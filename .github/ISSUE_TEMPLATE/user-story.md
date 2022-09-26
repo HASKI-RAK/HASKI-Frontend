@@ -27,7 +27,9 @@ As a _role_ I want _functionality_ so that _value_
 - [ ] User Story has added value for the product or development
 - [ ] User Story origin is known (stakeholder)
 - [ ] User Story is assigned to Release
-
+- [ ] Backend and Frontend are cloned from GitHub and Running locally
+- [ ] Basic knowledge of the backend and frontend architecture
+- [ ] Activity diagram (or sequence diagram) screenshot in issue
  
 **Definition of Done**
 
@@ -36,10 +38,10 @@ As a _role_ I want _functionality_ so that _value_
 - [ ] The implementation is in GitHub
 - [ ] A code review has been performed (or created in pairing program)
 - [ ] Code conventions are followed
-- [ ] Unit test coverage must be greater than 90% [ ] All tests must pass
+- [ ] Unit test coverage must be greater than 90% 
 - [ ] All tests must have passed
-- [ ] Technical documentation created (activity diagram screenshot in issue)
+- [ ] Technical documentation created (Feature documented in GitHub Wiki)
 - [ ] UML class diagrams and component diagrams created and up-to-date
 - [ ] Documentation in realization created (source code)
-- [ ] Changelog created
+- [ ] Changelog created (Clear description in merge request)
 - [ ] There are no known bugs
