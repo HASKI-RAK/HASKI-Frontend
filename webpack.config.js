@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-const dev = process.env.NODE_ENV !== 'production'
+const dev = process.env.NODE_ENV !== 'production' // Jest will set process.env.NODE_ENV to 'test'
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: 'src/index.tsx',

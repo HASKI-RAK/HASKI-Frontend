@@ -3,3 +3,5 @@ dist
 bin
 .vscode
 .github
+webpack.config.js
+tsconfig.json
