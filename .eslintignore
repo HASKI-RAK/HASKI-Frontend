@@ -5,3 +5,4 @@ bin
 .github
 webpack.config.js
 tsconfig.json
+jest.config.js
