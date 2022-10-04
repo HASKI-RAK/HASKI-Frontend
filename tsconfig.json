@@ -29,16 +29,16 @@
         "src/pages"
       ],
       "@services": [
-        "src/services"
+        "src/common/services"
       ],
       "@hooks": [
-        "src/hooks"
+        "src/common/hooks"
       ],
-      "@domain": [
-        "src/domain"
+      "@core": [
+        "src/common/core"
       ],
       "@components": [
-        "src/components"
+        "src/common/components"
       ]
     },
     "outDir": "./bin"
