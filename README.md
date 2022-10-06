@@ -8,6 +8,8 @@ Choose your favourite package manager for the following commands. Therefore, rep
 
 - `yarn install`
 
+Optionally install Sonar Cube to avoid code quality complaints form Sonar Cloud after the commit.
+
 ### Scripts
 
 - Run for development: `yarn start`
