@@ -31,6 +31,9 @@
       "@services": [
         "src/common/services"
       ],
+      "@utils": [
+        "src/common/utils"
+      ],
       "@hooks": [
         "src/common/hooks"
       ],
@@ -40,9 +43,9 @@
       "@components": [
         "src/components"
       ],
-      "@common": [
+      "@common/components": [
         "src/common/components"
-      ]
+      ],
     },
     "outDir": "./bin"
   }

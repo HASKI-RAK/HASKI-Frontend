@@ -9,15 +9,20 @@ module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: 'src/index.tsx',
     mode: dev ? 'development' : 'production',
-    devtool: dev ? 'cheap-module-source-map' : 'source-map',
+    devtool: "inline-source-map",//dev ? 'cheap-module-source-map' : 'source-map',
     resolve: {
-        extensions: ['.tsx', '.ts', '.js', '.jsx'],
+        extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
         modules: ['node_modules'],
         alias: {
             react: path.join(__dirname, 'node_modules', 'react'),
         },
         plugins: [new TsconfigPathsPlugin({ configFile: path.join(__dirname, "./", "tsconfig.json") })]
     },
+    devServer: {
+        historyApiFallback: true,
+        allowedHosts: "all",
+    },
+    target: 'web',
     output: { filename: 'index.bundle.js', path: path.resolve(__dirname, 'dist') },
     module: {
         rules: [
@@ -38,8 +43,15 @@ module.exports = {
             {
                 test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
                 use: ["file-loader"],
+                exclude: /node_modules/,
             },
+            {
+                test: /\.(ts|tsx|js)$/,
+                use: 'source-map-loader',
+                exclude: /node_modules/,
+            }
         ],
+
     },
     plugins: [
         new HtmlWebPackPlugin({
