@@ -6,7 +6,7 @@ import { CLSReportCallback } from "web-vitals";
  */
 export function sendToAnalytics(metric: object): void {
   const body = JSON.stringify(metric);
-  const url = "https://example.com/analytics";
+  const url = "https://localhost:5000/analytics";
 
   // Use `navigator.sendBeacon()` if available, falling back to `fetch()`
   if (navigator.sendBeacon) {
