@@ -1,4 +1,6 @@
+import { Dashboard } from "src/components/Dashboard/Dashboard";
+
 function App() {
-  return <div>HASKI</div>;
+  return  <Dashboard/>
 }
 export default App;
