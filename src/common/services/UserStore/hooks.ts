@@ -1,19 +1,17 @@
 import User from "src/common/core/User/User";
 import create from "zustand";
-import { devtools, persist } from "zustand/middleware";
 
 interface UserState {
-  user?: User;
+  user: User;
   setUser: (newUser: User) => void;
-  setId: (newId: number) => void;
+  increaseId: () => void;
 }
 
-export const useUserState = create<UserState>()(
-  devtools(
-    persist((set) => ({
-      user: {},
-      setUser: (newUser) => set({ user: newUser }),
-      setId: (newId) => set({ user: { id: newId } }),
-    }))
-  )
-);
+export const useUserState = create<UserState>()((set) => ({
+  user: { id: 1, firstName: "Max", surName: "Mustermann" },
+  setUser: (newUser) => set({ user: newUser }),
+  increaseId: () =>
+    set((state) => ({
+      user: { ...state.user, id: state.user?.id ? state.user?.id + 1 : 0 },
+    })),
+}));
