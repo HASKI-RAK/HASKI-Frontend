@@ -6,14 +6,14 @@ import { CLSReportCallback } from "web-vitals";
  */
 export function sendToAnalytics(metric: object): void {
   const body = JSON.stringify(metric);
-  const url = "https://localhost:5000/analytics";
-
+  const url = "http://localhost:5000/logs/frontend";
   // Use `navigator.sendBeacon()` if available, falling back to `fetch()`
-  if (navigator.sendBeacon) {
-    navigator.sendBeacon(url, body);
-  } else {
-    fetch(url, { body, method: "POST", keepalive: true });
-  }
+  const headers = {
+    type: "application/json",
+  };
+
+  const blob = new Blob([body], headers);
+  navigator.sendBeacon(url, blob);
 }
 /**
  * Reports the webvitals from library
