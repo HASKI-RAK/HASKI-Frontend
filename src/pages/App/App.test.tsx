@@ -6,7 +6,7 @@ import "@testing-library/jest-dom";
 describe("Test the demo component", () => {
   test("renders HASKI basic label", () => {
     const landingPage = render(<App />);
-    expect(landingPage.getByText("HASKI")).toBeInTheDocument();
+    expect(landingPage.getByText("Hello with ID: 1")).toBeInTheDocument();
   });
 
   test("renders correctly", () => {

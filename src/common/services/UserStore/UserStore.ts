@@ -1,10 +1,16 @@
-// import User from "src/common/core/User/User";
+import create from "zustand";
+import { UserState } from "./UserState/UserState";
 
-// class UserStore extends User {
-//   #useUserStore: Function;
-//   constructor() {
-//     super();
-//   }
-//   useUserStore() {}
-// }
-export {};
+/**
+ * Zustand Store of User
+ */
+const useUserStore = create<UserState>()((set) => ({
+  user: { id: 1 },
+  setUser: (newUser) => set({ user: newUser }),
+  increaseUserId: () =>
+    set((state) => ({
+      user: { ...state.user, id: state.user?.id ? state.user?.id + 1 : 0 },
+    })),
+}));
+
+export { useUserStore };

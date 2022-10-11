@@ -4,10 +4,11 @@ exports[`Test the demo component renders correctly 1`] = `
 [
   <div>
     Hello 
+    Max
      
+    Mustermann
      with ID:
      
-    1
   </div>,
   <button
     className="ButtonUnstyled-root"

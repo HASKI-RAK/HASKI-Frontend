@@ -1,6 +1,7 @@
 {
   "include": [
-    "src"
+    "src",
+    "__mocks__"
   ],
   "compilerOptions": {
     "target": "ESNext",
@@ -28,16 +29,16 @@
       "@pages": [
         "src/pages"
       ],
-      "@services": [
+      "@services/*": [
         "src/common/services"
       ],
       "@utils": [
         "src/common/utils"
       ],
-      "@hooks": [
+      "@hooks/*": [
         "src/common/hooks"
       ],
-      "@core": [
+      "@core/*": [
         "src/common/core"
       ],
       "@components": [
@@ -45,7 +46,7 @@
       ],
       "@common/components": [
         "src/common/components"
-      ],
+      ]
     },
     "outDir": "./bin"
   }

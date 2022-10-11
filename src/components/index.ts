@@ -1,4 +1,5 @@
+import { Dashboard } from "./Dashboard/Dashboard";
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
-export {};
+export default Dashboard;
