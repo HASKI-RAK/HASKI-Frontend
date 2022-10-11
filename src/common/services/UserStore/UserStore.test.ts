@@ -6,9 +6,9 @@ describe("Test the demo component", () => {
   const userIdStore = renderHook(() =>
     useUserStore((state) => state.increaseUserId)
   );
-  //   const userSetUserStore = renderHook(() =>
-  //     useUserStore((state) => state.setUser)
-  //   );
+  const userSetUserStore = renderHook(() =>
+    useUserStore((state) => state.setUser)
+  );
   // Change User ID
   test("Change User ID", () => {
     expect(userUserStore.result.current.id).toBe(1);
@@ -19,17 +19,18 @@ describe("Test the demo component", () => {
     expect(userUserStore.result.current.firstName).toBeUndefined();
     expect(userUserStore.result.current.surName).toBeUndefined();
   });
-  //   test("Setting new user", () => {
-  //     act(() => {
-  //       userSetUserStore.result.current?.({
-  //         id: 3,
-  //         firstName: "Peter",
-  //         surName: "Schmidt",
-  //       });
-  //     });
-  //     userUserStore.rerender();
-  //     expect(userUserStore.result.current.id).toBe(3);
-  //     expect(userUserStore.result.current.firstName).toBe("Peter");
-  //     expect(userUserStore.result.current.surName).toBe("Schmidt");
-  //   });
+  test("Setting new user", () => {
+    act(() => {
+      userSetUserStore.result.current?.({
+        id: 3,
+        firstName: "Peter",
+        surName: "Schmidt",
+      });
+    });
+    // TODO Expect doesnt work yet
+    //   userUserStore.rerender();
+    //   expect(userUserStore.result.current.id).toBe(3);
+    //   expect(userUserStore.result.current.firstName).toBe("Peter");
+    //   expect(userUserStore.result.current.surName).toBe("Schmidt");
+  });
 });
