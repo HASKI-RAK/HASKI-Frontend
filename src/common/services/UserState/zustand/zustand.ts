@@ -1,5 +1,5 @@
 import create from "zustand";
-import { UserState } from "./UserState/UserState";
+import { UserState } from "../UserState";
 
 /**
  * Zustand Store of User

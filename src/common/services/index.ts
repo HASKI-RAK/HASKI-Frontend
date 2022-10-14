@@ -1,5 +1,5 @@
 /**
  * Reusable service calls go here.
  */
-export { useUserStore } from "./UserStore";
-export type { UserState } from "./UserStore";
+export { useUserStore } from "./UserState";
+export type { UserState } from "./UserState";

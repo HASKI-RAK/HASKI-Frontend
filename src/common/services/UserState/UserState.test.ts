@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
-import { useUserStore } from "./UserStore";
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react";
+import { useUserStore } from "./zustand/zustand";
+
 describe("Test the demo component", () => {
   const userUserStore = renderHook(() => useUserStore((state) => state.user));
   const userIdStore = renderHook(() =>
