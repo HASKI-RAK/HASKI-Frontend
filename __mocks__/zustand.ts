@@ -1,5 +1,4 @@
 import actualCreate, { StateCreator } from "zustand";
-// const actualCreate = jest.requireActual('zustand') // if using jest
 import { act } from "react-dom/test-utils";
 
 // a variable to hold reset functions for all stores declared in the app

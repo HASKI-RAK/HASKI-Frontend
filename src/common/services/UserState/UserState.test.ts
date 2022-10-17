@@ -28,10 +28,5 @@ describe("Test the demo component", () => {
         surName: "Schmidt",
       });
     });
-    // TODO Expect doesnt work yet
-    //   userUserStore.rerender();
-    //   expect(userUserStore.result.current.id).toBe(3);
-    //   expect(userUserStore.result.current.firstName).toBe("Peter");
-    //   expect(userUserStore.result.current.surName).toBe("Schmidt");
   });
 });
