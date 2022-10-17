@@ -9,8 +9,8 @@ export const Dashboard = ({
 }: DashboardProps) => (
   <>
     <div>
-      Hello {userState.user.firstName} {userState.user.surName} with ID:{" "}
-      {userState.user.id}
+      Hello {userState.user?.firstName} {userState.user?.surName} with ID:{" "}
+      {userState.user?.id}
     </div>
     <ButtonUnstyled onClick={userState.increaseUserId}>one up</ButtonUnstyled>
   </>

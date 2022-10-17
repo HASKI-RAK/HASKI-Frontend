@@ -12,13 +12,13 @@ describe("Test the demo component", () => {
   );
   // Change User ID
   test("Change User ID", () => {
-    expect(userUserStore.result.current.id).toBe(1);
+    expect(userUserStore.result.current?.id).toBe(1);
     act(() => userIdStore.result.current?.());
-    expect(userUserStore.result.current.id).toBe(2);
+    expect(userUserStore.result.current?.id).toBe(2);
   });
   test("Inital User State is undefined", () => {
-    expect(userUserStore.result.current.firstName).toBeUndefined();
-    expect(userUserStore.result.current.surName).toBeUndefined();
+    expect(userUserStore.result.current?.firstName).toBeUndefined();
+    expect(userUserStore.result.current?.surName).toBeUndefined();
   });
   test("Setting new user", () => {
     act(() => {
