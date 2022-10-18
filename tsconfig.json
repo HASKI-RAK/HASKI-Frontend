@@ -1,0 +1,53 @@
+{
+  "include": [
+    "src",
+    "__mocks__"
+  ],
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "inlineSourceMap": true,
+    "paths": {
+      "@pages": [
+        "src/pages"
+      ],
+      "@services/*": [
+        "src/common/services"
+      ],
+      "@utils": [
+        "src/common/utils"
+      ],
+      "@hooks/*": [
+        "src/common/hooks"
+      ],
+      "@core/*": [
+        "src/common/core"
+      ],
+      "@components": [
+        "src/components"
+      ],
+      "@common/components": [
+        "src/common/components"
+      ]
+    },
+    "outDir": "./bin"
+  }
+}

@@ -1,0 +1,8 @@
+node_modules
+dist
+bin
+.vscode
+.github
+webpack.config.js
+tsconfig.json
+jest.config.js

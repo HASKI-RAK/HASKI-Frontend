@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test the demo component renders correctly 1`] = `
+[
+  <div>
+    Hello 
+    Max
+     
+    Mustermann
+     with ID:
+  </div>,
+  <button
+    className="ButtonUnstyled-root"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+  >
+    one up
+  </button>,
+]
+`;
