@@ -5,14 +5,17 @@ import { UserState } from "../UserState";
  * Zustand Store of User
  */
 const useUserStore = create<UserState>()((set) => ({
-  user: {},
+  user: undefined,
   setUser: (newUser) =>
     set(() => ({
       user: newUser,
     })),
   increaseUserId: () =>
     set((state) => ({
-      user: { ...state.user, id: state.user?.id ? state.user?.id + 1 : 0 },
+      user: {
+        ...state.user,
+        id: state.user?.id == undefined ? 0 : state.user?.id + 1,
+      },
     })),
 }));
 

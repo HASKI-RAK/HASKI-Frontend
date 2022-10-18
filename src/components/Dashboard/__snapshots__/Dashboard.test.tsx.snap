@@ -8,7 +8,6 @@ exports[`Test the demo component renders correctly 1`] = `
      
     Mustermann
      with ID:
-     
   </div>,
   <button
     className="ButtonUnstyled-root"
