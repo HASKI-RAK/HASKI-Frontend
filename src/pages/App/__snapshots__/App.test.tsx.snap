@@ -7,7 +7,6 @@ exports[`Test the demo component renders correctly 1`] = `
      
      with ID:
      
-    1
   </div>,
   <button
     className="ButtonUnstyled-root"
