@@ -6,9 +6,9 @@ import {
   CardContent,
   LinearProgress,
   Stack,
+  Typography,
 } from "@mui/material";
 import { Container } from "@mui/system";
-import { Typography } from "@mui/material";
 const bull = (
   <Box
     component="span"
