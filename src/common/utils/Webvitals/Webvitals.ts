@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { CLSReportCallback } from "web-vitals";
 
 /**

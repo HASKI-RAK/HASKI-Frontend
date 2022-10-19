@@ -19,5 +19,12 @@ module.exports = {
     // The directory where Jest should output its coverage files
     coverageDirectory: "coverage",
     automock: false,
-    testEnvironment: "jsdom"
+    testEnvironment: "jsdom",
+    coveragePathIgnorePatterns: [
+        "node_modules",
+        "Webvitals.ts",
+        "<rootDir>/src/index.tsx",
+        ".mock.ts",
+        "index.ts"
+    ],
 }
