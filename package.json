@@ -14,7 +14,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@mui/base": "^5.0.0-alpha.100",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.10",
     "@types/node": "^18.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
