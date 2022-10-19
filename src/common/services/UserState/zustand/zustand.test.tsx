@@ -5,7 +5,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useUserStore, UserState } from "@services/UserStore";
-import { ButtonUnstyled } from "@mui/base";
+import { Button } from "@common/components";
 
 interface DivElementProps {
   userState?: UserState;
@@ -23,8 +23,8 @@ const DivElement = ({
       Hello {userState.user?.firstName} {userState.user?.surName} with ID:{" "}
       {userState.user?.id}
     </div>
-    <ButtonUnstyled data-testid="increase" onClick={userState.increaseUserId} />
-    <ButtonUnstyled
+    <Button data-testid="increase" onClick={userState.increaseUserId} />
+    <Button
       data-testid="setuser"
       onClick={() => {
         userState.setUser?.({ id: 3 });

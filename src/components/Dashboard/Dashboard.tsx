@@ -1,4 +1,4 @@
-import { ButtonUnstyled } from "@mui/base";
+import { Button } from "@common/components";
 import { UserState, useUserStore } from "@services/UserStore";
 
 export const Dashboard = ({
@@ -12,7 +12,7 @@ export const Dashboard = ({
       Hello {userState.user?.firstName} {userState.user?.surName} with ID:
       {userState.user?.id}
     </div>
-    <ButtonUnstyled onClick={userState.increaseUserId}>one up</ButtonUnstyled>
+    <Button onClick={userState.increaseUserId}>one up</Button>
   </>
 );
 interface DashboardProps {
