@@ -1,6 +1,6 @@
-import { Button } from "./Button/Button";
+import { DefaultButton } from "./DefaultButton/DefaultButton";
 
 /**
  * Reusable components such as buttons and forms go in here.
  */
-export { Button };
+export { DefaultButton };

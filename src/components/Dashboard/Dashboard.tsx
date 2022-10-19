@@ -1,6 +1,5 @@
-import { Button } from "@common/components";
+import { DefaultButton as Button } from "@common/components";
 import { UserState, useUserStore } from "@services/UserStore";
-
 export const Dashboard = ({
   userState = {
     user: useUserStore((state) => state.user),
@@ -12,7 +11,13 @@ export const Dashboard = ({
       Hello {userState.user?.firstName} {userState.user?.surName} with ID:
       {userState.user?.id}
     </div>
-    <Button onClick={userState.increaseUserId}>one up</Button>
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={userState.increaseUserId}
+    >
+      one up
+    </Button>
   </>
 );
 interface DashboardProps {

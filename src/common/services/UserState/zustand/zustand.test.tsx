@@ -5,7 +5,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { useUserStore, UserState } from "@services/UserStore";
-import { Button } from "@common/components";
+import { DefaultButton as Button } from "@common/components";
 
 interface DivElementProps {
   userState?: UserState;
