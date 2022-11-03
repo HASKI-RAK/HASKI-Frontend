@@ -1,1 +1,4 @@
-export { reportWebVitals, sendToAnalytics } from "./Webvitals";
+import { Theme } from "./Theme/Theme";
+import { reportWebVitals, sendToAnalytics } from "./Webvitals/Webvitals";
+
+export { reportWebVitals, sendToAnalytics, Theme };
