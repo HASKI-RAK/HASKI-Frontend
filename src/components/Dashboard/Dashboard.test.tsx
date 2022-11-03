@@ -22,11 +22,13 @@ describe("Test the demo component", () => {
   });
 
   test("renders correctly", () => {
+    const mockCallback = jest.fn();
     const tree = renderer
       .create(
         <Dashboard
           userState={{
             user: { firstName: "Max", surName: "Mustermann" },
+            increaseUserId: () => mockCallback(),
           }}
         />
       )
