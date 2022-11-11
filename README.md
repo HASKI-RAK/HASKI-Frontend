@@ -20,8 +20,8 @@ Optional plugins for your development environment:
 | Plugin | README | Explanaition |
 | ------ | ------ | ------ |
 | SonarCube | https://www.sonarqube.org/ | SonarCloud will automatically scan the code for required standards and notify you in the merge request. |
-| Babel JavaScript | https://babeljs.io/ | Compile JavaScript. |
+| Babel JavaScript | https://babeljs.io/ | Compiles JavaScript. |
 | ESLint | https://eslint.org/ | ESLint statically analyzes your code to quickly find problems. |
-| JavsScript and TypeScript | https://github.com/microsoft/vscode-typescript-next.git | TypeScript version used to power JavaScript and TypeScript IntelliSense. |
+| JavaScript and TypeScript | https://github.com/microsoft/vscode-typescript-next.git | TypeScript version used to power JavaScript and TypeScript IntelliSense. |
 | Npm Intellisense | https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense | Code completion for imports. |
 
