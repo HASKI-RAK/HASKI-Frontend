@@ -37,7 +37,7 @@ const ArrangeElement = () => {
 
 
 test("language can be changed", () => {
-    const c = render(
+    render(
         <I18nextProvider i18n={i18next}> // actually give translation to your component
             <ArrangeElement />
         </I18nextProvider>
