@@ -2,6 +2,7 @@
 import { DefaultSelect as Select } from "@common/components";
 import {MenuItem} from "@mui/material";
 import "../../shared/internationalization";
+import * as events from "events";
 
 export const DropdownLanguage = () => {
     

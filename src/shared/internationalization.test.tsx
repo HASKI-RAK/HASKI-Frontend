@@ -59,7 +59,7 @@ test("language can be changed", () => {
     
     localStorage.setItem("i18nextLng", "en");
     
-    const c = render(
+    render(
         <I18nextProvider i18n={i18next}> // actually give translation to your component
             <ArrangeElement />
         </I18nextProvider>
