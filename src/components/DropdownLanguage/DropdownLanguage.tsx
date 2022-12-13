@@ -2,14 +2,13 @@
 import { DefaultSelect as Select } from "@common/components";
 import {MenuItem} from "@mui/material";
 import "../../shared/internationalization";
-import * as events from "events";
 
 export const DropdownLanguage = () => {
     
     const {i18n} = useTranslation();
     const startingLanguage = localStorage.getItem("i18nextLng") as string;
     
-    const onClickLanguageChange = (e:any) => {
+    function onClickLanguageChange(e:any){
         i18n.changeLanguage(e.target.value);
         localStorage.setItem("i18nextLng", e.target.value);
     }
