@@ -6,7 +6,7 @@ import "../../shared/internationalization";
 export const DropdownLanguage = () => {
     
     const {i18n} = useTranslation();
-    let startingLanguage = localStorage.getItem("i18nextLng") as string;
+    const startingLanguage = localStorage.getItem("i18nextLng") as string;
     
     const onClickLanguageChange = (e:any) => {
         i18n.changeLanguage(e.target.value);
