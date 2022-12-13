@@ -13,7 +13,7 @@ import { I18nextProvider, useTranslation } from 'react-i18next'
 const ArrangeElement = () => {
     
     const {i18n} = useTranslation();
-    let startingLanguage = localStorage.getItem("i18nextLng") as string;
+    const startingLanguage = localStorage.getItem("i18nextLng") as string;
 
     const onClickLanguageChange = (e:any) => {
         i18n.changeLanguage(e.target.value);
@@ -69,6 +69,4 @@ test("language can be changed", () => {
     expect(i18next.language).toBe("en");
 });
 
-
-//let startingLanguage = localStorage.getItem("i18nextLng") as string;
 
