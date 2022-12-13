@@ -1,0 +1,18 @@
+﻿{
+  "searchButtonText": "Suche",
+  "resultPagesText": "Ergebnisseite",
+  "spellcheckText": "Hast du das gesucht?",
+  "previousText": "Vorherige",
+  "nextText": "Nächste",
+  "and": "und",
+  "sort": "Sortiere bei:",
+  "firstPage": "Erste Seite",
+  "lastPage": "Letzte Seite",
+  "Notifications": "Benachrichtigungen",
+  "Activities": "Aktivitäten",
+  "post": "Post",
+  "delete": "Löschen",
+  "update": "Aktualisieren",
+  "DSGVO": "DSGVO",
+  "pages.glossary.title": "Glossar"
+}
