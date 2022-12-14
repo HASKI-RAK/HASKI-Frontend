@@ -1,5 +1,15 @@
-import Dashboard from "@components";
+import {Dashboard,DropdownLanguage,Text} from "@components";
 
-const Home = () => <Dashboard />;
+
+
+export const Home = () => {
+    return (
+        <div className="main">
+            <Dashboard/>
+            <DropdownLanguage/>
+            <Text/>
+        </div>
+    )
+};
 
 export default Home;
