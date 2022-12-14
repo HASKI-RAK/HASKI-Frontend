@@ -8,7 +8,7 @@ export const DropdownLanguage = () => {
     const {i18n} = useTranslation();
     const startingLanguage = localStorage.getItem("i18nextLng") as string;
     
-    function onClickLanguageChange(e:any){
+    function onClickLanguageChange(e: { target: { value: string }; }){
         i18n.changeLanguage(e.target.value);
         localStorage.setItem("i18nextLng", e.target.value);
     }
