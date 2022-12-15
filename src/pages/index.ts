@@ -3,5 +3,6 @@
  */
 import App from "./App/App";
 import Home from "./Home/Home";
+import Glossary from "./Glossary/Glossary";
 import ThemePresentation from "./ThemePresentation/ThemePresentation";
-export { App, ThemePresentation, Home };
+export { App, ThemePresentation, Home, Glossary };

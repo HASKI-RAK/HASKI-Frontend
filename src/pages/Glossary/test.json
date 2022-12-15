@@ -1,0 +1,18 @@
+{
+    "glossaryElementsGerman": [
+        {
+            "term": "Titel", // String
+            "definition": "Definition", // String
+            "sources": "Quellen", // String
+            "tags": [ "Tags" ] // Array
+        }
+    ],
+    "glossaryElementsEnglish": [
+        {
+            "term": "Title", // String
+            "definition": "Definition", // String
+            "sources": "Sources", // String
+            "tags": [ "Tags" ] // Array
+        }
+    ]
+}

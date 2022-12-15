@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@mui/material";
-import { Home, ThemePresentation } from "@pages";
+import { Home, Glossary, ThemePresentation } from "@pages";
 import { Theme } from "@utils";
 import { Routes } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -10,6 +10,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/glossary" element={<Glossary />} />
           <Route path="/theme" element={<ThemePresentation />} />
         </Routes>
       </Router>
