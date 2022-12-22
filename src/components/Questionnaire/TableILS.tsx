@@ -11,29 +11,33 @@ import { useTranslation } from 'react-i18next';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
+        backgroundColor: '#24262a',
+        color: '#FFFFFF',
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
+    },
+    [`&.MuiTableCell-root`]: {
+        borderLeft: "1px solid rgba(224, 224, 224, 1)"
     }
+}));
+
+const StyledTableCellWithoutBorder = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: '#24262a',
+        color: '#FFFFFF',
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,
     },
-    '& .MuiTableCell-root': {
-        borderLeft: "1px solid rgba(224, 224, 224, 1)"
-    }
+    
 }));
-
-const StyledTableRowWithoutBorder = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    }
-}));
-
 
 
 export function ILS() {
@@ -98,22 +102,22 @@ export function ILS() {
             <Table style={{ width: 500 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell align="left">{rows[0].col1}</StyledTableCell>
-                        <StyledTableCell></StyledTableCell>
-                        <StyledTableCell align="left">{rows[0].col3}</StyledTableCell>
-                        <StyledTableCell align="left">{rows[0].col4}</StyledTableCell>
+                        <StyledTableCellWithoutBorder align="left">{rows[0].col1}</StyledTableCellWithoutBorder>
+                        <StyledTableCellWithoutBorder></StyledTableCellWithoutBorder>
+                        <StyledTableCellWithoutBorder align="left">{rows[0].col3}</StyledTableCellWithoutBorder>
+                        <StyledTableCellWithoutBorder align="left">{rows[0].col4}</StyledTableCellWithoutBorder>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.filter(function(row) {
                         return row.id !== 1;
                     }).map((row) => (
-                    <StyledTableRow>
-                        <StyledTableCell align="left">{row.col1}</StyledTableCell>
-                        <StyledTableCell align="left">{row.col2}</StyledTableCell>
-                        <StyledTableCell align="left">{row.col3}</StyledTableCell>
-                        <StyledTableCell align="right">{row.col4}</StyledTableCell>
-                    </StyledTableRow>
+                            <StyledTableRow>
+                                <StyledTableCellWithoutBorder align="left">{row.col1}</StyledTableCellWithoutBorder>
+                                <StyledTableCellWithoutBorder align="left">{row.col2}</StyledTableCellWithoutBorder>
+                                <StyledTableCell align="left">{row.col3}</StyledTableCell>
+                                <StyledTableCell align="right">{row.col4}</StyledTableCell>
+                            </StyledTableRow>
                     ))}
                 </TableBody>
             </Table>

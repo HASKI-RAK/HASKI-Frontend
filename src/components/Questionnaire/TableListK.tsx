@@ -11,29 +11,38 @@ import { useTranslation } from 'react-i18next';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: '#24262a',
+    color: '#FFFFFF',
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
+  },
+  [`&.MuiTableCell-root`]: {
+    borderLeft: "1px solid rgba(224, 224, 224, 1)"
   }
+}));
+
+const StyledTableCellWithoutBorder = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: '#24262a',
+    color: '#FFFFFF',
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
-  '& .MuiTableCell-root': {
-    borderLeft: "1px solid rgba(224, 224, 224, 1)"
-  }
+  '&:nth-of-type(2)':{
+    backgroundColor: '#24262a'
+  },
+  '&:nth-of-type(7)':{
+    backgroundColor: '#24262a'
+  },
 }));
-
-const StyledTableRowWithoutBorder = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  }
-}));
-
 
 
 export function ListK() {
@@ -107,23 +116,67 @@ export function ListK() {
         <Table style={{ width: 500 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="left">{rows[0].col1}</StyledTableCell>
-              <StyledTableCell align="left">{rows[0].col2}</StyledTableCell>
-              <StyledTableCell align="left">{rows[0].col1}</StyledTableCell>
-              <StyledTableCell align="left">{rows[0].col2}</StyledTableCell>
+              <StyledTableCellWithoutBorder align="left">{rows[0].col1}</StyledTableCellWithoutBorder>
+              <StyledTableCellWithoutBorder align="left">{rows[0].col2}</StyledTableCellWithoutBorder>
+              <StyledTableCellWithoutBorder align="left">{rows[0].col1}</StyledTableCellWithoutBorder>
+              <StyledTableCellWithoutBorder align="left">{rows[0].col2}</StyledTableCellWithoutBorder>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.filter(function(row) {
-              return row.id !== 1;
-            }).map((row) => (
                 <StyledTableRow>
-                  <StyledTableCell align="left">{row.col1}</StyledTableCell>
-                  <StyledTableCell align="right" style={{color:"yellow"}}>{row.col2}</StyledTableCell>
-                  <StyledTableCell align="left">{row.col3}</StyledTableCell>
-                  <StyledTableCell align="right">{row.col4}</StyledTableCell>
+                  <StyledTableCellWithoutBorder align="left">{rows[1].col1}</StyledTableCellWithoutBorder>
+                  <StyledTableCell align="left">{rows[1].col2}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[1].col3}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[1].col4}</StyledTableCell>
                 </StyledTableRow>
-            ))}
+                <StyledTableRow>
+                  <StyledTableCellWithoutBorder align="left" style={{color:"white"}}>{rows[2].col1}</StyledTableCellWithoutBorder>
+                  <StyledTableCellWithoutBorder align="left" style={{color:"white"}}>{rows[2].col2}</StyledTableCellWithoutBorder>
+                  <StyledTableCellWithoutBorder align="left" style={{color:"white"}}>{rows[2].col3}</StyledTableCellWithoutBorder>
+                  <StyledTableCellWithoutBorder align="left" style={{color:"white"}}>{rows[2].col4}</StyledTableCellWithoutBorder>
+                </StyledTableRow>
+                <StyledTableRow>
+                  <StyledTableCellWithoutBorder align="left">{rows[3].col1}</StyledTableCellWithoutBorder>
+                  <StyledTableCell align="left">{rows[3].col2}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[3].col3}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[3].col4}</StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow>
+                  <StyledTableCellWithoutBorder align="left">{rows[4].col1}</StyledTableCellWithoutBorder>
+                  <StyledTableCell align="left">{rows[4].col2}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[4].col3}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[4].col4}</StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow>
+                  <StyledTableCellWithoutBorder align="left">{rows[5].col1}</StyledTableCellWithoutBorder>
+                  <StyledTableCell align="left">{rows[5].col2}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[5].col3}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[5].col4}</StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow>
+                  <StyledTableCellWithoutBorder align="left">{rows[6].col1}</StyledTableCellWithoutBorder>
+                  <StyledTableCell align="left">{rows[6].col2}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[6].col3}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[6].col4}</StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow>
+                  <StyledTableCellWithoutBorder align="left" style={{color:"white"}}>{rows[7].col1}</StyledTableCellWithoutBorder>
+                  <StyledTableCellWithoutBorder align="left" style={{color:"white"}}>{rows[7].col2}</StyledTableCellWithoutBorder>
+                  <StyledTableCellWithoutBorder align="left" style={{color:"white"}}>{rows[7].col3}</StyledTableCellWithoutBorder>
+                  <StyledTableCellWithoutBorder align="left" style={{color:"white"}}>{rows[7].col4}</StyledTableCellWithoutBorder>
+                </StyledTableRow>
+                <StyledTableRow>
+                  <StyledTableCellWithoutBorder align="left">{rows[8].col1}</StyledTableCellWithoutBorder>
+                  <StyledTableCell align="left">{rows[8].col2}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[8].col3}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[8].col4}</StyledTableCell>
+                </StyledTableRow>
+                <StyledTableRow>
+                  <StyledTableCellWithoutBorder align="left">{rows[9].col1}</StyledTableCellWithoutBorder>
+                  <StyledTableCell align="left">{rows[9].col2}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[9].col3}</StyledTableCell>
+                  <StyledTableCell align="left">{rows[9].col4}</StyledTableCell>
+                </StyledTableRow>
           </TableBody>
         </Table>
       </TableContainer>
