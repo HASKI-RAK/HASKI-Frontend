@@ -1,10 +1,4 @@
 {
-	
-	"resultPagesText": "Results",
-	"searchButtonText": "Search",
-	"sort": "Sort by:",
-	"spellcheckText": "Did you mean:",
-	"update": "Updated",
 	"Activities": "Activities",
 	"and": "and",
 	"delete": "Deleted",
@@ -15,5 +9,10 @@
 	"Notifications": "Notifications",
 	"pages.glossary.title": "Glossary",
 	"post": "Posted",
-	"previousText": "Previous"
+	"previousText": "Previous",
+	"resultPagesText": "Results",
+	"searchButtonText": "Search",
+	"sort": "Sort by:",
+	"spellcheckText": "Did you mean:",
+	"update": "Updated"
 }
