@@ -19,7 +19,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
         fontSize: 13,
     },
     [`&.MuiTableCell-root`]: {
-        borderLeft: "1px solid rgba(224, 224, 224, 1)"
+        borderLeft: "3px solid rgba(224, 224, 224, 1)"
     }
 }));
 
