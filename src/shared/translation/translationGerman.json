@@ -14,5 +14,19 @@
   "delete": "Löschen",
   "update": "Aktualisieren",
   "DSGVO": "DSGVO",
-  "pages.glossary.title": "Glossar"
+  "pages.glossary.title": "Glossar",
+  "components.QuestionnaireResults.TableILS.dimension": "Dimensionen",
+  "components.QuestionnaireResults.TableILS.interpretation": "Interpretation",
+  "components.QuestionnaireResults.TableILS.score": "Wert",
+  "components.QuestionnaireResults.TableILS.active": "Aktiv",
+  "components.QuestionnaireResults.TableILS.reflective": "Reflektiv",
+  "components.QuestionnaireResults.TableILS.sensory": "Sensorisch",
+  "components.QuestionnaireResults.TableILS.intuitive": "Intuitive",
+  "components.QuestionnaireResults.TableILS.visual": "Visuel",
+  "components.QuestionnaireResults.TableILS.verbal": "Verbal",
+  "components.QuestionnaireResults.TableILS.sequential": "Sequentiell",
+  "components.QuestionnaireResults.TableILS.global": "Global",
+  "components.QuestionnaireResults.TableILS.balanced": "balanciert",
+  "components.QuestionnaireResults.TableILS.moderate": "moderat",
+  "components.QuestionnaireResults.TableILS.strong": "stark"
 }
