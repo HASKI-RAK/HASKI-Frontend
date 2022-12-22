@@ -1,4 +1,5 @@
 {
+	"update": "Updated",
 	"post": "Posted",
 	"previousText": "Previous",
 	"resultPagesText": "Results",
@@ -13,6 +14,5 @@
 	"nextText": "Next",
 	"Notifications": "Notifications",
 	"pages.glossary.title": "Glossary",
-	"spellcheckText": "Did you mean:",
-	"update": "Updated"
+	"spellcheckText": "Did you mean:"
 }
