@@ -13,9 +13,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: '#24262a',
         color: '#FFFFFF',
+        fontSize: 13,
     },
     [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
+        fontSize: 13,
     },
     [`&.MuiTableCell-root`]: {
         borderLeft: "1px solid rgba(224, 224, 224, 1)"
@@ -26,9 +27,10 @@ const StyledTableCellWithoutBorder = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: '#24262a',
         color: '#FFFFFF',
+        fontSize: 13,
     },
     [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
+        fontSize: 13,
     },
 }));
 

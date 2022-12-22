@@ -10,38 +10,40 @@ import Paper from '@mui/material/Paper';
 import { useTranslation } from 'react-i18next';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#24262a',
-    color: '#FFFFFF',
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-  [`&.MuiTableCell-root`]: {
-    borderLeft: "1px solid rgba(224, 224, 224, 1)"
-  }
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: '#24262a',
+        color: '#FFFFFF',
+        fontSize: 13,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 13,
+    },
+    [`&.MuiTableCell-root`]: {
+        borderLeft: "1px solid rgba(224, 224, 224, 1)"
+    }
 }));
 
 const StyledTableCellWithoutBorder = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#24262a',
-    color: '#FFFFFF',
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: '#24262a',
+      color: '#FFFFFF',
+      fontSize: 13,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 13,
+    },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  '&:nth-of-type(2)':{
-    backgroundColor: '#24262a'
-  },
-  '&:nth-of-type(7)':{
-    backgroundColor: '#24262a'
-  },
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    '&:nth-of-type(2)':{
+      backgroundColor: '#24262a'
+    },
+    '&:nth-of-type(7)':{
+      backgroundColor: '#24262a'
+    },
 }));
 
 
