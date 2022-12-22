@@ -3,3 +3,4 @@
 
 npm test
 node src/shared/auto-order-json-translations.ts
+
