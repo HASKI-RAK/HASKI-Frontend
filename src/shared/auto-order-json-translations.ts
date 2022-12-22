@@ -1,4 +1,6 @@
-﻿const fs = require('fs');
+﻿//@ts-nocheck
+//@ts-ignore
+const fs = require('fs');
 const path = require('path');
 const english = require('./translation/translationEnglish.json');
 const exec = require('child_process').exec;
