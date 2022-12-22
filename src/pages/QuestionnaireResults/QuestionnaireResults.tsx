@@ -1,4 +1,4 @@
-﻿import {TableILS, TableListK, GraphILS, GraphListK} from "@components";
+import {TableILS, TableListK, GraphILS, GraphListK} from "@components";
 
 
 export const QuestionnaireResults = () => {
