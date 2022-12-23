@@ -136,14 +136,10 @@ export function ListK() {
                 </TableHead>
                 <TableBody>
                     <StyledTableRow>
-                        <StyledTableCellWithoutBorder align="left"
-                                                      style={{color: "white"}}>{rows[1].col1}</StyledTableCellWithoutBorder>
-                        <StyledTableCellWithoutBorder align="left"
-                                                      style={{color: "white"}}>{rows[1].col2}</StyledTableCellWithoutBorder>
-                        <StyledTableCellWithoutBorder align="left"
-                                                      style={{color: "white"}}>{rows[1].col3}</StyledTableCellWithoutBorder>
-                        <StyledTableCellWithoutBorder align="left"
-                                                      style={{color: "white"}}>{rows[1].col4}</StyledTableCellWithoutBorder>
+                        <StyledTableCellWithoutBorder align="left" style={{color: "white"}}>{rows[1].col1}</StyledTableCellWithoutBorder>
+                        <StyledTableCellWithoutBorder align="left" style={{color: "white"}}>{rows[1].col2}</StyledTableCellWithoutBorder>
+                        <StyledTableCellWithoutBorder align="left" style={{color: "white"}}>{rows[1].col3}</StyledTableCellWithoutBorder>
+                        <StyledTableCellWithoutBorder align="left" style={{color: "white"}}>{rows[1].col4}</StyledTableCellWithoutBorder>
                     </StyledTableRow>
                     <StyledTableRow>
                         <StyledTableCellWithoutBorder align="left"
