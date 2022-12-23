@@ -60,9 +60,9 @@ export function ILS() {
     inter.set(-11, t("components.QuestionnaireResults.TableILS.strong"))
     inter.set(11, t("components.QuestionnaireResults.TableILS.strong"))
 
-    function getInterpretation(score: number, interpretationString: string) {
-        if (inter.get(score) === t("components.QuestionnaireResults.TableILS.balanced"))
-            return inter.get(score)
+    function getInterpretation(score: number, interpretationString: string): string {
+        if(inter.get(score) === t("components.QuestionnaireResults.TableILS.balanced"))
+            return t("components.QuestionnaireResults.TableILS.balanced")
         return inter.get(score) + " " + interpretationString;
     }
 
@@ -105,21 +105,21 @@ export function ILS() {
     ];
 
     return (
-        <TableContainer component={Paper} style={{width: 500}}>
-            <Table style={{width: 500}} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
+        <TableContainer component={Paper} style={{width: 500}} key={"TableILSContainer"}>
+            <Table style={{width: 500}} aria-label="customized table" key={"TableILS"}>
+                <TableHead key={"TableILSHead"}>
+                    <TableRow key={"TableILSTableRow"}>
                         <StyledTableCellWithoutBorder align="left">{rows[0].col1}</StyledTableCellWithoutBorder>
                         <StyledTableCellWithoutBorder></StyledTableCellWithoutBorder>
                         <StyledTableCellWithoutBorder align="left">{rows[0].col3}</StyledTableCellWithoutBorder>
                         <StyledTableCellWithoutBorder align="left">{rows[0].col4}</StyledTableCellWithoutBorder>
                     </TableRow>
                 </TableHead>
-                <TableBody>
-                    {rows.filter(function (row) {
+                <TableBody key={"TableILSBody"}>
+                    {rows.filter(function(row) {
                         return row.id !== 1;
                     }).map((row) => (
-                        <StyledTableRow>
+                        <StyledTableRow key={row.id}>
                             <StyledTableCellWithoutBorder align="left">{row.col1}</StyledTableCellWithoutBorder>
                             <StyledTableCellWithoutBorder align="left">{row.col2}</StyledTableCellWithoutBorder>
                             <StyledTableCell align="left">{row.col3}</StyledTableCell>
