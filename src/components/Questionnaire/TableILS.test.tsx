@@ -36,10 +36,10 @@ describe("Test Interpretation", () => {
 
         const {getAllByRole} = render(<ILS/>);
 
-        expect(getAllByRole("cell")[2]).toHaveTextContent("components.QuestionnaireResults.TableILS.InterpretationActive");
-        expect(getAllByRole("cell")[6]).toHaveTextContent("components.QuestionnaireResults.TableILS.InterpretationReflective");
-        expect(getAllByRole("cell")[10]).toHaveTextContent("components.QuestionnaireResults.TableILS.InterpretationSensory");
-        expect(getAllByRole("cell")[14]).toHaveTextContent("components.QuestionnaireResults.TableILS.InterpretationIntuitive");
+        expect(getAllByRole("cell")[2]).toHaveTextContent("components.QuestionnaireResults.TableILS.balanced");
+        expect(getAllByRole("cell")[6]).toHaveTextContent("components.QuestionnaireResults.TableILS.moderate components.questionnaireresults.tableils.intuitive");
+        expect(getAllByRole("cell")[10]).toHaveTextContent("components.QuestionnaireResults.TableILS.balanced");
+        expect(getAllByRole("cell")[14]).toHaveTextContent("components.QuestionnaireResults.TableILS.strong components.questionnaireresults.tableils.verbal");
     });
 });
 
