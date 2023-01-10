@@ -1,0 +1,543 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test the Home page renders correctly and matches snapshot 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-11xur9t-MuiPaper-root-MuiTableContainer-root"
+    style={
+      {
+        "width": 500,
+      }
+    }
+  >
+    <table
+      aria-label="customized table"
+      className="MuiTable-root css-rqglhn-MuiTable-root"
+      role={null}
+      style={
+        {
+          "width": 500,
+        }
+      }
+    >
+      <thead
+        className="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+        role={null}
+      >
+        <tr
+          className="MuiTableRow-root MuiTableRow-head css-1q1u3t4-MuiTableRow-root"
+          role={null}
+        >
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
+            scope="col"
+          >
+            Dimensionen
+          </th>
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
+            scope="col"
+          />
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
+            scope="col"
+          >
+            Interpretation
+          </th>
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
+            scope="col"
+          >
+            Wert
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+        role={null}
+      >
+        <tr
+          className="MuiTableRow-root css-fmtgwu-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Aktiv
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Reflektiv
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            balanciert
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-rqbqsm-MuiTableCell-root"
+          >
+            -1
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-fmtgwu-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Sensorisch
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Intuitive
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            moderat intuitive
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-rqbqsm-MuiTableCell-root"
+          >
+            -5
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-fmtgwu-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Visuel
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Verbal
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            balanciert
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-rqbqsm-MuiTableCell-root"
+          >
+            3
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-fmtgwu-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Sequentiell
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Global
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            stark verbal
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium css-rqbqsm-MuiTableCell-root"
+          >
+            11
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-11xur9t-MuiPaper-root-MuiTableContainer-root"
+    style={
+      {
+        "width": 500,
+      }
+    }
+  >
+    <table
+      aria-label="customized table"
+      className="MuiTable-root css-rqglhn-MuiTable-root"
+      role={null}
+      style={
+        {
+          "width": 500,
+        }
+      }
+    >
+      <thead
+        className="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+        role={null}
+      >
+        <tr
+          className="MuiTableRow-root MuiTableRow-head css-1q1u3t4-MuiTableRow-root"
+          role={null}
+        >
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
+            scope="col"
+          >
+            Faktoren & Subskalen
+          </th>
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
+            scope="col"
+          >
+            Wert
+          </th>
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
+            scope="col"
+          >
+            Faktoren & Subskalen
+          </th>
+          <th
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
+            scope="col"
+          >
+            Wert
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+        role={null}
+      >
+        <tr
+          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+            style={
+              {
+                "color": "white",
+              }
+            }
+          >
+            Kognitive Strategien
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+            style={
+              {
+                "color": "white",
+              }
+            }
+          >
+            2,08
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+            style={
+              {
+                "color": "white",
+              }
+            }
+          >
+            Strategien des Managements interner Ressourcen
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+            style={
+              {
+                "color": "white",
+              }
+            }
+          >
+            2,33
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Organisieren
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            2,00
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            Aufmerksamkeit
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            2,67
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Elaborieren
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            1,67
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            Anstrengung
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            3,33
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Kritisches Prüfen
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            1,00
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            Zeit
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            1.00
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Wiederholen
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            3,67
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          />
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          />
+        </tr>
+        <tr
+          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+            style={
+              {
+                "color": "white",
+              }
+            }
+          >
+            Metakognitive Strategien
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+            style={
+              {
+                "color": "white",
+              }
+            }
+          >
+            1,89
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+            style={
+              {
+                "color": "white",
+              }
+            }
+          >
+            Strategien des Managements externer Ressourcen
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+            style={
+              {
+                "color": "white",
+              }
+            }
+          >
+            3,44
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Ziele und Planen
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            1,00
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            Lernen mit Studienkollegen
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            3,00
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Kontrollieren
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            2,33
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            Literaturrecherche
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            3,67
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Regulieren
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            2,33
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            Lernumgebung
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            3,67
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
