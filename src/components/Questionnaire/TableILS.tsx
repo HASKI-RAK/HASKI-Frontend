@@ -41,8 +41,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 }));
 
-
-export function ILS() {
+export function getInterpretation(score: number, interpretationString: string): string {
 
     const {t} = useTranslation();
 
@@ -60,11 +59,15 @@ export function ILS() {
     inter.set(-11, t("components.QuestionnaireResults.TableILS.strong"))
     inter.set(11, t("components.QuestionnaireResults.TableILS.strong"))
 
-    function getInterpretation(score: number, interpretationString: string): string {
-        if(inter.get(score) === t("components.QuestionnaireResults.TableILS.balanced"))
-            return t("components.QuestionnaireResults.TableILS.balanced")
-        return inter.get(score) + " " + interpretationString;
-    }
+    if(inter.get(score) === t("components.QuestionnaireResults.TableILS.balanced"))
+        return t("components.QuestionnaireResults.TableILS.balanced")
+    return inter.get(score) + " " + interpretationString;
+}
+
+
+export function ILS() {
+
+    const {t} = useTranslation();
 
     const rows = [
         {

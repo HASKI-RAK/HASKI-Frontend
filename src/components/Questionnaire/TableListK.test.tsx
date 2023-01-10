@@ -13,7 +13,8 @@ jest.mock('react-i18next', () => ({
 // tests for mui can be found https://github.com/mui/material-ui/blob/master/packages/mui-material/src
 describe("Test the Table dimensions", () => {
 
-    test("interpretation is right", () => {
+    test("interpretation is right",
+        () => {
 
         const {getAllByRole} = render(<ListK/>);
 
@@ -44,7 +45,8 @@ describe("Test the Table dimensions", () => {
 
 describe("Test the Table Score values are numbers", () => {
 
-    test("values are numbers", () => {
+    test("values are numbers",
+        () => {
 
         const {getAllByRole} = render(<ListK/>);
 

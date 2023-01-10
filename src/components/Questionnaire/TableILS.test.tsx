@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {ILS} from "./TableILS";
+import {ILS, getInterpretation} from "./TableILS";
 import {render} from "@testing-library/react";
 
 //we have to mock react-i18next otherwise a warning will appear
@@ -12,7 +12,8 @@ jest.mock('react-i18next', () => ({
 // tests for mui can be found https://github.com/mui/material-ui/blob/master/packages/mui-material/src
 describe("Test the Table dimensions", () => {
 
-    test("interpretation is right", () => {
+    test("interpretation is right",
+        () => {
 
         const {getAllByRole} = render(<ILS/>);
 
@@ -32,20 +33,28 @@ describe("Test the Table dimensions", () => {
 });
 
 describe("Test Interpretation", () => {
-    test("dimension interpretation is correct", () => {
+    test("dimension interpretation is correct",
+        () => {
 
-        const {getAllByRole} = render(<ILS/>);
-
-        expect(getAllByRole("cell")[2]).toHaveTextContent("components.QuestionnaireResults.TableILS.balanced");
-        expect(getAllByRole("cell")[6]).toHaveTextContent("components.QuestionnaireResults.TableILS.moderate components.questionnaireresults.tableils.intuitive");
-        expect(getAllByRole("cell")[10]).toHaveTextContent("components.QuestionnaireResults.TableILS.balanced");
-        expect(getAllByRole("cell")[14]).toHaveTextContent("components.QuestionnaireResults.TableILS.strong components.questionnaireresults.tableils.verbal");
-    });
+            expect(getInterpretation(-1, "components.QuestionnaireResults.TableILS.Reflective")).toBe("components.QuestionnaireResults.TableILS.balanced");
+            expect(getInterpretation(1, "components.QuestionnaireResults.TableILS.Reflective")).toBe("components.QuestionnaireResults.TableILS.balanced");
+            expect(getInterpretation(-3, "components.QuestionnaireResults.TableILS.Reflective")).toBe("components.QuestionnaireResults.TableILS.balanced");
+            expect(getInterpretation(3, "components.QuestionnaireResults.TableILS.Reflective")).toBe("components.QuestionnaireResults.TableILS.balanced");
+            expect(getInterpretation(-5, ("components.QuestionnaireResults.TableILS.Reflective").toLowerCase())).toBe("components.QuestionnaireResults.TableILS.moderate components.questionnaireresults.tableils.reflective");
+            expect(getInterpretation(5, ("components.QuestionnaireResults.TableILS.Reflective").toLowerCase())).toBe("components.QuestionnaireResults.TableILS.moderate components.questionnaireresults.tableils.reflective");
+            expect(getInterpretation(-7, ("components.QuestionnaireResults.TableILS.Reflective").toLowerCase())).toBe("components.QuestionnaireResults.TableILS.moderate components.questionnaireresults.tableils.reflective");
+            expect(getInterpretation(7, ("components.QuestionnaireResults.TableILS.Reflective").toLowerCase())).toBe("components.QuestionnaireResults.TableILS.moderate components.questionnaireresults.tableils.reflective");
+            expect(getInterpretation(-9, ("components.QuestionnaireResults.TableILS.Reflective").toLowerCase())).toBe("components.QuestionnaireResults.TableILS.strong components.questionnaireresults.tableils.reflective");
+            expect(getInterpretation(9, ("components.QuestionnaireResults.TableILS.Reflective").toLowerCase())).toBe("components.QuestionnaireResults.TableILS.strong components.questionnaireresults.tableils.reflective");
+            expect(getInterpretation(-11, ("components.QuestionnaireResults.TableILS.Reflective").toLowerCase())).toBe("components.QuestionnaireResults.TableILS.strong components.questionnaireresults.tableils.reflective");
+            expect(getInterpretation(11, ("components.QuestionnaireResults.TableILS.Reflective").toLowerCase())).toBe("components.QuestionnaireResults.TableILS.strong components.questionnaireresults.tableils.reflective");
+        });
 });
 
 describe("Test the Table Score values are numbers", () => {
 
-    test("values are numbers", () => {
+    test("values are numbers",
+        () => {
 
         const {getAllByRole} = render(<ILS/>);
 
