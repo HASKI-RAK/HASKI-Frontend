@@ -263,7 +263,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
               }
             }
           >
-            2,08
+            2.42
           </td>
           <td
             aria-sort={null}
@@ -285,7 +285,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
               }
             }
           >
-            2,33
+            1.89
           </td>
         </tr>
         <tr
@@ -302,71 +302,13 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            2,00
+            1.67
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
             Aufmerksamkeit
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
-          >
-            2,67
-          </td>
-        </tr>
-        <tr
-          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
-          role={null}
-        >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
-          >
-            Elaborieren
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
-          >
-            1,67
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
-          >
-            Anstrengung
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
-          >
-            3,33
-          </td>
-        </tr>
-        <tr
-          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
-          role={null}
-        >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
-          >
-            Kritisches Prüfen
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
-          >
-            1,00
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
-          >
-            Zeit
           </td>
           <td
             aria-sort={null}
@@ -383,13 +325,71 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
+            Elaborieren
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            2.00
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            Anstrengung
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            2.33
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            Kritisches Prüfen
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            3.67
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            Zeit
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            2.33
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
             Wiederholen
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            3,67
+            2.33
           </td>
           <td
             aria-sort={null}
@@ -424,7 +424,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
               }
             }
           >
-            1,89
+            2.33
           </td>
           <td
             aria-sort={null}
@@ -446,7 +446,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
               }
             }
           >
-            3,44
+            3.45
           </td>
         </tr>
         <tr
@@ -463,7 +463,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            1,00
+            2.67
           </td>
           <td
             aria-sort={null}
@@ -475,7 +475,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            3,00
+            3.00
           </td>
         </tr>
         <tr
@@ -492,7 +492,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            2,33
+            3.33
           </td>
           <td
             aria-sort={null}
@@ -504,7 +504,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            3,67
+            3.67
           </td>
         </tr>
         <tr
@@ -521,7 +521,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            2,33
+            1.00
           </td>
           <td
             aria-sort={null}
@@ -533,7 +533,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            3,67
+            3.67
           </td>
         </tr>
       </tbody>
