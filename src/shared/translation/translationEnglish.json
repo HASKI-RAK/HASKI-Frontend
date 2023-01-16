@@ -14,5 +14,22 @@
 	"searchButtonText": "Search",
 	"sort": "Sort by:",
 	"spellcheckText": "Did you mean:",
-	"update": "Updated"
+	"update": "Updated",
+
+	"glossaryElementsGerman": [
+		{
+			"term": "Titel",
+			"definition": "Definition",
+			"sources": "Quellen",
+			"tags": [ "Tags" ]
+		}
+	],
+	"glossaryElementsEnglish": [
+		{
+			"term": "Title",
+			"definition": "Definition",
+			"sources": "Sources",
+			"tags": [ "Tags" ]
+		}
+	]
 }
