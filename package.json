@@ -11,8 +11,7 @@
     "build-prod": "webpack -c webpack.prod.config.js --progress --profile --color",
     "build": "webpack -c webpack.config.js --progress --profile --color",
     "lint": "eslint ./src --ext .ts,.tsx",
-    "test": "jest",
-    "prepare": "husky install"
+    "test": "jest"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
