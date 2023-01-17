@@ -18,6 +18,14 @@ export const Dashboard = ({
     >
       one up
     </Button>
+    <Button
+      variant="text"
+      color="primary"
+      href="contact"
+      onClick={userState.increaseUserId}
+    >
+      Contact
+    </Button>
   </>
 );
 interface DashboardProps {

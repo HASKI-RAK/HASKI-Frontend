@@ -4,4 +4,5 @@
 import App from "./App/App";
 import Home from "./Home/Home";
 import ThemePresentation from "./ThemePresentation/ThemePresentation";
-export { App, ThemePresentation, Home };
+import Contact from "./Contact/Contact";
+export { App, ThemePresentation, Home, Contact };
