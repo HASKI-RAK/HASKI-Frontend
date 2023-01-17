@@ -1,7 +1,4 @@
-﻿{
-	"nextText": "Nächste",
-	"Notifications": "Benachrichtigungen",
-	"pages.glossary.title": "Glossar",
+{
 	"post": "Post",
 	"previousText": "Vorherige",
 	"resultPagesText": "Ergebnisseite",
@@ -14,5 +11,8 @@
 	"delete": "Löschen",
 	"DSGVO": "DSGVO",
 	"firstPage": "Erste Seite",
-	"lastPage": "Letzte Seite"
+	"lastPage": "Letzte Seite",
+	"nextText": "Nächste",
+	"Notifications": "Benachrichtigungen",
+	"pages.glossary.title": "Glossar"
 }
