@@ -16,7 +16,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "node src/shared/auto-order-json-translations.ts"
+      "pre-commit": "node ../src/shared/auto-order-json-translations.ts"
     }
   },
   "dependencies": {
