@@ -1,4 +1,19 @@
 {
+	"Activities": "Activities",
+	"and": "and",
+	"delete": "Deleted",
+	"DSGVO": "GDPR",
+	"firstPage": "First",
+	"glossaryElementsEnglish": [
+		{
+			"term": "Title",
+			"definition": "Definition",
+			"sources": "Sources",
+			"tags": [
+				"Tags"
+			]
+		}
+	],
 	"glossaryElementsGerman": [
 		{
 			"term": "Titel",
@@ -19,20 +34,5 @@
 	"searchButtonText": "Search",
 	"sort": "Sort by:",
 	"spellcheckText": "Did you mean:",
-	"update": "Updated",
-	"Activities": "Activities",
-	"and": "and",
-	"delete": "Deleted",
-	"DSGVO": "GDPR",
-	"firstPage": "First",
-	"glossaryElementsEnglish": [
-		{
-			"term": "Title",
-			"definition": "Definition",
-			"sources": "Sources",
-			"tags": [
-				"Tags"
-			]
-		}
-	]
+	"update": "Updated"
 }
