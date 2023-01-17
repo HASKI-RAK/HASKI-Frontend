@@ -1,9 +1,4 @@
 {
-	"Activities": "Aktivitäten",
-	"and": "und",
-	"delete": "Löschen",
-	"DSGVO": "DSGVO",
-	"firstPage": "Erste Seite",
 	"lastPage": "Letzte Seite",
 	"nextText": "Nächste",
 	"Notifications": "Benachrichtigungen",
@@ -14,5 +9,10 @@
 	"searchButtonText": "Suche",
 	"sort": "Sortiere bei:",
 	"spellcheckText": "Hast du das gesucht?",
-	"update": "Aktualisieren"
+	"update": "Aktualisieren",
+	"Activities": "Aktivitäten",
+	"and": "und",
+	"delete": "Löschen",
+	"DSGVO": "DSGVO",
+	"firstPage": "Erste Seite"
 }
