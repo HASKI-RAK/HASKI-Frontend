@@ -2,7 +2,6 @@
 	"Activities": "Activities",
 	"and": "and",
 	"delete": "Deleted",
-	"DSGVO": "GDPR",
 	"firstPage": "First",
 	"lastPage": "Last",
 	"nextText": "Next",
@@ -15,6 +14,7 @@
 	"sort": "Sort by:",
 	"spellcheckText": "Did you mean:",
 	"update": "Updated",
+	"DSGVO": "GDPR",
 
 	"glossaryElementsGerman": [
 		{
