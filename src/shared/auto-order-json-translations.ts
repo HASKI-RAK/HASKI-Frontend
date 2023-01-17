@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const english = require('./translation/translationEnglish.json');
 const german = require('./translation/translationGerman.json');
-const exec = require('child_process').exec;
 
 const orderedEnglish = {};
 Object.keys(english).sort(function (a, b) {
