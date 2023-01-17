@@ -4,7 +4,6 @@
 	"resultPagesText": "Ergebnisseite",
 	"searchButtonText": "Suche",
 	"sort": "Sortiere bei:",
-	"spellcheckText": "Hast du das gesucht?",
 	"update": "Aktualisieren",
 	"Activities": "Aktivitäten",
 	"and": "und",
@@ -14,5 +13,6 @@
 	"lastPage": "Letzte Seite",
 	"nextText": "Nächste",
 	"Notifications": "Benachrichtigungen",
+	"spellcheckText": "Hast du das gesucht?",
 	"pages.glossary.title": "Glossar"
 }
