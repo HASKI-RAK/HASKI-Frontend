@@ -4,26 +4,6 @@
 	"delete": "Deleted",
 	"DSGVO": "GDPR",
 	"firstPage": "First",
-	"glossaryElementsEnglish": [
-		{
-			"term": "Title",
-			"definition": "Definition",
-			"sources": "Sources",
-			"tags": [
-				"Tags"
-			]
-		}
-	],
-	"glossaryElementsGerman": [
-		{
-			"term": "Titel",
-			"definition": "Definition",
-			"sources": "Quellen",
-			"tags": [
-				"Tags"
-			]
-		}
-	],
 	"lastPage": "Last",
 	"nextText": "Next",
 	"Notifications": "Notifications",
