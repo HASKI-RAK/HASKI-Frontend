@@ -1,15 +1,18 @@
 import { Skeleton } from "@mui/material";
+import { AuthContext } from "@services/*";
 import { stringify } from "querystring";
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const Login = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [loggedIn, setLoggedIn] = useState(false);
     const [data, setData] = useState({ "user": "test", "id": -1 });
 
+    const navigate = useNavigate();
+    const authcontext = useContext(AuthContext);
     const nonce = searchParams.get('nonce');
-    console.log(nonce);
+
     // on mount, read search param 'nounce' and set it to state
     useEffect(() => {
         const response = fetch(`http://fakedomain.com:5000/login`, {
@@ -23,24 +26,18 @@ export const Login = () => {
             .then((response) => response.json())
             .then((json) => {
                 setLoggedIn(true);
-                fetch(`http://fakedomain.com:5000/user`, {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                    .then((response) => response.json()).then((json) => {
-                        setData(json);
-                    }).catch((err) => {
-                        console.log(err);
-                    });
+                // to some sanity checks here
+                // then supply data to auth context
+                authcontext.setIsAuth(true);
+                // then redirect to home page
+                setData(json); // this is just for demo purposes
+                navigate('/dashboard', { replace: true });
             }).catch((err) => {
                 console.log(err);
             });
     }, []);
     return (
-        loggedIn ? <div>Logged in {data.user} with id {data.id}</div> :
+        loggedIn ? <div>You will be redirected shortly...</div> :
             <Skeleton variant="text" />
     )
 };
