@@ -1,38 +1,46 @@
 import { Skeleton } from "@mui/material";
+import { stringify } from "querystring";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export const Login = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [loggedIn, setLoggedIn] = useState(false);
-    const [data, setData] = useState({ "name": "test" });
-    const [userid, setUserid] = useState(0);
+    const [data, setData] = useState({ "user": "test", "id": -1 });
 
     const nonce = searchParams.get('nonce');
     console.log(nonce);
     // on mount, read search param 'nounce' and set it to state
     useEffect(() => {
-        const requestOptions = {
+        const response = fetch(`http://fakedomain.com:5000/login`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nonce: nonce })
-        };
-        const response = fetch(`http://127.0.0.1:5000/login`, requestOptions).then((response) => {
-            return response.json();
-        }).then((data) => {
-            console.log(data); //data is user info et
-            setLoggedIn(true);
-            setData(data);
-            // fetch(`http://127.0.0.1:5000/user_info`, { method: 'GET' }).then((response_user) => {
-            //     return response_user.json();
-            // }).then((data_user) => {
-            //     console.log(data_user)
-            //     setUserid(data_user['user_info'])
-            // });
-        });
+            credentials: 'include',
+            body: JSON.stringify({ nonce: nonce }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                setLoggedIn(true);
+                fetch(`http://fakedomain.com:5000/user`, {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then((response) => response.json()).then((json) => {
+                        setData(json);
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+            }).catch((err) => {
+                console.log(err);
+            });
     }, []);
     return (
-        loggedIn ? <div>Logged in {data.name}</div> :
+        loggedIn ? <div>Logged in {data.user} with id {data.id}</div> :
             <Skeleton variant="text" />
     )
 };
