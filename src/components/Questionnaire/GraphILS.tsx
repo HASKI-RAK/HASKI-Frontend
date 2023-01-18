@@ -2,35 +2,43 @@ import React from 'react';
 import {ResponsiveBar} from '@nivo/bar';
 import {useTranslation} from 'react-i18next';
 
-const data = [
-    {
-        "dimension": "Global",
-        "Dimension": 11,
-    },
-    {
-        "dimension": "Verbal",
-        "Dimension": 3,
-    },
-    {
-        "dimension": "Intuitive",
-        "Dimension": -5,
-    },
-    {
-        "dimension": "Reflective",
-        "Dimension": -1,
-    },
-];
+export function SetData(): any{
+    const {t} = useTranslation();
+    const score = t("components.QuestionnaireResults.TableILS.Dimension");
+
+    const data = [
+        {
+            "dimension": t("components.QuestionnaireResults.TableILS.Global"),
+            [score]: 11,
+        },
+        {
+            "dimension": t("components.QuestionnaireResults.TableILS.Verbal"),
+            [score]: 3,
+        },
+        {
+            "dimension": t("components.QuestionnaireResults.TableILS.Intuitive"),
+            [score]: -5,
+        },
+        {
+            "dimension": t("components.QuestionnaireResults.TableILS.Reflective"),
+            [score]: -1,
+        },
+    ];
+
+    return [data, score];
+}
+
+
 
 
 export const GraphILS = () => {
+    const [data, score] = SetData();
     return (
 
         <div style={{height: 300, width: 600}}>
             <ResponsiveBar
                 data={data}
-                keys={[
-                    'Dimension',
-                ]}
+                keys={[score]}
                 indexBy="dimension"
                 margin={{top: 0, right: 130, bottom: 50, left: 60}}
                 padding={0.3}
