@@ -5,28 +5,23 @@ const path = require('path');
 const english = require('./translation/translationEnglish.json');
 const german = require('./translation/translationGerman.json');
 
-const orderedEnglish = {};
-Object.keys(english).sort(function (a, b) {
-    return a.toLowerCase().localeCompare(b.toLowerCase());
-}).forEach(key => {
-    orderedEnglish[key] = english[key];
-});
+function orderTranslationFile(translationObject, translationPath) {
 
-const orderedGerman = {};
-Object.keys(german).sort(function (a, b) {
-    return a.toLowerCase().localeCompare(b.toLowerCase());
-}).forEach(key => {
-    orderedGerman[key] = german[key];
-});
+  const ordered = {};
 
-fs.writeFile(path.resolve(__dirname, './translation/translationEnglish.json'), JSON.stringify(orderedEnglish, null, '\t'), function (err) {
-    if (err) {
-        throw err;
-    }
-});
+    Object.keys(translationObject).sort(function (a, b) {
+        return a.toLowerCase().localeCompare(b.toLowerCase());
+    }).forEach(key => {
+        ordered[key] = translationObject[key];
+    });
 
-fs.writeFile(path.resolve(__dirname, './translation/translationGerman.json'), JSON.stringify(orderedGerman, null, '\t'), function (err) {
-    if (err) {
-        throw err;
-    }
-});
+    fs.writeFile(path.resolve(__dirname, translationPath), JSON.stringify(ordered, null, '\t'), function (err) {
+        if (err) {
+            throw err;
+        }
+    });
+    return "";
+}
+
+orderTranslationFile(english, "./translation/translationEnglish.json");
+orderTranslationFile(german, "./translation/translationGerman.json");
