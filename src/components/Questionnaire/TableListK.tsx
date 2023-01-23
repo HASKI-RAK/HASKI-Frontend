@@ -46,46 +46,21 @@ const StyledTableRow = styled(TableRow)(() => ({
     },
 }));
 
-export function getSubscaleScore(score: number[]): number{
-
-    return score.reduce((a, b) => a + b, 0) / score.length;
-}
-
-export function getListKParameters(){
-
-    //These Values are later given from the Backend
-    const organize = 2.12;
-    const elaborate = 1.32;
-    const criticalReview = 1.23;
-    const repeat = 2.45;
-    const attention = 2.47;
-    const effort = 2.32;
-    const time = 2.00;
-    const goalsPlans = 1.85;
-    const control = 2.75;
-    const regulate = 3.1;
-    const learnWithClassmates = 4.99;
-    const literatureResearch = 4.32;
-    const learningEnvironment = 4.32;
-
-    return [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment];
-}
-
 
 export function TableListK() {
 
     const {t} = useTranslation();
-    const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment] = getListKParameters();
 
-    const scoreCognitiveStrategiesArray = [organize, elaborate, criticalReview, repeat];
-    const scoreInternalResourceManagementStrategiesArray = [attention, effort, time];
-    const scoreMetacognitiveStrategiesArray = [goalsPlans, control, regulate];
-    const scoreExternalResourceManagementStrategiesArray = [learnWithClassmates, literatureResearch, learningEnvironment];
+    //These Values are given from the Backend
+    const scoreCognitiveStrategiesArray = [1.67, 2.00, 3.67, 2.33];
+    const scoreInternalResourceManagementStrategiesArray = [1.00, 2.33, 2.33];
+    const scoreMetacognitiveStrategiesArray = [2.67, 3.33, 1.00];
+    const scoreExternalResourceManagementStrategiesArray = [3.00, 3.67, 3.67];
 
-    const averageCognitiveStrategies = getSubscaleScore(scoreCognitiveStrategiesArray)
-    const averageInternalResourceManagementStrategies = getSubscaleScore(scoreInternalResourceManagementStrategiesArray);
-    const averageMetacognitiveStrategies = getSubscaleScore(scoreMetacognitiveStrategiesArray);
-    const averageExternalResourcesManagementStrategies = getSubscaleScore(scoreExternalResourceManagementStrategiesArray);
+    const averageCognitiveStrategies = scoreCognitiveStrategiesArray.reduce((a, b) => a + b, 0) / scoreCognitiveStrategiesArray.length;
+    const averageInternalResourceManagementStrategies = scoreInternalResourceManagementStrategiesArray.reduce((a, b) => a + b, 0) / scoreInternalResourceManagementStrategiesArray.length;
+    const averageMetacognitiveStrategies = scoreMetacognitiveStrategiesArray.reduce((a, b) => a + b, 0) / scoreMetacognitiveStrategiesArray.length;
+    const averageExternalResourcesManagementStrategies = scoreExternalResourceManagementStrategiesArray.reduce((a, b) => a + b, 0) / scoreExternalResourceManagementStrategiesArray.length;
 
 
     const rows = [
@@ -160,8 +135,8 @@ export function TableListK() {
     ];
 
     return (
-        <TableContainer component={Paper} style={{minWidth: 300}}>
-            <Table sx={{minWidth: 300, top:300}} aria-label="customized table">
+        <TableContainer component={Paper} style={{minWidth: 400}}>
+            <Table style={{minWidth: 400}} aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         <StyledTableCellWithoutBorder align="left">{rows[0].col1}</StyledTableCellWithoutBorder>

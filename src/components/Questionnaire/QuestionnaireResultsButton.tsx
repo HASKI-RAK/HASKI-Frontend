@@ -6,13 +6,12 @@ import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import Modal from '@mui/material/Modal';
 import {TableILS} from './TableILS';
-import {TableListK, GraphILS, GraphListK, ResultDescriptionILS, ResultDescriptionListK} from "@components";
+import {TableListK, GraphILS, GraphListK} from "@components";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Stack} from "@mui/material";
-import {useTranslation} from "react-i18next";
 
-
+const steps = ['ILS Results', 'List K Results'];
 
 const styleButtonClose = {
     position: 'relative',
@@ -25,7 +24,7 @@ const styleBox = {
     left: '10%',
     top: '5%',
     overflow: 'auto',
-    height: '83%',
+    maxHeight: '85%',
     width: '75%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
@@ -34,17 +33,16 @@ const styleBox = {
 };
 
 const styleButtonNext = {
-
+    position: 'relative',
+    top: '10px',
 }
 
 const styleButtonBack = {
-
+    position: 'relative',
+    top: '10px',
 }
 
 export function QuestionnaireResultsButton() {
-    const {t} = useTranslation();
-
-    const steps = [t("components.QuestionnaireResults.ResultDescriptionILS.ILSResults"), t("components.QuestionnaireResults.ResultDescriptionILS.ListKResults")];
     const [open, setOpen] = React.useState(false);
     const [activeStep, setActiveStep] = React.useState(0);
 
@@ -63,7 +61,7 @@ export function QuestionnaireResultsButton() {
         <div>
             <Button variant="contained"
                     color="primary"
-                    onClick={handleOpen}>{t("components.QuestionnaireResults.QuestionnaireResultsButton.ButtonText")}
+                    onClick={handleOpen}>Questionnaire Results
             </Button>
             <Modal
                 id={"myModal"}
@@ -94,8 +92,8 @@ export function QuestionnaireResultsButton() {
                                         direction="column"
                                         justifyContent="space-between"
                                         alignItems="stretch"
+                                        spacing={1}
                                     >
-                                        <div>
                                         <Stack direction="row"
                                                justifyContent="space-between"
                                                alignItems="center"
@@ -104,33 +102,24 @@ export function QuestionnaireResultsButton() {
                                             <GraphILS/>
                                             <TableILS/>
                                         </Stack>
-                                        </div>
-                                        <ResultDescriptionILS/>
+                                        HALLO
                                     </Stack>
                                 </div>) : (
                                 <div>
-                                    <Stack direction="column"
+                                    <Stack direction="row"
                                            justifyContent="space-between"
-                                           alignItems="stretch"
-                                           m={2}
+                                           alignItems="center"
+                                           spacing={1}
                                     >
-                                        <div>
-                                        <Stack direction="row"
-                                               justifyContent="space-between"
-                                                alignItems="center"
-                                        >
-                                            <GraphListK/>
-                                            <TableListK/>
-                                        </Stack>
-                                        </div>
-                                        <ResultDescriptionListK/>
+                                        <GraphListK/>
+                                        <TableListK/>
                                     </Stack>
                                 </div>)}
                         </React.Fragment>
                     </div>
                     <Stack direction="row"
                            justifyContent="space-between"
-                           alignItems="flex-end"
+                           alignItems="center"
                            spacing={1}
                     >
                         <Button
@@ -139,7 +128,7 @@ export function QuestionnaireResultsButton() {
                             onClick={handleBack}
                             sx={styleButtonBack}
                         >
-                            {t("Back")}
+                            Back
                         </Button>
                         <Button
                             variant="contained"
@@ -147,7 +136,7 @@ export function QuestionnaireResultsButton() {
                             onClick={handleNext}
                             sx={styleButtonNext}
                         >
-                            {t("Next")}
+                            Next
                         </Button>
                     </Stack>
                 </Box>
