@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {ListK} from "./TableListK";
+import {TableListK} from "./TableListK";
 import {render} from "@testing-library/react";
 
 
@@ -16,7 +16,7 @@ describe("Test the Table dimensions", () => {
     test("interpretation is right",
         () => {
 
-        const {getAllByRole} = render(<ListK/>);
+        const {getAllByRole} = render(<TableListK/>);
 
         expect(getAllByRole("columnheader")[0]).toHaveTextContent("components.QuestionnaireResults.TableListK.Factors & subscales");
         expect(getAllByRole("columnheader")[1]).toHaveTextContent("components.QuestionnaireResults.TableListK.Score");
@@ -48,7 +48,7 @@ describe("Test the Table Score values are numbers", () => {
     test("values are numbers",
         () => {
 
-        const {getAllByRole} = render(<ListK/>);
+        const {getAllByRole} = render(<TableListK/>);
 
         const cell1 = getAllByRole("cell")[1].textContent;
         let cell1Int;

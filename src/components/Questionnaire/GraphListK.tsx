@@ -117,7 +117,7 @@ const data = {
         {
             "source": "List K",
             "target": "Cognitive strategies",
-            "distance": 80
+            "distance": 60
         },
         {
             "source": "Cognitive strategies",
@@ -142,7 +142,7 @@ const data = {
         {
             "source": "List K",
             "target": "Internal resource management strategies",
-            "distance": 80
+            "distance": 50
         },
         {
             "source": "Internal resource management strategies",
@@ -157,17 +157,17 @@ const data = {
         {
             "source": "Internal resource management strategies",
             "target": "Time \n   2.33",
-            "distance": 80
+            "distance": 60
         },
         {
             "source": "List K",
             "target": "Metacognitive strategies",
-            "distance": 80
+            "distance": 50
         },
         {
             "source": "Metacognitive strategies",
             "target": "Goals & plans \n   2.67",
-            "distance": 80
+            "distance": 60
         },
         {
             "source": "Metacognitive strategies",
@@ -182,12 +182,12 @@ const data = {
         {
             "source": "List K",
             "target": "External resource management strategies",
-            "distance": 80
+            "distance": 70
         },
         {
             "source": "External resource management strategies",
             "target": "Learning with classmates \n   3.00",
-            "distance": 50
+            "distance": 40
         },
         {
             "source": "External resource management strategies",
@@ -206,10 +206,10 @@ const data = {
 export const GraphListK = () => {
     return (
 
-        <div style={{height: 400, width: 600}}>
+        <div style={{height: 400, minWidth: 600}}>
             <ResponsiveNetwork
                 data={data}
-                margin={{ top: 0, right: 0, bottom: 0, left: -100 }}
+                margin={{ top: 0, right: 110, bottom: 0, left: 0 }}
                 linkDistance={function(e){return e.distance}}
                 repulsivity={100}
                 nodeSize={function(n){return n.size}}
@@ -228,10 +228,21 @@ export const GraphListK = () => {
                             id: 'Cognitive strategies'
                         },
                         note: 'Score: 2.42',
-                        noteX: -30,
-                        noteY: 36,
+                        noteX: -10,
+                        noteY: 40,
                         offset: 13,
                         noteTextOffset: 5
+                    },
+                    {
+                        type: 'circle',
+                        match: {
+                            id: 'Cognitive strategies'
+                        },
+                        note: 'Cognitive strategies',
+                        noteX: -10,
+                        noteY: 40,
+                        offset: 13,
+                        noteTextOffset: -15
                     },
                     {
                         type: 'circle',
@@ -239,8 +250,32 @@ export const GraphListK = () => {
                             id: 'Internal resource management strategies'
                         },
                         note: 'Score: 1.89',
-                        noteX: 60,
-                        noteY: 70,
+                        noteWidth: 240,
+                        noteX: 20,
+                        noteY: 35,
+                        offset: 13,
+                        noteTextOffset: 5,
+                    },
+                    {
+                        type: 'circle',
+                        match: {
+                            id: 'Internal resource management strategies'
+                        },
+                        note: 'Internal resource management strategies',
+                        noteWidth: 240,
+                        noteX: 20,
+                        noteY: 35,
+                        offset: 13,
+                        noteTextOffset: -15
+                    },
+                    {
+                        type: 'circle',
+                        match: {
+                            id: 'Metacognitive strategies'
+                        },
+                        note: 'Score: 2.33',
+                        noteX: -20,
+                        noteY: 80,
                         offset: 13,
                         noteTextOffset: 5
                     },
@@ -249,9 +284,21 @@ export const GraphListK = () => {
                         match: {
                             id: 'Metacognitive strategies'
                         },
-                        note: 'Score: 2.33',
-                        noteX: -40,
-                        noteY: 50,
+                        note: 'Metacognitive strategies',
+                        noteX: -20,
+                        noteY: 80,
+                        offset: 13,
+                        noteTextOffset: -15
+                    },
+                    {
+                        type: 'circle',
+                        match: {
+                            id: 'External resource management strategies'
+                        },
+                        note: 'Score: 3.45',
+                        noteWidth: 240,
+                        noteX: 10,
+                        noteY: 90,
                         offset: 13,
                         noteTextOffset: 5
                     },
@@ -260,11 +307,12 @@ export const GraphListK = () => {
                         match: {
                             id: 'External resource management strategies'
                         },
-                        note: 'Score: 3.45',
-                        noteX: 60,
-                        noteY: 25,
+                        note: 'External resource management strategies',
+                        noteWidth: 240,
+                        noteX: 10,
+                        noteY: 90,
                         offset: 13,
-                        noteTextOffset: 5
+                        noteTextOffset: -15
                     }
                 ]}
             />

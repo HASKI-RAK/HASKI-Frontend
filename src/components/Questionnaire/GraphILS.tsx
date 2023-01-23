@@ -35,12 +35,12 @@ export const GraphILS = () => {
     const [data, score] = SetData();
     return (
 
-        <div style={{height: 300, width: 600}}>
+        <div style={{height: 300, minWidth: 450,}}>
             <ResponsiveBar
                 data={data}
                 keys={[score]}
                 indexBy="dimension"
-                margin={{top: 0, right: 130, bottom: 50, left: 60}}
+                margin={{top: 0, right: 50, bottom: 50, left: 60}}
                 padding={0.3}
                 minValue={-11}
                 maxValue={11}

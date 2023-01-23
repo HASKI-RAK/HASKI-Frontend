@@ -47,7 +47,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 
-export function ListK() {
+export function TableListK() {
 
     const {t} = useTranslation();
 
@@ -135,8 +135,8 @@ export function ListK() {
     ];
 
     return (
-        <TableContainer component={Paper} style={{width: 500}}>
-            <Table style={{width: 500}} aria-label="customized table">
+        <TableContainer component={Paper} style={{minWidth: 400}}>
+            <Table style={{minWidth: 400}} aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         <StyledTableCellWithoutBorder align="left">{rows[0].col1}</StyledTableCellWithoutBorder>

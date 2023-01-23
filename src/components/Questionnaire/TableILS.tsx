@@ -64,10 +64,51 @@ export function getInterpretation(score: number, interpretationString: string): 
     return inter.get(score) + " " + interpretationString;
 }
 
-
-export function ILS() {
+export function getDimensionOne(score: number): string {
 
     const {t} = useTranslation();
+    if (score < 0 )
+        return t("components.QuestionnaireResults.TableILS.Active")
+    else
+        return t("components.QuestionnaireResults.TableILS.Reflective")
+}
+
+export function getDimensionTwo(score: number): string {
+
+    const {t} = useTranslation();
+    if (score < 0 )
+        return t("components.QuestionnaireResults.TableILS.Sensory")
+    else
+        return t("components.QuestionnaireResults.TableILS.Intuitive")
+}
+
+export function getDimensionThree(score: number): string {
+
+    const {t} = useTranslation();
+    if (score < 0 )
+        return t("components.QuestionnaireResults.TableILS.Visual")
+    else
+        return t("components.QuestionnaireResults.TableILS.Verbal")
+}
+
+export function getDimensionFour(score: number): string {
+
+    const {t} = useTranslation();
+    if (score < 0 )
+        return t("components.QuestionnaireResults.TableILS.Sequential")
+    else
+        return t("components.QuestionnaireResults.TableILS.Global")
+}
+
+
+export function TableILS() {
+
+    const {t} = useTranslation();
+    const score1 = -1;
+    const score2 = -5;
+    const score3 = 3;
+    const score4 = 9;
+
 
     const rows = [
         {
@@ -81,35 +122,35 @@ export function ILS() {
             id: 2,
             col1: t("components.QuestionnaireResults.TableILS.Active"),
             col2: t("components.QuestionnaireResults.TableILS.Reflective"),
-            col3: getInterpretation(-1, t("components.QuestionnaireResults.TableILS.Reflective").toLowerCase()),
+            col3: getInterpretation(score1, getDimensionOne(score1).toLowerCase()),
             col4: "-1"
         },
         {
             id: 3,
             col1: t("components.QuestionnaireResults.TableILS.Sensory"),
             col2: t("components.QuestionnaireResults.TableILS.Intuitive"),
-            col3: getInterpretation(-5, t("components.QuestionnaireResults.TableILS.Intuitive").toLowerCase()),
+            col3: getInterpretation(score2, getDimensionTwo(score2).toLowerCase()),
             col4: "-5"
         },
         {
             id: 4,
             col1: t("components.QuestionnaireResults.TableILS.Visual"),
             col2: t("components.QuestionnaireResults.TableILS.Verbal"),
-            col3: getInterpretation(3, t("components.QuestionnaireResults.TableILS.Verbal").toLowerCase()),
+            col3: getInterpretation(score3, getDimensionThree(score3).toLowerCase()),
             col4: "3"
         },
         {
             id: 5,
             col1: t("components.QuestionnaireResults.TableILS.Sequential"),
             col2: t("components.QuestionnaireResults.TableILS.Global"),
-            col3: getInterpretation(11, t("components.QuestionnaireResults.TableILS.Verbal").toLowerCase()),
+            col3: getInterpretation(score4, getDimensionFour(score4).toLowerCase()),
             col4: "11"
         },
     ];
 
     return (
-        <TableContainer component={Paper} style={{width: 500}} key={"TableILSContainer"}>
-            <Table style={{width: 500}} aria-label="customized table" key={"TableILS"}>
+        <TableContainer component={Paper} style={{minWidth: 300}} key={"TableILSContainer"}>
+            <Table style={{minWidth: 300}} aria-label="customized table" key={"TableILS"}>
                 <TableHead key={"TableILSHead"}>
                     <TableRow key={"TableILSTableRow"}>
                         <StyledTableCellWithoutBorder align="left">{rows[0].col1}</StyledTableCellWithoutBorder>

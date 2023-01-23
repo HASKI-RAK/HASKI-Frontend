@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {ILS, getInterpretation} from "./TableILS";
+import {TableILS, getInterpretation} from "./TableILS";
 import {render} from "@testing-library/react";
 
 //we have to mock react-i18next otherwise a warning will appear
@@ -15,7 +15,7 @@ describe("Test the Table dimensions", () => {
     test("interpretation is right",
         () => {
 
-        const {getAllByRole} = render(<ILS/>);
+        const {getAllByRole} = render(<TableILS/>);
 
         expect(getAllByRole("columnheader")[0]).toHaveTextContent("components.QuestionnaireResults.TableILS.Dimension");
         expect(getAllByRole("columnheader")[1]).toHaveTextContent("");
@@ -56,7 +56,7 @@ describe("Test the Table Score values are numbers", () => {
     test("values are numbers",
         () => {
 
-        const {getAllByRole} = render(<ILS/>);
+        const {getAllByRole} = render(<TableILS/>);
 
         const cell3 = getAllByRole("cell")[3].textContent;
         let cell3Int;
