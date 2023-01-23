@@ -14,5 +14,19 @@
   "delete": "Löschen",
   "update": "Aktualisieren",
   "DSGVO": "DSGVO",
-  "pages.glossary.title": "Glossar"
+  "pages.glossary.title": "Glossar",
+
+  "pages.contact.title": "Kontakt",
+  "contactform": "Kontaktformular",
+	"topic":"Thema",
+  "reportType": "Report Typ",
+  "briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
+  "issue":"Problem",
+  "bug":"Fehler",
+  "feature":"Funktionalität",
+  "other": "Sonstiges",
+  "submit": "Abschicken",
+  "learningelement": "Lernelement",
+	"ui": "UI",
+	"design":"Design"
 }

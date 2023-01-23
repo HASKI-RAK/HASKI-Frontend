@@ -14,5 +14,20 @@
 	"delete": "Deleted",
 	"update": "Updated",
 	"DSGVO": "GDPR",
-	"pages.glossary.title": "Glossary"
+	"pages.glossary.title": "Glossary",
+
+	"pages.contact.title": "Contact",
+	"contactform": "Contactform",
+	"topic": "Topic",
+	"reportType": "Reporttype",
+	"briefDescription": "Give a brief description of your request",
+	"issue": "issue",
+	"bug": "bug",
+	"feature": "feature",
+	"other": "other",
+	"submit": "Submit",
+	"learningelement": "Learningelement",
+	"ui": "UI",
+	"design":"Design"
+
 }

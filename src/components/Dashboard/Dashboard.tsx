@@ -22,7 +22,6 @@ export const Dashboard = ({
       variant="text"
       color="primary"
       href="contact"
-      onClick={userState.increaseUserId}
     >
       Contact
     </Button>
