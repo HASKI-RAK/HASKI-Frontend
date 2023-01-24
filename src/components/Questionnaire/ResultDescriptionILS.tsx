@@ -1,4 +1,5 @@
 import {useTranslation} from "react-i18next";
+import Typography from '@mui/material/Typography';
 import {getDimensionOne, getDimensionTwo, getDimensionThree, getDimensionFour, getInterpretation} from "./TableILS";
 
 export function ResultDescriptionILS(score1: number, score2: number, score3: number, score4: number) {
@@ -10,75 +11,88 @@ export function ResultDescriptionILS(score1: number, score2: number, score3: num
     const dimension2 = getDimensionTwo(score2);
     const dimension3 = getDimensionThree(score3);
     const dimension4 = getDimensionFour(score4)
-
     const arrayDimension = [dimension1, dimension2, dimension3, dimension4];
 
     //balanced, moderate, strong
-    const interpretationScore1 = getInterpretation(score1, "").trim();
-    const interpretationScore2 = getInterpretation(score2, "").trim();
-    const interpretationScore3 = getInterpretation(score3, "").trim();
-    const interpretationScore4 = getInterpretation(score4, "").trim();
+    const interpretationScore1 = getInterpretation(score1, "", true).trim();
+    const interpretationScore2 = getInterpretation(score2, "", true).trim();
+    const interpretationScore3 = getInterpretation(score3, "", true).trim();
+    const interpretationScore4 = getInterpretation(score4, "", true).trim();
 
-    const arrayInterpretation = [interpretationScore1, interpretationScore2, interpretationScore3, interpretationScore4];
-    const arrayBalanced = [];
-    let balancedCount = 0;
-    let itemCount = 1;
-    let resultInterpretationString = "";
+    const interpretationArray = [interpretationScore1, interpretationScore2, interpretationScore3, interpretationScore4];
+
+    const balancedArray = [];
+    const resultInterpretationString = [];
     let resultInterpretationBalancedString = "";
     let resultInterpretationBalancedExtendedString = "";
 
-    for (const item in arrayInterpretation) {
-        if (item === "balanced") {
-            balancedCount++;
-            arrayBalanced.push(item);
+    //All dimensions are processed here and balanced dimensions are stored in balancedArray
+    for (const item in interpretationArray) {
+        if (interpretationArray[item] === "balanced") {
+            balancedArray.push(arrayDimension[item] + "." + interpretationArray[item]);
         }
         else{
-            resultInterpretationString += t("components.QuestionnaireResults.ResultDescriptionILS."+arrayDimension[itemCount]+"."+item) + " \n"
-            itemCount++;
+            resultInterpretationString.push(
+                <div>
+                    <Typography variant="h6" gutterBottom>
+                        {arrayDimension[item]}
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                        {t("components.QuestionnaireResults.ResultDescriptionILS." + arrayDimension[item] + "." + interpretationArray[item])} <br/>
+                    </Typography>
+                </div>)
         }
     }
 
-    if (balancedCount > 0) {
-        if (balancedCount === 4){
-            resultInterpretationBalancedString = t("components.QuestionnaireResults.ResultDescriptionILS.EverythingBalanced");
+    //All balanced dimensions are processed here
+    if (balancedArray.length > 0) {
+        if (balancedArray.length === 4){
             return(
                 <div>
-                    {resultInterpretationBalancedString} <br/>
+                    <Typography variant="h6" gutterBottom>
+                        Alle Dimensionen
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                        {t("components.QuestionnaireResults.ResultDescriptionILS.EverythingBalanced")}
+                    </Typography>
                 </div>
             )
         }
         else {
-            for(const item in arrayBalanced) {
-                switch (item) {
-                    case "(components.QuestionnaireResults.ResultDescriptionILS.Active.balanced)":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing") + " & "
+            for(const dim in balancedArray) {
+                switch (balancedArray[dim]) {
+                    case "Active.balanced":
+                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing") + " & ";
                         break;
-                    case "(components.QuestionnaireResults.ResultDescriptionILS.Reflective.balanced)":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing") + " & "
+                    case "Reflective.balanced":
+                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing") + " & ";
                         break;
-                    case "(components.QuestionnaireResults.ResultDescriptionILS.Sensory.balanced)":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception") + " & "
+                    case "Sensory.balanced":
+                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception") + " & ";
                         break;
-                    case "(components.QuestionnaireResults.ResultDescriptionILS.Intuitive.balanced)":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception") + " & "
+                    case "Intuitive.balanced":
+                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception") + " & ";
                         break;
-                    case "(components.QuestionnaireResults.ResultDescriptionILS.Verbal.balanced)":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation") + " & "
+                    case "Verbal.balanced":
+                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation") + " & ";
                         break;
-                    case "(components.QuestionnaireResults.ResultDescriptionILS.Visual.balanced)":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation") + " & "
+                    case "Visual.balanced":
+                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation") + " & ";
                         break;
-                    case "(components.QuestionnaireResults.ResultDescriptionILS.Sequential.balanced)":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation") + " & "
+                    case "Sequential.balanced":
+                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation") + " & ";
                         break;
-                    case "(components.QuestionnaireResults.ResultDescriptionILS.Global.balanced)":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation") + " & "
+                    case "Global.balanced":
+                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation") + " & ";
                         break;
                     default: break;
             }}
 
+            //Remove last " & "
+            resultInterpretationBalancedExtendedString = resultInterpretationBalancedExtendedString.slice(0, resultInterpretationBalancedExtendedString.length - 2);
+
             resultInterpretationBalancedString = t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part1") + " " +
-            t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced."+balancedCount) + " " +
+            t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced."+ balancedArray.length) + " " +
             t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part2") + " " + resultInterpretationBalancedExtendedString + " " +
             t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part3");
             }
@@ -86,8 +100,17 @@ export function ResultDescriptionILS(score1: number, score2: number, score3: num
 
     return(
         <div>
-            {resultInterpretationString} <br/>
-            {resultInterpretationBalancedString} <br/>
+            {resultInterpretationString}
+            {resultInterpretationBalancedString == "" ? <br/> :
+            <div>
+                <Typography variant="h6" gutterBottom>
+                    Restliche Dimensionen
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                    {resultInterpretationBalancedString}
+                </Typography>
+            </div>
+            }
         </div>
     )
 }

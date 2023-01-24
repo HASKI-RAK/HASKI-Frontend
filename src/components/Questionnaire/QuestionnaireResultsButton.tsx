@@ -6,7 +6,7 @@ import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import Modal from '@mui/material/Modal';
 import {TableILS} from './TableILS';
-import {TableListK, GraphILS, GraphListK} from "@components";
+import {TableListK, GraphILS, GraphListK, ResultDescriptionILS} from "@components";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Stack} from "@mui/material";
@@ -102,17 +102,24 @@ export function QuestionnaireResultsButton() {
                                             <GraphILS/>
                                             <TableILS/>
                                         </Stack>
-                                        HALLO
+                                        {ResultDescriptionILS(7,11,9,7)}
                                     </Stack>
                                 </div>) : (
                                 <div>
-                                    <Stack direction="row"
+                                    <Stack direction="column"
                                            justifyContent="space-between"
-                                           alignItems="center"
+                                           alignItems="stretch"
                                            spacing={1}
                                     >
-                                        <GraphListK/>
-                                        <TableListK/>
+                                        <Stack direction="row"
+                                               justifyContent="space-between"
+                                                alignItems="center"
+                                                spacing={1}
+                                        >
+                                            <GraphListK/>
+                                            <TableListK/>
+                                        </Stack>
+                                        {ResultDescriptionILS(1,1,3,7)}
                                     </Stack>
                                 </div>)}
                         </React.Fragment>

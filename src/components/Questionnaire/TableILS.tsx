@@ -41,23 +41,42 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 }));
 
-export function getInterpretation(score: number, interpretationString: string): string {
+export function getInterpretation(score: number, interpretationString: string, onlyEnglish?: boolean): string {
 
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
 
     const inter = new Map<number, string>();
-    inter.set(-1, t("components.QuestionnaireResults.TableILS.balanced"))
-    inter.set(1, t("components.QuestionnaireResults.TableILS.balanced"))
-    inter.set(-3, t("components.QuestionnaireResults.TableILS.balanced"))
-    inter.set(3, t("components.QuestionnaireResults.TableILS.balanced"))
-    inter.set(-5, t("components.QuestionnaireResults.TableILS.moderate"))
-    inter.set(5, t("components.QuestionnaireResults.TableILS.moderate"))
-    inter.set(-7, t("components.QuestionnaireResults.TableILS.moderate"))
-    inter.set(7, t("components.QuestionnaireResults.TableILS.moderate"))
-    inter.set(-9, t("components.QuestionnaireResults.TableILS.strong"))
-    inter.set(9, t("components.QuestionnaireResults.TableILS.strong"))
-    inter.set(-11, t("components.QuestionnaireResults.TableILS.strong"))
-    inter.set(11, t("components.QuestionnaireResults.TableILS.strong"))
+
+    if(onlyEnglish){
+        const en = i18n.getFixedT("en");
+
+        inter.set(-1, en("components.QuestionnaireResults.TableILS.balanced"))
+        inter.set(1, en("components.QuestionnaireResults.TableILS.balanced"))
+        inter.set(-3, en("components.QuestionnaireResults.TableILS.balanced"))
+        inter.set(3, en("components.QuestionnaireResults.TableILS.balanced"))
+        inter.set(-5, en("components.QuestionnaireResults.TableILS.moderate"))
+        inter.set(5, en("components.QuestionnaireResults.TableILS.moderate"))
+        inter.set(-7, en("components.QuestionnaireResults.TableILS.moderate"))
+        inter.set(7, en("components.QuestionnaireResults.TableILS.moderate"))
+        inter.set(-9, en("components.QuestionnaireResults.TableILS.strong"))
+        inter.set(9, en("components.QuestionnaireResults.TableILS.strong"))
+        inter.set(-11, en("components.QuestionnaireResults.TableILS.strong"))
+        inter.set(11, en("components.QuestionnaireResults.TableILS.strong"))
+    }
+    else{
+        inter.set(-1, t("components.QuestionnaireResults.TableILS.balanced"))
+        inter.set(1, t("components.QuestionnaireResults.TableILS.balanced"))
+        inter.set(-3, t("components.QuestionnaireResults.TableILS.balanced"))
+        inter.set(3, t("components.QuestionnaireResults.TableILS.balanced"))
+        inter.set(-5, t("components.QuestionnaireResults.TableILS.moderate"))
+        inter.set(5, t("components.QuestionnaireResults.TableILS.moderate"))
+        inter.set(-7, t("components.QuestionnaireResults.TableILS.moderate"))
+        inter.set(7, t("components.QuestionnaireResults.TableILS.moderate"))
+        inter.set(-9, t("components.QuestionnaireResults.TableILS.strong"))
+        inter.set(9, t("components.QuestionnaireResults.TableILS.strong"))
+        inter.set(-11, t("components.QuestionnaireResults.TableILS.strong"))
+        inter.set(11, t("components.QuestionnaireResults.TableILS.strong"))
+    }
 
     if(inter.get(score) === t("components.QuestionnaireResults.TableILS.balanced"))
         return t("components.QuestionnaireResults.TableILS.balanced")
@@ -66,38 +85,46 @@ export function getInterpretation(score: number, interpretationString: string): 
 
 export function getDimensionOne(score: number): string {
 
-    const {t} = useTranslation();
+    const {i18n} = useTranslation();
+    const en = i18n.getFixedT("en");
+
     if (score < 0 )
-        return t("components.QuestionnaireResults.TableILS.Active")
+        return en("components.QuestionnaireResults.TableILS.Active")
     else
-        return t("components.QuestionnaireResults.TableILS.Reflective")
+        return en("components.QuestionnaireResults.TableILS.Reflective")
 }
 
 export function getDimensionTwo(score: number): string {
 
-    const {t} = useTranslation();
+    const {i18n} = useTranslation();
+    const en = i18n.getFixedT("en");
+
     if (score < 0 )
-        return t("components.QuestionnaireResults.TableILS.Sensory")
+        return en("components.QuestionnaireResults.TableILS.Sensory")
     else
-        return t("components.QuestionnaireResults.TableILS.Intuitive")
+        return en("components.QuestionnaireResults.TableILS.Intuitive")
 }
 
 export function getDimensionThree(score: number): string {
 
-    const {t} = useTranslation();
+    const {i18n} = useTranslation();
+    const en = i18n.getFixedT("en");
+
     if (score < 0 )
-        return t("components.QuestionnaireResults.TableILS.Visual")
+        return en("components.QuestionnaireResults.TableILS.Visual")
     else
-        return t("components.QuestionnaireResults.TableILS.Verbal")
+        return en("components.QuestionnaireResults.TableILS.Verbal")
 }
 
 export function getDimensionFour(score: number): string {
 
-    const {t} = useTranslation();
+    const {i18n} = useTranslation();
+    const en = i18n.getFixedT("en");
+
     if (score < 0 )
-        return t("components.QuestionnaireResults.TableILS.Sequential")
+        return en("components.QuestionnaireResults.TableILS.Sequential")
     else
-        return t("components.QuestionnaireResults.TableILS.Global")
+        return en("components.QuestionnaireResults.TableILS.Global")
 }
 
 

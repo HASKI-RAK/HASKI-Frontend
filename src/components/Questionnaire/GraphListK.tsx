@@ -1,8 +1,216 @@
 import React from 'react';
 import {ResponsiveNetwork} from '@nivo/network';
+import {useTranslation} from 'react-i18next';
 
+function SetData(): any{
+    const {t} = useTranslation();
+    const data = {
 
-const data = {
+        "nodes": [
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
+                "height": 1,
+                "size": 24,
+                "color": "rgb(97, 205, 187)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Internal resource management strategies"),
+                "height": 1,
+                "size": 24,
+                "color": "rgb(97, 205, 187)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Metacognitive strategies"),
+                "height": 1,
+                "size": 24,
+                "color": "rgb(97, 205, 187)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.External resource management strategies"),
+                "height": 1,
+                "size": 24,
+                "color": "rgb(97, 205, 187)"
+            },
+            {
+                "id": "List K",
+                "height": 2,
+                "size": 32,
+                "color": "rgb(244, 117, 96)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Organize")+ "\n   1.67",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Elaborate")+ "\n   2.00",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Critical review")+ "\n   3.67",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Repeat")+ "\n   2.33",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Attention")+ "\n   1.00",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Effort")+ "\n   2.33",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Time")+ "\n   2.33",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Goals & plans")+ "\n   2.67",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Control")+ "\n   3.33",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Regulate")+ "\n   1.00",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Learning with classmates")+ "\n   3.00",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Literature research")+ "\n   3.67",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Learning environment")+ "\n   3.67",
+                "height": 0,
+                "size": 12,
+                "color": "rgb(232, 193, 160)"
+            }
+        ],
+        "links": [
+            {
+                "source": "List K",
+                "target": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
+                "distance": 60
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Organize")+ "\n   1.67",
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Elaborate")+ "\n   2.00",
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Critical review")+ "\n   3.67",
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Repeat")+ "\n   2.33",
+                "distance": 50
+            },
+            {
+                "source": "List K",
+                "target": t("components.QuestionnaireResults.TableListK.Internal resource management strategies"),
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Internal resource management strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Attention")+ "\n   1.00",
+                "distance": 80
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Internal resource management strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Effort")+ "\n   2.33",
+                "distance": 80
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Internal resource management strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Time")+ "\n   2.33",
+                "distance": 60
+            },
+            {
+                "source": "List K",
+                "target": t("components.QuestionnaireResults.TableListK.Metacognitive strategies"),
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Metacognitive strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Goals & plans")+ "\n   2.67",
+                "distance": 60
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Metacognitive strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Control")+ "\n   3.33",
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Metacognitive strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Regulate")+ "\n   1.00",
+                "distance": 50
+            },
+            {
+                "source": "List K",
+                "target": t("components.QuestionnaireResults.TableListK.External resource management strategies"),
+                "distance": 70
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.External resource management strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Learning with classmates")+ "\n   3.00",
+                "distance": 40
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.External resource management strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Literature research")+ "\n   3.67",
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.External resource management strategies"),
+                "target": t("components.QuestionnaireResults.TableListK.Learning environment")+ "\n   3.67",
+                "distance": 50
+            }
+        ]
+    };
+
+    return data;
+
+}
+
+/*const data = {
+
     "nodes": [
         {
             "id": "Cognitive strategies",
@@ -200,24 +408,31 @@ const data = {
             "distance": 50
         }
     ]
-};
+};*/
 
 
 export const GraphListK = () => {
+    const { t } = useTranslation();
+    const data1 = SetData();
+    const cognitiveStrategies = t("components.QuestionnaireResults.TableListK.Cognitive strategies");
+    const intResMngtStrategies = t("components.QuestionnaireResults.TableListK.Internal resource management strategies");
+    const metacognitiveStrategies = t("components.QuestionnaireResults.TableListK.Metacognitive strategies");
+    const extResMngtStrategies = t("components.QuestionnaireResults.TableListK.External resource management strategies");
+
+
     return (
 
         <div style={{height: 400, minWidth: 600}}>
             <ResponsiveNetwork
-                data={data}
+                data={data1}
                 margin={{ top: 0, right: 110, bottom: 0, left: 0 }}
-                linkDistance={function(e){return e.distance}}
+                linkDistance={data1.nodes.distance}
                 repulsivity={100}
-                nodeSize={function(n){return n.size}}
-                activeNodeSize={function(n){return 1.5*n.size}}
-                nodeColor={function(e){return e.color}}
+                nodeSize={data1.nodes.size}
+                activeNodeSize={1.5*data1.nodes.size}
+                nodeColor={data1.nodes.color}
                 nodeBorderWidth={1}
                 nodeBorderColor="black"
-                linkThickness={function(n){return 2+2*n.target.data.height}}
                 linkColor={{ from: 'source.color', modifiers: [] }}
                 linkBlendMode="multiply"
                 motionConfig="wobbly"
@@ -225,7 +440,7 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'Cognitive strategies'
+                            id: cognitiveStrategies
                         },
                         note: 'Score: 2.42',
                         noteX: -10,
@@ -236,9 +451,9 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'Cognitive strategies'
+                            id: cognitiveStrategies
                         },
-                        note: 'Cognitive strategies',
+                        note: cognitiveStrategies,
                         noteX: -10,
                         noteY: 40,
                         offset: 13,
@@ -247,7 +462,7 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'Internal resource management strategies'
+                            id: intResMngtStrategies
                         },
                         note: 'Score: 1.89',
                         noteWidth: 240,
@@ -259,9 +474,9 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'Internal resource management strategies'
+                            id: intResMngtStrategies
                         },
-                        note: 'Internal resource management strategies',
+                        note: intResMngtStrategies,
                         noteWidth: 240,
                         noteX: 20,
                         noteY: 35,
@@ -271,7 +486,7 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'Metacognitive strategies'
+                            id: metacognitiveStrategies
                         },
                         note: 'Score: 2.33',
                         noteX: -20,
@@ -282,9 +497,9 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'Metacognitive strategies'
+                            id: metacognitiveStrategies
                         },
-                        note: 'Metacognitive strategies',
+                        note: metacognitiveStrategies,
                         noteX: -20,
                         noteY: 80,
                         offset: 13,
@@ -293,7 +508,7 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'External resource management strategies'
+                            id: extResMngtStrategies
                         },
                         note: 'Score: 3.45',
                         noteWidth: 240,
@@ -305,9 +520,9 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'External resource management strategies'
+                            id: extResMngtStrategies
                         },
-                        note: 'External resource management strategies',
+                        note: extResMngtStrategies,
                         noteWidth: 240,
                         noteX: 10,
                         noteY: 90,

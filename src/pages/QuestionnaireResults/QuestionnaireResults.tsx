@@ -6,7 +6,7 @@ export const QuestionnaireResults = () => {
         <div>
             <GraphILS/>
             <TableILS />
-            {ResultDescriptionILS(1,1,7,7)}
+            {ResultDescriptionILS(1,11,-1,7)}
             <GraphListK/>
             <TableListK />
         </div>
