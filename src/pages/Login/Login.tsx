@@ -39,7 +39,7 @@ export const Login = () => {
     return (
         searchParams.get('nonce') ?
             loggedIn ? <div>You will be redirected shortly...</div> :
-                <Skeleton variant="text" />
+                <Skeleton variant="rectangular" />
             :
             <div>
                 You are not authorized to view this page. Later here is login for admin
