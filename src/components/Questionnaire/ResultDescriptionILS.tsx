@@ -2,15 +2,21 @@ import {useTranslation} from "react-i18next";
 import Typography from '@mui/material/Typography';
 import {getDimensionOne, getDimensionTwo, getDimensionThree, getDimensionFour, getInterpretation} from "./TableILS";
 
-export function ResultDescriptionILS(score1: number, score2: number, score3: number, score4: number) {
+export function ResultDescriptionILS (){
 
     const {t} = useTranslation();
 
+    const score1=1;
+    const score2=-9;
+    const score3=7;
+    const score4=11;
+
+
     //active, reflective, sensory...etc
-    const dimension1 = getDimensionOne(score1);
-    const dimension2 = getDimensionTwo(score2);
-    const dimension3 = getDimensionThree(score3);
-    const dimension4 = getDimensionFour(score4)
+    const dimension1 = getDimensionOne(score1, true);
+    const dimension2 = getDimensionTwo(score2, true);
+    const dimension3 = getDimensionThree(score3, true);
+    const dimension4 = getDimensionFour(score4, true)
     const arrayDimension = [dimension1, dimension2, dimension3, dimension4];
 
     //balanced, moderate, strong

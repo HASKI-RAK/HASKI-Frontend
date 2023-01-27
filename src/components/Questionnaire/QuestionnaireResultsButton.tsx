@@ -6,12 +6,13 @@ import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import Modal from '@mui/material/Modal';
 import {TableILS} from './TableILS';
-import {TableListK, GraphILS, GraphListK, ResultDescriptionILS} from "@components";
+import {TableListK, GraphILS, GraphListK, ResultDescriptionILS, ResultDescriptionListK} from "@components";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Stack} from "@mui/material";
+import {useTranslation} from "react-i18next";
 
-const steps = ['ILS Results', 'List K Results'];
+
 
 const styleButtonClose = {
     position: 'relative',
@@ -24,7 +25,7 @@ const styleBox = {
     left: '10%',
     top: '5%',
     overflow: 'auto',
-    maxHeight: '85%',
+    height: '83%',
     width: '75%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
@@ -43,6 +44,9 @@ const styleButtonBack = {
 }
 
 export function QuestionnaireResultsButton() {
+    const {t} = useTranslation();
+
+    const steps = [t("components.QuestionnaireResults.ResultDescriptionILS.ILSResults"), t("components.QuestionnaireResults.ResultDescriptionILS.ListKResults")];
     const [open, setOpen] = React.useState(false);
     const [activeStep, setActiveStep] = React.useState(0);
 
@@ -61,7 +65,7 @@ export function QuestionnaireResultsButton() {
         <div>
             <Button variant="contained"
                     color="primary"
-                    onClick={handleOpen}>Questionnaire Results
+                    onClick={handleOpen}>{t("components.QuestionnaireResults.QuestionnaireResultsButton.ButtonText")}
             </Button>
             <Modal
                 id={"myModal"}
@@ -92,8 +96,8 @@ export function QuestionnaireResultsButton() {
                                         direction="column"
                                         justifyContent="space-between"
                                         alignItems="stretch"
-                                        spacing={1}
                                     >
+                                        <div>
                                         <Stack direction="row"
                                                justifyContent="space-between"
                                                alignItems="center"
@@ -102,24 +106,26 @@ export function QuestionnaireResultsButton() {
                                             <GraphILS/>
                                             <TableILS/>
                                         </Stack>
-                                        {ResultDescriptionILS(7,11,9,7)}
+                                        </div>
+                                        <ResultDescriptionILS/>
                                     </Stack>
                                 </div>) : (
                                 <div>
                                     <Stack direction="column"
                                            justifyContent="space-between"
                                            alignItems="stretch"
-                                           spacing={1}
+                                           m={2}
                                     >
+                                        <div>
                                         <Stack direction="row"
                                                justifyContent="space-between"
                                                 alignItems="center"
-                                                spacing={1}
                                         >
                                             <GraphListK/>
                                             <TableListK/>
                                         </Stack>
-                                        {ResultDescriptionILS(1,1,3,7)}
+                                        </div>
+                                        <ResultDescriptionListK/>
                                     </Stack>
                                 </div>)}
                         </React.Fragment>
@@ -135,7 +141,7 @@ export function QuestionnaireResultsButton() {
                             onClick={handleBack}
                             sx={styleButtonBack}
                         >
-                            Back
+                            {t("Back")}
                         </Button>
                         <Button
                             variant="contained"
@@ -143,7 +149,7 @@ export function QuestionnaireResultsButton() {
                             onClick={handleNext}
                             sx={styleButtonNext}
                         >
-                            Next
+                            {t("Next")}
                         </Button>
                     </Stack>
                 </Box>

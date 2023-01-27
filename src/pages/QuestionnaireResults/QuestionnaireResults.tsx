@@ -1,4 +1,4 @@
-﻿import {TableILS, TableListK, GraphILS, GraphListK, ResultDescriptionILS} from "@components";
+﻿import {TableILS, TableListK, GraphILS, GraphListK} from "@components";
 
 
 export const QuestionnaireResults = () => {
@@ -6,7 +6,6 @@ export const QuestionnaireResults = () => {
         <div>
             <GraphILS/>
             <TableILS />
-            {ResultDescriptionILS(1,11,-1,7)}
             <GraphListK/>
             <TableListK />
         </div>

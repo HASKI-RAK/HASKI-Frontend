@@ -83,48 +83,81 @@ export function getInterpretation(score: number, interpretationString: string, o
     return inter.get(score) + " " + interpretationString;
 }
 
-export function getDimensionOne(score: number): string {
+export function getDimensionOne(score: number, onlyEnglish?: boolean): string {
 
-    const {i18n} = useTranslation();
-    const en = i18n.getFixedT("en");
+    const {t,i18n} = useTranslation();
 
-    if (score < 0 )
-        return en("components.QuestionnaireResults.TableILS.Active")
-    else
-        return en("components.QuestionnaireResults.TableILS.Reflective")
+    if(onlyEnglish){
+        const en = i18n.getFixedT("en");
+        if (score > 0 )
+            return en("components.QuestionnaireResults.TableILS.Active")
+        else
+            return en("components.QuestionnaireResults.TableILS.Reflective")
+    }
+    else {
+        if(score > 0)
+            return t("components.QuestionnaireResults.TableILS.Active")
+        else
+            return t("components.QuestionnaireResults.TableILS.Reflective")
+    }
 }
 
-export function getDimensionTwo(score: number): string {
+export function getDimensionTwo(score: number, onlyEnglish?: boolean): string {
 
-    const {i18n} = useTranslation();
-    const en = i18n.getFixedT("en");
+    const {t,i18n} = useTranslation();
 
-    if (score < 0 )
-        return en("components.QuestionnaireResults.TableILS.Sensory")
-    else
-        return en("components.QuestionnaireResults.TableILS.Intuitive")
+    if(onlyEnglish){
+        const en = i18n.getFixedT("en");
+        if (score > 0 )
+            return en("components.QuestionnaireResults.TableILS.Sensory")
+        else
+            return en("components.QuestionnaireResults.TableILS.Intuitive")
+    }
+    else {
+
+        if(score > 0)
+            return t("components.QuestionnaireResults.TableILS.Sensory")
+        else
+            return t("components.QuestionnaireResults.TableILS.Intuitive")
+    }
 }
 
-export function getDimensionThree(score: number): string {
+export function getDimensionThree(score: number, onlyEnglish?: boolean): string {
 
-    const {i18n} = useTranslation();
-    const en = i18n.getFixedT("en");
+    const {t,i18n} = useTranslation();
 
-    if (score < 0 )
-        return en("components.QuestionnaireResults.TableILS.Visual")
-    else
-        return en("components.QuestionnaireResults.TableILS.Verbal")
+    if(onlyEnglish){
+        const en = i18n.getFixedT("en");
+        if (score > 0 )
+            return en("components.QuestionnaireResults.TableILS.Visual")
+        else
+            return en("components.QuestionnaireResults.TableILS.Verbal")
+    }
+    else {
+        if(score > 0)
+            return t("components.QuestionnaireResults.TableILS.Visual")
+        else
+            return t("components.QuestionnaireResults.TableILS.Verbal")
+    }
 }
 
-export function getDimensionFour(score: number): string {
+export function getDimensionFour(score: number, onlyEnglish?: boolean): string {
 
-    const {i18n} = useTranslation();
-    const en = i18n.getFixedT("en");
+    const {t,i18n} = useTranslation();
 
-    if (score < 0 )
-        return en("components.QuestionnaireResults.TableILS.Sequential")
-    else
-        return en("components.QuestionnaireResults.TableILS.Global")
+    if(onlyEnglish){
+        const en = i18n.getFixedT("en");
+        if (score > 0 )
+            return en("components.QuestionnaireResults.TableILS.Sequential")
+        else
+            return en("components.QuestionnaireResults.TableILS.Global")
+    }
+    else {
+        if(score > 0)
+            return t("components.QuestionnaireResults.TableILS.Sequential")
+        else
+            return t("components.QuestionnaireResults.TableILS.Global")
+    }
 }
 
 
@@ -147,29 +180,29 @@ export function TableILS() {
         },
         {
             id: 2,
-            col1: t("components.QuestionnaireResults.TableILS.Active"),
-            col2: t("components.QuestionnaireResults.TableILS.Reflective"),
+            col1: t("components.QuestionnaireResults.TableILS.Reflective"),
+            col2: t("components.QuestionnaireResults.TableILS.Active"),
             col3: getInterpretation(score1, getDimensionOne(score1).toLowerCase()),
             col4: "-1"
         },
         {
             id: 3,
-            col1: t("components.QuestionnaireResults.TableILS.Sensory"),
-            col2: t("components.QuestionnaireResults.TableILS.Intuitive"),
+            col1: t("components.QuestionnaireResults.TableILS.Intuitive"),
+            col2: t("components.QuestionnaireResults.TableILS.Sensory"),
             col3: getInterpretation(score2, getDimensionTwo(score2).toLowerCase()),
             col4: "-5"
         },
         {
             id: 4,
-            col1: t("components.QuestionnaireResults.TableILS.Visual"),
-            col2: t("components.QuestionnaireResults.TableILS.Verbal"),
+            col1: t("components.QuestionnaireResults.TableILS.Verbal"),
+            col2: t("components.QuestionnaireResults.TableILS.Visual"),
             col3: getInterpretation(score3, getDimensionThree(score3).toLowerCase()),
             col4: "3"
         },
         {
             id: 5,
-            col1: t("components.QuestionnaireResults.TableILS.Sequential"),
-            col2: t("components.QuestionnaireResults.TableILS.Global"),
+            col1: t("components.QuestionnaireResults.TableILS.Global"),
+            col2: t("components.QuestionnaireResults.TableILS.Sequential"),
             col3: getInterpretation(score4, getDimensionFour(score4).toLowerCase()),
             col4: "11"
         },
