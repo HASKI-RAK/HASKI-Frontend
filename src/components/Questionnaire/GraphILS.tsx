@@ -1,47 +1,48 @@
 import React from 'react';
 import {ResponsiveBar} from '@nivo/bar';
+import {getILSParameters} from "./TableILS";
 import {useTranslation} from 'react-i18next';
 
 
-export function SetData(): [data: { dimension: string, [score: string]: string }[] , score: string] {
+// The Key "Dimension" is used in the Graph, therefore the name matters
+// The naming of the Key "possibleDimensions" is not important, as it is not used in the Graph, just for indexing
+export function SetData(): { possibleDimensions: string, [Dimension: string]: string }[] {
 
     const {t} = useTranslation();
-    const score = t("components.QuestionnaireResults.TableILS.Dimension");
+    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters();
 
-    const data = [
+    return [
         {
-            "dimension": t("components.QuestionnaireResults.TableILS.Global") + " / " + t("components.QuestionnaireResults.TableILS.Sequential"),
-            [score]: "11",
+            "possibleDimensions": t("components.QuestionnaireResults.TableILS.Global") + " / " + t("components.QuestionnaireResults.TableILS.Sequential"),
+            [t("components.QuestionnaireResults.TableILS.Dimension")]: [dimensionFourScore].toString(),
         },
         {
-            "dimension": t("components.QuestionnaireResults.TableILS.Verbal") + " / " + t("components.QuestionnaireResults.TableILS.Visual"),
-            [score]: "3",
+            "possibleDimensions": t("components.QuestionnaireResults.TableILS.Verbal") + " / " + t("components.QuestionnaireResults.TableILS.Visual"),
+            [t("components.QuestionnaireResults.TableILS.Dimension")]: dimensionThreeScore.toString(),
         },
         {
-            "dimension": t("components.QuestionnaireResults.TableILS.Intuitive") + " / " + t("components.QuestionnaireResults.TableILS.Sensory"),
-            [score]: "5",
+            "possibleDimensions": t("components.QuestionnaireResults.TableILS.Intuitive") + " / " + t("components.QuestionnaireResults.TableILS.Sensory"),
+            [t("components.QuestionnaireResults.TableILS.Dimension")]: dimensionTwoScore.toString(),
         },
         {
-            "dimension": t("components.QuestionnaireResults.TableILS.Reflective") + " / " + t("components.QuestionnaireResults.TableILS.Active"),
-            [score]: "1",
+            "possibleDimensions": t("components.QuestionnaireResults.TableILS.Reflective") + " / " + t("components.QuestionnaireResults.TableILS.Active"),
+            [t("components.QuestionnaireResults.TableILS.Dimension")]: dimensionOneScore.toString(),
         },
     ];
-
-    return [data,score];
 }
 
 
 export const GraphILS = () => {
     const {t} = useTranslation();
-    const [data, score] = SetData();
+    const data = SetData();
 
     return (
 
         <div style={{height: 300, minWidth: 850,}}>
             <ResponsiveBar
                 data={data}
-                keys={[score]}
-                indexBy={"dimension"}
+                keys={[t("components.QuestionnaireResults.TableILS.Dimension")]}
+                indexBy={"possibleDimensions"}
                 margin={{top: 0, right: 100, bottom: 50, left: 80}}
                 padding={0.3}
                 axisBottom={{
@@ -96,15 +97,9 @@ export const GraphILS = () => {
                         ]
                     ]
                 }}
-                axisTop={null}
                 labelSkipWidth={12}
                 labelSkipHeight={12}
                 labelTextColor="white"
-                role="application"
-                ariaLabel="Nivo bar chart demo"
-                barAriaLabel={function(e) {
-                    return e.id + ": " + e.formattedValue + " in Score: " + e.indexValue
-                }}
             />
         </div>
     );

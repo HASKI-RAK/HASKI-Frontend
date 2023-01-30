@@ -1,58 +1,54 @@
 import {useTranslation} from "react-i18next";
 import Typography from '@mui/material/Typography';
-import {getDimensionOne, getDimensionTwo, getDimensionThree, getDimensionFour, getInterpretation} from "./TableILS";
+import {getILSParameters, getILSDimension, getInterpretation} from "./TableILS";
 
 export function ResultDescriptionILS (){
 
     const {t} = useTranslation();
 
-    const score1=1;
-    const score2=-9;
-    const score3=7;
-    const score4=11;
+    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters();
 
-
-    //active, reflective, sensory...etc
-    const dimension1 = getDimensionOne(score1, true);
-    const dimension2 = getDimensionTwo(score2, true);
-    const dimension3 = getDimensionThree(score3, true);
-    const dimension4 = getDimensionFour(score4, true)
-    const arrayDimension = [dimension1, dimension2, dimension3, dimension4];
+    //active, reflective, sensory...etc, it´s mandatory in english because of internationalization name in .json file
+    const dimensionOne = getILSDimension(1, dimensionOneScore, true);
+    const dimensionTwo = getILSDimension(2, dimensionTwoScore, true);
+    const dimensionThree = getILSDimension(3, dimensionThreeScore, true);
+    const dimensionFour = getILSDimension(4, dimensionFourScore, true)
+    const dimensionArray = [dimensionOne, dimensionTwo, dimensionThree, dimensionFour];
 
     //balanced, moderate, strong
-    const interpretationScore1 = getInterpretation(score1, "", true).trim();
-    const interpretationScore2 = getInterpretation(score2, "", true).trim();
-    const interpretationScore3 = getInterpretation(score3, "", true).trim();
-    const interpretationScore4 = getInterpretation(score4, "", true).trim();
+    const interpretationDimensionOneScore = getInterpretation(dimensionOneScore, "", true).trim();
+    const interpretationDimensionTwoScore = getInterpretation(dimensionTwoScore, "", true).trim();
+    const interpretationDimensionThreeScore = getInterpretation(dimensionThreeScore, "", true).trim();
+    const interpretationDimensionFourScore = getInterpretation(dimensionFourScore, "", true).trim();
 
-    const interpretationArray = [interpretationScore1, interpretationScore2, interpretationScore3, interpretationScore4];
+    const interpretationArray = [interpretationDimensionOneScore, interpretationDimensionTwoScore, interpretationDimensionThreeScore, interpretationDimensionFourScore];
 
-    const balancedArray = [];
-    const resultInterpretationString = [];
-    let resultInterpretationBalancedString = "";
-    let resultInterpretationBalancedExtendedString = "";
+    const balancedDimensionsArray = [];
+    const unbalancedDimensionsArray = [];
+    let balancedDimensionsInterpretationString = "";
+    let balancedDimensionsKeyWordString = "";
 
-    //All dimensions are processed here and balanced dimensions are stored in balancedArray
+    //All dimensions are processed here and balanced dimensions are stored in balancedDimensionsArray
     for (const item in interpretationArray) {
         if (interpretationArray[item] === "balanced") {
-            balancedArray.push(arrayDimension[item] + "." + interpretationArray[item]);
+            balancedDimensionsArray.push(dimensionArray[item] + "." + interpretationArray[item]);
         }
         else{
-            resultInterpretationString.push(
+            unbalancedDimensionsArray.push(
                 <div>
                     <Typography variant="h6" gutterBottom>
-                        {arrayDimension[item]}
+                        {dimensionArray[item]}
                     </Typography>
                     <Typography variant="body1" gutterBottom>
-                        {t("components.QuestionnaireResults.ResultDescriptionILS." + arrayDimension[item] + "." + interpretationArray[item])} <br/>
+                        {t("components.QuestionnaireResults.ResultDescriptionILS." + dimensionArray[item] + "." + interpretationArray[item])} <br/>
                     </Typography>
                 </div>)
         }
     }
 
     //All balanced dimensions are processed here
-    if (balancedArray.length > 0) {
-        if (balancedArray.length === 4){
+    if (balancedDimensionsArray.length > 0) {
+        if (balancedDimensionsArray.length === 4){
             return(
                 <div>
                     <Typography variant="h6" gutterBottom>
@@ -65,55 +61,55 @@ export function ResultDescriptionILS (){
             )
         }
         else {
-            for(const dim in balancedArray) {
-                switch (balancedArray[dim]) {
+            for(const dim in balancedDimensionsArray) {
+                switch (balancedDimensionsArray[dim]) {
                     case "Active.balanced":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing") + " & ";
+                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing") + " & ";
                         break;
                     case "Reflective.balanced":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing") + " & ";
+                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing") + " & ";
                         break;
                     case "Sensory.balanced":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception") + " & ";
+                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception") + " & ";
                         break;
                     case "Intuitive.balanced":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception") + " & ";
+                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception") + " & ";
                         break;
                     case "Verbal.balanced":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation") + " & ";
+                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation") + " & ";
                         break;
                     case "Visual.balanced":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation") + " & ";
+                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation") + " & ";
                         break;
                     case "Sequential.balanced":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation") + " & ";
+                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation") + " & ";
                         break;
                     case "Global.balanced":
-                        resultInterpretationBalancedExtendedString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation") + " & ";
+                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation") + " & ";
                         break;
                     default: break;
             }}
 
             //Remove last " & "
-            resultInterpretationBalancedExtendedString = resultInterpretationBalancedExtendedString.slice(0, resultInterpretationBalancedExtendedString.length - 2);
+            balancedDimensionsKeyWordString = balancedDimensionsKeyWordString.slice(0, balancedDimensionsKeyWordString.length - 2);
 
-            resultInterpretationBalancedString = t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part1") + " " +
-            t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced."+ balancedArray.length) + " " +
-            t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part2") + " " + resultInterpretationBalancedExtendedString + " " +
+            balancedDimensionsInterpretationString = t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part1") + " " +
+            t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced."+ balancedDimensionsArray.length) + " " +
+            t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part2") + " " + balancedDimensionsKeyWordString + " " +
             t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part3");
             }
         }
 
     return(
         <div>
-            {resultInterpretationString}
-            {resultInterpretationBalancedString == "" ? <br/> :
+            {unbalancedDimensionsArray}
+            {balancedDimensionsInterpretationString == "" ? <br/> :
             <div>
                 <Typography variant="h6" gutterBottom>
-                    Restliche Dimensionen
+                    {t("components.QuestionnaireResults.ResultDescriptionILS.RemainingDimensions")}
                 </Typography>
                 <Typography variant="body1" gutterBottom>
-                    {resultInterpretationBalancedString}
+                    {balancedDimensionsInterpretationString}
                 </Typography>
             </div>
             }

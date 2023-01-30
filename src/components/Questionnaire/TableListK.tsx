@@ -53,8 +53,9 @@ export function getSubscaleScore(score: number[]): number{
 
 export function getListKParameters(){
 
+    //These Values are later given from the Backend
     const organize = 2.12;
-    const elaborate = 3.32;
+    const elaborate = 1.32;
     const criticalReview = 1.23;
     const repeat = 2.45;
     const attention = 2.47;
@@ -63,9 +64,9 @@ export function getListKParameters(){
     const goalsPlans = 1.85;
     const control = 2.75;
     const regulate = 3.1;
-    const learnWithClassmates = 2.99;
-    const literatureResearch = 2.32;
-    const learningEnvironment = 2.32;
+    const learnWithClassmates = 4.99;
+    const literatureResearch = 4.32;
+    const learningEnvironment = 4.32;
 
     return [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment];
 }
@@ -76,7 +77,6 @@ export function TableListK() {
     const {t} = useTranslation();
     const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment] = getListKParameters();
 
-    //These Values are given from the Backend
     const scoreCognitiveStrategiesArray = [organize, elaborate, criticalReview, repeat];
     const scoreInternalResourceManagementStrategiesArray = [attention, effort, time];
     const scoreMetacognitiveStrategiesArray = [goalsPlans, control, regulate];

@@ -41,6 +41,17 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 }));
 
+export function getILSParameters(){
+
+    const dimensionOneScore = -11;
+    const dimensionTwoScore = 3;
+    const dimensionThreeScore = 9;
+    const dimensionFourScore = -3;
+
+
+    return [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore];
+}
+
 export function getInterpretation(score: number, interpretationString: string, onlyEnglish?: boolean): string {
 
     const {t, i18n} = useTranslation();
@@ -78,97 +89,83 @@ export function getInterpretation(score: number, interpretationString: string, o
         inter.set(11, t("components.QuestionnaireResults.TableILS.strong"))
     }
 
+    //if the interpretation is "balanced", then only return "balanced" without the Dimension
     if(inter.get(score) === t("components.QuestionnaireResults.TableILS.balanced"))
         return t("components.QuestionnaireResults.TableILS.balanced")
     return inter.get(score) + " " + interpretationString;
 }
 
-export function getDimensionOne(score: number, onlyEnglish?: boolean): string {
+//Depending on the score, return the corresponding dimension
+export function getILSDimension(dimensionNumber: number, score: number, onlyEnglish?:boolean): string{
 
     const {t,i18n} = useTranslation();
 
-    if(onlyEnglish){
-        const en = i18n.getFixedT("en");
-        if (score > 0 )
-            return en("components.QuestionnaireResults.TableILS.Active")
-        else
-            return en("components.QuestionnaireResults.TableILS.Reflective")
-    }
-    else {
-        if(score > 0)
-            return t("components.QuestionnaireResults.TableILS.Active")
-        else
-            return t("components.QuestionnaireResults.TableILS.Reflective")
-    }
-}
-
-export function getDimensionTwo(score: number, onlyEnglish?: boolean): string {
-
-    const {t,i18n} = useTranslation();
-
-    if(onlyEnglish){
-        const en = i18n.getFixedT("en");
-        if (score > 0 )
-            return en("components.QuestionnaireResults.TableILS.Sensory")
-        else
-            return en("components.QuestionnaireResults.TableILS.Intuitive")
-    }
-    else {
-
-        if(score > 0)
-            return t("components.QuestionnaireResults.TableILS.Sensory")
-        else
-            return t("components.QuestionnaireResults.TableILS.Intuitive")
-    }
-}
-
-export function getDimensionThree(score: number, onlyEnglish?: boolean): string {
-
-    const {t,i18n} = useTranslation();
-
-    if(onlyEnglish){
-        const en = i18n.getFixedT("en");
-        if (score > 0 )
-            return en("components.QuestionnaireResults.TableILS.Visual")
-        else
-            return en("components.QuestionnaireResults.TableILS.Verbal")
-    }
-    else {
-        if(score > 0)
-            return t("components.QuestionnaireResults.TableILS.Visual")
-        else
-            return t("components.QuestionnaireResults.TableILS.Verbal")
-    }
-}
-
-export function getDimensionFour(score: number, onlyEnglish?: boolean): string {
-
-    const {t,i18n} = useTranslation();
-
-    if(onlyEnglish){
-        const en = i18n.getFixedT("en");
-        if (score > 0 )
-            return en("components.QuestionnaireResults.TableILS.Sequential")
-        else
-            return en("components.QuestionnaireResults.TableILS.Global")
-    }
-    else {
-        if(score > 0)
-            return t("components.QuestionnaireResults.TableILS.Sequential")
-        else
-            return t("components.QuestionnaireResults.TableILS.Global")
+    switch(dimensionNumber){
+        case 1:
+            if(onlyEnglish){
+                const en = i18n.getFixedT("en");
+                if (score > 0 )
+                    return en("components.QuestionnaireResults.TableILS.Active")
+                else
+                    return en("components.QuestionnaireResults.TableILS.Reflective")
+            }
+            else {
+                if(score > 0)
+                    return t("components.QuestionnaireResults.TableILS.Active")
+                else
+                    return t("components.QuestionnaireResults.TableILS.Reflective")
+            }
+        case 2:
+            if(onlyEnglish){
+                const en = i18n.getFixedT("en");
+                if (score > 0 )
+                    return en("components.QuestionnaireResults.TableILS.Sensory")
+                else
+                    return en("components.QuestionnaireResults.TableILS.Intuitive")
+            }
+            else {
+                if(score > 0)
+                    return t("components.QuestionnaireResults.TableILS.Sensory")
+                else
+                    return t("components.QuestionnaireResults.TableILS.Intuitive")
+            }
+        case 3:
+            if(onlyEnglish){
+                const en = i18n.getFixedT("en");
+                if (score > 0 )
+                    return en("components.QuestionnaireResults.TableILS.Visual")
+                else
+                    return en("components.QuestionnaireResults.TableILS.Verbal")
+            }
+            else {
+                if(score > 0)
+                    return t("components.QuestionnaireResults.TableILS.Visual")
+                else
+                    return t("components.QuestionnaireResults.TableILS.Verbal")
+            }
+        case 4:
+            if(onlyEnglish){
+                const en = i18n.getFixedT("en");
+                if (score > 0 )
+                    return en("components.QuestionnaireResults.TableILS.Sequential")
+                else
+                    return en("components.QuestionnaireResults.TableILS.Global")
+            }
+            else {
+                if(score > 0)
+                    return t("components.QuestionnaireResults.TableILS.Sequential")
+                else
+                    return t("components.QuestionnaireResults.TableILS.Global")
+            }
+        default:
+            return "No dimension found";
     }
 }
-
 
 export function TableILS() {
 
     const {t} = useTranslation();
-    const score1 = -1;
-    const score2 = -5;
-    const score3 = 3;
-    const score4 = 9;
-
+    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters();
 
     const rows = [
         {
@@ -182,29 +179,29 @@ export function TableILS() {
             id: 2,
             col1: t("components.QuestionnaireResults.TableILS.Reflective"),
             col2: t("components.QuestionnaireResults.TableILS.Active"),
-            col3: getInterpretation(score1, getDimensionOne(score1).toLowerCase()),
-            col4: "-1"
+            col3: getInterpretation(dimensionOneScore, getILSDimension(1, dimensionOneScore).toLowerCase()),
+            col4: [dimensionOneScore].toString()
         },
         {
             id: 3,
             col1: t("components.QuestionnaireResults.TableILS.Intuitive"),
             col2: t("components.QuestionnaireResults.TableILS.Sensory"),
-            col3: getInterpretation(score2, getDimensionTwo(score2).toLowerCase()),
-            col4: "-5"
+            col3: getInterpretation(dimensionTwoScore, getILSDimension(2, dimensionTwoScore).toLowerCase()),
+            col4: [dimensionTwoScore].toString()
         },
         {
             id: 4,
             col1: t("components.QuestionnaireResults.TableILS.Verbal"),
             col2: t("components.QuestionnaireResults.TableILS.Visual"),
-            col3: getInterpretation(score3, getDimensionThree(score3).toLowerCase()),
-            col4: "3"
+            col3: getInterpretation(dimensionThreeScore, getILSDimension(3, dimensionThreeScore).toLowerCase()),
+            col4: [dimensionThreeScore].toString()
         },
         {
             id: 5,
             col1: t("components.QuestionnaireResults.TableILS.Global"),
             col2: t("components.QuestionnaireResults.TableILS.Sequential"),
-            col3: getInterpretation(score4, getDimensionFour(score4).toLowerCase()),
-            col4: "11"
+            col3: getInterpretation(dimensionFourScore, getILSDimension(4, dimensionFourScore).toLowerCase()),
+            col4: [dimensionFourScore].toString()
         },
     ];
 

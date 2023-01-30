@@ -34,13 +34,11 @@ const styleBox = {
 };
 
 const styleButtonNext = {
-    position: 'relative',
-    top: '10px',
+
 }
 
 const styleButtonBack = {
-    position: 'relative',
-    top: '10px',
+
 }
 
 export function QuestionnaireResultsButton() {
@@ -132,7 +130,7 @@ export function QuestionnaireResultsButton() {
                     </div>
                     <Stack direction="row"
                            justifyContent="space-between"
-                           alignItems="center"
+                           alignItems="flex-end"
                            spacing={1}
                     >
                         <Button

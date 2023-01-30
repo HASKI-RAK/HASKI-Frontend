@@ -7,30 +7,30 @@ function getCognitiveStrategiesBelow3String(organize: number, elaborate: number,
     const {t} = useTranslation();
 
     let cognitiveStrategiesBelow3String = t("components.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part1");
-    const cognitiveStrategiesBelow3 = [];
+    const cognitiveStrategiesBelow3Array = [];
     const cognitiveStrategiesBelow3Html = [];
 
     if(organize < 3) {
-        cognitiveStrategiesBelow3.push("Organize");
+        cognitiveStrategiesBelow3Array.push("Organize");
         cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Organize") + " &";
     }
     if(elaborate < 3) {
-        cognitiveStrategiesBelow3.push("Elaborate");
+        cognitiveStrategiesBelow3Array.push("Elaborate");
         cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Elaborate") + " &";
     }
     if(criticalReview < 3) {
-        cognitiveStrategiesBelow3.push("Critical review");
+        cognitiveStrategiesBelow3Array.push("Critical review");
         cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Critical review") + " &";
     }
     if(repeat < 3) {
-        cognitiveStrategiesBelow3.push("Repeat");
+        cognitiveStrategiesBelow3Array.push("Repeat");
         cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Repeat") + " &";
     }
 
     //Remove last " & "
     cognitiveStrategiesBelow3String = cognitiveStrategiesBelow3String.slice(0, cognitiveStrategiesBelow3String.length - 2);
 
-    if(cognitiveStrategiesBelow3.length > 0) {
+    if(cognitiveStrategiesBelow3Array.length > 0) {
         cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part2");
         cognitiveStrategiesBelow3Html.push(
             <div>
@@ -52,26 +52,26 @@ function getMetacognitiveStrategiesBelow3String(goalsPlans: number, control: num
     const {t} = useTranslation();
 
     let metacognitiveStrategiesBelow3String = t("components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Part1");
-    const metacognitiveStrategiesBelow3 = [];
+    const metacognitiveStrategiesBelow3Array = [];
     const metacognitiveStrategiesBelow3Html = [];
 
     if(goalsPlans < 3) {
-        metacognitiveStrategiesBelow3.push("Goals and plans");
+        metacognitiveStrategiesBelow3Array.push("Goals and plans");
         metacognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Goals & Plans") + " &";
     }
     if(control < 3) {
-        metacognitiveStrategiesBelow3.push("Control");
+        metacognitiveStrategiesBelow3Array.push("Control");
         metacognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Control") + " &";
     }
     if(regulate < 3) {
-        metacognitiveStrategiesBelow3.push("Regulate");
+        metacognitiveStrategiesBelow3Array.push("Regulate");
         metacognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Regulate") + " &";
     }
 
     //Remove last " & "
     metacognitiveStrategiesBelow3String = metacognitiveStrategiesBelow3String.slice(0, metacognitiveStrategiesBelow3String.length - 2);
 
-    if(metacognitiveStrategiesBelow3.length > 0) {
+    if(metacognitiveStrategiesBelow3Array.length > 0) {
         metacognitiveStrategiesBelow3String += t("Dot");
         metacognitiveStrategiesBelow3Html.push(
             <div>
@@ -94,27 +94,27 @@ export function ResultDescriptionListK() {
 
     const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment] = getListKParameters();
 
-    const averageCognitiveStrategies = getSubscaleScore([organize, elaborate, criticalReview, repeat]);
+    const cognitiveStrategiesAverage = getSubscaleScore([organize, elaborate, criticalReview, repeat]);
     const averageInternalResourceManagementStrategies = getSubscaleScore([attention, effort, time]);
     const averageMetacognitiveStrategies = getSubscaleScore([goalsPlans, control, regulate]);
     const averageExternalResourcesManagementStrategies = getSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]);
-    const averageSubscaleArray = [averageCognitiveStrategies, averageInternalResourceManagementStrategies, averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies];
+    const averageSubscaleArray = [cognitiveStrategiesAverage, averageInternalResourceManagementStrategies, averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies];
 
-    const averageSubScaleBelow3Array = [];
-    let averageSubScaleBelow3String = "";
-    const subScalesBelow3Array = [];
-    const subScalesBelow3MessageString = [];
+    const averageSubscaleBelow3Array = [];
+    let averageSubscaleBelow3String = "";
+    const subscalesBelow3Array = [];
+    const subscalesBelow3MessageString = [];
 
     // All Subscales that have a score below 3 are stored in averageSubscaleArray and the corresponding string is stored in
-    // averageSubScaleBelow3String
+    // averageSubscaleBelow3String
     // !todo Funktion draus machen
     for(const item in averageSubscaleArray) {
         if(averageSubscaleArray[item] < 3) {
-            averageSubScaleBelow3Array.push(averageSubscaleArray[item]);
+            averageSubscaleBelow3Array.push(averageSubscaleArray[item]);
         }
     }
-    if(averageSubScaleBelow3Array.length > 1) {
-        averageSubScaleBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3." + averageSubScaleBelow3Array.length);
+    if(averageSubscaleBelow3Array.length > 1) {
+        averageSubscaleBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3." + averageSubscaleBelow3Array.length);
     }
 
     const cognitiveStrategiesBelow3 = getCognitiveStrategiesBelow3String(organize, elaborate, criticalReview, repeat);
@@ -127,21 +127,21 @@ export function ResultDescriptionListK() {
     // !todo Funktion draus machen
     for (const item in subScalesRelevantCombinations) {
         if(subScalesRelevantCombinations[item][1] < 3) {
-            subScalesBelow3Array.push(subScalesRelevantCombinations[item][0] + " && ");
+            subscalesBelow3Array.push(subScalesRelevantCombinations[item][0] + " && ");
         }
     }
 
     //If there are any relevant subScales below 3, the if-statement is created
-    if(subScalesBelow3Array.length > 0) {
+    if(subscalesBelow3Array.length > 0) {
         //remove last " && "
-        subScalesBelow3Array[subScalesBelow3Array.length-1] = subScalesBelow3Array[subScalesBelow3Array.length-1].slice(0, subScalesBelow3Array[subScalesBelow3Array.length-1].length - 4);
-            subScalesBelow3MessageString.push(
+        subscalesBelow3Array[subscalesBelow3Array.length-1] = subscalesBelow3Array[subscalesBelow3Array.length-1].slice(0, subscalesBelow3Array[subscalesBelow3Array.length-1].length - 4);
+            subscalesBelow3MessageString.push(
             <div>
                 <Typography variant={"h6"} gutterBottom>
-                    {t("components.QuestionnaireResults.ResultDescriptionListK."+ subScalesBelow3Array.join("") +" Below3.Title")}
+                    {t("components.QuestionnaireResults.ResultDescriptionListK."+ subscalesBelow3Array.join("") +" Below3.Title")}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                    {t("components.QuestionnaireResults.ResultDescriptionListK."+ subScalesBelow3Array.join("") +" Below3.Description")}
+                    {t("components.QuestionnaireResults.ResultDescriptionListK."+ subscalesBelow3Array.join("") +" Below3.Description")}
                 </Typography>
             </div>
             );
@@ -155,14 +155,14 @@ export function ResultDescriptionListK() {
             <div>
                 <Typography variant="body2" gutterBottom>
                     {t("components.QuestionnaireResults.ResultDescriptionListK.GeneralDescription")}
-                    {averageSubScaleBelow3String} <br/>
+                    {averageSubscaleBelow3String} <br/>
 
                 </Typography>
             </div>
             {cognitiveStrategiesBelow3}
             {metacognitiveStrategiesBelow3}
-            {subScalesBelow3Array}
-            {subScalesBelow3MessageString}
+            {subscalesBelow3Array}
+            {subscalesBelow3MessageString}
         </div>
     )
 }
