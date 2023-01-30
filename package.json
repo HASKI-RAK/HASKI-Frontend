@@ -10,12 +10,14 @@
     "start": "webpack-dev-server --mode=development --hot --color --port 8080 --open",
     "build-prod": "webpack -c webpack.prod.config.js --progress --profile --color",
     "build": "webpack -c webpack.config.js --progress --profile --color",
+    "watch": "webpack -c webpack.config.js --progress --profile --color --watch",
     "lint": "eslint ./src --ext .ts,.tsx",
     "test": "jest"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.10.10",
     "@types/node": "^18.8.2",
     "i18next": "^22.1.2",

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, createContext } from "react";
+import { createContext } from "react";
 export type AuthContextType = {
     isAuth: boolean,
     setIsAuth: (value: boolean) => void,

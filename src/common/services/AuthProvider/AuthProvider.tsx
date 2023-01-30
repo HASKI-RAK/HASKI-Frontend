@@ -4,7 +4,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isAuth, setIsAuth] = useState(false);
     // middleware to check if user is logged in by asking backend
     useEffect(() => {
-        const response = fetch(`http://fakedomain.com:5000/loginstatus`, {
+        fetch(`http://fakedomain.com:5000/loginstatus`, {
             method: 'GET',
             credentials: 'include',
             headers: {

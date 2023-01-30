@@ -14,5 +14,10 @@
   "delete": "Löschen",
   "update": "Aktualisieren",
   "DSGVO": "DSGVO",
-  "pages.glossary.title": "Glossar"
+  "pages.glossary.title": "Glossar",
+  "components.login.title": "HASKI Anmeldung",
+  "components.login.subtitle": "Bitte geben Sie Ihre Zugangsdaten ein",
+  "components.login.username": "Benutzername",
+  "components.login.password": "Passwort",
+  "components.login.login": "Anmelden"
 }

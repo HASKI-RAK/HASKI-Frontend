@@ -1,3 +1,4 @@
+import { LoginForm } from "@components";
 import { Skeleton } from "@mui/material";
 import { AuthContext } from "@services/*";
 import { stringify } from "querystring";
@@ -41,9 +42,7 @@ export const Login = () => {
             loggedIn ? <div>You will be redirected shortly...</div> :
                 <Skeleton variant="rectangular" />
             :
-            <div>
-                You are not authorized to view this page. Later here is login for admin
-            </div>
+            <LoginForm />
     )
 };
 
