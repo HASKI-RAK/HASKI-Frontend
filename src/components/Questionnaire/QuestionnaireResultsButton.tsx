@@ -6,43 +6,36 @@ import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import Modal from '@mui/material/Modal';
 import {TableILS} from './TableILS';
-import {TableListK, GraphILS, GraphListK} from "@components";
+import {TableListK, GraphILS, GraphListK, ResultDescriptionILS, ResultDescriptionListK} from "@components";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Stack} from "@mui/material";
+import {useTranslation} from "react-i18next";
 
-const steps = ['ILS Results', 'List K Results'];
 
 const styleButtonClose = {
     position: 'relative',
-    left: '98%',
-    bottom: '20px',
+    left: '97%',
+    bottom: '10px',
 }
 
 const styleBox = {
     position: 'absolute',
-    left: '10%',
+    left: '8%',
+    right: '8%',
     top: '5%',
     overflow: 'auto',
-    maxHeight: '85%',
-    width: '75%',
+    maxHeight: '83%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 2,
 };
 
-const styleButtonNext = {
-    position: 'relative',
-    top: '10px',
-}
-
-const styleButtonBack = {
-    position: 'relative',
-    top: '10px',
-}
-
 export function QuestionnaireResultsButton() {
+    const {t} = useTranslation();
+
+    const steps = [t("components.QuestionnaireResults.ResultDescriptionILS.ILSResults"), t("components.QuestionnaireResults.ResultDescriptionILS.ListKResults")];
     const [open, setOpen] = React.useState(false);
     const [activeStep, setActiveStep] = React.useState(0);
 
@@ -52,6 +45,7 @@ export function QuestionnaireResultsButton() {
 
     const handleNext = () => {
         setActiveStep(activeStep === 0 ? activeStep + 1 : activeStep);
+
     };
 
     const handleOpen = () => setOpen(true);
@@ -61,13 +55,14 @@ export function QuestionnaireResultsButton() {
         <div>
             <Button variant="contained"
                     color="primary"
-                    onClick={handleOpen}>Questionnaire Results
+                    onClick={handleOpen}>{t("components.QuestionnaireResults.QuestionnaireResultsButton.ButtonText")}
             </Button>
             <Modal
                 id={"myModal"}
                 open={open}
                 onClose={handleClose}
             >
+                <div>
                 <Box sx={styleBox}>
                     <IconButton color="primary" sx={styleButtonClose}>
                         <CloseIcon onClick={handleClose}/>
@@ -84,6 +79,11 @@ export function QuestionnaireResultsButton() {
                             </Step>
                         ))}
                     </Stepper>
+                    <Stack
+                        direction="column"
+                        justifyContent="space-between"
+                        alignItems="stretch"
+                    >
                     <div>
                         <React.Fragment>
                             {activeStep === 0 ? (
@@ -92,57 +92,66 @@ export function QuestionnaireResultsButton() {
                                         direction="column"
                                         justifyContent="space-between"
                                         alignItems="stretch"
-                                        spacing={1}
+                                        m={2}
                                     >
-                                        <Stack direction="row"
-                                               justifyContent="space-between"
-                                               alignItems="center"
-                                               spacing={1}
-                                        >
-                                            <GraphILS/>
-                                            <TableILS/>
-                                        </Stack>
-                                        HALLO
+                                        <div>
+                                            <Stack direction="row"
+                                                   justifyContent="space-between"
+                                                   alignItems="center"
+                                            >
+                                                <GraphILS/>
+                                                <TableILS/>
+                                            </Stack>
+                                        </div>
+                                        <ResultDescriptionILS/>
                                     </Stack>
                                 </div>) : (
                                 <div>
-                                    <Stack direction="row"
+                                    <Stack direction="column"
                                            justifyContent="space-between"
-                                           alignItems="center"
-                                           spacing={1}
+                                           alignItems="stretch"
+                                           m={2}
                                     >
-                                        <GraphListK/>
-                                        <TableListK/>
+                                        <div>
+                                            <Stack direction="row"
+                                                   justifyContent="space-between"
+                                                   alignItems="center"
+                                            >
+                                                <GraphListK/>
+                                                <TableListK/>
+                                            </Stack>
+                                        </div>
+                                        <ResultDescriptionListK/>
                                     </Stack>
                                 </div>)}
                         </React.Fragment>
-                    </div>
-                    <Stack direction="row"
-                           justifyContent="space-between"
-                           alignItems="center"
-                           spacing={1}
-                    >
+                        <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems="center"
+                            m={2}>
                         <Button
                             variant="contained"
                             color="primary"
                             onClick={handleBack}
-                            sx={styleButtonBack}
+                            disabled={activeStep === 0}
                         >
-                            Back
+                            {t("Back")}
                         </Button>
                         <Button
                             variant="contained"
                             color="primary"
                             onClick={handleNext}
-                            sx={styleButtonNext}
+                            disabled={activeStep === 1}
                         >
-                            Next
+                            {t("Next")}
                         </Button>
+                        </Stack>
+                    </div>
                     </Stack>
                 </Box>
+                </div>
             </Modal>
         </div>
     );
 }
-
-

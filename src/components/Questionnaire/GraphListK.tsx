@@ -1,233 +1,306 @@
 import React from 'react';
 import {ResponsiveNetwork} from '@nivo/network';
+import {useTranslation} from 'react-i18next';
+import {getListKParameters, getSubscaleScore} from "./TableListK";
+
+function centerString(str: string, maxLen: number) {
+    return str.padStart((str.length+maxLen*1.5)/2)
+}
+
+function SetData(): { nodes: { id: string, height: number, size: number, score: number, color: string }[], links: { source: string, target: string, distance: number }[] } {
+
+    const {t} = useTranslation();
+    const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment] = getListKParameters();
+
+    const organizeCentered = t("components.QuestionnaireResults.TableListK.Organize") + "\n" + centerString(organize.toFixed(2), (t("components.QuestionnaireResults.TableListK.Organize")).length);
+    const elaborateCentered = t("components.QuestionnaireResults.TableListK.Elaborate") + "\n" + centerString(elaborate.toFixed(2), (t("components.QuestionnaireResults.TableListK.Elaborate")).length);
+    const criticalReviewCentered = t("components.QuestionnaireResults.TableListK.Critical review") + "\n" + centerString(criticalReview.toFixed(2), (t("components.QuestionnaireResults.TableListK.Critical review")).length);
+    const repeatCentered = t("components.QuestionnaireResults.TableListK.Repeat") + "\n" + centerString(repeat.toFixed(2), (t("components.QuestionnaireResults.TableListK.Repeat")).length);
+    const attentionCentered = t("components.QuestionnaireResults.TableListK.Attention") + "\n" + centerString(attention.toFixed(2), (t("components.QuestionnaireResults.TableListK.Attention")).length);
+    const effortCentered = t("components.QuestionnaireResults.TableListK.Effort") + "\n" + centerString(effort.toFixed(2), (t("components.QuestionnaireResults.TableListK.Effort")).length);
+    const timeCentered = t("components.QuestionnaireResults.TableListK.Time") + "\n" + centerString(time.toFixed(2), (t("components.QuestionnaireResults.TableListK.Time")).length);
+    const goalsPlansCentered = t("components.QuestionnaireResults.TableListK.Goals & plans") + "\n" + centerString(goalsPlans.toFixed(2), (t("components.QuestionnaireResults.TableListK.Goals & plans")).length);
+    const controlCentered = t("components.QuestionnaireResults.TableListK.Control") + "\n" + centerString(control.toFixed(2), (t("components.QuestionnaireResults.TableListK.Control")).length);
+    const regulateCentered = t("components.QuestionnaireResults.TableListK.Regulate") + "\n" + centerString(regulate.toFixed(2), (t("components.QuestionnaireResults.TableListK.Regulate")).length);
+    const learnWithClassmatesCentered = t("components.QuestionnaireResults.TableListK.Learning with classmates") + "\n" + centerString(learnWithClassmates.toFixed(2), (t("components.QuestionnaireResults.TableListK.Learning with classmates")).length);
+    const literatureResearchCentered = t("components.QuestionnaireResults.TableListK.Literature research") + "\n" + centerString(literatureResearch.toFixed(2), (t("components.QuestionnaireResults.TableListK.Literature research")).length);
+    const learningEnvironmentCentered = t("components.QuestionnaireResults.TableListK.Learning environment") + "\n" + centerString(learningEnvironment.toFixed(2), (t("components.QuestionnaireResults.TableListK.Learning environment")).length);
 
 
-const data = {
-    "nodes": [
-        {
-            "id": "Cognitive strategies",
-            "height": 1,
-            "size": 24,
-            "color": "rgb(97, 205, 187)"
-        },
-        {
-            "id": "Internal resource management strategies",
-            "height": 1,
-            "size": 24,
-            "color": "rgb(97, 205, 187)"
-        },
-        {
-            "id": "Metacognitive strategies",
-            "height": 1,
-            "size": 24,
-            "color": "rgb(97, 205, 187)"
-        },
-        {
-            "id": "External resource management strategies",
-            "height": 1,
-            "size": 24,
-            "color": "rgb(97, 205, 187)"
-        },
-        {
-            "id": "List K",
-            "height": 2,
-            "size": 32,
-            "color": "rgb(244, 117, 96)"
-        },
-        {
-            "id": "Organize \n   1.67",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        },
-        {
-            "id": "Elaborate \n   2.00",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        },
-        {
-            "id": "Critical review \n   3.67",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        },
-        {
-            "id": "Repeat \n   2.33",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        },
-        {
-            "id": "Attention \n   1.00",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        },
-        {
-            "id": "Effort \n   2.33",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        },
-        {
-            "id": "Time \n   2.33",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        },
-        {
-            "id": "Goals & plans \n   2.67",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        },
-        {
-            "id": "Control \n   3.33",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        },
-        {
-            "id": "Regulate \n   1.00",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        },
-        {
-            "id": "Learning with classmates \n   3.00",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        },
-        {
-            "id": "Literature research \n   3.67",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        },
-        {
-            "id": "Learning environment \n   3.67",
-            "height": 0,
-            "size": 12,
-            "color": "rgb(232, 193, 160)"
-        }
-    ],
-    "links": [
-        {
-            "source": "List K",
-            "target": "Cognitive strategies",
-            "distance": 60
-        },
-        {
-            "source": "Cognitive strategies",
-            "target": "Organize \n   1.67",
-            "distance": 50
-        },
-        {
-            "source": "Cognitive strategies",
-            "target": "Elaborate \n   2.00",
-            "distance": 50
-        },
-        {
-            "source": "Cognitive strategies",
-            "target": "Critical review \n   3.67",
-            "distance": 50
-        },
-        {
-            "source": "Cognitive strategies",
-            "target": "Repeat \n   2.33",
-            "distance": 50
-        },
-        {
-            "source": "List K",
-            "target": "Internal resource management strategies",
-            "distance": 50
-        },
-        {
-            "source": "Internal resource management strategies",
-            "target": "Attention \n   1.00",
-            "distance": 80
-        },
-        {
-            "source": "Internal resource management strategies",
-            "target": "Effort \n   2.33",
-            "distance": 80
-        },
-        {
-            "source": "Internal resource management strategies",
-            "target": "Time \n   2.33",
-            "distance": 60
-        },
-        {
-            "source": "List K",
-            "target": "Metacognitive strategies",
-            "distance": 50
-        },
-        {
-            "source": "Metacognitive strategies",
-            "target": "Goals & plans \n   2.67",
-            "distance": 60
-        },
-        {
-            "source": "Metacognitive strategies",
-            "target": "Control \n   3.33",
-            "distance": 50
-        },
-        {
-            "source": "Metacognitive strategies",
-            "target": "Regulate \n   1.00",
-            "distance": 50
-        },
-        {
-            "source": "List K",
-            "target": "External resource management strategies",
-            "distance": 70
-        },
-        {
-            "source": "External resource management strategies",
-            "target": "Learning with classmates \n   3.00",
-            "distance": 40
-        },
-        {
-            "source": "External resource management strategies",
-            "target": "Literature research \n   3.67",
-            "distance": 50
-        },
-        {
-            "source": "External resource management strategies",
-            "target": "Learning environment \n   3.67",
-            "distance": 50
-        }
-    ]
-};
+    return {
 
+        "nodes": [
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
+                "height": 1,
+                "size": 12,
+                "score": getSubscaleScore([organize, elaborate, criticalReview, repeat]),
+                "color": "rgb(97, 205, 187)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Internal resource management strategies"),
+                "height": 1,
+                "size": 12,
+                "score": getSubscaleScore([attention, effort, time]),
+                "color": "rgb(97, 205, 187)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.Metacognitive strategies"),
+                "height": 1,
+                "size": 12,
+                "score": getSubscaleScore([goalsPlans, control, regulate]),
+                "color": "rgb(97, 205, 187)"
+            },
+            {
+                "id": t("components.QuestionnaireResults.TableListK.External resource management strategies"),
+                "height": 1,
+                "size": 12,
+                "score": getSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]),
+                "color": "rgb(97, 205, 187)"
+            },
+            {
+                "id": "List K",
+                "height": 2,
+                "size": 12,
+                "score": 3,
+                "color": "rgb(244, 117, 96)"
+            },
+            {
+                "id": organizeCentered,
+                "height": 0,
+                "size": 5,
+                "score": organize,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": elaborateCentered,
+                "height": 0,
+                "size": 5,
+                "score": elaborate,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": criticalReviewCentered,
+                "height": 0,
+                "size": 5,
+                "score": criticalReview,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": repeatCentered,
+                "height": 0,
+                "size": 5,
+                "score": repeat,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": attentionCentered,
+                "height": 0,
+                "size": 5,
+                "score": attention,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": effortCentered,
+                "height": 0,
+                "size": 5,
+                "score": effort,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": timeCentered,
+                "height": 0,
+                "size": 5,
+                "score": time,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": goalsPlansCentered,
+                "height": 0,
+                "size": 5,
+                "score": goalsPlans,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": controlCentered,
+                "height": 0,
+                "size": 5,
+                "score": control,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": regulateCentered,
+                "height": 0,
+                "size": 5,
+                "score": regulate,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": learnWithClassmatesCentered,
+                "height": 0,
+                "size": 5,
+                "score": learnWithClassmates,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": literatureResearchCentered,
+                "height": 0,
+                "size": 5,
+                "score": literatureResearch,
+                "color": "rgb(232, 193, 160)"
+            },
+            {
+                "id": learningEnvironmentCentered,
+                "height": 0,
+                "size": 5,
+                "score": learningEnvironment,
+                "color": "rgb(232, 193, 160)"
+            }
+        ],
+        "links": [
+            {
+                "source": "List K",
+                "target": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
+                "distance": 60
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
+                "target": organizeCentered,
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
+                "target": elaborateCentered,
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
+                "target": criticalReviewCentered,
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
+                "target": repeatCentered,
+                "distance": 50
+            },
+            {
+                "source": "List K",
+                "target": t("components.QuestionnaireResults.TableListK.Internal resource management strategies"),
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Internal resource management strategies"),
+                "target": attentionCentered,
+                "distance": 70
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Internal resource management strategies"),
+                "target": effortCentered,
+                "distance": 70
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Internal resource management strategies"),
+                "target": timeCentered,
+                "distance": 55
+            },
+            {
+                "source": "List K",
+                "target": t("components.QuestionnaireResults.TableListK.Metacognitive strategies"),
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Metacognitive strategies"),
+                "target": goalsPlansCentered,
+                "distance": 60
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Metacognitive strategies"),
+                "target": controlCentered,
+                "distance": 50
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.Metacognitive strategies"),
+                "target": regulateCentered,
+                "distance": 50
+            },
+            {
+                "source": "List K",
+                "target": t("components.QuestionnaireResults.TableListK.External resource management strategies"),
+                "distance": 70
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.External resource management strategies"),
+                "target": learnWithClassmatesCentered,
+                "distance": 60
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.External resource management strategies"),
+                "target": literatureResearchCentered,
+                "distance": 55
+            },
+            {
+                "source": t("components.QuestionnaireResults.TableListK.External resource management strategies"),
+                "target": learningEnvironmentCentered,
+                "distance": 50
+            }
+        ]
+    };
+
+}
 
 export const GraphListK = () => {
+    const {t} = useTranslation();
+    const graphListKData = SetData();
+    const cognitiveStrategies = t("components.QuestionnaireResults.TableListK.Cognitive strategies");
+    const intResMngtStrategies = t("components.QuestionnaireResults.TableListK.Internal resource management strategies");
+    const metacognitiveStrategies = t("components.QuestionnaireResults.TableListK.Metacognitive strategies");
+    const extResMngtStrategies = t("components.QuestionnaireResults.TableListK.External resource management strategies");
+
+    const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment] = getListKParameters();
+
     return (
 
-        <div style={{height: 400, minWidth: 600}}>
+        <div style={{height: 500, minWidth: 650}}>
             <ResponsiveNetwork
-                data={data}
-                margin={{ top: 0, right: 110, bottom: 0, left: 0 }}
-                linkDistance={function(e){return e.distance}}
+                data={graphListKData}
+                margin={{top: 0, right: 200, bottom: 80, left: 0}}
+                linkDistance={function(e) {
+                    return e.distance
+                }}
                 repulsivity={100}
-                nodeSize={function(n){return n.size}}
-                activeNodeSize={function(n){return 1.5*n.size}}
-                nodeColor={function(e){return e.color}}
-                nodeBorderWidth={1}
-                nodeBorderColor="black"
-                linkThickness={function(n){return 2+2*n.target.data.height}}
-                linkColor={{ from: 'source.color', modifiers: [] }}
+                nodeSize={function(n) {
+                    return n.size * (n.score * 0.6 + 1)
+                }}
+                activeNodeSize={function(n) {
+                    return 3 * n.size
+                }}
+                nodeColor={function(e) {
+                    return e.color
+                }}
+                nodeBorderWidth={1.3}
+                nodeBorderColor={function(data) {
+                    if(data.data.score >= 3) {
+                        return "black"
+                    }
+                    else {
+                        return "#9c3641"
+
+                    }
+                }}
+                linkColor={{from: 'source.color', modifiers: []}}
+                linkThickness={function(n) {
+                    return 2 + 2 * n.target.data.height
+                }}
                 linkBlendMode="multiply"
                 motionConfig="wobbly"
+                animate={true}
                 annotations={[
                     {
                         type: 'circle',
                         match: {
-                            id: 'Cognitive strategies'
+                            id: cognitiveStrategies
                         },
-                        note: 'Score: 2.42',
+                        note: 'Score: ' + getSubscaleScore([organize, elaborate, criticalReview, repeat]).toFixed(2),
                         noteX: -10,
                         noteY: 40,
                         offset: 13,
@@ -236,9 +309,9 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'Cognitive strategies'
+                            id: cognitiveStrategies
                         },
-                        note: 'Cognitive strategies',
+                        note: cognitiveStrategies,
                         noteX: -10,
                         noteY: 40,
                         offset: 13,
@@ -247,11 +320,11 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'Internal resource management strategies'
+                            id: intResMngtStrategies
                         },
-                        note: 'Score: 1.89',
-                        noteWidth: 240,
-                        noteX: 20,
+                        note: 'Score: ' + getSubscaleScore([attention, effort, time]).toFixed(2),
+                        noteWidth: 250,
+                        noteX: 50,
                         noteY: 35,
                         offset: 13,
                         noteTextOffset: 5,
@@ -259,11 +332,11 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'Internal resource management strategies'
+                            id: intResMngtStrategies
                         },
-                        note: 'Internal resource management strategies',
-                        noteWidth: 240,
-                        noteX: 20,
+                        note: intResMngtStrategies,
+                        noteWidth: 250,
+                        noteX: 50,
                         noteY: 35,
                         offset: 13,
                         noteTextOffset: -15
@@ -271,32 +344,34 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'Metacognitive strategies'
+                            id: metacognitiveStrategies
                         },
-                        note: 'Score: 2.33',
-                        noteX: -20,
-                        noteY: 80,
+                        note: 'Score: ' + getSubscaleScore([goalsPlans, control, regulate]).toFixed(2),
+                        noteWidth: 145,
+                        noteX: -10,
+                        noteY: 100,
                         offset: 13,
                         noteTextOffset: 5
                     },
                     {
                         type: 'circle',
                         match: {
-                            id: 'Metacognitive strategies'
+                            id: metacognitiveStrategies
                         },
-                        note: 'Metacognitive strategies',
-                        noteX: -20,
-                        noteY: 80,
+                        note: metacognitiveStrategies,
+                        noteWidth: 145,
+                        noteX: -10,
+                        noteY: 100,
                         offset: 13,
                         noteTextOffset: -15
                     },
                     {
                         type: 'circle',
                         match: {
-                            id: 'External resource management strategies'
+                            id: extResMngtStrategies
                         },
-                        note: 'Score: 3.45',
-                        noteWidth: 240,
+                        note: 'Score: ' + getSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]).toFixed(2),
+                        noteWidth: 250,
                         noteX: 10,
                         noteY: 90,
                         offset: 13,
@@ -305,17 +380,18 @@ export const GraphListK = () => {
                     {
                         type: 'circle',
                         match: {
-                            id: 'External resource management strategies'
+                            id: extResMngtStrategies
                         },
-                        note: 'External resource management strategies',
-                        noteWidth: 240,
+                        note: extResMngtStrategies,
+                        noteWidth: 250,
                         noteX: 10,
                         noteY: 90,
                         offset: 13,
                         noteTextOffset: -15
                     }
                 ]}
-            />
+                ariaDescribedBy={"List K Graph"}
+                ariaLabel={"List K Graph"}/>
         </div>
     );
 }
