@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {TableListK} from "./TableListK";
+import {getListKParameters, getSubscaleScore, TableListK} from "./TableListK";
 import {render} from "@testing-library/react";
 
 
@@ -7,13 +7,23 @@ import {render} from "@testing-library/react";
 //"You will need pass in an i18next instance by using initReactI18next" => mock is needed.
 
 jest.mock('react-i18next', () => ({
-    useTranslation: () => ({t: (key:string) => key})
-}));
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => {
+        return {
+            t: (str: string) => str,
+            i18n: {
+                //changeLanguage: () => new Promise(() => {}),
+                getFixedT: () => (str: string) => { return str; },
+                // You can include here any property your component may use
+            },
+        }
+    },
+}))
 
 // tests for mui can be found https://github.com/mui/material-ui/blob/master/packages/mui-material/src
-describe("Test the Table dimensions", () => {
+describe("Test TableList-K with all Methods", () => {
 
-    test("interpretation is right",
+    test("Table Values are correct",
         () => {
 
         const {getAllByRole} = render(<TableListK/>);
@@ -41,134 +51,166 @@ describe("Test the Table dimensions", () => {
         expect(getAllByRole("cell")[32]).toHaveTextContent("components.QuestionnaireResults.TableListK.Regulate");
         expect(getAllByRole("cell")[34]).toHaveTextContent("components.QuestionnaireResults.TableListK.Learning environment");
     });
-});
 
-describe("Test the Table Score values are numbers", () => {
-
-    test("values are numbers",
+    test("Table Score-values are numbers",
         () => {
 
-        const {getAllByRole} = render(<TableListK/>);
+            const {getAllByRole} = render(<TableListK/>);
 
-        const cell1 = getAllByRole("cell")[1].textContent;
-        let cell1Int;
-        if(cell1 !== null){
-            cell1Int = parseInt(cell1)
-        }
+            const cell1 = getAllByRole("cell")[1].textContent;
+            let cell1Int;
+            if(cell1 !== null){
+                cell1Int = parseInt(cell1)
+            }
 
-        const cell3 = getAllByRole("cell")[3].textContent;
-        let cell3Int;
-        if(cell3 !== null){
-            cell3Int = parseInt(cell3)
-        }
+            const cell3 = getAllByRole("cell")[3].textContent;
+            let cell3Int;
+            if(cell3 !== null){
+                cell3Int = parseInt(cell3)
+            }
 
-        const cell5 = getAllByRole("cell")[5].textContent;
-        let cell5Int;
-        if(cell5 !== null){
-            cell5Int = parseInt(cell5)
-        }
+            const cell5 = getAllByRole("cell")[5].textContent;
+            let cell5Int;
+            if(cell5 !== null){
+                cell5Int = parseInt(cell5)
+            }
 
-        const cell7 = getAllByRole("cell")[7].textContent;
-        let cell7Int;
-        if(cell7 !== null){
-            cell7Int = parseInt(cell7)
-        }
+            const cell7 = getAllByRole("cell")[7].textContent;
+            let cell7Int;
+            if(cell7 !== null){
+                cell7Int = parseInt(cell7)
+            }
 
-        const cell9 = getAllByRole("cell")[9].textContent;
-        let cell9Int;
-        if(cell9 !== null){
-            cell9Int = parseInt(cell9)
-        }
+            const cell9 = getAllByRole("cell")[9].textContent;
+            let cell9Int;
+            if(cell9 !== null){
+                cell9Int = parseInt(cell9)
+            }
 
-        const cell11 = getAllByRole("cell")[11].textContent;
-        let cell11Int;
-        if(cell11 !== null){
-            cell11Int = parseInt(cell11)
-        }
+            const cell11 = getAllByRole("cell")[11].textContent;
+            let cell11Int;
+            if(cell11 !== null){
+                cell11Int = parseInt(cell11)
+            }
 
-        const cell13 = getAllByRole("cell")[13].textContent;
-        let cell13Int;
-        if(cell13 !== null){
-            cell13Int = parseInt(cell13)
-        }
+            const cell13 = getAllByRole("cell")[13].textContent;
+            let cell13Int;
+            if(cell13 !== null){
+                cell13Int = parseInt(cell13)
+            }
 
-        const cell15 = getAllByRole("cell")[15].textContent;
-        let cell15Int;
-        if(cell15 !== null){
-            cell15Int = parseInt(cell15)
-        }
+            const cell15 = getAllByRole("cell")[15].textContent;
+            let cell15Int;
+            if(cell15 !== null){
+                cell15Int = parseInt(cell15)
+            }
 
-        const cell17 = getAllByRole("cell")[17].textContent;
-        let cell17Int;
-        if(cell17 !== null){
-            cell17Int = parseInt(cell17)
-        }
+            const cell17 = getAllByRole("cell")[17].textContent;
+            let cell17Int;
+            if(cell17 !== null){
+                cell17Int = parseInt(cell17)
+            }
 
-        const cell21 = getAllByRole("cell")[21].textContent;
-        let cell21Int;
-        if(cell21 !== null){
-            cell21Int = parseInt(cell21)
-        }
+            const cell21 = getAllByRole("cell")[21].textContent;
+            let cell21Int;
+            if(cell21 !== null){
+                cell21Int = parseInt(cell21)
+            }
 
-        const cell23 = getAllByRole("cell")[23].textContent;
-        let cell23Int;
-        if(cell23 !== null){
-            cell23Int = parseInt(cell23)
-        }
+            const cell23 = getAllByRole("cell")[23].textContent;
+            let cell23Int;
+            if(cell23 !== null){
+                cell23Int = parseInt(cell23)
+            }
 
-        const cell25 = getAllByRole("cell")[25].textContent;
-        let cell25Int;
-        if(cell25 !== null){
-            cell25Int = parseInt(cell25)
-        }
+            const cell25 = getAllByRole("cell")[25].textContent;
+            let cell25Int;
+            if(cell25 !== null){
+                cell25Int = parseInt(cell25)
+            }
 
-        const cell27 = getAllByRole("cell")[27].textContent;
-        let cell27Int;
-        if(cell27 !== null){
-            cell27Int = parseInt(cell27)
-        }
+            const cell27 = getAllByRole("cell")[27].textContent;
+            let cell27Int;
+            if(cell27 !== null){
+                cell27Int = parseInt(cell27)
+            }
 
-        const cell29 = getAllByRole("cell")[29].textContent;
-        let cell29Int;
-        if(cell29 !== null){
-            cell29Int = parseInt(cell29)
-        }
+            const cell29 = getAllByRole("cell")[29].textContent;
+            let cell29Int;
+            if(cell29 !== null){
+                cell29Int = parseInt(cell29)
+            }
 
-        const cell31 = getAllByRole("cell")[31].textContent;
-        let cell31Int;
-        if(cell31 !== null){
-            cell31Int = parseInt(cell31)
-        }
+            const cell31 = getAllByRole("cell")[31].textContent;
+            let cell31Int;
+            if(cell31 !== null){
+                cell31Int = parseInt(cell31)
+            }
 
-        const cell33 = getAllByRole("cell")[33].textContent;
-        let cell33Int;
-        if(cell33 !== null){
-            cell33Int = parseInt(cell33)
-        }
+            const cell33 = getAllByRole("cell")[33].textContent;
+            let cell33Int;
+            if(cell33 !== null){
+                cell33Int = parseInt(cell33)
+            }
 
-        const cell35 = getAllByRole("cell")[35].textContent;
-        let cell35Int;
-        if(cell35 !== null){
-            cell35Int = parseInt(cell35)
-        }
+            const cell35 = getAllByRole("cell")[35].textContent;
+            let cell35Int;
+            if(cell35 !== null){
+                cell35Int = parseInt(cell35)
+            }
 
-        expect(cell1Int).toBeGreaterThanOrEqual(0);
-        expect(cell3Int).toBeGreaterThanOrEqual(0);
-        expect(cell5Int).toBeGreaterThanOrEqual(0);
-        expect(cell7Int).toBeGreaterThanOrEqual(0);
-        expect(cell9Int).toBeGreaterThanOrEqual(0);
-        expect(cell11Int).toBeGreaterThanOrEqual(0);
-        expect(cell13Int).toBeGreaterThanOrEqual(0);
-        expect(cell15Int).toBeGreaterThanOrEqual(0);
-        expect(cell17Int).toBeGreaterThanOrEqual(0);
-        expect(getAllByRole("cell")[19]).toHaveTextContent("");
-        expect(cell21Int).toBeGreaterThanOrEqual(0);
-        expect(cell23Int).toBeGreaterThanOrEqual(0);
-        expect(cell25Int).toBeGreaterThanOrEqual(0);
-        expect(cell27Int).toBeGreaterThanOrEqual(0);
-        expect(cell29Int).toBeGreaterThanOrEqual(0);
-        expect(cell31Int).toBeGreaterThanOrEqual(0);
-        expect(cell33Int).toBeGreaterThanOrEqual(0);
-        expect(cell35Int).toBeGreaterThanOrEqual(0);
-    });
+            expect(cell1Int).toBeGreaterThanOrEqual(0);
+            expect(cell3Int).toBeGreaterThanOrEqual(0);
+            expect(cell5Int).toBeGreaterThanOrEqual(0);
+            expect(cell7Int).toBeGreaterThanOrEqual(0);
+            expect(cell9Int).toBeGreaterThanOrEqual(0);
+            expect(cell11Int).toBeGreaterThanOrEqual(0);
+            expect(cell13Int).toBeGreaterThanOrEqual(0);
+            expect(cell15Int).toBeGreaterThanOrEqual(0);
+            expect(cell17Int).toBeGreaterThanOrEqual(0);
+            expect(getAllByRole("cell")[19]).toHaveTextContent("");
+            expect(cell21Int).toBeGreaterThanOrEqual(0);
+            expect(cell23Int).toBeGreaterThanOrEqual(0);
+            expect(cell25Int).toBeGreaterThanOrEqual(0);
+            expect(cell27Int).toBeGreaterThanOrEqual(0);
+            expect(cell29Int).toBeGreaterThanOrEqual(0);
+            expect(cell31Int).toBeGreaterThanOrEqual(0);
+            expect(cell33Int).toBeGreaterThanOrEqual(0);
+            expect(cell35Int).toBeGreaterThanOrEqual(0);
+        });
+
+    test("List-K parameters are plausible",
+        () => {
+
+            const ListKParameters = getListKParameters();
+
+            expect(ListKParameters[0].length).toBe(13);
+            expect(ListKParameters[0][0] >= 1).toBe(true);
+            expect(ListKParameters[0][1] >= 1 && ListKParameters[0][1] <= 5).toBe(true);
+            expect(ListKParameters[0][2] >= 1 && ListKParameters[0][2] <= 5).toBe(true);
+            expect(ListKParameters[0][3] >= 1 && ListKParameters[0][3] <= 5).toBe(true);
+            expect(ListKParameters[0][4] >= 1 && ListKParameters[0][4] <= 5).toBe(true);
+            expect(ListKParameters[0][5] >= 1 && ListKParameters[0][5] <= 5).toBe(true);
+            expect(ListKParameters[0][6] >= 1 && ListKParameters[0][6] <= 5).toBe(true);
+            expect(ListKParameters[0][7] >= 1 && ListKParameters[0][7] <= 5).toBe(true);
+            expect(ListKParameters[0][8] >= 1 && ListKParameters[0][8] <= 5).toBe(true);
+            expect(ListKParameters[0][9] >= 1 && ListKParameters[0][9] <= 5).toBe(true);
+            expect(ListKParameters[0][10] >= 1 && ListKParameters[0][10] <= 5).toBe(true);
+            expect(ListKParameters[0][11] >= 1 && ListKParameters[0][11] <= 5).toBe(true);
+            expect(ListKParameters[0][12] >= 1 && ListKParameters[0][12] <= 5).toBe(true);
+
+            expect(ListKParameters[1].length).toBe(4);
+            expect(ListKParameters[1][0] >= 1 && ListKParameters[1][0] <= 5).toBe(true);
+            expect(ListKParameters[1][1] >= 1 && ListKParameters[1][1] <= 5).toBe(true);
+            expect(ListKParameters[1][2] >= 1 && ListKParameters[1][2] <= 5).toBe(true);
+            expect(ListKParameters[1][3] >= 1 && ListKParameters[1][3] <= 5).toBe(true);
+        });
+
+    test("Average List-K are calculated correctly",
+        () => {
+            const ListKParameters = [3,3,5,4,5,1]; // Average=3.5
+            const ListKAverage = getSubscaleScore(ListKParameters);
+
+            expect(ListKAverage).toBe(3.5);
+        });
 });

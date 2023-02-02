@@ -1,16 +1,22 @@
 import React from 'react';
-import {ResponsiveNetwork} from '@nivo/network';
+import {Network} from '@nivo/network';
 import {useTranslation} from 'react-i18next';
-import {getListKParameters, getSubscaleScore} from "./TableListK";
+import {getListKParameters} from "./TableListK";
 
 function centerString(str: string, maxLen: number) {
     return str.padStart((str.length+maxLen*1.5)/2)
 }
 
-function SetData(): { nodes: { id: string, height: number, size: number, score: number, color: string }[], links: { source: string, target: string, distance: number }[] } {
+export function SetData(): { nodes: { id: string, height: number, size: number, score: number, color: string }[], links: { source: string, target: string, distance: number }[] } {
 
     const {t} = useTranslation();
-    const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment] = getListKParameters();
+    const [[
+        organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates,
+        literatureResearch, learningEnvironment
+    ], [
+        averageCognitiveStrategies, averageInternalResourceManagementStrategies,
+        averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies
+    ]] = getListKParameters();
 
     const organizeCentered = t("components.QuestionnaireResults.TableListK.Organize") + "\n" + centerString(organize.toFixed(2), (t("components.QuestionnaireResults.TableListK.Organize")).length);
     const elaborateCentered = t("components.QuestionnaireResults.TableListK.Elaborate") + "\n" + centerString(elaborate.toFixed(2), (t("components.QuestionnaireResults.TableListK.Elaborate")).length);
@@ -34,28 +40,28 @@ function SetData(): { nodes: { id: string, height: number, size: number, score: 
                 "id": t("components.QuestionnaireResults.TableListK.Cognitive strategies"),
                 "height": 1,
                 "size": 12,
-                "score": getSubscaleScore([organize, elaborate, criticalReview, repeat]),
+                "score": averageCognitiveStrategies,
                 "color": "rgb(97, 205, 187)"
             },
             {
                 "id": t("components.QuestionnaireResults.TableListK.Internal resource management strategies"),
                 "height": 1,
                 "size": 12,
-                "score": getSubscaleScore([attention, effort, time]),
+                "score": averageInternalResourceManagementStrategies,
                 "color": "rgb(97, 205, 187)"
             },
             {
                 "id": t("components.QuestionnaireResults.TableListK.Metacognitive strategies"),
                 "height": 1,
                 "size": 12,
-                "score": getSubscaleScore([goalsPlans, control, regulate]),
+                "score": averageMetacognitiveStrategies,
                 "color": "rgb(97, 205, 187)"
             },
             {
                 "id": t("components.QuestionnaireResults.TableListK.External resource management strategies"),
                 "height": 1,
                 "size": 12,
-                "score": getSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]),
+                "score": averageExternalResourcesManagementStrategies,
                 "color": "rgb(97, 205, 187)"
             },
             {
@@ -256,23 +262,26 @@ export const GraphListK = () => {
     const metacognitiveStrategies = t("components.QuestionnaireResults.TableListK.Metacognitive strategies");
     const extResMngtStrategies = t("components.QuestionnaireResults.TableListK.External resource management strategies");
 
-    const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment] = getListKParameters();
+    const [ averageCognitiveStrategies, averageInternalResourceManagementStrategies,
+        averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies] = getListKParameters()[1];
 
     return (
 
-        <div style={{height: 500, minWidth: 650}}>
-            <ResponsiveNetwork
+        <div>
+            <Network
+                height={500}
+                width={650}
                 data={graphListKData}
                 margin={{top: 0, right: 200, bottom: 80, left: 0}}
                 linkDistance={function(e) {
                     return e.distance
                 }}
                 repulsivity={100}
+                activeNodeSize={function(n) {
+                    return (n.size*3)
+                }}
                 nodeSize={function(n) {
                     return n.size * (n.score * 0.6 + 1)
-                }}
-                activeNodeSize={function(n) {
-                    return 3 * n.size
                 }}
                 nodeColor={function(e) {
                     return e.color
@@ -300,7 +309,7 @@ export const GraphListK = () => {
                         match: {
                             id: cognitiveStrategies
                         },
-                        note: 'Score: ' + getSubscaleScore([organize, elaborate, criticalReview, repeat]).toFixed(2),
+                        note: 'Score: ' + (Math.round((averageCognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
                         noteX: -10,
                         noteY: 40,
                         offset: 13,
@@ -322,7 +331,7 @@ export const GraphListK = () => {
                         match: {
                             id: intResMngtStrategies
                         },
-                        note: 'Score: ' + getSubscaleScore([attention, effort, time]).toFixed(2),
+                        note: 'Score: ' + (Math.round((averageInternalResourceManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
                         noteWidth: 250,
                         noteX: 50,
                         noteY: 35,
@@ -346,7 +355,7 @@ export const GraphListK = () => {
                         match: {
                             id: metacognitiveStrategies
                         },
-                        note: 'Score: ' + getSubscaleScore([goalsPlans, control, regulate]).toFixed(2),
+                        note: 'Score: ' + (Math.round((averageMetacognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
                         noteWidth: 145,
                         noteX: -10,
                         noteY: 100,
@@ -370,7 +379,7 @@ export const GraphListK = () => {
                         match: {
                             id: extResMngtStrategies
                         },
-                        note: 'Score: ' + getSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]).toFixed(2),
+                        note: 'Score: ' + (Math.round((averageExternalResourcesManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
                         noteWidth: 250,
                         noteX: 10,
                         noteY: 90,

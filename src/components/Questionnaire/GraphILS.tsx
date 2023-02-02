@@ -1,5 +1,5 @@
 import React from 'react';
-import {ResponsiveBar} from '@nivo/bar';
+import {Bar} from '@nivo/bar';
 import {getILSParameters} from "./TableILS";
 import {useTranslation} from 'react-i18next';
 
@@ -38,8 +38,10 @@ export const GraphILS = () => {
 
     return (
 
-        <div style={{height: 300, minWidth: 750,}}>
-            <ResponsiveBar
+        <div>
+            <Bar
+                width={750}
+                height={300}
                 data={data}
                 keys={[t("components.QuestionnaireResults.TableILS.Dimension")]}
                 indexBy={"possibleDimensions"}

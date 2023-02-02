@@ -46,47 +46,62 @@ const StyledTableRow = styled(TableRow)(() => ({
     },
 }));
 
-export function getSubscaleScore(score: number[]): number{
+export function getSubscaleScore(score: number[]): number {
 
     return score.reduce((a, b) => a + b, 0) / score.length;
 }
 
-export function getListKParameters(){
+export function getListKParameters(): [[
+    organize: number, elaborate: number, criticalReview: number, repeat: number,
+    attention: number, effort: number, time: number, goalsPlans: number, control: number,
+    regulate: number, learnWithClassmates: number, literatureResearch: number,
+    learningEnvironment: number
+], [
+    averageCognitiveStrategies: number, averageInternalResourceManagementStrategies: number,
+    averageMetacognitiveStrategies: number, averageExternalResourcesManagementStrategies: number
+]] {
 
     //These Values are later given from the Backend
-    const organize = 2.12;
-    const elaborate = 1.32;
-    const criticalReview = 1.23;
-    const repeat = 2.45;
-    const attention = 2.47;
-    const effort = 2.32;
-    const time = 2.00;
-    const goalsPlans = 1.85;
-    const control = 2.75;
-    const regulate = 3.1;
-    const learnWithClassmates = 4.99;
-    const literatureResearch = 4.32;
-    const learningEnvironment = 4.32;
+    const organize = 2.67;
+    const elaborate = 2.67;
+    const criticalReview = 3.67;
+    const repeat = 1.33;
+    const attention = 1.67;
+    const effort = 4.00;
+    const time = 2.33;
+    const goalsPlans = 2.33;
+    const control = 2.00;
+    const regulate = 2.67;
+    const learnWithClassmates = 3.00;
+    const literatureResearch = 4.33;
+    const learningEnvironment = 2.33;
 
-    return [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment];
+    const averageCognitiveStrategies = getSubscaleScore([organize, elaborate, criticalReview, repeat])
+    const averageInternalResourceManagementStrategies = getSubscaleScore([attention, effort, time]);
+    const averageMetacognitiveStrategies = getSubscaleScore([goalsPlans, control, regulate]);
+    const averageExternalResourcesManagementStrategies = getSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]);
+
+
+    return [[
+        organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates,
+        literatureResearch, learningEnvironment
+    ], [
+        averageCognitiveStrategies, averageInternalResourceManagementStrategies,
+        averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies
+    ]];
 }
-
 
 export function TableListK() {
 
     const {t} = useTranslation();
-    const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment] = getListKParameters();
 
-    const scoreCognitiveStrategiesArray = [organize, elaborate, criticalReview, repeat];
-    const scoreInternalResourceManagementStrategiesArray = [attention, effort, time];
-    const scoreMetacognitiveStrategiesArray = [goalsPlans, control, regulate];
-    const scoreExternalResourceManagementStrategiesArray = [learnWithClassmates, literatureResearch, learningEnvironment];
-
-    const averageCognitiveStrategies = getSubscaleScore(scoreCognitiveStrategiesArray)
-    const averageInternalResourceManagementStrategies = getSubscaleScore(scoreInternalResourceManagementStrategiesArray);
-    const averageMetacognitiveStrategies = getSubscaleScore(scoreMetacognitiveStrategiesArray);
-    const averageExternalResourcesManagementStrategies = getSubscaleScore(scoreExternalResourceManagementStrategiesArray);
-
+    const [[
+        organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates,
+        literatureResearch, learningEnvironment
+    ], [
+        averageCognitiveStrategies, averageInternalResourceManagementStrategies,
+        averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies
+    ]] = getListKParameters();
 
     const rows = [
         {
@@ -104,28 +119,28 @@ export function TableListK() {
         {
             id: 3,
             col1: t("components.QuestionnaireResults.TableListK.Organize"),
-            col2: scoreCognitiveStrategiesArray[0].toFixed(2),
+            col2: organize.toFixed(2),
             col3: t("components.QuestionnaireResults.TableListK.Attention"),
-            col4: scoreInternalResourceManagementStrategiesArray[0].toFixed(2),
+            col4: attention.toFixed(2),
         },
         {
             id: 4,
             col1: t("components.QuestionnaireResults.TableListK.Elaborate"),
-            col2: scoreCognitiveStrategiesArray[1].toFixed(2),
+            col2: elaborate.toFixed(2),
             col3: t("components.QuestionnaireResults.TableListK.Effort"),
-            col4: scoreInternalResourceManagementStrategiesArray[1].toFixed(2),
+            col4: effort.toFixed(2),
         },
         {
             id: 5,
             col1: t("components.QuestionnaireResults.TableListK.Critical review"),
-            col2: scoreCognitiveStrategiesArray[2].toFixed(2),
+            col2: criticalReview.toFixed(2),
             col3: t("components.QuestionnaireResults.TableListK.Time"),
-            col4: scoreInternalResourceManagementStrategiesArray[2].toFixed(2),
+            col4: time.toFixed(2),
         },
         {
             id: 6,
             col1: t("components.QuestionnaireResults.TableListK.Repeat"),
-            col2: scoreCognitiveStrategiesArray[3].toFixed(2),
+            col2: repeat.toFixed(2),
             col3: "",
             col4: ""
         },
@@ -139,23 +154,23 @@ export function TableListK() {
         {
             id: 8,
             col1: t("components.QuestionnaireResults.TableListK.Goals & plans"),
-            col2: scoreMetacognitiveStrategiesArray[0].toFixed(2),
+            col2: goalsPlans.toFixed(2),
             col3: t("components.QuestionnaireResults.TableListK.Learning with classmates"),
-            col4: scoreExternalResourceManagementStrategiesArray[0].toFixed(2),
+            col4: learnWithClassmates.toFixed(2),
         },
         {
             id: 9,
             col1: t("components.QuestionnaireResults.TableListK.Control"),
-            col2: scoreMetacognitiveStrategiesArray[1].toFixed(2),
+            col2: control.toFixed(2),
             col3: t("components.QuestionnaireResults.TableListK.Literature research"),
-            col4: scoreExternalResourceManagementStrategiesArray[1].toFixed(2),
+            col4: literatureResearch.toFixed(2),
         },
         {
             id: 10,
             col1: t("components.QuestionnaireResults.TableListK.Regulate"),
-            col2: scoreMetacognitiveStrategiesArray[2].toFixed(2),
+            col2: regulate.toFixed(2),
             col3: t("components.QuestionnaireResults.TableListK.Learning environment"),
-            col4: scoreExternalResourceManagementStrategiesArray[2].toFixed(2),
+            col4: learningEnvironment.toFixed(2),
         },
     ];
 
@@ -172,10 +187,14 @@ export function TableListK() {
                 </TableHead>
                 <TableBody>
                     <StyledTableRow>
-                        <StyledTableCellWithoutBorder align="left" style={{color: "white"}}>{rows[1].col1}</StyledTableCellWithoutBorder>
-                        <StyledTableCellWithoutBorder align="left" style={{color: "white"}}>{rows[1].col2}</StyledTableCellWithoutBorder>
-                        <StyledTableCellWithoutBorder align="left" style={{color: "white"}}>{rows[1].col3}</StyledTableCellWithoutBorder>
-                        <StyledTableCellWithoutBorder align="left" style={{color: "white"}}>{rows[1].col4}</StyledTableCellWithoutBorder>
+                        <StyledTableCellWithoutBorder align="left"
+                                                      style={{color: "white"}}>{rows[1].col1}</StyledTableCellWithoutBorder>
+                        <StyledTableCellWithoutBorder align="left"
+                                                      style={{color: "white"}}>{rows[1].col2}</StyledTableCellWithoutBorder>
+                        <StyledTableCellWithoutBorder align="left"
+                                                      style={{color: "white"}}>{rows[1].col3}</StyledTableCellWithoutBorder>
+                        <StyledTableCellWithoutBorder align="left"
+                                                      style={{color: "white"}}>{rows[1].col4}</StyledTableCellWithoutBorder>
                     </StyledTableRow>
                     <StyledTableRow>
                         <StyledTableCellWithoutBorder align="left"

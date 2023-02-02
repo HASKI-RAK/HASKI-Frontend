@@ -162,7 +162,9 @@ function getRelevantSubscalesBelow3Element(subScalesRelevantCombinations: (strin
 
 export function ResultDescriptionListK() {
 
-    const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment] = getListKParameters();
+    const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates,
+        literatureResearch, learningEnvironment] = getListKParameters()[0];
+
     const subScalesRelevantCombinations = [["attention",attention], ["time",time], ["learnWithClassmates",learnWithClassmates], ["literatureResearch",literatureResearch], ["learningEnvironment",learningEnvironment]];
 
     const generalSubscalesBelow3 = getGeneralSubscalesBelow3Element(organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment);

@@ -31,6 +31,29 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
     one up
   </button>
   <div>
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      Fragebogen Ergebnisse
+    </button>
+  </div>
+  <div>
     <div
       className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary LanguageDropdown css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
       onClick={[Function]}
@@ -92,7 +115,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
       Vorherige
        
       <br />
-      Nächste
+      nextText
        
       <br />
       Hast du das gesucht?
