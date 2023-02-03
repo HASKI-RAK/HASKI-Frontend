@@ -1,4 +1,20 @@
-﻿{
+{
+	"Activities": "Aktivitäten",
+	"and": "und",
+	"delete": "Löschen",
+	"DSGVO": "DSGVO",
+	"firstPage": "Erste Seite",
+	"lastPage": "Letzte Seite",
+	"nextText": "Nächste",
+	"Notifications": "Benachrichtigungen",
+	"pages.glossary.title": "Glossar",
+	"post": "Post",
+	"previousText": "Vorherige",
+	"resultPagesText": "Ergebnisseite",
+	"searchButtonText": "Suche",
+	"sort": "Sortiere bei:",
+	"spellcheckText": "Hast du das gesucht?",
+	"update": "Aktualisieren"
     "searchButtonText": "Suche",
     "resultPagesText": "Ergebnisseite",
     "spellcheckText": "Hast du das gesucht?",
