@@ -1,18 +1,35 @@
 ﻿{
-  "searchButtonText": "Suche",
-  "resultPagesText": "Ergebnisseite",
-  "spellcheckText": "Hast du das gesucht?",
-  "previousText": "Vorherige",
-  "nextText": "Nächste",
-  "and": "und",
-  "sort": "Sortiere bei:",
-  "firstPage": "Erste Seite",
-  "lastPage": "Letzte Seite",
-  "Notifications": "Benachrichtigungen",
-  "Activities": "Aktivitäten",
-  "post": "Post",
-  "delete": "Löschen",
-  "update": "Aktualisieren",
-  "DSGVO": "DSGVO",
-  "pages.glossary.title": "Glossar"
+    "searchButtonText": "Suche",
+    "resultPagesText": "Ergebnisseite",
+    "spellcheckText": "Hast du das gesucht?",
+    "previousText": "Vorherige",
+    "nextText": "Nächste",
+    "and": "und",
+    "sort": "Sortiere bei:",
+    "firstPage": "Erste Seite",
+    "lastPage": "Letzte Seite",
+    "Notifications": "Benachrichtigungen",
+    "Activities": "Aktivitäten",
+    "post": "Post",
+    "delete": "Löschen",
+    "update": "Aktualisieren",
+    "DSGVO": "DSGVO",
+    "pages.glossary.title": "Glossar",
+    "pages.glossary.sources": "Quellen:",
+    "pages.glossary.search": "Suche",
+    "pages.glossary.elements": [
+        {
+            "term": "Adaptierbarkeit",
+            "definition": "Die Adaptierbarkeit eines Systems bedeutet, dass dieses durch externe Aktionen hinsichtlich seiner Programmeinstellungen verändert werden kann. Das HASKI-System ist für Lehrpersonen und für die Lernenden adaptierbar. Während Lehrpersonen z.B. in die vorgeschlagenen Lernpfade eingreifen können, können die Lernenden selbstständig bestimmte Grundeinstellungen modifizieren. Letzteres kann z.B. das Verändern von Farben oder die Konfigurierung einer eigenen Sequenz von Lernelementen sein (vgl. Zens 2005; Petko & Reusser 2005, S.188; Bartel, Dörringer & Klopp 2022a).",
+            "sources": "Bartel, Dörringer & Klopp, 2022a; Petko & Reusser, 2005, S.188; Zens, 2005"
+        },
+        {
+            "term": "Adaptivität",
+            "definition": "Adaptivität ist in einem System vorhanden, wenn es sich selbstständig an den Input (z.B. Testergebnisse, Bearbeitungsgeschwindigkeit, Lernwege usw.) anpasst. „Adaptivität ermöglicht in kurzen Abständen eine kontinuierliche Anpassung des Systems“ (Petko & Reusser 2005, S.188). In diesem Kontext meint adaptives Lernen „Anpassung des Lernangebots an die individuellen Unterschiede der Lernenden, damit alle gleichermaßen gefördert werden können“ (Stangl 2022, S.1) (vgl. Bartel, Dörringer & Klopp 2022a)."
+        },
+        {
+            "term": "Adaptive Inhaltspräsentation"
+        },
+        {}
+    ]
 }

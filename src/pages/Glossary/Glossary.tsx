@@ -1,43 +1,40 @@
-import { Skeleton, Grid, Accordion, AccordionSummary, AccordionDetails, ThemeProvider, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { useTranslation } from "react-i18next";
+import { DefaultTypography as Typography, DefaultGrid as Grid } from "@common/components";
+import { GlossaryList, GlossaryFilter, GlossarySearch, GlossaryIndex } from "@components";
 
-const Glossary = () => {
+export const Glossary = () => {
+    const  { t } = useTranslation();
+
     return(
         <>
             <div>
                 <Typography variant="h3">
-                    Glossary
+                    {
+                        t('pages.glossary.title')
+                    }
                 </Typography>
-                <Grid container spacing={0}>
-                    <Grid item xs = {2}/>
-                    <Grid item xs={6}>
-                        <Typography variant="h4">
-                            Filter
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Typography variant="h4">
-                            Searchbar
-                        </Typography>
-                    </Grid>
-                </Grid>
             </div>
             <div>
-
+                <Grid container spacing={0}>
+                    <Grid item xs={2}/>
+                    <Grid item xs={6}>
+                        <GlossaryFilter />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <GlossarySearch />
+                    </Grid>
+                </Grid>
+                    <GlossaryIndex />
+            </div>
+            <div>
+                <GlossaryList/>
             </div>
         </>
     );
 }
 
-// TODO:
-// 1. Header als String Variable
-// 2. Suchleiste auf Höhe des Headers ganz rechts
-
-
-// Accordion Komponente unter Components
-// Und durch Application Function aufgefüllt
-// Skeleton als Komponente
-//<Typography> Begriff </Typography>
-    
-
 export default Glossary;
+
+// TODO:
+// 1. Suchleiste so wie bei der Wishlist in Steam?
+// 2. URL aktualisieren Home/ProjectDescription/glossary

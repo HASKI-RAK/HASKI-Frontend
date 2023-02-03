@@ -1450,6 +1450,13 @@
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.10.12.tgz#ff36abc5f4aac3c762d116e12ab51c2688d93da1"
   integrity sha512-cR8lOS606G++iVHR8I6ySgMAEiPoA3DxO/nLeqiv7w7d1707kvKoV4/7SWjh4ui+kHb052xlf/G196q2EKx31w==
 
+"@mui/icons-material@^5.11.0":
+  version "5.11.0"
+  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.11.0.tgz#9ea6949278b2266d2683866069cd43009eaf6464"
+  integrity sha512-I2LaOKqO8a0xcLGtIozC9xoXjZAto5G5gh0FYUMAlbsIHNHIjn4Xrw9rvjY20vZonyiGrZNMAlAXYkY6JvhF6A==
+  dependencies:
+    "@babel/runtime" "^7.20.6"
+
 "@mui/material@^5.10.10":
   version "5.10.12"
   resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.10.12.tgz#1e97bb4bdfdfde136c1acbfb6ab16991de1e8677"
@@ -3981,10 +3988,10 @@ husky@^8.0.1:
   resolved "https://registry.yarnpkg.com/husky/-/husky-8.0.1.tgz#511cb3e57de3e3190514ae49ed50f6bc3f50b3e9"
   integrity sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==
 
-i18next@^22.1.2:
-  version "22.1.2"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-22.1.2.tgz#3327c6d8c1281011c280c58ad88dc74a329f6bf2"
-  integrity sha512-HqAjWygRuDvMPdAjMgyv3l07PiN7MtBTCh8aud1iwn1FPBNhF0mzFUYQt+aVKZ3OOl0A+KrlqbCjrR1TCGB4Jw==
+i18next@^22.4.5:
+  version "22.4.5"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-22.4.5.tgz#7324e4946c2facbe743ca25bca8980af05b0a109"
+  integrity sha512-Kc+Ow0guRetUq+kv02tj0Yof9zveROPBAmJ8UxxNODLVBRSwsM4iD0Gw3BEieOmkWemF6clU3K1fbnCuTqiN2Q==
   dependencies:
     "@babel/runtime" "^7.20.6"
 

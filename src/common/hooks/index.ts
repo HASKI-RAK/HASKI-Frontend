@@ -1,4 +1,5 @@
 /**
  * Reusable hooks for multiple purposes go here.
  */
-export {};
+import { useDefaultCallback } from "./useDefaultCallback/useDefaultCallback";
+export { useDefaultCallback };
