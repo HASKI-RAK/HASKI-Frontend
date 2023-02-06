@@ -24,6 +24,7 @@
 	"issue": "issue",
 	"bug": "bug",
 	"feature": "feature",
+	"feedback":"feedback",
 	"other": "other",
 	"submit": "Submit",
 	"learningelement": "Learningelement",

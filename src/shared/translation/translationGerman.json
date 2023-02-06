@@ -23,6 +23,7 @@
   "briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
   "issue":"Problem",
   "bug":"Fehler",
+  "feedback":"Bewertung",
   "feature":"Funktionalität",
   "other": "Sonstiges",
   "submit": "Abschicken",

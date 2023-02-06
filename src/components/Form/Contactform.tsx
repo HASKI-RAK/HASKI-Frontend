@@ -1,73 +1,94 @@
 import { DefaultButton as Button, DefaultSelect as Select, DefaultTextField as TextField, DefaultRadio as RadioButton } from "@common/components";
-import { InputLabel, FormControl, MenuItem, Stack, RadioGroup, FormLabel, FormControlLabel } from "@mui/material";
-import { UserState, useUserStore } from "@services/UserStore";
+import { InputLabel, FormControl, MenuItem, Stack, RadioGroup, FormLabel, FormControlLabel, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import React, { useState } from "react";
 
 
-export const Text=(id: string)=>{
-  const {t}=useTranslation();
-  return(
+const defaultContactValues = {
+  name:"",
+  reporttype: "other",
+  reporttopic: "other",
+  description: "",
+};
+export const sendForm = () => {
+  return (<div>
+    <h5>Form was submitted</h5>
+
+  </div>)
+};
+
+export const Text = (id: string) => {
+  const { t } = useTranslation();
+  return (
     <div>{t(id)}</div>
   )
 };
 
-export const Contactform = ({
-  userState = {
-    user: useUserStore((state) => state.user),
-    increaseUserId: useUserStore((state) => state.increaseUserId),
-  },
-}: ContactformProps) => (
-  <>
+const Contactform = () => {
+  
+  const [contactValues, setContactValues] = useState(defaultContactValues);
 
-    <Stack spacing={2} boxShadow={10} sx={{ minWidth: 120, backgroundColor: "white" }}  >
-      
-      <h5>Please fill out the form. Your request will be sent anonymously with just your userid which is: </h5>
-      {Text("contactform")}
-      {userState.user?.id}
-      <Stack direction="row" spacing={2}>
-        <FormControl sx={{ width: "50%" }}>
-          <InputLabel id="select_label_contact">{Text("topic")}</InputLabel>
-          <Select labelId="select_label_contact" label="Topic">
-            <MenuItem value={1}>{Text("learningelement")}</MenuItem>
-            <MenuItem value={2}>{Text("ui")}</MenuItem>
-            <MenuItem value={3}>{Text("design")}</MenuItem>
-            <MenuItem value={4}>{Text("other")}</MenuItem>
-            <MenuItem value={5}>{Text("other")}</MenuItem>
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setContactValues({
+      ...contactValues,
+      [name]: value,
+    });
+  };
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    console.log(contactValues);
+  };
 
-          </Select>
+  return (
+    <form onSubmit={handleSubmit}>
+      <Stack spacing={2} boxShadow={10} sx={{ minWidth: 120, backgroundColor: "white" }}  >
+        <Typography variant="h5" component="h5">
+          {Text("contactform")}
+        </Typography>
+
+        <Stack spacing={2}>
+          <FormControl sx={{ width: "50%" }}>
+            <InputLabel id="select_label_contact">{Text("topic")}</InputLabel>
+            <Select name="reporttopic" labelId="select_label_contact" label="Topic" value={contactValues.reporttopic} onChange={handleInputChange}>
+              <MenuItem value={"le"}>{Text("learningelement")}</MenuItem>
+              <MenuItem value={"ui"}>{Text("ui")}</MenuItem>
+              <MenuItem value={"design"}>{Text("design")}</MenuItem>
+              <MenuItem value={"other"}>{Text("other")}</MenuItem>
+              <MenuItem value={5}>{Text("other")}</MenuItem>
+            </Select>
+          </FormControl>
+
+          <FormControl>
+            <FormLabel id="radio_contact_label">{Text("reportType")}</FormLabel>
+            <RadioGroup row name="reporttype" value={contactValues.reporttype} onChange={handleInputChange}>
+              <FormControlLabel value="issue" control={<RadioButton />} label={Text("issue")} />
+              <FormControlLabel value="bug" control={<RadioButton />} label={Text("bug")} />
+              <FormControlLabel value="feedback" control={<RadioButton />} label={Text("feedback")} />
+              <FormControlLabel value="feature" control={<RadioButton />} label={Text("feature")} />
+              <FormControlLabel value="other" control={<RadioButton />} label={Text("other")} />
+            </RadioGroup>
+          </FormControl>
+        </Stack>
+
+        <FormControl fullWidth>
+          <TextField id="desc_input" name="description" type="text" required label={Text("briefDescription")} multiline rows={5} maxRows={15} value={contactValues.description} onChange={handleInputChange} />
         </FormControl>
-        <FormControl>
-          <FormLabel id="radio_contact_label">{Text("reportType")}</FormLabel>
-          <RadioGroup row defaultValue={"other"}>
-            <FormControlLabel value="issue" control={<RadioButton />} label={Text("issue")} />
-            <FormControlLabel value="bug" control={<RadioButton />} label={Text("bug")} />
-            <FormControlLabel value="feature" control={<RadioButton />} label={Text("feature")} />
-            <FormControlLabel value="other" control={<RadioButton />} label={Text("other")} />
-          </RadioGroup>
-        </FormControl>
-      </Stack>
-      <FormControl fullWidth>
-        <TextField required label={Text("briefDescription")} multiline rows={5} maxRows={15}>
 
-        </TextField>
-      </FormControl>
-      <FormControl fullWidth>
-        <Button
-          variant="outlined"
-          sx={{alignSelf: "end", width: 250}}
-          href="/"
-        //onClick={userState.increaseUserId}
+        <FormControl fullWidth>
+          <Button
+            variant="outlined"
+            sx={{ alignSelf: "end", width: 250 }}
+            //href="/"
+            onClick={handleSubmit}
         >
           {Text("submit")}
         </Button>
       </FormControl>
     </Stack>
+   </form>
+  )
+};
 
-
-  </>
-);
-interface ContactformProps {
-  userState?: UserState;
-}
 
 export default Contactform;
