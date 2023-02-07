@@ -15,9 +15,12 @@
   "update": "Aktualisieren",
   "DSGVO": "DSGVO",
   "pages.glossary.title": "Glossar",
+  "pages.login.redirect": "Sie werden weitergeleitet",
   "components.login.title": "HASKI Anmeldung",
   "components.login.subtitle": "Bitte geben Sie Ihre Zugangsdaten ein",
   "components.login.username": "Benutzername",
   "components.login.password": "Passwort",
-  "components.login.login": "Anmelden"
+  "components.login.login": "Anmelden",
+  "components.login.usernameError": "Bitte geben Sie einen gültigen Benutzernamen ein",
+  "components.login.passwordError": "Bitte geben Sie ein gültiges Passwort ein"
 }

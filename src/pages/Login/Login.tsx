@@ -1,22 +1,67 @@
 import { LoginForm } from "@components";
+import { useLoginForm } from "@hooks/*";
 import { Skeleton } from "@mui/material";
 import { AuthContext } from "@services/*";
-import { stringify } from "querystring";
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const Login = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [data, setData] = useState({ "user": "test", "id": -1 });
+    const [searchParams] = useSearchParams();
+    const [loggedIn, data, password, username, usernameError, passwordError,
+        { setLoggedInHandler, setDataHandler, setUsernameHandler,
+            setPasswordHandler, setUsernameErrorHandler, setPasswordErrorHandler }] = useLoginForm();
 
     const navigate = useNavigate();
     const authcontext = useContext(AuthContext);
     const nonce = searchParams.get('nonce');
 
+    const passwordChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setPasswordHandler(event.target.value);
+    }
+    const usernameChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setUsernameHandler(event.target.value);
+    }
+
+    const handleLogin = () => {
+        setLoggedInHandler(true);
+        // to some sanity checks here
+        // then supply data to auth context
+        authcontext.setIsAuth(true);
+        // then redirect to home page
+        navigate('/dashboard', { replace: true });
+    }
+
+    const onLoginValidationHandler = () => {
+        setUsernameErrorHandler(username.length === 0);
+        setPasswordErrorHandler(password.length === 0);
+
+        if (!usernameError && !passwordError)
+            onLoginHandler();
+    }
+
+    // Login with username and password
+    const onLoginHandler = () => {
+        fetch(`http://fakedomain.com:5000/login_credentials`, {
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify({ username: "test", password: "test" }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => response.statusText)
+            .then((json) => {
+                handleLogin();
+
+            }).catch((err) => {
+                console.log(err);
+            });
+    };
+
+
     // on mount, read search param 'nounce' and set it to state
     useEffect(() => {
-        const response = fetch(`http://fakedomain.com:5000/login`, {
+        fetch(`http://fakedomain.com:5000/login`, {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify({ nonce: nonce }),
@@ -26,12 +71,12 @@ export const Login = () => {
         })
             .then((response) => response.json())
             .then((json) => {
-                setLoggedIn(true);
+                setLoggedInHandler(true);
                 // to some sanity checks here
                 // then supply data to auth context
                 authcontext.setIsAuth(true);
                 // then redirect to home page
-                setData(json); // this is just for demo purposes
+                setDataHandler(json); // this is just for demo purposes
                 navigate('/dashboard', { replace: true });
             }).catch((err) => {
                 console.log(err);
@@ -39,10 +84,17 @@ export const Login = () => {
     }, []);
     return (
         searchParams.get('nonce') ?
-            loggedIn ? <div>You will be redirected shortly...</div> :
+            loggedIn ? <div>Logged in as {data.user} with id {data.id}</div> :
                 <Skeleton variant="rectangular" />
             :
-            <LoginForm />
+            <LoginForm
+                usernameDefault={username}
+                usernameError={usernameError}
+                passwordError={passwordError}
+                onLogin={onLoginValidationHandler}
+                onUsernameChange={usernameChangeHandler}
+                onPasswordChange={passwordChangeHandler}
+            />
     )
 };
 

@@ -1,21 +1,22 @@
 import React, { ChangeEvent, useState } from "react"
-import { Button, Grid, IconButton, Input, InputAdornment, Paper, TextField, Typography } from "@mui/material";
+import { Button, IconButton, InputAdornment, Paper, TextField, Typography } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Container, Stack } from "@mui/system";
+import { Stack } from "@mui/system";
 import { useTranslation } from "react-i18next";
 
 type LoginFormProps = {
+    usernameDefault?: string;
     onLogin?: React.MouseEventHandler<HTMLButtonElement>;
+    usernameError?: boolean;
+    passwordError?: boolean;
+    onUsernameChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onPasswordChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
-const LoginForm = ({ onLogin = () => { null } }: LoginFormProps) => {
+const LoginForm = ({ usernameDefault, onLogin, usernameError, passwordError, onUsernameChange: usernameChangeHandler, onPasswordChange: passwordChangeHandler }: LoginFormProps) => {
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
-    const handleMouseDownPassword = () => setShowPassword(!showPassword);
     const { i18n } = useTranslation();
-    function passwordChangeHandler(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
-
-    }
 
     return (
         <Paper elevation={3}>
@@ -26,25 +27,34 @@ const LoginForm = ({ onLogin = () => { null } }: LoginFormProps) => {
                 margin={2}
             >
                 <Typography variant="h4" component="h1" gutterBottom>
-                    {i18n.t("components.login.title") as string}
+                    {i18n.t("components.login.title")}
                 </Typography>
                 <Typography variant="h6" component="h2" gutterBottom>
-                    {i18n.t("components.login.subtitle") as string}
+                    {i18n.t("components.login.subtitle")}
                 </Typography>
                 <Stack spacing={2} direction="column">
-                    <TextField label={i18n.t("components.login.username") as string} />
                     <TextField
-                        label={i18n.t("components.login.password") as string}
+                        required
+                        error={usernameError}
+                        helperText={usernameError ? i18n.t("components.login.usernameError") : ""}
+                        label={i18n.t("components.login.username")}
+                        defaultValue={usernameDefault}
+                        onChange={usernameChangeHandler}
+                    />
+                    <TextField
+                        required
+                        error={passwordError}
+                        helperText={passwordError ? i18n.t("components.login.passwordError") : ""}
+                        label={i18n.t("components.login.password")}
                         variant="outlined"
-                        type={showPassword ? "text" : "password"} // <-- This is where the magic happens
+                        type={showPassword ? "text" : "password"}
                         onChange={passwordChangeHandler}
-                        InputProps={{ // <-- This is where the toggle button is added.
+                        InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton
                                         aria-label="toggle password visibility"
                                         onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
                                     >
                                         {showPassword ? <Visibility /> : <VisibilityOff />}
                                     </IconButton>
@@ -53,7 +63,7 @@ const LoginForm = ({ onLogin = () => { null } }: LoginFormProps) => {
                         }}
                     />
                     <Button variant="contained" color="primary" onClick={onLogin}>
-                        {i18n.t("components.login.login") as string}
+                        {i18n.t("components.login.login")}
                     </Button>
                 </Stack>
             </Stack>

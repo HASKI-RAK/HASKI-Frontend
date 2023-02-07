@@ -1,7 +1,14 @@
 import { useState, useEffect, useMemo } from 'react';
 import { AuthContext } from '../AuthContext';
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+type AuthProviderProps = {
+    children: React.ReactNode;
+};
+export const AuthProvider = (props: AuthProviderProps) => {
     const [isAuth, setIsAuth] = useState(false);
+
+    const clearCookie = () => {
+        document.cookie = "haski_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
     // middleware to check if user is logged in by asking backend
     useEffect(() => {
         fetch(`http://fakedomain.com:5000/loginstatus`, {
@@ -17,14 +24,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             } else {
                 setIsAuth(false);
                 // clear cookie haski_state
-                document.cookie = "haski_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                clearCookie();
             }
-        }).catch((err) => {
-            console.log(err);
-        });
+        })
     }, []);
     const useAuthWrapper = useMemo(() => ({ isAuth, setIsAuth }), [isAuth, setIsAuth]);
     return (
-        <AuthContext.Provider value={useAuthWrapper}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={useAuthWrapper}>{props.children}</AuthContext.Provider>
     );
 };
+
