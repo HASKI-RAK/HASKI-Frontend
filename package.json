@@ -11,7 +11,7 @@
     "build-prod": "webpack -c webpack.prod.config.js --progress --profile --color",
     "build": "webpack -c webpack.config.js --progress --profile --color",
     "watch": "webpack -c webpack.config.js --progress --profile --color --watch",
-    "lint": "eslint ./src --ext .ts,.tsx",
+    "lint": "./node_modules/.bin/eslint ./src --ext .ts,.tsx",
     "test": "jest"
   },
   "dependencies": {

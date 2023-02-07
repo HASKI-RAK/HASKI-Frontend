@@ -8,8 +8,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 export const Login = () => {
     const [searchParams] = useSearchParams();
     const [loggedIn, data, password, username, usernameError, passwordError,
-        { setLoggedInHandler, setDataHandler, setUsernameHandler,
-            setPasswordHandler, setUsernameErrorHandler, setPasswordErrorHandler }] = useLoginForm();
+        setLoggedInHandler, setDataHandler, setUsernameHandler,
+            setPasswordHandler, setUsernameErrorHandler, setPasswordErrorHandler ] = useLoginForm();
 
     const navigate = useNavigate();
     const authcontext = useContext(AuthContext);
@@ -22,22 +22,6 @@ export const Login = () => {
         setUsernameHandler(event.target.value);
     }
 
-    const handleLogin = () => {
-        setLoggedInHandler(true);
-        // to some sanity checks here
-        // then supply data to auth context
-        authcontext.setIsAuth(true);
-        // then redirect to home page
-        navigate('/dashboard', { replace: true });
-    }
-
-    const onLoginValidationHandler = () => {
-        setUsernameErrorHandler(username.length === 0);
-        setPasswordErrorHandler(password.length === 0);
-
-        if (!usernameError && !passwordError)
-            onLoginHandler();
-    }
 
     // Login with username and password
     const onLoginHandler = () => {
