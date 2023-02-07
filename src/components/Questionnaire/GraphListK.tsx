@@ -1,7 +1,7 @@
 import React from 'react';
 import {Network} from '@nivo/network';
 import {useTranslation} from 'react-i18next';
-import {getListKParameters} from "./TableListK";
+import {GetListKParameters} from "./TableListK";
 
 function centerString(str: string, maxLen: number) {
     return str.padStart((str.length+maxLen*1.5)/2)
@@ -16,7 +16,7 @@ export function SetData(): { nodes: { id: string, height: number, size: number, 
     ], [
         averageCognitiveStrategies, averageInternalResourceManagementStrategies,
         averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies
-    ]] = getListKParameters();
+    ]] = GetListKParameters();
 
     const organizeCentered = t("components.QuestionnaireResults.TableListK.Organize") + "\n" + centerString(organize.toFixed(2), (t("components.QuestionnaireResults.TableListK.Organize")).length);
     const elaborateCentered = t("components.QuestionnaireResults.TableListK.Elaborate") + "\n" + centerString(elaborate.toFixed(2), (t("components.QuestionnaireResults.TableListK.Elaborate")).length);
@@ -263,7 +263,7 @@ export const GraphListK = () => {
     const extResMngtStrategies = t("components.QuestionnaireResults.TableListK.External resource management strategies");
 
     const [ averageCognitiveStrategies, averageInternalResourceManagementStrategies,
-        averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies] = getListKParameters()[1];
+        averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies] = GetListKParameters()[1];
 
     return (
 

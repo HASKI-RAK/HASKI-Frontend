@@ -6,7 +6,7 @@ import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import Modal from '@mui/material/Modal';
 import {TableILS} from './TableILS';
-import {TableListK, GraphILS, GraphListK, ResultDescriptionILS, ResultDescriptionListK} from "@components";
+import {TableListK, GraphILS, GraphListK, ResultDescriptionListK} from "@components";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Stack} from "@mui/material";
@@ -103,7 +103,9 @@ export function QuestionnaireResultsButton() {
                                                 <TableILS/>
                                             </Stack>
                                         </div>
-                                        <ResultDescriptionILS/>
+                                        <div>
+                                            {ResultDescriptionListK()}
+                                        </div>
                                     </Stack>
                                 </div>) : (
                                 <div>
@@ -121,7 +123,9 @@ export function QuestionnaireResultsButton() {
                                                 <TableListK/>
                                             </Stack>
                                         </div>
-                                        <ResultDescriptionListK/>
+                                        <div>
+                                            {ResultDescriptionListK()}
+                                        </div>
                                     </Stack>
                                 </div>)}
                         </React.Fragment>

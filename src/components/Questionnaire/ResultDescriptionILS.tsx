@@ -2,17 +2,18 @@ import {useTranslation} from "react-i18next";
 import Typography from '@mui/material/Typography';
 import {getILSParameters, getILSDimension, getInterpretation} from "./TableILS";
 
-export function ResultDescriptionILS (){
+export function ResultDescriptionILS (ilsDIM = (n: number, s: number, b?: boolean) => getILSDimension(n, s, b)){
+
 
     const {t} = useTranslation();
 
     const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters();
 
     //active, reflective, sensory...etc, it´s mandatory in english because of internationalization name in .json file
-    const dimensionOne = getILSDimension(1, dimensionOneScore, true);
-    const dimensionTwo = getILSDimension(2, dimensionTwoScore, true);
-    const dimensionThree = getILSDimension(3, dimensionThreeScore, true);
-    const dimensionFour = getILSDimension(4, dimensionFourScore, true)
+    const dimensionOne = ilsDIM(1, dimensionOneScore, true);
+    const dimensionTwo = ilsDIM(2, dimensionTwoScore, true);
+    const dimensionThree = ilsDIM(3, dimensionThreeScore, true);
+    const dimensionFour = ilsDIM(4, dimensionFourScore, true)
     const dimensionArray = [dimensionOne, dimensionTwo, dimensionThree, dimensionFour];
 
     //balanced, moderate, strong
@@ -23,34 +24,35 @@ export function ResultDescriptionILS (){
 
     const interpretationArray = [interpretationDimensionOneScore, interpretationDimensionTwoScore, interpretationDimensionThreeScore, interpretationDimensionFourScore];
 
-    const balancedDimensionsArray = [];
-    const unbalancedDimensionsArray = [];
+
+    const balancedDimensionsArray: string[] = [];
+    const unbalancedDimensionsArray: JSX.Element[] = [];
     let balancedDimensionsInterpretationString = "";
     let balancedDimensionsKeyWordString = "";
 
     //All dimensions are processed here and balanced dimensions are stored in balancedDimensionsArray
-    for (const item in interpretationArray) {
-        if (interpretationArray[item] === "balanced") {
-            balancedDimensionsArray.push(dimensionArray[item] + "." + interpretationArray[item]);
+    interpretationArray.forEach((item, index) => {
+        if (item === "balanced") {
+            balancedDimensionsArray.push(dimensionArray[index] + "." + interpretationArray[index]);
         }
         else{
             unbalancedDimensionsArray.push(
-                <div>
+                <div key={"Dimension: "+dimensionArray[index] + " Interpretation: " + interpretationArray[index]}>
                     <Typography variant="h6" gutterBottom>
-                        {dimensionArray[item]}
+                        {dimensionArray[index]}
                     </Typography>
                     <Typography variant="body1" gutterBottom>
-                        {t("components.QuestionnaireResults.ResultDescriptionILS." + dimensionArray[item] + "." + interpretationArray[item])} <br/>
+                        {t("components.QuestionnaireResults.ResultDescriptionILS." + dimensionArray[index] + "." + interpretationArray[index])} <br/>
                     </Typography>
                 </div>)
         }
-    }
+    });
 
     //All balanced dimensions are processed here
     if (balancedDimensionsArray.length > 0) {
         if (balancedDimensionsArray.length === 4){
             return(
-                <div>
+                <div key={"AllDimensionsAreBalancedDescription"}>
                     <Typography variant="h6" gutterBottom>
                         Alle Dimensionen
                     </Typography>
@@ -101,10 +103,10 @@ export function ResultDescriptionILS (){
     }
 
     return(
-        <div>
+        <div key={"OuterDivResultDescriptionILS"}>
             {unbalancedDimensionsArray}
             {balancedDimensionsInterpretationString == "" ? <br/> :
-                <div>
+                <div key={"InnerDivResultDescriptionILS"}>
                     <Typography variant="h6" gutterBottom>
                         {t("components.QuestionnaireResults.ResultDescriptionILS.RemainingDimensions")}
                     </Typography>

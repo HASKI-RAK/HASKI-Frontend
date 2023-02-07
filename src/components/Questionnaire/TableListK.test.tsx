@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {getListKParameters, getSubscaleScore, TableListK} from "./TableListK";
+import {GetListKParameters, GetSubscaleScore, TableListK} from "./TableListK";
 import {render} from "@testing-library/react";
 
 
@@ -55,105 +55,105 @@ describe("Test TableList-K with all Methods", () => {
     test("Table Score-values are numbers",
         () => {
 
-            const {getAllByRole} = render(<TableListK/>);
+            const {getAllByRole: GetAllByRole} = render(<TableListK/>);
 
-            const cell1 = getAllByRole("cell")[1].textContent;
+            const cell1 = GetAllByRole("cell")[1].textContent;
             let cell1Int;
             if(cell1 !== null){
                 cell1Int = parseInt(cell1)
             }
 
-            const cell3 = getAllByRole("cell")[3].textContent;
+            const cell3 = GetAllByRole("cell")[3].textContent;
             let cell3Int;
             if(cell3 !== null){
                 cell3Int = parseInt(cell3)
             }
 
-            const cell5 = getAllByRole("cell")[5].textContent;
+            const cell5 = GetAllByRole("cell")[5].textContent;
             let cell5Int;
             if(cell5 !== null){
                 cell5Int = parseInt(cell5)
             }
 
-            const cell7 = getAllByRole("cell")[7].textContent;
+            const cell7 = GetAllByRole("cell")[7].textContent;
             let cell7Int;
             if(cell7 !== null){
                 cell7Int = parseInt(cell7)
             }
 
-            const cell9 = getAllByRole("cell")[9].textContent;
+            const cell9 = GetAllByRole("cell")[9].textContent;
             let cell9Int;
             if(cell9 !== null){
                 cell9Int = parseInt(cell9)
             }
 
-            const cell11 = getAllByRole("cell")[11].textContent;
+            const cell11 = GetAllByRole("cell")[11].textContent;
             let cell11Int;
             if(cell11 !== null){
                 cell11Int = parseInt(cell11)
             }
 
-            const cell13 = getAllByRole("cell")[13].textContent;
+            const cell13 = GetAllByRole("cell")[13].textContent;
             let cell13Int;
             if(cell13 !== null){
                 cell13Int = parseInt(cell13)
             }
 
-            const cell15 = getAllByRole("cell")[15].textContent;
+            const cell15 = GetAllByRole("cell")[15].textContent;
             let cell15Int;
             if(cell15 !== null){
                 cell15Int = parseInt(cell15)
             }
 
-            const cell17 = getAllByRole("cell")[17].textContent;
+            const cell17 = GetAllByRole("cell")[17].textContent;
             let cell17Int;
             if(cell17 !== null){
                 cell17Int = parseInt(cell17)
             }
 
-            const cell21 = getAllByRole("cell")[21].textContent;
+            const cell21 = GetAllByRole("cell")[21].textContent;
             let cell21Int;
             if(cell21 !== null){
                 cell21Int = parseInt(cell21)
             }
 
-            const cell23 = getAllByRole("cell")[23].textContent;
+            const cell23 = GetAllByRole("cell")[23].textContent;
             let cell23Int;
             if(cell23 !== null){
                 cell23Int = parseInt(cell23)
             }
 
-            const cell25 = getAllByRole("cell")[25].textContent;
+            const cell25 = GetAllByRole("cell")[25].textContent;
             let cell25Int;
             if(cell25 !== null){
                 cell25Int = parseInt(cell25)
             }
 
-            const cell27 = getAllByRole("cell")[27].textContent;
+            const cell27 = GetAllByRole("cell")[27].textContent;
             let cell27Int;
             if(cell27 !== null){
                 cell27Int = parseInt(cell27)
             }
 
-            const cell29 = getAllByRole("cell")[29].textContent;
+            const cell29 = GetAllByRole("cell")[29].textContent;
             let cell29Int;
             if(cell29 !== null){
                 cell29Int = parseInt(cell29)
             }
 
-            const cell31 = getAllByRole("cell")[31].textContent;
+            const cell31 = GetAllByRole("cell")[31].textContent;
             let cell31Int;
             if(cell31 !== null){
                 cell31Int = parseInt(cell31)
             }
 
-            const cell33 = getAllByRole("cell")[33].textContent;
+            const cell33 = GetAllByRole("cell")[33].textContent;
             let cell33Int;
             if(cell33 !== null){
                 cell33Int = parseInt(cell33)
             }
 
-            const cell35 = getAllByRole("cell")[35].textContent;
+            const cell35 = GetAllByRole("cell")[35].textContent;
             let cell35Int;
             if(cell35 !== null){
                 cell35Int = parseInt(cell35)
@@ -168,7 +168,7 @@ describe("Test TableList-K with all Methods", () => {
             expect(cell13Int).toBeGreaterThanOrEqual(0);
             expect(cell15Int).toBeGreaterThanOrEqual(0);
             expect(cell17Int).toBeGreaterThanOrEqual(0);
-            expect(getAllByRole("cell")[19]).toHaveTextContent("");
+            expect(GetAllByRole("cell")[19]).toHaveTextContent("");
             expect(cell21Int).toBeGreaterThanOrEqual(0);
             expect(cell23Int).toBeGreaterThanOrEqual(0);
             expect(cell25Int).toBeGreaterThanOrEqual(0);
@@ -182,7 +182,7 @@ describe("Test TableList-K with all Methods", () => {
     test("List-K parameters are plausible",
         () => {
 
-            const ListKParameters = getListKParameters();
+            const ListKParameters = GetListKParameters();
 
             expect(ListKParameters[0].length).toBe(13);
             expect(ListKParameters[0][0] >= 1).toBe(true);
@@ -209,7 +209,7 @@ describe("Test TableList-K with all Methods", () => {
     test("Average List-K are calculated correctly",
         () => {
             const ListKParameters = [3,3,5,4,5,1]; // Average=3.5
-            const ListKAverage = getSubscaleScore(ListKParameters);
+            const ListKAverage = GetSubscaleScore(ListKParameters);
 
             expect(ListKAverage).toBe(3.5);
         });

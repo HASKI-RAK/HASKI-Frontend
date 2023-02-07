@@ -41,13 +41,24 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 }));
 
+let dimensionOneScore = -11;
+let dimensionTwoScore = 7;
+let dimensionThreeScore = 3;
+let dimensionFourScore = -5;
+
+
+//Setting ILSparameters for tests
+export function setILSParameters(dimOne?: number, dimTwo?: number, dimThree?: number, dimFour?: number){
+
+    dimensionOneScore = dimOne ?? dimensionOneScore;
+    dimensionTwoScore = dimTwo ?? dimensionTwoScore;
+    dimensionThreeScore = dimThree ?? dimensionThreeScore;
+    dimensionFourScore = dimFour ?? dimensionFourScore;
+}
+
 export function getILSParameters(){
 
-    const dimensionOneScore = -11;
-    const dimensionTwoScore = 3;
-    const dimensionThreeScore = 9;
-    const dimensionFourScore = -3;
-
+    setILSParameters();
 
     return [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore];
 }

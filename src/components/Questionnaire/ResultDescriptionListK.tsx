@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import {getListKParameters, getSubscaleScore} from "./TableListK";
+import {GetListKParameters, GetSubscaleScore} from "./TableListK";
 import {useTranslation} from "react-i18next";
 
 function getGeneralSubscalesBelow3Element(organize: number, elaborate: number, criticalReview: number, repeat: number, attention: number,
@@ -12,10 +12,10 @@ function getGeneralSubscalesBelow3Element(organize: number, elaborate: number, c
     let averageSubscaleBelow3String = "";
     const cognitiveSubscaleBelow3Html = [];
 
-    const cognitiveStrategiesAverage = getSubscaleScore([organize, elaborate, criticalReview, repeat]);
-    const averageInternalResourceManagementStrategies = getSubscaleScore([attention, effort, time]);
-    const averageMetacognitiveStrategies = getSubscaleScore([goalsPlans, control, regulate]);
-    const averageExternalResourcesManagementStrategies = getSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]);
+    const cognitiveStrategiesAverage = GetSubscaleScore([organize, elaborate, criticalReview, repeat]);
+    const averageInternalResourceManagementStrategies = GetSubscaleScore([attention, effort, time]);
+    const averageMetacognitiveStrategies = GetSubscaleScore([goalsPlans, control, regulate]);
+    const averageExternalResourcesManagementStrategies = GetSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]);
     const averageSubscaleArray = [cognitiveStrategiesAverage, averageInternalResourceManagementStrategies, averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies];
 
     for(const item in averageSubscaleArray) {
@@ -28,7 +28,7 @@ function getGeneralSubscalesBelow3Element(organize: number, elaborate: number, c
     }
 
     cognitiveSubscaleBelow3Html.push(
-        <div>
+        <div key={"GeneralDescriptionListK"}>
             <Typography variant="h6" gutterBottom>
                 {t("components.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Title")} <br/>
             </Typography>
@@ -73,7 +73,7 @@ function getCognitiveStrategiesBelow3Element(organize: number, elaborate: number
     if(cognitiveStrategiesBelow3Array.length > 0) {
         cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part2");
         cognitiveStrategiesBelow3Html.push(
-            <div>
+            <div key={"CognitiveStrategiesDescriptionListK"}>
                 <Typography variant={"h6"} gutterBottom>
                     {t("components.QuestionnaireResults.TableListK.Cognitive strategies")}
                 </Typography>
@@ -114,7 +114,7 @@ function getMetacognitiveStrategiesBelow3Element(goalsPlans: number, control: nu
     if(metacognitiveStrategiesBelow3Array.length > 0) {
         metacognitiveStrategiesBelow3String += t("Dot");
         metacognitiveStrategiesBelow3Html.push(
-            <div>
+            <div key={"MetaCognitiveStrategiesDescriptionListK"}>
                 <Typography variant={"h6"} gutterBottom>
                     {t("components.QuestionnaireResults.TableListK.Metacognitive strategies")}
                 </Typography>
@@ -146,7 +146,7 @@ function getRelevantSubscalesBelow3Element(subScalesRelevantCombinations: (strin
         //remove last " && "
         subscalesBelow3Array[subscalesBelow3Array.length-1] = subscalesBelow3Array[subscalesBelow3Array.length-1].slice(0, subscalesBelow3Array[subscalesBelow3Array.length-1].length - 4);
         subscalesBelow3MessageString.push(
-            <div>
+            <div key={"RelevantSubscalesBelow3DescriptionListK"}>
                 <Typography variant={"h6"} gutterBottom>
                     {t("components.QuestionnaireResults.ResultDescriptionListK."+ subscalesBelow3Array.join("") +" Below3.Title")}
                 </Typography>
@@ -163,7 +163,7 @@ function getRelevantSubscalesBelow3Element(subScalesRelevantCombinations: (strin
 export function ResultDescriptionListK() {
 
     const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates,
-        literatureResearch, learningEnvironment] = getListKParameters()[0];
+        literatureResearch, learningEnvironment] = GetListKParameters()[0];
 
     const subScalesRelevantCombinations = [["attention",attention], ["time",time], ["learnWithClassmates",learnWithClassmates], ["literatureResearch",literatureResearch], ["learningEnvironment",learningEnvironment]];
 
@@ -173,7 +173,7 @@ export function ResultDescriptionListK() {
     const relevantSubscalesBelow3 = getRelevantSubscalesBelow3Element(subScalesRelevantCombinations);
 
     return (
-        <div>
+        <div key={"ResultDescriptionListK"}>
             {generalSubscalesBelow3}
             {cognitiveStrategiesBelow3}
             {metacognitiveStrategiesBelow3}
