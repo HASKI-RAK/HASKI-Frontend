@@ -4,6 +4,7 @@ import { Home, ThemePresentation, Login, Dashboard } from "@pages";
 import { Theme } from "@utils";
 import { Routes } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import Test from "../Test/Test";
 
 function App() {
   return (

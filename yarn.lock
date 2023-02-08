@@ -3247,6 +3247,11 @@ eslint-plugin-prefer-arrow-functions@^3.1.4:
   resolved "https://registry.yarnpkg.com/eslint-plugin-prefer-arrow-functions/-/eslint-plugin-prefer-arrow-functions-3.1.4.tgz#a0761c7a0ba71461f6b2136fdf7f7cec1c82d778"
   integrity sha512-LSO8VibqBKqzelr+L21mEIfachavCon+1SEumCJ6U8Ze2q0pntyojmomcVwd9RZBjrP+HV6k1Osz0B3Xwdq8WA==
 
+eslint-plugin-react-hooks@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.6.0.tgz#4c3e697ad95b77e93f8646aaa1630c1ba607edd3"
+  integrity sha512-oFc7Itz9Qxh2x4gNHStv3BqJq54ExXmfC+a1NjAta66IAN87Wu0R/QArgIS9qKzX3dXKPI9H5crl9QchNMY9+g==
+
 eslint-scope@5.1.1, eslint-scope@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-5.1.1.tgz#e786e59a66cb92b3f6c1fb0d508aab174848f48c"

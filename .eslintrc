@@ -3,7 +3,8 @@
     "parser": "@typescript-eslint/parser",
     "plugins": [
         "@typescript-eslint",
-        "prefer-arrow-functions"
+        "prefer-arrow-functions",
+        "react-hooks"
     ],
     "extends": [
         "eslint:recommended",
@@ -21,6 +22,7 @@
                 "returnStyle": "unchanged",
                 "singleReturnOnly": false
             }
-        ]
+        ],
+        "react-hooks/rules-of-hooks": "warn" // Checks rules of Hooks
     }
 }

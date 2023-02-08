@@ -1,25 +1,56 @@
 import React, { ChangeEvent, useState } from "react"
-import { Button, IconButton, InputAdornment, Paper, TextField, Typography } from "@mui/material";
+import { Backdrop, Button, CircularProgress, IconButton, InputAdornment, Paper, TextField, Typography } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Stack } from "@mui/system";
 import { useTranslation } from "react-i18next";
+import { useLoginForm as _useLoginForm, useLoginFormParams, useLoginFormReturn } from "./LoginForm.hooks";
+import { Type } from "typescript";
 
 type LoginFormProps = {
-    usernameDefault?: string;
-    onLogin?: React.MouseEventHandler<HTMLButtonElement>;
-    usernameError?: boolean;
-    passwordError?: boolean;
-    onUsernameChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    onPasswordChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onSubmit?: (username: string, password: string) => void;
+    onValidate?: (username: string, password: string) => [boolean, boolean];
+    usernameDefaultValue?: string;
+    isLoading?: boolean;
+    useLoginForm?: (params?: useLoginFormParams) => useLoginFormReturn;
 };
 
-const LoginForm = ({ usernameDefault, onLogin, usernameError, passwordError, onUsernameChange: usernameChangeHandler, onPasswordChange: passwordChangeHandler }: LoginFormProps) => {
+const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) => {
+
+    // Custom state hook
+    const { username, password, usernameHasError, passwordHasError, setUsername, setPassword, setUsernameHasError, setPasswordHasError }
+        = useLoginForm();
+
+    // Props destructuring
+    const {
+        onSubmit = () => { }, onValidate = () => [username.length !== 0, password.length !== 0],
+        usernameDefaultValue: usernameDefault = "", isLoading = false
+    } = props;
+
+    // UX State
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
+
+    // Event Handlers
+    const handleSubmit = () => {
+        const [usernameIsValid, passwordIsValid] = onValidate(username, password);
+        setUsernameHasError(!usernameIsValid);
+        setPasswordHasError(!passwordIsValid);
+        if (usernameIsValid && passwordIsValid)
+            onSubmit(username, password);
+    }
+    const usernameChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setUsername(event.target.value);
+    }
+
+    const passwordChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setPassword(event.target.value);
+    }
+
+    // Translation
     const { i18n } = useTranslation();
 
     return (
-        <Paper elevation={3}>
+        <Paper elevation={3} >
             <Stack
                 direction="column"
                 justifyContent="center"
@@ -35,16 +66,16 @@ const LoginForm = ({ usernameDefault, onLogin, usernameError, passwordError, onU
                 <Stack spacing={2} direction="column">
                     <TextField
                         required
-                        error={usernameError}
-                        helperText={usernameError ? i18n.t("components.login.usernameError") : ""}
+                        error={usernameHasError}
+                        helperText={usernameHasError ? i18n.t("components.login.usernameError") : ""}
                         label={i18n.t("components.login.username")}
                         defaultValue={usernameDefault}
                         onChange={usernameChangeHandler}
                     />
                     <TextField
                         required
-                        error={passwordError}
-                        helperText={passwordError ? i18n.t("components.login.passwordError") : ""}
+                        error={passwordHasError}
+                        helperText={passwordHasError ? i18n.t("components.login.passwordError") : ""}
                         label={i18n.t("components.login.password")}
                         variant="outlined"
                         type={showPassword ? "text" : "password"}
@@ -62,12 +93,17 @@ const LoginForm = ({ usernameDefault, onLogin, usernameError, passwordError, onU
                             )
                         }}
                     />
-                    <Button variant="contained" color="primary" onClick={onLogin}>
+                    <Button variant="contained" color="primary" onClick={handleSubmit}>
                         {i18n.t("components.login.login")}
                     </Button>
                 </Stack>
             </Stack>
-        </Paper>
+            <Backdrop
+                open={isLoading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+        </Paper >
     )
 }
 

@@ -1,44 +1,45 @@
 import { LoginForm } from "@components";
-import { useLoginForm } from "@hooks/*";
 import { Skeleton } from "@mui/material";
 import { AuthContext } from "@services/*";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const Login = () => {
     const [searchParams] = useSearchParams();
-    const [loggedIn, data, password, username, usernameError, passwordError,
-        setLoggedInHandler, setDataHandler, setUsernameHandler,
-            setPasswordHandler, setUsernameErrorHandler, setPasswordErrorHandler ] = useLoginForm();
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
     const authcontext = useContext(AuthContext);
     const nonce = searchParams.get('nonce');
 
-    const passwordChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-        setPasswordHandler(event.target.value);
-    }
-    const usernameChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-        setUsernameHandler(event.target.value);
+    const login = () => {
+        // supply auth context
+        authcontext.setIsAuth(true);
+        // then redirect to home page
+        navigate('/dashboard', { replace: true });
     }
 
 
     // Login with username and password
-    const onLoginHandler = () => {
+    const onSubmitHandler = () => {
+        setIsLoading(true);
         fetch(`http://fakedomain.com:5000/login_credentials`, {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify({ username: "test", password: "test" }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/text'
             }
         })
             .then((response) => response.statusText)
-            .then((json) => {
-                handleLogin();
-
-            }).catch((err) => {
-                console.log(err);
+            .then((text) => {
+                if (text === "OK") {
+                    login();
+                }
+            }).catch(() => {
+                //snackbar
+            }).finally(() => {
+                setIsLoading(false);
             });
     };
 
@@ -53,32 +54,21 @@ export const Login = () => {
                 'Content-Type': 'application/json'
             }
         })
-            .then((response) => response.json())
-            .then((json) => {
-                setLoggedInHandler(true);
-                // to some sanity checks here
-                // then supply data to auth context
-                authcontext.setIsAuth(true);
-                // then redirect to home page
-                setDataHandler(json); // this is just for demo purposes
-                navigate('/dashboard', { replace: true });
-            }).catch((err) => {
-                console.log(err);
+            .then((response) => response.statusText)
+            .then((text) => {
+                if (text === "OK") {
+                    login();
+                }
+            }).catch(() => {
+                //snackbar
             });
     }, []);
     return (
-        searchParams.get('nonce') ?
-            loggedIn ? <div>Logged in as {data.user} with id {data.id}</div> :
+        authcontext.isAuth ? <>{navigate('/dashboard', { replace: true })}</> :
+            searchParams.get('nonce') ?
                 <Skeleton variant="rectangular" />
-            :
-            <LoginForm
-                usernameDefault={username}
-                usernameError={usernameError}
-                passwordError={passwordError}
-                onLogin={onLoginValidationHandler}
-                onUsernameChange={usernameChangeHandler}
-                onPasswordChange={passwordChangeHandler}
-            />
+                :
+                <LoginForm onSubmit={onSubmitHandler} isLoading={isLoading} />
     )
 };
 

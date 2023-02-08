@@ -6,6 +6,21 @@ type AuthProviderProps = {
 export const AuthProvider = (props: AuthProviderProps) => {
     const [isAuth, setIsAuth] = useState(false);
 
+    const logout = () => {
+        fetch(`http://fakedomain.com:5000/logout`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'text/html'
+            }
+        }).then((response) => {
+            if (response.status === 200) {
+                setIsAuth(false);
+                clearCookie();
+            }
+        })
+    }
+
     const clearCookie = () => {
         document.cookie = "haski_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
@@ -28,7 +43,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
             }
         })
     }, []);
-    const useAuthWrapper = useMemo(() => ({ isAuth, setIsAuth }), [isAuth, setIsAuth]);
+    const useAuthWrapper = useMemo(() => ({ isAuth, setIsAuth, logout }), [isAuth]);
     return (
         <AuthContext.Provider value={useAuthWrapper}>{props.children}</AuthContext.Provider>
     );
