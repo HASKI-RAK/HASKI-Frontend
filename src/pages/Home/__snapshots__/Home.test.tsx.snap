@@ -33,6 +33,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
   <div>
     <button
       className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
+      data-testid="QuestionnaireResultsButton"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}

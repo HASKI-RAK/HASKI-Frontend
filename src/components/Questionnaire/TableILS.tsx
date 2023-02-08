@@ -56,7 +56,7 @@ export function setILSParameters(dimOne?: number, dimTwo?: number, dimThree?: nu
     dimensionFourScore = dimFour ?? dimensionFourScore;
 }
 
-export function getILSParameters(){
+export function GetILSParameters(){
 
     setILSParameters();
 
@@ -176,7 +176,7 @@ export function getILSDimension(dimensionNumber: number, score: number, onlyEngl
 export function TableILS() {
 
     const {t} = useTranslation();
-    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters();
+    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = GetILSParameters();
 
     const rows = [
         {

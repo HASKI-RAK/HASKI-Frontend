@@ -181,3 +181,13 @@ export function ResultDescriptionListK() {
         </div>
     )
 }
+
+export const ResultDescListK = () => {
+
+    const res = ResultDescriptionListK();
+    return (
+        <div id={"ResultDescListK"}>
+            {res}
+        </div>
+    );
+}

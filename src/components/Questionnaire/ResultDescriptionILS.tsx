@@ -1,13 +1,13 @@
 import {useTranslation} from "react-i18next";
 import Typography from '@mui/material/Typography';
-import {getILSParameters, getILSDimension, getInterpretation} from "./TableILS";
+import {GetILSParameters, getILSDimension, getInterpretation} from "./TableILS";
 
 export function ResultDescriptionILS (ilsDIM = (n: number, s: number, b?: boolean) => getILSDimension(n, s, b)){
 
 
     const {t} = useTranslation();
 
-    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters();
+    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = GetILSParameters();
 
     //active, reflective, sensory...etc, it´s mandatory in english because of internationalization name in .json file
     const dimensionOne = ilsDIM(1, dimensionOneScore, true);
@@ -117,4 +117,14 @@ export function ResultDescriptionILS (ilsDIM = (n: number, s: number, b?: boolea
             }
         </div>
     )
+}
+
+export const ResultDescILS = () => {
+
+    const res1 = ResultDescriptionILS();
+    return (
+        <div id={"ResultDescILS"}>
+            {res1}
+        </div>
+    );
 }

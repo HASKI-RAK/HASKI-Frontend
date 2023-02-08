@@ -47,10 +47,10 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 //These Values are later given from the Backend
-let organize = 1;
-let elaborate = 1;
-let criticalReview = 1;
-let repeat = 1;
+let organize = 5;
+let elaborate = 5;
+let criticalReview = 5;
+let repeat = 5;
 let attention = 1;
 let effort = 1;
 let time = 1;

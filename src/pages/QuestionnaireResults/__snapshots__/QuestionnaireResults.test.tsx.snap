@@ -1304,7 +1304,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
               }
             }
           >
-            1.00
+            5.00
           </td>
           <td
             aria-sort={null}
@@ -1343,7 +1343,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            1.00
+            5.00
           </td>
           <td
             aria-sort={null}
@@ -1372,7 +1372,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            1.00
+            5.00
           </td>
           <td
             aria-sort={null}
@@ -1401,7 +1401,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            1.00
+            5.00
           </td>
           <td
             aria-sort={null}
@@ -1430,7 +1430,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            1.00
+            5.00
           </td>
           <td
             aria-sort={null}

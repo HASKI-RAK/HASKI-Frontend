@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
-import {ResultDescriptionListK} from "./ResultDescriptionListK";
+import {ResultDescListK, ResultDescriptionListK} from "./ResultDescriptionListK";
 import {SetListKParameters} from "./TableListK";
+import {render} from "@testing-library/react";
 
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -188,5 +189,12 @@ describe("Test ResultDescriptionListK with all Methods",
             const container = ResultDescriptionListK();
 
             expect(container.props.children[3][0].props.children[0].props.children.substring(55,147)).toMatch("attention && time && learnWithClassmates && literatureResearch && learningEnvironment Below3");
+        });
+
+        test("ResultDescription as const is called correctly",() => {
+
+            const {container} = render(<ResultDescListK/>);
+
+            expect(container.querySelector(`div[id='ResultDescListK']`)).toBeInTheDocument();
         });
 });

@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
-import {ResultDescriptionILS} from "./ResultDescriptionILS";
+import {ResultDescriptionILS, ResultDescILS} from "./ResultDescriptionILS";
 import {setILSParameters,getInterpretation, getILSDimension} from "./TableILS";
+import {render} from "@testing-library/react";
 
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate-hook can use it without a warning being shown
@@ -457,6 +458,13 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
         //Because the Switch is not working in the test, the following String has 2 spaces at the end
         expect(container.props.children[1].props.children[1].props.children.substring(98,105)).toMatch("Part2  ")
 
+    });
+
+    test("ResultDescription as const is called correctly",() => {
+
+        const {container} = render(<ResultDescILS/>);
+
+        expect(container.querySelector(`div[id='ResultDescILS']`)).toBeInTheDocument();
     });
 
 });

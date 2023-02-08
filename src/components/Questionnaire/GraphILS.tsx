@@ -1,15 +1,14 @@
 import React from 'react';
 import {Bar} from '@nivo/bar';
-import {getILSParameters} from "./TableILS";
+import {GetILSParameters} from "./TableILS";
 import {useTranslation} from 'react-i18next';
-
 
 // The Key "Dimension" is used in the Graph, therefore the name matters
 // The naming of the Key "possibleDimensions" is not important, as it is not used in the Graph, just for indexing
 export function SetData(): { possibleDimensions: string, [Dimension: string]: string }[] {
 
     const {t} = useTranslation();
-    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters();
+    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = GetILSParameters();
 
     return [
         {

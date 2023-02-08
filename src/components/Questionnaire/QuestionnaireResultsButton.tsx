@@ -6,7 +6,11 @@ import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import Modal from '@mui/material/Modal';
 import {TableILS} from './TableILS';
-import {TableListK, GraphILS, GraphListK, ResultDescriptionListK} from "@components";
+import {TableListK} from "./TableListK";
+import {GraphILS} from "./GraphILS";
+import {GraphListK} from "./GraphListK";
+import {ResultDescILS} from "./ResultDescriptionILS";
+import {ResultDescListK} from "./ResultDescriptionListK";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Stack} from "@mui/material";
@@ -14,9 +18,10 @@ import {useTranslation} from "react-i18next";
 
 
 const styleButtonClose = {
-    position: 'relative',
-    left: '97%',
-    bottom: '10px',
+    position: 'sticky',
+    left: '99%',
+    top: '1%',
+    p: 2,
 }
 
 const styleBox = {
@@ -29,10 +34,10 @@ const styleBox = {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 2,
+    p: 1,
 };
 
-export function QuestionnaireResultsButton() {
+export const QuestionnaireResultsButton = () => {
     const {t} = useTranslation();
 
     const steps = [t("components.QuestionnaireResults.ResultDescriptionILS.ILSResults"), t("components.QuestionnaireResults.ResultDescriptionILS.ListKResults")];
@@ -40,11 +45,11 @@ export function QuestionnaireResultsButton() {
     const [activeStep, setActiveStep] = React.useState(0);
 
     const handleBack = () => {
-        setActiveStep(activeStep === 1 ? activeStep - 1 : activeStep);
+        setActiveStep(activeStep - 1);
     };
 
     const handleNext = () => {
-        setActiveStep(activeStep === 0 ? activeStep + 1 : activeStep);
+        setActiveStep(activeStep + 1);
 
     };
 
@@ -55,7 +60,8 @@ export function QuestionnaireResultsButton() {
         <div>
             <Button variant="contained"
                     color="primary"
-                    onClick={handleOpen}>{t("components.QuestionnaireResults.QuestionnaireResultsButton.ButtonText")}
+                    onClick={handleOpen}
+                    data-testid={"QuestionnaireResultsButton"}>{t("components.QuestionnaireResults.QuestionnaireResultsButton.ButtonText")}
             </Button>
             <Modal
                 id={"myModal"}
@@ -63,97 +69,99 @@ export function QuestionnaireResultsButton() {
                 onClose={handleClose}
             >
                 <div>
-                <Box sx={styleBox}>
-                    <IconButton color="primary" sx={styleButtonClose}>
-                        <CloseIcon onClick={handleClose}/>
-                    </IconButton>
-                    <Stepper nonLinear activeStep={activeStep}>
-                        {steps.map((label, index) => (
-                            <Step key={label}>
-                                <StepButton color="inherit" onClick={() => {
-                                    setActiveStep(index);
-                                    handleOpen();
-                                }}>
-                                    {label}
-                                </StepButton>
-                            </Step>
-                        ))}
-                    </Stepper>
-                    <Stack
-                        direction="column"
-                        justifyContent="space-between"
-                        alignItems="stretch"
-                    >
-                    <div>
-                        <React.Fragment>
-                            {activeStep === 0 ? (
-                                <div>
-                                    <Stack
-                                        direction="column"
-                                        justifyContent="space-between"
-                                        alignItems="stretch"
-                                        m={2}
-                                    >
-                                        <div>
-                                            <Stack direction="row"
-                                                   justifyContent="space-between"
-                                                   alignItems="center"
-                                            >
-                                                <GraphILS/>
-                                                <TableILS/>
-                                            </Stack>
-                                        </div>
-                                        <div>
-                                            {ResultDescriptionListK()}
-                                        </div>
-                                    </Stack>
-                                </div>) : (
-                                <div>
-                                    <Stack direction="column"
-                                           justifyContent="space-between"
-                                           alignItems="stretch"
-                                           m={2}
-                                    >
-                                        <div>
-                                            <Stack direction="row"
-                                                   justifyContent="space-between"
-                                                   alignItems="center"
-                                            >
-                                                <GraphListK/>
-                                                <TableListK/>
-                                            </Stack>
-                                        </div>
-                                        <div>
-                                            {ResultDescriptionListK()}
-                                        </div>
-                                    </Stack>
-                                </div>)}
-                        </React.Fragment>
+                    <Box sx={styleBox}>
+                        <IconButton color="primary" sx={styleButtonClose} onClick={handleClose} data-testid={"QuestionnaireResultsCloseButton"}>
+                            <CloseIcon/>
+                        </IconButton>
+                        <Stepper nonLinear activeStep={activeStep}>
+                            {steps.map((label, index) => (
+                                <Step key={label} data-testid={"StepperButton"}>
+                                    <StepButton color="inherit" onClick={() => {
+                                        setActiveStep(index);
+                                        handleOpen();
+                                    }}>
+                                        {label}
+                                    </StepButton>
+                                </Step>
+                            ))}
+                        </Stepper>
                         <Stack
-                            direction="row"
+                            direction="column"
                             justifyContent="space-between"
-                            alignItems="center"
-                            m={2}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleBack}
-                            disabled={activeStep === 0}
+                            alignItems="stretch"
                         >
-                            {t("Back")}
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleNext}
-                            disabled={activeStep === 1}
-                        >
-                            {t("Next")}
-                        </Button>
+                            <div>
+                                <React.Fragment>
+                                    {activeStep === 0 ? (
+                                        <div data-testid={"ActiveStepILS"}>
+                                            <Stack
+                                                direction="column"
+                                                justifyContent="space-between"
+                                                alignItems="stretch"
+                                                m={2}
+                                            >
+                                                <div>
+                                                    <Stack direction="row"
+                                                           justifyContent="space-between"
+                                                           alignItems="center"
+                                                    >
+                                                        <GraphILS/>
+                                                        <TableILS/>
+                                                    </Stack>
+                                                </div>
+                                                <div>
+                                                    <ResultDescILS/>
+                                                </div>
+                                            </Stack>
+                                        </div>) : (
+                                        <div data-testid={"ActiveStepListK"}>
+                                            <Stack direction="column"
+                                                   justifyContent="space-between"
+                                                   alignItems="stretch"
+                                                   m={2}
+                                            >
+                                                <div>
+                                                    <Stack direction="row"
+                                                           justifyContent="space-between"
+                                                           alignItems="center"
+                                                    >
+                                                        <GraphListK/>
+                                                        <TableListK/>
+                                                    </Stack>
+                                                </div>
+                                                <div>
+                                                    <ResultDescListK/>
+                                                </div>
+                                            </Stack>
+                                        </div>)}
+                                </React.Fragment>
+                                <Stack
+                                    direction="row"
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                    m={2}>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={handleBack}
+                                        data-testid="backButton"
+                                        disabled={activeStep === 0}
+                                    >
+                                        {t("Back")}
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={handleNext}
+                                        data-testid="nextButton"
+                                        disabled={activeStep === 1}
+                                    >
+                                        {t("Next")}
+                                    </Button>
+                                </Stack>
+                            </div>
                         </Stack>
-                    </div>
-                    </Stack>
-                </Box>
+                    </Box>
                 </div>
             </Modal>
         </div>
