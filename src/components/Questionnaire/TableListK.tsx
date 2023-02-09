@@ -61,13 +61,13 @@ let learnWithClassmates = 1;
 let literatureResearch = 1;
 let learningEnvironment = 1;
 
-export function GetSubscaleScore(score: number[]): number {
+export function getSubscaleScore(score: number[]): number {
 
     return score.reduce((a, b) => a + b, 0) / score.length;
 }
 
 //Setting ILSparameters for tests
-export function SetListKParameters(org?: number, elab?: number, critRev?: number, rep?: number,
+export function setListKParameters(org?: number, elab?: number, critRev?: number, rep?: number,
                                    att?: number, eff?: number, tim?: number, goalsPl?: number, contr?: number,
                                    reg?: number, learnWClass?: number, litRes?: number,
                                    learnE?: number){
@@ -87,7 +87,7 @@ export function SetListKParameters(org?: number, elab?: number, critRev?: number
     learningEnvironment = learnE ?? learningEnvironment;
 }
 
-export function GetListKParameters(): [[
+export function getListKParameters(): [[
     organize: number, elaborate: number, criticalReview: number, repeat: number,
     attention: number, effort: number, time: number, goalsPlans: number, control: number,
     regulate: number, learnWithClassmates: number, literatureResearch: number,
@@ -97,12 +97,12 @@ export function GetListKParameters(): [[
     averageMetacognitiveStrategies: number, averageExternalResourcesManagementStrategies: number
 ]] {
 
-    SetListKParameters();
+    setListKParameters();
 
-    const averageCognitiveStrategies = GetSubscaleScore([organize, elaborate, criticalReview, repeat])
-    const averageInternalResourceManagementStrategies = GetSubscaleScore([attention, effort, time]);
-    const averageMetacognitiveStrategies = GetSubscaleScore([goalsPlans, control, regulate]);
-    const averageExternalResourcesManagementStrategies = GetSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]);
+    const averageCognitiveStrategies = getSubscaleScore([organize, elaborate, criticalReview, repeat])
+    const averageInternalResourceManagementStrategies = getSubscaleScore([attention, effort, time]);
+    const averageMetacognitiveStrategies = getSubscaleScore([goalsPlans, control, regulate]);
+    const averageExternalResourcesManagementStrategies = getSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]);
 
 
     return [[
@@ -124,7 +124,7 @@ export function TableListK() {
     ], [
         averageCognitiveStrategies, averageInternalResourceManagementStrategies,
         averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies
-    ]] = GetListKParameters();
+    ]] = getListKParameters();
 
     const rows = [
         {

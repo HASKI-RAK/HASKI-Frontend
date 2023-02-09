@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {TableILS, getInterpretation, GetILSParameters, getILSDimension} from "./TableILS";
+import {TableILS, getInterpretation, getILSParameters, getILSDimension} from "./TableILS";
 import {render} from "@testing-library/react";
 import React from "react";
 
@@ -25,7 +25,7 @@ describe("Test TableILS with all Methods", () => {
     test("ILS parameters are plausible",
         () => {
 
-        const ILSParameters = GetILSParameters();
+        const ILSParameters = getILSParameters();
 
         expect(ILSParameters.length).toBe(4);
         expect(ILSParameters[0] > -12 && ILSParameters[0] < 12).toBe(true);

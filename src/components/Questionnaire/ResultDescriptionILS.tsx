@@ -1,19 +1,20 @@
 import {useTranslation} from "react-i18next";
 import Typography from '@mui/material/Typography';
-import {GetILSParameters, getILSDimension, getInterpretation} from "./TableILS";
+import {getILSParameters, getILSDimension, getInterpretation} from "./TableILS";
 
-export function ResultDescriptionILS (ilsDIM = (n: number, s: number, b?: boolean) => getILSDimension(n, s, b)){
+// function can be replaced for test-purposes
+export function ResultDescriptionILS (ILSdim = (n: number, s: number, b?: boolean) => getILSDimension(n, s, b)){
 
 
     const {t} = useTranslation();
 
-    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = GetILSParameters();
+    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters();
 
     //active, reflective, sensory...etc, it´s mandatory in english because of internationalization name in .json file
-    const dimensionOne = ilsDIM(1, dimensionOneScore, true);
-    const dimensionTwo = ilsDIM(2, dimensionTwoScore, true);
-    const dimensionThree = ilsDIM(3, dimensionThreeScore, true);
-    const dimensionFour = ilsDIM(4, dimensionFourScore, true)
+    const dimensionOne = ILSdim(1, dimensionOneScore, true);
+    const dimensionTwo = ILSdim(2, dimensionTwoScore, true);
+    const dimensionThree = ILSdim(3, dimensionThreeScore, true);
+    const dimensionFour = ILSdim(4, dimensionFourScore, true)
     const dimensionArray = [dimensionOne, dimensionTwo, dimensionThree, dimensionFour];
 
     //balanced, moderate, strong
@@ -23,7 +24,6 @@ export function ResultDescriptionILS (ilsDIM = (n: number, s: number, b?: boolea
     const interpretationDimensionFourScore = getInterpretation(dimensionFourScore, "", true).trim();
 
     const interpretationArray = [interpretationDimensionOneScore, interpretationDimensionTwoScore, interpretationDimensionThreeScore, interpretationDimensionFourScore];
-
 
     const balancedDimensionsArray: string[] = [];
     const unbalancedDimensionsArray: JSX.Element[] = [];
@@ -121,10 +121,10 @@ export function ResultDescriptionILS (ilsDIM = (n: number, s: number, b?: boolea
 
 export const ResultDescILS = () => {
 
-    const res1 = ResultDescriptionILS();
+    const resultDescILSDiv = ResultDescriptionILS();
     return (
         <div id={"ResultDescILS"}>
-            {res1}
+            {resultDescILSDiv}
         </div>
     );
 }

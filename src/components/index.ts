@@ -7,9 +7,12 @@ import { TableListK } from "./Questionnaire/TableListK";
 import { GraphListK } from "./Questionnaire/GraphListK";
 import { ResultDescriptionListK } from "./Questionnaire/ResultDescriptionListK";
 import { QuestionnaireResultsButton } from "./Questionnaire/QuestionnaireResultsButton";
+import { ResultDescILS } from "./Questionnaire/ResultDescriptionILS";
+import { ResultDescListK } from "./Questionnaire/ResultDescriptionListK";
 import { Text } from "./Text/Text";
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
 
-export {Dashboard, DropdownLanguage, Text, TableILS, GraphILS, ResultDescriptionILS, ResultDescriptionListK, TableListK, GraphListK, QuestionnaireResultsButton};
+
+export {Dashboard, DropdownLanguage, Text, TableILS, GraphILS, ResultDescriptionILS, TableListK, GraphListK, ResultDescriptionListK, ResultDescILS, ResultDescListK,QuestionnaireResultsButton};

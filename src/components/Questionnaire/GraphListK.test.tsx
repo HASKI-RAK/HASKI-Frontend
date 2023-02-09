@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import {SetData, GraphListK} from "./GraphListK";
 import {fireEvent, render} from "@testing-library/react";
 import React from "react";
-import {GetListKParameters} from "./TableListK";
+import {getListKParameters} from "./TableListK";
 
 // Mocking the resize observer to prevent errors in the tests
 window.ResizeObserver = require('resize-observer-polyfill')
@@ -70,7 +70,7 @@ describe("Test GraphListK with all Methods",
             const [
                 averageCognitiveStrategies, averageInternalResourceManagementStrategies,
                 averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies
-            ] = GetListKParameters()[1];
+            ] = getListKParameters()[1];
 
             expect(graphListK.getAllByText("Score: " + (Math.round((averageCognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2))[0]).toBeInTheDocument();
             expect(graphListK.getAllByText("Score: " + (Math.round((averageInternalResourceManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2))[0]).toBeInTheDocument();

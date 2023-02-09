@@ -5,17 +5,18 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import Modal from '@mui/material/Modal';
-import {TableILS} from './TableILS';
-import {TableListK} from "./TableListK";
-import {GraphILS} from "./GraphILS";
-import {GraphListK} from "./GraphListK";
-import {ResultDescILS} from "./ResultDescriptionILS";
-import {ResultDescListK} from "./ResultDescriptionListK";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Stack} from "@mui/material";
 import {useTranslation} from "react-i18next";
 
+//Can not shorten import, tests fail to recognize i18n.use...
+import {GraphListK} from "./GraphListK";
+import {TableListK} from "./TableListK";
+import {ResultDescILS} from "./ResultDescriptionILS";
+import {ResultDescListK} from "./ResultDescriptionListK";
+import {GraphILS} from "./GraphILS";
+import {TableILS} from './TableILS';
 
 const styleButtonClose = {
     position: 'sticky',

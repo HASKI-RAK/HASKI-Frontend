@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import {GetListKParameters, GetSubscaleScore} from "./TableListK";
+import {getListKParameters, getSubscaleScore} from "./TableListK";
 import {useTranslation} from "react-i18next";
 
 function getGeneralSubscalesBelow3Element(organize: number, elaborate: number, criticalReview: number, repeat: number, attention: number,
@@ -12,10 +12,10 @@ function getGeneralSubscalesBelow3Element(organize: number, elaborate: number, c
     let averageSubscaleBelow3String = "";
     const cognitiveSubscaleBelow3Html = [];
 
-    const cognitiveStrategiesAverage = GetSubscaleScore([organize, elaborate, criticalReview, repeat]);
-    const averageInternalResourceManagementStrategies = GetSubscaleScore([attention, effort, time]);
-    const averageMetacognitiveStrategies = GetSubscaleScore([goalsPlans, control, regulate]);
-    const averageExternalResourcesManagementStrategies = GetSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]);
+    const cognitiveStrategiesAverage = getSubscaleScore([organize, elaborate, criticalReview, repeat]);
+    const averageInternalResourceManagementStrategies = getSubscaleScore([attention, effort, time]);
+    const averageMetacognitiveStrategies = getSubscaleScore([goalsPlans, control, regulate]);
+    const averageExternalResourcesManagementStrategies = getSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]);
     const averageSubscaleArray = [cognitiveStrategiesAverage, averageInternalResourceManagementStrategies, averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies];
 
     for(const item in averageSubscaleArray) {
@@ -128,6 +128,7 @@ function getMetacognitiveStrategiesBelow3Element(goalsPlans: number, control: nu
     return metacognitiveStrategiesBelow3Html;
 }
 
+//relevant subscales are: attention, time, learning with classmates, literature research and learning environment
 function getRelevantSubscalesBelow3Element(subScalesRelevantCombinations: (string| number)[][]): JSX.Element[] {
 
     const {t} = useTranslation();
@@ -163,7 +164,7 @@ function getRelevantSubscalesBelow3Element(subScalesRelevantCombinations: (strin
 export function ResultDescriptionListK() {
 
     const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates,
-        literatureResearch, learningEnvironment] = GetListKParameters()[0];
+        literatureResearch, learningEnvironment] = getListKParameters()[0];
 
     const subScalesRelevantCombinations = [["attention",attention], ["time",time], ["learnWithClassmates",learnWithClassmates], ["literatureResearch",literatureResearch], ["learningEnvironment",learningEnvironment]];
 
@@ -184,10 +185,10 @@ export function ResultDescriptionListK() {
 
 export const ResultDescListK = () => {
 
-    const res = ResultDescriptionListK();
+    const resultDescListKDiv = ResultDescriptionListK();
     return (
         <div id={"ResultDescListK"}>
-            {res}
+            {resultDescListKDiv}
         </div>
     );
 }

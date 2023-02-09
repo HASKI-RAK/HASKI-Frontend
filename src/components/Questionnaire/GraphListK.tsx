@@ -1,9 +1,10 @@
 import React from 'react';
 import {Network} from '@nivo/network';
 import {useTranslation} from 'react-i18next';
-import {GetListKParameters} from "./TableListK";
+import {getListKParameters} from "./TableListK";
 
-function centerString(str: string, maxLen: number) {
+// Center the Score beneath the Subscale name. That is done with Whitespaces before the score.
+function centerString(str: string, maxLen: number): string {
     return str.padStart((str.length+maxLen*1.5)/2)
 }
 
@@ -16,8 +17,9 @@ export function SetData(): { nodes: { id: string, height: number, size: number, 
     ], [
         averageCognitiveStrategies, averageInternalResourceManagementStrategies,
         averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies
-    ]] = GetListKParameters();
+    ]] = getListKParameters();
 
+    // Center the Score beneath the Subscale name. That is done with Whitespaces before the score.
     const organizeCentered = t("components.QuestionnaireResults.TableListK.Organize") + "\n" + centerString(organize.toFixed(2), (t("components.QuestionnaireResults.TableListK.Organize")).length);
     const elaborateCentered = t("components.QuestionnaireResults.TableListK.Elaborate") + "\n" + centerString(elaborate.toFixed(2), (t("components.QuestionnaireResults.TableListK.Elaborate")).length);
     const criticalReviewCentered = t("components.QuestionnaireResults.TableListK.Critical review") + "\n" + centerString(criticalReview.toFixed(2), (t("components.QuestionnaireResults.TableListK.Critical review")).length);
@@ -263,7 +265,7 @@ export const GraphListK = () => {
     const extResMngtStrategies = t("components.QuestionnaireResults.TableListK.External resource management strategies");
 
     const [ averageCognitiveStrategies, averageInternalResourceManagementStrategies,
-        averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies] = GetListKParameters()[1];
+        averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies] = getListKParameters()[1];
 
     return (
 

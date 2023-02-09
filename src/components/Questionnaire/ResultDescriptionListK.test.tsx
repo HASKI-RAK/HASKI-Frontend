@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import {ResultDescListK, ResultDescriptionListK} from "./ResultDescriptionListK";
-import {SetListKParameters} from "./TableListK";
+import {setListKParameters} from "./TableListK";
 import {render} from "@testing-library/react";
 
 jest.mock('react-i18next', () => ({
@@ -32,7 +32,7 @@ describe("Test ResultDescriptionListK with all Methods",
             const interStrat = [1, 1, 1];
             const exterStrat = [1, 1, 1];
 
-        SetListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
+        setListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
             interStrat[1], interStrat[2], metaCognitiveStrat[0], metaCognitiveStrat[1], metaCognitiveStrat[2], exterStrat[0],
             exterStrat[1], exterStrat[2]);
 
@@ -50,7 +50,7 @@ describe("Test ResultDescriptionListK with all Methods",
             const metaCognitiveStrat = [1, 1, 1];
             const exterStrat = [1, 1, 1];
 
-            SetListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], metaCognitiveStrat[0],
+            setListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], metaCognitiveStrat[0],
                 metaCognitiveStrat[1], metaCognitiveStrat[2], interStrat[0], interStrat[1], interStrat[2], exterStrat[0],
                 exterStrat[1], exterStrat[2]);
 
@@ -69,7 +69,7 @@ describe("Test ResultDescriptionListK with all Methods",
             const metaCognitiveStrat = [5,5,5];
             const exterStrat = [5,5,5];
 
-            SetListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
+            setListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
                 interStrat[1], interStrat[2], metaCognitiveStrat[0], metaCognitiveStrat[1], metaCognitiveStrat[2], exterStrat[0],
                 exterStrat[1], exterStrat[2]);
 
@@ -88,7 +88,7 @@ describe("Test ResultDescriptionListK with all Methods",
             const metaCognitiveStrat = [1,1,1];
             const exterStrat = [5,5,5];
 
-            SetListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
+            setListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
                 interStrat[1], interStrat[2], metaCognitiveStrat[0], metaCognitiveStrat[1], metaCognitiveStrat[2], exterStrat[0],
                 exterStrat[1], exterStrat[2]);
 
@@ -107,7 +107,7 @@ describe("Test ResultDescriptionListK with all Methods",
             const metaCognitiveStrat = [5,5,5];
             const exterStrat = [5,5,5];
 
-            SetListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
+            setListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
                 interStrat[1], interStrat[2], metaCognitiveStrat[0], metaCognitiveStrat[1], metaCognitiveStrat[2], exterStrat[0],
                 exterStrat[1], exterStrat[2]);
 
@@ -122,7 +122,7 @@ describe("Test ResultDescriptionListK with all Methods",
             const metaCognitiveStrat = [5,5,5];
             const exterStrat = [5,5,5];
 
-            SetListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
+            setListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
                 interStrat[1], interStrat[2], metaCognitiveStrat[0], metaCognitiveStrat[1], metaCognitiveStrat[2], exterStrat[0],
                 exterStrat[1], exterStrat[2]);
 
@@ -137,7 +137,7 @@ describe("Test ResultDescriptionListK with all Methods",
             const metaCognitiveStrat = [5,5,5];
             const exterStrat = [5,5,5];
 
-            SetListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
+            setListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
                 interStrat[1], interStrat[2], metaCognitiveStrat[0], metaCognitiveStrat[1], metaCognitiveStrat[2], exterStrat[0],
                 exterStrat[1], exterStrat[2]);
 
@@ -152,7 +152,7 @@ describe("Test ResultDescriptionListK with all Methods",
             const metaCognitiveStrat = [5,5,5];
             const exterStrat = [1,5,5];
 
-            SetListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
+            setListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
                 interStrat[1], interStrat[2], metaCognitiveStrat[0], metaCognitiveStrat[1], metaCognitiveStrat[2], exterStrat[0],
                 exterStrat[1], exterStrat[2]);
 
@@ -167,7 +167,7 @@ describe("Test ResultDescriptionListK with all Methods",
             const metaCognitiveStrat = [5,5,5];
             const exterStrat = [1,1,5];
 
-            SetListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
+            setListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
                 interStrat[1], interStrat[2], metaCognitiveStrat[0], metaCognitiveStrat[1], metaCognitiveStrat[2], exterStrat[0],
                 exterStrat[1], exterStrat[2]);
 
@@ -182,7 +182,7 @@ describe("Test ResultDescriptionListK with all Methods",
             const metaCognitiveStrat = [5,5,5];
             const exterStrat = [1,1,1];
 
-            SetListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
+            setListKParameters(cognitiveStrat[0], cognitiveStrat[1], cognitiveStrat[2], cognitiveStrat[3], interStrat[0],
                 interStrat[1], interStrat[2], metaCognitiveStrat[0], metaCognitiveStrat[1], metaCognitiveStrat[2], exterStrat[0],
                 exterStrat[1], exterStrat[2]);
 

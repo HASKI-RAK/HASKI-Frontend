@@ -41,13 +41,14 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 }));
 
+//These Values are later given from the Backend
 let dimensionOneScore = -11;
 let dimensionTwoScore = 7;
 let dimensionThreeScore = 3;
 let dimensionFourScore = -5;
 
 
-//Setting ILSparameters for tests
+//Setting ILS-Parameters for tests
 export function setILSParameters(dimOne?: number, dimTwo?: number, dimThree?: number, dimFour?: number){
 
     dimensionOneScore = dimOne ?? dimensionOneScore;
@@ -56,13 +57,14 @@ export function setILSParameters(dimOne?: number, dimTwo?: number, dimThree?: nu
     dimensionFourScore = dimFour ?? dimensionFourScore;
 }
 
-export function GetILSParameters(){
+export function getILSParameters(){
 
     setILSParameters();
 
     return [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore];
 }
 
+//Returns the Interpretation of the ILS-Test (balanced, moderate, strong + Dimension (if score is not balanced))
 export function getInterpretation(score: number, interpretationString: string, onlyEnglish?: boolean): string {
 
     const {t, i18n} = useTranslation();
@@ -176,7 +178,7 @@ export function getILSDimension(dimensionNumber: number, score: number, onlyEngl
 export function TableILS() {
 
     const {t} = useTranslation();
-    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = GetILSParameters();
+    const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters();
 
     const rows = [
         {

@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {GetListKParameters, GetSubscaleScore, TableListK} from "./TableListK";
+import {getListKParameters, getSubscaleScore, TableListK} from "./TableListK";
 import {render} from "@testing-library/react";
 
 
@@ -182,7 +182,7 @@ describe("Test TableList-K with all Methods", () => {
     test("List-K parameters are plausible",
         () => {
 
-            const ListKParameters = GetListKParameters();
+            const ListKParameters = getListKParameters();
 
             expect(ListKParameters[0].length).toBe(13);
             expect(ListKParameters[0][0] >= 1).toBe(true);
@@ -209,7 +209,7 @@ describe("Test TableList-K with all Methods", () => {
     test("Average List-K are calculated correctly",
         () => {
             const ListKParameters = [3,3,5,4,5,1]; // Average=3.5
-            const ListKAverage = GetSubscaleScore(ListKParameters);
+            const ListKAverage = getSubscaleScore(ListKParameters);
 
             expect(ListKAverage).toBe(3.5);
         });
