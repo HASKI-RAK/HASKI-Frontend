@@ -113,13 +113,13 @@ exports[`Test the demo component renders correctly 1`] = `
       de
        
       <br />
-      Vorherige
+      Zurück
        
       <br />
-      nextText
+      Weiter
        
       <br />
-      Hast du das gesucht?
+      Fragebogen Ergebnisse
        
       <br />
     </div>

@@ -1,6 +1,4 @@
 {
-	"Activities": "Aktivitäten",
-	"and": "und",
 	"Back": "Zurück",
 	"components.QuestionnaireResults.QuestionnaireResultsButton.ButtonText": "Fragebogen Ergebnisse",
 	"components.QuestionnaireResults.ResultDescriptionILS.Active.moderate": "Ihre Informationsverarbeitung erfolgt bevorzugt eher aktiv. Es ist zu empfehlen, dass Sie stets Möglichkeiten für sich schaffen, neue Information im Zuge von praktischen Experimenten und Diskussionen mit Kommiliton*innen zu verarbeiten. So können Sie tendenziell schneller lernen.",
@@ -138,19 +136,7 @@
 	"components.QuestionnaireResults.TableListK.Repeat": "Wiederholen",
 	"components.QuestionnaireResults.TableListK.Score": "Wert",
 	"components.QuestionnaireResults.TableListK.Time": "Zeit",
-	"delete": "Löschen",
 	"Dot": ".",
-	"DSGVO": "DSGVO",
-	"firstPage": "Erste Seite",
-	"lastPage": "Letzte Seite",
 	"Next": "Weiter",
-	"Notifications": "Benachrichtigungen",
-	"pages.glossary.title": "Glossar",
-	"post": "Post",
-	"previousText": "Vorherige",
-	"resultPagesText": "Ergebnisseite",
-	"searchButtonText": "Suche",
-	"sort": "Sortiere bei:",
-	"spellcheckText": "Hast du das gesucht?",
-	"update": "Aktualisieren"
+	"pages.glossary.title": "Glossary"
 }

@@ -113,13 +113,13 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
       de
        
       <br />
-      Vorherige
+      Zurück
        
       <br />
-      nextText
+      Weiter
        
       <br />
-      Hast du das gesucht?
+      Fragebogen Ergebnisse
        
       <br />
     </div>
