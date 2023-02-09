@@ -147,10 +147,8 @@
 	"Notifications": "Notifications",
 	"pages.glossary.title": "Glossary",
 	"post": "Posted",
-	"previousText": "Previous",
-	"resultPagesText": "Results",
-	"searchButtonText": "Search",
-	"sort": "Sort by:",
-	"spellcheckText": "Did you mean:",
-	"update": "Updated"
+	"delete": "Deleted",
+	"update": "Updated",
+	"DSGVO": "GDPR",
+	"pages.glossary.title": "Glossary"
 }
