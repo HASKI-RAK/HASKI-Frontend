@@ -65,7 +65,7 @@ export function getILSParameters(){
 }
 
 //Returns the Interpretation of the ILS-Test (balanced, moderate, strong + Dimension (if score is not balanced))
-export function getInterpretation(score: number, interpretationString: string, onlyEnglish?: boolean): string {
+export function ILSInterpretation(score: number, interpretationString: string, onlyEnglish?: boolean): string {
 
     const {t, i18n} = useTranslation();
 
@@ -109,7 +109,7 @@ export function getInterpretation(score: number, interpretationString: string, o
 }
 
 //Depending on the score, return the corresponding dimension
-export function getILSDimension(dimensionNumber: number, score: number, onlyEnglish?:boolean): string{
+export function ILSDimension(dimensionNumber: number, score: number, onlyEnglish?:boolean): string{
 
     const {t,i18n} = useTranslation();
 
@@ -192,28 +192,28 @@ export function TableILS() {
             id: 2,
             col1: t("components.QuestionnaireResults.TableILS.Reflective"),
             col2: t("components.QuestionnaireResults.TableILS.Active"),
-            col3: getInterpretation(dimensionOneScore, getILSDimension(1, dimensionOneScore).toLowerCase()),
+            col3: ILSInterpretation(dimensionOneScore, ILSDimension(1, dimensionOneScore).toLowerCase()),
             col4: [dimensionOneScore].toString()
         },
         {
             id: 3,
             col1: t("components.QuestionnaireResults.TableILS.Intuitive"),
             col2: t("components.QuestionnaireResults.TableILS.Sensory"),
-            col3: getInterpretation(dimensionTwoScore, getILSDimension(2, dimensionTwoScore).toLowerCase()),
+            col3: ILSInterpretation(dimensionTwoScore, ILSDimension(2, dimensionTwoScore).toLowerCase()),
             col4: [dimensionTwoScore].toString()
         },
         {
             id: 4,
             col1: t("components.QuestionnaireResults.TableILS.Verbal"),
             col2: t("components.QuestionnaireResults.TableILS.Visual"),
-            col3: getInterpretation(dimensionThreeScore, getILSDimension(3, dimensionThreeScore).toLowerCase()),
+            col3: ILSInterpretation(dimensionThreeScore, ILSDimension(3, dimensionThreeScore).toLowerCase()),
             col4: [dimensionThreeScore].toString()
         },
         {
             id: 5,
             col1: t("components.QuestionnaireResults.TableILS.Global"),
             col2: t("components.QuestionnaireResults.TableILS.Sequential"),
-            col3: getInterpretation(dimensionFourScore, getILSDimension(4, dimensionFourScore).toLowerCase()),
+            col3: ILSInterpretation(dimensionFourScore, ILSDimension(4, dimensionFourScore).toLowerCase()),
             col4: [dimensionFourScore].toString()
         },
     ];

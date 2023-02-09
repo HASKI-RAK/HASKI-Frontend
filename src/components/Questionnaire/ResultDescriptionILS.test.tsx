@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import {ResultDescriptionILS, ResultDescILS} from "./ResultDescriptionILS";
-import {setILSParameters,getInterpretation, getILSDimension} from "./TableILS";
+import {setILSParameters,ILSInterpretation, ILSDimension} from "./TableILS";
 import {render} from "@testing-library/react";
 
 jest.mock('react-i18next', () => ({
@@ -50,8 +50,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
         let unbalancedDimension = 1;
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -67,8 +67,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -93,8 +93,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -110,8 +110,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -136,8 +136,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -153,8 +153,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -179,8 +179,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -196,8 +196,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -222,8 +222,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -239,8 +239,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -265,8 +265,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -282,8 +282,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -308,8 +308,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -325,8 +325,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -351,8 +351,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -368,8 +368,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
-            const int = getInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
+            const dim = ILSDimension(unbalancedDimension, dimScoreArray[unbalancedDimension - 1]);
+            const int = ILSInterpretation(dimScoreArray[unbalancedDimension - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             unbalancedDimension++;
@@ -385,8 +385,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(i, dimScoreArray[i - 1]);
-            const int = getInterpretation(dimScoreArray[i - 1], "").trim();
+            const dim = ILSDimension(i, dimScoreArray[i - 1]);
+            const int = ILSInterpretation(dimScoreArray[i - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             i++;
@@ -402,8 +402,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(i, dimScoreArray[i - 1]);
-            const int = getInterpretation(dimScoreArray[i - 1], "").trim();
+            const dim = ILSDimension(i, dimScoreArray[i - 1]);
+            const int = ILSInterpretation(dimScoreArray[i - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             i++;
@@ -419,8 +419,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(i, dimScoreArray[i - 1]);
-            const int = getInterpretation(dimScoreArray[i - 1], "").trim();
+            const dim = ILSDimension(i, dimScoreArray[i - 1]);
+            const int = ILSInterpretation(dimScoreArray[i - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             i++;
@@ -436,8 +436,8 @@ describe("Test ResultDescriptionILS with all Score combinations",() => {
 
 
         container.props.children[0].forEach((element: { key: string }) => {
-            const dim = getILSDimension(i, dimScoreArray[i - 1]);
-            const int = getInterpretation(dimScoreArray[i - 1], "").trim();
+            const dim = ILSDimension(i, dimScoreArray[i - 1]);
+            const int = ILSInterpretation(dimScoreArray[i - 1], "").trim();
 
             expect(element.key).toBe("Dimension: " + dim + " Interpretation: " + int);
             i++;

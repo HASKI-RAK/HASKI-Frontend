@@ -1,9 +1,9 @@
 import {useTranslation} from "react-i18next";
 import Typography from '@mui/material/Typography';
-import {getILSParameters, getILSDimension, getInterpretation} from "./TableILS";
+import {getILSParameters, ILSDimension, ILSInterpretation} from "./TableILS";
 
 // function can be replaced for test-purposes
-export function ResultDescriptionILS (ILSdim = (n: number, s: number, b?: boolean) => getILSDimension(n, s, b)){
+export function ResultDescriptionILS (ILSdim = (n: number, s: number, b?: boolean) => ILSDimension(n, s, b)){
 
 
     const {t} = useTranslation();
@@ -18,10 +18,10 @@ export function ResultDescriptionILS (ILSdim = (n: number, s: number, b?: boolea
     const dimensionArray = [dimensionOne, dimensionTwo, dimensionThree, dimensionFour];
 
     //balanced, moderate, strong
-    const interpretationDimensionOneScore = getInterpretation(dimensionOneScore, "", true).trim();
-    const interpretationDimensionTwoScore = getInterpretation(dimensionTwoScore, "", true).trim();
-    const interpretationDimensionThreeScore = getInterpretation(dimensionThreeScore, "", true).trim();
-    const interpretationDimensionFourScore = getInterpretation(dimensionFourScore, "", true).trim();
+    const interpretationDimensionOneScore = ILSInterpretation(dimensionOneScore, "", true).trim();
+    const interpretationDimensionTwoScore = ILSInterpretation(dimensionTwoScore, "", true).trim();
+    const interpretationDimensionThreeScore = ILSInterpretation(dimensionThreeScore, "", true).trim();
+    const interpretationDimensionFourScore = ILSInterpretation(dimensionFourScore, "", true).trim();
 
     const interpretationArray = [interpretationDimensionOneScore, interpretationDimensionTwoScore, interpretationDimensionThreeScore, interpretationDimensionFourScore];
 
