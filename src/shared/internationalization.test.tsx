@@ -2,6 +2,8 @@
 //That way we can access the else statement in the i18n config file.
 localStorage.setItem("i18nextLng", "en");
 
+jest.unmock('./internationalization');
+jest.unmock('react-i18next');
 import React from 'react';
 import { act, render } from "@testing-library/react";
 import { DefaultSelect as Select } from "@common/components";
@@ -11,8 +13,6 @@ import { I18nextProvider, useTranslation } from 'react-i18next'
 
 
 const ArrangeElement = () => {
-    jest.unmock('./internationalization');
-    jest.unmock('react-i18next');
     const { i18n } = useTranslation();
     const startingLanguage = localStorage.getItem("i18nextLng") as string;
 
