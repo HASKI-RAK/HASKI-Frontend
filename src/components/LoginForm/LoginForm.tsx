@@ -1,14 +1,13 @@
-import React, { ChangeEvent, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { Backdrop, Button, CircularProgress, IconButton, InputAdornment, Paper, TextField, Typography } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Stack } from "@mui/system";
 import { useTranslation } from "react-i18next";
 import { useLoginForm as _useLoginForm, useLoginFormParams, useLoginFormReturn } from "./LoginForm.hooks";
-import { Type } from "typescript";
 
 type LoginFormProps = {
     onSubmit?: (username: string, password: string) => void;
-    onValidate?: (username: string, password: string) => [boolean, boolean];
+    onValidate?: (username: string, password: string) => readonly [boolean, boolean];
     usernameDefaultValue?: string;
     isLoading?: boolean;
     useLoginForm?: (params?: useLoginFormParams) => useLoginFormReturn;
@@ -47,7 +46,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
     }
 
     // Translation
-    const { i18n } = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <Paper elevation={3} >
@@ -58,28 +57,31 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
                 margin={2}
             >
                 <Typography variant="h4" component="h1" gutterBottom>
-                    {i18n.t("components.login.title")}
+                    {t("components.login.title")}
                 </Typography>
                 <Typography variant="h6" component="h2" gutterBottom>
-                    {i18n.t("components.login.subtitle")}
+                    {t("components.login.subtitle")}
                 </Typography>
                 <Stack spacing={2} direction="column">
                     <TextField
                         required
                         error={usernameHasError}
-                        helperText={usernameHasError ? i18n.t("components.login.usernameError") : ""}
-                        label={i18n.t("components.login.username")}
+                        helperText={usernameHasError ? t("components.login.usernameError") : ""}
+                        label={t("components.login.username")}
                         defaultValue={usernameDefault}
                         onChange={usernameChangeHandler}
+                        name="username"
                     />
                     <TextField
                         required
                         error={passwordHasError}
-                        helperText={passwordHasError ? i18n.t("components.login.passwordError") : ""}
-                        label={i18n.t("components.login.password")}
+                        helperText={passwordHasError ? t("components.login.passwordError") : ""}
+                        label={t("components.login.password")}
                         variant="outlined"
                         type={showPassword ? "text" : "password"}
                         onChange={passwordChangeHandler}
+                        name="password"
+                        id="password"
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
@@ -94,7 +96,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
                         }}
                     />
                     <Button variant="contained" color="primary" onClick={handleSubmit}>
-                        {i18n.t("components.login.login")}
+                        {t("components.login.login")}
                     </Button>
                 </Stack>
             </Stack>

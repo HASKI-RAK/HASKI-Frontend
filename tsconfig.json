@@ -47,6 +47,9 @@
       ],
       "@common/components": [
         "src/common/components"
+      ],
+      "@shared": [
+        "src/shared"
       ]
     },
     "outDir": "./bin"

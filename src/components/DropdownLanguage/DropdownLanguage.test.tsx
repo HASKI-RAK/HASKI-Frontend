@@ -1,9 +1,7 @@
 ﻿import renderer from "react-test-renderer";
 import "@testing-library/jest-dom";
-import { DropdownLanguage } from "@components";
+import { DropdownLanguage } from "./../DropdownLanguage/DropdownLanguage";
 import { fireEvent, render, act } from "@testing-library/react";
-
-
 
 // tests for mui can be found https://github.com/mui/material-ui/blob/master/packages/mui-material/src
 

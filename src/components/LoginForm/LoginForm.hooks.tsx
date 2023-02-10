@@ -22,12 +22,7 @@ export const useLoginForm = (params?: useLoginFormParams): useLoginFormReturn =>
         defaultPassword = "",
         defaultUsernameError = false,
         defaultPasswordError = false
-    } = (params || {
-        defaultUsername: "",
-        defaultPassword: "",
-        defaultUsernameError: false,
-        defaultPasswordError: false
-    });
+    } = params || {};
 
     // State
     const [username, setUsername] = useState(defaultUsername);
