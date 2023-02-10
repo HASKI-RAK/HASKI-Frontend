@@ -1,4 +1,4 @@
-import {Dashboard,DropdownLanguage,Text, QuestionnaireResultsButton} from "@components";
+import {Dashboard,DropdownLanguage,Text, QuestionnaireResultsModal} from "@components";
 
 
 
@@ -6,7 +6,7 @@ export const Home = () => {
     return (
         <div className="main">
             <Dashboard/>
-            <QuestionnaireResultsButton/>
+            <QuestionnaireResultsModal/>
             <DropdownLanguage/>
             <Text/>
         </div>

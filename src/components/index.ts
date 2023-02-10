@@ -6,11 +6,11 @@ import { ResultDescILS, ResultDescriptionILS } from "./Questionnaire/ResultDescr
 import { TableListK } from "./Questionnaire/TableListK";
 import { GraphListK } from "./Questionnaire/GraphListK";
 import { ResultDescListK, ResultDescriptionListK } from "./Questionnaire/ResultDescriptionListK";
-import { QuestionnaireResultsButton } from "./Questionnaire/QuestionnaireResultsButton";
+import { QuestionnaireResultsModal } from "./Questionnaire/QuestionnaireResultsModal";
 import { Text } from "./Text/Text";
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
 
 
-export {Dashboard, DropdownLanguage, Text, TableILS, GraphILS, ResultDescriptionILS, TableListK, GraphListK, ResultDescriptionListK, ResultDescILS, ResultDescListK,QuestionnaireResultsButton};
+export {Dashboard, DropdownLanguage, Text, TableILS, GraphILS, ResultDescriptionILS, TableListK, GraphListK, ResultDescriptionListK, ResultDescILS, ResultDescListK,QuestionnaireResultsModal};

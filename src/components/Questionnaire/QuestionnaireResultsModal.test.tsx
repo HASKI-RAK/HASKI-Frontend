@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {QuestionnaireResultsButton} from "./QuestionnaireResultsButton";
+import {QuestionnaireResultsModal} from "./QuestionnaireResultsModal";
 import {fireEvent, render} from "@testing-library/react";
 import * as React from 'react';
 
@@ -27,14 +27,14 @@ describe("Test ResultDescriptionListK with all Methods", () => {
 
     test("Modal opens", async() => {
 
-        const {getByTestId} = render(<QuestionnaireResultsButton/>);
+        const {getByTestId} = render(<QuestionnaireResultsModal/>);
 
         expect(getByTestId("QuestionnaireResultsButton")).toBeInTheDocument();
     });
 
     test("Active Step ILS is shown", async() => {
 
-        const {getByTestId} = render(<QuestionnaireResultsButton/>);
+        const {getByTestId} = render(<QuestionnaireResultsModal/>);
 
         fireEvent.click(getByTestId('QuestionnaireResultsButton'));
         expect(getByTestId("ActiveStepILS")).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe("Test ResultDescriptionListK with all Methods", () => {
 
     test("Active Step List-K is shown", async() => {
 
-        const {getByTestId} = render(<QuestionnaireResultsButton/>);
+        const {getByTestId} = render(<QuestionnaireResultsModal/>);
 
         fireEvent.click(getByTestId('QuestionnaireResultsButton'));
         fireEvent.click(getByTestId('nextButton'));
@@ -51,7 +51,7 @@ describe("Test ResultDescriptionListK with all Methods", () => {
 
     test("Active Step List-K is shown", async() => {
 
-        const {getByTestId, getByText} = render(<QuestionnaireResultsButton/>);
+        const {getByTestId, getByText} = render(<QuestionnaireResultsModal/>);
 
         fireEvent.click(getByTestId('QuestionnaireResultsButton'));
         fireEvent.click(getByText('components.QuestionnaireResults.ResultDescriptionILS.ILSResults'));
@@ -60,7 +60,7 @@ describe("Test ResultDescriptionListK with all Methods", () => {
 
     test("Active Step List-K is shown", async() => {
 
-        const {getByTestId, getByText} = render(<QuestionnaireResultsButton/>);
+        const {getByTestId, getByText} = render(<QuestionnaireResultsModal/>);
 
         fireEvent.click(getByTestId('QuestionnaireResultsButton'));
         fireEvent.click(getByText('components.QuestionnaireResults.ResultDescriptionILS.ListKResults'));
@@ -69,7 +69,7 @@ describe("Test ResultDescriptionListK with all Methods", () => {
 
     test("Next and Back button work", async() => {
 
-        const {getByTestId} = render(<QuestionnaireResultsButton/>);
+        const {getByTestId} = render(<QuestionnaireResultsModal/>);
 
         fireEvent.click(getByTestId('QuestionnaireResultsButton'));
         fireEvent.click(getByTestId('nextButton'));
@@ -88,7 +88,7 @@ describe("Test ResultDescriptionListK with all Methods", () => {
 
     test("close button works", async() => {
 
-        const {getByTestId} = render(<QuestionnaireResultsButton/>);
+        const {getByTestId} = render(<QuestionnaireResultsModal/>);
 
         fireEvent.click(getByTestId('QuestionnaireResultsButton'));
         expect(getByTestId("ActiveStepILS")).toBeInTheDocument();

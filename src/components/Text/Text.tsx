@@ -9,7 +9,7 @@ export const Text = () => {
                 Current Language: {i18n.language} <br/>
                 {(t("Back"))} <br/>
                 {(t("Next"))} <br/>
-                {(t("components.QuestionnaireResults.QuestionnaireResultsButton.ButtonText"))} <br/>
+                {(t("components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText"))} <br/>
             </div>
         </div>
     )

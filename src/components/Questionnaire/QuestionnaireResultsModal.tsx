@@ -38,7 +38,7 @@ const styleBox = {
     p: 1,
 };
 
-export const QuestionnaireResultsButton = () => {
+export const QuestionnaireResultsModal = () => {
     const {t} = useTranslation();
 
     const steps = [t("components.QuestionnaireResults.ResultDescriptionILS.ILSResults"), t("components.QuestionnaireResults.ResultDescriptionILS.ListKResults")];
@@ -62,7 +62,7 @@ export const QuestionnaireResultsButton = () => {
             <Button variant="contained"
                     color="primary"
                     onClick={handleOpen}
-                    data-testid={"QuestionnaireResultsButton"}>{t("components.QuestionnaireResults.QuestionnaireResultsButton.ButtonText")}
+                    data-testid={"QuestionnaireResultsButton"}>{t("components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText")}
             </Button>
             <Modal
                 id={"myModal"}

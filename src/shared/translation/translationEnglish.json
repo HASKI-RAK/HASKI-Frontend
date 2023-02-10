@@ -1,8 +1,6 @@
 {
-	"Activities": "Activities",
-	"and": "and",
 	"Back": "Back",
-	"components.QuestionnaireResults.QuestionnaireResultsButton.ButtonText": "Questionnaire Results",
+	"components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText": "Questionnaire Results",
 	"components.QuestionnaireResults.ResultDescriptionILS.Active.moderate": "Your information processing tends to be active. It is recommended that you always create opportunities for yourself to process new information in the course of practical experiments and discussions with fellow students. This tends to help you learn faster.",
 	"components.QuestionnaireResults.ResultDescriptionILS.Active.strong": "Your information processing is preferably active. It is recommended that you always create opportunities for yourself to process new information in the course of practical experiments and discussions with fellow students. This tends to help you learn faster.",
 	"components.QuestionnaireResults.ResultDescriptionILS.EverythingBalanced": "You do not show a clear tendency in any of the dimensions. This indicates that you can make use of both poles of the dimensions in the processing, perception, presentation and organization of information. According to the ILS results, you have the skillset to adapt flexibly here. The recommendation is therefore to continue learning in this balance.",
