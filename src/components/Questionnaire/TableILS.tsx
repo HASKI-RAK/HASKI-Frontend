@@ -1,45 +1,14 @@
 ﻿import * as React from 'react';
-import {styled} from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, {tableCellClasses} from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useTranslation} from 'react-i18next';
+import {StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow} from './QuestionnaireTableStyle';
 
-const StyledTableCell = styled(TableCell)(() => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: '#24262a',
-        color: '#FFFFFF',
-        fontSize: 13,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 13,
-    },
-    [`&.MuiTableCell-root`]: {
-        borderLeft: "3px solid rgba(224, 224, 224, 1)"
-    }
-}));
 
-const StyledTableCellWithoutBorder = styled(TableCell)(() => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: '#24262a',
-        color: '#FFFFFF',
-        fontSize: 13,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 13,
-    },
-}));
-
-const StyledTableRow = styled(TableRow)(() => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: 'rgba(200,205,219,0.25)',
-    },
-
-}));
 
 //These Values are later given from the Backend
 let dimensionOneScore = -11;

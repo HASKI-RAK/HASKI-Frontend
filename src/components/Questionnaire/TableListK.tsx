@@ -1,50 +1,26 @@
 ﻿import * as React from 'react';
-import {styled} from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, {tableCellClasses} from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useTranslation} from 'react-i18next';
+import {StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow} from './QuestionnaireTableStyle';
 
-const StyledTableCell = styled(TableCell)(() => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: '#24262a',
-        color: '#FFFFFF',
-        fontSize: 13,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 13,
-    },
-    [`&.MuiTableCell-root`]: {
-        borderLeft: "3px solid rgba(224, 224, 224, 1)"
-    }
-}));
+//Deepclone object, not only reference
+const StyledTableRowListK = Object.assign({},StyledTableRow);
 
-const StyledTableCellWithoutBorder = styled(TableCell)(() => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: '#24262a',
-        color: '#FFFFFF',
-        fontSize: 13,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 13,
-    },
-}));
+StyledTableRowListK.defaultProps = {
+    sx: {
+        '&:nth-of-type(1)': {
+            backgroundColor: '#24262a'
+        },
+        '&:nth-of-type(6)': {
+            backgroundColor: '#24262a'
+        },
+}};
 
-const StyledTableRow = styled(TableRow)(() => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: 'rgba(200,205,219,0.25)',
-    },
-    '&:nth-of-type(1)': {
-        backgroundColor: '#24262a'
-    },
-    '&:nth-of-type(6)': {
-        backgroundColor: '#24262a'
-    },
-}));
 
 //These Values are later given from the Backend
 let organize = 5;
@@ -209,7 +185,7 @@ export function TableListK() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <StyledTableRow>
+                    <StyledTableRowListK>
                         <StyledTableCellWithoutBorder align="left"
                                                       style={{color: "white"}}>{rows[1].col1}</StyledTableCellWithoutBorder>
                         <StyledTableCellWithoutBorder align="left"
@@ -218,8 +194,8 @@ export function TableListK() {
                                                       style={{color: "white"}}>{rows[1].col3}</StyledTableCellWithoutBorder>
                         <StyledTableCellWithoutBorder align="left"
                                                       style={{color: "white"}}>{rows[1].col4}</StyledTableCellWithoutBorder>
-                    </StyledTableRow>
-                    <StyledTableRow>
+                    </StyledTableRowListK>
+                    <StyledTableRowListK>
                         <StyledTableCellWithoutBorder align="left"
                         >{rows[2].col1}</StyledTableCellWithoutBorder>
                         <StyledTableCell align="left"
@@ -228,26 +204,26 @@ export function TableListK() {
                         >{rows[2].col3}</StyledTableCell>
                         <StyledTableCell align="left"
                         >{rows[2].col4}</StyledTableCell>
-                    </StyledTableRow>
-                    <StyledTableRow>
+                    </StyledTableRowListK>
+                    <StyledTableRowListK>
                         <StyledTableCellWithoutBorder align="left">{rows[3].col1}</StyledTableCellWithoutBorder>
                         <StyledTableCell align="left">{rows[3].col2}</StyledTableCell>
                         <StyledTableCell align="left">{rows[3].col3}</StyledTableCell>
                         <StyledTableCell align="left">{rows[3].col4}</StyledTableCell>
-                    </StyledTableRow>
-                    <StyledTableRow>
+                    </StyledTableRowListK>
+                    <StyledTableRowListK>
                         <StyledTableCellWithoutBorder align="left">{rows[4].col1}</StyledTableCellWithoutBorder>
                         <StyledTableCell align="left">{rows[4].col2}</StyledTableCell>
                         <StyledTableCell align="left">{rows[4].col3}</StyledTableCell>
                         <StyledTableCell align="left">{rows[4].col4}</StyledTableCell>
-                    </StyledTableRow>
-                    <StyledTableRow>
+                    </StyledTableRowListK>
+                    <StyledTableRowListK>
                         <StyledTableCellWithoutBorder align="left">{rows[5].col1}</StyledTableCellWithoutBorder>
                         <StyledTableCell align="left">{rows[5].col2}</StyledTableCell>
                         <StyledTableCell align="left">{rows[5].col3}</StyledTableCell>
                         <StyledTableCell align="left">{rows[5].col4}</StyledTableCell>
-                    </StyledTableRow>
-                    <StyledTableRow>
+                    </StyledTableRowListK>
+                    <StyledTableRowListK>
                         <StyledTableCellWithoutBorder align="left" style={{color: "white"}}>
                             {rows[6].col1}</StyledTableCellWithoutBorder>
                         <StyledTableCellWithoutBorder align="left" style={{color: "white"}}>
@@ -256,25 +232,25 @@ export function TableListK() {
                             {rows[6].col3}</StyledTableCellWithoutBorder>
                         <StyledTableCellWithoutBorder align="left" style={{color: "white"}}>
                             {rows[6].col4}</StyledTableCellWithoutBorder>
-                    </StyledTableRow>
-                    <StyledTableRow>
+                    </StyledTableRowListK>
+                    <StyledTableRowListK>
                         <StyledTableCellWithoutBorder align="left">{rows[7].col1}</StyledTableCellWithoutBorder>
                         <StyledTableCell align="left">{rows[7].col2}</StyledTableCell>
                         <StyledTableCell align="left">{rows[7].col3}</StyledTableCell>
                         <StyledTableCell align="left">{rows[7].col4}</StyledTableCell>
-                    </StyledTableRow>
-                    <StyledTableRow>
+                    </StyledTableRowListK>
+                    <StyledTableRowListK>
                         <StyledTableCellWithoutBorder align="left">{rows[8].col1}</StyledTableCellWithoutBorder>
                         <StyledTableCell align="left">{rows[8].col2}</StyledTableCell>
                         <StyledTableCell align="left">{rows[8].col3}</StyledTableCell>
                         <StyledTableCell align="left">{rows[8].col4}</StyledTableCell>
-                    </StyledTableRow>
-                    <StyledTableRow>
+                    </StyledTableRowListK>
+                    <StyledTableRowListK>
                         <StyledTableCellWithoutBorder align="left">{rows[9].col1}</StyledTableCellWithoutBorder>
                         <StyledTableCell align="left">{rows[9].col2}</StyledTableCell>
                         <StyledTableCell align="left">{rows[9].col3}</StyledTableCell>
                         <StyledTableCell align="left">{rows[9].col4}</StyledTableCell>
-                    </StyledTableRow>
+                    </StyledTableRowListK>
                 </TableBody>
             </Table>
         </TableContainer>
