@@ -19,6 +19,7 @@
     "@mui/material": "^5.10.10",
     "@types/node": "^18.8.2",
     "i18next": "^22.1.2",
+    "loglevel": "^1.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.1.1",

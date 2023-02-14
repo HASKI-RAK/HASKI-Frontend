@@ -1,7 +1,7 @@
 {
   "include": [
     "src",
-    "__mocks__"
+    "__mocks__",
   ],
   "compilerOptions": {
     "target": "ESNext",
