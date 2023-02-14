@@ -6,19 +6,19 @@ import {
     DefaultSkeleton as Skeleton,
     DefaultBox as Box,
     DefaultGrid as Grid
-} from "@common/components";
+} from "@common/components"
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next"
 
 export const GlossaryEntry = (props: GlossaryEntryProps) => {
-    const { t } = useTranslation();    
+    const { t } = useTranslation()
 
     return(
         <>
             <div>
                 <Accordion>
                     <AccordionSummary id="panel1a-header">
-                        <Box sx={{ width: 500}}>
+                        <Box sx={{ width: 500 }}>
                             <Typography component="div" key="h4" variant="h4">
                                 {
                                     props.term ?? <Skeleton animation="wave"/>
@@ -60,8 +60,8 @@ export const GlossaryEntry = (props: GlossaryEntryProps) => {
 }
 
 export interface GlossaryEntryProps {
-    term?: string;
-    definition?: string;
-    sources?: string;
+    term?: string
+    definition?: string
+    sources?: string
     // tags?: Array<string>;
 }

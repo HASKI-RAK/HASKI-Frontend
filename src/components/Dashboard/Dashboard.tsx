@@ -3,7 +3,7 @@ import { UserState, useUserStore } from "@services/UserStore";
 export const Dashboard = ({
   userState = {
     user: useUserStore((state) => state.user),
-    increaseUserId: useUserStore((state) => state.increaseUserId),
+    increaseUserId: useUserStore((i) => i.increaseUserId),
   },
 }: DashboardProps) => (
   <>

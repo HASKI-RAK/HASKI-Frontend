@@ -14,7 +14,7 @@
 	"searchButtonText": "Suche",
 	"sort": "Sortiere bei:",
 	"spellcheckText": "Hast du das gesucht?",
-	"update": "Aktualisieren"
+	"update": "Aktualisieren",
     "searchButtonText": "Suche",
     "resultPagesText": "Ergebnisseite",
     "spellcheckText": "Hast du das gesucht?",
@@ -47,5 +47,17 @@
             "term": "Adaptive Inhaltspräsentation"
         },
         {}
-    ]
+    ],
+    "pages.glossary.tags": [
+		"Typescript",
+		"Python",
+		"Erziehungswissenschaften",
+		"Künstliche Intelligenz",
+		"Webdevelopment",
+		"",
+		"TestDeutsch1",
+		"TestDeutsch2",
+		"TestDeutsch3",
+		"TestDeutsch4"
+	]
 }

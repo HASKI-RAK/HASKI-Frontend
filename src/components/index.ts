@@ -10,5 +10,5 @@ import { GlossaryIndex } from "./GlossaryIndex/GlossaryIndex";
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
-export { Dashboard, DropdownLanguage, Text, GlossaryList, GlossaryEntry, GlossaryFilter, GlossarySearch, GlossaryIndex }; 
+export { Dashboard, DropdownLanguage, Text, GlossaryList, GlossaryEntry, GlossaryFilter, GlossarySearch, GlossaryIndex}; 
 export type { GlossaryEntryProps };

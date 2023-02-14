@@ -1,6 +1,7 @@
 import { DefaultGrid as Grid } from "@common/components";
 import { MenuItem, ListItemText, Checkbox } from "@mui/material";
 
+//Useless file?
 export const GlossaryTagGroup = (props: GlossaryTagGroupProps) => {
 
     return(
