@@ -26,4 +26,10 @@ describe("Test the RingBuffer class", () => {
         expect(ringBuffer.toArray()).toEqual([6,7,8,9,10]);
     });
 
+    test("RingBuffer can have string values", () => {
+        const ringBuffer = new RingBuffer(5);
+        ringBuffer.fromArray(["1","2","3","4","5","6","7","8","9","10"]);
+        expect(ringBuffer.toArray()).toEqual(["6","7","8","9","10"]);
+    });
+
 });
