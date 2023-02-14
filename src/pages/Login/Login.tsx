@@ -1,71 +1,29 @@
 import { LoginForm } from "@components";
 import { Skeleton } from "@mui/material";
-import { AuthContext } from "@services/*";
-import { useContext, useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { AuthContext } from "@services";
+import { useContext, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useLogin as _useLogin, LoginHookParams, LoginHookReturn } from "./Login.hooks";
 
-export const Login = () => {
-    const [searchParams] = useSearchParams();
+type LoginProps = {
+    useLogin?: (params: LoginHookParams) => LoginHookReturn;
+};
+
+export const Login = ({ useLogin = _useLogin }: LoginProps) => {
+    // UX state
     const [isLoading, setIsLoading] = useState(false);
-
-    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const authcontext = useContext(AuthContext);
-    const nonce = searchParams.get('nonce');
 
-    const login = () => {
-        // supply auth context
-        authcontext.setIsAuth(true);
-        // then redirect to home page
-        navigate('/dashboard', { replace: true });
-    }
+    const nonce = searchParams.get('nonce') || undefined;
 
+    // Application logic hooks
+    const { onSubmit } = useLogin({ setIsLoading, nonce });
 
-    // Login with username and password
-    const onSubmitHandler = () => {
-        setIsLoading(true);
-        fetch(`http://fakedomain.com:5000/login_credentials`, {
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify({ username: "test", password: "test" }),
-            headers: {
-                'Content-Type': 'application/text'
-            }
-        })
-            .then((response) => response.statusText)
-            .then((text) => {
-                if (text === "OK") {
-                    login();
-                }
-            }).catch(() => {
-                //snackbar
-            }).finally(() => {
-                setIsLoading(false);
-            });
-    };
-
-
-    // on mount, read search param 'nounce' and set it to state
-    useEffect(() => {
-        fetch(`http://fakedomain.com:5000/login`, {
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify({ nonce: nonce }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((response) => response.statusText)
-            .then((text) => {
-                if (text === "OK") {
-                    login();
-                }
-            }).catch(() => {
-                //snackbar
-            });
-    }, []);
     return (
-        authcontext.isAuth ? <>a</> :
-            <LoginForm onSubmit={onSubmitHandler} isLoading={isLoading} />
+        nonce ? <Skeleton  /> :
+            authcontext.isAuth ? <Skeleton /> :
+                <LoginForm onSubmit={onSubmit} isLoading={isLoading} />
     )
 };
 

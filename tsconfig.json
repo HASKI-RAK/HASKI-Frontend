@@ -30,7 +30,7 @@
       "@pages": [
         "src/pages"
       ],
-      "@services/*": [
+      "@services": [
         "src/common/services"
       ],
       "@utils": [

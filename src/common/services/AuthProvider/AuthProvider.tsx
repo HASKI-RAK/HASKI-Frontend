@@ -1,4 +1,4 @@
-import { AuthContext, AuthContextType } from '../AuthContext';
+import { AuthContext, AuthContextType } from '@services';
 import { useAuthProvider as _useAuthprovider } from './AuthProvider.hooks';
 type AuthProviderProps = {
     children: React.ReactNode;

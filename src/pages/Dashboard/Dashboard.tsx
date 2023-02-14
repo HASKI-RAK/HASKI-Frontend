@@ -1,4 +1,4 @@
-import { AuthContext } from "@services/*";
+import { AuthContext } from "@services";
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom";
 

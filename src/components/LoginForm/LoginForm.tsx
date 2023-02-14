@@ -3,14 +3,14 @@ import { Backdrop, Button, CircularProgress, IconButton, InputAdornment, Paper, 
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Stack } from "@mui/system";
 import { useTranslation } from "react-i18next";
-import { useLoginForm as _useLoginForm, useLoginFormHookParams, LoginFormHookReturn } from "./LoginForm.hooks";
+import { useLoginForm as _useLoginForm, useLoginFormHookParams as LoginFormHookParams, LoginFormHookReturn } from "./LoginForm.hooks";
 
 type LoginFormProps = {
     onSubmit?: (username: string, password: string) => void;
     onValidate?: (username: string, password: string) => readonly [boolean, boolean];
     usernameDefaultValue?: string;
     isLoading?: boolean;
-    useLoginForm?: (params?: useLoginFormHookParams) => LoginFormHookReturn;
+    useLoginForm?: (params?: LoginFormHookParams) => LoginFormHookReturn;
 };
 
 const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) => {
@@ -20,7 +20,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
 
-    // Application logic state
+    // Application logic hooks
     const { username, password, setUsername, setPassword, submit, validate }
         = useLoginForm();
 

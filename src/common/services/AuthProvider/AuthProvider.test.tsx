@@ -1,8 +1,6 @@
 import "@testing-library/jest-dom";
-import { AuthProvider } from "@services/AuthProvider";
-import { AuthContext } from "@services/AuthContext";
-import { useContext } from "react";
-import { RenderResult, act, fireEvent, render, renderHook, waitFor } from "@testing-library/react";
+import { AuthProvider } from "@services";
+import { act, render, renderHook, waitFor } from "@testing-library/react";
 import { useAuthProvider } from "./AuthProvider.hooks";
 
 

@@ -1,10 +1,6 @@
+import { RequestResponse } from "./RequestResponse";
 
-export type LoginStatusResponse = {
-    status: number;
-    message: string;
-};
-
-export const getLoginStatus = async (): Promise<LoginStatusResponse> => {
+export const getLoginStatus = async (): Promise<RequestResponse> => {
     return fetch(`http://fakedomain.com:5000/loginstatus`, {
         method: 'GET',
         credentials: 'include',
@@ -13,5 +9,5 @@ export const getLoginStatus = async (): Promise<LoginStatusResponse> => {
         }
     }).then((response) => {
         return response.json();
-    }) as Promise<LoginStatusResponse>;
+    }) as Promise<RequestResponse>;
 }

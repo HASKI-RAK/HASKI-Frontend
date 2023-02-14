@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@mui/material";
-import { AuthProvider } from "@services/*";
+import { AuthProvider } from "@services";
 import { Home, ThemePresentation, Login, Dashboard } from "@pages";
 import { Theme } from "@utils";
 import { Routes } from "react-router";
