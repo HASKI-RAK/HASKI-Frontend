@@ -3,6 +3,12 @@ import { AuthContext, AuthContextType } from "./AuthContext";
 import { render, renderHook } from "@testing-library/react";
 import { useContext } from "react";
 
+global.fetch = jest.fn(() =>
+    Promise.resolve({
+        json: () => Promise.resolve({ status: 200 }),
+    }),
+) as jest.Mock;
+
 describe("Test Authcontext", () => {
     // render custom component
     const TestComponent = () => {

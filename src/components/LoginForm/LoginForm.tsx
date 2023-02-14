@@ -3,31 +3,33 @@ import { Backdrop, Button, CircularProgress, IconButton, InputAdornment, Paper, 
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Stack } from "@mui/system";
 import { useTranslation } from "react-i18next";
-import { useLoginForm as _useLoginForm, useLoginFormParams, useLoginFormReturn } from "./LoginForm.hooks";
+import { useLoginForm as _useLoginForm, useLoginFormHookParams, LoginFormHookReturn } from "./LoginForm.hooks";
 
 type LoginFormProps = {
     onSubmit?: (username: string, password: string) => void;
     onValidate?: (username: string, password: string) => readonly [boolean, boolean];
     usernameDefaultValue?: string;
     isLoading?: boolean;
-    useLoginForm?: (params?: useLoginFormParams) => useLoginFormReturn;
+    useLoginForm?: (params?: useLoginFormHookParams) => LoginFormHookReturn;
 };
 
 const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) => {
+    // UX State
+    const [usernameHasError, setUsernameHasError] = useState(false);
+    const [passwordHasError, setPasswordHasError] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
 
-    // Custom state hook
-    const { username, password, usernameHasError, passwordHasError, setUsername, setPassword, setUsernameHasError, setPasswordHasError }
+    // Application logic state
+    const { username, password, setUsername, setPassword, submit, validate }
         = useLoginForm();
 
     // Props destructuring
     const {
-        onSubmit = () => { }, onValidate = () => [username.length !== 0, password.length !== 0],
+        onSubmit = submit, onValidate = validate,
         usernameDefaultValue: usernameDefault = "", isLoading = false
     } = props;
 
-    // UX State
-    const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => setShowPassword(!showPassword);
 
     // Event Handlers
     const handleSubmit = () => {

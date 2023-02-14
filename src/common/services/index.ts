@@ -6,3 +6,4 @@ export type { UserState } from "./UserState";
 export { AuthContext } from "./AuthContext";
 export type { AuthContextType } from "./AuthContext";
 export { AuthProvider } from "./AuthProvider";
+export { getLoginStatus, getLogout } from "./auth";

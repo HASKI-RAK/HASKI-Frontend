@@ -1,43 +1,37 @@
 import { useState } from "react";
 
-export type useLoginFormParams = {
+export type useLoginFormHookParams = {
     defaultUsername?: string;
     defaultPassword?: string;
-    defaultUsernameError?: boolean;
-    defaultPasswordError?: boolean;
 }
-export interface useLoginFormReturn {
+export type LoginFormHookReturn = {
     readonly username: string;
     readonly password: string;
-    readonly usernameHasError: boolean;
-    readonly passwordHasError: boolean;
     readonly setUsername: (username: string) => void;
     readonly setPassword: (password: string) => void;
-    readonly setUsernameHasError: (usernameHasError: boolean) => void;
-    readonly setPasswordHasError: (passwordHasError: boolean) => void;
+    readonly submit: () => void;
+    readonly validate: () => readonly [boolean, boolean];
 };
 
-export const useLoginForm = (params?: useLoginFormParams): useLoginFormReturn => {
+export const useLoginForm = (params?: useLoginFormHookParams): LoginFormHookReturn => {
+    // Default values
     const { defaultUsername = "",
-        defaultPassword = "",
-        defaultUsernameError = false,
-        defaultPasswordError = false
+        defaultPassword = ""
     } = params || {};
 
-    // State
+    // State data
     const [username, setUsername] = useState(defaultUsername);
     const [password, setPassword] = useState(defaultPassword);
-    const [usernameHasError, setUsernameHasError] = useState(defaultUsernameError);
-    const [passwordHasError, setPasswordHasError] = useState(defaultPasswordError);
+
+    // Logic
+    const onSubmit = () => { }, onValidate = () => [username.length !== 0, password.length !== 0] as const;
 
     return {
         username,
         password,
-        usernameHasError,
-        passwordHasError,
         setUsername,
         setPassword,
-        setUsernameHasError,
-        setPasswordHasError
+        submit: onSubmit,
+        validate: onValidate
     } as const;
 }

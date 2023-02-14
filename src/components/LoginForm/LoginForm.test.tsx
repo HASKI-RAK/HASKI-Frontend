@@ -1,8 +1,12 @@
 import { fireEvent, render } from "@testing-library/react";
-import { debug } from 'jest-preview';
 import "@testing-library/jest-dom";
 import LoginForm from "./LoginForm";
 
+global.fetch = jest.fn(() =>
+    Promise.resolve({
+        json: () => Promise.resolve({ status: 200 }),
+    }),
+) as jest.Mock;
 describe("Test LoginForm", () => {
     const submit = jest.fn();
     const validate = jest.fn((username: string, password: string) => [username.length !== 0, password.length !== 0] as const);
@@ -52,7 +56,6 @@ describe("Test LoginForm", () => {
         const loginForm = render(
             <LoginForm />
         );
-        debug();
         const [_, button] = loginForm.getAllByRole("button");
         const username = loginForm.getAllByRole("textbox")[0];
         const password = loginForm.container.querySelector('#password') as HTMLElement;

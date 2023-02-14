@@ -64,11 +64,8 @@ export const Login = () => {
             });
     }, []);
     return (
-        authcontext.isAuth ? <>{navigate('/dashboard', { replace: true })}</> :
-            searchParams.get('nonce') ?
-                <Skeleton variant="rectangular" />
-                :
-                <LoginForm onSubmit={onSubmitHandler} isLoading={isLoading} />
+        authcontext.isAuth ? <>a</> :
+            <LoginForm onSubmit={onSubmitHandler} isLoading={isLoading} />
     )
 };
 
