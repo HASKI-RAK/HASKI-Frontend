@@ -1,6 +1,4 @@
 import { useCallback } from 'react'
-import { SelectedTagsState, useSelectedTagsStore } from "@services/SelectedTagState";
-import { useTranslation } from "react-i18next"
 
 import {
     DefaultBox as Box,
@@ -27,21 +25,13 @@ const MenuProps = {
     },
 }
 
-export const GlossaryFilter = ({
-    selectedTagsState = {
-        selectedTags: useSelectedTagsStore((state) => state.selectedTags),
-        setSelectedTags: useSelectedTagsStore((state) => state.setSelectedTags)
-    }
-}: GlossaryFilterProps) => {
-    const { t } = useTranslation()
-    const tags: string[] = t<string>('pages.glossary.tags', { returnObjects: true}) as string[]
-
-    const handleChange = useCallback((event: SelectChangeEvent<typeof selectedTagsState.selectedTags>) => {
+export const Filter = (props: FilterProps) => {
+    const handleChange = useCallback((event: SelectChangeEvent<typeof props.selectedTags>) => {
         const {
             target: { value },
         } = event
 
-        selectedTagsState.setSelectedTags!((typeof value === 'string') ? value.split(',') : value!)
+        props.setSelectedTags!((typeof value === 'string') ? value.split(',') : value!)
     }, [])
 
     return (
@@ -56,7 +46,7 @@ export const GlossaryFilter = ({
                     labelId="glossary-filter-label"
                     id="glossary-filter"
                     multiple
-                    value={selectedTagsState.selectedTags}
+                    value={props.selectedTags}
                     onChange={handleChange}
                     input={<OutlinedInput label="Filter by tag" />}
                     renderValue={useCallback((selected: string[]) => (
@@ -69,9 +59,9 @@ export const GlossaryFilter = ({
                     MenuProps={MenuProps}
                 >
                     {
-                        tags.map((tag) => (
+                        props.tags!.map((tag) => (
                             <MenuItem key={tag} value={tag}>
-                                <Checkbox checked={selectedTagsState.selectedTags!.indexOf(tag) > -1} />
+                                <Checkbox checked={props.selectedTags!.indexOf(tag) > -1} />
                                 <ListItemText primary={tag} />
                             </MenuItem>
                         ))
@@ -82,6 +72,8 @@ export const GlossaryFilter = ({
     )
 }
 
-interface GlossaryFilterProps {
-    selectedTagsState?: SelectedTagsState;
+interface FilterProps {
+    tags?: string[]
+    selectedTags?: string[]
+    setSelectedTags?: (selectedTags: string[]) => void
 }

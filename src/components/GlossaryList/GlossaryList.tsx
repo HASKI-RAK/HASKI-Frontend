@@ -9,7 +9,7 @@ export const GlossaryList = () => {
         <>
             {
                 glossaryElements.map((glossaryElement) => (
-                    <GlossaryEntry key={glossaryElement.term} term={glossaryElement.term} definition={glossaryElement.definition} sources={glossaryElement.sources} />
+                    <GlossaryEntry key={glossaryElement.term! + glossaryElement.definition + glossaryElement.sources} term={glossaryElement.term} definition={glossaryElement.definition} sources={glossaryElement.sources} />
                 ))
             }
         </>

@@ -19,7 +19,7 @@ export const GlossaryEntry = (props: GlossaryEntryProps) => {
                 <Accordion>
                     <AccordionSummary id="panel1a-header">
                         <Box sx={{ width: 500 }}>
-                            <Typography component="div" key="h4" variant="h4">
+                            <Typography component="div" key={props.term} variant="h4">
                                 {
                                     props.term ?? <Skeleton animation="wave"/>
                                 }
@@ -27,7 +27,7 @@ export const GlossaryEntry = (props: GlossaryEntryProps) => {
                         </Box>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography component="div" key="h6" variant="h6">
+                        <Typography component="div" key={props.definition} variant="h6">
                                 {
                                     props.definition ?? (
                                         <>
@@ -38,7 +38,7 @@ export const GlossaryEntry = (props: GlossaryEntryProps) => {
                                     )
                                 }
                         </Typography>
-                        <Typography component="div" key="h6" variant="h6">
+                        <Typography component="div" key={props.sources} variant="h6">
                             <Grid container spacing={1}>
                                 <Grid item xs={0}>
                                     {
