@@ -17,18 +17,19 @@
 	"pages.glossary.title": "Glossary",
 
 	"pages.contact.title": "Contact",
-	"contactform": "Contactform",
-	"topic": "Topic",
-	"reportType": "Reporttype",
-	"briefDescription": "Give a brief description of your request",
-	"issue": "issue",
-	"bug": "bug",
-	"feature": "feature",
-	"feedback":"feedback",
-	"other": "other",
-	"submit": "Submit",
-	"learningelement": "Learningelement",
-	"ui": "UI",
-	"design":"Design"
+	"components.contactform.contactform": "Contactform",
+	"components.contactform.topic": "Topic",
+	"components.contactform.reportType": "Reporttype",
+	"components.contactform.briefDescription": "Give a brief description of your request",
+	"components.contactform.issue": "issue",
+	"components.contactform.bug": "bug",
+	"components.contactform.feature": "feature",
+	"components.contactform.feedback":"feedback",
+	"components.contactform.other": "other",
+	"components.contactform.submit": "Submit",
+	"components.contactform.learningelement": "Learningelement",
+	"components.contactform.ui": "UI",
+	"components.contactform.design":"Design",
+	"components.contactform.error": "Missing description. Please write something."
 
 }

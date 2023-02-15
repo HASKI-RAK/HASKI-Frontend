@@ -1,33 +1,38 @@
-import { DefaultButton as Button, DefaultSelect as Select, DefaultTextField as TextField, DefaultRadio as RadioButton } from "@common/components";
-import { InputLabel, FormControl, MenuItem, Stack, RadioGroup, FormLabel, FormControlLabel, Typography } from "@mui/material";
+import {
+  DefaultButton as Button,
+  DefaultSelect as Select,
+  DefaultTextField as TextField,
+  DefaultRadio as RadioButton,
+} from "@common/components";
+import {
+  InputLabel,
+  FormControl,
+  MenuItem,
+  Stack,
+  RadioGroup,
+  FormLabel,
+  FormControlLabel,
+  Typography,
+  makeStyles,
+} from "@mui/material";
 import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
 
 
 const defaultContactValues = {
-  name:"",
+  name: "",
   reporttype: "other",
   reporttopic: "other",
   description: "",
 };
-export const sendForm = () => {
-  return (<div>
-    <h5>Form was submitted</h5>
 
-  </div>)
-};
 
-export const Text = (id: string) => {
-  const { t } = useTranslation();
-  return (
-    <div>{t(id)}</div>
-  )
-};
-
-const Contactform = () => {
-  
+//groesse anpassen lassen
+//passing props to mui styles
+export const Contactform = ({width="50%", sendtoBackend=()=>{console.log("yay")}}) => {
   const [contactValues, setContactValues] = useState(defaultContactValues);
-
+  const [textfieldError, setTextfieldError] = useState(false);
+  const { t } = useTranslation();
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setContactValues({
@@ -37,42 +42,99 @@ const Contactform = () => {
   };
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log(contactValues);
+    if (contactValues.description == "") {
+      setTextfieldError(true);
+      
+    } else {
+      
+      setTextfieldError(false);
+     console.log(contactValues);
+     sendtoBackend();
+    }
+    
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <Stack spacing={2} boxShadow={10} sx={{ minWidth: 120, backgroundColor: "white" }}  >
+      <Stack
+        spacing={2}
+        boxShadow={10}
+        sx={{ minWidth: 120, backgroundColor: "white" }}
+      >
         <Typography variant="h5" component="h5">
-          {Text("contactform")}
+          {t("components.contactform.contactform")}
         </Typography>
 
         <Stack spacing={2}>
-          <FormControl sx={{ width: "50%" }}>
-            <InputLabel id="select_label_contact">{Text("topic")}</InputLabel>
-            <Select name="reporttopic" labelId="select_label_contact" label="Topic" value={contactValues.reporttopic} onChange={handleInputChange}>
-              <MenuItem value={"le"}>{Text("learningelement")}</MenuItem>
-              <MenuItem value={"ui"}>{Text("ui")}</MenuItem>
-              <MenuItem value={"design"}>{Text("design")}</MenuItem>
-              <MenuItem value={"other"}>{Text("other")}</MenuItem>
-              <MenuItem value={5}>{Text("other")}</MenuItem>
+          <FormControl sx={ {width} }>
+            <InputLabel id="select_label_contact">{ t("components.contactform.topic")}</InputLabel>
+            <Select
+              name="reporttopic"
+              labelId="select_label_contact"
+              label="Topic"
+              value={contactValues.reporttopic}
+              onChange={handleInputChange}
+            >
+              <MenuItem value={"le"}>{ t("components.contactform.learningelement")}</MenuItem>
+              <MenuItem value={"ui"}>{ t("components.contactform.ui")}</MenuItem>
+              <MenuItem value={"design"}>{ t("components.contactform.design")}</MenuItem>
+              <MenuItem value={"other"}>{ t("components.contactform.other")}</MenuItem>
+              <MenuItem value={5}>{ t("components.contactform.other")}</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl>
-            <FormLabel id="radio_contact_label">{Text("reportType")}</FormLabel>
-            <RadioGroup row name="reporttype" value={contactValues.reporttype} onChange={handleInputChange}>
-              <FormControlLabel value="issue" control={<RadioButton />} label={Text("issue")} />
-              <FormControlLabel value="bug" control={<RadioButton />} label={Text("bug")} />
-              <FormControlLabel value="feedback" control={<RadioButton />} label={Text("feedback")} />
-              <FormControlLabel value="feature" control={<RadioButton />} label={Text("feature")} />
-              <FormControlLabel value="other" control={<RadioButton />} label={Text("other")} />
+            <FormLabel id="radio_contact_label">{ t("components.contactform.reportType")}</FormLabel>
+            <RadioGroup
+              row
+              name="reporttype"
+              value={contactValues.reporttype}
+              onChange={handleInputChange}
+            >
+              <FormControlLabel
+                value="issue"
+                control={<RadioButton />}
+                label={ t("components.contactform.issue")}
+              />
+              <FormControlLabel
+                value="bug"
+                control={<RadioButton />}
+                label={ t("components.contactform.bug")}
+              />
+              <FormControlLabel
+                value="feedback"
+                control={<RadioButton />}
+                label={ t("components.contactform.feedback")}
+              />
+              <FormControlLabel
+                value="feature"
+                control={<RadioButton />}
+                label={ t("components.contactform.feature")}
+              />
+              <FormControlLabel
+                value="other"
+                control={<RadioButton />}
+                label={ t("components.contactform.other")}
+              />
             </RadioGroup>
           </FormControl>
         </Stack>
 
-        <FormControl fullWidth>
-          <TextField id="desc_input" name="description" type="text" required label={Text("briefDescription")} multiline rows={5} maxRows={15} value={contactValues.description} onChange={handleInputChange} />
+        <FormControl fullWidth >
+          <TextField
+            id="desc_input"
+            data-testid="desc_input"
+            name="description"
+            type="text"
+            required
+            label={ t("components.contactform.briefDescription")}
+            rows={5}
+            maxRows={15}
+            value={contactValues.description}
+            onChange={handleInputChange}
+            error={textfieldError}
+            helperText={textfieldError ?  t("components.contactform.error") : ""}
+          />
         </FormControl>
 
         <FormControl fullWidth>
@@ -81,14 +143,13 @@ const Contactform = () => {
             sx={{ alignSelf: "end", width: 250 }}
             //href="/"
             onClick={handleSubmit}
-        >
-          {Text("submit")}
-        </Button>
-      </FormControl>
-    </Stack>
-   </form>
-  )
+          >
+            { t("components.contactform.submit")}
+          </Button>
+        </FormControl>
+      </Stack>
+    </form>
+  );
 };
-
 
 export default Contactform;

@@ -1,13 +1,9 @@
-import { DefaultTextField } from "@common/components";
-import { DefaultButton as Button } from "@common/components";
-import { handleSubmit, handleInputChange } from "src/common/services/ContactValues/CState/CState";
-import { useState } from "react";
 import { Contactform } from "@components";
 import { Skeleton } from "@mui/material";
 import { Box } from "@mui/material";
-
+import { useTranslation } from "react-i18next";
 //Testing useState
-const defaultValues = {
+/*const defaultValues = {
   name: "",
   age: 0,
   gender: "",
@@ -46,27 +42,29 @@ const Form = () => {
       
     </form>
   );
-};
+};*/
+
 function Contactskeleton(props: { loading?: boolean }) {
   const { loading = false } = props;
   return (
     <div>
       <Box sx={{ width: '50%', height: 400 }}>
       {loading?(
-        <Skeleton variant="rectangular" width='100%' height='100%'/>
+        <Skeleton id="loadingSkeleton_contact" variant="rectangular" width='100%' height='100%'/>
       ):(
-        <Contactform />
+        <Contactform width='100%'/>
+        
       )}
       </Box>
     </div>
   );
 }
-export const Contact = () => {
+export const Contact = ({ld=false}) => {
   return (
     <div>
       
-      <Contactskeleton loading/>
-      <Contactform/>
+      <Contactskeleton loading={ld}/>
+      
     </div>
   )
 }
