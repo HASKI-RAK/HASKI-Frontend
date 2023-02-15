@@ -1,24 +1,16 @@
 ﻿import {useTranslation} from "react-i18next";
 import log from "loglevel";
-import { RingBuffer } from "../../shared/RingBuffer";
+import {GlobalRingBuffer} from "../../shared/RingBuffer";
 
 export const Text = () => {
 
     const {t, i18n} = useTranslation();
+    log.setLevel("trace");
     log.trace("this is a trace");
-    log.warn("what is happening here?");
-    log.error("text could not be shown");
-    const ring = new RingBuffer<[Date,string]>(5);
-
-    ring.add([new Date(),"test1"]);
-    ring.add([new Date(),"test2"]);
-    ring.add([new Date(),"test3"]);
-    ring.add([new Date(),"test4"]);
-    ring.add([new Date(),"test5"]);
-    ring.add([new Date(),"test6"]);
-    ring.add([new Date(),"test7"]);
-
-    console.log(ring.toArray())
+    //log.warn("what is happening here?");
+    //log.error("text could not be shown");
+    console.log(GlobalRingBuffer.toArray());
+    log.traceWithRingBuffer(new Date(), "this is a trace with ring buffer");
 
     return(
         <div>

@@ -35,3 +35,5 @@ export class RingBuffer<T>{
         }
     }
 }
+
+export const GlobalRingBuffer = new RingBuffer<[Date,string]>(100);
