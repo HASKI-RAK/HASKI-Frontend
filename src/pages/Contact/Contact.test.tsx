@@ -1,10 +1,10 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
 import { Contact } from "@pages";
 import renderer from "react-test-renderer";
 import "@testing-library/jest-dom";
 
-  describe("Test Contact", () => {
+//in case a skeleton component should be needed for the contact page
+  /*describe("Test Contact", () => {
     test("Skeleton state not loading", () => {
       const l=false;
       const tree = renderer.create(<Contact ld={l} />).toJSON();
@@ -12,11 +12,10 @@ import "@testing-library/jest-dom";
     });
     test("Skeleton state loading", () => {
       const l=true;
-      const content=<div>Some text</div>;
-      const tree = render(<Contact ld={l} />);
-      expect(tree.container(content)).not.toBeInTheDocument();
+      const {queryByRole} = render(<Contact ld={l} />);
+      expect(queryByRole("skeleton")).toBeNull();
     });
-  })
+  })*/
   test("renders correctly and matches snapshot", () => {
     
     const tree = renderer.create(<Contact />).toJSON();

@@ -29,7 +29,12 @@ const defaultContactValues = {
 
 //groesse anpassen lassen
 //passing props to mui styles
-export const Contactform = ({width="50%", sendtoBackend=()=>{console.log("yay")}}) => {
+type ContactformParameter =  {
+  width: string;
+  sendtoBackend: () => void;
+};
+
+export const Contactform = ( {width, sendtoBackend}: ContactformParameter) => {
   const [contactValues, setContactValues] = useState(defaultContactValues);
   const [textfieldError, setTextfieldError] = useState(false);
   const { t } = useTranslation();
@@ -71,11 +76,11 @@ export const Contactform = ({width="50%", sendtoBackend=()=>{console.log("yay")}
             <Select
               name="reporttopic"
               labelId="select_label_contact"
-              label="Topic"
+              label="topic"
               value={contactValues.reporttopic}
               onChange={handleInputChange}
             >
-              <MenuItem value={"le"}>{ t("components.contactform.learningelement")}</MenuItem>
+              <MenuItem value={"le"} >{ t("components.contactform.learningelement")}</MenuItem>
               <MenuItem value={"ui"}>{ t("components.contactform.ui")}</MenuItem>
               <MenuItem value={"design"}>{ t("components.contactform.design")}</MenuItem>
               <MenuItem value={"other"}>{ t("components.contactform.other")}</MenuItem>
@@ -95,6 +100,7 @@ export const Contactform = ({width="50%", sendtoBackend=()=>{console.log("yay")}
                 value="issue"
                 control={<RadioButton />}
                 label={ t("components.contactform.issue")}
+                
               />
               <FormControlLabel
                 value="bug"
