@@ -15,10 +15,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@mui/icons-material": "^5.11.0",
-    "@mui/material": "^5.10.10",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.9",
+    "@mui/material": "^5.11.10",
     "@types/node": "^18.8.2",
     "i18next": "^22.1.2",
     "react": "^18.2.0",
