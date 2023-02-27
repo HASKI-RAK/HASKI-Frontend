@@ -1,17 +1,25 @@
 import { GlossaryEntry, GlossaryEntryProps } from "@components"
-import { useTranslation } from "react-i18next"
 
-export const GlossaryList = () => {
-    const { t } = useTranslation()
-    const glossaryElements : GlossaryEntryProps[] = t<string>('pages.glossary.elements', { returnObjects: true}) as GlossaryEntryProps[]
+export const GlossaryList = (props: GlossaryListProps) => {
 
     return(
         <>
             {
-                glossaryElements.map((glossaryElement) => (
-                    <GlossaryEntry key={glossaryElement.term! + glossaryElement.definition + glossaryElement.sources} term={glossaryElement.term} definition={glossaryElement.definition} sources={glossaryElement.sources} />
+                props.glossaryEntries && props.glossaryEntries.map((glossaryEntry) => (
+                    <GlossaryEntry
+                        key={glossaryEntry.term && (glossaryEntry.term + glossaryEntry.definition + glossaryEntry.sources)}
+                        term={glossaryEntry.term}
+                        definition={glossaryEntry.definition}
+                        sources={glossaryEntry.sources}
+                        tags={glossaryEntry.tags}
+                        fundamental={glossaryEntry.fundamental}
+                    />
                 ))
             }
         </>
-    );
+    )
+}
+
+interface GlossaryListProps {
+    glossaryEntries?: GlossaryEntryProps[]
 }

@@ -21,17 +21,32 @@
 		{
 			"term": "Adaptability",
 			"definition": "The adaptability of a system means that it can be changed by external actions regarding its program settings. The HASKI system is adaptable for teachers and for learners. While teachers can e.g. intervene in the suggested learning paths, learners can independently modify certain basic settings. The latter can be e.g. changing colors or configuring their own sequence of learning elements.",
-			"sources": "Bartel, Dörringer & Klopp, 2022a; Petko & Reusser, 2005, S.188; Zens, 2005"
+			"sources": "Bartel, Dörringer & Klopp, 2022a; Petko & Reusser, 2005, S.188; Zens, 2005",
+			"tags": ["Pedagogy", "Artificial Intelligence"]
 		},
 		{
 			"term": "Adaptivity",
 			"definition": "Adaptivity is present in a system when it independently adapts to input (e.g., test results, processing speed, learning paths, etc.). 'Adaptivity enables continuous adjustment of the system at short intervals' (Petko & Reusser 2005, p.188). In this context, adaptive learning means 'adapting the learning offer to the individual differences of the learners so that all can be supported equally' (Stangl 2022, p.1). "
 		},
 		{
-			"term": "Adaptive content presentation"
+			"term": "Adaptive content presentation",
+			"tags": ["Popular"]
 		},
 		{
-			
+			"fundamental": true
+		},
+		{
+			"term": "Externally controlled learning",
+			"definition": "In externally controlled learning, the learning processes are controlled by external influences. These can be other persons (e.g. the instructions of teachers), instructional media (computer programs) or the design of a teaching environment.",
+			"sources": "",
+			"fundamental": false
+		},
+		{
+			"term": "Learning element",
+			"definition": "Learning elements serve the competence development of the learners and are made available to them in learning spaces. They appear as verbal elements (written texts, hypertexts, spoken language) and/or visual elements (static or moving images) and/or have interactive forms of presentation (simulations, games, 3D) (cf. Arnold 2011, p. 138; Bartel, Dörringer & Klopp 2022, p.1). In the hierarchy of the domain model, learning elements are on the lowest level and are located in learning spaces. Learning elements can be separated into different classification types.",
+			"sources": "Arnold 2011, S. 138; Bartel, Dörringer & Klopp 2022, S.1",
+			"tags": ["Pedagogy"],
+			"fundamental": true
 		}
 	],
 	"pages.glossary.tags": [
@@ -44,7 +59,9 @@
 		"TestEnglish1",
 		"TestEnglish2",
 		"TestEnglish3",
-		"TestEnglish4",
-		"Does, this, work,or,will,it,fuck,everything,up?"
-	]
+		"TestEnglish4"
+	],
+	"pages.glossary.popular": "Popular",
+    "pages.glossary.filter": "Filter by tags",
+	"pages.glossary.fundamentals": "Fundamentals"
 }

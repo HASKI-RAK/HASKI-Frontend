@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-
+import { useTranslation } from "react-i18next"
 import {
     DefaultBox as Box,
     DefaultCheckbox as Checkbox,
@@ -26,20 +26,32 @@ const MenuProps = {
 }
 
 export const Filter = (props: FilterProps) => {
+    const  { t } = useTranslation();
+
     const handleChange = useCallback((event: SelectChangeEvent<typeof props.selectedTags>) => {
         const {
             target: { value },
         } = event
 
-        props.setSelectedTags!((typeof value === 'string') ? value.split(',') : value!)
+        props.setSelectedTags && props.setSelectedTags((typeof value === 'string') ? value.split(',') : value!)
     }, [])
+
+    const renderValue = useCallback((selected: string[]) => (
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
+            {selected.map((value: string) => (
+                <Chip key={value} label={value} size="small"/>
+            ))}
+        </Box>
+    ), [])
 
     return (
         <>
-            <FormControl sx={{ m: 1, width: 600 }}>
+            <FormControl fullWidth>
                 <InputLabel id="glossary-filter-label">
                     <Typography>
-                        Filter by tag
+                        {
+                            t('pages.glossary.filter')
+                        }
                     </Typography>
                 </InputLabel>
                 <Select
@@ -48,20 +60,14 @@ export const Filter = (props: FilterProps) => {
                     multiple
                     value={props.selectedTags}
                     onChange={handleChange}
-                    input={<OutlinedInput label="Filter by tag" />}
-                    renderValue={useCallback((selected: string[]) => (
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
-                            {selected.map((value: string) => (
-                                <Chip key={value} label={value} size="small"/>
-                            ))}
-                        </Box>
-                    ), [])}
+                    input={<OutlinedInput label={t('pages.glossary.filter')}/>}
+                    renderValue={renderValue}
                     MenuProps={MenuProps}
                 >
                     {
-                        props.tags!.map((tag) => (
+                        props.tags && props.tags.map((tag) => (
                             <MenuItem key={tag} value={tag}>
-                                <Checkbox checked={props.selectedTags!.indexOf(tag) > -1} />
+                                <Checkbox checked={props.selectedTags && props.selectedTags.indexOf(tag) > -1}/>
                                 <ListItemText primary={tag} />
                             </MenuItem>
                         ))

@@ -1,15 +1,18 @@
+// import { useContext } from "react"
+// import { AuthContext } from "@services";
 import { GlossaryForm } from "@components"
+// import { DefaultSkeleton as Skeleton } from "@common/components"
 
 export const Glossary = () => {
+    // const authcontext = useContext(AuthContext);
+
     return(
-        <GlossaryForm />
+        // authcontext.isAuth ? <Skeleton /> :
+            <GlossaryForm />
     );
 }
 
 export default Glossary;
 
 // TODO:
-// 1. Suchleiste so wie bei der Wishlist in Steam?
-// 2. URL aktualisieren Home/ProjectDescription/glossary
-// 3. Alles react includes aus di entfernen
-// TODO: Authentifizierung
+// URL aktualisieren Home/ProjectDescription/glossary
