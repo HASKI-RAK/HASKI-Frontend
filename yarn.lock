@@ -1633,13 +1633,6 @@
   dependencies:
     "@react-spring/web" "9.4.5"
 
-"@nivo/tooltip@^0.80.0":
-  version "0.80.0"
-  resolved "https://registry.yarnpkg.com/@nivo/tooltip/-/tooltip-0.80.0.tgz#07ebef47eb708a0612bd6297d5ad156bbec19d34"
-  integrity sha512-qGmrreRwnCsYjn/LAuwBtxBn/tvG8y+rwgd4gkANLBAoXd3bzJyvmkSe+QJPhUG64bq57ibDK+lO2pC48a3/fw==
-  dependencies:
-    "@react-spring/web" "9.4.5"
-
 "@nivo/voronoi@0.80.0":
   version "0.80.0"
   resolved "https://registry.npmjs.org/@nivo/voronoi/-/voronoi-0.80.0.tgz"
