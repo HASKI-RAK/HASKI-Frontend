@@ -1,11 +1,10 @@
-import {render} from "@testing-library/react";
-import {App} from "@pages";
 import log from "loglevel";
+import {logBuffer} from "./logBuffer.config";
 
 describe("Test the demo component", () => {
 
     test("log messages are added to localStorage", () => {
-        render(<App/>);
+        logBuffer();
         log.setLevel("trace");
         log.trace("This is a trace");
         log.warn("This is a warning");
@@ -38,7 +37,7 @@ describe("localStorage already set", () => {
 
     test("should return a value from GlobalRingBuffer", () => {
 
-        render(<App/>);
+        logBuffer();
         log.setLevel("trace");
         log.trace("This is a trace");
         log.warn("This is a warning");

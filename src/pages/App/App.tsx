@@ -5,9 +5,9 @@ import { Routes } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import {logBuffer} from "../../shared/logBuffer.config";
 
-function App() {
+logBuffer();
 
-  logBuffer();
+function App() {
 
   return (
     <ThemeProvider theme={Theme}>
