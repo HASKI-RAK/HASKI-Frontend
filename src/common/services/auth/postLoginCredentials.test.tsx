@@ -2,9 +2,11 @@ import "@testing-library/jest-dom";
 import { postLoginCredentials } from "./postLoginCredentials";
 
 global.fetch = jest.fn(() =>
-    Promise.resolve(
-        { status: 200 },
-    ),
+    Promise.resolve({
+        json: () => Promise.resolve({ status: 200 }),
+        status: 200,
+        message: "OK",
+    }),
 ) as jest.Mock;
 
 describe('getLoginStatus', () => {

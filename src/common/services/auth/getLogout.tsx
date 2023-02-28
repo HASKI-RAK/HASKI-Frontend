@@ -8,6 +8,9 @@ export const getLogout = async (): Promise<RequestResponse> => {
             'Content-Type': 'text/html'
         }
     }).then((response) => {
-        return response.json();
+        return {
+            status: response.status,
+            message: response.statusText,
+        }
     }) as Promise<RequestResponse>;
 };

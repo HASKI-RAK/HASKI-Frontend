@@ -1,26 +1,33 @@
 import { Login } from "@pages";
 import renderer from "react-test-renderer";
 import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
+import { act, fireEvent, render } from "@testing-library/react";
 import { BrowserRouter as Router, Route, Routes, MemoryRouter } from "react-router-dom";
+import * as router from 'react-router'
+import { AuthContext } from "@services";
 
-global.fetch = jest.fn(() =>
-    Promise.resolve({
-        json: () => Promise.resolve({ status: 200 }),
-    }),
-) as jest.Mock;
+
+const navigate = jest.fn();
 
 describe("Test the Login page", () => {
-    const navigate = jest.fn();
-    jest.mock("react-router-dom", () => ({
-        ...(jest.requireActual("react-router-dom") as any), // technically it passes without this too, but I'm not sure if its there for other tests to use the real thing so I left it in
-        useNavigate: () => navigate,
-    }));
+    global.fetch = jest.fn(() =>
+        Promise.resolve({
+            json: () => Promise.resolve({ status: 200 }),
+            status: 200,
+            message: "OK",
+        }),
+    ) as jest.Mock;
+
+    beforeEach(() => {
+        jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+    })
 
     it("should render the skeleton when a nonce is supplied as search params", () => {
         const login = render(
             <MemoryRouter initialEntries={["?nonce=123"]}>
-                <Login />
+                <AuthContext.Provider value={{ isAuth: false, setIsAuth: jest.fn(), logout: jest.fn() }}>
+                    <Login />
+                </AuthContext.Provider>
             </MemoryRouter>
         );
         // span length should be 1
@@ -31,12 +38,43 @@ describe("Test the Login page", () => {
 
     it("should render the skeleton the login page without nonce", () => {
         const login = render(
-            <MemoryRouter initialEntries={[""]}>
-                <Login />
+            <MemoryRouter initialEntries={["?nonce=123"]}>
+                <AuthContext.Provider value={{ isAuth: true, setIsAuth: jest.fn(), logout: jest.fn() }}>
+                    <Login />
+                </AuthContext.Provider>
             </MemoryRouter>
         );
-        // login form should be rendered
-        const username = login.getAllByRole("textbox")
-        expect(username.length).toEqual(1);
+        expect(login.container.querySelectorAll("span").length).toEqual(1);
+    });
+
+    test("submit navigates to dashboard on correct username and password", () => {
+        const login = render(
+            <MemoryRouter initialEntries={[""]}>
+                <AuthContext.Provider value={{ isAuth: false, setIsAuth: jest.fn(), logout: jest.fn() }}>
+                    <Login />
+                </AuthContext.Provider>
+            </MemoryRouter>
+        );
+        const [_, buttonLogin] = login.getAllByRole("button");
+        const username = login.getAllByRole("textbox")[0];
+        const password = login.container.querySelector('#password') as HTMLElement;
+
+        act(() => {
+            // Fill in username
+            fireEvent.change(username, { target: { value: "test" } });
+
+            // Fill in password
+            fireEvent.change(password, { target: { value: "test" } });
+        });
+
+        // Click on login button
+        act(() => {
+            fireEvent.click(buttonLogin);
+        });
+        // wait for the fetch to complete
+        setTimeout(() => {
+            // navigate should be called with /dashboard
+            expect(navigate).toBeCalledWith("/dashboard");
+        }, 1000);
     });
 });

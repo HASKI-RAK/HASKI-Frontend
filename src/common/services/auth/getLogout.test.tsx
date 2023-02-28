@@ -4,6 +4,8 @@ import { getLogout } from "./getLogout";
 global.fetch = jest.fn(() =>
     Promise.resolve({
         json: () => Promise.resolve({ status: 200 }),
+        status: 200,
+        message: "OK",
     }),
 ) as jest.Mock;
 

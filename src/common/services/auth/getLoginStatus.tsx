@@ -8,6 +8,9 @@ export const getLoginStatus = async (): Promise<RequestResponse> => {
             'Content-Type': 'text/json'
         }
     }).then((response) => {
-        return response.json();
+        return {
+            status: response.status,
+            message: response.statusText,
+        }
     }) as Promise<RequestResponse>;
 }

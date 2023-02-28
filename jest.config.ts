@@ -2,9 +2,7 @@
 import { compilerOptions } from './tsconfig.json'
 import { pathsToModuleNameMapper } from 'ts-jest'
 import { Config } from '@jest/types'
-import i18next from 'i18next';
 
-i18next.init();
 const config: Config.InitialOptions = {
     preset: 'ts-jest',
     moduleNameMapper: { "react-i18next": "<rootDir>/__mocks__/react-i18next", '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy', ...pathsToModuleNameMapper(compilerOptions.paths) },

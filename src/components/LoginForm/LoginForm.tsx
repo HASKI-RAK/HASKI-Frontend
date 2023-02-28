@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react"
 import { Backdrop, Button, CircularProgress, IconButton, InputAdornment, Paper, TextField, Typography } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material/";
 import { Stack } from "@mui/system";
 import { useTranslation } from "react-i18next";
 import { useLoginForm as _useLoginForm, useLoginFormHookParams as LoginFormHookParams, LoginFormHookReturn } from "./LoginForm.hooks";

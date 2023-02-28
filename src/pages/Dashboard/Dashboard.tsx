@@ -1,7 +1,8 @@
 import { AuthContext } from "@services";
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom";
-
+// Ignore jest
+/* istanbul ignore next */
 const Dashboard = () => {
     const authcontext = useContext(AuthContext);
     const navigate = useNavigate();

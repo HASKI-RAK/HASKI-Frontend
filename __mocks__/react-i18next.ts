@@ -1,6 +1,7 @@
+
 const reactI18Next: any = jest.createMockFromModule('react-i18next');
 
-reactI18Next.useTranslation = () => {
+const useTranslation = () => {
     return {
         t: (str: string) => str,
         i18n: {
@@ -9,6 +10,14 @@ reactI18Next.useTranslation = () => {
     };
 };
 
-module.exports = reactI18Next;
+const initReactI18next = {
+    type: '3rdParty',
+    init: jest.fn(),
+};
 
-export default {};
+const I18nextProvider = ({ children }: any) => {
+    return children;
+};
+
+
+export { useTranslation, initReactI18next, I18nextProvider };
