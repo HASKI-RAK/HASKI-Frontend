@@ -1,9 +1,12 @@
 ﻿import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import log from "loglevel";
 
 // Import all translation files
 import translationEnglish from './translation/translationEnglish.json';
 import translationGerman from './translation/translationGerman.json';
+
+log.setLevel("trace");
 
 //define the available languages
 const resources = {
@@ -19,9 +22,11 @@ let lng="";
 
 if(localStorage.getItem("i18nextLng") === null){
     localStorage.setItem("i18nextLng", "de");
+    log.trace("Local storage item \"i18nextLng\" was empty. Set \"i18nextLng\" language to: de.")
 }
 else{
     lng = localStorage.getItem("i18nextLng") as string;
+    log.trace("Local storage item \"i18nextLng\" was already set. Value is: "+lng+".")
 }
 
 //initial value is german
