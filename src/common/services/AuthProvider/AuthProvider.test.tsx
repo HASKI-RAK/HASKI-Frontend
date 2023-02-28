@@ -7,6 +7,8 @@ import { useAuthProvider } from "./AuthProvider.hooks";
 global.fetch = jest.fn(() =>
     Promise.resolve({
         json: () => Promise.resolve({ status: 200 }),
+        status: 200,
+        message: "OK",
     }),
 ) as jest.Mock;
 
@@ -49,16 +51,46 @@ describe("Test AuthProvider", () => {
         global.fetch = jest.fn(() =>
             Promise.resolve({
                 json: () => Promise.resolve({ status: 400 }),
+                status: 400,
+                message: "Bad Request",
             }),
         ) as jest.Mock;
-
-        const { result } = await renderHook(() => useAuthProvider());
-        expect(result.current).toMatchObject({
+        let _result!: any;
+        await act(async () => {
+            const { result } = await renderHook(() => useAuthProvider());
+            _result = result;
+        });
+        expect(_result.current).toMatchObject({
             isAuth: false,
             setIsAuth: expect.any(Function),
             logout: expect.any(Function)
         });
 
-        expect(result.current.isAuth).toBe(false);
+        expect(_result.current.isAuth).toBe(false);
+    });
+
+    test("useffect should set isAuth to true when backend returns 200", async () => {
+
+        const fech_mock = jest.fn(() =>
+            Promise.resolve({
+                json: () => Promise.resolve({ status: 200 }),
+                status: 200,
+                message: "OK",
+            }),
+        ) as jest.Mock;
+        global.fetch = fech_mock;
+        let _result!: any;
+        await act(async () => {
+            const { result } = await renderHook(() => useAuthProvider());
+            _result = result;
+        }).then(() => {
+            expect(_result.current).toMatchObject({
+                isAuth: false,
+                setIsAuth: expect.any(Function),
+                logout: expect.any(Function)
+            });
+            expect(_result.current.isAuth).toBe(false);
+        });
+
     });
 });

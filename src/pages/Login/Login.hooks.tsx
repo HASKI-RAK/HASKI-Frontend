@@ -31,8 +31,8 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
             if (response.status === 200) {
                 login();
             }
-        }).catch(() => {
-            //snackbar
+
+            //TODO catch and🍿 snackbar
         }).finally(() => {
             params.setIsLoading(false);
         });
@@ -46,8 +46,8 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
                 login();
             else
                 navigate('/login', { replace: true });
-        }).catch(() => {
-            //snackbar
+
+            //TODO 🍿 snackbar
         })
     }, []);
 

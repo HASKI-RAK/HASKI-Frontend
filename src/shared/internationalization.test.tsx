@@ -31,7 +31,16 @@ describe("i18n test", () => {
         )
     };
 
-
+    test("local storage null", () => {
+        localStorage.removeItem("i18nextLng");
+        render(
+            <I18nextProvider i18n={i18next}> // actually give translation to your component
+                <ArrangeElement />
+            </I18nextProvider>
+        );
+        // example if you have a key called example
+        expect(i18next.language).toBe("de");
+    });
 
     test("language can be changed", () => {
         render(

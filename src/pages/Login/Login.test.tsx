@@ -10,6 +10,7 @@ import { AuthContext } from "@services";
 const navigate = jest.fn();
 
 describe("Test the Login page", () => {
+
     global.fetch = jest.fn(() =>
         Promise.resolve({
             json: () => Promise.resolve({ status: 200 }),
@@ -47,6 +48,17 @@ describe("Test the Login page", () => {
         expect(login.container.querySelectorAll("span").length).toEqual(1);
     });
 
+    it("should render the skeleton without nonce but authorized", () => {
+        const login = render(
+            <MemoryRouter initialEntries={[""]}>
+                <AuthContext.Provider value={{ isAuth: true, setIsAuth: jest.fn(), logout: jest.fn() }}>
+                    <Login />
+                </AuthContext.Provider>
+            </MemoryRouter>
+        );
+        expect(login.container.querySelectorAll("span").length).toEqual(1);
+    });
+
     test("submit navigates to dashboard on correct username and password", () => {
         const login = render(
             <MemoryRouter initialEntries={[""]}>
@@ -75,6 +87,29 @@ describe("Test the Login page", () => {
         setTimeout(() => {
             // navigate should be called with /dashboard
             expect(navigate).toBeCalledWith("/dashboard");
+        }, 1000);
+    });
+
+    test("the hook should redirect to /login when a nonce is supplied as search params and unauthorized", () => {
+        global.fetch = jest.fn(() =>
+            Promise.resolve({
+                json: () => Promise.resolve({ status: 401 }),
+                status: 401,
+                message: "Unauthorized",
+            }),
+        ) as jest.Mock;
+        const login = render(
+            <MemoryRouter initialEntries={["?nonce=123"]}>
+                <AuthContext.Provider value={{ isAuth: false, setIsAuth: jest.fn(), logout: jest.fn() }}>
+                    <Login />
+                </AuthContext.Provider>
+            </MemoryRouter>
+        );
+        expect(login.container.querySelectorAll("span").length).toEqual(1);
+        // wait for the fetch to complete
+        setTimeout(() => {
+            // navigate should be called with /dashboard
+            expect(navigate).toBeCalledWith("/login");
         }, 1000);
     });
 });
