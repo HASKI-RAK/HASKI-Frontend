@@ -51,7 +51,7 @@ exports[`Test the demo component renders correctly 1`] = `
       tabIndex={0}
       type="button"
     >
-      Fragebogen Ergebnisse
+      components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText
     </button>
   </div>
   <div>
@@ -110,16 +110,15 @@ exports[`Test the demo component renders correctly 1`] = `
   <div>
     <div>
       Current Language: 
-      de
        
       <br />
-      Zurück
+      Back
        
       <br />
-      Weiter
+      Next
        
       <br />
-      Fragebogen Ergebnisse
+      components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText
        
       <br />
     </div>

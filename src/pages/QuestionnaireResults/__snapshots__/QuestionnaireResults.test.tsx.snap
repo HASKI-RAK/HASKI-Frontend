@@ -150,7 +150,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
                 textAnchor="start"
                 transform="translate(10,0) rotate(0)"
               >
-                 Sequentiell
+                 components.QuestionnaireResults.TableILS.Sequential
               </text>
             </g>
             <g
@@ -185,7 +185,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
                 textAnchor="start"
                 transform="translate(10,0) rotate(0)"
               >
-                 Visuel
+                 components.QuestionnaireResults.TableILS.Visual
               </text>
             </g>
             <g
@@ -220,7 +220,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
                 textAnchor="start"
                 transform="translate(10,0) rotate(0)"
               >
-                 Sensorisch
+                 components.QuestionnaireResults.TableILS.Sensory
               </text>
             </g>
             <g
@@ -255,7 +255,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
                 textAnchor="start"
                 transform="translate(10,0) rotate(0)"
               >
-                 Aktiv
+                 components.QuestionnaireResults.TableILS.Active
               </text>
             </g>
             <line
@@ -718,7 +718,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
               textAnchor="middle"
               transform="translate(285, 32) rotate(0)"
             >
-              Wert
+              components.QuestionnaireResults.TableILS.Score
             </text>
           </g>
           <g
@@ -756,7 +756,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
                 textAnchor="end"
                 transform="translate(-10,0) rotate(0)"
               >
-                Global
+                components.QuestionnaireResults.TableILS.Global
               </text>
             </g>
             <g
@@ -791,7 +791,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
                 textAnchor="end"
                 transform="translate(-10,0) rotate(0)"
               >
-                Verbal
+                components.QuestionnaireResults.TableILS.Verbal
               </text>
             </g>
             <g
@@ -826,7 +826,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
                 textAnchor="end"
                 transform="translate(-10,0) rotate(0)"
               >
-                Intuitiv
+                components.QuestionnaireResults.TableILS.Intuitive
               </text>
             </g>
             <g
@@ -861,7 +861,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
                 textAnchor="end"
                 transform="translate(-10,0) rotate(0)"
               >
-                Reflektiv
+                components.QuestionnaireResults.TableILS.Reflective
               </text>
             </g>
             <line
@@ -1052,7 +1052,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
             scope="col"
           >
-            Dimension
+            components.QuestionnaireResults.TableILS.Dimension
           </th>
           <th
             aria-sort={null}
@@ -1064,14 +1064,14 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
             scope="col"
           >
-            Interpretation
+            components.QuestionnaireResults.TableILS.Interpretation
           </th>
           <th
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
             scope="col"
           >
-            Wert
+            components.QuestionnaireResults.TableILS.Score
           </th>
         </tr>
       </thead>
@@ -1087,19 +1087,19 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Reflektiv
+            components.QuestionnaireResults.TableILS.Reflective
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Aktiv
+            components.QuestionnaireResults.TableILS.Active
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            stark reflektiv
+            components.QuestionnaireResults.TableILS.strong components.questionnaireresults.tableils.reflective
           </td>
           <td
             aria-sort={null}
@@ -1116,19 +1116,19 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Intuitiv
+            components.QuestionnaireResults.TableILS.Intuitive
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Sensorisch
+            components.QuestionnaireResults.TableILS.Sensory
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            moderat sensorisch
+            components.QuestionnaireResults.TableILS.moderate components.questionnaireresults.tableils.sensory
           </td>
           <td
             aria-sort={null}
@@ -1145,19 +1145,19 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Verbal
+            components.QuestionnaireResults.TableILS.Verbal
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Visuel
+            components.QuestionnaireResults.TableILS.Visual
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            balanciert
+            components.QuestionnaireResults.TableILS.balanced
           </td>
           <td
             aria-sort={null}
@@ -1174,19 +1174,19 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Global
+            components.QuestionnaireResults.TableILS.Global
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Sequentiell
+            components.QuestionnaireResults.TableILS.Sequential
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            moderat global
+            components.QuestionnaireResults.TableILS.moderate components.questionnaireresults.tableils.global
           </td>
           <td
             aria-sort={null}
@@ -1251,28 +1251,28 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
             scope="col"
           >
-            Faktoren & Subskalen
+            components.QuestionnaireResults.TableListK.Factors & subscales
           </th>
           <th
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
             scope="col"
           >
-            Wert
+            components.QuestionnaireResults.TableListK.Score
           </th>
           <th
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
             scope="col"
           >
-            Faktoren & Subskalen
+            components.QuestionnaireResults.TableListK.Factors & subscales
           </th>
           <th
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-j3il49-MuiTableCell-root"
             scope="col"
           >
-            Wert
+            components.QuestionnaireResults.TableListK.Score
           </th>
         </tr>
       </thead>
@@ -1293,7 +1293,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
               }
             }
           >
-            Kognitive Strategien
+            components.QuestionnaireResults.TableListK.Cognitive strategies
           </td>
           <td
             aria-sort={null}
@@ -1315,7 +1315,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
               }
             }
           >
-            Strategien des Managements interner Ressourcen
+            components.QuestionnaireResults.TableListK.Internal resource management strategies
           </td>
           <td
             aria-sort={null}
@@ -1337,7 +1337,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Organisieren
+            components.QuestionnaireResults.TableListK.Organize
           </td>
           <td
             aria-sort={null}
@@ -1349,7 +1349,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            Aufmerksamkeit
+            components.QuestionnaireResults.TableListK.Attention
           </td>
           <td
             aria-sort={null}
@@ -1366,7 +1366,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Elaborieren
+            components.QuestionnaireResults.TableListK.Elaborate
           </td>
           <td
             aria-sort={null}
@@ -1378,7 +1378,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            Anstrengung
+            components.QuestionnaireResults.TableListK.Effort
           </td>
           <td
             aria-sort={null}
@@ -1395,7 +1395,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Kritisches Prüfen
+            components.QuestionnaireResults.TableListK.Critical review
           </td>
           <td
             aria-sort={null}
@@ -1407,7 +1407,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            Zeit
+            components.QuestionnaireResults.TableListK.Time
           </td>
           <td
             aria-sort={null}
@@ -1424,7 +1424,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Wiederholen
+            components.QuestionnaireResults.TableListK.Repeat
           </td>
           <td
             aria-sort={null}
@@ -1454,7 +1454,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
               }
             }
           >
-            Metakognitive Strategien
+            components.QuestionnaireResults.TableListK.Metacognitive strategies
           </td>
           <td
             aria-sort={null}
@@ -1476,7 +1476,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
               }
             }
           >
-            Strategien des Managements externer Ressourcen
+            components.QuestionnaireResults.TableListK.External resource management strategies
           </td>
           <td
             aria-sort={null}
@@ -1498,7 +1498,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Ziele und Planen
+            components.QuestionnaireResults.TableListK.Goals & plans
           </td>
           <td
             aria-sort={null}
@@ -1510,36 +1510,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            Lernen mit Studienkollegen
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
-          >
-            1.00
-          </td>
-        </tr>
-        <tr
-          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
-          role={null}
-        >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
-          >
-            Kontrollieren
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
-          >
-            1.00
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
-          >
-            Literaturrecherche
+            components.QuestionnaireResults.TableListK.Learning with classmates
           </td>
           <td
             aria-sort={null}
@@ -1556,7 +1527,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
           >
-            Regulieren
+            components.QuestionnaireResults.TableListK.Control
           </td>
           <td
             aria-sort={null}
@@ -1568,7 +1539,36 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
             aria-sort={null}
             className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
           >
-            Lernumgebung
+            components.QuestionnaireResults.TableListK.Literature research
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            1.00
+          </td>
+        </tr>
+        <tr
+          className="MuiTableRow-root css-10i7qgx-MuiTableRow-root"
+          role={null}
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-jn1bxv-MuiTableCell-root"
+          >
+            components.QuestionnaireResults.TableListK.Regulate
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            1.00
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1edvckk-MuiTableCell-root"
+          >
+            components.QuestionnaireResults.TableListK.Learning environment
           </td>
           <td
             aria-sort={null}
