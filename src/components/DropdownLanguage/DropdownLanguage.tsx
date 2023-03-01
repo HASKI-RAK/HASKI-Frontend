@@ -7,7 +7,7 @@ import log from "loglevel";
 
 export const DropdownLanguage = () => {
 
-    log.setLevel("trace");
+    log.setLevel("error");
     const {i18n} = useTranslation();
     const startingLanguage = localStorage.getItem("i18nextLng") as string;
     function onClickLanguageChange(e: { target: { value: string }; }) {
@@ -17,20 +17,17 @@ export const DropdownLanguage = () => {
             log.trace("The language was changed to: " + e.target.value);
         }
         catch(e: unknown){
-            if(typeof e === "string"){
-                log.error("The language could not be changed. Error Message: "+e);
-            }
-            else if(e instanceof Error){
-                log.error("The language could not be changed. Error Message: "+e.message);
-            }
+            log.error("The language could not be changed. Error Message: "+e);
         }
     }
+
     
     return(
         <div>
             <Select className="LanguageDropdown"
                     autoWidth={true}
                     value={startingLanguage}
+                    inputProps={{ "data-testid": "LanguageDropdown" }}
                     onChange={onClickLanguageChange}
             >
                 <MenuItem value="de">Deutsch</MenuItem>

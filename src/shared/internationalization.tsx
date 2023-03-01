@@ -6,7 +6,7 @@ import log from "loglevel";
 import translationEnglish from './translation/translationEnglish.json';
 import translationGerman from './translation/translationGerman.json';
 
-log.setLevel("trace");
+log.setLevel("error");
 
 //define the available languages
 const resources = {
