@@ -138,5 +138,13 @@
 	"components.QuestionnaireResults.TableListK.Time": "Time",
 	"Dot": ".",
 	"Next": "Next",
-	"pages.glossary.title": "Glossary"
+	"pages.glossary.title": "Glossary",
+	"pages.login.redirect": "You will be redirected after a few seconds",
+	"components.login.title": "HASKI Login",
+	"components.login.subtitle": "Please login to continue",
+	"components.login.username": "Username",
+	"components.login.password": "Password",
+	"components.login.login": "Login",
+	"components.login.usernameError": "Please enter a valid username",
+	"components.login.passwordError": "Please enter a valid password"
 }

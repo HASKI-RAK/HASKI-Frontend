@@ -3,6 +3,13 @@ import renderer from "react-test-renderer";
 import "@testing-library/jest-dom";
 import { Dashboard } from "./Dashboard";
 
+
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ status: 200 }),
+  }),
+) as jest.Mock;
+
 describe("Test the demo component", () => {
   const mockCallback = jest.fn();
 

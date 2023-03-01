@@ -8,9 +8,9 @@ import { GraphListK } from "./Questionnaire/GraphListK";
 import { ResultDescListK, ResultDescriptionListK } from "./Questionnaire/ResultDescriptionListK";
 import { QuestionnaireResultsModal } from "./Questionnaire/QuestionnaireResultsModal";
 import { Text } from "./Text/Text";
+import LoginForm from "./LoginForm/LoginForm";
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
 
-
-export {Dashboard, DropdownLanguage, Text, TableILS, GraphILS, ResultDescriptionILS, TableListK, GraphListK, ResultDescriptionListK, ResultDescILS, ResultDescListK,QuestionnaireResultsModal};
+export {Dashboard, DropdownLanguage, Text, LoginForm, TableILS, GraphILS, ResultDescriptionILS, TableListK, GraphListK, ResultDescriptionListK, ResultDescILS, ResultDescListK,QuestionnaireResultsModal};

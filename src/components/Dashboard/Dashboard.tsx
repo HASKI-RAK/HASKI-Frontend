@@ -1,5 +1,5 @@
 import { DefaultButton as Button } from "@common/components";
-import { UserState, useUserStore } from "@services/UserStore";
+import { UserState, useUserStore } from "@services";
 export const Dashboard = ({
   userState = {
     user: useUserStore((state) => state.user),

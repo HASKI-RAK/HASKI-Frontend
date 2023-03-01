@@ -3,6 +3,7 @@
  */
 import App from "./App/App";
 import Home from "./Home/Home";
+import Login from "./Login/Login";
 import ThemePresentation from "./ThemePresentation/ThemePresentation";
-import QuestionnaireResults from "./QuestionnaireResults/QuestionnaireResults";
-export { App, ThemePresentation, Home, QuestionnaireResults };
+import Dashboard from "./Dashboard/Dashboard";
+export { App, ThemePresentation, Home, Login, Dashboard };

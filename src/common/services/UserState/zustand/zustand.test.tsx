@@ -4,7 +4,7 @@
 
 import { fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { useUserStore, UserState } from "@services/UserStore";
+import { useUserStore, UserState } from "@services";
 import { DefaultButton as Button } from "@common/components";
 
 interface DivElementProps {
@@ -38,17 +38,13 @@ describe("zustand test", () => {
     const divelement = render(<DivElement />);
     const button = divelement.getByTestId("increase");
     fireEvent.click(button);
-  });
-
-  test("click increaseUserId with no user in store", () => {
-    const divelement = render(<DivElement />);
-    const button = divelement.getByTestId("increase");
-    fireEvent.click(button);
+    expect(divelement.getByText("Hello with ID: 0")).toBeInTheDocument();
   });
 
   test("click set user", () => {
     const divelement = render(<DivElement />);
     const button = divelement.getByTestId("setuser");
     fireEvent.click(button);
+    expect(divelement.getByText("Hello with ID: 3")).toBeInTheDocument();
   });
 });
