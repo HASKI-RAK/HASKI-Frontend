@@ -75,6 +75,7 @@ exports[`Test the demo component renders correctly 1`] = `
       <input
         aria-hidden={true}
         className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        data-testid="LanguageDropdown"
         onAnimationStart={[Function]}
         onChange={[Function]}
         tabIndex={-1}

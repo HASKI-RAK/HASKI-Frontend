@@ -17,15 +17,16 @@ exports[`Test the change-language dropdown component renders correctly 1`] = `
       role="button"
       tabIndex={0}
     >
-      English
+      Deutsch
     </div>
     <input
       aria-hidden={true}
       className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+      data-testid="LanguageDropdown"
       onAnimationStart={[Function]}
       onChange={[Function]}
       tabIndex={-1}
-      value="en"
+      value="de"
     />
     <svg
       aria-hidden={true}
