@@ -4,34 +4,30 @@
 
 import { fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { useUserStore, UserState } from "@services";
+import { useUserStore } from "@services";
 import { DefaultButton as Button } from "@common/components";
 
-interface DivElementProps {
-  userState?: UserState;
-}
 
-const DivElement = ({
-  userState = {
-    user: useUserStore((state) => state.user),
-    increaseUserId: useUserStore((state) => state.increaseUserId),
-    setUser: useUserStore((state) => state.setUser),
-  },
-}: DivElementProps) => (
-  <>
-    <div>
-      Hello {userState.user?.firstName} {userState.user?.surName} with ID:{" "}
-      {userState.user?.id}
-    </div>
-    <Button data-testid="increase" onClick={userState.increaseUserId} />
-    <Button
-      data-testid="setuser"
-      onClick={() => {
-        userState.setUser?.({ id: 3 });
-      }}
-    />
-  </>
-);
+const DivElement = () => {
+  const user = useUserStore((state) => state.user)
+  const increaseUserId = useUserStore((state) => state.increaseUserId)
+  const setUser = useUserStore((state) => state.setUser)
+  return (
+    <>
+      <div>
+        Hello {user?.firstName} {user?.surName} with ID:{" "}
+        {user?.id}
+      </div>
+      <Button data-testid="increase" onClick={increaseUserId} />
+      <Button
+        data-testid="setuser"
+        onClick={() => {
+          setUser?.({ id: 3 });
+        }}
+      />
+    </>
+  )
+}
 
 describe("zustand test", () => {
   test("click increaseUserId", () => {

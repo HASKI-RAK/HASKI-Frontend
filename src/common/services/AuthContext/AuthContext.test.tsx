@@ -15,7 +15,6 @@ describe("Test Authcontext", () => {
         const context = useContext(AuthContext);
         const changeIsAuth = () => {
             context.setIsAuth(!context.isAuth);
-            console.log(context.isAuth);
         }
         return (
             <>
@@ -29,7 +28,7 @@ describe("Test Authcontext", () => {
         )
     }
     const providedContext = {
-        isAuth: false, setIsAuth: function (active: boolean) { this.isAuth = active }, logout: jest.fn(() => { })
+        isAuth: false, setIsAuth: function (active: boolean) { this.isAuth = active }, logout: jest.fn()
     } as AuthContextType;
     it("should render unauthorized", () => {
 

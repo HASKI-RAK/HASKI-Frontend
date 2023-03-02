@@ -24,7 +24,7 @@ export const useLoginForm = (params?: useLoginFormHookParams): LoginFormHookRetu
     const [password, setPassword] = useState(defaultPassword);
 
     // Logic
-    const onSubmit = () => { }, onValidate = () => [username.length !== 0, password.length !== 0] as const;
+    const onSubmit = () => { return }, onValidate = () => [username.length !== 0, password.length !== 0] as const;
 
     return {
         username,
