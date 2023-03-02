@@ -16,7 +16,8 @@ export const DropdownLanguage = () => {
         <div>
             <Select className="LanguageDropdown"
                 autoWidth={true}
-                defaultValue={startingLanguage}
+                value={startingLanguage}
+                inputProps={{ "data-testid": "LanguageDropdown" }}
                 onChange={onClickLanguageChange}
             >
                 <MenuItem value="de">Deutsch</MenuItem>
