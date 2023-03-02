@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# yarn run lint
+yarn test
+node src/shared/auto-order-json-translations.ts
