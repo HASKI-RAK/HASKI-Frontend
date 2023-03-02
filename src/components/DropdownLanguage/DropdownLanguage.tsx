@@ -1,24 +1,24 @@
-﻿import {useTranslation} from "react-i18next";
+﻿import { useTranslation } from "react-i18next";
 import { DefaultSelect as Select } from "@common/components";
-import {MenuItem} from "@mui/material";
-import "../../shared/internationalization";
+import { MenuItem } from "@mui/material";
 
 export const DropdownLanguage = () => {
-    
-    const {i18n} = useTranslation();
+
+    const { i18n } = useTranslation();
     const startingLanguage = localStorage.getItem("i18nextLng") as string;
-    
-    function onClickLanguageChange(e: { target: { value: string }; }){
+
+    const onClickLanguageChange = (e: { target: { value: string }; }) => {
         i18n.changeLanguage(e.target.value);
         localStorage.setItem("i18nextLng", e.target.value);
-    }
-    
-    return(
+    };
+
+    return (
         <div>
             <Select className="LanguageDropdown"
-                    autoWidth={true}
-                    value={startingLanguage}
-                    onChange={onClickLanguageChange}
+                autoWidth={true}
+                value={startingLanguage}
+                inputProps={{ "data-testid": "LanguageDropdown" }}
+                onChange={onClickLanguageChange}
             >
                 <MenuItem value="de">Deutsch</MenuItem>
                 <MenuItem value="en">English</MenuItem>
