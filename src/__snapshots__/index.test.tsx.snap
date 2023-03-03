@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test the demo component renders correctly 1`] = `
+exports[`Test the landing page renders correctly 1`] = `
 <div
   className="main"
 >

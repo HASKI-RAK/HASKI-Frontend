@@ -4,3 +4,4 @@ dist
 bin
 .vscode
 coverage
+yarn.lock
