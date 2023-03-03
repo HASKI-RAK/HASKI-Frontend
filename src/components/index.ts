@@ -1,4 +1,3 @@
-import { Dashboard } from "./Dashboard/Dashboard";
 import { DropdownLanguage } from "./DropdownLanguage/DropdownLanguage";
 import { TableILS } from "./Questionnaire/TableILS";
 import { GraphILS } from "./Questionnaire/GraphILS";
@@ -13,4 +12,4 @@ import LoginForm from "./LoginForm/LoginForm";
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
 
-export {Dashboard, DropdownLanguage, Text, LoginForm, TableILS, GraphILS, ResultDescriptionILS, TableListK, GraphListK, ResultDescriptionListK, ResultDescILS, ResultDescListK,QuestionnaireResultsModal};
+export {DropdownLanguage, Text, LoginForm, TableILS, GraphILS, ResultDescriptionILS, TableListK, GraphListK, ResultDescriptionListK, ResultDescILS, ResultDescListK,QuestionnaireResultsModal};

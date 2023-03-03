@@ -55,7 +55,7 @@ describe("Test AuthProvider", () => {
                 message: "Bad Request",
             }),
         ) as jest.Mock;
-        let _result!: any;
+        let _result!: { current: { isAuth: boolean; } };
         await act(async () => {
             const { result } = await renderHook(() => useAuthProvider());
             _result = result;
@@ -79,7 +79,7 @@ describe("Test AuthProvider", () => {
             }),
         ) as jest.Mock;
         global.fetch = fech_mock;
-        let _result!: any;
+        let _result!: { current: { isAuth: boolean; } };
         await act(async () => {
             const { result } = await renderHook(() => useAuthProvider());
             _result = result;

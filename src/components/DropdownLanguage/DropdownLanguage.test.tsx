@@ -28,7 +28,7 @@ describe("Test the change-language dropdown component", () => {
 
     test("dropdown can be set to german", () => {
 
-        const {getByTestId, getByRole} = render(<I18nextProvider i18n={i18next}> // actually give translation to your component
+        const {getByRole, getByTestId} = render(<I18nextProvider i18n={i18next}> // actually give translation to your component
             <DropdownLanguage/>
         </I18nextProvider>);
 
@@ -41,10 +41,10 @@ describe("Test the change-language dropdown component", () => {
 
     test("dropdown can be set to english", () => {
 
-        const {getByTestId} =
-            render(<I18nextProvider i18n={i18next}> // actually give translation to your component
-                    <DropdownLanguage/>
-                   </I18nextProvider>);
+
+        const {getByTestId} = render(<I18nextProvider i18n={i18next}> // actually give translation to your component
+            <DropdownLanguage/>
+        </I18nextProvider>);
 
         const selectElement = getByTestId("LanguageDropdown");
 
@@ -52,15 +52,13 @@ describe("Test the change-language dropdown component", () => {
 
         expect(localStorageMock.setItem).toHaveBeenCalledWith("i18nextLng", "en");
     });
-    
+
     test("renders correctly", () => {
         const tree = renderer
             .create(
-                <DropdownLanguage/>
+                <DropdownLanguage />
             )
             .toJSON();
         expect(tree).toMatchSnapshot();
     });
-
-
 });

@@ -1,8 +1,7 @@
 import { Login } from "@pages";
-import renderer from "react-test-renderer";
 import "@testing-library/jest-dom";
 import { act, fireEvent, render } from "@testing-library/react";
-import { BrowserRouter as Router, Route, Routes, MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import * as router from 'react-router'
 import { AuthContext } from "@services";
 
@@ -67,7 +66,7 @@ describe("Test the Login page", () => {
                 </AuthContext.Provider>
             </MemoryRouter>
         );
-        const [_, buttonLogin] = login.getAllByRole("button");
+        const buttonLogin = login.getAllByRole("button")[1];
         const username = login.getAllByRole("textbox")[0];
         const password = login.container.querySelector('#password') as HTMLElement;
 

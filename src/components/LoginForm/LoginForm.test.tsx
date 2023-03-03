@@ -56,7 +56,7 @@ describe("Test LoginForm", () => {
         const loginForm = render(
             <LoginForm />
         );
-        const [_, button] = loginForm.getAllByRole("button");
+        const button = loginForm.getAllByRole("button")[1];
         const username = loginForm.getAllByRole("textbox")[0];
         const password = loginForm.container.querySelector('#password') as HTMLElement;
         // No input yet so no submit
