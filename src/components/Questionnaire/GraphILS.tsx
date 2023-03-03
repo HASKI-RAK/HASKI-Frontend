@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next';
 
 // The Key "Dimension" is used in the Graph, therefore the name matters
 // The naming of the Key "possibleDimensions" is not important, as it is not used in the Graph, just for indexing
-export function SetData(): { possibleDimensions: string, [Dimension: string]: string }[] {
+export const SetData = (): { possibleDimensions: string, [Dimension: string]: string }[] => {
 
     const {t} = useTranslation();
     const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters();
@@ -28,7 +28,7 @@ export function SetData(): { possibleDimensions: string, [Dimension: string]: st
             [t("components.QuestionnaireResults.TableILS.Dimension")]: dimensionOneScore.toString(),
         },
     ];
-}
+};
 
 
 export const GraphILS = () => {

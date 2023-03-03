@@ -444,14 +444,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
                 x="27.46256615925492"
                 y="198.48821265607646"
               >
-                Score: 5.00
+                components.QuestionnaireResults.ResultDescriptionListK.Score: 5.00
               </text>
               <text
                 style="font-size: 13px; font-family: sans-serif; fill: #333333;"
                 x="27.46256615925492"
                 y="198.48821265607646"
               >
-                Score: 5.00
+                components.QuestionnaireResults.ResultDescriptionListK.Score: 5.00
               </text>
               <path
                 d="M148.4887480329106,199.38348516145373 L147.46256615925492,203.48821265607646 L27.46256615925492,203.48821265607646"
@@ -516,14 +516,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
                 x="310.83569380937786"
                 y="195.4379264442183"
               >
-                Score: 1.00
+                components.QuestionnaireResults.ResultDescriptionListK.Score: 1.00
               </text>
               <text
                 style="font-size: 13px; font-family: sans-serif; fill: #333333;"
                 x="310.83569380937786"
                 y="195.4379264442183"
               >
-                Score: 1.00
+                components.QuestionnaireResults.ResultDescriptionListK.Score: 1.00
               </text>
               <path
                 d="M279.35033521310817,178.39817542682954 L310.83569380937786,200.4379264442183 L560.8356938093779,200.4379264442183"
@@ -588,14 +588,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
                 x="28.053880296695468"
                 y="367.08906158604367"
               >
-                Score: 1.00
+                components.QuestionnaireResults.ResultDescriptionListK.Score: 1.00
               </text>
               <text
                 style="font-size: 13px; font-family: sans-serif; fill: #333333;"
                 x="28.053880296695468"
                 y="367.08906158604367"
               >
-                Score: 1.00
+                components.QuestionnaireResults.ResultDescriptionListK.Score: 1.00
               </text>
               <path
                 d="M180.8050962468209,294.5769020847894 L173.05388029669547,372.08906158604367 L28.053880296695468,372.08906158604367"
@@ -660,14 +660,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
                 x="293.2728343264598"
                 y="350.5876774428621"
               >
-                Score: 1.00
+                components.QuestionnaireResults.ResultDescriptionListK.Score: 1.00
               </text>
               <text
                 style="font-size: 13px; font-family: sans-serif; fill: #333333;"
                 x="293.2728343264598"
                 y="350.5876774428621"
               >
-                Score: 1.00
+                components.QuestionnaireResults.ResultDescriptionListK.Score: 1.00
               </text>
               <path
                 d="M285.76858681575135,288.0494498464859 L293.2728343264598,355.5876774428621 L543.2728343264598,355.5876774428621"
@@ -1151,14 +1151,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               x="27.46256615925492"
               y="198.48821265607646"
             >
-              Score: 5.00
+              components.QuestionnaireResults.ResultDescriptionListK.Score: 5.00
             </text>
             <text
               style="font-size: 13px; font-family: sans-serif; fill: #333333;"
               x="27.46256615925492"
               y="198.48821265607646"
             >
-              Score: 5.00
+              components.QuestionnaireResults.ResultDescriptionListK.Score: 5.00
             </text>
             <path
               d="M148.4887480329106,199.38348516145373 L147.46256615925492,203.48821265607646 L27.46256615925492,203.48821265607646"
@@ -1223,14 +1223,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               x="310.83569380937786"
               y="195.4379264442183"
             >
-              Score: 1.00
+              components.QuestionnaireResults.ResultDescriptionListK.Score: 1.00
             </text>
             <text
               style="font-size: 13px; font-family: sans-serif; fill: #333333;"
               x="310.83569380937786"
               y="195.4379264442183"
             >
-              Score: 1.00
+              components.QuestionnaireResults.ResultDescriptionListK.Score: 1.00
             </text>
             <path
               d="M279.35033521310817,178.39817542682954 L310.83569380937786,200.4379264442183 L560.8356938093779,200.4379264442183"
@@ -1295,14 +1295,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               x="28.053880296695468"
               y="367.08906158604367"
             >
-              Score: 1.00
+              components.QuestionnaireResults.ResultDescriptionListK.Score: 1.00
             </text>
             <text
               style="font-size: 13px; font-family: sans-serif; fill: #333333;"
               x="28.053880296695468"
               y="367.08906158604367"
             >
-              Score: 1.00
+              components.QuestionnaireResults.ResultDescriptionListK.Score: 1.00
             </text>
             <path
               d="M180.8050962468209,294.5769020847894 L173.05388029669547,372.08906158604367 L28.053880296695468,372.08906158604367"
@@ -1367,14 +1367,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               x="293.2728343264598"
               y="350.5876774428621"
             >
-              Score: 1.00
+              components.QuestionnaireResults.ResultDescriptionListK.Score: 1.00
             </text>
             <text
               style="font-size: 13px; font-family: sans-serif; fill: #333333;"
               x="293.2728343264598"
               y="350.5876774428621"
             >
-              Score: 1.00
+              components.QuestionnaireResults.ResultDescriptionListK.Score: 1.00
             </text>
             <path
               d="M285.76858681575135,288.0494498464859 L293.2728343264598,355.5876774428621 L543.2728343264598,355.5876774428621"

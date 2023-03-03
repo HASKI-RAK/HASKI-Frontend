@@ -72,10 +72,10 @@ describe("Test GraphListK with all Methods",
                 averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies
             ] = getListKParameters()[1];
 
-            expect(graphListK.getAllByText("Score: " + (Math.round((averageCognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2))[0]).toBeInTheDocument();
-            expect(graphListK.getAllByText("Score: " + (Math.round((averageInternalResourceManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2))[0]).toBeInTheDocument();
-            expect(graphListK.getAllByText("Score: " + (Math.round((averageMetacognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2))[0]).toBeInTheDocument();
-            expect(graphListK.getAllByText("Score: " + (Math.round((averageExternalResourcesManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2))[0]).toBeInTheDocument();
+            expect(graphListK.getAllByText(("components.QuestionnaireResults.ResultDescriptionListK.Score") + ": " + (Math.round((averageCognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2))[0]).toBeInTheDocument();
+            expect(graphListK.getAllByText(("components.QuestionnaireResults.ResultDescriptionListK.Score") + ": " + (Math.round((averageInternalResourceManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2))[0]).toBeInTheDocument();
+            expect(graphListK.getAllByText(("components.QuestionnaireResults.ResultDescriptionListK.Score") + ": " + (Math.round((averageMetacognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2))[0]).toBeInTheDocument();
+            expect(graphListK.getAllByText(("components.QuestionnaireResults.ResultDescriptionListK.Score") + ": " + (Math.round((averageExternalResourcesManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2))[0]).toBeInTheDocument();
 
 
             expect(graphListK).toMatchSnapshot();

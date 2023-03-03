@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import {getILSParameters, ILSDimension, ILSInterpretation} from "./TableILS";
 
 // function can be replaced for test-purposes
-export function ResultDescriptionILS (ILSdim = (n: number, s: number, b?: boolean) => ILSDimension(n, s, b)){
+export const ResultDescriptionILS = (ILSdim = (n: number, s: number, b?: boolean) => ILSDimension(n, s, b)) => {
 
 
     const {t} = useTranslation();
@@ -39,7 +39,7 @@ export function ResultDescriptionILS (ILSdim = (n: number, s: number, b?: boolea
             unbalancedDimensionsArray.push(
                 <div key={"Dimension: "+dimensionArray[index] + " Interpretation: " + interpretationArray[index]}>
                     <Typography variant="h6" gutterBottom>
-                        {dimensionArray[index]}
+                        {t("components.QuestionnaireResults.TableILS." + dimensionArray[index])}
                     </Typography>
                     <Typography variant="body1" gutterBottom>
                         {t("components.QuestionnaireResults.ResultDescriptionILS." + dimensionArray[index] + "." + interpretationArray[index])} <br/>
@@ -117,7 +117,7 @@ export function ResultDescriptionILS (ILSdim = (n: number, s: number, b?: boolea
             }
         </div>
     )
-}
+};
 
 export const ResultDescILS = () => {
 

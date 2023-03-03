@@ -4,11 +4,9 @@ import {useTranslation} from 'react-i18next';
 import {getListKParameters} from "./TableListK";
 
 // Center the Score beneath the Subscale name. That is done with Whitespaces before the score.
-function centerString(str: string, maxLen: number): string {
-    return str.padStart((str.length+maxLen*1.5)/2)
-}
+const centerString = (str: string, maxLen: number): string => str.padStart((str.length+maxLen*1.5)/2);
 
-export function SetData(): { nodes: { id: string, height: number, size: number, score: number, color: string }[], links: { source: string, target: string, distance: number }[] } {
+export const SetData = (): { nodes: { id: string, height: number, size: number, score: number, color: string }[], links: { source: string, target: string, distance: number }[] } => {
 
     const {t} = useTranslation();
     const [[
@@ -254,7 +252,7 @@ export function SetData(): { nodes: { id: string, height: number, size: number, 
         ]
     };
 
-}
+};
 
 export const GraphListK = () => {
     const {t} = useTranslation();
@@ -275,21 +273,13 @@ export const GraphListK = () => {
                 width={650}
                 data={graphListKData}
                 margin={{top: 0, right: 200, bottom: 80, left: 0}}
-                linkDistance={function(e) {
-                    return e.distance
-                }}
+                linkDistance={(e: { distance: number; }) => e.distance}
                 repulsivity={100}
-                activeNodeSize={function(n) {
-                    return (n.size*3)
-                }}
-                nodeSize={function(n) {
-                    return n.size * (n.score * 0.6 + 1)
-                }}
-                nodeColor={function(e) {
-                    return e.color
-                }}
+                activeNodeSize={(n: { size: number; }) => n.size*3}
+                nodeSize={(n: { size: number; score: number; }) => n.size * (n.score * 0.6 + 1)}
+                nodeColor={(e: { color: string; }) => e.color}
                 nodeBorderWidth={1.3}
-                nodeBorderColor={function(data) {
+                nodeBorderColor={(data:{data:{score:number}}) => {
                     if(data.data.score >= 3) {
                         return "black"
                     }
@@ -299,9 +289,7 @@ export const GraphListK = () => {
                     }
                 }}
                 linkColor={{from: 'source.color', modifiers: []}}
-                linkThickness={function(n) {
-                    return 2 + 2 * n.target.data.height
-                }}
+                linkThickness={(n: {target: {data: {height:number}}}) => 2 + 2 * n.target.data.height}
                 linkBlendMode="multiply"
                 motionConfig="wobbly"
                 animate={true}
@@ -311,7 +299,7 @@ export const GraphListK = () => {
                         match: {
                             id: cognitiveStrategies
                         },
-                        note: 'Score: ' + (Math.round((averageCognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
+                        note: t("components.QuestionnaireResults.ResultDescriptionListK.Score") + ": "  + (Math.round((averageCognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
                         noteX: -10,
                         noteY: 40,
                         offset: 13,
@@ -333,7 +321,7 @@ export const GraphListK = () => {
                         match: {
                             id: intResMngtStrategies
                         },
-                        note: 'Score: ' + (Math.round((averageInternalResourceManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
+                        note: t("components.QuestionnaireResults.ResultDescriptionListK.Score") + ": " + (Math.round((averageInternalResourceManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
                         noteWidth: 250,
                         noteX: 50,
                         noteY: 35,
@@ -357,7 +345,7 @@ export const GraphListK = () => {
                         match: {
                             id: metacognitiveStrategies
                         },
-                        note: 'Score: ' + (Math.round((averageMetacognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
+                        note: t("components.QuestionnaireResults.ResultDescriptionListK.Score") + ": " + (Math.round((averageMetacognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
                         noteWidth: 145,
                         noteX: -10,
                         noteY: 100,
@@ -381,7 +369,7 @@ export const GraphListK = () => {
                         match: {
                             id: extResMngtStrategies
                         },
-                        note: 'Score: ' + (Math.round((averageExternalResourcesManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
+                        note: t("components.QuestionnaireResults.ResultDescriptionListK.Score") + ": " + (Math.round((averageExternalResourcesManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
                         noteWidth: 250,
                         noteX: 10,
                         noteY: 90,

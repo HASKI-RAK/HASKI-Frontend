@@ -18,23 +18,23 @@ let dimensionFourScore = -5;
 
 
 //Setting ILS-Parameters for tests
-export function setILSParameters(dimOne?: number, dimTwo?: number, dimThree?: number, dimFour?: number){
+export const setILSParameters = (dimOne?: number, dimTwo?: number, dimThree?: number, dimFour?: number) => {
 
     dimensionOneScore = dimOne ?? dimensionOneScore;
     dimensionTwoScore = dimTwo ?? dimensionTwoScore;
     dimensionThreeScore = dimThree ?? dimensionThreeScore;
     dimensionFourScore = dimFour ?? dimensionFourScore;
-}
+};
 
-export function getILSParameters(){
+export const getILSParameters = () => {
 
     setILSParameters();
 
     return [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore];
-}
+};
 
 //Returns the Interpretation of the ILS-Test (balanced, moderate, strong + Dimension (if score is not balanced))
-export function ILSInterpretation(score: number, interpretationString: string, onlyEnglish?: boolean): string {
+export const ILSInterpretation = (score: number, interpretationString: string, onlyEnglish?: boolean): string => {
 
     const {t, i18n} = useTranslation();
 
@@ -75,10 +75,10 @@ export function ILSInterpretation(score: number, interpretationString: string, o
     if(inter.get(score) === t("components.QuestionnaireResults.TableILS.balanced"))
         return t("components.QuestionnaireResults.TableILS.balanced")
     return inter.get(score) + " " + interpretationString;
-}
+};
 
 //Depending on the score, return the corresponding dimension
-export function ILSDimension(dimensionNumber: number, score: number, onlyEnglish?:boolean): string{
+export const ILSDimension = (dimensionNumber: number, score: number, onlyEnglish?:boolean): string => {
 
     const {t,i18n} = useTranslation();
 
@@ -142,9 +142,9 @@ export function ILSDimension(dimensionNumber: number, score: number, onlyEnglish
         default:
             return "No dimension found";
     }
-}
+};
 
-export function TableILS() {
+export const TableILS = () => {
 
     const {t} = useTranslation();
     const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters();
@@ -199,7 +199,7 @@ export function TableILS() {
                     </TableRow>
                 </TableHead>
                 <TableBody key={"TableILSBody"}>
-                    {rows.filter(function(row) {
+                    {rows.filter((row) => {
                         return row.id !== 1;
                     }).map((row) => (
                         <StyledTableRow key={row.id}>
@@ -213,4 +213,4 @@ export function TableILS() {
             </Table>
         </TableContainer>
     );
-}
+};

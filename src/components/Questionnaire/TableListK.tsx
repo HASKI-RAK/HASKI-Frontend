@@ -37,16 +37,10 @@ let learnWithClassmates = 1;
 let literatureResearch = 1;
 let learningEnvironment = 1;
 
-export function getSubscaleScore(score: number[]): number {
-
-    return score.reduce((a, b) => a + b, 0) / score.length;
-}
+export const getSubscaleScore = (score: number[]): number => score.reduce((a, b) => a + b, 0) / score.length;
 
 //Setting ILSparameters for tests
-export function setListKParameters(org?: number, elab?: number, critRev?: number, rep?: number,
-                                   att?: number, eff?: number, tim?: number, goalsPl?: number, contr?: number,
-                                   reg?: number, learnWClass?: number, litRes?: number,
-                                   learnE?: number){
+export const setListKParameters = (org?: number, elab?: number, critRev?: number, rep?: number, att?: number, eff?: number, tim?: number, goalsPl?: number, contr?: number, reg?: number, learnWClass?: number, litRes?: number, learnE?: number) => {
 
     organize = org ?? organize;
     elaborate = elab ?? elaborate;
@@ -61,9 +55,9 @@ export function setListKParameters(org?: number, elab?: number, critRev?: number
     learnWithClassmates = learnWClass ?? learnWithClassmates;
     literatureResearch = litRes ?? literatureResearch;
     learningEnvironment = learnE ?? learningEnvironment;
-}
+};
 
-export function getListKParameters(): [[
+export const getListKParameters = (): [[
     organize: number, elaborate: number, criticalReview: number, repeat: number,
     attention: number, effort: number, time: number, goalsPlans: number, control: number,
     regulate: number, learnWithClassmates: number, literatureResearch: number,
@@ -71,7 +65,7 @@ export function getListKParameters(): [[
 ], [
     averageCognitiveStrategies: number, averageInternalResourceManagementStrategies: number,
     averageMetacognitiveStrategies: number, averageExternalResourcesManagementStrategies: number
-]] {
+]] => {
 
     setListKParameters();
 
@@ -88,9 +82,9 @@ export function getListKParameters(): [[
         averageCognitiveStrategies, averageInternalResourceManagementStrategies,
         averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies
     ]];
-}
+};
 
-export function TableListK() {
+export const TableListK = () => {
 
     const {t} = useTranslation();
 
@@ -255,4 +249,4 @@ export function TableListK() {
             </Table>
         </TableContainer>
     );
-}
+};

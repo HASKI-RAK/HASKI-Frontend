@@ -2,9 +2,7 @@ import Typography from '@mui/material/Typography';
 import {getListKParameters, getSubscaleScore} from "./TableListK";
 import {useTranslation} from "react-i18next";
 
-function getGeneralSubscalesBelow3Element(organize: number, elaborate: number, criticalReview: number, repeat: number, attention: number,
-                                          effort: number, time: number, goalsPlans: number, control: number, regulate: number,
-                                          learnWithClassmates: number, literatureResearch: number, learningEnvironment: number): JSX.Element[]{
+const getGeneralSubscalesBelow3Element = (organize: number, elaborate: number, criticalReview: number, repeat: number, attention: number, effort: number, time: number, goalsPlans: number, control: number, regulate: number, learnWithClassmates: number, literatureResearch: number, learningEnvironment: number): JSX.Element[] => {
 
     const {t} = useTranslation();
 
@@ -40,9 +38,9 @@ function getGeneralSubscalesBelow3Element(organize: number, elaborate: number, c
     );
 
     return cognitiveSubscaleBelow3Html;
-}
+};
 
-function getCognitiveStrategiesBelow3Element(organize: number, elaborate: number, criticalReview: number, repeat: number) {
+const getCognitiveStrategiesBelow3Element = (organize: number, elaborate: number, criticalReview: number, repeat: number) => {
 
     const {t} = useTranslation();
 
@@ -85,9 +83,9 @@ function getCognitiveStrategiesBelow3Element(organize: number, elaborate: number
     }
 
     return cognitiveStrategiesBelow3Html;
-}
+};
 
-function getMetacognitiveStrategiesBelow3Element(goalsPlans: number, control: number, regulate: number) {
+const getMetacognitiveStrategiesBelow3Element = (goalsPlans: number, control: number, regulate: number) => {
 
     const {t} = useTranslation();
 
@@ -126,10 +124,10 @@ function getMetacognitiveStrategiesBelow3Element(goalsPlans: number, control: nu
     }
 
     return metacognitiveStrategiesBelow3Html;
-}
+};
 
 //relevant subscales are: attention, time, learning with classmates, literature research and learning environment
-function getRelevantSubscalesBelow3Element(subScalesRelevantCombinations: (string| number)[][]): JSX.Element[] {
+const getRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: (string| number)[][]): JSX.Element[] => {
 
     const {t} = useTranslation();
     const subscalesBelow3Array = [];
@@ -159,9 +157,9 @@ function getRelevantSubscalesBelow3Element(subScalesRelevantCombinations: (strin
     }
 
     return subscalesBelow3MessageString;
-}
+};
 
-export function ResultDescriptionListK() {
+export const ResultDescriptionListK = () => {
 
     const [organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates,
         literatureResearch, learningEnvironment] = getListKParameters()[0];
@@ -181,7 +179,7 @@ export function ResultDescriptionListK() {
             {relevantSubscalesBelow3}
         </div>
     )
-}
+};
 
 export const ResultDescListK = () => {
 
