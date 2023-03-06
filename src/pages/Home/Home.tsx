@@ -1,11 +1,10 @@
-import {Dashboard,DropdownLanguage,Text} from "@components";
+import { DropdownLanguage, Text } from "@components";
 
 export const Home = () => {
     return (
         <div className="main">
-            <Dashboard/>
-            <DropdownLanguage/>
-            <Text/>
+            <DropdownLanguage />
+            <Text />
         </div>
     )
 };

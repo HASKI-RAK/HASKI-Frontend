@@ -1,6 +1,6 @@
-import { Dashboard } from "./Dashboard/Dashboard";
 import { DropdownLanguage } from "./DropdownLanguage/DropdownLanguage";
 import { Text } from "./Text/Text";
+import LoginForm from "./LoginForm/LoginForm";
 import { GlossaryList } from "./GlossaryList/GlossaryList";
 import { GlossaryEntry, GlossaryEntryProps } from "./GlossaryEntry/GlossaryEntry";
 import { Filter } from "./Filter/Filter"
@@ -12,5 +12,5 @@ import { ToggleButtonList } from "./ToggleButtonList/ToggleButtonList"
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
-export { Dashboard, DropdownLanguage, Text, GlossaryList, GlossaryEntry, Filter, Searchbar, GlossaryIndex, GlossaryForm, ToggleButtonList }
+export {  DropdownLanguage, Text, LoginForm , GlossaryList, GlossaryEntry, Filter, Searchbar, GlossaryIndex, GlossaryForm, ToggleButtonList }
 export type { GlossaryEntryProps }

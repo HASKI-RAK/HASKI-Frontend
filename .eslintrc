@@ -2,7 +2,9 @@
     "root": true,
     "parser": "@typescript-eslint/parser",
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prefer-arrow-functions",
+        "react-hooks"
     ],
     "extends": [
         "eslint:recommended",
@@ -10,6 +12,17 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
-        "no-console": 1 // Warn on console log
+        "no-console": 1, // Warn on console log
+        "prefer-arrow-callback": 1, // Warn on function() { ... }
+        "prefer-arrow-functions/prefer-arrow-functions": [
+            "warn",
+            {
+                "classPropertiesAllowed": false,
+                "disallowPrototype": false,
+                "returnStyle": "unchanged",
+                "singleReturnOnly": false
+            }
+        ],
+        "react-hooks/rules-of-hooks": "warn" // Checks rules of Hooks
     }
 }

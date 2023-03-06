@@ -15,12 +15,15 @@ const resources = {
     },
 };
 
-let lng="";
+let lng = "";
 
-if(localStorage.getItem("i18nextLng") === null){
+if (localStorage.getItem("i18nextLng") === null) {
     localStorage.setItem("i18nextLng", "de");
 }
-else{
+// Have to ignore since the dependency is loaded before the test, so it will always be null
+/* istanbul ignore next */
+else {
+    /* istanbul ignore next */
     lng = localStorage.getItem("i18nextLng") as string;
 }
 

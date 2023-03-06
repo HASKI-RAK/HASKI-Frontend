@@ -30,7 +30,7 @@
       "@pages": [
         "src/pages"
       ],
-      "@services/*": [
+      "@services": [
         "src/common/services"
       ],
       "@utils": [
@@ -47,6 +47,9 @@
       ],
       "@common/components": [
         "src/common/components"
+      ],
+      "@shared": [
+        "src/shared"
       ]
     },
     "outDir": "./bin"
