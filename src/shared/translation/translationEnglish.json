@@ -33,9 +33,6 @@
 			"tags": ["Popular"]
 		},
 		{
-			"fundamental": true
-		},
-		{
 			"term": "Externally controlled learning",
 			"definition": "In externally controlled learning, the learning processes are controlled by external influences. These can be other persons (e.g. the instructions of teachers), instructional media (computer programs) or the design of a teaching environment.",
 			"sources": "",
@@ -61,7 +58,8 @@
 		"TestEnglish3",
 		"TestEnglish4"
 	],
-	"pages.glossary.popular": "Popular",
     "pages.glossary.filter": "Filter by tags",
-	"pages.glossary.fundamentals": "Fundamentals"
+	"pages.glossary.fundamentals": "Fundamentals",
+	"pages.glossary.collapseAll": "Collapse All",
+	"pages.glossary.expandAll": "Expand All"
 }

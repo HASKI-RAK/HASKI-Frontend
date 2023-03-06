@@ -1,10 +1,11 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next"
-import { DefaultTypography as Typography, DefaultTextField as TextField } from "@common/components"
-
-
-import SearchIcon from '@mui/icons-material/Search' // 
-import { InputAdornment } from '@mui/material' // 
+import SearchIcon from '@mui/icons-material/Search'
+import { 
+    DefaultTypography as Typography,
+    DefaultTextField as TextField,
+    DefaultInputAdornment as InputAdornment
+} from "@common/components"
 
 export const Searchbar = (props: SearchbarProps) => {
     const { t } = useTranslation();
@@ -35,8 +36,8 @@ export const Searchbar = (props: SearchbarProps) => {
                 />
             </Typography>
         </>
-    );
-};
+    )
+}
 
 interface SearchbarProps {
     setSearchQuery?: (query: string) => void

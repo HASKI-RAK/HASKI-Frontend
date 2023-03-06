@@ -5,9 +5,9 @@ import { ToggleButtonList } from "@components"
 export const GlossaryIndex = (props: GlossaryIndexProps) => {
     const handleChange = useCallback((
         event: React.MouseEvent<HTMLElement>,
-        newSelectedIndexElement: string | null,
+        newSelectedIndexElement: string,
     ) => {
-        props.setSelectedIndexElement && props.setSelectedIndexElement(newSelectedIndexElement!)
+        props.setSelectedIndexElement && props.setSelectedIndexElement(newSelectedIndexElement)
     }, [])
 
     return (

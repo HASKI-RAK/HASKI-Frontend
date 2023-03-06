@@ -7,8 +7,8 @@ const ToggleButtonListComponent = ({toggleButtonList, selectedElement, ...props}
     return (
         <Box>
             {
-                toggleButtonList && toggleButtonList.map((toggleButtonElement: string) => (
-                    <ToggleButton {...props} value={toggleButtonElement} selected={toggleButtonElement === selectedElement}>
+                toggleButtonList?.map((toggleButtonElement: string) => (
+                    <ToggleButton {...props} key={toggleButtonElement} value={toggleButtonElement} selected={toggleButtonElement === selectedElement}>
                         {
                             toggleButtonElement
                         }

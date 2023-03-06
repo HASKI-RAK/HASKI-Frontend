@@ -1,19 +1,18 @@
 import { useTranslation } from "react-i18next"
-import { DefaultTypography as Typography, DefaultBox as Box, DefaultGrid as Grid } from "@common/components"
+import { DefaultTypography as Typography, DefaultBox as Box, DefaultGrid as Grid, DefaultButton as Button } from "@common/components"
 import { GlossaryList, Filter, Searchbar, GlossaryIndex, GlossaryEntryProps } from "@components"
 import { useGlossaryForm as _useGlossaryForm, useGlossaryFormHookParams, GlossaryFormHookReturn } from "./GlossaryForm.hooks"
-
-import AutoStories from '@mui/icons-material/AutoStories' // Hier
+import AutoStories from '@mui/icons-material/AutoStories'
 
 export const GlossaryForm = ({ useGlossaryForm = _useGlossaryForm, ...props }: GlossaryFormProps) => {
     // Translation
     const  { t } = useTranslation();
     const tags = t<string>('pages.glossary.tags', { returnObjects: true}) as string[]
-    const indexElements = [t('pages.glossary.popular'), t('pages.glossary.fundamentals')].concat(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"])
+    const indexElements = [t('pages.glossary.fundamentals')].concat(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"])
     const glossaryEntries : GlossaryEntryProps[] = t<string>('pages.glossary.elements', { returnObjects: true}) as GlossaryEntryProps[]
 
     // Application logic state
-    const { selectedTagsState, selectedIndexElementState, searchQueryState, filterByTags, filterByIndexElement, searchByQuery } = useGlossaryForm();
+    const { glossaryState, filterByTags, filterByIndexElement, searchByQuery, collapseAll, expandAll } = useGlossaryForm();
 
     return (
         <>
@@ -26,27 +25,46 @@ export const GlossaryForm = ({ useGlossaryForm = _useGlossaryForm, ...props }: G
                                 t('pages.glossary.title')
                             }
                         </Typography>
-                    </Box>
+                    </Box> 
                 </Grid>
                 <Grid item xs={8} sm={6}>
-                    <Searchbar setSearchQuery={searchQueryState.setSearchQuery}/>
+                    <Searchbar setSearchQuery={glossaryState.setSearchQuery}/>
                 </Grid>
                 <Grid item xs={4} sm={6}>
-                    <Filter tags={tags} selectedTags={selectedTagsState.selectedTags} setSelectedTags={selectedTagsState.setSelectedTags}/>
+                    <Filter tags={tags} selectedTags={glossaryState.selectedTags} setSelectedTags={glossaryState.setSelectedTags}/>
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                    <GlossaryIndex 
-                        orientation="horizontal" 
-                        indexElements={indexElements} 
-                        selectedIndexElement={selectedIndexElementState.selectedIndexElement} 
-                        setSelectedIndexElement={selectedIndexElementState.setSelectedIndexElement}
-                    />
+                    <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 1}}>
+                        <GlossaryIndex 
+                            orientation="horizontal" 
+                            indexElements={indexElements} 
+                            selectedIndexElement={glossaryState.selectedIndexElement} 
+                            setSelectedIndexElement={glossaryState.setSelectedIndexElement}
+                        />
+                        <Button variant="outlined" onClick={collapseAll}>
+                            {
+                                t('pages.glossary.collapseAll')
+                            }
+                        </Button>
+                        <Button variant="outlined" onClick={() => expandAll(glossaryEntries)}>
+                            {
+                                t('pages.glossary.expandAll')
+                            }
+                        </Button>
+                    </Box>
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                    <GlossaryList glossaryEntries={filterByTags(selectedTagsState.selectedTags!,    
-                        filterByIndexElement(selectedIndexElementState.selectedIndexElement!, 
-                        searchByQuery(searchQueryState.searchQuery!, glossaryEntries)))} 
-                    />
+                    {
+                        (
+                            <GlossaryList 
+                                expandedList={glossaryState.expandedList} 
+                                setExpandedList={glossaryState.setExpandedList}
+                                glossaryEntries={searchByQuery(glossaryState.searchQuery!,
+                                    filterByTags(glossaryState.selectedTags!, 
+                                        filterByIndexElement(glossaryState.selectedIndexElement!, glossaryEntries)))}
+                            />
+                        )
+                    }
                 </Grid>
             </Grid>
         </>

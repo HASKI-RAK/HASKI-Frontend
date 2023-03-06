@@ -31,7 +31,6 @@
             "term": "Adaptive Inhaltspräsentation",
             "tags": ["Beliebt"]
         },
-        {},
         {
             "term": "Fremdgesteuertes Lernen",
             "definition": "Beim fremdgesteuerten Lernen werden die Lernprozesse durch Einflüsse von außen gesteuert. Dies können anderen Personen sein (z.B. die Anweisungen von Lehrern), Instruktionsmedien (Computerprogramme) oder die Gestaltung einer Lehrumgebung. (https://www.hrm-akademie.de/stichworte/selbstgesteuertes-lernen.html#:~:text=Beim%20fremdgesteuerten%20Lernen%20hingegen%20werden,oder%20die%20Gestaltung%20einer%20Lehrumgebung.)",
@@ -57,7 +56,8 @@
 		"TestDeutsch3",
 		"TestDeutsch4"
 	],
-    "pages.glossary.popular": "Beliebt",
     "pages.glossary.filter": "Nach Tags filtern",
-    "pages.glossary.fundamentals": "Grundlagen"
+    "pages.glossary.fundamentals": "Grundlagen",
+	"pages.glossary.collapseAll": "Alle schließen",
+	"pages.glossary.expandAll": "Alle öffnen"
 }

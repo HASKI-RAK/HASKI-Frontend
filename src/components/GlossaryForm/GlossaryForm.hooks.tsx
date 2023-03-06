@@ -1,51 +1,56 @@
-import { useEffect } from "react"
+import { useEffect, useCallback } from "react"
 import { useTranslation } from "react-i18next"
-import { 
-    SelectedTagsState, 
-    useSelectedTagsStore, 
-    SelectedIndexElementState, 
-    useSelectedIndexElementStore,
-    SearchQueryState,
-    useSearchQueryStore
-} from "@services/*"
+import { GlossaryState, useGlossaryStore } from "@services/*"
 import { GlossaryEntryProps } from "@components"
 
 export type useGlossaryFormHookParams = {
-    defaultSelectedTags?: string[]
+    defaultExpandedList?: string[]
+    defaultSearchQuery?: string
     defaultSelectedIndexElement?: string
-    defaultSearchQuery? :string
+    defaultSelectedTags?: string[]
 }
 
 export type GlossaryFormHookReturn = {
-    readonly selectedTagsState: SelectedTagsState
-    readonly selectedIndexElementState: SelectedIndexElementState
-    readonly searchQueryState: SearchQueryState
+    readonly glossaryState: GlossaryState
     readonly filterByTags: (selectedTags: string[], inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
     readonly filterByIndexElement: (selectedIndexElement: string, inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
     readonly searchByQuery: (searchQuery: string, inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
+    readonly collapseAll: () => void
+    readonly expandAll: (inputData: GlossaryEntryProps[]) => void
 }
 
 export const useGlossaryForm = (params?: useGlossaryFormHookParams): GlossaryFormHookReturn => {
     const  { t } = useTranslation();
     
     // Default values
-    const { defaultSelectedTags = [] } = params || {}
-    const { defaultSelectedIndexElement = '' } = params || {}
-    const { defaultSearchQuery = '' } = params || {}
+    const {
+        defaultExpandedList = [],
+        defaultSearchQuery = '',
+        defaultSelectedIndexElement = '',
+        defaultSelectedTags = []
+    } = params || {}
     
     // State data
-    const {selectedTags, setSelectedTags} = useSelectedTagsStore()
-    const {selectedIndexElement, setSelectedIndexElement} = useSelectedIndexElementStore()
-    const {searchQuery, setSearchQuery} = useSearchQueryStore()
+    const {
+        expandedList,
+        searchQuery,
+        selectedIndexElement,
+        selectedTags,
+        setExpandedList,
+        setSearchQuery,
+        setSelectedIndexElement,
+        setSelectedTags
+    } = useGlossaryStore()
 
     useEffect(() => {
-        setSelectedTags!(defaultSelectedTags)
-        setSelectedIndexElement!(defaultSelectedIndexElement)
-        setSearchQuery!(defaultSearchQuery)
+        setExpandedList && setExpandedList(defaultExpandedList)
+        setSearchQuery && setSearchQuery(defaultSearchQuery)
+        setSelectedIndexElement && setSelectedIndexElement(defaultSelectedIndexElement)
+        setSelectedTags && setSelectedTags(defaultSelectedTags)
       }, []);
 
     // Logic
-    const onFilterByTags = (selectedTags: string[], glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[]  => {
+    const onFilterByTags = useCallback((selectedTags: string[], glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[]  => {
         const filteredGlossaryEntries: GlossaryEntryProps[] = []
         
         if(selectedTags.length === 0) {
@@ -53,23 +58,18 @@ export const useGlossaryForm = (params?: useGlossaryFormHookParams): GlossaryFor
         }
         
         glossaryEntries.forEach((glossaryEntry) => {
-
             if(selectedTags.every(selectedTag => glossaryEntry.tags && glossaryEntry.tags.includes(selectedTag))) {
                 filteredGlossaryEntries.push(glossaryEntry)
             }
         })
         
         return filteredGlossaryEntries
-    }
+    }, [])
     
-    const onFilterByIndexElement = (selectedIndexElement: string, glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[]  => {
+    const onFilterByIndexElement = useCallback((selectedIndexElement: string, glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[]  => {
         const filteredGlossaryEntries: GlossaryEntryProps[] = []
 
-        if(selectedIndexElement === null || selectedIndexElement.length === 0) {
-            return glossaryEntries
-        }
-
-        if(selectedIndexElement === t('pages.glossary.popular')) {
+        if(selectedIndexElement === null || selectedIndexElement === '') {
             return glossaryEntries
         }
 
@@ -79,6 +79,7 @@ export const useGlossaryForm = (params?: useGlossaryFormHookParams): GlossaryFor
                     filteredGlossaryEntries.push(glossaryEntry)
                 }
             })
+
             return filteredGlossaryEntries
         }
 
@@ -89,43 +90,57 @@ export const useGlossaryForm = (params?: useGlossaryFormHookParams): GlossaryFor
         })
 
         return filteredGlossaryEntries
-    }
+    }, [])
 
-    const onSearchByQuery = (searchQuery: string, glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[]  => {
+    const onSearchByQuery = useCallback((searchQuery: string, glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[]  => {
         const searchedGlossaryEntries: GlossaryEntryProps[] = []
 
-        if(searchQuery === '') {
+        if(searchQuery === undefined || searchQuery === '') {
             return glossaryEntries
         }
         
         glossaryEntries.forEach((glossaryEntry) => {
-            if((glossaryEntry.term && glossaryEntry.term.toLowerCase().includes(searchQuery.toLowerCase()))
-            || (glossaryEntry.definition && glossaryEntry.definition.toLowerCase().includes(searchQuery.toLowerCase()))
-            || (glossaryEntry.sources && glossaryEntry.sources.toLowerCase().includes(searchQuery.toLowerCase()))
-            || (glossaryEntry.tags && glossaryEntry.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())))) {
+            if((glossaryEntry.term?.toLowerCase().includes(searchQuery.toLowerCase()))
+            || (glossaryEntry.definition?.toLowerCase().includes(searchQuery.toLowerCase()))
+            || (glossaryEntry.sources?.toLowerCase().includes(searchQuery.toLowerCase()))
+            || (glossaryEntry.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())))) {
                 
                 searchedGlossaryEntries.push(glossaryEntry)
             }
         })
 
         return searchedGlossaryEntries
-    }
+    }, [])
+
+    const onCollapseAll = useCallback(() => {
+        setExpandedList && setExpandedList([])
+    }, [])
+
+    const onExpandAll = useCallback((glossaryEntries: GlossaryEntryProps[]) => {
+        const tempExpandedList: string[] = []
+        
+        glossaryEntries.forEach(glossaryEntry => {
+            glossaryEntry.term && tempExpandedList.push(glossaryEntry.term)
+        })
+
+        setExpandedList && setExpandedList(tempExpandedList)
+    }, [])
 
     return {
-        selectedTagsState: {
-            selectedTags: selectedTags,
-            setSelectedTags: setSelectedTags
-        },
-        selectedIndexElementState: {
-            selectedIndexElement: selectedIndexElement,
-            setSelectedIndexElement: setSelectedIndexElement
-        },
-        searchQueryState: {
+        glossaryState: {
+            expandedList: expandedList,
             searchQuery: searchQuery,
-            setSearchQuery: setSearchQuery
+            selectedIndexElement: selectedIndexElement,
+            selectedTags: selectedTags,
+            setExpandedList: setExpandedList,
+            setSearchQuery: setSearchQuery,
+            setSelectedIndexElement: setSelectedIndexElement,
+            setSelectedTags: setSelectedTags
         },
         filterByTags: onFilterByTags,
         filterByIndexElement: onFilterByIndexElement,
-        searchByQuery: onSearchByQuery
+        searchByQuery: onSearchByQuery ,
+        collapseAll: onCollapseAll,
+        expandAll: onExpandAll
     } as const
 }

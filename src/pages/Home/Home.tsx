@@ -1,7 +1,5 @@
 import {Dashboard,DropdownLanguage,Text} from "@components";
 
-
-
 export const Home = () => {
     return (
         <div className="main">

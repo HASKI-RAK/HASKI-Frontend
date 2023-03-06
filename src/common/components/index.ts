@@ -21,7 +21,7 @@ import { DefaultOutlinedInput } from "./DefaultOutlinedInput/DefaultOutlinedInpu
 import { DefaultToggleButton } from "./DefaultToggleButton/DefaultToggleButton"
 import { DefaultToggleButtonGroup } from "./DefaultToggleButtonGroup/DefaultToggleButtonGroup"
 import { DefaultSkeleton } from "./DefaultSkeleton/DefaultSkeleton"
-import { DefaultToggleButtonProps } from "./DefaultToggleButtonProps/DefaultToggleButtonProps"
+import { DefaultInputAdornment } from "./DefaultInputAdornment/DefaultInputAdornment"
 
 export {
     DefaultButton,
@@ -42,9 +42,9 @@ export {
     DefaultOutlinedInput,
     DefaultToggleButton,
     DefaultToggleButtonGroup,
-    DefaultSkeleton
+    DefaultSkeleton,
+    DefaultInputAdornment
 }
 export type {
     DefaultSelectChangeEvent,
-    DefaultToggleButtonProps
 }

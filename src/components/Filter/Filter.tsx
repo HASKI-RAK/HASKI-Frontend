@@ -33,7 +33,7 @@ export const Filter = (props: FilterProps) => {
             target: { value },
         } = event
 
-        props.setSelectedTags && props.setSelectedTags((typeof value === 'string') ? value.split(',') : value!)
+        value && props.setSelectedTags && props.setSelectedTags((typeof value === 'string') ? value.split(',') : value)
     }, [])
 
     const renderValue = useCallback((selected: string[]) => (
@@ -65,9 +65,9 @@ export const Filter = (props: FilterProps) => {
                     MenuProps={MenuProps}
                 >
                     {
-                        props.tags && props.tags.map((tag) => (
+                        props.tags?.map((tag) => (
                             <MenuItem key={tag} value={tag}>
-                                <Checkbox checked={props.selectedTags && props.selectedTags.indexOf(tag) > -1}/>
+                                <Checkbox checked={props.selectedTags && (props.selectedTags.indexOf(tag) > -1)}/>
                                 <ListItemText primary={tag} />
                             </MenuItem>
                         ))
