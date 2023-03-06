@@ -3,8 +3,10 @@ import Typography from '@mui/material/Typography';
 import {getILSParameters, ILSDimension, ILSInterpretation} from "./TableILS";
 
 // function can be replaced for test-purposes
-export const ResultDescriptionILS = (ILSdim = (n: number, s: number, b?: boolean) => ILSDimension(n, s, b)) => {
-
+type ResultDescriptionILSProps = {
+    ILSdim?: (n: number, s: number, b?: boolean) => string,
+}
+export const ResultDescriptionILS = ({ILSdim=ILSDimension}: ResultDescriptionILSProps) => {
 
     const {t} = useTranslation();
 
@@ -118,7 +120,7 @@ export const ResultDescriptionILS = (ILSdim = (n: number, s: number, b?: boolean
         </div>
     )
 };
-
+/*
 export const ResultDescILS = () => {
 
     const resultDescILSDiv = ResultDescriptionILS();
@@ -127,4 +129,4 @@ export const ResultDescILS = () => {
             {resultDescILSDiv}
         </div>
     );
-}
+}*/

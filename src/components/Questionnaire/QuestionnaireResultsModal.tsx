@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState} from 'react';
 import Box from '@mui/material/Box';
 import {DefaultButton as Button} from "@common/components";
 import Stepper from '@mui/material/Stepper';
@@ -13,8 +13,8 @@ import {useTranslation} from "react-i18next";
 //Can not shorten import, tests fail to recognize i18n.use...
 import {GraphListK} from "./GraphListK";
 import {TableListK} from "./TableListK";
-import {ResultDescILS} from "./ResultDescriptionILS";
-import {ResultDescListK} from "./ResultDescriptionListK";
+import {ResultDescriptionILS} from "./ResultDescriptionILS";
+import {ResultDescriptionListK} from "./ResultDescriptionListK";
 import {GraphILS} from "./GraphILS";
 import {TableILS} from './TableILS';
 
@@ -42,8 +42,8 @@ export const QuestionnaireResultsModal = () => {
     const {t} = useTranslation();
 
     const steps = [t("components.QuestionnaireResults.ResultDescriptionILS.ILSResults"), t("components.QuestionnaireResults.ResultDescriptionILS.ListKResults")];
-    const [open, setOpen] = React.useState(false);
-    const [activeStep, setActiveStep] = React.useState(0);
+    const [open, setOpen] = useState(false);
+    const [activeStep, setActiveStep] = useState(0);
 
     const handleBack = () => {
         setActiveStep(activeStep - 1);
@@ -92,7 +92,7 @@ export const QuestionnaireResultsModal = () => {
                             alignItems="stretch"
                         >
                             <div>
-                                <React.Fragment>
+                                <>
                                     {activeStep === 0 ? (
                                         <div data-testid={"ActiveStepILS"}>
                                             <Stack
@@ -111,7 +111,7 @@ export const QuestionnaireResultsModal = () => {
                                                     </Stack>
                                                 </div>
                                                 <div>
-                                                    <ResultDescILS/>
+                                                    <ResultDescriptionILS/>
                                                 </div>
                                             </Stack>
                                         </div>) : (
@@ -131,11 +131,11 @@ export const QuestionnaireResultsModal = () => {
                                                     </Stack>
                                                 </div>
                                                 <div>
-                                                    <ResultDescListK/>
+                                                    <ResultDescriptionListK/>
                                                 </div>
                                             </Stack>
                                         </div>)}
-                                </React.Fragment>
+                                </>
                                 <Stack
                                     direction="row"
                                     justifyContent="space-between"

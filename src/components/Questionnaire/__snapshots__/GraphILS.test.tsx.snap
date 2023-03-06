@@ -570,7 +570,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                 <text
                   dominant-baseline="central"
                   fill-opacity="0"
-                  style="font-family: sans-serif; font-size: 11px; fill: white; pointer-events: none;"
+                  style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                   text-anchor="middle"
                   x="65"
                   y="20.5"
@@ -594,7 +594,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                 <text
                   dominant-baseline="central"
                   fill-opacity="0"
-                  style="font-family: sans-serif; font-size: 11px; fill: white; pointer-events: none;"
+                  style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                   text-anchor="middle"
                   x="39"
                   y="20.5"
@@ -618,7 +618,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                 <text
                   dominant-baseline="central"
                   fill-opacity="0"
-                  style="font-family: sans-serif; font-size: 11px; fill: white; pointer-events: none;"
+                  style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                   text-anchor="middle"
                   x="90.5"
                   y="20.5"
@@ -642,7 +642,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                 <text
                   dominant-baseline="central"
                   fill-opacity="0"
-                  style="font-family: sans-serif; font-size: 11px; fill: white; pointer-events: none;"
+                  style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                   text-anchor="middle"
                   x="142.5"
                   y="20.5"
@@ -1222,7 +1222,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
               <text
                 dominant-baseline="central"
                 fill-opacity="0"
-                style="font-family: sans-serif; font-size: 11px; fill: white; pointer-events: none;"
+                style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                 text-anchor="middle"
                 x="65"
                 y="20.5"
@@ -1246,7 +1246,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
               <text
                 dominant-baseline="central"
                 fill-opacity="0"
-                style="font-family: sans-serif; font-size: 11px; fill: white; pointer-events: none;"
+                style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                 text-anchor="middle"
                 x="39"
                 y="20.5"
@@ -1270,7 +1270,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
               <text
                 dominant-baseline="central"
                 fill-opacity="0"
-                style="font-family: sans-serif; font-size: 11px; fill: white; pointer-events: none;"
+                style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                 text-anchor="middle"
                 x="90.5"
                 y="20.5"
@@ -1294,7 +1294,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
               <text
                 dominant-baseline="central"
                 fill-opacity="0"
-                style="font-family: sans-serif; font-size: 11px; fill: white; pointer-events: none;"
+                style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                 text-anchor="middle"
                 x="142.5"
                 y="20.5"

@@ -1,4 +1,3 @@
-import React from 'react';
 import {Network} from '@nivo/network';
 import {useTranslation} from 'react-i18next';
 import {getListKParameters} from "./TableListK";

@@ -7,30 +7,24 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useTranslation} from 'react-i18next';
 import {StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow} from './QuestionnaireTableStyle';
+import {ILS} from "@core/*"
 
-
-
-//These Values are later given from the Backend
-let dimensionOneScore = -11;
-let dimensionTwoScore = 7;
-let dimensionThreeScore = 3;
-let dimensionFourScore = -5;
-
+const ils = new ILS();
 
 //Setting ILS-Parameters for tests
 export const setILSParameters = (dimOne?: number, dimTwo?: number, dimThree?: number, dimFour?: number) => {
 
-    dimensionOneScore = dimOne ?? dimensionOneScore;
-    dimensionTwoScore = dimTwo ?? dimensionTwoScore;
-    dimensionThreeScore = dimThree ?? dimensionThreeScore;
-    dimensionFourScore = dimFour ?? dimensionFourScore;
+    ils.dimensionOneScore = dimOne ?? ils.dimensionOneScore;
+    ils.dimensionTwoScore = dimTwo ?? ils.dimensionTwoScore;
+    ils.dimensionThreeScore = dimThree ?? ils.dimensionThreeScore;
+    ils.dimensionFourScore = dimFour ?? ils.dimensionFourScore;
 };
 
 export const getILSParameters = () => {
 
     setILSParameters();
 
-    return [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore];
+    return [ils.dimensionOneScore, ils.dimensionTwoScore, ils.dimensionThreeScore, ils.dimensionFourScore];
 };
 
 //Returns the Interpretation of the ILS-Test (balanced, moderate, strong + Dimension (if score is not balanced))
@@ -189,7 +183,7 @@ export const TableILS = () => {
 
     return (
         <TableContainer component={Paper} style={{minWidth: 300}} key={"TableILSContainer"}>
-            <Table style={{minWidth: 300}} aria-label="customized table" key={"TableILS"}>
+            <Table style={{minWidth: 300}} key={"TableILS"}>
                 <TableHead key={"TableILSHead"}>
                     <TableRow key={"TableILSTableRow"}>
                         <StyledTableCellWithoutBorder align="left">{rows[0].col1}</StyledTableCellWithoutBorder>

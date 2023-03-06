@@ -2,18 +2,43 @@ import Typography from '@mui/material/Typography';
 import {getListKParameters, getSubscaleScore} from "./TableListK";
 import {useTranslation} from "react-i18next";
 
-const getGeneralSubscalesBelow3Element = (organize: number, elaborate: number, criticalReview: number, repeat: number, attention: number, effort: number, time: number, goalsPlans: number, control: number, regulate: number, learnWithClassmates: number, literatureResearch: number, learningEnvironment: number): JSX.Element[] => {
+type GeneralSubscalesProps = {
+    CognitiveStrategies: CognitiveStrategiesProps,
+    attention: number,
+    effort: number,
+    time: number,
+    goalsPlans: number,
+    control: number,
+    regulate: number,
+    learnWithClassmates: number,
+    literatureResearch: number,
+    learningEnvironment: number,
+}
+
+type CognitiveStrategiesProps = {
+    organize: number,
+    elaborate: number,
+    criticalReview: number,
+    repeat: number,
+}
+
+type MetaCognitiveStrategiesProps = {
+    goalsPlans: number,
+    control: number,
+    regulate: number,
+}
+
+const useGeneralSubscalesBelow3Element = (generalProps: GeneralSubscalesProps): JSX.Element => {
 
     const {t} = useTranslation();
 
     const averageSubscaleBelow3Array = [];
     let averageSubscaleBelow3String = "";
-    const cognitiveSubscaleBelow3Html = [];
 
-    const cognitiveStrategiesAverage = getSubscaleScore([organize, elaborate, criticalReview, repeat]);
-    const averageInternalResourceManagementStrategies = getSubscaleScore([attention, effort, time]);
-    const averageMetacognitiveStrategies = getSubscaleScore([goalsPlans, control, regulate]);
-    const averageExternalResourcesManagementStrategies = getSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]);
+    const cognitiveStrategiesAverage = getSubscaleScore([generalProps.CognitiveStrategies.organize, generalProps.CognitiveStrategies.elaborate, generalProps.CognitiveStrategies.criticalReview, generalProps.CognitiveStrategies.repeat]);
+    const averageInternalResourceManagementStrategies = getSubscaleScore([generalProps.attention, generalProps.effort, generalProps.time]);
+    const averageMetacognitiveStrategies = getSubscaleScore([generalProps.goalsPlans, generalProps.control, generalProps.regulate]);
+    const averageExternalResourcesManagementStrategies = getSubscaleScore([generalProps.learnWithClassmates, generalProps.literatureResearch, generalProps.learningEnvironment]);
     const averageSubscaleArray = [cognitiveStrategiesAverage, averageInternalResourceManagementStrategies, averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies];
 
     for(const item in averageSubscaleArray) {
@@ -25,7 +50,7 @@ const getGeneralSubscalesBelow3Element = (organize: number, elaborate: number, c
         averageSubscaleBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3." + averageSubscaleBelow3Array.length);
     }
 
-    cognitiveSubscaleBelow3Html.push(
+    return(
         <div key={"GeneralDescriptionListK"}>
             <Typography variant="h6" gutterBottom>
                 {t("components.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Title")} <br/>
@@ -36,11 +61,9 @@ const getGeneralSubscalesBelow3Element = (organize: number, elaborate: number, c
             </Typography>
         </div>
     );
-
-    return cognitiveSubscaleBelow3Html;
 };
 
-const getCognitiveStrategiesBelow3Element = (organize: number, elaborate: number, criticalReview: number, repeat: number) => {
+const useCognitiveStrategiesBelow3Element = (generalProps: CognitiveStrategiesProps) => {
 
     const {t} = useTranslation();
 
@@ -48,19 +71,19 @@ const getCognitiveStrategiesBelow3Element = (organize: number, elaborate: number
     const cognitiveStrategiesBelow3Array = [];
     const cognitiveStrategiesBelow3Html = [];
 
-    if(organize < 3) {
+    if(generalProps.organize < 3) {
         cognitiveStrategiesBelow3Array.push("Organize");
         cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Organize") + " &";
     }
-    if(elaborate < 3) {
+    if(generalProps.elaborate < 3) {
         cognitiveStrategiesBelow3Array.push("Elaborate");
         cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Elaborate") + " &";
     }
-    if(criticalReview < 3) {
+    if(generalProps.criticalReview < 3) {
         cognitiveStrategiesBelow3Array.push("Critical review");
         cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Critical review") + " &";
     }
-    if(repeat < 3) {
+    if(generalProps.repeat < 3) {
         cognitiveStrategiesBelow3Array.push("Repeat");
         cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Repeat") + " &";
     }
@@ -85,7 +108,7 @@ const getCognitiveStrategiesBelow3Element = (organize: number, elaborate: number
     return cognitiveStrategiesBelow3Html;
 };
 
-const getMetacognitiveStrategiesBelow3Element = (goalsPlans: number, control: number, regulate: number) => {
+const useMetacognitiveStrategiesBelow3Element = (metacognitiveProps: MetaCognitiveStrategiesProps) => {
 
     const {t} = useTranslation();
 
@@ -93,15 +116,15 @@ const getMetacognitiveStrategiesBelow3Element = (goalsPlans: number, control: nu
     const metacognitiveStrategiesBelow3Array = [];
     const metacognitiveStrategiesBelow3Html = [];
 
-    if(goalsPlans < 3) {
+    if(metacognitiveProps.goalsPlans < 3) {
         metacognitiveStrategiesBelow3Array.push("Goals and plans");
         metacognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Goals & Plans") + " &";
     }
-    if(control < 3) {
+    if(metacognitiveProps.control < 3) {
         metacognitiveStrategiesBelow3Array.push("Control");
         metacognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Control") + " &";
     }
-    if(regulate < 3) {
+    if(metacognitiveProps.regulate < 3) {
         metacognitiveStrategiesBelow3Array.push("Regulate");
         metacognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Regulate") + " &";
     }
@@ -127,7 +150,7 @@ const getMetacognitiveStrategiesBelow3Element = (goalsPlans: number, control: nu
 };
 
 //relevant subscales are: attention, time, learning with classmates, literature research and learning environment
-const getRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: (string| number)[][]): JSX.Element[] => {
+const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: (string| number)[][]): JSX.Element[] => {
 
     const {t} = useTranslation();
     const subscalesBelow3Array = [];
@@ -166,10 +189,10 @@ export const ResultDescriptionListK = () => {
 
     const subScalesRelevantCombinations = [["attention",attention], ["time",time], ["learnWithClassmates",learnWithClassmates], ["literatureResearch",literatureResearch], ["learningEnvironment",learningEnvironment]];
 
-    const generalSubscalesBelow3 = getGeneralSubscalesBelow3Element(organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment);
-    const cognitiveStrategiesBelow3 = getCognitiveStrategiesBelow3Element(organize, elaborate, criticalReview, repeat);
-    const metacognitiveStrategiesBelow3 = getMetacognitiveStrategiesBelow3Element(goalsPlans, control, regulate);
-    const relevantSubscalesBelow3 = getRelevantSubscalesBelow3Element(subScalesRelevantCombinations);
+    const generalSubscalesBelow3 = useGeneralSubscalesBelow3Element({CognitiveStrategies:{organize, elaborate, criticalReview, repeat}, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment});
+    const cognitiveStrategiesBelow3 = useCognitiveStrategiesBelow3Element({organize, elaborate, criticalReview, repeat});
+    const metacognitiveStrategiesBelow3 = useMetacognitiveStrategiesBelow3Element({goalsPlans, control, regulate});
+    const relevantSubscalesBelow3 = useRelevantSubscalesBelow3Element(subScalesRelevantCombinations);
 
     return (
         <div key={"ResultDescriptionListK"}>
@@ -180,13 +203,3 @@ export const ResultDescriptionListK = () => {
         </div>
     )
 };
-
-export const ResultDescListK = () => {
-
-    const resultDescListKDiv = ResultDescriptionListK();
-    return (
-        <div id={"ResultDescListK"}>
-            {resultDescListKDiv}
-        </div>
-    );
-}

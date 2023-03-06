@@ -2,8 +2,8 @@
 import "@testing-library/jest-dom";
 import { DropdownLanguage } from "@components";
 import {fireEvent, render} from "@testing-library/react";
-import i18next from "../../shared/internationalization";
 import {I18nextProvider} from "react-i18next";
+import i18next from "i18next";
 
 const localStorageMock = {
     getItem: jest.fn().mockImplementation((key) => {

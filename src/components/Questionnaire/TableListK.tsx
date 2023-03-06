@@ -1,5 +1,4 @@
-﻿import * as React from 'react';
-import Table from '@mui/material/Table';
+﻿import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
@@ -7,6 +6,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useTranslation} from 'react-i18next';
 import {StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow} from './QuestionnaireTableStyle';
+import {ListK} from "@core/*";
+
+const listK = new ListK();
 
 //Deepclone object, not only reference
 const StyledTableRowListK = Object.assign({},StyledTableRow);
@@ -21,40 +23,24 @@ StyledTableRowListK.defaultProps = {
         },
 }};
 
-
-//These Values are later given from the Backend
-let organize = 5;
-let elaborate = 5;
-let criticalReview = 5;
-let repeat = 5;
-let attention = 1;
-let effort = 1;
-let time = 1;
-let goalsPlans = 1;
-let control = 1;
-let regulate = 1;
-let learnWithClassmates = 1;
-let literatureResearch = 1;
-let learningEnvironment = 1;
-
 export const getSubscaleScore = (score: number[]): number => score.reduce((a, b) => a + b, 0) / score.length;
 
 //Setting ILSparameters for tests
 export const setListKParameters = (org?: number, elab?: number, critRev?: number, rep?: number, att?: number, eff?: number, tim?: number, goalsPl?: number, contr?: number, reg?: number, learnWClass?: number, litRes?: number, learnE?: number) => {
 
-    organize = org ?? organize;
-    elaborate = elab ?? elaborate;
-    criticalReview = critRev ?? criticalReview;
-    repeat = rep ?? repeat;
-    attention = att ?? attention;
-    effort = eff ?? effort;
-    time = tim ?? time;
-    goalsPlans = goalsPl ?? goalsPlans;
-    control = contr ?? control;
-    regulate = reg ?? regulate;
-    learnWithClassmates = learnWClass ?? learnWithClassmates;
-    literatureResearch = litRes ?? literatureResearch;
-    learningEnvironment = learnE ?? learningEnvironment;
+    listK.organize = org ?? listK.organize;
+    listK.elaborate = elab ?? listK.elaborate;
+    listK.criticalReview = critRev ?? listK.criticalReview;
+    listK.repeat = rep ?? listK.repeat;
+    listK.attention = att ?? listK.attention;
+    listK.effort = eff ?? listK.effort;
+    listK.time = tim ?? listK.time;
+    listK.goalsPlans = goalsPl ?? listK.goalsPlans;
+    listK.control = contr ?? listK.control;
+    listK.regulate = reg ?? listK.regulate;
+    listK.learnWithClassmates = learnWClass ?? listK.learnWithClassmates;
+    listK.literatureResearch = litRes ?? listK.literatureResearch;
+    listK.learningEnvironment = learnE ?? listK.learningEnvironment;
 };
 
 export const getListKParameters = (): [[
@@ -69,15 +55,15 @@ export const getListKParameters = (): [[
 
     setListKParameters();
 
-    const averageCognitiveStrategies = getSubscaleScore([organize, elaborate, criticalReview, repeat])
-    const averageInternalResourceManagementStrategies = getSubscaleScore([attention, effort, time]);
-    const averageMetacognitiveStrategies = getSubscaleScore([goalsPlans, control, regulate]);
-    const averageExternalResourcesManagementStrategies = getSubscaleScore([learnWithClassmates, literatureResearch, learningEnvironment]);
+    const averageCognitiveStrategies = getSubscaleScore([listK.organize, listK.elaborate, listK.criticalReview, listK.repeat])
+    const averageInternalResourceManagementStrategies = getSubscaleScore([listK.attention, listK.effort, listK.time]);
+    const averageMetacognitiveStrategies = getSubscaleScore([listK.goalsPlans, listK.control, listK.regulate]);
+    const averageExternalResourcesManagementStrategies = getSubscaleScore([listK.learnWithClassmates, listK.literatureResearch, listK.learningEnvironment]);
 
 
     return [[
-        organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates,
-        literatureResearch, learningEnvironment
+        listK.organize, listK.elaborate, listK.criticalReview, listK.repeat, listK.attention, listK.effort, listK.time, listK.goalsPlans, listK.control, listK.regulate, listK.learnWithClassmates,
+        listK.literatureResearch, listK.learningEnvironment
     ], [
         averageCognitiveStrategies, averageInternalResourceManagementStrategies,
         averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies
@@ -169,7 +155,7 @@ export const TableListK = () => {
 
     return (
         <TableContainer component={Paper} style={{minWidth: 300}}>
-            <Table sx={{minWidth: 300}} aria-label="customized table">
+            <Table sx={{minWidth: 300}}>
                 <TableHead>
                     <TableRow>
                         <StyledTableCellWithoutBorder align="left">{rows[0].col1}</StyledTableCellWithoutBorder>

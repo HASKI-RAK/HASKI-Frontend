@@ -1,7 +1,7 @@
-import React from 'react';
 import {Bar} from '@nivo/bar';
 import {getILSParameters} from "./TableILS";
 import {useTranslation} from 'react-i18next';
+import {useTheme} from "@mui/material";
 
 // The Key "Dimension" is used in the Graph, therefore the name matters
 // The naming of the Key "possibleDimensions" is not important, as it is not used in the Graph, just for indexing
@@ -33,6 +33,7 @@ export const SetData = (): { possibleDimensions: string, [Dimension: string]: st
 
 export const GraphILS = () => {
     const {t} = useTranslation();
+    const theme = useTheme();
     const data = SetData();
 
     return (
@@ -100,7 +101,7 @@ export const GraphILS = () => {
                 }}
                 labelSkipWidth={12}
                 labelSkipHeight={12}
-                labelTextColor="white"
+                labelTextColor={theme.palette.common.white}
             />
         </div>
     );

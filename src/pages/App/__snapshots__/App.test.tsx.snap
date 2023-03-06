@@ -44,7 +44,11 @@ exports[`Test the demo component renders correctly 1`] = `
         role="button"
         tabIndex={0}
       >
-        Deutsch
+        <span
+          className="notranslate"
+        >
+          ​
+        </span>
       </div>
       <input
         aria-hidden={true}
@@ -53,7 +57,7 @@ exports[`Test the demo component renders correctly 1`] = `
         onAnimationStart={[Function]}
         onChange={[Function]}
         tabIndex={-1}
-        value="de"
+        value={null}
       />
       <svg
         aria-hidden={true}
