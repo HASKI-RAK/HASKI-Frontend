@@ -120,13 +120,3 @@ export const ResultDescriptionILS = ({ILSdim=ILSDimension}: ResultDescriptionILS
         </div>
     )
 };
-/*
-export const ResultDescILS = () => {
-
-    const resultDescILSDiv = ResultDescriptionILS();
-    return (
-        <div id={"ResultDescILS"}>
-            {resultDescILSDiv}
-        </div>
-    );
-}*/
