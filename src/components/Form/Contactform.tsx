@@ -140,6 +140,7 @@ export const Contactform = ( {width, sendtoBackend}: ContactformParameter) => {
             onChange={handleInputChange}
             error={textfieldError}
             helperText={textfieldError ?  t("components.contactform.error") : ""}
+            multiline
           />
         </FormControl>
 
