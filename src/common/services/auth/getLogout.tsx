@@ -1,7 +1,7 @@
 import { RequestResponse } from "./RequestResponse";
 
 export const getLogout = async (): Promise<RequestResponse> => {
-    return fetch(`http://fakedomain.com:5000/logout`, {
+    return fetch(process.env.BACKEND + `/logout`, {
         method: 'GET',
         credentials: 'include',
         headers: {

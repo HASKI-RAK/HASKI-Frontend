@@ -1,9 +1,9 @@
 {
-  "name": "HASKI-Frontend",
+  "name": "haski-frontend",
   "version": "0.0.1",
   "description": "modern frontend for accessing the haski system trough an embedded webapp",
   "main": "src/app.ts",
-  "repository": "https://github.com/HASKI-Kempten/HASKI-Frontend.git",
+  "repository": "https://github.com/HASKI-RAK/HASKI-Frontend.git",
   "author": "David Fischer <davidvfischer@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -48,6 +48,7 @@
     "babel-loader": "^8.2.5",
     "compression-webpack-plugin": "^10.0.0",
     "css-loader": "^6.7.1",
+    "dotenv": "^16.0.3",
     "eslint": "^8.35.0",
     "eslint-plugin-prefer-arrow-functions": "^3.1.4",
     "eslint-plugin-react-hooks": "^4.6.0",
