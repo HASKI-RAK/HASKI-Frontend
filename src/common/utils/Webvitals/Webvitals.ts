@@ -7,7 +7,7 @@ import { CLSReportCallback } from "web-vitals";
  */
 export const sendToAnalytics = (metric: object): void => {
   const body = JSON.stringify(metric);
-  const url = "http://localhost:5000/logs/frontend";
+  const url = process.env.BACKEND + "/logs/frontend";
   // Use `navigator.sendBeacon()` if available, falling back to `fetch()`
   const headers = {
     type: "application/json",
