@@ -59,7 +59,7 @@ export const GlossaryForm = ({ useGlossaryForm = _useGlossaryForm, ...props }: G
                             <GlossaryList 
                                 expandedList={glossaryState.expandedList} 
                                 setExpandedList={glossaryState.setExpandedList}
-                                glossaryEntries={searchByQuery(glossaryState.searchQuery!,
+                                glossaryEntries={searchByQuery(
                                     filterByTags(glossaryState.selectedTags!, 
                                         filterByIndexElement(glossaryState.selectedIndexElement!, glossaryEntries)))}
                             />

@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react"
 import { useTranslation } from "react-i18next"
-import { GlossaryState, useGlossaryStore } from "@services/*"
+import { GlossaryState, useGlossaryStore } from "@services"
 import { GlossaryEntryProps } from "@components"
 
 export type useGlossaryFormHookParams = {
@@ -14,7 +14,7 @@ export type GlossaryFormHookReturn = {
     readonly glossaryState: GlossaryState
     readonly filterByTags: (selectedTags: string[], inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
     readonly filterByIndexElement: (selectedIndexElement: string, inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
-    readonly searchByQuery: (searchQuery: string, inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
+    readonly searchByQuery: (inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
     readonly collapseAll: () => void
     readonly expandAll: (inputData: GlossaryEntryProps[]) => void
 }
@@ -92,13 +92,13 @@ export const useGlossaryForm = (params?: useGlossaryFormHookParams): GlossaryFor
         return filteredGlossaryEntries
     }, [])
 
-    const onSearchByQuery = useCallback((searchQuery: string, glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[]  => {
+    const onSearchByQuery = useCallback((glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[]  => {
         const searchedGlossaryEntries: GlossaryEntryProps[] = []
 
         if(searchQuery === undefined || searchQuery === '') {
             return glossaryEntries
         }
-        
+
         glossaryEntries.forEach((glossaryEntry) => {
             if((glossaryEntry.term?.toLowerCase().includes(searchQuery.toLowerCase()))
             || (glossaryEntry.definition?.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -110,7 +110,7 @@ export const useGlossaryForm = (params?: useGlossaryFormHookParams): GlossaryFor
         })
 
         return searchedGlossaryEntries
-    }, [])
+    }, [searchQuery])
 
     const onCollapseAll = useCallback(() => {
         setExpandedList && setExpandedList([])
@@ -139,7 +139,7 @@ export const useGlossaryForm = (params?: useGlossaryFormHookParams): GlossaryFor
         },
         filterByTags: onFilterByTags,
         filterByIndexElement: onFilterByIndexElement,
-        searchByQuery: onSearchByQuery ,
+        searchByQuery: onSearchByQuery,
         collapseAll: onCollapseAll,
         expandAll: onExpandAll
     } as const

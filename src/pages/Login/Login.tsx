@@ -1,5 +1,5 @@
 import { LoginForm } from "@components";
-import { Skeleton } from "@mui/material";
+import { DefaultSkeleton as Skeleton } from "@common/components"
 import { AuthContext } from "@services";
 import { useContext, useState } from "react";
 import { useSearchParams } from "react-router-dom";

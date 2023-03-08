@@ -11,11 +11,16 @@ export const Searchbar = (props: SearchbarProps) => {
     const { t } = useTranslation();
 
     const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const timer = setTimeout(() => {
+        
         const {
             target: { value },
         } = event
 
         props.setSearchQuery && props.setSearchQuery(value)
+        }, 100)
+
+        return () => clearTimeout(timer)
     }, [])
 
     return(
