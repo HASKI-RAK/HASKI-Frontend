@@ -5,7 +5,7 @@ import {useTheme} from "@mui/material";
 
 // The Key "Dimension" is used in the Graph, therefore the name matters
 // The naming of the Key "possibleDimensions" is not important, as it is not used in the Graph, just for indexing
-export const SetData = (): { possibleDimensions: string, [Dimension: string]: string }[] => {
+export const useData = (): { possibleDimensions: string, [Dimension: string]: string }[] => {
 
     const {t} = useTranslation();
     const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters();
@@ -34,7 +34,7 @@ export const SetData = (): { possibleDimensions: string, [Dimension: string]: st
 export const GraphILS = () => {
     const {t} = useTranslation();
     const theme = useTheme();
-    const data = SetData();
+    const data = useData();
 
     return (
 

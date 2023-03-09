@@ -5,7 +5,7 @@ import {getListKParameters} from "./TableListK";
 // Center the Score beneath the Subscale name. That is done with Whitespaces before the score.
 const centerString = (str: string, maxLen: number): string => str.padStart((str.length+maxLen*1.5)/2);
 
-export const SetData = (): { nodes: { id: string, height: number, size: number, score: number, color: string }[], links: { source: string, target: string, distance: number }[] } => {
+export const useData = (): { nodes: { id: string, height: number, size: number, score: number, color: string }[], links: { source: string, target: string, distance: number }[] } => {
 
     const {t} = useTranslation();
     const [[
@@ -255,7 +255,7 @@ export const SetData = (): { nodes: { id: string, height: number, size: number, 
 
 export const GraphListK = () => {
     const {t} = useTranslation();
-    const graphListKData = SetData();
+    const graphListKData = useData();
     const cognitiveStrategies = t("components.QuestionnaireResults.TableListK.Cognitive strategies");
     const intResMngtStrategies = t("components.QuestionnaireResults.TableListK.Internal resource management strategies");
     const metacognitiveStrategies = t("components.QuestionnaireResults.TableListK.Metacognitive strategies");

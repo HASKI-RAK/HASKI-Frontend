@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {SetData, GraphListK} from "./GraphListK";
+import {useData, GraphListK} from "./GraphListK";
 import {fireEvent, render} from "@testing-library/react";
 import React from "react";
 import {getListKParameters} from "./TableListK";
@@ -20,7 +20,7 @@ jest.mock('react-i18next', () => ({
 describe("Test GraphListK with all Methods",
     () => {
         test("Required data is returned in correct format", () => {
-            const data = SetData();
+            const data = useData();
 
             expect(data.nodes.length).toBe(18);
             expect(data.links.length).toBe(17);

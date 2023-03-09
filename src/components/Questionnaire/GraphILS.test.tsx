@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {SetData, GraphILS} from "./GraphILS";
+import {useData, GraphILS} from "./GraphILS";
 import {render} from "@testing-library/react";
 import React from "react";
 
@@ -16,7 +16,7 @@ describe("Test GraphILS with all Methods",
     () => {
     test("Required data is returned in correct format", () => {
 
-        const data = SetData();
+        const data = useData();
 
         expect(data.length).toBe(4);
 
