@@ -1,12 +1,13 @@
-import { DropdownLanguage, Text } from "@components";
+import {DropdownLanguage,Text, QuestionnaireResultsModal} from "@components";
 
 
 
 export const Home = () => {
     return (
         <div className="main">
-            <DropdownLanguage />
-            <Text />
+            <QuestionnaireResultsModal/>
+            <DropdownLanguage/>
+            <Text/>
         </div>
     )
 };

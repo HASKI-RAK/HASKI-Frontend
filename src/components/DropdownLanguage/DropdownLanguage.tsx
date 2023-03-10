@@ -1,6 +1,6 @@
 ﻿import { useTranslation } from "react-i18next";
 import { DefaultSelect as Select } from "@common/components";
-import { MenuItem } from "@mui/material";
+import {MenuItem} from "@mui/material";
 
 export const DropdownLanguage = () => {
 

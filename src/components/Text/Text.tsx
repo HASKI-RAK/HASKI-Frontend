@@ -7,9 +7,9 @@ export const Text = () => {
         <div>
             <div>
                 Current Language: {i18n.language} <br/>
-                {(t("previousText"))} <br/>
-                {(t("nextText"))} <br/>
-                {(t("spellcheckText"))} <br/>
+                {(t("Back"))} <br/>
+                {(t("Next"))} <br/>
+                {(t("components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText"))} <br/>
             </div>
         </div>
     )
