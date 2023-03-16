@@ -1,7 +1,6 @@
 ﻿import {useTranslation} from "react-i18next";
 import { DefaultSelect as Select } from "@common/components";
 import {MenuItem} from "@mui/material";
-import "../../shared/internationalization";
 import log from "loglevel";
 
 
@@ -13,8 +12,8 @@ export const DropdownLanguage = () => {
     const onClickLanguageChange = (e: { target: { value: string }; }) => {
         try {
             i18n.changeLanguage(e.target.value);
-            localStorage.setItem("i18nextLng", e.target.value);
             log.trace("The language was changed to: " + e.target.value);
+            localStorage.setItem("i18nextLng", e.target.value);
         }
         catch(e: unknown){
             log.error("The language could not be changed. Error Message: "+e);
