@@ -1,12 +1,12 @@
 import { ThemeProvider } from "@mui/material";
 import { AuthProvider } from "@services";
 import { Home, ThemePresentation, Login, Dashboard } from "@pages";
-import { Theme } from "@utils";
+import { HaskiTheme } from "@utils";
 import { Routes } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const App = () =>
-  <ThemeProvider theme={Theme}>
+  <ThemeProvider theme={HaskiTheme}>
     <AuthProvider>
       <Router>
         <Routes>
