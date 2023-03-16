@@ -1,4 +1,4 @@
-import { DropdownLanguage, Text } from "@components";
+import { DropdownLanguage, Text, SnackbarTest, Snackbars } from "@components";
 
 
 
@@ -7,6 +7,8 @@ export const Home = () => {
         <div className="main">
             <DropdownLanguage />
             <Text />
+            <Snackbars/>
+            <SnackbarTest/>
         </div>
     )
 };
