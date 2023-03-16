@@ -1,13 +1,11 @@
-import {Dashboard,DropdownLanguage,Text} from "@components";
+import {DropdownLanguage, Text, QuestionnaireResultsModal} from "@components";
 import log from "loglevel";
-
-
 
 export const Home = () => {
     log.setLevel("error")
     return (
         <div className="main">
-            <Dashboard/>
+            <QuestionnaireResultsModal/>
             <DropdownLanguage/>
             <Text/>
         </div>

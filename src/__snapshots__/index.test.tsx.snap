@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test the landing page renders correctly 1`] = `
+<div
+  className="main"
+>
+  <div>
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1u1dbmp-MuiButtonBase-root-MuiButton-root"
+      data-testid="QuestionnaireResultsButton"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText
+    </button>
+  </div>
+  <div>
+    <div
+      className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary LanguageDropdown css-jb90b-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+      onClick={[Function]}
+    >
+      <div
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        className="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseDown={[Function]}
+        role="button"
+        tabIndex={0}
+      >
+        <span
+          className="notranslate"
+        >
+          ​
+        </span>
+      </div>
+      <input
+        aria-hidden={true}
+        className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        data-testid="LanguageDropdown"
+        onAnimationStart={[Function]}
+        onChange={[Function]}
+        tabIndex={-1}
+        value={null}
+      />
+      <svg
+        aria-hidden={true}
+        className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+        data-testid="ArrowDropDownIcon"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M7 10l5 5 5-5z"
+        />
+      </svg>
+      <fieldset
+        aria-hidden={true}
+        className="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          className="css-ihdtdm"
+        >
+          <span
+            className="notranslate"
+          >
+            ​
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+  </div>
+  <div>
+    <div>
+      Current Language: 
+       
+      <br />
+      Back
+       
+      <br />
+      Next
+       
+      <br />
+      components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText
+       
+      <br />
+    </div>
+  </div>
+</div>
+`;

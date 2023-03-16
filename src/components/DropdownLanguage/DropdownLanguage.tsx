@@ -10,7 +10,7 @@ export const DropdownLanguage = () => {
     log.setLevel("error");
     const {i18n} = useTranslation();
     const startingLanguage = localStorage.getItem("i18nextLng") as string;
-    function onClickLanguageChange(e: { target: { value: string }; }) {
+    const onClickLanguageChange = (e: { target: { value: string }; }) => {
         try {
             i18n.changeLanguage(e.target.value);
             localStorage.setItem("i18nextLng", e.target.value);

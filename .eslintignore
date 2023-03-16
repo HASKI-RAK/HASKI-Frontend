@@ -6,3 +6,4 @@ bin
 webpack.config.js
 tsconfig.json
 jest.config.js
+auto-order-json-translations.ts

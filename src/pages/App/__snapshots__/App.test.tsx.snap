@@ -5,31 +5,29 @@ exports[`Test the demo component renders correctly 1`] = `
   className="main"
 >
   <div>
-    Hello 
-     
-     with ID:
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1u1dbmp-MuiButtonBase-root-MuiButton-root"
+      data-testid="QuestionnaireResultsButton"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText
+    </button>
   </div>
-  <button
-    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1u1dbmp-MuiButtonBase-root-MuiButton-root"
-    disabled={false}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onContextMenu={[Function]}
-    onDragLeave={[Function]}
-    onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseDown={[Function]}
-    onMouseLeave={[Function]}
-    onMouseUp={[Function]}
-    onTouchEnd={[Function]}
-    onTouchMove={[Function]}
-    onTouchStart={[Function]}
-    tabIndex={0}
-    type="button"
-  >
-    one up
-  </button>
   <div>
     <div
       className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary LanguageDropdown css-jb90b-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
@@ -46,15 +44,20 @@ exports[`Test the demo component renders correctly 1`] = `
         role="button"
         tabIndex={0}
       >
-        Deutsch
+        <span
+          className="notranslate"
+        >
+          ​
+        </span>
       </div>
       <input
         aria-hidden={true}
         className="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+        data-testid="LanguageDropdown"
         onAnimationStart={[Function]}
         onChange={[Function]}
         tabIndex={-1}
-        value="de"
+        value={null}
       />
       <svg
         aria-hidden={true}
@@ -86,16 +89,15 @@ exports[`Test the demo component renders correctly 1`] = `
   <div>
     <div>
       Current Language: 
-      de
        
       <br />
-      Vorherige
+      Back
        
       <br />
-      Nächste
+      Next
        
       <br />
-      Hast du das gesucht?
+      components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText
        
       <br />
     </div>

@@ -5,9 +5,9 @@ import { CLSReportCallback } from "web-vitals";
  * Sends statistics to backend enpoint to track vitals of website like responsiveness
  * @param metric the corresponding metric like CLS or FID
  */
-export function sendToAnalytics(metric: object): void {
+export const sendToAnalytics = (metric: object): void => {
   const body = JSON.stringify(metric);
-  const url = "http://localhost:5000/logs/frontend";
+  const url = process.env.BACKEND + "/logs/frontend";
   // Use `navigator.sendBeacon()` if available, falling back to `fetch()`
   const headers = {
     type: "application/json",
@@ -15,12 +15,12 @@ export function sendToAnalytics(metric: object): void {
 
   const blob = new Blob([body], headers);
   navigator.sendBeacon(url, blob);
-}
+};
 /**
  * Reports the webvitals from library
  * @param onPerfEntry function which gets called for each metric
  */
-export function reportWebVitals(onPerfEntry: CLSReportCallback): void {
+export const reportWebVitals = (onPerfEntry: CLSReportCallback): void => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
     import("web-vitals").then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
       getCLS(onPerfEntry);
@@ -30,4 +30,4 @@ export function reportWebVitals(onPerfEntry: CLSReportCallback): void {
       getTTFB(onPerfEntry);
     });
   }
-}
+};
