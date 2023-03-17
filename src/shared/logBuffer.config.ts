@@ -1,7 +1,7 @@
 import {RingBuffer} from "./RingBuffer";
 import log from "loglevel";
 
-export function logBuffer() {
+export const logBuffer = () => {
 
     const GlobalRingBuffer = new RingBuffer<[string, string]>(100);
     if(localStorage.getItem('ringBufferContent') !== null) {
@@ -15,10 +15,10 @@ export function logBuffer() {
     }
 
     const originalFactory = log.methodFactory;
-    log.methodFactory = function(methodName, logLevel, loggerName) {
+    log.methodFactory = (methodName, logLevel, loggerName) => {
         const rawMethod = originalFactory(methodName, logLevel, loggerName);
 
-        return function(message) {
+        return (message) => {
             //show only warnings and error in console and log everything else in the GlobalRingBuffer?
             if(methodName === "warn" || methodName === "error") {
                 rawMethod(message);
@@ -28,4 +28,4 @@ export function logBuffer() {
             localStorage.setItem('ringBufferContent', JSON.stringify(GlobalRingBuffer));
         };
     };
-}
+};

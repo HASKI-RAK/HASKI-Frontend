@@ -29,6 +29,7 @@ if (localStorage.getItem("i18nextLng") === null) {
 else {
     /* istanbul ignore next */
     lng = localStorage.getItem("i18nextLng") as string;
+    /* istanbul ignore next */
     log.trace("Local storage item \"i18nextLng\" was already set. Value is: "+lng+".")
 }
 
