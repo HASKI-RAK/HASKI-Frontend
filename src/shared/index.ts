@@ -1,3 +1,4 @@
 import i18next from "i18next";
+import {logBuffer} from "./logBuffer.config";
 
-export default i18next;
+export {i18next,logBuffer};
