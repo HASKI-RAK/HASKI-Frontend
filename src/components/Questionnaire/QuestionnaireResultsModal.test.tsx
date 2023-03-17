@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {QuestionnaireResultsModal} from "./QuestionnaireResultsModal";
+import {QuestionnaireResultsModal} from "@components";
 import {fireEvent, render} from "@testing-library/react";
 import * as React from 'react';
 
@@ -27,51 +27,46 @@ describe("Test ResultDescriptionListK with all Methods", () => {
 
     test("Modal opens", async() => {
 
-        const {getByTestId} = render(<QuestionnaireResultsModal/>);
+        const {getByTestId} = render(<QuestionnaireResultsModal open={true} handleClose={()=>false}/>);
 
-        expect(getByTestId("QuestionnaireResultsButton")).toBeInTheDocument();
+        expect(getByTestId("ILS and ListK Modal")).toBeInTheDocument();
     });
 
     test("Active Step ILS is shown", async() => {
 
-        const {getByTestId} = render(<QuestionnaireResultsModal/>);
+        const {getByTestId} = render(<QuestionnaireResultsModal open={true} handleClose={()=>false}/>);
 
-        fireEvent.click(getByTestId('QuestionnaireResultsButton'));
         expect(getByTestId("ActiveStepILS")).toBeInTheDocument();
     });
 
     test("Active Step List-K is shown", async() => {
 
-        const {getByTestId} = render(<QuestionnaireResultsModal/>);
+        const {getByTestId} = render(<QuestionnaireResultsModal open={true} handleClose={()=>false}/>);
 
-        fireEvent.click(getByTestId('QuestionnaireResultsButton'));
         fireEvent.click(getByTestId('nextButton'));
         expect(getByTestId("ActiveStepListK")).toBeInTheDocument();
     });
 
     test("Active Step List-K is shown", async() => {
 
-        const {getByTestId, getByText} = render(<QuestionnaireResultsModal/>);
+        const {getByTestId, getByText} = render(<QuestionnaireResultsModal open={true} handleClose={()=>false}/>);
 
-        fireEvent.click(getByTestId('QuestionnaireResultsButton'));
         fireEvent.click(getByText('components.QuestionnaireResults.ResultDescriptionILS.ILSResults'));
         expect(getByTestId("ActiveStepILS")).toBeInTheDocument();
     });
 
     test("Active Step List-K is shown", async() => {
 
-        const {getByTestId, getByText} = render(<QuestionnaireResultsModal/>);
+        const {getByTestId, getByText} = render(<QuestionnaireResultsModal open={true} handleClose={()=>false}/>);
 
-        fireEvent.click(getByTestId('QuestionnaireResultsButton'));
         fireEvent.click(getByText('components.QuestionnaireResults.ResultDescriptionILS.ListKResults'));
         expect(getByTestId("ActiveStepListK")).toBeInTheDocument();
     });
 
     test("Next and Back button work", async() => {
 
-        const {getByTestId} = render(<QuestionnaireResultsModal/>);
+        const {getByTestId} = render(<QuestionnaireResultsModal open={true} handleClose={()=>false}/>);
 
-        fireEvent.click(getByTestId('QuestionnaireResultsButton'));
         fireEvent.click(getByTestId('nextButton'));
         expect(getByTestId("ActiveStepListK")).toBeInTheDocument();
         //cant click twice
@@ -88,12 +83,15 @@ describe("Test ResultDescriptionListK with all Methods", () => {
 
     test("close button works", async() => {
 
-        const {getByTestId} = render(<QuestionnaireResultsModal/>);
+        const handleClose = jest.fn();
 
-        fireEvent.click(getByTestId('QuestionnaireResultsButton'));
+        const {getByTestId} = render(<QuestionnaireResultsModal open={true} handleClose={handleClose}/>);
+
         expect(getByTestId("ActiveStepILS")).toBeInTheDocument();
-        fireEvent.click(getByTestId('QuestionnaireResultsCloseButton'));
-        expect(getByTestId("QuestionnaireResultsButton")).toBeInTheDocument();
+        const closeButton = getByTestId("QuestionnaireResultsCloseButton");
+        fireEvent.click(closeButton);
+
+        expect(handleClose).toHaveBeenCalledTimes(1);
     });
 
 });
