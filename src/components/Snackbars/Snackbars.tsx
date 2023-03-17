@@ -1,12 +1,12 @@
 import { useSnackbar, CustomSnackbar } from "@components"
-import { Snackbar, Stack } from "@mui/material"
+import { Snackbar, Stack, Slide, SlideProps, Grow, GrowProps, Typography } from "@mui/material"
 
-export const Snackbars: React.FC = () => {
-    const  { snackbarsErrorWarning, snackbarsSuccessInfo } = useSnackbar()
+const Snackbars: React.FC = () => {
+    const { snackbarsErrorWarning, snackbarsSuccessInfo } = useSnackbar()
     const firstSnackbarErrorWarning = snackbarsErrorWarning[0]
     const firstSnackbarSuccessInfo = snackbarsSuccessInfo[0]
 
-    return(
+    return (
         <>
             <Snackbar
                 open={!!firstSnackbarErrorWarning}
@@ -28,10 +28,16 @@ export const Snackbars: React.FC = () => {
             >
                 <Stack flexDirection="column" gap={1}>
                     {snackbarsSuccessInfo.map((snackbar) => (
-                        <CustomSnackbar key={snackbar.message} customSnackbar={snackbar} />
+                            snackbar.severity ? (
+                                <CustomSnackbar key={snackbar.message} customSnackbar={snackbar} />
+                            ) : (
+                                <Typography>TEST</Typography>
+                            )
                     ))}
                 </Stack>
             </Snackbar>
         </>
     )
 }
+
+export default Snackbars

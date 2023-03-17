@@ -4,34 +4,48 @@ import CloseIcon from '@mui/icons-material/Close'
 import { useTranslation } from 'react-i18next'
 import { useSnackbar, SnackbarProps } from '../SnackbarProvider/SnackbarProvider'
 import { useState, useCallback, useEffect } from 'react'
+import { open } from 'fs'
 
-const AnchorOrigin = (messageType?: MessageType): SnackbarOrigin => {
-    switch(messageType) {
+const anchorOrigin = (messageType?: MessageType): SnackbarOrigin => {
+    switch (messageType) {
         case "error":
         case "warning":
             return { vertical: 'top', horizontal: 'center' }
         case "success":
+        case "info":
         default:
             return { vertical: 'bottom', horizontal: 'left' }
     }
 }
 
-const SlideTransition = (props: SlideProps) => {
-    return <Slide {...props} direction="down" />;
+type TransitionProps = {
+    children?: React.ReactElement
+    in?: boolean
+    severity?: MessageType
+    timeout?: number
 }
 
-const GrowTransition = (props: GrowProps) => {
-    return <Grow {...props} />;
-}
+const Transition = (props: TransitionProps) => {
+    if (props.children === undefined) {
+        return null
+    }
 
-const Transition = (messageType?: MessageType) => {
-    switch(messageType) {
+    switch (props.severity) {
         case "error":
         case "warning":
-            return SlideTransition
+            return (
+                <Slide in={props.in} timeout={props.timeout}>
+                    {props.children}
+                </Slide>
+            )
         case "success":
+        case "info":
         default:
-            return GrowTransition
+            return (
+                <Grow in={props.in} timeout={props.timeout}>
+                    {props.children}
+                </Grow>
+            )
     }
 }
 
@@ -47,19 +61,19 @@ export const CustomSnackbar: React.FC<CustomSnackbarProps> = ({ customSnackbar }
             removeSnackbar(customSnackbar)
         }, 1000)
     }, [customSnackbar.message, removeSnackbar])
-    
+
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return
         }
-        if(customSnackbar.onClose) {
+        if (customSnackbar.onClose) {
             customSnackbar.onClose()
         }
         close()
     }
 
     useEffect(() => {
-        if(customSnackbar.autoHideDuration !== 0) {
+        if (customSnackbar.autoHideDuration !== 0) {
             setTimeout(() => {
                 close()
             }, customSnackbar.autoHideDuration || 6000)
@@ -79,21 +93,36 @@ export const CustomSnackbar: React.FC<CustomSnackbarProps> = ({ customSnackbar }
         </>
     )
 
-    return(
+    return (
         <>
             {
                 customSnackbar.severity && (
-                    <Alert
-                        onClick={handleClose} 
-                        onClose={handleClose}
-                        severity={customSnackbar.severity}
-                    >
-                        <Typography>
-                            {
-                               t(customSnackbar.severity) + ": " + customSnackbar.message
-                            }
-                        </Typography>
-                    </Alert>
+                    <Transition severity={customSnackbar.severity} in={open} timeout={300}>
+                        {
+                            customSnackbar.severity ? (
+                                <Alert
+                                    onClick={handleClose}
+                                    onClose={handleClose}
+                                    severity={customSnackbar.severity}
+                                >
+                                    <Typography>
+                                        {
+                                            t(customSnackbar.severity) + ": " + customSnackbar.message
+                                        }
+                                    </Typography>
+                                </Alert>
+                            ) : (
+                                <Snackbar open={open}
+                                    onClick={handleClose}
+                                    onClose={handleClose}
+                                    anchorOrigin={anchorOrigin(customSnackbar.severity)}
+                                    message={customSnackbar.message}
+                                >
+                                    <Typography>{customSnackbar.message}</Typography>
+                                </Snackbar  >
+                            )
+                        }
+                    </Transition>
                 )
             }
         </>

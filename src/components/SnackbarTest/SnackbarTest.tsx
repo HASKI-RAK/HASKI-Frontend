@@ -42,6 +42,9 @@ export const SnackbarTest = () => {
             <Button onClick={() => addSnackbar({severity: "info", message: "ja rip"})}>
                 Info
             </Button>
+            <Button onClick={() => addSnackbar({message: "Was machsch du?"})}>
+                Empty
+            </Button>
         </>
     )
 }
