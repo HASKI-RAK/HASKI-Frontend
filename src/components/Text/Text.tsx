@@ -3,6 +3,7 @@
 export const Text = () => {
 
     const {t, i18n} = useTranslation();
+
     return(
         <div>
             <div>
