@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {ResultDescriptionILS} from "./ResultDescriptionILS";
+import {ResultDescriptionILS} from "@components";
 import {setILSParameters, ILSDimension} from "./TableILS";
 import {render} from "@testing-library/react";
 
