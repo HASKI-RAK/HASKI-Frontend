@@ -22,7 +22,7 @@ export type LoginFormProps = {
 };
 /**
  * LoginForm presents a form for the user to login.
- * @param props - The props of the component.
+ * @param props {@link LoginFormProps}  - The props of the component.
  * 
  * @category Components
  */
