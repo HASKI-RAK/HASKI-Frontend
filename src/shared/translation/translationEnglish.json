@@ -1,5 +1,12 @@
 {
 	"Back": "Back",
+	"components.login.login": "Login",
+	"components.login.password": "Password",
+	"components.login.passwordError": "Please enter a valid password",
+	"components.login.subtitle": "Please login to continue",
+	"components.login.title": "HASKI Login",
+	"components.login.username": "Username",
+	"components.login.usernameError": "Please enter a valid username",
 	"components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText": "Questionnaire Results",
 	"components.QuestionnaireResults.ResultDescriptionILS.Active.moderate": "Your information processing tends to be active. It is recommended that you always create opportunities for yourself to process new information in the course of practical experiments and discussions with fellow students. This tends to help you learn faster.",
 	"components.QuestionnaireResults.ResultDescriptionILS.Active.strong": "Your information processing is preferably active. It is recommended that you always create opportunities for yourself to process new information in the course of practical experiments and discussions with fellow students. This tends to help you learn faster.",
@@ -31,7 +38,6 @@
 	"components.QuestionnaireResults.ResultDescriptionILS.Verbal.strong": "In terms of presenting information, you prefer a verbal focus. When dealing with difficult and complex content, you may find it helpful to verbalize it using your own written summaries or audio recordings to facilitate their learning.",
 	"components.QuestionnaireResults.ResultDescriptionILS.Visual.moderate": "In terms of presenting information, you tend to prefer a visual focus. When dealing with difficult and complex content, it may help you to visualize it using graphs, charts, or the like to facilitate your learning.",
 	"components.QuestionnaireResults.ResultDescriptionILS.Visual.strong": "In terms of presenting information, you prefer a visual focus. When dealing with difficult and complex content, it may help you to visualize it using graphs, charts, or the like to facilitate your learning.",
-	"components.QuestionnaireResults.ResultDescriptionListK.Score": "Score",
 	"components.QuestionnaireResults.ResultDescriptionListK.attention && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. It would probably be beneficial if you try to create a suitable environment with as few disruptive factors as possible to make your learning more effective. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
 	"components.QuestionnaireResults.ResultDescriptionListK.attention && learningEnvironment Below3.Title": "Attention and learning environment have a value below 3",
 	"components.QuestionnaireResults.ResultDescriptionListK.attention && learningWithClassmates Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. It would probably be beneficial if you try to create a suitable environment with as few disruptive factors as possible to make your learning more effective. It would be beneficial if you try to find a study group with fellow student friends. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives.",
@@ -85,6 +91,7 @@
 	"components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Goals & Plans": "plan",
 	"components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Part1": "In terms of metacognitive strategies, it is recommended that you make the effort to frequently",
 	"components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Regulate": "reflect",
+	"components.QuestionnaireResults.ResultDescriptionListK.Score": "Score",
 	"components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3.2": "In your case, it appears that the use of learning strategies can still be improved in two areas in particular.",
 	"components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3.3": "In your case, it appears that the use of learning strategies can still be improved in three areas in particular.",
 	"components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3.4": "In your case, it appears that the use of learning strategies can still be improved in four areas in particular.",
@@ -140,12 +147,5 @@
 	"Dot": ".",
 	"Next": "Next",
 	"pages.glossary.title": "Glossary",
-	"pages.login.redirect": "You will be redirected after a few seconds",
-	"components.login.title": "HASKI Login",
-	"components.login.subtitle": "Please login to continue",
-	"components.login.username": "Username",
-	"components.login.password": "Password",
-	"components.login.login": "Login",
-	"components.login.usernameError": "Please enter a valid username",
-	"components.login.passwordError": "Please enter a valid password"
+	"pages.login.redirect": "You will be redirected after a few seconds"
 }

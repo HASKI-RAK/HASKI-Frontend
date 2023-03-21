@@ -21,7 +21,7 @@ export const Login = ({ useLogin = _useLogin }: LoginProps) => {
     const { onSubmit } = useLogin({ setIsLoading, nonce });
 
     return (
-        nonce ? <Skeleton  /> :
+        nonce ? <Skeleton /> :
             authcontext.isAuth ? <Skeleton /> :
                 <LoginForm onSubmit={onSubmit} isLoading={isLoading} />
     )

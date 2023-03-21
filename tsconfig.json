@@ -53,5 +53,11 @@
       ]
     },
     "outDir": "./bin"
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "src/*"
+    ],
+    "out": "wiki"
   }
 }
