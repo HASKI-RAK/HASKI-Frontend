@@ -2,7 +2,7 @@
 
 The bridge between AI backend models and LMS, wrapped in a web application.
 
-The complete **technical documentation** can be found [here](modules.md).
+The complete **technical documentation** can be found [here](Exports).
 
 ## Setup
 
