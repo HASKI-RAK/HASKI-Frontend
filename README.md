@@ -2,6 +2,8 @@
 
 The bridge between AI backend models and LMS, wrapped in a web application.
 
+The complete **technical documentation** can be found [here](Exports).
+
 ## Setup
 
 - Install a JavaScript Runtime like [Node.js](https://nodejs.org/).

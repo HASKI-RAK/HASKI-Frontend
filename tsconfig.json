@@ -54,5 +54,11 @@
       ],
     },
     "outDir": "./bin"
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "src/*"
+    ],
+    "out": "docs"
   }
 }

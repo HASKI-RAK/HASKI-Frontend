@@ -38,12 +38,18 @@ const styleBox = {
     p: 1,
 };
 
-export const QuestionnaireResultsModal = () => {
+type QuestionnaireResultsModalProps = {
+    open?: boolean;
+    handleClose?: () => void;
+}
+
+export const QuestionnaireResultsModal = ({open=false, handleClose}: QuestionnaireResultsModalProps) => {
     const {t} = useTranslation();
 
     const steps = [t("components.QuestionnaireResults.ResultDescriptionILS.ILSResults"), t("components.QuestionnaireResults.ResultDescriptionILS.ListKResults")];
-    const [open, setOpen] = useState(false);
+
     const [activeStep, setActiveStep] = useState(0);
+
 
     const handleBack = () => {
         setActiveStep(activeStep - 1);
@@ -54,18 +60,11 @@ export const QuestionnaireResultsModal = () => {
 
     };
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
     return (
         <div>
-            <Button variant="contained"
-                    color="primary"
-                    onClick={handleOpen}
-                    data-testid={"QuestionnaireResultsButton"}>{t("components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText")}
-            </Button>
             <Modal
-                id={"myModal"}
+                data-testid={"ILS and ListK Modal"}
                 open={open}
                 onClose={handleClose}
             >
@@ -79,7 +78,6 @@ export const QuestionnaireResultsModal = () => {
                                 <Step key={label} data-testid={"StepperButton"}>
                                     <StepButton color="inherit" onClick={() => {
                                         setActiveStep(index);
-                                        handleOpen();
                                     }}>
                                         {label}
                                     </StepButton>

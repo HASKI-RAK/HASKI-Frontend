@@ -11,6 +11,16 @@ export type LoginHookReturn = {
     readonly onSubmit: () => void;
 };
 
+/**
+ * Hook for the login logic. Handles the login request and redirects to the home page.
+ * 
+ * @remarks
+ * If a nonce is passed, the user can be authenticated with the nonce.
+ * If no nonce is passed the user is redirected to the login page without a nonce.
+ * 
+ * @param params - Contain nonce and setIsLoading
+ * @returns {LoginHookReturn} - The login logic.
+ */
 export const useLogin = (params: LoginHookParams): LoginHookReturn => {
 
     const authcontext = useContext(AuthContext);

@@ -1,5 +1,6 @@
 import "@testing-library/jest-dom";
-import {ResultDescriptionListK} from "@components";
+//tests fail because of i18next, if import is shortened
+import {ResultDescriptionListK} from "./ResultDescriptionListK";
 import {setListKParameters} from "./TableListK";
 
 jest.mock('react-i18next', () => ({
