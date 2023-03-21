@@ -58,6 +58,6 @@
     "entryPoints": [
       "src/*"
     ],
-    "out": "wiki"
+    "out": "docs"
   }
 }
