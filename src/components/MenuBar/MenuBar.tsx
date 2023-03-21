@@ -1,8 +1,6 @@
 import { AppBar, Container, Toolbar, Typography, Box, IconButton, Menu, Button, Tooltip, Avatar, SvgIcon, Paper } from "@mui/material";
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
-// import { Logo } from "@shared";
-import Logo from '../../shared/images/LogoPng.png'
 import { useNavigate } from "react-router-dom";
 
 const MenuBar = () => {
@@ -10,7 +8,7 @@ const MenuBar = () => {
     return <AppBar position="static">
         <Container maxWidth="xl">
             <Toolbar disableGutters>
-                <img src={Logo} width="10%" height="10%" onClick={() => navigate("/")} style={{ margin: '5px' }} />
+                <img src={"/LogoPng.png"} width="10%" height="10%" onClick={() => navigate("/")} style={{ margin: '5px' }} />
                 <Typography
                     variant="h6"
                     noWrap

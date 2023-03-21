@@ -5,10 +5,14 @@ import { Config } from '@jest/types'
 
 const config: Config.InitialOptions = {
     preset: 'ts-jest',
-    moduleNameMapper: { "react-i18next": "<rootDir>/__mocks__/react-i18next", '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy', ...pathsToModuleNameMapper(compilerOptions.paths) },
+    moduleNameMapper: {
+        "react-i18next": "<rootDir>/__mocks__/react-i18next",
+        '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+        ...pathsToModuleNameMapper(compilerOptions.paths)
+    },
     modulePaths: [
         '<rootDir>',
-        '<rootDir>/src',
+        '<rootDir>/src'
     ],
     roots: [
         "<rootDir>/src/"
