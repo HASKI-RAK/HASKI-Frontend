@@ -564,7 +564,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
     };
 
     const onClickClose = () => {
-        if(window.confirm("Do you really want to cancel the Questionnaire?")) {
+        if(window.confirm(t("CloseWebsite").toString())) {
             navigate('/');
         }
     }

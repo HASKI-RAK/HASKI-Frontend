@@ -279,5 +279,6 @@
 	"Dot": ".",
 	"Next": "Weiter",
 	"pages.glossary.title": "Glossar",
-	"pages.login.redirect": "Sie werden weitergeleitet"
+	"pages.login.redirect": "Sie werden weitergeleitet",
+	"CloseWebsite":  "Deine Änderungen werden eventuell nicht gespeichert."
 }

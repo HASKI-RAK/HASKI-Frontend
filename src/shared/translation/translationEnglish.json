@@ -279,5 +279,6 @@
 	"Dot": ".",
 	"Next": "Next",
 	"pages.glossary.title": "Glossary",
-	"pages.login.redirect": "You will be redirected after a few seconds"
+	"pages.login.redirect": "You will be redirected after a few seconds",
+	"CloseWebsite":  "Your changes might not be saved."
 }
