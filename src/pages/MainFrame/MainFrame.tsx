@@ -1,35 +1,49 @@
 import { Breadcrumbs, Divider, Grid, Typography } from "@mui/material";
-import { Container, Stack } from "@mui/system"
+import { Box, Container, Stack } from "@mui/system"
 
 import { Outlet, useLocation } from "react-router-dom";
 import MenuBar from "src/components/MenuBar/MenuBar";
 
 const MainFrame = () => {
     return (
-        <Stack>
+        <Stack direction="column"
+            sx={{ minHeight: 'inherit' }}>
             <MenuBar />
-            {BreadcrumbsContainer()}
-            <Grid
-                container
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-            >
-                <Grid item xs={2} sx={{ borderRight: '2px solid grey' }}>
-                    {LocalNav()}
-                </Grid>
-                <Grid item xs={8}>
-                    <Container>
-                        <Outlet />
-                    </Container>
-                </Grid>
-                <Grid item xs={2}>
-                    <Typography variant="h4">Gamification</Typography>
-                </Grid>
+            <BreadcrumbsContainer />
+            <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
+                <Grid
+                    container
+                    item
+                    flexGrow={1}
+                    sx={{ alignItems: 'stretch' }}
+                >
+                    <Grid item xs={2} >
+                        <Box>
+                            <Typography variant="h5">Banner</Typography>
+                            <Divider />
+                            <Typography variant="h5">Banner</Typography>
+                            <Divider />
 
+                            <Typography variant="h5">Banner</Typography>
+                            <Divider />
+
+                            <Typography variant="h5">Banner</Typography>
+                        </Box>
+                        <Divider orientation="vertical" flexItem />
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Container>
+                            <Outlet />
+                        </Container>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Typography variant="h4">Gamification</Typography>
+                    </Grid>
+
+                </Grid>
+                <Divider flexItem />
+                <Footer />
             </Grid>
-            <Divider />
-            {Footer()}
         </Stack >
     )
 
@@ -48,16 +62,6 @@ const BreadcrumbsContainer = () => {
     </Breadcrumbs>;
 }
 
-const LocalNav = () => {
-    return <>
-        <Typography variant="h5">Banner</Typography>
-        <Divider />
-        <Typography variant="h5">Banner</Typography>
-        <Divider />
-
-        <Typography variant="h5">Banner</Typography>
-        <Divider />
-
-        <Typography variant="h5">Banner</Typography>
-    </>;
-}
+// const LocalNav = () => {
+//     return (
+// }
