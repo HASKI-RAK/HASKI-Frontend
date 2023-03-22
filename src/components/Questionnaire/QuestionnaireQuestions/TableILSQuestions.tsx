@@ -9,13 +9,14 @@ import MobileStepper from '@mui/material/MobileStepper';
 import {Box, FormControlLabel, Radio, RadioGroup, Stack, Typography, useTheme} from "@mui/material";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import {DefaultButton as Button} from "@common/components";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import {styled} from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import {useNavigate} from "react-router-dom";
+import {useQuestionnaireAnswersILSStore} from "@services";
 
 const StyledTableCellQuestion = styled(TableCell)(() => ({
     [`&.${tableCellClasses.body}`]: {
@@ -39,6 +40,15 @@ const StyledMobileStepper = styled(MobileStepper)(() => ({
      'background-color': `linear-gradient(to right, #8d44486 0%, #ff0000 50%, #ffffff 50%, #ffffff 100%)`, // Change this to the desired colors and percentages
      },*/
 }));
+
+// Before reload or close window ask the user if he is sure
+window.addEventListener("beforeunload", (e: BeforeUnloadEvent) => {
+    // Cancel the event
+    e.preventDefault();
+
+    // Chrome requires returnValue to be set
+    e.returnValue = "";
+});
 
 const stepsShortILS = [
     [
@@ -476,40 +486,93 @@ export const TableILSQuestions = (ilsLong: boolean) => {
     const [radioButton4, setRadioButton4] = useState("");
     const isNextDisabled = !radioButton1 || !radioButton2 || !radioButton3 || !radioButton4;
 
+    const { questionnaireAnswers, setQuestionnaireAnswers } = useQuestionnaireAnswersILSStore();
+
+
     type ILStype = { question_id: string, answer: string };
-    const shortILSarray: ILStype[] = [];
-    const longILSarray: ILStype[] = [];
+    //const shortILSarray: ILStype[] = [];
+    //const [longILSarray, setLongILSarray] = useState<ILStype[]>([]);
+
+    useEffect(() => {
+        //console.log(longILSarray);
+        console.log(questionnaireAnswers)
+    }, [questionnaireAnswers]);
+
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        setRadioButton1("");
-        setRadioButton2("");
-        setRadioButton3("");
-        setRadioButton4("");
+        if(ilsLong) {
+            setRadioButton1(handleBackAndNext(stepsLongILS[activeStep+1][0]));
+            setRadioButton2(handleBackAndNext(stepsLongILS[activeStep+1][1]));
+            setRadioButton3(handleBackAndNext(stepsLongILS[activeStep+1][2]));
+            setRadioButton4(handleBackAndNext(stepsLongILS[activeStep+1][3]));
+        }
+        else{
+            setRadioButton1(handleBackAndNext(stepsShortILS[activeStep+1][0]));
+            setRadioButton2(handleBackAndNext(stepsShortILS[activeStep+1][1]));
+            setRadioButton3(handleBackAndNext(stepsShortILS[activeStep+1][2]));
+            setRadioButton4(handleBackAndNext(stepsShortILS[activeStep+1][3]));
+        }
     };
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        if(ilsLong){
+            setRadioButton1(handleBackAndNext(stepsLongILS[activeStep-1][0]));
+            setRadioButton2(handleBackAndNext(stepsLongILS[activeStep-1][1]));
+            setRadioButton3(handleBackAndNext(stepsLongILS[activeStep-1][2]));
+            setRadioButton4(handleBackAndNext(stepsLongILS[activeStep-1][3]));
+        }
+        else{
+            setRadioButton1(handleBackAndNext(stepsShortILS[activeStep-1][0]));
+            setRadioButton2(handleBackAndNext(stepsShortILS[activeStep-1][1]));
+            setRadioButton3(handleBackAndNext(stepsShortILS[activeStep-1][2]));
+            setRadioButton4(handleBackAndNext(stepsShortILS[activeStep-1][3]));
+        }
+
     };
 
     const handleFinish = () => {
         // TODO: Send the answers to the database
     }
 
+    const handleBackAndNext = (ilsStep:{ question: string, questionLabel: string, answer1: string, answer2: string }) => {
+
+        //this returns a or b
+        if(questionnaireAnswers[ilsStep.questionLabel as keyof typeof questionnaireAnswers] === "a"){
+            return ilsStep.answer1
+        }
+        else if(questionnaireAnswers[ilsStep.questionLabel as keyof typeof questionnaireAnswers] === "b"){
+            return ilsStep.answer2
+        }
+        else{
+            return ""
+        }
+    }
+
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>, ilsStep: { question: string, questionLabel: string, answer1: string, answer2: string }) => {
         const radioButtonOptions = [ilsStep.answer1, ilsStep.answer2];
-        const selectedAnswer = radioButtonOptions.indexOf(event.target.value);
+        let selectedAnswer = "";
+        if(radioButtonOptions.indexOf(event.target.value) === 0){
+            selectedAnswer = "a";
+        }
+        else{
+            selectedAnswer = "b";
+        }
 
         /*
         if(longILSarray.find(element => element.question_id === ilsStep.questionLabel)){
-            longILSarray.find(element => element.question_id === ilsStep.questionLabel)!.answer = event.target.value;
+            longILSarray.find(element => element.question_id === ilsStep.questionLabel)!.answer = selectedAnswer.toString();
         }
         else{
-            longILSarray.push({question_id: ilsStep.questionLabel, answer: selectedAnswer.toString()});
+            const newILSArray = [
+                ...longILSarray.filter((item) => item.question_id !== ilsStep.questionLabel),
+                { question_id: ilsStep.questionLabel, answer: selectedAnswer.toString() },
+            ];
+            setLongILSarray(newILSArray);
         }*/
-        longILSarray.push({question_id: ilsStep.questionLabel, answer: selectedAnswer.toString()});
 
-        console.log(longILSarray);
+        setQuestionnaireAnswers(ilsStep.questionLabel , selectedAnswer.toString() );
     };
 
     const onClickClose = () => {
@@ -631,7 +694,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                         value={radioButton1}
                         onChange={e => {
                             setRadioButton1(e.target.value);
-                            handleRadioChange(e, stepsLongILS[activeStep][3])
+                            handleRadioChange(e, stepsShortILS[activeStep][0])
                         }}
                         name="Question1-radio-buttons-group"
                     >
@@ -655,7 +718,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                         value={radioButton2}
                         onChange={e => {
                             setRadioButton2(e.target.value);
-                            handleRadioChange(e, stepsLongILS[activeStep][3])
+                            handleRadioChange(e, stepsShortILS[activeStep][1])
                         }}
                         name="Question1-radio-buttons-group"
                     >
@@ -679,7 +742,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                         value={radioButton3}
                         onChange={e => {
                             setRadioButton3(e.target.value);
-                            handleRadioChange(e, stepsLongILS[activeStep][3])
+                            handleRadioChange(e, stepsShortILS[activeStep][2])
                         }}
                         name="Question1-radio-buttons-group"
                     >
@@ -703,7 +766,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                         value={radioButton4}
                         onChange={e => {
                             setRadioButton4(e.target.value);
-                            handleRadioChange(e, stepsLongILS[activeStep][3])
+                            handleRadioChange(e, stepsShortILS[activeStep][3])
                         }}
                         name="Question1-radio-buttons-group"
                     >
@@ -721,7 +784,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
 
     return (
         <Box>
-            <IconButton color="primary" sx={styleButtonClose} onClick={onClickClose} data-testid={"QuestionnaireResultsCloseButton"}>
+            <IconButton id={"QuestionnaireAnswersCloseButton"} color="primary" sx={styleButtonClose} onClick={onClickClose} data-testid={"QuestionnaireAnswersCloseButton"}>
                 <CloseIcon/>
             </IconButton>
             <Stack
