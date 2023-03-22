@@ -9,7 +9,7 @@ import MobileStepper from '@mui/material/MobileStepper';
 import {Box, FormControlLabel, Radio, RadioGroup, Stack, Typography, useTheme} from "@mui/material";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import {DefaultButton as Button} from "@common/components";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import {styled} from "@mui/material/styles";
@@ -30,16 +30,6 @@ const styleButtonClose = {
     top: '1%',
     p: 2,
 }
-
-const StyledMobileStepper = styled(MobileStepper)(() => ({
-    // Override the color of the progress bar here
-    ['.css-187aqqa-MuiLinearProgress-bar1']: {
-        ['background-color']: '#8d4446', // Change this to the desired color
-    },
-    /*[`& .MuiMobileStepper-progress`]: {
-     'background-color': `linear-gradient(to right, #8d44486 0%, #ff0000 50%, #ffffff 50%, #ffffff 100%)`, // Change this to the desired colors and percentages
-     },*/
-}));
 
 // Before reload or close window ask the user if he is sure
 window.addEventListener("beforeunload", (e: BeforeUnloadEvent) => {
@@ -488,17 +478,6 @@ export const TableILSQuestions = (ilsLong: boolean) => {
 
     const { questionnaireAnswers, setQuestionnaireAnswers } = useQuestionnaireAnswersILSStore();
 
-
-    type ILStype = { question_id: string, answer: string };
-    //const shortILSarray: ILStype[] = [];
-    //const [longILSarray, setLongILSarray] = useState<ILStype[]>([]);
-
-    useEffect(() => {
-        //console.log(longILSarray);
-        console.log(questionnaireAnswers)
-    }, [questionnaireAnswers]);
-
-
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         if(ilsLong) {
@@ -533,7 +512,16 @@ export const TableILSQuestions = (ilsLong: boolean) => {
     };
 
     const handleSend = () => {
-        console.log(questionnaireAnswers);
+        const ILSarray:string[][] = [];
+        for (const [key, value] of Object.entries(questionnaireAnswers)) {
+            if(key !== ""){
+                ILSarray.push([key,value]);
+            }
+        }
+        const ils_result = ["ils", ILSarray]
+        console.log(JSON.stringify(ils_result));
+        //todo: send to server
+
     }
 
     const handleBackAndNext = (ilsStep:{ question: string, questionLabel: string, answer1: string, answer2: string }) => {
@@ -786,7 +774,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                     justifyContent="space-around"
                     alignItems="center"
                 >
-                    <StyledMobileStepper
+                    <MobileStepper
                         variant="progress"
                         steps={ilsLong ? 11 : 5}
                         position="static"

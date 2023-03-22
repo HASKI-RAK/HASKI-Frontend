@@ -1,5 +1,6 @@
 {
 	"Back": "Zurück",
+	"CloseWebsite": "Deine Änderungen werden eventuell nicht gespeichert.",
 	"components.login.login": "Anmelden",
 	"components.login.password": "Passwort",
 	"components.login.passwordError": "Bitte geben Sie ein gültiges Passwort ein",
@@ -279,6 +280,5 @@
 	"Dot": ".",
 	"Next": "Weiter",
 	"pages.glossary.title": "Glossar",
-	"pages.login.redirect": "Sie werden weitergeleitet",
-	"CloseWebsite":  "Deine Änderungen werden eventuell nicht gespeichert."
+	"pages.login.redirect": "Sie werden weitergeleitet"
 }
