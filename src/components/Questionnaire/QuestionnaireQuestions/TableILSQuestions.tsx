@@ -532,8 +532,8 @@ export const TableILSQuestions = (ilsLong: boolean) => {
 
     };
 
-    const handleFinish = () => {
-        // TODO: Send the answers to the database
+    const handleSend = () => {
+        console.log(questionnaireAnswers);
     }
 
     const handleBackAndNext = (ilsStep:{ question: string, questionLabel: string, answer1: string, answer2: string }) => {
@@ -552,25 +552,13 @@ export const TableILSQuestions = (ilsLong: boolean) => {
 
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>, ilsStep: { question: string, questionLabel: string, answer1: string, answer2: string }) => {
         const radioButtonOptions = [ilsStep.answer1, ilsStep.answer2];
-        let selectedAnswer = "";
+        let selectedAnswer;
         if(radioButtonOptions.indexOf(event.target.value) === 0){
             selectedAnswer = "a";
         }
         else{
             selectedAnswer = "b";
         }
-
-        /*
-        if(longILSarray.find(element => element.question_id === ilsStep.questionLabel)){
-            longILSarray.find(element => element.question_id === ilsStep.questionLabel)!.answer = selectedAnswer.toString();
-        }
-        else{
-            const newILSArray = [
-                ...longILSarray.filter((item) => item.question_id !== ilsStep.questionLabel),
-                { question_id: ilsStep.questionLabel, answer: selectedAnswer.toString() },
-            ];
-            setLongILSarray(newILSArray);
-        }*/
 
         setQuestionnaireAnswers(ilsStep.questionLabel , selectedAnswer.toString() );
     };
@@ -858,6 +846,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                                             color="primary"
                                             data-testid="sendButton"
                                             disabled={isNextDisabled}
+                                            onClick={handleSend}
                                             sx={{m: 2}}>
                                         {t("Send")}
                                     </Button>

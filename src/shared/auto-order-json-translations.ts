@@ -1,10 +1,10 @@
 ﻿/* eslint-disable @typescript-eslint/ban-ts-comment */
 //@ts-nocheck
 //@ts-ignore
-import fs from 'fs';
-import path from 'path';
-import english from './translation/translationEnglish.json';
-import german from './translation/translationGerman.json';
+const fs = require('fs');
+const path = require('path');
+const english = require('./translation/translationEnglish.json');
+const german = require('./translation/translationGerman.json');
 
 const orderTranslationFile = (translationObject, translationPath) => {
 

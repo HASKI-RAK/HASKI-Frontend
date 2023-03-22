@@ -48,7 +48,6 @@ const useQuestionnaireAnswersILSStore = create<QuestionnaireAnswersILS>((set) =>
         "SI_11_F42": "",
         "VV_11_F43": "",
         "SG_11_F44": "",
-        "" : "",
     },
     setQuestionnaireAnswers: (question_id: string, newAnswer: string) =>
         set((state) => ({
