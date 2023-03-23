@@ -576,7 +576,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                     >
                         <FormControlLabel value={stepsLongILS[activeStep][0].answer1} control={<Radio/>}
                                           label={<Typography variant={"h6"}>{t(stepsLongILS[activeStep][0].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px solid rgba(36,38,42,0.65)"}} value={stepsLongILS[activeStep][0].answer2} control={<Radio/>}
+                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsLongILS[activeStep][0].answer2} control={<Radio/>}
                                           label={<Typography variant={"h6"}>{t(stepsLongILS[activeStep][0].answer2)}</Typography>}/>
                     </RadioGroup>
                 </TableCell>
@@ -599,7 +599,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                         <FormControlLabel value={stepsLongILS[activeStep][1].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsLongILS[activeStep][1].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px solid rgba(36,38,42,0.65)"}} value={stepsLongILS[activeStep][1].answer2} control={<Radio/>}
+                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsLongILS[activeStep][1].answer2} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsLongILS[activeStep][1].answer2)}</Typography>}/>
                     </RadioGroup>
@@ -623,7 +623,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                         <FormControlLabel value={stepsLongILS[activeStep][2].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsLongILS[activeStep][2].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px solid rgba(36,38,42,0.65)"}} value={stepsLongILS[activeStep][2].answer2} control={<Radio/>}
+                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsLongILS[activeStep][2].answer2} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsLongILS[activeStep][2].answer2)}</Typography>}/>
                     </RadioGroup>
@@ -647,7 +647,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                         <FormControlLabel value={stepsLongILS[activeStep][3].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsLongILS[activeStep][3].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px solid rgba(36,38,42,0.65)"}} value={stepsLongILS[activeStep][3].answer2} control={<Radio/>}
+                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsLongILS[activeStep][3].answer2} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsLongILS[activeStep][3].answer2)}</Typography>}/>
                     </RadioGroup>
@@ -677,7 +677,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                         <FormControlLabel value={stepsShortILS[activeStep][0].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][0].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px solid rgba(36,38,42,0.65)"}} value={stepsShortILS[activeStep][0].answer2} control={<Radio/>}
+                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsShortILS[activeStep][0].answer2} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][0].answer2)}</Typography>}/>
                     </RadioGroup>
@@ -701,7 +701,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                         <FormControlLabel value={stepsShortILS[activeStep][1].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][1].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px solid rgba(36,38,42,0.65)"}} value={stepsShortILS[activeStep][1].answer2} control={<Radio/>}
+                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsShortILS[activeStep][1].answer2} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][1].answer2)}</Typography>}/>
                     </RadioGroup>
@@ -725,7 +725,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                         <FormControlLabel value={stepsShortILS[activeStep][2].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][2].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px solid rgba(36,38,42,0.65)"}} value={stepsShortILS[activeStep][2].answer2} control={<Radio/>}
+                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsShortILS[activeStep][2].answer2} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][2].answer2)}</Typography>}/>
                     </RadioGroup>
@@ -749,7 +749,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
                         <FormControlLabel value={stepsShortILS[activeStep][3].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][3].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px solid rgba(36,38,42,0.65)"}} value={stepsShortILS[activeStep][3].answer2} control={<Radio/>}
+                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsShortILS[activeStep][3].answer2} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][3].answer2)}</Typography>}/>
                     </RadioGroup>
