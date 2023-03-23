@@ -24,7 +24,7 @@ module.exports = {
         allowedHosts: "all",
     },
     target: 'web',
-    output: { filename: 'index.bundle.js', path: path.resolve(__dirname, 'dist') },
+    output: { filename: 'index.bundle.js', path: path.resolve(__dirname, 'dist'), publicPath: '/' },
     module: {
         rules: [
             {

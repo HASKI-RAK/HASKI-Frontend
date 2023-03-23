@@ -1,9 +1,23 @@
-import { Breadcrumbs, Divider, Grid, Typography } from "@mui/material";
-import { Box, Container, Stack } from "@mui/system"
+import { Divider, Grid, Typography } from "@mui/material";
+import { Box, Container, Stack } from "@mui/system";
+import { Outlet } from "react-router-dom";
+import { MenuBar } from "@components";
+import { Footer } from "@components";
+import { BreadcrumbsContainer } from "@components";
+import { LocalNav } from "@components";
 
-import { Outlet, useLocation } from "react-router-dom";
-import MenuBar from "src/components/MenuBar/MenuBar";
-
+/**
+ * Main frame component.
+ * 
+ * @remarks
+ * It contains the main frame of the application and is used in the App.tsx.
+ * It contains the menu bar, the breadcrumbs, the local navigation and the outlet for the other pages.
+ * The footer is also included.
+ * It holds a layout for all pages.
+ * Help, Global settings and User settings are also included in the menu bar. 
+ * 
+ * @category Pages
+ */
 const MainFrame = () => {
     return (
         <Stack direction="column"
@@ -17,19 +31,11 @@ const MainFrame = () => {
                     flexGrow={1}
                     sx={{ alignItems: 'stretch' }}
                 >
-                    <Grid item xs={2} >
-                        <Box>
-                            <Typography variant="h5">Banner</Typography>
-                            <Divider />
-                            <Typography variant="h5">Banner</Typography>
-                            <Divider />
-
-                            <Typography variant="h5">Banner</Typography>
-                            <Divider />
-
-                            <Typography variant="h5">Banner</Typography>
+                    <Grid item xs={2}>
+                        <Box height={'100%'} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch' }}>
+                            <LocalNav />
+                            <Divider flexItem orientation="vertical" />
                         </Box>
-                        <Divider orientation="vertical" flexItem />
                     </Grid>
                     <Grid item xs={8}>
                         <Container>
@@ -49,19 +55,5 @@ const MainFrame = () => {
 
 };
 
-const Footer = () => {
-    return <Typography variant="h1">Footer</Typography>;
-}
 export default MainFrame;
 
-
-const BreadcrumbsContainer = () => {
-    const location = useLocation();
-    return <Breadcrumbs aria-label="breadcrumb">
-        <Typography color="text.primary">{location.pathname}</Typography>
-    </Breadcrumbs>;
-}
-
-// const LocalNav = () => {
-//     return (
-// }
