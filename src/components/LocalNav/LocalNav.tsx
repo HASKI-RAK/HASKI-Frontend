@@ -12,6 +12,7 @@ export const LocalNav = () => {
     return <Box flexGrow={1}>
         <Typography variant="h5">Themenbereiche</Typography>
         <Divider />
+        {/** TODO 📑 add real topics */}
         <Typography variant="h6">
             1. Übersicht
         </Typography>

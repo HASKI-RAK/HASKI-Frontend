@@ -2,6 +2,14 @@ import { Breadcrumbs, Link } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
+/**
+ * Breadcrumbs container component.
+ * 
+ * @remarks
+ * It contains the breadcrumbs of the application and is used in the main frame. * 
+ * 
+ * @category Components
+ */
 export const BreadcrumbsContainer = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
