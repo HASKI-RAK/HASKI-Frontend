@@ -8,12 +8,12 @@ jest.mock('react-i18next', () => ({
     useTranslation: () => {
         return {
             t: (str: string) => {
-                if(str==='components.QuestionnaireResults.TableILS.balanced') return 'balanced'
+                if(str==='components.Questionnaire.QuestionnaireResults.TableILS.balanced') return 'balanced'
                 else return str.substring(41,str.length); },
             i18n: {
                 //changeLanguage: () => new Promise(() => {}),
                 getFixedT: () => (str: string) => {
-                    if(str==='components.QuestionnaireResults.TableILS.balanced') return 'balanced'
+                    if(str==='components.Questionnaire.QuestionnaireResults.TableILS.balanced') return 'balanced'
                     else return str.substring(41,str.length); },
                 // You can include here any property your component may use
             },

@@ -12,7 +12,7 @@ jest.mock('react-i18next', () => ({
             i18n: {
                 //changeLanguage: () => new Promise(() => {}),
                 getFixedT: () => (str: string) => {
-                    if(str === 'components.QuestionnaireResults.TableILS.balanced') return 'balanced'
+                    if(str === 'components.Questionnaire.QuestionnaireResults.TableILS.balanced') return 'balanced'
                     else return str;
                 },
                 // You can include here any property your component may use
@@ -58,7 +58,7 @@ describe("Test ResultDescriptionListK with all Methods", () => {
 
         const {getByTestId, getByText} = render(<QuestionnaireResultsModal open={true} handleClose={()=>false}/>);
 
-        fireEvent.click(getByText('components.QuestionnaireResults.ResultDescriptionILS.ILSResults'));
+        fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.ILSResults'));
         expect(getByTestId("ActiveStepILS")).toBeInTheDocument();
     });
 
@@ -66,7 +66,7 @@ describe("Test ResultDescriptionListK with all Methods", () => {
 
         const {getByTestId, getByText} = render(<QuestionnaireResultsModal open={true} handleClose={()=>false}/>);
 
-        fireEvent.click(getByText('components.QuestionnaireResults.ResultDescriptionILS.ListKResults'));
+        fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.ListKResults'));
         expect(getByTestId("ActiveStepListK")).toBeInTheDocument();
     });
 

@@ -28,28 +28,28 @@ describe("Test TableList-K with all Methods", () => {
 
         const {getAllByRole} = render(<TableListK/>);
 
-        expect(getAllByRole("columnheader")[0]).toHaveTextContent("components.QuestionnaireResults.TableListK.Factors & subscales");
-        expect(getAllByRole("columnheader")[1]).toHaveTextContent("components.QuestionnaireResults.TableListK.Score");
-        expect(getAllByRole("columnheader")[2]).toHaveTextContent("components.QuestionnaireResults.TableListK.Factors & subscales");
-        expect(getAllByRole("columnheader")[3]).toHaveTextContent("components.QuestionnaireResults.TableListK.Score");
-        expect(getAllByRole("cell")[0]).toHaveTextContent("components.QuestionnaireResults.TableListK.Cognitive strategies");
-        expect(getAllByRole("cell")[2]).toHaveTextContent("components.QuestionnaireResults.TableListK.Internal resource management strategies");
-        expect(getAllByRole("cell")[4]).toHaveTextContent("components.QuestionnaireResults.TableListK.Organize");
-        expect(getAllByRole("cell")[6]).toHaveTextContent("components.QuestionnaireResults.TableListK.Attention");
-        expect(getAllByRole("cell")[8]).toHaveTextContent("components.QuestionnaireResults.TableListK.Elaborate");
-        expect(getAllByRole("cell")[10]).toHaveTextContent("components.QuestionnaireResults.TableListK.Effort");
-        expect(getAllByRole("cell")[12]).toHaveTextContent("components.QuestionnaireResults.TableListK.Critical review");
-        expect(getAllByRole("cell")[14]).toHaveTextContent("components.QuestionnaireResults.TableListK.Time");
-        expect(getAllByRole("cell")[16]).toHaveTextContent("components.QuestionnaireResults.TableListK.Repeat");
+        expect(getAllByRole("columnheader")[0]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Factors & subscales");
+        expect(getAllByRole("columnheader")[1]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Score");
+        expect(getAllByRole("columnheader")[2]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Factors & subscales");
+        expect(getAllByRole("columnheader")[3]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Score");
+        expect(getAllByRole("cell")[0]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Cognitive strategies");
+        expect(getAllByRole("cell")[2]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Internal resource management strategies");
+        expect(getAllByRole("cell")[4]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Organize");
+        expect(getAllByRole("cell")[6]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Attention");
+        expect(getAllByRole("cell")[8]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Elaborate");
+        expect(getAllByRole("cell")[10]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Effort");
+        expect(getAllByRole("cell")[12]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Critical review");
+        expect(getAllByRole("cell")[14]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Time");
+        expect(getAllByRole("cell")[16]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Repeat");
         expect(getAllByRole("cell")[18]).toHaveTextContent("");
-        expect(getAllByRole("cell")[20]).toHaveTextContent("components.QuestionnaireResults.TableListK.Metacognitive strategies");
-        expect(getAllByRole("cell")[22]).toHaveTextContent("components.QuestionnaireResults.TableListK.External resource management strategies");
-        expect(getAllByRole("cell")[24]).toHaveTextContent("components.QuestionnaireResults.TableListK.Goals & plans");
-        expect(getAllByRole("cell")[26]).toHaveTextContent("components.QuestionnaireResults.TableListK.Learning with classmates");
-        expect(getAllByRole("cell")[28]).toHaveTextContent("components.QuestionnaireResults.TableListK.Control");
-        expect(getAllByRole("cell")[30]).toHaveTextContent("components.QuestionnaireResults.TableListK.Literature research");
-        expect(getAllByRole("cell")[32]).toHaveTextContent("components.QuestionnaireResults.TableListK.Regulate");
-        expect(getAllByRole("cell")[34]).toHaveTextContent("components.QuestionnaireResults.TableListK.Learning environment");
+        expect(getAllByRole("cell")[20]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Metacognitive strategies");
+        expect(getAllByRole("cell")[22]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.External resource management strategies");
+        expect(getAllByRole("cell")[24]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Goals & plans");
+        expect(getAllByRole("cell")[26]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Learning with classmates");
+        expect(getAllByRole("cell")[28]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Control");
+        expect(getAllByRole("cell")[30]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Literature research");
+        expect(getAllByRole("cell")[32]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Regulate");
+        expect(getAllByRole("cell")[34]).toHaveTextContent("components.Questionnaire.QuestionnaireResults.TableListK.Learning environment");
     });
 
     test("Table Score-values are numbers",

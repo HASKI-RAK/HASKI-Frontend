@@ -12,20 +12,20 @@ export const useData = (): { possibleDimensions: string, [Dimension: string]: st
 
     return [
         {
-            "possibleDimensions": t("components.QuestionnaireResults.TableILS.Global") + " / " + t("components.QuestionnaireResults.TableILS.Sequential"),
-            [t("components.QuestionnaireResults.TableILS.Dimension")]: [dimensionFourScore].toString(),
+            "possibleDimensions": t("components.Questionnaire.QuestionnaireResults.TableILS.Global") + " / " + t("components.Questionnaire.QuestionnaireResults.TableILS.Sequential"),
+            [t("components.Questionnaire.QuestionnaireResults.TableILS.Dimension")]: [dimensionFourScore].toString(),
         },
         {
-            "possibleDimensions": t("components.QuestionnaireResults.TableILS.Verbal") + " / " + t("components.QuestionnaireResults.TableILS.Visual"),
-            [t("components.QuestionnaireResults.TableILS.Dimension")]: dimensionThreeScore.toString(),
+            "possibleDimensions": t("components.Questionnaire.QuestionnaireResults.TableILS.Verbal") + " / " + t("components.Questionnaire.QuestionnaireResults.TableILS.Visual"),
+            [t("components.Questionnaire.QuestionnaireResults.TableILS.Dimension")]: dimensionThreeScore.toString(),
         },
         {
-            "possibleDimensions": t("components.QuestionnaireResults.TableILS.Intuitive") + " / " + t("components.QuestionnaireResults.TableILS.Sensory"),
-            [t("components.QuestionnaireResults.TableILS.Dimension")]: dimensionTwoScore.toString(),
+            "possibleDimensions": t("components.Questionnaire.QuestionnaireResults.TableILS.Intuitive") + " / " + t("components.Questionnaire.QuestionnaireResults.TableILS.Sensory"),
+            [t("components.Questionnaire.QuestionnaireResults.TableILS.Dimension")]: dimensionTwoScore.toString(),
         },
         {
-            "possibleDimensions": t("components.QuestionnaireResults.TableILS.Reflective") + " / " + t("components.QuestionnaireResults.TableILS.Active"),
-            [t("components.QuestionnaireResults.TableILS.Dimension")]: dimensionOneScore.toString(),
+            "possibleDimensions": t("components.Questionnaire.QuestionnaireResults.TableILS.Reflective") + " / " + t("components.Questionnaire.QuestionnaireResults.TableILS.Active"),
+            [t("components.Questionnaire.QuestionnaireResults.TableILS.Dimension")]: dimensionOneScore.toString(),
         },
     ];
 };
@@ -43,13 +43,13 @@ export const GraphILS = () => {
                 width={750}
                 height={300}
                 data={data}
-                keys={[t("components.QuestionnaireResults.TableILS.Dimension")]}
+                keys={[t("components.Questionnaire.QuestionnaireResults.TableILS.Dimension")]}
                 indexBy={"possibleDimensions"}
                 margin={{top: 0, right: 100, bottom: 50, left: 80}}
                 padding={0.3}
                 axisBottom={{
                     tickSize: 5, tickValues: [-11, -9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11], tickPadding: 5, tickRotation: 0,
-                    legend: t("components.QuestionnaireResults.TableILS.Score"), legendPosition: 'middle', legendOffset: 32
+                    legend: t("components.Questionnaire.QuestionnaireResults.TableILS.Score"), legendPosition: 'middle', legendOffset: 32
                 }}
                 axisLeft={{
                     tickSize: 5, tickPadding: 5, tickRotation: 0, format: (value: string) => {

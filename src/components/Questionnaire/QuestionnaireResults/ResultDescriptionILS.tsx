@@ -41,10 +41,10 @@ export const ResultDescriptionILS = ({ILSdim=ILSDimension}: ResultDescriptionILS
             unbalancedDimensionsArray.push(
                 <div key={"Dimension: "+dimensionArray[index] + " Interpretation: " + interpretationArray[index]}>
                     <Typography variant="h6" gutterBottom>
-                        {t("components.QuestionnaireResults.TableILS." + dimensionArray[index])}
+                        {t("components.Questionnaire.QuestionnaireResults.TableILS." + dimensionArray[index])}
                     </Typography>
                     <Typography variant="body1" gutterBottom>
-                        {t("components.QuestionnaireResults.ResultDescriptionILS." + dimensionArray[index] + "." + interpretationArray[index])} <br/>
+                        {t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS." + dimensionArray[index] + "." + interpretationArray[index])} <br/>
                     </Typography>
                 </div>)
         }
@@ -59,7 +59,7 @@ export const ResultDescriptionILS = ({ILSdim=ILSDimension}: ResultDescriptionILS
                         Alle Dimensionen
                     </Typography>
                     <Typography variant="body1" gutterBottom>
-                        {t("components.QuestionnaireResults.ResultDescriptionILS.EverythingBalanced")}
+                        {t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.EverythingBalanced")}
                     </Typography>
                 </div>
             )
@@ -68,28 +68,28 @@ export const ResultDescriptionILS = ({ILSdim=ILSDimension}: ResultDescriptionILS
             for(const dim in balancedDimensionsArray) {
                 switch (balancedDimensionsArray[dim]) {
                     case "Active.balanced":
-                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing") + " & ";
+                        balancedDimensionsKeyWordString += t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing") + " & ";
                         break;
                     case "Reflective.balanced":
-                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing") + " & ";
+                        balancedDimensionsKeyWordString += t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing") + " & ";
                         break;
                     case "Sensory.balanced":
-                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception") + " & ";
+                        balancedDimensionsKeyWordString += t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception") + " & ";
                         break;
                     case "Intuitive.balanced":
-                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception") + " & ";
+                        balancedDimensionsKeyWordString += t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception") + " & ";
                         break;
                     case "Verbal.balanced":
-                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation") + " & ";
+                        balancedDimensionsKeyWordString += t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation") + " & ";
                         break;
                     case "Visual.balanced":
-                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation") + " & ";
+                        balancedDimensionsKeyWordString += t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation") + " & ";
                         break;
                     case "Sequential.balanced":
-                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation") + " & ";
+                        balancedDimensionsKeyWordString += t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation") + " & ";
                         break;
                     case "Global.balanced":
-                        balancedDimensionsKeyWordString += t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation") + " & ";
+                        balancedDimensionsKeyWordString += t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation") + " & ";
                         break;
                     default: break;
                 }}
@@ -97,10 +97,10 @@ export const ResultDescriptionILS = ({ILSdim=ILSDimension}: ResultDescriptionILS
             //Remove last " & "
             balancedDimensionsKeyWordString = balancedDimensionsKeyWordString.slice(0, balancedDimensionsKeyWordString.length - 2);
 
-            balancedDimensionsInterpretationString = t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part1") + " " +
-                t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced."+ balancedDimensionsArray.length) + " " +
-                t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part2") + " " + balancedDimensionsKeyWordString + " " +
-                t("components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part3");
+            balancedDimensionsInterpretationString = t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part1") + " " +
+                t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced."+ balancedDimensionsArray.length) + " " +
+                t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part2") + " " + balancedDimensionsKeyWordString + " " +
+                t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part3");
         }
     }
 
@@ -110,7 +110,7 @@ export const ResultDescriptionILS = ({ILSdim=ILSDimension}: ResultDescriptionILS
             {balancedDimensionsInterpretationString == "" ? <br/> :
                 <div key={"InnerDivResultDescriptionILS"}>
                     <Typography variant="h6" gutterBottom>
-                        {t("components.QuestionnaireResults.ResultDescriptionILS.RemainingDimensions")}
+                        {t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.RemainingDimensions")}
                     </Typography>
                     <Typography variant="body1" gutterBottom>
                         {balancedDimensionsInterpretationString}

@@ -46,7 +46,7 @@ type QuestionnaireResultsModalProps = {
 export const QuestionnaireResultsModal = ({open=false, handleClose}: QuestionnaireResultsModalProps) => {
     const {t} = useTranslation();
 
-    const steps = [t("components.QuestionnaireResults.ResultDescriptionILS.ILSResults"), t("components.QuestionnaireResults.ResultDescriptionILS.ListKResults")];
+    const steps = [t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.ILSResults"), t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.ListKResults")];
 
     const [activeStep, setActiveStep] = useState(0);
 

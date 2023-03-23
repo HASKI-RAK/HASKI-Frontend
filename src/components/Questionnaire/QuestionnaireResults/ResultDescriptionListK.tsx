@@ -47,16 +47,16 @@ const useGeneralSubscalesBelow3Element = (generalProps: GeneralSubscalesProps): 
         }
     }
     if(averageSubscaleBelow3Array.length > 1) {
-        averageSubscaleBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3." + averageSubscaleBelow3Array.length);
+        averageSubscaleBelow3String += " " + t("components.Questionnaire.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3." + averageSubscaleBelow3Array.length);
     }
 
     return(
         <div key={"GeneralDescriptionListK"}>
             <Typography variant="h6" gutterBottom>
-                {t("components.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Title")} <br/>
+                {t("components.Questionnaire.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Title")} <br/>
             </Typography>
             <Typography variant="body2" gutterBottom>
-                {t("components.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Description")}
+                {t("components.Questionnaire.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Description")}
                 {averageSubscaleBelow3String} <br/>
             </Typography>
         </div>
@@ -67,36 +67,36 @@ const useCognitiveStrategiesBelow3Element = (generalProps: CognitiveStrategiesPr
 
     const {t} = useTranslation();
 
-    let cognitiveStrategiesBelow3String = t("components.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part1");
+    let cognitiveStrategiesBelow3String = t("components.Questionnaire.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part1");
     const cognitiveStrategiesBelow3Array = [];
     const cognitiveStrategiesBelow3Html = [];
 
     if(generalProps.organize < 3) {
         cognitiveStrategiesBelow3Array.push("Organize");
-        cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Organize") + " &";
+        cognitiveStrategiesBelow3String += " " + t("components.Questionnaire.QuestionnaireResults.TableListK.Organize") + " &";
     }
     if(generalProps.elaborate < 3) {
         cognitiveStrategiesBelow3Array.push("Elaborate");
-        cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Elaborate") + " &";
+        cognitiveStrategiesBelow3String += " " + t("components.Questionnaire.QuestionnaireResults.TableListK.Elaborate") + " &";
     }
     if(generalProps.criticalReview < 3) {
         cognitiveStrategiesBelow3Array.push("Critical review");
-        cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Critical review") + " &";
+        cognitiveStrategiesBelow3String += " " + t("components.Questionnaire.QuestionnaireResults.TableListK.Critical review") + " &";
     }
     if(generalProps.repeat < 3) {
         cognitiveStrategiesBelow3Array.push("Repeat");
-        cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Repeat") + " &";
+        cognitiveStrategiesBelow3String += " " + t("components.Questionnaire.QuestionnaireResults.TableListK.Repeat") + " &";
     }
 
     //Remove last " & "
     cognitiveStrategiesBelow3String = cognitiveStrategiesBelow3String.slice(0, cognitiveStrategiesBelow3String.length - 2);
 
     if(cognitiveStrategiesBelow3Array.length > 0) {
-        cognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part2");
+        cognitiveStrategiesBelow3String += " " + t("components.Questionnaire.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part2");
         cognitiveStrategiesBelow3Html.push(
             <div key={"CognitiveStrategiesDescriptionListK"}>
                 <Typography variant={"h6"} gutterBottom>
-                    {t("components.QuestionnaireResults.TableListK.Cognitive strategies")}
+                    {t("components.Questionnaire.QuestionnaireResults.TableListK.Cognitive strategies")}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                     {cognitiveStrategiesBelow3String}
@@ -112,21 +112,21 @@ const useMetacognitiveStrategiesBelow3Element = (metacognitiveProps: MetaCogniti
 
     const {t} = useTranslation();
 
-    let metacognitiveStrategiesBelow3String = t("components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Part1");
+    let metacognitiveStrategiesBelow3String = t("components.Questionnaire.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Part1");
     const metacognitiveStrategiesBelow3Array = [];
     const metacognitiveStrategiesBelow3Html = [];
 
     if(metacognitiveProps.goalsPlans < 3) {
         metacognitiveStrategiesBelow3Array.push("Goals and plans");
-        metacognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Goals & Plans") + " &";
+        metacognitiveStrategiesBelow3String += " " + t("components.Questionnaire.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Goals & Plans") + " &";
     }
     if(metacognitiveProps.control < 3) {
         metacognitiveStrategiesBelow3Array.push("Control");
-        metacognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.TableListK.Control") + " &";
+        metacognitiveStrategiesBelow3String += " " + t("components.Questionnaire.QuestionnaireResults.TableListK.Control") + " &";
     }
     if(metacognitiveProps.regulate < 3) {
         metacognitiveStrategiesBelow3Array.push("Regulate");
-        metacognitiveStrategiesBelow3String += " " + t("components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Regulate") + " &";
+        metacognitiveStrategiesBelow3String += " " + t("components.Questionnaire.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Regulate") + " &";
     }
 
     //Remove last " & "
@@ -137,7 +137,7 @@ const useMetacognitiveStrategiesBelow3Element = (metacognitiveProps: MetaCogniti
         metacognitiveStrategiesBelow3Html.push(
             <div key={"MetaCognitiveStrategiesDescriptionListK"}>
                 <Typography variant={"h6"} gutterBottom>
-                    {t("components.QuestionnaireResults.TableListK.Metacognitive strategies")}
+                    {t("components.Questionnaire.QuestionnaireResults.TableListK.Metacognitive strategies")}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                     {metacognitiveStrategiesBelow3String}
@@ -170,10 +170,10 @@ const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: (strin
         subscalesBelow3MessageString.push(
             <div key={"RelevantSubscalesBelow3DescriptionListK"}>
                 <Typography variant={"h6"} gutterBottom>
-                    {t("components.QuestionnaireResults.ResultDescriptionListK."+ subscalesBelow3Array.join("") +" Below3.Title")}
+                    {t("components.Questionnaire.QuestionnaireResults.ResultDescriptionListK."+ subscalesBelow3Array.join("") +" Below3.Title")}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                    {t("components.QuestionnaireResults.ResultDescriptionListK."+ subscalesBelow3Array.join("") +" Below3.Description")}
+                    {t("components.Questionnaire.QuestionnaireResults.ResultDescriptionListK."+ subscalesBelow3Array.join("") +" Below3.Description")}
                 </Typography>
             </div>
         );

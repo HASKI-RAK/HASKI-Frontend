@@ -17,7 +17,7 @@ export const Home = () => {
                     onClick={() => {
                         setOpen(true)
                     }}
-                    data-testid={"QuestionnaireResultsButton"}>{t("components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText")}
+                    data-testid={"QuestionnaireResultsButton"}>{t("components.Questionnaire.QuestionnaireResults.QuestionnaireResultsModal.ButtonText")}
             </Button>
             <QuestionnaireResultsModal open={open} handleClose={()=>setOpen(!open)}/>
             <DropdownLanguage/>
