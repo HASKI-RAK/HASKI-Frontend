@@ -41,5 +41,4 @@ describe("Test the demo component", () => {
     act(() => userIdStore.result.current?.());
     expect(userUserStore.result.current?.id).toBe(4);
   });
-
 });

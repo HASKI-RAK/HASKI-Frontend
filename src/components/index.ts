@@ -16,4 +16,19 @@ import { BreadcrumbsContainer } from "./BreadcrumbsContainer/BreadcrumbsContaine
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
 
-export { BreadcrumbsContainer, LocalNav, MenuBar, Footer, DropdownLanguage, Text, LoginForm, TableILS, GraphILS, ResultDescriptionILS, TableListK, GraphListK, ResultDescriptionListK, QuestionnaireResultsModal };
+export {
+  BreadcrumbsContainer,
+  LocalNav,
+  MenuBar,
+  Footer,
+  DropdownLanguage,
+  Text,
+  LoginForm,
+  TableILS,
+  GraphILS,
+  ResultDescriptionILS,
+  TableListK,
+  GraphListK,
+  ResultDescriptionListK,
+  QuestionnaireResultsModal,
+};

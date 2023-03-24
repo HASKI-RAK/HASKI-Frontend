@@ -13,6 +13,7 @@
     "watch": "webpack -c webpack.config.js --progress --profile --color --watch",
     "lint": "./node_modules/.bin/eslint ./src --ext .ts,.tsx",
     "pull": "git pull && del node_modules && yarn install",
+    "prettier": "prettier --write \"**/*.{ts,js,css,html}\"",
     "test": "jest"
   },
   "dependencies": {
