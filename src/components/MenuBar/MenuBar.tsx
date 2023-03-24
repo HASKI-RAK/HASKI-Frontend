@@ -36,7 +36,6 @@ export const MenuBar = () => {
         setAnchorElUser(event.currentTarget);
     };
 
-
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
@@ -169,7 +168,7 @@ export const MenuBar = () => {
                 {/** User menu */}
                 <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
                     <Tooltip title={t("tooltip.openSettings")}>
-                        <IconButton onClick={handleOpenUserMenu}>
+                        <IconButton onClick={handleOpenUserMenu} data-testid='useravatar'>
                             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                         </IconButton>
                     </Tooltip>
@@ -190,7 +189,7 @@ export const MenuBar = () => {
                         onClose={handleCloseUserMenu}
                     >
                         {settings.map((setting) => (
-                            <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                            <MenuItem data-testid='usermenuitem' key={setting} onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center">{setting}</Typography>
                             </MenuItem>
                         ))}

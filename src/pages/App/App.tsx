@@ -1,9 +1,8 @@
 import { ThemeProvider } from "@mui/material";
 import { AuthProvider } from "@services";
-import { Home, ThemePresentation, Login, Dashboard } from "@pages";
+import { MainFrame, Home, ThemePresentation, Login, Dashboard } from "@pages";
 import { Theme } from "@utils";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import MainFrame from "../MainFrame/MainFrame";
 import { logBuffer } from "@shared";
 
 logBuffer();
