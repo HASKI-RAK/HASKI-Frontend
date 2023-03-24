@@ -11,9 +11,12 @@ import { useTranslation } from "react-i18next";
  * @category Components
  */
 export const BreadcrumbsContainer = () => {
+
+    // UX Logic
     const { t } = useTranslation();
     const navigate = useNavigate();
     const location = useLocation();
+
     return <Breadcrumbs aria-label="breadcrumb">
         {location.pathname.split('/').map((path, index) => {
             if (path === '')

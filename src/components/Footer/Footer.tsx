@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
  */
 export const Footer = () => {
 
+    // UX Logic
     const navigate = useNavigate();
     const { t } = useTranslation();
 

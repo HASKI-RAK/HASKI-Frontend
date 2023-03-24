@@ -29,6 +29,8 @@ const topics = [
  * @category Components
  */
 export const MenuBar = () => {
+
+    // UX Logic
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null);
 
