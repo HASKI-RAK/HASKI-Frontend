@@ -5,7 +5,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useTranslation} from 'react-i18next';
-import {StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow} from './QuestionnaireTableStyle';
+import {StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow} from './QuestionnaireResultTableStyle';
 import {ILS} from "@core/*"
 
 const ils = new ILS();

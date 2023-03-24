@@ -7,29 +7,17 @@ import Paper from '@mui/material/Paper';
 import {useTranslation} from 'react-i18next';
 import MobileStepper from '@mui/material/MobileStepper';
 import {Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography, useTheme} from "@mui/material";
-import TableCell, {tableCellClasses} from "@mui/material/TableCell";
+import TableCell from "@mui/material/TableCell";
 import {DefaultButton as Button} from "@common/components";
 import React, {useState} from "react";
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import {styled} from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import {useNavigate} from "react-router-dom";
 import {useQuestionnaireAnswersILSStore} from "@services";
+import { StyledTableCellQuestion, styleButtonClose} from "./QuestionnaireQuestionsTableStyle";
 
-const StyledTableCellQuestion = styled(TableCell)(() => ({
-    [`&.${tableCellClasses.body}`]: {
-        backgroundColor: 'rgba(36,38,42,0.65)',
-    },
-}));
-
-const styleButtonClose = {
-    position: 'absolute',
-    left: '75.5%',
-    top: '1%',
-    p: 2,
-}
 
 const stepsShortILS = [
     [
