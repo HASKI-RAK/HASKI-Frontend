@@ -411,12 +411,14 @@ export const TableListKQuestions = () => {
     const navigate = useNavigate();
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
-    const [radioButton1, setRadioButton1] = useState("");
-    const [radioButton2, setRadioButton2] = useState("");
-    const [radioButton3, setRadioButton3] = useState("");
-    const [radioButton4, setRadioButton4] = useState("");
-    const [radioButton5, setRadioButton5] = useState("");
-    const isNextDisabled = !radioButton1 || !radioButton2 || !radioButton3 || !radioButton4 || !radioButton5;
+    const [radioButtonGroup1, setRadioButtonGroup1] = useState("");
+    const [radioButtonGroup2, setRadioButtonGroup2] = useState("");
+    const [radioButtonGroup3, setRadioButtonGroup3] = useState("");
+    const [radioButtonGroup4, setRadioButtonGroup4] = useState("");
+    const [radioButtonGroup5, setRadioButtonGroup5] = useState("");
+
+    //if all radio buttons are selected, the next button is enabled (They are reset to their previous Value when the user goes back)
+    const isNextDisabled = !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4 || !radioButtonGroup5;
 
     const {questionnaireAnswers, setQuestionnaireAnswers} = useQuestionnaireAnswersListKStore();
 
@@ -432,81 +434,75 @@ export const TableListKQuestions = () => {
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
-        setRadioButton1(handleBackAndNext(stepsListK[activeStep+1][0]));
-        setRadioButton2(handleBackAndNext(stepsListK[activeStep+1][1]));
-        setRadioButton3(handleBackAndNext(stepsListK[activeStep+1][2]));
-        setRadioButton4(handleBackAndNext(stepsListK[activeStep+1][3]));
+        setRadioButtonGroup1(setRadioButtonValue(stepsListK[activeStep+1][0]));
+        setRadioButtonGroup2(setRadioButtonValue(stepsListK[activeStep+1][1]));
+        setRadioButtonGroup3(setRadioButtonValue(stepsListK[activeStep+1][2]));
+        setRadioButtonGroup4(setRadioButtonValue(stepsListK[activeStep+1][3]));
         //because the last step has only 4 questions
         if(activeStep < 6){
-            setRadioButton5(handleBackAndNext(stepsListK[activeStep+1][4]));
+            setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep+1][4]));
         }
     };
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
-        setRadioButton1(handleBackAndNext(stepsListK[activeStep-1][0]));
-        setRadioButton2(handleBackAndNext(stepsListK[activeStep-1][1]));
-        setRadioButton3(handleBackAndNext(stepsListK[activeStep-1][2]));
-        setRadioButton4(handleBackAndNext(stepsListK[activeStep-1][3]));
-        setRadioButton5(handleBackAndNext(stepsListK[activeStep-1][4]));
+        setRadioButtonGroup1(setRadioButtonValue(stepsListK[activeStep-1][0]));
+        setRadioButtonGroup2(setRadioButtonValue(stepsListK[activeStep-1][1]));
+        setRadioButtonGroup3(setRadioButtonValue(stepsListK[activeStep-1][2]));
+        setRadioButtonGroup4(setRadioButtonValue(stepsListK[activeStep-1][3]));
+        setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep-1][4]));
     };
 
     const handleSend = () => {
-        const ListKarray:string[][] = [];
-        for (const [key, value] of Object.entries(questionnaireAnswers)) {
-            if(key !== ""){
-                ListKarray.push([key,value]);
-            }
-        }
-        const listk_result = ["listk", ListKarray]
+        const listkArray = Object.entries(questionnaireAnswers).filter(([key]) => key !== "");
+        const listk_result = ["ils", listkArray];
         console.log(JSON.stringify(listk_result));
         //todo: send to server
     }
 
-    const handleBackAndNext = (listkStep:{ question: string, questionLabel: string, answer1: string, answer2: string, answer3: string,
+    const setRadioButtonValue = (listkStep:{ question: string, questionLabel: string, answer1: string, answer2: string, answer3: string,
         answer4: string, answer5: string }) => {
 
-        //this returns 1,2,3,4,5
-        if(questionnaireAnswers[listkStep.questionLabel as keyof typeof questionnaireAnswers] === "1"){
-            return listkStep.answer1
-        }
-        else if(questionnaireAnswers[listkStep.questionLabel as keyof typeof questionnaireAnswers] === "2"){
-            return listkStep.answer2
-        }
-        else if(questionnaireAnswers[listkStep.questionLabel as keyof typeof questionnaireAnswers] === "3"){
-            return listkStep.answer3
-        }
-        else if(questionnaireAnswers[listkStep.questionLabel as keyof typeof questionnaireAnswers] === "4"){
-            return listkStep.answer4
-        }
-        else if(questionnaireAnswers[listkStep.questionLabel as keyof typeof questionnaireAnswers] === "5"){
-            return listkStep.answer5
-        }
-        else{
-            return ""
+        //if the question is already answered, the answer is set to the value of the radio button/ else radio button is not set
+        switch (questionnaireAnswers[listkStep.questionLabel as keyof typeof questionnaireAnswers]) {
+            case "1":
+                return listkStep.answer1;
+            case "2":
+                return listkStep.answer2;
+            case "3":
+                return listkStep.answer3;
+            case "4":
+                return listkStep.answer4;
+            case "5":
+                return listkStep.answer5;
+            default:
+                return "";
         }
     }
 
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>, listkStep: { question: string, questionLabel: string,
         answer1: string, answer2: string, answer3: string, answer4: string, answer5: string }) => {
+
         const radioButtonOptions = [listkStep.answer1, listkStep.answer2, listkStep.answer3, listkStep.answer4, listkStep.answer5];
         let selectedAnswer;
 
-        if(radioButtonOptions.indexOf(event.target.value) === 0){
-            selectedAnswer = "1";
-        }
-        else if(radioButtonOptions.indexOf(event.target.value) === 1){
-            selectedAnswer = "2";
-        }
-        else if(radioButtonOptions.indexOf(event.target.value) === 2){
-            selectedAnswer = "3";
-        }
-        else if(radioButtonOptions.indexOf(event.target.value) === 3){
-            selectedAnswer = "4";
-        }
-        else{
-            selectedAnswer = "5";
+        switch (radioButtonOptions.indexOf(event.target.value)) {
+            case 0:
+                selectedAnswer = "1";
+                break;
+            case 1:
+                selectedAnswer = "2";
+                break;
+            case 2:
+                selectedAnswer = "3";
+                break;
+            case 3:
+                selectedAnswer = "4";
+                break;
+            default:
+                selectedAnswer = "5";
+                break;
         }
 
         setQuestionnaireAnswers(listkStep.questionLabel , selectedAnswer.toString() );
@@ -588,10 +584,10 @@ export const TableListKQuestions = () => {
                                 <TableRow>
                                     <TableCell>
                                         <RadioGroup
-                                            value={radioButton1}
+                                            value={radioButtonGroup1}
                                             name={stepsListK[activeStep][0].questionLabel}
                                             onChange={e => {
-                                                setRadioButton1(e.target.value);
+                                                setRadioButtonGroup1(e.target.value);
                                                 handleRadioChange(e, stepsListK[activeStep][0])
                                             }}
                                         >
@@ -628,10 +624,10 @@ export const TableListKQuestions = () => {
                                 <TableRow>
                                     <TableCell>
                                         <RadioGroup
-                                            value={radioButton2}
+                                            value={radioButtonGroup2}
                                             name={stepsListK[activeStep][1].questionLabel}
                                             onChange={e => {
-                                                setRadioButton2(e.target.value);
+                                                setRadioButtonGroup2(e.target.value);
                                                 handleRadioChange(e, stepsListK[activeStep][1])
                                             }}
                                         >
@@ -668,10 +664,10 @@ export const TableListKQuestions = () => {
                                 <TableRow>
                                     <TableCell>
                                         <RadioGroup
-                                            value={radioButton3}
+                                            value={radioButtonGroup3}
                                             name={stepsListK[activeStep][2].questionLabel}
                                             onChange={e => {
-                                                setRadioButton3(e.target.value);
+                                                setRadioButtonGroup3(e.target.value);
                                                 handleRadioChange(e, stepsListK[activeStep][2])
                                             }}
                                         >
@@ -708,10 +704,10 @@ export const TableListKQuestions = () => {
                                 <TableRow>
                                     <TableCell>
                                         <RadioGroup
-                                            value={radioButton4}
+                                            value={radioButtonGroup4}
                                             name={stepsListK[activeStep][3].questionLabel}
                                             onChange={e => {
-                                                setRadioButton4(e.target.value);
+                                                setRadioButtonGroup4(e.target.value);
                                                 handleRadioChange(e, stepsListK[activeStep][3])
                                             }}
                                         >
@@ -750,10 +746,10 @@ export const TableListKQuestions = () => {
                                     <TableRow>
                                         <TableCell>
                                             <RadioGroup
-                                                value={radioButton5}
+                                                value={radioButtonGroup5}
                                                 name={stepsListK[activeStep][4].questionLabel}
                                                 onChange={e => {
-                                                    setRadioButton5(e.target.value);
+                                                    setRadioButtonGroup5(e.target.value);
                                                     handleRadioChange(e, stepsListK[activeStep][4])
                                                 }}
                                             >
