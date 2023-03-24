@@ -1,4 +1,4 @@
-import User from "@core/*";
+import {User} from "@core/*";
 
 /**
  * Defines the State for store purposes

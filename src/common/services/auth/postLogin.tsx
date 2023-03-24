@@ -5,7 +5,7 @@ export type postLoginParams = {
 };
 export const postLogin = async (params?: postLoginParams): Promise<RequestResponse> => {
     const { nonce = "" } = params || {};
-    return fetch(`http://fakedomain.com:5000/login`, {
+    return fetch(process.env.BACKEND + `/login`, {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({ nonce: nonce }),

@@ -2,8 +2,9 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
+const { DefinePlugin } = require('webpack');
 
-
+const dotenv = require('dotenv').config({ path: __dirname + '/.env.development' })
 const dev = process.env.NODE_ENV !== 'production' // Jest will set process.env.NODE_ENV to 'test'
 module.exports = {
     context: path.resolve(__dirname, 'src'),
@@ -57,6 +58,10 @@ module.exports = {
         new HtmlWebPackPlugin({
             template: path.join(__dirname, "src", "index.html"),
         }),
-        new CompressionPlugin()
+        new CompressionPlugin(),
+        new DefinePlugin({
+            'process.env': JSON.stringify(dotenv.parsed),
+            'process.env.NODE_ENV': JSON.stringify(dev ? 'development' : 'production'),
+        })
     ],
 };

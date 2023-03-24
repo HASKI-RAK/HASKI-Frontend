@@ -4,6 +4,7 @@ export type useLoginFormHookParams = {
     defaultUsername?: string;
     defaultPassword?: string;
 }
+
 export type LoginFormHookReturn = {
     readonly username: string;
     readonly password: string;
@@ -13,6 +14,12 @@ export type LoginFormHookReturn = {
     readonly validate: () => readonly [boolean, boolean];
 };
 
+/**
+ * Hook for the login form logic. Handles username and password state and
+ * provides functions to validate and submit the form.
+ * @param params - The default values for the form.
+ * @returns {LoginFormHookReturn} - The form logic.
+ */
 export const useLoginForm = (params?: useLoginFormHookParams): LoginFormHookReturn => {
     // Default values
     const { defaultUsername = "",
