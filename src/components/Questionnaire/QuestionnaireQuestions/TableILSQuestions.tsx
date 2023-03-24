@@ -6,7 +6,7 @@ import SendIcon from '@mui/icons-material/Send';
 import Paper from '@mui/material/Paper';
 import {useTranslation} from 'react-i18next';
 import MobileStepper from '@mui/material/MobileStepper';
-import {Box, FormControlLabel, Radio, RadioGroup, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography, useTheme} from "@mui/material";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import {DefaultButton as Button} from "@common/components";
 import React, {useState} from "react";
@@ -461,13 +461,15 @@ export const TableILSQuestions = (ilsLong: boolean) => {
     const navigate = useNavigate();
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
-    const [radioButton1, setRadioButton1] = useState("");
-    const [radioButton2, setRadioButton2] = useState("");
-    const [radioButton3, setRadioButton3] = useState("");
-    const [radioButton4, setRadioButton4] = useState("");
-    const isNextDisabled = !radioButton1 || !radioButton2 || !radioButton3 || !radioButton4;
+    const [radioButtonGroup1, setRadioButtonGroup1] = useState("");
+    const [radioButtonGroup2, setRadioButtonGroup2] = useState("");
+    const [radioButtonGroup3, setRadioButtonGroup3] = useState("");
+    const [radioButtonGroup4, setRadioButtonGroup4] = useState("");
 
-    const { questionnaireAnswers, setQuestionnaireAnswers } = useQuestionnaireAnswersILSStore();
+    //if all radio buttons are selected, the next button is enabled (They are reset to their previous Value when the user goes back)
+    const isNextDisabled = !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4;
+
+    const {questionnaireAnswers, setQuestionnaireAnswers} = useQuestionnaireAnswersILSStore();
 
     // Before reload or close window ask the user if he is sure
     window.addEventListener("beforeunload", (e: BeforeUnloadEvent) => {
@@ -481,74 +483,69 @@ export const TableILSQuestions = (ilsLong: boolean) => {
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         if(ilsLong) {
-            setRadioButton1(handleBackAndNext(stepsLongILS[activeStep+1][0]));
-            setRadioButton2(handleBackAndNext(stepsLongILS[activeStep+1][1]));
-            setRadioButton3(handleBackAndNext(stepsLongILS[activeStep+1][2]));
-            setRadioButton4(handleBackAndNext(stepsLongILS[activeStep+1][3]));
+            setRadioButtonGroup1(setRadioButtonValue(stepsLongILS[activeStep + 1][0]));
+            setRadioButtonGroup2(setRadioButtonValue(stepsLongILS[activeStep + 1][1]));
+            setRadioButtonGroup3(setRadioButtonValue(stepsLongILS[activeStep + 1][2]));
+            setRadioButtonGroup4(setRadioButtonValue(stepsLongILS[activeStep + 1][3]));
         }
-        else{
-            setRadioButton1(handleBackAndNext(stepsShortILS[activeStep+1][0]));
-            setRadioButton2(handleBackAndNext(stepsShortILS[activeStep+1][1]));
-            setRadioButton3(handleBackAndNext(stepsShortILS[activeStep+1][2]));
-            setRadioButton4(handleBackAndNext(stepsShortILS[activeStep+1][3]));
+        else {
+            setRadioButtonGroup1(setRadioButtonValue(stepsShortILS[activeStep + 1][0]));
+            setRadioButtonGroup2(setRadioButtonValue(stepsShortILS[activeStep + 1][1]));
+            setRadioButtonGroup3(setRadioButtonValue(stepsShortILS[activeStep + 1][2]));
+            setRadioButtonGroup4(setRadioButtonValue(stepsShortILS[activeStep + 1][3]));
         }
     };
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
-        if(ilsLong){
-            setRadioButton1(handleBackAndNext(stepsLongILS[activeStep-1][0]));
-            setRadioButton2(handleBackAndNext(stepsLongILS[activeStep-1][1]));
-            setRadioButton3(handleBackAndNext(stepsLongILS[activeStep-1][2]));
-            setRadioButton4(handleBackAndNext(stepsLongILS[activeStep-1][3]));
+        if(ilsLong) {
+            setRadioButtonGroup1(setRadioButtonValue(stepsLongILS[activeStep - 1][0]));
+            setRadioButtonGroup2(setRadioButtonValue(stepsLongILS[activeStep - 1][1]));
+            setRadioButtonGroup3(setRadioButtonValue(stepsLongILS[activeStep - 1][2]));
+            setRadioButtonGroup4(setRadioButtonValue(stepsLongILS[activeStep - 1][3]));
         }
-        else{
-            setRadioButton1(handleBackAndNext(stepsShortILS[activeStep-1][0]));
-            setRadioButton2(handleBackAndNext(stepsShortILS[activeStep-1][1]));
-            setRadioButton3(handleBackAndNext(stepsShortILS[activeStep-1][2]));
-            setRadioButton4(handleBackAndNext(stepsShortILS[activeStep-1][3]));
+        else {
+            setRadioButtonGroup1(setRadioButtonValue(stepsShortILS[activeStep - 1][0]));
+            setRadioButtonGroup2(setRadioButtonValue(stepsShortILS[activeStep - 1][1]));
+            setRadioButtonGroup3(setRadioButtonValue(stepsShortILS[activeStep - 1][2]));
+            setRadioButtonGroup4(setRadioButtonValue(stepsShortILS[activeStep - 1][3]));
         }
 
     };
 
     const handleSend = () => {
-        const ILSarray:string[][] = [];
-        for (const [key, value] of Object.entries(questionnaireAnswers)) {
-            if(key !== ""){
-                ILSarray.push([key,value]);
-            }
-        }
-        const ils_result = ["ils", ILSarray]
+        const ILSarray = Object.entries(questionnaireAnswers).filter(([key]) => key !== "");
+        const ils_result = ["ils", ILSarray];
         console.log(JSON.stringify(ils_result));
         //todo: send to server
 
     }
 
-    const handleBackAndNext = (ilsStep:{ question: string, questionLabel: string, answer1: string, answer2: string }) => {
+    const setRadioButtonValue = (ilsStep: { question: string, questionLabel: string, answer1: string, answer2: string }): string => {
 
-        //this returns a or b
-        if(questionnaireAnswers[ilsStep.questionLabel as keyof typeof questionnaireAnswers] === "a"){
+        //if the question is already answered, the answer is set to the value of the radio button/ else radio button is not set
+        if(questionnaireAnswers[ilsStep.questionLabel as keyof typeof questionnaireAnswers] === "a") {
             return ilsStep.answer1
         }
-        else if(questionnaireAnswers[ilsStep.questionLabel as keyof typeof questionnaireAnswers] === "b"){
+        else if(questionnaireAnswers[ilsStep.questionLabel as keyof typeof questionnaireAnswers] === "b") {
             return ilsStep.answer2
         }
-        else{
+        else {
             return ""
         }
     }
 
-    const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>, ilsStep: { question: string, questionLabel: string, answer1: string, answer2: string }) => {
+    const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>, ilsStep: { question: string, questionLabel: string, answer1: string, answer2: string }): void => {
         const radioButtonOptions = [ilsStep.answer1, ilsStep.answer2];
         let selectedAnswer;
-        if(radioButtonOptions.indexOf(event.target.value) === 0){
+        if(radioButtonOptions.indexOf(event.target.value) === 0) {
             selectedAnswer = "a";
         }
-        else{
+        else {
             selectedAnswer = "b";
         }
 
-        setQuestionnaireAnswers(ilsStep.questionLabel , selectedAnswer.toString() );
+        setQuestionnaireAnswers(ilsStep.questionLabel, selectedAnswer.toString());
     };
 
     const onClickClose = () => {
@@ -567,17 +564,25 @@ export const TableILSQuestions = (ilsLong: boolean) => {
             <TableRow>
                 <TableCell>
                     <RadioGroup
-                        value={radioButton1}
+                        value={radioButtonGroup1}
                         name={stepsLongILS[activeStep][0].questionLabel}
                         onChange={e => {
-                            setRadioButton1(e.target.value);
+                            setRadioButtonGroup1(e.target.value);
                             handleRadioChange(e, stepsLongILS[activeStep][0])
                         }}
                     >
-                        <FormControlLabel value={stepsLongILS[activeStep][0].answer1} control={<Radio/>}
-                                          label={<Typography variant={"h6"}>{t(stepsLongILS[activeStep][0].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsLongILS[activeStep][0].answer2} control={<Radio/>}
-                                          label={<Typography variant={"h6"}>{t(stepsLongILS[activeStep][0].answer2)}</Typography>}/>
+                        <Stack
+                            direction="column"
+                            justifyContent="center"
+                            alignItems="flex-start"
+                            spacing={0}
+                            divider={<Divider orientation="horizontal" flexItem/>}
+                        >
+                            <FormControlLabel value={stepsLongILS[activeStep][0].answer1} control={<Radio/>}
+                                              label={<Typography variant={"h6"}>{t(stepsLongILS[activeStep][0].answer1)}</Typography>}/>
+                            <FormControlLabel value={stepsLongILS[activeStep][0].answer2} control={<Radio/>}
+                                              label={<Typography variant={"h6"}>{t(stepsLongILS[activeStep][0].answer2)}</Typography>}/>
+                        </Stack>
                     </RadioGroup>
                 </TableCell>
             </TableRow>
@@ -589,19 +594,28 @@ export const TableILSQuestions = (ilsLong: boolean) => {
             <TableRow>
                 <TableCell>
                     <RadioGroup
-                        value={radioButton2}
+                        value={radioButtonGroup2}
                         onChange={e => {
-                            setRadioButton2(e.target.value);
+                            setRadioButtonGroup2(e.target.value);
                             handleRadioChange(e, stepsLongILS[activeStep][1])
                         }}
                         name={stepsLongILS[activeStep][1].questionLabel}
                     >
+                        <Stack
+                            direction="column"
+                            justifyContent="center"
+                            alignItems="flex-start"
+                            spacing={0}
+                            divider={<Divider orientation="horizontal" flexItem/>}
+                        >
                         <FormControlLabel value={stepsLongILS[activeStep][1].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsLongILS[activeStep][1].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsLongILS[activeStep][1].answer2} control={<Radio/>}
+                        <FormControlLabel value={stepsLongILS[activeStep][1].answer2}
+                                          control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsLongILS[activeStep][1].answer2)}</Typography>}/>
+                        </Stack>
                     </RadioGroup>
                 </TableCell>
             </TableRow>
@@ -613,19 +627,28 @@ export const TableILSQuestions = (ilsLong: boolean) => {
             <TableRow>
                 <TableCell>
                     <RadioGroup
-                        value={radioButton3}
+                        value={radioButtonGroup3}
                         onChange={e => {
-                            setRadioButton3(e.target.value);
+                            setRadioButtonGroup3(e.target.value);
                             handleRadioChange(e, stepsLongILS[activeStep][2])
                         }}
                         name={stepsLongILS[activeStep][2].questionLabel}
                     >
+                        <Stack
+                            direction="column"
+                            justifyContent="center"
+                            alignItems="flex-start"
+                            spacing={0}
+                            divider={<Divider orientation="horizontal" flexItem/>}
+                        >
                         <FormControlLabel value={stepsLongILS[activeStep][2].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsLongILS[activeStep][2].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsLongILS[activeStep][2].answer2} control={<Radio/>}
+                        <FormControlLabel value={stepsLongILS[activeStep][2].answer2}
+                                          control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsLongILS[activeStep][2].answer2)}</Typography>}/>
+                        </Stack>
                     </RadioGroup>
                 </TableCell>
             </TableRow>
@@ -637,19 +660,28 @@ export const TableILSQuestions = (ilsLong: boolean) => {
             <TableRow>
                 <TableCell>
                     <RadioGroup
-                        value={radioButton4}
+                        value={radioButtonGroup4}
                         onChange={e => {
-                            setRadioButton4(e.target.value);
+                            setRadioButtonGroup4(e.target.value);
                             handleRadioChange(e, stepsLongILS[activeStep][3])
                         }}
                         name={stepsLongILS[activeStep][3].questionLabel}
                     >
+                        <Stack
+                            direction="column"
+                            justifyContent="center"
+                            alignItems="flex-start"
+                            spacing={0}
+                            divider={<Divider orientation="horizontal" flexItem/>}
+                        >
                         <FormControlLabel value={stepsLongILS[activeStep][3].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsLongILS[activeStep][3].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsLongILS[activeStep][3].answer2} control={<Radio/>}
+                        <FormControlLabel value={stepsLongILS[activeStep][3].answer2}
+                                          control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsLongILS[activeStep][3].answer2)}</Typography>}/>
+                        </Stack>
                     </RadioGroup>
                 </TableCell>
             </TableRow>
@@ -667,19 +699,28 @@ export const TableILSQuestions = (ilsLong: boolean) => {
             <TableRow>
                 <TableCell>
                     <RadioGroup
-                        value={radioButton1}
+                        value={radioButtonGroup1}
                         onChange={e => {
-                            setRadioButton1(e.target.value);
+                            setRadioButtonGroup1(e.target.value);
                             handleRadioChange(e, stepsShortILS[activeStep][0])
                         }}
                         name="Question1-radio-buttons-group"
                     >
+                        <Stack
+                            direction="column"
+                            justifyContent="center"
+                            alignItems="flex-start"
+                            spacing={0}
+                            divider={<Divider orientation="horizontal" flexItem/>}
+                        >
                         <FormControlLabel value={stepsShortILS[activeStep][0].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][0].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsShortILS[activeStep][0].answer2} control={<Radio/>}
+                        <FormControlLabel value={stepsShortILS[activeStep][0].answer2}
+                                          control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][0].answer2)}</Typography>}/>
+                        </Stack>
                     </RadioGroup>
                 </TableCell>
             </TableRow>
@@ -691,19 +732,27 @@ export const TableILSQuestions = (ilsLong: boolean) => {
             <TableRow>
                 <TableCell>
                     <RadioGroup
-                        value={radioButton2}
+                        value={radioButtonGroup2}
                         onChange={e => {
-                            setRadioButton2(e.target.value);
+                            setRadioButtonGroup2(e.target.value);
                             handleRadioChange(e, stepsShortILS[activeStep][1])
                         }}
                         name="Question1-radio-buttons-group"
                     >
+                        <Stack
+                            direction="column"
+                            justifyContent="center"
+                            alignItems="flex-start"
+                            spacing={0}
+                            divider={<Divider orientation="horizontal" flexItem/>}
+                        >
                         <FormControlLabel value={stepsShortILS[activeStep][1].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][1].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsShortILS[activeStep][1].answer2} control={<Radio/>}
+                        <FormControlLabel value={stepsShortILS[activeStep][1].answer2} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][1].answer2)}</Typography>}/>
+                        </Stack>
                     </RadioGroup>
                 </TableCell>
             </TableRow>
@@ -715,19 +764,27 @@ export const TableILSQuestions = (ilsLong: boolean) => {
             <TableRow>
                 <TableCell>
                     <RadioGroup
-                        value={radioButton3}
+                        value={radioButtonGroup3}
                         onChange={e => {
-                            setRadioButton3(e.target.value);
+                            setRadioButtonGroup3(e.target.value);
                             handleRadioChange(e, stepsShortILS[activeStep][2])
                         }}
                         name="Question1-radio-buttons-group"
                     >
+                        <Stack
+                            direction="column"
+                            justifyContent="center"
+                            alignItems="flex-start"
+                            spacing={0}
+                            divider={<Divider orientation="horizontal" flexItem/>}
+                        >
                         <FormControlLabel value={stepsShortILS[activeStep][2].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][2].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsShortILS[activeStep][2].answer2} control={<Radio/>}
+                        <FormControlLabel value={stepsShortILS[activeStep][2].answer2} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][2].answer2)}</Typography>}/>
+                        </Stack>
                     </RadioGroup>
                 </TableCell>
             </TableRow>
@@ -739,19 +796,27 @@ export const TableILSQuestions = (ilsLong: boolean) => {
             <TableRow>
                 <TableCell>
                     <RadioGroup
-                        value={radioButton4}
+                        value={radioButtonGroup4}
                         onChange={e => {
-                            setRadioButton4(e.target.value);
+                            setRadioButtonGroup4(e.target.value);
                             handleRadioChange(e, stepsShortILS[activeStep][3])
                         }}
                         name="Question1-radio-buttons-group"
                     >
+                        <Stack
+                            direction="column"
+                            justifyContent="center"
+                            alignItems="flex-start"
+                            spacing={0}
+                            divider={<Divider orientation="horizontal" flexItem/>}
+                        >
                         <FormControlLabel value={stepsShortILS[activeStep][3].answer1} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][3].answer1)}</Typography>}/>
-                        <FormControlLabel style={{ borderTop: "1px dashed rgba(36,38,42,0.65)"}} value={stepsShortILS[activeStep][3].answer2} control={<Radio/>}
+                        <FormControlLabel value={stepsShortILS[activeStep][3].answer2} control={<Radio/>}
                                           label={<Typography
                                               variant={"h6"}>{t(stepsShortILS[activeStep][3].answer2)}</Typography>}/>
+                        </Stack>
                     </RadioGroup>
                 </TableCell>
             </TableRow>
@@ -760,7 +825,7 @@ export const TableILSQuestions = (ilsLong: boolean) => {
 
     return (
         <Box>
-            <IconButton id={"QuestionnaireAnswersCloseButton"} color="primary" sx={styleButtonClose} onClick={onClickClose} data-testid={"QuestionnaireAnswersCloseButton"}>
+            <IconButton color="primary" sx={styleButtonClose} onClick={onClickClose} data-testid={"QuestionnaireAnswersCloseButton"}>
                 <CloseIcon/>
             </IconButton>
             <Stack

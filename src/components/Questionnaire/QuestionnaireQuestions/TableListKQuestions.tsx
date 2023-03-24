@@ -6,7 +6,7 @@ import SendIcon from '@mui/icons-material/Send';
 import Paper from '@mui/material/Paper';
 import {useTranslation} from 'react-i18next';
 import MobileStepper from '@mui/material/MobileStepper';
-import {Box, FormControlLabel, Radio, RadioGroup, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography, useTheme} from "@mui/material";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import {DefaultButton as Button} from "@common/components";
 import React, {useState} from "react";
@@ -599,18 +599,19 @@ export const TableListKQuestions = () => {
                                                 direction="row"
                                                 justifyContent="space-around"
                                                 alignItems="center"
+                                                divider={<Divider orientation="vertical" flexItem sx={{backgroundColor:"rgba(36,38,42,0.30)"}}/>}
                                             >
                                                 <FormControlLabel value={stepsListK[activeStep][0].answer1} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][0].answer1)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][0].answer2} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][0].answer2)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][0].answer3} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][0].answer3)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][0].answer4} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][0].answer4)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][0].answer5} control={<Radio/>}
                                                                   label={<Typography
@@ -638,18 +639,19 @@ export const TableListKQuestions = () => {
                                                 direction="row"
                                                 justifyContent="space-around"
                                                 alignItems="center"
+                                                divider={<Divider orientation="vertical" flexItem sx={{backgroundColor:"rgba(36,38,42,0.30)"}}/>}
                                             >
                                                 <FormControlLabel value={stepsListK[activeStep][1].answer1} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][1].answer1)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][1].answer2} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][1].answer2)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][1].answer3} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][1].answer3)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][1].answer4} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][1].answer4)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][1].answer5} control={<Radio/>}
                                                                   label={<Typography
@@ -677,18 +679,19 @@ export const TableListKQuestions = () => {
                                                 direction="row"
                                                 justifyContent="space-around"
                                                 alignItems="center"
+                                                divider={<Divider orientation="vertical" flexItem sx={{backgroundColor:"rgba(36,38,42,0.30)"}}/>}
                                             >
                                                 <FormControlLabel value={stepsListK[activeStep][2].answer1} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][2].answer1)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][2].answer2} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][2].answer2)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][2].answer3} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][2].answer3)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][2].answer4} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][2].answer4)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][2].answer5} control={<Radio/>}
                                                                   label={<Typography
@@ -716,18 +719,19 @@ export const TableListKQuestions = () => {
                                                 direction="row"
                                                 justifyContent="space-around"
                                                 alignItems="center"
+                                                divider={<Divider orientation="vertical" flexItem sx={{backgroundColor:"rgba(36,38,42,0.30)"}}/>}
                                             >
                                                 <FormControlLabel value={stepsListK[activeStep][3].answer1} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][3].answer1)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][3].answer2} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][3].answer2)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][3].answer3} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][3].answer3)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][3].answer4} control={<Radio/>}
-                                                                  label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                  label={<Typography
                                                                       variant={"h6"}>{t(stepsListK[activeStep][3].answer4)}</Typography>}/>
                                                 <FormControlLabel value={stepsListK[activeStep][3].answer5} control={<Radio/>}
                                                                   label={<Typography
@@ -757,18 +761,19 @@ export const TableListKQuestions = () => {
                                                     direction="row"
                                                     justifyContent="space-around"
                                                     alignItems="center"
+                                                    divider={<Divider orientation="vertical" flexItem sx={{backgroundColor:"rgba(36,38,42,0.30)"}}/>}
                                                 >
                                                     <FormControlLabel value={stepsListK[activeStep][4].answer1} control={<Radio/>}
-                                                                      label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                      label={<Typography
                                                                           variant={"h6"}>{t(stepsListK[activeStep][4].answer1)}</Typography>}/>
                                                     <FormControlLabel value={stepsListK[activeStep][4].answer2} control={<Radio/>}
-                                                                      label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                      label={<Typography
                                                                           variant={"h6"}>{t(stepsListK[activeStep][4].answer2)}</Typography>}/>
                                                     <FormControlLabel value={stepsListK[activeStep][4].answer3} control={<Radio/>}
-                                                                      label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                      label={<Typography
                                                                           variant={"h6"}>{t(stepsListK[activeStep][4].answer3)}</Typography>}/>
                                                     <FormControlLabel value={stepsListK[activeStep][4].answer4} control={<Radio/>}
-                                                                      label={<Typography style={{ borderRight: "1px solid rgba(36,38,42,0.65)", padding: "5px 30px" }}
+                                                                      label={<Typography
                                                                           variant={"h6"}>{t(stepsListK[activeStep][4].answer4)}</Typography>}/>
                                                     <FormControlLabel value={stepsListK[activeStep][4].answer5} control={<Radio/>}
                                                                       label={<Typography
