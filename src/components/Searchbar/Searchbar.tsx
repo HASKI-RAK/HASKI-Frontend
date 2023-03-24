@@ -7,7 +7,11 @@ import {
     DefaultInputAdornment as InputAdornment
 } from "@common/components"
 
-export const Searchbar = (props: SearchbarProps) => {
+type SearchbarProps = {
+    setSearchQuery?: (query: string) => void
+}
+
+const Searchbar = (props: SearchbarProps) => {
     const { t } = useTranslation();
 
     const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -24,26 +28,22 @@ export const Searchbar = (props: SearchbarProps) => {
     }, [])
 
     return(
-        <>
-            <Typography variant="h4">
-                <TextField
-                    id="pages.glossary.search"
-                    fullWidth
-                    label={t('pages.glossary.search')}
-                    onChange={handleChange}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <SearchIcon />
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-            </Typography>
-        </>
+        <Typography variant="h4">
+            <TextField
+                id="pages.glossary.search"
+                fullWidth
+                label={t('pages.glossary.search')}
+                onChange={handleChange}
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            <SearchIcon />
+                        </InputAdornment>
+                    ),
+                }}
+            />
+        </Typography>
     )
 }
 
-interface SearchbarProps {
-    setSearchQuery?: (query: string) => void
-}
+export default Searchbar

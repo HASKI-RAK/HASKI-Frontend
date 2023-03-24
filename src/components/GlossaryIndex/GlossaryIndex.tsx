@@ -2,7 +2,14 @@ import React, { useCallback } from "react"
 import { DefaultToggleButtonGroup as ToggleButtonGroup } from "@common/components"
 import { ToggleButtonList } from "@components"
 
-export const GlossaryIndex = (props: GlossaryIndexProps) => {
+export type GlossaryIndexProps = {
+    orientation?: "horizontal" | "vertical"
+    indexElements?: string[]
+    selectedIndexElement?: string
+    setSelectedIndexElement?: (indexElement: string) => void
+}
+
+const GlossaryIndex = (props: GlossaryIndexProps) => {
     const handleChange = useCallback((
         event: React.MouseEvent<HTMLElement>,
         newSelectedIndexElement: string,
@@ -24,9 +31,4 @@ export const GlossaryIndex = (props: GlossaryIndexProps) => {
     )
 }
 
-export interface GlossaryIndexProps {
-    orientation?: "horizontal" | "vertical"
-    indexElements?: string[]
-    selectedIndexElement?: string
-    setSelectedIndexElement?: (indexElement: string) => void
-}
+export default GlossaryIndex

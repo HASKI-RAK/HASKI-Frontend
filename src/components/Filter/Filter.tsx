@@ -1,5 +1,4 @@
-import { useCallback } from 'react'
-import { useTranslation } from "react-i18next"
+import { useCallback, useState } from 'react'
 import {
     DefaultBox as Box,
     DefaultCheckbox as Checkbox,
@@ -25,61 +24,62 @@ const MenuProps = {
     },
 }
 
-export const Filter = (props: FilterProps) => {
-    const  { t } = useTranslation();
+type FilterProps = {
+    label?: string
+    options?: string[]
+    selectedOptions?: string[]
+    setSelectedOptions?: (selectedElements?: string[] | string) => void
+}
 
-    const handleChange = useCallback((event: SelectChangeEvent<typeof props.selectedTags>) => {
-        const {
-            target: { value },
-        } = event
+const Filter = (props: FilterProps) => {
+    const [open, setOpen] = useState(false)
 
-        value && props.setSelectedTags && props.setSelectedTags((typeof value === 'string') ? value.split(',') : value)
+    const handleChange = useCallback((event: SelectChangeEvent<typeof props.selectedOptions>) => {
+        if(!!props.setSelectedOptions) {
+            props.setSelectedOptions(event.target.value)
+        }
     }, [])
 
     const renderValue = useCallback((selected: string[]) => (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
             {selected.map((value: string) => (
-                <Chip key={value} label={value} size="small"/>
+                <Chip key={value} role="chip" label={value} size="small"/>
             ))}
         </Box>
     ), [])
 
     return (
-        <>
-            <FormControl fullWidth>
-                <InputLabel id="glossary-filter-label">
-                    <Typography>
-                        {
-                            t('pages.glossary.filter')
-                        }
-                    </Typography>
-                </InputLabel>
-                <Select
-                    labelId="glossary-filter-label"
-                    id="glossary-filter"
-                    multiple
-                    value={props.selectedTags}
-                    onChange={handleChange}
-                    input={<OutlinedInput label={t('pages.glossary.filter')}/>}
-                    renderValue={renderValue}
-                    MenuProps={MenuProps}
-                >
+        <FormControl fullWidth>
+            <InputLabel id="filter-label">
+                <Typography>
                     {
-                        props.tags?.map((tag) => (
-                            <MenuItem key={tag} value={tag}>
-                                <Checkbox checked={props.selectedTags && (props.selectedTags.indexOf(tag) > -1)}/>
-                                <ListItemText primary={tag} />
-                            </MenuItem>
-                        ))
+                        props.label
                     }
-                </Select>
-            </FormControl>
-        </>
+                </Typography>
+            </InputLabel>
+            <Select
+                labelId="filter-label"
+                id="filter"
+                multiple
+                value={props.selectedOptions}
+                onClick={() => setOpen(!open)}
+                onChange={handleChange}
+                input={<OutlinedInput label={props.label}/>}
+                inputProps={{ "data-testid": "filter" }}
+                renderValue={renderValue}
+                MenuProps={MenuProps}
+            >
+                {
+                    props.options?.map((option) => (
+                        <MenuItem key={option} value={option}>
+                            <Checkbox checked={props.selectedOptions && (props.selectedOptions.indexOf(option) > -1)} />
+                            <ListItemText primary={option} />
+                        </MenuItem>
+                    ))
+                }
+            </Select>
+        </FormControl>
     )
 }
 
-interface FilterProps {
-    tags?: string[]
-    selectedTags?: string[]
-    setSelectedTags?: (selectedTags: string[]) => void
-}
+export default Filter

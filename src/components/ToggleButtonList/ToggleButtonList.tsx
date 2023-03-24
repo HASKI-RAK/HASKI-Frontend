@@ -3,6 +3,11 @@ import {
     DefaultBox as Box
 } from "@common/components"
 
+type ToggleButtonListProps = {
+    toggleButtonList?: string[]
+    selectedElement?: string
+}
+
 const ToggleButtonListComponent = ({toggleButtonList, selectedElement, ...props}: ToggleButtonListProps) => {
     return (
         <Box>
@@ -17,11 +22,6 @@ const ToggleButtonListComponent = ({toggleButtonList, selectedElement, ...props}
             }
         </Box>
     )
-}
-
-interface ToggleButtonListProps {
-    toggleButtonList?: string[]
-    selectedElement?: string
 }
 
 // https://mui.com/material-ui/guides/composition/

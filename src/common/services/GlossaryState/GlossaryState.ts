@@ -6,5 +6,5 @@ export type GlossaryState = {
     setExpandedList?: (newExpandedList: string[]) => void
     setSearchQuery?: (newSearchQuery: string) => void
     setSelectedIndexElement?: (newSelectedIndexElement: string) => void
-    setSelectedTags?: (newSelectedTags: string[]) => void
+    setSelectedTags?: (newSelectedTags?: string[] | string) => void
 }

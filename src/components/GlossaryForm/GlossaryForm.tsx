@@ -4,12 +4,17 @@ import { GlossaryList, Filter, Searchbar, GlossaryIndex, GlossaryEntryProps } fr
 import { useGlossaryForm as _useGlossaryForm, useGlossaryFormHookParams, GlossaryFormHookReturn } from "./GlossaryForm.hooks"
 import AutoStories from '@mui/icons-material/AutoStories'
 
-export const GlossaryForm = ({ useGlossaryForm = _useGlossaryForm, ...props }: GlossaryFormProps) => {
+type GlossaryFormProps = {
+    useGlossaryForm?: (params?: useGlossaryFormHookParams) => GlossaryFormHookReturn;
+}
+
+const GlossaryForm = ({ useGlossaryForm = _useGlossaryForm, ...props }: GlossaryFormProps) => {
     // Translation
     const  { t } = useTranslation();
     const tags = t<string>('pages.glossary.tags', { returnObjects: true}) as string[]
     const indexElements = [t('pages.glossary.fundamentals')].concat(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"])
     const glossaryEntries : GlossaryEntryProps[] = t<string>('pages.glossary.elements', { returnObjects: true}) as GlossaryEntryProps[]
+    const filterLabel = t('pages.glossary.filter')
 
     // Application logic state
     const { glossaryState, filterByTags, filterByIndexElement, searchByQuery, collapseAll, expandAll } = useGlossaryForm();
@@ -31,7 +36,7 @@ export const GlossaryForm = ({ useGlossaryForm = _useGlossaryForm, ...props }: G
                     <Searchbar setSearchQuery={glossaryState.setSearchQuery}/>
                 </Grid>
                 <Grid item xs={4} sm={6}>
-                    <Filter tags={tags} selectedTags={glossaryState.selectedTags} setSelectedTags={glossaryState.setSelectedTags}/>
+                    <Filter label={filterLabel} options={tags} selectedOptions={glossaryState.selectedTags} setSelectedOptions={glossaryState.setSelectedTags}/>
                 </Grid>
                 <Grid item xs={12} sm={12}>
                     <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 1}}>
@@ -71,6 +76,4 @@ export const GlossaryForm = ({ useGlossaryForm = _useGlossaryForm, ...props }: G
     )
 }
 
-type GlossaryFormProps = {
-    useGlossaryForm?: (params?: useGlossaryFormHookParams) => GlossaryFormHookReturn;
-}
+export default GlossaryForm

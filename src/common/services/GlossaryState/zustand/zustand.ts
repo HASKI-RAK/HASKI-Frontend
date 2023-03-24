@@ -9,5 +9,15 @@ export const useGlossaryStore = create<GlossaryState>()((set) => ({
     setExpandedList: (newExpandedList) => set({expandedList: newExpandedList}),
     setSearchQuery: (newSearchQuery) => set({searchQuery: newSearchQuery}),
     setSelectedIndexElement: (newSelectedIndexElement) => set({selectedIndexElement: newSelectedIndexElement}),
-    setSelectedTags: (newSelectedTags) => set({selectedTags: newSelectedTags})
+    setSelectedTags: (newSelectedTags) => {
+        if(newSelectedTags === undefined) { // typeof newSelectedTags === "undefined"
+            set({selectedTags: [] as string[]})
+        }
+        else if(typeof newSelectedTags === "string") {
+            set({selectedTags: newSelectedTags.split(',')})
+        }
+        else {
+            set({selectedTags: newSelectedTags})
+        }
+    }
 }))

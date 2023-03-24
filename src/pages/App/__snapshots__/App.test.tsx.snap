@@ -4,6 +4,31 @@ exports[`Test the demo component renders correctly 1`] = `
 <div
   className="main"
 >
+  <a
+    href="/projectinformation"
+    onClick={[Function]}
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeSmall MuiButton-outlinedSizeSmall css-2f0367-MuiButtonBase-root-MuiButton-root"
+      disabled={false}
+      onBlur={[Function]}
+      onContextMenu={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      Project Information
+    </button>
+  </a>
   <div>
     <div
       className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary LanguageDropdown css-jb90b-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
