@@ -88,23 +88,23 @@ describe("Test TableILS with all Methods", () => {
     test("Returned dimensions are correct",
         () => {
 
-            expect(ILSDimension(1,3)).toBe("components.QuestionnaireResults.TableILS.Active");
-            expect(ILSDimension(1,-3)).toBe("components.QuestionnaireResults.TableILS.Reflective");
-            expect(ILSDimension(2,3)).toBe("components.QuestionnaireResults.TableILS.Sensory");
-            expect(ILSDimension(2,-3)).toBe("components.QuestionnaireResults.TableILS.Intuitive");
-            expect(ILSDimension(3,3)).toBe("components.QuestionnaireResults.TableILS.Visual");
-            expect(ILSDimension(3,-3)).toBe("components.QuestionnaireResults.TableILS.Verbal");
-            expect(ILSDimension(4,3)).toBe("components.QuestionnaireResults.TableILS.Sequential");
-            expect(ILSDimension(4,-3)).toBe("components.QuestionnaireResults.TableILS.Global");
+            expect(ILSDimension(1,3)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Active");
+            expect(ILSDimension(1,-3)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Reflective");
+            expect(ILSDimension(2,3)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Sensory");
+            expect(ILSDimension(2,-3)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Intuitive");
+            expect(ILSDimension(3,3)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Visual");
+            expect(ILSDimension(3,-3)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Verbal");
+            expect(ILSDimension(4,3)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Sequential");
+            expect(ILSDimension(4,-3)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Global");
 
-            expect(ILSDimension(1,3, true)).toBe("components.QuestionnaireResults.TableILS.Active");
-            expect(ILSDimension(1,-3, true)).toBe("components.QuestionnaireResults.TableILS.Reflective");
-            expect(ILSDimension(2,3, true)).toBe("components.QuestionnaireResults.TableILS.Sensory");
-            expect(ILSDimension(2,-3, true)).toBe("components.QuestionnaireResults.TableILS.Intuitive");
-            expect(ILSDimension(3,3, true)).toBe("components.QuestionnaireResults.TableILS.Visual");
-            expect(ILSDimension(3,-3, true)).toBe("components.QuestionnaireResults.TableILS.Verbal");
-            expect(ILSDimension(4,3, true)).toBe("components.QuestionnaireResults.TableILS.Sequential");
-            expect(ILSDimension(4,-3, true)).toBe("components.QuestionnaireResults.TableILS.Global");
+            expect(ILSDimension(1,3, true)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Active");
+            expect(ILSDimension(1,-3, true)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Reflective");
+            expect(ILSDimension(2,3, true)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Sensory");
+            expect(ILSDimension(2,-3, true)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Intuitive");
+            expect(ILSDimension(3,3, true)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Visual");
+            expect(ILSDimension(3,-3, true)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Verbal");
+            expect(ILSDimension(4,3, true)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Sequential");
+            expect(ILSDimension(4,-3, true)).toBe("components.Questionnaire.QuestionnaireResults.TableILS.Global");
 
             expect(ILSDimension(100, 3)).toBe("No dimension found");
             expect(ILSDimension(100, 3,true)).toBe("No dimension found");

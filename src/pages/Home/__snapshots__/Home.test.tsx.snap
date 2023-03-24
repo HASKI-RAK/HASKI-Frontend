@@ -22,7 +22,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
     tabIndex={0}
     type="button"
   >
-    components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText
+    components.Questionnaire.QuestionnaireResults.QuestionnaireResultsModal.ButtonText
   </button>
   <div />
   <div>
@@ -94,7 +94,7 @@ exports[`Test the Home page renders correctly and matches snapshot 1`] = `
       Next
        
       <br />
-      components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText
+      components.Questionnaire.QuestionnaireResults.QuestionnaireResultsModal.ButtonText
        
       <br />
     </div>

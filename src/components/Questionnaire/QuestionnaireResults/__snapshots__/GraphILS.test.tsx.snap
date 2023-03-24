@@ -134,7 +134,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                     text-anchor="start"
                     transform="translate(10,0) rotate(0)"
                   >
-                     components.QuestionnaireResults.TableILS.Sequential
+                     components.Questionnaire.QuestionnaireResults.TableILS.Sequential
                   </text>
                 </g>
                 <g
@@ -154,7 +154,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                     text-anchor="start"
                     transform="translate(10,0) rotate(0)"
                   >
-                     components.QuestionnaireResults.TableILS.Visual
+                     components.Questionnaire.QuestionnaireResults.TableILS.Visual
                   </text>
                 </g>
                 <g
@@ -174,7 +174,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                     text-anchor="start"
                     transform="translate(10,0) rotate(0)"
                   >
-                     components.QuestionnaireResults.TableILS.Sensory
+                     components.Questionnaire.QuestionnaireResults.TableILS.Sensory
                   </text>
                 </g>
                 <g
@@ -194,7 +194,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                     text-anchor="start"
                     transform="translate(10,0) rotate(0)"
                   >
-                     components.QuestionnaireResults.TableILS.Active
+                     components.Questionnaire.QuestionnaireResults.TableILS.Active
                   </text>
                 </g>
                 <line
@@ -460,7 +460,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   text-anchor="middle"
                   transform="translate(285, 32) rotate(0)"
                 >
-                  components.QuestionnaireResults.TableILS.Score
+                  components.Questionnaire.QuestionnaireResults.TableILS.Score
                 </text>
               </g>
               <g
@@ -483,7 +483,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                     text-anchor="end"
                     transform="translate(-10,0) rotate(0)"
                   >
-                    components.QuestionnaireResults.TableILS.Global
+                    components.Questionnaire.QuestionnaireResults.TableILS.Global
                   </text>
                 </g>
                 <g
@@ -503,7 +503,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                     text-anchor="end"
                     transform="translate(-10,0) rotate(0)"
                   >
-                    components.QuestionnaireResults.TableILS.Verbal
+                    components.Questionnaire.QuestionnaireResults.TableILS.Verbal
                   </text>
                 </g>
                 <g
@@ -523,7 +523,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                     text-anchor="end"
                     transform="translate(-10,0) rotate(0)"
                   >
-                    components.QuestionnaireResults.TableILS.Intuitive
+                    components.Questionnaire.QuestionnaireResults.TableILS.Intuitive
                   </text>
                 </g>
                 <g
@@ -543,7 +543,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                     text-anchor="end"
                     transform="translate(-10,0) rotate(0)"
                   >
-                    components.QuestionnaireResults.TableILS.Reflective
+                    components.Questionnaire.QuestionnaireResults.TableILS.Reflective
                   </text>
                 </g>
                 <line
@@ -786,7 +786,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   text-anchor="start"
                   transform="translate(10,0) rotate(0)"
                 >
-                   components.QuestionnaireResults.TableILS.Sequential
+                   components.Questionnaire.QuestionnaireResults.TableILS.Sequential
                 </text>
               </g>
               <g
@@ -806,7 +806,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   text-anchor="start"
                   transform="translate(10,0) rotate(0)"
                 >
-                   components.QuestionnaireResults.TableILS.Visual
+                   components.Questionnaire.QuestionnaireResults.TableILS.Visual
                 </text>
               </g>
               <g
@@ -826,7 +826,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   text-anchor="start"
                   transform="translate(10,0) rotate(0)"
                 >
-                   components.QuestionnaireResults.TableILS.Sensory
+                   components.Questionnaire.QuestionnaireResults.TableILS.Sensory
                 </text>
               </g>
               <g
@@ -846,7 +846,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   text-anchor="start"
                   transform="translate(10,0) rotate(0)"
                 >
-                   components.QuestionnaireResults.TableILS.Active
+                   components.Questionnaire.QuestionnaireResults.TableILS.Active
                 </text>
               </g>
               <line
@@ -1112,7 +1112,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                 text-anchor="middle"
                 transform="translate(285, 32) rotate(0)"
               >
-                components.QuestionnaireResults.TableILS.Score
+                components.Questionnaire.QuestionnaireResults.TableILS.Score
               </text>
             </g>
             <g
@@ -1135,7 +1135,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   text-anchor="end"
                   transform="translate(-10,0) rotate(0)"
                 >
-                  components.QuestionnaireResults.TableILS.Global
+                  components.Questionnaire.QuestionnaireResults.TableILS.Global
                 </text>
               </g>
               <g
@@ -1155,7 +1155,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   text-anchor="end"
                   transform="translate(-10,0) rotate(0)"
                 >
-                  components.QuestionnaireResults.TableILS.Verbal
+                  components.Questionnaire.QuestionnaireResults.TableILS.Verbal
                 </text>
               </g>
               <g
@@ -1175,7 +1175,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   text-anchor="end"
                   transform="translate(-10,0) rotate(0)"
                 >
-                  components.QuestionnaireResults.TableILS.Intuitive
+                  components.Questionnaire.QuestionnaireResults.TableILS.Intuitive
                 </text>
               </g>
               <g
@@ -1195,7 +1195,7 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   text-anchor="end"
                   transform="translate(-10,0) rotate(0)"
                 >
-                  components.QuestionnaireResults.TableILS.Reflective
+                  components.Questionnaire.QuestionnaireResults.TableILS.Reflective
                 </text>
               </g>
               <line

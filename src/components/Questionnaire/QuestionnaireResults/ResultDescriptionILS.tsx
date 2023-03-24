@@ -39,7 +39,7 @@ export const ResultDescriptionILS = ({ILSdim=ILSDimension}: ResultDescriptionILS
         }
         else{
             unbalancedDimensionsArray.push(
-                <div key={"Dimension: "+dimensionArray[index] + " Interpretation: " + interpretationArray[index]}>
+                <div data-testid={"Dimension: "+dimensionArray[index] + " Interpretation: " + interpretationArray[index]} key={"Dimension: "+dimensionArray[index] + " Interpretation: " + interpretationArray[index]}>
                     <Typography variant="h6" gutterBottom>
                         {t("components.Questionnaire.QuestionnaireResults.TableILS." + dimensionArray[index])}
                     </Typography>
