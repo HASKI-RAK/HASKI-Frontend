@@ -6,7 +6,7 @@ import SendIcon from '@mui/icons-material/Send';
 import Paper from '@mui/material/Paper';
 import {useTranslation} from 'react-i18next';
 import MobileStepper from '@mui/material/MobileStepper';
-import {Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography} from "@mui/material";
 import TableCell from "@mui/material/TableCell";
 import {DefaultButton as Button} from "@common/components";
 import React, {useState} from "react";
@@ -16,7 +16,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import {useNavigate} from "react-router-dom";
 import {useQuestionnaireAnswersListKStore} from "@services";
-import { StyledTableCellQuestion, styleButtonClose} from "./QuestionnaireQuestionsTableStyle";
+import {styleButtonClose} from "./QuestionnaireQuestionsTableStyle";
 
 
 const stepsListK = [
@@ -397,7 +397,6 @@ export const TableListKQuestions = () => {
     const {t} = useTranslation();
 
     const navigate = useNavigate();
-    const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
     const [radioButtonGroup1, setRadioButtonGroup1] = useState("");
     const [radioButtonGroup2, setRadioButtonGroup2] = useState("");
@@ -422,24 +421,24 @@ export const TableListKQuestions = () => {
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
-        setRadioButtonGroup1(setRadioButtonValue(stepsListK[activeStep+1][0]));
-        setRadioButtonGroup2(setRadioButtonValue(stepsListK[activeStep+1][1]));
-        setRadioButtonGroup3(setRadioButtonValue(stepsListK[activeStep+1][2]));
-        setRadioButtonGroup4(setRadioButtonValue(stepsListK[activeStep+1][3]));
+        setRadioButtonGroup1(setRadioButtonValue(stepsListK[activeStep + 1][0]));
+        setRadioButtonGroup2(setRadioButtonValue(stepsListK[activeStep + 1][1]));
+        setRadioButtonGroup3(setRadioButtonValue(stepsListK[activeStep + 1][2]));
+        setRadioButtonGroup4(setRadioButtonValue(stepsListK[activeStep + 1][3]));
         //because the last step has only 4 questions
-        if(activeStep < 6){
-            setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep+1][4]));
+        if(activeStep < 6) {
+            setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep + 1][4]));
         }
     };
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
-        setRadioButtonGroup1(setRadioButtonValue(stepsListK[activeStep-1][0]));
-        setRadioButtonGroup2(setRadioButtonValue(stepsListK[activeStep-1][1]));
-        setRadioButtonGroup3(setRadioButtonValue(stepsListK[activeStep-1][2]));
-        setRadioButtonGroup4(setRadioButtonValue(stepsListK[activeStep-1][3]));
-        setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep-1][4]));
+        setRadioButtonGroup1(setRadioButtonValue(stepsListK[activeStep - 1][0]));
+        setRadioButtonGroup2(setRadioButtonValue(stepsListK[activeStep - 1][1]));
+        setRadioButtonGroup3(setRadioButtonValue(stepsListK[activeStep - 1][2]));
+        setRadioButtonGroup4(setRadioButtonValue(stepsListK[activeStep - 1][3]));
+        setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep - 1][4]));
     };
 
     const handleSend = () => {
@@ -449,11 +448,13 @@ export const TableListKQuestions = () => {
         //todo: send to server
     }
 
-    const setRadioButtonValue = (listkStep:{ question: string, questionLabel: string, answer1: string, answer2: string, answer3: string,
-        answer4: string, answer5: string }) => {
+    const setRadioButtonValue = (listkStep: {
+        question: string, questionLabel: string, answer1: string, answer2: string, answer3: string,
+        answer4: string, answer5: string
+    }) => {
 
         //if the question is already answered, the answer is set to the value of the radio button/ else radio button is not set
-        switch (questionnaireAnswers[listkStep.questionLabel as keyof typeof questionnaireAnswers]) {
+        switch(questionnaireAnswers[listkStep.questionLabel as keyof typeof questionnaireAnswers]) {
             case "1":
                 return listkStep.answer1;
             case "2":
@@ -469,13 +470,15 @@ export const TableListKQuestions = () => {
         }
     }
 
-    const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>, listkStep: { question: string, questionLabel: string,
-        answer1: string, answer2: string, answer3: string, answer4: string, answer5: string }) => {
+    const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>, listkStep: {
+        question: string, questionLabel: string,
+        answer1: string, answer2: string, answer3: string, answer4: string, answer5: string
+    }) => {
 
         const radioButtonOptions = [listkStep.answer1, listkStep.answer2, listkStep.answer3, listkStep.answer4, listkStep.answer5];
         let selectedAnswer;
 
-        switch (radioButtonOptions.indexOf(event.target.value)) {
+        switch(radioButtonOptions.indexOf(event.target.value)) {
             case 0:
                 selectedAnswer = "1";
                 break;
@@ -493,7 +496,7 @@ export const TableListKQuestions = () => {
                 break;
         }
 
-        setQuestionnaireAnswers(listkStep.questionLabel , selectedAnswer.toString() );
+        setQuestionnaireAnswers(listkStep.questionLabel, selectedAnswer.toString());
     };
 
     const onClickClose = () => {
@@ -532,11 +535,7 @@ export const TableListKQuestions = () => {
                                     data-testid="nextButton"
                                     disabled={activeStep === 7 || isNextDisabled}>
                                 Next
-                                {theme.direction === 'rtl' ? (
-                                    <KeyboardArrowLeft/>
-                                ) : (
                                     <KeyboardArrowRight/>
-                                )}
                             </Button>
                         }
 
@@ -546,11 +545,7 @@ export const TableListKQuestions = () => {
                                     onClick={handleBack}
                                     data-testid="backButton"
                                     disabled={activeStep === 0}>
-                                {theme.direction === 'rtl' ? (
-                                    <KeyboardArrowRight/>
-                                ) : (
                                     <KeyboardArrowLeft/>
-                                )}
                                 Back
                             </Button>
                         }
@@ -565,9 +560,13 @@ export const TableListKQuestions = () => {
                         <Table style={{minWidth: '300px'}}>
                             <TableBody key={"TableILSBody"}>
                                 <TableRow>
-                                    <StyledTableCellQuestion align="left"
-                                                             style={{color: theme.palette.common.white}}><Typography
-                                        variant={"h5"}>{t(stepsListK[activeStep][0].question)}</Typography></StyledTableCellQuestion>
+                                    <TableCell align="left"
+                                               sx={{
+                                                   backgroundColor: (theme) => theme.palette.primary.dark,
+                                                   color: (theme) => theme.palette.secondary.main
+                                               }}>
+                                        <Typography variant={"h5"}>{t(stepsListK[activeStep][0].question)}</Typography>
+                                    </TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>
@@ -583,7 +582,8 @@ export const TableListKQuestions = () => {
                                                 direction="row"
                                                 justifyContent="space-around"
                                                 alignItems="center"
-                                                divider={<Divider orientation="vertical" flexItem sx={{backgroundColor:"rgba(36,38,42,0.30)"}}/>}
+                                                divider={<Divider orientation="vertical" flexItem
+                                                                  sx={{backgroundColor: (theme) => theme.palette.primary.dark}}/>}
                                             >
                                                 <FormControlLabel value={stepsListK[activeStep][0].answer1} control={<Radio/>}
                                                                   label={<Typography
@@ -605,9 +605,13 @@ export const TableListKQuestions = () => {
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <StyledTableCellQuestion align="left"
-                                                             style={{color: theme.palette.common.white}}><Typography
-                                        variant={"h5"}>{t(stepsListK[activeStep][1].question)}</Typography></StyledTableCellQuestion>
+                                    <TableCell align="left"
+                                               sx={{
+                                                   backgroundColor: (theme) => theme.palette.primary.dark,
+                                                   color: (theme) => theme.palette.secondary.main
+                                               }}>
+                                        <Typography variant={"h5"}>{t(stepsListK[activeStep][1].question)}</Typography>
+                                    </TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>
@@ -623,7 +627,8 @@ export const TableListKQuestions = () => {
                                                 direction="row"
                                                 justifyContent="space-around"
                                                 alignItems="center"
-                                                divider={<Divider orientation="vertical" flexItem sx={{backgroundColor:"rgba(36,38,42,0.30)"}}/>}
+                                                divider={<Divider orientation="vertical" flexItem
+                                                                  sx={{backgroundColor: (theme) => theme.palette.primary.dark}}/>}
                                             >
                                                 <FormControlLabel value={stepsListK[activeStep][1].answer1} control={<Radio/>}
                                                                   label={<Typography
@@ -645,9 +650,13 @@ export const TableListKQuestions = () => {
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <StyledTableCellQuestion align="left"
-                                                             style={{color: theme.palette.common.white}}><Typography
-                                        variant={"h5"}>{t(stepsListK[activeStep][2].question)}</Typography></StyledTableCellQuestion>
+                                    <TableCell align="left"
+                                               sx={{
+                                                   backgroundColor: (theme) => theme.palette.primary.dark,
+                                                   color: (theme) => theme.palette.secondary.main
+                                               }}>
+                                        <Typography variant={"h5"}>{t(stepsListK[activeStep][2].question)}</Typography>
+                                    </TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>
@@ -663,7 +672,8 @@ export const TableListKQuestions = () => {
                                                 direction="row"
                                                 justifyContent="space-around"
                                                 alignItems="center"
-                                                divider={<Divider orientation="vertical" flexItem sx={{backgroundColor:"rgba(36,38,42,0.30)"}}/>}
+                                                divider={<Divider orientation="vertical" flexItem
+                                                                  sx={{backgroundColor: (theme) => theme.palette.primary.dark}}/>}
                                             >
                                                 <FormControlLabel value={stepsListK[activeStep][2].answer1} control={<Radio/>}
                                                                   label={<Typography
@@ -685,9 +695,13 @@ export const TableListKQuestions = () => {
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <StyledTableCellQuestion align="left"
-                                                             style={{color: theme.palette.common.white}}><Typography
-                                        variant={"h5"}>{t(stepsListK[activeStep][3].question)}</Typography></StyledTableCellQuestion>
+                                    <TableCell align="left"
+                                               sx={{
+                                                   backgroundColor: (theme) => theme.palette.primary.dark,
+                                                   color: (theme) => theme.palette.secondary.main
+                                               }}>
+                                        <Typography variant={"h5"}>{t(stepsListK[activeStep][3].question)}</Typography>
+                                    </TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell>
@@ -703,7 +717,8 @@ export const TableListKQuestions = () => {
                                                 direction="row"
                                                 justifyContent="space-around"
                                                 alignItems="center"
-                                                divider={<Divider orientation="vertical" flexItem sx={{backgroundColor:"rgba(36,38,42,0.30)"}}/>}
+                                                divider={<Divider orientation="vertical" flexItem
+                                                                  sx={{backgroundColor: (theme) => theme.palette.primary.dark}}/>}
                                             >
                                                 <FormControlLabel value={stepsListK[activeStep][3].answer1} control={<Radio/>}
                                                                   label={<Typography
@@ -724,48 +739,53 @@ export const TableListKQuestions = () => {
                                         </RadioGroup>
                                     </TableCell>
                                 </TableRow>
-                                    {activeStep < 7 ? (
-<>
-                                <TableRow>
-                                    <StyledTableCellQuestion align="left"
-                                                             style={{color: theme.palette.common.white}}><Typography
-                                        variant={"h5"}>{t(stepsListK[activeStep][4].question)}</Typography></StyledTableCellQuestion>
-                                </TableRow>
-                                    <TableRow>
-                                        <TableCell>
-                                            <RadioGroup
-                                                value={radioButtonGroup5}
-                                                name={stepsListK[activeStep][4].questionLabel}
-                                                onChange={e => {
-                                                    setRadioButtonGroup5(e.target.value);
-                                                    handleRadioChange(e, stepsListK[activeStep][4])
-                                                }}
-                                            >
-                                                <Stack
-                                                    direction="row"
-                                                    justifyContent="space-around"
-                                                    alignItems="center"
-                                                    divider={<Divider orientation="vertical" flexItem sx={{backgroundColor:"rgba(36,38,42,0.30)"}}/>}
+                                {activeStep < 7 ? (
+                                    <>
+                                        <TableRow>
+                                            <TableCell align="left"
+                                                       sx={{
+                                                           backgroundColor: (theme) => theme.palette.primary.dark,
+                                                           color: (theme) => theme.palette.secondary.main
+                                                       }}>
+                                                <Typography variant={"h5"}>{t(stepsListK[activeStep][4].question)}</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>
+                                                <RadioGroup
+                                                    value={radioButtonGroup5}
+                                                    name={stepsListK[activeStep][4].questionLabel}
+                                                    onChange={e => {
+                                                        setRadioButtonGroup5(e.target.value);
+                                                        handleRadioChange(e, stepsListK[activeStep][4])
+                                                    }}
                                                 >
-                                                    <FormControlLabel value={stepsListK[activeStep][4].answer1} control={<Radio/>}
-                                                                      label={<Typography
-                                                                          variant={"h6"}>{t(stepsListK[activeStep][4].answer1)}</Typography>}/>
-                                                    <FormControlLabel value={stepsListK[activeStep][4].answer2} control={<Radio/>}
-                                                                      label={<Typography
-                                                                          variant={"h6"}>{t(stepsListK[activeStep][4].answer2)}</Typography>}/>
-                                                    <FormControlLabel value={stepsListK[activeStep][4].answer3} control={<Radio/>}
-                                                                      label={<Typography
-                                                                          variant={"h6"}>{t(stepsListK[activeStep][4].answer3)}</Typography>}/>
-                                                    <FormControlLabel value={stepsListK[activeStep][4].answer4} control={<Radio/>}
-                                                                      label={<Typography
-                                                                          variant={"h6"}>{t(stepsListK[activeStep][4].answer4)}</Typography>}/>
-                                                    <FormControlLabel value={stepsListK[activeStep][4].answer5} control={<Radio/>}
-                                                                      label={<Typography
-                                                                          variant={"h6"}>{t(stepsListK[activeStep][4].answer5)}</Typography>}/>
-                                                </Stack>
-                                            </RadioGroup>
-                                        </TableCell>
-                                    </TableRow></>) : undefined}
+                                                    <Stack
+                                                        direction="row"
+                                                        justifyContent="space-around"
+                                                        alignItems="center"
+                                                        divider={<Divider orientation="vertical" flexItem
+                                                                          sx={{backgroundColor: (theme) => theme.palette.primary.dark}}/>}
+                                                    >
+                                                        <FormControlLabel value={stepsListK[activeStep][4].answer1} control={<Radio/>}
+                                                                          label={<Typography
+                                                                              variant={"h6"}>{t(stepsListK[activeStep][4].answer1)}</Typography>}/>
+                                                        <FormControlLabel value={stepsListK[activeStep][4].answer2} control={<Radio/>}
+                                                                          label={<Typography
+                                                                              variant={"h6"}>{t(stepsListK[activeStep][4].answer2)}</Typography>}/>
+                                                        <FormControlLabel value={stepsListK[activeStep][4].answer3} control={<Radio/>}
+                                                                          label={<Typography
+                                                                              variant={"h6"}>{t(stepsListK[activeStep][4].answer3)}</Typography>}/>
+                                                        <FormControlLabel value={stepsListK[activeStep][4].answer4} control={<Radio/>}
+                                                                          label={<Typography
+                                                                              variant={"h6"}>{t(stepsListK[activeStep][4].answer4)}</Typography>}/>
+                                                        <FormControlLabel value={stepsListK[activeStep][4].answer5} control={<Radio/>}
+                                                                          label={<Typography
+                                                                              variant={"h6"}>{t(stepsListK[activeStep][4].answer5)}</Typography>}/>
+                                                    </Stack>
+                                                </RadioGroup>
+                                            </TableCell>
+                                        </TableRow></>) : undefined}
                             </TableBody>
                         </Table>
                     </TableContainer>

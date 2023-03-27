@@ -7,7 +7,7 @@ export const QuestionnaireILSQuestionsShort = () => {
     const authcontext = useContext(AuthContext)
 
     return(
-        authcontext.isAuth ? <Skeleton /> : TableILSQuestions(false)
+        authcontext.isAuth ? <Skeleton /> : <TableILSQuestions ilsLong={false} />
     )
 }
 
