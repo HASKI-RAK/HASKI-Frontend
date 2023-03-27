@@ -7,7 +7,7 @@ export const logBuffer = () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore - localStorage.getItem('ringBufferContent') is not null
     const localStorageRingBuffer = JSON.parse(
-      localStorage.getItem("ringBufferContent") ?? ""
+      localStorage.getItem("ringBufferContent") || '{"buffer":[]}'
     );
     GlobalRingBuffer.fromArray(localStorageRingBuffer.buffer);
   } else {
