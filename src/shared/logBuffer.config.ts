@@ -1,6 +1,10 @@
 import { RingBuffer } from "./RingBuffer";
 import log from "loglevel";
 
+/**
+ * This function is used to log all the messages in the console and also store them in a ring buffer.
+ * @category Shared
+ */
 export const logBuffer = () => {
   const GlobalRingBuffer = new RingBuffer<[string, string]>(100);
   if (localStorage.getItem("ringBufferContent") !== null) {
