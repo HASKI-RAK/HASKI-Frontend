@@ -507,9 +507,7 @@ export const TableILSQuestions = ({ilsLong}: TableILSQuestionsProps) => {
     const handleSend = () => {
         const ILSarray = Object.entries(questionnaireAnswers).filter(([key]) => key !== "");
         const ils_result = ["ils", ILSarray];
-        console.log(JSON.stringify(ils_result));
         //todo: send to server
-
     }
 
     const setRadioButtonValue = (ilsStep: { question: string, questionLabel: string, answer1: string, answer2: string }): string => {
