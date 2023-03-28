@@ -51,7 +51,7 @@ describe("MenuBar", () => {
     );
     // click on HelpIcon:
     fireEvent.click(result.getByTestId("HelpIcon"));
-    // expect(result.getByTestId('HelpIcon')).toBeInTheDocument();
+    expect(result.getByTestId("HelpIcon")).toBeInTheDocument();
   });
 
   test("click on SettingsIcon should open popover", () => {
@@ -63,7 +63,7 @@ describe("MenuBar", () => {
     );
     // click on HelpIcon:
     fireEvent.click(result.getByTestId("SettingsIcon"));
-    // expect(result.getByTestId('HelpIcon')).toBeInTheDocument();
+    expect(result.getByTestId("SettingsIcon")).toBeInTheDocument();
   });
 
   test("click on UserIcon should open popover", () => {
@@ -81,5 +81,6 @@ describe("MenuBar", () => {
 
     // click on first element of popover:
     fireEvent.click(result.getAllByTestId("usermenuitem")[0]);
+    // TODO 📑: will be implemented in the future. Current menu is mock.
   });
 });

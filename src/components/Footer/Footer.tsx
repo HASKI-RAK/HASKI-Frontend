@@ -1,8 +1,13 @@
-import { Grid, Link, Typography } from "@mui/material";
-import { Box, Container } from "@mui/system";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import {
+  DefaultContainer as Container,
+  DefaultBox as Box,
+  DefaultGrid as Grid,
+  DefaultLink as Link,
+  DefaultTypography as Typography,
+} from "@common/components";
 
 /**
  * The footer component. *
@@ -41,7 +46,7 @@ const Footer = () => {
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
               <Typography color="black" variant="h5">
-                Project HASKI
+                {t("projecthaski")}
               </Typography>
             </Grid>
             <Grid

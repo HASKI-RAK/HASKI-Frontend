@@ -45,7 +45,7 @@ export type LoginFormProps = {
  * @returns {JSX.Element} - The Form component.
  * @category Components
  */
-export const LoginForm = ({
+const LoginForm = ({
   useLoginForm = _useLoginForm,
   ...props
 }: LoginFormProps) => {

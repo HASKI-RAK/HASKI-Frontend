@@ -1,6 +1,13 @@
-import { Divider, Grid, Typography } from "@mui/material";
-import { Box, Container, Stack } from "@mui/system";
 import { Outlet } from "react-router-dom";
+import {
+  DefaultBox as Box,
+  DefaultDivider as Divider,
+  DefaultTypography as Typography,
+  DefaultStack as Stack,
+  DefaultGrid as Grid,
+  DefaultContainer as Container,
+} from "@common/components";
+
 import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from "@components";
 
 /**

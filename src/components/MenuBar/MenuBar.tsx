@@ -1,25 +1,25 @@
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  IconButton,
-  Menu,
-  Tooltip,
-  Avatar,
-  MenuItem,
-  Grid,
-  Button,
-  Popover,
-  Link,
-  Divider,
-} from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  DefaultAppBar as AppBar,
+  DefaultToolbar as Toolbar,
+  DefaultTypography as Typography,
+  DefaultBox as Box,
+  DefaultIconButton as IconButton,
+  DefaultMenu as Menu,
+  DefaultTooltip as Tooltip,
+  DefaultAvatar as Avatar,
+  DefaultMenuItem as MenuItem,
+  DefaultGrid as Grid,
+  DefaultButton as Button,
+  DefaultPopover as Popover,
+  DefaultLink as Link,
+  DefaultDivider as Divider,
+} from "@common/components";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HelpIcon from "@mui/icons-material/Help";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const topics = [
@@ -68,6 +68,8 @@ const MenuBar = () => {
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(
     null
   );
+
+  const { t } = useTranslation();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -210,9 +212,9 @@ const MenuBar = () => {
 
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title="Help">
+            <Tooltip title={t("help")}>
               <IconButton>
-                <HelpIcon />
+                <HelpIcon data-testid="HelpIcon" />
               </IconButton>
             </Tooltip>
           </Box>
@@ -221,7 +223,7 @@ const MenuBar = () => {
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t("tooltip.openGlobalSettings")}>
               <IconButton>
-                <SettingsIcon />
+                <SettingsIcon data-testid="SettingsIcon" />
               </IconButton>
             </Tooltip>
           </Box>

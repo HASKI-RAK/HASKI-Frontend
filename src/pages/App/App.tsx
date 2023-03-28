@@ -1,23 +1,23 @@
-import { ThemeProvider } from "@mui/material";
-import { AuthProvider } from "@services";
-import { MainFrame, Home, ThemePresentation, Login, Dashboard } from "@pages";
-import { Theme } from "@utils";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { DefaultThemeProvider as ThemeProvider } from "@common/components";
+import { MainFrame, Home, ThemePresentation, Login, Dashboard } from "@pages";
+import { AuthProvider } from "@services";
 import { logBuffer } from "@shared";
+import { Theme } from "@utils";
 
 logBuffer();
 
 /**
  * App component.
- * 
+ *
  * @remarks
  * This is the main component of the application and the entry point after the index.tsx.
  * It contains the main frame and the routes to the other pages.
  * The Theme is injected here. Additionally, the AuthProvider is used to provide the authentication context.
- * 
+ *
  * @category Pages
  */
-const App = () =>
+const App = () => (
   <ThemeProvider theme={Theme}>
     <AuthProvider>
       <Router>
@@ -33,5 +33,6 @@ const App = () =>
         </Routes>
       </Router>
     </AuthProvider>
-  </ThemeProvider >;
+  </ThemeProvider>
+);
 export default App;
