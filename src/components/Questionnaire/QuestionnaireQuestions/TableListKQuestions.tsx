@@ -444,7 +444,6 @@ export const TableListKQuestions = () => {
     const handleSend = () => {
         const listkArray = Object.entries(questionnaireAnswers).filter(([key]) => key !== "");
         const listk_result = ["ils", listkArray];
-        console.log(JSON.stringify(listk_result));
         //todo: send to server
     }
 
@@ -532,7 +531,7 @@ export const TableListKQuestions = () => {
                             <Button variant="contained"
                                     color="primary"
                                     onClick={handleNext}
-                                    data-testid="nextButton"
+                                    data-testid="nextButtonListKQuestionnaire"
                                     disabled={activeStep === 7 || isNextDisabled}>
                                 Next
                                     <KeyboardArrowRight/>
@@ -543,7 +542,7 @@ export const TableListKQuestions = () => {
                             <Button variant="contained"
                                     color="primary"
                                     onClick={handleBack}
-                                    data-testid="backButton"
+                                    data-testid="backButtonListKQuestionnaire"
                                     disabled={activeStep === 0}>
                                     <KeyboardArrowLeft/>
                                 Back
@@ -572,7 +571,7 @@ export const TableListKQuestions = () => {
                                     <TableCell>
                                         <RadioGroup
                                             value={radioButtonGroup1}
-                                            name={stepsListK[activeStep][0].questionLabel}
+                                            data-testid="ListKQuestionnaireButtonGroup1"
                                             onChange={e => {
                                                 setRadioButtonGroup1(e.target.value);
                                                 handleRadioChange(e, stepsListK[activeStep][0])
@@ -617,7 +616,7 @@ export const TableListKQuestions = () => {
                                     <TableCell>
                                         <RadioGroup
                                             value={radioButtonGroup2}
-                                            name={stepsListK[activeStep][1].questionLabel}
+                                            data-testid="ListKQuestionnaireButtonGroup2"
                                             onChange={e => {
                                                 setRadioButtonGroup2(e.target.value);
                                                 handleRadioChange(e, stepsListK[activeStep][1])
@@ -662,7 +661,7 @@ export const TableListKQuestions = () => {
                                     <TableCell>
                                         <RadioGroup
                                             value={radioButtonGroup3}
-                                            name={stepsListK[activeStep][2].questionLabel}
+                                            data-testid="ListKQuestionnaireButtonGroup3"
                                             onChange={e => {
                                                 setRadioButtonGroup3(e.target.value);
                                                 handleRadioChange(e, stepsListK[activeStep][2])
@@ -707,7 +706,7 @@ export const TableListKQuestions = () => {
                                     <TableCell>
                                         <RadioGroup
                                             value={radioButtonGroup4}
-                                            name={stepsListK[activeStep][3].questionLabel}
+                                            data-testid="ListKQuestionnaireButtonGroup4"
                                             onChange={e => {
                                                 setRadioButtonGroup4(e.target.value);
                                                 handleRadioChange(e, stepsListK[activeStep][3])
@@ -754,7 +753,7 @@ export const TableListKQuestions = () => {
                                             <TableCell>
                                                 <RadioGroup
                                                     value={radioButtonGroup5}
-                                                    name={stepsListK[activeStep][4].questionLabel}
+                                                    data-testid="ListKQuestionnaireButtonGroup5"
                                                     onChange={e => {
                                                         setRadioButtonGroup5(e.target.value);
                                                         handleRadioChange(e, stepsListK[activeStep][4])
@@ -800,7 +799,7 @@ export const TableListKQuestions = () => {
                                     <Button variant="contained"
                                             endIcon={<SendIcon/>}
                                             color="primary"
-                                            data-testid="sendButton"
+                                            data-testid="sendButtonListKQuestionnaire"
                                             onClick={handleSend}
                                             disabled={isNextDisabled}
                                             sx={{m: 2}}>
