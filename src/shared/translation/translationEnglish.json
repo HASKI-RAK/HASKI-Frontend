@@ -155,6 +155,7 @@
 	"pages.Login.redirect": "You will be redirected after a few seconds",
 	"pages.privacypolicy": "Privacy Policy",
 	"pages.projectinformation": "Project Information",
+	"projecthaski": "Project Haski",
 	"tooltip.openGlobalSettings": "Open global settings",
 	"tooltip.openSettings": "Open settings"
 }
