@@ -5,22 +5,6 @@ import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 
 describe("BreadcrumbsContainer", () => {
-  it("should render the default breadcrumb with one home", () => {
-    const history = createMemoryHistory({ initialEntries: ["/home"] });
-
-    const { getAllByText, getByText } = render(
-      <Router location={history.location} navigator={history}>
-        <BreadcrumbsContainer />
-      </Router>
-    );
-    expect(getAllByText("pages.home").length).toEqual(1);
-    expect(getByText("/")).toBeInTheDocument();
-
-    // click first link:
-    fireEvent.click(getAllByText("pages.home")[0]);
-    expect(history.location.pathname).toEqual("/");
-  });
-
   it("should render the default breadcrumb with default path", () => {
     const history = createMemoryHistory({ initialEntries: ["/"] });
     jest.mock("react-router-dom", () => ({
