@@ -4,7 +4,7 @@ export type AuthContextType = {
   setIsAuth: (value: boolean) => void;
   logout: () => void;
 };
-export const AuthContext = createContext<AuthContextType>({
+const AuthContext = createContext<AuthContextType>({
   isAuth: false,
   setIsAuth: function (active: boolean) {
     this.isAuth = active;
