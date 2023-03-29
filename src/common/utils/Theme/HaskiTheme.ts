@@ -53,17 +53,17 @@ export const HaskiTheme = createTheme({
       light: defaultColors.black,
     },
 
-    action: {
-      active: defaultColors.secondary[100],
+    /*action: {
+      active: defaultColors.primary[100],
       
-      hover: defaultColors.secondary[100],
+      hover: defaultColors.primary[100],
       hoverOpacity: 0.1,
-      focus: defaultColors.secondary[100],
-      focusOpacity: 1,
-      selected: defaultColors.secondary[100],
+      focus: defaultColors.primary[100],
+      focusOpacity: 0.1,
+      selected: defaultColors.primary[100],
       selectedOpacity: 1,
       
-    },
+    },*/
   },
 
   typography: {
