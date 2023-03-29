@@ -1,7 +1,8 @@
 {
   "include": [
     "src",
-    "__mocks__"
+    "__mocks__",
+    "src/custom.d.ts"
   ],
   "compilerOptions": {
     "target": "ESNext",
@@ -30,7 +31,7 @@
       "@pages": [
         "src/pages"
       ],
-      "@services/*": [
+      "@services": [
         "src/common/services"
       ],
       "@utils": [
@@ -47,8 +48,17 @@
       ],
       "@common/components": [
         "src/common/components"
+      ],
+      "@shared": [
+        "src/shared"
       ]
     },
     "outDir": "./bin"
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "src/*"
+    ],
+    "out": "docs"
   }
 }

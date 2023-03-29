@@ -3,6 +3,10 @@
  */
 import App from "./App/App";
 import Home from "./Home/Home";
+import Login from "./Login/Login";
 import ThemePresentation from "./ThemePresentation/ThemePresentation";
 import Contact from "./Contact/Contact";
-export { App, ThemePresentation, Home, Contact };
+import Dashboard from "./Dashboard/Dashboard";
+import MainFrame from "./MainFrame/MainFrame";
+export { MainFrame, App, ThemePresentation, Home, Login, Dashboard, Contact };
+

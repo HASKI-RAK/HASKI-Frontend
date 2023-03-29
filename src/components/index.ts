@@ -1,11 +1,37 @@
-import { Dashboard } from "./Dashboard/Dashboard";
 import { DropdownLanguage } from "./DropdownLanguage/DropdownLanguage";
+import { TableILS } from "./Questionnaire/TableILS";
+import { GraphILS } from "./Questionnaire/GraphILS";
+import { ResultDescriptionILS } from "./Questionnaire/ResultDescriptionILS";
+import { TableListK } from "./Questionnaire/TableListK";
+import { GraphListK } from "./Questionnaire/GraphListK";
+import { ResultDescriptionListK } from "./Questionnaire/ResultDescriptionListK";
+import { QuestionnaireResultsModal } from "./Questionnaire/QuestionnaireResultsModal";
 import { Text } from "./Text/Text";
-//import { Contactform } from "./Form/Contactform";
+
+export { default as Contactform } from './Form/Contactform';
+import LoginForm from "./LoginForm/LoginForm";
+import MenuBar from "./MenuBar/MenuBar";
+import Footer from "./Footer/Footer";
+import LocalNav from "./LocalNav/LocalNav";
+import BreadcrumbsContainer from "./BreadcrumbsContainer/BreadcrumbsContainer";
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
-//export default {Dashboard, Contactform};
-export default Dashboard;
-export { default as Contactform } from './Form/Contactform';
-export {Dashboard, DropdownLanguage, Text};
+
+export {
+  BreadcrumbsContainer,
+  LocalNav,
+  MenuBar,
+  Footer,
+  DropdownLanguage,
+  Text,
+  LoginForm,
+  TableILS,
+  GraphILS,
+  ResultDescriptionILS,
+  TableListK,
+  GraphListK,
+  ResultDescriptionListK,
+  QuestionnaireResultsModal,
+};
+

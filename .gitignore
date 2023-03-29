@@ -4,3 +4,7 @@ dist
 bin
 .vscode
 coverage
+yarn.lock
+.env.development
+.env.production
+docs
