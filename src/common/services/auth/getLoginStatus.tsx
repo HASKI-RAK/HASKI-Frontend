@@ -1,7 +1,7 @@
 import { RequestResponse } from "./RequestResponse";
 
 export const getLoginStatus = async (): Promise<RequestResponse> => {
-    return fetch(`http://fakedomain.com:5000/loginstatus`, {
+    return fetch(process.env.BACKEND + `/loginstatus`, {
         method: 'GET',
         credentials: 'include',
         headers: {

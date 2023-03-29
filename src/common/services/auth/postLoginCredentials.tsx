@@ -1,7 +1,7 @@
 import { RequestResponse } from "./RequestResponse";
 
 export const postLoginCredentials = async (): Promise<RequestResponse> => {
-    return fetch(`http://fakedomain.com:5000/login_credentials`, {
+    return fetch(process.env.BACKEND + `/login_credentials`, {
         method: 'POST',
         credentials: 'include',
         headers: {
