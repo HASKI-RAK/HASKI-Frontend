@@ -158,7 +158,7 @@
   "components.contactform.learningelement": "Lernelement",
   "components.contactform.ui": "UI",
   "components.contactform.design": "Design",
-  "components.contactform.error": "Fehler. Es fehtlt eine Beschriebung.",
+  "components.contactform.error": "Es fehlt eine Beschriebung.",
 
   "Dot": ".",
   "help": "Hilfe",

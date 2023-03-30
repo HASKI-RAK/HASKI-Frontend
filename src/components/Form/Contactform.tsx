@@ -19,6 +19,19 @@ import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
 
 
+/**
+ * Contactform component.
+ *
+ * @remarks
+ * This component is accessed by the contact page. It currently can be accessed from the home page.
+ * In the future it will get the id of the contact form user.
+ * The contact form enables the user to give a reporttopic and a reporttype to the report, which helps to identify the contents of the report early.
+ * The user can also give a description of the report, this is also the only required field.
+ * The contents of the form will have to be sent to the backend, which is not implemented yet.
+ *
+ * @category Pages
+ */
+
 const defaultContactValues = {
   name: "",
   reporttype: "other",
@@ -63,7 +76,7 @@ export const Contactform = ( {width, sendtoBackend}: ContactformParameter) => {
     <form onSubmit={handleSubmit}>
       <Stack
         spacing={2}
-        boxShadow={10}
+      
         sx={{ minWidth: 120, backgroundColor: "white" }}
       >
         <Typography variant="h5" component="h5">
