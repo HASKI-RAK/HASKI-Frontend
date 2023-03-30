@@ -1,22 +1,24 @@
 import { ChangeEvent, useState } from "react";
-import {
-  Backdrop,
-  Button,
-  CircularProgress,
-  IconButton,
-  InputAdornment,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material/";
-import { Stack } from "@mui/system";
-import { useTranslation } from "react-i18next";
+import {
+  DefaultBackdrop as Backdrop,
+  DefaultButton as Button,
+  DefaultCircularProgress as CircularProgress,
+  DefaultIconButton as IconButton,
+  DefaultInputAdornment as InputAdornment,
+  DefaultPaper as Paper,
+  DefaultTextField as TextField,
+  DefaultGrid as Grid,
+  DefaultTypography as Typography,
+  DefaultDivider as Divider,
+  DefaultStack as Stack,
+} from "@common/components";
 import {
   useLoginForm as _useLoginForm,
   useLoginFormHookParams as LoginFormHookParams,
   LoginFormHookReturn,
 } from "./LoginForm.hooks";
+import { useTranslation } from "react-i18next";
 
 /**
  * @typedef {Object} LoginFormProps
@@ -24,7 +26,9 @@ import {
  * @param {function} onValidate - The function to be called when the form is validated.
  * @param {string} usernameDefaultValue - The default value for the username field.
  * @param {boolean} isLoading - Whether the form is loading or not.
- * @param useLoginForm - The hook to be used for the form logic.
+ * @param {boolean} moodleLogin - Whether the form displays a moodle login button or not.
+ * @param {function} onMoodleLogin - The function to be called when the moodle login button is clicked.
+ * @param {function} useLoginForm - The hook to be used for the form logic.
  */
 export type LoginFormProps = {
   onSubmit?: (username: string, password: string) => void;
@@ -32,8 +36,10 @@ export type LoginFormProps = {
     username: string,
     password: string
   ) => readonly [boolean, boolean];
+  onMoodleLogin?: () => void;
   usernameDefaultValue?: string;
   isLoading?: boolean;
+  moodleLogin?: boolean;
   useLoginForm?: (params?: LoginFormHookParams) => LoginFormHookReturn;
 };
 /**
@@ -56,15 +62,24 @@ const LoginForm = ({
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   // Application logic hooks
-  const { username, password, setUsername, setPassword, submit, validate } =
-    useLoginForm();
+  const {
+    username,
+    password,
+    setUsername,
+    setPassword,
+    submit,
+    validate,
+    loginMoodle,
+  } = useLoginForm();
 
   // Props destructuring
   const {
     onSubmit = submit,
     onValidate = validate,
+    onMoodleLogin = loginMoodle,
     usernameDefaultValue: usernameDefault = "",
     isLoading = false,
+    moodleLogin = false,
   } = props;
 
   // Event Handlers
@@ -143,6 +158,41 @@ const LoginForm = ({
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             {t("components.Login.login")}
           </Button>
+          {moodleLogin && (
+            <Grid
+              container
+              sx={{ justifyContent: "center" }}
+              direction="column"
+              rowSpacing={2}
+            >
+              <Grid item sm={0} md={6}>
+                <Divider flexItem>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      textAlign: "center",
+                      fontSize: "0.8rem",
+                      color: (theme) => theme.palette.secondary.dark,
+                    }}
+                  >
+                    {t("components.Login.orLoginWithMoodle")}
+                  </Typography>
+                </Divider>
+              </Grid>
+              <Grid item display="flex" justifyContent="center" md={6}>
+                <Button
+                  onClick={onMoodleLogin}
+                  data-testid="moodle-login-button"
+                >
+                  <img
+                    src="/LogoMoodle.png"
+                    alt="Moodle"
+                    style={{ width: "100px" }}
+                  />
+                </Button>
+              </Grid>
+            </Grid>
+          )}
         </Stack>
       </Stack>
       <Backdrop open={isLoading}>
