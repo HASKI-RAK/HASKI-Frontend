@@ -11,7 +11,6 @@ global.fetch = jest.fn(() =>
 describe("redirectMoodleLogin", () => {
   it("should success", async () => {
     const loginStatus = await redirectMoodleLogin();
-    console.log(loginStatus);
     expect(loginStatus.status).toEqual(200);
     expect(loginStatus.message).toEqual("https://moodle.test");
   });
