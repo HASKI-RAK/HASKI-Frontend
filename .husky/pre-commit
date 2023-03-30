@@ -6,7 +6,3 @@ yarn run ts-node src/shared/auto-order-json-translations.ts
 yarn lint
 yarn prettier
 npx typedoc ./src/** --theme github-wiki
-# force copy contents of docs folder to wiki folder:
-cp -rf docs/* wiki/
-# remove docs folder:
-rm -rf docs
