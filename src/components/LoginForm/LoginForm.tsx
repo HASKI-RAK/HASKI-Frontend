@@ -7,7 +7,10 @@ import {
   InputAdornment,
   Paper,
   TextField,
+  Grid,
   Typography,
+  Divider,
+  Box,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material/";
 import { Stack } from "@mui/system";
@@ -24,6 +27,7 @@ import {
  * @param {function} onValidate - The function to be called when the form is validated.
  * @param {string} usernameDefaultValue - The default value for the username field.
  * @param {boolean} isLoading - Whether the form is loading or not.
+ * @param {boolean} moodleLogin - Whether the form displays a moodle login button or not.
  * @param useLoginForm - The hook to be used for the form logic.
  */
 export type LoginFormProps = {
@@ -32,8 +36,10 @@ export type LoginFormProps = {
     username: string,
     password: string
   ) => readonly [boolean, boolean];
+  onMoodleLogin?: () => void;
   usernameDefaultValue?: string;
   isLoading?: boolean;
+  moodleLogin?: boolean;
   useLoginForm?: (params?: LoginFormHookParams) => LoginFormHookReturn;
 };
 /**
@@ -56,15 +62,24 @@ const LoginForm = ({
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   // Application logic hooks
-  const { username, password, setUsername, setPassword, submit, validate } =
-    useLoginForm();
+  const {
+    username,
+    password,
+    setUsername,
+    setPassword,
+    submit,
+    validate,
+    loginMoodle,
+  } = useLoginForm();
 
   // Props destructuring
   const {
     onSubmit = submit,
     onValidate = validate,
+    onMoodleLogin = loginMoodle,
     usernameDefaultValue: usernameDefault = "",
     isLoading = false,
+    moodleLogin = false,
   } = props;
 
   // Event Handlers
@@ -143,6 +158,42 @@ const LoginForm = ({
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             {t("components.Login.login")}
           </Button>
+          {moodleLogin && (
+            <Grid
+              container
+              sx={{ justifyContent: "center" }}
+              direction="column"
+              rowSpacing={2}
+            >
+              {/** Box: <divider/> or with this Option <divider/> */}
+              <Grid item sm={0} md={6}>
+                <Divider flexItem>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      textAlign: "center",
+                      fontSize: "0.8rem",
+                      color: (theme) => theme.palette.secondary.dark,
+                    }}
+                  >
+                    {t("components.Login.orLoginWithMoodle")}
+                  </Typography>
+                </Divider>
+              </Grid>
+              <Grid item display="flex" justifyContent="center" md={6}>
+                <Button
+                  onClick={onMoodleLogin}
+                  data-testid="moodle-login-button"
+                >
+                  <img
+                    src="/LogoMoodle.png"
+                    alt="Moodle"
+                    style={{ width: "100px" }}
+                  />
+                </Button>
+              </Grid>
+            </Grid>
+          )}
         </Stack>
       </Stack>
       <Backdrop open={isLoading}>
