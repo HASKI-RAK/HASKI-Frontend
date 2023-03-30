@@ -27,7 +27,8 @@ import { useTranslation } from "react-i18next";
  * @param {string} usernameDefaultValue - The default value for the username field.
  * @param {boolean} isLoading - Whether the form is loading or not.
  * @param {boolean} moodleLogin - Whether the form displays a moodle login button or not.
- * @param useLoginForm - The hook to be used for the form logic.
+ * @param {function} onMoodleLogin - The function to be called when the moodle login button is clicked.
+ * @param {function} useLoginForm - The hook to be used for the form logic.
  */
 export type LoginFormProps = {
   onSubmit?: (username: string, password: string) => void;
