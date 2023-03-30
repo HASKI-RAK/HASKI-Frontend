@@ -1,18 +1,17 @@
 import { ThemeProvider } from "@mui/material";
-import { AuthProvider } from "@services";
+import { AuthProvider, SnackbarProvider } from "@services";
 import { Home, ThemePresentation, Login, Dashboard } from "@pages";
 import { Theme } from "@utils";
 import { Routes } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { logBuffer } from "@shared";
-import { SnackbarProvider } from "@components";
 
 logBuffer();
 
 const App = () => (
   <ThemeProvider theme={Theme}>
-    <SnackbarProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <SnackbarProvider>
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -22,8 +21,8 @@ const App = () => (
             <Route path="*" element={<div>404</div>} />
           </Routes>
         </Router>
-      </AuthProvider>
-    </SnackbarProvider>
+      </SnackbarProvider>
+    </AuthProvider>
   </ThemeProvider>
 );
 export default App;

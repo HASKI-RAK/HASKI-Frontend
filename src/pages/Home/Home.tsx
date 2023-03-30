@@ -2,7 +2,6 @@ import {
   DropdownLanguage,
   Text,
   SnackbarTest,
-  SnackbarContainer,
   QuestionnaireResultsModal,
 } from "@components";
 import log from "loglevel";
@@ -35,7 +34,6 @@ export const Home = () => {
       />
       <DropdownLanguage />
       <Text />
-      <SnackbarContainer />
       <SnackbarTest />
     </div>
   );

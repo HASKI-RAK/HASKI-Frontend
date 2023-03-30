@@ -7,3 +7,6 @@ export { AuthContext } from "./AuthContext";
 export type { AuthContextType } from "./AuthContext";
 export { AuthProvider } from "./AuthProvider";
 export * from "./auth";
+export { SnackbarContext, useSnackbarContext } from "./SnackbarContext";
+export type { SnackbarContextType } from "./SnackbarContext";
+export { SnackbarProvider } from "./SnackbarProvider";

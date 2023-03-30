@@ -1,12 +1,22 @@
 import { Alert, Slide, Grow, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { useSnackbar, SnackbarProps, Severity } from "@components";
 import { useState, useCallback, useEffect } from "react";
+import { useSnackbarContext } from "@services";
+
+export type SeverityType = "error" | "success" | "warning" | "info";
+
+export type SnackbarProps = {
+  autoHideDuration?: number;
+  message?: string;
+  severity?: SeverityType;
+  open?: boolean;
+  onClose?: () => void; // Ist das überhaupt nötig?
+};
 
 type TransitionProps = {
   children?: React.ReactElement;
   in?: boolean;
-  severity?: Severity;
+  severity?: SeverityType;
   timeout?: number;
 };
 
@@ -27,23 +37,20 @@ const Transition = (props: TransitionProps) => {
 };
 
 type SnackbarEntryProps = {
+  children?: React.ReactElement;
   snackbar?: SnackbarProps;
-  timeout?: number;
 };
 
-export const SnackbarEntry: React.FC<SnackbarEntryProps> = ({
-  snackbar,
-  timeout, // Ne der Timeout muss irgendwie in die add und nicht hierein wtf
-}) => {
+const SnackbarEntry: React.FC<SnackbarEntryProps> = ({ snackbar }) => {
   const { t } = useTranslation();
-  const [open, setOpen] = useState(true);
-  const { removeSnackbar } = useSnackbar();
+  const [openTransition, setOpenTransition] = useState(true);
+  const { removeSnackbar } = useSnackbarContext();
 
   const close = useCallback(() => {
-    setOpen(false);
+    setOpenTransition(false);
     setTimeout(() => {
       snackbar && removeSnackbar(snackbar);
-    }, timeout);
+    }, 1000);
   }, [snackbar?.message, removeSnackbar]);
 
   const handleClose = (
@@ -60,17 +67,27 @@ export const SnackbarEntry: React.FC<SnackbarEntryProps> = ({
   };
 
   useEffect(() => {
-    if (snackbar?.autoHideDuration !== 0) {
+    if (
+      typeof snackbar?.autoHideDuration === "number" &&
+      snackbar?.autoHideDuration !== 0
+    ) {
       setTimeout(() => {
         close();
-      }, snackbar?.autoHideDuration || 6000);
+      }, snackbar?.autoHideDuration);
     }
   }, [close, snackbar?.autoHideDuration]);
+
+  useEffect(() => {
+    console.log(snackbar?.open);
+    if (snackbar?.open === false) {
+      close();
+    }
+  }, [close, snackbar?.open]);
 
   return (
     <>
       {snackbar?.severity && (
-        <Transition severity={snackbar.severity} in={open}>
+        <Transition severity={snackbar.severity} in={openTransition}>
           {snackbar.severity && (
             <Alert
               onClick={handleClose}
@@ -91,3 +108,5 @@ export const SnackbarEntry: React.FC<SnackbarEntryProps> = ({
     </>
   );
 };
+
+export default SnackbarEntry;

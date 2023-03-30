@@ -8,6 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { SnackbarTest } from "@components";
 import { Container } from "@mui/system";
 const bull = (
   <Box
@@ -46,6 +47,7 @@ const card = (
 export const ThemePresentation = () => {
   return (
     <>
+      <SnackbarTest />
       <Container maxWidth="sm">
         <Typography variant="h3" component="div" gutterBottom>
           Theme Presentation

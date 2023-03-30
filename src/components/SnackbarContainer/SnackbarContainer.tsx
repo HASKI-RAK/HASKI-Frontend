@@ -1,8 +1,13 @@
-import { useSnackbar, SnackbarEntry } from "@components";
-import { Snackbar, Stack } from "@mui/material";
+import { SnackbarEntry } from "@components";
+import { Snackbar, Stack } from "@mui/material"; // TODO
+import { useSnackbarContext } from "@services";
+
+/*type SnackbarContainerProps = {
+  snackbars;
+};*/
 
 const SnackbarContainer: React.FC = () => {
-  const { snackbarsErrorWarning, snackbarsSuccessInfo } = useSnackbar();
+  const { snackbarsErrorWarning, snackbarsSuccessInfo } = useSnackbarContext();
 
   return (
     <>
@@ -31,12 +36,9 @@ const SnackbarContainer: React.FC = () => {
         }}
       >
         <Stack flexDirection="column" gap={1}>
-          {snackbarsSuccessInfo.map(
-            (snackbar) =>
-              snackbar.severity && (
-                <SnackbarEntry key={snackbar.message} snackbar={snackbar} />
-              )
-          )}
+          {snackbarsSuccessInfo.map((snackbar) => (
+            <SnackbarEntry key={snackbar.message} snackbar={snackbar} />
+          ))}
         </Stack>
       </Snackbar>
     </>

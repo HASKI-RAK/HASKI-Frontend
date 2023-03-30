@@ -1,35 +1,7 @@
-import { useState, useContext, createContext, useMemo } from "react";
+import { useState, useMemo } from "react";
+import { SnackbarProps } from "@components";
 
-export type Severity = "error" | "success" | "warning" | "info";
-
-export type SnackbarProps = {
-  message?: string;
-  children?: React.ReactNode;
-  autoHideDuration?: number;
-  severity?: Severity;
-  onClose?: () => void;
-  // hier irgendwie timeout hs
-};
-
-export type SnackbarContextProps = {
-  snackbarsErrorWarning: SnackbarProps[];
-  snackbarsSuccessInfo: SnackbarProps[];
-  setSnackbarsErrorWarning: (newSnackbars: SnackbarProps[]) => void;
-  setSnackbarsSuccessInfo: (newSnackbars: SnackbarProps[]) => void;
-  addSnackbar: (newSnackbar: SnackbarProps) => void;
-  removeSnackbar: (snackbarToRemove: SnackbarProps) => void;
-};
-
-const SnackbarContext = createContext<SnackbarContextProps>({
-  snackbarsErrorWarning: [],
-  snackbarsSuccessInfo: [],
-  setSnackbarsErrorWarning: (newSnackbars) => {},
-  setSnackbarsSuccessInfo: (newSnackbars) => {},
-  addSnackbar: (newSnackbar) => {},
-  removeSnackbar: (snackbarToRemove) => {},
-});
-
-const SnackbarProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const useSnackbarProvider = () => {
   const [snackbarsErrorWarning, setSnackbarsErrorWarning] = useState<
     SnackbarProps[]
   >([]);
@@ -73,6 +45,32 @@ const SnackbarProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     }
   };
 
+  const updateSnackbar = (snackbarToUpdate: SnackbarProps) => {
+    if (
+      snackbarToUpdate.severity === "error" ||
+      snackbarToUpdate.severity === "warning"
+    ) {
+      setSnackbarsErrorWarning((previous) =>
+        previous.map((snackbar) =>
+          snackbar.message === snackbarToUpdate.message
+            ? snackbarToUpdate
+            : snackbar
+        )
+      );
+    } else if (
+      snackbarToUpdate.severity === "success" ||
+      snackbarToUpdate.severity === "info"
+    ) {
+      setSnackbarsSuccessInfo((previous) =>
+        previous.map((snackbar) =>
+          snackbar.message === snackbarToUpdate.message
+            ? snackbarToUpdate
+            : snackbar
+        )
+      );
+    }
+  };
+
   const removeSnackbar = (snackbarToRemove: SnackbarProps) => {
     if (
       snackbarToRemove.severity === "error" ||
@@ -91,13 +89,14 @@ const SnackbarProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     }
   };
 
-  const snackbarProviderValue = useMemo(
+  return useMemo(
     () => ({
       snackbarsErrorWarning,
       snackbarsSuccessInfo,
       setSnackbarsErrorWarning,
       setSnackbarsSuccessInfo,
       addSnackbar,
+      updateSnackbar,
       removeSnackbar,
     }),
     [
@@ -106,16 +105,8 @@ const SnackbarProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
       setSnackbarsErrorWarning,
       setSnackbarsSuccessInfo,
       addSnackbar,
+      updateSnackbar,
       removeSnackbar,
     ]
   );
-
-  return (
-    <SnackbarContext.Provider value={snackbarProviderValue}>
-      {children}
-    </SnackbarContext.Provider>
-  );
 };
-
-export const useSnackbar = () => useContext(SnackbarContext);
-export default SnackbarProvider;
