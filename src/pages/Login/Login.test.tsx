@@ -95,6 +95,41 @@ describe("Test the Login page", () => {
     }, 1000);
   });
 
+  test("moodle default login", () => {
+    window = Object.create(window);
+    const url = "http://fakedomain.com";
+    Object.defineProperty(window, "location", {
+      value: {
+        href: url,
+      },
+      writable: true,
+    });
+    window.location.replace = jest.fn();
+
+    const login = render(
+      <MemoryRouter initialEntries={[""]}>
+        <AuthContext.Provider
+          value={{ isAuth: false, setIsAuth: jest.fn(), logout: jest.fn() }}
+        >
+          <Login />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    );
+    // test id moodle-login
+    // const buttonLogin = login.getByTestId("moodle-login-button");
+    const buttonLogin = login.getAllByRole("button")[2];
+
+    // Click on login button
+    act(() => {
+      fireEvent.click(buttonLogin);
+    });
+    // wait for the fetch to complete
+    setTimeout(() => {
+      // navigate should be called with /dashboard
+      expect(window.location.replace).toBeCalled();
+    }, 1000);
+  });
+
   test("the hook should redirect to /login when a nonce is supplied as search params and unauthorized", () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({

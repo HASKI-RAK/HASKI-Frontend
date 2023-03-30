@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { DefaultSkeleton as Skeleton } from "@common/components";
 import { LoginForm } from "@components";
-import { AuthContext } from "@services";
 import {
   useLogin as _useLogin,
   LoginHookParams,
@@ -42,7 +41,15 @@ export const Login = ({ useLogin = _useLogin }: LoginProps) => {
   const { onSubmit, onMoodleLogin } = useLogin({ setIsLoading, nonce });
 
   if (nonce) return <Skeleton />;
-  else return <LoginForm onSubmit={onSubmit} isLoading={isLoading} moodleLogin onMoodleLogin={onMoodleLogin}/>;
+  else
+    return (
+      <LoginForm
+        onSubmit={onSubmit}
+        isLoading={isLoading}
+        moodleLogin
+        onMoodleLogin={onMoodleLogin}
+      />
+    );
 };
 
 export default Login;

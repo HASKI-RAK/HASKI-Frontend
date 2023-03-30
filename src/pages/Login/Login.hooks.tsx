@@ -6,7 +6,6 @@ import {
 } from "@services";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useContext } from "react";
-import log from "loglevel";
 
 export type LoginHookParams = {
   setIsLoading: (isLoading: boolean) => void;

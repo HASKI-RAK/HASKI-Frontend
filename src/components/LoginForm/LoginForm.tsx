@@ -1,25 +1,24 @@
 import { ChangeEvent, useState } from "react";
-import {
-  Backdrop,
-  Button,
-  CircularProgress,
-  IconButton,
-  InputAdornment,
-  Paper,
-  TextField,
-  Grid,
-  Typography,
-  Divider,
-  Box,
-} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material/";
-import { Stack } from "@mui/system";
-import { useTranslation } from "react-i18next";
+import {
+  DefaultBackdrop as Backdrop,
+  DefaultButton as Button,
+  DefaultCircularProgress as CircularProgress,
+  DefaultIconButton as IconButton,
+  DefaultInputAdornment as InputAdornment,
+  DefaultPaper as Paper,
+  DefaultTextField as TextField,
+  DefaultGrid as Grid,
+  DefaultTypography as Typography,
+  DefaultDivider as Divider,
+  DefaultStack as Stack,
+} from "@common/components";
 import {
   useLoginForm as _useLoginForm,
   useLoginFormHookParams as LoginFormHookParams,
   LoginFormHookReturn,
 } from "./LoginForm.hooks";
+import { useTranslation } from "react-i18next";
 
 /**
  * @typedef {Object} LoginFormProps
@@ -165,7 +164,6 @@ const LoginForm = ({
               direction="column"
               rowSpacing={2}
             >
-              {/** Box: <divider/> or with this Option <divider/> */}
               <Grid item sm={0} md={6}>
                 <Divider flexItem>
                   <Typography
