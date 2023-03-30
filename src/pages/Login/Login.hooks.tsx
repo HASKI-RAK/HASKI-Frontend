@@ -29,11 +29,8 @@ export type LoginHookReturn = {
  * @returns {LoginHookReturn} - The login logic.
  */
 export const useLogin = (params: LoginHookParams): LoginHookReturn => {
-  log.setLevel("debug");
   const authcontext = useContext(AuthContext);
   const navigate = useNavigate();
-  log.debug("useLogin", params);
-  console.log("useLogin", params);
 
   const login = () => {
     // supply auth context
