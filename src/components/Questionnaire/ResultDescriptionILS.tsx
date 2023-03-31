@@ -43,7 +43,7 @@ export const ResultDescriptionILS = ({ILSdim=ILSDimension}: ResultDescriptionILS
                     <Typography variant="h6" gutterBottom>
                         {t("components.QuestionnaireResults.TableILS." + dimensionArray[index])}
                     </Typography>
-                    <Typography variant="body1" gutterBottom>
+                    <Typography variant="body2" gutterBottom>
                         {t("components.QuestionnaireResults.ResultDescriptionILS." + dimensionArray[index] + "." + interpretationArray[index])} <br/>
                     </Typography>
                 </div>)
@@ -58,7 +58,7 @@ export const ResultDescriptionILS = ({ILSdim=ILSDimension}: ResultDescriptionILS
                     <Typography variant="h6" gutterBottom>
                         Alle Dimensionen
                     </Typography>
-                    <Typography variant="body1" gutterBottom>
+                    <Typography variant="body2" gutterBottom>
                         {t("components.QuestionnaireResults.ResultDescriptionILS.EverythingBalanced")}
                     </Typography>
                 </div>
@@ -112,7 +112,7 @@ export const ResultDescriptionILS = ({ILSdim=ILSDimension}: ResultDescriptionILS
                     <Typography variant="h6" gutterBottom>
                         {t("components.QuestionnaireResults.ResultDescriptionILS.RemainingDimensions")}
                     </Typography>
-                    <Typography variant="body1" gutterBottom>
+                    <Typography variant="body2" gutterBottom>
                         {balancedDimensionsInterpretationString}
                     </Typography>
                 </div>

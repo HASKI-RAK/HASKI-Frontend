@@ -2,6 +2,7 @@
 
 	"Back": "Back",
 	"components.Login.login": "Login",
+	"components.Login.orLoginWithMoodle": "or login with Moodle",
 	"components.Login.password": "Password",
 	"components.Login.passwordError": "Please enter a valid password",
 	"components.Login.subtitle": "Please login to continue",
