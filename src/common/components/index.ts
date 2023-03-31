@@ -21,3 +21,8 @@ export { DefaultMenu } from "./DefaultMenu/DefaultMenu";
 export { DefaultStack } from "./DefaultStack/DefaultStack";
 export { DefaultSkeleton } from "./DefaultSkeleton/DefaultSkeleton";
 export { DefaultThemeProvider } from "./DefaultThemeProvider/DefaultThemeProvider";
+export { DefaultBackdrop } from "./DefaultBackdrop/DefaultBackdrop";
+export { DefaultCircularProgress } from "./DefaultCircularProgress/DefaultCircularProgress";
+export { DefaultInputAdornment } from "./DefaultInputAdornment/DefaultInputAdornment";
+export { DefaultPaper } from "./DefaultPaper/DefaultPaper";
+export { DefaultTextField } from "./DefaultTextField/DefaultTextField";
