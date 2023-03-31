@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import { AuthContext } from "@services"
-import {TableILSQuestions} from "../../components/Questionnaire/QuestionnaireQuestions/TableILSQuestions";
+import {TableILSQuestions} from "../../components/Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions";
 import {Skeleton} from "@mui/material";
 
 export const QuestionnaireILSQuestionsShort = () => {

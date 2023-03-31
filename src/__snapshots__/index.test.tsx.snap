@@ -22,7 +22,7 @@ exports[`Test the landing page renders correctly 1`] = `
     tabIndex={0}
     type="button"
   >
-    components.Questionnaire.QuestionnaireResults.QuestionnaireResultsModal.ButtonText
+    components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.ButtonText
   </button>
   <div />
   <div>
@@ -94,7 +94,7 @@ exports[`Test the landing page renders correctly 1`] = `
       Next
        
       <br />
-      components.Questionnaire.QuestionnaireResults.QuestionnaireResultsModal.ButtonText
+      components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.ButtonText
        
       <br />
     </div>

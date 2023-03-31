@@ -11,12 +11,12 @@ import {Stack} from "@mui/material";
 import {useTranslation} from "react-i18next";
 
 //Can not shorten import, tests fail to recognize i18n.use...
-import {GraphListK} from "./GraphListK";
-import {TableListK} from "./TableListK";
-import {ResultDescriptionILS} from "./ResultDescriptionILS";
-import {ResultDescriptionListK} from "./ResultDescriptionListK";
-import {GraphILS} from "./GraphILS";
-import {TableILS} from './TableILS';
+import {GraphListK} from "../Graph/GraphListK";
+import {TableListK} from "../Table/TableListK";
+import {ResultDescriptionILS} from "../Text/ResultDescriptionILS";
+import {ResultDescriptionListK} from "../Text/ResultDescriptionListK";
+import {GraphILS} from "../Graph/GraphILS";
+import {TableILS} from '../Table/TableILS';
 
 const styleButtonClose = {
     position: 'sticky',
@@ -46,7 +46,7 @@ type QuestionnaireResultsModalProps = {
 export const QuestionnaireResultsModal = ({open=false, handleClose}: QuestionnaireResultsModalProps) => {
     const {t} = useTranslation();
 
-    const steps = [t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.ILSResults"), t("components.Questionnaire.QuestionnaireResults.ResultDescriptionILS.ListKResults")];
+    const steps = [t("components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults"), t("components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults")];
 
     const [activeStep, setActiveStep] = useState(0);
 

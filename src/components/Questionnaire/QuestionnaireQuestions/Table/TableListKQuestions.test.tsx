@@ -151,17 +151,17 @@ describe("TableListKQuestions", () => {
 
         const {getByTestId} = render(<TableListKQuestions/>);
 
-        const ValuePage1RadioButton1 = "components.Questionnaire.QuestionnaireQuestions.TableListKQuestions.Answer-1";
-        const ValuePage1RadioButton2 = "components.Questionnaire.QuestionnaireQuestions.TableListKQuestions.Answer-2";
-        const ValuePage1RadioButton3 = "components.Questionnaire.QuestionnaireQuestions.TableListKQuestions.Answer-3";
-        const ValuePage1RadioButton4 = "components.Questionnaire.QuestionnaireQuestions.TableListKQuestions.Answer-4";
-        const ValuePage1RadioButton5 = "components.Questionnaire.QuestionnaireQuestions.TableListKQuestions.Answer-5";
+        const ValuePage1RadioButton1 = "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1";
+        const ValuePage1RadioButton2 = "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2";
+        const ValuePage1RadioButton3 = "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3";
+        const ValuePage1RadioButton4 = "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4";
+        const ValuePage1RadioButton5 = "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5";
 
-        const ValuePage2RadioButton1 = "components.Questionnaire.QuestionnaireQuestions.TableListKQuestions.Answer-1";
-        const ValuePage2RadioButton2 = "components.Questionnaire.QuestionnaireQuestions.TableListKQuestions.Answer-1";
-        const ValuePage2RadioButton3 = "components.Questionnaire.QuestionnaireQuestions.TableListKQuestions.Answer-1";
-        const ValuePage2RadioButton4 = "components.Questionnaire.QuestionnaireQuestions.TableListKQuestions.Answer-1";
-        const ValuePage2RadioButton5 = "components.Questionnaire.QuestionnaireQuestions.TableListKQuestions.Answer-1";
+        const ValuePage2RadioButton1 = "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1";
+        const ValuePage2RadioButton2 = "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1";
+        const ValuePage2RadioButton3 = "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1";
+        const ValuePage2RadioButton4 = "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1";
+        const ValuePage2RadioButton5 = "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1";
 
         const nextButton = getByTestId('nextButtonListKQuestionnaire');
         const backButton = getByTestId('backButtonListKQuestionnaire');

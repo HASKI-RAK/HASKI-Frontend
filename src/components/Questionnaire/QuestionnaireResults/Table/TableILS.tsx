@@ -36,37 +36,37 @@ export const ILSInterpretation = (score: number, interpretationString: string, o
     if(onlyEnglish){
         const en = i18n.getFixedT("en");
 
-        inter.set(-1, en("components.Questionnaire.QuestionnaireResults.TableILS.balanced"))
-        inter.set(1, en("components.Questionnaire.QuestionnaireResults.TableILS.balanced"))
-        inter.set(-3, en("components.Questionnaire.QuestionnaireResults.TableILS.balanced"))
-        inter.set(3, en("components.Questionnaire.QuestionnaireResults.TableILS.balanced"))
-        inter.set(-5, en("components.Questionnaire.QuestionnaireResults.TableILS.moderate"))
-        inter.set(5, en("components.Questionnaire.QuestionnaireResults.TableILS.moderate"))
-        inter.set(-7, en("components.Questionnaire.QuestionnaireResults.TableILS.moderate"))
-        inter.set(7, en("components.Questionnaire.QuestionnaireResults.TableILS.moderate"))
-        inter.set(-9, en("components.Questionnaire.QuestionnaireResults.TableILS.strong"))
-        inter.set(9, en("components.Questionnaire.QuestionnaireResults.TableILS.strong"))
-        inter.set(-11, en("components.Questionnaire.QuestionnaireResults.TableILS.strong"))
-        inter.set(11, en("components.Questionnaire.QuestionnaireResults.TableILS.strong"))
+        inter.set(-1, en("components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced"))
+        inter.set(1, en("components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced"))
+        inter.set(-3, en("components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced"))
+        inter.set(3, en("components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced"))
+        inter.set(-5, en("components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate"))
+        inter.set(5, en("components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate"))
+        inter.set(-7, en("components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate"))
+        inter.set(7, en("components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate"))
+        inter.set(-9, en("components.Questionnaire.QuestionnaireResults.Table.TableILS.strong"))
+        inter.set(9, en("components.Questionnaire.QuestionnaireResults.Table.TableILS.strong"))
+        inter.set(-11, en("components.Questionnaire.QuestionnaireResults.Table.TableILS.strong"))
+        inter.set(11, en("components.Questionnaire.QuestionnaireResults.Table.TableILS.strong"))
     }
     else{
-        inter.set(-1, t("components.Questionnaire.QuestionnaireResults.TableILS.balanced"))
-        inter.set(1, t("components.Questionnaire.QuestionnaireResults.TableILS.balanced"))
-        inter.set(-3, t("components.Questionnaire.QuestionnaireResults.TableILS.balanced"))
-        inter.set(3, t("components.Questionnaire.QuestionnaireResults.TableILS.balanced"))
-        inter.set(-5, t("components.Questionnaire.QuestionnaireResults.TableILS.moderate"))
-        inter.set(5, t("components.Questionnaire.QuestionnaireResults.TableILS.moderate"))
-        inter.set(-7, t("components.Questionnaire.QuestionnaireResults.TableILS.moderate"))
-        inter.set(7, t("components.Questionnaire.QuestionnaireResults.TableILS.moderate"))
-        inter.set(-9, t("components.Questionnaire.QuestionnaireResults.TableILS.strong"))
-        inter.set(9, t("components.Questionnaire.QuestionnaireResults.TableILS.strong"))
-        inter.set(-11, t("components.Questionnaire.QuestionnaireResults.TableILS.strong"))
-        inter.set(11, t("components.Questionnaire.QuestionnaireResults.TableILS.strong"))
+        inter.set(-1, t("components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced"))
+        inter.set(1, t("components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced"))
+        inter.set(-3, t("components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced"))
+        inter.set(3, t("components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced"))
+        inter.set(-5, t("components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate"))
+        inter.set(5, t("components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate"))
+        inter.set(-7, t("components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate"))
+        inter.set(7, t("components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate"))
+        inter.set(-9, t("components.Questionnaire.QuestionnaireResults.Table.TableILS.strong"))
+        inter.set(9, t("components.Questionnaire.QuestionnaireResults.Table.TableILS.strong"))
+        inter.set(-11, t("components.Questionnaire.QuestionnaireResults.Table.TableILS.strong"))
+        inter.set(11, t("components.Questionnaire.QuestionnaireResults.Table.TableILS.strong"))
     }
 
     //if the interpretation is "balanced", then only return "balanced" without the Dimension
-    if(inter.get(score) === t("components.Questionnaire.QuestionnaireResults.TableILS.balanced"))
-        return t("components.Questionnaire.QuestionnaireResults.TableILS.balanced")
+    if(inter.get(score) === t("components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced"))
+        return t("components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced")
     return inter.get(score) + " " + interpretationString;
 };
 
@@ -80,57 +80,57 @@ export const ILSDimension = (dimensionNumber: number, score: number, onlyEnglish
             if(onlyEnglish){
                 const en = i18n.getFixedT("en");
                 if (score > 0 )
-                    return en("components.Questionnaire.QuestionnaireResults.TableILS.Active")
+                    return en("components.Questionnaire.QuestionnaireResults.Table.TableILS.Active")
                 else
-                    return en("components.Questionnaire.QuestionnaireResults.TableILS.Reflective")
+                    return en("components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective")
             }
             else {
                 if(score > 0)
-                    return t("components.Questionnaire.QuestionnaireResults.TableILS.Active")
+                    return t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Active")
                 else
-                    return t("components.Questionnaire.QuestionnaireResults.TableILS.Reflective")
+                    return t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective")
             }
         case 2:
             if(onlyEnglish){
                 const en = i18n.getFixedT("en");
                 if (score > 0 )
-                    return en("components.Questionnaire.QuestionnaireResults.TableILS.Sensory")
+                    return en("components.Questionnaire.QuestionnaireResults.Table.TableILS.Sensory")
                 else
-                    return en("components.Questionnaire.QuestionnaireResults.TableILS.Intuitive")
+                    return en("components.Questionnaire.QuestionnaireResults.Table.TableILS.Intuitive")
             }
             else {
                 if(score > 0)
-                    return t("components.Questionnaire.QuestionnaireResults.TableILS.Sensory")
+                    return t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Sensory")
                 else
-                    return t("components.Questionnaire.QuestionnaireResults.TableILS.Intuitive")
+                    return t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Intuitive")
             }
         case 3:
             if(onlyEnglish){
                 const en = i18n.getFixedT("en");
                 if (score > 0 )
-                    return en("components.Questionnaire.QuestionnaireResults.TableILS.Visual")
+                    return en("components.Questionnaire.QuestionnaireResults.Table.TableILS.Visual")
                 else
-                    return en("components.Questionnaire.QuestionnaireResults.TableILS.Verbal")
+                    return en("components.Questionnaire.QuestionnaireResults.Table.TableILS.Verbal")
             }
             else {
                 if(score > 0)
-                    return t("components.Questionnaire.QuestionnaireResults.TableILS.Visual")
+                    return t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Visual")
                 else
-                    return t("components.Questionnaire.QuestionnaireResults.TableILS.Verbal")
+                    return t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Verbal")
             }
         case 4:
             if(onlyEnglish){
                 const en = i18n.getFixedT("en");
                 if (score > 0 )
-                    return en("components.Questionnaire.QuestionnaireResults.TableILS.Sequential")
+                    return en("components.Questionnaire.QuestionnaireResults.Table.TableILS.Sequential")
                 else
-                    return en("components.Questionnaire.QuestionnaireResults.TableILS.Global")
+                    return en("components.Questionnaire.QuestionnaireResults.Table.TableILS.Global")
             }
             else {
                 if(score > 0)
-                    return t("components.Questionnaire.QuestionnaireResults.TableILS.Sequential")
+                    return t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Sequential")
                 else
-                    return t("components.Questionnaire.QuestionnaireResults.TableILS.Global")
+                    return t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Global")
             }
         default:
             return "No dimension found";
@@ -145,36 +145,36 @@ export const TableILS = () => {
     const rows = [
         {
             id: 1,
-            col1: t("components.Questionnaire.QuestionnaireResults.TableILS.Dimension"),
+            col1: t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension"),
             col2: "",
-            col3: t("components.Questionnaire.QuestionnaireResults.TableILS.Interpretation"),
-            col4: t("components.Questionnaire.QuestionnaireResults.TableILS.Score")
+            col3: t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Interpretation"),
+            col4: t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Score")
         },
         {
             id: 2,
-            col1: t("components.Questionnaire.QuestionnaireResults.TableILS.Reflective"),
-            col2: t("components.Questionnaire.QuestionnaireResults.TableILS.Active"),
+            col1: t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective"),
+            col2: t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Active"),
             col3: ILSInterpretation(dimensionOneScore, ILSDimension(1, dimensionOneScore).toLowerCase()),
             col4: [dimensionOneScore].toString()
         },
         {
             id: 3,
-            col1: t("components.Questionnaire.QuestionnaireResults.TableILS.Intuitive"),
-            col2: t("components.Questionnaire.QuestionnaireResults.TableILS.Sensory"),
+            col1: t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Intuitive"),
+            col2: t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Sensory"),
             col3: ILSInterpretation(dimensionTwoScore, ILSDimension(2, dimensionTwoScore).toLowerCase()),
             col4: [dimensionTwoScore].toString()
         },
         {
             id: 4,
-            col1: t("components.Questionnaire.QuestionnaireResults.TableILS.Verbal"),
-            col2: t("components.Questionnaire.QuestionnaireResults.TableILS.Visual"),
+            col1: t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Verbal"),
+            col2: t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Visual"),
             col3: ILSInterpretation(dimensionThreeScore, ILSDimension(3, dimensionThreeScore).toLowerCase()),
             col4: [dimensionThreeScore].toString()
         },
         {
             id: 5,
-            col1: t("components.Questionnaire.QuestionnaireResults.TableILS.Global"),
-            col2: t("components.Questionnaire.QuestionnaireResults.TableILS.Sequential"),
+            col1: t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Global"),
+            col2: t("components.Questionnaire.QuestionnaireResults.Table.TableILS.Sequential"),
             col3: ILSInterpretation(dimensionFourScore, ILSDimension(4, dimensionFourScore).toLowerCase()),
             col4: [dimensionFourScore].toString()
         },

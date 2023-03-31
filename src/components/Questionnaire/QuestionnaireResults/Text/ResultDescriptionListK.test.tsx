@@ -1,20 +1,20 @@
 import "@testing-library/jest-dom";
 //tests fail because of i18next, if import is shortened
 import {ResultDescriptionListK} from "./ResultDescriptionListK";
-import {setListKParameters} from "./TableListK";
+import {setListKParameters} from "../Table/TableListK";
 
 jest.mock('react-i18next', () => ({
     // this mock makes sure any components using the translate hook can use it without a warning being shown
     useTranslation: () => {
         return {
             t: (str: string) => {
-                if(str === 'components.Questionnaire.QuestionnaireResults.TableILS.balanced') return 'balanced'
+                if(str === 'components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced') return 'balanced'
                 else return str;
             },
             i18n: {
                 //changeLanguage: () => new Promise(() => {}),
                 getFixedT: () => (str: string) => {
-                    if(str === 'components.Questionnaire.QuestionnaireResults.TableILS.balanced') return 'balanced'
+                    if(str === 'components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced') return 'balanced'
                     else return str;
                 },
                 // You can include here any property your component may use
@@ -112,7 +112,7 @@ describe("Test ResultDescriptionListK with all Methods",
 
             const container = ResultDescriptionListK();
 
-            expect(container.props.children[3][0].props.children[0].props.children.substring(69, 93)).toMatch("attention && time Below3");
+            expect(container.props.children[3][0].props.children[0].props.children.substring(74, 98)).toMatch("attention && time Below3");
         });
 
         test("Attention below 3", () => {
@@ -127,7 +127,7 @@ describe("Test ResultDescriptionListK with all Methods",
 
             const container = ResultDescriptionListK();
 
-            expect(container.props.children[3][0].props.children[0].props.children.substring(69, 85)).toMatch("attention Below3");
+            expect(container.props.children[3][0].props.children[0].props.children.substring(74, 90)).toMatch("attention Below3");
         });
 
         test("Attention and Time below 3", () => {
@@ -142,7 +142,7 @@ describe("Test ResultDescriptionListK with all Methods",
 
             const container = ResultDescriptionListK();
 
-            expect(container.props.children[3][0].props.children[0].props.children.substring(69, 93)).toMatch("attention && time Below3");
+            expect(container.props.children[3][0].props.children[0].props.children.substring(74, 98)).toMatch("attention && time Below3");
         });
 
         test("Attention and Time and Learning with Classmates below 3", () => {
@@ -157,7 +157,7 @@ describe("Test ResultDescriptionListK with all Methods",
 
             const container = ResultDescriptionListK();
 
-            expect(container.props.children[3][0].props.children[0].props.children.substring(69, 116)).toMatch("attention && time && learnWithClassmates Below3");
+            expect(container.props.children[3][0].props.children[0].props.children.substring(74, 121)).toMatch("attention && time && learnWithClassmates Below3");
         });
 
         test("Attention and Time and Learning with Classmates and Literature Reasearch below 3", () => {
@@ -172,7 +172,7 @@ describe("Test ResultDescriptionListK with all Methods",
 
             const container = ResultDescriptionListK();
 
-            expect(container.props.children[3][0].props.children[0].props.children.substring(69, 138)).toMatch("attention && time && learnWithClassmates && literatureResearch Below3");
+            expect(container.props.children[3][0].props.children[0].props.children.substring(74, 143)).toMatch("attention && time && learnWithClassmates && literatureResearch Below3");
         });
 
         test("Attention and Time and Learning with Classmates and Literature Reasearch and Learning Environment below 3", () => {
@@ -187,7 +187,7 @@ describe("Test ResultDescriptionListK with all Methods",
 
             const container = ResultDescriptionListK();
 
-            expect(container.props.children[3][0].props.children[0].props.children.substring(69, 161)).toMatch("attention && time && learnWithClassmates && literatureResearch && learningEnvironment Below3");
+            expect(container.props.children[3][0].props.children[0].props.children.substring(74, 166)).toMatch("attention && time && learnWithClassmates && literatureResearch && learningEnvironment Below3");
         });
 
     });
