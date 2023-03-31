@@ -1,23 +1,31 @@
 import { DefaultButton as Button } from "@common/components";
 import { useSnackbarContext } from "@services";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { SnackbarProps } from "../SnackbarEntry/SnackbarEntry";
 
 export const SnackbarTest = () => {
+  const { addSnackbar, updateSnackbar } = useSnackbarContext();
+
   // Online state
   const [isOffline, setIsOffline] = useState(navigator.onLine);
   const [offlineSnackbarClosedRecently, setOfflineSnackbarClosedRecently] =
     useState(false);
 
-  const [autoHideDuration, setAutoHideDuration] = useState<undefined | number>(
-    undefined
-  );
+  const [autoHideDuration, setAutoHideDuration] = useState<
+    undefined | number
+  >();
 
   const snackbar = {
     severity: "warning",
     message: "You are currently offline", // TODO: Add translation
     autoHideDuration: autoHideDuration,
   } as SnackbarProps;
+
+  const handle = useCallback(() => {
+    setAutoHideDuration(1);
+    updateSnackbar(snackbar);
+    console.log(snackbar.autoHideDuration);
+  }, []);
 
   useEffect(() => {
     // Update network status
@@ -26,6 +34,9 @@ export const SnackbarTest = () => {
 
       if (isOffline) {
         addSnackbar(snackbar);
+        // setAutoHideDuration(1);
+        updateSnackbar(snackbar); // TODO: This does not work
+        console.log(snackbar.autoHideDuration);
       }
 
       if (!isOffline) {
@@ -57,6 +68,7 @@ export const SnackbarTest = () => {
       //     autoHideDuration: 3000,
       //   });
       // }
+      updateSnackbar(snackbar);
     };
 
     // Listen to the online status
@@ -72,20 +84,20 @@ export const SnackbarTest = () => {
     };
   }, [isOffline]);
 
-  const { addSnackbar, updateSnackbar } = useSnackbarContext();
+  // const [test, setTest] = useState<undefined | number>(undefined);
 
   const sn = {
     severity: "error",
     message: "testing",
-    autoHideDuration: autoHideDuration,
+    autoHideDuration: 0,
     // open: open,
   } as SnackbarProps;
 
   return (
     <>
-      <Button onClick={() => addSnackbar(sn)}>Test</Button>
+      <Button onClick={() => addSnackbar(snackbar)}>Test</Button>
       <Button onClick={() => setAutoHideDuration(1)}>Test2</Button>
-      <Button onClick={() => updateSnackbar(sn)}>Test2.5</Button>
+      <Button onClick={() => updateSnackbar(snackbar)}>Test2.5</Button>
       <Button onClick={() => console.log(sn.autoHideDuration)}>Test3</Button>
       <Button
         onClick={() =>

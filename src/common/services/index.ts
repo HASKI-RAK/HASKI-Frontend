@@ -10,3 +10,4 @@ export * from "./auth";
 export { SnackbarContext, useSnackbarContext } from "./SnackbarContext";
 export type { SnackbarContextType } from "./SnackbarContext";
 export { SnackbarProvider } from "./SnackbarProvider";
+export { useNetworkStatus } from "./connection";

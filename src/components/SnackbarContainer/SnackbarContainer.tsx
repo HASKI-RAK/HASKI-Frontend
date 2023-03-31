@@ -1,6 +1,6 @@
 import { SnackbarEntry } from "@components";
 import { Snackbar, Stack } from "@mui/material"; // TODO
-import { useSnackbarContext } from "@services";
+import { useSnackbarContext, useNetworkStatus } from "@services";
 
 /*type SnackbarContainerProps = {
   snackbars;
@@ -8,6 +8,7 @@ import { useSnackbarContext } from "@services";
 
 const SnackbarContainer: React.FC = () => {
   const { snackbarsErrorWarning, snackbarsSuccessInfo } = useSnackbarContext();
+  const networkStatus = useNetworkStatus();
 
   return (
     <>
