@@ -1,6 +1,5 @@
 import { createTheme } from "@mui/material/styles";
 import { yellow, red } from "@mui/material/colors";
-import { Typography } from "@mui/material";
 
 
 export const defaultBehavior = {
