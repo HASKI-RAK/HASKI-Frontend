@@ -18,11 +18,16 @@ import { Contactform } from "@components";
   );
 }*/
 
+export const SendToBackend = () => {
+  console.log("send to backend");
+};
+
 export const Contact = () => {
+
   return (
     <div>
       
-      <Contactform width="50%" sendtoBackend={()=>{console.log("Test");}}/>
+      <Contactform width="50%" sendtoBackend={SendToBackend}/>
       
     </div>
   )

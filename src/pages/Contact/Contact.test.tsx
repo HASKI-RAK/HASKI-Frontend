@@ -2,6 +2,7 @@ import React from "react";
 import { Contact } from "@pages";
 import renderer from "react-test-renderer";
 import "@testing-library/jest-dom";
+import { SendToBackend } from "./Contact";
 
 //in case a skeleton component should be needed for the contact page
   /*describe("Test Contact", () => {
@@ -20,4 +21,9 @@ import "@testing-library/jest-dom";
     
     const tree = renderer.create(<Contact />).toJSON();
     expect(tree).toMatchSnapshot();
+  })
+
+  test("Test Send to backend", () => {
+    SendToBackend()
+    
   })

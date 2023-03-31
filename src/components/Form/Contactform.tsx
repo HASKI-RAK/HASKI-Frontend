@@ -13,7 +13,7 @@ import {
   FormLabel,
   FormControlLabel,
   Typography,
-  makeStyles,
+  
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
@@ -153,7 +153,7 @@ export const Contactform = ( {width, sendtoBackend}: ContactformParameter) => {
             onChange={handleInputChange}
             error={textfieldError}
             helperText={textfieldError ?  t("components.contactform.error") : ""}
-            multiline
+          
           />
         </FormControl>
 

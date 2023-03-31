@@ -1,8 +1,7 @@
 import renderer, { act } from "react-test-renderer";
 import "@testing-library/jest-dom";
-import { fireEvent, render,screen } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { Contactform } from "./Contactform";
-import { mockComponent } from "react-dom/test-utils";
 
 jest.mock('react-i18next', () => ({
     useTranslation: () => {return {t: (key: string) => key };}, }));
