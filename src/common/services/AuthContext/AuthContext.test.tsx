@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { AuthContext, AuthContextType } from "./AuthContext";
+import AuthContext, { AuthContextType } from "./AuthContext";
 import { render, renderHook } from "@testing-library/react";
 import { useContext } from "react";
 

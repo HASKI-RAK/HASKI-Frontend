@@ -8,6 +8,10 @@ import { ResultDescriptionListK } from "./Questionnaire/ResultDescriptionListK";
 import { QuestionnaireResultsModal } from "./Questionnaire/QuestionnaireResultsModal";
 import { Text } from "./Text/Text";
 import LoginForm from "./LoginForm/LoginForm";
+import MenuBar from "./MenuBar/MenuBar";
+import Footer from "./Footer/Footer";
+import LocalNav from "./LocalNav/LocalNav";
+import BreadcrumbsContainer from "./BreadcrumbsContainer/BreadcrumbsContainer";
 export { SnackbarTest } from "./SnackbarTest/SnackbarTest";
 import SnackbarEntry, {
   SnackbarProps,
@@ -17,7 +21,12 @@ import SnackbarContainer from "./SnackbarContainer/SnackbarContainer";
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
+
 export {
+  BreadcrumbsContainer,
+  LocalNav,
+  MenuBar,
+  Footer,
   DropdownLanguage,
   Text,
   LoginForm,

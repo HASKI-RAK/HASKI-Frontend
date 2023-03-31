@@ -1,8 +1,7 @@
-import { LoginForm } from "@components";
-import { Skeleton } from "@mui/material";
-import { AuthContext } from "@services";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { DefaultSkeleton as Skeleton } from "@common/components";
+import { LoginForm } from "@components";
 import {
   useLogin as _useLogin,
   LoginHookParams,
@@ -35,20 +34,22 @@ export const Login = ({ useLogin = _useLogin }: LoginProps) => {
   // UX state
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams] = useSearchParams();
-  const authcontext = useContext(AuthContext);
 
   const nonce = searchParams.get("nonce") || undefined;
 
   // Application logic hooks
-  const { onSubmit } = useLogin({ setIsLoading, nonce });
+  const { onSubmit, onMoodleLogin } = useLogin({ setIsLoading, nonce });
 
-  return nonce ? (
-    <Skeleton />
-  ) : authcontext.isAuth ? (
-    <Skeleton />
-  ) : (
-    <LoginForm onSubmit={onSubmit} isLoading={isLoading} />
-  );
+  if (nonce) return <Skeleton />;
+  else
+    return (
+      <LoginForm
+        onSubmit={onSubmit}
+        isLoading={isLoading}
+        moodleLogin
+        onMoodleLogin={onMoodleLogin}
+      />
+    );
 };
 
 export default Login;
