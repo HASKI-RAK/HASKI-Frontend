@@ -15,7 +15,5 @@ RUN yarn install
 COPY . ./
 
 # start app
-EXPOSE 3000
-ENV REACT_APP_BACKENDHOST https://api.haski.cluuub.xyz
 ENTRYPOINT [ "yarn" ]
 CMD ["start"]
