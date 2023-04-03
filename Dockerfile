@@ -15,5 +15,4 @@ RUN yarn install
 COPY . ./
 
 # start app
-EXPOSE 3000
-ENTRYPOINT ["yarn"]
+RUN yarn build
