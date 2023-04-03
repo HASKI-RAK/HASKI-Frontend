@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [ "main" ]
 
-jobs:
-  build_frontend:
+jobs: 
+  publish_frontend:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -23,6 +23,13 @@ jobs:
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
