@@ -15,4 +15,4 @@ RUN yarn install
 COPY . ./
 
 # start app
-RUN yarn build
+RUN yarn webpack-dev-server --mode=development --hot --color --port 80 --open
