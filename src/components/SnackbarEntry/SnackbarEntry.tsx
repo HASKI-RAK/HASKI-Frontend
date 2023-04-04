@@ -1,7 +1,12 @@
-import { Alert, Slide, Grow, Typography } from "@mui/material";
-import { useTranslation } from "react-i18next";
 import { useState, useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useSnackbarContext } from "@services";
+import {
+  DefaultAlert as Alert,
+  DefaultSlide as Slide,
+  DefaultGrow as Grow,
+  DefaultTypography as Typography,
+} from "@common/components";
 
 export type SeverityType = "error" | "success" | "warning" | "info";
 
@@ -10,7 +15,6 @@ export type SnackbarProps = {
   message?: string;
   severity?: SeverityType;
   open?: boolean;
-  onClose?: () => void; // Ist das überhaupt nötig?
 };
 
 type TransitionProps = {
@@ -36,12 +40,12 @@ const Transition = (props: TransitionProps) => {
   }
 };
 
-type SnackbarEntryProps = {
+type SnackbarMessageProps = {
   children?: React.ReactElement;
   snackbar?: SnackbarProps;
 };
 
-const SnackbarEntry: React.FC<SnackbarEntryProps> = ({ snackbar }) => {
+const SnackbarMessage: React.FC<SnackbarMessageProps> = ({ snackbar }) => {
   const { t } = useTranslation();
   const [openTransition, setOpenTransition] = useState(true);
   const { removeSnackbar } = useSnackbarContext();
@@ -59,9 +63,6 @@ const SnackbarEntry: React.FC<SnackbarEntryProps> = ({ snackbar }) => {
   ) => {
     if (reason === "clickaway") {
       return;
-    }
-    if (snackbar?.onClose) {
-      snackbar.onClose();
     }
     close();
   };
@@ -109,4 +110,4 @@ const SnackbarEntry: React.FC<SnackbarEntryProps> = ({ snackbar }) => {
   );
 };
 
-export default SnackbarEntry;
+export default SnackbarMessage;

@@ -12,8 +12,7 @@ import MenuBar from "./MenuBar/MenuBar";
 import Footer from "./Footer/Footer";
 import LocalNav from "./LocalNav/LocalNav";
 import BreadcrumbsContainer from "./BreadcrumbsContainer/BreadcrumbsContainer";
-export { SnackbarTest } from "./SnackbarTest/SnackbarTest";
-import SnackbarEntry, {
+import SnackbarMessage, {
   SnackbarProps,
   SeverityType,
 } from "./SnackbarEntry/SnackbarEntry";
@@ -30,7 +29,7 @@ export {
   DropdownLanguage,
   Text,
   LoginForm,
-  SnackbarEntry,
+  SnackbarMessage as SnackbarEntry,
   SnackbarContainer,
   TableILS,
   GraphILS,

@@ -1,9 +1,4 @@
-import {
-  DropdownLanguage,
-  Text,
-  SnackbarTest,
-  QuestionnaireResultsModal,
-} from "@components";
+import { DropdownLanguage, Text, QuestionnaireResultsModal } from "@components";
 import log from "loglevel";
 import { DefaultButton as Button } from "@common/components";
 import { useTranslation } from "react-i18next";
@@ -34,7 +29,6 @@ export const Home = () => {
       />
       <DropdownLanguage />
       <Text />
-      <SnackbarTest />
     </div>
   );
 };

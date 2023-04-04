@@ -1,14 +1,46 @@
+import { useEffect, useState } from "react";
 import { SnackbarEntry } from "@components";
-import { Snackbar, Stack } from "@mui/material"; // TODO
 import { useSnackbarContext, useNetworkStatus } from "@services";
-
-/*type SnackbarContainerProps = {
-  snackbars;
-};*/
+import {
+  DefaultStack as Stack,
+  DefaultSnackbar as Snackbar,
+} from "@common/components";
 
 const SnackbarContainer: React.FC = () => {
-  const { snackbarsErrorWarning, snackbarsSuccessInfo } = useSnackbarContext();
-  const networkStatus = useNetworkStatus();
+  const {
+    snackbarsErrorWarning,
+    snackbarsSuccessInfo,
+    addSnackbar,
+    updateSnackbar,
+  } = useSnackbarContext();
+
+  const isOnline = useNetworkStatus();
+  const [recentlyOffline, setRecentlyOffline] = useState(false);
+
+  useEffect(() => {
+    if (!isOnline) {
+      setRecentlyOffline(true);
+      addSnackbar({
+        severity: "warning",
+        message: "You are offline", // TODO: Add translation
+        autoHideDuration: undefined,
+      });
+    }
+
+    if (isOnline && recentlyOffline) {
+      setRecentlyOffline(false);
+      addSnackbar({
+        severity: "warning",
+        message: "You are online again", // TODO: Add translation
+        autoHideDuration: 3000,
+      });
+      updateSnackbar({
+        severity: "warning",
+        message: "You are offline", // TODO: Add translation
+        autoHideDuration: 1,
+      });
+    }
+  }, [isOnline]);
 
   return (
     <>
