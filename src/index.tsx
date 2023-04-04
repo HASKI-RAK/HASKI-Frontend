@@ -5,6 +5,7 @@ import { App } from "@pages";
 import { reportWebVitals, sendToAnalytics } from "@utils";
 import "./shared/internationalization";
 
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

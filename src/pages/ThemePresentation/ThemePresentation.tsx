@@ -7,6 +7,14 @@ import {
   LinearProgress,
   Stack,
   Typography,
+  Radio,
+  Select,
+  MenuItem,
+  Link,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
 } from "@mui/material";
 import { Container } from "@mui/system";
 const bull = (
@@ -144,6 +152,51 @@ export const ThemePresentation = () => {
         <Typography marginTop={5} variant="h4" component="div" gutterBottom>
           Custom UI Elements
         </Typography>
+        <Typography variant="h6" component="div" gutterBottom>
+        Link
+      </Typography>
+      <Link href="/">Go back to the Homepage</Link>
+
+      <Typography marginTop={5} variant="h6" component="div" gutterBottom>
+        RadioButtons
+      </Typography>
+      <FormControl>
+        <FormLabel>Radio Button example </FormLabel>
+        <RadioGroup row name="radio-buttons-group" defaultValue={"default"}>
+          <FormControlLabel
+            value="default"
+            control={<Radio />}
+            label="default"
+          />
+          <FormControlLabel
+            value="unchecked"
+            control={<Radio />}
+            label="unchecked"
+          />
+          <FormControlLabel
+            value="disabled"
+            control={<Radio />}
+            label="disabled"
+            disabled
+          />
+        </RadioGroup>
+      </FormControl>
+      <Typography marginTop={5} variant="h6" component="div" gutterBottom>
+        Select
+      </Typography>
+      <FormControl>
+            <Select
+              name="Select"
+              labelId="select_label_theme"
+              label="Thema"
+              defaultValue={1}
+            >
+              <MenuItem value={1} >Option1</MenuItem>
+              <MenuItem value={2}>Option2</MenuItem>
+              <MenuItem value={3}>Option3</MenuItem>
+             
+            </Select>
+          </FormControl>
       </Container>
     </>
   );
