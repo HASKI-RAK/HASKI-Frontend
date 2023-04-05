@@ -158,5 +158,11 @@
 	"pages.projectinformation": "Projektinformation",
 	"projecthaski": "Projekt HASKI",
 	"tooltip.openGlobalSettings": "Globale Einstellungen",
-	"tooltip.openSettings": "Einstellungen"
+	"tooltip.openSettings": "Einstellungen",
+	"components.LocalNav.LocalNav.Topics": "Themenbereiche",
+	"components.LocalNav.LocalNav.Topics.1": "1. Allgemeine Informationen",
+	"components.LocalNav.LocalNav.Topics.2": "2. Adapter",
+	"components.LocalNav.LocalNav.Topics.3": "3. Command, Command with...",
+	"components.LocalNav.LocalNav.Topics.4": "4. Strategie",
+	"components.LocalNav.LocalNav.Topics.5": "5. Zustand"
 }

@@ -1,8 +1,10 @@
 import {
-  DefaultBox as Box,
-  DefaultDivider as Divider,
-  DefaultTypography as Typography,
+    DefaultBox as Box,
+    DefaultDivider as Divider,
+    DefaultTypography as Typography,
 } from "@common/components";
+import {useTranslation} from "react-i18next";
+
 /**
  * Local navigation component for the main frame.
  * @remarks
@@ -11,15 +13,19 @@ import {
  * @category Components
  */
 const LocalNav = () => {
-  return (
-    <Box flexGrow={1}>
-      <Typography variant="h5">Themenbereiche</Typography>
-      <Divider />
-      {/** TODO 📑 add real topics */}
-      <Typography variant="h6">1. Übersicht</Typography>
-      <Typography variant="h6">2. Entwurfsmuster</Typography>
-    </Box>
-  );
+    const {t} = useTranslation();
+    return (
+        <Box flexGrow={1}>
+            <Typography variant="h5">{t("components.LocalNav.LocalNav.Topics")}</Typography>
+            <Divider/>
+            {/** TODO 📑 add real topics */}
+            <Typography variant="h6">{t("components.LocalNav.LocalNav.Topics.1")}</Typography>
+            <Typography variant="h6">{t("components.LocalNav.LocalNav.Topics.2")}</Typography>
+            <Typography variant="h6">{t("components.LocalNav.LocalNav.Topics.3")}</Typography>
+            <Typography variant="h6">{t("components.LocalNav.LocalNav.Topics.4")}</Typography>
+            <Typography variant="h6">{t("components.LocalNav.LocalNav.Topics.5")}</Typography>
+        </Box>
+    );
 };
 
 export default LocalNav;
