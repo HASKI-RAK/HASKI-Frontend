@@ -18,7 +18,19 @@ import {useNavigate} from "react-router-dom";
 import {useQuestionnaireAnswersILSStore} from "@services";
 import {styleButtonClose} from "./QuestionnaireQuestionsTableStyle";
 
-
+/**
+ * @description
+ * This component is used to display the questionnaire questions for the ILS questionnaire.
+ * The questions are displayed in a table with two columns.
+ * The first column contains the question and the second column contains the two possible answers.
+ * The answers are displayed as radio buttons.
+ * The user can select one of the two answers.
+ * The user can navigate between the questions using the stepper at the bottom of the page.
+ * The user can submit the answers at the end of the Questionnaire.
+ *
+ * if boolean ilsLong is true, the long version of the questionnaire is displayed, else the short version is displayed.
+ * The long version contains 44, and the short version contains 20 questions.
+ */
 const stepsShortILS = [
     [
         {
