@@ -148,10 +148,14 @@ const MenuBar = () => {
             display: { xs: "none", md: "flex" },
             maxHeight: { xs: 20, md: 50 },
             maxWidth: { xs: 20, md: 50 },
+            borderRadius: "50%",
+            backgroundColor: "white",
+            cursor: "pointer",
           }}
           alt="HASKI Home"
           src="/LogoPng.png"
           onClick={() => navigate("/")}
+
         />
         <Box sx={{ flexGrow: 1, textAlign: "center", display: "flex" }}>
           <Box
