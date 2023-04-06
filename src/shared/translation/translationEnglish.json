@@ -174,5 +174,6 @@
 	"components.LocalNav.LocalNav.Topics.X.7": "1.7. Medium Exercise 2",
 	"components.LocalNav.LocalNav.Topics.X.8": "1.8. Difficult Exercise 1",
 	"components.LocalNav.LocalNav.Topics.X.9": "1.9. Difficult Exercise 2",
-	"components.LocalNav.LocalNav.Topics.X.10": "1.10. Summary"
+	"components.LocalNav.LocalNav.Topics.X.10": "1.10. Summary",
+	"components.MenuBar.MenuBar.Button": "Topics"
 }

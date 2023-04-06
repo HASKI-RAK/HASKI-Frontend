@@ -24,30 +24,78 @@ import { useTranslation } from "react-i18next";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const topics = [
   {
-    name: "Design patterns",
+    name: ("components.LocalNav.LocalNav.Topics.5"),
     subtopics: [
-      "Adapter",
-      "Builder",
-      "Command",
-      "Facade",
-      "Compositum",
-      "Singleton",
-      "Strategy",
-      "Template method",
-      "State",
+      "components.LocalNav.LocalNav.Topics.X.1",
+      "components.LocalNav.LocalNav.Topics.X.2",
+      "components.LocalNav.LocalNav.Topics.X.3",
+      "components.LocalNav.LocalNav.Topics.X.4",
+      "components.LocalNav.LocalNav.Topics.X.5",
+      "components.LocalNav.LocalNav.Topics.X.6",
+      "components.LocalNav.LocalNav.Topics.X.7",
+      "components.LocalNav.LocalNav.Topics.X.8",
+      "components.LocalNav.LocalNav.Topics.X.9",
+      "components.LocalNav.LocalNav.Topics.X.10",
     ],
   },
   {
-    name: "Metrics",
+    name: ("components.LocalNav.LocalNav.Topics.4"),
     subtopics: [
-      "Cyclomatic complexity",
-      "Cohesion",
-      "Coupling",
-      "Halstead complexity",
-      "Lines of code",
-      "Nesting depth",
-      "Size",
-      "Weighted methods per class",
+      "components.LocalNav.LocalNav.Topics.X.1",
+      "components.LocalNav.LocalNav.Topics.X.2",
+      "components.LocalNav.LocalNav.Topics.X.3",
+      "components.LocalNav.LocalNav.Topics.X.4",
+      "components.LocalNav.LocalNav.Topics.X.5",
+      "components.LocalNav.LocalNav.Topics.X.6",
+      "components.LocalNav.LocalNav.Topics.X.7",
+      "components.LocalNav.LocalNav.Topics.X.8",
+      "components.LocalNav.LocalNav.Topics.X.9",
+      "components.LocalNav.LocalNav.Topics.X.10",
+    ],
+  },
+  {
+    name: ("components.LocalNav.LocalNav.Topics.3"),
+    subtopics: [
+      "components.LocalNav.LocalNav.Topics.X.1",
+      "components.LocalNav.LocalNav.Topics.X.2",
+      "components.LocalNav.LocalNav.Topics.X.3",
+      "components.LocalNav.LocalNav.Topics.X.4",
+      "components.LocalNav.LocalNav.Topics.X.5",
+      "components.LocalNav.LocalNav.Topics.X.6",
+      "components.LocalNav.LocalNav.Topics.X.7",
+      "components.LocalNav.LocalNav.Topics.X.8",
+      "components.LocalNav.LocalNav.Topics.X.9",
+      "components.LocalNav.LocalNav.Topics.X.10",
+    ],
+  },
+  {
+    name: ("components.LocalNav.LocalNav.Topics.2"),
+    subtopics: [
+      "components.LocalNav.LocalNav.Topics.X.1",
+      "components.LocalNav.LocalNav.Topics.X.2",
+      "components.LocalNav.LocalNav.Topics.X.3",
+      "components.LocalNav.LocalNav.Topics.X.4",
+      "components.LocalNav.LocalNav.Topics.X.5",
+      "components.LocalNav.LocalNav.Topics.X.6",
+      "components.LocalNav.LocalNav.Topics.X.7",
+      "components.LocalNav.LocalNav.Topics.X.8",
+      "components.LocalNav.LocalNav.Topics.X.9",
+      "components.LocalNav.LocalNav.Topics.X.10",
+    ],
+  },
+  {
+    name: ("components.LocalNav.LocalNav.Topics.1"),
+    subtopics: [
+      "components.LocalNav.LocalNav.Topics.X.1",
+      "components.LocalNav.LocalNav.Topics.X.2",
+      "components.LocalNav.LocalNav.Topics.X.3",
+      "components.LocalNav.LocalNav.Topics.X.4",
+      "components.LocalNav.LocalNav.Topics.X.5",
+      "components.LocalNav.LocalNav.Topics.X.6",
+      "components.LocalNav.LocalNav.Topics.X.7",
+      "components.LocalNav.LocalNav.Topics.X.8",
+      "components.LocalNav.LocalNav.Topics.X.9",
+      "components.LocalNav.LocalNav.Topics.X.10",
     ],
   },
 ];
@@ -146,7 +194,7 @@ const MenuBar = () => {
                     )
                   }
                 >
-                  Topics
+                  {t("components.MenuBar.MenuBar.Button")}
                 </Button>
               </Tooltip>
               <Popover
@@ -167,8 +215,8 @@ const MenuBar = () => {
                   <Grid container direction="column-reverse" spacing={2}>
                     {topics.map((topic) => (
                       <>
-                        <Grid item xs={12} key={topic.name}>
-                          <Typography variant="h6">{topic.name}</Typography>
+                        <Grid item xs={12} key={t(topic.name)}>
+                          <Typography variant="h6">{t(topic.name)}</Typography>
                           <Box
                             sx={{
                               display: "flex",
@@ -179,18 +227,18 @@ const MenuBar = () => {
                           >
                             {topic.subtopics.map((subtopic) => (
                               <Link
-                                key={subtopic}
+                                key={t(subtopic)}
                                 underline="hover"
                                 variant="body2"
                                 component="span"
                                 color="inherit"
                                 sx={{ m: 1 }}
                                 onClick={() => {
-                                  navigate(`/topics/${topic.name}/${subtopic}`);
+                                  navigate(`/topics/${t(topic.name)}/${t(subtopic)}`);
                                   handleCloseTopicsMenu();
                                 }}
                               >
-                                {subtopic}
+                                {t(subtopic)}
                               </Link>
                             ))}
                           </Box>
