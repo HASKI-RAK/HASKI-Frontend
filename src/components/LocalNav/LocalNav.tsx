@@ -22,74 +22,74 @@ import {useNavigate} from "react-router-dom";
     //todo: get paths of topics from backend, and sort with .sort((a, b) => a.position - b.position);
 
 const responseTopics = {
-        "topics": [
-            {
-                "id": 1,
-                "name": "Allgemeine Informationen",
-                "lms_id": 1,
-                "is_topic": true,
-                "parent_id": 0,
-                "contains_le": true,
-                "done": false,
-                "done_percantage": 0,
-                "last_visit": "0",
-                "time_spend": 0,
-                "is_recommended": true
-            },
-            {
-                "id": 2,
-                "name": "Adapter",
-                "lms_id": 2,
-                "is_topic": true,
-                "parent_id": 0,
-                "contains_le": true,
-                "done": false,
-                "done_percantage": 0,
-                "last_visit": "0",
-                "time_spend": 0,
-                "is_recommended": false
-            },
-            {
-                "id": 3,
-                "name": "Command, Command with Undo, Command Processor",
-                "lms_id": 3,
-                "is_topic": true,
-                "parent_id": 0,
-                "contains_le": true,
-                "done": false,
-                "done_percantage": 0,
-                "last_visit": "0",
-                "time_spend": 0,
-                "is_recommended": false
-            },
-            {
-                "id": 4,
-                "name": "Strategie",
-                "lms_id": 4,
-                "is_topic": true,
-                "parent_id": 0,
-                "contains_le": true,
-                "done": false,
-                "done_percantage": 0,
-                "last_visit": "0",
-                "time_spend": 0,
-                "is_recommended": false
-            },
-            {
-                "id": 5,
-                "name": "Zustand",
-                "lms_id": 5,
-                "is_topic": true,
-                "parent_id": 0,
-                "contains_le": true,
-                "done": false,
-                "done_percantage": 0,
-                "last_visit": "0",
-                "time_spend": 0,
-                "is_recommended": false
-            },
-        ]
-    };
+    "topics": [
+        {
+            "id": 1,
+            "name": "Allgemeine Informationen",
+            "lms_id": 1,
+            "is_topic": true,
+            "parent_id": 0,
+            "contains_le": true,
+            "done": false,
+            "done_percantage": 0,
+            "last_visit": "0",
+            "time_spend": 0,
+            "is_recommended": true
+        },
+        {
+            "id": 2,
+            "name": "Adapter",
+            "lms_id": 2,
+            "is_topic": true,
+            "parent_id": 0,
+            "contains_le": true,
+            "done": false,
+            "done_percantage": 0,
+            "last_visit": "0",
+            "time_spend": 0,
+            "is_recommended": false
+        },
+        {
+            "id": 3,
+            "name": "Command, Command with Undo, Command Processor",
+            "lms_id": 3,
+            "is_topic": true,
+            "parent_id": 0,
+            "contains_le": true,
+            "done": false,
+            "done_percantage": 0,
+            "last_visit": "0",
+            "time_spend": 0,
+            "is_recommended": false
+        },
+        {
+            "id": 4,
+            "name": "Strategie",
+            "lms_id": 4,
+            "is_topic": true,
+            "parent_id": 0,
+            "contains_le": true,
+            "done": false,
+            "done_percantage": 0,
+            "last_visit": "0",
+            "time_spend": 0,
+            "is_recommended": false
+        },
+        {
+            "id": 5,
+            "name": "Zustand",
+            "lms_id": 5,
+            "is_topic": true,
+            "parent_id": 0,
+            "contains_le": true,
+            "done": false,
+            "done_percantage": 0,
+            "last_visit": "0",
+            "time_spend": 0,
+            "is_recommended": false
+        },
+    ]
+};
 
 const responseLearningElements = [
     {
@@ -265,21 +265,26 @@ const LocalNav = () => {
             <Typography variant="h5">{t("components.LocalNav.LocalNav.Topics")}</Typography>
             <Divider/>
             {/** TODO 📑 add real topics */}
-            <div>
-                <>
-                    {responseTopics.topics.map((topic) => (
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon/>}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                            >
-                                <Typography variant="h6">{topic.name}</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                {/*api-call get all learning elements from current topic and sort it with position*/}
-                                {responseLearningElements.map((learningElement) => (
-                                    <Typography variant="body2">
+            <>
+                {responseTopics.topics.map((topic) => (
+                    <Accordion disableGutters
+                               sx=
+                                   {{
+                                       borderColor: 'divider',
+                                       boxShadow: '0 1px 0 lightgrey',
+                                       border: '1px',
+                                   }}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon/>}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Typography variant="h6">{topic.name}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails sx={{flexDirection: 'column'}}>
+                            {/*api-call get all learning elements from current topic and sort it with position*/}
+                            {responseLearningElements.map((learningElement) => (
+                                <Typography variant="body2">
                                     <Link
                                         key={learningElement.learning_element.name}
                                         underline="hover"
@@ -293,13 +298,12 @@ const LocalNav = () => {
                                     >
                                         {learningElement.position} {learningElement.learning_element.name}
                                     </Link>
-                                    </Typography>
-                                ))}
-                            </AccordionDetails>
-                        </Accordion>
-                    ))}
-                </>
-            </div>
+                                </Typography>
+                            ))}
+                        </AccordionDetails>
+                    </Accordion>
+                ))}
+            </>
         </Box>
     );
 };
