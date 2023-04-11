@@ -10,7 +10,7 @@ exports[`renders correctly and matches snapshot 1`] = `
     <h5
       className="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
     >
-      components.form.contactform.contactform
+      components.ContactForm.ContactForm.contactform
     </h5>
     <div
       className="css-1p5q5e5-MuiStack-root"
@@ -23,7 +23,7 @@ exports[`renders correctly and matches snapshot 1`] = `
           data-shrink={true}
           id="select_label_contact"
         >
-          components.form.contactform.topic
+          components.ContactForm.ContactForm.topic
         </label>
         <div
           className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
@@ -42,7 +42,7 @@ exports[`renders correctly and matches snapshot 1`] = `
             role="button"
             tabIndex={0}
           >
-            components.form.contactform.other
+            components.ContactForm.ContactForm.other
           </div>
           <input
             aria-hidden={true}
@@ -87,7 +87,7 @@ exports[`renders correctly and matches snapshot 1`] = `
           className="MuiFormLabel-root MuiFormLabel-colorPrimary css-u4tvz2-MuiFormLabel-root"
           id="radio_contact_label"
         >
-          components.form.contactform.reportType
+          components.ContactForm.ContactForm.reportType
         </label>
         <div
           className="MuiFormGroup-root MuiFormGroup-row css-qfz70r-MuiFormGroup-root"
@@ -152,7 +152,7 @@ exports[`renders correctly and matches snapshot 1`] = `
             <span
               className="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
             >
-              components.form.contactform.issue
+              components.ContactForm.ContactForm.issue
             </span>
           </label>
           <label
@@ -214,7 +214,7 @@ exports[`renders correctly and matches snapshot 1`] = `
             <span
               className="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
             >
-              components.form.contactform.bug
+              components.ContactForm.ContactForm.bug
             </span>
           </label>
           <label
@@ -276,7 +276,7 @@ exports[`renders correctly and matches snapshot 1`] = `
             <span
               className="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
             >
-              components.form.contactform.feedback
+              components.ContactForm.ContactForm.feedback
             </span>
           </label>
           <label
@@ -338,7 +338,7 @@ exports[`renders correctly and matches snapshot 1`] = `
             <span
               className="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
             >
-              components.form.contactform.feature
+              components.ContactForm.ContactForm.feature
             </span>
           </label>
           <label
@@ -400,7 +400,7 @@ exports[`renders correctly and matches snapshot 1`] = `
             <span
               className="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-ahj2mt-MuiTypography-root"
             >
-              components.form.contactform.other
+              components.ContactForm.ContactForm.other
             </span>
           </label>
         </div>
@@ -419,7 +419,7 @@ exports[`renders correctly and matches snapshot 1`] = `
           htmlFor="desc_input"
           id="desc_input-label"
         >
-          components.form.contactform.briefDescription
+          components.ContactForm.ContactForm.briefDescription
           <span
             aria-hidden={true}
             className="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
@@ -456,7 +456,7 @@ exports[`renders correctly and matches snapshot 1`] = `
               className="css-yjsfm1"
             >
               <span>
-                components.form.contactform.briefDescription
+                components.ContactForm.ContactForm.briefDescription
                  
                 *
               </span>
@@ -487,7 +487,7 @@ exports[`renders correctly and matches snapshot 1`] = `
         tabIndex={0}
         type="button"
       >
-        components.form.contactform.submit
+        components.ContactForm.ContactForm.submit
       </button>
     </div>
   </div>

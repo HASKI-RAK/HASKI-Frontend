@@ -16,12 +16,12 @@ import {
 import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
 import {
-  useContactform as _useContactform,
-  useContactformHookParams,
-  ContactformHookReturn,
-} from "./Contactform.hooks";
+  useContactForm as _useContactForm,
+  useContactFormHookParams,
+  ContactFormHookReturn,
+} from "./ContactForm.hooks";
 /**
- * Contactform component.
+ * ContactForm component.
  *
  * @remarks
  * This component is accessed by the contact page. It currently can be accessed from the home page.
@@ -40,22 +40,22 @@ const defaultContactValues = {
   description: "",
 };
 
-export type ContactformProps = {
+export type ContactFormProps = {
   defaultWidth?: string;
   onsendtoBackend?: () => void;
-  useContactform?: (params?: useContactformHookParams) => ContactformHookReturn;
+  useContactForm?: (params?: useContactFormHookParams) => ContactFormHookReturn;
 };
 
-export const Contactform = ({
-  useContactform = _useContactform, 
+export const ContactForm = ({
+  useContactForm = _useContactForm, 
   ...props
-}: ContactformProps) => {
+}: ContactFormProps) => {
   const [contactValues, setContactValues] = useState(defaultContactValues);
   const [textfieldError, setTextfieldError] = useState(false);
   const { t } = useTranslation();
 
   // ** Get Functions from Hook ** //
-  const { sendtoBackend, width } = useContactform();
+  const { sendtoBackend, width } = useContactForm();
  
 
   // ** Override Functions if passed as props ** //
@@ -92,13 +92,13 @@ export const Contactform = ({
     <form onSubmit={handleSubmit}>
       <Stack spacing={2} sx={{ minWidth: 120 }}>
         <Typography variant="h5" component="h5">
-          {t("components.form.contactform.contactform")}
+          {t("components.ContactForm.ContactForm.contactform")}
         </Typography>
 
         <Stack spacing={2}>
           <FormControl sx={{ defaultWidth }}>
             <InputLabel id="select_label_contact">
-              {t("components.form.contactform.topic")}
+              {t("components.ContactForm.ContactForm.topic")}
             </InputLabel>
             <Select
               name="reporttopic"
@@ -108,26 +108,26 @@ export const Contactform = ({
               onChange={handleInputChange}
             >
               <MenuItem value={"le"}>
-                {t("components.form.contactform.learningelement")}
+                {t("components.ContactForm.ContactForm.learningelement")}
               </MenuItem>
               <MenuItem value={"ui"}>
-                {t("components.form.contactform.ui")}
+                {t("components.ContactForm.ContactForm.ui")}
               </MenuItem>
               <MenuItem value={"design"}>
-                {t("components.form.contactform.design")}
+                {t("components.ContactForm.ContactForm.design")}
               </MenuItem>
               <MenuItem value={"other"}>
-                {t("components.form.contactform.other")}
+                {t("components.ContactForm.ContactForm.other")}
               </MenuItem>
               <MenuItem value={5}>
-                {t("components.form.contactform.other")}
+                {t("components.ContactForm.ContactForm.other")}
               </MenuItem>
             </Select>
           </FormControl>
 
           <FormControl>
             <FormLabel id="radio_contact_label">
-              {t("components.form.contactform.reportType")}
+              {t("components.ContactForm.ContactForm.reportType")}
             </FormLabel>
             <RadioGroup
               row
@@ -138,27 +138,27 @@ export const Contactform = ({
               <FormControlLabel
                 value="issue"
                 control={<RadioButton />}
-                label={t("components.form.contactform.issue")}
+                label={t("components.ContactForm.ContactForm.issue")}
               />
               <FormControlLabel
                 value="bug"
                 control={<RadioButton />}
-                label={t("components.form.contactform.bug")}
+                label={t("components.ContactForm.ContactForm.bug")}
               />
               <FormControlLabel
                 value="feedback"
                 control={<RadioButton />}
-                label={t("components.form.contactform.feedback")}
+                label={t("components.ContactForm.ContactForm.feedback")}
               />
               <FormControlLabel
                 value="feature"
                 control={<RadioButton />}
-                label={t("components.form.contactform.feature")}
+                label={t("components.ContactForm.ContactForm.feature")}
               />
               <FormControlLabel
                 value="other"
                 control={<RadioButton />}
-                label={t("components.form.contactform.other")}
+                label={t("components.ContactForm.ContactForm.other")}
               />
             </RadioGroup>
           </FormControl>
@@ -171,14 +171,14 @@ export const Contactform = ({
             name="description"
             type="text"
             required
-            label={t("components.form.contactform.briefDescription")}
+            label={t("components.ContactForm.ContactForm.briefDescription")}
             rows={5}
             maxRows={15}
             value={contactValues.description}
             onChange={handleInputChange}
             error={textfieldError}
             helperText={
-              textfieldError ? t("components.form.contactform.error") : ""
+              textfieldError ? t("components.ContactForm.ContactForm.error") : ""
             }
           />
         </FormControl>
@@ -190,7 +190,7 @@ export const Contactform = ({
             //href="/"
             onClick={handleSubmit}
           >
-            {t("components.form.contactform.submit")}
+            {t("components.ContactForm.ContactForm.submit")}
           </Button>
         </FormControl>
       </Stack>
@@ -198,4 +198,4 @@ export const Contactform = ({
   );
 };
 
-export default Contactform;
+export default ContactForm;

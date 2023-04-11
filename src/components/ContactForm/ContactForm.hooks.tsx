@@ -1,16 +1,16 @@
 
-export type useContactformHookParams = {
+export type useContactFormHookParams = {
     defaultWidth?:string;
 };
 
-export type ContactformHookReturn = {
+export type ContactFormHookReturn = {
     readonly sendtoBackend: () => void;
     width: string;
 };
 
-export const useContactform = (
-    params?: useContactformHookParams
-    ): ContactformHookReturn => {
+export const useContactForm = (
+    params?: useContactFormHookParams
+    ): ContactFormHookReturn => {
         
         // ** Logic **//
         const sendtoBackend = () => {

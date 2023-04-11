@@ -1,7 +1,7 @@
 import renderer, { act } from "react-test-renderer";
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
-import { Contactform } from "./Contactform";
+import { ContactForm } from "./ContactForm";
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => {
@@ -12,9 +12,9 @@ jest.mock("react-i18next", () => ({
 test("Test default params", () => {
 
   const form = render(
-    <Contactform />
+    <ContactForm />
   );
-  const submitButton = form.getByText("components.form.contactform.submit");
+  const submitButton = form.getByText("components.ContactForm.ContactForm.submit");
   const input = form.getByRole("textbox");
   fireEvent.change(input, { target: { value: "text" } });
   fireEvent.click(submitButton);
@@ -26,9 +26,9 @@ test("submits form correctly", () => {
   const send = jest.fn();
   
   const form = render(
-    <Contactform defaultWidth={""} onsendtoBackend={send}/>
+    <ContactForm defaultWidth={""} onsendtoBackend={send}/>
   );
-  const submitButton = form.getByText("components.form.contactform.submit");
+  const submitButton = form.getByText("components.ContactForm.ContactForm.submit");
   const input = form.getByRole("textbox");
   fireEvent.change(input, { target: { value: "text" } });
   fireEvent.click(submitButton);
@@ -41,9 +41,9 @@ test("submits form incorrectly", () => {
   const send = jest.fn();
   const text = "60%";
   const form = render(
-    <Contactform defaultWidth={text} onsendtoBackend={send}/>
+    <ContactForm defaultWidth={text} onsendtoBackend={send}/>
   );
-  const submitButton = form.getByText("components.form.contactform.submit");
+  const submitButton = form.getByText("components.ContactForm.ContactForm.submit");
 
   fireEvent.click(submitButton);
   expect(typeof text).toBe("string");
@@ -54,7 +54,7 @@ test("submits form incorrectly", () => {
 test("check InputChange function", () => {
 
   const { getAllByRole, getByRole } = render(
-    <Contactform defaultWidth={""} />
+    <ContactForm defaultWidth={""} />
   );
   fireEvent.mouseDown(getByRole("button", { name: /Topic/i }));
   act(() => {
@@ -68,7 +68,7 @@ test("check InputChange function", () => {
 test("renders correctly and matches snapshot", () => {
 
   const tree = renderer
-    .create(<Contactform defaultWidth={""} />)
+    .create(<ContactForm defaultWidth={""} />)
     .toJSON();
     expect(tree).toMatchSnapshot();
 });

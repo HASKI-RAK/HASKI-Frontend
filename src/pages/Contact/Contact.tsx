@@ -1,6 +1,6 @@
-import { Contactform } from "@components";
+import { ContactForm } from "@components";
 
 export const Contact = () => {
-  return <Contactform defaultWidth={""} />;
+  return <ContactForm defaultWidth={""} />;
 };
 export default Contact;
