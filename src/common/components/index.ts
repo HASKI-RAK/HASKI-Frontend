@@ -1,9 +1,4 @@
 
-import { DefaultButton } from "./DefaultButton/DefaultButton";
-import { DefaultTextField } from "./DefaultTextField/DefaultTextField";
-import { DefaultSelect } from "./DefaultSelect/DefaultSelect";
-import { DefaultRadio } from "./DefaultRadio/DefaultRadio";
-
 /**
  * Reusable components such as buttons and forms go in here.
  */
@@ -33,3 +28,9 @@ export { DefaultCircularProgress } from "./DefaultCircularProgress/DefaultCircul
 export { DefaultInputAdornment } from "./DefaultInputAdornment/DefaultInputAdornment";
 export { DefaultPaper } from "./DefaultPaper/DefaultPaper";
 export { DefaultTextField } from "./DefaultTextField/DefaultTextField";
+export {DefaultRadioGroup} from "./DefaultRadioGroup/DefaultRadioGroup";
+export {DefaultFormLabel} from "./DefaultFormLabel/DefaultFormLabel";
+export {DefaultInputLabel} from "./DefaultInputLabel/DefaultInputLabel";
+export {DefaultFormControl} from "./DefaultFormControl/DefaultFormControl";
+export {DefaultFormControlLabel} from "./DefaultFormControlLabel/DefaultFormControlLabel";
+export type {DefaultSelectChangeEvent} from "./DefaultSelectChangeEvent/DefaultSelectChangeEvent";

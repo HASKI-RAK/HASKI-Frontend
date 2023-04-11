@@ -3,22 +3,23 @@ import {
   DefaultSelect as Select,
   DefaultTextField as TextField,
   DefaultRadio as RadioButton,
+  DefaultTypography as Typography,
+  DefaultRadioGroup as RadioGroup,
+  DefaultStack as Stack,
+  DefaultMenuItem as MenuItem,
+  DefaultInputLabel as InputLabel,
+  DefaultFormControl as FormControl,
+  DefaultFormLabel as FormLabel,
+  DefaultFormControlLabel as FormControlLabel,
+  DefaultSelectChangeEvent as SelectChangeEvent,
 } from "@common/components";
-import {
-  InputLabel,
-  FormControl,
-  MenuItem,
-  Stack,
-  RadioGroup,
-  FormLabel,
-  FormControlLabel,
-  Typography,
-  
-} from "@mui/material";
 import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
-
-
+import {
+  useContactform as _useContactform,
+  useContactformHookParams,
+  ContactformHookReturn,
+} from "./Contactform.hooks";
 /**
  * Contactform component.
  *
@@ -39,53 +40,66 @@ const defaultContactValues = {
   description: "",
 };
 
-
-//groesse anpassen lassen
-//passing props to mui styles
-type ContactformParameter =  {
-  width: string;
-  sendtoBackend: () => void;
+export type ContactformProps = {
+  defaultWidth?: string;
+  onsendtoBackend?: () => void;
+  useContactform?: (params?: useContactformHookParams) => ContactformHookReturn;
 };
 
-export const Contactform = ( {width, sendtoBackend}: ContactformParameter) => {
+export const Contactform = ({
+  useContactform = _useContactform, 
+  ...props
+}: ContactformProps) => {
   const [contactValues, setContactValues] = useState(defaultContactValues);
   const [textfieldError, setTextfieldError] = useState(false);
   const { t } = useTranslation();
-  const handleInputChange = (e: any) => {
+
+  // ** Get Functions from Hook ** //
+  const { sendtoBackend, width } = useContactform();
+ 
+
+  // ** Override Functions if passed as props ** //
+  const {defaultWidth=width, 
+    onsendtoBackend=sendtoBackend} = props;
+
+  
+  const handleInputChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | SelectChangeEvent<string>
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setContactValues({
       ...contactValues,
       [name]: value,
     });
   };
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (
+    event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLElement>
+  ) => {
     event.preventDefault();
-    if (contactValues.description == "") {
+    if (!contactValues.description) {
       setTextfieldError(true);
-      
     } else {
-      
       setTextfieldError(false);
-     console.log(contactValues);
-     sendtoBackend();
+      console.log(contactValues);
+      onsendtoBackend();
     }
-    
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <Stack
-        spacing={2}
-      
-        sx={{ minWidth: 120, backgroundColor: "white" }}
-      >
+      <Stack spacing={2} sx={{ minWidth: 120 }}>
         <Typography variant="h5" component="h5">
-          {t("components.contactform.contactform")}
+          {t("components.form.contactform.contactform")}
         </Typography>
 
         <Stack spacing={2}>
-          <FormControl sx={ {width} }>
-            <InputLabel id="select_label_contact">{ t("components.contactform.topic")}</InputLabel>
+          <FormControl sx={{ defaultWidth }}>
+            <InputLabel id="select_label_contact">
+              {t("components.form.contactform.topic")}
+            </InputLabel>
             <Select
               name="reporttopic"
               labelId="select_label_contact"
@@ -93,16 +107,28 @@ export const Contactform = ( {width, sendtoBackend}: ContactformParameter) => {
               value={contactValues.reporttopic}
               onChange={handleInputChange}
             >
-              <MenuItem value={"le"} >{ t("components.contactform.learningelement")}</MenuItem>
-              <MenuItem value={"ui"}>{ t("components.contactform.ui")}</MenuItem>
-              <MenuItem value={"design"}>{ t("components.contactform.design")}</MenuItem>
-              <MenuItem value={"other"}>{ t("components.contactform.other")}</MenuItem>
-              <MenuItem value={5}>{ t("components.contactform.other")}</MenuItem>
+              <MenuItem value={"le"}>
+                {t("components.form.contactform.learningelement")}
+              </MenuItem>
+              <MenuItem value={"ui"}>
+                {t("components.form.contactform.ui")}
+              </MenuItem>
+              <MenuItem value={"design"}>
+                {t("components.form.contactform.design")}
+              </MenuItem>
+              <MenuItem value={"other"}>
+                {t("components.form.contactform.other")}
+              </MenuItem>
+              <MenuItem value={5}>
+                {t("components.form.contactform.other")}
+              </MenuItem>
             </Select>
           </FormControl>
 
           <FormControl>
-            <FormLabel id="radio_contact_label">{ t("components.contactform.reportType")}</FormLabel>
+            <FormLabel id="radio_contact_label">
+              {t("components.form.contactform.reportType")}
+            </FormLabel>
             <RadioGroup
               row
               name="reporttype"
@@ -112,48 +138,48 @@ export const Contactform = ( {width, sendtoBackend}: ContactformParameter) => {
               <FormControlLabel
                 value="issue"
                 control={<RadioButton />}
-                label={ t("components.contactform.issue")}
-                
+                label={t("components.form.contactform.issue")}
               />
               <FormControlLabel
                 value="bug"
                 control={<RadioButton />}
-                label={ t("components.contactform.bug")}
+                label={t("components.form.contactform.bug")}
               />
               <FormControlLabel
                 value="feedback"
                 control={<RadioButton />}
-                label={ t("components.contactform.feedback")}
+                label={t("components.form.contactform.feedback")}
               />
               <FormControlLabel
                 value="feature"
                 control={<RadioButton />}
-                label={ t("components.contactform.feature")}
+                label={t("components.form.contactform.feature")}
               />
               <FormControlLabel
                 value="other"
                 control={<RadioButton />}
-                label={ t("components.contactform.other")}
+                label={t("components.form.contactform.other")}
               />
             </RadioGroup>
           </FormControl>
         </Stack>
 
-        <FormControl fullWidth >
+        <FormControl fullWidth>
           <TextField
             id="desc_input"
             data-testid="desc_input"
             name="description"
             type="text"
             required
-            label={ t("components.contactform.briefDescription")}
+            label={t("components.form.contactform.briefDescription")}
             rows={5}
             maxRows={15}
             value={contactValues.description}
             onChange={handleInputChange}
             error={textfieldError}
-            helperText={textfieldError ?  t("components.contactform.error") : ""}
-          
+            helperText={
+              textfieldError ? t("components.form.contactform.error") : ""
+            }
           />
         </FormControl>
 
@@ -164,7 +190,7 @@ export const Contactform = ( {width, sendtoBackend}: ContactformParameter) => {
             //href="/"
             onClick={handleSubmit}
           >
-            { t("components.contactform.submit")}
+            {t("components.form.contactform.submit")}
           </Button>
         </FormControl>
       </Stack>

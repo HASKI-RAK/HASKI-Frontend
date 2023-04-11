@@ -8,7 +8,7 @@ import { ResultDescriptionListK } from "./Questionnaire/ResultDescriptionListK";
 import { QuestionnaireResultsModal } from "./Questionnaire/QuestionnaireResultsModal";
 import { Text } from "./Text/Text";
 
-export { default as Contactform } from './Form/Contactform';
+import Contactform  from './Form/Contactform';
 import LoginForm from "./LoginForm/LoginForm";
 import MenuBar from "./MenuBar/MenuBar";
 import Footer from "./Footer/Footer";
@@ -33,5 +33,6 @@ export {
   GraphListK,
   ResultDescriptionListK,
   QuestionnaireResultsModal,
+  Contactform
 };
 
