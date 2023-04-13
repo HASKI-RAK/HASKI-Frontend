@@ -1,6 +1,25 @@
-version: "1.0"
+version: "1.1"
 services:
   frontend:
     image: frontend:latest
+    command:
+      - "nginx"
+      - "-g"
+      - "daemon off;"
     env_file:
       - .env.production
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.haski-frontend.tls=true"
+      - "traefik.http.routers.haski-frontend.entrypoints=websecure"
+      - "traefik.http.routers.haski-frontend.rule=Host(`haski.app`)"
+      - "traefik.http.routers.haski-frontend.service=haski-frontend"
+      - "traefik.http.routers.haski-frontend.tls.certresolver=le"
+      - "traefik.http.services.haski-frontend.loadbalancer.server.port=80"
+
+    networks:
+      - traefik_web
+
+networks:
+  traefik_web:
+    external: true
