@@ -94,7 +94,7 @@ const responseTopics = {
 
 const responseLearningElements = [
     {
-        "position": 1,
+        "position": 2,
         "learning_element": {
             "id": 1,
             "lms_id": 14,
@@ -110,7 +110,7 @@ const responseLearningElements = [
         }
     },
     {
-        "position": 2,
+        "position": 1,
         "learning_element": {
             "id": 2,
             "lms_id": 63,
@@ -126,7 +126,7 @@ const responseLearningElements = [
         }
     },
     {
-        "position": 4,
+        "position": 3,
         "learning_element": {
             "id": 3,
             "lms_id": 62,
@@ -142,7 +142,7 @@ const responseLearningElements = [
         }
     },
     {
-        "position": 3,
+        "position": 5,
         "learning_element": {
             "id": 4,
             "lms_id": 15,
@@ -158,7 +158,7 @@ const responseLearningElements = [
         }
     },
     {
-        "position": 5,
+        "position": 6,
         "learning_element": {
             "id": 5,
             "lms_id": 68,
@@ -174,7 +174,7 @@ const responseLearningElements = [
         }
     },
     {
-        "position": 6,
+        "position": 7,
         "learning_element": {
             "id": 6,
             "lms_id": 66,
@@ -190,7 +190,7 @@ const responseLearningElements = [
         }
     },
     {
-        "position": 7,
+        "position": 8,
         "learning_element": {
             "id": 7,
             "lms_id": 69,
@@ -206,7 +206,7 @@ const responseLearningElements = [
         }
     },
     {
-        "position": 8,
+        "position": 9,
         "learning_element": {
             "id": 8,
             "lms_id": 67,
@@ -222,7 +222,7 @@ const responseLearningElements = [
         }
     },
     {
-        "position": 9,
+        "position": 10,
         "learning_element": {
             "id": 9,
             "lms_id": 20,
@@ -238,7 +238,7 @@ const responseLearningElements = [
         }
     },
     {
-        "position": 10,
+        "position": 4,
         "learning_element": {
             "id": 10,
             "lms_id": 71,
