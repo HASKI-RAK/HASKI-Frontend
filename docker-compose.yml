@@ -1,0 +1,6 @@
+version: "1.0"
+services:
+  frontend:
+    image: frontend:latest
+    env_file:
+      - .env.production
