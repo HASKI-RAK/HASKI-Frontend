@@ -4,14 +4,9 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const { DefinePlugin } = require("webpack");
 
-const dotenv =
-  process.env.NODE_ENV !== "production"
-    ? require("dotenv").config({
-        path: __dirname + "/.env.development",
-      })
-    : require("dotenv").config({
-        path: __dirname + "/.env.production",
-      });
+const dotenv = require("dotenv").config({
+  path: __dirname + "\\.env." + process.env.NODE_ENV.trim(),
+});
 const dev = process.env.NODE_ENV !== "production"; // Jest will set process.env.NODE_ENV to 'test'
 module.exports = {
   context: path.resolve(__dirname, "src"),

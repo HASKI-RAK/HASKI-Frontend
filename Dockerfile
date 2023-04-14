@@ -6,6 +6,8 @@ COPY package.json ./
 COPY yarn.lock ./
 RUN yarn install
 COPY . ./
+ARG NODE_ENV=production
+ARG BACKEND=https://backend.haski.app
 RUN yarn build-prod
 
 # production environment
