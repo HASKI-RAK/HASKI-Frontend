@@ -150,7 +150,7 @@ const useMetacognitiveStrategiesBelow3Element = (metacognitiveProps: MetaCogniti
 };
 
 //relevant subscales are: attention, time, learning with classmates, literature research and learning environment
-const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: (string| number)[][]): JSX.Element[] => {
+const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: {[key:string]: number}): JSX.Element[] => {
 
     const {t} = useTranslation();
     const subscalesBelow3Array = [];
@@ -158,8 +158,8 @@ const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: (strin
 
     //Going through all combinations of subScales and adding them to the future if-statement if they are below 3
     for (const item in subScalesRelevantCombinations) {
-        if(subScalesRelevantCombinations[item][1] < 3) {
-            subscalesBelow3Array.push(subScalesRelevantCombinations[item][0] + " && ");
+        if(subScalesRelevantCombinations[item] < 3) {
+            subscalesBelow3Array.push(item + " && ");
         }
     }
 
@@ -188,11 +188,12 @@ export const ResultDescriptionListK = () => {
         literatureResearch, learningEnvironment] = getListKParameters()[0];
 
     const subScalesRelevantCombinations = [["attention",attention], ["time",time], ["learnWithClassmates",learnWithClassmates], ["literatureResearch",literatureResearch], ["learningEnvironment",learningEnvironment]];
+    const subScalesDictionary = subScalesRelevantCombinations.reduce((acc, [key, value]) => ({...acc, [key]: value}), {});
 
     const generalSubscalesBelow3 = useGeneralSubscalesBelow3Element({CognitiveStrategies:{organize, elaborate, criticalReview, repeat}, attention, effort, time, goalsPlans, control, regulate, learnWithClassmates, literatureResearch, learningEnvironment});
     const cognitiveStrategiesBelow3 = useCognitiveStrategiesBelow3Element({organize, elaborate, criticalReview, repeat});
     const metacognitiveStrategiesBelow3 = useMetacognitiveStrategiesBelow3Element({goalsPlans, control, regulate});
-    const relevantSubscalesBelow3 = useRelevantSubscalesBelow3Element(subScalesRelevantCombinations);
+    const relevantSubscalesBelow3 = useRelevantSubscalesBelow3Element(subScalesDictionary);
 
     return (
         <div key={"ResultDescriptionListK"}>
