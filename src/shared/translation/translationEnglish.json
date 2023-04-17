@@ -176,5 +176,6 @@
 	"components.LocalNav.LocalNav.Topics.X.9": "Difficult Exercise 2",
 	"components.LocalNav.LocalNav.Topics.X.10": "Summary",
 	"components.MenuBar.MenuBar.Button": "Topics",
-	"components.MenuBar.MenuBar.Profile.Logout": "Logout"
+	"components.MenuBar.MenuBar.Profile.Logout": "Logout",
+	"components.LocalNav.LocalNav.Topics.NoLearningElements": "No learning elements found"
 }

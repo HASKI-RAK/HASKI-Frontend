@@ -40,7 +40,7 @@ interface Topic {
         id: number;
         student_id: number;
         topic_id: number;
-        visits: any[]; // Define type of visits array if known
+        visits: string[]; // Define type of visits array if known
     };
     university: string;
 }
@@ -96,14 +96,15 @@ const LocalNav = () => {
                 setTopics(dataTopic.topics);
 
                 const dataLearningPath: LearningPath[] = [];
-                for (const topic of dataTopic.topics) {
-                    const topicIndex = topic.id;
-                    const responseLearningPath = await fetch('http://127.0.0.1:5000/user/2/5/student/1/course/1/topic/'+{topicIndex}+'/learningPath');
+                for(const topic of dataTopic.topics) {
+                    const topicIndex = topic.id.toString();
+                    const responseLearningPath = await fetch(`http://127.0.0.1:5000/user/2/5/student/1/course/1/topic/${topicIndex}/learningPath`);
                     const path: LearningPath = await responseLearningPath.json();
+                    // how do we know where the element is in Moodle?
+                    path.path.sort((a, b) => a.id - b.id);
                     dataLearningPath.push(path);
                 }
                 setLearningPath(dataLearningPath);
-
                 setLoading(false); // set loading state to false after request is done
             }
             catch(error) {
@@ -127,7 +128,7 @@ const LocalNav = () => {
                 </Box>
             ) : ( // display actual content once loading is false
                 <>
-                    {topics.map((topic) => (
+                    {topics.map((topic, index) => (
                         <Accordion disableGutters
                                    sx=
                                        {{
@@ -153,8 +154,7 @@ const LocalNav = () => {
                                 <Typography variant="h6">{topic.name}</Typography>
                             </AccordionSummary>
                             <AccordionDetails sx={{flexDirection: 'column'}}>
-                                {/*api-call get all learning elements from current topic and sort it with position*/}
-                                {learningPath.map((learningElement) => (
+                                {learningPath[index].path.map((learningElement) => (
                                     <Typography variant="body1">
                                         <Link
                                             key={learningElement.learning_element.name}
@@ -174,12 +174,13 @@ const LocalNav = () => {
                                             {learningElement.position} {learningElement.learning_element.name}
                                         </Link>
                                     </Typography>
-                                ))}
+                                ))
+                                }
                             </AccordionDetails>
                         </Accordion>
                     ))}
                 </>
-                )}
+            )}
         </Box>
     );
 };

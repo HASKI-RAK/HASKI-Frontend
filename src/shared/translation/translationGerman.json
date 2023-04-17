@@ -176,5 +176,6 @@
 	"components.LocalNav.LocalNav.Topics.X.9": "Übung Schwer 2",
 	"components.LocalNav.LocalNav.Topics.X.10": "Zusammenfassung",
 	"components.MenuBar.MenuBar.Button": "Themenbereiche",
-	"components.MenuBar.MenuBar.Profile.Logout": "Ausloggen"
+	"components.MenuBar.MenuBar.Profile.Logout": "Ausloggen",
+	"components.LocalNav.LocalNav.Topics.NoLearningElements": "Keine Lernelemente gefunden"
 }
