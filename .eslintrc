@@ -1,28 +1,26 @@
 {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-        "@typescript-eslint",
-        "prefer-arrow-functions",
-        "react-hooks"
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prefer-arrow-functions", "react-hooks"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "no-console": 1, // Warn on console log
+    "prefer-arrow-callback": 1, // Warn on function() { ... }
+    "prefer-arrow-functions/prefer-arrow-functions": [
+      "warn",
+      {
+        "classPropertiesAllowed": false,
+        "disallowPrototype": false,
+        "returnStyle": "unchanged",
+        "singleReturnOnly": false
+      }
     ],
-    "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
-    ],
-    "rules": {
-        "no-console": 1, // Warn on console log
-        "prefer-arrow-callback": 1, // Warn on function() { ... }
-        "prefer-arrow-functions/prefer-arrow-functions": [
-            "warn",
-            {
-                "classPropertiesAllowed": false,
-                "disallowPrototype": false,
-                "returnStyle": "unchanged",
-                "singleReturnOnly": false
-            }
-        ],
-        "react-hooks/rules-of-hooks": "warn" // Checks rules of Hooks
-    }
+    "react-hooks/rules-of-hooks": "warn" // Checks rules of Hooks
+  }
 }
