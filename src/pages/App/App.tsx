@@ -1,11 +1,11 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { DefaultThemeProvider as ThemeProvider } from "@common/components";
-import { MainFrame, Home, ThemePresentation, Login, Dashboard } from "@pages";
-import { AuthProvider } from "@services";
-import { logBuffer } from "@shared";
-import { Theme } from "@utils";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { DefaultThemeProvider as ThemeProvider } from '@common/components'
+import { MainFrame, Home, ThemePresentation, Login, Dashboard } from '@pages'
+import { AuthProvider } from '@services'
+import { logBuffer } from '@shared'
+import { Theme } from '@utils'
 
-logBuffer();
+logBuffer()
 
 /**
  * App component.
@@ -34,5 +34,5 @@ const App = () => (
       </Router>
     </AuthProvider>
   </ThemeProvider>
-);
-export default App;
+)
+export default App

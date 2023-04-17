@@ -1,1 +1,1 @@
-export { InputAdornment as DefaultInputAdornment } from "@mui/material";
+export { InputAdornment as DefaultInputAdornment } from '@mui/material'

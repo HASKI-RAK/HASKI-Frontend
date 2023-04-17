@@ -1,0 +1,14 @@
+{
+  "entry": ["src/index.tsx"],
+  "extensions": [".ts", ".js", ".tsx"],
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "__mocks__/**",
+    "bin/**",
+    "dist/**",
+    "coverage/**",
+    "**/*.test.{js,jsx,ts,tsx}",
+    "**/*.d.ts"
+  ],
+  "ignoreUnimported": ["src/shared/auto-order-json-translations.ts"]
+}

@@ -1,1 +1,1 @@
-export { CircularProgress as DefaultCircularProgress } from "@mui/material";
+export { CircularProgress as DefaultCircularProgress } from '@mui/material'
