@@ -5,7 +5,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const { DefinePlugin } = require("webpack");
 
 const dotenv = require("dotenv").config({
-  path: __dirname + "/.env.development",
+  path: __dirname + "\\.env." + process.env.NODE_ENV.trim(),
 });
 const dev = process.env.NODE_ENV !== "production"; // Jest will set process.env.NODE_ENV to 'test'
 module.exports = {
@@ -69,10 +69,10 @@ module.exports = {
     }),
     new CompressionPlugin(),
     new DefinePlugin({
-      "process.env": JSON.stringify(dotenv.parsed),
       "process.env.NODE_ENV": JSON.stringify(
         dev ? "development" : "production"
       ),
+      "process.env": JSON.stringify(dotenv.parsed),
     }),
   ],
 };

@@ -2,7 +2,7 @@ name: frontend
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   publish_frontend:
     runs-on: ubuntu-latest
