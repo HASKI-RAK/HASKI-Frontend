@@ -4,10 +4,10 @@
   "plugins": ["@typescript-eslint", "prefer-arrow-functions", "react-hooks"],
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:react-hooks/recommended",
+    "prettier"
   ],
   "rules": {
     "no-console": 1, // Warn on console log
@@ -21,6 +21,15 @@
         "singleReturnOnly": false
       }
     ],
-    "react-hooks/rules-of-hooks": "warn" // Checks rules of Hooks
+    "react-hooks/rules-of-hooks": "warn", // Checks rules of Hooks
+    // suppress errors for missing 'import React' in files
+    "react/react-in-jsx-scope": "off",
+    // allow jsx syntax in js files (for next.js project)
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }] //should add ".ts" if typescript project
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

@@ -1,18 +1,18 @@
 // const { pathsToModuleNameMapper } = require('ts-jest')
-import { compilerOptions } from "./tsconfig.json";
-import { pathsToModuleNameMapper } from "ts-jest";
-import { Config } from "@jest/types";
+import { compilerOptions } from './tsconfig.json'
+import { pathsToModuleNameMapper } from 'ts-jest'
+import { Config } from '@jest/types'
 
 const config: Config.InitialOptions = {
-  preset: "ts-jest",
+  preset: 'ts-jest',
   moduleNameMapper: {
-    "react-i18next": "<rootDir>/__mocks__/react-i18next",
-    "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
-    ...pathsToModuleNameMapper(compilerOptions.paths),
+    'react-i18next': '<rootDir>/__mocks__/react-i18next',
+    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    ...pathsToModuleNameMapper(compilerOptions.paths)
   },
-  modulePaths: ["<rootDir>", "<rootDir>/src"],
-  roots: ["<rootDir>/src/"],
-  rootDir: ".",
+  modulePaths: ['<rootDir>', '<rootDir>/src'],
+  roots: ['<rootDir>/src/'],
+  rootDir: '.',
   // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,
 
@@ -23,31 +23,28 @@ const config: Config.InitialOptions = {
   // collectCoverageFrom: undefined,
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: "coverage",
+  coverageDirectory: 'coverage',
   automock: false,
-  testEnvironment: "jsdom",
-  testMatch: ["<rootDir>/src/**/*.test.{js,jsx,ts,tsx}"],
+  testEnvironment: 'jsdom',
+  testMatch: ['<rootDir>/src/**/*.test.{js,jsx,ts,tsx}'],
   testPathIgnorePatterns: [
-    "node_modules",
-    "Webvitals.ts",
-    "<rootDir>/src/index.tsx",
-    ".mock.ts",
-    "index.ts",
+    'node_modules',
+    'Webvitals.ts',
+    '<rootDir>/src/index.tsx',
+    '.mock.ts',
+    'index.ts'
   ],
   coveragePathIgnorePatterns: [
-    "node_modules",
-    "Webvitals.ts",
-    "<rootDir>/src/index.tsx",
-    ".mock.ts",
-    "index.ts",
+    'node_modules',
+    'Webvitals.ts',
+    '<rootDir>/src/index.tsx',
+    '.mock.ts',
+    'index.ts'
   ],
   transform: {
-    "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest",
+    'node_modules/variables/.+\\.(j|t)sx?$': 'ts-jest'
   },
-  transformIgnorePatterns: [
-    "^.+\\.module\\.(css|sass|scss)$",
-    "node_modules/(?!variables/.*)",
-  ],
-};
+  transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$', 'node_modules/(?!variables/.*)']
+}
 
-export default config;
+export default config

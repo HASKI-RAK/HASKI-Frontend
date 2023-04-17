@@ -1,128 +1,124 @@
-﻿import renderer from "react-test-renderer";
-import "@testing-library/jest-dom";
-import { DropdownLanguage } from "@components";
-import {fireEvent, render, act} from "@testing-library/react";
-import {I18nextProvider} from "react-i18next";
-import i18next from "i18next";
-
+﻿import renderer from 'react-test-renderer'
+import '@testing-library/jest-dom'
+import { DropdownLanguage } from '@components'
+import { fireEvent, render, act } from '@testing-library/react'
+import { I18nextProvider } from 'react-i18next'
+import i18next from 'i18next'
 
 // tests for mui can be found https://github.com/mui/material-ui/blob/master/packages/mui-material/src
 
-describe("Test the change-language dropdown component", () => {
-
-    test("catch clause in DropdownLanguage component works correctly", () => {
-
-        const localStorageMock_withSetError = {
-            getItem: jest.fn().mockImplementation((key) => {
-                if(key === "i18nextLng"){
-                    return "de";
-                }
-                return null;
-            }),
-            setItem: jest.fn().mockImplementation(() => {
-                throw new Error("Error")
-            }),
-        };
-
-        // Replace the real localStorage object with our mock object
-        Object.defineProperty(global, "localStorage", {
-            value: localStorageMock_withSetError,
-        });
-
-        const localLog = {
-            error: jest.fn()
-        };
-
-        Object.defineProperty(global, "loglevel", {
-            value: localLog,
-        });
-
-        const localConsole = {
-            error: jest.fn()
+describe('Test the change-language dropdown component', () => {
+  test('catch clause in DropdownLanguage component works correctly', () => {
+    const localStorageMock_withSetError = {
+      getItem: jest.fn().mockImplementation((key) => {
+        if (key === 'i18nextLng') {
+          return 'de'
         }
+        return null
+      }),
+      setItem: jest.fn().mockImplementation(() => {
+        throw new Error('Error')
+      })
+    }
 
-        Object.defineProperty(global, "console", {
-            value: localConsole,
-        });
+    // Replace the real localStorage object with our mock object
+    Object.defineProperty(global, 'localStorage', {
+      value: localStorageMock_withSetError
+    })
 
-        const { getAllByRole,getByRole } = render(<DropdownLanguage />);
+    const localLog = {
+      error: jest.fn()
+    }
 
-        fireEvent.mouseDown(getByRole('button'));
-        act(() => {
-            getAllByRole('option')[1].click();
-        })
+    Object.defineProperty(global, 'loglevel', {
+      value: localLog
+    })
 
-        expect(localStorageMock_withSetError.setItem).toHaveBeenCalledWith("i18nextLng", "en");
-        expect(localConsole.error).toHaveBeenCalledWith("The language could not be changed. Error Message: Error: Error");
-    });
+    const localConsole = {
+      error: jest.fn()
+    }
 
-    test("dropdown can be set to english", () => {
+    Object.defineProperty(global, 'console', {
+      value: localConsole
+    })
 
-        const localStorageMock = {
-            getItem: jest.fn().mockImplementation((key) => {
-                if(key === "i18nextLng"){
-                    return "de";
-                }
-                return null;
-            }),
-            setItem: jest.fn().mockImplementation((key) => {
-                return key;
-            }),
-        };
+    const { getAllByRole, getByRole } = render(<DropdownLanguage />)
 
-// Replace the real localStorage object with our mock object
-        Object.defineProperty(global, "localStorage", {
-            value: localStorageMock,
-        });
+    fireEvent.mouseDown(getByRole('button'))
+    act(() => {
+      getAllByRole('option')[1].click()
+    })
 
-        const {getByTestId} = render( // actually give translation to your component
-            <I18nextProvider i18n={i18next}> // actually give translation to your component
-                <DropdownLanguage/>
-            </I18nextProvider>
-        );
+    expect(localStorageMock_withSetError.setItem).toHaveBeenCalledWith('i18nextLng', 'en')
+    expect(localConsole.error).toHaveBeenCalledWith(
+      'The language could not be changed. Error Message: Error: Error'
+    )
+  })
 
-        const selectElement = getByTestId("LanguageDropdown");
+  test('dropdown can be set to english', () => {
+    const localStorageMock = {
+      getItem: jest.fn().mockImplementation((key) => {
+        if (key === 'i18nextLng') {
+          return 'de'
+        }
+        return null
+      }),
+      setItem: jest.fn().mockImplementation((key) => {
+        return key
+      })
+    }
 
-        fireEvent.change(selectElement, { target: { value: 'en' } });
-    });
+    // Replace the real localStorage object with our mock object
+    Object.defineProperty(global, 'localStorage', {
+      value: localStorageMock
+    })
 
-    test("dropdown can be set to german", () => {
+    const { getByTestId } = render(
+      // actually give translation to your component
+      <I18nextProvider i18n={i18next}>
+        <DropdownLanguage />
+      </I18nextProvider>
+    )
 
-        const localStorageMock = {
-            getItem: jest.fn().mockImplementation((key) => {
-                if(key === "i18nextLng"){
-                    return "de";
-                }
-                return null;
-            }),
-            setItem: jest.fn().mockImplementation((key) => {
-                return key;
-            }),
-        };
+    const selectElement = getByTestId('LanguageDropdown')
 
-// Replace the real localStorage object with our mock object
-        Object.defineProperty(global, "localStorage", {
-            value: localStorageMock,
-        });
+    fireEvent.change(selectElement, { target: { value: 'en' } })
+  })
 
-        const {getByRole, getByTestId} = render(<I18nextProvider i18n={i18next}> // actually give translation to your component
-            <DropdownLanguage/>
-        </I18nextProvider>);
+  test('dropdown can be set to german', () => {
+    const localStorageMock = {
+      getItem: jest.fn().mockImplementation((key) => {
+        if (key === 'i18nextLng') {
+          return 'de'
+        }
+        return null
+      }),
+      setItem: jest.fn().mockImplementation((key) => {
+        return key
+      })
+    }
 
-        const selectElement = getByTestId("LanguageDropdown");
+    // Replace the real localStorage object with our mock object
+    Object.defineProperty(global, 'localStorage', {
+      value: localStorageMock
+    })
+    // actually give translation to your component
+    const { getByRole, getByTestId } = render(
+      <I18nextProvider i18n={i18next}>
+        {' '}
+        <DropdownLanguage />
+      </I18nextProvider>
+    )
 
-        fireEvent.change(selectElement, { target: { value: 'de' } });
+    const selectElement = getByTestId('LanguageDropdown')
 
-        expect(getByRole("button")).toHaveTextContent(/Deutsch/i);
-    });
+    fireEvent.change(selectElement, { target: { value: 'de' } })
 
+    expect(getByRole('button')).toHaveTextContent(/Deutsch/i)
+  })
 
-    test("renders correctly", () => {
-        const tree = renderer
-            .create(
-                <DropdownLanguage />
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
-    });
-});
+  test('renders correctly', () => {
+    const tree = renderer.create(<DropdownLanguage />).toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+})
