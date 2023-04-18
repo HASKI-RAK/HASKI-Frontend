@@ -19,54 +19,30 @@ describe('Test GraphILS with all Methods', () => {
     expect(data.length).toBe(4)
 
     expect(data[0].possibleDimensions).toMatch(
-      'components.QuestionnaireResults.TableILS.Global' +
-        ' / ' +
-        'components.QuestionnaireResults.TableILS.Sequential'
+      'components.QuestionnaireResults.TableILS.Global' + ' / ' + 'components.QuestionnaireResults.TableILS.Sequential'
     )
     expect(data[1].possibleDimensions).toMatch(
-      'components.QuestionnaireResults.TableILS.Verbal' +
-        ' / ' +
-        'components.QuestionnaireResults.TableILS.Visual'
+      'components.QuestionnaireResults.TableILS.Verbal' + ' / ' + 'components.QuestionnaireResults.TableILS.Visual'
     )
     expect(data[2].possibleDimensions).toMatch(
-      'components.QuestionnaireResults.TableILS.Intuitive' +
-        ' / ' +
-        'components.QuestionnaireResults.TableILS.Sensory'
+      'components.QuestionnaireResults.TableILS.Intuitive' + ' / ' + 'components.QuestionnaireResults.TableILS.Sensory'
     )
     expect(data[3].possibleDimensions).toMatch(
-      'components.QuestionnaireResults.TableILS.Reflective' +
-        ' / ' +
-        'components.QuestionnaireResults.TableILS.Active'
+      'components.QuestionnaireResults.TableILS.Reflective' + ' / ' + 'components.QuestionnaireResults.TableILS.Active'
     )
   })
 
   test('GraphILS renders without crashing', () => {
     const graphILS = render(<GraphILS />)
 
-    expect(
-      graphILS.getByText('components.QuestionnaireResults.TableILS.Active')
-    ).toBeInTheDocument()
-    expect(
-      graphILS.getByText('components.QuestionnaireResults.TableILS.Reflective')
-    ).toBeInTheDocument()
-    expect(
-      graphILS.getByText('components.QuestionnaireResults.TableILS.Sensory')
-    ).toBeInTheDocument()
-    expect(
-      graphILS.getByText('components.QuestionnaireResults.TableILS.Intuitive')
-    ).toBeInTheDocument()
-    expect(
-      graphILS.getByText('components.QuestionnaireResults.TableILS.Visual')
-    ).toBeInTheDocument()
-    expect(
-      graphILS.getByText('components.QuestionnaireResults.TableILS.Verbal')
-    ).toBeInTheDocument()
-    expect(
-      graphILS.getByText('components.QuestionnaireResults.TableILS.Sequential')
-    ).toBeInTheDocument()
-    expect(
-      graphILS.getByText('components.QuestionnaireResults.TableILS.Global')
-    ).toBeInTheDocument()
+    expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Active')).toBeInTheDocument()
+    expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Reflective')).toBeInTheDocument()
+    expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Sensory')).toBeInTheDocument()
+    expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Intuitive')).toBeInTheDocument()
+    expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Visual')).toBeInTheDocument()
+    expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Verbal')).toBeInTheDocument()
+    expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Sequential')).toBeInTheDocument()
+    expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Global')).toBeInTheDocument()
 
     expect(graphILS).toMatchSnapshot()
   })

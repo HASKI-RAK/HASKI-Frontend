@@ -5,22 +5,13 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
-import {
-  StyledTableCell,
-  StyledTableCellWithoutBorder,
-  StyledTableRow
-} from './QuestionnaireTableStyle'
+import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireTableStyle'
 import { ILS } from '@core'
 
 const ils = new ILS()
 
 //Setting ILS-Parameters for tests
-export const setILSParameters = (
-  dimOne?: number,
-  dimTwo?: number,
-  dimThree?: number,
-  dimFour?: number
-) => {
+export const setILSParameters = (dimOne?: number, dimTwo?: number, dimThree?: number, dimFour?: number) => {
   ils.dimensionOneScore = dimOne ?? ils.dimensionOneScore
   ils.dimensionTwoScore = dimTwo ?? ils.dimensionTwoScore
   ils.dimensionThreeScore = dimThree ?? ils.dimensionThreeScore
@@ -30,20 +21,11 @@ export const setILSParameters = (
 export const getILSParameters = () => {
   setILSParameters()
 
-  return [
-    ils.dimensionOneScore,
-    ils.dimensionTwoScore,
-    ils.dimensionThreeScore,
-    ils.dimensionFourScore
-  ]
+  return [ils.dimensionOneScore, ils.dimensionTwoScore, ils.dimensionThreeScore, ils.dimensionFourScore]
 }
 
 //Returns the Interpretation of the ILS-Test (balanced, moderate, strong + Dimension (if score is not balanced))
-export const ILSInterpretation = (
-  score: number,
-  interpretationString: string,
-  onlyEnglish?: boolean
-): string => {
+export const ILSInterpretation = (score: number, interpretationString: string, onlyEnglish?: boolean): string => {
   const { t, i18n } = useTranslation()
 
   const inter = new Map<number, string>()
@@ -85,11 +67,7 @@ export const ILSInterpretation = (
 }
 
 //Depending on the score, return the corresponding dimension
-export const ILSDimension = (
-  dimensionNumber: number,
-  score: number,
-  onlyEnglish?: boolean
-): string => {
+export const ILSDimension = (dimensionNumber: number, score: number, onlyEnglish?: boolean): string => {
   const { t, i18n } = useTranslation()
 
   switch (dimensionNumber) {
@@ -136,8 +114,7 @@ export const ILSDimension = (
 
 export const TableILS = () => {
   const { t } = useTranslation()
-  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] =
-    getILSParameters()
+  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters()
 
   const rows = [
     {
@@ -165,20 +142,14 @@ export const TableILS = () => {
       id: 4,
       col1: t('components.QuestionnaireResults.TableILS.Verbal'),
       col2: t('components.QuestionnaireResults.TableILS.Visual'),
-      col3: ILSInterpretation(
-        dimensionThreeScore,
-        ILSDimension(3, dimensionThreeScore).toLowerCase()
-      ),
+      col3: ILSInterpretation(dimensionThreeScore, ILSDimension(3, dimensionThreeScore).toLowerCase()),
       col4: [dimensionThreeScore].toString()
     },
     {
       id: 5,
       col1: t('components.QuestionnaireResults.TableILS.Global'),
       col2: t('components.QuestionnaireResults.TableILS.Sequential'),
-      col3: ILSInterpretation(
-        dimensionFourScore,
-        ILSDimension(4, dimensionFourScore).toLowerCase()
-      ),
+      col3: ILSInterpretation(dimensionFourScore, ILSDimension(4, dimensionFourScore).toLowerCase()),
       col4: [dimensionFourScore].toString()
     }
   ]

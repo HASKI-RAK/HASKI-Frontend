@@ -135,11 +135,7 @@ const MenuBar = () => {
                   onClick={handleOpenTopicsMenu}
                   color="inherit"
                   endIcon={
-                    anchorElTopics ? (
-                      <ArrowDropDownIcon sx={{ transform: 'rotate(180deg)' }} />
-                    ) : (
-                      <ArrowDropDownIcon />
-                    )
+                    anchorElTopics ? <ArrowDropDownIcon sx={{ transform: 'rotate(180deg)' }} /> : <ArrowDropDownIcon />
                   }>
                   Topics
                 </Button>

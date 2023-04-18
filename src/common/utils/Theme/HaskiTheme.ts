@@ -14,8 +14,7 @@ export const defaultBehavior = {
 
 export const defaultFonts = {
   defaultFamily: 'din-round,sans-serif',
-  default:
-    '700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) din-round,sans-serif'
+  default: '700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) din-round,sans-serif'
 }
 
 export const defaultColors = {

@@ -4,9 +4,6 @@ type AuthProviderProps = {
   children: React.ReactNode
   useAuthProvider?: () => AuthContextType
 }
-export const AuthProvider = ({
-  useAuthProvider = _useAuthprovider,
-  ...props
-}: AuthProviderProps) => (
+export const AuthProvider = ({ useAuthProvider = _useAuthprovider, ...props }: AuthProviderProps) => (
   <AuthContext.Provider value={useAuthProvider()}>{props.children}</AuthContext.Provider>
 )

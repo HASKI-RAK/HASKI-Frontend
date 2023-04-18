@@ -18,8 +18,7 @@ describe('Test Authcontext', () => {
     }
     return (
       <>
-        context.isAuth ?<button onClick={changeIsAuth}>Test</button> :
-        <button onClick={changeIsAuth}>Test2</button>
+        context.isAuth ?<button onClick={changeIsAuth}>Test</button> :<button onClick={changeIsAuth}>Test2</button>
         <button onClick={context.logout}>Logout</button>
       </>
     )

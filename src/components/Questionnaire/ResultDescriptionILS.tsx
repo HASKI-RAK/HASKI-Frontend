@@ -9,8 +9,7 @@ type ResultDescriptionILSProps = {
 export const ResultDescriptionILS = ({ ILSdim = ILSDimension }: ResultDescriptionILSProps) => {
   const { t } = useTranslation()
 
-  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] =
-    getILSParameters()
+  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters()
 
   //active, reflective, sensory...etc, it´s mandatory in english because of internationalization name in .json file
   const dimensionOne = ILSdim(1, dimensionOneScore, true)
@@ -43,10 +42,7 @@ export const ResultDescriptionILS = ({ ILSdim = ILSDimension }: ResultDescriptio
       balancedDimensionsArray.push(dimensionArray[index] + '.' + interpretationArray[index])
     } else {
       unbalancedDimensionsArray.push(
-        <div
-          key={
-            'Dimension: ' + dimensionArray[index] + ' Interpretation: ' + interpretationArray[index]
-          }>
+        <div key={'Dimension: ' + dimensionArray[index] + ' Interpretation: ' + interpretationArray[index]}>
           <Typography variant="h6" gutterBottom>
             {t('components.QuestionnaireResults.TableILS.' + dimensionArray[index])}
           </Typography>
@@ -82,51 +78,35 @@ export const ResultDescriptionILS = ({ ILSdim = ILSDimension }: ResultDescriptio
         switch (balancedDimensionsArray[dim]) {
           case 'Active.balanced':
             balancedDimensionsKeyWordString +=
-              t(
-                'components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing'
-              ) + ' & '
+              t('components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing') + ' & '
             break
           case 'Reflective.balanced':
             balancedDimensionsKeyWordString +=
-              t(
-                'components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing'
-              ) + ' & '
+              t('components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing') + ' & '
             break
           case 'Sensory.balanced':
             balancedDimensionsKeyWordString +=
-              t(
-                'components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception'
-              ) + ' & '
+              t('components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception') + ' & '
             break
           case 'Intuitive.balanced':
             balancedDimensionsKeyWordString +=
-              t(
-                'components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception'
-              ) + ' & '
+              t('components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception') + ' & '
             break
           case 'Verbal.balanced':
             balancedDimensionsKeyWordString +=
-              t(
-                'components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation'
-              ) + ' & '
+              t('components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation') + ' & '
             break
           case 'Visual.balanced':
             balancedDimensionsKeyWordString +=
-              t(
-                'components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation'
-              ) + ' & '
+              t('components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation') + ' & '
             break
           case 'Sequential.balanced':
             balancedDimensionsKeyWordString +=
-              t(
-                'components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation'
-              ) + ' & '
+              t('components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation') + ' & '
             break
           case 'Global.balanced':
             balancedDimensionsKeyWordString +=
-              t(
-                'components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation'
-              ) + ' & '
+              t('components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation') + ' & '
             break
           default:
             break
@@ -142,10 +122,7 @@ export const ResultDescriptionILS = ({ ILSdim = ILSDimension }: ResultDescriptio
       balancedDimensionsInterpretationString =
         t('components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part1') +
         ' ' +
-        t(
-          'components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.' +
-            balancedDimensionsArray.length
-        ) +
+        t('components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.' + balancedDimensionsArray.length) +
         ' ' +
         t('components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part2') +
         ' ' +

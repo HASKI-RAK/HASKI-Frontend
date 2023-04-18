@@ -56,8 +56,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
   const handleClickShowPassword = () => setShowPassword(!showPassword)
 
   // Application logic hooks
-  const { username, password, setUsername, setPassword, submit, validate, loginMoodle } =
-    useLoginForm()
+  const { username, password, setUsername, setPassword, submit, validate, loginMoodle } = useLoginForm()
 
   // Props destructuring
   const {
@@ -76,15 +75,11 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
     setPasswordHasError(!passwordIsValid)
     if (usernameIsValid && passwordIsValid) onSubmit(username, password)
   }
-  const usernameChangeHandler = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
+  const usernameChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setUsername(event.target.value)
   }
 
-  const passwordChangeHandler = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
+  const passwordChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setPassword(event.target.value)
   }
 
@@ -123,9 +118,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}>
+                  <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword}>
                     {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>

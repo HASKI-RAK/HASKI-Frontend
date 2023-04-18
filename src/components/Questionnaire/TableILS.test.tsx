@@ -36,40 +36,18 @@ describe('Test TableILS with all Methods', () => {
   test('Table values are correct', () => {
     const { getAllByRole } = render(<TableILS />)
 
-    expect(getAllByRole('columnheader')[0]).toHaveTextContent(
-      'components.QuestionnaireResults.TableILS.Dimension'
-    )
+    expect(getAllByRole('columnheader')[0]).toHaveTextContent('components.QuestionnaireResults.TableILS.Dimension')
     expect(getAllByRole('columnheader')[1]).toHaveTextContent('')
-    expect(getAllByRole('columnheader')[2]).toHaveTextContent(
-      'components.QuestionnaireResults.TableILS.Interpretation'
-    )
-    expect(getAllByRole('columnheader')[3]).toHaveTextContent(
-      'components.QuestionnaireResults.TableILS.Score'
-    )
-    expect(getAllByRole('cell')[1]).toHaveTextContent(
-      'components.QuestionnaireResults.TableILS.Active'
-    )
-    expect(getAllByRole('cell')[0]).toHaveTextContent(
-      'components.QuestionnaireResults.TableILS.Reflective'
-    )
-    expect(getAllByRole('cell')[5]).toHaveTextContent(
-      'components.QuestionnaireResults.TableILS.Sensory'
-    )
-    expect(getAllByRole('cell')[4]).toHaveTextContent(
-      'components.QuestionnaireResults.TableILS.Intuitive'
-    )
-    expect(getAllByRole('cell')[9]).toHaveTextContent(
-      'components.QuestionnaireResults.TableILS.Visual'
-    )
-    expect(getAllByRole('cell')[8]).toHaveTextContent(
-      'components.QuestionnaireResults.TableILS.Verbal'
-    )
-    expect(getAllByRole('cell')[13]).toHaveTextContent(
-      'components.QuestionnaireResults.TableILS.Sequential'
-    )
-    expect(getAllByRole('cell')[12]).toHaveTextContent(
-      'components.QuestionnaireResults.TableILS.Global'
-    )
+    expect(getAllByRole('columnheader')[2]).toHaveTextContent('components.QuestionnaireResults.TableILS.Interpretation')
+    expect(getAllByRole('columnheader')[3]).toHaveTextContent('components.QuestionnaireResults.TableILS.Score')
+    expect(getAllByRole('cell')[1]).toHaveTextContent('components.QuestionnaireResults.TableILS.Active')
+    expect(getAllByRole('cell')[0]).toHaveTextContent('components.QuestionnaireResults.TableILS.Reflective')
+    expect(getAllByRole('cell')[5]).toHaveTextContent('components.QuestionnaireResults.TableILS.Sensory')
+    expect(getAllByRole('cell')[4]).toHaveTextContent('components.QuestionnaireResults.TableILS.Intuitive')
+    expect(getAllByRole('cell')[9]).toHaveTextContent('components.QuestionnaireResults.TableILS.Visual')
+    expect(getAllByRole('cell')[8]).toHaveTextContent('components.QuestionnaireResults.TableILS.Verbal')
+    expect(getAllByRole('cell')[13]).toHaveTextContent('components.QuestionnaireResults.TableILS.Sequential')
+    expect(getAllByRole('cell')[12]).toHaveTextContent('components.QuestionnaireResults.TableILS.Global')
   })
 
   test('Dimension interpretation is correct', () => {
@@ -140,9 +118,7 @@ describe('Test TableILS with all Methods', () => {
     expect(ILSInterpretation(9, 'components.QuestionnaireResults.TableILS.Reflective', true)).toBe(
       'components.QuestionnaireResults.TableILS.strong components.QuestionnaireResults.TableILS.Reflective'
     )
-    expect(
-      ILSInterpretation(-11, 'components.QuestionnaireResults.TableILS.Reflective', true)
-    ).toBe(
+    expect(ILSInterpretation(-11, 'components.QuestionnaireResults.TableILS.Reflective', true)).toBe(
       'components.QuestionnaireResults.TableILS.strong components.QuestionnaireResults.TableILS.Reflective'
     )
     expect(ILSInterpretation(11, 'components.QuestionnaireResults.TableILS.Reflective', true)).toBe(

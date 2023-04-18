@@ -79,8 +79,7 @@ const useGeneralSubscalesBelow3Element = (generalProps: GeneralSubscalesProps): 
   return (
     <div key={'GeneralDescriptionListK'}>
       <Typography variant="h6" gutterBottom>
-        {t('components.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Title')}{' '}
-        <br />
+        {t('components.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Title')} <br />
       </Typography>
       <Typography variant="body2" gutterBottom>
         {t('components.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Description')}
@@ -101,35 +100,27 @@ const useCognitiveStrategiesBelow3Element = (generalProps: CognitiveStrategiesPr
 
   if (generalProps.organize < 3) {
     cognitiveStrategiesBelow3Array.push('Organize')
-    cognitiveStrategiesBelow3String +=
-      ' ' + t('components.QuestionnaireResults.TableListK.Organize') + ' &'
+    cognitiveStrategiesBelow3String += ' ' + t('components.QuestionnaireResults.TableListK.Organize') + ' &'
   }
   if (generalProps.elaborate < 3) {
     cognitiveStrategiesBelow3Array.push('Elaborate')
-    cognitiveStrategiesBelow3String +=
-      ' ' + t('components.QuestionnaireResults.TableListK.Elaborate') + ' &'
+    cognitiveStrategiesBelow3String += ' ' + t('components.QuestionnaireResults.TableListK.Elaborate') + ' &'
   }
   if (generalProps.criticalReview < 3) {
     cognitiveStrategiesBelow3Array.push('Critical review')
-    cognitiveStrategiesBelow3String +=
-      ' ' + t('components.QuestionnaireResults.TableListK.Critical review') + ' &'
+    cognitiveStrategiesBelow3String += ' ' + t('components.QuestionnaireResults.TableListK.Critical review') + ' &'
   }
   if (generalProps.repeat < 3) {
     cognitiveStrategiesBelow3Array.push('Repeat')
-    cognitiveStrategiesBelow3String +=
-      ' ' + t('components.QuestionnaireResults.TableListK.Repeat') + ' &'
+    cognitiveStrategiesBelow3String += ' ' + t('components.QuestionnaireResults.TableListK.Repeat') + ' &'
   }
 
   //Remove last " & "
-  cognitiveStrategiesBelow3String = cognitiveStrategiesBelow3String.slice(
-    0,
-    cognitiveStrategiesBelow3String.length - 2
-  )
+  cognitiveStrategiesBelow3String = cognitiveStrategiesBelow3String.slice(0, cognitiveStrategiesBelow3String.length - 2)
 
   if (cognitiveStrategiesBelow3Array.length > 0) {
     cognitiveStrategiesBelow3String +=
-      ' ' +
-      t('components.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part2')
+      ' ' + t('components.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part2')
     cognitiveStrategiesBelow3Html.push(
       <div key={'CognitiveStrategiesDescriptionListK'}>
         <Typography variant={'h6'} gutterBottom>
@@ -145,9 +136,7 @@ const useCognitiveStrategiesBelow3Element = (generalProps: CognitiveStrategiesPr
   return cognitiveStrategiesBelow3Html
 }
 
-const useMetacognitiveStrategiesBelow3Element = (
-  metacognitiveProps: MetaCognitiveStrategiesProps
-) => {
+const useMetacognitiveStrategiesBelow3Element = (metacognitiveProps: MetaCognitiveStrategiesProps) => {
   const { t } = useTranslation()
 
   let metacognitiveStrategiesBelow3String = t(
@@ -160,24 +149,17 @@ const useMetacognitiveStrategiesBelow3Element = (
     metacognitiveStrategiesBelow3Array.push('Goals and plans')
     metacognitiveStrategiesBelow3String +=
       ' ' +
-      t(
-        'components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Goals & Plans'
-      ) +
+      t('components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Goals & Plans') +
       ' &'
   }
   if (metacognitiveProps.control < 3) {
     metacognitiveStrategiesBelow3Array.push('Control')
-    metacognitiveStrategiesBelow3String +=
-      ' ' + t('components.QuestionnaireResults.TableListK.Control') + ' &'
+    metacognitiveStrategiesBelow3String += ' ' + t('components.QuestionnaireResults.TableListK.Control') + ' &'
   }
   if (metacognitiveProps.regulate < 3) {
     metacognitiveStrategiesBelow3Array.push('Regulate')
     metacognitiveStrategiesBelow3String +=
-      ' ' +
-      t(
-        'components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Regulate'
-      ) +
-      ' &'
+      ' ' + t('components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Regulate') + ' &'
   }
 
   //Remove last " & "
@@ -204,9 +186,7 @@ const useMetacognitiveStrategiesBelow3Element = (
 }
 
 //relevant subscales are: attention, time, learning with classmates, literature research and learning environment
-const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: {
-  [key: string]: number
-}): JSX.Element[] => {
+const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: { [key: string]: number }): JSX.Element[] => {
   const { t } = useTranslation()
   const subscalesBelow3Array = []
   const subscalesBelow3MessageString = []
@@ -221,16 +201,15 @@ const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: {
   //If there are any relevant subScales below 3, the if-statement is created
   if (subscalesBelow3Array.length > 0) {
     //remove last " && "
-    subscalesBelow3Array[subscalesBelow3Array.length - 1] = subscalesBelow3Array[
-      subscalesBelow3Array.length - 1
-    ].slice(0, subscalesBelow3Array[subscalesBelow3Array.length - 1].length - 4)
+    subscalesBelow3Array[subscalesBelow3Array.length - 1] = subscalesBelow3Array[subscalesBelow3Array.length - 1].slice(
+      0,
+      subscalesBelow3Array[subscalesBelow3Array.length - 1].length - 4
+    )
     subscalesBelow3MessageString.push(
       <div key={'RelevantSubscalesBelow3DescriptionListK'}>
         <Typography variant={'h6'} gutterBottom>
           {t(
-            'components.QuestionnaireResults.ResultDescriptionListK.' +
-              subscalesBelow3Array.join('') +
-              ' Below3.Title'
+            'components.QuestionnaireResults.ResultDescriptionListK.' + subscalesBelow3Array.join('') + ' Below3.Title'
           )}
         </Typography>
         <Typography variant="body2" gutterBottom>

@@ -1,8 +1,4 @@
-import {
-  DefaultBox as Box,
-  DefaultDivider as Divider,
-  DefaultTypography as Typography
-} from '@common/components'
+import { DefaultBox as Box, DefaultDivider as Divider, DefaultTypography as Typography } from '@common/components'
 /**
  * Local navigation component for the main frame.
  * @remarks

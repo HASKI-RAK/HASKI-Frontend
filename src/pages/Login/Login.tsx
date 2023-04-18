@@ -37,15 +37,7 @@ export const Login = ({ useLogin = _useLogin }: LoginProps) => {
   const { onSubmit, onMoodleLogin } = useLogin({ setIsLoading, nonce })
 
   if (nonce) return <Skeleton />
-  else
-    return (
-      <LoginForm
-        onSubmit={onSubmit}
-        isLoading={isLoading}
-        moodleLogin
-        onMoodleLogin={onMoodleLogin}
-      />
-    )
+  else return <LoginForm onSubmit={onSubmit} isLoading={isLoading} moodleLogin onMoodleLogin={onMoodleLogin} />
 }
 
 export default Login

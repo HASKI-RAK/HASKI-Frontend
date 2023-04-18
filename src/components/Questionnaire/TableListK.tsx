@@ -5,11 +5,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
-import {
-  StyledTableCell,
-  StyledTableCellWithoutBorder,
-  StyledTableRow
-} from './QuestionnaireTableStyle'
+import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireTableStyle'
 import { ListK } from '@core'
 
 const listK = new ListK()
@@ -28,8 +24,7 @@ StyledTableRowListK.defaultProps = {
   }
 }
 
-export const getSubscaleScore = (score: number[]): number =>
-  score.reduce((a, b) => a + b, 0) / score.length
+export const getSubscaleScore = (score: number[]): number => score.reduce((a, b) => a + b, 0) / score.length
 
 //Setting ILSparameters for tests
 export const setListKParameters = (
@@ -93,16 +88,8 @@ export const getListKParameters = (): [
     listK.criticalReview,
     listK.repeat
   ])
-  const averageInternalResourceManagementStrategies = getSubscaleScore([
-    listK.attention,
-    listK.effort,
-    listK.time
-  ])
-  const averageMetacognitiveStrategies = getSubscaleScore([
-    listK.goalsPlans,
-    listK.control,
-    listK.regulate
-  ])
+  const averageInternalResourceManagementStrategies = getSubscaleScore([listK.attention, listK.effort, listK.time])
+  const averageMetacognitiveStrategies = getSubscaleScore([listK.goalsPlans, listK.control, listK.regulate])
   const averageExternalResourcesManagementStrategies = getSubscaleScore([
     listK.learnWithClassmates,
     listK.literatureResearch,
@@ -172,9 +159,7 @@ export const TableListK = () => {
       col1: t('components.QuestionnaireResults.TableListK.Cognitive strategies'),
       col2: (Math.round((averageCognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
       col3: t('components.QuestionnaireResults.TableListK.Internal resource management strategies'),
-      col4: (
-        Math.round((averageInternalResourceManagementStrategies + Number.EPSILON) * 100) / 100
-      ).toFixed(2)
+      col4: (Math.round((averageInternalResourceManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2)
     },
     {
       id: 3,
@@ -209,9 +194,7 @@ export const TableListK = () => {
       col1: t('components.QuestionnaireResults.TableListK.Metacognitive strategies'),
       col2: (Math.round((averageMetacognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
       col3: t('components.QuestionnaireResults.TableListK.External resource management strategies'),
-      col4: (
-        Math.round((averageExternalResourcesManagementStrategies + Number.EPSILON) * 100) / 100
-      ).toFixed(2)
+      col4: (Math.round((averageExternalResourcesManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2)
     },
     {
       id: 8,

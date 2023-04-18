@@ -7,8 +7,7 @@ import { useTheme } from '@mui/material'
 // The naming of the Key "possibleDimensions" is not important, as it is not used in the Graph, just for indexing
 export const useData = (): { possibleDimensions: string; [Dimension: string]: string }[] => {
   const { t } = useTranslation()
-  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] =
-    getILSParameters()
+  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters()
 
   return [
     {

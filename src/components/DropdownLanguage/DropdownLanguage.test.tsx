@@ -50,9 +50,7 @@ describe('Test the change-language dropdown component', () => {
     })
 
     expect(localStorageMock_withSetError.setItem).toHaveBeenCalledWith('i18nextLng', 'en')
-    expect(localConsole.error).toHaveBeenCalledWith(
-      'The language could not be changed. Error Message: Error: Error'
-    )
+    expect(localConsole.error).toHaveBeenCalledWith('The language could not be changed. Error Message: Error: Error')
   })
 
   test('dropdown can be set to english', () => {

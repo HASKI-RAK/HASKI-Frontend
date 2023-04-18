@@ -29,52 +29,40 @@ describe('Test ResultDescriptionListK with all Methods', () => {
   })
 
   test('Modal opens', async () => {
-    const { getByTestId } = render(
-      <QuestionnaireResultsModal open={true} handleClose={() => false} />
-    )
+    const { getByTestId } = render(<QuestionnaireResultsModal open={true} handleClose={() => false} />)
 
     expect(getByTestId('ILS and ListK Modal')).toBeInTheDocument()
   })
 
   test('Active Step ILS is shown', async () => {
-    const { getByTestId } = render(
-      <QuestionnaireResultsModal open={true} handleClose={() => false} />
-    )
+    const { getByTestId } = render(<QuestionnaireResultsModal open={true} handleClose={() => false} />)
 
     expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
   })
 
   test('Active Step List-K is shown', async () => {
-    const { getByTestId } = render(
-      <QuestionnaireResultsModal open={true} handleClose={() => false} />
-    )
+    const { getByTestId } = render(<QuestionnaireResultsModal open={true} handleClose={() => false} />)
 
     fireEvent.click(getByTestId('nextButton'))
     expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
   })
 
   test('Active Step List-K is shown', async () => {
-    const { getByTestId, getByText } = render(
-      <QuestionnaireResultsModal open={true} handleClose={() => false} />
-    )
+    const { getByTestId, getByText } = render(<QuestionnaireResultsModal open={true} handleClose={() => false} />)
 
     fireEvent.click(getByText('components.QuestionnaireResults.ResultDescriptionILS.ILSResults'))
     expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
   })
 
   test('Active Step List-K is shown', async () => {
-    const { getByTestId, getByText } = render(
-      <QuestionnaireResultsModal open={true} handleClose={() => false} />
-    )
+    const { getByTestId, getByText } = render(<QuestionnaireResultsModal open={true} handleClose={() => false} />)
 
     fireEvent.click(getByText('components.QuestionnaireResults.ResultDescriptionILS.ListKResults'))
     expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
   })
 
   test('Next and Back button work', async () => {
-    const { getByTestId } = render(
-      <QuestionnaireResultsModal open={true} handleClose={() => false} />
-    )
+    const { getByTestId } = render(<QuestionnaireResultsModal open={true} handleClose={() => false} />)
 
     fireEvent.click(getByTestId('nextButton'))
     expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
@@ -92,9 +80,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
   test('close button works', async () => {
     const handleClose = jest.fn()
 
-    const { getByTestId } = render(
-      <QuestionnaireResultsModal open={true} handleClose={handleClose} />
-    )
+    const { getByTestId } = render(<QuestionnaireResultsModal open={true} handleClose={handleClose} />)
 
     expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
     const closeButton = getByTestId('QuestionnaireResultsCloseButton')

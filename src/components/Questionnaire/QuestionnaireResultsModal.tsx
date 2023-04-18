@@ -43,10 +43,7 @@ type QuestionnaireResultsModalProps = {
   handleClose?: () => void
 }
 
-export const QuestionnaireResultsModal = ({
-  open = false,
-  handleClose
-}: QuestionnaireResultsModalProps) => {
+export const QuestionnaireResultsModal = ({ open = false, handleClose }: QuestionnaireResultsModalProps) => {
   const { t } = useTranslation()
 
   const steps = [
@@ -94,11 +91,7 @@ export const QuestionnaireResultsModal = ({
                 <>
                   {activeStep === 0 ? (
                     <div data-testid={'ActiveStepILS'}>
-                      <Stack
-                        direction="column"
-                        justifyContent="space-between"
-                        alignItems="stretch"
-                        m={2}>
+                      <Stack direction="column" justifyContent="space-between" alignItems="stretch" m={2}>
                         <div>
                           <Stack direction="row" justifyContent="space-between" alignItems="center">
                             <GraphILS />
@@ -112,11 +105,7 @@ export const QuestionnaireResultsModal = ({
                     </div>
                   ) : (
                     <div data-testid={'ActiveStepListK'}>
-                      <Stack
-                        direction="column"
-                        justifyContent="space-between"
-                        alignItems="stretch"
-                        m={2}>
+                      <Stack direction="column" justifyContent="space-between" alignItems="stretch" m={2}>
                         <div>
                           <Stack direction="row" justifyContent="space-between" alignItems="center">
                             <GraphListK />

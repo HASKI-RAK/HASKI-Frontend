@@ -12,8 +12,7 @@ export const defaultBehavior = {
 
 export const defaultFonts = {
   defaultFamily: 'din-round,sans-serif',
-  default:
-    '700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) din-round,sans-serif'
+  default: '700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) din-round,sans-serif'
 }
 export const defaultColors = {
   primary: {
@@ -63,9 +62,7 @@ export const Theme = createTheme({
         root: {
           // Some CSS
           color: defaultColors.lightgrey,
-          font:
-            '700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) ' +
-            defaultFonts.default,
+          font: '700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) ' + defaultFonts.default,
           background: 'none',
           border: defaultBehavior.border.default + defaultColors.lightgrey,
           borderRadius: '1rem',

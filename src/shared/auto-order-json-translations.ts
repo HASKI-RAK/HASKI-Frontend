@@ -17,15 +17,11 @@ const orderTranslationFile = (translationObject, translationPath) => {
       ordered[key] = translationObject[key]
     })
 
-  fs.writeFile(
-    path.resolve(__dirname, translationPath),
-    JSON.stringify(ordered, null, '\t'),
-    (err) => {
-      if (err) {
-        throw err
-      }
+  fs.writeFile(path.resolve(__dirname, translationPath), JSON.stringify(ordered, null, '\t'), (err) => {
+    if (err) {
+      throw err
     }
-  )
+  })
   return ''
 }
 

@@ -56,8 +56,8 @@ export const ThemePresentation = () => {
           Theme Presentation
         </Typography>
         <Typography variant="body1" gutterBottom>
-          This site demonstrates the individual elements used in the HASKI UI. It serves as a
-          reference, as well as a documentation.
+          This site demonstrates the individual elements used in the HASKI UI. It serves as a reference, as well as a
+          documentation.
         </Typography>
         <Typography variant="h4" component="div" gutterBottom>
           Buttons
