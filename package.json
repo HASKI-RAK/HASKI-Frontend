@@ -34,6 +34,7 @@
     "prop-types": "15.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "reactflow": "^11.7.0",
     "react-i18next": "^12.1.1",
     "react-router-dom": "^6.4.2",
     "resize-observer-polyfill": "^1.5.1",

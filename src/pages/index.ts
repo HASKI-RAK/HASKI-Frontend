@@ -7,4 +7,5 @@ import Login from "./Login/Login";
 import ThemePresentation from "./ThemePresentation/ThemePresentation";
 import Dashboard from "./Dashboard/Dashboard";
 import MainFrame from "./MainFrame/MainFrame";
-export { MainFrame, App, ThemePresentation, Home, Login, Dashboard };
+import Topic from "./Topic/Topic";
+export { MainFrame, App, ThemePresentation, Home, Login, Dashboard, Topic };
