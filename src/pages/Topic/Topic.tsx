@@ -1,8 +1,9 @@
+import { TopicLearningElements, LearningElement } from "@core/*";
 import { Box, Card, Modal } from "@mui/material";
 import log from "loglevel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
+import { useSearchParams } from "react-router-dom";
 const style = {
   position: "absolute",
   top: "25%",
@@ -63,7 +64,78 @@ const IframeModal = ({
     </Modal>
   );
 };
-export const Topic = (): JSX.Element => {
+const learning_path: TopicLearningElements[] = [
+  {
+    position: 1,
+    learning_element: {
+      id: 1,
+      lms_id: 1,
+      activity_type: "Quiz",
+      classification: "RQ",
+      name: "Test Learning Element 1",
+      done: false,
+      done_at: "2017-07-21T17:32:28Z",
+      nr_of_visits: 3,
+      last_visit: "2017-07-21T17:32:28Z",
+      time_spend: 123.45,
+      is_recommended: true,
+    },
+  },
+  {
+    position: 2,
+    learning_element: {
+      id: 2,
+      lms_id: 5,
+      activity_type: "Quiz",
+      classification: "RQ",
+      name: "Test Learning Element 5",
+      done: false,
+      done_at: "2017-07-21T17:32:28Z",
+      nr_of_visits: 0,
+      last_visit: "2017-07-21T17:32:28Z",
+      time_spend: 123.45,
+      is_recommended: true,
+    },
+  },
+  {
+    position: 2,
+    learning_element: {
+      id: 2,
+      lms_id: 3,
+      activity_type: "Quiz",
+      classification: "RQ",
+      name: "Test Learning Element 3",
+      done: false,
+      done_at: "2017-07-21T17:32:28Z",
+      nr_of_visits: 20,
+      last_visit: "2017-07-21T17:32:28Z",
+      time_spend: 1000,
+      is_recommended: true,
+    },
+  },
+];
+const _useTopic = () => {
+  const [learning_path, setLearningPath] = useState([]);
+  const [searchParams] = useSearchParams();
+  const topic = searchParams.get("topic");
+
+  useEffect(() => {
+    if (topic) {
+      // request to backend to get learning path for topic
+      alert("Topic: " + topic);
+      const lp = map_TopicLearningElements_to_reactflow(learning_path);
+      setLearningPath(lp);
+    }
+  }, [topic]);
+
+  return { topic };
+};
+
+type TopicProps = {
+  useTopic?: typeof _useTopic;
+};
+
+export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
@@ -97,3 +169,10 @@ export const Topic = (): JSX.Element => {
 };
 
 export default Topic;
+
+const map_TopicLearningElements_to_reactflow = (
+  learning_path: TopicLearningElements[]
+) => {
+  alert("map_TopicLearningElements_to_reactflow");
+  return learning_path.map((item) => item.learning_element);
+};
