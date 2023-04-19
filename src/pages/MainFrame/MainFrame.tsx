@@ -42,7 +42,7 @@ const MainFrame = () => (
         </Grid>
         <Grid item xs={8}>
           {/**💉 Pages get injected here through App routing */}
-          <Container>
+          <Container maxWidth="lg" sx={{ height: '100%' }}>
             <Outlet />
           </Container>
         </Grid>
