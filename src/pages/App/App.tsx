@@ -5,7 +5,7 @@ import { AuthProvider } from "@services";
 import { logBuffer } from "@shared";
 import { Theme } from "@utils";
 
-logBuffer();
+logBuffer()
 
 /**
  * App component.
@@ -35,5 +35,5 @@ const App = () => (
       </Router>
     </AuthProvider>
   </ThemeProvider>
-);
-export default App;
+)
+export default App

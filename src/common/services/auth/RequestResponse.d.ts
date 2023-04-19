@@ -1,4 +1,4 @@
 export type RequestResponse = {
-  status: number;
-  message: string;
-};
+  status: number
+  message: string
+}

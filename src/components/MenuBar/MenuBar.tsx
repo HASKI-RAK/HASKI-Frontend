@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   DefaultAppBar as AppBar,
   DefaultToolbar as Toolbar,
@@ -14,43 +14,43 @@ import {
   DefaultButton as Button,
   DefaultPopover as Popover,
   DefaultLink as Link,
-  DefaultDivider as Divider,
-} from "@common/components";
-import SettingsIcon from "@mui/icons-material/Settings";
-import HelpIcon from "@mui/icons-material/Help";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { useTranslation } from "react-i18next";
+  DefaultDivider as Divider
+} from '@common/components'
+import SettingsIcon from '@mui/icons-material/Settings'
+import HelpIcon from '@mui/icons-material/Help'
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+import { useTranslation } from 'react-i18next'
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 const topics = [
   {
-    name: "Design patterns",
+    name: 'Design patterns',
     subtopics: [
-      "Adapter",
-      "Builder",
-      "Command",
-      "Facade",
-      "Compositum",
-      "Singleton",
-      "Strategy",
-      "Template method",
-      "State",
-    ],
+      'Adapter',
+      'Builder',
+      'Command',
+      'Facade',
+      'Compositum',
+      'Singleton',
+      'Strategy',
+      'Template method',
+      'State'
+    ]
   },
   {
-    name: "Metrics",
+    name: 'Metrics',
     subtopics: [
-      "Cyclomatic complexity",
-      "Cohesion",
-      "Coupling",
-      "Halstead complexity",
-      "Lines of code",
-      "Nesting depth",
-      "Size",
-      "Weighted methods per class",
-    ],
-  },
-];
+      'Cyclomatic complexity',
+      'Cohesion',
+      'Coupling',
+      'Halstead complexity',
+      'Lines of code',
+      'Nesting depth',
+      'Size',
+      'Weighted methods per class'
+    ]
+  }
+]
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -64,30 +64,28 @@ const topics = [
  */
 const MenuBar = () => {
   // UX Logic
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
+  const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
 
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
+    setAnchorElUser(event.currentTarget)
+  }
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+    setAnchorElUser(null)
+  }
 
   const handleOpenTopicsMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElTopics(event.currentTarget);
-  };
+    setAnchorElTopics(event.currentTarget)
+  }
 
   const handleCloseTopicsMenu = () => {
-    setAnchorElTopics(null);
-  };
+    setAnchorElTopics(null)
+  }
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <AppBar position="static">
       <Toolbar disableGutters>
@@ -97,23 +95,22 @@ const MenuBar = () => {
             mt: 2,
             mb: 2,
             ml: { xs: 1, md: 2 },
-            display: { xs: "none", md: "flex" },
+            display: { xs: 'none', md: 'flex' },
             maxHeight: { xs: 20, md: 50 },
-            maxWidth: { xs: 20, md: 50 },
+            maxWidth: { xs: 20, md: 50 }
           }}
           alt="HASKI Home"
           src="/LogoPng.png"
-          onClick={() => navigate("/")}
+          onClick={() => navigate('/')}
         />
-        <Box sx={{ flexGrow: 1, textAlign: "center", display: "flex" }}>
+        <Box sx={{ flexGrow: 1, textAlign: 'center', display: 'flex' }}>
           <Box
             sx={{
               flexGrow: 1,
-              alignItems: "center",
-              textAlign: "center",
-              display: { xs: "none", md: "flex" },
-            }}
-          >
+              alignItems: 'center',
+              textAlign: 'center',
+              display: { xs: 'none', md: 'flex' }
+            }}>
             <Typography
               variant="h6"
               noWrap
@@ -121,14 +118,13 @@ const MenuBar = () => {
               sx={{
                 mr: 2,
                 ml: 2,
-                fontFamily: "monospace",
+                fontFamily: 'monospace',
                 fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none'
               }}
-              onClick={() => navigate("/")}
-            >
+              onClick={() => navigate('/')}>
               HASKI
             </Typography>
             <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
@@ -139,13 +135,8 @@ const MenuBar = () => {
                   onClick={handleOpenTopicsMenu}
                   color="inherit"
                   endIcon={
-                    anchorElTopics ? (
-                      <ArrowDropDownIcon sx={{ transform: "rotate(180deg)" }} />
-                    ) : (
-                      <ArrowDropDownIcon />
-                    )
-                  }
-                >
+                    anchorElTopics ? <ArrowDropDownIcon sx={{ transform: 'rotate(180deg)' }} /> : <ArrowDropDownIcon />
+                  }>
                   Topics
                 </Button>
               </Tooltip>
@@ -153,16 +144,15 @@ const MenuBar = () => {
                 id="menu-appbar"
                 anchorEl={anchorElTopics}
                 anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
+                  vertical: 'bottom',
+                  horizontal: 'left'
                 }}
                 transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
+                  vertical: 'top',
+                  horizontal: 'left'
                 }}
                 open={Boolean(anchorElTopics)}
-                onClose={handleCloseTopicsMenu}
-              >
+                onClose={handleCloseTopicsMenu}>
                 <Box sx={{ p: 2 }}>
                   <Grid container direction="column-reverse" spacing={2}>
                     {topics.map((topic) => (
@@ -171,12 +161,11 @@ const MenuBar = () => {
                           <Typography variant="h6">{topic.name}</Typography>
                           <Box
                             sx={{
-                              display: "flex",
-                              flexDirection: "row",
-                              flexWrap: "wrap",
-                              justifyContent: "start",
-                            }}
-                          >
+                              display: 'flex',
+                              flexDirection: 'row',
+                              flexWrap: 'wrap',
+                              justifyContent: 'start'
+                            }}>
                             {topic.subtopics.map((subtopic) => (
                               <Link
                                 key={subtopic}
@@ -186,18 +175,15 @@ const MenuBar = () => {
                                 color="inherit"
                                 sx={{ m: 1 }}
                                 onClick={() => {
-                                  navigate(`/topics/${topic.name}/${subtopic}`);
-                                  handleCloseTopicsMenu();
-                                }}
-                              >
+                                  navigate(`/topics/${topic.name}/${subtopic}`)
+                                  handleCloseTopicsMenu()
+                                }}>
                                 {subtopic}
                               </Link>
                             ))}
                           </Box>
                         </Grid>
-                        {topics.indexOf(topic) !== topics.length - 1 && (
-                          <Divider flexItem />
-                        )}
+                        {topics.indexOf(topic) !== topics.length - 1 && <Divider flexItem />}
                       </>
                     ))}
                   </Grid>
@@ -206,13 +192,11 @@ const MenuBar = () => {
             </Box>
           </Box>
           {/** Search bar */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            {/* <Searchbar /> */}
-          </Box>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>
 
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t("help")}>
+            <Tooltip title={t('help')}>
               <IconButton>
                 <HelpIcon data-testid="HelpIcon" />
               </IconButton>
@@ -221,7 +205,7 @@ const MenuBar = () => {
 
           {/** Settings button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t("tooltip.openGlobalSettings")}>
+            <Tooltip title={t('tooltip.openGlobalSettings')}>
               <IconButton>
                 <SettingsIcon data-testid="SettingsIcon" />
               </IconButton>
@@ -230,33 +214,28 @@ const MenuBar = () => {
 
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t("tooltip.openSettings")}>
+            <Tooltip title={t('tooltip.openSettings')}>
               <IconButton onClick={handleOpenUserMenu} data-testid="useravatar">
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right'
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right'
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
+              onClose={handleCloseUserMenu}>
               {settings.map((setting) => (
-                <MenuItem
-                  data-testid="usermenuitem"
-                  key={setting}
-                  onClick={handleCloseUserMenu}
-                >
+                <MenuItem data-testid="usermenuitem" key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
@@ -265,7 +244,7 @@ const MenuBar = () => {
         </Box>
       </Toolbar>
     </AppBar>
-  );
-};
+  )
+}
 
-export default MenuBar;
+export default MenuBar

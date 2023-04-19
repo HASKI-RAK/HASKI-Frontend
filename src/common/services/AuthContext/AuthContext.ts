@@ -1,16 +1,16 @@
-import { createContext } from "react";
+import { createContext } from 'react'
 export type AuthContextType = {
-  isAuth: boolean;
-  setIsAuth: (value: boolean) => void;
-  logout: () => void;
-};
+  isAuth: boolean
+  setIsAuth: (value: boolean) => void
+  logout: () => void
+}
 const AuthContext = createContext<AuthContextType>({
   isAuth: false,
   setIsAuth: function (active: boolean) {
-    this.isAuth = active;
+    this.isAuth = active
   },
   logout: () => {
-    return;
-  },
-});
-export default AuthContext;
+    return
+  }
+})
+export default AuthContext
