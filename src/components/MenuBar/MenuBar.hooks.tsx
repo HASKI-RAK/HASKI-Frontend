@@ -66,6 +66,7 @@ export const useLearningPath = () => {
             try {
                 const responseTopic = await fetch('http://127.0.0.1:5000/user/2/5/student/1/course/1/topic');
                 const dataTopic: TopicsResponse = await responseTopic.json();
+                dataTopic.topics.sort((a, b) => b.id - a.id);
                 setTopics(dataTopic.topics);
 
                 try {
