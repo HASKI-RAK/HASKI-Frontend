@@ -20,246 +20,10 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import HelpIcon from "@mui/icons-material/Help";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import {useTranslation} from "react-i18next";
-import {ListItemIcon} from "@mui/material";
+import {ListItemIcon, Skeleton} from "@mui/material";
 import {Logout} from "@mui/icons-material";
 import {AuthContext} from "@services";
-
-const responseTopics = {
-    "topics": [
-        {
-            "id": 1,
-            "name": "Allgemeine Informationen",
-            "lms_id": 1,
-            "is_topic": true,
-            "parent_id": 0,
-            "contains_le": true,
-            "done": false,
-            "done_percantage": 0,
-            "last_visit": "0",
-            "time_spend": 0,
-            "is_recommended": true
-        },
-        {
-            "id": 2,
-            "name": "Adapter",
-            "lms_id": 2,
-            "is_topic": true,
-            "parent_id": 0,
-            "contains_le": true,
-            "done": false,
-            "done_percantage": 0,
-            "last_visit": "0",
-            "time_spend": 0,
-            "is_recommended": false
-        },
-        {
-            "id": 3,
-            "name": "Command, Command with Undo, Command Processor",
-            "lms_id": 3,
-            "is_topic": true,
-            "parent_id": 0,
-            "contains_le": true,
-            "done": false,
-            "done_percantage": 0,
-            "last_visit": "0",
-            "time_spend": 0,
-            "is_recommended": false
-        },
-        {
-            "id": 4,
-            "name": "Strategie",
-            "lms_id": 4,
-            "is_topic": true,
-            "parent_id": 0,
-            "contains_le": true,
-            "done": false,
-            "done_percantage": 0,
-            "last_visit": "0",
-            "time_spend": 0,
-            "is_recommended": false
-        },
-        {
-            "id": 5,
-            "name": "Zustand",
-            "lms_id": 5,
-            "is_topic": true,
-            "parent_id": 0,
-            "contains_le": true,
-            "done": false,
-            "done_percantage": 0,
-            "last_visit": "0",
-            "time_spend": 0,
-            "is_recommended": false
-        },
-    ]
-};
-
-responseTopics.topics.sort((a, b) => b.id - a.id);
-
-const responseLearningElements = [
-    {
-        "position": 2,
-        "learning_element": {
-            "id": 1,
-            "lms_id": 14,
-            "activity_type": "h5pactiviy",
-            "classification": "SE",
-            "name": "Selbsteinschätzungstest",
-            "done": false,
-            "done_at": "",
-            "nr_of_visits": 0,
-            "last_visit": "",
-            "time_spend": 0,
-            "is_recommended": true
-        }
-    },
-    {
-        "position": 1,
-        "learning_element": {
-            "id": 2,
-            "lms_id": 63,
-            "activity_type": "h5pactiviy",
-            "classification": "KÜ",
-            "name": "Kurzübersicht",
-            "done": false,
-            "done_at": "",
-            "nr_of_visits": 0,
-            "last_visit": "",
-            "time_spend": 0,
-            "is_recommended": true
-        }
-    },
-    {
-        "position": 3,
-        "learning_element": {
-            "id": 3,
-            "lms_id": 62,
-            "activity_type": "h5pactiviy",
-            "classification": "BE",
-            "name": "Beispiel",
-            "done": false,
-            "done_at": "",
-            "nr_of_visits": 0,
-            "last_visit": "",
-            "time_spend": 0,
-            "is_recommended": true
-        }
-    },
-    {
-        "position": 5,
-        "learning_element": {
-            "id": 4,
-            "lms_id": 15,
-            "activity_type": "h5pactiviy",
-            "classification": "ÜB",
-            "name": "Uebung 1 Leicht",
-            "done": false,
-            "done_at": "",
-            "nr_of_visits": 0,
-            "last_visit": "",
-            "time_spend": 0,
-            "is_recommended": true
-        }
-    },
-    {
-        "position": 6,
-        "learning_element": {
-            "id": 5,
-            "lms_id": 68,
-            "activity_type": "h5pactiviy",
-            "classification": "ÜB",
-            "name": "Uebung 2 Leicht",
-            "done": false,
-            "done_at": "",
-            "nr_of_visits": 0,
-            "last_visit": "",
-            "time_spend": 0,
-            "is_recommended": true
-        }
-    },
-    {
-        "position": 7,
-        "learning_element": {
-            "id": 6,
-            "lms_id": 66,
-            "activity_type": "h5pactiviy",
-            "classification": "ÜB",
-            "name": "Uebung 1 Mittel",
-            "done": false,
-            "done_at": "",
-            "nr_of_visits": 0,
-            "last_visit": "",
-            "time_spend": 0,
-            "is_recommended": true
-        }
-    },
-    {
-        "position": 8,
-        "learning_element": {
-            "id": 7,
-            "lms_id": 69,
-            "activity_type": "h5pactiviy",
-            "classification": "ÜB",
-            "name": "Uebung 2 Mittel",
-            "done": false,
-            "done_at": "",
-            "nr_of_visits": 0,
-            "last_visit": "",
-            "time_spend": 0,
-            "is_recommended": true
-        }
-    },
-    {
-        "position": 9,
-        "learning_element": {
-            "id": 8,
-            "lms_id": 67,
-            "activity_type": "h5pactiviy",
-            "classification": "ÜB",
-            "name": "Uebung 1 Schwer",
-            "done": false,
-            "done_at": "",
-            "nr_of_visits": 0,
-            "last_visit": "",
-            "time_spend": 0,
-            "is_recommended": true
-        }
-    },
-    {
-        "position": 10,
-        "learning_element": {
-            "id": 9,
-            "lms_id": 20,
-            "activity_type": "h5pactiviy",
-            "classification": "ÜB",
-            "name": "Uebung 2 Schwer",
-            "done": false,
-            "done_at": "",
-            "nr_of_visits": 0,
-            "last_visit": "",
-            "time_spend": 0,
-            "is_recommended": true
-        }
-    },
-    {
-        "position": 4,
-        "learning_element": {
-            "id": 10,
-            "lms_id": 71,
-            "activity_type": "h5pactiviy",
-            "classification": "ZF",
-            "name": "Zusammenfassung",
-            "done": false,
-            "done_at": "",
-            "nr_of_visits": 0,
-            "last_visit": "",
-            "time_spend": 0,
-            "is_recommended": true
-        }
-    }
-];
-
-responseLearningElements.sort((a, b) => a.position - b.position);
+import {useLearningPath} from "./MenuBar.hooks";
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -272,11 +36,10 @@ responseLearningElements.sort((a, b) => a.position - b.position);
  * @category Components
  */
 const MenuBar = () => {
-    // UX Logic
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null);
     const authcontext = useContext(AuthContext);
-
+    const {loading, topics, learningPath} = useLearningPath();
     const {t} = useTranslation();
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -297,8 +60,18 @@ const MenuBar = () => {
 
     const handleUserLogout = () => {
         authcontext.logout();
-        navigate("/login", { replace: true });
+        navigate("/login", {replace: true});
     };
+
+    const skeletonItems = [];
+    for (let i = 0; i < 3; i++) {
+        skeletonItems.push(
+            <>
+                <Skeleton variant="text" width={'500'} height={55} />
+                <Skeleton variant="text" width={'70%'} height={20}  />
+            </>
+        );
+    }
 
     const navigate = useNavigate();
     return (
@@ -363,7 +136,7 @@ const MenuBar = () => {
                                         )
                                     }
                                 >
-                                    {t("components.MenuBar.MenuBar.Button")}
+                                    {t("components.MenuBar.MenuBar.TopicButton")}
                                 </Button>
                             </Tooltip>
                             <Popover
@@ -379,44 +152,53 @@ const MenuBar = () => {
                                 }}
                                 open={Boolean(anchorElTopics)}
                                 onClose={handleCloseTopicsMenu}
+                                sx={{minWidth:"500px"}}
                             >
                                 <Box sx={{p: 2}}>
                                     <Grid container direction="column-reverse" spacing={2}>
-                                        {responseTopics.topics.map((topic) => (
+                                        {loading ? ( // display Skeleton component while loading
+                                            <Box width={400}>
+                                                {skeletonItems}
+                                            </Box>
+                                        ) : (
                                             <>
-                                                <Grid item xs={12} key={t(topic.name)}>
-                                                    <Typography variant="h6">{t(topic.name)}</Typography>
-                                                    <Box
-                                                        sx={{
-                                                            display: "flex",
-                                                            flexDirection: "row",
-                                                            flexWrap: "wrap",
-                                                            justifyContent: "start",
-                                                        }}
-                                                    >
-                                                        {responseLearningElements.map((element) => (
-                                                            <Link
-                                                                key={element.learning_element.name}
-                                                                underline="hover"
-                                                                variant="body2"
-                                                                component="span"
-                                                                color="inherit"
-                                                                sx={{m: 1, cursor: "pointer"}}
-                                                                onClick={() => {
-                                                                    navigate(`/topics/${t(topic.name)}/${t(element.learning_element.name)}`);
-                                                                    handleCloseTopicsMenu();
+                                                {topics.map((topic, index) => (
+                                                    <>
+                                                        <Grid item xs={12} key={t(topic.name)}>
+                                                            <Typography variant="h6">{t(topic.name)}</Typography>
+                                                            <Box
+                                                                sx={{
+                                                                    display: "flex",
+                                                                    flexDirection: "row",
+                                                                    flexWrap: "wrap",
+                                                                    justifyContent: "start",
                                                                 }}
                                                             >
-                                                                {element.learning_element.name}
-                                                            </Link>
-                                                        ))}
-                                                    </Box>
-                                                </Grid>
-                                                {responseTopics.topics.indexOf(topic) !== responseTopics.topics.length - 1 && (
-                                                    <Divider flexItem/>
-                                                )}
+                                                                {learningPath[index].path.map((element) => (
+                                                                    <Link
+                                                                        key={element.learning_element.name}
+                                                                        underline="hover"
+                                                                        variant="body2"
+                                                                        component="span"
+                                                                        color="inherit"
+                                                                        sx={{m: 1, cursor: "pointer"}}
+                                                                        onClick={() => {
+                                                                            navigate(`/topics/${t(topic.name)}/${t(element.learning_element.name)}`);
+                                                                            handleCloseTopicsMenu();
+                                                                        }}
+                                                                    >
+                                                                        {element.learning_element.name}
+                                                                    </Link>
+                                                                ))}
+                                                            </Box>
+                                                        </Grid>
+                                                        {topics.indexOf(topic) !== topics.length - 1 && (
+                                                            <Divider flexItem/>
+                                                        )}
+                                                    </>
+                                                ))}
                                             </>
-                                        ))}
+                                        )}
                                     </Grid>
                                 </Box>
                             </Popover>
@@ -474,7 +256,7 @@ const MenuBar = () => {
                                 onClick={handleUserLogout}
                             >
                                 <ListItemIcon>
-                                    <Logout fontSize="small" />
+                                    <Logout fontSize="small"/>
                                 </ListItemIcon>
                                 <Typography textAlign="center">{t("components.MenuBar.MenuBar.Profile.Logout")}</Typography>
                             </MenuItem>
