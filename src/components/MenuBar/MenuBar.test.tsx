@@ -69,7 +69,27 @@ describe("MenuBar", () => {
                     visits: []
                 },
                 university: "HS-KE"
-            }];
+            },
+            {
+                contains_le: true,
+                created_at: "2021-09-01T12:00:00.000Z",
+                created_by: "dimitri", id: 2,
+                is_topic: true,
+                last_updated: "2021-09-01T12:00:00.000Z",
+                lms_id: 1,
+                name: "Zustand",
+                parent_id: 1,
+                student_topic: {
+                    done: false,
+                    done_at: null,
+                    id: 1,
+                    student_id: 1,
+                    topic_id: 1,
+                    visits: []
+                },
+                university: "HS-KE"
+            }
+        ];
 
         const learningElementPath: LearningPath[] = [{
             based_on: "some-Algorithm",
@@ -84,7 +104,21 @@ describe("MenuBar", () => {
                 position: 1,
                 recommended: true
             }]
-        }];
+        },
+            {
+                based_on: "some-Algorithm",
+                calculated_on: "today",
+                course_id: 1,
+                id: 2,
+                path: [{
+                    id: 2,
+                    learning_element: exampleLearningElement,
+                    learning_element_id: 1,
+                    learning_path_id: 1,
+                    position: 1,
+                    recommended: true
+                }]
+            }];
 
         const result = render(
             <Router location={history.location} navigator={history}>
@@ -204,7 +238,7 @@ describe("MenuBar", () => {
         });
         window.fetch = mockFetch;
 
-        const {result} = await renderHook(() => useLearningPath());
+        await renderHook(() => useLearningPath());
 
         expect(mockFetch).toHaveBeenCalledTimes(1);
         expect(mockFetch).toHaveBeenCalledWith(process.env.BACKEND + `/user/2/5/student/1/course/1/topic`, {
@@ -244,23 +278,54 @@ describe("MenuBar", () => {
         expect(result.current.learningPath).toHaveLength(0);
     });
 
-    //todo, close popover not working?
-    test("close Popover should close popover", () => {
+
+    test("clicking logout should close popover", () => {
         const history = createMemoryHistory({initialEntries: ["/home"]});
 
-        const {getByTestId, getByText, queryByTestId} = render(
+        const {getByTestId, queryByTestId} = render(
             <Router location={history.location} navigator={history}>
                 <MenuBar loading={loading} topics={topics} learningElementPath={learningElementPath}/>
-            </Router>);
+            </Router>
+        );
 
-        // Open the menu by clicking on the user avatar button
-        const userMenuButton = getByTestId('useravatar');
-        fireEvent.click(userMenuButton);
+        const userAvatarButton = getByTestId('useravatar');
 
-        // assert that the user menu is visible
-        const userMenu = getByTestId('usermenuitem');
-        expect(userMenu).toBeVisible();
+        // Open the user menu
+        fireEvent.click(userAvatarButton);
 
-        // simulate a click outside of the user menu to close it
+        // Check that the menu is open
+        const userMenuItem = getByTestId('usermenuitem');
+        expect(userMenuItem).toBeInTheDocument();
+
+        // Click the logout menu item to trigger onClose
+        fireEvent.click(userMenuItem);
+
+        // Check that the menu is closed
+        const userMenu = queryByTestId('menu-appbar');
+        expect(userMenu).toBeNull();
+    });
+
+    test("clicking outside of Menu should close popover", () => {
+        const history = createMemoryHistory({initialEntries: ["/home"]});
+
+        const {getByTestId, queryByTestId} = render(
+            <Router location={history.location} navigator={history}>
+                <MenuBar loading={loading} topics={topics} learningElementPath={learningElementPath}/>
+            </Router>
+        );
+
+        // get the user avatar button
+        const userAvatarButton = getByTestId("useravatar");
+
+        // simulate click on the user avatar button to open the menu
+        fireEvent.click(userAvatarButton);
+
+        const userMenuItem = getByTestId('usermenuitem');
+        expect(userMenuItem).toBeInTheDocument();
+
+        // simulate click outside of the menu to close it
+        fireEvent.mouseDown(document.body);
+        const userMenu = queryByTestId('menu-appbar');
+        expect(userMenu).toBeNull();
     });
 });

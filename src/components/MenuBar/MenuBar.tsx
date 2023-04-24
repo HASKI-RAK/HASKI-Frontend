@@ -67,6 +67,7 @@ const MenuBar = ({loading, topics, learningElementPath}: MenuBarProps) => {
     };
 
     const handleUserLogout = () => {
+        handleCloseUserMenu();
         authcontext.logout();
         navigate("/login", {replace: true});
     };
@@ -171,7 +172,7 @@ const MenuBar = ({loading, topics, learningElementPath}: MenuBarProps) => {
                                         ) : (
                                             <>
                                                 {topics.map((topic, index) => (
-                                                    <>
+                                                    <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>
                                                         <Grid item xs={12} key={t(topic.name)}>
                                                             <Typography variant="h6">{t(topic.name)}</Typography>
                                                             <Box
@@ -203,7 +204,7 @@ const MenuBar = ({loading, topics, learningElementPath}: MenuBarProps) => {
                                                         {topics.indexOf(topic) !== topics.length - 1 && (
                                                             <Divider flexItem/>
                                                         )}
-                                                    </>
+                                                    </React.Fragment>
                                                 ))}
                                             </>
                                         )}
