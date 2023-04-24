@@ -9,8 +9,10 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
-import {useLearningPath} from "./LocalNav.hooks";
 import {Skeleton, Stack} from "@mui/material";
+import {Topic} from "../../common/services/topic/RequestResponse";
+import {LearningPath} from "../../common/services/learningPath/RequestResponse";
+import React from "react";
 
 
 /**
@@ -24,20 +26,25 @@ import {Skeleton, Stack} from "@mui/material";
 //todo: get Topics of Student-id from backend
     //todo: get paths of topics from backend, and sort with .sort((a, b) => a.position - b.position);
 
+export type LocalNavProps = {
+       readonly loading: boolean,
+       readonly topics: Topic[],
+       readonly learningElementPath: LearningPath[]
+}
 
-const LocalNav = () => {
+const LocalNav = ({loading, topics, learningElementPath}: LocalNavProps) => {
         const {t} = useTranslation()
         const navigate = useNavigate()
-        const {loading, topics, learningPath} = useLearningPath()
+
 
         const skeletonItems = []
         for(let i = 0; i < 3; i++) {
             skeletonItems.push(
-                <>
+                <React.Fragment key={`LocalNav-Skeleton-${i}`}>
                     <Skeleton variant="text" width={'100%'} height={55}/>
                     <Skeleton variant="text" width={'70%'} height={20}/>
                     <Skeleton variant="text" width={'70%'} height={20} sx={{left: '50'}}/>
-                </>
+                </React.Fragment>
             );
         }
 
@@ -79,7 +86,7 @@ const LocalNav = () => {
                                         <Typography variant="h6">{topic.name}</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails sx={{flexDirection: 'column'}}>
-                                        {learningPath[index].path.map((learningElement) => (
+                                        {learningElementPath[index].path.map((learningElement) => (
                                             <Typography variant="body1">
                                                 <Link
                                                     key={learningElement.learning_element.name}

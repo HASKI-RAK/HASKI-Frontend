@@ -1,14 +1,15 @@
-import { Outlet } from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import {
-  DefaultBox as Box,
-  DefaultDivider as Divider,
-  DefaultTypography as Typography,
-  DefaultStack as Stack,
-  DefaultGrid as Grid,
-  DefaultContainer as Container,
+    DefaultBox as Box,
+    DefaultDivider as Divider,
+    DefaultTypography as Typography,
+    DefaultStack as Stack,
+    DefaultGrid as Grid,
+    DefaultContainer as Container,
 } from "@common/components";
 
-import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from "@components";
+import {MenuBar, Footer, BreadcrumbsContainer, LocalNav} from "@components";
+import {useLearningPath} from "../../components/MenuBar/MenuBar.hooks";
 
 /**
  * Main frame component.
@@ -22,44 +23,49 @@ import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from "@components";
  *
  * @category Pages
  */
-const MainFrame = () => (
-  <Stack direction="column" sx={{ minHeight: "inherit" }}>
-    <MenuBar />
-    <BreadcrumbsContainer />
-    <Grid
-      flex={1}
-      container
-      sx={{ flexDirection: "column", justifyContent: "space-between" }}
-    >
-      <Grid container item flexGrow={1} sx={{ alignItems: "stretch" }}>
-        <Grid item xs={2}>
-          <Box
-            height={"100%"}
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "stretch",
-            }}
-          >
-            <LocalNav />
-            <Divider flexItem orientation="vertical" />
-          </Box>
-        </Grid>
-        <Grid item xs={8}>
-          {/**💉 Pages get injected here through App routing */}
-          <Container>
-            <Outlet />
-          </Container>
-        </Grid>
-        <Grid item xs={2}>
-          {/** TODO 📑 add real gameification */}
-          <Typography variant="h4">Gamification</Typography>
-        </Grid>
-      </Grid>
-      <Divider flexItem />
-      <Footer />
-    </Grid>
-  </Stack>
-);
+const MainFrame = () => {
+
+    const {loading, topics, learningPath} = useLearningPath()
+
+    return (
+        <Stack direction="column" sx={{minHeight: "inherit"}}>
+            <MenuBar loading={loading} topics={topics} learningElementPath={learningPath}/>
+            <BreadcrumbsContainer/>
+            <Grid
+                flex={1}
+                container
+                sx={{flexDirection: "column", justifyContent: "space-between"}}
+            >
+                <Grid container item flexGrow={1} sx={{alignItems: "stretch"}}>
+                    <Grid item xs={2}>
+                        <Box
+                            height={"100%"}
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "stretch",
+                            }}
+                        >
+                            <LocalNav loading={loading} topics={topics} learningElementPath={learningPath}/>
+                            <Divider flexItem orientation="vertical"/>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={8}>
+                        {/**💉 Pages get injected here through App routing */}
+                        <Container>
+                            <Outlet/>
+                        </Container>
+                    </Grid>
+                    <Grid item xs={2}>
+                        {/** TODO 📑 add real gameification */}
+                        <Typography variant="h4">Gamification</Typography>
+                    </Grid>
+                </Grid>
+                <Divider flexItem/>
+                <Footer/>
+            </Grid>
+        </Stack>
+    )
+};
 
 export default MainFrame;

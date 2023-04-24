@@ -4,13 +4,11 @@ import {getElementLearningPath} from "../../common/services/learningPath/getElem
 import {LearningPath} from "../../common/services/learningPath/RequestResponse";
 import {Topic} from "../../common/services/topic/RequestResponse";
 
-const getSortedLearningPath = async (data: Topic[]): Promise<LearningPath[]> => {
+const getSortedLearningPath = async(data: Topic[]): Promise<LearningPath[]> => {
     const promises = data.map((topic) => getElementLearningPath(topic.id));
     const learningPaths = await Promise.all(promises);
 
-    return learningPaths
-    .filter((learningPath) => learningPath.status === 200)
-     .map((learningPath) => {
+    return learningPaths.filter((learningPath) => learningPath.status === 200).map((learningPath) => {
         learningPath.data.path.sort((a, b) => a.position - b.position);
         return learningPath.data;
     });
@@ -21,7 +19,7 @@ export const useLearningPath = () => {
     const [topics, setTopics] = useState<Topic[]>([]);
     const [learningPath, setLearningPath] = useState<LearningPath[]>([]);
 
-    const effect = async ()  => {
+    const effect = async() => {
 
         setLoading(true);
         getCourseTopics().then((response) => {
@@ -33,11 +31,16 @@ export const useLearningPath = () => {
                     setLoading(false);
                 })
             }
-        })};
+            else {
+                // some error occurred
+                setLoading(false);
+            }
+        })
+    };
 
     useEffect(() => {
         effect();
-    },[]);
+    }, []);
 
-    return { loading, topics, learningPath };
+    return {loading, topics, learningPath};
 };

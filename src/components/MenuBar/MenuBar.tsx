@@ -23,7 +23,9 @@ import {useTranslation} from "react-i18next";
 import {ListItemIcon, Skeleton} from "@mui/material";
 import {Logout} from "@mui/icons-material";
 import {AuthContext} from "@services";
-import {useLearningPath} from "./MenuBar.hooks";
+import {Topic} from "../../common/services/topic/RequestResponse";
+import {LearningPath} from "../../common/services/learningPath/RequestResponse";
+import React from "react";
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -35,15 +37,21 @@ import {useLearningPath} from "./MenuBar.hooks";
  *
  * @category Components
  */
-const MenuBar = () => {
+export type MenuBarProps = {
+    readonly loading: boolean,
+    readonly topics: Topic[],
+    readonly learningElementPath: LearningPath[]
+}
+
+const MenuBar = ({loading, topics, learningElementPath}: MenuBarProps) => {
+
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null);
     const authcontext = useContext(AuthContext);
-    const {loading, topics, learningPath} = useLearningPath();
     const {t} = useTranslation();
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
+        setAnchorElUser(event.currentTarget)
     };
 
     const handleCloseUserMenu = () => {
@@ -66,10 +74,10 @@ const MenuBar = () => {
     const skeletonItems = [];
     for (let i = 0; i < 3; i++) {
         skeletonItems.push(
-            <>
+            <React.Fragment key={`MenuBar-Topic-Skeleton-${i}`}>
                 <Skeleton variant="text" width={'500'} height={55} />
                 <Skeleton variant="text" width={'70%'} height={20}  />
-            </>
+            </React.Fragment>
         );
     }
 
@@ -174,7 +182,7 @@ const MenuBar = () => {
                                                                     justifyContent: "start",
                                                                 }}
                                                             >
-                                                                {learningPath[index].path.map((element) => (
+                                                                {learningElementPath[index].path.map((element) => (
                                                                     <Link
                                                                         key={element.learning_element.name}
                                                                         underline="hover"
