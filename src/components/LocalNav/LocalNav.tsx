@@ -61,7 +61,7 @@ const LocalNav = ({loading, topics, learningElementPath}: LocalNavProps) => {
                 ) : ( // display actual content once loading is false
                     <>
                         {topics.map((topic, index) => (
-                                <Accordion disableGutters
+                                <Accordion disableGutters key={`topic-Accordion-${topic.id}`}
                                            sx=
                                                {{
                                                    borderColor: 'divider',
@@ -87,9 +87,8 @@ const LocalNav = ({loading, topics, learningElementPath}: LocalNavProps) => {
                                     </AccordionSummary>
                                     <AccordionDetails sx={{flexDirection: 'column'}}>
                                         {learningElementPath[index].path.map((learningElement) => (
-                                            <Typography variant='body1'>
+                                            <Typography variant='body1' key={learningElement.learning_element.name}>
                                                 <Link
-                                                    key={learningElement.learning_element.name}
                                                     underline='hover'
                                                     variant='body2'
                                                     color='inherit'
