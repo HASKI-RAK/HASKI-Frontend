@@ -1,14 +1,13 @@
-import {Outlet} from "react-router-dom";
+import { Outlet } from 'react-router-dom'
 import {
-    DefaultBox as Box,
-    DefaultDivider as Divider,
-    DefaultTypography as Typography,
-    DefaultStack as Stack,
-    DefaultGrid as Grid,
-    DefaultContainer as Container,
-} from "@common/components";
-
-import {MenuBar, Footer, BreadcrumbsContainer, LocalNav} from "@components";
+  DefaultBox as Box,
+  DefaultDivider as Divider,
+  DefaultTypography as Typography,
+  DefaultStack as Stack,
+  DefaultGrid as Grid,
+  DefaultContainer as Container
+} from '@common/components'
+import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from '@components'
 import {useLearningPath} from "../../components/LocalNav/LocalNav.hooks";
 
 /**
@@ -25,28 +24,28 @@ import {useLearningPath} from "../../components/LocalNav/LocalNav.hooks";
  */
 const MainFrame = () => {
 
-    const {loading, topics, learningPath} = useLearningPath()
+    const { loading, topics, learningPath } = useLearningPath()
 
     return (
-        <Stack direction="column" sx={{minHeight: "inherit"}}>
-            <MenuBar loading={loading} topics={topics} learningElementPath={learningPath}/>
+        <Stack direction="column" sx={{ minHeight: "inherit" }}>
+            <MenuBar loading={ loading } topics={ topics } learningElementPath={ learningPath }/>
             <BreadcrumbsContainer/>
             <Grid
                 flex={1}
                 container
-                sx={{flexDirection: "column", justifyContent: "space-between"}}
+                sx={{ flexDirection: "column", justifyContent: "space-between" }}
             >
-                <Grid container item flexGrow={1} sx={{alignItems: "stretch"}}>
+                <Grid container item flexGrow={1} sx={{ alignItems: "stretch" }}>
                     <Grid item xs={2}>
                         <Box
-                            height={"100%"}
+                            height={ "100%" }
                             sx={{
                                 display: "flex",
                                 flexDirection: "row",
                                 alignItems: "stretch",
                             }}
                         >
-                            <LocalNav loading={loading} topics={topics} learningElementPath={learningPath}/>
+                            <LocalNav loading={ loading } topics={ topics } learningElementPath={ learningPath }/>
                             <Divider flexItem orientation="vertical"/>
                         </Box>
                     </Grid>
@@ -66,6 +65,6 @@ const MainFrame = () => {
             </Grid>
         </Stack>
     )
-};
+}
 
-export default MainFrame;
+export default MainFrame

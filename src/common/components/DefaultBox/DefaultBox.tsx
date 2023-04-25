@@ -1,1 +1,1 @@
-export { Box as DefaultBox } from "@mui/material";
+export { Box as DefaultBox } from '@mui/material'

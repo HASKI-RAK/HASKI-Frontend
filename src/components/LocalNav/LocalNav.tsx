@@ -5,14 +5,14 @@ import {
     DefaultAccordionSummary as AccordionSummary,
     DefaultAccordionDetails as AccordionDetails,
     DefaultAccordion as Accordion, DefaultLink as Link
-} from "@common/components";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {useTranslation} from "react-i18next";
-import {useNavigate} from "react-router-dom";
-import {Skeleton, Stack} from "@mui/material";
-import {Topic} from "../../common/services/topic/RequestResponse";
-import {LearningPath} from "../../common/services/learningPath/RequestResponse";
-import React from "react";
+} from '@common/components'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import {useTranslation} from 'react-i18next'
+import {useNavigate} from 'react-router-dom'
+import {Skeleton, Stack} from '@mui/material'
+import {Topic} from '../../common/services/topic/RequestResponse'
+import {LearningPath} from '../../common/services/learningPath/RequestResponse'
+import React from 'react'
 
 
 /**
@@ -41,16 +41,16 @@ const LocalNav = ({loading, topics, learningElementPath}: LocalNavProps) => {
         for(let i = 0; i < 3; i++) {
             skeletonItems.push(
                 <React.Fragment key={`LocalNav-Skeleton-${i}`}>
-                    <Skeleton variant="text" width={'100%'} height={55}/>
-                    <Skeleton variant="text" width={'70%'} height={20}/>
-                    <Skeleton variant="text" width={'70%'} height={20} sx={{left: '50'}}/>
+                    <Skeleton variant='text' width={'100%'} height={55}/>
+                    <Skeleton variant='text' width={'70%'} height={20}/>
+                    <Skeleton variant='text' width={'70%'} height={20} sx={{left: '50'}}/>
                 </React.Fragment>
-            );
+            )
         }
 
         return (
             <Box flexGrow={1}>
-                <Typography variant="h5">{t("components.LocalNav.LocalNav.Topics")}</Typography>
+                <Typography variant='h5'>{t('components.LocalNav.LocalNav.Topics')}</Typography>
                 <Divider/>
                 {loading ? ( // display Skeleton component while loading is true
                     <Box>
@@ -74,8 +74,8 @@ const LocalNav = ({loading, topics, learningElementPath}: LocalNavProps) => {
                                                }}>
                                     <AccordionSummary
                                         expandIcon={<ExpandMoreIcon/>}
-                                        aria-controls="panel1a-content"
-                                        id="panel1a-header"
+                                        aria-controls='panel1a-content'
+                                        id='panel1a-header'
                                         sx={{
                                             backgroundColor: (theme) => theme.palette.secondary.main,
                                             '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
@@ -83,24 +83,24 @@ const LocalNav = ({loading, topics, learningElementPath}: LocalNavProps) => {
                                             },
                                         }}
                                     >
-                                        <Typography variant="h6">{topic.name}</Typography>
+                                        <Typography variant='h6'>{topic.name}</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails sx={{flexDirection: 'column'}}>
                                         {learningElementPath[index].path.map((learningElement) => (
-                                            <Typography variant="body1">
+                                            <Typography variant='body1'>
                                                 <Link
                                                     key={learningElement.learning_element.name}
-                                                    underline="hover"
-                                                    variant="body2"
-                                                    color="inherit"
+                                                    underline='hover'
+                                                    variant='body2'
+                                                    color='inherit'
                                                     sx={{
-                                                        cursor: "pointer",
+                                                        cursor: 'pointer',
                                                         padding: '8px',
                                                         borderRadius: 10,
                                                         '&:hover': {backgroundColor: (theme) => theme.palette.primary.main},
                                                     }}
                                                     onClick={() => {
-                                                        navigate(`/topics/${t(topic.name)}/${t(learningElement.learning_element.name)}`);
+                                                        navigate(`/topics/${t(topic.name)}/${t(learningElement.learning_element.name)}`)
                                                     }}
                                                 >
                                                     {learningElement.position} {learningElement.learning_element.name}
@@ -118,4 +118,4 @@ const LocalNav = ({loading, topics, learningElementPath}: LocalNavProps) => {
         )
     }
 
-export default LocalNav;
+export default LocalNav

@@ -1,21 +1,16 @@
-import {
-  AuthContext,
-  postLogin,
-  postLoginCredentials,
-  redirectMoodleLogin,
-} from "@services";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { AuthContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useContext, useCallback } from 'react'
 
 export type LoginHookParams = {
-  setIsLoading: (isLoading: boolean) => void;
-  nonce?: string;
-};
+  setIsLoading: (isLoading: boolean) => void
+  nonce?: string
+}
 
 export type LoginHookReturn = {
-  readonly onSubmit: () => void;
-  readonly onMoodleLogin: () => void;
-};
+  readonly onSubmit: () => void
+  readonly onMoodleLogin: () => void
+}
 
 /**
  * Hook for the login logic. Handles the login request and redirects to the home page.
@@ -28,60 +23,60 @@ export type LoginHookReturn = {
  * @returns {LoginHookReturn} - The login logic.
  */
 export const useLogin = (params: LoginHookParams): LoginHookReturn => {
-  const authcontext = useContext(AuthContext);
-  const navigate = useNavigate();
+  const authcontext = useContext(AuthContext)
+  const navigate = useNavigate()
 
-  const login = () => {
+  const login = useCallback(() => {
     // supply auth context
-    authcontext.setIsAuth(true);
+    authcontext.setIsAuth(true)
     // then redirect to home page
-    navigate("/dashboard", { replace: true });
-  };
+    navigate('/dashboard', { replace: true })
+  }, [authcontext, navigate])
 
   // Login with username and password
   const onSubmitHandler = () => {
-    params.setIsLoading(true);
+    params.setIsLoading(true)
     postLoginCredentials()
       .then((response) => {
         if (response.status === 200) {
-          login();
+          login()
         }
 
         //TODO catch and🍿 snackbar
       })
       .finally(() => {
-        params.setIsLoading(false);
-      });
-  };
+        params.setIsLoading(false)
+      })
+  }
 
   const onMoodleLogin = () => {
-    params.setIsLoading(true);
+    params.setIsLoading(true)
     redirectMoodleLogin()
       .then((response) => {
         if (response.status === 200) {
           // 👇️ redirects to Moodle LTI launch acticity
-          window.location.replace(response.message);
+          window.location.replace(response.message)
         }
 
         //TODO catch and🍿 snackbar
       })
       .finally(() => {
-        params.setIsLoading(false);
-      });
-  };
+        params.setIsLoading(false)
+      })
+  }
 
   // on mount, read search param 'nounce' and set it to state
   useEffect(() => {
     postLogin({ nonce: params.nonce }).then((response) => {
-      if (response.status === 200) login();
-      else navigate("/login", { replace: true });
+      if (response.status === 200) login()
+      else navigate('/login', { replace: true })
 
       //TODO 🍿 snackbar
-    });
-  }, []);
+    })
+  }, [login, navigate, params.nonce])
 
   return {
     onSubmit: onSubmitHandler,
-    onMoodleLogin,
-  } as const;
-};
+    onMoodleLogin
+  } as const
+}
