@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react";
-import {getCourseTopics} from "../../common/services/topic/getCourseTopics";
-import {getElementLearningPath} from "../../common/services/learningPath/getElementLearningPath";
-import {LearningPath} from "../../common/services/learningPath/RequestResponse";
-import {Topic} from "../../common/services/topic/RequestResponse";
+import {
+    getCourseTopics,
+    getElementLearningPath,
+    LearningPath,
+    Topic
+} from "@services";
 
 const getSortedLearningPath = async(data: Topic[]): Promise<LearningPath[]> => {
     const promises = data.map((topic) => getElementLearningPath(topic.id));

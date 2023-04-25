@@ -1,6 +1,6 @@
-import {RequestResponse, TopicsResponse} from "./RequestResponse";
+import { TopicRequestResponse, TopicsResponse } from "@services";
 
-export const getCourseTopics = async(): Promise<RequestResponse> => {
+export const getCourseTopics = async(): Promise<TopicRequestResponse> => {
     try {
 
         const response = await fetch(

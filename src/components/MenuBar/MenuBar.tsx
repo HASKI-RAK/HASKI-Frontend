@@ -1,5 +1,5 @@
-import {useContext, useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
     DefaultAppBar as AppBar,
     DefaultToolbar as Toolbar,
@@ -19,12 +19,11 @@ import {
 import SettingsIcon from '@mui/icons-material/Settings'
 import HelpIcon from '@mui/icons-material/Help'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
-import {useTranslation} from 'react-i18next'
-import {ListItemIcon, Skeleton} from '@mui/material'
-import {Logout} from '@mui/icons-material'
-import {AuthContext} from '@services'
-import {Topic} from '../../common/services/topic/RequestResponse'
-import {LearningPath} from '../../common/services/learningPath/RequestResponse'
+import { useTranslation } from 'react-i18next'
+import { ListItemIcon, Skeleton } from '@mui/material'
+import { Logout } from '@mui/icons-material'
+import { AuthContext } from '@services'
+import { Topic, LearningPath } from '@services'
 import React from 'react'
 
 /**

@@ -1,4 +1,4 @@
-export type Topic = {
+type Topic = {
     contains_le: boolean;
     created_at: string;
     created_by: string;
@@ -19,12 +19,14 @@ export type Topic = {
     university: string;
 }
 
-export type TopicsResponse = {
+type TopicsResponse = {
     topics: Topic[];
 }
 
-export type RequestResponse = {
+type RequestResponse = {
     status: number;
     message: string;
     data: TopicsResponse;
 };
+
+export type { Topic, TopicsResponse, RequestResponse as TopicRequestResponse}

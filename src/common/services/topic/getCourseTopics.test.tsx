@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import {getCourseTopics} from "./getCourseTopics";
+import { getCourseTopics } from "@services";
 
 describe('getLoginStatus', () => {
 

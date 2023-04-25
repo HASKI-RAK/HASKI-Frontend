@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, renderHook } from '@testing-library/react'
 import LocalNav from './LocalNav'
-import { Topic } from '../../common/services/topic/RequestResponse'
-import { LearningElement, LearningPath } from '../../common/services/learningPath/RequestResponse'
+import { Topic, LearningElement, LearningPath } from '@services'
 import * as router from 'react-router'
 import { useLearningPath } from './LocalNav.hooks'
 

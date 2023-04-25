@@ -28,8 +28,10 @@ type LearningPath = {
     path: PathItem[];
 }
 
-export type RequestResponse = {
+type RequestResponse = {
     status: number;
     message: string;
     data: LearningPath;
 };
+
+export type { LearningElement, PathItem, LearningPath, RequestResponse as LearningPathRequestResponse}

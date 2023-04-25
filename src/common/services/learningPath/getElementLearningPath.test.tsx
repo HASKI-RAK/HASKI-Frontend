@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { getElementLearningPath } from "./getElementLearningPath";
+import { getElementLearningPath } from "@services";
 
 global.fetch = jest.fn(() =>
     Promise.resolve({

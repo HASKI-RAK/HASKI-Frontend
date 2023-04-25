@@ -1,6 +1,6 @@
-import {LearningElement, LearningPath, PathItem, RequestResponse} from "./RequestResponse";
+import {LearningElement, LearningPath, PathItem, LearningPathRequestResponse} from "@services";
 
-export const getElementLearningPath = async (topicIndex: number): Promise<RequestResponse> => {
+export const getElementLearningPath = async (topicIndex: number): Promise<LearningPathRequestResponse> => {
     try {
 
         const response = await fetch(

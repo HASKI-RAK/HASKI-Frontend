@@ -3,8 +3,7 @@ import { fireEvent, render } from '@testing-library/react'
 import MenuBar from './MenuBar'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
-import { Topic } from '../../common/services/topic/RequestResponse'
-import { LearningElement, LearningPath } from '../../common/services/learningPath/RequestResponse'
+import { Topic, LearningElement, LearningPath } from '@services'
 
 const loading = false
 const topics: Topic[] = []
