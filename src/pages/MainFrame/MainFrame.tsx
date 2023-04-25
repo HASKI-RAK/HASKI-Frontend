@@ -9,7 +9,7 @@ import {
 } from "@common/components";
 
 import {MenuBar, Footer, BreadcrumbsContainer, LocalNav} from "@components";
-import {useLearningPath} from "../../components/MenuBar/MenuBar.hooks";
+import {useLearningPath} from "../../components/LocalNav/LocalNav.hooks";
 
 /**
  * Main frame component.

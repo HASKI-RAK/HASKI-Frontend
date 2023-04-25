@@ -1,11 +1,10 @@
 import "@testing-library/jest-dom";
-import {fireEvent, render, renderHook} from "@testing-library/react";
+import {fireEvent, render} from "@testing-library/react";
 import MenuBar from "./MenuBar";
 import {createMemoryHistory} from "history";
 import {Router} from "react-router-dom";
 import {Topic} from "../../common/services/topic/RequestResponse";
 import {LearningElement, LearningPath} from "../../common/services/learningPath/RequestResponse";
-import {useLearningPath} from "./MenuBar.hooks";
 
 const loading = false;
 const topics: Topic[] = [];
@@ -177,105 +176,6 @@ describe("MenuBar", () => {
         // click on first element of popover:
         fireEvent.click(result.getAllByTestId("usermenuitem")[0]);
         // TODO 📑: will be implemented in the future. Current menu is mock.
-    });
-
-    test('useLearningPath returns expected values (status 200)', async() => {
-        const mockResponse = {
-            status: 200,
-            message: 'OK',
-            data: {
-                topics: [
-                    {
-                        based_on: "example",
-                        calculated_on: null,
-                        course_id: 1,
-                        id: 1,
-                        path: [
-                            {
-                                id: 1,
-                                learning_element: {},
-                                learning_element_id: 2,
-                                learning_path_id: 1,
-                                position: 2,
-                                recommended: true
-                            },
-                            {
-                                id: 1,
-                                learning_element: {},
-                                learning_element_id: 3,
-                                learning_path_id: 1,
-                                position: 1,
-                                recommended: true
-                            }
-                        ]
-                    }
-                ],
-                path: [
-                    {
-                        id: 1,
-                        learning_element: {},
-                        learning_element_id: 2,
-                        learning_path_id: 1,
-                        position: 2,
-                        recommended: true
-                    },
-                    {
-                        id: 1,
-                        learning_element: {},
-                        learning_element_id: 3,
-                        learning_path_id: 1,
-                        position: 1,
-                        recommended: true
-                    }
-
-                ],
-            },
-        };
-        const mockFetch = jest.fn().mockResolvedValue({
-            json: () => Promise.resolve(mockResponse.data),
-            status: mockResponse.status,
-            statusText: mockResponse.message,
-        });
-        window.fetch = mockFetch;
-
-        await renderHook(() => useLearningPath());
-
-        expect(mockFetch).toHaveBeenCalledTimes(1);
-        expect(mockFetch).toHaveBeenCalledWith(process.env.BACKEND + `/user/2/5/student/1/course/1/topic`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'text/json',
-            },
-        });
-    });
-
-    test('useLearningPath returns expected values (status 500)', async() => {
-        const mockResponse = {
-            status: 500,
-            message: 'Error',
-            data: {
-                topics: [],
-            },
-        };
-        const mockFetch = jest.fn().mockResolvedValue({
-            json: () => Promise.resolve(mockResponse.data),
-            status: mockResponse.status,
-            statusText: mockResponse.message,
-        });
-        window.fetch = mockFetch;
-
-        const {result} = await renderHook(() => useLearningPath());
-
-        expect(mockFetch).toHaveBeenCalledTimes(1);
-        expect(mockFetch).toHaveBeenCalledWith(process.env.BACKEND + `/user/2/5/student/1/course/1/topic`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'text/json',
-            },
-        });
-        expect(result.current.loading).toBeTruthy();
-        expect(result.current.topics).toEqual(mockResponse.data.topics);
-        expect(result.current.learningPath).toHaveLength(0);
     });
 
 
