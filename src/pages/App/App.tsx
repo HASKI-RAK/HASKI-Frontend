@@ -1,9 +1,16 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { DefaultThemeProvider as ThemeProvider } from "@common/components";
-import { MainFrame, Home, ThemePresentation, Login, Dashboard } from "@pages";
+import {
+  MainFrame,
+  Home,
+  ThemePresentation,
+  Login,
+  Dashboard,
+  ProjectDescription,
+} from "@pages";
 import { AuthProvider } from "@services";
 import { logBuffer } from "@shared";
-import { Theme } from "@utils";
+import { HaskiTheme } from "@utils";
 
 logBuffer();
 
@@ -18,7 +25,7 @@ logBuffer();
  * @category Pages
  */
 const App = () => (
-  <ThemeProvider theme={Theme}>
+  <ThemeProvider theme={HaskiTheme}>
     <AuthProvider>
       <Router>
         <Routes>
@@ -27,6 +34,10 @@ const App = () => (
             <Route path="/theme" element={<ThemePresentation />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/projectdescription"
+              element={<ProjectDescription />}
+            />
             <Route path="*" element={<div>404</div>} />
           </Route>
           <Route path="*" element={<div>404</div>} />

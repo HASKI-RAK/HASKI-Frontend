@@ -12,6 +12,10 @@ import MenuBar from "./MenuBar/MenuBar";
 import Footer from "./Footer/Footer";
 import LocalNav from "./LocalNav/LocalNav";
 import BreadcrumbsContainer from "./BreadcrumbsContainer/BreadcrumbsContainer";
+import HASKILettering from "./HASKILettering/HASKILettering";
+import ProjectDescriptionForm from "./ProjectDescriptionForm/ProjectDescriptionForm";
+import ProjectDescriptionCard from "./ProjectDescriptionCard/ProjectDescriptionCard";
+import ProjectDescriptionStepper from "./ProjectDescriptionStepper/ProjectDescriptionStepper";
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
@@ -31,4 +35,8 @@ export {
   GraphListK,
   ResultDescriptionListK,
   QuestionnaireResultsModal,
+  HASKILettering,
+  ProjectDescriptionForm,
+  ProjectDescriptionCard,
+  ProjectDescriptionStepper,
 };

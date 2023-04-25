@@ -1,7 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import { yellow, red } from "@mui/material/colors";
 
-
 export const defaultBehavior = {
   boxShadowSize: {
     default: "2px 2px 0",
@@ -22,15 +21,15 @@ export const defaultFonts = {
 export const defaultColors = {
   primary: {
     //orange
-    [100]:"#FF8E00",//light orange
-    [300]:"#FD7702",//strong orange
-    [900]:"#FF5003",//dark orange
+    [100]: "#FF8E00", //light orange
+    [300]: "#FD7702", //strong orange
+    [900]: "#FF5003", //dark orange
   },
   secondary: {
     //blue
-    [100]:"#003F7D",//blue
-    [300]:"#003366",//blue, slightly darker
-    [500]:"#002347",//blue, darker
+    [100]: "#003F7D", //blue
+    [300]: "#003366", //blue, slightly darker
+    [500]: "#002347", //blue, darker
   },
 
   lightgrey: "lightgrey",
@@ -66,12 +65,9 @@ export const HaskiTheme = createTheme({
   },
 
   typography: {
-    fontFamily: [
-      'Courier New',
-      'regular'
-    ].join(','),
+    fontFamily: ["Courier New", "regular"].join(","),
   },
- 
+
   components: {
     // Name of the component
     MuiPaper: {
@@ -89,8 +85,8 @@ export const HaskiTheme = createTheme({
     MuiButton: {
       //disables the ripple effect
       defaultProps: {
-            disableRipple: true,
-          },
+        disableRipple: true,
+      },
       styleOverrides: {
         // Name of the slot
         root: {
@@ -110,8 +106,7 @@ export const HaskiTheme = createTheme({
           top: "-2px",
           padding: "0.5rem 1.2rem 0.5rem 1.2rem",
           transition: "filter 0.1s ease",
-          
-          
+
           //padding: 'var(--web-ui_button-padding,0 16px)',
           "&:hover": {
             filter: "var(--web-ui_button-filter-hover,brightness(1.1))",
@@ -128,8 +123,7 @@ export const HaskiTheme = createTheme({
           color: defaultColors.black,
           backgroundColor: defaultColors.primary[100],
           boxShadow:
-            defaultBehavior.boxShadowSize["default"] +
-            defaultColors.black,
+            defaultBehavior.boxShadowSize["default"] + defaultColors.black,
           borderColor: defaultColors.black,
           "&:hover": {
             backgroundColor: defaultColors.primary[100],
@@ -142,23 +136,20 @@ export const HaskiTheme = createTheme({
           "&:active": {
             //transform: "translateY(4px) translateZ(0)",
             boxShadow: "unset",
-            
           },
         },
         //Button wird unterstrichen
         outlined: {
           color: defaultColors.black,
           boxShadow:
-            defaultBehavior.boxShadowSize["default"] +
-            defaultColors.white,
+            defaultBehavior.boxShadowSize["default"] + defaultColors.white,
           borderColor: defaultColors.white,
           disableRipple: true,
           "&:hover": {
             textDecoration: "underline #FF8E00",
             border: defaultBehavior.border["default"],
             boxShadow:
-              defaultBehavior.boxShadowSize["default"] +
-              defaultColors.white,
+              defaultBehavior.boxShadowSize["default"] + defaultColors.white,
             borderColor: defaultColors.white,
             filter: "var(--web-ui_button-filter-hover,brightness(1.1))",
           },
@@ -166,8 +157,6 @@ export const HaskiTheme = createTheme({
             //transform: "translateY(4px) translateZ(0)",
             boxShadow: "unset",
           },
-          
-          
         },
       },
     },
@@ -177,7 +166,6 @@ export const HaskiTheme = createTheme({
           color: defaultColors.black,
           "&:hover": {
             textDecoration: "underline #FF8E00",
-
           },
         },
       },
@@ -190,35 +178,32 @@ export const HaskiTheme = createTheme({
           height: 32,
           outline: "2px auto {defaultColors.black}",
           backgroundColor: defaultColors.white,
-        
+
           color: defaultColors.black,
-          '.Mui-focusVisible &': {
-            outline: '2px auto rgba(19,124,189,.6)',
+          ".Mui-focusVisible &": {
+            outline: "2px auto rgba(19,124,189,.6)",
             outlineOffset: 2,
           },
           "&:hover": {
             backgroundColor: defaultColors.lightgrey,
-            
           },
           "&:checked": {
             color: defaultColors.secondary[100],
             backgroundColor: defaultColors.secondary[100],
           },
-          ":disabled":{
+          ":disabled": {
             color: defaultColors.lightgrey,
             cursor: "not-allowed",
           },
-        
         },
         colorSecondary: {
           color: defaultColors.secondary[100],
-          "&$checked": {	
+          "&$checked": {
             color: defaultColors.secondary[100],
           },
         },
       },
     },
-    
   },
 });
 
@@ -288,4 +273,3 @@ export const bottom_text_right = {
   paddingLeft: "0.2rem",
   right: "0.5rem",
 };
-
