@@ -19,6 +19,9 @@ export const Home = () => {
                     }}
                     data-testid={"QuestionnaireResultsButton"}>{t("components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText")}
             </Button>
+            <Button href="/contact">
+                Contact
+            </Button>
             <QuestionnaireResultsModal open={open} handleClose={()=>setOpen(!open)}/>
             <DropdownLanguage/>
             <Text/>

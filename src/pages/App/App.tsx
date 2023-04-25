@@ -4,7 +4,7 @@ import { DefaultThemeProvider as ThemeProvider } from "@common/components";
 import { MainFrame, Home, ThemePresentation, Login, Dashboard, Contact } from "@pages";
 import { AuthProvider } from "@services";
 import { logBuffer } from "@shared";
-import { Theme } from "@utils";
+import { HaskiTheme, Theme } from "@utils";
 
 logBuffer();
 
@@ -19,7 +19,7 @@ logBuffer();
  * @category Pages
  */
 const App = () => (
-  <ThemeProvider theme={Theme}>
+  <ThemeProvider theme={HaskiTheme}>
     <AuthProvider>
       <Router>
         <Routes>

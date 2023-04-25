@@ -14,7 +14,7 @@ test("Test default params", () => {
   const form = render(
     <ContactForm />
   );
-  const submitButton = form.getByText("components.ContactForm.ContactForm.submit");
+  const submitButton = form.getByText("components.ContactForm.submit");
   const input = form.getByRole("textbox");
   fireEvent.change(input, { target: { value: "text" } });
   fireEvent.click(submitButton);
@@ -26,9 +26,9 @@ test("submits form correctly", () => {
   const send = jest.fn();
   
   const form = render(
-    <ContactForm defaultWidth={""} onsendtoBackend={send}/>
+    <ContactForm onsendtoBackend={send}/>
   );
-  const submitButton = form.getByText("components.ContactForm.ContactForm.submit");
+  const submitButton = form.getByText("components.ContactForm.submit");
   const input = form.getByRole("textbox");
   fireEvent.change(input, { target: { value: "text" } });
   fireEvent.click(submitButton);
@@ -41,9 +41,9 @@ test("submits form incorrectly", () => {
   const send = jest.fn();
   const text = "60%";
   const form = render(
-    <ContactForm defaultWidth={text} onsendtoBackend={send}/>
+    <ContactForm onsendtoBackend={send}/>
   );
-  const submitButton = form.getByText("components.ContactForm.ContactForm.submit");
+  const submitButton = form.getByText("components.ContactForm.submit");
 
   fireEvent.click(submitButton);
   expect(typeof text).toBe("string");
@@ -54,7 +54,7 @@ test("submits form incorrectly", () => {
 test("check InputChange function", () => {
 
   const { getAllByRole, getByRole } = render(
-    <ContactForm defaultWidth={""} />
+    <ContactForm/>
   );
   fireEvent.mouseDown(getByRole("button", { name: /Topic/i }));
   act(() => {
@@ -68,7 +68,7 @@ test("check InputChange function", () => {
 test("renders correctly and matches snapshot", () => {
 
   const tree = renderer
-    .create(<ContactForm defaultWidth={""} />)
+    .create(<ContactForm/>)
     .toJSON();
     
 });

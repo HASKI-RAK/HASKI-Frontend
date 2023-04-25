@@ -20,6 +20,7 @@ import {
   useContactFormHookParams,
   ContactFormHookReturn,
 } from "./ContactForm.hooks";
+import { FormHelperText } from "@mui/material";
 /**
  * ContactForm component.
  *
@@ -33,164 +34,147 @@ import {
  * @category Pages
  */
 
-const defaultContactValues = {
-  name: "",
-  reporttype: "other",
-  reporttopic: "other",
-  description: "",
-};
-
 export type ContactFormProps = {
-  defaultWidth?: string;
+  descriptionDefaultValue?: string;
+  onSubmit?: () => void;
   onsendtoBackend?: () => void;
   useContactForm?: (params?: useContactFormHookParams) => ContactFormHookReturn;
 };
 
 export const ContactForm = ({
-  useContactForm = _useContactForm, 
+  useContactForm = _useContactForm,
   ...props
 }: ContactFormProps) => {
-  const [contactValues, setContactValues] = useState(defaultContactValues);
   const [textfieldError, setTextfieldError] = useState(false);
+  const [selectError, setSelectError] = useState(false);
   const { t } = useTranslation();
 
   // ** Get Functions from Hook ** //
-  const { sendtoBackend, width } = useContactForm();
- 
+  const {
+    sendtoBackend,
+    submit,
+    setReportType,
+    setReportTopic,
+    setDescription,
+    description,
+    reportTopic,
+    reportType,
+  } = useContactForm();
 
   // ** Override Functions if passed as props ** //
-  const {defaultWidth=width, 
-    onsendtoBackend=sendtoBackend} = props;
+  const { onsendtoBackend = sendtoBackend, onSubmit = submit } = props;
 
-  
-  const handleInputChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | SelectChangeEvent<string>
-      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setContactValues({
-      ...contactValues,
-      [name]: value,
-    });
+  const reporttypeChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setReportType(event.target.value);
+  };
+  const reporttopicChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>
+  ): void => {
+    setReportTopic(event.target.value);
+  };
+  const descriptionChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setDescription(event.target.value);
   };
   const handleSubmit = (
     event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLElement>
   ) => {
     event.preventDefault();
-    if (!contactValues.description) {
+    if (!reportTopic) {
+      setSelectError(true);
+      if (!description) {
+        setTextfieldError(true);
+      }
+    } else if (!description) {
       setTextfieldError(true);
+      if (reportTopic) {
+        setSelectError(false);
+      }
     } else {
       setTextfieldError(false);
-      console.log(contactValues);
+      setSelectError(false);
+      onSubmit();
       onsendtoBackend();
     }
   };
 
+  const reportTypes = t("components.ContactForm.types", {
+    returnObjects: true,
+  }) as [{ value: string; label: string }];
+  const reportTopics = t("components.ContactForm.topics", {
+    returnObjects: true,
+  }) as [{ value: string; label: string }];
   return (
     <form onSubmit={handleSubmit}>
       <Stack spacing={2} sx={{ minWidth: 120 }}>
         <Typography variant="h5" component="h5">
-          {t("components.ContactForm.ContactForm.contactform")}
+          {t("components.ContactForm.contactform")}
         </Typography>
 
-        <Stack spacing={2}>
-          <FormControl sx={{ defaultWidth }}>
-            <InputLabel id="select_label_contact">
-              {t("components.ContactForm.ContactForm.topic")}
-            </InputLabel>
-            <Select
-              name="reporttopic"
-              labelId="select_label_contact"
-              label="topic"
-              value={contactValues.reporttopic}
-              onChange={handleInputChange}
-            >
-              <MenuItem value={"le"}>
-                {t("components.ContactForm.ContactForm.learningelement")}
+        <FormControl required>
+          <InputLabel id="select_label_contact">
+            {t("components.ContactForm.topic")}
+          </InputLabel>
+          <Select
+            name="reporttopic"
+            labelId="select_label_contact"
+            label="topic"
+            onChange={reporttopicChangeHandler}
+            error={selectError}
+          >
+            {reportTopics.map((topic) => (
+              <MenuItem key={topic.value} value={topic.value}>
+                {topic.label}
               </MenuItem>
-              <MenuItem value={"ui"}>
-                {t("components.ContactForm.ContactForm.ui")}
-              </MenuItem>
-              <MenuItem value={"design"}>
-                {t("components.ContactForm.ContactForm.design")}
-              </MenuItem>
-              <MenuItem value={"other"}>
-                {t("components.ContactForm.ContactForm.other")}
-              </MenuItem>
-              <MenuItem value={5}>
-                {t("components.ContactForm.ContactForm.other")}
-              </MenuItem>
-            </Select>
-          </FormControl>
+            ))}
+          </Select>
+          <FormHelperText>
+            <Typography>
+            {selectError ? t("components.ContactForm.errorSelect") : ""}
+            </Typography>
+          </FormHelperText>
+        </FormControl>
 
-          <FormControl>
-            <FormLabel id="radio_contact_label">
-              {t("components.ContactForm.ContactForm.reportType")}
-            </FormLabel>
-            <RadioGroup
-              row
-              name="reporttype"
-              value={contactValues.reporttype}
-              onChange={handleInputChange}
-            >
-              <FormControlLabel
-                value="issue"
-                control={<RadioButton />}
-                label={t("components.ContactForm.ContactForm.issue")}
-              />
-              <FormControlLabel
-                value="bug"
-                control={<RadioButton />}
-                label={t("components.ContactForm.ContactForm.bug")}
-              />
-              <FormControlLabel
-                value="feedback"
-                control={<RadioButton />}
-                label={t("components.ContactForm.ContactForm.feedback")}
-              />
-              <FormControlLabel
-                value="feature"
-                control={<RadioButton />}
-                label={t("components.ContactForm.ContactForm.feature")}
-              />
-              <FormControlLabel
-                value="other"
-                control={<RadioButton />}
-                label={t("components.ContactForm.ContactForm.other")}
-              />
-            </RadioGroup>
-          </FormControl>
-        </Stack>
+        <FormLabel id="radio_contact_label" sx={{ mt: "0.6rem" }}>
+          {t("components.ContactForm.reportType")}
+        </FormLabel>
+        <RadioGroup
+          row
+          name="reporttype"
+          value={reportType}
+          onChange={reporttypeChangeHandler}
+        >
+          {reportTypes.map((report) => (
+            <FormControlLabel
+              key={report.value}
+              value={report.value}
+              control={<RadioButton />}
+              label={report.label}
+            />
+          ))}
+        </RadioGroup>
 
-        <FormControl fullWidth>
+        <FormControl>
           <TextField
             id="desc_input"
             data-testid="desc_input"
             name="description"
             type="text"
             required
-            label={t("components.ContactForm.ContactForm.briefDescription")}
+            label={t("components.ContactForm.briefDescription")}
             rows={5}
             maxRows={15}
-            value={contactValues.description}
-            onChange={handleInputChange}
+            value={description}
+            onChange={descriptionChangeHandler}
             error={textfieldError}
-            helperText={
-              textfieldError ? t("components.ContactForm.ContactForm.error") : ""
-            }
+            helperText={textfieldError ? t("components.ContactForm.error") : ""}
           />
-        </FormControl>
 
-        <FormControl fullWidth>
-          <Button
-            variant="outlined"
-            sx={{ alignSelf: "end", width: 250 }}
-            //href="/"
-            onClick={handleSubmit}
-          >
-            {t("components.ContactForm.ContactForm.submit")}
+          <Button sx={{ alignSelf: "end" }} onClick={handleSubmit}>
+            {t("components.ContactForm.submit")}
           </Button>
         </FormControl>
       </Stack>
