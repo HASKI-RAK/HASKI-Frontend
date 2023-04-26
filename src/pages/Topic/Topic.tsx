@@ -1,7 +1,8 @@
-import { TopicLearningElements, LearningElement } from '@core'
+import { TopicLearningElements as TopicLearningElement, LearningElement } from '@core'
 import { Box, Card, Modal, Typography } from '@mui/material'
 import log from 'loglevel'
 import { useEffect, useMemo, useState } from 'react'
+import { create, StateCreator } from 'zustand'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 import ReactFlow, { Handle, Node, NodeProps, NodeTypes, Position } from 'reactflow'
@@ -66,7 +67,7 @@ const IframeModal = ({
     </Modal>
   )
 }
-const learning_path_mock: TopicLearningElements[] = [
+const learning_path_mock: TopicLearningElement[] = [
   {
     position: 1,
     learning_element: {
@@ -116,6 +117,32 @@ const learning_path_mock: TopicLearningElements[] = [
     }
   }
 ]
+
+interface TopicSlice {
+  topicLearningElements: TopicLearningElement[]
+  addBear: () => void
+  eatFish: () => void
+}
+const createBearSlice: StateCreator<TopicSlice & FishSlice, [], [], TopicSlice> = (set) => ({
+  bears: 0,
+  addBear: () => set((state) => ({ bears: state.bears + 1 })),
+  eatFish: () => set((state) => ({ fishes: state.fishes - 1 }))
+})
+
+interface FishSlice {
+  fishes: number
+  addFish: () => void
+}
+const createFishSlice: StateCreator<TopicSlice & FishSlice, [], [], FishSlice> = (set) => ({
+  fishes: 0,
+  addFish: () => set((state) => ({ fishes: state.fishes + 1 }))
+})
+
+const useBoundStore = create<TopicSlice & FishSlice>()((...a) => ({
+  ...createBearSlice(...a),
+  ...createFishSlice(...a)
+}))
+
 const _useTopic = () => {
   const [initalNodes, setInitalNodes] = useState<TopicNode[]>()
   const [initalEdges, setInitalEdges] = useState<TopicEdge[]>()
@@ -208,7 +235,7 @@ const nodeTypes: NodeTypes = {
 type TopicProps = {
   useTopic?: typeof _useTopic
 }
-
+// TODO URL Stuktur übelrgeen. bzswp. localhost:3000/topic?topic=1
 const initialNodes = [
   { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
   { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } }
@@ -271,7 +298,7 @@ type TopicEdge = {
   source: string
   target: string
 }
-const topiclearningelements_to_nodes = (learning_path: TopicLearningElements[]): Node[] => {
+const topiclearningelements_to_nodes = (learning_path: TopicLearningElement[]): Node<TopicNode>[] => {
   // alert('map_TopicLearningElements_to_reactflow')
   return learning_path.map((item, index) => {
     return {

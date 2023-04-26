@@ -1,4 +1,4 @@
-type TopicLearningElements = {
+type TopicLearningElement = {
   position: number
   learning_element: LearningElement
 }
@@ -17,4 +17,4 @@ export type LearningElement = {
   is_recommended: boolean
 }
 
-export default TopicLearningElements
+export default TopicLearningElement
