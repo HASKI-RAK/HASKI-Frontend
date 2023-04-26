@@ -7,8 +7,10 @@ import { GraphListK } from './Questionnaire/GraphListK'
 import { ResultDescriptionListK } from './Questionnaire/ResultDescriptionListK'
 import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResultsModal'
 import { Text } from './Text/Text'
+import { Imprint } from './Imprint/Imprint'
 import LoginForm from './LoginForm/LoginForm'
 import MenuBar from './MenuBar/MenuBar'
+
 import Footer from './Footer/Footer'
 import LocalNav from './LocalNav/LocalNav'
 import BreadcrumbsContainer from './BreadcrumbsContainer/BreadcrumbsContainer'
@@ -30,5 +32,6 @@ export {
   TableListK,
   GraphListK,
   ResultDescriptionListK,
-  QuestionnaireResultsModal
+  QuestionnaireResultsModal,
+  Imprint
 }
