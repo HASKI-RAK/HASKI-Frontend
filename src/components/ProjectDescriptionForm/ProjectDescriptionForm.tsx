@@ -20,8 +20,8 @@ const ProjectDescriptionForm = () => {
   return (
     <div data-testid="projectDescriptionForm">
       <ProjectDescriptionCard
-        header={t("components.ProjectDescriptionForm.introductionHeader") || ""}
-        body={t("components.ProjectDescriptionForm.introductionBody") || ""}
+        header={t("components.ProjectDescriptionForm.introductionHeader")}
+        body={t("components.ProjectDescriptionForm.introductionBody")}
       >
         <Box
           component="img"
@@ -33,7 +33,7 @@ const ProjectDescriptionForm = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionStepper
-        header={t("components.ProjectDescriptionForm.approachesHeader") || ""}
+        header={t("components.ProjectDescriptionForm.approachesHeader")}
         body={
           t<string>("components.ProjectDescriptionForm.approachesBody", {
             returnObjects: true,
@@ -41,12 +41,8 @@ const ProjectDescriptionForm = () => {
         }
       />
       <ProjectDescriptionCard
-        header={
-          t("components.ProjectDescriptionForm.advantagesTeachingHeader") || ""
-        }
-        body={
-          t("components.ProjectDescriptionForm.advantagesTeachingBody") || ""
-        }
+        header={t("components.ProjectDescriptionForm.advantagesTeachingHeader")}
+        body={t("components.ProjectDescriptionForm.advantagesTeachingBody")}
       >
         <Avatar
           alt="Advantages Teaching 1"
@@ -58,12 +54,10 @@ const ProjectDescriptionForm = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionCard
-        header={
-          t("components.ProjectDescriptionForm.advantagesTeachingHeader2") || ""
-        }
-        body={
-          t("components.ProjectDescriptionForm.advantagesTeachingBody2") || ""
-        }
+        header={t(
+          "components.ProjectDescriptionForm.advantagesTeachingHeader2"
+        )}
+        body={t("components.ProjectDescriptionForm.advantagesTeachingBody2")}
       >
         <Avatar
           alt="Advantages Teaching 2"
@@ -75,12 +69,8 @@ const ProjectDescriptionForm = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionCard
-        header={
-          t("components.ProjectDescriptionForm.advantagesLearningHeader") || ""
-        }
-        body={
-          t("components.ProjectDescriptionForm.advantagesLearningBody") || ""
-        }
+        header={t("components.ProjectDescriptionForm.advantagesLearningHeader")}
+        body={t("components.ProjectDescriptionForm.advantagesLearningBody")}
       >
         <Avatar
           alt="Advantages Learning 1"
@@ -92,12 +82,10 @@ const ProjectDescriptionForm = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionCard
-        header={
-          t("components.ProjectDescriptionForm.advantagesLearningHeader2") || ""
-        }
-        body={
-          t("components.ProjectDescriptionForm.advantagesLearningBody2") || ""
-        }
+        header={t(
+          "components.ProjectDescriptionForm.advantagesLearningHeader2"
+        )}
+        body={t("components.ProjectDescriptionForm.advantagesLearningBody2")}
       >
         <Avatar
           alt="Advantages Learning 2"
@@ -109,7 +97,7 @@ const ProjectDescriptionForm = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionStepper
-        header={t("components.ProjectDescriptionForm.goalsHeader") || ""}
+        header={t("components.ProjectDescriptionForm.goalsHeader")}
         body={
           t<string>("components.ProjectDescriptionForm.goalsBody", {
             returnObjects: true,

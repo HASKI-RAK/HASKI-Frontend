@@ -5,6 +5,11 @@ import {
   DefaultGrid as Grid,
   DefaultTypography as Typography,
 } from "@common/components";
+import {
+  useProjectDescriptionCard as _useProjectDescriptionCard,
+  useProjectDescriptionCardHookParams,
+  ProjectDescriptionCardHookReturn,
+} from "./ProjectDescriptionCard.hooks";
 
 /**
  * @typedef {Object} ProjectDescriptionCardProps
@@ -16,7 +21,12 @@ type ProjectDescriptionCardProps = {
   body?: string;
   children?: React.ReactNode;
   header?: string;
+  useProjectDescriptionCard?: (
+    // TODO: Könnte man diese Prop eventuell mocken?
+    params?: useProjectDescriptionCardHookParams
+  ) => ProjectDescriptionCardHookReturn;
 };
+
 /**
  * ProjectDescriptionCard presents a component that displays a header and a body text on the left side and a child element on the right side.
  * The header text is animated by using a typewriter effect. The body text is animated by using a fade in effect.
@@ -25,52 +35,24 @@ type ProjectDescriptionCardProps = {
  * @returns {JSX.Element} - The ProjectDescriptionCard component.
  * @category Components
  */
-const ProjectDescriptionCard = (props: ProjectDescriptionCardProps) => {
+const ProjectDescriptionCard = ({
+  useProjectDescriptionCard = _useProjectDescriptionCard,
+  ...props
+}: ProjectDescriptionCardProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [headerState, setHeaderState] = useState("");
-  const [bodyState, setBodyState] = useState("");
 
-  // Checks if top of component is in the viewport and animates header and body texts if states are not equal to props.
-  const animate = () => {
-    const topPosition = ref.current?.getBoundingClientRect().top;
-    const viewportBottom = window.innerHeight;
-
-    if (topPosition && topPosition < viewportBottom) {
-      if (props.header !== headerState) {
-        animateHeader();
-      }
-      if (props.body !== bodyState) {
-        animateBody();
-      }
-    }
-  };
-
-  // Animates header text by writing one character at a time into the headerState with a short timeout.
-  const animateHeader = () => {
-    const headerTimeout = setTimeout(() => {
-      props.header &&
-        setHeaderState(props.header.slice(0, headerState.length + 1));
-    }, 50);
-    return () => clearTimeout(headerTimeout);
-  };
-
-  // Animates body text by setting the bodyState after a short timeout.
-  const animateBody = () => {
-    const bodyTimeout =
-      props.header?.length &&
-      setTimeout(() => {
-        setBodyState(props.body!);
-      }, props.header?.length * 50);
-    return () => clearTimeout(bodyTimeout);
-  };
+  const { bodyState, headerState, animateBody, animateHeader } =
+    useProjectDescriptionCard();
 
   const handleScroll = () => {
-    animate();
+    props.body && animateBody(ref, props.body);
+    props.header && animateHeader(ref, props.header);
   };
 
   useEffect(() => {
     // Starts animation on component mount and continues already started animation.
-    animate();
+    props.body && animateBody(ref, props.body);
+    props.header && animateHeader(ref, props.header);
 
     window.addEventListener("scroll", handleScroll);
 
@@ -90,7 +72,11 @@ const ProjectDescriptionCard = (props: ProjectDescriptionCardProps) => {
         }}
       >
         <Grid item xs={7}>
-          <Typography variant="h3" align="center" sx={{ pt: "2.5rem" }}>
+          <Typography
+            variant="h3"
+            align="center"
+            sx={{ height: { sx: 200, md: 100 }, pt: "2.5rem" }}
+          >
             {headerState}
           </Typography>
           <Fade in={!!bodyState} easing="linear" timeout={1000}>
