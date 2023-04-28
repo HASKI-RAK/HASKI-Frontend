@@ -1,5 +1,4 @@
-import {LearningCharacteristicsILSResponse, learningCharacteristics, characteristics, ilsCharacteristics} from "./RequestResponse";
-import * as process from "process";
+import {LearningCharacteristicsILSResponse, learningCharacteristics} from "./RequestResponse";
 
 export const getLearningCharacteristicsILS = async(): Promise<LearningCharacteristicsILSResponse> => {
     try {
@@ -27,35 +26,35 @@ export const getLearningCharacteristicsILS = async(): Promise<LearningCharacteri
         const learningCharacteristicsExample: learningCharacteristics = {
             id: 1,
             knowledge: {
-                characteristicID: 1,
+                characteristic_id: 1,
                 id: 1
             },
-            learningAnalytics: {
-                characteristicID: 2,
+            learning_analytics: {
+                characteristic_id: 2,
                 id: 2
             },
-            learningStrategy: {
-                characteristicID: 3,
+            learning_strategy: {
+                characteristic_id: 3,
                 id: 3
             },
-            learningStyle: {
-                characteristicID: 4,
+            learning_style: {
+                characteristic_id: 4,
                 id: 4,
-                inputDimension: "vrb",
-                inputValue: 0,
-                perceptionDimension: "sns",
-                perceptionValue: 0,
-                processingDimension: "act",
-                processingValue: 0,
-                understandingDimension: "seq",
-                understandingValue: 0
+                input_dimension: "vrb",
+                input_value: 0,
+                perception_dimension: "sns",
+                perception_value: 0,
+                processing_dimension: "act",
+                processing_value: 0,
+                understanding_dimension: "seq",
+                understanding_value: 0
             },
-            studentID: 0
+            student_id: 0
         };
 
         return{
             status: 500,
-            message: "Some error occurred, while fetching the learning characteristics (ILS)",
+            message: process.env.BACKEND + '/user/2/5/student/1/learningCharacteristics',
             data: learningCharacteristicsExample
         }
     }

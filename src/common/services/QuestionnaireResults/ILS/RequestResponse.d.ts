@@ -1,28 +1,28 @@
 type ilsCharacteristics = {
-    characteristicID: number
+    characteristic_id: number
     id: number
-    inputDimension: string
-    inputValue: number
-    perceptionDimension: string
-    perceptionValue: number
-    processingDimension: string
-    processingValue: number
-    understandingDimension: string
-    understandingValue: number
+    input_dimension: string
+    input_value: number
+    perception_dimension: string
+    perception_value: number
+    processing_dimension: string
+    processing_value: number
+    understanding_dimension: string
+    understanding_value: number
 }
 
 type characteristics = {
-    characteristicID: number
+    characteristic_id: number
     id: number
 }
 
 type learningCharacteristics = {
     id: number;
     knowledge: characteristics
-    learningAnalytics: characteristics
-    learningStrategy: characteristics
-    learningStyle: ilsCharacteristics
-    studentID: number
+    learning_analytics: characteristics
+    learning_strategy: characteristics
+    learning_style: ilsCharacteristics
+    student_id: number
 }
 
 type RequestResponse = {

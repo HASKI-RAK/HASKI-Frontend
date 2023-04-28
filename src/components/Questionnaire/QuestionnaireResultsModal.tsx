@@ -17,6 +17,7 @@ import { ResultDescriptionILS } from './ResultDescriptionILS'
 import { ResultDescriptionListK } from './ResultDescriptionListK'
 import { GraphILS } from './GraphILS'
 import { TableILS } from './TableILS'
+import {learningCharacteristics} from "../../common/services/QuestionnaireResults/ILS/RequestResponse";
 
 const styleButtonClose = {
   position: 'sticky',
@@ -41,9 +42,10 @@ const styleBox = {
 type QuestionnaireResultsModalProps = {
   open?: boolean
   handleClose?: () => void
+  ILScharacteristics: learningCharacteristics
 }
 
-export const QuestionnaireResultsModal = ({ open = false, handleClose }: QuestionnaireResultsModalProps) => {
+export const QuestionnaireResultsModal = ({ open = false, handleClose, ILScharacteristics }: QuestionnaireResultsModalProps) => {
   const { t } = useTranslation()
 
   const steps = [
@@ -95,7 +97,7 @@ export const QuestionnaireResultsModal = ({ open = false, handleClose }: Questio
                         <div>
                           <Stack direction="row" justifyContent="space-between" alignItems="center">
                             <GraphILS />
-                            <TableILS />
+                            <TableILS learningStyle={ILScharacteristics}/>
                           </Stack>
                         </div>
                         <div>

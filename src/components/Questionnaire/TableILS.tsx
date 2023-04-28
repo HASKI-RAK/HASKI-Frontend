@@ -7,6 +7,7 @@ import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireTableStyle'
 import { ILS } from '@core'
+import {learningCharacteristics} from "../../common/services/QuestionnaireResults/ILS/RequestResponse";
 
 const ils = new ILS()
 
@@ -18,8 +19,21 @@ export const setILSParameters = (dimOne?: number, dimTwo?: number, dimThree?: nu
   ils.dimensionFourScore = dimFour ?? ils.dimensionFourScore
 }
 
+export const setILSParameters2 = (values: learningCharacteristics) => {
+  ils.dimensionOneScore = values.learning_style.input_value
+  ils.dimensionTwoScore = values.learning_style.perception_value
+  ils.dimensionThreeScore = values.learning_style.processing_value
+  ils.dimensionFourScore = values.learning_style.understanding_value
+}
+
 export const getILSParameters = () => {
   setILSParameters()
+
+  return [ils.dimensionOneScore, ils.dimensionTwoScore, ils.dimensionThreeScore, ils.dimensionFourScore]
+}
+
+export const getILSParameters2 = (values: { learningStyle: TableILSProps }) => {
+  setILSParameters2(values.learningStyle.learningStyle)
 
   return [ils.dimensionOneScore, ils.dimensionTwoScore, ils.dimensionThreeScore, ils.dimensionFourScore]
 }
@@ -112,9 +126,14 @@ export const ILSDimension = (dimensionNumber: number, score: number, onlyEnglish
   }
 }
 
-export const TableILS = () => {
+type TableILSProps = {
+  learningStyle: learningCharacteristics;
+};
+
+export const TableILS = (learningStyle: TableILSProps) => {
   const { t } = useTranslation()
-  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters()
+  console.log({learningStyle})
+  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters2({learningStyle})
 
   const rows = [
     {
