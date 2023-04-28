@@ -118,31 +118,6 @@ const learning_path_mock: TopicLearningElement[] = [
   }
 ]
 
-interface TopicSlice {
-  topicLearningElements: TopicLearningElement[]
-  addBear: () => void
-  eatFish: () => void
-}
-const createBearSlice: StateCreator<TopicSlice & FishSlice, [], [], TopicSlice> = (set) => ({
-  bears: 0,
-  addBear: () => set((state) => ({ bears: state.bears + 1 })),
-  eatFish: () => set((state) => ({ fishes: state.fishes - 1 }))
-})
-
-interface FishSlice {
-  fishes: number
-  addFish: () => void
-}
-const createFishSlice: StateCreator<TopicSlice & FishSlice, [], [], FishSlice> = (set) => ({
-  fishes: 0,
-  addFish: () => set((state) => ({ fishes: state.fishes + 1 }))
-})
-
-const useBoundStore = create<TopicSlice & FishSlice>()((...a) => ({
-  ...createBearSlice(...a),
-  ...createFishSlice(...a)
-}))
-
 const _useTopic = () => {
   const [initalNodes, setInitalNodes] = useState<TopicNode[]>()
   const [initalEdges, setInitalEdges] = useState<TopicEdge[]>()
@@ -241,7 +216,7 @@ const initialNodes = [
   { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } }
 ]
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }]
-
+// Topic Page - TODO Component extract
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
   const [url, setUrl] = useState('')

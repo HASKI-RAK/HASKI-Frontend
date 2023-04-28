@@ -6,4 +6,4 @@ import TopicLearningElement, { LearningElement } from './TopicLearningElement/To
  * Holds all pure business logic. Does not rely on any other components.
  */
 export { User, ILS, ListK }
-export type { TopicLearningElement as TopicLearningElements, LearningElement }
+export type { TopicLearningElement, LearningElement }
