@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom'
-import { TableILS, ILSInterpretation, getILSParameters, ILSDimension } from './TableILS'
+import { TableILS, ILSInterpretation, getILSParameters2, ILSDimension } from './TableILS'
 import { render } from '@testing-library/react'
 import React from 'react'
+import {learningCharacteristics} from "../../common/services/QuestionnaireResults/ILS/RequestResponse";
 
 //we have to mock react-i18next otherwise a warning will appear
 //"You will need pass in an i18next instance by using initReactI18next" => mock is needed.
@@ -22,9 +23,38 @@ jest.mock('react-i18next', () => ({
   }
 }))
 
+const learningCharacteristicsExample: learningCharacteristics = {
+  id: 1,
+  knowledge: {
+    characteristic_id: 1,
+    id: 1
+  },
+  learning_analytics: {
+    characteristic_id: 2,
+    id: 2
+  },
+  learning_strategy: {
+    characteristic_id: 3,
+    id: 3
+  },
+  learning_style: {
+    characteristic_id: 4,
+    id: 4,
+    input_dimension: "vrb",
+    input_value: 0,
+    perception_dimension: "sns",
+    perception_value: 0,
+    processing_dimension: "act",
+    processing_value: 0,
+    understanding_dimension: "seq",
+    understanding_value: 0
+  },
+  student_id: 0
+};
+
 describe('Test TableILS with all Methods', () => {
   test('ILS parameters are plausible', () => {
-    const ILSParameters = getILSParameters()
+    const ILSParameters = getILSParameters2()
 
     expect(ILSParameters.length).toBe(4)
     expect(ILSParameters[0] > -12 && ILSParameters[0] < 12).toBe(true)
@@ -33,8 +63,8 @@ describe('Test TableILS with all Methods', () => {
     expect(ILSParameters[3] > -12 && ILSParameters[3] < 12).toBe(true)
   })
 
-  test('Table values are correct', () => {
-    const { getAllByRole } = render(<TableILS />)
+ test('Table values are correct', () => {
+    const { getAllByRole } = render(<TableILS learningStyle={learningCharacteristicsExample} />)
 
     expect(getAllByRole('columnheader')[0]).toHaveTextContent('components.QuestionnaireResults.TableILS.Dimension')
     expect(getAllByRole('columnheader')[1]).toHaveTextContent('')
@@ -87,7 +117,6 @@ describe('Test TableILS with all Methods', () => {
     expect(ILSInterpretation(11, 'components.QuestionnaireResults.TableILS.Reflective')).toBe(
       'components.QuestionnaireResults.TableILS.strong components.QuestionnaireResults.TableILS.Reflective'
     )
-
     expect(ILSInterpretation(-1, 'components.QuestionnaireResults.TableILS.Reflective', true)).toBe(
       'components.QuestionnaireResults.TableILS.balanced'
     )
@@ -150,7 +179,7 @@ describe('Test TableILS with all Methods', () => {
   })
 
   test('Table Score-values are numbers', () => {
-    const { getAllByRole } = render(<TableILS />)
+    const { getAllByRole } = render(<TableILS learningStyle={learningCharacteristicsExample} />)
 
     const cell3 = getAllByRole('cell')[3].textContent
     let cell3Int

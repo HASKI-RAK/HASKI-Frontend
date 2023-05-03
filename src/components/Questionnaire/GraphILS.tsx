@@ -1,5 +1,5 @@
 import { Bar } from '@nivo/bar'
-import { getILSParameters } from './TableILS'
+import { getILSParameters2 } from './TableILS'
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '@mui/material'
 
@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material'
 // The naming of the Key "possibleDimensions" is not important, as it is not used in the Graph, just for indexing
 export const useData = (): { possibleDimensions: string; [Dimension: string]: string }[] => {
   const { t } = useTranslation()
-  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters()
+  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters2()
 
   return [
     {

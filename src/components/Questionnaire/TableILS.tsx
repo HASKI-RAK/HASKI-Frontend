@@ -12,28 +12,32 @@ import {learningCharacteristics} from "../../common/services/QuestionnaireResult
 const ils = new ILS()
 
 //Setting ILS-Parameters for tests
-export const setILSParameters = (dimOne?: number, dimTwo?: number, dimThree?: number, dimFour?: number) => {
+/*export const setILSParameters = (dimOne?: number, dimTwo?: number, dimThree?: number, dimFour?: number) => {
   ils.dimensionOneScore = dimOne ?? ils.dimensionOneScore
   ils.dimensionTwoScore = dimTwo ?? ils.dimensionTwoScore
   ils.dimensionThreeScore = dimThree ?? ils.dimensionThreeScore
   ils.dimensionFourScore = dimFour ?? ils.dimensionFourScore
+}*/
+
+export const setILSParameters2 = (values?: learningCharacteristics) => {
+
+  if(!values) {return}
+  else{
+  ils.dimensionOneScore = values.learning_style.processing_dimension === "act" ? values.learning_style.processing_value : (-values.learning_style.processing_value)
+  ils.dimensionTwoScore = values.learning_style.perception_dimension === "sns" ? values.learning_style.perception_value : (-values.learning_style.perception_value)
+  ils.dimensionThreeScore = values.learning_style.input_dimension === "vis" ? values.learning_style.input_value : (-values.learning_style.input_value)
+  ils.dimensionFourScore = values.learning_style.understanding_dimension === "seq" ? values.learning_style.understanding_value : (-values.learning_style.understanding_value)}
 }
 
-export const setILSParameters2 = (values: learningCharacteristics) => {
-  ils.dimensionOneScore = values.learning_style.input_value
-  ils.dimensionTwoScore = values.learning_style.perception_value
-  ils.dimensionThreeScore = values.learning_style.processing_value
-  ils.dimensionFourScore = values.learning_style.understanding_value
-}
-
-export const getILSParameters = () => {
+/*export const getILSParameters = () => {
   setILSParameters()
 
   return [ils.dimensionOneScore, ils.dimensionTwoScore, ils.dimensionThreeScore, ils.dimensionFourScore]
-}
+}*/
 
-export const getILSParameters2 = (values: { learningStyle: TableILSProps }) => {
-  setILSParameters2(values.learningStyle.learningStyle)
+export const getILSParameters2 = ( ilsProps?: TableILSProps ) => {
+
+  if(ilsProps) {setILSParameters2(ilsProps.learningStyle)}
 
   return [ils.dimensionOneScore, ils.dimensionTwoScore, ils.dimensionThreeScore, ils.dimensionFourScore]
 }
@@ -130,10 +134,9 @@ type TableILSProps = {
   learningStyle: learningCharacteristics;
 };
 
-export const TableILS = (learningStyle: TableILSProps) => {
+export const TableILS = (ilsProps: TableILSProps) => {
   const { t } = useTranslation()
-  console.log({learningStyle})
-  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters2({learningStyle})
+  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters2(ilsProps)
 
   const rows = [
     {

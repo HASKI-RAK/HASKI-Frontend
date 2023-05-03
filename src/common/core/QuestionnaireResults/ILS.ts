@@ -5,10 +5,10 @@ export default class ILS {
   dimensionFourScore: number
 
   constructor() {
-    this.dimensionOneScore = -11
-    this.dimensionTwoScore = 7
-    this.dimensionThreeScore = 3
-    this.dimensionFourScore = -5
+    this.dimensionOneScore = 0
+    this.dimensionTwoScore = 0
+    this.dimensionThreeScore = 0
+    this.dimensionFourScore = 0
 
     return this
   }
