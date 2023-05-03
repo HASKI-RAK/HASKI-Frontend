@@ -1,9 +1,9 @@
 /**
  * Reusable components such as buttons and forms go in here.
  */
-export {DefaultAccordion} from './DefaultAccordion/DefaultAccordion'
-export {DefaultAccordionDetails} from './DefaultAccordionDetails/DefaultAccordionDetails'
-export {DefaultAccordionSummary} from './DefaultAccordionSummary/DefaultAccordionSummary'
+export { DefaultAccordion } from './DefaultAccordion/DefaultAccordion'
+export { DefaultAccordionDetails } from './DefaultAccordionDetails/DefaultAccordionDetails'
+export { DefaultAccordionSummary } from './DefaultAccordionSummary/DefaultAccordionSummary'
 export { DefaultButton } from './DefaultButton/DefaultButton'
 export { DefaultSelect } from './DefaultSelect/DefaultSelect'
 export { DefaultBox } from './DefaultBox/DefaultBox'

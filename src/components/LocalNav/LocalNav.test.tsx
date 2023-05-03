@@ -8,130 +8,151 @@ import { useLearningPath } from './LocalNav.hooks'
 const navigate = jest.fn()
 
 describe('LocalNav', () => {
-
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
   it('should render the LocalNav', () => {
     const loading = false
-    const topics: Topic[]= []
+    const topics: Topic[] = []
     const learningElementPath: LearningPath[] = []
 
-    const result = render(<LocalNav loading={loading} topics={topics} learningElementPath={learningElementPath}/>)
+    const result = render(<LocalNav loading={loading} topics={topics} learningElementPath={learningElementPath} />)
     expect(result).toBeTruthy()
   })
 
   it('should render the LocalNav with loading', () => {
     const loading = true
-    const topics: Topic[]= []
+    const topics: Topic[] = []
     const learningElementPath: LearningPath[] = []
 
-    const result = render(<LocalNav loading={loading} topics={topics} learningElementPath={learningElementPath}/>)
+    const result = render(<LocalNav loading={loading} topics={topics} learningElementPath={learningElementPath} />)
     expect(result).toBeTruthy()
   })
 
-    it('should render the LocalNav with topic and learningElementPath', () => {
+  it('should render the LocalNav with topic and learningElementPath', () => {
     const loading = false
-      const exampleLearningElement: LearningElement = {
-        activity_type: 'Quiz',
-        classification: 'Formative',
-        created_at: '2023-04-19T10:30:00.000Z',
-        created_by: 'John Doe',
-        id: 123,
-        last_updated: '2023-04-20T15:45:00.000Z',
-        lms_id: 456,
-        name: 'Quiz on Chapter 3',
-        student_learning_element: null,
-        university: 'ABC University'
-      }
-    const topics: Topic[]= [
-        {contains_le: true,
-          created_at: '2021-09-01T12:00:00.000Z',
-          created_by: 'dimitri', id: 1,
-          is_topic: true,
-          last_updated: '2021-09-01T12:00:00.000Z',
-          lms_id: 1,
-          name: 'test',
-          parent_id: 1,
-          student_topic:{
-            done: false,
-            done_at: null,
-            id: 1,
-            student_id: 1,
-            topic_id: 1,
-            visits:[]},
-          university: 'HS-KE'}]
-    const learningElementPath: LearningPath[] = [{
-      based_on: 'some-Algorithm',
-      calculated_on: 'today',
-      course_id: 1,
-      id: 1,
-      path: [{
+    const exampleLearningElement: LearningElement = {
+      activity_type: 'Quiz',
+      classification: 'Formative',
+      created_at: '2023-04-19T10:30:00.000Z',
+      created_by: 'John Doe',
+      id: 123,
+      last_updated: '2023-04-20T15:45:00.000Z',
+      lms_id: 456,
+      name: 'Quiz on Chapter 3',
+      student_learning_element: null,
+      university: 'ABC University'
+    }
+    const topics: Topic[] = [
+      {
+        contains_le: true,
+        created_at: '2021-09-01T12:00:00.000Z',
+        created_by: 'dimitri',
         id: 1,
-        learning_element: exampleLearningElement,
-        learning_element_id: 1,
-        learning_path_id: 1,
-        position: 1,
-        recommended: true}]
-    }]
-
-    const result = render(<LocalNav loading={loading} topics={topics} learningElementPath={learningElementPath}/>)
-    expect(result).toBeTruthy()
-    })
-
-    it('should render LocalNav and click navigates to LearningElement URL', () => {
-      const loading = false
-      const exampleLearningElement: LearningElement = {
-        activity_type: 'Quiz',
-        classification: 'Formative',
-        created_at: '2023-04-19T10:30:00.000Z',
-        created_by: 'John Doe',
-        id: 123,
-        last_updated: '2023-04-20T15:45:00.000Z',
-        lms_id: 456,
-        name: 'Quiz on Chapter 3',
-        student_learning_element: null,
-        university: 'ABC University'
+        is_topic: true,
+        last_updated: '2021-09-01T12:00:00.000Z',
+        lms_id: 1,
+        name: 'test',
+        parent_id: 1,
+        student_topic: {
+          done: false,
+          done_at: null,
+          id: 1,
+          student_id: 1,
+          topic_id: 1,
+          visits: []
+        },
+        university: 'HS-KE'
       }
-      const topics: Topic[]= [
-        {contains_le: true,
-          created_at: '2021-09-01T12:00:00.000Z',
-          created_by: 'dimitri', id: 1,
-          is_topic: true,
-          last_updated: '2021-09-01T12:00:00.000Z',
-          lms_id: 1,
-          name: 'test',
-          parent_id: 1,
-          student_topic:{
-            done: false,
-            done_at: null,
-            id: 1,
-            student_id: 1,
-            topic_id: 1,
-            visits:[]},
-          university: 'HS-KE'}]
-      const learningElementPath: LearningPath[] = [{
+    ]
+    const learningElementPath: LearningPath[] = [
+      {
         based_on: 'some-Algorithm',
         calculated_on: 'today',
         course_id: 1,
         id: 1,
-        path: [{
+        path: [
+          {
+            id: 1,
+            learning_element: exampleLearningElement,
+            learning_element_id: 1,
+            learning_path_id: 1,
+            position: 1,
+            recommended: true
+          }
+        ]
+      }
+    ]
+
+    const result = render(<LocalNav loading={loading} topics={topics} learningElementPath={learningElementPath} />)
+    expect(result).toBeTruthy()
+  })
+
+  it('should render LocalNav and click navigates to LearningElement URL', () => {
+    const loading = false
+    const exampleLearningElement: LearningElement = {
+      activity_type: 'Quiz',
+      classification: 'Formative',
+      created_at: '2023-04-19T10:30:00.000Z',
+      created_by: 'John Doe',
+      id: 123,
+      last_updated: '2023-04-20T15:45:00.000Z',
+      lms_id: 456,
+      name: 'Quiz on Chapter 3',
+      student_learning_element: null,
+      university: 'ABC University'
+    }
+    const topics: Topic[] = [
+      {
+        contains_le: true,
+        created_at: '2021-09-01T12:00:00.000Z',
+        created_by: 'dimitri',
+        id: 1,
+        is_topic: true,
+        last_updated: '2021-09-01T12:00:00.000Z',
+        lms_id: 1,
+        name: 'test',
+        parent_id: 1,
+        student_topic: {
+          done: false,
+          done_at: null,
           id: 1,
-          learning_element: exampleLearningElement,
-          learning_element_id: 1,
-          learning_path_id: 1,
-          position: 1,
-          recommended: true}]
-      }]
+          student_id: 1,
+          topic_id: 1,
+          visits: []
+        },
+        university: 'HS-KE'
+      }
+    ]
+    const learningElementPath: LearningPath[] = [
+      {
+        based_on: 'some-Algorithm',
+        calculated_on: 'today',
+        course_id: 1,
+        id: 1,
+        path: [
+          {
+            id: 1,
+            learning_element: exampleLearningElement,
+            learning_element_id: 1,
+            learning_path_id: 1,
+            position: 1,
+            recommended: true
+          }
+        ]
+      }
+    ]
 
-      const {getByText} = render(<LocalNav loading={loading} topics={topics} learningElementPath={learningElementPath}/>)
-      fireEvent.click(getByText('1 Quiz on Chapter 3'))
+    const { getByText } = render(
+      <LocalNav loading={loading} topics={topics} learningElementPath={learningElementPath} />
+    )
+    fireEvent.click(getByText('1 Quiz on Chapter 3'))
 
-      expect(navigate).toHaveBeenCalledWith('/topics/test/Quiz on Chapter 3')
-    })
+    expect(navigate).toHaveBeenCalledWith('/topics/test/Quiz on Chapter 3')
+  })
 
-  test('useLearningPath returns expected values (status 200)', async() => {
+  test('useLearningPath returns expected values (status 200)', async () => {
     const mockResponse = {
       status: 200,
       message: 'OK',
@@ -179,14 +200,13 @@ describe('LocalNav', () => {
             position: 1,
             recommended: true
           }
-
-        ],
-      },
+        ]
+      }
     }
     const mockFetch = jest.fn().mockResolvedValue({
       json: () => Promise.resolve(mockResponse.data),
       status: mockResponse.status,
-      statusText: mockResponse.message,
+      statusText: mockResponse.message
     })
     window.fetch = mockFetch
 
@@ -196,34 +216,34 @@ describe('LocalNav', () => {
     expect(mockFetch).toHaveBeenCalledWith(process.env.BACKEND + `/user/2/5/student/1/course/1/topic`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'text/json',
-      },
+        'Content-Type': 'text/json'
+      }
     })
   })
 
-  test('useLearningPath returns expected values (status 500)', async() => {
+  test('useLearningPath returns expected values (status 500)', async () => {
     const mockResponse = {
       status: 500,
       message: 'Error',
       data: {
-        topics: [],
-      },
+        topics: []
+      }
     }
     const mockFetch = jest.fn().mockResolvedValue({
       json: () => Promise.resolve(mockResponse.data),
       status: mockResponse.status,
-      statusText: mockResponse.message,
+      statusText: mockResponse.message
     })
     window.fetch = mockFetch
 
-    const {result} = await renderHook(() => useLearningPath())
+    const { result } = await renderHook(() => useLearningPath())
 
     expect(mockFetch).toHaveBeenCalledTimes(1)
     expect(mockFetch).toHaveBeenCalledWith(process.env.BACKEND + `/user/2/5/student/1/course/1/topic`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'text/json',
-      },
+        'Content-Type': 'text/json'
+      }
     })
     expect(result.current.loading).toBeTruthy()
     expect(result.current.topics).toEqual(mockResponse.data.topics)
