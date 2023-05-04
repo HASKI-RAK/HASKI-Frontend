@@ -22,38 +22,38 @@ import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from '@components'
  * @category Pages
  */
 const MainFrame = () => (
-    <Stack direction="column" sx={{ minHeight: 'inherit' }}>
-      <MenuBar />
-      <BreadcrumbsContainer />
-      <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
-        <Grid container item flexGrow={1} sx={{ alignItems: 'stretch' }}>
-          <Grid item xs={2}>
-            <Box
-              height={'100%'}
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'stretch'
-              }}>
-              <LocalNav />
-              <Divider flexItem orientation="vertical" />
-            </Box>
-          </Grid>
-          <Grid item xs={8}>
-            {/**💉 Pages get injected here through App routing */}
-            <Container>
-              <Outlet />
-            </Container>
-          </Grid>
-          <Grid item xs={2}>
-            {/** TODO 📑 add real gameification */}
-            <Typography variant="h4">Gamification</Typography>
-          </Grid>
+  <Stack direction="column" sx={{ minHeight: 'inherit' }}>
+    <MenuBar />
+    <BreadcrumbsContainer />
+    <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
+      <Grid container item flexGrow={1} sx={{ alignItems: 'stretch' }}>
+        <Grid item xs={2}>
+          <Box
+            height={'100%'}
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'stretch'
+            }}>
+            <LocalNav />
+            <Divider flexItem orientation="vertical" />
+          </Box>
         </Grid>
-        <Divider flexItem />
-        <Footer />
+        <Grid item xs={8}>
+          {/**💉 Pages get injected here through App routing */}
+          <Container>
+            <Outlet />
+          </Container>
+        </Grid>
+        <Grid item xs={2}>
+          {/** TODO 📑 add real gameification */}
+          <Typography variant="h4">Gamification</Typography>
+        </Grid>
       </Grid>
-    </Stack>
+      <Divider flexItem />
+      <Footer />
+    </Grid>
+  </Stack>
 )
 
 export default MainFrame

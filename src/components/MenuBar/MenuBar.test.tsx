@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
-import MenuBar, {MenuBarProps} from './MenuBar'
+import MenuBar, { MenuBarProps } from './MenuBar'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
 import { Topic, LearningElement, LearningPath } from '@services'
@@ -9,10 +9,8 @@ const topics: Topic[] = []
 const learningElementPath: LearningPath[] = []
 
 describe('MenuBar', () => {
-
   it('should return to home when clicked on logo or text', () => {
     const history = createMemoryHistory({ initialEntries: ['/home'] })
-
 
     const result = render(
       <Router location={history.location} navigator={history}>

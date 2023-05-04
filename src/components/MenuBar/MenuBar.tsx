@@ -24,7 +24,7 @@ import { useTranslation } from 'react-i18next'
 import { ListItemIcon } from '@mui/material'
 import { Logout } from '@mui/icons-material'
 import { AuthContext, Topic, LearningPath } from '@services'
-import {useLearningPath as _useLearningPath} from "../LocalNav/LocalNav.hooks";
+import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -37,7 +37,7 @@ import {useLearningPath as _useLearningPath} from "../LocalNav/LocalNav.hooks";
  * @category Components
  */
 export type MenuBarProps = {
-  useLearningPath?: () => { loading: boolean, topics: Topic[], learningPath: LearningPath[] }
+  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPath: LearningPath[] }
 }
 
 const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {

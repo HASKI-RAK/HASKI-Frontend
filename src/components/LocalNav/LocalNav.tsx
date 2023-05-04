@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Topic, LearningPath } from '@services'
 import React from 'react'
-import {useLearningPath as _useLearningPath} from "./LocalNav.hooks";
+import { useLearningPath as _useLearningPath } from './LocalNav.hooks'
 
 /**
  * Local navigation component for the main frame.
@@ -25,7 +25,7 @@ import {useLearningPath as _useLearningPath} from "./LocalNav.hooks";
  */
 
 export type LocalNavProps = {
-  useLearningPath?: () => { loading: boolean, topics: Topic[], learningPath: LearningPath[] }
+  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPath: LearningPath[] }
 }
 
 const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
