@@ -14,17 +14,14 @@ import {
   RadioGroup,
   FormControlLabel,
   FormControl,
-  FormLabel,
-} from "@mui/material";
-import { Container } from "@mui/system";
+  FormLabel
+} from '@mui/material'
+import { Container } from '@mui/system'
 const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
+  <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
     •
   </Box>
-);
+)
 const card = (
   <>
     <CardContent>
@@ -49,7 +46,7 @@ const card = (
       </Button>
     </CardActions>
   </>
-);
+)
 
 export const ThemePresentation = () => {
   return (
@@ -59,8 +56,8 @@ export const ThemePresentation = () => {
           Theme Presentation
         </Typography>
         <Typography variant="body1" gutterBottom>
-          This site demonstrates the individual elements used in the HASKI UI.
-          It serves as a reference, as well as a documentation.
+          This site demonstrates the individual elements used in the HASKI UI. It serves as a reference, as well as a
+          documentation.
         </Typography>
         <Typography variant="h4" component="div" gutterBottom>
           Buttons
@@ -68,7 +65,7 @@ export const ThemePresentation = () => {
         <Typography variant="h6" component="div" gutterBottom>
           Text Buttons
         </Typography>
-        <Stack spacing={2} sx={{ height: "100%" }} direction="row">
+        <Stack spacing={2} sx={{ height: '100%' }} direction="row">
           <Button color="primary">Primary</Button>
           <Button color="secondary" size="large">
             Other
@@ -81,7 +78,7 @@ export const ThemePresentation = () => {
         <Typography variant="h6" component="div" gutterBottom>
           Contained Buttons
         </Typography>
-        <Stack spacing={2} sx={{ height: "100%" }} direction="row">
+        <Stack spacing={2} sx={{ height: '100%' }} direction="row">
           <Button variant="contained" color="primary">
             Primary
           </Button>
@@ -104,7 +101,7 @@ export const ThemePresentation = () => {
         <Typography variant="h6" component="div" gutterBottom>
           Outlined Buttons
         </Typography>
-        <Stack spacing={2} sx={{ height: "100%" }} direction="row">
+        <Stack spacing={2} sx={{ height: '100%' }} direction="row">
           <Button variant="outlined" color="primary">
             Primary
           </Button>
@@ -128,7 +125,7 @@ export const ThemePresentation = () => {
         <Typography marginTop={5} variant="h4" component="div" gutterBottom>
           Card
         </Typography>
-        <Stack spacing={2} sx={{ height: "100%" }} direction="row">
+        <Stack spacing={2} sx={{ height: '100%' }} direction="row">
           <Stack spacing={2}>
             <Typography variant="h6" component="div" gutterBottom>
               Simple
@@ -153,53 +150,34 @@ export const ThemePresentation = () => {
           Custom UI Elements
         </Typography>
         <Typography variant="h6" component="div" gutterBottom>
-        Link
-      </Typography>
-      <Link href="/">Go back to the Homepage</Link>
+          Link
+        </Typography>
+        <Link href="/">Go back to the Homepage</Link>
 
-      <Typography marginTop={5} variant="h6" component="div" gutterBottom>
-        RadioButtons
-      </Typography>
-      <FormControl>
-        <FormLabel>Radio Button example </FormLabel>
-        <RadioGroup row name="radio-buttons-group" defaultValue={"default"}>
-          <FormControlLabel
-            value="default"
-            control={<Radio />}
-            label="default"
-          />
-          <FormControlLabel
-            value="unchecked"
-            control={<Radio />}
-            label="unchecked"
-          />
-          <FormControlLabel
-            value="disabled"
-            control={<Radio />}
-            label="disabled"
-            disabled
-          />
-        </RadioGroup>
-      </FormControl>
-      <Typography marginTop={5} variant="h6" component="div" gutterBottom>
-        Select
-      </Typography>
-      <FormControl>
-            <Select
-              name="Select"
-              labelId="select_label_theme"
-              label="Thema"
-              defaultValue={1}
-            >
-              <MenuItem value={1} >Option1</MenuItem>
-              <MenuItem value={2}>Option2</MenuItem>
-              <MenuItem value={3}>Option3</MenuItem>
-             
-            </Select>
-          </FormControl>
+        <Typography marginTop={5} variant="h6" component="div" gutterBottom>
+          RadioButtons
+        </Typography>
+        <FormControl>
+          <FormLabel>Radio Button example </FormLabel>
+          <RadioGroup row name="radio-buttons-group" defaultValue={'default'}>
+            <FormControlLabel value="default" control={<Radio />} label="default" />
+            <FormControlLabel value="unchecked" control={<Radio />} label="unchecked" />
+            <FormControlLabel value="disabled" control={<Radio />} label="disabled" disabled />
+          </RadioGroup>
+        </FormControl>
+        <Typography marginTop={5} variant="h6" component="div" gutterBottom>
+          Select
+        </Typography>
+        <FormControl>
+          <Select name="Select" labelId="select_label_theme" label="Thema" defaultValue={1}>
+            <MenuItem value={1}>Option1</MenuItem>
+            <MenuItem value={2}>Option2</MenuItem>
+            <MenuItem value={3}>Option3</MenuItem>
+          </Select>
+        </FormControl>
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default ThemePresentation;
+export default ThemePresentation

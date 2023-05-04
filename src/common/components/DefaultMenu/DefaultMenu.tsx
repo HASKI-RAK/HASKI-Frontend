@@ -1,1 +1,1 @@
-export { Menu as DefaultMenu } from "@mui/material";
+export { Menu as DefaultMenu } from '@mui/material'

@@ -1,1 +1,1 @@
-export { Stack as DefaultStack } from "@mui/material";
+export { Stack as DefaultStack } from '@mui/material'

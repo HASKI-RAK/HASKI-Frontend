@@ -1,1 +1,1 @@
-export { Avatar as DefaultAvatar } from "@mui/material";
+export { Avatar as DefaultAvatar } from '@mui/material'

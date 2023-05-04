@@ -1,7 +1,7 @@
 {
-
   "Back": "Zurück",
   "components.Login.login": "Anmelden",
+  "components.Login.orLoginWithMoodle": "oder mit Moodle anmelden",
   "components.Login.password": "Passwort",
   "components.Login.passwordError": "Bitte geben Sie ein gültiges Passwort ein",
   "components.Login.subtitle": "Bitte geben Sie Ihre Zugangsdaten ein",
@@ -166,7 +166,6 @@
   "components.ContactForm.submit": "Abschicken",
   "components.ContactForm.error": "Es fehlt eine Beschreibung.",
   "components.ContactForm.errorSelect": "Es wurde kein Thema ausgewählt.",
-
   "Dot": ".",
   "help": "Hilfe",
   "Next": "Weiter",

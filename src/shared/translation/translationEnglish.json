@@ -169,7 +169,6 @@
   "components.ContactForm.design": "Design",
   "components.ContactForm.error": "Missing description. Please write something.",
   "components.ContactForm.errorSelect": "Missing topic. Please select something.",
-
   "Dot": ".",
   "help": "Help",
   "Next": "Next",
