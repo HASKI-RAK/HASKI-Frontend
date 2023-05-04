@@ -1,24 +1,22 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
-import MenuBar from './MenuBar'
+import MenuBar, {MenuBarProps} from './MenuBar'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
 import { Topic, LearningElement, LearningPath } from '@services'
 
-const loading = false
 const topics: Topic[] = []
 const learningElementPath: LearningPath[] = []
 
 describe('MenuBar', () => {
+
   it('should return to home when clicked on logo or text', () => {
     const history = createMemoryHistory({ initialEntries: ['/home'] })
-    const loading = false
-    const topics: Topic[] = []
-    const learningElementPath: LearningPath[] = []
+
 
     const result = render(
       <Router location={history.location} navigator={history}>
-        <MenuBar loading={loading} topics={topics} learningElementPath={learningElementPath} />
+        <MenuBar />
       </Router>
     )
     // click on img:
@@ -126,13 +124,23 @@ describe('MenuBar', () => {
       }
     ]
 
+    const mockUseLearningPath = jest.fn().mockReturnValue({
+      loading: false,
+      topics: topics,
+      learningPath: learningElementPath
+    })
+
+    const props: MenuBarProps = {
+      useLearningPath: mockUseLearningPath
+    }
+
     const result = render(
       <Router location={history.location} navigator={history}>
-        <MenuBar loading={loading} topics={topics} learningElementPath={learningElementPath} />
+        <MenuBar {...props} />
       </Router>
     )
     // click on Topics button:
-    fireEvent.click(result.getAllByText('components.MenuBar.MenuBar.TopicButton')[0])
+    fireEvent.click(result.getAllByText('components.MenuBar.TopicButton')[0])
     expect(result.getByText('Allgemeine Informatik')).toBeInTheDocument()
 
     // click on subtopic:
@@ -143,9 +151,20 @@ describe('MenuBar', () => {
 
   test('click on HelpIcon should open popover', () => {
     const history = createMemoryHistory({ initialEntries: ['/home'] })
+
+    const mockUseLearningPath = jest.fn().mockReturnValue({
+      loading: false,
+      topics: topics,
+      learningPath: learningElementPath
+    })
+
+    const props: MenuBarProps = {
+      useLearningPath: mockUseLearningPath
+    }
+
     const result = render(
       <Router location={history.location} navigator={history}>
-        <MenuBar loading={loading} topics={topics} learningElementPath={learningElementPath} />
+        <MenuBar {...props} />
       </Router>
     )
     // click on HelpIcon:
@@ -155,9 +174,20 @@ describe('MenuBar', () => {
 
   test('click on SettingsIcon should open popover', () => {
     const history = createMemoryHistory({ initialEntries: ['/home'] })
+
+    const mockUseLearningPath = jest.fn().mockReturnValue({
+      loading: false,
+      topics: topics,
+      learningPath: learningElementPath
+    })
+
+    const props: MenuBarProps = {
+      useLearningPath: mockUseLearningPath
+    }
+
     const result = render(
       <Router location={history.location} navigator={history}>
-        <MenuBar loading={loading} topics={topics} learningElementPath={learningElementPath} />
+        <MenuBar {...props} />
       </Router>
     )
     // click on HelpIcon:
@@ -167,9 +197,20 @@ describe('MenuBar', () => {
 
   test('click on UserIcon should open popover', () => {
     const history = createMemoryHistory({ initialEntries: ['/home'] })
+
+    const mockUseLearningPath = jest.fn().mockReturnValue({
+      loading: false,
+      topics: topics,
+      learningPath: learningElementPath
+    })
+
+    const props: MenuBarProps = {
+      useLearningPath: mockUseLearningPath
+    }
+
     const result = render(
       <Router location={history.location} navigator={history}>
-        <MenuBar loading={loading} topics={topics} learningElementPath={learningElementPath} />
+        <MenuBar {...props} />
       </Router>
     )
 
@@ -186,9 +227,19 @@ describe('MenuBar', () => {
   test('clicking logout should close popover', () => {
     const history = createMemoryHistory({ initialEntries: ['/home'] })
 
+    const mockUseLearningPath = jest.fn().mockReturnValue({
+      loading: false,
+      topics: topics,
+      learningPath: learningElementPath
+    })
+
+    const props: MenuBarProps = {
+      useLearningPath: mockUseLearningPath
+    }
+
     const { getByTestId, queryByTestId } = render(
       <Router location={history.location} navigator={history}>
-        <MenuBar loading={loading} topics={topics} learningElementPath={learningElementPath} />
+        <MenuBar {...props} />
       </Router>
     )
 
@@ -212,9 +263,19 @@ describe('MenuBar', () => {
   test('clicking outside of Menu should close popover', () => {
     const history = createMemoryHistory({ initialEntries: ['/home'] })
 
+    const mockUseLearningPath = jest.fn().mockReturnValue({
+      loading: false,
+      topics: topics,
+      learningPath: learningElementPath
+    })
+
+    const props: MenuBarProps = {
+      useLearningPath: mockUseLearningPath
+    }
+
     const { getByTestId, queryByTestId } = render(
       <Router location={history.location} navigator={history}>
-        <MenuBar loading={loading} topics={topics} learningElementPath={learningElementPath} />
+        <MenuBar {...props} />
       </Router>
     )
 

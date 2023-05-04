@@ -8,7 +8,6 @@ import {
   DefaultContainer as Container
 } from '@common/components'
 import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from '@components'
-import { useLearningPath } from '../../components/LocalNav/LocalNav.hooks'
 
 /**
  * Main frame component.
@@ -22,12 +21,9 @@ import { useLearningPath } from '../../components/LocalNav/LocalNav.hooks'
  *
  * @category Pages
  */
-const MainFrame = () => {
-  const { loading, topics, learningPath } = useLearningPath()
-
-  return (
+const MainFrame = () => (
     <Stack direction="column" sx={{ minHeight: 'inherit' }}>
-      <MenuBar loading={loading} topics={topics} learningElementPath={learningPath} />
+      <MenuBar />
       <BreadcrumbsContainer />
       <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
         <Grid container item flexGrow={1} sx={{ alignItems: 'stretch' }}>
@@ -39,7 +35,7 @@ const MainFrame = () => {
                 flexDirection: 'row',
                 alignItems: 'stretch'
               }}>
-              <LocalNav loading={loading} topics={topics} learningElementPath={learningPath} />
+              <LocalNav />
               <Divider flexItem orientation="vertical" />
             </Box>
           </Grid>
@@ -58,7 +54,6 @@ const MainFrame = () => {
         <Footer />
       </Grid>
     </Stack>
-  )
-}
+)
 
 export default MainFrame

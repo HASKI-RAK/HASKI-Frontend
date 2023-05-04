@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   DefaultAppBar as AppBar,
@@ -14,17 +14,17 @@ import {
   DefaultButton as Button,
   DefaultPopover as Popover,
   DefaultLink as Link,
-  DefaultDivider as Divider
+  DefaultDivider as Divider,
+  DefaultSkeleton as Skeleton
 } from '@common/components'
 import SettingsIcon from '@mui/icons-material/Settings'
 import HelpIcon from '@mui/icons-material/Help'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { useTranslation } from 'react-i18next'
-import { ListItemIcon, Skeleton } from '@mui/material'
+import { ListItemIcon } from '@mui/material'
 import { Logout } from '@mui/icons-material'
-import { AuthContext } from '@services'
-import { Topic, LearningPath } from '@services'
-import React from 'react'
+import { AuthContext, Topic, LearningPath } from '@services'
+import {useLearningPath as _useLearningPath} from "../LocalNav/LocalNav.hooks";
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -37,16 +37,17 @@ import React from 'react'
  * @category Components
  */
 export type MenuBarProps = {
-  readonly loading: boolean
-  readonly topics: Topic[]
-  readonly learningElementPath: LearningPath[]
+  useLearningPath?: () => { loading: boolean, topics: Topic[], learningPath: LearningPath[] }
 }
 
-const MenuBar = ({ loading, topics, learningElementPath }: MenuBarProps) => {
+const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
   const authcontext = useContext(AuthContext)
   const { t } = useTranslation()
+
+  //Application logic hooks
+  const { loading, topics, learningPath } = useLearningPath()
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -135,7 +136,7 @@ const MenuBar = ({ loading, topics, learningElementPath }: MenuBarProps) => {
                   endIcon={
                     anchorElTopics ? <ArrowDropDownIcon sx={{ transform: 'rotate(180deg)' }} /> : <ArrowDropDownIcon />
                   }>
-                  {t('components.MenuBar.MenuBar.TopicButton')}
+                  {t('components.MenuBar.TopicButton')}
                 </Button>
               </Tooltip>
               <Popover
@@ -169,7 +170,7 @@ const MenuBar = ({ loading, topics, learningElementPath }: MenuBarProps) => {
                                   flexWrap: 'wrap',
                                   justifyContent: 'start'
                                 }}>
-                                {learningElementPath[index].path.map((element) => (
+                                {learningPath[index].path.map((element) => (
                                   <Link
                                     key={element.learning_element.name}
                                     underline="hover"
@@ -178,7 +179,7 @@ const MenuBar = ({ loading, topics, learningElementPath }: MenuBarProps) => {
                                     color="inherit"
                                     sx={{ m: 1, cursor: 'pointer' }}
                                     onClick={() => {
-                                      navigate(`/topics/${t(topic.name)}/${t(element.learning_element.name)}`)
+                                      navigate(`/topics/${topic.name}/${element.learning_element.name}`)
                                       handleCloseTopicsMenu()
                                     }}>
                                     {element.learning_element.name}
@@ -241,12 +242,12 @@ const MenuBar = ({ loading, topics, learningElementPath }: MenuBarProps) => {
               onClose={handleCloseUserMenu}>
               <MenuItem
                 data-testid="usermenuitem"
-                key={t('components.MenuBar.MenuBar.Profile.Logout')}
+                key={t('components.MenuBar.Profile.Logout')}
                 onClick={handleUserLogout}>
                 <ListItemIcon>
                   <Logout fontSize="small" />
                 </ListItemIcon>
-                <Typography textAlign="center">{t('components.MenuBar.MenuBar.Profile.Logout')}</Typography>
+                <Typography textAlign="center">{t('components.MenuBar.Profile.Logout')}</Typography>
               </MenuItem>
             </Menu>
           </Box>

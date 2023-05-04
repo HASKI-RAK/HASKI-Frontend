@@ -159,8 +159,8 @@
   "projecthaski": "Projekt HASKI",
   "tooltip.openGlobalSettings": "Globale Einstellungen",
   "tooltip.openSettings": "Einstellungen",
-  "components.LocalNav.LocalNav.Topics": "Themenbereiche",
-  "components.MenuBar.MenuBar.TopicButton": "Themenbereiche",
-  "components.MenuBar.MenuBar.Profile.Logout": "Ausloggen",
-  "components.LocalNav.LocalNav.Topics.NoLearningElements": "Keine Lernelemente gefunden"
+  "components.LocalNav.Topics": "Themenbereiche",
+  "components.MenuBar.TopicButton": "Themenbereiche",
+  "components.MenuBar.Profile.Logout": "Ausloggen",
+  "components.LocalNav.Topics.NoLearningElements": "Keine Lernelemente gefunden"
 }

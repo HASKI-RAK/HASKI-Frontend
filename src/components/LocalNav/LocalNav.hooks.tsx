@@ -13,7 +13,7 @@ const getSortedLearningPath = async (data: Topic[]): Promise<LearningPath[]> => 
     })
 }
 
-export const useLearningPath = () => {
+export const useLearningPath = (): { loading: boolean, topics: Topic[], learningPath: LearningPath[] } => {
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
   const [learningPath, setLearningPath] = useState<LearningPath[]>([])
@@ -36,7 +36,9 @@ export const useLearningPath = () => {
   }
 
   useEffect(() => {
-    effect()
+    effect().catch(() => {
+        setLoading(false)
+    })
   }, [])
 
   return { loading, topics, learningPath }

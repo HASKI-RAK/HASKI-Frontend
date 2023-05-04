@@ -5,14 +5,16 @@ import {
   DefaultAccordionSummary as AccordionSummary,
   DefaultAccordionDetails as AccordionDetails,
   DefaultAccordion as Accordion,
-  DefaultLink as Link
+  DefaultLink as Link,
+  DefaultSkeleton as Skeleton,
+  DefaultStack as Stack
 } from '@common/components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Skeleton, Stack } from '@mui/material'
 import { Topic, LearningPath } from '@services'
 import React from 'react'
+import {useLearningPath as _useLearningPath} from "./LocalNav.hooks";
 
 /**
  * Local navigation component for the main frame.
@@ -22,17 +24,14 @@ import React from 'react'
  * @category Components
  */
 
-//todo: get Topics of Student-id from backend
-
 export type LocalNavProps = {
-  readonly loading: boolean
-  readonly topics: Topic[]
-  readonly learningElementPath: LearningPath[]
+  useLearningPath?: () => { loading: boolean, topics: Topic[], learningPath: LearningPath[] }
 }
 
-const LocalNav = ({ loading, topics, learningElementPath }: LocalNavProps) => {
+const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const { loading, topics, learningPath } = useLearningPath()
 
   const skeletonItems = []
   for (let i = 0; i < 3; i++) {
@@ -47,7 +46,7 @@ const LocalNav = ({ loading, topics, learningElementPath }: LocalNavProps) => {
 
   return (
     <Box flexGrow={1}>
-      <Typography variant="h5">{t('components.LocalNav.LocalNav.Topics')}</Typography>
+      <Typography variant="h5">{t('components.LocalNav.Topics')}</Typography>
       <Divider />
       {loading ? ( // display Skeleton component while loading is true
         <Box>
@@ -62,7 +61,7 @@ const LocalNav = ({ loading, topics, learningElementPath }: LocalNavProps) => {
               key={`topic-Accordion-${topic.id}`}
               sx={{
                 borderColor: 'divider',
-                boxShadow: `0 1px 0 lightgrey`,
+                boxShadow: (theme) => `0 1px 0 ${theme.palette.secondary.main}`,
                 border: '1px',
                 '&:last-of-type': {
                   borderBottomLeftRadius: 0,
@@ -82,7 +81,7 @@ const LocalNav = ({ loading, topics, learningElementPath }: LocalNavProps) => {
                 <Typography variant="h6">{topic.name}</Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ flexDirection: 'column' }}>
-                {learningElementPath[index].path.map((learningElement) => (
+                {learningPath[index].path.map((learningElement) => (
                   <Typography variant="body1" key={learningElement.learning_element.name}>
                     <Link
                       underline="hover"
@@ -95,7 +94,7 @@ const LocalNav = ({ loading, topics, learningElementPath }: LocalNavProps) => {
                         '&:hover': { backgroundColor: (theme) => theme.palette.primary.main }
                       }}
                       onClick={() => {
-                        navigate(`/topics/${t(topic.name)}/${t(learningElement.learning_element.name)}`)
+                        navigate(`/topics/${topic.name}/${learningElement.learning_element.name}`)
                       }}>
                       {learningElement.position} {learningElement.learning_element.name}
                     </Link>
