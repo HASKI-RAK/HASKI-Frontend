@@ -1,15 +1,13 @@
-export type ContactHookReturn={
-    readonly onSubmit: () => void;
-
+export type ContactHookReturn = {
+  submit: () => void;
 };
 
 export const useContact = (): ContactHookReturn => {
+  const submit = () => {
+    return;
+  };
 
-    const onSubmitHandler = () => {
-        
-          return ;
-      };
-      return {
-        onSubmit: onSubmitHandler,
-        } as const;
-}
+  return {
+    submit,
+  } as const;
+};

@@ -107,6 +107,7 @@ export const ContactForm = ({
   const reportTopics = t("components.ContactForm.topics", {
     returnObjects: true,
   }) as [{ value: string; label: string }];
+ 
   return (
     <form onSubmit={handleSubmit}>
       <Stack spacing={2} sx={{ minWidth: 120 }}>

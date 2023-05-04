@@ -30,7 +30,7 @@ export const useContactForm = (
         const sendtoBackend = () => {
             return;
         }
-        const onSubmit = () => {
+        const submit = () => {
             return;
         }
         
@@ -43,6 +43,6 @@ export const useContactForm = (
             setReportTopic,
             setDescription,
             sendtoBackend,
-            submit: onSubmit,
+            submit,
         } as const;
     };
