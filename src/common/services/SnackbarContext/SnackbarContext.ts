@@ -1,14 +1,14 @@
 import { createContext, useContext } from "react";
-import { SnackbarProps } from "@components";
+import { SnackbarMessageProps } from "@components";
 
 export type SnackbarContextType = {
-  snackbarsErrorWarning: SnackbarProps[];
-  snackbarsSuccessInfo: SnackbarProps[];
-  setSnackbarsErrorWarning: (newSnackbars: SnackbarProps[]) => void;
-  setSnackbarsSuccessInfo: (newSnackbars: SnackbarProps[]) => void;
-  addSnackbar: (newSnackbar: SnackbarProps) => void;
-  updateSnackbar: (snackbarToUpdate: SnackbarProps) => void;
-  removeSnackbar: (snackbarToRemove: SnackbarProps) => void;
+  snackbarsErrorWarning: SnackbarMessageProps[];
+  snackbarsSuccessInfo: SnackbarMessageProps[];
+  setSnackbarsErrorWarning: (newSnackbars: SnackbarMessageProps[]) => void;
+  setSnackbarsSuccessInfo: (newSnackbars: SnackbarMessageProps[]) => void;
+  addSnackbar: (newSnackbar: SnackbarMessageProps) => void;
+  updateSnackbar: (snackbarToUpdate: SnackbarMessageProps) => void;
+  removeSnackbar: (snackbarToRemove: SnackbarMessageProps) => void;
 };
 
 export const SnackbarContext = createContext<SnackbarContextType>({
@@ -21,4 +21,5 @@ export const SnackbarContext = createContext<SnackbarContextType>({
   removeSnackbar: (snackbarToRemove) => {},
 });
 
-export const useSnackbarContext = () => useContext(SnackbarContext);
+export default SnackbarContext;
+export const useSnackbarContext = () => useContext(SnackbarContext); // TODO: remove

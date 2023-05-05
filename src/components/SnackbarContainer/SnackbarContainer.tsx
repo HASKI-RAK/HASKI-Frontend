@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import { SnackbarEntry } from "@components";
-import { useSnackbarContext, useNetworkStatus } from "@services";
+import { useEffect, useState, useContext, forwardRef } from "react";
+import { SnackbarMessage } from "@components";
+import { SnackbarContext, useNetworkStatus } from "@services";
 import {
   DefaultStack as Stack,
   DefaultSnackbar as Snackbar,
 } from "@common/components";
 
-const SnackbarContainer: React.FC = () => {
+const SnackbarContainer = () => {
   const {
     snackbarsErrorWarning,
     snackbarsSuccessInfo,
     addSnackbar,
     updateSnackbar,
-  } = useSnackbarContext();
+  } = useContext(SnackbarContext);
 
   const isOnline = useNetworkStatus();
   const [recentlyOffline, setRecentlyOffline] = useState(false);
@@ -20,6 +20,7 @@ const SnackbarContainer: React.FC = () => {
   useEffect(() => {
     if (!isOnline) {
       setRecentlyOffline(true);
+      console.log("recentlyOffline:" + recentlyOffline);
       addSnackbar({
         severity: "warning",
         message: "You are offline", // TODO: Add translation
@@ -29,6 +30,7 @@ const SnackbarContainer: React.FC = () => {
 
     if (isOnline && recentlyOffline) {
       setRecentlyOffline(false);
+      console.log("recentlyOffline:" + recentlyOffline);
       addSnackbar({
         severity: "warning",
         message: "You are online again", // TODO: Add translation
@@ -43,7 +45,7 @@ const SnackbarContainer: React.FC = () => {
   }, [isOnline]);
 
   return (
-    <>
+    <div data-testid="snackbarContainer">
       <Snackbar
         open={!!snackbarsErrorWarning[0]}
         autoHideDuration={null}
@@ -55,7 +57,7 @@ const SnackbarContainer: React.FC = () => {
       >
         <Stack flexDirection="column" gap={1}>
           {snackbarsErrorWarning.map((snackbar) => (
-            <SnackbarEntry key={snackbar.message} snackbar={snackbar} />
+            <SnackbarMessage key={snackbar.message} {...snackbar} />
           ))}
         </Stack>
       </Snackbar>
@@ -70,11 +72,11 @@ const SnackbarContainer: React.FC = () => {
       >
         <Stack flexDirection="column" gap={1}>
           {snackbarsSuccessInfo.map((snackbar) => (
-            <SnackbarEntry key={snackbar.message} snackbar={snackbar} />
+            <SnackbarMessage key={snackbar.message} {...snackbar} />
           ))}
         </Stack>
       </Snackbar>
-    </>
+    </div>
   );
 };
 

@@ -21,19 +21,19 @@ const App = () => (
   <ThemeProvider theme={Theme}>
     <AuthProvider>
       <SnackbarProvider>
-      <Router>
-        <Routes>
-          <Route element={<MainFrame />}>
-            <Route index element={<Home />} />
-            <Route path="/theme" element={<ThemePresentation />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+        <Router>
+          <Routes>
+            <Route element={<MainFrame />}>
+              <Route index element={<Home />} />
+              <Route path="/theme" element={<ThemePresentation />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/🥚" element={<div>Ei</div>} />
+              <Route path="*" element={<div>404</div>} />
+            </Route>
             <Route path="*" element={<div>404</div>} />
-          </Route>
-          <Route path="*" element={<div>404</div>} />
-        </Routes>
-      </Router>
-      
+          </Routes>
+        </Router>
       </SnackbarProvider>
     </AuthProvider>
   </ThemeProvider>

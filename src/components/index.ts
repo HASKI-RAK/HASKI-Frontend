@@ -13,10 +13,11 @@ import Footer from "./Footer/Footer";
 import LocalNav from "./LocalNav/LocalNav";
 import BreadcrumbsContainer from "./BreadcrumbsContainer/BreadcrumbsContainer";
 import SnackbarMessage, {
-  SnackbarProps,
+  SnackbarMessageProps,
   SeverityType,
-} from "./SnackbarEntry/SnackbarEntry";
+} from "./SnackbarMessage/SnackbarMessage";
 import SnackbarContainer from "./SnackbarContainer/SnackbarContainer";
+import SnackbarTransition from "./SnackbarTransition/SnackbarTransition";
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
@@ -29,7 +30,7 @@ export {
   DropdownLanguage,
   Text,
   LoginForm,
-  SnackbarMessage as SnackbarEntry,
+  SnackbarMessage,
   SnackbarContainer,
   TableILS,
   GraphILS,
@@ -38,5 +39,6 @@ export {
   GraphListK,
   ResultDescriptionListK,
   QuestionnaireResultsModal,
+  SnackbarTransition,
 };
-export type { SnackbarProps, SeverityType };
+export type { SnackbarMessageProps, SeverityType };

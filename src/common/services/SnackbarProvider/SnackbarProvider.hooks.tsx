@@ -1,15 +1,15 @@
 import { useState, useMemo } from "react";
-import { SnackbarProps } from "@components";
+import { SnackbarMessageProps } from "@components";
 
 export const useSnackbarProvider = () => {
   const [snackbarsErrorWarning, setSnackbarsErrorWarning] = useState<
-    SnackbarProps[]
+    SnackbarMessageProps[]
   >([]);
   const [snackbarsSuccessInfo, setSnackbarsSuccessInfo] = useState<
-    SnackbarProps[]
+    SnackbarMessageProps[]
   >([]);
 
-  const addSnackbar = (newSnackbar: SnackbarProps) => {
+  const addSnackbar = (newSnackbar: SnackbarMessageProps) => {
     if (
       newSnackbar.severity === "error" ||
       newSnackbar.severity === "warning"
@@ -45,7 +45,7 @@ export const useSnackbarProvider = () => {
     }
   };
 
-  const updateSnackbar = (snackbarToUpdate: SnackbarProps) => {
+  const updateSnackbar = (snackbarToUpdate: SnackbarMessageProps) => {
     if (
       snackbarToUpdate.severity === "error" ||
       snackbarToUpdate.severity === "warning"
@@ -71,7 +71,7 @@ export const useSnackbarProvider = () => {
     }
   };
 
-  const removeSnackbar = (snackbarToRemove: SnackbarProps) => {
+  const removeSnackbar = (snackbarToRemove: SnackbarMessageProps) => {
     if (
       snackbarToRemove.severity === "error" ||
       snackbarToRemove.severity === "warning"
