@@ -1,11 +1,18 @@
-import { useEffect, useState, useContext, forwardRef } from "react";
+import { useEffect, useState, useContext } from "react";
 import { SnackbarMessage } from "@components";
 import { SnackbarContext, useNetworkStatus } from "@services";
+import { useTranslation } from "react-i18next";
 import {
   DefaultStack as Stack,
   DefaultSnackbar as Snackbar,
 } from "@common/components";
 
+/**
+ * SnackbarContainer presents a container rendering the snackbars and their messages.
+ * It can't be used as a standalone component and must be somewhere beneath the snackbar provider.
+ * @returns {JSX.Element} - The snackbar container component.
+ * @category Components
+ */
 const SnackbarContainer = () => {
   const {
     snackbarsErrorWarning,
@@ -14,31 +21,33 @@ const SnackbarContainer = () => {
     updateSnackbar,
   } = useContext(SnackbarContext);
 
+  const { t } = useTranslation();
   const isOnline = useNetworkStatus();
   const [recentlyOffline, setRecentlyOffline] = useState(false);
 
+  // Respectively adds a snackbar when internet connection is lost and regained.
   useEffect(() => {
     if (!isOnline) {
       setRecentlyOffline(true);
-      console.log("recentlyOffline:" + recentlyOffline);
+      console.log("recentlyOffline:" + recentlyOffline); // only for testing
       addSnackbar({
         severity: "warning",
-        message: "You are offline", // TODO: Add translation
+        message: t("offlineWarning"),
         autoHideDuration: undefined,
       });
     }
 
     if (isOnline && recentlyOffline) {
       setRecentlyOffline(false);
-      console.log("recentlyOffline:" + recentlyOffline);
+      console.log("recentlyOffline:" + recentlyOffline); // only for testing
       addSnackbar({
         severity: "warning",
-        message: "You are online again", // TODO: Add translation
+        message: t("onlineWarning"),
         autoHideDuration: 3000,
       });
       updateSnackbar({
         severity: "warning",
-        message: "You are offline", // TODO: Add translation
+        message: t("offlineWarning"),
         autoHideDuration: 1,
       });
     }

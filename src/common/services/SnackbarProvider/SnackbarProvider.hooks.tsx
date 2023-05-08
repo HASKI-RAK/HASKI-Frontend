@@ -1,7 +1,37 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, Dispatch, SetStateAction } from "react";
 import { SnackbarMessageProps } from "@components";
 
-export const useSnackbarProvider = () => {
+/**
+ * @typedef {Object} SnackbarProviderHookReturn
+ * @param {SnackbarMessageProps[]} snackbarsErrorWarning - The array of error and warning snackbars.
+ * @param {SnackbarMessageProps[]} snackbarsSuccessInfo - The array of success and info snackbars.
+ * @param {function} setSnackbarsErrorWarning - The function to set the error and warning snackbars.
+ * @param {function} setSnackbarsSuccessInfo - The function to set the success and info snackbars.
+ * @param {function} addSnackbar - The function to add a single snackbar.
+ * @param {function} updateSnackbar - The function to update a single snackbar.
+ * @param {function} removeSnackbar - The function to remove a single snackbar.
+ */
+type SnackbarProviderHookReturn = {
+  readonly snackbarsErrorWarning: SnackbarMessageProps[];
+  readonly snackbarsSuccessInfo: SnackbarMessageProps[];
+  readonly setSnackbarsErrorWarning: Dispatch<
+    SetStateAction<SnackbarMessageProps[]>
+  >;
+  readonly setSnackbarsSuccessInfo: Dispatch<
+    SetStateAction<SnackbarMessageProps[]>
+  >;
+  readonly addSnackbar: (newSnackbar: SnackbarMessageProps) => void;
+  readonly updateSnackbar: (snackbarToUpdate: SnackbarMessageProps) => void;
+  readonly removeSnackbar: (snackbarToRemove: SnackbarMessageProps) => void;
+};
+
+/**
+ * useSnackbarProvider presents a hook for the snackbar provider.
+ * It can be used to inject the snackbar logic into a provider.
+ * @returns {SnackbarProviderHookReturn} - The provider logic.
+ * @category Services
+ */
+export const useSnackbarProvider = (): SnackbarProviderHookReturn => {
   const [snackbarsErrorWarning, setSnackbarsErrorWarning] = useState<
     SnackbarMessageProps[]
   >([]);
@@ -9,6 +39,7 @@ export const useSnackbarProvider = () => {
     SnackbarMessageProps[]
   >([]);
 
+  // Adds a snackbar to the array of snackbars. It depends on the severity type which array is used.
   const addSnackbar = (newSnackbar: SnackbarMessageProps) => {
     if (
       newSnackbar.severity === "error" ||
@@ -45,6 +76,7 @@ export const useSnackbarProvider = () => {
     }
   };
 
+  // Updates a snackbar in the array of snackbars. The message is used as a key to change an existing snackbar.
   const updateSnackbar = (snackbarToUpdate: SnackbarMessageProps) => {
     if (
       snackbarToUpdate.severity === "error" ||
@@ -71,6 +103,7 @@ export const useSnackbarProvider = () => {
     }
   };
 
+  // Removes a snackbar from the array of snackbars.
   const removeSnackbar = (snackbarToRemove: SnackbarMessageProps) => {
     if (
       snackbarToRemove.severity === "error" ||

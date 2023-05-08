@@ -1,6 +1,13 @@
 import { SeverityType } from "@components";
 import { DefaultSlide as Slide, DefaultGrow as Grow } from "@common/components";
 
+/**
+ * @typedef {Object} SnackbarTransitionProps
+ * @param {React.ReactElement} children - The child element to be transitioned.
+ * @param {boolean} in - The condition for the transition to be triggered.
+ * @param {SeverityType} severity - The severity that determines the transition type.
+ * @param {number} timeout - The duration of the transition.
+ */
 type SnackbarTransitionProps = {
   children?: React.ReactElement;
   in?: boolean;
@@ -8,6 +15,13 @@ type SnackbarTransitionProps = {
   timeout?: number;
 };
 
+/**
+ * SnackbarTransition presents a transition for snackbars by wrapping them as a child component.
+ * It can be used as a standalone component on a page.
+ * @param props - Props containing condition, type and timeout of a transition.
+ * @returns {JSX.Element} - The transition component for snackbars
+ * @category Components
+ */
 const SnackbarTransition = (props: SnackbarTransitionProps) => {
   if (props.children === undefined) {
     return <div data-testid="snackbarTransition" />;
@@ -17,7 +31,11 @@ const SnackbarTransition = (props: SnackbarTransitionProps) => {
     case "error":
     case "warning":
       return (
-        <Slide in={props.in} data-testid="snackbarTransition">
+        <Slide
+          in={props.in}
+          data-testid="snackbarTransition"
+          timeout={props.timeout}
+        >
           {props.children}
         </Slide>
       );
@@ -25,7 +43,11 @@ const SnackbarTransition = (props: SnackbarTransitionProps) => {
     case "info":
     default:
       return (
-        <Grow in={props.in} data-testid="snackbarTransition">
+        <Grow
+          in={props.in}
+          data-testid="snackbarTransition"
+          timeout={props.timeout}
+        >
           {props.children}
         </Grow>
       );
