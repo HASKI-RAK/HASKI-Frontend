@@ -3,7 +3,7 @@ import { DefaultThemeProvider as ThemeProvider } from "@common/components";
 import { MainFrame, Home, ThemePresentation, Login, Dashboard, Contact } from "@pages";
 import { AuthProvider } from "@services";
 import { logBuffer } from "@shared";
-import { HaskiTheme, Theme } from "@utils";
+import { HaskiTheme} from "@utils";
 
 logBuffer()
 

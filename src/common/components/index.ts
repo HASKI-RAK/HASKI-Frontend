@@ -35,4 +35,5 @@ export {DefaultInputLabel} from "./DefaultInputLabel/DefaultInputLabel";
 export {DefaultFormControl} from "./DefaultFormControl/DefaultFormControl";
 export {DefaultFormControlLabel} from "./DefaultFormControlLabel/DefaultFormControlLabel";
 export type {DefaultSelectChangeEvent} from "./DefaultSelectChangeEvent/DefaultSelectChangeEvent";
+export {DefaultFormHelperText} from "./DefaultFormHelperText/DefaultFormHelperText";
 

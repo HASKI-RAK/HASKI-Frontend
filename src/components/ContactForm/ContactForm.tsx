@@ -12,6 +12,7 @@ import {
   DefaultFormLabel as FormLabel,
   DefaultFormControlLabel as FormControlLabel,
   DefaultSelectChangeEvent as SelectChangeEvent,
+  DefaultFormHelperText as FormHelperText,
 } from "@common/components";
 import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
@@ -20,7 +21,6 @@ import {
   useContactFormHookParams,
   ContactFormHookReturn,
 } from "./ContactForm.hooks";
-import { FormHelperText } from "@mui/material";
 /**
  * ContactForm component.
  *
@@ -37,11 +37,11 @@ import { FormHelperText } from "@mui/material";
 export type ContactFormProps = {
   descriptionDefaultValue?: string;
   onSubmit?: () => void;
-  onsendtoBackend?: () => void;
+  onSendToBackend?: () => void;
   useContactForm?: (params?: useContactFormHookParams) => ContactFormHookReturn;
 };
 
-export const ContactForm = ({
+const ContactForm = ({
   useContactForm = _useContactForm,
   ...props
 }: ContactFormProps) => {
@@ -51,7 +51,7 @@ export const ContactForm = ({
 
   // ** Get Functions from Hook ** //
   const {
-    sendtoBackend,
+    sendToBackend,
     submit,
     setReportType,
     setReportTopic,
@@ -62,7 +62,7 @@ export const ContactForm = ({
   } = useContactForm();
 
   // ** Override Functions if passed as props ** //
-  const { onsendtoBackend = sendtoBackend, onSubmit = submit } = props;
+  const { onSendToBackend = sendToBackend, onSubmit = submit } = props;
 
   const reporttypeChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -97,7 +97,7 @@ export const ContactForm = ({
       setTextfieldError(false);
       setSelectError(false);
       onSubmit();
-      onsendtoBackend();
+      onSendToBackend();
     }
   };
 
@@ -117,7 +117,7 @@ export const ContactForm = ({
 
         <FormControl required>
           <InputLabel id="select_label_contact">
-            {t("components.ContactForm.topic")}
+            {t("topic")}
           </InputLabel>
           <Select
             name="reporttopic"

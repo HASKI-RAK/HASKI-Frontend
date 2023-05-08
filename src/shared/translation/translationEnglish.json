@@ -145,23 +145,21 @@
   "components.QuestionnaireResults.TableListK.Repeat": "Repeat",
   "components.QuestionnaireResults.TableListK.Score": "Score",
   "components.QuestionnaireResults.TableListK.Time": "Time",
-  "pages.Contact.title": "Contact",
   "components.ContactForm.contactform": "Contactform",
-  "components.ContactForm.topic": "Topic",
   "components.ContactForm.reportType": "Reporttype",
   "components.ContactForm.briefDescription": "Give a brief description of your request",
-  "components.ContactForm.types":[
+  "components.ContactForm.types": [
     { "value": "issue", "label": "issue" },
-    { "value": "bug", "label": "bug"},
-    { "value": "feedback", "label": "feedback"},
-    { "value": "feature", "label": "feature"},
-    { "value": "other", "label": "other"}
+    { "value": "bug", "label": "bug" },
+    { "value": "feedback", "label": "feedback" },
+    { "value": "feature", "label": "feature" },
+    { "value": "other", "label": "other" }
   ],
-  "components.ContactForm.topics":[
-    {"value":"le", "label":"Learningelement"},
-    {"value":"ui", "label":"UI"},
-    {"value":"design", "label":"Design"},
-    {"value":"other", "label":"other"}
+  "components.ContactForm.topics": [
+    { "value": "le", "label": "Learningelement" },
+    { "value": "ui", "label": "UI" },
+    { "value": "design", "label": "Design" },
+    { "value": "other", "label": "other" }
   ],
   "components.ContactForm.submit": "Submit",
   "components.ContactForm.learningelement": "Learningelement",
@@ -172,7 +170,8 @@
   "Dot": ".",
   "help": "Help",
   "Next": "Next",
-  "pages.contact": "Contact",
+  "contact": "Contact",
+  "topic": "Topic",
   "pages.glossary": "Glossary",
   "pages.home": "Home",
   "pages.imprint": "Imprint",

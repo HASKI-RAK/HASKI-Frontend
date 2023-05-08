@@ -13,7 +13,7 @@ export type ContactFormHookReturn = {
     readonly setReportType: (reportType: string) => void;
     readonly setReportTopic: (reportTopic: string) => void;
     readonly setDescription: (description: string) => void;
-    readonly sendtoBackend: () => void;
+    readonly sendToBackend: () => void;
     readonly submit: () => void;
     
 };
@@ -21,13 +21,13 @@ export type ContactFormHookReturn = {
 export const useContactForm = (
     params?: useContactFormHookParams
     ): ContactFormHookReturn => {
-        const { defaultReportType = "other", defaultReportTopic = "", defaultDescription = "" } = params || {};
+        const { defaultReportType = "", defaultReportTopic = "", defaultDescription = "" } = params || {};
         const [reportType, setReportType] = useState(defaultReportType);
         const [reportTopic, setReportTopic] = useState(defaultReportTopic);
         const [description, setDescription] = useState(defaultDescription);
 
         // ** Logic **//
-        const sendtoBackend = () => {
+        const sendToBackend = () => {
             return;
         }
         const submit = () => {
@@ -42,7 +42,7 @@ export const useContactForm = (
             setReportType,
             setReportTopic,
             setDescription,
-            sendtoBackend,
+            sendToBackend,
             submit,
         } as const;
     };

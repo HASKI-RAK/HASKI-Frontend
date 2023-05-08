@@ -145,23 +145,22 @@
   "components.QuestionnaireResults.TableListK.Repeat": "Wiederholen",
   "components.QuestionnaireResults.TableListK.Score": "Wert",
   "components.QuestionnaireResults.TableListK.Time": "Zeit",
-  "pages.Contact.title": "Kontakt",
+
   "components.ContactForm.contactform": "Kontaktformular",
-  "components.ContactForm.topic": "Thema",
   "components.ContactForm.reportType": "Reporttyp",
   "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
-  "components.ContactForm.types":[
+  "components.ContactForm.types": [
     { "value": "issue", "label": "Problem" },
-    { "value": "bug", "label": "Fehler"},
-    { "value": "feedback", "label": "Bewertung"},
-    { "value": "feature", "label": "Funktionalität"},
-    { "value": "other", "label": "Sonstiges"}
+    { "value": "bug", "label": "Fehler" },
+    { "value": "feedback", "label": "Bewertung" },
+    { "value": "feature", "label": "Funktionalität" },
+    { "value": "other", "label": "Sonstiges" }
   ],
-  "components.ContactForm.topics":[
-    {"value":"le", "label":"Lernelement"},
-    {"value":"ui", "label":"UI"},
-    {"value":"design", "label":"Design"},
-    {"value":"other", "label":"Sonstiges"}
+  "components.ContactForm.topics": [
+    { "value": "le", "label": "Lernelement" },
+    { "value": "ui", "label": "UI" },
+    { "value": "design", "label": "Design" },
+    { "value": "other", "label": "Sonstiges" }
   ],
   "components.ContactForm.submit": "Abschicken",
   "components.ContactForm.error": "Es fehlt eine Beschreibung.",
@@ -169,7 +168,8 @@
   "Dot": ".",
   "help": "Hilfe",
   "Next": "Weiter",
-  "pages.contact": "Kontakt",
+  "contact": "Kontakt",
+  "topic": "Thema",
   "pages.glossary": "Glossar",
   "pages.home": "Startseite",
   "pages.imprint": "Impressum",
