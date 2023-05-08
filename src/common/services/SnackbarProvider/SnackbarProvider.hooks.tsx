@@ -110,14 +110,18 @@ export const useSnackbarProvider = (): SnackbarProviderHookReturn => {
       snackbarToRemove.severity === "warning"
     ) {
       setSnackbarsErrorWarning((previous) =>
-        previous.filter((snackbar) => snackbar !== snackbarToRemove)
+        previous.filter(
+          (snackbar) => snackbar.message !== snackbarToRemove.message
+        )
       );
     } else if (
       snackbarToRemove.severity === "success" ||
       snackbarToRemove.severity === "info"
     ) {
       setSnackbarsSuccessInfo((previous) =>
-        previous.filter((snackbar) => snackbar !== snackbarToRemove)
+        previous.filter(
+          (snackbar) => snackbar.message !== snackbarToRemove.message
+        )
       );
     }
   };

@@ -64,7 +64,7 @@ describe("Test SnackbarContainer", () => {
     expect(snackbarContainer).toBeInTheDocument();
   });
 
-  test("Lose and retrieve internet connection", async () => {
+  test("Lose and retrieve internet connection", () => {
     const { rerender, getByText } = render(
       <SnackbarContext.Provider value={mockContext}>
         <SnackbarContainer />
@@ -81,10 +81,8 @@ describe("Test SnackbarContainer", () => {
     mockInternetConnection("online");
 
     window.dispatchEvent(new Event("online"));
-
-    await waitFor(() => {
-      expect(getByText("You are online again")).toBeInTheDocument();
-    });
+    screen.debug();
+    expect(getByText("You are online again")).toBeInTheDocument();
 
     expect(internetConnection).toHaveBeenCalledTimes(2); // Wird zweimal aufgerufen!
   });

@@ -19,6 +19,7 @@ const SnackbarContainer = () => {
     snackbarsSuccessInfo,
     addSnackbar,
     updateSnackbar,
+    removeSnackbar,
   } = useContext(SnackbarContext);
 
   const { t } = useTranslation();
@@ -51,6 +52,7 @@ const SnackbarContainer = () => {
         autoHideDuration: 1,
       });
     }
+    console.log(snackbarsErrorWarning);
   }, [isOnline]);
 
   return (
