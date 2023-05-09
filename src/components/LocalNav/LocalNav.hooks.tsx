@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import {getCourseTopics, getElementLearningPath, LearningPath, Topic} from '@services'
 
-const getSortedLearningPath = async(data: Topic[]): Promise<LearningPath[]> => {
+export const getSortedLearningPath = async(data: Topic[]): Promise<LearningPath[]> => {
     const promises = data.map((topic) => getElementLearningPath(topic.id))
     const learningPaths = await Promise.all(promises)
 
