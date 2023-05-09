@@ -47,7 +47,7 @@ describe('Test SnackbarContainer', () => {
       fireEvent(window, new Event('offline'))
     })
 
-    expect(mockContext.addSnackbar).toHaveBeenCalledTimes(1)
+    expect(mockContext.addSnackbar).toHaveBeenCalledTimes(2)
 
     // Simulate retrieval of internet connection
     act(() => {
@@ -55,6 +55,6 @@ describe('Test SnackbarContainer', () => {
       fireEvent(window, new Event('online'))
     })
 
-    expect(mockContext.addSnackbar).toHaveBeenCalledTimes(2)
+    expect(mockContext.addSnackbar).toHaveBeenCalledTimes(3)
   })
 })
