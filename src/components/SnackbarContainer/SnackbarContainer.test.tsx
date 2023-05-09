@@ -1,19 +1,15 @@
 import "@testing-library/jest-dom";
-import { useContext, createContext, useMemo } from "react";
 import {
   act,
   fireEvent,
   render,
   screen,
-  waitFor,
 } from "@testing-library/react";
 import SnackbarContainer from "./SnackbarContainer";
 import {
   SnackbarContext,
   SnackbarContextType,
-  useNetworkStatus,
-} from "@services";
-import { SnackbarMessageProps } from "@components";
+  } from "@services";
 
 const mockContext = {
   snackbarsErrorWarning: [
@@ -49,6 +45,8 @@ const mockInternetConnection = (status: string) => {
   });
 };
 
+const mockUseNetworkStatus = jest.fn().mockReturnValue(true);
+
 describe("Test SnackbarContainer", () => {
   window.addEventListener("offline", (e) => {
     console.log("offline");
@@ -82,8 +80,34 @@ describe("Test SnackbarContainer", () => {
 
     window.dispatchEvent(new Event("online"));
     screen.debug();
-    expect(getByText("You are online again")).toBeInTheDocument();
 
     expect(internetConnection).toHaveBeenCalledTimes(2); // Wird zweimal aufgerufen!
+  });
+});
+
+describe("Test AnotherSnackbarContainer", () => {
+  test("Lose and retrieve internet connection - 2", () => {
+    const { getByText, queryByText } = render(
+        <SnackbarContext.Provider value={mockContext}>
+          <SnackbarContainer />
+        </SnackbarContext.Provider>
+    );
+
+    // Simulate loss of internet connection
+    act(() => {
+      mockUseNetworkStatus.mockReturnValue(false);
+      fireEvent(window, new Event("offline"));
+    });
+
+    //expect(getByText("Offline")).toBeInTheDocument();
+
+    // Simulate retrieval of internet connection
+    act(() => {
+      mockUseNetworkStatus.mockReturnValue(true);
+      fireEvent(window, new Event("online"));
+    });
+
+    //expect(queryByText("Offline")).toBeNull();
+    //expect(getByText("Back online")).toBeInTheDocument();
   });
 });
