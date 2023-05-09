@@ -1,5 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
-import { getLoginStatus, getLogout } from "@services";
+import { useState, useEffect, useMemo, useCallback } from 'react'
+import { getLoginStatus, getLogout } from '@services'
 
 const useAuthProvider = () => {
   // State data

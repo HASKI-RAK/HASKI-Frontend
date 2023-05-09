@@ -5,7 +5,7 @@ import { AuthProvider, SnackbarProvider } from "@services";
 import { logBuffer } from "@shared";
 import { Theme } from "@utils";
 
-logBuffer();
+logBuffer()
 
 /**
  * App component.
@@ -37,5 +37,5 @@ const App = () => (
       </SnackbarProvider>
     </AuthProvider>
   </ThemeProvider>
-);
-export default App;
+)
+export default App

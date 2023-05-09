@@ -14,7 +14,7 @@ declare module "i18next" {
 import translationEnglish from "./translation/translationEnglish.json";
 import translationGerman from "./translation/translationGerman.json";
 
-log.setLevel("error");
+log.setLevel('error')
 
 //define the available languages
 const resources = {
@@ -26,7 +26,7 @@ const resources = {
   },
 };
 
-let lng = "";
+let lng = ''
 
 if (localStorage.getItem("i18nextLng") === null) {
   localStorage.setItem("i18nextLng", "de");

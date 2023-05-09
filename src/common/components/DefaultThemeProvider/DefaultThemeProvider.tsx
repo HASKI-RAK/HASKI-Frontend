@@ -1,1 +1,1 @@
-export { ThemeProvider as DefaultThemeProvider } from "@mui/material";
+export { ThemeProvider as DefaultThemeProvider } from '@mui/material'
