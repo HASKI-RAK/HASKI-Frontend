@@ -12,39 +12,31 @@ export const getSortedLearningPath = async(data: Topic[]): Promise<LearningPath[
 }
 
 export const useLearningPath = (): { loading: boolean; topics: Topic[]; learningPath: LearningPath[] } => {
-    const [loading, setLoading] = useState(true)
-    const [topics, setTopics] = useState<Topic[]>([])
-    const [learningPath, setLearningPath] = useState<LearningPath[]>([])
+    const [loading, setLoading] = useState(true);
+    const [topics, setTopics] = useState<Topic[]>([]);
+    const [learningPath, setLearningPath] = useState<LearningPath[]>([]);
 
-    const effect = async() => {
-        setLoading(true)
-        getCourseTopics().then((response) => {
-            if(response.status === 200) {
-                setTopics(response.data.topics)
-
-                getSortedLearningPath(response.data.topics).then((dataLearningPath) => {
-                    setLearningPath(dataLearningPath)
-                    setLoading(false)
-                }).catch(() => {
-                    setLoading(false)
-                    console.log("sortedLearningPath error")
-                })
-            }
-            else {
+    const effect = async () => {
+        setLoading(true);
+        try {
+            const response = await getCourseTopics();
+            if (response.status === 200) {
+                setTopics(response.data.topics);
+                const dataLearningPath = await getSortedLearningPath(response.data.topics);
+                setLearningPath(dataLearningPath);
+            } else {
                 // some error occurred
                 setLoading(false)
             }
-        }).catch(() => {
-            setLoading(false)
-            console.log("courseTopics error")
-        })
-    }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        effect().catch(() => {
-            setLoading(false)
-            console.log("useEffect error")
-        })
+        effect()
     }, [])
 
     return {loading, topics, learningPath}

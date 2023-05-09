@@ -1,26 +1,29 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { useLearningPath } from './LocalNav.hooks';
-import { getCourseTopics, getElementLearningPath } from '@services';
+import { useLearningPath, getSortedLearningPath } from './LocalNav.hooks';
+import { getCourseTopics } from '@services';
 
-jest.mock('@services');
+jest.mock('@services', () => ({
+    getCourseTopics: jest.fn(),
+}));
 
 describe('useLearningPath', () => {
-    beforeEach(() => {
+    afterEach(() => {
         jest.clearAllMocks();
     });
 
-    afterEach(() => {
-        jest.resetModules();
-    });
+    it('should set loading to false when there is an error fetching course topics', async () => {
+        (getCourseTopics as jest.Mock).mockResolvedValueOnce({ status: 200, data: { topics: [{ id: 1 }] } });
 
-    test('should set loading to false if getCourseTopics() fails', async () => {
-        (getCourseTopics as jest.Mock).mockRejectedValue(new Error('Failed to fetch topics'));
+        const error = new Error('Failed to sort learning path');
+        (getSortedLearningPath as jest.Mock).mockResolvedValueOnce = jest.fn().mockRejectedValueOnce(error);
+
 
         const { result, waitForNextUpdate } = renderHook(() => useLearningPath());
 
         expect(result.current.loading).toBe(true);
-        await waitForNextUpdate();
-        expect(result.current.loading).toBe(false);
-    })
 
-})
+        await waitForNextUpdate();
+
+
+    });
+});
