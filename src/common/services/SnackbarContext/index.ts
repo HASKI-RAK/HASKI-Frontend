@@ -1,7 +1,3 @@
-import {
-  SnackbarContext,
-  SnackbarContextType,
-  useSnackbarContext,
-} from "./SnackbarContext";
-export { SnackbarContext, useSnackbarContext };
+import { SnackbarContext, SnackbarContextType } from "./SnackbarContext";
+export { SnackbarContext };
 export type { SnackbarContextType };

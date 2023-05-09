@@ -1,5 +1,5 @@
-import { SeverityType } from "@components";
 import { DefaultSlide as Slide, DefaultGrow as Grow } from "@common/components";
+import { SeverityType } from "@components";
 
 /**
  * @typedef {Object} SnackbarTransitionProps

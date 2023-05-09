@@ -1,7 +1,7 @@
-import "@testing-library/jest-dom";
+import SnackbarTransition from "./SnackbarTransition";
 import { render } from "@testing-library/react";
 import { SeverityType } from "@components";
-import SnackbarTransition from "./SnackbarTransition";
+import "@testing-library/jest-dom";
 
 const mockErrorSnackbarTransitionProps = {
   children: <div>test</div>,

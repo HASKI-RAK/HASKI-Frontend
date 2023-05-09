@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useContext } from "react";
+import { SnackbarTransition } from "@components";
 import { useTranslation } from "react-i18next";
 import { SnackbarContext } from "@services";
-import { SnackbarTransition } from "@components";
 import {
   DefaultAlert as Alert,
   DefaultTypography as Typography,

@@ -1,7 +1,7 @@
-import { useEffect, useState, useContext } from "react";
-import { SnackbarMessage } from "@components";
 import { SnackbarContext, useNetworkStatus } from "@services";
+import { useEffect, useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
+import { SnackbarMessage } from "@components";
 import {
   DefaultStack as Stack,
   DefaultSnackbar as Snackbar,
@@ -19,7 +19,6 @@ const SnackbarContainer = () => {
     snackbarsSuccessInfo,
     addSnackbar,
     updateSnackbar,
-    removeSnackbar,
   } = useContext(SnackbarContext);
 
   const { t } = useTranslation();

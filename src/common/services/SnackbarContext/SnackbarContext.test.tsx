@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import "@testing-library/jest-dom";
 import { SnackbarContext, SnackbarContextType } from "./SnackbarContext";
 import { render, renderHook } from "@testing-library/react";
+import { useContext } from "react";
+import "@testing-library/jest-dom";
 
 describe("Test Authcontext", () => {
   const providedContext = {

@@ -1,7 +1,7 @@
-import "@testing-library/jest-dom";
-import { SnackbarProvider } from "@services";
 import { act, render, renderHook } from "@testing-library/react";
 import { useSnackbarProvider } from "./SnackbarProvider.hooks";
+import { SnackbarProvider } from "@services";
+import "@testing-library/jest-dom";
 
 describe("Test SnackbarProvider", () => {
   test("SnackbarProvider renders correctly", () => {
@@ -14,8 +14,8 @@ describe("Test SnackbarProvider", () => {
     expect(getByText("Test")).toBeInTheDocument();
   });
 
-  test("functionality of SnackbarProvider hook", async () => {
-    const { result } = await renderHook(() => useSnackbarProvider());
+  test("functionality of SnackbarProvider hook", () => {
+    const { result } = renderHook(() => useSnackbarProvider());
 
     expect(result.current).toMatchObject({
       snackbarsErrorWarning: [],
@@ -160,8 +160,26 @@ describe("Test SnackbarProvider", () => {
       });
     });
 
+    act(() => {
+      result.current.addSnackbar({
+        message: "error test 5",
+        severity: "error",
+        autoHideDuration: undefined,
+      });
+      result.current.addSnackbar({
+        message: "success test 5",
+        severity: "success",
+        autoHideDuration: undefined,
+      });
+    });
+
     expect(result.current).toMatchObject({
       snackbarsErrorWarning: [
+        {
+          autoHideDuration: undefined,
+          message: "error test 5",
+          severity: "error",
+        },
         {
           autoHideDuration: undefined,
           message: "warning test 4",
@@ -172,13 +190,13 @@ describe("Test SnackbarProvider", () => {
           message: "warning test 3",
           severity: "warning",
         },
-        {
-          autoHideDuration: undefined,
-          message: "error test 2",
-          severity: "error",
-        },
       ],
       snackbarsSuccessInfo: [
+        {
+          autoHideDuration: undefined,
+          message: "success test 5",
+          severity: "success",
+        },
         {
           autoHideDuration: undefined,
           message: "info test 4",
@@ -188,11 +206,6 @@ describe("Test SnackbarProvider", () => {
           autoHideDuration: undefined,
           message: "info test 3",
           severity: "info",
-        },
-        {
-          autoHideDuration: undefined,
-          message: "success test 2",
-          severity: "success",
         },
       ],
       setSnackbarsErrorWarning: expect.any(Function),

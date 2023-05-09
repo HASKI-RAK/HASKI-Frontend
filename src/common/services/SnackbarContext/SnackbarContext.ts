@@ -1,5 +1,5 @@
-import { createContext, useContext } from "react";
 import { SnackbarMessageProps } from "@components";
+import { createContext } from "react";
 
 /**
  * @typedef {Object} SnackbarContextType
@@ -38,4 +38,3 @@ export const SnackbarContext = createContext<SnackbarContextType>({
 });
 
 export default SnackbarContext;
-export const useSnackbarContext = () => useContext(SnackbarContext); // TODO: remove
