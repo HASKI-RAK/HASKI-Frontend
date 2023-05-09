@@ -1,1 +1,1 @@
-export { Slide as DefaultSlide } from "@mui/material";
+export { Slide as DefaultSlide } from '@mui/material'

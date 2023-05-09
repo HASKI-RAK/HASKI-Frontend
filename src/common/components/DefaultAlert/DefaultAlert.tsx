@@ -1,1 +1,1 @@
-export { Alert as DefaultAlert } from "@mui/material";
+export { Alert as DefaultAlert } from '@mui/material'

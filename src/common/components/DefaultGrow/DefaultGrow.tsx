@@ -1,1 +1,1 @@
-export { Grow as DefaultGrow } from "@mui/material";
+export { Grow as DefaultGrow } from '@mui/material'

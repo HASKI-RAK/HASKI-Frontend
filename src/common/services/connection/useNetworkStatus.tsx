@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 
 /**
  * Service hook for the network status. Returns true if the user is online
@@ -6,21 +6,21 @@ import { useState, useEffect } from "react";
  * @returns {boolean} - The network status.
  */
 export const useNetworkStatus = () => {
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [isOnline, setIsOnline] = useState(navigator.onLine)
 
   useEffect(() => {
     const handleStatusChange = () => {
-      setIsOnline(!isOnline);
-    };
+      setIsOnline(!isOnline)
+    }
 
-    window.addEventListener("online", handleStatusChange);
-    window.addEventListener("offline", handleStatusChange);
+    window.addEventListener('online', handleStatusChange)
+    window.addEventListener('offline', handleStatusChange)
 
     return () => {
-      window.removeEventListener("online", handleStatusChange);
-      window.removeEventListener("offline", handleStatusChange);
-    };
-  }, [isOnline]);
+      window.removeEventListener('online', handleStatusChange)
+      window.removeEventListener('offline', handleStatusChange)
+    }
+  }, [isOnline])
 
-  return isOnline;
-};
+  return isOnline
+}

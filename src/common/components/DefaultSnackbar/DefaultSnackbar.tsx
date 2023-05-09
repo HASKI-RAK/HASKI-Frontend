@@ -1,1 +1,1 @@
-export { Snackbar as DefaultSnackbar } from "@mui/material";
+export { Snackbar as DefaultSnackbar } from '@mui/material'

@@ -1,1 +1,1 @@
-export { useNetworkStatus } from "./useNetworkStatus";
+export { useNetworkStatus } from './useNetworkStatus'

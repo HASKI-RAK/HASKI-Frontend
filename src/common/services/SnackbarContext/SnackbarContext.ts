@@ -1,5 +1,5 @@
-import { SnackbarMessageProps } from "@components";
-import { createContext } from "react";
+import { SnackbarMessageProps } from '@components'
+import { createContext } from 'react'
 
 /**
  * @typedef {Object} SnackbarContextType
@@ -12,14 +12,14 @@ import { createContext } from "react";
  * @param {function} removeSnackbar - The function to remove a single snackbar.
  */
 export type SnackbarContextType = {
-  snackbarsErrorWarning: SnackbarMessageProps[];
-  snackbarsSuccessInfo: SnackbarMessageProps[];
-  setSnackbarsErrorWarning: (newSnackbars: SnackbarMessageProps[]) => void;
-  setSnackbarsSuccessInfo: (newSnackbars: SnackbarMessageProps[]) => void;
-  addSnackbar: (newSnackbar: SnackbarMessageProps) => void;
-  updateSnackbar: (snackbarToUpdate: SnackbarMessageProps) => void;
-  removeSnackbar: (snackbarToRemove: SnackbarMessageProps) => void;
-};
+  snackbarsErrorWarning: SnackbarMessageProps[]
+  snackbarsSuccessInfo: SnackbarMessageProps[]
+  setSnackbarsErrorWarning: (newSnackbars: SnackbarMessageProps[]) => void
+  setSnackbarsSuccessInfo: (newSnackbars: SnackbarMessageProps[]) => void
+  addSnackbar: (newSnackbar: SnackbarMessageProps) => void
+  updateSnackbar: (snackbarToUpdate: SnackbarMessageProps) => void
+  removeSnackbar: (snackbarToRemove: SnackbarMessageProps) => void
+}
 
 /**
  * SnackbarContext presents a context of SnackbarContextType.
@@ -30,11 +30,21 @@ export type SnackbarContextType = {
 export const SnackbarContext = createContext<SnackbarContextType>({
   snackbarsErrorWarning: [],
   snackbarsSuccessInfo: [],
-  setSnackbarsErrorWarning: (newSnackbars) => {},
-  setSnackbarsSuccessInfo: (newSnackbars) => {},
-  addSnackbar: (newSnackbar) => {},
-  updateSnackbar: (snackbarToUpdate) => {},
-  removeSnackbar: (snackbarToRemove) => {},
-});
+  setSnackbarsErrorWarning: (newSnackbars) => {
+    return newSnackbars
+  },
+  setSnackbarsSuccessInfo: (newSnackbars) => {
+    return newSnackbars
+  },
+  addSnackbar: (newSnackbar) => {
+    return newSnackbar
+  },
+  updateSnackbar: (snackbarToUpdate) => {
+    return snackbarToUpdate
+  },
+  removeSnackbar: (snackbarToRemove) => {
+    return snackbarToRemove
+  }
+})
 
-export default SnackbarContext;
+export default SnackbarContext

@@ -1,6 +1,6 @@
-import { useSnackbarProvider as _useSnackbarProvider } from "./SnackbarProvider.hooks";
-import { SnackbarContext, SnackbarContextType } from "@services";
-import { SnackbarContainer } from "@components";
+import { useSnackbarProvider as _useSnackbarProvider } from './SnackbarProvider.hooks'
+import { SnackbarContext, SnackbarContextType } from '@services'
+import { SnackbarContainer } from '@components'
 
 /**
  * @typedef {Object} SnackbarProviderProps
@@ -8,9 +8,9 @@ import { SnackbarContainer } from "@components";
  * @param {function} useSnackbarProvider - The hook supplying the snackbar provider logic.
  */
 type SnackbarProviderProps = {
-  children: React.ReactNode;
-  useSnackbarProvider?: () => SnackbarContextType;
-};
+  children: React.ReactNode
+  useSnackbarProvider?: () => SnackbarContextType
+}
 
 /**
  * SnackbarProvider presents a provider for the snackbars.
@@ -19,14 +19,11 @@ type SnackbarProviderProps = {
  * @returns {JSX.Element} - The snackbar provider.
  * @category Services
  */
-export const SnackbarProvider = ({
-  useSnackbarProvider = _useSnackbarProvider,
-  ...props
-}: SnackbarProviderProps) => (
+export const SnackbarProvider = ({ useSnackbarProvider = _useSnackbarProvider, ...props }: SnackbarProviderProps) => (
   <SnackbarContext.Provider value={useSnackbarProvider()}>
     <SnackbarContainer />
     {props.children}
   </SnackbarContext.Provider>
-);
+)
 
-export default SnackbarProvider;
+export default SnackbarProvider

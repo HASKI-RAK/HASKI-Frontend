@@ -1,5 +1,5 @@
-import { DefaultSlide as Slide, DefaultGrow as Grow } from "@common/components";
-import { SeverityType } from "@components";
+import { DefaultSlide as Slide, DefaultGrow as Grow } from '@common/components'
+import { SeverityType } from '@components'
 
 /**
  * @typedef {Object} SnackbarTransitionProps
@@ -9,11 +9,11 @@ import { SeverityType } from "@components";
  * @param {number} timeout - The duration of the transition.
  */
 type SnackbarTransitionProps = {
-  children?: React.ReactElement;
-  in?: boolean;
-  severity?: SeverityType;
-  timeout?: number;
-};
+  children?: React.ReactElement
+  in?: boolean
+  severity?: SeverityType
+  timeout?: number
+}
 
 /**
  * SnackbarTransition presents a transition for snackbars by wrapping them as a child component.
@@ -24,34 +24,26 @@ type SnackbarTransitionProps = {
  */
 const SnackbarTransition = (props: SnackbarTransitionProps) => {
   if (props.children === undefined) {
-    return <div data-testid="snackbarTransition" />;
+    return <div data-testid="snackbarTransition" />
   }
 
   switch (props.severity) {
-    case "error":
-    case "warning":
+    case 'error':
+    case 'warning':
       return (
-        <Slide
-          in={props.in}
-          data-testid="snackbarTransition"
-          timeout={props.timeout}
-        >
+        <Slide in={props.in} data-testid="snackbarTransition" timeout={props.timeout}>
           {props.children}
         </Slide>
-      );
-    case "success":
-    case "info":
+      )
+    case 'success':
+    case 'info':
     default:
       return (
-        <Grow
-          in={props.in}
-          data-testid="snackbarTransition"
-          timeout={props.timeout}
-        >
+        <Grow in={props.in} data-testid="snackbarTransition" timeout={props.timeout}>
           {props.children}
         </Grow>
-      );
+      )
   }
-};
+}
 
-export default SnackbarTransition;
+export default SnackbarTransition
