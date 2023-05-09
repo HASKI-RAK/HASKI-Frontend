@@ -1,8 +1,4 @@
-import {
-  DefaultBox as Box,
-  DefaultDivider as Divider,
-  DefaultTypography as Typography,
-} from "@common/components";
+import { DefaultBox as Box, DefaultDivider as Divider, DefaultTypography as Typography } from '@common/components'
 /**
  * Local navigation component for the main frame.
  * @remarks
@@ -19,7 +15,7 @@ const LocalNav = () => {
       <Typography variant="h6">1. Übersicht</Typography>
       <Typography variant="h6">2. Entwurfsmuster</Typography>
     </Box>
-  );
-};
+  )
+}
 
-export default LocalNav;
+export default LocalNav

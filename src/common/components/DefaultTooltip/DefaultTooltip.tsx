@@ -1,1 +1,1 @@
-export { Tooltip as DefaultTooltip } from "@mui/material";
+export { Tooltip as DefaultTooltip } from '@mui/material'

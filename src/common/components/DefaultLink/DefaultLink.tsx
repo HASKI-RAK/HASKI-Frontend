@@ -1,1 +1,1 @@
-export { Link as DefaultLink } from "@mui/material";
+export { Link as DefaultLink } from '@mui/material'

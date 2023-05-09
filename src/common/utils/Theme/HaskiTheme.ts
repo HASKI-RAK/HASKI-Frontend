@@ -3,20 +3,19 @@ import { yellow, red } from "@mui/material/colors";
 
 export const defaultBehavior = {
   boxShadowSize: {
-    default: "2px 2px 0",
-    large: "0 0.5rem 0 ",
-    hidden: "0 0 0 0 ",
+    default: '2px 2px 0',
+    large: '0 0.5rem 0 ',
+    hidden: '0 0 0 0 '
   },
   border: {
-    default: "2px solid ",
-  },
-};
+    default: '2px solid '
+  }
+}
 
 export const defaultFonts = {
-  defaultFamily: "din-round,sans-serif",
-  default:
-    "700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) din-round,sans-serif",
-};
+  defaultFamily: 'din-round,sans-serif',
+  default: '700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) din-round,sans-serif'
+}
 
 export const defaultColors = {
   primary: {
@@ -32,24 +31,24 @@ export const defaultColors = {
     [500]: "#002347", //blue, darker
   },
 
-  lightgrey: "lightgrey",
-  white: "white",
-  black: "#000000",
-};
+  lightgrey: 'lightgrey',
+  white: 'white',
+  black: '#000000'
+}
 
 export const HaskiTheme = createTheme({
   palette: {
     primary: {
       main: yellow[900],
       dark: yellow[800],
-      light: "#a4dddf",
+      light: '#a4dddf'
     },
     secondary: {
       main: red[900],
       dark: defaultColors.primary[900],
       contrastText: defaultColors.black,
-      light: defaultColors.black,
-    },
+      light: defaultColors.black
+    }
 
     /*action: {
       active: defaultColors.primary[100],
@@ -74,13 +73,13 @@ export const HaskiTheme = createTheme({
       // Name of the rule
       styleOverrides: {
         root: {
-          backgroundColor: "white",
+          backgroundColor: 'white',
           border: defaultBehavior.border.default + defaultColors.lightgrey,
-          borderRadius: "1rem",
+          borderRadius: '1rem',
           color: defaultColors.black, // text color
-          boxShadow: defaultBehavior.boxShadowSize["default"] + "lightgrey",
-        },
-      },
+          boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey'
+        }
+      }
     },
     MuiButton: {
       //disables the ripple effect
@@ -95,12 +94,12 @@ export const HaskiTheme = createTheme({
           /*font:
             "700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) " +
             defaultFonts.default,*/
-          font: "Courier New",
-          background: "none",
+          font: 'Courier New',
+          background: 'none',
           border: defaultBehavior.border.default + defaultColors.lightgrey,
-          borderRadius: "0.2rem",
-          backgroundColor: "white",
-          bottom: "-2px",
+          borderRadius: '0.2rem',
+          backgroundColor: 'white',
+          bottom: '-2px',
           //boxShadow: defaultBehavior.boxShadowSize["default"] + "lightgrey",
           left: "-2px",
           top: "-2px",
@@ -108,15 +107,15 @@ export const HaskiTheme = createTheme({
           transition: "filter 0.1s ease",
 
           //padding: 'var(--web-ui_button-padding,0 16px)',
-          "&:hover": {
-            filter: "var(--web-ui_button-filter-hover,brightness(1.1))",
-            backgroundColor: "inherit",
+          '&:hover': {
+            filter: 'var(--web-ui_button-filter-hover,brightness(1.1))',
+            backgroundColor: 'inherit'
           },
-          "&:active": {
-            transform: "translateY(4px) translateZ(0)",
-            boxShadow: "unset",
-            disableRipple: true,
-          },
+          '&:active': {
+            transform: 'translateY(4px) translateZ(0)',
+            boxShadow: 'unset',
+            disableRipple: true
+          }
         },
         //komplett gefüllter button
         contained: {
@@ -125,15 +124,13 @@ export const HaskiTheme = createTheme({
           boxShadow:
             defaultBehavior.boxShadowSize["default"] + defaultColors.black,
           borderColor: defaultColors.black,
-          "&:hover": {
+          '&:hover': {
             backgroundColor: defaultColors.primary[100],
-            boxShadow:
-              defaultBehavior.boxShadowSize["default"] +
-              defaultColors.secondary[500],
+            boxShadow: defaultBehavior.boxShadowSize['default'] + defaultColors.secondary[500],
             borderColor: defaultColors.secondary[500],
-            filter: "var(--web-ui_button-filter-hover,brightness(1.1))",
+            filter: 'var(--web-ui_button-filter-hover,brightness(1.1))'
           },
-          "&:active": {
+          '&:active': {
             //transform: "translateY(4px) translateZ(0)",
             boxShadow: "unset",
           },
@@ -151,9 +148,9 @@ export const HaskiTheme = createTheme({
             boxShadow:
               defaultBehavior.boxShadowSize["default"] + defaultColors.white,
             borderColor: defaultColors.white,
-            filter: "var(--web-ui_button-filter-hover,brightness(1.1))",
+            filter: 'var(--web-ui_button-filter-hover,brightness(1.1))'
           },
-          "&:active": {
+          '&:active': {
             //transform: "translateY(4px) translateZ(0)",
             boxShadow: "unset",
           },
@@ -173,10 +170,10 @@ export const HaskiTheme = createTheme({
     MuiRadio: {
       styleOverrides: {
         root: {
-          font: "Courier Prime",
+          font: 'Courier Prime',
           width: 32,
           height: 32,
-          outline: "2px auto {defaultColors.black}",
+          outline: '2px auto {defaultColors.black}',
           backgroundColor: defaultColors.white,
 
           color: defaultColors.black,
@@ -187,9 +184,9 @@ export const HaskiTheme = createTheme({
           "&:hover": {
             backgroundColor: defaultColors.lightgrey,
           },
-          "&:checked": {
+          '&:checked': {
             color: defaultColors.secondary[100],
-            backgroundColor: defaultColors.secondary[100],
+            backgroundColor: defaultColors.secondary[100]
           },
           ":disabled": {
             color: defaultColors.lightgrey,
@@ -208,64 +205,63 @@ export const HaskiTheme = createTheme({
 });
 
 export const node_style = {
-  display: "flex",
-  flexDirection: "column",
-  height: "100 %",
-  borderWidth: "2px",
-  borderStyle: "solid",
-  borderImage: "initial",
-  borderColor: "black",
-  borderRadius: "8px",
-  overflow: "hidden",
-  boxShadow:
-    "rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px",
-};
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100 %',
+  borderWidth: '2px',
+  borderStyle: 'solid',
+  borderImage: 'initial',
+  borderColor: 'black',
+  borderRadius: '8px',
+  overflow: 'hidden',
+  boxShadow: 'rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px'
+}
 
 export const footer_style = {
-  backgroundColor: "#FFCA3A",
-  color: "black",
-  fontWeight: "400",
-  textTransform: "uppercase",
-  fontFamily: "monospace",
-  fontSize: "10px",
-  paddingInlineStart: "0.5rem",
-  paddingInlineEnd: "0.5rem",
-  paddingTop: "0.2rem",
-  paddingBottom: "0.2rem",
-  borderTopWidth: "2px",
-  borderTopStyle: "solid",
-  borderColor: "black",
-  flex: "1 1 0%",
-};
+  backgroundColor: '#FFCA3A',
+  color: 'black',
+  fontWeight: '400',
+  textTransform: 'uppercase',
+  fontFamily: 'monospace',
+  fontSize: '10px',
+  paddingInlineStart: '0.5rem',
+  paddingInlineEnd: '0.5rem',
+  paddingTop: '0.2rem',
+  paddingBottom: '0.2rem',
+  borderTopWidth: '2px',
+  borderTopStyle: 'solid',
+  borderColor: 'black',
+  flex: '1 1 0%'
+}
 export const header_style = {
-  backgroundColor: "#FFCA3A",
-  color: "black",
-  fontWeight: "400",
-  textTransform: "uppercase",
-  fontFamily: "monospace",
-  fontSize: "10px",
-  paddingInlineStart: "0.5rem",
-  paddingInlineEnd: "0.5rem",
-  paddingTop: "0.2rem",
-  paddingBottom: "0.2rem",
-  borderBottomWidth: "2px",
-  borderBottomStyle: "solid",
-  borderColor: "black",
-  flex: "1 1 0%",
-};
+  backgroundColor: '#FFCA3A',
+  color: 'black',
+  fontWeight: '400',
+  textTransform: 'uppercase',
+  fontFamily: 'monospace',
+  fontSize: '10px',
+  paddingInlineStart: '0.5rem',
+  paddingInlineEnd: '0.5rem',
+  paddingTop: '0.2rem',
+  paddingBottom: '0.2rem',
+  borderBottomWidth: '2px',
+  borderBottomStyle: 'solid',
+  borderColor: 'black',
+  flex: '1 1 0%'
+}
 
 export const middle_style = {
-  backgroundColor: "#FFCA3A",
-  margin: "0rem",
-  paddingTop: "0.1rem",
-  paddingBottom: "0.1rem",
-};
+  backgroundColor: '#FFCA3A',
+  margin: '0rem',
+  paddingTop: '0.1rem',
+  paddingBottom: '0.1rem'
+}
 
 export const bottom_text = {
-  paddingTop: "0.2rem",
-  paddingBottom: "0.2rem",
-  paddingLeft: "0.2rem",
-};
+  paddingTop: '0.2rem',
+  paddingBottom: '0.2rem',
+  paddingLeft: '0.2rem'
+}
 export const bottom_text_right = {
   position: "absolute",
   paddingTop: "0.2rem",
