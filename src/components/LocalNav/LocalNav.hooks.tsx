@@ -36,7 +36,11 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
     };
 
     useEffect(() => {
-        effect()
+
+            effect().then(() => {
+                console.log('useEffect');
+            });
+
     }, [])
 
     return {loading, topics, learningPath}
