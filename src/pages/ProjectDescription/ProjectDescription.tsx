@@ -1,4 +1,4 @@
-import { ProjectDescriptionForm } from "@components";
+import { ProjectDescriptionForm } from '@components'
 
 /**
  * ProjectDescription presents a page with a description of the project. It uses the ProjectDescriptionForm component to present the form.
@@ -7,7 +7,7 @@ import { ProjectDescriptionForm } from "@components";
  * @category Pages
  */
 const ProjectDescription = () => {
-  return <ProjectDescriptionForm />;
-};
+  return <ProjectDescriptionForm />
+}
 
-export default ProjectDescription;
+export default ProjectDescription

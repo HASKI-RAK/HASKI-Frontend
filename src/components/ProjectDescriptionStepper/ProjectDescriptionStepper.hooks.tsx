@@ -3,22 +3,22 @@ import { useState, RefObject } from 'react'
 /**
  * TODO: Comment
  */
-export type useProjectDescriptionCardHookParams = {
-  defaultBodyState?: string
+export type useProjectDescriptionStepperHookParams = {
+  defaultBodyState?: string[]
   defaultHeaderState?: string
 }
 
 /**
  * TODO: Comment
  */
-export type ProjectDescriptionCardHookReturn = {
-  readonly bodyState: string
+export type ProjectDescriptionStepperHookReturn = {
+  readonly bodyState: string[]
   readonly headerState: string
-  readonly setBodyState: (body: string) => void
+  readonly setBodyState: (body: string[]) => void
   readonly setHeaderState: (header: string) => void
-  readonly animateBody: (ref: RefObject<HTMLDivElement>, body: string) => void
+  readonly animateBody: (ref: RefObject<HTMLDivElement>, body: string[]) => void
   readonly animateHeader: (ref: RefObject<HTMLDivElement>, header: string) => void
-  readonly fadeInEffect: (body: string) => () => void
+  readonly fadeInEffect: (body: string[]) => () => void
   readonly typewriterEffect: (header: string) => () => void
 }
 
@@ -27,11 +27,11 @@ export type ProjectDescriptionCardHookReturn = {
  * @param params
  * @returns
  */
-export const useProjectDescriptionCard = (
-  params?: useProjectDescriptionCardHookParams
-): ProjectDescriptionCardHookReturn => {
+export const useProjectDescriptionStepper = (
+  params?: useProjectDescriptionStepperHookParams
+): ProjectDescriptionStepperHookReturn => {
   // Default values
-  const { defaultHeaderState = '', defaultBodyState = '' } = params || {}
+  const { defaultHeaderState = '', defaultBodyState = [] } = params || {}
 
   // State data
   const [bodyState, setBodyState] = useState(defaultBodyState)
@@ -39,7 +39,7 @@ export const useProjectDescriptionCard = (
 
   // Logic
   // Checks if top of component is in the viewport and animates body texts if states are not equal to param.
-  const animateBody = (ref: RefObject<HTMLDivElement>, body: string) => {
+  const animateBody = (ref: RefObject<HTMLDivElement>, body: string[]) => {
     const topPosition = ref.current?.getBoundingClientRect().top
     const viewportBottom = window.innerHeight
 
@@ -67,7 +67,7 @@ export const useProjectDescriptionCard = (
   }
 
   // Animates body text by setting the bodyState after a short timeout.
-  const fadeInEffect = (body: string) => {
+  const fadeInEffect = (body: string[]) => {
     const bodyTimeout = setTimeout(() => {
       setBodyState(body)
     }, 1000)

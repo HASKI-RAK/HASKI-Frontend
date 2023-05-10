@@ -1,1 +1,1 @@
-export { MobileStepper as DefaultMobileStepper } from "@mui/material";
+export { MobileStepper as DefaultMobileStepper } from '@mui/material'

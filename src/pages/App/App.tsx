@@ -1,16 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { DefaultThemeProvider as ThemeProvider } from "@common/components";
-import {
-  MainFrame,
-  Home,
-  ThemePresentation,
-  Login,
-  Dashboard,
-  ProjectDescription,
-} from "@pages";
-import { AuthProvider } from "@services";
-import { logBuffer } from "@shared";
-import { HaskiTheme } from "@utils";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { DefaultThemeProvider as ThemeProvider } from '@common/components'
+import { MainFrame, Home, ThemePresentation, Login, Dashboard, ProjectDescription } from '@pages'
+import { AuthProvider } from '@services'
+import { logBuffer } from '@shared'
+import { HaskiTheme } from '@utils'
 
 logBuffer()
 
@@ -34,10 +27,7 @@ const App = () => (
             <Route path="/theme" element={<ThemePresentation />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route
-              path="/projectdescription"
-              element={<ProjectDescription />}
-            />
+            <Route path="/projectdescription" element={<ProjectDescription />} />
             <Route path="*" element={<div>404</div>} />
           </Route>
           <Route path="*" element={<div>404</div>} />

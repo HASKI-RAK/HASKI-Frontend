@@ -1,5 +1,5 @@
-import { createTheme } from "@mui/material/styles";
-import { yellow, red } from "@mui/material/colors";
+import { createTheme } from '@mui/material/styles'
+import { yellow, red } from '@mui/material/colors'
 
 export const defaultBehavior = {
   boxShadowSize: {
@@ -20,15 +20,15 @@ export const defaultFonts = {
 export const defaultColors = {
   primary: {
     //orange
-    [100]: "#FF8E00", //light orange
-    [300]: "#FD7702", //strong orange
-    [900]: "#FF5003", //dark orange
+    [100]: '#FF8E00', //light orange
+    [300]: '#FD7702', //strong orange
+    [900]: '#FF5003' //dark orange
   },
   secondary: {
     //blue
-    [100]: "#003F7D", //blue
-    [300]: "#003366", //blue, slightly darker
-    [500]: "#002347", //blue, darker
+    [100]: '#003F7D', //blue
+    [300]: '#003366', //blue, slightly darker
+    [500]: '#002347' //blue, darker
   },
 
   lightgrey: 'lightgrey',
@@ -64,7 +64,7 @@ export const HaskiTheme = createTheme({
   },
 
   typography: {
-    fontFamily: ["Courier New", "regular"].join(","),
+    fontFamily: ['Courier New', 'regular'].join(',')
   },
 
   components: {
@@ -84,7 +84,7 @@ export const HaskiTheme = createTheme({
     MuiButton: {
       //disables the ripple effect
       defaultProps: {
-        disableRipple: true,
+        disableRipple: true
       },
       styleOverrides: {
         // Name of the slot
@@ -101,10 +101,10 @@ export const HaskiTheme = createTheme({
           backgroundColor: 'white',
           bottom: '-2px',
           //boxShadow: defaultBehavior.boxShadowSize["default"] + "lightgrey",
-          left: "-2px",
-          top: "-2px",
-          padding: "0.5rem 1.2rem 0.5rem 1.2rem",
-          transition: "filter 0.1s ease",
+          left: '-2px',
+          top: '-2px',
+          padding: '0.5rem 1.2rem 0.5rem 1.2rem',
+          transition: 'filter 0.1s ease',
 
           //padding: 'var(--web-ui_button-padding,0 16px)',
           '&:hover': {
@@ -121,8 +121,7 @@ export const HaskiTheme = createTheme({
         contained: {
           color: defaultColors.black,
           backgroundColor: defaultColors.primary[100],
-          boxShadow:
-            defaultBehavior.boxShadowSize["default"] + defaultColors.black,
+          boxShadow: defaultBehavior.boxShadowSize['default'] + defaultColors.black,
           borderColor: defaultColors.black,
           '&:hover': {
             backgroundColor: defaultColors.primary[100],
@@ -132,40 +131,38 @@ export const HaskiTheme = createTheme({
           },
           '&:active': {
             //transform: "translateY(4px) translateZ(0)",
-            boxShadow: "unset",
-          },
+            boxShadow: 'unset'
+          }
         },
         //Button wird unterstrichen
         outlined: {
           color: defaultColors.black,
-          boxShadow:
-            defaultBehavior.boxShadowSize["default"] + defaultColors.white,
+          boxShadow: defaultBehavior.boxShadowSize['default'] + defaultColors.white,
           borderColor: defaultColors.white,
           disableRipple: true,
-          "&:hover": {
-            textDecoration: "underline #FF8E00",
-            border: defaultBehavior.border["default"],
-            boxShadow:
-              defaultBehavior.boxShadowSize["default"] + defaultColors.white,
+          '&:hover': {
+            textDecoration: 'underline #FF8E00',
+            border: defaultBehavior.border['default'],
+            boxShadow: defaultBehavior.boxShadowSize['default'] + defaultColors.white,
             borderColor: defaultColors.white,
             filter: 'var(--web-ui_button-filter-hover,brightness(1.1))'
           },
           '&:active': {
             //transform: "translateY(4px) translateZ(0)",
-            boxShadow: "unset",
-          },
-        },
-      },
+            boxShadow: 'unset'
+          }
+        }
+      }
     },
     MuiLink: {
       styleOverrides: {
         root: {
           color: defaultColors.black,
-          "&:hover": {
-            textDecoration: "underline #FF8E00",
-          },
-        },
-      },
+          '&:hover': {
+            textDecoration: 'underline #FF8E00'
+          }
+        }
+      }
     },
     MuiRadio: {
       styleOverrides: {
@@ -177,32 +174,32 @@ export const HaskiTheme = createTheme({
           backgroundColor: defaultColors.white,
 
           color: defaultColors.black,
-          ".Mui-focusVisible &": {
-            outline: "2px auto rgba(19,124,189,.6)",
-            outlineOffset: 2,
+          '.Mui-focusVisible &': {
+            outline: '2px auto rgba(19,124,189,.6)',
+            outlineOffset: 2
           },
-          "&:hover": {
-            backgroundColor: defaultColors.lightgrey,
+          '&:hover': {
+            backgroundColor: defaultColors.lightgrey
           },
           '&:checked': {
             color: defaultColors.secondary[100],
             backgroundColor: defaultColors.secondary[100]
           },
-          ":disabled": {
+          ':disabled': {
             color: defaultColors.lightgrey,
-            cursor: "not-allowed",
-          },
+            cursor: 'not-allowed'
+          }
         },
         colorSecondary: {
           color: defaultColors.secondary[100],
-          "&$checked": {
-            color: defaultColors.secondary[100],
-          },
-        },
-      },
-    },
-  },
-});
+          '&$checked': {
+            color: defaultColors.secondary[100]
+          }
+        }
+      }
+    }
+  }
+})
 
 export const node_style = {
   display: 'flex',
@@ -263,9 +260,9 @@ export const bottom_text = {
   paddingLeft: '0.2rem'
 }
 export const bottom_text_right = {
-  position: "absolute",
-  paddingTop: "0.2rem",
-  paddingBottom: "0.2rem",
-  paddingLeft: "0.2rem",
-  right: "0.5rem",
-};
+  position: 'absolute',
+  paddingTop: '0.2rem',
+  paddingBottom: '0.2rem',
+  paddingLeft: '0.2rem',
+  right: '0.5rem'
+}
