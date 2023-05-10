@@ -1,10 +1,7 @@
 import { ImprintContent } from '@components'
 
-
 const Imprint = () => {
-    return (
-        <ImprintContent />
-    )
+  return <ImprintContent />
 }
 
 export default Imprint
