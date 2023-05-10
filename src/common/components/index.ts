@@ -26,3 +26,4 @@ export { DefaultCircularProgress } from './DefaultCircularProgress/DefaultCircul
 export { DefaultInputAdornment } from './DefaultInputAdornment/DefaultInputAdornment'
 export { DefaultPaper } from './DefaultPaper/DefaultPaper'
 export { DefaultTextField } from './DefaultTextField/DefaultTextField'
+export { DefaultModal } from './DefaultModal/DefaultModal'

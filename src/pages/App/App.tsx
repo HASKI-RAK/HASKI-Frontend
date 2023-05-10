@@ -25,9 +25,10 @@ const App = () => (
           <Route element={<MainFrame />}>
             <Route index element={<Home />} />
             <Route path="/theme" element={<ThemePresentation />} />
-            <Route path="/topic" element={<Topic />} />
+            <Route path="/topic/:id" element={<Topic />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/🥚" element={<div>Ei</div>} />
             <Route path="*" element={<div>404</div>} />
           </Route>
           <Route path="*" element={<div>404</div>} />

@@ -1,25 +1,12 @@
-import { LearningPath, LearningElement } from '@core'
-import { Box, Card, Modal, Typography } from '@mui/material'
+import { nodeTypes } from '@components'
+import { LearningPath } from '@core'
+import { Box } from '@mui/material'
 import log from 'loglevel'
-import { useEffect, useMemo, useState } from 'react'
-import { create, StateCreator } from 'zustand'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSearchParams } from 'react-router-dom'
-import ReactFlow, { Handle, Node, NodeProps, NodeTypes, Position } from 'reactflow'
-
-const style = {
-  position: 'absolute',
-  top: '25%',
-  left: '25%',
-  transform: 'translate(-20%, -20%)',
-  width: '75%',
-  height: '85%',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-  overflow: 'hidden'
-}
+import { useParams, useSearchParams } from 'react-router-dom'
+import ReactFlow, { Edge, Node } from 'reactflow'
+import useBoundStore from '@store'
 
 const design_patterns_general = [
   {
@@ -38,89 +25,9 @@ const design_patterns_general = [
   }
 ]
 
-const IframeModal = ({
-  url,
-  title,
-  isOpen,
-  onClose
-}: {
-  url: string
-  title: string
-  isOpen: boolean
-  onClose: () => void
-}): JSX.Element => {
-  return (
-    <Modal open={isOpen} onClose={onClose}>
-      <Box sx={style}>
-        <iframe
-          src={url}
-          title={title}
-          width="120%"
-          height="130%"
-          style={{
-            position: 'relative',
-            left: '-19%',
-            top: '-21%'
-          }}
-        />
-      </Box>
-    </Modal>
-  )
-}
-const learning_path_mock: LearningPath[] = [
-  {
-    position: 1,
-    learning_element: {
-      id: 1,
-      lms_id: 4,
-      activity_type: 'assign',
-      classification: 'RQ',
-      name: 'Test Learning Element 1',
-      done: false,
-      done_at: '2017-07-21T17:32:28Z',
-      nr_of_visits: 3,
-      last_visit: '2017-07-21T17:32:28Z',
-      time_spend: 123.45,
-      is_recommended: true
-    }
-  },
-  {
-    position: 2,
-    learning_element: {
-      id: 2,
-      lms_id: 4,
-      activity_type: 'assign',
-      classification: 'RQ',
-      name: 'Test Learning Element 5',
-      done: false,
-      done_at: '2017-07-21T17:32:28Z',
-      nr_of_visits: 0,
-      last_visit: '2017-07-21T17:32:28Z',
-      time_spend: 123.45,
-      is_recommended: true
-    }
-  },
-  {
-    position: 3,
-    learning_element: {
-      id: 2,
-      lms_id: 4,
-      activity_type: 'assign',
-      classification: 'RQ',
-      name: 'Test Learning Element 3',
-      done: false,
-      done_at: '2017-07-21T17:32:28Z',
-      nr_of_visits: 20,
-      last_visit: '2017-07-21T17:32:28Z',
-      time_spend: 1000,
-      is_recommended: true
-    }
-  }
-]
-
 const _useTopic = () => {
-  const [initalNodes, setInitalNodes] = useState<TopicNode[]>()
-  const [initalEdges, setInitalEdges] = useState<TopicEdge[]>()
+  const [initalNodes, setInitalNodes] = useState()
+  const [initalEdges, setInitalEdges] = useState()
   const [searchParams] = useSearchParams()
   const topic = searchParams.get('topic')
 
@@ -141,71 +48,6 @@ const _useTopic = () => {
 
   return { topic }
 }
-export const BasicNode = ({ data }: NodeProps<TopicNode>) => {
-  console.log(data)
-  const { t } = useTranslation()
-  const [isOpen, setIsOpen] = useState(false)
-  const [url, setUrl] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
-  const [title, setTitle] = useState(data.label)
-  console.log(url)
-  return (
-    <>
-      <Handle
-        type="target"
-        position={Position.Top}
-        style={{ background: '#555' }}
-        onConnect={(params) => console.log('handle onConnect', params)}
-      />
-      <Card
-        sx={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '0.5rem',
-          cursor: 'pointer'
-        }}
-        onClick={() => {
-          setIsOpen(true)
-        }}>
-        <Typography variant="h5" sx={{ textAlign: 'center' }}>
-          {data.label}
-        </Typography>
-        <Typography variant="h6" sx={{ textAlign: 'center' }}>
-          {t('topic.type')}: {data.activity_type}
-        </Typography>
-        <Typography variant="h6" sx={{ textAlign: 'center' }}>
-          {t('topic.visits')}: {data.nr_of_visits}
-        </Typography>
-        <IframeModal url={url} title={title} isOpen={isOpen} onClose={() => setIsOpen(false)} />
-      </Card>
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        id="a"
-        style={{ top: '50%', background: '#555' }}
-        onConnect={(params) => console.log('handle onConnect', params)}
-      />
-    </>
-  )
-}
-type TopicNode = {
-  lms_id: number
-  label: string
-  activity_type: string
-  classification: string
-  done: boolean
-  nr_of_visits: number
-  last_visit: string
-  time_spend: number
-  is_recommended: boolean
-}
-
-const nodeTypes: NodeTypes = {
-  special: BasicNode
-}
 
 type TopicProps = {
   useTopic?: typeof _useTopic
@@ -218,34 +60,40 @@ const initialNodes = [
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }]
 // Topic Page - TODO Component extract
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [url, setUrl] = useState('')
-  const [title, setTitle] = useState('')
-  const { t } = useTranslation()
   const [initalNodes, setInitalNodes] = useState<Node[]>()
-  const [initalEdges, setInitalEdges] = useState<TopicEdge[]>()
-  const [searchParams] = useSearchParams()
-  const topic = searchParams.get('topic')
+  const [initalEdges, setInitalEdges] = useState<Edge[]>()
+  const { id } = useParams<{ id: string }>()
+
+  const user = useBoundStore((state) => state.user)
+  const course = useBoundStore((state) => state.course)
+  const fetchLearningPath = useBoundStore((state) =>
+    state.fetchLearningPath(user.userId, user.lmsUserId, user.studentId, course.id, Number(id))
+  )
 
   useEffect(() => {
-    if (topic) {
-      // request to backend to get learning path for topic
-      // alert('Topic: ' + topic)
-      const nodes: Node[] = topiclearningelements_to_nodes(learning_path_mock)
-      setInitalNodes(nodes)
-      const edges: TopicEdge[] = nodes.map((item, index) => ({
-        id: index.toString(),
-        source: item.id,
-        target: nodes[index + 1]?.id
-      }))
-      setInitalEdges(edges)
-      console.log('nodes', nodes)
-      console.log('edges', edges)
-    }
-  }, [topic])
+    // request to backend to get learning path for topic
+    // alert('Topic: ' + topic)
+    fetchLearningPath
+      .then((learning_path_data) => {
+        const nodes: Node[] = topiclearningelements_to_nodes(learning_path_data)
+        setInitalNodes(nodes)
+        const edges: Edge[] = nodes.map((item, index) => ({
+          id: index.toString(),
+          source: item.id,
+          target: nodes[index + 1]?.id
+        }))
+        setInitalEdges(edges)
+        console.log('nodes', nodes)
+        console.log('edges', edges)
+      })
+      .catch((error) => {
+        console.log(error) // 🍿 snackbar error
+        alert('Error: ' + error)
+      })
+  }, [fetchLearningPath])
 
   log.setLevel('error')
-  return (
+  return initalNodes && initalEdges ? (
     <Box height={'100%'}>
       <ReactFlow fitView nodes={initalNodes} edges={initalEdges} nodeTypes={nodeTypes} />
       {/* {design_patterns_general.map((item) => (
@@ -261,34 +109,39 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           <p>{item.description}</p>
         </Card>
       ))} */}
-      <IframeModal url={url} title={title} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      {/* <IframeModal url={url} title={title} isOpen={isOpen} onClose={() => setIsOpen(false)} /> */}
     </Box>
+  ) : (
+    <div>Loading...</div>
   )
 }
 
 export default Topic
 
-type TopicEdge = {
-  id: string
-  source: string
-  target: string
+type TopicNode = {
+  lms_id: number
+  label: string
+  activity_type: string
+  classification: string
+  done: boolean
+  done_at: string
+  recommended: boolean
 }
-const topiclearningelements_to_nodes = (learning_path: LearningPath[]): Node<TopicNode>[] => {
+
+const topiclearningelements_to_nodes = (learning_path: LearningPath): Node<TopicNode>[] => {
   // alert('map_TopicLearningElements_to_reactflow')
-  return learning_path.map((item, index) => {
+  return learning_path.path.map((item, index) => {
     return {
       id: item.position.toString(),
-      type: 'special',
+      type: 'basic',
       data: {
         lms_id: item.learning_element.lms_id,
         label: item.learning_element.name,
         activity_type: item.learning_element.activity_type,
         classification: item.learning_element.classification,
-        done: item.learning_element.done,
-        nr_of_visits: item.learning_element.nr_of_visits,
-        last_visit: item.learning_element.last_visit,
-        time_spend: item.learning_element.time_spend,
-        is_recommended: item.learning_element.is_recommended
+        done: item.learning_element.student_learning_element.done,
+        done_at: item.learning_element.student_learning_element.done_at,
+        recommended: item.recommended
       },
       position: {
         x: 0,

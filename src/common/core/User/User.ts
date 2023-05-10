@@ -1,5 +1,6 @@
-export default class User {
-  id?: number
-  firstName?: string
-  surName?: string
+type User = {
+  userId: number
+  lmsUserId: number
+  studentId: number
 }
+export default User
