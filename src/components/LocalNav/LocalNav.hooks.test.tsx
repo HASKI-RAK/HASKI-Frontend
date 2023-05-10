@@ -7,6 +7,7 @@ jest.mock('@services', () => ({
     getElementLearningPath: jest.fn(),
 }));
 
+
 describe('useLearningPath', () => {
     beforeEach(() => {
         jest.clearAllMocks()
@@ -26,9 +27,4 @@ describe('useLearningPath', () => {
         expect(result.current.learningPath).toEqual([])
     })
 
-    it('setLoading throws error', async () => {
-
-        (getCourseTopics as jest.MockedFunction<typeof getCourseTopics>).mockRejectedValueOnce(new Error('Failed to fetch course topics'))
-
-    })
 })

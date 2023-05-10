@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import {getCourseTopics, getElementLearningPath, LearningPath, Topic} from '@services'
+import log from "loglevel";
 
 export const getSortedLearningPath = async(data: Topic[]): Promise<LearningPath[]> => {
     const promises = data.map((topic) => getElementLearningPath(topic.id))
@@ -29,7 +30,8 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
                 setLoading(false)
             }
         } catch (error) {
-            console.log(error);
+            log.error(error);
+            throw error;
         } finally {
             setLoading(false);
         }
@@ -37,7 +39,7 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
 
     useEffect(() => {
             effect().catch(() => {
-                console.log('useEffect');
+                log.error('An error occurred while fetching course topics in LocalNav.hooks')
             });
     }, [])
 
