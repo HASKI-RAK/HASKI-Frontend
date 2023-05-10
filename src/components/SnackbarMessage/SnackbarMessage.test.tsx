@@ -5,26 +5,23 @@ import '@testing-library/jest-dom'
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')
 
-const mockErrorSnackbarMessageProps = {
+const mockErrorSnackbarMessageProps: SnackbarMessageProps = {
   autoHideDuration: 10,
   message: 'test',
-  severity: 'error',
-  open: true
-} as SnackbarMessageProps
+  severity: 'error'
+}
 
-const mockWarningSnackbarMessageProps = {
+const mockWarningSnackbarMessageProps: SnackbarMessageProps = {
   autoHideDuration: 10,
   message: 'test',
-  severity: 'warning',
-  open: false
-} as SnackbarMessageProps
+  severity: 'warning'
+}
 
-const mockSuccessSnackbarMessageProps = {
+const mockSuccessSnackbarMessageProps: SnackbarMessageProps = {
   autoHideDuration: 0,
   message: 'test',
-  severity: 'success',
-  open: true
-} as SnackbarMessageProps
+  severity: 'success'
+}
 
 describe('Test SnackbarMessage', () => {
   test('SnackbarMessage renders without input', () => {

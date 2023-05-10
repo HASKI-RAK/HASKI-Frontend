@@ -1,1 +1,2 @@
-export { SnackbarProvider } from './SnackbarProvider'
+import SnackbarProvider from './SnackbarProvider'
+export { SnackbarProvider }

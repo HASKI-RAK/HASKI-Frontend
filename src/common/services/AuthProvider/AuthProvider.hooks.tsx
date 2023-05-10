@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { getLoginStatus, getLogout } from '@services'
 
 const useAuthProvider = () => {
@@ -10,14 +10,14 @@ const useAuthProvider = () => {
     document.cookie = 'haski_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
   }
 
-  const logout = () => {
+  const logout = useCallback(() => {
     getLogout().then((response) => {
       if (response.status === 200) {
         setIsAuth(false)
         clearCookie()
       }
     })
-  }
+  }, [])
 
   // Side effects
   useEffect(() => {
@@ -32,7 +32,7 @@ const useAuthProvider = () => {
     })
   }, [])
 
-  return useMemo(() => ({ isAuth, setIsAuth, logout }), [isAuth])
+  return useMemo(() => ({ isAuth, setIsAuth, logout }), [isAuth, logout])
 }
 
 export { useAuthProvider }

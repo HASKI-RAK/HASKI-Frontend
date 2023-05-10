@@ -33,47 +33,43 @@ export const useSnackbarProvider = (): SnackbarProviderHookReturn => {
 
   // Adds a snackbar to the array of snackbars. It depends on the severity type which array is used.
   const addSnackbar = useCallback(
-    (newSnackbar: SnackbarMessageProps) => {
-      if (newSnackbar.severity === 'error' || newSnackbar.severity === 'warning') {
-        if (snackbarsErrorWarning.find((snackbar) => snackbar.message === newSnackbar.message)) {
+    (props: SnackbarMessageProps) => {
+      if (props.severity === 'error' || props.severity === 'warning') {
+        if (snackbarsErrorWarning.find((snackbar) => snackbar.message === props.message)) {
           return
         }
         const rest = snackbarsErrorWarning.length < 3 ? snackbarsErrorWarning : snackbarsErrorWarning.slice(0, -1)
-        setSnackbarsErrorWarning([newSnackbar, ...rest])
-      } else if (newSnackbar.severity === 'success' || newSnackbar.severity === 'info') {
-        if (snackbarsSuccessInfo.find((snackbar) => snackbar.message === newSnackbar.message)) {
+        setSnackbarsErrorWarning([props, ...rest])
+      } else if (props.severity === 'success' || props.severity === 'info') {
+        if (snackbarsSuccessInfo.find((snackbar) => snackbar.message === props.message)) {
           return
         }
         const rest = snackbarsSuccessInfo.length < 3 ? snackbarsSuccessInfo : snackbarsSuccessInfo.slice(0, -1)
-        setSnackbarsSuccessInfo([newSnackbar, ...rest])
+        setSnackbarsSuccessInfo([props, ...rest])
       }
     },
     [snackbarsErrorWarning, snackbarsSuccessInfo]
   )
 
   // Updates a snackbar in the array of snackbars. The message is used as a key to change an existing snackbar.
-  const updateSnackbar = useCallback((snackbarToUpdate: SnackbarMessageProps) => {
-    if (snackbarToUpdate.severity === 'error' || snackbarToUpdate.severity === 'warning') {
+  const updateSnackbar = useCallback((props: SnackbarMessageProps) => {
+    if (props.severity === 'error' || props.severity === 'warning') {
       setSnackbarsErrorWarning((previous) =>
-        previous.map((snackbar) => (snackbar.message === snackbarToUpdate.message ? snackbarToUpdate : snackbar))
+        previous.map((snackbar) => (snackbar.message === props.message ? props : snackbar))
       )
-    } else if (snackbarToUpdate.severity === 'success' || snackbarToUpdate.severity === 'info') {
+    } else if (props.severity === 'success' || props.severity === 'info') {
       setSnackbarsSuccessInfo((previous) =>
-        previous.map((snackbar) => (snackbar.message === snackbarToUpdate.message ? snackbarToUpdate : snackbar))
+        previous.map((snackbar) => (snackbar.message === props.message ? props : snackbar))
       )
     }
   }, [])
 
   // Removes a snackbar from the array of snackbars.
-  const removeSnackbar = useCallback((snackbarToRemove: SnackbarMessageProps) => {
-    if (snackbarToRemove.severity === 'error' || snackbarToRemove.severity === 'warning') {
-      setSnackbarsErrorWarning((previous) =>
-        previous.filter((snackbar) => snackbar.message !== snackbarToRemove.message)
-      )
-    } else if (snackbarToRemove.severity === 'success' || snackbarToRemove.severity === 'info') {
-      setSnackbarsSuccessInfo((previous) =>
-        previous.filter((snackbar) => snackbar.message !== snackbarToRemove.message)
-      )
+  const removeSnackbar = useCallback((props: SnackbarMessageProps) => {
+    if (props.severity === 'error' || props.severity === 'warning') {
+      setSnackbarsErrorWarning((previous) => previous.filter((snackbar) => snackbar.message !== props.message))
+    } else if (props.severity === 'success' || props.severity === 'info') {
+      setSnackbarsSuccessInfo((previous) => previous.filter((snackbar) => snackbar.message !== props.message))
     }
   }, [])
 

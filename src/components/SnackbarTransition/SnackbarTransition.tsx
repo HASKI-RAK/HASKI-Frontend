@@ -8,7 +8,7 @@ import { SeverityType } from '@components'
  * @param {SeverityType} severity - The severity that determines the transition type.
  * @param {number} timeout - The duration of the transition.
  */
-type SnackbarTransitionProps = {
+export type SnackbarTransitionProps = {
   children?: React.ReactElement
   in?: boolean
   severity?: SeverityType

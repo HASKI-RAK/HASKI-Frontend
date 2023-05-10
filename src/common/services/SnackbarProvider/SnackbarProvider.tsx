@@ -19,7 +19,7 @@ type SnackbarProviderProps = {
  * @returns {JSX.Element} - The snackbar provider.
  * @category Services
  */
-export const SnackbarProvider = ({ useSnackbarProvider = _useSnackbarProvider, ...props }: SnackbarProviderProps) => (
+const SnackbarProvider = ({ useSnackbarProvider = _useSnackbarProvider, ...props }: SnackbarProviderProps) => (
   <SnackbarContext.Provider value={useSnackbarProvider()}>
     <SnackbarContainer />
     {props.children}

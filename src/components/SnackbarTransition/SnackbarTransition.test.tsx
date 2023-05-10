@@ -1,19 +1,19 @@
-import SnackbarTransition from './SnackbarTransition'
+import SnackbarTransition, { SnackbarTransitionProps } from './SnackbarTransition'
 import { render } from '@testing-library/react'
 import { SeverityType } from '@components'
 import '@testing-library/jest-dom'
 
-const mockErrorSnackbarTransitionProps = {
+const mockErrorSnackbarTransitionProps: SnackbarTransitionProps = {
   children: <div>test</div>,
   in: true,
-  severity: 'error' as SeverityType,
+  severity: 'error',
   timeout: 10
 }
 
-const mockSuccessSnackbarTransitionProps = {
+const mockSuccessSnackbarTransitionProps: SnackbarTransitionProps = {
   children: <div>test</div>,
   in: true,
-  severity: 'success' as SeverityType,
+  severity: 'success',
   timeout: 10
 }
 

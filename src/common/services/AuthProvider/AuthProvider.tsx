@@ -1,12 +1,12 @@
 import { AuthContext, AuthContextType } from '@services'
 import { useAuthProvider as _useAuthProvider } from './AuthProvider.hooks'
 
-type AuthProviderType = {
+type AuthProviderProps = {
   children: React.ReactNode
   useAuthProvider?: () => AuthContextType
 }
 
-export const AuthProvider = ({ useAuthProvider = _useAuthProvider, ...props }: AuthProviderType) => (
+const AuthProvider = ({ useAuthProvider = _useAuthProvider, ...props }: AuthProviderProps) => (
   <AuthContext.Provider value={useAuthProvider()}>{props.children}</AuthContext.Provider>
 )
 
