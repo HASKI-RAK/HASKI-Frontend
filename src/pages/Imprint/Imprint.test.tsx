@@ -1,10 +1,10 @@
 import {render} from "@testing-library/react";
-import {ImprintPage} from "@pages";
+import {Imprint} from "@pages";
 
 describe('MainFrame', () => {
     it('should render the MainFrame', () => {
 
-        const result = render(<ImprintPage />)
+        const result = render(<Imprint />)
         expect(result).toBeTruthy()
     })
 })

@@ -7,7 +7,7 @@ import { GraphListK } from './Questionnaire/GraphListK'
 import { ResultDescriptionListK } from './Questionnaire/ResultDescriptionListK'
 import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResultsModal'
 import { Text } from './Text/Text'
-import { Imprint } from './Imprint/Imprint'
+import { ImprintContent } from './Imprint/ImprintContent'
 import LoginForm from './LoginForm/LoginForm'
 import MenuBar from './MenuBar/MenuBar'
 
@@ -33,5 +33,5 @@ export {
   GraphListK,
   ResultDescriptionListK,
   QuestionnaireResultsModal,
-  Imprint
+  ImprintContent
 }
