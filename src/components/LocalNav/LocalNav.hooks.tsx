@@ -36,11 +36,9 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
     };
 
     useEffect(() => {
-
-            effect().then(() => {
+            effect().catch(() => {
                 console.log('useEffect');
             });
-
     }, [])
 
     return {loading, topics, learningPath}

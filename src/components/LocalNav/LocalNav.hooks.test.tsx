@@ -25,4 +25,10 @@ describe('useLearningPath', () => {
         expect(result.current.topics).toEqual([])
         expect(result.current.learningPath).toEqual([])
     })
+
+    it('setLoading throws error', async () => {
+
+        (getCourseTopics as jest.MockedFunction<typeof getCourseTopics>).mockRejectedValueOnce(new Error('Failed to fetch course topics'))
+
+    })
 })
