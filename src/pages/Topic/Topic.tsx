@@ -1,4 +1,4 @@
-import { TopicLearningElements as TopicLearningElement, LearningElement } from '@core'
+import { LearningPath, LearningElement } from '@core'
 import { Box, Card, Modal, Typography } from '@mui/material'
 import log from 'loglevel'
 import { useEffect, useMemo, useState } from 'react'
@@ -67,7 +67,7 @@ const IframeModal = ({
     </Modal>
   )
 }
-const learning_path_mock: TopicLearningElement[] = [
+const learning_path_mock: LearningPath[] = [
   {
     position: 1,
     learning_element: {
@@ -273,7 +273,7 @@ type TopicEdge = {
   source: string
   target: string
 }
-const topiclearningelements_to_nodes = (learning_path: TopicLearningElement[]): Node<TopicNode>[] => {
+const topiclearningelements_to_nodes = (learning_path: LearningPath[]): Node<TopicNode>[] => {
   // alert('map_TopicLearningElements_to_reactflow')
   return learning_path.map((item, index) => {
     return {

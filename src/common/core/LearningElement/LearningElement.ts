@@ -1,9 +1,4 @@
-type TopicLearningElement = {
-  position: number
-  learning_element: LearningElement
-}
-
-export type LearningElement = {
+type LearningElement = {
   id: number
   lms_id: number
   activity_type: string
@@ -17,4 +12,4 @@ export type LearningElement = {
   is_recommended: boolean
 }
 
-export default TopicLearningElement
+export default LearningElement
