@@ -164,7 +164,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                     {loading ? ( // display Skeleton component while loading
                       <Box width={400}>{skeletonItems}</Box>
                     ) : (
-                        //For every Topic the LearningPath is displayed under it.
+                      //For every Topic the LearningPath is displayed under it.
                       <>
                         {topics.map((topic, index) => (
                           <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>
