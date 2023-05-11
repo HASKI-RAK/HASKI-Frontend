@@ -255,6 +255,6 @@ describe('LocalNav', () => {
     })
     expect(result.current.loading).toBeTruthy()
     expect(result.current.topics).toEqual(mockResponse.data.topics)
-    expect(result.current.learningPath).toHaveLength(0)
+    expect(result.current.learningPaths).toHaveLength(0)
   })
 })

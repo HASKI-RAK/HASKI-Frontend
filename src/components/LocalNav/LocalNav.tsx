@@ -17,22 +17,25 @@ import React from 'react'
 import { useLearningPath as _useLearningPath } from './LocalNav.hooks'
 
 /**
+ *  Local navigation component props.
+ */
+export type LocalNavProps = {
+  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPath[] }
+}
+
+/**
  * Local navigation component for the main frame.
  * @remarks
  * It contains the topics menu as a way to navigate through the application.
  *
  * @category Components
  */
-
-export type LocalNavProps = {
-  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPath: LearningPath[] }
-}
-
 const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { loading, topics, learningPath } = useLearningPath()
+  const { loading, topics, learningPaths } = useLearningPath()
 
+  // Skeleton component items, currently 3 items are looking the best in the Loading-state
   const skeletonItems = []
   for (let i = 0; i < 3; i++) {
     skeletonItems.push(
@@ -81,7 +84,7 @@ const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
                 <Typography variant="h6">{topic.name}</Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ flexDirection: 'column' }}>
-                {learningPath[index].path.map((learningElement) => (
+                {learningPaths[index]?.path.map((learningElement) => (
                   <Typography variant="body1" key={learningElement.learning_element.name}>
                     <Link
                       underline="hover"

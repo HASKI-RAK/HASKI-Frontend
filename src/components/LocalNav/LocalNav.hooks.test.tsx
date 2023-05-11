@@ -25,6 +25,6 @@ describe('useLearningPath', () => {
 
     expect(result.current.loading).toBe(false)
     expect(result.current.topics).toEqual([])
-    expect(result.current.learningPath).toEqual([])
+    expect(result.current.learningPaths).toEqual([])
   })
 })

@@ -14,10 +14,10 @@ export const getSortedLearningPath = async (data: Topic[]): Promise<LearningPath
     })
 }
 
-export const useLearningPath = (): { loading: boolean; topics: Topic[]; learningPath: LearningPath[] } => {
+export const useLearningPath = (): { loading: boolean; topics: Topic[]; learningPaths: LearningPath[] } => {
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
-  const [learningPath, setLearningPath] = useState<LearningPath[]>([])
+  const [learningPaths, setLearningPaths] = useState<LearningPath[]>([])
 
   const effect = async () => {
     setLoading(true)
@@ -26,7 +26,7 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
       if (response.status === 200) {
         setTopics(response.data.topics)
         const dataLearningPath = await getSortedLearningPath(response.data.topics)
-        setLearningPath(dataLearningPath)
+        setLearningPaths(dataLearningPath)
       } else {
         // some error occurred
         setLoading(false)
@@ -45,5 +45,5 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
     })
   }, [])
 
-  return { loading, topics, learningPath }
+  return { loading, topics, learningPaths: learningPaths }
 }

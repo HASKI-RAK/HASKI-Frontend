@@ -37,7 +37,7 @@ import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
  * @category Components
  */
 export type MenuBarProps = {
-  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPath: LearningPath[] }
+  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPath[] }
 }
 
 const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
@@ -47,7 +47,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
   const { t } = useTranslation()
 
   //Application logic hooks
-  const { loading, topics, learningPath } = useLearningPath()
+  const { loading, topics, learningPaths } = useLearningPath()
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -170,7 +170,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                                   flexWrap: 'wrap',
                                   justifyContent: 'start'
                                 }}>
-                                {learningPath[index].path.map((element) => (
+                                {learningPaths[index]?.path.map((element) => (
                                   <Link
                                     key={element.learning_element.name}
                                     underline="hover"
