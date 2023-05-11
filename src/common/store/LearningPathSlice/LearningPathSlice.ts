@@ -18,6 +18,7 @@ export const createLearningPathSlice: StateCreator<StoreState, [], [], LearningP
 
     // Check if we have the learning path cached
     const cached = get()._cache[`${courseId}-${topicId}`]
+    // TODO
     if (cached) set({ _cache: { ...get()._cache, [`${courseId}-${topicId}`]: cached } })
     else {
       // If not, fetch it and cache it
