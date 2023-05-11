@@ -2,25 +2,14 @@ import { Card, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { IFrameModal } from '@components'
-type TopicNode = {
-  lms_id: number
-  label: string
-  activity_type: string
-  classification: string
-  done: boolean
-  nr_of_visits: number
-  last_visit: string
-  time_spend: number
-  is_recommended: boolean
-}
+import { IFrameModal, LearningPathLearningElementNode } from '@components'
 
-export const BasicNode = ({ data }: NodeProps<TopicNode>) => {
+export const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   console.log(data)
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const [url, setUrl] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
-  const [title, setTitle] = useState(data.label)
+  const [title, setTitle] = useState(data.name)
   console.log(url)
   const handleOpen = () => setIsOpen(true)
   const handleClose = () => setIsOpen(false)
@@ -40,13 +29,10 @@ export const BasicNode = ({ data }: NodeProps<TopicNode>) => {
         }}
         onClick={handleOpen}>
         <Typography variant="h5" sx={{ textAlign: 'center' }}>
-          {data.label}
+          {data.name}
         </Typography>
         <Typography variant="h6" sx={{ textAlign: 'center' }}>
           {t('topic.type')}: {data.activity_type}
-        </Typography>
-        <Typography variant="h6" sx={{ textAlign: 'center' }}>
-          {t('topic.visits')}: {data.nr_of_visits}
         </Typography>
         <IFrameModal url={url} title={title} isOpen={isOpen} onClose={handleClose} />
       </Card>
