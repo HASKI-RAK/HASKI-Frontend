@@ -7,10 +7,9 @@ export const getLoginStatus = async (): Promise<RequestResponse> => {
     headers: {
       'Content-Type': 'text/json'
     }
-  }).then((response) => {
-    return {
-      status: response.status,
-      message: response.statusText
-    }
-  }) as Promise<RequestResponse>
+  }).then((response) =>
+    response.json().then((data) => {
+      return { status: response.status, message: response.statusText, json: data } satisfies RequestResponse
+    })
+  )
 }

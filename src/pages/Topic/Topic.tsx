@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useParams, useSearchParams } from 'react-router-dom'
 import ReactFlow, { Node, Edge } from 'reactflow'
 import useBoundStore from '@store'
+import { useAuthProvider } from 'src/common/services/AuthProvider/AuthProvider.hooks'
 
 const _useTopic = () => {
   console.log('useTopic')
@@ -21,18 +22,20 @@ type TopicProps = {
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initalNodes, setInitalNodes] = useState<Node[]>()
   const [initalEdges, setInitalEdges] = useState<Edge[]>()
+  const isAuth = useAuthProvider().isAuth
   const { id } = useParams<{ id: string }>()
 
   const user = useBoundStore((state) => state.user)
   const course = useBoundStore((state) => state.course)
   const fetchLearningPath = useBoundStore((state) =>
-    state.fetchLearningPath(user.userId, user.lmsUserId, user.studentId, course.id, Number(id))
+    state.fetchLearningPath
   )
 
   useEffect(() => {
     // request to backend to get learning path for topic
     // alert('Topic: ' + topic)
-    fetchLearningPath
+
+    fetchLearningPath(user.userId, user.lmsUserId, user.studentId, course.id, Number(id))
       .then((learning_path_data) => {
         const nodes = mapLeaningPathToNodes(learning_path_data)
         setInitalNodes(nodes)
