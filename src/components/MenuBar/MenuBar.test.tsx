@@ -125,7 +125,7 @@ describe('MenuBar', () => {
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
-      learningPath: learningElementPath
+      learningPaths: learningElementPath
     })
 
     const props: MenuBarProps = {
@@ -153,7 +153,7 @@ describe('MenuBar', () => {
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
-      learningPath: learningElementPath
+      learningPaths: learningElementPath
     })
 
     const props: MenuBarProps = {
@@ -176,7 +176,7 @@ describe('MenuBar', () => {
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
-      learningPath: learningElementPath
+      learningPaths: learningElementPath
     })
 
     const props: MenuBarProps = {
@@ -199,7 +199,7 @@ describe('MenuBar', () => {
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
-      learningPath: learningElementPath
+      learningPaths: learningElementPath
     })
 
     const props: MenuBarProps = {
@@ -228,7 +228,7 @@ describe('MenuBar', () => {
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
-      learningPath: learningElementPath
+      learningPaths: learningElementPath
     })
 
     const props: MenuBarProps = {
@@ -264,7 +264,7 @@ describe('MenuBar', () => {
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
-      learningPath: learningElementPath
+      learningPaths: learningElementPath
     })
 
     const props: MenuBarProps = {

@@ -27,6 +27,16 @@ import { AuthContext, Topic, LearningPath } from '@services'
 import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
 
 /**
+ *  Local navigation component props.
+ *  The "loading" property is a boolean value that indicates whether the data is still being loaded.
+ *  The "topics" property is an array of objects that represent the topics related to the current page.
+ *  The "learningPaths" property is an array of objects that represent the available learning paths related to the current page.
+ */
+export type MenuBarProps = {
+  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPath[] }
+}
+
+/**
  * The MenuBar component is the top bar of the application.
  *
  * @remarks
@@ -36,10 +46,6 @@ import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
  *
  * @category Components
  */
-export type MenuBarProps = {
-  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPath[] }
-}
-
 const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
@@ -158,6 +164,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                     {loading ? ( // display Skeleton component while loading
                       <Box width={400}>{skeletonItems}</Box>
                     ) : (
+                        //For every Topic the LearningPath is displayed under it.
                       <>
                         {topics.map((topic, index) => (
                           <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>

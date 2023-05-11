@@ -45,5 +45,5 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
     })
   }, [])
 
-  return { loading, topics, learningPaths: learningPaths }
+  return { loading, topics, learningPaths }
 }

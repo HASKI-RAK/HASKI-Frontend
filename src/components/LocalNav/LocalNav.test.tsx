@@ -79,7 +79,7 @@ describe('LocalNav', () => {
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
-      learningPath: learningElementPath
+      learningPaths: learningElementPath
     })
 
     const props: LocalNavProps = {
@@ -147,7 +147,7 @@ describe('LocalNav', () => {
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
-      learningPath: learningElementPath
+      learningPaths: learningElementPath
     })
 
     const props: LocalNavProps = {
