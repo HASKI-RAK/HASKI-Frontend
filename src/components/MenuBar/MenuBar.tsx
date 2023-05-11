@@ -25,6 +25,7 @@ import { ListItemIcon } from '@mui/material'
 import { Logout } from '@mui/icons-material'
 import { AuthContext, Topic, LearningPath } from '@services'
 import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
+// TODO: Move it into @common/hooks since it is reused in LocalNav
 
 /**
  *  Local navigation component props.

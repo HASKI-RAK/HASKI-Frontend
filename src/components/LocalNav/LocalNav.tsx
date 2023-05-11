@@ -29,7 +29,7 @@ export type LocalNavProps = {
 /**
  * Local navigation component for the main frame.
  * @remarks
- * It contains the topics menu as a way to navigate through the application.
+ * @param {LocalNavProps} props  - Local navigation component props via dependency injection.
  *
  * @category Components
  */
