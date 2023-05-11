@@ -5,25 +5,8 @@ import log from 'loglevel'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams, useSearchParams } from 'react-router-dom'
-import ReactFlow, { Edge, Node } from 'reactflow'
+import ReactFlow, { Node, Edge } from 'reactflow'
 import useBoundStore from '@store'
-
-const design_patterns_general = [
-  {
-    name: 'Kurzübersicht',
-    link: 'fakedomain.com/',
-    description: 'Kurzübersicht über die wichtigsten Design Patterns',
-    tags: ['general', 'overview'],
-    type: 'text'
-  },
-  {
-    name: 'Selbsteinschätzungstest',
-    link: 'http://fakedomain.com/mod/quiz/view.php?id=5',
-    description: 'Selbsteinschätzungstest für Design Patterns',
-    tags: ['general', 'test'],
-    type: 'quiz'
-  }
-]
 
 const _useTopic = () => {
   const [initalNodes, setInitalNodes] = useState()
@@ -75,7 +58,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     // alert('Topic: ' + topic)
     fetchLearningPath
       .then((learning_path_data) => {
-        const nodes: Node[] = topiclearningelements_to_nodes(learning_path_data)
+        const nodes = topiclearningelements_to_nodes(learning_path_data)
         setInitalNodes(nodes)
         const edges: Edge[] = nodes.map((item, index) => ({
           id: index.toString(),
@@ -128,7 +111,7 @@ type TopicNode = {
   recommended: boolean
 }
 
-const topiclearningelements_to_nodes = (learning_path: LearningPath): Node<TopicNode>[] => {
+const topiclearningelements_to_nodes = (learning_path: LearningPath) => {
   // alert('map_TopicLearningElements_to_reactflow')
   return learning_path.path.map((item, index) => {
     return {
