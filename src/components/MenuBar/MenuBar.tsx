@@ -264,4 +264,5 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
   )
 }
 
+
 export default MenuBar
