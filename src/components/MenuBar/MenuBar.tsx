@@ -15,13 +15,13 @@ import {
   DefaultPopover as Popover,
   DefaultLink as Link,
   DefaultDivider as Divider,
-  DefaultSkeleton as Skeleton
+  DefaultSkeleton as Skeleton,
+  DefaultListItemIcon as ListItemIcon
 } from '@common/components'
 import SettingsIcon from '@mui/icons-material/Settings'
 import HelpIcon from '@mui/icons-material/Help'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { useTranslation } from 'react-i18next'
-import { ListItemIcon } from '@mui/material'
 import { Logout } from '@mui/icons-material'
 import { AuthContext, Topic, LearningPath } from '@services'
 import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
@@ -102,7 +102,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
             maxHeight: { xs: 20, md: 50 },
             maxWidth: { xs: 20, md: 50 },
             borderRadius: '50%',
-            backgroundColor: 'white',
+            backgroundColor: (theme) => `${ theme.palette.secondary.main }`,
             cursor: 'pointer'
           }}
           alt="HASKI Home"
