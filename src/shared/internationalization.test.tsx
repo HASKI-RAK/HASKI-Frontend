@@ -4,9 +4,7 @@ import { act, render } from '@testing-library/react'
 import { DefaultSelect as Select } from '@common/components'
 import { MenuItem } from '@mui/material'
 import i18next from './internationalization' // your i18n config file
-import { I18nextProvider, useTranslation, I18nextProviderProps } from 'react-i18next'
-import { TFunction, i18n, ThirdPartyModule } from 'i18next'
-import React from 'react'
+import { I18nextProvider, useTranslation } from 'react-i18next'
 
 describe('i18n test', () => {
   localStorage.setItem('i18nextLng', 'en')
@@ -78,111 +76,5 @@ describe('i18n test', () => {
     // example if you have a key called example
 
     expect(i18next.language).toBe('en')
-  })
-
-  test('was passiert hier?', async () => {
-    // localStorage.removeItem('i18nextLng')
-    // localStorage.setItem('resources', undefined as unknown as string)
-    /*const i18n = jest.mock('./internationalization', () => ({
-      i18n: () => Promise.reject(new Error('Failed to load translation file'))
-    }))*/
-    // initReactI18next.init = jest.fn(() => Promise.reject(new Error('Failed to load translation file')))
-    // const i18n = Promise.reject(new Error('Failed to load translation file'))
-    /*    render(
-      <I18nextProvider i18n={i18next}>
-        {' '}
-        <ArrangeElement />
-      </I18nextProvider>
-    )*/
-    /*i18next.on('failedLoading', (lng, ns, msg) => {
-      console.log({ lng, ns, msg })
-    })
-
-    setTimeout(() => {
-      i18next.emit('failedLoading')
-    }, 2000)*/
-    // Force an initialization error by passing an invalid `lng` value
-    /*const i18n = {} as i18n
-    render(
-      <I18nextProvider i18n={i18n}>
-        {' '}
-        <ArrangeElement />
-      </I18nextProvider>
-    )*/
-  })
-
-  test('i18next initialization should handle errors and show snackbar', async () => {
-    // expect.assertions(3) // Number of assertions
-    /*
-    // Mock the error message
-    const errorMessage = 'Mocked error message'
-    const error = new Error(errorMessage)
-
-    // Mock the addSnackbar function
-    const mockAddSnackbar = jest.fn()
-
-    // Mock the useContext hook
-    jest.spyOn(React, 'useContext').mockReturnValueOnce({
-      addSnackbar: mockAddSnackbar
-    })
-
-    // Promise<TFunction<"translation", undefined>>
-    const t: Promise<TFunction<'translation', undefined>> = Promise.reject(i18next.init)
-
-    // Mock the i18next initialization to throw an error
-    // jest.spyOn(i18next, 'init').mockReturnValueOnce(t)
-
-    render(
-      <I18nextProvider i18n={i18next}>
-        {' '}
-        <ArrangeElement />
-      </I18nextProvider>
-    )
-
-    // Render your component or any component that triggers i18next initialization
-
-    // Await any asynchronous tasks to complete
-    await act(async () => {})
-
-    // Assertions
-    // expect(mockAddSnackbar).toHaveBeenCalledTimes(1)
-    // expect(mockAddSnackbar).toHaveBeenCalledWith({
-    //   message: 'Error while initializing i18next: ' + errorMessage,
-    //   severity: 'error',
-    //   autoHideDuration: 3000
-    // })
-    // expect(i18next.init).toHaveBeenCalled()
-  */
-  })
-
-  test('catch block is triggered on initialization error', async () => {
-    // Mock the SnackbarContext
-    const addSnackbar = jest.fn()
-    jest.spyOn(React, 'useContext').mockImplementation(() => ({ addSnackbar }))
-
-    // Force an initialization error by passing an invalid `lng` value
-    const resources = {
-      en: {},
-      de: {}
-    }
-
-    const { initReactI18next } = require('i18next')
-
-    const lng = 'invalid-language-code'
-    await expect(
-      i18next.use(initReactI18next).init({
-        returnNull: false,
-        resources,
-        lng,
-        fallbackLng: 'de'
-      })
-    ).rejects.toThrow()
-
-    // Expect the SnackbarContext to have been called with an error message
-    expect(addSnackbar).toHaveBeenCalledWith({
-      message: expect.stringContaining('Error while initializing i18next'),
-      severity: 'error',
-      autoHideDuration: 3000
-    })
   })
 })
