@@ -5,6 +5,7 @@ import { DefaultSelect as Select } from '@common/components'
 import { MenuItem } from '@mui/material'
 import i18next from './internationalization' // your i18n config file
 import { I18nextProvider, useTranslation } from 'react-i18next'
+
 describe('i18n test', () => {
   localStorage.setItem('i18nextLng', 'en')
   const ArrangeElement = () => {
