@@ -1,8 +1,8 @@
+import { DefaultAlert as Alert, DefaultTypography as Typography } from '@common/components'
 import { useState, useCallback, useEffect, useContext } from 'react'
 import { SnackbarTransition } from '@components'
 import { useTranslation } from 'react-i18next'
 import { SnackbarContext } from '@services'
-import { DefaultAlert as Alert, DefaultTypography as Typography } from '@common/components'
 
 /**
  * @typedef {Object} SeverityType
@@ -60,7 +60,7 @@ const SnackbarMessage = (props: SnackbarMessageProps) => {
   }, [close, props?.autoHideDuration])
 
   return (
-    <div data-testid="snackbarMessage">
+    <>
       {props?.severity && (
         <SnackbarTransition severity={props.severity} in={openTransition}>
           {props.severity && (
@@ -70,7 +70,7 @@ const SnackbarMessage = (props: SnackbarMessageProps) => {
           )}
         </SnackbarTransition>
       )}
-    </div>
+    </>
   )
 }
 

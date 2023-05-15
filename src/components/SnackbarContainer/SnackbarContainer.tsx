@@ -1,8 +1,8 @@
+import { DefaultStack as Stack, DefaultSnackbar as Snackbar } from '@common/components'
 import { SnackbarContext, useNetworkStatus } from '@services'
 import { useEffect, useState, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SnackbarMessage } from '@components'
-import { DefaultStack as Stack, DefaultSnackbar as Snackbar } from '@common/components'
 
 /**
  * SnackbarContainer presents a container rendering the snackbars and their messages.

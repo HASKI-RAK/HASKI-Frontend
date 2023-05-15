@@ -25,26 +25,32 @@ const mockSuccessSnackbarMessageProps: SnackbarMessageProps = {
 
 describe('Test SnackbarMessage', () => {
   test('SnackbarMessage renders without input', () => {
-    const { getByTestId } = render(<SnackbarMessage />)
-    const snackbarMessage = getByTestId('snackbarMessage')
-    expect(snackbarMessage).toBeInTheDocument()
+    const { queryByText } = render(<SnackbarMessage />)
+    const snackbarMessage = queryByText('test')
+    expect(snackbarMessage).toEqual(null)
   })
 
   test('SnackbarMessage renders with error input', () => {
-    const { getByTestId } = render(<SnackbarMessage {...mockErrorSnackbarMessageProps} />)
-    const snackbarMessage = getByTestId('snackbarMessage')
+    const { queryByText } = render(<SnackbarMessage {...mockErrorSnackbarMessageProps} />)
+    const snackbarMessage = queryByText(
+      mockErrorSnackbarMessageProps.severity + ': ' + mockErrorSnackbarMessageProps.message
+    )
     expect(snackbarMessage).toBeInTheDocument()
   })
 
   test('SnackbarMessage renders with warning input', () => {
-    const { getByTestId } = render(<SnackbarMessage {...mockWarningSnackbarMessageProps} />)
-    const snackbarMessage = getByTestId('snackbarMessage')
+    const { queryByText } = render(<SnackbarMessage {...mockWarningSnackbarMessageProps} />)
+    const snackbarMessage = queryByText(
+      mockWarningSnackbarMessageProps.severity + ': ' + mockWarningSnackbarMessageProps.message
+    )
     expect(snackbarMessage).toBeInTheDocument()
   })
 
   test('SnackbarMessage renders with success input', () => {
-    const { getByTestId } = render(<SnackbarMessage {...mockSuccessSnackbarMessageProps} />)
-    const snackbarMessage = getByTestId('snackbarMessage')
+    const { queryByText } = render(<SnackbarMessage {...mockSuccessSnackbarMessageProps} />)
+    const snackbarMessage = queryByText(
+      mockSuccessSnackbarMessageProps.severity + ': ' + mockSuccessSnackbarMessageProps.message
+    )
     expect(snackbarMessage).toBeInTheDocument()
   })
 

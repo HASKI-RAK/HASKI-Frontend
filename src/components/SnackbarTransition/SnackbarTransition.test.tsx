@@ -1,6 +1,5 @@
 import SnackbarTransition, { SnackbarTransitionProps } from './SnackbarTransition'
 import { render } from '@testing-library/react'
-import { SeverityType } from '@components'
 import '@testing-library/jest-dom'
 
 const mockErrorSnackbarTransitionProps: SnackbarTransitionProps = {

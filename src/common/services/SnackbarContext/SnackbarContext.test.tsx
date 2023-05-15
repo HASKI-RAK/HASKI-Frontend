@@ -3,7 +3,7 @@ import { render, renderHook } from '@testing-library/react'
 import { useContext } from 'react'
 import '@testing-library/jest-dom'
 
-describe('Test Authcontext', () => {
+describe('Test SnackbarContext', () => {
   const providedContext = {
     snackbarsErrorWarning: [],
     snackbarsSuccessInfo: [],
