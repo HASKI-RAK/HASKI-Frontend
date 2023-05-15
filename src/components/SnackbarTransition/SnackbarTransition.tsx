@@ -3,10 +3,10 @@ import { SeverityType } from '@components'
 
 /**
  * @typedef {Object} SnackbarTransitionProps
- * @param {React.ReactElement} children - The child element to be transitioned.
- * @param {boolean} in - The condition for the transition to be triggered.
- * @param {SeverityType} severity - The severity that determines the transition type.
- * @param {number} timeout - The duration of the transition.
+ * @property {React.ReactElement} children - The child element to be transitioned.
+ * @property {boolean} in - The condition for the transition to be triggered.
+ * @property {SeverityType} severity - The severity that determines the transition type.
+ * @property {number} timeout - The duration of the transition.
  */
 export type SnackbarTransitionProps = {
   children?: React.ReactElement

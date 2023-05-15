@@ -6,18 +6,18 @@ import { SnackbarContext } from '@services'
 
 /**
  * @typedef {Object} SeverityType
- * @param {string} error - The error severity of a snackbar.
- * @param {string} success - The success severity of a snackbar.
- * @param {string} warning - The warning severity of a snackbar.
- * @param {string} info - The info severity of a snackbar.
+ * @property {string} error - The error severity of a snackbar.
+ * @property {string} success - The success severity of a snackbar.
+ * @property {string} warning - The warning severity of a snackbar.
+ * @property {string} info - The info severity of a snackbar.
  */
 export type SeverityType = 'error' | 'success' | 'warning' | 'info'
 
 /**
  * @typedef {Object} SnackbarMessageProps
- * @param {number} autoHideDuration - The duration a snackbar stays before it autmatically disappears.
- * @param {string} message - The message that is displayed on a snackbar.
- * @param {SeverityType} severity - The severity type of a snackbar.
+ * @property {number} autoHideDuration - The duration a snackbar stays before it autmatically disappears.
+ * @property {string} message - The message that is displayed on a snackbar.
+ * @property {SeverityType} severity - The severity type of a snackbar.
  */
 export type SnackbarMessageProps = {
   autoHideDuration?: number

@@ -4,8 +4,8 @@ import { SnackbarContainer } from '@components'
 
 /**
  * @typedef {Object} SnackbarProviderProps
- * @param {React.ReactNode} children - The child element of the provider.
- * @param {function} useSnackbarProvider - The hook supplying the snackbar provider logic.
+ * @property {React.ReactNode} children - The child element of the provider.
+ * @property {function} useSnackbarProvider - The hook supplying the snackbar provider logic.
  */
 type SnackbarProviderProps = {
   children: React.ReactNode

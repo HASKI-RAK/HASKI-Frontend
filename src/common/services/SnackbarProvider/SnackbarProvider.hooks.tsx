@@ -3,13 +3,13 @@ import { SnackbarMessageProps } from '@components'
 
 /**
  * @typedef {Object} SnackbarProviderHookReturn
- * @param {SnackbarMessageProps[]} snackbarsErrorWarning - The array of error and warning snackbars.
- * @param {SnackbarMessageProps[]} snackbarsSuccessInfo - The array of success and info snackbars.
- * @param {function} setSnackbarsErrorWarning - The function to set the error and warning snackbars.
- * @param {function} setSnackbarsSuccessInfo - The function to set the success and info snackbars.
- * @param {function} addSnackbar - The function to add a single snackbar.
- * @param {function} updateSnackbar - The function to update a single snackbar.
- * @param {function} removeSnackbar - The function to remove a single snackbar.
+ * @property {SnackbarMessageProps[]} snackbarsErrorWarning - The array of error and warning snackbars.
+ * @property {SnackbarMessageProps[]} snackbarsSuccessInfo - The array of success and info snackbars.
+ * @property {function} setSnackbarsErrorWarning - The function to set the error and warning snackbars.
+ * @property {function} setSnackbarsSuccessInfo - The function to set the success and info snackbars.
+ * @property {function} addSnackbar - The function to add a single snackbar.
+ * @property {function} updateSnackbar - The function to update a single snackbar.
+ * @property {function} removeSnackbar - The function to remove a single snackbar.
  */
 type SnackbarProviderHookReturn = {
   readonly snackbarsErrorWarning: SnackbarMessageProps[]
