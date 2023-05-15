@@ -3,12 +3,13 @@ import { getLoginStatus, getLogout } from '@services'
 import useBoundStore from '@store'
 import { User } from '@core'
 
-const isUser = (user: unknown): user is User => (user as User).userId !== undefined
+function isType<T>(typeToTest: unknown): typeToTest is T {
+  return typeof typeToTest === typeof ({} as T);
+}
 
 const useAuthProvider = () => {
   // State data
   const [isAuth, setIsAuth] = useState(false)
-  const setUser = useBoundStore((state) => state.setUser)
 
   // Logic
   const clearCookie = () => {
@@ -30,18 +31,18 @@ const useAuthProvider = () => {
       // When the user is logged in, the backend will return 200, otherwise 401 and clear the cookie
       if (response.status === 200) {
         setIsAuth(true)
-        if (isUser(response.json)) {
-          setUser(response.json)
-        }
+        // if (isUser(response.json)) {
+        //   setUser(response.json)
+        // }
       } else {
         setIsAuth(false)
         clearCookie()
       }
     }).catch((error) => {
       // TODO: snackbar
-      alert(error)
+      console.error(error)
     })
-  }, [setUser])
+  }, [])
 
   return useMemo(() => ({ isAuth, setIsAuth, logout }), [isAuth, logout])
 }

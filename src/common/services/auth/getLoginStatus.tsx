@@ -5,10 +5,10 @@ export const getLoginStatus = async (): Promise<RequestResponse> => {
     method: 'GET',
     credentials: 'include',
     headers: {
-      'Content-Type': 'text/json'
+      'Content-Type': 'application/json'
     }
   }).then((response) =>
-    response.json().then((data) => {
+    response.json().then((data: unknown) => {
       return { status: response.status, message: response.statusText, json: data } satisfies RequestResponse
     })
   )
