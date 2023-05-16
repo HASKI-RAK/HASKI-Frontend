@@ -9,4 +9,5 @@ import Dashboard from './Dashboard/Dashboard'
 import MainFrame from './MainFrame/MainFrame'
 import Imprint from './Imprint/Imprint'
 import Topic from './Topic/Topic'
-export { MainFrame, App, ThemePresentation, Home, Login, Dashboard, Imprint, Topic }
+import CoursePage from './CoursePage/CoursePage'
+export { MainFrame, App, ThemePresentation, Home, Login, Dashboard, Imprint, Topic, CoursePage }

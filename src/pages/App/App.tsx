@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { DefaultThemeProvider as ThemeProvider } from '@common/components'
-import { MainFrame, Home, ThemePresentation, Login, Dashboard, Imprint, Topic } from '@pages'
+import { MainFrame, Home, ThemePresentation, Login, Dashboard, Imprint, Topic, CoursePage } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { logBuffer } from '@shared'
 import { Theme } from '@utils'
@@ -25,6 +25,7 @@ const App = () => (
           <Routes>
             <Route element={<MainFrame />}>
               <Route index element={<Home />} />
+              <Route path="/course/:id" element={<CoursePage />} />
               <Route path="/theme" element={<ThemePresentation />} />
               <Route path="/topic/:id" element={<Topic />} />
               <Route path="/login" element={<Login />} />
