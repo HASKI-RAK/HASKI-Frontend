@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { IFrameModal, LearningPathLearningElementNode } from '@components'
-import FeedbackIcon from '@mui/icons-material/Feedback'
-
-export const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
+import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates'
+export const ExplanationNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
+  console.log(data)
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
@@ -24,7 +24,7 @@ export const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) 
           justifyContent: 'center',
           alignItems: 'center'
         }}>
-        <FeedbackIcon sx={{ fontSize: 50 }} />
+        <TipsAndUpdatesIcon sx={{ fontSize: 50 }} />
 
         {/* <Typography variant="h5" sx={{ textAlign: 'center' }}>
           {data.name}

@@ -4,7 +4,7 @@ import { Box } from '@mui/material'
 import log from 'loglevel'
 import { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import ReactFlow, { Node, Edge } from 'reactflow'
+import ReactFlow, { Node, Edge, MiniMap, Controls, Background } from 'reactflow'
 import useBoundStore from '@store'
 import { AuthContext } from '@services'
 
@@ -55,7 +55,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   log.setLevel('error')
   return initalNodes && initalEdges ? (
     <Box height={'100%'}>
-      <ReactFlow fitView nodes={initalNodes} edges={initalEdges} nodeTypes={nodeTypes} />
+      <ReactFlow nodes={initalNodes} edges={initalEdges} nodeTypes={nodeTypes} fitView></ReactFlow>
     </Box>
   ) : (
     <div>Loading...</div>
@@ -77,7 +77,7 @@ const mapLeaningPathToNodes = (learning_path: LearningPath) => {
     }
     return {
       id: item.position.toString(),
-      type: item.learning_element.activity_type,
+      type: item.learning_element.classification,
       data: node_data,
       position: {
         x: 0,
