@@ -2,7 +2,7 @@ import { User } from '@core'
 import { RequestResponse } from './RequestResponse.d'
 
 export const getUser = async (): Promise<User> => {
-    return fetch(process.env.BACKEND + `/loginstatus`, {
+    return fetch(process.env.BACKEND + `/lms/user_from_cookie`, {
         method: 'GET',
         credentials: 'include',
         headers: {

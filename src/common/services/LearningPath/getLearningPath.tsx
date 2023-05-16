@@ -6,15 +6,31 @@ export const getLearingPath: LearningPathReturn = async (userId, lmsUserId, stud
   }
   return fetch(
     process.env.BACKEND +
-      `/user/${userId}/${lmsUserId}/student/${studentId}/course/${course_id}/topic/${topic_id}/learningPath`,
+    `/user/${userId}/${lmsUserId}/student/${studentId}/course/${course_id}/topic/${topic_id}/learningPath`,
     {
-      method: 'POST',
+      method: 'GET',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       }
     }
   ).then((response) => {
-    return response.json()
-  }) as Promise<LearningPath>
+    if (response.ok) {
+      return response.json().then((data: unknown) => {
+        return data as LearningPath
+      })
+    } else {
+      // If resposne has error variable, then throw error
+      return response.json().then((data) => {
+        if (data.hasOwnProperty('error')) {
+          throw new Error(data['error'] + ' ' + data['message'])
+        } else {
+          throw new Error('Unknown error')
+        }
+      }
+      )
+
+    }
+
+  })
 }

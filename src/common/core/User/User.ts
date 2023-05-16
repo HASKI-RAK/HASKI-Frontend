@@ -1,6 +1,6 @@
 type User = {
-  userId: number
-  lmsUserId: number
-  studentId?: number
+  id: number
+  lms_user_id: number
+  student_id?: number
 }
 export default User
