@@ -5,5 +5,6 @@ export const nodeTypes: NodeTypes = {
   basic: BasicNode,
   assign: BasicNode,
   quiz: BasicNode,
-  feedback: BasicNode
+  feedback: BasicNode,
+  resource: BasicNode
 }
