@@ -2,12 +2,11 @@ import { nodeTypes, LearningPathLearningElementNode } from '@components'
 import { LearningPath } from '@core'
 import { Box } from '@mui/material'
 import log from 'loglevel'
-import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useEffect, useState, useContext } from 'react'
+import { useParams } from 'react-router-dom'
 import ReactFlow, { Node, Edge } from 'reactflow'
 import useBoundStore from '@store'
-import { useAuthProvider } from 'src/common/services/AuthProvider/AuthProvider.hooks'
+import { AuthContext } from '@services'
 
 const _useTopic = () => {
   console.log('useTopic')
@@ -22,7 +21,7 @@ type TopicProps = {
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initalNodes, setInitalNodes] = useState<Node[]>()
   const [initalEdges, setInitalEdges] = useState<Edge[]>()
-  const isAuth = useAuthProvider().isAuth
+  const authcontext = useContext(AuthContext)
   const { id } = useParams<{ id: string }>()
 
   const fetchUser = useBoundStore((state) => state.fetchUser)
@@ -32,7 +31,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   useEffect(() => {
     // request to backend to get learning path for topic
     // alert('Topic: ' + topic)
-    if (isAuth)
+    if (authcontext.isAuth)
       fetchUser()
         .then((user) => {
           fetchLearningPath(user.id, user.lms_user_id, user.id, 1, Number(id)).then((learning_path_data) => {
@@ -53,7 +52,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           alert('Error: ' + error)
         })
     else alert('Error: ' + 'Not logged in')
-  }, [isAuth])
+  }, [authcontext.isAuth])
 
   log.setLevel('error')
   return initalNodes && initalEdges ? (
