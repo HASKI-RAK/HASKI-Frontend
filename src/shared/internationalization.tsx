@@ -1,6 +1,16 @@
 ﻿import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import log from 'loglevel'
+import { SnackbarContext } from '@services'
+import React from 'react'
+
+// Custom type options for i18next prevents return type of null
+// https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    returnNull: false
+  }
+}
 
 // Custom type options for i18next prevents return type of null
 // https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
@@ -42,11 +52,21 @@ else {
 }
 
 //initial value is german
-i18next.use(initReactI18next).init({
-  returnNull: false,
-  resources,
-  lng: lng, // local storage get the language from the browser
-  fallbackLng: 'de'
-})
+i18next
+  .use(initReactI18next)
+  .init({
+    returnNull: false,
+    resources,
+    lng: lng, // local storage get the language from the browser
+    fallbackLng: 'de'
+  })
+  .catch((error) => {
+    const { addSnackbar } = React.useContext(SnackbarContext)
+    addSnackbar({
+      message: 'Error while initializing i18next: ' + error,
+      severity: 'error',
+      autoHideDuration: 3000
+    })
+  })
 
 export default i18next

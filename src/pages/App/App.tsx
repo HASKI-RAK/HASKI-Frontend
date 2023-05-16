@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { DefaultThemeProvider as ThemeProvider } from '@common/components'
-import { MainFrame, Home, ThemePresentation, Login, Dashboard, ProjectDescription, ProjectInformation } from '@pages'
-import { AuthProvider } from '@services'
+import { MainFrame, Home, ThemePresentation, Login, Dashboard, ProjectDescription, ProjectInformation, Imprint } from '@pages'
+import { AuthProvider, SnackbarProvider } from '@services'
 import { logBuffer } from '@shared'
 import { HaskiTheme } from '@utils'
 
@@ -20,20 +20,24 @@ logBuffer()
 const App = () => (
   <ThemeProvider theme={HaskiTheme}>
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route element={<MainFrame />}>
-            <Route index element={<Home />} />
-            <Route path="/theme" element={<ThemePresentation />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/projectinformation" element={<ProjectInformation />} />
-            <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
+      <SnackbarProvider>
+        <Router>
+          <Routes>
+            <Route element={<MainFrame />}>
+              <Route index element={<Home />} />
+              <Route path="/theme" element={<ThemePresentation />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/projectinformation" element={<ProjectInformation />} />
+              <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
+              <Route path="/imprint" element={<Imprint />} />
+              <Route path="/🥚" element={<div>Ei</div>} />
+              <Route path="*" element={<div>404</div>} />
+            </Route>
             <Route path="*" element={<div>404</div>} />
-          </Route>
-          <Route path="*" element={<div>404</div>} />
-        </Routes>
-      </Router>
+          </Routes>
+        </Router>
+      </SnackbarProvider>
     </AuthProvider>
   </ThemeProvider>
 )

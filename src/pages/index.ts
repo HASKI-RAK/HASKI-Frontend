@@ -9,4 +9,5 @@ import Dashboard from './Dashboard/Dashboard'
 import MainFrame from './MainFrame/MainFrame'
 import ProjectDescription from './ProjectDescription/ProjectDescription'
 import ProjectInformation from './ProjectInformation/ProjectInformation'
-export { MainFrame, App, ThemePresentation, Home, Login, Dashboard, ProjectDescription, ProjectInformation }
+import Imprint from './Imprint/Imprint'
+export { MainFrame, App, ThemePresentation, Home, Login, Dashboard, ProjectDescription, ProjectInformation, Imprint }
