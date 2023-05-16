@@ -40,7 +40,7 @@ const useAuthProvider = () => {
       }
     }).catch((error) => {
       // TODO: snackbar
-      console.error(error)
+      console.log(error)
     })
   }, [])
 
