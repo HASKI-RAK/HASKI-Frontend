@@ -36,7 +36,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     // alert('Topic: ' + topic) 
     if (isAuth)
       fetchUser().then((user) => {
-        fetchLearningPath(user.id, user.lms_user_id, user.id, 2, Number(id))
+        fetchLearningPath(user.id, user.lms_user_id, user.id, 1, Number(id))
           .then((learning_path_data) => {
             const nodes = mapLeaningPathToNodes(learning_path_data)
             setInitalNodes(nodes)
