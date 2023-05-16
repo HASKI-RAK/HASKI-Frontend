@@ -6,7 +6,7 @@ import { useEffect, useState, useContext } from 'react'
 import useBoundStore from '@store'
 import { AuthContext, SnackbarContext } from '@services'
 import { Stack } from '@mui/system'
-import { Card, CardContent, Typography } from '@mui/material'
+import { Card, CardContent, Skeleton, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 /**
@@ -20,6 +20,7 @@ export const Home = () => {
   const [open, setOpen] = useState(false)
   const authcontext = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
+  const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
   // Store
@@ -39,6 +40,7 @@ export const Home = () => {
               autoHideDuration: 5000
             })
             console.log(courses)
+            setLoading(false)
           })
         })
         .catch((error) => {
@@ -51,9 +53,11 @@ export const Home = () => {
           })
         })
     else console.log('not logged in')
-  }, [authcontext.isAuth])
+  }, [authcontext.isAuth, loading])
   // Card cointaining the courses with a button to the specific course
-  return (
+  return loading ? (
+    <Skeleton variant="rectangular" width="100%" height={118} />
+  ) : (
     <div>
       <Stack spacing={2} direction="row" justifyContent="center">
         <div>
