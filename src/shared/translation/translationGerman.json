@@ -501,6 +501,10 @@
   "projecthaski": "Projekt HASKI",
   "tooltip.openGlobalSettings": "Globale Einstellungen",
   "tooltip.openSettings": "Einstellungen",
+  "components.LocalNav.Topics": "Themenbereiche",
+  "components.MenuBar.TopicButton": "Themenbereiche",
+  "components.MenuBar.Profile.Logout": "Ausloggen",
+  "components.LocalNav.Topics.NoLearningElements": "Keine Lernelemente gefunden",
   "offlineWarning": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
   "onlineWarning": "Sie sind wieder online."
 }

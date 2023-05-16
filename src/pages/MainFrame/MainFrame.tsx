@@ -7,7 +7,6 @@ import {
   DefaultGrid as Grid,
   DefaultContainer as Container
 } from '@common/components'
-
 import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from '@components'
 /**
  * Main frame component.

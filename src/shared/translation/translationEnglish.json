@@ -529,6 +529,10 @@
   "projecthaski": "Project Haski",
   "tooltip.openGlobalSettings": "Open global settings",
   "tooltip.openSettings": "Open settings",
+  "components.LocalNav.Topics": "Topics",
+  "components.MenuBar.TopicButton": "Topics",
+  "components.MenuBar.Profile.Logout": "Logout",
+  "components.LocalNav.Topics.NoLearningElements": "No learning elements found",
   "offlineWarning": "You are currently offline. Please check your internet connection.",
   "onlineWarning": "You are online again."
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   DefaultAppBar as AppBar,
@@ -14,43 +14,28 @@ import {
   DefaultButton as Button,
   DefaultPopover as Popover,
   DefaultLink as Link,
-  DefaultDivider as Divider
+  DefaultDivider as Divider,
+  DefaultSkeleton as Skeleton,
+  DefaultListItemIcon as ListItemIcon
 } from '@common/components'
 import SettingsIcon from '@mui/icons-material/Settings'
 import HelpIcon from '@mui/icons-material/Help'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { useTranslation } from 'react-i18next'
+import { Logout } from '@mui/icons-material'
+import { AuthContext, Topic, LearningPath } from '@services'
+import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
+// TODO: Move it into @common/hooks since it is reused in LocalNav
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
-const topics = [
-  {
-    name: 'Design patterns',
-    subtopics: [
-      'Adapter',
-      'Builder',
-      'Command',
-      'Facade',
-      'Compositum',
-      'Singleton',
-      'Strategy',
-      'Template method',
-      'State'
-    ]
-  },
-  {
-    name: 'Metrics',
-    subtopics: [
-      'Cyclomatic complexity',
-      'Cohesion',
-      'Coupling',
-      'Halstead complexity',
-      'Lines of code',
-      'Nesting depth',
-      'Size',
-      'Weighted methods per class'
-    ]
-  }
-]
+/**
+ *  Local navigation component props.
+ *  The "loading" property is a boolean value that indicates whether the data is still being loaded.
+ *  The "topics" property is an array of objects that represent the topics related to the current page.
+ *  The "learningPaths" property is an array of objects that represent the available learning paths related to the current page.
+ */
+export type MenuBarProps = {
+  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPath[] }
+}
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -62,12 +47,14 @@ const topics = [
  *
  * @category Components
  */
-const MenuBar = () => {
-  // UX Logic
+const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
-
+  const authcontext = useContext(AuthContext)
   const { t } = useTranslation()
+
+  //Application logic hooks
+  const { loading, topics, learningPaths } = useLearningPath()
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -85,6 +72,22 @@ const MenuBar = () => {
     setAnchorElTopics(null)
   }
 
+  const handleUserLogout = () => {
+    handleCloseUserMenu()
+    authcontext.logout()
+    navigate('/login', { replace: true })
+  }
+
+  const skeletonItems = []
+  for (let i = 0; i < 3; i++) {
+    skeletonItems.push(
+      <React.Fragment key={`MenuBar-Topic-Skeleton-${i}`}>
+        <Skeleton variant="text" width={'500'} height={55} />
+        <Skeleton variant="text" width={'70%'} height={20} />
+      </React.Fragment>
+    )
+  }
+
   const navigate = useNavigate()
   return (
     <AppBar position="static">
@@ -97,7 +100,10 @@ const MenuBar = () => {
             ml: { xs: 1, md: 2 },
             display: { xs: 'none', md: 'flex' },
             maxHeight: { xs: 20, md: 50 },
-            maxWidth: { xs: 20, md: 50 }
+            maxWidth: { xs: 20, md: 50 },
+            borderRadius: '50%',
+            backgroundColor: (theme) => `${ theme.palette.secondary.main }`,
+            cursor: 'pointer'
           }}
           alt="HASKI Home"
           src="/LogoPng.png"
@@ -137,7 +143,7 @@ const MenuBar = () => {
                   endIcon={
                     anchorElTopics ? <ArrowDropDownIcon sx={{ transform: 'rotate(180deg)' }} /> : <ArrowDropDownIcon />
                   }>
-                  Topics
+                  {t('components.MenuBar.TopicButton')}
                 </Button>
               </Tooltip>
               <Popover
@@ -152,40 +158,48 @@ const MenuBar = () => {
                   horizontal: 'left'
                 }}
                 open={Boolean(anchorElTopics)}
-                onClose={handleCloseTopicsMenu}>
+                onClose={handleCloseTopicsMenu}
+                sx={{ minWidth: '500px' }}>
                 <Box sx={{ p: 2 }}>
                   <Grid container direction="column-reverse" spacing={2}>
-                    {topics.map((topic) => (
+                    {loading ? ( // display Skeleton component while loading
+                      <Box width={400}>{skeletonItems}</Box>
+                    ) : (
+                      //For every Topic the LearningPath is displayed under it.
                       <>
-                        <Grid item xs={12} key={topic.name}>
-                          <Typography variant="h6">{topic.name}</Typography>
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              flexWrap: 'wrap',
-                              justifyContent: 'start'
-                            }}>
-                            {topic.subtopics.map((subtopic) => (
-                              <Link
-                                key={subtopic}
-                                underline="hover"
-                                variant="body2"
-                                component="span"
-                                color="inherit"
-                                sx={{ m: 1 }}
-                                onClick={() => {
-                                  navigate(`/topics/${topic.name}/${subtopic}`)
-                                  handleCloseTopicsMenu()
+                        {topics.map((topic, index) => (
+                          <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>
+                            <Grid item xs={12} key={t(topic.name)}>
+                              <Typography variant="h6">{t(topic.name)}</Typography>
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  flexWrap: 'wrap',
+                                  justifyContent: 'start'
                                 }}>
-                                {subtopic}
-                              </Link>
-                            ))}
-                          </Box>
-                        </Grid>
-                        {topics.indexOf(topic) !== topics.length - 1 && <Divider flexItem />}
+                                {learningPaths[index]?.path.map((element) => (
+                                  <Link
+                                    key={element.learning_element.name}
+                                    underline="hover"
+                                    variant="body2"
+                                    component="span"
+                                    color="inherit"
+                                    sx={{ m: 1, cursor: 'pointer' }}
+                                    onClick={() => {
+                                      navigate(`/topics/${topic.name}/${element.learning_element.name}`)
+                                      handleCloseTopicsMenu()
+                                    }}>
+                                    {element.learning_element.name}
+                                  </Link>
+                                ))}
+                              </Box>
+                            </Grid>
+                            {topics.indexOf(topic) !== topics.length - 1 && <Divider flexItem />}
+                          </React.Fragment>
+                        ))}
                       </>
-                    ))}
+                    )}
                   </Grid>
                 </Box>
               </Popover>
@@ -234,11 +248,15 @@ const MenuBar = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
-              {settings.map((setting) => (
-                <MenuItem data-testid="usermenuitem" key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem
+                data-testid="usermenuitem"
+                key={t('components.MenuBar.Profile.Logout')}
+                onClick={handleUserLogout}>
+                <ListItemIcon>
+                  <Logout fontSize="small" />
+                </ListItemIcon>
+                <Typography textAlign="center">{t('components.MenuBar.Profile.Logout')}</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Box>
@@ -246,5 +264,6 @@ const MenuBar = () => {
     </AppBar>
   )
 }
+
 
 export default MenuBar

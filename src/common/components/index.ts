@@ -1,11 +1,15 @@
 /**
  * Reusable components such as buttons and forms go in here.
  */
+export { DefaultAccordion } from './DefaultAccordion/DefaultAccordion'
+export { DefaultAccordionDetails } from './DefaultAccordionDetails/DefaultAccordionDetails'
+export { DefaultAccordionSummary } from './DefaultAccordionSummary/DefaultAccordionSummary'
 export { DefaultButton } from './DefaultButton/DefaultButton'
 export { DefaultSelect } from './DefaultSelect/DefaultSelect'
 export { DefaultBox } from './DefaultBox/DefaultBox'
 export { DefaultBreadcrumbs } from './DefaultBreadcrumbs/DefaultBreadcrumbs'
 export { DefaultLink } from './DefaultLink/DefaultLink'
+export { DefaultListItemIcon } from './DefaultListItemIcon/DefaultListItemIcon'
 export { DefaultTypography } from './DefaultTypography/DefaultTypography'
 export { DefaultGrid } from './DefaultGrid/DefaultGrid'
 export { DefaultContainer } from './DefaultContainer/DefaultContainer'
