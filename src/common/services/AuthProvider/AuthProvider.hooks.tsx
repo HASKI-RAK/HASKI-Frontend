@@ -3,9 +3,6 @@ import { getLoginStatus, getLogout } from '@services'
 import useBoundStore from '@store'
 import { User } from '@core'
 
-function isType<T>(typeToTest: unknown): typeToTest is T {
-  return typeof typeToTest === typeof ({} as T);
-}
 
 const useAuthProvider = () => {
   // State data
