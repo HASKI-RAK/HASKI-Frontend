@@ -34,7 +34,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     if (authcontext.isAuth)
       fetchUser()
         .then((user) => {
-          fetchLearningPath(user.id, user.lms_user_id, user.id, 1, Number(id)).then((learning_path_data) => {
+          fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, 2, Number(id)).then((learning_path_data) => {
             const nodes = mapLeaningPathToNodes(learning_path_data)
             setInitalNodes(nodes)
             const edges: Edge[] = nodes.map((item, index) => ({
@@ -51,27 +51,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           console.log(error) // 🍿 snackbar error
           alert('Error: ' + error)
         })
-    else alert('Error: ' + 'Not logged in')
+    else console.log('not logged in')
   }, [authcontext.isAuth])
 
   log.setLevel('error')
   return initalNodes && initalEdges ? (
     <Box height={'100%'}>
       <ReactFlow fitView nodes={initalNodes} edges={initalEdges} nodeTypes={nodeTypes} />
-      {/* {design_patterns_general.map((item) => (
-        <Card
-          key={item.name}
-          sx={{ p: 2, m: 2 }}
-          onClick={() => {
-            setIsOpen(true)
-            setUrl(item.link)
-            setTitle(item.name)
-          }}>
-          <h2>{item.name}</h2>
-          <p>{item.description}</p>
-        </Card>
-      ))} */}
-      {/* <IframeModal url={url} title={title} isOpen={isOpen} onClose={() => setIsOpen(false)} /> */}
     </Box>
   ) : (
     <div>Loading...</div>
@@ -82,19 +68,18 @@ export default Topic
 
 const mapLeaningPathToNodes = (learning_path: LearningPath) => {
   // alert('map_TopicLearningElements_to_reactflow')
-  return learning_path.path.map((item, index) => {
+  const sorted_learning_path = learning_path.path.sort((a, b) => a.position - b.position)
+  return sorted_learning_path.map((item, index) => {
     const node_data: LearningPathLearningElementNode = {
       lms_id: item.learning_element.lms_id,
       name: item.learning_element.name,
       activity_type: item.learning_element.activity_type,
       classification: item.learning_element.classification,
-      done: item.learning_element.student_learning_element.done,
-      done_at: item.learning_element.student_learning_element.done_at,
       is_recommended: item.recommended
     }
     return {
       id: item.position.toString(),
-      type: 'basic',
+      type: item.learning_element.activity_type,
       data: node_data,
       position: {
         x: 0,
