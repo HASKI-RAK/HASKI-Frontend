@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 // TODO: Replace this with the actual data from the backend
 const topics = [
@@ -15,6 +15,7 @@ const topics = [
 const CoursePage = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const { courseId } = useParams()
 
   return (
     <Stack spacing={2}>
@@ -28,7 +29,7 @@ const CoursePage = () => {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  navigate('/topic/' + topic.id)
+                  navigate('topic/' + topic.id)
                 }}>
                 {t('components.CoursePage.Button.Topic')}
               </Button>

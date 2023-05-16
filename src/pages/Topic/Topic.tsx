@@ -22,7 +22,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initalNodes, setInitalNodes] = useState<Node[]>()
   const [initalEdges, setInitalEdges] = useState<Edge[]>()
   const authcontext = useContext(AuthContext)
-  const { id } = useParams<{ id: string }>()
+  const { courseId, topicId } = useParams()
 
   const fetchUser = useBoundStore((state) => state.fetchUser)
   const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
@@ -33,7 +33,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     if (authcontext.isAuth)
       fetchUser()
         .then((user) => {
-          fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, 2, Number(id)).then(
+          fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, Number(courseId), Number(topicId)).then(
             (learning_path_data) => {
               const nodes = mapLeaningPathToNodes(learning_path_data)
               setInitalNodes(nodes)

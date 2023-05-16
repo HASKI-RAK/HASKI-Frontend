@@ -25,9 +25,9 @@ const App = () => (
           <Routes>
             <Route element={<MainFrame />}>
               <Route index element={<Home />} />
-              <Route path="/course/:id" element={<CoursePage />} />
+              <Route path="/course/:courseId" element={<CoursePage />} />
+              <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
               <Route path="/theme" element={<ThemePresentation />} />
-              <Route path="/topic/:id" element={<Topic />} />
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/imprint" element={<Imprint />} />
