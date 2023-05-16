@@ -1,6 +1,6 @@
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useCallback } from 'react'
 import {
   DefaultButton as Button,
   DefaultFade as Fade,
@@ -52,7 +52,7 @@ const ProjectDescriptionStepper = ({
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
   }
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (props.body !== null && typeof props.body === 'object') {
       animateBody(ref, props.body)
     }
@@ -60,7 +60,7 @@ const ProjectDescriptionStepper = ({
     if (props.header != null && typeof props.header === 'string') {
       animateHeader(ref, props.header)
     }
-  }
+  }, [animateBody, animateHeader, props.body, props.header])
 
   // Starts animation on component mount and continues already started animation.
   useEffect(() => {
@@ -70,7 +70,7 @@ const ProjectDescriptionStepper = ({
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [headerState, bodyState])
+  }, [headerState, bodyState, handleScroll])
 
   return (
     <div ref={ref} data-testid="projectDescriptionStepper">

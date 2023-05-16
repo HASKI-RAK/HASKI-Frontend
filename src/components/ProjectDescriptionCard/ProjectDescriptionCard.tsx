@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useCallback } from 'react'
 import {
   DefaultDivider as Divider,
   DefaultFade as Fade,
@@ -40,15 +40,15 @@ const ProjectDescriptionCard = ({
   const ref = useRef<HTMLDivElement>(null)
   const { bodyState, headerState, animateBody, animateHeader } = useProjectDescriptionCard()
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (props.body !== null && typeof props.body === 'string') {
       animateBody(ref, props.body)
     }
-    
+
     if (props.header !== null && typeof props.header === 'string') {
       animateHeader(ref, props.header)
     }
-  }
+  }, [animateBody, animateHeader, props.body, props.header])
 
   // Starts animation on component mount and continues already started animation.
   useEffect(() => {
@@ -58,7 +58,7 @@ const ProjectDescriptionCard = ({
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [headerState, bodyState])
+  }, [headerState, bodyState, handleScroll])
 
   return (
     <div ref={ref} data-testid="projectDescriptionCard">
