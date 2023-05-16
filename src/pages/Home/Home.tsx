@@ -37,20 +37,17 @@ export const Home = () => {
               severity: 'success',
               autoHideDuration: 5000
             })
-            console.log(courses)
             setLoading(false)
           })
         })
         .catch((error) => {
           // 🍿 snackbar error
-          console.log(error)
           addSnackbar({
             message: error.message,
             severity: 'error',
             autoHideDuration: 5000
           })
         })
-    else console.log('not logged in')
   }, [authcontext.isAuth, loading])
   // Card cointaining the courses with a button to the specific course
   return loading ? (

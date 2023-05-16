@@ -25,7 +25,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const { id } = useParams<{ id: string }>()
 
   const fetchUser = useBoundStore((state) => state.fetchUser)
-  const course = useBoundStore((state) => state.course)
   const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
 
   useEffect(() => {
@@ -44,16 +43,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
                 target: nodes[index + 1]?.id
               }))
               setInitalEdges(edges)
-              console.log('nodes', nodes)
-              console.log('edges', edges)
             }
           )
         })
         .catch((error) => {
-          console.log(error) // 🍿 snackbar error
+          // 🍿 snackbar error
           alert('Error: ' + error)
         })
-    else console.log('not logged in')
   }, [authcontext.isAuth])
 
   log.setLevel('error')
