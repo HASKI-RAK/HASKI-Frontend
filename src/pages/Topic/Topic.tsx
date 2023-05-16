@@ -34,18 +34,20 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     if (authcontext.isAuth)
       fetchUser()
         .then((user) => {
-          fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, 2, Number(id)).then((learning_path_data) => {
-            const nodes = mapLeaningPathToNodes(learning_path_data)
-            setInitalNodes(nodes)
-            const edges: Edge[] = nodes.map((item, index) => ({
-              id: index.toString(),
-              source: item.id,
-              target: nodes[index + 1]?.id
-            }))
-            setInitalEdges(edges)
-            console.log('nodes', nodes)
-            console.log('edges', edges)
-          })
+          fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, 2, Number(id)).then(
+            (learning_path_data) => {
+              const nodes = mapLeaningPathToNodes(learning_path_data)
+              setInitalNodes(nodes)
+              const edges: Edge[] = nodes.map((item, index) => ({
+                id: index.toString(),
+                source: item.id,
+                target: nodes[index + 1]?.id
+              }))
+              setInitalEdges(edges)
+              console.log('nodes', nodes)
+              console.log('edges', edges)
+            }
+          )
         })
         .catch((error) => {
           console.log(error) // 🍿 snackbar error

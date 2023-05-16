@@ -44,6 +44,7 @@ Create _component_or_page_name_
 - [ ] Documentation in realization created (source code)
 - [ ] Changelog created (Clear description in merge request)
 - [ ] There are no known bugs
+- [ ] Rendering behaviour is optimized
 
 **Technical Definition of Done**
 
