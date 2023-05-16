@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { DefaultThemeProvider as ThemeProvider } from '@common/components'
 import { MainFrame, Home, ThemePresentation, Login, Dashboard, Imprint } from '@pages'
-import { AuthProvider } from '@services'
+import { AuthProvider, SnackbarProvider } from '@services'
 import { logBuffer } from '@shared'
 import { Theme } from '@utils'
 
