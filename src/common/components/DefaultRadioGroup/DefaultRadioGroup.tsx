@@ -1,1 +1,1 @@
-export {RadioGroup as DefaultRadioGroup} from "@mui/material";
+export { RadioGroup as DefaultRadioGroup } from '@mui/material'

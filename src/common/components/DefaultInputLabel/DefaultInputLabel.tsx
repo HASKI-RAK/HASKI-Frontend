@@ -1,1 +1,1 @@
-export {InputLabel as DefaultInputLabel} from "@mui/material";
+export { InputLabel as DefaultInputLabel } from '@mui/material'

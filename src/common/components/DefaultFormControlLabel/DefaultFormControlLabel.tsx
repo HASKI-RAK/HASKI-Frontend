@@ -1,1 +1,1 @@
-export {FormControlLabel as DefaultFormControlLabel} from "@mui/material";
+export { FormControlLabel as DefaultFormControlLabel } from '@mui/material'

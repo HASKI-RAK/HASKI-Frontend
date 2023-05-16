@@ -12,17 +12,22 @@ import {
   DefaultFormLabel as FormLabel,
   DefaultFormControlLabel as FormControlLabel,
   DefaultSelectChangeEvent as SelectChangeEvent,
-  DefaultFormHelperText as FormHelperText,
-} from "@common/components";
-import { useTranslation } from "react-i18next";
-import React, { useState } from "react";
-import {
-  useContactForm as _useContactForm,
-  useContactFormHookParams,
-  ContactFormHookReturn,
-} from "./ContactForm.hooks";
+  DefaultFormHelperText as FormHelperText
+} from '@common/components'
+import { useTranslation } from 'react-i18next'
+import React, { useState } from 'react'
+import { useContactForm as _useContactForm, useContactFormHookParams, ContactFormHookReturn } from './ContactForm.hooks'
+
+export type ContactFormProps = {
+  descriptionDefaultValue?: string
+  onSubmit?: (formdata: any) => void
+  useContactForm?: (params?: useContactFormHookParams) => ContactFormHookReturn
+}
 /**
  * ContactForm component.
+ *
+ * @param props - Props containing the form logic and the form state.
+ * @returns {JSX.Element} - The Form component.
  *
  * @remarks
  * This component is accessed by the contact page. It currently can be accessed from the home page.
@@ -33,99 +38,68 @@ import {
  *
  * @category Pages
  */
-
-export type ContactFormProps = {
-  descriptionDefaultValue?: string;
-  onSubmit?: () => void;
-  onSendToBackend?: () => void;
-  useContactForm?: (params?: useContactFormHookParams) => ContactFormHookReturn;
-};
-
-const ContactForm = ({
-  useContactForm = _useContactForm,
-  ...props
-}: ContactFormProps) => {
-  const [textfieldError, setTextfieldError] = useState(false);
-  const [selectError, setSelectError] = useState(false);
-  const { t } = useTranslation();
+const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactFormProps) => {
+  const [textfieldError, setTextfieldError] = useState(false)
+  const [selectError, setSelectError] = useState(false)
+  const { t } = useTranslation()
 
   // ** Get Functions from Hook ** //
-  const {
-    sendToBackend,
-    submit,
-    setReportType,
-    setReportTopic,
-    setDescription,
-    description,
-    reportTopic,
-    reportType,
-  } = useContactForm();
+  const { submit, setReportType, setReportTopic, setDescription, description, reportTopic, reportType } =
+    useContactForm()
 
   // ** Override Functions if passed as props ** //
-  const { onSendToBackend = sendToBackend, onSubmit = submit } = props;
+  const { onSubmit = submit } = props
 
-  const reporttypeChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    setReportType(event.target.value);
-  };
-  const reporttopicChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>
-  ): void => {
-    setReportTopic(event.target.value);
-  };
-  const descriptionChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    setDescription(event.target.value);
-  };
-  const handleSubmit = (
-    event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLElement>
-  ) => {
-    event.preventDefault();
+  const reporttypeChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setReportType(event.target.value)
+  }
+  const reporttopicChangeHandler = (event: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>): void => {
+    setReportTopic(event.target.value)
+  }
+  const descriptionChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setDescription(event.target.value)
+  }
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLElement>) => {
+    event.preventDefault()
     if (!reportTopic) {
-      setSelectError(true);
+      setSelectError(true)
       if (!description) {
-        setTextfieldError(true);
+        setTextfieldError(true)
       }
     } else if (!description) {
-      setTextfieldError(true);
+      setTextfieldError(true)
       if (reportTopic) {
-        setSelectError(false);
+        setSelectError(false)
       }
     } else {
-      setTextfieldError(false);
-      setSelectError(false);
-      onSubmit();
-      onSendToBackend();
+      setTextfieldError(false)
+      setSelectError(false)
+      onSubmit(reportTopic, reportType, description)
     }
-  };
+  }
 
-  const reportTypes = t("components.ContactForm.types", {
-    returnObjects: true,
-  }) as [{ value: string; label: string }];
-  const reportTopics = t("components.ContactForm.topics", {
-    returnObjects: true,
-  }) as [{ value: string; label: string }];
- 
+  const reportTypes = t('components.ContactForm.types', {
+    returnObjects: true
+  }) as [{ value: string; label: string }]
+  const reportTopics = t('components.ContactForm.topics', {
+    returnObjects: true
+  }) as [{ value: string; label: string }]
+
   return (
     <form onSubmit={handleSubmit}>
       <Stack spacing={2} sx={{ minWidth: 120 }}>
         <Typography variant="h5" component="h5">
-          {t("components.ContactForm.contactform")}
+          {t('components.ContactForm.contactform')}
         </Typography>
 
         <FormControl required>
-          <InputLabel id="select_label_contact">
-            {t("topic")}
-          </InputLabel>
+          <InputLabel id="select_label_contact">{t('topic')}</InputLabel>
           <Select
             name="reporttopic"
             labelId="select_label_contact"
             label="topic"
             onChange={reporttopicChangeHandler}
-            error={selectError}
-          >
+            error={selectError}>
             {reportTopics.map((topic) => (
               <MenuItem key={topic.value} value={topic.value}>
                 {topic.label}
@@ -133,28 +107,16 @@ const ContactForm = ({
             ))}
           </Select>
           <FormHelperText>
-            <Typography>
-            {selectError ? t("components.ContactForm.errorSelect") : ""}
-            </Typography>
+            <Typography>{selectError ? t('components.ContactForm.errorSelect') : ''}</Typography>
           </FormHelperText>
         </FormControl>
 
-        <FormLabel id="radio_contact_label" sx={{ mt: "0.6rem" }}>
-          {t("components.ContactForm.reportType")}
+        <FormLabel id="radio_contact_label" sx={{ mt: '0.6rem' }}>
+          {t('components.ContactForm.reportType')}
         </FormLabel>
-        <RadioGroup
-          row
-          name="reporttype"
-          value={reportType}
-          onChange={reporttypeChangeHandler}
-        >
+        <RadioGroup row name="reporttype" value={reportType} onChange={reporttypeChangeHandler}>
           {reportTypes.map((report) => (
-            <FormControlLabel
-              key={report.value}
-              value={report.value}
-              control={<RadioButton />}
-              label={report.label}
-            />
+            <FormControlLabel key={report.value} value={report.value} control={<RadioButton />} label={report.label} />
           ))}
         </RadioGroup>
 
@@ -165,22 +127,22 @@ const ContactForm = ({
             name="description"
             type="text"
             required
-            label={t("components.ContactForm.briefDescription")}
+            label={t('components.ContactForm.briefDescription')}
             rows={5}
             maxRows={15}
             value={description}
             onChange={descriptionChangeHandler}
             error={textfieldError}
-            helperText={textfieldError ? t("components.ContactForm.error") : ""}
+            helperText={textfieldError ? t('components.ContactForm.error') : ''}
           />
 
-          <Button sx={{ alignSelf: "end" }} onClick={handleSubmit}>
-            {t("components.ContactForm.submit")}
+          <Button sx={{ alignSelf: 'end' }} onClick={handleSubmit}>
+            {t('components.ContactForm.submit')}
           </Button>
         </FormControl>
       </Stack>
     </form>
-  );
-};
+  )
+}
 
-export default ContactForm;
+export default ContactForm

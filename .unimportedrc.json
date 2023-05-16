@@ -1,6 +1,12 @@
 {
-  "entry": ["src/index.tsx"],
-  "extensions": [".ts", ".js", ".tsx"],
+  "entry": [
+    "src/index.tsx"
+  ],
+  "extensions": [
+    ".ts",
+    ".js",
+    ".tsx"
+  ],
   "ignorePatterns": [
     "**/node_modules/**",
     "__mocks__/**",
@@ -10,5 +16,12 @@
     "**/*.test.{js,jsx,ts,tsx}",
     "**/*.d.ts"
   ],
-  "ignoreUnimported": ["src/shared/auto-order-json-translations.ts"]
+  "ignoreUnimported": [
+    "src/shared/auto-order-json-translations.ts"
+  ],
+  "ignoreUnresolved": [],
+  "ignoreUnused": [
+    "@nivo/core",
+    "@nivo/tooltip"
+  ]
 }

@@ -8,10 +8,9 @@ export const Home = () => {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
 
-
   log.setLevel('error')
   return (
-    <div>
+    <>
       <Button
         variant="contained"
         color="primary"
@@ -24,9 +23,8 @@ export const Home = () => {
       <QuestionnaireResultsModal open={open} handleClose={() => setOpen(!open)} />
       <DropdownLanguage />
       <Text />
-    </div>
+    </>
   )
 }
-
 
 export default Home

@@ -1,1 +1,1 @@
-export { FormControl as DefaultFormControl } from "@mui/material";
+export { FormControl as DefaultFormControl } from '@mui/material'

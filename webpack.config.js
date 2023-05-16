@@ -4,7 +4,6 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 
-
 const dotenv = require('dotenv').config({
   path: './.env.development'
 })
