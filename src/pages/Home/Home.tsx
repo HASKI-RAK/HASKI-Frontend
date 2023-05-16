@@ -1,4 +1,3 @@
-import { DropdownLanguage, Text, QuestionnaireResultsModal } from '@components'
 import log from 'loglevel'
 import { DefaultButton as Button } from '@common/components'
 import { useTranslation } from 'react-i18next'
@@ -17,7 +16,6 @@ export const Home = () => {
   log.setLevel('error')
   // UX
   const { t } = useTranslation()
-  const [open, setOpen] = useState(false)
   const authcontext = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
   const [loading, setLoading] = useState(true)
