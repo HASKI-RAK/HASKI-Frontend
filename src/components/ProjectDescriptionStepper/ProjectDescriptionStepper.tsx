@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react'
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
+import React, { useRef, useEffect } from 'react'
 import {
   DefaultButton as Button,
   DefaultFade as Fade,
@@ -16,8 +16,9 @@ import {
 
 /**
  * @typedef {Object} ProjectDescriptionStepperProps
- * @param {string[]} body - The body texts that can be stepped through.
- * @param {string} header - The header text that is permanently displayed above the body texts.
+ * @property {string[]} body - The body texts that can be stepped through.
+ * @property {string} header - The header text that is permanently displayed above the body texts.
+ * @property {function} useProjectDescriptionStepper - The hook that is used for the stepper logic.
  */
 type ProjectDescriptionStepperProps = {
   body?: string[]
@@ -28,7 +29,9 @@ type ProjectDescriptionStepperProps = {
 }
 
 /**
- * TODO: Comment
+ * ProjectDescriptionCard presents a component that displays a header text on top and and multiple steppable body texts on the bottom of the element.
+ * The header text is animated by using a typewriter effect. The body texts are animated by using a fade in effect.
+ * ProjectDescriptionCard can be used as a standalone component on a page.
  * @param props -
  * @returns {JSX.Element} - The ProjectDescriptionStepper component.
  * @category Components
@@ -83,19 +86,19 @@ const ProjectDescriptionStepper = ({
             variant="h3"
             align="center"
             sx={{
-              width: { sx: 300, md: 600 },
-              height: { sx: 200, md: 100 }
+              width: { sm: '18.75rem', md: '37.5rem' },
+              height: { sm: '10.625rem', md: '6.25rem' }
             }}>
             {headerState}
           </Typography>
           <Fade in={!!bodyState[activeStep]} easing="linear" timeout={1000}>
             <Typography
               variant="h5"
-              align="center"
               sx={{
+                alignItems: 'center',
                 pt: '2.5rem',
-                width: { sx: 300, md: 600 },
-                height: { sx: 400, md: 200 }
+                width: { sm: '18.75rem', md: '37.5rem' },
+                height: { sm: '25rem', md: '12.5rem' }
               }}>
               {bodyState[activeStep]}
             </Typography>
@@ -108,7 +111,7 @@ const ProjectDescriptionStepper = ({
             position="static"
             activeStep={activeStep}
             sx={{
-              maxWidth: 400,
+              maxWidth: { sm: '18.75rem', md: '25rem' },
               flexGrow: 1,
               border: 0
             }}

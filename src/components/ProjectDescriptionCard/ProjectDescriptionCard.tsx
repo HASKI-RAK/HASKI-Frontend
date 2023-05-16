@@ -13,9 +13,10 @@ import {
 
 /**
  * @typedef {Object} ProjectDescriptionCardProps
- * @param {string} body - The body text that is displayed on the bottom left side.
- * @param {React.ReactNode} children - The child element that is displayed on the right side.
- * @param {string} header - The header text that is displayed on the top left side.
+ * @property {string} body - The body text that is displayed on the bottom left side.
+ * @property {React.ReactNode} children - The child element that is displayed on the right side.
+ * @property {string} header - The header text that is displayed on the top left side.
+ * @property {function} useProjectDescriptionCard - The hook that is used for the card logic.
  */
 type ProjectDescriptionCardProps = {
   body?: string
@@ -40,16 +41,18 @@ const ProjectDescriptionCard = ({
   const { bodyState, headerState, animateBody, animateHeader } = useProjectDescriptionCard()
 
   const handleScroll = () => {
-    props.body && animateBody(ref, props.body)
-    props.header && animateHeader(ref, props.header)
+    if (props.body !== null && typeof props.body === 'string') {
+      animateBody(ref, props.body)
+    }
+    
+    if (props.header !== null && typeof props.header === 'string') {
+      animateHeader(ref, props.header)
+    }
   }
 
   // Starts animation on component mount and continues already started animation.
   useEffect(() => {
-    // TODO
-    props.body && animateBody(ref, props.body) //TODO: ersetzen
-    props.header && animateHeader(ref, props.header)
-
+    handleScroll()
     window.addEventListener('scroll', handleScroll)
 
     return () => {
@@ -67,7 +70,10 @@ const ProjectDescriptionCard = ({
           mb: '7.5rem'
         }}>
         <Grid item xs={7}>
-          <Typography variant="h3" align="center" sx={{ height: { sx: 200, md: 100 }, pt: '2.5rem' }}>
+          <Typography
+            variant="h3"
+            align="center"
+            sx={{ minHeight: { xs: '17.5rem', sm: '14.063rem', md: '10.625rem', lg: '7.188rem' }, pt: '2.5rem' }}>
             {headerState}
           </Typography>
           <Fade in={!!bodyState} easing="linear" timeout={1000}>

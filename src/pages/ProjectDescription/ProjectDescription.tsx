@@ -1,13 +1,13 @@
-import { ProjectDescriptionForm } from '@components'
+import { ProjectDescriptionContent } from '@components'
 
 /**
- * ProjectDescription presents a page with a description of the project. It uses the ProjectDescriptionForm component to present the form.
+ * ProjectDescription presents a page with a description of the project. It uses the ProjectDescriptionContent component to present the content.
  *
  * @returns {JSX.Element} - The ProjectDescription component.
  * @category Pages
  */
 const ProjectDescription = () => {
-  return <ProjectDescriptionForm />
+  return <ProjectDescriptionContent />
 }
 
 export default ProjectDescription

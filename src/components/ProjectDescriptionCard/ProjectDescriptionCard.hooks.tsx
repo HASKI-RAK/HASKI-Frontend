@@ -1,7 +1,9 @@
 import { useState, RefObject } from 'react'
 
 /**
- * TODO: Comment
+ * @typedef {Object} useProjectDescriptionCardHookParams
+ * @property {string} defaultBodyState - The default value for the body state.
+ * @property {string} defaultHeaderState - The default value for the header state.
  */
 export type useProjectDescriptionCardHookParams = {
   defaultBodyState?: string
@@ -9,7 +11,15 @@ export type useProjectDescriptionCardHookParams = {
 }
 
 /**
- * TODO: Comment
+ * @typedef {Object} ProjectDescriptionCardHookReturn
+ * @property {string} bodyState - The state that is used to animate the body text.
+ * @property {string} headerState - The state that is used to animate the header text.
+ * @property {function} setBodyState - The function that sets the body state.
+ * @property {function} setHeaderState - The function that sets the header state.
+ * @property {function} animateBody - The function that animates the body text.
+ * @property {function} animateHeader - The function that animates the header text.
+ * @property {function} fadeInEffect - The function that realizes the fade in effect.
+ * @property {function} typewriterEffect - The function that realizes the typewriter effect.
  */
 export type ProjectDescriptionCardHookReturn = {
   readonly bodyState: string
@@ -23,9 +33,10 @@ export type ProjectDescriptionCardHookReturn = {
 }
 
 /**
- * TODO: Comment
- * @param params
- * @returns
+ * Hook for the ProjectDescriptionCard logic.
+ * Handles states and provides functions to animate the body and header texts.
+ * @param params - The default value for the card.
+ * @returns {ProjectDescriptionCardHookReturn} - The ProjectDescriptionCard logic.
  */
 export const useProjectDescriptionCard = (
   params?: useProjectDescriptionCardHookParams

@@ -1,5 +1,5 @@
 import { useProjectDescriptionStepper } from './ProjectDescriptionStepper.hooks'
-import { act, getAllByRole, render, renderHook, screen, fireEvent } from '@testing-library/react'
+import { act, render, renderHook, fireEvent } from '@testing-library/react'
 import ProjectDescriptionStepper from './ProjectDescriptionStepper'
 import '@testing-library/jest-dom'
 
@@ -59,10 +59,6 @@ describe('Test ProjectDescriptionStepper', () => {
     expect(getByText(mockProjectDescriptionCardProps.body[0])).toBeInTheDocument()
     expect(getByText(mockProjectDescriptionCardProps.header.slice(0, 1))).toBeInTheDocument()
   })
-
-  /**
-   * TODO Test anzahl + 1 nach rechts steppen und anzahl + 1 nach links steppen
-   */
 
   test('Step through all body texts of ProjectDescriptionStepper', () => {
     const { getByText, getAllByRole } = render(

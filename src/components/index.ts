@@ -12,7 +12,7 @@ import MenuBar from './MenuBar/MenuBar'
 import Footer from './Footer/Footer'
 import LocalNav from './LocalNav/LocalNav'
 import BreadcrumbsContainer from './BreadcrumbsContainer/BreadcrumbsContainer'
-import ProjectDescriptionForm from './ProjectDescriptionForm/ProjectDescriptionForm'
+import ProjectDescriptionContent from './ProjectDescriptionContent/ProjectDescriptionContent'
 import ProjectDescriptionCard from './ProjectDescriptionCard/ProjectDescriptionCard'
 import ProjectDescriptionStepper from './ProjectDescriptionStepper/ProjectDescriptionStepper'
 /**
@@ -34,7 +34,7 @@ export {
   GraphListK,
   ResultDescriptionListK,
   QuestionnaireResultsModal,
-  ProjectDescriptionForm,
+  ProjectDescriptionContent,
   ProjectDescriptionCard,
   ProjectDescriptionStepper
 }
