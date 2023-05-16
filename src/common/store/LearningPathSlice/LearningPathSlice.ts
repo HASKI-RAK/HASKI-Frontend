@@ -1,5 +1,5 @@
 import { LearningPath, LearningPathReturn } from '@core'
-import { getLearingPath } from '@services'
+import { getLearningPath } from '@services'
 import { StateCreator } from 'zustand'
 import { StoreState } from '@store'
 
@@ -20,7 +20,7 @@ export const createLearningPathSlice: StateCreator<StoreState, [], [], LearningP
     // TODO
     if (!cached) {
       // If not, fetch it and cache it
-      const learningPath_response = await getLearingPath(userId, lmsUserId, studentId, courseId, topicId)
+      const learningPath_response = await getLearningPath(userId, lmsUserId, studentId, courseId, topicId)
       set({ _cache: { ...get()._cache, [`${courseId}-${topicId}`]: learningPath_response } })
       return learningPath_response
     }

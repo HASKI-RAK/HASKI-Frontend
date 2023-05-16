@@ -1,6 +1,6 @@
 import { LearningPath, LearningPathReturn } from '@core'
 
-export const getLearingPath: LearningPathReturn = async (userId, lmsUserId, studentId, course_id, topic_id) => {
+export const getLearningPath: LearningPathReturn = async (userId, lmsUserId, studentId, course_id, topic_id) => {
   if (!course_id || !topic_id) {
     throw new Error('course_id and topic_id are required')
   }
