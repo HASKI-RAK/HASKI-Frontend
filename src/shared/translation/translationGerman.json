@@ -518,6 +518,8 @@
   "searchButtonText": "Suche",
   "sort": "Sortiere bei:",
   "spellcheckText": "Hast du das gesucht?",
+  "services.AuthProvider.connectivityerror": "Fehler bei der Authentifizierung. Keine Verbindung zum Server.",
+  "services.AuthProvider.logout": "Logout erfolgreich",
   "success": "Erfolg",
   "tooltip.openGlobalSettings": "Globale Einstellungen",
   "tooltip.openSettings": "Einstellungen",

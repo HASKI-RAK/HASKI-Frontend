@@ -19,7 +19,7 @@ export const getLoginStatus = async (): Promise<RequestResponse> => {
       throw new Error('Unknown error')
     }
   }
-  if (data && data.status)
-    return { status: response.status, message: response.statusText, json: data } as RequestResponse
+  if (data && data.message && data.status)
+    return { status: data.status, message: data.message, json: data } as RequestResponse
   else throw new Error('Unknown error during data parsing')
 }

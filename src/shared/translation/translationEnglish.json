@@ -546,6 +546,8 @@
   "searchButtonText": "Search",
   "sort": "Sort by:",
   "spellcheckText": "Did you mean:",
+  "services.AuthProvider.connectivityerror": "Error while checking login status. Check your connectivity",
+  "services.AuthProvider.logout": "Logout successful",
   "success": "Success",
   "tooltip.openGlobalSettings": "Open global settings",
   "tooltip.openSettings": "Open settings",

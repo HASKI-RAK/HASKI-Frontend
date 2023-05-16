@@ -19,8 +19,8 @@ logBuffer()
  */
 const App = () => (
   <ThemeProvider theme={Theme}>
-    <AuthProvider>
-      <SnackbarProvider>
+    <SnackbarProvider>
+      <AuthProvider>
         <Router>
           <Routes>
             <Route element={<MainFrame />}>
@@ -36,8 +36,8 @@ const App = () => (
             <Route path="*" element={<div>404</div>} />
           </Routes>
         </Router>
-      </SnackbarProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </SnackbarProvider>
   </ThemeProvider>
 )
 export default App

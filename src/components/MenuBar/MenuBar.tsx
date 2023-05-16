@@ -75,7 +75,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
   const handleUserLogout = () => {
     handleCloseUserMenu()
     authcontext.logout()
-    navigate('/login', { replace: true })
+    navigate('/login')
   }
 
   const skeletonItems = []
