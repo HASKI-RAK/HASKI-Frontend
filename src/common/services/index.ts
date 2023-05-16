@@ -11,3 +11,7 @@ export type { LearningPath, LearningElement, PathItem, LearningPathRequestRespon
 export { getCourseTopics } from './topic'
 export type { Topic, TopicsResponse, TopicRequestResponse } from './topic'
 export * from './auth'
+export { SnackbarContext } from './SnackbarContext'
+export type { SnackbarContextType } from './SnackbarContext'
+export { SnackbarProvider } from './SnackbarProvider'
+export { useNetworkStatus } from './connection'
