@@ -5,16 +5,10 @@ const useAuthProvider = () => {
   // State data
   const [isAuth, setIsAuth] = useState(false)
 
-  // Logic
-  const clearCookie = () => {
-    document.cookie = 'haski_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-  }
-
   const logout = useCallback(() => {
     getLogout().then((response) => {
       if (response.status === 200) {
         setIsAuth(false)
-        clearCookie()
       }
     })
   }, [])
@@ -31,10 +25,9 @@ const useAuthProvider = () => {
           // }
         } else {
           setIsAuth(false)
-          clearCookie()
         }
       })
-      .catch((error) => {
+      .catch(() => {
         // TODO: snackbar error
       })
   }, [])
