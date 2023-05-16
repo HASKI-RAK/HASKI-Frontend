@@ -24,6 +24,6 @@ describe('getLoginStatus', () => {
       })
     ) as jest.Mock
 
-    expect(getLoginStatus()).toThrow();
+    expect(getLoginStatus()).toThrow()
   })
 })

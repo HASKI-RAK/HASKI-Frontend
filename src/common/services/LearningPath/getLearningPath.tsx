@@ -6,7 +6,7 @@ export const getLearingPath: LearningPathReturn = async (userId, lmsUserId, stud
   }
   return fetch(
     process.env.BACKEND +
-    `/user/${userId}/${lmsUserId}/student/${studentId}/course/${course_id}/topic/${topic_id}/learningPath`,
+      `/user/${userId}/${lmsUserId}/student/${studentId}/course/${course_id}/topic/${topic_id}/learningPath`,
     {
       method: 'GET',
       credentials: 'include',
@@ -27,10 +27,7 @@ export const getLearingPath: LearningPathReturn = async (userId, lmsUserId, stud
         } else {
           throw new Error('Unknown error')
         }
-      }
-      )
-
+      })
     }
-
   })
 }

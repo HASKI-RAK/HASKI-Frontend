@@ -21,20 +21,22 @@ const useAuthProvider = () => {
 
   // Side effects
   useEffect(() => {
-    getLoginStatus().then((response) => {
-      // When the user is logged in, the backend will return 200, otherwise 401 and clear the cookie
-      if (response.status === 200) {
-        setIsAuth(true)
-        // if (isUser(response.json)) {
-        //   setUser(response.json)
-        // }
-      } else {
-        setIsAuth(false)
-        clearCookie()
-      }
-    }).catch((error) => {
-      // TODO: snackbar error
-    })
+    getLoginStatus()
+      .then((response) => {
+        // When the user is logged in, the backend will return 200, otherwise 401 and clear the cookie
+        if (response.status === 200) {
+          setIsAuth(true)
+          // if (isUser(response.json)) {
+          //   setUser(response.json)
+          // }
+        } else {
+          setIsAuth(false)
+          clearCookie()
+        }
+      })
+      .catch((error) => {
+        // TODO: snackbar error
+      })
   }, [])
 
   return useMemo(() => ({ isAuth, setIsAuth, logout }), [isAuth, logout])

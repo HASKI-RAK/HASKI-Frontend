@@ -27,6 +27,5 @@ export const createLearningPathSlice: StateCreator<StoreState, [], [], LearningP
     if (get()._cache[`${courseId}-${topicId}`] === undefined)
       throw new Error('getLearningPath: Learning path not found')
     return get()._cache[`${courseId}-${topicId}`]!
-
   }
 })
