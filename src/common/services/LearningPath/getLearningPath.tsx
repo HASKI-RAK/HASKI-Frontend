@@ -22,7 +22,7 @@ export const getLearingPath: LearningPathReturn = async (userId, lmsUserId, stud
     } else {
       // If resposne has error variable, then throw error
       return response.json().then((data) => {
-        if (data.hasOwnProperty('error')) {
+        if ('error' in data) {
           throw new Error(data['error'] + ' ' + data['message'])
         } else {
           throw new Error('Unknown error')

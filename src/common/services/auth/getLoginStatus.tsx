@@ -14,7 +14,7 @@ export const getLoginStatus = async (): Promise<RequestResponse> => {
   if (response.status !== 200) {
 
     // This has to look like the backend error response
-    if (data.hasOwnProperty('error')) {
+    if ('error' in data) {
       throw new Error(data['error'] + ' ' + data['message'])
     } else {
       throw new Error('Unknown error')

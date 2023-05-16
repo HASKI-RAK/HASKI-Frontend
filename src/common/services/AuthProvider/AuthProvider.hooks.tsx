@@ -1,8 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { getLoginStatus, getLogout } from '@services'
-import useBoundStore from '@store'
-import { User } from '@core'
-
 
 const useAuthProvider = () => {
   // State data
@@ -36,8 +33,7 @@ const useAuthProvider = () => {
         clearCookie()
       }
     }).catch((error) => {
-      // TODO: snackbar
-      console.log(error)
+      // TODO: snackbar error
     })
   }, [])
 

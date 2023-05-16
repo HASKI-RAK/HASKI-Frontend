@@ -22,7 +22,11 @@ export const createLearningPathSlice: StateCreator<StoreState, [], [], LearningP
       // If not, fetch it and cache it
       const learningPath_response = await getLearingPath(userId, lmsUserId, studentId, courseId, topicId)
       set({ _cache: { ...get()._cache, [`${courseId}-${topicId}`]: learningPath_response } })
+      return learningPath_response
     }
+    if (get()._cache[`${courseId}-${topicId}`] === undefined)
+      throw new Error('getLearningPath: Learning path not found')
     return get()._cache[`${courseId}-${topicId}`]!
+
   }
 })
