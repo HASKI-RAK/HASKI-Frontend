@@ -107,7 +107,7 @@ const ProjectDescriptionStepper = ({
         <Grid alignContent="center" container item justifyContent="center" xs={12}>
           <MobileStepper
             variant="dots"
-            steps={props.body?.length || 0}
+            steps={props.body?.length ?? 0}
             position="static"
             activeStep={activeStep}
             sx={{

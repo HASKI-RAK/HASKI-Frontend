@@ -42,7 +42,7 @@ export const useProjectDescriptionCard = (
   params?: useProjectDescriptionCardHookParams
 ): ProjectDescriptionCardHookReturn => {
   // Default values
-  const { defaultHeaderState = '', defaultBodyState = '' } = params || {}
+  const { defaultHeaderState = '', defaultBodyState = '' } = params ?? {}
 
   // State data
   const [bodyState, setBodyState] = useState(defaultBodyState)
