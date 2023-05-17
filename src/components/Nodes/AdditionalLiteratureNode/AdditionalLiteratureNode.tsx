@@ -6,7 +6,7 @@ import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import ArticleIcon from '@mui/icons-material/Article'
 // import NewspaperIcon from '@mui/icons-material/Newspaper'
 
-export const AdditionalLiteraturNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
+export const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   console.log(data)
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)

@@ -1,5 +1,5 @@
 import { ShortTextualIntroductionNode } from '../ShortTextualIntroductionNode/ShortTextualIntroductionNode'
-import { AdditionalLiteraturNode } from '../AdditionalLiteraturNode/AdditionalLiteraturNode'
+import { AdditionalLiteratureNode } from '../AdditionalLiteratureNode/AdditionalLiteratureNode'
 import { SelfAssessmentNode } from '../SelfAssessmentNode/SelfAssessmentNode'
 import { ExplanationNode } from '../ExplanationNode/ExplanationNode'
 import { FeedbackNode } from '../FeedbackNode/FeedbackNode'
@@ -18,6 +18,6 @@ export const nodeTypes: NodeTypes = {
   BE: ExampleNode,
   ÜB: ExerciseNode,
   ZF: SummaryNode,
-  ZL: AdditionalLiteraturNode,
+  ZL: AdditionalLiteratureNode,
   SE: SelfAssessmentNode
 }
