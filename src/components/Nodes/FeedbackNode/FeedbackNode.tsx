@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import FeedbackIcon from '@mui/icons-material/Feedback'
+
 export const FeedbackNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   console.log(data)
   const { t } = useTranslation()
@@ -13,6 +14,7 @@ export const FeedbackNode = ({ data }: NodeProps<LearningPathLearningElementNode
   console.log(url)
   const handleOpen = () => setIsOpen(true)
   const handleClose = () => setIsOpen(false)
+
   return (
     <>
       <Handle type="target" position={Position.Top} style={{ background: '#555' }} />

@@ -1,16 +1,23 @@
-import { NodeTypes } from 'reactflow'
-import { BasicNode } from '../BasicNode/BasicNode'
-import { FeedbackNode } from '../FeedbackNode/FeedbackNode'
+import { ShortTextualIntroductionNode } from '../ShortTextualIntroductionNode/ShortTextualIntroductionNode'
+import { AdditionalLiteraturNode } from '../AdditionalLiteraturNode/AdditionalLiteraturNode'
+import { SelfAssessmentNode } from '../SelfAssessmentNode/SelfAssessmentNode'
 import { ExplanationNode } from '../ExplanationNode/ExplanationNode'
+import { FeedbackNode } from '../FeedbackNode/FeedbackNode'
+import { ExerciseNode } from '../ExerciseNode/ExerciseNode'
+import { ExampleNode } from '../ExampleNode/ExampleNode'
+import { SummaryNode } from '../SummaryNode/SummaryNode'
+import { VideoNode } from '../VideoNode/VideoNode'
+import { BasicNode } from '../BasicNode/BasicNode'
+import { NodeTypes } from 'reactflow'
 
 export const nodeTypes: NodeTypes = {
   RQ: FeedbackNode,
-  KÜ: BasicNode,
+  KÜ: ShortTextualIntroductionNode,
   EK: ExplanationNode,
-  AN: BasicNode,
-  BE: BasicNode,
-  ÜB: BasicNode,
-  ZF: BasicNode,
-  ZL: BasicNode,
-  SE: BasicNode
+  AN: VideoNode,
+  BE: ExampleNode,
+  ÜB: ExerciseNode,
+  ZF: SummaryNode,
+  ZL: AdditionalLiteraturNode,
+  SE: SelfAssessmentNode
 }

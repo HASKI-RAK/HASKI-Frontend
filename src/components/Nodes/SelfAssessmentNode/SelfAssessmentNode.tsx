@@ -3,9 +3,10 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { IFrameModal, LearningPathLearningElementNode } from '@components'
-import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates'
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'
+// import BallotIcon from '@mui/icons-material/Ballot';
 
-export const ExplanationNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
+export const SelfAssessmentNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   console.log(data)
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
@@ -26,7 +27,7 @@ export const ExplanationNode = ({ data }: NodeProps<LearningPathLearningElementN
           justifyContent: 'center',
           alignItems: 'center'
         }}>
-        <TipsAndUpdatesIcon sx={{ fontSize: 50 }} />
+        <AssignmentIndIcon sx={{ fontSize: 50 }} />
 
         {/* <Typography variant="h5" sx={{ textAlign: 'center' }}>
           {data.name}
