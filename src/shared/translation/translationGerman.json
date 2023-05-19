@@ -524,5 +524,36 @@
   "tooltip.openGlobalSettings": "Globale Einstellungen",
   "tooltip.openSettings": "Einstellungen",
   "update": "Aktualisieren",
-  "warning": "Warnung"
+  "warning": "Warnung",
+	"pages.projectdescription": "Projektbeschreibung",
+	"projectHASKI": "Projekt HASKI",
+	"components.ProjectDescriptionContent.introductionHeader": "Was ist HASKI?",
+	"components.ProjectDescriptionContent.introductionBody": "HASKI steht für „Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt“ und wird gefördert durch das Bundesministerium für Bildung und Forschung mit einer Projektlaufzeit bis Dezember 2025. HASKI ist ein Verbundprojekt von drei bayerischen Hochschulen: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
+	"components.ProjectDescriptionContent.advantagesTeachingHeader": "Vorteile für die Hochschullehre",
+	"components.ProjectDescriptionContent.advantagesTeachingBody": "Das HASKI-System möchte einen wichtigen Beitrag dazu leisten, interaktives, individuelles und selbstgesteuertes Lernen in der Hochschullehre besser zu etablieren. Digitale Medien und Plattformen können weit mehr gewährleisten als die derzeitige Praxis der Hochschullehre, in der auch im Zuge der Pandemie der Frontalunterricht dominiert.",
+	"components.ProjectDescriptionContent.advantagesTeachingHeader2": "Einsatz in der Hochschullehre",
+	"components.ProjectDescriptionContent.advantagesTeachingBody2": "Die Idee von HASKI ist es, das Potenzial von KI in den Veranstaltungen der Hochschule Kempten zu nutzen. Kombiniert werden dazu die Präsenzveranstaltungen, das Learning Management System (z. B. Moodle) und das HASKI-System. Damit bieten wir eine Software-Komponente, die mithilfe von KI-Algorithmen Dich bei dem Erreichen Deiner Lernziele unterstützt.",
+	"components.ProjectDescriptionContent.advantagesLearningHeader": "Vorteile für Dich im Studium",
+	"components.ProjectDescriptionContent.advantagesLearningBody": "Die Unterstützung wird ermöglicht, indem das HASKI-System Deine Daten aus Moodle ausliest und ein KI-Algorithmus auf Basis dieser Daten Dir einen personalisierten Lernpfad durch die Lernmaterialien vorschlägt. Natürlich bleibt die Entscheidung bei Dir, welches Material Du als Nächstes bearbeiten willst. Auch diese Präferenzen merkt sich HASKI und passt zukünftige Vorschläge an die neuen Begebenheiten an.",
+	"components.ProjectDescriptionContent.advantagesLearningHeader2": "Mit welchen Daten arbeitet HASKI?",
+	"components.ProjectDescriptionContent.advantagesLearningBody2": "Die Datenbasis sind Fragebögen, individueller Wissensstand, ausgewertete Aufgaben und Verhaltensdaten aus Moodle. Ein Rückschluss der Lehrenden auf Dich wird durch Anonymisierung der Daten verhindert.",
+	"components.ProjectDescriptionContent.approachesHeader": "Was ist unser Ansatz?",
+	"components.ProjectDescriptionContent.approachesBody": [
+		"Bundesweiter Austausch. Publikation von wissenschaftlichen Beiträgen. Vorträge auf deutschen Konferenzen.",
+		"Applikation von modernster Technologie. Kombination von Learning Analytics und Künstlicher Intelligenz.",
+		"Empirische Untersuchungen. Online-Fragebögen, Evaluationsstudien, Datenanalysen."
+	],
+	"components.ProjectDescriptionContent.goalsHeader": "Ziele des HASKI Projekts",
+	"components.ProjectDescriptionContent.goalsBody": [
+		"Verbesserung und Erweiterung von bisherigen Kursen im Bereich „Software Engineering“, durch Produktion von qualitativ hochwertigen, pädagogisch sinnvollen und abwechslungsreichen Lerninhalten",
+		"Umfassende digitale Repräsentation von einzelnen Studierenden und deren Charakteristiken",
+		"Entwicklung eines adaptiven und KI-basierten Lernsystems zur Generierung von personalisierten Lernpfadempfehlungen",
+		"KI-basierte Auswertung von Aufgaben und hilfreiches Feedback",
+		"Visualisierung und Aufbereitung von Learning Analytics zur Reflektion des Lernverhaltens",
+		"Didaktisch relevante Berichte für Lehrende zur Weiterentwicklung von Kursen"
+	],
+	"components.ProjectDescriptionContent.imageSources": "Bildquellen: ",
+	"components.ProjectDescriptionContent.imageSource1": "Bild von katemangostar auf Freepik",
+	"components.ProjectDescriptionContent.imageSource2": "Bild von natanaelginting auf Freepik",
+	"universityKempten": "Hochschule Kempten"
 }
