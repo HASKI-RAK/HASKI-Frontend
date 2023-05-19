@@ -1,9 +1,13 @@
 import { LearningElement, LearningPath, PathItem, LearningPathRequestResponse } from '@services'
+import useBoundStore from "@store";
 
 export const getElementLearningPath = async (topicIndex: number): Promise<LearningPathRequestResponse> => {
+  const fetchUser = useBoundStore((state) => state.fetchUser)
+
   try {
+    const user = await fetchUser();
     const response = await fetch(
-      process.env.BACKEND + `/user/2/49/student/1/course/2/topic/1/learningPath`,
+      process.env.BACKEND + `/user/${user.settings.user_id}/${user.lms_user_id}/student/${user.id}/course/2/topic/${topicIndex}/learningPath`,
       {
         method: 'GET',
         headers: {
