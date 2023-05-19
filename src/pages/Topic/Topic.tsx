@@ -1,5 +1,5 @@
 import { nodeTypes, LearningPathLearningElementNode } from '@components'
-import { LearningPath } from '@core'
+import { LearningElement, LearningPath, LearningPathLearningElement, LearningPathReturn } from '@core'
 import { Box } from '@mui/material'
 import log from 'loglevel'
 import { useEffect, useState, useContext } from 'react'
@@ -7,9 +7,92 @@ import { useParams } from 'react-router-dom'
 import ReactFlow, { Node, Edge, MiniMap, Controls, Background } from 'reactflow'
 import useBoundStore from '@store'
 import { AuthContext } from '@services'
+import StudentLearningElement from 'src/common/core/StudentLearningElement/StudentLearningElement'
 
 const _useTopic = () => {
   console.log('useTopic')
+}
+
+const studentLearningElement: StudentLearningElement = {
+  id: 160,
+  learning_element_id: 4,
+  student_id: 2,
+  done: false,
+  done_at: 'null'
+}
+
+const learningElement: LearningElement[] = [
+  {
+    id: 4,
+    lms_id: 108,
+    name: 'Kurzübersicht',
+    activity_type: 'h5pactivity',
+    classification: 'KÜ',
+    university: 'HS-KE',
+    created_by: 'Dimitri Bigler',
+    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
+    last_updated: 'null',
+    student_learning_element: studentLearningElement
+  },
+  {
+    id: 4,
+    lms_id: 108,
+    name: 'Kurzübersicht',
+    activity_type: 'h5pactivity',
+    classification: 'EK',
+    university: 'HS-KE',
+    created_by: 'Dimitri Bigler',
+    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
+    last_updated: 'null',
+    student_learning_element: studentLearningElement
+  },
+  {
+    id: 4,
+    lms_id: 108,
+    name: 'Kurzübersicht',
+    activity_type: 'h5pactivity',
+    classification: 'AN',
+    university: 'HS-KE',
+    created_by: 'Dimitri Bigler',
+    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
+    last_updated: 'null',
+    student_learning_element: studentLearningElement
+  }
+]
+
+const learningPathLearningElement: LearningPathLearningElement[] = [
+  {
+    position: 1,
+    id: 4,
+    learning_element_id: 246,
+    learning_path_id: 16,
+    recommended: true,
+    learning_element: learningElement[0]
+  },
+  {
+    position: 2,
+    id: 4,
+    learning_element_id: 246,
+    learning_path_id: 16,
+    recommended: true,
+    learning_element: learningElement[1]
+  },
+  {
+    position: 3,
+    id: 4,
+    learning_element_id: 246,
+    learning_path_id: 16,
+    recommended: true,
+    learning_element: learningElement[2]
+  }
+]
+
+const learningPath: LearningPath = {
+  based_on: 'aoc',
+  calculated_on: 'null',
+  course_id: 2,
+  id: 16,
+  path: learningPathLearningElement
 }
 
 type TopicProps = {
@@ -27,7 +110,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const fetchUser = useBoundStore((state) => state.fetchUser)
   const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
 
-  useEffect(() => {
+  /*useEffect(() => {
     // request to backend to get learning path for topic
     // alert('Topic: ' + topic)
     if (authcontext.isAuth)
@@ -50,7 +133,18 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           // 🍿 snackbar error
           alert('Error: ' + error)
         })
-  }, [authcontext.isAuth])
+  }, [authcontext.isAuth])*/
+
+  useEffect(() => {
+    const nodes = mapLeaningPathToNodes(learningPath)
+    setInitalNodes(nodes)
+    const edges: Edge[] = nodes.map((item, index) => ({
+      id: index.toString(),
+      source: item.id,
+      target: nodes[index + 1]?.id
+    }))
+    setInitalEdges(edges)
+  })
 
   log.setLevel('error')
   return initalNodes && initalEdges ? (
