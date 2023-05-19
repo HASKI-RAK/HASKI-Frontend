@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import ReactFlow, { Node, Edge, MiniMap, Controls, Background } from 'reactflow'
 import useBoundStore from '@store'
 import { AuthContext } from '@services'
+import { useTranslation } from 'react-i18next'
 
 const _useTopic = () => {
   console.log('useTopic')
@@ -23,6 +24,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initalEdges, setInitalEdges] = useState<Edge[]>()
   const authcontext = useContext(AuthContext)
   const { courseId, topicId } = useParams()
+  const { t } = useTranslation()
 
   const fetchUser = useBoundStore((state) => state.fetchUser)
   const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
@@ -58,7 +60,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       <ReactFlow nodes={initalNodes} edges={initalEdges} nodeTypes={nodeTypes} fitView></ReactFlow>
     </Box>
   ) : (
-    <div>Loading...</div>
+    <div>{t('loading')}</div>
   )
 }
 
