@@ -145,6 +145,39 @@
   "components.QuestionnaireResults.TableListK.Repeat": "Wiederholen",
   "components.QuestionnaireResults.TableListK.Score": "Wert",
   "components.QuestionnaireResults.TableListK.Time": "Zeit",
+  "pages.privacypolicy.consent": "Hinweise zum Datenschutz und Einwilligung zur Verarbeitung von Daten",
+  "pages.privacypolicy.contenttable": "Inhaltsverzeichnis",
+  "pages.privacypolicy.consent.webpage": "Die Nutzung von „https://HASKI.de“ und seinen inkludierten Angeboten an der Hochschule Kempten - University of Applied Sciences ist freiwillig.",
+  "pages.privacypolicy.paragraphs": [
+    {
+      "header": "1.1 Art der Informationen, die gesammelt werden",
+      "content": "Learning Analytics werden automatisch seitens des HASKI Systems erhoben. Die Benutzer können jederzeit einer Aufzeichnung der Analytics widersprechen, was dazu führt, dass diese nicht aufgezeichnet bzw. gestoppt werden und der entsprechende Datensatz im weiteren Verlauf nicht mehr berücksichtigt wird.\n Learning Analytics bezeichnet, die Daten, die zu Anfang der Benutzung des HASKI Systems über einen Fragebogen erfasst werden und beinhaltet darauffolgende Benutzungsverhalten, wie der Lernfortschritt, der aus der Bearbeitung der jeweiligen Übungen und die Verwendung der anderen Lernelemente besteht.\n Generelle Daten die immer vom Nutzer gesammelt werden, werden unter seiner Benutzer ID gespeichert. Generelle Daten bezeichnen die Zugriffszeit, -dauer und -menge auf die jeweiligen Seiten und Elemente. Über die ID lassen sich jedoch keine Rückschlüsse auf die echte Person ziehen."
+    },
+    {
+      "header": "1.2 Grund für Sammeln der Daten",
+      "content": "Nutzer, die das Sammeln Ihrer Daten ablehnen können die HASKI Seite normal benutzen. Sie erhalten jedoch keine individuellen Anpassungen Ihres Kurses.\n Für Benutzer, die der Aufzeichnung der Learning Analytics zugestimmt haben:\n Daten werden ausschließlich für das HASKI System benötigt, um ein individuelles Lernprofil für den Nutzer erstellen zu können. Anhand dieses Lernprofils werden dem Nutzer Vorschläge für die Bearbeitung des Lerninhalts gegeben. Das Lernprofil und die Vorschläge dienen nur zur Unterstützung des Nutzers und deren Verwendung ist nicht verpflichtend."
+    },
+    {
+      "header": "1.3 Wie werden die Daten gesammelt?",
+      "content": "Cookies"
+    },
+    {
+      "header": "1.4 Verwendung der Daten",
+      "content": "Daten werden für in 1.2 bereits genannte Zwecke erhoben und ausschließlich im HASKI System verwendet. "
+    },
+    {
+      "header": "1.5 Informierung über Datenschutzänderungen",
+      "content": "Über Änderungen in der Datenschutzbestimmung werden die Benutzer jeweils bei erstmaligen Benutzen der HASKI Seite, nach der Änderung, in Kenntnis gesetzt. "
+    },
+    {
+      "header": "1.6 Kontaktierung",
+      "content": "Bei Fragen oder Anträgen kann sich über das in HASKI zur Verfügung gestellte Kontaktformular an die zuständigen Personen gewandt werden. Die Kontaktierung erfolgt anonym und wird nur anhand der Nutzer ID protokolliert."
+    },
+    {
+      "header": "1.7 Schutz der Daten",
+      "content": "Sofern nicht bereits durch die Methodik und die verwendeten Erhebungsverfahren eine Anonymisierung und Pseudonymisierung der Rohdaten inkludiert ist, wird diese durch einen nachgelagerten Postprozess garantiert. "
+    }
+  ],
   "Dot": ".",
   "help": "Hilfe",
   "Next": "Weiter",
