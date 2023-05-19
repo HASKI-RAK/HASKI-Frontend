@@ -80,6 +80,7 @@ const mapLeaningPathToNodes = (learning_path: LearningPath) => {
     return {
       id: item.position.toString(),
       type: item.learning_element.classification,
+      name: item.learning_element.name,
       data: node_data,
       position: {
         x: 0,

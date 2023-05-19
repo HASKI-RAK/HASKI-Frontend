@@ -7,6 +7,7 @@ import { AuthContext, SnackbarContext } from '@services'
 import { Stack } from '@mui/system'
 import { Card, CardContent, Skeleton, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import {DropdownLanguage} from "@components";
 
 /**
  *
@@ -76,6 +77,7 @@ export const Home = () => {
           })}
         </div>
       </Stack>
+          <DropdownLanguage />
     </div>
   )
 }
