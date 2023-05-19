@@ -2,7 +2,7 @@ import { TopicRequestResponse, TopicsResponse } from '@services'
 
 export const getCourseTopics = async (): Promise<TopicRequestResponse> => {
   try {
-    const response = await fetch(process.env.BACKEND + `/user/2/5/student/1/course/1/topic`, {
+    const response = await fetch(process.env.BACKEND + `/user/2/49/student/1/course/2/topic`, {
       method: 'GET',
       headers: {
         'Content-Type': 'text/json'

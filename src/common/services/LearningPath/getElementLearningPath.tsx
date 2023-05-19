@@ -3,7 +3,7 @@ import { LearningElement, LearningPath, PathItem, LearningPathRequestResponse } 
 export const getElementLearningPath = async (topicIndex: number): Promise<LearningPathRequestResponse> => {
   try {
     const response = await fetch(
-      process.env.BACKEND + `/user/2/5/student/1/course/1/topic/${topicIndex}/learningPath`,
+      process.env.BACKEND + `/user/2/49/student/1/course/2/topic/1/learningPath`,
       {
         method: 'GET',
         headers: {
