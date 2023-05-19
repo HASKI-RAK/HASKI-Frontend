@@ -102,7 +102,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
             maxHeight: { xs: 20, md: 50 },
             maxWidth: { xs: 20, md: 50 },
             borderRadius: '50%',
-            backgroundColor: (theme) => `${theme.palette.secondary.main}`,
+            backgroundColor: 'white',
             cursor: 'pointer'
           }}
           alt="HASKI Home"
