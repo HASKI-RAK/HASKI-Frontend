@@ -12,4 +12,16 @@ import ProjectInformation from './ProjectInformation/ProjectInformation'
 import Imprint from './Imprint/Imprint'
 import Topic from './Topic/Topic'
 import CoursePage from './CoursePage/CoursePage'
-export { MainFrame, App, ThemePresentation, Home, Login, Dashboard, ProjectDescription, ProjectInformation, Imprint, Topic, CoursePage }
+export {
+  MainFrame,
+  App,
+  ThemePresentation,
+  Home,
+  Login,
+  Dashboard,
+  ProjectDescription,
+  ProjectInformation,
+  Imprint,
+  Topic,
+  CoursePage
+}
