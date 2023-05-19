@@ -1,12 +1,9 @@
 import { TopicRequestResponse, TopicsResponse } from '@services'
-import useBoundStore from "@store";
 
-export const getCourseTopics = async (): Promise<TopicRequestResponse> => {
-  const fetchUser = useBoundStore((state) => state.fetchUser)
+export const getCourseTopics = async (userId: number, lmsUserId: number, studentId: number): Promise<TopicRequestResponse> => {
 
   try{
-      const user = await fetchUser();
-      const response = await fetch(process.env.BACKEND + `/user/${user.settings.user_id}/${user.lms_user_id}/student/${user.id}/course/2/topic`, {
+      const response = await fetch(process.env.BACKEND + `/user/${userId}/${lmsUserId}/student/${studentId}/course/2/topic`, {
         method: 'GET',
         headers: {
           'Content-Type': 'text/json'

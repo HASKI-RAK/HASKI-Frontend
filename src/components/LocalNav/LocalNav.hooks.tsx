@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { getCourseTopics, getElementLearningPath, LearningPath, Topic } from '@services'
 import log from 'loglevel'
+import useBoundStore from "@store";
 
-export const getSortedLearningPath = async (data: Topic[]): Promise<LearningPath[]> => {
-  const promises = data.map((topic) => getElementLearningPath(topic.id))
+export const getSortedLearningPath = async(data: Topic[], userId: number, lmsUserId: number, studentId: number): Promise<LearningPath[]> => {
+  const promises = data.map((topic) => getElementLearningPath(topic.id, userId, lmsUserId, studentId))
   const learningPaths = await Promise.all(promises)
 
   return learningPaths
@@ -18,14 +19,16 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
   const [learningPaths, setLearningPaths] = useState<LearningPath[]>([])
+  const fetchUser = useBoundStore((state) => state.fetchUser)
 
   const effect = async () => {
     setLoading(true)
     try {
-      const response = await getCourseTopics()
+      const user = await fetchUser();
+      const response = await getCourseTopics(user.settings.user_id, user.lms_user_id, user.id)
       if (response.status === 200) {
         setTopics(response.data.topics)
-        const dataLearningPath = await getSortedLearningPath(response.data.topics)
+        const dataLearningPath = await getSortedLearningPath(response.data.topics, user.settings.user_id, user.lms_user_id, user.id)
         setLearningPaths(dataLearningPath)
       } else {
         // some error occurred
