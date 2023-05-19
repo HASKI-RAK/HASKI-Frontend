@@ -1,1 +1,1 @@
-export { ListItemIcon  as DefaultListItemIcon  } from '@mui/material'
+export { ListItemIcon as DefaultListItemIcon } from '@mui/material'

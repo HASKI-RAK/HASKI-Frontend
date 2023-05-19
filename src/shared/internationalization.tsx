@@ -12,6 +12,14 @@ declare module 'i18next' {
   }
 }
 
+// Custom type options for i18next prevents return type of null
+// https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    returnNull: false
+  }
+}
+
 // Import all translation files
 import translationEnglish from './translation/translationEnglish.json'
 import translationGerman from './translation/translationGerman.json'
