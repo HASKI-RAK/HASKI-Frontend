@@ -115,7 +115,7 @@ const learningPathLearningElement: LearningPathLearningElement[] = [
     learning_element: learningElement[1]
   },
   {
-    position: 2,
+    position: 3,
     id: 6,
     learning_element_id: 246,
     learning_path_id: 16,
@@ -123,7 +123,7 @@ const learningPathLearningElement: LearningPathLearningElement[] = [
     learning_element: learningElement[2]
   },
   {
-    position: 2,
+    position: 4,
     id: 7,
     learning_element_id: 246,
     learning_path_id: 16,
@@ -131,7 +131,7 @@ const learningPathLearningElement: LearningPathLearningElement[] = [
     learning_element: learningElement[3]
   },
   {
-    position: 3,
+    position: 5,
     id: 8,
     learning_element_id: 246,
     learning_path_id: 16,
@@ -139,7 +139,7 @@ const learningPathLearningElement: LearningPathLearningElement[] = [
     learning_element: learningElement[4]
   },
   {
-    position: 4,
+    position: 6,
     id: 8,
     learning_element_id: 246,
     learning_path_id: 16,
@@ -265,14 +265,14 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
       is_recommended: node.recommended
     }
     return {
-      id: node.position.toString() + index.toString(),
+      id: exerciseLearningElementParentNode.id + " " + index.toString(),
       type: node.learning_element.classification,
       data: node_data,
       position: {
         x: 300 * index,
         y: -70 * index
       },
-      parentNode: node.position.toString()
+      parentNode: exerciseLearningElementParentNode.id
     }
   })
 
@@ -295,7 +295,7 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
       data: node_data,
       position: {
         x: (300 * (learningPathExercises.length - 1)) / 2,
-        y: 200 * (item.position - 1)
+        y: item.position < parseInt(exerciseLearningElementParentNode.id) ? 200 * (item.position - 1) : 200 * (item.position - exerciseLearningElementChildNodes.length - 1)
       },
       style: { background: 'lightblue', padding: 10 },
       content: (
@@ -320,20 +320,5 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
     ...learningElementNodesAfterExercises
   ]
 
-  const nodeA = {
-    id: 'A',
-    type: 'ÜB',
-    position: { x: 0, y: 0 },
-    data: {}
-  }
-
-  const nodeB = {
-    id: 'B',
-    type: 'ÜB',
-    position: { x: 0, y: 300 },
-    data: {}
-  }
-
   return learningElementNodes
-  // return [nodeA, nodeB]
 }
