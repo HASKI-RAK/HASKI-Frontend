@@ -25,6 +25,7 @@ import { useTranslation } from 'react-i18next'
 import { Logout } from '@mui/icons-material'
 import { AuthContext, Topic, LearningPath } from '@services'
 import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
+import {DropdownLanguage} from "@components";
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
 /**
@@ -207,6 +208,13 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
           </Box>
           {/** Search bar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>
+
+          {/** Language dropdown */}
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
+              <Tooltip title={t('language')}>
+                  <DropdownLanguage/>
+              </Tooltip>
+          </Box>
 
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>

@@ -1,9 +1,10 @@
 import { LearningElement, LearningPath, PathItem, LearningPathRequestResponse } from '@services'
 
-export const getElementLearningPath = async (topicIndex: number): Promise<LearningPathRequestResponse> => {
+export const getElementLearningPath = async (topicIndex: number, userId: number, lmsUserId: number, studentId: number): Promise<LearningPathRequestResponse> => {
+
   try {
     const response = await fetch(
-      process.env.BACKEND + `/user/2/5/student/1/course/1/topic/${topicIndex}/learningPath`,
+      process.env.BACKEND + `/user/${userId}/${lmsUserId}/student/${studentId}/course/2/topic/${topicIndex}/learningPath`,
       {
         method: 'GET',
         headers: {
