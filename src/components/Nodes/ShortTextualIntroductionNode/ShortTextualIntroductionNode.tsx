@@ -6,7 +6,6 @@ import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import ShortTextIcon from '@mui/icons-material/ShortText'
 
 export const ShortTextualIntroductionNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
-    console.log(data)
     const { t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
     const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)

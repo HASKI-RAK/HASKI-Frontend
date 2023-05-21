@@ -6,7 +6,6 @@ import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import ArticleIcon from '@mui/icons-material/Article'
 
 export const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
-    console.log(data)
     const { t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
     const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
