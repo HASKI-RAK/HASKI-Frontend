@@ -163,8 +163,8 @@ type TopicProps = {
 
 // Topic Page - TODO Component extract
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
-  const [initalNodes, setInitalNodes] = useState<Node[]>()
-  const [initalEdges, setInitalEdges] = useState<Edge[]>()
+  const [initialNodes, setInitialNodes] = useState<Node[]>()
+  const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const authcontext = useContext(AuthContext)
   const { courseId, topicId } = useParams()
   const { t } = useTranslation()
@@ -199,21 +199,32 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   useEffect(() => {
     const nodes = mapLearningPathToNodes(learningPath)
-    setInitalNodes(nodes)
-    const edges: Edge[] = nodes.map((item, index) => ({
-      id: index.toString(),
-      source: item.id,
-      target: nodes[index + 1]?.id
-    }))
-    setInitalEdges(edges)
+    setInitialNodes(nodes)
+
+    // Get first character of node ids
+    const nodeIDs = nodes.map((item) => Array.from(item.id)[0])
+
+    // Erase duplicate of node ids
+    const uniqueNodeIDs = [...new Set(nodeIDs)]
+
+    /*const edges: Edge[] = uniqueNodeIDs.map((item, index) => ({
+      id: 'Edge' + item.toString(),
+      source: 'A', //item,
+      target: 'B' //uniqueNodeIDs[index + 1]
+    }))*/
+
+    const edge = { id: 'AB', source: 'A', target: 'B' }
+
+    //setInitialEdges(edges)
+    setInitialEdges([edge])
   })
 
   log.setLevel('error')
 
   // TODO: HIer edges rendern
-  return initalNodes && initalEdges ? (
+  return initialNodes && initialEdges ? (
     <Box height={'100%'}>
-      <ReactFlow nodes={initalNodes} edges={initalEdges} nodeTypes={nodeTypes} fitView />
+      <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView />
     </Box>
   ) : (
     <div>{t('loading')}</div>
@@ -237,7 +248,7 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
   // Parent node for exercise learning elements
   const exerciseLearningElementParentNode = {
     id: learningPathExercises[0].position.toString(),
-    data: { label: 'Group B' }, //TODO del
+    data: {},
     position: {
       x: 0,
       y: 200 * (learningPathExercises[0].position - 1)
@@ -258,11 +269,10 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
       type: node.learning_element.classification,
       data: node_data,
       position: {
-        x: 200 * index,
-        y: -64 * index
+        x: 300 * index,
+        y: -70 * index
       },
       parentNode: node.position.toString()
-      // extent: 'parent'
     }
   })
 
@@ -284,7 +294,7 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
       type: item.learning_element.classification,
       data: node_data,
       position: {
-        x: (200 * (learningPathExercises.length - 1)) / 2,
+        x: (300 * (learningPathExercises.length - 1)) / 2,
         y: 200 * (item.position - 1)
       },
       style: { background: 'lightblue', padding: 10 },
@@ -310,5 +320,20 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
     ...learningElementNodesAfterExercises
   ]
 
+  const nodeA = {
+    id: 'A',
+    type: 'ÜB',
+    position: { x: 0, y: 0 },
+    data: {}
+  }
+
+  const nodeB = {
+    id: 'B',
+    type: 'ÜB',
+    position: { x: 0, y: 300 },
+    data: {}
+  }
+
   return learningElementNodes
+  // return [nodeA, nodeB]
 }
