@@ -35,11 +35,11 @@ const learningElement: LearningElement[] = [
     student_learning_element: studentLearningElement
   },
   {
-    id: 4,
+    id: 5,
     lms_id: 108,
     name: 'Kurzübersicht',
     activity_type: 'h5pactivity',
-    classification: 'EK',
+    classification: 'ÜB', // EK
     university: 'HS-KE',
     created_by: 'Dimitri Bigler',
     created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
@@ -47,11 +47,47 @@ const learningElement: LearningElement[] = [
     student_learning_element: studentLearningElement
   },
   {
-    id: 4,
+    id: 6,
     lms_id: 108,
     name: 'Kurzübersicht',
     activity_type: 'h5pactivity',
-    classification: 'AN',
+    classification: 'ÜB', // AN
+    university: 'HS-KE',
+    created_by: 'Dimitri Bigler',
+    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
+    last_updated: 'null',
+    student_learning_element: studentLearningElement
+  },
+  {
+    id: 7,
+    lms_id: 108,
+    name: 'Kurzübersicht',
+    activity_type: 'h5pactivity',
+    classification: 'ÜB', // AN
+    university: 'HS-KE',
+    created_by: 'Dimitri Bigler',
+    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
+    last_updated: 'null',
+    student_learning_element: studentLearningElement
+  },
+  {
+    id: 8,
+    lms_id: 108,
+    name: 'Kurzübersicht',
+    activity_type: 'h5pactivity',
+    classification: 'AN', // AN
+    university: 'HS-KE',
+    created_by: 'Dimitri Bigler',
+    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
+    last_updated: 'null',
+    student_learning_element: studentLearningElement
+  },
+  {
+    id: 8,
+    lms_id: 108,
+    name: 'Kurzübersicht',
+    activity_type: 'h5pactivity',
+    classification: 'AN', // AN
     university: 'HS-KE',
     created_by: 'Dimitri Bigler',
     created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
@@ -71,19 +107,43 @@ const learningPathLearningElement: LearningPathLearningElement[] = [
   },
   {
     position: 2,
-    id: 4,
+    id: 5,
     learning_element_id: 246,
     learning_path_id: 16,
     recommended: true,
     learning_element: learningElement[1]
   },
   {
-    position: 3,
-    id: 4,
+    position: 2,
+    id: 6,
     learning_element_id: 246,
     learning_path_id: 16,
     recommended: true,
     learning_element: learningElement[2]
+  },
+  {
+    position: 2,
+    id: 7,
+    learning_element_id: 246,
+    learning_path_id: 16,
+    recommended: true,
+    learning_element: learningElement[3]
+  },
+  {
+    position: 3,
+    id: 8,
+    learning_element_id: 246,
+    learning_path_id: 16,
+    recommended: true,
+    learning_element: learningElement[4]
+  },
+  {
+    position: 4,
+    id: 8,
+    learning_element_id: 246,
+    learning_path_id: 16,
+    recommended: true,
+    learning_element: learningElement[5]
   }
 ]
 
@@ -118,7 +178,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         .then((user) => {
           fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, Number(courseId), Number(topicId)).then(
             (learning_path_data) => {
-              const nodes = mapLeaningPathToNodes(learning_path_data)
+              const nodes = mapLearningPathToNodes(learning_path_data)
               setInitalNodes(nodes)
               const edges: Edge[] = nodes.map((item, index) => ({
                 id: index.toString(),
@@ -136,7 +196,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   }, [authcontext.isAuth])*/
 
   useEffect(() => {
-    const nodes = mapLeaningPathToNodes(learningPath)
+    const nodes = mapLearningPathToNodes(learningPath)
     setInitalNodes(nodes)
     const edges: Edge[] = nodes.map((item, index) => ({
       id: index.toString(),
@@ -147,9 +207,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   })
 
   log.setLevel('error')
+
+  // TODO: HIer edges rendern
   return initalNodes && initalEdges ? (
     <Box height={'100%'}>
-      <ReactFlow nodes={initalNodes} edges={initalEdges} nodeTypes={nodeTypes} fitView></ReactFlow>
+      <ReactFlow nodes={initalNodes} edges={initalEdges} nodeTypes={nodeTypes} fitView />
     </Box>
   ) : (
     <div>Loading...</div>
@@ -158,10 +220,55 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
 export default Topic
 
-const mapLeaningPathToNodes = (learning_path: LearningPath) => {
-  // alert('map_TopicLearningElements_to_reactflow')
-  const sorted_learning_path = learning_path.path.sort((a, b) => a.position - b.position)
-  return sorted_learning_path.map((item, index) => {
+const mapLearningPathToNodes = (learningPath: LearningPath) => {
+  // Sort learning path
+  const sortedLearningPath = learningPath.path.sort((a, b) => a.position - b.position)
+
+  // Every exercise learning element
+  const learningPathExercises = sortedLearningPath.filter((item) => item.learning_element.classification === 'ÜB')
+
+  // Every learning element exept exercises
+  const learningPathExcludingExercises = sortedLearningPath.filter(
+    (item) => item.learning_element.classification !== 'ÜB'
+  )
+
+  // Parent node for exercise learning elements
+  const exerciseLearningElementParentNode = {
+    id: learningPathExercises[0].position.toString(),
+    data: { label: 'Group B' }, //TODO del
+    position: {
+      x: 0,
+      y: 200 * (learningPathExercises[0].position - 1)
+    }
+  }
+
+  // Exercise nodes
+  const exerciseLearningElementChildNodes = learningPathExercises.map((node, index) => {
+    const node_data: LearningPathLearningElementNode = {
+      lms_id: node.learning_element.lms_id,
+      name: node.learning_element.name,
+      activity_type: node.learning_element.activity_type,
+      classification: node.learning_element.classification,
+      is_recommended: node.recommended
+    }
+    return {
+      id: node.position.toString() + index.toString(),
+      type: node.learning_element.classification,
+      data: node_data,
+      position: {
+        x: 200 * index,
+        y: -64 * index
+      },
+      parentNode: node.position.toString()
+      // extent: 'parent'
+    }
+  })
+
+  // Combine parent and exercise nodes
+  const learningElementsExercisesNodes = [exerciseLearningElementParentNode, ...exerciseLearningElementChildNodes]
+
+  // Rest of learning elements
+  const learningElementNodesExcludingExercises = learningPathExcludingExercises.map((item, index) => {
     const node_data: LearningPathLearningElementNode = {
       lms_id: item.learning_element.lms_id,
       name: item.learning_element.name,
@@ -169,14 +276,31 @@ const mapLeaningPathToNodes = (learning_path: LearningPath) => {
       classification: item.learning_element.classification,
       is_recommended: item.recommended
     }
+
     return {
       id: item.position.toString(),
       type: item.learning_element.classification,
       data: node_data,
       position: {
-        x: 0,
-        y: index * 200
+        x: (200 * (learningPathExercises.length - 1)) / 2,
+        y: 200 * (item.position - 1)
       }
     }
   })
+
+  // Insert exercise nodes into learning elements
+  const learningElementNodesBeforeExercises = learningElementNodesExcludingExercises.filter(
+    (item) => parseInt(item.id) < parseInt(exerciseLearningElementParentNode.id)
+  )
+  const learningElementNodesAfterExercises = learningElementNodesExcludingExercises.filter(
+    (item) => parseInt(item.id) > parseInt(exerciseLearningElementParentNode.id)
+  )
+
+  const learningElementNodes = [
+    ...learningElementNodesBeforeExercises,
+    ...learningElementsExercisesNodes,
+    ...learningElementNodesAfterExercises
+  ]
+
+  return learningElementNodes
 }
