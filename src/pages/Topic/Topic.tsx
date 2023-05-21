@@ -295,7 +295,7 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
       data: node_data,
       position: {
         x: (300 * (learningPathExercises.length - 1)) / 2,
-        y: item.position < parseInt(exerciseLearningElementParentNode.id) ? 200 * (item.position - 1) : 200 * (item.position - exerciseLearningElementChildNodes.length - 1)
+        y: item.position < parseInt(exerciseLearningElementParentNode.id) ? 200 * (item.position - 1) : 200 * (item.position - exerciseLearningElementChildNodes.length)
       },
       style: { background: 'lightblue', padding: 10 },
       content: (
