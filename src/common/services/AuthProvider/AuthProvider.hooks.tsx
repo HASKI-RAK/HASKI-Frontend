@@ -17,7 +17,7 @@ const useAuthProvider = () => {
         addSnackbar({ message: t('services.AuthProvider.logout'), severity: 'success', autoHideDuration: 5000 })
       }
     })
-  }, [])
+  }, [addSnackbar, t])
 
   // Side effects
   useEffect(() => {
@@ -37,7 +37,7 @@ const useAuthProvider = () => {
           autoHideDuration: 5000
         })
       })
-  }, [])
+  }, [addSnackbar, t])
 
   return useMemo(() => ({ isAuth, setIsAuth, logout }), [isAuth, logout])
 }

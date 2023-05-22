@@ -30,6 +30,8 @@ export { DefaultCircularProgress } from './DefaultCircularProgress/DefaultCircul
 export { DefaultInputAdornment } from './DefaultInputAdornment/DefaultInputAdornment'
 export { DefaultPaper } from './DefaultPaper/DefaultPaper'
 export { DefaultTextField } from './DefaultTextField/DefaultTextField'
+export { DefaultFade } from './DefaultFade/DefaultFade'
+export { DefaultMobileStepper } from './DefaultMobileStepper/DefaultMobileStepper'
 export { DefaultAlert } from './DefaultAlert/DefaultAlert'
 export { DefaultSlide } from './DefaultSlide/DefaultSlide'
 export { DefaultGrow } from './DefaultGrow/DefaultGrow'

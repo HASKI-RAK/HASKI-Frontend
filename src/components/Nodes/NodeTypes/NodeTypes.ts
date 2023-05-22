@@ -6,9 +6,9 @@ import { FeedbackNode } from '../FeedbackNode/FeedbackNode'
 import { ExerciseNode } from '../ExerciseNode/ExerciseNode'
 import { ExampleNode } from '../ExampleNode/ExampleNode'
 import { SummaryNode } from '../SummaryNode/SummaryNode'
-import { VideoNode } from '../VideoNode/VideoNode'
-import { BasicNode } from '../BasicNode/BasicNode'
+import VideoNode from '../VideoNode/VideoNode'
 import { NodeTypes } from 'reactflow'
+import DefaultGroup from '../DefaultGroup/DefaultGroup'
 
 export const nodeTypes: NodeTypes = {
   RQ: FeedbackNode,
@@ -19,5 +19,6 @@ export const nodeTypes: NodeTypes = {
   ÜB: ExerciseNode,
   ZF: SummaryNode,
   ZL: AdditionalLiteratureNode,
-  SE: SelfAssessmentNode
+  SE: SelfAssessmentNode,
+  GROUP: DefaultGroup
 }

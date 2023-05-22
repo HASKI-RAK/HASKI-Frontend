@@ -2,6 +2,8 @@
   "Activities": "Activities",
   "and": "and",
   "Back": "Back",
+  "components.Home.Button.Course": "Continue to course",
+  "components.CoursePage.Button.Topic": "Continue to topic",
   "components.ImprintContent.AsOf": "As of",
   "components.ImprintContent.AuthorisedRepresentative": "Authorised representative",
   "components.ImprintContent.AuthorisedRepresentative.Title": "Mr.",
@@ -36,7 +38,37 @@
   "components.login.usernameError": "Please enter a valid username",
   "components.Login.usernameError": "Please enter a valid username",
   "components.MenuBar.Profile.Logout": "Logout",
+  "components.MenuBar.Profile.Login": "Login",
   "components.MenuBar.TopicButton": "Topics",
+  "components.MenubBar.GlobalSettings.Error": "Global Settings not implemented yet",
+  "components.ProjectDescriptionContent.advantagesLearningBody": "The support is enabled by the HASKI system reading your data from Moodle and using an AI algorithm based on this data to suggest a personalized learning path through the learning materials. Of course, the decision about which material you want to work on next remains with you. HASKI also remembers these preferences and adjusts future suggestions to new circumstances.",
+  "components.ProjectDescriptionContent.advantagesLearningBody2": "The data basis consists of questionnaires, individual knowledge levels, evaluated tasks, and behavioral data from Moodle. Through anonymization of data, a conclusion about you by instructors is prevented.",
+  "components.ProjectDescriptionContent.advantagesLearningHeader": "Benefits for you in your studies",
+  "components.ProjectDescriptionContent.advantagesLearningHeader2": "What data does HASKI work with?",
+  "components.ProjectDescriptionContent.advantagesTeachingBody": "The HASKI system aims to make a significant contribution to establishing interactive, personalized, and self-directed learning in higher education. Digital media and platforms can provide much more than the current practice of higher education, which is dominated by traditional classroom teaching, even in the context of the pandemic.",
+  "components.ProjectDescriptionContent.advantagesTeachingBody2": "The idea behind HASKI is to harness the potential of AI in the courses offered at University of Applied Sciences Kempten. This is achieved by combining in-person teaching, the learning management system (e.g. Moodle), and the HASKI system. With this we provide a software component that utilizes AI algorithms to assist you in achieving your learning goals.",
+  "components.ProjectDescriptionContent.advantagesTeachingHeader": "Benefits for higher education teaching",
+  "components.ProjectDescriptionContent.advantagesTeachingHeader2": "Application in higher education",
+  "components.ProjectDescriptionContent.approachesBody": [
+    "National exchange. Publication of scientific contributions. Presentations at german conferences.",
+    "Application of state-of-the-art technology. Combination of learning analytics and artificial intelligence.",
+    "Empirical investigations. Online surveys, evaluation studies, data analysis."
+  ],
+  "components.ProjectDescriptionContent.approachesHeader": "What is our approach?",
+  "components.ProjectDescriptionContent.goalsBody": [
+    "Improvement and expansion of existing courses in the field of software engineering through the production of high-quality, pedagogically meaningful, and varied learning content",
+    "Comprehensive digital representation of individual students and their characteristics",
+    "Development of an adaptive and AI-based learning system for generating personalized learning path recommendations",
+    "AI-based evaluation of exercises and helpful feedback",
+    "Visualization and preparation of learning analytics to reflect on learning behavior",
+    "Didactically relevant reports for lecturers to improve courses"
+  ],
+  "components.ProjectDescriptionContent.goalsHeader": "Goals of the HASKI project",
+  "components.ProjectDescriptionContent.imageSource1": "Image by katemangostar on Freepik",
+  "components.ProjectDescriptionContent.imageSource2": "Image by natanaelginting on Freepik",
+  "components.ProjectDescriptionContent.imageSources": "",
+  "components.ProjectDescriptionContent.introductionBody": "HASKI stands for \"Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt\" (\"Higher education teaching: Adaptive, self-directed, AI-assisted\") and is funded by the Federal Ministry of Education and Research with a project duration until December 2025. HASKI is a collaborative project of three Bavarian universities: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
+  "components.ProjectDescriptionContent.introductionHeader": "What is HASKI?",
   "components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText": "Questionnaire Results",
   "components.QuestionnaireResults.ResultDescriptionILS.Active.moderate": "Your information processing tends to be active. It is recommended that you always create opportunities for yourself to process new information in the course of practical experiments and discussions with fellow students. This tends to help you learn faster.",
   "components.QuestionnaireResults.ResultDescriptionILS.Active.strong": "Your information processing is preferably active. It is recommended that you always create opportunities for yourself to process new information in the course of practical experiments and discussions with fellow students. This tends to help you learn faster.",
@@ -531,6 +563,53 @@
     "TestEnglish3",
     "TestEnglish4"
   ],
+  "pages.CoursePage.topics": [
+    {
+      "id": "1",
+      "name": "General",
+      "description": "This is the first topic"
+    },
+    {
+      "id": "16",
+      "name": "Individual Sorting",
+      "description": "This is the second topic"
+    },
+    {
+      "id": "7",
+      "name": "Designpattern general",
+      "description": "This is the third topic"
+    },
+    {
+      "id": "2",
+      "name": "Known Designpattern",
+      "description": "This is the fourth topic"
+    },
+    {
+      "id": "3",
+      "name": "Strategy",
+      "description": "This is the fifth topic"
+    },
+    {
+      "id": "4",
+      "name": "State",
+      "description": "This is the sixth topic"
+    },
+    {
+      "id": "5",
+      "name": "Adapter",
+      "description": "This is the seventh topic"
+    },
+    {
+      "id": "6",
+      "name": "Facade",
+      "description": "This is the eighth topic"
+    },
+    {
+      "id": "14",
+      "name": "Finish",
+      "description": "This is the nineth topic"
+    }
+  ],
   "pages.glossary.title": "Glossary",
   "pages.home": "Home",
   "pages.imprint": "Imprint",
@@ -538,10 +617,34 @@
   "pages.login.redirect": "You will be redirected after a few seconds",
   "pages.Login.redirect": "You will be redirected after a few seconds",
   "pages.privacypolicy": "Privacy Policy",
+  "pages.projectdescription": "Project Description",
   "pages.projectinformation": "Project Information",
+
+  "pages.course": "Course",
+  "pages.topic": "Topic",
+  "pages.1": "1",
+  "pages.2": "2",
+  "pages.3": "3",
+  "pages.4": "4",
+  "pages.5": "5",
+  "pages.6": "6",
+  "pages.7": "7",
+  "pages.8": "8",
+  "pages.9": "9",
+  "pages.10": "10",
+  "pages.11": "11",
+  "pages.12": "12",
+  "pages.13": "13",
+  "pages.14": "14",
+  "pages.15": "15",
+  "pages.16": "16",
+  "pages.17": "17",
+  "loading": "Loading...",
+
   "post": "Posted",
   "previousText": "Previous",
   "projecthaski": "Project HASKI",
+  "projectHASKi": "Project HASKI",
   "resultPagesText": "Results",
   "searchButtonText": "Search",
   "services.AuthProvider.connectivityerror": "Error while checking login status. Check your connectivity",
@@ -551,6 +654,7 @@
   "success": "Success",
   "tooltip.openGlobalSettings": "Open global settings",
   "tooltip.openSettings": "Open settings",
+  "universityKempten": "University of Applied Sciences Kempten",
   "update": "Updated",
   "warning": "Warning"
 }

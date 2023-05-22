@@ -30,7 +30,7 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
     // supply auth context
     authcontext.setIsAuth(true)
     // then redirect to home page
-    navigate('/dashboard', { replace: true })
+    navigate('/', { replace: true })
   }, [authcontext, navigate])
 
   // Login with username and password

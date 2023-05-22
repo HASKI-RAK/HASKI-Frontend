@@ -1,4 +1,4 @@
-import { Card, Paper, Typography } from '@mui/material'
+import { Box, Paper, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
@@ -6,37 +6,31 @@ import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import AssignmentLateIcon from '@mui/icons-material/AssignmentLate'
 
 export const ExerciseNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
-  console.log(data)
-  const { t } = useTranslation()
-  const [isOpen, setIsOpen] = useState(false)
-  const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
-  const [title] = useState(data.name)
-  const handleOpen = () => setIsOpen(true)
-  const handleClose = () => setIsOpen(false)
+    const { t } = useTranslation()
+    const [isOpen, setIsOpen] = useState(false)
+    const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
+    const [title] = useState(data.name)
+    const handleOpen = () => setIsOpen(true)
+    const handleClose = () => setIsOpen(false)
 
   return (
-    <>
-      <Handle type="target" position={Position.Top} style={{ background: '#555' }} />
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={handleOpen}>
+      <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
-        onClick={handleOpen}
         sx={{
-          width: '60px',
-          height: '60px',
+          width: '65px',
+          height: '65px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center'
         }}>
         <AssignmentLateIcon sx={{ fontSize: 50 }} />
-
-        {/* <Typography variant="h5" sx={{ textAlign: 'center' }}>
-          {data.name}
-        </Typography>
-        <Typography variant="h6" sx={{ textAlign: 'center' }}>
-        {t('topic.type')}: {data.activity_type}
-        </Typography> */}
       </Paper>
+      <Typography variant="h6" style={{ marginLeft: '8px' }}>
+        {data.name}
+      </Typography>
       <IFrameModal url={url} title={title} isOpen={isOpen} onClose={handleClose} />
-      <Handle type="source" position={Position.Bottom} id="a" style={{ top: '50%', background: '#555' }} />
-    </>
+      <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
+    </Box>
   )
 }

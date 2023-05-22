@@ -1,22 +1,27 @@
 import { TopicRequestResponse, TopicsResponse } from '@services'
 
-export const getCourseTopics = async (): Promise<TopicRequestResponse> => {
-  try {
-    const response = await fetch(process.env.BACKEND + `/user/2/5/student/1/course/1/topic`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'text/json'
+export const getCourseTopics = async (userId: number, lmsUserId: number, studentId: number): Promise<TopicRequestResponse> => {
+
+  try{
+      const response = await fetch(process.env.BACKEND + `/user/${userId}/${lmsUserId}/student/${studentId}/course/2/topic`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      const data = await response.json()
+
+      return {
+        status: response.status,
+        message: response.statusText,
+        data: data
       }
-    })
 
-    const data = await response.json()
+  }
 
-    return {
-      status: response.status,
-      message: response.statusText,
-      data: data
-    }
-  } catch (error) {
+  catch (error) {
     const topicResponse: TopicsResponse = {
       topics: [
         {

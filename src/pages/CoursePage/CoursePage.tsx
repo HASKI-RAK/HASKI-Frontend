@@ -4,18 +4,15 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 
 // TODO: Replace this with the actual data from the backend
-const topics = [
-  {
-    id: 2,
-    name: 'Topic 2',
-    description: 'This is the first topic'
-  }
-]
 
 const CoursePage = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { courseId } = useParams()
+
+  const topics = t('pages.CoursePage.topics', {
+    returnObjects: true
+  }) as [{ id: string; name: string; description: string }]
 
   return (
     <Stack spacing={2}>

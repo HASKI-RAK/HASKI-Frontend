@@ -1,15 +1,160 @@
 import { nodeTypes, LearningPathLearningElementNode } from '@components'
-import { LearningPath } from '@core'
-import { Box } from '@mui/material'
+import { LearningElement, LearningPath, LearningPathLearningElement, LearningPathReturn } from '@core'
+import { Box, Theme, useTheme } from '@mui/material'
 import log from 'loglevel'
 import { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactFlow, { Node, Edge, MiniMap, Controls, Background } from 'reactflow'
 import useBoundStore from '@store'
 import { AuthContext } from '@services'
+import StudentLearningElement from 'src/common/core/StudentLearningElement/StudentLearningElement'
+import { useTranslation } from 'react-i18next'
+import 'reactflow/dist/style.css'
 
 const _useTopic = () => {
   console.log('useTopic')
+}
+
+const studentLearningElement: StudentLearningElement = {
+  id: 160,
+  learning_element_id: 4,
+  student_id: 2,
+  done: false,
+  done_at: 'null'
+}
+
+const learningElement: LearningElement[] = [
+  {
+    id: 4,
+    lms_id: 108,
+    name: 'Kurzübersicht',
+    activity_type: 'h5pactivity',
+    classification: 'KÜ',
+    university: 'HS-KE',
+    created_by: 'Dimitri Bigler',
+    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
+    last_updated: 'null',
+    student_learning_element: studentLearningElement
+  },
+  {
+    id: 5,
+    lms_id: 108,
+    name: 'Kurzübersicht',
+    activity_type: 'h5pactivity',
+    classification: 'ÜB', // EK
+    university: 'HS-KE',
+    created_by: 'Dimitri Bigler',
+    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
+    last_updated: 'null',
+    student_learning_element: studentLearningElement
+  },
+  {
+    id: 6,
+    lms_id: 108,
+    name: 'Kurzübersicht',
+    activity_type: 'h5pactivity',
+    classification: 'ÜB', // AN
+    university: 'HS-KE',
+    created_by: 'Dimitri Bigler',
+    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
+    last_updated: 'null',
+    student_learning_element: studentLearningElement
+  },
+  {
+    id: 7,
+    lms_id: 108,
+    name: 'Kurzübersicht',
+    activity_type: 'h5pactivity',
+    classification: 'ÜB', // AN
+    university: 'HS-KE',
+    created_by: 'Dimitri Bigler',
+    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
+    last_updated: 'null',
+    student_learning_element: studentLearningElement
+  },
+  {
+    id: 8,
+    lms_id: 108,
+    name: 'Kurzübersicht',
+    activity_type: 'h5pactivity',
+    classification: 'AN', // AN
+    university: 'HS-KE',
+    created_by: 'Dimitri Bigler',
+    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
+    last_updated: 'null',
+    student_learning_element: studentLearningElement
+  },
+  {
+    id: 8,
+    lms_id: 108,
+    name: 'Kurzübersicht',
+    activity_type: 'h5pactivity',
+    classification: 'AN', // AN
+    university: 'HS-KE',
+    created_by: 'Dimitri Bigler',
+    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
+    last_updated: 'null',
+    student_learning_element: studentLearningElement
+  }
+]
+
+const learningPathLearningElement: LearningPathLearningElement[] = [
+  {
+    position: 1,
+    id: 4,
+    learning_element_id: 246,
+    learning_path_id: 16,
+    recommended: true,
+    learning_element: learningElement[0]
+  },
+  {
+    position: 2,
+    id: 5,
+    learning_element_id: 246,
+    learning_path_id: 16,
+    recommended: true,
+    learning_element: learningElement[1]
+  },
+  {
+    position: 3,
+    id: 6,
+    learning_element_id: 246,
+    learning_path_id: 16,
+    recommended: true,
+    learning_element: learningElement[2]
+  },
+  {
+    position: 4,
+    id: 7,
+    learning_element_id: 246,
+    learning_path_id: 16,
+    recommended: true,
+    learning_element: learningElement[3]
+  },
+  {
+    position: 5,
+    id: 8,
+    learning_element_id: 246,
+    learning_path_id: 16,
+    recommended: true,
+    learning_element: learningElement[4]
+  },
+  {
+    position: 6,
+    id: 8,
+    learning_element_id: 246,
+    learning_path_id: 16,
+    recommended: true,
+    learning_element: learningElement[5]
+  }
+]
+
+const learningPath: LearningPath = {
+  based_on: 'aoc',
+  calculated_on: 'null',
+  course_id: 2,
+  id: 16,
+  path: learningPathLearningElement
 }
 
 type TopicProps = {
@@ -19,15 +164,17 @@ type TopicProps = {
 
 // Topic Page - TODO Component extract
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
-  const [initalNodes, setInitalNodes] = useState<Node[]>()
-  const [initalEdges, setInitalEdges] = useState<Edge[]>()
+  const [initialNodes, setInitialNodes] = useState<Node[]>()
+  const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const authcontext = useContext(AuthContext)
   const { courseId, topicId } = useParams()
+  const { t } = useTranslation()
+  const theme = useTheme()
 
   const fetchUser = useBoundStore((state) => state.fetchUser)
   const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
 
-  useEffect(() => {
+  /*useEffect(() => {
     // request to backend to get learning path for topic
     // alert('Topic: ' + topic)
     if (authcontext.isAuth)
@@ -35,14 +182,14 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         .then((user) => {
           fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, Number(courseId), Number(topicId)).then(
             (learning_path_data) => {
-              const nodes = mapLeaningPathToNodes(learning_path_data)
-              setInitalNodes(nodes)
+              const nodes = mapLearningPathToNodes(learning_path_data)
+              setInitialNodes(nodes)
               const edges: Edge[] = nodes.map((item, index) => ({
                 id: index.toString(),
                 source: item.id,
                 target: nodes[index + 1]?.id
               }))
-              setInitalEdges(edges)
+              setInitialEdges(edges)
             }
           )
         })
@@ -50,24 +197,112 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           // 🍿 snackbar error
           alert('Error: ' + error)
         })
-  }, [authcontext.isAuth])
+  }, [authcontext.isAuth])*/
+
+  useEffect(() => {
+    const nodes = mapLearningPathToNodes(learningPath, theme)
+    setInitialNodes(nodes)
+
+    // Get first character of node ids
+    const nodeIDs = nodes.map((item) => Array.from(item.id)[0])
+
+    // Erase duplicate of node ids
+    const uniqueNodeIDs = [...new Set(nodeIDs)]
+
+    const edges: Edge[] = uniqueNodeIDs.map((item, index) => ({
+      id: 'Edge' + item.toString(),
+      source: item,
+      target: uniqueNodeIDs[index + 1]
+    }))
+
+    //setInitialEdges(edges)
+    setInitialEdges(edges)
+  }, [theme])
 
   log.setLevel('error')
-  return initalNodes && initalEdges ? (
+
+  // TODO: HIer edges rendern
+  return initialNodes && initialEdges ? (
     <Box height={'100%'}>
-      <ReactFlow nodes={initalNodes} edges={initalEdges} nodeTypes={nodeTypes} fitView></ReactFlow>
+      <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
+        <Background gap={16} />
+        <MiniMap nodeBorderRadius={2} />
+        <Controls />
+      </ReactFlow>
     </Box>
   ) : (
-    <div>Loading...</div>
+    <div>{t('loading')}</div>
   )
 }
 
 export default Topic
 
-const mapLeaningPathToNodes = (learning_path: LearningPath) => {
-  // alert('map_TopicLearningElements_to_reactflow')
-  const sorted_learning_path = learning_path.path.sort((a, b) => a.position - b.position)
-  return sorted_learning_path.map((item, index) => {
+const mapLearningPathToNodes = (learningPath: LearningPath, theme: Theme): Node[] => {
+  // Sort learning path
+  const sortedLearningPath = learningPath.path.sort((a, b) => a.position - b.position)
+
+  // Every exercise learning element
+  const learningPathExercises = sortedLearningPath.filter((item) => item.learning_element.classification === 'ÜB')
+
+  // Every learning element exept exercises
+  const learningPathExcludingExercises = sortedLearningPath.filter(
+    (item) => item.learning_element.classification !== 'ÜB'
+  )
+
+  const groupHeight = 175
+  const nodeOffsetX = 50
+
+  const learningElementStyle = {
+    background: theme.palette.primary.main,
+    padding: 10,
+    border: '1px solid ' + theme.palette.grey[500],
+    borderRadius: 8,
+    cursor: 'pointer'
+  }
+  // Parent node for exercise learning elements
+  const exerciseLearningElementParentNode = {
+    id: learningPathExercises[0].position.toString(),
+    data: { label: 'Übungen' },
+    type: 'GROUP',
+    position: {
+      x: 0,
+      y: 250 * (learningPathExercises[0].position - 1)
+    },
+    style: {
+      border: '1px solid ' + theme.palette.grey[500],
+      borderRadius: 8,
+      width: 300 * learningPathExercises.length + nodeOffsetX,
+      height: groupHeight
+    }
+  }
+
+  // Exercise nodes
+  const exerciseLearningElementChildNodes = learningPathExercises.map((node, index) => {
+    const node_data: LearningPathLearningElementNode = {
+      lms_id: node.learning_element.lms_id,
+      name: node.learning_element.name,
+      activity_type: node.learning_element.activity_type,
+      classification: node.learning_element.classification,
+      is_recommended: node.recommended
+    }
+    return {
+      id: exerciseLearningElementParentNode.id + ' ' + index.toString(),
+      type: node.learning_element.classification,
+      data: node_data,
+      position: {
+        x: nodeOffsetX + 300 * index,
+        y: 50
+      },
+      parentNode: exerciseLearningElementParentNode.id,
+      style: learningElementStyle
+    }
+  })
+
+  // Combine parent and exercise nodes
+  const learningElementsExercisesNodes = [exerciseLearningElementParentNode, ...exerciseLearningElementChildNodes]
+
+  // Rest of learning elements
+  const learningElementNodesExcludingExercises = learningPathExcludingExercises.map((item, index) => {
     const node_data: LearningPathLearningElementNode = {
       lms_id: item.learning_element.lms_id,
       name: item.learning_element.name,
@@ -75,14 +310,35 @@ const mapLeaningPathToNodes = (learning_path: LearningPath) => {
       classification: item.learning_element.classification,
       is_recommended: item.recommended
     }
+
     return {
       id: item.position.toString(),
       type: item.learning_element.classification,
       data: node_data,
       position: {
-        x: 0,
-        y: index * 200
-      }
+        x: nodeOffsetX + (300 * (learningPathExercises.length - 1)) / 2,
+        y:
+          item.position < parseInt(exerciseLearningElementParentNode.id)
+            ? 250 * (item.position - 1)
+            : 250 * (item.position - exerciseLearningElementChildNodes.length) + groupHeight - 70
+      },
+      style: learningElementStyle
     }
   })
+
+  // Insert exercise nodes into learning elements
+  const learningElementNodesBeforeExercises = learningElementNodesExcludingExercises.filter(
+    (item) => parseInt(item.id) < parseInt(exerciseLearningElementParentNode.id)
+  )
+  const learningElementNodesAfterExercises = learningElementNodesExcludingExercises.filter(
+    (item) => parseInt(item.id) > parseInt(exerciseLearningElementParentNode.id)
+  )
+
+  const learningElementNodes = [
+    ...learningElementNodesBeforeExercises,
+    ...learningElementsExercisesNodes,
+    ...learningElementNodesAfterExercises
+  ]
+
+  return learningElementNodes
 }
