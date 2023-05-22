@@ -12,7 +12,8 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Topic, LearningPath } from '@services'
+import { Topic } from '@services'
+import { LearningPath } from '@core'
 import React from 'react'
 import { useLearningPath as _useLearningPath } from './LocalNav.hooks'
 

@@ -23,7 +23,8 @@ import HelpIcon from '@mui/icons-material/Help'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { useTranslation } from 'react-i18next'
 import { Logout } from '@mui/icons-material'
-import { AuthContext, Topic, LearningPath } from '@services'
+import { AuthContext, Topic } from '@services'
+import { LearningPath } from '@core'
 import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
 import {DropdownLanguage} from "@components";
 // TODO: Move it into @common/hooks since it is reused in LocalNav
