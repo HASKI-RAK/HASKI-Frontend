@@ -1,11 +1,12 @@
 import { Box, Paper, Typography } from '@mui/material'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import VideocamIcon from '@mui/icons-material/Videocam'
+import { memberExpression } from '@babel/types'
 
-export const VideoNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
+const VideoNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
@@ -34,3 +35,5 @@ export const VideoNode = ({ data }: NodeProps<LearningPathLearningElementNode>) 
     </Box>
   )
 }
+
+export default memo(VideoNode)
