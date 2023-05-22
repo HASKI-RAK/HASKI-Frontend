@@ -23,7 +23,8 @@ import HelpIcon from '@mui/icons-material/Help'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { useTranslation } from 'react-i18next'
 import { Logout } from '@mui/icons-material'
-import { AuthContext, Topic, LearningPath } from '@services'
+import { AuthContext, Topic } from '@services'
+import { LearningPath } from '@core'
 import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
 import {DropdownLanguage} from "@components";
 // TODO: Move it into @common/hooks since it is reused in LocalNav
@@ -56,6 +57,8 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
 
   //Application logic hooks
   const { loading, topics, learningPaths } = useLearningPath()
+    const reversedTopics: Topic[] = [...topics];
+  reversedTopics.sort((a, b) => reversedTopics.indexOf(b) - reversedTopics.indexOf(a))
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -168,7 +171,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                     ) : (
                       //For every Topic the LearningPath is displayed under it.
                       <>
-                        {topics.map((topic, index) => (
+                        {reversedTopics.map((topic, index) => (
                           <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>
                             <Grid item xs={12} key={t(topic.name)}>
                               <Typography variant="h6">{t(topic.name)}</Typography>
@@ -188,7 +191,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                                     color="inherit"
                                     sx={{ m: 1, cursor: 'pointer' }}
                                     onClick={() => {
-                                      navigate(`/topics/${topic.name}/${element.learning_element.name}`)
+                                      navigate(`course/2/topic/${topic.id}`)
                                       handleCloseTopicsMenu()
                                     }}>
                                     {element.learning_element.name}

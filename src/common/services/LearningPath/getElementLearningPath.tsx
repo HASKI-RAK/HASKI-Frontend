@@ -7,8 +7,9 @@ export const getElementLearningPath = async (topicIndex: number, userId: number,
       process.env.BACKEND + `/user/${userId}/${lmsUserId}/student/${studentId}/course/2/topic/${topicIndex}/learningPath`,
       {
         method: 'GET',
+        credentials: 'include',
         headers: {
-          'Content-Type': 'text/json'
+          'Content-Type': 'application/json'
         }
       }
     )

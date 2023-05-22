@@ -5,8 +5,9 @@ export const getCourseTopics = async (userId: number, lmsUserId: number, student
   try{
       const response = await fetch(process.env.BACKEND + `/user/${userId}/${lmsUserId}/student/${studentId}/course/2/topic`, {
         method: 'GET',
+        credentials: 'include',
         headers: {
-          'Content-Type': 'text/json'
+          'Content-Type': 'application/json'
         }
       })
 

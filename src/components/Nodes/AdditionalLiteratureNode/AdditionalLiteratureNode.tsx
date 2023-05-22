@@ -6,12 +6,13 @@ import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import ArticleIcon from '@mui/icons-material/Article'
 
 export const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
-  const { t } = useTranslation()
-  const [isOpen, setIsOpen] = useState(false)
-  const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
-  const [title] = useState(data.name)
-  const handleOpen = () => setIsOpen(true)
-  const handleClose = () => setIsOpen(false)
+    console.log(data)
+    const { t } = useTranslation()
+    const [isOpen, setIsOpen] = useState(false)
+    const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
+    const [title] = useState(data.name)
+    const handleOpen = () => setIsOpen(true)
+    const handleClose = () => setIsOpen(false)
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={handleOpen}>

@@ -6,12 +6,12 @@ import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'
 
 export const SelfAssessmentNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
-  const { t } = useTranslation()
-  const [isOpen, setIsOpen] = useState(false)
-  const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
-  const [title] = useState(data.name)
-  const handleOpen = () => setIsOpen(true)
-  const handleClose = () => setIsOpen(false)
+      const { t } = useTranslation()
+    const [isOpen, setIsOpen] = useState(false)
+    const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
+    const [title] = useState(data.name)
+    const handleOpen = () => setIsOpen(true)
+    const handleClose = () => setIsOpen(false)
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={handleOpen}>
