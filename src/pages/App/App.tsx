@@ -10,12 +10,12 @@ import {
   ProjectInformation,
   Imprint,
   Topic,
-  CoursePage
+  CoursePage,
+  PageNotFound
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { logBuffer } from '@shared'
 import { HaskiTheme } from '@utils'
-
 logBuffer()
 
 /**
@@ -45,9 +45,9 @@ const App = () => (
               <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
               <Route path="/imprint" element={<Imprint />} />
               <Route path="/🥚" element={<div>Ei</div>} />
-              <Route path="*" element={<div>404</div>} />
+              <Route path="*" element={<PageNotFound />} />
             </Route>
-            <Route path="*" element={<div>404</div>} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Router>
       </AuthProvider>

@@ -12,6 +12,7 @@ import ProjectInformation from './ProjectInformation/ProjectInformation'
 import Imprint from './Imprint/Imprint'
 import Topic from './Topic/Topic'
 import CoursePage from './CoursePage/CoursePage'
+import PageNotFound from './PageNotFound/PageNotFound'
 export {
   MainFrame,
   App,
@@ -23,5 +24,6 @@ export {
   ProjectInformation,
   Imprint,
   Topic,
-  CoursePage
+  CoursePage,
+  PageNotFound
 }

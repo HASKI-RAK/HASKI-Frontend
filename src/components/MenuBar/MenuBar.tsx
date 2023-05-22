@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   DefaultAppBar as AppBar,
@@ -21,12 +21,13 @@ import {
 import SettingsIcon from '@mui/icons-material/Settings'
 import HelpIcon from '@mui/icons-material/Help'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+import PersonIcon from '@mui/icons-material/Person'
 import { useTranslation } from 'react-i18next'
-import { Logout } from '@mui/icons-material'
-import { AuthContext, Topic } from '@services'
+import { Login, Logout } from '@mui/icons-material'
+import { AuthContext, SnackbarContext, Topic } from '@services'
 import { LearningPath } from '@core'
 import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
-import {DropdownLanguage} from "@components";
+import { DropdownLanguage } from '@components'
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
 /**
@@ -52,12 +53,13 @@ export type MenuBarProps = {
 const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
-  const authcontext = useContext(AuthContext)
+  const { addSnackbar } = useContext(SnackbarContext)
+  const { isAuth, logout } = useContext(AuthContext)
   const { t } = useTranslation()
 
   //Application logic hooks
   const { loading, topics, learningPaths } = useLearningPath()
-    const reversedTopics: Topic[] = [...topics];
+  const reversedTopics: Topic[] = [...topics]
   reversedTopics.sort((a, b) => reversedTopics.indexOf(b) - reversedTopics.indexOf(a))
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -78,7 +80,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
 
   const handleUserLogout = () => {
     handleCloseUserMenu()
-    authcontext.logout()
+    logout()
     navigate('/login')
   }
 
@@ -214,9 +216,9 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
 
           {/** Language dropdown */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-              <Tooltip title={t('language')}>
-                  <DropdownLanguage/>
-              </Tooltip>
+            <Tooltip title={t('language')}>
+              <DropdownLanguage />
+            </Tooltip>
           </Box>
 
           {/** Help button */}
@@ -231,7 +233,14 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
           {/** Settings button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openGlobalSettings')}>
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  addSnackbar({
+                    message: t('components.MenubBar.GlobalSettings.Error'),
+                    severity: 'warning',
+                    autoHideDuration: 5000
+                  })
+                }}>
                 <SettingsIcon data-testid="SettingsIcon" />
               </IconButton>
             </Tooltip>
@@ -241,7 +250,9 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openSettings')}>
               <IconButton onClick={handleOpenUserMenu} data-testid="useravatar">
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp">
+                  <PersonIcon />
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -261,12 +272,15 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
               onClose={handleCloseUserMenu}>
               <MenuItem
                 data-testid="usermenuitem"
-                key={t('components.MenuBar.Profile.Logout')}
-                onClick={handleUserLogout}>
-                <ListItemIcon>
-                  <Logout fontSize="small" />
-                </ListItemIcon>
-                <Typography textAlign="center">{t('components.MenuBar.Profile.Logout')}</Typography>
+                key="usermenuitem"
+                onClick={() => {
+                  isAuth ? handleUserLogout() : navigate('/login')
+                  handleCloseUserMenu()
+                }}>
+                <ListItemIcon>{isAuth ? <Logout fontSize="small" /> : <Login fontSize="small" />}</ListItemIcon>
+                <Typography textAlign="center">
+                  {isAuth ? t('components.MenuBar.Profile.Logout') : t('components.MenuBar.Profile.Login')}
+                </Typography>
               </MenuItem>
             </Menu>
           </Box>
