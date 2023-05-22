@@ -190,7 +190,7 @@ const hardcodedTopics: Topic[] = [
 
 export const getSortedLearningPath = async(data: Topic[], userId: number, lmsUserId: number, studentId: number, fetchLearningPath: LearningPathReturn): Promise<LearningPath[]> => {
 
-    const promises = data.map((topic) => fetchLearningPath(topic.id, userId, lmsUserId, studentId)) //reihenfolge der parameter beachten
+    const promises = data.map((topic) => fetchLearningPath(userId, lmsUserId, studentId, 2, topic.id)) //reihenfolge der parameter beachten
     const learningPaths = await Promise.all(promises)
 
     return learningPaths.map((learningPath) => {

@@ -81,7 +81,7 @@ const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
                 sx={{
-                  backgroundColor: (theme) => theme.palette.secondary.main,
+                  backgroundColor: 'white',
                   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
                     transform: 'rotate(-90deg)'
                   }
