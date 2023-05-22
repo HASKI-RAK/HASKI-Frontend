@@ -204,12 +204,12 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
     const [topics, setTopics] = useState<Topic[]>([])
     const [learningPaths, setLearningPaths] = useState<LearningPath[]>([])
     const fetchUser = useBoundStore((state) => state.fetchUser)
-    const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
+    //const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
 
     const effect = async() => {
         setLoading(true)
         try {
-            const user = await fetchUser();
+            //const user = await fetchUser();
                 setTopics(hardcodedTopics)
                 //const dataLearningPath = await getSortedLearningPath(hardcodedTopics, user.settings.user_id, user.lms_user_id, user.id, fetchLearningPath)
 
