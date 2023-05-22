@@ -1,4 +1,4 @@
-import { Paper, Typography } from '@mui/material'
+import { Box, Paper, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
@@ -14,10 +14,9 @@ export const ExerciseNode = ({ data }: NodeProps<LearningPathLearningElementNode
   const handleClose = () => setIsOpen(false)
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Handle type="target" position={Position.Top} style={{ background: '#555' }} />
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={handleOpen}>
+      <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
-        onClick={handleOpen}
         sx={{
           width: '65px',
           height: '65px',
@@ -31,7 +30,7 @@ export const ExerciseNode = ({ data }: NodeProps<LearningPathLearningElementNode
         {data.name}
       </Typography>
       <IFrameModal url={url} title={title} isOpen={isOpen} onClose={handleClose} />
-      <Handle type="source" position={Position.Bottom} id="a" style={{ top: '50%', background: '#555' }} />
-    </div>
+      <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
+    </Box>
   )
 }

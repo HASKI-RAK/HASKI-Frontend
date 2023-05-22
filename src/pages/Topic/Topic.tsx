@@ -1,6 +1,6 @@
 import { nodeTypes, LearningPathLearningElementNode } from '@components'
 import { LearningElement, LearningPath, LearningPathLearningElement, LearningPathReturn } from '@core'
-import { Box } from '@mui/material'
+import { Box, Theme, useTheme } from '@mui/material'
 import log from 'loglevel'
 import { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
@@ -169,6 +169,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const authcontext = useContext(AuthContext)
   const { courseId, topicId } = useParams()
   const { t } = useTranslation()
+  const theme = useTheme()
 
   const fetchUser = useBoundStore((state) => state.fetchUser)
   const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
@@ -199,7 +200,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   }, [authcontext.isAuth])*/
 
   useEffect(() => {
-    const nodes = mapLearningPathToNodes(learningPath)
+    const nodes = mapLearningPathToNodes(learningPath, theme)
     setInitialNodes(nodes)
 
     // Get first character of node ids
@@ -223,7 +224,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // TODO: HIer edges rendern
   return initialNodes && initialEdges ? (
     <Box height={'100%'}>
-      <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView />
+      <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
+        <Background gap={16} />
+        <MiniMap nodeBorderRadius={2} />
+        <Controls />
+      </ReactFlow>
     </Box>
   ) : (
     <div>{t('loading')}</div>
@@ -232,7 +237,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
 export default Topic
 
-const mapLearningPathToNodes = (learningPath: LearningPath) => {
+const mapLearningPathToNodes = (learningPath: LearningPath, theme: Theme): Node[] => {
   // Sort learning path
   const sortedLearningPath = learningPath.path.sort((a, b) => a.position - b.position)
 
@@ -244,13 +249,30 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
     (item) => item.learning_element.classification !== 'ÜB'
   )
 
+  const groupHeight = 175
+  const nodeOffsetX = 50
+
+  const learningElementStyle = {
+    background: theme.palette.primary.main,
+    padding: 10,
+    border: '1px solid ' + theme.palette.grey[500],
+    borderRadius: 8,
+    cursor: 'pointer'
+  }
   // Parent node for exercise learning elements
   const exerciseLearningElementParentNode = {
     id: learningPathExercises[0].position.toString(),
-    data: {},
+    data: { label: 'Übungen' },
+    type: 'GROUP',
     position: {
       x: 0,
-      y: 200 * (learningPathExercises[0].position - 1)
+      y: 250 * (learningPathExercises[0].position - 1)
+    },
+    style: {
+      border: '1px solid ' + theme.palette.grey[500],
+      borderRadius: 8,
+      width: 300 * learningPathExercises.length + nodeOffsetX,
+      height: groupHeight
     }
   }
 
@@ -264,14 +286,15 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
       is_recommended: node.recommended
     }
     return {
-      id: exerciseLearningElementParentNode.id + " " + index.toString(),
+      id: exerciseLearningElementParentNode.id + ' ' + index.toString(),
       type: node.learning_element.classification,
       data: node_data,
       position: {
-        x: 300 * index,
-        y: index
+        x: nodeOffsetX + 300 * index,
+        y: 50
       },
-      parentNode: exerciseLearningElementParentNode.id
+      parentNode: exerciseLearningElementParentNode.id,
+      style: learningElementStyle
     }
   })
 
@@ -293,15 +316,13 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
       type: item.learning_element.classification,
       data: node_data,
       position: {
-        x: (300 * (learningPathExercises.length - 1)) / 2,
-        y: item.position < parseInt(exerciseLearningElementParentNode.id) ? 400 * (item.position - 1) : 400 * (item.position - exerciseLearningElementChildNodes.length - 1)
+        x: nodeOffsetX + (300 * (learningPathExercises.length - 1)) / 2,
+        y:
+          item.position < parseInt(exerciseLearningElementParentNode.id)
+            ? 250 * (item.position - 1)
+            : 250 * (item.position - exerciseLearningElementChildNodes.length) + groupHeight - 70
       },
-      style: { background: 'lightblue', padding: 10 },
-      content: (
-        <>
-          <span>{item.learning_element.name}</span>
-        </>
-      )
+      style: learningElementStyle
     }
   })
 

@@ -9,6 +9,7 @@ import { SummaryNode } from '../SummaryNode/SummaryNode'
 import { VideoNode } from '../VideoNode/VideoNode'
 import { BasicNode } from '../BasicNode/BasicNode'
 import { NodeTypes } from 'reactflow'
+import DefaultGroup from '../DefaultGroup/DefaultGroup'
 
 export const nodeTypes: NodeTypes = {
   RQ: FeedbackNode,
@@ -19,5 +20,6 @@ export const nodeTypes: NodeTypes = {
   ÜB: ExerciseNode,
   ZF: SummaryNode,
   ZL: AdditionalLiteratureNode,
-  SE: SelfAssessmentNode
+  SE: SelfAssessmentNode,
+  GROUP: DefaultGroup
 }
