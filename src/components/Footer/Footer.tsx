@@ -45,7 +45,7 @@ const Footer = () => {
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
               <Typography color="black" variant="h5">
-                {t('projecthaski')}
+                {t('projectHASKI')}
               </Typography>
             </Grid>
             <Grid item xs={12} display="flex" width="100%" justifyContent="center">

@@ -9,12 +9,19 @@ import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResultsM
 import { Text } from './Text/Text'
 
 import ContactForm from './ContactForm/ContactForm'
+import { ImprintContent } from './Imprint/ImprintContent'
 import LoginForm from './LoginForm/LoginForm'
 import MenuBar from './MenuBar/MenuBar'
+
 import Footer from './Footer/Footer'
 import LocalNav from './LocalNav/LocalNav'
 import BreadcrumbsContainer from './BreadcrumbsContainer/BreadcrumbsContainer'
-
+import ProjectDescriptionContent from './ProjectDescriptionContent/ProjectDescriptionContent'
+import ProjectDescriptionCard from './ProjectDescriptionCard/ProjectDescriptionCard'
+import ProjectDescriptionStepper from './ProjectDescriptionStepper/ProjectDescriptionStepper'
+import SnackbarMessage, { SnackbarMessageProps, SeverityType } from './SnackbarMessage/SnackbarMessage'
+import SnackbarContainer from './SnackbarContainer/SnackbarContainer'
+import SnackbarTransition from './SnackbarTransition/SnackbarTransition'
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
@@ -27,6 +34,8 @@ export {
   DropdownLanguage,
   Text,
   LoginForm,
+  SnackbarMessage,
+  SnackbarContainer,
   TableILS,
   GraphILS,
   ResultDescriptionILS,
@@ -34,5 +43,11 @@ export {
   GraphListK,
   ResultDescriptionListK,
   QuestionnaireResultsModal,
-  ContactForm
+  ContactForm,
+  ProjectDescriptionContent,
+  ProjectDescriptionCard,
+  ProjectDescriptionStepper,
+  SnackbarTransition,
+  ImprintContent
 }
+export type { SnackbarMessageProps, SeverityType }

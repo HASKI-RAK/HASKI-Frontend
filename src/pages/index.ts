@@ -9,4 +9,18 @@ import ThemePresentation from './ThemePresentation/ThemePresentation'
 import Contact from './Contact/Contact'
 import Dashboard from './Dashboard/Dashboard'
 import MainFrame from './MainFrame/MainFrame'
-export { MainFrame, App, ThemePresentation, Home, Login, Dashboard, Contact }
+import ProjectDescription from './ProjectDescription/ProjectDescription'
+import ProjectInformation from './ProjectInformation/ProjectInformation'
+import Imprint from './Imprint/Imprint'
+export {
+  MainFrame,
+  App,
+  ThemePresentation,
+  Home,
+  Login,
+  Dashboard,
+  Contact,
+  ProjectDescription,
+  ProjectInformation,
+  Imprint
+}

@@ -171,13 +171,408 @@
   "contact": "Kontakt",
   "topic": "Thema",
   "pages.glossary": "Glossar",
+  "pages.projectdescription": "Projektbeschreibung",
+  "projectHASKI": "Projekt HASKI",
+  "components.ProjectDescriptionContent.introductionHeader": "Was ist HASKI?",
+  "components.ProjectDescriptionContent.introductionBody": "HASKI steht für „Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt“ und wird gefördert durch das Bundesministerium für Bildung und Forschung mit einer Projektlaufzeit bis Dezember 2025. HASKI ist ein Verbundprojekt von drei bayerischen Hochschulen: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
+  "components.ProjectDescriptionContent.advantagesTeachingHeader": "Vorteile für die Hochschullehre",
+  "components.ProjectDescriptionContent.advantagesTeachingBody": "Das HASKI-System möchte einen wichtigen Beitrag dazu leisten, interaktives, individuelles und selbstgesteuertes Lernen in der Hochschullehre besser zu etablieren. Digitale Medien und Plattformen können weit mehr gewährleisten als die derzeitige Praxis der Hochschullehre, in der auch im Zuge der Pandemie der Frontalunterricht dominiert.",
+  "components.ProjectDescriptionContent.advantagesTeachingHeader2": "Einsatz in der Hochschullehre",
+  "components.ProjectDescriptionContent.advantagesTeachingBody2": "Die Idee von HASKI ist es, das Potenzial von KI in den Veranstaltungen der Hochschule Kempten zu nutzen. Kombiniert werden dazu die Präsenzveranstaltungen, das Learning Management System (z. B. Moodle) und das HASKI-System. Damit bieten wir eine Software-Komponente, die mithilfe von KI-Algorithmen Dich bei dem Erreichen Deiner Lernziele unterstützt.",
+  "components.ProjectDescriptionContent.advantagesLearningHeader": "Vorteile für Dich im Studium",
+  "components.ProjectDescriptionContent.advantagesLearningBody": "Die Unterstützung wird ermöglicht, indem das HASKI-System Deine Daten aus Moodle ausliest und ein KI-Algorithmus auf Basis dieser Daten Dir einen personalisierten Lernpfad durch die Lernmaterialien vorschlägt. Natürlich bleibt die Entscheidung bei Dir, welches Material Du als Nächstes bearbeiten willst. Auch diese Präferenzen merkt sich HASKI und passt zukünftige Vorschläge an die neuen Begebenheiten an.",
+  "components.ProjectDescriptionContent.advantagesLearningHeader2": "Mit welchen Daten arbeitet HASKI?",
+  "components.ProjectDescriptionContent.advantagesLearningBody2": "Die Datenbasis sind Fragebögen, individueller Wissensstand, ausgewertete Aufgaben und Verhaltensdaten aus Moodle. Ein Rückschluss der Lehrenden auf Dich wird durch Anonymisierung der Daten verhindert.",
+  "components.ProjectDescriptionContent.approachesHeader": "Was ist unser Ansatz?",
+  "components.ProjectDescriptionContent.approachesBody": [
+    "Bundesweiter Austausch. Publikation von wissenschaftlichen Beiträgen. Vorträge auf deutschen Konferenzen.",
+    "Applikation von modernster Technologie. Kombination von Learning Analytics und Künstlicher Intelligenz.",
+    "Empirische Untersuchungen. Online-Fragebögen, Evaluationsstudien, Datenanalysen."
+  ],
+  "components.ProjectDescriptionContent.goalsHeader": "Ziele des HASKI Projekts",
+  "components.ProjectDescriptionContent.goalsBody": [
+    "Verbesserung und Erweiterung von bisherigen Kursen im Bereich „Software Engineering“, durch Produktion von qualitativ hochwertigen, pädagogisch sinnvollen und abwechslungsreichen Lerninhalten",
+    "Umfassende digitale Repräsentation von einzelnen Studierenden und deren Charakteristiken",
+    "Entwicklung eines adaptiven und KI-basierten Lernsystems zur Generierung von personalisierten Lernpfadempfehlungen",
+    "KI-basierte Auswertung von Aufgaben und hilfreiches Feedback",
+    "Visualisierung und Aufbereitung von Learning Analytics zur Reflektion des Lernverhaltens",
+    "Didaktisch relevante Berichte für Lehrende zur Weiterentwicklung von Kursen"
+  ],
+  "components.ProjectDescriptionContent.imageSources": "Bildquellen: ",
+  "components.ProjectDescriptionContent.imageSource1": "Bild von katemangostar auf Freepik",
+  "components.ProjectDescriptionContent.imageSource2": "Bild von natanaelginting auf Freepik",
+  "universityKempten": "Hochschule Kempten",
+  "Activities": "Aktivitäten",
+  "and": "und",
+  "components.ImprintContent.AsOf": "Stand",
+  "components.ImprintContent.AuthorisedRepresentative": "Vertretungsberechtigte Person",
+  "components.ImprintContent.AuthorisedRepresentative.Title": "Herr",
+  "components.ImprintContent.Disclaimer": "Haftungsausschluss",
+  "components.ImprintContent.Disclaimer.CopyrightAndTrademarkLaw": "Urheber- und Leistungsschutzrechte",
+  "components.ImprintContent.Disclaimer.CopyrightAndTrademarkLaw.Text": "Die Hochschule Kempten ist bestrebt, in allen Publikationen die Urheberrechte der verwendeten Grafiken, Tondokumente, Videosequenzen und Texte zu beachten, von ihr selbst erstellte Grafiken, Tondokumente, Videosequenzen und Texte zu nutzen oder auf lizenzfreie Grafiken, Tondokumente, Videosequenzen und Texte zurückzugreifen. Alle innerhalb des Internetangebotes genannten und ggf. durch Dritte geschützten Marken- und Warenzeichen unterliegen uneingeschränkt den Bestimmungen des jeweils gültigen Kennzeichenrechts und den Besitzrechten der jeweiligen eingetragenen Eigentümer. Allein aufgrund der bloßen Nennung ist nicht der Schluss zu ziehen, dass Markenzeichen nicht durch Rechte Dritter geschützt sind! Das Copyright für veröffentlichte, von der Hochschule erstellte Objekte bleibt allein bei der HS Kempten. Eine Vervielfältigung oder Verwendung solcher Grafiken, Tondokumente, Videosequenzen und Texte in anderen elektronischen oder gedruckten Publikationen ist ohne ausdrückliche Zustimmung der Fachhochschule nicht gestattet.",
+  "components.ImprintContent.Disclaimer.DataProtection": "Datenschutz",
+  "components.ImprintContent.Disclaimer.DataProtection.Text": "Sofern innerhalb des Internetangebotes die Möglichkeit zur Eingabe persönlicher oder geschäftlicher Daten (Emailadressen, Namen, Anschriften) besteht, so erfolgt die Preisgabe dieser Daten seitens des Nutzers auf ausdrücklich freiwilliger Basis. Die Inanspruchnahme aller angebotenen Dienste ist - soweit technisch möglich und zumutbar - auch ohne Angabe solcher Daten bzw. unter Angabe anonymisierter Daten oder eines Pseudonyms gestattet. Die Nutzung der im Rahmen des Impressums oder vergleichbarer Angaben veröffentlichten Kontaktdaten wie Postanschriften, Telefon- und Faxnummern sowie Emailadressen durch Dritte zur Übersendung von nicht ausdrücklich angeforderten Informationen ist nicht gestattet. Rechtliche Schritte gegen die Versender von sogenannten Spam-Mails bei Verstößen gegen dieses Verbot sind ausdrücklich vorbehalten.",
+  "components.ImprintContent.Disclaimer.LegalValidityOfDisclaimer": "Rechtswirksamkeit dieses Haftungsausschlusses",
+  "components.ImprintContent.Disclaimer.LegalValidityOfDisclaimer.Text": "Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten, von dem aus auf diese Seite verwiesen wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder nicht vollständig entsprechen sollten, bleiben die übrigen Teile des Dokumentes in ihrem Inhalt und ihrer Gültigkeit davon unberührt.",
+  "components.ImprintContent.Disclaimer.OnlineContent": "Inhalt des Onlineangebotes",
+  "components.ImprintContent.Disclaimer.OnlineContent.Text": "Die Hochschule Kempten übernimmt keinerlei Gewähr für die Aktualität, Korrektheit, Vollständigkeit oder Qualität der bereitgestellten Informationen. Haftungsansprüche gegen die Hochschule, welche sich auf Schäden materieller oder ideeller Art beziehen, die durch die Nutzung oder Nichtnutzung der dargebotenen Informationen bzw. durch die Nutzung fehlerhafter und unvollständiger Informationen verursacht wurden, sind grundsätzlich ausgeschlossen, sofern seitens der Hochschule kein nachweislich vorsätzliches oder grob fahrlässiges Verschulden vorliegt. Alle Angebote sind freibleibend und unverbindlich. Die Hochschule Kempten behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen.",
+  "components.ImprintContent.Disclaimer.ReferencesAndLinks": "Verweise und Links",
+  "components.ImprintContent.Disclaimer.ReferencesAndLinks.Text": "Bei direkten oder indirekten Verweisen auf fremde Webseiten (\"Hyperlinks\"), die außerhalb des Verantwortungsbereiches der Hochschule liegen, würde eine Haftungsverpflichtung ausschließlich in dem Fall in Kraft treten, in dem die Hochschule von den Inhalten Kenntnis hat und es ihm technisch möglich und zumutbar wäre, die Nutzung im Falle rechtswidriger Inhalte zu verhindern. Die Hochschule Kempten erklärt hiermit ausdrücklich, dass zum Zeitpunkt der Linksetzung keine illegalen Inhalte auf den zu verlinkenden Seiten erkennbar waren. Auf die aktuelle und zukünftige Gestaltung, die Inhalte oder die Urheberschaft der gelinkten/verknüpften Seiten hat die Hochschule keinerlei Einfluss. Deshalb distanziert sie sich hiermit ausdrücklich von allen Inhalten aller gelinkten /verknüpften Seiten, die nach der Linksetzung verändert wurden. Diese Feststellung gilt für alle innerhalb des eigenen Internetangebotes gesetzten Links und Verweise . Für illegale, fehlerhafte oder unvollständige Inhalte und insbesondere für Schäden, die aus der Nutzung oder Nichtnutzung solcherart dargebotener Informationen entstehen, haftet allein der Anbieter der Seite, auf welche verwiesen wurde, nicht derjenige, der über Links auf die jeweilige Veröffentlichung lediglich verweist.",
+  "components.ImprintContent.Subtitle": "Lehr-/Lernplattform HASKI vom Labor Softwareentwicklung Hochschule Kempten",
+  "components.ImprintContent.Title": "Impressum",
+  "components.LocalNav.Topics": "Themenbereiche",
+  "components.LocalNav.Topics.NoLearningElements": "Keine Lernelemente gefunden",
+  "components.login.login": "Anmelden",
+  "components.login.password": "Passwort",
+  "components.login.passwordError": "Bitte geben Sie ein gültiges Passwort ein",
+  "components.login.subtitle": "Bitte geben Sie Ihre Zugangsdaten ein",
+  "components.login.title": "HASKI Anmeldung",
+  "components.login.username": "Benutzername",
+  "components.login.usernameError": "Bitte geben Sie einen gültigen Benutzernamen ein",
+  "components.MenuBar.Profile.Logout": "Ausloggen",
+  "components.MenuBar.TopicButton": "Themenbereiche",
+  "delete": "Löschen",
+  "DSGVO": "DSGVO",
+  "error": "Fehler",
+  "firstPage": "Erste Seite",
+  "info": "Info",
+  "lastPage": "Letzte Seite",
+  "nextText": "Nächste",
+  "Notifications": "Benachrichtigungen",
+  "offlineWarning": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
+  "onlineWarning": "Sie sind wieder online.",
+  "pages.glossary.collapseAll": "Alle schließen",
+  "pages.glossary.elements": [
+    {
+      "term": "Adaptierbarkeit",
+      "definition": "Die Adaptierbarkeit eines Systems bedeutet, dass dieses durch externe Aktionen hinsichtlich seiner Programmeinstellungen verändert werden kann. Das HASKI-System ist für Lehrpersonen und für die Lernenden adaptierbar. Während Lehrpersonen z.B. in die vorgeschlagenen Lernpfade eingreifen können, können die Lernenden selbstständig bestimmte Grundeinstellungen modifizieren. Letzteres kann z.B. das Verändern von Farben oder die Konfigurierung einer eigenen Sequenz von Lernelementen sein (vgl. Zens 2005; Petko & Reusser 2005, S.188; Bartel, Dörringer & Klopp 2022a).",
+      "sources": "Bartel, Dörringer & Klopp, 2022a; Petko & Reusser, 2005, S.188; Zens, 2005",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Adaptivität",
+      "definition": "Adaptivität ist in einem System vorhanden, wenn es sich selbstständig an den Input (z.B. Testergebnisse, Bearbeitungsgeschwindigkeit, Lernwege usw.) anpasst. „Adaptivität ermöglicht in kurzen Abständen eine kontinuierliche Anpassung des Systems“ (Petko & Reusser 2005, S.188). In diesem Kontext meint adaptives Lernen „Anpassung des Lernangebots an die individuellen Unterschiede der Lernenden, damit alle gleichermaßen gefördert werden können“ (Stangl 2022, S.1) (vgl. Bartel, Dörringer & Klopp 2022a).",
+      "sources": "Bartel, Dörringer & Klopp 2022a; Petko & Reusser 2005, S.188; Stangl 2022, S.1",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Adaptive Inhaltspräsentation",
+      "definition": "Die Anpassung des Inhalts oder der Darstellung einer Seite auf Basis der Charakteristiken einer einzelnen lernenden Person wird als adaptive Inhaltspräsentation bezeichnet (Brusilovsky, 1996). In Bezug auf Inhalt können Lernende mit hohem Wissensstand mehr Detailinformationen erhalten, während die Seite für Lernende mit niedrigerem Wissensstand mehr Erklärungen inkludiert (Kersebaum 2016, S.98). Im Hinblick auf die Darstellung können Lernende beispielsweise Grafiken oder Textelemente präferieren und so die Gestaltung der Seite beeinflussen.",
+      "sources": "Brusilovsky, 1996; Kersebaum 2016, S.98",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Adaptive Navigationsunterstützung",
+      "definition": "Die adaptive Navigationsunterstützung hat zum Ziel den Lernenden bei der Wegfindung durch das System Hilfestellung zu geben. Es existieren mehrere Adaptionstechniken, die unter diesen Oberbegriff fallen (Brusilovsky, 1996; Kersebaum 2016, S.98) Von diesen nutzt das HASKI-System die adaptive Annotation von Links. Die vom HASKI-System als nächstes empfohlene Aktion wird farblich hervorgehoben.",
+      "sources": "Brusilovsky, 1996; Kersebaum 2016, S.98",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Adaptives Lernsystem",
+      "definition": "Ein adaptives Lernsystem, im Englischen auch als Intelligent Tutoring System (ITS), Adaptive Educational System (AES) oder Personalized Learning Environment (PLE) bezeichnet, versucht sich an die Bedürfnisse und Lernziele der einzelnen Lernenden anzupassen. Dies geschieht auf Basis der drei Modelle aus denen sich das HASKI-System zusammensetzt: dem Lernenden-Modell, dem Tutoriellen Modell und dem Domänen-Modell.",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Animationen (AN)",
+      "definition": "Animationen sind multimediale Präsentationen, die die Lerninhalte in animierter Form veranschaulichen. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives 2010",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Anwendungsbeispiel (AB)",
+      "definition": "Anwendungsbeispiele zeigen, wie das gelernte Material in realen Situationen umgesetzt werden kann. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives 2010",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "(zusätzliches) Beispiel (BE)",
+      "definition": "Beispiele geben konkrete Veranschaulichungen theoretischer Konzepte. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives 2010",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Domänen-Modell",
+      "definition": "Das Domänenmodell beinhaltet die Metadaten zu allen Themenbereichen, digitalen Lernräumen und Lernelementen der Lernwelt. Dazu gehört die Grundstruktur der Domäne. „Das Domänen-Modell beinhaltet Informationen zu Konzepten und Inhalten, zu Lernobjekten, wie etwa Beispielen, Grafiken oder Übungsaufgaben, und zu deren Beziehungen untereinander bzw. Abhängigkeiten voneinander“ (Meier 2019, S.4)",
+      "sources": "Meier, 2019, S.4",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Elementfortschritt",
+      "definition": "Der Elementfortschritt stellt die Historie der besuchten Lernelemente dar und zeigt an welche Lernelemente bereits besucht wurden.",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Erklärung (EK)",
+      "definition": "Erklärungen präsentieren das eigentliche fundamentale Lernmaterial. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives 2010",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Forum (FO)",
+      "definition": "Forumaktivitäten bieten den Lernenden die Möglichkeit Fragen zu stellen und Themen mit anderen Lernenden oder den Lehrenden zu diskutieren. Ein Kurs hat zwar meistens nur ein Forum aber in diesem Forum kann es mehrere Aktivitäten geben. Das Diskussionsthema wird vom Lehrenden angeleitet. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives 2010",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Felder & Silverman Learning Style Model (FSLSM)",
+      "definition": "Im FSLSM wird zwischen 8 Lernstilen unterschieden, die auf 4 Dimensionen basieren: wie Lernende es vorziehen, Informationen zu verarbeiten - aktiv (AKT) oder reflektierend (REF), wie Lernende Informationen wahrnehmen oder aufnehmen – sensorisch (SNS) oder intuitive (INT),  wie Informationen für Lernende bevorzugt präsentiert werden – visuell (VIS) oder verbal (VRB), wie es dem Lernenden gelingt, Informationen zu organisieren und zu verstehen – sequentiell (SEQ) oder global (GLO). Besteht in einer Dimension keine merkliche Ausprägung nennt sich dies „balanciert“ (BAL).",
+      "sources": "Felder & Silverman 1988",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Fremdgesteuertes Lernen",
+      "definition": "Beim fremdgesteuerten Lernen werden die Lernprozesse durch Einflüsse von außen gesteuert. Dies können anderen Personen sein (z.B. die Anweisungen von Lehrern), Instruktionsmedien (Computerprogramme) oder die Gestaltung einer Lehrumgebung.",
+      "sources": "HRM Akademie Deutschland (o.J.)",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Grundstruktur (des Domänen-Modells bzw. der Lernwelt) ",
+      "definition": "Die Grundstruktur der Lernwelt umfasst alle Beziehungen und Abhängigkeiten von Themenbereichen, digitalen Lernräumen und Lernelementen die aus Sicht der Lehrenden bestehen.",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Index of Learning Styles",
+      "definition": "Der Lernstil des Individuums wird durch den ILS-Fragebogen ermittelt. Dieser hat in seiner originalen englischen Form 44 dichotome Fragen. Jeweils 11 Fragen beziehen sich dementsprechend auf eine Dimension. Die Präferenzen werden mit Werten zwischen +11 und -11 pro Dimension ausgedrückt. Bei jeder Frage wird bei Antwort a) der Wert in der jeweiligen Dimension um +1 erhöht und bei Antwort b) der Wert um -1 reduziert. Während Antwort a) stets den einen Pol der Dimension repräsentiert, bezieht sich die Antwort b) auf den anderen Pol. (vgl. Graf, Viola, Leo & Kinshuk 2007, S.82)",
+      "sources": "Graf, Viola, Leo & Kinshuk 2007, S.82",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Kurs",
+      "definition": "Der Kurs bildet die höchste Hierarchie-Stufe in der Struktur des Domänenmodells. Innerhalb eines Kurses können ein oder mehrere Themen und Sub-Themen enthalten sein, die über Lernpfade logisch miteinander verknüpft sein können und in welchen die eigentlichen Lernprozesse stattfinden (angelehnt an Bartel, Dörringer & Klopp 2022e, S. 1).",
+      "sources": "Bartel, Dörringer & Klopp, 2022e, S. 1",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Kurzübersicht (KÜ)",
+      "definition": "Kurzübersichten bieten den Lernenden einen kurzen Überblick über das Sub-Thema. In HASKI sind sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives 2010",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Learning Analytics",
+      "definition": "Im Kontext von HASKI umfasst Learning Analytics folgende Kategorien: Elementfortschritt, Lernfortschritt, Gegebene Ratings, Verbrachte Zeit (wie lange und wann), Lernweg (Wiederholungen, Sequenzen), Leistung in Testelementen, Demografische Daten (Alter, Geschlecht, Fachsemester, Erststudiengang, Berufserfahrung), Noten",
+      "sources": "Judel, 2018, S.7",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Learning Management System - LMS",
+      "definition": "Ein Learning Management System ist eine Software, die die Verwaltung von Schulungen automatisch übernimmt. Das LMS registriert Benutzer, verfolgt Kurse in einem Katalog und erfasst Daten von Lernenden; es stellt auch geeignete Berichte an die Führungskräfte bereit. Die Datenbankfähigkeiten des LMS erstrecken sich auf zusätzliche Funktionen wie Unternehmensverwaltung, Online-Bewertung, Personalisierung und andere Ressourcen. Lernmanagement-Systeme (LMS) werden als Online-Lerntechnologien für die Erstellung, Verwaltung und Bereitstellung von Kursmaterial definiert (Sabharwal et al. 2018; Turnbull, Chugh, and Luck 2019). In der heutigen allgegenwärtigen digitalen Umgebung spielen LMSs eine wichtige Rolle bei der Verbesserung und Förderung von Lehre und Lernen. LMSs ermöglichen nicht nur die Bereitstellung von Anweisungen und elektronischen Ressourcen, um das Lernen von Schülern in einem kooperativen Umfeld zu verbessern und zu erweitern, sondern erlauben auch Lehrpersonen, sich auf die Gestaltung sinnvoller pädagogischer Aktivitäten zu konzentrieren (Kattoua, Al-Lozi & Alrowwad 2016; Turnbull, Chugh & Luck, 2021, S. 164).",
+      "sources": "Hall, 2001; Kattoua, Al-Lozi, and Alrowwad 2016; Sabharwal et al. 2018; Turnbull, Chugh & Luck 2019; Turnbull, Chugh & Luck, 2021, S. 164",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Lernelement - LE",
+      "definition": "Lernelemente (engl. learning element) dienen der Kompetenzentwicklung der Lernenden und werden diesen in Lernräumen zur Verfügung gestellt. Sie treten als verbale Elemente (schriftliche Texte, Hypertexte, gesprochene Sprache) und/oder visuelle Elemente (statische oder bewegte Bilder) in Erscheinung und/oder haben interaktive Darstellungsformen (Simulationen, Spiele, 3D) (vgl. Arnold 2011, S. 138; Bartel, Dörringer & Klopp 2022, S.1). In der Hierarchie des Domänenmodells siedeln sich Lernelemente auf der untersten Stufe an und sind in Lernräumen verortet. Lernelemente können in unterschiedliche Klassifikationsarten differenziert werden.",
+      "sources": "Arnold 2011, S. 138; Bartel, Dörringer & Klopp 2022, S.1",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Lernempfehlung",
+      "definition": "Das HASKI-System kann Lernempfehlungen aufgrund von Daten des/der individuellen Lerner*in und der Struktur des Domänenmodells kommunizieren und so bei der Entscheidung im Hinblick auf den weiteren Lernweg unterstützen. Das geschieht durch ein visuelles Hervorheben der empfohlenen Lernelemente (vgl. Raj & Renumol 2022, S.114). Das Tutorielle Modell des HASKI-Systems füllt den Adaptionsmechanismus mit den Daten aus dem Lernenden Modell und dem Domänen-Modell um dann individualisierte Lernempfehlungen zu kommunizieren. ",
+      "sources": "Raj & Renumol 2022, S.114",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Lernfortschritt",
+      "definition": "Der Lernfortschritt zeigt an welche Lernelemente bereits vollständig bearbeitet wurden. Es wird ebenfalls ausgedrückt, wie erfolgreich die lernende Person in Rahmen der Bearbeitung dieser Lernelemente war.",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Lernenden-Modell",
+      "definition": "Das Lernenden-Modell des HASKI-Projekts setzt sich aus mehreren Komponenten zusammen. Diese Komponenten interagieren untereinander und beeinflussen sich gegenseitig. Es wird davon ausgegangen, dass es sich um ein dynamisches Lernenden-Modell handelt, welches sich durch neue Erfahrungen, Interaktionen und die Aneignung von Wissen in einem bestimmten Bereich verändert und an die jeweiligen Anforderungen anpasst. ",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "(Physischer) Lernraum",
+      "definition": "Physische Lernräume können „zunächst als bloßer physikalischer Behälter betrachtet werden“ (Wittwer & Diettrich 2015, S.18). Sie sind aufgrund der Tatsache, dass sich dort Lehrende und Lernende treffen „zugleich auch Wahrnehmungs- und Handlungsräume“ (ebd., S.18). Außerdem ist ein physischer Lernraum damit „immer auch sozialer Raum“ (ebd., S.18).  Im Rahmen von HASKI werden alle Präsenzveranstaltungen, die von Lehrenden, dem Blended Learning Ansatz folgend, in Kombination mit dem HASKI-System durchgeführt werden, als physische Lernräume bezeichnet.",
+      "sources": "Wittwer & Diettrich, 2015, S.18-19",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Lernstand (Spielstand)",
+      "definition": "Der Lernstand ist der individualisierte Teil des Lernenden-Modells. Er beinhaltet Informationen zum individuellen Elementfortschritt des Lernenden, dessen Lernstil, Lernstrategie und Wissensstand sowie weitere Learning Analytics. Sichtbar ist dieser ausschließlich für die lernende Person selbst. Die Lehrperson kann die Durchschnittswerte aller Lernenden ebenfalls einsehen.",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Lernstil - LS",
+      "definition": "Lernstile sind individuelle, relativ stabile Indikatoren, die Präferenzen in der Verarbeitung, Wahrnehmung, Organisation und Präsentation von Informationen zeigen. Sie sind situations- und aufgabenunspezifisch und repräsentieren wie ein(e) Lernende(r) mit ihrer/seiner Lernumgebung interagiert und darauf reagiert. ",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Lernstrategien",
+      "definition": "Lernstrategien werden aus Sicht des HASKI-Projekts als Verhaltensweisen betrachtet, die bewusst zur Aneignung von Wissen eingesetzt werden. Sie zielen darauf ab, sich Wissen und Informationen auf eine möglichst effektive Art zu beschaffen, zu verarbeiten, zu organisieren und langfristig zu speichern. Lernstrategien stellen ein individuelles Merkmal dar und setzen sich aus unterschiedlichen Komponenten zusammen, deren Ausprägung variieren kann. Im Rahmen des HASKI-Projekts werden sie aktuell mittels des LIST-K erhoben.",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Lernweg",
+      "definition": "Ein Lernweg stellt die tatsächliche Sequenz der Aktionen durch den individuellen Lerner dar. Der Lernweg kann aber muss nicht identisch sein mit dem geplanten Lernpfad für den jeweiligen Lernraum. Der Lernweg gibt bei externer Beobachtung (z.B. durch Verhaltensdaten) Aufschluss  über das Lernverhalten des Einzelnen sowie über dessen Wissensstand und seine Präferenzen. Die Differenz zwischen dem geplanten Lernpfad und den tatsächlichen Lernwegen der individuellen Lernenden, die gute Leistungen erbringen, kann außerdem Informationen über die Passgenauigkeit und Qualität des Lernpfades geben.",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Lernziele (LZ)",
+      "definition": "Lernziele beschreiben, was von den Lernenden in Bezug auf die Kursbewertung verlangt wird. In HASKI sind sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives 2010",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "LIST-K Fragebogen",
+      "definition": "Beim LIST-K-Fragebogen handelt es sich um eine gekürzte Version des ursprünglichen „Lernstrategien im Studium – LIST“ (Wild & Schiefele, 1994). Aufgrund der verringerten Itemanzahl bietet dieser im Vergleich zum Original eine bessere Testökonomie, kann aber gleichzeitig eine hohe Reliabilität erzielen. Klingsieck (2018) gelang es beim LIST-K ebenfalls eine ausgeglichene Faktorenstruktur zu erzielen. Diese unterteilt sich in Kognitive Strategien (4 Subskalen: Organisieren, Elaborieren, Kritisches Prüfen, Wiederholen), Metakognitive Strategien (3 Subskalen: Ziele und Planen, Kontrollieren, Regulieren), Strategien des Managements interner Ressourcen (3 Subskalen: Anstrengung, Aufmerksamkeit, Zeit) und Strategien des Managements externer Ressourcen (3 Subskalen: Lernen mit Studienkolleg*innen, Literaturrecherche, Lernumgebung).",
+      "sources": "Klingsieck, 2018; Wild & Schiefele, 1994",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Metadaten",
+      "definition": "Die Metadaten beschreiben Themenbereiche, digitale Lernräume und Lernelemente detaillierter. Bisherige Kategorien von Metadaten sind: ID, Name, Autor, Datum, Changelog, Kurszuordnung, Zielgruppe, Fachsemester, Kurzbeschreibung, Schwierigkeitslevel, Learning Analytics (Bearbeitungszeit, Klickrate, Rating), Verortung in der Lernwelt und Relationen innerhalb der Grundstruktur. Für Lernelemente speziell kommen hinzu: Klassifikationsart des Lernelements, Dateityp, unterstützende & hindernde FSLSM-Dimensionen und beeinflussende Lernstrategien. Eine Orientierung an der Schablone zur Erfassung von Lehr-Lern-Arrangements im Hochschulfach Software Engineering (Bartel, Beslmeisl, Figas & Gold-Veerkamp 2015), die im Zuge des EVELIN-Projekts entstanden ist, wird angedacht.",
+      "sources": "Bartel, Beslmeisl, Figas & Gold-Veerkamp, 2015",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Reflektives Quiz (RQ)",
+      "definition": "Reflektive Quizze enthalten eine oder mehr offene Fragen zum Inhalt eines Sub-Themas. Diese Fragen sollen die Lernenden dazu ermutigen, über das gelernte Material nachzudenken. In HASKI sind sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives 2010",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Selbsteinschätzungstest (SE)",
+      "definition": "Selbsteinschätzungstests beinhalten mehrere geschlossene Fragen zum Inhalt eines Sub-Themas. Diese Fragen ermöglichen es den Lernenden, ihr erworbenes Wissen und ihr Verständnis des Inhalts des Sub-Themas zu überprüfen, indem sie unmittelbares Feedback zu ihren Antworten erhalten. In HASKI werden sie als Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives 2010",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Selbstgesteuertes Lernen ",
+      "definition": "Selbstgesteuertes Lernen: Lernende haben einen hohen Gestaltungsspielraum und entscheiden selbst, „welche Inhalte, Lernwerkzeuge und Didaktiken ihren eigenen Lernbedarfen am ehesten entsprechen“ (Goertz 2014, S. 23). Selbstgesteuertes Lernen ist eine Lernform, bei der die Lernenden im Hinblick auf vorgegebene (fremd- wie selbstbestimmte) Ziele und in Abhängigkeit von der Art ihrer Lernmotivation sowie den Anforderungen der aktuellen Lernsituation eine oder mehrere Selbststeuerungsmaßnahmen ergreifen und dadurch den Fortgang des Lernprozesses selbst überwachen, regulieren und bewerten (Konrad & Traub, 2010).",
+      "sources": "Goertz, 2014, S. 23; Konrad & Traub, 2010",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Sub-Thema",
+      "definition": "Innerhalb eines Sub-Themas sind ein oder mehrere Lernelemente verortet und die Lernenden können diese dort besuchen und bearbeiten. Die Lernelemente können anhand von Lernpfaden logisch verknüpft sein. In der Hierarchie des Domänen-Modells siedeln sich Sub-Themen auf der Stufe über den Lernelementen an.",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Thema",
+      "definition": "Als Thema wird im Kontext von HASKI ein logisch verknüpfter Bereich innerhalb eines Kurses bezeichnet, dessen Funktion es ist zusammenhängende Sub-Themen zu bündeln. In Ausnahmefällen kann ein Thema auch nur ein einziges Sub-Thema beinhalten. Das Thema gliedert sich als Ebene zwischen Kurs und Sub-Thema ein.",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Tutorielles Modell ",
+      "definition": "Das Tutorielle Modell ist in HASKI dafür verantwortlich individualisierte Lernpfade zu generieren. Diese Lernpfade kommuniziert es mit den Lernenden über Lernempfehlungen. Das Tutorielle Modell handelt mit allen Daten des Lernenden-Modells und der Grundstruktur des Domänen-Modells aus, was der einzelnen lernenden Person empfohlen werden soll. Diese Aushandlung geschieht auf Basis von unterschiedlichen KI-Modellen oder regelbasierten Methoden. Das Tutorielle Modell beinhaltet außerdem die Informationen dazu wann welcher Lerninhalt für die Lernenden empfohlen wird (vgl. Meier 2019, S.4).",
+      "sources": "Meier, 2019, S.4",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Übung (ÜB)",
+      "definition": "Übungen geben den Lernenden die Möglichkeit das Gelernte anzuwenden und zu erproben. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives 2010",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Wissensstand",
+      "definition": "Der Wissensstand einer lernenden Person wird als Teilmenge des Wissens eines Experten oder der gesamten Wissensdomäne festgehalten (vgl. Brusilovsky & Millán 2005). Der Wissensstand umfasst wie vertraut Lernende mit inhaltlich zentralen Themen oder Begriff einer Wissensdomäne sind (Uhing 2004, S.102). Er ist ein Aspekt des Lernenden-Modells von HASKI und wird zunächst über einen Vorwissenstest eruiert. Der Wissensstand wird im Laufe der Lernprozesses des Individuum stetig aktualisiert, da dieser sich mit jedem erfolgreich bearbeiteten Lernelement, Lernraum und Themenbereich erweitert. HASKI wird im Rahmen des Wissensstands zunächst nur das deklarative Wissen, als verbalisierbares Faktenwissen, modellieren (vgl. von Cranach & Bangerter 2000, S.235-236).",
+      "sources": "Brusilovsky & Millán, 2005; Cranach & Bangerter, 2000, S.235-236; Uhing, 2004, S.102 ",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Zusammenfassung (ZF)",
+      "definition": "Zusammenfassungen präsentieren den Lerninhalt der Erklärung gebündelt. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives 2010",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Zusatzliteratur (ZL)",
+      "definition": "Zusatzliteratur bietet Lernenden zusätzliche Quellen zum Lesen über den Inhalt des Sub-Themas, zum Beispiel detailliertere Ausführungen oder andere Sichtweisen. In HASKI wird sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives 2010",
+      "tags": [],
+      "fundamental": false
+    }
+  ],
+  "pages.glossary.expandAll": "Alle öffnen",
+  "pages.glossary.filter": "Nach Tags filtern",
+  "pages.glossary.fundamentals": "Grundlagen",
+  "pages.glossary.search": "Suche",
+  "pages.glossary.sources": "Quellen:",
+  "pages.glossary.tags": [
+    "Typescript",
+    "Python",
+    "Erziehungswissenschaften",
+    "Künstliche Intelligenz",
+    "Webdevelopment",
+    "",
+    "TestDeutsch1",
+    "TestDeutsch2",
+    "TestDeutsch3",
+    "TestDeutsch4"
+  ],
+  "pages.glossary.title": "Glossar",
   "pages.home": "Startseite",
   "pages.imprint": "Impressum",
   "pages.login": "Login",
+  "pages.login.redirect": "Sie werden weitergeleitet",
   "pages.Login.redirect": "Sie werden weitergeleitet",
   "pages.privacypolicy": "Datenschutzerklärung",
   "pages.projectinformation": "Projektinformation",
+  "post": "Post",
+  "previousText": "Vorherige",
   "projecthaski": "Projekt HASKI",
+  "resultPagesText": "Ergebnisseite",
+  "searchButtonText": "Suche",
+  "sort": "Sortiere bei:",
+  "spellcheckText": "Hast du das gesucht?",
+  "success": "Erfolg",
   "tooltip.openGlobalSettings": "Globale Einstellungen",
-  "tooltip.openSettings": "Einstellungen"
+  "tooltip.openSettings": "Einstellungen",
+  "update": "Aktualisieren",
+  "warning": "Warnung"
 }
