@@ -174,7 +174,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const fetchUser = useBoundStore((state) => state.fetchUser)
   const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
 
-  /*useEffect(() => {
+  useEffect(() => {
     // request to backend to get learning path for topic
     // alert('Topic: ' + topic)
     if (authcontext.isAuth)
@@ -182,13 +182,22 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         .then((user) => {
           fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, Number(courseId), Number(topicId)).then(
             (learning_path_data) => {
-              const nodes = mapLearningPathToNodes(learning_path_data)
+              const nodes = mapLearningPathToNodes(learning_path_data, theme)
+
               setInitialNodes(nodes)
-              const edges: Edge[] = nodes.map((item, index) => ({
-                id: index.toString(),
-                source: item.id,
-                target: nodes[index + 1]?.id
+              // Get first character of node ids
+              const nodeIDs = nodes.map((item) => Array.from(item.id)[0])
+
+              // Erase duplicate of node ids
+              const uniqueNodeIDs = [...new Set(nodeIDs)]
+
+              const edges: Edge[] = uniqueNodeIDs.map((item, index) => ({
+                id: 'Edge' + item.toString(),
+                source: item,
+                target: uniqueNodeIDs[index + 1]
               }))
+
+              //setInitialEdges(edges)
               setInitialEdges(edges)
             }
           )
@@ -197,27 +206,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           // 🍿 snackbar error
           alert('Error: ' + error)
         })
-  }, [authcontext.isAuth])*/
-
-  useEffect(() => {
-    const nodes = mapLearningPathToNodes(learningPath, theme)
-    setInitialNodes(nodes)
-
-    // Get first character of node ids
-    const nodeIDs = nodes.map((item) => Array.from(item.id)[0])
-
-    // Erase duplicate of node ids
-    const uniqueNodeIDs = [...new Set(nodeIDs)]
-
-    const edges: Edge[] = uniqueNodeIDs.map((item, index) => ({
-      id: 'Edge' + item.toString(),
-      source: item,
-      target: uniqueNodeIDs[index + 1]
-    }))
-
-    //setInitialEdges(edges)
-    setInitialEdges(edges)
-  }, [theme])
+  }, [authcontext.isAuth, courseId, fetchLearningPath, fetchUser, theme, topicId])
 
   log.setLevel('error')
 
