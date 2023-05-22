@@ -189,7 +189,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                                     color="inherit"
                                     sx={{ m: 1, cursor: 'pointer' }}
                                     onClick={() => {
-                                      navigate(`/topics/${topic.name}/${element.learning_element.name}`)
+                                      navigate(`course/2/topic/${topic.id}`)
                                       handleCloseTopicsMenu()
                                     }}>
                                     {element.learning_element.name}
