@@ -1,7 +1,7 @@
 import { Paper, Typography} from '@mui/material'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Handle, NodeProps, Position } from 'react-flow-renderer'
+import { Handle, NodeProps, Position } from 'reactflow'
 import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 
