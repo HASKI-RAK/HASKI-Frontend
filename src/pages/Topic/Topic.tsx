@@ -217,7 +217,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
     //setInitialEdges(edges)
     setInitialEdges(edges)
-  })
+  }, [theme])
 
   log.setLevel('error')
 
