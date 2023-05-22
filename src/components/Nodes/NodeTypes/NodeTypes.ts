@@ -8,7 +8,7 @@ import { ExampleNode } from '../ExampleNode/ExampleNode'
 import { SummaryNode } from '../SummaryNode/SummaryNode'
 import { VideoNode } from '../VideoNode/VideoNode'
 import { BasicNode } from '../BasicNode/BasicNode'
-import { NodeTypes } from 'reactflow'
+import { NodeTypes } from 'react-flow-renderer'
 
 export const nodeTypes: NodeTypes = {
   RQ: FeedbackNode,
