@@ -27,7 +27,11 @@ export const Home = () => {
   const courses = useBoundStore((state) => state._cache_courses)
 
   useEffect(() => {
-    if (authcontext.isAuth)
+    const preventEndlessLoading = setTimeout(() => {
+      navigate('/login')
+    }, 5000)
+    if (authcontext.isAuth) {
+      clearTimeout(preventEndlessLoading)
       fetchUser()
         .then((user) => {
           fetchCourses(user.settings.user_id, user.lms_user_id, user.id).then((courses) => {
@@ -48,6 +52,10 @@ export const Home = () => {
             autoHideDuration: 5000
           })
         })
+    }
+    return () => {
+      clearTimeout(preventEndlessLoading)
+    }
   }, [authcontext.isAuth, loading])
   // Card cointaining the courses with a button to the specific course
   return loading ? (
