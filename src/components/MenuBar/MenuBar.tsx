@@ -57,6 +57,8 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
 
   //Application logic hooks
   const { loading, topics, learningPaths } = useLearningPath()
+    const reversedTopics: Topic[] = [...topics];
+  reversedTopics.sort((a, b) => reversedTopics.indexOf(b) - reversedTopics.indexOf(a))
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -169,7 +171,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                     ) : (
                       //For every Topic the LearningPath is displayed under it.
                       <>
-                        {topics.map((topic, index) => (
+                        {reversedTopics.map((topic, index) => (
                           <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>
                             <Grid item xs={12} key={t(topic.name)}>
                               <Typography variant="h6">{t(topic.name)}</Typography>

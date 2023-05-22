@@ -102,7 +102,7 @@ const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
                         '&:hover': { backgroundColor: (theme) => theme.palette.primary.main }
                       }}
                       onClick={() => {
-                        navigate(`course/2/topic/${topic.id}`)
+                        navigate(`course/2/topic/${topic.id}`, )
                       }}>
                       {learningElement.position} {learningElement.learning_element.name}
                     </Link>

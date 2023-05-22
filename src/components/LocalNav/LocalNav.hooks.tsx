@@ -211,8 +211,9 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
         try {
             const user = await fetchUser();
                 setTopics(hardcodedTopics)
-                const dataLearningPath = await getSortedLearningPath(hardcodedTopics, user.settings.user_id, user.lms_user_id, user.id, fetchLearningPath)
-                setLearningPaths(dataLearningPath)
+                //const dataLearningPath = await getSortedLearningPath(hardcodedTopics, user.settings.user_id, user.lms_user_id, user.id, fetchLearningPath)
+
+                //setLearningPaths(dataLearningPath)
         }
         catch(error) {
             log.error(error)
