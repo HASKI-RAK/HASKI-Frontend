@@ -210,7 +210,6 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
         setLoading(true)
         try {
             const user = await fetchUser();
-            //const response = await getCourseTopics(user.settings.user_id, user.lms_user_id, user.id)
                 setTopics(hardcodedTopics)
                 const dataLearningPath = await getSortedLearningPath(hardcodedTopics, user.settings.user_id, user.lms_user_id, user.id, fetchLearningPath)
                 setLearningPaths(dataLearningPath)
