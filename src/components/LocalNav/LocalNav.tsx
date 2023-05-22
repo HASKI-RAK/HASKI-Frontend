@@ -12,7 +12,8 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Topic, LearningPath } from '@services'
+import { Topic } from '@services'
+import { LearningPath } from '@core'
 import React from 'react'
 import { useLearningPath as _useLearningPath } from './LocalNav.hooks'
 
@@ -80,7 +81,7 @@ const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
                 sx={{
-                  backgroundColor: (theme) => theme.palette.secondary.main,
+                  backgroundColor: 'white',
                   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
                     transform: 'rotate(-90deg)'
                   }
