@@ -9,6 +9,7 @@ import useBoundStore from '@store'
 import { AuthContext } from '@services'
 import StudentLearningElement from 'src/common/core/StudentLearningElement/StudentLearningElement'
 import { useTranslation } from 'react-i18next'
+import 'reactflow/dist/style.css'
 
 const _useTopic = () => {
   console.log('useTopic')
@@ -181,13 +182,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, Number(courseId), Number(topicId)).then(
             (learning_path_data) => {
               const nodes = mapLearningPathToNodes(learning_path_data)
-              setInitalNodes(nodes)
+              setInitialNodes(nodes)
               const edges: Edge[] = nodes.map((item, index) => ({
                 id: index.toString(),
                 source: item.id,
                 target: nodes[index + 1]?.id
               }))
-              setInitalEdges(edges)
+              setInitialEdges(edges)
             }
           )
         })
@@ -207,16 +208,14 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     // Erase duplicate of node ids
     const uniqueNodeIDs = [...new Set(nodeIDs)]
 
-    /*const edges: Edge[] = uniqueNodeIDs.map((item, index) => ({
+    const edges: Edge[] = uniqueNodeIDs.map((item, index) => ({
       id: 'Edge' + item.toString(),
-      source: 'A', //item,
-      target: 'B' //uniqueNodeIDs[index + 1]
-    }))*/
-
-    const edge = { id: 'AB', source: 'A', target: 'B' }
+      source: item,
+      target: uniqueNodeIDs[index + 1]
+    }))
 
     //setInitialEdges(edges)
-    setInitialEdges([edge])
+    setInitialEdges(edges)
   })
 
   log.setLevel('error')
@@ -270,7 +269,7 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
       data: node_data,
       position: {
         x: 300 * index,
-        y: -70 * index
+        y: index
       },
       parentNode: exerciseLearningElementParentNode.id
     }
@@ -295,7 +294,7 @@ const mapLearningPathToNodes = (learningPath: LearningPath) => {
       data: node_data,
       position: {
         x: (300 * (learningPathExercises.length - 1)) / 2,
-        y: item.position < parseInt(exerciseLearningElementParentNode.id) ? 200 * (item.position - 1) : 200 * (item.position - exerciseLearningElementChildNodes.length)
+        y: item.position < parseInt(exerciseLearningElementParentNode.id) ? 400 * (item.position - 1) : 400 * (item.position - exerciseLearningElementChildNodes.length - 1)
       },
       style: { background: 'lightblue', padding: 10 },
       content: (
