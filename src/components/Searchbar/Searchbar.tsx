@@ -6,13 +6,13 @@ import {
   DefaultInputAdornment as InputAdornment
 } from '@common/components'
 
-type SearchbarProps = {
+export type SearchbarProps = {
   label?: string
   setSearchQuery?: (query: string) => void
   timeout?: number
 }
 
-const debouncedSearchQuery = (
+export const debouncedSearchQuery = (
   event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   setSearchQuery?: (query: string) => void,
   timeout?: number
@@ -51,9 +51,5 @@ const Searchbar = (props: SearchbarProps) => {
     </Typography>
   )
 }
-
-//for tests
-export type TestSearchbarProps = SearchbarProps
-export const TestSearchbar = Searchbar
 
 export default Searchbar
