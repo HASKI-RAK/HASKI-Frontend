@@ -217,7 +217,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // TODO: HIer edges rendern
   return initialNodes && initialEdges ? (
     <Box height={'100%'}>
-      <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} >
+      <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
         <Background gap={16} />
         <MiniMap nodeBorderRadius={2} />
         <Controls />
