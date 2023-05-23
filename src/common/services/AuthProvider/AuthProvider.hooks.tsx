@@ -26,7 +26,15 @@ const useAuthProvider = () => {
         // When the user is logged in, the backend will return 200, otherwise 401 and clear the cookie
         if (response.status === 200) {
           setIsAuth(true)
-        } else {
+        } else if (response.status === 403) {
+          setIsAuth(false)
+          addSnackbar({
+            message: t('services.AuthProvider.cookienotfound'),
+            severity: 'error',
+            autoHideDuration: 5000
+          })
+        }
+        else {
           setIsAuth(false)
         }
       })

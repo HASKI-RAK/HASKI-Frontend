@@ -10,6 +10,7 @@ import { AuthContext } from '@services'
 import StudentLearningElement from 'src/common/core/StudentLearningElement/StudentLearningElement'
 import { useTranslation } from 'react-i18next'
 import 'reactflow/dist/style.css'
+import { DefaultSkeleton as Skeleton } from '@common/components'
 
 const _useTopic = () => {
   console.log('useTopic')
@@ -220,7 +221,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       </ReactFlow>
     </Box>
   ) : (
-    <div>{t('loading')}</div>
+    <Skeleton variant="rectangular" width={'80%'} height={'80%'} />
   )
 }
 
@@ -233,7 +234,7 @@ const mapLearningPathToNodes = (learningPath: LearningPath, theme: Theme): Node[
   // Every exercise learning element
   const learningPathExercises = sortedLearningPath.filter((item) => item.learning_element.classification === 'ÜB')
 
-  // Every learning element exept exercises
+  // Every learning element except exercises
   const learningPathExcludingExercises = sortedLearningPath.filter(
     (item) => item.learning_element.classification !== 'ÜB'
   )
@@ -248,8 +249,30 @@ const mapLearningPathToNodes = (learningPath: LearningPath, theme: Theme): Node[
     borderRadius: 8,
     cursor: 'pointer'
   }
+
+  // Exercise nodes
+  const exerciseLearningElementChildNodes = learningPathExercises.map((node, index) => {
+    const node_data: LearningPathLearningElementNode = {
+      lms_id: node.learning_element.lms_id,
+      name: node.learning_element.name,
+      activity_type: node.learning_element.activity_type,
+      classification: node.learning_element.classification,
+      is_recommended: node.recommended
+    }
+    return {
+      id: index.toString(),
+      type: node.learning_element.classification,
+      data: node_data,
+      position: {
+        x: nodeOffsetX + 300 * index,
+        y: 50
+      },
+      style: learningElementStyle
+    }
+  })
+
   // Parent node for exercise learning elements
-  const exerciseLearningElementParentNode = {
+  const exerciseLearningElementParentNode = learningPathExercises.length > 0 ? {
     id: learningPathExercises[0].position.toString(),
     data: { label: 'Übungen' },
     type: 'GROUP',
@@ -263,32 +286,7 @@ const mapLearningPathToNodes = (learningPath: LearningPath, theme: Theme): Node[
       width: 300 * learningPathExercises.length + nodeOffsetX,
       height: groupHeight
     }
-  }
-
-  // Exercise nodes
-  const exerciseLearningElementChildNodes = learningPathExercises.map((node, index) => {
-    const node_data: LearningPathLearningElementNode = {
-      lms_id: node.learning_element.lms_id,
-      name: node.learning_element.name,
-      activity_type: node.learning_element.activity_type,
-      classification: node.learning_element.classification,
-      is_recommended: node.recommended
-    }
-    return {
-      id: exerciseLearningElementParentNode.id + ' ' + index.toString(),
-      type: node.learning_element.classification,
-      data: node_data,
-      position: {
-        x: nodeOffsetX + 300 * index,
-        y: 50
-      },
-      parentNode: exerciseLearningElementParentNode.id,
-      style: learningElementStyle
-    }
-  })
-
-  // Combine parent and exercise nodes
-  const learningElementsExercisesNodes = [exerciseLearningElementParentNode, ...exerciseLearningElementChildNodes]
+  } : null
 
   // Rest of learning elements
   const learningElementNodesExcludingExercises = learningPathExcludingExercises.map((item, index) => {
@@ -307,9 +305,11 @@ const mapLearningPathToNodes = (learningPath: LearningPath, theme: Theme): Node[
       position: {
         x: nodeOffsetX + (300 * (learningPathExercises.length - 1)) / 2,
         y:
-          item.position < parseInt(exerciseLearningElementParentNode.id)
+          exerciseLearningElementParentNode && item.position < parseInt(exerciseLearningElementParentNode.id)
             ? 250 * (item.position - 1)
-            : 250 * (item.position - exerciseLearningElementChildNodes.length) + groupHeight - 70
+            : exerciseLearningElementParentNode
+              ? 250 * (item.position - exerciseLearningElementChildNodes.length) + groupHeight - 70
+              : 250 * (item.position - 1),
       },
       style: learningElementStyle
     }
@@ -317,15 +317,15 @@ const mapLearningPathToNodes = (learningPath: LearningPath, theme: Theme): Node[
 
   // Insert exercise nodes into learning elements
   const learningElementNodesBeforeExercises = learningElementNodesExcludingExercises.filter(
-    (item) => parseInt(item.id) < parseInt(exerciseLearningElementParentNode.id)
+    (item) => exerciseLearningElementParentNode && parseInt(item.id) < parseInt(exerciseLearningElementParentNode.id)
   )
   const learningElementNodesAfterExercises = learningElementNodesExcludingExercises.filter(
-    (item) => parseInt(item.id) > parseInt(exerciseLearningElementParentNode.id)
+    (item) => exerciseLearningElementParentNode && parseInt(item.id) > parseInt(exerciseLearningElementParentNode.id)
   )
 
   const learningElementNodes = [
-    ...learningElementNodesBeforeExercises,
-    ...learningElementsExercisesNodes,
+    ...(learningElementNodesBeforeExercises.length > 0 ? learningElementNodesBeforeExercises : learningElementNodesExcludingExercises),
+    ...(exerciseLearningElementParentNode ? [exerciseLearningElementParentNode, ...exerciseLearningElementChildNodes] : []),
     ...learningElementNodesAfterExercises
   ]
 

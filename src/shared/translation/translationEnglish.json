@@ -619,7 +619,6 @@
   "pages.privacypolicy": "Privacy Policy",
   "pages.projectdescription": "Project Description",
   "pages.projectinformation": "Project Information",
-
   "pages.course": "Course",
   "pages.topic": "Topic",
   "pages.1": "1",
@@ -640,7 +639,6 @@
   "pages.16": "16",
   "pages.17": "17",
   "loading": "Loading...",
-
   "post": "Posted",
   "previousText": "Previous",
   "projecthaski": "Project HASKI",
@@ -648,6 +646,7 @@
   "resultPagesText": "Results",
   "searchButtonText": "Search",
   "services.AuthProvider.connectivityerror": "Error while checking login status. Check your connectivity",
+  "services.AuthProvider.cookienotfound": "Cookie not found. Please login again",
   "services.AuthProvider.logout": "Logout successful",
   "sort": "Sort by:",
   "spellcheckText": "Did you mean:",

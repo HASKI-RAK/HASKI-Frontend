@@ -4,7 +4,6 @@
   "Back": "Zurück",
   "components.Home.Button.Course": "Weiter zum Kurs",
   "components.CoursePage.Button.Topic": "Weiter zum Thema",
-
   "components.ImprintContent.AsOf": "Stand",
   "components.ImprintContent.AuthorisedRepresentative": "Vertretungsberechtigte Person",
   "components.ImprintContent.AuthorisedRepresentative.Title": "Herr",
@@ -619,6 +618,7 @@
   "resultPagesText": "Ergebnisseite",
   "searchButtonText": "Suche",
   "services.AuthProvider.connectivityerror": "Fehler bei der Authentifizierung. Keine Verbindung zum Server.",
+  "services.AuthProvider.cookienotfound": "Cookie nicht gefunden. Bitte erneut einloggen.",
   "services.AuthProvider.logout": "Logout erfolgreich",
   "sort": "Sortiere bei:",
   "spellcheckText": "Hast du das gesucht?",
