@@ -8,7 +8,7 @@ type GlossaryListProps = {
 
 const GlossaryList = (props: GlossaryListProps) => {
   return (
-    <>
+    <div data-testid="GlossaryList">
       {props.glossaryEntries?.map((glossaryEntry) => (
         <GlossaryEntry
           key={glossaryEntry.term}
@@ -17,8 +17,12 @@ const GlossaryList = (props: GlossaryListProps) => {
           {...glossaryEntry}
         />
       ))}
-    </>
+    </div>
   );
 };
+
+//for tests
+export type TestGlossaryListProps = GlossaryListProps;
+export const TestGlossaryList = GlossaryList;
 
 export default GlossaryList;

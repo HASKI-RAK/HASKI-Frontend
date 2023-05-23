@@ -12,32 +12,32 @@ type SearchbarProps = {
   timeout?: number;
 };
 
+export const handleChange = useCallback(
+  (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, setSearchQuery?: (query: string) => void,
+  timeout?: number ) => {
+    const timer = setTimeout(() => {
+      const {
+        target: { value },
+      } = event;
+
+      setSearchQuery && setSearchQuery(value);
+    }, timeout);
+    return () => clearTimeout(timer);
+  },
+  []
+);
+
 const Searchbar = (props: SearchbarProps) => {
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const timer = setTimeout(() => {
-        const {
-          target: { value },
-        } = event;
-
-        props.setSearchQuery && props.setSearchQuery(value);
-      }, props.timeout);
-
-      return () => clearTimeout(timer);
-    },
-    []
-  );
-
   return (
-    <Typography variant="h4">
+    <Typography variant="h4" data-testid="searchbar">
       <TextField
         id="searchbar"
         fullWidth
         label={props.label}
-        onChange={handleChange}
+        onChange={handleChange(props.setSearchQuery, props.timeout)}
         InputProps={{
           startAdornment: (
-            <InputAdornment position="start">
+            <InputAdornment position="start"> 
               <SearchIcon />
             </InputAdornment>
           ),
@@ -46,5 +46,9 @@ const Searchbar = (props: SearchbarProps) => {
     </Typography>
   );
 };
+
+//for tests
+export type TestSearchbarProps = SearchbarProps;
+export const TestSearchbar = Searchbar;
 
 export default Searchbar;
