@@ -1,2 +1,1 @@
-import { Skeleton } from "@mui/material"
-export { Skeleton as DefaultSkeleton }
+export { Skeleton as DefaultSkeleton } from '@mui/material'

@@ -2,7 +2,8 @@ import "@testing-library/jest-dom"
 import { AuthContext } from "@services"
 import { MemoryRouter } from "react-router-dom"
 import { fireEvent, render, screen } from "@testing-library/react"
-
+import { createMemoryHistory } from 'history'
+import { Router } from 'react-router-dom'
 
 import ProjectInformation from "./ProjectInformation"
 import { debug } from "console";
@@ -49,3 +50,16 @@ describe("Test the Project Information ", () => {
     })
     
 });
+
+describe('Test the ProjectInformation page', () => {
+    it('should render the ProjectInformation page', () => {
+      const history = createMemoryHistory({ initialEntries: ['/home', '/projectinformation'] })
+      const { getByText } = render(
+        <Router location={history.location} navigator={history}>
+          <ProjectInformation />
+        </Router>
+      )
+      fireEvent.click(getByText('pages.projectdescription'))
+      expect(history.location.pathname).toBe('/projectinformation/projectdescription')
+    })
+  })

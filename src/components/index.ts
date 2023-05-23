@@ -17,6 +17,17 @@ import Searchbar from "./Searchbar/Searchbar";
 import GlossaryIndex from "./GlossaryIndex/GlossaryIndex";
 import GlossaryForm from "./GlossaryForm/GlossaryForm";
 import { ToggleButtonList } from "./ToggleButtonList/ToggleButtonList";
+import { ImprintContent } from './Imprint/ImprintContent'
+import MenuBar from './MenuBar/MenuBar'
+import Footer from './Footer/Footer'
+import LocalNav from './LocalNav/LocalNav'
+import BreadcrumbsContainer from './BreadcrumbsContainer/BreadcrumbsContainer'
+import ProjectDescriptionContent from './ProjectDescriptionContent/ProjectDescriptionContent'
+import ProjectDescriptionCard from './ProjectDescriptionCard/ProjectDescriptionCard'
+import ProjectDescriptionStepper from './ProjectDescriptionStepper/ProjectDescriptionStepper'
+import SnackbarMessage, { SnackbarMessageProps, SeverityType } from './SnackbarMessage/SnackbarMessage'
+import SnackbarContainer from './SnackbarContainer/SnackbarContainer'
+import SnackbarTransition from './SnackbarTransition/SnackbarTransition'
 
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
@@ -32,6 +43,12 @@ export {
   GlossaryIndex,
   GlossaryForm,
   ToggleButtonList,
+  BreadcrumbsContainer,
+  LocalNav,
+  MenuBar,
+  Footer,
+  SnackbarMessage,
+  SnackbarContainer,
   TableILS,
   GraphILS,
   ResultDescriptionILS,
@@ -39,5 +56,10 @@ export {
   GraphListK,
   ResultDescriptionListK,
   QuestionnaireResultsModal,
-};
-export type { GlossaryEntryProps };
+  ProjectDescriptionContent,
+  ProjectDescriptionCard,
+  ProjectDescriptionStepper,
+  SnackbarTransition,
+  ImprintContent
+}
+export type { SnackbarMessageProps, SeverityType, GlossaryEntryProps }

@@ -1,2 +1,1 @@
-import { AccordionDetails } from "@mui/material";
-export { AccordionDetails as DefaultAccordionDetails };
+export { AccordionDetails as DefaultAccordionDetails } from '@mui/material'

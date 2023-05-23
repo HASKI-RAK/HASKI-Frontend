@@ -1,2 +1,1 @@
-import { Typography } from "@mui/material"
-export { Typography as DefaultTypography }
+export { Typography as DefaultTypography } from '@mui/material'
