@@ -62,6 +62,9 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
   const reversedTopics: Topic[] = [...topics]
   reversedTopics.sort((a, b) => reversedTopics.indexOf(b) - reversedTopics.indexOf(a))
 
+  const reversedLearningElements: LearningPath[] = [...learningPaths]
+  reversedLearningElements.sort((a, b) => reversedLearningElements.indexOf(b) - reversedLearningElements.indexOf(a))
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
   }
@@ -184,7 +187,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                                   flexWrap: 'wrap',
                                   justifyContent: 'start'
                                 }}>
-                                {learningPaths[index]?.path.map((element) => (
+                                {reversedLearningElements[index]?.path.map((element) => (
                                   <Link
                                     key={element.learning_element.name}
                                     underline="hover"
