@@ -1,28 +1,29 @@
-import { GlossaryEntry, GlossaryEntryProps } from "@components";
+import { GlossaryEntry, GlossaryEntryProps } from '@components'
 
 type GlossaryListProps = {
-  glossaryEntries?: GlossaryEntryProps[];
-  expandedList?: string[];
-  setExpandedList?: (newExpandedList: string[]) => void;
-};
+  glossaryEntries?: GlossaryEntryProps[]
+  expandedList?: string[]
+  setExpandedList?: (newExpandedList: string[]) => void
+}
 
 const GlossaryList = (props: GlossaryListProps) => {
   return (
     <div data-testid="GlossaryList">
-      {props.glossaryEntries?.map((glossaryEntry) => (
-        <GlossaryEntry
-          key={glossaryEntry.term}
-          expandedList={props.expandedList}
-          setExpandedList={props.setExpandedList}
-          {...glossaryEntry}
-        />
-      ))}
+      {props.glossaryEntries &&
+        Array.from(props.glossaryEntries).map((glossaryEntry) => (
+          <GlossaryEntry
+            key={glossaryEntry.term}
+            expandedList={props.expandedList}
+            setExpandedList={props.setExpandedList}
+            {...glossaryEntry}
+          />
+        ))}
     </div>
-  );
-};
+  )
+}
 
 //for tests
-export type TestGlossaryListProps = GlossaryListProps;
-export const TestGlossaryList = GlossaryList;
+export type TestGlossaryListProps = GlossaryListProps
+export const TestGlossaryList = GlossaryList
 
-export default GlossaryList;
+export default GlossaryList

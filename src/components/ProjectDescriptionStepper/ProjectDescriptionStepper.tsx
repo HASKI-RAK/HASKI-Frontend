@@ -1,6 +1,7 @@
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import React, { useRef, useEffect, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   DefaultButton as Button,
   DefaultFade as Fade,
@@ -40,6 +41,7 @@ const ProjectDescriptionStepper = ({
   useProjectDescriptionStepper = _useProjectDescriptionStepper,
   ...props
 }: ProjectDescriptionStepperProps) => {
+  const { t } = useTranslation()
   const ref = useRef<HTMLDivElement>(null)
   const [activeStep, setActiveStep] = React.useState(0)
   const { bodyState, headerState, animateBody, animateHeader } = useProjectDescriptionStepper()
@@ -94,8 +96,8 @@ const ProjectDescriptionStepper = ({
           <Fade in={!!bodyState[activeStep]} easing="linear" timeout={1000}>
             <Typography
               variant="h5"
+              align="center"
               sx={{
-                alignItems: 'center',
                 pt: '2.5rem',
                 width: { sm: '18.75rem', md: '37.5rem' },
                 height: { sm: '25rem', md: '12.5rem' }
@@ -117,14 +119,14 @@ const ProjectDescriptionStepper = ({
             }}
             nextButton={
               <Button size="small" onClick={handleNext} disabled={activeStep === (props.body && props.body.length - 1)}>
-                Next
+                {t('nextText')}
                 <KeyboardArrowRight />
               </Button>
             }
             backButton={
               <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
                 <KeyboardArrowLeft />
-                Back
+                {t('previousText')}
               </Button>
             }
           />

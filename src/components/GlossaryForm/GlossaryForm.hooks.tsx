@@ -1,44 +1,34 @@
-import { useEffect, useCallback } from "react";
-import { useTranslation } from "react-i18next";
-import { GlossaryState, useGlossaryStore } from "@services";
-import { GlossaryEntryProps } from "@components";
+import { useEffect, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { GlossaryState, useGlossaryStore } from '@services'
+import { GlossaryEntryProps } from '@components'
 
 export type useGlossaryFormHookParams = {
-  defaultExpandedList?: string[];
-  defaultSearchQuery?: string;
-  defaultSelectedIndexElement?: string;
-  defaultSelectedTags?: string[];
-};
+  defaultExpandedList?: string[]
+  defaultSearchQuery?: string
+  defaultSelectedIndexElement?: string
+  defaultSelectedTags?: string[]
+}
 
 export type GlossaryFormHookReturn = {
-  readonly glossaryState: GlossaryState;
-  readonly filterByTags: (
-    selectedTags: string[],
-    inputData: GlossaryEntryProps[]
-  ) => GlossaryEntryProps[];
-  readonly filterByIndexElement: (
-    selectedIndexElement: string,
-    inputData: GlossaryEntryProps[]
-  ) => GlossaryEntryProps[];
-  readonly searchByQuery: (
-    inputData: GlossaryEntryProps[]
-  ) => GlossaryEntryProps[];
-  readonly collapseAll: () => void;
-  readonly expandAll: (inputData: GlossaryEntryProps[]) => void;
-};
+  readonly glossaryState: GlossaryState
+  readonly filterByTags: (selectedTags: string[], inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
+  readonly filterByIndexElement: (selectedIndexElement: string, inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
+  readonly searchByQuery: (inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
+  readonly collapseAll: () => void
+  readonly expandAll: (inputData: GlossaryEntryProps[]) => void
+}
 
-export const useGlossaryForm = (
-  params?: useGlossaryFormHookParams
-): GlossaryFormHookReturn => {
-  const { t } = useTranslation();
+export const useGlossaryForm = (params?: useGlossaryFormHookParams): GlossaryFormHookReturn => {
+  const { t } = useTranslation()
 
   // Default values
   const {
     defaultExpandedList = [],
-    defaultSearchQuery = "",
-    defaultSelectedIndexElement = "",
-    defaultSelectedTags = [],
-  } = params || {};
+    defaultSearchQuery = '',
+    defaultSelectedIndexElement = '',
+    defaultSelectedTags = []
+  } = params || {}
 
   // State data
   const {
@@ -49,125 +39,102 @@ export const useGlossaryForm = (
     setExpandedList,
     setSearchQuery,
     setSelectedIndexElement,
-    setSelectedTags,
-  } = useGlossaryStore();
+    setSelectedTags
+  } = useGlossaryStore()
 
   useEffect(() => {
-    setExpandedList && setExpandedList(defaultExpandedList);
-    setSearchQuery && setSearchQuery(defaultSearchQuery);
-    setSelectedIndexElement &&
-      setSelectedIndexElement(defaultSelectedIndexElement);
-    setSelectedTags && setSelectedTags(defaultSelectedTags);
-  }, []);
+    setExpandedList && setExpandedList(defaultExpandedList)
+    setSearchQuery && setSearchQuery(defaultSearchQuery)
+    setSelectedIndexElement && setSelectedIndexElement(defaultSelectedIndexElement)
+    setSelectedTags && setSelectedTags(defaultSelectedTags)
+  }, [])
 
   // Logic
   const onFilterByTags = useCallback(
-    (
-      selectedTags: string[],
-      glossaryEntries: GlossaryEntryProps[]
-    ): GlossaryEntryProps[] => {
-      const filteredGlossaryEntries: GlossaryEntryProps[] = [];
+    (selectedTags: string[], glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[] => {
+      const filteredGlossaryEntries: GlossaryEntryProps[] = []
 
       if (selectedTags.length === 0) {
-        return glossaryEntries;
+        return glossaryEntries
       }
 
-      glossaryEntries.forEach((glossaryEntry) => {
-        if (
-          selectedTags.every(
-            (selectedTag) =>
-              glossaryEntry.tags && glossaryEntry.tags.includes(selectedTag)
-          )
-        ) {
-          filteredGlossaryEntries.push(glossaryEntry);
+      Array.from(glossaryEntries).forEach((glossaryEntry) => {
+        if (selectedTags.every((selectedTag) => glossaryEntry.tags && glossaryEntry.tags.includes(selectedTag))) {
+          filteredGlossaryEntries.push(glossaryEntry)
         }
-      });
+      })
 
-      return filteredGlossaryEntries;
+      return filteredGlossaryEntries
     },
     []
-  );
+  )
 
   const onFilterByIndexElement = useCallback(
-    (
-      selectedIndexElement: string,
-      glossaryEntries: GlossaryEntryProps[]
-    ): GlossaryEntryProps[] => {
-      const filteredGlossaryEntries: GlossaryEntryProps[] = [];
+    (selectedIndexElement: string, glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[] => {
+      const filteredGlossaryEntries: GlossaryEntryProps[] = []
 
-      if (selectedIndexElement === null || selectedIndexElement === "") {
-        return glossaryEntries;
+      if (selectedIndexElement === null || selectedIndexElement === '') {
+        return glossaryEntries
       }
 
-      if (selectedIndexElement === t("pages.glossary.fundamentals")) {
-        glossaryEntries.forEach((glossaryEntry) => {
+      if (selectedIndexElement === t('pages.glossary.fundamentals')) {
+        Array.from(glossaryEntries).forEach((glossaryEntry) => {
           if (glossaryEntry.fundamental) {
-            filteredGlossaryEntries.push(glossaryEntry);
+            filteredGlossaryEntries.push(glossaryEntry)
           }
-        });
+        })
 
-        return filteredGlossaryEntries;
+        return filteredGlossaryEntries
       }
 
-      glossaryEntries.forEach((glossaryEntry) => {
-        if (
-          glossaryEntry.term &&
-          Array.from(glossaryEntry.term)[0] === selectedIndexElement
-        ) {
-          filteredGlossaryEntries.push(glossaryEntry);
+      Array.from(glossaryEntries).forEach((glossaryEntry) => {
+        if (glossaryEntry.term && Array.from(glossaryEntry.term)[0] === selectedIndexElement) {
+          filteredGlossaryEntries.push(glossaryEntry)
         }
-      });
+      })
 
-      return filteredGlossaryEntries;
+      return filteredGlossaryEntries
     },
     []
-  );
+  )
 
   const onSearchByQuery = useCallback(
     (glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[] => {
-      const searchedGlossaryEntries: GlossaryEntryProps[] = [];
+      const searchedGlossaryEntries: GlossaryEntryProps[] = []
 
-      if (searchQuery === undefined || searchQuery === "") {
-        return glossaryEntries;
+      if (searchQuery === undefined || searchQuery === '') {
+        return glossaryEntries
       }
 
-      glossaryEntries.forEach((glossaryEntry) => {
+      Array.from(glossaryEntries).forEach((glossaryEntry) => {
         if (
-          glossaryEntry.term
-            ?.toLowerCase()
-            .includes(searchQuery.toLowerCase()) ||
-          glossaryEntry.definition
-            ?.toLowerCase()
-            .includes(searchQuery.toLowerCase()) ||
-          glossaryEntry.sources
-            ?.toLowerCase()
-            .includes(searchQuery.toLowerCase()) ||
-          glossaryEntry.tags?.some((tag) =>
-            tag.toLowerCase().includes(searchQuery.toLowerCase())
-          )
+          glossaryEntry.term?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          glossaryEntry.definition?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          glossaryEntry.sources?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          glossaryEntry.tags?.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
         ) {
-          searchedGlossaryEntries.push(glossaryEntry);
+          searchedGlossaryEntries.push(glossaryEntry)
         }
-      });
+      })
 
-      return searchedGlossaryEntries;
+      return searchedGlossaryEntries
     },
     [searchQuery]
-  );
+  )
 
   const onCollapseAll = useCallback(() => {
-    setExpandedList && setExpandedList([]);
-  }, []);
+    setExpandedList && setExpandedList([])
+  }, [])
 
   const onExpandAll = useCallback((glossaryEntries: GlossaryEntryProps[]) => {
-    const tempExpandedList: string[] = [];
+    const tempExpandedList: string[] = []
 
     glossaryEntries.forEach((glossaryEntry) => {
-      glossaryEntry.term && tempExpandedList.push(glossaryEntry.term);
-    });
+      glossaryEntry.term && tempExpandedList.push(glossaryEntry.term)
+    })
 
-    setExpandedList && setExpandedList(tempExpandedList);
-  }, []);
+    setExpandedList && setExpandedList(tempExpandedList)
+  }, [])
 
   return {
     glossaryState: {
@@ -178,12 +145,12 @@ export const useGlossaryForm = (
       setExpandedList: setExpandedList,
       setSearchQuery: setSearchQuery,
       setSelectedIndexElement: setSelectedIndexElement,
-      setSelectedTags: setSelectedTags,
+      setSelectedTags: setSelectedTags
     },
     filterByTags: onFilterByTags,
     filterByIndexElement: onFilterByIndexElement,
     searchByQuery: onSearchByQuery,
     collapseAll: onCollapseAll,
-    expandAll: onExpandAll,
-  } as const;
-};
+    expandAll: onExpandAll
+  } as const
+}
