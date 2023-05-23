@@ -30,6 +30,7 @@ const GlossaryIndex = (props: GlossaryIndexProps) => {
       <ToggleButtonList
         toggleButtonList={props.indexElements}
         selectedElement={props.selectedIndexElement}
+        data-testid="glossaryIndexButton"
       />
     </ToggleButtonGroup>
   );

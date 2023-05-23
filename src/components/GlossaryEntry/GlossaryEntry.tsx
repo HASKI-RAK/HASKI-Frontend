@@ -50,7 +50,7 @@ const GlossaryEntry = ({
         <AccordionSummary expandIcon={<ExpandMoreIcon />} id="panel1a-header">
           <Grid container columnSpacing={1}>
             <Grid item>
-              <Typography component="span" key={props.term} variant="h4">
+              <Typography component="span" key={props.term} variant="h4" data-testid={"glossaryEntryTerm"} >
                 {props.term}
               </Typography>
             </Grid>
@@ -59,7 +59,7 @@ const GlossaryEntry = ({
                 sx={{ display: "flex", flexWrap: "wrap", gap: 0.5, pt: 0.5 }}
               >
                 {props.tags &&
-                  props.tags.map((tag) => <Chip key={tag} label={tag} />)}
+                  props.tags.map((tag) => <Chip key={tag} label={tag} data-testid="glossaryEntryTag"/>)}
               </Box>
             </Grid>
           </Grid>
@@ -67,7 +67,7 @@ const GlossaryEntry = ({
         <AccordionDetails>
           <Grid container rowSpacing={1}>
             <Grid item xs={12} sm={12}>
-              <Typography component="span" key={props.definition} variant="h6">
+              <Typography component="span" key={props.definition} variant="h6" data-testid="glossaryEntryDefinition">
                 {props.definition}
               </Typography>
             </Grid>
@@ -79,12 +79,13 @@ const GlossaryEntry = ({
                   variant="subtitle1"
                   fontWeight="bold"
                 >
-                  {props.sources && t("pages.glossary.sources")}
+                  {props.sources && t("pages.glossary.sources")} 
                 </Typography>
                 <Typography
                   component="span"
-                  key={props.sources}
+                  key={props.sources+"1"}
                   variant="subtitle1"
+                  data-testid="glossaryEntrySources"
                 >
                   {props.sources}
                 </Typography>
