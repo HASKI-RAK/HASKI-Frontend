@@ -1,23 +1,30 @@
 import { Box, Paper, Typography } from '@mui/material'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import FeedbackIcon from '@mui/icons-material/Feedback'
+import { useBoundNodeStore } from '@store'
 
-export const FeedbackNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
+const FeedbackNodeMemo = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
   const [title] = useState(data.name)
-  const handleOpen = () => setIsOpen(true)
-  const handleClose = () => setIsOpen(false)
+  console.log("rendering feedback node with data: ", data)
+
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+
+  const handleClose = () => {
+    setIsOpen(false)
+  }
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={handleOpen}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
-        onClick={handleOpen}
         sx={{
           width: '65px',
           height: '65px',
@@ -30,8 +37,10 @@ export const FeedbackNode = ({ data }: NodeProps<LearningPathLearningElementNode
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}
       </Typography>
-      <IFrameModal url={url} title={title} isOpen={isOpen} onClose={handleClose} />
+      <IFrameModal url={url} title={title} isOpen={isOpen} onClose={handleClose} key={url} />
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
     </Box>
   )
 }
+
+export const FeedbackNode = memo(FeedbackNodeMemo)

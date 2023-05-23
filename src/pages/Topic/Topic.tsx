@@ -2,7 +2,7 @@ import { nodeTypes, LearningPathLearningElementNode } from '@components'
 import { LearningElement, LearningPath, LearningPathLearningElement, LearningPathReturn } from '@core'
 import { Box, Theme, useTheme } from '@mui/material'
 import log from 'loglevel'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactFlow, { Node, Edge, MiniMap, Controls, Background } from 'reactflow'
 import useBoundStore from '@store'
@@ -30,7 +30,7 @@ const learningElement: LearningElement[] = [
     lms_id: 108,
     name: 'Kurzübersicht',
     activity_type: 'h5pactivity',
-    classification: 'KÜ',
+    classification: 'RQ',
     university: 'HS-KE',
     created_by: 'Dimitri Bigler',
     created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
@@ -40,7 +40,7 @@ const learningElement: LearningElement[] = [
   {
     id: 5,
     lms_id: 108,
-    name: 'Kurzübersicht',
+    name: 'Übung 1 - leicht',
     activity_type: 'h5pactivity',
     classification: 'ÜB', // EK
     university: 'HS-KE',
@@ -52,7 +52,7 @@ const learningElement: LearningElement[] = [
   {
     id: 6,
     lms_id: 108,
-    name: 'Kurzübersicht',
+    name: 'Übung 2 - leicht',
     activity_type: 'h5pactivity',
     classification: 'ÜB', // AN
     university: 'HS-KE',
@@ -64,7 +64,7 @@ const learningElement: LearningElement[] = [
   {
     id: 7,
     lms_id: 108,
-    name: 'Kurzübersicht',
+    name: 'Übung 3 leicht',
     activity_type: 'h5pactivity',
     classification: 'ÜB', // AN
     university: 'HS-KE',
@@ -76,7 +76,7 @@ const learningElement: LearningElement[] = [
   {
     id: 8,
     lms_id: 108,
-    name: 'Kurzübersicht',
+    name: 'Animation cool',
     activity_type: 'h5pactivity',
     classification: 'AN', // AN
     university: 'HS-KE',
@@ -88,7 +88,7 @@ const learningElement: LearningElement[] = [
   {
     id: 8,
     lms_id: 108,
-    name: 'Kurzübersicht',
+    name: 'Animation cool 2',
     activity_type: 'h5pactivity',
     classification: 'AN', // AN
     university: 'HS-KE',
@@ -99,7 +99,7 @@ const learningElement: LearningElement[] = [
   }
 ]
 
-const learningPathLearningElement: LearningPathLearningElement[] = [
+const learningPathLearningElements: LearningPathLearningElement[] = [
   {
     position: 1,
     id: 4,
@@ -155,7 +155,7 @@ const learningPath: LearningPath = {
   calculated_on: 'null',
   course_id: 2,
   id: 16,
-  path: learningPathLearningElement
+  path: learningPathLearningElements
 }
 
 type TopicProps = {
@@ -175,6 +175,21 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const fetchUser = useBoundStore((state) => state.fetchUser)
   const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
 
+  const mapNodes = useCallback((learning_path_data: LearningPath) => {
+    const nodes = mapLearningPathToNodes(learning_path_data, theme)
+
+    // Id array of all nodes which types are not 'ÜB
+    const nodesWithEdges = nodes.filter((node) => node.type !== 'ÜB').map((node) => node.id)
+
+
+    const edges: Edge[] = nodesWithEdges.map((item, index) => ({
+      id: 'Edge' + item.toString(),
+      source: item,
+      target: nodesWithEdges[index + 1]
+    }))
+    return { nodes, edges }
+  }, [theme])
+
   useEffect(() => {
     // request to backend to get learning path for topic
     // alert('Topic: ' + topic)
@@ -183,21 +198,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         .then((user) => {
           fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, Number(courseId), Number(topicId)).then(
             (learning_path_data) => {
-              const nodes = mapLearningPathToNodes(learning_path_data, theme)
-
+              const { nodes, edges } = mapNodes(learning_path_data)
+              console.log("rendering nodes")
               setInitialNodes(nodes)
-              // Get first character of node ids
-              const nodeIDs = nodes.map((item) => Array.from(item.id)[0])
-
-              // Erase duplicate of node ids
-              const uniqueNodeIDs = [...new Set(nodeIDs)]
-
-              const edges: Edge[] = uniqueNodeIDs.map((item, index) => ({
-                id: 'Edge' + item.toString(),
-                source: item,
-                target: uniqueNodeIDs[index + 1]
-              }))
-
               //setInitialEdges(edges)
               setInitialEdges(edges)
             }
@@ -214,12 +217,12 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // TODO: HIer edges rendern
   return initialNodes && initialEdges ? (
     <Box height={'100%'}>
-      <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
+      <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} >
         <Background gap={16} />
         <MiniMap nodeBorderRadius={2} />
         <Controls />
       </ReactFlow>
-    </Box>
+    </Box >
   ) : (
     <Skeleton variant="rectangular" width={'80%'} height={'80%'} />
   )
@@ -228,6 +231,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 export default Topic
 
 const mapLearningPathToNodes = (learningPath: LearningPath, theme: Theme): Node[] => {
+  console.log("mapping nodes")
   // Sort learning path
   const sortedLearningPath = learningPath.path.sort((a, b) => a.position - b.position)
 
@@ -260,12 +264,12 @@ const mapLearningPathToNodes = (learningPath: LearningPath, theme: Theme): Node[
       is_recommended: node.recommended
     }
     return {
-      id: index.toString(),
+      id: node.position.toString() + "-" + node.learning_element.lms_id,
       type: node.learning_element.classification,
       data: node_data,
       position: {
         x: nodeOffsetX + 300 * index,
-        y: 50
+        y: 250 * (learningPathExercises[0].position - 1) + 50
       },
       style: learningElementStyle
     }
@@ -319,14 +323,34 @@ const mapLearningPathToNodes = (learningPath: LearningPath, theme: Theme): Node[
   const learningElementNodesBeforeExercises = learningElementNodesExcludingExercises.filter(
     (item) => exerciseLearningElementParentNode && parseInt(item.id) < parseInt(exerciseLearningElementParentNode.id)
   )
+
+
   const learningElementNodesAfterExercises = learningElementNodesExcludingExercises.filter(
     (item) => exerciseLearningElementParentNode && parseInt(item.id) > parseInt(exerciseLearningElementParentNode.id)
   )
 
+
+  // Add 1 to the id of all elements (including exercises) after the exercise parent node
+  const learningElementNodesAfterExercisesElementParentNode = learningElementNodesAfterExercises.map((item) => {
+    return {
+      ...item,
+      id: (parseInt(item.id) + 1).toString()
+    }
+  })
+
+  // const exerciseLearningElementChildNodesWithIncreasedId = exerciseLearningElementChildNodes.map((item) => {
+  //   return {
+  //     ...item,
+  //     id: (parseInt(item.id) + 1).toString()
+  //   }
+  // })
+
+
+
   const learningElementNodes = [
     ...(learningElementNodesBeforeExercises.length > 0 ? learningElementNodesBeforeExercises : learningElementNodesExcludingExercises),
     ...(exerciseLearningElementParentNode ? [exerciseLearningElementParentNode, ...exerciseLearningElementChildNodes] : []),
-    ...learningElementNodesAfterExercises
+    ...learningElementNodesAfterExercisesElementParentNode
   ]
 
   return learningElementNodes

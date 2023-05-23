@@ -1,4 +1,7 @@
 import { DefaultBox as Box, DefaultModal as Modal } from '@common/components'
+import { Button } from '@mui/material'
+import { useBoundNodeStore } from '@store'
+import { memo, useEffect, useState } from 'react'
 
 const style_box = {
   position: 'absolute',
@@ -18,7 +21,7 @@ type IFrameModalProps = {
   url: string
   title: string
   isOpen: boolean
-  onClose?: () => void
+  onClose: () => void
 }
 
 /**
@@ -27,27 +30,48 @@ type IFrameModalProps = {
  * @param props.url is the url of the iframe.
  * @param props.title is the title of the iframe.
  * @param props.isOpen is a boolean that determines if the modal is open or not.
+ * @param props.onClose is a function that is called when the modal is closed
+ * 
  * @returns {JSX.Element} - An element that renders an iframe in a modal.
  * @category Components
  */
-const IFrameModal = (props: IFrameModalProps): JSX.Element => {
+const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
+  const [open, setOpen] = useState(false)
+
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => {
+    setOpen(false)
+    props.onClose()
+  }
+
+  useEffect(() => {
+    setOpen(props.isOpen)
+  }, [props.isOpen])
+
+
   return (
-    <Modal open={props.isOpen} onClose={props.onClose}>
-      <Box sx={style_box}>
-        <iframe
-          src={props.url}
-          title={props.title}
-          width="120%"
-          height="130%"
-          style={{
-            position: 'relative',
-            left: '-19%',
-            top: '-21%'
-          }}
-        />
-      </Box>
+    <Modal open={props.isOpen} onClose={handleClose}>
+      <>
+        {/* Close button on top right */}
+        <Button onClick={handleClose} style={{ position: 'absolute', top: '0', right: '0' }}>
+
+        </Button>
+        <Box sx={style_box}>
+          <iframe
+            src={props.url}
+            title={props.title}
+            width="120%"
+            height="130%"
+            style={{
+              position: 'relative',
+              left: '-19%',
+              top: '-21%'
+            }}
+          />
+        </Box>
+      </>
     </Modal>
   )
 }
 
-export default IFrameModal
+export default memo(IFrameModalMemo)
