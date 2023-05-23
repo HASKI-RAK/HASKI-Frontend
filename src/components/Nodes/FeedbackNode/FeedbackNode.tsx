@@ -1,5 +1,5 @@
 import { Box, Paper, Typography } from '@mui/material'
-import { memo, useState } from 'react'
+import { memo, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { IFrameModal, LearningPathLearningElementNode } from '@components'
@@ -11,18 +11,24 @@ const FeedbackNodeMemo = ({ data }: NodeProps<LearningPathLearningElementNode>) 
   const [isOpen, setIsOpen] = useState(false)
   const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
   const [title] = useState(data.name)
-  console.log("rendering feedback node with data: ", data)
 
-  const handleOpen = () => {
-    setIsOpen(true)
-  }
+  const handleOpen = useMemo(() => {
+    return () => {
+      setIsOpen(true)
+    }
+  }, [])
 
   const handleClose = () => {
     setIsOpen(false)
   }
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={handleOpen}>
+    <Box
+      sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      onClick={() => {
+        data.handleOpen()
+        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
+      }}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
         sx={{

@@ -7,17 +7,16 @@ const useAuthProvider = () => {
   const [isAuth, setIsAuth] = useState(false)
 
   // UX
-  const { addSnackbar } = useContext(SnackbarContext)
   const { t } = useTranslation()
 
   const logout = useCallback(() => {
     getLogout().then((response) => {
       if (response.status === 200) {
         setIsAuth(false)
-        addSnackbar({ message: t('services.AuthProvider.logout'), severity: 'success', autoHideDuration: 5000 })
+        //addSnackbar({ message: t('services.AuthProvider.logout'), severity: 'success', autoHideDuration: 5000 })
       }
     })
-  }, [addSnackbar, t])
+  }, [])
 
   // Side effects
   useEffect(() => {
@@ -28,24 +27,23 @@ const useAuthProvider = () => {
           setIsAuth(true)
         } else if (response.status === 403) {
           setIsAuth(false)
-          addSnackbar({
-            message: t('services.AuthProvider.cookienotfound'),
-            severity: 'error',
-            autoHideDuration: 5000
-          })
-        }
-        else {
+          // addSnackbar({
+          //   message: t('services.AuthProvider.cookienotfound'),
+          //   severity: 'error',
+          //   autoHideDuration: 5000
+          // })
+        } else {
           setIsAuth(false)
         }
       })
       .catch(() => {
-        addSnackbar({
-          message: t('services.AuthProvider.connectivityerror'),
-          severity: 'error',
-          autoHideDuration: 5000
-        })
+        // addSnackbar({
+        //   message: t('services.AuthProvider.connectivityerror'),
+        //   severity: 'error',
+        //   autoHideDuration: 5000
+        // })
       })
-  }, [addSnackbar, t])
+  }, [])
 
   return useMemo(() => ({ isAuth, setIsAuth, logout }), [isAuth, logout])
 }
