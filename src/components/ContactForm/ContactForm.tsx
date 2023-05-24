@@ -20,7 +20,7 @@ import { useContactForm as _useContactForm, useContactFormHookParams, ContactFor
 
 export type ContactFormProps = {
   descriptionDefaultValue?: string
-  onSubmit?: (formdata: any) => void
+  onSubmit?: () => void
   useContactForm?: (params?: useContactFormHookParams) => ContactFormHookReturn
 }
 /**
@@ -74,7 +74,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
     } else {
       setTextfieldError(false)
       setSelectError(false)
-      onSubmit(reportTopic, reportType, description)
+      onSubmit()
     }
   }
 

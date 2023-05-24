@@ -2,6 +2,8 @@ import React from 'react'
 import { Contact } from '@pages'
 import '@testing-library/jest-dom'
 import { render, fireEvent, act } from '@testing-library/react'
+import { ContactForm } from '@components'
+import * as onSubmitHandler from './Contact.hooks'
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => {
@@ -27,35 +29,37 @@ jest.mock('react-i18next', () => ({
 
 describe('Test Contactpage', () => {
   const submit = jest.fn()
-  test('sends onSubmit to Contactform', () => {
-    const form = render(<Contact onSubmit={submit} />)
-
-    const submitButton = form.getByText('components.ContactForm.submit')
-    const input = form.getByRole('textbox')
-    fireEvent.change(input, { target: { value: 'text' } })
-    fireEvent.mouseDown(form.getByRole('button', { name: /Topic/i }))
-    act(() => {
-      form.getAllByRole('option')[0].click()
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve({ status: 200 }),
+      status: 200,
+      message: 'OK'
     })
-    fireEvent.click(submitButton)
-    expect(submit).toBeCalled()
+  ) as jest.Mock
+  beforeEach(() => {
+    jest.spyOn(onSubmitHandler, 'useContact').mockImplementation(() => {
+      return {
+        onSubmitHandler: submit
+      }
+    })
   })
+
   test('not sending', () => {
-    render(<Contact onSubmit={submit} />)
+    render(<Contact />)
     expect(submit).not.toBeCalled()
   })
+  test('sends onSubmit to Contactform', () => {
+    const form = render(<ContactForm onSubmit={submit} />)
 
-  test('test default no action submit', () => {
-    const form = render(<Contact />)
-
+    const submitButton = form.getByText('components.ContactForm.submit')
     const input = form.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'text' } })
     fireEvent.mouseDown(form.getByRole('button', { name: /Topic/i }))
     act(() => {
       form.getAllByRole('option')[0].click()
     })
-
-    const submitButton = form.getByText('components.ContactForm.submit')
     fireEvent.click(submitButton)
+    expect(onSubmitHandler).toBeCalled()
+    render(<Contact />)
   })
 })

@@ -1,19 +1,19 @@
 export interface FormDataType {
-  reporttype: string
-  reporttopic: string
+  reportType: string
+  reportTopic: string
   description: string
 }
 
-export type postContactFormResponse = {
+export type PostContactFormResponse = {
   status: number
   message: string
 }
-export type postContactFormParams = {
+export type PostContactFormParams = {
   nonce?: string
   responseBody?: FormDataType
 }
-export const postContactFormInputs = async (responseBody?: FormDataType): Promise<postContactFormResponse> => {
-  return fetch(process.env.BACKEND + `/contactform_inputs`, {
+export const PostContactFormInputs = async (responseBody?: FormDataType): Promise<PostContactFormResponse> => {
+  return fetch(process.env.BACKEND + `/contactform`, {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify({ responseBody }),
@@ -25,5 +25,5 @@ export const postContactFormInputs = async (responseBody?: FormDataType): Promis
       status: response.status,
       message: response.statusText
     }
-  }) as Promise<postContactFormResponse>
+  })
 }

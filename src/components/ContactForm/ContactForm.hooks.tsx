@@ -28,16 +28,16 @@ export const useContactForm = (params?: useContactFormHookParams): ContactFormHo
   const [description, setDescription] = useState(defaultDescription)
 
   interface FormDataType {
-    reporttype: string
-    reporttopic: string
+    reportType: string
+    reportTopic: string
     description: string
   }
-  const responseBody: FormDataType = { reporttype: '', reporttopic: '', description: '0' }
+  const responseBody: FormDataType = { reportType: '', reportTopic: '', description: '' }
 
   // ** Logic **//
   const submit = () => {
-    responseBody.reporttype = reportType
-    responseBody.reporttopic = reportTopic
+    responseBody.reportType = reportType
+    responseBody.reportTopic = reportTopic
     responseBody.description = description
   }
 

@@ -1,20 +1,20 @@
-import { postContactFormInputs, FormDataType } from '@services'
+import { PostContactFormInputs, FormDataType } from '@services'
 export type ContactHookReturn = {
   onSubmitHandler: () => void
 }
+export const onSubmitHandler = () => {
+  const postBody: FormDataType = { reportType: 'tes', reportTopic: 'Test', description: '0' }
 
+  PostContactFormInputs(postBody).then((response) => {
+    if (response.status === 200) {
+      console.log('Success')
+    }
+
+    //TODO catch and🍿 snackbar
+  })
+}
 export const useContact = (): ContactHookReturn => {
-  const onSubmitHandler = () => {
-    const potBody: FormDataType = { reporttype: 'tes', reporttopic: 'Test', description: '0' }
-
-    postContactFormInputs(potBody).then((response) => {
-      if (response.status === 200) {
-        console.log('Success')
-      }
-
-      //TODO catch and🍿 snackbar
-    })
-  }
+  onSubmitHandler()
 
   return {
     onSubmitHandler
