@@ -227,7 +227,11 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('help')}>
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  window.open('/files/Bedienungsanleitung_von_HASKI_Alpha.pdf', '_blank')
+                }
+                }>
                 <HelpIcon data-testid="HelpIcon" />
               </IconButton>
             </Tooltip>
