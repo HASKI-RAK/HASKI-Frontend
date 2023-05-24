@@ -321,7 +321,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Kurzübersicht - EM Allg",
+                    name: "Kurzübersicht",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -346,7 +346,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 2,
                     lms_id: 2,
-                    name: "Erklärung - EM Allg",
+                    name: "Erklärung",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -371,7 +371,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 3,
                     lms_id: 3,
-                    name: "Animation - EM Allg",
+                    name: "Animation",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -396,7 +396,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 4,
                     lms_id: 4,
-                    name: "Beispiel - EM Allg",
+                    name: "Beispiel",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -421,7 +421,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 5,
                     lms_id: 5,
-                    name: "Selbsteinschätzungstest - EM Allg",
+                    name: "Selbsteinschätzungstest",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -446,7 +446,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 6,
                     lms_id: 6,
-                    name: "Leichte Übung - 1 - EM Allg",
+                    name: "Leichte Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -471,7 +471,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 7,
                     lms_id: 7,
-                    name: "Leichte Übung - 2 - EM Allg",
+                    name: "Leichte Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -496,7 +496,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 8,
                     lms_id: 8,
-                    name: "Mittlere Übung - 1 - EM Allg",
+                    name: "Mittlere Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -521,7 +521,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 9,
                     lms_id: 9,
-                    name: "Mittlere Übung - 2 - EM Allg",
+                    name: "Mittlere Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -546,7 +546,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 10,
                     lms_id: 10,
-                    name: "Schwere Übung - 1 - EM Allg",
+                    name: "Schwere Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -571,7 +571,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 11,
                     lms_id: 11,
-                    name: "Schwere Übung - 2 - EM Allg",
+                    name: "Schwere Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -596,7 +596,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 12,
                     lms_id: 12,
-                    name: "Zusammenfassung - EM Allg",
+                    name: "Zusammenfassung",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -621,7 +621,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 13,
                     lms_id: 13,
-                    name: "Zusatzliteratur - EM Allg",
+                    name: "Zusatzliteratur",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -679,7 +679,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Erklärung - Bekannte EM",
+                    name: "Erklärung",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -737,7 +737,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Kurzübersicht - Strategie",
+                    name: "Kurzübersicht",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -762,7 +762,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Erklärung - Strategie",
+                    name: "Erklärung",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -787,7 +787,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Animation - Strategie",
+                    name: "Animation",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -812,7 +812,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Beispiel - Strategie",
+                    name: "Beispiel",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -837,7 +837,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Selbsteinschätzungstest - Strategie",
+                    name: "Selbsteinschätzungstest",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -862,7 +862,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Leichte Übung - 1 - Strategie",
+                    name: "Leichte Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -887,7 +887,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Leichte Übung - 2 - Strategie",
+                    name: "Leichte Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -912,7 +912,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Mittlere Übung - 1 - Strategie",
+                    name: "Mittlere Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -937,7 +937,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Mittlere Übung - 2 - Strategie",
+                    name: "Mittlere Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -962,7 +962,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 1 - Strategie",
+                    name: "Schwere Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -987,7 +987,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 2 - Strategie",
+                    name: "Schwere Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1011,7 +1011,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Zusammenfassung - Strategie",
+                    name: "Zusammenfassung",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1036,7 +1036,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Zusatzliteratur - Strategie",
+                    name: "Zusatzliteratur",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1119,7 +1119,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Kurzübersicht - Zustand",
+                    name: "Kurzübersicht",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1144,7 +1144,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Erklärung - Zustand",
+                    name: "Erklärung",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1169,7 +1169,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Animation - Zustand",
+                    name: "Animation",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1194,7 +1194,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Beispiel - Zustand",
+                    name: "Beispiel",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1219,7 +1219,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Selbsteinschätzungstest - Zustand",
+                    name: "Selbsteinschätzungstest",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1244,7 +1244,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Leichte Übung - 1 - Zustand",
+                    name: "Leichte Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1269,7 +1269,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Leichte Übung - 2 - Zustand",
+                    name: "Leichte Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1294,7 +1294,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Mittlere Übung - 1 - Zustand",
+                    name: "Mittlere Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1319,7 +1319,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Mittlere Übung - 2 Aufgabe 1 Heatmap - Zustand",
+                    name: "Mittlere Übung - 2 Aufgabe 1 Heatmap",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1344,7 +1344,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Mittlere Übung - 2 - Zustand",
+                    name: "Mittlere Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1369,7 +1369,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 1 Aufgabe 1 Heatmap - Zustand",
+                    name: "Schwere Übung - 1 Aufgabe 1 Heatmap",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1394,7 +1394,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 1 Aufgabe 2 Heatmap - Zustand",
+                    name: "Schwere Übung - 1 Aufgabe 2 Heatmap",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1419,7 +1419,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 1 - Zustand",
+                    name: "Schwere Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1444,7 +1444,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 2 - Zustand",
+                    name: "Schwere Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1469,7 +1469,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Zusammenfassung - Zustand",
+                    name: "Zusammenfassung",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1494,7 +1494,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Zusatzliteratur - Zustand",
+                    name: "Zusatzliteratur",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1577,7 +1577,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Kurzübersicht - Adapter",
+                    name: "Kurzübersicht",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1602,7 +1602,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Erklärung - Adapter",
+                    name: "Erklärung",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1627,7 +1627,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Animation - Adapter",
+                    name: "Animation",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1652,7 +1652,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Beispiel - Adapter",
+                    name: "Beispiel",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1677,7 +1677,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Selbsteinschätzungstest - Adapter",
+                    name: "Selbsteinschätzungstest",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1702,7 +1702,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Leichte Übung - 1 - Adapter",
+                    name: "Leichte Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1727,7 +1727,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Leichte Übung - 2 - Adapter",
+                    name: "Leichte Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1752,7 +1752,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Mittlere Übung - 1.1 - Adapter",
+                    name: "Mittlere Übung - 1.1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1777,7 +1777,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Mittlere Übung - 1.2 - Adapter",
+                    name: "Mittlere Übung - 1.2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1802,7 +1802,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Mittlere Übung - 2 - Adapter",
+                    name: "Mittlere Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1827,7 +1827,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 1.1 - Adapter",
+                    name: "Schwere Übung - 1.1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1852,7 +1852,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 1.2 - Adapter",
+                    name: "Schwere Übung - 1.2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1877,7 +1877,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 1.3 - Adapter",
+                    name: "Schwere Übung - 1.3",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1902,7 +1902,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 2.1 - Adapter",
+                    name: "Schwere Übung - 2.1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1927,7 +1927,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 2.2 - Adapter",
+                    name: "Schwere Übung - 2.2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1952,7 +1952,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Zusammenfassung - Adapter",
+                    name: "Zusammenfassung",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -1977,7 +1977,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Zusatzliteratur - Adapter",
+                    name: "Zusatzliteratur",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2060,7 +2060,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Kurzübersicht - Fassade",
+                    name: "Kurzübersicht",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2085,7 +2085,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Erklärung - Fassade",
+                    name: "Erklärung",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2110,7 +2110,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Animation - Fassade",
+                    name: "Animation",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2135,7 +2135,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Beispiel - Fassade",
+                    name: "Beispiel",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2160,7 +2160,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Selbsteinschätzungstest - Fassade",
+                    name: "Selbsteinschätzungstest",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2185,7 +2185,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Leichte Übung - 1 - Fassade",
+                    name: "Leichte Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2210,7 +2210,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Leichte Übung - 2 - Fassade",
+                    name: "Leichte Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2235,7 +2235,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Mittlere Übung - 1 - Fassade",
+                    name: "Mittlere Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2260,7 +2260,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Mittlere Übung - 2 - Fassade",
+                    name: "Mittlere Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2285,7 +2285,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 1 - Fassade",
+                    name: "Schwere Übung - 1",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2310,7 +2310,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Schwere Übung - 2 - Fassade",
+                    name: "Schwere Übung - 2",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2335,7 +2335,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Zusammenfassung - Fassade",
+                    name: "Zusammenfassung",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2360,7 +2360,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Zusatzliteratur - Fassade",
+                    name: "Zusatzliteratur",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2385,7 +2385,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                 learning_element: {
                     id: 1,
                     lms_id: 1,
-                    name: "Evaluation nach dem Thema - Fassade",
+                    name: "Evaluation nach dem Thema",
                     activity_type: "feedback",
                     classification: "RQ",
                     university: "HS-KE",
@@ -2503,7 +2503,7 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
     const [loading, setLoading] = useState(true)
     const [topics, setTopics] = useState<Topic[]>([])
     const [learningPaths, setLearningPaths] = useState<LearningPath[]>([])
-    const fetchUser = useBoundStore((state) => state.fetchUser)
+    //const fetchUser = useBoundStore((state) => state.fetchUser)
     //const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
 
     const effect = async() => {
