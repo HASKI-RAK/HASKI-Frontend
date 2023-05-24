@@ -10,6 +10,7 @@ import { Text } from './Text/Text'
 import { ImprintContent } from './Imprint/ImprintContent'
 import LoginForm from './LoginForm/LoginForm'
 import MenuBar from './MenuBar/MenuBar'
+import { PrivacyPolicyContent } from "./PrivacyPolicy/PrivacyPolicyContent";
 
 import Footer from './Footer/Footer'
 import LocalNav from './LocalNav/LocalNav'
@@ -48,6 +49,7 @@ export {
   ProjectDescriptionStepper,
   SnackbarTransition,
   ImprintContent,
-  IFrameModal
+  IFrameModal,
+  PrivacyPolicyContent
 }
 export type { SnackbarMessageProps, SeverityType }

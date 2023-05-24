@@ -11,7 +11,8 @@ import {
   Imprint,
   Topic,
   CoursePage,
-  PageNotFound
+  PageNotFound,
+  PrivacyPolicy,
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { logBuffer } from '@shared'
@@ -44,6 +45,7 @@ const App = () => (
               <Route path="/projectinformation" element={<ProjectInformation />} />
               <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
               <Route path="/imprint" element={<Imprint />} />
+              <Route path="/privacypolicy" element={<PrivacyPolicy />} />
               <Route path="/🥚" element={<div>Ei</div>} />
               <Route path="*" element={<PageNotFound />} />
             </Route>
