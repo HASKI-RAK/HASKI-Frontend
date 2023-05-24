@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FormDataType } from '@services'
 
 export type useContactFormHookParams = {
   defaultReportType?: string
@@ -20,6 +21,8 @@ export type ContactFormHookReturn = {
  * provides function to submit the form.
  * @param params - The default values for the form.
  * @returns {ContactFormHookReturn} - The form logic.
+ * @function submit - Function for submitting the form. It writes the values of the form into the responseBody.
+ * The responseBody is the object that will be sent to the backend.
  */
 export const useContactForm = (params?: useContactFormHookParams): ContactFormHookReturn => {
   const { defaultReportType = '', defaultReportTopic = '', defaultDescription = '' } = params || {}
@@ -27,11 +30,6 @@ export const useContactForm = (params?: useContactFormHookParams): ContactFormHo
   const [reportTopic, setReportTopic] = useState(defaultReportTopic)
   const [description, setDescription] = useState(defaultDescription)
 
-  interface FormDataType {
-    reportType: string
-    reportTopic: string
-    description: string
-  }
   const responseBody: FormDataType = { reportType: '', reportTopic: '', description: '' }
 
   // ** Logic **//

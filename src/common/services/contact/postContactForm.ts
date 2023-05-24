@@ -12,6 +12,10 @@ export type PostContactFormParams = {
   nonce?: string
   responseBody?: FormDataType
 }
+/**
+ * Send the input of the contact form to the backend.
+ * @returns PostContactFormResponse
+ */
 export const PostContactFormInputs = async (responseBody?: FormDataType): Promise<PostContactFormResponse> => {
   return fetch(process.env.BACKEND + `/contactform`, {
     method: 'POST',
