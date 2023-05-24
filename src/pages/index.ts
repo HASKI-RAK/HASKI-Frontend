@@ -13,6 +13,7 @@ import Imprint from './Imprint/Imprint'
 import Topic from './Topic/Topic'
 import CoursePage from './CoursePage/CoursePage'
 import PageNotFound from './PageNotFound/PageNotFound'
+import PrivacyPolicy from "./PrivacyPolicy/PrivacyPolicy";
 export {
   MainFrame,
   App,
@@ -25,5 +26,6 @@ export {
   Imprint,
   Topic,
   CoursePage,
-  PageNotFound
+  PageNotFound,
+  PrivacyPolicy
 }
