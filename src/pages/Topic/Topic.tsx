@@ -3,7 +3,7 @@ import { LearningElement, LearningPath, LearningPathLearningElement, LearningPat
 import { Box, Button, Paper, Theme, Typography, useTheme } from '@mui/material'
 import log from 'loglevel'
 import { useEffect, useState, useContext, useCallback, useMemo } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Node, Edge, MiniMap, Controls, Background, Handle, NodeProps, Position } from 'reactflow'
 import useBoundStore from '@store'
 import { AuthContext } from '@services'
@@ -167,6 +167,7 @@ type TopicProps = {
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialNodes, setInitialNodes] = useState<Node[]>()
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
+  const navigate = useNavigate()
   const authcontext = useContext(AuthContext)
   const { courseId, topicId } = useParams()
   const { t } = useTranslation()
@@ -231,7 +232,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   useEffect(() => {
     // request to backend to get learning path for topic
     // alert('Topic: ' + topic)
-    if (authcontext.isAuth)
+    log.log('Topic page')
+    const preventEndlessLoading = setTimeout(() => {
+      log.log('Topic page timeout')
+      navigate('/login')
+    }, 5000)
+    if (authcontext.isAuth) {
+      clearTimeout(preventEndlessLoading)
       fetchUser().then((user) => {
         fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, Number(courseId), Number(topicId)).then(
           (learning_path_data) => {
@@ -242,6 +249,10 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           }
         )
       })
+    }
+    return () => {
+      clearTimeout(preventEndlessLoading)
+    }
   }, [authcontext.isAuth, courseId, fetchLearningPath, fetchUser, theme, topicId])
 
   log.setLevel('error')
@@ -322,20 +333,20 @@ const mapLearningPathToNodes = (
   const exerciseLearningElementParentNode =
     learningPathExercises.length > 0
       ? {
-          id: learningPathExercises[0].position.toString(),
-          data: { label: 'Übungen' },
-          type: 'GROUP',
-          position: {
-            x: 0,
-            y: 250 * (learningPathExercises[0].position - 1)
-          },
-          style: {
-            border: '1px solid ' + theme.palette.grey[500],
-            borderRadius: 8,
-            width: 300 * learningPathExercises.length + nodeOffsetX,
-            height: groupHeight
-          }
+        id: learningPathExercises[0].position.toString(),
+        data: { label: 'Übungen' },
+        type: 'GROUP',
+        position: {
+          x: 0,
+          y: 250 * (learningPathExercises[0].position - 1)
+        },
+        style: {
+          border: '1px solid ' + theme.palette.grey[500],
+          borderRadius: 8,
+          width: 300 * learningPathExercises.length + nodeOffsetX,
+          height: groupHeight
         }
+      }
       : null
 
   // Rest of learning elements
@@ -362,8 +373,8 @@ const mapLearningPathToNodes = (
           exerciseLearningElementParentNode && item.position < parseInt(exerciseLearningElementParentNode.id)
             ? 250 * (item.position - 1)
             : exerciseLearningElementParentNode
-            ? 250 * (item.position - exerciseLearningElementChildNodes.length) + groupHeight - 70
-            : 250 * (item.position - 1)
+              ? 250 * (item.position - exerciseLearningElementChildNodes.length) + groupHeight - 70
+              : 250 * (item.position - 1)
       },
       style: learningElementStyle
     }
