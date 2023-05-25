@@ -40,13 +40,7 @@ jest.mock('react-i18next', () => ({
  */
 describe('Test Contactpage', () => {
   const submit = jest.fn()
-  global.fetch = jest.fn(() =>
-    Promise.resolve({
-      json: () => Promise.resolve({ status: 200 }),
-      status: 200,
-      message: 'OK'
-    })
-  ) as jest.Mock
+
   const useContact = jest.fn(() => {
     return { onSubmitHandler: submit }
   })
@@ -54,6 +48,17 @@ describe('Test Contactpage', () => {
   test('not sending', () => {
     render(<Contact />)
     expect(useContact).not.toBeCalled()
+  })
+  test('test the fetch function', async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve({ status: 200 }),
+        status: 200,
+        message: 'OK'
+      })
+    ) as jest.Mock
+    const result = await fetch(process.env.BACKEND + `/contactform`)
+    await expect(result.status).toBe(200)
   })
   test('sends onSubmit to Contactform', () => {
     const form = render(<ContactForm onSubmit={useContact} />)
@@ -67,10 +72,21 @@ describe('Test Contactpage', () => {
     })
     fireEvent.click(submitButton)
     expect(useContact).toBeCalled()
+
     render(<Contact />)
   })
-  test('test the fetch function', async () => {
+
+  test('test catch error', async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => {
+          throw new Error('Error')
+        },
+        status: 404,
+        message: 'OK'
+      })
+    ) as jest.Mock
     const result = await fetch(process.env.BACKEND + `/contactform`)
-    await expect(result.status).toBe(200)
+    await expect(result.status).toBe(404)
   })
 })

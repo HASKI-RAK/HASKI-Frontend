@@ -11,11 +11,17 @@ export type ContactHookReturn = {
 export const onSubmitHandler = () => {
   const postBody: FormDataType = { reportType: 'tes', reportTopic: 'Test', description: '0' }
 
-  postContactForm(postBody).then((response) => {
-    if (response.status === 200) {
-      console.log('Success')
-    }
-  })
+  postContactForm(postBody)
+    .then((response) => {
+      if (response.status === 200) {
+        console.log('Success')
+      }
+    })
+    .catch((error) => {
+      if (error) {
+        console.log('Error')
+      }
+    })
 }
 export const useContact = (): ContactHookReturn => {
   onSubmitHandler()
