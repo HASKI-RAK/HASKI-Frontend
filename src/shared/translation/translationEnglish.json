@@ -149,17 +149,44 @@
   "components.ContactForm.reportType": "Reporttype",
   "components.ContactForm.briefDescription": "Give a brief description of your request",
   "components.ContactForm.types": [
-    { "value": "issue", "label": "issue" },
-    { "value": "bug", "label": "bug" },
-    { "value": "feedback", "label": "feedback" },
-    { "value": "feature", "label": "feature" },
-    { "value": "other", "label": "other" }
+    {
+      "value": "issue",
+      "label": "issue"
+    },
+    {
+      "value": "bug",
+      "label": "bug"
+    },
+    {
+      "value": "feedback",
+      "label": "feedback"
+    },
+    {
+      "value": "feature",
+      "label": "feature"
+    },
+    {
+      "value": "other",
+      "label": "other"
+    }
   ],
   "components.ContactForm.topics": [
-    { "value": "le", "label": "Learningelement" },
-    { "value": "ui", "label": "UI" },
-    { "value": "design", "label": "Design" },
-    { "value": "other", "label": "other" }
+    {
+      "value": "le",
+      "label": "Learningelement"
+    },
+    {
+      "value": "ui",
+      "label": "UI"
+    },
+    {
+      "value": "design",
+      "label": "Design"
+    },
+    {
+      "value": "other",
+      "label": "other"
+    }
   ],
   "components.ContactForm.submit": "Submit",
   "components.ContactForm.learningelement": "Learningelement",
@@ -180,6 +207,8 @@
   "pages.privacypolicy": "Privacy Policy",
   "pages.projectinformation": "Project Information",
   "pages.projectdescription": "Project Description",
+  "pages.Contact.success": "Your feedback has been sent successfully.",
+  "pages.Contact.error": "An error occurred while sending your feedback. Please try again later.",
   "projectHASKi": "Project HASKI",
   "tooltip.openGlobalSettings": "Open global settings",
   "tooltip.openSettings": "Open settings",

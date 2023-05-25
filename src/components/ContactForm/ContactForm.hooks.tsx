@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { FormDataType } from '@services'
+import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 export type useContactFormHookParams = {
   defaultReportType?: string
@@ -25,7 +27,13 @@ export type ContactFormHookReturn = {
  * The responseBody is the object that will be sent to the backend.
  */
 export const useContactForm = (params?: useContactFormHookParams): ContactFormHookReturn => {
-  const { defaultReportType = '', defaultReportTopic = '', defaultDescription = '' } = params || {}
+  const { t } = useTranslation()
+
+  // ** State **//
+  const reportTypes = t('components.ContactForm.types', {
+    returnObjects: true
+  }) as [{ value: string; label: string }]
+  const { defaultReportType = reportTypes.at(-1)?.value ?? '', defaultReportTopic = '', defaultDescription = '' } = params || {}
   const [reportType, setReportType] = useState(defaultReportType)
   const [reportTopic, setReportTopic] = useState(defaultReportTopic)
   const [description, setDescription] = useState(defaultDescription)
