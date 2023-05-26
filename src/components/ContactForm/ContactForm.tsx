@@ -17,10 +17,11 @@ import {
 import { useTranslation } from 'react-i18next'
 import React, { useState } from 'react'
 import { useContactForm as _useContactForm, useContactFormHookParams, ContactFormHookReturn } from './ContactForm.hooks'
+import { FormDataType } from '@services'
 
 export type ContactFormProps = {
   descriptionDefaultValue?: string
-  onSubmit?: () => void
+  onSubmit?: (content: FormDataType) => void
   useContactForm?: (params?: useContactFormHookParams) => ContactFormHookReturn
 }
 /**
@@ -36,7 +37,7 @@ export type ContactFormProps = {
  * The user can also give a description of the report, this is also the only required field.
  * The contents of the form will have to be sent to the backend, which is not implemented yet.
  *
- * @category Pages
+ * @category Components
  */
 const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactFormProps) => {
   const [textfieldError, setTextfieldError] = useState(false)
@@ -44,16 +45,16 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
   const { t } = useTranslation()
 
   // ** Get Functions from Hook ** //
-  const { submit, setReportType, setReportTopic, setDescription, description, reportTopic, reportType } =
+  const { submit, setReportType, setReportTopic, setDescription, description, reportTopic, reportType, responseBody } =
     useContactForm()
 
   // ** Override Functions if passed as props ** //
   const { onSubmit = submit } = props
 
-  const reporttypeChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const reportTypeChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setReportType(event.target.value)
   }
-  const reporttopicChangeHandler = (event: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>): void => {
+  const reportTopicChangeHandler = (event: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>): void => {
     setReportTopic(event.target.value)
   }
   const descriptionChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -74,7 +75,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
     } else {
       setTextfieldError(false)
       setSelectError(false)
-      onSubmit()
+      onSubmit(responseBody)
     }
   }
 
@@ -98,7 +99,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
             name="reporttopic"
             labelId="select_label_contact"
             label="topic"
-            onChange={reporttopicChangeHandler}
+            onChange={reportTopicChangeHandler}
             error={selectError}>
             {reportTopics.map((topic) => (
               <MenuItem key={topic.value} value={topic.value}>
@@ -114,7 +115,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
         <FormLabel id="radio_contact_label" sx={{ mt: '0.6rem' }}>
           {t('components.ContactForm.reportType')}
         </FormLabel>
-        <RadioGroup row name="reporttype" value={reportType} onChange={reporttypeChangeHandler}>
+        <RadioGroup row name="reporttype" value={reportType} onChange={reportTypeChangeHandler}>
           {reportTypes.map((report) => (
             <FormControlLabel key={report.value} value={report.value} control={<RadioButton />} label={report.label} />
           ))}

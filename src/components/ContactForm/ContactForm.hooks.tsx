@@ -11,10 +11,11 @@ export type ContactFormHookReturn = {
   readonly reportType: string
   readonly reportTopic: string
   readonly description: string
+  readonly responseBody: FormDataType
   readonly setReportType: (reportType: string) => void
   readonly setReportTopic: (reportTopic: string) => void
   readonly setDescription: (description: string) => void
-  readonly submit: () => void
+  readonly submit: (content: FormDataType) => void
 }
 /**
  * Hook for the ContactForm logic. Handles reporttype, reporttopic and description state which sets the input for the textfields and
@@ -30,10 +31,10 @@ export const useContactForm = (params?: useContactFormHookParams): ContactFormHo
   const [reportTopic, setReportTopic] = useState(defaultReportTopic)
   const [description, setDescription] = useState(defaultDescription)
 
-  const responseBody: FormDataType = { reportType: '', reportTopic: '', description: '' }
+  const responseBody: FormDataType = { reportType: reportType, reportTopic: reportTopic, description: description }
 
   // ** Logic **//
-  const submit = () => {
+  const submit = (content: FormDataType) => {
     responseBody.reportType = reportType
     responseBody.reportTopic = reportTopic
     responseBody.description = description
@@ -46,6 +47,7 @@ export const useContactForm = (params?: useContactFormHookParams): ContactFormHo
     setReportType,
     setReportTopic,
     setDescription,
-    submit
+    submit,
+    responseBody
   } as const
 }

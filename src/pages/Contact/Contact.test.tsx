@@ -3,6 +3,8 @@ import { Contact } from '@pages'
 import '@testing-library/jest-dom'
 import { render, fireEvent, act } from '@testing-library/react'
 import { ContactForm } from '@components'
+import { FormDataType } from '@services'
+import { useContact } from './Contact.hooks'
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => {
@@ -88,5 +90,39 @@ describe('Test Contactpage', () => {
     ) as jest.Mock
     const result = await fetch(process.env.BACKEND + `/contactform`)
     await expect(result.status).toBe(404)
+  })
+})
+
+describe('Test on submit Function', () => {
+  const testData: FormDataType = {
+    reportType: '1',
+    reportTopic: '1',
+    description: 'test'
+  }
+  test('Fetch Return 200', async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        status: 200,
+        message: 'OK'
+      })
+    ) as jest.Mock
+
+    const onSubmit = useContact()
+
+    onSubmit.onSubmitHandler(testData)
+  })
+
+  test('Fetch throws an error', async () => {
+    global.fetch = jest.fn(() => {
+      throw new Error('Error')
+      return Promise.resolve({
+        status: 404,
+        message: 'OK'
+      })
+    }) as jest.Mock
+
+    const onSubmit = useContact()
+
+    onSubmit.onSubmitHandler(testData)
   })
 })
