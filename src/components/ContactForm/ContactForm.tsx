@@ -12,10 +12,12 @@ import {
   DefaultFormLabel as FormLabel,
   DefaultFormControlLabel as FormControlLabel,
   DefaultSelectChangeEvent as SelectChangeEvent,
-  DefaultFormHelperText as FormHelperText
+  DefaultFormHelperText as FormHelperText,
+  DefaultBackdrop as Backdrop,
+  DefaultCircularProgress as CircularProgress
 } from '@common/components'
 import { useTranslation } from 'react-i18next'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useContactForm as _useContactForm, useContactFormHookParams, ContactFormHookReturn } from './ContactForm.hooks'
 import { FormDataType } from '@services'
 
@@ -49,7 +51,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
     useContactForm()
 
   // ** Override Functions if passed as props ** //
-  const { onSubmit = submit } = props
+  const { onSubmit = submit, isLoading = false } = props
 
   const reportTypeChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setReportType(event.target.value)
@@ -62,29 +64,24 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
   }
   const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLElement>) => {
     event.preventDefault()
-    if (!reportTopic) {
-      setSelectError(true)
-      if (!description) {
-        setTextfieldError(true)
-      }
-    } else if (!description) {
-      setTextfieldError(true)
-      if (reportTopic) {
-        setSelectError(false)
-      }
-    } else {
-      setTextfieldError(false)
-      setSelectError(false)
+    setSelectError(!reportTopic)
+    setTextfieldError(!description)
+    if (reportTopic && description)
       onSubmit(responseBody)
-    }
   }
 
-  const reportTypes = t('components.ContactForm.types', {
-    returnObjects: true
-  }) as [{ value: string; label: string }]
-  const reportTopics = t('components.ContactForm.topics', {
-    returnObjects: true
-  }) as [{ value: string; label: string }]
+  const reportTypes = useMemo(() => {
+    return t('components.ContactForm.types', {
+      returnObjects: true
+    }) as [{ value: string; label: string }]
+  }, [t])
+
+  const reportTopics = useMemo(() => {
+    return t('components.ContactForm.topics', {
+      returnObjects: true
+    }) as [{ value: string; label: string }]
+  }, [t])
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -98,8 +95,10 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
           <Select
             name="reporttopic"
             labelId="select_label_contact"
-            label="topic"
+            label={t('topic')}
+            required
             onChange={reportTopicChangeHandler}
+            value={reportTopic}
             error={selectError}>
             {reportTopics.map((topic) => (
               <MenuItem key={topic.value} value={topic.value}>
@@ -108,7 +107,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
             ))}
           </Select>
           <FormHelperText>
-            <Typography>{selectError ? t('components.ContactForm.errorSelect') : ''}</Typography>
+            {selectError && t('components.ContactForm.errorSelect')}
           </FormHelperText>
         </FormControl>
 
@@ -141,6 +140,9 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
             {t('components.ContactForm.submit')}
           </Button>
         </FormControl>
+        <Backdrop open={isLoading}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </Stack>
     </form>
   )

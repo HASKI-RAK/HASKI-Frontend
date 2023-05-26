@@ -1,26 +1,52 @@
-import { postContactForm, FormDataType } from '@services'
+import { postContactForm, FormDataType, SnackbarContext } from '@services'
+import { useCallback, useContext } from 'react'
+import { useTranslation } from 'react-i18next'
+
+export type ContactHookProps = {
+  setIsLoading: (isLoading: boolean) => void
+}
+
 export type ContactHookReturn = {
   onSubmitHandler: (content: FormDataType) => void
 }
-/**
- * Hook for the Contact page logic which handles the sending of the responsebody to the backend.
- * @returns {ContactFormHookReturn} - The form logic.
- * @function onSubmitHandler - Function for collecting the postBody from the responsebody and sending it to the backend.
- * PostContactFormInputs is a function from the services folder which sends the postBody to the backend.
- */
-export const onSubmitHandler = (content: FormDataType) => {
-  const postBody = content
-  postContactForm(postBody)
-    .then((response) => {
-      if (response.status === 200) {
-        console.log('ok')
-      }
-    })
-    .catch((error) => {
-      console.log('Error')
-    })
-}
-export const useContact = (): ContactHookReturn => {
+
+export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookReturn => {
+
+  const { t } = useTranslation()
+  const { addSnackbar } = useContext(SnackbarContext)
+
+  const onSubmitHandler = useCallback((content: FormDataType) => {
+    setIsLoading(true)
+    const postBody = content
+    postContactForm(postBody)
+      .then((response) => {
+        if (response.status === 200) {
+          setIsLoading(false)
+          addSnackbar({
+            message: t('pages.Contact.success'),
+            severity: 'success'
+          })
+        }
+        else
+        {
+          setIsLoading(false)
+          addSnackbar({
+            message: t('pages.Contact.error'),
+            severity: 'error'
+          })
+        }
+      })
+      .catch((error) => {
+
+        setIsLoading(false)
+        addSnackbar({
+          message: t('pages.Contact.error'),
+          severity: 'error'
+        })
+      
+      })
+  }, [t, addSnackbar, setIsLoading])
+
   return {
     onSubmitHandler
   } as const
