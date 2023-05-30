@@ -48,7 +48,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
   const { t } = useTranslation()
 
   // ** Get Functions from Hook ** //
-  const { submit, setReportType, setReportTopic, setDescription, description, reportTopic, reportType, responseBody } =
+  const { submit, setReportType, setReportTopic, setDescription, description, reportTopic, reportType } =
     useContactForm()
 
   // ** Override Functions if passed as props ** //
@@ -67,7 +67,12 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
     event.preventDefault()
     setSelectError(!reportTopic)
     setTextfieldError(!description)
-    if (reportTopic && description) onSubmit(responseBody)
+    if (reportTopic && description)
+      onSubmit({
+        reportTopic,
+        reportType,
+        description
+      })
   }
 
   const reportTypes = useMemo(() => {

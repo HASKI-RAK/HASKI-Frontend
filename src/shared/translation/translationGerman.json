@@ -191,6 +191,7 @@
   "components.ContactForm.submit": "Abschicken",
   "components.ContactForm.error": "Es fehlt eine Beschreibung.",
   "components.ContactForm.errorSelect": "Es wurde kein Thema ausgewählt.",
+  "components.ContactForm.submitError":"Die submit funktion wurde aufgerufen, jedoch gab es einen Fehler."
   "Dot": ".",
   "help": "Hilfe",
   "Next": "Weiter",

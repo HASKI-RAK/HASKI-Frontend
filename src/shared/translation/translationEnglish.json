@@ -194,6 +194,7 @@
   "components.ContactForm.design": "Design",
   "components.ContactForm.error": "Missing description. Please write something.",
   "components.ContactForm.errorSelect": "Missing topic. Please select something.",
+  "components.ContactForm.submitError": "The submit function has been called and an error occurred.",
   "Dot": ".",
   "help": "Help",
   "Next": "Next",

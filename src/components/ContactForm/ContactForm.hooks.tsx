@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { FormDataType } from '@services'
+import { useState, useContext } from 'react'
+import { FormDataType, SnackbarContext } from '@services'
 import { t } from 'i18next'
 import { useTranslation } from 'react-i18next'
 
@@ -13,7 +13,6 @@ export type ContactFormHookReturn = {
   readonly reportType: string
   readonly reportTopic: string
   readonly description: string
-  readonly responseBody: FormDataType
   readonly setReportType: (reportType: string) => void
   readonly setReportTopic: (reportTopic: string) => void
   readonly setDescription: (description: string) => void
@@ -29,23 +28,27 @@ export type ContactFormHookReturn = {
  */
 export const useContactForm = (params?: useContactFormHookParams): ContactFormHookReturn => {
   const { t } = useTranslation()
+  const { addSnackbar } = useContext(SnackbarContext)
 
   // ** State **//
   const reportTypes = t('components.ContactForm.types', {
     returnObjects: true
   }) as [{ value: string; label: string }]
-  const { defaultReportType = reportTypes.at(-1)?.value ?? '', defaultReportTopic = '', defaultDescription = '' } = params || {}
+  const {
+    defaultReportType = reportTypes.at(-1)?.value ?? '',
+    defaultReportTopic = '',
+    defaultDescription = ''
+  } = params || {}
   const [reportType, setReportType] = useState(defaultReportType)
   const [reportTopic, setReportTopic] = useState(defaultReportTopic)
   const [description, setDescription] = useState(defaultDescription)
 
-  const responseBody: FormDataType = { reportType: reportType, reportTopic: reportTopic, description: description }
-
   // ** Logic **//
   const submit = (content: FormDataType) => {
-    responseBody.reportType = reportType
-    responseBody.reportTopic = reportTopic
-    responseBody.description = description
+    addSnackbar({
+      message: t('components.ContactForm.submitError') + ': ' + content.description,
+      severity: 'error'
+    })
   }
 
   return {
@@ -55,7 +58,6 @@ export const useContactForm = (params?: useContactFormHookParams): ContactFormHo
     setReportType,
     setReportTopic,
     setDescription,
-    submit,
-    responseBody
+    submit
   } as const
 }
