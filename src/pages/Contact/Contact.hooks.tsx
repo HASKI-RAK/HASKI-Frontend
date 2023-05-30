@@ -7,45 +7,42 @@ export type ContactHookProps = {
 }
 
 export type ContactHookReturn = {
-  onSubmitHandler: (content: FormDataType) => void
+  onSubmitHandler: (postBody: FormDataType) => void
 }
 
 export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookReturn => {
-
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
 
-  const onSubmitHandler = useCallback((content: FormDataType) => {
-    setIsLoading(true)
-    const postBody = content
-    postContactForm(postBody)
-      .then((response) => {
-        if (response.status === 200) {
-          setIsLoading(false)
-          addSnackbar({
-            message: t('pages.Contact.success'),
-            severity: 'success'
-          })
-        }
-        else
-        {
+  const onSubmitHandler = useCallback(
+    (postBody: FormDataType) => {
+      setIsLoading(true)
+      postContactForm(postBody)
+        .then((response) => {
+          if (response.status === 200) {
+            setIsLoading(false)
+            addSnackbar({
+              message: t('pages.Contact.success'),
+              severity: 'success'
+            })
+          } else {
+            setIsLoading(false)
+            addSnackbar({
+              message: t('pages.Contact.error'),
+              severity: 'error'
+            })
+          }
+        })
+        .catch((error) => {
           setIsLoading(false)
           addSnackbar({
             message: t('pages.Contact.error'),
             severity: 'error'
           })
-        }
-      })
-      .catch((error) => {
-
-        setIsLoading(false)
-        addSnackbar({
-          message: t('pages.Contact.error'),
-          severity: 'error'
         })
-      
-      })
-  }, [t, addSnackbar, setIsLoading])
+    },
+    [t, addSnackbar, setIsLoading]
+  )
 
   return {
     onSubmitHandler

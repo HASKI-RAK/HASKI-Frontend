@@ -24,6 +24,7 @@ import { FormDataType } from '@services'
 export type ContactFormProps = {
   descriptionDefaultValue?: string
   onSubmit?: (content: FormDataType) => void
+  isLoading?: boolean
   useContactForm?: (params?: useContactFormHookParams) => ContactFormHookReturn
 }
 /**
@@ -66,8 +67,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
     event.preventDefault()
     setSelectError(!reportTopic)
     setTextfieldError(!description)
-    if (reportTopic && description)
-      onSubmit(responseBody)
+    if (reportTopic && description) onSubmit(responseBody)
   }
 
   const reportTypes = useMemo(() => {
@@ -81,7 +81,6 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
       returnObjects: true
     }) as [{ value: string; label: string }]
   }, [t])
-
 
   return (
     <form onSubmit={handleSubmit}>
@@ -106,9 +105,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
               </MenuItem>
             ))}
           </Select>
-          <FormHelperText>
-            {selectError && t('components.ContactForm.errorSelect')}
-          </FormHelperText>
+          <FormHelperText>{selectError && t('components.ContactForm.errorSelect')}</FormHelperText>
         </FormControl>
 
         <FormLabel id="radio_contact_label" sx={{ mt: '0.6rem' }}>

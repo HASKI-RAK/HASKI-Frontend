@@ -106,8 +106,7 @@ describe('Test on submit Function', () => {
         message: 'OK'
       })
     ) as jest.Mock
-
-    const onSubmit = useContact()
+    const onSubmit = useContact({ setIsLoading: jest.fn() })
 
     onSubmit.onSubmitHandler(testData)
   })
@@ -121,7 +120,7 @@ describe('Test on submit Function', () => {
       })
     }) as jest.Mock
 
-    const onSubmit = useContact()
+    const onSubmit = useContact({ setIsLoading: jest.fn() })
 
     onSubmit.onSubmitHandler(testData)
   })
