@@ -28,7 +28,7 @@ export const useGlossaryForm = (params?: useGlossaryFormHookParams): GlossaryFor
     defaultSearchQuery = '',
     defaultSelectedIndexElement = '',
     defaultSelectedTags = []
-  } = params || {}
+  } = params ?? {}
 
   // State data
   const {
