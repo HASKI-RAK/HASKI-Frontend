@@ -15,18 +15,18 @@ export const ProjectInformation = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  return authcontext.isAuth ? (
+  return !authcontext.isAuth ? (
     <Skeleton />
   ) : (
     <>
       <Box>
-        <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/projectdescription')}>
-          <Typography>{t('pages.projectdescription')}</Typography>
+        <Button data-testid="ProjectInformation_Button_1" sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/projectdescription')}>
+          <Typography  >{t('pages.projectdescription')}  </Typography>
         </Button>
       </Box>
       <Box>
       <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/glossary')}>
-        <Typography>{t('pages.glossary')}</Typography>
+        <Typography data-testid="ProjectInformation_Button_2">{t('pages.glossary')}</Typography>
       </Button></Box>
     </>
   )

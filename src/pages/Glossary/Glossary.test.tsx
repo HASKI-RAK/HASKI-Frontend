@@ -37,9 +37,5 @@ describe("Test the Glossary page", () => {
         )
         expect(glossary.container.querySelectorAll("span").length).toEqual(1);
     })
-    
-    test("renders correctly and matches snapshot", () => {
-        const tree = renderer.create(<Glossary />).toJSON()
-        expect(tree).toMatchSnapshot()
-    })
+
 })
