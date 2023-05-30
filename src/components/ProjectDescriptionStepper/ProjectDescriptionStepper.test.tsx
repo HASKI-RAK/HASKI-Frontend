@@ -1,5 +1,5 @@
 import { useProjectDescriptionStepper } from './ProjectDescriptionStepper.hooks'
-import { act, render, renderHook, fireEvent } from '@testing-library/react'
+import { act, render, renderHook, fireEvent, screen } from '@testing-library/react'
 import ProjectDescriptionStepper from './ProjectDescriptionStepper'
 import '@testing-library/jest-dom'
 
