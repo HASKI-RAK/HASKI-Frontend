@@ -28,7 +28,7 @@ export const useGlossaryForm = (params?: useGlossaryFormHookParams): GlossaryFor
     defaultSearchQuery = '',
     defaultSelectedIndexElement = '',
     defaultSelectedTags = []
-  } = params || {}
+  } = params ?? {}
 
   // State data
   const {
@@ -88,7 +88,7 @@ export const useGlossaryForm = (params?: useGlossaryFormHookParams): GlossaryFor
       }
 
       Array.from(glossaryEntries).forEach((glossaryEntry) => {
-        if (glossaryEntry.term && Array.from(glossaryEntry.term)[0] === selectedIndexElement) {
+        if (glossaryEntry.term && Array.from(glossaryEntry.term)[0].toLowerCase() === selectedIndexElement.toLowerCase()) {
           filteredGlossaryEntries.push(glossaryEntry)
         }
       })
@@ -129,7 +129,7 @@ export const useGlossaryForm = (params?: useGlossaryFormHookParams): GlossaryFor
   const onExpandAll = useCallback((glossaryEntries: GlossaryEntryProps[]) => {
     const tempExpandedList: string[] = []
 
-    glossaryEntries.forEach((glossaryEntry) => {
+    Array.from(glossaryEntries).forEach((glossaryEntry) => {
       glossaryEntry.term && tempExpandedList.push(glossaryEntry.term)
     })
 
