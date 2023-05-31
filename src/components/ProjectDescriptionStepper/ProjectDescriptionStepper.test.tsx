@@ -3,7 +3,7 @@ import { act, render, renderHook, fireEvent, screen } from '@testing-library/rea
 import ProjectDescriptionStepper from './ProjectDescriptionStepper'
 import '@testing-library/jest-dom'
 
-const mockProjectDescriptionCardProps = {
+const mockProjectDescriptionStepperProps = {
   body: ['body1', 'body2', 'body3'],
   header: 'header'
 }
@@ -33,8 +33,8 @@ describe('Test ProjectDescriptionStepper', () => {
   test('ProjectDescriptionCard renders with input', () => {
     const { getByTestId } = render(
       <ProjectDescriptionStepper
-        body={mockProjectDescriptionCardProps.body}
-        header={mockProjectDescriptionCardProps.header}
+        body={mockProjectDescriptionStepperProps.body}
+        header={mockProjectDescriptionStepperProps.header}
       />
     )
 
@@ -45,8 +45,8 @@ describe('Test ProjectDescriptionStepper', () => {
   test('ProjectDescriptionCard with input can be scrolled', () => {
     const { getByText } = render(
       <ProjectDescriptionStepper
-        body={mockProjectDescriptionCardProps.body}
-        header={mockProjectDescriptionCardProps.header}
+        body={mockProjectDescriptionStepperProps.body}
+        header={mockProjectDescriptionStepperProps.header}
       />
     )
 
@@ -56,15 +56,15 @@ describe('Test ProjectDescriptionStepper', () => {
     })
 
     expect(setTimeout).toHaveBeenCalledTimes(6)
-    expect(getByText(mockProjectDescriptionCardProps.body[0])).toBeInTheDocument()
-    expect(getByText(mockProjectDescriptionCardProps.header.slice(0, 1))).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperProps.body[0])).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperProps.header.slice(0, 1))).toBeInTheDocument()
   })
 
   test('Step through all body texts of ProjectDescriptionStepper', () => {
     const { getByText, getAllByRole } = render(
       <ProjectDescriptionStepper
-        body={mockProjectDescriptionCardProps.body}
-        header={mockProjectDescriptionCardProps.header}
+        body={mockProjectDescriptionStepperProps.body}
+        header={mockProjectDescriptionStepperProps.header}
       />
     )
 
@@ -72,23 +72,23 @@ describe('Test ProjectDescriptionStepper', () => {
       window.dispatchEvent(new Event('scroll'))
       jest.runAllTimers()
     })
-    expect(getByText(mockProjectDescriptionCardProps.body[0])).toBeInTheDocument()
-    expect(getByText(mockProjectDescriptionCardProps.header.slice(0, 1))).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperProps.body[0])).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperProps.header.slice(0, 1))).toBeInTheDocument()
 
     // Steps to the right
     const buttons = getAllByRole('button')
     fireEvent.click(buttons[1])
-    expect(getByText(mockProjectDescriptionCardProps.body[1])).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperProps.body[1])).toBeInTheDocument()
     fireEvent.click(buttons[1])
-    expect(getByText(mockProjectDescriptionCardProps.body[2])).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperProps.body[2])).toBeInTheDocument()
     fireEvent.click(buttons[1])
-    expect(getByText(mockProjectDescriptionCardProps.body[2])).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperProps.body[2])).toBeInTheDocument()
 
     // Steps to the left
     fireEvent.click(buttons[0])
-    expect(getByText(mockProjectDescriptionCardProps.body[1])).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperProps.body[1])).toBeInTheDocument()
     fireEvent.click(buttons[0])
-    expect(getByText(mockProjectDescriptionCardProps.body[0])).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperProps.body[0])).toBeInTheDocument()
   })
 
   test('General functionality of ProjectDescriptionCard hook', () => {

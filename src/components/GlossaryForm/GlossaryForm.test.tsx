@@ -11,7 +11,6 @@ const mockGlossaryEntryProps: GlossaryEntryProps[] = [
 ]
 
 describe('GlossaryForm tests', () => {
-
   test('functionality of hooks', () => {
     const { result } = renderHook(() => useGlossaryForm())
 
@@ -42,14 +41,12 @@ describe('GlossaryForm tests', () => {
     })
     expect(result.current.glossaryState.expandedList).toStrictEqual(['term1'])
 
-
     const entriesFilteredByIndexElement = result.current.filterByIndexElement('t', mockGlossaryEntryProps)
     expect(entriesFilteredByIndexElement).toMatchObject([
       { term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true },
       { term: 'term2', definition: 'definition2', sources: 'source2', tags: ['tag11', 'tag12'], fundamental: false },
       { term: 'TeRm3', definition: 'dEfIniTioN3', sources: 'SoUrcE3', tags: [], fundamental: false }
     ])
-
 
     const entriesSearchedByQuery = result.current.searchByQuery(mockGlossaryEntryProps)
     expect(entriesSearchedByQuery).toMatchObject(mockGlossaryEntryProps)
@@ -63,7 +60,6 @@ describe('GlossaryForm tests', () => {
 
     const entriesExpanded = result.current.expandAll(mockGlossaryEntryProps)
     expect(result.current.expandAll).toBeCalled
-
 
     act(() => {
       result.current.glossaryState.setExpandedList!(['term1', 'term2'])
@@ -105,24 +101,28 @@ describe('GlossaryForm tests', () => {
   it('GlossaryForm hooks selectedIndexElement == pages.glossary.fundamentals', () => {
     const { result } = renderHook(() => useGlossaryForm())
 
-    const entriesFilteredByIndexElement = result.current.filterByIndexElement('pages.glossary.fundamentals', mockGlossaryEntryProps)
+    const entriesFilteredByIndexElement = result.current.filterByIndexElement(
+      'pages.glossary.fundamentals',
+      mockGlossaryEntryProps
+    )
     act(() => {
       result.current.glossaryState.setSelectedIndexElement!('pages.glossary.fundamentals')
     })
     expect(result.current.glossaryState.selectedIndexElement).toStrictEqual('pages.glossary.fundamentals')
-
   })
 
   it('GlossaryForm there is a term with the selected Index Element', () => {
     const { result } = renderHook(() => useGlossaryForm())
     act(() => {
-    result.current.glossaryState.setSelectedIndexElement!(mockGlossaryEntryProps[0].term!)
-    result.current.glossaryState.setSearchQuery!(mockGlossaryEntryProps[0].term!)
-  })
+      result.current.glossaryState.setSelectedIndexElement!(mockGlossaryEntryProps[0].term!)
+      result.current.glossaryState.setSearchQuery!(mockGlossaryEntryProps[0].term!)
+    })
     expect(result.current.glossaryState.selectedIndexElement).toStrictEqual(mockGlossaryEntryProps[0].term!)
-    const test = result.current.searchByQuery(mockGlossaryEntryProps);
+    const test = result.current.searchByQuery(mockGlossaryEntryProps)
 
-    expect(test).toMatchObject([{ term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true }])
+    expect(test).toMatchObject([
+      { term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true }
+    ])
   })
 
   it('GlossaryForm searchQuery case-insensitive match, search by different elements', () => {
@@ -132,29 +132,37 @@ describe('GlossaryForm tests', () => {
       result.current.glossaryState.setSearchQuery!('tErM1')
     })
     expect(result.current.glossaryState.searchQuery).toStrictEqual('tErM1')
-    const test1 = result.current.searchByQuery(mockGlossaryEntryProps);
-    expect(test1).toMatchObject([{ term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true }])
+    const test1 = result.current.searchByQuery(mockGlossaryEntryProps)
+    expect(test1).toMatchObject([
+      { term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true }
+    ])
 
     act(() => {
       result.current.glossaryState.setSearchQuery!('DeFiNiTiOn1')
     })
     expect(result.current.glossaryState.searchQuery).toStrictEqual('DeFiNiTiOn1')
-    const test2 = result.current.searchByQuery(mockGlossaryEntryProps);
-    expect(test2).toMatchObject([{ term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true }])
+    const test2 = result.current.searchByQuery(mockGlossaryEntryProps)
+    expect(test2).toMatchObject([
+      { term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true }
+    ])
 
     act(() => {
       result.current.glossaryState.setSearchQuery!('sOuRcE1')
     })
     expect(result.current.glossaryState.searchQuery).toStrictEqual('sOuRcE1')
-    const test3 = result.current.searchByQuery(mockGlossaryEntryProps);
-    expect(test3).toMatchObject([{ term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true }])
+    const test3 = result.current.searchByQuery(mockGlossaryEntryProps)
+    expect(test3).toMatchObject([
+      { term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true }
+    ])
 
     act(() => {
       result.current.glossaryState.setSearchQuery!('tAg1')
     })
     expect(result.current.glossaryState.searchQuery).toStrictEqual('tAg1')
-    const test4 = result.current.searchByQuery(mockGlossaryEntryProps);
-    expect(test4).toMatchObject([{ term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true }, { term: 'term2', definition: 'definition2', sources: 'source2', tags: ['tag11', 'tag12'], fundamental: false }])
-
+    const test4 = result.current.searchByQuery(mockGlossaryEntryProps)
+    expect(test4).toMatchObject([
+      { term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true },
+      { term: 'term2', definition: 'definition2', sources: 'source2', tags: ['tag11', 'tag12'], fundamental: false }
+    ])
   })
 })
