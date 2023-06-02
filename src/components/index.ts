@@ -1,22 +1,20 @@
-import { DropdownLanguage } from "./DropdownLanguage/DropdownLanguage";
-import { TableILS } from "./Questionnaire/TableILS";
-import { GraphILS } from "./Questionnaire/GraphILS";
-import { ResultDescriptionILS } from "./Questionnaire/ResultDescriptionILS";
-import { TableListK } from "./Questionnaire/TableListK";
-import { GraphListK } from "./Questionnaire/GraphListK";
-import { ResultDescriptionListK } from "./Questionnaire/ResultDescriptionListK";
-import { QuestionnaireResultsModal } from "./Questionnaire/QuestionnaireResultsModal";
-import { Text } from "./Text/Text";
-import LoginForm from "./LoginForm/LoginForm";
-import GlossaryList from "./GlossaryList/GlossaryList";
-import GlossaryEntry, {
-  GlossaryEntryProps,
-} from "./GlossaryEntry/GlossaryEntry";
-import Filter from "./Filter/Filter";
-import Searchbar from "./Searchbar/Searchbar";
-import GlossaryIndex from "./GlossaryIndex/GlossaryIndex";
-import GlossaryForm from "./GlossaryForm/GlossaryForm";
-import { ToggleButtonList } from "./ToggleButtonList/ToggleButtonList";
+import { DropdownLanguage } from './DropdownLanguage/DropdownLanguage'
+import { TableILS } from './Questionnaire/TableILS'
+import { GraphILS } from './Questionnaire/GraphILS'
+import { ResultDescriptionILS } from './Questionnaire/ResultDescriptionILS'
+import { TableListK } from './Questionnaire/TableListK'
+import { GraphListK } from './Questionnaire/GraphListK'
+import { ResultDescriptionListK } from './Questionnaire/ResultDescriptionListK'
+import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResultsModal'
+import { Text } from './Text/Text'
+import LoginForm from './LoginForm/LoginForm'
+import GlossaryList from './GlossaryList/GlossaryList'
+import GlossaryEntry, { GlossaryEntryProps } from './GlossaryEntry/GlossaryEntry'
+import Filter from './Filter/Filter'
+import Searchbar from './Searchbar/Searchbar'
+import GlossaryIndex from './GlossaryIndex/GlossaryIndex'
+import GlossaryContent from './GlossaryContent/GlossaryContent'
+import { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
 import { ImprintContent } from './Imprint/ImprintContent'
 import MenuBar from './MenuBar/MenuBar'
 import Footer from './Footer/Footer'
@@ -41,7 +39,7 @@ export {
   Filter,
   Searchbar,
   GlossaryIndex,
-  GlossaryForm,
+  GlossaryContent,
   ToggleButtonList,
   BreadcrumbsContainer,
   LocalNav,

@@ -1,8 +1,8 @@
 import React from 'react'
 import { render, screen, renderHook, act, fireEvent } from '@testing-library/react'
-import GlossaryForm, { GlossaryFormProps } from './GlossaryForm'
+import GlossaryContent, { GlossaryContentProps } from './GlossaryContent'
 import { GlossaryEntryProps } from '@components'
-import { useGlossaryFormHookParams, GlossaryFormHookReturn, useGlossaryForm } from './GlossaryForm.hooks'
+import { useGlossaryContentHookParams, GlossaryContentHookReturn, useGlossaryContent } from './GlossaryContent.hooks'
 
 const mockGlossaryEntryProps: GlossaryEntryProps[] = [
   { term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true },
@@ -12,7 +12,7 @@ const mockGlossaryEntryProps: GlossaryEntryProps[] = [
 
 describe('GlossaryForm tests', () => {
   test('functionality of hooks', () => {
-    const { result } = renderHook(() => useGlossaryForm())
+    const { result } = renderHook(() => useGlossaryContent())
 
     expect(result.current).toMatchObject({
       glossaryState: {
@@ -83,7 +83,7 @@ describe('GlossaryForm tests', () => {
   })
 
   it('GlossaryForm collapseAll Button', () => {
-    const { getByText } = render(<GlossaryForm />)
+    const { getByText } = render(<GlossaryContent />)
     const button = getByText('pages.glossary.collapseAll')
 
     fireEvent.click(button)
@@ -91,7 +91,7 @@ describe('GlossaryForm tests', () => {
   })
 
   it('GlossaryForm expandAll Button', () => {
-    const { getByText } = render(<GlossaryForm />)
+    const { getByText } = render(<GlossaryContent />)
     const button = getByText('pages.glossary.expandAll')
 
     fireEvent.click(button)
@@ -99,7 +99,7 @@ describe('GlossaryForm tests', () => {
   })
 
   it('GlossaryForm hooks selectedIndexElement == pages.glossary.fundamentals', () => {
-    const { result } = renderHook(() => useGlossaryForm())
+    const { result } = renderHook(() => useGlossaryContent())
 
     const entriesFilteredByIndexElement = result.current.filterByIndexElement(
       'pages.glossary.fundamentals',
@@ -112,7 +112,7 @@ describe('GlossaryForm tests', () => {
   })
 
   it('GlossaryForm there is a term with the selected Index Element', () => {
-    const { result } = renderHook(() => useGlossaryForm())
+    const { result } = renderHook(() => useGlossaryContent())
     act(() => {
       result.current.glossaryState.setSelectedIndexElement!(mockGlossaryEntryProps[0].term!)
       result.current.glossaryState.setSearchQuery!(mockGlossaryEntryProps[0].term!)
@@ -126,7 +126,7 @@ describe('GlossaryForm tests', () => {
   })
 
   it('GlossaryForm searchQuery case-insensitive match, search by different elements', () => {
-    const { result } = renderHook(() => useGlossaryForm())
+    const { result } = renderHook(() => useGlossaryContent())
 
     act(() => {
       result.current.glossaryState.setSearchQuery!('tErM1')

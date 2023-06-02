@@ -7,17 +7,17 @@ import {
 } from '@common/components'
 import { GlossaryList, Filter, Searchbar, GlossaryIndex, GlossaryEntryProps } from '@components'
 import {
-  useGlossaryForm as _useGlossaryForm,
-  useGlossaryFormHookParams,
-  GlossaryFormHookReturn
-} from './GlossaryForm.hooks'
+  useGlossaryContent as _useGlossaryContent,
+  useGlossaryContentHookParams,
+  GlossaryContentHookReturn
+} from './GlossaryContent.hooks'
 import AutoStories from '@mui/icons-material/AutoStories'
 
-export type GlossaryFormProps = {
-  useGlossaryForm?: (params?: useGlossaryFormHookParams) => GlossaryFormHookReturn
+export type GlossaryContentProps = {
+  useGlossaryContent?: (params?: useGlossaryContentHookParams) => GlossaryContentHookReturn
 }
 
-const GlossaryForm = ({ useGlossaryForm = _useGlossaryForm, ...props }: GlossaryFormProps) => {
+const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }: GlossaryContentProps) => {
   // Translation
   const { t } = useTranslation()
   const tags = t<string>('pages.glossary.tags', {
@@ -54,14 +54,13 @@ const GlossaryForm = ({ useGlossaryForm = _useGlossaryForm, ...props }: Glossary
   const glossaryEntries: GlossaryEntryProps[] = t<string>('pages.glossary.elements', {
     returnObjects: true
   }) as GlossaryEntryProps[]
-  const filterLabel = t('pages.glossary.filter')
-  const searchbarLabel = t('pages.glossary.search')
 
   // Application logic state
-  const { glossaryState, filterByTags, filterByIndexElement, searchByQuery, collapseAll, expandAll } = useGlossaryForm()
+  const { glossaryState, filterByTags, filterByIndexElement, searchByQuery, collapseAll, expandAll } =
+    useGlossaryContent()
 
   return (
-    <div data-testid="GlossaryForm">
+    <div data-testid="GlossaryContent">
       <Grid container columnSpacing={1} rowSpacing={1}>
         <Grid item xs={12} sm={12}>
           <Box sx={{ display: 'flex', gap: 0.5 }}>
@@ -70,11 +69,11 @@ const GlossaryForm = ({ useGlossaryForm = _useGlossaryForm, ...props }: Glossary
           </Box>
         </Grid>
         <Grid item xs={8} sm={6}>
-          <Searchbar label={searchbarLabel} setSearchQuery={glossaryState.setSearchQuery} timeout={100} />
+          <Searchbar label={t('pages.glossary.search')} setSearchQuery={glossaryState.setSearchQuery} timeout={100} />
         </Grid>
         <Grid item xs={4} sm={6}>
           <Filter
-            label={filterLabel}
+            label={t('pages.glossary.filter')}
             options={tags}
             selectedOptions={glossaryState.selectedTags}
             setSelectedOptions={glossaryState.setSelectedTags}
@@ -115,4 +114,4 @@ const GlossaryForm = ({ useGlossaryForm = _useGlossaryForm, ...props }: Glossary
   )
 }
 
-export default GlossaryForm
+export default GlossaryContent

@@ -1,5 +1,2 @@
-import { GlossaryState } from "./GlossaryState";
-import { useGlossaryStore } from "./zustand/zustand";
-
-export { useGlossaryStore };
-export type { GlossaryState };
+export { useGlossaryStore } from './zustand/zustand'
+export type { GlossaryState } from './GlossaryState'

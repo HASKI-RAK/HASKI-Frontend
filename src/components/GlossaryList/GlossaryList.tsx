@@ -9,15 +9,15 @@ type GlossaryListProps = {
 const GlossaryList = (props: GlossaryListProps) => {
   return (
     <div data-testid="GlossaryList">
-        {props.glossaryEntries &&
-          Array.from(props.glossaryEntries).map((glossaryEntry, index) => (
-            <GlossaryEntry
-              key={index}
-              expandedList={props.expandedList}
-              setExpandedList={props.setExpandedList}
-              {...glossaryEntry}
-            />
-          ))}   
+      {props.glossaryEntries &&
+        Array.from(props.glossaryEntries).map((glossaryEntry, index) => (
+          <GlossaryEntry
+            key={glossaryEntry.term && glossaryEntry.term + index}
+            expandedList={props.expandedList}
+            setExpandedList={props.setExpandedList}
+            {...glossaryEntry}
+          />
+        ))}
     </div>
   )
 }

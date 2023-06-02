@@ -1,22 +1,18 @@
-import React, { useCallback } from "react";
-import { DefaultToggleButtonGroup as ToggleButtonGroup } from "@common/components";
-import { ToggleButtonList } from "@components";
+import React, { useCallback } from 'react'
+import { DefaultToggleButtonGroup as ToggleButtonGroup } from '@common/components'
+import { ToggleButtonList } from '@components'
 
 export type GlossaryIndexProps = {
-  orientation?: "horizontal" | "vertical";
-  indexElements?: string[];
-  selectedIndexElement?: string;
-  setSelectedIndexElement?: (indexElement: string) => void;
-};
+  orientation?: 'horizontal' | 'vertical'
+  indexElements?: string[]
+  selectedIndexElement?: string
+  setSelectedIndexElement?: (indexElement: string) => void
+}
 
 const GlossaryIndex = (props: GlossaryIndexProps) => {
-  const handleChange = useCallback(
-    (event: React.MouseEvent<HTMLElement>, newSelectedIndexElement: string) => {
-      props.setSelectedIndexElement &&
-        props.setSelectedIndexElement(newSelectedIndexElement);
-    },
-    []
-  );
+  const handleChange = useCallback((event: React.MouseEvent<HTMLElement>, newSelectedIndexElement: string) => {
+    props.setSelectedIndexElement?.(newSelectedIndexElement)
+  }, [])
 
   return (
     <ToggleButtonGroup
@@ -25,15 +21,14 @@ const GlossaryIndex = (props: GlossaryIndexProps) => {
       onChange={handleChange}
       orientation={props.orientation}
       size="medium"
-      value={props.selectedIndexElement}
-    >
+      value={props.selectedIndexElement}>
       <ToggleButtonList
         toggleButtonList={props.indexElements}
         selectedElement={props.selectedIndexElement}
         data-testid="glossaryIndexButton"
       />
     </ToggleButtonGroup>
-  );
-};
+  )
+}
 
-export default GlossaryIndex;
+export default GlossaryIndex
