@@ -83,7 +83,7 @@ const ProjectDescriptionStepper = ({
           mt: '7.5rem',
           mb: '7.5rem'
         }}>
-        <Grid container item justifyContent="center" xs={12}>
+        <Grid container item justifyContent="center" xs={12} sx={{ maxWidth: { sm: '18.75rem', md: '37.5rem' } }}>
           <Typography
             variant="h3"
             align="center"
@@ -95,8 +95,8 @@ const ProjectDescriptionStepper = ({
           </Typography>
           <Fade in={!!bodyState[activeStep]} easing="linear" timeout={1000}>
             <Typography
-              variant="h5"
               align="center"
+              variant="h5"
               sx={{
                 pt: '2.5rem',
                 width: { sm: '18.75rem', md: '37.5rem' },

@@ -44,7 +44,7 @@ const SnackbarContainer = () => {
   }, [isOnline, addSnackbar, recentlyOffline, t, updateSnackbar])
 
   return (
-    <div data-testid="snackbarContainer">
+    <>
       <Snackbar
         open={!!snackbarsErrorWarning[0]}
         autoHideDuration={null}
@@ -73,7 +73,7 @@ const SnackbarContainer = () => {
           ))}
         </Stack>
       </Snackbar>
-    </div>
+    </>
   )
 }
 
