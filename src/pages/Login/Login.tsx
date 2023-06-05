@@ -26,7 +26,7 @@ type LoginProps = {
  *
  * @category Pages
  */
-export const Login = ({ useLogin = _useLogin }: LoginProps) => {
+const Login = ({ useLogin = _useLogin }: LoginProps) => {
   // UX state
   const [isLoading, setIsLoading] = useState(false)
   const [searchParams] = useSearchParams()
