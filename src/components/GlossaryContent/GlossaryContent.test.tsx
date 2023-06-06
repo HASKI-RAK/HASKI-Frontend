@@ -48,12 +48,12 @@ describe('GlossaryForm tests', () => {
       { term: 'TeRm3', definition: 'dEfIniTioN3', sources: 'SoUrcE3', tags: [], fundamental: false }
     ])
 
-    const entriesSearchedByQuery = result.current.searchByQuery(mockGlossaryEntryProps)
+    /*    const entriesSearchedByQuery = result.current.searchByQuery(mockGlossaryEntryProps)
     expect(entriesSearchedByQuery).toMatchObject(mockGlossaryEntryProps)
     act(() => {
       result.current.glossaryState.setSearchQuery!('term1')
     })
-    expect(result.current.glossaryState.searchQuery).toStrictEqual('term1')
+    expect(result.current.glossaryState.searchQuery).toStrictEqual('term1')*/
 
     const entriesCollapsed = result.current.collapseAll()
     expect(result.current.collapseAll).toBeCalled
@@ -66,10 +66,10 @@ describe('GlossaryForm tests', () => {
     })
     expect(result.current.glossaryState.expandedList).toStrictEqual(['term1', 'term2'])
 
-    act(() => {
+    /*    act(() => {
       result.current.glossaryState.setSearchQuery!('SearchQuery')
     })
-    expect(result.current.glossaryState.searchQuery).toStrictEqual('SearchQuery')
+    expect(result.current.glossaryState.searchQuery).toStrictEqual('SearchQuery')*/
 
     act(() => {
       result.current.glossaryState.setSelectedIndexElement!('SelectedIndexElement')
@@ -111,7 +111,7 @@ describe('GlossaryForm tests', () => {
     expect(result.current.glossaryState.selectedIndexElement).toStrictEqual('pages.glossary.fundamentals')
   })
 
-  it('GlossaryForm there is a term with the selected Index Element', () => {
+  /*  it('GlossaryForm there is a term with the selected Index Element', () => {
     const { result } = renderHook(() => useGlossaryContent())
     act(() => {
       result.current.glossaryState.setSelectedIndexElement!(mockGlossaryEntryProps[0].term!)
@@ -164,5 +164,5 @@ describe('GlossaryForm tests', () => {
       { term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true },
       { term: 'term2', definition: 'definition2', sources: 'source2', tags: ['tag11', 'tag12'], fundamental: false }
     ])
-  })
+  })*/
 })

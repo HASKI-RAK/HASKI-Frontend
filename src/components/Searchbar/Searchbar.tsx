@@ -22,16 +22,19 @@ export const debouncedSearchQuery = (
       target: { value }
     } = event
 
-    setSearchQuery && setSearchQuery(value)
+    setSearchQuery?.(value)
   }, timeout)
 
   return () => clearTimeout(timer)
 }
 
 const Searchbar = (props: SearchbarProps) => {
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    debouncedSearchQuery(event, props.setSearchQuery, props.timeout)
-  }, [])
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      debouncedSearchQuery(event, props.setSearchQuery, props.timeout)
+    },
+    [props.setSearchQuery, props.timeout]
+  )
 
   return (
     <Typography variant="h4" data-testid="searchbar">

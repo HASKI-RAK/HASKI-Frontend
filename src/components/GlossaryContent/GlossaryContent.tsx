@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { useState } from 'react'
 import {
   DefaultTypography as Typography,
   DefaultBox as Box,
@@ -20,6 +21,9 @@ export type GlossaryContentProps = {
 const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }: GlossaryContentProps) => {
   // Translation
   const { t } = useTranslation()
+  const glossaryEntries: GlossaryEntryProps[] = t<string>('pages.glossary.elements', {
+    returnObjects: true
+  }) as GlossaryEntryProps[]
   const tags = t<string>('pages.glossary.tags', {
     returnObjects: true
   }) as string[]
@@ -51,9 +55,6 @@ const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }:
     'Y',
     'Z'
   ])
-  const glossaryEntries: GlossaryEntryProps[] = t<string>('pages.glossary.elements', {
-    returnObjects: true
-  }) as GlossaryEntryProps[]
 
   // Application logic state
   const {
@@ -66,6 +67,8 @@ const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }:
     expandAll
   } = useGlossaryContent()
 
+  const [searchQuery, setSearchQuery] = useState('')
+
   return (
     <div data-testid="GlossaryContent">
       <Grid container columnSpacing={1} rowSpacing={1}>
@@ -76,11 +79,7 @@ const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }:
           </Box>
         </Grid>
         <Grid item xs={8} sm={6}>
-          <Searchbar
-            label={t('pages.glossary.search')}
-            setSearchQuery={glossarySearchQueryState.setSearchQuery}
-            timeout={100}
-          />
+          <Searchbar label={t('pages.glossary.search')} setSearchQuery={setSearchQuery} timeout={100} />
         </Grid>
         <Grid item xs={4} sm={6}>
           <Filter
@@ -112,7 +111,7 @@ const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }:
               glossaryEntries={glossaryEntries}
               expandedList={glossaryState.expandedList}
               setExpandedList={glossaryState.setExpandedList}
-              searchQuery={glossarySearchQueryState.searchQuery}
+              searchQuery={searchQuery}
               selectedIndexElement={glossaryState.selectedIndexElement}
               selectedTags={glossaryState.selectedTags}
             />

@@ -28,10 +28,19 @@ const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: Glossary
       }
 
       if (props.searchQuery) {
-        searchByQuery(props.searchQuery, glossaryEntryState)
+        setGlossaryState(searchByQuery(props.searchQuery, glossaryEntryState))
       }
     }
-  }, [props])
+  }, [
+    glossaryEntryState,
+    props.glossaryEntries,
+    props.selectedTags,
+    props.selectedIndexElement,
+    props.searchQuery,
+    filterByTags,
+    filterByIndexElement,
+    searchByQuery
+  ])
 
   return (
     <div data-testid="GlossaryList">
