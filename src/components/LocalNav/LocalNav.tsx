@@ -1,10 +1,10 @@
 import {
+  Accordion,
   DefaultBox as Box,
   DefaultDivider as Divider,
   DefaultTypography as Typography,
   DefaultAccordionSummary as AccordionSummary,
   DefaultAccordionDetails as AccordionDetails,
-  DefaultAccordion as Accordion,
   DefaultLink as Link,
   DefaultSkeleton as Skeleton,
   DefaultStack as Stack
