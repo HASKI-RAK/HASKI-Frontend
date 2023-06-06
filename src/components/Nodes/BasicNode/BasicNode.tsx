@@ -6,7 +6,6 @@ import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import FeedbackIcon from '@mui/icons-material/Feedback'
 
 export const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
-
   return (
     <Box
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}

@@ -12,7 +12,7 @@ global.fetch = jest.fn(() =>
 describe('getLoginStatus', () => {
   it('should return login status', async () => {
     const topicIndex = 1
-    const loginStatus = await getElementLearningPath(topicIndex,1,2,3)
+    const loginStatus = await getElementLearningPath(topicIndex, 1, 2, 3)
     expect(loginStatus.status).toEqual(200)
   })
 
@@ -21,7 +21,7 @@ describe('getLoginStatus', () => {
     window.fetch = jest.fn().mockRejectedValue(mockError)
 
     const topicIndex = 1
-    const response = await getElementLearningPath(topicIndex,1,2,3)
+    const response = await getElementLearningPath(topicIndex, 1, 2, 3)
 
     expect(fetch).toHaveBeenCalled()
     expect(response.status).toEqual(500)

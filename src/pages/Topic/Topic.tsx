@@ -13,10 +13,6 @@ import 'reactflow/dist/style.css'
 import { DefaultSkeleton as Skeleton } from '@common/components'
 import { useTopic as _useTopic, TopicHookReturn } from './Topic.hooks'
 
-/*const _useTopic = () => {
-  console.log('useTopic')
-}*/
-
 const studentLearningElement: StudentLearningElement = {
   id: 160,
   learning_element_id: 4,
@@ -151,7 +147,7 @@ const learningPathLearningElements: LearningPathLearningElement[] = [
   }
 ]
 
-const learningPath: LearningPath = {
+const learningPathData: LearningPath = {
   based_on: 'aoc',
   calculated_on: 'null',
   course_id: 2,
@@ -159,74 +155,26 @@ const learningPath: LearningPath = {
   path: learningPathLearningElements
 }
 
+// TODO: Ab hier relevant
 export type TopicProps = {
   useTopic?: typeof _useTopic
 }
 
-// TODO URL Stuktur übelrgeen. bzswp. localhost:3000/topic?topic=1
-// Topic Page - TODO Component extract
+// TODO: URL-Struktur überlegen bspw. "localhost:3000/topic?topic=1"
 const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
+  // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
-  const navigate = useNavigate()
-  const authcontext = useContext(AuthContext)
-  const { courseId, topicId } = useParams()
-  const { t } = useTranslation()
-  const theme = useTheme()
-  const [url, setUrl] = useState('')
-  const [title, setTitle] = useState('')
-  const [isOpen, setIsOpen] = useState(false)
-
-  const { mapLearningPathToNodes } = useTopic()
-
   const fetchUser = useBoundStore((state) => state.fetchUser)
   const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
 
-  const handleOpen = useCallback(() => {
-    setIsOpen(true)
-  }, [setIsOpen])
+  const authcontext = useContext(AuthContext)
+  const navigate = useNavigate()
+  const { courseId, topicId } = useParams()
 
-  const handleClose = useCallback(() => {
-    setIsOpen(false)
-  }, [setIsOpen])
-
-  const handleSetUrl = useCallback(
-    (url: string) => {
-      setUrl(url)
-    },
-    [setUrl]
-  )
-
-  const handleSetTitle = useCallback(
-    (title: string) => {
-      setTitle(title)
-    },
-    [setTitle]
-  )
-
-  const mapNodes = useCallback(
-    (learning_path_data: LearningPath) => {
-      const nodes = mapLearningPathToNodes(
-        learning_path_data,
-        theme,
-        handleSetUrl,
-        handleSetTitle,
-        handleOpen,
-        handleClose
-      )
-
-      // Id array of all nodes which types are not 'ÜB
-      const nodesWithEdges = nodes.filter((node) => node.type !== 'ÜB').map((node) => node.id)
-
-      const edges: Edge[] = nodesWithEdges.map((item, index) => ({
-        id: 'Edge' + item.toString(),
-        source: item,
-        target: nodesWithEdges[index + 1]
-      }))
-      return { nodes, edges }
-    },
-    [theme]
-  )
+  const theme = useTheme()
+  const { t } = useTranslation()
+  const { url, title, isOpen, handleClose, mapNodes } = useTopic()
 
   useEffect(() => {
     // request to backend to get learning path for topic
@@ -242,9 +190,8 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     // fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, Number(courseId), Number(topicId)).then(
     //  (learning_path_data) => {
     //const { nodes, edges } = mapNodes(learning_path_data)
-    const { nodes, edges } = mapNodes(learningPath)
+    const { nodes, edges } = mapNodes(learningPathData, theme)
     setInitialNodes(nodes)
-    //setInitialEdges(edges)
     setInitialEdges(edges)
     //})
     // })

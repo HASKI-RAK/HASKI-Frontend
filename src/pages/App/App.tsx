@@ -12,7 +12,7 @@ import {
   Topic,
   CoursePage,
   PageNotFound,
-  PrivacyPolicy,
+  PrivacyPolicy
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { logBuffer } from '@shared'

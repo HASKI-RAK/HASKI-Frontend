@@ -23,7 +23,7 @@ export type LoginFormHookReturn = {
  */
 export const useLoginForm = (params?: useLoginFormHookParams): LoginFormHookReturn => {
   // Default values
-  const { defaultUsername = '', defaultPassword = '' } = params || {}
+  const { defaultUsername = '', defaultPassword = '' } = params ?? {}
 
   // State data
   const [username, setUsername] = useState(defaultUsername)

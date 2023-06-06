@@ -25,16 +25,16 @@ export type LoginHookReturn = {
  */
 export const useLogin = (params: LoginHookParams): LoginHookReturn => {
   const { t } = useTranslation()
-  const authcontext = useContext(AuthContext)
+  const authContext = useContext(AuthContext)
   const navigate = useNavigate()
   const { addSnackbar } = useContext(SnackbarContext)
 
   const login = useCallback(() => {
     // supply auth context
-    authcontext.setIsAuth(true)
+    authContext.setIsAuth(true)
     // then redirect to home page
     navigate('/', { replace: true })
-  }, [authcontext, navigate])
+  }, [authContext, navigate])
 
   // Login with username and password
   const onSubmitHandler = () => {

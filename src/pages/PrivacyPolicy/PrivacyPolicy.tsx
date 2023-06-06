@@ -1,7 +1,7 @@
 import { PrivacyPolicyContent } from '@components'
 
 const PrivacyPolicy = () => {
-    return <PrivacyPolicyContent />
+  return <PrivacyPolicyContent />
 }
 
 export default PrivacyPolicy
