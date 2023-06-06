@@ -7,7 +7,6 @@ import { GraphListK } from './Questionnaire/GraphListK'
 import { ResultDescriptionListK } from './Questionnaire/ResultDescriptionListK'
 import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResultsModal'
 import { Text } from './Text/Text'
-import { ImprintContent } from './Imprint/ImprintContent'
 import LoginForm from './LoginForm/LoginForm'
 import MenuBar from './MenuBar/MenuBar'
 
@@ -44,7 +43,6 @@ export {
   ProjectDescriptionContent,
   ProjectDescriptionCard,
   ProjectDescriptionStepper,
-  SnackbarTransition,
-  ImprintContent
+  SnackbarTransition
 }
 export type { SnackbarMessageProps, SeverityType }
