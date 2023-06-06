@@ -56,8 +56,15 @@ const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }:
   }) as GlossaryEntryProps[]
 
   // Application logic state
-  const { glossaryState, filterByTags, filterByIndexElement, searchByQuery, collapseAll, expandAll } =
-    useGlossaryContent()
+  const {
+    glossaryState,
+    glossarySearchQueryState,
+    filterByTags,
+    filterByIndexElement,
+    searchByQuery,
+    collapseAll,
+    expandAll
+  } = useGlossaryContent()
 
   return (
     <div data-testid="GlossaryContent">
@@ -69,7 +76,11 @@ const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }:
           </Box>
         </Grid>
         <Grid item xs={8} sm={6}>
-          <Searchbar label={t('pages.glossary.search')} setSearchQuery={glossaryState.setSearchQuery} timeout={100} />
+          <Searchbar
+            label={t('pages.glossary.search')}
+            setSearchQuery={glossarySearchQueryState.setSearchQuery}
+            timeout={100}
+          />
         </Grid>
         <Grid item xs={4} sm={6}>
           <Filter
@@ -98,14 +109,12 @@ const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }:
         <Grid item xs={12} sm={12}>
           {
             <GlossaryList
+              glossaryEntries={glossaryEntries}
               expandedList={glossaryState.expandedList}
               setExpandedList={glossaryState.setExpandedList}
-              glossaryEntries={searchByQuery(
-                filterByTags(
-                  glossaryState.selectedTags!,
-                  filterByIndexElement(glossaryState.selectedIndexElement!, glossaryEntries)
-                )
-              )}
+              searchQuery={glossarySearchQueryState.searchQuery}
+              selectedIndexElement={glossaryState.selectedIndexElement}
+              selectedTags={glossaryState.selectedTags}
             />
           }
         </Grid>

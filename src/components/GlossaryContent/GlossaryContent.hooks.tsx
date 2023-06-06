@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { GlossaryState, useGlossaryStore } from '@services'
+import { GlossaryState, useGlossaryStore, GlossarySearchQueryState, useGlossarySearchQueryState } from '@services'
 import { GlossaryEntryProps } from '@components'
 
 export type useGlossaryContentHookParams = {
@@ -12,6 +12,7 @@ export type useGlossaryContentHookParams = {
 
 export type GlossaryContentHookReturn = {
   readonly glossaryState: GlossaryState
+  readonly glossarySearchQueryState: GlossarySearchQueryState
   readonly filterByTags: (selectedTags: string[], inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
   readonly filterByIndexElement: (selectedIndexElement: string, inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
   readonly searchByQuery: (inputData: GlossaryEntryProps[]) => GlossaryEntryProps[]
@@ -33,14 +34,16 @@ export const useGlossaryContent = (params?: useGlossaryContentHookParams): Gloss
   // State data
   const {
     expandedList,
-    searchQuery,
+    //searchQuery,
     selectedIndexElement,
     selectedTags,
     setExpandedList,
-    setSearchQuery,
+    // setSearchQuery,
     setSelectedIndexElement,
     setSelectedTags
   } = useGlossaryStore()
+
+  const { searchQuery, setSearchQuery } = useGlossarySearchQueryState()
 
   useEffect(() => {
     setExpandedList?.(defaultExpandedList)
@@ -101,26 +104,29 @@ export const useGlossaryContent = (params?: useGlossaryContentHookParams): Gloss
     []
   )
 
-  const onSearchByQuery = useCallback((glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[] => {
-    const searchedGlossaryEntries: GlossaryEntryProps[] = []
+  const onSearchByQuery = useCallback(
+    (glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[] => {
+      const searchedGlossaryEntries: GlossaryEntryProps[] = []
 
-    if (searchQuery === undefined || searchQuery === '') {
-      return glossaryEntries
-    }
-
-    Array.from(glossaryEntries).forEach((glossaryEntry) => {
-      if (
-        glossaryEntry.term?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        glossaryEntry.definition?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        glossaryEntry.sources?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        glossaryEntry.tags?.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-      ) {
-        searchedGlossaryEntries.push(glossaryEntry)
+      if (searchQuery === undefined || searchQuery === '') {
+        return glossaryEntries
       }
-    })
 
-    return searchedGlossaryEntries
-  }, [])
+      Array.from(glossaryEntries).forEach((glossaryEntry) => {
+        if (
+          glossaryEntry.term?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          glossaryEntry.definition?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          glossaryEntry.sources?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          glossaryEntry.tags?.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+        ) {
+          searchedGlossaryEntries.push(glossaryEntry)
+        }
+      })
+
+      return searchedGlossaryEntries
+    },
+    [searchQuery]
+  )
 
   const onCollapseAll = useCallback(() => {
     setExpandedList?.([])
@@ -141,13 +147,17 @@ export const useGlossaryContent = (params?: useGlossaryContentHookParams): Gloss
       ({
         glossaryState: {
           expandedList: expandedList,
-          searchQuery: searchQuery,
+          //searchQuery: searchQuery,
           selectedIndexElement: selectedIndexElement,
           selectedTags: selectedTags,
           setExpandedList: setExpandedList,
-          setSearchQuery: setSearchQuery,
+          //setSearchQuery: setSearchQuery,
           setSelectedIndexElement: setSelectedIndexElement,
           setSelectedTags: setSelectedTags
+        },
+        glossarySearchQueryState: {
+          searchQuery: searchQuery,
+          setSearchQuery: setSearchQuery
         },
         filterByTags: onFilterByTags,
         filterByIndexElement: onFilterByIndexElement,
@@ -156,23 +166,19 @@ export const useGlossaryContent = (params?: useGlossaryContentHookParams): Gloss
         expandAll: onExpandAll
       } as const),
     [
-      {
-        glossaryState: {
-          expandedList: expandedList,
-          searchQuery: searchQuery,
-          selectedIndexElement: selectedIndexElement,
-          selectedTags: selectedTags,
-          setExpandedList: setExpandedList,
-          setSearchQuery: setSearchQuery,
-          setSelectedIndexElement: setSelectedIndexElement,
-          setSelectedTags: setSelectedTags
-        },
-        filterByTags: onFilterByTags,
-        filterByIndexElement: onFilterByIndexElement,
-        searchByQuery: onSearchByQuery,
-        collapseAll: onCollapseAll,
-        expandAll: onExpandAll
-      }
+      expandedList,
+      searchQuery,
+      selectedIndexElement,
+      selectedTags,
+      setExpandedList,
+      setSearchQuery,
+      setSelectedIndexElement,
+      setSelectedTags,
+      onFilterByTags,
+      onFilterByIndexElement,
+      onSearchByQuery,
+      onCollapseAll,
+      onExpandAll
     ]
   )
 }

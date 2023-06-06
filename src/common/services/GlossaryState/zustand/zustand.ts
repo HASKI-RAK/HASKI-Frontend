@@ -3,11 +3,11 @@ import { GlossaryState } from '../GlossaryState'
 
 export const useGlossaryStore = create<GlossaryState>()((set) => ({
   expandedList: undefined,
-  searchQuery: undefined,
+  // searchQuery: undefined,
   selectedIndexElement: undefined,
   selectedTags: [], // TODO
   setExpandedList: (newExpandedList) => set({ expandedList: newExpandedList }),
-  setSearchQuery: (newSearchQuery) => set({ searchQuery: newSearchQuery }),
+  // setSearchQuery: (newSearchQuery) => set({ searchQuery: newSearchQuery }),
   setSelectedIndexElement: (newSelectedIndexElement) => set({ selectedIndexElement: newSelectedIndexElement }),
   setSelectedTags: (newSelectedTags) => {
     if (newSelectedTags === undefined) {
