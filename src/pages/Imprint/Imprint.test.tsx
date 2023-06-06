@@ -32,9 +32,7 @@ describe('Imprint Component', () => {
   it('displays the correct contact information for the authorised representative', () => {
     const { getByText } = render(<Imprint />)
     expect(getByText('components.Imprint.AuthorisedRepresentative')).toBeTruthy()
-    expect(
-      getByText('components.Imprint.AuthorisedRepresentative.Title' + ' Prof. Dr. Georg Hagel')
-    ).toBeTruthy()
+    expect(getByText('components.Imprint.AuthorisedRepresentative.Title' + ' Prof. Dr. Georg Hagel')).toBeTruthy()
     expect(getByText('Tel.:')).toBeTruthy()
     expect(getByText('+49 (0) 831 2523-471')).toBeTruthy()
     expect(getByText('E-Mail:')).toBeTruthy()

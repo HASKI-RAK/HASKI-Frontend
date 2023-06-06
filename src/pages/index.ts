@@ -11,4 +11,15 @@ import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy'
 import ProjectDescription from './ProjectDescription/ProjectDescription'
 import ProjectInformation from './ProjectInformation/ProjectInformation'
 import Imprint from './Imprint/Imprint'
-export { MainFrame, App, ThemePresentation, Home, Login, Dashboard, PrivacyPolicy, ProjectDescription, ProjectInformation, Imprint }
+export {
+  MainFrame,
+  App,
+  ThemePresentation,
+  Home,
+  Login,
+  Dashboard,
+  PrivacyPolicy,
+  ProjectDescription,
+  ProjectInformation,
+  Imprint
+}
