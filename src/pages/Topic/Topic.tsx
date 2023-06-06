@@ -1,15 +1,14 @@
 import { useTopic as _useTopic, useTopicHookParams, TopicHookReturn } from './Topic.hooks'
 import { DefaultBox as Box, DefaultSkeleton as Skeleton } from '@common/components'
 import ReactFlow, { Node, Edge, MiniMap, Controls, Background } from 'reactflow'
-import { IFrameModal, nodeTypes } from '@components'
-import { useTheme } from '@mui/material' // TODO: DI
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
+import { IFrameModal, nodeTypes } from '@components'
+import { useTheme } from '@mui/material' // TODO: DI?
 import { AuthContext } from '@services'
 import useBoundStore from '@store'
 import 'reactflow/dist/style.css'
 
-// TODO: Ab hier relevant
 export type TopicProps = {
   useTopic?: (params?: useTopicHookParams) => TopicHookReturn
 }
@@ -42,9 +41,9 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             setInitialNodes(nodes)
             setInitialEdges(edges)
           },
-          null
+          null // TODO: Maybe add Snackbar
         )
-      }, null)
+      }, null) // TODO: Maybe add Snackbar
     }
     return () => {
       clearTimeout(preventEndlessLoading)
