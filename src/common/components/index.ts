@@ -1,7 +1,7 @@
 /**
  * Reusable components such as buttons and forms go in here.
  */
-export { Accordion } from './Accordion/Accordion'
+export { DefaultAccordion as Accordion } from './DefaultAccordion/DefaultAccordion'
 export { DefaultAccordionDetails } from './DefaultAccordionDetails/DefaultAccordionDetails'
 export { DefaultAccordionSummary } from './DefaultAccordionSummary/DefaultAccordionSummary'
 export { DefaultButton } from './DefaultButton/DefaultButton'
