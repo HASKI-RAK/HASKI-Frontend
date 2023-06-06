@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import {
   DefaultContainer as Container,
-  DefaultBox as Box,
+  Box,
   DefaultGrid as Grid,
   DefaultLink as Link,
   DefaultTypography as Typography

@@ -1,6 +1,6 @@
 import {
   Accordion,
-  DefaultBox as Box,
+  Box,
   DefaultDivider as Divider,
   DefaultTypography as Typography,
   DefaultAccordionSummary as AccordionSummary,

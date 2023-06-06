@@ -1,5 +1,5 @@
 import {
-  DefaultBox as Box,
+  Box,
   DefaultBreadcrumbs as Breadcrumbs,
   DefaultLink as Link,
   DefaultTypography as Typography

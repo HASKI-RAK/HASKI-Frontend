@@ -6,7 +6,7 @@ export { DefaultAccordionDetails } from './DefaultAccordionDetails/DefaultAccord
 export { DefaultAccordionSummary } from './DefaultAccordionSummary/DefaultAccordionSummary'
 export { DefaultButton } from './DefaultButton/DefaultButton'
 export { DefaultSelect } from './DefaultSelect/DefaultSelect'
-export { DefaultBox } from './DefaultBox/DefaultBox'
+export { DefaultBox as Box } from './DefaultBox/DefaultBox'
 export { DefaultBreadcrumbs } from './DefaultBreadcrumbs/DefaultBreadcrumbs'
 export { DefaultLink } from './DefaultLink/DefaultLink'
 export { DefaultListItemIcon } from './DefaultListItemIcon/DefaultListItemIcon'

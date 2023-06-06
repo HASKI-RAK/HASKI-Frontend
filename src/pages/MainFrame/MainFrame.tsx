@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import {
-  DefaultBox as Box,
+  Box,
   DefaultDivider as Divider,
   DefaultTypography as Typography,
   DefaultStack as Stack,

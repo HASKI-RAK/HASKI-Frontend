@@ -4,7 +4,7 @@ import {
   DefaultAppBar as AppBar,
   DefaultToolbar as Toolbar,
   DefaultTypography as Typography,
-  DefaultBox as Box,
+  Box,
   DefaultIconButton as IconButton,
   DefaultMenu as Menu,
   DefaultTooltip as Tooltip,

@@ -1,11 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { ProjectDescriptionCard, ProjectDescriptionStepper } from '@components'
-import {
-  DefaultAvatar as Avatar,
-  DefaultBox as Box,
-  DefaultGrid as Grid,
-  DefaultTypography as Typography
-} from '@common/components'
+import { DefaultAvatar as Avatar, Box, DefaultGrid as Grid, DefaultTypography as Typography } from '@common/components'
 
 /**
  * ProjectDescriptionContent presents content for the project description.

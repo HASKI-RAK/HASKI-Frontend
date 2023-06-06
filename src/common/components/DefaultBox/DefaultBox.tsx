@@ -1,1 +1,2 @@
-export { Box as DefaultBox } from '@mui/material'
+import DefaultBox from '@mui/material/Box/Box'
+export { DefaultBox }
