@@ -1,7 +1,7 @@
 import { useGlossaryContent as _useGlossaryContent, GlossaryContentHookReturn } from './GlossaryContent.hooks'
 import { GlossaryList, Filter, Searchbar, GlossaryIndex, GlossaryEntryProps } from '@components'
 import { useTranslation } from 'react-i18next'
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import {
   DefaultTypography as Typography,
   DefaultBox as Box,
@@ -13,7 +13,8 @@ export type GlossaryContentProps = {
   useGlossaryContent?: () => GlossaryContentHookReturn
 }
 
-const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }: GlossaryContentProps) => {
+// TODO: Move to glossary page
+const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent }: GlossaryContentProps) => {
   // Translation
   const { t } = useTranslation()
 
@@ -63,6 +64,7 @@ const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }:
   const [selectedIndexElement, setSelectedIndexElement] = useState<string>('')
   const [expandedList, setExpandedList] = useState<string[]>([])
 
+  // TODO: Refactor
   const setSel = (input?: string | string[]) => {
     if (input === undefined) {
       setSelectedTags([])
@@ -73,20 +75,16 @@ const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }:
     }
   }
 
+  // TODO: Div verschwindibus
   return (
     <div data-testid="GlossaryContent">
       <Grid container columnSpacing={1} rowSpacing={1}>
         <Grid item xs={12} sm={12} sx={{ mt: '1rem', mb: '1rem' }}>
           <Typography variant="h3">{t('pages.glossary.title')}</Typography>
         </Grid>
-        {useMemo(
-          () => (
-            <Grid item xs={8} sm={6}>
-              <Searchbar label={t('pages.glossary.search')} setSearchQuery={setSearchQuery} timeout={100} />
-            </Grid>
-          ),
-          [setSearchQuery]
-        )}
+        <Grid item xs={8} sm={6}>
+          <Searchbar label={t('pages.glossary.search')} setSearchQuery={setSearchQuery} timeout={100} />
+        </Grid>
         <Grid item xs={4} sm={6}>
           <Filter
             label={t('pages.glossary.filter')}
@@ -95,53 +93,38 @@ const GlossaryContent = ({ useGlossaryContent = _useGlossaryContent, ...props }:
             setSelectedOptions={setSel}
           />
         </Grid>
-        {useMemo(
-          () => (
-            <Grid item xs={12} sm={12}>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                <GlossaryIndex
-                  orientation="horizontal"
-                  indexElements={indexElements}
-                  selectedIndexElement={selectedIndexElement}
-                  setSelectedIndexElement={setSelectedIndexElement}
-                />
-              </Box>
-            </Grid>
-          ),
-          [indexElements, selectedIndexElement, setSelectedIndexElement]
-        )}
-        {useMemo(
-          () => (
-            <Grid item xs={12} sm={12} sx={{ mt: '0.5rem', mb: '0.5rem' }}>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                <Button variant="outlined" onClick={() => collapseAll(setExpandedList)}>
-                  {t('pages.glossary.collapseAll')}
-                </Button>
-                <Button variant="outlined" onClick={() => expandAll(setExpandedList, glossaryEntries)}>
-                  {t('pages.glossary.expandAll')}
-                </Button>
-              </Box>
-            </Grid>
-          ),
-          [collapseAll, expandAll, setExpandedList, glossaryEntries]
-        )}
-        {useMemo(
-          () => (
-            <Grid item xs={12} sm={12}>
-              {
-                <GlossaryList
-                  glossaryEntries={glossaryEntries}
-                  expandedList={expandedList}
-                  setExpandedList={setExpandedList}
-                  searchQuery={searchQuery}
-                  selectedIndexElement={selectedIndexElement}
-                  selectedTags={selectedTags}
-                />
-              }
-            </Grid>
-          ),
-          [glossaryEntries, expandedList, setExpandedList, searchQuery, selectedIndexElement, selectedTags]
-        )}
+        <Grid item xs={12} sm={12}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            <GlossaryIndex
+              orientation="horizontal"
+              indexElements={indexElements}
+              selectedIndexElement={selectedIndexElement}
+              setSelectedIndexElement={setSelectedIndexElement}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={12} sx={{ mt: '0.5rem', mb: '0.5rem' }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            <Button variant="outlined" onClick={() => collapseAll(setExpandedList)}>
+              {t('pages.glossary.collapseAll')}
+            </Button>
+            <Button variant="outlined" onClick={() => expandAll(setExpandedList, glossaryEntries)}>
+              {t('pages.glossary.expandAll')}
+            </Button>
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          {
+            <GlossaryList
+              glossaryEntries={glossaryEntries}
+              expandedList={expandedList}
+              setExpandedList={setExpandedList}
+              searchQuery={searchQuery}
+              selectedIndexElement={selectedIndexElement}
+              selectedTags={selectedTags}
+            />
+          }
+        </Grid>
       </Grid>
     </div>
   )

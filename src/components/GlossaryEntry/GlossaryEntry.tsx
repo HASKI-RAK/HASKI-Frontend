@@ -1,3 +1,4 @@
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
 import {
   DefaultAccordionSummary as AccordionSummary,
@@ -8,7 +9,6 @@ import {
   DefaultGrid as Grid,
   DefaultChip as Chip
 } from '@common/components'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 interface GlossaryAccordionEntryProps extends GlossaryEntryProps {
   expandedList?: string[]
@@ -23,10 +23,11 @@ export type GlossaryEntryProps = {
   fundamental?: boolean
 }
 
+// TODO: REmove unnecessary ids
 const GlossaryEntry = ({ expandedList, setExpandedList, ...props }: GlossaryAccordionEntryProps) => {
   const { t } = useTranslation()
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleClick = () => {
     props.term &&
       expandedList &&
       (expandedList.includes(props.term)
