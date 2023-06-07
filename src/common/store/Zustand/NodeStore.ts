@@ -20,7 +20,7 @@ export const useBoundNodeStore = create<StoreState>()(
         // add if not exists, update if exists
         setNode: (id, node) => set({ nodes: [...get().nodes.filter((n) => n.id !== id), node] })
       }),
-      { name: 'node-store' }
+      { name: 'node-store', getStorage: () => sessionStorage }
     )
   )
 )
