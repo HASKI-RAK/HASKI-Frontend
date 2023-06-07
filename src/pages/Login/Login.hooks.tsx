@@ -1,6 +1,7 @@
-import { AuthContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
+import { AuthContext, SnackbarContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useContext, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export type LoginHookParams = {
   setIsLoading: (isLoading: boolean) => void
@@ -23,30 +24,35 @@ export type LoginHookReturn = {
  * @returns {LoginHookReturn} - The login logic.
  */
 export const useLogin = (params: LoginHookParams): LoginHookReturn => {
+  const { t } = useTranslation()
   const authcontext = useContext(AuthContext)
   const navigate = useNavigate()
+  const { addSnackbar } = useContext(SnackbarContext)
 
   const login = useCallback(() => {
     // supply auth context
     authcontext.setIsAuth(true)
     // then redirect to home page
-    navigate('/dashboard', { replace: true })
+    navigate('/', { replace: true })
   }, [authcontext, navigate])
 
   // Login with username and password
   const onSubmitHandler = () => {
-    params.setIsLoading(true)
-    postLoginCredentials()
-      .then((response) => {
-        if (response.status === 200) {
-          login()
-        }
+    params.setIsLoading(false)
+    addSnackbar({ message: t('components.Login.passwordError'), severity: 'success', autoHideDuration: 5000 })
 
-        //TODO catch and🍿 snackbar
-      })
-      .finally(() => {
-        params.setIsLoading(false)
-      })
+    // params.setIsLoading(true)
+    // postLoginCredentials()
+    //   .then((response) => {
+    //     if (response.status === 200) {
+    //       login()
+    //     }
+
+    //     //TODO catch and🍿 snackbar
+    //   })
+    //   .finally(() => {
+    //     params.setIsLoading(false)
+    //   })
   }
 
   const onMoodleLogin = () => {

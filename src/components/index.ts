@@ -19,10 +19,12 @@ import ProjectDescriptionStepper from './ProjectDescriptionStepper/ProjectDescri
 import SnackbarMessage, { SnackbarMessageProps, SeverityType } from './SnackbarMessage/SnackbarMessage'
 import SnackbarContainer from './SnackbarContainer/SnackbarContainer'
 import SnackbarTransition from './SnackbarTransition/SnackbarTransition'
+import IFrameModal from './IFrameModal/IFrameModal'
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
 
+export * from './Nodes'
 export {
   BreadcrumbsContainer,
   LocalNav,
@@ -43,6 +45,7 @@ export {
   ProjectDescriptionContent,
   ProjectDescriptionCard,
   ProjectDescriptionStepper,
-  SnackbarTransition
+  SnackbarTransition,
+  IFrameModal
 }
 export type { SnackbarMessageProps, SeverityType }

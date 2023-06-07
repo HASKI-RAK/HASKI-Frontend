@@ -38,16 +38,16 @@ const MainFrame = () => (
             <Divider flexItem orientation="vertical" />
           </Box>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={10}>
           {/**💉 Pages get injected here through App routing */}
-          <Container>
-            <Outlet />
-          </Container>
+          {/* <Container maxWidth="lg" sx={{ height: '100%' }}> */}
+          <Outlet />
+          {/* </Container> */}
         </Grid>
-        <Grid item xs={2}>
-          {/** TODO 📑 add real gameification */}
+        {/** TODO 📑 add real gameification */}
+        {/* <Grid item xs={2}>
           <Typography variant="h4">Gamification</Typography>
-        </Grid>
+        </Grid> */}
       </Grid>
       <Divider flexItem />
       <Footer />

@@ -7,10 +7,13 @@ import Login from './Login/Login'
 import ThemePresentation from './ThemePresentation/ThemePresentation'
 import Dashboard from './Dashboard/Dashboard'
 import MainFrame from './MainFrame/MainFrame'
-import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy'
 import ProjectDescription from './ProjectDescription/ProjectDescription'
 import ProjectInformation from './ProjectInformation/ProjectInformation'
 import Imprint from './Imprint/Imprint'
+import Topic from './Topic/Topic'
+import CoursePage from './CoursePage/CoursePage'
+import PageNotFound from './PageNotFound/PageNotFound'
+import PrivacyPolicy from "./PrivacyPolicy/PrivacyPolicy";
 export {
   MainFrame,
   App,
@@ -18,8 +21,11 @@ export {
   Home,
   Login,
   Dashboard,
-  PrivacyPolicy,
   ProjectDescription,
   ProjectInformation,
-  Imprint
+  Imprint,
+  Topic,
+  CoursePage,
+  PageNotFound,
+  PrivacyPolicy
 }
