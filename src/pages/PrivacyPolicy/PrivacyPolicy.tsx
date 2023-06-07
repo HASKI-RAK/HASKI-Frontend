@@ -1,6 +1,13 @@
 import { useTranslation } from 'react-i18next'
-import { DefaultTypography as Typography, DefaultLink as Link, DefaultDivider as Divider } from '@common/components'
-import { List, ListItem, ListItemText, ListItemIcon } from '@mui/material'
+import {
+  DefaultTypography as Typography,
+  DefaultLink as Link,
+  DefaultDivider as Divider,
+  DefaultList as List,
+  DefaultListItem as ListItem,
+  DefaultListItemText as ListItemText,
+  DefaultListItemIcon as ListItemIcon
+} from '@common/components'
 import { FiberManualRecord } from '@mui/icons-material'
 export const PrivacyPolicy = () => {
   // Translation
