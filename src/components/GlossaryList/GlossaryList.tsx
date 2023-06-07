@@ -19,27 +19,26 @@ const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: Glossary
 
   useEffect(() => {
     if (props.glossaryEntries) {
-      if (props.selectedTags) {
-        setGlossaryState(filterByTags(props.selectedTags, props.glossaryEntries))
-      }
-
-      if (props.selectedIndexElement) {
-        setGlossaryState(filterByIndexElement(props.selectedIndexElement, glossaryEntryState))
-      }
-
-      if (props.searchQuery) {
-        setGlossaryState(searchByQuery(props.searchQuery, glossaryEntryState))
-      }
+      const byTagsFilteredGlossaryEntries = filterByTags(props.glossaryEntries, props.selectedTags)
+      const bySelectedIndexElementFilteredGlossaryEntries = filterByIndexElement(
+        byTagsFilteredGlossaryEntries,
+        props.selectedIndexElement
+      )
+      const byQuerySearchedGlossaryEntries = searchByQuery(
+        bySelectedIndexElementFilteredGlossaryEntries,
+        props.searchQuery
+      )
+      setGlossaryState(byQuerySearchedGlossaryEntries)
     }
   }, [
-    glossaryEntryState,
     props.glossaryEntries,
-    props.selectedTags,
-    props.selectedIndexElement,
-    props.searchQuery,
     filterByTags,
+    props.selectedTags,
     filterByIndexElement,
-    searchByQuery
+    props.selectedIndexElement,
+    searchByQuery,
+    props.searchQuery,
+    setGlossaryState
   ])
 
   return (

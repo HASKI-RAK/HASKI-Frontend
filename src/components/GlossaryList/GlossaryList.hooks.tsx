@@ -3,12 +3,12 @@ import { GlossaryEntryProps } from '@components'
 import { useTranslation } from 'react-i18next'
 
 export type GlossaryListHookReturn = {
-  readonly filterByTags: (selectedTags: string[], glossaryEntries: GlossaryEntryProps[]) => GlossaryEntryProps[]
+  readonly filterByTags: (glossaryEntries: GlossaryEntryProps[], selectedTags?: string[]) => GlossaryEntryProps[]
   readonly filterByIndexElement: (
-    selectedIndexElement: string,
-    glossaryEntries: GlossaryEntryProps[]
+    glossaryEntries: GlossaryEntryProps[],
+    selectedIndexElement?: string
   ) => GlossaryEntryProps[]
-  readonly searchByQuery: (searchQuery: string, glossaryEntries: GlossaryEntryProps[]) => GlossaryEntryProps[]
+  readonly searchByQuery: (glossaryEntries: GlossaryEntryProps[], searchQuery?: string) => GlossaryEntryProps[]
   readonly collapseAll: (setExpandedList: (newExpandedList: string[]) => void) => void
   readonly expandAll: (
     setExpandedList: (newExpandedList: string[]) => void,
@@ -21,10 +21,10 @@ export const useGlossaryList = (): GlossaryListHookReturn => {
 
   // Logic
   const onFilterByTags = useCallback(
-    (selectedTags: string[], glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[] => {
+    (glossaryEntries: GlossaryEntryProps[], selectedTags?: string[]): GlossaryEntryProps[] => {
       const filteredGlossaryEntries: GlossaryEntryProps[] = []
 
-      if (selectedTags.length === 0) {
+      if (selectedTags === undefined || selectedTags.length === 0) {
         return glossaryEntries
       }
 
@@ -40,7 +40,7 @@ export const useGlossaryList = (): GlossaryListHookReturn => {
   )
 
   const onFilterByIndexElement = useCallback(
-    (selectedIndexElement: string, glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[] => {
+    (glossaryEntries: GlossaryEntryProps[], selectedIndexElement?: string): GlossaryEntryProps[] => {
       const filteredGlossaryEntries: GlossaryEntryProps[] = []
 
       if (selectedIndexElement === null || selectedIndexElement === '' || selectedIndexElement === undefined) {
@@ -72,7 +72,7 @@ export const useGlossaryList = (): GlossaryListHookReturn => {
   )
 
   const onSearchByQuery = useCallback(
-    (searchQuery: string, glossaryEntries: GlossaryEntryProps[]): GlossaryEntryProps[] => {
+    (glossaryEntries: GlossaryEntryProps[], searchQuery?: string): GlossaryEntryProps[] => {
       const searchedGlossaryEntries: GlossaryEntryProps[] = []
 
       if (searchQuery === undefined || searchQuery === '') {
