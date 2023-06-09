@@ -9,18 +9,14 @@ const mockFilterProps = {
   setSelectedOptions: jest.fn()
 }
 
-Object.defineProperty(global, 'mockFilterProps', {
-  value: mockFilterProps
-})
-
 describe('Filter tests', () => {
-  test('Filter renders without input', () => {
+  it('renders without input', () => {
     const { getByTestId } = render(<Filter />)
     const select = getByTestId('filter')
     expect(select).toBeInTheDocument()
   })
 
-  test('Filter renders with input', () => {
+  it('renders with input', () => {
     const { getByTestId } = render(
       <Filter
         label={mockFilterProps.label}
@@ -115,7 +111,7 @@ describe('Filter tests', () => {
     expect(mockFilterProps.setSelectedOptions).toHaveBeenCalledTimes(2)
   })
 
-  test('Selected options get rendered', () => {
+  test('Currently selected options get rendered', () => {
     const { getByTestId } = render(
       <Filter
         label={mockFilterProps.label}

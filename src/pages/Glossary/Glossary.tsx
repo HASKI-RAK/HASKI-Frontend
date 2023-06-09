@@ -1,7 +1,7 @@
 import { GlossaryList, Filter, Searchbar, GlossaryIndex, GlossaryEntryProps } from '@components'
 import { useGlossary as _useGlossary, GlossaryHookReturn } from './Glossary.hooks'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import {
   DefaultTypography as Typography,
   DefaultBox as Box,
@@ -94,12 +94,17 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
         </Grid>
         <Grid item xs={12} sm={12}>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-            <GlossaryIndex
-              orientation="horizontal"
-              indexElements={indexElements}
-              selectedIndexElement={selectedIndexElement}
-              setSelectedIndexElement={setSelectedIndexElement}
-            />
+            {useMemo(
+              () => (
+                <GlossaryIndex
+                  orientation="horizontal"
+                  indexElements={indexElements}
+                  selectedIndexElement={selectedIndexElement}
+                  setSelectedIndexElement={setSelectedIndexElement}
+                />
+              ),
+              [indexElements, selectedIndexElement, setSelectedIndexElement]
+            )}
           </Box>
         </Grid>
         <Grid item xs={12} sm={12} sx={{ mt: '0.5rem', mb: '0.5rem' }}>
@@ -113,16 +118,14 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
           </Box>
         </Grid>
         <Grid item xs={12} sm={12}>
-          {
-            <GlossaryList
-              glossaryEntries={glossaryEntries}
-              expandedList={expandedList}
-              setExpandedList={setExpandedList}
-              searchQuery={searchQuery}
-              selectedIndexElement={selectedIndexElement}
-              selectedTags={selectedTags}
-            />
-          }
+          <GlossaryList
+            glossaryEntries={glossaryEntries}
+            expandedList={expandedList}
+            setExpandedList={setExpandedList}
+            searchQuery={searchQuery}
+            selectedIndexElement={selectedIndexElement}
+            selectedTags={selectedTags}
+          />
         </Grid>
       </Grid>
     </div>

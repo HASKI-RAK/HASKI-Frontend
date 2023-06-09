@@ -24,6 +24,13 @@ const MenuProps = {
   }
 }
 
+/**
+ * @typedef {Object} FilterProps
+ * @property {string} [label] - The label text of the filter.
+ * @property {string[]} [options] - The options of the filter for the user to select from.
+ * @property {string[]} [selectedOptions] - The options that are currently selected.
+ * @property {function} [setSelectedOptions] -  The function to set the selected options.
+ */
 type FilterProps = {
   label?: string
   options?: string[]
@@ -31,15 +38,26 @@ type FilterProps = {
   setSelectedOptions?: (selectedElements?: string[] | string) => void
 }
 
+/**
+ * Filter presents a component for the user to select elements from a list of options.
+ * It can be used as a standalone component on a page.
+ * @param props - Props containing label, options, selectedOptions and setSelectedOptions of the filter.
+ * @returns {JSX.Element} - The filter component.
+ * @category Components
+ */
 const Filter = (props: FilterProps) => {
   const [open, setOpen] = useState(false)
 
-  const handleChange = useCallback((event: SelectChangeEvent<typeof props.selectedOptions>) => {
-    if (props.setSelectedOptions) {
-      props.setSelectedOptions(event.target.value)
-    }
-  }, [])
+  const handleChange = useCallback(
+    (event: SelectChangeEvent<typeof props.selectedOptions>) => {
+      if (props.setSelectedOptions) {
+        props.setSelectedOptions(event.target.value)
+      }
+    },
+    [props]
+  )
 
+  // Renders the selected options as chips.
   const renderValue = useCallback(
     (selected: string[]) => (
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>

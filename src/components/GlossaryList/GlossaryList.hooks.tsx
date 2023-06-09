@@ -68,7 +68,7 @@ export const useGlossaryList = (): GlossaryListHookReturn => {
 
       return filteredGlossaryEntries
     },
-    []
+    [t]
   )
 
   const onSearchByQuery = useCallback(
