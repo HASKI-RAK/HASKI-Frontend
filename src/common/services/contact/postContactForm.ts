@@ -1,7 +1,8 @@
 export interface FormDataType {
-  reportType: string
-  reportTopic: string
-  description: string
+  //muss mit backend variablen übereinstimmen
+  report_type: string
+  report_topic: string
+  report_description: string
 }
 
 export type PostContactFormResponse = {
@@ -17,10 +18,13 @@ export type PostContactFormParams = {
  * @returns PostContactFormResponse
  */
 export const postContactForm = async (responseBody?: FormDataType): Promise<PostContactFormResponse> => {
-  return fetch(process.env.BACKEND + `/contactform`, {
+  //nur zum testen
+  const user_id = 2
+  const lms_user_id = 2
+  return fetch(process.env.BACKEND + `/user/${user_id}/${lms_user_id}/contactform`, {
     method: 'POST',
     credentials: 'include',
-    body: JSON.stringify({ responseBody }),
+    body: JSON.stringify(responseBody),
     headers: {
       'Content-Type': 'application/json'
     }

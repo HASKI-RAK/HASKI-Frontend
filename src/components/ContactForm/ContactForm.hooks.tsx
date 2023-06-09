@@ -1,6 +1,5 @@
 import { useState, useContext } from 'react'
 import { FormDataType, SnackbarContext } from '@services'
-import { t } from 'i18next'
 import { useTranslation } from 'react-i18next'
 
 export type useContactFormHookParams = {
@@ -35,7 +34,7 @@ export const useContactForm = (params?: useContactFormHookParams): ContactFormHo
     returnObjects: true
   }) as [{ value: string; label: string }]
   const {
-    defaultReportType = reportTypes.at(-1)?.value ?? '',
+    defaultReportType = '', //TODO: TEST reportTypes.at(-1)?.value ??
     defaultReportTopic = '',
     defaultDescription = ''
   } = params || {}
@@ -46,7 +45,7 @@ export const useContactForm = (params?: useContactFormHookParams): ContactFormHo
   // ** Logic **//
   const submit = (content: FormDataType) => {
     addSnackbar({
-      message: t('components.ContactForm.submitError') + ': ' + content.description,
+      message: t('components.ContactForm.submitError') + ': ' + content.report_description,
       severity: 'error'
     })
   }

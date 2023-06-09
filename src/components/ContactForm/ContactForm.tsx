@@ -69,9 +69,9 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
     setTextfieldError(!description)
     if (reportTopic && description)
       onSubmit({
-        reportTopic,
-        reportType,
-        description
+        report_topic: reportTopic,
+        report_type: reportType,
+        report_description: description
       })
   }
 

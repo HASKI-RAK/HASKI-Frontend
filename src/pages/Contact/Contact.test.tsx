@@ -1,9 +1,8 @@
-import React from 'react'
 import { Contact } from '@pages'
 import '@testing-library/jest-dom'
-import { render, fireEvent, act } from '@testing-library/react'
-import { ContactForm } from '@components'
-import { FormDataType } from '@services'
+import { render, fireEvent, act, renderHook } from '@testing-library/react'
+import { ContactForm, SnackbarMessage } from '@components'
+import { FormDataType, SnackbarContext, SnackbarContextType } from '@services'
 import { useContact } from './Contact.hooks'
 
 jest.mock('react-i18next', () => ({
@@ -27,6 +26,32 @@ jest.mock('react-i18next', () => ({
     }
   }
 }))
+
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useCallback: (a: any) => a
+}))
+
+const scontext: SnackbarContextType = {
+  snackbarsErrorWarning: [],
+  snackbarsSuccessInfo: [],
+  setSnackbarsErrorWarning: (a: any[]) => {
+    return a
+  },
+  setSnackbarsSuccessInfo: (a: any) => {
+    return a
+  },
+  addSnackbar: (a: any) => {
+    return a
+  },
+  updateSnackbar: (a: any) => {
+    return a
+  },
+  removeSnackbar: (a: any) => {
+    return a
+  }
+}
+
 /** use Translation mocks the translation and also mocks the map input of reportTypes and topics,
  * input isnt important here.
  * global.fetch mocks the fetch function, which is used in the onSubmitHandler function in Contact.hooks.tsx
@@ -48,22 +73,30 @@ describe('Test Contactpage', () => {
   })
 
   test('not sending', () => {
-    render(<Contact />)
+    render(
+      <SnackbarContext.Provider value={scontext}>
+        <Contact />
+      </SnackbarContext.Provider>
+    )
     expect(useContact).not.toBeCalled()
   })
   test('test the fetch function', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
-        json: () => Promise.resolve({ status: 200 }),
-        status: 200,
+        json: () => Promise.resolve({ status: 201 }),
+        status: 201,
         message: 'OK'
       })
     ) as jest.Mock
     const result = await fetch(process.env.BACKEND + `/contactform`)
-    await expect(result.status).toBe(200)
+    await expect(result.status).toBe(201)
   })
   test('sends onSubmit to Contactform', () => {
-    const form = render(<ContactForm onSubmit={useContact} />)
+    const form = render(
+      <SnackbarContext.Provider value={scontext}>
+        <ContactForm onSubmit={useContact} />
+      </SnackbarContext.Provider>
+    )
 
     const submitButton = form.getByText('components.ContactForm.submit')
     const input = form.getByRole('textbox')
@@ -95,20 +128,104 @@ describe('Test Contactpage', () => {
 
 describe('Test on submit Function', () => {
   const testData: FormDataType = {
-    reportType: '1',
-    reportTopic: '1',
-    description: 'test'
+    report_type: '1',
+    report_topic: '1',
+    report_description: 'test'
   }
-  test('Fetch Return 200', async () => {
+  test('Fetch Return 201', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
-        status: 200,
+        status: 201,
         message: 'OK'
       })
     ) as jest.Mock
-    const onSubmit = useContact({ setIsLoading: jest.fn() })
 
-    onSubmit.onSubmitHandler(testData)
+    const loadingMock = jest.fn()
+    const addSnackbarMock = jest.fn()
+
+    const my_context = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+
+    const result = renderHook(
+      () => {
+        const onSubmit = useContact({ setIsLoading: loadingMock })
+        return onSubmit
+      },
+      { wrapper: ({ children }) => <SnackbarContext.Provider value={my_context}>{children}</SnackbarContext.Provider> }
+    )
+
+    const onSubmit = result.result.current
+
+    await act(async () => {
+      onSubmit.onSubmitHandler(testData)
+
+      // Check if loading is set True
+      expect(loadingMock).lastCalledWith(true)
+
+      // wait for all asycc calls
+      await Promise.resolve()
+    })
+
+    expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('success')
+    expect(loadingMock).lastCalledWith(false)
+  })
+
+  test('Fetch Return 404', async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        status: 404,
+        message: 'OK'
+      })
+    ) as jest.Mock
+
+    const loadingMock = jest.fn()
+    const addSnackbarMock = jest.fn()
+
+    const my_context = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+
+    const result = renderHook(
+      () => {
+        const onSubmit = useContact({ setIsLoading: loadingMock })
+        return onSubmit
+      },
+      { wrapper: ({ children }) => <SnackbarContext.Provider value={my_context}>{children}</SnackbarContext.Provider> }
+    )
+
+    const onSubmit = result.result.current
+
+    await act(async () => {
+      onSubmit.onSubmitHandler(testData)
+
+      // Check if loading is set True
+      expect(loadingMock).lastCalledWith(true)
+
+      // wait for all asycc calls
+      await Promise.resolve()
+    })
+
+    expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
+    expect(loadingMock).lastCalledWith(false)
   })
 
   test('Fetch throws an error', async () => {
@@ -120,8 +237,40 @@ describe('Test on submit Function', () => {
       })
     }) as jest.Mock
 
-    const onSubmit = useContact({ setIsLoading: jest.fn() })
+    const loadingMock = jest.fn()
+    const addSnackbarMock = jest.fn()
 
-    onSubmit.onSubmitHandler(testData)
+    const my_context = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+
+    const result = renderHook(
+      () => {
+        const onSubmit = useContact({ setIsLoading: loadingMock })
+        return onSubmit
+      },
+      { wrapper: ({ children }) => <SnackbarContext.Provider value={my_context}>{children}</SnackbarContext.Provider> }
+    )
+
+    const onSubmit = result.result.current
+
+    await act(async () => {
+      onSubmit.onSubmitHandler(testData)
+
+      await Promise.resolve()
+    })
+
+    expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
+    expect(loadingMock).lastCalledWith(false)
+    //onSubmit.onSubmitHandler(testData)
   })
 })
