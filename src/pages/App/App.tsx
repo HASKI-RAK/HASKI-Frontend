@@ -6,13 +6,13 @@ import {
   ThemePresentation,
   Login,
   Dashboard,
+  PrivacyPolicy,
   ProjectDescription,
   ProjectInformation,
   Imprint,
   Topic,
   CoursePage,
   PageNotFound,
-  PrivacyPolicy,
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { logBuffer } from '@shared'
@@ -42,6 +42,7 @@ const App = () => (
               <Route path="/theme" element={<ThemePresentation />} />
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/privacypolicy" element={<PrivacyPolicy />} />
               <Route path="/projectinformation" element={<ProjectInformation />} />
               <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
               <Route path="/imprint" element={<Imprint />} />

@@ -222,12 +222,12 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   )
 
   // useEffect(() => {
-  //   const { nodes, edges } = mapNodes(learningPath)
+  //   const { nodes, edges } = mapNodes(LearningPath)
   //   console.log('rendering nodes')
   //   setInitialNodes(nodes)
   //   //setInitialEdges(edges)
   //   setInitialEdges(edges)
-  // }, [mapNodes, learningPath])
+  // }, [mapNodes, LearningPath])
 
   useEffect(() => {
     // request to backend to get learning path for topic

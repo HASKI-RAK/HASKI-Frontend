@@ -7,10 +7,8 @@ import { GraphListK } from './Questionnaire/GraphListK'
 import { ResultDescriptionListK } from './Questionnaire/ResultDescriptionListK'
 import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResultsModal'
 import { Text } from './Text/Text'
-import { ImprintContent } from './Imprint/ImprintContent'
 import LoginForm from './LoginForm/LoginForm'
 import MenuBar from './MenuBar/MenuBar'
-import { PrivacyPolicyContent } from "./PrivacyPolicy/PrivacyPolicyContent";
 
 import Footer from './Footer/Footer'
 import LocalNav from './LocalNav/LocalNav'
@@ -48,8 +46,6 @@ export {
   ProjectDescriptionCard,
   ProjectDescriptionStepper,
   SnackbarTransition,
-  ImprintContent,
-  IFrameModal,
-  PrivacyPolicyContent
+  IFrameModal
 }
 export type { SnackbarMessageProps, SeverityType }
