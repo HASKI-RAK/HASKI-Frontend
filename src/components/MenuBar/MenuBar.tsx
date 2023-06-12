@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   DefaultAppBar as AppBar,
@@ -174,7 +174,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                     {loading ? ( // display Skeleton component while loading
                       <Box width={400}>{skeletonItems}</Box>
                     ) : (
-                      //For every Topic the LearningPath is displayed under it.
+                      //For every Topic the learningPath is displayed under it.
                       <>
                         {reversedTopics.map((topic, index) => (
                           <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>

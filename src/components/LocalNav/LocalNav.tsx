@@ -61,7 +61,7 @@ const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
         </Box>
       ) : (
         // display actual content once loading is false
-        //For every Topic, get LearningPath and display it inside an Accordion
+        //For every Topic, get learningPath and display it inside an Accordion
         <>
           {topics.map((topic, index) => (
             <Accordion
