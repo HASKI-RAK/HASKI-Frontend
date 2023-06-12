@@ -13,7 +13,6 @@ import {
   Topic,
   CoursePage,
   PageNotFound,
-  PrivacyPolicy,
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { logBuffer } from '@shared'
