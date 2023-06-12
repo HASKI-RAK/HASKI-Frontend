@@ -1,7 +1,7 @@
 import { Contact } from '@pages'
 import '@testing-library/jest-dom'
 import { render, fireEvent, act, renderHook } from '@testing-library/react'
-import { ContactForm, SnackbarMessage } from '@components'
+import { ContactForm } from '@components'
 import { FormDataType, SnackbarContext, SnackbarContextType } from '@services'
 import { useContact } from './Contact.hooks'
 
@@ -27,10 +27,10 @@ jest.mock('react-i18next', () => ({
   }
 }))
 
-jest.mock('react', () => ({
+/*jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useCallback: (a: any) => a
-}))
+}))*/
 
 const scontext: SnackbarContextType = {
   snackbarsErrorWarning: [],
@@ -56,14 +56,16 @@ const scontext: SnackbarContextType = {
  * input isnt important here.
  * global.fetch mocks the fetch function, which is used in the onSubmitHandler function in Contact.hooks.tsx
  * useContact mocks the useContact function, which is used in the Contact.tsx
+ * scontext is a mocked Snackbarcontext, which handles the testing of the snackbar, when a form is submitted
  *
- * Now the two tests handle the case, that the user doesnt send the form, and the case that the user sends the form.
- * Not sending the form is tested by checking if the useContact function is not called.
- * Sending the form is tested by checking if the useContact function is called.
- * The useContact function can only be called if the user fills in the required fields.
- * Which is why this is also mocked here.
+ * Currently getting tested are the cases:
  *
- * Last test checks if the fetch function works.
+ * - Contactform is not getting sent at all. Only renders the form
+ * - a form gets submitted, so that the fetch function gets called and returns 201
+ * - tests a normal submit with filled in textfields, that are required
+ * - a form gets submitted, but throws an error
+ *
+ * - the fetch function returns 201, but is Loading is false, so the Snackbar shows an error
  */
 describe('Test Contactpage', () => {
   const submit = jest.fn()
@@ -271,6 +273,5 @@ describe('Test on submit Function', () => {
 
     expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
     expect(loadingMock).lastCalledWith(false)
-    //onSubmit.onSubmitHandler(testData)
   })
 })
