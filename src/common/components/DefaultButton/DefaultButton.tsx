@@ -1,2 +1,2 @@
-import { Button } from '@mui/material'
-export { Button as DefaultButton }
+import  DefaultButton from '@mui/material/Button/Button'
+export { DefaultButton }

@@ -1,1 +1,2 @@
-export { Avatar as DefaultAvatar } from '@mui/material'
+import  DefaultAvatar  from '@mui/material/Avatar/Avatar'
+export { DefaultAvatar } 

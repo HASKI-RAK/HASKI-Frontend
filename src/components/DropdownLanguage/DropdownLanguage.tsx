@@ -1,5 +1,5 @@
 ﻿import { useTranslation } from 'react-i18next'
-import { DefaultSelect as Select } from '@common/components'
+import { Select } from '@common/components'
 import { MenuItem } from '@mui/material'
 import log from 'loglevel'
 

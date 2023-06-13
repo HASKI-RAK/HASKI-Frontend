@@ -1,1 +1,2 @@
-export { Grid as DefaultGrid } from '@mui/material'
+import DefaultGrid from '@mui/material/Grid/Grid'
+export { DefaultGrid }
