@@ -1,1 +1,2 @@
-export { Divider as DefaultDivider } from '@mui/material'
+import DefaultDivider from '@mui/material/Divider/Divider'
+export { DefaultDivider } 

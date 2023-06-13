@@ -1,1 +1,2 @@
-export { Paper as DefaultPaper } from '@mui/material'
+import DefaultPaper from '@mui/material/Paper/Paper'
+export { DefaultPaper }

@@ -1,9 +1,9 @@
 import { useRef, useEffect, useCallback } from 'react'
 import {
-  DefaultDivider as Divider,
-  DefaultFade as Fade,
-  DefaultGrid as Grid,
-  DefaultTypography as Typography
+  Divider,
+  Fade,
+  Grid,
+  Typography
 } from '@common/components'
 import {
   useProjectDescriptionCard as _useProjectDescriptionCard,

@@ -1,1 +1,2 @@
-export { AppBar as DefaultAppBar } from '@mui/material'
+import  DefaultAppBar  from '@mui/material/AppBar/AppBar'
+export { DefaultAppBar }

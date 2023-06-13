@@ -1,22 +1,22 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  DefaultAppBar as AppBar,
-  DefaultToolbar as Toolbar,
-  DefaultTypography as Typography,
+  AppBar,
+  Toolbar,
+  Typography,
   Box,
-  DefaultIconButton as IconButton,
-  DefaultMenu as Menu,
-  DefaultTooltip as Tooltip,
-  DefaultAvatar as Avatar,
-  DefaultMenuItem as MenuItem,
-  DefaultGrid as Grid,
-  DefaultButton as Button,
-  DefaultPopover as Popover,
-  DefaultLink as Link,
-  DefaultDivider as Divider,
-  DefaultSkeleton as Skeleton,
-  DefaultListItemIcon as ListItemIcon
+  IconButton,
+  Menu,
+  Tooltip,
+  Avatar,
+  MenuItem,
+  Grid,
+  Button,
+  Popover,
+  Link,
+  Divider,
+  Skeleton,
+  ListItemIcon
 } from '@common/components'
 import SettingsIcon from '@mui/icons-material/Settings'
 import HelpIcon from '@mui/icons-material/Help'
