@@ -1,33 +1,16 @@
-import { Box, Paper, Typography } from '@mui/material'
-import { memo, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { DefaultBox as Box, DefaultPaper as Paper, DefaultTypography as Typography } from '@common/components'
+import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { IFrameModal, LearningPathLearningElementNode } from '@components'
-import FeedbackIcon from '@mui/icons-material/Feedback'
-import { useBoundNodeStore } from '@store'
+import FeedbackIcon from '@mui/icons-material/Feedback' // TODO: DI
+import { memo } from 'react'
 
-const FeedbackNodeMemo = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
-  const { t } = useTranslation()
-  const [isOpen, setIsOpen] = useState(false)
-  const [url] = useState(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
-  const [title] = useState(data.name)
-
-  const handleOpen = useMemo(() => {
-    return () => {
-      setIsOpen(true)
-    }
-  }, [])
-
-  const handleClose = () => {
-    setIsOpen(false)
-  }
-
+const FeedbackNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
     <Box
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()
-        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
+        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
       }}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
@@ -35,18 +18,17 @@ const FeedbackNodeMemo = ({ data }: NodeProps<LearningPathLearningElementNode>) 
           width: '65px',
           height: '65px',
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          justifyContent: 'center'
         }}>
         <FeedbackIcon sx={{ fontSize: 50 }} />
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}
       </Typography>
-      <IFrameModal url={url} title={title} isOpen={isOpen} onClose={handleClose} key={url} />
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
     </Box>
   )
 }
 
-export const FeedbackNode = memo(FeedbackNodeMemo)
+export default memo(FeedbackNode)

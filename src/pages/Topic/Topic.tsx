@@ -15,13 +15,14 @@ export type TopicProps = {
 
 // TODO: URL-Struktur überlegen bspw. "localhost:3000/topic?topic=1"
 const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
+  const theme = useTheme()
   const navigate = useNavigate()
   const authcontext = useContext(AuthContext)
-  const fetchUser = useBoundStore((state) => state.fetchUser)
-  const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
+
   const { courseId, topicId } = useParams()
   const { url, title, isOpen, handleClose, mapNodes } = useTopic()
-  const theme = useTheme()
+  const fetchUser = useBoundStore((state) => state.fetchUser)
+  const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
 
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()

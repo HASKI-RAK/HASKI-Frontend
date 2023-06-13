@@ -1,8 +1,8 @@
-import { useState, useCallback, useMemo } from 'react'
-import { LearningPath } from '@core'
 import { LearningPathLearningElementNode } from '@components'
+import { useState, useCallback, useMemo } from 'react'
 import { Node, Edge } from 'reactflow'
 import { Theme } from '@mui/material' // TODO: DI
+import { LearningPath } from '@core'
 
 export type useTopicHookParams = {
   defaultUrl?: string
@@ -98,11 +98,11 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       // Exercise nodes
       const exerciseLearningElementChildNodes = learningPathExercises.map((node, index) => {
         const node_data: LearningPathLearningElementNode = {
-          lms_id: node.learning_element.lms_id,
+          lmsId: node.learning_element.lms_id,
           name: node.learning_element.name,
-          activity_type: node.learning_element.activity_type,
+          activityType: node.learning_element.activity_type,
           classification: node.learning_element.classification,
-          is_recommended: node.recommended,
+          isRecommended: node.recommended,
           handleSetUrl: handleSetUrl,
           handleSetTitle: handleSetTitle,
           handleOpen: handleOpen,
@@ -143,11 +143,11 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       // Leftover learning elements
       const learningElementNodesExcludingExercises = learningPathExcludingExercises.map((item) => {
         const node_data: LearningPathLearningElementNode = {
-          lms_id: item.learning_element.lms_id,
+          lmsId: item.learning_element.lms_id,
           name: item.learning_element.name,
-          activity_type: item.learning_element.activity_type,
+          activityType: item.learning_element.activity_type,
           classification: item.learning_element.classification,
-          is_recommended: item.recommended,
+          isRecommended: item.recommended,
           handleSetUrl: handleSetUrl,
           handleSetTitle: handleSetTitle,
           handleOpen: handleOpen,

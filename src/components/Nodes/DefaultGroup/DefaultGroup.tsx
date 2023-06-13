@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material'
-import { memo } from 'react'
+import { DefaultTypography as Typography } from '@common/components'
 import { Handle, NodeProps, Position } from 'reactflow'
+import { memo } from 'react'
 
 const DefaultGroup = ({
   data,
@@ -19,6 +19,7 @@ const DefaultGroup = ({
   )
 }
 
+// https://stackoverflow.com/questions/41581130/what-is-react-component-displayname-used-for
 DefaultGroup.displayName = 'DefaultGroup'
 
 export default memo(DefaultGroup)

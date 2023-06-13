@@ -1,10 +1,8 @@
-import { Box, Paper, Typography } from '@mui/material'
-import { memo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { DefaultBox as Box, DefaultPaper as Paper, DefaultTypography as Typography } from '@common/components'
+import { LearningPathLearningElementNode } from '@components'
+import VideocamIcon from '@mui/icons-material/Videocam' // TODO: DI
 import { Handle, NodeProps, Position } from 'reactflow'
-import { IFrameModal, LearningPathLearningElementNode } from '@components'
-import VideocamIcon from '@mui/icons-material/Videocam'
-import { memberExpression } from '@babel/types'
+import { memo } from 'react'
 
 const VideoNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
@@ -12,7 +10,7 @@ const VideoNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()
-        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
+        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
       }}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
@@ -20,8 +18,8 @@ const VideoNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
           width: '65px',
           height: '65px',
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          justifyContent: 'center'
         }}>
         <VideocamIcon sx={{ fontSize: 50 }} />
       </Paper>

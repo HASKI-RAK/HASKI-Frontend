@@ -1,17 +1,16 @@
-import { Box, Paper, Typography } from '@mui/material'
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { DefaultBox as Box, DefaultPaper as Paper, DefaultTypography as Typography } from '@common/components'
+import { LearningPathLearningElementNode } from '@components'
+import ShortTextIcon from '@mui/icons-material/ShortText' // TODO: DI
 import { Handle, NodeProps, Position } from 'reactflow'
-import { IFrameModal, LearningPathLearningElementNode } from '@components'
-import ShortTextIcon from '@mui/icons-material/ShortText'
+import { memo } from 'react'
 
-export const ShortTextualIntroductionNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
+const ShortTextualIntroductionNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
     <Box
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()
-        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
+        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
       }}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
@@ -19,8 +18,8 @@ export const ShortTextualIntroductionNode = ({ data }: NodeProps<LearningPathLea
           width: '65px',
           height: '65px',
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          justifyContent: 'center'
         }}>
         <ShortTextIcon sx={{ fontSize: 50 }} />
       </Paper>
@@ -31,3 +30,5 @@ export const ShortTextualIntroductionNode = ({ data }: NodeProps<LearningPathLea
     </Box>
   )
 }
+
+export default memo(ShortTextualIntroductionNode)

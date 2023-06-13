@@ -1,9 +1,9 @@
 export type LearningPathLearningElementNode = {
-  lms_id: number
+  lmsId: number
   name: string
-  activity_type: string
+  activityType: string
   classification: string
-  is_recommended: boolean
+  isRecommended: boolean
   handleSetUrl: (url: string) => void
   handleSetTitle: (title: string) => void
   handleOpen: () => void
