@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react'
 import { DefaultToggleButtonGroup as ToggleButtonGroup } from '@common/components'
 import { ToggleButtonList } from '@components'
+import React, { useCallback } from 'react'
 
 export type GlossaryIndexProps = {
   orientation?: 'horizontal' | 'vertical'

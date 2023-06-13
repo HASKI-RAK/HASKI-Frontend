@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import GlossaryIndex, { GlossaryIndexProps } from './GlossaryIndex'
 
-describe('Test the Glossary Index', () => {
+describe('GlossaryIndex tests', () => {
   const mockNorm: GlossaryIndexProps = {
     orientation: 'horizontal',
     indexElements: ['test1', 'test2', 'test3'],

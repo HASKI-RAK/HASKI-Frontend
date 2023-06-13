@@ -30,7 +30,7 @@ const mockGlossaryAccordionEntryProps2: GlossaryAccordionEntryProps = {
   ...mockGlossaryEntry2
 }
 
-describe('Test GlossaryEntry', () => {
+describe('GlossaryEntry tests', () => {
   it('renders correctly with input', () => {
     const { getByTestId, getAllByTestId } = render(
       <GlossaryEntry
