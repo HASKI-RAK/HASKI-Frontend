@@ -7,6 +7,8 @@ import { GraphListK } from './Questionnaire/GraphListK'
 import { ResultDescriptionListK } from './Questionnaire/ResultDescriptionListK'
 import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResultsModal'
 import { Text } from './Text/Text'
+
+import ContactForm from './ContactForm/ContactForm'
 import { ImprintContent } from './Imprint/ImprintContent'
 import LoginForm from './LoginForm/LoginForm'
 import MenuBar from './MenuBar/MenuBar'
@@ -41,6 +43,7 @@ export {
   GraphListK,
   ResultDescriptionListK,
   QuestionnaireResultsModal,
+  ContactForm,
   ProjectDescriptionContent,
   ProjectDescriptionCard,
   ProjectDescriptionStepper,

@@ -69,6 +69,19 @@ export const HaskiTheme = createTheme({
 
   components: {
     // Name of the component
+    MuiFormHelperText: {
+      defaultProps: {
+        color: defaultColors.primary[300]
+      },
+      styleOverrides: {
+        root: {
+          color: 'red'
+        },
+        filled: {
+          color: 'red'
+        }
+      }
+    },
     MuiPaper: {
       // Name of the rule
       styleOverrides: {
