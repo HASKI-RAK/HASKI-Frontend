@@ -5,13 +5,13 @@ import ArticleIcon from '@mui/icons-material/Article' // TODO: DI
 import { memo } from 'react'
 
 const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
+  const handleClick = (data: any) => {
+    data.handleOpen()
+    data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
+  }
+
   return (
-    <Box
-      sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      onClick={() => {
-        data.handleOpen()
-        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
-      }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => handleClick(data)}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
         sx={{

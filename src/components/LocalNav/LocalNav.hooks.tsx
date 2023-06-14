@@ -198,20 +198,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 1,
         position: 1,
-        learning_element_id: 1,
-        learning_path_id: 1,
+        learningElementId: 1,
+        learningPathId: 1,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 1,
-          lms_id: 1,
+          lmsId: 1,
           name: 'Begriffserklärung HASKI Alpha-Version',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 1,
             student_id: 1,
             learning_element_id: 1,
@@ -223,20 +223,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 2,
         position: 2,
-        learning_element_id: 2,
-        learning_path_id: 2,
+        learningElementId: 2,
+        learningPathId: 2,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 2,
-          lms_id: 2,
+          lmsId: 2,
           name: 'Welche Gefühlszustände treffen derzeit auf Sie zu?',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 2,
             student_id: 2,
             learning_element_id: 2,
@@ -248,20 +248,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 3,
         position: 3,
-        learning_element_id: 3,
-        learning_path_id: 3,
+        learningElementId: 3,
+        learningPathId: 3,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 3,
-          lms_id: 3,
+          lmsId: 3,
           name: 'Evaluation vor dem Thema Entwurfsmuster Allgemein',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 3,
             student_id: 3,
             learning_element_id: 3,
@@ -281,20 +281,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 1,
         position: 1,
-        learning_element_id: 1,
-        learning_path_id: 1,
+        learningElementId: 1,
+        learningPathId: 1,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 1,
-          lms_id: 1,
+          lmsId: 1,
           name: 'Intuitive Reihenfolge der Lernelemente',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 1,
             student_id: 1,
             learning_element_id: 1,
@@ -314,20 +314,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 1,
         position: 1,
-        learning_element_id: 1,
-        learning_path_id: 1,
+        learningElementId: 1,
+        learningPathId: 1,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 1,
-          lms_id: 1,
+          lmsId: 1,
           name: 'Kurzübersicht',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 1,
             student_id: 1,
             learning_element_id: 1,
@@ -339,20 +339,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 2,
         position: 2,
-        learning_element_id: 2,
-        learning_path_id: 2,
+        learningElementId: 2,
+        learningPathId: 2,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 2,
-          lms_id: 2,
+          lmsId: 2,
           name: 'Erklärung',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 2,
             student_id: 2,
             learning_element_id: 2,
@@ -364,20 +364,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 3,
         position: 3,
-        learning_element_id: 3,
-        learning_path_id: 3,
+        learningElementId: 3,
+        learningPathId: 3,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 3,
-          lms_id: 3,
+          lmsId: 3,
           name: 'Animation',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 3,
             student_id: 3,
             learning_element_id: 3,
@@ -389,20 +389,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 4,
         position: 4,
-        learning_element_id: 4,
-        learning_path_id: 4,
+        learningElementId: 4,
+        learningPathId: 4,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 4,
-          lms_id: 4,
+          lmsId: 4,
           name: 'Beispiel',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 4,
             student_id: 4,
             learning_element_id: 4,
@@ -414,20 +414,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 5,
         position: 5,
-        learning_element_id: 5,
-        learning_path_id: 5,
+        learningElementId: 5,
+        learningPathId: 5,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 5,
-          lms_id: 5,
+          lmsId: 5,
           name: 'Selbsteinschätzungstest',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 5,
             student_id: 5,
             learning_element_id: 5,
@@ -439,20 +439,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 6,
         position: 6,
-        learning_element_id: 6,
-        learning_path_id: 6,
+        learningElementId: 6,
+        learningPathId: 6,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 6,
-          lms_id: 6,
+          lmsId: 6,
           name: 'Leichte Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 6,
             student_id: 6,
             learning_element_id: 6,
@@ -464,20 +464,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 7,
         position: 7,
-        learning_element_id: 7,
-        learning_path_id: 7,
+        learningElementId: 7,
+        learningPathId: 7,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 7,
-          lms_id: 7,
+          lmsId: 7,
           name: 'Leichte Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 7,
             student_id: 7,
             learning_element_id: 7,
@@ -489,20 +489,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 8,
         position: 8,
-        learning_element_id: 8,
-        learning_path_id: 8,
+        learningElementId: 8,
+        learningPathId: 8,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 8,
-          lms_id: 8,
+          lmsId: 8,
           name: 'Mittlere Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 8,
             student_id: 8,
             learning_element_id: 8,
@@ -514,20 +514,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 9,
         position: 9,
-        learning_element_id: 9,
-        learning_path_id: 9,
+        learningElementId: 9,
+        learningPathId: 9,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 9,
-          lms_id: 9,
+          lmsId: 9,
           name: 'Mittlere Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 9,
             student_id: 9,
             learning_element_id: 9,
@@ -539,20 +539,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 10,
         position: 10,
-        learning_element_id: 10,
-        learning_path_id: 10,
+        learningElementId: 10,
+        learningPathId: 10,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 10,
-          lms_id: 10,
+          lmsId: 10,
           name: 'Schwere Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 10,
             student_id: 10,
             learning_element_id: 10,
@@ -564,20 +564,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 11,
         position: 11,
-        learning_element_id: 11,
-        learning_path_id: 11,
+        learningElementId: 11,
+        learningPathId: 11,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 11,
-          lms_id: 11,
+          lmsId: 11,
           name: 'Schwere Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 11,
             student_id: 11,
             learning_element_id: 11,
@@ -589,20 +589,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 12,
         position: 12,
-        learning_element_id: 12,
-        learning_path_id: 12,
+        learningElementId: 12,
+        learningPathId: 12,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 12,
-          lms_id: 12,
+          lmsId: 12,
           name: 'Zusammenfassung',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 12,
             student_id: 12,
             learning_element_id: 12,
@@ -614,20 +614,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 13,
         position: 13,
-        learning_element_id: 13,
-        learning_path_id: 13,
+        learningElementId: 13,
+        learningPathId: 13,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 13,
-          lms_id: 13,
+          lmsId: 13,
           name: 'Zusatzliteratur',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 13,
             student_id: 13,
             learning_element_id: 13,
@@ -639,20 +639,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 14,
         position: 14,
-        learning_element_id: 14,
-        learning_path_id: 14,
+        learningElementId: 14,
+        learningPathId: 14,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 14,
-          lms_id: 14,
+          lmsId: 14,
           name: 'Evaluation nach dem Thema Entwurfsmuster Allgemein',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 14,
             student_id: 14,
             learning_element_id: 14,
@@ -672,20 +672,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 1,
         position: 1,
-        learning_element_id: 1,
-        learning_path_id: 1,
+        learningElementId: 1,
+        learningPathId: 1,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 1,
-          lms_id: 1,
+          lmsId: 1,
           name: 'Erklärung',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 1,
             student_id: 1,
             learning_element_id: 1,
@@ -697,20 +697,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 2,
         position: 2,
-        learning_element_id: 2,
-        learning_path_id: 2,
+        learningElementId: 2,
+        learningPathId: 2,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 2,
-          lms_id: 2,
+          lmsId: 2,
           name: 'Evaluation vor dem Thema Strategie',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 2,
             student_id: 2,
             learning_element_id: 2,
@@ -730,20 +730,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 1,
         position: 1,
-        learning_element_id: 1,
-        learning_path_id: 1,
+        learningElementId: 1,
+        learningPathId: 1,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 1,
-          lms_id: 1,
+          lmsId: 1,
           name: 'Kurzübersicht',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 1,
             student_id: 1,
             learning_element_id: 1,
@@ -755,20 +755,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 2,
         position: 2,
-        learning_element_id: 2,
-        learning_path_id: 2,
+        learningElementId: 2,
+        learningPathId: 2,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 2,
-          lms_id: 2,
+          lmsId: 2,
           name: 'Erklärung',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 2,
             student_id: 2,
             learning_element_id: 2,
@@ -780,20 +780,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 3,
         position: 3,
-        learning_element_id: 3,
-        learning_path_id: 3,
+        learningElementId: 3,
+        learningPathId: 3,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 3,
-          lms_id: 3,
+          lmsId: 3,
           name: 'Animation',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 3,
             student_id: 3,
             learning_element_id: 3,
@@ -805,20 +805,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 4,
         position: 4,
-        learning_element_id: 4,
-        learning_path_id: 4,
+        learningElementId: 4,
+        learningPathId: 4,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 4,
-          lms_id: 4,
+          lmsId: 4,
           name: 'Beispiel',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 4,
             student_id: 4,
             learning_element_id: 4,
@@ -830,20 +830,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 5,
         position: 5,
-        learning_element_id: 5,
-        learning_path_id: 5,
+        learningElementId: 5,
+        learningPathId: 5,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 5,
-          lms_id: 5,
+          lmsId: 5,
           name: 'Selbsteinschätzungstest',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 5,
             student_id: 5,
             learning_element_id: 5,
@@ -855,20 +855,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 6,
         position: 6,
-        learning_element_id: 6,
-        learning_path_id: 6,
+        learningElementId: 6,
+        learningPathId: 6,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 6,
-          lms_id: 6,
+          lmsId: 6,
           name: 'Leichte Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 6,
             student_id: 6,
             learning_element_id: 6,
@@ -880,20 +880,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 7,
         position: 7,
-        learning_element_id: 7,
-        learning_path_id: 7,
+        learningElementId: 7,
+        learningPathId: 7,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 7,
-          lms_id: 7,
+          lmsId: 7,
           name: 'Leichte Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 7,
             student_id: 7,
             learning_element_id: 7,
@@ -905,20 +905,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 8,
         position: 8,
-        learning_element_id: 8,
-        learning_path_id: 8,
+        learningElementId: 8,
+        learningPathId: 8,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 8,
-          lms_id: 8,
+          lmsId: 8,
           name: 'Mittlere Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 8,
             student_id: 8,
             learning_element_id: 8,
@@ -930,20 +930,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 9,
         position: 9,
-        learning_element_id: 9,
-        learning_path_id: 9,
+        learningElementId: 9,
+        learningPathId: 9,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 9,
-          lms_id: 9,
+          lmsId: 9,
           name: 'Mittlere Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 9,
             student_id: 9,
             learning_element_id: 9,
@@ -955,20 +955,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 10,
         position: 10,
-        learning_element_id: 10,
-        learning_path_id: 10,
+        learningElementId: 10,
+        learningPathId: 10,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 10,
-          lms_id: 10,
+          lmsId: 10,
           name: 'Schwere Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 10,
             student_id: 10,
             learning_element_id: 10,
@@ -980,20 +980,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 11,
         position: 11,
-        learning_element_id: 11,
-        learning_path_id: 11,
+        learningElementId: 11,
+        learningPathId: 11,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 11,
-          lms_id: 11,
+          lmsId: 11,
           name: 'Schwere Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 11,
             student_id: 11,
             learning_element_id: 11,
@@ -1005,20 +1005,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 12,
         position: 12,
-        learning_element_id: 12,
-        learning_path_id: 12,
+        learningElementId: 12,
+        learningPathId: 12,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 12,
-          lms_id: 12,
+          lmsId: 12,
           name: 'Zusammenfassung',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 12,
             student_id: 12,
             learning_element_id: 12,
@@ -1030,20 +1030,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 13,
         position: 13,
-        learning_element_id: 13,
-        learning_path_id: 13,
+        learningElementId: 13,
+        learningPathId: 13,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 13,
-          lms_id: 13,
+          lmsId: 13,
           name: 'Zusatzliteratur',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 13,
             student_id: 13,
             learning_element_id: 13,
@@ -1055,20 +1055,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 14,
         position: 14,
-        learning_element_id: 14,
-        learning_path_id: 14,
+        learningElementId: 14,
+        learningPathId: 14,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 14,
-          lms_id: 14,
+          lmsId: 14,
           name: 'Evaluation nach dem Thema Strategie',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 14,
             student_id: 14,
             learning_element_id: 14,
@@ -1080,20 +1080,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 15,
         position: 15,
-        learning_element_id: 15,
-        learning_path_id: 15,
+        learningElementId: 15,
+        learningPathId: 15,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 15,
-          lms_id: 15,
+          lmsId: 15,
           name: 'Evaluation vor dem Thema Zustand',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 15,
             student_id: 15,
             learning_element_id: 15,
@@ -1113,20 +1113,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 1,
         position: 1,
-        learning_element_id: 1,
-        learning_path_id: 1,
+        learningElementId: 1,
+        learningPathId: 1,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 1,
-          lms_id: 1,
+          lmsId: 1,
           name: 'Kurzübersicht',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 1,
             student_id: 1,
             learning_element_id: 1,
@@ -1138,20 +1138,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 2,
         position: 2,
-        learning_element_id: 2,
-        learning_path_id: 2,
+        learningElementId: 2,
+        learningPathId: 2,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 2,
-          lms_id: 2,
+          lmsId: 2,
           name: 'Erklärung',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 2,
             student_id: 2,
             learning_element_id: 2,
@@ -1163,20 +1163,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 3,
         position: 3,
-        learning_element_id: 3,
-        learning_path_id: 3,
+        learningElementId: 3,
+        learningPathId: 3,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 3,
-          lms_id: 3,
+          lmsId: 3,
           name: 'Animation',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 3,
             student_id: 3,
             learning_element_id: 3,
@@ -1188,20 +1188,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 4,
         position: 4,
-        learning_element_id: 4,
-        learning_path_id: 4,
+        learningElementId: 4,
+        learningPathId: 4,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 1,
-          lms_id: 1,
+          lmsId: 1,
           name: 'Beispiel',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 4,
             student_id: 4,
             learning_element_id: 4,
@@ -1213,20 +1213,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 5,
         position: 5,
-        learning_element_id: 5,
-        learning_path_id: 5,
+        learningElementId: 5,
+        learningPathId: 5,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 5,
-          lms_id: 5,
+          lmsId: 5,
           name: 'Selbsteinschätzungstest',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 5,
             student_id: 5,
             learning_element_id: 5,
@@ -1238,20 +1238,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 6,
         position: 6,
-        learning_element_id: 6,
-        learning_path_id: 6,
+        learningElementId: 6,
+        learningPathId: 6,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 6,
-          lms_id: 6,
+          lmsId: 6,
           name: 'Leichte Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 6,
             student_id: 6,
             learning_element_id: 6,
@@ -1263,20 +1263,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 7,
         position: 7,
-        learning_element_id: 7,
-        learning_path_id: 7,
+        learningElementId: 7,
+        learningPathId: 7,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 7,
-          lms_id: 7,
+          lmsId: 7,
           name: 'Leichte Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 7,
             student_id: 7,
             learning_element_id: 7,
@@ -1288,20 +1288,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 8,
         position: 8,
-        learning_element_id: 8,
-        learning_path_id: 8,
+        learningElementId: 8,
+        learningPathId: 8,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 8,
-          lms_id: 8,
+          lmsId: 8,
           name: 'Mittlere Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 8,
             student_id: 8,
             learning_element_id: 8,
@@ -1313,20 +1313,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 9,
         position: 9,
-        learning_element_id: 9,
-        learning_path_id: 9,
+        learningElementId: 9,
+        learningPathId: 9,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 9,
-          lms_id: 9,
+          lmsId: 9,
           name: 'Mittlere Übung - 2 Aufgabe 1 Heatmap',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 9,
             student_id: 9,
             learning_element_id: 9,
@@ -1338,20 +1338,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 10,
         position: 10,
-        learning_element_id: 10,
-        learning_path_id: 10,
+        learningElementId: 10,
+        learningPathId: 10,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 10,
-          lms_id: 10,
+          lmsId: 10,
           name: 'Mittlere Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 10,
             student_id: 10,
             learning_element_id: 10,
@@ -1363,20 +1363,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 11,
         position: 11,
-        learning_element_id: 11,
-        learning_path_id: 11,
+        learningElementId: 11,
+        learningPathId: 11,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 11,
-          lms_id: 11,
+          lmsId: 11,
           name: 'Schwere Übung - 1 Aufgabe 1 Heatmap',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 11,
             student_id: 11,
             learning_element_id: 11,
@@ -1388,20 +1388,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 12,
         position: 12,
-        learning_element_id: 12,
-        learning_path_id: 12,
+        learningElementId: 12,
+        learningPathId: 12,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 12,
-          lms_id: 12,
+          lmsId: 12,
           name: 'Schwere Übung - 1 Aufgabe 2 Heatmap',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 12,
             student_id: 12,
             learning_element_id: 12,
@@ -1413,20 +1413,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 13,
         position: 13,
-        learning_element_id: 13,
-        learning_path_id: 13,
+        learningElementId: 13,
+        learningPathId: 13,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 13,
-          lms_id: 13,
+          lmsId: 13,
           name: 'Schwere Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 13,
             student_id: 13,
             learning_element_id: 13,
@@ -1438,20 +1438,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 14,
         position: 14,
-        learning_element_id: 14,
-        learning_path_id: 14,
+        learningElementId: 14,
+        learningPathId: 14,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 14,
-          lms_id: 14,
+          lmsId: 14,
           name: 'Schwere Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 14,
             student_id: 14,
             learning_element_id: 14,
@@ -1463,20 +1463,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 15,
         position: 15,
-        learning_element_id: 15,
-        learning_path_id: 15,
+        learningElementId: 15,
+        learningPathId: 15,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 15,
-          lms_id: 15,
+          lmsId: 15,
           name: 'Zusammenfassung',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 15,
             student_id: 15,
             learning_element_id: 15,
@@ -1488,20 +1488,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 16,
         position: 16,
-        learning_element_id: 16,
-        learning_path_id: 16,
+        learningElementId: 16,
+        learningPathId: 16,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 16,
-          lms_id: 16,
+          lmsId: 16,
           name: 'Zusatzliteratur',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 16,
             student_id: 16,
             learning_element_id: 16,
@@ -1513,20 +1513,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 17,
         position: 17,
-        learning_element_id: 17,
-        learning_path_id: 17,
+        learningElementId: 17,
+        learningPathId: 17,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 17,
-          lms_id: 17,
+          lmsId: 17,
           name: 'Evaluation nach dem Thema Zustand',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 17,
             student_id: 17,
             learning_element_id: 17,
@@ -1538,20 +1538,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 18,
         position: 18,
-        learning_element_id: 18,
-        learning_path_id: 18,
+        learningElementId: 18,
+        learningPathId: 18,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 18,
-          lms_id: 18,
+          lmsId: 18,
           name: 'Evaluation vor dem Thema Adapter',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 18,
             student_id: 18,
             learning_element_id: 18,
@@ -1571,20 +1571,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 1,
         position: 1,
-        learning_element_id: 1,
-        learning_path_id: 1,
+        learningElementId: 1,
+        learningPathId: 1,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 1,
-          lms_id: 1,
+          lmsId: 1,
           name: 'Kurzübersicht',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 1,
             student_id: 1,
             learning_element_id: 1,
@@ -1596,20 +1596,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 2,
         position: 2,
-        learning_element_id: 2,
-        learning_path_id: 2,
+        learningElementId: 2,
+        learningPathId: 2,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 2,
-          lms_id: 2,
+          lmsId: 2,
           name: 'Erklärung',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 2,
             student_id: 2,
             learning_element_id: 2,
@@ -1621,20 +1621,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 3,
         position: 3,
-        learning_element_id: 3,
-        learning_path_id: 3,
+        learningElementId: 3,
+        learningPathId: 3,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 3,
-          lms_id: 3,
+          lmsId: 3,
           name: 'Animation',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 3,
             student_id: 3,
             learning_element_id: 3,
@@ -1646,20 +1646,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 4,
         position: 4,
-        learning_element_id: 4,
-        learning_path_id: 4,
+        learningElementId: 4,
+        learningPathId: 4,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 4,
-          lms_id: 4,
+          lmsId: 4,
           name: 'Beispiel',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 4,
             student_id: 4,
             learning_element_id: 4,
@@ -1671,20 +1671,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 5,
         position: 5,
-        learning_element_id: 5,
-        learning_path_id: 5,
+        learningElementId: 5,
+        learningPathId: 5,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 5,
-          lms_id: 5,
+          lmsId: 5,
           name: 'Selbsteinschätzungstest',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 5,
             student_id: 5,
             learning_element_id: 5,
@@ -1696,20 +1696,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 6,
         position: 6,
-        learning_element_id: 6,
-        learning_path_id: 6,
+        learningElementId: 6,
+        learningPathId: 6,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 6,
-          lms_id: 6,
+          lmsId: 6,
           name: 'Leichte Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 6,
             student_id: 6,
             learning_element_id: 6,
@@ -1721,20 +1721,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 7,
         position: 7,
-        learning_element_id: 7,
-        learning_path_id: 7,
+        learningElementId: 7,
+        learningPathId: 7,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 7,
-          lms_id: 7,
+          lmsId: 7,
           name: 'Leichte Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 7,
             student_id: 7,
             learning_element_id: 7,
@@ -1746,20 +1746,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 8,
         position: 8,
-        learning_element_id: 8,
-        learning_path_id: 8,
+        learningElementId: 8,
+        learningPathId: 8,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 8,
-          lms_id: 8,
+          lmsId: 8,
           name: 'Mittlere Übung - 1.1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 8,
             student_id: 8,
             learning_element_id: 8,
@@ -1771,20 +1771,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 9,
         position: 9,
-        learning_element_id: 9,
-        learning_path_id: 9,
+        learningElementId: 9,
+        learningPathId: 9,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 9,
-          lms_id: 9,
+          lmsId: 9,
           name: 'Mittlere Übung - 1.2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 9,
             student_id: 9,
             learning_element_id: 9,
@@ -1796,20 +1796,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 10,
         position: 10,
-        learning_element_id: 10,
-        learning_path_id: 10,
+        learningElementId: 10,
+        learningPathId: 10,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 10,
-          lms_id: 10,
+          lmsId: 10,
           name: 'Mittlere Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 10,
             student_id: 10,
             learning_element_id: 10,
@@ -1821,20 +1821,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 11,
         position: 11,
-        learning_element_id: 11,
-        learning_path_id: 11,
+        learningElementId: 11,
+        learningPathId: 11,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 11,
-          lms_id: 11,
+          lmsId: 11,
           name: 'Schwere Übung - 1.1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 11,
             student_id: 11,
             learning_element_id: 11,
@@ -1846,20 +1846,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 12,
         position: 12,
-        learning_element_id: 12,
-        learning_path_id: 12,
+        learningElementId: 12,
+        learningPathId: 12,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 12,
-          lms_id: 12,
+          lmsId: 12,
           name: 'Schwere Übung - 1.2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 12,
             student_id: 12,
             learning_element_id: 12,
@@ -1871,20 +1871,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 13,
         position: 13,
-        learning_element_id: 13,
-        learning_path_id: 13,
+        learningElementId: 13,
+        learningPathId: 13,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 13,
-          lms_id: 13,
+          lmsId: 13,
           name: 'Schwere Übung - 1.3',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 13,
             student_id: 13,
             learning_element_id: 13,
@@ -1896,20 +1896,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 14,
         position: 14,
-        learning_element_id: 14,
-        learning_path_id: 14,
+        learningElementId: 14,
+        learningPathId: 14,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 14,
-          lms_id: 14,
+          lmsId: 14,
           name: 'Schwere Übung - 2.1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 14,
             student_id: 14,
             learning_element_id: 14,
@@ -1921,20 +1921,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 15,
         position: 15,
-        learning_element_id: 15,
-        learning_path_id: 15,
+        learningElementId: 15,
+        learningPathId: 15,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 15,
-          lms_id: 15,
+          lmsId: 15,
           name: 'Schwere Übung - 2.2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 15,
             student_id: 15,
             learning_element_id: 15,
@@ -1946,20 +1946,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 16,
         position: 16,
-        learning_element_id: 16,
-        learning_path_id: 16,
+        learningElementId: 16,
+        learningPathId: 16,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 16,
-          lms_id: 16,
+          lmsId: 16,
           name: 'Zusammenfassung',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 16,
             student_id: 16,
             learning_element_id: 16,
@@ -1971,20 +1971,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 17,
         position: 17,
-        learning_element_id: 17,
-        learning_path_id: 17,
+        learningElementId: 17,
+        learningPathId: 17,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 17,
-          lms_id: 17,
+          lmsId: 17,
           name: 'Zusatzliteratur',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 17,
             student_id: 17,
             learning_element_id: 17,
@@ -1996,20 +1996,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 18,
         position: 18,
-        learning_element_id: 18,
-        learning_path_id: 18,
+        learningElementId: 18,
+        learningPathId: 18,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 18,
-          lms_id: 18,
+          lmsId: 18,
           name: 'Evaluation nach dem Thema Adapter',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 18,
             student_id: 18,
             learning_element_id: 18,
@@ -2021,20 +2021,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 19,
         position: 19,
-        learning_element_id: 19,
-        learning_path_id: 19,
+        learningElementId: 19,
+        learningPathId: 19,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 19,
-          lms_id: 19,
+          lmsId: 19,
           name: 'Evaluation vor dem Thema Fassade',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 19,
             student_id: 19,
             learning_element_id: 19,
@@ -2054,20 +2054,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 1,
         position: 1,
-        learning_element_id: 1,
-        learning_path_id: 1,
+        learningElementId: 1,
+        learningPathId: 1,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 1,
-          lms_id: 1,
+          lmsId: 1,
           name: 'Kurzübersicht',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 1,
             student_id: 1,
             learning_element_id: 1,
@@ -2079,20 +2079,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 2,
         position: 2,
-        learning_element_id: 2,
-        learning_path_id: 2,
+        learningElementId: 2,
+        learningPathId: 2,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 2,
-          lms_id: 2,
+          lmsId: 2,
           name: 'Erklärung',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 2,
             student_id: 2,
             learning_element_id: 2,
@@ -2104,20 +2104,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 3,
         position: 3,
-        learning_element_id: 3,
-        learning_path_id: 3,
+        learningElementId: 3,
+        learningPathId: 3,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 3,
-          lms_id: 3,
+          lmsId: 3,
           name: 'Animation',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 3,
             student_id: 3,
             learning_element_id: 3,
@@ -2129,20 +2129,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 4,
         position: 4,
-        learning_element_id: 4,
-        learning_path_id: 4,
+        learningElementId: 4,
+        learningPathId: 4,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 4,
-          lms_id: 4,
+          lmsId: 4,
           name: 'Beispiel',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 4,
             student_id: 4,
             learning_element_id: 4,
@@ -2154,20 +2154,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 5,
         position: 5,
-        learning_element_id: 5,
-        learning_path_id: 5,
+        learningElementId: 5,
+        learningPathId: 5,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 5,
-          lms_id: 5,
+          lmsId: 5,
           name: 'Selbsteinschätzungstest',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 5,
             student_id: 5,
             learning_element_id: 5,
@@ -2179,20 +2179,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 6,
         position: 6,
-        learning_element_id: 6,
-        learning_path_id: 6,
+        learningElementId: 6,
+        learningPathId: 6,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 6,
-          lms_id: 6,
+          lmsId: 6,
           name: 'Leichte Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 6,
             student_id: 6,
             learning_element_id: 6,
@@ -2204,20 +2204,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 7,
         position: 7,
-        learning_element_id: 7,
-        learning_path_id: 7,
+        learningElementId: 7,
+        learningPathId: 7,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 7,
-          lms_id: 7,
+          lmsId: 7,
           name: 'Leichte Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 7,
             student_id: 7,
             learning_element_id: 7,
@@ -2229,20 +2229,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 8,
         position: 8,
-        learning_element_id: 8,
-        learning_path_id: 8,
+        learningElementId: 8,
+        learningPathId: 8,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 8,
-          lms_id: 8,
+          lmsId: 8,
           name: 'Mittlere Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 8,
             student_id: 8,
             learning_element_id: 8,
@@ -2254,20 +2254,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 9,
         position: 9,
-        learning_element_id: 9,
-        learning_path_id: 9,
+        learningElementId: 9,
+        learningPathId: 9,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 9,
-          lms_id: 9,
+          lmsId: 9,
           name: 'Mittlere Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 9,
             student_id: 9,
             learning_element_id: 9,
@@ -2279,20 +2279,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 10,
         position: 10,
-        learning_element_id: 10,
-        learning_path_id: 10,
+        learningElementId: 10,
+        learningPathId: 10,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 10,
-          lms_id: 10,
+          lmsId: 10,
           name: 'Schwere Übung - 1',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 10,
             student_id: 10,
             learning_element_id: 10,
@@ -2304,20 +2304,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 11,
         position: 11,
-        learning_element_id: 11,
-        learning_path_id: 11,
+        learningElementId: 11,
+        learningPathId: 11,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 11,
-          lms_id: 11,
+          lmsId: 11,
           name: 'Schwere Übung - 2',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 11,
             student_id: 11,
             learning_element_id: 11,
@@ -2329,20 +2329,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 12,
         position: 12,
-        learning_element_id: 12,
-        learning_path_id: 12,
+        learningElementId: 12,
+        learningPathId: 12,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 12,
-          lms_id: 12,
+          lmsId: 12,
           name: 'Zusammenfassung',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 12,
             student_id: 12,
             learning_element_id: 12,
@@ -2354,20 +2354,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 13,
         position: 13,
-        learning_element_id: 13,
-        learning_path_id: 13,
+        learningElementId: 13,
+        learningPathId: 13,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 13,
-          lms_id: 13,
+          lmsId: 13,
           name: 'Zusatzliteratur',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 13,
             student_id: 13,
             learning_element_id: 13,
@@ -2379,20 +2379,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 14,
         position: 14,
-        learning_element_id: 14,
-        learning_path_id: 14,
+        learningElementId: 14,
+        learningPathId: 14,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 14,
-          lms_id: 14,
+          lmsId: 14,
           name: 'Evaluation nach dem Thema',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 14,
             student_id: 14,
             learning_element_id: 14,
@@ -2412,20 +2412,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 14,
         position: 14,
-        learning_element_id: 14,
-        learning_path_id: 14,
+        learningElementId: 14,
+        learningPathId: 14,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 14,
-          lms_id: 14,
+          lmsId: 14,
           name: 'Evaluation der Themen',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 14,
             student_id: 14,
             learning_element_id: 14,
@@ -2437,20 +2437,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 15,
         position: 15,
-        learning_element_id: 15,
-        learning_path_id: 15,
+        learningElementId: 15,
+        learningPathId: 15,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 15,
-          lms_id: 15,
+          lmsId: 15,
           name: 'Retrospektive Reihenfolge der Lernelemente',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 15,
             student_id: 15,
             learning_element_id: 15,
@@ -2462,20 +2462,20 @@ const hardcodedLearningPaths: LearningPath[] = [
       {
         id: 16,
         position: 16,
-        learning_element_id: 16,
-        learning_path_id: 16,
+        learningElementId: 16,
+        learningPathId: 16,
         recommended: false,
-        learning_element: {
+        learningElement: {
           id: 16,
-          lms_id: 16,
+          lmsId: 16,
           name: 'Abschließende Fragen',
-          activity_type: 'feedback',
+          activityType: 'feedback',
           classification: 'RQ',
           university: 'HS-KE',
-          created_by: 'me',
-          created_at: 'now',
-          last_updated: 'now',
-          student_learning_element: {
+          createdBy: 'me',
+          createdAt: 'now',
+          lastUpdated: 'now',
+          studentLearningElement: {
             id: 16,
             student_id: 16,
             learning_element_id: 16,

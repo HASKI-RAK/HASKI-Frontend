@@ -77,11 +77,11 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       const sortedLearningPath = Array.from(learningPath.path).sort((a, b) => a.position - b.position)
 
       // Every exercise learning element
-      const learningPathExercises = sortedLearningPath.filter((item) => item.learning_element.classification === 'ÜB')
+      const learningPathExercises = sortedLearningPath.filter((item) => item.learningElement.classification === 'ÜB')
 
       // Every learning element except exercises
       const learningPathExcludingExercises = sortedLearningPath.filter(
-        (item) => item.learning_element.classification !== 'ÜB'
+        (item) => item.learningElement.classification !== 'ÜB'
       )
 
       const groupHeight = 175
@@ -97,11 +97,11 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
 
       // Exercise nodes
       const exerciseLearningElementChildNodes = learningPathExercises.map((node, index) => {
-        const node_data: LearningPathLearningElementNode = {
-          lmsId: node.learning_element.lms_id,
-          name: node.learning_element.name,
-          activityType: node.learning_element.activity_type,
-          classification: node.learning_element.classification,
+        const nodeData: LearningPathLearningElementNode = {
+          lmsId: node.learningElement.lmsId,
+          name: node.learningElement.name,
+          activityType: node.learningElement.activityType,
+          classification: node.learningElement.classification,
           isRecommended: node.recommended,
           handleSetUrl: handleSetUrl,
           handleSetTitle: handleSetTitle,
@@ -109,9 +109,9 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           handleClose: handleClose
         }
         return {
-          id: node.position.toString() + '-' + node.learning_element.lms_id,
-          type: node.learning_element.classification,
-          data: node_data,
+          id: node.position.toString() + '-' + node.learningElement.lmsId,
+          type: node.learningElement.classification,
+          data: nodeData,
           position: {
             x: nodeOffsetX + 300 * index,
             y: 250 * (learningPathExercises[0].position - 1) + 50
@@ -142,11 +142,11 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
 
       // Leftover learning elements
       const learningElementNodesExcludingExercises = learningPathExcludingExercises.map((item) => {
-        const node_data: LearningPathLearningElementNode = {
-          lmsId: item.learning_element.lms_id,
-          name: item.learning_element.name,
-          activityType: item.learning_element.activity_type,
-          classification: item.learning_element.classification,
+        const nodeData: LearningPathLearningElementNode = {
+          lmsId: item.learningElement.lmsId,
+          name: item.learningElement.name,
+          activityType: item.learningElement.activityType,
+          classification: item.learningElement.classification,
           isRecommended: item.recommended,
           handleSetUrl: handleSetUrl,
           handleSetTitle: handleSetTitle,
@@ -165,8 +165,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
 
         return {
           id: item.position.toString(),
-          type: item.learning_element.classification,
-          data: node_data,
+          type: item.learningElement.classification,
+          data: nodeData,
           position: {
             x: nodeOffsetX + (300 * (learningPathExercises.length - 1)) / 2,
             y: getY()

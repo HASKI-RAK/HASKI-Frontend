@@ -189,7 +189,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                                 }}>
                                 {reversedLearningElements[index]?.path.map((element) => (
                                   <Link
-                                    key={element.learning_element.name}
+                                    key={element.learningElement.name}
                                     underline="hover"
                                     variant="body2"
                                     component="span"
@@ -199,7 +199,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                                       navigate(`course/2/topic/${topic.id}`)
                                       handleCloseTopicsMenu()
                                     }}>
-                                    {element.learning_element.name}
+                                    {element.learningElement.name}
                                   </Link>
                                 ))}
                               </Box>

@@ -2,15 +2,15 @@ type UserSettings = {
   id: number
   pswd: string
   theme: string
-  user_id: number
+  userId: number
 }
 
 type User = {
   id: number
-  lms_user_id: number
+  lmsUserId: number
   name: string
   role: string
-  role_id?: number
+  roleId?: number
   settings: UserSettings
   university: string
 }

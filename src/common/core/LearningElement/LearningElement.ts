@@ -2,15 +2,15 @@ import StudentLearningElement from '../StudentLearningElement/StudentLearningEle
 
 type LearningElement = {
   id: number
-  lms_id: number
-  activity_type: string
+  lmsId: number
+  activityType: string
   classification: string
   name: string
   university: string
-  created_by: string
-  created_at: string
-  last_updated: string
-  student_learning_element: StudentLearningElement
+  createdBy: string
+  createdAt: string
+  lastUpdated: string
+  studentLearningElement: StudentLearningElement
 }
 
 export default LearningElement
