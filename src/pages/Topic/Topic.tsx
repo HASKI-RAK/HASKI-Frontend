@@ -5,12 +5,12 @@ import log from 'loglevel'
 import { useEffect, useState, useContext, useCallback, useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Node, Edge, MiniMap, Controls, Background, Handle, NodeProps, Position } from 'reactflow'
-import useBoundStore from '@store'
 import { AuthContext } from '@services'
 import StudentLearningElement from 'src/common/core/StudentLearningElement/StudentLearningElement'
 import { useTranslation } from 'react-i18next'
 import 'reactflow/dist/style.css'
 import { DefaultSkeleton as Skeleton } from '@common/components'
+import { usePersistedStore, useStore } from '@store'
 
 const _useTopic = () => {
   console.log('useTopic')
@@ -176,8 +176,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [title, setTitle] = useState('')
   const [isOpen, setIsOpen] = useState(false)
 
-  const fetchUser = useBoundStore((state) => state.fetchUser)
-  const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const fetchLearningPath = useStore((state) => state.fetchLearningPath)
 
   const handleOpen = useMemo(() => {
     return () => {

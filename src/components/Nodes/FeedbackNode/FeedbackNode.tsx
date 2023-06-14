@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import FeedbackIcon from '@mui/icons-material/Feedback'
-import { useBoundNodeStore } from '@store'
+
 
 const FeedbackNodeMemo = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   const { t } = useTranslation()

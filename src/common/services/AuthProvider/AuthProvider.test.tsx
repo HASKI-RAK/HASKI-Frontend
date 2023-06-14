@@ -33,7 +33,7 @@ describe('Test AuthProvider', () => {
 
     // test side effects
     act(() => {
-      result.current.setIsAuth(true)
+      result.current.setExpire(9999999999) // if this test fails, how did react js even survive this long?
     })
     expect(result.current.isAuth).toBe(true)
 

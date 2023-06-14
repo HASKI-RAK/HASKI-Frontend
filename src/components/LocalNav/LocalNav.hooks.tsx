@@ -1,9 +1,8 @@
-import {useEffect, useState} from 'react'
-import {Topic} from '@services'
-import {LearningPath} from '@core'
+import { useEffect, useState } from 'react'
+import { Topic } from '@services'
+import { LearningPath } from '@core'
 import log from 'loglevel'
-import useBoundStore from "@store";
-import {LearningPathReturn} from "@core";
+import { LearningPathReturn } from "@core";
 
 const hardcodedTopics: Topic[] = [
     {
@@ -1002,7 +1001,7 @@ const hardcodedLearningPaths: LearningPath[] = [
                         done_at: "now"
                     }
                 }
-            },{
+            }, {
                 id: 12,
                 position: 12,
                 learning_element_id: 12,
@@ -2488,7 +2487,7 @@ const hardcodedLearningPaths: LearningPath[] = [
     }
 ]
 
-export const getSortedLearningPath = async(data: Topic[], userId: number, lmsUserId: number, studentId: number, fetchLearningPath: LearningPathReturn): Promise<LearningPath[]> => {
+export const getSortedLearningPath = async (data: Topic[], userId: number, lmsUserId: number, studentId: number, fetchLearningPath: LearningPathReturn): Promise<LearningPath[]> => {
 
     const promises = data.map((topic) => fetchLearningPath(userId, lmsUserId, studentId, 2, topic.id)) //reihenfolge der parameter beachten
     const learningPaths = await Promise.all(promises)
@@ -2506,7 +2505,7 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
     //const fetchUser = useBoundStore((state) => state.fetchUser)
     //const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
 
-    const effect = async() => {
+    const effect = async () => {
         setLoading(true)
         try {
             //const user = await fetchUser();
@@ -2516,7 +2515,7 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
 
             setLearningPaths(hardcodedLearningPaths)
         }
-        catch(error) {
+        catch (error) {
             log.error(error)
             throw error
         }
@@ -2531,5 +2530,5 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
         })
     }, [])
 
-    return {loading, topics, learningPaths}
+    return { loading, topics, learningPaths }
 }

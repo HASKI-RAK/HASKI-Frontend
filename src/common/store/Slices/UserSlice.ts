@@ -1,6 +1,6 @@
 import { User } from '@core'
 import { StateCreator } from 'zustand'
-import { StoreState } from '@store'
+import { PersistedStoreState } from '@store'
 import { getUser } from '@services'
 
 export default interface UserSlice {
@@ -8,7 +8,7 @@ export default interface UserSlice {
   fetchUser: () => Promise<User>
 }
 
-export const createUserSlice: StateCreator<StoreState, [], [], UserSlice> = (set, get) => ({
+export const createUserSlice: StateCreator<PersistedStoreState, [], [], UserSlice> = (set, get) => ({
   _user: undefined,
   fetchUser: async () => {
     const cached = get()._user
