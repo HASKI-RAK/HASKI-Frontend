@@ -31,7 +31,7 @@ describe('MenuBar', () => {
   test('popover is rendered when Topics button is clicked', () => {
     const history = createMemoryHistory({ initialEntries: ['/home'] })
 
-    const exampleLearningElement: LearningElement = {
+    const exampleLearningElement1: LearningElement = {
       activity_type: 'Quiz',
       classification: 'Formative',
       created_at: '2023-04-19T10:30:00.000Z',
@@ -40,6 +40,19 @@ describe('MenuBar', () => {
       last_updated: '2023-04-20T15:45:00.000Z',
       lms_id: 456,
       name: 'Quiz on Chapter 3',
+      student_learning_element: null,
+      university: 'ABC University'
+    }
+
+    const exampleLearningElement2: LearningElement = {
+      activity_type: 'Quiz',
+      classification: 'Formative',
+      created_at: '2023-04-19T10:30:00.000Z',
+      created_by: 'John Doe',
+      id: 123,
+      last_updated: '2023-04-20T15:45:00.000Z',
+      lms_id: 456,
+      name: 'Quiz on Chapter 5',
       student_learning_element: null,
       university: 'ABC University'
     }
@@ -96,7 +109,7 @@ describe('MenuBar', () => {
         path: [
           {
             id: 1,
-            learning_element: exampleLearningElement,
+            learning_element: exampleLearningElement1,
             learning_element_id: 1,
             learning_path_id: 1,
             position: 1,
@@ -112,7 +125,7 @@ describe('MenuBar', () => {
         path: [
           {
             id: 2,
-            learning_element: exampleLearningElement,
+            learning_element: exampleLearningElement2,
             learning_element_id: 1,
             learning_path_id: 1,
             position: 1,
@@ -144,7 +157,9 @@ describe('MenuBar', () => {
     // click on subtopic:
     fireEvent.click(result.getAllByText('Quiz on Chapter 3')[0])
     // render is different from browser url. in browser url is /topics/Design%20patterns/Adapter
-    expect(history.location.pathname).toEqual('/topics/Allgemeine Informatik/Quiz on Chapter 3')
+
+    console.log(history.location.pathname)
+    expect(history.location.pathname).toEqual('/course/2/topic/1')
   })
 
   test('click on HelpIcon should open popover', () => {

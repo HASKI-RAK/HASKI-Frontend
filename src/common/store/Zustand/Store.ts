@@ -1,17 +1,19 @@
 import create from 'zustand'
-import LearningPathSlice, { createLearningPathSlice } from '../LearningPathSlice/LearningPathSlice'
+import LearningPathElementSlice, { createLearningPathElementSlice } from '../LearningPathElementSlice/LearningPathElementSlice'
 import UserSlice, { createUserSlice } from '../UserSlice/UserSlice'
 import CourseSlice, { createCourseSlice } from '../CourseSlice/CourseSlice'
 import CoursesSlice, { createCoursesSlice } from '../CoursesSlice/CoursesSlice'
+import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../LearningPathTopicSlice/LearningPathTopicSlice'
 import { devtools, persist } from 'zustand/middleware'
 
-export type StoreState = UserSlice & LearningPathSlice & CourseSlice & CoursesSlice
+export type StoreState = UserSlice & LearningPathElementSlice & CourseSlice & CoursesSlice & LearningPathTopicSlice
 
 export const useBoundStore = create<StoreState>()(devtools(persist((...a) => ({
-  ...createLearningPathSlice(...a),
+  ...createLearningPathElementSlice(...a),
   ...createUserSlice(...a),
   ...createCourseSlice(...a),
-  ...createCoursesSlice(...a)
+  ...createCoursesSlice(...a),
+  ...createLearningPathTopicSlice(...a)
 }), {
   name: 'bound-storage', // unique name for the storage
   // take Persisted type from UserSlice, do not use explicit property names

@@ -25,7 +25,7 @@ import PersonIcon from '@mui/icons-material/Person'
 import { useTranslation } from 'react-i18next'
 import { Login, Logout } from '@mui/icons-material'
 import { AuthContext, SnackbarContext, Topic } from '@services'
-import { LearningPath } from '@core'
+import { LearningPathElement } from '@core'
 import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
 import { DropdownLanguage } from '@components'
 // TODO: Move it into @common/hooks since it is reused in LocalNav
@@ -37,7 +37,7 @@ import { DropdownLanguage } from '@components'
  *  The "learningPaths" property is an array of objects that represent the available learning paths related to the current page.
  */
 export type MenuBarProps = {
-  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPath[] }
+  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPathElement[] }
 }
 
 /**
@@ -61,9 +61,6 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
   const { loading, topics, learningPaths } = useLearningPath()
   const reversedTopics: Topic[] = [...topics]
   reversedTopics.sort((a, b) => reversedTopics.indexOf(b) - reversedTopics.indexOf(a))
-
-  const reversedLearningElements: LearningPath[] = [...learningPaths]
-  reversedLearningElements.sort((a, b) => reversedLearningElements.indexOf(b) - reversedLearningElements.indexOf(a))
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -174,7 +171,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                     {loading ? ( // display Skeleton component while loading
                       <Box width={400}>{skeletonItems}</Box>
                     ) : (
-                      //For every Topic the LearningPath is displayed under it.
+                      //For every Topic the LearningPathElement is displayed under it.
                       <>
                         {reversedTopics.map((topic, index) => (
                           <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>
@@ -187,21 +184,6 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                                   flexWrap: 'wrap',
                                   justifyContent: 'start'
                                 }}>
-                                {reversedLearningElements[index]?.path.map((element) => (
-                                  <Link
-                                    key={element.learning_element.name}
-                                    underline="hover"
-                                    variant="body2"
-                                    component="span"
-                                    color="inherit"
-                                    sx={{ m: 1, cursor: 'pointer' }}
-                                    onClick={() => {
-                                      navigate(`course/2/topic/${topic.id}`)
-                                      handleCloseTopicsMenu()
-                                    }}>
-                                    {element.learning_element.name}
-                                  </Link>
-                                ))}
                               </Box>
                             </Grid>
                             {topics.indexOf(topic) !== topics.length - 1 && <Divider flexItem />}

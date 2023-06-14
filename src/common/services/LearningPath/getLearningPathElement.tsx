@@ -1,6 +1,6 @@
-import { LearningPath, LearningPathReturn } from '@core'
+import { LearningPathElement, LearningPathElementReturn } from '@core'
 
-export const getLearningPath: LearningPathReturn = async (userId, lmsUserId, studentId, course_id, topic_id) => {
+export const getLearningPathElement: LearningPathElementReturn = async (userId, lmsUserId, studentId, course_id, topic_id) => {
   if (!course_id || !topic_id) {
     throw new Error('course_id and topic_id are required')
   }
@@ -17,7 +17,7 @@ export const getLearningPath: LearningPathReturn = async (userId, lmsUserId, stu
   ).then((response) => {
     if (response.ok) {
       return response.json().then((data: unknown) => {
-        return data as LearningPath
+        return data as LearningPathElement
       })
     } else {
       // If resposne has error variable, then throw error

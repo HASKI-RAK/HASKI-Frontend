@@ -157,7 +157,7 @@ describe('LocalNav', () => {
     const { getByText } = render(<LocalNav {...props} />)
     fireEvent.click(getByText('1 Quiz on Chapter 3'))
 
-    expect(navigate).toHaveBeenCalledWith('/topics/test/Quiz on Chapter 3')
+    expect(navigate).toHaveBeenCalledWith('course/2/topic/1')
   })
 
   test('useLearningPath returns expected values (status 200)', async () => {
@@ -221,10 +221,11 @@ describe('LocalNav', () => {
     await renderHook(() => useLearningPath())
 
     expect(mockFetch).toHaveBeenCalledTimes(1)
-    expect(mockFetch).toHaveBeenCalledWith(process.env.BACKEND + `/user/2/5/student/1/course/1/topic`, {
+    expect(mockFetch).toHaveBeenCalledWith(process.env.BACKEND + `/lms/user_from_cookie`, {
+      credentials: "include",
       method: 'GET',
       headers: {
-        'Content-Type': 'text/json'
+        'Content-Type': 'application/json'
       }
     })
   })
@@ -247,10 +248,11 @@ describe('LocalNav', () => {
     const { result } = await renderHook(() => useLearningPath())
 
     expect(mockFetch).toHaveBeenCalledTimes(1)
-    expect(mockFetch).toHaveBeenCalledWith(process.env.BACKEND + `/user/2/5/student/1/course/1/topic`, {
+    expect(mockFetch).toHaveBeenCalledWith(process.env.BACKEND + `/lms/user_from_cookie`, {
+      credentials: "include",
       method: 'GET',
       headers: {
-        'Content-Type': 'text/json'
+        'Content-Type': 'application/json'
       }
     })
     expect(result.current.loading).toBeTruthy()

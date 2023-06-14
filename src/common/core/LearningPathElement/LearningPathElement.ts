@@ -8,18 +8,18 @@ import { LearningPathLearningElement } from '@core'
  * @param studentId The user's student id
  * @param courseId The course's id
  * @param topicId The topic's id
- * @returns The learning path for the given user, course and topic
+ * @returns The learning path elements for the given user, course and topic
  */
 
-type LearningPathReturn = (
+type LearningPathElementReturn = (
   userId?: number,
   lmsUserId?: number,
   studentId?: number,
   courseId?: number,
   topicId?: number
-) => Promise<LearningPath>
+) => Promise<LearningPathElement>
 
-type LearningPath = {
+type LearningPathElement = {
   id: number
   course_id: number
   based_on: string
@@ -27,5 +27,5 @@ type LearningPath = {
   path: LearningPathLearningElement[]
 }
 
-export default LearningPath
-export type { LearningPathReturn }
+export default LearningPathElement
+export type { LearningPathElementReturn }

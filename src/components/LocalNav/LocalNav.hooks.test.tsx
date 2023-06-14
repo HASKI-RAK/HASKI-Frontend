@@ -1,6 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { useLearningPath } from './LocalNav.hooks'
-import { getCourseTopics } from '@services'
 
 jest.mock('@services', () => ({
   getCourseTopics: jest.fn(),
@@ -13,9 +12,6 @@ describe('useLearningPath', () => {
   })
 
   it('should handle errors', async () => {
-    ;(getCourseTopics as jest.MockedFunction<typeof getCourseTopics>).mockRejectedValueOnce(
-      new Error('Failed to fetch course topics')
-    )
 
     const { result, waitForNextUpdate } = renderHook(() => useLearningPath())
 

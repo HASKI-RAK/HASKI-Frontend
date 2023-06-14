@@ -1,5 +1,5 @@
 import { LearningPathLearningElementNode, IFrameModal, nodeTypes } from '@components'
-import { LearningElement, LearningPath, LearningPathLearningElement, LearningPathReturn } from '@core'
+import { LearningElement, LearningPathElement, LearningPathLearningElement, LearningPathElementReturn } from '@core'
 import { Box, Button, Paper, Theme, Typography, useTheme } from '@mui/material'
 import log from 'loglevel'
 import { useEffect, useState, useContext, useCallback, useMemo } from 'react'
@@ -14,148 +14,6 @@ import { DefaultSkeleton as Skeleton } from '@common/components'
 
 const _useTopic = () => {
   console.log('useTopic')
-}
-
-const studentLearningElement: StudentLearningElement = {
-  id: 160,
-  learning_element_id: 4,
-  student_id: 2,
-  done: false,
-  done_at: 'null'
-}
-
-const learningElement: LearningElement[] = [
-  {
-    id: 4,
-    lms_id: 108,
-    name: 'Kurzübersicht',
-    activity_type: 'h5pactivity',
-    classification: 'RQ',
-    university: 'HS-KE',
-    created_by: 'Dimitri Bigler',
-    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
-    last_updated: 'null',
-    student_learning_element: studentLearningElement
-  },
-  {
-    id: 5,
-    lms_id: 108,
-    name: 'Übung 1 - leicht',
-    activity_type: 'h5pactivity',
-    classification: 'ÜB', // EK
-    university: 'HS-KE',
-    created_by: 'Dimitri Bigler',
-    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
-    last_updated: 'null',
-    student_learning_element: studentLearningElement
-  },
-  {
-    id: 6,
-    lms_id: 108,
-    name: 'Übung 2 - leicht',
-    activity_type: 'h5pactivity',
-    classification: 'ÜB', // AN
-    university: 'HS-KE',
-    created_by: 'Dimitri Bigler',
-    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
-    last_updated: 'null',
-    student_learning_element: studentLearningElement
-  },
-  {
-    id: 7,
-    lms_id: 108,
-    name: 'Übung 3 leicht',
-    activity_type: 'h5pactivity',
-    classification: 'ÜB', // AN
-    university: 'HS-KE',
-    created_by: 'Dimitri Bigler',
-    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
-    last_updated: 'null',
-    student_learning_element: studentLearningElement
-  },
-  {
-    id: 8,
-    lms_id: 108,
-    name: 'Animation cool',
-    activity_type: 'h5pactivity',
-    classification: 'AN', // AN
-    university: 'HS-KE',
-    created_by: 'Dimitri Bigler',
-    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
-    last_updated: 'null',
-    student_learning_element: studentLearningElement
-  },
-  {
-    id: 8,
-    lms_id: 108,
-    name: 'Animation cool 2',
-    activity_type: 'h5pactivity',
-    classification: 'AN', // AN
-    university: 'HS-KE',
-    created_by: 'Dimitri Bigler',
-    created_at: 'Wed, 05 Apr 2023 13:38:28 GMT',
-    last_updated: 'null',
-    student_learning_element: studentLearningElement
-  }
-]
-
-const learningPathLearningElements: LearningPathLearningElement[] = [
-  {
-    position: 1,
-    id: 4,
-    learning_element_id: 246,
-    learning_path_id: 16,
-    recommended: true,
-    learning_element: learningElement[0]
-  },
-  {
-    position: 2,
-    id: 5,
-    learning_element_id: 246,
-    learning_path_id: 16,
-    recommended: true,
-    learning_element: learningElement[1]
-  },
-  {
-    position: 3,
-    id: 6,
-    learning_element_id: 246,
-    learning_path_id: 16,
-    recommended: true,
-    learning_element: learningElement[2]
-  },
-  {
-    position: 4,
-    id: 7,
-    learning_element_id: 246,
-    learning_path_id: 16,
-    recommended: true,
-    learning_element: learningElement[3]
-  },
-  {
-    position: 5,
-    id: 8,
-    learning_element_id: 246,
-    learning_path_id: 16,
-    recommended: true,
-    learning_element: learningElement[4]
-  },
-  {
-    position: 6,
-    id: 8,
-    learning_element_id: 246,
-    learning_path_id: 16,
-    recommended: true,
-    learning_element: learningElement[5]
-  }
-]
-
-const learningPath: LearningPath = {
-  based_on: 'aoc',
-  calculated_on: 'null',
-  course_id: 2,
-  id: 16,
-  path: learningPathLearningElements
 }
 
 type TopicProps = {
@@ -177,7 +35,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
 
   const fetchUser = useBoundStore((state) => state.fetchUser)
-  const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
+  const fetchLearningPath = useBoundStore((state) => state.fetchLearningPathElement)
 
   const handleOpen = useMemo(() => {
     return () => {
@@ -198,7 +56,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   }, [])
 
   const mapNodes = useCallback(
-    (learning_path_data: LearningPath) => {
+    (learning_path_data: LearningPathElement) => {
       const nodes = mapLearningPathToNodes(
         learning_path_data,
         theme,
@@ -222,12 +80,12 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   )
 
   // useEffect(() => {
-  //   const { nodes, edges } = mapNodes(LearningPath)
+  //   const { nodes, edges } = mapNodes(LearningPathElement)
   //   console.log('rendering nodes')
   //   setInitialNodes(nodes)
   //   //setInitialEdges(edges)
   //   setInitialEdges(edges)
-  // }, [mapNodes, LearningPath])
+  // }, [mapNodes, LearningPathElement])
 
   useEffect(() => {
     // request to backend to get learning path for topic
@@ -275,7 +133,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 export default Topic
 
 const mapLearningPathToNodes = (
-  learningPath: LearningPath,
+  learningPath: LearningPathElement,
   theme: Theme,
   handleSetUrl: (url: string) => void,
   handleSetTitle: (title: string) => void,

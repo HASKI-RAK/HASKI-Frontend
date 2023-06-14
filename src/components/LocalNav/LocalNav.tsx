@@ -13,7 +13,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Topic } from '@services'
-import { LearningPath } from '@core'
+import { LearningPathElement } from '@core'
 import React from 'react'
 import { useLearningPath as _useLearningPath } from './LocalNav.hooks'
 
@@ -24,7 +24,7 @@ import { useLearningPath as _useLearningPath } from './LocalNav.hooks'
  *  The "learningPaths" property is an array of objects that represent the available learning paths related to the current page.
  */
 export type LocalNavProps = {
-  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPath[] }
+  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPathElement[] }
 }
 
 /**
@@ -61,7 +61,7 @@ const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
         </Box>
       ) : (
         // display actual content once loading is false
-        //For every Topic, get LearningPath and display it inside an Accordion
+        //For every Topic, get LearningPathElement and display it inside an Accordion
         <>
           {topics.map((topic, index) => (
             <Accordion

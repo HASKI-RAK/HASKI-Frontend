@@ -1,12 +1,13 @@
 import User from './User/User'
 import ILS from './QuestionnaireResults/ILS'
 import ListK from './QuestionnaireResults/ListK'
-import TopicLearningElement from './LearningPath/LearningPath'
+import TopicLearningElement from './LearningPathElement/LearningPathElement'
 import LearningElement from './LearningElement/LearningElement'
 import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
-import LearningPath from './LearningPath/LearningPath'
+import LearningPathElement from './LearningPathElement/LearningPathElement'
 import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
 import Course from './Course/Course'
+import Topic from './Topic/Topic'
 /**
  * Holds all pure business logic. Does not rely on any other components.
  */
@@ -17,7 +18,9 @@ export type {
   TopicLearningElement,
   LearningElement,
   LearningPathTopic,
-  LearningPath,
-  LearningPathLearningElement
+  LearningPathElement,
+  LearningPathLearningElement,
+  Topic
 }
-export type { LearningPathReturn } from './LearningPath/LearningPath'
+export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
+export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'
