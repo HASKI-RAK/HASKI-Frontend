@@ -47,7 +47,7 @@ export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookRetur
         .catch((error) => {
           setIsLoading(false)
           addSnackbar({
-            message: t('pages.Contact.error'),
+            message: t('pages.Contact.error')+error,
             severity: 'error'
           })
         })
