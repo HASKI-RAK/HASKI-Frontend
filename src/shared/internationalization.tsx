@@ -1,6 +1,5 @@
 ﻿import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import log from 'loglevel'
 import { SnackbarContext } from '@services'
 import React from 'react'
 
@@ -23,8 +22,7 @@ declare module 'i18next' {
 // Import all translation files
 import translationEnglish from './translation/translationEnglish.json'
 import translationGerman from './translation/translationGerman.json'
-
-log.setLevel('error')
+import log from 'loglevel'
 
 //define the available languages
 const resources = {

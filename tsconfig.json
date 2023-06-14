@@ -24,6 +24,7 @@
       "@services": ["src/common/services"],
       "@utils": ["src/common/utils"],
       "@core": ["src/common/core"],
+      "@store": ["src/common/store"],
       "@components": ["src/components"],
       "@common/components": ["src/common/components"],
       "@shared": ["src/shared"]

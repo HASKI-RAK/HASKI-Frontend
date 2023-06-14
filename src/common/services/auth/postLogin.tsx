@@ -1,9 +1,17 @@
-import { RequestResponse } from './RequestResponse.d'
+export type LoginResponse = {
+  // Unix timestamp
+  expiration: number
+}
+
+type LoginRequestResponse = {
+  status: number
+  error?: string
+}
 
 export type postLoginParams = {
   nonce?: string
 }
-export const postLogin = async (params?: postLoginParams): Promise<RequestResponse> => {
+export const postLogin = async (params?: postLoginParams): Promise<LoginResponse> => {
   const { nonce = '' } = params || {}
   return fetch(process.env.BACKEND + `/login`, {
     method: 'POST',
@@ -12,10 +20,11 @@ export const postLogin = async (params?: postLoginParams): Promise<RequestRespon
     headers: {
       'Content-Type': 'application/json'
     }
-  }).then((response) => {
-    return {
-      status: response.status,
-      message: response.statusText
+  }).then((response) => response.json().then((data: LoginResponse & LoginRequestResponse) => {
+    if (response.ok) {
+      return { expiration: data.expiration }
     }
-  }) as Promise<RequestResponse>
+    throw new Error(data.error)
+  }
+  ))
 }

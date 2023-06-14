@@ -1,16 +1,25 @@
 import { RequestResponse } from './RequestResponse.d'
 
 export const getLogout = async (): Promise<RequestResponse> => {
-  return fetch(process.env.BACKEND + `/logout`, {
+  const response = await fetch(process.env.BACKEND + `/logout`, {
     method: 'GET',
     credentials: 'include',
     headers: {
-      'Content-Type': 'text/html'
+      'Content-Type': 'application/json'
     }
-  }).then((response) => {
-    return {
-      status: response.status,
-      message: response.statusText
+  })
+
+  const data = await response.json()
+
+  if (response.status !== 200) {
+    // This has to look like the backend error response
+    if ('error' in data) {
+      throw new Error(data['error'] + ' ' + data['message'])
+    } else {
+      throw new Error('Unknown error')
     }
-  }) as Promise<RequestResponse>
+  }
+  if (data && data.status)
+    return { status: response.status, message: response.statusText, json: data } as RequestResponse
+  else throw new Error('Unknown error during data parsing')
 }

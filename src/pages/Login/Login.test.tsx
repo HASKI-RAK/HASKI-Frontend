@@ -23,7 +23,7 @@ describe('Test the Login page', () => {
   it('should render the skeleton when a nonce is supplied as search params', () => {
     const login = render(
       <MemoryRouter initialEntries={['?nonce=123']}>
-        <AuthContext.Provider value={{ isAuth: false, setIsAuth: jest.fn(), logout: jest.fn() }}>
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
           <Login />
         </AuthContext.Provider>
       </MemoryRouter>
@@ -37,7 +37,7 @@ describe('Test the Login page', () => {
   it('should render the form the login page without nonce', () => {
     const login = render(
       <MemoryRouter initialEntries={['?nonce=123']}>
-        <AuthContext.Provider value={{ isAuth: true, setIsAuth: jest.fn(), logout: jest.fn() }}>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Login />
         </AuthContext.Provider>
       </MemoryRouter>
@@ -48,7 +48,7 @@ describe('Test the Login page', () => {
   it('should render the form without nonce but authorized', () => {
     const login = render(
       <MemoryRouter initialEntries={['']}>
-        <AuthContext.Provider value={{ isAuth: true, setIsAuth: jest.fn(), logout: jest.fn() }}>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Login />
         </AuthContext.Provider>
       </MemoryRouter>
@@ -59,7 +59,7 @@ describe('Test the Login page', () => {
   test('submit navigates to dashboard on correct username and password', () => {
     const login = render(
       <MemoryRouter initialEntries={['']}>
-        <AuthContext.Provider value={{ isAuth: false, setIsAuth: jest.fn(), logout: jest.fn() }}>
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
           <Login />
         </AuthContext.Provider>
       </MemoryRouter>
@@ -100,7 +100,7 @@ describe('Test the Login page', () => {
 
     const login = render(
       <MemoryRouter initialEntries={['']}>
-        <AuthContext.Provider value={{ isAuth: false, setIsAuth: jest.fn(), logout: jest.fn() }}>
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
           <Login />
         </AuthContext.Provider>
       </MemoryRouter>
@@ -130,7 +130,7 @@ describe('Test the Login page', () => {
     ) as jest.Mock
     const login = render(
       <MemoryRouter initialEntries={['?nonce=123']}>
-        <AuthContext.Provider value={{ isAuth: false, setIsAuth: jest.fn(), logout: jest.fn() }}>
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
           <Login />
         </AuthContext.Provider>
       </MemoryRouter>

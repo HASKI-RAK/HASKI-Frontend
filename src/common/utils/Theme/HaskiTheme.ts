@@ -40,8 +40,8 @@ export const HaskiTheme = createTheme({
   palette: {
     primary: {
       main: yellow[900],
-      dark: yellow[800],
-      light: '#a4dddf'
+      dark: yellow[900],
+      light: yellow[100]
     },
     secondary: {
       main: red[900],
