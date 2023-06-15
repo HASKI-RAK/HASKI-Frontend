@@ -10,5 +10,6 @@
     "**/*.test.{js,jsx,ts,tsx}",
     "**/*.d.ts"
   ],
-  "ignoreUnimported": ["src/shared/auto-order-json-translations.ts"]
+  "ignoreUnresolved": [],
+  "ignoreUnused": ["@nivo/core", "@nivo/tooltip"]
 }

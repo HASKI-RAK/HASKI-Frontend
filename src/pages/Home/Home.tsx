@@ -10,7 +10,7 @@ export const Home = () => {
 
   log.setLevel('error')
   return (
-    <div>
+    <>
       <Button
         variant="contained"
         color="primary"
@@ -23,7 +23,7 @@ export const Home = () => {
       <QuestionnaireResultsModal open={open} handleClose={() => setOpen(!open)} />
       <DropdownLanguage />
       <Text />
-    </div>
+    </>
   )
 }
 

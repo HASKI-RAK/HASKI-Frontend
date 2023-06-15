@@ -6,6 +6,7 @@ import {
   ThemePresentation,
   Login,
   Dashboard,
+  Contact,
   ProjectDescription,
   ProjectInformation,
   Imprint
@@ -37,6 +38,7 @@ const App = () => (
               <Route path="/theme" element={<ThemePresentation />} />
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/projectinformation" element={<ProjectInformation />} />
               <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
               <Route path="/imprint" element={<Imprint />} />
