@@ -1,41 +1,33 @@
-import '@testing-library/jest-dom'
-import { fireEvent, render, screen } from '@testing-library/react'
 import GlossaryIndex, { GlossaryIndexProps } from './GlossaryIndex'
+import { fireEvent, render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 describe('GlossaryIndex tests', () => {
-  const mockNorm: GlossaryIndexProps = {
+  const mockIndexProps: GlossaryIndexProps = {
     orientation: 'horizontal',
     indexElements: ['test1', 'test2', 'test3'],
     selectedIndexElement: 'test1',
     setSelectedIndexElement: jest.fn()
   }
-  const mockUndefined: GlossaryIndexProps = {
-    orientation: undefined,
-    indexElements: undefined,
-    selectedIndexElement: undefined,
-    setSelectedIndexElement: undefined
-  }
 
-  test('renders correctly normal Input', () => {
-    const { getAllByTestId } = render(<GlossaryIndex {...mockNorm} />)
-
-    const button = getAllByTestId('glossaryIndexButton')
-    expect(button[0].textContent).toEqual(mockNorm.indexElements![0])
-    screen.debug()
+  it('renders with input', () => {
+    const { getByText } = render(<GlossaryIndex {...mockIndexProps} />)
+    expect(getByText('test1').textContent).toEqual(mockIndexProps.indexElements?.[0])
+    expect(getByText('test2').textContent).toEqual(mockIndexProps.indexElements?.[1])
+    expect(getByText('test3').textContent).toEqual(mockIndexProps.indexElements?.[2])
   })
 
-  test('renders correctly undefined Input', () => {
-    const mockRender = render(<GlossaryIndex {...mockUndefined} />)
-
-    const button = screen.getByRole('group')
+  it('renders without input', () => {
+    const { getByRole } = render(<GlossaryIndex />)
+    const button = getByRole('group')
     expect(button).toBeInTheDocument()
   })
 
-  test('clickEvent', () => {
-    const { getAllByTestId } = render(<GlossaryIndex {...mockNorm} />)
-    fireEvent.click(getAllByTestId('glossaryIndexButton')[0])
-    fireEvent.click(getAllByTestId('glossaryIndexButton')[1])
-    fireEvent.click(getAllByTestId('glossaryIndexButton')[2])
-    expect(mockNorm.setSelectedIndexElement).toHaveBeenCalledTimes(3)
+  test('Elements can be selected', () => {
+    const { getByText } = render(<GlossaryIndex {...mockIndexProps} />)
+    fireEvent.click(getByText('test1'))
+    fireEvent.click(getByText('test2'))
+    fireEvent.click(getByText('test3'))
+    expect(mockIndexProps.setSelectedIndexElement).toHaveBeenCalledTimes(3)
   })
 })

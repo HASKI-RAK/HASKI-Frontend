@@ -44,7 +44,7 @@ export type GlossaryAccordionEntryProps = GlossaryEntryProps & {
  * @param props - Props containing the term, definition, sources, tags and fundamental of a single entry as well as expandedList and setExpandedList.
  * @returns {JSX.Element} - The GlossaryEntry component
  * @category Components
- * */
+ */
 const GlossaryEntry = ({ expandedList, setExpandedList, ...props }: GlossaryAccordionEntryProps) => {
   const { t } = useTranslation()
 

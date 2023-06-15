@@ -27,15 +27,15 @@ describe('GlossaryList', () => {
   test('renders without crashing', () => {
     const { getByTestId } = render(<TestGlossaryList {...mockPropsNorm} />)
 
-    const glossaryEntriesAsString = mockPropsNorm
-      .glossaryEntries!.map((entry) => {
-        const tagsAsString = entry.tags!.join('')
+    const glossaryEntriesAsString = mockPropsNorm.glossaryEntries
+      ?.map((entry) => {
+        const tagsAsString = entry.tags?.join('')
         const sourcesAsString = entry.sources ? `pages.glossary.sources${entry.sources}` : ''
 
         return `${entry.term}${tagsAsString}${entry.definition}${sourcesAsString}`
       })
       .join('')
 
-    expect(getByTestId('GlossaryList').textContent?.length).toEqual(glossaryEntriesAsString.length)
+    expect(getByTestId('GlossaryList').textContent?.length).toEqual(glossaryEntriesAsString?.length)
   })
 })
