@@ -14,7 +14,7 @@ describe('Test Authcontext', () => {
   const TestComponent = () => {
     const context = useContext(AuthContext)
     const changeIsAuth = () => {
-      context.setIsAuth(!context.isAuth)
+      context.setExpire(0)
     }
     return (
       <>
@@ -25,9 +25,7 @@ describe('Test Authcontext', () => {
   }
   const providedContext = {
     isAuth: false,
-    setIsAuth: function (active: boolean) {
-      this.isAuth = active
-    },
+    setExpire: jest.fn(),
     logout: jest.fn()
   } as AuthContextType
   it('should render unauthorized', () => {
@@ -59,13 +57,14 @@ describe('Test Authcontext', () => {
 
   test('should change isAuth to true', () => {
     const context = renderHook(() => useContext(AuthContext))
-    context.result.current.setIsAuth(true)
+    //expire unix timestamp > now
+    context.result.current.setExpire(9999999999)
     expect(context.result.current.isAuth).toBe(true)
   })
 
   test('should change isAuth to false', () => {
     const context = renderHook(() => useContext(AuthContext))
-    context.result.current.setIsAuth(false)
+    context.result.current.setExpire(0)
     expect(context.result.current.isAuth).toBe(false)
   })
 

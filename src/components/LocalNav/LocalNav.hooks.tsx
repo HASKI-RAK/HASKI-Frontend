@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 import { Topic } from '@services'
 import { LearningPath } from '@core'
 import log from 'loglevel'
-import useBoundStore from '@store'
-import { LearningPathReturn } from '@core'
+import { LearningPathReturn } from "@core";
 
 const hardcodedTopics: Topic[] = [
   {
@@ -413,55 +412,387 @@ const hardcodedLearningPaths: LearningPath[] = [
       },
       {
         id: 5,
-        position: 5,
-        learningElementId: 5,
-        learningPathId: 5,
-        recommended: false,
-        learningElement: {
-          id: 5,
-          lmsId: 5,
-          name: 'Selbsteinschätzungstest',
-          activityType: 'feedback',
-          classification: 'RQ',
-          university: 'HS-KE',
-          createdBy: 'me',
-          createdAt: 'now',
-          lastUpdated: 'now',
-          studentLearningElement: {
-            id: 5,
-            student_id: 5,
-            learning_element_id: 5,
-            done: false,
-            done_at: 'now'
-          }
-        }
-      },
-      {
-        id: 6,
-        position: 6,
-        learningElementId: 6,
-        learningPathId: 6,
-        recommended: false,
-        learningElement: {
-          id: 6,
-          lmsId: 6,
-          name: 'Leichte Übung - 1',
-          activityType: 'feedback',
-          classification: 'RQ',
-          university: 'HS-KE',
-          createdBy: 'me',
-          createdAt: 'now',
-          lastUpdated: 'now',
-          studentLearningElement: {
-            id: 6,
-            student_id: 6,
-            learning_element_id: 6,
-            done: false,
-            done_at: 'now'
-          }
-        }
-      },
-      {
+        course_id: 5,
+        based_on: "aco",
+        calculated_on: "aco",
+        path: [
+            {
+                id: 1,
+                position: 1,
+                learning_element_id: 1,
+                learning_path_id: 1,
+                recommended: false,
+                learning_element: {
+                    id: 1,
+                    lms_id: 1,
+                    name: "Kurzübersicht",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 1,
+                        student_id: 1,
+                        learning_element_id: 1,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 2,
+                position: 2,
+                learning_element_id: 2,
+                learning_path_id: 2,
+                recommended: false,
+                learning_element: {
+                    id: 2,
+                    lms_id: 2,
+                    name: "Erklärung",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 2,
+                        student_id: 2,
+                        learning_element_id: 2,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 3,
+                position: 3,
+                learning_element_id: 3,
+                learning_path_id: 3,
+                recommended: false,
+                learning_element: {
+                    id: 3,
+                    lms_id: 3,
+                    name: "Animation",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 3,
+                        student_id: 3,
+                        learning_element_id: 3,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 4,
+                position: 4,
+                learning_element_id: 4,
+                learning_path_id: 4,
+                recommended: false,
+                learning_element: {
+                    id: 4,
+                    lms_id: 4,
+                    name: "Beispiel",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 4,
+                        student_id: 4,
+                        learning_element_id: 4,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 5,
+                position: 5,
+                learning_element_id: 5,
+                learning_path_id: 5,
+                recommended: false,
+                learning_element: {
+                    id: 5,
+                    lms_id: 5,
+                    name: "Selbsteinschätzungstest",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 5,
+                        student_id: 5,
+                        learning_element_id: 5,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 6,
+                position: 6,
+                learning_element_id: 6,
+                learning_path_id: 6,
+                recommended: false,
+                learning_element: {
+                    id: 6,
+                    lms_id: 6,
+                    name: "Leichte Übung - 1",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 6,
+                        student_id: 6,
+                        learning_element_id: 6,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 7,
+                position: 7,
+                learning_element_id: 7,
+                learning_path_id: 7,
+                recommended: false,
+                learning_element: {
+                    id: 7,
+                    lms_id: 7,
+                    name: "Leichte Übung - 2",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 7,
+                        student_id: 7,
+                        learning_element_id: 7,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 8,
+                position: 8,
+                learning_element_id: 8,
+                learning_path_id: 8,
+                recommended: false,
+                learning_element: {
+                    id: 8,
+                    lms_id: 8,
+                    name: "Mittlere Übung - 1",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 8,
+                        student_id: 8,
+                        learning_element_id: 8,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 9,
+                position: 9,
+                learning_element_id: 9,
+                learning_path_id: 9,
+                recommended: false,
+                learning_element: {
+                    id: 9,
+                    lms_id: 9,
+                    name: "Mittlere Übung - 2",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 9,
+                        student_id: 9,
+                        learning_element_id: 9,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 10,
+                position: 10,
+                learning_element_id: 10,
+                learning_path_id: 10,
+                recommended: false,
+                learning_element: {
+                    id: 10,
+                    lms_id: 10,
+                    name: "Schwere Übung - 1",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 10,
+                        student_id: 10,
+                        learning_element_id: 10,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 11,
+                position: 11,
+                learning_element_id: 11,
+                learning_path_id: 11,
+                recommended: false,
+                learning_element: {
+                    id: 11,
+                    lms_id: 11,
+                    name: "Schwere Übung - 2",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 11,
+                        student_id: 11,
+                        learning_element_id: 11,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            }, {
+                id: 12,
+                position: 12,
+                learning_element_id: 12,
+                learning_path_id: 12,
+                recommended: false,
+                learning_element: {
+                    id: 12,
+                    lms_id: 12,
+                    name: "Zusammenfassung",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 12,
+                        student_id: 12,
+                        learning_element_id: 12,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 13,
+                position: 13,
+                learning_element_id: 13,
+                learning_path_id: 13,
+                recommended: false,
+                learning_element: {
+                    id: 13,
+                    lms_id: 13,
+                    name: "Zusatzliteratur",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 13,
+                        student_id: 13,
+                        learning_element_id: 13,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 14,
+                position: 14,
+                learning_element_id: 14,
+                learning_path_id: 14,
+                recommended: false,
+                learning_element: {
+                    id: 14,
+                    lms_id: 14,
+                    name: "Evaluation nach dem Thema Strategie",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 14,
+                        student_id: 14,
+                        learning_element_id: 14,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            },
+            {
+                id: 15,
+                position: 15,
+                learning_element_id: 15,
+                learning_path_id: 15,
+                recommended: false,
+                learning_element: {
+                    id: 15,
+                    lms_id: 15,
+                    name: "Evaluation vor dem Thema Zustand",
+                    activity_type: "feedback",
+                    classification: "RQ",
+                    university: "HS-KE",
+                    created_by: "me",
+                    created_at: "now",
+                    last_updated: "now",
+                    student_learning_element: {
+                        id: 15,
+                        student_id: 15,
+                        learning_element_id: 15,
+                        done: false,
+                        done_at: "now"
+                    }
+                }
+            }
+        ]
+    },
+    {
         id: 7,
         position: 7,
         learningElementId: 7,
@@ -2488,15 +2819,7 @@ const hardcodedLearningPaths: LearningPath[] = [
   }
 ]
 
-export const getSortedLearningPath = async (
-  data: Topic[],
-  userId: number,
-  lmsUserId: number,
-  studentId: number,
-  fetchLearningPath: LearningPathReturn
-): Promise<LearningPath[]> => {
-  const promises = data.map((topic) => fetchLearningPath(userId, lmsUserId, studentId, 2, topic.id)) //reihenfolge der parameter beachten
-  const learningPaths = await Promise.all(promises)
+export const getSortedLearningPath = async (data: Topic[], userId: number, lmsUserId: number, studentId: number, fetchLearningPath: LearningPathReturn): Promise<LearningPath[]> => {
 
   return learningPaths.map((learningPath) => {
     learningPath.path.sort((a, b) => a.position - b.position)
@@ -2511,20 +2834,23 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
   //const fetchUser = useBoundStore((state) => state.fetchUser)
   //const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
 
-  const effect = async () => {
-    setLoading(true)
-    try {
-      //const user = await fetchUser();
-      setTopics(hardcodedTopics)
-      //const dataLearningPath = await getSortedLearningPath(hardcodedTopics, user.settings.user_id, user.lms_user_id, user.id,
-      // fetchLearningPath)
+    const effect = async () => {
+        setLoading(true)
+        try {
+            //const user = await fetchUser();
+            setTopics(hardcodedTopics)
+            //const dataLearningPath = await getSortedLearningPath(hardcodedTopics, user.settings.user_id, user.lms_user_id, user.id,
+            // fetchLearningPath)
 
-      setLearningPaths(hardcodedLearningPaths)
-    } catch (error) {
-      log.error(error)
-      throw error
-    } finally {
-      setLoading(false)
+            setLearningPaths(hardcodedLearningPaths)
+        }
+        catch (error) {
+            log.error(error)
+            throw error
+        }
+        finally {
+            setLoading(false)
+        }
     }
   }
 
@@ -2534,5 +2860,5 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
     })
   }, [])
 
-  return { loading, topics, learningPaths }
+    return { loading, topics, learningPaths }
 }

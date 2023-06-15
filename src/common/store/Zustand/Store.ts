@@ -1,14 +1,33 @@
 import create from 'zustand'
-import LearningPathSlice, { createLearningPathSlice } from '../LearningPathSlice/LearningPathSlice'
-import UserSlice, { createUserSlice } from '../UserSlice/UserSlice'
-import CourseSlice, { createCourseSlice } from '../CourseSlice/CourseSlice'
-import CoursesSlice, { createCoursesSlice } from '../CoursesSlice/CoursesSlice'
+import log from 'loglevel'
+import { devtools, persist } from 'zustand/middleware'
+import LearningPathSlice, { createLearningPathSlice } from '../Slices/LearningPathSlice'
+import UserSlice, { createUserSlice } from '../Slices/UserSlice'
+import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
+import CoursesSlice, { createCoursesSlice } from '../Slices/CoursesSlice'
+import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 
-export type StoreState = UserSlice & LearningPathSlice & CourseSlice & CoursesSlice
+export type StoreState = LearningPathSlice & CourseSlice & CoursesSlice
+export type PersistedStoreState = UserSlice & AuthSlice
 
-export const useBoundStore = create<StoreState>()((...a) => ({
-  ...createUserSlice(...a),
+export const useStore = create<StoreState>()((...a) => ({
   ...createLearningPathSlice(...a),
   ...createCourseSlice(...a),
   ...createCoursesSlice(...a)
 }))
+
+export const usePersistedStore = create<PersistedStoreState>()(devtools(persist((...a) => ({
+  ...createUserSlice(...a),
+  ...createAuthSlice(...a)
+}), {
+  name: 'persisted_storage',
+  // Here we can whitelist the keys we want to persist
+  partialize: (state) => (
+    {
+      _user: state._user,
+      expire: state.expire
+    }
+  ),
+  onRehydrateStorage: () => { log.log('PersistedStore hydration starts') },
+  version: 1 // When this changes, the persisted data will be discarded and the store reinitialized (Useful for migrations)
+})))

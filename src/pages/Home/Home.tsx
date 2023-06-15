@@ -2,7 +2,7 @@ import log from 'loglevel'
 import { DefaultButton as Button } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState, useContext } from 'react'
-import useBoundStore from '@store'
+import { usePersistedStore, useStore } from '@store'
 import { AuthContext, SnackbarContext } from '@services'
 import { Stack } from '@mui/system'
 import { Card, CardContent, Skeleton, Typography } from '@mui/material'
@@ -22,9 +22,9 @@ export const Home = () => {
   const navigate = useNavigate()
 
   // Store
-  const fetchUser = useBoundStore((state) => state.fetchUser)
-  const fetchCourses = useBoundStore((state) => state.fetchCourses)
-  const courses = useBoundStore((state) => state._cache_courses)
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const fetchCourses = useStore((state) => state.fetchCourses)
+  const courses = useStore((state) => state._cache_courses)
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
