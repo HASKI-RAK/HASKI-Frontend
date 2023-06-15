@@ -1,20 +1,20 @@
 import {
-  DefaultButton as Button,
-  DefaultSelect as Select,
-  DefaultTextField as TextField,
-  DefaultRadio as RadioButton,
-  DefaultTypography as Typography,
-  DefaultRadioGroup as RadioGroup,
-  DefaultStack as Stack,
-  DefaultMenuItem as MenuItem,
-  DefaultInputLabel as InputLabel,
-  DefaultFormControl as FormControl,
-  DefaultFormLabel as FormLabel,
-  DefaultFormControlLabel as FormControlLabel,
-  DefaultSelectChangeEvent as SelectChangeEvent,
-  DefaultFormHelperText as FormHelperText,
-  DefaultBackdrop as Backdrop,
-  DefaultCircularProgress as CircularProgress
+  Button,
+  Select,
+  TextField,
+  Radio,
+  Typography,
+  RadioGroup,
+  Stack,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+  FormHelperText,
+  Backdrop,
+  CircularProgress,
+  SelectChangeEvent
 } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import React, { useMemo, useState } from 'react'
@@ -118,7 +118,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
         </FormLabel>
         <RadioGroup row name="reporttype" value={reportType} onChange={reportTypeChangeHandler}>
           {reportTypes.map((report) => (
-            <FormControlLabel key={report.value} value={report.value} control={<RadioButton />} label={report.label} />
+            <FormControlLabel key={report.value} value={report.value} control={<Radio />} label={report.label} />
           ))}
         </RadioGroup>
 

@@ -42,5 +42,5 @@ export { DefaultFormLabel as FormLabel } from './DefaultFormLabel/DefaultFormLab
 export { DefaultInputLabel as InputLabel } from './DefaultInputLabel/DefaultInputLabel'
 export { DefaultFormControl as FormControl } from './DefaultFormControl/DefaultFormControl'
 export { DefaultFormControlLabel as FormControlLabel } from './DefaultFormControlLabel/DefaultFormControlLabel'
+export { DefaultFormHelperText as FormHelperText } from './DefaultFormHelperText/DefaultFormHelperText'
 export type { DefaultSelectChangeEvent as SelectChangeEvent } from './DefaultSelectChangeEvent/DefaultSelectChangeEvent'
-export { DefaultFormHelperText as FormHelpertext } from './DefaultFormHelperText/DefaultFormHelperText'

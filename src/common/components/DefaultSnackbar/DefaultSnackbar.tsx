@@ -1,2 +1,2 @@
 import DefaultSnackbar from '@mui/material/Snackbar/Snackbar'
-export {DefaultSnackbar } 
+export { DefaultSnackbar }

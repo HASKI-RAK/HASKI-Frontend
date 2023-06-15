@@ -1,13 +1,7 @@
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import React, { useRef, useEffect, useCallback } from 'react'
-import {
-  Button,
-  Fade,
-  Grid,
-  MobileStepper,
-  Typography
-} from '@common/components'
+import { Button, Fade, Grid, MobileStepper, Typography } from '@common/components'
 import {
   useProjectDescriptionStepper as _useProjectDescriptionStepper,
   useProjectDescriptionStepperHookParams,
