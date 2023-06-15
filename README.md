@@ -34,7 +34,7 @@ BACKEND=http://localhost:8080
 ### IDE
 
 Optional plugins for your development environment:
-| Plugin | README | Explanaition |
+| Plugin | README | Explanation |
 | ------ | ------ | ------ |
 | SonarCube | https://www.sonarqube.org/ | SonarCloud will automatically scan the code for required standards and notify you in the merge request. |
 | Babel JavaScript | https://babeljs.io/ | Compiles JavaScript. |

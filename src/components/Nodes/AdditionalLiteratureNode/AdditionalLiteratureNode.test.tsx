@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import ReactFlow, { Node, Edge, MiniMap, Controls, Background, WrapNodeProps, NodeProps } from 'reactflow'
 import { DefaultBox as Box, DefaultSkeleton as Skeleton } from '@common/components'
 // import 'reactflow/dist/base.css'
-import { mockReactFlow } from 'bin/__mocks__/ResizeObserver'
+import { mockReactFlow } from '__mocks__/ResizeObserver'
 
 beforeEach(() => {
   mockReactFlow()
@@ -24,15 +24,6 @@ describe('AdditionalLiteratureNode test', () => {
     handleClose: jest.fn()
   }
 
-  const mockLearningElementStyle = {
-    background: '#fff',
-    padding: 10,
-    border: '1px solid ' + '#ddd',
-    borderRadius: 8,
-    cursor: 'pointer',
-    visiblity: true
-  }
-
   const mockNode: Node = {
     id: 'testId',
     type: mockData.classification,
@@ -40,9 +31,12 @@ describe('AdditionalLiteratureNode test', () => {
     position: {
       x: 0,
       y: 0
-    },
-    style: mockLearningElementStyle
+    }
   }
+
+  it('renders correctly', () => {
+    const { getByRole } = render(<ReactFlow nodes={[mockNode]} />)
+  })
 
   it('renders correctly and can be clicked', () => {
     const { getAllByRole, getByTestId } = render(
@@ -53,10 +47,14 @@ describe('AdditionalLiteratureNode test', () => {
 
     screen.debug()
 
+    const test = getByTestId('rf__node-testId')
     const test2 = getAllByRole('button')
-    fireEvent.click(test2[0])
-    // const test = getByTestId('rf__node-testId')
-    // fireEvent.click(test)
-    // fireEvent.click(getByRole('button'))
+
+    act(() => {
+      fireEvent.click(test2[0])
+    })
+
+    expect(mockNode.data.handleOpen).toBeCalled()
+    expect(mockNode.data.handleSetUrl).toBeCalled()
   })
 })

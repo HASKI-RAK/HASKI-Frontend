@@ -2,16 +2,16 @@ import { DefaultBox as Box, DefaultPaper as Paper, DefaultTypography as Typograp
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
 import ArticleIcon from '@mui/icons-material/Article' // TODO: DI
-import { memo } from 'react'
+import { memo, useCallback, MouseEventHandler } from 'react'
 
 const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
-  const handleClick = (data: any) => {
+  const handleClick = useCallback((event: MouseEventHandler<HTMLDivElement>) => {
     data.handleOpen()
     data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
-  }
+  }, [])
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => handleClick(data)}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => handleClick}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
         sx={{

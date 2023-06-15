@@ -7,7 +7,6 @@ import { IFrameModal, nodeTypes } from '@components'
 import { useTheme } from '@mui/material' // TODO: DI?
 import { AuthContext } from '@services'
 import useBoundStore from '@store'
-import 'reactflow/dist/style.css'
 
 export type TopicProps = {
   useTopic?: (params?: useTopicHookParams) => TopicHookReturn
@@ -35,16 +34,19 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     }, 5000)
     if (authcontext.isAuth) {
       clearTimeout(preventEndlessLoading)
-      fetchUser().then((user) => {
-        fetchLearningPath(user.settings.userId, user.lmsUserId, user.id, Number(courseId), Number(topicId)).then(
-          (learningPathData) => {
-            const { nodes, edges } = mapNodes(learningPathData, theme)
-            setInitialNodes(nodes)
-            setInitialEdges(edges)
-          },
-          null // TODO: Maybe add Snackbar
-        )
-      }, null) // TODO: Maybe add Snackbar
+      fetchUser().then(
+        (user) => {
+          fetchLearningPath(user.settings.userId, user.lmsUserId, user.id, Number(courseId), Number(topicId)).then(
+            (learningPathData) => {
+              const { nodes, edges } = mapNodes(learningPathData, theme)
+              setInitialNodes(nodes)
+              setInitialEdges(edges)
+            },
+            () => console.log('innerFailed') // TODO: Maybe add Snackbar
+          )
+        },
+        () => console.log('failed')
+      ) // TODO: Maybe add Snackbar
     }
     return () => {
       clearTimeout(preventEndlessLoading)
