@@ -15,8 +15,10 @@ import { useNavigate } from 'react-router-dom'
 import { Topic } from '@services'
 import { LearningPathElement } from '@core'
 import React, { Suspense, useState } from 'react'
-import { useLearningPathTopic as _useLearningPathTopic } from './LocalNav.hooks'
-import { useLearningPathElement as _useLearningPathElement } from './LocalNav.hooks'
+import {
+  useLearningPathTopic as _useLearningPathTopic,
+  useLearningPathElement as _useLearningPathElement
+} from './LocalNav.hooks'
 
 /**
  *  Local navigation component props.
@@ -25,7 +27,7 @@ import { useLearningPathElement as _useLearningPathElement } from './LocalNav.ho
  *  The "learningPaths" property is an array of objects that represent the available learning paths related to the current page.
  */
 
-type LocalNavProps = {
+export type LocalNavProps = {
   useLearningPathTopic?: () => { loading: boolean; topics: Topic[] }
   useLearningPathElement?: (topic: Topic) => {
     loadingElements: boolean
@@ -40,6 +42,12 @@ const LocalNav = ({
   const { t } = useTranslation()
   const { loading, topics } = useLearningPathTopic()
 
+  const [openAccordion, setOpenAccordion] = useState<number | null>(null)
+
+  const handleAccordionClick = (index: number) => {
+    setOpenAccordion(openAccordion === index ? null : index)
+  }
+
   const skeletonItems = []
   for (let i = 0; i < 3; i++) {
     skeletonItems.push(
@@ -49,11 +57,6 @@ const LocalNav = ({
         <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />
       </React.Fragment>
     )
-  }
-  const [openAccordion, setOpenAccordion] = useState<number | null>(null)
-
-  const handleAccordionClick = (index: number) => {
-    setOpenAccordion(openAccordion === index ? null : index)
   }
 
   const LazyLearningPathElement = ({ topic }: { topic: Topic }) => {
@@ -133,11 +136,11 @@ const LocalNav = ({
                 <Typography variant="h6">{topic.name}</Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ flexDirection: 'column' }}>
-                {openAccordion === index ? (
+                {openAccordion === index && (
                   <Suspense fallback={<div>Loading...</div>}>
                     <LazyLearningPathElement topic={topic} />
                   </Suspense>
-                ) : null}
+                )}
               </AccordionDetails>
             </Accordion>
           ))}
