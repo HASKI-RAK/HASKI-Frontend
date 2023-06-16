@@ -20,7 +20,7 @@ type TopicProps = {
   useTopic?: typeof _useTopic
 }
 
-// TODO URL Stuktur übelrgeen. bzswp. localhost:3000/topic?topic=1
+// TODO URL Stuktur übelrgeen. bzswp. localhost:3000/Topic?Topic=1
 // Topic Page - TODO Component extract
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialNodes, setInitialNodes] = useState<Node[]>()
@@ -88,8 +88,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // }, [mapNodes, LearningPathElement])
 
   useEffect(() => {
-    // request to backend to get learning path for topic
-    // alert('Topic: ' + topic)
+    // request to backend to get learning path for Topic
+    // alert('Topic: ' + Topic)
     log.log('Topic page')
     const preventEndlessLoading = setTimeout(() => {
       log.log('Topic page timeout')

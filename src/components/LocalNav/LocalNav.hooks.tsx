@@ -5,19 +5,6 @@ import log from 'loglevel'
 import useBoundStore from '@store'
 import { LearningPathElementReturn } from '@core'
 
-/*export const getSortedLearningPath = async (
-  data: Topic[],
-  fetchLearningPath: LearningPathElementReturn
-): Promise<LearningPathElement[]> => {
-  const promises = data.map((topic) => fetchLearningPath(topic.id)) //reihenfolge der parameter beachten
-  const learningPaths = await Promise.all(promises)
-
-  return learningPaths.map((learningPath) => {
-    learningPath.path.sort((a, b) => a.position - b.position)
-    return learningPath
-  })
-}*/
-
 const initialLearningPathElement: LearningPathElement = {
   id: 99999,
   course_id: 99999,
@@ -45,25 +32,24 @@ const initialLearningPathElement: LearningPathElement = {
           student_id: 99999,
           learning_element_id: 99999,
           done: false,
-          done_at: 'inital LearningPathElement',
-        },
-      },
-    },
-  ],
-};
+          done_at: 'inital LearningPathElement'
+        }
+      }
+    }
+  ]
+}
 
 export const getSortedLearningPath = async (
-    userid: number,
-    lmsUserid: number,
-    studentid: number,
-    data: Topic,
-    fetchLearningPath: LearningPathElementReturn
+  userid: number,
+  lmsUserid: number,
+  studentid: number,
+  data: Topic,
+  fetchLearningPath: LearningPathElementReturn
 ): Promise<LearningPathElement> => {
-  const learningPath = await fetchLearningPath(userid, lmsUserid, studentid, 2, data.id);
-  console.log("1")
-  learningPath.path.sort((a, b) => a.position - b.position);
-  return learningPath;
-};
+  const learningPath = await fetchLearningPath(userid, lmsUserid, studentid, 2, data.id)
+  learningPath.path.sort((a, b) => a.position - b.position)
+  return learningPath
+}
 
 export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } => {
   const [loading, setLoading] = useState(true)
@@ -77,7 +63,6 @@ export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } =>
       const user = await fetchUser()
       const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, 2)
       setTopics(fetchedTopics.topics)
-
     } catch (error) {
       log.error(error)
       throw error
@@ -95,7 +80,9 @@ export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } =>
   return { loading, topics }
 }
 
-export const useLearningPathElement = (topic: Topic): { loadingElements: boolean; learningPaths: LearningPathElement } => {
+export const useLearningPathElement = (
+  topic: Topic
+): { loadingElements: boolean; learningPaths: LearningPathElement } => {
   const [loadingElements, setLoadingElements] = useState(true)
   const [learningPaths, setLearningPaths] = useState<LearningPathElement>(initialLearningPathElement)
   const fetchUser = useBoundStore((state) => state.fetchUser)
@@ -105,9 +92,14 @@ export const useLearningPathElement = (topic: Topic): { loadingElements: boolean
     setLoadingElements(true)
     try {
       const user = await fetchUser()
-      const dataLearningPath = await getSortedLearningPath(user.settings.user_id, user.lms_user_id, user.id ,topic, fetchLearningPathElement)
+      const dataLearningPath = await getSortedLearningPath(
+        user.settings.user_id,
+        user.lms_user_id,
+        user.id,
+        topic,
+        fetchLearningPathElement
+      )
       setLearningPaths(dataLearningPath)
-      console.log(dataLearningPath)
     } catch (error) {
       log.error(error)
       throw error
@@ -118,7 +110,7 @@ export const useLearningPathElement = (topic: Topic): { loadingElements: boolean
 
   useEffect(() => {
     effect().catch(() => {
-      log.error('An error occurred while fetching course topic Elements in LocalNav.hooks')
+      log.error('An error occurred while fetching course Topic Elements in LocalNav.hooks')
     })
   }, [])
 

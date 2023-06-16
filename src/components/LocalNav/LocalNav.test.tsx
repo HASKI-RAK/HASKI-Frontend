@@ -22,7 +22,7 @@ describe('LocalNav', () => {
     expect(result).toBeTruthy()
   })
 
-  it('should render the LocalNav with topic and learningElementPath', () => {
+  it('should render the LocalNav with Topic and learningElementPath', () => {
     const exampleLearningElement: LearningElement = {
       activity_type: 'Quiz',
       classification: 'Formative',
@@ -157,7 +157,7 @@ describe('LocalNav', () => {
     const { getByText } = render(<LocalNav {...props} />)
     fireEvent.click(getByText('1 Quiz on Chapter 3'))
 
-    expect(navigate).toHaveBeenCalledWith('course/2/topic/1')
+    expect(navigate).toHaveBeenCalledWith('course/2/Topic/1')
   })
 
   test('useLearningPath returns expected values (status 200)', async () => {

@@ -44,7 +44,7 @@ const CoursePage = () => {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  navigate('topic/' + topic.id)
+                  navigate('Topic/' + topic.id)
                 }}>
                 {t('components.CoursePage.Button.Topic')}
               </Button>

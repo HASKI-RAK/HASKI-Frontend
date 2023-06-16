@@ -6,19 +6,17 @@ import {
   DefaultAccordionDetails as AccordionDetails,
   DefaultAccordion as Accordion,
   DefaultSkeleton as Skeleton,
-  DefaultStack as Stack
+  DefaultStack as Stack,
+  DefaultLink as Link
 } from '@common/components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Topic } from '@services'
 import { LearningPathElement } from '@core'
-import React, {lazy, Suspense, useState} from 'react'
+import React, { Suspense, useState } from 'react'
 import { useLearningPathTopic as _useLearningPathTopic } from './LocalNav.hooks'
 import { useLearningPathElement as _useLearningPathElement } from './LocalNav.hooks'
-
-const LazyLearningPathElementSmth = lazy(() => import('./LazyLearningPathElement'));
-
 
 /**
  *  Local navigation component props.
@@ -52,11 +50,50 @@ const LocalNav = ({
       </React.Fragment>
     )
   }
-  const [openAccordion, setOpenAccordion] = useState<number | null>(null);
+  const [openAccordion, setOpenAccordion] = useState<number | null>(null)
 
   const handleAccordionClick = (index: number) => {
-    setOpenAccordion(openAccordion === index ? null : index);
-  };
+    setOpenAccordion(openAccordion === index ? null : index)
+  }
+
+  const LazyLearningPathElement = ({ topic }: { topic: Topic }) => {
+    const { loadingElements, learningPaths } = useLearningPathElement(topic)
+    const navigate = useNavigate()
+
+    if (loadingElements) {
+      return (
+        <>
+          <Skeleton variant="text" width={'100%'} height={55} />
+          <Skeleton variant="text" width={'70%'} height={20} />
+          <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />
+        </>
+      )
+    }
+
+    return (
+      <>
+        {learningPaths.path.map((learningElement) => (
+          <Typography variant="body1" key={learningElement.learning_element.name}>
+            <Link
+              underline="hover"
+              variant="body2"
+              color="inherit"
+              sx={{
+                cursor: 'pointer',
+                padding: '8px',
+                borderRadius: 10,
+                '&:hover': { backgroundColor: (theme) => theme.palette.primary.main }
+              }}
+              onClick={() => {
+                navigate(`/topics/${topic.name}/${learningElement.learning_element.name}`)
+              }}>
+              {learningElement.position} {learningElement.learning_element.name}
+            </Link>
+          </Typography>
+        ))}
+      </>
+    )
+  }
 
   return (
     <Box flexGrow={1}>
@@ -82,8 +119,7 @@ const LocalNav = ({
                 }
               }}
               expanded={openAccordion === index}
-              onChange={() => handleAccordionClick(index)}
-            >
+              onChange={() => handleAccordionClick(index)}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -96,15 +132,13 @@ const LocalNav = ({
                 }}>
                 <Typography variant="h6">{topic.name}</Typography>
               </AccordionSummary>
-
               <AccordionDetails sx={{ flexDirection: 'column' }}>
                 {openAccordion === index ? (
-                <Suspense fallback={<div>Loading...</div>}>
-                  <LazyLearningPathElementSmth topic={topic} useLearningPathElement={useLearningPathElement} />
-                </Suspense>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <LazyLearningPathElement topic={topic} />
+                  </Suspense>
                 ) : null}
-                </AccordionDetails>
-
+              </AccordionDetails>
             </Accordion>
           ))}
         </>
@@ -112,8 +146,5 @@ const LocalNav = ({
     </Box>
   )
 }
-
-
-
 
 export default LocalNav

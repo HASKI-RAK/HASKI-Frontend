@@ -7,8 +7,8 @@ import { LearningPathLearningElement } from '@core'
  * @param lmsUserId The user's lms id
  * @param studentId The user's student id
  * @param courseId The course's id
- * @param topicId The topic's id
- * @returns The learning path elements for the given user, course and topic
+ * @param topicId The Topic's id
+ * @returns The learning path elements for the given user, course and Topic
  */
 
 type LearningPathElementReturn = (
