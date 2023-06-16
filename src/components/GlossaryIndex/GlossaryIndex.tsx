@@ -18,12 +18,14 @@ export type GlossaryIndexProps = {
 
 /**
  * GlossaryIndex presents a component where elements are displayed that can be selected to filter the glossary.
+ * It can be used as a standalone component on a page.
  * @param props - Props containing the orientation, indexElements of the index aswell as selectedIndexElement and setSelectedIndexElement.
  * @returns {JSX.Element} - The GlossaryIndex component
  * @category Components
  */
 const GlossaryIndex = (props: GlossaryIndexProps) => {
   const handleChange = useCallback(
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     (event: React.MouseEvent<HTMLElement>, newSelectedIndexElement: string) => {
       props.setSelectedIndexElement?.(newSelectedIndexElement)
