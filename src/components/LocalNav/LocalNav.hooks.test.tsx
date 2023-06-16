@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { useLearningPath } from './LocalNav.hooks'
+import { useLearningPathTopic } from './LocalNav.hooks'
 
 jest.mock('@services', () => ({
   getCourseTopics: jest.fn(),
@@ -13,7 +13,7 @@ describe('useLearningPath', () => {
 
   it('should handle errors', async () => {
 
-    const { result, waitForNextUpdate } = renderHook(() => useLearningPath())
+    const { result, waitForNextUpdate } = renderHook(() => useLearningPathTopic())
 
     expect(result.current.loading).toBe(true)
 
@@ -21,6 +21,5 @@ describe('useLearningPath', () => {
 
     expect(result.current.loading).toBe(false)
     expect(result.current.topics).toEqual([])
-    expect(result.current.learningPaths).toEqual([])
   })
 })

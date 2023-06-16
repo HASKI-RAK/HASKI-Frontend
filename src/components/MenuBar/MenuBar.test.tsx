@@ -142,7 +142,7 @@ describe('MenuBar', () => {
     })
 
     const props: MenuBarProps = {
-      useLearningPath: mockUseLearningPath
+      useLearningPathTopic: mockUseLearningPath
     }
 
     const result = render(
@@ -172,7 +172,7 @@ describe('MenuBar', () => {
     })
 
     const props: MenuBarProps = {
-      useLearningPath: mockUseLearningPath
+      useLearningPathTopic: mockUseLearningPath
     }
 
     const result = render(
@@ -195,7 +195,7 @@ describe('MenuBar', () => {
     })
 
     const props: MenuBarProps = {
-      useLearningPath: mockUseLearningPath
+      useLearningPathTopic: mockUseLearningPath
     }
 
     const result = render(
@@ -218,7 +218,7 @@ describe('MenuBar', () => {
     })
 
     const props: MenuBarProps = {
-      useLearningPath: mockUseLearningPath
+      useLearningPathTopic: mockUseLearningPath
     }
 
     const result = render(
@@ -247,7 +247,7 @@ describe('MenuBar', () => {
     })
 
     const props: MenuBarProps = {
-      useLearningPath: mockUseLearningPath
+      useLearningPathTopic: mockUseLearningPath
     }
 
     const { getByTestId, queryByTestId } = render(
@@ -283,7 +283,7 @@ describe('MenuBar', () => {
     })
 
     const props: MenuBarProps = {
-      useLearningPath: mockUseLearningPath
+      useLearningPathTopic: mockUseLearningPath
     }
 
     const { getByTestId, queryByTestId } = render(

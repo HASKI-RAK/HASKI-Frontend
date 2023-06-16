@@ -13,7 +13,6 @@ import {
   DefaultGrid as Grid,
   DefaultButton as Button,
   DefaultPopover as Popover,
-  DefaultLink as Link,
   DefaultDivider as Divider,
   DefaultSkeleton as Skeleton,
   DefaultListItemIcon as ListItemIcon
@@ -25,8 +24,7 @@ import PersonIcon from '@mui/icons-material/Person'
 import { useTranslation } from 'react-i18next'
 import { Login, Logout } from '@mui/icons-material'
 import { AuthContext, SnackbarContext, Topic } from '@services'
-import { LearningPathElement } from '@core'
-import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
+import { useLearningPathTopic as _useLearningPathTopic } from '../LocalNav/LocalNav.hooks'
 import { DropdownLanguage } from '@components'
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
@@ -37,7 +35,7 @@ import { DropdownLanguage } from '@components'
  *  The "learningPaths" property is an array of objects that represent the available learning paths related to the current page.
  */
 export type MenuBarProps = {
-  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPathElement[] }
+  useLearningPathTopic?: () => { loading: boolean; topics: Topic[] }
 }
 
 /**
@@ -50,7 +48,7 @@ export type MenuBarProps = {
  *
  * @category Components
  */
-const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
+const MenuBar = ({ useLearningPathTopic = _useLearningPathTopic }: MenuBarProps) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
   const { addSnackbar } = useContext(SnackbarContext)
@@ -58,7 +56,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
   const { t } = useTranslation()
 
   //Application logic hooks
-  const { loading, topics, learningPaths } = useLearningPath()
+  const { loading, topics } = useLearningPathTopic()
   const reversedTopics: Topic[] = [...topics]
   reversedTopics.sort((a, b) => reversedTopics.indexOf(b) - reversedTopics.indexOf(a))
 
@@ -173,7 +171,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                     ) : (
                       //For every Topic the LearningPathElement is displayed under it.
                       <>
-                        {reversedTopics.map((topic, index) => (
+                        {reversedTopics.map((topic) => (
                           <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>
                             <Grid item xs={12} key={t(topic.name)}>
                               <Typography variant="h6">{t(topic.name)}</Typography>
