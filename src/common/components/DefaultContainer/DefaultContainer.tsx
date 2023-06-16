@@ -1,2 +1,2 @@
-import DefaultContainer from '@mui/material/Container/Container'
-export { DefaultContainer }
+import DefaultContainer from '@mui/material/Container'
+export { DefaultContainer as Container }

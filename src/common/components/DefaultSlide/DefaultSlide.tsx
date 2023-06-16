@@ -1,2 +1,2 @@
-import DefaultSlide from '@mui/material/Slide/Slide'
-export { DefaultSlide }
+import DefaultSlide from '@mui/material/Slide'
+export { DefaultSlide as Slide }

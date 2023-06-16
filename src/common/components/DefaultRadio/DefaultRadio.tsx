@@ -1,2 +1,2 @@
-import DefaultRadio from '@mui/material/Radio/Radio'
-export { DefaultRadio }
+import DefaultRadio from '@mui/material/Radio'
+export { DefaultRadio as Radio }

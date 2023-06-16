@@ -1,2 +1,2 @@
-import DefaultFormControl from '@mui/material/FormControl/FormControl'
-export { DefaultFormControl }
+import DefaultFormControl from '@mui/material/FormControl'
+export { DefaultFormControl as FormControl }

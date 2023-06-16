@@ -1,1 +1,1 @@
-export type { SelectChangeEvent as DefaultSelectChangeEvent } from '@mui/material/Select/Select'
+export type { SelectChangeEvent } from '@mui/material/Select/Select'

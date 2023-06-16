@@ -1,2 +1,2 @@
-import DefaultGrow from '@mui/material/Grow/Grow'
-export { DefaultGrow }
+import DefaultGrow from '@mui/material/Grow'
+export { DefaultGrow as Grow }

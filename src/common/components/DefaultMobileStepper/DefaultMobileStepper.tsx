@@ -1,2 +1,2 @@
-import DefaultMobileStepper from '@mui/material/MobileStepper/MobileStepper'
-export { DefaultMobileStepper }
+import DefaultMobileStepper from '@mui/material/MobileStepper'
+export { DefaultMobileStepper as MobileStepper }

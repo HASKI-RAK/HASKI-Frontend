@@ -1,2 +1,2 @@
-import DefaultStack from '@mui/material/Stack/Stack'
-export { DefaultStack }
+import DefaultStack from '@mui/material/Stack'
+export { DefaultStack as Stack }

@@ -1,2 +1,2 @@
-import DefaultListItemIcon from '@mui/material/ListItemIcon/ListItemIcon'
-export { DefaultListItemIcon }
+import DefaultListItemIcon from '@mui/material/ListItemIcon'
+export { DefaultListItemIcon as ListItemIcon }

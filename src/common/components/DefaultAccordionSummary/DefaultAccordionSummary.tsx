@@ -1,2 +1,2 @@
-import DefaultAccordionSummary from '@mui/material/AccordionSummary/AccordionSummary'
-export { DefaultAccordionSummary }
+import DefaultAccordionSummary from '@mui/material/AccordionSummary'
+export { DefaultAccordionSummary as AccordionSummary }

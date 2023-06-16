@@ -1,2 +1,2 @@
-import DefaultFormLabel from '@mui/material/FormLabel/FormLabel'
-export { DefaultFormLabel }
+import DefaultFormLabel from '@mui/material/FormLabel'
+export { DefaultFormLabel as FormLabel }

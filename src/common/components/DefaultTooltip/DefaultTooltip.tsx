@@ -1,2 +1,2 @@
-import DefaultTooltip from '@mui/material/Tooltip/Tooltip'
-export { DefaultTooltip }
+import DefaultTooltip from '@mui/material/Tooltip'
+export { DefaultTooltip as Tooltip }

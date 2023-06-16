@@ -1,2 +1,2 @@
-import DefaultTextField from '@mui/material/TextField/TextField'
-export { DefaultTextField }
+import DefaultTextField from '@mui/material/TextField'
+export { DefaultTextField as TextField }

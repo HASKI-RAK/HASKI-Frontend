@@ -1,2 +1,2 @@
-import DefaultFormHelperText from '@mui/material/FormHelperText/FormHelperText'
-export { DefaultFormHelperText }
+import DefaultFormHelperText from '@mui/material/FormHelperText'
+export { DefaultFormHelperText as FormHelperText }

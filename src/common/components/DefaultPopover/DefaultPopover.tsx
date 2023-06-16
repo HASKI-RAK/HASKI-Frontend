@@ -1,2 +1,2 @@
-import DefaultPopover from '@mui/material/Popover/Popover'
-export { DefaultPopover }
+import DefaultPopover from '@mui/material/Popover'
+export { DefaultPopover as Popover }

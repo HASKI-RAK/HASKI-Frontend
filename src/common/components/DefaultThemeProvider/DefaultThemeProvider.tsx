@@ -1,2 +1,2 @@
-import DefaultThemeProvider from '@mui/material/styles/ThemeProvider'
-export { DefaultThemeProvider }
+import { ThemeProvider as DefaultThemeProvider } from '@mui/material/styles'
+export { DefaultThemeProvider as ThemeProvider }
