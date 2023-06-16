@@ -1,9 +1,10 @@
+import { render, renderHook } from '@testing-library/react'
+import { useGlossaryList } from './GlossaryList.hooks'
+import GlossaryList from './GlossaryList'
 import '@testing-library/jest-dom'
-import { render } from '@testing-library/react'
-import { TestGlossaryListProps, TestGlossaryList } from './GlossaryList'
 
-describe('GlossaryList', () => {
-  const mockPropsNorm: TestGlossaryListProps = {
+describe('GlossaryList tests', () => {
+  const mockGlossaryListProps = {
     glossaryEntries: [
       {
         term: 'testTerm 1',
@@ -23,19 +24,79 @@ describe('GlossaryList', () => {
     expandedList: ['listItem 1', 'listItem 2', 'listItem 3'],
     setExpandedList: jest.fn()
   }
+  it('renders with input', () => {
+    const { getByText } = render(<GlossaryList {...mockGlossaryListProps} />)
 
-  test('renders without crashing', () => {
-    const { getByTestId } = render(<TestGlossaryList {...mockPropsNorm} />)
+    expect(getByText(mockGlossaryListProps.glossaryEntries[0].term)).toBeInTheDocument()
+    expect(getByText(mockGlossaryListProps.glossaryEntries[0].definition)).toBeInTheDocument()
+    expect(getByText(mockGlossaryListProps.glossaryEntries[0].sources)).toBeInTheDocument()
+    expect(getByText(mockGlossaryListProps.glossaryEntries[0].tags[0])).toBeInTheDocument()
+    expect(getByText(mockGlossaryListProps.glossaryEntries[0].tags[1])).toBeInTheDocument()
 
-    const glossaryEntriesAsString = mockPropsNorm.glossaryEntries
-      ?.map((entry) => {
-        const tagsAsString = entry.tags?.join('')
-        const sourcesAsString = entry.sources ? `pages.glossary.sources${entry.sources}` : ''
+    expect(getByText(mockGlossaryListProps.glossaryEntries[1].term)).toBeInTheDocument()
+    expect(getByText(mockGlossaryListProps.glossaryEntries[1].definition)).toBeInTheDocument()
+    expect(getByText(mockGlossaryListProps.glossaryEntries[1].sources)).toBeInTheDocument()
+    expect(getByText(mockGlossaryListProps.glossaryEntries[1].tags[0])).toBeInTheDocument()
+    expect(getByText(mockGlossaryListProps.glossaryEntries[1].tags[1])).toBeInTheDocument()
+  })
 
-        return `${entry.term}${tagsAsString}${entry.definition}${sourcesAsString}`
-      })
-      .join('')
+  it('renders without input', () => {
+    const { queryByText } = render(<GlossaryList />)
 
-    expect(getByTestId('GlossaryList').textContent?.length).toEqual(glossaryEntriesAsString?.length)
+    expect(queryByText(mockGlossaryListProps.glossaryEntries[0].term)).toEqual(null)
+    expect(queryByText(mockGlossaryListProps.glossaryEntries[0].definition)).toEqual(null)
+    expect(queryByText(mockGlossaryListProps.glossaryEntries[0].sources)).toEqual(null)
+    expect(queryByText(mockGlossaryListProps.glossaryEntries[0].tags[0])).toEqual(null)
+    expect(queryByText(mockGlossaryListProps.glossaryEntries[0].tags[1])).toEqual(null)
+
+    expect(queryByText(mockGlossaryListProps.glossaryEntries[1].term)).toEqual(null)
+    expect(queryByText(mockGlossaryListProps.glossaryEntries[1].definition)).toEqual(null)
+    expect(queryByText(mockGlossaryListProps.glossaryEntries[1].sources)).toEqual(null)
+    expect(queryByText(mockGlossaryListProps.glossaryEntries[1].tags[0])).toEqual(null)
+    expect(queryByText(mockGlossaryListProps.glossaryEntries[1].tags[1])).toEqual(null)
+  })
+
+  test('General functionality of GlossaryList hook', () => {
+    const { result } = renderHook(() => useGlossaryList())
+
+    expect(result.current).toStrictEqual({
+      filterByTags: expect.any(Function),
+      filterByIndexElement: expect.any(Function),
+      searchByQuery: expect.any(Function),
+      collapseAll: expect.any(Function),
+      expandAll: expect.any(Function)
+    })
+
+    const glossaryEntriesFilteredByTags = result.current.filterByTags(mockGlossaryListProps.glossaryEntries, [
+      'testTag 1-1'
+    ])
+    expect(glossaryEntriesFilteredByTags).toStrictEqual([mockGlossaryListProps.glossaryEntries[0]])
+
+    const glossaryEntriesFilteredByIndexElement = result.current.filterByIndexElement(
+      mockGlossaryListProps.glossaryEntries,
+      't'
+    )
+    expect(glossaryEntriesFilteredByIndexElement).toStrictEqual(mockGlossaryListProps.glossaryEntries)
+
+    const glossaryEntriesFilteredByFundamental = result.current.filterByIndexElement(
+      mockGlossaryListProps.glossaryEntries,
+      'pages.glossary.fundamentals'
+    )
+    expect(glossaryEntriesFilteredByFundamental).toStrictEqual([mockGlossaryListProps.glossaryEntries[0]])
+
+    const glossaryEntriesSearchedByQuery = result.current.searchByQuery(
+      mockGlossaryListProps.glossaryEntries,
+      'testSource 2'
+    )
+    expect(glossaryEntriesSearchedByQuery).toStrictEqual([mockGlossaryListProps.glossaryEntries[1]])
+
+    result.current.collapseAll(mockGlossaryListProps.setExpandedList)
+    expect(mockGlossaryListProps.setExpandedList).toHaveBeenCalledWith([])
+
+    result.current.expandAll(mockGlossaryListProps.setExpandedList, mockGlossaryListProps.glossaryEntries)
+    expect(mockGlossaryListProps.setExpandedList).toHaveBeenCalledWith([
+      mockGlossaryListProps.glossaryEntries[0].term,
+      mockGlossaryListProps.glossaryEntries[1].term
+    ])
   })
 })

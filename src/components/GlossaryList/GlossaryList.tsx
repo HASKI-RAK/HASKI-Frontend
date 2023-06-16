@@ -42,7 +42,7 @@ const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: Glossary
   ])
 
   return (
-    <div data-testid="GlossaryList">
+    <>
       {Array.from(glossaryEntryState).map((glossaryEntry, index) => (
         <GlossaryEntry
           key={glossaryEntry.term && glossaryEntry.term + index}
@@ -51,12 +51,8 @@ const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: Glossary
           {...glossaryEntry}
         />
       ))}
-    </div>
+    </>
   )
 }
-
-//for tests
-export type TestGlossaryListProps = GlossaryListProps
-export const TestGlossaryList = GlossaryList
 
 export default GlossaryList
