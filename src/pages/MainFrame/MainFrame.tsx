@@ -2,10 +2,8 @@ import { Outlet } from 'react-router-dom'
 import {
   DefaultBox as Box,
   DefaultDivider as Divider,
-  DefaultTypography as Typography,
   DefaultStack as Stack,
-  DefaultGrid as Grid,
-  DefaultContainer as Container
+  DefaultGrid as Grid
 } from '@common/components'
 import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from '@components'
 /**

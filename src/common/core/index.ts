@@ -6,6 +6,7 @@ import LearningElement from './LearningElement/LearningElement'
 import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
 import LearningPath from './LearningPath/LearningPath'
 import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
+import StudentLearningElement from './StudentLearningElement/StudentLearningElement'
 import Course from './Course/Course'
 /**
  * Holds all pure business logic. Does not rely on any other components.
@@ -18,6 +19,7 @@ export type {
   LearningElement,
   LearningPathTopic,
   LearningPath,
-  LearningPathLearningElement
+  LearningPathLearningElement,
+  StudentLearningElement
 }
 export type { LearningPathReturn } from './LearningPath/LearningPath'
