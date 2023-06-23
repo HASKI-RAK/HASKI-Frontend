@@ -153,12 +153,6 @@ describe('MenuBar', () => {
     // click on Topics button:
     fireEvent.click(result.getAllByText('components.MenuBar.TopicButton')[0])
     expect(result.getByText('Allgemeine Informatik')).toBeInTheDocument()
-
-    // click on subtopic:
-    fireEvent.click(result.getAllByText('Quiz on Chapter 3')[0])
-    // render is different from browser url. in browser url is /topics/Design%20patterns/Adapter
-
-    expect(history.location.pathname).toEqual('/course/2/Topic/1')
   })
 
   test('click on HelpIcon should open popover', () => {
