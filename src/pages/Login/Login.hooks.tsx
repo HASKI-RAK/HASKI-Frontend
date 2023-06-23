@@ -29,7 +29,6 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
   const navigate = useNavigate()
   const { addSnackbar } = useContext(SnackbarContext)
 
-
   // Login with username and password
   const onSubmitHandler = () => {
     params.setIsLoading(false)
@@ -47,7 +46,8 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
           //TODO 🍿 snackbar
           addSnackbar({ message: response.message, severity: 'error', autoHideDuration: 5000 })
         }
-      }).catch((error: string) => {
+      })
+      .catch((error: string) => {
         //TODO 🍿 snackbar
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
       })
@@ -58,18 +58,18 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
 
   // on mount, read search param 'nounce' and set it to state
   useEffect(() => {
-    postLogin({ nonce: params.nonce }).then((response) => {
-      // supply auth context
-      authcontext.setExpire(response.expiration)
-      // then redirect to home page
-      navigate('/', { replace: true })
-
-    }).catch((error: string) => {
-      //TODO 🍿 snackbar
-      addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
-      navigate('/login', { replace: true })
-    }
-    )
+    postLogin({ nonce: params.nonce })
+      .then((response) => {
+        // supply auth context
+        authcontext.setExpire(response.expiration)
+        // then redirect to home page
+        navigate('/', { replace: true })
+      })
+      .catch((error: string) => {
+        //TODO 🍿 snackbar
+        addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
+        navigate('/login', { replace: true })
+      })
   }, [])
 
   return {

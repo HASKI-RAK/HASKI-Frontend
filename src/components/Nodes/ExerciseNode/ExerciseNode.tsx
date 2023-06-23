@@ -6,8 +6,6 @@ import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import AssignmentLateIcon from '@mui/icons-material/AssignmentLate'
 
 export const ExerciseNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
-
-
   return (
     <Box
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}

@@ -333,20 +333,20 @@ const mapLearningPathToNodes = (
   const exerciseLearningElementParentNode =
     learningPathExercises.length > 0
       ? {
-        id: learningPathExercises[0].position.toString(),
-        data: { label: 'Übungen' },
-        type: 'GROUP',
-        position: {
-          x: 0,
-          y: 250 * (learningPathExercises[0].position - 1)
-        },
-        style: {
-          border: '1px solid ' + theme.palette.grey[500],
-          borderRadius: 8,
-          width: 300 * learningPathExercises.length + nodeOffsetX,
-          height: groupHeight
+          id: learningPathExercises[0].position.toString(),
+          data: { label: 'Übungen' },
+          type: 'GROUP',
+          position: {
+            x: 0,
+            y: 250 * (learningPathExercises[0].position - 1)
+          },
+          style: {
+            border: '1px solid ' + theme.palette.grey[500],
+            borderRadius: 8,
+            width: 300 * learningPathExercises.length + nodeOffsetX,
+            height: groupHeight
+          }
         }
-      }
       : null
 
   // Rest of learning elements
@@ -373,8 +373,8 @@ const mapLearningPathToNodes = (
           exerciseLearningElementParentNode && item.position < parseInt(exerciseLearningElementParentNode.id)
             ? 250 * (item.position - 1)
             : exerciseLearningElementParentNode
-              ? 250 * (item.position - exerciseLearningElementChildNodes.length) + groupHeight - 70
-              : 250 * (item.position - 1)
+            ? 250 * (item.position - exerciseLearningElementChildNodes.length) + groupHeight - 70
+            : 250 * (item.position - 1)
       },
       style: learningElementStyle
     }

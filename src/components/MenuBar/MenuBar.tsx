@@ -230,8 +230,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
               <IconButton
                 onClick={() => {
                   window.open('/files/Bedienungsanleitung_von_HASKI_Alpha.pdf', '_blank')
-                }
-                }>
+                }}>
                 <HelpIcon data-testid="HelpIcon" />
               </IconButton>
             </Tooltip>

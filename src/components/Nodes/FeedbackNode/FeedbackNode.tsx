@@ -5,7 +5,6 @@ import { Handle, NodeProps, Position } from 'reactflow'
 import { IFrameModal, LearningPathLearningElementNode } from '@components'
 import FeedbackIcon from '@mui/icons-material/Feedback'
 
-
 const FeedbackNodeMemo = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)

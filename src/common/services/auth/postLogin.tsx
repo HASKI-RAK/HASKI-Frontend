@@ -20,11 +20,12 @@ export const postLogin = async (params?: postLoginParams): Promise<LoginResponse
     headers: {
       'Content-Type': 'application/json'
     }
-  }).then((response) => response.json().then((data: LoginResponse & LoginRequestResponse) => {
-    if (response.ok) {
-      return { expiration: data.expiration }
-    }
-    throw new Error(data.error)
-  }
-  ))
+  }).then((response) =>
+    response.json().then((data: LoginResponse & LoginRequestResponse) => {
+      if (response.ok) {
+        return { expiration: data.expiration }
+      }
+      throw new Error(data.error)
+    })
+  )
 }

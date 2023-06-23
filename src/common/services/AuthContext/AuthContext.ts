@@ -7,10 +7,10 @@ export type AuthContextType = {
 }
 const AuthContext = createContext<AuthContextType>({
   isAuth: false,
-  logout: () => {
+  setExpire: () => {
     return
   },
-  setExpire: function (unixTimestamp: number) { // eslint-disable-line @typescript-eslint/no-unused-vars
+  logout: () => {
     return
   }
 })
