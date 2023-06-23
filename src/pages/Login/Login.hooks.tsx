@@ -34,19 +34,6 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
   const onSubmitHandler = () => {
     params.setIsLoading(false)
     addSnackbar({ message: t('components.Login.passwordError'), severity: 'success', autoHideDuration: 5000 })
-
-    // params.setIsLoading(true)
-    // postLoginCredentials()
-    //   .then((response) => {
-    //     if (response.status === 200) {
-    //       login()
-    //     }
-
-    //     //TODO catch and🍿 snackbar
-    //   })
-    //   .finally(() => {
-    //     params.setIsLoading(false)
-    //   })
   }
 
   const onMoodleLogin = () => {
@@ -83,7 +70,7 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
       navigate('/login', { replace: true })
     }
     )
-  }, [addSnackbar, authcontext, navigate, params.nonce])
+  }, [])
 
   return {
     onSubmit: onSubmitHandler,

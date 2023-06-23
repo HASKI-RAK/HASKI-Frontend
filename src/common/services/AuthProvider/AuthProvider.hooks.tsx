@@ -16,7 +16,7 @@ const useAuthProvider = (): AuthContextType => {
   // check UNIX timestamp against current time in seconds and return true if the token is still valid
   const isAuth = useMemo(() => {
     const now = Math.floor(Date.now() / 1000)
-    if (expiration && expiration < now) {
+    if (expiration < now) {
       log.warn('isAuth. Expired: ', expiration, now)
       return false
     }
