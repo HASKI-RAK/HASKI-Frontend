@@ -1,9 +1,10 @@
 import '@testing-library/jest-dom'
-import { postLogin, LoginResponse } from './postLogin'
+import { postLogin, LoginResponse, LoginRequestResponse } from './postLogin'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
-    json: () => Promise.resolve<LoginResponse>({ expiration: 0 }),
+    json: () => Promise.resolve<LoginResponse & LoginRequestResponse>({ expiration: 0, status: 200 }),
+    ok: true,
     status: 200,
     message: 'OK'
   })

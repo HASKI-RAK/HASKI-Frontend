@@ -3,7 +3,7 @@ export type LoginResponse = {
   expiration: number
 }
 
-type LoginRequestResponse = {
+export type LoginRequestResponse = {
   status: number
   error?: string
 }
