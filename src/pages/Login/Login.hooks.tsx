@@ -61,7 +61,7 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
     postLogin({ nonce: params.nonce })
       .then((response) => {
         // supply auth context
-        authcontext.setExpire(response.expiration)
+        authContext.setExpire(response.expiration)
         // then redirect to home page
         navigate('/', { replace: true })
       })
