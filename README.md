@@ -43,8 +43,8 @@ LOG_LEVEL="debug"
 ### Code style
 
 We use [ESLint](https://eslint.org/) to enforce a consistent code style. A .prettierrc file is also included to format the code automatically.
-Run `yarn lint` to check for errors. You can also use `yarn lint --fix` to automatically fix some of the errors.
-It also runs `unimported` to check for unused imports. You will be prompted to install this package if you run `yarn lint` for the first time.
+Run `yarn lint` to check for errors.
+It also runs `unimported` to check for unused imports. You will be prompted to install this package if you run `yarn lint` for the first time. You can run `yarn lint --fix` to fix some of the errors automatically.
 
 ### Testing
 
