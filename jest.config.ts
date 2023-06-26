@@ -33,7 +33,7 @@ const config: Config.InitialOptions = {
     'node_modules/variables/.+\\.(j|t)sx?$': 'ts-jest'
   },
   transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$', 'node_modules/(?!variables/.*)'],
-  setupFilesAfterEnv: ['<rootDir>/__mocks__/jestSetup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/__mocks__/jestSetup.ts']
 }
 
 export default config

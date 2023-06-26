@@ -15,12 +15,11 @@ describe('Test Authcontext', () => {
     const context = useContext(AuthContext)
     return (
       <>
-        {context.isAuth ? <button onClick={() =>
-          context.logout()
-        }>Logout</button> :
-          <button onClick={() =>
-            context.setExpire(Math.round(new Date().getTime() / 1000) + 1000)
-          }>Login</button>}
+        {context.isAuth ? (
+          <button onClick={() => context.logout()}>Logout</button>
+        ) : (
+          <button onClick={() => context.setExpire(Math.round(new Date().getTime() / 1000) + 1000)}>Login</button>
+        )}
       </>
     )
   }
