@@ -20,6 +20,6 @@ export const getLogout = async (): Promise<RequestResponse> => {
     }
   }
   if (data && data.status)
-    return { status: response.status, message: response.statusText, json: data } as RequestResponse
+    return { status: response.status, message: response.statusText, json: data }
   else throw new Error('Unknown error during data parsing')
 }

@@ -1,5 +1,6 @@
 /**
  * Reusable service calls go here.
+ * Dont forget to mock them in jestSetup.ts
  */
 export { AuthContext } from './AuthContext'
 export type { AuthContextType } from './AuthContext'
