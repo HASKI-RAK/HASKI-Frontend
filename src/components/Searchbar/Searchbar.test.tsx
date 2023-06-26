@@ -1,5 +1,5 @@
-import Searchbar, { SearchbarProps, debouncedSearchQuery } from './Searchbar'
 import { fireEvent, render, act } from '@testing-library/react'
+import Searchbar, { debouncedSearchQuery } from './Searchbar'
 import { ChangeEvent } from 'react'
 import '@testing-library/jest-dom'
 
@@ -12,44 +12,37 @@ afterEach(() => {
 })
 
 describe('Searchbar tests', () => {
-  const mockPropsNorm: SearchbarProps = {
+  const mockSearchbarProps = {
     label: 'testLabel',
     setSearchQuery: jest.fn(),
     timeout: 1000
   }
 
-  it('renders without crashing', () => {
-    const { getAllByText } = render(<Searchbar {...mockPropsNorm} />)
-    expect(getAllByText(mockPropsNorm.label!).length).toEqual(2)
+  it('renders without input', () => {
+    const { getByDisplayValue } = render(<Searchbar />)
+    expect(getByDisplayValue('')).toBeInTheDocument()
   })
 
-  test('Searchbar renders without input', () => {
-    const { getByTestId } = render(<Searchbar />)
-    const searchbar = getByTestId('searchbar')
-    expect(searchbar).toBeInTheDocument()
+  it('renders with input', () => {
+    const { getAllByText } = render(<Searchbar {...mockSearchbarProps} />)
+    expect(getAllByText(mockSearchbarProps.label).length).toEqual(2)
   })
 
-  test('query has changed', () => {
-    const { getByRole } = render(<Searchbar {...mockPropsNorm} />)
+  test('search query has changed', () => {
+    const { getByRole } = render(<Searchbar {...mockSearchbarProps} />)
     const searchbarInput = getByRole('textbox')
 
     expect(setTimeout).toHaveBeenCalledTimes(0)
-
     fireEvent.change(searchbarInput, { target: { value: 'testValue' } })
-
-    expect(mockPropsNorm.setSearchQuery).toHaveBeenCalledTimes(0)
-
-    jest.advanceTimersByTime(mockPropsNorm.timeout!)
-
+    expect(mockSearchbarProps.setSearchQuery).toHaveBeenCalledTimes(0)
+    jest.advanceTimersByTime(mockSearchbarProps.timeout)
     expect(setTimeout).toHaveBeenCalledTimes(1)
-    expect(mockPropsNorm.setSearchQuery).toHaveBeenCalledTimes(1)
-    expect(mockPropsNorm.setSearchQuery).toHaveBeenCalledWith('testValue')
+    expect(mockSearchbarProps.setSearchQuery).toHaveBeenCalledTimes(1)
+    expect(mockSearchbarProps.setSearchQuery).toHaveBeenCalledWith('testValue')
   })
 
   test('debounced search query function', () => {
-    render(<Searchbar {...mockPropsNorm} />)
-
-    const mockEvent: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> = {
+    const mockEvent = {
       target: {
         value: 'testValue'
       }
@@ -59,9 +52,11 @@ describe('Searchbar tests', () => {
 
     const mockDebouncedSearchQuery = debouncedSearchQuery(
       mockEvent,
-      mockPropsNorm.setSearchQuery,
-      mockPropsNorm.timeout
+      mockSearchbarProps.setSearchQuery,
+      mockSearchbarProps.timeout
     )
+
+    render(<Searchbar {...mockSearchbarProps} />)
 
     act(() => {
       mockDebouncedSearchQuery()
