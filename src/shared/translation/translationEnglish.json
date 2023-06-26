@@ -1,5 +1,9 @@
 {
   "Back": "Back",
+  "components.DropdownLanguage.ChangeFailure": "An error occurred while changing language settings",
+  "components.DropdownLanguage.ChangeSuccess": "Language changed successfully",
+  "components.LocalNav.ErrorFetchingTopics": "Course topics could not be fetched",
+  "components.LocalNav.ErrorServerResponse": "No response from server while trying to fetch course topics",
   "components.Login.login": "Login",
   "components.Login.orLoginWithMoodle": "or login with Moodle",
   "components.Login.password": "Password",

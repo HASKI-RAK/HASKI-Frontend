@@ -2,6 +2,8 @@
 import { DefaultSelect as Select } from '@common/components'
 import { MenuItem } from '@mui/material'
 import log from 'loglevel'
+import {useContext} from "react";
+import {SnackbarContext} from "@services";
 
 /**
  * DropdownLanguage is a dropdown menu that allows the user to change the language of the application.
@@ -37,6 +39,10 @@ jest.mock('react-i18next', () => ({
  * @returns {JSX.Element} - The DropdownLanguage component.
  */
 export const DropdownLanguage = () => {
+    //snackbar
+    const { addSnackbar } = useContext(SnackbarContext)
+    const { t } = useTranslation()
+
   log.setLevel('error')
   const { i18n } = useTranslation()
   const startingLanguage = localStorage.getItem('i18nextLng') as string
@@ -45,8 +51,10 @@ export const DropdownLanguage = () => {
       i18n.changeLanguage(e.target.value)
       log.trace('The language was changed to: ' + e.target.value)
       localStorage.setItem('i18nextLng', e.target.value)
+        addSnackbar({severity: 'success', message: t('components.DropdownLanguage.ChangeSuccess'), autoHideDuration: 3000})
     } catch (e: unknown) {
       log.error('The language could not be changed. Error Message: ' + e)
+        addSnackbar({severity: 'error', message: t('components.DropdownLanguage.ChangeFailure'), autoHideDuration: 5000})
     }
   }
 

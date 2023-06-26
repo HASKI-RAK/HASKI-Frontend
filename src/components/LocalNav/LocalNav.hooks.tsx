@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
-import { getCourseTopics, getElementLearningPath, LearningPath, Topic } from '@services'
+import {useContext, useEffect, useState} from 'react'
+import {getCourseTopics, getElementLearningPath, LearningPath, SnackbarContext, Topic} from '@services'
 import log from 'loglevel'
+import {useTranslation} from "react-i18next";
 
 export const getSortedLearningPath = async (data: Topic[]): Promise<LearningPath[]> => {
   const promises = data.map((topic) => getElementLearningPath(topic.id))
@@ -19,6 +20,10 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
   const [topics, setTopics] = useState<Topic[]>([])
   const [learningPaths, setLearningPaths] = useState<LearningPath[]>([])
 
+  //snackbar
+  const { addSnackbar } = useContext(SnackbarContext)
+  const { t } = useTranslation()
+
   const effect = async () => {
     setLoading(true)
     try {
@@ -29,10 +34,12 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
         setLearningPaths(dataLearningPath)
       } else {
         // some error occurred
+        addSnackbar({severity: 'error', message: t('components.LocalNav.ErrorServerResponse'), autoHideDuration: 5000})
         setLoading(false)
       }
     } catch (error) {
       log.error(error)
+      addSnackbar({severity: 'error', message: t('components.LocalNav.ErrorFetchingTopics'), autoHideDuration: 5000})
       throw error
     } finally {
       setLoading(false)
@@ -42,6 +49,7 @@ export const useLearningPath = (): { loading: boolean; topics: Topic[]; learning
   useEffect(() => {
     effect().catch(() => {
       log.error('An error occurred while fetching course topics in LocalNav.hooks')
+      addSnackbar({severity: 'error', message: t('components.LocalNav.ErrorFetchingTopics'), autoHideDuration: 5000})
     })
   }, [])
 

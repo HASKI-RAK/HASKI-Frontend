@@ -1,5 +1,9 @@
 {
   "Back": "Zurück",
+  "components.DropdownLanguage.ChangeFailure": "Beim Anpassen der Spracheinstellungen ist ein Fehler aufgetreten",
+  "components.DropdownLanguage.ChangeSuccess": "Sprachumstellung erfolgreich",
+  "components.LocalNav.ErrorFetchingTopics": "Bereitstellung der Themenbereiche schlug fehl",
+  "components.LocalNav.ErrorServerResponse": "Keine Antwort des Servers beim Abrufen der Themenbereiche",
   "components.Login.login": "Anmelden",
   "components.Login.orLoginWithMoodle": "oder mit Moodle anmelden",
   "components.Login.password": "Passwort",
