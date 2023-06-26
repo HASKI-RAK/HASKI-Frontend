@@ -19,8 +19,8 @@ export type SearchbarProps = {
 }
 
 /**
- * debouncedSearchQuery presents a hook that can be used to debounce a query by a timeout before it gets written into a state.
- * debouncedSearchQuery can be used as a hook on in a component.
+ * debouncedSearchQuery presents a function that can be used to debounce a query by a timeout before it gets written into a state.
+ * debouncedSearchQuery can be used as a function in a component.
  * @param props - Props containing a change event, a function to set the search query and a timeout.
  * @returns {() => void} - The function thats clears the timeout.
  * @category Hooks
