@@ -11,7 +11,7 @@ import {
   Imprint,
   Topic,
   CoursePage,
-  PageNotFound,
+  PageNotFound
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { HaskiTheme } from '@utils'

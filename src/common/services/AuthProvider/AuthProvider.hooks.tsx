@@ -9,20 +9,22 @@ const useAuthProvider = (): AuthContextType => {
   const setStoreExpire = usePersistedStore((state) => state.setExpire)
 
   // Called by components which are part of login. Sets the auth state to true.
-  const setExpire = useCallback((expire: number) => {
-    setStoreExpire(expire)
-  }, [setStoreExpire])
+  const setExpire = useCallback(
+    (expire: number) => {
+      setStoreExpire(expire)
+    },
+    [setStoreExpire]
+  )
 
   // check UNIX timestamp against current time in seconds and return true if the token is still valid
   const isAuth = useMemo(() => {
     const now = Math.floor(Date.now() / 1000)
-    if (expiration && expiration < now) {
+    if (expiration < now) {
       log.warn('isAuth. Expired: ', expiration, now)
       return false
     }
     log.debug('isAuth. Not expired: ', expiration, now)
     return true
-
   }, [expiration])
 
   const logout = useCallback(() => {
