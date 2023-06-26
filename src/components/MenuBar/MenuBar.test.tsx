@@ -3,7 +3,7 @@ import { fireEvent, render } from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
-import { Topic, LearningElement, LearningPath } from '@services'
+import { Topic, LearningElement, LearningPath, AuthContext } from '@services'
 
 const topics: Topic[] = []
 const learningElementPath: LearningPath[] = []
@@ -298,5 +298,161 @@ describe('MenuBar', () => {
     fireEvent.mouseDown(document.body)
     const userMenu = queryByTestId('menu-appbar')
     expect(userMenu).toBeNull()
+  })
+
+
+  it('should set anchorElTopics to null', async () => {
+    const history = createMemoryHistory({ initialEntries: ['/home'] })
+
+    const exampleLearningElement1: LearningElement = {
+      activity_type: 'Quiz',
+      classification: 'Formative',
+      created_at: '2023-04-19T10:30:00.000Z',
+      created_by: 'John Doe',
+      id: 123,
+      last_updated: '2023-04-20T15:45:00.000Z',
+      lms_id: 456,
+      name: 'Quiz on Chapter 3',
+      student_learning_element: null,
+      university: 'ABC University'
+    }
+
+    const exampleLearningElement2: LearningElement = {
+      activity_type: 'Quiz',
+      classification: 'Formative',
+      created_at: '2023-04-19T10:30:00.000Z',
+      created_by: 'John Doe',
+      id: 123,
+      last_updated: '2023-04-20T15:45:00.000Z',
+      lms_id: 456,
+      name: 'Quiz on Chapter 5',
+      student_learning_element: null,
+      university: 'ABC University'
+    }
+
+    const topics: Topic[] = [
+      {
+        contains_le: true,
+        created_at: '2021-09-01T12:00:00.000Z',
+        created_by: 'dimitri',
+        id: 1,
+        is_topic: true,
+        last_updated: '2021-09-01T12:00:00.000Z',
+        lms_id: 1,
+        name: 'Allgemeine Informatik',
+        parent_id: 1,
+        student_topic: {
+          done: false,
+          done_at: null,
+          id: 1,
+          student_id: 1,
+          topic_id: 1,
+          visits: []
+        },
+        university: 'HS-KE'
+      },
+      {
+        contains_le: true,
+        created_at: '2021-09-01T12:00:00.000Z',
+        created_by: 'dimitri',
+        id: 2,
+        is_topic: true,
+        last_updated: '2021-09-01T12:00:00.000Z',
+        lms_id: 1,
+        name: 'Zustand',
+        parent_id: 1,
+        student_topic: {
+          done: false,
+          done_at: null,
+          id: 1,
+          student_id: 1,
+          topic_id: 1,
+          visits: []
+        },
+        university: 'HS-KE'
+      }
+    ]
+
+    const learningElementPath: LearningPath[] = [
+      {
+        based_on: 'some-Algorithm',
+        calculated_on: 'today',
+        course_id: 1,
+        id: 1,
+        path: [
+          {
+            id: 1,
+            learning_element: exampleLearningElement1,
+            learning_element_id: 1,
+            learning_path_id: 1,
+            position: 1,
+            recommended: true
+          }
+        ]
+      },
+      {
+        based_on: 'some-Algorithm',
+        calculated_on: 'today',
+        course_id: 1,
+        id: 2,
+        path: [
+          {
+            id: 2,
+            learning_element: exampleLearningElement2,
+            learning_element_id: 1,
+            learning_path_id: 1,
+            position: 1,
+            recommended: true
+          }
+        ]
+      }
+    ]
+
+    const mockUseLearningPath = jest.fn().mockReturnValue({
+      loading: false,
+      topics: topics,
+      learningPaths: learningElementPath
+    })
+
+    const props: MenuBarProps = {
+      useLearningPathTopic: mockUseLearningPath
+    }
+
+    const {getAllByText, getByText} = render(
+        <Router location={history.location} navigator={history}>
+          <MenuBar {...props} />
+        </Router>
+    )
+    // click on Topics button:
+    fireEvent.click(getAllByText('components.MenuBar.TopicButton')[0])
+    expect(getByText('Allgemeine Informatik')).toBeInTheDocument()
+
+    fireEvent.click(getAllByText('Allgemeine Informatik')[0])
+    expect(history.location.pathname).toBe('/course/2/topic/1')
+    //fireEvent.keyDown(getAllByText('components.MenuBar.TopicButton')[0], {key: "esc",})
+    //fireEvent.click(getAllByText('components.MenuBar.TopicButton')[0])
+
+    //fireEvent.click(document.body); // Simulate clicking outside the Popover
+    //await userEvent.keyboard('{esc}');
+
+    //await waitFor(() => expect(result.getByText('Allgemeine Informatik')).not.toBeInTheDocument());
+  });
+
+
+  it('navigates to logout page', async () => {
+    const history = createMemoryHistory({ initialEntries: ['/home'] })
+
+    const {getAllByText, getByTestId} = render(
+      <AuthContext.Provider value={{ isAuth: true, setIsAuth: jest.fn(), logout: jest.fn() }}>
+        <Router location={history.location} navigator={history}>
+          <MenuBar />
+        </Router>
+      </AuthContext.Provider>
+    )
+    // click on Topics button:
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getAllByText('components.MenuBar.Profile.Logout')[0])
+    expect(history.location.pathname).toEqual('/login')
   })
 })
