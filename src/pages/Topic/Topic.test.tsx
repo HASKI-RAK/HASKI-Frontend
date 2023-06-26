@@ -19,7 +19,7 @@ describe('Topic tests', () => {
     const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
     render(
       <Router location={history.location} navigator={history}>
-        <AuthContext.Provider value={{ isAuth: false, setIsAuth: jest.fn(), logout: jest.fn() }}>
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
           <Topic />
         </AuthContext.Provider>
       </Router>
@@ -32,7 +32,7 @@ describe('Topic tests', () => {
     const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
     render(
       <Router location={history.location} navigator={history}>
-        <AuthContext.Provider value={{ isAuth: true, setIsAuth: jest.fn(), logout: jest.fn() }}>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Topic />
         </AuthContext.Provider>
       </Router>
