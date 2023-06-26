@@ -6,7 +6,7 @@ import { useEffect, useState, useContext } from 'react'
 import { IFrameModal, nodeTypes } from '@components'
 import { useTheme } from '@mui/material' // TODO: DI?
 import { AuthContext } from '@services'
-import useBoundStore from '@store'
+import { useStore, usePersistedStore } from '@store'
 
 export type TopicProps = {
   useTopic?: (params?: useTopicHookParams) => TopicHookReturn
@@ -20,8 +20,8 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   const { courseId, topicId } = useParams()
   const { url, title, isOpen, handleClose, mapNodes } = useTopic()
-  const fetchUser = useBoundStore((state) => state.fetchUser)
-  const fetchLearningPath = useBoundStore((state) => state.fetchLearningPath)
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const fetchLearningPath = useStore((state) => state.fetchLearningPath)
 
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
