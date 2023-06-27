@@ -58,7 +58,7 @@ const Searchbar = (props: SearchbarProps) => {
   )
 
   return (
-    <Typography variant="h4" data-testid="searchbar">
+    <Typography variant="h4">
       <TextField
         id="searchbar"
         fullWidth

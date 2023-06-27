@@ -64,7 +64,7 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
   const [expandedList, setExpandedList] = useState<string[]>([])
 
   // TODO: Refactor
-  const setSel = (input?: string | string[]) => {
+  const setSelectedTagsWrapper = (input?: string | string[]) => {
     if (input === undefined) {
       setSelectedTags([])
     } else if (typeof input === 'string') {
@@ -74,61 +74,58 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
     }
   }
 
-  // TODO: Div verschwindibus
   return (
-    <div data-testid="GlossaryContent">
-      <Grid container columnSpacing={1} rowSpacing={1}>
-        <Grid item xs={12} sm={12} sx={{ mt: '1rem', mb: '1rem' }}>
-          <Typography variant="h3">{t('pages.glossary.title')}</Typography>
-        </Grid>
-        <Grid item xs={8} sm={6}>
-          <Searchbar label={t('pages.glossary.search')} setSearchQuery={setSearchQuery} timeout={100} />
-        </Grid>
-        <Grid item xs={4} sm={6}>
-          <Filter
-            label={t('pages.glossary.filter')}
-            options={tags}
-            selectedOptions={selectedTags}
-            setSelectedOptions={setSel}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-            {useMemo(
-              () => (
-                <GlossaryIndex
-                  orientation="horizontal"
-                  indexElements={indexElements}
-                  selectedIndexElement={selectedIndexElement}
-                  setSelectedIndexElement={setSelectedIndexElement}
-                />
-              ),
-              [indexElements, selectedIndexElement, setSelectedIndexElement]
-            )}
-          </Box>
-        </Grid>
-        <Grid item xs={12} sm={12} sx={{ mt: '0.5rem', mb: '0.5rem' }}>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-            <Button variant="outlined" onClick={() => collapseAll(setExpandedList)}>
-              {t('pages.glossary.collapseAll')}
-            </Button>
-            <Button variant="outlined" onClick={() => expandAll(setExpandedList, glossaryEntries)}>
-              {t('pages.glossary.expandAll')}
-            </Button>
-          </Box>
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <GlossaryList
-            glossaryEntries={glossaryEntries}
-            expandedList={expandedList}
-            setExpandedList={setExpandedList}
-            searchQuery={searchQuery}
-            selectedIndexElement={selectedIndexElement}
-            selectedTags={selectedTags}
-          />
-        </Grid>
+    <Grid container columnSpacing={1} rowSpacing={1}>
+      <Grid item xs={12} sm={12} sx={{ mt: '1rem', mb: '1rem' }}>
+        <Typography variant="h3">{t('pages.glossary.title')}</Typography>
       </Grid>
-    </div>
+      <Grid item xs={8} sm={6}>
+        <Searchbar label={t('pages.glossary.search')} setSearchQuery={setSearchQuery} timeout={100} />
+      </Grid>
+      <Grid item xs={4} sm={6}>
+        <Filter
+          label={t('pages.glossary.filter')}
+          options={tags}
+          selectedOptions={selectedTags}
+          setSelectedOptions={setSelectedTagsWrapper}
+        />
+      </Grid>
+      <Grid item xs={12} sm={12}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+          {useMemo(
+            () => (
+              <GlossaryIndex
+                orientation="horizontal"
+                indexElements={indexElements}
+                selectedIndexElement={selectedIndexElement}
+                setSelectedIndexElement={setSelectedIndexElement}
+              />
+            ),
+            [indexElements, selectedIndexElement, setSelectedIndexElement]
+          )}
+        </Box>
+      </Grid>
+      <Grid item xs={12} sm={12} sx={{ mt: '0.5rem', mb: '0.5rem' }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+          <Button variant="outlined" onClick={() => collapseAll(setExpandedList)}>
+            {t('pages.glossary.collapseAll')}
+          </Button>
+          <Button variant="outlined" onClick={() => expandAll(setExpandedList, glossaryEntries)}>
+            {t('pages.glossary.expandAll')}
+          </Button>
+        </Box>
+      </Grid>
+      <Grid item xs={12} sm={12}>
+        <GlossaryList
+          glossaryEntries={glossaryEntries}
+          expandedList={expandedList}
+          setExpandedList={setExpandedList}
+          searchQuery={searchQuery}
+          selectedIndexElement={selectedIndexElement}
+          selectedTags={selectedTags}
+        />
+      </Grid>
+    </Grid>
   )
 }
 
