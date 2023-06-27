@@ -24,8 +24,7 @@ const CoursePage = () => {
       log.log('CoursePage timeout')
       navigate('/login')
     }, 5000)
-    if (authcontext.isAuth)
-      clearTimeout(preventEndlessLoading)
+    if (authcontext.isAuth) clearTimeout(preventEndlessLoading)
 
     return () => {
       clearTimeout(preventEndlessLoading)

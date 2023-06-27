@@ -29,30 +29,10 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
   const navigate = useNavigate()
   const { addSnackbar } = useContext(SnackbarContext)
 
-  const login = useCallback(() => {
-    // supply auth context
-    authcontext.setIsAuth(true)
-    // then redirect to home page
-    navigate('/', { replace: true })
-  }, [authcontext, navigate])
-
   // Login with username and password
   const onSubmitHandler = () => {
     params.setIsLoading(false)
     addSnackbar({ message: t('components.Login.passwordError'), severity: 'success', autoHideDuration: 5000 })
-
-    // params.setIsLoading(true)
-    // postLoginCredentials()
-    //   .then((response) => {
-    //     if (response.status === 200) {
-    //       login()
-    //     }
-
-    //     //TODO catch and🍿 snackbar
-    //   })
-    //   .finally(() => {
-    //     params.setIsLoading(false)
-    //   })
   }
 
   const onMoodleLogin = () => {
@@ -62,9 +42,14 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
         if (response.status === 200) {
           // 👇️ redirects to Moodle LTI launch acticity
           window.location.replace(response.message)
+        } else {
+          //TODO 🍿 snackbar
+          addSnackbar({ message: response.message, severity: 'error', autoHideDuration: 5000 })
         }
-
-        //TODO catch and🍿 snackbar
+      })
+      .catch((error: string) => {
+        //TODO 🍿 snackbar
+        addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
       })
       .finally(() => {
         params.setIsLoading(false)
@@ -73,13 +58,19 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
 
   // on mount, read search param 'nounce' and set it to state
   useEffect(() => {
-    postLogin({ nonce: params.nonce }).then((response) => {
-      if (response.status === 200) login()
-      else navigate('/login', { replace: true })
-
-      //TODO 🍿 snackbar
-    })
-  }, [login, navigate, params.nonce])
+    postLogin({ nonce: params.nonce })
+      .then((response) => {
+        // supply auth context
+        authcontext.setExpire(response.expiration)
+        // then redirect to home page
+        navigate('/', { replace: true })
+      })
+      .catch((error: string) => {
+        //TODO 🍿 snackbar
+        addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
+        navigate('/login', { replace: true })
+      })
+  }, [])
 
   return {
     onSubmit: onSubmitHandler,

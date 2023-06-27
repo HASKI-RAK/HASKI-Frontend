@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Topic } from '@services'
 import { LearningPathElement } from '@core'
 import log from 'loglevel'
-import useBoundStore from '@store'
+import { useStore, usePersistedStore} from '@store'
 import { LearningPathElementReturn } from '@core'
 
 const initialLearningPathElement: LearningPathElement = {
@@ -54,8 +54,8 @@ export const getSortedLearningPath = async (
 export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } => {
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
-  const fetchUser = useBoundStore((state) => state.fetchUser)
-  const fetchLearningPathTopic = useBoundStore((state) => state.fetchLearningPathTopic)
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
 
   const effect = async () => {
     setLoading(true)
@@ -85,8 +85,8 @@ export const useLearningPathElement = (
 ): { loadingElements: boolean; learningPaths: LearningPathElement } => {
   const [loadingElements, setLoadingElements] = useState(true)
   const [learningPaths, setLearningPaths] = useState<LearningPathElement>(initialLearningPathElement)
-  const fetchUser = useBoundStore((state) => state.fetchUser)
-  const fetchLearningPathElement = useBoundStore((state) => state.fetchLearningPathElement)
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const fetchLearningPathElement = useStore((state) => state.fetchLearningPathElement)
 
   const effect = async () => {
     setLoadingElements(true)

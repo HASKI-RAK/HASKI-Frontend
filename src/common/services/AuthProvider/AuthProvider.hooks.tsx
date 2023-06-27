@@ -1,51 +1,47 @@
-import { useState, useEffect, useMemo, useCallback, useContext } from 'react'
-import { getLoginStatus, getLogout, SnackbarContext } from '@services'
-import { useTranslation } from 'react-i18next'
+import { useMemo, useCallback } from 'react'
+import { AuthContextType, getLogout } from '@services'
+import { usePersistedStore } from '@store'
+import log from 'loglevel'
 
-const useAuthProvider = () => {
+const useAuthProvider = (): AuthContextType => {
   // State data
-  const [isAuth, setIsAuth] = useState(false)
+  const expiration = usePersistedStore((state) => state.expire)
+  const setStoreExpire = usePersistedStore((state) => state.setExpire)
 
-  // UX
-  const { t } = useTranslation()
+  // Called by components which are part of login. Sets the auth state to true.
+  const setExpire = useCallback(
+    (expire: number) => {
+      setStoreExpire(expire)
+    },
+    [setStoreExpire]
+  )
+
+  // check UNIX timestamp against current time in seconds and return true if the token is still valid
+  const isAuth = useMemo(() => {
+    const now = Math.floor(Date.now() / 1000)
+    if (expiration < now) {
+      log.warn('isAuth. Expired: ', expiration, now)
+      return false
+    }
+    log.debug('isAuth. Not expired: ', expiration, now)
+    return true
+  }, [expiration])
 
   const logout = useCallback(() => {
     getLogout().then((response) => {
       if (response.status === 200) {
-        setIsAuth(false)
+        log.debug('logout successful')
+        setExpire(0)
         //addSnackbar({ message: t('services.AuthProvider.logout'), severity: 'success', autoHideDuration: 5000 })
       }
     })
-  }, [])
+  }, [setExpire])
 
-  // Side effects
-  useEffect(() => {
-    getLoginStatus()
-      .then((response) => {
-        // When the user is logged in, the backend will return 200, otherwise 401 and clear the cookie
-        if (response.status === 200) {
-          setIsAuth(true)
-        } else if (response.status === 403) {
-          setIsAuth(false)
-          // addSnackbar({
-          //   message: t('services.AuthProvider.cookienotfound'),
-          //   severity: 'error',
-          //   autoHideDuration: 5000
-          // })
-        } else {
-          setIsAuth(false)
-        }
-      })
-      .catch(() => {
-        // addSnackbar({
-        //   message: t('services.AuthProvider.connectivityerror'),
-        //   severity: 'error',
-        //   autoHideDuration: 5000
-        // })
-      })
-  }, [])
-
-  return useMemo(() => ({ isAuth, setIsAuth, logout }), [isAuth, logout])
+  return {
+    isAuth,
+    setExpire,
+    logout
+  }
 }
 
 export { useAuthProvider }

@@ -5,19 +5,16 @@ import {
   Home,
   ThemePresentation,
   Login,
-  Dashboard,
   PrivacyPolicy,
   ProjectDescription,
   ProjectInformation,
   Imprint,
   Topic,
   CoursePage,
-  PageNotFound,
+  PageNotFound
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
-import { logBuffer } from '@shared'
 import { HaskiTheme } from '@utils'
-logBuffer()
 
 /**
  * App component.
@@ -41,7 +38,6 @@ const App = () => (
               <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
               <Route path="/theme" element={<ThemePresentation />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />
               <Route path="/projectinformation" element={<ProjectInformation />} />
               <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />

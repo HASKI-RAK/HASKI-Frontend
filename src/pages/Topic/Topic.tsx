@@ -5,12 +5,12 @@ import log from 'loglevel'
 import { useEffect, useState, useContext, useCallback, useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Node, Edge, MiniMap, Controls, Background, Handle, NodeProps, Position } from 'reactflow'
-import useBoundStore from '@store'
 import { AuthContext } from '@services'
-import StudentLearningElement from 'src/common/core/StudentLearningElement/StudentLearningElement'
+import { StudentLearningElement } from '@core'
 import { useTranslation } from 'react-i18next'
 import 'reactflow/dist/style.css'
 import { DefaultSkeleton as Skeleton } from '@common/components'
+import { usePersistedStore, useStore } from '@store'
 
 const _useTopic = () => {
   console.log('useTopic')
@@ -20,7 +20,7 @@ type TopicProps = {
   useTopic?: typeof _useTopic
 }
 
-// TODO URL Stuktur übelrgeen. bzswp. localhost:3000/Topic?Topic=1
+// TODO URL Stuktur übelrgeen. bzswp. localhost:3000/topic?topic=1
 // Topic Page - TODO Component extract
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialNodes, setInitialNodes] = useState<Node[]>()
@@ -34,8 +34,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [title, setTitle] = useState('')
   const [isOpen, setIsOpen] = useState(false)
 
-  const fetchUser = useBoundStore((state) => state.fetchUser)
-  const fetchLearningPath = useBoundStore((state) => state.fetchLearningPathElement)
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const fetchLearningPath = useStore((state) => state.fetchLearningPathElement)
 
   const handleOpen = useMemo(() => {
     return () => {
@@ -88,8 +88,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // }, [mapNodes, LearningPathElement])
 
   useEffect(() => {
-    // request to backend to get learning path for Topic
-    // alert('Topic: ' + Topic)
+    // request to backend to get learning path for topic
+    // alert('Topic: ' + topic)
     log.log('Topic page')
     const preventEndlessLoading = setTimeout(() => {
       log.log('Topic page timeout')
@@ -191,20 +191,20 @@ const mapLearningPathToNodes = (
   const exerciseLearningElementParentNode =
     learningPathExercises.length > 0
       ? {
-        id: learningPathExercises[0].position.toString(),
-        data: { label: 'Übungen' },
-        type: 'GROUP',
-        position: {
-          x: 0,
-          y: 250 * (learningPathExercises[0].position - 1)
-        },
-        style: {
-          border: '1px solid ' + theme.palette.grey[500],
-          borderRadius: 8,
-          width: 300 * learningPathExercises.length + nodeOffsetX,
-          height: groupHeight
+          id: learningPathExercises[0].position.toString(),
+          data: { label: 'Übungen' },
+          type: 'GROUP',
+          position: {
+            x: 0,
+            y: 250 * (learningPathExercises[0].position - 1)
+          },
+          style: {
+            border: '1px solid ' + theme.palette.grey[500],
+            borderRadius: 8,
+            width: 300 * learningPathExercises.length + nodeOffsetX,
+            height: groupHeight
+          }
         }
-      }
       : null
 
   // Rest of learning elements
@@ -231,8 +231,8 @@ const mapLearningPathToNodes = (
           exerciseLearningElementParentNode && item.position < parseInt(exerciseLearningElementParentNode.id)
             ? 250 * (item.position - 1)
             : exerciseLearningElementParentNode
-              ? 250 * (item.position - exerciseLearningElementChildNodes.length) + groupHeight - 70
-              : 250 * (item.position - 1)
+            ? 250 * (item.position - exerciseLearningElementChildNodes.length) + groupHeight - 70
+            : 250 * (item.position - 1)
       },
       style: learningElementStyle
     }

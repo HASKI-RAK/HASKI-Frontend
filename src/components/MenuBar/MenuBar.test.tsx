@@ -443,7 +443,7 @@ describe('MenuBar', () => {
     const history = createMemoryHistory({ initialEntries: ['/home'] })
 
     const {getAllByText, getByTestId} = render(
-      <AuthContext.Provider value={{ isAuth: true, setIsAuth: jest.fn(), logout: jest.fn() }}>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(),logout: jest.fn() }}>
         <Router location={history.location} navigator={history}>
           <MenuBar />
         </Router>

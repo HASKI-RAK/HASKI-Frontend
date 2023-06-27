@@ -2,6 +2,7 @@
 import { DefaultSelect as Select } from '@common/components'
 import { MenuItem } from '@mui/material'
 import log from 'loglevel'
+import { ForwardedRef, forwardRef } from 'react'
 
 /**
  * DropdownLanguage is a dropdown menu that allows the user to change the language of the application.
@@ -36,8 +37,7 @@ jest.mock('react-i18next', () => ({
 ```
  * @returns {JSX.Element} - The DropdownLanguage component.
  */
-export const DropdownLanguage = () => {
-  log.setLevel('error')
+const DropdownLanguage = forwardRef((props, ref: ForwardedRef<HTMLDivElement | null>) => {
   const { i18n } = useTranslation()
   const startingLanguage = localStorage.getItem('i18nextLng') as string
   const onClickLanguageChange = (e: { target: { value: string } }) => {
@@ -51,7 +51,7 @@ export const DropdownLanguage = () => {
   }
 
   return (
-    <div>
+    <div {...props} ref={ref}>
       <Select
         className="LanguageDropdown"
         autoWidth={true}
@@ -63,4 +63,6 @@ export const DropdownLanguage = () => {
       </Select>
     </div>
   )
-}
+})
+DropdownLanguage.displayName = 'DropdownLanguage'
+export { DropdownLanguage }

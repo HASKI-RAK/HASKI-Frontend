@@ -6,6 +6,7 @@ import LearningElement from './LearningElement/LearningElement'
 import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
 import LearningPathElement from './LearningPathElement/LearningPathElement'
 import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
+import StudentLearningElement from './StudentLearningElement/StudentLearningElement'
 import Course from './Course/Course'
 import Topic from './Topic/Topic'
 /**
@@ -20,7 +21,8 @@ export type {
   LearningPathTopic,
   LearningPathElement,
   LearningPathLearningElement,
-  Topic
+  Topic,
+  StudentLearningElement
 }
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
 export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'

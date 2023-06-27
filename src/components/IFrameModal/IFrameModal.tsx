@@ -1,6 +1,5 @@
 import { DefaultBox as Box, DefaultModal as Modal } from '@common/components'
 import { Button } from '@mui/material'
-import { useBoundNodeStore } from '@store'
 import { memo, useEffect, useState } from 'react'
 
 const style_box = {
