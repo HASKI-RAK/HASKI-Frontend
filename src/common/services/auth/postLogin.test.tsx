@@ -6,7 +6,10 @@ global.fetch = jest.fn(() =>
     json: () => Promise.resolve<LoginResponse & LoginRequestResponse>({ expiration: 0, status: 200 }),
     ok: true,
     status: 200,
-    message: 'OK'
+    message: 'OK',
+    headers: {
+      get: () => 'application/json'
+    }
   })
 ) as jest.Mock
 

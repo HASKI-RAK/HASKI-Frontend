@@ -31,6 +31,7 @@ const useAuthProvider = (): AuthContextType => {
     getLogout().then(() => {
       setExpire(0)
       log.debug('logout successful')
+      // TODO 📑 clear state in zustand
       // Snackbar will be handled by the component which calls logout
     }
     ).catch((error: string) => {

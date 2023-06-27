@@ -38,16 +38,11 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
   const onMoodleLogin = () => {
     params.setIsLoading(true)
     redirectMoodleLogin()
-      .then((response) => {
-        if (response.ok && response.message) {
-          // 👇️ redirects to Moodle LTI launch acticity
-          window.location.replace(response.message)
-        } else {
-          //TODO 🍿 snackbar
-          addSnackbar({ message: response.message, severity: 'error', autoHideDuration: 5000 })
-        }
-      })
-      .catch((error: string) => {
+      .then((response) =>
+        // 👇️ redirects to Moodle LTI launch acticity
+        window.location.replace(response.lti_launch_view)
+      )
+      .catch((error) => {
         //TODO 🍿 snackbar
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
       })
