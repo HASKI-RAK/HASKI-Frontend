@@ -27,7 +27,6 @@ import { AuthContext, SnackbarContext, Topic } from '@services'
 import { useLearningPathTopic as _useLearningPathTopic } from '../LocalNav/LocalNav.hooks'
 import { DropdownLanguage } from '@components'
 import {Link} from "@mui/material";
-import useBoundStore from "@store";
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
 /**
@@ -201,7 +200,7 @@ const MenuBar = ({ useLearningPathTopic = _useLearningPathTopic }: MenuBarProps)
                                   justifyContent: 'start'
                                 }}></Box>
                             </Grid>
-                            {topics.indexOf(topic) !== topics.length - 1 && <Divider flexItem />}
+                            {topics.indexOf(topic) !== topics.length  && <Divider flexItem />}
                           </React.Fragment>
                         ))}
                       </>
