@@ -51,8 +51,8 @@ const LocalNav = ({
   const skeletonItems = []
   for (let i = 0; i < 3; i++) {
     skeletonItems.push(
-      <React.Fragment key={`LocalNav-Skeleton-${i}`}>
-        <Skeleton variant="text" width={'100%'} height={55} />
+      <React.Fragment key={`LocalNav-Skeleton-${i}`} >
+        <Skeleton data-testid={`LocalNav-Skeleton-Topic-${i}`} variant="text" width={'100%'} height={55} />
         <Skeleton variant="text" width={'70%'} height={20} />
         <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />
       </React.Fragment>
@@ -66,7 +66,7 @@ const LocalNav = ({
     if (loadingElements) {
       return (
         <>
-          <Skeleton variant="text" width={'100%'} height={55} />
+          <Skeleton data-testid={`LocalNav-Skeleton-Element`} variant="text" width={'100%'} height={55} />
           <Skeleton variant="text" width={'70%'} height={20} />
           <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />
         </>
@@ -78,6 +78,7 @@ const LocalNav = ({
         {learningPaths.path.map((learningElement) => (
           <Typography variant="body1" key={learningElement.learning_element.name}>
             <Link
+              data-testid={learningElement.learning_element.name}
               underline="hover"
               variant="body2"
               color="inherit"
@@ -125,6 +126,7 @@ const LocalNav = ({
               onChange={() => handleAccordionClick(index)}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
+                data-testid={`topic-AccordionSummary-${topic.id}`}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
                 sx={{
