@@ -1,5 +1,5 @@
 import { User } from '@core'
-import { RequestResponse } from './RequestResponse.d'
+import { RequestResponse } from './RequestResponse'
 
 export const getUser = async (): Promise<User> => {
   return fetch(process.env.BACKEND + `/lms/user_from_cookie`, {

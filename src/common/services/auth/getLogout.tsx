@@ -1,5 +1,11 @@
-import { RequestResponse } from './RequestResponse.d'
+import { RequestResponse } from './RequestResponse'
 
+/**
+ * Sends a GET request to the backend to logout the user
+ * @remarks
+ * Expects a 204 response. If the response is not 204, an error is thrown.
+ * @returns {Promise<RequestResponse>} - The response of the request.
+ */
 export const getLogout = async (): Promise<RequestResponse> => {
   const response = await fetch(process.env.BACKEND + `/logout`, {
     method: 'GET',
@@ -9,16 +15,14 @@ export const getLogout = async (): Promise<RequestResponse> => {
     }
   })
 
-  const data = await response.json()
-
-  if (response.status !== 200) {
-    // This has to look like the backend error response
-    if ('error' in data) {
+  // First check the expected return status
+  if (response.status !== 204) {
+    // If response has json, it is an error response
+    if (response.headers.get('Content-Type')?.includes('application/json')) {
+      const data = await response.json()
       throw new Error(data['error'] + ' ' + data['message'])
-    } else {
-      throw new Error('Unknown error')
     }
+
   }
-  if (data && data.status) return { status: response.status, message: response.statusText, json: data }
-  else throw new Error('Unknown error during data parsing')
+  return { ok: true, status: response.status }
 }

@@ -39,7 +39,7 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
     params.setIsLoading(true)
     redirectMoodleLogin()
       .then((response) => {
-        if (response.status === 200) {
+        if (response.ok && response.message) {
           // 👇️ redirects to Moodle LTI launch acticity
           window.location.replace(response.message)
         } else {
@@ -58,6 +58,9 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
 
   // on mount, read search param 'nounce' and set it to state
   useEffect(() => {
+    if (!params.nonce)
+      return
+
     postLogin({ nonce: params.nonce })
       .then((response) => {
         // supply auth context
