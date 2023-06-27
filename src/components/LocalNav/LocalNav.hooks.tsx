@@ -8,8 +8,8 @@ import { LearningPathElementReturn } from '@core'
 const initialLearningPathElement: LearningPathElement = {
   id: 99999,
   course_id: 99999,
-  based_on: 'inital LearningPathElement',
-  calculated_on: 'inital LearningPathElement',
+  based_on: 'initial LearningPathElement',
+  calculated_on: 'initial LearningPathElement',
   path: [
     {
       id: 99999,
@@ -20,19 +20,19 @@ const initialLearningPathElement: LearningPathElement = {
       learning_element: {
         id: 99999,
         lms_id: 99999,
-        activity_type: 'inital LearningPathElement',
-        classification: 'inital LearningPathElement',
-        name: 'inital LearningPathElement',
-        university: 'inital LearningPathElement',
-        created_by: 'inital LearningPathElement',
-        created_at: 'inital LearningPathElement',
-        last_updated: 'inital LearningPathElement',
+        activity_type: 'initial LearningPathElement',
+        classification: 'initial LearningPathElement',
+        name: 'initial LearningPathElement',
+        university: 'initial LearningPathElement',
+        created_by: 'initial LearningPathElement',
+        created_at: 'initial LearningPathElement',
+        last_updated: 'initial LearningPathElement',
         student_learning_element: {
           id: 99999,
           student_id: 99999,
           learning_element_id: 99999,
           done: false,
-          done_at: 'inital LearningPathElement'
+          done_at: 'initial LearningPathElement'
         }
       }
     }

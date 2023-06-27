@@ -27,6 +27,7 @@ import { AuthContext, SnackbarContext, Topic } from '@services'
 import { useLearningPathTopic as _useLearningPathTopic } from '../LocalNav/LocalNav.hooks'
 import { DropdownLanguage } from '@components'
 import {Link} from "@mui/material";
+import useBoundStore from "@store";
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
 /**
@@ -54,7 +55,7 @@ const MenuBar = ({ useLearningPathTopic = _useLearningPathTopic }: MenuBarProps)
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
   const { addSnackbar } = useContext(SnackbarContext)
   const { isAuth, logout } = useContext(AuthContext)
-  //const userCourse = useBoundStore(state => state.course);
+  const userCourse = useBoundStore(state => state.course);
   const { t } = useTranslation()
 
   //Application logic hooks
@@ -187,7 +188,7 @@ const MenuBar = ({ useLearningPathTopic = _useLearningPathTopic }: MenuBarProps)
                                     color="inherit"
                                     sx={{ m: 1, cursor: 'pointer' }}
                                     onClick={() => {
-                                        navigate(`course/2/topic/${topic.id}`)
+                                        navigate(`course/${userCourse.lms_id}/topic/${topic.id}`)
                                         handleCloseTopicsMenu()
                                     }}>
                                     {topic.name}
