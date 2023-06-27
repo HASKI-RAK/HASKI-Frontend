@@ -1,5 +1,4 @@
 import * as services from '@services'
-
 // ############################## Auth ############################## //
 // SpyOn getUser to return a mock user
 jest.spyOn(services, 'getUser').mockImplementation(() => {
@@ -28,6 +27,9 @@ jest.spyOn(services, 'postLogin').mockImplementation(() => {
     expiration: 999999999999999,
   })
 })
+// ############################## Log ############################## //
+
+
 // ############################## LearningPath ############################## //
 // SpyOn getLearningPath to return a mock learning path
 jest.spyOn(services, 'getLearningPath').mockImplementation(() => {

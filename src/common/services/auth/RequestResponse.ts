@@ -1,4 +1,3 @@
-import log from "loglevel"
 /**
  * The response of a request
  *
@@ -34,6 +33,15 @@ type ErrorRequestResponse = {
   message: string
 }
 
+type Response = {
+  headers: {
+    get: (key: string) => string | null
+  }
+  ok: boolean
+  json: () => Promise<unknown>
+  text: () => Promise<string>
+}
+
 /**
  * Get the data of a response
  * @remarks
@@ -48,8 +56,7 @@ export const getData = async <T,>(response: Response, contentType = 'application
   if (response.headers.get('Content-Type')?.includes(contentType)) {
     if (!response.ok) {
       // If response has json, it is an error response
-      const data: ErrorRequestResponse = await response.json()
-      log.error(data.error)
+      const data: ErrorRequestResponse = await response.json() as ErrorRequestResponse
       throw new Error(data.message)
     }
     switch (contentType) {

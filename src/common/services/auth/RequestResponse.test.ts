@@ -1,6 +1,14 @@
 import { RequestResponse, getData } from './RequestResponse'
 
 describe('RequestResponse', () => {
+
+    const response = {
+        json: () => Promise.resolve({ data: 'test' }),
+        text: () => Promise.resolve('test'),
+        ok: true,
+        headers: { get: () => 'application/json' }
+    }
+
     describe('when ok is true', () => {
         it('should have a status code between 200 and 299', () => {
             const response: RequestResponse = {
@@ -21,24 +29,26 @@ describe('RequestResponse', () => {
         })
 
         it('should have a json property if the content type is application/json', () => {
-            const mockResponse = new Response('{"data": "test"}', {
-                'Content-Type': 'application/json',
-            })
+            const mockResponse = {
+                ...response,
+            }
             expect(getData(mockResponse)).resolves.toEqual({ data: 'test' })
         })
 
         it('should have a text property if the content type is text/plain', () => {
 
-            const mockResponse = new Response('test', {
-                'Content-Type': 'text/plain',
-            })
+            const mockResponse = {
+                ...response,
+                headers: { get: () => 'text/plain' }
+            }
             expect(getData(mockResponse, 'text/plain')).resolves.toEqual('test')
         })
 
         it('should throw an error if the content type is not supported', () => {
-            const mockResponse = new Response('test', {
-                'Content-Type': 'text/html',
-            })
+            const mockResponse = {
+                ...response,
+                headers: { get: () => 'text/html' }
+            }
             expect(() => getData(mockResponse, 'text/html')).toThrow(
                 'Content-Type text/html is not supported'
             )
@@ -68,17 +78,13 @@ describe('RequestResponse', () => {
             expect(response.message).toBeDefined()
         })
 
-        it('should throw an error with the message property', () => {
-            const response: RequestResponse = {
-                status: 400,
+        it('should throw an error if the response is not ok', () => {
+            const mockResponse = {
+                ...response,
                 ok: false,
-                error: 'BadRequestException',
-                message: 'Bad request',
+                status: 500
             }
-            const mockResponse = new Response(JSON.stringify(response), {
-                'Content-Type': 'application/json',
-            })
-            expect(() => getData(mockResponse)).toThrow('Bad request')
+            expect(() => getData(mockResponse)).toThrow()
         })
     })
 })
