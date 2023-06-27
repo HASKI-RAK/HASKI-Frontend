@@ -1,11 +1,12 @@
 import '@testing-library/jest-dom'
 import { AuthProvider } from '@services'
-import { act, render, renderHook, waitFor } from '@testing-library/react'
+import { act, render, renderHook } from '@testing-library/react'
 import { useAuthProvider } from './AuthProvider.hooks'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve({ status: 200 }),
+    text: () => Promise.resolve(),
     status: 200,
     message: 'OK',
     ok: true,
@@ -22,16 +23,14 @@ describe('Test AuthProvider', () => {
         <>Test</>
       </AuthProvider>
     )
-    waitFor(() => {
-      expect(result.getByText('Test')).toBeInTheDocument()
-    })
+    expect(result.getByText('Test')).toBeInTheDocument()
   })
 
   test('functionality of AuthProvider hook', async () => {
     const { result } = await renderHook(() => useAuthProvider())
     expect(result.current).toMatchObject({
       isAuth: false,
-      setIsAuth: expect.any(Function),
+      setExpire: expect.any(Function),
       logout: expect.any(Function)
     })
 
@@ -52,6 +51,10 @@ describe('Test AuthProvider', () => {
       Promise.resolve({
         json: () => Promise.resolve({ status: 400 }),
         status: 400,
+        ok: false,
+        headers: {
+          get: () => 'application/json'
+        },
         message: 'Bad Request'
       })
     ) as jest.Mock
@@ -62,7 +65,7 @@ describe('Test AuthProvider', () => {
     })
     expect(_result.current).toMatchObject({
       isAuth: false,
-      setIsAuth: expect.any(Function),
+      setExpire: expect.any(Function),
       logout: expect.any(Function)
     })
 
@@ -74,6 +77,10 @@ describe('Test AuthProvider', () => {
       Promise.resolve({
         json: () => Promise.resolve({ status: 200 }),
         status: 200,
+        ok: true,
+        headers: {
+          get: () => 'application/json'
+        },
         message: 'OK'
       })
     ) as jest.Mock
@@ -85,7 +92,7 @@ describe('Test AuthProvider', () => {
     }).then(() => {
       expect(_result.current).toMatchObject({
         isAuth: false,
-        setIsAuth: expect.any(Function),
+        setExpire: expect.any(Function),
         logout: expect.any(Function)
       })
       expect(_result.current.isAuth).toBe(false)

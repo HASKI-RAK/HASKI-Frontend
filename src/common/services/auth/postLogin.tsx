@@ -4,12 +4,6 @@ export type LoginResponse = {
   // Unix timestamp
   expiration: number
 }
-
-export type LoginRequestResponse = {
-  status: number
-  error?: string
-}
-
 export type postLoginParams = {
   nonce?: string
 }
