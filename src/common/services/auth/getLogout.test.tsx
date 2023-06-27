@@ -3,15 +3,19 @@ import { getLogout } from './getLogout'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
-    json: () => Promise.resolve({ status: 200 }),
+    json: () => Promise.resolve(),
     status: 200,
-    message: 'OK'
+    message: 'OK',
+    headers: {
+      'Content-Type': 'text/plain'
+    }
   })
 ) as jest.Mock
 
 describe('getLoginStatus', () => {
   it('should return logout success', async () => {
-    const loginStatus = await getLogout()
-    expect(loginStatus.status).toEqual(200)
+    await getLogout().then(() => {
+      expect(global.fetch).toHaveBeenCalledTimes(1)
+    })
   })
 })

@@ -1,12 +1,12 @@
-import { RequestResponse } from './RequestResponse'
+import { getData } from './RequestResponse'
 
 /**
  * Sends a GET request to the backend to logout the user
  * @remarks
- * Expects a 204 response. If the response is not 204, an error is thrown.
- * @returns {Promise<RequestResponse>} - The response of the request.
+ * The response does not include a body.
+ * @returns {Promise<void>} The response of the request.
  */
-export const getLogout = async (): Promise<RequestResponse> => {
+export const getLogout = async (): Promise<void> => {
   const response = await fetch(process.env.BACKEND + `/logout`, {
     method: 'GET',
     credentials: 'include',
@@ -14,15 +14,5 @@ export const getLogout = async (): Promise<RequestResponse> => {
       'Content-Type': 'application/json'
     }
   })
-
-  // First check the expected return status
-  if (response.status !== 204) {
-    // If response has json, it is an error response
-    if (response.headers.get('Content-Type')?.includes('application/json')) {
-      const data = await response.json()
-      throw new Error(data['error'] + ' ' + data['message'])
-    }
-
-  }
-  return { ok: true, status: response.status }
+  return getData<undefined>(response, 'text/plain')
 }

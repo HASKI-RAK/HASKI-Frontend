@@ -1,5 +1,4 @@
 import log from "loglevel"
-
 /**
  * The response of a request
  *
@@ -18,20 +17,50 @@ export type RequestResponse = {
 }
 
 /**
- * Asserts that the response status code is the expected one
- * If not, it throws an error with the message from the response
- *
- * @param response - The response to check
- * @param expectedStatusCode - The expected status code
- * @returns void when the response status code is the expected one or throws an error
+ * The response of a request if the response is an error
+ * @remarks
+ * 📑 ErrorRequestResponse must be compliant with the Backend.
+ * If the backend changes, this type must be changed too.
+ * 
+ * @property  status - The status code of the response
+ * @property  ok - This is false if the response status code is not between 200 and 299
+ * @property  error - This is the error class name of the response (e.g. "StateNotMatchingException") from the backend
+ * @property  message - This is the message of the error. Used for detailed error messages.
  */
-export const assertResponseStatusCode = async (response: Response, expectedStatusCode: number): Promise<void> => {
-  if (response.status !== expectedStatusCode) {
-    // If response has json, it is an error response
-    if (response.headers.get('Content-Type')?.includes('application/json')) {
-      const data: RequestResponse = await response.json()
+type ErrorRequestResponse = {
+  status: number
+  ok: false
+  error: string
+  message: string
+}
+
+/**
+ * Get the data of a response
+ * @remarks
+ * Specify a type T for the return data.
+ * If the response is not ok, it throws an error
+ *
+ * @param response - The response of an api fetch request
+ * @param contentType - The content type of the response. Default is 'application/json'. Another example is 'text/html'.
+ * @returns The data of type T of the response
+ */
+export const getData = async <T,>(response: Response, contentType = 'application/json'): Promise<T> => {
+  if (response.headers.get('Content-Type')?.includes(contentType)) {
+    if (!response.ok) {
+      // If response has json, it is an error response
+      const data: ErrorRequestResponse = await response.json()
       log.error(data.error)
       throw new Error(data.message)
     }
+    switch (contentType) {
+      case 'application/json':
+        return await response.json() as T
+      case 'text/plain':
+        return await response.text() as unknown as T
+      default:
+        throw new Error(`Content-Type ${contentType} is not supported`)
+    }
   }
+  else
+    throw new Error(`Content-Type of response is not ${contentType}`)
 }

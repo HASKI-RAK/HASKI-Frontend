@@ -20,10 +20,7 @@ jest.spyOn(services, 'getUser').mockImplementation(() => {
 })
 
 jest.spyOn(services, 'getLogout').mockImplementation(() => {
-  return Promise.resolve({
-    status: 200,
-    message: 'OK'
-  })
+  return Promise.resolve(undefined)
 })
 
 // ############################## LearningPath ############################## //
