@@ -1,5 +1,5 @@
 /**
- * Reusable components such    buttons and forms go in here.
+ * Reusable components such as buttons and forms go in here.
  */
 export { Accordion } from './DefaultAccordion/DefaultAccordion'
 export { AccordionDetails } from './DefaultAccordionDetails/DefaultAccordionDetails'
