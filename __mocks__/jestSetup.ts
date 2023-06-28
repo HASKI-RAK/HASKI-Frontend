@@ -1,4 +1,6 @@
 import * as services from '@services'
+// ############################## Common ############################## //
+jest.mock('reactflow/dist/style.css', () => jest.fn())
 // ############################## Auth ############################## //
 // SpyOn getUser to return a mock user
 jest.spyOn(services, 'getUser').mockImplementation(() => {
@@ -28,7 +30,6 @@ jest.spyOn(services, 'postLogin').mockImplementation(() => {
   })
 })
 // ############################## Log ############################## //
-
 
 // ############################## LearningPath ############################## //
 // SpyOn getLearningPath to return a mock learning path
