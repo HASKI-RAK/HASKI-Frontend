@@ -3,10 +3,9 @@ import { RequestResponse, getData } from './RequestResponse'
 describe('RequestResponse', () => {
 
     const response = {
-        json: () => Promise.resolve({ data: 'test' }),
-        text: () => Promise.resolve('test'),
+        text: () => Promise.reject(),
+        json: () => Promise.reject(),
         ok: true,
-        headers: { get: () => 'application/json' }
     }
 
     describe('when ok is true', () => {
@@ -31,6 +30,8 @@ describe('RequestResponse', () => {
         it('should have a json property if the content type is application/json', async () => {
             const mockResponse = {
                 ...response,
+                headers: { get: () => 'application/json' },
+                json: () => Promise.resolve({ data: 'test' })
             }
             await expect(getData(mockResponse)).resolves.toEqual({ data: 'test' })
         })
@@ -39,17 +40,21 @@ describe('RequestResponse', () => {
 
             const mockResponse = {
                 ...response,
-                headers: { get: () => 'text/plain' }
+                headers: { get: () => 'text/plain' },
+                text: () => Promise.resolve('test')
             }
-            await expect(getData(mockResponse, 'text/plain')).resolves.toEqual('test')
+            await expect(getData(mockResponse)).resolves.toEqual('test')
         })
 
         it('should throw an error if the content type is not supported', async () => {
             const mockResponse = {
                 ...response,
-                headers: { get: () => 'text/html' }
+                headers: { get: () => 'text/html' },
+                text: () => Promise.reject(),
+                json: () => Promise.reject(),
+                data: 'test'
             }
-            await expect(() => getData(mockResponse, 'text/html')).rejects.toThrow(Error)
+            await expect(() => getData(mockResponse)).rejects.toThrow(Error)
         })
     })
 
@@ -69,7 +74,8 @@ describe('RequestResponse', () => {
             const mockResponse = {
                 ...response,
                 ok: false,
-                status: 500
+                status: 500,
+                headers: { get: () => 'application/json' },
             }
             await expect(() => getData(mockResponse)).rejects.toThrow(Error)
         })

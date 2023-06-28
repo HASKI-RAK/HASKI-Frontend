@@ -14,5 +14,5 @@ export const getLogout = async (): Promise<void> => {
       'Content-Type': 'application/json'
     }
   })
-  return getData<undefined>(response, 'text/plain')
+  return getData<undefined>(response)
 }

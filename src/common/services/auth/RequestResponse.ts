@@ -38,8 +38,11 @@ type Response = {
     get: (key: string) => string | null
   }
   ok: boolean
+  data?: unknown
   json: () => Promise<unknown>
   text: () => Promise<string>
+  content?: <T>() => Promise<T>
+  error?: () => Promise<never>
 }
 
 /**
@@ -52,22 +55,28 @@ type Response = {
  * @param contentType - The content type of the response. Default is 'application/json'. Another example is 'text/html'.
  * @returns The data of type T of the response
  */
-export const getData = async <T,>(response: Response, contentType = 'application/json'): Promise<T> => {
-  if (response.headers.get('Content-Type')?.includes(contentType)) {
-    if (!response.ok) {
-      // If response has json, it is an error response
-      const data: ErrorRequestResponse = await response.json() as ErrorRequestResponse
-      throw new Error(data.message)
-    }
-    switch (contentType) {
-      case 'application/json':
-        return await response.json() as T
-      case 'text/plain':
-        return await response.text() as unknown as T
-      default:
-        throw new Error(`Content-Type ${contentType} is not supported`)
+export const getData = async <T,>(response: Response): Promise<T> => {
+  response.content = async <T>() => await content<T>(response)
+  if (response.ok)
+    return await response.content<T>()
+  else {
+    const data: ErrorRequestResponse = await response.content<ErrorRequestResponse>()
+    throw new Error(data.message)
+  }
+}
+
+const content = async <T>(response: Response): Promise<T> => {
+  try {
+    return await response.json() as T
+  } catch (error) {
+    try {
+      return await response.text() as unknown as T
+    } catch (error) {
+      // If response data is empty, return undefined
+      if (response.data === undefined)
+        return undefined as unknown as T
+      else
+        throw new Error(`Content-Type ${response.headers.get('Content-Type')} is not supported`)
     }
   }
-  else
-    throw new Error(`Content-Type of response is not ${contentType}`)
 }
