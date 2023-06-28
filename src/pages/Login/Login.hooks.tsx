@@ -1,6 +1,6 @@
-import { AuthContext, SnackbarContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
+import { AuthContext, SnackbarContext, postLogin, redirectMoodleLogin } from '@services'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useContext, useCallback } from 'react'
+import { useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export type LoginHookParams = {
