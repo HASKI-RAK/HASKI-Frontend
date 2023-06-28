@@ -1,1 +1,2 @@
-export { Alert as DefaultAlert } from '@mui/material'
+import DefaultAlert from '@mui/material/Alert'
+export { DefaultAlert as Alert }

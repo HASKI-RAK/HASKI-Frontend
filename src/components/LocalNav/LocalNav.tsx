@@ -1,13 +1,13 @@
 import {
-  DefaultBox as Box,
-  DefaultDivider as Divider,
-  DefaultTypography as Typography,
-  DefaultAccordionSummary as AccordionSummary,
-  DefaultAccordionDetails as AccordionDetails,
-  DefaultAccordion as Accordion,
-  DefaultLink as Link,
-  DefaultSkeleton as Skeleton,
-  DefaultStack as Stack
+  Accordion,
+  Box,
+  Divider,
+  Typography,
+  AccordionSummary,
+  AccordionDetails,
+  Link,
+  Skeleton,
+  Stack
 } from '@common/components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'

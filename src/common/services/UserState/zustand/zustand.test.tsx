@@ -5,7 +5,7 @@
 import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { useUserStore } from '@services'
-import { DefaultButton as Button } from '@common/components'
+import { Button } from '@common/components'
 
 const DivElement = () => {
   const user = useUserStore((state) => state.user)
