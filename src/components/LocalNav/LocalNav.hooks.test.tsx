@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react-hooks'
 import { getSortedLearningPath, useLearningPathTopic, useLearningPathElement } from './LocalNav.hooks'
 import {LearningPathElement} from "@core";
 import {Topic} from "@services";
@@ -90,8 +89,7 @@ const mockFetchLearningPathTopic = jest.fn().mockResolvedValue({
   ]
 })
 
-// Mock fetchLearningPathElement
-const mockFetchLearningPathElement = jest.fn().mockResolvedValue(initialLearningPathElement)
+
 
 describe('getSortedLearningPath', () => {
 
@@ -181,7 +179,6 @@ describe('getSortedLearningPath', () => {
 
   test('fetches learning path elements for a topic and returns the loading state', async () => {
     mockFetchUser.mockResolvedValueOnce({ settings: { user_id: 1 }, lms_user_id: 1, id: 1 })
-    mockFetchLearningPathElement.mockResolvedValueOnce(initialLearningPathElement)
 
     const { result, waitForNextUpdate } = renderHook(() => useLearningPathElement(topic))
 
@@ -192,76 +189,37 @@ describe('getSortedLearningPath', () => {
 
     expect(result.current.loadingElements).toBe(false)
     expect(result.current.learningPaths).toEqual({
-      id: 99999,
-      course_id: 99999,
-      based_on: 'initial LearningPathElement',
-      calculated_on: 'initial LearningPathElement',
+      id: 1,
+      course_id: 2,
+      based_on: 'string',
+      calculated_on: 'string',
       path: [
         {
-          id: 99999,
-          learning_element_id: 99999,
-          learning_path_id: 99999,
+          id: 1,
+          learning_element_id: 1,
+          learning_path_id: 1,
           recommended: true,
-          position: 99999,
+          position: 1,
           learning_element: {
-            id: 99999,
-            lms_id: 99999,
-            activity_type: 'initial LearningPathElement',
-            classification: 'initial LearningPathElement',
-            name: 'initial LearningPathElement',
-            university: 'initial LearningPathElement',
-            created_by: 'initial LearningPathElement',
-            created_at: 'initial LearningPathElement',
-            last_updated: 'initial LearningPathElement',
+            id: 1,
+            lms_id: 1,
+            activity_type: 'KÜ',
+            classification: 'KÜ',
+            name: 'Kurzüberblick',
+            university: 'HS-Kempten',
+            created_by: 'string',
+            created_at: 'string',
+            last_updated: 'string',
             student_learning_element: {
-              id: 99999,
-              student_id: 99999,
-              learning_element_id: 99999,
-              done: false,
-              done_at: 'initial LearningPathElement'
+              id: 1,
+              student_id: 1,
+              learning_element_id: 1,
+              done: true,
+              done_at: 'string'
             }
           }
         }
       ]
     })
-  })
-})
-
-
-
-describe('useLearningPathElement', () => {
-
-  const mockFetchLearningPath = jest.fn().mockResolvedValue({
-    id: 12345,
-    course_id: 12345,
-    based_on: 'mock LearningPathElement',
-    calculated_on: 'mock LearningPathElement',
-    path: [
-      {
-        id: 99999,
-        learning_element_id: 99999,
-        learning_path_id: 99999,
-        recommended: true,
-        position: 99999,
-        learning_element: {
-          id: 99999,
-          lms_id: 99999,
-          activity_type: 'mock LearningPathElement',
-          classification: 'mock LearningPathElement',
-          name: 'mock LearningPathElement',
-          university: 'mock LearningPathElement',
-          created_by: 'mock LearningPathElement',
-          created_at: 'mock LearningPathElement',
-          last_updated: 'mock LearningPathElement',
-          student_learning_element: {
-            id: 99999,
-            student_id: 99999,
-            learning_element_id: 99999,
-            done: false,
-            done_at: 'mock LearningPathElement'
-          }
-        }
-      }
-    ]
   })
 })

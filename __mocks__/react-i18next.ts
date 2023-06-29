@@ -4,7 +4,11 @@ const useTranslation = () => {
   return {
     t: (str: string) => str,
     i18n: {
-      changeLanguage: () => new Promise(() => {})
+      changeLanguage: () => new Promise(() => {return}),
+      getFixedT: () => (str: string) => {
+        if (str === 'components.QuestionnaireResults.TableILS.balanced') return 'balanced'
+        else return str.substring(41, str.length)
+      }
     }
   }
 }

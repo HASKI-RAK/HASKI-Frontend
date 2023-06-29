@@ -3,27 +3,10 @@ import { ResultDescriptionILS } from './ResultDescriptionILS'
 import { setILSParameters, ILSDimension } from './TableILS'
 import { render } from '@testing-library/react'
 
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate-hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str: string) => {
-        if (str === 'components.QuestionnaireResults.TableILS.balanced') return 'balanced'
-        else return str.substring(41, str.length)
-      },
-      i18n: {
-        //changeLanguage: () => new Promise(() => {}),
-        getFixedT: () => (str: string) => {
-          if (str === 'components.QuestionnaireResults.TableILS.balanced') return 'balanced'
-          else return str.substring(41, str.length)
-        }
-        // You can include here any property your component may use
-      }
-    }
-  }
-}))
 
 describe('Test ResultDescriptionILS with all Score combinations', () => {
+
+
   test('all positive dimensions are balanced', () => {
     const dimScoreArray = [3, 3, 3, 3]
     setILSParameters(dimScoreArray[0], dimScoreArray[1], dimScoreArray[2], dimScoreArray[3])
@@ -31,7 +14,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(251, 251 + 'EverythingBalanced'.length)).toBe('EverythingBalanced')
+    expect(container.innerHTML.substring(292, 292 + 'EverythingBalanced'.length)).toBe('EverythingBalanced')
   })
 
   test('all negative dimensions are balanced', () => {
@@ -41,7 +24,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(251, 251 + 'EverythingBal'.length)).toBe('EverythingBal')
+    expect(container.innerHTML.substring(292, 292 + 'EverythingBalanced'.length)).toBe('EverythingBalanced')
   })
 
   test('3 dimensions are balanced, 1 Dimension is active & moderate', () => {
@@ -51,7 +34,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(246, 246 + 'Active.moderate'.length)).toBe('Active.moderate')
+    expect(container.innerHTML.substring(328, 328 + 'Active.moderate'.length)).toBe('Active.moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is active & strong', () => {
@@ -61,7 +44,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(246, 246 + 'Active.strong'.length)).toBe('Active.strong')
+    expect(container.innerHTML.substring(328, 328 + 'Active.strong'.length)).toBe('Active.strong')
   })
 
   test('3 dimensions are balanced, 1 Dimension is reflective & moderate', () => {
@@ -71,7 +54,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(250, 250 + 'Reflective.moderate'.length)).toBe('Reflective.moderate')
+    expect(container.innerHTML.substring(332, 332 + 'Reflective.moderate'.length)).toBe('Reflective.moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is reflective & strong', () => {
@@ -81,7 +64,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(250, 250 + 'Reflective.strong'.length)).toBe('Reflective.strong')
+    expect(container.innerHTML.substring(332, 332 + 'Reflective.strong'.length)).toBe('Reflective.strong')
   })
 
   test('3 dimensions do not matter, 1 Dimension is reflective & balanced', () => {
@@ -91,7 +74,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(1198, 1198 + 'SomethingBalanced.processing'.length)).toBe(
+    expect(container.innerHTML.substring(1649, 1649 + 'SomethingBalanced.processing'.length)).toBe(
       'SomethingBalanced.processing'
     )
   })
@@ -103,7 +86,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(247, 247 + 'Sensory.moderate'.length)).toBe('Sensory.moderate')
+    expect(container.innerHTML.substring(329, 329 + 'Sensory.moderate'.length)).toBe('Sensory.moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is sensory & strong', () => {
@@ -113,7 +96,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(247, 247 + 'Sensory.strong'.length)).toBe('Sensory.strong')
+    expect(container.innerHTML.substring(329, 329 + 'Sensory.strong'.length)).toBe('Sensory.strong')
   })
 
   test('3 dimensions are balanced, 1 Dimension is intuitive & moderate', () => {
@@ -123,7 +106,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(249, 249 + 'Intuitive.moderate'.length)).toBe('Intuitive.moderate')
+    expect(container.innerHTML.substring(331, 331 + 'Intuitive.moderate'.length)).toBe('Intuitive.moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is intuitive & strong', () => {
@@ -133,7 +116,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(249, 249 + 'Intuitive.strong'.length)).toBe('Intuitive.strong')
+    expect(container.innerHTML.substring(331, 331 + 'Intuitive.strong'.length)).toBe('Intuitive.strong')
   })
 
   test('3 dimensions do not matter, 1 Dimension is intuitive & balanced', () => {
@@ -143,7 +126,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(1196, 1196 + 'SomethingBalanced.perception'.length)).toBe(
+    expect(container.innerHTML.substring(1647, 1647 + 'SomethingBalanced.perception'.length)).toBe(
       'SomethingBalanced.perception'
     )
   })
@@ -155,7 +138,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(246, 246 + 'Visual.moderate'.length)).toBe('Visual.moderate')
+    expect(container.innerHTML.substring(328, 328 + 'Visual.moderate'.length)).toBe('Visual.moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is visual & strong', () => {
@@ -165,7 +148,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(246, 246 + 'Visual.strong'.length)).toBe('Visual.strong')
+    expect(container.innerHTML.substring(328, 328 + 'Visual.strong'.length)).toBe('Visual.strong')
   })
 
   test('3 dimensions are balanced, 1 Dimension is verbal & moderate', () => {
@@ -175,7 +158,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(246, 246 + 'Verbal.moderate'.length)).toBe('Verbal.moderate')
+    expect(container.innerHTML.substring(328, 328 + 'Verbal.moderate'.length)).toBe('Verbal.moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is verbal & strong', () => {
@@ -185,7 +168,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(246, 246 + 'Verbal.strong'.length)).toBe('Verbal.strong')
+    expect(container.innerHTML.substring(328, 328 + 'Verbal.strong'.length)).toBe('Verbal.strong')
   })
 
   test('3 dimensions do not matter, 1 Dimension is verbal & balanced', () => {
@@ -195,7 +178,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(1198, 1198 + 'SomethingBalanced.presentation'.length)).toBe(
+    expect(container.innerHTML.substring(1649, 1649 + 'SomethingBalanced.presentation'.length)).toBe(
       'SomethingBalanced.presentation'
     )
   })
@@ -207,7 +190,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(250, 250 + 'Sequential.moderate'.length)).toBe('Sequential.moderate')
+    expect(container.innerHTML.substring(332, 332 + 'Sequential.moderate'.length)).toBe('Sequential.moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is sequential & strong', () => {
@@ -217,7 +200,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(250, 250 + 'Sequential.strong'.length)).toBe('Sequential.strong')
+    expect(container.innerHTML.substring(332, 332 + 'Sequential.strong'.length)).toBe('Sequential.strong')
   })
 
   test('3 dimensions are balanced, 1 Dimension is global & moderate', () => {
@@ -227,7 +210,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(246, 246 + 'Global.moderate'.length)).toBe('Global.moderate')
+    expect(container.innerHTML.substring(328, 328 + 'Global.moderate'.length)).toBe('Global.moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is global & strong', () => {
@@ -237,7 +220,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(246, 246 + 'Global.strong'.length)).toBe('Global.strong')
+    expect(container.innerHTML.substring(328, 328 + 'Global.strong'.length)).toBe('Global.strong')
   })
 
   test('3 dimensions do not matter, 1 Dimension is global & balanced', () => {
@@ -247,7 +230,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(1190, 1190 + 'SomethingBalanced.organisation'.length)).toBe(
+    expect(container.innerHTML.substring(1641, 1641 + 'SomethingBalanced.organisation'.length)).toBe(
       'SomethingBalanced.organisation'
     )
   })
@@ -259,10 +242,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(518, 518 + 'Sensory.moderate'.length)).toBe('Sensory.moderate')
-    expect(container.innerHTML.substring(246, 246 + 'Active.moderate'.length)).toBe('Active.moderate')
-    expect(container.innerHTML.substring(790, 790 + 'Visual.moderate'.length)).toBe('Visual.moderate')
-    expect(container.innerHTML.substring(1065, 1065 + 'Sequential.moderate'.length)).toBe('Sequential.moderate')
+    expect(container.innerHTML.substring(682, 682 + 'Sensory.moderate'.length)).toBe('Sensory.moderate')
+    expect(container.innerHTML.substring(328, 328 + 'Active.moderate'.length)).toBe('Active.moderate')
+    expect(container.innerHTML.substring(1036, 1036 + 'Visual.moderate'.length)).toBe('Visual.moderate')
+    expect(container.innerHTML.substring(1393, 1393 + 'Sequential.moderate'.length)).toBe('Sequential.moderate')
   })
 
   test('all dimensions strong positive', () => {
@@ -272,10 +255,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(516, 516 + 'Sensory.strong'.length)).toBe('Sensory.strong')
-    expect(container.innerHTML.substring(246, 246 + 'Active.strong'.length)).toBe('Active.strong')
-    expect(container.innerHTML.substring(786, 786 + 'Visual.strong'.length)).toBe('Visual.strong')
-    expect(container.innerHTML.substring(1059, 1059 + 'Sequential.strong'.length)).toBe('Sequential.strong')
+    expect(container.innerHTML.substring(680, 680 + 'Sensory.strong'.length)).toBe('Sensory.strong')
+    expect(container.innerHTML.substring(328, 328 + 'Active.strong'.length)).toBe('Active.strong')
+    expect(container.innerHTML.substring(1032, 1032 + 'Visual.strong'.length)).toBe('Visual.strong')
+    expect(container.innerHTML.substring(1387, 1387 + 'Sequential.strong'.length)).toBe('Sequential.strong')
   })
 
   test('all dimensions moderate negative', () => {
@@ -285,10 +268,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(528, 528 + 'Intuitive.moderate'.length)).toBe('Intuitive.moderate')
-    expect(container.innerHTML.substring(250, 250 + 'Reflective.moderate'.length)).toBe('Reflective.moderate')
-    expect(container.innerHTML.substring(802, 802 + 'Verbal.moderate'.length)).toBe('Verbal.moderate')
-    expect(container.innerHTML.substring(1073, 1073 + 'Global.moderate'.length)).toBe('Global.moderate')
+    expect(container.innerHTML.substring(692, 692 + 'Intuitive.moderate'.length)).toBe('Intuitive.moderate')
+    expect(container.innerHTML.substring(332, 332 + 'Reflective.moderate'.length)).toBe('Reflective.moderate')
+    expect(container.innerHTML.substring(1048, 1048 + 'Verbal.moderate'.length)).toBe('Verbal.moderate')
+    expect(container.innerHTML.substring(1401, 1401 + 'Global.moderate'.length)).toBe('Global.moderate')
   })
 
   test('all dimensions strong negative', () => {
@@ -298,10 +281,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
     )
 
-    expect(container.innerHTML.substring(526, 526 + 'Intuitive.strong'.length)).toBe('Intuitive.strong')
-    expect(container.innerHTML.substring(250, 250 + 'Reflective.strong'.length)).toBe('Reflective.strong')
-    expect(container.innerHTML.substring(798, 798 + 'Verbal.strong'.length)).toBe('Verbal.strong')
-    expect(container.innerHTML.substring(1067, 1067 + 'Global.strong'.length)).toBe('Global.strong')
+    expect(container.innerHTML.substring(690, 690 + 'Intuitive.strong'.length)).toBe('Intuitive.strong')
+    expect(container.innerHTML.substring(332, 332 + 'Reflective.strong'.length)).toBe('Reflective.strong')
+    expect(container.innerHTML.substring(1044, 1044 + 'Verbal.strong'.length)).toBe('Verbal.strong')
+    expect(container.innerHTML.substring(1395, 1395 + 'Global.strong'.length)).toBe('Global.strong')
   })
 
   test('Switch default case', () => {
@@ -317,7 +300,8 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => getILSDimension(1, 1, true)} />
     )
 
+
     //Because the Switch is not working in the test, the following String has 2 spaces at the end
-    expect(container.innerHTML.substring(686, 693)).toBe('Part2  ')
+    expect(container.innerHTML.substring(932, 939)).toBe('Part2  ')
   })
 })

@@ -4,11 +4,15 @@ import { DropdownLanguage } from '@components'
 import { fireEvent, render, act } from '@testing-library/react'
 import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
+import requireActual = jest.requireActual;
+requireActual('i18next')
 
 // tests for mui can be found https://github.com/mui/material-ui/blob/master/packages/mui-material/src
 
 describe('Test the change-language dropdown component', () => {
+
   test('catch clause in DropdownLanguage component works correctly', () => {
+
     const localStorageMock_withSetError = {
       getItem: jest.fn().mockImplementation((key) => {
         if (key === 'i18nextLng') {
