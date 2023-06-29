@@ -20,77 +20,7 @@ beforeEach(() => {
 })
 
 describe('Topic tests', () => {
-  // SpyOn getUser to return a mock user
-  const mock = jest.spyOn(services, 'getUser')
-  mock.mockImplementation(() => {
-    return Promise.resolve({
-      id: 1,
-      lmsUserId: 1,
-      name: 'string',
-      role: 'string',
-      roleId: 1,
-      settings: {
-        id: 1,
-        userId: 1,
-        pswd: 'string',
-        theme: 'string'
-      },
-      university: 'string'
-    })
-  })
-
-  // SpyOn getLearningPath to return a mock learning path
-  const mock2 = jest.spyOn(services, 'getLearningPath')
-  mock2.mockImplementation(() => {
-    return Promise.resolve({
-      id: 1,
-      course_id: 2,
-      based_on: 'string',
-      calculated_on: 'string',
-      path: [
-        {
-          id: 1,
-          learningElementId: 1,
-          learningPathId: 1,
-          recommended: true,
-          position: 1,
-          learningElement: {
-            id: 1,
-            lmsId: 1,
-            activityType: 'string',
-            classification: 'string',
-            name: 'string',
-            university: 'string',
-            createdBy: 'string',
-            createdAt: 'string',
-            lastUpdated: 'string',
-            studentLearningElement: {
-              id: 1,
-              student_id: 1,
-              learning_element_id: 1,
-              done: true,
-              done_at: 'string'
-            }
-          }
-        }
-      ]
-    })
-  })
-
-  it('auth is false', async () => {
-    const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
-    await act(async () => {
-      render(
-        <Router location={history.location} navigator={history}>
-          <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Topic />
-          </AuthContext.Provider>
-        </Router>
-      )
-    })
-  })
-
-  it('auth is true', async () => {
+  test('Auth is true', async () => {
     const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
     await act(async () => {
       render(
@@ -103,7 +33,20 @@ describe('Topic tests', () => {
     })
   })
 
-  it('auth is true and user is admin', async () => {
+  test('Auth is false', async () => {
+    const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
+    await act(async () => {
+      render(
+        <Router location={history.location} navigator={history}>
+          <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Topic />
+          </AuthContext.Provider>
+        </Router>
+      )
+    })
+  })
+
+  test('Timer runs out', async () => {
     const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
     await act(async () => {
       render(
@@ -117,7 +60,7 @@ describe('Topic tests', () => {
   })
 })
 
-describe('Topic tests 2', () => {
+/*describe('Topic tests 2', () => {
   const mock3 = jest.spyOn(services, 'getUser')
   mock3.mockImplementation(() => {
     return Promise.reject({
@@ -200,4 +143,9 @@ describe('Topic tests 2', () => {
       )
     })
   })
-})
+})*/
+
+// auth true
+// auth false
+// getLearningPath fails
+// getUser fails

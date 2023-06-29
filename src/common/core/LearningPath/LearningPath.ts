@@ -21,9 +21,9 @@ type LearningPathReturn = (
 
 type LearningPath = {
   id: number
-  course_id: number
-  based_on: string
-  calculated_on: string
+  courseId: number
+  basedOn: string
+  calculatedOn: string
   path: LearningPathLearningElement[]
 }
 

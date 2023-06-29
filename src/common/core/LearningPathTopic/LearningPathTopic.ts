@@ -1,7 +1,7 @@
 type LearningPathTopic = {
   id: number
-  topic_id: number
-  learning_path_id: number
+  topicId: number
+  learningPathId: number
   position: number
   recommended: boolean
 }

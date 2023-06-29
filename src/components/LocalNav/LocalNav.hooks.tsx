@@ -190,9 +190,9 @@ const hardcodedTopics: Topic[] = [
 const hardcodedLearningPaths: LearningPath[] = [
   {
     id: 1,
-    course_id: 2,
-    based_on: 'aco',
-    calculated_on: 'aco',
+    courseId: 2,
+    basedOn: 'aco',
+    calculatedOn: 'aco',
     path: [
       {
         id: 1,
@@ -212,10 +212,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 1,
-            student_id: 1,
-            learning_element_id: 1,
+            studentId: 1,
+            learningElementId: 1,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -237,10 +237,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 2,
-            student_id: 2,
-            learning_element_id: 2,
+            studentId: 2,
+            learningElementId: 2,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -262,10 +262,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 3,
-            student_id: 3,
-            learning_element_id: 3,
+            studentId: 3,
+            learningElementId: 3,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       }
@@ -273,9 +273,9 @@ const hardcodedLearningPaths: LearningPath[] = [
   },
   {
     id: 2,
-    course_id: 2,
-    based_on: 'aco',
-    calculated_on: 'aco',
+    courseId: 2,
+    basedOn: 'aco',
+    calculatedOn: 'aco',
     path: [
       {
         id: 1,
@@ -295,10 +295,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 1,
-            student_id: 1,
-            learning_element_id: 1,
+            studentId: 1,
+            learningElementId: 1,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       }
@@ -306,9 +306,9 @@ const hardcodedLearningPaths: LearningPath[] = [
   },
   {
     id: 3,
-    course_id: 2,
-    based_on: 'aco',
-    calculated_on: 'aco',
+    courseId: 2,
+    basedOn: 'aco',
+    calculatedOn: 'aco',
     path: [
       {
         id: 1,
@@ -328,10 +328,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 1,
-            student_id: 1,
-            learning_element_id: 1,
+            studentId: 1,
+            learningElementId: 1,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -353,10 +353,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 2,
-            student_id: 2,
-            learning_element_id: 2,
+            studentId: 2,
+            learningElementId: 2,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -378,10 +378,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 3,
-            student_id: 3,
-            learning_element_id: 3,
+            studentId: 3,
+            learningElementId: 3,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -403,10 +403,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 4,
-            student_id: 4,
-            learning_element_id: 4,
+            studentId: 4,
+            learningElementId: 4,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -428,10 +428,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 5,
-            student_id: 5,
-            learning_element_id: 5,
+            studentId: 5,
+            learningElementId: 5,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -453,10 +453,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 6,
-            student_id: 6,
-            learning_element_id: 6,
+            studentId: 6,
+            learningElementId: 6,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -478,10 +478,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 7,
-            student_id: 7,
-            learning_element_id: 7,
+            studentId: 7,
+            learningElementId: 7,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -503,10 +503,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 8,
-            student_id: 8,
-            learning_element_id: 8,
+            studentId: 8,
+            learningElementId: 8,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -528,10 +528,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 9,
-            student_id: 9,
-            learning_element_id: 9,
+            studentId: 9,
+            learningElementId: 9,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -553,10 +553,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 10,
-            student_id: 10,
-            learning_element_id: 10,
+            studentId: 10,
+            learningElementId: 10,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -578,10 +578,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 11,
-            student_id: 11,
-            learning_element_id: 11,
+            studentId: 11,
+            learningElementId: 11,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -603,10 +603,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 12,
-            student_id: 12,
-            learning_element_id: 12,
+            studentId: 12,
+            learningElementId: 12,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -628,10 +628,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 13,
-            student_id: 13,
-            learning_element_id: 13,
+            studentId: 13,
+            learningElementId: 13,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -653,10 +653,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 14,
-            student_id: 14,
-            learning_element_id: 14,
+            studentId: 14,
+            learningElementId: 14,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       }
@@ -664,9 +664,9 @@ const hardcodedLearningPaths: LearningPath[] = [
   },
   {
     id: 4,
-    course_id: 4,
-    based_on: 'aco',
-    calculated_on: 'aco',
+    courseId: 4,
+    basedOn: 'aco',
+    calculatedOn: 'aco',
     path: [
       {
         id: 1,
@@ -686,10 +686,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 1,
-            student_id: 1,
-            learning_element_id: 1,
+            studentId: 1,
+            learningElementId: 1,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -711,10 +711,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 2,
-            student_id: 2,
-            learning_element_id: 2,
+            studentId: 2,
+            learningElementId: 2,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       }
@@ -722,9 +722,9 @@ const hardcodedLearningPaths: LearningPath[] = [
   },
   {
     id: 5,
-    course_id: 5,
-    based_on: 'aco',
-    calculated_on: 'aco',
+    courseId: 5,
+    basedOn: 'aco',
+    calculatedOn: 'aco',
     path: [
       {
         id: 1,
@@ -744,10 +744,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 1,
-            student_id: 1,
-            learning_element_id: 1,
+            studentId: 1,
+            learningElementId: 1,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -769,10 +769,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 2,
-            student_id: 2,
-            learning_element_id: 2,
+            studentId: 2,
+            learningElementId: 2,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -794,10 +794,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 3,
-            student_id: 3,
-            learning_element_id: 3,
+            studentId: 3,
+            learningElementId: 3,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -819,10 +819,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 4,
-            student_id: 4,
-            learning_element_id: 4,
+            studentId: 4,
+            learningElementId: 4,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -844,10 +844,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 5,
-            student_id: 5,
-            learning_element_id: 5,
+            studentId: 5,
+            learningElementId: 5,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -869,10 +869,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 6,
-            student_id: 6,
-            learning_element_id: 6,
+            studentId: 6,
+            learningElementId: 6,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -894,10 +894,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 7,
-            student_id: 7,
-            learning_element_id: 7,
+            studentId: 7,
+            learningElementId: 7,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -919,10 +919,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 8,
-            student_id: 8,
-            learning_element_id: 8,
+            studentId: 8,
+            learningElementId: 8,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -944,10 +944,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 9,
-            student_id: 9,
-            learning_element_id: 9,
+            studentId: 9,
+            learningElementId: 9,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -969,10 +969,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 10,
-            student_id: 10,
-            learning_element_id: 10,
+            studentId: 10,
+            learningElementId: 10,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -994,10 +994,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 11,
-            student_id: 11,
-            learning_element_id: 11,
+            studentId: 11,
+            learningElementId: 11,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1019,10 +1019,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 12,
-            student_id: 12,
-            learning_element_id: 12,
+            studentId: 12,
+            learningElementId: 12,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1044,10 +1044,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 13,
-            student_id: 13,
-            learning_element_id: 13,
+            studentId: 13,
+            learningElementId: 13,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1069,10 +1069,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 14,
-            student_id: 14,
-            learning_element_id: 14,
+            studentId: 14,
+            learningElementId: 14,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1094,10 +1094,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 15,
-            student_id: 15,
-            learning_element_id: 15,
+            studentId: 15,
+            learningElementId: 15,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       }
@@ -1105,9 +1105,9 @@ const hardcodedLearningPaths: LearningPath[] = [
   },
   {
     id: 7,
-    course_id: 7,
-    based_on: 'aco',
-    calculated_on: 'aco',
+    courseId: 7,
+    basedOn: 'aco',
+    calculatedOn: 'aco',
     path: [
       {
         id: 1,
@@ -1127,10 +1127,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 1,
-            student_id: 1,
-            learning_element_id: 1,
+            studentId: 1,
+            learningElementId: 1,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1152,10 +1152,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 2,
-            student_id: 2,
-            learning_element_id: 2,
+            studentId: 2,
+            learningElementId: 2,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1177,10 +1177,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 3,
-            student_id: 3,
-            learning_element_id: 3,
+            studentId: 3,
+            learningElementId: 3,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1202,10 +1202,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 4,
-            student_id: 4,
-            learning_element_id: 4,
+            studentId: 4,
+            learningElementId: 4,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1227,10 +1227,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 5,
-            student_id: 5,
-            learning_element_id: 5,
+            studentId: 5,
+            learningElementId: 5,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1252,10 +1252,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 6,
-            student_id: 6,
-            learning_element_id: 6,
+            studentId: 6,
+            learningElementId: 6,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1277,10 +1277,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 7,
-            student_id: 7,
-            learning_element_id: 7,
+            studentId: 7,
+            learningElementId: 7,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1302,10 +1302,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 8,
-            student_id: 8,
-            learning_element_id: 8,
+            studentId: 8,
+            learningElementId: 8,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1327,10 +1327,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 9,
-            student_id: 9,
-            learning_element_id: 9,
+            studentId: 9,
+            learningElementId: 9,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1352,10 +1352,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 10,
-            student_id: 10,
-            learning_element_id: 10,
+            studentId: 10,
+            learningElementId: 10,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1377,10 +1377,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 11,
-            student_id: 11,
-            learning_element_id: 11,
+            studentId: 11,
+            learningElementId: 11,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1402,10 +1402,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 12,
-            student_id: 12,
-            learning_element_id: 12,
+            studentId: 12,
+            learningElementId: 12,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1427,10 +1427,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 13,
-            student_id: 13,
-            learning_element_id: 13,
+            studentId: 13,
+            learningElementId: 13,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1452,10 +1452,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 14,
-            student_id: 14,
-            learning_element_id: 14,
+            studentId: 14,
+            learningElementId: 14,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1477,10 +1477,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 15,
-            student_id: 15,
-            learning_element_id: 15,
+            studentId: 15,
+            learningElementId: 15,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1502,10 +1502,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 16,
-            student_id: 16,
-            learning_element_id: 16,
+            studentId: 16,
+            learningElementId: 16,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1527,10 +1527,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 17,
-            student_id: 17,
-            learning_element_id: 17,
+            studentId: 17,
+            learningElementId: 17,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1552,10 +1552,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 18,
-            student_id: 18,
-            learning_element_id: 18,
+            studentId: 18,
+            learningElementId: 18,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       }
@@ -1563,9 +1563,9 @@ const hardcodedLearningPaths: LearningPath[] = [
   },
   {
     id: 8,
-    course_id: 8,
-    based_on: 'aco',
-    calculated_on: 'aco',
+    courseId: 8,
+    basedOn: 'aco',
+    calculatedOn: 'aco',
     path: [
       {
         id: 1,
@@ -1585,10 +1585,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 1,
-            student_id: 1,
-            learning_element_id: 1,
+            studentId: 1,
+            learningElementId: 1,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1610,10 +1610,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 2,
-            student_id: 2,
-            learning_element_id: 2,
+            studentId: 2,
+            learningElementId: 2,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1635,10 +1635,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 3,
-            student_id: 3,
-            learning_element_id: 3,
+            studentId: 3,
+            learningElementId: 3,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1660,10 +1660,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 4,
-            student_id: 4,
-            learning_element_id: 4,
+            studentId: 4,
+            learningElementId: 4,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1685,10 +1685,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 5,
-            student_id: 5,
-            learning_element_id: 5,
+            studentId: 5,
+            learningElementId: 5,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1710,10 +1710,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 6,
-            student_id: 6,
-            learning_element_id: 6,
+            studentId: 6,
+            learningElementId: 6,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1735,10 +1735,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 7,
-            student_id: 7,
-            learning_element_id: 7,
+            studentId: 7,
+            learningElementId: 7,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1760,10 +1760,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 8,
-            student_id: 8,
-            learning_element_id: 8,
+            studentId: 8,
+            learningElementId: 8,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1785,10 +1785,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 9,
-            student_id: 9,
-            learning_element_id: 9,
+            studentId: 9,
+            learningElementId: 9,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1810,10 +1810,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 10,
-            student_id: 10,
-            learning_element_id: 10,
+            studentId: 10,
+            learningElementId: 10,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1835,10 +1835,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 11,
-            student_id: 11,
-            learning_element_id: 11,
+            studentId: 11,
+            learningElementId: 11,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1860,10 +1860,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 12,
-            student_id: 12,
-            learning_element_id: 12,
+            studentId: 12,
+            learningElementId: 12,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1885,10 +1885,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 13,
-            student_id: 13,
-            learning_element_id: 13,
+            studentId: 13,
+            learningElementId: 13,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1910,10 +1910,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 14,
-            student_id: 14,
-            learning_element_id: 14,
+            studentId: 14,
+            learningElementId: 14,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1935,10 +1935,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 15,
-            student_id: 15,
-            learning_element_id: 15,
+            studentId: 15,
+            learningElementId: 15,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1960,10 +1960,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 16,
-            student_id: 16,
-            learning_element_id: 16,
+            studentId: 16,
+            learningElementId: 16,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -1985,10 +1985,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 17,
-            student_id: 17,
-            learning_element_id: 17,
+            studentId: 17,
+            learningElementId: 17,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2010,10 +2010,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 18,
-            student_id: 18,
-            learning_element_id: 18,
+            studentId: 18,
+            learningElementId: 18,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2035,10 +2035,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 19,
-            student_id: 19,
-            learning_element_id: 19,
+            studentId: 19,
+            learningElementId: 19,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       }
@@ -2046,9 +2046,9 @@ const hardcodedLearningPaths: LearningPath[] = [
   },
   {
     id: 9,
-    course_id: 9,
-    based_on: 'aco',
-    calculated_on: 'aco',
+    courseId: 9,
+    basedOn: 'aco',
+    calculatedOn: 'aco',
     path: [
       {
         id: 1,
@@ -2068,10 +2068,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 1,
-            student_id: 1,
-            learning_element_id: 1,
+            studentId: 1,
+            learningElementId: 1,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2093,10 +2093,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 2,
-            student_id: 2,
-            learning_element_id: 2,
+            studentId: 2,
+            learningElementId: 2,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2118,10 +2118,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 3,
-            student_id: 3,
-            learning_element_id: 3,
+            studentId: 3,
+            learningElementId: 3,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2143,10 +2143,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 4,
-            student_id: 4,
-            learning_element_id: 4,
+            studentId: 4,
+            learningElementId: 4,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2168,10 +2168,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 5,
-            student_id: 5,
-            learning_element_id: 5,
+            studentId: 5,
+            learningElementId: 5,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2193,10 +2193,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 6,
-            student_id: 6,
-            learning_element_id: 6,
+            studentId: 6,
+            learningElementId: 6,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2218,10 +2218,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 7,
-            student_id: 7,
-            learning_element_id: 7,
+            studentId: 7,
+            learningElementId: 7,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2243,10 +2243,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 8,
-            student_id: 8,
-            learning_element_id: 8,
+            studentId: 8,
+            learningElementId: 8,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2268,10 +2268,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 9,
-            student_id: 9,
-            learning_element_id: 9,
+            studentId: 9,
+            learningElementId: 9,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2293,10 +2293,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 10,
-            student_id: 10,
-            learning_element_id: 10,
+            studentId: 10,
+            learningElementId: 10,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2318,10 +2318,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 11,
-            student_id: 11,
-            learning_element_id: 11,
+            studentId: 11,
+            learningElementId: 11,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2343,10 +2343,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 12,
-            student_id: 12,
-            learning_element_id: 12,
+            studentId: 12,
+            learningElementId: 12,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2368,10 +2368,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 13,
-            student_id: 13,
-            learning_element_id: 13,
+            studentId: 13,
+            learningElementId: 13,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2393,10 +2393,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 14,
-            student_id: 14,
-            learning_element_id: 14,
+            studentId: 14,
+            learningElementId: 14,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       }
@@ -2404,9 +2404,9 @@ const hardcodedLearningPaths: LearningPath[] = [
   },
   {
     id: 14,
-    course_id: 14,
-    based_on: 'aco',
-    calculated_on: 'aco',
+    courseId: 14,
+    basedOn: 'aco',
+    calculatedOn: 'aco',
     path: [
       {
         id: 14,
@@ -2426,10 +2426,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 14,
-            student_id: 14,
-            learning_element_id: 14,
+            studentId: 14,
+            learningElementId: 14,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2451,10 +2451,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 15,
-            student_id: 15,
-            learning_element_id: 15,
+            studentId: 15,
+            learningElementId: 15,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       },
@@ -2476,10 +2476,10 @@ const hardcodedLearningPaths: LearningPath[] = [
           lastUpdated: 'now',
           studentLearningElement: {
             id: 16,
-            student_id: 16,
-            learning_element_id: 16,
+            studentId: 16,
+            learningElementId: 16,
             done: false,
-            done_at: 'now'
+            doneAt: 'now'
           }
         }
       }
