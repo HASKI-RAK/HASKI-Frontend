@@ -555,9 +555,9 @@ export const TableListKQuestions = () => {
                     justifyContent="space-around"
                     alignItems="center"
                 >
-                    <TableContainer component={Paper} style={{maxWidth: '51%'}}>
+                    <TableContainer component={Paper} style={{maxWidth: '71%'}}>
                         <Table style={{minWidth: '300px'}}>
-                            <TableBody key={"TableILSBody"}>
+                            <TableBody key={"TableListK"}>
                                 <TableRow>
                                     <TableCell align="left"
                                                sx={{
@@ -581,8 +581,8 @@ export const TableListKQuestions = () => {
                                                 direction="row"
                                                 justifyContent="space-around"
                                                 alignItems="center"
-                                                divider={<Divider orientation="vertical" flexItem
-                                                                  sx={{backgroundColor: (theme) => theme.palette.primary.dark}}/>}
+                                                spacing={1}
+                                                divider={<Divider orientation="vertical" flexItem/>}
                                             >
                                                 <FormControlLabel value={stepsListK[activeStep][0].answer1} control={<Radio/>}
                                                                   label={<Typography
@@ -626,8 +626,8 @@ export const TableListKQuestions = () => {
                                                 direction="row"
                                                 justifyContent="space-around"
                                                 alignItems="center"
-                                                divider={<Divider orientation="vertical" flexItem
-                                                                  sx={{backgroundColor: (theme) => theme.palette.primary.dark}}/>}
+                                                spacing={1}
+                                                divider={<Divider orientation="vertical" flexItem />}
                                             >
                                                 <FormControlLabel value={stepsListK[activeStep][1].answer1} control={<Radio/>}
                                                                   label={<Typography
@@ -671,8 +671,8 @@ export const TableListKQuestions = () => {
                                                 direction="row"
                                                 justifyContent="space-around"
                                                 alignItems="center"
-                                                divider={<Divider orientation="vertical" flexItem
-                                                                  sx={{backgroundColor: (theme) => theme.palette.primary.dark}}/>}
+                                                spacing={1}
+                                                divider={<Divider orientation="vertical" flexItem/>}
                                             >
                                                 <FormControlLabel value={stepsListK[activeStep][2].answer1} control={<Radio/>}
                                                                   label={<Typography
@@ -716,8 +716,8 @@ export const TableListKQuestions = () => {
                                                 direction="row"
                                                 justifyContent="space-around"
                                                 alignItems="center"
-                                                divider={<Divider orientation="vertical" flexItem
-                                                                  sx={{backgroundColor: (theme) => theme.palette.primary.dark}}/>}
+                                                spacing={1}
+                                                divider={<Divider orientation="vertical" flexItem/>}
                                             >
                                                 <FormControlLabel value={stepsListK[activeStep][3].answer1} control={<Radio/>}
                                                                   label={<Typography
@@ -763,8 +763,8 @@ export const TableListKQuestions = () => {
                                                         direction="row"
                                                         justifyContent="space-around"
                                                         alignItems="center"
-                                                        divider={<Divider orientation="vertical" flexItem
-                                                                          sx={{backgroundColor: (theme) => theme.palette.primary.dark}}/>}
+                                                        spacing={1}
+                                                        divider={<Divider orientation="vertical" flexItem/>}
                                                     >
                                                         <FormControlLabel value={stepsListK[activeStep][4].answer1} control={<Radio/>}
                                                                           label={<Typography
