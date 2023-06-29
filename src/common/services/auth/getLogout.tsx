@@ -1,16 +1,18 @@
-import { RequestResponse } from "./RequestResponse";
+import { getData } from './RequestResponse'
 
-export const getLogout = async (): Promise<RequestResponse> => {
-    return fetch(process.env.BACKEND + `/logout`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-            'Content-Type': 'text/html'
-        }
-    }).then((response) => {
-        return {
-            status: response.status,
-            message: response.statusText,
-        }
-    }) as Promise<RequestResponse>;
-};
+/**
+ * Sends a GET request to the backend to logout the user
+ * @remarks
+ * The response does not include a body.
+ * @returns {Promise<void>} The response of the request.
+ */
+export const getLogout = async (): Promise<void> => {
+  const response = await fetch(process.env.BACKEND + `/logout`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  return getData<undefined>(response)
+}

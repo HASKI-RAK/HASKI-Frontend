@@ -1,38 +1,51 @@
-import { useState, useEffect, useMemo } from "react";
-import { getLoginStatus, getLogout } from "@services";
+import { useMemo, useCallback } from 'react'
+import { AuthContextType, getLogout } from '@services'
+import { usePersistedStore } from '@store'
+import log from 'loglevel'
 
-const useAuthProvider = () => {
-    // State data
-    const [isAuth, setIsAuth] = useState(false);
+const useAuthProvider = (): AuthContextType => {
+  // State data
+  const expiration = usePersistedStore((state) => state.expire)
+  const setStoreExpire = usePersistedStore((state) => state.setExpire)
 
-    // Logic
-    const clearCookie = () => {
-        document.cookie = "haski_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  // Called by components which are part of login. Sets the auth state to true.
+  const setExpire = useCallback(
+    (expire: number) => {
+      setStoreExpire(expire)
+    },
+    [setStoreExpire]
+  )
+
+  // check UNIX timestamp against current time in seconds and return true if the token is still valid
+  const isAuth = useMemo(() => {
+    const now = Math.floor(Date.now() / 1000)
+    if (expiration < now) {
+      log.warn('isAuth. Expired: ', expiration, now)
+      return false
     }
+    log.debug('isAuth. Not expired: ', expiration, now)
+    return true
+  }, [expiration])
 
-    const logout = () => {
-        getLogout().then((response) => {
-            if (response.status === 200) {
-                setIsAuth(false);
-                clearCookie();
-            }
-        });
-    }
+  const logout = useCallback(() => {
+    getLogout()
+      .then(() => {
+        setExpire(0)
+        log.debug('logout successful')
+        // TODO 📑 clear state in zustand
+        // Snackbar will be handled by the component which calls logout
+      })
+      .catch((error: string) => {
+        log.error('logout failed: ', error)
+        throw new Error(error)
+      })
+  }, [])
 
-    // Side effects
-    useEffect(() => {
-        getLoginStatus().then((response) => {
-            // When the user is logged in, the backend will return 200, otherwise 401 and clear the cookie
-            if (response.status === 200) {
-                setIsAuth(true);
-            } else {
-                setIsAuth(false);
-                clearCookie();
-            }
-        });
-    }, []);
+  return {
+    isAuth,
+    setExpire,
+    logout
+  }
+}
 
-    return useMemo(() => ({ isAuth, setIsAuth, logout }), [isAuth]);
-};
-
-export { useAuthProvider };
+export { useAuthProvider }

@@ -1,7 +1,8 @@
-import { Home } from "@pages";
-import renderer from "react-test-renderer";
-import "@testing-library/jest-dom";
-import { fireEvent, render } from "@testing-library/react";
+import { Home } from '@pages'
+import '@testing-library/jest-dom'
+import { fireEvent, render } from '@testing-library/react'
+import { createMemoryHistory } from 'history'
+import { Router } from 'react-router-dom'
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -12,31 +13,26 @@ jest.mock('react-i18next', () => ({
         //changeLanguage: () => new Promise(() => {}),
         getFixedT: () => (str: string) => {
           if (str === 'components.QuestionnaireResults.TableILS.balanced') return 'balanced'
-          else return str;
-        },
+          else return str
+        }
         // You can include here any property your component may use
-      },
+      }
     }
-  },
+  }
 }))
 
-describe("Test the Home page", () => {
+describe('Test the Home page', () => {
+  const history = createMemoryHistory({ initialEntries: ['/home'] })
 
-  test("renders QuestionnaireResultsModal", () => {
-    const { getByTestId } = render(<Home />);
+  test('renders skeleton since no login is present', () => {
+    const result = render(
+      <Router location={history.location} navigator={history}>
+        <Home />
+      </Router>
+    )
 
-    fireEvent.click(getByTestId("QuestionnaireResultsButton"));
-
-    expect(getByTestId("QuestionnaireResultsButton")).toBeInTheDocument();
-  });
-
-  test('closes the questionnaire results modal when "handleClose" is called', () => {
-    const { getByTestId } = render(<Home />);
-    const button = getByTestId('QuestionnaireResultsButton');
-    fireEvent.click(button);
-    const modal = getByTestId('ILS and ListK Modal');
-    const closeButton = getByTestId('QuestionnaireResultsCloseButton');
-    fireEvent.click(closeButton);
-    expect(modal).not.toBeInTheDocument();
-  });
-});
+    result.debug()
+    // Expect skeleton to be rendered
+    expect(result.container.querySelectorAll('span').length).toEqual(1)
+  })
+})

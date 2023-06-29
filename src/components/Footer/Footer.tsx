@@ -1,13 +1,13 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import {
   DefaultContainer as Container,
   DefaultBox as Box,
   DefaultGrid as Grid,
   DefaultLink as Link,
-  DefaultTypography as Typography,
-} from "@common/components";
+  DefaultTypography as Typography
+} from '@common/components'
 
 /**
  * The footer component. *
@@ -20,64 +20,51 @@ import {
  */
 const Footer = () => {
   // UX Logic
-  const navigate = useNavigate();
-  const { t } = useTranslation();
+  const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const footerComponents = [
-    { name: [new Date().getFullYear()], link: "" },
-    { name: [t("pages.home")], link: "/" },
-    { name: [t("pages.projectinformation")], link: "/projectinformation" },
-    { name: [t("pages.contact")], link: "/contact" },
-    { name: [t("pages.imprint")], link: "/imprint" },
-    { name: [t("pages.privacypolicy")], link: "/privacypolicy" },
-  ];
+    { name: [new Date().getFullYear()], link: '' },
+    { name: [t('pages.home')], link: '/' },
+    { name: [t('pages.projectinformation')], link: '/projectinformation' },
+    { name: [t('pages.contact')], link: '/contact' },
+    { name: [t('pages.imprint')], link: '/imprint' },
+    { name: [t('pages.PrivacyPolicy')], link: '/privacypolicy' }
+  ]
 
   return (
     <footer>
       <Box
         sx={{
-          width: "100%",
-          height: "auto",
-          paddingTop: "1em",
-          paddingBottom: "1em",
-        }}
-      >
+          width: '100%',
+          height: 'auto',
+          paddingTop: '1em',
+          paddingBottom: '1em'
+        }}>
         <Container maxWidth="lg">
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
               <Typography color="black" variant="h5">
-                {t("projecthaski")}
+                {t('projectHASKI')}
               </Typography>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              display="flex"
-              width="100%"
-              justifyContent="center"
-            >
+            <Grid item xs={12} display="flex" width="100%" justifyContent="center">
               {footerComponents.map((component) => (
                 <React.Fragment key={component.link}>
                   <Link
                     marginX="0.2em"
                     component="button"
                     variant="subtitle1"
-                    color={"textSecondary"}
+                    color={'textSecondary'}
                     href={component.link}
                     underline="hover"
-                    onClick={() => navigate(component.link)}
-                  >
+                    onClick={() => navigate(component.link)}>
                     {component.name}
                   </Link>
-                  {footerComponents.indexOf(component) !==
-                    footerComponents.length - 1 && (
-                    <Typography
-                      marginX="0.2em"
-                      color="textSecondary"
-                      variant="subtitle1"
-                    >
-                      {" "}
-                      |{" "}
+                  {footerComponents.indexOf(component) !== footerComponents.length - 1 && (
+                    <Typography marginX="0.2em" color="textSecondary" variant="subtitle1">
+                      {' '}
+                      |{' '}
                     </Typography>
                   )}
                 </React.Fragment>
@@ -87,7 +74,7 @@ const Footer = () => {
         </Container>
       </Box>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

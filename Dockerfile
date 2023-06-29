@@ -1,21 +1,21 @@
-# pull official base image
-FROM node:14-slim
-
-# set working directory
+# build environment
+FROM node:16.20.0-alpine as build
 WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
-
-# install app dependencies
 COPY package.json ./
+COPY yarn.lock ./
 RUN yarn install
-
-# add app
 COPY . ./
+ARG NODE_ENV=production
+ARG BACKEND=https://backend.haski.app
+ARG MOODLE=https://moodle.haski.app
+RUN yarn build-prod
 
-# start app
-EXPOSE 3000
-ENV REACT_APP_BACKENDHOST https://api.haski.cluuub.xyz
-ENTRYPOINT [ "yarn" ]
-CMD ["start"]
+# production environment
+FROM nginx:stable-alpine
+# Overrite the config file. Fixes for react router by directing all requests to index.html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/public /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

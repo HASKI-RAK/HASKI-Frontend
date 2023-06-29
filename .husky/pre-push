@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# yarn test
+# yarn run ts-node src/shared/auto-order-json-translations.ts
+# yarn lint
+npx typedoc ./src/** --theme github-wiki

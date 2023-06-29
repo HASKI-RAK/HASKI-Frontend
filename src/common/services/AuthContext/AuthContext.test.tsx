@@ -1,87 +1,86 @@
-import "@testing-library/jest-dom";
-import AuthContext, { AuthContextType } from "./AuthContext";
-import { render, renderHook } from "@testing-library/react";
-import { useContext } from "react";
+import '@testing-library/jest-dom'
+import AuthContext, { AuthContextType } from './AuthContext'
+import { render, renderHook } from '@testing-library/react'
+import { useContext } from 'react'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve({ status: 200 }),
+    ok: true,
+    headers: {
+      get: () => 'application/json'
+    }
   })
-) as jest.Mock;
+) as jest.Mock
 
-describe("Test Authcontext", () => {
+describe('Test Authcontext', () => {
   // render custom component
   const TestComponent = () => {
-    const context = useContext(AuthContext);
-    const changeIsAuth = () => {
-      context.setIsAuth(!context.isAuth);
-    };
+    const context = useContext(AuthContext)
     return (
       <>
-        context.isAuth ?<button onClick={changeIsAuth}>Test</button> :
-        <button onClick={changeIsAuth}>Test2</button>
-        <button onClick={context.logout}>Logout</button>
+        {context.isAuth ? (
+          <button onClick={() => context.logout()}>Logout</button>
+        ) : (
+          <button onClick={() => context.setExpire(Math.round(new Date().getTime() / 1000) + 1000)}>Login</button>
+        )}
       </>
-    );
-  };
+    )
+  }
   const providedContext = {
     isAuth: false,
-    setIsAuth: function (active: boolean) {
-      this.isAuth = active;
-    },
-    logout: jest.fn(),
-  } as AuthContextType;
-  it("should render unauthorized", () => {
+    setExpire: jest.fn(),
+    logout: jest.fn()
+  } as AuthContextType
+  it('should render unauthorized', () => {
     const renderResult = render(
       <AuthContext.Provider value={providedContext}>
         <TestComponent />
       </AuthContext.Provider>
-    );
-    expect(renderResult.getByText("Test2")).toBeInTheDocument();
-  });
+    )
+    expect(renderResult.getByText('Login')).toBeInTheDocument()
+    renderResult.getByText('Login').click()
+    expect(providedContext.setExpire).toBeCalled()
+  })
 
-  it("should render authorized", () => {
+  it('should render authorized', () => {
     const renderResult = render(
       <AuthContext.Provider value={{ ...providedContext, isAuth: true }}>
         <TestComponent />
       </AuthContext.Provider>
-    );
-    expect(renderResult.getByText("Test")).toBeInTheDocument();
-  });
+    )
+    expect(renderResult.getByText('Logout')).toBeInTheDocument()
+    renderResult.getByText('Logout').click()
+    expect(providedContext.logout).toBeCalled()
+  })
 
-  it("should return the default props of AuthContext", () => {
-    const context = renderHook(() => useContext(AuthContext));
+  it('should return the default props of AuthContext', () => {
+    const context = renderHook(() => useContext(AuthContext))
     expect(context.result.current).toMatchObject({
       isAuth: false,
-      setIsAuth: expect.any(Function),
-      logout: expect.any(Function),
-    });
-  });
+      setExpire: expect.any(Function),
+      logout: expect.any(Function)
+    })
+  })
 
-  test("should change isAuth to true", () => {
-    const context = renderHook(() => useContext(AuthContext));
-    context.result.current.setIsAuth(true);
-    expect(context.result.current.isAuth).toBe(true);
-  });
-
-  test("should change isAuth to false", () => {
-    const context = renderHook(() => useContext(AuthContext));
-    context.result.current.setIsAuth(false);
-    expect(context.result.current.isAuth).toBe(false);
-  });
-
-  test("should call logout", () => {
+  test('should change isAuth to true', () => {
     const renderResult = render(
-      <AuthContext.Provider value={providedContext}>
+      <AuthContext.Provider value={{ ...providedContext }}>
         <TestComponent />
       </AuthContext.Provider>
-    );
-    renderResult.getByText("Logout").click();
-    expect(providedContext.logout).toBeCalled();
-  });
+    )
+    renderResult.getByText('Login').click()
+    expect(providedContext.setExpire).toBeCalled()
+  })
 
-  it("should call default logout", () => {
-    const context = renderHook(() => useContext(AuthContext));
-    context.result.current.logout();
-  });
-});
+  test('should change isAuth to false', () => {
+    const context = renderHook(() => useContext(AuthContext))
+    context.result.current.setExpire(0)
+    expect(context.result.current.isAuth).toBe(false)
+  })
+
+  it('should call default logout', () => {
+    const context = renderHook(() => useContext(AuthContext))
+    context.result.current.logout()
+  })
+})

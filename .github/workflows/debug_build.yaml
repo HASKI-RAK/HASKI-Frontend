@@ -2,7 +2,7 @@ name: frontend
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   publish_frontend:
     runs-on: ubuntu-latest
@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          submodules: "true"
+          submodules: 'true'
 
       - name: Set up Docker Buildx
         id: buildx

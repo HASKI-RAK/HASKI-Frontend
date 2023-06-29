@@ -1,15 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom'
 import {
   DefaultBox as Box,
   DefaultDivider as Divider,
-  DefaultTypography as Typography,
   DefaultStack as Stack,
-  DefaultGrid as Grid,
-  DefaultContainer as Container,
-} from "@common/components";
-
-import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from "@components";
-
+  DefaultGrid as Grid
+} from '@common/components'
+import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from '@components'
 /**
  * Main frame component.
  *
@@ -23,43 +19,38 @@ import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from "@components";
  * @category Pages
  */
 const MainFrame = () => (
-  <Stack direction="column" sx={{ minHeight: "inherit" }}>
+  <Stack direction="column" sx={{ minHeight: 'inherit' }}>
     <MenuBar />
     <BreadcrumbsContainer />
-    <Grid
-      flex={1}
-      container
-      sx={{ flexDirection: "column", justifyContent: "space-between" }}
-    >
-      <Grid container item flexGrow={1} sx={{ alignItems: "stretch" }}>
+    <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
+      <Grid container item flexGrow={1} sx={{ alignItems: 'stretch' }}>
         <Grid item xs={2}>
           <Box
-            height={"100%"}
+            height={'100%'}
             sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "stretch",
-            }}
-          >
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'stretch'
+            }}>
             <LocalNav />
             <Divider flexItem orientation="vertical" />
           </Box>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={10}>
           {/**💉 Pages get injected here through App routing */}
-          <Container>
-            <Outlet />
-          </Container>
+          {/* <Container maxWidth="lg" sx={{ height: '100%' }}> */}
+          <Outlet />
+          {/* </Container> */}
         </Grid>
-        <Grid item xs={2}>
-          {/** TODO 📑 add real gameification */}
+        {/** TODO 📑 add real gameification */}
+        {/* <Grid item xs={2}>
           <Typography variant="h4">Gamification</Typography>
-        </Grid>
+        </Grid> */}
       </Grid>
       <Divider flexItem />
       <Footer />
     </Grid>
   </Stack>
-);
+)
 
-export default MainFrame;
+export default MainFrame

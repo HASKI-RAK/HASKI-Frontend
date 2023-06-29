@@ -17,3 +17,13 @@ If your pull request changes the UI, please include screenshots of the changes.
 - [ ] Documentation <!-- changes to documentation only -->
 - [ ] CI/CD <!-- changes to CI/CD pipeline -->
 - [ ] Other <!-- please specify in the description below -->
+
+## Requirements
+- [ ] Everything build out of Material UI components
+- [ ] New Material UI components capsulated via dependency injection in "@common/components"
+- [ ] Provide basic information pieces in comments
+- [ ] Establish interface to backend (if necessary) 
+- [ ] Use Skeleton components if something has to be fetched (if necessary)
+- [ ] Error management: Components should handle undefined inputs
+- [ ] Components should be resuable (if possible)
+- [ ] [Component Requirements](https://lab.las3.de/nextcloud/index.php/apps/onlyoffice/510074?filePath=%2FHASKI-Extern%2F06-Frontend%2F03-UX%2F04-Implementation%2FComponent_Requirements.docx) are met
