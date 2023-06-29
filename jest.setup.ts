@@ -26,7 +26,7 @@ jest.spyOn(services, 'getLogout').mockImplementation(() => {
 
 jest.spyOn(services, 'postLogin').mockImplementation(() => {
   return Promise.resolve({
-    expiration: 999999999999999,
+    expiration: 999999999999999
   })
 })
 // ############################## Log ############################## //
@@ -63,6 +63,33 @@ jest.spyOn(services, 'getLearningPathElement').mockImplementation(() => {
             done: true,
             done_at: 'string'
           }
+        }
+      }
+    ]
+  })
+})
+
+jest.spyOn(services, 'getLearningPathTopic').mockImplementation(() => {
+  return Promise.resolve({
+    topics: [
+      {
+        contains_le: true,
+        created_at: 'string',
+        created_by: 'string',
+        id: 1,
+        is_topic: true,
+        last_updated: 'string',
+        lms_id: 1,
+        name: 'string',
+        parent_id: 1,
+        university: 'HS-Kempten',
+        student_topic: {
+          done: true,
+          done_at: 'string',
+          id: 1,
+          student_id: 1,
+          topic_id: 1,
+          visits: ['string']
         }
       }
     ]

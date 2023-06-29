@@ -174,7 +174,27 @@ describe('getSortedLearningPath', () => {
     await waitForNextUpdate()
 
     expect(result.current.loading).toBe(false)
-    expect(result.current.topics).toEqual([])
+    expect(result.current.topics).toEqual([{
+      contains_le: true,
+      created_at: 'string',
+      created_by: 'string',
+      id: 1,
+      is_topic: true,
+      last_updated: 'string',
+      lms_id: 1,
+      name: 'string',
+      parent_id: 1,
+      university: 'HS-Kempten',
+      student_topic: {
+        done: true,
+        done_at: 'string',
+        id: 1,
+        student_id: 1,
+        topic_id: 1,
+        visits: ['string']
+      }
+    }
+    ])
   })
 
   test('fetches learning path elements for a topic and returns the loading state', async () => {
