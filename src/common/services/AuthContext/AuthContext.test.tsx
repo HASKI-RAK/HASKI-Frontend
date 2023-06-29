@@ -5,7 +5,11 @@ import { useContext } from 'react'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
-    json: () => Promise.resolve({ status: 200 })
+    json: () => Promise.resolve({ status: 200 }),
+    ok: true,
+    headers: {
+      get: () => 'application/json'
+    }
   })
 ) as jest.Mock
 

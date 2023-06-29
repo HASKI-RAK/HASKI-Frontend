@@ -1,5 +1,6 @@
 import * as services from '@services'
-import { json } from 'stream/consumers'
+// ############################## Common ############################## //
+jest.mock('reactflow/dist/style.css', () => jest.fn())
 // ############################## Auth ############################## //
 // SpyOn getUser to return a mock user
 jest.spyOn(services, 'getUser').mockImplementation(() => {
@@ -20,11 +21,15 @@ jest.spyOn(services, 'getUser').mockImplementation(() => {
 })
 
 jest.spyOn(services, 'getLogout').mockImplementation(() => {
+  return Promise.resolve(undefined)
+})
+
+jest.spyOn(services, 'postLogin').mockImplementation(() => {
   return Promise.resolve({
-    status: 200,
-    message: 'OK'
+    expiration: 999999999999999,
   })
 })
+// ############################## Log ############################## //
 
 // ############################## LearningPath ############################## //
 // SpyOn getLearningPath to return a mock learning path

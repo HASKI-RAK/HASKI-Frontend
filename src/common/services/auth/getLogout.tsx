@@ -1,6 +1,12 @@
-import { RequestResponse } from './RequestResponse.d'
+import { getData } from './RequestResponse'
 
-export const getLogout = async (): Promise<RequestResponse> => {
+/**
+ * Sends a GET request to the backend to logout the user
+ * @remarks
+ * The response does not include a body.
+ * @returns {Promise<void>} The response of the request.
+ */
+export const getLogout = async (): Promise<void> => {
   const response = await fetch(process.env.BACKEND + `/logout`, {
     method: 'GET',
     credentials: 'include',
@@ -8,17 +14,5 @@ export const getLogout = async (): Promise<RequestResponse> => {
       'Content-Type': 'application/json'
     }
   })
-
-  const data = await response.json()
-
-  if (response.status !== 200) {
-    // This has to look like the backend error response
-    if ('error' in data) {
-      throw new Error(data['error'] + ' ' + data['message'])
-    } else {
-      throw new Error('Unknown error')
-    }
-  }
-  if (data && data.status) return { status: response.status, message: response.statusText, json: data }
-  else throw new Error('Unknown error during data parsing')
+  return getData<undefined>(response)
 }

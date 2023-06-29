@@ -1,6 +1,8 @@
 import { Home } from '@pages'
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
+import { createMemoryHistory } from 'history'
+import { Router } from 'react-router-dom'
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -20,21 +22,17 @@ jest.mock('react-i18next', () => ({
 }))
 
 describe('Test the Home page', () => {
-  test('renders QuestionnaireResultsModal', () => {
-    const { getByTestId } = render(<Home />)
+  const history = createMemoryHistory({ initialEntries: ['/home'] })
 
-    fireEvent.click(getByTestId('QuestionnaireResultsButton'))
+  test('renders skeleton since no login is present', () => {
+    const result = render(
+      <Router location={history.location} navigator={history}>
+        <Home />
+      </Router>
+    )
 
-    expect(getByTestId('QuestionnaireResultsButton')).toBeInTheDocument()
-  })
-
-  test('closes the questionnaire results modal when "handleClose" is called', () => {
-    const { getByTestId } = render(<Home />)
-    const button = getByTestId('QuestionnaireResultsButton')
-    fireEvent.click(button)
-    const modal = getByTestId('ILS and ListK Modal')
-    const closeButton = getByTestId('QuestionnaireResultsCloseButton')
-    fireEvent.click(closeButton)
-    expect(modal).not.toBeInTheDocument()
+    result.debug()
+    // Expect skeleton to be rendered
+    expect(result.container.querySelectorAll('span').length).toEqual(1)
   })
 })

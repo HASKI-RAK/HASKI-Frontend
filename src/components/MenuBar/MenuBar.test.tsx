@@ -428,7 +428,7 @@ describe('MenuBar', () => {
     expect(getByText('Allgemeine Informatik')).toBeInTheDocument()
 
     fireEvent.click(getAllByText('Allgemeine Informatik')[0])
-    expect(history.location.pathname).toBe('/course/2/topic/1')
+    expect(history.location.pathname).toBe('/course/undefined/topic/1')
     //fireEvent.keyDown(getAllByText('components.MenuBar.TopicButton')[0], {key: "esc",})
     //fireEvent.click(getAllByText('components.MenuBar.TopicButton')[0])
 

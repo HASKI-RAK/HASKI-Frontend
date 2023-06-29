@@ -1,6 +1,6 @@
-import { AuthContext, SnackbarContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
+import { AuthContext, SnackbarContext, postLogin, redirectMoodleLogin } from '@services'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useContext, useCallback } from 'react'
+import { useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export type LoginHookParams = {
@@ -38,16 +38,11 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
   const onMoodleLogin = () => {
     params.setIsLoading(true)
     redirectMoodleLogin()
-      .then((response) => {
-        if (response.status === 200) {
-          // 👇️ redirects to Moodle LTI launch acticity
-          window.location.replace(response.message)
-        } else {
-          //TODO 🍿 snackbar
-          addSnackbar({ message: response.message, severity: 'error', autoHideDuration: 5000 })
-        }
-      })
-      .catch((error: string) => {
+      .then((response) =>
+        // 👇️ redirects to Moodle LTI launch acticity
+        window.location.replace(response.lti_launch_view)
+      )
+      .catch((error) => {
         //TODO 🍿 snackbar
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
       })
@@ -58,6 +53,9 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
 
   // on mount, read search param 'nounce' and set it to state
   useEffect(() => {
+    if (!params.nonce)
+      return
+
     postLogin({ nonce: params.nonce })
       .then((response) => {
         // supply auth context

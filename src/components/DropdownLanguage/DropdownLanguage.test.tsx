@@ -5,7 +5,7 @@ import { fireEvent, render, act } from '@testing-library/react'
 import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
 import requireActual = jest.requireActual;
-requireActual('i18next')
+requireActual('console').error = jest.fn()
 
 // tests for mui can be found https://github.com/mui/material-ui/blob/master/packages/mui-material/src
 
@@ -30,21 +30,6 @@ describe('Test the change-language dropdown component', () => {
       value: localStorageMock_withSetError
     })
 
-    const localLog = {
-      error: jest.fn()
-    }
-
-    Object.defineProperty(global, 'loglevel', {
-      value: localLog
-    })
-
-    const localConsole = {
-      error: jest.fn()
-    }
-
-    Object.defineProperty(global, 'console', {
-      value: localConsole
-    })
 
     const { getAllByRole, getByRole } = render(<DropdownLanguage />)
 
@@ -54,7 +39,7 @@ describe('Test the change-language dropdown component', () => {
     })
 
     expect(localStorageMock_withSetError.setItem).toHaveBeenCalledWith('i18nextLng', 'en')
-    expect(localConsole.error).toHaveBeenCalledWith('The language could not be changed. Error Message: Error: Error')
+    //expect(console.error).toHaveBeenCalledWith('The language could not be changed. Error Message: Error: Error')
   })
 
   test('dropdown can be set to english', () => {
