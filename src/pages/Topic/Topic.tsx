@@ -7,6 +7,7 @@ import { IFrameModal, nodeTypes } from '@components'
 import { useTheme } from '@mui/material' // TODO: DI?
 import { AuthContext } from '@services'
 import { useStore, usePersistedStore } from '@store'
+import { SnackbarContext } from '@services'
 
 export type TopicProps = {
   useTopic?: (params?: useTopicHookParams) => TopicHookReturn
@@ -45,7 +46,7 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             () => console.log('innerFailed') // TODO: Maybe add Snackbar
           )
         },
-        () => console.log('failed')
+        (error) => console.log('failed')
       ) // TODO: Maybe add Snackbar
     }
     return () => {
@@ -68,3 +69,12 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 }
 
 export default Topic
+
+/*
+
+    const { addSnackbar } = React.useContext(SnackbarContext)
+    addSnackbar({
+      message: 'Error while initializing i18next: ' + error,
+      severity: 'error',
+      autoHideDuration: 3000
+    })*/

@@ -10,9 +10,13 @@ import { Router } from 'react-router-dom'
 import Topic from './Topic'
 import { AuthContext } from '@services'
 import * as services from '@services'
-beforeEach(() => {
-  mockReactFlow()
 
+jest.useFakeTimers()
+jest.spyOn(global, 'setTimeout')
+
+beforeEach(() => {
+  jest.clearAllTimers()
+  mockReactFlow()
 })
 
 describe('Topic tests', () => {
@@ -22,16 +26,16 @@ describe('Topic tests', () => {
     return Promise.resolve({
       id: 1,
       lmsUserId: 1,
-      name: "string",
-      role: "string",
+      name: 'string',
+      role: 'string',
       roleId: 1,
       settings: {
         id: 1,
         userId: 1,
-        pswd: "string",
-        theme: "string",
+        pswd: 'string',
+        theme: 'string'
       },
-      university: "string"
+      university: 'string'
     })
   })
 
@@ -41,57 +45,159 @@ describe('Topic tests', () => {
     return Promise.resolve({
       id: 1,
       course_id: 2,
-      based_on: "string",
-      calculated_on: "string",
-      path: [{
-        id: 1,
-        learningElementId: 1,
-        learningPathId: 1,
-        recommended: true,
-        position: 1,
-        learningElement: {
+      based_on: 'string',
+      calculated_on: 'string',
+      path: [
+        {
           id: 1,
-          lmsId: 1,
-          activityType: "string",
-          classification: "string",
-          name: "string",
-          university: "string",
-          createdBy: "string",
-          createdAt: "string",
-          lastUpdated: "string",
-          studentLearningElement: {
+          learningElementId: 1,
+          learningPathId: 1,
+          recommended: true,
+          position: 1,
+          learningElement: {
             id: 1,
-            student_id: 1,
-            learning_element_id: 1,
-            done: true,
-            done_at: "string"
+            lmsId: 1,
+            activityType: 'string',
+            classification: 'string',
+            name: 'string',
+            university: 'string',
+            createdBy: 'string',
+            createdAt: 'string',
+            lastUpdated: 'string',
+            studentLearningElement: {
+              id: 1,
+              student_id: 1,
+              learning_element_id: 1,
+              done: true,
+              done_at: 'string'
+            }
           }
         }
-      }]
+      ]
     })
   })
 
-  it('auth is false', () => {
+  it('auth is false', async () => {
     const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
-    render(
-      <Router location={history.location} navigator={history}>
-        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Topic />
-        </AuthContext.Provider>
-      </Router>
-    )
-
-    // timeout beenden
+    await act(async () => {
+      render(
+        <Router location={history.location} navigator={history}>
+          <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Topic />
+          </AuthContext.Provider>
+        </Router>
+      )
+    })
   })
 
-  it('auth is true', () => {
+  it('auth is true', async () => {
     const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
-    render(
-      <Router location={history.location} navigator={history}>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+    await act(async () => {
+      render(
+        <Router location={history.location} navigator={history}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Topic />
+          </AuthContext.Provider>
+        </Router>
+      )
+    })
+  })
+
+  it('auth is true and user is admin', async () => {
+    const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
+    await act(async () => {
+      render(
+        <Router location={history.location} navigator={history}>
           <Topic />
-        </AuthContext.Provider>
-      </Router>
-    )
+        </Router>
+      )
+    })
+
+    jest.runAllTimers()
+  })
+})
+
+describe('Topic tests 2', () => {
+  const mock3 = jest.spyOn(services, 'getUser')
+  mock3.mockImplementation(() => {
+    return Promise.reject({
+      id: 1,
+      lmsUserId: 1,
+      name: 'string',
+      role: 'string',
+      roleId: 1,
+      settings: {
+        id: 1,
+        userId: 1,
+        pswd: 'string',
+        theme: 'string'
+      },
+      university: 'string'
+    })
+  })
+
+  test('getUser fails', async () => {
+    const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
+    await act(async () => {
+      render(
+        <Router location={history.location} navigator={history}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Topic />
+          </AuthContext.Provider>
+        </Router>
+      )
+    })
+  })
+
+  // getuser muss resolved werden, sonst wird der rest nicht ausgeführt
+
+  const mock4 = jest.spyOn(services, 'getLearningPath')
+  mock4.mockImplementation(() => {
+    return Promise.reject({
+      id: 1,
+      course_id: 2,
+      based_on: 'string',
+      calculated_on: 'string',
+      path: [
+        {
+          id: 1,
+          learningElementId: 1,
+          learningPathId: 1,
+          recommended: true,
+          position: 1,
+          learningElement: {
+            id: 1,
+            lmsId: 1,
+            activityType: 'string',
+            classification: 'string',
+            name: 'string',
+            university: 'string',
+            createdBy: 'string',
+            createdAt: 'string',
+            lastUpdated: 'string',
+            studentLearningElement: {
+              id: 1,
+              student_id: 1,
+              learning_element_id: 1,
+              done: true,
+              done_at: 'string'
+            }
+          }
+        }
+      ]
+    })
+  })
+
+  test('getLearningPath fails', async () => {
+    const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
+    await act(async () => {
+      render(
+        <Router location={history.location} navigator={history}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Topic />
+          </AuthContext.Provider>
+        </Router>
+      )
+    })
   })
 })
