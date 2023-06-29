@@ -28,14 +28,17 @@ const useAuthProvider = (): AuthContextType => {
   }, [expiration])
 
   const logout = useCallback(() => {
-    getLogout().then((response) => {
-      if (response.status === 200) {
-        log.debug('logout successful')
-        setExpire(0)
-        //addSnackbar({ message: t('services.AuthProvider.logout'), severity: 'success', autoHideDuration: 5000 })
-      }
+    getLogout().then(() => {
+      setExpire(0)
+      log.debug('logout successful')
+      // TODO 📑 clear state in zustand
+      // Snackbar will be handled by the component which calls logout
+    }
+    ).catch((error: string) => {
+      log.error('logout failed: ', error)
+      throw new Error(error)
     })
-  }, [setExpire])
+  }, [])
 
   return {
     isAuth,

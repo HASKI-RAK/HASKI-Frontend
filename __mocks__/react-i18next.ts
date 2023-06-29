@@ -4,7 +4,7 @@ const useTranslation = () => {
   return {
     t: (str: string) => str,
     i18n: {
-      changeLanguage: () => new Promise(() => {})
+      changeLanguage: () => new Promise(() => { return })
     }
   }
 }
@@ -18,4 +18,4 @@ const I18nextProvider = ({ children }: any) => {
   return children
 }
 
-export { useTranslation, initReactI18next, I18nextProvider }
+export { useTranslation, initReactI18next, I18nextProvider, reactI18Next }
