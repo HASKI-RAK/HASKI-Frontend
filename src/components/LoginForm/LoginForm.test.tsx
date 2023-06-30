@@ -8,7 +8,7 @@ global.fetch = jest.fn(() =>
     headers: {
       get: () => 'application/json'
     },
-    ok: true,
+    ok: true
   })
 ) as jest.Mock
 describe('Test LoginForm', () => {

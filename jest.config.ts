@@ -32,8 +32,7 @@ const config: Config.InitialOptions = {
   transform: {
     'node_modules/variables/.+\\.(j|t)sx?$': 'ts-jest'
   },
-  transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$', 'node_modules/(?!variables/.*)'],
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts']
+  transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$', 'node_modules/(?!variables/.*)']
 }
 
 export default config

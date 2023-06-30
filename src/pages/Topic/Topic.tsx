@@ -2,12 +2,11 @@ import { useTopic as _useTopic, useTopicHookParams, TopicHookReturn } from './To
 import { DefaultBox as Box, DefaultSkeleton as Skeleton } from '@common/components'
 import ReactFlow, { Node, Edge, MiniMap, Controls, Background } from 'reactflow'
 import { useNavigate, useParams } from 'react-router-dom'
+import { AuthContext, SnackbarContext } from '@services'
 import { useEffect, useState, useContext } from 'react'
+import { useStore, usePersistedStore } from '@store'
 import { IFrameModal, nodeTypes } from '@components'
 import { useTheme } from '@mui/material' // TODO: DI?
-import { AuthContext } from '@services'
-import { useStore, usePersistedStore } from '@store'
-import { SnackbarContext } from '@services'
 
 export type TopicProps = {
   useTopic?: (params?: useTopicHookParams) => TopicHookReturn
@@ -17,7 +16,8 @@ export type TopicProps = {
 const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const theme = useTheme()
   const navigate = useNavigate()
-  const authcontext = useContext(AuthContext)
+  const authContext = useContext(AuthContext)
+  const { addSnackbar } = useContext(SnackbarContext)
 
   const { courseId, topicId } = useParams()
   const { url, title, isOpen, handleClose, mapNodes } = useTopic()
@@ -33,7 +33,7 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     const preventEndlessLoading = setTimeout(() => {
       navigate('/login')
     }, 5000)
-    if (authcontext.isAuth) {
+    if (authContext.isAuth) {
       clearTimeout(preventEndlessLoading)
       fetchUser().then(
         (user) => {
@@ -43,16 +43,28 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               setInitialNodes(nodes)
               setInitialEdges(edges)
             },
-            () => console.log('innerFailed') // TODO: Maybe add Snackbar
+            (error) => {
+              addSnackbar({
+                message: error,
+                severity: 'error',
+                autoHideDuration: 3000
+              })
+            }
           )
         },
-        (error) => console.log('failed')
-      ) // TODO: Maybe add Snackbar
+        (error) => {
+          addSnackbar({
+            message: error,
+            severity: 'error',
+            autoHideDuration: 3000
+          })
+        }
+      )
     }
     return () => {
       clearTimeout(preventEndlessLoading)
     }
-  }, [authcontext.isAuth, courseId, fetchLearningPath, fetchUser, theme, topicId, mapNodes, navigate])
+  }, [authContext.isAuth, courseId, fetchLearningPath, fetchUser, theme, topicId, mapNodes, navigate])
 
   return initialNodes && initialEdges ? (
     <Box height={'100%'}>
@@ -69,12 +81,3 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 }
 
 export default Topic
-
-/*
-
-    const { addSnackbar } = React.useContext(SnackbarContext)
-    addSnackbar({
-      message: 'Error while initializing i18next: ' + error,
-      severity: 'error',
-      autoHideDuration: 3000
-    })*/
