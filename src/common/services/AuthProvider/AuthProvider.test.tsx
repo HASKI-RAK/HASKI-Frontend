@@ -98,4 +98,15 @@ describe('Test AuthProvider', () => {
       expect(_result.current.isAuth).toBe(false)
     })
   })
+
+
+  it('should throw an error if logout fails', async () => {
+
+    const { result } = renderHook(() => useAuthProvider())
+    act(() => {
+      result.current.setExpire(1234567890)
+    })
+
+    await expect(result.current.logout()).rejects.toThrow()
+  })
 })
