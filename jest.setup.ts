@@ -1,5 +1,17 @@
-// Jest setup file
-const original = {
+/**
+ * Add custom mocks here to be used in tests
+ * use import { mockServices } from '@tests/jest.setup' to import mocks
+ * use mockServices.<mockName> to access a mock
+ * use mockServices.<mockName>.mockImplementationOnce(() => {}) to define a mock for a single test
+ * @remarks
+ * This file is automatically imported by Jest
+ * @packageDocumentation
+ * @module jest.setup
+ * @preferred
+ * @see {@link https://jestjs.io/docs/configuration#setupfilesafterenv-array | Jest setupFilesAfterEnv}
+ * @see {@link https://jestjs.io/docs/mock-functions | Jest Mock Functions}
+ */
+const mockData = {
   getUser: jest.fn().mockImplementation(() => {
     return Promise.resolve({
       id: 1,
@@ -57,11 +69,23 @@ const original = {
     })
   })
 }
+/**
+ * This object is used to store mocks. After each test, the object is cleaned up.
+ * @remarks
+ * Do not use this object directly, use the proxy {@link mockServices} instead
+ * @packageDocumentation
+ * @module jest.setup
+ * @preferred
+ */
 const mockImplementations: { [key: string]: jest.Mock } = {
-  ...original
+  ...mockData
   // Add more predefined mocks here
 }
-// use a proxy when the user adds a mock that doesn't exist
+/**
+ * This object acts as a proxy for {@link mockImplementations}. If a mock is not defined in {@link mockImplementations}, it is created and added to {@link mockImplementations}.
+ * @remarks
+ * Do not use {@link mockImplementations} directly, use {@link mockServices} instead
+ */
 export const mockServices = new Proxy(mockImplementations, {
   get: (target, property) => {
     // If the mock does not exist on mocks, return user defined mock
@@ -72,19 +96,32 @@ export const mockServices = new Proxy(mockImplementations, {
   }
 })
 
-// cleanup after each test
+/**
+ * This function is called after each test. It removes all mocks that are not defined in {@link mockData}.
+ * @remarks
+ * By default, all mocks are removed after each test. If you want to keep a mock, add it to {@link mockData}
+ */
 afterEach(() => {
-  // remove key in mockImplementations if not present in original object
   Object.keys(mockImplementations).forEach((key) => {
-    if (!(key in original)) {
+    if (!(key in mockData)) {
       delete mockImplementations[key]
     }
   })
 })
 
 // ############################## Common ############################## //
+
 jest.mock('reactflow/dist/style.css', () => jest.fn())
 
+// ############################## Services ############################## //
+/**
+ * This mock is used to mock all services. If a predefined mock exists, it is used. Otherwise, the actual implementation is used.
+ * @remarks
+ * If you want to mock a new module, duplicate this mock and replace the module name.
+ * @packageDocumentation
+ * @module jest.setup
+ * @preferred
+ */
 jest.mock<typeof import('@services')>('@services', () => {
   const actualModule = jest.requireActual('@services')
   return new Proxy(actualModule, {
