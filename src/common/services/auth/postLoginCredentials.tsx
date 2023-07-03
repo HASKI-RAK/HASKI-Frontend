@@ -1,4 +1,4 @@
-import { RequestResponse, getData } from './RequestResponse'
+import { RequestResponse, getData } from '../RequestResponse'
 
 export const postLoginCredentials = async (): Promise<RequestResponse> => {
   const response = await fetch(process.env.BACKEND + `/login_credentials`, {

@@ -1,4 +1,4 @@
-import { RequestResponse, getData } from './RequestResponse'
+import { RequestResponse, getData } from '../RequestResponse'
 
 describe('RequestResponse', () => {
 
