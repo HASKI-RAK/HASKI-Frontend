@@ -50,7 +50,6 @@ export const mockReactFlow = () => {
       }
     }
   })
-
   ;(global.SVGElement as any).prototype.getBBox = () => ({
     x: 0,
     y: 0,

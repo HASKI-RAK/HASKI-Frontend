@@ -4,7 +4,10 @@ const useTranslation = () => {
   return {
     t: (str: string) => str,
     i18n: {
-      changeLanguage: () => new Promise(() => { return })
+      changeLanguage: () =>
+        new Promise(() => {
+          return
+        })
     }
   }
 }

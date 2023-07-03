@@ -28,15 +28,16 @@ const useAuthProvider = (): AuthContextType => {
   }, [expiration])
 
   const logout = useCallback(async () => {
-    return getLogout().then(() => {
-      setExpire(0)
-      log.debug('logout successful')
-      // TODO 📑 clear state in zustand
-      // Snackbar will be handled by the component which calls logout
-    }
-    ).catch((error) => {
-      throw new Error(error)
-    })
+    return getLogout()
+      .then(() => {
+        setExpire(0)
+        log.debug('logout successful')
+        // TODO 📑 clear state in zustand
+        // Snackbar will be handled by the component which calls logout
+      })
+      .catch((error) => {
+        throw new Error(error)
+      })
   }, [])
 
   return {

@@ -53,8 +53,7 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
 
   // on mount, read search param 'nounce' and set it to state
   useEffect(() => {
-    if (!params.nonce)
-      return
+    if (!params.nonce) return
 
     postLogin({ nonce: params.nonce })
       .then((response) => {

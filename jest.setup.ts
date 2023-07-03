@@ -53,12 +53,12 @@ const original = {
   }),
   postLogin: jest.fn().mockImplementation(() => {
     return Promise.resolve({
-      expiration: 999999999999999,
+      expiration: 999999999999999
     })
   })
 }
 const mockImplementations: { [key: string]: jest.Mock } = {
-  ...original,
+  ...original
   // Add more predefined mocks here
 }
 // use a proxy when the user adds a mock that doesn't exist
@@ -66,36 +66,35 @@ export const mockServices = new Proxy(mockImplementations, {
   get: (target, property) => {
     // If the mock does not exist on mocks, return user defined mock
     if (typeof property === 'string' && !(property in mockImplementations)) {
-      mockImplementations[property] = jest.fn();
+      mockImplementations[property] = jest.fn()
     }
-    return Reflect.get(target, property);
+    return Reflect.get(target, property)
   }
-});
+})
 
 // cleanup after each test
 afterEach(() => {
   // remove key in mockImplementations if not present in original object
-  Object.keys(mockImplementations).forEach(key => {
+  Object.keys(mockImplementations).forEach((key) => {
     if (!(key in original)) {
-      delete mockImplementations[key];
+      delete mockImplementations[key]
     }
   })
-});
-
+})
 
 // ############################## Common ############################## //
 jest.mock('reactflow/dist/style.css', () => jest.fn())
 
-jest.mock<typeof import("@services")>('@services', () => {
-  const actualModule = jest.requireActual('@services');
+jest.mock<typeof import('@services')>('@services', () => {
+  const actualModule = jest.requireActual('@services')
   return new Proxy(actualModule, {
     get: (target, property) => {
       // If a predefined mock exists, use it
       if (typeof property === 'string' && mockImplementations[property]) {
-        return mockImplementations[property];
+        return mockImplementations[property]
       }
       // Otherwise, use the actual implementation
-      return Reflect.get(target, property);
+      return Reflect.get(target, property)
     }
-  });
-});
+  })
+})

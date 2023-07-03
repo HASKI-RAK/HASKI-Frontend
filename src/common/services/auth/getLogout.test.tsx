@@ -9,7 +9,7 @@ global.fetch = jest.fn(() =>
     status: 200,
     message: 'OK',
     headers: {
-      get: () => 'text/plain',
+      get: () => 'text/plain'
     }
   })
 ) as jest.Mock

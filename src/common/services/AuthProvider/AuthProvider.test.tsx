@@ -100,9 +100,7 @@ describe('Test AuthProvider', () => {
     })
   })
 
-
   it('should throw an error if logout fails', async () => {
-
     mockServices.getLogout.mockImplementationOnce(() => {
       return Promise.reject('logout failed')
     })
@@ -116,7 +114,6 @@ describe('Test AuthProvider', () => {
   })
 
   it('should work again', async () => {
-
     const { result } = renderHook(() => useAuthProvider())
     act(() => {
       result.current.setExpire(9999999999) // if this test fails, how did react js even survive this long?
@@ -125,8 +122,7 @@ describe('Test AuthProvider', () => {
     // logout should throw an error
     await act(async () => {
       await result.current.logout()
-    }
-    )
+    })
     expect(result.current.isAuth).toBe(false)
   })
 })
