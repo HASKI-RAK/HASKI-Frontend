@@ -8,8 +8,13 @@ import DefaultGroup from '../DefaultGroup/DefaultGroup'
 import ExampleNode from '../ExampleNode/ExampleNode'
 import SummaryNode from '../SummaryNode/SummaryNode'
 import VideoNode from '../VideoNode/VideoNode'
+import BasicNode from '../BasicNode/BasicNode'
 import { NodeTypes } from 'reactflow'
 
+/**
+ * nodeTypes presents a object containing all node types.
+ * @returns {NodeTypes} - Returns a list of all node types.
+ */
 export const nodeTypes: NodeTypes = {
   RQ: FeedbackNode,
   KÜ: ShortTextualIntroductionNode,
@@ -20,5 +25,6 @@ export const nodeTypes: NodeTypes = {
   ZF: SummaryNode,
   ZL: AdditionalLiteratureNode,
   SE: SelfAssessmentNode,
-  GROUP: DefaultGroup
+  GROUP: DefaultGroup,
+  DEFAULT: BasicNode
 }

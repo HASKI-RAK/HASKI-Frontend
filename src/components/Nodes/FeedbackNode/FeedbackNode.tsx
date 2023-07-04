@@ -4,6 +4,14 @@ import { Handle, NodeProps, Position } from 'reactflow'
 import FeedbackIcon from '@mui/icons-material/Feedback' // TODO: DI
 import { memo } from 'react'
 
+/**
+ * FeedbackNode presents a component that displays a node with an icon and a name.
+ * It can be clicked to open a corresponding activity of the lms.
+ * FeedbackNode can't be used as a standalone component and must be rendered via ReactFlow.
+ * @param props - Props containing the data of the node.
+ * @returns {JSX.Element} - The FeedbackNode component.
+ * @category Components
+ */
 const FeedbackNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
     <Box
@@ -11,7 +19,8 @@ const FeedbackNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
       onClick={() => {
         data.handleOpen()
         data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
-      }}>
+      }}
+      data-testid={'feedbackNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
         sx={{

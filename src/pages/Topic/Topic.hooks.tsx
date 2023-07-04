@@ -15,14 +15,9 @@ export type TopicHookReturn = {
   readonly title: string
   readonly isOpen: boolean
   readonly handleClose: () => void
-  readonly mapLearningPathToNodes: (
-    learningPath: LearningPath,
-    theme: Theme,
-    handleSetUrl: (url: string) => void,
-    handleSetTitle: (title: string) => void,
-    handleOpen: () => void,
-    handleClose: () => void
-  ) => Node[]
+  readonly handleOpen: () => void
+  readonly handleSetUrl: (url: string) => void
+  readonly handleSetTitle: (title: string) => void
   readonly mapNodes: (
     learningPathData: LearningPath,
     theme: Theme
@@ -154,8 +149,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           handleClose: handleClose
         }
 
-        // TODO: Rename
-        const getY = () => {
+        const getNodeYPos = () => {
           if (exerciseLearningElementParentNode && item.position >= parseInt(exerciseLearningElementParentNode.id)) {
             return 250 * (item.position - exerciseLearningElementChildNodes.length) + groupHeight - 70
           } else {
@@ -169,7 +163,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           data: nodeData,
           position: {
             x: nodeOffsetX + (300 * (learningPathExercises.length - 1)) / 2,
-            y: getY()
+            y: getNodeYPos()
           },
           style: learningElementStyle
         }
@@ -241,9 +235,11 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         title,
         isOpen,
         handleClose,
-        mapLearningPathToNodes,
+        handleOpen,
+        handleSetUrl,
+        handleSetTitle,
         mapNodes
       } as const),
-    [url, title, isOpen, handleClose, mapLearningPathToNodes, mapNodes]
+    [url, title, isOpen, handleClose, handleOpen, handleSetUrl, handleSetTitle, mapNodes]
   )
 }

@@ -4,6 +4,14 @@ import AssignmentIcon from '@mui/icons-material/Assignment' // TODO: DI
 import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
 
+/**
+ * ExampleNode presents a component that displays a node with an icon and a name.
+ * It can be clicked to open a corresponding activity of the lms.
+ * ExampleNode can't be used as a standalone component and must be rendered via ReactFlow.
+ * @param props - Props containing the data of the node.
+ * @returns {JSX.Element} - The ExampleNode component.
+ * @category Components
+ */
 const ExampleNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
     <Box
@@ -11,7 +19,8 @@ const ExampleNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
       onClick={() => {
         data.handleOpen()
         data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
-      }}>
+      }}
+      data-testid={'exampleNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
         sx={{

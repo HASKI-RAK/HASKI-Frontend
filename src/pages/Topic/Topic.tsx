@@ -64,7 +64,7 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     return () => {
       clearTimeout(preventEndlessLoading)
     }
-  }, [authContext.isAuth, courseId, fetchLearningPath, fetchUser, theme, topicId, mapNodes, navigate])
+  }, [authContext.isAuth, courseId, fetchLearningPath, fetchUser, theme, topicId, mapNodes, navigate, addSnackbar])
 
   return initialNodes && initialEdges ? (
     <Box height={'100%'}>

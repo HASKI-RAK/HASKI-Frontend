@@ -1,10 +1,10 @@
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
-import { render, fireEvent } from '@testing-library/react'
 import { mockReactFlow } from '__mocks__/ResizeObserver'
+import { render } from '@testing-library/react'
 import ReactFlow, { Node } from 'reactflow'
 import '@testing-library/jest-dom'
 
-describe('AdditionalLiteratureNode tests', () => {
+describe('DefaultGroup tests', () => {
   beforeEach(() => {
     mockReactFlow()
   })
@@ -13,7 +13,7 @@ describe('AdditionalLiteratureNode tests', () => {
     lmsId: 1,
     name: 'testNode',
     activityType: 'testType',
-    classification: 'ZL',
+    classification: 'GROUP',
     isRecommended: true,
     handleSetUrl: jest.fn(),
     handleSetTitle: jest.fn(),
@@ -31,15 +31,9 @@ describe('AdditionalLiteratureNode tests', () => {
     }
   }
 
-  it('renders correctly and can be clicked', () => {
-    const { getByTestId } = render(<ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />)
-    const additionalLiteratureNode = getByTestId('additionalLiteratureNode')
+  it('renders correctly', () => {
+    const reactFlow = render(<ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />)
 
-    expect(additionalLiteratureNode).toBeInTheDocument()
-
-    fireEvent.click(additionalLiteratureNode)
-
-    expect(mockNode.data.handleOpen).toBeCalled()
-    expect(mockNode.data.handleSetUrl).toBeCalled()
+    expect(reactFlow).toBeTruthy()
   })
 })

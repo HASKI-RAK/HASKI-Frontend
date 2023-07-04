@@ -2,16 +2,25 @@ import { DefaultBox as Box, DefaultPaper as Paper, DefaultTypography as Typograp
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
 import ArticleIcon from '@mui/icons-material/Article' // TODO: DI
-import { memo, useCallback, MouseEventHandler } from 'react'
+import { memo } from 'react'
 
+/**
+ * AdditionalLiteratureNode presents a component that displays a node with an icon and a name.
+ * It can be clicked to open a corresponding activity of the lms.
+ * AdditionalLiteratureNode can't be used as a standalone component and must be rendered via ReactFlow.
+ * @param props - Props containing the data of the node.
+ * @returns {JSX.Element} - The AdditionalLiteratureNode component.
+ * @category Components
+ */
 const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
-  const handleClick = useCallback((event: MouseEventHandler<HTMLDivElement>) => {
-    data.handleOpen()
-    data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
-  }, [])
-
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() => handleClick}>
+    <Box
+      sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      onClick={() => {
+        data.handleOpen()
+        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
+      }}
+      data-testid={'additionalLiteratureNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
         sx={{

@@ -4,7 +4,7 @@ import { mockReactFlow } from '__mocks__/ResizeObserver'
 import ReactFlow, { Node } from 'reactflow'
 import '@testing-library/jest-dom'
 
-describe('AdditionalLiteratureNode tests', () => {
+describe('ShortTextualIntroductionNode tests', () => {
   beforeEach(() => {
     mockReactFlow()
   })
@@ -13,7 +13,7 @@ describe('AdditionalLiteratureNode tests', () => {
     lmsId: 1,
     name: 'testNode',
     activityType: 'testType',
-    classification: 'ZL',
+    classification: 'KÜ',
     isRecommended: true,
     handleSetUrl: jest.fn(),
     handleSetTitle: jest.fn(),
@@ -33,11 +33,11 @@ describe('AdditionalLiteratureNode tests', () => {
 
   it('renders correctly and can be clicked', () => {
     const { getByTestId } = render(<ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />)
-    const additionalLiteratureNode = getByTestId('additionalLiteratureNode')
+    const ShortTextualIntroductionNode = getByTestId('shortTextualIntroductionNode')
 
-    expect(additionalLiteratureNode).toBeInTheDocument()
+    expect(ShortTextualIntroductionNode).toBeInTheDocument()
 
-    fireEvent.click(additionalLiteratureNode)
+    fireEvent.click(ShortTextualIntroductionNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()
