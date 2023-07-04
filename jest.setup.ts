@@ -11,6 +11,7 @@ type MockDataServices = {
  * This file is automatically imported by Jest
  * @packageDocumentation
  * @module jest.setup
+ * @category Testing
  * @preferred
  * @see {@link https://jestjs.io/docs/configuration#setupfilesafterenv-array | Jest setupFilesAfterEnv}
  * @see {@link https://jestjs.io/docs/mock-functions | Jest Mock Functions}
@@ -80,6 +81,8 @@ const mockDataServices: MockDataServices = {
  * @packageDocumentation
  * @module jest.setup
  * @preferred
+ * @category Testing
+ * @see {@link https://jestjs.io/docs/mock-functions | Jest Mock Functions}
  */
 const mockImplementations: { [key: string]: jest.Mock } = {
   ...mockDataServices
@@ -89,6 +92,8 @@ const mockImplementations: { [key: string]: jest.Mock } = {
  * This object acts as a proxy for {@link mockImplementations}. If a mock is not defined in {@link mockImplementations}, it is created and added to {@link mockImplementations}.
  * @remarks
  * Do not use {@link mockImplementations} directly, use {@link mockServices} instead
+ * @category Testing
+ * @packageDocumentation
  */
 export const mockServices = new Proxy(mockImplementations, {
   get: (target, property) => {
@@ -104,6 +109,8 @@ export const mockServices = new Proxy(mockImplementations, {
  * This function is called after each test. It removes all mocks that are not defined in {@link mockDataServices}.
  * @remarks
  * By default, all mocks are removed after each test. If you want to keep a mock, add it to {@link mockDataServices}
+ * @category Testing
+ * @packageDocumentation
  */
 afterEach(() => {
   Object.keys(mockImplementations).forEach((key) => {
@@ -130,6 +137,7 @@ jest.mock('reactflow/dist/style.css', () => jest.fn())
  * If you want to mock a new module, duplicate this mock and replace the module name.
  * @packageDocumentation
  * @module jest.setup
+ * @category Testing
  * @preferred
  */
 jest.mock<typeof import('@services')>('@services', () => {
