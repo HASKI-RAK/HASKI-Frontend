@@ -1,3 +1,8 @@
+/**
+ * Type definition for {@link mockDataServices} 
+ * @category Testing
+ * @packageDocumentation
+ */
 type MockDataServices = {
   [key: string]: jest.Mock<any, any>
 }
