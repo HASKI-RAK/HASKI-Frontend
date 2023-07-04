@@ -101,6 +101,7 @@ describe('Test AuthProvider', () => {
   })
 
   it('should throw an error if logout fails', async () => {
+    // Here we override the mockServices.getLogout function to throw an error
     mockServices.getLogout.mockImplementationOnce(() => {
       return Promise.reject('logout failed')
     })
@@ -119,7 +120,6 @@ describe('Test AuthProvider', () => {
       result.current.setExpire(9999999999) // if this test fails, how did react js even survive this long?
     })
     expect(result.current.isAuth).toBe(true)
-    // logout should throw an error
     await act(async () => {
       await result.current.logout()
     })

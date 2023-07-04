@@ -1,3 +1,8 @@
+
+type MockDataServices = {
+  [key: string]: jest.Mock<any, any>
+}
+
 /**
  * Add custom mocks here to be used in tests
  * use import { mockServices } from '@tests/jest.setup' to import mocks
@@ -11,7 +16,7 @@
  * @see {@link https://jestjs.io/docs/configuration#setupfilesafterenv-array | Jest setupFilesAfterEnv}
  * @see {@link https://jestjs.io/docs/mock-functions | Jest Mock Functions}
  */
-const mockData = {
+const mockDataServices: MockDataServices = {
   getUser: jest.fn().mockImplementation(() => {
     return Promise.resolve({
       id: 1,
@@ -78,7 +83,7 @@ const mockData = {
  * @preferred
  */
 const mockImplementations: { [key: string]: jest.Mock } = {
-  ...mockData
+  ...mockDataServices
   // Add more predefined mocks here
 }
 /**
@@ -97,17 +102,24 @@ export const mockServices = new Proxy(mockImplementations, {
 })
 
 /**
- * This function is called after each test. It removes all mocks that are not defined in {@link mockData}.
+ * This function is called after each test. It removes all mocks that are not defined in {@link mockDataServices}.
  * @remarks
- * By default, all mocks are removed after each test. If you want to keep a mock, add it to {@link mockData}
+ * By default, all mocks are removed after each test. If you want to keep a mock, add it to {@link mockDataServices}
  */
 afterEach(() => {
   Object.keys(mockImplementations).forEach((key) => {
-    if (!(key in mockData)) {
+    if (!(key in mockDataServices)) {
       delete mockImplementations[key]
     }
   })
 })
+// Reset mock implementations to mockDataServices after each test suite
+afterAll(() => {
+  Object.keys(mockDataServices).forEach((key) => {
+    mockImplementations[key] = mockDataServices[key]
+  })
+})
+
 
 // ############################## Common ############################## //
 
