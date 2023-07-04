@@ -3,5 +3,5 @@
 
 # yarn test
 # yarn run ts-node src/shared/auto-order-json-translations.ts
-# yarn lint
-npx typedoc ./src/** --theme github-wiki
+yarn lint
+npx typedoc ./src/** --theme github-wiki --out ../HASKI-Frontend.wiki/

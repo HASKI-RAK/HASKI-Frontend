@@ -1,4 +1,3 @@
-
 type MockDataServices = {
   [key: string]: jest.Mock<any, any>
 }
@@ -119,7 +118,6 @@ afterAll(() => {
     mockImplementations[key] = mockDataServices[key]
   })
 })
-
 
 // ############################## Common ############################## //
 

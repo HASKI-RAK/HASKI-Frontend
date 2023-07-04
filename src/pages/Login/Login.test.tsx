@@ -21,11 +21,11 @@ describe('Test the Login page', () => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
-  test("throw error when postLogin fails", () => {
+  test('throw error when postLogin fails', () => {
     // This gets reset after each test
     mockServices.postLogin.mockImplementationOnce(() => {
-      return Promise.reject("error");
-    });
+      return Promise.reject('error')
+    })
 
     const login = render(
       <MemoryRouter initialEntries={['?nonce=123']}>
@@ -159,10 +159,7 @@ describe('Test the Login page', () => {
     }, 1000)
   })
 
-
-
-  test("Doesnt throw", () => {
-
+  test('Doesnt throw', () => {
     const login = render(
       <MemoryRouter initialEntries={['?nonce=123']}>
         <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
