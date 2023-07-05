@@ -1,5 +1,5 @@
 /**
- * Type definition for {@link mockDataServices} 
+ * Type definition for {@link mockDataServices}
  * @category Testing
  * @packageDocumentation
  */
@@ -25,17 +25,17 @@ const mockDataServices: MockDataServices = {
   getUser: jest.fn().mockImplementation(() => {
     return Promise.resolve({
       id: 1,
-      lmsUserId: 1,
-      name: 'string',
-      role: 'string',
-      roleId: 1,
+      lms_user_id: 1,
+      name: 'Thaddäus Tentakel',
+      role: 'Tester',
+      role_id: 1,
       settings: {
         id: 1,
-        pswd: 'string',
-        theme: 'string',
-        userId: 1
+        user_id: 1,
+        pswd: '1234',
+        theme: 'test'
       },
-      university: 'string'
+      university: 'HS Kempten'
     })
   }),
   getLearningPath: jest.fn().mockImplementation(() => {
@@ -49,24 +49,99 @@ const mockDataServices: MockDataServices = {
           id: 1,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
+          recommended: false,
           position: 1,
           learning_element: {
             id: 1,
             lms_id: 1,
-            activity_type: 'KÜ',
+            activity_type: 'test',
             classification: 'KÜ',
-            name: 'Kurzüberblick',
-            university: 'HS-Kempten',
-            created_at: 'string',
-            created_by: 'string',
-            last_updated: 'string',
+            name: 'test',
+            university: 'test',
+            created_at: 'test',
+            created_by: 'test',
+            last_updated: 'test',
             student_learning_element: {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: true,
-              done_at: 'string'
+              done: false,
+              done_at: 'test'
+            }
+          }
+        },
+        {
+          id: 2,
+          learning_element_id: 2,
+          learningPath_id: 2,
+          recommended: false,
+          position: 2,
+          learning_element: {
+            id: 2,
+            lms_id: 2,
+            activity_type: 'test',
+            classification: 'ÜB',
+            name: 'test',
+            university: 'test',
+            created_at: 'test',
+            created_by: 'test',
+            last_updated: 'test',
+            student_learning_element: {
+              id: 2,
+              student_id: 1,
+              learning_element_id: 2,
+              done: false,
+              done_at: 'test'
+            }
+          }
+        },
+        {
+          id: 3,
+          learning_element_id: 3,
+          learning_path_id: 3,
+          recommended: false,
+          position: 3,
+          learning_element: {
+            id: 3,
+            lms_id: 3,
+            activity_type: 'test',
+            classification: 'ÜB',
+            name: 'test',
+            university: 'test',
+            created_at: 'test',
+            created_by: 'test',
+            last_updated: 'test',
+            student_learning_element: {
+              id: 3,
+              student_id: 1,
+              learning_element_id: 3,
+              done: false,
+              done_at: 'test'
+            }
+          }
+        },
+        {
+          id: 4,
+          learning_element_id: 4,
+          learning_path_id: 4,
+          recommended: false,
+          position: 4,
+          learning_element: {
+            id: 4,
+            lms_id: 4,
+            activity_type: 'test',
+            classification: 'KÜ',
+            name: 'test',
+            university: 'test',
+            created_at: 'test',
+            created_by: 'test',
+            last_updated: 'test',
+            student_learning_element: {
+              id: 4,
+              student_id: 1,
+              learning_element_id: 4,
+              done: false,
+              done_at: 'test'
             }
           }
         }

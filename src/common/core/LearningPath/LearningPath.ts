@@ -10,7 +10,6 @@ import { LearningPathLearningElement } from '@core'
  * @param topicId The topic's id
  * @returns The learning path for the given user, course and topic
  */
-
 type LearningPathReturn = (
   userId?: number,
   lmsUserId?: number,

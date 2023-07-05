@@ -25,7 +25,7 @@ export type LoginHookReturn = {
  */
 export const useLogin = (params: LoginHookParams): LoginHookReturn => {
   const { t } = useTranslation()
-  const authcontext = useContext(AuthContext)
+  const authContext = useContext(AuthContext)
   const navigate = useNavigate()
   const { addSnackbar } = useContext(SnackbarContext)
 
@@ -58,7 +58,7 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
     postLogin({ nonce: params.nonce })
       .then((response) => {
         // supply auth context
-        authcontext.setExpire(response.expiration)
+        authContext.setExpire(response.expiration)
         // then redirect to home page
         navigate('/', { replace: true })
       })

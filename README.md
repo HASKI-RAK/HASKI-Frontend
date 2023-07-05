@@ -53,7 +53,7 @@ We use [Jest](https://jestjs.io/) as a testing framework. Tests are located besi
 ### IDE
 
 Optional plugins for your development environment:
-| Plugin | README | Explanaition |
+| Plugin | README | Explanation |
 | ------ | ------ | ------ |
 | SonarCube | https://www.sonarqube.org/ | SonarCloud will automatically scan the code for required standards and notify you in the merge request. |
 | Babel JavaScript | https://babeljs.io/ | Compiles JavaScript. |
