@@ -4,6 +4,7 @@ import { act, fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import * as router from 'react-router'
 import { AuthContext } from '@services'
+import { mockServices } from 'jest.setup'
 
 const navigate = jest.fn()
 
@@ -18,6 +19,21 @@ describe('Test the Login page', () => {
 
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+  })
+
+  test('throw error when postLogin fails', () => {
+    // This gets reset after each test
+    mockServices.postLogin.mockImplementationOnce(() => {
+      return Promise.reject('error')
+    })
+
+    const login = render(
+      <MemoryRouter initialEntries={['?nonce=123']}>
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Login />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
   })
 
   it('should render the skeleton when a nonce is supplied as search params', () => {
@@ -141,5 +157,15 @@ describe('Test the Login page', () => {
       // navigate should be called with /dashboard
       expect(navigate).toBeCalledWith('/login')
     }, 1000)
+  })
+
+  test('Doesnt throw', () => {
+    const login = render(
+      <MemoryRouter initialEntries={['?nonce=123']}>
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Login />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
   })
 })
