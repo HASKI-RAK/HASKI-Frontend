@@ -1,11 +1,11 @@
 type Course = {
   id: number
-  lmsId: number
+  lms_id: number
   name: string
   university: string
-  createdAt: string
-  createdBy: string
-  lastUpdated: string
+  created_at: string
+  created_by: string
+  last_updated: string
 }
 
 export default Course
