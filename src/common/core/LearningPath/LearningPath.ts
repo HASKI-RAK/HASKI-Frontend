@@ -4,7 +4,7 @@ import { LearningPathLearningElement } from '@core'
  * Params are optional so
  *
  * @param userId The user's id
- * @param lms_userId The user's lms id
+ * @param lmsUserId The user's lms id
  * @param studentId The user's student id
  * @param courseId The course's id
  * @param topicId The topic's id
