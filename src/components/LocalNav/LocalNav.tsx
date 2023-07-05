@@ -90,7 +90,7 @@ const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
               </AccordionSummary>
               <AccordionDetails sx={{ flexDirection: 'column' }}>
                 {learningPaths[index]?.path.map((learningElement) => (
-                  <Typography variant="body1" key={learningElement.learningElement.name}>
+                  <Typography variant="body1" key={learningElement.learning_element.name}>
                     <Link
                       underline="hover"
                       variant="body2"
@@ -104,7 +104,7 @@ const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
                       onClick={() => {
                         navigate(`course/2/topic/${topic.id}`)
                       }}>
-                      {learningElement.position} {learningElement.learningElement.name}
+                      {learningElement.position} {learningElement.learning_element.name}
                     </Link>
                   </Typography>
                 ))}

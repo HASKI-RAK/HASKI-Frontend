@@ -17,13 +17,13 @@ describe('Topic tests', () => {
     jest.spyOn(services, 'getUser').mockImplementation(() => {
       return Promise.resolve({
         id: 1,
-        lmsUserId: 1,
+        lms_user_id: 1,
         name: 'Theodor Tester',
         role: 'Tester',
-        roleId: 1,
+        role_id: 1,
         settings: {
           id: 1,
-          userId: 1,
+          user_id: 1,
           pswd: 'test',
           theme: 'test'
         },

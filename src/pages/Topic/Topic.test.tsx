@@ -7,7 +7,6 @@ import { mockServices } from 'jest.setup'
 import { useTopic } from './Topic.hooks'
 import { AuthContext } from '@services'
 import * as router from 'react-router'
-import * as services from '@services'
 import '@testing-library/jest-dom'
 import Topic from './Topic'
 
@@ -102,57 +101,57 @@ describe('Topic tests', () => {
 
     const mockLearningPath = {
       id: 1,
-      courseId: 1,
-      basedOn: '',
-      calculatedOn: '',
+      course_id: 1,
+      based_on: '',
+      calculated_on: '',
       path: [
         {
           id: 1,
-          learningElementId: 1,
-          learningPathId: 1,
+          learning_element_id: 1,
+          learning_path_id: 1,
           recommended: true,
           position: 1,
-          learningElement: {
+          learning_element: {
             id: 1,
-            lmsId: 1,
-            activityType: '',
+            lms_id: 1,
+            activity_type: '',
             classification: '',
             name: '',
             university: '',
-            createdBy: '',
-            createdAt: '',
-            lastUpdated: '',
-            studentLearningElement: {
+            created_by: '',
+            created_at: '',
+            last_updated: '',
+            student_learning_element: {
               id: 1,
-              studentId: 1,
-              learningElementId: 1,
+              student_id: 1,
+              learning_element_id: 1,
               done: false,
-              doneAt: ''
+              done_at: ''
             }
           }
         },
         {
           id: 1,
-          learningElementId: 1,
-          learningPathId: 1,
+          learning_element_id: 1,
+          learning_path_id: 1,
           recommended: true,
           position: 2,
-          learningElement: {
+          learning_element: {
             id: 1,
-            lmsId: 1,
-            activityType: '',
+            lms_id: 1,
+            activity_type: '',
             classification: '',
             name: '',
             university: '',
-            createdBy: '',
-            createdAt: '',
-            lastUpdated: '',
-            studentLearningElement: {
+            created_by: '',
+            created_at: '',
+            last_updated: '',
+            student_learning_element: {
               id: 1,
-              studentId: 1,
-              learningElementId: 1,
+              student_id: 1,
+              learning_element_id: 1,
               done: false,
-              doneAt: ''
+              done_at: ''
             }
           }
         }
