@@ -1,9 +1,9 @@
 type StudentLearningElement = {
   id: number
-  studentId: number
-  learningElementId: number
+  student_id: number
+  learning_element_id: number
   done: boolean
-  doneAt: string
+  done_at: string
 }
 
 export default StudentLearningElement

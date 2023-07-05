@@ -34,7 +34,7 @@ export const Home = () => {
       clearTimeout(preventEndlessLoading)
       fetchUser()
         .then((user) => {
-          fetchCourses(user.settings.userId, user.lmsUserId, user.id).then((courses) => {
+          fetchCourses(user.settings.user_id, user.lms_user_id, user.id).then((courses) => {
             // t('components.Home.Snackbar.Success')
             addSnackbar({
               message: courses.length.toString() + ' ' + t('components.Snackbar.CoursesLoaded'),

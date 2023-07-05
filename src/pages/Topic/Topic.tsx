@@ -47,7 +47,7 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       clearTimeout(preventEndlessLoading)
       fetchUser().then(
         (user) => {
-          fetchLearningPath(user.settings.userId, user.lmsUserId, user.id, Number(courseId), Number(topicId)).then(
+          fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, Number(courseId), Number(topicId)).then(
             (learningPathData) => {
               const { nodes, edges } = mapNodes(learningPathData, theme)
               setInitialNodes(nodes)

@@ -2,11 +2,11 @@ import { LearningElement } from '@core'
 
 type LearningPathLearningElement = {
   id: number
-  learningElementId: number
-  learningPathId: number
+  learning_element_id: number
+  learning_path_id: number
   recommended: boolean
   position: number
-  learningElement: LearningElement
+  learning_element: LearningElement
 }
 
 export default LearningPathLearningElement
