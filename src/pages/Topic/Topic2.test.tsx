@@ -21,7 +21,9 @@ describe('Topic tests', () => {
       return Promise.reject(new Error('getUser failed'))
     })
 
-    jest.spyOn(services, 'getUser').withImplementation(
+    const getUser = jest.spyOn(services, 'getUser')
+
+    getUser.withImplementation(
       () => {
         throw new Error('getUser failed')
       },
@@ -36,5 +38,6 @@ describe('Topic tests', () => {
           )
         })
     )
+    expect(getUser).toThrow('getUser failed')
   })
 })

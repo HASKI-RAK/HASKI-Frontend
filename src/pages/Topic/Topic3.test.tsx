@@ -38,7 +38,9 @@ describe('Topic tests', () => {
       return Promise.reject(new Error('getLearningPath failed'))
     })
 
-    jest.spyOn(services, 'getLearningPath').withImplementation(
+    const getLearningPath = jest.spyOn(services, 'getLearningPath')
+
+    getLearningPath.withImplementation(
       () => {
         throw new Error('getLearningPath failed')
       },
@@ -53,5 +55,7 @@ describe('Topic tests', () => {
           )
         })
     )
+
+    expect(getLearningPath).toThrow('getLearningPath failed')
   })
 })

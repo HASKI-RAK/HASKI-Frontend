@@ -4,12 +4,29 @@ import { Node, Edge } from 'reactflow'
 import { Theme } from '@mui/material' // TODO: DI
 import { LearningPath } from '@core'
 
+/**
+ * @interface useTopicHookParams
+ * @property {string} [defaultUrl] - The default url of a node
+ * @property {string} [defaultTitle] - The default title of a node
+ * @property {boolean} [defaultIsOpen] - The default bool value if a node is open
+ */
 export type useTopicHookParams = {
   defaultUrl?: string
   defaultTitle?: string
   defaultIsOpen?: boolean
 }
 
+/**
+ * @interface TopicHookReturn
+ * @property {string} url - The url of a node
+ * @property {string} title - The title of a node
+ * @property {boolean} isOpen - The bool value if a node is open
+ * @property {function} handleClose - The function to close a node
+ * @property {function} handleOpen - The function to open a node
+ * @property {function} handleSetUrl - The function to set the url of a node
+ * @property {function} handleSetTitle - The function to set the title of a node
+ * @property {function} mapNodes - The function to map the learning path to nodes and edges
+ */
 export type TopicHookReturn = {
   readonly url: string
   readonly title: string
@@ -27,6 +44,12 @@ export type TopicHookReturn = {
   }
 }
 
+/**
+ * Hook for the Topic page logic.
+ * Handles states and provides functions to create nodes and edges.
+ * @param params - The default values for url, title and isOpen.
+ * @returns {TopicHookReturn} The Topic page logic.
+ */
 export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   // Default values
   const { defaultUrl = '', defaultTitle = '', defaultIsOpen = false } = params ?? {}

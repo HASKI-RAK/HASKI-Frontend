@@ -1,5 +1,5 @@
 /**
- * Type definition for {@link mockDataServices} 
+ * Type definition for {@link mockDataServices}
  * @category Testing
  * @packageDocumentation
  */

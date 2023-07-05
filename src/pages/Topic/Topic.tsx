@@ -8,11 +8,21 @@ import { useStore, usePersistedStore } from '@store'
 import { IFrameModal, nodeTypes } from '@components'
 import { useTheme } from '@mui/material' // TODO: DI?
 
+/**
+ * @interface TopicProps
+ * @property {useTopicHookParams} [useTopic] - The hook for the topic page
+ */
 export type TopicProps = {
   useTopic?: (params?: useTopicHookParams) => TopicHookReturn
 }
 
 // TODO: URL-Struktur überlegen bspw. "localhost:3000/topic?topic=1"
+/**
+ * Topic presents a page that displays a learning path containing nodes of learning elements and edges.
+ * @param props - The hook for the topic page
+ * @returns {JSX.Element} - The topic page
+ * @category Pages
+ */
 const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const theme = useTheme()
   const navigate = useNavigate()
@@ -52,7 +62,7 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             }
           )
         },
-        (error) => {
+        (error: string) => {
           addSnackbar({
             message: error,
             severity: 'error',
