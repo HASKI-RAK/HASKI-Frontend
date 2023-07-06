@@ -43,7 +43,7 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     const preventEndlessLoading = setTimeout(() => {
       navigate('/login')
     }, 5000)
-    if (authContext.isAuth) {
+    if (authContext.isAuth && courseId && topicId) {
       clearTimeout(preventEndlessLoading)
       fetchUser().then(
         (user) => {

@@ -1,5 +1,5 @@
-import { Login } from '@pages'
 import '@testing-library/jest-dom'
+import { Login } from '@pages'
 import { act, fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import * as router from 'react-router'

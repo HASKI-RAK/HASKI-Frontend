@@ -14,16 +14,14 @@ export const createLearningPathSlice: StateCreator<StoreState, [], [], LearningP
   return {
     _cache_learningPath_record: {},
     fetchLearningPath: async (...arg) => {
-      // Throw if any of arg is undefined, can be catched by the caller
-      if (arg.some((a) => a === undefined)) throw new Error('getLearningPath: Missing argument')
-      const [userId, lmsUserId, studentId, courseId, topicId] = arg
+      const [courseId, topicId] = arg
 
       // Check if we have the learning path cached
       const cached = get()._cache_learningPath_record[`${courseId}-${topicId}`]
       // TODO
       if (!cached) {
         // If not, fetch it and cache it
-        const learningPath_response = await getLearningPath(userId, lmsUserId, studentId, courseId, topicId)
+        const learningPath_response = await getLearningPath(...arg)
         set({
           _cache_learningPath_record: {
             ...get()._cache_learningPath_record,

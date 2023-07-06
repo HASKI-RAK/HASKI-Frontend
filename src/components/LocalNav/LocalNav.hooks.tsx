@@ -2494,7 +2494,7 @@ export const getSortedLearningPath = async (
   studentId: number,
   fetchLearningPath: LearningPathReturn
 ): Promise<LearningPath[]> => {
-  const promises = data.map((topic) => fetchLearningPath(userId, lmsUserId, studentId, "2", topic.id)) //reihenfolge der parameter beachten
+  const promises = data.map((topic) => fetchLearningPath(userId, lmsUserId, studentId, "2", String(topic.id))) //reihenfolge der parameter beachten
   const learningPaths = await Promise.all(promises)
 
   return learningPaths.map((learningPath) => {
