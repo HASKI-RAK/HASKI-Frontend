@@ -69,10 +69,7 @@ describe('Topic tests', () => {
   test('getUser fails', () => {
     // await act(async () => {
     const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
-    mockServices.getUser.mockImplementation(() => {
-      return Promise.reject('getUser failed')
-    })
-
+    mockServices.getUser = jest.fn().mockRejectedValue(new Error('getUser failed'))
     render(
       <Router location={history.location} navigator={history}>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>

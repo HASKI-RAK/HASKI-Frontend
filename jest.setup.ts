@@ -22,7 +22,7 @@ type MockDataServices = {
  * @see {@link https://jestjs.io/docs/mock-functions | Jest Mock Functions}
  */
 const mockDataServices: MockDataServices = {
-  getUser: jest.fn().mockImplementation(() => {
+  getUser: jest.fn(() => {
     return Promise.resolve({
       id: 1,
       lms_user_id: 1,
@@ -38,7 +38,7 @@ const mockDataServices: MockDataServices = {
       university: 'HS Kempten'
     })
   }),
-  getLearningPath: jest.fn().mockImplementation(() => {
+  getLearningPath: jest.fn(() => {
     return Promise.resolve({
       id: 1,
       course_id: 2,
@@ -148,9 +148,14 @@ const mockDataServices: MockDataServices = {
       ]
     })
   }),
-  postLogin: jest.fn().mockImplementation(() => {
+  postLogin: jest.fn(() => {
     return Promise.resolve({
       expiration: 999999999999999
+    })
+  }),
+  redirectMoodleLogin: jest.fn(() => {
+    return Promise.resolve({
+      lti_launch_view: 'test'
     })
   })
 }
@@ -176,12 +181,17 @@ const mockImplementations: { [key: string]: jest.Mock } = {
  * @packageDocumentation
  */
 export const mockServices = new Proxy(mockImplementations, {
-  get: (target, property) => {
-    // If the mock does not exist on mocks, return user defined mock
-    if (typeof property === 'string' && !(property in mockImplementations)) {
-      mockImplementations[property] = jest.fn()
+  get: (target, property, receiver) => {
+    // If the mock does exist, return it
+    if (typeof property === 'string' && property in mockImplementations) {
+      return Reflect.get(target, property, receiver)
     }
-    return Reflect.get(target, property)
+    // Return undefined if the mock does not exist
+    return undefined
+  },
+  set: (target, property, value, receiver) => {
+    // This gets called when a mock is set via: mockServices.mockName = jest.fn()
+    return Reflect.set(target, property, value, receiver)
   }
 })
 
@@ -197,9 +207,6 @@ afterEach(() => {
     if (!(key in mockDataServices)) {
       delete mockImplementations[key]
     }
-  })
-  Object.keys(mockDataServices).forEach((key) => {
-    mockImplementations[key] = mockDataServices[key]
   })
 })
 // Reset mock implementations to mockDataServices after each test suite
@@ -228,11 +235,19 @@ jest.mock<typeof import('@services')>('@services', () => {
   return new Proxy(actualModule, {
     get: (target, property) => {
       // If a predefined mock exists, use it
-      if (typeof property === 'string' && mockImplementations[property]) {
-        return mockImplementations[property]
+      if (typeof property === 'string' && mockServices[property]) {
+        return mockServices[property]
       }
       // Otherwise, use the actual implementation
       return Reflect.get(target, property)
+    },
+    set: (target, property, value, receiver) => {
+      // If a predefined mock exists, use it
+      if (typeof property === 'string' && mockServices[property]) {
+        return true
+      }
+      // Otherwise, use the actual implementation
+      return Reflect.set(target, property, value, receiver)
     }
   })
 })
