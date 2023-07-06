@@ -40,7 +40,4 @@ export const usePersistedStore = create<PersistedStoreState>()(
     )
   )
 )
-export const resetAllSlices = () => {
-  console.log('resetAllSlices:' + resetters.length)
-  resetters.forEach((resetter) => resetter())
-}
+export const resetAllSlices = () => resetters.forEach((reset) => reset())
