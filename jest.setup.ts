@@ -1,3 +1,6 @@
+import { resetAllSlices } from '@store'
+import { exit } from 'process'
+
 /**
  * Type definition for {@link mockDataServices}
  * @category Testing
@@ -208,6 +211,8 @@ afterEach(() => {
       delete mockImplementations[key]
     }
   })
+  // Reset store!
+  resetAllSlices()
 })
 // Reset mock implementations to mockDataServices after each test suite
 afterAll(() => {

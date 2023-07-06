@@ -1,63 +1,66 @@
-import { act, render, renderHook } from '@testing-library/react'
+import { act, render, renderHook, waitFor } from '@testing-library/react'
 import { mockReactFlow } from '__mocks__/ResizeObserver'
-import { createMemoryHistory } from 'history'
 import { createTheme } from '@mui/material'
-import { Router } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
+import Router from "react-router-dom";
 import { useTopic } from './Topic.hooks'
-import { AuthContext } from '@services'
 import * as router from 'react-router'
 import '@testing-library/jest-dom'
 import Topic from './Topic'
+import { usePersistedStore } from '@store'
+const { AuthContext } = jest.requireActual('@services')
 
 const navigate = jest.fn()
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')
 
-describe('Topic tests', () => {
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useParams: jest.fn(),
+}));
+
+describe('Topic Page', () => {
   beforeEach(() => {
     jest.clearAllTimers()
     mockReactFlow()
-    jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+    jest.spyOn(Router, 'useNavigate').mockImplementation(() => navigate)
+    jest.spyOn(Router, 'useParams').mockReturnValue({ courseId: "2", topicId: "1" })
   })
 
   it('renders when Auth is true', async () => {
-    const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
     await act(async () => {
       const topic = render(
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <Topic />
           </AuthContext.Provider>
-        </Router>
+        </MemoryRouter>
       )
-
       expect(topic).toBeTruthy()
     })
   })
 
-  it('renders when Auth is false', async () => {
-    const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
-    await act(async () => {
+  it('renders when Auth is false', () => {
+    act(() => {
       const topic = render(
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
             <Topic />
           </AuthContext.Provider>
-        </Router>
+        </MemoryRouter>
       )
 
       expect(topic).toBeTruthy()
     })
   })
 
-  test('Navigation called after timer finishes', async () => {
-    const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
-    await act(async () => {
+  test('Navigation called after timer finishes', () => {
+    act(() => {
       render(
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <Topic />
-        </Router>
+        </MemoryRouter>
       )
     })
 
@@ -66,19 +69,47 @@ describe('Topic tests', () => {
     expect(navigate).toBeCalledWith('/login')
   })
 
-  test('getUser fails', () => {
-    // await act(async () => {
-    const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
-    mockServices.getUser = jest.fn().mockRejectedValue(new Error('getUser failed'))
-    render(
-      <Router location={history.location} navigator={history}>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Topic />
-        </AuthContext.Provider>
-      </Router>
-    )
-    // expect(getUser).toThrow('getUser failed')
-    // })
+  test('fetchUser failed', async () => {
+
+    const mockgetUser = jest.fn(() => {
+      console.log('mockgetUser')
+      return Promise.reject(new Error('getUser failed'))
+    })
+    act(() => {
+      mockServices.getUser.mockImplementationOnce(mockgetUser)
+      console.log('fetchUser')
+      const rend = render(
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Topic />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      )
+    })
+    await waitFor(() => {
+      expect(mockgetUser).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  test('fetchLearningPath failed', async () => {
+    const mockgetLearningPath = jest.fn(() => {
+      console.log('mockgetLearningPath')
+      return Promise.reject(new Error('getLearningPath failed'))
+    })
+    act(() => {
+      mockServices.getLearningPath.mockImplementationOnce(mockgetLearningPath)
+      console.log('fetchLearningPath')
+      const ren = render(
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Topic />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      )
+    })
+    await waitFor(() => {
+      expect(mockgetLearningPath).toHaveBeenCalledTimes(1)
+    })
   })
 
   test('General functionality of Topic hook', () => {

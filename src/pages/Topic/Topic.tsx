@@ -47,13 +47,13 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       clearTimeout(preventEndlessLoading)
       fetchUser().then(
         (user) => {
-          fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, Number(courseId), Number(topicId)).then(
+          fetchLearningPath(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId).then(
             (learningPathData) => {
               const { nodes, edges } = mapNodes(learningPathData, theme)
               setInitialNodes(nodes)
               setInitialEdges(edges)
             }
-          ).catch((error) => {
+          ).catch((error: string) => {
             addSnackbar({
               message: error,
               severity: 'error',
@@ -73,7 +73,7 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     return () => {
       clearTimeout(preventEndlessLoading)
     }
-  }, [authContext.isAuth, courseId, fetchLearningPath, fetchUser, theme, topicId, mapNodes, navigate, addSnackbar])
+  }, [authContext.isAuth, courseId, fetchLearningPath, fetchUser, theme, topicId, mapNodes, navigate, setInitialNodes, setInitialEdges])
 
   return initialNodes && initialEdges ? (
     <Box height={'100%'}>

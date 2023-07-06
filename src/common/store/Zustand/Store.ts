@@ -10,6 +10,8 @@ import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 export type StoreState = LearningPathSlice & CourseSlice & CoursesSlice
 export type PersistedStoreState = UserSlice & AuthSlice
 
+export const resetters: (() => void)[] = []
+
 export const useStore = create<StoreState>()((...a) => ({
   ...createLearningPathSlice(...a),
   ...createCourseSlice(...a),
@@ -38,3 +40,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
     )
   )
 )
+export const resetAllSlices = () => {
+  console.log('resetAllSlices:' + resetters.length)
+  resetters.forEach((resetter) => resetter())
+}

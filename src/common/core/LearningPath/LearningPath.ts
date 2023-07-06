@@ -14,8 +14,8 @@ type LearningPathReturn = (
   userId?: number,
   lmsUserId?: number,
   studentId?: number,
-  courseId?: number,
-  topicId?: number
+  courseId?: string | undefined,
+  topicId?: string | number
 ) => Promise<LearningPath>
 
 type LearningPath = {

@@ -26,7 +26,7 @@ describe('Login Page', () => {
         </AuthContext.Provider>
       </MemoryRouter>
     )
-    expect(mock).rejects.toThrow('login failed')
+    expect(mock).toHaveBeenCalledTimes(1)
   })
 
   test('should render the login page', () => {
@@ -137,7 +137,7 @@ describe('Login Page', () => {
     setTimeout(() => {
       expect(window.location.replace).toBeCalled()
     }, 1000)
-    expect(mock).rejects.toThrow('moodel login failed')
+    expect(mock).toBeCalledTimes(1)
   })
 
   test('moodle default login', () => {
@@ -192,6 +192,6 @@ describe('Login Page', () => {
       expect(navigate).toBeCalledWith('/login')
     }, 1000)
 
-    expect(mock).rejects.toThrow('unauthorized')
+    expect(mock).toBeCalledTimes(1)
   })
 })
