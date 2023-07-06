@@ -69,7 +69,7 @@ describe('Topic tests', () => {
   test('getUser fails', () => {
     // await act(async () => {
     const history = createMemoryHistory({ initialEntries: ['/home', '/course', '/2'] })
-    mockServices.getUser.mockImplementationOnce(() => {
+    mockServices.getUser.mockImplementation(() => {
       return Promise.reject('getUser failed')
     })
 

@@ -198,6 +198,9 @@ afterEach(() => {
       delete mockImplementations[key]
     }
   })
+  Object.keys(mockDataServices).forEach((key) => {
+    mockImplementations[key] = mockDataServices[key]
+  })
 })
 // Reset mock implementations to mockDataServices after each test suite
 afterAll(() => {

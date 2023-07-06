@@ -52,24 +52,23 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               const { nodes, edges } = mapNodes(learningPathData, theme)
               setInitialNodes(nodes)
               setInitialEdges(edges)
-            },
-            (error) => {
-              addSnackbar({
-                message: error,
-                severity: 'error',
-                autoHideDuration: 3000
-              })
             }
-          )
-        },
-        (error: string) => {
-          addSnackbar({
-            message: error,
-            severity: 'error',
-            autoHideDuration: 3000
+          ).catch((error) => {
+            addSnackbar({
+              message: error,
+              severity: 'error',
+              autoHideDuration: 3000
+            })
           })
         }
-      )
+
+      ).catch((error: string) => {
+        addSnackbar({
+          message: error,
+          severity: 'error',
+          autoHideDuration: 3000
+        })
+      })
     }
     return () => {
       clearTimeout(preventEndlessLoading)
