@@ -70,12 +70,10 @@ describe('Topic Page', () => {
   test('fetchUser failed', async () => {
 
     const mockgetUser = jest.fn(() => {
-      console.log('mockgetUser')
       return Promise.reject(new Error('getUser failed'))
     })
     act(() => {
       mockServices.getUser.mockImplementationOnce(mockgetUser)
-      console.log('fetchUser')
       const rend = render(
         <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -91,12 +89,10 @@ describe('Topic Page', () => {
 
   test('fetchLearningPath failed', async () => {
     const mockgetLearningPath = jest.fn(() => {
-      console.log('mockgetLearningPath')
       return Promise.reject(new Error('getLearningPath failed'))
     })
     act(() => {
       mockServices.getLearningPath.mockImplementationOnce(mockgetLearningPath)
-      console.log('fetchLearningPath')
       const ren = render(
         <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
