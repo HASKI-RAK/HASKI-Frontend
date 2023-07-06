@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { act, render, renderHook, waitFor } from '@testing-library/react'
 import { mockReactFlow } from '__mocks__/ResizeObserver'
 import { createTheme } from '@mui/material'
@@ -5,10 +6,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
 import Router from "react-router-dom";
 import { useTopic } from './Topic.hooks'
-import * as router from 'react-router'
-import '@testing-library/jest-dom'
 import Topic from './Topic'
-import { usePersistedStore } from '@store'
 const { AuthContext } = jest.requireActual('@services')
 
 const navigate = jest.fn()

@@ -1,5 +1,4 @@
 import { resetAllSlices } from '@store'
-import { exit } from 'process'
 
 /**
  * Type definition for {@link mockDataServices}
