@@ -15,8 +15,8 @@ type LearningPathElementReturn = (
   userId?: number,
   lmsUserId?: number,
   studentId?: number,
-  courseId?: number,
-  topicId?: number
+  courseId?: string,
+  topicId?: string
 ) => Promise<LearningPathElement>
 
 type LearningPathElement = {

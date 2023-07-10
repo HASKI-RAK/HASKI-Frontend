@@ -39,7 +39,7 @@ const initialLearningPathElement: LearningPathElement = {
 }
 
 // Mock fetchLearningPath
-const mockFetchLearningPath = jest.fn().mockResolvedValue({
+const mockFetchLearningPathElement = jest.fn().mockResolvedValue({
   id: 99999,
   course_id: 99999,
   based_on: 'mock LearningPathElement',
@@ -119,7 +119,7 @@ describe('getSortedLearningPath', () => {
     const userid = 1
     const lmsUserid = 1
     const studentid = 1
-    const result = await getSortedLearningPath(userid, lmsUserid, studentid, topic, mockFetchLearningPath)
+    const result = await getSortedLearningPath(userid, lmsUserid, studentid, topic, mockFetchLearningPathElement)
     expect(result).toEqual({
       id: 99999,
       course_id: 99999,
@@ -153,7 +153,7 @@ describe('getSortedLearningPath', () => {
         }
       ]
     })
-    expect(mockFetchLearningPath).toHaveBeenCalledWith(userid, lmsUserid, studentid, 2, topic.id)
+    expect(mockFetchLearningPathElement).toHaveBeenCalledWith(userid, lmsUserid, studentid, 2, topic.id)
   })
 
   test('fetches learning path topics and returns the loading state', async () => {
