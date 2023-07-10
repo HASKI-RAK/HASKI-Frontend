@@ -513,7 +513,21 @@ export const TableILSQuestions = ({ ilsLong }: TableILSQuestionsProps) => {
 
   const handleSend = () => {
     const ILSarray = Object.entries(questionnaireAnswers).filter(([key]) => key !== '')
+    const listKJson = {
+      "list_k": [
+        {}
+      ]
+    }
     const ils_result = ['ils', ILSarray]
+    console.log(ils_result)
+    const outputJson = JSON.stringify({
+      ils: ILSarray.map((item: any) => ({
+        question_id: item[0].toLowerCase(),
+        answer: item[1]
+      })),
+      list_k: listKJson.list_k.map(() => [])
+    });
+    console.log(outputJson)
     //todo: send to server
   }
 
