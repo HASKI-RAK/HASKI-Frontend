@@ -11,6 +11,8 @@ import { devtools, persist } from 'zustand/middleware'
 export type StoreState = LearningPathElementSlice & CourseSlice & CoursesSlice & LearningPathTopicSlice
 export type PersistedStoreState = UserSlice & AuthSlice
 
+export const resetters: (() => void)[] = []
+
 export const useStore = create<StoreState>()((...a) => ({
   ...createLearningPathElementSlice(...a),
   ...createLearningPathTopicSlice(...a),
@@ -40,3 +42,4 @@ export const usePersistedStore = create<PersistedStoreState>()(
     )
   )
 )
+export const resetAllSlices = () => resetters.forEach((reset) => reset())

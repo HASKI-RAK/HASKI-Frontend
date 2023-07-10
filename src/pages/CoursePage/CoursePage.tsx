@@ -6,8 +6,13 @@ import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 
-// TODO: Replace this with the actual data from the backend
-
+/**
+ * The CoursePage component presents an overview of the course.
+ *
+ * @returns {JSX.Element} - The CoursePage component.
+ *
+ * @category Pages
+ */
 const CoursePage = () => {
   const { t } = useTranslation()
   const authcontext = useContext(AuthContext)

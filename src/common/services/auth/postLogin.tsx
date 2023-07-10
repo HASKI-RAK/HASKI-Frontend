@@ -1,4 +1,4 @@
-import { getData } from "./RequestResponse"
+import { getData } from '../RequestResponse'
 
 export type LoginResponse = {
   // Unix timestamp

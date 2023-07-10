@@ -20,23 +20,23 @@ export type LoginHookReturn = {
  * If a nonce is passed, the user can be authenticated with the nonce.
  * If no nonce is passed the user is redirected to the login page without a nonce.
  *
- * @param params - Contain nonce and setIsLoading
+ * @param props - Contain nonce and setIsLoading
  * @returns {LoginHookReturn} - The login logic.
  */
-export const useLogin = (params: LoginHookParams): LoginHookReturn => {
+export const useLogin = (props: LoginHookParams): LoginHookReturn => {
   const { t } = useTranslation()
-  const authcontext = useContext(AuthContext)
+  const authContext = useContext(AuthContext)
   const navigate = useNavigate()
   const { addSnackbar } = useContext(SnackbarContext)
 
   // Login with username and password
   const onSubmitHandler = () => {
-    params.setIsLoading(false)
+    props.setIsLoading(false)
     addSnackbar({ message: t('components.Login.passwordError'), severity: 'success', autoHideDuration: 5000 })
   }
 
   const onMoodleLogin = () => {
-    params.setIsLoading(true)
+    props.setIsLoading(true)
     redirectMoodleLogin()
       .then((response) =>
         // 👇️ redirects to Moodle LTI launch acticity
@@ -47,19 +47,18 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
       })
       .finally(() => {
-        params.setIsLoading(false)
+        props.setIsLoading(false)
       })
   }
 
   // on mount, read search param 'nounce' and set it to state
   useEffect(() => {
-    if (!params.nonce)
-      return
+    if (!props.nonce) return
 
-    postLogin({ nonce: params.nonce })
+    postLogin({ nonce: props.nonce })
       .then((response) => {
         // supply auth context
-        authcontext.setExpire(response.expiration)
+        authContext.setExpire(response.expiration)
         // then redirect to home page
         navigate('/', { replace: true })
       })

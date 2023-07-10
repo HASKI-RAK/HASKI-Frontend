@@ -2,6 +2,7 @@ import '@testing-library/jest-dom'
 import { AuthProvider } from '@services'
 import { act, render, renderHook } from '@testing-library/react'
 import { useAuthProvider } from './AuthProvider.hooks'
+import { mockServices } from 'jest.setup'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -27,7 +28,7 @@ describe('Test AuthProvider', () => {
   })
 
   test('functionality of AuthProvider hook', async () => {
-    const { result } = await renderHook(() => useAuthProvider())
+    const { result } = renderHook(() => useAuthProvider())
     expect(result.current).toMatchObject({
       isAuth: false,
       setExpire: expect.any(Function),
@@ -40,13 +41,13 @@ describe('Test AuthProvider', () => {
     })
     expect(result.current.isAuth).toBe(true)
 
-    await act(() => {
-      result.current.logout()
+    await act(async () => {
+      await result.current.logout()
     })
     expect(result.current.isAuth).toBe(false)
   })
 
-  it('should set isauth to false when backend returns other than 200', async () => {
+  it('should set isauth to false when backend returns other than 200', () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         json: () => Promise.resolve({ status: 400 }),
@@ -59,8 +60,8 @@ describe('Test AuthProvider', () => {
       })
     ) as jest.Mock
     let _result!: { current: { isAuth: boolean } }
-    await act(async () => {
-      const { result } = await renderHook(() => useAuthProvider())
+    act(() => {
+      const { result } = renderHook(() => useAuthProvider())
       _result = result
     })
     expect(_result.current).toMatchObject({
@@ -87,7 +88,7 @@ describe('Test AuthProvider', () => {
     global.fetch = fech_mock
     let _result!: { current: { isAuth: boolean } }
     await act(async () => {
-      const { result } = await renderHook(() => useAuthProvider())
+      const { result } = renderHook(() => useAuthProvider())
       _result = result
     }).then(() => {
       expect(_result.current).toMatchObject({
@@ -97,5 +98,31 @@ describe('Test AuthProvider', () => {
       })
       expect(_result.current.isAuth).toBe(false)
     })
+  })
+
+  it('should throw an error if logout fails', async () => {
+    // Here we override the mockServices.getLogout function to throw an error
+    mockServices.getLogout.mockImplementationOnce(() => {
+      return Promise.reject('logout failed')
+    })
+    const { result } = renderHook(() => useAuthProvider())
+    act(() => {
+      result.current.setExpire(9999999999) // if this test fails, how did react js even survive this long?
+    })
+    expect(result.current.isAuth).toBe(true)
+    // logout should throw an error
+    await expect(result.current.logout()).rejects.toThrow('logout failed')
+  })
+
+  it('should work again', async () => {
+    const { result } = renderHook(() => useAuthProvider())
+    act(() => {
+      result.current.setExpire(9999999999) // if this test fails, how did react js even survive this long?
+    })
+    expect(result.current.isAuth).toBe(true)
+    await act(async () => {
+      await result.current.logout()
+    })
+    expect(result.current.isAuth).toBe(false)
   })
 })

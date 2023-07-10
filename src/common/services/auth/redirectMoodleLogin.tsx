@@ -1,5 +1,4 @@
-import { getData } from './RequestResponse'
-
+import { getData } from '../RequestResponse'
 
 export type LTILaunchViewResponse = {
   lti_launch_view: string
