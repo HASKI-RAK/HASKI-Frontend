@@ -10,13 +10,12 @@ import { LearningPathLearningElement } from '@core'
  * @param topicId The topic's id
  * @returns The learning path for the given user, course and topic
  */
-
 type LearningPathReturn = (
-  userId?: number,
-  lmsUserId?: number,
-  studentId?: number,
-  courseId?: number,
-  topicId?: number
+  userId: number,
+  lmsUserId: number,
+  studentId: number,
+  courseId: string,
+  topicId: string
 ) => Promise<LearningPath>
 
 type LearningPath = {

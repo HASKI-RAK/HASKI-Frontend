@@ -9,37 +9,42 @@ const useAuthProvider = (): AuthContextType => {
   const setStoreExpire = usePersistedStore((state) => state.setExpire)
 
   // Called by components which are part of login. Sets the auth state to true.
-  const setExpire = useCallback((expire: number) => {
-    setStoreExpire(expire)
-  }, [setStoreExpire])
+  const setExpire = useCallback(
+    (expire: number) => {
+      setStoreExpire(expire)
+    },
+    [setStoreExpire]
+  )
 
   // check UNIX timestamp against current time in seconds and return true if the token is still valid
   const isAuth = useMemo(() => {
     const now = Math.floor(Date.now() / 1000)
-    if (expiration && expiration < now) {
+    if (expiration < now) {
       log.warn('isAuth. Expired: ', expiration, now)
       return false
     }
     log.debug('isAuth. Not expired: ', expiration, now)
     return true
-
   }, [expiration])
 
-  const logout = useCallback(() => {
-    getLogout().then((response) => {
-      if (response.status === 200) {
-        log.debug('logout successful')
+  const logout = useCallback(async () => {
+    return getLogout()
+      .then(() => {
         setExpire(0)
-        //addSnackbar({ message: t('services.AuthProvider.logout'), severity: 'success', autoHideDuration: 5000 })
-      }
-    })
-  }, [setExpire])
+        log.debug('logout successful')
+        // TODO 📑 clear state in zustand
+        // Snackbar will be handled by the component which calls logout
+      })
+      .catch((error) => {
+        throw new Error(error)
+      })
+  }, [])
 
   return {
     isAuth,
     setExpire,
     logout
-  }
+  } as const
 }
 
 export { useAuthProvider }

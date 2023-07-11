@@ -1,5 +1,6 @@
 /**
  * Reusable service calls go here.
+ * Dont forget to mock them in jest.setup.ts
  */
 export { useUserStore } from './UserState'
 export type { UserState } from './UserState'

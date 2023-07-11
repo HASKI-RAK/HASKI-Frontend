@@ -63,7 +63,6 @@ const DropdownLanguage = forwardRef((props, ref: ForwardedRef<HTMLDivElement | n
       </Select>
     </div>
   )
-}
-)
+})
 DropdownLanguage.displayName = 'DropdownLanguage'
 export { DropdownLanguage }

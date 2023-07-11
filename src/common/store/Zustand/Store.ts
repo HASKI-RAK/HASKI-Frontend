@@ -10,24 +10,34 @@ import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 export type StoreState = LearningPathSlice & CourseSlice & CoursesSlice
 export type PersistedStoreState = UserSlice & AuthSlice
 
+export const resetters: (() => void)[] = []
+
 export const useStore = create<StoreState>()((...a) => ({
   ...createLearningPathSlice(...a),
   ...createCourseSlice(...a),
   ...createCoursesSlice(...a)
 }))
 
-export const usePersistedStore = create<PersistedStoreState>()(devtools(persist((...a) => ({
-  ...createUserSlice(...a),
-  ...createAuthSlice(...a)
-}), {
-  name: 'persisted_storage',
-  // Here we can whitelist the keys we want to persist
-  partialize: (state) => (
-    {
-      _user: state._user,
-      expire: state.expire
-    }
-  ),
-  onRehydrateStorage: () => { log.log('PersistedStore hydration starts') },
-  version: 1 // When this changes, the persisted data will be discarded and the store reinitialized (Useful for migrations)
-})))
+export const usePersistedStore = create<PersistedStoreState>()(
+  devtools(
+    persist(
+      (...a) => ({
+        ...createUserSlice(...a),
+        ...createAuthSlice(...a)
+      }),
+      {
+        name: 'persisted_storage',
+        // Here we can whitelist the keys we want to persist
+        partialize: (state) => ({
+          _user: state._user,
+          expire: state.expire
+        }),
+        onRehydrateStorage: () => {
+          log.debug('PersistedStore hydration starts')
+        },
+        version: 1 // When this changes, the persisted data will be discarded and the store reinitialized (Useful for migrations)
+      }
+    )
+  )
+)
+export const resetAllSlices = () => resetters.forEach((reset) => reset())

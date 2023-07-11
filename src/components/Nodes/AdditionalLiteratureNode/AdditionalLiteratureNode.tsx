@@ -1,26 +1,34 @@
-import { Box, Paper, Typography } from '@mui/material'
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { DefaultBox as Box, DefaultPaper as Paper, DefaultTypography as Typography } from '@common/components'
+import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { IFrameModal, LearningPathLearningElementNode } from '@components'
-import ArticleIcon from '@mui/icons-material/Article'
+import ArticleIcon from '@mui/icons-material/Article' // TODO: DI
+import { memo } from 'react'
 
-export const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
+/**
+ * AdditionalLiteratureNode presents a component that displays a node with an icon and a name.
+ * It can be clicked to open a corresponding activity of the lms.
+ * AdditionalLiteratureNode can't be used as a standalone component and must be rendered via ReactFlow.
+ * @param props - Props containing the data of the node.
+ * @returns {JSX.Element} - The AdditionalLiteratureNode component.
+ * @category Components
+ */
+const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
     <Box
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()
-        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activity_type}/view.php?id=${data.lms_id}`)
-      }}>
+        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
+      }}
+      data-testid={'additionalLiteratureNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
         sx={{
           width: '65px',
           height: '65px',
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          justifyContent: 'center'
         }}>
         <ArticleIcon sx={{ fontSize: 50 }} />
       </Paper>
@@ -31,3 +39,5 @@ export const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearnin
     </Box>
   )
 }
+
+export default memo(AdditionalLiteratureNode)

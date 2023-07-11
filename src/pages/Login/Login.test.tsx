@@ -1,23 +1,43 @@
-import { Login } from '@pages'
 import '@testing-library/jest-dom'
+import { Login } from '@pages'
 import { act, fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import * as router from 'react-router'
-import { AuthContext } from '@services'
+const { AuthContext } = jest.requireActual('@services')
+import { mockServices } from 'jest.setup'
 
 const navigate = jest.fn()
 
-describe('Test the Login page', () => {
-  global.fetch = jest.fn(() =>
-    Promise.resolve({
-      json: () => Promise.resolve({ status: 200 }),
-      status: 200,
-      message: 'OK'
-    })
-  ) as jest.Mock
-
+describe('Login Page', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+  })
+
+  test('should render the login page but throw an error when the backend fails', () => {
+    const mock = jest.fn(() => {
+      return Promise.reject(new Error('login failed'))
+    })
+    mockServices.postLogin.mockImplementationOnce(mock)
+
+    render(
+      <MemoryRouter initialEntries={['?nonce=123']}>
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Login />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+    expect(mock).toHaveBeenCalledTimes(1)
+  })
+
+  test('should render the login page', () => {
+    render(
+      <MemoryRouter initialEntries={['?nonce=123']}>
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Login />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+    expect(mockServices.postLogin).toHaveBeenCalledTimes(1)
   })
 
   it('should render the skeleton when a nonce is supplied as search params', () => {
@@ -30,11 +50,11 @@ describe('Test the Login page', () => {
     )
     // span length should be 1
     expect(login.container.querySelectorAll('span').length).toEqual(1)
-    // navigate should  be called with /login
-    // expect(navigate).toBeCalledWith("/login");
+    // useEffect login try should be called once
+    expect(mockServices.postLogin).toHaveBeenCalledTimes(1)
   })
 
-  it('should render the form the login page without nonce', () => {
+  it('should render the skeleton with nonce and authorized', () => {
     const login = render(
       <MemoryRouter initialEntries={['?nonce=123']}>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -58,7 +78,7 @@ describe('Test the Login page', () => {
 
   test('submit navigates to dashboard on correct username and password', () => {
     const login = render(
-      <MemoryRouter initialEntries={['']}>
+      <MemoryRouter initialEntries={['/login']}>
         <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
           <Login />
         </AuthContext.Provider>
@@ -70,11 +90,44 @@ describe('Test the Login page', () => {
 
     act(() => {
       // Fill in username
-      fireEvent.change(username, { target: { value: 'test' } })
+      fireEvent.change(username, { target: { value: 'Thomas' } })
 
       // Fill in password
-      fireEvent.change(password, { target: { value: 'test' } })
+      fireEvent.change(password, { target: { value: 'Tester' } })
     })
+
+    // Click on login button
+    act(() => {
+      fireEvent.click(buttonLogin)
+    })
+    // expect nothing since not implemented
+  })
+
+  test('moodle default login failed', () => {
+    window = Object.create(window)
+    const url = 'http://fakedomain.com'
+    Object.defineProperty(window, 'location', {
+      value: {
+        href: url
+      },
+      writable: true
+    })
+    window.location.replace = jest.fn()
+    const mock = jest.fn(() => {
+      return Promise.reject(new Error('moodel login failed'))
+    })
+    mockServices.redirectMoodleLogin.mockImplementationOnce(mock)
+
+    const login = render(
+      <MemoryRouter initialEntries={['']}>
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Login />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+    // test id moodle-login
+    // const buttonLogin = login.getByTestId("moodle-login-button");
+    const buttonLogin = login.getAllByRole('button')[2]
 
     // Click on login button
     act(() => {
@@ -82,9 +135,9 @@ describe('Test the Login page', () => {
     })
     // wait for the fetch to complete
     setTimeout(() => {
-      // navigate should be called with /dashboard
-      expect(navigate).toBeCalledWith('/dashboard')
+      expect(window.location.replace).toBeCalled()
     }, 1000)
+    expect(mock).toBeCalledTimes(1)
   })
 
   test('moodle default login', () => {
@@ -121,13 +174,10 @@ describe('Test the Login page', () => {
   })
 
   test('the hook should redirect to /login when a nonce is supplied as search params and unauthorized', () => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve({ status: 401 }),
-        status: 401,
-        message: 'Unauthorized'
-      })
-    ) as jest.Mock
+    const mock = jest.fn(() => {
+      return Promise.reject(new Error('unauthorized'))
+    })
+    mockServices.postLogin.mockImplementationOnce(mock)
     const login = render(
       <MemoryRouter initialEntries={['?nonce=123']}>
         <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -141,5 +191,7 @@ describe('Test the Login page', () => {
       // navigate should be called with /dashboard
       expect(navigate).toBeCalledWith('/login')
     }, 1000)
+
+    expect(mock).toBeCalledTimes(1)
   })
 })

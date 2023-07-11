@@ -1,6 +1,6 @@
-import { AuthContext, SnackbarContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
+import { AuthContext, SnackbarContext, postLogin, redirectMoodleLogin } from '@services'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useContext, useCallback } from 'react'
+import { useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export type LoginHookParams = {
@@ -20,70 +20,54 @@ export type LoginHookReturn = {
  * If a nonce is passed, the user can be authenticated with the nonce.
  * If no nonce is passed the user is redirected to the login page without a nonce.
  *
- * @param params - Contain nonce and setIsLoading
+ * @param props - Contain nonce and setIsLoading
  * @returns {LoginHookReturn} - The login logic.
  */
-export const useLogin = (params: LoginHookParams): LoginHookReturn => {
+export const useLogin = (props: LoginHookParams): LoginHookReturn => {
   const { t } = useTranslation()
-  const authcontext = useContext(AuthContext)
+  const authContext = useContext(AuthContext)
   const navigate = useNavigate()
   const { addSnackbar } = useContext(SnackbarContext)
 
-
   // Login with username and password
   const onSubmitHandler = () => {
-    params.setIsLoading(false)
+    props.setIsLoading(false)
     addSnackbar({ message: t('components.Login.passwordError'), severity: 'success', autoHideDuration: 5000 })
-
-    // params.setIsLoading(true)
-    // postLoginCredentials()
-    //   .then((response) => {
-    //     if (response.status === 200) {
-    //       login()
-    //     }
-
-    //     //TODO catch and🍿 snackbar
-    //   })
-    //   .finally(() => {
-    //     params.setIsLoading(false)
-    //   })
   }
 
   const onMoodleLogin = () => {
-    params.setIsLoading(true)
+    props.setIsLoading(true)
     redirectMoodleLogin()
-      .then((response) => {
-        if (response.status === 200) {
-          // 👇️ redirects to Moodle LTI launch acticity
-          window.location.replace(response.message)
-        } else {
-          //TODO 🍿 snackbar
-          addSnackbar({ message: response.message, severity: 'error', autoHideDuration: 5000 })
-        }
-      }).catch((error: string) => {
+      .then((response) =>
+        // 👇️ redirects to Moodle LTI launch acticity
+        window.location.replace(response.lti_launch_view)
+      )
+      .catch((error) => {
         //TODO 🍿 snackbar
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
       })
       .finally(() => {
-        params.setIsLoading(false)
+        props.setIsLoading(false)
       })
   }
 
   // on mount, read search param 'nounce' and set it to state
   useEffect(() => {
-    postLogin({ nonce: params.nonce }).then((response) => {
-      // supply auth context
-      authcontext.setExpire(response.expiration)
-      // then redirect to home page
-      navigate('/', { replace: true })
+    if (!props.nonce) return
 
-    }).catch((error: string) => {
-      //TODO 🍿 snackbar
-      addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
-      navigate('/login', { replace: true })
-    }
-    )
-  }, [addSnackbar, authcontext, navigate, params.nonce])
+    postLogin({ nonce: props.nonce })
+      .then((response) => {
+        // supply auth context
+        authContext.setExpire(response.expiration)
+        // then redirect to home page
+        navigate('/', { replace: true })
+      })
+      .catch((error: string) => {
+        //TODO 🍿 snackbar
+        addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
+        navigate('/login', { replace: true })
+      })
+  }, [])
 
   return {
     onSubmit: onSubmitHandler,

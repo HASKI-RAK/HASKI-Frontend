@@ -16,7 +16,7 @@ describe('getLoginStatus', () => {
       statusText: mockResponse.message
     })
 
-    const loginStatus = await getCourseTopics(1,2,3)
+    const loginStatus = await getCourseTopics(1, 2, 3)
     expect(loginStatus.status).toEqual(200)
   })
 
@@ -24,7 +24,7 @@ describe('getLoginStatus', () => {
     const mockError = new Error('Network error')
     window.fetch = jest.fn().mockRejectedValue(mockError)
 
-    const response = await getCourseTopics(1,2,3)
+    const response = await getCourseTopics(1, 2, 3)
 
     expect(fetch).toHaveBeenCalled()
     expect(response.status).toEqual(500)

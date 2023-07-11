@@ -3,14 +3,14 @@ import { createContext } from 'react'
 export type AuthContextType = {
   isAuth: boolean
   setExpire: (unixTimestamp: number) => void
-  logout: () => void
+  logout: () => Promise<void>
 }
 const AuthContext = createContext<AuthContextType>({
   isAuth: false,
-  logout: () => {
+  setExpire: () => {
     return
   },
-  setExpire: function (unixTimestamp: number) { // eslint-disable-line @typescript-eslint/no-unused-vars
+  logout: async () => {
     return
   }
 })
