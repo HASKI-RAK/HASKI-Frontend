@@ -2,9 +2,10 @@ import '@testing-library/jest-dom'
 import { useStore } from '../Zustand/Store'
 import { mockServices } from 'jest.setup'
 
-const learningPath = { id: 1, name: 'Math', description: 'Learn math' }
-describe('LearningPathSlice', () => {
-    mockServices.getLearningPathElement.mockReturnValue(learningPath)
+const learningPathElement = { id: 1, name: 'Math', description: 'Learn math' }
+
+describe('LearningPathElementSlice', () => {
+    mockServices.getLearningPathElement.mockReturnValue(learningPathElement)
 
     it('should fetch learning path from server and cache it', async () => {
         const { fetchLearningPathElement } = useStore.getState()
@@ -14,12 +15,12 @@ describe('LearningPathSlice', () => {
 
         const result = await fetchLearningPathElement(1, 2, 3, courseId, topicId)
 
-        expect(result).toEqual(learningPath)
+        expect(result).toEqual(learningPathElement)
         expect(fetchLearningPathElement).toBeDefined()
         expect(fetchLearningPathElement).toBeInstanceOf(Function)
         expect(mockServices.getLearningPathElement).toHaveBeenCalledTimes(1)
         expect(mockServices.getLearningPathElement).toHaveBeenCalledWith(1, 2, 3, courseId, topicId)
-        expect(useStore.getState()._cache_learningPathElement_record[`${courseId}-${topicId}`]).toEqual(learningPath)
+        expect(useStore.getState()._cache_learningPathElement_record[`${courseId}-${topicId}`]).toEqual(learningPathElement)
     })
 
     it('should return cached learning path if available', async () => {

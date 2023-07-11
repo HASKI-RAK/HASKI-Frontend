@@ -75,7 +75,7 @@ const mockDataServices: MockDataServices = {
         {
           id: 2,
           learning_element_id: 2,
-          learningPath_id: 2,
+          learning_path_id: 2,
           recommended: false,
           position: 2,
           learning_element: {

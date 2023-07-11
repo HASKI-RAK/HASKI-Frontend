@@ -61,7 +61,7 @@ export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } =>
     setLoading(true)
     try {
       const user = await fetchUser()
-      const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, 2)
+      const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, "2")
       setTopics(fetchedTopics.topics)
     } catch (error) {
       log.error(error)

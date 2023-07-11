@@ -14,7 +14,7 @@ type LearningPathTopicReturn = (
     userId?: number,
     lmsUserId?: number,
     studentId?: number,
-    courseId?: number
+    courseId?: string
 ) => Promise<LearningPathTopic>
 
 type LearningPathTopic = {
