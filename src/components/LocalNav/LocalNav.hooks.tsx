@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Topic } from '@services'
 import { LearningPathElement } from '@core'
 import log from 'loglevel'
-import { useStore, usePersistedStore} from '@store'
+import { useStore, usePersistedStore } from '@store'
 import { LearningPathElementReturn } from '@core'
 
 const initialLearningPathElement: LearningPathElement = {
@@ -46,7 +46,7 @@ export const getSortedLearningPath = async (
   data: Topic,
   fetchLearningPath: LearningPathElementReturn
 ): Promise<LearningPathElement> => {
-  const learningPath = await fetchLearningPath(userid, lmsUserid, studentid, "2", data.id.toString())
+  const learningPath = await fetchLearningPath(userid, lmsUserid, studentid, '2', data.id.toString())
   learningPath.path.sort((a, b) => a.position - b.position)
   return learningPath
 }
@@ -61,7 +61,7 @@ export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } =>
     setLoading(true)
     try {
       const user = await fetchUser()
-      const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, "2")
+      const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, '2')
       setTopics(fetchedTopics.topics)
     } catch (error) {
       log.error(error)

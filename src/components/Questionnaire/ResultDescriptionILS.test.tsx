@@ -3,10 +3,7 @@ import { ResultDescriptionILS } from './ResultDescriptionILS'
 import { setILSParameters, ILSDimension } from './TableILS'
 import { render } from '@testing-library/react'
 
-
 describe('Test ResultDescriptionILS with all Score combinations', () => {
-
-
   test('all positive dimensions are balanced', () => {
     const dimScoreArray = [3, 3, 3, 3]
     setILSParameters(dimScoreArray[0], dimScoreArray[1], dimScoreArray[2], dimScoreArray[3])
@@ -299,7 +296,6 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
     const { container } = render(
       <ResultDescriptionILS ILSdim={(n: number, b: number, c?: boolean | undefined) => getILSDimension(1, 1, true)} />
     )
-
 
     //Because the Switch is not working in the test, the following String has 2 spaces at the end
     expect(container.innerHTML.substring(932, 939)).toBe('Part2  ')

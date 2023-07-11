@@ -22,9 +22,7 @@ export const createCoursesSlice: StateCreator<StoreState, [], [], CoursesSlice> 
         const courses_response = await getCourses(userId, lmsUserId, studentId)
         set({ _cache_courses: courses_response })
         return courses_response
-      }
-      else
-        return cached
+      } else return cached
     }
   }
 }

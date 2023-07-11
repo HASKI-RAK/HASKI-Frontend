@@ -51,7 +51,7 @@ const LocalNav = ({
   const skeletonItems = []
   for (let i = 0; i < 3; i++) {
     skeletonItems.push(
-      <React.Fragment key={`LocalNav-Skeleton-${i}`} >
+      <React.Fragment key={`LocalNav-Skeleton-${i}`}>
         <Skeleton data-testid={`LocalNav-Skeleton-Topic-${i}`} variant="text" width={'100%'} height={55} />
         <Skeleton variant="text" width={'70%'} height={20} />
         <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />

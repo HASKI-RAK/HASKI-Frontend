@@ -26,8 +26,8 @@ import { Login, Logout } from '@mui/icons-material'
 import { AuthContext, SnackbarContext, Topic } from '@services'
 import { useLearningPathTopic as _useLearningPathTopic } from '../LocalNav/LocalNav.hooks'
 import { DropdownLanguage } from '@components'
-import { Link } from "@mui/material";
-import { useStore, usePersistedStore } from "@store";
+import { Link } from '@mui/material'
+import { useStore } from '@store'
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
 /**
@@ -55,7 +55,7 @@ const MenuBar = ({ useLearningPathTopic = _useLearningPathTopic }: MenuBarProps)
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
   const { addSnackbar } = useContext(SnackbarContext)
   const { isAuth, logout } = useContext(AuthContext)
-  const userCourse = useStore(state => state.course);
+  const userCourse = useStore((state) => state.course)
   const { t } = useTranslation()
 
   //Application logic hooks
@@ -177,22 +177,21 @@ const MenuBar = ({ useLearningPathTopic = _useLearningPathTopic }: MenuBarProps)
                       //For every Topic the LearningPathElement is displayed under it.
                       <>
                         {reversedTopics.map((topic) => (
-
                           <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>
                             <Grid item xs={12} key={t(topic.name)}>
-                                <Link
-                                    key={topic.name}
-                                    underline="hover"
-                                    variant="h6"
-                                    component="span"
-                                    color="inherit"
-                                    sx={{ m: 1, cursor: 'pointer' }}
-                                    onClick={() => {
-                                        navigate(`course/${userCourse.lms_id}/topic/${topic.id}`)
-                                        handleCloseTopicsMenu()
-                                    }}>
-                                    {topic.name}
-                                </Link>
+                              <Link
+                                key={topic.name}
+                                underline="hover"
+                                variant="h6"
+                                component="span"
+                                color="inherit"
+                                sx={{ m: 1, cursor: 'pointer' }}
+                                onClick={() => {
+                                  navigate(`course/${userCourse.lms_id}/topic/${topic.id}`)
+                                  handleCloseTopicsMenu()
+                                }}>
+                                {topic.name}
+                              </Link>
                               <Box
                                 sx={{
                                   display: 'flex',
@@ -201,7 +200,7 @@ const MenuBar = ({ useLearningPathTopic = _useLearningPathTopic }: MenuBarProps)
                                   justifyContent: 'start'
                                 }}></Box>
                             </Grid>
-                            {topics.indexOf(topic) !== topics.length  && <Divider flexItem />}
+                            {topics.indexOf(topic) !== topics.length && <Divider flexItem />}
                           </React.Fragment>
                         ))}
                       </>

@@ -1,15 +1,15 @@
 import '@testing-library/jest-dom'
-import {act, fireEvent, render} from '@testing-library/react'
+import { act, fireEvent, render } from '@testing-library/react'
 import LocalNav, { LocalNavProps } from './LocalNav'
 import * as router from 'react-router'
-import {LearningPathElement, LearningPathLearningElement, Topic, LearningElement} from "@core";
-import StudentLearningElement from "../../common/core/StudentLearningElement/StudentLearningElement";
-import {createMemoryHistory} from "history";
+import { LearningPathElement, LearningPathLearningElement, Topic, LearningElement } from '@core'
+import StudentLearningElement from '../../common/core/StudentLearningElement/StudentLearningElement'
+import { createMemoryHistory } from 'history'
 import { MemoryRouter } from 'react-router-dom'
-import {mockServices} from "../../../jest.setup";
-import {renderHook} from "@testing-library/react-hooks";
-import {getSortedLearningPath, useLearningPathTopic, useLearningPathElement} from './LocalNav.hooks'
-import resetModules = jest.resetModules;
+import { mockServices } from '../../../jest.setup'
+import { renderHook } from '@testing-library/react-hooks'
+import { getSortedLearningPath, useLearningPathTopic, useLearningPathElement } from './LocalNav.hooks'
+import resetModules = jest.resetModules
 
 const navigate = jest.fn()
 
@@ -23,19 +23,19 @@ describe('LocalNav', () => {
     student_id: 1,
     learning_element_id: 1,
     done: false,
-    done_at: "null",
+    done_at: 'null'
   }
 
   const mockLearningElement: LearningElement = {
     id: 1,
     lms_id: 1,
-    activity_type: "Quiz",
-    classification: "Formative",
-    name: "Quiz on Chapter 3",
-    university: "HS-KE",
-    created_by: "John Doe",
-    created_at: "2023-04-19T10:30:00.000Z",
-    last_updated: "2023-04-20T15:45:00.000Z",
+    activity_type: 'Quiz',
+    classification: 'Formative',
+    name: 'Quiz on Chapter 3',
+    university: 'HS-KE',
+    created_by: 'John Doe',
+    created_at: '2023-04-19T10:30:00.000Z',
+    last_updated: '2023-04-20T15:45:00.000Z',
     student_learning_element: mockStudentLearningElement
   }
 
@@ -53,8 +53,8 @@ describe('LocalNav', () => {
   const mockLearningPathElement: LearningPathElement = {
     id: 1,
     course_id: 1,
-    based_on: "some-Algorithm",
-    calculated_on: "today",
+    based_on: 'some-Algorithm',
+    calculated_on: 'today',
     path: mockLearningPathLearningElement
   }
 
@@ -101,15 +101,14 @@ describe('LocalNav', () => {
     }
   ]
 
-
   const mockUseLearningPathTopic = jest.fn().mockReturnValue({
     loading: true,
-    topics: topics,
+    topics: topics
   })
 
   const mockUseLearningPathElement = jest.fn().mockReturnValue({
     loadingElements: true,
-    learningPaths: mockLearningPathElement,
+    learningPaths: mockLearningPathElement
   })
 
   const props: LocalNavProps = {
@@ -123,24 +122,21 @@ describe('LocalNav', () => {
   })
 
   it('should render the LocalNav with Topic and learningElementPath loading Topics', () => {
+    const { getAllByTestId } = render(<LocalNav {...props} />)
 
-    const {getAllByTestId} = render(<LocalNav {...props} />)
-
-    const loadingSkeletons = getAllByTestId(/LocalNav-Skeleton-Topic/);
-    expect(loadingSkeletons).toHaveLength(3);
-
+    const loadingSkeletons = getAllByTestId(/LocalNav-Skeleton-Topic/)
+    expect(loadingSkeletons).toHaveLength(3)
   })
 
   it('should render the LocalNav with Topic and learningElementPath loading Elements', () => {
-
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
-      topics: topics,
+      topics: topics
     })
 
     const mockUseLearningPathElement = jest.fn().mockReturnValue({
       loadingElements: true,
-      learningPaths: mockLearningPathElement,
+      learningPaths: mockLearningPathElement
     })
 
     const props: LocalNavProps = {
@@ -148,32 +144,30 @@ describe('LocalNav', () => {
       useLearningPathElement: mockUseLearningPathElement
     }
 
-    const {getAllByTestId} = render(<LocalNav {...props} />)
+    const { getAllByTestId } = render(<LocalNav {...props} />)
 
-    const topicAccordions = getAllByTestId(/topic-Accordion/);
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false');
+    const topicAccordions = getAllByTestId(/topic-Accordion/)
+    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
 
-    fireEvent.click(topicAccordions[0]);
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('true');
+    fireEvent.click(topicAccordions[0])
+    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('true')
 
-    const loadingSkeletons = getAllByTestId(/LocalNav-Skeleton-Element/);
-    expect(loadingSkeletons).toHaveLength(1);
+    const loadingSkeletons = getAllByTestId(/LocalNav-Skeleton-Element/)
+    expect(loadingSkeletons).toHaveLength(1)
 
-    fireEvent.click(topicAccordions[0]);
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false');
-
+    fireEvent.click(topicAccordions[0])
+    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
   })
 
   it('should render the LocalNav with Topic and learningElementPath rendered', () => {
-
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
-      topics: topics,
+      topics: topics
     })
 
     const mockUseLearningPathElement = jest.fn().mockReturnValue({
       loadingElements: false,
-      learningPaths: mockLearningPathElement,
+      learningPaths: mockLearningPathElement
     })
 
     const props: LocalNavProps = {
@@ -186,15 +180,14 @@ describe('LocalNav', () => {
   })
 
   it('should render the LocalNav with Topic and learningElementPath clicked (opened)', () => {
-
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
-      topics: topics,
+      topics: topics
     })
 
     const mockUseLearningPathElement = jest.fn().mockReturnValue({
       loadingElements: false,
-      learningPaths: mockLearningPathElement,
+      learningPaths: mockLearningPathElement
     })
 
     const props: LocalNavProps = {
@@ -202,28 +195,27 @@ describe('LocalNav', () => {
       useLearningPathElement: mockUseLearningPathElement
     }
 
-    const {getAllByTestId} = render(<LocalNav {...props} />)
+    const { getAllByTestId } = render(<LocalNav {...props} />)
 
-    const topicAccordions = getAllByTestId(/topic-Accordion/);
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false');
+    const topicAccordions = getAllByTestId(/topic-Accordion/)
+    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
 
-    fireEvent.click(topicAccordions[0]);
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('true');
+    fireEvent.click(topicAccordions[0])
+    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('true')
 
-    fireEvent.click(topicAccordions[0]);
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(topicAccordions[0])
+    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
   })
 
   it('should render the LocalNav with Topic and learningElementPath clicked on Element', () => {
-
-        const mockUseLearningPathTopic = jest.fn().mockReturnValue({
+    const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
-      topics: topics,
+      topics: topics
     })
 
     const mockUseLearningPathElement = jest.fn().mockReturnValue({
       loadingElements: false,
-      learningPaths: mockLearningPathElement,
+      learningPaths: mockLearningPathElement
     })
 
     const props: LocalNavProps = {
@@ -231,27 +223,23 @@ describe('LocalNav', () => {
       useLearningPathElement: mockUseLearningPathElement
     }
 
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
+    const { getByTestId, getAllByTestId } = render(
+      <MemoryRouter initialEntries={['/login']}>
+        <LocalNav {...props} />
+      </MemoryRouter>
+    )
 
-    const {getByTestId, getAllByTestId} = render(
-        <MemoryRouter initialEntries={['/login']}>
-          <LocalNav {...props} />
-        </MemoryRouter>)
+    const topicAccordions = getAllByTestId(/topic-Accordion/)
+    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
 
-    const topicAccordions = getAllByTestId(/topic-Accordion/);
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(topicAccordions[0])
+    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('true')
 
-    fireEvent.click(topicAccordions[0]);
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('true');
-
-    fireEvent.click(getByTestId("Quiz on Chapter 3"))
+    fireEvent.click(getByTestId('Quiz on Chapter 3'))
   })
-
 })
 
-
 describe('getSortedLearningPath works as expected', () => {
-
   const initialLearningPathElement: LearningPathElement = {
     id: 99999,
     course_id: 99999,
@@ -323,7 +311,7 @@ describe('getSortedLearningPath works as expected', () => {
 
   // Mock fetchUser
   const mockFetchUser = jest.fn().mockResolvedValue({
-    settings: {user_id: 1},
+    settings: { user_id: 1 },
     lms_user_id: 1,
     id: 1
   })
@@ -331,35 +319,34 @@ describe('getSortedLearningPath works as expected', () => {
   // Mock fetchLearningPathTopic
   const mockFetchLearningPathTopic = jest.fn().mockResolvedValue({
     topics: [
-      {id: 1, name: 'Topic 1'},
-      {id: 2, name: 'Topic 2'},
-      {id: 3, name: 'Topic 3'}
+      { id: 1, name: 'Topic 1' },
+      { id: 2, name: 'Topic 2' },
+      { id: 3, name: 'Topic 3' }
     ]
   })
 
-  const topic: Topic =
-      {
-        contains_le: true,
-        created_at: '2021-09-01T12:00:00.000Z',
-        created_by: 'dimitri',
-        id: 1,
-        is_topic: true,
-        last_updated: '2021-09-01T12:00:00.000Z',
-        lms_id: 1,
-        name: 'Allgemeine Informatik',
-        parent_id: 1,
-        student_topic: {
-          done: false,
-          done_at: null,
-          id: 1,
-          student_id: 1,
-          topic_id: 1,
-          visits: []
-        },
-        university: 'HS-KE'
-      }
+  const topic: Topic = {
+    contains_le: true,
+    created_at: '2021-09-01T12:00:00.000Z',
+    created_by: 'dimitri',
+    id: 1,
+    is_topic: true,
+    last_updated: '2021-09-01T12:00:00.000Z',
+    lms_id: 1,
+    name: 'Allgemeine Informatik',
+    parent_id: 1,
+    student_topic: {
+      done: false,
+      done_at: null,
+      id: 1,
+      student_id: 1,
+      topic_id: 1,
+      visits: []
+    },
+    university: 'HS-KE'
+  }
 
-  test('returns a sorted learning path', async() => {
+  test('returns a sorted learning path', async () => {
     const userid = 1
     const lmsUserid = 1
     const studentid = 1
@@ -397,20 +384,20 @@ describe('getSortedLearningPath works as expected', () => {
         }
       ]
     })
-    expect(mockFetchLearningPathElement).toHaveBeenCalledWith(userid, lmsUserid, studentid, "2", topic.id.toString())
+    expect(mockFetchLearningPathElement).toHaveBeenCalledWith(userid, lmsUserid, studentid, '2', topic.id.toString())
   })
 
-  test('fetches learning path topics and returns the loading state', async() => {
-    mockFetchUser.mockResolvedValueOnce({settings: {user_id: 1}, lms_user_id: 1, id: 1})
+  test('fetches learning path topics and returns the loading state', async () => {
+    mockFetchUser.mockResolvedValueOnce({ settings: { user_id: 1 }, lms_user_id: 1, id: 1 })
     mockFetchLearningPathTopic.mockResolvedValueOnce({
       topics: [
-        {id: 1, name: 'Topic 1'},
-        {id: 2, name: 'Topic 2'},
-        {id: 3, name: 'Topic 3'}
+        { id: 1, name: 'Topic 1' },
+        { id: 2, name: 'Topic 2' },
+        { id: 3, name: 'Topic 3' }
       ]
     })
 
-    const {result, waitForNextUpdate} = renderHook(() => useLearningPathTopic())
+    const { result, waitForNextUpdate } = renderHook(() => useLearningPathTopic())
 
     expect(result.current.loading).toBe(true)
     expect(result.current.topics).toEqual([])
@@ -418,33 +405,34 @@ describe('getSortedLearningPath works as expected', () => {
     await waitForNextUpdate()
 
     expect(result.current.loading).toBe(false)
-    expect(result.current.topics).toEqual([{
-      contains_le: true,
-      created_at: 'string',
-      created_by: 'string',
-      id: 1,
-      is_topic: true,
-      last_updated: 'string',
-      lms_id: 1,
-      name: 'string',
-      parent_id: 1,
-      university: 'HS-Kempten',
-      student_topic: {
-        done: true,
-        done_at: 'string',
+    expect(result.current.topics).toEqual([
+      {
+        contains_le: true,
+        created_at: 'string',
+        created_by: 'string',
         id: 1,
-        student_id: 1,
-        topic_id: 1,
-        visits: ['string']
+        is_topic: true,
+        last_updated: 'string',
+        lms_id: 1,
+        name: 'string',
+        parent_id: 1,
+        university: 'HS-Kempten',
+        student_topic: {
+          done: true,
+          done_at: 'string',
+          id: 1,
+          student_id: 1,
+          topic_id: 1,
+          visits: ['string']
+        }
       }
-    }
     ])
   })
 
-  test('fetches learning path elements for a topic and returns the loading state', async() => {
-    mockFetchUser.mockResolvedValueOnce({settings: {user_id: 1}, lms_user_id: 1, id: 1})
+  test('fetches learning path elements for a topic and returns the loading state', async () => {
+    mockFetchUser.mockResolvedValueOnce({ settings: { user_id: 1 }, lms_user_id: 1, id: 1 })
 
-    const {result, waitForNextUpdate} = renderHook(() => useLearningPathElement(topic))
+    const { result, waitForNextUpdate } = renderHook(() => useLearningPathElement(topic))
 
     expect(result.current.loadingElements).toBe(true)
     expect(result.current.learningPaths).toEqual(initialLearningPathElement)
@@ -487,76 +475,76 @@ describe('getSortedLearningPath works as expected', () => {
           id: 2,
           learning_path_id: 2,
           learning_element: {
-            activity_type: "test",
-            classification: "ÜB",
-            created_at: "test",
-            created_by: "test",
+            activity_type: 'test',
+            classification: 'ÜB',
+            created_at: 'test',
+            created_by: 'test',
             id: 2,
-            last_updated: "test",
+            last_updated: 'test',
             lms_id: 2,
-            name: "test",
+            name: 'test',
             student_learning_element: {
               done: false,
-              done_at: "test",
+              done_at: 'test',
               id: 2,
               learning_element_id: 2,
-              student_id: 1,
+              student_id: 1
             },
-            university: "test",
+            university: 'test'
           },
           learning_element_id: 2,
           position: 2,
-          recommended: false,
+          recommended: false
         },
         {
           id: 3,
           learning_element: {
-            activity_type: "test",
-            classification: "ÜB",
-            created_at: "test",
-            created_by: "test",
+            activity_type: 'test',
+            classification: 'ÜB',
+            created_at: 'test',
+            created_by: 'test',
             id: 3,
-            last_updated: "test",
+            last_updated: 'test',
             lms_id: 3,
-            name: "test",
+            name: 'test',
             student_learning_element: {
               done: false,
-              done_at: "test",
+              done_at: 'test',
               id: 3,
               learning_element_id: 3,
-              student_id: 1,
+              student_id: 1
             },
-            university: "test",
+            university: 'test'
           },
           learning_element_id: 3,
           learning_path_id: 3,
           position: 3,
-          recommended: false,
+          recommended: false
         },
         {
           id: 4,
           learning_path_id: 4,
           learning_element: {
-            activity_type: "test",
-            classification: "KÜ",
-            created_at: "test",
-            created_by: "test",
+            activity_type: 'test',
+            classification: 'KÜ',
+            created_at: 'test',
+            created_by: 'test',
             id: 4,
-            last_updated: "test",
+            last_updated: 'test',
             lms_id: 4,
-            name: "test",
+            name: 'test',
             student_learning_element: {
               done: false,
-              done_at: "test",
+              done_at: 'test',
               id: 4,
               learning_element_id: 4,
-              student_id: 1,
+              student_id: 1
             },
-            university: "test",
+            university: 'test'
           },
           learning_element_id: 4,
           position: 4,
-          recommended: false,
+          recommended: false
         }
       ]
     })
@@ -564,27 +552,24 @@ describe('getSortedLearningPath works as expected', () => {
 })
 
 describe('useLearningPathTopic', () => {
-
   beforeEach(() => {
     resetModules()
   })
 
   test('fetch learningPathTopics fails', async () => {
     const mockgetLearningPathTopic = jest.fn(() => {
-      return Promise.reject(new Error('getLearningPathTopic failed'));
-    });
+      return Promise.reject(new Error('getLearningPathTopic failed'))
+    })
 
     act(() => {
-      mockServices.getLearningPathTopic.mockImplementationOnce(mockgetLearningPathTopic);
-      const { result } = renderHook(() => useLearningPathTopic());
+      mockServices.getLearningPathTopic.mockImplementationOnce(mockgetLearningPathTopic)
+      const { result } = renderHook(() => useLearningPathTopic())
 
-      expect(result.current).toBeUndefined();
-    });
-  });
+      expect(result.current).toBeUndefined()
+    })
+  })
 
-
-  test('fetch learningPathElement fails', async() => {
-
+  test('fetch learningPathElement fails', async () => {
     const topic = {
       contains_le: true,
       created_at: 'string',
@@ -612,7 +597,7 @@ describe('useLearningPathTopic', () => {
 
     act(() => {
       mockServices.getLearningPathElement.mockImplementationOnce(mockgetLearningPathElement)
-      const {result} = renderHook(() => useLearningPathElement(topic))
+      const { result } = renderHook(() => useLearningPathElement(topic))
 
       expect(result.current).toBeUndefined()
     })

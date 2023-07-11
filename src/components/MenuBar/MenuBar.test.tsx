@@ -300,7 +300,6 @@ describe('MenuBar', () => {
     expect(userMenu).toBeNull()
   })
 
-
   it('should set anchorElTopics to null', async () => {
     const history = createMemoryHistory({ initialEntries: ['/home'] })
 
@@ -418,10 +417,10 @@ describe('MenuBar', () => {
       useLearningPathTopic: mockUseLearningPath
     }
 
-    const {getAllByText, getByText} = render(
-        <Router location={history.location} navigator={history}>
-          <MenuBar {...props} />
-        </Router>
+    const { getAllByText, getByText } = render(
+      <Router location={history.location} navigator={history}>
+        <MenuBar {...props} />
+      </Router>
     )
     // click on Topics button:
     fireEvent.click(getAllByText('components.MenuBar.TopicButton')[0])
@@ -436,14 +435,13 @@ describe('MenuBar', () => {
     //await userEvent.keyboard('{esc}');
 
     //await waitFor(() => expect(result.getByText('Allgemeine Informatik')).not.toBeInTheDocument());
-  });
-
+  })
 
   it('navigates to logout page', async () => {
     const history = createMemoryHistory({ initialEntries: ['/home'] })
 
-    const {getAllByText, getByTestId} = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(),logout: jest.fn() }}>
+    const { getAllByText, getByTestId } = render(
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <Router location={history.location} navigator={history}>
           <MenuBar />
         </Router>

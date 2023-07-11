@@ -45,35 +45,45 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     }, 5000)
     if (authContext.isAuth && courseId && topicId) {
       clearTimeout(preventEndlessLoading)
-      fetchUser().then(
-        (user) => {
-          fetchLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId).then(
-            (learningPathElementData) => {
+      fetchUser()
+        .then((user) => {
+          fetchLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
+            .then((learningPathElementData) => {
               const { nodes, edges } = mapNodes(learningPathElementData, theme)
               setInitialNodes(nodes)
               setInitialEdges(edges)
-            }
-          ).catch((error: string) => {
-            addSnackbar({
-              message: error,
-              severity: 'error',
-              autoHideDuration: 3000
             })
-          })
-        }
-
-      ).catch((error: string) => {
-        addSnackbar({
-          message: error,
-          severity: 'error',
-          autoHideDuration: 3000
+            .catch((error: string) => {
+              addSnackbar({
+                message: error,
+                severity: 'error',
+                autoHideDuration: 3000
+              })
+            })
         })
-      })
+        .catch((error: string) => {
+          addSnackbar({
+            message: error,
+            severity: 'error',
+            autoHideDuration: 3000
+          })
+        })
     }
     return () => {
       clearTimeout(preventEndlessLoading)
     }
-  }, [authContext.isAuth, courseId, fetchLearningPathElement, fetchUser, theme, topicId, mapNodes, navigate, setInitialNodes, setInitialEdges])
+  }, [
+    authContext.isAuth,
+    courseId,
+    fetchLearningPathElement,
+    fetchUser,
+    theme,
+    topicId,
+    mapNodes,
+    navigate,
+    setInitialNodes,
+    setInitialEdges
+  ])
 
   return initialNodes && initialEdges ? (
     <Box height={'100%'}>

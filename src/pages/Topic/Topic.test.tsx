@@ -4,7 +4,7 @@ import { mockReactFlow } from '__mocks__/ResizeObserver'
 import { createTheme } from '@mui/material'
 import { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
-import Router from "react-router-dom";
+import Router from 'react-router-dom'
 import { useTopic } from './Topic.hooks'
 import Topic from './Topic'
 const { AuthContext } = jest.requireActual('@services')
@@ -13,17 +13,17 @@ const navigate = jest.fn()
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useParams: jest.fn(),
-}));
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn()
+}))
 
 describe('Topic Page', () => {
   beforeEach(() => {
     jest.clearAllTimers()
     mockReactFlow()
     jest.spyOn(Router, 'useNavigate').mockImplementation(() => navigate)
-    jest.spyOn(Router, 'useParams').mockReturnValue({ courseId: "2", topicId: "1" })
+    jest.spyOn(Router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
   })
 
   it('renders when Auth is true', async () => {
@@ -68,7 +68,6 @@ describe('Topic Page', () => {
   })
 
   test('fetchUser failed', async () => {
-
     const mockgetUser = jest.fn(() => {
       return Promise.reject(new Error('getUser failed'))
     })

@@ -1,4 +1,4 @@
-import {Topic} from "@core";
+import { Topic } from '@core'
 
 /**
  * Params are optional so
@@ -11,10 +11,10 @@ import {Topic} from "@core";
  */
 
 type LearningPathTopicReturn = (
-    userId?: number,
-    lmsUserId?: number,
-    studentId?: number,
-    courseId?: string
+  userId?: number,
+  lmsUserId?: number,
+  studentId?: number,
+  courseId?: string
 ) => Promise<LearningPathTopic>
 
 type LearningPathTopic = {
