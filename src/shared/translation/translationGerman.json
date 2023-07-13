@@ -552,53 +552,6 @@
     "TestDeutsch3",
     "TestDeutsch4"
   ],
-  "pages.CoursePage.topics": [
-    {
-      "id": "1",
-      "name": "Allgemein",
-      "description": "Dies ist das erste Thema"
-    },
-    {
-      "id": "16",
-      "name": "Individuelle Anordnung",
-      "description": "Dies ist das zweite Thema"
-    },
-    {
-      "id": "7",
-      "name": "Entwurfsmuster Allgemein",
-      "description": "Dies ist das dritte Thema"
-    },
-    {
-      "id": "2",
-      "name": "Bekannte Entwurfsmuster",
-      "description": "Dies ist das vierte Thema"
-    },
-    {
-      "id": "3",
-      "name": "Strategie",
-      "description": "Dies ist das fünfte Thema"
-    },
-    {
-      "id": "4",
-      "name": "Zustand",
-      "description": "Dies ist das sechste Thema"
-    },
-    {
-      "id": "5",
-      "name": "Adapter",
-      "description": "Dies ist das siebte Thema"
-    },
-    {
-      "id": "6",
-      "name": "Fassade",
-      "description": "Dies ist das achte Thema"
-    },
-    {
-      "id": "14",
-      "name": "Abschluss",
-      "description": "Dies ist das neunte Thema"
-    }
-  ],
   "pages.glossary.title": "Glossar",
   "pages.home": "Startseite",
   "pages.imprint": "Impressum",
