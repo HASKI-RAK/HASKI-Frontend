@@ -75,6 +75,7 @@ export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } =>
     effect().catch(() => {
       log.error('An error occurred while fetching course topics in LocalNav.hooks')
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return { loading, topics }
@@ -112,6 +113,7 @@ export const useLearningPathElement = (
     effect().catch(() => {
       log.error('An error occurred while fetching course Topic Elements in LocalNav.hooks')
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return { loadingElements, learningPaths }

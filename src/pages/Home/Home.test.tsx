@@ -1,6 +1,6 @@
 import { Home } from '@pages'
 import '@testing-library/jest-dom'
-import { fireEvent, render } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
 

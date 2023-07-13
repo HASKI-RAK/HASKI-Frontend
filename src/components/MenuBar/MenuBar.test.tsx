@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
-import { createMemoryHistory } from 'history'
 import { MemoryRouter } from 'react-router-dom'
 import { Topic, LearningElement, LearningPath, AuthContext } from '@services'
 import * as router from 'react-router'

@@ -73,7 +73,7 @@ describe('Topic Page', () => {
     })
     act(() => {
       mockServices.getUser.mockImplementationOnce(mockgetUser)
-      const rend = render(
+      render(
         <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <Topic />
@@ -92,7 +92,7 @@ describe('Topic Page', () => {
     })
     act(() => {
       mockServices.getLearningPathElement.mockImplementationOnce(mockgetLearningPathElement)
-      const ren = render(
+      render(
         <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <Topic />
