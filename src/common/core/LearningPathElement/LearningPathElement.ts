@@ -11,6 +11,14 @@ import { LearningPathLearningElement } from '@core'
  * @returns The learning path for the given user, course and topic
  */
 
+type LearningPathElementReturn = (
+  userId?: number,
+  lmsUserId?: number,
+  studentId?: number,
+  courseId?: string,
+  topicId?: string
+) => Promise<LearningPathElement>
+
 type LearningPathElement = {
   id: number
   course_id: number
