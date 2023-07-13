@@ -40,7 +40,7 @@ const mockDataServices: MockDataServices = {
       university: 'HS Kempten'
     })
   }),
-  getLearningPath: jest.fn(() => {
+  getLearningPathElement: jest.fn(() => {
     return Promise.resolve({
       id: 1,
       course_id: 2,
@@ -75,7 +75,7 @@ const mockDataServices: MockDataServices = {
         {
           id: 2,
           learning_element_id: 2,
-          learningPath_id: 2,
+          learning_path_id: 2,
           recommended: false,
           position: 2,
           learning_element: {
@@ -145,6 +145,32 @@ const mockDataServices: MockDataServices = {
               done: false,
               done_at: 'test'
             }
+          }
+        }
+      ]
+    })
+  }),
+  getLearningPathTopic: jest.fn(() => {
+    return Promise.resolve({
+      topics: [
+        {
+          contains_le: true,
+          created_at: 'string',
+          created_by: 'string',
+          id: 1,
+          is_topic: true,
+          last_updated: 'string',
+          lms_id: 1,
+          name: 'string',
+          parent_id: 1,
+          university: 'HS-Kempten',
+          student_topic: {
+            done: true,
+            done_at: 'string',
+            id: 1,
+            student_id: 1,
+            topic_id: 1,
+            visits: ['string']
           }
         }
       ]
