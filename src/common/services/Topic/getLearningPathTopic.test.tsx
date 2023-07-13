@@ -69,9 +69,7 @@ describe('getLearningPathElement has expected behaviour', () => {
     const studentId = 1
     const courseId = '2'
 
-    await expect(getLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow(
-      `${expectedError} ${expectedMessage}`
-    )
+    await expect(getLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
@@ -89,6 +87,6 @@ describe('getLearningPathElement has expected behaviour', () => {
     const studentId = 1
     const courseId = '2'
 
-    await expect(getLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow('Unknown error')
+    await expect(getLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow('')
   })
 })

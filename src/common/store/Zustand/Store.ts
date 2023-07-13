@@ -37,7 +37,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
         onRehydrateStorage: () => {
           log.debug('PersistedStore hydration starts')
         },
-        version: 1 // When this changes, the persisted data will be discarded and the store reinitialized (Useful for migrations)
+        version: 1.1 // When this changes, the persisted data will be discarded and the store reinitialized (Useful for migrations)
       }
     )
   )

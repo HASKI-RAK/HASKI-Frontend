@@ -2,35 +2,41 @@ import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
 import { createMemoryHistory } from 'history'
-import { Router } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import { Topic, LearningElement, LearningPath, AuthContext } from '@services'
+import * as router from 'react-router'
 
 const topics: Topic[] = []
 const learningElementPath: LearningPath[] = []
 
+const navigate = jest.fn()
+
 describe('MenuBar', () => {
+  beforeEach(() => {
+    jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+  })
+
   it('should return to home when clicked on logo or text', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
-    const result = render(
-      <Router location={history.location} navigator={history}>
+    const { getAllByRole, getAllByText } = render(
+      <MemoryRouter>
         <MenuBar />
-      </Router>
+      </MemoryRouter>
     )
-    // click on img:
-    fireEvent.click(result.getAllByRole('img')[0])
-    expect(history.location.pathname).toEqual('/')
 
-    history.push('/home')
+    // Click on the logo:
+    fireEvent.click(getAllByRole('img')[0])
+    expect(navigate).toHaveBeenCalledTimes(1)
+    expect(navigate).toHaveBeenCalledWith('/')
 
-    // click on component a with text HASKI:
-    fireEvent.click(result.getAllByText('HASKI')[0])
-    expect(history.location.pathname).toEqual('/')
+    // Click on the component with text 'HASKI':
+    fireEvent.click(getAllByText('HASKI')[0])
+
+    // Assert that useNavigate was called again
+    expect(navigate).toHaveBeenCalledTimes(2)
+    expect(navigate).toHaveBeenCalledWith('/')
   })
 
   test('popover is rendered when Topics button is clicked', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
     const exampleLearningElement1: LearningElement = {
       activity_type: 'Quiz',
       classification: 'Formative',
@@ -146,9 +152,9 @@ describe('MenuBar', () => {
     }
 
     const result = render(
-      <Router location={history.location} navigator={history}>
+      <MemoryRouter>
         <MenuBar {...props} />
-      </Router>
+      </MemoryRouter>
     )
     // click on Topics button:
     fireEvent.click(result.getAllByText('components.MenuBar.TopicButton')[0])
@@ -156,8 +162,6 @@ describe('MenuBar', () => {
   })
 
   test('click on HelpIcon should open popover', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
@@ -169,9 +173,9 @@ describe('MenuBar', () => {
     }
 
     const result = render(
-      <Router location={history.location} navigator={history}>
+      <MemoryRouter>
         <MenuBar {...props} />
-      </Router>
+      </MemoryRouter>
     )
     // click on HelpIcon:
     fireEvent.click(result.getByTestId('HelpIcon'))
@@ -179,8 +183,6 @@ describe('MenuBar', () => {
   })
 
   test('click on SettingsIcon should open popover', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
@@ -192,9 +194,9 @@ describe('MenuBar', () => {
     }
 
     const result = render(
-      <Router location={history.location} navigator={history}>
+      <MemoryRouter>
         <MenuBar {...props} />
-      </Router>
+      </MemoryRouter>
     )
     // click on HelpIcon:
     fireEvent.click(result.getByTestId('SettingsIcon'))
@@ -202,8 +204,6 @@ describe('MenuBar', () => {
   })
 
   test('click on UserIcon should open popover', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
@@ -215,9 +215,9 @@ describe('MenuBar', () => {
     }
 
     const result = render(
-      <Router location={history.location} navigator={history}>
+      <MemoryRouter>
         <MenuBar {...props} />
-      </Router>
+      </MemoryRouter>
     )
 
     // click on UserIcon:
@@ -231,8 +231,6 @@ describe('MenuBar', () => {
   })
 
   test('clicking logout should close popover', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
@@ -244,9 +242,9 @@ describe('MenuBar', () => {
     }
 
     const { getByTestId, queryByTestId } = render(
-      <Router location={history.location} navigator={history}>
+      <MemoryRouter>
         <MenuBar {...props} />
-      </Router>
+      </MemoryRouter>
     )
 
     const userAvatarButton = getByTestId('useravatar')
@@ -267,8 +265,6 @@ describe('MenuBar', () => {
   })
 
   test('clicking outside of Menu should close popover', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
     const mockUseLearningPath = jest.fn().mockReturnValue({
       loading: false,
       topics: topics,
@@ -280,9 +276,9 @@ describe('MenuBar', () => {
     }
 
     const { getByTestId, queryByTestId } = render(
-      <Router location={history.location} navigator={history}>
+      <MemoryRouter>
         <MenuBar {...props} />
-      </Router>
+      </MemoryRouter>
     )
 
     // get the user avatar button
@@ -301,8 +297,6 @@ describe('MenuBar', () => {
   })
 
   it('should set anchorElTopics to null', async () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
     const exampleLearningElement1: LearningElement = {
       activity_type: 'Quiz',
       classification: 'Formative',
@@ -418,39 +412,30 @@ describe('MenuBar', () => {
     }
 
     const { getAllByText, getByText } = render(
-      <Router location={history.location} navigator={history}>
+      <MemoryRouter>
         <MenuBar {...props} />
-      </Router>
+      </MemoryRouter>
     )
     // click on Topics button:
     fireEvent.click(getAllByText('components.MenuBar.TopicButton')[0])
     expect(getByText('Allgemeine Informatik')).toBeInTheDocument()
 
     fireEvent.click(getAllByText('Allgemeine Informatik')[0])
-    expect(history.location.pathname).toBe('/course/undefined/topic/1')
-    //fireEvent.keyDown(getAllByText('components.MenuBar.TopicButton')[0], {key: "esc",})
-    //fireEvent.click(getAllByText('components.MenuBar.TopicButton')[0])
-
-    //fireEvent.click(document.body); // Simulate clicking outside the Popover
-    //await userEvent.keyboard('{esc}');
-
-    //await waitFor(() => expect(result.getByText('Allgemeine Informatik')).not.toBeInTheDocument());
+    expect(navigate).toHaveBeenCalledWith('course/undefined/topic/1')
   })
 
   it('navigates to logout page', async () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
     const { getAllByText, getByTestId } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter>
           <MenuBar />
-        </Router>
+        </MemoryRouter>
       </AuthContext.Provider>
     )
     // click on Topics button:
 
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getAllByText('components.MenuBar.Profile.Logout')[0])
-    expect(history.location.pathname).toEqual('/login')
+    expect(navigate).toHaveBeenCalledWith('/login')
   })
 })

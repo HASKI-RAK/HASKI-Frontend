@@ -1,4 +1,5 @@
 import { LearningPathElement, LearningPathElementReturn } from '@core'
+import { getData } from '../RequestResponse'
 
 export const getLearningPathElement: LearningPathElementReturn = async (
   userId,
@@ -10,7 +11,7 @@ export const getLearningPathElement: LearningPathElementReturn = async (
   if (!course_id || !topic_id) {
     throw new Error('course_id and topic_id are required')
   }
-  return fetch(
+  const response = await fetch(
     process.env.BACKEND +
       `/user/${userId}/${lmsUserId}/student/${studentId}/course/${course_id}/topic/${topic_id}/learningPath`,
     {
@@ -20,20 +21,6 @@ export const getLearningPathElement: LearningPathElementReturn = async (
         'Content-Type': 'application/json'
       }
     }
-  ).then((response) => {
-    if (response.ok) {
-      return response.json().then((data: unknown) => {
-        return data as LearningPathElement
-      })
-    } else {
-      // If resposne has error variable, then throw error
-      return response.json().then((data) => {
-        if ('error' in data) {
-          throw new Error(data['error'] + ' ' + data['message'])
-        } else {
-          throw new Error('Unknown error')
-        }
-      })
-    }
-  })
+  )
+  return getData<LearningPathElement>(response)
 }

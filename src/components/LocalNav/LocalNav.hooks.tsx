@@ -57,21 +57,21 @@ export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } =>
   const fetchUser = usePersistedStore((state) => state.fetchUser)
   const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
 
-  const effect = async () => {
-    setLoading(true)
-    try {
-      const user = await fetchUser()
-      const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, '2')
-      setTopics(fetchedTopics.topics)
-    } catch (error) {
-      log.error(error)
-      throw error
-    } finally {
-      setLoading(false)
-    }
-  }
-
   useEffect(() => {
+    const effect = async () => {
+      setLoading(true)
+      try {
+        const user = await fetchUser()
+        const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, '2')
+        setTopics(fetchedTopics.topics)
+      } catch (error) {
+        log.error(error)
+        throw error
+      } finally {
+        setLoading(false)
+      }
+    }
+
     effect().catch(() => {
       log.error('An error occurred while fetching course topics in LocalNav.hooks')
     })
@@ -88,27 +88,27 @@ export const useLearningPathElement = (
   const fetchUser = usePersistedStore((state) => state.fetchUser)
   const fetchLearningPathElement = useStore((state) => state.fetchLearningPathElement)
 
-  const effect = async () => {
-    setLoadingElements(true)
-    try {
-      const user = await fetchUser()
-      const dataLearningPath = await getSortedLearningPath(
-        user.settings.user_id,
-        user.lms_user_id,
-        user.id,
-        topic,
-        fetchLearningPathElement
-      )
-      setLearningPaths(dataLearningPath)
-    } catch (error) {
-      log.error(error)
-      throw error
-    } finally {
-      setLoadingElements(false)
-    }
-  }
-
   useEffect(() => {
+    const effect = async () => {
+      setLoadingElements(true)
+      try {
+        const user = await fetchUser()
+        const dataLearningPath = await getSortedLearningPath(
+          user.settings.user_id,
+          user.lms_user_id,
+          user.id,
+          topic,
+          fetchLearningPathElement
+        )
+        setLearningPaths(dataLearningPath)
+      } catch (error) {
+        log.error(error)
+        throw error
+      } finally {
+        setLoadingElements(false)
+      }
+    }
+
     effect().catch(() => {
       log.error('An error occurred while fetching course Topic Elements in LocalNav.hooks')
     })
