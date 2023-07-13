@@ -25,4 +25,3 @@ export type {
   StudentLearningElement
 }
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
-export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'
