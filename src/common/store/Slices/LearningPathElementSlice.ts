@@ -14,14 +14,14 @@ export const createLearningPathElementSlice: StateCreator<StoreState, [], [], Le
   return {
     _cache_learningPathElement_record: {},
     fetchLearningPathElement: async (...arg) => {
-      const [courseId, topicId] = arg
+      const [userId, lmsUserId, studentId, courseId, topicId] = arg
 
       // Check if we have the learning path cached
       const cached = get()._cache_learningPathElement_record[`${courseId}-${topicId}`]
 
       if (!cached) {
         // If not, fetch it and cache it
-        const learningPathElement_response = await getLearningPathElement(...arg)
+        const learningPathElement_response = await getLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)
         set({
           _cache_learningPathElement_record: {
             ...get()._cache_learningPathElement_record,
