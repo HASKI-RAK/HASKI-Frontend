@@ -1,10 +1,12 @@
-import { Button, Card, CardContent, Typography } from '@mui/material'
+import {Button, Card, CardContent, Skeleton, Typography} from '@mui/material'
 import { Stack } from '@mui/system'
 import { AuthContext } from '@services'
 import log from 'loglevel'
-import { useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useLearningPathTopic } from "../../components/LocalNav/LocalNav.hooks"
+import { DefaultBox as Box } from "@common/components"
 
 /**
  * The Course component presents an overview of the course.
@@ -17,12 +19,7 @@ const Course = () => {
   const { t } = useTranslation()
   const authcontext = useContext(AuthContext)
   const navigate = useNavigate()
-  const { courseId } = useParams()
-
-  //ToDo: Fetch topics of student
-  const topics = t('pages.Course.topics', {
-    returnObjects: true
-  }) as [{ id: string; name: string; description: string }]
+  const {loading, topics} = useLearningPathTopic()
 
   useEffect(() => {
     log.log('Course')
@@ -37,14 +34,31 @@ const Course = () => {
     }
   }, [authcontext.isAuth])
 
+  const skeletonItems = []
+  for (let i = 0; i < 3; i++) {
+    skeletonItems.push(
+        <React.Fragment key={`Course-Skeleton-${i}`}>
+          <Skeleton data-testid={`Course-Skeleton-Topic-${i}`} variant="text" width={'100%'} height={150} />
+          <Skeleton data-testid={`Course-Skeleton-Topic-${i}`} variant="text" width={'100%'} height={150} />
+          <Skeleton data-testid={`Course-Skeleton-Topic-${i}`} variant="text" width={'100%'} height={150} />
+        </React.Fragment>
+    )
+  }
+
   return (
     <Stack spacing={2}>
+      {loading ? (
+          <Box>
+            <Stack spacing={1}>{skeletonItems}</Stack>
+          </Box>
+      ) : (
+          <>
       {topics.map((topic) => {
         return (
           <Card key={topic.id}>
             <CardContent>
               <Typography variant="h5">{topic.name}</Typography>
-              <Typography variant="body1">{topic.description}</Typography>
+              <Typography variant="body1">{topic.lms_id}</Typography>
               <Button
                 variant="contained"
                 color="primary"
@@ -57,6 +71,8 @@ const Course = () => {
           </Card>
         )
       })}
+          </>
+          )}
     </Stack>
   )
 }

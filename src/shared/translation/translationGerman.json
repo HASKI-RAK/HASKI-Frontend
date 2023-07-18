@@ -1,7 +1,7 @@
 {
   "Back": "Zurück",
   "components.Home.Button.Course": "Weiter zum Kurs",
-  "components.CoursePage.Button.Topic": "Weiter zum Thema",
+  "components.Course.Button.Topic": "Weiter zum Thema",
   "components.Imprint.AsOf": "Stand",
   "components.Imprint.AuthorisedRepresentative": "Vertretungsberechtigte Person",
   "components.Imprint.AuthorisedRepresentative.Title": "Herr",
