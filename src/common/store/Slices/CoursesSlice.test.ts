@@ -19,7 +19,7 @@ describe('CoursesSlice', () => {
     expect(fetchCourses).not.toThrow()
     expect(mockServices.getCourses).toHaveBeenCalledTimes(1)
     expect(mockServices.getCourses).toHaveBeenCalledWith(1, 2, 3)
-    expect(useStore.getState()._cache_courses).toEqual(courses)
+    expect(useStore.getState()._cache_Courses_record).toEqual(courses)
   })
 
   it('should return cached courses if available', async () => {
@@ -29,7 +29,7 @@ describe('CoursesSlice', () => {
 
     await fetchCourses(1, 2, 3)
 
-    expect(useStore.getState()._cache_courses).toEqual(courses)
+    expect(useStore.getState()._cache_Courses_record).toEqual(courses)
 
     const cached = await fetchCourses(1, 2, 3)
 
