@@ -47,6 +47,7 @@ export const Home = () => {
     }, 5000)
     const loadData = async () => {
       if (authcontext.isAuth) {
+        clearTimeout(preventEndlessLoading)
         try {
           const user = await fetchUser()
           const courseResponse = await fetchCourses(user.settings.user_id, user.lms_user_id, user.id)
