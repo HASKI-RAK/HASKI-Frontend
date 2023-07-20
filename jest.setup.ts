@@ -188,26 +188,26 @@ const mockDataServices: MockDataServices = {
   }),
   getCourses: jest.fn(() => {
     return Promise.resolve({
-        courses: [
-            {
-                id: 1,
-                lms_id: 1,
-                name: 'test',
-                university: 'test',
-                created_at: 'test',
-                created_by: 'test',
-                last_updated: 'test'
-            },
-            {
-            id: 2,
-            lms_id: 2,
-            name: 'test',
-            university: 'test',
-            created_at: 'test',
-            created_by: 'test',
-            last_updated: 'test'
-            }
-    ]
+      courses: [
+        {
+          id: 1,
+          lms_id: 1,
+          name: 'test',
+          university: 'test',
+          created_at: 'test',
+          created_by: 'test',
+          last_updated: 'test'
+        },
+        {
+          id: 2,
+          lms_id: 2,
+          name: 'test',
+          university: 'test',
+          created_at: 'test',
+          created_by: 'test',
+          last_updated: 'test'
+        }
+      ]
     })
   })
 }
