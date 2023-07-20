@@ -197,6 +197,15 @@ const mockDataServices: MockDataServices = {
                 created_at: 'test',
                 created_by: 'test',
                 last_updated: 'test'
+            },
+            {
+            id: 2,
+            lms_id: 2,
+            name: 'test',
+            university: 'test',
+            created_at: 'test',
+            created_by: 'test',
+            last_updated: 'test'
             }
     ]
     })

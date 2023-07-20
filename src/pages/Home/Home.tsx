@@ -60,12 +60,13 @@ export const Home = () => {
               severity: 'error',
               autoHideDuration: 5000
             })
+            log.error(err.message)
           }
         }
-        setLoading(false)
       }
     }
     loadData()
+    setLoading(false)
     return () => {
       clearTimeout(preventEndlessLoading)
     }
