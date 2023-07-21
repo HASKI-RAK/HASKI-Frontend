@@ -44,6 +44,7 @@ export const Home = () => {
           .then((user) => {
             fetchCourses(user.settings.user_id, user.lms_user_id, user.id).then((CourseResponse) => {
               setCourses(CourseResponse.courses)
+              setLoading(false)
             }).catch((error) => {
                 // 🍿 snackbar error
                 addSnackbar({
@@ -66,7 +67,6 @@ export const Home = () => {
       }
     }
     loadData()
-    setLoading(false)
     return () => {
       clearTimeout(preventEndlessLoading)
     }
@@ -80,11 +80,14 @@ export const Home = () => {
       <Stack spacing={2} direction="row" justifyContent="center">
         <div>
           {courses.length === 0 ? (
+              <>
+              {setLoading(false)}
             <Card>
               <CardContent>
                 <Typography variant="h5">No courses yet</Typography>
               </CardContent>
             </Card>
+              </>
           ) : (
             courses.map((course) => {
               return (
