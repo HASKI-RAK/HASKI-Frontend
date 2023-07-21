@@ -13,7 +13,6 @@ import {
   DefaultGrid as Grid,
   DefaultButton as Button,
   DefaultPopover as Popover,
-  DefaultLink as Link,
   DefaultDivider as Divider,
   DefaultSkeleton as Skeleton,
   DefaultListItemIcon as ListItemIcon
@@ -25,9 +24,10 @@ import PersonIcon from '@mui/icons-material/Person'
 import { useTranslation } from 'react-i18next'
 import { Login, Logout } from '@mui/icons-material'
 import { AuthContext, SnackbarContext, Topic } from '@services'
-import { LearningPath } from '@core'
-import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
+import { useLearningPathTopic as _useLearningPathTopic } from '../LocalNav/LocalNav.hooks'
 import { DropdownLanguage } from '@components'
+import { Link } from '@mui/material'
+import { useStore } from '@store'
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
 /**
@@ -37,7 +37,7 @@ import { DropdownLanguage } from '@components'
  *  The "learningPaths" property is an array of objects that represent the available learning paths related to the current page.
  */
 export type MenuBarProps = {
-  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPath[] }
+  useLearningPathTopic?: () => { loading: boolean; topics: Topic[] }
 }
 
 /**
@@ -50,20 +50,18 @@ export type MenuBarProps = {
  *
  * @category Components
  */
-const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
+const MenuBar = ({ useLearningPathTopic = _useLearningPathTopic }: MenuBarProps) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
   const { addSnackbar } = useContext(SnackbarContext)
   const { isAuth, logout } = useContext(AuthContext)
+  const userCourse = useStore((state) => state.course)
   const { t } = useTranslation()
 
   //Application logic hooks
-  const { loading, topics, learningPaths } = useLearningPath()
+  const { loading, topics } = useLearningPathTopic()
   const reversedTopics: Topic[] = [...topics]
   reversedTopics.sort((a, b) => reversedTopics.indexOf(b) - reversedTopics.indexOf(a))
-
-  const reversedLearningElements: LearningPath[] = [...learningPaths]
-  reversedLearningElements.sort((a, b) => reversedLearningElements.indexOf(b) - reversedLearningElements.indexOf(a))
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -148,6 +146,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleOpenTopicsMenu}
+                  data-testid="Menubar-TopicButton"
                   color="inherit"
                   endIcon={
                     anchorElTopics ? <ArrowDropDownIcon sx={{ transform: 'rotate(180deg)' }} /> : <ArrowDropDownIcon />
@@ -157,6 +156,7 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
               </Tooltip>
               <Popover
                 id="menu-appbar"
+                data-testid={'Menubar-TopicPopover'}
                 anchorEl={anchorElTopics}
                 anchorOrigin={{
                   vertical: 'bottom',
@@ -174,37 +174,33 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
                     {loading ? ( // display Skeleton component while loading
                       <Box width={400}>{skeletonItems}</Box>
                     ) : (
-                      //For every Topic the LearningPath is displayed under it.
+                      //For every Topic the LearningPathElement is displayed under it.
                       <>
-                        {reversedTopics.map((topic, index) => (
+                        {reversedTopics.map((topic) => (
                           <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>
                             <Grid item xs={12} key={t(topic.name)}>
-                              <Typography variant="h6">{t(topic.name)}</Typography>
+                              <Link
+                                key={topic.name}
+                                underline="hover"
+                                variant="h6"
+                                component="span"
+                                color="inherit"
+                                sx={{ m: 1, cursor: 'pointer' }}
+                                onClick={() => {
+                                  navigate(`course/${userCourse.lms_id}/topic/${topic.id}`)
+                                  handleCloseTopicsMenu()
+                                }}>
+                                {topic.name}
+                              </Link>
                               <Box
                                 sx={{
                                   display: 'flex',
                                   flexDirection: 'row',
                                   flexWrap: 'wrap',
                                   justifyContent: 'start'
-                                }}>
-                                {reversedLearningElements[index]?.path.map((element) => (
-                                  <Link
-                                    key={element.learning_element.name}
-                                    underline="hover"
-                                    variant="body2"
-                                    component="span"
-                                    color="inherit"
-                                    sx={{ m: 1, cursor: 'pointer' }}
-                                    onClick={() => {
-                                      navigate(`course/2/topic/${topic.id}`)
-                                      handleCloseTopicsMenu()
-                                    }}>
-                                    {element.learning_element.name}
-                                  </Link>
-                                ))}
-                              </Box>
+                                }}></Box>
                             </Grid>
-                            {topics.indexOf(topic) !== topics.length - 1 && <Divider flexItem />}
+                            {topics.indexOf(topic) !== topics.length && <Divider flexItem />}
                           </React.Fragment>
                         ))}
                       </>

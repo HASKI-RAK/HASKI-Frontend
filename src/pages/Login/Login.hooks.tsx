@@ -67,6 +67,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
         navigate('/login', { replace: true })
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return {

@@ -6,7 +6,6 @@ import { TableListK } from './Questionnaire/TableListK'
 import { GraphListK } from './Questionnaire/GraphListK'
 import { ResultDescriptionListK } from './Questionnaire/ResultDescriptionListK'
 import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResultsModal'
-import { Text } from './Text/Text'
 import LoginForm from './LoginForm/LoginForm'
 import MenuBar from './MenuBar/MenuBar'
 
@@ -31,7 +30,6 @@ export {
   MenuBar,
   Footer,
   DropdownLanguage,
-  Text,
   LoginForm,
   SnackbarMessage,
   SnackbarContainer,

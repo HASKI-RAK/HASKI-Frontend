@@ -7,26 +7,27 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 
 /**
- * The CoursePage component presents an overview of the course.
+ * The Course component presents an overview of the course.
  *
- * @returns {JSX.Element} - The CoursePage component.
+ * @returns {JSX.Element} - The Course component.
  *
  * @category Pages
  */
-const CoursePage = () => {
+const Course = () => {
   const { t } = useTranslation()
   const authcontext = useContext(AuthContext)
   const navigate = useNavigate()
   const { courseId } = useParams()
 
-  const topics = t('pages.CoursePage.topics', {
+  //ToDo: Fetch topics of student
+  const topics = t('pages.Course.topics', {
     returnObjects: true
   }) as [{ id: string; name: string; description: string }]
 
   useEffect(() => {
-    log.log('CoursePage')
+    log.log('Course')
     const preventEndlessLoading = setTimeout(() => {
-      log.log('CoursePage timeout')
+      log.log('Course timeout')
       navigate('/login')
     }, 5000)
     if (authcontext.isAuth) clearTimeout(preventEndlessLoading)
@@ -50,7 +51,7 @@ const CoursePage = () => {
                 onClick={() => {
                   navigate('topic/' + topic.id)
                 }}>
-                {t('components.CoursePage.Button.Topic')}
+                {t('components.Course.Button.Topic')}
               </Button>
             </CardContent>
           </Card>
@@ -60,4 +61,4 @@ const CoursePage = () => {
   )
 }
 
-export default CoursePage
+export default Course

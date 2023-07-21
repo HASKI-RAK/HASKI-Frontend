@@ -1,41 +1,69 @@
 import '@testing-library/jest-dom'
 import { useStore } from '../Zustand/Store'
 import { mockServices } from 'jest.setup'
+
 describe('CoursesSlice', () => {
-    afterEach(() => {
-        jest.clearAllMocks()
-    })
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
 
-    it('should fetch courses from server and cache them', async () => {
-        const { fetchCourses } = useStore.getState()
-        const courses = [{ id: 1, name: 'Math', description: 'Learn math' }]
-        mockServices.getCourses = jest.fn().mockResolvedValueOnce(courses)
+  it('should fetch courses from server and cache them', async () => {
+    const { fetchCourses } = useStore.getState()
+    const courses = {
+      courses: [
+        {
+          created_at: 'test',
+          created_by: 'test',
+          id: 1,
+          last_updated: 'test',
+          lms_id: 1,
+          name: 'test',
+          university: 'test'
+        },
+        {
+          created_at: 'test',
+          created_by: 'test',
+          id: 2,
+          last_updated: 'test',
+          lms_id: 2,
+          name: 'test',
+          university: 'test'
+        }
+      ]
+    }
 
-        const result = await fetchCourses(1, 2, 3)
+    const userId = 1
+    const lmsUserId = 2
+    const studentId = 3
 
-        expect(result).toEqual(courses)
-        expect(fetchCourses).toBeDefined()
-        expect(fetchCourses).toBeInstanceOf(Function)
-        expect(fetchCourses).not.toThrow()
-        expect(mockServices.getCourses).toHaveBeenCalledTimes(1)
-        expect(mockServices.getCourses).toHaveBeenCalledWith(1, 2, 3)
-        expect(useStore.getState()._cache_courses).toEqual(courses)
-    })
+    const result = await fetchCourses(userId, lmsUserId, studentId)
 
-    it('should return cached courses if available', async () => {
-        const { fetchCourses } = useStore.getState()
-        const courses = [{ id: 1, name: 'Math', description: 'Learn math' }]
-        mockServices.getCourses = jest.fn().mockResolvedValueOnce(courses)
+    expect(result).toEqual(courses)
+    expect(fetchCourses).toBeDefined()
+    expect(fetchCourses).toBeInstanceOf(Function)
+    expect(mockServices.getCourses).toHaveBeenCalledTimes(1)
+    expect(mockServices.getCourses).toHaveBeenCalledWith(1, 2, 3)
+    expect(useStore.getState()._cache_Courses_record[`${userId}-${lmsUserId}-${studentId}`]).toEqual(courses)
+    expect(fetchCourses).not.toThrow() // counts as function call (fetchCourses), here it would be Called 2 times instead of 1
+  })
 
-        await fetchCourses(1, 2, 3)
+  it('should return cached courses if available', async () => {
+    const { fetchCourses } = useStore.getState()
+    const courses = [{ id: 1, name: 'Math', description: 'Learn math' }]
+    mockServices.getCourses = jest.fn().mockResolvedValueOnce(courses)
 
-        expect(useStore.getState()._cache_courses).toEqual(courses)
+    const userId = 1
+    const lmsUserId = 2
+    const studentId = 3
 
-        const cached = await fetchCourses(1, 2, 3)
+    await fetchCourses(userId, lmsUserId, studentId)
 
-        expect(mockServices.getCourses).toHaveBeenCalledTimes(1)
+    expect(useStore.getState()._cache_Courses_record[`${userId}-${lmsUserId}-${studentId}`]).toEqual(courses)
 
-        expect(cached).toEqual(courses)
-    })
+    const cached = await fetchCourses(1, 2, 3)
 
+    expect(mockServices.getCourses).toHaveBeenCalledTimes(1)
+
+    expect(cached).toEqual(courses)
+  })
 })

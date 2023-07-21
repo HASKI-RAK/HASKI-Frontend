@@ -641,53 +641,6 @@
     "TestEnglish3",
     "TestEnglish4"
   ],
-  "pages.CoursePage.topics": [
-    {
-      "id": "1",
-      "name": "General",
-      "description": "This is the first topic"
-    },
-    {
-      "id": "16",
-      "name": "Individual Sorting",
-      "description": "This is the second topic"
-    },
-    {
-      "id": "7",
-      "name": "Designpattern general",
-      "description": "This is the third topic"
-    },
-    {
-      "id": "2",
-      "name": "Known Designpattern",
-      "description": "This is the fourth topic"
-    },
-    {
-      "id": "3",
-      "name": "Strategy",
-      "description": "This is the fifth topic"
-    },
-    {
-      "id": "4",
-      "name": "State",
-      "description": "This is the sixth topic"
-    },
-    {
-      "id": "5",
-      "name": "Adapter",
-      "description": "This is the seventh topic"
-    },
-    {
-      "id": "6",
-      "name": "Facade",
-      "description": "This is the eighth topic"
-    },
-    {
-      "id": "14",
-      "name": "Finish",
-      "description": "This is the nineth topic"
-    }
-  ],
   "pages.glossary.title": "Glossary",
   "pages.login.redirect": "You will be redirected after a few seconds",
   "pages.PrivacyPolicy": "Privacy Policy",

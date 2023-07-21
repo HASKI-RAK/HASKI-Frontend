@@ -20,8 +20,7 @@ export const createUserSlice: StateCreator<PersistedStoreState, [], [], UserSlic
         const user = await getUser()
         set({ _user: user })
         return user
-      } else
-        return cached
+      } else return cached
     }
   }
 }

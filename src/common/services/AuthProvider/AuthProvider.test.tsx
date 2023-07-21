@@ -102,7 +102,7 @@ describe('Test AuthProvider', () => {
 
   it('should throw an error if logout fails', async () => {
     // Here we override the mockServices.getLogout function to throw an error
-    mockServices.getLogout.mockImplementationOnce(() => {
+    mockServices.getLogout = jest.fn().mockImplementationOnce(() => {
       return Promise.reject('logout failed')
     })
     const { result } = renderHook(() => useAuthProvider())

@@ -1,6 +1,5 @@
 import { DefaultBox as Box, DefaultModal as Modal } from '@common/components'
-import { Button } from '@mui/material'
-import { memo, useEffect, useState } from 'react'
+import { memo } from 'react'
 
 const style_box = {
   position: 'absolute',

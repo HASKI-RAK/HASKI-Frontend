@@ -5,17 +5,20 @@ import {
   DefaultAccordionSummary as AccordionSummary,
   DefaultAccordionDetails as AccordionDetails,
   DefaultAccordion as Accordion,
-  DefaultLink as Link,
   DefaultSkeleton as Skeleton,
-  DefaultStack as Stack
+  DefaultStack as Stack,
+  DefaultLink as Link
 } from '@common/components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Topic } from '@services'
-import { LearningPath } from '@core'
-import React from 'react'
-import { useLearningPath as _useLearningPath } from './LocalNav.hooks'
+import { LearningPathElement } from '@core'
+import React, { Suspense, useState } from 'react'
+import {
+  useLearningPathTopic as _useLearningPathTopic,
+  useLearningPathElement as _useLearningPathElement
+} from './LocalNav.hooks'
 
 /**
  *  Local navigation component props.
@@ -23,31 +26,76 @@ import { useLearningPath as _useLearningPath } from './LocalNav.hooks'
  *  The "topics" property is an array of objects that represent the topics related to the current page.
  *  The "learningPaths" property is an array of objects that represent the available learning paths related to the current page.
  */
+
 export type LocalNavProps = {
-  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPath[] }
+  useLearningPathTopic?: () => { loading: boolean; topics: Topic[] }
+  useLearningPathElement?: (topic: Topic) => {
+    loadingElements: boolean
+    learningPaths: LearningPathElement
+  }
 }
 
-/**
- * Local navigation component for the main frame.
- * @remarks
- * @param {LocalNavProps} props  - Local navigation component props via dependency injection.
- *
- * @category Components
- */
-const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
+const LocalNav = ({
+  useLearningPathTopic = _useLearningPathTopic,
+  useLearningPathElement = _useLearningPathElement
+}: LocalNavProps) => {
   const { t } = useTranslation()
-  const navigate = useNavigate()
-  const { loading, topics, learningPaths } = useLearningPath()
+  const { loading, topics } = useLearningPathTopic()
 
-  // Skeleton component items, currently 3 items are looking the best in the Loading-state
+  const [openAccordion, setOpenAccordion] = useState<number | null>(null)
+
+  const handleAccordionClick = (index: number) => {
+    setOpenAccordion(openAccordion === index ? null : index)
+  }
+
   const skeletonItems = []
   for (let i = 0; i < 3; i++) {
     skeletonItems.push(
       <React.Fragment key={`LocalNav-Skeleton-${i}`}>
-        <Skeleton variant="text" width={'100%'} height={55} />
+        <Skeleton data-testid={`LocalNav-Skeleton-Topic-${i}`} variant="text" width={'100%'} height={55} />
         <Skeleton variant="text" width={'70%'} height={20} />
         <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />
       </React.Fragment>
+    )
+  }
+
+  const LazyLearningPathElement = ({ topic }: { topic: Topic }) => {
+    const { loadingElements, learningPaths } = useLearningPathElement(topic)
+    const navigate = useNavigate()
+
+    if (loadingElements) {
+      return (
+        <>
+          <Skeleton data-testid={`LocalNav-Skeleton-Element`} variant="text" width={'100%'} height={55} />
+          <Skeleton variant="text" width={'70%'} height={20} />
+          <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />
+        </>
+      )
+    }
+
+    return (
+      <>
+        {learningPaths.path.map((learningElement) => (
+          <Typography variant="body1" key={learningElement.learning_element.name}>
+            <Link
+              data-testid={learningElement.learning_element.name}
+              underline="hover"
+              variant="body2"
+              color="inherit"
+              sx={{
+                cursor: 'pointer',
+                padding: '8px',
+                borderRadius: 10,
+                '&:hover': { backgroundColor: (theme) => theme.palette.primary.main }
+              }}
+              onClick={() => {
+                navigate(`/topics/${topic.name}/${learningElement.learning_element.name}`)
+              }}>
+              {learningElement.position} {learningElement.learning_element.name}
+            </Link>
+          </Typography>
+        ))}
+      </>
     )
   }
 
@@ -55,13 +103,11 @@ const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
     <Box flexGrow={1}>
       <Typography variant="h5">{t('components.LocalNav.Topics')}</Typography>
       <Divider />
-      {loading ? ( // display Skeleton component while loading is true
+      {loading ? (
         <Box>
           <Stack spacing={1}>{skeletonItems}</Stack>
         </Box>
       ) : (
-        // display actual content once loading is false
-        //For every Topic, get LearningPath and display it inside an Accordion
         <>
           {topics.map((topic, index) => (
             <Accordion
@@ -75,9 +121,12 @@ const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
                   borderBottomLeftRadius: 0,
                   borderBottomRightRadius: 0
                 }
-              }}>
+              }}
+              expanded={openAccordion === index}
+              onChange={() => handleAccordionClick(index)}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
+                data-testid={`topic-AccordionSummary-${topic.id}`}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
                 sx={{
@@ -89,25 +138,11 @@ const LocalNav = ({ useLearningPath = _useLearningPath }: LocalNavProps) => {
                 <Typography variant="h6">{topic.name}</Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ flexDirection: 'column' }}>
-                {learningPaths[index]?.path.map((learningElement) => (
-                  <Typography variant="body1" key={learningElement.learning_element.name}>
-                    <Link
-                      underline="hover"
-                      variant="body2"
-                      color="inherit"
-                      sx={{
-                        cursor: 'pointer',
-                        padding: '8px',
-                        borderRadius: 10,
-                        '&:hover': { backgroundColor: (theme) => theme.palette.primary.main }
-                      }}
-                      onClick={() => {
-                        navigate(`course/2/topic/${topic.id}`)
-                      }}>
-                      {learningElement.position} {learningElement.learning_element.name}
-                    </Link>
-                  </Typography>
-                ))}
+                {openAccordion === index && (
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <LazyLearningPathElement topic={topic} />
+                  </Suspense>
+                )}
               </AccordionDetails>
             </Accordion>
           ))}

@@ -2,7 +2,7 @@ import { LearningPathLearningElementNode } from '@components'
 import { useState, useCallback, useMemo } from 'react'
 import { Node, Edge } from 'reactflow'
 import { Theme } from '@mui/material' // TODO: DI
-import { LearningPath } from '@core'
+import { LearningPathElement } from '@core'
 
 /**
  * @interface useTopicHookParams
@@ -36,7 +36,7 @@ export type TopicHookReturn = {
   readonly handleSetUrl: (url: string) => void
   readonly handleSetTitle: (title: string) => void
   readonly mapNodes: (
-    learningPathData: LearningPath,
+    learningPathData: LearningPathElement,
     theme: Theme
   ) => {
     nodes: Node[]
@@ -84,7 +84,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
 
   const mapLearningPathToNodes = useCallback(
     (
-      learningPath: LearningPath,
+      learningPath: LearningPathElement,
       theme: Theme,
       handleSetUrl: (url: string) => void,
       handleSetTitle: (title: string) => void,
@@ -227,7 +227,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   )
 
   const mapNodes = useCallback(
-    (learningPathData: LearningPath, theme: Theme) => {
+    (learningPathData: LearningPathElement, theme: Theme) => {
       const nodes = mapLearningPathToNodes(
         learningPathData,
         theme,
