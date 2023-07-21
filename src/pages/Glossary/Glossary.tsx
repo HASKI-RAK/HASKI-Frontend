@@ -1,7 +1,7 @@
 import { GlossaryList, Filter, Searchbar, GlossaryIndex, GlossaryEntryProps } from '@components'
 import { useGlossary as _useGlossary, GlossaryHookReturn } from './Glossary.hooks'
 import { useTranslation } from 'react-i18next'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, Dispatch, SetStateAction } from 'react'
 import {
   DefaultTypography as Typography,
   DefaultBox as Box,
@@ -9,10 +9,37 @@ import {
   DefaultButton as Button
 } from '@common/components'
 
+/**
+ * @interface GlossaryProps
+ * @property {function} useGlossary - The hook that is used for the Glossary page logic.
+ */
 type GlossaryProps = {
   useGlossary?: () => GlossaryHookReturn
 }
 
+// Returns a function that maps an undefined, string or string array input to a string array and sets it as currently selected tags.
+export const getSelectedTagsWrapper = (setSelectedTags: Dispatch<SetStateAction<string[]>>) => {
+  const setSelectedTagsWrapper = (input?: string | string[]) => {
+    if (input === undefined) {
+      setSelectedTags([])
+    } else if (typeof input === 'string') {
+      setSelectedTags(input.split(','))
+    } else {
+      setSelectedTags(input)
+    }
+  }
+
+  return setSelectedTagsWrapper
+}
+
+/**
+ * Glossary presents a page with a list of important terms of the haski project.
+ * It uses the GlossaryList component to present the content and several other components, like a Filter, Searchbar and GlossaryIndex to filter or search for specific entries.
+ * It is also possible to collapse and expand individual entries or all at once to gain further information to every term.
+ * @param props - Props containing the logic to collapse and expand the every glossary entry.
+ * @returns {JSX.Element} - The Glossary page.
+ * @category Pages
+ */
 const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
   // Translation
   const { t } = useTranslation()
@@ -63,17 +90,6 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
   const [selectedIndexElement, setSelectedIndexElement] = useState<string>('')
   const [expandedList, setExpandedList] = useState<string[]>([])
 
-  // TODO: Refactor
-  const setSelectedTagsWrapper = (input?: string | string[]) => {
-    if (input === undefined) {
-      setSelectedTags([])
-    } else if (typeof input === 'string') {
-      setSelectedTags(input.split(','))
-    } else {
-      setSelectedTags(input)
-    }
-  }
-
   return (
     <Grid container columnSpacing={1} rowSpacing={1}>
       <Grid item xs={12} sm={12} sx={{ mt: '1rem', mb: '1rem' }}>
@@ -87,7 +103,7 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
           label={t('pages.glossary.filter')}
           options={tags}
           selectedOptions={selectedTags}
-          setSelectedOptions={setSelectedTagsWrapper}
+          setSelectedOptions={getSelectedTagsWrapper(setSelectedTags)}
         />
       </Grid>
       <Grid item xs={12} sm={12}>

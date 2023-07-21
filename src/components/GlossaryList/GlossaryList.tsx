@@ -62,7 +62,7 @@ const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: Glossary
     <>
       {Array.from(glossaryEntryState).map((glossaryEntry, index) => (
         <GlossaryEntry
-          key={glossaryEntry.term && glossaryEntry.term + index}
+          key={glossaryEntry.term ?? index}
           expandedList={props.expandedList}
           setExpandedList={props.setExpandedList}
           {...glossaryEntry}

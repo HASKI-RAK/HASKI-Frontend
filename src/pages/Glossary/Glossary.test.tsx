@@ -1,11 +1,8 @@
-import { Glossary } from '@pages'
-import renderer from 'react-test-renderer'
-import '@testing-library/jest-dom'
-import { AuthContext } from '@services'
-import { MemoryRouter } from 'react-router-dom'
-import { render, screen, renderHook, fireEvent } from '@testing-library/react'
-import { useGlossary } from './Glossary.hooks'
+import { render, renderHook, fireEvent } from '@testing-library/react'
+import Glossary, { getSelectedTagsWrapper } from './Glossary'
 import { GlossaryEntryProps } from '@components'
+import { useGlossary } from './Glossary.hooks'
+import '@testing-library/jest-dom'
 
 describe('Glossary page tests', () => {
   const mockGlossaryEntryProps: GlossaryEntryProps[] = [
@@ -53,5 +50,19 @@ describe('Glossary page tests', () => {
 
     result.current.expandAll(mockSetExpandedList, mockGlossaryEntryProps)
     expect(mockSetExpandedList).toBeCalled
+  })
+
+  test('selectedTagsWrapper functionality', () => {
+    const mockSetSelectedTags = jest.fn()
+    const selectedTagsWrapper = getSelectedTagsWrapper(mockSetSelectedTags)
+
+    selectedTagsWrapper()
+    expect(mockSetSelectedTags).toBeCalledWith([])
+
+    selectedTagsWrapper('string')
+    expect(mockSetSelectedTags).toBeCalledWith(['string'])
+
+    selectedTagsWrapper(['string'])
+    expect(mockSetSelectedTags).toBeCalledWith(['string'])
   })
 })
