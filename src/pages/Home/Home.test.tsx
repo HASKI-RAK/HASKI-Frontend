@@ -17,7 +17,7 @@ describe('Test the Home page', () => {
   })
 
   test('navigate back to /login page', () => {
-    const result = render(
+    render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
           <Home />
@@ -66,8 +66,6 @@ describe('Test the Home page', () => {
       return
     })
 
-    const addSnackbarMock = jest.fn()
-
     const { container } = render(
       <MemoryRouter>
         <SnackbarContext.Provider
@@ -76,7 +74,7 @@ describe('Test the Home page', () => {
             snackbarsSuccessInfo: [],
             setSnackbarsErrorWarning: jest.fn(),
             setSnackbarsSuccessInfo: jest.fn(),
-            addSnackbar: addSnackbarMock,
+            addSnackbar: jest.fn(),
             updateSnackbar: () => jest.fn(),
             removeSnackbar: () => jest.fn()
           }}>
