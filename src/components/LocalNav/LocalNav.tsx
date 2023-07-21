@@ -11,7 +11,7 @@ import {
 } from '@common/components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import { Topic } from '@services'
 import { LearningPathElement } from '@core'
 import React, { Suspense, useState } from 'react'
@@ -28,7 +28,7 @@ import {
  */
 
 export type LocalNavProps = {
-  useLearningPathTopic?: () => { loading: boolean; topics: Topic[] }
+  useLearningPathTopic?: (courseId: string) => { loading: boolean; topics: Topic[] }
   useLearningPathElement?: (topic: Topic) => {
     loadingElements: boolean
     learningPaths: LearningPathElement
@@ -40,7 +40,8 @@ const LocalNav = ({
   useLearningPathElement = _useLearningPathElement
 }: LocalNavProps) => {
   const { t } = useTranslation()
-  const { loading, topics } = useLearningPathTopic()
+  const { courseId } = useParams() as { courseId: string }
+  const { loading, topics } = useLearningPathTopic(courseId)
 
   const [openAccordion, setOpenAccordion] = useState<number | null>(null)
 

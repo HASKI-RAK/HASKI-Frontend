@@ -99,7 +99,6 @@ export const Home = () => {
                       <Button
                         variant="contained"
                         color="primary"
-                        disabled={course.id === 99999}
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>

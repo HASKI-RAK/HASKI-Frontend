@@ -396,7 +396,7 @@ describe('getSortedLearningPath works as expected', () => {
       ]
     })
 
-    const { result, waitForNextUpdate } = renderHook(() => useLearningPathTopic())
+    const { result, waitForNextUpdate } = renderHook(() => useLearningPathTopic("2"))
 
     expect(result.current.loading).toBe(true)
     expect(result.current.topics).toEqual([])
@@ -562,7 +562,7 @@ describe('useLearningPathTopic', () => {
 
     act(() => {
       mockServices.getLearningPathTopic.mockImplementationOnce(mockgetLearningPathTopic)
-      const { result } = renderHook(() => useLearningPathTopic())
+      const { result } = renderHook(() => useLearningPathTopic("2"))
 
       expect(result.current).toBeUndefined()
     })

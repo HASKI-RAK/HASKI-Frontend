@@ -51,7 +51,7 @@ export const getSortedLearningPath = async (
   return learningPath
 }
 
-export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } => {
+export const useLearningPathTopic = (courseId: string): { loading: boolean; topics: Topic[] } => {
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
   const fetchUser = usePersistedStore((state) => state.fetchUser)
@@ -62,7 +62,7 @@ export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } =>
       setLoading(true)
       try {
         const user = await fetchUser()
-        const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, '2')
+        const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
         setTopics(fetchedTopics.topics)
       } catch (error) {
         log.error(error)

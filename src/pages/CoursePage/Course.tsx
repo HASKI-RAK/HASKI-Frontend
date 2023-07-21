@@ -4,7 +4,7 @@ import { AuthContext } from '@services'
 import log from 'loglevel'
 import React, { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useLearningPathTopic } from "../../components/LocalNav/LocalNav.hooks"
 import { DefaultBox as Box } from "@common/components"
 
@@ -19,7 +19,9 @@ const Course = () => {
   const { t } = useTranslation()
   const authcontext = useContext(AuthContext)
   const navigate = useNavigate()
-  const {loading, topics} = useLearningPathTopic()
+  const { courseId } = useParams() as { courseId: string }
+
+  const {loading, topics} = useLearningPathTopic(courseId)
 
   useEffect(() => {
     log.log('Course')

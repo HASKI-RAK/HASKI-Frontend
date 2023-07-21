@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import {
   DefaultAppBar as AppBar,
   DefaultToolbar as Toolbar,
@@ -37,7 +37,7 @@ import { useStore } from '@store'
  *  The "learningPaths" property is an array of objects that represent the available learning paths related to the current page.
  */
 export type MenuBarProps = {
-  useLearningPathTopic?: () => { loading: boolean; topics: Topic[] }
+  useLearningPathTopic?: (courseId: string) => { loading: boolean; topics: Topic[] }
 }
 
 /**
@@ -56,10 +56,11 @@ const MenuBar = ({ useLearningPathTopic = _useLearningPathTopic }: MenuBarProps)
   const { addSnackbar } = useContext(SnackbarContext)
   const { isAuth, logout } = useContext(AuthContext)
   const userCourse = useStore((state) => state.course)
+  const { courseId } = useParams() as { courseId: string }
   const { t } = useTranslation()
 
   //Application logic hooks
-  const { loading, topics } = useLearningPathTopic()
+  const { loading, topics } = useLearningPathTopic(courseId)
   const reversedTopics: Topic[] = [...topics]
   reversedTopics.sort((a, b) => reversedTopics.indexOf(b) - reversedTopics.indexOf(a))
 
