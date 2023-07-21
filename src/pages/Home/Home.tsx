@@ -44,6 +44,14 @@ export const Home = () => {
           .then((user) => {
             fetchCourses(user.settings.user_id, user.lms_user_id, user.id).then((CourseResponse) => {
               setCourses(CourseResponse.courses)
+            }).catch((error) => {
+                // 🍿 snackbar error
+                addSnackbar({
+                    message: error.message,
+                    severity: 'error',
+                    autoHideDuration: 5000
+                })
+                log.error(error.message)
             })
           })
           .catch((error) => {

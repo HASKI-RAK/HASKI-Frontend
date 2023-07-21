@@ -1,5 +1,5 @@
 import { Home } from '@pages'
-import { AuthContext, SnackbarContext } from '@services'
+import { AuthContext } from '@services'
 import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
@@ -57,8 +57,9 @@ describe('Test the Home page', () => {
     })
   })
 
-  test('fetching User or Course throws error', async () => {
-    mockServices.getCourses.mockImplementation(() => {
+  test('fetching User throws error', async () => {
+
+    mockServices.getUser.mockImplementationOnce(() => {
       throw new Error('Error')
     })
 
@@ -68,21 +69,33 @@ describe('Test the Home page', () => {
 
     const { container } = render(
       <MemoryRouter>
-        <SnackbarContext.Provider
-          value={{
-            snackbarsErrorWarning: [],
-            snackbarsSuccessInfo: [],
-            setSnackbarsErrorWarning: jest.fn(),
-            setSnackbarsSuccessInfo: jest.fn(),
-            addSnackbar: jest.fn(),
-            updateSnackbar: () => jest.fn(),
-            removeSnackbar: () => jest.fn()
-          }}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <Home />
           </AuthContext.Provider>
-        </SnackbarContext.Provider>
       </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(container.querySelector('.MuiSkeleton-root')).toBeNull()
+    })
+  })
+
+  test('fetching Course throws error', async () => {
+
+    mockServices.getCourses.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { container } = render(
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
     )
 
     await waitFor(() => {
