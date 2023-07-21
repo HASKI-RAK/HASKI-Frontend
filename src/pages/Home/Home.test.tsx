@@ -1,19 +1,105 @@
 import { Home } from '@pages'
+import { AuthContext } from '@services'
 import '@testing-library/jest-dom'
-import { render } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
+import * as router from 'react-router'
+import React from 'react'
+import { mockServices } from '../../../jest.setup'
+
+const navigate = jest.fn()
+
+jest.useFakeTimers()
 
 describe('Test the Home page', () => {
+  beforeEach(() => {
+    jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+  })
 
-  test('renders skeleton since no login is present', () => {
-    const result = render(
+  test('navigate back to /login page', () => {
+    render(
       <MemoryRouter>
-        <Home />
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
       </MemoryRouter>
     )
 
-    result.debug()
-    // Expect skeleton to be rendered
-    expect(result.container.querySelectorAll('span').length).toEqual(1)
+    jest.runAllTimers()
+    expect(navigate).toHaveBeenCalledWith('/login')
+  })
+
+  test('render page', () => {
+    const result = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    expect(result).toBeTruthy()
+  })
+
+  test('click on course navigates to course page', async () => {
+    const { getAllByText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      const course = getAllByText('components.Home.Button.Course')
+      fireEvent.click(course[1])
+      expect(navigate).toHaveBeenCalledWith('/course/2')
+    })
+  })
+
+  test('fetching User throws error', async () => {
+
+    mockServices.getUser.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { container } = render(
+      <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(container.querySelector('.MuiSkeleton-root')).toBeNull()
+    })
+  })
+
+  test('fetching Course throws error', async () => {
+
+    mockServices.getCourses.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { container } = render(
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(container.querySelector('.MuiSkeleton-root')).toBeNull()
+    })
   })
 })

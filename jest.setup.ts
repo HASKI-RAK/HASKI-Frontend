@@ -185,6 +185,30 @@ const mockDataServices: MockDataServices = {
     return Promise.resolve({
       lti_launch_view: 'test'
     })
+  }),
+  getCourses: jest.fn(() => {
+    return Promise.resolve({
+      courses: [
+        {
+          id: 1,
+          lms_id: 1,
+          name: 'test',
+          university: 'test',
+          created_at: 'test',
+          created_by: 'test',
+          last_updated: 'test'
+        },
+        {
+          id: 2,
+          lms_id: 2,
+          name: 'test',
+          university: 'test',
+          created_at: 'test',
+          created_by: 'test',
+          last_updated: 'test'
+        }
+      ]
+    })
   })
 }
 /**
