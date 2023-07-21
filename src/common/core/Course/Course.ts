@@ -1,3 +1,9 @@
+type CourseReturn = (userId?: number, lmsUserId?: number, studentId?: number) => Promise<CourseResponse>
+
+type CourseResponse = {
+  courses: Course[]
+}
+
 type Course = {
   id: number
   lms_id: number
@@ -9,3 +15,4 @@ type Course = {
 }
 
 export default Course
+export type { CourseReturn, CourseResponse }
