@@ -24,9 +24,6 @@ export {
   Contact,
   ProjectDescription,
   ProjectInformation,
-  Imprint
-  ProjectDescription,
-  ProjectInformation,
   Imprint,
   Topic,
   Course,

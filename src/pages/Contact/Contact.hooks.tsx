@@ -1,6 +1,7 @@
-import { postContactForm, FormDataType, SnackbarContext } from '@services'
+import { postContactForm, FormDataType, SnackbarContext, getUser } from '@services'
 import { useCallback, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import { usePersistedStore } from '@store'
 
 export type ContactHookProps = {
   setIsLoading: (isLoading: boolean) => void
@@ -25,11 +26,12 @@ export type ContactHookReturn = {
 export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookReturn => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
   const onSubmitHandler = useCallback(
     (postBody: FormDataType) => {
       setIsLoading(true)
-      postContactForm(postBody)
-        .then((response) => {
+      fetchUser().then((user) => {
+        postContactForm(postBody, user).then((response) => {
           if (response.status === 201) {
             setIsLoading(false)
             addSnackbar({
@@ -44,16 +46,17 @@ export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookRetur
             })
           }
         })
-        .catch((error) => {
-          setIsLoading(false)
-          addSnackbar({
-            message: t('pages.Contact.error')+error,
-            severity: 'error'
-          })
-        })
+      })
     },
     [t, addSnackbar, setIsLoading]
   )
+  // .catch((error) => {
+  //   setIsLoading(false)
+  //   addSnackbar({
+  //     message: t('pages.Contact.error') + error,
+  //     severity: 'error'
+  //   })
+  // })
 
   return {
     onSubmitHandler

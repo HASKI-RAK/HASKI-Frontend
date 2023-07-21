@@ -2,13 +2,13 @@
  * Reusable service calls go here.
  * Dont forget to mock them in jest.setup.ts
  */
-export { useUserStore } from './UserState'
-export type { UserState } from './UserState'
 export { AuthContext } from './AuthContext'
 export type { AuthContextType } from './AuthContext'
 export { AuthProvider } from './AuthProvider'
 export { getLearningPathElement } from './LearningPath'
 export type { LearningPath, LearningElement, PathItem, LearningPathRequestResponse } from './LearningPath'
+export { postContactForm } from './contact'
+export type { FormDataType } from './contact'
 export { getLearningPathTopic } from './Topic'
 export type { Topic, TopicsResponse, TopicRequestResponse } from './Topic'
 export * from './auth'
