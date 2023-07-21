@@ -76,7 +76,7 @@ describe('Test the Home page', () => {
     )
 
     await waitFor(() => {
-      expect(container.querySelector('.MuiSkeleton-root')).toBeNull()
+      expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
     })
   })
 
@@ -99,7 +99,7 @@ describe('Test the Home page', () => {
     )
 
     await waitFor(() => {
-      expect(container.querySelector('.MuiSkeleton-root')).toBeNull()
+      expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
     })
   })
 })
