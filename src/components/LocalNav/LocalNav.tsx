@@ -29,7 +29,7 @@ import {
 
 export type LocalNavProps = {
   useLearningPathTopic?: (courseId: string) => { loading: boolean; topics: Topic[] }
-  useLearningPathElement?: (topic: Topic) => {
+  useLearningPathElement?: (topic: Topic, courseId: string) => {
     loadingElements: boolean
     learningPaths: LearningPathElement
   }
@@ -61,7 +61,7 @@ const LocalNav = ({
   }
 
   const LazyLearningPathElement = ({ topic }: { topic: Topic }) => {
-    const { loadingElements, learningPaths } = useLearningPathElement(topic)
+    const { loadingElements, learningPaths } = useLearningPathElement(topic, courseId)
     const navigate = useNavigate()
 
     if (loadingElements) {

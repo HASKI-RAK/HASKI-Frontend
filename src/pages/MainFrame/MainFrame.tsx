@@ -22,11 +22,15 @@ const MainFrame = () => {
     const { courseId } = useParams()
 
     // !! converts courseId to a boolean
+    const renderMenuBar = !!courseId
     const renderLocalNav = !!courseId
 
     return (
         <Stack direction="column" sx={{ minHeight: 'inherit' }}>
-            <MenuBar />
+            {renderMenuBar ? (
+                <MenuBar courseSelected={true}/>
+            ) : <MenuBar courseSelected={false}/>
+            }
             <BreadcrumbsContainer />
             <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
                 <Grid container item flexGrow={1} sx={{ alignItems: 'stretch' }}>

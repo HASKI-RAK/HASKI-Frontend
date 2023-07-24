@@ -349,7 +349,7 @@ describe('getSortedLearningPath works as expected', () => {
     const userid = 1
     const lmsUserid = 1
     const studentid = 1
-    const result = await getSortedLearningPath(userid, lmsUserid, studentid, topic, mockFetchLearningPathElement)
+    const result = await getSortedLearningPath(userid, lmsUserid, studentid, topic, "2", mockFetchLearningPathElement)
     expect(result).toEqual({
       id: 99999,
       course_id: 99999,
@@ -431,7 +431,7 @@ describe('getSortedLearningPath works as expected', () => {
   test('fetches learning path elements for a topic and returns the loading state', async () => {
     mockFetchUser.mockResolvedValueOnce({ settings: { user_id: 1 }, lms_user_id: 1, id: 1 })
 
-    const { result, waitForNextUpdate } = renderHook(() => useLearningPathElement(topic))
+    const { result, waitForNextUpdate } = renderHook(() => useLearningPathElement(topic, "2"))
 
     expect(result.current.loadingElements).toBe(true)
     expect(result.current.learningPaths).toEqual(initialLearningPathElement)
@@ -596,7 +596,7 @@ describe('useLearningPathTopic', () => {
 
     act(() => {
       mockServices.getLearningPathElement.mockImplementationOnce(mockgetLearningPathElement)
-      const { result } = renderHook(() => useLearningPathElement(topic))
+      const { result } = renderHook(() => useLearningPathElement(topic, "2"))
 
       expect(result.current).toBeUndefined()
     })
