@@ -40,7 +40,7 @@ describe('MenuBar', () => {
             courseSelected: true,
         }
 
-        const { getByText, getByTestId } = render(
+        const { getByText, getAllByTestId } = render(
             <MemoryRouter>
                 <MenuBar {...props} />
             </MemoryRouter>
@@ -49,7 +49,7 @@ describe('MenuBar', () => {
         await waitFor(async () => {
             fireEvent.click(getByText('components.MenuBar.TopicButton'))
             await waitFor(() => {
-                expect(getByTestId('Menubar-Topic-string')).toBeInTheDocument()
+                expect(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0]).toBeInTheDocument()
             })
         })
     })
@@ -226,7 +226,7 @@ describe('MenuBar', () => {
             courseSelected: true,
         }
 
-        const { getByText, getByTestId } = render(
+        const { getByText, getAllByTestId } = render(
             <MemoryRouter>
                 <MenuBar {...props} />
             </MemoryRouter>
@@ -235,8 +235,8 @@ describe('MenuBar', () => {
         await waitFor(async () => {
             fireEvent.click(getByText('components.MenuBar.TopicButton'))
             await waitFor(() => {
-                expect(getByTestId('Menubar-Topic-string')).toBeInTheDocument()
-                fireEvent.click(getByTestId('Menubar-Topic-string'))
+                expect(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0]).toBeInTheDocument()
+                fireEvent.click(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0])
                 expect(navigate).toHaveBeenCalledWith('course/undefined/topic/1')
             })
         })
