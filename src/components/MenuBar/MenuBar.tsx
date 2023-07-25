@@ -15,7 +15,8 @@ import {
     DefaultPopover as Popover,
     DefaultDivider as Divider,
     DefaultSkeleton as Skeleton,
-    DefaultListItemIcon as ListItemIcon
+    DefaultListItemIcon as ListItemIcon,
+    DefaultLink as Link
 } from '@common/components'
 import SettingsIcon from '@mui/icons-material/Settings'
 import HelpIcon from '@mui/icons-material/Help'
@@ -25,10 +26,8 @@ import {useTranslation} from 'react-i18next'
 import {Login, Logout} from '@mui/icons-material'
 import {AuthContext, SnackbarContext, Topic} from '@services'
 import {DropdownLanguage} from '@components'
-import {Link} from '@mui/material'
 import {usePersistedStore, useStore} from '@store'
 import log from "loglevel";
-// TODO: Move it into @common/hooks since it is reused in LocalNav
 
 /**
  *  Local navigation component props.
@@ -58,7 +57,6 @@ const MenuBar = ({
     const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
     const {addSnackbar} = useContext(SnackbarContext)
     const {isAuth, logout} = useContext(AuthContext)
-    const userCourse = useStore((state) => state.course)
     const {courseId} = useParams() as { courseId: string }
     const {t} = useTranslation()
     const [loadingTopics, setLoadingTopics] = useState(true);
@@ -77,24 +75,31 @@ const MenuBar = ({
         setAnchorElUser(null)
     }
 
-    const handleOpenTopicsMenu = async (event: React.MouseEvent<HTMLElement>) => {
+    const handleOpenTopicsMenu = async(event: React.MouseEvent<HTMLElement>) => {
         setAnchorElTopics(event.currentTarget)
-        try {
-            setLoadingTopics(true)
-            const user = await fetchUser()
-            const fetchedTopics = await fetchLearningPathTopic(
-                user.settings.user_id,
-                user.lms_user_id,
-                user.id,
-                courseId
-            )
-            setTopicsPath(fetchedTopics.topics)
-        } catch (error) {
-            log.error('Error fetching topics:', error)
-        } finally {
-            setLoadingTopics(false)
-        }
-    };
+        fetchUser().then((user) => {
+            fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId).then((TopicResponse) => {
+                setTopicsPath(TopicResponse.topics)
+                setLoadingTopics(false)
+            }).catch((error) => {
+                // 🍿 snackbar error
+                addSnackbar({
+                    message: error.message,
+                    severity: 'error',
+                    autoHideDuration: 5000
+                })
+                log.error(error.message)
+            })
+        }).catch((error) => {
+            // 🍿 snackbar error
+            addSnackbar({
+                message: error.message,
+                severity: 'error',
+                autoHideDuration: 5000
+            })
+            log.error(error.message)
+        })
+    }
 
     const handleCloseTopicsMenu = () => {
         setAnchorElTopics(null)
@@ -199,17 +204,18 @@ const MenuBar = ({
                                                 //For every Topic the LearningPathElement is displayed under it.
                                                 <>
                                                     {reversedTopics.map((topic) => (
-                                                        <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>
+                                                        <>
                                                             <Grid item xs={12} key={t(topic.name)}>
                                                                 <Link
                                                                     key={topic.name}
+                                                                    data-testid={`Menubar-Topic-${topic.name}`}
                                                                     underline="hover"
                                                                     variant="h6"
                                                                     component="span"
                                                                     color="inherit"
                                                                     sx={{m: 1, cursor: 'pointer'}}
                                                                     onClick={() => {
-                                                                        navigate(`course/${userCourse.lms_id}/topic/${topic.id}`)
+                                                                        navigate(`course/${courseId}/topic/${topic.id}`)
                                                                         handleCloseTopicsMenu()
                                                                     }}>
                                                                     {topic.name}
@@ -223,7 +229,7 @@ const MenuBar = ({
                                                                     }}></Box>
                                                             </Grid>
                                                             {topicsPath.indexOf(topic) !== topicsPath.length && <Divider flexItem/>}
-                                                        </React.Fragment>
+                                                        </>
                                                     ))}
                                                 </>
                                             )}
