@@ -1,2 +1,2 @@
-import { ToggleButtonGroup } from '@mui/material'
-export { ToggleButtonGroup as DefaultToggleButtonGroup }
+import DefaultToggleButtonGroup from '@mui/material/ToggleButtonGroup'
+export { DefaultToggleButtonGroup as ToggleButtonGroup }

@@ -1,2 +1,2 @@
-import { Chip } from '@mui/material'
-export { Chip as DefaultChip }
+import DefaultChip from '@mui/material/Chip'
+export { DefaultChip as Chip }

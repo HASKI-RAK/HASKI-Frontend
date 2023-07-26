@@ -1,14 +1,6 @@
+import { AccordionSummary, AccordionDetails, Accordion, Typography, Box, Grid, Chip } from '@common/components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
-import {
-  DefaultAccordionSummary as AccordionSummary,
-  DefaultAccordionDetails as AccordionDetails,
-  DefaultAccordion as Accordion,
-  DefaultTypography as Typography,
-  DefaultBox as Box,
-  DefaultGrid as Grid,
-  DefaultChip as Chip
-} from '@common/components'
 
 /**
  * @typedef {object} GlossaryEntryProps

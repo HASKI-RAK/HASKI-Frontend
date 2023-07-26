@@ -1,4 +1,4 @@
-import { DefaultToggleButtonGroup as ToggleButtonGroup } from '@common/components'
+import { ToggleButtonGroup } from '@common/components'
 import { ToggleButtonList } from '@components'
 import React, { useCallback } from 'react'
 

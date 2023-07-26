@@ -1,16 +1,16 @@
 import { useCallback, useState } from 'react'
 import {
-  DefaultBox as Box,
-  DefaultCheckbox as Checkbox,
-  DefaultChip as Chip,
-  DefaultFormControl as FormControl,
-  DefaultInputLabel as InputLabel,
-  DefaultListItemText as ListItemText,
-  DefaultMenuItem as MenuItem,
-  DefaultOutlinedInput as OutlinedInput,
-  DefaultSelect as Select,
-  DefaultSelectChangeEvent as SelectChangeEvent,
-  DefaultTypography as Typography
+  Box,
+  Checkbox,
+  Chip,
+  FormControl,
+  InputLabel,
+  ListItemText,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  SelectChangeEvent,
+  Typography
 } from '@common/components'
 
 const ITEM_HEIGHT = 48

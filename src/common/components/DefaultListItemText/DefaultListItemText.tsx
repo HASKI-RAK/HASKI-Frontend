@@ -1,2 +1,2 @@
-import { ListItemText } from '@mui/material'
-export { ListItemText as DefaultListItemText }
+import DefaultListItemText from '@mui/material/ListItemText'
+export { DefaultListItemText as ListItemText }

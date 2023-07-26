@@ -1,2 +1,2 @@
-import { Checkbox } from '@mui/material'
-export { Checkbox as DefaultCheckbox }
+import DefaultCheckbox from '@mui/material/Checkbox'
+export { DefaultCheckbox as Checkbox }

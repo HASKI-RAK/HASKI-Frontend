@@ -1,2 +1,2 @@
-import { OutlinedInput } from '@mui/material'
-export { OutlinedInput as DefaultOutlinedInput }
+import DefaultOutlinedInput from '@mui/material/OutlinedInput'
+export { DefaultOutlinedInput as OutlinedInput }

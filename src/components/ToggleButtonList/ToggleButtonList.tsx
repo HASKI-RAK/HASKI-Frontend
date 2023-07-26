@@ -1,4 +1,4 @@
-import { DefaultToggleButton as ToggleButton, DefaultBox as Box } from '@common/components'
+import { ToggleButton, Box } from '@common/components'
 
 /**
  * @typedef {object} ToggleButtonListProps

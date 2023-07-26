@@ -1,10 +1,6 @@
+import { Typography, TextField, InputAdornment } from '@common/components'
 import SearchIcon from '@mui/icons-material/Search'
 import { useCallback } from 'react'
-import {
-  DefaultTypography as Typography,
-  DefaultTextField as TextField,
-  DefaultInputAdornment as InputAdornment
-} from '@common/components'
 
 /**
  * @typedef {object} SearchbarProps
