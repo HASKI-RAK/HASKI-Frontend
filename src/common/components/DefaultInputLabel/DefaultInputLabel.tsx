@@ -1,2 +1,2 @@
-import { InputLabel } from '@mui/material'
-export { InputLabel as DefaultInputLabel }
+import DefaultInputLabel from '@mui/material/InputLabel'
+export { DefaultInputLabel as InputLabel }

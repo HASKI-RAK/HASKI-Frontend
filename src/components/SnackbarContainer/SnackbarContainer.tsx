@@ -1,4 +1,4 @@
-import { DefaultStack as Stack, DefaultSnackbar as Snackbar } from '@common/components'
+import { Stack, Snackbar } from '@common/components'
 import { SnackbarContext, useNetworkStatus } from '@services'
 import { useEffect, useState, useContext } from 'react'
 import { useTranslation } from 'react-i18next'

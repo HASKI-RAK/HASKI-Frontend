@@ -1,12 +1,16 @@
 /**
  * Reusable service calls go here.
  */
+
 export { useUserStore } from './UserState'
 export type { UserState } from './UserState'
 export { AuthContext } from './AuthContext'
 export type { AuthContextType } from './AuthContext'
 export { AuthProvider } from './AuthProvider'
 export * from './auth'
+export { postContactForm } from './contact'
+export type { FormDataType } from './contact'
+
 export { getElementLearningPath } from './learningPath'
 export type { LearningPath, LearningElement, PathItem, LearningPathRequestResponse } from './learningPath'
 export { getCourseTopics } from './topic'

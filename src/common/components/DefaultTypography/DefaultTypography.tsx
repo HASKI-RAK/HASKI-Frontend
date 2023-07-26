@@ -1,1 +1,2 @@
-export { Typography as DefaultTypography } from '@mui/material'
+import DefaultTypography from '@mui/material/Typography'
+export { DefaultTypography as Typography }

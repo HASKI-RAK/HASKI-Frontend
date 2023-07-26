@@ -1,4 +1,4 @@
-import { DefaultSlide as Slide, DefaultGrow as Grow } from '@common/components'
+import { Slide, Grow } from '@common/components'
 import { SeverityType } from '@components'
 
 /**

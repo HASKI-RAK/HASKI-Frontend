@@ -1,6 +1,6 @@
 import { DropdownLanguage, Text, QuestionnaireResultsModal } from '@components'
 import log from 'loglevel'
-import { DefaultButton as Button } from '@common/components'
+import { Button } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
@@ -10,7 +10,7 @@ export const Home = () => {
 
   log.setLevel('error')
   return (
-    <div>
+    <>
       <Button
         variant="contained"
         color="primary"
@@ -23,7 +23,7 @@ export const Home = () => {
       <QuestionnaireResultsModal open={open} handleClose={() => setOpen(!open)} />
       <DropdownLanguage />
       <Text />
-    </div>
+    </>
   )
 }
 

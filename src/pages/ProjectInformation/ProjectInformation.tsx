@@ -1,4 +1,4 @@
-import { DefaultButton as Button, DefaultTypography as Typography, DefaultBox as Box } from '@common/components'
+import { Button, Typography, Box } from '@common/components'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
