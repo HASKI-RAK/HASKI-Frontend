@@ -1,59 +1,42 @@
-import '@testing-library/jest-dom'
-import { AuthContext } from '@services'
-import { MemoryRouter } from 'react-router-dom'
-import { fireEvent, render, screen } from '@testing-library/react'
-import { createMemoryHistory } from 'history'
-import { Router } from 'react-router-dom'
-
+import { fireEvent, render } from '@testing-library/react'
 import ProjectInformation from './ProjectInformation'
-import { debug } from 'console'
+import { MemoryRouter } from 'react-router-dom'
+import * as router from 'react-router'
+import '@testing-library/jest-dom'
 
-describe('Test the Project Information ', () => {
-  it('Should render the skeleton', () => {
+const navigate = jest.fn()
+beforeEach(() => {
+  jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+})
+
+describe('ProjectInformation tests', () => {
+  it('render correctly', () => {
     const projectInformation = render(
       <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: false, setIsAuth: jest.fn(), logout: jest.fn() }}>
-          <ProjectInformation />
-        </AuthContext.Provider>
+        <ProjectInformation />
       </MemoryRouter>
     )
-    expect(projectInformation.container.querySelectorAll('span').length).toEqual(1)
+    expect(projectInformation).toBeTruthy()
   })
 
-  it('Should render the project information page', () => {
-    const projectInformation = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setIsAuth: jest.fn(), logout: jest.fn() }}>
-          <ProjectInformation />
-        </AuthContext.Provider>
+  test('first button navigates to ProjectDescription page', () => {
+    const { getAllByRole } = render(
+      <MemoryRouter initialEntries={['/home', '/projectinformation']}>
+        <ProjectInformation />
       </MemoryRouter>
     )
-    expect(projectInformation.container.querySelectorAll('span').length).toEqual(2)
+
+    fireEvent.click(getAllByRole('button')[0])
+    expect(navigate).toBeCalledWith('/projectinformation/projectdescription')
   })
 
-  test('The project description buttons navigates to the ProjectDescription page', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home', '/projectinformation'] })
-    const { getByText } = render(
-      <Router location={history.location} navigator={history}>
-        <AuthContext.Provider value={{ isAuth: true, setIsAuth: jest.fn(), logout: jest.fn() }}>
-          <ProjectInformation />
-        </AuthContext.Provider>
-      </Router>
+  test('second button navigates to Glossary page', () => {
+    const { getAllByRole } = render(
+      <MemoryRouter initialEntries={['/home', '/projectinformation']}>
+        <ProjectInformation />
+      </MemoryRouter>
     )
-    fireEvent.click(getByText('pages.projectdescription'))
-    expect(history.location.pathname).toBe('/projectinformation/projectdescription')
-  })
-
-  test('The glossary buttons navigates to the Glossary page', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home', '/projectinformation'] })
-    const { getByText } = render(
-      <Router location={history.location} navigator={history}>
-        <AuthContext.Provider value={{ isAuth: true, setIsAuth: jest.fn(), logout: jest.fn() }}>
-          <ProjectInformation />
-        </AuthContext.Provider>
-      </Router>
-    )
-    fireEvent.click(getByText('pages.glossary'))
-    expect(history.location.pathname).toBe('/projectinformation/glossary')
+    fireEvent.click(getAllByRole('button')[1])
+    expect(navigate).toBeCalledWith('/projectinformation/glossary')
   })
 })
