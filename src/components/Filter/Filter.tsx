@@ -71,12 +71,10 @@ const Filter = (props: FilterProps) => {
 
   return (
     <FormControl fullWidth>
-      <InputLabel id="filter-label">
+      <InputLabel>
         <Typography>{props.label}</Typography>
       </InputLabel>
       <Select
-        labelId="filter-label"
-        id="filter"
         multiple
         value={props.selectedOptions}
         onClick={() => setOpen(!open)}

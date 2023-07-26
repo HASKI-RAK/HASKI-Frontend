@@ -58,7 +58,7 @@ const GlossaryEntry = ({ expandedList, setExpandedList, ...props }: GlossaryAcco
 
   return (
     <Accordion expanded={expandedList?.find((entry) => entry === props.term) ? true : false} onClick={handleClick}>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} id="panel1a-header">
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Grid container columnSpacing={1}>
           <Grid item>
             <Typography component="span" key={props.term} variant="h4" data-testid={'glossaryEntryTerm'}>

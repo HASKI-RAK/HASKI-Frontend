@@ -13,7 +13,6 @@ import GlossaryEntry, { GlossaryEntryProps } from './GlossaryEntry/GlossaryEntry
 import Filter from './Filter/Filter'
 import Searchbar from './Searchbar/Searchbar'
 import GlossaryIndex from './GlossaryIndex/GlossaryIndex'
-import GlossaryContent from './GlossaryContent/GlossaryContent'
 import { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
 import { ImprintContent } from './Imprint/ImprintContent'
 import MenuBar from './MenuBar/MenuBar'
@@ -39,7 +38,6 @@ export {
   Filter,
   Searchbar,
   GlossaryIndex,
-  GlossaryContent,
   ToggleButtonList,
   BreadcrumbsContainer,
   LocalNav,
