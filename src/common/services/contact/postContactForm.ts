@@ -1,3 +1,4 @@
+import { getData } from '../RequestResponse'
 export interface FormDataType {
   //muss mit backend variablen übereinstimmen
   report_type: string
@@ -5,34 +6,27 @@ export interface FormDataType {
   report_description: string
 }
 
-export type PostContactFormResponse = {
-  status: number
-  message: string
-}
 export type PostContactFormParams = {
-  nonce?: string
   responseBody?: FormDataType
   userId?: any
+  lmsUserId?: any
 }
 /**
  * Send the input of the contact form to the backend.
  * @returns PostContactFormResponse
  */
-export const postContactForm = async (responseBody?: FormDataType, userId?: any): Promise<PostContactFormResponse> => {
-  //nur zum testen
-  const user_id = userId
-  const lms_user_id = userId
-  return fetch(process.env.BACKEND + `/user/${user_id}/${lms_user_id}/contactform`, {
+export const postContactForm = async (
+  responseBody?: FormDataType,
+  userId?: any,
+  lmsUserId?: any
+): Promise<Response> => {
+  const response = await fetch(process.env.BACKEND + `/user/${userId}/${lmsUserId}/contactform`, {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify(responseBody),
     headers: {
       'Content-Type': 'application/json'
     }
-  }).then((response) => {
-    return {
-      status: response.status,
-      message: response.statusText
-    }
   })
+  return getData<Response>(response)
 }

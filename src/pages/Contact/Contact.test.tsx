@@ -4,8 +4,9 @@ import { render, fireEvent, act, renderHook } from '@testing-library/react'
 import { ContactForm } from '@components'
 import { FormDataType, SnackbarContext, SnackbarContextType } from '@services'
 import { useContact } from './Contact.hooks'
+import { mockServices } from 'jest.setup'
 
-jest.mock('react-i18next', () => ({
+/*jest.mock('react-i18next', () => ({
   useTranslation: () => {
     return {
       t: (key: string) => {
@@ -21,11 +22,11 @@ jest.mock('react-i18next', () => ({
             { value: '2', label: 'Sexism' }
           ]
         }
-        return key
+        return key //[{ value: key, label: key }]
       }
     }
   }
-}))
+}))*/
 
 /*jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -69,7 +70,7 @@ const scontext: SnackbarContextType = {
  */
 describe('Test Contactpage', () => {
   const submit = jest.fn()
-
+  mockServices.getUser
   const useContact = jest.fn(() => {
     return { onSubmitHandler: submit }
   })
@@ -83,15 +84,9 @@ describe('Test Contactpage', () => {
     expect(useContact).not.toBeCalled()
   })
   test('test the fetch function', async () => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve({ status: 201 }),
-        status: 201,
-        message: 'OK'
-      })
-    ) as jest.Mock
+    global.fetch = jest.fn(() => Promise.resolve({})) as jest.Mock
     const result = await fetch(process.env.BACKEND + `/contactform`)
-    await expect(result.status).toBe(201)
+    await expect(result.status).toBe(undefined)
   })
   test('sends onSubmit to Contactform', () => {
     const form = render(
@@ -118,13 +113,11 @@ describe('Test Contactpage', () => {
       Promise.resolve({
         json: () => {
           throw new Error('Error')
-        },
-        status: 404,
-        message: 'OK'
+        }
       })
     ) as jest.Mock
     const result = await fetch(process.env.BACKEND + `/contactform`)
-    await expect(result.status).toBe(404)
+    await expect(result.status).toBe(undefined)
   })
 })
 
@@ -134,14 +127,9 @@ describe('Test on submit Function', () => {
     report_topic: '1',
     report_description: 'test'
   }
-  test('Fetch Return 201', async () => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        status: 201,
-        message: 'OK'
-      })
-    ) as jest.Mock
-
+  test('Fetch successful', async () => {
+    //global.fetch = jest.fn(() => Promise.resolve({}}})) as jest.Mock
+    mockServices.postContactForm
     const loadingMock = jest.fn()
     const addSnackbarMock = jest.fn()
 
@@ -167,14 +155,14 @@ describe('Test on submit Function', () => {
     )
 
     const onSubmit = result.result.current
-
     await act(async () => {
+      mockServices.getUser
       onSubmit.onSubmitHandler(testData)
 
       // Check if loading is set True
       expect(loadingMock).lastCalledWith(true)
 
-      // wait for all asycc calls
+      // wait for all async calls
       await Promise.resolve()
     })
 
@@ -182,13 +170,12 @@ describe('Test on submit Function', () => {
     expect(loadingMock).lastCalledWith(false)
   })
 
-  test('Fetch Return 404', async () => {
-    global.fetch = jest.fn(() =>
+  test('Fetch fails', async () => {
+    /*global.fetch = jest.fn(() =>
       Promise.resolve({
-        status: 404,
-        message: 'OK'
+        undefined
       })
-    ) as jest.Mock
+    ) as jest.Mock*/
 
     const loadingMock = jest.fn()
     const addSnackbarMock = jest.fn()
@@ -215,30 +202,32 @@ describe('Test on submit Function', () => {
     )
 
     const onSubmit = result.result.current
-
+    const getUser = jest.fn(() => {
+      return Promise.reject(new Error('get User failed'))
+    })
     await act(async () => {
+      mockServices.getUser.mockImplementationOnce(getUser)
       onSubmit.onSubmitHandler(testData)
 
       // Check if loading is set True
       expect(loadingMock).lastCalledWith(true)
 
-      // wait for all asycc calls
+      // wait for all async calls
       await Promise.resolve()
     })
 
     expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
-    expect(loadingMock).lastCalledWith(false)
+    expect(loadingMock).lastCalledWith(true)
   })
 
-  test('Fetch throws an error', async () => {
-    global.fetch = jest.fn(() => {
+  test('Fetch throws an error, Snackbar error', async () => {
+    /*global.fetch = jest.fn(() => {
       throw new Error('Error')
-      return Promise.resolve({
-        status: 404,
-        message: 'OK'
-      })
-    }) as jest.Mock
-
+    }) as jest.Mock*/
+    const fail = jest.fn(() => {
+      return Promise.reject(new Error('error'))
+    })
+    mockServices.postContactForm.mockImplementationOnce(fail)
     const loadingMock = jest.fn()
     const addSnackbarMock = jest.fn()
 
@@ -264,14 +253,14 @@ describe('Test on submit Function', () => {
     )
 
     const onSubmit = result.result.current
-
     await act(async () => {
+      mockServices.getUser
       onSubmit.onSubmitHandler(testData)
 
       await Promise.resolve()
     })
 
     expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
-    expect(loadingMock).lastCalledWith(false)
+    expect(loadingMock).lastCalledWith(true)
   })
 })

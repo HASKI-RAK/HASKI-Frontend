@@ -1,4 +1,4 @@
-import { postContactForm, FormDataType, SnackbarContext, getUser } from '@services'
+import { postContactForm, FormDataType, SnackbarContext } from '@services'
 import { useCallback, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { usePersistedStore } from '@store'
@@ -30,23 +30,31 @@ export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookRetur
   const onSubmitHandler = useCallback(
     (postBody: FormDataType) => {
       setIsLoading(true)
-      fetchUser().then((user) => {
-        postContactForm(postBody, user).then((response) => {
-          if (response.status === 201) {
-            setIsLoading(false)
-            addSnackbar({
-              message: t('pages.Contact.success'),
-              severity: 'success'
+      fetchUser()
+        .then((user) => {
+          postContactForm(postBody, user.settings.user_id, user.lms_user_id)
+            .then(() => {
+              setIsLoading(false)
+              addSnackbar({
+                message: t('pages.Contact.success'),
+                severity: 'success'
+              })
             })
-          } else {
-            setIsLoading(false)
-            addSnackbar({
-              message: t('pages.Contact.error'),
-              severity: 'error'
-            })
-          }
+            .catch((error) =>
+              addSnackbar({
+                message: t('pages.Contact.error') + error,
+                severity: 'error',
+                autoHideDuration: 3000
+              })
+            )
         })
-      })
+        .catch((error) =>
+          addSnackbar({
+            message: t('pages.Contact.error') + error,
+            severity: 'error',
+            autoHideDuration: 3000
+          })
+        )
     },
     [t, addSnackbar, setIsLoading]
   )
