@@ -5,6 +5,7 @@ import { ContactForm } from '@components'
 import { FormDataType, SnackbarContext, SnackbarContextType } from '@services'
 import { useContact } from './Contact.hooks'
 import { mockServices } from 'jest.setup'
+import { MemoryRouter } from 'react-router-dom'
 
 /*jest.mock('react-i18next', () => ({
   useTranslation: () => {
@@ -22,7 +23,7 @@ import { mockServices } from 'jest.setup'
             { value: '2', label: 'Sexism' }
           ]
         }
-        return key //[{ value: key, label: key }]
+        return key
       }
     }
   }
@@ -83,16 +84,13 @@ describe('Test Contactpage', () => {
     )
     expect(useContact).not.toBeCalled()
   })
-  test('test the fetch function', async () => {
-    global.fetch = jest.fn(() => Promise.resolve({})) as jest.Mock
-    const result = await fetch(process.env.BACKEND + `/contactform`)
-    await expect(result.status).toBe(undefined)
-  })
   test('sends onSubmit to Contactform', () => {
     const form = render(
-      <SnackbarContext.Provider value={scontext}>
-        <ContactForm onSubmit={useContact} />
-      </SnackbarContext.Provider>
+      <MemoryRouter>
+        <SnackbarContext.Provider value={scontext}>
+          <ContactForm onSubmit={useContact} />
+        </SnackbarContext.Provider>
+      </MemoryRouter>
     )
 
     const submitButton = form.getByText('components.ContactForm.submit')
@@ -128,7 +126,6 @@ describe('Test on submit Function', () => {
     report_description: 'test'
   }
   test('Fetch successful', async () => {
-    //global.fetch = jest.fn(() => Promise.resolve({}}})) as jest.Mock
     mockServices.postContactForm
     const loadingMock = jest.fn()
     const addSnackbarMock = jest.fn()
@@ -171,12 +168,6 @@ describe('Test on submit Function', () => {
   })
 
   test('Fetch fails', async () => {
-    /*global.fetch = jest.fn(() =>
-      Promise.resolve({
-        undefined
-      })
-    ) as jest.Mock*/
-
     const loadingMock = jest.fn()
     const addSnackbarMock = jest.fn()
 
