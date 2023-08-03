@@ -7,28 +7,6 @@ import { useContact } from './Contact.hooks'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 
-/*jest.mock('react-i18next', () => ({
-  useTranslation: () => {
-    return {
-      t: (key: string) => {
-        if (key == 'components.ContactForm.types') {
-          const reportTypes = [
-            { value: '1', label: 'issue' },
-            { value: '2', label: 'Spam' }
-          ]
-          return reportTypes
-        } else if (key == 'components.ContactForm.topics') {
-          return [
-            { value: '1', label: 'Learningelement' },
-            { value: '2', label: 'Sexism' }
-          ]
-        }
-        return key
-      }
-    }
-  }
-}))*/
-
 /*jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useCallback: (a: any) => a
