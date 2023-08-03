@@ -11,7 +11,7 @@ import {
 } from '@common/components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
-import {useNavigate, useParams} from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Topic } from '@services'
 import { LearningPathElement } from '@core'
 import React, { Suspense, useState } from 'react'
@@ -29,7 +29,10 @@ import {
 
 export type LocalNavProps = {
   useLearningPathTopic?: (courseId: string) => { loading: boolean; topics: Topic[] }
-  useLearningPathElement?: (topic: Topic, courseId: string) => {
+  useLearningPathElement?: (
+    topic: Topic,
+    courseId: string
+  ) => {
     loadingElements: boolean
     learningPaths: LearningPathElement
   }

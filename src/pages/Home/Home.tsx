@@ -42,18 +42,20 @@ export const Home = () => {
         clearTimeout(preventEndlessLoading)
         fetchUser()
           .then((user) => {
-            fetchCourses(user.settings.user_id, user.lms_user_id, user.id).then((CourseResponse) => {
-              setCourses(CourseResponse.courses)
-              setLoading(false)
-            }).catch((error) => {
+            fetchCourses(user.settings.user_id, user.lms_user_id, user.id)
+              .then((CourseResponse) => {
+                setCourses(CourseResponse.courses)
+                setLoading(false)
+              })
+              .catch((error) => {
                 // 🍿 snackbar error
                 addSnackbar({
-                    message: error.message,
-                    severity: 'error',
-                    autoHideDuration: 5000
+                  message: error.message,
+                  severity: 'error',
+                  autoHideDuration: 5000
                 })
                 log.error(error.message)
-            })
+              })
           })
           .catch((error) => {
             // 🍿 snackbar error
@@ -80,14 +82,14 @@ export const Home = () => {
       <Stack spacing={2} direction="row" justifyContent="center">
         <div>
           {courses.length === 0 ? (
-              <>
+            <>
               {setLoading(false)}
-            <Card>
-              <CardContent>
-                <Typography variant="h5">No courses yet</Typography>
-              </CardContent>
-            </Card>
-              </>
+              <Card>
+                <CardContent>
+                  <Typography variant="h5">No courses yet</Typography>
+                </CardContent>
+              </Card>
+            </>
           ) : (
             courses.map((course) => {
               return (

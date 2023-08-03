@@ -47,7 +47,7 @@ export const getSortedLearningPath = async (
   courseId: string,
   fetchLearningPath: LearningPathElementReturn
 ): Promise<LearningPathElement> => {
-  const learningPath = await fetchLearningPath(userid, lmsUserid, studentid,  courseId, data.id.toString())
+  const learningPath = await fetchLearningPath(userid, lmsUserid, studentid, courseId, data.id.toString())
   learningPath.path.sort((a, b) => a.position - b.position)
   return learningPath
 }
