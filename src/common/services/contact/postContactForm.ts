@@ -12,8 +12,8 @@ export type PostContactFormParams = {
   lmsUserId?: any
 }
 /**
- * Send the input of the contact form to the backend.
- * @returns PostContactFormResponse
+ * Send the input of the contact form to the backend with the userid.
+ * @returns either no response or an error
  */
 export const postContactForm = async (
   responseBody?: FormDataType,

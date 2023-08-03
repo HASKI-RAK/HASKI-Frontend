@@ -16,6 +16,7 @@ export type ContactHookReturn = {
  *
  * @returns {ContactFormReturn} - Logic
  * @function onSubmitHandler - handles the submission of the values, that were inserted in the Contactform.
+ * Prior to sending with the postContactForm function the userid is getting fetched so that it can be sent with the postbody to the backend.
  * It posts the content thats supposed to be sent with the postBody with the postContactForm Function(can be found @services)
  * Upon recieving a response the submission was either successful, successful but still failed oder threw an error.
  * Supports usage of the Snackbar.
@@ -58,13 +59,6 @@ export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookRetur
     },
     [t, addSnackbar, setIsLoading]
   )
-  // .catch((error) => {
-  //   setIsLoading(false)
-  //   addSnackbar({
-  //     message: t('pages.Contact.error') + error,
-  //     severity: 'error'
-  //   })
-  // })
 
   return {
     onSubmitHandler
