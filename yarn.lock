@@ -4161,6 +4161,11 @@ eslint-config-prettier@^8.8.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.8.0.tgz#bfda738d412adc917fd7b038857110efe98c9348"
   integrity sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==
 
+eslint-plugin-immutable@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-immutable/-/eslint-plugin-immutable-1.0.0.tgz#4fe5839836be9809e08bac00cb7ce10e4b8e4821"
+  integrity sha512-ybjqMiL+hgrkgdHfkZjhgJS+Pkwb/iVmPNzbgsMbb2EZKNp3LOYfyce70w0P69LPy6UZgMq3j9kCTQk2hu6/fw==
+
 eslint-plugin-prefer-arrow-functions@^3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/eslint-plugin-prefer-arrow-functions/-/eslint-plugin-prefer-arrow-functions-3.1.4.tgz#a0761c7a0ba71461f6b2136fdf7f7cec1c82d778"
