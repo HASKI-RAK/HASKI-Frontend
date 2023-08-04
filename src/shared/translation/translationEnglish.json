@@ -651,5 +651,6 @@
   "spellcheckText": "Did you mean:",
   "success": "Success",
   "update": "Updated",
-  "warning": "Warning"
+  "warning": "Warning",
+  "components.Home.NoCourses": "No courses found"
 }

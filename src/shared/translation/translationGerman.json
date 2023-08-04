@@ -622,5 +622,6 @@
   "tooltip.openGlobalSettings": "Globale Einstellungen",
   "tooltip.openSettings": "Einstellungen",
   "update": "Aktualisieren",
-  "warning": "Warnung"
+  "warning": "Warnung",
+  "components.Home.NoCourses": "Keine Kurse gefunden"
 }
