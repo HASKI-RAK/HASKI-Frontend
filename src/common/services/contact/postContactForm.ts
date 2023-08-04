@@ -8,8 +8,8 @@ export interface FormDataType {
 
 export type PostContactFormParams = {
   responseBody?: FormDataType
-  userId?: any
-  lmsUserId?: any
+  userId?: number
+  lmsUserId?: number
 }
 /**
  * Send the input of the contact form to the backend with the userid.
@@ -17,8 +17,8 @@ export type PostContactFormParams = {
  */
 export const postContactForm = async (
   responseBody?: FormDataType,
-  userId?: any,
-  lmsUserId?: any
+  userId?: number,
+  lmsUserId?: number
 ): Promise<Response> => {
   const response = await fetch(process.env.BACKEND + `/user/${userId}/${lmsUserId}/contactform`, {
     method: 'POST',

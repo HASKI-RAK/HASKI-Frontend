@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom'
 import { FormDataType, postContactForm } from './postContactForm'
-import { error } from 'console'
 global.fetch = jest.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve<Response>,

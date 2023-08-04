@@ -30,14 +30,11 @@ export const useContactForm = (params?: useContactFormHookParams): ContactFormHo
   const { addSnackbar } = useContext(SnackbarContext)
 
   // ** State **//
-  const reportTypes = t('components.ContactForm.types', {
-    returnObjects: true
-  }) as [{ value: string; label: string }]
   const {
     defaultReportType = '', //TODO: TEST reportTypes.at(-1)?.value ??
     defaultReportTopic = '',
     defaultDescription = ''
-  } = params || {}
+  } = params ?? {}
   const [reportType, setReportType] = useState(defaultReportType)
   const [reportTopic, setReportTopic] = useState(defaultReportTopic)
   const [description, setDescription] = useState(defaultDescription)
