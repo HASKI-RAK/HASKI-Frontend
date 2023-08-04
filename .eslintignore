@@ -11,3 +11,4 @@ auto-order-json-translations.ts
 *.test.*
 *.config.*
 RingBuffer.ts
+index.html
