@@ -39,13 +39,18 @@ describe('UserSlice', () => {
   it('fetchUser should return the user if user is already set', async () => {
     // Set the user in the state
 
-    const realUser = { id: 1, lms_user_id: 1, name: 'John Doe', role: 'student', settings:
-          { id: 1, pswd: '123', theme: 'light', user_id: 1 } , university: 'University of the Philippines' }
+    const realUser = {
+      id: 1,
+      lms_user_id: 1,
+      name: 'John Doe',
+      role: 'student',
+      settings: { id: 1, pswd: '123', theme: 'light', user_id: 1 },
+      university: 'University of the Philippines'
+    }
 
     const { fetchUser } = usePersistedStore.getState()
 
     const result = await fetchUser(realUser)
     expect(result).toEqual(realUser)
   })
-
 })

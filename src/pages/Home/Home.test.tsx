@@ -102,7 +102,6 @@ describe('Test the Home page', () => {
   })
 
   test('fetching Course returns no courses', async () => {
-
     const mockgetCourse = jest.fn(() => {
       return Promise.resolve({
         courses: []
@@ -112,11 +111,11 @@ describe('Test the Home page', () => {
     mockServices.getCourses.mockImplementationOnce(mockgetCourse)
 
     const { getByText } = render(
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Home />
-          </AuthContext.Provider>
-        </MemoryRouter>
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
     )
 
     await waitFor(() => {
