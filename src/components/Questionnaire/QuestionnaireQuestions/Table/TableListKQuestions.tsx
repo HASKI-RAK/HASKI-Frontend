@@ -4,19 +4,25 @@ import TableContainer from '@mui/material/TableContainer'
 import TableRow from '@mui/material/TableRow'
 import SendIcon from '@mui/icons-material/Send'
 import Paper from '@mui/material/Paper'
-import { useTranslation } from 'react-i18next'
+import {useTranslation} from 'react-i18next'
 import MobileStepper from '@mui/material/MobileStepper'
-import { Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material'
+import {Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography} from '@mui/material'
 import TableCell from '@mui/material/TableCell'
-import { DefaultButton as Button } from '@common/components'
-import React, { useState } from 'react'
+import {DefaultButton as Button} from '@common/components'
+import React, {memo, useCallback, useMemo, useState} from 'react'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import CloseIcon from '@mui/icons-material/Close'
 import IconButton from '@mui/material/IconButton'
-import { useNavigate } from 'react-router-dom'
-import { useQuestionnaireAnswersListKStore } from '@services'
-import { styleButtonClose } from './QuestionnaireQuestionsTableStyle'
+import {useNavigate} from 'react-router-dom'
+import {useQuestionnaireAnswersListKStore} from '@services'
+import {styleButtonClose} from './QuestionnaireQuestionsTableStyle'
+import PropTypes from 'prop-types';
+
+/**
+ * @description
+ * This component is used to display the questionnaire questions for the ListK questionnaire.
+ */
 
 const stepsListK = [
   [
@@ -388,7 +394,231 @@ const stepsListK = [
   ]
 ]
 
-export const TableListKQuestions = () => {
+// region Memoized Elements
+// region memo props interfaces
+interface CommonProps {
+  t: (key: string) => string;
+  activeStep: number;
+}
+
+interface CustomTableRowProps extends CustomTableRowSpacerProps{
+  radioButtonGroup: string;
+  handleRadioChange: (event: React.ChangeEvent<HTMLInputElement>,
+                      listkStep: {question: string, questionLabel: string, answer1: string,
+                        answer2: string, answer3: string, answer4: string, answer5: string}) => void;
+  setRadioButtonGroup: (value: (((prevState: string) => string) | string)) => void;
+}
+
+interface CustomTableRowSpacerProps extends CommonProps{
+  answerIndex: number;
+}
+
+interface CustomIcButtonProps {
+  onClickClose: () => void;
+}
+
+interface CustomButtonStackProps {
+  activeStep: number;
+  handleNext: () => void;
+  handleBack: () => void;
+  isNextDisabled: boolean;
+}
+
+interface CustomSendButtonProps extends CommonProps{
+  handleSend: () => void;
+  isNextDisabled: boolean;
+}
+// endregion
+
+// region memo react elements
+const CustomTableRow: React.FC<CustomTableRowProps> = memo((
+    { activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex}) => {
+
+  return (
+      <TableRow>
+        <TableCell>
+          <RadioGroup
+              value={radioButtonGroup}
+              data-testid={`ListKQuestionnaireButtonGroup${(answerIndex + 1)}`}
+              onChange={(e) => {
+                setRadioButtonGroup(e.target.value)
+                handleRadioChange(e, stepsListK[activeStep][answerIndex])
+              }}>
+            <Stack
+                direction="row"
+                justifyContent="space-around"
+                alignItems="center"
+                spacing={1}
+                divider={<Divider orientation="vertical" flexItem />}>
+              <FormControlLabel
+                  value={stepsListK[activeStep][answerIndex].answer1}
+                  control={<Radio />}
+                  label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer1)}</Typography>}
+              />
+              <FormControlLabel
+                  value={stepsListK[activeStep][answerIndex].answer2}
+                  control={<Radio />}
+                  label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer2)}</Typography>}
+              />
+              <FormControlLabel
+                  value={stepsListK[activeStep][answerIndex].answer3}
+                  control={<Radio />}
+                  label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer3)}</Typography>}
+              />
+              <FormControlLabel
+                  value={stepsListK[activeStep][answerIndex].answer4}
+                  control={<Radio />}
+                  label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer4)}</Typography>}
+              />
+              <FormControlLabel
+                  value={stepsListK[activeStep][answerIndex].answer5}
+                  control={<Radio />}
+                  label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer5)}</Typography>}
+              />
+            </Stack>
+          </RadioGroup>
+        </TableCell>
+      </TableRow>
+  );
+});
+
+const CustomTableRowSpacer: React.FC<CustomTableRowSpacerProps> = memo(({t, activeStep, answerIndex}) => {
+  return (
+      <TableRow>
+        <TableCell
+            align="left"
+            sx={{
+              backgroundColor: (theme) => theme.palette.primary.dark,
+              color: (theme) => theme.palette.secondary.main
+            }}>
+          <Typography variant={'h5'}>{t(stepsListK[activeStep][answerIndex].question)}</Typography>
+        </TableCell>
+      </TableRow>
+  );
+});
+
+const CustomIcButton: React.FC<CustomIcButtonProps> = memo(({onClickClose}) => {
+  return (
+      <IconButton
+          id={'QuestionnaireAnswersCloseButton'}
+          color="primary"
+          sx={styleButtonClose}
+          onClick={onClickClose}
+          data-testid={'QuestionnaireAnswersCloseButton'}>
+        <CloseIcon />
+      </IconButton>
+  );
+});
+
+const CustomButtonStack: React.FC<CustomButtonStackProps> = memo((
+    {activeStep, handleNext, isNextDisabled, handleBack}) => {
+  return (
+      <Stack direction="row" justifyContent="space-around" alignItems="center">
+        <MobileStepper
+            variant="progress"
+            steps={8}
+            position="static"
+            activeStep={activeStep}
+            sx={{ maxWidth: '50%', flexGrow: 1, align: 'center' }}
+            nextButton={
+              <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  data-testid="nextButtonListKQuestionnaire"
+                  disabled={activeStep === 7 || isNextDisabled}>
+                Next
+                <KeyboardArrowRight />
+              </Button>
+            }
+            backButton={
+              <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleBack}
+                  data-testid="backButtonListKQuestionnaire"
+                  disabled={activeStep === 0}>
+                <KeyboardArrowLeft />
+                Back
+              </Button>
+            }
+        />
+      </Stack>
+  );
+});
+
+const CustomSendButton: React.FC<CustomSendButtonProps> = memo((
+    {activeStep, handleSend, isNextDisabled, t})=> {
+  return (
+      <>
+        <Stack direction="column" justifyContent="flex-end" alignItems="center">
+          {activeStep === 7 ? (
+              <div data-testid={'ActiveStepILS'}>
+                <Button
+                    variant="contained"
+                    endIcon={<SendIcon/>}
+                    color="primary"
+                    data-testid="sendButtonListKQuestionnaire"
+                    onClick={handleSend}
+                    disabled={isNextDisabled}
+                    sx={{m: 2}}>
+                  {t('Send')}
+                </Button>
+              </div>
+          ) : undefined}
+        </Stack>
+      </>
+  );
+});
+//endregion
+
+// region memo required propTypes
+const commonPropTypes = {
+  t: PropTypes.func.isRequired,
+  activeStep: PropTypes.number.isRequired,
+}
+
+CustomTableRow.displayName = 'CustomTableRow';
+CustomTableRow.propTypes = {
+  ...commonPropTypes,
+  answerIndex: PropTypes.number.isRequired,
+  radioButtonGroup: PropTypes.string.isRequired,
+  handleRadioChange: PropTypes.func.isRequired,
+  setRadioButtonGroup: PropTypes.func.isRequired,
+};
+
+CustomTableRowSpacer.displayName = 'CustomTableRowSpacer';
+CustomTableRowSpacer.propTypes = {
+  ...commonPropTypes,
+  answerIndex: PropTypes.number.isRequired,
+}
+
+CustomIcButton.displayName = 'CustomIconButton';
+CustomIcButton.propTypes = {
+  onClickClose: PropTypes.func.isRequired,
+}
+
+CustomButtonStack.displayName = 'CustomButtonStack';
+CustomButtonStack.propTypes = {
+  activeStep: PropTypes.number.isRequired,
+  handleNext: PropTypes.func.isRequired,
+  handleBack: PropTypes.func.isRequired,
+  isNextDisabled: PropTypes.bool.isRequired,
+}
+
+CustomSendButton.displayName = 'CustomTableRow';
+CustomSendButton.propTypes = {
+  ...commonPropTypes,
+  handleSend: PropTypes.func.isRequired,
+  isNextDisabled: PropTypes.bool.isRequired,
+};
+// endregion
+// endregion
+
+// region TableListKQuestions
+export const TableListKQuestions = memo(() => {
+  TableListKQuestions.displayName = 'TableListKQuestions';
+
   const { t } = useTranslation()
 
   const navigate = useNavigate()
@@ -399,9 +629,10 @@ export const TableListKQuestions = () => {
   const [radioButtonGroup4, setRadioButtonGroup4] = useState('')
   const [radioButtonGroup5, setRadioButtonGroup5] = useState('')
 
-  //if all radio buttons are selected, the next button is enabled (They are reset to their previous Value when the user goes back)
-  const isNextDisabled =
-    !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4 || !radioButtonGroup5
+  //if all radio buttons are selected, the next button is enabled
+  // (They are reset to their previous Value when the user goes back)
+  const isNextDisabled = (
+    !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4 || !radioButtonGroup5)
 
   const { questionnaireAnswers, setQuestionnaireAnswers } = useQuestionnaireAnswersListKStore()
 
@@ -409,457 +640,169 @@ export const TableListKQuestions = () => {
   window.addEventListener('beforeunload', (e: BeforeUnloadEvent) => {
     // Cancel the event
     e.preventDefault()
-
     // Chrome requires returnValue to be set
     e.returnValue = ''
   })
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
+  const setRadioButtonGroups = (newActiveStep: number) => {
+    setRadioButtonGroup1(setRadioButtonValue(stepsListK[newActiveStep][0]));
+    setRadioButtonGroup2(setRadioButtonValue(stepsListK[newActiveStep][1]));
+    setRadioButtonGroup3(setRadioButtonValue(stepsListK[newActiveStep][2]));
+    setRadioButtonGroup4(setRadioButtonValue(stepsListK[newActiveStep][3]));
+  };
 
-    setRadioButtonGroup1(setRadioButtonValue(stepsListK[activeStep + 1][0]))
-    setRadioButtonGroup2(setRadioButtonValue(stepsListK[activeStep + 1][1]))
-    setRadioButtonGroup3(setRadioButtonValue(stepsListK[activeStep + 1][2]))
-    setRadioButtonGroup4(setRadioButtonValue(stepsListK[activeStep + 1][3]))
+  const handleNext = useCallback(() => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setRadioButtonGroups(activeStep + 1)
     //because the last step has only 4 questions
     if (activeStep < 6) {
-      setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep + 1][4]))
+      setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep + 1][4]));
     }
-  }
+  }, [activeStep]);
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1)
 
-    setRadioButtonGroup1(setRadioButtonValue(stepsListK[activeStep - 1][0]))
-    setRadioButtonGroup2(setRadioButtonValue(stepsListK[activeStep - 1][1]))
-    setRadioButtonGroup3(setRadioButtonValue(stepsListK[activeStep - 1][2]))
-    setRadioButtonGroup4(setRadioButtonValue(stepsListK[activeStep - 1][3]))
-    setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep - 1][4]))
-  }
+  const handleBack = useCallback(() => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setRadioButtonGroups(activeStep - 1)
+  }, [activeStep]);
 
-  const handleSend = () => {
-    const listkArray = Object.entries(questionnaireAnswers).filter(([key]) => key !== '')
-    const listk_result = ['ils', listkArray]
+
+  const handleSend = useCallback(() => {
+    const listkArray = Object.entries(questionnaireAnswers).filter(([key]) => key !== '');
+    const listk_result = ['ils', listkArray];
     //todo: send to server
-  }
+  }, [questionnaireAnswers]);
 
-  const setRadioButtonValue = (listkStep: {
-    question: string
-    questionLabel: string
-    answer1: string
-    answer2: string
-    answer3: string
-    answer4: string
-    answer5: string
-  }) => {
-    //if the question is already answered, the answer is set to the value of the radio button/ else radio button is not set
-    switch (questionnaireAnswers[listkStep.questionLabel as keyof typeof questionnaireAnswers]) {
-      case '1':
-        return listkStep.answer1
-      case '2':
-        return listkStep.answer2
-      case '3':
-        return listkStep.answer3
-      case '4':
-        return listkStep.answer4
-      case '5':
-        return listkStep.answer5
-      default:
-        return ''
-    }
-  }
+  const setRadioButtonValue = useMemo(
+      () => (listkStep: {
+        question: string;
+        questionLabel: string;
+        answer1: string;
+        answer2: string;
+        answer3: string;
+        answer4: string;
+        answer5: string;
+      }) => {
+        //if the question is already answered, the answer is set to the value of the radio button/ else radio button is not set
+        switch (questionnaireAnswers[listkStep.questionLabel as keyof typeof questionnaireAnswers]) {
+          case '1':
+            return listkStep.answer1;
+          case '2':
+            return listkStep.answer2;
+          case '3':
+            return listkStep.answer3;
+          case '4':
+            return listkStep.answer4;
+          case '5':
+            return listkStep.answer5;
+          default:
+            return '';
+        }
+      },
+      [questionnaireAnswers]
+  );
 
-  const handleRadioChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    listkStep: {
-      question: string
-      questionLabel: string
-      answer1: string
-      answer2: string
-      answer3: string
-      answer4: string
-      answer5: string
-    }
-  ) => {
-    const radioButtonOptions = [
-      listkStep.answer1,
-      listkStep.answer2,
-      listkStep.answer3,
-      listkStep.answer4,
-      listkStep.answer5
-    ]
-    let selectedAnswer
+  const handleRadioChange = useCallback(
+      (
+          event: React.ChangeEvent<HTMLInputElement>,
+          listkStep: {
+            question: string;
+            questionLabel: string;
+            answer1: string;
+            answer2: string;
+            answer3: string;
+            answer4: string;
+            answer5: string;
+          }
+      ) => {
+        const radioButtonOptions = [
+          listkStep.answer1,
+          listkStep.answer2,
+          listkStep.answer3,
+          listkStep.answer4,
+          listkStep.answer5,
+        ];
+        const selectedAnswer = (radioButtonOptions.indexOf(event.target.value) + 1) || '5';
+        setQuestionnaireAnswers(listkStep.questionLabel, selectedAnswer.toString());
+      },
+      [setQuestionnaireAnswers]
+  );
 
-    switch (radioButtonOptions.indexOf(event.target.value)) {
-      case 0:
-        selectedAnswer = '1'
-        break
-      case 1:
-        selectedAnswer = '2'
-        break
-      case 2:
-        selectedAnswer = '3'
-        break
-      case 3:
-        selectedAnswer = '4'
-        break
-      default:
-        selectedAnswer = '5'
-        break
-    }
 
-    setQuestionnaireAnswers(listkStep.questionLabel, selectedAnswer.toString())
-  }
-
-  const onClickClose = () => {
+  const onClickClose = useCallback(() => {
     if (window.confirm(t('CloseWebsite').toString())) {
-      navigate('/')
+      navigate('/');
     }
-  }
+  }, [t, navigate]);
 
   return (
     <Box>
-      <IconButton
-        id={'QuestionnaireAnswersCloseButton'}
-        color="primary"
-        sx={styleButtonClose}
-        onClick={onClickClose}
-        data-testid={'QuestionnaireAnswersCloseButton'}>
-        <CloseIcon />
-      </IconButton>
+      <CustomIcButton onClickClose={onClickClose}/>
       <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
-        <Stack direction="row" justifyContent="space-around" alignItems="center">
-          <MobileStepper
-            variant="progress"
-            steps={8}
-            position="static"
+        <CustomButtonStack
             activeStep={activeStep}
-            sx={{ maxWidth: '50%', flexGrow: 1, align: 'center' }}
-            nextButton={
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                data-testid="nextButtonListKQuestionnaire"
-                disabled={activeStep === 7 || isNextDisabled}>
-                Next
-                <KeyboardArrowRight />
-              </Button>
-            }
-            backButton={
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleBack}
-                data-testid="backButtonListKQuestionnaire"
-                disabled={activeStep === 0}>
-                <KeyboardArrowLeft />
-                Back
-              </Button>
-            }
-          />
-        </Stack>
+            handleNext={handleNext}
+            handleBack={handleBack}
+            isNextDisabled={isNextDisabled} />
         <Stack direction="column" justifyContent="space-around" alignItems="center">
           <TableContainer component={Paper} style={{ maxWidth: '71%' }}>
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableListK'}>
-                <TableRow>
-                  <TableCell
-                    align="left"
-                    sx={{
-                      backgroundColor: (theme) => theme.palette.primary.dark,
-                      color: (theme) => theme.palette.secondary.main
-                    }}>
-                    <Typography variant={'h5'}>{t(stepsListK[activeStep][0].question)}</Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>
-                    <RadioGroup
-                      value={radioButtonGroup1}
-                      data-testid="ListKQuestionnaireButtonGroup1"
-                      onChange={(e) => {
-                        setRadioButtonGroup1(e.target.value)
-                        handleRadioChange(e, stepsListK[activeStep][0])
-                      }}>
-                      <Stack
-                        direction="row"
-                        justifyContent="space-around"
-                        alignItems="center"
-                        spacing={1}
-                        divider={<Divider orientation="vertical" flexItem />}>
-                        <FormControlLabel
-                          value={stepsListK[activeStep][0].answer1}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][0].answer1)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][0].answer2}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][0].answer2)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][0].answer3}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][0].answer3)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][0].answer4}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][0].answer4)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][0].answer5}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][0].answer5)}</Typography>}
-                        />
-                      </Stack>
-                    </RadioGroup>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell
-                    align="left"
-                    sx={{
-                      backgroundColor: (theme) => theme.palette.primary.dark,
-                      color: (theme) => theme.palette.secondary.main
-                    }}>
-                    <Typography variant={'h5'}>{t(stepsListK[activeStep][1].question)}</Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>
-                    <RadioGroup
-                      value={radioButtonGroup2}
-                      data-testid="ListKQuestionnaireButtonGroup2"
-                      onChange={(e) => {
-                        setRadioButtonGroup2(e.target.value)
-                        handleRadioChange(e, stepsListK[activeStep][1])
-                      }}>
-                      <Stack
-                        direction="row"
-                        justifyContent="space-around"
-                        alignItems="center"
-                        spacing={1}
-                        divider={<Divider orientation="vertical" flexItem />}>
-                        <FormControlLabel
-                          value={stepsListK[activeStep][1].answer1}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][1].answer1)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][1].answer2}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][1].answer2)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][1].answer3}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][1].answer3)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][1].answer4}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][1].answer4)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][1].answer5}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][1].answer5)}</Typography>}
-                        />
-                      </Stack>
-                    </RadioGroup>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell
-                    align="left"
-                    sx={{
-                      backgroundColor: (theme) => theme.palette.primary.dark,
-                      color: (theme) => theme.palette.secondary.main
-                    }}>
-                    <Typography variant={'h5'}>{t(stepsListK[activeStep][2].question)}</Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>
-                    <RadioGroup
-                      value={radioButtonGroup3}
-                      data-testid="ListKQuestionnaireButtonGroup3"
-                      onChange={(e) => {
-                        setRadioButtonGroup3(e.target.value)
-                        handleRadioChange(e, stepsListK[activeStep][2])
-                      }}>
-                      <Stack
-                        direction="row"
-                        justifyContent="space-around"
-                        alignItems="center"
-                        spacing={1}
-                        divider={<Divider orientation="vertical" flexItem />}>
-                        <FormControlLabel
-                          value={stepsListK[activeStep][2].answer1}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][2].answer1)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][2].answer2}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][2].answer2)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][2].answer3}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][2].answer3)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][2].answer4}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][2].answer4)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][2].answer5}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][2].answer5)}</Typography>}
-                        />
-                      </Stack>
-                    </RadioGroup>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell
-                    align="left"
-                    sx={{
-                      backgroundColor: (theme) => theme.palette.primary.dark,
-                      color: (theme) => theme.palette.secondary.main
-                    }}>
-                    <Typography variant={'h5'}>{t(stepsListK[activeStep][3].question)}</Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>
-                    <RadioGroup
-                      value={radioButtonGroup4}
-                      data-testid="ListKQuestionnaireButtonGroup4"
-                      onChange={(e) => {
-                        setRadioButtonGroup4(e.target.value)
-                        handleRadioChange(e, stepsListK[activeStep][3])
-                      }}>
-                      <Stack
-                        direction="row"
-                        justifyContent="space-around"
-                        alignItems="center"
-                        spacing={1}
-                        divider={<Divider orientation="vertical" flexItem />}>
-                        <FormControlLabel
-                          value={stepsListK[activeStep][3].answer1}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][3].answer1)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][3].answer2}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][3].answer2)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][3].answer3}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][3].answer3)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][3].answer4}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][3].answer4)}</Typography>}
-                        />
-                        <FormControlLabel
-                          value={stepsListK[activeStep][3].answer5}
-                          control={<Radio />}
-                          label={<Typography variant={'h6'}>{t(stepsListK[activeStep][3].answer5)}</Typography>}
-                        />
-                      </Stack>
-                    </RadioGroup>
-                  </TableCell>
-                </TableRow>
+                <CustomTableRowSpacer t={t} activeStep={activeStep} answerIndex={0} />
+                <CustomTableRow
+                    activeStep={activeStep}
+                    handleRadioChange={handleRadioChange}
+                    radioButtonGroup={radioButtonGroup1}
+                    setRadioButtonGroup={setRadioButtonGroup1}
+                    t={t}
+                    answerIndex={0} />
+                <CustomTableRowSpacer t={t} activeStep={activeStep} answerIndex={1} />
+                <CustomTableRow
+                    activeStep={activeStep}
+                    handleRadioChange={handleRadioChange}
+                    radioButtonGroup={radioButtonGroup2}
+                    setRadioButtonGroup={setRadioButtonGroup2}
+                    t={t}
+                    answerIndex={1} />
+                <CustomTableRowSpacer t={t} activeStep={activeStep} answerIndex={2} />
+                <CustomTableRow
+                    activeStep={activeStep}
+                    handleRadioChange={handleRadioChange}
+                    radioButtonGroup={radioButtonGroup3}
+                    setRadioButtonGroup={setRadioButtonGroup3}
+                    t={t}
+                    answerIndex={2} />
+                <CustomTableRowSpacer t={t} activeStep={activeStep} answerIndex={3} />
+                <CustomTableRow
+                    activeStep={activeStep}
+                    handleRadioChange={handleRadioChange}
+                    radioButtonGroup={radioButtonGroup4}
+                    setRadioButtonGroup={setRadioButtonGroup4}
+                    t={t}
+                    answerIndex={3} />
                 {activeStep < 7 ? (
                   <>
-                    <TableRow>
-                      <TableCell
-                        align="left"
-                        sx={{
-                          backgroundColor: (theme) => theme.palette.primary.dark,
-                          color: (theme) => theme.palette.secondary.main
-                        }}>
-                        <Typography variant={'h5'}>{t(stepsListK[activeStep][4].question)}</Typography>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>
-                        <RadioGroup
-                          value={radioButtonGroup5}
-                          data-testid="ListKQuestionnaireButtonGroup5"
-                          onChange={(e) => {
-                            setRadioButtonGroup5(e.target.value)
-                            handleRadioChange(e, stepsListK[activeStep][4])
-                          }}>
-                          <Stack
-                            direction="row"
-                            justifyContent="space-around"
-                            alignItems="center"
-                            spacing={1}
-                            divider={<Divider orientation="vertical" flexItem />}>
-                            <FormControlLabel
-                              value={stepsListK[activeStep][4].answer1}
-                              control={<Radio />}
-                              label={<Typography variant={'h6'}>{t(stepsListK[activeStep][4].answer1)}</Typography>}
-                            />
-                            <FormControlLabel
-                              value={stepsListK[activeStep][4].answer2}
-                              control={<Radio />}
-                              label={<Typography variant={'h6'}>{t(stepsListK[activeStep][4].answer2)}</Typography>}
-                            />
-                            <FormControlLabel
-                              value={stepsListK[activeStep][4].answer3}
-                              control={<Radio />}
-                              label={<Typography variant={'h6'}>{t(stepsListK[activeStep][4].answer3)}</Typography>}
-                            />
-                            <FormControlLabel
-                              value={stepsListK[activeStep][4].answer4}
-                              control={<Radio />}
-                              label={<Typography variant={'h6'}>{t(stepsListK[activeStep][4].answer4)}</Typography>}
-                            />
-                            <FormControlLabel
-                              value={stepsListK[activeStep][4].answer5}
-                              control={<Radio />}
-                              label={<Typography variant={'h6'}>{t(stepsListK[activeStep][4].answer5)}</Typography>}
-                            />
-                          </Stack>
-                        </RadioGroup>
-                      </TableCell>
-                    </TableRow>
+                    <CustomTableRowSpacer t={t} activeStep={activeStep} answerIndex={4} />
+                    <CustomTableRow
+                        activeStep={activeStep}
+                        handleRadioChange={handleRadioChange}
+                        radioButtonGroup={radioButtonGroup5}
+                        setRadioButtonGroup={setRadioButtonGroup5}
+                        t={t}
+                        answerIndex={4} />
                   </>
                 ) : undefined}
               </TableBody>
             </Table>
           </TableContainer>
-          <>
-            <Stack direction="column" justifyContent="flex-end" alignItems="center">
-              {activeStep === 7 ? (
-                <div data-testid={'ActiveStepILS'}>
-                  <Button
-                    variant="contained"
-                    endIcon={<SendIcon />}
-                    color="primary"
-                    data-testid="sendButtonListKQuestionnaire"
-                    onClick={handleSend}
-                    disabled={isNextDisabled}
-                    sx={{ m: 2 }}>
-                    {t('Send')}
-                  </Button>
-                </div>
-              ) : undefined}
-            </Stack>
-          </>
+          <CustomSendButton
+              activeStep={activeStep}
+              handleSend={handleSend}
+              isNextDisabled={isNextDisabled}
+              t={t} />
         </Stack>
       </Stack>
     </Box>
   )
-}
+});
+// endregion

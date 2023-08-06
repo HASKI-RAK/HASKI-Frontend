@@ -4,19 +4,20 @@ import TableContainer from '@mui/material/TableContainer'
 import TableRow from '@mui/material/TableRow'
 import SendIcon from '@mui/icons-material/Send'
 import Paper from '@mui/material/Paper'
-import { useTranslation } from 'react-i18next'
+import {useTranslation} from 'react-i18next'
 import MobileStepper from '@mui/material/MobileStepper'
-import { Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material'
+import {Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography} from '@mui/material'
 import TableCell from '@mui/material/TableCell'
-import { DefaultButton as Button } from '@common/components'
-import React, { useState } from 'react'
+import {DefaultButton as Button} from '@common/components'
+import React, {memo, useCallback, useMemo, useState} from 'react'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import CloseIcon from '@mui/icons-material/Close'
 import IconButton from '@mui/material/IconButton'
-import { useNavigate } from 'react-router-dom'
-import { useQuestionnaireAnswersILSStore } from '@services'
-import { styleButtonClose } from './QuestionnaireQuestionsTableStyle'
+import {useNavigate} from 'react-router-dom'
+import {useQuestionnaireAnswersILSStore} from '@services'
+import {styleButtonClose} from './QuestionnaireQuestionsTableStyle'
+import PropTypes from "prop-types";
 
 /**
  * @description
@@ -453,11 +454,227 @@ const stepsLongILS = [
   ]
 ]
 
+// region Memoized Elements
+// region memo props interfaces
+interface CommonProps {
+  t: (key: string) => string;
+  activeStep: number;
+}
+interface CustomTableRowProps extends CustomTableRowSpacerProps{
+  radioButtonGroup: string;
+  handleRadioChange: (event: React.ChangeEvent<HTMLInputElement>,
+                      ilsStep: {question: string, questionLabel: string, answer1: string, answer2: string}) => void;
+  setRadioButtonGroup: (value: (((prevState: string) => string) | string)) => void;
+}
+
+interface CustomTableRowSpacerProps extends CommonProps{
+  answerIndex: number;
+  isIlsLong: boolean;
+}
+
+interface CustomIcButtonProps {
+  onClickClose: () => void;
+}
+
+interface CustomButtonStackProps {
+  activeStep: number;
+  handleNext: () => void;
+  handleBack: () => void;
+  isNextDisabled: boolean;
+  ilsLong: boolean;
+}
+
+interface CustomSendButtonProps extends CommonProps{
+  handleSend: () => void;
+  isNextDisabled: boolean;
+  ilsLong: boolean;
+}
+// endregion
+
+// region react elements
+const CustomTableRow: React.FC<CustomTableRowProps> = memo((
+    { activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex, isIlsLong}) => {
+  const ilsArray = isIlsLong ? stepsLongILS : stepsShortILS;
+  return (
+      <TableRow>
+        <TableCell>
+          <RadioGroup
+              value={radioButtonGroup}
+              data-testid={`ils${isIlsLong ? 'Long' : 'Short'}QuestionnaireILSButtonGroup${(answerIndex + 1)}`}
+              onChange={(e) => {
+                setRadioButtonGroup(e.target.value)
+                handleRadioChange(e, ilsArray[activeStep][answerIndex])
+              }}>
+            <Stack
+                direction="column"
+                justifyContent="center"
+                alignItems="flex-start"
+                spacing={0}
+                divider={<Divider orientation="horizontal" flexItem />}>
+              <FormControlLabel
+                  value={ilsArray[activeStep][answerIndex].answer1}
+                  control={<Radio />}
+                  label={<Typography variant={'h6'}>{t(ilsArray[activeStep][answerIndex].answer1)}</Typography>}
+              />
+              <FormControlLabel
+                  value={ilsArray[activeStep][answerIndex].answer2}
+                  control={<Radio />}
+                  label={<Typography variant={'h6'}>{t(ilsArray[activeStep][answerIndex].answer2)}</Typography>}
+              />
+            </Stack>
+          </RadioGroup>
+        </TableCell>
+      </TableRow>
+  );
+});
+
+const CustomTableRowSpacer: React.FC<CustomTableRowSpacerProps> = memo((
+    {t, activeStep, answerIndex, isIlsLong}) => {
+  const ilsArray = isIlsLong ? stepsLongILS : stepsShortILS;
+  return (
+      <TableRow>
+        <TableCell
+            align="left"
+            sx={{
+              backgroundColor: (theme) => theme.palette.primary.dark,
+              color: (theme) => theme.palette.secondary.main
+            }}>
+          <Typography variant={'h5'}>{t(ilsArray[activeStep][answerIndex].question)}</Typography>
+        </TableCell>
+      </TableRow>
+  );
+});
+
+const CustomIcButton: React.FC<CustomIcButtonProps> = memo(({onClickClose}) => {
+  return (
+      <IconButton
+          id={'QuestionnaireAnswersCloseButton'}
+          color="primary"
+          sx={styleButtonClose}
+          onClick={onClickClose}
+          data-testid={'QuestionnaireAnswersCloseButton'}>
+        <CloseIcon />
+      </IconButton>
+  );
+});
+
+const CustomButtonStack: React.FC<CustomButtonStackProps> = memo((
+    {activeStep, handleNext, isNextDisabled, handleBack, ilsLong}) => {
+  return (
+      <Stack direction="row" justifyContent="space-around" alignItems="center">
+        <MobileStepper
+            variant="progress"
+            steps={ilsLong ? 11 : 5}
+            position="static"
+            activeStep={activeStep}
+            sx={{ maxWidth: '50%', flexGrow: 1, align: 'center' }}
+            nextButton={
+              <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  data-testid="nextButtonILSQuestionnaire"
+                  disabled={ilsLong ? activeStep === 10 || isNextDisabled : activeStep === 4 || isNextDisabled}>
+                Next
+                <KeyboardArrowRight />
+              </Button>
+            }
+            backButton={
+              <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleBack}
+                  data-testid="backButtonILSQuestionnaire"
+                  disabled={activeStep === 0}>
+                <KeyboardArrowLeft />
+                Back
+              </Button>
+            }
+        />
+      </Stack>
+  );
+});
+
+const CustomSendButton: React.FC<CustomSendButtonProps> = memo((
+    {activeStep, handleSend, isNextDisabled, t, ilsLong})=> {
+  return (
+      <>
+        <Stack direction="column" justifyContent="flex-end" alignItems="center">
+          {(ilsLong ? activeStep === 10 : activeStep === 4) ? (
+              <div data-testid={'ActiveStepILS'}>
+                <Button
+                    variant="contained"
+                    endIcon={<SendIcon />}
+                    color="primary"
+                    data-testid="sendButtonILSQuestionnaire"
+                    disabled={isNextDisabled}
+                    onClick={handleSend}
+                    sx={{ m: 2 }}>
+                  {t('Send')}
+                </Button>
+              </div>
+          ) : undefined}
+        </Stack>
+      </>
+  );
+});
+// endregion
+
+// region required propTypes
+const commonPropTypes = {
+  t: PropTypes.func.isRequired,
+  activeStep: PropTypes.number.isRequired,
+}
+
+CustomTableRow.displayName = 'CustomTableRow';
+CustomTableRow.propTypes = {
+  ...commonPropTypes,
+  answerIndex: PropTypes.number.isRequired,
+  radioButtonGroup: PropTypes.string.isRequired,
+  handleRadioChange: PropTypes.func.isRequired,
+  setRadioButtonGroup: PropTypes.func.isRequired,
+  isIlsLong: PropTypes.bool.isRequired,
+};
+
+CustomTableRowSpacer.displayName = 'CustomTableRowSpacer';
+CustomTableRowSpacer.propTypes = {
+  ...commonPropTypes,
+  answerIndex: PropTypes.number.isRequired,
+  isIlsLong: PropTypes.bool.isRequired,
+}
+
+CustomIcButton.displayName = 'CustomIconButton';
+CustomIcButton.propTypes = {
+  onClickClose: PropTypes.func.isRequired,
+}
+
+CustomButtonStack.displayName = 'CustomButtonStack';
+CustomButtonStack.propTypes = {
+  activeStep: PropTypes.number.isRequired,
+  handleNext: PropTypes.func.isRequired,
+  handleBack: PropTypes.func.isRequired,
+  isNextDisabled: PropTypes.bool.isRequired,
+  ilsLong: PropTypes.bool.isRequired,
+}
+
+CustomSendButton.displayName = 'CustomTableRow';
+CustomSendButton.propTypes = {
+  ...commonPropTypes,
+  handleSend: PropTypes.func.isRequired,
+  isNextDisabled: PropTypes.bool.isRequired,
+  ilsLong: PropTypes.bool.isRequired,
+};
+// endregion
+// endregion
+
+// region TableILSQuestions
 type TableILSQuestionsProps = {
   ilsLong: boolean
 }
 
-export const TableILSQuestions = ({ ilsLong }: TableILSQuestionsProps) => {
+export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
+  TableILSQuestions.displayName = 'TableILSQuestions';
+
   const { t } = useTranslation()
 
   const navigate = useNavigate()
@@ -467,7 +684,8 @@ export const TableILSQuestions = ({ ilsLong }: TableILSQuestionsProps) => {
   const [radioButtonGroup3, setRadioButtonGroup3] = useState('')
   const [radioButtonGroup4, setRadioButtonGroup4] = useState('')
 
-  //if all radio buttons are selected, the next button is enabled (They are reset to their previous Value when the user goes back)
+  //if all radio buttons are selected, the next button is enabled
+  // (They are reset to their previous Value when the user goes back)
   const isNextDisabled = !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4
 
   const { questionnaireAnswers, setQuestionnaireAnswers } = useQuestionnaireAnswersILSStore()
@@ -476,42 +694,30 @@ export const TableILSQuestions = ({ ilsLong }: TableILSQuestionsProps) => {
   window.addEventListener('beforeunload', (e: BeforeUnloadEvent) => {
     // Cancel the event
     e.preventDefault()
-
     // Chrome requires returnValue to be set
     e.returnValue = ''
   })
 
-  const handleNext = () => {
+  const setRadioButtonGroups = (newActiveStep: number) => {
+    const stepsILS = ilsLong ? stepsLongILS : stepsShortILS;
+
+    setRadioButtonGroup1(setRadioButtonValue(stepsILS[newActiveStep][0]));
+    setRadioButtonGroup2(setRadioButtonValue(stepsILS[newActiveStep][1]));
+    setRadioButtonGroup3(setRadioButtonValue(stepsILS[newActiveStep][2]));
+    setRadioButtonGroup4(setRadioButtonValue(stepsILS[newActiveStep][3]));
+  };
+
+  const handleNext = useCallback(() => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
-    if (ilsLong) {
-      setRadioButtonGroup1(setRadioButtonValue(stepsLongILS[activeStep + 1][0]))
-      setRadioButtonGroup2(setRadioButtonValue(stepsLongILS[activeStep + 1][1]))
-      setRadioButtonGroup3(setRadioButtonValue(stepsLongILS[activeStep + 1][2]))
-      setRadioButtonGroup4(setRadioButtonValue(stepsLongILS[activeStep + 1][3]))
-    } else {
-      setRadioButtonGroup1(setRadioButtonValue(stepsShortILS[activeStep + 1][0]))
-      setRadioButtonGroup2(setRadioButtonValue(stepsShortILS[activeStep + 1][1]))
-      setRadioButtonGroup3(setRadioButtonValue(stepsShortILS[activeStep + 1][2]))
-      setRadioButtonGroup4(setRadioButtonValue(stepsShortILS[activeStep + 1][3]))
-    }
-  }
+    setRadioButtonGroups(activeStep + 1)
+  }, [activeStep]);
 
-  const handleBack = () => {
+  const handleBack = useCallback(() => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
-    if (ilsLong) {
-      setRadioButtonGroup1(setRadioButtonValue(stepsLongILS[activeStep - 1][0]))
-      setRadioButtonGroup2(setRadioButtonValue(stepsLongILS[activeStep - 1][1]))
-      setRadioButtonGroup3(setRadioButtonValue(stepsLongILS[activeStep - 1][2]))
-      setRadioButtonGroup4(setRadioButtonValue(stepsLongILS[activeStep - 1][3]))
-    } else {
-      setRadioButtonGroup1(setRadioButtonValue(stepsShortILS[activeStep - 1][0]))
-      setRadioButtonGroup2(setRadioButtonValue(stepsShortILS[activeStep - 1][1]))
-      setRadioButtonGroup3(setRadioButtonValue(stepsShortILS[activeStep - 1][2]))
-      setRadioButtonGroup4(setRadioButtonValue(stepsShortILS[activeStep - 1][3]))
-    }
-  }
+    setRadioButtonGroups(activeStep - 1)
+  }, [activeStep]);
 
-  const handleSend = () => {
+  const handleSend = useCallback(() => {
     const ILSarray = Object.entries(questionnaireAnswers).filter(([key]) => key !== '')
     const listKJson = {
       "list_k": [
@@ -529,436 +735,97 @@ export const TableILSQuestions = ({ ilsLong }: TableILSQuestionsProps) => {
     });
     console.log(outputJson)
     //todo: send to server
-  }
+  }, [questionnaireAnswers]);
 
-  const setRadioButtonValue = (ilsStep: {
+  const setRadioButtonValue = useMemo(() => (ilsStep: {
     question: string
     questionLabel: string
     answer1: string
     answer2: string
   }): string => {
-    //if the question is already answered, the answer is set to the value of the radio button/ else radio button is not set
-    if (questionnaireAnswers[ilsStep.questionLabel as keyof typeof questionnaireAnswers] === 'a') {
-      return ilsStep.answer1
-    } else if (questionnaireAnswers[ilsStep.questionLabel as keyof typeof questionnaireAnswers] === 'b') {
-      return ilsStep.answer2
-    } else {
-      return ''
-    }
-  }
+    //if the question is already answered, the answer is set to the value of the radio button, else radio button is not set
+    const answerType = questionnaireAnswers[ilsStep.questionLabel as keyof typeof questionnaireAnswers]
+    return answerType === 'a' ? ilsStep.answer1 : answerType === 'b' ? ilsStep.answer2 : ''
+  }, [questionnaireAnswers]);
 
-  const handleRadioChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }
-  ): void => {
+  const handleRadioChange = useCallback((
+      event: React.ChangeEvent<HTMLInputElement>,
+      ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }
+  ) : void => {
     const radioButtonOptions = [ilsStep.answer1, ilsStep.answer2]
-    let selectedAnswer
-    if (radioButtonOptions.indexOf(event.target.value) === 0) {
-      selectedAnswer = 'a'
-    } else {
-      selectedAnswer = 'b'
-    }
+    const selectedAnswer = radioButtonOptions.indexOf(event.target.value) === 0 ? 'a' : 'b'
 
     setQuestionnaireAnswers(ilsStep.questionLabel, selectedAnswer.toString())
-  }
+  }, [setQuestionnaireAnswers]);
 
-  const onClickClose = () => {
+  const onClickClose = useCallback(() => {
     if (window.confirm(t('CloseWebsite').toString())) {
       navigate('/')
     }
-  }
-
-  const LongIls = () => {
-    return (
-      <TableBody key={'TableILSBody'}>
-        <TableRow>
-          <TableCell
-            sx={{
-              backgroundColor: (theme) => theme.palette.primary.dark,
-              color: (theme) => theme.palette.secondary.main
-            }}
-            align="left">
-            <Typography variant={'h5'}>{t(stepsLongILS[activeStep][0].question)}</Typography>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <RadioGroup
-              value={radioButtonGroup1}
-              data-testid="ilsLongQuestionnaireILSButtonGroup1"
-              onChange={(e) => {
-                setRadioButtonGroup1(e.target.value)
-                handleRadioChange(e, stepsLongILS[activeStep][0])
-              }}>
-              <Stack
-                direction="column"
-                justifyContent="center"
-                alignItems="flex-start"
-                spacing={0}
-                divider={<Divider orientation="horizontal" flexItem />}>
-                <FormControlLabel
-                  value={stepsLongILS[activeStep][0].answer1}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsLongILS[activeStep][0].answer1)}</Typography>}
-                />
-                <FormControlLabel
-                  value={stepsLongILS[activeStep][0].answer2}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsLongILS[activeStep][0].answer2)}</Typography>}
-                />
-              </Stack>
-            </RadioGroup>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell
-            align="left"
-            sx={{
-              backgroundColor: (theme) => theme.palette.primary.dark,
-              color: (theme) => theme.palette.secondary.main
-            }}>
-            <Typography variant={'h5'}>{t(stepsLongILS[activeStep][1].question)}</Typography>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <RadioGroup
-              value={radioButtonGroup2}
-              data-testid="ilsLongQuestionnaireILSButtonGroup2"
-              onChange={(e) => {
-                setRadioButtonGroup2(e.target.value)
-                handleRadioChange(e, stepsLongILS[activeStep][1])
-              }}>
-              <Stack
-                direction="column"
-                justifyContent="center"
-                alignItems="flex-start"
-                spacing={0}
-                divider={<Divider orientation="horizontal" flexItem />}>
-                <FormControlLabel
-                  value={stepsLongILS[activeStep][1].answer1}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsLongILS[activeStep][1].answer1)}</Typography>}
-                />
-                <FormControlLabel
-                  value={stepsLongILS[activeStep][1].answer2}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsLongILS[activeStep][1].answer2)}</Typography>}
-                />
-              </Stack>
-            </RadioGroup>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell
-            align="left"
-            sx={{
-              backgroundColor: (theme) => theme.palette.primary.dark,
-              color: (theme) => theme.palette.secondary.main
-            }}>
-            <Typography variant={'h5'}>{t(stepsLongILS[activeStep][2].question)}</Typography>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <RadioGroup
-              value={radioButtonGroup3}
-              data-testid="ilsLongQuestionnaireILSButtonGroup3"
-              onChange={(e) => {
-                setRadioButtonGroup3(e.target.value)
-                handleRadioChange(e, stepsLongILS[activeStep][2])
-              }}>
-              <Stack
-                direction="column"
-                justifyContent="center"
-                alignItems="flex-start"
-                spacing={0}
-                divider={<Divider orientation="horizontal" flexItem />}>
-                <FormControlLabel
-                  value={stepsLongILS[activeStep][2].answer1}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsLongILS[activeStep][2].answer1)}</Typography>}
-                />
-                <FormControlLabel
-                  value={stepsLongILS[activeStep][2].answer2}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsLongILS[activeStep][2].answer2)}</Typography>}
-                />
-              </Stack>
-            </RadioGroup>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell
-            align="left"
-            sx={{
-              backgroundColor: (theme) => theme.palette.primary.dark,
-              color: (theme) => theme.palette.secondary.main
-            }}>
-            <Typography variant={'h5'}>{t(stepsLongILS[activeStep][3].question)}</Typography>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <RadioGroup
-              value={radioButtonGroup4}
-              data-testid="ilsLongQuestionnaireILSButtonGroup4"
-              onChange={(e) => {
-                setRadioButtonGroup4(e.target.value)
-                handleRadioChange(e, stepsLongILS[activeStep][3])
-              }}>
-              <Stack
-                direction="column"
-                justifyContent="center"
-                alignItems="flex-start"
-                spacing={0}
-                divider={<Divider orientation="horizontal" flexItem />}>
-                <FormControlLabel
-                  value={stepsLongILS[activeStep][3].answer1}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsLongILS[activeStep][3].answer1)}</Typography>}
-                />
-                <FormControlLabel
-                  value={stepsLongILS[activeStep][3].answer2}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsLongILS[activeStep][3].answer2)}</Typography>}
-                />
-              </Stack>
-            </RadioGroup>
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    )
-  }
-
-  const ShortIls = () => {
-    return (
-      <TableBody key={'TableILSBody'}>
-        <TableRow>
-          <TableCell
-            align="left"
-            sx={{
-              backgroundColor: (theme) => theme.palette.primary.dark,
-              color: (theme) => theme.palette.secondary.main
-            }}>
-            <Typography variant={'h5'}>{t(stepsShortILS[activeStep][0].question)}</Typography>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <RadioGroup
-              value={radioButtonGroup1}
-              data-testid="ilsShortQuestionnaireILSButtonGroup1"
-              onChange={(e) => {
-                setRadioButtonGroup1(e.target.value)
-                handleRadioChange(e, stepsShortILS[activeStep][0])
-              }}>
-              <Stack
-                direction="column"
-                justifyContent="center"
-                alignItems="flex-start"
-                spacing={0}
-                divider={<Divider orientation="horizontal" flexItem />}>
-                <FormControlLabel
-                  value={stepsShortILS[activeStep][0].answer1}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsShortILS[activeStep][0].answer1)}</Typography>}
-                />
-                <FormControlLabel
-                  value={stepsShortILS[activeStep][0].answer2}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsShortILS[activeStep][0].answer2)}</Typography>}
-                />
-              </Stack>
-            </RadioGroup>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell
-            align="left"
-            sx={{
-              backgroundColor: (theme) => theme.palette.primary.dark,
-              color: (theme) => theme.palette.secondary.main
-            }}>
-            <Typography variant={'h5'}>{t(stepsShortILS[activeStep][1].question)}</Typography>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <RadioGroup
-              value={radioButtonGroup2}
-              data-testid="ilsShortQuestionnaireILSButtonGroup2"
-              onChange={(e) => {
-                setRadioButtonGroup2(e.target.value)
-                handleRadioChange(e, stepsShortILS[activeStep][1])
-              }}>
-              <Stack
-                direction="column"
-                justifyContent="center"
-                alignItems="flex-start"
-                spacing={0}
-                divider={<Divider orientation="horizontal" flexItem />}>
-                <FormControlLabel
-                  value={stepsShortILS[activeStep][1].answer1}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsShortILS[activeStep][1].answer1)}</Typography>}
-                />
-                <FormControlLabel
-                  value={stepsShortILS[activeStep][1].answer2}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsShortILS[activeStep][1].answer2)}</Typography>}
-                />
-              </Stack>
-            </RadioGroup>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell
-            align="left"
-            sx={{
-              backgroundColor: (theme) => theme.palette.primary.dark,
-              color: (theme) => theme.palette.secondary.main
-            }}>
-            <Typography variant={'h5'}>{t(stepsShortILS[activeStep][2].question)}</Typography>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <RadioGroup
-              value={radioButtonGroup3}
-              data-testid="ilsShortQuestionnaireILSButtonGroup3"
-              onChange={(e) => {
-                setRadioButtonGroup3(e.target.value)
-                handleRadioChange(e, stepsShortILS[activeStep][2])
-              }}>
-              <Stack
-                direction="column"
-                justifyContent="center"
-                alignItems="flex-start"
-                spacing={0}
-                divider={<Divider orientation="horizontal" flexItem />}>
-                <FormControlLabel
-                  value={stepsShortILS[activeStep][2].answer1}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsShortILS[activeStep][2].answer1)}</Typography>}
-                />
-                <FormControlLabel
-                  value={stepsShortILS[activeStep][2].answer2}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsShortILS[activeStep][2].answer2)}</Typography>}
-                />
-              </Stack>
-            </RadioGroup>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell
-            align="left"
-            sx={{
-              backgroundColor: (theme) => theme.palette.primary.dark,
-              color: (theme) => theme.palette.secondary.main
-            }}>
-            <Typography variant={'h5'}>{t(stepsShortILS[activeStep][3].question)}</Typography>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <RadioGroup
-              value={radioButtonGroup4}
-              data-testid="ilsShortQuestionnaireILSButtonGroup4"
-              onChange={(e) => {
-                setRadioButtonGroup4(e.target.value)
-                handleRadioChange(e, stepsShortILS[activeStep][3])
-              }}>
-              <Stack
-                direction="column"
-                justifyContent="center"
-                alignItems="flex-start"
-                spacing={0}
-                divider={<Divider orientation="horizontal" flexItem />}>
-                <FormControlLabel
-                  value={stepsShortILS[activeStep][3].answer1}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsShortILS[activeStep][3].answer1)}</Typography>}
-                />
-                <FormControlLabel
-                  value={stepsShortILS[activeStep][3].answer2}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsShortILS[activeStep][3].answer2)}</Typography>}
-                />
-              </Stack>
-            </RadioGroup>
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    )
-  }
+  }, [t, navigate]);
 
   return (
     <Box>
-      <IconButton
-        color="primary"
-        sx={styleButtonClose}
-        onClick={onClickClose}
-        data-testid={'QuestionnaireAnswersCloseButton'}>
-        <CloseIcon />
-      </IconButton>
+      <CustomIcButton onClickClose={onClickClose} />
       <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
-        <Stack direction="row" justifyContent="space-around" alignItems="center">
-          <MobileStepper
-            variant="progress"
-            steps={ilsLong ? 11 : 5}
-            position="static"
+        <CustomButtonStack
             activeStep={activeStep}
-            sx={{ maxWidth: '50%', flexGrow: 1, align: 'center' }}
-            nextButton={
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                data-testid="nextButtonILSQuestionnaire"
-                disabled={ilsLong ? activeStep === 10 || isNextDisabled : activeStep === 4 || isNextDisabled}>
-                Next
-                <KeyboardArrowRight />
-              </Button>
-            }
-            backButton={
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleBack}
-                data-testid="backButtonILSQuestionnaire"
-                disabled={activeStep === 0}>
-                <KeyboardArrowLeft />
-                Back
-              </Button>
-            }
-          />
-        </Stack>
+            handleNext={handleNext}
+            handleBack={handleBack}
+            isNextDisabled={isNextDisabled}
+            ilsLong={ilsLong} />
         <Stack direction="column" justifyContent="space-around" alignItems="center">
           <TableContainer component={Paper} style={{ maxWidth: '51%' }}>
-            <Table style={{ minWidth: '300px' }}>{ilsLong ? LongIls() : ShortIls()}</Table>
+            <Table style={{ minWidth: '300px' }}>
+              <TableBody key={'TableILSBody'}>
+                <CustomTableRowSpacer answerIndex={0} isIlsLong={ilsLong} t={t} activeStep={activeStep} />
+                <CustomTableRow
+                    radioButtonGroup={radioButtonGroup1}
+                    handleRadioChange={handleRadioChange}
+                    setRadioButtonGroup={setRadioButtonGroup1}
+                    answerIndex={0}
+                    isIlsLong={ilsLong}
+                    t={t}
+                    activeStep={activeStep} />
+                <CustomTableRowSpacer answerIndex={1} isIlsLong={ilsLong} t={t} activeStep={activeStep} />
+                <CustomTableRow
+                    radioButtonGroup={radioButtonGroup2}
+                    handleRadioChange={handleRadioChange}
+                    setRadioButtonGroup={setRadioButtonGroup2}
+                    answerIndex={1}
+                    isIlsLong={ilsLong}
+                    t={t}
+                    activeStep={activeStep} />
+                <CustomTableRowSpacer answerIndex={2} isIlsLong={ilsLong} t={t} activeStep={activeStep} />
+                <CustomTableRow
+                    radioButtonGroup={radioButtonGroup3}
+                    handleRadioChange={handleRadioChange}
+                    setRadioButtonGroup={setRadioButtonGroup3}
+                    answerIndex={2}
+                    isIlsLong={ilsLong}
+                    t={t}
+                    activeStep={activeStep} />
+                <CustomTableRowSpacer answerIndex={3} isIlsLong={ilsLong} t={t} activeStep={activeStep} />
+                <CustomTableRow
+                    radioButtonGroup={radioButtonGroup4}
+                    handleRadioChange={handleRadioChange}
+                    setRadioButtonGroup={setRadioButtonGroup4}
+                    answerIndex={3}
+                    isIlsLong={ilsLong}
+                    t={t}
+                    activeStep={activeStep} />
+              </TableBody>
+            </Table>
           </TableContainer>
-          <>
-            <Stack direction="column" justifyContent="flex-end" alignItems="center">
-              {(ilsLong ? activeStep === 10 : activeStep === 4) ? (
-                <div data-testid={'ActiveStepILS'}>
-                  <Button
-                    variant="contained"
-                    endIcon={<SendIcon />}
-                    color="primary"
-                    data-testid="sendButtonILSQuestionnaire"
-                    disabled={isNextDisabled}
-                    onClick={handleSend}
-                    sx={{ m: 2 }}>
-                    {t('Send')}
-                  </Button>
-                </div>
-              ) : undefined}
-            </Stack>
-          </>
+          <CustomSendButton
+              handleSend={handleSend}
+              isNextDisabled={isNextDisabled}
+              ilsLong={ilsLong}
+              t={t}
+              activeStep={activeStep} />
         </Stack>
       </Stack>
     </Box>
   )
-}
+});
+// endregion
