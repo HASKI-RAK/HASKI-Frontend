@@ -2,22 +2,15 @@ import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableContainer from '@mui/material/TableContainer'
 import TableRow from '@mui/material/TableRow'
-import SendIcon from '@mui/icons-material/Send'
 import Paper from '@mui/material/Paper'
 import {useTranslation} from 'react-i18next'
-import MobileStepper from '@mui/material/MobileStepper'
 import {Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography} from '@mui/material'
 import TableCell from '@mui/material/TableCell'
-import {DefaultButton as Button} from '@common/components'
 import React, {memo, useCallback, useMemo, useState} from 'react'
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
-import CloseIcon from '@mui/icons-material/Close'
-import IconButton from '@mui/material/IconButton'
 import {useNavigate} from 'react-router-dom'
 import {useQuestionnaireAnswersListKStore} from '@services'
-import {styleButtonClose} from './QuestionnaireQuestionsTableStyle'
 import PropTypes from 'prop-types';
+import {MemoButtonStack, MemoIcButton, MemoSendButton, MemoTableRowQuestion} from './TableCommonComponents'
 
 /**
  * @description
@@ -395,13 +388,10 @@ const stepsListK = [
 ]
 
 // region Memoized Elements
-// region memo props interfaces
-interface CommonProps {
+interface MemoTableRowAnswersProps {
   t: (key: string) => string;
   activeStep: number;
-}
-
-interface CustomTableRowProps extends CustomTableRowSpacerProps{
+  answerIndex: number;
   radioButtonGroup: string;
   handleRadioChange: (event: React.ChangeEvent<HTMLInputElement>,
                       listkStep: {question: string, questionLabel: string, answer1: string,
@@ -409,29 +399,7 @@ interface CustomTableRowProps extends CustomTableRowSpacerProps{
   setRadioButtonGroup: (value: (((prevState: string) => string) | string)) => void;
 }
 
-interface CustomTableRowSpacerProps extends CommonProps{
-  answerIndex: number;
-}
-
-interface CustomIcButtonProps {
-  onClickClose: () => void;
-}
-
-interface CustomButtonStackProps {
-  activeStep: number;
-  handleNext: () => void;
-  handleBack: () => void;
-  isNextDisabled: boolean;
-}
-
-interface CustomSendButtonProps extends CommonProps{
-  handleSend: () => void;
-  isNextDisabled: boolean;
-}
-// endregion
-
-// region memo react elements
-const CustomTableRow: React.FC<CustomTableRowProps> = memo((
+const MemoTableRowAnswers: React.FC<MemoTableRowAnswersProps> = memo((
     { activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex}) => {
 
   return (
@@ -482,137 +450,15 @@ const CustomTableRow: React.FC<CustomTableRowProps> = memo((
   );
 });
 
-const CustomTableRowSpacer: React.FC<CustomTableRowSpacerProps> = memo(({t, activeStep, answerIndex}) => {
-  return (
-      <TableRow>
-        <TableCell
-            align="left"
-            sx={{
-              backgroundColor: (theme) => theme.palette.primary.dark,
-              color: (theme) => theme.palette.secondary.main
-            }}>
-          <Typography variant={'h5'}>{t(stepsListK[activeStep][answerIndex].question)}</Typography>
-        </TableCell>
-      </TableRow>
-  );
-});
-
-const CustomIcButton: React.FC<CustomIcButtonProps> = memo(({onClickClose}) => {
-  return (
-      <IconButton
-          id={'QuestionnaireAnswersCloseButton'}
-          color="primary"
-          sx={styleButtonClose}
-          onClick={onClickClose}
-          data-testid={'QuestionnaireAnswersCloseButton'}>
-        <CloseIcon />
-      </IconButton>
-  );
-});
-
-const CustomButtonStack: React.FC<CustomButtonStackProps> = memo((
-    {activeStep, handleNext, isNextDisabled, handleBack}) => {
-  return (
-      <Stack direction="row" justifyContent="space-around" alignItems="center">
-        <MobileStepper
-            variant="progress"
-            steps={8}
-            position="static"
-            activeStep={activeStep}
-            sx={{ maxWidth: '50%', flexGrow: 1, align: 'center' }}
-            nextButton={
-              <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  data-testid="nextButtonListKQuestionnaire"
-                  disabled={activeStep === 7 || isNextDisabled}>
-                Next
-                <KeyboardArrowRight />
-              </Button>
-            }
-            backButton={
-              <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleBack}
-                  data-testid="backButtonListKQuestionnaire"
-                  disabled={activeStep === 0}>
-                <KeyboardArrowLeft />
-                Back
-              </Button>
-            }
-        />
-      </Stack>
-  );
-});
-
-const CustomSendButton: React.FC<CustomSendButtonProps> = memo((
-    {activeStep, handleSend, isNextDisabled, t})=> {
-  return (
-      <>
-        <Stack direction="column" justifyContent="flex-end" alignItems="center">
-          {activeStep === 7 ? (
-              <div data-testid={'ActiveStepILS'}>
-                <Button
-                    variant="contained"
-                    endIcon={<SendIcon/>}
-                    color="primary"
-                    data-testid="sendButtonListKQuestionnaire"
-                    onClick={handleSend}
-                    disabled={isNextDisabled}
-                    sx={{m: 2}}>
-                  {t('Send')}
-                </Button>
-              </div>
-          ) : undefined}
-        </Stack>
-      </>
-  );
-});
-//endregion
-
-// region memo required propTypes
-const commonPropTypes = {
+MemoTableRowAnswers.displayName = 'MemoTableRowAnswers';
+MemoTableRowAnswers.propTypes = {
   t: PropTypes.func.isRequired,
   activeStep: PropTypes.number.isRequired,
-}
-
-CustomTableRow.displayName = 'CustomTableRow';
-CustomTableRow.propTypes = {
-  ...commonPropTypes,
   answerIndex: PropTypes.number.isRequired,
   radioButtonGroup: PropTypes.string.isRequired,
   handleRadioChange: PropTypes.func.isRequired,
   setRadioButtonGroup: PropTypes.func.isRequired,
 };
-
-CustomTableRowSpacer.displayName = 'CustomTableRowSpacer';
-CustomTableRowSpacer.propTypes = {
-  ...commonPropTypes,
-  answerIndex: PropTypes.number.isRequired,
-}
-
-CustomIcButton.displayName = 'CustomIconButton';
-CustomIcButton.propTypes = {
-  onClickClose: PropTypes.func.isRequired,
-}
-
-CustomButtonStack.displayName = 'CustomButtonStack';
-CustomButtonStack.propTypes = {
-  activeStep: PropTypes.number.isRequired,
-  handleNext: PropTypes.func.isRequired,
-  handleBack: PropTypes.func.isRequired,
-  isNextDisabled: PropTypes.bool.isRequired,
-}
-
-CustomSendButton.displayName = 'CustomTableRow';
-CustomSendButton.propTypes = {
-  ...commonPropTypes,
-  handleSend: PropTypes.func.isRequired,
-  isNextDisabled: PropTypes.bool.isRequired,
-};
-// endregion
 // endregion
 
 // region TableListKQuestions
@@ -737,43 +583,45 @@ export const TableListKQuestions = memo(() => {
 
   return (
     <Box>
-      <CustomIcButton onClickClose={onClickClose}/>
+      <MemoIcButton onClickClose={onClickClose} />
       <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
-        <CustomButtonStack
+        <MemoButtonStack
             activeStep={activeStep}
             handleNext={handleNext}
             handleBack={handleBack}
-            isNextDisabled={isNextDisabled} />
+            steps={8}
+            idType={'ListK'}
+            disabled={activeStep === 7 || isNextDisabled} />
         <Stack direction="column" justifyContent="space-around" alignItems="center">
           <TableContainer component={Paper} style={{ maxWidth: '71%' }}>
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableListK'}>
-                <CustomTableRowSpacer t={t} activeStep={activeStep} answerIndex={0} />
-                <CustomTableRow
+                <MemoTableRowQuestion question={t(stepsListK[activeStep][0].question)} />
+                <MemoTableRowAnswers
                     activeStep={activeStep}
                     handleRadioChange={handleRadioChange}
                     radioButtonGroup={radioButtonGroup1}
                     setRadioButtonGroup={setRadioButtonGroup1}
                     t={t}
                     answerIndex={0} />
-                <CustomTableRowSpacer t={t} activeStep={activeStep} answerIndex={1} />
-                <CustomTableRow
+                <MemoTableRowQuestion question={t(stepsListK[activeStep][1].question)} />
+                <MemoTableRowAnswers
                     activeStep={activeStep}
                     handleRadioChange={handleRadioChange}
                     radioButtonGroup={radioButtonGroup2}
                     setRadioButtonGroup={setRadioButtonGroup2}
                     t={t}
                     answerIndex={1} />
-                <CustomTableRowSpacer t={t} activeStep={activeStep} answerIndex={2} />
-                <CustomTableRow
+                <MemoTableRowQuestion question={t(stepsListK[activeStep][2].question)} />
+                <MemoTableRowAnswers
                     activeStep={activeStep}
                     handleRadioChange={handleRadioChange}
                     radioButtonGroup={radioButtonGroup3}
                     setRadioButtonGroup={setRadioButtonGroup3}
                     t={t}
                     answerIndex={2} />
-                <CustomTableRowSpacer t={t} activeStep={activeStep} answerIndex={3} />
-                <CustomTableRow
+                <MemoTableRowQuestion question={t(stepsListK[activeStep][3].question)} />
+                <MemoTableRowAnswers
                     activeStep={activeStep}
                     handleRadioChange={handleRadioChange}
                     radioButtonGroup={radioButtonGroup4}
@@ -782,8 +630,8 @@ export const TableListKQuestions = memo(() => {
                     answerIndex={3} />
                 {activeStep < 7 ? (
                   <>
-                    <CustomTableRowSpacer t={t} activeStep={activeStep} answerIndex={4} />
-                    <CustomTableRow
+                    <MemoTableRowQuestion question={t(stepsListK[activeStep][4].question)} />
+                    <MemoTableRowAnswers
                         activeStep={activeStep}
                         handleRadioChange={handleRadioChange}
                         radioButtonGroup={radioButtonGroup5}
@@ -795,11 +643,12 @@ export const TableListKQuestions = memo(() => {
               </TableBody>
             </Table>
           </TableContainer>
-          <CustomSendButton
-              activeStep={activeStep}
+          <MemoSendButton
+              t={t}
               handleSend={handleSend}
               isNextDisabled={isNextDisabled}
-              t={t} />
+              isValid={activeStep === 7}
+              idType={'ListK'} />
         </Stack>
       </Stack>
     </Box>
