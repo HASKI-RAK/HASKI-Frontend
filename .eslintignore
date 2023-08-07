@@ -8,3 +8,7 @@ webpack.config.prod.js
 tsconfig.json
 jest.config.js
 auto-order-json-translations.ts
+*.test.*
+*.config.*
+RingBuffer.ts
+index.html
