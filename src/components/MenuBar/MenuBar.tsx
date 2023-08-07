@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   DefaultAppBar as AppBar,
@@ -55,14 +55,13 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
   const { addSnackbar } = useContext(SnackbarContext)
   const { isAuth, logout } = useContext(AuthContext)
-  const { courseId } = useParams() as { courseId: string }
+  const { courseId } = useParams<string>()
   const { t } = useTranslation()
   const [loadingTopics, setLoadingTopics] = useState(true)
   const [topicsPath, setTopicsPath] = useState<Topic[]>([])
   const fetchUser = usePersistedStore((state) => state.fetchUser)
   const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
-  const reversedTopics: Topic[] = [...topicsPath]
-  reversedTopics.sort((a, b) => reversedTopics.indexOf(b) - reversedTopics.indexOf(a))
+  const reversedTopics: Topic[] = [...topicsPath].sort((a, b) => reversedTopics.indexOf(b) - reversedTopics.indexOf(a))
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -112,15 +111,20 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     navigate('/login')
   }
 
-  const skeletonItems = []
-  for (let i = 0; i < 3; i++) {
-    skeletonItems.push(
-      <React.Fragment key={`MenuBar-Topic-Skeleton-${i}`}>
-        <Skeleton variant="text" width={'500'} height={55} />
-        <Skeleton variant="text" width={'70%'} height={20} />
-      </React.Fragment>
-    )
-  }
+  // Use useMemo to memoize the skeletonItems array
+  const skeletonItems = useMemo(() => {
+    const items = []
+    for (let i = 0; i < 3; i++) {
+      items.push(
+        <React.Fragment key={`LocalNav-Skeleton-${i}`}>
+          <Skeleton data-testid={`LocalNav-Skeleton-Topic-${i}`} variant="text" width={'100%'} height={55} />
+          <Skeleton variant="text" width={'70%'} height={20} />
+          <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />
+        </React.Fragment>
+      )
+    }
+    return items
+  }, [])
 
   const navigate = useNavigate()
   return (
@@ -231,7 +235,8 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                                     flexDirection: 'row',
                                     flexWrap: 'wrap',
                                     justifyContent: 'start'
-                                  }}></Box>
+                                  }}
+                                />
                               </Grid>
                               {topicsPath.indexOf(topic) !== topicsPath.length && <Divider flexItem />}
                             </>

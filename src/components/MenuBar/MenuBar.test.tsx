@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
 import * as router from 'react-router'
 import React from 'react'
-import { mockServices } from '../../../jest.setup'
+import { mockServices } from 'jest.setup'
 
 const navigate = jest.fn()
 

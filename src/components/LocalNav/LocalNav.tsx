@@ -7,18 +7,18 @@ import {
   DefaultAccordion as Accordion,
   DefaultSkeleton as Skeleton,
   DefaultStack as Stack,
-  DefaultLink as Link
 } from '@common/components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Topic } from '@services'
 import { LearningPathElement } from '@core'
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useMemo, useState } from 'react'
 import {
   useLearningPathTopic as _useLearningPathTopic,
   useLearningPathElement as _useLearningPathElement
 } from './LocalNav.hooks'
+import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
 
 /**
  *  Local navigation component props.
@@ -52,56 +52,20 @@ const LocalNav = ({
     setOpenAccordion(openAccordion === index ? null : index)
   }
 
-  const skeletonItems = []
-  for (let i = 0; i < 3; i++) {
-    skeletonItems.push(
-      <React.Fragment key={`LocalNav-Skeleton-${i}`}>
-        <Skeleton data-testid={`LocalNav-Skeleton-Topic-${i}`} variant="text" width={'100%'} height={55} />
-        <Skeleton variant="text" width={'70%'} height={20} />
-        <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />
-      </React.Fragment>
-    )
-  }
-
-  const LazyLearningPathElement = ({ topic }: { topic: Topic }) => {
-    const { loadingElements, learningPaths } = useLearningPathElement(topic, courseId)
-    const navigate = useNavigate()
-
-    if (loadingElements) {
-      return (
-        <>
-          <Skeleton data-testid={`LocalNav-Skeleton-Element`} variant="text" width={'100%'} height={55} />
+  // Use useMemo to memoize the skeletonItems array
+  const skeletonItems = useMemo(() => {
+    const items = []
+    for (let i = 0; i < 3; i++) {
+      items.push(
+        <React.Fragment key={`LocalNav-Skeleton-${i}`}>
+          <Skeleton data-testid={`LocalNav-Skeleton-Topic-${i}`} variant="text" width={'100%'} height={55} />
           <Skeleton variant="text" width={'70%'} height={20} />
           <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />
-        </>
+        </React.Fragment>
       )
     }
-
-    return (
-      <>
-        {learningPaths.path.map((learningElement) => (
-          <Typography variant="body1" key={learningElement.learning_element.name}>
-            <Link
-              data-testid={learningElement.learning_element.name}
-              underline="hover"
-              variant="body2"
-              color="inherit"
-              sx={{
-                cursor: 'pointer',
-                padding: '8px',
-                borderRadius: 10,
-                '&:hover': { backgroundColor: (theme) => theme.palette.primary.main }
-              }}
-              onClick={() => {
-                navigate(`/topics/${topic.name}/${learningElement.learning_element.name}`)
-              }}>
-              {learningElement.position} {learningElement.learning_element.name}
-            </Link>
-          </Typography>
-        ))}
-      </>
-    )
-  }
+    return items
+  }, [])
 
   return (
     <Box flexGrow={1}>
@@ -143,8 +107,12 @@ const LocalNav = ({
               </AccordionSummary>
               <AccordionDetails sx={{ flexDirection: 'column' }}>
                 {openAccordion === index && (
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <LazyLearningPathElement topic={topic} />
+                  <Suspense fallback={<div>{t('loading')}</div>}>
+                    <LazyLoadingLearningPathElement
+                      topic={topic}
+                      courseId={courseId}
+                      useLearningPathElement={useLearningPathElement}
+                    />
                   </Suspense>
                 )}
               </AccordionDetails>

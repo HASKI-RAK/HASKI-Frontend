@@ -75,7 +75,7 @@ export const Home = () => {
     return () => {
       clearTimeout(preventEndlessLoading)
     }
-  }, [authcontext.isAuth, loading])
+  }, [loading])
 
   // Card cointaining the courses with a button to the specific course
   return loading ? (
