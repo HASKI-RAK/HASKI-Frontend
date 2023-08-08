@@ -2,17 +2,17 @@ import {
   DefaultButton as Button,
   DefaultCard as Card,
   DefaultCardContent as CardContent,
-  DefaultSkeleton as Skeleton,
   DefaultTypography as Typography,
   DefaultBox as Box,
   DefaultStack as Stack
 } from '@common/components'
 import { AuthContext } from '@services'
 import log from 'loglevel'
-import React, {useContext, useEffect, useMemo} from 'react'
+import React, {useContext, useEffect} from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useLearningPathTopic } from '../../components/LocalNav/LocalNav.hooks'
+import { SkeletonList } from '@components'
 
 /**
  * The Course component presents an overview of the course.
@@ -43,26 +43,11 @@ export const Course = () => {
     }
   }, [])
 
-  // Use useMemo to memoize the skeletonItems array
-  const skeletonItems = useMemo(() => {
-    const items = []
-    for (let i = 0; i < 3; i++) {
-      items.push(
-          <React.Fragment key={`LocalNav-Skeleton-${i}`}>
-            <Skeleton data-testid={`LocalNav-Skeleton-Topic-${i}`} variant="text" width={'100%'} height={55} />
-            <Skeleton variant="text" width={'70%'} height={20} />
-            <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />
-          </React.Fragment>
-      )
-    }
-    return items
-  }, [])
-
   return (
     <Stack spacing={2}>
       {loading ? (
         <Box>
-          <Stack spacing={1}>{skeletonItems}</Stack>
+          <Stack spacing={1}><SkeletonList/></Stack>
         </Box>
       ) : (
         <>
