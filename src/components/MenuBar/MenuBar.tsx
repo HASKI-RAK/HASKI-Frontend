@@ -61,7 +61,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const [topicsPath, setTopicsPath] = useState<Topic[]>([])
   const fetchUser = usePersistedStore((state) => state.fetchUser)
   const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
-  const reversedTopics: Topic[] = [...topicsPath].sort((a, b) => reversedTopics.indexOf(b) - reversedTopics.indexOf(a))
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -212,7 +211,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                       ) : (
                         //For every Topic the LearningPathElement is displayed under it.
                         <>
-                          {reversedTopics.map((topic) => (
+                          {[...topicsPath].reverse().map((topic) => (
                             <>
                               <Grid item xs={12} key={t(topic.name)}>
                                 <Link
