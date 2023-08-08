@@ -19,6 +19,7 @@ import SnackbarMessage, { SnackbarMessageProps, SeverityType } from './SnackbarM
 import SnackbarContainer from './SnackbarContainer/SnackbarContainer'
 import SnackbarTransition from './SnackbarTransition/SnackbarTransition'
 import IFrameModal from './IFrameModal/IFrameModal'
+import SkeletonList from './SkeletonList/SkeletonList'
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
@@ -44,6 +45,7 @@ export {
   ProjectDescriptionCard,
   ProjectDescriptionStepper,
   SnackbarTransition,
-  IFrameModal
+  IFrameModal,
+  SkeletonList
 }
 export type { SnackbarMessageProps, SeverityType }

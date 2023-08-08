@@ -5,7 +5,6 @@ import {
   DefaultAccordionSummary as AccordionSummary,
   DefaultAccordionDetails as AccordionDetails,
   DefaultAccordion as Accordion,
-  DefaultSkeleton as Skeleton,
   DefaultStack as Stack,
 } from '@common/components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
@@ -13,12 +12,13 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Topic } from '@services'
 import { LearningPathElement } from '@core'
-import React, { Suspense, useMemo, useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import {
   useLearningPathTopic as _useLearningPathTopic,
   useLearningPathElement as _useLearningPathElement
 } from './LocalNav.hooks'
 import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
+import { SkeletonList } from "@components";
 
 /**
  *  Local navigation component props.
@@ -52,28 +52,13 @@ const LocalNav = ({
     setOpenAccordion(openAccordion === index ? null : index)
   }
 
-  // Use useMemo to memoize the skeletonItems array
-  const skeletonItems = useMemo(() => {
-    const items = []
-    for (let i = 0; i < 3; i++) {
-      items.push(
-        <React.Fragment key={`LocalNav-Skeleton-${i}`}>
-          <Skeleton data-testid={`LocalNav-Skeleton-Topic-${i}`} variant="text" width={'100%'} height={55} />
-          <Skeleton variant="text" width={'70%'} height={20} />
-          <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />
-        </React.Fragment>
-      )
-    }
-    return items
-  }, [])
-
   return (
     <Box flexGrow={1}>
       <Typography variant="h5">{t('components.LocalNav.Topics')}</Typography>
       <Divider />
       {loading ? (
         <Box>
-          <Stack spacing={1}>{skeletonItems}</Stack>
+          <Stack spacing={1}><SkeletonList/></Stack>
         </Box>
       ) : (
         <>

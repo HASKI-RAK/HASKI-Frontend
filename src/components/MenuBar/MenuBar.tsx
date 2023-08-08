@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   DefaultAppBar as AppBar,
@@ -14,7 +14,6 @@ import {
   DefaultButton as Button,
   DefaultPopover as Popover,
   DefaultDivider as Divider,
-  DefaultSkeleton as Skeleton,
   DefaultListItemIcon as ListItemIcon,
   DefaultLink as Link
 } from '@common/components'
@@ -25,7 +24,7 @@ import PersonIcon from '@mui/icons-material/Person'
 import { useTranslation } from 'react-i18next'
 import { Login, Logout } from '@mui/icons-material'
 import { AuthContext, SnackbarContext, Topic } from '@services'
-import { DropdownLanguage } from '@components'
+import { DropdownLanguage, SkeletonList } from '@components'
 import { usePersistedStore, useStore } from '@store'
 import log from 'loglevel'
 
@@ -61,7 +60,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const [topicsPath, setTopicsPath] = useState<Topic[]>([])
   const fetchUser = usePersistedStore((state) => state.fetchUser)
   const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
-  const reversedTopics: Topic[] = [...topicsPath].sort((a, b) => reversedTopics.indexOf(b) - reversedTopics.indexOf(a))
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -110,21 +108,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     logout()
     navigate('/login')
   }
-
-  // Use useMemo to memoize the skeletonItems array
-  const skeletonItems = useMemo(() => {
-    const items = []
-    for (let i = 0; i < 3; i++) {
-      items.push(
-        <React.Fragment key={`LocalNav-Skeleton-${i}`}>
-          <Skeleton data-testid={`LocalNav-Skeleton-Topic-${i}`} variant="text" width={'100%'} height={55} />
-          <Skeleton variant="text" width={'70%'} height={20} />
-          <Skeleton variant="text" width={'70%'} height={20} sx={{ left: '50' }} />
-        </React.Fragment>
-      )
-    }
-    return items
-  }, [])
 
   const navigate = useNavigate()
   return (
@@ -208,11 +191,13 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   <Box sx={{ p: 2 }}>
                     <Grid container direction="column-reverse" spacing={2}>
                       {loadingTopics ? ( // display Skeleton component while loading
-                        <Box width={400}>{skeletonItems}</Box>
+                        <Box width={400}>
+                          <SkeletonList/>
+                        </Box>
                       ) : (
                         //For every Topic the LearningPathElement is displayed under it.
                         <>
-                          {reversedTopics.map((topic) => (
+                          {[...topicsPath].reverse().map((topic) => (
                             <>
                               <Grid item xs={12} key={t(topic.name)}>
                                 <Link
