@@ -22,7 +22,7 @@ interface MemoTableRowQuestionProps {
     question: string;
 }
 
-interface MemoIcButtonProps {
+interface MemoIconButtonProps {
     onClickClose: () => void;
 }
 
@@ -60,7 +60,7 @@ export const MemoTableRowQuestion: React.FC<MemoTableRowQuestionProps> = memo(({
     );
 });
 
-export const MemoIcButton: React.FC<MemoIcButtonProps> = memo(({onClickClose}) => {
+export const MemoIconButton: React.FC<MemoIconButtonProps> = memo(({onClickClose}) => {
     return (
         <IconButton
             id={'QuestionnaireAnswersCloseButton'}
@@ -141,8 +141,8 @@ MemoTableRowQuestion.propTypes = {
     question: PropTypes.string.isRequired,
 }
 
-MemoIcButton.displayName = 'MemoIconButton';
-MemoIcButton.propTypes = {
+MemoIconButton.displayName = 'MemoIconButton';
+MemoIconButton.propTypes = {
     onClickClose: PropTypes.func.isRequired,
 }
 

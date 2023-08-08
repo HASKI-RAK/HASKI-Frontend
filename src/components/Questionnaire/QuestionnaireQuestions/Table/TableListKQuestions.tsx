@@ -10,7 +10,7 @@ import React, {memo, useCallback, useMemo, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useQuestionnaireAnswersListKStore} from '@services'
 import PropTypes from 'prop-types';
-import {MemoButtonStack, MemoIcButton, MemoSendButton, MemoTableRowQuestion} from './TableCommonComponents'
+import {MemoButtonStack, MemoIconButton, MemoSendButton, MemoTableRowQuestion} from './TableCommonComponents'
 
 /**
  * @description
@@ -583,7 +583,7 @@ export const TableListKQuestions = memo(() => {
 
   return (
     <Box>
-      <MemoIcButton onClickClose={onClickClose} />
+      <MemoIconButton onClickClose={onClickClose} />
       <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
         <MemoButtonStack
             activeStep={activeStep}
