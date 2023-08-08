@@ -1,38 +1,125 @@
 import { Home } from '@pages'
+import { AuthContext } from '@services'
 import '@testing-library/jest-dom'
-import { fireEvent, render } from '@testing-library/react'
-import { createMemoryHistory } from 'history'
-import { Router } from 'react-router-dom'
+import { fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import * as router from 'react-router'
+import React from 'react'
+import { mockServices } from '../../../jest.setup'
 
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str: string) => str,
-      i18n: {
-        //changeLanguage: () => new Promise(() => {}),
-        getFixedT: () => (str: string) => {
-          if (str === 'components.QuestionnaireResults.TableILS.balanced') return 'balanced'
-          else return str
-        }
-        // You can include here any property your component may use
-      }
-    }
-  }
-}))
+const navigate = jest.fn()
+
+jest.useFakeTimers()
 
 describe('Test the Home page', () => {
-  const history = createMemoryHistory({ initialEntries: ['/home'] })
+  beforeEach(() => {
+    jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+  })
 
-  test('renders skeleton since no login is present', () => {
-    const result = render(
-      <Router location={history.location} navigator={history}>
-        <Home />
-      </Router>
+  test('navigate back to /login page', () => {
+    render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
     )
 
-    result.debug()
-    // Expect skeleton to be rendered
-    expect(result.container.querySelectorAll('span').length).toEqual(1)
+    jest.runAllTimers()
+    expect(navigate).toHaveBeenCalledWith('/login')
+  })
+
+  test('render page', () => {
+    const result = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    expect(result).toBeTruthy()
+  })
+
+  test('click on course navigates to course page', async () => {
+    const { getAllByText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      const course = getAllByText('components.Home.Button.Course')
+      fireEvent.click(course[1])
+      expect(navigate).toHaveBeenCalledWith('/course/2')
+    })
+  })
+
+  test('fetching User throws error', async () => {
+    mockServices.getUser.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { container } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
+    })
+  })
+
+  test('fetching Course throws error', async () => {
+    mockServices.getCourses.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { container } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
+    })
+  })
+
+  test('fetching Course returns no courses', async () => {
+    const mockgetCourse = jest.fn(() => {
+      return Promise.resolve({
+        courses: []
+      })
+    })
+
+    mockServices.getCourses.mockImplementationOnce(mockgetCourse)
+
+    const { getByText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(getByText('components.Home.NoCourses')).toBeInTheDocument()
+    })
   })
 })

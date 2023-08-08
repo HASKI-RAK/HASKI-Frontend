@@ -1,4 +1,4 @@
-import { getCourseTopics } from './getCourseTopics'
+import { getLearningPathTopic } from './getLearningPathTopic'
 import { Topic, TopicsResponse, TopicRequestResponse } from './RequestResponse.d'
-export { getCourseTopics }
+export { getLearningPathTopic }
 export type { Topic, TopicsResponse, TopicRequestResponse }

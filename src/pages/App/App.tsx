@@ -13,7 +13,7 @@ import {
   ProjectInformation,
   Imprint,
   Topic,
-  CoursePage,
+  Course,
   PageNotFound
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
@@ -37,7 +37,7 @@ const App = () => (
           <Routes>
             <Route element={<MainFrame />}>
               <Route index element={<Home />} />
-              <Route path="/course/:courseId" element={<CoursePage />} />
+              <Route path="/course/:courseId" element={<Course />} />
               <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
               <Route path="/theme" element={<ThemePresentation />} />
               <Route path="/login" element={<Login />} />

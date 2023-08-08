@@ -10,7 +10,7 @@ import ProjectDescription from './ProjectDescription/ProjectDescription'
 import ProjectInformation from './ProjectInformation/ProjectInformation'
 import Imprint from './Imprint/Imprint'
 import Topic from './Topic/Topic'
-import CoursePage from './CoursePage/CoursePage'
+import Course from './Course/Course'
 import PageNotFound from './PageNotFound/PageNotFound'
 import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy'
 import QuestionnaireILSQuestionsLong from './QuestionnaireQuestions/QuestionnaireILSQuestionsLong'
@@ -26,7 +26,7 @@ export {
   ProjectInformation,
   Imprint,
   Topic,
-  CoursePage,
+  Course,
   PageNotFound,
   PrivacyPolicy,
   QuestionnaireILSQuestionsLong,

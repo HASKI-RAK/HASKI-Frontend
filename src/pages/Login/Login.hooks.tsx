@@ -1,7 +1,8 @@
-import { AuthContext, SnackbarContext, postLogin, redirectMoodleLogin } from '@services'
+import { AuthContext, SnackbarContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import { usePersistedStore, useStore } from '@store'
 
 export type LoginHookParams = {
   setIsLoading: (isLoading: boolean) => void
@@ -9,7 +10,7 @@ export type LoginHookParams = {
 }
 
 export type LoginHookReturn = {
-  readonly onSubmit: () => void
+  readonly onSubmit: (username: string, password: string) => void
   readonly onMoodleLogin: () => void
 }
 
@@ -20,23 +21,30 @@ export type LoginHookReturn = {
  * If a nonce is passed, the user can be authenticated with the nonce.
  * If no nonce is passed the user is redirected to the login page without a nonce.
  *
- * @param params - Contain nonce and setIsLoading
+ * @param props - Contain nonce and setIsLoading
  * @returns {LoginHookReturn} - The login logic.
  */
-export const useLogin = (params: LoginHookParams): LoginHookReturn => {
+export const useLogin = (props: LoginHookParams): LoginHookReturn => {
   const { t } = useTranslation()
-  const authcontext = useContext(AuthContext)
+  const authContext = useContext(AuthContext)
   const navigate = useNavigate()
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
   const { addSnackbar } = useContext(SnackbarContext)
 
   // Login with username and password
-  const onSubmitHandler = () => {
-    params.setIsLoading(false)
-    addSnackbar({ message: t('components.Login.passwordError'), severity: 'success', autoHideDuration: 5000 })
+  const onSubmitHandler = (username: string, password: string) => {
+    postLoginCredentials(Number(username), password).then((user) => {
+      // supply auth context
+      authContext.setExpire(9999999999)
+      fetchUser(user)
+
+      // then redirect to home page
+      navigate('/', { replace: true })
+    })
   }
 
   const onMoodleLogin = () => {
-    params.setIsLoading(true)
+    props.setIsLoading(true)
     redirectMoodleLogin()
       .then((response) =>
         // 👇️ redirects to Moodle LTI launch acticity
@@ -47,18 +55,18 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
       })
       .finally(() => {
-        params.setIsLoading(false)
+        props.setIsLoading(false)
       })
   }
 
   // on mount, read search param 'nounce' and set it to state
   useEffect(() => {
-    if (!params.nonce) return
+    if (!props.nonce) return
 
-    postLogin({ nonce: params.nonce })
+    postLogin({ nonce: props.nonce })
       .then((response) => {
         // supply auth context
-        authcontext.setExpire(response.expiration)
+        authContext.setExpire(response.expiration)
         // then redirect to home page
         navigate('/', { replace: true })
       })
@@ -67,6 +75,7 @@ export const useLogin = (params: LoginHookParams): LoginHookReturn => {
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
         navigate('/login', { replace: true })
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return {

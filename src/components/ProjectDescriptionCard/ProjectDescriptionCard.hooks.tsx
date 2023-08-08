@@ -35,7 +35,7 @@ export type ProjectDescriptionCardHookReturn = {
 /**
  * Hook for the ProjectDescriptionCard logic.
  * Handles states and provides functions to animate the body and header texts.
- * @param params - The default value for the card.
+ * @param params - The default values for header and body state.
  * @returns {ProjectDescriptionCardHookReturn} - The ProjectDescriptionCard logic.
  */
 export const useProjectDescriptionCard = (

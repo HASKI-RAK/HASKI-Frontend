@@ -1,4 +1,4 @@
-import { getData } from './RequestResponse'
+import { getData } from '../RequestResponse'
 
 /**
  * Sends a GET request to the backend to logout the user

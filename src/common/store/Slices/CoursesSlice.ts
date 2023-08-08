@@ -1,30 +1,36 @@
-import { Course } from '@core'
+import { CourseReturn } from '@core'
 import { StateCreator } from 'zustand'
 import { StoreState } from '@store'
 import { getCourses } from '@services'
+import { resetters } from '../Zustand/Store'
+import { CourseResponse } from '../../core/Course/Course'
 
 export default interface CoursesSlice {
-  _cache_courses: Course[]
-  fetchCourses: (userId: number, lmsUserId: number, studentId: number) => Promise<Course[]>
+  _cache_Courses_record: Record<string, CourseResponse>
+  fetchCourses: CourseReturn
 }
 
-export const createCoursesSlice: StateCreator<StoreState, [], [], CoursesSlice> = (set, get) => ({
-  _cache_courses: [],
-  fetchCourses: async (...arg) => {
-    // Throw if any of arg is undefined, can be catched by the caller
-    if (arg.some((a) => a === undefined)) throw new Error('fetchCourses: Missing argument')
-    const [userId, lmsUserId, studentId] = arg
+export const createCoursesSlice: StateCreator<StoreState, [], [], CoursesSlice> = (set, get) => {
+  resetters.push(() => set({ _cache_Courses_record: {} }))
+  return {
+    _cache_Courses_record: {},
+    fetchCourses: async (...arg) => {
+      const [userId, lmsUserId, studentId] = arg
 
-    // Check if we have the courses in cache
-    const cached = get()._cache_courses
-    // TODO
-    if (cached.length === 0) {
-      // If not, fetch it and cache it
-      const courses_response = await getCourses(userId, lmsUserId, studentId)
-      set({ _cache_courses: courses_response })
-      return courses_response
+      // Check if we have the courses in cache
+      const cached = get()._cache_Courses_record[`${userId}-${lmsUserId}-${studentId}`]
+
+      if (!cached) {
+        // If not, fetch it and cache it
+        const coursesResponse = await getCourses(userId, lmsUserId, studentId)
+        set({
+          _cache_Courses_record: {
+            ...get()._cache_Courses_record,
+            [`${userId}-${lmsUserId}-${studentId}`]: coursesResponse
+          }
+        })
+        return coursesResponse
+      } else return cached
     }
-    if (get()._cache_courses.length === 0) throw new Error('fetchCourses: No courses found')
-    return get()._cache_courses
   }
-})
+}
