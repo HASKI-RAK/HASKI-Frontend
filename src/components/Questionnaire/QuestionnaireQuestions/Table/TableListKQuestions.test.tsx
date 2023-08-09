@@ -379,19 +379,6 @@ describe('TableListKQuestions', () => {
     }
   })
 
-  test('ListK Questionnaire can be closed', () => {
-    const mockConfirm = jest.spyOn(window, 'confirm')
-    mockConfirm.mockImplementation(() => true)
-
-    const { getByTestId } = render(<TableListKQuestions />)
-
-    const closeButton = getByTestId('QuestionnaireAnswersCloseButton')
-
-    fireEvent.click(closeButton)
-
-    expect(mockNavigate).toHaveBeenCalledWith('/')
-  })
-
   test('ListK Questionnaire reload confirm needed', () => {
     const mockConfirm = jest.spyOn(window, 'addEventListener')
     mockConfirm.mockImplementation(() => true)

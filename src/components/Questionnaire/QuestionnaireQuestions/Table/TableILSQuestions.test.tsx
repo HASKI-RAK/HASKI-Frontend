@@ -376,18 +376,6 @@ describe('Test TableILSQuestions Long with all Methods', () => {
     }
   })
 
-  test('Long ILS Questionnaire can be closed', () => {
-    const mockConfirm = jest.spyOn(window, 'confirm')
-    mockConfirm.mockImplementation(() => true)
-
-    const { getByTestId } = render(<TableILSQuestions ilsLong={true} />)
-    const closeButton = getByTestId('QuestionnaireAnswersCloseButton')
-
-    fireEvent.click(closeButton)
-
-    expect(mockNavigate).toHaveBeenCalledWith('/')
-  })
-
   test('Long ILS Questionnaire reload confirm needed', () => {
     const mockConfirm = jest.spyOn(window, 'addEventListener')
     mockConfirm.mockImplementation(() => true)
@@ -747,18 +735,6 @@ describe('Table ILS Questionnaire Short', () => {
         expect(sendButton).toBeEnabled()
       }
     }
-  })
-
-  test('Short ILS Questionnaire can be closed', () => {
-    const mockConfirm = jest.spyOn(window, 'confirm')
-    mockConfirm.mockImplementation(() => true)
-
-    const { getByTestId } = render(<TableILSQuestions ilsLong={false} />)
-    const closeButton = getByTestId('QuestionnaireAnswersCloseButton')
-
-    fireEvent.click(closeButton)
-
-    expect(mockNavigate).toHaveBeenCalledWith('/')
   })
 
   test('Short ILS Questionnaire reload confirm needed', () => {

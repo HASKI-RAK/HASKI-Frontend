@@ -158,6 +158,26 @@ describe('MenuBar', () => {
     // TODO 📑: will be implemented in the future. Current menu is mock.
   })
 
+  test('click on Learningtype should open Questionnaire Results Modal', () => {
+    const props: MenuBarProps = {
+      courseSelected: false
+    }
+
+    const result = render(
+        <MemoryRouter>
+          <MenuBar {...props} />
+        </MemoryRouter>
+    )
+
+    // click on QuestionnaireResultsIcon:
+    fireEvent.click(result.getByTestId('QuestionnaireResultsIcon'))
+    expect(result.getByTestId('ILS and ListK Modal')).toBeInTheDocument()
+
+    // click on close button
+    fireEvent.click(result.getByTestId('QuestionnaireResultsCloseButton'))
+    expect(result.queryByTestId('ILS and ListK Modal')).not.toBeInTheDocument()
+  })
+
   test('clicking logout should close popover', () => {
     const props: MenuBarProps = {
       courseSelected: true
