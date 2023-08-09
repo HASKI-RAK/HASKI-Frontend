@@ -3,13 +3,13 @@ import TableBody from '@mui/material/TableBody'
 import TableContainer from '@mui/material/TableContainer'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import {useTranslation} from 'react-i18next'
-import {Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography} from '@mui/material'
+import { useTranslation } from 'react-i18next'
+import { Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material'
 import TableCell from '@mui/material/TableCell'
-import React, {memo, useCallback, useMemo, useState} from 'react'
-import {useQuestionnaireAnswersILSStore} from '@services'
-import PropTypes from "prop-types";
-import {MemoButtonStack, MemoSendButton, MemoTableRowQuestion} from './TableCommonComponents'
+import React, { memo, useCallback, useMemo, useState } from 'react'
+import { useQuestionnaireAnswersILSStore } from '@services'
+import PropTypes from 'prop-types'
+import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
 
 /**
  * @description
@@ -448,53 +448,56 @@ const stepsLongILS = [
 
 // region Memoized Elements
 interface MemoTableRowAnswersProps {
-  t: (key: string) => string;
-  activeStep: number;
-  answerIndex: number;
-  isIlsLong: boolean;
-  radioButtonGroup: string;
-  handleRadioChange: (event: React.ChangeEvent<HTMLInputElement>,
-                      ilsStep: {question: string, questionLabel: string, answer1: string, answer2: string}) => void;
-  setRadioButtonGroup: (value: (((prevState: string) => string) | string)) => void;
+  t: (key: string) => string
+  activeStep: number
+  answerIndex: number
+  isIlsLong: boolean
+  radioButtonGroup: string
+  handleRadioChange: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }
+  ) => void
+  setRadioButtonGroup: (value: ((prevState: string) => string) | string) => void
 }
 
-const MemoTableRowAnswers: React.FC<MemoTableRowAnswersProps> = memo((
-    { activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex, isIlsLong}) => {
-  const ilsArray = isIlsLong ? stepsLongILS : stepsShortILS;
-  return (
+const MemoTableRowAnswers: React.FC<MemoTableRowAnswersProps> = memo(
+  ({ activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex, isIlsLong }) => {
+    const ilsArray = isIlsLong ? stepsLongILS : stepsShortILS
+    return (
       <TableRow>
         <TableCell>
           <RadioGroup
-              value={radioButtonGroup}
-              data-testid={`ils${isIlsLong ? 'Long' : 'Short'}QuestionnaireILSButtonGroup${(answerIndex + 1)}`}
-              onChange={(e) => {
-                setRadioButtonGroup(e.target.value)
-                handleRadioChange(e, ilsArray[activeStep][answerIndex])
-              }}>
+            value={radioButtonGroup}
+            data-testid={`ils${isIlsLong ? 'Long' : 'Short'}QuestionnaireILSButtonGroup${answerIndex + 1}`}
+            onChange={(e) => {
+              setRadioButtonGroup(e.target.value)
+              handleRadioChange(e, ilsArray[activeStep][answerIndex])
+            }}>
             <Stack
-                direction="column"
-                justifyContent="center"
-                alignItems="flex-start"
-                spacing={0}
-                divider={<Divider orientation="horizontal" flexItem />}>
+              direction="column"
+              justifyContent="center"
+              alignItems="flex-start"
+              spacing={0}
+              divider={<Divider orientation="horizontal" flexItem />}>
               <FormControlLabel
-                  value={ilsArray[activeStep][answerIndex].answer1}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(ilsArray[activeStep][answerIndex].answer1)}</Typography>}
+                value={ilsArray[activeStep][answerIndex].answer1}
+                control={<Radio />}
+                label={<Typography variant={'h6'}>{t(ilsArray[activeStep][answerIndex].answer1)}</Typography>}
               />
               <FormControlLabel
-                  value={ilsArray[activeStep][answerIndex].answer2}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(ilsArray[activeStep][answerIndex].answer2)}</Typography>}
+                value={ilsArray[activeStep][answerIndex].answer2}
+                control={<Radio />}
+                label={<Typography variant={'h6'}>{t(ilsArray[activeStep][answerIndex].answer2)}</Typography>}
               />
             </Stack>
           </RadioGroup>
         </TableCell>
       </TableRow>
-  );
-});
+    )
+  }
+)
 
-MemoTableRowAnswers.displayName = 'MemoTableRowAnswers';
+MemoTableRowAnswers.displayName = 'MemoTableRowAnswers'
 MemoTableRowAnswers.propTypes = {
   t: PropTypes.func.isRequired,
   activeStep: PropTypes.number.isRequired,
@@ -502,8 +505,8 @@ MemoTableRowAnswers.propTypes = {
   radioButtonGroup: PropTypes.string.isRequired,
   handleRadioChange: PropTypes.func.isRequired,
   setRadioButtonGroup: PropTypes.func.isRequired,
-  isIlsLong: PropTypes.bool.isRequired,
-};
+  isIlsLong: PropTypes.bool.isRequired
+}
 // endregion
 
 // region TableILSQuestions
@@ -512,7 +515,7 @@ type TableILSQuestionsProps = {
 }
 
 export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
-  TableILSQuestions.displayName = 'TableILSQuestions';
+  TableILSQuestions.displayName = 'TableILSQuestions'
 
   const { t } = useTranslation()
 
@@ -537,30 +540,28 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   })
 
   const setRadioButtonGroups = (newActiveStep: number) => {
-    const stepsILS = ilsLong ? stepsLongILS : stepsShortILS;
+    const stepsILS = ilsLong ? stepsLongILS : stepsShortILS
 
-    setRadioButtonGroup1(setRadioButtonValue(stepsILS[newActiveStep][0]));
-    setRadioButtonGroup2(setRadioButtonValue(stepsILS[newActiveStep][1]));
-    setRadioButtonGroup3(setRadioButtonValue(stepsILS[newActiveStep][2]));
-    setRadioButtonGroup4(setRadioButtonValue(stepsILS[newActiveStep][3]));
-  };
+    setRadioButtonGroup1(setRadioButtonValue(stepsILS[newActiveStep][0]))
+    setRadioButtonGroup2(setRadioButtonValue(stepsILS[newActiveStep][1]))
+    setRadioButtonGroup3(setRadioButtonValue(stepsILS[newActiveStep][2]))
+    setRadioButtonGroup4(setRadioButtonValue(stepsILS[newActiveStep][3]))
+  }
 
   const handleNext = useCallback(() => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
     setRadioButtonGroups(activeStep + 1)
-  }, [activeStep]);
+  }, [activeStep])
 
   const handleBack = useCallback(() => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
     setRadioButtonGroups(activeStep - 1)
-  }, [activeStep]);
+  }, [activeStep])
 
   const handleSend = useCallback(() => {
     const ILSarray = Object.entries(questionnaireAnswers).filter(([key]) => key !== '')
     const listKJson = {
-      "list_k": [
-        {}
-      ]
+      list_k: [{}]
     }
     const ils_result = ['ils', ILSarray]
     console.log(ils_result)
@@ -570,96 +571,104 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
         answer: item[1]
       })),
       list_k: listKJson.list_k.map(() => [])
-    });
+    })
     console.log(outputJson)
     //todo: send to server
-  }, [questionnaireAnswers]);
+  }, [questionnaireAnswers])
 
-  const setRadioButtonValue = useMemo(() => (ilsStep: {
-    question: string
-    questionLabel: string
-    answer1: string
-    answer2: string
-  }): string => {
-    //if the question is already answered, the answer is set to the value of the radio button, else radio button is not set
-    const answerType = questionnaireAnswers[ilsStep.questionLabel as keyof typeof questionnaireAnswers]
-    return answerType === 'a' ? ilsStep.answer1 : answerType === 'b' ? ilsStep.answer2 : ''
-  }, [questionnaireAnswers]);
+  const setRadioButtonValue = useMemo(
+    () =>
+      (ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }): string => {
+        //if the question is already answered, the answer is set to the value of the radio button, else radio button is not set
+        const answerType = questionnaireAnswers[ilsStep.questionLabel as keyof typeof questionnaireAnswers]
+        return answerType === 'a' ? ilsStep.answer1 : answerType === 'b' ? ilsStep.answer2 : ''
+      },
+    [questionnaireAnswers]
+  )
 
-  const handleRadioChange = useCallback((
+  const handleRadioChange = useCallback(
+    (
       event: React.ChangeEvent<HTMLInputElement>,
       ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }
-  ) : void => {
-    const radioButtonOptions = [ilsStep.answer1, ilsStep.answer2]
-    const selectedAnswer = radioButtonOptions.indexOf(event.target.value) === 0 ? 'a' : 'b'
+    ): void => {
+      const radioButtonOptions = [ilsStep.answer1, ilsStep.answer2]
+      const selectedAnswer = radioButtonOptions.indexOf(event.target.value) === 0 ? 'a' : 'b'
 
-    setQuestionnaireAnswers(ilsStep.questionLabel, selectedAnswer.toString())
-  }, [setQuestionnaireAnswers]);
+      setQuestionnaireAnswers(ilsStep.questionLabel, selectedAnswer.toString())
+    },
+    [setQuestionnaireAnswers]
+  )
 
-  const ilsArray = ilsLong ? stepsLongILS : stepsShortILS;
+  const ilsArray = ilsLong ? stepsLongILS : stepsShortILS
 
   return (
     <Box>
       <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
         <MemoButtonStack
-            activeStep={activeStep}
-            handleNext={handleNext}
-            handleBack={handleBack}
-            steps={ilsLong ? 11 : 5}
-            idType={'ILS'}
-            disabled={ilsLong ? activeStep === 10 || isNextDisabled : activeStep === 4 || isNextDisabled} />
+          activeStep={activeStep}
+          handleNext={handleNext}
+          handleBack={handleBack}
+          steps={ilsLong ? 11 : 5}
+          idType={'ILS'}
+          disabled={ilsLong ? activeStep === 10 || isNextDisabled : activeStep === 4 || isNextDisabled}
+        />
         <Stack direction="column" justifyContent="space-around" alignItems="center">
           <TableContainer component={Paper} style={{ maxWidth: '51%' }}>
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableILSBody'}>
                 <MemoTableRowQuestion question={t(ilsArray[activeStep][0].question)} />
                 <MemoTableRowAnswers
-                    radioButtonGroup={radioButtonGroup1}
-                    handleRadioChange={handleRadioChange}
-                    setRadioButtonGroup={setRadioButtonGroup1}
-                    answerIndex={0}
-                    isIlsLong={ilsLong}
-                    t={t}
-                    activeStep={activeStep} />
+                  radioButtonGroup={radioButtonGroup1}
+                  handleRadioChange={handleRadioChange}
+                  setRadioButtonGroup={setRadioButtonGroup1}
+                  answerIndex={0}
+                  isIlsLong={ilsLong}
+                  t={t}
+                  activeStep={activeStep}
+                />
                 <MemoTableRowQuestion question={t(ilsArray[activeStep][1].question)} />
                 <MemoTableRowAnswers
-                    radioButtonGroup={radioButtonGroup2}
-                    handleRadioChange={handleRadioChange}
-                    setRadioButtonGroup={setRadioButtonGroup2}
-                    answerIndex={1}
-                    isIlsLong={ilsLong}
-                    t={t}
-                    activeStep={activeStep} />
+                  radioButtonGroup={radioButtonGroup2}
+                  handleRadioChange={handleRadioChange}
+                  setRadioButtonGroup={setRadioButtonGroup2}
+                  answerIndex={1}
+                  isIlsLong={ilsLong}
+                  t={t}
+                  activeStep={activeStep}
+                />
                 <MemoTableRowQuestion question={t(ilsArray[activeStep][2].question)} />
                 <MemoTableRowAnswers
-                    radioButtonGroup={radioButtonGroup3}
-                    handleRadioChange={handleRadioChange}
-                    setRadioButtonGroup={setRadioButtonGroup3}
-                    answerIndex={2}
-                    isIlsLong={ilsLong}
-                    t={t}
-                    activeStep={activeStep} />
+                  radioButtonGroup={radioButtonGroup3}
+                  handleRadioChange={handleRadioChange}
+                  setRadioButtonGroup={setRadioButtonGroup3}
+                  answerIndex={2}
+                  isIlsLong={ilsLong}
+                  t={t}
+                  activeStep={activeStep}
+                />
                 <MemoTableRowQuestion question={t(ilsArray[activeStep][3].question)} />
                 <MemoTableRowAnswers
-                    radioButtonGroup={radioButtonGroup4}
-                    handleRadioChange={handleRadioChange}
-                    setRadioButtonGroup={setRadioButtonGroup4}
-                    answerIndex={3}
-                    isIlsLong={ilsLong}
-                    t={t}
-                    activeStep={activeStep} />
+                  radioButtonGroup={radioButtonGroup4}
+                  handleRadioChange={handleRadioChange}
+                  setRadioButtonGroup={setRadioButtonGroup4}
+                  answerIndex={3}
+                  isIlsLong={ilsLong}
+                  t={t}
+                  activeStep={activeStep}
+                />
               </TableBody>
             </Table>
           </TableContainer>
           <MemoSendButton
-              t={t}
-              handleSend={handleSend}
-              isNextDisabled={isNextDisabled}
-              isValid={(ilsLong ? activeStep === 10 : activeStep === 4)}
-              idType={'ILS'} />
+            t={t}
+            handleSend={handleSend}
+            isNextDisabled={isNextDisabled}
+            isValid={ilsLong ? activeStep === 10 : activeStep === 4}
+            idType={'ILS'}
+          />
         </Stack>
       </Stack>
     </Box>
   )
-});
+})
 // endregion

@@ -5,7 +5,7 @@ import {
   DefaultAccordionSummary as AccordionSummary,
   DefaultAccordionDetails as AccordionDetails,
   DefaultAccordion as Accordion,
-  DefaultStack as Stack,
+  DefaultStack as Stack
 } from '@common/components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
@@ -18,7 +18,7 @@ import {
   useLearningPathElement as _useLearningPathElement
 } from './LocalNav.hooks'
 import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
-import { SkeletonList } from "@components";
+import { SkeletonList } from '@components'
 
 /**
  *  Local navigation component props.
@@ -58,7 +58,9 @@ const LocalNav = ({
       <Divider />
       {loading ? (
         <Box>
-          <Stack spacing={1}><SkeletonList/></Stack>
+          <Stack spacing={1}>
+            <SkeletonList />
+          </Stack>
         </Box>
       ) : (
         <>

@@ -3,13 +3,13 @@ import TableBody from '@mui/material/TableBody'
 import TableContainer from '@mui/material/TableContainer'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import {useTranslation} from 'react-i18next'
-import {Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography} from '@mui/material'
+import { useTranslation } from 'react-i18next'
+import { Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material'
 import TableCell from '@mui/material/TableCell'
-import React, {memo, useCallback, useMemo, useState} from 'react'
-import {useQuestionnaireAnswersListKStore} from '@services'
-import PropTypes from 'prop-types';
-import {MemoButtonStack, MemoSendButton, MemoTableRowQuestion} from './TableCommonComponents'
+import React, { memo, useCallback, useMemo, useState } from 'react'
+import { useQuestionnaireAnswersListKStore } from '@services'
+import PropTypes from 'prop-types'
+import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
 
 /**
  * @description
@@ -388,81 +388,90 @@ const stepsListK = [
 
 // region Memoized Elements
 interface MemoTableRowAnswersProps {
-  t: (key: string) => string;
-  activeStep: number;
-  answerIndex: number;
-  radioButtonGroup: string;
-  handleRadioChange: (event: React.ChangeEvent<HTMLInputElement>,
-                      listkStep: {question: string, questionLabel: string, answer1: string,
-                        answer2: string, answer3: string, answer4: string, answer5: string}) => void;
-  setRadioButtonGroup: (value: (((prevState: string) => string) | string)) => void;
+  t: (key: string) => string
+  activeStep: number
+  answerIndex: number
+  radioButtonGroup: string
+  handleRadioChange: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    listkStep: {
+      question: string
+      questionLabel: string
+      answer1: string
+      answer2: string
+      answer3: string
+      answer4: string
+      answer5: string
+    }
+  ) => void
+  setRadioButtonGroup: (value: ((prevState: string) => string) | string) => void
 }
 
-const MemoTableRowAnswers: React.FC<MemoTableRowAnswersProps> = memo((
-    { activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex}) => {
-
-  return (
+const MemoTableRowAnswers: React.FC<MemoTableRowAnswersProps> = memo(
+  ({ activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex }) => {
+    return (
       <TableRow>
         <TableCell>
           <RadioGroup
-              value={radioButtonGroup}
-              data-testid={`ListKQuestionnaireButtonGroup${(answerIndex + 1)}`}
-              onChange={(e) => {
-                setRadioButtonGroup(e.target.value)
-                handleRadioChange(e, stepsListK[activeStep][answerIndex])
-              }}>
+            value={radioButtonGroup}
+            data-testid={`ListKQuestionnaireButtonGroup${answerIndex + 1}`}
+            onChange={(e) => {
+              setRadioButtonGroup(e.target.value)
+              handleRadioChange(e, stepsListK[activeStep][answerIndex])
+            }}>
             <Stack
-                direction="row"
-                justifyContent="space-around"
-                alignItems="center"
-                spacing={1}
-                divider={<Divider orientation="vertical" flexItem />}>
+              direction="row"
+              justifyContent="space-around"
+              alignItems="center"
+              spacing={1}
+              divider={<Divider orientation="vertical" flexItem />}>
               <FormControlLabel
-                  value={stepsListK[activeStep][answerIndex].answer1}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer1)}</Typography>}
+                value={stepsListK[activeStep][answerIndex].answer1}
+                control={<Radio />}
+                label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer1)}</Typography>}
               />
               <FormControlLabel
-                  value={stepsListK[activeStep][answerIndex].answer2}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer2)}</Typography>}
+                value={stepsListK[activeStep][answerIndex].answer2}
+                control={<Radio />}
+                label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer2)}</Typography>}
               />
               <FormControlLabel
-                  value={stepsListK[activeStep][answerIndex].answer3}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer3)}</Typography>}
+                value={stepsListK[activeStep][answerIndex].answer3}
+                control={<Radio />}
+                label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer3)}</Typography>}
               />
               <FormControlLabel
-                  value={stepsListK[activeStep][answerIndex].answer4}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer4)}</Typography>}
+                value={stepsListK[activeStep][answerIndex].answer4}
+                control={<Radio />}
+                label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer4)}</Typography>}
               />
               <FormControlLabel
-                  value={stepsListK[activeStep][answerIndex].answer5}
-                  control={<Radio />}
-                  label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer5)}</Typography>}
+                value={stepsListK[activeStep][answerIndex].answer5}
+                control={<Radio />}
+                label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer5)}</Typography>}
               />
             </Stack>
           </RadioGroup>
         </TableCell>
       </TableRow>
-  );
-});
+    )
+  }
+)
 
-MemoTableRowAnswers.displayName = 'MemoTableRowAnswers';
+MemoTableRowAnswers.displayName = 'MemoTableRowAnswers'
 MemoTableRowAnswers.propTypes = {
   t: PropTypes.func.isRequired,
   activeStep: PropTypes.number.isRequired,
   answerIndex: PropTypes.number.isRequired,
   radioButtonGroup: PropTypes.string.isRequired,
   handleRadioChange: PropTypes.func.isRequired,
-  setRadioButtonGroup: PropTypes.func.isRequired,
-};
+  setRadioButtonGroup: PropTypes.func.isRequired
+}
 // endregion
 
 // region TableListKQuestions
 export const TableListKQuestions = memo(() => {
-  TableListKQuestions.displayName = 'TableListKQuestions';
+  TableListKQuestions.displayName = 'TableListKQuestions'
 
   const { t } = useTranslation()
 
@@ -475,8 +484,8 @@ export const TableListKQuestions = memo(() => {
 
   //if all radio buttons are selected, the next button is enabled
   // (They are reset to their previous Value when the user goes back)
-  const isNextDisabled = (
-    !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4 || !radioButtonGroup5)
+  const isNextDisabled =
+    !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4 || !radioButtonGroup5
 
   const { questionnaireAnswers, setQuestionnaireAnswers } = useQuestionnaireAnswersListKStore()
 
@@ -489,160 +498,166 @@ export const TableListKQuestions = memo(() => {
   })
 
   const setRadioButtonGroups = (newActiveStep: number) => {
-    setRadioButtonGroup1(setRadioButtonValue(stepsListK[newActiveStep][0]));
-    setRadioButtonGroup2(setRadioButtonValue(stepsListK[newActiveStep][1]));
-    setRadioButtonGroup3(setRadioButtonValue(stepsListK[newActiveStep][2]));
-    setRadioButtonGroup4(setRadioButtonValue(stepsListK[newActiveStep][3]));
-  };
+    setRadioButtonGroup1(setRadioButtonValue(stepsListK[newActiveStep][0]))
+    setRadioButtonGroup2(setRadioButtonValue(stepsListK[newActiveStep][1]))
+    setRadioButtonGroup3(setRadioButtonValue(stepsListK[newActiveStep][2]))
+    setRadioButtonGroup4(setRadioButtonValue(stepsListK[newActiveStep][3]))
+  }
 
   const handleNext = useCallback(() => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setActiveStep((prevActiveStep) => prevActiveStep + 1)
     setRadioButtonGroups(activeStep + 1)
     //because the last step has only 4 questions
     if (activeStep < 6) {
-      setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep + 1][4]));
+      setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep + 1][4]))
     }
-  }, [activeStep]);
-
+  }, [activeStep])
 
   const handleBack = useCallback(() => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setActiveStep((prevActiveStep) => prevActiveStep - 1)
     setRadioButtonGroups(activeStep - 1)
-  }, [activeStep]);
-
+  }, [activeStep])
 
   const handleSend = useCallback(() => {
     const listkArray = Object.entries(questionnaireAnswers).filter(([key]) => key !== '')
     const listk_result = ['ils', listkArray]
     console.log(listk_result)
     //todo: send to server
-  }, [questionnaireAnswers]);
+  }, [questionnaireAnswers])
 
   const setRadioButtonValue = useMemo(
-      () => (listkStep: {
-        question: string;
-        questionLabel: string;
-        answer1: string;
-        answer2: string;
-        answer3: string;
-        answer4: string;
-        answer5: string;
+    () =>
+      (listkStep: {
+        question: string
+        questionLabel: string
+        answer1: string
+        answer2: string
+        answer3: string
+        answer4: string
+        answer5: string
       }) => {
         //if the question is already answered, the answer is set to the value of the radio button/ else radio button is not set
         switch (questionnaireAnswers[listkStep.questionLabel as keyof typeof questionnaireAnswers]) {
           case '1':
-            return listkStep.answer1;
+            return listkStep.answer1
           case '2':
-            return listkStep.answer2;
+            return listkStep.answer2
           case '3':
-            return listkStep.answer3;
+            return listkStep.answer3
           case '4':
-            return listkStep.answer4;
+            return listkStep.answer4
           case '5':
-            return listkStep.answer5;
+            return listkStep.answer5
           default:
-            return '';
+            return ''
         }
       },
-      [questionnaireAnswers]
-  );
+    [questionnaireAnswers]
+  )
 
   const handleRadioChange = useCallback(
-      (
-          event: React.ChangeEvent<HTMLInputElement>,
-          listkStep: {
-            question: string;
-            questionLabel: string;
-            answer1: string;
-            answer2: string;
-            answer3: string;
-            answer4: string;
-            answer5: string;
-          }
-      ) => {
-        const radioButtonOptions = [
-          listkStep.answer1,
-          listkStep.answer2,
-          listkStep.answer3,
-          listkStep.answer4,
-          listkStep.answer5,
-        ];
-        const selectedAnswer = (radioButtonOptions.indexOf(event.target.value) + 1) || '5';
-        setQuestionnaireAnswers(listkStep.questionLabel, selectedAnswer.toString());
-      },
-      [setQuestionnaireAnswers]
-  );
+    (
+      event: React.ChangeEvent<HTMLInputElement>,
+      listkStep: {
+        question: string
+        questionLabel: string
+        answer1: string
+        answer2: string
+        answer3: string
+        answer4: string
+        answer5: string
+      }
+    ) => {
+      const radioButtonOptions = [
+        listkStep.answer1,
+        listkStep.answer2,
+        listkStep.answer3,
+        listkStep.answer4,
+        listkStep.answer5
+      ]
+      const selectedAnswer = radioButtonOptions.indexOf(event.target.value) + 1 || '5'
+      setQuestionnaireAnswers(listkStep.questionLabel, selectedAnswer.toString())
+    },
+    [setQuestionnaireAnswers]
+  )
 
   return (
     <Box>
       <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
         <MemoButtonStack
-            activeStep={activeStep}
-            handleNext={handleNext}
-            handleBack={handleBack}
-            steps={8}
-            idType={'ListK'}
-            disabled={activeStep === 7 || isNextDisabled} />
+          activeStep={activeStep}
+          handleNext={handleNext}
+          handleBack={handleBack}
+          steps={8}
+          idType={'ListK'}
+          disabled={activeStep === 7 || isNextDisabled}
+        />
         <Stack direction="column" justifyContent="space-around" alignItems="center">
           <TableContainer component={Paper} style={{ maxWidth: '71%' }}>
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableListK'}>
                 <MemoTableRowQuestion question={t(stepsListK[activeStep][0].question)} />
                 <MemoTableRowAnswers
-                    activeStep={activeStep}
-                    handleRadioChange={handleRadioChange}
-                    radioButtonGroup={radioButtonGroup1}
-                    setRadioButtonGroup={setRadioButtonGroup1}
-                    t={t}
-                    answerIndex={0} />
+                  activeStep={activeStep}
+                  handleRadioChange={handleRadioChange}
+                  radioButtonGroup={radioButtonGroup1}
+                  setRadioButtonGroup={setRadioButtonGroup1}
+                  t={t}
+                  answerIndex={0}
+                />
                 <MemoTableRowQuestion question={t(stepsListK[activeStep][1].question)} />
                 <MemoTableRowAnswers
-                    activeStep={activeStep}
-                    handleRadioChange={handleRadioChange}
-                    radioButtonGroup={radioButtonGroup2}
-                    setRadioButtonGroup={setRadioButtonGroup2}
-                    t={t}
-                    answerIndex={1} />
+                  activeStep={activeStep}
+                  handleRadioChange={handleRadioChange}
+                  radioButtonGroup={radioButtonGroup2}
+                  setRadioButtonGroup={setRadioButtonGroup2}
+                  t={t}
+                  answerIndex={1}
+                />
                 <MemoTableRowQuestion question={t(stepsListK[activeStep][2].question)} />
                 <MemoTableRowAnswers
-                    activeStep={activeStep}
-                    handleRadioChange={handleRadioChange}
-                    radioButtonGroup={radioButtonGroup3}
-                    setRadioButtonGroup={setRadioButtonGroup3}
-                    t={t}
-                    answerIndex={2} />
+                  activeStep={activeStep}
+                  handleRadioChange={handleRadioChange}
+                  radioButtonGroup={radioButtonGroup3}
+                  setRadioButtonGroup={setRadioButtonGroup3}
+                  t={t}
+                  answerIndex={2}
+                />
                 <MemoTableRowQuestion question={t(stepsListK[activeStep][3].question)} />
                 <MemoTableRowAnswers
-                    activeStep={activeStep}
-                    handleRadioChange={handleRadioChange}
-                    radioButtonGroup={radioButtonGroup4}
-                    setRadioButtonGroup={setRadioButtonGroup4}
-                    t={t}
-                    answerIndex={3} />
+                  activeStep={activeStep}
+                  handleRadioChange={handleRadioChange}
+                  radioButtonGroup={radioButtonGroup4}
+                  setRadioButtonGroup={setRadioButtonGroup4}
+                  t={t}
+                  answerIndex={3}
+                />
                 {activeStep < 7 ? (
                   <>
                     <MemoTableRowQuestion question={t(stepsListK[activeStep][4].question)} />
                     <MemoTableRowAnswers
-                        activeStep={activeStep}
-                        handleRadioChange={handleRadioChange}
-                        radioButtonGroup={radioButtonGroup5}
-                        setRadioButtonGroup={setRadioButtonGroup5}
-                        t={t}
-                        answerIndex={4} />
+                      activeStep={activeStep}
+                      handleRadioChange={handleRadioChange}
+                      radioButtonGroup={radioButtonGroup5}
+                      setRadioButtonGroup={setRadioButtonGroup5}
+                      t={t}
+                      answerIndex={4}
+                    />
                   </>
                 ) : undefined}
               </TableBody>
             </Table>
           </TableContainer>
           <MemoSendButton
-              t={t}
-              handleSend={handleSend}
-              isNextDisabled={isNextDisabled}
-              isValid={activeStep === 7}
-              idType={'ListK'} />
+            t={t}
+            handleSend={handleSend}
+            isNextDisabled={isNextDisabled}
+            isValid={activeStep === 7}
+            idType={'ListK'}
+          />
         </Stack>
       </Stack>
     </Box>
   )
-});
+})
 // endregion

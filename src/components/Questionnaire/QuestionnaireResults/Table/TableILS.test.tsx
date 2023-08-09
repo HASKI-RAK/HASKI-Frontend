@@ -126,9 +126,7 @@ describe('Test TableILS with all Methods', () => {
     )
     expect(
       ILSInterpretation(-11, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)
-    ).toBe(
-      'strong components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
+    ).toBe('strong components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')
     expect(ILSInterpretation(11, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)).toBe(
       'strong components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
     )

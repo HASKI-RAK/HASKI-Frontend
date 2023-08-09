@@ -3,8 +3,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '../../common/services/AuthContext'
 import renderer from 'react-test-renderer'
-import "@testing-library/jest-dom/extend-expect";
-
+import '@testing-library/jest-dom/extend-expect'
 
 describe('ILS Short Questionnaire', () => {
   global.fetch = jest.fn(() =>
@@ -40,5 +39,4 @@ describe('ILS Short Questionnaire', () => {
       .toJSON()
     expect(tree).toMatchSnapshot()
   })
-
 })

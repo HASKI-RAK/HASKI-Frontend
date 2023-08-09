@@ -38,5 +38,4 @@ describe('Test ListK Questionnaire', () => {
       .toJSON()
     expect(tree).toMatchSnapshot()
   })
-
 })

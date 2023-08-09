@@ -8,7 +8,7 @@ import {
 } from '@common/components'
 import { AuthContext } from '@services'
 import log from 'loglevel'
-import React, {useContext, useEffect} from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useLearningPathTopic } from '../../components/LocalNav/LocalNav.hooks'
@@ -47,7 +47,9 @@ export const Course = () => {
     <Stack spacing={2}>
       {loading ? (
         <Box>
-          <Stack spacing={1}><SkeletonList/></Stack>
+          <Stack spacing={1}>
+            <SkeletonList />
+          </Stack>
         </Box>
       ) : (
         <>

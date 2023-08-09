@@ -221,7 +221,9 @@ const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: { [key
       <div key={'RelevantSubscalesBelow3DescriptionListK'}>
         <Typography variant={'h6'} gutterBottom>
           {t(
-            'components.Questionnaire.QuestionnaireResults.ResultDescriptionListK.' + subscalesBelow3Array.join('') + ' Below3.Title'
+            'components.Questionnaire.QuestionnaireResults.ResultDescriptionListK.' +
+              subscalesBelow3Array.join('') +
+              ' Below3.Title'
           )}
         </Typography>
         <Typography variant="body2" gutterBottom>
