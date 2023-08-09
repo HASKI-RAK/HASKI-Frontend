@@ -69,6 +69,7 @@ const MenuBar = ({courseSelected = false}: MenuBarProps) => {
 
     const handleCloseModal = () => {
         setModalOpen(false);
+        console.log(modalOpen)
     };
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -252,7 +253,7 @@ const MenuBar = ({courseSelected = false}: MenuBarProps) => {
 
                     {/** Questionnaire Results */}
                     <Box display="flex" sx={{flexGrow: 0, mr: {xs: 0, md: 2}}}>
-                        <Tooltip title={t('results')}>
+                        <Tooltip title={t('tooltip.openQuestionnaireResults')}>
                             <IconButton
                                 onClick={handleOpenModal}>
                                 <AnalyticsIcon data-testid="QuestionnaireResultsIcon"/>

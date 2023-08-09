@@ -965,5 +965,6 @@
   "tooltip.openSettings": "Open settings",
   "universityKempten": "University of Applied Sciences Kempten",
   "update": "Updated",
-  "warning": "Warning"
+  "warning": "Warning",
+  "tooltip.openQuestionnaireResults": "Learningtype"
 }

@@ -936,5 +936,6 @@
   "tooltip.openSettings": "Einstellungen",
   "universityKempten": "Hochschule Kempten",
   "update": "Aktualisieren",
-  "warning": "Warnung"
+  "warning": "Warnung",
+  "tooltip.openQuestionnaireResults": "Lerntyp"
 }
