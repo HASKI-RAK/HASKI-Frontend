@@ -69,7 +69,6 @@ const MenuBar = ({courseSelected = false}: MenuBarProps) => {
 
     const handleCloseModal = () => {
         setModalOpen(false);
-        console.log(modalOpen)
     };
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -246,9 +245,7 @@ const MenuBar = ({courseSelected = false}: MenuBarProps) => {
 
                     {/** Language dropdown */}
                     <Box display="flex" sx={{flexGrow: 0, mr: {xs: 0, md: 2}}}>
-                        <Tooltip title={t('language')}>
-                            <DropdownLanguage/>
-                        </Tooltip>
+                        <DropdownLanguage/>
                     </Box>
 
                     {/** Questionnaire Results */}
@@ -257,9 +254,9 @@ const MenuBar = ({courseSelected = false}: MenuBarProps) => {
                             <IconButton
                                 onClick={handleOpenModal}>
                                 <AnalyticsIcon data-testid="QuestionnaireResultsIcon"/>
-                                <QuestionnaireResultsModal open={modalOpen} handleClose={handleCloseModal}/>
                             </IconButton>
                         </Tooltip>
+                        <QuestionnaireResultsModal open={modalOpen} handleClose={handleCloseModal}/>
                     </Box>
 
                     {/** Help button */}
