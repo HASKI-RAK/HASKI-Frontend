@@ -7,10 +7,9 @@ import {useTranslation} from 'react-i18next'
 import {Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography} from '@mui/material'
 import TableCell from '@mui/material/TableCell'
 import React, {memo, useCallback, useMemo, useState} from 'react'
-import {useNavigate} from 'react-router-dom'
 import {useQuestionnaireAnswersILSStore} from '@services'
 import PropTypes from "prop-types";
-import {MemoButtonStack, MemoIconButton, MemoSendButton, MemoTableRowQuestion} from './TableCommonComponents'
+import {MemoButtonStack, MemoSendButton, MemoTableRowQuestion} from './TableCommonComponents'
 
 /**
  * @description
@@ -517,7 +516,6 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
 
   const { t } = useTranslation()
 
-  const navigate = useNavigate()
   const [activeStep, setActiveStep] = useState(0)
   const [radioButtonGroup1, setRadioButtonGroup1] = useState('')
   const [radioButtonGroup2, setRadioButtonGroup2] = useState('')
@@ -598,17 +596,10 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
     setQuestionnaireAnswers(ilsStep.questionLabel, selectedAnswer.toString())
   }, [setQuestionnaireAnswers]);
 
-  const onClickClose = useCallback(() => {
-    if (window.confirm(t('CloseWebsite').toString())) {
-      navigate('/')
-    }
-  }, [t, navigate]);
-
   const ilsArray = ilsLong ? stepsLongILS : stepsShortILS;
 
   return (
     <Box>
-      <MemoIconButton onClickClose={onClickClose} />
       <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
         <MemoButtonStack
             activeStep={activeStep}

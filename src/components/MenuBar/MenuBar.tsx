@@ -243,12 +243,16 @@ const MenuBar = ({courseSelected = false}: MenuBarProps) => {
                     <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>{/* <Searchbar /> */}</Box>
 
                     {/** Questionnaire Results */}
-                    <div>
-                        <Button variant="contained" color="primary" onClick={handleOpenModal}>
-                            Open Modal
-                        </Button>
-                        <QuestionnaireResultsModal open={modalOpen} handleClose={handleCloseModal}/>
-                    </div>
+                    <Box display="flex" sx={{flexGrow: 0, mr: {xs: 0, md: 2}}}>
+                        <Tooltip title={t('results')}>
+                            <div>
+                                <Button variant="contained" color="primary" onClick={handleOpenModal}>
+                                    Open Modal
+                                </Button>
+                                <QuestionnaireResultsModal open={modalOpen} handleClose={handleCloseModal}/>
+                            </div>
+                        </Tooltip>
+                    </Box>
 
                     {/** Language dropdown */}
                     <Box display="flex" sx={{flexGrow: 0, mr: {xs: 0, md: 2}}}>
