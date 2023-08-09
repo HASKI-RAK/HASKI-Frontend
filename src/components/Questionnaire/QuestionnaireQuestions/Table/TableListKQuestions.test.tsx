@@ -2,22 +2,6 @@ import '@testing-library/jest-dom'
 import { TableListKQuestions } from './TableListKQuestions'
 import { fireEvent, render } from '@testing-library/react'
 
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str: string) => str,
-      i18n: {
-        //changeLanguage: () => new Promise(() => {}),
-        getFixedT: () => (str: string) => {
-          return str
-        }
-        // You can include here any property your component may use
-      }
-    }
-  }
-}))
-
 const mockNavigate = jest.fn()
 
 jest.mock('react-router-dom', () => ({

@@ -9,8 +9,8 @@ const useTranslation = () => {
           return
         }),
       getFixedT: () => (str: string) => {
-        if (str === 'components.QuestionnaireResults.TableILS.balanced') return 'balanced'
-        else return str.substring(41, str.length)
+        if (str === 'components.Questionnaire.QuestionnaireResults.TableILS.balanced') return 'balanced'
+        else return str.substring(61, str.length)
       }
     }
   }

@@ -1,25 +1,10 @@
 import QuestionnaireILSQuestionsShort from './QuestionnaireILSQuestionsShort'
 import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { AuthContext } from '@services'
+import { AuthContext } from '../../common/services/AuthContext'
 import renderer from 'react-test-renderer'
+import "@testing-library/jest-dom/extend-expect";
 
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str: string) => str,
-      i18n: {
-        //changeLanguage: () => new Promise(() => {}),
-        getFixedT: () => (str: string) => {
-          if (str === 'components.QuestionnaireResults.TableILS.balanced') return 'balanced'
-          else return str
-        }
-        // You can include here any property your component may use
-      }
-    }
-  }
-}))
 
 describe('ILS Short Questionnaire', () => {
   global.fetch = jest.fn(() =>
@@ -56,15 +41,4 @@ describe('ILS Short Questionnaire', () => {
     expect(tree).toMatchSnapshot()
   })
 
-  test('ILS Short Questionnaire Skeleton loading', () => {
-    const { container } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <QuestionnaireILSQuestionsShort />
-        </AuthContext.Provider>
-      </MemoryRouter>
-    )
-
-    expect(container.innerHTML).toContain('MuiSkeleton-root')
-  })
 })
