@@ -18,6 +18,7 @@ import {
     DefaultLink as Link
 } from '@common/components'
 import SettingsIcon from '@mui/icons-material/Settings'
+import AnalyticsIcon from '@mui/icons-material/Analytics';
 import HelpIcon from '@mui/icons-material/Help'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import PersonIcon from '@mui/icons-material/Person'
@@ -242,22 +243,21 @@ const MenuBar = ({courseSelected = false}: MenuBarProps) => {
                     {/** Search bar */}
                     <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>{/* <Searchbar /> */}</Box>
 
-                    {/** Questionnaire Results */}
-                    <Box display="flex" sx={{flexGrow: 0, mr: {xs: 0, md: 2}}}>
-                        <Tooltip title={t('results')}>
-                            <div>
-                                <Button variant="contained" color="primary" onClick={handleOpenModal}>
-                                    Open Modal
-                                </Button>
-                                <QuestionnaireResultsModal open={modalOpen} handleClose={handleCloseModal}/>
-                            </div>
-                        </Tooltip>
-                    </Box>
-
                     {/** Language dropdown */}
                     <Box display="flex" sx={{flexGrow: 0, mr: {xs: 0, md: 2}}}>
                         <Tooltip title={t('language')}>
                             <DropdownLanguage/>
+                        </Tooltip>
+                    </Box>
+
+                    {/** Questionnaire Results */}
+                    <Box display="flex" sx={{flexGrow: 0, mr: {xs: 0, md: 2}}}>
+                        <Tooltip title={t('results')}>
+                            <IconButton
+                                onClick={handleOpenModal}>
+                                <AnalyticsIcon data-testid="QuestionnaireResultsIcon"/>
+                                <QuestionnaireResultsModal open={modalOpen} handleClose={handleCloseModal}/>
+                            </IconButton>
                         </Tooltip>
                     </Box>
 
