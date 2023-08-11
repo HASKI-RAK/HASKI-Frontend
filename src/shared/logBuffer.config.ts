@@ -1,5 +1,5 @@
-import { RingBuffer } from './RingBuffer'
 import log from 'loglevel'
+import { RingBuffer } from './RingBuffer'
 
 /**
  * This function is used to log all the messages in the console and also store them in a ring buffer.
@@ -10,7 +10,7 @@ export const logBuffer = () => {
   if (localStorage.getItem('ringBufferContent') !== null) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore - localStorage.getItem('ringBufferContent') is not null
-    const localStorageRingBuffer = JSON.parse(localStorage.getItem('ringBufferContent') || '{"buffer":[]}')
+    const localStorageRingBuffer = JSON.parse(localStorage.getItem('ringBufferContent') ?? '{"buffer":[]}')
     GlobalRingBuffer.fromArray(localStorageRingBuffer.buffer)
   } else {
     localStorage.setItem('ringBufferContent', JSON.stringify(GlobalRingBuffer))
