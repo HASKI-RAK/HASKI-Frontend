@@ -138,7 +138,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
             helperText={textfieldError ? t('components.ContactForm.error') : ''}
           />
 
-          <Button sx={{ alignSelf: 'end' }} onClick={handleSubmit}>
+          <Button variant="contained" color="primary" sx={{ alignSelf: 'end' }} onClick={handleSubmit}>
             {t('components.ContactForm.submit')}
           </Button>
         </FormControl>
