@@ -2,7 +2,7 @@ import { User } from '@core'
 import { getData } from '../RequestResponse'
 
 /**
- * 
+ *
  * @return {Promise<User>} User
  */
 export const getUser = async (): Promise<User> => {
