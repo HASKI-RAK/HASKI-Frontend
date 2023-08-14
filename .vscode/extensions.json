@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "kavod-io.vscode-jest-test-adapter",
+        "firsttris.vscode-jest-runner",
+        "sonarsource.sonarlint-vscode",
+        "ms-vscode.test-adapter-converter",
+        "hbenl.vscode-test-explorer"
+    ]
+}
