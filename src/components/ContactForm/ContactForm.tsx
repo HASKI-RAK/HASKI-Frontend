@@ -88,65 +88,76 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
   }, [t])
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Stack spacing={2} sx={{ minWidth: 120 }}>
-        <Typography variant="h5" component="h5">
-          {t('components.ContactForm.contactform')}
-        </Typography>
+    <Stack justifyContent="center" alignItems="center">
+      <form onSubmit={handleSubmit}>
+        <Stack spacing={2} sx={{ minWidth: 120 }}>
+          <Typography variant="h5" component="h5">
+            {t('components.ContactForm.contactform')}
+          </Typography>
 
-        <FormControl required>
-          <InputLabel id="select_label_contact">{t('topic')}</InputLabel>
-          <Select
-            name="reporttopic"
-            labelId="select_label_contact"
-            label={t('topic')}
-            required
-            onChange={reportTopicChangeHandler}
-            value={reportTopic}
-            error={selectError}>
-            {reportTopics.map((topic) => (
-              <MenuItem key={topic.value} value={topic.value}>
-                {topic.label}
-              </MenuItem>
+          <FormControl required>
+            <InputLabel id="select_label_contact">{t('topic')}</InputLabel>
+            <Select
+              name="reporttopic"
+              labelId="select_label_contact"
+              label={t('topic')}
+              required
+              onChange={reportTopicChangeHandler}
+              value={reportTopic}
+              error={selectError}>
+              {reportTopics.map((topic) => (
+                <MenuItem key={topic.value} value={topic.value}>
+                  {topic.label}
+                </MenuItem>
+              ))}
+            </Select>
+            <FormHelperText>{selectError && t('components.ContactForm.errorSelect')}</FormHelperText>
+          </FormControl>
+
+          <FormLabel id="radio_contact_label" sx={{ mt: '0.6rem' }}>
+            {t('components.ContactForm.reportType')}
+          </FormLabel>
+          <RadioGroup row name="reporttype" value={reportType} onChange={reportTypeChangeHandler}>
+            {reportTypes.map((report) => (
+              <FormControlLabel
+                key={report.value}
+                value={report.value}
+                control={<RadioButton />}
+                label={report.label}
+              />
             ))}
-          </Select>
-          <FormHelperText>{selectError && t('components.ContactForm.errorSelect')}</FormHelperText>
-        </FormControl>
+          </RadioGroup>
 
-        <FormLabel id="radio_contact_label" sx={{ mt: '0.6rem' }}>
-          {t('components.ContactForm.reportType')}
-        </FormLabel>
-        <RadioGroup row name="reporttype" value={reportType} onChange={reportTypeChangeHandler}>
-          {reportTypes.map((report) => (
-            <FormControlLabel key={report.value} value={report.value} control={<RadioButton />} label={report.label} />
-          ))}
-        </RadioGroup>
+          <FormControl>
+            <TextField
+              id="desc_input"
+              data-testid="desc_input"
+              name="description"
+              type="text"
+              required
+              label={t('components.ContactForm.briefDescription')}
+              rows={5}
+              maxRows={15}
+              value={description}
+              onChange={descriptionChangeHandler}
+              error={textfieldError}
+              helperText={textfieldError ? t('components.ContactForm.error') : ''}
+            />
 
-        <FormControl>
-          <TextField
-            id="desc_input"
-            data-testid="desc_input"
-            name="description"
-            type="text"
-            required
-            label={t('components.ContactForm.briefDescription')}
-            rows={5}
-            maxRows={15}
-            value={description}
-            onChange={descriptionChangeHandler}
-            error={textfieldError}
-            helperText={textfieldError ? t('components.ContactForm.error') : ''}
-          />
-
-          <Button variant="contained" color="primary" sx={{ alignSelf: 'end' }} onClick={handleSubmit}>
-            {t('components.ContactForm.submit')}
-          </Button>
-        </FormControl>
-        <Backdrop open={isLoading}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
-      </Stack>
-    </form>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ alignSelf: 'end', marginTop: '0.6rem' }}
+              onClick={handleSubmit}>
+              {t('components.ContactForm.submit')}
+            </Button>
+          </FormControl>
+          <Backdrop open={isLoading}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        </Stack>
+      </form>
+    </Stack>
   )
 }
 
