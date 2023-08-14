@@ -3,5 +3,4 @@
 
 yarn run ts-node src/shared/auto-order-json-translations.ts
 yarn lint
-npx typedoc
 # copy and overwrite into wiki
