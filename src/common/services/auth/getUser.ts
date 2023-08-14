@@ -3,7 +3,7 @@ import { getData } from '../RequestResponse'
 
 /**
  *
- * @return {Promise<User>} User
+ * @returns {@link User} object
  */
 export const getUser = async (): Promise<User> => {
   const response = await fetch(process.env.BACKEND + `/lms/user_from_cookie`, {

@@ -2,11 +2,19 @@ import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
 import { MemoryRouter } from 'react-router-dom'
-import { Topic, LearningElement, LearningPath, AuthContext } from '@services'
+import {Topic, LearningElement, LearningPathElement, StudentLearningElement} from '@core'
+import { AuthContext } from '@services'
 import * as router from 'react-router'
 
 const topics: Topic[] = []
-const learningElementPath: LearningPath[] = []
+const learningElementPath: LearningPathElement[] = []
+const studentLearningElement: StudentLearningElement = {
+  id: 1,
+  student_id: 1,
+  learning_element_id: 1,
+  done: false,
+  done_at: "2021-09-01T12:00:00.000Z",
+}
 
 const navigate = jest.fn()
 
@@ -45,7 +53,7 @@ describe('MenuBar', () => {
       last_updated: '2023-04-20T15:45:00.000Z',
       lms_id: 456,
       name: 'Quiz on Chapter 3',
-      student_learning_element: null,
+      student_learning_element: studentLearningElement,
       university: 'ABC University'
     }
 
@@ -58,7 +66,7 @@ describe('MenuBar', () => {
       last_updated: '2023-04-20T15:45:00.000Z',
       lms_id: 456,
       name: 'Quiz on Chapter 5',
-      student_learning_element: null,
+      student_learning_element: studentLearningElement,
       university: 'ABC University'
     }
 
@@ -105,7 +113,7 @@ describe('MenuBar', () => {
       }
     ]
 
-    const learningElementPath: LearningPath[] = [
+    const learningElementPath: LearningPathElement[] = [
       {
         based_on: 'some-Algorithm',
         calculated_on: 'today',
@@ -305,7 +313,7 @@ describe('MenuBar', () => {
       last_updated: '2023-04-20T15:45:00.000Z',
       lms_id: 456,
       name: 'Quiz on Chapter 3',
-      student_learning_element: null,
+      student_learning_element: studentLearningElement,
       university: 'ABC University'
     }
 
@@ -318,7 +326,7 @@ describe('MenuBar', () => {
       last_updated: '2023-04-20T15:45:00.000Z',
       lms_id: 456,
       name: 'Quiz on Chapter 5',
-      student_learning_element: null,
+      student_learning_element: studentLearningElement,
       university: 'ABC University'
     }
 
@@ -365,7 +373,7 @@ describe('MenuBar', () => {
       }
     ]
 
-    const learningElementPath: LearningPath[] = [
+    const learningElementPath: LearningPathElement[] = [
       {
         based_on: 'some-Algorithm',
         calculated_on: 'today',

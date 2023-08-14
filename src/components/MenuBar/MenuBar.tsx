@@ -23,11 +23,12 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import PersonIcon from '@mui/icons-material/Person'
 import { useTranslation } from 'react-i18next'
 import { Login, Logout } from '@mui/icons-material'
-import { AuthContext, SnackbarContext, Topic } from '@services'
+import { AuthContext, SnackbarContext } from '@services'
 import { useLearningPathTopic as _useLearningPathTopic } from '../LocalNav/LocalNav.hooks'
 import { DropdownLanguage } from '@components'
 import { Link } from '@mui/material'
 import { useStore } from '@store'
+import { Topic } from '@core'
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
 /**

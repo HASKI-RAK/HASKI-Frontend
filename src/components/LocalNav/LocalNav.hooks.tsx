@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Topic } from '@services'
-import { LearningPathElement } from '@core'
+import { LearningPathElement, Topic, LearningPathElementReturn } from '@core'
 import log from 'loglevel'
 import { useStore, usePersistedStore } from '@store'
-import { LearningPathElementReturn } from '@core'
 
 const initialLearningPathElement: LearningPathElement = {
   id: 99999,

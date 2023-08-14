@@ -7,6 +7,7 @@
   "plugin": ["typedoc-plugin-markdown", "typedoc-github-wiki-theme"],
   "theme": "github-wiki",
   "entryPoints": ["./src/index.tsx", "./src/common/core/index.ts"],
+  "exclude": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx", "./docs", "./pages"],
   "out": "docs",
   "sourceLinkTemplate": "https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/{path}#L{line}",
   "readme": "README.md",

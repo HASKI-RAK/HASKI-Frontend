@@ -1,7 +1,9 @@
+/**
+ * @module core
+ */
 import User from './User/User'
 import ILS from './QuestionnaireResults/ILS'
 import ListK from './QuestionnaireResults/ListK'
-import TopicLearningElement from './LearningPathElement/LearningPathElement'
 import LearningElement from './LearningElement/LearningElement'
 import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
 import LearningPathElement from './LearningPathElement/LearningPathElement'
@@ -17,7 +19,6 @@ export type {
   User,
   Course,
   CourseResponse,
-  TopicLearningElement,
   LearningElement,
   LearningPathTopic,
   LearningPathElement,
