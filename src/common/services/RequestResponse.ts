@@ -56,10 +56,10 @@ type Response = {
  * @returns The data of type T of the response
  */
 export const getData = async <T>(response: Response): Promise<T> => {
-  response.content = async <T>() => await content<T>(response)
-  if (response.ok) return await response.content<T>()
+  const contentData = await content<T>(response)
+  if (response.ok) return contentData
   else {
-    const data: ErrorRequestResponse = await response.content<ErrorRequestResponse>()
+    const data: ErrorRequestResponse = await content<ErrorRequestResponse>(response)
     throw new Error(data.message)
   }
 }

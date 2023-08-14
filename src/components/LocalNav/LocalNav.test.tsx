@@ -9,6 +9,7 @@ import { mockServices } from '../../../jest.setup'
 import { renderHook } from '@testing-library/react-hooks'
 import { getSortedLearningPath, useLearningPathTopic, useLearningPathElement } from './LocalNav.hooks'
 import resetModules = jest.resetModules
+import LazyLoadingLearningPathElement, { LazyLoadingLearningPathElementProps } from './LazyLoadingLearningPathElement'
 
 const navigate = jest.fn()
 
@@ -121,10 +122,9 @@ describe('LocalNav', () => {
   })
 
   it('should render the LocalNav with Topic and learningElementPath loading Topics', () => {
-    const { getAllByTestId } = render(<LocalNav {...props} />)
+    const {container} = render(<LocalNav {...props} />)
 
-    const loadingSkeletons = getAllByTestId(/LocalNav-Skeleton-Topic/)
-    expect(loadingSkeletons).toHaveLength(3)
+    expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
   })
 
   it('should render the LocalNav with Topic and learningElementPath loading Elements', () => {
@@ -235,6 +235,42 @@ describe('LocalNav', () => {
     expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('true')
 
     fireEvent.click(getByTestId('Quiz on Chapter 3'))
+  })
+
+  it('should render the lazy learning path element with prop mock', () => {
+    const mockUseLearningPathElement = jest.fn().mockReturnValue({
+      loadingElements: false,
+      learningPaths: mockLearningPathElement
+    })
+
+    const props: LazyLoadingLearningPathElementProps = {
+      topic: topics[0],
+      courseId: '2',
+      useLearningPathElement: mockUseLearningPathElement
+    }
+
+    const { getByTestId } = render(
+      <MemoryRouter initialEntries={['/login']}>
+        <LazyLoadingLearningPathElement {...props} />
+      </MemoryRouter>
+    )
+
+    fireEvent.click(getByTestId('Quiz on Chapter 3'))
+  })
+
+  it('should render the lazy learning path element without giving mock prop', () => {
+    const props: LazyLoadingLearningPathElementProps = {
+      topic: topics[0],
+      courseId: '2'
+    }
+
+    const { container } = render(
+      <MemoryRouter initialEntries={['/login']}>
+        <LazyLoadingLearningPathElement {...props} />
+      </MemoryRouter>
+    )
+
+    expect(container.innerHTML).toContain('MuiSkeleton-root')
   })
 })
 
@@ -349,7 +385,7 @@ describe('getSortedLearningPath works as expected', () => {
     const userid = 1
     const lmsUserid = 1
     const studentid = 1
-    const result = await getSortedLearningPath(userid, lmsUserid, studentid, topic, mockFetchLearningPathElement)
+    const result = await getSortedLearningPath(userid, lmsUserid, studentid, topic, '2', mockFetchLearningPathElement)
     expect(result).toEqual({
       id: 99999,
       course_id: 99999,
@@ -396,7 +432,7 @@ describe('getSortedLearningPath works as expected', () => {
       ]
     })
 
-    const { result, waitForNextUpdate } = renderHook(() => useLearningPathTopic())
+    const { result, waitForNextUpdate } = renderHook(() => useLearningPathTopic('2'))
 
     expect(result.current.loading).toBe(true)
     expect(result.current.topics).toEqual([])
@@ -413,7 +449,7 @@ describe('getSortedLearningPath works as expected', () => {
         is_topic: true,
         last_updated: 'string',
         lms_id: 1,
-        name: 'string',
+        name: 'Wirtschaftsinformatik',
         parent_id: 1,
         university: 'HS-Kempten',
         student_topic: {
@@ -424,6 +460,26 @@ describe('getSortedLearningPath works as expected', () => {
           topic_id: 1,
           visits: ['string']
         }
+      },
+      {
+        contains_le: true,
+        created_at: 'string',
+        created_by: 'string',
+        id: 2,
+        is_topic: true,
+        last_updated: 'string',
+        lms_id: 1,
+        name: 'Informatik',
+        parent_id: 1,
+        university: 'HS-Kempten',
+        student_topic: {
+          done: true,
+          done_at: 'string',
+          id: 2,
+          student_id: 1,
+          topic_id: 2,
+          visits: ['string']
+        }
       }
     ])
   })
@@ -431,7 +487,7 @@ describe('getSortedLearningPath works as expected', () => {
   test('fetches learning path elements for a topic and returns the loading state', async () => {
     mockFetchUser.mockResolvedValueOnce({ settings: { user_id: 1 }, lms_user_id: 1, id: 1 })
 
-    const { result, waitForNextUpdate } = renderHook(() => useLearningPathElement(topic))
+    const { result, waitForNextUpdate } = renderHook(() => useLearningPathElement(topic, '2'))
 
     expect(result.current.loadingElements).toBe(true)
     expect(result.current.learningPaths).toEqual(initialLearningPathElement)
@@ -562,7 +618,7 @@ describe('useLearningPathTopic', () => {
 
     act(() => {
       mockServices.getLearningPathTopic.mockImplementationOnce(mockgetLearningPathTopic)
-      const { result } = renderHook(() => useLearningPathTopic())
+      const { result } = renderHook(() => useLearningPathTopic('2'))
 
       expect(result.current).toBeUndefined()
     })
@@ -596,7 +652,7 @@ describe('useLearningPathTopic', () => {
 
     act(() => {
       mockServices.getLearningPathElement.mockImplementationOnce(mockgetLearningPathElement)
-      const { result } = renderHook(() => useLearningPathElement(topic))
+      const { result } = renderHook(() => useLearningPathElement(topic, '2'))
 
       expect(result.current).toBeUndefined()
     })

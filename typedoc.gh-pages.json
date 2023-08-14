@@ -1,0 +1,12 @@
+{
+  // User friendly name
+  "name": "HASKI-Frontend Documentation",
+  "excludeExternals": true,
+  "excludeNotDocumented": true,
+  // "typedoc-plugin-merge-modules",
+  "entryPoints": ["./src/index.tsx", "./src/common/core/index.ts"],
+  "sourceLinkTemplate": "https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/{path}#L{line}",
+  "cleanOutputDir": false,
+  "titleLink": "https://wiki.haski.app"
+  // "mergeModulesMergeMode": "module-category"
+}

@@ -42,17 +42,19 @@ export const Home = () => {
         clearTimeout(preventEndlessLoading)
         fetchUser()
           .then((user) => {
-            fetchCourses(user.settings.user_id, user.lms_user_id, user.id).then((CourseResponse) => {
-              setCourses(CourseResponse.courses)
-            }).catch((error) => {
+            fetchCourses(user.settings.user_id, user.lms_user_id, user.id)
+              .then((CourseResponse) => {
+                setCourses(CourseResponse.courses)
+              })
+              .catch((error) => {
                 // 🍿 snackbar error
                 addSnackbar({
-                    message: error.message,
-                    severity: 'error',
-                    autoHideDuration: 5000
+                  message: error.message,
+                  severity: 'error',
+                  autoHideDuration: 5000
                 })
                 log.error(error.message)
-            })
+              })
           })
           .catch((error) => {
             // 🍿 snackbar error
@@ -63,14 +65,16 @@ export const Home = () => {
             })
             log.error(error.message)
           })
+          .finally(() => {
+            setLoading(false)
+          })
       }
     }
     loadData()
-    setLoading(false)
     return () => {
       clearTimeout(preventEndlessLoading)
     }
-  }, [authcontext.isAuth, loading])
+  }, [loading])
 
   // Card cointaining the courses with a button to the specific course
   return loading ? (
@@ -82,7 +86,7 @@ export const Home = () => {
           {courses.length === 0 ? (
             <Card>
               <CardContent>
-                <Typography variant="h5">No courses yet</Typography>
+                <Typography variant="h5">{t('components.Home.NoCourses')}</Typography>
               </CardContent>
             </Card>
           ) : (
@@ -96,7 +100,6 @@ export const Home = () => {
                       <Button
                         variant="contained"
                         color="primary"
-                        disabled={course.id === 99999}
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>

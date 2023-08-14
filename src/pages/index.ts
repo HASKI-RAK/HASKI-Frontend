@@ -12,7 +12,7 @@ import ProjectDescription from './ProjectDescription/ProjectDescription'
 import ProjectInformation from './ProjectInformation/ProjectInformation'
 import Imprint from './Imprint/Imprint'
 import Topic from './Topic/Topic'
-import Course from './CoursePage/Course'
+import Course from './Course/Course'
 import PageNotFound from './PageNotFound/PageNotFound'
 import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy'
 export {

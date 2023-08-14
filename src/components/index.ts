@@ -6,7 +6,7 @@ import { TableListK } from './Questionnaire/TableListK'
 import { GraphListK } from './Questionnaire/GraphListK'
 import { ResultDescriptionListK } from './Questionnaire/ResultDescriptionListK'
 import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResultsModal'
-import LoginForm from './LoginForm/LoginForm'
+export { default as LoginForm, type LoginFormProps } from './LoginForm/LoginForm'
 import MenuBar from './MenuBar/MenuBar'
 import ContactForm from './ContactForm/ContactForm'
 import Footer from './Footer/Footer'
@@ -19,6 +19,7 @@ import SnackbarMessage, { SnackbarMessageProps, SeverityType } from './SnackbarM
 import SnackbarContainer from './SnackbarContainer/SnackbarContainer'
 import SnackbarTransition from './SnackbarTransition/SnackbarTransition'
 import IFrameModal from './IFrameModal/IFrameModal'
+import SkeletonList from './SkeletonList/SkeletonList'
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
@@ -30,7 +31,6 @@ export {
   MenuBar,
   Footer,
   DropdownLanguage,
-  LoginForm,
   SnackbarMessage,
   SnackbarContainer,
   TableILS,
@@ -45,6 +45,7 @@ export {
   ProjectDescriptionCard,
   ProjectDescriptionStepper,
   SnackbarTransition,
-  IFrameModal
+  IFrameModal,
+  SkeletonList
 }
 export type { SnackbarMessageProps, SeverityType }
