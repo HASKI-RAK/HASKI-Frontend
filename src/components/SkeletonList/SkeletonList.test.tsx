@@ -1,11 +1,11 @@
-import React from "react";
-import { render } from "@testing-library/react";
-import SkeletonList from "./SkeletonList"; // Adjust the import path accordingly
+import React from 'react'
+import { render } from '@testing-library/react'
+import SkeletonList from './SkeletonList' // Adjust the import path accordingly
 
-describe("SkeletonList component", () => {
-    it("renders skeleton items", () => {
-        const container = render(<SkeletonList />);
+describe('SkeletonList component', () => {
+  it('renders skeleton items', () => {
+    const container = render(<SkeletonList />)
 
-        expect(container).toBeTruthy();
-    });
-});
+    expect(container).toBeTruthy()
+  })
+})

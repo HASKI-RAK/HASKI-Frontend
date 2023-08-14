@@ -198,7 +198,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                     <Grid container direction="column-reverse" spacing={2}>
                       {loadingTopics ? ( // display Skeleton component while loading
                         <Box width={400}>
-                          <SkeletonList/>
+                          <SkeletonList />
                         </Box>
                       ) : (
                         //For every Topic the LearningPathElement is displayed under it.

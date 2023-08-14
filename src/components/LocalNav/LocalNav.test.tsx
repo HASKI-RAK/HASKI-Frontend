@@ -122,7 +122,7 @@ describe('LocalNav', () => {
   })
 
   it('should render the LocalNav with Topic and learningElementPath loading Topics', () => {
-    const {container} = render(<LocalNav {...props} />)
+    const { container } = render(<LocalNav {...props} />)
 
     expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
   })
