@@ -3,4 +3,6 @@
 
 yarn run ts-node src/shared/auto-order-json-translations.ts
 yarn lint
-npx typedoc ./src/** --theme github-wiki --out ../HASKI-Frontend.wiki/
+npx typedoc ./src/** --theme github-wiki --out ../HASKI-Frontend.wiki-temp/
+# copy and overwrite into wiki
+cp -r ../HASKI-Frontend.wiki-temp/* ../HASKI-Frontend.wiki/
