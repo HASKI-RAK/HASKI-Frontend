@@ -5009,8 +5009,6 @@ i18next@^22.1.2:
   version "22.1.2"
   resolved "https://registry.yarnpkg.com/i18next/-/i18next-22.1.2.tgz#3327c6d8c1281011c280c58ad88dc74a329f6bf2"
   integrity sha512-HqAjWygRuDvMPdAjMgyv3l07PiN7MtBTCh8aud1iwn1FPBNhF0mzFUYQt+aVKZ3OOl0A+KrlqbCjrR1TCGB4Jw==
-  dependencies:
-    "@babel/runtime" "^7.20.6"
 
 iconv-lite@0.4.24:
   version "0.4.24"

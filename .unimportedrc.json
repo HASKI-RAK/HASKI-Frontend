@@ -17,5 +17,5 @@
     "src/common/index.ts"
   ],
   "ignoreUnresolved": [],
-  "ignoreUnused": ["react-flow-renderer"]
+  "ignoreUnused": ["react-flow-renderer", "@nivo/core", "@nivo/tooltip"]
 }

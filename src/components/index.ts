@@ -8,7 +8,7 @@ import { ResultDescriptionListK } from './Questionnaire/ResultDescriptionListK'
 import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResultsModal'
 export { default as LoginForm, type LoginFormProps } from './LoginForm/LoginForm'
 import MenuBar from './MenuBar/MenuBar'
-
+import ContactForm from './ContactForm/ContactForm'
 import Footer from './Footer/Footer'
 import LocalNav from './LocalNav/LocalNav'
 import BreadcrumbsContainer from './BreadcrumbsContainer/BreadcrumbsContainer'
@@ -19,6 +19,7 @@ import SnackbarMessage, { SnackbarMessageProps, SeverityType } from './SnackbarM
 import SnackbarContainer from './SnackbarContainer/SnackbarContainer'
 import SnackbarTransition from './SnackbarTransition/SnackbarTransition'
 import IFrameModal from './IFrameModal/IFrameModal'
+import SkeletonList from './SkeletonList/SkeletonList'
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
@@ -39,10 +40,12 @@ export {
   GraphListK,
   ResultDescriptionListK,
   QuestionnaireResultsModal,
+  ContactForm,
   ProjectDescriptionContent,
   ProjectDescriptionCard,
   ProjectDescriptionStepper,
   SnackbarTransition,
-  IFrameModal
+  IFrameModal,
+  SkeletonList
 }
 export type { SnackbarMessageProps, SeverityType }

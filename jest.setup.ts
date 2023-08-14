@@ -161,7 +161,7 @@ const mockDataServices: MockDataServices = {
           is_topic: true,
           last_updated: 'string',
           lms_id: 1,
-          name: 'string',
+          name: 'Wirtschaftsinformatik',
           parent_id: 1,
           university: 'HS-Kempten',
           student_topic: {
@@ -172,8 +172,33 @@ const mockDataServices: MockDataServices = {
             topic_id: 1,
             visits: ['string']
           }
+        },
+        {
+          contains_le: true,
+          created_at: 'string',
+          created_by: 'string',
+          id: 2,
+          is_topic: true,
+          last_updated: 'string',
+          lms_id: 1,
+          name: 'Informatik',
+          parent_id: 1,
+          university: 'HS-Kempten',
+          student_topic: {
+            done: true,
+            done_at: 'string',
+            id: 2,
+            student_id: 1,
+            topic_id: 2,
+            visits: ['string']
+          }
         }
       ]
+    })
+  }),
+  postContactForm: jest.fn(() => {
+    return Promise.resolve({
+      undefined
     })
   }),
   postLogin: jest.fn(() => {

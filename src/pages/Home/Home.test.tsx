@@ -75,7 +75,7 @@ describe('Test the Home page', () => {
     )
 
     await waitFor(() => {
-      expect(container.querySelector('.MuiSkeleton-root')).toBeNull()
+      expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
     })
   })
 
@@ -97,7 +97,29 @@ describe('Test the Home page', () => {
     )
 
     await waitFor(() => {
-      expect(container.querySelector('.MuiSkeleton-root')).toBeNull()
+      expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
+    })
+  })
+
+  test('fetching Course returns no courses', async () => {
+    const mockgetCourse = jest.fn(() => {
+      return Promise.resolve({
+        courses: []
+      })
+    })
+
+    mockServices.getCourses.mockImplementationOnce(mockgetCourse)
+
+    const { getByText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(getByText('components.Home.NoCourses')).toBeInTheDocument()
     })
   })
 })

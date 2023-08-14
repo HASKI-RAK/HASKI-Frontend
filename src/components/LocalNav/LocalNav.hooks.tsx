@@ -42,14 +42,15 @@ export const getSortedLearningPath = async (
   lmsUserid: number,
   studentid: number,
   data: Topic,
+  courseId: string,
   fetchLearningPath: LearningPathElementReturn
 ): Promise<LearningPathElement> => {
-  const learningPath = await fetchLearningPath(userid, lmsUserid, studentid, '2', data.id.toString())
+  const learningPath = await fetchLearningPath(userid, lmsUserid, studentid, courseId, data.id.toString())
   learningPath.path.sort((a, b) => a.position - b.position)
   return learningPath
 }
 
-export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } => {
+export const useLearningPathTopic = (courseId: string): { loading: boolean; topics: Topic[] } => {
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
   const fetchUser = usePersistedStore((state) => state.fetchUser)
@@ -60,7 +61,7 @@ export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } =>
       setLoading(true)
       try {
         const user = await fetchUser()
-        const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, '2')
+        const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
         setTopics(fetchedTopics.topics)
       } catch (error) {
         log.error(error)
@@ -80,7 +81,8 @@ export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } =>
 }
 
 export const useLearningPathElement = (
-  topic: Topic
+  topic: Topic,
+  courseId: string
 ): { loadingElements: boolean; learningPaths: LearningPathElement } => {
   const [loadingElements, setLoadingElements] = useState(true)
   const [learningPaths, setLearningPaths] = useState<LearningPathElement>(initialLearningPathElement)
@@ -97,6 +99,7 @@ export const useLearningPathElement = (
           user.lms_user_id,
           user.id,
           topic,
+          courseId,
           fetchLearningPathElement
         )
         setLearningPaths(dataLearningPath)
