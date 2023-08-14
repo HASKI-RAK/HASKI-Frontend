@@ -2,7 +2,7 @@ node_modules
 build
 dist
 bin
-.vscode
+.vscode/launch.json
 coverage
 yarn.lock
 .env.development
@@ -10,3 +10,4 @@ yarn.lock
 docs
 wiki
 debug.log
+pages

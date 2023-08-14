@@ -51,7 +51,6 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
         window.location.replace(response.lti_launch_view)
       )
       .catch((error) => {
-        //TODO 🍿 snackbar
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
       })
       .finally(() => {
@@ -71,7 +70,6 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
         navigate('/', { replace: true })
       })
       .catch((error: string) => {
-        //TODO 🍿 snackbar
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
         navigate('/login', { replace: true })
       })

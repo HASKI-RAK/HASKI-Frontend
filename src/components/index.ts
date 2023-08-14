@@ -6,7 +6,7 @@ import { TableListK } from './Questionnaire/TableListK'
 import { GraphListK } from './Questionnaire/GraphListK'
 import { ResultDescriptionListK } from './Questionnaire/ResultDescriptionListK'
 import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResultsModal'
-import LoginForm from './LoginForm/LoginForm'
+export { default as LoginForm, type LoginFormProps } from './LoginForm/LoginForm'
 import MenuBar from './MenuBar/MenuBar'
 
 import Footer from './Footer/Footer'
@@ -31,7 +31,6 @@ export {
   MenuBar,
   Footer,
   DropdownLanguage,
-  LoginForm,
   SnackbarMessage,
   SnackbarContainer,
   TableILS,

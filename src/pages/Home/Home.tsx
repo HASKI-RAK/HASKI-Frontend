@@ -45,7 +45,6 @@ export const Home = () => {
             fetchCourses(user.settings.user_id, user.lms_user_id, user.id)
               .then((CourseResponse) => {
                 setCourses(CourseResponse.courses)
-                setLoading(false)
               })
               .catch((error) => {
                 // 🍿 snackbar error

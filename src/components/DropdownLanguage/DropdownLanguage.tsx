@@ -64,5 +64,6 @@ const DropdownLanguage = forwardRef((props, ref: ForwardedRef<HTMLDivElement | n
     </div>
   )
 })
+// eslint-disable-next-line immutable/no-mutation
 DropdownLanguage.displayName = 'DropdownLanguage'
 export { DropdownLanguage }

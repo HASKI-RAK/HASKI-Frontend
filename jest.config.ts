@@ -1,4 +1,3 @@
-// const { pathsToModuleNameMapper } = require('ts-jest')
 import { compilerOptions } from './tsconfig.json'
 import { pathsToModuleNameMapper } from 'ts-jest'
 import { Config } from '@jest/types'
