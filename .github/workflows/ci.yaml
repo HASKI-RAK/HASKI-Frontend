@@ -27,7 +27,7 @@ jobs:
         run: yarn install
 
       - name: Create the docs directory locally in CI
-        run: npx typedoc --options typedoc.gh-pages.json --out pages
+        run: yarn run typedoc --out pages
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
