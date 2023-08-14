@@ -21,11 +21,11 @@
     "inlineSourceMap": true,
     "paths": {
       "@pages": ["src/pages"],
-      "@services": ["src/common/services"],
-      "@utils": ["src/common/utils"],
-      "@core": ["src/common/core"],
-      "@store": ["src/common/store"],
+      "@services": ["src/services"],
+      "@core": ["src/core"],
+      "@store": ["src/store"],
       "@components": ["src/components"],
+      "@utils": ["src/common/utils"],
       "@common/components": ["src/common/components"],
       "@shared": ["src/shared"]
     },

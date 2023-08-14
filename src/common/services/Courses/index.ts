@@ -1,1 +1,0 @@
-export { getCourses } from './getCourses'

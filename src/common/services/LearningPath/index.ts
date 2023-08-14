@@ -1,1 +1,0 @@
-export { getLearningPathElement } from './getLearningPathElement'
