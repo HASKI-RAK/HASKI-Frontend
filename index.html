@@ -1,0 +1,142 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>HASKI-Frontend Documentation</title><meta name="description" content="Documentation for HASKI-Frontend Documentation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/search.js" id="tsd-search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base=".">
+<div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<div class="field">
+<div id="tsd-toolbar-links"></div></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="https://wiki.haski.app" class="title">HASKI-Frontend Documentation</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+<div class="container container-main">
+<div class="col-content">
+<div class="tsd-page-title">
+<h2>HASKI-Frontend Documentation</h2></div>
+<div class="tsd-panel tsd-typography"><a id="md:haski-frontend" class="tsd-anchor"></a><h1><a href="#md:haski-frontend">HASKI-Frontend</a></h1><p>The bridge between AI backend models and LMS, wrapped in a web application.</p>
+<p>The complete <strong>technical documentation</strong> can be found <a href="https://github.com/HASKI-RAK/HASKI-Frontend/wiki/Modules">here</a>.</p>
+<a id="md:setup" class="tsd-anchor"></a><h2><a href="#md:setup">Setup</a></h2><ul>
+<li>Install a JavaScript Runtime like <a href="https://nodejs.org/">Node.js</a>.</li>
+<li>If you choose to use yarn as a package manager, install it globally via <code>npm install --global yarn</code>, otherwise use the <code>npm</code> equivalents in the following steps.</li>
+<li>Navigate into the root project directory, where <code>package.json</code> lays.</li>
+<li>Install the project dependencies via <code>yarn install</code></li>
+<li>Add a .env.development file</li>
+<li>For production add a .env.development file</li>
+</ul>
+<a id="md:env-files" class="tsd-anchor"></a><h3><a href="#md:env-files">.env files</a></h3><p>The content of the .env.development or .env.production file gets injected at build time. The values will not be available at runtime. The .env file is not tracked by git.</p>
+<pre><code class="language-sh"><span class="hl-0"># API</span><br/><span class="hl-0"># Change the backend url to the correct one</span><br/><span class="hl-1">BACKEND</span><span class="hl-2">=</span><span class="hl-3">&quot;http://fakedomain.com:5000&quot;</span><br/><span class="hl-1">MOODLE</span><span class="hl-2">=</span><span class="hl-3">&quot;http://fakedomain.com&quot;</span><br/><span class="hl-1">LOG_LEVEL</span><span class="hl-2">=</span><span class="hl-3">&quot;debug&quot;</span>
+</code><button>Copy</button></pre>
+<a id="md:scripts" class="tsd-anchor"></a><h3><a href="#md:scripts">Scripts</a></h3><ul>
+<li>Run for development: <code>yarn start</code></li>
+<li>Build for production: <code>yarn build-prod</code></li>
+<li>Serve production build: <code>yarn serve -s dist</code></li>
+<li>Run tests: <code>yarn test</code></li>
+<li>For linting: <code>yarn lint</code></li>
+</ul>
+<a id="md:docker" class="tsd-anchor"></a><h3><a href="#md:docker">Docker</a></h3><ul>
+<li>Build docker image: <code>docker build -t haski-frontend:latest .</code></li>
+<li>Run docker image: <code>docker run -p 8080:80 haski-frontend:latest</code></li>
+</ul>
+<a id="md:development" class="tsd-anchor"></a><h2><a href="#md:development">Development</a></h2><a id="md:code-style" class="tsd-anchor"></a><h3><a href="#md:code-style">Code style</a></h3><p>We use <a href="https://eslint.org/">ESLint</a> to enforce a consistent code style. A .prettierrc file is also included to format the code automatically.
+Run <code>yarn lint</code> to check for errors.
+It also runs <code>unimported</code> to check for unused imports. You will be prompted to install this package if you run <code>yarn lint</code> for the first time. You can run <code>yarn lint --fix</code> to fix some of the errors automatically.</p>
+<a id="md:testing" class="tsd-anchor"></a><h3><a href="#md:testing">Testing</a></h3><p>We use <a href="https://jestjs.io/">Jest</a> as a testing framework. Tests are located besides the actual files. The naming convention for test files is <code>*.test.(ts/tsx)</code>.</p>
+<a id="md:ide" class="tsd-anchor"></a><h3><a href="#md:ide">IDE</a></h3><p>Optional plugins for your development environment:</p>
+<table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>README</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SonarCube</td>
+<td><a href="https://www.sonarqube.org/">https://www.sonarqube.org/</a></td>
+<td>SonarCloud will automatically scan the code for required standards and notify you in the merge request.</td>
+</tr>
+<tr>
+<td>Babel JavaScript</td>
+<td><a href="https://babeljs.io/">https://babeljs.io/</a></td>
+<td>Compiles JavaScript.</td>
+</tr>
+<tr>
+<td>ESLint</td>
+<td><a href="https://eslint.org/">https://eslint.org/</a></td>
+<td>ESLint statically analyzes your code to quickly find problems.</td>
+</tr>
+<tr>
+<td>JavaScript and TypeScript</td>
+<td><a href="https://github.com/microsoft/vscode-typescript-next.git">https://github.com/microsoft/vscode-typescript-next.git</a></td>
+<td>TypeScript version used to power JavaScript and TypeScript IntelliSense.</td>
+</tr>
+<tr>
+<td>Npm Intellisense</td>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense">https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense</a></td>
+<td>Code completion for imports.</td>
+</tr>
+<tr>
+<td>Prettier</td>
+<td><a href="https://prettier.io/">https://prettier.io/</a></td>
+<td>Code formatter.</td>
+</tr>
+<tr>
+<td>Jest</td>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest">https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest</a></td>
+<td>Jest runner.</td>
+</tr>
+<tr>
+<td>GitLens</td>
+<td><a href="https://gitlens.amod.io/">https://gitlens.amod.io/</a></td>
+<td>GitLens supercharges the Git capabilities built into Visual Studio Code.</td>
+</tr>
+<tr>
+<td>Git History</td>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory">https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory</a></td>
+<td>View git log, file history, compare branches or commits.</td>
+</tr>
+</tbody></table>
+</div></div>
+<div class="col-sidebar">
+<div class="page-menu">
+<div class="tsd-navigation settings">
+<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)" id="icon-chevronDown"></path></svg>Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility">
+<h4 class="uppercase">Member Visibility</h4><form>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></form></div>
+<div class="tsd-theme-toggle">
+<h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg>On This Page</h3></summary>
+<div class="tsd-accordion-details">
+<ul>
+<li>
+<ul>
+<li><a href="#md:haski-frontend"><span>HASKI-<wbr/>Frontend</span></a></li>
+<li>
+<ul>
+<li><a href="#md:setup"><span>Setup</span></a></li>
+<li>
+<ul>
+<li><a href="#md:env-files"><span>.env files</span></a></li>
+<li><a href="#md:scripts"><span>Scripts</span></a></li>
+<li><a href="#md:docker"><span>Docker</span></a></li></ul></li>
+<li><a href="#md:development"><span>Development</span></a></li>
+<li>
+<ul>
+<li><a href="#md:code-style"><span>Code style</span></a></li>
+<li><a href="#md:testing"><span>Testing</span></a></li>
+<li><a href="#md:ide"><span>IDE</span></a></li></ul></li></ul></li></ul></li></ul></div></details></div>
+<div class="site-menu">
+<nav class="tsd-navigation"><a href="index.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>HASKI-<wbr/>Frontend <wbr/>Documentation</span></a>
+<ul class="tsd-small-nested-navigation">
+<li><a href="modules/components.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>components</span></a></li>
+<li><a href="modules/pages.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>pages</span></a></li>
+<li><a href="modules/shared.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>shared</span></a></li></ul></nav></div></div></div>
+<div class="tsd-generator">
+<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
+<div class="overlay"></div></body></html>
