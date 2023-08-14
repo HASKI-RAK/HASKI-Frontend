@@ -1,7 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prefer-arrow-functions", "react-hooks", "immutable"],
+  "plugins": ["@typescript-eslint", "prefer-arrow-functions", "react-hooks", "immutable", "eslint-plugin-tsdoc"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -29,7 +29,8 @@
     "react-hooks/exhaustive-deps": 0, // Checks effect dependencies
     "immutable/no-let": 1,
     "immutable/no-this": 1,
-    "immutable/no-mutation": 1
+    "immutable/no-mutation": 1,
+    "tsdoc/syntax": "warn"
   },
   "settings": {
     "react": {

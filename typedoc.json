@@ -1,0 +1,12 @@
+{
+  // User friendly name
+  "name": "HASKI-Frontend Documentation",
+  "excludeExternals": true,
+  "excludeNotDocumented": true,
+  "plugin": ["typedoc-plugin-markdown", "typedoc-github-wiki-theme"],
+  "theme": "github-wiki",
+  "entryPoints": ["./src/index.tsx", "./src/index.html"],
+  "out": "docs",
+  "sourceLinkTemplate": "https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/{path}#L{line}",
+  "readme": "README.md"
+}
