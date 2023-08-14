@@ -1,4 +1,4 @@
-import Typography from '@mui/material/Typography'
+import { DefaultTypography as Typography } from '@common/components'
 import { getListKParameters, getSubscaleScore } from './TableListK'
 import { useTranslation } from 'react-i18next'
 
@@ -226,7 +226,7 @@ const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: { [key
   return subscalesBelow3MessageString
 }
 
-export const ResultDescriptionListK = () => {
+const ResultDescriptionListK = () => {
   const [
     organize,
     elaborate,
@@ -289,3 +289,5 @@ export const ResultDescriptionListK = () => {
     </div>
   )
 }
+
+export default ResultDescriptionListK

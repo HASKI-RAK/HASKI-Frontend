@@ -1,10 +1,23 @@
 import { useState } from 'react'
 
+/**
+ * @property {@link useLoginFormHookParams#defaultUsername} - The default value for the username field.
+ * @property {@link useLoginFormHookParams#defaultPassword} - The default value for the password field.
+ */
 export type useLoginFormHookParams = {
   defaultUsername?: string
   defaultPassword?: string
 }
 
+/**
+ * @property {@link LoginFormHookReturn#username} - The current value of the username field.
+ * @property {@link LoginFormHookReturn#password} - The current value of the password field.
+ * @property {@link LoginFormHookReturn#setUsername} - Sets the value of the username field.
+ * @property {@link LoginFormHookReturn#setPassword} - Sets the value of the password field.
+ * @property {@link LoginFormHookReturn#submit} - Submits the form.
+ * @property {@link LoginFormHookReturn#validate} - Validates the form.
+ * @property {@link LoginFormHookReturn#loginMoodle} - Logs the user in to moodle.
+ */
 export type LoginFormHookReturn = {
   readonly username: string
   readonly password: string
@@ -18,8 +31,7 @@ export type LoginFormHookReturn = {
 /**
  * Hook for the login form logic. Handles username and password state and
  * provides functions to validate and submit the form.
- * @param params - The default values for the form.
- * @returns {LoginFormHookReturn} - The form logic.
+ * @param params - {@link useLoginFormHookParams}
  */
 export const useLoginForm = (params?: useLoginFormHookParams): LoginFormHookReturn => {
   // Default values

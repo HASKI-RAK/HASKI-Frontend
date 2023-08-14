@@ -1,3 +1,5 @@
+[![Documentation Coverage Status](https://wiki.haski.app/coverage.svg)]
+
 # HASKI-Frontend
 
 The bridge between AI backend models and a Learning Management System (LMS), wrapped nicely as a web application 🎁.

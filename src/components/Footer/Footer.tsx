@@ -10,7 +10,7 @@ import {
 } from '@common/components'
 
 /**
- * The footer component. *
+ * Sticks to the bottom of the page and is always visible.
  *
  * @remarks
  * It contains the footer of the application and is used in the main frame.

@@ -3,6 +3,11 @@ import { DefaultLink as Link, DefaultSkeleton as Skeleton, DefaultTypography as 
 import { useLearningPathElement as _useLearningPathElement } from './LocalNav.hooks'
 import { LearningPathElement, Topic } from '@core'
 
+/**
+ * @prop The {@link Topic} to be displayed
+ * @prop The id of the {@link Course} to be displayed
+ * @prop Optional function to override the default hook
+ */
 export type LazyLoadingLearningPathElementProps = {
   topic: Topic
   courseId: string
@@ -15,6 +20,10 @@ export type LazyLoadingLearningPathElementProps = {
   }
 }
 
+/**
+ * Lazy loading component to display the {@link LearningPathElement} of a {@link Topic}
+ * @param param - The {@link LazyLoadingLearningPathElementProps}
+ */
 const LazyLoadingLearningPathElement = ({
   topic,
   courseId,

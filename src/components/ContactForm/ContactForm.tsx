@@ -18,9 +18,15 @@ import {
 } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import React, { useMemo, useState } from 'react'
-import { useContactForm as _useContactForm, useContactFormHookParams, ContactFormHookReturn } from './ContactForm.hooks'
+import { default as _useContactForm, useContactFormHookParams, ContactFormHookReturn } from './ContactForm.hooks'
 import { FormDataType } from '@services'
 
+/**
+ * @property descriptionDefaultValue - The default value of the description textfield.
+ * @property onSubmit - The function that will be called when the form is submitted. Default is the submit function from the hook.
+ * @property isLoading - The loading state of the form. Default is false.
+ * @property useContactForm - The hook that contains the form logic and the form state. Dependency injection for testing purposes and extensibility.
+ */
 export type ContactFormProps = {
   descriptionDefaultValue?: string
   onSubmit?: (content: FormDataType) => void
@@ -31,7 +37,6 @@ export type ContactFormProps = {
  * ContactForm component.
  *
  * @param props - Props containing the form logic and the form state.
- * @returns {JSX.Element} - The Form component.
  *
  * @remarks
  * This component is accessed by the contact page. It currently can be accessed from the home page.

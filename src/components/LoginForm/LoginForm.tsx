@@ -45,7 +45,7 @@ export type LoginFormProps = {
  * It can be used as a standalone component on a page. The functionality
  * comes by default, but it can be overriden by custom functions passed as described
  * in {@link LoginFormProps.useLoginForm} or {@link LoginFormProps.onSubmit} and {@link LoginFormProps.onValidate}.
- * @param props - Props containing the form logic and the form state.
+ * @param props - {@link LoginFormProps} Props containing the form logic and the form state.
  * @returns The Form component.
  * @category Components
  */

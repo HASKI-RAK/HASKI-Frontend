@@ -41,7 +41,7 @@ export const useData = (): { possibleDimensions: string; [Dimension: string]: st
   ]
 }
 
-export const GraphILS = () => {
+const GraphILS = () => {
   const { t } = useTranslation()
   const theme = useTheme()
   const data = useData()
@@ -120,3 +120,5 @@ export const GraphILS = () => {
     </div>
   )
 }
+
+export default GraphILS

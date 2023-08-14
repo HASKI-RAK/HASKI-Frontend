@@ -2,11 +2,27 @@ import { useState, useContext } from 'react'
 import { FormDataType, SnackbarContext } from '@services'
 import { useTranslation } from 'react-i18next'
 
+/**
+ * @property - The default report type of the form.
+ * @property - The default report topic of the form.
+ * @property - The default description of the form.
+ * @category Hooks
+ */
 export type useContactFormHookParams = {
   defaultReportType?: string
   defaultReportTopic?: string
   defaultDescription?: string
 }
+/**
+ * @prop reportType - The report type of the form.
+ * @prop reportTopic - The report topic of the form.
+ * @prop description - The description of the form.
+ * @prop setReportType - Function to set the report type.
+ * @prop setReportTopic - Function to set the report topic.
+ * @prop setDescription - Function to set the description.
+ * @prop submit - Function to submit the form.
+ * @category Hooks
+ */
 
 export type ContactFormHookReturn = {
   readonly reportType: string
@@ -20,12 +36,11 @@ export type ContactFormHookReturn = {
 /**
  * Hook for the ContactForm logic. Handles reporttype, reporttopic and description state which sets the input for the textfields and
  * provides function to submit the form.
- * @param params - The default values for the form.
- * @returns {ContactFormHookReturn} - The form logic.
- * @function submit - Function for submitting the form. It writes the values of the form into the responseBody.
- * The responseBody is the object that will be sent to the backend.
+ * @param params - Default values for the form. They are optional and have a default value in case they are not provided.
+ * @returns - Logic like state and submit function.
+ * @category Hooks
  */
-export const useContactForm = (params?: useContactFormHookParams): ContactFormHookReturn => {
+const useContactForm = (params?: useContactFormHookParams): ContactFormHookReturn => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
 
@@ -57,3 +72,7 @@ export const useContactForm = (params?: useContactFormHookParams): ContactFormHo
     submit
   } as const
 }
+/**
+ * @module hooks
+ */
+export default useContactForm

@@ -121,7 +121,7 @@ export const getListKParameters = (): [
   ]
 }
 
-export const TableListK = () => {
+const TableListK = () => {
   const { t } = useTranslation()
 
   const [
@@ -306,3 +306,5 @@ export const TableListK = () => {
     </TableContainer>
   )
 }
+
+export default TableListK

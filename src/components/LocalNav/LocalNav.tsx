@@ -11,7 +11,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { LearningPathElement, Topic } from '@core'
-import React, { Suspense, useState } from 'react'
+import { Suspense, useState } from 'react'
 import {
   useLearningPathTopic as _useLearningPathTopic,
   useLearningPathElement as _useLearningPathElement
@@ -21,11 +21,9 @@ import { SkeletonList } from '@components'
 
 /**
  *  Local navigation component props.
- *  The "loading" property is a boolean value that indicates whether the data is still being loaded.
- *  The "topics" property is an array of objects that represent the topics related to the current page.
- *  The "learningPaths" property is an array of objects that represent the available learning paths related to the current page.
+ *  @prop {@link _useLearningPathTopic} - hook to get learning path topics
+ *  @prop {@link _useLearningPathElement} - hook to get learning path elements
  */
-
 export type LocalNavProps = {
   useLearningPathTopic?: (courseId: string) => { loading: boolean; topics: Topic[] }
   useLearningPathElement?: (
@@ -37,6 +35,11 @@ export type LocalNavProps = {
   }
 }
 
+/**
+ * Local navigation component.
+ * @param param - component props. The {@link LocalNavProps#useLearningPathTopic} and {@link LocalNavProps#useLearningPathElement} are optional.
+ * @returns
+ */
 const LocalNav = ({
   useLearningPathTopic = _useLearningPathTopic,
   useLearningPathElement = _useLearningPathElement
