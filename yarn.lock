@@ -1576,6 +1576,11 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
+"@mxssfd/typedoc-theme@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@mxssfd/typedoc-theme/-/typedoc-theme-1.1.2.tgz#cd17ef3227c7093e249a0432893c201a836d382c"
+  integrity sha512-Q/9Z+sff8ey92PaB7bnsGOfyNa85vTjyofO8EOH8KwEdfGnV4lGXwLFt4AUth7CCqYplqI9q4JxHNt869mlEcw==
+
 "@nivo/annotations@0.80.0":
   version "0.80.0"
   resolved "https://registry.yarnpkg.com/@nivo/annotations/-/annotations-0.80.0.tgz#127e4801fff7370dcfb9acfe1e335781dd65cfd5"
@@ -4881,6 +4886,11 @@ html-escaper@^2.0.0:
   resolved "https://registry.yarnpkg.com/html-escaper/-/html-escaper-2.0.2.tgz#dfd60027da36a36dfcbe236262c00a5822681453"
   integrity sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
 
+html-escaper@^3.0.0:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/html-escaper/-/html-escaper-3.0.3.tgz#4d336674652beb1dcbc29ef6b6ba7f6be6fdfed6"
+  integrity sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==
+
 html-minifier-terser@^6.0.2:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/html-minifier-terser/-/html-minifier-terser-6.1.0.tgz#bfc818934cc07918f6b3669f5774ecdfd48f32ab"
@@ -7809,6 +7819,13 @@ typedoc-plugin-coverage@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/typedoc-plugin-coverage/-/typedoc-plugin-coverage-2.1.0.tgz#619bf10853c5851c47dc17585e14385647bbb754"
   integrity sha512-d0Lc/aOPRAMnfABCW2cQqCQdzLUzadeq62r4DBrSchcfzx1X8nOvhXK/n4mVAO4wQQUchTm2ZGAzTtiAc2nl0A==
+
+typedoc-plugin-mermaid@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-mermaid/-/typedoc-plugin-mermaid-1.10.0.tgz#ef3d62b74a36ead6679f59f0b1315156b334a38e"
+  integrity sha512-NMo+m5FY5SuNR2dgDYwLO/Bu8O1927xPm1B5S5QcqBD9JiNaWP6jbyuPUltJtq9KEZOme3QwLVe1ZPSDr3tsmw==
+  dependencies:
+    html-escaper "^3.0.0"
 
 typedoc-plugin-missing-exports@^2.0.1:
   version "2.0.1"

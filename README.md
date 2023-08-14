@@ -16,7 +16,7 @@ The complete **technical documentation** can be found [here](https://wiki.haski.
 
 ### .env files
 
-The content of the .env.development or .env.production file gets injected at build time. The values will not be available at runtime. The .env file is not tracked by git.
+The content of the `.env.development` or `.env.production` file gets injected at build time. The values will not be available at runtime. The .env file is not tracked by git.
 
 ```sh
 # API

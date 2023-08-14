@@ -3,9 +3,15 @@
   "excludeExternals": false,
   "entryPoints": ["src/**/*.{ts,tsx}"],
   "exclude": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx", "./node_modules/**/*"],
-  "plugin": ["typedoc-plugin-coverage", "typedoc-plugin-missing-exports"],
+  "plugin": [
+    "@mxssfd/typedoc-theme",
+    "typedoc-plugin-mermaid",
+    "typedoc-plugin-coverage",
+    "typedoc-plugin-missing-exports"
+  ],
   "sourceLinkTemplate": "https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/{path}#L{line}",
   "cleanOutputDir": true,
+  "theme": "my-theme",
   "entryPointStrategy": "resolve", // expand or merge or resolve or packages
   "titleLink": "https://wiki.haski.app",
   "internalModule": "exports",
