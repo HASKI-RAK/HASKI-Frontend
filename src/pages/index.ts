@@ -1,10 +1,12 @@
 /**
  * This file provides direct access to elements in the pages folder
  */
+
 import App from './App/App'
 import Home from './Home/Home'
 import Login from './Login/Login'
 import ThemePresentation from './ThemePresentation/ThemePresentation'
+import Contact from './Contact/Contact'
 import MainFrame from './MainFrame/MainFrame'
 import ProjectDescription from './ProjectDescription/ProjectDescription'
 import ProjectInformation from './ProjectInformation/ProjectInformation'
@@ -19,6 +21,7 @@ export {
   ThemePresentation,
   Home,
   Login,
+  Contact,
   ProjectDescription,
   ProjectInformation,
   Imprint,

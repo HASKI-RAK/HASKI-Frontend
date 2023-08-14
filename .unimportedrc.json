@@ -16,5 +16,5 @@
     "src/shared/auto-order-json-translations.ts"
   ],
   "ignoreUnresolved": [],
-  "ignoreUnused": ["react-flow-renderer"]
+  "ignoreUnused": ["react-flow-renderer", "@nivo/core", "@nivo/tooltip"]
 }

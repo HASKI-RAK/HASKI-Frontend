@@ -6,6 +6,7 @@ import {
   ThemePresentation,
   Login,
   PrivacyPolicy,
+  Contact,
   ProjectDescription,
   ProjectInformation,
   Imprint,
@@ -38,6 +39,7 @@ const App = () => (
               <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
               <Route path="/theme" element={<ThemePresentation />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />
               <Route path="/projectinformation" element={<ProjectInformation />} />
               <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />

@@ -8,7 +8,7 @@ import { ResultDescriptionListK } from './Questionnaire/ResultDescriptionListK'
 import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResultsModal'
 export { default as LoginForm, type LoginFormProps } from './LoginForm/LoginForm'
 import MenuBar from './MenuBar/MenuBar'
-
+import ContactForm from './ContactForm/ContactForm'
 import Footer from './Footer/Footer'
 import LocalNav from './LocalNav/LocalNav'
 import BreadcrumbsContainer from './BreadcrumbsContainer/BreadcrumbsContainer'
@@ -40,6 +40,7 @@ export {
   GraphListK,
   ResultDescriptionListK,
   QuestionnaireResultsModal,
+  ContactForm,
   ProjectDescriptionContent,
   ProjectDescriptionCard,
   ProjectDescriptionStepper,
