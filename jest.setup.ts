@@ -11,7 +11,7 @@ type MockDataServices = {
 
 /**
  * Add custom mocks here to be used in tests
- * use import { mockServices } from '@tests/jest.setup' to import mocks
+ * use import { mockServices } from 'jest.setup' to import mocks
  * use mockServices.<mockName> to access a mock
  * use mockServices.<mockName>.mockImplementationOnce(() => {}) to define a mock for a single test
  * @remarks

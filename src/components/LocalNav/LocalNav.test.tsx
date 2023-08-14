@@ -4,7 +4,7 @@ import LocalNav, { LocalNavProps } from './LocalNav'
 import * as router from 'react-router'
 import { LearningPathElement, LearningPathLearningElement, Topic, LearningElement, StudentLearningElement } from '@core'
 import { MemoryRouter } from 'react-router-dom'
-import { mockServices } from '../../../jest.setup'
+import { mockServices } from 'jest.setup'
 import { renderHook } from '@testing-library/react-hooks'
 import { getSortedLearningPath, useLearningPathTopic, useLearningPathElement } from './LocalNav.hooks'
 import resetModules = jest.resetModules

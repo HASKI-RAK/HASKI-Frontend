@@ -1,9 +1,7 @@
-import { Topic } from '@services'
 import { useNavigate } from 'react-router-dom'
 import { DefaultLink as Link, DefaultSkeleton as Skeleton, DefaultTypography as Typography } from '@common/components'
-import React from 'react'
 import { useLearningPathElement as _useLearningPathElement } from './LocalNav.hooks'
-import { LearningPathElement } from '@core'
+import { LearningPathElement, Topic } from '@core'
 
 export type LazyLoadingLearningPathElementProps = {
   topic: Topic

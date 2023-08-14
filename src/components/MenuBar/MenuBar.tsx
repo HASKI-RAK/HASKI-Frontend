@@ -24,11 +24,8 @@ import PersonIcon from '@mui/icons-material/Person'
 import { useTranslation } from 'react-i18next'
 import { Login, Logout } from '@mui/icons-material'
 import { AuthContext, SnackbarContext } from '@services'
-import { useLearningPathTopic as _useLearningPathTopic } from '../LocalNav/LocalNav.hooks'
 import { DropdownLanguage, SkeletonList } from '@components'
 import { usePersistedStore, useStore } from '@store'
-
-import { useStore } from '@store'
 import { Topic } from '@core'
 import log from 'loglevel'
 
