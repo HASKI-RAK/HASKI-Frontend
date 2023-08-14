@@ -13,7 +13,8 @@
   "ignoreUnimported": [
     "src/components/Nodes/AdditionalLiteratureNode/NodeTypes.ts",
     "src/components/Nodes/BasicNode/BasicNode.tsx",
-    "src/shared/auto-order-json-translations.ts"
+    "src/shared/auto-order-json-translations.ts",
+    "src/common/index.ts"
   ],
   "ignoreUnresolved": [],
   "ignoreUnused": ["react-flow-renderer"]

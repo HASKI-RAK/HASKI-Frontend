@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
 import { MemoryRouter } from 'react-router-dom'
-import {Topic, LearningElement, LearningPathElement, StudentLearningElement} from '@core'
+import { Topic, LearningElement, LearningPathElement, StudentLearningElement } from '@core'
 import { AuthContext } from '@services'
 import * as router from 'react-router'
 
@@ -13,7 +13,7 @@ const studentLearningElement: StudentLearningElement = {
   student_id: 1,
   learning_element_id: 1,
   done: false,
-  done_at: "2021-09-01T12:00:00.000Z",
+  done_at: '2021-09-01T12:00:00.000Z'
 }
 
 const navigate = jest.fn()
