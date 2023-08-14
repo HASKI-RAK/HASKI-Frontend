@@ -1,4 +1,4 @@
-[![Documentation Coverage Status](https://wiki.haski.app/coverage.svg)]
+![Documentation Coverage Status](https://wiki.haski.app/coverage.svg)
 
 # HASKI-Frontend
 
