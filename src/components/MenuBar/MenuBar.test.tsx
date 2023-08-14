@@ -1,12 +1,11 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
 import { MemoryRouter } from 'react-router-dom'
-import { Topic, LearningElement, LearningPath, AuthContext } from '@services'
+import { AuthContext } from '@services'
 import * as router from 'react-router'
-
-const topics: Topic[] = []
-const learningElementPath: LearningPath[] = []
+import React from 'react'
+import { mockServices } from 'jest.setup'
 
 const navigate = jest.fn()
 
@@ -35,140 +34,82 @@ describe('MenuBar', () => {
     expect(navigate).toHaveBeenCalledWith('/')
   })
 
-  test('popover is rendered when Topics button is clicked', () => {
-    const exampleLearningElement1: LearningElement = {
-      activity_type: 'Quiz',
-      classification: 'Formative',
-      created_at: '2023-04-19T10:30:00.000Z',
-      created_by: 'John Doe',
-      id: 123,
-      last_updated: '2023-04-20T15:45:00.000Z',
-      lms_id: 456,
-      name: 'Quiz on Chapter 3',
-      student_learning_element: null,
-      university: 'ABC University'
-    }
-
-    const exampleLearningElement2: LearningElement = {
-      activity_type: 'Quiz',
-      classification: 'Formative',
-      created_at: '2023-04-19T10:30:00.000Z',
-      created_by: 'John Doe',
-      id: 123,
-      last_updated: '2023-04-20T15:45:00.000Z',
-      lms_id: 456,
-      name: 'Quiz on Chapter 5',
-      student_learning_element: null,
-      university: 'ABC University'
-    }
-
-    const topics: Topic[] = [
-      {
-        contains_le: true,
-        created_at: '2021-09-01T12:00:00.000Z',
-        created_by: 'dimitri',
-        id: 1,
-        is_topic: true,
-        last_updated: '2021-09-01T12:00:00.000Z',
-        lms_id: 1,
-        name: 'Allgemeine Informatik',
-        parent_id: 1,
-        student_topic: {
-          done: false,
-          done_at: null,
-          id: 1,
-          student_id: 1,
-          topic_id: 1,
-          visits: []
-        },
-        university: 'HS-KE'
-      },
-      {
-        contains_le: true,
-        created_at: '2021-09-01T12:00:00.000Z',
-        created_by: 'dimitri',
-        id: 2,
-        is_topic: true,
-        last_updated: '2021-09-01T12:00:00.000Z',
-        lms_id: 1,
-        name: 'Zustand',
-        parent_id: 1,
-        student_topic: {
-          done: false,
-          done_at: null,
-          id: 1,
-          student_id: 1,
-          topic_id: 1,
-          visits: []
-        },
-        university: 'HS-KE'
-      }
-    ]
-
-    const learningElementPath: LearningPath[] = [
-      {
-        based_on: 'some-Algorithm',
-        calculated_on: 'today',
-        course_id: 1,
-        id: 1,
-        path: [
-          {
-            id: 1,
-            learning_element: exampleLearningElement1,
-            learning_element_id: 1,
-            learning_path_id: 1,
-            position: 1,
-            recommended: true
-          }
-        ]
-      },
-      {
-        based_on: 'some-Algorithm',
-        calculated_on: 'today',
-        course_id: 1,
-        id: 2,
-        path: [
-          {
-            id: 2,
-            learning_element: exampleLearningElement2,
-            learning_element_id: 1,
-            learning_path_id: 1,
-            position: 1,
-            recommended: true
-          }
-        ]
-      }
-    ]
-
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
-    })
-
+  test('popover is rendered when Topics button is clicked', async () => {
     const props: MenuBarProps = {
-      useLearningPathTopic: mockUseLearningPath
+      courseSelected: true
     }
 
-    const result = render(
+    const { getByText, getAllByTestId } = render(
       <MemoryRouter>
         <MenuBar {...props} />
       </MemoryRouter>
     )
-    // click on Topics button:
-    fireEvent.click(result.getAllByText('components.MenuBar.TopicButton')[0])
-    expect(result.getByText('Allgemeine Informatik')).toBeInTheDocument()
+
+    await waitFor(async () => {
+      fireEvent.click(getByText('components.MenuBar.TopicButton'))
+      await waitFor(() => {
+        expect(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0]).toBeInTheDocument()
+      })
+    })
   })
 
-  test('click on HelpIcon should open popover', () => {
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
+  test('fetching user throws error ', async () => {
+    mockServices.getUser.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
     })
 
     const props: MenuBarProps = {
-      useLearningPathTopic: mockUseLearningPath
+      courseSelected: true
+    }
+
+    const { container, getByText } = render(
+      <MemoryRouter>
+        <MenuBar {...props} />
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getByText('components.MenuBar.TopicButton'))
+      waitFor(() => {
+        expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
+      })
+    })
+  })
+
+  test('fetching topic throws error ', async () => {
+    mockServices.getLearningPathTopic.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const props: MenuBarProps = {
+      courseSelected: true
+    }
+
+    const { container, getByText } = render(
+      <MemoryRouter>
+        <MenuBar {...props} />
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getByText('components.MenuBar.TopicButton'))
+      waitFor(() => {
+        expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
+      })
+    })
+  })
+
+  test('click on HelpIcon should open popover', () => {
+    const props: MenuBarProps = {
+      courseSelected: false
     }
 
     const result = render(
@@ -182,14 +123,8 @@ describe('MenuBar', () => {
   })
 
   test('click on SettingsIcon should open popover', () => {
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
-    })
-
     const props: MenuBarProps = {
-      useLearningPathTopic: mockUseLearningPath
+      courseSelected: false
     }
 
     const result = render(
@@ -203,14 +138,8 @@ describe('MenuBar', () => {
   })
 
   test('click on UserIcon should open popover', () => {
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
-    })
-
     const props: MenuBarProps = {
-      useLearningPathTopic: mockUseLearningPath
+      courseSelected: false
     }
 
     const result = render(
@@ -230,14 +159,8 @@ describe('MenuBar', () => {
   })
 
   test('clicking logout should close popover', () => {
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
-    })
-
     const props: MenuBarProps = {
-      useLearningPathTopic: mockUseLearningPath
+      courseSelected: true
     }
 
     const { getByTestId, queryByTestId } = render(
@@ -264,14 +187,8 @@ describe('MenuBar', () => {
   })
 
   test('clicking outside of Menu should close popover', () => {
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
-    })
-
     const props: MenuBarProps = {
-      useLearningPathTopic: mockUseLearningPath
+      courseSelected: true
     }
 
     const { getByTestId, queryByTestId } = render(
@@ -296,131 +213,24 @@ describe('MenuBar', () => {
   })
 
   it('should set anchorElTopics to null', async () => {
-    const exampleLearningElement1: LearningElement = {
-      activity_type: 'Quiz',
-      classification: 'Formative',
-      created_at: '2023-04-19T10:30:00.000Z',
-      created_by: 'John Doe',
-      id: 123,
-      last_updated: '2023-04-20T15:45:00.000Z',
-      lms_id: 456,
-      name: 'Quiz on Chapter 3',
-      student_learning_element: null,
-      university: 'ABC University'
-    }
-
-    const exampleLearningElement2: LearningElement = {
-      activity_type: 'Quiz',
-      classification: 'Formative',
-      created_at: '2023-04-19T10:30:00.000Z',
-      created_by: 'John Doe',
-      id: 123,
-      last_updated: '2023-04-20T15:45:00.000Z',
-      lms_id: 456,
-      name: 'Quiz on Chapter 5',
-      student_learning_element: null,
-      university: 'ABC University'
-    }
-
-    const topics: Topic[] = [
-      {
-        contains_le: true,
-        created_at: '2021-09-01T12:00:00.000Z',
-        created_by: 'dimitri',
-        id: 1,
-        is_topic: true,
-        last_updated: '2021-09-01T12:00:00.000Z',
-        lms_id: 1,
-        name: 'Allgemeine Informatik',
-        parent_id: 1,
-        student_topic: {
-          done: false,
-          done_at: null,
-          id: 1,
-          student_id: 1,
-          topic_id: 1,
-          visits: []
-        },
-        university: 'HS-KE'
-      },
-      {
-        contains_le: true,
-        created_at: '2021-09-01T12:00:00.000Z',
-        created_by: 'dimitri',
-        id: 2,
-        is_topic: true,
-        last_updated: '2021-09-01T12:00:00.000Z',
-        lms_id: 1,
-        name: 'Zustand',
-        parent_id: 1,
-        student_topic: {
-          done: false,
-          done_at: null,
-          id: 1,
-          student_id: 1,
-          topic_id: 1,
-          visits: []
-        },
-        university: 'HS-KE'
-      }
-    ]
-
-    const learningElementPath: LearningPath[] = [
-      {
-        based_on: 'some-Algorithm',
-        calculated_on: 'today',
-        course_id: 1,
-        id: 1,
-        path: [
-          {
-            id: 1,
-            learning_element: exampleLearningElement1,
-            learning_element_id: 1,
-            learning_path_id: 1,
-            position: 1,
-            recommended: true
-          }
-        ]
-      },
-      {
-        based_on: 'some-Algorithm',
-        calculated_on: 'today',
-        course_id: 1,
-        id: 2,
-        path: [
-          {
-            id: 2,
-            learning_element: exampleLearningElement2,
-            learning_element_id: 1,
-            learning_path_id: 1,
-            position: 1,
-            recommended: true
-          }
-        ]
-      }
-    ]
-
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
-    })
-
     const props: MenuBarProps = {
-      useLearningPathTopic: mockUseLearningPath
+      courseSelected: true
     }
 
-    const { getAllByText, getByText } = render(
+    const { getByText, getAllByTestId } = render(
       <MemoryRouter>
         <MenuBar {...props} />
       </MemoryRouter>
     )
-    // click on Topics button:
-    fireEvent.click(getAllByText('components.MenuBar.TopicButton')[0])
-    expect(getByText('Allgemeine Informatik')).toBeInTheDocument()
 
-    fireEvent.click(getAllByText('Allgemeine Informatik')[0])
-    expect(navigate).toHaveBeenCalledWith('course/undefined/topic/1')
+    await waitFor(async () => {
+      fireEvent.click(getByText('components.MenuBar.TopicButton'))
+      await waitFor(() => {
+        expect(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0]).toBeInTheDocument()
+        fireEvent.click(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0])
+        expect(navigate).toHaveBeenCalledWith('course/undefined/topic/1')
+      })
+    })
   })
 
   it('navigates to logout page', async () => {

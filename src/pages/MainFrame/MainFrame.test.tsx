@@ -1,16 +1,21 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import MainFrame from './MainFrame'
-import { Router } from 'react-router-dom'
-import { createMemoryHistory } from 'history'
+import { MemoryRouter } from 'react-router-dom'
+import * as router from 'react-router'
+
+const navigate = jest.fn()
 
 describe('MainFrame', () => {
+  beforeEach(() => {
+    jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+  })
+
   it('should render the MainFrame', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
     const result = render(
-      <Router location={history.location} navigator={history}>
+      <MemoryRouter>
         <MainFrame />
-      </Router>
+      </MemoryRouter>
     )
     expect(result).toBeTruthy()
   })
