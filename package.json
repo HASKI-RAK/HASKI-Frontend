@@ -7,7 +7,7 @@
   "author": "David Fischer <davidvfischer@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --color --open",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --color --open",
     "build-prod": "cross-env NODE_ENV=production webpack --progress --profile --color",
     "build": "cross-env NODE_ENV=development webpack --progress --profile --color",
     "watch": "cross-env NODE_ENV=production webpack --progress --profile --color --watch",

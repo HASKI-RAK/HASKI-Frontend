@@ -30,10 +30,11 @@ export const useLoginForm = (params?: useLoginFormHookParams): LoginFormHookRetu
   const [password, setPassword] = useState(defaultPassword)
 
   // Logic
-  const onSubmit = () => {
-      return
-    },
-    onValidate = () => [username.length !== 0, password.length !== 0] as const
+  const submit = () => {
+    return
+  }
+
+  const validate = () => [username.length !== 0, password.length !== 0] as const
 
   const loginMoodle = () => {
     return
@@ -44,8 +45,8 @@ export const useLoginForm = (params?: useLoginFormHookParams): LoginFormHookRetu
     password,
     setUsername,
     setPassword,
-    submit: onSubmit,
-    validate: onValidate,
+    submit,
+    validate,
     loginMoodle
   } as const
 }

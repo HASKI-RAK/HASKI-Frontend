@@ -10,7 +10,9 @@ const dotenv = require('dotenv').config({
 if (dotenv.error) {
   throw dotenv.error
 }
-const module_to_merge = require('./webpack.config.'.concat(process.env.NODE_ENV === 'production' ? 'prod' : 'dev' + '.js'))
+const module_to_merge = require('./webpack.config.'.concat(
+  process.env.NODE_ENV === 'production' ? 'prod' : 'dev' + '.js'
+))
 
 module.exports = merge(module_to_merge, {
   context: path.resolve(__dirname, 'src'),
@@ -70,4 +72,4 @@ module.exports = merge(module_to_merge, {
     }),
     new CompressionPlugin()
   ]
-});
+})
