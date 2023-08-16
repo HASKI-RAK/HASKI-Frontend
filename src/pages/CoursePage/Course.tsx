@@ -1,5 +1,4 @@
-import { Button, Card, CardContent, Typography } from '@mui/material'
-import { Stack } from '@mui/system'
+import { Button, Card, CardContent, Typography, Stack } from '@common/components'
 import { AuthContext } from '@services'
 import log from 'loglevel'
 import { useContext, useEffect } from 'react'

@@ -1,1 +1,2 @@
-export { List as DefaultList } from '@mui/material'
+import DefaultList from '@mui/material/List'
+export { DefaultList as List }

@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { ProjectDescriptionCard, ProjectDescriptionStepper } from '@components'
 import {
-  DefaultAvatar as Avatar,
-  DefaultBox as Box,
-  DefaultGrid as Grid,
-  DefaultTypography as Typography
+  Avatar,
+  Box,
+  Grid,
+  Typography
 } from '@common/components'
 
 /**

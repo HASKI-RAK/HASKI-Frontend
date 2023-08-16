@@ -1,7 +1,7 @@
-import { DefaultBox as Box, DefaultPaper as Paper, DefaultTypography as Typography } from '@common/components'
+import { Box,Paper, Typography } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
-import ArticleIcon from '@mui/icons-material/Article' // TODO: DI
+import {ArticleIcon} from '@common/icons' // TODO: DI
 import { memo } from 'react'
 
 /**

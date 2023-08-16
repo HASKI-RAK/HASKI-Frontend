@@ -1,32 +1,30 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  DefaultAppBar as AppBar,
-  DefaultToolbar as Toolbar,
-  DefaultTypography as Typography,
-  DefaultBox as Box,
-  DefaultIconButton as IconButton,
-  DefaultMenu as Menu,
-  DefaultTooltip as Tooltip,
-  DefaultAvatar as Avatar,
-  DefaultMenuItem as MenuItem,
-  DefaultGrid as Grid,
-  DefaultButton as Button,
-  DefaultPopover as Popover,
-  DefaultDivider as Divider,
-  DefaultSkeleton as Skeleton,
-  DefaultListItemIcon as ListItemIcon
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  IconButton,
+  Menu,
+  Tooltip,
+  Avatar,
+  MenuItem,
+  Grid,
+  Button,
+  Popover,
+  Divider,
+  Skeleton,
+  ListItemIcon,
+  Link
 } from '@common/components'
-import SettingsIcon from '@mui/icons-material/Settings'
-import HelpIcon from '@mui/icons-material/Help'
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
-import PersonIcon from '@mui/icons-material/Person'
+
+import { SettingsIcon, HelpIcon, ArrowDropDownIcon, PersonIcon, Login, Logout  } from '@common/icons'
+
 import { useTranslation } from 'react-i18next'
-import { Login, Logout } from '@mui/icons-material'
 import { AuthContext, SnackbarContext, Topic } from '@services'
 import { useLearningPathTopic as _useLearningPathTopic } from '../LocalNav/LocalNav.hooks'
 import { DropdownLanguage } from '@components'
-import { Link } from '@mui/material'
 import { useStore } from '@store'
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 

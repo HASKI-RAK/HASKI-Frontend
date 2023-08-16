@@ -1,1 +1,2 @@
-export { Breadcrumbs as DefaultBreadcrumbs } from '@mui/material'
+import DefaultBreadcrumbs from '@mui/material/Breadcrumbs'
+export { DefaultBreadcrumbs as Breadcrumbs }

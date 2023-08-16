@@ -1,1 +1,2 @@
-export { MenuItem as DefaultMenuItem } from '@mui/material'
+import DefaultMenuItem from '@mui/material/MenuItem'
+export { DefaultMenuItem as MenuItem }

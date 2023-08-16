@@ -1,13 +1,18 @@
+
 import { useState } from 'react'
-import Box from '@mui/material/Box'
-import { DefaultButton as Button } from '@common/components'
-import Stepper from '@mui/material/Stepper'
-import Step from '@mui/material/Step'
-import StepButton from '@mui/material/StepButton'
-import Modal from '@mui/material/Modal'
-import IconButton from '@mui/material/IconButton'
-import CloseIcon from '@mui/icons-material/Close'
-import { Stack } from '@mui/material'
+
+import {
+  Box, 
+  Button, 
+  Stepper, 
+  Step, 
+  StepButton, 
+  Modal, 
+  IconButton, 
+  Stack
+} from '@common/components'
+
+import {CloseIcon} from '@common/icons'
 import { useTranslation } from 'react-i18next'
 
 //Can not shorten import, tests fail to recognize i18n.use...

@@ -1,16 +1,16 @@
 import log from 'loglevel'
 import {
-  DefaultButton as Button,
-  DefaultSkeleton as Skeleton,
-  DefaultTypography as Typography,
-  DefaultCard as Card,
-  DefaultCardContent as CardContent
+  Button,
+  Skeleton,
+  Typography,
+  Card,
+  CardContent,
+  Stack
 } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState, useContext } from 'react'
 import { usePersistedStore, useStore } from '@store'
 import { AuthContext, SnackbarContext } from '@services'
-import { Stack } from '@mui/system'
 import { useNavigate } from 'react-router-dom'
 import { Course } from '@core'
 

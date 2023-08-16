@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme } from '@common/styles'
 export const defaultBehavior = {
   boxShadowSize: {
     default: '0 2px 0 ',
