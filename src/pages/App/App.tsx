@@ -18,16 +18,17 @@ import { AuthProvider, SnackbarProvider } from '@services'
 import { HaskiTheme } from '@utils'
 
 /**
- * App component.
- *
+ * # App
+ * Entry point of the application.
  * @remarks
  * This is the main component of the application and the entry point after the index.tsx.
- * It contains the main frame and the routes to the other pages.
- * The Theme is injected here. Additionally, the AuthProvider is used to provide the authentication context.
+ * It contains the {@link MainFrame} and the routes to the other pages.
+ * The {@link HaskiTheme} is injected here. Additionally, the {@link AuthProvider} is used to provide the authentication context.
+ * The {@link SnackbarProvider} is used to provide the snackbars to all pages.
  *
  * @category Pages
  */
-const App = () => (
+export const App = () => (
   <ThemeProvider theme={HaskiTheme}>
     <SnackbarProvider>
       <AuthProvider>

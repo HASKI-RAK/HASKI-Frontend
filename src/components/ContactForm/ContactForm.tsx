@@ -22,13 +22,14 @@ import { default as _useContactForm, useContactFormHookParams, ContactFormHookRe
 import { FormDataType } from '@services'
 
 /**
- * @property descriptionDefaultValue - The default value of the description textfield.
- * @property onSubmit - The function that will be called when the form is submitted. Default is the submit function from the hook.
- * @property isLoading - The loading state of the form. Default is false.
- * @property useContactForm - The hook that contains the form logic and the form state. Dependency injection for testing purposes and extensibility.
+ * @prop descriptionDefaultValue - The default value of the description textfield.
+ * @prop onSubmit - The function that will be called when the form is submitted. Default is the submit function from the hook.
+ * @prop isLoading - The loading state of the form. Default is false.
+ * @prop useContactForm - The hook that contains the form logic and the form state. Dependency injection for testing purposes and extensibility.
+ * @interface
  */
 export type ContactFormProps = {
-  descriptionDefaultValue?: string
+  descriptionDefaultValue?: string // TODO: Remove this prop and use the hook instead
   onSubmit?: (content: FormDataType) => void
   isLoading?: boolean
   useContactForm?: (params?: useContactFormHookParams) => ContactFormHookReturn

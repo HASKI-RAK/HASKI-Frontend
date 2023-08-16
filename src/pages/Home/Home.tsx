@@ -15,8 +15,9 @@ import { useNavigate } from 'react-router-dom'
 import { Course } from '@core'
 
 /**
- *
- * @returns
+ * # Home Page
+ * Presents an overview of the courses.
+ * @category Pages
  */
 
 export const Home = () => {

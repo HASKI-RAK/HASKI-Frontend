@@ -1,31 +1,30 @@
 import { AuthContext, SnackbarContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useContext } from 'react'
-import { useTranslation } from 'react-i18next'
-import { usePersistedStore, useStore } from '@store'
+import { usePersistedStore } from '@store'
 
 export type LoginHookParams = {
   setIsLoading: (isLoading: boolean) => void
+  /** The nonce is a string that is passed to the login page back from the backend as part of the LTI flow.
+   * It is used to accociate the session in a short living authorization flow. */
   nonce?: string
 }
 
 export type LoginHookReturn = {
   readonly onSubmit: (username: string, password: string) => void
+  /** Redirects the user to moddle for authorization */
   readonly onMoodleLogin: () => void
 }
 
 /**
  * Hook for the login logic. Handles the login request and redirects to the home page.
- *
+ * @param props - Contain nonce and {@link LoginHookParams.setIsLoading | setIsLoading} function.
  * @remarks
  * If a nonce is passed, the user can be authenticated with the nonce.
  * If no nonce is passed the user is redirected to the login page without a nonce.
  *
- * @param props - Contain nonce and setIsLoading
- * @returns {LoginHookReturn} - The login logic.
  */
 export const useLogin = (props: LoginHookParams): LoginHookReturn => {
-  const { t } = useTranslation()
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
   const fetchUser = usePersistedStore((state) => state.fetchUser)
@@ -73,7 +72,6 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
         navigate('/login', { replace: true })
       })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return {

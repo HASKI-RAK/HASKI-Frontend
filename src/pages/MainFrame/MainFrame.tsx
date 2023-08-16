@@ -7,18 +7,20 @@ import {
 } from '@common/components'
 import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from '@components'
 /**
- * Main frame component.
- *
+ * # MainFrame Page
+ * Wraps the application in a frame with a menu bar, breadcrumbs, local navigation and footer.
  * @remarks
- * It contains the main frame of the application and is used in the App.tsx.
- * It contains the menu bar, the breadcrumbs, the local navigation and the outlet for the other pages.
+ * Used in {@link pages.App | App} component.
+ * Here the other pages get rendered. This is done by the {@link Outlet} component.
+ *
  * The footer is also included.
+ *
  * It holds a layout for all pages.
  * Help, Global settings and User settings are also included in the menu bar.
  *
  * @category Pages
  */
-const MainFrame = () => {
+export const MainFrame = () => {
   const { courseId } = useParams()
 
   // !! converts courseId to a boolean

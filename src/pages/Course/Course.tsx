@@ -8,17 +8,17 @@ import {
 } from '@common/components'
 import { AuthContext } from '@services'
 import log from 'loglevel'
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useLearningPathTopic } from '../../components/LocalNav/LocalNav.hooks'
 import { SkeletonList } from '@components'
 
 /**
- * The Course component presents an overview of the course.
- *
- * @returns {JSX.Element} - The Course component.
- *
+ * # Course Page
+ * Presents an overview of the course.
+ * @remarks
+ * Uses the {@link useLearningPathTopic} hook to get the topics of the course.
  * @category Pages
  */
 export const Course = () => {

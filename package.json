@@ -2,7 +2,7 @@
   "name": "haski-frontend",
   "version": "1.0.0",
   "description": "modern frontend for accessing the haski system trough an embedded webapp",
-  "main": "src/app.ts",
+  "main": "src/index.tsx",
   "repository": "https://github.com/HASKI-RAK/HASKI-Frontend.git",
   "author": "David Fischer <davidvfischer@gmail.com>",
   "license": "MIT",
@@ -13,7 +13,8 @@
     "watch": "cross-env NODE_ENV=production webpack --progress --profile --color --watch",
     "lint": "eslint ./src/** --ext .ts,.tsx --fix && prettier --loglevel silent --write \"**/*.{ts,tsx,js,css,html,json}\" && npx unimported",
     "pull": "git pull && del node_modules && yarn install",
-    "test": "jest"
+    "test": "jest",
+    "wiki": "yarn run typedoc --out pages&&npx serve pages"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -41,6 +42,7 @@
     "@babel/preset-env": "^7.19.3",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
+    "@microsoft/tsdoc": "^0.14.2",
     "@microsoft/tsdoc-config": "^0.16.2",
     "@mxssfd/typedoc-theme": "^1.1.2",
     "@testing-library/jest-dom": "^5.16.5",
@@ -60,7 +62,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "dotenv": "^16.0.3",
-    "eslint": "^8.38.0",
+    "eslint": "^8.47.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-immutable": "^1.0.0",
     "eslint-plugin-prefer-arrow-functions": "^3.1.4",
@@ -89,6 +91,7 @@
     "tslib": "^2.4.0",
     "typedoc": "^0.24.8",
     "typedoc-plugin-coverage": "^2.1.0",
+    "typedoc-plugin-merge-modules": "^5.0.1",
     "typedoc-plugin-mermaid": "^1.10.0",
     "typedoc-plugin-missing-exports": "^2.0.1",
     "typescript": "^5.0.4",

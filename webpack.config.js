@@ -19,8 +19,8 @@ const module_to_merge = require('./webpack.config.'.concat(
 Logger.info('module_to_merge: ', module_to_merge)
 
 module.exports = merge(module_to_merge, {
-  context: path.resolve(__dirname, 'src'),
-  entry: 'src/index.tsx',
+  context: path.resolve(__dirname, '.'),
+  entry: 'index.tsx',
   resolve: {
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
     modules: ['node_modules'],

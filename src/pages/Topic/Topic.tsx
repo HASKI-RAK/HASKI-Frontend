@@ -8,22 +8,25 @@ import { useStore, usePersistedStore } from '@store'
 import { IFrameModal, nodeTypes } from '@components'
 import { useTheme } from '@mui/material' // TODO: DI?
 
-/**
- * @interface TopicProps
- * @property {useTopicHookParams} [useTopic] - The hook for the topic page
- */
 export type TopicProps = {
+  /**
+   * {@link useTopic | Topic hook} does the heavy work such as mapping nodes and edges
+   *  and fetching.
+   * @remarks
+   * The hook is dependency injected.
+   * @defaultValue {@link _useTopic}
+   */
   useTopic?: (params?: useTopicHookParams) => TopicHookReturn
 }
-
 // TODO: URL-Struktur überlegen bspw. "localhost:3000/topic?topic=1"
+
 /**
- * Topic presents a page that displays a learning path containing nodes of learning elements and edges.
- * @param props - The hook for the topic page
- * @returns {JSX.Element} - The topic page
+ * # Topic Page
+ * Presents a page that displays a learning path containing nodes of learning elements and edges.
+ * @param props - Dependency injects {@link useTopic}.
  * @category Pages
  */
-const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
+export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const theme = useTheme()
   const navigate = useNavigate()
   const authContext = useContext(AuthContext)

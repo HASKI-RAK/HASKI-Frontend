@@ -9,6 +9,13 @@ import {
   DefaultListItemIcon as ListItemIcon
 } from '@common/components'
 import { FiberManualRecord } from '@mui/icons-material'
+
+/**
+ * # Privacy Policy Page
+ * @remarks
+ * Contains legal information about the privacy policy.
+ * @category Pages
+ */
 export const PrivacyPolicy = () => {
   // Translation
   const { t } = useTranslation()

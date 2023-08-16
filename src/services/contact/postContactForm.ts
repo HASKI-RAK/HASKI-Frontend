@@ -1,19 +1,18 @@
 import { getData } from '../RequestResponse'
+
+/**
+ * The data that is sent to the backend.
+ * The properties have to be named like the backend expects them.
+ */
 export interface FormDataType {
-  //muss mit backend variablen übereinstimmen
   report_type: string
   report_topic: string
   report_description: string
 }
 
-export type PostContactFormParams = {
-  responseBody?: FormDataType
-  userId?: number
-  lmsUserId?: number
-}
 /**
  * Send the input of the contact form to the backend with the userid.
- * @returns either no response or an error
+ * @returns Either no response or an error
  */
 export const postContactForm = async (
   responseBody?: FormDataType,
