@@ -47,16 +47,7 @@ const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: Glossary
       )
       setGlossaryState(byQuerySearchedGlossaryEntries)
     }
-  }, [
-    props.glossaryEntries,
-    filterByTags,
-    props.selectedTags,
-    filterByIndexElement,
-    props.selectedIndexElement,
-    searchByQuery,
-    props.searchQuery,
-    setGlossaryState
-  ])
+  }, [props, filterByTags, filterByIndexElement, searchByQuery, setGlossaryState])
 
   return (
     <>
