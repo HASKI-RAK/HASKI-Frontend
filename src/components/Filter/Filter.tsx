@@ -48,14 +48,11 @@ type FilterProps = {
 const Filter = (props: FilterProps) => {
   const [open, setOpen] = useState(false)
 
-  const handleChange = useCallback(
-    (event: SelectChangeEvent<typeof props.selectedOptions>) => {
-      if (props.setSelectedOptions) {
-        props.setSelectedOptions(event.target.value)
-      }
-    },
-    [props]
-  )
+  const handleChange = useCallback((event: SelectChangeEvent<typeof props.selectedOptions>) => {
+    if (props.setSelectedOptions) {
+      props.setSelectedOptions(event.target.value)
+    }
+  }, [])
 
   // Renders the selected options as chips.
   const renderValue = useCallback(
@@ -86,7 +83,7 @@ const Filter = (props: FilterProps) => {
         {props.options &&
           Array.from(props.options).map((option) => (
             <MenuItem key={option} value={option}>
-              <Checkbox checked={props.selectedOptions && props.selectedOptions.indexOf(option) > -1} />
+              <Checkbox checked={props.selectedOptions && props.selectedOptions.indexOf(option) >= 0} />
               <ListItemText primary={option} />
             </MenuItem>
           ))}

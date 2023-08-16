@@ -24,14 +24,9 @@ export type GlossaryIndexProps = {
  * @category Components
  */
 const GlossaryIndex = (props: GlossaryIndexProps) => {
-  const handleChange = useCallback(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    (event: React.MouseEvent<HTMLElement>, newSelectedIndexElement: string) => {
-      props.setSelectedIndexElement?.(newSelectedIndexElement)
-    },
-    [props]
-  )
+  const handleChange = useCallback((_: React.MouseEvent<HTMLElement>, newSelectedIndexElement: string) => {
+    props.setSelectedIndexElement?.(newSelectedIndexElement)
+  }, [])
 
   return (
     <ToggleButtonGroup
