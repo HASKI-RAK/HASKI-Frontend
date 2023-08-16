@@ -1,9 +1,4 @@
-import {
-  DefaultBox as Box,
-  DefaultBreadcrumbs as Breadcrumbs,
-  DefaultLink as Link,
-  DefaultTypography as Typography
-} from '@common/components'
+import { Box, Breadcrumbs, Link, Typography } from '@common/components'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 

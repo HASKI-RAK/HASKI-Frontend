@@ -1,1 +1,2 @@
-export { Link as DefaultLink } from '@mui/material'
+import DefaultLink from '@mui/material/Link'
+export { DefaultLink as Link }

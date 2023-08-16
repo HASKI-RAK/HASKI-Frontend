@@ -1,4 +1,4 @@
-import { DefaultTypography as Typography, DefaultLink as Link, DefaultDivider as Divider } from '@common/components'
+import { Typography, Link, Divider } from '@common/components'
 import { useTranslation } from 'react-i18next'
 
 export const ImprintContent = () => {

@@ -1,1 +1,2 @@
-export { Fade as DefaultFade } from '@mui/material'
+import DefaultFade from '@mui/material/Fade'
+export { DefaultFade as Fade }

@@ -29,13 +29,13 @@ const mockUseNetworkStatus = jest.fn().mockReturnValue(true)
 
 describe('Test SnackbarContainer', () => {
   test('SnackbarContainer renders on its own', () => {
-    const { getByTestId } = render(<SnackbarContainer />)
-    const snackbarContainer = getByTestId('snackbarContainer')
-    expect(snackbarContainer).toBeInTheDocument()
+    const { queryAllByText } = render(<SnackbarContainer />)
+    expect(queryAllByText('error: test').length).toEqual(0)
+    expect(queryAllByText('success: test').length).toEqual(0)
   })
 
   test('Lose and retrieve internet connection', () => {
-    render(
+    const { queryAllByText } = render(
       <SnackbarContext.Provider value={mockContext}>
         <SnackbarContainer />
       </SnackbarContext.Provider>
@@ -56,5 +56,7 @@ describe('Test SnackbarContainer', () => {
     })
 
     expect(mockContext.addSnackbar).toHaveBeenCalledTimes(3)
+    expect(queryAllByText('error: test').length).toEqual(1)
+    expect(queryAllByText('success: test').length).toEqual(1)
   })
 })

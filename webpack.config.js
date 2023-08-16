@@ -10,6 +10,7 @@ const dotenv = require('dotenv').config({
 if (dotenv.error) {
   throw dotenv.error
 }
+
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: 'src/index.tsx',

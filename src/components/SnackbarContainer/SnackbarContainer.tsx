@@ -1,4 +1,4 @@
-import { DefaultStack as Stack, DefaultSnackbar as Snackbar } from '@common/components'
+import { Stack, Snackbar } from '@common/components'
 import { SnackbarContext, useNetworkStatus } from '@services'
 import { useEffect, useState, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -44,7 +44,7 @@ const SnackbarContainer = () => {
   }, [isOnline, addSnackbar, recentlyOffline, t, updateSnackbar])
 
   return (
-    <div data-testid="snackbarContainer">
+    <>
       <Snackbar
         open={!!snackbarsErrorWarning[0]}
         autoHideDuration={null}
@@ -73,7 +73,7 @@ const SnackbarContainer = () => {
           ))}
         </Stack>
       </Snackbar>
-    </div>
+    </>
   )
 }
 
