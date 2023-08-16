@@ -57,9 +57,9 @@ export const useGlossaryList = (): GlossaryListHookReturn => {
 
       return glossaryEntries.filter(
         (glossaryEntry) =>
-          glossaryEntry.term?.toLowerCase().includes(searchQuery.toLowerCase()) ??
-          glossaryEntry.definition?.toLowerCase().includes(searchQuery.toLowerCase()) ??
-          glossaryEntry.sources?.toLowerCase().includes(searchQuery.toLowerCase()) ??
+          glossaryEntry.term?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          glossaryEntry.definition?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          glossaryEntry.sources?.toLowerCase().includes(searchQuery.toLowerCase()) ||
           glossaryEntry.tags?.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
       )
     },

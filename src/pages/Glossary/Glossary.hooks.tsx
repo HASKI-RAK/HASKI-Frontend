@@ -26,7 +26,9 @@ export const useGlossary = (): GlossaryHookReturn => {
   // Expands all glossary entries by setting the expandedList to an array of all glossary entry terms.
   const expandAll = useCallback((setExpandedList: (props: string[]) => void, glossaryEntries: GlossaryEntryProps[]) => {
     setExpandedList?.(
-      glossaryEntries.map((glossaryEntry) => glossaryEntry.term).filter((term): term is string => term !== undefined)
+      Array.from(glossaryEntries)
+        .map((glossaryEntry) => glossaryEntry.term)
+        .filter((term): term is string => term !== undefined)
     )
   }, [])
 
