@@ -20,7 +20,7 @@ Logger.info('module_to_merge: ', module_to_merge)
 
 module.exports = merge(module_to_merge, {
   context: path.resolve(__dirname, '.'),
-  entry: 'index.tsx',
+  entry: './src/index.tsx',
   resolve: {
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
     modules: ['node_modules'],

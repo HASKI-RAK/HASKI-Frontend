@@ -18,20 +18,20 @@
     "isolatedModules": true,
     "noEmit": false,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "inlineSourceMap": true,
     "skipDefaultLibCheck": true,
     "paths": {
-      "@pages": ["pages"],
-      "@services": ["services"],
-      "@core": ["core"],
-      "@store": ["store"],
-      "@components": ["components"],
-      "@utils": ["common/utils"],
-      "@common/components": ["common/components"],
-      "@shared": ["shared"],
-      "@mocks": ["../__mocks__"],
-      "jest.setup": ["../jest.setup.ts"]
+      "@pages": ["src/pages"],
+      "@services": ["src/services"],
+      "@core": ["src/core"],
+      "@store": ["src/store"],
+      "@components": ["src/components"],
+      "@utils": ["src/common/utils"],
+      "@common/components": ["src/common/components"],
+      "@shared": ["src/shared"],
+      "@mocks": ["__mocks__"],
+      "jest.setup": ["jest.setup.ts"]
     },
     "outDir": "./dist"
   }
