@@ -1,2 +1,2 @@
-import  DefaultCardActions  from '@mui/material/CardActions'
-export { DefaultCardActions as  CardActions}
+import DefaultCardActions from '@mui/material/CardActions'
+export { DefaultCardActions as CardActions }

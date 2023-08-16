@@ -1,5 +1,5 @@
 import { useTopic as _useTopic, useTopicHookParams, TopicHookReturn } from './Topic.hooks'
-import {Box, Skeleton } from '@common/components'
+import { Box, Skeleton } from '@common/components'
 import ReactFlow, { Node, Edge, MiniMap, Controls, Background } from 'reactflow'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext, SnackbarContext } from '@services'

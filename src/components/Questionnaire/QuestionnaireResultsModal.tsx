@@ -1,18 +1,8 @@
-
 import { useState } from 'react'
 
-import {
-  Box, 
-  Button, 
-  Stepper, 
-  Step, 
-  StepButton, 
-  Modal, 
-  IconButton, 
-  Stack
-} from '@common/components'
+import { Box, Button, Stepper, Step, StepButton, Modal, IconButton, Stack } from '@common/components'
 
-import {CloseIcon} from '@common/icons'
+import { CloseIcon } from '@common/icons'
 import { useTranslation } from 'react-i18next'
 
 //Can not shorten import, tests fail to recognize i18n.use...

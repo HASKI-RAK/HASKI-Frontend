@@ -1,10 +1,5 @@
 import { useRef, useEffect, useCallback } from 'react'
-import {
-  Divider,
-  Fade,
-  Grid,
-  Typography
-} from '@common/components'
+import { Divider, Fade, Grid, Typography } from '@common/components'
 import {
   useProjectDescriptionCard as _useProjectDescriptionCard,
   useProjectDescriptionCardHookParams,

@@ -1,13 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import {
-  Typography,
-  Link,
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon
-} from '@common/components'
+import { Typography, Link, Divider, List, ListItem, ListItemText, ListItemIcon } from '@common/components'
 import { FiberManualRecord } from '@common/icons'
 export const PrivacyPolicy = () => {
   // Translation

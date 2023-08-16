@@ -1,11 +1,4 @@
-﻿import {
-  Table, 
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper
-} from '@common/components'
+﻿import { Table, TableBody, TableContainer, TableHead, TableRow, Paper } from '@common/components'
 
 import { useTranslation } from 'react-i18next'
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireTableStyle'

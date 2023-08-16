@@ -1,12 +1,6 @@
-import {KeyboardArrowRight, KeyboardArrowLeft} from '@common/icons'
+import { KeyboardArrowRight, KeyboardArrowLeft } from '@common/icons'
 import React, { useRef, useEffect, useCallback } from 'react'
-import {
-  Button,
-  Fade,
-  Grid,
-  MobileStepper,
-  Typography
-} from '@common/components'
+import { Button, Fade, Grid, MobileStepper, Typography } from '@common/components'
 import {
   useProjectDescriptionStepper as _useProjectDescriptionStepper,
   useProjectDescriptionStepperHookParams,

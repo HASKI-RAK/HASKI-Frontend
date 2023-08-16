@@ -1,12 +1,5 @@
 import log from 'loglevel'
-import {
-  Button,
-  Skeleton,
-  Typography,
-  Card,
-  CardContent,
-  Stack
-} from '@common/components'
+import { Button, Skeleton, Typography, Card, CardContent, Stack } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState, useContext } from 'react'
 import { usePersistedStore, useStore } from '@store'
@@ -42,17 +35,19 @@ export const Home = () => {
         clearTimeout(preventEndlessLoading)
         fetchUser()
           .then((user) => {
-            fetchCourses(user.settings.user_id, user.lms_user_id, user.id).then((CourseResponse) => {
-              setCourses(CourseResponse.courses)
-            }).catch((error) => {
+            fetchCourses(user.settings.user_id, user.lms_user_id, user.id)
+              .then((CourseResponse) => {
+                setCourses(CourseResponse.courses)
+              })
+              .catch((error) => {
                 // 🍿 snackbar error
                 addSnackbar({
-                    message: error.message,
-                    severity: 'error',
-                    autoHideDuration: 5000
+                  message: error.message,
+                  severity: 'error',
+                  autoHideDuration: 5000
                 })
                 log.error(error.message)
-            })
+              })
           })
           .catch((error) => {
             // 🍿 snackbar error

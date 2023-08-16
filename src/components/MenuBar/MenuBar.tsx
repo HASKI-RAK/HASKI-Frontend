@@ -19,7 +19,7 @@ import {
   Link
 } from '@common/components'
 
-import { SettingsIcon, HelpIcon, ArrowDropDownIcon, PersonIcon, Login, Logout  } from '@common/icons'
+import { SettingsIcon, HelpIcon, ArrowDropDownIcon, PersonIcon, Login, Logout } from '@common/icons'
 
 import { useTranslation } from 'react-i18next'
 import { AuthContext, SnackbarContext, Topic } from '@services'

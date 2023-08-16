@@ -1,2 +1,2 @@
-import  DefaultCard  from '@mui/material/Card'
-export { DefaultCard as Card}
+import DefaultCard from '@mui/material/Card'
+export { DefaultCard as Card }
