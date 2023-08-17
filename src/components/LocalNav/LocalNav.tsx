@@ -1,15 +1,15 @@
 import {
-  DefaultBox as Box,
-  DefaultDivider as Divider,
-  DefaultTypography as Typography,
-  DefaultAccordionSummary as AccordionSummary,
-  DefaultAccordionDetails as AccordionDetails,
-  DefaultAccordion as Accordion,
-  DefaultSkeleton as Skeleton,
-  DefaultStack as Stack,
-  DefaultLink as Link
+  Accordion,
+  Box,
+  Divider,
+  Typography,
+  AccordionSummary,
+  AccordionDetails,
+  Link,
+  Skeleton,
+  Stack
 } from '@common/components'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { ExpandMoreIcon } from '@common/icons'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Topic } from '@services'

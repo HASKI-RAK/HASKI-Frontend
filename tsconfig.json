@@ -27,6 +27,9 @@
       "@store": ["src/common/store"],
       "@components": ["src/components"],
       "@common/components": ["src/common/components"],
+      "@common/theme": ["src/common/theme"],
+      "@common/icons": ["src/common/icons"],
+      "@common/hooks": ["src/common/hooks"],
       "@shared": ["src/shared"]
     },
     "outDir": "./bin"

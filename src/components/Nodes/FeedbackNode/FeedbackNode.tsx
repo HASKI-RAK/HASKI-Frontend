@@ -1,7 +1,7 @@
-import { DefaultBox as Box, DefaultPaper as Paper, DefaultTypography as Typography } from '@common/components'
+import { Box, Paper, Typography } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
-import FeedbackIcon from '@mui/icons-material/Feedback' // TODO: DI
+import { FeedbackIcon } from '@common/icons'
 import { memo } from 'react'
 
 /**

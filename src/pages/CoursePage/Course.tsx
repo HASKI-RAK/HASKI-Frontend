@@ -1,5 +1,4 @@
-import { Button, Card, CardContent, Typography } from '@mui/material'
-import { Stack } from '@mui/system'
+import { Button, Card, CardContent, Typography, Stack } from '@common/components'
 import { AuthContext } from '@services'
 import log from 'loglevel'
 import { useContext, useEffect } from 'react'
@@ -20,9 +19,9 @@ const Course = () => {
   const { courseId } = useParams()
 
   //ToDo: Fetch topics of student
-  const topics = t('pages.Course.topics', {
+  const topics = [...t('pages.Course.topics', {
     returnObjects: true
-  }) as [{ id: string; name: string; description: string }]
+  }) as [{ id: string; name: string; description: string }]]
 
   useEffect(() => {
     log.log('Course')

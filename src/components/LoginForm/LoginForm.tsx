@@ -1,17 +1,17 @@
 import { ChangeEvent, useState } from 'react'
-import { Visibility, VisibilityOff } from '@mui/icons-material/'
+import { VisibilityIcon, VisibilityOffIcon } from '@common/icons'
 import {
-  DefaultBackdrop as Backdrop,
-  DefaultButton as Button,
-  DefaultCircularProgress as CircularProgress,
-  DefaultIconButton as IconButton,
-  DefaultInputAdornment as InputAdornment,
-  DefaultPaper as Paper,
-  DefaultTextField as TextField,
-  DefaultGrid as Grid,
-  DefaultTypography as Typography,
-  DefaultDivider as Divider,
-  DefaultStack as Stack
+  Backdrop,
+  Button,
+  CircularProgress,
+  IconButton,
+  InputAdornment,
+  Paper,
+  TextField,
+  Grid,
+  Typography,
+  Divider,
+  Stack
 } from '@common/components'
 import {
   useLoginForm as _useLoginForm,
@@ -119,7 +119,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword}>
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                   </IconButton>
                 </InputAdornment>
               )

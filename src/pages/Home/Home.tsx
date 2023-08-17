@@ -1,16 +1,9 @@
 import log from 'loglevel'
-import {
-  DefaultButton as Button,
-  DefaultSkeleton as Skeleton,
-  DefaultTypography as Typography,
-  DefaultCard as Card,
-  DefaultCardContent as CardContent
-} from '@common/components'
+import { Button, Skeleton, Typography, Card, CardContent, Stack } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useState, useContext } from 'react'
 import { usePersistedStore, useStore } from '@store'
 import { AuthContext, SnackbarContext } from '@services'
-import { Stack } from '@mui/system'
 import { useNavigate } from 'react-router-dom'
 import { Course } from '@core'
 
@@ -42,20 +35,20 @@ export const Home = () => {
         clearTimeout(preventEndlessLoading)
         fetchUser()
           .then((user) => {
-            fetchCourses(user.settings.user_id, user.lms_user_id, user.id).then((CourseResponse) => {
-              setCourses(CourseResponse.courses)
-            }).catch((error) => {
-                // 🍿 snackbar error
+            fetchCourses(user.settings.user_id, user.lms_user_id, user.id)
+              .then((CourseResponse) => {
+                setCourses(CourseResponse.courses)
+              })
+              .catch((error) => {
                 addSnackbar({
-                    message: error.message,
-                    severity: 'error',
-                    autoHideDuration: 5000
+                  message: error.message,
+                  severity: 'error',
+                  autoHideDuration: 5000
                 })
                 log.error(error.message)
-            })
+              })
           })
           .catch((error) => {
-            // 🍿 snackbar error
             addSnackbar({
               message: error.message,
               severity: 'error',
