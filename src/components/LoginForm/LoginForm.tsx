@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react'
-import { Visibility, VisibilityOff } from '@common/icons'
+import { VisibilityIcon, VisibilityOffIcon } from '@common/icons'
 import {
   Backdrop,
   Button,
@@ -119,7 +119,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword}>
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                   </IconButton>
                 </InputAdornment>
               )

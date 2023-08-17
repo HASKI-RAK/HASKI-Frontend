@@ -3,8 +3,8 @@
  */
 
 export { ExpandMoreIcon } from './DefaultExpandMoreIcon/DefaultExpandMoreIcon'
-export { Visibility } from './DefaultVisibility/DefaultVisibility'
-export { VisibilityOff } from './DefaultVisibilityOff/DefaultVisibilityOff'
+export { VisibilityIcon } from './DefaultVisibilityIcon/DefaultVisibilityIcon'
+export { VisibilityOffIcon } from './DefaultVisibilityOffIcon/DefaultVisibilityOffIcon'
 export { SettingsIcon } from './DefaultSettingsIcon/DefaultSettingsIcon'
 export { HelpIcon } from './DefaultHelpIcon/DefaultHelpIcon'
 export { ArrowDropDownIcon } from './DefaultArrowDropDownIcon/DefaultArrowDropDownIcon'
