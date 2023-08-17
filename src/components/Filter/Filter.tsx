@@ -80,13 +80,12 @@ const Filter = (props: FilterProps) => {
         inputProps={{ 'data-testid': 'filter' }}
         renderValue={renderValue}
         MenuProps={MenuProps}>
-        {props.options &&
-          Array.from(props.options).map((option) => (
-            <MenuItem key={option} value={option}>
-              <Checkbox checked={props.selectedOptions && props.selectedOptions.indexOf(option) >= 0} />
-              <ListItemText primary={option} />
-            </MenuItem>
-          ))}
+        {props.options?.map((option) => (
+          <MenuItem key={option} value={option}>
+            <Checkbox checked={props.selectedOptions && props.selectedOptions.indexOf(option) >= 0} />
+            <ListItemText primary={option} />
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   )
