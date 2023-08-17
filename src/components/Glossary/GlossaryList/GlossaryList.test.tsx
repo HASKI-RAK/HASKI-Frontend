@@ -89,8 +89,6 @@ describe('GlossaryList tests', () => {
       'testSource 2'
     )
 
-    console.log(glossaryEntriesSearchedByQuery)
-    console.log(mockGlossaryListProps.glossaryEntries[1])
     expect(glossaryEntriesSearchedByQuery).toStrictEqual([mockGlossaryListProps.glossaryEntries[1]])
 
     result.current.collapseAll(mockGlossaryListProps.setExpandedList)

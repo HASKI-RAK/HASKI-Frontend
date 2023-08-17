@@ -39,14 +39,14 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
   // Translation
   const { t } = useTranslation()
 
-  // Deconstructing array of glossary entries into array to prevent testing errors
+  // Deconstructing array of glossary entries into array to prevent testing errors.
   const glossaryEntries: GlossaryEntryProps[] = [
     ...(t<string>('pages.glossary.elements', {
       returnObjects: true
     }) as GlossaryEntryProps[])
   ]
 
-  // Deconstructing array of tags into array to prevent testing errors
+  // Deconstructing array of tags into array to prevent testing errors.
   const tags = [
     ...(t<string>('pages.glossary.tags', {
       returnObjects: true

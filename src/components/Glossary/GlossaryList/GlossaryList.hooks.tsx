@@ -55,15 +55,14 @@ export const useGlossaryList = (): GlossaryListHookReturn => {
         return glossaryEntries
       }
 
-      return [
-        ...glossaryEntries.filter(
-          (glossaryEntry) =>
-            glossaryEntry.term?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            glossaryEntry.definition?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            glossaryEntry.sources?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            glossaryEntry.tags?.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-        )
-      ]
+      // Nullish coalescing operator (??) doesn't work for tests here, so logical OR (||) is used despite being not recommended by SonarLint.
+      return glossaryEntries.filter(
+        (glossaryEntry) =>
+          glossaryEntry.term?.toLowerCase().includes(searchQuery.toLowerCase()) || // NOSONAR
+          glossaryEntry.definition?.toLowerCase().includes(searchQuery.toLowerCase()) || // NOSONAR
+          glossaryEntry.sources?.toLowerCase().includes(searchQuery.toLowerCase()) || // NOSONAR
+          glossaryEntry.tags?.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
     },
     []
   )
