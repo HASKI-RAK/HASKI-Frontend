@@ -1,2 +1,2 @@
-import DefaultUseTheme from '@mui/material/styles/useTheme'
+import { useTheme as DefaultUseTheme } from '@mui/material/styles'
 export { DefaultUseTheme as useTheme }
