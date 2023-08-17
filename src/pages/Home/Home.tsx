@@ -40,7 +40,6 @@ export const Home = () => {
                 setCourses(CourseResponse.courses)
               })
               .catch((error) => {
-                // 🍿 snackbar error
                 addSnackbar({
                   message: error.message,
                   severity: 'error',
@@ -50,7 +49,6 @@ export const Home = () => {
               })
           })
           .catch((error) => {
-            // 🍿 snackbar error
             addSnackbar({
               message: error.message,
               severity: 'error',

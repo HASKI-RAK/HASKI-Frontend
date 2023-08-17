@@ -1,5 +1,5 @@
-import { styled } from '@common/styles'
 import { TableCell, TableRow, tableCellClasses } from '@common/components'
+import { styled } from '@common/theme'
 
 export const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {

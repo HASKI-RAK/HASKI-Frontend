@@ -1,4 +1,4 @@
-import { createTheme } from '@common/styles'
+import { createTheme } from 'src/common/theme'
 export const defaultBehavior = {
   boxShadowSize: {
     default: '0 2px 0 ',

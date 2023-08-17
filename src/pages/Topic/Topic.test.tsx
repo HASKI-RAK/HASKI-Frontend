@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { act, render, renderHook, waitFor } from '@testing-library/react'
 import { mockReactFlow } from '__mocks__/ResizeObserver'
-import { createTheme } from '@common/styles'
+import { createTheme } from 'src/common/theme'
 import { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
 import Router from 'react-router-dom'

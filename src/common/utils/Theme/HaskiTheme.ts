@@ -1,5 +1,4 @@
-import { createTheme } from '@common/styles'
-import { yellow, red } from '@common/colors'
+import { createTheme, yellow, red } from '@common/theme'
 
 export const defaultBehavior = {
   boxShadowSize: {
