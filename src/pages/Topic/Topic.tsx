@@ -6,7 +6,7 @@ import { AuthContext, SnackbarContext } from '@services'
 import { useEffect, useState, useContext } from 'react'
 import { useStore, usePersistedStore } from '@store'
 import { IFrameModal, nodeTypes } from '@components'
-import { useTheme } from '@common/hooks' // TODO: DI?
+import { useTheme } from '@common/hooks'
 
 /**
  * @interface TopicProps

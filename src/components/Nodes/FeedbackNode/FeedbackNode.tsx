@@ -1,7 +1,7 @@
 import { Box, Paper, Typography } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { FeedbackIcon } from '@common/icons' // TODO: DI
+import { FeedbackIcon } from '@common/icons'
 import { memo } from 'react'
 
 /**

@@ -26,7 +26,6 @@ import { AuthContext, SnackbarContext, Topic } from '@services'
 import { useLearningPathTopic as _useLearningPathTopic } from '../LocalNav/LocalNav.hooks'
 import { DropdownLanguage } from '@components'
 import { useStore } from '@store'
-// TODO: Move it into @common/hooks since it is reused in LocalNav
 
 /**
  *  Local navigation component props.
