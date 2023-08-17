@@ -19,9 +19,9 @@ const Course = () => {
   const { courseId } = useParams()
 
   //ToDo: Fetch topics of student
-  const topics = t('pages.Course.topics', {
+  const topics = [...t('pages.Course.topics', {
     returnObjects: true
-  }) as [{ id: string; name: string; description: string }]
+  }) as [{ id: string; name: string; description: string }]]
 
   useEffect(() => {
     log.log('Course')
