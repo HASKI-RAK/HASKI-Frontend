@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { TableILS, ILSInterpretation, getILSParameters, ILSDimension } from './TableILS'
+import TableILS, { ILSInterpretation, getILSParameters, ILSDimension } from './TableILS'
 import { render } from '@testing-library/react'
 import React from 'react'
 

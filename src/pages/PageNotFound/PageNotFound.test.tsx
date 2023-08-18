@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import PageNotFound from './PageNotFound'
-import { mockReactFlow } from '__mocks__/ResizeObserver'
+import { mockReactFlow } from '@mocks'
 import '@testing-library/jest-dom'
 describe('PageNotFound', () => {
   beforeEach(() => {

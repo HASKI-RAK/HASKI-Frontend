@@ -8,8 +8,9 @@ import { useNavigate } from 'react-router-dom'
 import { Course } from '@core'
 
 /**
- *
- * @returns
+ * # Home Page
+ * Presents an overview of the courses.
+ * @category Pages
  */
 
 export const Home = () => {
@@ -56,14 +57,16 @@ export const Home = () => {
             })
             log.error(error.message)
           })
+          .finally(() => {
+            setLoading(false)
+          })
       }
     }
     loadData()
-    setLoading(false)
     return () => {
       clearTimeout(preventEndlessLoading)
     }
-  }, [authcontext.isAuth, loading])
+  }, [loading])
 
   // Card cointaining the courses with a button to the specific course
   return loading ? (
@@ -75,7 +78,7 @@ export const Home = () => {
           {courses.length === 0 ? (
             <Card>
               <CardContent>
-                <Typography variant="h5">No courses yet</Typography>
+                <Typography variant="h5">{t('components.Home.NoCourses')}</Typography>
               </CardContent>
             </Card>
           ) : (
@@ -89,7 +92,6 @@ export const Home = () => {
                       <Button
                         variant="contained"
                         color="primary"
-                        disabled={course.id === 99999}
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>

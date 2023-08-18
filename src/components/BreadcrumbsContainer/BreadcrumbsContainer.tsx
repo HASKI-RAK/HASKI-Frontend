@@ -3,10 +3,12 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 /**
- * Breadcrumbs container component.
+ *  The BreadcrumbsContainer that renders breadcrumbs.
+ * @example
+ * Home / Page 1 / Page 2 / Page 3
  *
  * @remarks
- * It contains the breadcrumbs of the application and is used in the main frame. *
+ * It contains the breadcrumbs of the application and is used in the main frame.
  *
  * @category Components
  */

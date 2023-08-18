@@ -1,0 +1,1 @@
+export { getLearningPathTopic } from './getLearningPathTopic'

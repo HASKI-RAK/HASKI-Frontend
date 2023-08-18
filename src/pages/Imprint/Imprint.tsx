@@ -1,7 +1,11 @@
 import { Divider, Link, Typography } from '@common/components'
 import { useTranslation } from 'react-i18next'
 
-const Imprint = () => {
+/**
+ * # Imprint Page
+ * @category Pages
+ */
+export const Imprint = () => {
   const { t } = useTranslation()
   return (
     <>

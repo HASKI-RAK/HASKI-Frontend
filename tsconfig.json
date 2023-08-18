@@ -2,7 +2,7 @@
   "include": ["src", "__mocks__", "src/custom.d.ts", "jest.setup.ts"],
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext", "ES2022"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -14,28 +14,28 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "experimentalDecorators": true,
     "isolatedModules": true,
     "noEmit": false,
     "jsx": "react-jsx",
     "baseUrl": ".",
     "inlineSourceMap": true,
+    "skipDefaultLibCheck": true,
     "paths": {
       "@pages": ["src/pages"],
-      "@services": ["src/common/services"],
-      "@utils": ["src/common/utils"],
-      "@core": ["src/common/core"],
-      "@store": ["src/common/store"],
+      "@services": ["src/services"],
+      "@core": ["src/core"],
+      "@store": ["src/store"],
       "@components": ["src/components"],
+      "@utils": ["src/common/utils"],
       "@common/components": ["src/common/components"],
       "@common/theme": ["src/common/theme"],
       "@common/icons": ["src/common/icons"],
       "@common/hooks": ["src/common/hooks"],
-      "@shared": ["src/shared"]
+      "@shared": ["src/shared"],
+      "@mocks": ["__mocks__"],
+      "jest.setup": ["jest.setup.ts"]
     },
-    "outDir": "./bin"
-  },
-  "typedocOptions": {
-    "entryPoints": ["src/*"],
-    "out": "docs"
+    "outDir": "./dist"
   }
 }

@@ -316,7 +316,7 @@ export const useData = (): {
   }
 }
 
-export const GraphListK = () => {
+const GraphListK = () => {
   const { t } = useTranslation()
   const graphListKData = useData()
   const cognitiveStrategies = t('components.QuestionnaireResults.TableListK.Cognitive strategies')
@@ -470,3 +470,5 @@ export const GraphListK = () => {
     </div>
   )
 }
+
+export default GraphListK

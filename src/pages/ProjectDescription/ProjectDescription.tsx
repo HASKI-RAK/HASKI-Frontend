@@ -1,12 +1,11 @@
 import { ProjectDescriptionContent } from '@components'
 
 /**
- * ProjectDescription presents a page with a description of the project. It uses the ProjectDescriptionContent component to present the content.
- *
- * @returns {JSX.Element} - The ProjectDescription component.
+ * # Project Description Page
+ * Presents a page with a description of the project. It uses the {@link ProjectDescriptionContent} to present the content.
  * @category Pages
  */
-const ProjectDescription = () => {
+export const ProjectDescription = () => {
   return <ProjectDescriptionContent />
 }
 

@@ -1,7 +1,7 @@
 ﻿import { useTranslation } from 'react-i18next'
 import { Select, MenuItem } from '@common/components'
-import log from 'loglevel'
 import { ForwardedRef, forwardRef } from 'react'
+import log from 'loglevel'
 
 /**
  * DropdownLanguage is a dropdown menu that allows the user to change the language of the application.
@@ -34,7 +34,7 @@ jest.mock('react-i18next', () => ({
     useTranslation: () => ({t: (key:string) => key})
 }));
 ```
- * @returns {JSX.Element} - The DropdownLanguage component.
+ * @returns - The DropdownLanguage component.
  */
 const DropdownLanguage = forwardRef((props, ref: ForwardedRef<HTMLDivElement | null>) => {
   const { i18n } = useTranslation()
@@ -63,5 +63,6 @@ const DropdownLanguage = forwardRef((props, ref: ForwardedRef<HTMLDivElement | n
     </div>
   )
 })
+// eslint-disable-next-line immutable/no-mutation
 DropdownLanguage.displayName = 'DropdownLanguage'
-export { DropdownLanguage }
+export default DropdownLanguage

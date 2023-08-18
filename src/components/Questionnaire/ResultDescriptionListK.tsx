@@ -226,7 +226,7 @@ const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: { [key
   return subscalesBelow3MessageString
 }
 
-export const ResultDescriptionListK = () => {
+const ResultDescriptionListK = () => {
   const [
     organize,
     elaborate,
@@ -289,3 +289,5 @@ export const ResultDescriptionListK = () => {
     </div>
   )
 }
+
+export default ResultDescriptionListK

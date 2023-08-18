@@ -21,14 +21,14 @@ import {
 import { useTranslation } from 'react-i18next'
 
 /**
- * @typedef {Object} LoginFormProps
- * @property {function} onSubmit - The function to be called when the form is submitted.
- * @property {function} onValidate - The function to be called when the form is validated.
- * @property {string} usernameDefaultValue - The default value for the username field.
- * @property {boolean} isLoading - Whether the form is loading or not.
- * @property {boolean} moodleLogin - Whether the form displays a moodle login button or not.
- * @property {function} onMoodleLogin - The function to be called when the moodle login button is clicked.
- * @property {function} useLoginForm - The hook to be used for the form logic.
+ * LoginFormProps is the type of the props object that must be passed to
+ * @prop onSubmit - The function to be called when the form is submitted.
+ * @prop onValidate - The function to be called when the form is validated.
+ * @prop usernameDefaultValue - The default value for the username field.
+ * @prop isLoading - Whether the form is loading or not.
+ * @prop moodleLogin - Whether the form displays a moodle login button or not.
+ * @prop onMoodleLogin - The function to be called when the moodle login button is clicked.
+ * @prop useLoginForm - The hook to be used for the form logic.
  */
 export type LoginFormProps = {
   onSubmit?: (username: string, password: string) => void
@@ -40,12 +40,13 @@ export type LoginFormProps = {
   useLoginForm?: (params?: LoginFormHookParams) => LoginFormHookReturn
 }
 /**
+ *
  * LoginForm presents a form for the user to login.
  * It can be used as a standalone component on a page. The functionality
  * comes by default, but it can be overriden by custom functions passed as described
  * in {@link LoginFormProps.useLoginForm} or {@link LoginFormProps.onSubmit} and {@link LoginFormProps.onValidate}.
- * @param props - Props containing the form logic and the form state.
- * @returns {JSX.Element} - The Form component.
+ * @param props - {@link LoginFormProps} Props containing the form logic and the form state.
+ * @returns The Form component.
  * @category Components
  */
 const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) => {
@@ -87,75 +88,77 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
   const { t } = useTranslation()
 
   return (
-    <Paper elevation={3}>
-      <Stack direction="column" justifyContent="center" alignItems="center" margin={2}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          {t('components.Login.title')}
-        </Typography>
-        <Typography variant="h6" component="h2" gutterBottom>
-          {t('components.Login.subtitle')}
-        </Typography>
-        <Stack spacing={2} direction="column">
-          <TextField
-            required
-            error={usernameHasError}
-            helperText={usernameHasError ? t('components.Login.usernameError') : ''}
-            label={t('components.Login.username')}
-            defaultValue={usernameDefault}
-            onChange={usernameChangeHandler}
-            name="username"
-          />
-          <TextField
-            required
-            error={passwordHasError}
-            helperText={passwordHasError ? t('components.Login.passwordError') : ''}
-            label={t('components.Login.password')}
-            variant="outlined"
-            type={showPassword ? 'text' : 'password'}
-            onChange={passwordChangeHandler}
-            name="password"
-            id="password"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword}>
-                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-          />
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
-            {t('components.Login.login')}
-          </Button>
-          {moodleLogin && (
-            <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={2}>
-              <Grid item sm={0} md={6}>
-                <Divider flexItem>
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      textAlign: 'center',
-                      fontSize: '0.8rem',
-                      color: (theme) => theme.palette.secondary.dark
-                    }}>
-                    {t('components.Login.orLoginWithMoodle')}
-                  </Typography>
-                </Divider>
+    <Stack justifyContent="center" alignItems="center">
+      <Paper elevation={3}>
+        <Stack direction="column" justifyContent="center" alignItems="center" margin={2}>
+          <Typography variant="h4" component="h1" gutterBottom>
+            {t('components.Login.title')}
+          </Typography>
+          <Typography variant="h6" component="h2" gutterBottom>
+            {t('components.Login.subtitle')}
+          </Typography>
+          <Stack spacing={2} direction="column">
+            <TextField
+              required
+              error={usernameHasError}
+              helperText={usernameHasError ? t('components.Login.usernameError') : ''}
+              label={t('components.Login.username')}
+              defaultValue={usernameDefault}
+              onChange={usernameChangeHandler}
+              name="username"
+            />
+            <TextField
+              required
+              error={passwordHasError}
+              helperText={passwordHasError ? t('components.Login.passwordError') : ''}
+              label={t('components.Login.password')}
+              variant="outlined"
+              type={showPassword ? 'text' : 'password'}
+              onChange={passwordChangeHandler}
+              name="password"
+              id="password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword}>
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+            />
+            <Button variant="contained" color="primary" onClick={handleSubmit}>
+              {t('components.Login.login')}
+            </Button>
+            {moodleLogin && (
+              <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={2}>
+                <Grid item sm={0} md={6}>
+                  <Divider flexItem>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        textAlign: 'center',
+                        fontSize: '0.8rem',
+                        color: (theme) => theme.palette.secondary.dark
+                      }}>
+                      {t('components.Login.orLoginWithMoodle')}
+                    </Typography>
+                  </Divider>
+                </Grid>
+                <Grid item display="flex" justifyContent="center" md={6}>
+                  <Button onClick={onMoodleLogin} data-testid="moodle-login-button">
+                    <img src="/LogoMoodle.png" alt="Moodle" style={{ width: '100px' }} />
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item display="flex" justifyContent="center" md={6}>
-                <Button onClick={onMoodleLogin} data-testid="moodle-login-button">
-                  <img src="/LogoMoodle.png" alt="Moodle" style={{ width: '100px' }} />
-                </Button>
-              </Grid>
-            </Grid>
-          )}
+            )}
+          </Stack>
         </Stack>
-      </Stack>
-      <Backdrop open={isLoading}>
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    </Paper>
+        <Backdrop open={isLoading}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      </Paper>
+    </Stack>
   )
 }
 

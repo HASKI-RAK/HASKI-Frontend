@@ -6,7 +6,7 @@ import { getILSParameters, ILSDimension, ILSInterpretation } from './TableILS'
 type ResultDescriptionILSProps = {
   ILSdim?: (n: number, s: number, b?: boolean) => string
 }
-export const ResultDescriptionILS = ({ ILSdim = ILSDimension }: ResultDescriptionILSProps) => {
+const ResultDescriptionILS = ({ ILSdim = ILSDimension }: ResultDescriptionILSProps) => {
   const { t } = useTranslation()
 
   const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters()
@@ -150,3 +150,5 @@ export const ResultDescriptionILS = ({ ILSdim = ILSDimension }: ResultDescriptio
     </div>
   )
 }
+
+export default ResultDescriptionILS

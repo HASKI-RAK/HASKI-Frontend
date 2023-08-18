@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Topic } from '@services'
-import { LearningPathElement } from '@core'
+import { LearningPathElement, Topic, LearningPathElementReturn } from '@core'
 import log from 'loglevel'
 import { useStore, usePersistedStore } from '@store'
-import { LearningPathElementReturn } from '@core'
 
+/**
+ * This is a mock of the LearningPathElement object
+ */
 const initialLearningPathElement: LearningPathElement = {
   id: 99999,
   course_id: 99999,
@@ -39,19 +40,36 @@ const initialLearningPathElement: LearningPathElement = {
   ]
 }
 
+/**
+ * This function sorts the learning path elements by position.
+ * @param userid - user id
+ * @param lmsUserid - lms user id
+ * @param studentid - student id
+ * @param data - topic data
+ * @param courseId - course id
+ * @param fetchLearningPath - fetch learning path function
+ *
+ * @remarks
+ * It makes a call to the fetchLearningPath function to get the learning path elements.
+ * @returns
+ */
 export const getSortedLearningPath = async (
   userid: number,
   lmsUserid: number,
   studentid: number,
   data: Topic,
+  courseId: string,
   fetchLearningPath: LearningPathElementReturn
 ): Promise<LearningPathElement> => {
-  const learningPath = await fetchLearningPath(userid, lmsUserid, studentid, '2', data.id.toString())
+  const learningPath = await fetchLearningPath(userid, lmsUserid, studentid, courseId, data.id.toString())
   learningPath.path.sort((a, b) => a.position - b.position)
   return learningPath
 }
 
-export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } => {
+/**
+ * @param courseId - course id
+ */
+export const useLearningPathTopic = (courseId: string): { loading: boolean; topics: Topic[] } => {
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
   const fetchUser = usePersistedStore((state) => state.fetchUser)
@@ -62,7 +80,7 @@ export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } =>
       setLoading(true)
       try {
         const user = await fetchUser()
-        const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, '2')
+        const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
         setTopics(fetchedTopics.topics)
       } catch (error) {
         log.error(error)
@@ -82,7 +100,8 @@ export const useLearningPathTopic = (): { loading: boolean; topics: Topic[] } =>
 }
 
 export const useLearningPathElement = (
-  topic: Topic
+  topic: Topic,
+  courseId: string
 ): { loadingElements: boolean; learningPaths: LearningPathElement } => {
   const [loadingElements, setLoadingElements] = useState(true)
   const [learningPaths, setLearningPaths] = useState<LearningPathElement>(initialLearningPathElement)
@@ -99,6 +118,7 @@ export const useLearningPathElement = (
           user.lms_user_id,
           user.id,
           topic,
+          courseId,
           fetchLearningPathElement
         )
         setLearningPaths(dataLearningPath)

@@ -108,7 +108,7 @@ export const ILSDimension = (dimensionNumber: number, score: number, onlyEnglish
   }
 }
 
-export const TableILS = () => {
+const TableILS = () => {
   const { t } = useTranslation()
   const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters()
 
@@ -179,3 +179,5 @@ export const TableILS = () => {
     </TableContainer>
   )
 }
+
+export default TableILS

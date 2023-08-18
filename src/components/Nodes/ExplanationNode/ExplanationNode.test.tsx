@@ -1,6 +1,6 @@
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
 import { render, fireEvent } from '@testing-library/react'
-import { mockReactFlow } from '__mocks__/ResizeObserver'
+import { mockReactFlow } from '@mocks'
 import ReactFlow, { Node } from 'reactflow'
 import '@testing-library/jest-dom'
 
