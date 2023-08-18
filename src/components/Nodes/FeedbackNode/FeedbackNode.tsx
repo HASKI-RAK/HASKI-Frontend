@@ -1,7 +1,7 @@
 import { Box, Paper, Typography } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { FeedbackIcon } from '@common/icons'
+import { Feedback } from '@common/icons'
 import { memo } from 'react'
 
 /**
@@ -30,7 +30,7 @@ const FeedbackNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <FeedbackIcon sx={{ fontSize: 50 }} />
+        <Feedback sx={{ fontSize: 50 }} />
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}

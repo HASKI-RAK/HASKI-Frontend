@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react'
-import { VisibilityIcon, VisibilityOffIcon } from '@common/icons'
+import { Visibility, VisibilityOff } from '@common/icons'
 import {
   Backdrop,
   Button,

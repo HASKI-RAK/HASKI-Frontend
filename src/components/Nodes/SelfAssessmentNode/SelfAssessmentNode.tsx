@@ -1,5 +1,5 @@
 import { Box, Paper, Typography } from '@common/components'
-import { AssignmentIndIcon } from '@common/icons'
+import { AssignmentInd } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
@@ -30,7 +30,7 @@ const SelfAssessmentNode = ({ data }: NodeProps<LearningPathLearningElementNode>
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <AssignmentIndIcon sx={{ fontSize: 50 }} />
+        <AssignmentInd sx={{ fontSize: 50 }} />
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}

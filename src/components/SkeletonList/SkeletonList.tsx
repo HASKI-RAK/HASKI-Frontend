@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { DefaultSkeleton as Skeleton } from '@common/components'
+import { Skeleton } from '@common/components'
 
 const SkeletonList = () => {
   const skeletonItems = []

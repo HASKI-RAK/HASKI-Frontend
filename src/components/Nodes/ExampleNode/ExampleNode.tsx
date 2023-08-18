@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
-import { AssignmentIcon } from '@common/icons'
+import { Assignment } from '@common/icons'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
 
@@ -30,7 +30,7 @@ const ExampleNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <AssignmentIcon sx={{ fontSize: 50 }} />
+        <Assignment sx={{ fontSize: 50 }} />
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}

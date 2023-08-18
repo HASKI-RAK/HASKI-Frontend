@@ -18,7 +18,7 @@ import {
   Link
 } from '@common/components'
 
-import { SettingsIcon, HelpIcon, ArrowDropDownIcon, PersonIcon, Login, Logout } from '@common/icons'
+import { Settings, Help, ArrowDropDown, Person, Login, Logout } from '@common/icons'
 
 import { useTranslation } from 'react-i18next'
 import { AuthContext, SnackbarContext } from '@services'
@@ -166,9 +166,9 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                     color="inherit"
                     endIcon={
                       anchorElTopics ? (
-                        <ArrowDropDownIcon sx={{ transform: 'rotate(180deg)' }} />
+                        <ArrowDropDown sx={{ transform: 'rotate(180deg)' }} />
                       ) : (
-                        <ArrowDropDownIcon />
+                        <ArrowDropDown />
                       )
                     }>
                     {t('components.MenuBar.TopicButton')}
@@ -252,7 +252,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                 onClick={() => {
                   window.open('/files/Bedienungsanleitung_von_HASKI_Alpha.pdf', '_blank')
                 }}>
-                <HelpIcon data-testid="HelpIcon" />
+                <Help data-testid="HelpIcon" />
               </IconButton>
             </Tooltip>
           </Box>
@@ -268,7 +268,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                     autoHideDuration: 5000
                   })
                 }}>
-                <SettingsIcon data-testid="SettingsIcon" />
+                <Settings data-testid="SettingsIcon" />
               </IconButton>
             </Tooltip>
           </Box>
@@ -278,7 +278,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             <Tooltip title={t('tooltip.openSettings')}>
               <IconButton onClick={handleOpenUserMenu} data-testid="useravatar">
                 <Avatar alt="Remy Sharp">
-                  <PersonIcon />
+                  <Person />
                 </Avatar>
               </IconButton>
             </Tooltip>

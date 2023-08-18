@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
-import { ShortTextIcon } from '@common/icons'
+import { ShortText } from '@common/icons'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
 
@@ -30,7 +30,7 @@ const ShortTextualIntroductionNode = ({ data }: NodeProps<LearningPathLearningEl
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <ShortTextIcon sx={{ fontSize: 50 }} />
+        <ShortText sx={{ fontSize: 50 }} />
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}

@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Box, Button, Stepper, Step, StepButton, Modal, IconButton, Stack } from '@common/components'
 
-import { CloseIcon } from '@common/icons'
+import { Close } from '@common/icons'
 import { useTranslation } from 'react-i18next'
 
 //Can not shorten import, tests fail to recognize i18n.use...
@@ -66,7 +66,7 @@ const QuestionnaireResultsModal = ({ open = false, handleClose }: QuestionnaireR
               sx={styleButtonClose}
               onClick={handleClose}
               data-testid={'QuestionnaireResultsCloseButton'}>
-              <CloseIcon />
+              <Close />
             </IconButton>
             <Stepper nonLinear activeStep={activeStep}>
               {steps.map((label, index) => (
