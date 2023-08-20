@@ -502,7 +502,6 @@ export const TableListKQuestions = memo(() => {
     setRadioButtonGroup2(setRadioButtonValue(stepsListK[newActiveStep][1]))
     setRadioButtonGroup3(setRadioButtonValue(stepsListK[newActiveStep][2]))
     setRadioButtonGroup4(setRadioButtonValue(stepsListK[newActiveStep][3]))
-    setRadioButtonGroup5(setRadioButtonValue(stepsListK[newActiveStep][4]))
   }
 
   const handleNext = useCallback(() => {
