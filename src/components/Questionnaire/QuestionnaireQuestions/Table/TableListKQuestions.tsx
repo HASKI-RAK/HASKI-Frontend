@@ -521,7 +521,7 @@ export const TableListKQuestions = memo(() => {
 
   const handleSend = useCallback(() => {
     const listkArray = Object.entries(questionnaireAnswers).filter(([key]) => key !== '')
-    const listk_result = ['ils', listkArray]
+    const listk_result = ['listk', listkArray]
     console.log(listk_result)
     //todo: send to server
   }, [questionnaireAnswers])
@@ -576,7 +576,7 @@ export const TableListKQuestions = memo(() => {
         listkStep.answer4,
         listkStep.answer5
       ]
-      const selectedAnswer = radioButtonOptions.indexOf(event.target.value) + 1 || '5'
+      const selectedAnswer = (radioButtonOptions.indexOf(event.target.value) + 1)
       setQuestionnaireAnswers(listkStep.questionLabel, selectedAnswer.toString())
     },
     [setQuestionnaireAnswers]
