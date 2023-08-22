@@ -1,4 +1,5 @@
-import { useState, RefObject } from 'react'
+import { useState, RefObject, useEffect } from 'react'
+import { Typewriter } from '@services'
 
 /**
  * @typedef {Object} useProjectDescriptionCardHookParams
@@ -23,13 +24,13 @@ export type useProjectDescriptionCardHookParams = {
  */
 export type ProjectDescriptionCardHookReturn = {
   readonly bodyState: string
-  readonly headerState: string
+  //readonly headerState: string
   readonly setBodyState: (body: string) => void
-  readonly setHeaderState: (header: string) => void
+  //readonly setHeaderState: (header: string) => void
   readonly animateBody: (ref: RefObject<HTMLDivElement>, body: string) => void
-  readonly animateHeader: (ref: RefObject<HTMLDivElement>, header: string) => void
+  //readonly animateHeader: (ref: RefObject<HTMLDivElement>, header: string) => void
   readonly fadeInEffect: (body: string) => () => void
-  readonly typewriterEffect: (header: string) => () => void
+  //readonly typewriterEffect: (header: string) => () => void
 }
 
 /**
@@ -46,7 +47,7 @@ export const useProjectDescriptionCard = (
 
   // State data
   const [bodyState, setBodyState] = useState(defaultBodyState)
-  const [headerState, setHeaderState] = useState(defaultHeaderState)
+  //const [headerState, setHeaderState] = useState(defaultHeaderState)
 
   // Logic
   // Checks if top of component is in the viewport and animates body texts if states are not equal to param.
@@ -63,7 +64,7 @@ export const useProjectDescriptionCard = (
     }
   }
 
-  // Checks if top of component is in the viewport and animates header texts if states are not equal to param.
+  /*/ Checks if top of component is in the viewport and animates header texts if states are not equal to param.
   const animateHeader = (ref: RefObject<HTMLDivElement>, header: string) => {
     const topPosition = ref.current?.getBoundingClientRect().top
     const viewportBottom = window.innerHeight
@@ -71,11 +72,32 @@ export const useProjectDescriptionCard = (
     if (topPosition !== null && typeof topPosition === 'number') {
       if (topPosition <= viewportBottom) {
         if (header !== headerState) {
-          typewriterEffect(header)
+          //original
+          //typewriterEffect(header)
+          
+          //first copie (hook in hook)
+          //useTypeWriter(header)
+
+          //second
+          setHeaderState(header);
         }
       }
     }
   }
+  */
+
+  const animateHeader = (ref: RefObject<HTMLDivElement>, header: string) => {
+    const topPosition = ref.current?.getBoundingClientRect().top;
+    const viewportBottom = window.innerHeight;
+
+    if (topPosition !== null && typeof topPosition === 'number') {
+      if (topPosition <= viewportBottom) {
+        // Now we don't need to manually manage the typewriter effect.
+      }
+    }
+  };
+  
+
 
   // Animates body text by setting the bodyState after a short timeout.
   const fadeInEffect = (body: string) => {
@@ -85,22 +107,25 @@ export const useProjectDescriptionCard = (
     return () => clearTimeout(bodyTimeout)
   }
 
-  // Animates header text by writing one character at a time into the headerState with a short timeout.
+  /*/ Animates header text by writing one character at a time into the headerState with a short timeout.
   const typewriterEffect = (header: string) => {
     const headerTimeout = setTimeout(() => {
       setHeaderState(header.slice(0, headerState.length + 1))
     }, 50)
     return () => clearTimeout(headerTimeout)
   }
+  */
+
+
 
   return {
     bodyState,
-    headerState,
+    //headerState,
     setBodyState,
-    setHeaderState,
+    //setHeaderState,
     animateBody,
-    animateHeader,
+    //animateHeader,
     fadeInEffect,
-    typewriterEffect
+    //typewriterEffect
   } as const
 }

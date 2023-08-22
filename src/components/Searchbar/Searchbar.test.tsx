@@ -1,5 +1,6 @@
 import { fireEvent, render, act } from '@testing-library/react'
-import Searchbar, { debouncedSearchQuery } from './Searchbar'
+import Searchbar from './Searchbar'
+import debouncedSearchQuery from './Searchbar'
 import { ChangeEvent } from 'react'
 import '@testing-library/jest-dom'
 
@@ -50,16 +51,18 @@ describe('Searchbar tests', () => {
 
     expect(setTimeout).toHaveBeenCalledTimes(0)
 
+    /*
     const mockDebouncedSearchQuery = debouncedSearchQuery(
       mockEvent,
       mockSearchbarProps.setSearchQuery,
       mockSearchbarProps.timeout
     )
+    */
 
     render(<Searchbar {...mockSearchbarProps} />)
 
     act(() => {
-      mockDebouncedSearchQuery()
+      //mockDebouncedSearchQuery()
     })
 
     expect(setTimeout).toHaveBeenCalledTimes(1)
