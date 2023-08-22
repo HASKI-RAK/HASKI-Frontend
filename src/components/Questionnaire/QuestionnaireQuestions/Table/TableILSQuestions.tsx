@@ -561,25 +561,51 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   }, [activeStep])
 
   const handleSend = async() => {
-    const ILSarray = Object.entries(questionnaireAnswers).filter(([key]) => key !== '')
-    const listKJson = {
-      list_k: [{}]
-    }
+    const ILSarray = Object.entries(questionnaireAnswers).filter(([key,item]) => key !== "" && item !== "")
     const ils_result = ['ils', ILSarray]
     console.log(ils_result)
     const outputJson = JSON.stringify({
       ils: ILSarray.map((item: any) => ({
         question_id: item[0].toLowerCase(),
         answer: item[1]
-      })),
-      list_k: listKJson.list_k.map(() => [])
+      }))
     })
     console.log(outputJson)
     fetchUser()
     .then(
         (user) => {
-          console.log(user.role)
-          console.log(user.role_id)
+            const studentId = user.id
+            fetch(
+                process.env.BACKEND +
+                `/lms/student/${studentId}/questionnaire/ils`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: outputJson
+                }
+            )
+            .then(
+                (response) => {
+                    if (response.ok) {
+                    return response.json()
+                    } else {
+                    throw new Error('Something went wrong')
+                    }
+                }
+            )
+            .then(
+                (data) => {
+                    console.log(data)
+                }
+            )
+            .catch(
+                (error) => {
+                    console.log(error)
+                }
+            )
         }
     )
     /*const response = await fetch(
