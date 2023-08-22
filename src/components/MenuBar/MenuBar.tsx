@@ -23,7 +23,9 @@ import HelpIcon from '@mui/icons-material/Help'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import PersonIcon from '@mui/icons-material/Person'
 import { useTranslation } from 'react-i18next'
-import { Login, Logout } from '@mui/icons-material'
+import { Login, Logout, AssignmentOutlined } from '@mui/icons-material'
+import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
+import PlaylistAddCheckCircleOutlinedIcon from '@mui/icons-material/PlaylistAddCheckCircleOutlined';
 import { AuthContext, SnackbarContext, Topic } from '@services'
 import { DropdownLanguage, SkeletonList, QuestionnaireResultsModal } from '@components'
 import { usePersistedStore, useStore } from '@store'
@@ -315,12 +317,48 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
               <MenuItem
-                data-testid="usermenuitem"
-                key="usermenuitem"
+                data-testid="questionnaireILS"
+                key="questionnaireILS"
                 onClick={() => {
-                  isAuth ? handleUserLogout() : navigate('/login')
-                  handleCloseUserMenu()
+                    navigate('/questionnaire_ils_long')
+                    handleCloseUserMenu()
                 }}>
+                <ListItemIcon>{isAuth ? <LibraryBooksOutlinedIcon fontSize="small" /> : null}</ListItemIcon>
+                <Typography textAlign="center">
+                {isAuth ? 'ILS Questionnaire' : null}
+              </Typography>
+              </MenuItem>
+              <MenuItem
+                  data-testid="questionnaireILSshort"
+                  key="questionnaireILSshort"
+                  onClick={() => {
+                    navigate('/questionnaire_ils_short')
+                    handleCloseUserMenu()
+                  }}>
+                <ListItemIcon>{isAuth ? <AssignmentOutlined fontSize="small" /> : null}</ListItemIcon>
+                <Typography textAlign="center">
+                  {isAuth ? 'ILS Questionnaire shortend' : null}
+                </Typography>
+              </MenuItem>
+              <MenuItem
+                  data-testid="questionnaireListk"
+                  key="questionnaireListk"
+                  onClick={() => {
+                    navigate('/questionnaire_listk')
+                    handleCloseUserMenu()
+                  }}>
+                <ListItemIcon>{isAuth ? <PlaylistAddCheckCircleOutlinedIcon fontSize="small" /> : null}</ListItemIcon>
+                <Typography textAlign="center">
+                  {isAuth ? 'List-K Questionnaire' : null}
+                </Typography>
+              </MenuItem>
+              <MenuItem
+                  data-testid="usermenuitem"
+                  key="usermenuitem"
+                  onClick={() => {
+                    isAuth ? handleUserLogout() : navigate('/login')
+                    handleCloseUserMenu()
+                  }}>
                 <ListItemIcon>{isAuth ? <Logout fontSize="small" /> : <Login fontSize="small" />}</ListItemIcon>
                 <Typography textAlign="center">
                   {isAuth ? t('components.MenuBar.Profile.Logout') : t('components.MenuBar.Profile.Login')}

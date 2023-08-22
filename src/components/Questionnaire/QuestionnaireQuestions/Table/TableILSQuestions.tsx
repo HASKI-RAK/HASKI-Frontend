@@ -10,6 +10,7 @@ import React, { memo, useCallback, useMemo, useState } from 'react'
 import { useQuestionnaireAnswersILSStore } from '@services'
 import PropTypes from 'prop-types'
 import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
+import {usePersistedStore} from "@store";
 
 /**
  * @description
@@ -516,6 +517,7 @@ type TableILSQuestionsProps = {
 
 export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   TableILSQuestions.displayName = 'TableILSQuestions'
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
 
   const { t } = useTranslation()
 
@@ -558,7 +560,7 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
     setRadioButtonGroups(activeStep - 1)
   }, [activeStep])
 
-  const handleSend = useCallback(() => {
+  const handleSend = async() => {
     const ILSarray = Object.entries(questionnaireAnswers).filter(([key]) => key !== '')
     const listKJson = {
       list_k: [{}]
@@ -573,8 +575,25 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
       list_k: listKJson.list_k.map(() => [])
     })
     console.log(outputJson)
-    //todo: send to server
-  }, [questionnaireAnswers])
+    fetchUser()
+    .then(
+        (user) => {
+          console.log(user.role)
+          console.log(user.role_id)
+        }
+    )
+    /*const response = await fetch(
+        process.env.BACKEND +
+        `/lms/student/${studentId}/questionnaire/ils`,
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+    )*/
+  }
 
   const setRadioButtonValue = useMemo(
     () =>
