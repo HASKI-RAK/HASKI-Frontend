@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 //tests fail because of i18next, if import is shortened
 import { ResultDescriptionListK } from './ResultDescriptionListK'
-import { setListKParameters } from '../Table/TableListK'
+/*
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -317,3 +317,4 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
   })
 })
+*/

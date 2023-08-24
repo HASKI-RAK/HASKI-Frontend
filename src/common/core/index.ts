@@ -12,7 +12,6 @@ import Topic from './Topic/Topic'
 /**
  * Holds all pure business logic. Does not rely on any other components.
  */
-export { ILS, ListK }
 export type {
   User,
   Course,
@@ -23,7 +22,9 @@ export type {
   LearningPathElement,
   LearningPathLearningElement,
   Topic,
-  StudentLearningElement
+  StudentLearningElement,
+  ILS,
+  ListK
 }
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
 export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'

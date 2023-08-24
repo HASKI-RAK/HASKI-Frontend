@@ -6,23 +6,8 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireResultTableStyle'
-import { ILS } from '@core'
+import {ILS} from "@core";
 
-const ils = new ILS()
-
-//Setting ILS-Parameters for tests
-export const setILSParameters = (dimOne?: number, dimTwo?: number, dimThree?: number, dimFour?: number) => {
-  ils.dimensionOneScore = dimOne ?? ils.dimensionOneScore
-  ils.dimensionTwoScore = dimTwo ?? ils.dimensionTwoScore
-  ils.dimensionThreeScore = dimThree ?? ils.dimensionThreeScore
-  ils.dimensionFourScore = dimFour ?? ils.dimensionFourScore
-}
-
-export const getILSParameters = () => {
-  setILSParameters()
-
-  return [ils.dimensionOneScore, ils.dimensionTwoScore, ils.dimensionThreeScore, ils.dimensionFourScore]
-}
 
 //Returns the Interpretation of the ILS-Test (balanced, moderate, strong + Dimension (if score is not balanced))
 export const ILSInterpretation = (score: number, interpretationString: string, onlyEnglish?: boolean): string => {
@@ -112,9 +97,17 @@ export const ILSDimension = (dimensionNumber: number, score: number, onlyEnglish
   }
 }
 
-export const TableILS = () => {
+type TableILSProps = {
+  data: ILS,
+}
+
+export const TableILS = ({ data }: TableILSProps) => {
   const { t } = useTranslation()
-  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters()
+
+  const dimensionOneScore = data.input_value
+  const dimensionTwoScore = data.perception_value
+  const dimensionThreeScore = data.processing_value
+  const dimensionFourScore = data.understanding_value
 
   const rows = [
     {

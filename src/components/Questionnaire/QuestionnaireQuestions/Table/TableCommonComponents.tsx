@@ -11,6 +11,7 @@ import SendIcon from '@mui/icons-material/Send'
 import PropTypes from 'prop-types'
 import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
+import {CircularProgress} from "@mui/material";
 
 /**
  * @description
@@ -37,6 +38,7 @@ interface MemoSendButtonProps {
     isNextDisabled: boolean
     isValid: boolean
     idType: string
+    isSending: boolean
 }
 
 // endregion
@@ -96,11 +98,22 @@ export const MemoButtonStack: React.FC<MemoButtonStackProps> = memo(
 )
 
 export const MemoSendButton: React.FC<MemoSendButtonProps> = memo(
-    ({handleSend, isNextDisabled, t, isValid, idType}) => {
+    ({handleSend, isNextDisabled, t, isValid, idType, isSending}) => {
         return (
             <>
                 <Stack direction="column" justifyContent="flex-end" alignItems="center">
-                    {isValid ? (
+                    {isSending ? (
+                            <Button
+                                variant="contained"
+                                endIcon={<SendIcon/>}
+                                color="primary"
+                                data-testid={`sendButton${idType}Questionnaire`}
+                                onClick={handleSend}
+                                disabled={isNextDisabled || !isValid}
+                                sx={{m: 2}}>
+                                <CircularProgress size={24} />
+                            </Button>
+                    ):(
                         <div data-testid={'ActiveStepILS'}>
                             <Button
                                 variant="contained"
@@ -108,12 +121,12 @@ export const MemoSendButton: React.FC<MemoSendButtonProps> = memo(
                                 color="primary"
                                 data-testid={`sendButton${idType}Questionnaire`}
                                 onClick={handleSend}
-                                disabled={isNextDisabled}
+                                disabled={isNextDisabled || !isValid}
                                 sx={{m: 2}}>
                                 {t('Send')}
                             </Button>
                         </div>
-                    ) : undefined}
+                    )}
                 </Stack>
             </>
         )
@@ -143,6 +156,7 @@ MemoSendButton.propTypes = {
     handleSend: PropTypes.func.isRequired,
     isNextDisabled: PropTypes.bool.isRequired,
     isValid: PropTypes.bool.isRequired,
-    idType: PropTypes.string.isRequired
+    idType: PropTypes.string.isRequired,
+    isSending: PropTypes.bool.isRequired
 }
 // endregion

@@ -7,11 +7,11 @@ const DivElement = () => {
   const setAnswer = useQuestionnaireAnswersListKStore((state) => state.setQuestionnaireAnswers)
   return (
     <>
-      <div>The Question ID: {question_id?.Org1_F1}</div>
+      <div>The Question ID: {question_id?.org1_f1}</div>
       <Button
         data-testid="set Answer"
         onClick={() => {
-          setAnswer?.('Org1_F1', '1')
+          setAnswer?.('org1_f1', '1')
         }}
       />
     </>

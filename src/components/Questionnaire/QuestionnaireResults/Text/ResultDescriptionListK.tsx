@@ -1,18 +1,12 @@
 import Typography from '@mui/material/Typography'
-import { getListKParameters, getSubscaleScore } from '../Table/TableListK'
 import { useTranslation } from 'react-i18next'
+import {ListK} from "@core";
 
 type GeneralSubscalesProps = {
-  CognitiveStrategies: CognitiveStrategiesProps
-  attention: number
-  effort: number
-  time: number
-  goalsPlans: number
-  control: number
-  regulate: number
-  learnWithClassmates: number
-  literatureResearch: number
-  learningEnvironment: number
+  averageCognitiveStrategies: number
+  averageInternalResourceManagementStrategies: number
+  averageMetacognitiveStrategies: number
+  averageExternalResourcesManagementStrategies: number
 }
 
 type CognitiveStrategiesProps = {
@@ -34,32 +28,11 @@ const useGeneralSubscalesBelow3Element = (generalProps: GeneralSubscalesProps): 
   const averageSubscaleBelow3Array = []
   let averageSubscaleBelow3String = ''
 
-  const cognitiveStrategiesAverage = getSubscaleScore([
-    generalProps.CognitiveStrategies.organize,
-    generalProps.CognitiveStrategies.elaborate,
-    generalProps.CognitiveStrategies.criticalReview,
-    generalProps.CognitiveStrategies.repeat
-  ])
-  const averageInternalResourceManagementStrategies = getSubscaleScore([
-    generalProps.attention,
-    generalProps.effort,
-    generalProps.time
-  ])
-  const averageMetacognitiveStrategies = getSubscaleScore([
-    generalProps.goalsPlans,
-    generalProps.control,
-    generalProps.regulate
-  ])
-  const averageExternalResourcesManagementStrategies = getSubscaleScore([
-    generalProps.learnWithClassmates,
-    generalProps.literatureResearch,
-    generalProps.learningEnvironment
-  ])
   const averageSubscaleArray = [
-    cognitiveStrategiesAverage,
-    averageInternalResourceManagementStrategies,
-    averageMetacognitiveStrategies,
-    averageExternalResourcesManagementStrategies
+    generalProps.averageCognitiveStrategies,
+    generalProps.averageInternalResourceManagementStrategies,
+    generalProps.averageMetacognitiveStrategies,
+    generalProps.averageExternalResourcesManagementStrategies
   ]
 
   for (const item in averageSubscaleArray) {
@@ -240,22 +213,29 @@ const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: { [key
   return subscalesBelow3MessageString
 }
 
-export const ResultDescriptionListK = () => {
-  const [
-    organize,
-    elaborate,
-    criticalReview,
-    repeat,
-    attention,
-    effort,
-    time,
-    goalsPlans,
-    control,
-    regulate,
-    learnWithClassmates,
-    literatureResearch,
-    learningEnvironment
-  ] = getListKParameters()[0]
+type ResultDescriptionListKProps = {
+  data: ListK,
+}
+
+export const ResultDescriptionListK = ({ data }: ResultDescriptionListKProps) => {
+
+  const organize = data.org
+  const elaborate = data.elab
+  const criticalReview = data.crit_rev
+  const repeat = data.rep
+  const attention = data.att
+  const effort = data.eff
+  const time = data.time
+  const goalsPlans = data.goal_plan
+  const control = data.con
+  const regulate = data.reg
+  const learnWithClassmates = data.lrn_w_cls
+  const literatureResearch = data.lit_res
+  const learningEnvironment = data.lrn_env
+  const averageCognitiveStrategies = data.cogn_str
+  const averageInternalResourceManagementStrategies = data.int_res_mng_str
+  const averageMetacognitiveStrategies = data.metacogn_str
+  const averageExternalResourcesManagementStrategies = data.ext_res_mng_str
 
   const subScalesRelevantCombinations = [
     ['attention', attention],
@@ -270,16 +250,10 @@ export const ResultDescriptionListK = () => {
   )
 
   const generalSubscalesBelow3 = useGeneralSubscalesBelow3Element({
-    CognitiveStrategies: { organize, elaborate, criticalReview, repeat },
-    attention,
-    effort,
-    time,
-    goalsPlans,
-    control,
-    regulate,
-    learnWithClassmates,
-    literatureResearch,
-    learningEnvironment
+    averageCognitiveStrategies,
+    averageInternalResourceManagementStrategies,
+    averageMetacognitiveStrategies,
+    averageExternalResourcesManagementStrategies
   })
   const cognitiveStrategiesBelow3 = useCognitiveStrategiesBelow3Element({ organize, elaborate, criticalReview, repeat })
   const metacognitiveStrategiesBelow3 = useMetacognitiveStrategiesBelow3Element({ goalsPlans, control, regulate })

@@ -6,11 +6,9 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireResultTableStyle'
-import { ListK } from '@core'
+import {ListK} from "@core";
 
-const listK = new ListK()
 
-//Deepclone object, not only reference
 const StyledTableRowListK = Object.assign({}, StyledTableRow)
 
 StyledTableRowListK.defaultProps = {
@@ -26,127 +24,31 @@ StyledTableRowListK.defaultProps = {
 
 export const getSubscaleScore = (score: number[]): number => score.reduce((a, b) => a + b, 0) / score.length
 
-//Setting ILSparameters for tests
-export const setListKParameters = (
-  org?: number,
-  elab?: number,
-  critRev?: number,
-  rep?: number,
-  att?: number,
-  eff?: number,
-  tim?: number,
-  goalsPl?: number,
-  contr?: number,
-  reg?: number,
-  learnWClass?: number,
-  litRes?: number,
-  learnE?: number
-) => {
-  listK.organize = org ?? listK.organize
-  listK.elaborate = elab ?? listK.elaborate
-  listK.criticalReview = critRev ?? listK.criticalReview
-  listK.repeat = rep ?? listK.repeat
-  listK.attention = att ?? listK.attention
-  listK.effort = eff ?? listK.effort
-  listK.time = tim ?? listK.time
-  listK.goalsPlans = goalsPl ?? listK.goalsPlans
-  listK.control = contr ?? listK.control
-  listK.regulate = reg ?? listK.regulate
-  listK.learnWithClassmates = learnWClass ?? listK.learnWithClassmates
-  listK.literatureResearch = litRes ?? listK.literatureResearch
-  listK.learningEnvironment = learnE ?? listK.learningEnvironment
+type TableListKProps = {
+  data: ListK,
 }
 
-export const getListKParameters = (): [
-  [
-    organize: number,
-    elaborate: number,
-    criticalReview: number,
-    repeat: number,
-    attention: number,
-    effort: number,
-    time: number,
-    goalsPlans: number,
-    control: number,
-    regulate: number,
-    learnWithClassmates: number,
-    literatureResearch: number,
-    learningEnvironment: number
-  ],
-  [
-    averageCognitiveStrategies: number,
-    averageInternalResourceManagementStrategies: number,
-    averageMetacognitiveStrategies: number,
-    averageExternalResourcesManagementStrategies: number
-  ]
-] => {
-  setListKParameters()
-
-  const averageCognitiveStrategies = getSubscaleScore([
-    listK.organize,
-    listK.elaborate,
-    listK.criticalReview,
-    listK.repeat
-  ])
-  const averageInternalResourceManagementStrategies = getSubscaleScore([listK.attention, listK.effort, listK.time])
-  const averageMetacognitiveStrategies = getSubscaleScore([listK.goalsPlans, listK.control, listK.regulate])
-  const averageExternalResourcesManagementStrategies = getSubscaleScore([
-    listK.learnWithClassmates,
-    listK.literatureResearch,
-    listK.learningEnvironment
-  ])
-
-  return [
-    [
-      listK.organize,
-      listK.elaborate,
-      listK.criticalReview,
-      listK.repeat,
-      listK.attention,
-      listK.effort,
-      listK.time,
-      listK.goalsPlans,
-      listK.control,
-      listK.regulate,
-      listK.learnWithClassmates,
-      listK.literatureResearch,
-      listK.learningEnvironment
-    ],
-    [
-      averageCognitiveStrategies,
-      averageInternalResourceManagementStrategies,
-      averageMetacognitiveStrategies,
-      averageExternalResourcesManagementStrategies
-    ]
-  ]
-}
-
-export const TableListK = () => {
+export const TableListK = ({ data }: TableListKProps) => {
   const { t } = useTranslation()
 
-  const [
-    [
-      organize,
-      elaborate,
-      criticalReview,
-      repeat,
-      attention,
-      effort,
-      time,
-      goalsPlans,
-      control,
-      regulate,
-      learnWithClassmates,
-      literatureResearch,
-      learningEnvironment
-    ],
-    [
-      averageCognitiveStrategies,
-      averageInternalResourceManagementStrategies,
-      averageMetacognitiveStrategies,
-      averageExternalResourcesManagementStrategies
-    ]
-  ] = getListKParameters()
+  const organize = data.org
+  const elaborate = data.elab
+  const criticalReview = data.crit_rev
+  const repeat = data.rep
+  const attention = data.att
+  const effort = data.eff
+  const time = data.time
+  const goalsPlans = data.goal_plan
+  const control = data.con
+  const regulate = data.reg
+  const learnWithClassmates = data.lrn_w_cls
+  const literatureResearch = data.lit_res
+  const learningEnvironment = data.lrn_env
+  const averageCognitiveStrategies = data.cogn_str
+  const averageInternalResourceManagementStrategies = data.int_res_mng_str
+  const averageMetacognitiveStrategies = data.metacogn_str
+  const averageExternalResourcesManagementStrategies = data.ext_res_mng_str
+
 
   const rows = [
     {

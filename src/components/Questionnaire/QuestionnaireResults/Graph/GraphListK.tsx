@@ -1,38 +1,19 @@
 import { Network } from '@nivo/network'
 import { useTranslation } from 'react-i18next'
-import { getListKParameters } from '../Table/TableListK'
+import {ListK} from "@core";
 
 // Center the Score beneath the Subscale name. That is done with Whitespaces before the score.
 const centerString = (str: string, maxLen: number): string => str.padStart((str.length + maxLen * 1.5) / 2)
 
-export const useData = (): {
+export const useData = (organize: number, elaborate: number, criticalReview: number, repeat: number, attention: number, effort: number,
+                        time: number, goalsPlans: number, control: number, regulate: number, learnWithClassmates: number,
+                        literatureResearch: number, learningEnvironment: number, averageCognitiveStrategies: number,
+                        averageInternalResourceManagementStrategies: number, averageMetacognitiveStrategies: number,
+                        averageExternalResourcesManagementStrategies: number): {
   nodes: { id: string; height: number; size: number; score: number; color: string }[]
   links: { source: string; target: string; distance: number }[]
 } => {
   const { t } = useTranslation()
-  const [
-    [
-      organize,
-      elaborate,
-      criticalReview,
-      repeat,
-      attention,
-      effort,
-      time,
-      goalsPlans,
-      control,
-      regulate,
-      learnWithClassmates,
-      literatureResearch,
-      learningEnvironment
-    ],
-    [
-      averageCognitiveStrategies,
-      averageInternalResourceManagementStrategies,
-      averageMetacognitiveStrategies,
-      averageExternalResourcesManagementStrategies
-    ]
-  ] = getListKParameters()
 
   // Center the Score beneath the Subscale name. That is done with Whitespaces before the score.
   const organizeCentered =
@@ -350,9 +331,35 @@ export const useData = (): {
   }
 }
 
-export const GraphListK = () => {
+type GraphListKProps = {
+  data: ListK,
+}
+
+export const GraphListK = ({ data }: GraphListKProps) => {
   const { t } = useTranslation()
-  const graphListKData = useData()
+
+  const organize = data.org
+  const elaborate = data.elab
+  const criticalReview = data.crit_rev
+  const repeat = data.rep
+  const attention = data.att
+  const effort = data.eff
+  const time = data.time
+  const goalsPlans = data.goal_plan
+  const control = data.con
+  const regulate = data.reg
+  const learnWithClassmates = data.lrn_w_cls
+  const literatureResearch = data.lit_res
+  const learningEnvironment = data.lrn_env
+  const averageCognitiveStrategies = data.cogn_str
+  const averageInternalResourceManagementStrategies = data.int_res_mng_str
+  const averageMetacognitiveStrategies = data.metacogn_str
+  const averageExternalResourcesManagementStrategies = data.ext_res_mng_str
+
+  const graphListKData = useData(organize, elaborate, criticalReview, repeat, attention, effort, time, goalsPlans, control, regulate,
+    learnWithClassmates, literatureResearch, learningEnvironment, averageCognitiveStrategies, averageInternalResourceManagementStrategies,
+    averageMetacognitiveStrategies, averageExternalResourcesManagementStrategies)
+
   const cognitiveStrategies = t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies')
   const intResMngtStrategies = t(
     'components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'
@@ -363,13 +370,6 @@ export const GraphListK = () => {
   const extResMngtStrategies = t(
     'components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'
   )
-
-  const [
-    averageCognitiveStrategies,
-    averageInternalResourceManagementStrategies,
-    averageMetacognitiveStrategies,
-    averageExternalResourcesManagementStrategies
-  ] = getListKParameters()[1]
 
   return (
     <div>

@@ -1,15 +1,20 @@
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
-import { getILSParameters, ILSDimension, ILSInterpretation } from '../Table/TableILS'
+import { ILSDimension, ILSInterpretation } from '../Table/TableILS'
+import {ILS} from "@core";
 
 // function can be replaced for test-purposes
 type ResultDescriptionILSProps = {
+  data: ILS,
   ILSdim?: (n: number, s: number, b?: boolean) => string
 }
-export const ResultDescriptionILS = ({ ILSdim = ILSDimension }: ResultDescriptionILSProps) => {
+export const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescriptionILSProps) => {
   const { t } = useTranslation()
 
-  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters()
+  const dimensionOneScore = data.input_value
+  const dimensionTwoScore = data.perception_value
+  const dimensionThreeScore = data.processing_value
+  const dimensionFourScore = data.understanding_value
 
   //active, reflective, sensory...etc, it´s mandatory in english because of internationalization name in .json file
   const dimensionOne = ILSdim(1, dimensionOneScore, true)

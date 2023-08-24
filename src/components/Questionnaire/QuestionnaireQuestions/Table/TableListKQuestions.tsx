@@ -10,6 +10,9 @@ import React, { memo, useCallback, useMemo, useState } from 'react'
 import { useQuestionnaireAnswersListKStore } from '@services'
 import PropTypes from 'prop-types'
 import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
+import useHandleSend from "./TableListKQuestions.hooks";
+import SendStatusModal from "./TableCommonQuestionsSendStatusModal";
+
 
 /**
  * @description
@@ -20,7 +23,7 @@ const stepsListK = [
   [
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1',
-      questionLabel: 'Org1_F1',
+      questionLabel: 'org1_f1',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -29,7 +32,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-2',
-      questionLabel: 'Org2_F2',
+      questionLabel: 'org2_f2',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -38,7 +41,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-3',
-      questionLabel: 'Org3_F3',
+      questionLabel: 'org3_f3',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -47,7 +50,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-4',
-      questionLabel: 'Ela1_F4',
+      questionLabel: 'elab1_f4',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -56,7 +59,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-5',
-      questionLabel: 'Ela2_F5',
+      questionLabel: 'elab2_f5',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -67,7 +70,7 @@ const stepsListK = [
   [
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-6',
-      questionLabel: 'Ela3_F6',
+      questionLabel: 'elab3_f6',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -76,7 +79,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-7',
-      questionLabel: 'krP1_F7',
+      questionLabel: 'crit_rev1_f7',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -85,7 +88,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-8',
-      questionLabel: 'krP2_F8',
+      questionLabel: 'crit_rev2_f8',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -94,7 +97,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-9',
-      questionLabel: 'krP3_F9',
+      questionLabel: 'crit_rev3_f9',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -103,7 +106,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-10',
-      questionLabel: 'Wie1_F10',
+      questionLabel: 'rep1_f10',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -114,7 +117,7 @@ const stepsListK = [
   [
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-11',
-      questionLabel: 'Wie2_F11',
+      questionLabel: 'rep2_f11',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -123,7 +126,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-12',
-      questionLabel: 'Wie3_F12',
+      questionLabel: 'rep3_f12',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -132,7 +135,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-13',
-      questionLabel: 'ZP1_F13',
+      questionLabel: 'goal_plan1_f13',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -141,7 +144,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-14',
-      questionLabel: 'ZP2_F14',
+      questionLabel: 'goal_plan2_f14',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -150,7 +153,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-15',
-      questionLabel: 'ZP3_F15',
+      questionLabel: 'goal_plan3_f15',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -161,7 +164,7 @@ const stepsListK = [
   [
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-16',
-      questionLabel: 'Kon1_F16',
+      questionLabel: 'con1_f16',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -170,7 +173,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-17',
-      questionLabel: 'Kon2_F17',
+      questionLabel: 'con2_f17',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -179,7 +182,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-18',
-      questionLabel: 'Kon3_F18',
+      questionLabel: 'con3_f18',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -188,7 +191,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-19',
-      questionLabel: 'Reg1_F19',
+      questionLabel: 'reg1_f19',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -197,7 +200,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-20',
-      questionLabel: 'Reg2_F20',
+      questionLabel: 'reg2_f20',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -208,7 +211,7 @@ const stepsListK = [
   [
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-21',
-      questionLabel: 'Reg3_F21',
+      questionLabel: 'reg3_f21',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -217,7 +220,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-22',
-      questionLabel: 'Auf1r_F22',
+      questionLabel: 'att1_f22',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -226,7 +229,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-23',
-      questionLabel: 'Auf2r_F23',
+      questionLabel: 'att2_f23',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -235,7 +238,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-24',
-      questionLabel: 'Auf3r_F24',
+      questionLabel: 'att3_f24',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -244,7 +247,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-25',
-      questionLabel: 'Ans1_F25',
+      questionLabel: 'eff1_f25',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -255,7 +258,7 @@ const stepsListK = [
   [
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-26',
-      questionLabel: 'Ans2_F26',
+      questionLabel: 'eff2_f26',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -264,7 +267,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-27',
-      questionLabel: 'Ans3_F27',
+      questionLabel: 'eff3_f27',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -273,7 +276,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-28',
-      questionLabel: 'Zei1_F28',
+      questionLabel: 'time1_f28',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -282,7 +285,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-29',
-      questionLabel: 'Zei2_F29',
+      questionLabel: 'time2_f29',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -291,7 +294,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-30',
-      questionLabel: 'Zei3_F30',
+      questionLabel: 'time3_f30',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -302,7 +305,7 @@ const stepsListK = [
   [
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-31',
-      questionLabel: 'LmS1_F31',
+      questionLabel: 'lrn_w_cls1_f31',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -311,7 +314,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-32',
-      questionLabel: 'LmS2_F32',
+      questionLabel: 'lrn_w_cls2_f32',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -320,7 +323,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-33',
-      questionLabel: 'LmS3_F33',
+      questionLabel: 'lrn_w_cls3_f33',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -329,7 +332,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-34',
-      questionLabel: 'Lit1_F34',
+      questionLabel: 'lit_res1_f34',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -338,7 +341,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-35',
-      questionLabel: 'Lit2_F35',
+      questionLabel: 'lit_res2_f35',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -349,7 +352,7 @@ const stepsListK = [
   [
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-36',
-      questionLabel: 'Lit3_F36',
+      questionLabel: 'lit_res3_f36',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -358,7 +361,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-37',
-      questionLabel: 'LU1_F37',
+      questionLabel: 'lrn_env1_f37',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -367,7 +370,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-38',
-      questionLabel: 'LU2_F38',
+      questionLabel: 'lrn_env2_f38',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -376,7 +379,7 @@ const stepsListK = [
     },
     {
       question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-39',
-      questionLabel: 'LU3_F39',
+      questionLabel: 'lrn_env3_f39',
       answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
       answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
       answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
@@ -472,6 +475,9 @@ MemoTableRowAnswers.propTypes = {
 // region TableListKQuestions
 export const TableListKQuestions = memo(() => {
   TableListKQuestions.displayName = 'TableListKQuestions'
+  const { sendAnswers, isSending } = useHandleSend();
+  const [showStatusModal, setShowStatusModal] = useState(false);
+  const [sendSuccess, setSendSuccess] = useState(false)
 
   const { t } = useTranslation()
 
@@ -481,6 +487,17 @@ export const TableListKQuestions = memo(() => {
   const [radioButtonGroup3, setRadioButtonGroup3] = useState('')
   const [radioButtonGroup4, setRadioButtonGroup4] = useState('')
   const [radioButtonGroup5, setRadioButtonGroup5] = useState('')
+
+  const handleSendClick = async () => {
+    setSendSuccess(await sendAnswers())
+
+    setShowStatusModal(true)
+  }
+
+  const handleModalClose = () => {
+    setShowStatusModal(false)
+    setSendSuccess(false)
+  }
 
   //if all radio buttons are selected, the next button is enabled
   // (They are reset to their previous Value when the user goes back)
@@ -518,13 +535,6 @@ export const TableListKQuestions = memo(() => {
     setRadioButtonGroups(activeStep - 1)
     setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep - 1][4]))
   }, [activeStep])
-
-  const handleSend = useCallback(() => {
-    const listkArray = Object.entries(questionnaireAnswers).filter(([key]) => key !== '')
-    const listk_result = ['listk', listkArray]
-    console.log(listk_result)
-    //todo: send to server
-  }, [questionnaireAnswers])
 
   const setRadioButtonValue = useMemo(
     () =>
@@ -651,10 +661,16 @@ export const TableListKQuestions = memo(() => {
           </TableContainer>
           <MemoSendButton
             t={t}
-            handleSend={handleSend}
+            handleSend={handleSendClick}
             isNextDisabled={isNextDisabled}
             isValid={activeStep === 7}
             idType={'ListK'}
+            isSending={isSending}
+          />
+          <SendStatusModal
+              open={showStatusModal}
+              onClose={handleModalClose}
+              isSuccess={sendSuccess}
           />
         </Stack>
       </Stack>

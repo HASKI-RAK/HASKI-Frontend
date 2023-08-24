@@ -10,7 +10,8 @@ import React, { memo, useCallback, useMemo, useState } from 'react'
 import { useQuestionnaireAnswersILSStore } from '@services'
 import PropTypes from 'prop-types'
 import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
-import {usePersistedStore} from "@store";
+import useHandleSend from "./TableILSQuestions.hooks";
+import SendStatusModal from "./TableCommonQuestionsSendStatusModal";
 
 /**
  * @description
@@ -517,7 +518,9 @@ type TableILSQuestionsProps = {
 
 export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   TableILSQuestions.displayName = 'TableILSQuestions'
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const { sendAnswers, isSending } = useHandleSend();
+  const [showStatusModal, setShowStatusModal] = useState(false);
+  const [sendSuccess, setSendSuccess] = useState(false)
 
   const { t } = useTranslation()
 
@@ -560,65 +563,15 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
     setRadioButtonGroups(activeStep - 1)
   }, [activeStep])
 
-  const handleSend = async() => {
-    const ILSarray = Object.entries(questionnaireAnswers).filter(([key,item]) => key !== "" && item !== "")
-    const ils_result = ['ils', ILSarray]
-    console.log(ils_result)
-    const outputJson = JSON.stringify({
-      ils: ILSarray.map((item: any) => ({
-        question_id: item[0].toLowerCase(),
-        answer: item[1]
-      }))
-    })
-    console.log(outputJson)
-    fetchUser()
-    .then(
-        (user) => {
-            const studentId = user.id
-            fetch(
-                process.env.BACKEND +
-                `/lms/student/${studentId}/questionnaire/ils`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: {
-                    'Content-Type': 'application/json'
-                    },
-                    body: outputJson
-                }
-            )
-            .then(
-                (response) => {
-                    if (response.ok) {
-                    return response.json()
-                    } else {
-                    throw new Error('Something went wrong')
-                    }
-                }
-            )
-            .then(
-                (data) => {
-                    console.log(data)
-                }
-            )
-            .catch(
-                (error) => {
-                    console.log(error)
-                }
-            )
-        }
-    )
-    /*const response = await fetch(
-        process.env.BACKEND +
-        `/lms/student/${studentId}/questionnaire/ils`,
-        {
-          method: 'GET',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-    )*/
+  const handleSendClick = async () => {
+    setSendSuccess(await sendAnswers())
+
+    setShowStatusModal(true)
+  }
+
+  const handleModalClose = () => {
+    setShowStatusModal(false)
+    setSendSuccess(false)
   }
 
   const setRadioButtonValue = useMemo(
@@ -705,11 +658,17 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
             </Table>
           </TableContainer>
           <MemoSendButton
-            t={t}
-            handleSend={handleSend}
-            isNextDisabled={isNextDisabled}
-            isValid={ilsLong ? activeStep === 10 : activeStep === 4}
-            idType={'ILS'}
+              t={t}
+              handleSend={handleSendClick}
+              isNextDisabled={isNextDisabled}
+              isValid={ilsLong ? activeStep === 10 : activeStep === 4}
+              idType={'ILS'}
+              isSending={isSending}
+          />
+          <SendStatusModal
+              open={showStatusModal}
+              onClose={handleModalClose}
+              isSuccess={sendSuccess}
           />
         </Stack>
       </Stack>

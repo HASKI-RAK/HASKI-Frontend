@@ -1,13 +1,13 @@
 import { Bar } from '@nivo/bar'
-import { getILSParameters } from '../Table/TableILS'
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '@mui/material'
+import {ILS} from "@core";
 
 // The Key "Dimension" is used in the Graph, therefore the name matters
 // The naming of the Key "possibleDimensions" is not important, as it is not used in the Graph, just for indexing
-export const useData = (): { possibleDimensions: string; [Dimension: string]: string }[] => {
+export const useData = (dimensionOneScore: number, dimensionTwoScore: number, dimensionThreeScore: number, dimensionFourScore: number):
+    { possibleDimensions: string; [Dimension: string]: string }[] => {
   const { t } = useTranslation()
-  const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters()
 
   return [
     {
@@ -41,17 +41,27 @@ export const useData = (): { possibleDimensions: string; [Dimension: string]: st
   ]
 }
 
-export const GraphILS = () => {
+type GraphILSProps = {
+  data: ILS,
+}
+
+export const GraphILS = ({data}: GraphILSProps) => {
   const { t } = useTranslation()
+
+  const dimensionOneScore = data.input_value
+  const dimensionTwoScore = data.perception_value
+  const dimensionThreeScore = data.processing_value
+  const dimensionFourScore = data.understanding_value
+
   const theme = useTheme()
-  const data = useData()
+  const graphILSdata = useData(dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore)
 
   return (
     <div>
       <Bar
         width={750}
         height={300}
-        data={data}
+        data={graphILSdata}
         keys={[t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]}
         indexBy={'possibleDimensions'}
         margin={{ top: 0, right: 100, bottom: 50, left: 80 }}
