@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { getSubscaleScore, TableListK } from './TableListK'
 import { render } from '@testing-library/react'
-/*
+
 //we have to mock react-i18next otherwise a warning will appear
 //"You will need pass in an i18next instance by using initReactI18next" => mock is needed.
 
@@ -21,10 +21,32 @@ jest.mock('react-i18next', () => ({
   }
 }))
 
+const mockListK = {
+    characteristic_id: 1,
+    id: 1,
+    att: 1,
+    cogn_str: 1,
+    con: 1,
+    crit_rev: 1,
+    eff: 1,
+    elab: 1,
+    ext_res_mng_str: 1,
+    goal_plan: 1,
+    int_res_mng_str: 1,
+    lit_res: 1,
+    lrn_env: 1,
+    lrn_w_cls: 1,
+    metacogn_str: 1,
+    org: 1,
+    reg: 1,
+    rep: 1,
+    time: 1
+}
+
 // tests for mui can be found https://github.com/mui/material-ui/blob/master/packages/mui-material/src
 describe('Test TableList-K with all Methods', () => {
   test('Table Values are correct', () => {
-    const { getAllByRole } = render(<TableListK />)
+    const { getAllByRole } = render(<TableListK data={mockListK} />)
 
     expect(getAllByRole('columnheader')[0]).toHaveTextContent(
       'components.Questionnaire.QuestionnaireResults.Table.TableListK.Factors & subscales'
@@ -93,7 +115,7 @@ describe('Test TableList-K with all Methods', () => {
   })
 
   test('Table Score-values are numbers', () => {
-    const { getAllByRole: GetAllByRole } = render(<TableListK />)
+    const { getAllByRole: GetAllByRole } = render(<TableListK data={mockListK} />)
 
     const cell1 = GetAllByRole('cell')[1].textContent
     let cell1Int
@@ -217,31 +239,6 @@ describe('Test TableList-K with all Methods', () => {
     expect(cell35Int).toBeGreaterThanOrEqual(0)
   })
 
-  test('List-K parameters are plausible', () => {
-    const ListKParameters = getListKParameters()
-
-    expect(ListKParameters[0].length).toBe(13)
-    expect(ListKParameters[0][0] >= 1).toBe(true)
-    expect(ListKParameters[0][1] >= 1 && ListKParameters[0][1] <= 5).toBe(true)
-    expect(ListKParameters[0][2] >= 1 && ListKParameters[0][2] <= 5).toBe(true)
-    expect(ListKParameters[0][3] >= 1 && ListKParameters[0][3] <= 5).toBe(true)
-    expect(ListKParameters[0][4] >= 1 && ListKParameters[0][4] <= 5).toBe(true)
-    expect(ListKParameters[0][5] >= 1 && ListKParameters[0][5] <= 5).toBe(true)
-    expect(ListKParameters[0][6] >= 1 && ListKParameters[0][6] <= 5).toBe(true)
-    expect(ListKParameters[0][7] >= 1 && ListKParameters[0][7] <= 5).toBe(true)
-    expect(ListKParameters[0][8] >= 1 && ListKParameters[0][8] <= 5).toBe(true)
-    expect(ListKParameters[0][9] >= 1 && ListKParameters[0][9] <= 5).toBe(true)
-    expect(ListKParameters[0][10] >= 1 && ListKParameters[0][10] <= 5).toBe(true)
-    expect(ListKParameters[0][11] >= 1 && ListKParameters[0][11] <= 5).toBe(true)
-    expect(ListKParameters[0][12] >= 1 && ListKParameters[0][12] <= 5).toBe(true)
-
-    expect(ListKParameters[1].length).toBe(4)
-    expect(ListKParameters[1][0] >= 1 && ListKParameters[1][0] <= 5).toBe(true)
-    expect(ListKParameters[1][1] >= 1 && ListKParameters[1][1] <= 5).toBe(true)
-    expect(ListKParameters[1][2] >= 1 && ListKParameters[1][2] <= 5).toBe(true)
-    expect(ListKParameters[1][3] >= 1 && ListKParameters[1][3] <= 5).toBe(true)
-  })
-
   test('Average List-K are calculated correctly', () => {
     const ListKParameters = [3, 3, 5, 4, 5, 1] // Average=3.5
     const ListKAverage = getSubscaleScore(ListKParameters)
@@ -249,4 +246,3 @@ describe('Test TableList-K with all Methods', () => {
     expect(ListKAverage).toBe(3.5)
   })
 })
-*/

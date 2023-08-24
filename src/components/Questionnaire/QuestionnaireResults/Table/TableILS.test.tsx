@@ -1,41 +1,28 @@
 import '@testing-library/jest-dom'
 import { TableILS, ILSInterpretation, ILSDimension } from './TableILS'
 import { render } from '@testing-library/react'
-import React, {useState} from 'react'
-import {usePersistedStore} from "@store";
-import {ILS} from "@core";
-/*
+import React from 'react'
+
+const mockILS = {
+    characteristic_id: 1,
+    id: 1,
+    input_dimension: 'test',
+    input_value: 1,
+    perception_dimension: 'test',
+    perception_value: 1,
+    processing_dimension: 'test',
+    processing_value: 1,
+    understanding_dimension: 'test',
+    understanding_value: 1
+}
 
 //we have to mock react-i18next otherwise a warning will appear
 //"You will need pass in an i18next instance by using initReactI18next" => mock is needed.
 
 describe('Test TableILS with all Methods', () => {
-  test('ILS parameters are plausible', () => {
-    const fetchILS = usePersistedStore((state) => state.fetchILS)
-
-    const [dimensionOneScore, setDimensionOneScore] = useState<number>(0)
-    const [dimensionTwoScore, setDimensionTwoScore] = useState<number>(0)
-    const [dimensionThreeScore, setDimensionThreeScore] = useState<number>(0)
-    const [dimensionFourScore, setDimensionFourScore] = useState<number>(0)
-
-    fetchILS().then((ils: ILS) => {
-      setDimensionOneScore(ils.input_values)
-      setDimensionTwoScore(ils.perception_values)
-      setDimensionThreeScore(ils.processing_values)
-      setDimensionFourScore(ils.understanding_values)
-    })
-
-    const ILSParameters = [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore]
-
-    expect(ILSParameters.length).toBe(4)
-    expect(ILSParameters[0] > -12 && ILSParameters[0] < 12).toBe(true)
-    expect(ILSParameters[1] > -12 && ILSParameters[1] < 12).toBe(true)
-    expect(ILSParameters[2] > -12 && ILSParameters[2] < 12).toBe(true)
-    expect(ILSParameters[3] > -12 && ILSParameters[3] < 12).toBe(true)
-  })
 
   test('Table values are correct', () => {
-    const { getAllByRole } = render(<TableILS />)
+    const { getAllByRole } = render(<TableILS data={mockILS} />)
 
     expect(getAllByRole('columnheader')[0]).toHaveTextContent(
       'components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension'
@@ -173,7 +160,7 @@ describe('Test TableILS with all Methods', () => {
   })
 
   test('Table Score-values are numbers', () => {
-    const { getAllByRole } = render(<TableILS />)
+    const { getAllByRole } = render(<TableILS data={mockILS}/>)
 
     const cell3 = getAllByRole('cell')[3].textContent
     let cell3Int
@@ -207,4 +194,3 @@ describe('Test TableILS with all Methods', () => {
 })
 
 // tests for mui can be found https://github.com/mui/material-ui/blob/master/packages/mui-material/src
-*/
