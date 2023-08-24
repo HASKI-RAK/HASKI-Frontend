@@ -18,5 +18,16 @@ export const getILS: ILSReturn = async (
             }
         }
     )
-    return getData<ILS>(response)
+
+    const originalData = await getData<ILS>(response);
+
+    const newData: ILS = {
+        ...originalData,
+        processing_value: originalData.processing_dimension === 'ref' ? -originalData.processing_value : originalData.processing_value,
+        perception_value: originalData.perception_dimension === 'int' ? -originalData.perception_value : originalData.perception_value,
+        input_value: originalData.input_dimension === 'vrb' ? -originalData.input_value : originalData.input_value,
+        understanding_value: originalData.understanding_dimension === 'glb' ? -originalData.understanding_value : originalData.understanding_value
+    };
+
+    return newData;
 }
