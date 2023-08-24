@@ -229,6 +229,43 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
+  }),
+  getILS: jest.fn(() => {
+    return Promise.resolve({
+      characteristic_id: 1,
+      id: 1,
+      input_dimension: 'test',
+      input_value: 1,
+      perception_dimension: 'test',
+      perception_value: 1,
+      processing_dimension: 'test',
+      processing_value: 1,
+      understanding_dimension: 'test',
+      understanding_value: 1
+    })
+  }),
+  getListK: jest.fn(() => {
+    return Promise.resolve({
+      att: 1,
+      characteristic_id: 1,
+      cogn_str: 1,
+      con: 1,
+      crit_rev: 1,
+      eff: 1,
+      elab: 1,
+      ext_res_mng_str: 1,
+      goal_plan: 1,
+      id: 1,
+      int_res_mng_str: 1,
+      lit_res: 1,
+      lrn_env: 1,
+      lrn_w_cls: 1,
+      metacogn_str: 1,
+      org: 1,
+      reg: 1,
+      rep: 1,
+      time: 1
+    })
   })
 }
 /**

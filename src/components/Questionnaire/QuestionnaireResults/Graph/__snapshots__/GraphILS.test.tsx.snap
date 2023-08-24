@@ -572,10 +572,10 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   fill-opacity="0"
                   style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                   text-anchor="middle"
-                  x="39"
+                  x="13"
                   y="20.5"
                 >
-                  3
+                  1
                 </text>
               </g>
               <g
@@ -596,10 +596,10 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   fill-opacity="0"
                   style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                   text-anchor="middle"
-                  x="39"
+                  x="13"
                   y="20.5"
                 >
-                  3
+                  1
                 </text>
               </g>
               <g
@@ -620,10 +620,10 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   fill-opacity="0"
                   style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                   text-anchor="middle"
-                  x="39"
+                  x="13"
                   y="20.5"
                 >
-                  3
+                  1
                 </text>
               </g>
               <g
@@ -644,10 +644,10 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                   fill-opacity="0"
                   style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                   text-anchor="middle"
-                  x="39"
+                  x="13"
                   y="20.5"
                 >
-                  3
+                  1
                 </text>
               </g>
             </g>
@@ -1224,10 +1224,10 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                 fill-opacity="0"
                 style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                 text-anchor="middle"
-                x="39"
+                x="13"
                 y="20.5"
               >
-                3
+                1
               </text>
             </g>
             <g
@@ -1248,10 +1248,10 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                 fill-opacity="0"
                 style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                 text-anchor="middle"
-                x="39"
+                x="13"
                 y="20.5"
               >
-                3
+                1
               </text>
             </g>
             <g
@@ -1272,10 +1272,10 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                 fill-opacity="0"
                 style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                 text-anchor="middle"
-                x="39"
+                x="13"
                 y="20.5"
               >
-                3
+                1
               </text>
             </g>
             <g
@@ -1296,10 +1296,10 @@ exports[`Test GraphILS with all Methods GraphILS renders without crashing 1`] = 
                 fill-opacity="0"
                 style="font-family: sans-serif; font-size: 11px; fill: #fff; pointer-events: none;"
                 text-anchor="middle"
-                x="39"
+                x="13"
                 y="20.5"
               >
-                3
+                1
               </text>
             </g>
           </g>

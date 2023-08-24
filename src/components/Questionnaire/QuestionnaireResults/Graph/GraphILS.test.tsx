@@ -2,19 +2,25 @@ import '@testing-library/jest-dom'
 import { useData, GraphILS } from './GraphILS'
 import { render } from '@testing-library/react'
 import React from 'react'
-/*
-jest.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str: string) => str
-    }
-  }
-}))
+
+const mockILS = {
+  characteristic_id: 1,
+  id: 1,
+  input_dimension: 'test',
+  input_value: 1,
+  perception_dimension: 'test',
+  perception_value: 1,
+  processing_dimension: 'test',
+  processing_value: 1,
+  understanding_dimension: 'test',
+  understanding_value: 1
+}
 
 describe('Test GraphILS with all Methods', () => {
+
   test('Required data is returned in correct format', () => {
-    const data = useData()
+
+    const data = useData(1, 1, 1, 1)
 
     expect(data.length).toBe(4)
 
@@ -41,7 +47,7 @@ describe('Test GraphILS with all Methods', () => {
   })
 
   test('GraphILS renders without crashing', () => {
-    const graphILS = render(<GraphILS />)
+    const graphILS = render(<GraphILS data={mockILS}/>)
 
     expect(
       graphILS.getByText('components.Questionnaire.QuestionnaireResults.Table.TableILS.Active')
@@ -71,4 +77,3 @@ describe('Test GraphILS with all Methods', () => {
     expect(graphILS).toMatchSnapshot()
   })
 })
-*/
