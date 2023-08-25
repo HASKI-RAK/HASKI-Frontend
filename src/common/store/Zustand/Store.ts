@@ -36,8 +36,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
         // Here we can whitelist the keys we want to persist
         partialize: (state) => ({
           _user: state._user,
-          expire: state.expire,
-
+          expire: state.expire
         }),
         onRehydrateStorage: () => {
           log.debug('PersistedStore hydration starts')
