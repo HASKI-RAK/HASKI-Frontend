@@ -89,6 +89,8 @@ export const QuestionnaireResultsModal = ({open = false, handleClose}: Questionn
         setActiveStep(activeStep + 1);
     };
 
+    console.log(ilsData)
+
     return (
         <div>
             <Modal data-testid={'ILS and ListK Modal'} open={open} onClose={handleClose}>
@@ -148,20 +150,20 @@ export const QuestionnaireResultsModal = ({open = false, handleClose}: Questionn
                                     <Stack alignItems="center">
                                         <div>
                                             <Typography variant="body2">
-                                                To see any results you need to complete the
+                                                {t("components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1")}
                                                 <ul>
                                                     <li>
                                                         <Link to="/questionnaire_ils_short" onClick={handleClose}>
-                                                            ILS-Questionnaire-Short
-                                                        </Link> Variant or
+                                                            {t("components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1")}
+                                                        </Link> {t("components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2")}
                                                     </li>
                                                     <li>
                                                         <Link to="/questionnaire_ils_long" onClick={handleClose}>
-                                                            ILS-Questionnaire-Complete
-                                                        </Link> Variant
+                                                            {t("components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1")}
+                                                        </Link>
                                                     </li>
                                                 </ul>
-                                                first.
+                                                {t("components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2")}
                                             </Typography>
                                         </div>
                                     </Stack>
@@ -169,15 +171,15 @@ export const QuestionnaireResultsModal = ({open = false, handleClose}: Questionn
                                     <Stack alignItems="center">
                                         <div>
                                             <Typography variant="body2">
-                                                To see any results you need to complete the
+                                                {t("components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1")}
                                                 <ul>
                                                     <li>
                                                         <Link to="/questionnaire_listk" onClick={handleClose}>
-                                                            List-K-Questionnaire
+                                                            {t("components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK")}
                                                         </Link>
                                                     </li>
                                                 </ul>
-                                                first.
+                                                {t("components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2")}
                                             </Typography>
                                         </div>
                                     </Stack>

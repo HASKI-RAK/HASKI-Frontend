@@ -1,8 +1,9 @@
 import '@testing-library/jest-dom'
 import { QuestionnaireResultsModal } from '@components'
-import { fireEvent, render } from '@testing-library/react'
+import {fireEvent, render, waitFor} from '@testing-library/react'
 import * as React from 'react'
-/*
+import {MemoryRouter} from "react-router-dom";
+
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
   useTranslation: () => {
@@ -29,64 +30,129 @@ describe('Test ResultDescriptionListK with all Methods', () => {
   })
 
   test('Modal opens', async () => {
-    const { getByTestId } = render(<QuestionnaireResultsModal open={true} handleClose={() => false} />)
+    const { getByTestId } = render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={() => false} />
+        </MemoryRouter>
+    )
 
     expect(getByTestId('ILS and ListK Modal')).toBeInTheDocument()
   })
 
-  test('Active Step ILS is shown', async () => {
-    const { getByTestId } = render(<QuestionnaireResultsModal open={true} handleClose={() => false} />)
+  test('Modal without ILS data', async () => {
 
-    expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
+    const { getByText } = render(
+        <MemoryRouter>
+            <QuestionnaireResultsModal open={true} handleClose={() => false} />
+        </MemoryRouter>
+    )
+
+    expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')).toBeInTheDocument()
+    expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')).toBeInTheDocument()
   })
 
-  test('Active Step List-K is shown', async () => {
-    const { getByTestId } = render(<QuestionnaireResultsModal open={true} handleClose={() => false} />)
+  test('Modal without ListK data', async () => {
+
+    const { getByTestId, getByText } = render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={() => false} />
+        </MemoryRouter>
+    )
 
     fireEvent.click(getByTestId('nextButton'))
-    expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
+
+    expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')).toBeInTheDocument()
+  })
+
+
+
+  test('Active Step ILS is shown, when ils data is given', async () => {
+    const { getByTestId } = render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={() => false} />
+        </MemoryRouter>
+    )
+
+    await waitFor(() => {
+        expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
+    })
+  })
+
+  test('Active Step List-K is shown, when listk data is given', async () => {
+    const { getByTestId } = render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={() => false} />
+        </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getByTestId('nextButton'))
+      expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
+    })
+  })
+
+  test('Active Step ILS is shown', async () => {
+    const { getByTestId, getByText } = render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={() => false} />
+        </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults'))
+      expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
+    })
   })
 
   test('Active Step List-K is shown', async () => {
-    const { getByTestId, getByText } = render(<QuestionnaireResultsModal open={true} handleClose={() => false} />)
+    const { getByTestId, getByText } = render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={() => false} />
+        </MemoryRouter>
+    )
 
-    fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults'))
-    expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
-  })
-
-  test('Active Step List-K is shown', async () => {
-    const { getByTestId, getByText } = render(<QuestionnaireResultsModal open={true} handleClose={() => false} />)
-
-    fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
-    expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
+    await waitFor(() => {
+      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
+      expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
+    })
   })
 
   test('Next and Back button work', async () => {
-    const { getByTestId } = render(<QuestionnaireResultsModal open={true} handleClose={() => false} />)
+    const { getByTestId } = render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={() => false} />
+        </MemoryRouter>
+    )
 
-    fireEvent.click(getByTestId('nextButton'))
-    expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
-    //cant click twice
-    fireEvent.click(getByTestId('nextButton'))
-    expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
+    await waitFor(() => {
+      fireEvent.click(getByTestId('nextButton'))
+      expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
+      //cant click twice
+      fireEvent.click(getByTestId('nextButton'))
+      expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
 
-    fireEvent.click(getByTestId('backButton'))
-    expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
-    //cant click twice
-    fireEvent.click(getByTestId('backButton'))
-    expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
+      fireEvent.click(getByTestId('backButton'))
+      expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
+      //cant click twice
+      fireEvent.click(getByTestId('backButton'))
+      expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
+    })
   })
 
   test('close button works', async () => {
     const handleClose = jest.fn()
 
-    const { getByTestId } = render(<QuestionnaireResultsModal open={true} handleClose={handleClose} />)
+    const { getByTestId } = render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+        </MemoryRouter>)
 
-    expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
-    const closeButton = getByTestId('QuestionnaireResultsCloseButton')
-    fireEvent.click(closeButton)
+    await waitFor(() => {
+      expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
+      const closeButton = getByTestId('QuestionnaireResultsCloseButton')
+      fireEvent.click(closeButton)
 
-    expect(handleClose).toHaveBeenCalledTimes(1)
+      expect(handleClose).toHaveBeenCalledTimes(1)
+    })
   })
 })
-*/

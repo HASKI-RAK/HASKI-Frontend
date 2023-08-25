@@ -937,5 +937,11 @@
   "universityKempten": "Hochschule Kempten",
   "update": "Aktualisieren",
   "warning": "Warnung",
-  "tooltip.openQuestionnaireResults": "Lerntyp"
+  "tooltip.openQuestionnaireResults": "Lerntyp",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1": "Um Ergebnisse anzuzeigen, müssen Sie zuerst den",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2": "abschließen.",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1": "ILS-Fragebogen (Kurz)",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2": "oder",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1": "ILS-Fragebogen (Vollständig)",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK": "List-K-Fragebogen"
 }

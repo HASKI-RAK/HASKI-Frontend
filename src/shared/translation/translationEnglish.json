@@ -966,5 +966,11 @@
   "universityKempten": "University of Applied Sciences Kempten",
   "update": "Updated",
   "warning": "Warning",
-  "tooltip.openQuestionnaireResults": "Learningtype"
+  "tooltip.openQuestionnaireResults": "Learningtype",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1": "To see any results you need to complete the",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2": "first.",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1": "ILS-Questionnaire-Short",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2": "or",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1": "ILS-Questionnaire-Long",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK": "List-K-Questionnaire"
 }
