@@ -1,6 +1,10 @@
-import { Typography, TextField, InputAdornment } from '@common/components'
 import SearchIcon from '@mui/icons-material/Search'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
+import { Typography, TextField, InputAdornment } from '@common/components'
+
+// mine -------------------------------------------------
+import {useDebounce} from '@services'
+// --------------------------------------------------------
 
 /**
  * @typedef {object} SearchbarProps
@@ -21,6 +25,8 @@ export type SearchbarProps = {
  * @returns {() => void} - The function thats clears the timeout.
  * @category Hooks
  */
+
+/* original
 export const debouncedSearchQuery = (
   event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   setSearchQuery?: (query: string) => void,
@@ -32,10 +38,14 @@ export const debouncedSearchQuery = (
     } = event
 
     setSearchQuery?.(value)
+    console.log("Searchbar.debounceSearchQuery: event.target.value = ", value);
+    console.log("---------------------");
   }, timeout)
 
   return () => clearTimeout(timer)
 }
+/*/
+
 
 /**
  * Searchbar presents a component that can be used to write a search query.
@@ -46,20 +56,36 @@ export const debouncedSearchQuery = (
  * @category Components
  */
 const Searchbar = (props: SearchbarProps) => {
+  
+  /* original
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      console.log("Searchbar.handleChange: event.target.value = ", event.target.value);
       debouncedSearchQuery(event, props.setSearchQuery, props.timeout)
     },
     [props.setSearchQuery, props.timeout]
   )
-
+  */
+  
+  ///* mine -------------------------------------------------
+  const { actualValue, debouncedValue, handleChange } = useDebounce(
+    300,
+    props.setSearchQuery || (() => {})
+  );  //*/--------------------------------------------------------
+  
   return (
-    <Typography variant="h4">
+    <Typography variant="h4" data-testid="searchbar">
       <TextField
         id="searchbar"
         fullWidth
         label={props.label}
+        
+        
+        //onChange={handleChange}
+        //mine
+        value={actualValue}
         onChange={handleChange}
+
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

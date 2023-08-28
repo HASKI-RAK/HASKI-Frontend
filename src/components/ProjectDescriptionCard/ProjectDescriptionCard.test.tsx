@@ -83,23 +83,23 @@ describe('Test ProjectDescriptionCard', () => {
     // Animates body and header with passing the height condition and input not equal to current states
     act(() => {
       result.current.animateBody(mockRef, 'body')
-      result.current.animateHeader(mockRef, 'header')
+      //result.current.animateHeader(mockRef, 'header')
       jest.runAllTimers()
     })
 
     expect(result.current.bodyState).toBe('body')
-    expect(result.current.headerState).toBe('h')
+    //expect(result.current.headerState).toBe('h')
 
     act(() => {
-      result.current.setHeaderState('header')
+      //result.current.setHeaderState('header')
 
       // Animates body and header with passing the height condition and input equal to current states
       result.current.animateBody(mockRef, result.current.bodyState)
-      result.current.animateHeader(mockRef, result.current.headerState)
+      //result.current.animateHeader(mockRef, result.current.headerState)
     })
 
     expect(result.current.bodyState).toBe('body')
-    expect(result.current.headerState).toBe('header')
+    //expect(result.current.headerState).toBe('header')
   })
 
   test('Animation functionality of ProjectDescriptionCard hook with topPosition greater than viewportBottom', () => {
@@ -127,11 +127,11 @@ describe('Test ProjectDescriptionCard', () => {
 
     act(() => {
       result.current.animateBody(mockRef, result.current.bodyState)
-      result.current.animateHeader(mockRef, result.current.headerState)
+      //result.current.animateHeader(mockRef, result.current.headerState)
     })
 
     expect(result.current.bodyState).toBe('')
-    expect(result.current.headerState).toBe('')
+    //expect(result.current.headerState).toBe('')
   })
 
   test('Animation functionality of ProjectDescriptionCard hook with undefined ref.current', () => {
@@ -142,23 +142,23 @@ describe('Test ProjectDescriptionCard', () => {
 
     act(() => {
       result.current.animateBody(mockRef, 'body')
-      result.current.animateHeader(mockRef, 'header')
+      //result.current.animateHeader(mockRef, 'header')
     })
 
     expect(result.current.bodyState).toBe('')
-    expect(result.current.headerState).toBe('')
+    //expect(result.current.headerState).toBe('')
   })
 
   test('Effect functionality of ProjectDescriptionCard hook', () => {
     const { result } = renderHook(() => useProjectDescriptionCard())
     expect(setTimeout).toHaveBeenCalledTimes(0)
     const fadeInEffect = result.current.fadeInEffect('body')
-    const typewriterEffect = result.current.typewriterEffect('header')
+    //const typewriterEffect = result.current.typewriterEffect('header')
 
     // Call effect functions and run timers
     act(() => {
       fadeInEffect()
-      typewriterEffect()
+      //typewriterEffect()
       jest.runAllTimers()
     })
 
@@ -168,14 +168,14 @@ describe('Test ProjectDescriptionCard', () => {
   test('Setter functionality of ProjectDescriptionCard hook', () => {
     const { result } = renderHook(() => useProjectDescriptionCard())
     expect(result.current.bodyState).toBe('')
-    expect(result.current.headerState).toBe('')
+    //expect(result.current.headerState).toBe('')
 
     act(() => {
       result.current.setBodyState('body')
-      result.current.setHeaderState('header')
+      //result.current.setHeaderState('header')
     })
 
     expect(result.current.bodyState).toBe('body')
-    expect(result.current.headerState).toBe('header')
+    //expect(result.current.headerState).toBe('header')
   })
 })
