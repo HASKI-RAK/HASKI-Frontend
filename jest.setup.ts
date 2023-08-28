@@ -24,6 +24,25 @@ type MockDataServices = {
  * @see {@link https://jestjs.io/docs/mock-functions | Jest Mock Functions}
  */
 const mockDataServices: MockDataServices = {
+  getLogout: jest.fn(() => {
+    return Promise.resolve()
+  }),
+  postLoginCredentials: jest.fn(() => {
+    return Promise.resolve({
+      id: 1,
+      lms_user_id: 1,
+      name: 'Thaddäus Tentakel',
+      role: 'Tester',
+      role_id: 1,
+      settings: {
+        id: 1,
+        user_id: 1,
+        pswd: '1234',
+        theme: 'test'
+      },
+      university: 'HS Kempten'
+    })
+  }),
   getUser: jest.fn(() => {
     return Promise.resolve({
       id: 1,
@@ -197,9 +216,7 @@ const mockDataServices: MockDataServices = {
     })
   }),
   postContactForm: jest.fn(() => {
-    return Promise.resolve({
-      undefined
-    })
+    return Promise.resolve
   }),
   postLogin: jest.fn(() => {
     return Promise.resolve({
