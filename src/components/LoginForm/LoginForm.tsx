@@ -76,6 +76,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
     setPasswordHasError(!passwordIsValid)
     if (usernameIsValid && passwordIsValid) onSubmit(username, password)
   }
+
   const usernameChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setUsername(event.target.value)
   }

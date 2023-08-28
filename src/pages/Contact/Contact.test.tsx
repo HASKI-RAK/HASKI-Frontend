@@ -12,7 +12,7 @@ import { MemoryRouter } from 'react-router-dom'
   useCallback: (a: any) => a
 }))*/
 
-const scontext: SnackbarContextType = {
+const mockSnackbarContext: SnackbarContextType = {
   snackbarsErrorWarning: [],
   snackbarsSuccessInfo: [],
   setSnackbarsErrorWarning: (a: any[]) => {
@@ -32,7 +32,8 @@ const scontext: SnackbarContextType = {
   }
 }
 
-/** use Translation mocks the translation and also mocks the map input of reportTypes and topics,
+/** 
+ * useTranslation mocks the translation and also mocks the map input of reportTypes and topics,
  * input isnt important here.
  * global.fetch mocks the fetch function, which is used in the onSubmitHandler function in Contact.hooks.tsx
  * useContact mocks the useContact function, which is used in the Contact.tsx
@@ -56,7 +57,7 @@ describe('Test Contactpage', () => {
 
   test('not sending', () => {
     render(
-      <SnackbarContext.Provider value={scontext}>
+      <SnackbarContext.Provider value={mockSnackbarContext}>
         <Contact />
       </SnackbarContext.Provider>
     )
@@ -65,7 +66,7 @@ describe('Test Contactpage', () => {
   test('sends onSubmit to Contactform', () => {
     const form = render(
       <MemoryRouter>
-        <SnackbarContext.Provider value={scontext}>
+        <SnackbarContext.Provider value={mockSnackbarContext}>
           <ContactForm onSubmit={useContact} />
         </SnackbarContext.Provider>
       </MemoryRouter>

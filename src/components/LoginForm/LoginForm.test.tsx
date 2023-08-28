@@ -11,6 +11,7 @@ global.fetch = jest.fn(() =>
     ok: true
   })
 ) as jest.Mock
+
 describe('Test LoginForm', () => {
   const submit = jest.fn()
   const validate = jest.fn(

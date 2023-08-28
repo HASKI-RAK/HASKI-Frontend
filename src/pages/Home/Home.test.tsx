@@ -102,13 +102,11 @@ describe('Test the Home page', () => {
   })
 
   test('fetching Course returns no courses', async () => {
-    const mockgetCourse = jest.fn(() => {
+    mockServices.getCourses.mockImplementationOnce(jest.fn(() => {
       return Promise.resolve({
         courses: []
       })
-    })
-
-    mockServices.getCourses.mockImplementationOnce(mockgetCourse)
+    }))
 
     const { getByText } = render(
       <MemoryRouter>
