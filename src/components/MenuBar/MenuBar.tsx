@@ -100,15 +100,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             log.error(error.message)
           })
       })
-      .catch((error) => {
-        // 🍿 snackbar error
-        addSnackbar({
-          message: error.message,
-          severity: 'error',
-          autoHideDuration: 5000
-        })
-        log.error(error.message)
-      })
   }
 
   const handleCloseTopicsMenu = () => {

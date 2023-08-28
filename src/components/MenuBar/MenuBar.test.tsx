@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import {fireEvent, getByTestId, render, waitFor} from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
 import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
@@ -53,7 +53,7 @@ describe('MenuBar', () => {
     })
   })
 
-  test('fetching user throws error ', async () => {
+  test('fetching user when opening Topics throws error ', async () => {
     mockServices.getUser.mockImplementationOnce(() => {
       throw new Error('Error')
     })
@@ -77,6 +77,30 @@ describe('MenuBar', () => {
       waitFor(() => {
         expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
       })
+    })
+  })
+
+  test('fetching user when opening Questionnaire Results', async () => {
+    mockServices.getUser.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const props: MenuBarProps = {
+      courseSelected: true
+    }
+
+    const { getByTestId } = render(
+        <MemoryRouter>
+          <MenuBar {...props} />
+        </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getByTestId('QuestionnaireResultsIcon'))
     })
   })
 
@@ -253,6 +277,48 @@ describe('MenuBar', () => {
     })
   })
 
+  it('navigates to questionnaire ils-short page', async () => {
+    const { getByTestId } = render(
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireILSshort'))
+    expect(navigate).toHaveBeenCalledWith('/questionnaire_ils_short')
+  })
+
+  it('navigates to questionnaire ils-long page', async () => {
+    const { getByTestId } = render(
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireILS'))
+    expect(navigate).toHaveBeenCalledWith('/questionnaire_ils_long')
+  })
+
+  it('navigates to questionnaire listk page', async () => {
+    const { getByTestId } = render(
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireListk'))
+    expect(navigate).toHaveBeenCalledWith('/questionnaire_listk')
+  })
+
   it('navigates to logout page', async () => {
     const { getAllByText, getByTestId } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -261,10 +327,10 @@ describe('MenuBar', () => {
         </MemoryRouter>
       </AuthContext.Provider>
     )
-    // click on Topics button:
 
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getAllByText('components.MenuBar.Profile.Logout')[0])
     expect(navigate).toHaveBeenCalledWith('/login')
   })
+
 })
