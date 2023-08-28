@@ -78,6 +78,8 @@ export const QuestionnaireResultsModal = ({open = false, handleClose}: Questionn
             }).catch((error) => {
                 log.error(error);
             })
+        }).catch((error) => {
+            log.error(error);
         })
     }, []);
 
@@ -88,8 +90,6 @@ export const QuestionnaireResultsModal = ({open = false, handleClose}: Questionn
     const handleNext = () => {
         setActiveStep(activeStep + 1);
     };
-
-    console.log(ilsData)
 
     return (
         <div>
