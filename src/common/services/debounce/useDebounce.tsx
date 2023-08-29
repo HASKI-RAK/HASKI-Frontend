@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-export const useDebounce = () => {
-
-}
-=======
 import React, { useEffect, useState, useCallback } from "react";
 
 export const useDebounce = (wait: number, callback2: (value: string) => void) => {
@@ -60,4 +55,3 @@ export const useDebounce = (wait: number, callback2: (value: string) => void) =>
     handleChange,
   };
 };
->>>>>>> Stashed changes
