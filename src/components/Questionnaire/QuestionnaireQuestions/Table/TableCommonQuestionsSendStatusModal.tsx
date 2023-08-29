@@ -12,11 +12,11 @@ const SendStatusModal: React.FC<SendStatusModalProps> = ({ open, onClose, isSucc
     const message = isSuccess ? 'Data sent successfully!' : 'An error occurred while sending data. Please try again.';
 
     return (
-        <Dialog open={open} onClose={onClose}>
+        <Dialog open={open} onClose={onClose} data-testid={'QuestionnaireSendStatusModal'}>
             <DialogTitle>{title}</DialogTitle>
             <DialogContent>{message}</DialogContent>
             <DialogActions>
-                <Button onClick={onClose} color="primary">
+                <Button onClick={onClose} color="primary" data-testid={"QuestionnaireSendStatusModalButton"}>
                     Close
                 </Button>
             </DialogActions>

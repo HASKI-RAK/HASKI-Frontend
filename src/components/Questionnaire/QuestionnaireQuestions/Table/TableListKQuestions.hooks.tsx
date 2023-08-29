@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useQuestionnaireAnswersListKStore } from '@services';
 import { usePersistedStore } from "@store";
-import log from "loglevel";
+import {postListK} from "@services";
 
 interface SendHookResult {
     sendAnswers: () => Promise<boolean>
@@ -20,44 +20,25 @@ const useHandleSend = (): SendHookResult => {
 
             const listkArray = Object.entries(questionnaireAnswers).filter(([key]) => key !== '')
             const outputJson = JSON.stringify({
-                list_k: listkArray.map((item: any) => ({
+                list_k: listkArray.map((item: [string, string]) => ({
                     question_id: item[0].toLowerCase(),
                     answer: parseInt(item[1],10)
                 }))
             })
 
             const user = await fetchUser();
-            const studentId = user.id;
+            const studentId = user.id
 
-            const response = await fetch(
-                process.env.BACKEND + `/lms/student/${studentId}/questionnaire/listk`,
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: outputJson,
-                }
-            );
-
-            if (response.ok) {
-                const data = await response.json();
-                //todo: handle response and set ListK answers to store
-                console.log(data);
-                return true
-            } else {
-                throw new Error('Something went wrong');
-            }
+            const successListK = await postListK({ studentId, outputJson });
+            return !!successListK;
         } catch (error) {
-            log.error(error);
             return false
         } finally {
-            setIsSending(false);
+            setIsSending(false)
         }
-    }, [questionnaireAnswers]);
+    }, [questionnaireAnswers])
 
-    return { sendAnswers, isSending };
+    return { sendAnswers, isSending }
 };
 
 export default useHandleSend;

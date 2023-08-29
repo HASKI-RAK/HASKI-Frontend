@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom'
 import { TableILSQuestions } from './TableILSQuestions'
-import { fireEvent, render } from '@testing-library/react'
+import {fireEvent, render, waitFor} from '@testing-library/react'
+import {act} from "react-dom/test-utils";
+import {mockServices} from "../../../../../jest.setup";
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -17,6 +19,16 @@ jest.mock('react-i18next', () => ({
     }
   }
 }))
+
+global.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve({ status: 200 }),
+      ok: true,
+      headers: {
+        get: () => 'application/json'
+      }
+    })
+) as jest.Mock
 
 const mockNavigate = jest.fn()
 
@@ -694,32 +706,32 @@ describe('Table ILS Questionnaire Short', () => {
     expect(backButton).toBeDisabled()
   })
 
-  test('Short ILS values can be send', () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={false} />)
+  test('Short ILS values can be send', async() => {
+    const {getByTestId} = render(<TableILSQuestions ilsLong={false}/>)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
     expect(backButton).toBeDisabled()
 
-    for (let i = 0; i < 5; i++) {
+    for(let i = 0; i < 6; i++) {
       const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
-        'input[type="radio"]'
+          'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton1)
 
       const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
-        'input[type="radio"]'
+          'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton2)
 
       const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
-        'input[type="radio"]'
+          'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton3)
 
       const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
-        'input[type="radio"]'
+          'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton4)
 
@@ -728,11 +740,22 @@ describe('Table ILS Questionnaire Short', () => {
       expect(RadioButton3.checked).toBe(true)
       expect(RadioButton4.checked).toBe(true)
 
-      if (i < 5) {
+      if(i < 5) {
         fireEvent.click(nextButton)
-      } else {
+      }
+      else {
         const sendButton = getByTestId('sendButtonILSQuestionnaire')
         expect(sendButton).toBeEnabled()
+        act(() => {
+          fireEvent.click(sendButton);
+        });
+
+        await waitFor(async() => {
+         expect(getByTestId('QuestionnaireSendStatusModal')).toBeInTheDocument()
+          act(() => {
+            fireEvent.click(getByTestId('QuestionnaireSendStatusModalButton'));
+          })
+        })
       }
     }
   })
@@ -746,5 +769,68 @@ describe('Table ILS Questionnaire Short', () => {
     window.dispatchEvent(new Event('beforeunload'))
 
     expect(mockConfirm).toHaveBeenCalled()
+  })
+
+  test('ILS Questionnaire useHandleSend returns error', async() => {
+
+    const mock = jest.fn(() => {
+      return Promise.reject(new Error('posting ils failed'))
+    })
+    mockServices.postILS.mockImplementationOnce(mock)
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+
+    const {getByTestId} = render(<TableILSQuestions ilsLong={false}/>)
+
+    const nextButton = getByTestId('nextButtonILSQuestionnaire')
+    const backButton = getByTestId('backButtonILSQuestionnaire')
+    expect(nextButton).toBeDisabled()
+    expect(backButton).toBeDisabled()
+
+    for(let i = 0; i < 6; i++) {
+      const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton1)
+
+      const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton2)
+
+      const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton3)
+
+      const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton4)
+
+      expect(RadioButton1.checked).toBe(true)
+      expect(RadioButton2.checked).toBe(true)
+      expect(RadioButton3.checked).toBe(true)
+      expect(RadioButton4.checked).toBe(true)
+
+      if(i < 5) {
+        fireEvent.click(nextButton)
+      }
+      else {
+        const sendButton = getByTestId('sendButtonILSQuestionnaire')
+        expect(sendButton).toBeEnabled()
+        act(() => {
+          fireEvent.click(sendButton);
+        });
+
+        await waitFor(async() => {
+          expect(getByTestId('QuestionnaireSendStatusModal')).toBeInTheDocument()
+          act(() => {
+            fireEvent.click(getByTestId('QuestionnaireSendStatusModalButton'));
+          })
+        })
+      }
+    }
   })
 })

@@ -3,6 +3,7 @@ import { QuestionnaireResultsModal } from '@components'
 import {fireEvent, render, waitFor} from '@testing-library/react'
 import * as React from 'react'
 import {MemoryRouter} from "react-router-dom";
+import {mockServices} from "../../../../../jest.setup";
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -154,5 +155,48 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
       expect(handleClose).toHaveBeenCalledTimes(1)
     })
+  })
+
+  test('fetching ils data returns error', async () => {
+    const handleClose = jest.fn()
+    mockServices.getILS.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { getByText } =render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+        </MemoryRouter>
+    )
+
+    expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')).toBeInTheDocument()
+    expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')).toBeInTheDocument()
+  })
+
+  test('fetching listk data returns error', async () => {
+    const handleClose = jest.fn()
+    mockServices.getListK.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { getByText } = render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+        </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
+      expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')).toBeInTheDocument()
+    })
+
   })
 })

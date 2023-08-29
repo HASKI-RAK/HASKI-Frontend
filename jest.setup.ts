@@ -266,6 +266,22 @@ const mockDataServices: MockDataServices = {
       rep: 1,
       time: 1
     })
+  }),
+  postILS: jest.fn(() => {
+    return Promise.resolve({
+        ok: true,
+        status: 201,
+        statusText: "CREATED",
+        url: "http://fakedomain.com:5000/lms/student/1/questionnaire/ils"
+      })
+  }),
+  postListK: jest.fn(() => {
+    return Promise.resolve({
+        ok: true,
+        status: 201,
+        statusText: "CREATED",
+        url: "http://fakedomain.com:5000/lms/student/1/questionnaire/listk"
+    })
   })
 }
 /**
