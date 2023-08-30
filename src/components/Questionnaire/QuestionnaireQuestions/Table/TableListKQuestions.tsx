@@ -10,9 +10,8 @@ import React, { memo, useCallback, useMemo, useState } from 'react'
 import { useQuestionnaireAnswersListKStore } from '@services'
 import PropTypes from 'prop-types'
 import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
-import useHandleSend from "./TableListKQuestions.hooks";
-import SendStatusModal from "./TableCommonQuestionsSendStatusModal";
-
+import useHandleSend from './TableListKQuestions.hooks'
+import SendStatusModal from './TableCommonQuestionsSendStatusModal'
 
 /**
  * @description
@@ -475,8 +474,8 @@ MemoTableRowAnswers.propTypes = {
 // region TableListKQuestions
 export const TableListKQuestions = memo(() => {
   TableListKQuestions.displayName = 'TableListKQuestions'
-  const { sendAnswers, isSending } = useHandleSend();
-  const [showStatusModal, setShowStatusModal] = useState(false);
+  const { sendAnswers, isSending } = useHandleSend()
+  const [showStatusModal, setShowStatusModal] = useState(false)
   const [sendSuccess, setSendSuccess] = useState(false)
 
   const { t } = useTranslation()
@@ -586,7 +585,7 @@ export const TableListKQuestions = memo(() => {
         listkStep.answer4,
         listkStep.answer5
       ]
-      const selectedAnswer = (radioButtonOptions.indexOf(event.target.value) + 1)
+      const selectedAnswer = radioButtonOptions.indexOf(event.target.value) + 1
       setQuestionnaireAnswers(listkStep.questionLabel, selectedAnswer.toString())
     },
     [setQuestionnaireAnswers]
@@ -667,11 +666,7 @@ export const TableListKQuestions = memo(() => {
             idType={'ListK'}
             isSending={isSending}
           />
-          <SendStatusModal
-              open={showStatusModal}
-              onClose={handleModalClose}
-              isSuccess={sendSuccess}
-          />
+          <SendStatusModal open={showStatusModal} onClose={handleModalClose} isSuccess={sendSuccess} />
         </Stack>
       </Stack>
     </Box>

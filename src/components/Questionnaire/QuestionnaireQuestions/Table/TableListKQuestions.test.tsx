@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom'
 import { TableListKQuestions } from './TableListKQuestions'
-import {fireEvent, render, waitFor} from '@testing-library/react'
-import {act} from "react-dom/test-utils";
-import {mockServices} from "../../../../../jest.setup";
+import { fireEvent, render, waitFor } from '@testing-library/react'
+import { act } from 'react-dom/test-utils'
+import { mockServices } from '../../../../../jest.setup'
 
 const mockNavigate = jest.fn()
 
@@ -12,13 +12,13 @@ jest.mock('react-router-dom', () => ({
 }))
 
 global.fetch = jest.fn(() =>
-    Promise.resolve({
-      json: () => Promise.resolve({ status: 200 }),
-      ok: true,
-      headers: {
-        get: () => 'application/json'
-      }
-    })
+  Promise.resolve({
+    json: () => Promise.resolve({ status: 200 }),
+    ok: true,
+    headers: {
+      get: () => 'application/json'
+    }
+  })
 ) as jest.Mock
 
 describe('TableListKQuestions', () => {
@@ -315,38 +315,38 @@ describe('TableListKQuestions', () => {
     expect(backButton).toBeDisabled()
   })
 
-  test('ListK values can be send', async() => {
-    const {getByTestId} = render(<TableListKQuestions/>)
+  test('ListK values can be send', async () => {
+    const { getByTestId } = render(<TableListKQuestions />)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
     expect(backButton).toBeDisabled()
 
-    for(let i = 0; i < 8; i++) {
-      if(i < 7) {
+    for (let i = 0; i < 8; i++) {
+      if (i < 7) {
         const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton1)
 
         const RadioButton2 = getByTestId('ListKQuestionnaireButtonGroup2').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton2)
 
         const RadioButton3 = getByTestId('ListKQuestionnaireButtonGroup3').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton3)
 
         const RadioButton4 = getByTestId('ListKQuestionnaireButtonGroup4').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton4)
 
         const RadioButton5 = getByTestId('ListKQuestionnaireButtonGroup5').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton5)
 
@@ -360,22 +360,22 @@ describe('TableListKQuestions', () => {
       //Last step only has 4 radio buttongroups
       else {
         const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton1)
 
         const RadioButton2 = getByTestId('ListKQuestionnaireButtonGroup2').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton2)
 
         const RadioButton3 = getByTestId('ListKQuestionnaireButtonGroup3').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton3)
 
         const RadioButton4 = getByTestId('ListKQuestionnaireButtonGroup4').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton4)
 
@@ -388,13 +388,13 @@ describe('TableListKQuestions', () => {
         expect(sendButton).toBeEnabled()
         fireEvent.click(sendButton)
         act(() => {
-          fireEvent.click(sendButton);
-        });
+          fireEvent.click(sendButton)
+        })
 
-        await waitFor(async() => {
+        await waitFor(async () => {
           expect(getByTestId('QuestionnaireSendStatusModal')).toBeInTheDocument()
           act(() => {
-            fireEvent.click(getByTestId('QuestionnaireSendStatusModalButton'));
+            fireEvent.click(getByTestId('QuestionnaireSendStatusModalButton'))
           })
         })
       }
@@ -412,8 +412,7 @@ describe('TableListKQuestions', () => {
     expect(mockConfirm).toHaveBeenCalled()
   })
 
-  test('useHandleSend returns error', async() => {
-
+  test('useHandleSend returns error', async () => {
     const mock = jest.fn(() => {
       return Promise.reject(new Error('posting listk failed'))
     })
@@ -422,37 +421,37 @@ describe('TableListKQuestions', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
 
-    const {getByTestId} = render(<TableListKQuestions/>)
+    const { getByTestId } = render(<TableListKQuestions />)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
     expect(backButton).toBeDisabled()
 
-    for(let i = 0; i < 8; i++) {
-      if(i < 7) {
+    for (let i = 0; i < 8; i++) {
+      if (i < 7) {
         const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton1)
 
         const RadioButton2 = getByTestId('ListKQuestionnaireButtonGroup2').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton2)
 
         const RadioButton3 = getByTestId('ListKQuestionnaireButtonGroup3').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton3)
 
         const RadioButton4 = getByTestId('ListKQuestionnaireButtonGroup4').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton4)
 
         const RadioButton5 = getByTestId('ListKQuestionnaireButtonGroup5').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton5)
 
@@ -466,22 +465,22 @@ describe('TableListKQuestions', () => {
       //Last step only has 4 radio buttongroups
       else {
         const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton1)
 
         const RadioButton2 = getByTestId('ListKQuestionnaireButtonGroup2').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton2)
 
         const RadioButton3 = getByTestId('ListKQuestionnaireButtonGroup3').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton3)
 
         const RadioButton4 = getByTestId('ListKQuestionnaireButtonGroup4').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton4)
 
@@ -494,17 +493,16 @@ describe('TableListKQuestions', () => {
         expect(sendButton).toBeEnabled()
         fireEvent.click(sendButton)
         act(() => {
-          fireEvent.click(sendButton);
-        });
+          fireEvent.click(sendButton)
+        })
 
-        await waitFor(async() => {
+        await waitFor(async () => {
           expect(getByTestId('QuestionnaireSendStatusModal')).toBeInTheDocument()
           act(() => {
-            fireEvent.click(getByTestId('QuestionnaireSendStatusModalButton'));
+            fireEvent.click(getByTestId('QuestionnaireSendStatusModalButton'))
           })
         })
       }
     }
   })
-
 })

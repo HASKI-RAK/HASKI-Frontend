@@ -1,12 +1,16 @@
 import { Bar } from '@nivo/bar'
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '@mui/material'
-import {ILS} from "@core";
+import { ILS } from '@core'
 
 // The Key "Dimension" is used in the Graph, therefore the name matters
 // The naming of the Key "possibleDimensions" is not important, as it is not used in the Graph, just for indexing
-export const useData = (dimensionOneScore: number, dimensionTwoScore: number, dimensionThreeScore: number, dimensionFourScore: number):
-    { possibleDimensions: string; [Dimension: string]: string }[] => {
+export const useData = (
+  dimensionOneScore: number,
+  dimensionTwoScore: number,
+  dimensionThreeScore: number,
+  dimensionFourScore: number
+): { possibleDimensions: string; [Dimension: string]: string }[] => {
   const { t } = useTranslation()
 
   return [
@@ -42,10 +46,10 @@ export const useData = (dimensionOneScore: number, dimensionTwoScore: number, di
 }
 
 type GraphILSProps = {
-  data: ILS,
+  data: ILS
 }
 
-export const GraphILS = ({data}: GraphILSProps) => {
+export const GraphILS = ({ data }: GraphILSProps) => {
   const { t } = useTranslation()
 
   const dimensionOneScore = data.input_value

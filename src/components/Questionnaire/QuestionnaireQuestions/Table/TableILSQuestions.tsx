@@ -10,8 +10,8 @@ import React, { memo, useCallback, useMemo, useState } from 'react'
 import { useQuestionnaireAnswersILSStore } from '@services'
 import PropTypes from 'prop-types'
 import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
-import useHandleSend from "./TableILSQuestions.hooks";
-import SendStatusModal from "./TableCommonQuestionsSendStatusModal";
+import useHandleSend from './TableILSQuestions.hooks'
+import SendStatusModal from './TableCommonQuestionsSendStatusModal'
 
 /**
  * @description
@@ -518,8 +518,8 @@ type TableILSQuestionsProps = {
 
 export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   TableILSQuestions.displayName = 'TableILSQuestions'
-  const { sendAnswers, isSending } = useHandleSend();
-  const [showStatusModal, setShowStatusModal] = useState(false);
+  const { sendAnswers, isSending } = useHandleSend()
+  const [showStatusModal, setShowStatusModal] = useState(false)
   const [sendSuccess, setSendSuccess] = useState(false)
 
   const { t } = useTranslation()
@@ -658,18 +658,14 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
             </Table>
           </TableContainer>
           <MemoSendButton
-              t={t}
-              handleSend={handleSendClick}
-              isNextDisabled={isNextDisabled}
-              isValid={ilsLong ? activeStep === 10 : activeStep === 4}
-              idType={'ILS'}
-              isSending={isSending}
+            t={t}
+            handleSend={handleSendClick}
+            isNextDisabled={isNextDisabled}
+            isValid={ilsLong ? activeStep === 10 : activeStep === 4}
+            idType={'ILS'}
+            isSending={isSending}
           />
-          <SendStatusModal
-              open={showStatusModal}
-              onClose={handleModalClose}
-              isSuccess={sendSuccess}
-          />
+          <SendStatusModal open={showStatusModal} onClose={handleModalClose} isSuccess={sendSuccess} />
         </Stack>
       </Stack>
     </Box>

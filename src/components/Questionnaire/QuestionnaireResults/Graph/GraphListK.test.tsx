@@ -3,7 +3,6 @@ import { useData, GraphListK } from './GraphListK'
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
-
 // Mocking the resize observer to prevent errors in the tests
 window.ResizeObserver = require('resize-observer-polyfill')
 
@@ -17,32 +16,30 @@ jest.mock('react-i18next', () => ({
 }))
 
 const mockListK = {
-    characteristic_id: 1,
-    id: 1,
-    att: 1,
-    cogn_str: 1,
-    con: 1,
-    crit_rev: 1,
-    eff: 1,
-    elab: 1,
-    ext_res_mng_str: 1,
-    goal_plan: 1,
-    int_res_mng_str: 1,
-    lit_res: 1,
-    lrn_env: 1,
-    lrn_w_cls: 1,
-    metacogn_str: 1,
-    org: 1,
-    reg: 1,
-    rep: 1,
-    time: 1
+  characteristic_id: 1,
+  id: 1,
+  att: 1,
+  cogn_str: 1,
+  con: 1,
+  crit_rev: 1,
+  eff: 1,
+  elab: 1,
+  ext_res_mng_str: 1,
+  goal_plan: 1,
+  int_res_mng_str: 1,
+  lit_res: 1,
+  lrn_env: 1,
+  lrn_w_cls: 1,
+  metacogn_str: 1,
+  org: 1,
+  reg: 1,
+  rep: 1,
+  time: 1
 }
 
 describe('Test GraphListK with all Methods', () => {
   test('Required data is returned in correct format', () => {
-    const data = useData(1,1,1,1,1,1,1,1,1,1,1,
-        1,1,1,1,1,
-        1)
+    const data = useData(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 
     expect(data.nodes.length).toBe(18)
     expect(data.links.length).toBe(17)
@@ -121,7 +118,7 @@ describe('Test GraphListK with all Methods', () => {
       averageInternalResourceManagementStrategies,
       averageMetacognitiveStrategies,
       averageExternalResourcesManagementStrategies
-    ] = [1,1,1,1]
+    ] = [1, 1, 1, 1]
 
     expect(
       graphListK.getAllByText(

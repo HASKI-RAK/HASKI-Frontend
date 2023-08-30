@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import {fireEvent, getByTestId, render, waitFor} from '@testing-library/react'
+import { fireEvent, getByTestId, render, waitFor } from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
 import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
@@ -94,9 +94,9 @@ describe('MenuBar', () => {
     }
 
     const { getByTestId } = render(
-        <MemoryRouter>
-          <MenuBar {...props} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <MenuBar {...props} />
+      </MemoryRouter>
     )
 
     await waitFor(() => {
@@ -188,9 +188,9 @@ describe('MenuBar', () => {
     }
 
     const result = render(
-        <MemoryRouter>
-          <MenuBar {...props} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <MenuBar {...props} />
+      </MemoryRouter>
     )
 
     // click on QuestionnaireResultsIcon:
@@ -279,11 +279,11 @@ describe('MenuBar', () => {
 
   it('navigates to questionnaire ils-short page', async () => {
     const { getByTestId } = render(
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <MemoryRouter>
-            <MenuBar />
-          </MemoryRouter>
-        </AuthContext.Provider>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
@@ -293,11 +293,11 @@ describe('MenuBar', () => {
 
   it('navigates to questionnaire ils-long page', async () => {
     const { getByTestId } = render(
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <MemoryRouter>
-            <MenuBar />
-          </MemoryRouter>
-        </AuthContext.Provider>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
@@ -307,11 +307,11 @@ describe('MenuBar', () => {
 
   it('navigates to questionnaire listk page', async () => {
     const { getByTestId } = render(
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <MemoryRouter>
-            <MenuBar />
-          </MemoryRouter>
-        </AuthContext.Provider>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
@@ -333,8 +333,5 @@ describe('MenuBar', () => {
     expect(navigate).toHaveBeenCalledWith('/login')
   })
 
-  it('', async () =>{
-
-
-  })
+  it('', async () => {})
 })

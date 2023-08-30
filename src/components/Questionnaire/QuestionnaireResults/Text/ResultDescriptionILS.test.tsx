@@ -5,21 +5,24 @@ import { render } from '@testing-library/react'
 
 describe('Test ResultDescriptionILS with all Score combinations', () => {
   test('all positive dimensions are balanced', () => {
-      const mockILS = {
-        characteristic_id: 1,
-        id: 1,
-        input_dimension: 'test',
-        input_value: 3,
-        perception_dimension: 'test',
-        perception_value: 3,
-        processing_dimension: 'test',
-        processing_value: 3,
-        understanding_dimension: 'test',
-        understanding_value: 3
-      }
+    const mockILS = {
+      characteristic_id: 1,
+      id: 1,
+      input_dimension: 'test',
+      input_value: 3,
+      perception_dimension: 'test',
+      perception_value: 3,
+      processing_dimension: 'test',
+      processing_value: 3,
+      understanding_dimension: 'test',
+      understanding_value: 3
+    }
 
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(311, 311 + 'EverythingBalanced'.length)).toBe('EverythingBalanced')
@@ -40,14 +43,16 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
     }
 
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(311, 311 + 'EverythingBalanced'.length)).toBe('EverythingBalanced')
   })
 
   test('3 dimensions are balanced, 1 Dimension is active & moderate', () => {
-
     const mockILS = {
       characteristic_id: 1,
       id: 1,
@@ -62,7 +67,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
     }
 
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(424, 424 + 'Active.moderate'.length)).toBe('Active.moderate')
@@ -83,14 +91,16 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
     }
 
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(422, 422 + 'Active.strong'.length)).toBe('Active.strong')
   })
 
   test('3 dimensions are balanced, 1 Dimension is reflective & moderate', () => {
-
     const mockILS = {
       characteristic_id: 1,
       id: 1,
@@ -105,7 +115,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
     }
 
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(432, 432 + 'Reflective.moderate'.length)).toBe('Reflective.moderate')
@@ -126,7 +139,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
     }
 
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(430, 430 + 'Reflective.strong'.length)).toBe('Reflective.strong')
@@ -146,7 +162,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 5
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(2037, 2037 + 'SomethingBalanced.processing'.length)).toBe(
@@ -168,7 +187,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 3
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(426, 426 + 'Sensory.moderate'.length)).toBe('Sensory.moderate')
@@ -188,7 +210,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 3
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(424, 424 + 'Sensory.strong'.length)).toBe('Sensory.strong')
@@ -208,7 +233,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 3
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(430, 430 + 'Intuitive.moderate'.length)).toBe('Intuitive.moderate')
@@ -228,7 +256,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 3
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(428, 428 + 'Intuitive.strong'.length)).toBe('Intuitive.strong')
@@ -248,7 +279,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 5
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(2034, 2034 + 'SomethingBalanced.perception'.length)).toBe(
@@ -270,14 +304,16 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 3
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(424, 424 + 'Visual.moderate'.length)).toBe('Visual.moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is visual & strong', () => {
-
     const mockILS = {
       characteristic_id: 1,
       id: 1,
@@ -291,7 +327,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 3
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(422, 422 + 'Visual.strong'.length)).toBe('Visual.strong')
@@ -311,7 +350,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 3
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(424, 424 + 'Verbal.moderate'.length)).toBe('Verbal.moderate')
@@ -331,14 +373,16 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 3
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(422, 422 + 'Verbal.strong'.length)).toBe('Verbal.strong')
   })
 
   test('3 dimensions do not matter, 1 Dimension is verbal & balanced', () => {
-
     const mockILS = {
       characteristic_id: 1,
       id: 1,
@@ -352,7 +396,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 5
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(2037, 2037 + 'SomethingBalanced.presentation'.length)).toBe(
@@ -374,7 +421,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 5
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(432, 432 + 'Sequential.moderate'.length)).toBe('Sequential.moderate')
@@ -394,7 +444,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 9
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(430, 430 + 'Sequential.strong'.length)).toBe('Sequential.strong')
@@ -414,7 +467,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: -5
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(424, 424 + 'Global.moderate'.length)).toBe('Global.moderate')
@@ -434,7 +490,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: -9
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(422, 422 + 'Global.strong'.length)).toBe('Global.strong')
@@ -454,7 +513,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: -3
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(2025, 2025 + 'SomethingBalanced.organisation'.length)).toBe(
@@ -463,7 +525,6 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
   })
 
   test('all dimensions moderate positive', () => {
-
     const mockILS = {
       characteristic_id: 1,
       id: 1,
@@ -477,7 +538,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 5
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(875, 875 + 'Sensory.moderate'.length)).toBe('Sensory.moderate')
@@ -487,7 +551,6 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
   })
 
   test('all dimensions strong positive', () => {
-
     const mockILS = {
       characteristic_id: 1,
       id: 1,
@@ -501,7 +564,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 9
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(869, 869 + 'Sensory.strong'.length)).toBe('Sensory.strong')
@@ -524,7 +590,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: -5
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(891, 891 + 'Intuitive.moderate'.length)).toBe('Intuitive.moderate')
@@ -547,7 +616,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: -9
     }
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => ILSDimension(n, b, c)}
+      />
     )
 
     expect(container.innerHTML.substring(885, 885 + 'Intuitive.strong'.length)).toBe('Intuitive.strong')
@@ -596,7 +668,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
     })
 
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => getILSDimension(1, 1, true)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => getILSDimension(1, 1, true)}
+      />
     )
 
     expect(container.innerHTML.substring(854, 854 + 'Part1 '.length)).toBe('Part1 ')
@@ -644,7 +719,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
     })
 
     const { container } = render(
-      <ResultDescriptionILS data={mockILS} ILSdim={(n: number, b: number, c?: boolean | undefined) => getILSDimension(1, 1, true)} />
+      <ResultDescriptionILS
+        data={mockILS}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => getILSDimension(1, 1, true)}
+      />
     )
 
     //Because the switch case is not implemented for the string "test", the default case is used, thats why there are 2 spaces after Part2

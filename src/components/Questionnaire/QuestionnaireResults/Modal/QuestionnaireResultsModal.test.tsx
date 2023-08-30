@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom'
 import { QuestionnaireResultsModal } from '@components'
-import {fireEvent, render, waitFor} from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import * as React from 'react'
-import {MemoryRouter} from "react-router-dom";
-import {mockServices} from "../../../../../jest.setup";
+import { MemoryRouter } from 'react-router-dom'
+import { mockServices } from '../../../../../jest.setup'
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -32,20 +32,19 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('Modal opens', async () => {
     const { getByTestId } = render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={() => false} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={() => false} />
+      </MemoryRouter>
     )
 
     expect(getByTestId('ILS and ListK Modal')).toBeInTheDocument()
   })
 
   test('Modal without ILS data', async () => {
-
     const { getByText } = render(
-        <MemoryRouter>
-            <QuestionnaireResultsModal open={true} handleClose={() => false} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={() => false} />
+      </MemoryRouter>
     )
 
     expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')).toBeInTheDocument()
@@ -53,11 +52,10 @@ describe('Test ResultDescriptionListK with all Methods', () => {
   })
 
   test('Modal without ListK data', async () => {
-
     const { getByTestId, getByText } = render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={() => false} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={() => false} />
+      </MemoryRouter>
     )
 
     fireEvent.click(getByTestId('nextButton'))
@@ -65,25 +63,23 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')).toBeInTheDocument()
   })
 
-
-
   test('Active Step ILS is shown, when ils data is given', async () => {
     const { getByTestId } = render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={() => false} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={() => false} />
+      </MemoryRouter>
     )
 
     await waitFor(() => {
-        expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
+      expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
     })
   })
 
   test('Active Step List-K is shown, when listk data is given', async () => {
     const { getByTestId } = render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={() => false} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={() => false} />
+      </MemoryRouter>
     )
 
     await waitFor(() => {
@@ -94,9 +90,9 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('Active Step ILS is shown', async () => {
     const { getByTestId, getByText } = render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={() => false} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={() => false} />
+      </MemoryRouter>
     )
 
     await waitFor(() => {
@@ -107,9 +103,9 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('Active Step List-K is shown', async () => {
     const { getByTestId, getByText } = render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={() => false} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={() => false} />
+      </MemoryRouter>
     )
 
     await waitFor(() => {
@@ -120,9 +116,9 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('Next and Back button work', async () => {
     const { getByTestId } = render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={() => false} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={() => false} />
+      </MemoryRouter>
     )
 
     await waitFor(() => {
@@ -144,9 +140,10 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     const handleClose = jest.fn()
 
     const { getByTestId } = render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={handleClose} />
-        </MemoryRouter>)
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+      </MemoryRouter>
+    )
 
     await waitFor(() => {
       expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
@@ -167,10 +164,10 @@ describe('Test ResultDescriptionListK with all Methods', () => {
       return
     })
 
-    const { getByText } =render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={handleClose} />
-        </MemoryRouter>
+    const { getByText } = render(
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+      </MemoryRouter>
     )
 
     expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')).toBeInTheDocument()
@@ -188,16 +185,15 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     })
 
     const { getByText } = render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={handleClose} />
-        </MemoryRouter>
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+      </MemoryRouter>
     )
 
     await waitFor(() => {
       fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
       expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')).toBeInTheDocument()
     })
-
   })
 
   it('renders null for activeStep 3', () => {
@@ -206,11 +202,11 @@ describe('Test ResultDescriptionListK with all Methods', () => {
       throw new Error('Error')
     })
 
-    const {container} = render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={handleClose} activeStepForTesting={3}/>
-        </MemoryRouter>)
-    expect(container.innerHTML).toContain("<div></div>")
+    const { container } = render(
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={handleClose} activeStepForTesting={3} />
+      </MemoryRouter>
+    )
+    expect(container.innerHTML).toContain('<div></div>')
   })
-
 })

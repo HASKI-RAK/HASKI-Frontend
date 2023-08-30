@@ -6,8 +6,7 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireResultTableStyle'
-import {ListK} from "@core";
-
+import { ListK } from '@core'
 
 const StyledTableRowListK = Object.assign({}, StyledTableRow)
 
@@ -25,7 +24,7 @@ StyledTableRowListK.defaultProps = {
 export const getSubscaleScore = (score: number[]): number => score.reduce((a, b) => a + b, 0) / score.length
 
 type TableListKProps = {
-  data: ListK,
+  data: ListK
 }
 
 export const TableListK = ({ data }: TableListKProps) => {
@@ -48,7 +47,6 @@ export const TableListK = ({ data }: TableListKProps) => {
   const averageInternalResourceManagementStrategies = data.int_res_mng_str
   const averageMetacognitiveStrategies = data.metacogn_str
   const averageExternalResourcesManagementStrategies = data.ext_res_mng_str
-
 
   const rows = [
     {

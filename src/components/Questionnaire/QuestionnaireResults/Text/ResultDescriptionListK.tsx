@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
-import {ListK} from "@core";
+import { ListK } from '@core'
 
 type GeneralSubscalesProps = {
   averageCognitiveStrategies: number
@@ -214,11 +214,10 @@ const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: { [key
 }
 
 type ResultDescriptionListKProps = {
-  data: ListK,
+  data: ListK
 }
 
 export const ResultDescriptionListK = ({ data }: ResultDescriptionListKProps) => {
-
   const organize = data.org
   const elaborate = data.elab
   const criticalReview = data.crit_rev

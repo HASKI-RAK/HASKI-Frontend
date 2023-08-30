@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next'
 import Typography from '@mui/material/Typography'
 import { ILSDimension, ILSInterpretation } from '../Table/TableILS'
-import {ILS} from "@core";
+import { ILS } from '@core'
 
 // function can be replaced for test-purposes
 type ResultDescriptionILSProps = {
-  data: ILS,
+  data: ILS
   ILSdim?: (n: number, s: number, b?: boolean) => string
 }
 export const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescriptionILSProps) => {

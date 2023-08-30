@@ -1,4 +1,3 @@
-
 type ILSReturn = (userId?: number, lmsUserId?: number, studentId?: number) => Promise<ILS>
 
 type ILS = {

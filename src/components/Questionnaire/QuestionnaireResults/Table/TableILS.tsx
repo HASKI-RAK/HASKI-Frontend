@@ -6,8 +6,7 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireResultTableStyle'
-import {ILS} from "@core";
-
+import { ILS } from '@core'
 
 //Returns the Interpretation of the ILS-Test (balanced, moderate, strong + Dimension (if score is not balanced))
 export const ILSInterpretation = (score: number, interpretationString: string, onlyEnglish?: boolean): string => {
@@ -98,7 +97,7 @@ export const ILSDimension = (dimensionNumber: number, score: number, onlyEnglish
 }
 
 type TableILSProps = {
-  data: ILS,
+  data: ILS
 }
 
 export const TableILS = ({ data }: TableILSProps) => {

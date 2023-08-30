@@ -17,9 +17,7 @@ const mockILS = {
 }
 
 describe('Test GraphILS with all Methods', () => {
-
   test('Required data is returned in correct format', () => {
-
     const data = useData(1, 1, 1, 1)
 
     expect(data.length).toBe(4)
@@ -47,7 +45,7 @@ describe('Test GraphILS with all Methods', () => {
   })
 
   test('GraphILS renders without crashing', () => {
-    const graphILS = render(<GraphILS data={mockILS}/>)
+    const graphILS = render(<GraphILS data={mockILS} />)
 
     expect(
       graphILS.getByText('components.Questionnaire.QuestionnaireResults.Table.TableILS.Active')

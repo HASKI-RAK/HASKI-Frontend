@@ -4,23 +4,22 @@ import { render } from '@testing-library/react'
 import React from 'react'
 
 const mockILS = {
-    characteristic_id: 1,
-    id: 1,
-    input_dimension: 'test',
-    input_value: 1,
-    perception_dimension: 'test',
-    perception_value: 1,
-    processing_dimension: 'test',
-    processing_value: 1,
-    understanding_dimension: 'test',
-    understanding_value: 1
+  characteristic_id: 1,
+  id: 1,
+  input_dimension: 'test',
+  input_value: 1,
+  perception_dimension: 'test',
+  perception_value: 1,
+  processing_dimension: 'test',
+  processing_value: 1,
+  understanding_dimension: 'test',
+  understanding_value: 1
 }
 
 //we have to mock react-i18next otherwise a warning will appear
 //"You will need pass in an i18next instance by using initReactI18next" => mock is needed.
 
 describe('Test TableILS with all Methods', () => {
-
   test('Table values are correct', () => {
     const { getAllByRole } = render(<TableILS data={mockILS} />)
 
@@ -160,7 +159,7 @@ describe('Test TableILS with all Methods', () => {
   })
 
   test('Table Score-values are numbers', () => {
-    const { getAllByRole } = render(<TableILS data={mockILS}/>)
+    const { getAllByRole } = render(<TableILS data={mockILS} />)
 
     const cell3 = getAllByRole('cell')[3].textContent
     let cell3Int
