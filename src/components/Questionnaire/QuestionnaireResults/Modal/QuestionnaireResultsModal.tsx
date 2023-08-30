@@ -49,9 +49,10 @@ const styleBox = {
 type QuestionnaireResultsModalProps = {
     open?: boolean;
     handleClose?: () => void;
+    activeStepForTesting?: number
 };
 
-export const QuestionnaireResultsModal = ({open = false, handleClose}: QuestionnaireResultsModalProps) => {
+export const QuestionnaireResultsModal = ({open = false, handleClose, activeStepForTesting=0}: QuestionnaireResultsModalProps) => {
     const {t} = useTranslation();
     const fetchUser = usePersistedStore((state) => state.fetchUser);
     const fetchILS = useStore((state) => state.fetchILS);
@@ -62,7 +63,7 @@ export const QuestionnaireResultsModal = ({open = false, handleClose}: Questionn
         t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults')
     ];
 
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState(activeStepForTesting);
     const [ilsData, setILSData] = useState<ILS | null>(null); // Initialize with null
     const [listkData, setListKData] = useState<ListK | null>(null); // Initialize with null
 
@@ -148,7 +149,7 @@ export const QuestionnaireResultsModal = ({open = false, handleClose}: Questionn
                                     </div>
                                 ) : activeStep === 0 ? (
                                     <Stack alignItems="center">
-                                        <div>
+                                        <div data-testid={'ActiveStepILSNoData'}>
                                             <Typography variant="body2">
                                                 {t("components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1")}
                                                 <ul>
@@ -169,7 +170,7 @@ export const QuestionnaireResultsModal = ({open = false, handleClose}: Questionn
                                     </Stack>
                                 ) : activeStep === 1 ? (
                                     <Stack alignItems="center">
-                                        <div>
+                                        <div data-testid={'ActiveStepListKNoData'}>
                                             <Typography variant="body2">
                                                 {t("components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1")}
                                                 <ul>

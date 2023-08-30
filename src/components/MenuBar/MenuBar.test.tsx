@@ -333,4 +333,8 @@ describe('MenuBar', () => {
     expect(navigate).toHaveBeenCalledWith('/login')
   })
 
+  it('', async () =>{
+
+
+  })
 })

@@ -199,4 +199,18 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     })
 
   })
+
+  it('renders null for activeStep 3', () => {
+    const handleClose = jest.fn()
+    mockServices.getListK.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    const {container} = render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={handleClose} activeStepForTesting={3}/>
+        </MemoryRouter>)
+    expect(container.innerHTML).toContain("<div></div>")
+  })
+
 })
