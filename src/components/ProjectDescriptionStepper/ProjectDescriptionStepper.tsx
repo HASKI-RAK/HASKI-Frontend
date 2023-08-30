@@ -1,13 +1,6 @@
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
+import { KeyboardArrowRight, KeyboardArrowLeft } from '@common/icons'
 import React, { useRef, useEffect, useCallback } from 'react'
-import {
-  DefaultButton as Button,
-  DefaultFade as Fade,
-  DefaultGrid as Grid,
-  DefaultMobileStepper as MobileStepper,
-  DefaultTypography as Typography
-} from '@common/components'
+import { Button, Fade, Grid, MobileStepper, Typography } from '@common/components'
 import {
   useProjectDescriptionStepper as _useProjectDescriptionStepper,
   useProjectDescriptionStepperHookParams,

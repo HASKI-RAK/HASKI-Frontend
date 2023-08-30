@@ -1,6 +1,6 @@
-import { DefaultBox as Box, DefaultPaper as Paper, DefaultTypography as Typography } from '@common/components'
+import { Box, Paper, Typography } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
-import VideocamIcon from '@mui/icons-material/Videocam' // TODO: DI
+import { Videocam } from '@common/icons'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
 
@@ -30,7 +30,7 @@ const VideoNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <VideocamIcon sx={{ fontSize: 50 }} />
+        <Videocam sx={{ fontSize: 50 }} />
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}

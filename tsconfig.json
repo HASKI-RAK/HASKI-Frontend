@@ -29,6 +29,9 @@
       "@components": ["src/components"],
       "@utils": ["src/common/utils"],
       "@common/components": ["src/common/components"],
+      "@common/theme": ["src/common/theme"],
+      "@common/icons": ["src/common/icons"],
+      "@common/hooks": ["src/common/hooks"],
       "@shared": ["src/shared"],
       "@mocks": ["__mocks__"],
       "jest.setup": ["jest.setup.ts"]

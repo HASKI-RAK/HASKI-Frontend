@@ -1,5 +1,5 @@
-import { DefaultBox as Box, DefaultPaper as Paper, DefaultTypography as Typography } from '@common/components'
-import DescriptionIcon from '@mui/icons-material/Description' // TODO: DI
+import { Box, Paper, Typography } from '@common/components'
+import { Description } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
@@ -30,7 +30,7 @@ const SummaryNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <DescriptionIcon sx={{ fontSize: 50 }} />
+        <Description sx={{ fontSize: 50 }} />
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}

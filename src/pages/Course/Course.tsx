@@ -1,10 +1,10 @@
 import {
-  DefaultButton as Button,
-  DefaultCard as Card,
-  DefaultCardContent as CardContent,
-  DefaultTypography as Typography,
-  DefaultBox as Box,
-  DefaultStack as Stack
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  Stack
 } from '@common/components'
 import { AuthContext } from '@services'
 import log from 'loglevel'

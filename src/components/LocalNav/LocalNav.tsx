@@ -1,13 +1,13 @@
 import {
-  DefaultBox as Box,
-  DefaultDivider as Divider,
-  DefaultTypography as Typography,
-  DefaultAccordionSummary as AccordionSummary,
-  DefaultAccordionDetails as AccordionDetails,
-  DefaultAccordion as Accordion,
-  DefaultStack as Stack
+  Accordion,
+  Box,
+  Divider,
+  Typography,
+  AccordionSummary,
+  AccordionDetails,
+  Stack
 } from '@common/components'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { ExpandMore } from '@common/icons'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { LearningPathElement, Topic } from '@core'
@@ -82,7 +82,7 @@ const LocalNav = ({
               expanded={openAccordion === index}
               onChange={() => handleAccordionClick(index)}>
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
+                expandIcon={<ExpandMore />}
                 data-testid={`topic-AccordionSummary-${topic.id}`}
                 aria-controls="panel1a-content"
                 id="panel1a-header"

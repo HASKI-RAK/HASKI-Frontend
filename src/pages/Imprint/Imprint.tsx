@@ -1,4 +1,4 @@
-import { DefaultDivider as Divider, DefaultLink as Link, DefaultTypography as Typography } from '@common/components'
+import { Divider, Link, Typography } from '@common/components'
 import { useTranslation } from 'react-i18next'
 
 /**

@@ -1,4 +1,4 @@
-import { DefaultButton as Button, DefaultTypography as Typography } from '@common/components'
+import { Button, Typography } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 // TODO: Added unfinished projectinformation page for routing purposes

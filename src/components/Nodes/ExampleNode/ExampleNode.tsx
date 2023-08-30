@@ -1,6 +1,6 @@
-import { DefaultBox as Box, DefaultPaper as Paper, DefaultTypography as Typography } from '@common/components'
+import { Box, Paper, Typography } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
-import AssignmentIcon from '@mui/icons-material/Assignment' // TODO: DI
+import { Assignment } from '@common/icons'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
 
@@ -30,7 +30,7 @@ const ExampleNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <AssignmentIcon sx={{ fontSize: 50 }} />
+        <Assignment sx={{ fontSize: 50 }} />
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}

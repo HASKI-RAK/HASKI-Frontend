@@ -1,5 +1,4 @@
-import { createTheme } from '@mui/material/styles'
-import { yellow, red } from '@mui/material/colors'
+import { createTheme, yellow, red } from '@common/theme'
 
 export const defaultBehavior = {
   boxShadowSize: {

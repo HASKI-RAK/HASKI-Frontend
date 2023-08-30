@@ -1,7 +1,7 @@
 import { LearningPathLearningElementNode } from '@components'
 import { useState, useCallback, useMemo } from 'react'
 import { Node, Edge } from 'reactflow'
-import { Theme } from '@mui/material' // TODO: DI
+import { Theme } from '@common/theme'
 import { LearningPathElement } from '@core'
 
 /**
