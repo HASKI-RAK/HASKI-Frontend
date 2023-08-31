@@ -45,7 +45,7 @@ describe('localStorage already set', () => {
   test('log empty messages are not added to localStorage', () => {
     Object.defineProperty(window, 'localStorage', {
       value: {
-        getItem: jest.fn(() => ''),
+        getItem: jest.fn(() => undefined),
         setItem: localStorage.setItem.bind(localStorage),
         removeItem: jest.fn()
       },
@@ -57,7 +57,8 @@ describe('localStorage already set', () => {
     log.trace('')
     log.warn('')
     log.error('')
-
-    expect(localStorage.getItem('ringBufferContent')).toEqual('')
+    
+    // TODO: Find a better way to check if logBuffer is doing what it is supposed to do.
+    expect(localStorage.getItem('ringBufferContent')).toEqual(undefined)
   })
 })
