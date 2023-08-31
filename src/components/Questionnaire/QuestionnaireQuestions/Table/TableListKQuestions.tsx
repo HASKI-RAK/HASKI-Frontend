@@ -6,12 +6,11 @@ import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
 import { Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material'
 import TableCell from '@mui/material/TableCell'
-import React, { memo, useCallback, useMemo, useState } from 'react'
-import { useQuestionnaireAnswersListKStore } from '@services'
+import React, {memo, useCallback, useContext, useMemo, useState} from 'react'
+import {SnackbarContext, useQuestionnaireAnswersListKStore} from '@services'
 import PropTypes from 'prop-types'
 import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
 import useHandleSend from './TableListKQuestions.hooks'
-import SendStatusModal from './TableCommonQuestionsSendStatusModal'
 
 /**
  * @description
@@ -475,8 +474,7 @@ MemoTableRowAnswers.propTypes = {
 export const TableListKQuestions = memo(() => {
   TableListKQuestions.displayName = 'TableListKQuestions'
   const { sendAnswers, isSending } = useHandleSend()
-  const [showStatusModal, setShowStatusModal] = useState(false)
-  const [sendSuccess, setSendSuccess] = useState(false)
+  const { addSnackbar } = useContext(SnackbarContext)
 
   const { t } = useTranslation()
 
@@ -488,14 +486,24 @@ export const TableListKQuestions = memo(() => {
   const [radioButtonGroup5, setRadioButtonGroup5] = useState('')
 
   const handleSendClick = async () => {
-    setSendSuccess(await sendAnswers())
+    await sendAnswers().then((res) => {
+          if(res){
+            addSnackbar({
+              message: 'Data send successfully',
+              severity: 'success',
+              autoHideDuration: 5000
+            })
+          }
+          else{
+            addSnackbar({
+              message: 'Data could not be sent',
+              severity: 'error',
+              autoHideDuration: 5000
+            })
+          }
+        }
+    )
 
-    setShowStatusModal(true)
-  }
-
-  const handleModalClose = () => {
-    setShowStatusModal(false)
-    setSendSuccess(false)
   }
 
   //if all radio buttons are selected, the next button is enabled
@@ -666,7 +674,6 @@ export const TableListKQuestions = memo(() => {
             idType={'ListK'}
             isSending={isSending}
           />
-          <SendStatusModal open={showStatusModal} onClose={handleModalClose} isSuccess={sendSuccess} />
         </Stack>
       </Stack>
     </Box>
