@@ -31,7 +31,7 @@ export type LocalNavProps = {
     courseId: string
   ) => {
     loadingElements: boolean
-    learningPaths: LearningPathElement
+    learningPaths: LearningPathElement | undefined
   }
 }
 

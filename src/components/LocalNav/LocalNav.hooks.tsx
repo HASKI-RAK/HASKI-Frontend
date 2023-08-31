@@ -4,43 +4,6 @@ import log from 'loglevel'
 import { useStore, usePersistedStore } from '@store'
 
 /**
- * This is a mock of the LearningPathElement object
- */
-const initialLearningPathElement: LearningPathElement = {
-  id: 99999,
-  course_id: 99999,
-  based_on: 'initial LearningPathElement',
-  calculated_on: 'initial LearningPathElement',
-  path: [
-    {
-      id: 99999,
-      learning_element_id: 99999,
-      learning_path_id: 99999,
-      recommended: true,
-      position: 99999,
-      learning_element: {
-        id: 99999,
-        lms_id: 99999,
-        activity_type: 'initial LearningPathElement',
-        classification: 'initial LearningPathElement',
-        name: 'initial LearningPathElement',
-        university: 'initial LearningPathElement',
-        created_by: 'initial LearningPathElement',
-        created_at: 'initial LearningPathElement',
-        last_updated: 'initial LearningPathElement',
-        student_learning_element: {
-          id: 99999,
-          student_id: 99999,
-          learning_element_id: 99999,
-          done: false,
-          done_at: 'initial LearningPathElement'
-        }
-      }
-    }
-  ]
-}
-
-/**
  * This function sorts the learning path elements by position.
  * @param userid - user id
  * @param lmsUserid - lms user id
@@ -102,9 +65,9 @@ export const useLearningPathTopic = (courseId: string): { loading: boolean; topi
 export const useLearningPathElement = (
   topic: Topic,
   courseId: string
-): { loadingElements: boolean; learningPaths: LearningPathElement } => {
+): { loadingElements: boolean; learningPaths: LearningPathElement | undefined } => {
   const [loadingElements, setLoadingElements] = useState(true)
-  const [learningPaths, setLearningPaths] = useState<LearningPathElement>(initialLearningPathElement)
+  const [learningPaths, setLearningPaths] = useState<LearningPathElement>()
   const fetchUser = usePersistedStore((state) => state.fetchUser)
   const fetchLearningPathElement = useStore((state) => state.fetchLearningPathElement)
 
