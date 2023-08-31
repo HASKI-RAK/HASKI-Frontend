@@ -6,8 +6,8 @@ import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
 import { Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material'
 import TableCell from '@mui/material/TableCell'
-import React, { memo, useCallback, useMemo, useState } from 'react'
-import { useQuestionnaireAnswersILSStore } from '@services'
+import React, {memo, useCallback, useContext, useMemo, useState} from 'react'
+import {SnackbarContext, useQuestionnaireAnswersILSStore} from '@services'
 import PropTypes from 'prop-types'
 import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
 import useHandleSend from './TableILSQuestions.hooks'
@@ -521,6 +521,7 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   const { sendAnswers, isSending } = useHandleSend()
   const [showStatusModal, setShowStatusModal] = useState(false)
   const [sendSuccess, setSendSuccess] = useState(false)
+  const { addSnackbar } = useContext(SnackbarContext)
 
   const { t } = useTranslation()
 
@@ -567,6 +568,12 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
     setSendSuccess(await sendAnswers())
 
     setShowStatusModal(true)
+
+    addSnackbar({
+      message: 'Hello',
+      severity: 'error',
+      autoHideDuration: 5000
+    })
   }
 
   const handleModalClose = () => {
