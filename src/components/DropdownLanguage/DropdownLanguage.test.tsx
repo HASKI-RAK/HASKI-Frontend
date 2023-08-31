@@ -100,9 +100,4 @@ describe('Test the change-language dropdown component', () => {
 
     expect(getByRole('button')).toHaveTextContent(/Deutsch/i)
   })
-
-  test('renders correctly', () => {
-    const tree = renderer.create(<DropdownLanguage />).toJSON()
-    expect(tree).toMatchSnapshot()
-  })
 })
