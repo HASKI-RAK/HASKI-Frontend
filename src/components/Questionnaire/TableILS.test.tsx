@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 import TableILS, { ILSInterpretation, getILSParameters, ILSDimension } from './TableILS'
 import { render } from '@testing-library/react'
-import React from 'react'
 
 //we have to mock react-i18next otherwise a warning will appear
 //"You will need pass in an i18next instance by using initReactI18next" => mock is needed.

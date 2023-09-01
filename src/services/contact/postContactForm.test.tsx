@@ -20,6 +20,7 @@ describe('postContactForm', () => {
   }
   it('should return contact success with default params', async () => {
     const contactStatus = await postContactForm(testData, 1, 1)
-    expect(contactStatus).toEqual(Promise.resolve)
+    expect(contactStatus).toEqual(Promise.resolve<Response>)
+    expect(contactStatus.status).toEqual(undefined)
   })
 })

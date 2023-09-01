@@ -213,9 +213,7 @@ const mockDataServices: MockDataServices = {
       ]
     })
   }),
-  postContactForm: jest.fn(() => {
-    return Promise.resolve
-  }),
+  postContactForm: jest.fn(() => Promise.resolve({ status: undefined })),
   postLogin: jest.fn(() => {
     return Promise.resolve({
       expiration: 999999999999999

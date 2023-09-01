@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 import GraphListK, { useData } from './GraphListK'
 import { fireEvent, render } from '@testing-library/react'
-import React from 'react'
 import { getListKParameters } from './TableListK'
 
 // Mocking the resize observer to prevent errors in the tests
