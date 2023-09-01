@@ -1,11 +1,11 @@
 import { AuthContext } from '@services'
 import { MemoryRouter } from 'react-router-dom'
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor, screen } from '@testing-library/react'
 import Course from './Course'
 import * as router from 'react-router'
+import { act } from 'react-test-renderer'
 
 const navigate = jest.fn()
-
 jest.useFakeTimers()
 
 describe('Course', () => {
@@ -27,7 +27,7 @@ describe('Course', () => {
   })
 
   it('renders course page with topics, clicking on first topic', async () => {
-    const { getByText } = render(
+    const { getAllByRole } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Course />
@@ -36,12 +36,14 @@ describe('Course', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('Wirtschaftsinformatik'))
+      fireEvent.click(getAllByRole('button')[0])
     })
+
+    expect(navigate).toHaveBeenCalledWith('topic/1')
   })
 
   it('renders course page with topics, clicking on second topic', async () => {
-    const { getByText } = render(
+    const { getAllByRole } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Course />
@@ -50,8 +52,10 @@ describe('Course', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('Informatik'))
+      fireEvent.click(getAllByRole('button')[1])
     })
+
+    expect(navigate).toHaveBeenCalledWith('topic/2')
   })
 
   it('renders course page, clicking button navigates to topic page', async () => {

@@ -6,8 +6,8 @@ import Router, { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
 import { useTopic } from './Topic.hooks'
 import Topic from './Topic'
-const { AuthContext } = jest.requireActual('@services')
 
+const { AuthContext } = jest.requireActual('@services')
 const navigate = jest.fn()
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')
@@ -67,11 +67,12 @@ describe('Topic Page', () => {
   })
 
   test('fetchUser failed', async () => {
-    const mockgetUser = jest.fn(() => {
-      return Promise.reject(new Error('getUser failed'))
-    })
+    const mockGetUser = jest.fn(() => 
+      Promise.reject(new Error('getUser failed'))
+    )
+    mockServices.getUser.mockImplementationOnce(mockGetUser)
+
     act(() => {
-      mockServices.getUser.mockImplementationOnce(mockgetUser)
       render(
         <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -81,16 +82,17 @@ describe('Topic Page', () => {
       )
     })
     await waitFor(() => {
-      expect(mockgetUser).toHaveBeenCalledTimes(1)
+      expect(mockGetUser).toHaveBeenCalledTimes(1)
     })
   })
 
   test('fetchLearningPathElement failed', async () => {
-    const mockgetLearningPathElement = jest.fn(() => {
-      return Promise.reject(new Error('getLearningPathElement failed'))
-    })
-    act(() => {
-      mockServices.getLearningPathElement.mockImplementationOnce(mockgetLearningPathElement)
+    const mockGetLearningPathElement = jest.fn(() => 
+      Promise.reject(new Error('getLearningPathElement failed'))
+      )
+      mockServices.getLearningPathElement.mockImplementationOnce(mockGetLearningPathElement)
+    
+      act(() => {
       render(
         <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -99,8 +101,9 @@ describe('Topic Page', () => {
         </MemoryRouter>
       )
     })
+    
     await waitFor(() => {
-      expect(mockgetLearningPathElement).toHaveBeenCalledTimes(1)
+      expect(mockGetLearningPathElement).toHaveBeenCalledTimes(1)
     })
   })
 

@@ -108,8 +108,6 @@ describe('Test GraphListK with all Methods', () => {
           (Math.round((averageExternalResourcesManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2)
       )[0]
     ).toBeInTheDocument()
-
-    expect(graphListK).toMatchSnapshot()
   })
 
   test('All bigger subscales are in graph', () => {

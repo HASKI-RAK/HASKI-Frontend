@@ -14,9 +14,9 @@ describe('Login Page', () => {
   })
 
   test('should render the login page but throw an error when the backend fails', () => {
-    const mock = jest.fn(() => {
-      return Promise.reject(new Error('login failed'))
-    })
+    const mock = jest.fn(() => 
+      Promise.reject(new Error('login failed'))
+    )
     mockServices.postLogin.mockImplementationOnce(mock)
 
     render(
@@ -113,9 +113,9 @@ describe('Login Page', () => {
       writable: true
     })
     window.location.replace = jest.fn()
-    const mock = jest.fn(() => {
-      return Promise.reject(new Error('moodel login failed'))
-    })
+    const mock = jest.fn(() => 
+      Promise.reject(new Error('moodel login failed'))
+    )
     mockServices.redirectMoodleLogin.mockImplementationOnce(mock)
 
     const login = render(
@@ -174,9 +174,9 @@ describe('Login Page', () => {
   })
 
   test('the hook should redirect to /login when a nonce is supplied as search params and unauthorized', () => {
-    const mock = jest.fn(() => {
-      return Promise.reject(new Error('unauthorized'))
-    })
+    const mock = jest.fn(() => 
+      Promise.reject(new Error('unauthorized'))
+    )
     mockServices.postLogin.mockImplementationOnce(mock)
     const login = render(
       <MemoryRouter initialEntries={['?nonce=123']}>
