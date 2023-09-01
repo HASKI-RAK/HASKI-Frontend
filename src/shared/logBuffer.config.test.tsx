@@ -57,7 +57,7 @@ describe('localStorage already set', () => {
     log.trace('')
     log.warn('')
     log.error('')
-    
+
     // TODO: Find a better way to check if logBuffer is doing what it is supposed to do.
     expect(localStorage.getItem('ringBufferContent')).toEqual(undefined)
   })

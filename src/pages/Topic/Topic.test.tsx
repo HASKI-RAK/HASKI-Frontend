@@ -67,9 +67,7 @@ describe('Topic Page', () => {
   })
 
   test('fetchUser failed', async () => {
-    const mockGetUser = jest.fn(() => 
-      Promise.reject(new Error('getUser failed'))
-    )
+    const mockGetUser = jest.fn(() => Promise.reject(new Error('getUser failed')))
     mockServices.getUser.mockImplementationOnce(mockGetUser)
 
     act(() => {
@@ -87,12 +85,10 @@ describe('Topic Page', () => {
   })
 
   test('fetchLearningPathElement failed', async () => {
-    const mockGetLearningPathElement = jest.fn(() => 
-      Promise.reject(new Error('getLearningPathElement failed'))
-      )
-      mockServices.getLearningPathElement.mockImplementationOnce(mockGetLearningPathElement)
-    
-      act(() => {
+    const mockGetLearningPathElement = jest.fn(() => Promise.reject(new Error('getLearningPathElement failed')))
+    mockServices.getLearningPathElement.mockImplementationOnce(mockGetLearningPathElement)
+
+    act(() => {
       render(
         <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -101,7 +97,7 @@ describe('Topic Page', () => {
         </MemoryRouter>
       )
     })
-    
+
     await waitFor(() => {
       expect(mockGetLearningPathElement).toHaveBeenCalledTimes(1)
     })

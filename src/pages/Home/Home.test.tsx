@@ -57,9 +57,7 @@ describe('Test the Home page', () => {
   })
 
   test('fetching User throws error', async () => {
-    mockServices.getUser = jest.fn().mockImplementationOnce(() => 
-      new Error('Error')
-    )
+    mockServices.getUser = jest.fn().mockImplementationOnce(() => new Error('Error'))
 
     jest.spyOn(console, 'error').mockImplementation(() => {
       return
@@ -79,9 +77,7 @@ describe('Test the Home page', () => {
   })
 
   test('fetching Course throws error', async () => {
-    mockServices.getCourses = jest.fn().mockImplementationOnce(() => 
-      new Error('Error')
-    )
+    mockServices.getCourses = jest.fn().mockImplementationOnce(() => new Error('Error'))
 
     jest.spyOn(console, 'error').mockImplementation(() => {
       return
@@ -101,8 +97,8 @@ describe('Test the Home page', () => {
   })
 
   test('fetching Course returns no courses', async () => {
-    mockServices.getCourses = jest.fn().mockImplementationOnce(() => 
-       Promise.resolve({
+    mockServices.getCourses = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
         courses: []
       })
     )

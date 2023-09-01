@@ -102,9 +102,7 @@ describe('Test AuthProvider', () => {
 
   it('should throw an error if logout fails', async () => {
     // Here we override the mockServices.getLogout function to throw an error
-    mockServices.getLogout = jest.fn().mockImplementationOnce(() => 
-      Promise.reject(new Error('logout failed'))
-    )
+    mockServices.getLogout = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('logout failed')))
     const { result } = renderHook(() => useAuthProvider())
     act(() => {
       result.current.setExpire(9999999999) // if this test fails, how did react js even survive this long?
@@ -116,9 +114,7 @@ describe('Test AuthProvider', () => {
 
   it('should work again', async () => {
     // TODO: mockImplementationOnce of previous test is somehow still in effect and can't be restored with restoreAllMocks.
-    mockServices.getLogout = jest.fn().mockImplementationOnce(() => 
-      Promise.resolve()
-    )
+    mockServices.getLogout = jest.fn().mockImplementationOnce(() => Promise.resolve())
 
     const { result } = renderHook(() => useAuthProvider())
     act(() => {

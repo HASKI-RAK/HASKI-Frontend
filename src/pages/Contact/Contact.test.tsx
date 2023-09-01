@@ -32,7 +32,7 @@ const mockSnackbarContext: SnackbarContextType = {
   }
 }
 
-/** 
+/**
  * useTranslation mocks the translation and also mocks the map input of reportTypes and topics,
  * input isnt important here.
  * global.fetch mocks the fetch function, which is used in the onSubmitHandler function in Contact.hooks.tsx
@@ -170,9 +170,8 @@ describe('Test on submit Function', () => {
 
     const onSubmit = result.result.current
 
-    mockServices.getUser = jest.fn().mockImplementationOnce(() => 
-     Promise.reject(new Error('get User failed')))
-    
+    mockServices.getUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('get User failed')))
+
     await act(async () => {
       onSubmit.onSubmitHandler(testData)
 

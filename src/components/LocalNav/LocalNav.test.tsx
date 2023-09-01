@@ -334,7 +334,14 @@ describe('getSortedLearningPath works as expected', () => {
     const mockLmsUserId = 1
     const mockStudentId = 1
 
-    const result = await getSortedLearningPath(mockUserId, mockLmsUserId, mockStudentId, mockTopic, '2', mockFetchLearningPathElement)
+    const result = await getSortedLearningPath(
+      mockUserId,
+      mockLmsUserId,
+      mockStudentId,
+      mockTopic,
+      '2',
+      mockFetchLearningPathElement
+    )
     expect(result).toEqual({
       id: 99999,
       course_id: 99999,
@@ -368,7 +375,13 @@ describe('getSortedLearningPath works as expected', () => {
         }
       ]
     })
-    expect(mockFetchLearningPathElement).toHaveBeenCalledWith(mockUserId, mockLmsUserId, mockStudentId, '2', mockTopic.id.toString())
+    expect(mockFetchLearningPathElement).toHaveBeenCalledWith(
+      mockUserId,
+      mockLmsUserId,
+      mockStudentId,
+      '2',
+      mockTopic.id.toString()
+    )
   })
 
   test('fetches learning path topics and returns the loading state', async () => {
@@ -550,9 +563,9 @@ describe('useLearningPathTopic', () => {
   })
 
   test('fetch learningPathTopics fails', async () => {
-    mockServices.getLearningPathTopic = jest.fn().mockImplementationOnce(() =>
-      Promise.reject(new Error('getLearningPathTopic failed'))
-    )
+    mockServices.getLearningPathTopic = jest
+      .fn()
+      .mockImplementationOnce(() => Promise.reject(new Error('getLearningPathTopic failed')))
 
     act(() => {
       const { result } = renderHook(() => useLearningPathTopic('2'))
@@ -581,9 +594,9 @@ describe('useLearningPathTopic', () => {
         visits: ['string']
       }
     }
-    mockServices.getLearningPathElement = jest.fn().mockImplementationOnce(() => 
-      Promise.reject(new Error('getLearningPathElement failed'))
-    )
+    mockServices.getLearningPathElement = jest
+      .fn()
+      .mockImplementationOnce(() => Promise.reject(new Error('getLearningPathElement failed')))
 
     act(() => {
       const { result } = renderHook(() => useLearningPathElement(mockTopic, '2'))
