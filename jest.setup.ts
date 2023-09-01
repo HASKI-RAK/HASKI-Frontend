@@ -25,8 +25,8 @@ type MockDataServices = {
  */
 const mockDataServices: MockDataServices = {
   getLogout: jest.fn(() => Promise.resolve()),
-  postLoginCredentials: jest.fn(() => {
-    return Promise.resolve({
+  postLoginCredentials: jest.fn(() =>
+    Promise.resolve({
       id: 1,
       lms_user_id: 1,
       name: 'Thaddäus Tentakel',
@@ -40,9 +40,9 @@ const mockDataServices: MockDataServices = {
       },
       university: 'HS Kempten'
     })
-  }),
-  getUser: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  getUser: jest.fn(() =>
+    Promise.resolve({
       id: 1,
       lms_user_id: 1,
       name: 'Thaddäus Tentakel',
@@ -56,9 +56,9 @@ const mockDataServices: MockDataServices = {
       },
       university: 'HS Kempten'
     })
-  }),
-  getLearningPathElement: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  getLearningPathElement: jest.fn(() =>
+    Promise.resolve({
       id: 1,
       course_id: 2,
       based_on: 'string',
@@ -166,9 +166,9 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
-  }),
-  getLearningPathTopic: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  getLearningPathTopic: jest.fn(() =>
+    Promise.resolve({
       topics: [
         {
           contains_le: true,
@@ -212,20 +212,20 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
-  }),
+  ),
   postContactForm: jest.fn(() => Promise.resolve({ status: undefined })),
-  postLogin: jest.fn(() => {
-    return Promise.resolve({
+  postLogin: jest.fn(() =>
+    Promise.resolve({
       expiration: 999999999999999
     })
-  }),
-  redirectMoodleLogin: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  redirectMoodleLogin: jest.fn(() =>
+    Promise.resolve({
       lti_launch_view: 'test'
     })
-  }),
-  getCourses: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  getCourses: jest.fn(() =>
+    Promise.resolve({
       courses: [
         {
           id: 1,
@@ -247,7 +247,7 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
-  })
+  )
 }
 /**
  * This object is used to store mocks. After each test, the object is cleaned up.
