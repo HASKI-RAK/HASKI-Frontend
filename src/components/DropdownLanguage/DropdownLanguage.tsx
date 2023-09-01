@@ -1,5 +1,5 @@
 ﻿import { useTranslation } from 'react-i18next'
-import { DefaultSelect as Select, DefaultMenuItem as MenuItem } from '@common/components'
+import { Select, MenuItem } from '@common/components'
 import { ForwardedRef, forwardRef } from 'react'
 import log from 'loglevel'
 

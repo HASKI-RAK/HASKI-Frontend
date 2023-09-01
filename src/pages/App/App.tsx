@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { DefaultThemeProvider as ThemeProvider } from '@common/components'
+import { ThemeProvider } from '@common/theme'
 import {
   MainFrame,
   Home,

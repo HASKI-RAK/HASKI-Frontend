@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { DefaultLink as Link, DefaultSkeleton as Skeleton, DefaultTypography as Typography } from '@common/components'
+import { Link, Skeleton, Typography } from '@common/components'
 import { useLearningPathElement as _useLearningPathElement } from './LocalNav.hooks'
 import { LearningPathElement, Topic } from '@core'
 

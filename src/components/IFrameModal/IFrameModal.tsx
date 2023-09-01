@@ -1,4 +1,4 @@
-import { DefaultBox as Box, DefaultModal as Modal } from '@common/components'
+import { Box, Modal } from '@common/components'
 import { memo } from 'react'
 
 const style_box = {

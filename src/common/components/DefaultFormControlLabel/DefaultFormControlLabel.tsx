@@ -1,1 +1,2 @@
-export { FormControlLabel as DefaultFormControlLabel } from '@mui/material'
+import DefaultFormControlLabel from '@mui/material/FormControlLabel'
+export { DefaultFormControlLabel as FormControlLabel }

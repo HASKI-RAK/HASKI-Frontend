@@ -1,1 +1,2 @@
-export { Modal as DefaultModal } from '@mui/material'
+import DefaultModal from '@mui/material/Modal'
+export { DefaultModal as Modal }

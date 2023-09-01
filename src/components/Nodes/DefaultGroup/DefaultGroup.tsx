@@ -1,4 +1,4 @@
-import { DefaultTypography as Typography } from '@common/components'
+import { Typography } from '@common/components'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
 

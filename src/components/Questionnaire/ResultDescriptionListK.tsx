@@ -1,4 +1,4 @@
-import { DefaultTypography as Typography } from '@common/components'
+import { Typography } from '@common/components'
 import { getListKParameters, getSubscaleScore } from './TableListK'
 import { useTranslation } from 'react-i18next'
 

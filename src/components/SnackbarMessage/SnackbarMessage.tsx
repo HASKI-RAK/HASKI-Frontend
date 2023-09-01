@@ -1,4 +1,4 @@
-import { DefaultAlert as Alert, DefaultTypography as Typography } from '@common/components'
+import { Alert, Typography } from '@common/components'
 import { useState, useCallback, useEffect, useContext } from 'react'
 import { SnackbarTransition } from '@components'
 import { useTranslation } from 'react-i18next'

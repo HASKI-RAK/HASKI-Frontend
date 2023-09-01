@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { DefaultSkeleton as Skeleton } from '@common/components'
+import { Skeleton } from '@common/components'
 import { LoginForm } from '@components'
 import { useLogin as _useLogin, LoginHookParams, LoginHookReturn } from './Login.hooks'
 
