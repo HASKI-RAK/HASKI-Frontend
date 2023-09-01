@@ -1,5 +1,4 @@
-﻿import renderer from 'react-test-renderer'
-import '@testing-library/jest-dom'
+﻿import '@testing-library/jest-dom'
 import { DropdownLanguage } from '@components'
 import { fireEvent, render, act } from '@testing-library/react'
 import { I18nextProvider } from 'react-i18next'
