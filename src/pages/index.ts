@@ -12,7 +12,7 @@ import MainFrame from './MainFrame/MainFrame'
 import ProjectDescription from './ProjectDescription/ProjectDescription'
 import ProjectInformation from './ProjectInformation/ProjectInformation'
 import Imprint from './Imprint/Imprint'
-import { PrivacyModal } from './App/PrivacyModal'
+import PrivacyModal  from './App/PrivacyModal'
 export {
   MainFrame,
   App,
