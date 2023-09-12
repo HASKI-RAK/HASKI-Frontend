@@ -6,7 +6,6 @@ import {
   PrivacyModalHookReturn
 } from './PrivacyModal.hooks'
 import React from 'react'
-import { useCookies } from 'react-cookie'
 //Privacy policy modal
 //gibt die privacy policy an, die akzeptiert werden muss
 //cookie abfrage schon gesehen? nein->anzeigen
@@ -29,14 +28,13 @@ const style = {
   display: 'flex'
 }
 export type PrivacyModalProps = {
-  onAccept?: () => void
-  isLoading?: boolean
   usePrivacyModal?: (props: PrivacyModalHookProps) => PrivacyModalHookReturn
 }
-const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal, ...props }: PrivacyModalProps) => {
+const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps) => {
   const [open, setOpen] = React.useState(true)
   const [checked, setCheck] = React.useState(false)
-  const [cookies, setCookie] = useCookies(['privacy_accept_token'])
+  const [isLoading, setIsLoading] = React.useState(false)
+  const { onAcceptHandler } = usePrivacyModal({ setIsLoading })
 
   //Lässt sich nicht einfach wegklicken
   const handleClose = (event: any, reason: string) => {
@@ -48,16 +46,12 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal, ...props }: PrivacyM
     setCheck(event.target.checked)
   }
   const handleAccept = () => {
+    onAcceptHandler(true)
     setOpen(false)
-    setCookie('privacy_accept_token', true, { path: '/' })
-    document.cookie = setCookie.name
-    accept()
   }
   const handleDecline = () => {
+    onAcceptHandler(false)
     setOpen(false)
-    setCookie('privacy_accept_token', false, { path: '/' })
-    document.cookie = setCookie.name
-    accept()
   }
   //nichts laden wenn auf privacypolicy oder wenn cookie gesetzt
   if (document.cookie.includes('privacy_accept_token')) {

@@ -1,8 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { Box, Divider, Typography, Stack, Grid, Container } from '@common/components'
-import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from '@components'
-import PrivacyModal from '../App/PrivacyModal'
-import { Cookies } from 'react-cookie'
+import { MenuBar, Footer, BreadcrumbsContainer, LocalNav, PrivacyModal } from '@components'
+
 /**
  * Main frame component.
  *

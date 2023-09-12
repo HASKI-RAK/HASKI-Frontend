@@ -22,6 +22,7 @@ import ProjectDescriptionStepper from './ProjectDescriptionStepper/ProjectDescri
 import SnackbarMessage, { SnackbarMessageProps, SeverityType } from './SnackbarMessage/SnackbarMessage'
 import SnackbarContainer from './SnackbarContainer/SnackbarContainer'
 import SnackbarTransition from './SnackbarTransition/SnackbarTransition'
+import PrivacyModal from './PrivacyModal/PrivacyModal'
 /**
  * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
  */
@@ -48,6 +49,7 @@ export {
   ProjectDescriptionCard,
   ProjectDescriptionStepper,
   SnackbarTransition,
-  ImprintContent
+  ImprintContent,
+  PrivacyModal
 }
 export type { SnackbarMessageProps, SeverityType }
