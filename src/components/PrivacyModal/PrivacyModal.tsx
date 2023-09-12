@@ -5,6 +5,7 @@ import {
   PrivacyModalHookProps,
   PrivacyModalHookReturn
 } from './PrivacyModal.hooks'
+import { useTranslation } from 'react-i18next'
 import React from 'react'
 //Privacy policy modal
 //gibt die privacy policy an, die akzeptiert werden muss
@@ -31,19 +32,20 @@ export type PrivacyModalProps = {
   usePrivacyModal?: (props: PrivacyModalHookProps) => PrivacyModalHookReturn
 }
 const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps) => {
+  const { t } = useTranslation()
   const [open, setOpen] = React.useState(true)
   const [checked, setCheck] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
   const { onAcceptHandler } = usePrivacyModal({ setIsLoading })
 
   //Lässt sich nicht einfach wegklicken
-  const handleClose = (event: any, reason: string) => {
+  const handleClose = (reason: string) => {
     if (reason && reason == 'backdropClick') return
     setOpen(false)
   }
   //Accept lässt sich klicken sobald die checkbox geklickt ist
-  const handleChecked = (event: any) => {
-    setCheck(event.target.checked)
+  const handleChecked = (event: React.MouseEvent<HTMLElement>) => {
+    setCheck((event.target as HTMLInputElement).checked)
   }
   const handleAccept = () => {
     onAcceptHandler(true)
@@ -69,16 +71,16 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
       closeAfterTransition>
       <Box sx={style}>
         <Typography id="transition-modal-title" variant="h4" component="h2">
-          Terms of service and Privacy Policy
+          {t('components.PrivacyModal.TermsofService')}
           <Typography id="modal-text" variant="h6" component="h2">
-            After reading please accept:
+            {t('components.PrivacyModal.afterReading')}
             <FormGroup>
               <FormControlLabel
                 onClick={handleChecked}
                 control={<Checkbox />}
                 label={
                   <div>
-                    Agree&nbsp;
+                    {t('agree')}&nbsp;
                     <Link href="privacypolicy" underline="none">
                       Privacy Policy
                     </Link>
@@ -89,10 +91,10 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
             </FormGroup>
           </Typography>
           <Button variant={'contained'} sx={{ alignSelf: 'start' }} onClick={handleDecline}>
-            Decline
+            {t('decline')}
           </Button>
           <Button variant={'contained'} sx={{ alignSelf: 'end' }} disabled={!checked} onClick={handleAccept}>
-            Accept
+            {t('accept')}
           </Button>
         </Typography>
       </Box>

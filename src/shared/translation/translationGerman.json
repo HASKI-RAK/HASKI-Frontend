@@ -603,5 +603,12 @@
   "tooltip.openGlobalSettings": "Globale Einstellungen",
   "tooltip.openSettings": "Einstellungen",
   "update": "Aktualisieren",
-  "warning": "Warnung"
+  "warning": "Warnung",
+  "accept": "Akzeptieren",
+  "decline": "Ablehnen",
+  "agree": "Zustimmen",
+  "components.PrivacyModal.afterReading": "Nach dem Lesen bitte akzeptieren:",
+  "components.PrivacyModal.TermsofService": "Datenschutzerklärung und ",
+  "components.PrivacyModal.accepted": "Danke für dein Vertrauen. Daten für eine bessere Lernerfahrung werden jetzt gesammelt.",
+  "components.PrivacyModal.declined": "Daten werden nicht gesammelt. Solltest du deine Meinung ändern schau in die Einstellungen."
 }

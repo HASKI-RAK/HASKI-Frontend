@@ -17,7 +17,7 @@ export const usePrivacyModal = ({ setIsLoading }: PrivacyModalHookProps): Privac
     if (isAccepted) {
       setCookie('privacy_accept_token', true, { path: '/' })
       addSnackbar({
-        message: t('pages.Contact.success'),
+        message: t('components.PrivacyModal.accepted'),
         severity: 'success'
       })
     } else if (!isAccepted) {
@@ -25,7 +25,7 @@ export const usePrivacyModal = ({ setIsLoading }: PrivacyModalHookProps): Privac
       tomorrow.setDate(tomorrow.getDate() + 1)
       setCookie('privacy_accept_token', false, { path: '/', expires: tomorrow })
       addSnackbar({
-        message: t('pages.Contact.success'),
+        message: t('components.PrivacyModal.declined'),
         severity: 'success'
       })
     } else {
