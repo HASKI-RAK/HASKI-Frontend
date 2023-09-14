@@ -1,8 +1,10 @@
+![Documentation Coverage Status](https://wiki.haski.app/coverage.svg)
+
 # HASKI-Frontend
 
-The bridge between AI backend models and LMS, wrapped in a web application.
+The bridge between AI backend models and a Learning Management System (LMS), wrapped nicely as a web application 🎁.
 
-The complete **technical documentation** can be found [here](https://github.com/HASKI-RAK/HASKI-Frontend/wiki/Modules).
+The complete **technical documentation** can be found [here](https://wiki.haski.app).
 
 ## Setup
 
@@ -10,19 +12,19 @@ The complete **technical documentation** can be found [here](https://github.com/
 - If you choose to use yarn as a package manager, install it globally via `npm install --global yarn`, otherwise use the `npm` equivalents in the following steps.
 - Navigate into the root project directory, where `package.json` lays.
 - Install the project dependencies via `yarn install`
-- Add a .env.development file
-- For production add a .env.development file
+- Modify the `.env.development` or `.env.production file` to your needs (see below).
 
 ### .env files
 
-The content of the .env.development or .env.production file gets injected at build time. The values will not be available at runtime. The .env file is not tracked by git.
+The content of the `.env.development` or `.env.production` file gets injected at build time. The values will not be available at runtime. The .env file is not tracked by git.
 
 ```sh
 # API
-# Change the backend url to the correct one
+# Change the urls
 BACKEND="http://fakedomain.com:5000"
 MOODLE="http://fakedomain.com"
-LOG_LEVEL="debug"
+LOG_LEVEL="debug" # or info, warn, error
+NODE_ENV="development" # or production
 ```
 
 ### Scripts
@@ -39,6 +41,22 @@ LOG_LEVEL="debug"
 - Run docker image: `docker run -p 8080:80 haski-frontend:latest`
 
 ## Development
+
+### Documentation
+
+The documentation is located in the [wiki](https://wiki.haski.app). The project is structured in the following way:
+
+- [Common](https://wiki.haski.app/modules/common)
+- [Components](https://wiki.haski.app/modules/components)
+- [Core](https://wiki.haski.app/modules/core)
+- [Pages](https://wiki.haski.app/modules/pages)
+- [Services](https://wiki.haski.app/modules/services)
+- [Shared](https://wiki.haski.app/modules/shared)
+- [Store](https://wiki.haski.app/modules/store)
+
+### Architecture
+
+The frontend is built with [React](https://reactjs.org/), a JavaScript library for building user interfaces. It is bootstrapped with [Create React App](
 
 ### Code style
 

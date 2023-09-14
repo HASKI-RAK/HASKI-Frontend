@@ -1,7 +1,7 @@
-import { DefaultBox as Box, DefaultPaper as Paper, DefaultTypography as Typography } from '@common/components'
+import { Box, Paper, Typography } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
-import ArticleIcon from '@mui/icons-material/Article' // TODO: DI
+import { Article } from '@common/icons'
 import { memo } from 'react'
 
 /**
@@ -30,7 +30,7 @@ const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElemen
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <ArticleIcon sx={{ fontSize: 50 }} />
+        <Article sx={{ fontSize: 50 }} />
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}

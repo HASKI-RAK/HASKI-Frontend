@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { useData, GraphListK } from './GraphListK'
+import GraphListK, { useData } from './GraphListK'
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 

@@ -1,5 +1,4 @@
-import { createTheme } from '@mui/material/styles'
-import { yellow, red } from '@mui/material/colors'
+import { createTheme, yellow, red } from '@common/theme'
 
 export const defaultBehavior = {
   boxShadowSize: {
@@ -69,6 +68,19 @@ export const HaskiTheme = createTheme({
 
   components: {
     // Name of the component
+    MuiFormHelperText: {
+      defaultProps: {
+        color: defaultColors.primary[300]
+      },
+      styleOverrides: {
+        root: {
+          color: 'red'
+        },
+        filled: {
+          color: 'red'
+        }
+      }
+    },
     MuiPaper: {
       // Name of the rule
       styleOverrides: {

@@ -1,1 +1,2 @@
-export { Stepper as DefaultStepper } from '@mui/material'
+import DefaultStepper from '@mui/material/Stepper'
+export { DefaultStepper as Stepper }

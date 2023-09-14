@@ -349,7 +349,7 @@ type GraphListKProps = {
   data: ListK
 }
 
-export const GraphListK = ({ data }: GraphListKProps) => {
+const GraphListK = ({ data }: GraphListKProps) => {
   const { t } = useTranslation()
 
   const organize = data.org
@@ -540,3 +540,5 @@ export const GraphListK = ({ data }: GraphListKProps) => {
     </div>
   )
 }
+
+export default GraphListK

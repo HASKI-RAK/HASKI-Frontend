@@ -1,6 +1,5 @@
-import { styled } from '@mui/material/styles'
-import TableCell, { tableCellClasses } from '@mui/material/TableCell'
-import TableRow from '@mui/material/TableRow'
+import { TableCell, TableRow, tableCellClasses } from '@common/components'
+import { styled } from '@common/theme'
 
 export const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {

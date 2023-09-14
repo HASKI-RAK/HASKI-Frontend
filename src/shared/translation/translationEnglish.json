@@ -3,6 +3,56 @@
   "and": "and",
   "Back": "Back",
   "CloseWebsite": "Your changes might not be saved.",
+  "components.ContactForm.briefDescription": "Give a brief description of your request",
+  "components.ContactForm.contactform": "Contactform",
+  "components.ContactForm.design": "Design",
+  "components.ContactForm.error": "Missing description. Please write something.",
+  "components.ContactForm.errorSelect": "Missing topic. Please select something.",
+  "components.ContactForm.learningelement": "Learningelement",
+  "components.ContactForm.reportType": "Reporttype",
+  "components.ContactForm.submit": "Submit",
+  "components.ContactForm.submitError": "The submit function has been called and an error occurred.",
+  "components.ContactForm.topics": [
+    {
+      "value": "le",
+      "label": "Learningelement"
+    },
+    {
+      "value": "ui",
+      "label": "UI"
+    },
+    {
+      "value": "design",
+      "label": "Design"
+    },
+    {
+      "value": "other",
+      "label": "other"
+    }
+  ],
+  "components.ContactForm.types": [
+    {
+      "value": "issue",
+      "label": "issue"
+    },
+    {
+      "value": "bug",
+      "label": "bug"
+    },
+    {
+      "value": "feedback",
+      "label": "feedback"
+    },
+    {
+      "value": "feature",
+      "label": "feature"
+    },
+    {
+      "value": "other",
+      "label": "other"
+    }
+  ],
+  "components.ContactForm.ui": "UI",
   "components.Course.Button.Topic": "Continue to topic",
   "components.Home.Button.Course": "Continue to course",
   "components.Home.NoCourses": "No courses found",
@@ -397,6 +447,7 @@
   "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && literatureResearch Below3.Title": "Time and literature research have a value below 3",
   "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently not taking enough time for your learning. It would probably have a positive effect if you tried to create clear learning periods for yourself in order to make your learning more effective.",
   "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time Below3.Title": "Time has a value below 3",
+  "contact": "Contact",
   "delete": "Deleted",
   "Dot": ".",
   "DSGVO": "GDPR",
@@ -429,6 +480,8 @@
   "pages.8": "8",
   "pages.9": "9",
   "pages.contact": "Contact",
+  "pages.Contact.error": "An error occurred while sending your feedback. Please try again later.",
+  "pages.Contact.success": "Your feedback has been sent successfully.",
   "pages.course": "Course",
   "pages.glossary": "Glossary",
   "pages.glossary.collapseAll": "Collapse All",
@@ -825,6 +878,7 @@
   "tooltip.openGlobalSettings": "Open global settings",
   "tooltip.openQuestionnaireResults": "Learningtype",
   "tooltip.openSettings": "Open settings",
+  "topic": "Topic",
   "universityKempten": "University of Applied Sciences Kempten",
   "update": "Updated",
   "warning": "Warning"

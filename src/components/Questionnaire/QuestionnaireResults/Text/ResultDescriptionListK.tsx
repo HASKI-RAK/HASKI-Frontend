@@ -1,4 +1,4 @@
-import Typography from '@mui/material/Typography'
+import { Typography } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { ListK } from '@core'
 
@@ -217,7 +217,7 @@ type ResultDescriptionListKProps = {
   data: ListK
 }
 
-export const ResultDescriptionListK = ({ data }: ResultDescriptionListKProps) => {
+const ResultDescriptionListK = ({ data }: ResultDescriptionListKProps) => {
   const organize = data.org
   const elaborate = data.elab
   const criticalReview = data.crit_rev
@@ -267,3 +267,5 @@ export const ResultDescriptionListK = ({ data }: ResultDescriptionListKProps) =>
     </div>
   )
 }
+
+export default ResultDescriptionListK

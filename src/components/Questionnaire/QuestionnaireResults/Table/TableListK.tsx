@@ -1,9 +1,11 @@
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
+import {
+    Table,
+    TableBody,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper } from '@common/components'
+
 import { useTranslation } from 'react-i18next'
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireResultTableStyle'
 import { ListK } from '@core'
@@ -27,7 +29,7 @@ type TableListKProps = {
   data: ListK
 }
 
-export const TableListK = ({ data }: TableListKProps) => {
+const TableListK = ({ data }: TableListKProps) => {
   const { t } = useTranslation()
 
   const organize = data.org
@@ -206,3 +208,5 @@ export const TableListK = ({ data }: TableListKProps) => {
     </TableContainer>
   )
 }
+
+export default TableListK

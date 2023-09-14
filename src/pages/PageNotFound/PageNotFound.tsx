@@ -112,8 +112,13 @@ const initialEdges: Edge[] = [
     }
   }
 ]
-
-const PageNotFound = () => {
+/**
+ * # PageNotFound Page
+ * Uses the {@link https://reactflow.dev/ | ReactFlow} library to display a flowchart.
+ * The flow chart is a decision tree that helps the user to find the right page in a fun way.
+ * @category Pages
+ */
+export const PageNotFound = () => {
   const [nodes, , onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
   const onConnect = useCallback((params: Edge | Connection) => setEdges((els) => addEdge(params, els)), [setEdges])

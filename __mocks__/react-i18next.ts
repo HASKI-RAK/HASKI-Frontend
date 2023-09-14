@@ -2,7 +2,22 @@ const reactI18Next: any = jest.createMockFromModule('react-i18next')
 
 const useTranslation = () => {
   return {
-    t: (str: string) => str,
+    t: (str: string) => {
+      switch (str) {
+        case 'components.ContactForm.types':
+          return [
+            { value: '1', label: 'issue' },
+            { value: '2', label: 'Something' }
+          ]
+        case 'components.ContactForm.topics':
+          return [
+            { value: '1', label: 'Learningelement' },
+            { value: '2', label: 'idk' }
+          ]
+        default:
+          return str
+      }
+    },
     i18n: {
       changeLanguage: () =>
         new Promise(() => {

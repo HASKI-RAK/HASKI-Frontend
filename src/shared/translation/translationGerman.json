@@ -3,6 +3,53 @@
   "and": "und",
   "Back": "Zurück",
   "CloseWebsite": "Deine Änderungen werden eventuell nicht gespeichert.",
+  "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
+  "components.ContactForm.contactform": "Kontaktformular",
+  "components.ContactForm.error": "Es fehlt eine Beschreibung.",
+  "components.ContactForm.errorSelect": "Es wurde kein Thema ausgewählt.",
+  "components.ContactForm.reportType": "Reporttyp",
+  "components.ContactForm.submit": "Abschicken",
+  "components.ContactForm.submitError": "Die submit funktion wurde aufgerufen, jedoch gab es einen Fehler.",
+  "components.ContactForm.topics": [
+    {
+      "value": "le",
+      "label": "Lernelement"
+    },
+    {
+      "value": "ui",
+      "label": "UI"
+    },
+    {
+      "value": "design",
+      "label": "Design"
+    },
+    {
+      "value": "other",
+      "label": "Sonstiges"
+    }
+  ],
+  "components.ContactForm.types": [
+    {
+      "value": "issue",
+      "label": "Problem"
+    },
+    {
+      "value": "bug",
+      "label": "Fehler"
+    },
+    {
+      "value": "feedback",
+      "label": "Bewertung"
+    },
+    {
+      "value": "feature",
+      "label": "Funktionalität"
+    },
+    {
+      "value": "other",
+      "label": "Sonstiges"
+    }
+  ],
   "components.Course.Button.Topic": "Weiter zum Thema",
   "components.Home.Button.Course": "Weiter zum Kurs",
   "components.Home.NoCourses": "Keine Kurse gefunden",
@@ -397,6 +444,7 @@
   "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && literatureResearch Below3.Title": "Zeit und Literaturrecherche haben einen Wert unter 3",
   "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time Below3.Description": "Im Hinblick auf Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es würde sich wahrscheinlich positiv auswirken, wenn Sie versuchen, sich klare Lernzeiträume zu schaffen, um Ihr Lernen effektiver zu gestalten.",
   "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time Below3.Title": "Zeit hat einen Wert unter 3",
+  "contact": "Kontakt",
   "delete": "Löschen",
   "Dot": ".",
   "DSGVO": "DSGVO",
@@ -429,6 +477,8 @@
   "pages.8": "8",
   "pages.9": "9",
   "pages.contact": "Kontakt",
+  "pages.Contact.error": "Ihr Feedback konnte nicht versendet werden.",
+  "pages.Contact.success": "Ihr Feedback wurde erfolgreich versendet.",
   "pages.course": "Kurs",
   "pages.glossary": "Glossar",
   "pages.glossary.collapseAll": "Alle schließen",
@@ -798,6 +848,7 @@
   "tooltip.openGlobalSettings": "Globale Einstellungen",
   "tooltip.openQuestionnaireResults": "Lerntyp",
   "tooltip.openSettings": "Einstellungen",
+  "topic": "Thema",
   "universityKempten": "Hochschule Kempten",
   "update": "Aktualisieren",
   "warning": "Warnung"

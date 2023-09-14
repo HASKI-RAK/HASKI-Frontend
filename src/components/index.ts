@@ -1,51 +1,28 @@
-import { DropdownLanguage } from './DropdownLanguage/DropdownLanguage'
-import { TableILS } from './Questionnaire/QuestionnaireResults/Table/TableILS'
-import { GraphILS } from './Questionnaire/QuestionnaireResults/Graph/GraphILS'
-import { ResultDescriptionILS } from './Questionnaire/QuestionnaireResults/Text/ResultDescriptionILS'
-import { TableListK } from './Questionnaire/QuestionnaireResults/Table/TableListK'
-import { GraphListK } from './Questionnaire/QuestionnaireResults/Graph/GraphListK'
-import { ResultDescriptionListK } from './Questionnaire/QuestionnaireResults/Text/ResultDescriptionListK'
-import { QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResults/Modal/QuestionnaireResultsModal'
-import LoginForm from './LoginForm/LoginForm'
-import MenuBar from './MenuBar/MenuBar'
-
-import Footer from './Footer/Footer'
-import LocalNav from './LocalNav/LocalNav'
-import BreadcrumbsContainer from './BreadcrumbsContainer/BreadcrumbsContainer'
-import ProjectDescriptionContent from './ProjectDescriptionContent/ProjectDescriptionContent'
-import ProjectDescriptionCard from './ProjectDescriptionCard/ProjectDescriptionCard'
-import ProjectDescriptionStepper from './ProjectDescriptionStepper/ProjectDescriptionStepper'
-import SnackbarMessage, { SnackbarMessageProps, SeverityType } from './SnackbarMessage/SnackbarMessage'
-import SnackbarContainer from './SnackbarContainer/SnackbarContainer'
-import SnackbarTransition from './SnackbarTransition/SnackbarTransition'
-import IFrameModal from './IFrameModal/IFrameModal'
-import SkeletonList from './SkeletonList/SkeletonList'
-/**
- * Unique components. Structure as follows: <componentname>/<componentname.tsx>, <componentname.test.tsx>, ...
- */
-
-export * from './Nodes'
+export { default as DropdownLanguage } from './DropdownLanguage/DropdownLanguage'
+export { default as TableILS } from './Questionnaire/QuestionnaireResults/Table/TableILS'
+export { default as GraphILS } from './Questionnaire/QuestionnaireResults/Graph/GraphILS'
+export { default as ResultDescriptionILS } from './Questionnaire/QuestionnaireResults/Text/ResultDescriptionILS'
+export { default as TableListK } from './Questionnaire/QuestionnaireResults/Table/TableListK'
+export { default as GraphListK } from './Questionnaire/QuestionnaireResults/Graph/GraphListK'
+export { default as ResultDescriptionListK } from './Questionnaire/QuestionnaireResults/Text/ResultDescriptionListK'
+export { default as QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResults/Modal/QuestionnaireResultsModal'
+export { default as LoginForm, type LoginFormProps } from './LoginForm/LoginForm'
+export { default as MenuBar } from './MenuBar/MenuBar'
+export { default as ContactForm, type ContactFormProps } from './ContactForm/ContactForm'
+export { default as Footer } from './Footer/Footer'
+export { default as LocalNav } from './LocalNav/LocalNav'
+export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
+export { default as ProjectDescriptionContent } from './ProjectDescriptionContent/ProjectDescriptionContent'
+export { default as ProjectDescriptionCard } from './ProjectDescriptionCard/ProjectDescriptionCard'
+export { default as ProjectDescriptionStepper } from './ProjectDescriptionStepper/ProjectDescriptionStepper'
 export {
-  BreadcrumbsContainer,
-  LocalNav,
-  MenuBar,
-  Footer,
-  DropdownLanguage,
-  LoginForm,
-  SnackbarMessage,
-  SnackbarContainer,
-  TableILS,
-  GraphILS,
-  ResultDescriptionILS,
-  TableListK,
-  GraphListK,
-  ResultDescriptionListK,
-  QuestionnaireResultsModal,
-  ProjectDescriptionContent,
-  ProjectDescriptionCard,
-  ProjectDescriptionStepper,
-  SnackbarTransition,
-  IFrameModal,
-  SkeletonList
-}
-export type { SnackbarMessageProps, SeverityType }
+  default as SnackbarMessage,
+  type SnackbarMessageProps,
+  type SeverityType
+} from './SnackbarMessage/SnackbarMessage'
+export { default as SnackbarContainer } from './SnackbarContainer/SnackbarContainer'
+export { default as SnackbarTransition } from './SnackbarTransition/SnackbarTransition'
+export { default as IFrameModal } from './IFrameModal/IFrameModal'
+export { default as SkeletonList } from './SkeletonList/SkeletonList'
+
+export * from './Nodes' // This stays as is because it's not following the Component/Component structure

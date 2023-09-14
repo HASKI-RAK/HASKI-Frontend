@@ -1,16 +1,10 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import {
-  DefaultContainer as Container,
-  DefaultBox as Box,
-  DefaultGrid as Grid,
-  DefaultLink as Link,
-  DefaultTypography as Typography
-} from '@common/components'
+import { Container, Box, Grid, Link, Typography } from '@common/components'
 
 /**
- * The footer component. *
+ * Sticks to the bottom of the page and is always visible.
  *
  * @remarks
  * It contains the footer of the application and is used in the main frame.

@@ -1,35 +1,24 @@
 /**
- * This file provides direct access to elements in the pages folder
+ * # Pages
+ * This file provides direct access to the pages.
+ * @remarks
+ * Its a barrel file.
+ * @module pages
  */
-import App from './App/App'
-import Home from './Home/Home'
-import Login from './Login/Login'
-import ThemePresentation from './ThemePresentation/ThemePresentation'
-import MainFrame from './MainFrame/MainFrame'
-import ProjectDescription from './ProjectDescription/ProjectDescription'
-import ProjectInformation from './ProjectInformation/ProjectInformation'
-import Imprint from './Imprint/Imprint'
-import Topic from './Topic/Topic'
-import Course from './Course/Course'
-import PageNotFound from './PageNotFound/PageNotFound'
-import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy'
-import QuestionnaireILSQuestionsLong from './QuestionnaireQuestions/QuestionnaireILSQuestionsLong'
-import QuestionnaireILSQuestionsShort from './QuestionnaireQuestions/QuestionnaireILSQuestionsShort'
-import QuestionnaireListKQuestions from './QuestionnaireQuestions/QuestionnaireListKQuestions'
-export {
-  MainFrame,
-  App,
-  ThemePresentation,
-  Home,
-  Login,
-  ProjectDescription,
-  ProjectInformation,
-  Imprint,
-  Topic,
-  Course,
-  PageNotFound,
-  PrivacyPolicy,
-  QuestionnaireILSQuestionsLong,
-  QuestionnaireILSQuestionsShort,
-  QuestionnaireListKQuestions
-}
+
+export * from './App/App'
+export * from './Home/Home'
+export * from './Login/Login'
+export * from './ThemePresentation/ThemePresentation'
+export * from './Contact/Contact'
+export * from './MainFrame/MainFrame'
+export * from './QuestionnaireQuestions/QuestionnaireILSQuestionsLong'
+export * from './QuestionnaireQuestions/QuestionnaireILSQuestionsShort'
+export * from './QuestionnaireQuestions/QuestionnaireListKQuestions'
+export * from './ProjectDescription/ProjectDescription'
+export * from './ProjectInformation/ProjectInformation'
+export * from './Imprint/Imprint'
+export * from './Topic/Topic'
+export * from './Course/Course'
+export * from './PageNotFound/PageNotFound'
+export * from './PrivacyPolicy/PrivacyPolicy'

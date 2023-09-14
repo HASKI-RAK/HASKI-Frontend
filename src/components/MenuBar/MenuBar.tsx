@@ -1,35 +1,44 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
-  DefaultAppBar as AppBar,
-  DefaultToolbar as Toolbar,
-  DefaultTypography as Typography,
-  DefaultBox as Box,
-  DefaultIconButton as IconButton,
-  DefaultMenu as Menu,
-  DefaultTooltip as Tooltip,
-  DefaultAvatar as Avatar,
-  DefaultMenuItem as MenuItem,
-  DefaultGrid as Grid,
-  DefaultButton as Button,
-  DefaultPopover as Popover,
-  DefaultDivider as Divider,
-  DefaultListItemIcon as ListItemIcon,
-  DefaultLink as Link
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  IconButton,
+  Menu,
+  Tooltip,
+  Avatar,
+  MenuItem,
+  Grid,
+  Button,
+  Popover,
+  Divider,
+  ListItemIcon,
+  Link
 } from '@common/components'
-import SettingsIcon from '@mui/icons-material/Settings'
-import AnalyticsIcon from '@mui/icons-material/Analytics'
-import HelpIcon from '@mui/icons-material/Help'
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
-import PersonIcon from '@mui/icons-material/Person'
-import { useTranslation } from 'react-i18next'
-import { Login, Logout, AssignmentOutlined } from '@mui/icons-material'
+
+import {
+    Analytics,
+    Settings,
+    Help,
+    ArrowDropDown,
+    Person,
+    Login,
+    Logout,
+    AssignmentOutlined
+} from '@common/icons'
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined'
 import PlaylistAddCheckCircleOutlinedIcon from '@mui/icons-material/PlaylistAddCheckCircleOutlined'
-import { AuthContext, SnackbarContext, Topic } from '@services'
+
+import { useTranslation } from 'react-i18next'
+import { AuthContext, SnackbarContext } from '@services'
 import { DropdownLanguage, SkeletonList, QuestionnaireResultsModal } from '@components'
 import { usePersistedStore, useStore } from '@store'
+import { Topic } from '@core'
 import log from 'loglevel'
+
+// TODO: Move it into @common/hooks since it is reused in LocalNav
 
 /**
  *  Local navigation component props.
@@ -167,9 +176,9 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                     color="inherit"
                     endIcon={
                       anchorElTopics ? (
-                        <ArrowDropDownIcon sx={{ transform: 'rotate(180deg)' }} />
+                        <ArrowDropDown sx={{ transform: 'rotate(180deg)' }} />
                       ) : (
-                        <ArrowDropDownIcon />
+                        <ArrowDropDown />
                       )
                     }>
                     {t('components.MenuBar.TopicButton')}
@@ -261,7 +270,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                 onClick={() => {
                   window.open('/files/Bedienungsanleitung_von_HASKI_Alpha.pdf', '_blank')
                 }}>
-                <HelpIcon data-testid="HelpIcon" />
+                <Help data-testid="HelpIcon" />
               </IconButton>
             </Tooltip>
           </Box>
@@ -277,7 +286,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                     autoHideDuration: 5000
                   })
                 }}>
-                <SettingsIcon data-testid="SettingsIcon" />
+                <Settings data-testid="SettingsIcon" />
               </IconButton>
             </Tooltip>
           </Box>
@@ -287,7 +296,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             <Tooltip title={t('tooltip.openSettings')}>
               <IconButton onClick={handleOpenUserMenu} data-testid="useravatar">
                 <Avatar alt="Remy Sharp">
-                  <PersonIcon />
+                  <Person />
                 </Avatar>
               </IconButton>
             </Tooltip>

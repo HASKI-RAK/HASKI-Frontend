@@ -1,6 +1,6 @@
 import { Bar } from '@nivo/bar'
 import { useTranslation } from 'react-i18next'
-import { useTheme } from '@mui/material'
+import { useTheme } from '@common/hooks'
 import { ILS } from '@core'
 
 // The Key "Dimension" is used in the Graph, therefore the name matters
@@ -49,7 +49,7 @@ type GraphILSProps = {
   data: ILS
 }
 
-export const GraphILS = ({ data }: GraphILSProps) => {
+const GraphILS = ({ data }: GraphILSProps) => {
   const { t } = useTranslation()
 
   const dimensionOneScore = data.input_value
@@ -134,3 +134,5 @@ export const GraphILS = ({ data }: GraphILSProps) => {
     </div>
   )
 }
+
+export default GraphILS

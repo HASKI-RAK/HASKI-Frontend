@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Topic } from '@services'
-import { LearningPathElement } from '@core'
+import { LearningPathElement, Topic, LearningPathElementReturn } from '@core'
 import log from 'loglevel'
 import { useStore, usePersistedStore } from '@store'
-import { LearningPathElementReturn } from '@core'
 
+/**
+ * This is a mock of the LearningPathElement object
+ */
 const initialLearningPathElement: LearningPathElement = {
   id: 99999,
   course_id: 99999,
@@ -39,6 +40,19 @@ const initialLearningPathElement: LearningPathElement = {
   ]
 }
 
+/**
+ * This function sorts the learning path elements by position.
+ * @param userid - user id
+ * @param lmsUserid - lms user id
+ * @param studentid - student id
+ * @param data - topic data
+ * @param courseId - course id
+ * @param fetchLearningPath - fetch learning path function
+ *
+ * @remarks
+ * It makes a call to the fetchLearningPath function to get the learning path elements.
+ * @returns
+ */
 export const getSortedLearningPath = async (
   userid: number,
   lmsUserid: number,
@@ -52,6 +66,9 @@ export const getSortedLearningPath = async (
   return learningPath
 }
 
+/**
+ * @param courseId - course id
+ */
 export const useLearningPathTopic = (courseId: string): { loading: boolean; topics: Topic[] } => {
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])

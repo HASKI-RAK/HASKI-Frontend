@@ -1,16 +1,20 @@
 /**
+ * @prop lmsId - The id of the learning element inside the LMS.
+ * @prop name - The name of the learning element.
+ * @prop activityType - The activity type of the learning element.
+ * @prop classification - The classification of the learning element.
+ * @prop isRecommended - Whether the learning element is recommended or not.
+ * @prop handleSetUrl - The function that sets the url of the learning element.
+ * @prop handleSetTitle - The function that sets the title of the learning element.
+ * @prop handleOpen - The function that opens the learning element.
+ * @prop handleClose - The function that closes the learning element.
  * @interface LearningPathLearningElementNode
- * @property {number} lmsId - The id of the learning element inside the LMS.
- * @property {string} name - The name of the learning element.
- * @property {string} activityType - The activity type of the learning element.
- * @property {string} classification - The classification of the learning element.
- * @property {boolean} isRecommended - Whether the learning element is recommended or not.
- * @property {function} handleSetUrl - The function that sets the url of the learning element.
- * @property {function} handleSetTitle - The function that sets the title of the learning element.
- * @property {function} handleOpen - The function that opens the learning element.
- * @property {function} handleClose - The function that closes the learning element.
+ * which represents the props of the {@link LearningPathLearningElementNode}.
  */
 export type LearningPathLearningElementNode = {
+  /**
+   * The id of the learning element inside the LMS.
+   */
   lmsId: number
   name: string
   activityType: string

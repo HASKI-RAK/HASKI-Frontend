@@ -1,1 +1,2 @@
-export { Backdrop as DefaultBackdrop } from '@mui/material'
+import DefaultBackdrop from '@mui/material/Backdrop'
+export { DefaultBackdrop as Backdrop }

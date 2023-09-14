@@ -10,6 +10,7 @@ import SummaryNode from '../SummaryNode/SummaryNode'
 import VideoNode from '../VideoNode/VideoNode'
 import BasicNode from '../BasicNode/BasicNode'
 import { NodeTypes } from 'reactflow'
+import type { LearningPathLearningElementNode } from './LearningPathLearningElementNode/LearningPathLearningElementNode'
 
 /**
  * nodeTypes presents a object containing all node types.
@@ -28,3 +29,5 @@ export const nodeTypes: NodeTypes = {
   GROUP: DefaultGroup,
   DEFAULT: BasicNode
 }
+
+export type { LearningPathLearningElementNode }

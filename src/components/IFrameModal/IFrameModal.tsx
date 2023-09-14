@@ -1,4 +1,4 @@
-import { DefaultBox as Box, DefaultModal as Modal } from '@common/components'
+import { Box, Modal } from '@common/components'
 import { memo } from 'react'
 
 const style_box = {
@@ -23,14 +23,14 @@ type IFrameModalProps = {
 }
 
 /**
- * IFrameModal is a component that renders an iframe in a modal.
- * This can be used to render an activity from Moodle.
- * @param props.url is the url of the iframe.
- * @param props.title is the title of the iframe.
- * @param props.isOpen is a boolean that determines if the modal is open or not.
- * @param props.onClose is a function that is called when the modal is closed
+ * IFrameModal is a component that renders an iframe in a modal
+ * This can be used to render an activity from Moodle
+ * @prop url of the iframe
+ * @prop title of the iframe
+ * @prop boolean that determines if the modal is open or not
+ * @prop function that is called when the modal is closed
  *
- * @returns {JSX.Element} - An element that renders an iframe in a modal.
+ * @returns An element that renders an iframe in a modal
  * @category Components
  */
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
