@@ -6,8 +6,8 @@ import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
 import { Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material'
 import TableCell from '@mui/material/TableCell'
-import React, {memo, useCallback, useContext, useMemo, useState} from 'react'
-import {SnackbarContext, useQuestionnaireAnswersListKStore} from '@services'
+import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
+import { SnackbarContext, useQuestionnaireAnswersListKStore } from '@services'
 import PropTypes from 'prop-types'
 import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
 import useHandleSend from './TableListKQuestions.hooks'
@@ -474,7 +474,7 @@ MemoTableRowAnswers.propTypes = {
 export const TableListKQuestions = memo(() => {
   TableListKQuestions.displayName = 'TableListKQuestions'
   const { sendAnswers, isSending } = useHandleSend()
-  const [ sendSuccess, setSendSuccess ] = useState(false)
+  const [sendSuccess, setSendSuccess] = useState(false)
   const { addSnackbar } = useContext(SnackbarContext)
 
   const { t } = useTranslation()
@@ -488,25 +488,22 @@ export const TableListKQuestions = memo(() => {
 
   const handleSendClick = async () => {
     await sendAnswers().then((res) => {
-          if(res){
-            addSnackbar({
-              message: 'Data send successfully',
-              severity: 'success',
-              autoHideDuration: 5000
-            })
-            setSendSuccess(true)
-          }
-          else{
-            addSnackbar({
-              message: 'Data could not be sent',
-              severity: 'error',
-              autoHideDuration: 5000
-            })
-            setSendSuccess(false)
-          }
-        }
-    )
-
+      if (res) {
+        addSnackbar({
+          message: 'Data send successfully',
+          severity: 'success',
+          autoHideDuration: 5000
+        })
+        setSendSuccess(true)
+      } else {
+        addSnackbar({
+          message: 'Data could not be sent',
+          severity: 'error',
+          autoHideDuration: 5000
+        })
+        setSendSuccess(false)
+      }
+    })
   }
 
   //if all radio buttons are selected, the next button is enabled

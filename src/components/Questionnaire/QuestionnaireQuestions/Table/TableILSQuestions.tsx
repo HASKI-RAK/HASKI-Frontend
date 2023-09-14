@@ -6,8 +6,8 @@ import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
 import { Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material'
 import TableCell from '@mui/material/TableCell'
-import React, {memo, useCallback, useContext, useMemo, useState} from 'react'
-import {SnackbarContext, useQuestionnaireAnswersILSStore} from '@services'
+import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
+import { SnackbarContext, useQuestionnaireAnswersILSStore } from '@services'
 import PropTypes from 'prop-types'
 import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
 import useHandleSend from './TableILSQuestions.hooks'
@@ -518,7 +518,7 @@ type TableILSQuestionsProps = {
 export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   TableILSQuestions.displayName = 'TableILSQuestions'
   const { sendAnswers, isSending } = useHandleSend()
-  const [ successSend, setSuccessSend ] = useState(false)
+  const [successSend, setSuccessSend] = useState(false)
   const { addSnackbar } = useContext(SnackbarContext)
 
   const { t } = useTranslation()
@@ -564,25 +564,22 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
 
   const handleSendClick = () => {
     sendAnswers().then((res) => {
-          if(res){
-            addSnackbar({
-              message: 'Data send successfully',
-              severity: 'success',
-              autoHideDuration: 5000
-            })
-            setSuccessSend(true)
-          }
-          else{
-            addSnackbar({
-              message: 'Data could not be sent',
-              severity: 'error',
-              autoHideDuration: 5000
-            })
-            setSuccessSend(false)
-          }
-        }
-      )
-
+      if (res) {
+        addSnackbar({
+          message: 'Data send successfully',
+          severity: 'success',
+          autoHideDuration: 5000
+        })
+        setSuccessSend(true)
+      } else {
+        addSnackbar({
+          message: 'Data could not be sent',
+          severity: 'error',
+          autoHideDuration: 5000
+        })
+        setSuccessSend(false)
+      }
+    })
   }
 
   const setRadioButtonValue = useMemo(

@@ -720,22 +720,22 @@ describe('Table ILS Questionnaire Short', () => {
 
     for (let i = 0; i < 6; i++) {
       const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
-          'input[type="radio"]'
+        'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton1)
 
       const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
-          'input[type="radio"]'
+        'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton2)
 
       const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
-          'input[type="radio"]'
+        'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton3)
 
       const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
-          'input[type="radio"]'
+        'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton4)
 
@@ -744,10 +744,9 @@ describe('Table ILS Questionnaire Short', () => {
       expect(RadioButton3.checked).toBe(true)
       expect(RadioButton4.checked).toBe(true)
 
-      if(i < 5) {
+      if (i < 5) {
         fireEvent.click(nextButton)
-      }
-      else {
+      } else {
         const sendButton = getByTestId('sendButtonILSQuestionnaire')
         expect(sendButton).toBeEnabled()
         act(() => {
@@ -755,7 +754,7 @@ describe('Table ILS Questionnaire Short', () => {
           waitFor(async () => {
             expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
           })
-        });
+        })
       }
     }
   })
