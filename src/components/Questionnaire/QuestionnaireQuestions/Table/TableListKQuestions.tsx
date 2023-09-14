@@ -474,6 +474,7 @@ MemoTableRowAnswers.propTypes = {
 export const TableListKQuestions = memo(() => {
   TableListKQuestions.displayName = 'TableListKQuestions'
   const { sendAnswers, isSending } = useHandleSend()
+  const [ sendSuccess, setSendSuccess ] = useState(false)
   const { addSnackbar } = useContext(SnackbarContext)
 
   const { t } = useTranslation()
@@ -493,6 +494,7 @@ export const TableListKQuestions = memo(() => {
               severity: 'success',
               autoHideDuration: 5000
             })
+            setSendSuccess(true)
           }
           else{
             addSnackbar({
@@ -500,6 +502,7 @@ export const TableListKQuestions = memo(() => {
               severity: 'error',
               autoHideDuration: 5000
             })
+            setSendSuccess(false)
           }
         }
     )
@@ -673,6 +676,7 @@ export const TableListKQuestions = memo(() => {
             isValid={activeStep === 7}
             idType={'ListK'}
             isSending={isSending}
+            sendSuccess={sendSuccess}
           />
         </Stack>
       </Stack>

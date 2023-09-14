@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useState} from 'react'
+import React, {memo} from 'react'
 import {
     DefaultStack as Stack,
     DefaultTypography as Typography,
@@ -7,7 +7,6 @@ import {
 } from '@common/components'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
-import SendIcon from '@mui/icons-material/Send'
 import PropTypes from 'prop-types'
 import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
@@ -39,6 +38,7 @@ interface MemoSendButtonProps {
     isValid: boolean
     idType: string
     isSending: boolean
+    sendSuccess: boolean
 }
 
 // endregion
@@ -98,28 +98,19 @@ export const MemoButtonStack: React.FC<MemoButtonStackProps> = memo(
 )
 
 export const MemoSendButton: React.FC<MemoSendButtonProps> = memo(
-    ({handleSend, isNextDisabled, t, isValid, idType, isSending}) => {
-
-        const [loadingFinished, setLoadingFinished] = useState(false);
-
-        useEffect(() => {
-            if(isSending) {
-                setTimeout(() => {
-                    setLoadingFinished(true);
-                }, 2000); // Assuming your loading animation takes 2 seconds, adjust as needed
-            }
-        }, [isSending]);
+    ({handleSend, isNextDisabled, t, isValid, idType, isSending, sendSuccess}) => {
 
         return (
-            <div data-testid={`sendButton${idType}Questionnaire`}>
+            <div>
                 <Button
+                    data-testid={`sendButton${idType}Questionnaire`}
                     variant="contained"
                     color="primary"
                     onClick={handleSend}
-                    disabled={isNextDisabled || !isValid || isSending || !loadingFinished}
+                    disabled={isNextDisabled || !isValid || isSending || sendSuccess}
                     sx={{ m: 2 }}
                 >
-                    {isSending && !loadingFinished ? <CircularProgress size={24} /> : t('Send')}
+                    {isSending ? <CircularProgress size={24} /> : t('send')}
                 </Button>
             </div>
         )
@@ -143,13 +134,14 @@ MemoButtonStack.propTypes = {
     disabled: PropTypes.bool.isRequired
 }
 
-MemoSendButton.displayName = 'MemoTableRow'
+MemoSendButton.displayName = 'MemoSendButton'
 MemoSendButton.propTypes = {
     t: PropTypes.func.isRequired,
     handleSend: PropTypes.func.isRequired,
     isNextDisabled: PropTypes.bool.isRequired,
     isValid: PropTypes.bool.isRequired,
     idType: PropTypes.string.isRequired,
-    isSending: PropTypes.bool.isRequired
+    isSending: PropTypes.bool.isRequired,
+    sendSuccess: PropTypes.bool.isRequired
 }
 // endregion

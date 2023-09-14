@@ -518,6 +518,7 @@ type TableILSQuestionsProps = {
 export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   TableILSQuestions.displayName = 'TableILSQuestions'
   const { sendAnswers, isSending } = useHandleSend()
+  const [ successSend, setSuccessSend ] = useState(false)
   const { addSnackbar } = useContext(SnackbarContext)
 
   const { t } = useTranslation()
@@ -561,14 +562,15 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
     setRadioButtonGroups(activeStep - 1)
   }, [activeStep])
 
-  const handleSendClick = async () => {
-    await sendAnswers().then((res) => {
+  const handleSendClick = () => {
+    sendAnswers().then((res) => {
           if(res){
             addSnackbar({
               message: 'Data send successfully',
               severity: 'success',
               autoHideDuration: 5000
             })
+            setSuccessSend(true)
           }
           else{
             addSnackbar({
@@ -576,6 +578,7 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
               severity: 'error',
               autoHideDuration: 5000
             })
+            setSuccessSend(false)
           }
         }
       )
@@ -672,6 +675,7 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
             isValid={ilsLong ? activeStep === 10 : activeStep === 4}
             idType={'ILS'}
             isSending={isSending}
+            sendSuccess={successSend}
           />
         </Stack>
       </Stack>

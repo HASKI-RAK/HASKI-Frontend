@@ -389,12 +389,8 @@ describe('TableListKQuestions', () => {
         fireEvent.click(sendButton)
         act(() => {
           fireEvent.click(sendButton)
-        })
-
-        await waitFor(async () => {
-          expect(getByTestId('QuestionnaireSendStatusModal')).toBeInTheDocument()
-          act(() => {
-            fireEvent.click(getByTestId('QuestionnaireSendStatusModalButton'))
+          waitFor(async () => {
+            expect(getByTestId('sendButtonListKQuestionnaire')).toBeDisabled()
           })
         })
       }
@@ -494,12 +490,8 @@ describe('TableListKQuestions', () => {
         fireEvent.click(sendButton)
         act(() => {
           fireEvent.click(sendButton)
-        })
-
-        await waitFor(async () => {
-          expect(getByTestId('QuestionnaireSendStatusModal')).toBeInTheDocument()
-          act(() => {
-            fireEvent.click(getByTestId('QuestionnaireSendStatusModalButton'))
+          waitFor(async () => {
+            expect(getByTestId('sendButtonListKQuestionnaire')).toBeEnabled()
           })
         })
       }

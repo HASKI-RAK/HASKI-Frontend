@@ -1884,11 +1884,10 @@ exports[`Test ListK Questionnaire renders correctly and matches snapshot 1`] = `
           </tbody>
         </table>
       </div>
-      <div
-        data-testid="sendButtonListKQuestionnaire"
-      >
+      <div>
         <button
           className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-s3awaj-MuiButtonBase-root-MuiButton-root"
+          data-testid="sendButtonListKQuestionnaire"
           disabled={true}
           onBlur={[Function]}
           onClick={[Function]}
@@ -1906,7 +1905,7 @@ exports[`Test ListK Questionnaire renders correctly and matches snapshot 1`] = `
           tabIndex={-1}
           type="button"
         >
-          Send
+          send
         </button>
       </div>
     </div>

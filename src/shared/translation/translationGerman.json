@@ -788,6 +788,7 @@
 	"projectHASKI": "Projekt HASKI",
 	"resultPagesText": "Ergebnisseite",
 	"searchButtonText": "Suche",
+	"send": "Senden",
 	"services.AuthProvider.connectivityerror": "Fehler bei der Authentifizierung. Keine Verbindung zum Server.",
 	"services.AuthProvider.cookienotfound": "Cookie nicht gefunden. Bitte erneut einloggen.",
 	"services.AuthProvider.logout": "Logout erfolgreich",
