@@ -765,49 +765,29 @@ exports[`ILS Short Questionnaire renders correctly and matches snapshot 1`] = `
         </table>
       </div>
       <div
-        className="css-1mqw31f-MuiStack-root"
+        data-testid="sendButtonILSQuestionnaire"
       >
-        <div
-          data-testid="ActiveStepILS"
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-s3awaj-MuiButtonBase-root-MuiButton-root"
+          disabled={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onContextMenu={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={-1}
+          type="button"
         >
-          <button
-            className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-s3awaj-MuiButtonBase-root-MuiButton-root"
-            data-testid="sendButtonILSQuestionnaire"
-            disabled={true}
-            onBlur={[Function]}
-            onClick={[Function]}
-            onContextMenu={[Function]}
-            onDragLeave={[Function]}
-            onFocus={[Function]}
-            onKeyDown={[Function]}
-            onKeyUp={[Function]}
-            onMouseDown={[Function]}
-            onMouseLeave={[Function]}
-            onMouseUp={[Function]}
-            onTouchEnd={[Function]}
-            onTouchMove={[Function]}
-            onTouchStart={[Function]}
-            tabIndex={-1}
-            type="button"
-          >
-            Send
-            <span
-              className="MuiButton-endIcon MuiButton-iconSizeMedium css-9tj150-MuiButton-endIcon"
-            >
-              <svg
-                aria-hidden={true}
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-                data-testid="SendIcon"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M2.01 21 23 12 2.01 3 2 10l15 2-15 2z"
-                />
-              </svg>
-            </span>
-          </button>
-        </div>
+          Send
+        </button>
       </div>
     </div>
   </div>
