@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { useData, GraphILS } from './GraphILS'
+import GraphILS, { useData } from './GraphILS'
 import { render } from '@testing-library/react'
 import React from 'react'
 

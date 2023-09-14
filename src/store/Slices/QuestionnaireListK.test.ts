@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { useStore } from '../Zustand/Store'
+import { useStore } from '@store'
 import { mockServices } from 'jest.setup'
 
 const listk = {

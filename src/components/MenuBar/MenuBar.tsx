@@ -257,7 +257,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openQuestionnaireResults')}>
               <IconButton onClick={handleOpenModal}>
-                <AnalyticsIcon data-testid="QuestionnaireResultsIcon" />
+                <Analytics data-testid="QuestionnaireResultsIcon" />
               </IconButton>
             </Tooltip>
             <QuestionnaireResultsModal open={modalOpen} handleClose={handleCloseModal} />

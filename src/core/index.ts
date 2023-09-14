@@ -49,4 +49,5 @@ export type {
 }
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
 export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'
+export type { ListKReturn } from './QuestionnaireResults/ListK'
 export type { CourseReturn } from './Course/Course'

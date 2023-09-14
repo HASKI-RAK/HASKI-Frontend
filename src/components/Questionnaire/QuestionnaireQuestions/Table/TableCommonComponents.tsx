@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
 import {
-  DefaultStack as Stack,
-  DefaultTypography as Typography,
-  DefaultMobileStepper as MobileStepper,
-  DefaultButton as Button
+  Stack,
+  Typography,
+  MobileStepper,
+  Button
 } from '@common/components'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
@@ -13,6 +13,8 @@ import TableCell from '@mui/material/TableCell'
 import { CircularProgress } from '@mui/material'
 
 /**
+ * # TableCommonComponents
+ *
  * @description
  * This is a collection of common components of ILS (Long and Short) and ListK questionnaires.
  */

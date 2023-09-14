@@ -1,9 +1,9 @@
-import { ListK } from '@core'
+import { ListK, ListKReturn } from '@core'
 import { StateCreator } from 'zustand'
 import { StoreState } from '@store'
-import { getListK } from '@services'
+// Import can not be shortened
 import { resetters } from '../Zustand/Store'
-import { ListKReturn } from '../../core/QuestionnaireResults/ListK'
+import { getListK } from '@services'
 
 export default interface ListKSlice {
   _cache_listk_record: Record<string, ListK | undefined>

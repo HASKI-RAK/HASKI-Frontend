@@ -1,5 +1,5 @@
 import { useQuestionnaireAnswersListKStore } from '@services'
-import { DefaultButton as Button } from '@common/components'
+import { Button } from '@common/components'
 import { fireEvent, render } from '@testing-library/react'
 
 const DivElement = () => {

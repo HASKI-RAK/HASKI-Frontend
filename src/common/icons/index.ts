@@ -24,3 +24,5 @@ export { KeyboardArrowLeft } from './DefaultKeyboardArrowLeft/DefaultKeyboardArr
 export { KeyboardArrowRight } from './DefaultKeyboardArrowRight/DefaultKeyboardArrowRight'
 export { Close } from './DefaultClose/DefaultClose'
 export { FiberManualRecord } from './DefaultFiberManualRecord/DefaultFiberManualRecord'
+export { Analytics } from './DefaultAnalytics/DefaultAnalytics'
+export { AssignmentOutlined } from './DefaultAssignmentOutlined/DefaultAssignmentOutlined'

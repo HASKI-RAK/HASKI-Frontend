@@ -1,6 +1,5 @@
-import { ListK } from '@core'
+import { ListK, ListKReturn } from '@core'
 import { getData } from '../RequestResponse'
-import { ListKReturn } from '../../core/QuestionnaireResults/ListK'
 
 export const getListK: ListKReturn = async (userId, lmsUserId, studentId) => {
   const response = await fetch(

@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import { useTranslation } from 'react-i18next'
 import {
-  DefaultBox as Box,
-  DefaultButton as Button,
-  DefaultModal as Modal,
-  DefaultStepper as Stepper,
-  DefaultStep as Step,
-  DefaultStepButton as StepButton,
-  DefaultIconButton as IconButton,
-  DefaultStack as Stack,
-  DefaultTypography as Typography
+  Box,
+  Button,
+  Modal,
+  Stepper,
+  Step,
+  StepButton,
+  IconButton,
+  Stack,
+  Typography
 } from '@common/components'
 import { usePersistedStore, useStore } from '@store'
 import { ILS, ListK } from '@core'
@@ -18,12 +18,12 @@ import { Link } from 'react-router-dom'
 import log from 'loglevel'
 
 //Can not shorten import, tests fail to recognize i18n.use...
-import { GraphListK } from '../Graph/GraphListK'
-import { TableListK } from '../Table/TableListK'
-import { ResultDescriptionILS } from '../Text/ResultDescriptionILS'
-import { ResultDescriptionListK } from '../Text/ResultDescriptionListK'
-import { GraphILS } from '../Graph/GraphILS'
-import { TableILS } from '../Table/TableILS'
+import GraphListK from '../Graph/GraphListK'
+import TableListK from '../Table/TableListK'
+import ResultDescriptionILS from '../Text/ResultDescriptionILS'
+import ResultDescriptionListK from '../Text/ResultDescriptionListK'
+import GraphILS from '../Graph/GraphILS'
+import TableILS from '../Table/TableILS'
 
 const styleButtonClose = {
   position: 'sticky',
@@ -51,7 +51,7 @@ type QuestionnaireResultsModalProps = {
   activeStepForTesting?: number
 }
 
-export const QuestionnaireResultsModal = ({
+const QuestionnaireResultsModal = ({
   open = false,
   handleClose,
   activeStepForTesting = 0
@@ -221,3 +221,5 @@ export const QuestionnaireResultsModal = ({
     </div>
   )
 }
+
+export default QuestionnaireResultsModal

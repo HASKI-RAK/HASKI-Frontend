@@ -1,7 +1,7 @@
 import QuestionnaireILSQuestionsShort from './QuestionnaireILSQuestionsShort'
 import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { AuthContext } from '../../common/services/AuthContext'
+import { AuthContext } from '@services'
 import renderer from 'react-test-renderer'
 import '@testing-library/jest-dom/extend-expect'
 

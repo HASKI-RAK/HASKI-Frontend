@@ -100,7 +100,7 @@ type TableILSProps = {
   data: ILS
 }
 
-export const TableILS = ({ data }: TableILSProps) => {
+const TableILS = ({ data }: TableILSProps) => {
   const { t } = useTranslation()
 
   const dimensionOneScore = data.input_value
@@ -175,3 +175,5 @@ export const TableILS = ({ data }: TableILSProps) => {
     </TableContainer>
   )
 }
+
+export default TableILS
