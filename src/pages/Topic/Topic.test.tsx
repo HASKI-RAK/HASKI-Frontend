@@ -6,8 +6,8 @@ import Router, { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
 import { useTopic } from './Topic.hooks'
 import Topic from './Topic'
-
 const { AuthContext } = jest.requireActual('@services')
+
 const navigate = jest.fn()
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')
