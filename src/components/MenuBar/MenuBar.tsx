@@ -165,11 +165,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                     data-testid="Menubar-TopicButton"
                     color="inherit"
                     endIcon={
-                      anchorElTopics ? (
-                        <ArrowDropDown sx={{ transform: 'rotate(180deg)' }} />
-                      ) : (
-                        <ArrowDropDown />
-                      )
+                      anchorElTopics ? <ArrowDropDown sx={{ transform: 'rotate(180deg)' }} /> : <ArrowDropDown />
                     }>
                     {t('components.MenuBar.TopicButton')}
                   </Button>

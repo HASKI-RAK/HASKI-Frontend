@@ -12,7 +12,7 @@ import { MemoryRouter } from 'react-router-dom'
   useCallback: (a: any) => a
 }))*/
 
-const scontext: SnackbarContextType = {
+const mockSnackbarContext: SnackbarContextType = {
   snackbarsErrorWarning: [],
   snackbarsSuccessInfo: [],
   setSnackbarsErrorWarning: (a: any[]) => {
@@ -32,11 +32,12 @@ const scontext: SnackbarContextType = {
   }
 }
 
-/** use Translation mocks the translation and also mocks the map input of reportTypes and topics,
+/**
+ * useTranslation mocks the translation and also mocks the map input of reportTypes and topics,
  * input isnt important here.
  * global.fetch mocks the fetch function, which is used in the onSubmitHandler function in Contact.hooks.tsx
  * useContact mocks the useContact function, which is used in the Contact.tsx
- * scontext is a mocked Snackbarcontext, which handles the testing of the snackbar, when a form is submitted
+ * mockSnackbarContext is a mocked Snackbarcontext, which handles the testing of the snackbar, when a form is submitted
  *
  * Currently getting tested are the cases:
  *
@@ -49,14 +50,13 @@ const scontext: SnackbarContextType = {
  */
 describe('Test Contactpage', () => {
   const submit = jest.fn()
-  mockServices.getUser
   const useContact = jest.fn(() => {
     return { onSubmitHandler: submit }
   })
 
   test('not sending', () => {
     render(
-      <SnackbarContext.Provider value={scontext}>
+      <SnackbarContext.Provider value={mockSnackbarContext}>
         <Contact />
       </SnackbarContext.Provider>
     )
@@ -65,7 +65,7 @@ describe('Test Contactpage', () => {
   test('sends onSubmit to Contactform', () => {
     const form = render(
       <MemoryRouter>
-        <SnackbarContext.Provider value={scontext}>
+        <SnackbarContext.Provider value={mockSnackbarContext}>
           <ContactForm onSubmit={useContact} />
         </SnackbarContext.Provider>
       </MemoryRouter>
@@ -93,7 +93,7 @@ describe('Test Contactpage', () => {
       })
     ) as jest.Mock
     const result = await fetch(process.env.BACKEND + `/contactform`)
-    await expect(result.status).toBe(undefined)
+    expect(result.status).toBe(undefined)
   })
 })
 
@@ -104,7 +104,6 @@ describe('Test on submit Function', () => {
     report_description: 'test'
   }
   test('Fetch successful', async () => {
-    mockServices.postContactForm
     const loadingMock = jest.fn()
     const addSnackbarMock = jest.fn()
 
@@ -131,7 +130,6 @@ describe('Test on submit Function', () => {
 
     const onSubmit = result.result.current
     await act(async () => {
-      mockServices.getUser
       onSubmit.onSubmitHandler(testData)
 
       // Check if loading is set True
@@ -171,11 +169,10 @@ describe('Test on submit Function', () => {
     )
 
     const onSubmit = result.result.current
-    const getUser = jest.fn(() => {
-      return Promise.reject(new Error('get User failed'))
-    })
+
+    mockServices.getUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('get User failed')))
+
     await act(async () => {
-      mockServices.getUser.mockImplementationOnce(getUser)
       onSubmit.onSubmitHandler(testData)
 
       // Check if loading is set True
@@ -193,10 +190,23 @@ describe('Test on submit Function', () => {
     /*global.fetch = jest.fn(() => {
       throw new Error('Error')
     }) as jest.Mock*/
-    const fail = jest.fn(() => {
-      return Promise.reject(new Error('error'))
-    })
-    mockServices.postContactForm.mockImplementationOnce(fail)
+
+    // When running the whole suite, getUser gets overwritten by previous test.
+    mockServices.getUser = jest.fn().mockImplementationOnce(() => Promise.resolve({
+      id: 1,
+      lms_user_id: 1,
+      name: 'Thaddäus Tentakel',
+      role: 'Tester',
+      role_id: 1,
+      settings: {
+        id: 1,
+        user_id: 1,
+        pswd: '1234',
+        theme: 'test'
+      },
+      university: 'HS Kempten'
+    }))
+    mockServices.postContactForm = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
     const loadingMock = jest.fn()
     const addSnackbarMock = jest.fn()
 
@@ -223,7 +233,6 @@ describe('Test on submit Function', () => {
 
     const onSubmit = result.result.current
     await act(async () => {
-      mockServices.getUser
       onSubmit.onSubmitHandler(testData)
 
       await Promise.resolve()

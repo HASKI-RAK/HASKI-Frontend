@@ -2,8 +2,8 @@ import { RequestResponse, getData } from '../RequestResponse'
 
 describe('RequestResponse', () => {
   const response = {
-    text: () => Promise.reject(),
-    json: () => Promise.reject(),
+    text: () => Promise.reject(new Error('error')),
+    json: () => Promise.reject(new Error('error')),
     ok: true
   }
 
@@ -48,8 +48,8 @@ describe('RequestResponse', () => {
       const mockResponse = {
         ...response,
         headers: { get: () => 'text/html' },
-        text: () => Promise.reject(),
-        json: () => Promise.reject(),
+        text: () => Promise.reject(new Error('error')),
+        json: () => Promise.reject(new Error('error')),
         data: 'test'
       }
       await expect(() => getData(mockResponse)).rejects.toThrow(Error)

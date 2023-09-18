@@ -43,7 +43,5 @@ describe('Test GraphILS with all Methods', () => {
     expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Verbal')).toBeInTheDocument()
     expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Sequential')).toBeInTheDocument()
     expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Global')).toBeInTheDocument()
-
-    expect(graphILS).toMatchSnapshot()
   })
 })

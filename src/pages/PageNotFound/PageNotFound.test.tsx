@@ -4,6 +4,7 @@ import { createMemoryHistory } from 'history'
 import PageNotFound from './PageNotFound'
 import { mockReactFlow } from '@mocks'
 import '@testing-library/jest-dom'
+
 describe('PageNotFound', () => {
   beforeEach(() => {
     mockReactFlow()

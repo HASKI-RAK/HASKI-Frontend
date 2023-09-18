@@ -2,10 +2,8 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
 import { MemoryRouter } from 'react-router-dom'
-import { Topic, LearningElement, LearningPathElement, StudentLearningElement } from '@core'
 import { AuthContext } from '@services'
 import * as router from 'react-router'
-import React from 'react'
 import { mockServices } from 'jest.setup'
 
 const navigate = jest.fn()

@@ -24,8 +24,9 @@ type MockDataServices = {
  * @see {@link https://jestjs.io/docs/mock-functions | Jest Mock Functions}
  */
 const mockDataServices: MockDataServices = {
-  getUser: jest.fn(() => {
-    return Promise.resolve({
+  getLogout: jest.fn(() => Promise.resolve()),
+  postLoginCredentials: jest.fn(() =>
+    Promise.resolve({
       id: 1,
       lms_user_id: 1,
       name: 'Thaddäus Tentakel',
@@ -39,9 +40,25 @@ const mockDataServices: MockDataServices = {
       },
       university: 'HS Kempten'
     })
-  }),
-  getLearningPathElement: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  getUser: jest.fn(() =>
+    Promise.resolve({
+      id: 1,
+      lms_user_id: 1,
+      name: 'Thaddäus Tentakel',
+      role: 'Tester',
+      role_id: 1,
+      settings: {
+        id: 1,
+        user_id: 1,
+        pswd: '1234',
+        theme: 'test'
+      },
+      university: 'HS Kempten'
+    })
+  ),
+  getLearningPathElement: jest.fn(() =>
+    Promise.resolve({
       id: 1,
       course_id: 2,
       based_on: 'string',
@@ -149,9 +166,9 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
-  }),
-  getLearningPathTopic: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  getLearningPathTopic: jest.fn(() =>
+    Promise.resolve({
       topics: [
         {
           contains_le: true,
@@ -195,24 +212,20 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
-  }),
-  postContactForm: jest.fn(() => {
-    return Promise.resolve({
-      undefined
-    })
-  }),
-  postLogin: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  postContactForm: jest.fn(() => Promise.resolve({ status: undefined })),
+  postLogin: jest.fn(() =>
+    Promise.resolve({
       expiration: 999999999999999
     })
-  }),
-  redirectMoodleLogin: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  redirectMoodleLogin: jest.fn(() =>
+    Promise.resolve({
       lti_launch_view: 'test'
     })
-  }),
-  getCourses: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  getCourses: jest.fn(() =>
+    Promise.resolve({
       courses: [
         {
           id: 1,
@@ -234,7 +247,7 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
-  })
+  )
 }
 /**
  * This object is used to store mocks. After each test, the object is cleaned up.

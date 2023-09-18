@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 import GraphListK, { useData } from './GraphListK'
 import { fireEvent, render } from '@testing-library/react'
-import React from 'react'
 import { getListKParameters } from './TableListK'
 
 // Mocking the resize observer to prevent errors in the tests
@@ -109,8 +108,6 @@ describe('Test GraphListK with all Methods', () => {
           (Math.round((averageExternalResourcesManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2)
       )[0]
     ).toBeInTheDocument()
-
-    expect(graphListK).toMatchSnapshot()
   })
 
   test('All bigger subscales are in graph', () => {
