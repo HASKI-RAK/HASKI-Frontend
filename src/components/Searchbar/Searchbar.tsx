@@ -1,6 +1,6 @@
 import { Typography, TextField, InputAdornment } from '@common/components'
 import SearchIcon from '@mui/icons-material/Search'
-import { useCallback } from 'react'
+import { useCallback, memo } from 'react'
 
 /**
  * @typedef {object} SearchbarProps
@@ -46,9 +46,12 @@ export const debouncedSearchQuery = (
  * @category Components
  */
 const Searchbar = (props: SearchbarProps) => {
-  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    debouncedSearchQuery(event, props.setSearchQuery, props.timeout)
-  }, [])
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      debouncedSearchQuery(event, props.setSearchQuery, props.timeout)
+    },
+    [props.setSearchQuery, props.timeout]
+  )
 
   return (
     <Typography variant="h4">
@@ -69,4 +72,4 @@ const Searchbar = (props: SearchbarProps) => {
   )
 }
 
-export default Searchbar
+export default memo(Searchbar)

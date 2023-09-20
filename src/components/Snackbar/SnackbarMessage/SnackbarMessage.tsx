@@ -3,6 +3,7 @@ import { useState, useCallback, useEffect, useContext } from 'react'
 import { SnackbarTransition } from '@components'
 import { useTranslation } from 'react-i18next'
 import { SnackbarContext } from '@services'
+import { memo } from 'react'
 
 /**
  * @typedef {Object} SeverityType
@@ -74,4 +75,4 @@ const SnackbarMessage = (props: SnackbarMessageProps) => {
   )
 }
 
-export default SnackbarMessage
+export default memo(SnackbarMessage)

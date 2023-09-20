@@ -1,6 +1,6 @@
 import { Stack, Snackbar } from '@common/components'
 import { SnackbarContext, useNetworkStatus } from '@services'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SnackbarMessage } from '@components'
 
@@ -77,4 +77,4 @@ const SnackbarContainer = () => {
   )
 }
 
-export default SnackbarContainer
+export default memo(SnackbarContainer)

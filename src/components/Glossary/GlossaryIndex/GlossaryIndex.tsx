@@ -1,6 +1,6 @@
 import { ToggleButtonGroup } from '@common/components'
+import React, { useCallback, memo } from 'react'
 import { ToggleButtonList } from '@components'
-import React, { useCallback } from 'react'
 
 /**
  * @typedef {object} GlossaryIndexProps
@@ -44,4 +44,4 @@ const GlossaryIndex = (props: GlossaryIndexProps) => {
   )
 }
 
-export default GlossaryIndex
+export default memo(GlossaryIndex)

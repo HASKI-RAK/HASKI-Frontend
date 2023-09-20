@@ -1,6 +1,7 @@
 import { AccordionSummary, AccordionDetails, Accordion, Typography, Box, Grid, Chip } from '@common/components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useTranslation } from 'react-i18next'
+import { memo } from 'react'
 
 /**
  * @typedef {object} GlossaryEntryProps
@@ -93,4 +94,4 @@ const GlossaryEntry = ({ expandedList, setExpandedList, ...props }: GlossaryAcco
   )
 }
 
-export default GlossaryEntry
+export default memo(GlossaryEntry)

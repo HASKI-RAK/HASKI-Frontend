@@ -1,7 +1,7 @@
 import { Button, Fade, Grid, MobileStepper, Typography } from '@common/components'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
+import { useRef, useEffect, useCallback, useState, memo } from 'react'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
-import { useRef, useEffect, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   useProjectDescriptionStepper as _useProjectDescriptionStepper,
@@ -40,13 +40,13 @@ const ProjectDescriptionStepper = ({
   const [activeStep, setActiveStep] = useState(0)
   const { bodyState, headerState, animateBody, animateHeader } = useProjectDescriptionStepper()
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
-  }
+  }, [setActiveStep])
 
-  const handleBack = () => {
+  const handleBack = useCallback(() => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
-  }
+  }, [setActiveStep])
 
   const handleScroll = useCallback(() => {
     if (props.body !== null && typeof props.body === 'object') {
@@ -130,4 +130,4 @@ const ProjectDescriptionStepper = ({
   )
 }
 
-export default ProjectDescriptionStepper
+export default memo(ProjectDescriptionStepper)

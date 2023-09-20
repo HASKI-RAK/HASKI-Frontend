@@ -1,4 +1,4 @@
-import { useState, RefObject } from 'react'
+import { useState, RefObject, useCallback, useMemo } from 'react'
 
 /**
  * @typedef {Object} useProjectDescriptionStepperHookParams
@@ -49,58 +49,73 @@ export const useProjectDescriptionStepper = (
   const [headerState, setHeaderState] = useState(defaultHeaderState)
 
   // Logic
-  // Checks if top of component is in the viewport and animates body texts if states are not equal to param.
-  const animateBody = (ref: RefObject<HTMLDivElement>, body: string[]) => {
-    const topPosition = ref.current?.getBoundingClientRect().top
-    const viewportBottom = window.innerHeight
-
-    if (topPosition !== null && typeof topPosition === 'number') {
-      if (topPosition <= viewportBottom) {
-        if (body !== bodyState) {
-          fadeInEffect(body)
-        }
-      }
-    }
-  }
-
-  // Checks if top of component is in the viewport and animates header texts if states are not equal to param.
-  const animateHeader = (ref: RefObject<HTMLDivElement>, header: string) => {
-    const topPosition = ref.current?.getBoundingClientRect().top
-    const viewportBottom = window.innerHeight
-
-    if (topPosition !== null && typeof topPosition === 'number') {
-      if (topPosition <= viewportBottom) {
-        if (header !== headerState) {
-          typewriterEffect(header)
-        }
-      }
-    }
-  }
-
   // Animates body text by setting the bodyState after a short timeout.
-  const fadeInEffect = (body: string[]) => {
-    const bodyTimeout = setTimeout(() => {
-      setBodyState(body)
-    }, 1000)
-    return () => clearTimeout(bodyTimeout)
-  }
+  const fadeInEffect = useCallback(
+    (body: string[]) => {
+      const bodyTimeout = setTimeout(() => {
+        setBodyState(body)
+      }, 1000)
+      return () => clearTimeout(bodyTimeout)
+    },
+    [setBodyState]
+  )
 
   // Animates header text by writing one character at a time into the headerState with a short timeout.
-  const typewriterEffect = (header: string) => {
-    const headerTimeout = setTimeout(() => {
-      setHeaderState(header.slice(0, headerState.length + 1))
-    }, 50)
-    return () => clearTimeout(headerTimeout)
-  }
+  const typewriterEffect = useCallback(
+    (header: string) => {
+      const headerTimeout = setTimeout(() => {
+        setHeaderState(header.slice(0, headerState.length + 1))
+      }, 50)
+      return () => clearTimeout(headerTimeout)
+    },
+    [headerState, setHeaderState]
+  )
 
-  return {
-    bodyState,
-    headerState,
-    setBodyState,
-    setHeaderState,
-    animateBody,
-    animateHeader,
-    fadeInEffect,
-    typewriterEffect
-  } as const
+  // Checks if top of component is in the viewport and animates body texts if states are not equal to param.
+  const animateBody = useCallback(
+    (ref: RefObject<HTMLDivElement>, body: string[]) => {
+      const topPosition = ref.current?.getBoundingClientRect().top
+      const viewportBottom = window.innerHeight
+
+      if (topPosition !== null && typeof topPosition === 'number') {
+        if (topPosition <= viewportBottom) {
+          if (body !== bodyState) {
+            fadeInEffect(body)
+          }
+        }
+      }
+    },
+    [bodyState, fadeInEffect]
+  )
+
+  // Checks if top of component is in the viewport and animates header texts if states are not equal to param.
+  const animateHeader = useCallback(
+    (ref: RefObject<HTMLDivElement>, header: string) => {
+      const topPosition = ref.current?.getBoundingClientRect().top
+      const viewportBottom = window.innerHeight
+
+      if (topPosition !== null && typeof topPosition === 'number') {
+        if (topPosition <= viewportBottom) {
+          if (header !== headerState) {
+            typewriterEffect(header)
+          }
+        }
+      }
+    },
+    [headerState, typewriterEffect]
+  )
+
+  return useMemo(
+    () => ({
+      bodyState,
+      headerState,
+      setBodyState,
+      setHeaderState,
+      animateBody,
+      animateHeader,
+      fadeInEffect,
+      typewriterEffect
+    }),
+    [bodyState, headerState, setBodyState, setHeaderState, animateBody, animateHeader, fadeInEffect, typewriterEffect]
+  )
 }

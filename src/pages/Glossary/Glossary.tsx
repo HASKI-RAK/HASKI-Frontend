@@ -1,6 +1,6 @@
 import { GlossaryList, Filter, Searchbar, GlossaryIndex, GlossaryEntryProps } from '@components'
 import { useGlossary as _useGlossary, GlossaryHookReturn } from './Glossary.hooks'
-import { useState, useMemo, Dispatch, SetStateAction } from 'react'
+import { useState, useMemo, Dispatch, SetStateAction, memo } from 'react'
 import { Typography, Box, Grid, Button } from '@common/components'
 import { useTranslation } from 'react-i18next'
 
@@ -146,4 +146,4 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
   )
 }
 
-export default Glossary
+export default memo(Glossary)

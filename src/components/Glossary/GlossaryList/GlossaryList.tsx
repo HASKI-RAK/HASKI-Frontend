@@ -1,6 +1,6 @@
 import { useGlossaryList as _useGlossaryList, GlossaryListHookReturn } from './GlossaryList.hooks'
 import { GlossaryEntry, GlossaryEntryProps } from '@components'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 
 /**
  * @typedef {object} GlossaryListProps
@@ -63,4 +63,4 @@ const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: Glossary
   )
 }
 
-export default GlossaryList
+export default memo(GlossaryList)

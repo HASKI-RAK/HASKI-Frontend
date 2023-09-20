@@ -1,4 +1,5 @@
 import { ToggleButton, Box } from '@common/components'
+import { memo } from 'react'
 
 /**
  * @typedef {object} ToggleButtonListProps
@@ -37,6 +38,8 @@ const ToggleButtonListComponent = ({ toggleButtonList, selectedElement, ...props
  * @returns {JSX.Element} - The ToggleButtonList component
  * @category components
  */
-export const ToggleButtonList = Object.assign(ToggleButtonListComponent, {
-  muiName: 'ToggleButton'
-})
+export const ToggleButtonList = memo(
+  Object.assign(ToggleButtonListComponent, {
+    muiName: 'ToggleButton'
+  })
+)

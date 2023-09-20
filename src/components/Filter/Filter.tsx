@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, memo } from 'react'
 import {
   Box,
   Checkbox,
@@ -99,4 +99,4 @@ const Filter = (props: FilterProps) => {
   )
 }
 
-export default Filter
+export default memo(Filter)

@@ -1,5 +1,6 @@
 import { Slide, Grow } from '@common/components'
 import { SeverityType } from '@components'
+import { memo } from 'react'
 
 /**
  * @typedef {Object} SnackbarTransitionProps
@@ -46,4 +47,4 @@ const SnackbarTransition = (props: SnackbarTransitionProps) => {
   }
 }
 
-export default SnackbarTransition
+export default memo(SnackbarTransition)
