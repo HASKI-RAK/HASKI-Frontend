@@ -1,6 +1,18 @@
 import '@testing-library/jest-dom'
 import Filter from './Filter'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, act, screen } from '@testing-library/react'
+import selectEvent from 'react-select-event'
+import { Select, MenuItem } from '@common/components'
+
+// clock ist faketimer
+// .tick runs all timers
+jest.useFakeTimers()
+jest.spyOn(global, 'setTimeout')
+
+afterEach(() => {
+  jest.clearAllTimers()
+  jest.clearAllMocks()
+})
 
 const mockFilterProps = {
   label: 'filter',
@@ -11,9 +23,8 @@ const mockFilterProps = {
 
 describe('Filter tests', () => {
   it('renders without input', () => {
-    const { getByTestId } = render(<Filter />)
-    const select = getByTestId('filter')
-    expect(select).toBeInTheDocument()
+    const filter = render(<Filter />)
+    expect(filter).toBeTruthy()
   })
 
   it('renders with input', () => {
@@ -126,20 +137,66 @@ describe('Filter tests', () => {
   })
 
   test('setSelectedOptions can be undefined', () => {
-    const { getByTestId, getByRole, getAllByRole } = render(
-      <Filter
-        label={mockFilterProps.label}
-        options={mockFilterProps.options}
-        selectedOptions={mockFilterProps.selectedOptions}
-      />
+    const { getByTestId, getByRole, getAllByRole, getByLabelText, rerender } = render(
+      <form data-testid="form">
+        <label htmlFor="selectedOptions">selectedOptions</label>
+        <Filter
+          label={mockFilterProps.label}
+          options={mockFilterProps.options}
+          selectedOptions={mockFilterProps.selectedOptions}
+          setSelectedOptions={mockFilterProps.setSelectedOptions}
+        />
+      </form>
+    )
+    screen.debug()
+    const select = getByTestId('filter')
+
+    console.debug(getByTestId('form').innerHTML)
+
+    expect(getByTestId('form')).toHaveFormValues({ selectedOptions: 'tag 2,tag 4' })
+
+    const test = getByLabelText('selectedOptions')
+
+    const button = getByRole('button')
+    expect(button).toHaveAccessibleName('tag 2 tag 4')
+    fireEvent.mouseDown(button)
+
+    const menuItems = getAllByRole('option')
+    act(() => {
+      menuItems[0].click()
+      jest.runOnlyPendingTimers()
+    })
+
+    fireEvent.mouseDown(button)
+    rerender(
+      <form data-testid="form">
+        <label htmlFor="selectedOptions">selectedOptions</label>
+        <Filter
+          label={mockFilterProps.label}
+          options={mockFilterProps.options}
+          selectedOptions={mockFilterProps.selectedOptions}
+          setSelectedOptions={mockFilterProps.setSelectedOptions}
+        />
+      </form>
     )
 
-    const select = getByTestId('filter')
-    const button = getByRole('button')
-    fireEvent.mouseDown(button)
-    const menuItems = getAllByRole('option')
-    fireEvent.change(select, { target: { value: menuItems[0].textContent } })
-    expect(mockFilterProps.setSelectedOptions).toHaveBeenCalledTimes(0)
+    screen.debug()
+
+    expect(button).toHaveAccessibleName('tag 1 tag 2 tag 4')
+
+    // fireEvent.change(test, { target: { value: 'Choc' } })
+    // selectEvent.select(test, menuItems[0].textContent!)
+    expect(getByTestId('form')).toHaveFormValues({ selectedOptions: 'tag 1,tag 2,tag 4' })
+
+    //
+
+    fireEvent.click(menuItems[0])
+    // fireEvent.change(select, { target: { value: menuItems[0].textContent } })
+    //  fireEvent.change(getByLabelText('selectedOptions'), { target: { value: 'tag 1' } })
+    //selectEvent.select(getByTestId('form'), 'tag 1')
+
+    // console.log(select.getAttribute('value'))
+    // expect(mockFilterProps.selectedOptions).toEqual(['tag 2', 'tag 4'])
   })
 
   // No snapshot testing

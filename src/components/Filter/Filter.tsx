@@ -48,11 +48,14 @@ type FilterProps = {
 const Filter = (props: FilterProps) => {
   const [open, setOpen] = useState(false)
 
-  const handleChange = useCallback((event: SelectChangeEvent<typeof props.selectedOptions>) => {
-    if (props.setSelectedOptions) {
-      props.setSelectedOptions(event.target.value)
-    }
-  }, [])
+  const handleChange = useCallback(
+    (event: SelectChangeEvent<typeof props.selectedOptions>) => {
+      if (props.setSelectedOptions) {
+        props.setSelectedOptions(event.target.value)
+      }
+    },
+    [props]
+  )
 
   // Renders the selected options as chips.
   const renderValue = useCallback(
@@ -67,27 +70,32 @@ const Filter = (props: FilterProps) => {
   )
 
   return (
-    <FormControl fullWidth>
-      <InputLabel>
-        <Typography>{props.label}</Typography>
-      </InputLabel>
-      <Select
-        multiple
-        value={props.selectedOptions}
-        onClick={() => setOpen(!open)}
-        onChange={handleChange}
-        input={<OutlinedInput label={props.label} />}
-        inputProps={{ 'data-testid': 'filter' }}
-        renderValue={renderValue}
-        MenuProps={MenuProps}>
-        {props.options?.map((option) => (
-          <MenuItem key={option} value={option}>
-            <Checkbox checked={props.selectedOptions && props.selectedOptions.indexOf(option) >= 0} />
-            <ListItemText primary={option} />
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <>
+      {props.selectedOptions && (
+        <FormControl fullWidth>
+          <InputLabel>
+            <Typography>{props.label}</Typography>
+          </InputLabel>
+          <Select
+            multiple
+            name="selectedOptions"
+            value={props.selectedOptions}
+            onClick={() => setOpen(!open)}
+            onChange={handleChange}
+            input={<OutlinedInput label={props.label} />}
+            inputProps={{ 'data-testid': 'filter', id: 'selectedOptions' }}
+            renderValue={renderValue}
+            MenuProps={MenuProps}>
+            {props.options?.map((option) => (
+              <MenuItem key={option} value={option}>
+                <Checkbox checked={props.selectedOptions && props.selectedOptions.indexOf(option) >= 0} />
+                <ListItemText primary={option} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      )}
+    </>
   )
 }
 
