@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from '@common/components'
+import { PrivacyModal } from '@components'
 import {
   MainFrame,
   Home,
@@ -31,6 +32,7 @@ const App = () => (
   <ThemeProvider theme={HaskiTheme}>
     <AuthProvider>
       <SnackbarProvider>
+        <PrivacyModal />
         <Router>
           <Routes>
             <Route element={<MainFrame />}>

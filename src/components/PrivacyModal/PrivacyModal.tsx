@@ -1,10 +1,6 @@
 import { Modal, Typography, Box, Button, Link } from '@common/components'
-import { FormGroup, FormControlLabel, Checkbox } from '@mui/material'
-import {
-  usePrivacyModal as _usePrivacyModal,
-  PrivacyModalHookProps,
-  PrivacyModalHookReturn
-} from './PrivacyModal.hooks'
+import { FormGroup, FormControlLabel, Checkbox, Grid } from '@mui/material'
+import { usePrivacyModal as _usePrivacyModal, PrivacyModalHookReturn } from './PrivacyModal.hooks'
 import { useTranslation } from 'react-i18next'
 import React from 'react'
 //Privacy policy modal
@@ -13,9 +9,7 @@ import React from 'react'
 //wenn accept und gelesen->schließen und daten sammeln
 //wenn cancel->schließen und keine daten sammeln
 //zukünftig in die einstellung eine möglichkeit zum cookie declinen einbauen
-//fehlende translation
-//snackbar einfügen
-//submit handler für cookie setzten
+//was passiert wenn accept geklickt wird?
 const style = {
   position: 'absolute',
   top: '50%',
@@ -29,14 +23,13 @@ const style = {
   display: 'flex'
 }
 export type PrivacyModalProps = {
-  usePrivacyModal?: (props: PrivacyModalHookProps) => PrivacyModalHookReturn
+  usePrivacyModal?: () => PrivacyModalHookReturn
 }
 const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps) => {
   const { t } = useTranslation()
   const [open, setOpen] = React.useState(true)
   const [checked, setCheck] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(false)
-  const { onAcceptHandler } = usePrivacyModal({ setIsLoading })
+  const { onAcceptHandler } = usePrivacyModal()
 
   //Lässt sich nicht einfach wegklicken
   const handleClose = (reason: string) => {
@@ -47,6 +40,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   const handleChecked = (event: React.MouseEvent<HTMLElement>) => {
     setCheck((event.target as HTMLInputElement).checked)
   }
+  //weiß nicht wie sich das in eine function bringen lässt
   const handleAccept = () => {
     onAcceptHandler(true)
     setOpen(false)
@@ -57,10 +51,10 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   }
   //nichts laden wenn auf privacypolicy oder wenn cookie gesetzt
   if (document.cookie.includes('privacy_accept_token')) {
-    return <div></div>
+    return null
   }
   if (window.location.href.includes('privacypolicy')) {
-    return <div></div>
+    return null
   }
   return (
     <Modal
@@ -90,12 +84,19 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
               <FormControlLabel control={<Checkbox />} label="Agree someting else" />
             </FormGroup>
           </Typography>
-          <Button variant={'contained'} sx={{ alignSelf: 'start' }} onClick={handleDecline}>
-            {t('decline')}
-          </Button>
-          <Button variant={'contained'} sx={{ alignSelf: 'end' }} disabled={!checked} onClick={handleAccept}>
-            {t('accept')}
-          </Button>
+          <Box
+            height={'20%'}
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between'
+            }}>
+            <Button variant={'contained'} sx={{ alignSelf: 'end' }} onClick={handleDecline}>
+              {t('decline')}
+            </Button>
+            <Button variant={'contained'} sx={{ alignSelf: 'end' }} disabled={!checked} onClick={handleAccept}>
+              {t('accept')}
+            </Button>
+          </Box>
         </Typography>
       </Box>
     </Modal>

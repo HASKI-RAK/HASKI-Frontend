@@ -2,14 +2,11 @@ import { SnackbarContext } from '@services'
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCookies } from 'react-cookie'
-//cookie hier reinschmeißen
-export type PrivacyModalHookProps = {
-  setIsLoading: (isLoading: boolean) => void
-}
+
 export type PrivacyModalHookReturn = {
   readonly onAcceptHandler: (isAccepted: boolean) => void
 }
-export const usePrivacyModal = ({ setIsLoading }: PrivacyModalHookProps): PrivacyModalHookReturn => {
+export const usePrivacyModal = (): PrivacyModalHookReturn => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
   const [cookies, setCookie] = useCookies(['privacy_accept_token'])

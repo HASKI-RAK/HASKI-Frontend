@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { Box, Divider, Typography, Stack, Grid, Container } from '@common/components'
-import { MenuBar, Footer, BreadcrumbsContainer, LocalNav, PrivacyModal } from '@components'
+import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from '@components'
 
 /**
  * Main frame component.
@@ -34,7 +34,6 @@ const MainFrame = () => (
         </Grid>
         <Grid item xs={8}>
           {/**💉 Pages get injected here through App routing */}
-          <PrivacyModal />
           <Container>
             <Outlet />
           </Container>
