@@ -21,7 +21,6 @@ import MenuBar from './MenuBar/MenuBar'
 import Footer from './Footer/Footer'
 import LocalNav from './LocalNav/LocalNav'
 import BreadcrumbsContainer from './BreadcrumbsContainer/BreadcrumbsContainer'
-import ProjectDescriptionContent from './ProjectDescription/ProjectDescriptionContent/ProjectDescriptionContent'
 import ProjectDescriptionCard from './ProjectDescription/ProjectDescriptionCard/ProjectDescriptionCard'
 import ProjectDescriptionStepper from './ProjectDescription/ProjectDescriptionStepper/ProjectDescriptionStepper'
 import SnackbarMessage, { SnackbarMessageProps, SeverityType } from './Snackbar/SnackbarMessage/SnackbarMessage'
@@ -55,7 +54,6 @@ export {
   ResultDescriptionListK,
   QuestionnaireResultsModal,
   ContactForm,
-  ProjectDescriptionContent,
   ProjectDescriptionCard,
   ProjectDescriptionStepper,
   SnackbarTransition,
