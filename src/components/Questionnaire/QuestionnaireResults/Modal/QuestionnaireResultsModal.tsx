@@ -1,17 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import { useTranslation } from 'react-i18next'
-import {
-  Box,
-  Button,
-  Modal,
-  Stepper,
-  Step,
-  StepButton,
-  IconButton,
-  Stack,
-  Typography
-} from '@common/components'
+import { Box, Button, Modal, Stepper, Step, StepButton, IconButton, Stack, Typography } from '@common/components'
 import { usePersistedStore, useStore } from '@store'
 import { ILS, ListK } from '@core'
 import { Link } from 'react-router-dom'

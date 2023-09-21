@@ -851,5 +851,7 @@
   "topic": "Thema",
   "universityKempten": "Hochschule Kempten",
   "update": "Aktualisieren",
-  "warning": "Warnung"
+  "warning": "Warnung",
+  "ILS sending error": "ILS Fragebogen konnte nicht gesendet werden.",
+  "ListK sending error": "ListK Fragebogen konnte nicht gesendet werden."
 }

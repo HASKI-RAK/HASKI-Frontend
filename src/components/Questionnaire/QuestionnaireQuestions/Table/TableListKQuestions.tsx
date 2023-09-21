@@ -7,10 +7,9 @@ import { useTranslation } from 'react-i18next'
 import { Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material'
 import TableCell from '@mui/material/TableCell'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
-import { SnackbarContext, useQuestionnaireAnswersListKStore } from '@services'
-import PropTypes from 'prop-types'
-import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
-import useHandleSend from './TableListKQuestions.hooks'
+import { SnackbarContext } from '@services'
+import { ButtonStack, SendButton, MemoTableRowQuestion } from './TableCommonComponents'
+import useHandleSend from './Questions.hooks'
 
 /**
  * @description
@@ -388,7 +387,7 @@ const stepsListK = [
 ]
 
 // region Memoized Elements
-interface MemoTableRowAnswersProps {
+interface TableRowAnswersProps {
   t: (key: string) => string
   activeStep: number
   answerIndex: number
@@ -408,8 +407,8 @@ interface MemoTableRowAnswersProps {
   setRadioButtonGroup: (value: ((prevState: string) => string) | string) => void
 }
 
-const MemoTableRowAnswers: React.FC<MemoTableRowAnswersProps> = memo(
-  ({ activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex }) => {
+const TableRowAnswers = memo(
+  ({ activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex }: TableRowAnswersProps) => {
     return (
       <TableRow>
         <TableCell>
@@ -459,23 +458,15 @@ const MemoTableRowAnswers: React.FC<MemoTableRowAnswersProps> = memo(
   }
 )
 
-MemoTableRowAnswers.displayName = 'MemoTableRowAnswers'
-MemoTableRowAnswers.propTypes = {
-  t: PropTypes.func.isRequired,
-  activeStep: PropTypes.number.isRequired,
-  answerIndex: PropTypes.number.isRequired,
-  radioButtonGroup: PropTypes.string.isRequired,
-  handleRadioChange: PropTypes.func.isRequired,
-  setRadioButtonGroup: PropTypes.func.isRequired
-}
-// endregion
+TableRowAnswers.displayName = 'TableRowAnswers'
 
-// region TableListKQuestions
 export const TableListKQuestions = memo(() => {
+  // eslint-disable-next-line immutable/no-mutation
   TableListKQuestions.displayName = 'TableListKQuestions'
-  const { sendAnswers, isSending } = useHandleSend()
   const [sendSuccess, setSendSuccess] = useState(false)
   const { addSnackbar } = useContext(SnackbarContext)
+  const [questionnaireAnswers, setQuestionnaireAnswers ] = useState([{question_id: "", answer: ""}])
+  const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, false)
 
   const { t } = useTranslation()
 
@@ -486,8 +477,8 @@ export const TableListKQuestions = memo(() => {
   const [radioButtonGroup4, setRadioButtonGroup4] = useState('')
   const [radioButtonGroup5, setRadioButtonGroup5] = useState('')
 
-  const handleSendClick = async () => {
-    await sendAnswers().then((res) => {
+  const handleSendClick = () => {
+    sendAnswers().then((res) => {
       if (res) {
         addSnackbar({
           message: 'Data send successfully',
@@ -510,16 +501,6 @@ export const TableListKQuestions = memo(() => {
   // (They are reset to their previous Value when the user goes back)
   const isNextDisabled =
     !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4 || !radioButtonGroup5
-
-  const { questionnaireAnswers, setQuestionnaireAnswers } = useQuestionnaireAnswersListKStore()
-
-  // Before reload or close window ask the user if he is sure
-  window.addEventListener('beforeunload', (e: BeforeUnloadEvent) => {
-    // Cancel the event
-    e.preventDefault()
-    // Chrome requires returnValue to be set
-    e.returnValue = ''
-  })
 
   const setRadioButtonGroups = (newActiveStep: number) => {
     setRadioButtonGroup1(setRadioButtonValue(stepsListK[newActiveStep][0]))
@@ -555,7 +536,7 @@ export const TableListKQuestions = memo(() => {
         answer5: string
       }) => {
         //if the question is already answered, the answer is set to the value of the radio button/ else radio button is not set
-        switch (questionnaireAnswers[listkStep.questionLabel as keyof typeof questionnaireAnswers]) {
+        switch (questionnaireAnswers.find((answer) => answer.question_id === listkStep.questionLabel)?.answer) {
           case '1':
             return listkStep.answer1
           case '2':
@@ -594,7 +575,7 @@ export const TableListKQuestions = memo(() => {
         listkStep.answer5
       ]
       const selectedAnswer = radioButtonOptions.indexOf(event.target.value) + 1
-      setQuestionnaireAnswers(listkStep.questionLabel, selectedAnswer.toString())
+      setQuestionnaireAnswers(prevState => [...prevState, {"question_id": listkStep.questionLabel, "answer": selectedAnswer.toString()}])
     },
     [setQuestionnaireAnswers]
   )
@@ -602,7 +583,7 @@ export const TableListKQuestions = memo(() => {
   return (
     <Box>
       <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
-        <MemoButtonStack
+        <ButtonStack
           activeStep={activeStep}
           handleNext={handleNext}
           handleBack={handleBack}
@@ -611,11 +592,11 @@ export const TableListKQuestions = memo(() => {
           disabled={activeStep === 7 || isNextDisabled}
         />
         <Stack direction="column" justifyContent="space-around" alignItems="center">
-          <TableContainer component={Paper} style={{ maxWidth: '71%' }}>
+          <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableListK'}>
                 <MemoTableRowQuestion question={t(stepsListK[activeStep][0].question)} />
-                <MemoTableRowAnswers
+                <TableRowAnswers
                   activeStep={activeStep}
                   handleRadioChange={handleRadioChange}
                   radioButtonGroup={radioButtonGroup1}
@@ -624,7 +605,7 @@ export const TableListKQuestions = memo(() => {
                   answerIndex={0}
                 />
                 <MemoTableRowQuestion question={t(stepsListK[activeStep][1].question)} />
-                <MemoTableRowAnswers
+                <TableRowAnswers
                   activeStep={activeStep}
                   handleRadioChange={handleRadioChange}
                   radioButtonGroup={radioButtonGroup2}
@@ -633,7 +614,7 @@ export const TableListKQuestions = memo(() => {
                   answerIndex={1}
                 />
                 <MemoTableRowQuestion question={t(stepsListK[activeStep][2].question)} />
-                <MemoTableRowAnswers
+                <TableRowAnswers
                   activeStep={activeStep}
                   handleRadioChange={handleRadioChange}
                   radioButtonGroup={radioButtonGroup3}
@@ -642,7 +623,7 @@ export const TableListKQuestions = memo(() => {
                   answerIndex={2}
                 />
                 <MemoTableRowQuestion question={t(stepsListK[activeStep][3].question)} />
-                <MemoTableRowAnswers
+                <TableRowAnswers
                   activeStep={activeStep}
                   handleRadioChange={handleRadioChange}
                   radioButtonGroup={radioButtonGroup4}
@@ -653,7 +634,7 @@ export const TableListKQuestions = memo(() => {
                 {activeStep < 7 ? (
                   <>
                     <MemoTableRowQuestion question={t(stepsListK[activeStep][4].question)} />
-                    <MemoTableRowAnswers
+                    <TableRowAnswers
                       activeStep={activeStep}
                       handleRadioChange={handleRadioChange}
                       radioButtonGroup={radioButtonGroup5}
@@ -666,7 +647,7 @@ export const TableListKQuestions = memo(() => {
               </TableBody>
             </Table>
           </TableContainer>
-          <MemoSendButton
+          <SendButton
             t={t}
             handleSend={handleSendClick}
             isNextDisabled={isNextDisabled}
@@ -680,4 +661,4 @@ export const TableListKQuestions = memo(() => {
     </Box>
   )
 })
-// endregion
+

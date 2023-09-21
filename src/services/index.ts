@@ -4,10 +4,6 @@
  */
 export { AuthContext } from './AuthContext'
 export type { AuthContextType } from './AuthContext'
-export { useQuestionnaireAnswersILSStore } from './Questionnaire'
-export type { QuestionnaireAnswersILS } from './Questionnaire'
-export { useQuestionnaireAnswersListKStore } from './Questionnaire'
-export type { QuestionnaireAnswersListK } from './Questionnaire'
 export { AuthProvider } from './AuthProvider'
 export { getLearningPathElement } from './LearningPath'
 export { getLearningPathTopic } from './Topic'

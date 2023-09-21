@@ -1,11 +1,4 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  Stack
-} from '@common/components'
+import { Button, Card, CardContent, Typography, Box, Stack } from '@common/components'
 import { AuthContext } from '@services'
 import log from 'loglevel'
 import { useContext, useEffect } from 'react'

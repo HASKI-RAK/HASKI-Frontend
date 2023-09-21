@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, {useContext, useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   AppBar,
@@ -18,25 +18,19 @@ import {
   Link
 } from '@common/components'
 
-import {
-    Analytics,
-    Settings,
-    Help,
-    ArrowDropDown,
-    Person,
-    Login,
-    Logout,
-    AssignmentOutlined
-} from '@common/icons'
+import { Analytics, Settings, Help, ArrowDropDown, Person, Login, Logout, AssignmentOutlined } from '@common/icons'
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined'
 import PlaylistAddCheckCircleOutlinedIcon from '@mui/icons-material/PlaylistAddCheckCircleOutlined'
 
 import { useTranslation } from 'react-i18next'
 import { AuthContext, SnackbarContext } from '@services'
-import { DropdownLanguage, SkeletonList, QuestionnaireResultsModal } from '@components'
+import {DropdownLanguage, SkeletonList, QuestionnaireQuestionsModal, QuestionnaireResultsModal} from '@components'
 import { usePersistedStore, useStore } from '@store'
 import { Topic } from '@core'
 import log from 'loglevel'
+import {TableILSQuestions} from "../Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions"
+import {TableListKQuestions} from "../Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions"
+
 
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
@@ -73,6 +67,9 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const fetchUser = usePersistedStore((state) => state.fetchUser)
   const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
   const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
+  const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
+  const [modalOpenListK, setModalOpenListK] = useState(false)
 
   const handleOpenModal = () => {
     setModalOpen(true)
@@ -82,6 +79,39 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     setModalOpen(false)
   }
 
+  const handleOpenILSShortModal = () => {
+    setModalOpenILSShort(true)
+  }
+
+  const handleCloseILSShortModal = (event: object, reason: string) => {
+    if (reason == "backdropClick")
+      if(window.confirm("Please close the window with the close button on the top right corner."))
+        setModalOpenILSShort(false)
+      return
+  }
+
+  const handleOpenILSLongModal = () => {
+    setModalOpenILSLong(true)
+  }
+
+  const handleCloseILSLongModal = (event: object, reason: string) => {
+    if (reason == "backdropClick")
+      if(window.confirm("Please close the window with the close button on the top right corner."))
+        setModalOpenILSLong(false)
+      return
+  }
+
+  const handleOpenListKModal = () => {
+    setModalOpenListK(true)
+  }
+
+  const handleCloseListKModal = (event: object, reason: string) => {
+    if (reason == "backdropClick")
+        if(window.confirm("Please close the window with the close button on the top right corner."))
+          setModalOpenListK(false)
+        return
+  }
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
   }
@@ -89,6 +119,8 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
+
+
 
   const handleOpenTopicsMenu = async (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElTopics(event.currentTarget)
@@ -175,11 +207,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                     data-testid="Menubar-TopicButton"
                     color="inherit"
                     endIcon={
-                      anchorElTopics ? (
-                        <ArrowDropDown sx={{ transform: 'rotate(180deg)' }} />
-                      ) : (
-                        <ArrowDropDown />
-                      )
+                      anchorElTopics ? <ArrowDropDown sx={{ transform: 'rotate(180deg)' }} /> : <ArrowDropDown />
                     }>
                     {t('components.MenuBar.TopicButton')}
                   </Button>
@@ -315,36 +343,40 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
+
               <MenuItem
                 data-testid="questionnaireILS"
                 key="questionnaireILS"
-                onClick={() => {
-                  navigate('/questionnaire_ils_long')
-                  handleCloseUserMenu()
-                }}>
+                onClick={() => handleOpenILSLongModal()}>
                 <ListItemIcon>{isAuth ? <LibraryBooksOutlinedIcon fontSize="small" /> : null}</ListItemIcon>
                 <Typography textAlign="center">{isAuth ? 'ILS Questionnaire' : null}</Typography>
               </MenuItem>
+              <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
+                <TableILSQuestions ilsLong={true} />
+              </QuestionnaireQuestionsModal>
+
               <MenuItem
                 data-testid="questionnaireILSshort"
                 key="questionnaireILSshort"
-                onClick={() => {
-                  navigate('/questionnaire_ils_short')
-                  handleCloseUserMenu()
-                }}>
+                onClick={() => { handleOpenILSShortModal() }}>
                 <ListItemIcon>{isAuth ? <AssignmentOutlined fontSize="small" /> : null}</ListItemIcon>
                 <Typography textAlign="center">{isAuth ? 'ILS Questionnaire shortend' : null}</Typography>
               </MenuItem>
+              <QuestionnaireQuestionsModal open={modalOpenILSShort} handleClose={handleCloseILSShortModal}>
+                <TableILSQuestions ilsLong={false} />
+              </QuestionnaireQuestionsModal>
+
               <MenuItem
                 data-testid="questionnaireListk"
                 key="questionnaireListk"
-                onClick={() => {
-                  navigate('/questionnaire_listk')
-                  handleCloseUserMenu()
-                }}>
+                onClick={() => { handleOpenListKModal() }}>
                 <ListItemIcon>{isAuth ? <PlaylistAddCheckCircleOutlinedIcon fontSize="small" /> : null}</ListItemIcon>
                 <Typography textAlign="center">{isAuth ? 'List-K Questionnaire' : null}</Typography>
               </MenuItem>
+              <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>
+                <TableListKQuestions />
+              </QuestionnaireQuestionsModal>
+
               <MenuItem
                 data-testid="usermenuitem"
                 key="usermenuitem"

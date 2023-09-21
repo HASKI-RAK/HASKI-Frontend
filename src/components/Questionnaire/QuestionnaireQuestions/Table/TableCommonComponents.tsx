@@ -1,15 +1,7 @@
 import React, { memo } from 'react'
-import {
-  Stack,
-  Typography,
-  MobileStepper,
-  Button
-} from '@common/components'
+import { Stack, Typography, MobileStepper, Button, TableRow, TableCell } from '@common/components'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
-import PropTypes from 'prop-types'
-import TableRow from '@mui/material/TableRow'
-import TableCell from '@mui/material/TableCell'
 import { CircularProgress } from '@mui/material'
 
 /**
@@ -19,12 +11,7 @@ import { CircularProgress } from '@mui/material'
  * This is a collection of common components of ILS (Long and Short) and ListK questionnaires.
  */
 
-// region memo props interfaces
-interface MemoTableRowQuestionProps {
-  question: string
-}
-
-interface MemoButtonStackProps {
+type ButtonStackProps = {
   activeStep: number
   handleNext: () => void
   handleBack: () => void
@@ -33,7 +20,7 @@ interface MemoButtonStackProps {
   disabled: boolean
 }
 
-interface MemoSendButtonProps {
+type SendButtonProps = {
   t: (key: string) => string
   handleSend: () => void
   isNextDisabled: boolean
@@ -43,10 +30,7 @@ interface MemoSendButtonProps {
   sendSuccess: boolean
 }
 
-// endregion
-
-// region memo react elements
-export const MemoTableRowQuestion: React.FC<MemoTableRowQuestionProps> = memo(({ question }) => {
+export const MemoTableRowQuestion = memo(({ question }: {question: string}) => {
   return (
     <TableRow>
       <TableCell
@@ -60,9 +44,11 @@ export const MemoTableRowQuestion: React.FC<MemoTableRowQuestionProps> = memo(({
     </TableRow>
   )
 })
+// eslint-disable-next-line immutable/no-mutation
+MemoTableRowQuestion.displayName = 'MemoTableRowQuestion'
 
-export const MemoButtonStack: React.FC<MemoButtonStackProps> = memo(
-  ({ activeStep, handleNext, handleBack, steps, idType, disabled }) => {
+export const ButtonStack = memo(
+  ({ activeStep, handleNext, handleBack, steps, idType, disabled }: ButtonStackProps) => {
     return (
       <Stack direction="row" justifyContent="space-around" alignItems="center">
         <MobileStepper
@@ -98,9 +84,11 @@ export const MemoButtonStack: React.FC<MemoButtonStackProps> = memo(
     )
   }
 )
+// eslint-disable-next-line immutable/no-mutation
+ButtonStack.displayName = 'MemoButtonStack'
 
-export const MemoSendButton: React.FC<MemoSendButtonProps> = memo(
-  ({ handleSend, isNextDisabled, t, isValid, idType, isSending, sendSuccess }) => {
+export const SendButton = memo(
+  ({ handleSend, isNextDisabled, t, isValid, idType, isSending, sendSuccess }: SendButtonProps) => {
     return (
       <div>
         <Button
@@ -116,32 +104,5 @@ export const MemoSendButton: React.FC<MemoSendButtonProps> = memo(
     )
   }
 )
-//endregion
-
-// region memo required propTypes
-MemoTableRowQuestion.displayName = 'MemoTableRowQuestion'
-MemoTableRowQuestion.propTypes = {
-  question: PropTypes.string.isRequired
-}
-
-MemoButtonStack.displayName = 'MemoButtonStack'
-MemoButtonStack.propTypes = {
-  activeStep: PropTypes.number.isRequired,
-  handleNext: PropTypes.func.isRequired,
-  handleBack: PropTypes.func.isRequired,
-  steps: PropTypes.number.isRequired,
-  idType: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired
-}
-
-MemoSendButton.displayName = 'MemoSendButton'
-MemoSendButton.propTypes = {
-  t: PropTypes.func.isRequired,
-  handleSend: PropTypes.func.isRequired,
-  isNextDisabled: PropTypes.bool.isRequired,
-  isValid: PropTypes.bool.isRequired,
-  idType: PropTypes.string.isRequired,
-  isSending: PropTypes.bool.isRequired,
-  sendSuccess: PropTypes.bool.isRequired
-}
-// endregion
+// eslint-disable-next-line immutable/no-mutation
+SendButton.displayName = 'MemoSendButton'

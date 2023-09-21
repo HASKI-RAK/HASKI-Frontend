@@ -1,11 +1,9 @@
 import '@testing-library/jest-dom'
-import { fireEvent, getByTestId, render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
 import { MemoryRouter } from 'react-router-dom'
-import { Topic, LearningElement, LearningPathElement, StudentLearningElement } from '@core'
 import { AuthContext } from '@services'
 import * as router from 'react-router'
-import React from 'react'
 import { mockServices } from 'jest.setup'
 
 const navigate = jest.fn()
@@ -333,6 +331,4 @@ describe('MenuBar', () => {
     fireEvent.click(getAllByText('components.MenuBar.Profile.Logout')[0])
     expect(navigate).toHaveBeenCalledWith('/login')
   })
-
-  it('', async () => {})
 })

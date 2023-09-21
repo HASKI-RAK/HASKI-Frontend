@@ -485,6 +485,138 @@
   "pages.course": "Course",
   "pages.glossary": "Glossary",
   "pages.glossary.collapseAll": "Collapse All",
+  "components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions": [
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9",
+        "questionLabel": "AR_3_F9",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-2",
+        "questionLabel": "SI_1_F2",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-7",
+        "questionLabel": "VV_2_F7",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-4",
+        "questionLabel": "SG_1_F4",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-13",
+        "questionLabel": "AR_4_F13",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-14",
+        "questionLabel": "SI_4_F14",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-19",
+        "questionLabel": "VV_5_F19",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-8",
+        "questionLabel": "SG_2_F8",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-21",
+        "questionLabel": "AR_6_F21",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-21.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-21.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-26",
+        "questionLabel": "SI_7_F26",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-26.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-26.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-27",
+        "questionLabel": "VV_7_F27",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-27.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-27.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-16",
+        "questionLabel": "SG_4_F16",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-16.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-16.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-25",
+        "questionLabel": "AR_7_F25",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-25.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-25.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-38",
+        "questionLabel": "SI_10_F38",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-38.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-38.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-39",
+        "questionLabel": "VV_10_F39",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-39.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-39.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-40",
+        "questionLabel": "SG_10_F40",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-40.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-40.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-29",
+        "questionLabel": "AR_8_F29",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-29.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-29.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-42",
+        "questionLabel": "SI_11_F42",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-42.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-42.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-43",
+        "questionLabel": "VV_11_F43",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-43.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-43.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-44",
+        "questionLabel": "SG_11_F44",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-44.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-44.2"
+      }
+    ]
+  ],
   "pages.glossary.elements": [
     {
       "term": "Adaptability",
@@ -881,5 +1013,7 @@
   "topic": "Topic",
   "universityKempten": "University of Applied Sciences Kempten",
   "update": "Updated",
-  "warning": "Warning"
+  "warning": "Warning",
+  "ILS sending error": "ILS Questionnaire could not be sent.",
+  "ListK sending error": "ListK Questionnaire could not be sent."
 }

@@ -7,10 +7,9 @@ import { useTranslation } from 'react-i18next'
 import { Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material'
 import TableCell from '@mui/material/TableCell'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
-import { SnackbarContext, useQuestionnaireAnswersILSStore } from '@services'
-import PropTypes from 'prop-types'
-import { MemoButtonStack, MemoSendButton, MemoTableRowQuestion } from './TableCommonComponents'
-import useHandleSend from './TableILSQuestions.hooks'
+import { SnackbarContext } from '@services'
+import { ButtonStack, SendButton, MemoTableRowQuestion } from './TableCommonComponents'
+import useHandleSend from './Questions.hooks'
 
 /**
  * @description
@@ -461,8 +460,8 @@ interface MemoTableRowAnswersProps {
   setRadioButtonGroup: (value: ((prevState: string) => string) | string) => void
 }
 
-const MemoTableRowAnswers: React.FC<MemoTableRowAnswersProps> = memo(
-  ({ activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex, isIlsLong }) => {
+const MemoTableRowAnswers = memo(
+  ({ activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex, isIlsLong }: MemoTableRowAnswersProps) => {
     const ilsArray = isIlsLong ? stepsLongILS : stepsShortILS
     return (
       <TableRow>
@@ -499,27 +498,18 @@ const MemoTableRowAnswers: React.FC<MemoTableRowAnswersProps> = memo(
 )
 
 MemoTableRowAnswers.displayName = 'MemoTableRowAnswers'
-MemoTableRowAnswers.propTypes = {
-  t: PropTypes.func.isRequired,
-  activeStep: PropTypes.number.isRequired,
-  answerIndex: PropTypes.number.isRequired,
-  radioButtonGroup: PropTypes.string.isRequired,
-  handleRadioChange: PropTypes.func.isRequired,
-  setRadioButtonGroup: PropTypes.func.isRequired,
-  isIlsLong: PropTypes.bool.isRequired
-}
-// endregion
 
-// region TableILSQuestions
 type TableILSQuestionsProps = {
   ilsLong: boolean
 }
 
 export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   TableILSQuestions.displayName = 'TableILSQuestions'
-  const { sendAnswers, isSending } = useHandleSend()
   const [successSend, setSuccessSend] = useState(false)
+  const [ questionnaireAnswers, setQuestionnaireAnswers ] = useState([{question_id: "", answer: ""}])
   const { addSnackbar } = useContext(SnackbarContext)
+  const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, true)
+
 
   const { t } = useTranslation()
 
@@ -532,16 +522,6 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   //if all radio buttons are selected, the next button is enabled
   // (They are reset to their previous Value when the user goes back)
   const isNextDisabled = !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4
-
-  const { questionnaireAnswers, setQuestionnaireAnswers } = useQuestionnaireAnswersILSStore()
-
-  // Before reload or close window ask the user if he is sure
-  window.addEventListener('beforeunload', (e: BeforeUnloadEvent) => {
-    // Cancel the event
-    e.preventDefault()
-    // Chrome requires returnValue to be set
-    e.returnValue = ''
-  })
 
   const setRadioButtonGroups = (newActiveStep: number) => {
     const stepsILS = ilsLong ? stepsLongILS : stepsShortILS
@@ -583,14 +563,13 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   }
 
   const setRadioButtonValue = useMemo(
-    () =>
-      (ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }): string => {
-        //if the question is already answered, the answer is set to the value of the radio button, else radio button is not set
-        const answerType = questionnaireAnswers[ilsStep.questionLabel as keyof typeof questionnaireAnswers]
-        return answerType === 'a' ? ilsStep.answer1 : answerType === 'b' ? ilsStep.answer2 : ''
+      () => (ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }): string => {
+        // if the question is already answered, the answer is set to the value of the radio button, else radio button is not set
+        const answerType = questionnaireAnswers.find((answer) => answer.question_id === ilsStep.questionLabel)?.answer
+        return answerType === 'a' ? ilsStep.answer1 : answerType === 'b' ? ilsStep.answer2 : '';
       },
-    [questionnaireAnswers]
-  )
+      [questionnaireAnswers]
+  );
 
   const handleRadioChange = useCallback(
     (
@@ -600,7 +579,7 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
       const radioButtonOptions = [ilsStep.answer1, ilsStep.answer2]
       const selectedAnswer = radioButtonOptions.indexOf(event.target.value) === 0 ? 'a' : 'b'
 
-      setQuestionnaireAnswers(ilsStep.questionLabel, selectedAnswer.toString())
+      setQuestionnaireAnswers(prevState => [...prevState, {"question_id": ilsStep.questionLabel, "answer": selectedAnswer.toString()}])
     },
     [setQuestionnaireAnswers]
   )
@@ -610,7 +589,7 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   return (
     <Box>
       <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
-        <MemoButtonStack
+        <ButtonStack
           activeStep={activeStep}
           handleNext={handleNext}
           handleBack={handleBack}
@@ -619,7 +598,7 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
           disabled={ilsLong ? activeStep === 10 || isNextDisabled : activeStep === 4 || isNextDisabled}
         />
         <Stack direction="column" justifyContent="space-around" alignItems="center">
-          <TableContainer component={Paper} style={{ maxWidth: '51%' }}>
+          <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableILSBody'}>
                 <MemoTableRowQuestion question={t(ilsArray[activeStep][0].question)} />
@@ -665,7 +644,7 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
               </TableBody>
             </Table>
           </TableContainer>
-          <MemoSendButton
+          <SendButton
             t={t}
             handleSend={handleSendClick}
             isNextDisabled={isNextDisabled}
