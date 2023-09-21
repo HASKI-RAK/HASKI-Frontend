@@ -24,9 +24,12 @@ export type GlossaryIndexProps = {
  * @category Components
  */
 const GlossaryIndex = (props: GlossaryIndexProps) => {
-  const handleChange = useCallback((_: React.MouseEvent<HTMLElement>, newSelectedIndexElement: string) => {
-    props.setSelectedIndexElement?.(newSelectedIndexElement)
-  }, [])
+  const handleChange = useCallback(
+    (_: React.MouseEvent<HTMLElement>, newSelectedIndexElement: string) => {
+      props.setSelectedIndexElement?.(newSelectedIndexElement)
+    },
+    [props.setSelectedIndexElement]
+  )
 
   return (
     <ToggleButtonGroup
