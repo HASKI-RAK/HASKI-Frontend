@@ -16,378 +16,7 @@ import useHandleSend from './Questions.hooks'
  * This component is used to display the questionnaire questions for the ListK questionnaire.
  */
 
-const stepsListK = [
-  [
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1',
-      questionLabel: 'org1_f1',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-2',
-      questionLabel: 'org2_f2',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-3',
-      questionLabel: 'org3_f3',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-4',
-      questionLabel: 'elab1_f4',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-5',
-      questionLabel: 'elab2_f5',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    }
-  ],
-  [
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-6',
-      questionLabel: 'elab3_f6',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-7',
-      questionLabel: 'crit_rev1_f7',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-8',
-      questionLabel: 'crit_rev2_f8',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-9',
-      questionLabel: 'crit_rev3_f9',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-10',
-      questionLabel: 'rep1_f10',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    }
-  ],
-  [
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-11',
-      questionLabel: 'rep2_f11',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-12',
-      questionLabel: 'rep3_f12',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-13',
-      questionLabel: 'goal_plan1_f13',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-14',
-      questionLabel: 'goal_plan2_f14',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-15',
-      questionLabel: 'goal_plan3_f15',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    }
-  ],
-  [
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-16',
-      questionLabel: 'con1_f16',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-17',
-      questionLabel: 'con2_f17',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-18',
-      questionLabel: 'con3_f18',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-19',
-      questionLabel: 'reg1_f19',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-20',
-      questionLabel: 'reg2_f20',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    }
-  ],
-  [
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-21',
-      questionLabel: 'reg3_f21',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-22',
-      questionLabel: 'att1_f22',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-23',
-      questionLabel: 'att2_f23',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-24',
-      questionLabel: 'att3_f24',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-25',
-      questionLabel: 'eff1_f25',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    }
-  ],
-  [
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-26',
-      questionLabel: 'eff2_f26',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-27',
-      questionLabel: 'eff3_f27',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-28',
-      questionLabel: 'time1_f28',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-29',
-      questionLabel: 'time2_f29',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-30',
-      questionLabel: 'time3_f30',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    }
-  ],
-  [
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-31',
-      questionLabel: 'lrn_w_cls1_f31',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-32',
-      questionLabel: 'lrn_w_cls2_f32',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-33',
-      questionLabel: 'lrn_w_cls3_f33',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-34',
-      questionLabel: 'lit_res1_f34',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-35',
-      questionLabel: 'lit_res2_f35',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    }
-  ],
-  [
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-36',
-      questionLabel: 'lit_res3_f36',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-37',
-      questionLabel: 'lrn_env1_f37',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-38',
-      questionLabel: 'lrn_env2_f38',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    },
-    {
-      question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-39',
-      questionLabel: 'lrn_env3_f39',
-      answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1',
-      answer2: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2',
-      answer3: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3',
-      answer4: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4',
-      answer5: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
-    }
-  ]
-]
-
-// region Memoized Elements
-interface TableRowAnswersProps {
+type TableRowAnswersProps = {
   t: (key: string) => string
   activeStep: number
   answerIndex: number
@@ -405,10 +34,12 @@ interface TableRowAnswersProps {
     }
   ) => void
   setRadioButtonGroup: (value: ((prevState: string) => string) | string) => void
+  stepsListK: {question: string; questionLabel: string; answer1: string; answer2: string, answer3: string, answer4: string,
+    answer5: string}[][]
 }
 
 const TableRowAnswers = memo(
-  ({ activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex }: TableRowAnswersProps) => {
+  ({ activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex, stepsListK }: TableRowAnswersProps) => {
     return (
       <TableRow>
         <TableCell>
@@ -457,18 +88,25 @@ const TableRowAnswers = memo(
     )
   }
 )
-
+// eslint-disable-next-line immutable/no-mutation
 TableRowAnswers.displayName = 'TableRowAnswers'
 
 export const TableListKQuestions = memo(() => {
-  // eslint-disable-next-line immutable/no-mutation
-  TableListKQuestions.displayName = 'TableListKQuestions'
+
   const [sendSuccess, setSendSuccess] = useState(false)
   const { addSnackbar } = useContext(SnackbarContext)
   const [questionnaireAnswers, setQuestionnaireAnswers ] = useState([{question_id: "", answer: ""}])
   const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, false)
 
   const { t } = useTranslation()
+
+  const stepsListK: { question: string; questionLabel: string; answer1: string; answer2: string, answer3: string, answer4: string,
+  answer5: string }[][] = [
+    ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions', {
+      returnObjects: true
+    }) as { question: string; questionLabel: string; answer1: string; answer2: string, answer3: string, answer4: string,
+      answer5: string }[][])
+  ]
 
   const [activeStep, setActiveStep] = useState(0)
   const [radioButtonGroup1, setRadioButtonGroup1] = useState('')
@@ -603,6 +241,7 @@ export const TableListKQuestions = memo(() => {
                   setRadioButtonGroup={setRadioButtonGroup1}
                   t={t}
                   answerIndex={0}
+                  stepsListK={stepsListK}
                 />
                 <MemoTableRowQuestion question={t(stepsListK[activeStep][1].question)} />
                 <TableRowAnswers
@@ -612,6 +251,7 @@ export const TableListKQuestions = memo(() => {
                   setRadioButtonGroup={setRadioButtonGroup2}
                   t={t}
                   answerIndex={1}
+                  stepsListK={stepsListK}
                 />
                 <MemoTableRowQuestion question={t(stepsListK[activeStep][2].question)} />
                 <TableRowAnswers
@@ -621,6 +261,7 @@ export const TableListKQuestions = memo(() => {
                   setRadioButtonGroup={setRadioButtonGroup3}
                   t={t}
                   answerIndex={2}
+                  stepsListK={stepsListK}
                 />
                 <MemoTableRowQuestion question={t(stepsListK[activeStep][3].question)} />
                 <TableRowAnswers
@@ -630,6 +271,7 @@ export const TableListKQuestions = memo(() => {
                   setRadioButtonGroup={setRadioButtonGroup4}
                   t={t}
                   answerIndex={3}
+                  stepsListK={stepsListK}
                 />
                 {activeStep < 7 ? (
                   <>
@@ -641,6 +283,7 @@ export const TableListKQuestions = memo(() => {
                       setRadioButtonGroup={setRadioButtonGroup5}
                       t={t}
                       answerIndex={4}
+                      stepsListK={stepsListK}
                     />
                   </>
                 ) : undefined}
@@ -661,4 +304,5 @@ export const TableListKQuestions = memo(() => {
     </Box>
   )
 })
-
+// eslint-disable-next-line immutable/no-mutation
+TableListKQuestions.displayName = 'TableListKQuestions'

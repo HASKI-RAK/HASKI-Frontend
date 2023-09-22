@@ -37,8 +37,8 @@ interface MemoTableRowAnswersProps {
     ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }
   ) => void
   setRadioButtonGroup: (value: ((prevState: string) => string) | string) => void
-  stepsShortILS: [[{ question: string; questionLabel: string; answer1: string; answer2: string}]]
-  stepsLongILS: [[{ question: string; questionLabel: string; answer1: string; answer2: string}]]
+  stepsShortILS: { question: string; questionLabel: string; answer1: string; answer2: string}[][]
+  stepsLongILS: { question: string; questionLabel: string; answer1: string; answer2: string}[][]
 }
 
 const MemoTableRowAnswers = memo(
@@ -78,7 +78,7 @@ const MemoTableRowAnswers = memo(
     )
   }
 )
-
+// eslint-disable-next-line immutable/no-mutation
 MemoTableRowAnswers.displayName = 'MemoTableRowAnswers'
 
 type TableILSQuestionsProps = {
@@ -86,7 +86,6 @@ type TableILSQuestionsProps = {
 }
 
 export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
-  TableILSQuestions.displayName = 'TableILSQuestions'
   const [successSend, setSuccessSend] = useState(false)
   const [ questionnaireAnswers, setQuestionnaireAnswers ] = useState([{question_id: "", answer: ""}])
   const { addSnackbar } = useContext(SnackbarContext)
@@ -95,17 +94,17 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
 
   const { t } = useTranslation()
 
-  const stepsLongILS: [[{ question: string; questionLabel: string; answer1: string; answer2: string}]] = [[
+  const stepsLongILS: { question: string; questionLabel: string; answer1: string; answer2: string}[][] = [
     ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions', {
       returnObjects: true
-    }) as [{ question: string; questionLabel: string; answer1: string; answer2: string}])
-  ]]
+    }) as { question: string; questionLabel: string; answer1: string; answer2: string}[][])
+  ]
 
-  const stepsShortILS: [[{ question: string; questionLabel: string; answer1: string; answer2: string}]] = [[
+  const stepsShortILS: { question: string; questionLabel: string; answer1: string; answer2: string}[][] = [
     ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions', {
       returnObjects: true
-    }) as [{ question: string; questionLabel: string; answer1: string; answer2: string}])
-  ]]
+    }) as { question: string; questionLabel: string; answer1: string; answer2: string}[][])
+  ]
 
   const [activeStep, setActiveStep] = useState(0)
   const [radioButtonGroup1, setRadioButtonGroup1] = useState('')
@@ -260,4 +259,5 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
     </Box>
   )
 })
-// endregion
+// eslint-disable-next-line immutable/no-mutation
+TableILSQuestions.displayName = 'TableILSQuestions'
