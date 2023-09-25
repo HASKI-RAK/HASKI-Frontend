@@ -143,6 +143,9 @@ export const TableListKQuestions = memo(() => {
   const [radioButtonGroup4, setRadioButtonGroup4] = useState('')
   const [radioButtonGroup5, setRadioButtonGroup5] = useState('')
 
+  const radioButtonGroupArray = [radioButtonGroup1, radioButtonGroup2, radioButtonGroup3, radioButtonGroup4]
+  const setRadioButtonGroupArray = [setRadioButtonGroup1, setRadioButtonGroup2, setRadioButtonGroup3, setRadioButtonGroup4]
+
   const handleSendClick = () => {
     sendAnswers().then((res) => {
       if (res) {
@@ -167,6 +170,7 @@ export const TableListKQuestions = memo(() => {
   // (They are reset to their previous Value when the user goes back)
   const isNextDisabled =
     !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4 || !radioButtonGroup5
+
 
   const setRadioButtonGroups = (newActiveStep: number) => {
     setRadioButtonGroup1(setRadioButtonValue(stepsListK[newActiveStep][0]))
@@ -264,60 +268,34 @@ export const TableListKQuestions = memo(() => {
           <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableListK'}>
-                <MemoTableRowQuestion question={t(stepsListK[activeStep][0].question)} />
-                <TableRowAnswers
-                  activeStep={activeStep}
-                  handleRadioChange={handleRadioChange}
-                  radioButtonGroup={radioButtonGroup1}
-                  setRadioButtonGroup={setRadioButtonGroup1}
-                  t={t}
-                  answerIndex={0}
-                  stepsListK={stepsListK}
-                />
-                <MemoTableRowQuestion question={t(stepsListK[activeStep][1].question)} />
-                <TableRowAnswers
-                  activeStep={activeStep}
-                  handleRadioChange={handleRadioChange}
-                  radioButtonGroup={radioButtonGroup2}
-                  setRadioButtonGroup={setRadioButtonGroup2}
-                  t={t}
-                  answerIndex={1}
-                  stepsListK={stepsListK}
-                />
-                <MemoTableRowQuestion question={t(stepsListK[activeStep][2].question)} />
-                <TableRowAnswers
-                  activeStep={activeStep}
-                  handleRadioChange={handleRadioChange}
-                  radioButtonGroup={radioButtonGroup3}
-                  setRadioButtonGroup={setRadioButtonGroup3}
-                  t={t}
-                  answerIndex={2}
-                  stepsListK={stepsListK}
-                />
-                <MemoTableRowQuestion question={t(stepsListK[activeStep][3].question)} />
-                <TableRowAnswers
-                  activeStep={activeStep}
-                  handleRadioChange={handleRadioChange}
-                  radioButtonGroup={radioButtonGroup4}
-                  setRadioButtonGroup={setRadioButtonGroup4}
-                  t={t}
-                  answerIndex={3}
-                  stepsListK={stepsListK}
-                />
-                {activeStep < 7 ? (
-                  <>
-                    <MemoTableRowQuestion question={t(stepsListK[activeStep][4].question)} />
-                    <TableRowAnswers
-                      activeStep={activeStep}
-                      handleRadioChange={handleRadioChange}
-                      radioButtonGroup={radioButtonGroup5}
-                      setRadioButtonGroup={setRadioButtonGroup5}
-                      t={t}
-                      answerIndex={4}
-                      stepsListK={stepsListK}
-                    />
-                  </>
-                ) : undefined}
+                {radioButtonGroupArray.map((step, groupIndex) => (
+                    <>
+                      <MemoTableRowQuestion question={t(stepsListK[activeStep][groupIndex].question)} />
+                      <TableRowAnswers
+                          activeStep={activeStep}
+                          handleRadioChange={handleRadioChange}
+                          radioButtonGroup={radioButtonGroupArray[groupIndex]}
+                          setRadioButtonGroup={setRadioButtonGroupArray[groupIndex]}
+                          t={t}
+                          answerIndex={groupIndex}
+                          stepsListK={stepsListK}
+                      />
+                      {(activeStep < 7 && groupIndex == 3) ? (
+                          <>
+                            <MemoTableRowQuestion question={t(stepsListK[activeStep][4].question)} />
+                            <TableRowAnswers
+                                activeStep={activeStep}
+                                handleRadioChange={handleRadioChange}
+                                radioButtonGroup={radioButtonGroup5}
+                                setRadioButtonGroup={setRadioButtonGroup5}
+                                t={t}
+                                answerIndex={4}
+                                stepsListK={stepsListK}
+                            />
+                          </>
+                      ): undefined}
+                    </>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>

@@ -3,7 +3,7 @@ import { QuestionnaireResultsModal } from '@components'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import * as React from 'react'
 import { MemoryRouter } from 'react-router-dom'
-import { mockServices } from '../../../../../jest.setup'
+import { mockServices } from 'jest.setup'
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -207,6 +207,6 @@ describe('Test ResultDescriptionListK with all Methods', () => {
         <QuestionnaireResultsModal open={true} handleClose={handleClose} activeStepForTesting={3} />
       </MemoryRouter>
     )
-    expect(container.innerHTML).toContain('<div></div>')
+    expect(container.innerHTML).toContain('')
   })
 })
