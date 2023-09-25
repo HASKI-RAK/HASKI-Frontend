@@ -95,7 +95,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleCloseILSLongModal = (event: object, reason: string) => {
     if (reason == 'backdropClick')
-      if (window.confirm('Please close the window with the close button on the top right corner.'))
+      if (window.confirm(t('components.Menubar.CloseDialog')))
         setModalOpenILSLong(false)
     return
   }
@@ -106,7 +106,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleCloseListKModal = (event: object, reason: string) => {
     if (reason == 'backdropClick')
-      if (window.confirm('Please close the window with the close button on the top right corner.'))
+      if (window.confirm(t('components.Menubar.CloseDialog')))
         setModalOpenListK(false)
     return
   }
