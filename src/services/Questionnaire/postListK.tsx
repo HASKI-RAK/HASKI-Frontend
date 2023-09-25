@@ -1,12 +1,12 @@
-import log from 'loglevel'
+import {ListK} from '@core'
+import {getData} from "../RequestResponse";
 
 interface PostListKProps {
   studentId: number
   outputJson: string
 }
 
-export const postListK = async ({ studentId, outputJson }: PostListKProps): Promise<string> => {
-  try {
+export const postListK = async ({ studentId, outputJson }: PostListKProps): Promise<ListK> => {
     const response = await fetch(`${process.env.BACKEND}/lms/student/${studentId}/questionnaire/listk`, {
       method: 'POST',
       credentials: 'include',
@@ -16,14 +16,5 @@ export const postListK = async ({ studentId, outputJson }: PostListKProps): Prom
       body: outputJson
     })
 
-    if (response.ok) {
-      return await response.json()
-    } else {
-      // have to throw an error to test the catch block
-      throw new Error('ListK Questionnaire Answers: post-fetch failed')
-    }
-  } catch (error) {
-    log.error(error)
-    throw error
-  }
+    return getData<ListK>(response)
 }

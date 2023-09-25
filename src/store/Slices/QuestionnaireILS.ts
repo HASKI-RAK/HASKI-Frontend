@@ -4,7 +4,8 @@ import { StoreState } from '@store'
 import { getILS } from '@services'
 // Import can not be shortened
 import { resetters } from '../Zustand/Store'
-import { ILSReturn } from '../../core/QuestionnaireResults/ILS'
+import { ILSReturn } from '@core'
+import log from "loglevel";
 
 export default interface ILSSlice {
   _cache_ils_record: Record<string, ILS | undefined>
@@ -21,15 +22,20 @@ export const createILSSlice: StateCreator<StoreState, [], [], ILSSlice> = (set, 
       const cached = get()._cache_ils_record[`${userId}-${lmsUserId}-${studentId}`]
 
       if (!cached) {
-        const ils = await getILS(userId, lmsUserId, studentId)
-        set({
-          _cache_ils_record: {
-            ...get()._cache_ils_record,
-            [`${userId}-${lmsUserId}-${studentId}`]: ils
-          }
+        return getILS(userId, lmsUserId, studentId).then((ils) => {
+          set({
+            _cache_ils_record: {
+              ...get()._cache_ils_record,
+              [`${userId}-${lmsUserId}-${studentId}`]: ils
+            }
+          })
+          return ils
+        }).catch((err) => {
+            log.error(err)
+            return undefined
         })
-        return ils
-      } else return cached
+      }
+        else return cached
     }
   }
 }

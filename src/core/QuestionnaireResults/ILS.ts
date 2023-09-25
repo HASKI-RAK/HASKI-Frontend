@@ -1,4 +1,4 @@
-type ILSReturn = (userId?: number, lmsUserId?: number, studentId?: number) => Promise<ILS>
+type ILSReturn = (userId?: number, lmsUserId?: number, studentId?: number) => Promise<ILS | undefined>
 
 type ILS = {
   characteristic_id: number

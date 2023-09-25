@@ -46,8 +46,8 @@ const QuestionnaireResultsModal = ({
   ]
 
   const [activeStep, setActiveStep] = useState(activeStepForTesting)
-  const [ilsData, setILSData] = useState<ILS | null>(null) // Initialize with null
-  const [listkData, setListKData] = useState<ListK | null>(null) // Initialize with null
+  const [ilsData, setILSData] = useState<ILS | undefined>(undefined) // Initialize with null
+  const [listkData, setListKData] = useState<ListK | undefined>(undefined) // Initialize with null
 
   useEffect(() => {
     fetchUser()

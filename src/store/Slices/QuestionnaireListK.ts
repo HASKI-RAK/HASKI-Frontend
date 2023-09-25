@@ -4,6 +4,7 @@ import { StoreState } from '@store'
 // Import can not be shortened
 import { resetters } from '../Zustand/Store'
 import { getListK } from '@services'
+import log from "loglevel";
 
 export default interface ListKSlice {
   _cache_listk_record: Record<string, ListK | undefined>
@@ -20,14 +21,19 @@ export const createListKSlice: StateCreator<StoreState, [], [], ListKSlice> = (s
       const cached = get()._cache_listk_record[`${userId}-${lmsUserId}-${studentId}`]
 
       if (!cached) {
-        const listk = await getListK(userId, lmsUserId, studentId)
-        set({
-          _cache_listk_record: {
-            ...get()._cache_listk_record,
-            [`${userId}-${lmsUserId}-${studentId}`]: listk
-          }
+        return getListK(userId, lmsUserId, studentId).then((listk) => {
+          set({
+            _cache_listk_record: {
+              ...get()._cache_listk_record,
+              [`${userId}-${lmsUserId}-${studentId}`]: listk
+            }
+          })
+          return listk
+        }).catch((err) => {
+          log.error(err)
+          return undefined
         })
-        return listk
+
       } else return cached
     }
   }

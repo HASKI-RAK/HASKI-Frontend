@@ -1,4 +1,4 @@
-type ListKReturn = (userId?: number, lmsUserId?: number, studentId?: number) => Promise<ListK>
+type ListKReturn = (userId?: number, lmsUserId?: number, studentId?: number) => Promise<ListK | undefined>
 
 type ListK = {
   att: number
