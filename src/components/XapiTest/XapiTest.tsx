@@ -1,38 +1,34 @@
-import XAPI, { Statement } from '@xapi/xapi'
+// TODO: Folder structure: xAPI / statements
+// xAPI / setup
+import { myStatement } from './xAPI.statements'
+import xAPI from './xAPI.setup'
 import { Button } from '@mui/material'
+import postStatement from './postStatement'
 
-// Create LRS connection
-const endpoint = 'https://webhook.site/36fc7f53-621f-4d77-aae7-35c4a97ee1bc'
-const username = '36fc7f53-621f-4d77-aae7-35c4a97ee1bc@email.webhook.site'
-const password = ''
-const auth = XAPI.toBasicAuth(username, password)
-const xapi: XAPI = new XAPI({
-  endpoint: endpoint,
-  auth: auth
-})
-
-const myStatement: Statement = {
-  actor: {
-    objectType: 'Agent',
-    name: 'Test Agent',
-    mbox: 'mailto:hello@example.com'
-  },
-  verb: {
-    id: 'http://example.com/verbs/tested',
-    display: {
-      'en-GB': 'tested'
-    }
-  },
-  object: {
-    objectType: 'Activity',
-    id: 'https://github.com/xapijs/xapi'
-  }
-}
-
+// sendStatement eventuell auch noch auslagern
 const handleClick = () => {
-  xapi.sendStatement({
-    statement: myStatement
-  })
+  xAPI
+    .sendStatement({
+      statement: myStatement
+    })
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+/*,
+attachments: [arrayBuffer]*/
+
+const handleClick2 = async () => {
+  postStatement({ statement: myStatement })
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 const XapiTest = () => {
