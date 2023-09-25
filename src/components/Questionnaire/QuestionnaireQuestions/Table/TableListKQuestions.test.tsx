@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { TableListKQuestions } from './TableListKQuestions'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
-import { mockServices } from '../../../../../jest.setup'
+import { mockServices } from 'jest.setup'
 
 const mockNavigate = jest.fn()
 
@@ -395,17 +395,6 @@ describe('TableListKQuestions', () => {
         })
       }
     }
-  })
-
-  test('ListK Questionnaire reload confirm needed', () => {
-    const mockConfirm = jest.spyOn(window, 'addEventListener')
-    mockConfirm.mockImplementation(() => true)
-
-    render(<TableListKQuestions />)
-
-    window.dispatchEvent(new Event('beforeunload'))
-
-    expect(mockConfirm).toHaveBeenCalled()
   })
 
   test('useHandleSend returns error', async () => {

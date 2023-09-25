@@ -1,10 +1,11 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import {fireEvent, getByText, render, waitFor} from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
 import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
 import * as router from 'react-router'
 import { mockServices } from 'jest.setup'
+jest.requireActual('i18next')
 
 const navigate = jest.fn()
 
@@ -277,21 +278,22 @@ describe('MenuBar', () => {
   })
 
   it('navigates to questionnaire ils-short page', async () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
-          <MenuBar />
+          <MenuBar courseSelected={false}/>
         </MemoryRouter>
       </AuthContext.Provider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILSshort'))
-    expect(navigate).toHaveBeenCalledWith('/questionnaire_ils_short')
+    expect(getByTestId('Questions Modal')).toBeInTheDocument()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9')).toBeInTheDocument()
   })
 
   it('navigates to questionnaire ils-long page', async () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
           <MenuBar />
@@ -301,11 +303,12 @@ describe('MenuBar', () => {
 
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILS'))
-    expect(navigate).toHaveBeenCalledWith('/questionnaire_ils_long')
+    expect(getByTestId('Questions Modal')).toBeInTheDocument()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-1')).toBeInTheDocument()
   })
 
   it('navigates to questionnaire listk page', async () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
           <MenuBar />
@@ -315,7 +318,8 @@ describe('MenuBar', () => {
 
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireListk'))
-    expect(navigate).toHaveBeenCalledWith('/questionnaire_listk')
+    expect(getByTestId('Questions Modal')).toBeInTheDocument()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1')).toBeInTheDocument()
   })
 
   it('navigates to logout page', async () => {
