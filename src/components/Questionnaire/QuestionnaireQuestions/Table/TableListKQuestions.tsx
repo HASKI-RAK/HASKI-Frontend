@@ -1,11 +1,5 @@
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableContainer from '@mui/material/TableContainer'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
+import { Table, TableBody, TableContainer, TableRow, Paper, Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography, TableCell } from '@common/components'
 import { useTranslation } from 'react-i18next'
-import { Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material'
-import TableCell from '@mui/material/TableCell'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
 import { ButtonStack, SendButton, MemoTableRowQuestion } from './TableCommonComponents'
@@ -150,14 +144,14 @@ export const TableListKQuestions = memo(() => {
     sendAnswers().then((res) => {
       if (res) {
         addSnackbar({
-          message: 'Data send successfully',
+          message: t('Data send successfull'),
           severity: 'success',
           autoHideDuration: 5000
         })
         setSendSuccess(true)
       } else {
         addSnackbar({
-          message: 'Data could not be sent',
+          message: t('Data send unsuccessfull'),
           severity: 'error',
           autoHideDuration: 5000
         })

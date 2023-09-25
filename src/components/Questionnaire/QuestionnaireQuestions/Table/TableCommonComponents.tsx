@@ -1,8 +1,7 @@
 import React, { memo } from 'react'
-import { Stack, Typography, MobileStepper, Button, TableRow, TableCell } from '@common/components'
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
-import { CircularProgress } from '@mui/material'
+import { Stack, Typography, MobileStepper, Button, TableRow, TableCell, CircularProgress } from '@common/components'
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
+import {useTranslation} from "react-i18next";
 
 /**
  * # TableCommonComponents
@@ -48,6 +47,7 @@ export const MemoTableRowQuestion = memo(({ question }: { question: string }) =>
 MemoTableRowQuestion.displayName = 'MemoTableRowQuestion'
 
 export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, idType, disabled }: ButtonStackProps) => {
+    const {t} = useTranslation()
   return (
     <Stack direction="row" justifyContent="space-around" alignItems="center">
       <MobileStepper
@@ -63,7 +63,7 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
             onClick={handleNext}
             data-testid={`nextButton${idType}Questionnaire`}
             disabled={disabled}>
-            Next
+              {t('Next')}
             <KeyboardArrowRight />
           </Button>
         }
@@ -75,7 +75,7 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
             data-testid={`backButton${idType}Questionnaire`}
             disabled={activeStep === 0}>
             <KeyboardArrowLeft />
-            Back
+              {t('Back')}
           </Button>
         }
       />
@@ -88,7 +88,6 @@ ButtonStack.displayName = 'MemoButtonStack'
 export const SendButton = memo(
   ({ handleSend, isNextDisabled, t, isValid, idType, isSending, sendSuccess }: SendButtonProps) => {
     return (
-      <div>
         <Button
           data-testid={`sendButton${idType}Questionnaire`}
           variant="contained"
@@ -98,7 +97,6 @@ export const SendButton = memo(
           sx={{ m: 2 }}>
           {isSending ? <CircularProgress size={24} /> : t('send')}
         </Button>
-      </div>
     )
   }
 )

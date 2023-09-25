@@ -1,7 +1,6 @@
 import { useState, useCallback, useContext } from 'react'
-import { postILS, postListK } from '@services'
+import { postILS, postListK, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
-import { SnackbarContext } from '@services'
 import { useTranslation } from 'react-i18next'
 type SendHookResult = {
   sendAnswers: () => Promise<boolean>
@@ -19,34 +18,22 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
 
     const filteredData = data.filter((entry) => entry.question_id !== '')
 
-    const outputJson: string = (() => {
-      switch (ils) {
-        case true:
-          return JSON.stringify({
-            ils: filteredData.map((item) => ({
-              question_id: item.question_id.toLowerCase(),
-              answer: item.answer
-            }))
-          })
-        default:
-          return JSON.stringify({
-            list_k: filteredData.map((item) => ({
-              question_id: item.question_id.toLowerCase(),
-              answer: parseInt(item.answer, 10)
-            }))
-          })
-      }
-    })()
+    const key = ils ? 'ils' : 'listk'
+    const outputJson: string = JSON.stringify({
+        [key]: filteredData.map((item) => ({
+          question_id: item.question_id.toLowerCase(),
+          answer: ils ? item.answer : parseInt(item.answer, 10)
+        }))
+    })
 
     return fetchUser().then((user) => {
       const studentId = user.id
       if (ils) {
-        console.log(outputJson)
         return postILS({ studentId, outputJson })
           .then((response) => {
             return !!response
           })
-          .catch((error) => {
+          .catch(() => {
             addSnackbar({
               message: t('ILS sending error'),
               severity: 'error'
@@ -58,12 +45,11 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
             return false
           })
       } else {
-        console.log(outputJson)
         return postListK({ studentId, outputJson })
           .then((response) => {
             return !!response
           })
-          .catch((error) => {
+          .catch(() => {
             addSnackbar({
               message: t('ListK sending error'),
               severity: 'error'

@@ -1,11 +1,5 @@
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableContainer from '@mui/material/TableContainer'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
+import { Table, TableBody, TableContainer, TableRow, Paper, Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography, TableCell } from '@common/components'
 import { useTranslation } from 'react-i18next'
-import { Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material'
-import TableCell from '@mui/material/TableCell'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
 import { ButtonStack, SendButton, MemoTableRowQuestion } from './TableCommonComponents'
@@ -101,17 +95,21 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
 
   const { t } = useTranslation()
 
-  const stepsLongILS: { question: string; questionLabel: string; answer1: string; answer2: string }[][] = [
-    ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions', {
-      returnObjects: true
-    }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
-  ]
+  const stepsLongILS = useMemo(() => {
+    return [
+      ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions', {
+        returnObjects: true
+      }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
+    ];
+  }, []);
 
-  const stepsShortILS: { question: string; questionLabel: string; answer1: string; answer2: string }[][] = [
-    ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions', {
-      returnObjects: true
-    }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
-  ]
+  const stepsShortILS = useMemo(() => {
+    return [
+      ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions', {
+        returnObjects: true
+      }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
+    ];
+  }, []);
 
   const [activeStep, setActiveStep] = useState(0)
   const [radioButtonGroup1, setRadioButtonGroup1] = useState('')
@@ -154,14 +152,14 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
     sendAnswers().then((res) => {
       if (res) {
         addSnackbar({
-          message: 'Data send successfully',
+          message: t('Data send successfull'),
           severity: 'success',
           autoHideDuration: 5000
         })
         setSuccessSend(true)
       } else {
         addSnackbar({
-          message: 'Data could not be sent',
+          message: t('Data send unsuccessfull'),
           severity: 'error',
           autoHideDuration: 5000
         })
