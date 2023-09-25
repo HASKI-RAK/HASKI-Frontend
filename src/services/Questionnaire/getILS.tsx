@@ -1,6 +1,5 @@
-import { ILS } from '@core'
+import { ILS, ILSReturn } from '@core'
 import { getData } from '../RequestResponse'
-import { ILSReturn } from '../../core/QuestionnaireResults/ILS'
 
 export const getILS: ILSReturn = async (userId, lmsUserId, studentId) => {
   const response = await fetch(

@@ -1,4 +1,4 @@
-import { Bar } from '@nivo/bar'
+import { Bar } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useTheme } from '@common/hooks'
 import { ILS } from '@core'
@@ -6,10 +6,7 @@ import { ILS } from '@core'
 // The Key "Dimension" is used in the Graph, therefore the name matters
 // The naming of the Key "possibleDimensions" is not important, as it is not used in the Graph, just for indexing
 export const useData = (
-  dimensionOneScore: number,
-  dimensionTwoScore: number,
-  dimensionThreeScore: number,
-  dimensionFourScore: number
+    data: ILS
 ): { possibleDimensions: string; [Dimension: string]: string }[] => {
   const { t } = useTranslation()
 
@@ -19,28 +16,28 @@ export const useData = (
         t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Global') +
         ' / ' +
         t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Sequential'),
-      [t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]: [dimensionFourScore].toString()
+      [t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]: data.understanding_value.toString()
     },
     {
       possibleDimensions:
         t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Verbal') +
         ' / ' +
         t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Visual'),
-      [t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]: dimensionThreeScore.toString()
+      [t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]: data.processing_value.toString()
     },
     {
       possibleDimensions:
         t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Intuitive') +
         ' / ' +
         t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Sensory'),
-      [t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]: dimensionTwoScore.toString()
+      [t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]: data.perception_value.toString()
     },
     {
       possibleDimensions:
         t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective') +
         ' / ' +
         t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Active'),
-      [t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]: dimensionOneScore.toString()
+      [t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]: data.input_value.toString()
     }
   ]
 }
@@ -52,16 +49,10 @@ type GraphILSProps = {
 const GraphILS = ({ data }: GraphILSProps) => {
   const { t } = useTranslation()
 
-  const dimensionOneScore = data.input_value
-  const dimensionTwoScore = data.perception_value
-  const dimensionThreeScore = data.processing_value
-  const dimensionFourScore = data.understanding_value
-
   const theme = useTheme()
-  const graphILSdata = useData(dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore)
+  const graphILSdata = useData(data)
 
   return (
-    <div>
       <Bar
         width={750}
         height={300}
@@ -131,7 +122,6 @@ const GraphILS = ({ data }: GraphILSProps) => {
         labelSkipHeight={12}
         labelTextColor={theme.palette.common.white}
       />
-    </div>
   )
 }
 

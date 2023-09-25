@@ -25,7 +25,6 @@ import useHandleSend from './Questions.hooks'
  * The long version contains 44, and the short version contains 20 questions.
  */
 
-
 interface MemoTableRowAnswersProps {
   t: (key: string) => string
   activeStep: number
@@ -37,13 +36,22 @@ interface MemoTableRowAnswersProps {
     ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }
   ) => void
   setRadioButtonGroup: (value: ((prevState: string) => string) | string) => void
-  stepsShortILS: { question: string; questionLabel: string; answer1: string; answer2: string}[][]
-  stepsLongILS: { question: string; questionLabel: string; answer1: string; answer2: string}[][]
+  stepsShortILS: { question: string; questionLabel: string; answer1: string; answer2: string }[][]
+  stepsLongILS: { question: string; questionLabel: string; answer1: string; answer2: string }[][]
 }
 
 const MemoTableRowAnswers = memo(
-  ({ activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex, isIlsLong, stepsShortILS, stepsLongILS }: MemoTableRowAnswersProps) => {
-
+  ({
+    activeStep,
+    handleRadioChange,
+    t,
+    radioButtonGroup,
+    setRadioButtonGroup,
+    answerIndex,
+    isIlsLong,
+    stepsShortILS,
+    stepsLongILS
+  }: MemoTableRowAnswersProps) => {
     const ilsArray = isIlsLong ? stepsLongILS : stepsShortILS
     return (
       <TableRow>
@@ -87,23 +95,22 @@ type TableILSQuestionsProps = {
 
 export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   const [successSend, setSuccessSend] = useState(false)
-  const [ questionnaireAnswers, setQuestionnaireAnswers ] = useState([{question_id: "", answer: ""}])
+  const [questionnaireAnswers, setQuestionnaireAnswers] = useState([{ question_id: '', answer: '' }])
   const { addSnackbar } = useContext(SnackbarContext)
   const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, true)
 
-
   const { t } = useTranslation()
 
-  const stepsLongILS: { question: string; questionLabel: string; answer1: string; answer2: string}[][] = [
+  const stepsLongILS: { question: string; questionLabel: string; answer1: string; answer2: string }[][] = [
     ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions', {
       returnObjects: true
-    }) as { question: string; questionLabel: string; answer1: string; answer2: string}[][])
+    }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
   ]
 
-  const stepsShortILS: { question: string; questionLabel: string; answer1: string; answer2: string}[][] = [
+  const stepsShortILS: { question: string; questionLabel: string; answer1: string; answer2: string }[][] = [
     ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions', {
       returnObjects: true
-    }) as { question: string; questionLabel: string; answer1: string; answer2: string}[][])
+    }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
   ]
 
   const [activeStep, setActiveStep] = useState(0)
@@ -111,6 +118,14 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   const [radioButtonGroup2, setRadioButtonGroup2] = useState('')
   const [radioButtonGroup3, setRadioButtonGroup3] = useState('')
   const [radioButtonGroup4, setRadioButtonGroup4] = useState('')
+
+  const radioButtonGroupArray = [radioButtonGroup1, radioButtonGroup2, radioButtonGroup3, radioButtonGroup4]
+  const setRadioButtonGroupArray = [
+    setRadioButtonGroup1,
+    setRadioButtonGroup2,
+    setRadioButtonGroup3,
+    setRadioButtonGroup4
+  ]
 
   //if all radio buttons are selected, the next button is enabled
   // (They are reset to their previous Value when the user goes back)
@@ -156,13 +171,14 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   }
 
   const setRadioButtonValue = useMemo(
-      () => (ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }): string => {
+    () =>
+      (ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }): string => {
         // if the question is already answered, the answer is set to the value of the radio button, else radio button is not set
         const answerType = questionnaireAnswers.find((answer) => answer.question_id === ilsStep.questionLabel)?.answer
-        return answerType === 'a' ? ilsStep.answer1 : answerType === 'b' ? ilsStep.answer2 : '';
+        return answerType === 'a' ? ilsStep.answer1 : answerType === 'b' ? ilsStep.answer2 : ''
       },
-      [questionnaireAnswers]
-  );
+    [questionnaireAnswers]
+  )
 
   const handleRadioChange = useCallback(
     (
@@ -172,7 +188,10 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
       const radioButtonOptions = [ilsStep.answer1, ilsStep.answer2]
       const selectedAnswer = radioButtonOptions.indexOf(event.target.value) === 0 ? 'a' : 'b'
 
-      setQuestionnaireAnswers(prevState => [...prevState, {"question_id": ilsStep.questionLabel, "answer": selectedAnswer.toString()}])
+      setQuestionnaireAnswers((prevState) => [
+        ...prevState,
+        { question_id: ilsStep.questionLabel, answer: selectedAnswer.toString() }
+      ])
     },
     [setQuestionnaireAnswers]
   )
@@ -194,54 +213,22 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
           <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableILSBody'}>
-                <MemoTableRowQuestion question={t(ilsArray[activeStep][0].question)} />
-                <MemoTableRowAnswers
-                  radioButtonGroup={radioButtonGroup1}
-                  handleRadioChange={handleRadioChange}
-                  setRadioButtonGroup={setRadioButtonGroup1}
-                  answerIndex={0}
-                  isIlsLong={ilsLong}
-                  t={t}
-                  activeStep={activeStep}
-                  stepsShortILS={stepsShortILS}
-                  stepsLongILS={stepsLongILS}
-                />
-                <MemoTableRowQuestion question={t(ilsArray[activeStep][1].question)} />
-                <MemoTableRowAnswers
-                  radioButtonGroup={radioButtonGroup2}
-                  handleRadioChange={handleRadioChange}
-                  setRadioButtonGroup={setRadioButtonGroup2}
-                  answerIndex={1}
-                  isIlsLong={ilsLong}
-                  t={t}
-                  activeStep={activeStep}
-                    stepsShortILS={stepsShortILS}
-                  stepsLongILS={stepsLongILS}
-                />
-                <MemoTableRowQuestion question={t(ilsArray[activeStep][2].question)} />
-                <MemoTableRowAnswers
-                  radioButtonGroup={radioButtonGroup3}
-                  handleRadioChange={handleRadioChange}
-                  setRadioButtonGroup={setRadioButtonGroup3}
-                  answerIndex={2}
-                  isIlsLong={ilsLong}
-                  t={t}
-                  activeStep={activeStep}
-                    stepsShortILS={stepsShortILS}
-                  stepsLongILS={stepsLongILS}
-                />
-                <MemoTableRowQuestion question={t(ilsArray[activeStep][3].question)} />
-                <MemoTableRowAnswers
-                  radioButtonGroup={radioButtonGroup4}
-                  handleRadioChange={handleRadioChange}
-                  setRadioButtonGroup={setRadioButtonGroup4}
-                  answerIndex={3}
-                  isIlsLong={ilsLong}
-                  t={t}
-                  activeStep={activeStep}
-                    stepsShortILS={stepsShortILS}
-                  stepsLongILS={stepsLongILS}
-                />
+                {radioButtonGroupArray.map((step, groupIndex) => (
+                  <>
+                    <MemoTableRowQuestion question={t(ilsArray[activeStep][groupIndex].question)} />
+                    <MemoTableRowAnswers
+                      radioButtonGroup={radioButtonGroupArray[groupIndex]}
+                      handleRadioChange={handleRadioChange}
+                      setRadioButtonGroup={setRadioButtonGroupArray[groupIndex]}
+                      answerIndex={groupIndex}
+                      isIlsLong={ilsLong}
+                      t={t}
+                      activeStep={activeStep}
+                      stepsShortILS={stepsShortILS}
+                      stepsLongILS={stepsLongILS}
+                    />
+                  </>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>

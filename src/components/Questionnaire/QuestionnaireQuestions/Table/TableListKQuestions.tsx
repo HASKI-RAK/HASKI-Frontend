@@ -34,12 +34,27 @@ type TableRowAnswersProps = {
     }
   ) => void
   setRadioButtonGroup: (value: ((prevState: string) => string) | string) => void
-  stepsListK: {question: string; questionLabel: string; answer1: string; answer2: string, answer3: string, answer4: string,
-    answer5: string}[][]
+  stepsListK: {
+    question: string
+    questionLabel: string
+    answer1: string
+    answer2: string
+    answer3: string
+    answer4: string
+    answer5: string
+  }[][]
 }
 
 const TableRowAnswers = memo(
-  ({ activeStep, handleRadioChange, t, radioButtonGroup, setRadioButtonGroup, answerIndex, stepsListK }: TableRowAnswersProps) => {
+  ({
+    activeStep,
+    handleRadioChange,
+    t,
+    radioButtonGroup,
+    setRadioButtonGroup,
+    answerIndex,
+    stepsListK
+  }: TableRowAnswersProps) => {
     return (
       <TableRow>
         <TableCell>
@@ -92,20 +107,33 @@ const TableRowAnswers = memo(
 TableRowAnswers.displayName = 'TableRowAnswers'
 
 export const TableListKQuestions = memo(() => {
-
   const [sendSuccess, setSendSuccess] = useState(false)
   const { addSnackbar } = useContext(SnackbarContext)
-  const [questionnaireAnswers, setQuestionnaireAnswers ] = useState([{question_id: "", answer: ""}])
+  const [questionnaireAnswers, setQuestionnaireAnswers] = useState([{ question_id: '', answer: '' }])
   const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, false)
 
   const { t } = useTranslation()
 
-  const stepsListK: { question: string; questionLabel: string; answer1: string; answer2: string, answer3: string, answer4: string,
-  answer5: string }[][] = [
+  const stepsListK: {
+    question: string
+    questionLabel: string
+    answer1: string
+    answer2: string
+    answer3: string
+    answer4: string
+    answer5: string
+  }[][] = [
     ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions', {
       returnObjects: true
-    }) as { question: string; questionLabel: string; answer1: string; answer2: string, answer3: string, answer4: string,
-      answer5: string }[][])
+    }) as {
+      question: string
+      questionLabel: string
+      answer1: string
+      answer2: string
+      answer3: string
+      answer4: string
+      answer5: string
+    }[][])
   ]
 
   const [activeStep, setActiveStep] = useState(0)
@@ -213,7 +241,10 @@ export const TableListKQuestions = memo(() => {
         listkStep.answer5
       ]
       const selectedAnswer = radioButtonOptions.indexOf(event.target.value) + 1
-      setQuestionnaireAnswers(prevState => [...prevState, {"question_id": listkStep.questionLabel, "answer": selectedAnswer.toString()}])
+      setQuestionnaireAnswers((prevState) => [
+        ...prevState,
+        { question_id: listkStep.questionLabel, answer: selectedAnswer.toString() }
+      ])
     },
     [setQuestionnaireAnswers]
   )

@@ -1,12 +1,12 @@
-import log from 'loglevel'
+import {getData} from "../RequestResponse";
+import {ILS} from "@core";
 
 interface PostILSProps {
   studentId: number
   outputJson: string
 }
 
-export const postILS = async ({ studentId, outputJson }: PostILSProps): Promise<string> => {
-  try {
+export const postILS = async ({ studentId, outputJson }: PostILSProps): Promise<ILS> => {
     const response = await fetch(process.env.BACKEND + `/lms/student/${studentId}/questionnaire/ils`, {
       method: 'POST',
       credentials: 'include',
@@ -16,14 +16,5 @@ export const postILS = async ({ studentId, outputJson }: PostILSProps): Promise<
       body: outputJson
     })
 
-    if (response.ok) {
-      return await response.json()
-    } else {
-      // have to throw an error to test the catch block
-      throw new Error('ILS Questionnaire Answers: post-fetch failed')
-    }
-  } catch (error) {
-    log.error(error)
-    throw error
-  }
+    return getData<ILS>(response)
 }

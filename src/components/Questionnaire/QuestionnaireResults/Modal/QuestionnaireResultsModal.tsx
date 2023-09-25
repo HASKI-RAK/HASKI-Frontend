@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import {useContext, useEffect, useState} from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Modal, Stepper, Step, StepButton, IconButton, Stack, Typography } from '@common/components'
@@ -14,25 +14,13 @@ import ResultDescriptionILS from '../Text/ResultDescriptionILS'
 import ResultDescriptionListK from '../Text/ResultDescriptionListK'
 import GraphILS from '../Graph/GraphILS'
 import TableILS from '../Table/TableILS'
+import {SnackbarContext} from "@services";
 
 const styleButtonClose = {
   position: 'sticky',
   left: '99%',
   top: '0%',
   p: 2
-}
-
-const styleBox = {
-  position: 'absolute',
-  left: '8%',
-  right: '8%',
-  top: '10%',
-  overflow: 'auto',
-  maxHeight: '83%',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 1
 }
 
 type QuestionnaireResultsModalProps = {
@@ -50,6 +38,7 @@ const QuestionnaireResultsModal = ({
   const fetchUser = usePersistedStore((state) => state.fetchUser)
   const fetchILS = useStore((state) => state.fetchILS)
   const fetchListK = useStore((state) => state.fetchListK)
+  const { addSnackbar } = useContext(SnackbarContext)
 
   const steps = [
     t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults'),
@@ -69,6 +58,10 @@ const QuestionnaireResultsModal = ({
           })
           .catch((error) => {
             log.error(error)
+          addSnackbar({
+            message: t('ILS fetching error'),
+            severity: 'error'
+          })
           })
         fetchListK(user.settings.user_id, user.lms_user_id, user.id)
           .then((data) => {
@@ -76,10 +69,18 @@ const QuestionnaireResultsModal = ({
           })
           .catch((error) => {
             log.error(error)
+          addSnackbar({
+            message: t('ListK fetching error'),
+            severity: 'error'
+          })
           })
       })
       .catch((error) => {
         log.error(error)
+      addSnackbar({
+        message: t('User fetching error'),
+        severity: 'error'
+      })
       })
   }, [])
 
@@ -92,10 +93,19 @@ const QuestionnaireResultsModal = ({
   }
 
   return (
-    <div>
       <Modal data-testid={'ILS and ListK Modal'} open={open} onClose={handleClose}>
-        <div>
-          <Box sx={styleBox}>
+          <Box sx={{
+            position: 'absolute',
+            left: '8%',
+            right: '8%',
+            top: '10%',
+            overflow: 'auto',
+            maxHeight: '83%',
+            bgcolor: 'background.paper',
+            border: (theme) =>'2px solid'+ theme.palette.secondary.dark,
+            boxShadow: 24,
+            p: 1
+            }}>
             <IconButton
               color="primary"
               sx={styleButtonClose}
@@ -117,33 +127,24 @@ const QuestionnaireResultsModal = ({
               ))}
             </Stepper>
             <Stack direction="column" justifyContent="space-between" alignItems="stretch">
-              <div>
                 {activeStep === 0 && ilsData ? (
                   <div data-testid={'ActiveStepILS'}>
                     <Stack direction="column" justifyContent="space-between" alignItems="stretch" m={2}>
-                      <div>
                         <Stack direction="row" justifyContent="space-between" alignItems="center">
                           <GraphILS data={ilsData} />
                           <TableILS data={ilsData} />
                         </Stack>
-                      </div>
-                      <div>
                         <ResultDescriptionILS data={ilsData} />
-                      </div>
                     </Stack>
                   </div>
                 ) : activeStep === 1 && listkData ? (
                   <div data-testid={'ActiveStepListK'}>
                     <Stack direction="column" justifyContent="space-between" alignItems="stretch" m={2}>
-                      <div>
                         <Stack direction="row" justifyContent="space-between" alignItems="center">
                           <GraphListK data={listkData} />
                           <TableListK data={listkData} />
                         </Stack>
-                      </div>
-                      <div>
                         <ResultDescriptionListK data={listkData} />
-                      </div>
                     </Stack>
                   </div>
                 ) : activeStep === 0 ? (
@@ -203,12 +204,9 @@ const QuestionnaireResultsModal = ({
                     {t('Next')}
                   </Button>
                 </Stack>
-              </div>
             </Stack>
           </Box>
-        </div>
       </Modal>
-    </div>
   )
 }
 

@@ -18,7 +18,7 @@ const mockILS = {
 
 describe('Test GraphILS with all Methods', () => {
   test('Required data is returned in correct format', () => {
-    const data = useData(1, 1, 1, 1)
+    const data = useData(mockILS)
 
     expect(data.length).toBe(4)
 

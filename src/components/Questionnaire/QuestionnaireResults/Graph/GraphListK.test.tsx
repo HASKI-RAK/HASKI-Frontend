@@ -39,7 +39,7 @@ const mockListK = {
 
 describe('Test GraphListK with all Methods', () => {
   test('Required data is returned in correct format', () => {
-    const data = useData(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+    const data = useData(mockListK)
 
     expect(data.nodes.length).toBe(18)
     expect(data.links.length).toBe(17)

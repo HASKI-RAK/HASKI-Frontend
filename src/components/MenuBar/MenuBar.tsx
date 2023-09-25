@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   AppBar,
@@ -24,13 +24,12 @@ import PlaylistAddCheckCircleOutlinedIcon from '@mui/icons-material/PlaylistAddC
 
 import { useTranslation } from 'react-i18next'
 import { AuthContext, SnackbarContext } from '@services'
-import {DropdownLanguage, SkeletonList, QuestionnaireQuestionsModal, QuestionnaireResultsModal} from '@components'
+import { DropdownLanguage, SkeletonList, QuestionnaireQuestionsModal, QuestionnaireResultsModal } from '@components'
 import { usePersistedStore, useStore } from '@store'
 import { Topic } from '@core'
 import log from 'loglevel'
-import {TableILSQuestions} from "../Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions"
-import {TableListKQuestions} from "../Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions"
-
+import { TableILSQuestions } from '../Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions'
+import { TableListKQuestions } from '../Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions'
 
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
@@ -84,10 +83,10 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   }
 
   const handleCloseILSShortModal = (event: object, reason: string) => {
-    if (reason == "backdropClick")
-      if(window.confirm("Please close the window with the close button on the top right corner."))
+    if (reason == 'backdropClick')
+      if (window.confirm('Please close the window with the close button on the top right corner.'))
         setModalOpenILSShort(false)
-      return
+    return
   }
 
   const handleOpenILSLongModal = () => {
@@ -95,10 +94,10 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   }
 
   const handleCloseILSLongModal = (event: object, reason: string) => {
-    if (reason == "backdropClick")
-      if(window.confirm("Please close the window with the close button on the top right corner."))
+    if (reason == 'backdropClick')
+      if (window.confirm('Please close the window with the close button on the top right corner.'))
         setModalOpenILSLong(false)
-      return
+    return
   }
 
   const handleOpenListKModal = () => {
@@ -106,10 +105,10 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   }
 
   const handleCloseListKModal = (event: object, reason: string) => {
-    if (reason == "backdropClick")
-        if(window.confirm("Please close the window with the close button on the top right corner."))
-          setModalOpenListK(false)
-        return
+    if (reason == 'backdropClick')
+      if (window.confirm('Please close the window with the close button on the top right corner.'))
+        setModalOpenListK(false)
+    return
   }
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -119,8 +118,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
-
-
 
   const handleOpenTopicsMenu = async (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElTopics(event.currentTarget)
@@ -343,11 +340,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
-
-              <MenuItem
-                data-testid="questionnaireILS"
-                key="questionnaireILS"
-                onClick={() => handleOpenILSLongModal()}>
+              <MenuItem data-testid="questionnaireILS" key="questionnaireILS" onClick={() => handleOpenILSLongModal()}>
                 <ListItemIcon>{isAuth ? <LibraryBooksOutlinedIcon fontSize="small" /> : null}</ListItemIcon>
                 <Typography textAlign="center">{isAuth ? 'ILS Questionnaire' : null}</Typography>
               </MenuItem>
@@ -358,7 +351,9 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               <MenuItem
                 data-testid="questionnaireILSshort"
                 key="questionnaireILSshort"
-                onClick={() => { handleOpenILSShortModal() }}>
+                onClick={() => {
+                  handleOpenILSShortModal()
+                }}>
                 <ListItemIcon>{isAuth ? <AssignmentOutlined fontSize="small" /> : null}</ListItemIcon>
                 <Typography textAlign="center">{isAuth ? 'ILS Questionnaire shortend' : null}</Typography>
               </MenuItem>
@@ -369,7 +364,9 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               <MenuItem
                 data-testid="questionnaireListk"
                 key="questionnaireListk"
-                onClick={() => { handleOpenListKModal() }}>
+                onClick={() => {
+                  handleOpenListKModal()
+                }}>
                 <ListItemIcon>{isAuth ? <PlaylistAddCheckCircleOutlinedIcon fontSize="small" /> : null}</ListItemIcon>
                 <Typography textAlign="center">{isAuth ? 'List-K Questionnaire' : null}</Typography>
               </MenuItem>

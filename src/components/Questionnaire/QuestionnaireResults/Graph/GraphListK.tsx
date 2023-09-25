@@ -1,4 +1,4 @@
-import { Network } from '@nivo/network'
+import { Network } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { ListK } from '@core'
 
@@ -6,23 +6,7 @@ import { ListK } from '@core'
 const centerString = (str: string, maxLen: number): string => str.padStart((str.length + maxLen * 1.5) / 2)
 
 export const useData = (
-  organize: number,
-  elaborate: number,
-  criticalReview: number,
-  repeat: number,
-  attention: number,
-  effort: number,
-  time: number,
-  goalsPlans: number,
-  control: number,
-  regulate: number,
-  learnWithClassmates: number,
-  literatureResearch: number,
-  learningEnvironment: number,
-  averageCognitiveStrategies: number,
-  averageInternalResourceManagementStrategies: number,
-  averageMetacognitiveStrategies: number,
-  averageExternalResourcesManagementStrategies: number
+  data: ListK
 ): {
   nodes: { id: string; height: number; size: number; score: number; color: string }[]
   links: { source: string; target: string; distance: number }[]
@@ -34,79 +18,79 @@ export const useData = (
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize') +
     '\n' +
     centerString(
-      organize.toFixed(2),
+      data.org.toFixed(2),
       t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize').length
     )
   const elaborateCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate') +
     '\n' +
     centerString(
-      elaborate.toFixed(2),
+      data.elab.toFixed(2),
       t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate').length
     )
   const criticalReviewCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review') +
     '\n' +
     centerString(
-      criticalReview.toFixed(2),
+      data.crit_rev.toFixed(2),
       t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review').length
     )
   const repeatCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat') +
     '\n' +
-    centerString(repeat.toFixed(2), t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat').length)
+    centerString(data.rep.toFixed(2), t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat').length)
   const attentionCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention') +
     '\n' +
     centerString(
-      attention.toFixed(2),
+      data.att.toFixed(2),
       t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention').length
     )
   const effortCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort') +
     '\n' +
-    centerString(effort.toFixed(2), t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort').length)
+    centerString(data.eff.toFixed(2), t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort').length)
   const timeCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Time') +
     '\n' +
-    centerString(time.toFixed(2), t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Time').length)
+    centerString(data.time.toFixed(2), t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Time').length)
   const goalsPlansCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans') +
     '\n' +
     centerString(
-      goalsPlans.toFixed(2),
+      data.goal_plan.toFixed(2),
       t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans').length
     )
   const controlCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Control') +
     '\n' +
-    centerString(control.toFixed(2), t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Control').length)
+    centerString(data.con.toFixed(2), t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Control').length)
   const regulateCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate') +
     '\n' +
     centerString(
-      regulate.toFixed(2),
+      data.reg.toFixed(2),
       t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate').length
     )
   const learnWithClassmatesCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates') +
     '\n' +
     centerString(
-      learnWithClassmates.toFixed(2),
+      data.lrn_w_cls.toFixed(2),
       t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates').length
     )
   const literatureResearchCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research') +
     '\n' +
     centerString(
-      literatureResearch.toFixed(2),
+      data.lit_res.toFixed(2),
       t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research').length
     )
   const learningEnvironmentCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment') +
     '\n' +
     centerString(
-      learningEnvironment.toFixed(2),
+      data.lrn_env.toFixed(2),
       t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment').length
     )
 
@@ -116,28 +100,28 @@ export const useData = (
         id: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'),
         height: 1,
         size: 12,
-        score: averageCognitiveStrategies,
+        score: data.cogn_str,
         color: 'rgb(97, 205, 187)'
       },
       {
         id: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'),
         height: 1,
         size: 12,
-        score: averageInternalResourceManagementStrategies,
+        score: data.int_res_mng_str,
         color: 'rgb(97, 205, 187)'
       },
       {
         id: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'),
         height: 1,
         size: 12,
-        score: averageMetacognitiveStrategies,
+        score: data.metacogn_str,
         color: 'rgb(97, 205, 187)'
       },
       {
         id: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'),
         height: 1,
         size: 12,
-        score: averageExternalResourcesManagementStrategies,
+        score: data.ext_res_mng_str,
         color: 'rgb(97, 205, 187)'
       },
       {
@@ -151,91 +135,91 @@ export const useData = (
         id: organizeCentered,
         height: 0,
         size: 5,
-        score: organize,
+        score: data.org,
         color: 'rgb(232, 193, 160)'
       },
       {
         id: elaborateCentered,
         height: 0,
         size: 5,
-        score: elaborate,
+        score: data.elab,
         color: 'rgb(232, 193, 160)'
       },
       {
         id: criticalReviewCentered,
         height: 0,
         size: 5,
-        score: criticalReview,
+        score: data.crit_rev,
         color: 'rgb(232, 193, 160)'
       },
       {
         id: repeatCentered,
         height: 0,
         size: 5,
-        score: repeat,
+        score: data.rep,
         color: 'rgb(232, 193, 160)'
       },
       {
         id: attentionCentered,
         height: 0,
         size: 5,
-        score: attention,
+        score: data.att,
         color: 'rgb(232, 193, 160)'
       },
       {
         id: effortCentered,
         height: 0,
         size: 5,
-        score: effort,
+        score: data.eff,
         color: 'rgb(232, 193, 160)'
       },
       {
         id: timeCentered,
         height: 0,
         size: 5,
-        score: time,
+        score: data.time,
         color: 'rgb(232, 193, 160)'
       },
       {
         id: goalsPlansCentered,
         height: 0,
         size: 5,
-        score: goalsPlans,
+        score: data.goal_plan,
         color: 'rgb(232, 193, 160)'
       },
       {
         id: controlCentered,
         height: 0,
         size: 5,
-        score: control,
+        score: data.con,
         color: 'rgb(232, 193, 160)'
       },
       {
         id: regulateCentered,
         height: 0,
         size: 5,
-        score: regulate,
+        score: data.reg,
         color: 'rgb(232, 193, 160)'
       },
       {
         id: learnWithClassmatesCentered,
         height: 0,
         size: 5,
-        score: learnWithClassmates,
+        score: data.lrn_w_cls,
         color: 'rgb(232, 193, 160)'
       },
       {
         id: literatureResearchCentered,
         height: 0,
         size: 5,
-        score: literatureResearch,
+        score: data.lit_res,
         color: 'rgb(232, 193, 160)'
       },
       {
         id: learningEnvironmentCentered,
         height: 0,
         size: 5,
-        score: learningEnvironment,
+        score: data.lrn_env,
         color: 'rgb(232, 193, 160)'
       }
     ],
@@ -352,43 +336,7 @@ type GraphListKProps = {
 const GraphListK = ({ data }: GraphListKProps) => {
   const { t } = useTranslation()
 
-  const organize = data.org
-  const elaborate = data.elab
-  const criticalReview = data.crit_rev
-  const repeat = data.rep
-  const attention = data.att
-  const effort = data.eff
-  const time = data.time
-  const goalsPlans = data.goal_plan
-  const control = data.con
-  const regulate = data.reg
-  const learnWithClassmates = data.lrn_w_cls
-  const literatureResearch = data.lit_res
-  const learningEnvironment = data.lrn_env
-  const averageCognitiveStrategies = data.cogn_str
-  const averageInternalResourceManagementStrategies = data.int_res_mng_str
-  const averageMetacognitiveStrategies = data.metacogn_str
-  const averageExternalResourcesManagementStrategies = data.ext_res_mng_str
-
-  const graphListKData = useData(
-    organize,
-    elaborate,
-    criticalReview,
-    repeat,
-    attention,
-    effort,
-    time,
-    goalsPlans,
-    control,
-    regulate,
-    learnWithClassmates,
-    literatureResearch,
-    learningEnvironment,
-    averageCognitiveStrategies,
-    averageInternalResourceManagementStrategies,
-    averageMetacognitiveStrategies,
-    averageExternalResourcesManagementStrategies
-  )
+  const graphListKData = useData( data )
 
   const cognitiveStrategies = t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies')
   const intResMngtStrategies = t(
@@ -402,7 +350,6 @@ const GraphListK = ({ data }: GraphListKProps) => {
   )
 
   return (
-    <div>
       <Network
         height={500}
         width={650}
@@ -435,7 +382,7 @@ const GraphListK = ({ data }: GraphListKProps) => {
             note:
               t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
               ': ' +
-              (Math.round((averageCognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
+              (Math.round((data.cogn_str + Number.EPSILON) * 100) / 100).toFixed(2),
             noteX: -10,
             noteY: 40,
             offset: 13,
@@ -460,7 +407,7 @@ const GraphListK = ({ data }: GraphListKProps) => {
             note:
               t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
               ': ' +
-              (Math.round((averageInternalResourceManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
+              (Math.round((data.int_res_mng_str + Number.EPSILON) * 100) / 100).toFixed(2),
             noteWidth: 250,
             noteX: 50,
             noteY: 35,
@@ -487,7 +434,7 @@ const GraphListK = ({ data }: GraphListKProps) => {
             note:
               t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
               ': ' +
-              (Math.round((averageMetacognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
+              (Math.round((data.metacogn_str + Number.EPSILON) * 100) / 100).toFixed(2),
             noteWidth: 145,
             noteX: -10,
             noteY: 100,
@@ -514,7 +461,7 @@ const GraphListK = ({ data }: GraphListKProps) => {
             note:
               t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
               ': ' +
-              (Math.round((averageExternalResourcesManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
+              (Math.round((data.ext_res_mng_str + Number.EPSILON) * 100) / 100).toFixed(2),
             noteWidth: 250,
             noteX: 10,
             noteY: 90,
@@ -537,7 +484,6 @@ const GraphListK = ({ data }: GraphListKProps) => {
         ariaDescribedBy={'List K Graph'}
         ariaLabel={'List K Graph'}
       />
-    </div>
   )
 }
 

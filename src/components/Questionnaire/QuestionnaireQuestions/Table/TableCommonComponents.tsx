@@ -30,7 +30,7 @@ type SendButtonProps = {
   sendSuccess: boolean
 }
 
-export const MemoTableRowQuestion = memo(({ question }: {question: string}) => {
+export const MemoTableRowQuestion = memo(({ question }: { question: string }) => {
   return (
     <TableRow>
       <TableCell
@@ -47,43 +47,41 @@ export const MemoTableRowQuestion = memo(({ question }: {question: string}) => {
 // eslint-disable-next-line immutable/no-mutation
 MemoTableRowQuestion.displayName = 'MemoTableRowQuestion'
 
-export const ButtonStack = memo(
-  ({ activeStep, handleNext, handleBack, steps, idType, disabled }: ButtonStackProps) => {
-    return (
-      <Stack direction="row" justifyContent="space-around" alignItems="center">
-        <MobileStepper
-          variant="progress"
-          steps={steps}
-          position="static"
-          activeStep={activeStep}
-          sx={{ maxWidth: '50%', flexGrow: 1, align: 'center' }}
-          nextButton={
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleNext}
-              data-testid={`nextButton${idType}Questionnaire`}
-              disabled={disabled}>
-              Next
-              <KeyboardArrowRight />
-            </Button>
-          }
-          backButton={
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleBack}
-              data-testid={`backButton${idType}Questionnaire`}
-              disabled={activeStep === 0}>
-              <KeyboardArrowLeft />
-              Back
-            </Button>
-          }
-        />
-      </Stack>
-    )
-  }
-)
+export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, idType, disabled }: ButtonStackProps) => {
+  return (
+    <Stack direction="row" justifyContent="space-around" alignItems="center">
+      <MobileStepper
+        variant="progress"
+        steps={steps}
+        position="static"
+        activeStep={activeStep}
+        sx={{ maxWidth: '50%', flexGrow: 1, align: 'center' }}
+        nextButton={
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleNext}
+            data-testid={`nextButton${idType}Questionnaire`}
+            disabled={disabled}>
+            Next
+            <KeyboardArrowRight />
+          </Button>
+        }
+        backButton={
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleBack}
+            data-testid={`backButton${idType}Questionnaire`}
+            disabled={activeStep === 0}>
+            <KeyboardArrowLeft />
+            Back
+          </Button>
+        }
+      />
+    </Stack>
+  )
+})
 // eslint-disable-next-line immutable/no-mutation
 ButtonStack.displayName = 'MemoButtonStack'
 
