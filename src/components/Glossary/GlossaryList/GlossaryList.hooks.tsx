@@ -2,6 +2,15 @@ import { useCallback, useMemo } from 'react'
 import { GlossaryEntryProps } from '@components'
 import { useTranslation } from 'react-i18next'
 
+/**
+ * @prop filterByTags - Function to filter the glossary entries by tags.
+ * @prop filterByIndexElement - Function to filter the glossary entries by index element.
+ * @prop searchByQuery - Function to search the glossary entries by query.
+ * @prop collapseAll - Function to collapse all glossary entries.
+ * @prop expandAll - Function to expand all glossary entries.
+ * @category Hooks
+ * @interface
+ */
 export type GlossaryListHookReturn = {
   readonly filterByTags: (glossaryEntries: GlossaryEntryProps[], selectedTags?: string[]) => GlossaryEntryProps[]
   readonly filterByIndexElement: (
@@ -16,6 +25,19 @@ export type GlossaryListHookReturn = {
   ) => void
 }
 
+/**
+ * useGlossaryList hook.
+ *
+ * @param params - Default values for the hook. They are optional in case they're not provided.
+ *
+ * @remarks
+ * Hook for the GlossaryList logic.
+ * Provides functions to filter, search, collapse and expand the glossary entries.
+ *
+ * @returns - Logic to manipulate the glossary entries and change if they're presented collapsed or expanded.
+ *
+ * @category Hooks
+ */
 export const useGlossaryList = (): GlossaryListHookReturn => {
   const { t } = useTranslation()
 

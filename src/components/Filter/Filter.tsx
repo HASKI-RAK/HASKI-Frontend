@@ -25,11 +25,11 @@ const MenuProps = {
 }
 
 /**
- * @typedef {Object} FilterProps
- * @property {string} [label] - The label text of the filter.
- * @property {string[]} [options] - The options of the filter for the user to select from.
- * @property {string[]} [selectedOptions] - The options that are currently selected.
- * @property {function} [setSelectedOptions] -  The function to set the selected options.
+ * @prop label - The label text of the filter.
+ * @prop options - The options of the filter for the user to select from.
+ * @prop selectedOptions - The options that are currently selected.
+ * @prop setSelectedOptions - The function to set the selected options.
+ * @interface
  */
 type FilterProps = {
   label?: string
@@ -39,10 +39,14 @@ type FilterProps = {
 }
 
 /**
+ * Filter component.
+ *
+ * @param props - Props containing label, options, selectedOptions and setSelectedOptions of the filter.
+ *
+ * @remarks
  * Filter presents a component for the user to select elements from a list of options.
  * It can be used as a standalone component on a page.
- * @param props - Props containing label, options, selectedOptions and setSelectedOptions of the filter.
- * @returns {JSX.Element} - The filter component.
+ *
  * @category Components
  */
 const Filter = (props: FilterProps) => {

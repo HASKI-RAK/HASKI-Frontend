@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
 
 /**
- * @typedef {object} GlossaryEntryProps
- * @property {string} [term] - The term this entry defines.
- * @property {string} [definition] - The definition text of the term.
- * @property {string} [sources] - The sources of the term and definition texts
- * @property {string[]} [tags] - The tags that assigns the entry to different categories.
- * @property {boolean} [fundamental] - Whether the entry is fundamental or not.
+ * @prop term - The term this entry defines.
+ * @prop definition - The definition text of the term.
+ * @prop sources - The sources of the term and definition texts
+ * @prop tags - The tags that assigns the entry to different categories.
+ * @prop fundamental - Whether the entry is fundamental or not.
+ * @interface
  */
 export type GlossaryEntryProps = {
   term?: string
@@ -20,11 +20,10 @@ export type GlossaryEntryProps = {
 }
 
 /**
- * The GlossaryEntryProps combined with {@link GlossaryAccordionEntryProps.expandedList} and {@link GlossaryAccordionEntryProps.setExpandedList} via Intersection.
- * @typedef {object} GlossaryAccordionEntryProps
- * @property {string[]} [expandedList] - The list of terms of the currently expanded entries.
- * @property {function} [setExpandedList] - The function to set the currently expanded entries.
- * @property {GlossaryEntryProps} [] - The props of a single GlossaryEntry.
+ * @prop expandedList - The list of terms of the currently expanded entries.
+ * @prop setExpandedList - The function to set the currently expanded entries.
+ * @prop {@link GlossaryEntryProps} - The props of a single GlossaryEntry.
+ * @interface
  */
 export type GlossaryAccordionEntryProps = GlossaryEntryProps & {
   expandedList?: string[]
@@ -32,10 +31,14 @@ export type GlossaryAccordionEntryProps = GlossaryEntryProps & {
 }
 
 /**
+ * GlossaryEntry component.
+ *
+ * @param props - Props containing the term, definition, sources, tags and fundamental of a single entry as well as expandedList and setExpandedList.
+ *
+ * @remarks
  * GlossaryEntry presents a component where different information to a technical term is displayed.
  * It can be used as a standalone component on a page.
- * @param props - Props containing the term, definition, sources, tags and fundamental of a single entry as well as expandedList and setExpandedList.
- * @returns {JSX.Element} - The GlossaryEntry component
+ *
  * @category Components
  */
 const GlossaryEntry = ({ expandedList, setExpandedList, ...props }: GlossaryAccordionEntryProps) => {
