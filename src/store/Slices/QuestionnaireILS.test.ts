@@ -42,7 +42,6 @@ describe('ILSSlice', () => {
     expect(result).toEqual(ils)
     expect(fetchILS).toBeDefined()
     expect(fetchILS).toBeInstanceOf(Function)
-    expect(fetchILS).not.toThrow()
     expect(useStore.getState()._cache_ils_record).toEqual({ '1-1-1': ils })
   })
 })

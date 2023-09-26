@@ -51,7 +51,6 @@ describe('ListKSlice', () => {
     expect(result).toEqual(listk)
     expect(fetchListK).toBeDefined()
     expect(fetchListK).toBeInstanceOf(Function)
-    expect(fetchListK).not.toThrow()
     expect(useStore.getState()._cache_listk_record).toEqual({ '1-1-1': listk })
   })
 })

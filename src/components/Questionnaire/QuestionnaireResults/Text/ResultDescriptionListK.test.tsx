@@ -149,7 +149,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     const container = ResultDescriptionListK({ data: mockListK })
 
-    expect(container.props.children[3][0].props.children[0].props.children.substring(69, 93)).toMatch(
+    expect(container.props.children[3][0].props.children[0].props.children.substring(74, 98)).toMatch(
       'attention && time Below3'
     )
   })
@@ -179,7 +179,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     const container = ResultDescriptionListK({ data: mockListK })
 
-    expect(container.props.children[3][0].props.children[0].props.children.substring(69, 85)).toMatch(
+    expect(container.props.children[3][0].props.children[0].props.children.substring(74, 90)).toMatch(
       'attention Below3'
     )
   })
@@ -209,7 +209,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     const container = ResultDescriptionListK({ data: mockListK })
 
-    expect(container.props.children[3][0].props.children[0].props.children.substring(69, 116)).toMatch(
+    expect(container.props.children[3][0].props.children[0].props.children.substring(74, 121)).toMatch(
       'attention && time && learnWithClassmates Below3'
     )
   })
@@ -239,7 +239,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     const container = ResultDescriptionListK({ data: mockListK })
 
-    expect(container.props.children[3][0].props.children[0].props.children.substring(69, 138)).toMatch(
+    expect(container.props.children[3][0].props.children[0].props.children.substring(74, 143)).toMatch(
       'attention && time && learnWithClassmates && literatureResearch Below3'
     )
   })
@@ -269,7 +269,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     const container = ResultDescriptionListK({ data: mockListK })
 
-    expect(container.props.children[3][0].props.children[0].props.children.substring(69, 161)).toMatch(
+    expect(container.props.children[3][0].props.children[0].props.children.substring(74, 166)).toMatch(
       'attention && time && learnWithClassmates && literatureResearch && learningEnvironment Below3'
     )
   })

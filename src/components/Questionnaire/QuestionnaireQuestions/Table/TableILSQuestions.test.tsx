@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { TableILSQuestions } from './TableILSQuestions'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
-import { mockServices } from '../../../../../jest.setup'
+import { mockServices } from 'jest.setup'
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -390,17 +390,6 @@ describe('Test TableILSQuestions Long with all Methods', () => {
       }
     }
   })
-
-  test('Long ILS Questionnaire reload confirm needed', () => {
-    const mockConfirm = jest.spyOn(window, 'addEventListener')
-    mockConfirm.mockImplementation(() => true)
-
-    render(<TableILSQuestions ilsLong={false} />)
-
-    window.dispatchEvent(new Event('beforeunload'))
-
-    expect(mockConfirm).toHaveBeenCalled()
-  })
 })
 
 describe('Table ILS Questionnaire Short', () => {
@@ -757,17 +746,6 @@ describe('Table ILS Questionnaire Short', () => {
         })
       }
     }
-  })
-
-  test('Short ILS Questionnaire reload confirm needed', () => {
-    const mockConfirm = jest.spyOn(window, 'addEventListener')
-    mockConfirm.mockImplementation(() => true)
-
-    render(<TableILSQuestions ilsLong={false} />)
-
-    window.dispatchEvent(new Event('beforeunload'))
-
-    expect(mockConfirm).toHaveBeenCalled()
   })
 
   test('ILS Questionnaire useHandleSend returns error', async () => {

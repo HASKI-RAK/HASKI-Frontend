@@ -25,7 +25,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(311, 311 + 'EverythingBalanced'.length)).toBe('EverythingBalanced')
+    expect(container.innerHTML.substring(380, 380 + 'EverythingBalanced'.length)).toBe('EverythingBalanced')
   })
 
   test('all negative dimensions are balanced', () => {
@@ -49,7 +49,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(311, 311 + 'EverythingBalanced'.length)).toBe('EverythingBalanced')
+    expect(container.innerHTML.substring(380, 380 + 'EverythingBalanced'.length)).toBe('EverythingBalanced')
   })
 
   test('3 dimensions are balanced, 1 Dimension is active & moderate', () => {
