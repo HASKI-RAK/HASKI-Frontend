@@ -90,14 +90,5 @@ describe('GlossaryList tests', () => {
     )
 
     expect(glossaryEntriesSearchedByQuery).toStrictEqual([mockGlossaryListProps.glossaryEntries[1]])
-
-    result.current.collapseAll(mockGlossaryListProps.setExpandedList)
-    expect(mockGlossaryListProps.setExpandedList).toHaveBeenCalledWith([])
-
-    result.current.expandAll(mockGlossaryListProps.setExpandedList, mockGlossaryListProps.glossaryEntries)
-    expect(mockGlossaryListProps.setExpandedList).toHaveBeenCalledWith([
-      mockGlossaryListProps.glossaryEntries[0].term,
-      mockGlossaryListProps.glossaryEntries[1].term
-    ])
   })
 })

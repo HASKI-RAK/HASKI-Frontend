@@ -18,11 +18,6 @@ export type GlossaryListHookReturn = {
     selectedIndexElement?: string
   ) => GlossaryEntryProps[]
   readonly searchByQuery: (glossaryEntries: GlossaryEntryProps[], searchQuery?: string) => GlossaryEntryProps[]
-  readonly collapseAll: (setExpandedList: (newExpandedList: string[]) => void) => void
-  readonly expandAll: (
-    setExpandedList: (newExpandedList: string[]) => void,
-    glossaryEntries: GlossaryEntryProps[]
-  ) => void
 }
 
 /**
@@ -87,25 +82,12 @@ export const useGlossaryList = (): GlossaryListHookReturn => {
     []
   )
 
-  const collapseAll = useCallback((setExpandedList: (newExpandedList: string[]) => void) => {
-    setExpandedList?.([])
-  }, [])
-
-  const expandAll = useCallback(
-    (setExpandedList: (newExpandedList: string[]) => void, glossaryEntries: GlossaryEntryProps[]) => {
-      setExpandedList?.(glossaryEntries?.map(({ term }) => term).filter((term): term is string => term !== undefined))
-    },
-    []
-  )
-
   return useMemo(
     () => ({
       filterByTags,
       filterByIndexElement,
-      searchByQuery,
-      collapseAll, // TODO: delete
-      expandAll // TODO: delete
+      searchByQuery
     }),
-    [filterByTags, filterByIndexElement, searchByQuery, collapseAll, expandAll]
+    [filterByTags, filterByIndexElement, searchByQuery]
   )
 }
