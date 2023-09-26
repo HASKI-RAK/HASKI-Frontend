@@ -205,7 +205,7 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
                   <>
                     <MemoTableRowQuestion question={t(ilsArray[activeStep][groupIndex].question)} />
                     <MemoTableRowAnswers
-                      radioButtonGroup={radioButtonGroupArray[groupIndex]}
+                      radioButtonGroup={step}
                       handleRadioChange={handleRadioChange}
                       setRadioButtonGroup={setRadioButtonGroupArray[groupIndex]}
                       answerIndex={groupIndex}

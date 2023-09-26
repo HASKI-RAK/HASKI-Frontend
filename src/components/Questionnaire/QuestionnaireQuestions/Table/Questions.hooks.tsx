@@ -18,13 +18,15 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
 
     const filteredData = data.filter((entry) => entry.question_id !== '')
 
-    const key = ils ? 'ils' : 'listk'
+    const key = ils ? 'ils' : 'list_k'
     const outputJson: string = JSON.stringify({
         [key]: filteredData.map((item) => ({
           question_id: item.question_id.toLowerCase(),
           answer: ils ? item.answer : parseInt(item.answer, 10)
         }))
     })
+
+    console.log(outputJson)
 
     return fetchUser().then((user) => {
       const studentId = user.id

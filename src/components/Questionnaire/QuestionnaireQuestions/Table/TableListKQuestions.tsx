@@ -49,6 +49,8 @@ const TableRowAnswers = memo(
     answerIndex,
     stepsListK
   }: TableRowAnswersProps) => {
+    const answerValues = [stepsListK[activeStep][answerIndex].answer1, stepsListK[activeStep][answerIndex].answer2,
+      stepsListK[activeStep][answerIndex].answer3, stepsListK[activeStep][answerIndex].answer4, stepsListK[activeStep][answerIndex].answer5]
     return (
       <TableRow>
         <TableCell>
@@ -65,31 +67,15 @@ const TableRowAnswers = memo(
               alignItems="center"
               spacing={1}
               divider={<Divider orientation="vertical" flexItem />}>
-              <FormControlLabel
-                value={stepsListK[activeStep][answerIndex].answer1}
-                control={<Radio />}
-                label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer1)}</Typography>}
-              />
-              <FormControlLabel
-                value={stepsListK[activeStep][answerIndex].answer2}
-                control={<Radio />}
-                label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer2)}</Typography>}
-              />
-              <FormControlLabel
-                value={stepsListK[activeStep][answerIndex].answer3}
-                control={<Radio />}
-                label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer3)}</Typography>}
-              />
-              <FormControlLabel
-                value={stepsListK[activeStep][answerIndex].answer4}
-                control={<Radio />}
-                label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer4)}</Typography>}
-              />
-              <FormControlLabel
-                value={stepsListK[activeStep][answerIndex].answer5}
-                control={<Radio />}
-                label={<Typography variant={'h6'}>{t(stepsListK[activeStep][answerIndex].answer5)}</Typography>}
-              />
+              {answerValues.map((answer) => (
+                  <>
+                    <FormControlLabel
+                        value={answer}
+                        control={<Radio />}
+                        label={<Typography variant={'h6'}>{t(answer)}</Typography>}
+                    />
+                  </>
+              ))}
             </Stack>
           </RadioGroup>
         </TableCell>
