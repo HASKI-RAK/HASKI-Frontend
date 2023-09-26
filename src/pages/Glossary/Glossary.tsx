@@ -1,7 +1,7 @@
 import { GlossaryList, Filter, Searchbar, GlossaryIndex, GlossaryEntryProps } from '@components'
 import { useGlossary as _useGlossary, GlossaryHookReturn } from './Glossary.hooks'
-import { useState, useMemo, Dispatch, SetStateAction, memo } from 'react'
 import { Typography, Box, Grid, Button } from '@common/components'
+import { useState, Dispatch, SetStateAction, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
@@ -125,17 +125,12 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
       </Grid>
       <Grid item xs={12} sm={12}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-          {useMemo(
-            () => (
-              <GlossaryIndex
-                orientation="horizontal"
-                indexElements={indexElements}
-                selectedIndexElement={selectedIndexElement}
-                setSelectedIndexElement={setSelectedIndexElement}
-              />
-            ),
-            [indexElements, selectedIndexElement, setSelectedIndexElement]
-          )}
+          <GlossaryIndex
+            orientation="horizontal"
+            indexElements={indexElements}
+            selectedIndexElement={selectedIndexElement}
+            setSelectedIndexElement={setSelectedIndexElement}
+          />
         </Box>
       </Grid>
       <Grid item xs={12} sm={12} sx={{ mt: '0.5rem', mb: '0.5rem' }}>
