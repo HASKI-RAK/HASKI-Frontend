@@ -73,7 +73,7 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
       return (
         <div key={'AllDimensionsAreBalancedDescription'}>
           <Typography variant="h6" gutterBottom>
-            Alle Dimensionen
+            {t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.AllDimensions')}
           </Typography>
           <Typography variant="body2" gutterBottom>
             {t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.EverythingBalanced')}

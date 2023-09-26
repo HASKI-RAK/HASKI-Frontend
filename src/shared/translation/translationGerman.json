@@ -1648,5 +1648,6 @@
   "ListK fetching error": "Es gab einen Fehler beim Abrufen der ListK Fragebogen Daten.",
   "components.Menubar.CloseDialog": "Sind Sie sicher, dass Sie den Fragebogen schließen möchten? Nicht abgeschickte Antworten werden nicht gespeichert.",
   "Data send unsuccessfull": "Daten konnten nicht gesendet werden",
-  "Data send successfull": "Daten wurden erfolgreich gesendet"
+  "Data send successfull": "Daten wurden erfolgreich gesendet",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.AllDimensions": "Alle Dimensionen"
 }

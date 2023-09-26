@@ -1678,5 +1678,6 @@
   "ListK fetching error": "There was an Error fetching ListK Questionnaire data",
   "components.Menubar.CloseDialog": "Are you sure you want to close the Questionnaire? Unsent answers will not be saved.",
   "Data send unsuccessfull": "Data could not be sent",
-  "Data send successfull": "Data send successfully"
+  "Data send successfull": "Data send successfully",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.AllDimensions": "All Dimensions"
 }

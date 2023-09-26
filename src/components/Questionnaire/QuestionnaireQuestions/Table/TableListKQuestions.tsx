@@ -1,8 +1,22 @@
-import { Table, TableBody, TableContainer, TableRow, Paper, Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography, TableCell } from '@common/components'
-import { useTranslation } from 'react-i18next'
-import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
-import { SnackbarContext } from '@services'
-import { ButtonStack, SendButton, MemoTableRowQuestion } from './TableCommonComponents'
+import {
+  Box,
+  Divider,
+  FormControlLabel,
+  Paper,
+  Radio,
+  RadioGroup,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Typography
+} from '@common/components'
+import {useTranslation} from 'react-i18next'
+import React, {memo, useCallback, useContext, useMemo, useState} from 'react'
+import {SnackbarContext} from '@services'
+import {ButtonStack, MemoTableRowQuestion, SendButton} from './TableCommonComponents'
 import useHandleSend from './Questions.hooks'
 
 /**
@@ -186,20 +200,11 @@ export const TableListKQuestions = memo(() => {
         answer5: string
       }) => {
         //if the question is already answered, the answer is set to the value of the radio button/ else radio button is not set
-        switch (questionnaireAnswers.find((answer) => answer.question_id === listkStep.questionLabel)?.answer) {
-          case '1':
-            return listkStep.answer1
-          case '2':
-            return listkStep.answer2
-          case '3':
-            return listkStep.answer3
-          case '4':
-            return listkStep.answer4
-          case '5':
-            return listkStep.answer5
-          default:
-            return ''
-        }
+
+        const listkSteps=[listkStep.answer1, listkStep.answer2, listkStep.answer3, listkStep.answer4, listkStep.answer5]
+        const selectedAnswer = questionnaireAnswers.find((answer) => answer.question_id === listkStep.questionLabel)?.answer
+        return selectedAnswer ? listkSteps[parseInt(selectedAnswer) - 1] : ''
+
       },
     [questionnaireAnswers]
   )

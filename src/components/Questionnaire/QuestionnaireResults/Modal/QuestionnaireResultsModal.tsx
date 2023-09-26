@@ -2,9 +2,9 @@ import {useContext, useEffect, useState} from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Modal, Stepper, Step, StepButton, IconButton, Stack, Typography } from '@common/components'
+import { ListItem } from '@mui/material'
 import { usePersistedStore, useStore } from '@store'
 import { ILS, ListK } from '@core'
-import { Link } from 'react-router-dom'
 import log from 'loglevel'
 
 //Can not shorten import, tests fail to recognize i18n.use...
@@ -128,62 +128,47 @@ const QuestionnaireResultsModal = ({
             </Stepper>
             <Stack direction="column" justifyContent="space-between" alignItems="stretch">
                 {activeStep === 0 && ilsData ? (
-                  <div data-testid={'ActiveStepILS'}>
-                    <Stack direction="column" justifyContent="space-between" alignItems="stretch" m={2}>
+                    <Stack direction="column" justifyContent="space-between" alignItems="stretch" m={2} data-testid={'ActiveStepILS'}>
                         <Stack direction="row" justifyContent="space-between" alignItems="center">
                           <GraphILS data={ilsData} />
                           <TableILS data={ilsData} />
                         </Stack>
                         <ResultDescriptionILS data={ilsData} />
                     </Stack>
-                  </div>
                 ) : activeStep === 1 && listkData ? (
-                  <div data-testid={'ActiveStepListK'}>
-                    <Stack direction="column" justifyContent="space-between" alignItems="stretch" m={2}>
+                    <Stack direction="column" justifyContent="space-between" alignItems="stretch" m={2} data-testid={'ActiveStepListK'}>
                         <Stack direction="row" justifyContent="space-between" alignItems="center">
                           <GraphListK data={listkData} />
                           <TableListK data={listkData} />
                         </Stack>
                         <ResultDescriptionListK data={listkData} />
                     </Stack>
-                  </div>
                 ) : activeStep === 0 ? (
                   <Stack alignItems="center">
-                    <div data-testid={'ActiveStepILSNoData'}>
-                      <Typography variant="body2">
+                      <Typography variant="body2" data-testid={'ActiveStepILSNoData'}>
                         {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
-                        <ul>
-                          <li>
-                            <Link to="/questionnaire_ils_short" onClick={handleClose}>
-                              {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')}
-                            </Link>{' '}
+                        <ListItem sx={{ display: 'list-item' }}>
+                            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')}
+                            {' '}
                             {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2')}
-                          </li>
-                          <li>
-                            <Link to="/questionnaire_ils_long" onClick={handleClose}>
-                              {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')}
-                            </Link>
-                          </li>
-                        </ul>
-                        {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+                        </ListItem>
+                        <ListItem sx={{ display: 'list-item' }}>
+                            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')}
+                            {' '}
+                            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+                        </ListItem>
                       </Typography>
-                    </div>
                   </Stack>
                 ) : activeStep === 1 ? (
                   <Stack alignItems="center">
-                    <div data-testid={'ActiveStepListKNoData'}>
-                      <Typography variant="body2">
+                      <Typography variant="body2" data-testid={'ActiveStepListKNoData'}>
                         {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
-                        <ul>
-                          <li>
-                            <Link to="/questionnaire_listk" onClick={handleClose}>
-                              {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
-                            </Link>
-                          </li>
-                        </ul>
-                        {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+                        <ListItem sx={{ display: 'list-item' }}>
+                            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
+                            {' '}
+                            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+                        </ListItem>
                       </Typography>
-                    </div>
                   </Stack>
                 ) : null}
                 <Stack direction="row" justifyContent="space-between" alignItems="center" m={2}>

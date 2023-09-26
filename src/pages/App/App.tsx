@@ -6,9 +6,6 @@ import {
   ThemePresentation,
   Login,
   PrivacyPolicy,
-  QuestionnaireILSQuestionsLong,
-  QuestionnaireILSQuestionsShort,
-  QuestionnaireListKQuestions,
   Contact,
   ProjectDescription,
   ProjectInformation,
@@ -49,9 +46,6 @@ export const App = () => (
               <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
               <Route path="/imprint" element={<Imprint />} />
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-              <Route path="/questionnaire_ils_long" element={<QuestionnaireILSQuestionsLong />} />
-              <Route path="/questionnaire_ils_short" element={<QuestionnaireILSQuestionsShort />} />
-              <Route path="/questionnaire_listk" element={<QuestionnaireListKQuestions />} />
               <Route path="/🥚" element={<div>Ei</div>} />
               <Route path="*" element={<PageNotFound />} />
             </Route>
