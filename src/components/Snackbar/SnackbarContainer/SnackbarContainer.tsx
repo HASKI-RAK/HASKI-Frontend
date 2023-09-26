@@ -5,9 +5,12 @@ import { useTranslation } from 'react-i18next'
 import { SnackbarMessage } from '@components'
 
 /**
+ * SnackbarContainer component.
+ *
+ * @remarks
  * SnackbarContainer presents a container rendering the snackbars and their messages.
  * It can't be used as a standalone component and must be somewhere beneath the snackbar provider.
- * @returns {JSX.Element} - The snackbar container component.
+ *
  * @category Components
  */
 const SnackbarContainer = () => {

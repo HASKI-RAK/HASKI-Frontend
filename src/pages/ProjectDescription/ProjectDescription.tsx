@@ -4,14 +4,12 @@ import { Avatar, Box, Grid, Typography } from '@common/components'
 import { memo } from 'react'
 
 /**
- * ProjectDescriptionContent presents content for the project description.
- * It can be used as a standalone component on a page.
- * @returns {JSX.Element} The content component of the project description.
- * @category Components
- */
-/**
- * ProjectDescription presents a page with a description of the project. It uses the ProjectDescriptionContent component to present the content.
- * @returns {JSX.Element} - The ProjectDescription page.
+ * ProjectDescription page.
+ *
+ * @remarks
+ * ProjectDescription presents a page with a description of the project.
+ * It uses the ProjectDescriptionCard and ProjectDescriptionStepper components to present the content.
+ *
  * @category Pages
  */
 const ProjectDescription = () => {
@@ -21,8 +19,8 @@ const ProjectDescription = () => {
   return (
     <>
       <ProjectDescriptionCard
-        header={t('components.ProjectDescriptionContent.introductionHeader')}
-        body={t('components.ProjectDescriptionContent.introductionBody')}>
+        header={t('pages.ProjectDescription.introductionHeader')}
+        body={t('pages.ProjectDescription.introductionBody')}>
         <Box
           component="img"
           sx={{
@@ -33,16 +31,16 @@ const ProjectDescription = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionStepper
-        header={t('components.ProjectDescriptionContent.approachesHeader')}
+        header={t('pages.ProjectDescription.approachesHeader')}
         body={
-          t<string>('components.ProjectDescriptionContent.approachesBody', {
+          t<string>('pages.ProjectDescription.approachesBody', {
             returnObjects: true
           }) as string[]
         }
       />
       <ProjectDescriptionCard
-        header={t('components.ProjectDescriptionContent.advantagesTeachingHeader')}
-        body={t('components.ProjectDescriptionContent.advantagesTeachingBody')}>
+        header={t('pages.ProjectDescription.advantagesTeachingHeader')}
+        body={t('pages.ProjectDescription.advantagesTeachingBody')}>
         <Avatar
           alt="Advantages Teaching 1"
           src="/ProjectDescriptionImage01.jpg"
@@ -53,8 +51,8 @@ const ProjectDescription = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionCard
-        header={t('components.ProjectDescriptionContent.advantagesTeachingHeader2')}
-        body={t('components.ProjectDescriptionContent.advantagesTeachingBody2')}>
+        header={t('pages.ProjectDescription.advantagesTeachingHeader2')}
+        body={t('pages.ProjectDescription.advantagesTeachingBody2')}>
         <Avatar
           alt="Advantages Teaching 2"
           src="/ProjectDescriptionImage02.jpg"
@@ -65,8 +63,8 @@ const ProjectDescription = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionCard
-        header={t('components.ProjectDescriptionContent.advantagesLearningHeader')}
-        body={t('components.ProjectDescriptionContent.advantagesLearningBody')}>
+        header={t('pages.ProjectDescription.advantagesLearningHeader')}
+        body={t('pages.ProjectDescription.advantagesLearningBody')}>
         <Avatar
           alt="Advantages Learning 1"
           src="/ProjectDescriptionImage03.jpg"
@@ -77,8 +75,8 @@ const ProjectDescription = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionCard
-        header={t('components.ProjectDescriptionContent.advantagesLearningHeader2')}
-        body={t('components.ProjectDescriptionContent.advantagesLearningBody2')}>
+        header={t('pages.ProjectDescription.advantagesLearningHeader2')}
+        body={t('pages.ProjectDescription.advantagesLearningBody2')}>
         <Avatar
           alt="Advantages Learning 2"
           src="/ProjectDescriptionImage04.jpg"
@@ -89,22 +87,22 @@ const ProjectDescription = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionStepper
-        header={t('components.ProjectDescriptionContent.goalsHeader')}
+        header={t('pages.ProjectDescription.goalsHeader')}
         body={
-          t<string>('components.ProjectDescriptionContent.goalsBody', {
+          t<string>('pages.ProjectDescription.goalsBody', {
             returnObjects: true
           }) as string[]
         }
       />
       <Grid container item justifyContent="center" xs={12}>
         <Typography sx={{ pt: '1rem', pb: '1rem' }} variant="subtitle1">
-          {t('components.ProjectDescriptionContent.imageSources') + t('universityKempten') + ', '}
+          {t('pages.ProjectDescription.imageSources') + t('universityKempten') + ', '}
           <a href="https://de.freepik.com/fotos-kostenlos/close-up-der-studentin-schreiben-auf-laptop-am-tisch_1147740.htm">
-            {t('components.ProjectDescriptionContent.imageSource1')}
+            {t('pages.ProjectDescription.imageSource1')}
           </a>
           {', '}
           <a href="https://www.freepik.com/free-photo/cloud-upload-icon-line-connection-circuit-board_1198390.htm">
-            {t('components.ProjectDescriptionContent.imageSource2')}
+            {t('pages.ProjectDescription.imageSource2')}
           </a>
         </Typography>
       </Grid>

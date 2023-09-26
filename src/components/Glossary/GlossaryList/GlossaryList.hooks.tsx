@@ -28,8 +28,6 @@ export type GlossaryListHookReturn = {
 /**
  * useGlossaryList hook.
  *
- * @param params - Default values for the hook. They are optional in case they're not provided.
- *
  * @remarks
  * Hook for the GlossaryList logic.
  * Provides functions to filter, search, collapse and expand the glossary entries.
@@ -105,8 +103,8 @@ export const useGlossaryList = (): GlossaryListHookReturn => {
       filterByTags,
       filterByIndexElement,
       searchByQuery,
-      collapseAll,
-      expandAll
+      collapseAll, // TODO: delete
+      expandAll // TODO: delete
     }),
     [filterByTags, filterByIndexElement, searchByQuery, collapseAll, expandAll]
   )

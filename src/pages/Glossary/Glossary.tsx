@@ -5,14 +5,26 @@ import { Typography, Box, Grid, Button } from '@common/components'
 import { useTranslation } from 'react-i18next'
 
 /**
- * @interface GlossaryProps
- * @property {function} useGlossary - The hook that is used for the Glossary page logic.
+ * @props useGlossary - The hook that is used for the Glossary page logic.
+ * @interface
  */
 type GlossaryProps = {
   useGlossary?: () => GlossaryHookReturn
 }
 
-// Returns a function that maps an undefined, string or string array input to a string array and sets it as currently selected tags.
+//
+/**
+ * getSelectedTagsWrapper function.
+ *
+ * @param setSelectedTags - Function to set the currently selected tags.
+ *
+ * @remarks
+ * getSelectedTagsWrapper presents a function that can be used to get a function that sets the currently selected tags.
+ *
+ * @returns - Function thats maps an undefined, string or string array input to a string array and sets it as currently selected tags.
+ *
+ * @category Logic
+ */
 export const getSelectedTagsWrapper = (setSelectedTags: Dispatch<SetStateAction<string[]>>) => {
   const setSelectedTagsWrapper = (input?: string | string[]) => {
     if (input === undefined) {
@@ -28,11 +40,15 @@ export const getSelectedTagsWrapper = (setSelectedTags: Dispatch<SetStateAction<
 }
 
 /**
+ * Glossary page.
+ *
+ * @param props - Props containing the logic to collapse and expand the every glossary entry.
+ *
+ * @remarks
  * Glossary presents a page with a list of important terms of the haski project.
  * It uses the GlossaryList component to present the content and several other components, like a Filter, Searchbar and GlossaryIndex to filter or search for specific entries.
  * It is also possible to collapse and expand individual entries or all at once to gain further information to every term.
- * @param props - Props containing the logic to collapse and expand the every glossary entry.
- * @returns {JSX.Element} - The Glossary page.
+ *
  * @category Pages
  */
 const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {

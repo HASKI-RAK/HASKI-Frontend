@@ -10,10 +10,10 @@ import {
 } from './ProjectDescriptionStepper.hooks'
 
 /**
- * @typedef {Object} ProjectDescriptionStepperProps
- * @property {string[]} body - The body texts that can be stepped through.
- * @property {string} header - The header text that is permanently displayed above the body texts.
- * @property {function} useProjectDescriptionStepper - The hook that is used for the stepper logic.
+ * @props body - The body texts that can be stepped through.
+ * @props header - The header text that is permanently displayed above the body texts.
+ * @props useProjectDescriptionStepper - The hook that is used for the stepper logic.
+ * @interface
  */
 type ProjectDescriptionStepperProps = {
   body?: string[]
@@ -24,11 +24,15 @@ type ProjectDescriptionStepperProps = {
 }
 
 /**
+ * ProjectDescriptionStepper component.
+ *
+ * @param props - Props containing the body and header texts aswell as a hook for the animation logic.
+ *
+ * @remarks
  * ProjectDescriptionCard presents a component that displays a header text on top and and multiple steppable body texts on the bottom of the element.
  * The header text is animated by using a typewriter effect. The body texts are animated by using a fade in effect.
  * ProjectDescriptionCard can be used as a standalone component on a page.
- * @param props -
- * @returns {JSX.Element} - The ProjectDescriptionStepper component.
+ *
  * @category Components
  */
 const ProjectDescriptionStepper = ({
@@ -113,14 +117,14 @@ const ProjectDescriptionStepper = ({
             }}
             nextButton={
               <Button size="small" onClick={handleNext} disabled={activeStep === (props.body && props.body.length - 1)}>
-                {t('nextText')}
+                {t('Next')}
                 <KeyboardArrowRight />
               </Button>
             }
             backButton={
               <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
                 <KeyboardArrowLeft />
-                {t('previousText')}
+                {t('Back')}
               </Button>
             }
           />

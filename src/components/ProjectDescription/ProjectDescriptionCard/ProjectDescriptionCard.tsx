@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from 'react'
+import { useRef, useEffect, useCallback, memo } from 'react'
 import { Divider, Fade, Grid, Typography } from '@common/components'
 import {
   useProjectDescriptionCard as _useProjectDescriptionCard,
@@ -7,11 +7,11 @@ import {
 } from './ProjectDescriptionCard.hooks'
 
 /**
- * @typedef {Object} ProjectDescriptionCardProps
- * @property {string} body - The body text that is displayed on the bottom left side.
- * @property {React.ReactNode} children - The child element that is displayed on the right side.
- * @property {string} header - The header text that is displayed on the top left side.
- * @property {function} useProjectDescriptionCard - The hook that is used for the card logic.
+ * @props body - The body text that is displayed on the bottom left side.
+ * @props children - The child element that is displayed on the right side.
+ * @props header - The header text that is displayed on the top left side.
+ * @props useProjectDescriptionCard - The hook that is used for the card logic.
+ * @interface
  */
 type ProjectDescriptionCardProps = {
   body?: string
@@ -21,11 +21,15 @@ type ProjectDescriptionCardProps = {
 }
 
 /**
+ * ProjectDescriptionCard component.
+ *
+ * @param props - Props containing the body and header texts and a child element.
+ *
+ * @remarks
  * ProjectDescriptionCard presents a component that displays a header and a body text on the left side and a child element on the right side.
  * The header text is animated by using a typewriter effect. The body text is animated by using a fade in effect.
  * ProjectDescriptionCard can be used as a standalone component on a page.
- * @param props - Props containing the body and header texts and a child element.
- * @returns {JSX.Element} - The ProjectDescriptionCard component.
+ *
  * @category Components
  */
 const ProjectDescriptionCard = ({
@@ -86,4 +90,4 @@ const ProjectDescriptionCard = ({
   )
 }
 
-export default ProjectDescriptionCard
+export default memo(ProjectDescriptionCard)

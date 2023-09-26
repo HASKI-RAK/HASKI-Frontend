@@ -1,9 +1,10 @@
 import { useState, RefObject, useMemo, useCallback } from 'react'
 
 /**
- * @typedef {Object} useProjectDescriptionCardHookParams
- * @property {string} defaultBodyState - The default value for the body state.
- * @property {string} defaultHeaderState - The default value for the header state.
+ * @props defaultBodyState - The default value for the body state.
+ * @props defaultHeaderState - The default value for the header state.
+ * @category Hooks
+ * @interface
  */
 export type useProjectDescriptionCardHookParams = {
   defaultBodyState?: string
@@ -11,15 +12,16 @@ export type useProjectDescriptionCardHookParams = {
 }
 
 /**
- * @typedef {Object} ProjectDescriptionCardHookReturn
- * @property {string} bodyState - The state that is used to animate the body text.
- * @property {string} headerState - The state that is used to animate the header text.
- * @property {function} setBodyState - The function that sets the body state.
- * @property {function} setHeaderState - The function that sets the header state.
- * @property {function} animateBody - The function that animates the body text.
- * @property {function} animateHeader - The function that animates the header text.
- * @property {function} fadeInEffect - The function that realizes the fade in effect.
- * @property {function} typewriterEffect - The function that realizes the typewriter effect.
+ * @props bodyState - The state that is used to animate the body text.
+ * @props headerState - The state that is used to animate the header text.
+ * @props setBodyState - The function that sets the body state.
+ * @props setHeaderState - The function that sets the header state.
+ * @props animateBody - The function that animates the body text.
+ * @props animateHeader - The function that animates the header text.
+ * @props fadeInEffect - The function that realizes the fade in effect.
+ * @props typewriterEffect - The function that realizes the typewriter effect.
+ * @category Hooks
+ * @interface
  */
 export type ProjectDescriptionCardHookReturn = {
   readonly bodyState: string
@@ -33,10 +35,17 @@ export type ProjectDescriptionCardHookReturn = {
 }
 
 /**
+ * useProjectDescriptionCard hook.
+ *
+ * @param params - The default values for the card.
+ *
+ * @remarks
  * Hook for the ProjectDescriptionCard logic.
  * Handles states and provides functions to animate the body and header texts.
- * @param params - The default value for the card.
- * @returns {ProjectDescriptionCardHookReturn} - The ProjectDescriptionCard logic.
+ *
+ * @returns - States and logic to animate the body and header texts.
+ *
+ * @category Hooks
  */
 export const useProjectDescriptionCard = (
   params?: useProjectDescriptionCardHookParams
