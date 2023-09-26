@@ -84,7 +84,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleCloseILSShortModal = (event: object, reason: string) => {
     if (reason == 'backdropClick')
-      if (window.confirm('Please close the window with the close button on the top right corner.'))
+      if (window.confirm(t('components.Menubar.CloseDialog')))
         setModalOpenILSShort(false)
     return
   }

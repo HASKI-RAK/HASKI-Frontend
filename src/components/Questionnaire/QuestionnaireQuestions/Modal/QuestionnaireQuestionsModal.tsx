@@ -1,5 +1,5 @@
 import React from 'react'
-import CloseIcon from '@mui/icons-material/Close'
+import { Close } from '@common/icons'
 import { Box, Modal, IconButton } from '@common/components'
 
 const styleButtonClose = {
@@ -38,7 +38,7 @@ const QuestionnaireQuestionsModal = ({ open = false, handleClose, children }: Qu
           sx={styleButtonClose}
           onClick={() => handleClose({} as object, 'backdropClick')}
           data-testid={'QuestionnaireResultsCloseButton'}>
-          <CloseIcon />
+          <Close />
         </IconButton>
         {children}
       </Box>

@@ -30,8 +30,7 @@ interface MemoTableRowAnswersProps {
     ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }
   ) => void
   setRadioButtonGroup: (value: ((prevState: string) => string) | string) => void
-  stepsShortILS: { question: string; questionLabel: string; answer1: string; answer2: string }[][]
-  stepsLongILS: { question: string; questionLabel: string; answer1: string; answer2: string }[][]
+  stepsILSData: { question: string; questionLabel: string; answer1: string; answer2: string }[][]
 }
 
 const MemoTableRowAnswers = memo(
@@ -43,10 +42,9 @@ const MemoTableRowAnswers = memo(
     setRadioButtonGroup,
     answerIndex,
     isIlsLong,
-    stepsShortILS,
-    stepsLongILS
+    stepsILSData
   }: MemoTableRowAnswersProps) => {
-    const ilsArray = isIlsLong ? stepsLongILS : stepsShortILS
+    const ilsArray = stepsILSData
     return (
       <TableRow>
         <TableCell>
@@ -95,19 +93,11 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
 
   const { t } = useTranslation()
 
-  const stepsLongILS = useMemo(() => {
+  const stepsILSData = useMemo(() => {
     return [
-      ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions', {
-        returnObjects: true
-      }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
-    ];
-  }, []);
-
-  const stepsShortILS = useMemo(() => {
-    return [
-      ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions', {
-        returnObjects: true
-      }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
+      ...(t<string>(ilsLong ? 'components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions' : 'components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions', {
+        returnObjects: true,
+      }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][]),
     ];
   }, []);
 
@@ -130,7 +120,7 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
   const isNextDisabled = !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4
 
   const setRadioButtonGroups = (newActiveStep: number) => {
-    const stepsILS = ilsLong ? stepsLongILS : stepsShortILS
+    const stepsILS = stepsILSData
 
     setRadioButtonGroup1(setRadioButtonValue(stepsILS[newActiveStep][0]))
     setRadioButtonGroup2(setRadioButtonValue(stepsILS[newActiveStep][1]))
@@ -194,7 +184,7 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
     [setQuestionnaireAnswers]
   )
 
-  const ilsArray = ilsLong ? stepsLongILS : stepsShortILS
+  const ilsArray = stepsILSData
 
   return (
     <Box>
@@ -222,8 +212,7 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
                       isIlsLong={ilsLong}
                       t={t}
                       activeStep={activeStep}
-                      stepsShortILS={stepsShortILS}
-                      stepsLongILS={stepsLongILS}
+                      stepsILSData={stepsILSData}
                     />
                   </>
                 ))}
