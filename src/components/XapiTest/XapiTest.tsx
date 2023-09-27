@@ -1,15 +1,15 @@
 // TODO: Folder structure: xAPI / statements
 // xAPI / setup
-import { myStatement } from './xAPI.statements'
+import { myStatement2 } from './xAPI.statements'
 import xAPI from './xAPI.setup'
 import { Button } from '@mui/material'
-import postStatement from './postStatement'
+import { postStatement } from './postStatement'
 
 // sendStatement eventuell auch noch auslagern
 const handleClick = () => {
   xAPI
     .sendStatement({
-      statement: myStatement
+      statement: myStatement2
     })
     .then((response) => {
       console.log(response)
@@ -22,7 +22,7 @@ const handleClick = () => {
 attachments: [arrayBuffer]*/
 
 const handleClick2 = async () => {
-  postStatement({ statement: myStatement })
+  postStatement({ statement: myStatement2 })
     .then((response) => {
       console.log(response)
     })
