@@ -43,7 +43,7 @@ interface MemoTableRowAnswersProps {
     event: React.ChangeEvent<HTMLInputElement>,
     ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }
   ) => void
-  setRadioButtonGroup: (value: ((prevState: string) => string) | string) => void
+  setRadioButtonGroup: (newValue: string) => void
   stepsILSData: { question: string; questionLabel: string; answer1: string; answer2: string }[][]
 }
 
@@ -122,30 +122,23 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
   }, [])
 
   const [activeStep, setActiveStep] = useState(0)
-  const [radioButtonGroup1, setRadioButtonGroup1] = useState('')
-  const [radioButtonGroup2, setRadioButtonGroup2] = useState('')
-  const [radioButtonGroup3, setRadioButtonGroup3] = useState('')
-  const [radioButtonGroup4, setRadioButtonGroup4] = useState('')
-
-  const radioButtonGroupArray = [radioButtonGroup1, radioButtonGroup2, radioButtonGroup3, radioButtonGroup4]
-  const setRadioButtonGroupArray = [
-    setRadioButtonGroup1,
-    setRadioButtonGroup2,
-    setRadioButtonGroup3,
-    setRadioButtonGroup4
-  ]
+  const [radioButtonGroup, setRadioButtonGroup] = useState([{ value: '' }, { value: '' }, { value: '' }, { value: '' }])
 
   //if all radio buttons are selected, the next button is enabled
   // (They are reset to their previous Value when the user goes back)
-  const isNextDisabled = !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4
+  const isNextDisabled = radioButtonGroup.some((radioButton) => radioButton.value === '')
 
   const setRadioButtonGroups = (newActiveStep: number) => {
     const stepsILS = stepsILSData
 
-    setRadioButtonGroup1(setRadioButtonValue(stepsILS[newActiveStep][0]))
-    setRadioButtonGroup2(setRadioButtonValue(stepsILS[newActiveStep][1]))
-    setRadioButtonGroup3(setRadioButtonValue(stepsILS[newActiveStep][2]))
-    setRadioButtonGroup4(setRadioButtonValue(stepsILS[newActiveStep][3]))
+    setRadioButtonGroup((prevState) => {
+      return prevState.map((item, index) => {
+        return {
+          ...item,
+          value: setRadioButtonValue(stepsILS[newActiveStep][index])
+        }
+      })
+    })
   }
 
   const handleNext = useCallback(() => {
@@ -226,18 +219,30 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
           <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableILSBody'}>
-                {radioButtonGroupArray.map((step, groupIndex) => (
-                  <React.Fragment key={'QuestionnareILS Question: ' + groupIndex}>
-                    <MemoTableRowQuestion question={t(ilsArray[activeStep][groupIndex].question)} />
+                {stepsILSData[activeStep].map((page, row) => (
+                  <React.Fragment key={'QuestionnareILS Question: ' + row}>
+                    <MemoTableRowQuestion question={t(ilsArray[activeStep][row].question)} />
                     <MemoTableRowAnswers
-                      radioButtonGroup={step}
-                      handleRadioChange={handleRadioChange}
-                      setRadioButtonGroup={setRadioButtonGroupArray[groupIndex]}
-                      answerIndex={groupIndex}
-                      isIlsLong={ilsLong}
-                      t={t}
-                      activeStep={activeStep}
-                      stepsILSData={stepsILSData}
+                        radioButtonGroup={radioButtonGroup[row].value}
+                        handleRadioChange={handleRadioChange}
+                        setRadioButtonGroup={(newValue) => {
+                          setRadioButtonGroup((prevState) => {
+                            return prevState.map((item, index) => {
+                              if (index === row) {
+                                return {
+                                  ...item,
+                                  value: newValue
+                                };
+                              }
+                              return item;
+                            })
+                          })
+                        }}
+                        answerIndex={row}
+                        isIlsLong={ilsLong}
+                        t={t}
+                        activeStep={activeStep}
+                        stepsILSData={stepsILSData}
                     />
                   </React.Fragment>
                 ))}
