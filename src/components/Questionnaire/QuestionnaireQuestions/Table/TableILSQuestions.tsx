@@ -209,7 +209,7 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
               <TableBody key={'TableILSBody'}>
                 {radioButtonGroupArray.map((step, groupIndex) => (
                   <>
-                    <MemoTableRowQuestion question={t(ilsArray[activeStep][groupIndex].question)} />
+                    <MemoTableRowQuestion question={t(ilsArray[activeStep][groupIndex].question)} key={"ILS Question: "+groupIndex}/>
                     <MemoTableRowAnswers
                       radioButtonGroup={step}
                       handleRadioChange={handleRadioChange}
