@@ -83,6 +83,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleOpenILSShortModal = () => {
     setModalOpenILSShort(true)
+    setAnchorElUser(null)
   }
 
   const handleCloseILSShortModal = (event: object, reason: string) => {
@@ -100,6 +101,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleOpenILSLongModal = () => {
     setModalOpenILSLong(true)
+    setAnchorElUser(null)
   }
 
   const handleCloseILSLongModal = (event: object, reason: string) => {
@@ -116,6 +118,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleOpenListKModal = () => {
     setModalOpenListK(true)
+    setAnchorElUser(null)
   }
 
   const handleCloseListKModal = (event: object, reason: string) => {
@@ -359,6 +362,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
+
               <MenuItem data-testid="questionnaireILS" key="questionnaireILS" onClick={() => handleOpenILSLongModal()}>
                 <ListItemIcon>{isAuth ? <LibraryBooksOutlinedIcon fontSize="small" /> : null}</ListItemIcon>
                 <Typography textAlign="center">{isAuth ? 'ILS Questionnaire' : null}</Typography>
