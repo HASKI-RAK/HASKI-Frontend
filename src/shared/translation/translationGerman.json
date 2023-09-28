@@ -1646,6 +1646,7 @@
   "User fetching error": "Es gab einen Fehler beim Abrufen der Benutzerdaten.",
   "ILS fetching error": "Es gab einen Fehler beim Abrufen der ILS Fragebogen Daten.",
   "ListK fetching error": "Es gab einen Fehler beim Abrufen der ListK Fragebogen Daten.",
+  "Courses fetching error": "Es gab einen Fehler beim Abrufen der Kursdaten.",
   "components.Menubar.CloseDialog": "Sind Sie sicher, dass Sie den Fragebogen schließen möchten? Nicht abgeschickte Antworten werden nicht gespeichert.",
   "Data send unsuccessfull": "Daten konnten nicht gesendet werden",
   "Data send successfull": "Daten wurden erfolgreich gesendet",

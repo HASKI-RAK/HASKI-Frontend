@@ -1,5 +1,6 @@
 import { ILS, ILSReturn } from '@core'
 import { getData } from '../RequestResponse'
+import log from "loglevel";
 
 export const getILS: ILSReturn = async (userId, lmsUserId, studentId) => {
   const response = await fetch(
@@ -30,9 +31,5 @@ export const getILS: ILSReturn = async (userId, lmsUserId, studentId) => {
             : originalData.understanding_value
       }
       return newData
-    })
-    .catch((error) => {
-      console.log(error)
-      return undefined
     })
 }

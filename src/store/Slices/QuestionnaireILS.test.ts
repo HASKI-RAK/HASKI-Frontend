@@ -44,4 +44,17 @@ describe('ILSSlice', () => {
     expect(fetchILS).toBeInstanceOf(Function)
     expect(useStore.getState()._cache_ils_record).toEqual({ '1-1-1': ils })
   })
+
+  it('should return undefined if error', async () => {
+    const { fetchILS } = useStore.getState()
+    mockServices.getILS = jest.fn().mockRejectedValueOnce(new Error('error'))
+
+    const result = await fetchILS(1, 1, 1)
+
+    expect(mockServices.getILS).toHaveBeenCalledTimes(1)
+    expect(result).toBeUndefined()
+    expect(fetchILS).toBeDefined()
+    expect(fetchILS).toBeInstanceOf(Function)
+    expect(useStore.getState()._cache_ils_record).toEqual({ '1-1-1': undefined })
+  })
 })

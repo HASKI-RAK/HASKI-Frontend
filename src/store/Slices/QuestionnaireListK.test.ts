@@ -53,4 +53,17 @@ describe('ListKSlice', () => {
     expect(fetchListK).toBeInstanceOf(Function)
     expect(useStore.getState()._cache_listk_record).toEqual({ '1-1-1': listk })
   })
+
+  it('should return undefined if error', async () => {
+    const { fetchListK } = useStore.getState()
+    mockServices.getListK = jest.fn().mockRejectedValueOnce(new Error('error'))
+
+    const result = await fetchListK(1, 1, 1)
+
+    expect(mockServices.getListK).toHaveBeenCalledTimes(1)
+    expect(result).toBeUndefined()
+    expect(fetchListK).toBeDefined()
+    expect(fetchListK).toBeInstanceOf(Function)
+    expect(useStore.getState()._cache_ils_record).toEqual({ '1-1-1': undefined })
+  })
 })
