@@ -1,5 +1,7 @@
 import { Box, Modal } from '@common/components'
+import { Fab } from '@mui/material'
 import { memo } from 'react'
+import { Close } from '@common/icons'
 
 const style_box = {
   position: 'absolute',
@@ -50,15 +52,24 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
   return (
     <Modal open={props.isOpen} onClose={props.onClose}>
       <Box sx={style_box}>
+        <Fab
+         color="primary"
+         onClick={() => props.onClose()}
+         style={{
+           top: '-2%',
+           left: '-1%'
+         }}>
+          <Close />
+        </Fab>
         <iframe
           src={props.url}
           title={props.title}
-          width="120%"
-          height="130%"
+          width="100%"
+          height="110%"
           style={{
             position: 'relative',
-            left: '-19%',
-            top: '-21%'
+            border: 0,
+            top: '-15%',
           }}
         />
       </Box>
