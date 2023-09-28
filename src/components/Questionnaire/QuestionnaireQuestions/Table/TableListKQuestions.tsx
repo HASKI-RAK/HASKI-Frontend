@@ -82,13 +82,13 @@ const TableRowAnswers = memo(
               spacing={1}
               divider={<Divider orientation="vertical" flexItem />}>
               {answerValues.map((answer) => (
-                  <>
+                  <React.Fragment key={"QuestionnaireListK Answer: "+answer}>
                     <FormControlLabel
                         value={answer}
                         control={<Radio />}
                         label={<Typography variant={'h6'}>{t(answer)}</Typography>}
                     />
-                  </>
+                  </React.Fragment>
               ))}
             </Stack>
           </RadioGroup>
@@ -263,7 +263,7 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableListK'}>
                 {radioButtonGroupArray.map((step, groupIndex) => (
-                    <>
+                    <React.Fragment key={"QuestionnareListK Question: "+groupIndex}>
                       <MemoTableRowQuestion question={t(stepsListK[activeStep][groupIndex].question)} />
                       <TableRowAnswers
                           activeStep={activeStep}
@@ -288,7 +288,7 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
                             />
                           </>
                       ): undefined}
-                    </>
+                    </React.Fragment>
                 ))}
               </TableBody>
             </Table>

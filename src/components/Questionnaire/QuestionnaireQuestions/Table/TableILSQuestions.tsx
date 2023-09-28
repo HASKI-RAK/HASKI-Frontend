@@ -208,8 +208,8 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableILSBody'}>
                 {radioButtonGroupArray.map((step, groupIndex) => (
-                  <>
-                    <MemoTableRowQuestion question={t(ilsArray[activeStep][groupIndex].question)} key={"ILS Question: "+groupIndex}/>
+                  <React.Fragment key={"QuestionnareILS Question: "+groupIndex}>
+                    <MemoTableRowQuestion question={t(ilsArray[activeStep][groupIndex].question)}/>
                     <MemoTableRowAnswers
                       radioButtonGroup={step}
                       handleRadioChange={handleRadioChange}
@@ -220,7 +220,7 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
                       activeStep={activeStep}
                       stepsILSData={stepsILSData}
                     />
-                  </>
+                  </React.Fragment>
                 ))}
               </TableBody>
             </Table>
