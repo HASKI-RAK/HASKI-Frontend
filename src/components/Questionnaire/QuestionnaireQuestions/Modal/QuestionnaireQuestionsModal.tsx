@@ -1,13 +1,6 @@
 import React from 'react'
 import { Close } from '@common/icons'
-import { Box, Modal, IconButton } from '@common/components'
-
-const styleButtonClose = {
-  position: 'sticky',
-  left: '99%',
-  top: '0%',
-  p: 2
-}
+import { Box, Modal, Fab } from '@common/components'
 
 const styleBox = {
   position: 'absolute',
@@ -33,13 +26,16 @@ const QuestionnaireQuestionsModal = ({ open = false, handleClose, children }: Qu
   return (
     <Modal data-testid={'Questions Modal'} open={open} onClose={handleClose}>
       <Box sx={styleBox}>
-        <IconButton
-          color="primary"
-          sx={styleButtonClose}
-          onClick={() => handleClose({} as object, 'backdropClick')}
-          data-testid={'QuestionnaireResultsCloseButton'}>
+        <Fab
+            color="primary"
+            onClick={() => handleClose({} as object, 'backdropClick')}
+            style={{
+              position: 'absolute',
+              top: '4%',
+              left: '90.5%'
+            }}>
           <Close />
-        </IconButton>
+        </Fab>
         {children}
       </Box>
     </Modal>

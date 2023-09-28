@@ -69,6 +69,9 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
   const [modalOpenListK, setModalOpenListK] = useState(false)
+  const [successSendILSLong, setSuccessSendILSLong] = useState(false)
+  const [successSendILSShort, setSuccessSendILSShort] = useState(false)
+  const [successSendListK, setSuccessSendListK] = useState(false)
 
   const handleOpenModal = () => {
     setModalOpen(true)
@@ -83,9 +86,15 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   }
 
   const handleCloseILSShortModal = (event: object, reason: string) => {
-    if (reason == 'backdropClick')
-      if (window.confirm(t('components.Menubar.CloseDialog')))
-        setModalOpenILSShort(false)
+    if(!successSendILSShort) {
+      if(reason == 'backdropClick')
+        if(window.confirm(t('components.Menubar.CloseDialog')))
+          setModalOpenILSShort(false)
+    }
+    else {
+      setModalOpenILSShort(false)
+    }
+
     return
   }
 
@@ -94,9 +103,14 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   }
 
   const handleCloseILSLongModal = (event: object, reason: string) => {
-    if (reason == 'backdropClick')
-      if (window.confirm(t('components.Menubar.CloseDialog')))
+    if(!successSendILSLong) {
+      if (reason == 'backdropClick')
+        if (window.confirm(t('components.Menubar.CloseDialog')))
+          setModalOpenILSLong(false)
+    }
+    else{
         setModalOpenILSLong(false)
+    }
     return
   }
 
@@ -105,9 +119,14 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   }
 
   const handleCloseListKModal = (event: object, reason: string) => {
-    if (reason == 'backdropClick')
-      if (window.confirm(t('components.Menubar.CloseDialog')))
+    if(!successSendListK){
+      if (reason == 'backdropClick')
+        if (window.confirm(t('components.Menubar.CloseDialog')))
+          setModalOpenListK(false)
+    }
+    else{
         setModalOpenListK(false)
+    }
     return
   }
 
@@ -345,7 +364,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                 <Typography textAlign="center">{isAuth ? 'ILS Questionnaire' : null}</Typography>
               </MenuItem>
               <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
-                <TableILSQuestions ilsLong={true} />
+                <TableILSQuestions ilsLong={true} successSend={successSendILSLong} setSuccessSend={setSuccessSendILSLong} />
               </QuestionnaireQuestionsModal>
 
               <MenuItem
@@ -358,7 +377,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                 <Typography textAlign="center">{isAuth ? 'ILS Questionnaire shortend' : null}</Typography>
               </MenuItem>
               <QuestionnaireQuestionsModal open={modalOpenILSShort} handleClose={handleCloseILSShortModal}>
-                <TableILSQuestions ilsLong={false} />
+                <TableILSQuestions ilsLong={false} successSend={successSendILSShort} setSuccessSend={setSuccessSendILSShort} />
               </QuestionnaireQuestionsModal>
 
               <MenuItem
@@ -371,7 +390,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                 <Typography textAlign="center">{isAuth ? 'List-K Questionnaire' : null}</Typography>
               </MenuItem>
               <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>
-                <TableListKQuestions />
+                <TableListKQuestions successSend={successSendListK} setSuccessSend={setSuccessSendListK} />
               </QuestionnaireQuestionsModal>
 
               <MenuItem

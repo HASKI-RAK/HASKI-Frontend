@@ -83,10 +83,11 @@ MemoTableRowAnswers.displayName = 'MemoTableRowAnswers'
 
 type TableILSQuestionsProps = {
   ilsLong: boolean
+  successSend: boolean
+  setSuccessSend: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
-  const [successSend, setSuccessSend] = useState(false)
+export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }: TableILSQuestionsProps) => {
   const [questionnaireAnswers, setQuestionnaireAnswers] = useState([{ question_id: '', answer: '' }])
   const { addSnackbar } = useContext(SnackbarContext)
   const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, true)
@@ -188,6 +189,11 @@ export const TableILSQuestions = memo(({ ilsLong }: TableILSQuestionsProps) => {
 
   return (
     <Box>
+      <Stack direction="column" justifyContent="space-around" alignItems="center">
+        <Typography variant="h6" component={Paper} sx={{ m: 2, p: 2}}>
+          {ilsLong ? "ILS-Long Questionnaire" : "ILS-Short Questionnaire"}
+        </Typography>
+      </Stack>
       <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
         <ButtonStack
           activeStep={activeStep}

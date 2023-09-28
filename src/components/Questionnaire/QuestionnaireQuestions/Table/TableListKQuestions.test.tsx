@@ -22,8 +22,12 @@ global.fetch = jest.fn(() =>
 ) as jest.Mock
 
 describe('TableListKQuestions', () => {
+
+    const successSend = false
+    const setSuccessSend = jest.fn((successSend) => successSend)
+
   test('ListK RadioButtons can be checked', () => {
-    const { getByTestId } = render(<TableListKQuestions />)
+    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend}/>)
 
     const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
       'input[type="radio"]'
@@ -58,7 +62,7 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK next Button is enabled, when all radioButtons are selected', () => {
-    const { getByTestId } = render(<TableListKQuestions />)
+    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend}/>)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -92,7 +96,7 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK next Button is enabled, when all radioButtons are selected (2 Pages)', () => {
-    const { getByTestId } = render(<TableListKQuestions />)
+    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend}/>)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
@@ -156,7 +160,7 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK next Button is disabled, when not all radioButtons are selected', () => {
-    const { getByTestId } = render(<TableListKQuestions />)
+    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend}/>)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -187,7 +191,7 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK values are stored', () => {
-    const { getByTestId } = render(<TableListKQuestions />)
+    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend}/>)
 
     const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1'
     const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2'
@@ -316,7 +320,7 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK values can be send', async () => {
-    const { getByTestId } = render(<TableListKQuestions />)
+    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend}/>)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
@@ -406,7 +410,7 @@ describe('TableListKQuestions', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
 
-    const { getByTestId } = render(<TableListKQuestions />)
+    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend}/>)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')

@@ -100,8 +100,12 @@ const TableRowAnswers = memo(
 // eslint-disable-next-line immutable/no-mutation
 TableRowAnswers.displayName = 'TableRowAnswers'
 
-export const TableListKQuestions = memo(() => {
-  const [sendSuccess, setSendSuccess] = useState(false)
+type TableListKQuestionsProps = {
+  successSend: boolean
+  setSuccessSend: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableListKQuestionsProps) => {
   const { addSnackbar } = useContext(SnackbarContext)
   const [questionnaireAnswers, setQuestionnaireAnswers] = useState([{ question_id: '', answer: '' }])
   const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, false)
@@ -148,14 +152,14 @@ export const TableListKQuestions = memo(() => {
           severity: 'success',
           autoHideDuration: 5000
         })
-        setSendSuccess(true)
+        setSuccessSend(true)
       } else {
         addSnackbar({
           message: t('Data send unsuccessfull'),
           severity: 'error',
           autoHideDuration: 5000
         })
-        setSendSuccess(false)
+        setSuccessSend(false)
       }
     })
   }
@@ -240,6 +244,11 @@ export const TableListKQuestions = memo(() => {
 
   return (
     <Box>
+      <Stack direction="column" justifyContent="space-around" alignItems="center">
+        <Typography variant="h6" component={Paper} sx={{ m: 2, p: 2}}>
+          List-K Questionnaire
+        </Typography>
+      </Stack>
       <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
         <ButtonStack
           activeStep={activeStep}
@@ -291,7 +300,7 @@ export const TableListKQuestions = memo(() => {
             isValid={activeStep === 7}
             idType={'ListK'}
             isSending={isSending}
-            sendSuccess={sendSuccess}
+            sendSuccess={successSend}
           />
         </Stack>
       </Stack>
