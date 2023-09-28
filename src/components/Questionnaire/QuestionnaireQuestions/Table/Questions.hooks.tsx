@@ -20,10 +20,10 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
 
     const key = ils ? 'ils' : 'list_k'
     const outputJson: string = JSON.stringify({
-        [key]: filteredData.map((item) => ({
-          question_id: item.question_id.toLowerCase(),
-          answer: ils ? item.answer : parseInt(item.answer, 10)
-        }))
+      [key]: filteredData.map((item) => ({
+        question_id: item.question_id.toLowerCase(),
+        answer: ils ? item.answer : parseInt(item.answer, 10)
+      }))
     })
 
     console.log(outputJson)

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import {fireEvent, getByText, render, waitFor} from '@testing-library/react'
+import { fireEvent, getByText, render, waitFor } from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
 import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
@@ -281,7 +281,7 @@ describe('MenuBar', () => {
     const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
-          <MenuBar courseSelected={false}/>
+          <MenuBar courseSelected={false} />
         </MemoryRouter>
       </AuthContext.Provider>
     )
@@ -289,7 +289,9 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILSshort'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9')).toBeInTheDocument()
+    expect(
+      getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9')
+    ).toBeInTheDocument()
   })
 
   it('navigates to questionnaire ils-long page', async () => {
@@ -304,7 +306,9 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILS'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-1')).toBeInTheDocument()
+    expect(
+      getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-1')
+    ).toBeInTheDocument()
   })
 
   it('navigates to questionnaire listk page', async () => {
@@ -319,7 +323,9 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireListk'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1')).toBeInTheDocument()
+    expect(
+      getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1')
+    ).toBeInTheDocument()
   })
 
   it('navigates to logout page', async () => {

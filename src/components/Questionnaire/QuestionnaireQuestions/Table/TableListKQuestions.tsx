@@ -13,10 +13,10 @@ import {
   TableRow,
   Typography
 } from '@common/components'
-import {useTranslation} from 'react-i18next'
-import React, {memo, useCallback, useContext, useMemo, useState} from 'react'
-import {SnackbarContext} from '@services'
-import {ButtonStack, MemoTableRowQuestion, SendButton} from './TableCommonComponents'
+import { useTranslation } from 'react-i18next'
+import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
+import { SnackbarContext } from '@services'
+import { ButtonStack, MemoTableRowQuestion, SendButton } from './TableCommonComponents'
 import useHandleSend from './Questions.hooks'
 
 /**
@@ -63,8 +63,13 @@ const TableRowAnswers = memo(
     answerIndex,
     stepsListK
   }: TableRowAnswersProps) => {
-    const answerValues = [stepsListK[activeStep][answerIndex].answer1, stepsListK[activeStep][answerIndex].answer2,
-      stepsListK[activeStep][answerIndex].answer3, stepsListK[activeStep][answerIndex].answer4, stepsListK[activeStep][answerIndex].answer5]
+    const answerValues = [
+      stepsListK[activeStep][answerIndex].answer1,
+      stepsListK[activeStep][answerIndex].answer2,
+      stepsListK[activeStep][answerIndex].answer3,
+      stepsListK[activeStep][answerIndex].answer4,
+      stepsListK[activeStep][answerIndex].answer5
+    ]
     return (
       <TableRow>
         <TableCell>
@@ -82,13 +87,13 @@ const TableRowAnswers = memo(
               spacing={1}
               divider={<Divider orientation="vertical" flexItem />}>
               {answerValues.map((answer) => (
-                  <React.Fragment key={"QuestionnaireListK Answer: "+answer}>
-                    <FormControlLabel
-                        value={answer}
-                        control={<Radio />}
-                        label={<Typography variant={'h6'}>{t(answer)}</Typography>}
-                    />
-                  </React.Fragment>
+                <React.Fragment key={'QuestionnaireListK Answer: ' + answer}>
+                  <FormControlLabel
+                    value={answer}
+                    control={<Radio />}
+                    label={<Typography variant={'h6'}>{t(answer)}</Typography>}
+                  />
+                </React.Fragment>
               ))}
             </Stack>
           </RadioGroup>
@@ -142,7 +147,12 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
   const [radioButtonGroup5, setRadioButtonGroup5] = useState('')
 
   const radioButtonGroupArray = [radioButtonGroup1, radioButtonGroup2, radioButtonGroup3, radioButtonGroup4]
-  const setRadioButtonGroupArray = [setRadioButtonGroup1, setRadioButtonGroup2, setRadioButtonGroup3, setRadioButtonGroup4]
+  const setRadioButtonGroupArray = [
+    setRadioButtonGroup1,
+    setRadioButtonGroup2,
+    setRadioButtonGroup3,
+    setRadioButtonGroup4
+  ]
 
   const handleSendClick = () => {
     sendAnswers().then((res) => {
@@ -168,7 +178,6 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
   // (They are reset to their previous Value when the user goes back)
   const isNextDisabled =
     !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4 || !radioButtonGroup5
-
 
   const setRadioButtonGroups = (newActiveStep: number) => {
     setRadioButtonGroup1(setRadioButtonValue(stepsListK[newActiveStep][0]))
@@ -205,10 +214,17 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
       }) => {
         //if the question is already answered, the answer is set to the value of the radio button/ else radio button is not set
 
-        const listkSteps=[listkStep.answer1, listkStep.answer2, listkStep.answer3, listkStep.answer4, listkStep.answer5]
-        const selectedAnswer = questionnaireAnswers.find((answer) => answer.question_id === listkStep.questionLabel)?.answer
+        const listkSteps = [
+          listkStep.answer1,
+          listkStep.answer2,
+          listkStep.answer3,
+          listkStep.answer4,
+          listkStep.answer5
+        ]
+        const selectedAnswer = questionnaireAnswers.find(
+          (answer) => answer.question_id === listkStep.questionLabel
+        )?.answer
         return selectedAnswer ? listkSteps[parseInt(selectedAnswer) - 1] : ''
-
       },
     [questionnaireAnswers]
   )
@@ -245,7 +261,7 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
   return (
     <Box>
       <Stack direction="column" justifyContent="space-around" alignItems="center">
-        <Typography variant="h6" component={Paper} sx={{ m: 2, p: 2}}>
+        <Typography variant="h6" component={Paper} sx={{ m: 2, p: 2 }}>
           List-K Questionnaire
         </Typography>
       </Stack>
@@ -263,32 +279,32 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableListK'}>
                 {radioButtonGroupArray.map((step, groupIndex) => (
-                    <React.Fragment key={"QuestionnareListK Question: "+groupIndex}>
-                      <MemoTableRowQuestion question={t(stepsListK[activeStep][groupIndex].question)} />
-                      <TableRowAnswers
+                  <React.Fragment key={'QuestionnareListK Question: ' + groupIndex}>
+                    <MemoTableRowQuestion question={t(stepsListK[activeStep][groupIndex].question)} />
+                    <TableRowAnswers
+                      activeStep={activeStep}
+                      handleRadioChange={handleRadioChange}
+                      radioButtonGroup={radioButtonGroupArray[groupIndex]}
+                      setRadioButtonGroup={setRadioButtonGroupArray[groupIndex]}
+                      t={t}
+                      answerIndex={groupIndex}
+                      stepsListK={stepsListK}
+                    />
+                    {activeStep < 7 && groupIndex == 3 ? (
+                      <>
+                        <MemoTableRowQuestion question={t(stepsListK[activeStep][4].question)} />
+                        <TableRowAnswers
                           activeStep={activeStep}
                           handleRadioChange={handleRadioChange}
-                          radioButtonGroup={radioButtonGroupArray[groupIndex]}
-                          setRadioButtonGroup={setRadioButtonGroupArray[groupIndex]}
+                          radioButtonGroup={radioButtonGroup5}
+                          setRadioButtonGroup={setRadioButtonGroup5}
                           t={t}
-                          answerIndex={groupIndex}
+                          answerIndex={4}
                           stepsListK={stepsListK}
-                      />
-                      {(activeStep < 7 && groupIndex == 3) ? (
-                          <>
-                            <MemoTableRowQuestion question={t(stepsListK[activeStep][4].question)} />
-                            <TableRowAnswers
-                                activeStep={activeStep}
-                                handleRadioChange={handleRadioChange}
-                                radioButtonGroup={radioButtonGroup5}
-                                setRadioButtonGroup={setRadioButtonGroup5}
-                                t={t}
-                                answerIndex={4}
-                                stepsListK={stepsListK}
-                            />
-                          </>
-                      ): undefined}
-                    </React.Fragment>
+                        />
+                      </>
+                    ) : undefined}
+                  </React.Fragment>
                 ))}
               </TableBody>
             </Table>

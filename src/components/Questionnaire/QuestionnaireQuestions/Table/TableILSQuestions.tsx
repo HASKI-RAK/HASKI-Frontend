@@ -1,4 +1,18 @@
-import { Table, TableBody, TableContainer, TableRow, Paper, Box, Divider, FormControlLabel, Radio, RadioGroup, Stack, Typography, TableCell } from '@common/components'
+import {
+  Table,
+  TableBody,
+  TableContainer,
+  TableRow,
+  Paper,
+  Box,
+  Divider,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  Stack,
+  Typography,
+  TableCell
+} from '@common/components'
 import { useTranslation } from 'react-i18next'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
@@ -96,11 +110,16 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
 
   const stepsILSData = useMemo(() => {
     return [
-      ...(t<string>(ilsLong ? 'components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions' : 'components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions', {
-        returnObjects: true,
-      }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][]),
-    ];
-  }, []);
+      ...(t<string>(
+        ilsLong
+          ? 'components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions'
+          : 'components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions',
+        {
+          returnObjects: true
+        }
+      ) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
+    ]
+  }, [])
 
   const [activeStep, setActiveStep] = useState(0)
   const [radioButtonGroup1, setRadioButtonGroup1] = useState('')
@@ -190,8 +209,8 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
   return (
     <Box>
       <Stack direction="column" justifyContent="space-around" alignItems="center">
-        <Typography variant="h6" component={Paper} sx={{ m: 2, p: 2}}>
-          {ilsLong ? "ILS-Long Questionnaire" : "ILS-Short Questionnaire"}
+        <Typography variant="h6" component={Paper} sx={{ m: 2, p: 2 }}>
+          {ilsLong ? 'ILS-Long Questionnaire' : 'ILS-Short Questionnaire'}
         </Typography>
       </Stack>
       <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
@@ -208,8 +227,8 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableILSBody'}>
                 {radioButtonGroupArray.map((step, groupIndex) => (
-                  <React.Fragment key={"QuestionnareILS Question: "+groupIndex}>
-                    <MemoTableRowQuestion question={t(ilsArray[activeStep][groupIndex].question)}/>
+                  <React.Fragment key={'QuestionnareILS Question: ' + groupIndex}>
+                    <MemoTableRowQuestion question={t(ilsArray[activeStep][groupIndex].question)} />
                     <MemoTableRowAnswers
                       radioButtonGroup={step}
                       handleRadioChange={handleRadioChange}

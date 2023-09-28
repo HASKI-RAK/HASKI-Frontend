@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { Stack, Typography, MobileStepper, Button, TableRow, TableCell, CircularProgress } from '@common/components'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
-import {useTranslation} from "react-i18next";
+import { useTranslation } from 'react-i18next'
 
 /**
  * # TableCommonComponents
@@ -47,7 +47,7 @@ export const MemoTableRowQuestion = memo(({ question }: { question: string }) =>
 MemoTableRowQuestion.displayName = 'MemoTableRowQuestion'
 
 export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, idType, disabled }: ButtonStackProps) => {
-    const {t} = useTranslation()
+  const { t } = useTranslation()
   return (
     <Stack direction="row" justifyContent="space-around" alignItems="center">
       <MobileStepper
@@ -63,7 +63,7 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
             onClick={handleNext}
             data-testid={`nextButton${idType}Questionnaire`}
             disabled={disabled}>
-              {t('Next')}
+            {t('Next')}
             <KeyboardArrowRight />
           </Button>
         }
@@ -75,7 +75,7 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
             data-testid={`backButton${idType}Questionnaire`}
             disabled={activeStep === 0}>
             <KeyboardArrowLeft />
-              {t('Back')}
+            {t('Back')}
           </Button>
         }
       />
@@ -88,15 +88,15 @@ ButtonStack.displayName = 'MemoButtonStack'
 export const SendButton = memo(
   ({ handleSend, isNextDisabled, t, isValid, idType, isSending, sendSuccess }: SendButtonProps) => {
     return (
-        <Button
-          data-testid={`sendButton${idType}Questionnaire`}
-          variant="contained"
-          color="primary"
-          onClick={handleSend}
-          disabled={isNextDisabled || !isValid || isSending || sendSuccess}
-          sx={{ m: 2 }}>
-          {isSending ? <CircularProgress size={24} /> : t('send')}
-        </Button>
+      <Button
+        data-testid={`sendButton${idType}Questionnaire`}
+        variant="contained"
+        color="primary"
+        onClick={handleSend}
+        disabled={isNextDisabled || !isValid || isSending || sendSuccess}
+        sx={{ m: 2 }}>
+        {isSending ? <CircularProgress size={24} /> : t('send')}
+      </Button>
     )
   }
 )

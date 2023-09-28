@@ -47,12 +47,20 @@ describe('Test ResultDescriptionListK with all Methods', () => {
       </MemoryRouter>
     )
 
-    expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1'
-        + ' ' +
-        'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2')).toBeInTheDocument()
-    expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1'
-        + ' ' +
-        'components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')).toBeInTheDocument()
+    expect(
+      getByText(
+        'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1' +
+          ' ' +
+          'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2'
+      )
+    ).toBeInTheDocument()
+    expect(
+      getByText(
+        'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1' +
+          ' ' +
+          'components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2'
+      )
+    ).toBeInTheDocument()
   })
 
   test('Modal without ListK data', async () => {
@@ -64,9 +72,13 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     fireEvent.click(getByTestId('nextButton'))
 
-    expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK'
-        + ' ' +
-        'components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')).toBeInTheDocument()
+    expect(
+      getByText(
+        'components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK' +
+          ' ' +
+          'components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2'
+      )
+    ).toBeInTheDocument()
   })
 
   test('Active Step ILS is shown, when ils data is given', async () => {
@@ -176,12 +188,20 @@ describe('Test ResultDescriptionListK with all Methods', () => {
       </MemoryRouter>
     )
 
-    expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1'
-        + ' ' +
-        'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2')).toBeInTheDocument()
-    expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1'
-        + ' ' +
-        'components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')).toBeInTheDocument()
+    expect(
+      getByText(
+        'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1' +
+          ' ' +
+          'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2'
+      )
+    ).toBeInTheDocument()
+    expect(
+      getByText(
+        'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1' +
+          ' ' +
+          'components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2'
+      )
+    ).toBeInTheDocument()
   })
 
   test('fetching listk data returns error', async () => {
@@ -202,9 +222,13 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     await waitFor(() => {
       fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
-      expect(getByText('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK'
-          + ' ' +
-          'components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')).toBeInTheDocument()
+      expect(
+        getByText(
+          'components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK' +
+            ' ' +
+            'components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2'
+        )
+      ).toBeInTheDocument()
     })
   })
 

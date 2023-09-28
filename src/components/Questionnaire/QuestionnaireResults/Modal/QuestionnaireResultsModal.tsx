@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from 'react'
+import { useContext, useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Modal, Stepper, Step, StepButton, IconButton, Stack, Typography } from '@common/components'
@@ -14,7 +14,7 @@ import ResultDescriptionILS from '../Text/ResultDescriptionILS'
 import ResultDescriptionListK from '../Text/ResultDescriptionListK'
 import GraphILS from '../Graph/GraphILS'
 import TableILS from '../Table/TableILS'
-import {SnackbarContext} from "@services";
+import { SnackbarContext } from '@services'
 
 const styleButtonClose = {
   position: 'sticky',
@@ -58,10 +58,10 @@ const QuestionnaireResultsModal = ({
           })
           .catch((error) => {
             log.error(error)
-          addSnackbar({
-            message: t('ILS fetching error'),
-            severity: 'error'
-          })
+            addSnackbar({
+              message: t('ILS fetching error'),
+              severity: 'error'
+            })
           })
         fetchListK(user.settings.user_id, user.lms_user_id, user.id)
           .then((data) => {
@@ -69,18 +69,18 @@ const QuestionnaireResultsModal = ({
           })
           .catch((error) => {
             log.error(error)
-          addSnackbar({
-            message: t('ListK fetching error'),
-            severity: 'error'
-          })
+            addSnackbar({
+              message: t('ListK fetching error'),
+              severity: 'error'
+            })
           })
       })
       .catch((error) => {
         log.error(error)
-      addSnackbar({
-        message: t('User fetching error'),
-        severity: 'error'
-      })
+        addSnackbar({
+          message: t('User fetching error'),
+          severity: 'error'
+        })
       })
   }, [])
 
@@ -93,105 +93,113 @@ const QuestionnaireResultsModal = ({
   }
 
   return (
-      <Modal data-testid={'ILS and ListK Modal'} open={open} onClose={handleClose}>
-          <Box sx={{
-            position: 'absolute',
-            left: '8%',
-            right: '8%',
-            top: '10%',
-            overflow: 'auto',
-            maxHeight: '83%',
-            bgcolor: 'background.paper',
-            border: (theme) =>'2px solid'+ theme.palette.secondary.dark,
-            boxShadow: 24,
-            p: 1
-            }}>
-            <IconButton
-              color="primary"
-              sx={styleButtonClose}
-              onClick={handleClose}
-              data-testid={'QuestionnaireResultsCloseButton'}>
-              <CloseIcon />
-            </IconButton>
-            <Stepper nonLinear activeStep={activeStep}>
-              {steps.map((label, index) => (
-                <Step key={label} data-testid={'StepperButton'}>
-                  <StepButton
-                    color="inherit"
-                    onClick={() => {
-                      setActiveStep(index)
-                    }}>
-                    {label}
-                  </StepButton>
-                </Step>
-              ))}
-            </Stepper>
-            <Stack direction="column" justifyContent="space-between" alignItems="stretch">
-                {activeStep === 0 && ilsData ? (
-                    <Stack direction="column" justifyContent="space-between" alignItems="stretch" m={2} data-testid={'ActiveStepILS'}>
-                        <Stack direction="row" justifyContent="space-between" alignItems="center">
-                          <GraphILS data={ilsData} />
-                          <TableILS data={ilsData} />
-                        </Stack>
-                        <ResultDescriptionILS data={ilsData} />
-                    </Stack>
-                ) : activeStep === 1 && listkData ? (
-                    <Stack direction="column" justifyContent="space-between" alignItems="stretch" m={2} data-testid={'ActiveStepListK'}>
-                        <Stack direction="row" justifyContent="space-between" alignItems="center">
-                          <GraphListK data={listkData} />
-                          <TableListK data={listkData} />
-                        </Stack>
-                        <ResultDescriptionListK data={listkData} />
-                    </Stack>
-                ) : activeStep === 0 ? (
-                  <Stack alignItems="center">
-                      <Typography variant="body2" data-testid={'ActiveStepILSNoData'}>
-                        {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
-                        <ListItem sx={{ display: 'list-item' }}>
-                            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')}
-                            {' '}
-                            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2')}
-                        </ListItem>
-                        <ListItem sx={{ display: 'list-item' }}>
-                            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')}
-                            {' '}
-                            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
-                        </ListItem>
-                      </Typography>
-                  </Stack>
-                ) : activeStep === 1 ? (
-                  <Stack alignItems="center">
-                      <Typography variant="body2" data-testid={'ActiveStepListKNoData'}>
-                        {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
-                        <ListItem sx={{ display: 'list-item' }}>
-                            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
-                            {' '}
-                            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
-                        </ListItem>
-                      </Typography>
-                  </Stack>
-                ) : null}
-                <Stack direction="row" justifyContent="space-between" alignItems="center" m={2}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleBack}
-                    data-testid="backButton"
-                    disabled={activeStep === 0}>
-                    {t('Back')}
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    data-testid="nextButton"
-                    disabled={activeStep === 1}>
-                    {t('Next')}
-                  </Button>
-                </Stack>
+    <Modal data-testid={'ILS and ListK Modal'} open={open} onClose={handleClose}>
+      <Box
+        sx={{
+          position: 'absolute',
+          left: '8%',
+          right: '8%',
+          top: '10%',
+          overflow: 'auto',
+          maxHeight: '83%',
+          bgcolor: 'background.paper',
+          border: (theme) => '2px solid' + theme.palette.secondary.dark,
+          boxShadow: 24,
+          p: 1
+        }}>
+        <IconButton
+          color="primary"
+          sx={styleButtonClose}
+          onClick={handleClose}
+          data-testid={'QuestionnaireResultsCloseButton'}>
+          <CloseIcon />
+        </IconButton>
+        <Stepper nonLinear activeStep={activeStep}>
+          {steps.map((label, index) => (
+            <Step key={label} data-testid={'StepperButton'}>
+              <StepButton
+                color="inherit"
+                onClick={() => {
+                  setActiveStep(index)
+                }}>
+                {label}
+              </StepButton>
+            </Step>
+          ))}
+        </Stepper>
+        <Stack direction="column" justifyContent="space-between" alignItems="stretch">
+          {activeStep === 0 && ilsData ? (
+            <Stack
+              direction="column"
+              justifyContent="space-between"
+              alignItems="stretch"
+              m={2}
+              data-testid={'ActiveStepILS'}>
+              <Stack direction="row" justifyContent="space-between" alignItems="center">
+                <GraphILS data={ilsData} />
+                <TableILS data={ilsData} />
+              </Stack>
+              <ResultDescriptionILS data={ilsData} />
             </Stack>
-          </Box>
-      </Modal>
+          ) : activeStep === 1 && listkData ? (
+            <Stack
+              direction="column"
+              justifyContent="space-between"
+              alignItems="stretch"
+              m={2}
+              data-testid={'ActiveStepListK'}>
+              <Stack direction="row" justifyContent="space-between" alignItems="center">
+                <GraphListK data={listkData} />
+                <TableListK data={listkData} />
+              </Stack>
+              <ResultDescriptionListK data={listkData} />
+            </Stack>
+          ) : activeStep === 0 ? (
+            <Stack alignItems="center">
+              <Typography variant="body2" data-testid={'ActiveStepILSNoData'}>
+                {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
+                <ListItem sx={{ display: 'list-item' }}>
+                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')}{' '}
+                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2')}
+                </ListItem>
+                <ListItem sx={{ display: 'list-item' }}>
+                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')}{' '}
+                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+                </ListItem>
+              </Typography>
+            </Stack>
+          ) : activeStep === 1 ? (
+            <Stack alignItems="center">
+              <Typography variant="body2" data-testid={'ActiveStepListKNoData'}>
+                {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
+                <ListItem sx={{ display: 'list-item' }}>
+                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}{' '}
+                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+                </ListItem>
+              </Typography>
+            </Stack>
+          ) : null}
+          <Stack direction="row" justifyContent="space-between" alignItems="center" m={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleBack}
+              data-testid="backButton"
+              disabled={activeStep === 0}>
+              {t('Back')}
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNext}
+              data-testid="nextButton"
+              disabled={activeStep === 1}>
+              {t('Next')}
+            </Button>
+          </Stack>
+        </Stack>
+      </Box>
+    </Modal>
   )
 }
 

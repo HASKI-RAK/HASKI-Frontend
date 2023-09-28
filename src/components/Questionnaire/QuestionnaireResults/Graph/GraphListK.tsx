@@ -64,7 +64,10 @@ export const useData = (
   const controlCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Control') +
     '\n' +
-    centerString(data.con.toFixed(2), t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Control').length)
+    centerString(
+      data.con.toFixed(2),
+      t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Control').length
+    )
   const regulateCentered =
     t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate') +
     '\n' +
@@ -336,7 +339,7 @@ type GraphListKProps = {
 const GraphListK = ({ data }: GraphListKProps) => {
   const { t } = useTranslation()
 
-  const graphListKData = useData( data )
+  const graphListKData = useData(data)
 
   const cognitiveStrategies = t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies')
   const intResMngtStrategies = t(
@@ -350,140 +353,140 @@ const GraphListK = ({ data }: GraphListKProps) => {
   )
 
   return (
-      <Network
-        height={500}
-        width={650}
-        data={graphListKData}
-        margin={{ top: 0, right: 200, bottom: 80, left: 0 }}
-        linkDistance={(e: { distance: number }) => e.distance}
-        repulsivity={100}
-        activeNodeSize={(n: { size: number }) => n.size * 3}
-        nodeSize={(n: { size: number; score: number }) => n.size * (n.score * 0.6 + 1)}
-        nodeColor={(e: { color: string }) => e.color}
-        nodeBorderWidth={1.3}
-        nodeBorderColor={(data: { data: { score: number } }) => {
-          if (data.data.score >= 3) {
-            return 'black'
-          } else {
-            return '#9c3641'
-          }
-        }}
-        linkColor={{ from: 'source.color', modifiers: [] }}
-        linkThickness={(n: { target: { data: { height: number } } }) => 2 + 2 * n.target.data.height}
-        linkBlendMode="multiply"
-        motionConfig="wobbly"
-        animate={true}
-        annotations={[
-          {
-            type: 'circle',
-            match: {
-              id: cognitiveStrategies
-            },
-            note:
-              t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
-              ': ' +
-              (Math.round((data.cogn_str + Number.EPSILON) * 100) / 100).toFixed(2),
-            noteX: -10,
-            noteY: 40,
-            offset: 13,
-            noteTextOffset: 5
+    <Network
+      height={500}
+      width={650}
+      data={graphListKData}
+      margin={{ top: 0, right: 200, bottom: 80, left: 0 }}
+      linkDistance={(e: { distance: number }) => e.distance}
+      repulsivity={100}
+      activeNodeSize={(n: { size: number }) => n.size * 3}
+      nodeSize={(n: { size: number; score: number }) => n.size * (n.score * 0.6 + 1)}
+      nodeColor={(e: { color: string }) => e.color}
+      nodeBorderWidth={1.3}
+      nodeBorderColor={(data: { data: { score: number } }) => {
+        if (data.data.score >= 3) {
+          return 'black'
+        } else {
+          return '#9c3641'
+        }
+      }}
+      linkColor={{ from: 'source.color', modifiers: [] }}
+      linkThickness={(n: { target: { data: { height: number } } }) => 2 + 2 * n.target.data.height}
+      linkBlendMode="multiply"
+      motionConfig="wobbly"
+      animate={true}
+      annotations={[
+        {
+          type: 'circle',
+          match: {
+            id: cognitiveStrategies
           },
-          {
-            type: 'circle',
-            match: {
-              id: cognitiveStrategies
-            },
-            note: cognitiveStrategies,
-            noteX: -10,
-            noteY: 40,
-            offset: 13,
-            noteTextOffset: -15
+          note:
+            t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
+            ': ' +
+            (Math.round((data.cogn_str + Number.EPSILON) * 100) / 100).toFixed(2),
+          noteX: -10,
+          noteY: 40,
+          offset: 13,
+          noteTextOffset: 5
+        },
+        {
+          type: 'circle',
+          match: {
+            id: cognitiveStrategies
           },
-          {
-            type: 'circle',
-            match: {
-              id: intResMngtStrategies
-            },
-            note:
-              t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
-              ': ' +
-              (Math.round((data.int_res_mng_str + Number.EPSILON) * 100) / 100).toFixed(2),
-            noteWidth: 250,
-            noteX: 50,
-            noteY: 35,
-            offset: 13,
-            noteTextOffset: 5
+          note: cognitiveStrategies,
+          noteX: -10,
+          noteY: 40,
+          offset: 13,
+          noteTextOffset: -15
+        },
+        {
+          type: 'circle',
+          match: {
+            id: intResMngtStrategies
           },
-          {
-            type: 'circle',
-            match: {
-              id: intResMngtStrategies
-            },
-            note: intResMngtStrategies,
-            noteWidth: 250,
-            noteX: 50,
-            noteY: 35,
-            offset: 13,
-            noteTextOffset: -15
+          note:
+            t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
+            ': ' +
+            (Math.round((data.int_res_mng_str + Number.EPSILON) * 100) / 100).toFixed(2),
+          noteWidth: 250,
+          noteX: 50,
+          noteY: 35,
+          offset: 13,
+          noteTextOffset: 5
+        },
+        {
+          type: 'circle',
+          match: {
+            id: intResMngtStrategies
           },
-          {
-            type: 'circle',
-            match: {
-              id: metacognitiveStrategies
-            },
-            note:
-              t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
-              ': ' +
-              (Math.round((data.metacogn_str + Number.EPSILON) * 100) / 100).toFixed(2),
-            noteWidth: 145,
-            noteX: -10,
-            noteY: 100,
-            offset: 13,
-            noteTextOffset: 5
+          note: intResMngtStrategies,
+          noteWidth: 250,
+          noteX: 50,
+          noteY: 35,
+          offset: 13,
+          noteTextOffset: -15
+        },
+        {
+          type: 'circle',
+          match: {
+            id: metacognitiveStrategies
           },
-          {
-            type: 'circle',
-            match: {
-              id: metacognitiveStrategies
-            },
-            note: metacognitiveStrategies,
-            noteWidth: 145,
-            noteX: -10,
-            noteY: 100,
-            offset: 13,
-            noteTextOffset: -15
+          note:
+            t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
+            ': ' +
+            (Math.round((data.metacogn_str + Number.EPSILON) * 100) / 100).toFixed(2),
+          noteWidth: 145,
+          noteX: -10,
+          noteY: 100,
+          offset: 13,
+          noteTextOffset: 5
+        },
+        {
+          type: 'circle',
+          match: {
+            id: metacognitiveStrategies
           },
-          {
-            type: 'circle',
-            match: {
-              id: extResMngtStrategies
-            },
-            note:
-              t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
-              ': ' +
-              (Math.round((data.ext_res_mng_str + Number.EPSILON) * 100) / 100).toFixed(2),
-            noteWidth: 250,
-            noteX: 10,
-            noteY: 90,
-            offset: 13,
-            noteTextOffset: 5
+          note: metacognitiveStrategies,
+          noteWidth: 145,
+          noteX: -10,
+          noteY: 100,
+          offset: 13,
+          noteTextOffset: -15
+        },
+        {
+          type: 'circle',
+          match: {
+            id: extResMngtStrategies
           },
-          {
-            type: 'circle',
-            match: {
-              id: extResMngtStrategies
-            },
-            note: extResMngtStrategies,
-            noteWidth: 250,
-            noteX: 10,
-            noteY: 90,
-            offset: 13,
-            noteTextOffset: -15
-          }
-        ]}
-        ariaDescribedBy={'List K Graph'}
-        ariaLabel={'List K Graph'}
-      />
+          note:
+            t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
+            ': ' +
+            (Math.round((data.ext_res_mng_str + Number.EPSILON) * 100) / 100).toFixed(2),
+          noteWidth: 250,
+          noteX: 10,
+          noteY: 90,
+          offset: 13,
+          noteTextOffset: 5
+        },
+        {
+          type: 'circle',
+          match: {
+            id: extResMngtStrategies
+          },
+          note: extResMngtStrategies,
+          noteWidth: 250,
+          noteX: 10,
+          noteY: 90,
+          offset: 13,
+          noteTextOffset: -15
+        }
+      ]}
+      ariaDescribedBy={'List K Graph'}
+      ariaLabel={'List K Graph'}
+    />
   )
 }
 

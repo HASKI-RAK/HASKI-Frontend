@@ -22,18 +22,17 @@ type QuestionnaireQuestionsModalProps = {
 }
 
 const QuestionnaireQuestionsModal = ({ open = false, handleClose, children }: QuestionnaireQuestionsModalProps) => {
-
   return (
     <Modal data-testid={'Questions Modal'} open={open} onClose={handleClose}>
       <Box sx={styleBox}>
         <Fab
-            color="primary"
-            onClick={() => handleClose({} as object, 'backdropClick')}
-            style={{
-              position: 'absolute',
-              top: '4%',
-              left: '90.5%'
-            }}>
+          color="primary"
+          onClick={() => handleClose({} as object, 'backdropClick')}
+          style={{
+            position: 'absolute',
+            top: '4%',
+            left: '90.5%'
+          }}>
           <Close />
         </Fab>
         {children}

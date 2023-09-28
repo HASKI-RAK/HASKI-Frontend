@@ -37,15 +37,14 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate
 }))
 
-
-
 describe('Test TableILSQuestions Long with all Methods', () => {
-
   const successSend = false
   const setSuccessSend = jest.fn((successSend) => successSend)
 
   test('Long ILS radio Buttons can be checked', () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const RadioButton1 = getByTestId('ilsLongQuestionnaireILSButtonGroup1').querySelectorAll(
       'input[type="radio"]'
@@ -74,7 +73,9 @@ describe('Test TableILSQuestions Long with all Methods', () => {
   })
 
   test('Long ILS next button is enabled, when all radioButtons are selected', () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -107,7 +108,9 @@ describe('Test TableILSQuestions Long with all Methods', () => {
   })
 
   test('Long ILS next button is enabled, when all radioButtons are selected (2 Pages)', () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -190,7 +193,9 @@ describe('Test TableILSQuestions Long with all Methods', () => {
   })
 
   test('Long ILS next button is disabled, when not all radioButtons are selected', () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -243,7 +248,9 @@ describe('Test TableILSQuestions Long with all Methods', () => {
   })
 
   test('Long ILS values are stored', () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.1'
     const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1'
@@ -351,7 +358,9 @@ describe('Test TableILSQuestions Long with all Methods', () => {
   })
 
   test('Long ILS values can be send', () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
@@ -399,12 +408,13 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 })
 
 describe('Table ILS Questionnaire Short', () => {
-
   const successSend = false
   const setSuccessSend = jest.fn((successSend) => successSend)
 
   test('Short ILS radio Buttons can be checked', () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
       'input[type="radio"]'
@@ -433,7 +443,9 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('Short ILS next button is enabled, when all radioButtons are selected', () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -466,7 +478,9 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('Short ILS next button is enabled, when all radioButtons are selected (2 Pages)', () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -548,7 +562,9 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('Short ILS next button is disabled, when not all radioButtons are selected', () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -601,7 +617,9 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('Short ILS values are stored', () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
     const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1'
@@ -709,7 +727,9 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('Short ILS values can be send', async () => {
-    const { getByTestId } = render(<TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
@@ -767,7 +787,9 @@ describe('Table ILS Questionnaire Short', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
 
-    const { getByTestId } = render(<TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>)
+    const { getByTestId } = render(
+      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
