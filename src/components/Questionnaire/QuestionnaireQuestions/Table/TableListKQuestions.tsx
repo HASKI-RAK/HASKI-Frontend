@@ -41,7 +41,7 @@ type TableRowAnswersProps = {
       answer5: string
     }
   ) => void
-  setRadioButtonGroup: (value: ((prevState: string) => string) | string) => void
+  setRadioButtonGroup: (newValue: string) => void
   stepsListK: {
     question: string
     questionLabel: string
@@ -53,7 +53,7 @@ type TableRowAnswersProps = {
   }[][]
 }
 
-const TableRowAnswers = memo(
+const MemoTableRowAnswers = memo(
   ({
     activeStep,
     handleRadioChange,
@@ -103,7 +103,7 @@ const TableRowAnswers = memo(
   }
 )
 // eslint-disable-next-line immutable/no-mutation
-TableRowAnswers.displayName = 'TableRowAnswers'
+MemoTableRowAnswers.displayName = 'TableRowAnswers'
 
 type TableListKQuestionsProps = {
   successSend: boolean
@@ -140,19 +140,13 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
   ]
 
   const [activeStep, setActiveStep] = useState(0)
-  const [radioButtonGroup1, setRadioButtonGroup1] = useState('')
-  const [radioButtonGroup2, setRadioButtonGroup2] = useState('')
-  const [radioButtonGroup3, setRadioButtonGroup3] = useState('')
-  const [radioButtonGroup4, setRadioButtonGroup4] = useState('')
-  const [radioButtonGroup5, setRadioButtonGroup5] = useState('')
-
-  const radioButtonGroupArray = [radioButtonGroup1, radioButtonGroup2, radioButtonGroup3, radioButtonGroup4]
-  const setRadioButtonGroupArray = [
-    setRadioButtonGroup1,
-    setRadioButtonGroup2,
-    setRadioButtonGroup3,
-    setRadioButtonGroup4
-  ]
+  const [radioButtonGroup, setRadioButtonGroup] = useState([
+    { value: '' },
+    { value: '' },
+    { value: '' },
+    { value: '' },
+    { value: '' }
+  ])
 
   const handleSendClick = () => {
     sendAnswers().then((res) => {
@@ -176,29 +170,36 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
 
   //if all radio buttons are selected, the next button is enabled
   // (They are reset to their previous Value when the user goes back)
-  const isNextDisabled =
-    !radioButtonGroup1 || !radioButtonGroup2 || !radioButtonGroup3 || !radioButtonGroup4 || !radioButtonGroup5
+  const isNextDisabled = radioButtonGroup.some((radioButton) => radioButton.value === '')
 
   const setRadioButtonGroups = (newActiveStep: number) => {
-    setRadioButtonGroup1(setRadioButtonValue(stepsListK[newActiveStep][0]))
-    setRadioButtonGroup2(setRadioButtonValue(stepsListK[newActiveStep][1]))
-    setRadioButtonGroup3(setRadioButtonValue(stepsListK[newActiveStep][2]))
-    setRadioButtonGroup4(setRadioButtonValue(stepsListK[newActiveStep][3]))
+    setRadioButtonGroup((prevState) => {
+      return prevState.map((item, index) => {
+        if(newActiveStep < 7) {
+          return {
+            ...item,
+            value: setRadioButtonValue(stepsListK[newActiveStep][index])
+          }
+        }
+        else if(index < 4) {
+            return {
+                ...item,
+                value: setRadioButtonValue(stepsListK[newActiveStep][index])
+            }
+        }
+        else return item
+      })
+    })
   }
 
   const handleNext = useCallback(() => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
     setRadioButtonGroups(activeStep + 1)
-    //because the last step has only 4 questions
-    if (activeStep < 6) {
-      setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep + 1][4]))
-    }
   }, [activeStep])
 
   const handleBack = useCallback(() => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
     setRadioButtonGroups(activeStep - 1)
-    setRadioButtonGroup5(setRadioButtonValue(stepsListK[activeStep - 1][4]))
   }, [activeStep])
 
   const setRadioButtonValue = useMemo(
@@ -258,6 +259,35 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
     [setQuestionnaireAnswers]
   )
 
+  const listKQuestionsJsx = (row: number): JSX.Element => {
+    return(
+    <>
+      <MemoTableRowQuestion question={t(stepsListK[activeStep][row].question)}/>
+      <MemoTableRowAnswers
+          radioButtonGroup={radioButtonGroup[row].value}
+          handleRadioChange={handleRadioChange}
+          setRadioButtonGroup={(newValue) => {
+            setRadioButtonGroup((prevState) => {
+              return prevState.map((item, index) => {
+                if(index === row) {
+                  return {
+                    ...item,
+                    value: newValue
+                  }
+                }
+                return item
+              })
+            })
+          }}
+          answerIndex={row}
+          t={t}
+          activeStep={activeStep}
+          stepsListK={stepsListK}
+      />
+    </>
+    )
+  }
+
   return (
     <Box>
       <Stack direction="column" justifyContent="space-around" alignItems="center">
@@ -278,34 +308,13 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
           <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableListK'}>
-                {radioButtonGroupArray.map((step, groupIndex) => (
-                  <React.Fragment key={'QuestionnareListK Question: ' + groupIndex}>
-                    <MemoTableRowQuestion question={t(stepsListK[activeStep][groupIndex].question)} />
-                    <TableRowAnswers
-                      activeStep={activeStep}
-                      handleRadioChange={handleRadioChange}
-                      radioButtonGroup={radioButtonGroupArray[groupIndex]}
-                      setRadioButtonGroup={setRadioButtonGroupArray[groupIndex]}
-                      t={t}
-                      answerIndex={groupIndex}
-                      stepsListK={stepsListK}
-                    />
-                    {activeStep < 7 && groupIndex == 3 ? (
-                      <>
-                        <MemoTableRowQuestion question={t(stepsListK[activeStep][4].question)} />
-                        <TableRowAnswers
-                          activeStep={activeStep}
-                          handleRadioChange={handleRadioChange}
-                          radioButtonGroup={radioButtonGroup5}
-                          setRadioButtonGroup={setRadioButtonGroup5}
-                          t={t}
-                          answerIndex={4}
-                          stepsListK={stepsListK}
-                        />
-                      </>
-                    ) : undefined}
-                  </React.Fragment>
+                <>
+                {stepsListK[activeStep].map((page, row) => (
+                    <React.Fragment key={'QuestionnareListK Question: ' + row}>
+                    {activeStep < 7 ? listKQuestionsJsx(row) : row < 4 ? listKQuestionsJsx(row) : undefined}
+                    </React.Fragment>
                 ))}
+                  </>
               </TableBody>
             </Table>
           </TableContainer>

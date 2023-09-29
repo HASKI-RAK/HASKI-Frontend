@@ -223,26 +223,26 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
                   <React.Fragment key={'QuestionnareILS Question: ' + row}>
                     <MemoTableRowQuestion question={t(ilsArray[activeStep][row].question)} />
                     <MemoTableRowAnswers
-                        radioButtonGroup={radioButtonGroup[row].value}
-                        handleRadioChange={handleRadioChange}
-                        setRadioButtonGroup={(newValue) => {
-                          setRadioButtonGroup((prevState) => {
-                            return prevState.map((item, index) => {
-                              if (index === row) {
-                                return {
-                                  ...item,
-                                  value: newValue
-                                };
+                      radioButtonGroup={radioButtonGroup[row].value}
+                      handleRadioChange={handleRadioChange}
+                      setRadioButtonGroup={(newValue) => {
+                        setRadioButtonGroup((prevState) => {
+                          return prevState.map((item, index) => {
+                            if (index === row) {
+                              return {
+                                ...item,
+                                value: newValue
                               }
-                              return item;
-                            })
+                            }
+                            return item
                           })
-                        }}
-                        answerIndex={row}
-                        isIlsLong={ilsLong}
-                        t={t}
-                        activeStep={activeStep}
-                        stepsILSData={stepsILSData}
+                        })
+                      }}
+                      answerIndex={row}
+                      isIlsLong={ilsLong}
+                      t={t}
+                      activeStep={activeStep}
+                      stepsILSData={stepsILSData}
                     />
                   </React.Fragment>
                 ))}

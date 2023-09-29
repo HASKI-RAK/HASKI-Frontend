@@ -1,5 +1,4 @@
 import { getILS } from './getILS'
-import log from 'loglevel'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -12,7 +11,6 @@ global.fetch = jest.fn(() =>
 ) as jest.Mock
 
 describe('getILS has expected behaviour', () => {
-
   it('should return negative values when the response is successful (because of dimensions)', async () => {
     const inputData = {
       course: 'dude where is my car',
@@ -108,7 +106,6 @@ describe('getILS has expected behaviour', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
-
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
@@ -120,7 +117,5 @@ describe('getILS has expected behaviour', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
-
   })
-
 })
