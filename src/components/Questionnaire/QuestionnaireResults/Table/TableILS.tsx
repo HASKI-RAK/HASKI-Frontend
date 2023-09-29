@@ -40,9 +40,7 @@ export const ILSInterpretation = (score: number, interpretationString: string, o
   }
 
   //if the interpretation is "balanced", then only return "balanced" without the Dimension
-  if (inter.get(score) === t('components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced'))
-    return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced')
-  return inter.get(score) + ' ' + interpretationString
+  return inter.get(score) === t('components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced') ? t('components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced') : inter.get(score) + ' ' + interpretationString
 }
 
 //Depending on the score, return the corresponding dimension

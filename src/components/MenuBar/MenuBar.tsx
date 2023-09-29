@@ -18,9 +18,7 @@ import {
   Link
 } from '@common/components'
 
-import { Analytics, Settings, Help, ArrowDropDown, Person, Login, Logout, AssignmentOutlined } from '@common/icons'
-import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined'
-import PlaylistAddCheckCircleOutlinedIcon from '@mui/icons-material/PlaylistAddCheckCircleOutlined'
+import { Analytics, Settings, Help, ArrowDropDown, Person, Login, Logout, AssignmentOutlined, LibraryBooksOutlined, PlaylistAddCheckCircleOutlined } from '@common/icons'
 
 import { useTranslation } from 'react-i18next'
 import { AuthContext, SnackbarContext } from '@services'
@@ -93,8 +91,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     } else {
       setModalOpenILSShort(false)
     }
-
-    return
   }
 
   const handleOpenILSLongModal = () => {
@@ -108,7 +104,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     } else {
       setModalOpenILSLong(false)
     }
-    return
   }
 
   const handleOpenListKModal = () => {
@@ -122,7 +117,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     } else {
       setModalOpenListK(false)
     }
-    return
   }
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -355,7 +349,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
               <MenuItem data-testid="questionnaireILS" key="questionnaireILS" onClick={() => handleOpenILSLongModal()}>
-                <ListItemIcon>{isAuth ? <LibraryBooksOutlinedIcon fontSize="small" /> : null}</ListItemIcon>
+                <ListItemIcon>{isAuth ? <LibraryBooksOutlined fontSize="small" /> : null}</ListItemIcon>
                 <Typography textAlign="center">{isAuth ? 'ILS Questionnaire' : null}</Typography>
               </MenuItem>
               <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
@@ -389,7 +383,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                 onClick={() => {
                   handleOpenListKModal()
                 }}>
-                <ListItemIcon>{isAuth ? <PlaylistAddCheckCircleOutlinedIcon fontSize="small" /> : null}</ListItemIcon>
+                <ListItemIcon>{isAuth ? <PlaylistAddCheckCircleOutlined fontSize="small" /> : null}</ListItemIcon>
                 <Typography textAlign="center">{isAuth ? 'List-K Questionnaire' : null}</Typography>
               </MenuItem>
               <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>
