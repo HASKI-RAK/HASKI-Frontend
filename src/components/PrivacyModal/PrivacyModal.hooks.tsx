@@ -17,18 +17,13 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
         message: t('components.PrivacyModal.accepted'),
         severity: 'success'
       })
-    } else if (!isAccepted) {
+    } else {
       const tomorrow = new Date()
       tomorrow.setDate(tomorrow.getDate() + 1)
       setCookie('privacy_accept_token', false, { path: '/', expires: tomorrow })
       addSnackbar({
         message: t('components.PrivacyModal.declined'),
         severity: 'success'
-      })
-    } else {
-      addSnackbar({
-        message: t('pages.Contact.error'),
-        severity: 'error'
       })
     }
   }

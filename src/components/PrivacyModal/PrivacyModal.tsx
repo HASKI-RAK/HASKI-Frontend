@@ -1,5 +1,5 @@
 import { Modal, Typography, Box, Button, Link } from '@common/components'
-import { FormGroup, FormControlLabel, Checkbox, Grid } from '@mui/material'
+import { FormGroup, FormControlLabel, Checkbox } from '@mui/material'
 import { usePrivacyModal as _usePrivacyModal, PrivacyModalHookReturn } from './PrivacyModal.hooks'
 import { useTranslation } from 'react-i18next'
 import React from 'react'
@@ -32,21 +32,16 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   const { onAcceptHandler } = usePrivacyModal()
 
   //Lässt sich nicht einfach wegklicken
-  const handleClose = (reason: string) => {
+  const handleClose = (event: React.MouseEvent<HTMLElement>, reason: string) => {
     if (reason && reason == 'backdropClick') return
-    setOpen(false)
   }
   //Accept lässt sich klicken sobald die checkbox geklickt ist
   const handleChecked = (event: React.MouseEvent<HTMLElement>) => {
     setCheck((event.target as HTMLInputElement).checked)
   }
   //weiß nicht wie sich das in eine function bringen lässt
-  const handleAccept = () => {
-    onAcceptHandler(true)
-    setOpen(false)
-  }
-  const handleDecline = () => {
-    onAcceptHandler(false)
+  const handleModal = (lol: boolean) => {
+    onAcceptHandler(lol)
     setOpen(false)
   }
   //nichts laden wenn auf privacypolicy oder wenn cookie gesetzt
@@ -90,10 +85,14 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
               display: 'flex',
               justifyContent: 'space-between'
             }}>
-            <Button variant={'contained'} sx={{ alignSelf: 'end' }} onClick={handleDecline}>
+            <Button variant={'contained'} sx={{ alignSelf: 'end' }} onClick={() => handleModal(false)}>
               {t('decline')}
             </Button>
-            <Button variant={'contained'} sx={{ alignSelf: 'end' }} disabled={!checked} onClick={handleAccept}>
+            <Button
+              variant={'contained'}
+              sx={{ alignSelf: 'end' }}
+              disabled={!checked}
+              onClick={() => handleModal(true)}>
               {t('accept')}
             </Button>
           </Box>
