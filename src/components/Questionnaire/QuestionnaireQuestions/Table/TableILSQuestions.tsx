@@ -171,13 +171,20 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
   }
 
   const setRadioButtonValue = useMemo(
-    () =>
-      (ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }): string => {
-        // if the question is already answered, the answer is set to the value of the radio button, else radio button is not set
-        const answerType = questionnaireAnswers.findLast((answer) => answer.question_id === ilsStep.questionLabel)?.answer
-        return answerType === 'a' ? ilsStep.answer1 : answerType === 'b' ? ilsStep.answer2 : ''
-      },
-    [questionnaireAnswers]
+      () =>
+          (ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }): string => {
+            // Filter the questionnaireAnswers array to find all matching answers
+            const matchingAnswers = questionnaireAnswers.filter((answer) => answer.question_id === ilsStep.questionLabel);
+
+            // If there are matching answers, return the answer from the last one; otherwise, return an empty string
+            if (matchingAnswers.length > 0) {
+              const lastMatchingAnswer = matchingAnswers[matchingAnswers.length - 1];
+              return lastMatchingAnswer.answer === 'a' ? ilsStep.answer1 : lastMatchingAnswer.answer === 'b' ? ilsStep.answer2 : '';
+            }
+
+            return ''
+          },
+      [questionnaireAnswers]
   )
 
   const handleRadioChange = useCallback(

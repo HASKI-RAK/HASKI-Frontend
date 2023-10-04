@@ -115,4 +115,19 @@ describe('Test the Home page', () => {
       expect(getByText('components.Home.NoCourses')).toBeInTheDocument()
     })
   })
+
+  test('fetching Course returns error', async () => {
+    mockServices.getCourses.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    const { getByText } = render(
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+    )
+
+  })
 })

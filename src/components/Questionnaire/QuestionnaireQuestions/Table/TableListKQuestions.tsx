@@ -221,10 +221,16 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
           listkStep.answer4,
           listkStep.answer5
         ]
-        const selectedAnswer = questionnaireAnswers.findLast(
-          (answer) => answer.question_id === listkStep.questionLabel
-        )?.answer
-        return selectedAnswer ? listkSteps[parseInt(selectedAnswer) - 1] : ''
+        // Filter the questionnaireAnswers array to find all matching answers
+        const matchingAnswers = questionnaireAnswers.filter((answer) => answer.question_id === listkStep.questionLabel);
+
+        // If there are matching answers, return the answer from the last one; otherwise, return an empty string
+        if(matchingAnswers.length > 0) {
+          const lastMatchingAnswer = matchingAnswers[matchingAnswers.length - 1];
+          return listkSteps[parseInt(lastMatchingAnswer.answer) - 1]
+        }
+
+        return ''
       },
     [questionnaireAnswers]
   )
