@@ -31,7 +31,7 @@ describe('Test PrivacyModal', () => {
     expect(new_form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
-  test('page does not render if on url', () => {
+  test('Modal does not render if on url', () => {
     window = Object.create(window)
     const url = 'http://localhost:8080/privacypolicy'
     Object.defineProperty(window, 'location', {

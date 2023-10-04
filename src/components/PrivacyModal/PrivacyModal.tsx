@@ -3,11 +3,6 @@ import { FormGroup, FormControlLabel, Checkbox } from '@mui/material'
 import { usePrivacyModal as _usePrivacyModal, PrivacyModalHookReturn } from './PrivacyModal.hooks'
 import { useTranslation } from 'react-i18next'
 import React from 'react'
-//Privacy policy modal
-//gibt die privacy policy an, die akzeptiert werden muss
-//cookie abfrage schon gesehen? nein->anzeigen
-//wenn accept und gelesen->schließen und daten sammeln
-//wenn cancel->schließen und keine daten sammeln
 //zukünftig in die einstellung eine möglichkeit zum cookie declinen einbauen
 //was passiert wenn accept geklickt wird?
 const style = {
@@ -22,32 +17,47 @@ const style = {
   p: 4,
   display: 'flex'
 }
+
+/**
+ * @typedef {Object} PrivacyModalProps
+ * @property {function} usePrivacyModal - Hook used for the Modal logic upon clicking a button.
+ */
+
 export type PrivacyModalProps = {
   usePrivacyModal?: () => PrivacyModalHookReturn
 }
+
+/**
+ * PrivacyModal shows a Modal for the user to read and accept the PrivacyPolicy and other.
+ * The PrivacyModal gets shown upon entering haski. Gets rendered in App.
+ * @returns {JSX.Element} - The Modal
+ * @category Components
+ */
+
 const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps) => {
   const { t } = useTranslation()
   const [open, setOpen] = React.useState(true)
   const [checked, setCheck] = React.useState(false)
   const { onAcceptHandler } = usePrivacyModal()
 
-  //Lässt sich nicht einfach wegklicken
+  //Disable backdropClick so the Modal only closes via the buttons
   const handleClose = (event: React.MouseEvent<HTMLElement>, reason: string) => {
     if (reason && reason == 'backdropClick') return
   }
-  //Accept lässt sich klicken sobald die checkbox geklickt ist
+  //setting the check so the button gets enabled
   const handleChecked = (event: React.MouseEvent<HTMLElement>) => {
     setCheck((event.target as HTMLInputElement).checked)
   }
-  //weiß nicht wie sich das in eine function bringen lässt
+  //close the modal and set the cookie in the hook
   const handleModal = (lol: boolean) => {
     onAcceptHandler(lol)
     setOpen(false)
   }
-  //nichts laden wenn auf privacypolicy oder wenn cookie gesetzt
+  //load nothing if cookie is set
   if (document.cookie.includes('privacy_accept_token')) {
     return null
   }
+  //load nothing if current page is privacypolicy
   if (window.location.href.includes('privacypolicy')) {
     return null
   }
