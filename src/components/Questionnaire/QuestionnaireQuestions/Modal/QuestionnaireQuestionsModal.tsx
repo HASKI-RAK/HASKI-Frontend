@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import { Close } from '@common/icons'
 import { Box, Modal, Fab } from '@common/components'
 
@@ -41,4 +41,7 @@ const QuestionnaireQuestionsModal = ({ open = false, handleClose, children }: Qu
   )
 }
 
-export default QuestionnaireQuestionsModal
+export default memo(QuestionnaireQuestionsModal)
+
+// eslint-disable-next-line immutable/no-mutation
+QuestionnaireQuestionsModal.setDisplayName = 'QuestionnaireQuestionsModal'

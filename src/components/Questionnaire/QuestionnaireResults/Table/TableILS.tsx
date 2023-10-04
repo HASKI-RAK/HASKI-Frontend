@@ -53,37 +53,29 @@ export const ILSDimension = (dimensionNumber: number, score: number, onlyEnglish
         const en = i18n.getFixedT('en')
         if (score > 0) return en('components.Questionnaire.QuestionnaireResults.Table.TableILS.Active')
         else return en('components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')
-      } else {
-        if (score > 0) return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Active')
-        else return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')
-      }
+      } else if(score > 0) return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Active')
+      else return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')
     case 2:
       if (onlyEnglish) {
         const en = i18n.getFixedT('en')
         if (score > 0) return en('components.Questionnaire.QuestionnaireResults.Table.TableILS.Sensory')
         else return en('components.Questionnaire.QuestionnaireResults.Table.TableILS.Intuitive')
-      } else {
-        if (score > 0) return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Sensory')
-        else return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Intuitive')
-      }
+      } else if(score > 0) return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Sensory')
+      else return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Intuitive')
     case 3:
       if (onlyEnglish) {
         const en = i18n.getFixedT('en')
         if (score > 0) return en('components.Questionnaire.QuestionnaireResults.Table.TableILS.Visual')
         else return en('components.Questionnaire.QuestionnaireResults.Table.TableILS.Verbal')
-      } else {
-        if (score > 0) return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Visual')
-        else return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Verbal')
-      }
+      } else if(score > 0) return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Visual')
+      else return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Verbal')
     case 4:
       if (onlyEnglish) {
         const en = i18n.getFixedT('en')
         if (score > 0) return en('components.Questionnaire.QuestionnaireResults.Table.TableILS.Sequential')
         else return en('components.Questionnaire.QuestionnaireResults.Table.TableILS.Global')
-      } else {
-        if (score > 0) return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Sequential')
-        else return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Global')
-      }
+      } else if(score > 0) return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Sequential')
+      else return t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Global')
     default:
       return 'No dimension found'
   }

@@ -3,6 +3,7 @@ import { Table, TableBody, TableContainer, TableHead, TableRow, Paper } from '@c
 import { useTranslation } from 'react-i18next'
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireResultTableStyle'
 import { ListK } from '@core'
+import { memo } from 'react'
 
 const StyledTableRowListK = Object.assign({}, StyledTableRow)
 
@@ -203,4 +204,6 @@ const TableListK = ({ data }: TableListKProps) => {
   )
 }
 
-export default TableListK
+export default memo(TableListK)
+// eslint-disable-next-line immutable/no-mutation
+TableListK.displayName = 'TableListK'

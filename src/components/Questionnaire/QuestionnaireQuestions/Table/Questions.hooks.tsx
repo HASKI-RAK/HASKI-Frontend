@@ -26,8 +26,6 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
       }))
     })
 
-    console.log(outputJson)
-
     return fetchUser().then((user) => {
       const studentId = user.id
       if (ils) {

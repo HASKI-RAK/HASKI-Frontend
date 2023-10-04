@@ -33,7 +33,7 @@ import useHandleSend from './Questions.hooks'
  * The long version contains 44, and the short version contains 20 questions.
  */
 
-interface MemoTableRowAnswersProps {
+type MemoTableRowAnswersProps = {
   t: (key: string) => string
   activeStep: number
   answerIndex: number
