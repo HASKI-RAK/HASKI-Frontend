@@ -24,5 +24,5 @@ export { default as SnackbarContainer } from './SnackbarContainer/SnackbarContai
 export { default as SnackbarTransition } from './SnackbarTransition/SnackbarTransition'
 export { default as IFrameModal } from './IFrameModal/IFrameModal'
 export { default as SkeletonList } from './SkeletonList/SkeletonList'
-
+export {default as PrivacyModal} from './PrivacyModal/PrivacyModal'
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure

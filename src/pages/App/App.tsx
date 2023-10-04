@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { ThemeProvider } from '@common/components'
+import { ThemeProvider } from '@common/theme'
 import { PrivacyModal } from '@components'
 import {
   MainFrame,
@@ -54,8 +54,8 @@ export const App = () => (
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Router>
-        </SnackbarProvider>
-      </AuthProvider>
+      </SnackbarProvider>
+    </AuthProvider>
   </ThemeProvider>
 )
 export default App
