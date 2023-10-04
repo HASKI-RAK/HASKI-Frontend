@@ -16,7 +16,7 @@ export type LazyLoadingLearningPathElementProps = {
     courseId: string
   ) => {
     loadingElements: boolean
-    learningPaths: LearningPathElement
+    learningPaths: LearningPathElement | undefined
   }
 }
 
@@ -44,7 +44,7 @@ const LazyLoadingLearningPathElement = ({
 
   return (
     <>
-      {learningPaths.path.map((learningElement) => (
+      {learningPaths?.path.map((learningElement) => (
         <Typography variant="body1" key={learningElement.learning_element.name}>
           <Link
             data-testid={learningElement.learning_element.name}

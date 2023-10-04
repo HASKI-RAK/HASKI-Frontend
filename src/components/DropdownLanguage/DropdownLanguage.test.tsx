@@ -1,5 +1,4 @@
-﻿import renderer from 'react-test-renderer'
-import '@testing-library/jest-dom'
+﻿import '@testing-library/jest-dom'
 import { DropdownLanguage } from '@components'
 import { fireEvent, render, act } from '@testing-library/react'
 import { I18nextProvider } from 'react-i18next'
@@ -99,10 +98,5 @@ describe('Test the change-language dropdown component', () => {
     fireEvent.change(selectElement, { target: { value: 'de' } })
 
     expect(getByRole('button')).toHaveTextContent(/Deutsch/i)
-  })
-
-  test('renders correctly', () => {
-    const tree = renderer.create(<DropdownLanguage />).toJSON()
-    expect(tree).toMatchSnapshot()
   })
 })

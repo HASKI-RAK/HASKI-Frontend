@@ -3,8 +3,15 @@ import { fireEvent, render } from '@testing-library/react'
 import Footer from './Footer'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
+import * as router from 'react-router'
+
+const navigate = jest.fn()
 
 describe('Footer', () => {
+  beforeEach(() => {
+    jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+  })
+
   test('should render the footer and click on every element', () => {
     const history = createMemoryHistory({ initialEntries: ['/home'] })
 
@@ -16,8 +23,10 @@ describe('Footer', () => {
     expect(getByText(new Date().getFullYear())).toBeInTheDocument()
 
     // click on every button:
-    for (let i = 0; i < getAllByRole('button').length; i++) {
-      fireEvent.click(getAllByRole('button')[i])
-    }
+    getAllByRole('button').forEach((button) => {
+      fireEvent.click(button)
+    })
+
+    expect(navigate).toHaveBeenCalledTimes(6)
   })
 })
