@@ -1,9 +1,5 @@
-﻿import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
+﻿import { Table, TableBody, TableContainer, TableHead, TableRow, Paper } from '@common/components'
+
 import { useTranslation } from 'react-i18next'
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireTableStyle'
 import { ILS } from '@core'
@@ -112,7 +108,7 @@ export const ILSDimension = (dimensionNumber: number, score: number, onlyEnglish
   }
 }
 
-export const TableILS = () => {
+const TableILS = () => {
   const { t } = useTranslation()
   const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters()
 
@@ -183,3 +179,5 @@ export const TableILS = () => {
     </TableContainer>
   )
 }
+
+export default TableILS

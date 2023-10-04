@@ -8,6 +8,7 @@ RUN yarn install
 COPY . ./
 ARG NODE_ENV=production
 ARG BACKEND=https://backend.haski.app
+ARG MOODLE=https://moodle.haski.app
 RUN yarn build-prod
 
 # production environment

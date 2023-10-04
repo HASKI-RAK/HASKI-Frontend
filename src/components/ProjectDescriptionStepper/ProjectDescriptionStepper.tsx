@@ -1,5 +1,4 @@
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
+import { KeyboardArrowRight, KeyboardArrowLeft } from '@common/icons'
 import React, { useRef, useEffect, useCallback } from 'react'
 import { Button, Fade, Grid, MobileStepper, Typography } from '@common/components'
 import {
@@ -88,8 +87,8 @@ const ProjectDescriptionStepper = ({
           <Fade in={!!bodyState[activeStep]} easing="linear" timeout={1000}>
             <Typography
               variant="h5"
+              align="center"
               sx={{
-                alignItems: 'center',
                 pt: '2.5rem',
                 width: { sm: '18.75rem', md: '37.5rem' },
                 height: { sm: '25rem', md: '12.5rem' }

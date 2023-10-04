@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next'
-import Typography from '@mui/material/Typography'
+import { Typography } from '@common/components'
 import { getILSParameters, ILSDimension, ILSInterpretation } from './TableILS'
 
 // function can be replaced for test-purposes
 type ResultDescriptionILSProps = {
   ILSdim?: (n: number, s: number, b?: boolean) => string
 }
-export const ResultDescriptionILS = ({ ILSdim = ILSDimension }: ResultDescriptionILSProps) => {
+const ResultDescriptionILS = ({ ILSdim = ILSDimension }: ResultDescriptionILSProps) => {
   const { t } = useTranslation()
 
   const [dimensionOneScore, dimensionTwoScore, dimensionThreeScore, dimensionFourScore] = getILSParameters()
@@ -150,3 +150,5 @@ export const ResultDescriptionILS = ({ ILSdim = ILSDimension }: ResultDescriptio
     </div>
   )
 }
+
+export default ResultDescriptionILS

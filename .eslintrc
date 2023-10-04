@@ -1,7 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prefer-arrow-functions", "react-hooks"],
+  "plugins": ["@typescript-eslint", "prefer-arrow-functions", "react-hooks", "immutable", "eslint-plugin-tsdoc"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -25,7 +25,12 @@
     // suppress errors for missing 'import React' in files
     "react/react-in-jsx-scope": "off",
     // allow jsx syntax in js files (for next.js project)
-    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }] //should add ".ts" if typescript project
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }], //should add ".ts" if typescript project
+    "react-hooks/exhaustive-deps": 0, // Checks effect dependencies
+    "immutable/no-let": 1,
+    "immutable/no-this": 1,
+    "immutable/no-mutation": 1,
+    "tsdoc/syntax": "warn"
   },
   "settings": {
     "react": {

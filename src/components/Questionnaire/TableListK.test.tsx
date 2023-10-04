@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { getListKParameters, getSubscaleScore, TableListK } from './TableListK'
+import TableListK, { getListKParameters, getSubscaleScore } from './TableListK'
 import { render } from '@testing-library/react'
 
 //we have to mock react-i18next otherwise a warning will appear

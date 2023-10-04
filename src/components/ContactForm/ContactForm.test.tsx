@@ -3,28 +3,6 @@ import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import ContactForm from './ContactForm'
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => {
-    return {
-      t: (key: string) => {
-        if (key == 'components.ContactForm.types') {
-          const reportTypes = [
-            { value: '1', label: 'issue' },
-            { value: '2', label: 'Spam' }
-          ]
-          return reportTypes
-        } else if (key == 'components.ContactForm.topics') {
-          return [
-            { value: '1', label: 'Learningelement' },
-            { value: '2', label: 'Sexism' }
-          ]
-        }
-        return key
-      }
-    }
-  }
-}))
-
 describe('Test ContactForm', () => {
   const send = jest.fn()
 
@@ -38,6 +16,7 @@ describe('Test ContactForm', () => {
       form.getAllByRole('option')[0].click()
     })
     fireEvent.click(submitButton)
+    expect(form).toBeTruthy()
   })
 
   test('submits form correctly', () => {

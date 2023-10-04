@@ -1,8 +1,7 @@
 ﻿//Local Storage should be changed before importing i18n config file.
 //That way we can access the else statement in the i18n config file.
 import { act, render } from '@testing-library/react'
-import { Select } from '@common/components'
-import { MenuItem } from '@mui/material'
+import { Select, MenuItem } from '@common/components'
 import i18next from './internationalization' // your i18n config file
 import { I18nextProvider, useTranslation } from 'react-i18next'
 

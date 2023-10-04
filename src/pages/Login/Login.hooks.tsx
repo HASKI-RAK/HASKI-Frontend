@@ -1,79 +1,78 @@
-import { AuthContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
+import { AuthContext, SnackbarContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useContext, useCallback } from 'react'
+import { useEffect, useContext } from 'react'
+import { usePersistedStore } from '@store'
 
 export type LoginHookParams = {
   setIsLoading: (isLoading: boolean) => void
+  /** The nonce is a string that is passed to the login page back from the backend as part of the LTI flow.
+   * It is used to accociate the session in a short living authorization flow. */
   nonce?: string
 }
 
 export type LoginHookReturn = {
-  readonly onSubmit: () => void
+  readonly onSubmit: (username: string, password: string) => void
+  /** Redirects the user to moddle for authorization */
   readonly onMoodleLogin: () => void
 }
 
 /**
  * Hook for the login logic. Handles the login request and redirects to the home page.
- *
+ * @param props - Contain nonce and {@link LoginHookParams.setIsLoading | setIsLoading} function.
  * @remarks
  * If a nonce is passed, the user can be authenticated with the nonce.
  * If no nonce is passed the user is redirected to the login page without a nonce.
  *
- * @param params - Contain nonce and setIsLoading
- * @returns {LoginHookReturn} - The login logic.
  */
-export const useLogin = (params: LoginHookParams): LoginHookReturn => {
-  const authcontext = useContext(AuthContext)
+export const useLogin = (props: LoginHookParams): LoginHookReturn => {
+  const authContext = useContext(AuthContext)
   const navigate = useNavigate()
-
-  const login = useCallback(() => {
-    // supply auth context
-    authcontext.setIsAuth(true)
-    // then redirect to home page
-    navigate('/dashboard', { replace: true })
-  }, [authcontext, navigate])
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const { addSnackbar } = useContext(SnackbarContext)
 
   // Login with username and password
-  const onSubmitHandler = () => {
-    params.setIsLoading(true)
-    postLoginCredentials()
-      .then((response) => {
-        if (response.status === 200) {
-          login()
-        }
+  const onSubmitHandler = (username: string, password: string) => {
+    postLoginCredentials(Number(username), password).then((user) => {
+      // supply auth context
+      authContext.setExpire(9999999999)
+      fetchUser(user)
 
-        //TODO catch and🍿 snackbar
-      })
-      .finally(() => {
-        params.setIsLoading(false)
-      })
+      // then redirect to home page
+      navigate('/', { replace: true })
+    })
   }
 
   const onMoodleLogin = () => {
-    params.setIsLoading(true)
+    props.setIsLoading(true)
     redirectMoodleLogin()
-      .then((response) => {
-        if (response.status === 200) {
-          // 👇️ redirects to Moodle LTI launch acticity
-          window.location.replace(response.message)
-        }
-
-        //TODO catch and🍿 snackbar
+      .then((response) =>
+        // 👇️ redirects to Moodle LTI launch acticity
+        window.location.replace(response.lti_launch_view)
+      )
+      .catch((error) => {
+        addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
       })
       .finally(() => {
-        params.setIsLoading(false)
+        props.setIsLoading(false)
       })
   }
 
   // on mount, read search param 'nounce' and set it to state
   useEffect(() => {
-    postLogin({ nonce: params.nonce }).then((response) => {
-      if (response.status === 200) login()
-      else navigate('/login', { replace: true })
+    if (!props.nonce) return
 
-      //TODO 🍿 snackbar
-    })
-  }, [login, navigate, params.nonce])
+    postLogin({ nonce: props.nonce })
+      .then((response) => {
+        // supply auth context
+        authContext.setExpire(response.expiration)
+        // then redirect to home page
+        navigate('/', { replace: true })
+      })
+      .catch((error: string) => {
+        addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
+        navigate('/login', { replace: true })
+      })
+  }, [])
 
   return {
     onSubmit: onSubmitHandler,

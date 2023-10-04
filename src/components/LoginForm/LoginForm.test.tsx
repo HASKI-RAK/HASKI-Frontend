@@ -4,9 +4,14 @@ import LoginForm from './LoginForm'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
-    json: () => Promise.resolve({ status: 200 })
+    json: () => Promise.resolve({ status: 200 }),
+    headers: {
+      get: () => 'application/json'
+    },
+    ok: true
   })
 ) as jest.Mock
+
 describe('Test LoginForm', () => {
   const submit = jest.fn()
   const validate = jest.fn(

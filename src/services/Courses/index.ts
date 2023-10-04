@@ -1,0 +1,1 @@
+export { getCourses } from './getCourses'

@@ -1,9 +1,5 @@
-﻿import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
+﻿import { Table, TableBody, TableContainer, TableHead, TableRow, Paper } from '@common/components'
+
 import { useTranslation } from 'react-i18next'
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireTableStyle'
 import { ListK } from '@core'
@@ -121,7 +117,7 @@ export const getListKParameters = (): [
   ]
 }
 
-export const TableListK = () => {
+const TableListK = () => {
   const { t } = useTranslation()
 
   const [
@@ -306,3 +302,5 @@ export const TableListK = () => {
     </TableContainer>
   )
 }
+
+export default TableListK

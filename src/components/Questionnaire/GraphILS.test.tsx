@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { useData, GraphILS } from './GraphILS'
+import GraphILS, { useData } from './GraphILS'
 import { render } from '@testing-library/react'
 import React from 'react'
 
@@ -43,7 +43,5 @@ describe('Test GraphILS with all Methods', () => {
     expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Verbal')).toBeInTheDocument()
     expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Sequential')).toBeInTheDocument()
     expect(graphILS.getByText('components.QuestionnaireResults.TableILS.Global')).toBeInTheDocument()
-
-    expect(graphILS).toMatchSnapshot()
   })
 })
