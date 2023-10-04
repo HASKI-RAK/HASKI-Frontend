@@ -162,7 +162,7 @@ describe('Test GraphListK with all Methods', () => {
       `circle[data-testid='node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies']`
     )
     const MetacognitiveNode = container.querySelector(
-      `circle[data-testid='node.components.QuestionnaireResults.TableListK.Metacognitive strategies']`
+      `circle[data-testid='node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies']`
     )
     const ExternalResNode = container.querySelector(
       `circle[data-testid='node.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies']`

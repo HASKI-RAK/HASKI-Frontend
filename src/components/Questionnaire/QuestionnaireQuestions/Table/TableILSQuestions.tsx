@@ -20,7 +20,6 @@ import { ButtonStack, SendButton, MemoTableRowQuestion } from './TableCommonComp
 import useHandleSend from './Questions.hooks'
 
 /**
- * @description
  * This component is used to display the questionnaire questions for the ILS questionnaire.
  * The questions are displayed in a table with two columns.
  * The first column contains the question and the second column contains the two possible answers.
@@ -175,7 +174,7 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
     () =>
       (ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }): string => {
         // if the question is already answered, the answer is set to the value of the radio button, else radio button is not set
-        const answerType = questionnaireAnswers.find((answer) => answer.question_id === ilsStep.questionLabel)?.answer
+        const answerType = questionnaireAnswers.findLast((answer) => answer.question_id === ilsStep.questionLabel)?.answer
         return answerType === 'a' ? ilsStep.answer1 : answerType === 'b' ? ilsStep.answer2 : ''
       },
     [questionnaireAnswers]

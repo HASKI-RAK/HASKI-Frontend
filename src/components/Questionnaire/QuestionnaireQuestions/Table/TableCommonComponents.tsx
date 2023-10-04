@@ -5,8 +5,6 @@ import { useTranslation } from 'react-i18next'
 
 /**
  * # TableCommonComponents
- *
- * @description
  * This is a collection of common components of ILS (Long and Short) and ListK questionnaires.
  */
 

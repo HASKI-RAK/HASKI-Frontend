@@ -20,7 +20,6 @@ import { ButtonStack, MemoTableRowQuestion, SendButton } from './TableCommonComp
 import useHandleSend from './Questions.hooks'
 
 /**
- * @description
  * This component is used to display the questionnaire questions for the ListK questionnaire.
  */
 
@@ -222,7 +221,7 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
           listkStep.answer4,
           listkStep.answer5
         ]
-        const selectedAnswer = questionnaireAnswers.find(
+        const selectedAnswer = questionnaireAnswers.findLast(
           (answer) => answer.question_id === listkStep.questionLabel
         )?.answer
         return selectedAnswer ? listkSteps[parseInt(selectedAnswer) - 1] : ''
