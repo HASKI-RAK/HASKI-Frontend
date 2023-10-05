@@ -1,5 +1,5 @@
-import { Statement } from '@xapi/xapi'
-import { supportingMedia } from './xAPI.setup'
+import { Statement, Actor } from '@xapi/xapi'
+import xAPI from './xAPI.setup'
 
 export const myStatement: Statement = {
   // dynamic inputs from user like lms id and maybe role as name
@@ -112,6 +112,45 @@ export const myStatement2: Statement = {
   }
 }
 
-/*
-
-*/
+// Das hier könnte verwendet werden, um dynamische Statements zu senden
+// Wenn man irgendwas von der page noch mitschicken will -> welche komponente, welche seite
+// Jeweils ein Statement für jede unserer Aktionen
+export const sendMyStatement = (test: string) => {
+  xAPI
+    .sendStatement({
+      statement: {
+        // dynamic inputs from user like lms id and maybe role as name
+        actor: {
+          objectType: 'Agent',
+          name: test,
+          mbox: 'mailto:pottery@example.com' // Unique identifier for the actor like lms id
+        },
+        // the action the actor performed
+        verb: {
+          id: 'http://example.com/verbs/tested',
+          display: {
+            'en-GB': 'tested'
+          }
+        },
+        object: {
+          objectType: 'Activity',
+          id: 'https://github.com/xapijs/xapi',
+          definition: {
+            type: 'http://example.com/activity-types/test',
+            name: {
+              'en-GB': 'xAPI.js'
+            },
+            description: {
+              'en-GB': 'JavaScript library for working with the xAPI'
+            }
+          }
+        }
+      }
+    })
+    .then((response) => {
+      console.log('Statement sent', response)
+    })
+    .catch((error) => {
+      console.log('Statement failed', error)
+    })
+}

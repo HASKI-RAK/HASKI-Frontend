@@ -4,7 +4,7 @@ import { SendStatementParams } from '../../../node_modules/@xapi/xapi/dist/types
 
 export const postStatement = async (params: SendStatementParams): Promise<string[]> => {
   //const response = await fetch('https://haski.free.beeceptor.com', {
-  const response = await fetch('http://127.0.0.1:5000/endpoint', {
+  const response = await fetch('http://127.0.0.1:5000/endpoint/statements', {
     method: 'POST',
     //credentials: 'include',
     headers: {

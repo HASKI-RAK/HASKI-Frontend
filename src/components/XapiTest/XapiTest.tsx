@@ -1,7 +1,8 @@
 // TODO: Folder structure: xAPI / statements
-// xAPI / setup
-import { myStatement2 } from './xAPI.statements'
-import xAPI from './xAPI.setup'
+// services / xAPI / xAPI.setup.ts
+// services / xAPI / xAPI.statements.ts
+
+import { xAPI, myStatement2, sendMyStatement } from '@services'
 import { Button } from '@mui/material'
 import { postStatement } from './postStatement'
 
@@ -11,15 +12,13 @@ const handleClick = () => {
     .sendStatement({
       statement: myStatement2
     })
-    .then((response) => {
+    .then((response: any) => {
       console.log(response)
     })
-    .catch((error) => {
+    .catch((error: any) => {
       console.log(error)
     })
 }
-/*,
-attachments: [arrayBuffer]*/
 
 const handleClick2 = async () => {
   postStatement({ statement: myStatement2 })
@@ -34,7 +33,7 @@ const handleClick2 = async () => {
 const XapiTest = () => {
   return (
     <>
-      <Button onClick={handleClick}>Send statement</Button>
+      <Button onClick={() => sendMyStatement('Harald Töpfer')}>Send statement</Button>
     </>
   )
 }
