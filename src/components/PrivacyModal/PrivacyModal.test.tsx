@@ -8,12 +8,10 @@ jest.mock('react-cookie', () => ({
 }))
 
 describe('Test PrivacyModal', () => {
-  test('decline the PrivacyPolicy', () => {
-    const form = render(<PrivacyModal />)
-    const declineButton = form.getByRole('button', { name: /Decline/i })
-    fireEvent.click(declineButton)
-    expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
+  beforeEach(()=>{
+    document.cookie = 'privacy_accept_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
   })
+  
   test('backdrop click', () => {
     const form = render(<PrivacyModal />)
     const backdrop = form.getByRole('presentation').children[0]
@@ -28,9 +26,16 @@ describe('Test PrivacyModal', () => {
     const acceptButton = new_form.getByRole('button', { name: /Accept/i })
     expect(acceptButton).toHaveProperty('disabled', false)
     fireEvent.click(acceptButton)
+    console.log(document.cookie)
     expect(new_form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
-
+  test('decline the PrivacyPolicy', () => {
+    console.log(document.cookie)
+    const form = render(<PrivacyModal />)
+    const declineButton = form.getByRole('button', { name: /Decline/i })
+    fireEvent.click(declineButton)
+    expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
+  })
   test('Modal does not render if on url', () => {
     window = Object.create(window)
     const url = 'http://localhost:8080/privacypolicy'
