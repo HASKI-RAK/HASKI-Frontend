@@ -192,20 +192,22 @@ describe('Test on submit Function', () => {
     }) as jest.Mock*/
 
     // When running the whole suite, getUser gets overwritten by previous test.
-    mockServices.getUser = jest.fn().mockImplementationOnce(() => Promise.resolve({
-      id: 1,
-      lms_user_id: 1,
-      name: 'Thaddäus Tentakel',
-      role: 'Tester',
-      role_id: 1,
-      settings: {
+    mockServices.getUser = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
         id: 1,
-        user_id: 1,
-        pswd: '1234',
-        theme: 'test'
-      },
-      university: 'HS Kempten'
-    }))
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'HS Kempten'
+      })
+    )
     mockServices.postContactForm = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
     const loadingMock = jest.fn()
     const addSnackbarMock = jest.fn()
