@@ -1,10 +1,11 @@
 import '@testing-library/jest-dom'
-import { fireEvent, getByText, render, waitFor } from '@testing-library/react'
+import {fireEvent, render, waitFor} from '@testing-library/react'
 import MenuBar, { MenuBarProps } from './MenuBar'
 import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
 import * as router from 'react-router'
 import { mockServices } from 'jest.setup'
+import {act} from "react-dom/test-utils";
 jest.requireActual('i18next')
 
 const navigate = jest.fn()
@@ -13,6 +14,219 @@ describe('MenuBar', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
+
+  test('ils-short can be closed after sending answers', async () => {
+    const { getByTestId } = render(
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar courseSelected={false} />
+          </MemoryRouter>
+        </AuthContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireILSshort'))
+
+    const nextButton = getByTestId('nextButtonILSQuestionnaire')
+    const backButton = getByTestId('backButtonILSQuestionnaire')
+    expect(nextButton).toBeDisabled()
+    expect(backButton).toBeDisabled()
+    expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
+
+    for(let i = 0; i < 6; i++) {
+      const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton1)
+
+      const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton2)
+
+      const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton3)
+
+      const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton4)
+
+      expect(RadioButton1.checked).toBe(true)
+      expect(RadioButton2.checked).toBe(true)
+      expect(RadioButton3.checked).toBe(true)
+      expect(RadioButton4.checked).toBe(true)
+
+      if(i < 5) {
+        fireEvent.click(nextButton)
+      }
+      else {
+        const sendButton = getByTestId('sendButtonILSQuestionnaire')
+        expect(sendButton).toBeEnabled()
+        await act(async () => {
+          fireEvent.click(sendButton)
+        })
+        expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
+        expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
+        fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
+      }
+    }
+  })
+
+  // If only the describe runs, the test passes without problems. Running all tests in jest, this test times out.
+  // Adding a bigger timeout solved the problem
+  test('ils-long can be closed after sending answers', async () => {
+    const { getByTestId } = render(
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar courseSelected={false} />
+          </MemoryRouter>
+        </AuthContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireILS'))
+
+    const nextButton = getByTestId('nextButtonILSQuestionnaire')
+    const backButton = getByTestId('backButtonILSQuestionnaire')
+    expect(nextButton).toBeDisabled()
+    expect(backButton).toBeDisabled()
+
+    for (let i = 0; i < 11; i++) {
+      const RadioButton1 = getByTestId('ilsLongQuestionnaireILSButtonGroup1').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton1)
+
+      const RadioButton2 = getByTestId('ilsLongQuestionnaireILSButtonGroup2').querySelectorAll(
+          'input[type="radio"]'
+      )[1] as HTMLInputElement
+      fireEvent.click(RadioButton2)
+
+      const RadioButton3 = getByTestId('ilsLongQuestionnaireILSButtonGroup3').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton3)
+
+      const RadioButton4 = getByTestId('ilsLongQuestionnaireILSButtonGroup4').querySelectorAll(
+          'input[type="radio"]'
+      )[1] as HTMLInputElement
+      fireEvent.click(RadioButton4)
+
+      expect(RadioButton1.checked).toBe(true)
+      expect(RadioButton2.checked).toBe(true)
+      expect(RadioButton3.checked).toBe(true)
+      expect(RadioButton4.checked).toBe(true)
+
+      if (i < 10) {
+        fireEvent.click(nextButton)
+      }
+
+      else {
+        const sendButton = getByTestId('sendButtonILSQuestionnaire')
+        expect(sendButton).toBeEnabled()
+        await act(async () => {
+          fireEvent.click(sendButton)
+        })
+        expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
+        expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
+        fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
+      }
+    }
+  })
+
+  test('listk can be closed after sending answers', async () => {
+
+    const { getByTestId } = render(
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar courseSelected={false} />
+          </MemoryRouter>
+        </AuthContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireListk'))
+
+    const nextButton = getByTestId('nextButtonListKQuestionnaire')
+    const backButton = getByTestId('backButtonListKQuestionnaire')
+    expect(nextButton).toBeDisabled()
+    expect(backButton).toBeDisabled()
+
+    for (let i = 0; i < 8; i++) {
+      if (i < 7) {
+        const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
+            'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton1)
+
+        const RadioButton2 = getByTestId('ListKQuestionnaireButtonGroup2').querySelectorAll(
+            'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton2)
+
+        const RadioButton3 = getByTestId('ListKQuestionnaireButtonGroup3').querySelectorAll(
+            'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton3)
+
+        const RadioButton4 = getByTestId('ListKQuestionnaireButtonGroup4').querySelectorAll(
+            'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton4)
+
+        const RadioButton5 = getByTestId('ListKQuestionnaireButtonGroup5').querySelectorAll(
+            'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton5)
+
+        expect(RadioButton1.checked).toBe(true)
+        expect(RadioButton2.checked).toBe(true)
+        expect(RadioButton3.checked).toBe(true)
+        expect(RadioButton4.checked).toBe(true)
+        expect(RadioButton5.checked).toBe(true)
+        fireEvent.click(nextButton)
+      }
+      //Last step only has 4 radio buttongroups
+      else {
+        const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
+            'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton1)
+
+        const RadioButton2 = getByTestId('ListKQuestionnaireButtonGroup2').querySelectorAll(
+            'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton2)
+
+        const RadioButton3 = getByTestId('ListKQuestionnaireButtonGroup3').querySelectorAll(
+            'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton3)
+
+        const RadioButton4 = getByTestId('ListKQuestionnaireButtonGroup4').querySelectorAll(
+            'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton4)
+
+        expect(RadioButton1.checked).toBe(true)
+        expect(RadioButton2.checked).toBe(true)
+        expect(RadioButton3.checked).toBe(true)
+        expect(RadioButton4.checked).toBe(true)
+
+        const sendButton = getByTestId('sendButtonListKQuestionnaire')
+        expect(sendButton).toBeEnabled()
+        await act(async () => {
+          fireEvent.click(sendButton)
+        })
+        expect(getByTestId('sendButtonListKQuestionnaire')).toBeDisabled()
+        expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
+        fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
+      }
+    }
+  }, 30000)
 
   it('should return to home when clicked on logo or text', () => {
     const { getAllByRole, getAllByText } = render(
@@ -277,7 +491,7 @@ describe('MenuBar', () => {
     })
   })
 
-  it('navigates to questionnaire ils-short page', async () => {
+  it('opens the ils-short questionnaire', async () => {
     const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
@@ -294,7 +508,50 @@ describe('MenuBar', () => {
     ).toBeInTheDocument()
   })
 
-  it('navigates to questionnaire ils-long page', async () => {
+  it('closes the ils-short questionnaire', async () => {
+
+    window.confirm = jest.fn(() => true) // always click 'yes'
+
+    const { getByTestId, getByText } = render(
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar courseSelected={false} />
+          </MemoryRouter>
+        </AuthContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireILSshort'))
+    expect(getByTestId('Questions Modal')).toBeInTheDocument()
+    expect(
+        getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9')
+    ).toBeInTheDocument()
+
+    expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
+    fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
+  })
+
+  it('opens the questionnaire ils-long questionnaire', async () => {
+    const { getByTestId, getByText } = render(
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireILS'))
+    expect(getByTestId('Questions Modal')).toBeInTheDocument()
+    expect(
+        getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-1')
+    ).toBeInTheDocument()
+  })
+
+  it('close the ils-long questionnaire', async () => {
+
+    window.confirm = jest.fn(() => true) // always click 'yes'
+
     const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
@@ -309,9 +566,32 @@ describe('MenuBar', () => {
     expect(
       getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-1')
     ).toBeInTheDocument()
+
+    expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
+    fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
   })
 
-  it('navigates to questionnaire listk page', async () => {
+  it('open the listk questionnaire', async () => {
+    const { getByTestId, getByText } = render(
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireListk'))
+    expect(getByTestId('Questions Modal')).toBeInTheDocument()
+    expect(
+        getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1')
+    ).toBeInTheDocument()
+  })
+
+  it('close the listk questionnaire', async () => {
+
+    window.confirm = jest.fn(() => true) // always click 'yes'
+
     const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
@@ -326,6 +606,9 @@ describe('MenuBar', () => {
     expect(
       getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1')
     ).toBeInTheDocument()
+
+    expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
+    fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
   })
 
   it('navigates to logout page', async () => {
@@ -341,4 +624,5 @@ describe('MenuBar', () => {
     fireEvent.click(getAllByText('components.MenuBar.Profile.Logout')[0])
     expect(navigate).toHaveBeenCalledWith('/login')
   })
+
 })

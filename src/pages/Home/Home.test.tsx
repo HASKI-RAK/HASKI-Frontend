@@ -15,6 +15,26 @@ describe('Test the Home page', () => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
+  test('fetching Course throws error', async () => {
+    mockServices.getCourses.mockImplementationOnce(() => { throw new Error('Error') })
+
+    jest.spyOn(console, 'error').mockImplementationOnce(() => {
+      return
+    })
+
+    const { container } = render(
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
+    })
+  })
+
   test('navigate back to /login page', () => {
     render(
       <MemoryRouter>
@@ -76,26 +96,6 @@ describe('Test the Home page', () => {
     })
   })
 
-  test('fetching Course throws error', async () => {
-    mockServices.getCourses = jest.fn().mockImplementationOnce(() => new Error('Error'))
-
-    jest.spyOn(console, 'error').mockImplementation(() => {
-      return
-    })
-
-    const { container } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
-    )
-
-    await waitFor(() => {
-      expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
-    })
-  })
-
   test('fetching Course returns no courses', async () => {
     mockServices.getCourses = jest.fn().mockImplementationOnce(() =>
       Promise.resolve({
@@ -114,20 +114,5 @@ describe('Test the Home page', () => {
     await waitFor(() => {
       expect(getByText('components.Home.NoCourses')).toBeInTheDocument()
     })
-  })
-
-  test('fetching Course returns error', async () => {
-    mockServices.getCourses.mockImplementationOnce(() => {
-      throw new Error('Error')
-    })
-
-    const { getByText } = render(
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Home />
-          </AuthContext.Provider>
-        </MemoryRouter>
-    )
-
   })
 })

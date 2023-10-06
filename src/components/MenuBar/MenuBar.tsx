@@ -52,7 +52,7 @@ export type MenuBarProps = {
  * @category Components
  */
 
-const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
+const MenuBar = ({ courseSelected = false}: MenuBarProps) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
   const { addSnackbar } = useContext(SnackbarContext)
@@ -348,7 +348,12 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
-              <MenuItem data-testid="questionnaireILS" key="questionnaireILS" onClick={() => handleOpenILSLongModal()}>
+              <MenuItem
+                  data-testid="questionnaireILS"
+                  key="questionnaireILS"
+                  onClick={() =>
+                      handleOpenILSLongModal()
+                  }>
                 <ListItemIcon>{isAuth ? <LibraryBooksOutlined fontSize="small" /> : null}</ListItemIcon>
                 <Typography textAlign="center">{isAuth ? 'ILS Questionnaire' : null}</Typography>
               </MenuItem>

@@ -36,6 +36,7 @@ const resources = {
 
 let lng = ''
 
+/* istanbul ignore next */
 if (localStorage.getItem('i18nextLng') === null) {
   localStorage.setItem('i18nextLng', 'de')
   log.trace('Local storage item "i18nextLng" was empty. Set "i18nextLng" language to: de.')
@@ -58,8 +59,11 @@ i18next
     lng: lng, // local storage get the language from the browser
     fallbackLng: 'de'
   })
+    /* istanbul ignore next */
   .catch((error) => {
+  /* istanbul ignore next */
     const { addSnackbar } = React.useContext(SnackbarContext)
+  /* istanbul ignore next */
     addSnackbar({
       message: 'Error while initializing i18next: ' + error,
       severity: 'error',

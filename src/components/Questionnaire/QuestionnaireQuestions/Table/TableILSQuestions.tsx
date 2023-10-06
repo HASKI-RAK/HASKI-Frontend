@@ -98,9 +98,10 @@ type TableILSQuestionsProps = {
   ilsLong: boolean
   successSend: boolean
   setSuccessSend: React.Dispatch<React.SetStateAction<boolean>>
+  testEmptyStep?: boolean
 }
 
-export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }: TableILSQuestionsProps) => {
+export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmptyStep }: TableILSQuestionsProps) => {
   const [questionnaireAnswers, setQuestionnaireAnswers] = useState([{ question_id: '', answer: '' }])
   const { addSnackbar } = useContext(SnackbarContext)
   const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, true)
@@ -134,7 +135,7 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
       return prevState.map((item, index) => {
         return {
           ...item,
-          value: setRadioButtonValue(stepsILS[newActiveStep][index])
+          value: setRadioButtonValue(stepsILS[newActiveStep][index], testEmptyStep)
         }
       })
     })
@@ -172,20 +173,24 @@ export const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend }:
 
   const setRadioButtonValue = useMemo(
       () =>
-          (ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }): string => {
+          (ilsStep: { question: string; questionLabel: string; answer1: string; answer2: string }, testEmptyStep?: boolean): string => {
             // Filter the questionnaireAnswers array to find all matching answers
-            const matchingAnswers = questionnaireAnswers.filter((answer) => answer.question_id === ilsStep.questionLabel);
+            const matchingAnswers = questionnaireAnswers.filter((answer) => answer.question_id === ilsStep.questionLabel)
 
             // If there are matching answers, return the answer from the last one; otherwise, return an empty string
             if (matchingAnswers.length > 0) {
-              const lastMatchingAnswer = matchingAnswers[matchingAnswers.length - 1];
-              return lastMatchingAnswer.answer === 'a' ? ilsStep.answer1 : lastMatchingAnswer.answer === 'b' ? ilsStep.answer2 : '';
+              const lastMatchingAnswer = testEmptyStep
+                  ? { ...matchingAnswers[matchingAnswers.length - 1], answer: 'c' }
+                  : matchingAnswers[matchingAnswers.length - 1]
+
+              return lastMatchingAnswer.answer === 'a' ? ilsStep.answer1 : lastMatchingAnswer.answer === 'b' ? ilsStep.answer2 : ''
             }
 
             return ''
           },
       [questionnaireAnswers]
   )
+
 
   const handleRadioChange = useCallback(
     (

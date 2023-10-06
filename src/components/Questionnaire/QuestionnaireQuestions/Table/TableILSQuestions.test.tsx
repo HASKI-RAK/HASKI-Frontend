@@ -254,11 +254,11 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 
     const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.1'
     const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1'
-    const ValuePage1RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-3.1'
-    const ValuePage1RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.1'
+    const ValuePage1RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-3.2'
+    const ValuePage1RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2'
 
-    const ValuePage2RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-5.2'
-    const ValuePage2RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-6.2'
+    const ValuePage2RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-5.1'
+    const ValuePage2RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-6.1'
     const ValuePage2RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.2'
     const ValuePage2RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.2'
 
@@ -279,12 +279,12 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 
     const RadioButton3 = getByTestId('ilsLongQuestionnaireILSButtonGroup3').querySelectorAll(
       'input[type="radio"]'
-    )[0] as HTMLInputElement
+    )[1] as HTMLInputElement
     fireEvent.click(RadioButton3)
 
     const RadioButton4 = getByTestId('ilsLongQuestionnaireILSButtonGroup4').querySelectorAll(
       'input[type="radio"]'
-    )[0] as HTMLInputElement
+    )[1] as HTMLInputElement
     fireEvent.click(RadioButton4)
 
     expect(RadioButton1.checked).toBe(true)
@@ -302,11 +302,11 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 
     const RadioButton5 = getByTestId('ilsLongQuestionnaireILSButtonGroup1').querySelectorAll(
       'input[type="radio"]'
-    )[1] as HTMLInputElement
+    )[0] as HTMLInputElement
     fireEvent.click(RadioButton5)
     const RadioButton6 = getByTestId('ilsLongQuestionnaireILSButtonGroup2').querySelectorAll(
       'input[type="radio"]'
-    )[1] as HTMLInputElement
+    )[0] as HTMLInputElement
     fireEvent.click(RadioButton6)
     const RadioButton7 = getByTestId('ilsLongQuestionnaireILSButtonGroup3').querySelectorAll(
       'input[type="radio"]'
@@ -331,30 +331,6 @@ describe('Test TableILSQuestions Long with all Methods', () => {
     fireEvent.click(backButton)
     expect(nextButton).toBeEnabled()
     expect(backButton).toBeDisabled()
-
-    const RadioButton1Back = getByTestId('ilsLongQuestionnaireILSButtonGroup1').querySelector(
-      'input[type="radio"]'
-    ) as HTMLInputElement
-    const RadioButton2Back = getByTestId('ilsLongQuestionnaireILSButtonGroup2').querySelector(
-      'input[type="radio"]'
-    ) as HTMLInputElement
-    const RadioButton3Back = getByTestId('ilsLongQuestionnaireILSButtonGroup3').querySelector(
-      'input[type="radio"]'
-    ) as HTMLInputElement
-    const RadioButton4Back = getByTestId('ilsLongQuestionnaireILSButtonGroup4').querySelector(
-      'input[type="radio"]'
-    ) as HTMLInputElement
-
-    expect(RadioButton1Back.checked).toBe(true)
-    expect(RadioButton1Back.value).toBe(ValuePage1RadioButton1)
-    expect(RadioButton2Back.checked).toBe(true)
-    expect(RadioButton2Back.value).toBe(ValuePage1RadioButton2)
-    expect(RadioButton3Back.checked).toBe(true)
-    expect(RadioButton3Back.value).toBe(ValuePage1RadioButton3)
-    expect(RadioButton4Back.checked).toBe(true)
-    expect(RadioButton4Back.value).toBe(ValuePage1RadioButton4)
-    expect(nextButton).toBeEnabled()
-    expect(backButton).toBeDisabled()
   })
 
   test('Long ILS values can be send', () => {
@@ -375,7 +351,7 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 
       const RadioButton2 = getByTestId('ilsLongQuestionnaireILSButtonGroup2').querySelectorAll(
         'input[type="radio"]'
-      )[0] as HTMLInputElement
+      )[1] as HTMLInputElement
       fireEvent.click(RadioButton2)
 
       const RadioButton3 = getByTestId('ilsLongQuestionnaireILSButtonGroup3').querySelectorAll(
@@ -385,7 +361,7 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 
       const RadioButton4 = getByTestId('ilsLongQuestionnaireILSButtonGroup4').querySelectorAll(
         'input[type="radio"]'
-      )[0] as HTMLInputElement
+      )[1] as HTMLInputElement
       fireEvent.click(RadioButton4)
 
       expect(RadioButton1.checked).toBe(true)
@@ -412,27 +388,27 @@ describe('Table ILS Questionnaire Short', () => {
   const setSuccessSend = jest.fn((successSend) => successSend)
 
   test('Short ILS radio Buttons can be checked', () => {
-    const { getByTestId } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    const {getByTestId} = render(
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>
     )
 
     const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton1)
 
     const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton2)
 
     const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton3)
 
     const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton4)
 
@@ -443,30 +419,30 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('Short ILS next button is enabled, when all radioButtons are selected', () => {
-    const { getByTestId } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    const {getByTestId} = render(
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>
     )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
 
     const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton1)
 
     const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton2)
 
     const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton3)
 
     const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[1] as HTMLInputElement
     fireEvent.click(RadioButton4)
 
@@ -478,138 +454,138 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('Short ILS next button is enabled, when all radioButtons are selected (2 Pages)', () => {
-    const { getByTestId } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    const {getByTestId} = render(
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>
     )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
 
     const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton1)
 
     const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[1] as HTMLInputElement
     fireEvent.click(RadioButton2)
 
     const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton3)
 
     const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[1] as HTMLInputElement
     fireEvent.click(RadioButton4)
 
     expect(RadioButton1.checked).toBe(true)
     expect(RadioButton1.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
+        'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
     )
     expect(RadioButton2.checked).toBe(true)
     expect(RadioButton2.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.2'
+        'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.2'
     )
     expect(RadioButton3.checked).toBe(true)
     expect(RadioButton3.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1'
+        'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1'
     )
     expect(RadioButton4.checked).toBe(true)
     expect(RadioButton4.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2'
+        'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2'
     )
     expect(nextButton).toBeEnabled()
 
     fireEvent.click(nextButton)
 
     const RadioButton5 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton5)
     const RadioButton6 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton6)
     const RadioButton7 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton7)
     const RadioButton8 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton8)
 
     expect(RadioButton5.checked).toBe(true)
     expect(RadioButton5.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.1'
+        'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.1'
     )
     expect(RadioButton6.checked).toBe(true)
     expect(RadioButton6.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.1'
+        'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.1'
     )
     expect(RadioButton7.checked).toBe(true)
     expect(RadioButton7.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.1'
+        'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.1'
     )
     expect(RadioButton8.checked).toBe(true)
     expect(RadioButton8.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.1'
+        'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.1'
     )
     expect(nextButton).toBeEnabled()
   })
 
   test('Short ILS next button is disabled, when not all radioButtons are selected', () => {
-    const { getByTestId } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    const {getByTestId} = render(
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>
     )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
 
     const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton1)
 
     expect(nextButton).toBeDisabled()
 
     const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[1] as HTMLInputElement
     fireEvent.click(RadioButton2)
 
     expect(nextButton).toBeDisabled()
 
     const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton3)
 
     expect(nextButton).toBeDisabled()
 
     const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[1] as HTMLInputElement
     fireEvent.click(RadioButton4)
 
     expect(RadioButton1.checked).toBe(true)
     expect(RadioButton1.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
+        'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
     )
     expect(RadioButton2.checked).toBe(true)
     expect(RadioButton2.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.2'
+        'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.2'
     )
     expect(RadioButton3.checked).toBe(true)
     expect(RadioButton3.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1'
+        'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1'
     )
     expect(RadioButton4.checked).toBe(true)
     expect(RadioButton4.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2'
+        'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2'
     )
     expect(nextButton).toBeEnabled()
 
@@ -617,8 +593,8 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('Short ILS values are stored', () => {
-    const { getByTestId } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    const {getByTestId} = render(
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>
     )
 
     const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
@@ -637,22 +613,22 @@ describe('Table ILS Questionnaire Short', () => {
     expect(backButton).toBeDisabled()
 
     const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton1)
 
     const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton2)
 
     const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton3)
 
     const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[0] as HTMLInputElement
     fireEvent.click(RadioButton4)
 
@@ -670,19 +646,19 @@ describe('Table ILS Questionnaire Short', () => {
     expect(backButton).toBeEnabled()
 
     const RadioButton5 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[1] as HTMLInputElement
     fireEvent.click(RadioButton5)
     const RadioButton6 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[1] as HTMLInputElement
     fireEvent.click(RadioButton6)
     const RadioButton7 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[1] as HTMLInputElement
     fireEvent.click(RadioButton7)
     const RadioButton8 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
-      'input[type="radio"]'
+        'input[type="radio"]'
     )[1] as HTMLInputElement
     fireEvent.click(RadioButton8)
 
@@ -702,16 +678,16 @@ describe('Table ILS Questionnaire Short', () => {
     expect(backButton).toBeDisabled()
 
     const RadioButton1Back = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelector(
-      'input[type="radio"]'
+        'input[type="radio"]'
     ) as HTMLInputElement
     const RadioButton2Back = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelector(
-      'input[type="radio"]'
+        'input[type="radio"]'
     ) as HTMLInputElement
     const RadioButton3Back = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelector(
-      'input[type="radio"]'
+        'input[type="radio"]'
     ) as HTMLInputElement
     const RadioButton4Back = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelector(
-      'input[type="radio"]'
+        'input[type="radio"]'
     ) as HTMLInputElement
 
     expect(RadioButton1Back.checked).toBe(true)
@@ -726,9 +702,9 @@ describe('Table ILS Questionnaire Short', () => {
     expect(backButton).toBeDisabled()
   })
 
-  test('Short ILS values can be send', async () => {
-    const { getByTestId } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+  test('Short ILS values can be send', async() => {
+    const {getByTestId} = render(
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>
     )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -737,24 +713,24 @@ describe('Table ILS Questionnaire Short', () => {
     expect(backButton).toBeDisabled()
     expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
 
-    for (let i = 0; i < 6; i++) {
+    for(let i = 0; i < 6; i++) {
       const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
-        'input[type="radio"]'
+          'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton1)
 
       const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
-        'input[type="radio"]'
+          'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton2)
 
       const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
-        'input[type="radio"]'
+          'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton3)
 
       const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
-        'input[type="radio"]'
+          'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton4)
 
@@ -763,14 +739,15 @@ describe('Table ILS Questionnaire Short', () => {
       expect(RadioButton3.checked).toBe(true)
       expect(RadioButton4.checked).toBe(true)
 
-      if (i < 5) {
+      if(i < 5) {
         fireEvent.click(nextButton)
-      } else {
+      }
+      else {
         const sendButton = getByTestId('sendButtonILSQuestionnaire')
         expect(sendButton).toBeEnabled()
         act(() => {
           fireEvent.click(sendButton)
-          waitFor(async () => {
+          waitFor(async() => {
             expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
           })
         })
@@ -778,7 +755,7 @@ describe('Table ILS Questionnaire Short', () => {
     }
   })
 
-  test('ILS Questionnaire useHandleSend returns error', async () => {
+  test('ILS Questionnaire useHandleSend returns error', async() => {
     const mock = jest.fn(() => {
       return Promise.reject(new Error('posting ils failed'))
     })
@@ -787,8 +764,8 @@ describe('Table ILS Questionnaire Short', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
 
-    const { getByTestId } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+    const {getByTestId} = render(
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>
     )
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -796,24 +773,24 @@ describe('Table ILS Questionnaire Short', () => {
     expect(nextButton).toBeDisabled()
     expect(backButton).toBeDisabled()
 
-    for (let i = 0; i < 6; i++) {
+    for(let i = 0; i < 6; i++) {
       const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
-        'input[type="radio"]'
+          'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton1)
 
       const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
-        'input[type="radio"]'
+          'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton2)
 
       const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
-        'input[type="radio"]'
+          'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton3)
 
       const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
-        'input[type="radio"]'
+          'input[type="radio"]'
       )[0] as HTMLInputElement
       fireEvent.click(RadioButton4)
 
@@ -822,18 +799,211 @@ describe('Table ILS Questionnaire Short', () => {
       expect(RadioButton3.checked).toBe(true)
       expect(RadioButton4.checked).toBe(true)
 
-      if (i < 5) {
+      if(i < 5) {
         fireEvent.click(nextButton)
-      } else {
+      }
+      else {
         const sendButton = getByTestId('sendButtonILSQuestionnaire')
         expect(sendButton).toBeEnabled()
         act(() => {
           fireEvent.click(sendButton)
-          waitFor(async () => {
+          waitFor(async() => {
             expect(getByTestId('sendButtonILSQuestionnaire')).toBeEnabled()
           })
         })
       }
     }
   })
+
+  test('ILS unexpected next/prev value in ilsStep list', async() => {
+    const {getByTestId} = render(
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} testEmptyStep={true}/>
+    )
+
+    const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
+    const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1'
+    const ValuePage1RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1'
+    const ValuePage1RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.1'
+
+    const ValuePage2RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.2'
+    const ValuePage2RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.2'
+    const ValuePage2RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.2'
+    const ValuePage2RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.2'
+
+    const nextButton = getByTestId('nextButtonILSQuestionnaire')
+    const backButton = getByTestId('backButtonILSQuestionnaire')
+    expect(nextButton).toBeDisabled()
+    expect(backButton).toBeDisabled()
+
+    const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
+        'input[type="radio"]'
+    )[0] as HTMLInputElement
+    fireEvent.click(RadioButton1)
+
+    const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
+        'input[type="radio"]'
+    )[0] as HTMLInputElement
+    fireEvent.click(RadioButton2)
+
+    const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
+        'input[type="radio"]'
+    )[0] as HTMLInputElement
+    fireEvent.click(RadioButton3)
+
+    const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
+        'input[type="radio"]'
+    )[0] as HTMLInputElement
+    fireEvent.click(RadioButton4)
+
+    expect(RadioButton1.checked).toBe(true)
+    expect(RadioButton1.value).toBe(ValuePage1RadioButton1)
+    expect(RadioButton2.checked).toBe(true)
+    expect(RadioButton2.value).toBe(ValuePage1RadioButton2)
+    expect(RadioButton3.checked).toBe(true)
+    expect(RadioButton3.value).toBe(ValuePage1RadioButton3)
+    expect(RadioButton4.checked).toBe(true)
+    expect(RadioButton4.value).toBe(ValuePage1RadioButton4)
+    expect(nextButton).toBeEnabled()
+
+    fireEvent.click(nextButton)
+    expect(backButton).toBeEnabled()
+
+    const RadioButton5 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
+        'input[type="radio"]'
+    )[1] as HTMLInputElement
+    fireEvent.click(RadioButton5)
+    const RadioButton6 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
+        'input[type="radio"]'
+    )[1] as HTMLInputElement
+    fireEvent.click(RadioButton6)
+    const RadioButton7 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
+        'input[type="radio"]'
+    )[1] as HTMLInputElement
+    fireEvent.click(RadioButton7)
+    const RadioButton8 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
+        'input[type="radio"]'
+    )[1] as HTMLInputElement
+    fireEvent.click(RadioButton8)
+
+    expect(RadioButton5.checked).toBe(true)
+    expect(RadioButton5.value).toBe(ValuePage2RadioButton1)
+    expect(RadioButton6.checked).toBe(true)
+    expect(RadioButton6.value).toBe(ValuePage2RadioButton2)
+    expect(RadioButton7.checked).toBe(true)
+    expect(RadioButton7.value).toBe(ValuePage2RadioButton3)
+    expect(RadioButton8.checked).toBe(true)
+    expect(RadioButton8.value).toBe(ValuePage2RadioButton4)
+    expect(nextButton).toBeEnabled()
+    expect(backButton).toBeEnabled()
+
+    fireEvent.click(backButton)
+    expect(nextButton).toBeDisabled()
+    expect(backButton).toBeDisabled()
+
+    const RadioButton1Back = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelector(
+        'input[type="radio"]'
+    ) as HTMLInputElement
+    const RadioButton2Back = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelector(
+        'input[type="radio"]'
+    ) as HTMLInputElement
+    const RadioButton3Back = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelector(
+        'input[type="radio"]'
+    ) as HTMLInputElement
+    const RadioButton4Back = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelector(
+        'input[type="radio"]'
+    ) as HTMLInputElement
+
+    expect(RadioButton1Back.checked).toBe(false)
+    expect(RadioButton1Back.value).toBe(ValuePage1RadioButton1)
+    expect(RadioButton2Back.checked).toBe(false)
+    expect(RadioButton2Back.value).toBe(ValuePage1RadioButton2)
+    expect(RadioButton3Back.checked).toBe(false)
+    expect(RadioButton3Back.value).toBe(ValuePage1RadioButton3)
+    expect(RadioButton4Back.checked).toBe(false)
+    expect(RadioButton4Back.value).toBe(ValuePage1RadioButton4)
+    expect(nextButton).toBeDisabled()
+    expect(backButton).toBeDisabled()
+  })
+
+  test('Send question_id is not duplicated', async() => {
+    const {getByTestId} = render(
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend}/>
+    )
+
+    const nextButton = getByTestId('nextButtonILSQuestionnaire')
+    const backButton = getByTestId('backButtonILSQuestionnaire')
+    expect(nextButton).toBeDisabled()
+    expect(backButton).toBeDisabled()
+    expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
+
+    for(let i = 0; i < 6; i++) {
+      const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton1)
+
+      const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton2)
+
+      const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton3)
+
+      const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
+          'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton4)
+
+      expect(RadioButton1.checked).toBe(true)
+      expect(RadioButton2.checked).toBe(true)
+      expect(RadioButton3.checked).toBe(true)
+      expect(RadioButton4.checked).toBe(true)
+
+      if(i < 5) {
+        fireEvent.click(nextButton)
+      }
+      else {
+
+        fireEvent.click(backButton)
+        fireEvent.click(nextButton)
+        const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
+            'input[type="radio"]'
+        )[1] as HTMLInputElement
+        fireEvent.click(RadioButton1)
+
+        const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
+            'input[type="radio"]'
+        )[1] as HTMLInputElement
+        fireEvent.click(RadioButton2)
+
+        const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
+            'input[type="radio"]'
+        )[1] as HTMLInputElement
+        fireEvent.click(RadioButton3)
+
+        const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
+            'input[type="radio"]'
+        )[1] as HTMLInputElement
+        fireEvent.click(RadioButton4)
+
+        expect(RadioButton1.checked).toBe(true)
+        expect(RadioButton2.checked).toBe(true)
+        expect(RadioButton3.checked).toBe(true)
+        expect(RadioButton4.checked).toBe(true)
+
+        const sendButton = getByTestId('sendButtonILSQuestionnaire')
+        expect(sendButton).toBeEnabled()
+        act(() => {
+          fireEvent.click(sendButton)
+          waitFor(async() => {
+            expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
+          })
+        })
+      }
+    }
+  })
+
 })

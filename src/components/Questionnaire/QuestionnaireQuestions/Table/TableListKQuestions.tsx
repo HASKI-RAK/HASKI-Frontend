@@ -107,9 +107,10 @@ MemoTableRowAnswers.displayName = 'TableRowAnswers'
 type TableListKQuestionsProps = {
   successSend: boolean
   setSuccessSend: React.Dispatch<React.SetStateAction<boolean>>
+  testUndefined?: boolean
 }
 
-export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableListKQuestionsProps) => {
+export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUndefined }: TableListKQuestionsProps) => {
   const { addSnackbar } = useContext(SnackbarContext)
   const [questionnaireAnswers, setQuestionnaireAnswers] = useState([{ question_id: '', answer: '' }])
   const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, false)
@@ -125,7 +126,7 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
     answer4: string
     answer5: string
   }[][] = [
-    ...(t<string>('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions', {
+    ...(t<string>(!testUndefined ? 'components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions' : 'components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Undefined', {
       returnObjects: true
     }) as {
       question: string
@@ -174,17 +175,11 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend }: TableL
   const setRadioButtonGroups = (newActiveStep: number) => {
     setRadioButtonGroup((prevState) => {
       return prevState.map((item, index) => {
-        if(newActiveStep < 7) {
+        if(newActiveStep < 7 ||index < 4) {
           return {
             ...item,
             value: setRadioButtonValue(stepsListK[newActiveStep][index])
           }
-        }
-        else if(index < 4) {
-            return {
-                ...item,
-                value: setRadioButtonValue(stepsListK[newActiveStep][index])
-            }
         }
         else return item
       })

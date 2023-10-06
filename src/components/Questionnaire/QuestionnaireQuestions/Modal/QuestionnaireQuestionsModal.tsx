@@ -27,6 +27,7 @@ const QuestionnaireQuestionsModal = ({ open = false, handleClose, children }: Qu
       <Box sx={styleBox}>
         <Fab
           color="primary"
+          data-testid={'QuestionnaireQuestionsModal-Close-Button'}
           onClick={() => handleClose({} as object, 'backdropClick')}
           style={{
             position: 'absolute',
