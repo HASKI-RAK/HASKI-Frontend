@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useCookies } from 'react-cookie'
 
 export type PrivacyModalHookReturn = {
+  readonly privacyPolicyCookieSet: boolean
   readonly onAcceptHandler: (isAccepted: boolean) => void
 }
 export const usePrivacyModal = (): PrivacyModalHookReturn => {
@@ -27,7 +28,9 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
       })
     }
   }
+  const privacyPolicyCookieSet = cookies['privacy_accept_token'] != null
   return {
+    privacyPolicyCookieSet,
     onAcceptHandler
   } as const
 }

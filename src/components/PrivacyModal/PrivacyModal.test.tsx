@@ -1,6 +1,9 @@
 import '@testing-library/jest-dom'
 import { render, fireEvent } from '@testing-library/react'
 import PrivacyModal from './PrivacyModal'
+import * as router from 'react-router'
+
+const navigate = jest.fn()
 
 const mockCookie = jest.fn()
 jest.mock('react-cookie', () => ({
@@ -9,9 +12,9 @@ jest.mock('react-cookie', () => ({
 
 describe('Test PrivacyModal', () => {
   beforeEach(()=>{
+    jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
     document.cookie = 'privacy_accept_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
   })
-  
   test('backdrop click', () => {
     const form = render(<PrivacyModal />)
     const backdrop = form.getByRole('presentation').children[0]

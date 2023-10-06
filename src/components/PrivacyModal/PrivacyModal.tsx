@@ -1,10 +1,9 @@
-import { Modal, Typography, Box, Button, Link } from '@common/components'
-import { FormGroup, FormControlLabel, Checkbox } from '@mui/material'
+import { Modal, Typography, Box, Button, Link, FormGroup, FormControlLabel, Checkbox } from '@common/components'
 import { usePrivacyModal as _usePrivacyModal, PrivacyModalHookReturn } from './PrivacyModal.hooks'
 import { useTranslation } from 'react-i18next'
-import React from 'react'
-//zukünftig in die einstellung eine möglichkeit zum cookie declinen einbauen
-//was passiert wenn accept geklickt wird?
+import { useState, memo } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -19,8 +18,8 @@ const style = {
 }
 
 /**
- * @typedef {Object} PrivacyModalProps
- * @property {function} usePrivacyModal - Hook used for the Modal logic upon clicking a button.
+ * prop usePrivacyModal - Hook used for the Modal logic upon clicking a button.
+ * @interface
  */
 
 export type PrivacyModalProps = {
@@ -28,39 +27,52 @@ export type PrivacyModalProps = {
 }
 
 /**
+ * PrivacyModal component.
+ *
+ * @param props - Props containing the logic to accept and decline the privacy policy cookie.
+ *
+ * @remarks
  * PrivacyModal shows a Modal for the user to read and accept the PrivacyPolicy and other.
- * The PrivacyModal gets shown upon entering haski. Gets rendered in App.
- * @returns {JSX.Element} - The Modal
+ * The PrivacyModal gets shown upon entering HASKI.
+ * Gets rendered in App.
+ *
  * @category Components
  */
 
 const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps) => {
   const { t } = useTranslation()
-  const [open, setOpen] = React.useState(true)
-  const [checked, setCheck] = React.useState(false)
-  const { onAcceptHandler } = usePrivacyModal()
+  const navigate = useNavigate()
+  const [open, setOpen] = useState(true)
+  const [checked, setCheck] = useState(false)
+  const { privacyPolicyCookieSet, onAcceptHandler } = usePrivacyModal()
 
   //Disable backdropClick so the Modal only closes via the buttons
-  const handleClose = (event: React.MouseEvent<HTMLElement>, reason: string) => {
+  const handleClose = (_: React.MouseEvent<HTMLElement>, reason: string) => {
     if (reason && reason == 'backdropClick') return
   }
+
   //setting the check so the button gets enabled
   const handleChecked = (event: React.MouseEvent<HTMLElement>) => {
     setCheck((event.target as HTMLInputElement).checked)
   }
+
   //close the modal and set the cookie in the hook
-  const handleModal = (lol: boolean) => {
-    onAcceptHandler(lol)
+  const handleModal = (cookieAccepted: boolean) => {
+    onAcceptHandler(cookieAccepted)
     setOpen(false)
   }
+
   //load nothing if cookie is set
-  if (document.cookie.includes('privacy_accept_token')) {
-    return null
-  }
+  //if (document.cookie.includes('privacy_accept_token')) {
+  //  return null
+  //}
+  if (privacyPolicyCookieSet) return null
+
   //load nothing if current page is privacypolicy
   if (window.location.href.includes('privacypolicy')) {
     return null
   }
+
   return (
     <Modal
       aria-labelledby="privacy-modal"
@@ -70,7 +82,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
       closeAfterTransition>
       <Box sx={style}>
         <Typography id="transition-modal-title" variant="h4" component="h2">
-          {t('components.PrivacyModal.TermsofService')}
+          {t('components.PrivacyModal.termsOfService')}
           <Typography id="modal-text" variant="h6" component="h2">
             {t('components.PrivacyModal.afterReading')}
             <FormGroup>
@@ -78,12 +90,19 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                 onClick={handleChecked}
                 control={<Checkbox />}
                 label={
-                  <div>
+                  <>
                     {t('agree')}&nbsp;
-                    <Link href="privacypolicy" underline="none">
-                      Privacy Policy
+                    <Link
+                      marginX="0.2em"
+                      component="button"
+                      variant="subtitle1"
+                      color={'textSecondary'}
+                      href={'/privacypolicy'}
+                      underline="hover"
+                      onClick={() => navigate('/privacypolicy')}>
+                      {t('pages.PrivacyPolicy')}
                     </Link>
-                  </div>
+                  </>
                 }
               />
               <FormControlLabel control={<Checkbox />} label="Agree someting else" />
@@ -111,4 +130,4 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
     </Modal>
   )
 }
-export default PrivacyModal
+export default memo(PrivacyModal)

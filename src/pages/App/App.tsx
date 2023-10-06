@@ -31,10 +31,10 @@ import { HaskiTheme } from '@utils'
  */
 export const App = () => (
   <ThemeProvider theme={HaskiTheme}>
-    <AuthProvider>
-      <SnackbarProvider>
-        <PrivacyModal />
+    <SnackbarProvider>
+      <AuthProvider>
         <Router>
+          <PrivacyModal />
           <Routes>
             <Route element={<MainFrame />}>
               <Route index element={<Home />} />
@@ -54,8 +54,8 @@ export const App = () => (
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Router>
-      </SnackbarProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </SnackbarProvider>
   </ThemeProvider>
 )
 export default App
