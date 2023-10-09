@@ -21,9 +21,14 @@ describe('Test PrivacyModal', () => {
     fireEvent.click(backdrop)
     expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
+  test('click the link',()=>{
+    const form = render(<PrivacyModal/>)
+    const link = form.getByRole('button',{name:/pages.PrivacyPolicy/i})
+    fireEvent.click(link)
+  })
   test('accept the PrivacyPolicy', () => {
     const new_form = render(<PrivacyModal />)
-    const checkBox = new_form.getByRole('checkbox', { name: /Agree Privacy Policy/i })
+    const checkBox = new_form.getByRole('checkbox', { name: /agree pages.PrivacyPolicy/i })
     fireEvent.click(checkBox)
     expect(checkBox).toBeChecked()
     const acceptButton = new_form.getByRole('button', { name: /Accept/i })

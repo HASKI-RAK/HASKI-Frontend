@@ -63,9 +63,6 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   }
 
   //load nothing if cookie is set
-  //if (document.cookie.includes('privacy_accept_token')) {
-  //  return null
-  //}
   if (privacyPolicyCookieSet) return null
 
   //load nothing if current page is privacypolicy
