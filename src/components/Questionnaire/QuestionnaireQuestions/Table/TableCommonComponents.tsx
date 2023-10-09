@@ -23,7 +23,7 @@ type SendButtonProps = {
 }
 
 /**
- * @param {string} question - The question to be displayed in this row
+ * @param question - The question to be displayed in this row
  */
 export const MemoTableRowQuestion = memo(({ question }: { question: string }) => {
   return (

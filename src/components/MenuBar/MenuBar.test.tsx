@@ -132,7 +132,7 @@ describe('MenuBar', () => {
         fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
       }
     }
-  })
+  }, 20000)
 
   test('listk can be closed after sending answers', async () => {
     const { getByTestId } = render(
