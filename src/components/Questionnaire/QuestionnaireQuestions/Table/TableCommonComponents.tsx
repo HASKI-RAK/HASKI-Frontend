@@ -3,11 +3,6 @@ import { Stack, Typography, MobileStepper, Button, TableRow, TableCell, Circular
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
 import { useTranslation } from 'react-i18next'
 
-/**
- * # TableCommonComponents
- * This is a collection of common components of ILS (Long and Short) and ListK questionnaires.
- */
-
 type ButtonStackProps = {
   activeStep: number
   handleNext: () => void
@@ -27,6 +22,9 @@ type SendButtonProps = {
   sendSuccess: boolean
 }
 
+/**
+ * @param {string} question - The question to be displayed in this row
+ */
 export const MemoTableRowQuestion = memo(({ question }: { question: string }) => {
   return (
     <TableRow>
@@ -44,6 +42,14 @@ export const MemoTableRowQuestion = memo(({ question }: { question: string }) =>
 // eslint-disable-next-line immutable/no-mutation
 MemoTableRowQuestion.displayName = 'MemoTableRowQuestion'
 
+/**
+ * @param activeStep - The current active step
+ * @param handleNext - The function to handle the next step
+ * @param handleBack - The function to handle the previous step
+ * @param steps - The number of steps
+ * @param idType - The id of the questionnaire for testing purposes
+ * @param disabled - Whether the next button should be disabled
+ */
 export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, idType, disabled }: ButtonStackProps) => {
   const { t } = useTranslation()
   return (
@@ -83,6 +89,15 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
 // eslint-disable-next-line immutable/no-mutation
 ButtonStack.displayName = 'MemoButtonStack'
 
+/**
+ * @param t - The translation function
+ * @param handleSend - The function to handle the send button
+ * @param isNextDisabled - Whether the next button is disabled (should be disabled to enable send button)
+ * @param isValid - Whether the current step is valid for sending
+ * @param idType - The id of the questionnaire for testing purposes
+ * @param isSending - Whether the function is currently sending the data
+ * @param sendSuccess - Whether the function has successfully sent the data
+ */
 export const SendButton = memo(
   ({ handleSend, isNextDisabled, t, isValid, idType, isSending, sendSuccess }: SendButtonProps) => {
     return (

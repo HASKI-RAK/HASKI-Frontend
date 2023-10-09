@@ -59,11 +59,11 @@ i18next
     lng: lng, // local storage get the language from the browser
     fallbackLng: 'de'
   })
-    /* istanbul ignore next */
+  /* istanbul ignore next */
   .catch((error) => {
-  /* istanbul ignore next */
+    /* istanbul ignore next */
     const { addSnackbar } = React.useContext(SnackbarContext)
-  /* istanbul ignore next */
+    /* istanbul ignore next */
     addSnackbar({
       message: 'Error while initializing i18next: ' + error,
       severity: 'error',

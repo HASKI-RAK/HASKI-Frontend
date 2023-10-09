@@ -16,18 +16,20 @@ describe('Test the Home page', () => {
   })
 
   test('fetching Course throws error', async () => {
-    mockServices.getCourses.mockImplementationOnce(() => { throw new Error('Error') })
+    mockServices.getCourses.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
 
     jest.spyOn(console, 'error').mockImplementationOnce(() => {
       return
     })
 
     const { container } = render(
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Home />
-          </AuthContext.Provider>
-        </MemoryRouter>
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
     )
 
     await waitFor(() => {

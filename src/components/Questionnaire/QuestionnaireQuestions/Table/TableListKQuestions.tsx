@@ -14,14 +14,11 @@ import {
   Typography
 } from '@common/components'
 import { useTranslation } from 'react-i18next'
-import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
+import React, {memo, useCallback, useContext, useMemo, useState} from 'react'
 import { SnackbarContext } from '@services'
 import { ButtonStack, MemoTableRowQuestion, SendButton } from './TableCommonComponents'
 import useHandleSend from './Questions.hooks'
-
-/**
- * This component is used to display the questionnaire questions for the ListK questionnaire.
- */
+import {ReactJSXElement} from "@emotion/react/types/jsx-namespace";
 
 type TableRowAnswersProps = {
   t: (key: string) => string
@@ -110,6 +107,9 @@ type TableListKQuestionsProps = {
   testUndefined?: boolean
 }
 
+/**
+ * This component is used to display the questionnaire questions for the ListK questionnaire.
+ */
 export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUndefined }: TableListKQuestionsProps) => {
   const { addSnackbar } = useContext(SnackbarContext)
   const [questionnaireAnswers, setQuestionnaireAnswers] = useState([{ question_id: '', answer: '' }])
@@ -126,9 +126,14 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
     answer4: string
     answer5: string
   }[][] = [
-    ...(t<string>(!testUndefined ? 'components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions' : 'components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Undefined', {
-      returnObjects: true
-    }) as {
+    ...(t<string>(
+      !testUndefined
+        ? 'components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions'
+        : 'components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Undefined',
+      {
+        returnObjects: true
+      }
+    ) as {
       question: string
       questionLabel: string
       answer1: string
@@ -175,13 +180,12 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
   const setRadioButtonGroups = (newActiveStep: number) => {
     setRadioButtonGroup((prevState) => {
       return prevState.map((item, index) => {
-        if(newActiveStep < 7 ||index < 4) {
+        if (newActiveStep < 7 || index < 4) {
           return {
             ...item,
             value: setRadioButtonValue(stepsListK[newActiveStep][index])
           }
-        }
-        else return item
+        } else return item
       })
     })
   }
@@ -217,11 +221,11 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
           listkStep.answer5
         ]
         // Filter the questionnaireAnswers array to find all matching answers
-        const matchingAnswers = questionnaireAnswers.filter((answer) => answer.question_id === listkStep.questionLabel);
+        const matchingAnswers = questionnaireAnswers.filter((answer) => answer.question_id === listkStep.questionLabel)
 
         // If there are matching answers, return the answer from the last one; otherwise, return an empty string
-        if(matchingAnswers.length > 0) {
-          const lastMatchingAnswer = matchingAnswers[matchingAnswers.length - 1];
+        if (matchingAnswers.length > 0) {
+          const lastMatchingAnswer = matchingAnswers[matchingAnswers.length - 1]
           return listkSteps[parseInt(lastMatchingAnswer.answer) - 1]
         }
 
@@ -259,17 +263,17 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
     [setQuestionnaireAnswers]
   )
 
-  const listKQuestionsJsx = (row: number): JSX.Element => {
-    return(
-    <>
-      <MemoTableRowQuestion question={t(stepsListK[activeStep][row].question)}/>
-      <MemoTableRowAnswers
+  const listKQuestionsJsx = (row: number): ReactJSXElement => {
+    return (
+      <>
+        <MemoTableRowQuestion question={t(stepsListK[activeStep][row].question)} />
+        <MemoTableRowAnswers
           radioButtonGroup={radioButtonGroup[row].value}
           handleRadioChange={handleRadioChange}
           setRadioButtonGroup={(newValue) => {
             setRadioButtonGroup((prevState) => {
               return prevState.map((item, index) => {
-                if(index === row) {
+                if (index === row) {
                   return {
                     ...item,
                     value: newValue
@@ -283,8 +287,8 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
           t={t}
           activeStep={activeStep}
           stepsListK={stepsListK}
-      />
-    </>
+        />
+      </>
     )
   }
 
@@ -309,12 +313,12 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
             <Table style={{ minWidth: '300px' }}>
               <TableBody key={'TableListK'}>
                 <>
-                {stepsListK[activeStep].map((page, row) => (
+                  {stepsListK[activeStep].map((page, row) => (
                     <React.Fragment key={'QuestionnareListK Question: ' + row}>
-                    {activeStep < 7 ? listKQuestionsJsx(row) : row < 4 ? listKQuestionsJsx(row) : undefined}
+                      {activeStep < 7 ? listKQuestionsJsx(row) : row < 4 ? listKQuestionsJsx(row) : undefined}
                     </React.Fragment>
-                ))}
-                  </>
+                  ))}
+                </>
               </TableBody>
             </Table>
           </TableContainer>

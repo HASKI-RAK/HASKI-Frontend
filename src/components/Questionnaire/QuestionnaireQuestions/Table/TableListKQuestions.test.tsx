@@ -491,7 +491,9 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK Questions are undefined (40 instead of 39 questions)', async () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} testUndefined={true}/>)
+    const { getByTestId } = render(
+      <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} testUndefined={true} />
+    )
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
@@ -501,27 +503,27 @@ describe('TableListKQuestions', () => {
     for (let i = 0; i < 8; i++) {
       if (i < 7) {
         const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton1)
 
         const RadioButton2 = getByTestId('ListKQuestionnaireButtonGroup2').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton2)
 
         const RadioButton3 = getByTestId('ListKQuestionnaireButtonGroup3').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton3)
 
         const RadioButton4 = getByTestId('ListKQuestionnaireButtonGroup4').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton4)
 
         const RadioButton5 = getByTestId('ListKQuestionnaireButtonGroup5').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton5)
 
@@ -535,22 +537,22 @@ describe('TableListKQuestions', () => {
       //Last step only has 4 radio buttongroups
       else {
         const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton1)
 
         const RadioButton2 = getByTestId('ListKQuestionnaireButtonGroup2').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton2)
 
         const RadioButton3 = getByTestId('ListKQuestionnaireButtonGroup3').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton3)
 
         const RadioButton4 = getByTestId('ListKQuestionnaireButtonGroup4').querySelectorAll(
-            'input[type="radio"]'
+          'input[type="radio"]'
         )[0] as HTMLInputElement
         fireEvent.click(RadioButton4)
 

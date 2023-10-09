@@ -18,7 +18,18 @@ import {
   Link
 } from '@common/components'
 
-import { Analytics, Settings, Help, ArrowDropDown, Person, Login, Logout, AssignmentOutlined, LibraryBooksOutlined, PlaylistAddCheckCircleOutlined } from '@common/icons'
+import {
+  Analytics,
+  Settings,
+  Help,
+  ArrowDropDown,
+  Person,
+  Login,
+  Logout,
+  AssignmentOutlined,
+  LibraryBooksOutlined,
+  PlaylistAddCheckCircleOutlined
+} from '@common/icons'
 
 import { useTranslation } from 'react-i18next'
 import { AuthContext, SnackbarContext } from '@services'
@@ -52,7 +63,7 @@ export type MenuBarProps = {
  * @category Components
  */
 
-const MenuBar = ({ courseSelected = false}: MenuBarProps) => {
+const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
   const { addSnackbar } = useContext(SnackbarContext)
@@ -70,14 +81,6 @@ const MenuBar = ({ courseSelected = false}: MenuBarProps) => {
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [successSendILSShort, setSuccessSendILSShort] = useState(false)
   const [successSendListK, setSuccessSendListK] = useState(false)
-
-  const handleOpenModal = () => {
-    setModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setModalOpen(false)
-  }
 
   const handleOpenILSShortModal = () => {
     setModalOpenILSShort(true)
@@ -289,11 +292,11 @@ const MenuBar = ({ courseSelected = false}: MenuBarProps) => {
           {/** Questionnaire Results */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openQuestionnaireResults')}>
-              <IconButton onClick={handleOpenModal}>
+              <IconButton onClick={() => setModalOpen(true)}>
                 <Analytics data-testid="QuestionnaireResultsIcon" />
               </IconButton>
             </Tooltip>
-            <QuestionnaireResultsModal open={modalOpen} handleClose={handleCloseModal} />
+            <QuestionnaireResultsModal open={modalOpen} handleClose={() => setModalOpen(false)} />
           </Box>
 
           {/** Help button */}
@@ -348,14 +351,9 @@ const MenuBar = ({ courseSelected = false}: MenuBarProps) => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
-              <MenuItem
-                  data-testid="questionnaireILS"
-                  key="questionnaireILS"
-                  onClick={() =>
-                      handleOpenILSLongModal()
-                  }>
-                <ListItemIcon>{isAuth ? <LibraryBooksOutlined fontSize="small" /> : null}</ListItemIcon>
-                <Typography textAlign="center">{isAuth ? 'ILS Questionnaire' : null}</Typography>
+              <MenuItem data-testid="questionnaireILS" key="questionnaireILS" onClick={() => handleOpenILSLongModal()}>
+                <ListItemIcon>{isAuth && <LibraryBooksOutlined fontSize="small" />}</ListItemIcon>
+                <Typography textAlign="center">{isAuth && 'ILS Questionnaire'}</Typography>
               </MenuItem>
               <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
                 <TableILSQuestions
@@ -371,8 +369,8 @@ const MenuBar = ({ courseSelected = false}: MenuBarProps) => {
                 onClick={() => {
                   handleOpenILSShortModal()
                 }}>
-                <ListItemIcon>{isAuth ? <AssignmentOutlined fontSize="small" /> : null}</ListItemIcon>
-                <Typography textAlign="center">{isAuth ? 'ILS Questionnaire shortend' : null}</Typography>
+                <ListItemIcon>{isAuth && <AssignmentOutlined fontSize="small" />}</ListItemIcon>
+                <Typography textAlign="center">{isAuth && 'ILS Questionnaire shortend'}</Typography>
               </MenuItem>
               <QuestionnaireQuestionsModal open={modalOpenILSShort} handleClose={handleCloseILSShortModal}>
                 <TableILSQuestions
@@ -385,11 +383,9 @@ const MenuBar = ({ courseSelected = false}: MenuBarProps) => {
               <MenuItem
                 data-testid="questionnaireListk"
                 key="questionnaireListk"
-                onClick={() => {
-                  handleOpenListKModal()
-                }}>
-                <ListItemIcon>{isAuth ? <PlaylistAddCheckCircleOutlined fontSize="small" /> : null}</ListItemIcon>
-                <Typography textAlign="center">{isAuth ? 'List-K Questionnaire' : null}</Typography>
+                onClick={() => handleOpenListKModal()}>
+                <ListItemIcon>{isAuth && <PlaylistAddCheckCircleOutlined fontSize="small" />}</ListItemIcon>
+                <Typography textAlign="center">{isAuth && 'List-K Questionnaire'}</Typography>
               </MenuItem>
               <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>
                 <TableListKQuestions successSend={successSendListK} setSuccessSend={setSuccessSendListK} />

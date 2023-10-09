@@ -1,4 +1,4 @@
-import React, {memo} from 'react'
+import React, { memo } from 'react'
 import { Close } from '@common/icons'
 import { Box, Modal, Fab } from '@common/components'
 
