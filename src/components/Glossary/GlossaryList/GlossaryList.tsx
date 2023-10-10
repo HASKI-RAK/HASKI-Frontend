@@ -34,7 +34,7 @@ export type GlossaryListProps = {
  * @category Components
  */
 const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: GlossaryListProps) => {
-  const [glossaryEntryState, setGlossaryState] = useState<GlossaryEntryProps[]>([])
+  const [glossaryEntryState, setGlossaryEntryState] = useState<GlossaryEntryProps[]>([])
   const { filterByTags, filterByIndexElement, searchByQuery } = useGlossaryList()
 
   // Filters and searches the glossary entries
@@ -49,7 +49,7 @@ const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: Glossary
         bySelectedIndexElementFilteredGlossaryEntries,
         props.searchQuery
       )
-      setGlossaryState(byQuerySearchedGlossaryEntries)
+      setGlossaryEntryState(byQuerySearchedGlossaryEntries)
     }
   }, [
     props.glossaryEntries,
@@ -59,7 +59,7 @@ const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: Glossary
     filterByTags,
     filterByIndexElement,
     searchByQuery,
-    setGlossaryState
+    setGlossaryEntryState
   ])
 
   return (
