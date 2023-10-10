@@ -62,9 +62,7 @@ describe('GlossaryList tests', () => {
     expect(result.current).toStrictEqual({
       filterByTags: expect.any(Function),
       filterByIndexElement: expect.any(Function),
-      searchByQuery: expect.any(Function),
-      collapseAll: expect.any(Function),
-      expandAll: expect.any(Function)
+      searchByQuery: expect.any(Function)
     })
 
     const glossaryEntriesFilteredByTags = result.current.filterByTags(mockGlossaryListProps.glossaryEntries, [
