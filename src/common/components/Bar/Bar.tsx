@@ -1,2 +1,1 @@
-import { Bar } from '@nivo/bar'
-export { Bar }
+export { Bar } from '@nivo/bar'
