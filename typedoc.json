@@ -1,0 +1,32 @@
+{
+  "name": "HASKI-Frontend Documentation",
+  "excludeExternals": false,
+  // "entryPoints": ["./src/**/index.{ts,tsx}"],
+  //  "entryPoints": ["./src/{pages,components,core,store,common,shared,services}/index.{ts,tsx}"],
+  "commentStyle": "all",
+  "entryPoints": [
+    "./src/pages/index.ts",
+    "./src/components/index.ts",
+    "./src/core/index.ts",
+    "./src/store/index.ts",
+    "./src/common/index.ts",
+    "./src/shared/index.ts",
+    "./src/services/index.ts"
+  ],
+  "exclude": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx", "./node_modules/**/*"],
+  "plugin": [
+    "typedoc-plugin-merge-modules",
+    "typedoc-plugin-mermaid",
+    "typedoc-plugin-coverage",
+    "typedoc-plugin-missing-exports"
+  ],
+  "sourceLinkTemplate": "https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/{path}#L{line}",
+  "cleanOutputDir": true,
+  "theme": "default",
+  "entryPointStrategy": "resolve", // expand or merge or resolve or packages
+  "titleLink": "https://wiki.haski.app",
+  "internalModule": "exports",
+  "mergeModulesMergeMode": "module-category",
+  "mergeModulesRenameDefaults": true,
+  "excludeNotDocumented": false
+}

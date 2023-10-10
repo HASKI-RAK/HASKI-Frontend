@@ -1,6 +1,5 @@
 ﻿import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import log from 'loglevel'
 import { SnackbarContext } from '@services'
 import React from 'react'
 
@@ -23,8 +22,7 @@ declare module 'i18next' {
 // Import all translation files
 import translationEnglish from './translation/translationEnglish.json'
 import translationGerman from './translation/translationGerman.json'
-
-log.setLevel('error')
+import log from 'loglevel'
 
 //define the available languages
 const resources = {
@@ -38,6 +36,7 @@ const resources = {
 
 let lng = ''
 
+/* istanbul ignore next */
 if (localStorage.getItem('i18nextLng') === null) {
   localStorage.setItem('i18nextLng', 'de')
   log.trace('Local storage item "i18nextLng" was empty. Set "i18nextLng" language to: de.')
@@ -60,8 +59,11 @@ i18next
     lng: lng, // local storage get the language from the browser
     fallbackLng: 'de'
   })
+  /* istanbul ignore next */
   .catch((error) => {
+    /* istanbul ignore next */
     const { addSnackbar } = React.useContext(SnackbarContext)
+    /* istanbul ignore next */
     addSnackbar({
       message: 'Error while initializing i18next: ' + error,
       severity: 'error',

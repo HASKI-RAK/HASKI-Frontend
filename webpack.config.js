@@ -1,21 +1,26 @@
 const path = require('path')
+const { merge } = require('webpack-merge')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const { DefinePlugin } = require('webpack')
-
+const logging = require('webpack/lib/logging/runtime')
+const Logger = logging.getLogger('webpack-config')
 const dotenv = require('dotenv').config({
-  path: './.env.development'
+  path: './.env.'.concat(process.env.NODE_ENV === 'production' ? 'production' : 'development')
 })
 if (dotenv.error) {
   throw dotenv.error
 }
+Logger.info('dotenv parsed: ', dotenv.parsed)
+const module_to_merge = require('./webpack.config.'.concat(
+  process.env.NODE_ENV === 'production' ? 'prod' : 'dev' + '.js'
+))
+Logger.info('module_to_merge: ', module_to_merge)
 
-module.exports = {
-  context: path.resolve(__dirname, 'src'),
-  entry: 'src/index.tsx',
-  mode: 'development',
-  devtool: 'inline-source-map',
+module.exports = merge(module_to_merge, {
+  context: path.resolve(__dirname, '.'),
+  entry: './src/index.tsx',
   resolve: {
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
     modules: ['node_modules'],
@@ -27,10 +32,6 @@ module.exports = {
         configFile: path.join(__dirname, './', 'tsconfig.json')
       })
     ]
-  },
-  devServer: {
-    historyApiFallback: true,
-    allowedHosts: 'all'
   },
   target: 'web',
   output: {
@@ -75,4 +76,4 @@ module.exports = {
     }),
     new CompressionPlugin()
   ]
-}
+})

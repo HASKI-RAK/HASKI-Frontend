@@ -1,49 +1,103 @@
 import { useEffect, useState } from 'react'
-import { getCourseTopics, getElementLearningPath, LearningPath, Topic } from '@services'
+import { LearningPathElement, Topic, LearningPathElementReturn } from '@core'
 import log from 'loglevel'
+import { useStore, usePersistedStore } from '@store'
 
-export const getSortedLearningPath = async (data: Topic[]): Promise<LearningPath[]> => {
-  const promises = data.map((topic) => getElementLearningPath(topic.id))
-  const learningPaths = await Promise.all(promises)
-
-  return learningPaths
-    .filter((learningPath) => learningPath.status === 200)
-    .map((learningPath) => {
-      learningPath.data.path.sort((a, b) => a.position - b.position)
-      return learningPath.data
-    })
+/**
+ * This function sorts the learning path elements by position.
+ * @param userid - user id
+ * @param lmsUserid - lms user id
+ * @param studentid - student id
+ * @param data - topic data
+ * @param courseId - course id
+ * @param fetchLearningPath - fetch learning path function
+ *
+ * @remarks
+ * It makes a call to the fetchLearningPath function to get the learning path elements.
+ * @returns
+ */
+export const getSortedLearningPath = async (
+  userid: number,
+  lmsUserid: number,
+  studentid: number,
+  data: Topic,
+  courseId: string,
+  fetchLearningPath: LearningPathElementReturn
+): Promise<LearningPathElement> => {
+  const learningPath = await fetchLearningPath(userid, lmsUserid, studentid, courseId, data.id.toString())
+  learningPath.path.sort((a, b) => a.position - b.position)
+  return learningPath
 }
 
-export const useLearningPath = (): { loading: boolean; topics: Topic[]; learningPaths: LearningPath[] } => {
+/**
+ * @param courseId - course id
+ */
+export const useLearningPathTopic = (courseId: string): { loading: boolean; topics: Topic[] } => {
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
-  const [learningPaths, setLearningPaths] = useState<LearningPath[]>([])
-
-  const effect = async () => {
-    setLoading(true)
-    try {
-      const response = await getCourseTopics()
-      if (response.status === 200) {
-        setTopics(response.data.topics)
-        const dataLearningPath = await getSortedLearningPath(response.data.topics)
-        setLearningPaths(dataLearningPath)
-      } else {
-        // some error occurred
-        setLoading(false)
-      }
-    } catch (error) {
-      log.error(error)
-      throw error
-    } finally {
-      setLoading(false)
-    }
-  }
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
 
   useEffect(() => {
+    const effect = async () => {
+      setLoading(true)
+      try {
+        const user = await fetchUser()
+        const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
+        setTopics(fetchedTopics.topics)
+      } catch (error) {
+        log.error(error)
+        throw error
+      } finally {
+        setLoading(false)
+      }
+    }
+
     effect().catch(() => {
       log.error('An error occurred while fetching course topics in LocalNav.hooks')
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return { loading, topics, learningPaths }
+  return { loading, topics }
+}
+
+export const useLearningPathElement = (
+  topic: Topic,
+  courseId: string
+): { loadingElements: boolean; learningPaths: LearningPathElement | undefined } => {
+  const [loadingElements, setLoadingElements] = useState(true)
+  const [learningPaths, setLearningPaths] = useState<LearningPathElement>()
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const fetchLearningPathElement = useStore((state) => state.fetchLearningPathElement)
+
+  useEffect(() => {
+    const effect = async () => {
+      setLoadingElements(true)
+      try {
+        const user = await fetchUser()
+        const dataLearningPath = await getSortedLearningPath(
+          user.settings.user_id,
+          user.lms_user_id,
+          user.id,
+          topic,
+          courseId,
+          fetchLearningPathElement
+        )
+        setLearningPaths(dataLearningPath)
+      } catch (error) {
+        log.error(error)
+        throw error
+      } finally {
+        setLoadingElements(false)
+      }
+    }
+
+    effect().catch(() => {
+      log.error('An error occurred while fetching course Topic Elements in LocalNav.hooks')
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return { loadingElements, learningPaths }
 }

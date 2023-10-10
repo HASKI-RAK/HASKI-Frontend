@@ -1,4 +1,3 @@
-// const { pathsToModuleNameMapper } = require('ts-jest')
 import { compilerOptions } from './tsconfig.json'
 import { pathsToModuleNameMapper } from 'ts-jest'
 import { Config } from '@jest/types'
@@ -28,11 +27,13 @@ const config: Config.InitialOptions = {
   testEnvironment: 'jsdom',
   testMatch: ['<rootDir>/src/**/*.test.{js,jsx,ts,tsx}'],
   testPathIgnorePatterns: ['node_modules', 'Webvitals.ts', '<rootDir>/src/index.tsx', '.mock.ts', 'index.ts'],
+  coverageReporters: ['lcov', 'text', 'html'],
   coveragePathIgnorePatterns: ['node_modules', 'Webvitals.ts', '<rootDir>/src/index.tsx', '.mock.ts', 'index.ts'],
   transform: {
     'node_modules/variables/.+\\.(j|t)sx?$': 'ts-jest'
   },
-  transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$', 'node_modules/(?!variables/.*)']
+  transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$', 'node_modules/(?!variables/.*)'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts']
 }
 
 export default config
