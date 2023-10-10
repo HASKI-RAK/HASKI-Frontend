@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from 'react'
+import { useRef, useEffect, useCallback, memo } from 'react'
 import { Divider, Fade, Grid, Typography } from '@common/components'
 import {
   useProjectDescriptionCard as _useProjectDescriptionCard,

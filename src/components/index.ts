@@ -13,17 +13,22 @@ export { default as ContactForm, type ContactFormProps } from './ContactForm/Con
 export { default as Footer } from './Footer/Footer'
 export { default as LocalNav } from './LocalNav/LocalNav'
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
-export { default as ProjectDescriptionContent } from './ProjectDescriptionContent/ProjectDescriptionContent'
-export { default as ProjectDescriptionCard } from './ProjectDescriptionCard/ProjectDescriptionCard'
-export { default as ProjectDescriptionStepper } from './ProjectDescriptionStepper/ProjectDescriptionStepper'
+export { default as ProjectDescriptionCard } from './ProjectDescription/ProjectDescriptionCard/ProjectDescriptionCard'
+export { default as ProjectDescriptionStepper } from './ProjectDescription/ProjectDescriptionStepper/ProjectDescriptionStepper'
 export {
   default as SnackbarMessage,
   type SnackbarMessageProps,
   type SeverityType
-} from './SnackbarMessage/SnackbarMessage'
-export { default as SnackbarContainer } from './SnackbarContainer/SnackbarContainer'
-export { default as SnackbarTransition } from './SnackbarTransition/SnackbarTransition'
+} from './Snackbar/SnackbarMessage/SnackbarMessage'
+export { default as SnackbarContainer } from './Snackbar/SnackbarContainer/SnackbarContainer'
+export { default as SnackbarTransition } from './Snackbar/SnackbarTransition/SnackbarTransition'
 export { default as IFrameModal } from './IFrameModal/IFrameModal'
 export { default as SkeletonList } from './SkeletonList/SkeletonList'
+export { default as Filter } from './Filter/Filter'
+export { default as GlossaryList } from './Glossary/GlossaryList/GlossaryList'	
+export { default as Searchbar } from './Searchbar/Searchbar'
+export { default as GlossaryIndex } from './Glossary/GlossaryIndex/GlossaryIndex'
+export { default as GlossaryEntry, type GlossaryEntryProps } from './Glossary/GlossaryEntry/GlossaryEntry'
+export { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
 
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure

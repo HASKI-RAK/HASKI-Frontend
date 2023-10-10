@@ -1,4 +1,4 @@
-import { Button, Typography } from '@common/components'
+import { Button, Typography, Box } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 // TODO: Added unfinished projectinformation page for routing purposes
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
  * @category Pages
  */
 export const ProjectInformation = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   return (
