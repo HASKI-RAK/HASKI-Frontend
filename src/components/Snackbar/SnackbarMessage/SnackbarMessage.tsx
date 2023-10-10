@@ -1,23 +1,23 @@
+import { useState, useCallback, useEffect, useContext, memo } from 'react'
 import { Alert, Typography } from '@common/components'
-import { useState, useCallback, useEffect, useContext } from 'react'
 import { SnackbarTransition } from '@components'
 import { useTranslation } from 'react-i18next'
 import { SnackbarContext } from '@services'
 
 /**
- * @typedef {Object} SeverityType
- * @property {string} error - The error severity of a snackbar.
- * @property {string} success - The success severity of a snackbar.
- * @property {string} warning - The warning severity of a snackbar.
- * @property {string} info - The info severity of a snackbar.
+ * @props error - The error severity of a snackbar.
+ * @props success - The success severity of a snackbar.
+ * @props warning - The warning severity of a snackbar.
+ * @props info - The info severity of a snackbar.
+ * @interface
  */
 export type SeverityType = 'error' | 'success' | 'warning' | 'info'
 
 /**
- * @typedef {Object} SnackbarMessageProps
- * @property {number} autoHideDuration - The duration a snackbar stays before it autmatically disappears.
- * @property {string} message - The message that is displayed on a snackbar.
- * @property {SeverityType} severity - The severity type of a snackbar.
+ * @props autoHideDuration - The duration a snackbar stays before it autmatically disappears.
+ * @props message - The message that is displayed on a snackbar.
+ * @props severity - The severity type of a snackbar.
+ * @interface
  */
 export type SnackbarMessageProps = {
   autoHideDuration?: number
@@ -26,10 +26,14 @@ export type SnackbarMessageProps = {
 }
 
 /**
+ * SnackbarMessage component.
+ *
+ * @param props - Props containing message, severity and autoHideDuration of a snackbar.
+ *
+ * @remarks
  * SnackbarMessage presents an alert to display messages with different severities to inform users.
  * It can't be used as a standalone component and needs to be placed inside a snackbar component.
- * @param props - Props containing message, severity and autoHideDuration of a snackbar.
- * @returns {JSX.Element} - The message component of a snackbar.
+ *
  * @category Components
  */
 const SnackbarMessage = (props: SnackbarMessageProps) => {
@@ -74,4 +78,4 @@ const SnackbarMessage = (props: SnackbarMessageProps) => {
   )
 }
 
-export default SnackbarMessage
+export default memo(SnackbarMessage)

@@ -12,6 +12,8 @@ import MainFrame from './MainFrame/MainFrame'
 import ProjectDescription from './ProjectDescription/ProjectDescription'
 import ProjectInformation from './ProjectInformation/ProjectInformation'
 import Imprint from './Imprint/Imprint'
+import Glossary from './Glossary/Glossary'
+
 export {
   MainFrame,
   App,
@@ -19,8 +21,9 @@ export {
   Home,
   Login,
   Dashboard,
-  Contact,
   ProjectDescription,
   ProjectInformation,
-  Imprint
+  Imprint,
+  Glossary,
+  Contact
 }

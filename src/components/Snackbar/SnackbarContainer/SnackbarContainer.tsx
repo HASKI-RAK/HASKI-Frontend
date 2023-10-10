@@ -1,13 +1,16 @@
 import { Stack, Snackbar } from '@common/components'
 import { SnackbarContext, useNetworkStatus } from '@services'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SnackbarMessage } from '@components'
 
 /**
+ * SnackbarContainer component.
+ *
+ * @remarks
  * SnackbarContainer presents a container rendering the snackbars and their messages.
  * It can't be used as a standalone component and must be somewhere beneath the snackbar provider.
- * @returns {JSX.Element} - The snackbar container component.
+ *
  * @category Components
  */
 const SnackbarContainer = () => {
@@ -44,7 +47,7 @@ const SnackbarContainer = () => {
   }, [isOnline, addSnackbar, recentlyOffline, t, updateSnackbar])
 
   return (
-    <div data-testid="snackbarContainer">
+    <>
       <Snackbar
         open={!!snackbarsErrorWarning[0]}
         autoHideDuration={null}
@@ -73,8 +76,8 @@ const SnackbarContainer = () => {
           ))}
         </Stack>
       </Snackbar>
-    </div>
+    </>
   )
 }
 
-export default SnackbarContainer
+export default memo(SnackbarContainer)

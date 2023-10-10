@@ -1,16 +1,25 @@
-import { Button, Typography } from '@common/components'
-import { useTranslation } from 'react-i18next'
+import { Button, Typography, Box } from '@common/components'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 // TODO: Added unfinished projectinformation page for routing purposes
-const ProjectInformation = () => {
-  const navigate = useNavigate()
+export const ProjectInformation = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   return (
-    <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/projectdescription')}>
-      <Typography>{t('pages.projectdescription')}</Typography>
-    </Button>
+    <>
+      <Box>
+        <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/projectdescription')}>
+          <Typography>{t('pages.projectdescription')}</Typography>
+        </Button>
+      </Box>
+      <Box>
+        <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/glossary')}>
+          <Typography>{t('pages.glossary')}</Typography>
+        </Button>
+      </Box>
+    </>
   )
 }
 

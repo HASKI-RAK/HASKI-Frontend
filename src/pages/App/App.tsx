@@ -9,7 +9,8 @@ import {
   Contact,
   ProjectDescription,
   ProjectInformation,
-  Imprint
+  Imprint,
+  Glossary
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { logBuffer } from '@shared'
@@ -41,6 +42,7 @@ const App = () => (
               <Route path="/contact" element={<Contact />} />
               <Route path="/projectinformation" element={<ProjectInformation />} />
               <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
+              <Route path="/projectinformation/glossary" element={<Glossary />} />
               <Route path="/imprint" element={<Imprint />} />
               <Route path="/🥚" element={<div>Ei</div>} />
               <Route path="*" element={<div>404</div>} />
