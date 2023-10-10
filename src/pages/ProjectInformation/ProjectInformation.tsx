@@ -11,12 +11,20 @@ import { useNavigate } from 'react-router-dom'
  */
 export const ProjectInformation = () => {
   const navigate = useNavigate()
-  const { t } = useTranslation()
 
   return (
-    <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/projectdescription')}>
-      <Typography>{t('pages.projectdescription')}</Typography>
-    </Button>
+    <>
+      <Box>
+        <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/projectdescription')}>
+          <Typography>{t('pages.projectdescription')}</Typography>
+        </Button>
+      </Box>
+      <Box>
+        <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/glossary')}>
+          <Typography>{t('pages.glossary')}</Typography>
+        </Button>
+      </Box>
+    </>
   )
 }
 

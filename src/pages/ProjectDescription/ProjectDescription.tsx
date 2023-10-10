@@ -1,4 +1,7 @@
-import { ProjectDescriptionContent } from '@components'
+import { useTranslation } from 'react-i18next'
+import { ProjectDescriptionCard, ProjectDescriptionStepper } from '@components'
+import { Avatar, Box, Grid, Typography } from '@common/components'
+import { memo } from 'react'
 
 /**
  * # Project Description Page
