@@ -1,12 +1,4 @@
-import {
-  Accordion,
-  Box,
-  Divider,
-  Typography,
-  AccordionSummary,
-  AccordionDetails,
-  Stack
-} from '@common/components'
+import { Accordion, Box, Divider, Typography, AccordionSummary, AccordionDetails, Stack } from '@common/components'
 import { ExpandMore } from '@common/icons'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
@@ -31,7 +23,7 @@ export type LocalNavProps = {
     courseId: string
   ) => {
     loadingElements: boolean
-    learningPaths: LearningPathElement
+    learningPaths: LearningPathElement | undefined
   }
 }
 

@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom'
+// tests not working when shortened
 import { useStore } from '../Zustand/Store'
 import { mockServices } from 'jest.setup'
 
@@ -7,7 +8,7 @@ describe('LearningPathTopicSlice ', () => {
   mockServices.getLearningPathTopic.mockReturnValue(learningPathTopic)
 
   it('should fetch learning path from server and cache it', async () => {
-    const { fetchLearningPathTopic: fetchLearningPathTopic } = useStore.getState()
+    const { fetchLearningPathTopic } = useStore.getState()
     const courseId = '2'
 
     const result = await fetchLearningPathTopic(1, 2, 3, courseId)

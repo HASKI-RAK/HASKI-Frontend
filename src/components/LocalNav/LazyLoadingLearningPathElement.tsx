@@ -4,8 +4,8 @@ import { useLearningPathElement as _useLearningPathElement } from './LocalNav.ho
 import { LearningPathElement, Topic } from '@core'
 
 /**
- * @prop The {@link Topic} to be displayed
- * @prop The id of the {@link Course} to be displayed
+ * @prop {@link Topic} to be displayed
+ * @prop id of the {@link Course} to be displayed
  * @prop Optional function to override the default hook
  */
 export type LazyLoadingLearningPathElementProps = {
@@ -16,7 +16,7 @@ export type LazyLoadingLearningPathElementProps = {
     courseId: string
   ) => {
     loadingElements: boolean
-    learningPaths: LearningPathElement
+    learningPaths: LearningPathElement | undefined
   }
 }
 
@@ -44,7 +44,7 @@ const LazyLoadingLearningPathElement = ({
 
   return (
     <>
-      {learningPaths.path.map((learningElement) => (
+      {learningPaths?.path.map((learningElement) => (
         <Typography variant="body1" key={learningElement.learning_element.name}>
           <Link
             data-testid={learningElement.learning_element.name}

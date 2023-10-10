@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom'
+// test not working when import shortened
 import { FormDataType, postContactForm } from './postContactForm'
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -20,6 +21,7 @@ describe('postContactForm', () => {
   }
   it('should return contact success with default params', async () => {
     const contactStatus = await postContactForm(testData, 1, 1)
+    expect(contactStatus).toEqual(Promise.resolve<Response>)
     expect(contactStatus.status).toEqual(undefined)
   })
 })

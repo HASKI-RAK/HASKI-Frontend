@@ -24,8 +24,9 @@ type MockDataServices = {
  * @see {@link https://jestjs.io/docs/mock-functions | Jest Mock Functions}
  */
 const mockDataServices: MockDataServices = {
-  getUser: jest.fn(() => {
-    return Promise.resolve({
+  getLogout: jest.fn(() => Promise.resolve()),
+  postLoginCredentials: jest.fn(() =>
+    Promise.resolve({
       id: 1,
       lms_user_id: 1,
       name: 'Thaddäus Tentakel',
@@ -39,9 +40,25 @@ const mockDataServices: MockDataServices = {
       },
       university: 'HS Kempten'
     })
-  }),
-  getLearningPathElement: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  getUser: jest.fn(() =>
+    Promise.resolve({
+      id: 1,
+      lms_user_id: 1,
+      name: 'Thaddäus Tentakel',
+      role: 'Tester',
+      role_id: 1,
+      settings: {
+        id: 1,
+        user_id: 1,
+        pswd: '1234',
+        theme: 'test'
+      },
+      university: 'HS Kempten'
+    })
+  ),
+  getLearningPathElement: jest.fn(() =>
+    Promise.resolve({
       id: 1,
       course_id: 2,
       based_on: 'string',
@@ -149,9 +166,9 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
-  }),
-  getLearningPathTopic: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  getLearningPathTopic: jest.fn(() =>
+    Promise.resolve({
       topics: [
         {
           contains_le: true,
@@ -195,24 +212,20 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
-  }),
-  postContactForm: jest.fn(() => {
-    return Promise.resolve({
-      undefined
-    })
-  }),
-  postLogin: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  postContactForm: jest.fn(() => Promise.resolve({ status: undefined })),
+  postLogin: jest.fn(() =>
+    Promise.resolve({
       expiration: 999999999999999
     })
-  }),
-  redirectMoodleLogin: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  redirectMoodleLogin: jest.fn(() =>
+    Promise.resolve({
       lti_launch_view: 'test'
     })
-  }),
-  getCourses: jest.fn(() => {
-    return Promise.resolve({
+  ),
+  getCourses: jest.fn(() =>
+    Promise.resolve({
       courses: [
         {
           id: 1,
@@ -234,7 +247,60 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
-  })
+  ),
+  getILS: jest.fn(() =>
+    Promise.resolve({
+      characteristic_id: 1,
+      id: 1,
+      input_dimension: 'test',
+      input_value: 1,
+      perception_dimension: 'test',
+      perception_value: 1,
+      processing_dimension: 'test',
+      processing_value: 1,
+      understanding_dimension: 'test',
+      understanding_value: 1
+    })
+  ),
+  getListK: jest.fn(() =>
+    Promise.resolve({
+      att: 1,
+      characteristic_id: 1,
+      cogn_str: 1,
+      con: 1,
+      crit_rev: 1,
+      eff: 1,
+      elab: 1,
+      ext_res_mng_str: 1,
+      goal_plan: 1,
+      id: 1,
+      int_res_mng_str: 1,
+      lit_res: 1,
+      lrn_env: 1,
+      lrn_w_cls: 1,
+      metacogn_str: 1,
+      org: 1,
+      reg: 1,
+      rep: 1,
+      time: 1
+    })
+  ),
+  postILS: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED',
+      url: 'http://fakedomain.com:5000/lms/student/1/questionnaire/ils'
+    })
+  ),
+  postListK: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED',
+      url: 'http://fakedomain.com:5000/lms/student/1/questionnaire/listk'
+    })
+  )
 }
 /**
  * This object is used to store mocks. After each test, the object is cleaned up.

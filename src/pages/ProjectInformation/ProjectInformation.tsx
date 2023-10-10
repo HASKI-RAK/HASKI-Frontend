@@ -1,4 +1,4 @@
-import { Button, Typography } from '@common/components'
+import { Button, Typography, Box } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { XapiTest } from '@components'
@@ -11,14 +11,21 @@ import { XapiTest } from '@components'
  * @category Pages
  */
 export const ProjectInformation = () => {
-  const navigate = useNavigate()
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   return (
     <>
-      <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/projectdescription')}>
-        <Typography>{t('pages.projectdescription')}</Typography>
-      </Button>
+      <Box>
+        <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/projectdescription')}>
+          <Typography>{t('pages.projectdescription')}</Typography>
+        </Button>
+      </Box>
+      <Box>
+        <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/glossary')}>
+          <Typography>{t('pages.glossary')}</Typography>
+        </Button>
+      </Box>
       <XapiTest />
     </>
   )

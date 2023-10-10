@@ -11,8 +11,8 @@ import {
   FormControl,
   FormLabel,
   FormControlLabel,
-   SelectChangeEvent,
-   FormHelperText,
+  SelectChangeEvent,
+  FormHelperText,
   Backdrop,
   CircularProgress
 } from '@common/components'
@@ -125,12 +125,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
           </FormLabel>
           <RadioGroup row name="reporttype" value={reportType} onChange={reportTypeChangeHandler}>
             {reportTypes.map((report) => (
-              <FormControlLabel
-                key={report.value}
-                value={report.value}
-                control={<Radio />}
-                label={report.label}
-              />
+              <FormControlLabel key={report.value} value={report.value} control={<Radio />} label={report.label} />
             ))}
           </RadioGroup>
 

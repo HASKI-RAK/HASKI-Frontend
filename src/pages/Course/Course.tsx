@@ -1,11 +1,4 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  Stack
-} from '@common/components'
+import { Button, Card, CardContent, Typography, Box, Stack } from '@common/components'
 import { AuthContext } from '@services'
 import log from 'loglevel'
 import { useContext, useEffect } from 'react'
@@ -23,7 +16,7 @@ import { SkeletonList } from '@components'
  */
 export const Course = () => {
   const { t } = useTranslation()
-  const authcontext = useContext(AuthContext)
+  const authContext = useContext(AuthContext)
   const navigate = useNavigate()
   const { courseId } = useParams() as { courseId: string }
 
@@ -34,7 +27,7 @@ export const Course = () => {
       log.log('Course timeout')
       navigate('/login')
     }, 5000)
-    if (authcontext.isAuth) {
+    if (authContext.isAuth) {
       clearTimeout(preventEndlessLoading)
     }
 

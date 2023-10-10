@@ -52,7 +52,7 @@
     "@testing-library/react-hooks": "^8.0.1",
     "@types/jest": "^29.1.0",
     "@types/node": "^18.8.2",
-    "@types/react": "^18.0.21",
+    "@types/react": "^18.2.7",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-test-renderer": "^18.0.0",
