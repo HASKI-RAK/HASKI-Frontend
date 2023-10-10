@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom'
+// tests not working when shortened
 import { useStore } from '../Zustand/Store'
 import { mockServices } from 'jest.setup'
 

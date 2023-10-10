@@ -6,7 +6,6 @@
  * @module pages
  */
 
-export * from './Contact/Contact'
 export * from './App/App'
 export * from './Home/Home'
 export * from './Login/Login'

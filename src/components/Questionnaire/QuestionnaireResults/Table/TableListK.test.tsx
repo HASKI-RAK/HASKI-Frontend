@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import TableListK, { getListKParameters, getSubscaleScore } from './TableListK'
+import TableListK, { getSubscaleScore } from './TableListK'
 import { render } from '@testing-library/react'
 
 //we have to mock react-i18next otherwise a warning will appear
@@ -21,51 +21,101 @@ jest.mock('react-i18next', () => ({
   }
 }))
 
+const mockListK = {
+  characteristic_id: 1,
+  id: 1,
+  att: 1,
+  cogn_str: 1,
+  con: 1,
+  crit_rev: 1,
+  eff: 1,
+  elab: 1,
+  ext_res_mng_str: 1,
+  goal_plan: 1,
+  int_res_mng_str: 1,
+  lit_res: 1,
+  lrn_env: 1,
+  lrn_w_cls: 1,
+  metacogn_str: 1,
+  org: 1,
+  reg: 1,
+  rep: 1,
+  time: 1
+}
+
 // tests for mui can be found https://github.com/mui/material-ui/blob/master/packages/mui-material/src
 describe('Test TableList-K with all Methods', () => {
   test('Table Values are correct', () => {
-    const { getAllByRole } = render(<TableListK />)
+    const { getAllByRole } = render(<TableListK data={mockListK} />)
 
     expect(getAllByRole('columnheader')[0]).toHaveTextContent(
-      'components.QuestionnaireResults.TableListK.Factors & subscales'
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Factors & subscales'
     )
-    expect(getAllByRole('columnheader')[1]).toHaveTextContent('components.QuestionnaireResults.TableListK.Score')
+    expect(getAllByRole('columnheader')[1]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Score'
+    )
     expect(getAllByRole('columnheader')[2]).toHaveTextContent(
-      'components.QuestionnaireResults.TableListK.Factors & subscales'
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Factors & subscales'
     )
-    expect(getAllByRole('columnheader')[3]).toHaveTextContent('components.QuestionnaireResults.TableListK.Score')
-    expect(getAllByRole('cell')[0]).toHaveTextContent('components.QuestionnaireResults.TableListK.Cognitive strategies')
+    expect(getAllByRole('columnheader')[3]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Score'
+    )
+    expect(getAllByRole('cell')[0]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'
+    )
     expect(getAllByRole('cell')[2]).toHaveTextContent(
-      'components.QuestionnaireResults.TableListK.Internal resource management strategies'
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'
     )
-    expect(getAllByRole('cell')[4]).toHaveTextContent('components.QuestionnaireResults.TableListK.Organize')
-    expect(getAllByRole('cell')[6]).toHaveTextContent('components.QuestionnaireResults.TableListK.Attention')
-    expect(getAllByRole('cell')[8]).toHaveTextContent('components.QuestionnaireResults.TableListK.Elaborate')
-    expect(getAllByRole('cell')[10]).toHaveTextContent('components.QuestionnaireResults.TableListK.Effort')
-    expect(getAllByRole('cell')[12]).toHaveTextContent('components.QuestionnaireResults.TableListK.Critical review')
-    expect(getAllByRole('cell')[14]).toHaveTextContent('components.QuestionnaireResults.TableListK.Time')
-    expect(getAllByRole('cell')[16]).toHaveTextContent('components.QuestionnaireResults.TableListK.Repeat')
+    expect(getAllByRole('cell')[4]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize'
+    )
+    expect(getAllByRole('cell')[6]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention'
+    )
+    expect(getAllByRole('cell')[8]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate'
+    )
+    expect(getAllByRole('cell')[10]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort'
+    )
+    expect(getAllByRole('cell')[12]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review'
+    )
+    expect(getAllByRole('cell')[14]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Time'
+    )
+    expect(getAllByRole('cell')[16]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat'
+    )
     expect(getAllByRole('cell')[18]).toHaveTextContent('')
     expect(getAllByRole('cell')[20]).toHaveTextContent(
-      'components.QuestionnaireResults.TableListK.Metacognitive strategies'
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'
     )
     expect(getAllByRole('cell')[22]).toHaveTextContent(
-      'components.QuestionnaireResults.TableListK.External resource management strategies'
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'
     )
-    expect(getAllByRole('cell')[24]).toHaveTextContent('components.QuestionnaireResults.TableListK.Goals & plans')
+    expect(getAllByRole('cell')[24]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans'
+    )
     expect(getAllByRole('cell')[26]).toHaveTextContent(
-      'components.QuestionnaireResults.TableListK.Learning with classmates'
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates'
     )
-    expect(getAllByRole('cell')[28]).toHaveTextContent('components.QuestionnaireResults.TableListK.Control')
-    expect(getAllByRole('cell')[30]).toHaveTextContent('components.QuestionnaireResults.TableListK.Literature research')
-    expect(getAllByRole('cell')[32]).toHaveTextContent('components.QuestionnaireResults.TableListK.Regulate')
+    expect(getAllByRole('cell')[28]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Control'
+    )
+    expect(getAllByRole('cell')[30]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research'
+    )
+    expect(getAllByRole('cell')[32]).toHaveTextContent(
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate'
+    )
     expect(getAllByRole('cell')[34]).toHaveTextContent(
-      'components.QuestionnaireResults.TableListK.Learning environment'
+      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment'
     )
   })
 
   test('Table Score-values are numbers', () => {
-    const { getAllByRole: GetAllByRole } = render(<TableListK />)
+    const { getAllByRole: GetAllByRole } = render(<TableListK data={mockListK} />)
 
     const cell1 = GetAllByRole('cell')[1].textContent
     let cell1Int
@@ -187,31 +237,6 @@ describe('Test TableList-K with all Methods', () => {
     expect(cell31Int).toBeGreaterThanOrEqual(0)
     expect(cell33Int).toBeGreaterThanOrEqual(0)
     expect(cell35Int).toBeGreaterThanOrEqual(0)
-  })
-
-  test('List-K parameters are plausible', () => {
-    const ListKParameters = getListKParameters()
-
-    expect(ListKParameters[0].length).toBe(13)
-    expect(ListKParameters[0][0] >= 1).toBe(true)
-    expect(ListKParameters[0][1] >= 1 && ListKParameters[0][1] <= 5).toBe(true)
-    expect(ListKParameters[0][2] >= 1 && ListKParameters[0][2] <= 5).toBe(true)
-    expect(ListKParameters[0][3] >= 1 && ListKParameters[0][3] <= 5).toBe(true)
-    expect(ListKParameters[0][4] >= 1 && ListKParameters[0][4] <= 5).toBe(true)
-    expect(ListKParameters[0][5] >= 1 && ListKParameters[0][5] <= 5).toBe(true)
-    expect(ListKParameters[0][6] >= 1 && ListKParameters[0][6] <= 5).toBe(true)
-    expect(ListKParameters[0][7] >= 1 && ListKParameters[0][7] <= 5).toBe(true)
-    expect(ListKParameters[0][8] >= 1 && ListKParameters[0][8] <= 5).toBe(true)
-    expect(ListKParameters[0][9] >= 1 && ListKParameters[0][9] <= 5).toBe(true)
-    expect(ListKParameters[0][10] >= 1 && ListKParameters[0][10] <= 5).toBe(true)
-    expect(ListKParameters[0][11] >= 1 && ListKParameters[0][11] <= 5).toBe(true)
-    expect(ListKParameters[0][12] >= 1 && ListKParameters[0][12] <= 5).toBe(true)
-
-    expect(ListKParameters[1].length).toBe(4)
-    expect(ListKParameters[1][0] >= 1 && ListKParameters[1][0] <= 5).toBe(true)
-    expect(ListKParameters[1][1] >= 1 && ListKParameters[1][1] <= 5).toBe(true)
-    expect(ListKParameters[1][2] >= 1 && ListKParameters[1][2] <= 5).toBe(true)
-    expect(ListKParameters[1][3] >= 1 && ListKParameters[1][3] <= 5).toBe(true)
   })
 
   test('Average List-K are calculated correctly', () => {
