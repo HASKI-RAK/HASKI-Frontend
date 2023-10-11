@@ -679,7 +679,7 @@
   "decline": "Ablehnen",
   "agree": "Zustimmen",
   "components.PrivacyModal.afterReading": "Nach dem Lesen bitte akzeptieren:",
-  "components.PrivacyModal.TermsofService": "Datenschutzerklärung und ",
-  "components.PrivacyModal.accepted": "Danke für dein Vertrauen. Daten für eine bessere Lernerfahrung werden jetzt gesammelt.",
-  "components.PrivacyModal.declined": "Daten werden nicht gesammelt. Solltest du deine Meinung ändern schau in die Einstellungen."
+  "components.PrivacyModal.termsofService": "Datenschutzerklärung und ",
+  "components.PrivacyModal.accepted": "Danke für Dein Vertrauen. Daten werden jetzt gesammelt, um Dir eine bessere Lernerfahrung zu bieten.",
+  "components.PrivacyModal.declined": "Daten werden nicht gesammelt. Solltest du deine Meinung ändern, sieh in den Einstellungen nach."
 }

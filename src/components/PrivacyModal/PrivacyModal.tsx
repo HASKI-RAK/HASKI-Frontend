@@ -1,7 +1,7 @@
 import { Modal, Typography, Box, Button, Link, FormGroup, FormControlLabel, Checkbox } from '@common/components'
 import { usePrivacyModal as _usePrivacyModal, PrivacyModalHookReturn } from './PrivacyModal.hooks'
 import { useTranslation } from 'react-i18next'
-import { useState, memo } from 'react'
+import { useState, memo, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const style = {
@@ -18,7 +18,7 @@ const style = {
 }
 
 /**
- * prop usePrivacyModal - Hook used for the Modal logic upon clicking a button.
+ * @prop usePrivacyModal - Hook used for the Modal logic upon clicking a button.
  * @interface
  */
 
@@ -43,24 +43,30 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [open, setOpen] = useState(true)
-  const [checked, setCheck] = useState(false)
-  const { privacyPolicyCookieSet, onAcceptHandler } = usePrivacyModal()
+  const [checked, setChecked] = useState(false)
+  const { privacyPolicyCookieSet, handleAccept } = usePrivacyModal()
 
   //Disable backdropClick so the Modal only closes via the buttons
-  const handleClose = (_: React.MouseEvent<HTMLElement>, reason: string) => {
+  const handleClose = useCallback((_: React.MouseEvent<HTMLElement>, reason: string) => {
     if (reason && reason == 'backdropClick') return
-  }
+  }, [])
 
   //setting the check so the button gets enabled
-  const handleChecked = (event: React.MouseEvent<HTMLElement>) => {
-    setCheck((event.target as HTMLInputElement).checked)
-  }
+  const handleChecked = useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      setChecked((event.target as HTMLInputElement).checked)
+    },
+    [setChecked]
+  )
 
   //close the modal and set the cookie in the hook
-  const handleModal = (cookieAccepted: boolean) => {
-    onAcceptHandler(cookieAccepted)
-    setOpen(false)
-  }
+  const handleModal = useCallback(
+    (cookieAccepted: boolean) => {
+      handleAccept(cookieAccepted)
+      setOpen(false)
+    },
+    [handleAccept, setOpen]
+  )
 
   //load nothing if cookie is set
   if (privacyPolicyCookieSet) return null

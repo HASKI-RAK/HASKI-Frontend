@@ -712,6 +712,6 @@
   "agree": "Agree",
   "components.PrivacyModal.afterReading": "After reading please accept:",
   "components.PrivacyModal.termsOfService": "Terms of service and privacy policy",
-  "components.PrivacyModal.accepted": "Thank you for your trust. Data for better learning experience is now being collected.",
+  "components.PrivacyModal.accepted": "Thank you for your trust. Data to improve your learning experience is now being collected.",
   "components.PrivacyModal.declined": "Data will not be collected. Should you change your mind look in the settings."
 }
