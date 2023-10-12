@@ -48,7 +48,11 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
     [addSnackbar, setCookie]
   )
   const privacyPolicyCookieSet = cookies['privacy_accept_token'] != null
-  return useMemo(() => {
-    privacyPolicyCookieSet, handleAccept
-  }, [privacyPolicyCookieSet, handleAccept])
+  return useMemo(
+    () => ({
+      privacyPolicyCookieSet,
+      handleAccept
+    }),
+    [privacyPolicyCookieSet, handleAccept]
+  )
 }

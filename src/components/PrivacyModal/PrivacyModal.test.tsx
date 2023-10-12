@@ -16,23 +16,34 @@ jest.mock('react-cookie', () => ({
 }))
 
 describe('Test PrivacyModal', () => {
-
   test('backdrop click', () => {
-    const form = render(<PrivacyModal />)
+    const form = render(
+      <MemoryRouter>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
     const backdrop = form.getByRole('presentation').children[0]
     fireEvent.click(backdrop)
     expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
   test('click the link', () => {
-    const form = render(<PrivacyModal/>)
-    const link = form.getByRole('button',{name:/pages.PrivacyPolicy/i})
+    const form = render(
+      <MemoryRouter>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
+    const link = form.getByRole('button', { name: /pages.PrivacyPolicy/i })
     fireEvent.click(link)
     expect(navigate).toHaveBeenCalledWith('/privacypolicy')
   })
 
   test('accept the PrivacyPolicy', () => {
-    const new_form = render(<PrivacyModal />)
+    const new_form = render(
+      <MemoryRouter>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
     const checkBox = new_form.getByRole('checkbox', { name: /agree pages.PrivacyPolicy/i })
     fireEvent.click(checkBox)
     expect(checkBox).toBeChecked()
@@ -43,36 +54,35 @@ describe('Test PrivacyModal', () => {
   })
 
   test('decline the PrivacyPolicy', () => {
-    const form = render(<PrivacyModal />)
+    const form = render(
+      <MemoryRouter>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
     const declineButton = form.getByRole('button', { name: /Decline/i })
     fireEvent.click(declineButton)
     expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
   test('Modal does not render if on url', () => {
-    const form = render(<MemoryRouter initialEntries={['/privacypolicy']}>
-      <PrivacyModal/>
-    </MemoryRouter>)
-    /*window = Object.create(window)
-    const url = 'http://localhost:8080/privacypolicy'
-    Object.defineProperty(window, 'location', {
-      value: {
-        href: url
-      },
-      writable: true // possibility to override
-    })
-    
-    expect(window.location.href).toEqual(url)
-    const form = render(<PrivacyModal />)*/
+    const form = render(
+      <MemoryRouter initialEntries={['/privacypolicy']}>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
     expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
-  
+
   test('Modal does not render if cookie is set', () => {
     Object.defineProperty(window.document, 'cookie', {
       writable: true,
       value: 'privacy_accept_token = true'
     })
-    const form = render(<PrivacyModal />)
+    const form = render(
+      <MemoryRouter>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
     expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 })
