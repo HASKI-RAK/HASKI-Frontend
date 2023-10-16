@@ -1,3 +1,4 @@
+//Tests fail with shortened Path
 import { getLearningPathElement } from './getLearningPathElement'
 
 global.fetch = jest.fn(() =>
