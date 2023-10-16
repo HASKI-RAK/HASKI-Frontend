@@ -2,7 +2,7 @@ import { Modal, Typography, Box, Button, Link, FormGroup, FormControlLabel, Chec
 import { usePrivacyModal as _usePrivacyModal, PrivacyModalHookReturn } from './PrivacyModal.hooks'
 import { useTranslation } from 'react-i18next'
 import { useState, memo, useCallback } from 'react'
-import { Router, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const style = {
   position: 'absolute',
@@ -44,7 +44,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   const navigate = useNavigate()
   const [open, setOpen] = useState(true)
   const [checked, setChecked] = useState(false)
-  const { privacyPolicyCookieSet, handleAccept } = usePrivacyModal()
+  const { privacyPolicyCookie, handleAccept } = usePrivacyModal()
   const currentLocation = useLocation()
 
   //Disable backdropClick so the Modal only closes via the buttons
@@ -69,10 +69,8 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
     [handleAccept, setOpen]
   )
 
-  //load meme if cookie is false
-
   //load nothing if cookie is true or privacypolicy page is loaded
-  if (privacyPolicyCookieSet || currentLocation.pathname.includes('privacypolicy')) return null
+  if (privacyPolicyCookie || currentLocation.pathname.includes('privacypolicy')) return null
 
   return (
     <Modal

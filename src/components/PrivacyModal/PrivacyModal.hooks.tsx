@@ -10,7 +10,7 @@ import { useCookies } from 'react-cookie'
  */
 
 export type PrivacyModalHookReturn = {
-  readonly privacyPolicyCookieSet: boolean
+  readonly privacyPolicyCookie: boolean
   readonly handleAccept: (isAccepted: boolean) => void
 }
 
@@ -47,12 +47,12 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
     },
     [addSnackbar, setCookie]
   )
-  const privacyPolicyCookieSet = cookies['privacy_accept_token'] != null
+  const privacyPolicyCookie = cookies['privacy_accept_token'] != null
   return useMemo(
     () => ({
-      privacyPolicyCookieSet,
+      privacyPolicyCookie,
       handleAccept
     }),
-    [privacyPolicyCookieSet, handleAccept]
+    [privacyPolicyCookie, handleAccept]
   )
 }
