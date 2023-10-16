@@ -219,7 +219,6 @@ export const TableILSQuestions = memo(
       [setQuestionnaireAnswers]
     )
 
-
     return (
       <Box>
         <Stack direction="column" justifyContent="space-around" alignItems="center">

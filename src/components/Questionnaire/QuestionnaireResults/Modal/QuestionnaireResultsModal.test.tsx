@@ -1,9 +1,12 @@
 import '@testing-library/jest-dom'
 import { QuestionnaireResultsModal } from '@components'
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { fireEvent, getByTestId, render, waitFor } from '@testing-library/react'
 import * as React from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
+import log from 'loglevel'
+
+jest.mock('loglevel') // Mock the loglevel library
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -23,6 +26,11 @@ jest.mock('react-i18next', () => ({
 }))
 
 describe('Test ResultDescriptionListK with all Methods', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+    jest.restoreAllMocks()
+  })
+
   test('Modal does not open with optional props', async () => {
     const { queryByTestId } = render(<QuestionnaireResultsModal />)
 
@@ -41,30 +49,19 @@ describe('Test ResultDescriptionListK with all Methods', () => {
   })
 
   test('Modal without ILS data', async () => {
-    const { getByText } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <QuestionnaireResultsModal open={true} handleClose={() => false} />
       </MemoryRouter>
     )
 
-    expect(
-      getByText(
-        'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1' +
-          ' ' +
-          'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2'
-      )
-    ).toBeInTheDocument()
-    expect(
-      getByText(
-        'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1' +
-          ' ' +
-          'components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2'
-      )
-    ).toBeInTheDocument()
+    expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
+    expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
+    expect(getByTestId('SkeletonList Element-2')).toBeInTheDocument()
   })
 
   test('Modal without ListK data', async () => {
-    const { getByTestId, getByText } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <QuestionnaireResultsModal open={true} handleClose={() => false} />
       </MemoryRouter>
@@ -72,13 +69,9 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     fireEvent.click(getByTestId('nextButton'))
 
-    expect(
-      getByText(
-        'components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK' +
-          ' ' +
-          'components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2'
-      )
-    ).toBeInTheDocument()
+    expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
+    expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
+    expect(getByTestId('SkeletonList Element-2')).toBeInTheDocument()
   })
 
   test('Active Step ILS is shown, when ils data is given', async () => {
@@ -175,46 +168,66 @@ describe('Test ResultDescriptionListK with all Methods', () => {
   test('fetching ils data returns error', async () => {
     const handleClose = jest.fn()
     mockServices.getILS.mockImplementationOnce(() => {
-      throw new Error('Error')
+      throw new Error('Backend down')
     })
 
     jest.spyOn(console, 'error').mockImplementation(() => {
       return
     })
 
-    const { getByText } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <QuestionnaireResultsModal open={true} handleClose={handleClose} />
       </MemoryRouter>
     )
 
-    expect(
-      getByText(
-        'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1' +
-          ' ' +
-          'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2'
-      )
-    ).toBeInTheDocument()
-    expect(
-      getByText(
-        'components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1' +
-          ' ' +
-          'components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2'
-      )
-    ).toBeInTheDocument()
+    expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
+    expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
+    expect(getByTestId('SkeletonList Element-2')).toBeInTheDocument()
   })
 
-  test('fetching listk data returns error', async () => {
+  test('fetching ils data failed returns snackbar', async () => {
+    const handleClose = jest.fn()
+    mockServices.getILS.mockImplementationOnce(async () => {
+      throw new Error('id not found')
+    })
+
+    const { getByText, queryByTestId } = render(
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={handleClose} activeStepForTesting={1} />
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults'))
+      expect(queryByTestId('SkeletonList Element-0')).toBeFalsy()
+    })
+  })
+
+  test('fetching ils data failed to fetch, returns loading', async () => {
+    const handleClose = jest.fn()
+    mockServices.getILS.mockImplementationOnce(async () => {
+      throw new Error('Failed to fetch')
+    })
+
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+      </MemoryRouter>
+    )
+
+    expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
+    expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
+    expect(getByTestId('SkeletonList Element-2')).toBeInTheDocument()
+  })
+
+  test('fetching user on ListK step failed to fetch, returns loading', async () => {
     const handleClose = jest.fn()
     mockServices.getListK.mockImplementationOnce(() => {
-      throw new Error('Error')
+      throw new Error('Failed to fetch')
     })
 
-    jest.spyOn(console, 'error').mockImplementation(() => {
-      return
-    })
-
-    const { getByText } = render(
+    const { getByText, getByTestId } = render(
       <MemoryRouter>
         <QuestionnaireResultsModal open={true} handleClose={handleClose} />
       </MemoryRouter>
@@ -222,13 +235,47 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     await waitFor(() => {
       fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
-      expect(
-        getByText(
-          'components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK' +
-            ' ' +
-            'components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2'
-        )
-      ).toBeInTheDocument()
+      expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
+      expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
+      expect(getByTestId('SkeletonList Element-2')).toBeInTheDocument()
+    })
+  })
+
+  test('fetching listk data failed returns snackbar', async () => {
+    const handleClose = jest.fn()
+    mockServices.getListK.mockImplementationOnce(async () => {
+      throw new Error('id not found')
+    })
+
+    const { getByText, queryByTestId } = render(
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
+      expect(queryByTestId('SkeletonList Element-0')).toBeFalsy()
+    })
+  })
+
+  test('fetching listk data failed to fetch, returns loading', async () => {
+    const handleClose = jest.fn()
+    mockServices.getListK.mockImplementationOnce(async () => {
+      throw new Error('Failed to fetch')
+    })
+
+    const { getByText, getByTestId } = render(
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
+      expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
+      expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
+      expect(getByTestId('SkeletonList Element-2')).toBeInTheDocument()
     })
   })
 

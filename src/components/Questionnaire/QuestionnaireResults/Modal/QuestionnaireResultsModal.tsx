@@ -3,7 +3,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Modal, Stepper, Step, StepButton, IconButton, Stack, Typography } from '@common/components'
 import { ListItem } from '@mui/material'
-import { usePersistedStore, useStore } from '@store'
+import { usePersistedStore } from '@store'
 import { ILS, ListK } from '@core'
 import log from 'loglevel'
 
@@ -14,7 +14,8 @@ import ResultDescriptionILS from '../Text/ResultDescriptionILS'
 import ResultDescriptionListK from '../Text/ResultDescriptionListK'
 import GraphILS from '../Graph/GraphILS'
 import TableILS from '../Table/TableILS'
-import { SnackbarContext } from '@services'
+import { getILS, getListK, SnackbarContext } from '@services'
+import { SkeletonList } from '../../../index'
 
 const styleButtonClose = {
   position: 'sticky',
@@ -36,9 +37,9 @@ const QuestionnaireResultsModal = ({
 }: QuestionnaireResultsModalProps) => {
   const { t } = useTranslation()
   const fetchUser = usePersistedStore((state) => state.fetchUser)
-  const fetchILS = useStore((state) => state.fetchILS)
-  const fetchListK = useStore((state) => state.fetchListK)
   const { addSnackbar } = useContext(SnackbarContext)
+  const [ilsLoading, setILSLoading] = useState(true)
+  const [listkLoading, setListKLoading] = useState(true)
 
   const steps = [
     t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults'),
@@ -50,39 +51,64 @@ const QuestionnaireResultsModal = ({
   const [listkData, setListKData] = useState<ListK | undefined>(undefined) // Initialize with null
 
   useEffect(() => {
-    fetchUser()
-      .then((user) => {
-        fetchILS(user.settings.user_id, user.lms_user_id, user.id)
-          .then((data) => {
-            setILSData(data)
-          })
-          .catch((error) => {
-            log.error(error)
-            addSnackbar({
-              message: t('ILS fetching error'),
-              severity: 'error'
+    if (activeStep === 1 && open === true) {
+      fetchUser()
+        .then((user) => {
+          return getListK(user.settings.user_id, user.lms_user_id, user.id)
+            .then((data) => {
+              setListKData(data)
             })
-          })
-        fetchListK(user.settings.user_id, user.lms_user_id, user.id)
-          .then((data) => {
-            setListKData(data)
-          })
-          .catch((error) => {
-            log.error(error)
-            addSnackbar({
-              message: t('ListK fetching error'),
-              severity: 'error'
+            .catch((error) => {
+              log.error(error)
+              if (error.message !== 'Failed to fetch') {
+                setListKLoading(false)
+              } else {
+                addSnackbar({
+                  message: t('ListK fetching error'),
+                  severity: 'error'
+                })
+              }
             })
-          })
-      })
-      .catch((error) => {
-        log.error(error)
-        addSnackbar({
-          message: t('User fetching error'),
-          severity: 'error'
         })
-      })
-  }, [])
+        .catch((error) => {
+          log.error(error)
+          addSnackbar({
+            message: t('User fetching error'),
+            severity: 'error'
+          })
+        })
+    }
+  }, [activeStep, open])
+
+  useEffect(() => {
+    if (activeStep === 0 && open === true) {
+      fetchUser()
+        .then((user) => {
+          return getILS(user.settings.user_id, user.lms_user_id, user.id)
+            .then((data) => {
+              setILSData(data)
+            })
+            .catch((error) => {
+              log.error(error)
+              if (error.message !== 'Failed to fetch') {
+                setILSLoading(false)
+              } else {
+                addSnackbar({
+                  message: t('ILS fetching error'),
+                  severity: 'error'
+                })
+              }
+            })
+        })
+        .catch((error) => {
+          log.error(error)
+          addSnackbar({
+            message: t('User fetching error'),
+            severity: 'error'
+          })
+        })
+    }
+  }, [activeStep, open])
 
   const handleBack = () => {
     setActiveStep(activeStep - 1)
@@ -155,29 +181,49 @@ const QuestionnaireResultsModal = ({
               <ResultDescriptionListK data={listkData} />
             </Stack>
           ) : activeStep === 0 ? (
-            <Stack alignItems="center">
-              <Typography variant="body2" data-testid={'ActiveStepILSNoData'}>
-                {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
-                <ListItem sx={{ display: 'list-item' }}>
-                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')}{' '}
-                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2')}
-                </ListItem>
-                <ListItem sx={{ display: 'list-item' }}>
-                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')}{' '}
-                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
-                </ListItem>
-              </Typography>
-            </Stack>
+            <>
+              {ilsLoading ? (
+                <Box>
+                  <Stack spacing={1}>
+                    <SkeletonList />
+                  </Stack>
+                </Box>
+              ) : (
+                <>
+                  <Stack alignItems="center">
+                    <Typography variant="body2" data-testid={'ActiveStepILSNoData'}>
+                      {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
+                      <ListItem sx={{ display: 'list-item' }}>
+                        {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')}{' '}
+                        {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+                      </ListItem>
+                    </Typography>
+                  </Stack>
+                </>
+              )}
+            </>
           ) : activeStep === 1 ? (
-            <Stack alignItems="center">
-              <Typography variant="body2" data-testid={'ActiveStepListKNoData'}>
-                {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
-                <ListItem sx={{ display: 'list-item' }}>
-                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}{' '}
-                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
-                </ListItem>
-              </Typography>
-            </Stack>
+            <>
+              {listkLoading ? (
+                <Box>
+                  <Stack spacing={1}>
+                    <SkeletonList />
+                  </Stack>
+                </Box>
+              ) : (
+                <>
+                  <Stack alignItems="center">
+                    <Typography variant="body2" data-testid={'ActiveStepListKNoData'}>
+                      {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
+                      <ListItem sx={{ display: 'list-item' }}>
+                        {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}{' '}
+                        {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+                      </ListItem>
+                    </Typography>
+                  </Stack>
+                </>
+              )}
+            </>
           ) : null}
           <Stack direction="row" justifyContent="space-between" alignItems="center" m={2}>
             <Button

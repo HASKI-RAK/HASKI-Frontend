@@ -72,7 +72,7 @@ describe('MenuBar', () => {
         fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
       }
     }
-  })
+  }, 20000)
 
   // If only the describe runs, the test passes without problems. Running all tests in jest, this test times out.
   // Adding a bigger timeout solved the problem
