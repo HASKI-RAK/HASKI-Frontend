@@ -149,7 +149,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
               variant="contained"
               color="primary"
               sx={{ alignSelf: 'end', marginTop: '0.6rem' }}
-              onClick={handleSubmit}>
+              handleClick={handleSubmit}>
               {t('components.ContactForm.submit')}
             </Button>
           </FormControl>

@@ -183,7 +183,7 @@ const QuestionnaireResultsModal = ({
             <Button
               variant="contained"
               color="primary"
-              onClick={handleBack}
+              handleClick={handleBack}
               data-testid="backButton"
               disabled={activeStep === 0}>
               {t('Back')}
@@ -191,7 +191,7 @@ const QuestionnaireResultsModal = ({
             <Button
               variant="contained"
               color="primary"
-              onClick={handleNext}
+              handleClick={handleNext}
               data-testid="nextButton"
               disabled={activeStep === 1}>
               {t('Next')}

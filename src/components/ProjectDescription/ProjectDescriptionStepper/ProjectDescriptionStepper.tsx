@@ -116,13 +116,16 @@ const ProjectDescriptionStepper = ({
               border: 0
             }}
             nextButton={
-              <Button size="small" onClick={handleNext} disabled={activeStep === (props.body && props.body.length - 1)}>
+              <Button
+                size="small"
+                handleClick={handleNext}
+                disabled={activeStep === (props.body && props.body.length - 1)}>
                 {t('Next')}
                 <KeyboardArrowRight />
               </Button>
             }
             backButton={
-              <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+              <Button size="small" handleClick={handleBack} disabled={activeStep === 0}>
                 <KeyboardArrowLeft />
                 {t('Back')}
               </Button>

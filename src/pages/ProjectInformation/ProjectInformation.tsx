@@ -17,12 +17,18 @@ export const ProjectInformation = () => {
   return (
     <>
       <Box>
-        <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/projectdescription')}>
+        <Button
+          sx={{ mt: '2rem', color: 'black' }}
+          handleClick={() => navigate('/projectinformation/projectdescription')}
+          href="#project-description-button">
           <Typography>{t('pages.projectdescription')}</Typography>
         </Button>
       </Box>
       <Box>
-        <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/glossary')}>
+        <Button
+          id="glossary-button"
+          sx={{ mt: '2rem', color: 'black' }}
+          handleClick={() => navigate('/projectinformation/glossary')}>
           <Typography>{t('pages.glossary')}</Typography>
         </Button>
       </Box>
@@ -32,3 +38,5 @@ export const ProjectInformation = () => {
 }
 
 export default ProjectInformation
+
+// Scroll to section via href?

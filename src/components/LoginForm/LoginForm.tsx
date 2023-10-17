@@ -128,7 +128,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
                 )
               }}
             />
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
+            <Button variant="contained" color="primary" handleClick={handleSubmit}>
               {t('components.Login.login')}
             </Button>
             {moodleLogin && (
@@ -147,7 +147,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
                   </Divider>
                 </Grid>
                 <Grid item display="flex" justifyContent="center" md={6}>
-                  <Button onClick={onMoodleLogin} data-testid="moodle-login-button">
+                  <Button handleClick={onMoodleLogin} data-testid="moodle-login-button">
                     <img src="/LogoMoodle.png" alt="Moodle" style={{ width: '100px' }} />
                   </Button>
                 </Grid>

@@ -92,7 +92,7 @@ export const Home = () => {
                       <Button
                         variant="contained"
                         color="primary"
-                        onClick={() => {
+                        handleClick={() => {
                           navigate('/course/' + course.id)
                         }}>
                         {t('components.Home.Button.Course')}

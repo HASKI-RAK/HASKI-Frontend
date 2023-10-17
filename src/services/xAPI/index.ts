@@ -1,2 +1,8 @@
 export { default as xAPI } from './xAPI.setup'
 export * from './xAPI.statements'
+export * from './getStatement'
+export * from './sendStatement'
+export * from './getActor'
+export * from './getVerb'
+export * from './getObject'
+export * from './getContext'

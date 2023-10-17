@@ -211,7 +211,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   <Button
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
-                    onClick={handleOpenTopicsMenu}
+                    handleClick={handleOpenTopicsMenu}
                     data-testid="Menubar-TopicButton"
                     color="inherit"
                     endIcon={

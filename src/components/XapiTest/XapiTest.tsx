@@ -2,23 +2,10 @@
 // services / xAPI / xAPI.setup.ts
 // services / xAPI / xAPI.statements.ts
 
-import { xAPI, myStatement2, sendMyStatement } from '@services'
+import { xAPI, myStatement2, sendMyStatement, sendOnClickStatement, getOnClickStatement } from '@services'
 import { Button } from '@mui/material'
 import { postStatement } from './postStatement'
-
-// sendStatement eventuell auch noch auslagern
-const handleClick = () => {
-  xAPI
-    .sendStatement({
-      statement: myStatement2
-    })
-    .then((response: any) => {
-      console.log(response)
-    })
-    .catch((error: any) => {
-      console.log(error)
-    })
-}
+import { get } from 'http'
 
 const handleClick2 = async () => {
   postStatement({ statement: myStatement2 })
@@ -29,11 +16,21 @@ const handleClick2 = async () => {
       console.log(error)
     })
 }
-
+// <Button onClick={() => sendMyStatement('Harald Töpfer')}>Send statement</Button>
 const XapiTest = () => {
+  // sendStatement eventuell auch noch auslagern
+  const handleClick = async (s: string) => {
+    await sendOnClickStatement(s)
+  }
+
   return (
     <>
-      <Button onClick={() => sendMyStatement('Harald Töpfer')}>Send statement</Button>
+      <Button
+        href={'#test-button'}
+        // document.getElementById('button')[2]!.getAttribute('href')!
+        onClick={() => handleClick('test')}>
+        Send statement
+      </Button>
     </>
   )
 }
