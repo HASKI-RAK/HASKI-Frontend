@@ -32,7 +32,7 @@ export const MemoTableRowQuestion = memo(({ question }: { question: string }) =>
         align="left"
         sx={{
           backgroundColor: (theme) => theme.palette.primary.dark,
-          color: (theme) => theme.palette.secondary.main
+          color: (theme) => theme.palette.secondary.contrastText
         }}>
         <Typography variant={'h5'}>{question}</Typography>
       </TableCell>

@@ -90,9 +90,9 @@ type TableILSProps = {
 const TableILS = ({ data }: TableILSProps) => {
   const { t } = useTranslation()
 
-  const dimensionOneScore = data.input_value
+  const dimensionOneScore = data.processing_value
   const dimensionTwoScore = data.perception_value
-  const dimensionThreeScore = data.processing_value
+  const dimensionThreeScore = data.input_value
   const dimensionFourScore = data.understanding_value
 
   const rows = [
