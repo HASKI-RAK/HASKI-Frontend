@@ -1,6 +1,6 @@
 /**
  * Reusable service calls go here.
- * Dont forget to mock them in jest.setup.ts
+ * ! Dont forget to mock them in jest.setup.ts
  */
 export { AuthContext } from './AuthContext'
 export type { AuthContextType } from './AuthContext'
@@ -15,3 +15,4 @@ export type { SnackbarContextType } from './SnackbarContext'
 export { SnackbarProvider } from './SnackbarProvider'
 export { useNetworkStatus } from './connection'
 export { getCourses } from './Courses'
+export { getILS, getListK, postILS, postListK } from './Questionnaire'

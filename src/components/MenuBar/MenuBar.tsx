@@ -18,14 +18,27 @@ import {
   Link
 } from '@common/components'
 
-import { Settings, Help, ArrowDropDown, Person, Login, Logout } from '@common/icons'
+import {
+  Analytics,
+  Settings,
+  Help,
+  ArrowDropDown,
+  Person,
+  Login,
+  Logout,
+  AssignmentOutlined,
+  LibraryBooksOutlined,
+  PlaylistAddCheckCircleOutlined
+} from '@common/icons'
 
 import { useTranslation } from 'react-i18next'
 import { AuthContext, SnackbarContext } from '@services'
-import { DropdownLanguage, SkeletonList } from '@components'
+import { DropdownLanguage, SkeletonList, QuestionnaireQuestionsModal, QuestionnaireResultsModal } from '@components'
 import { usePersistedStore, useStore } from '@store'
 import { Topic } from '@core'
 import log from 'loglevel'
+import { TableILSQuestions } from '../Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions'
+import { TableListKQuestions } from '../Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions'
 
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
@@ -61,6 +74,53 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const [topicsPath, setTopicsPath] = useState<Topic[]>([])
   const fetchUser = usePersistedStore((state) => state.fetchUser)
   const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
+  const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
+  const [modalOpenListK, setModalOpenListK] = useState(false)
+  const [successSendILSLong, setSuccessSendILSLong] = useState(false)
+  const [successSendILSShort, setSuccessSendILSShort] = useState(false)
+  const [successSendListK, setSuccessSendListK] = useState(false)
+
+  const handleOpenILSShortModal = () => {
+    setModalOpenILSShort(true)
+    setAnchorElUser(null)
+  }
+
+  const handleCloseILSShortModal = (event: object, reason: string) => {
+    if (!successSendILSShort) {
+      if (reason == 'backdropClick')
+        if (window.confirm(t('components.Menubar.CloseDialog'))) setModalOpenILSShort(false)
+    } else {
+      setModalOpenILSShort(false)
+    }
+  }
+
+  const handleOpenILSLongModal = () => {
+    setModalOpenILSLong(true)
+    setAnchorElUser(null)
+  }
+
+  const handleCloseILSLongModal = (event: object, reason: string) => {
+    if (!successSendILSLong) {
+      if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.CloseDialog'))) setModalOpenILSLong(false)
+    } else {
+      setModalOpenILSLong(false)
+    }
+  }
+
+  const handleOpenListKModal = () => {
+    setModalOpenListK(true)
+    setAnchorElUser(null)
+  }
+
+  const handleCloseListKModal = (event: object, reason: string) => {
+    if (!successSendListK) {
+      if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.CloseDialog'))) setModalOpenListK(false)
+    } else {
+      setModalOpenListK(false)
+    }
+  }
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -72,32 +132,22 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleOpenTopicsMenu = async (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElTopics(event.currentTarget)
-    fetchUser()
-      .then((user) => {
-        fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
-          .then((TopicResponse) => {
-            setTopicsPath(TopicResponse.topics)
-            setLoadingTopics(false)
-          })
-          .catch((error) => {
-            // 🍿 snackbar error
-            addSnackbar({
-              message: error.message,
-              severity: 'error',
-              autoHideDuration: 5000
-            })
-            log.error(error.message)
-          })
-      })
-      .catch((error) => {
-        // 🍿 snackbar error
-        addSnackbar({
-          message: error.message,
-          severity: 'error',
-          autoHideDuration: 5000
+    fetchUser().then((user) => {
+      fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
+        .then((TopicResponse) => {
+          setTopicsPath(TopicResponse.topics)
+          setLoadingTopics(false)
         })
-        log.error(error.message)
-      })
+        .catch((error) => {
+          // 🍿 snackbar error
+          addSnackbar({
+            message: error.message,
+            severity: 'error',
+            autoHideDuration: 5000
+          })
+          log.error(error.message)
+        })
+    })
   }
 
   const handleCloseTopicsMenu = () => {
@@ -236,9 +286,17 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
           {/** Language dropdown */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('language')}>
-              <DropdownLanguage />
+            <DropdownLanguage />
+          </Box>
+
+          {/** Questionnaire Results */}
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
+            <Tooltip title={t('tooltip.openQuestionnaireResults')}>
+              <IconButton onClick={() => setModalOpen(true)}>
+                <Analytics data-testid="QuestionnaireResultsIcon" />
+              </IconButton>
             </Tooltip>
+            <QuestionnaireResultsModal open={modalOpen} handleClose={() => setModalOpen(false)} />
           </Box>
 
           {/** Help button */}
@@ -293,6 +351,46 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
+              <MenuItem data-testid="questionnaireILS" key="questionnaireILS" onClick={() => handleOpenILSLongModal()}>
+                <ListItemIcon>{isAuth && <LibraryBooksOutlined fontSize="small" />}</ListItemIcon>
+                <Typography textAlign="center">{isAuth && 'ILS Questionnaire'}</Typography>
+              </MenuItem>
+              <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
+                <TableILSQuestions
+                  ilsLong={true}
+                  successSend={successSendILSLong}
+                  setSuccessSend={setSuccessSendILSLong}
+                />
+              </QuestionnaireQuestionsModal>
+
+              <MenuItem
+                data-testid="questionnaireILSshort"
+                key="questionnaireILSshort"
+                onClick={() => {
+                  handleOpenILSShortModal()
+                }}>
+                <ListItemIcon>{isAuth && <AssignmentOutlined fontSize="small" />}</ListItemIcon>
+                <Typography textAlign="center">{isAuth && 'ILS Questionnaire shortend'}</Typography>
+              </MenuItem>
+              <QuestionnaireQuestionsModal open={modalOpenILSShort} handleClose={handleCloseILSShortModal}>
+                <TableILSQuestions
+                  ilsLong={false}
+                  successSend={successSendILSShort}
+                  setSuccessSend={setSuccessSendILSShort}
+                />
+              </QuestionnaireQuestionsModal>
+
+              <MenuItem
+                data-testid="questionnaireListk"
+                key="questionnaireListk"
+                onClick={() => handleOpenListKModal()}>
+                <ListItemIcon>{isAuth && <PlaylistAddCheckCircleOutlined fontSize="small" />}</ListItemIcon>
+                <Typography textAlign="center">{isAuth && 'List-K Questionnaire'}</Typography>
+              </MenuItem>
+              <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>
+                <TableListKQuestions successSend={successSendListK} setSuccessSend={setSuccessSendListK} />
+              </QuestionnaireQuestionsModal>
+
               <MenuItem
                 data-testid="usermenuitem"
                 key="usermenuitem"

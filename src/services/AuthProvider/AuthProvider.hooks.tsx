@@ -36,6 +36,7 @@ const useAuthProvider = (): AuthContextType => {
         // Snackbar will be handled by the component which calls logout
       })
       .catch((error) => {
+        log.error('logout failed: ', error)
         throw new Error(error)
       })
   }, [])
