@@ -1,4 +1,14 @@
-import { Modal, Typography, Box, Button, Link, FormGroup, FormControlLabel, Checkbox } from '@common/components'
+import {
+  Modal,
+  Typography,
+  Box,
+  Button,
+  Link,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Tooltip
+} from '@common/components'
 import { usePrivacyModal as _usePrivacyModal, PrivacyModalHookReturn } from './PrivacyModal.hooks'
 import { useTranslation } from 'react-i18next'
 import { useState, memo, useCallback } from 'react'
@@ -33,6 +43,7 @@ export type PrivacyModalProps = {
  *
  * @remarks
  * PrivacyModal shows a Modal for the user to read and accept the PrivacyPolicy and other.
+ * A Formcontrol label can be added for other documents that need to be read by the user.
  * The PrivacyModal gets shown upon entering HASKI.
  * Gets rendered in App.
  *
@@ -69,7 +80,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
     [handleAccept, setOpen]
   )
 
-  //load nothing if cookie is true or privacypolicy page is loaded
+  //load nothing if cookie is set or privacypolicy page is loaded
   if (privacyPolicyCookie || currentLocation.pathname.includes('privacypolicy')) return null
 
   return (
@@ -82,7 +93,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
       <Box sx={style}>
         <Typography id="transition-modal-title" variant="h4" component="h2">
           {t('components.PrivacyModal.termsOfService')}
-          <Typography id="modal-text" variant="h6" component="h2">
+          <Typography id="modal-text" variant="subtitle1" component="h2">
             {t('components.PrivacyModal.afterReading')}
             <FormGroup>
               <FormControlLabel
@@ -104,7 +115,6 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                   </>
                 }
               />
-              <FormControlLabel control={<Checkbox />} label="Agree someting else" />
             </FormGroup>
           </Typography>
           <Box
@@ -113,9 +123,17 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
               display: 'flex',
               justifyContent: 'space-between'
             }}>
-            <Button variant={'contained'} sx={{ alignSelf: 'end' }} onClick={() => handleModal(false)}>
-              {t('decline')}
-            </Button>
+            <Tooltip title={t('components.PrivacyModal.returnToMoodle')}>
+              <Button
+                variant={'contained'}
+                sx={{ alignSelf: 'end' }}
+                aria-multiline={'true'}
+                onClick={() => {
+                  handleModal(false), navigate('https://moodle.hs-kempten.de/enrol/index.php?id=357')
+                }}>
+                {t('decline')}
+              </Button>
+            </Tooltip>
             <Button
               variant={'contained'}
               sx={{ alignSelf: 'end' }}

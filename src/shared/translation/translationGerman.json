@@ -678,8 +678,9 @@
   "accept": "Akzeptieren",
   "decline": "Ablehnen",
   "agree": "Zustimmen",
-  "components.PrivacyModal.afterReading": "Nach dem Lesen bitte akzeptieren:",
+  "components.PrivacyModal.returnToMoodle": "Dies wird Sie zu Moodle weiterleiten",
+  "components.PrivacyModal.afterReading": "HASKI verwendet essentielle Cookies. Mehr Informationen über die gesammelten Daten und deren Verwendung können in der privacy policy nachgelesen werden. Nach dem Lesen bitte akzeptieren:",
   "components.PrivacyModal.termsofService": "Datenschutzerklärung und ",
   "components.PrivacyModal.accepted": "Danke für Dein Vertrauen. Daten werden jetzt gesammelt, um Dir eine bessere Lernerfahrung zu bieten.",
-  "components.PrivacyModal.declined": "Daten werden nicht gesammelt. Solltest du deine Meinung ändern, sieh in den Einstellungen nach."
+  "components.PrivacyModal.declined": "Sie können HASKI nicht verwenden, ohne den essentiellen Cookies zuzustimmen."
 }

@@ -710,8 +710,9 @@
   "accept": "Accept",
   "decline": "Decline",
   "agree": "Agree",
-  "components.PrivacyModal.afterReading": "After reading please accept:",
+  "components.PrivacyModal.returnToMoodle": "This will return you to Moodle",
+  "components.PrivacyModal.afterReading": "HASKI is using essential cookies. Information about the data being collected and its usage can be found in the privacy policy. After reading please accept:",
   "components.PrivacyModal.termsOfService": "Terms of service and privacy policy",
   "components.PrivacyModal.accepted": "Thank you for your trust. Data to improve your learning experience is now being collected.",
-  "components.PrivacyModal.declined": "Data will not be collected. Should you change your mind look in the settings."
+  "components.PrivacyModal.declined": "You cannot access HASKI without accepting the essential cookies."
 }

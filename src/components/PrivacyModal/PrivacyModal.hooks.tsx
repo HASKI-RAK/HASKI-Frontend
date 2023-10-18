@@ -36,9 +36,10 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
           severity: 'success'
         })
       } else {
-        const tomorrow = new Date()
-        tomorrow.setDate(tomorrow.getDate() + 1)
-        setCookie('privacy_accept_token', false, { path: '/', expires: tomorrow })
+        //if decline should set a cookie with expiration uncomment
+        //const tomorrow = new Date()
+        //tomorrow.setDate(tomorrow.getDate() + 1)
+        //setCookie('privacy_accept_token', false, { path: '/', expires: tomorrow })
         addSnackbar({
           message: t('components.PrivacyModal.declined'),
           severity: 'warning'
