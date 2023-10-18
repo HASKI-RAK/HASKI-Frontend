@@ -56,7 +56,7 @@ export const Course = () => {
                     variant="contained"
                     data-testid={'Course-Card-Topic-' + topic.name}
                     color="primary"
-                    handleClick={() => {
+                    onClick={() => {
                       navigate('topic/' + topic.id)
                     }}>
                     {t('components.Course.Button.Topic')}

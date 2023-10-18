@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback, memo } from 'react'
+import { useRef, useEffect, useCallback, memo, ReactNode } from 'react'
 import { Divider, Fade, Grid, Typography } from '@common/components'
 import {
   useProjectDescriptionCard as _useProjectDescriptionCard,
@@ -15,7 +15,7 @@ import {
  */
 type ProjectDescriptionCardProps = {
   body?: string
-  children?: React.ReactNode
+  children?: ReactNode
   header?: string
   useProjectDescriptionCard?: (params?: useProjectDescriptionCardHookParams) => ProjectDescriptionCardHookReturn
 }

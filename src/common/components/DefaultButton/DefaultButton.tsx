@@ -1,36 +1,29 @@
-import DefaultButton, { ButtonProps } from '@mui/material/Button'
-export { StatementButton as Button }
-import { useLocation } from 'react-router-dom'
+import DefaultButton from '@mui/material/Button'
+import { ButtonProps as DefaultButtonProps } from '@common/components'
+import { MouseEvent, memo } from 'react'
+import { useStatement as _useStatement, useStatementHookParams, StatementHookReturn } from '@services'
 
-type CustomButtonProps = ButtonProps & {
-  handleClick?: Function
+type ButtonProps = DefaultButtonProps & {
+  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
-const getURL = (id: string) => {
-  return new URL(window.location.href).origin.concat(location.pathname).concat('#').concat(id)
-}
+const Button = ({ useStatement = _useStatement, children, onClick, ...props }: ButtonProps) => {
+  const { sendStatement, getClickedStatement } = useStatement({ defaultComponentID: props.id! })
 
-const StatementButton = ({ handleClick, children, ...props }: CustomButtonProps) => {
-  const location = useLocation()
+  const handleClick = (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    // Send statement on every button click
+    sendStatement()
 
-  const onClick = () => {
-    // You can perform your custom logic here
-    console.log('Custom logic executed')
-    console.log(getURL(props.id!)) // Mit if absichern ob id existiert sonst fehler?
-
-    // sendStatement
-
-    // You can also call the original onClick function if needed
-    if (handleClick) {
-      handleClick()
+    if (onClick) {
+      onClick(event)
     }
   }
 
   return (
-    <DefaultButton {...props} onClick={onClick}>
+    <DefaultButton onClick={handleClick} {...props}>
       {children}
     </DefaultButton>
   )
 }
 
-export default StatementButton
+export default memo(Button)

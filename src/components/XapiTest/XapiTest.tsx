@@ -25,10 +25,7 @@ const XapiTest = () => {
 
   return (
     <>
-      <Button
-        href={'#test-button'}
-        // document.getElementById('button')[2]!.getAttribute('href')!
-        onClick={() => handleClick('test')}>
+      <Button id={'test-button'} onClick={() => handleClick('test')}>
         Send statement
       </Button>
     </>

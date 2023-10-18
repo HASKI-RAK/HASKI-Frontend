@@ -1,11 +1,11 @@
-export const getButtonObject = (elementURL: string) => {
+export const getButtonObject = (elementURL: string, componentName?: string) => {
   return {
-    id: elementURL, // Complete Url + #href of clicked element (button) -> param
+    id: elementURL,
     definition: {
       name: {
-        en: 'Button' // hardcoded
+        en: 'Button' // hardcoded -> is it possible to get this automatically?
       },
-      type: 'http://vocab.xapi.fr/activities/assignment' // wiki url to component e.g. button (common) -> hardcoded
+      type: 'http://vocab.xapi.fr/activities/assignment' // wiki url to component e.g. button (common) -> hardcoded // wiki url + componentName.toLowerCase()
     }
   }
 }

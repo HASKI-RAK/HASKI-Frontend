@@ -19,7 +19,7 @@ export const ProjectInformation = () => {
       <Box>
         <Button
           sx={{ mt: '2rem', color: 'black' }}
-          handleClick={() => navigate('/projectinformation/projectdescription')}
+          onClick={() => navigate('/projectinformation/projectdescription')}
           href="#project-description-button">
           <Typography>{t('pages.projectdescription')}</Typography>
         </Button>
@@ -28,7 +28,7 @@ export const ProjectInformation = () => {
         <Button
           id="glossary-button"
           sx={{ mt: '2rem', color: 'black' }}
-          handleClick={() => navigate('/projectinformation/glossary')}>
+          onClick={() => navigate('/projectinformation/glossary')}>
           <Typography>{t('pages.glossary')}</Typography>
         </Button>
       </Box>
