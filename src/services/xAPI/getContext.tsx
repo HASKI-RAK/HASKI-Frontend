@@ -46,9 +46,11 @@ export const getContext = (language: string, domain: string, path: string) => {
     language: language,
     extensions: {
       'http://lrs.learninglocker.net/define/extensions/info': {
-        domain: 'v1.0.0-alpha',
-        'https://github.com/HASKI-RAK/HASKI-Frontend': '',
-        event_name: '\\mod_assign\\event\\assessable_submitted' // onClick -> hardcoded url + string aus component
+        // Wiki url with explanations to custom properties
+        domain: domain,
+        domain_version: 'v1.0.0-alpha',
+        github: 'https://github.com/HASKI-RAK/HASKI-Frontend',
+        event_function: '\\mod_assign\\event\\assessable_submitted' // software code path to component (not wiki) + string aus component, path to function aka button that holds function
       }
     },
     contextActivities: getContextActivities(path)

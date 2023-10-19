@@ -1,14 +1,23 @@
 import DefaultButton from '@mui/material/Button'
 import { ButtonProps as DefaultButtonProps } from '@common/components'
 import { MouseEvent, memo } from 'react'
-import { useStatement as _useStatement, useStatementHookParams, StatementHookReturn } from '@services'
+import {
+  StatementComponent,
+  useStatement as _useStatement,
+  useStatementHookParams,
+  StatementHookReturn
+} from '@services'
+import { elementType } from 'prop-types'
 
 type ButtonProps = DefaultButtonProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
 const Button = ({ useStatement = _useStatement, children, onClick, ...props }: ButtonProps) => {
-  const { sendStatement, getClickedStatement } = useStatement({ defaultComponentID: props.id! })
+  const { sendStatement } = useStatement({
+    defaultComponentID: props.id!,
+    defaultComponent: StatementComponent.Button
+  })
 
   const handleClick = (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     // Send statement on every button click

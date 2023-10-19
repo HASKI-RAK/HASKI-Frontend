@@ -3,7 +3,6 @@ import xAPI from './xAPI.setup'
 import { getUser } from '../auth'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
-import { getOnClickStatement } from './getStatement'
 
 const id = getUser()
   .then((user) => {

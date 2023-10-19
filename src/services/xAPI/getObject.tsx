@@ -1,11 +1,14 @@
-export const getButtonObject = (elementURL: string, componentName?: string) => {
+// const object: Record<JSX.Elemen, string> = {}
+import { StatementComponent } from './Statement.hooks'
+
+export const getButtonObject = (elementURL: string, statementComponent: StatementComponent) => {
   return {
-    id: elementURL,
+    id: new URL(window.location.href).origin.concat(elementURL),
     definition: {
       name: {
-        en: 'Button' // hardcoded -> is it possible to get this automatically?
+        en: StatementComponent[statementComponent]
       },
-      type: 'http://vocab.xapi.fr/activities/assignment' // wiki url to component e.g. button (common) -> hardcoded // wiki url + componentName.toLowerCase()
+      type: 'http://vocab.xapi.fr/activities/'.concat(StatementComponent[statementComponent].toLowerCase()) // wiki url to component e.g. button (common) -> hardcoded // wiki url + componentName.toLowerCase()
     }
   }
 }
