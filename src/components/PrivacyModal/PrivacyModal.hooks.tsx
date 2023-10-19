@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie'
 
 /**
  * @prop privacyPolicyCookieSet - Currently set cookie
- * @function handleAccept - sets the cookie and displays a Snackbar
+ * @prop handleAccept - sets the cookie and displays a Snackbar
  * @category Hooks
  */
 

@@ -101,7 +101,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                 control={<Checkbox />}
                 label={
                   <>
-                    {t('agree')}&nbsp;
+                    {t('components.PrivacyModal.readPrivacypolicy')}&nbsp;
                     <Link
                       marginX="0.2em"
                       component="button"
@@ -112,6 +112,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                       onClick={() => navigate('/privacypolicy')}>
                       {t('pages.PrivacyPolicy')}
                     </Link>
+                    {t('components.PrivacyModal.readPrivacypolicy2')}
                   </>
                 }
               />
@@ -129,7 +130,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                 sx={{ alignSelf: 'end' }}
                 aria-multiline={'true'}
                 onClick={() => {
-                  handleModal(false), navigate('https://moodle.hs-kempten.de/enrol/index.php?id=357')
+                  handleModal(false), (window.location.href = 'https://moodle.hs-kempten.de/enrol/index.php?id=357')
                 }}>
                 {t('decline')}
               </Button>
