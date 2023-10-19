@@ -44,7 +44,9 @@ describe('Test PrivacyModal', () => {
         <PrivacyModal />
       </MemoryRouter>
     )
-    const checkBox = new_form.getByRole('checkbox', { name: /agree pages.PrivacyPolicy/i })
+    const checkBox = new_form.getByRole('checkbox', {
+      name: /components.PrivacyModal.readPrivacypolicy pages.PrivacyPolicy/i
+    })
     fireEvent.click(checkBox)
     expect(checkBox).toBeChecked()
     const acceptButton = new_form.getByRole('button', { name: /Accept/i })
@@ -59,7 +61,7 @@ describe('Test PrivacyModal', () => {
         <PrivacyModal />
       </MemoryRouter>
     )
-    const declineButton = form.getByRole('button', { name: /Decline/i })
+    const declineButton = form.getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
     fireEvent.click(declineButton)
     expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
