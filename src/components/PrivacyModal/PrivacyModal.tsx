@@ -130,7 +130,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                 sx={{ alignSelf: 'end' }}
                 aria-multiline={'true'}
                 onClick={() => {
-                  handleModal(false), window.location.assign('https://moodle.hs-kempten.de/enrol/index.php?id=357')
+                  handleModal(false), (window.location.href = 'https://moodle.hs-kempten.de/enrol/index.php?id=357')
                 }}>
                 {t('decline')}
               </Button>
