@@ -1,14 +1,11 @@
-// ! componentName : String, pathToParent?: string, pathToGrouping?: string
-
-const getParent = () => {
+const getParent = (path: string, getEnglishName: (identifier: string) => string) => {
   return [
-    // optional
     {
-      id: 'http://localhost:8080/projectinformation', // link to current page
+      id: new URL(window.location.href).origin.concat(path),
       definition: {
-        type: 'http://id.tincanapi.com/activitytype/lms/course', // Wiki link to page -> kann zusammengestellt werden?
+        type: 'https://wiki.haski.app/pages/'.concat(path.split('/').pop() ?? ''),
         name: {
-          en: 'Project Information' // Current Page Title
+          en: getEnglishName(path.split('/').pop() ?? '')
         }
       }
     }
@@ -17,12 +14,10 @@ const getParent = () => {
 
 const getGrouping = () => {
   return [
-    // Da, wenn parent nicht home und current page nicht home
-    // optional
     {
-      id: 'http://localhost:8080', // Homepage
+      id: new URL(window.location.href).origin,
       definition: {
-        type: 'http://id.tincanapi.com/activitytype/lms/course', // Wiki link to page
+        type: 'https://wiki.haski.app/pages/home',
         name: {
           en: 'Home'
         }
@@ -31,28 +26,33 @@ const getGrouping = () => {
   ]
 }
 
-const getContextActivities = (path: string, pathToParent?: string, pathToGrouping?: string) => {
-  // path to parent component is not home
-
-  return {
-    parent: getParent(),
-    grouping: getGrouping()
+const getContextActivities = (path: string, getEnglishName: (identifier: string) => string) => {
+  if (path === '/') {
+    return {}
+  } else if (path.split('/').length === 2) {
+    return {
+      parent: getParent(path, getEnglishName)
+    }
+  } else {
+    return {
+      parent: getParent(path, getEnglishName),
+      grouping: getGrouping()
+    }
   }
 }
 
-export const getContext = (language: string, domain: string, path: string) => {
+export const getContext = (path: string, getEnglishName: (identifier: string) => string) => {
   return {
     platform: 'Frontend',
-    language: language,
+    language: localStorage.getItem('i18nextLng') ?? '',
     extensions: {
       'http://lrs.learninglocker.net/define/extensions/info': {
-        // Wiki url with explanations to custom properties
-        domain: domain,
+        domain: new URL(window.location.href).origin,
         domain_version: 'v1.0.0-alpha',
         github: 'https://github.com/HASKI-RAK/HASKI-Frontend',
-        event_function: '\\mod_assign\\event\\assessable_submitted' // software code path to component (not wiki) + string aus component, path to function aka button that holds function
+        event_function: 'src/common/components/DefaultButton/DefaultButton' // TODO: Create webpack plugin to overwrite __dirname and __filename to get project path of components
       }
     },
-    contextActivities: getContextActivities(path)
+    contextActivities: getContextActivities(path, getEnglishName)
   }
 }

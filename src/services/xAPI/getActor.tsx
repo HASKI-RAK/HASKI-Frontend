@@ -1,4 +1,4 @@
-export const getActor = (domain: string, lmsUserID: string) => {
+export const getActor = (lmsUserID: string) => {
   return {
     account: {
       homePage: new URL(window.location.href).origin,

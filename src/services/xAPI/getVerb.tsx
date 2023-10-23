@@ -1,18 +1,16 @@
-enum Component {
-  Button,
-  Form
+import { xAPIComponent } from './Statement.hooks'
+
+const verbs: Record<xAPIComponent, string> = {
+  [xAPIComponent.Null]: 'null',
+  [xAPIComponent.Button]: 'clicked',
+  [xAPIComponent.Form]: 'submitted'
 }
 
-const verbs: Record<Component, string> = {
-  [Component.Button]: 'clicked',
-  [Component.Form]: 'submitted'
-}
-
-export const getVerb = (element: Component) => {
+export const getVerb = (component: xAPIComponent) => {
   return {
-    id: 'http://activitystrea.ms/schema/1.0/'.concat(verbs[element]), // URI of action in online directory + element -> hardcoded
+    id: 'https://wiki.haski.app/verbs/'.concat(verbs[component]), // URI of action in online directory + element -> hardcoded
     display: {
-      en: verbs[element]
+      en: verbs[component]
     }
   }
 }

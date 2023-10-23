@@ -1,13 +1,7 @@
 import DefaultButton from '@mui/material/Button'
 import { ButtonProps as DefaultButtonProps } from '@common/components'
-import { MouseEvent, memo } from 'react'
-import {
-  StatementComponent,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  StatementHookReturn
-} from '@services'
-import { elementType } from 'prop-types'
+import { MouseEvent, memo, useCallback } from 'react'
+import { xAPIComponent, useStatement as _useStatement, useStatementHookParams, StatementHookReturn } from '@services'
 
 type ButtonProps = DefaultButtonProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
@@ -16,17 +10,20 @@ type ButtonProps = DefaultButtonProps & {
 const Button = ({ useStatement = _useStatement, children, onClick, ...props }: ButtonProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id!,
-    defaultComponent: StatementComponent.Button
+    defaultComponent: xAPIComponent.Button
   })
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-    // Send statement on every button click
-    sendStatement()
+  const handleClick = useCallback(
+    (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+      // Send statement on every button click
+      sendStatement()
 
-    if (onClick) {
-      onClick(event)
-    }
-  }
+      if (onClick) {
+        onClick(event)
+      }
+    },
+    [onClick, sendStatement]
+  )
 
   return (
     <DefaultButton onClick={handleClick} {...props}>

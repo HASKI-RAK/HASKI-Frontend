@@ -8,15 +8,17 @@ import { getButtonObject } from './getObject'
 import { getContext } from './getContext'
 import { usePersistedStore } from '@store'
 import log from 'loglevel'
+import { useTranslation } from 'react-i18next'
 
-export enum StatementComponent {
+export enum xAPIComponent {
+  Null,
   Button,
   Form
 }
 
 export type useStatementHookParams = {
   defaultComponentID: string
-  defaultComponent?: StatementComponent
+  defaultComponent?: xAPIComponent
 }
 
 export type StatementHookReturn = {
@@ -26,15 +28,12 @@ export type StatementHookReturn = {
 
 export const useStatement = (params?: useStatementHookParams): StatementHookReturn => {
   // Default values
-  const { defaultComponentID = '', defaultComponent = undefined } = params ?? {}
+  const { defaultComponentID = 'null', defaultComponent = xAPIComponent.Null } = params ?? {}
 
   const fetchUser = usePersistedStore((state) => state.fetchUser)
   const location = useLocation()
+  const { t, i18n } = useTranslation()
 
-  /**
-   * Build params for statement
-   */
-  const domain = new URL(window.location.href).origin
   const lmsUserID = fetchUser()
     .then((user) => {
       return user.id.toString()
@@ -43,25 +42,29 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
       log.error(error)
       return '-1'
     })
-  const path = location.pathname
 
-  /**
-   * Create statements
-   */
+  const getEnglishName = (key: string) => {
+    i18n.changeLanguage('en')
+    const translatedName = t('pages.'.concat(key))
+    i18n.changeLanguage(localStorage.getItem('i18nextLng') ?? 'en')
+    return translatedName
+  }
+
+  // TODO: Single file getStatement.tsx with all the statement get functions
   const getClickedStatement = async () => {
     return {
-      actor: getActor(domain, await lmsUserID),
-      verb: getVerb(0),
-      object: getButtonObject(path.concat('#', defaultComponentID), defaultComponent!),
-      context: getContext(localStorage.getItem('i18nextLng') ?? '', domain, path),
-      timestamp: new Date().toISOString()
+      actor: getActor(await lmsUserID),
+      verb: getVerb(defaultComponent),
+      object: getButtonObject(location.pathname.concat('#', defaultComponentID), defaultComponent),
+      context: getContext(location.pathname, getEnglishName),
+      timestamp: new Date().toISOString() //toLocaleString('sv')
     }
   }
 
   // Wraps function so send statements from components
   const sendStatement = async () => {
     console.log(await getClickedStatement())
-    xAPI.sendStatement({ statement: await getClickedStatement() })
+    xAPI.sendStatement({ statement: await getClickedStatement() }) // Add statements to queue and send them in a batch every few minutes?
   }
 
   return useMemo(() => ({ sendStatement, getClickedStatement }), [sendStatement, getClickedStatement])

@@ -1,0 +1,35 @@
+{
+  "actor": { "account": { "homePage": "http://localhost:8080", "name": "-1" } },
+  "verb": { "id": "http://activitystrea.ms/schema/1.0/clicked", "display": { "en": "clicked" } },
+  "object": {
+    "id": "http://localhost:8080/projectinformation/glossary#",
+    "definition": { "name": { "en": "Button" }, "type": "http://vocab.xapi.fr/activities/button" }
+  },
+  "context": {
+    "platform": "Frontend",
+    "language": "de",
+    "extensions": {
+      "http://lrs.learninglocker.net/define/extensions/info": {
+        "domain": "http://localhost:8080",
+        "domain_version": "v1.0.0-alpha",
+        "github": "https://github.com/HASKI-RAK/HASKI-Frontend",
+        "event_function": "src/common/components/DefaultButton/DefaultButton"
+      }
+    },
+    "contextActivities": {
+      "parent": [
+        {
+          "id": "http://localhost:8080/projectinformation/glossary",
+          "definition": { "type": "http://id.tincanapi.com/activitytype/lms/course", "name": { "en": "Glossary" } }
+        }
+      ],
+      "grouping": [
+        {
+          "id": "http://localhost:8080",
+          "definition": { "type": "http://id.tincanapi.com/activitytype/lms/course", "name": { "en": "Home" } }
+        }
+      ]
+    }
+  },
+  "timestamp": "2023-10-23T15:02:08.694Z"
+}
