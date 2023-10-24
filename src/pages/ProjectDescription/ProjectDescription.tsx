@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { ProjectDescriptionCard, ProjectDescriptionStepper } from '@components'
-import { Avatar, Box, Grid, Typography } from '@common/components'
+import { Avatar, Grid, Typography, Box } from '@common/components'
 import { memo } from 'react'
+// import { Box } from '@mui/material'
 
 /**
  * ProjectDescription page.

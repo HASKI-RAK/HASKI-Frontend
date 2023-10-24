@@ -18,9 +18,9 @@ export const ProjectInformation = () => {
     <>
       <Box>
         <Button
+          id="project-description-button"
           sx={{ mt: '2rem', color: 'black' }}
-          onClick={() => navigate('/projectinformation/projectdescription')}
-          href="#project-description-button">
+          onClick={() => navigate('/projectinformation/projectdescription')}>
           <Typography>{t('pages.projectdescription')}</Typography>
         </Button>
       </Box>
@@ -38,5 +38,3 @@ export const ProjectInformation = () => {
 }
 
 export default ProjectInformation
-
-// Scroll to section via href?

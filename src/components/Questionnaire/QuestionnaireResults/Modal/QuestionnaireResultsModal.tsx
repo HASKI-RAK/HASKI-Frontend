@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Modal, Stepper, Step, StepButton, IconButton, Stack, Typography } from '@common/components'
-import { ListItem } from '@mui/material'
+import { ListItem, Theme } from '@mui/material'
 import { usePersistedStore, useStore } from '@store'
 import { ILS, ListK } from '@core'
 import log from 'loglevel'
@@ -103,7 +103,7 @@ const QuestionnaireResultsModal = ({
           overflow: 'auto',
           maxHeight: '83%',
           bgcolor: 'background.paper',
-          border: (theme) => '2px solid' + theme.palette.secondary.dark,
+          border: (theme: Theme) => '2px solid' + theme.palette.secondary.dark,
           boxShadow: 24,
           p: 1
         }}>
