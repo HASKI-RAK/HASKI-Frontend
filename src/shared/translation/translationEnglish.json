@@ -1708,5 +1708,6 @@
 	"universityKempten": "University of Applied Sciences Kempten",
 	"update": "Updated",
 	"User fetching error": "There was an Error fetching User data",
-	"warning": "Warning"
+	"warning": "Warning",
+	"components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.MoreInformation": "I want to know more about the ILS and ListK"
 }

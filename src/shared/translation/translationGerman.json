@@ -1678,5 +1678,6 @@
 	"universityKempten": "Hochschule Kempten",
 	"update": "Aktualisieren",
 	"User fetching error": "Es gab einen Fehler beim Abrufen der Benutzerdaten.",
-	"warning": "Warnung"
+	"warning": "Warnung",
+	"components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.MoreInformation": "Ich möchte mehr zum ILS und ListK erfahren"
 }
