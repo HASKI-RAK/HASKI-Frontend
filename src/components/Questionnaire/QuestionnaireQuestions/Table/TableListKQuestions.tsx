@@ -1,7 +1,10 @@
 import {
+  Avatar,
   Box,
   Divider,
+  Fade,
   FormControlLabel,
+  Grid,
   Paper,
   Radio,
   RadioGroup,
@@ -16,7 +19,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
-import { ButtonStack, MemoTableRowQuestion, SendButton } from './TableCommonComponents'
+import { ButtonStack, MemoTableRowQuestion, SendButton, StartButton } from './TableCommonComponents'
 import useHandleSend from './Questions.hooks'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 
@@ -180,7 +183,7 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
   const setRadioButtonGroups = (newActiveStep: number) => {
     setRadioButtonGroup((prevState) => {
       return prevState.map((item, index) => {
-        if (newActiveStep < 7 || index < 4) {
+        if (newActiveStep < 8 || index < 4) {
           return {
             ...item,
             value: setRadioButtonValue(stepsListK[newActiveStep][index])
@@ -294,45 +297,86 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
 
   return (
     <Box>
-      <Stack direction="column" justifyContent="space-around" alignItems="center">
-        <Typography variant="h6" component={Paper} sx={{ m: 2, p: 2 }}>
-          List-K Questionnaire
-        </Typography>
-      </Stack>
-      <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
-        <ButtonStack
-          activeStep={activeStep}
-          handleNext={handleNext}
-          handleBack={handleBack}
-          steps={8}
-          idType={'ListK'}
-          disabled={activeStep === 7 || isNextDisabled}
-        />
-        <Stack direction="column" justifyContent="space-around" alignItems="center">
-          <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
-            <Table style={{ minWidth: '300px' }}>
-              <TableBody key={'TableListK'}>
-                <>
-                  {stepsListK[activeStep].map((page, row) => (
-                    <React.Fragment key={'QuestionnareListK Question: ' + row}>
-                      {activeStep < 7 ? listKQuestionsJsx(row) : row < 4 ? listKQuestionsJsx(row) : undefined}
-                    </React.Fragment>
-                  ))}
-                </>
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <SendButton
-            t={t}
-            handleSend={handleSendClick}
-            isNextDisabled={isNextDisabled}
-            isValid={activeStep === 7}
-            idType={'ListK'}
-            isSending={isSending}
-            sendSuccess={successSend}
-          />
-        </Stack>
-      </Stack>
+      <>
+        {activeStep == 0 ? (
+          <>
+            <Grid
+              container
+              justifyContent="center"
+              sx={{
+                mt: '7.5rem',
+                mb: '3rem'
+              }}>
+              <Grid item xs={7}>
+                <Typography variant="h3" align="center" sx={{ pt: '2.5rem' }}>
+                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
+                </Typography>
+                <Fade
+                  in={!!t('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')}
+                  easing="linear"
+                  timeout={1000}>
+                  <Typography align="center" sx={{ pt: '2.5rem', pb: '2.5rem', pr: '2rem' }} variant="h5">
+                    {t('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')}
+                  </Typography>
+                </Fade>
+              </Grid>
+              <Divider flexItem orientation="vertical" />
+              <Grid container item justifyContent="center" sx={{ pt: '7.5rem', pb: '3rem' }} xs={4}>
+                <Avatar
+                  alt="Advantages Teaching 3"
+                  src="/ProjectDescriptionImage03.jpg"
+                  sx={{
+                    height: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' },
+                    width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </>
+        ) : (
+          <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
+            <ButtonStack
+              activeStep={activeStep}
+              handleNext={handleNext}
+              handleBack={handleBack}
+              steps={9}
+              idType={'ListK'}
+              disabled={activeStep === 8 || isNextDisabled}
+            />
+            <Stack direction="column" justifyContent="space-around" alignItems="center">
+              <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
+                <Table style={{ minWidth: '300px' }}>
+                  <TableBody key={'TableListK'}>
+                    <>
+                      {stepsListK[activeStep].map((page, row) => (
+                        <React.Fragment key={'QuestionnareListK Question: ' + row}>
+                          {activeStep < 8 ? listKQuestionsJsx(row) : row < 4 ? listKQuestionsJsx(row) : undefined}
+                        </React.Fragment>
+                      ))}
+                    </>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <SendButton
+                t={t}
+                handleSend={handleSendClick}
+                isNextDisabled={isNextDisabled}
+                isValid={activeStep === 8}
+                idType={'ListK'}
+                isSending={isSending}
+                sendSuccess={successSend}
+              />
+            </Stack>
+          </Stack>
+        )}
+      </>
+      <>
+        {activeStep == 0 && (
+          <Stack direction="column" justifyContent="space-around" alignItems="center">
+            <StartButton handleNext={handleNext} />
+          </Stack>
+        )}
+      </>
     </Box>
   )
 })

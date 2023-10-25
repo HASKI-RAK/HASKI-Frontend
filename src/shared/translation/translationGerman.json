@@ -129,6 +129,32 @@
 	"components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions": [
 		[
 			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": ""
+			},
+			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": ""
+			},
+			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": ""
+			},
+			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": ""
+			}
+		],
+		[
+			{
 				"question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-1",
 				"questionLabel": "AR_1_F1",
 				"answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.1",
@@ -414,7 +440,34 @@
 			}
 		]
 	],
+	"components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction": "Im Folgenden werden Ihnen Fragen gestellt, welche sich auf Ihre Art der Informationsverarbeitung und -organisierung, Wahrnehmung und bevorzugte Präsentation beziehen. Geben Sie bitte für jede Frage eine der beiden Antwortmöglichkeiten an. Sollten beide oder auch keine der Antwortmöglichkeiten auf Sie zutreffen, dann wählen Sie die aus, welche tendenziell noch häufiger zutrifft. Die gestellten Fragen basieren auf dem Index of Learning Styles (Felder & Solomon 1991).",
 	"components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions": [
+		[
+			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": ""
+			},
+			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": ""
+			},
+			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": ""
+			},
+			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": ""
+			}
+		],
 		[
 			{
 				"question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9",
@@ -547,6 +600,53 @@
 		]
 	],
 	"components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions": [
+		[
+			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": "",
+				"answer3": "",
+				"answer4": "",
+				"answer5": ""
+			},
+			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": "",
+				"answer3": "",
+				"answer4": "",
+				"answer5": ""
+			},
+			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": "",
+				"answer3": "",
+				"answer4": "",
+				"answer5": ""
+			},
+			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": "",
+				"answer3": "",
+				"answer4": "",
+				"answer5": ""
+			},
+			{
+				"question": "",
+				"questionLabel": "",
+				"answer1": "",
+				"answer2": "",
+				"answer3": "",
+				"answer4": "",
+				"answer5": ""
+			}
+		],
 		[
 			{
 				"question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1",
@@ -915,6 +1015,7 @@
 			}
 		]
 	],
+	"components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction": "Im Folgenden werden Ihnen Fragen darüber gestellt welche Lernstrategien Sie anwenden. Sie finden hier eine Liste verschiedener Lerntätigkeiten. Geben Sie bitte für jede Tätigkeit an, wie häufig diese bei Ihnen vorkommt. Sie können Ihre Antworten von sehr selten (1) bis sehr oft (5) abstufen. Die gestellten Fragen basieren auf dem LIST-K (Klingsieck, 2019), welcher eine gekürzte Form des LIST (Wild & Schiefele, 1994) darstellt.",
 	"components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.1": "es ausprobiert habe.",
 	"components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.2": "darüber nachgedacht habe.",
 	"components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-10.1": "Fakten zu lernen.",
@@ -1091,13 +1192,14 @@
 	"components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-7": "Ich frage mich, ob der Text, den ich gerade durcharbeite, wirklich überzeugend ist.",
 	"components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-8": "Ich gehe an die meisten Texte kritisch heran.",
 	"components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-9": "Das, was ich lerne, prüfe ich auch kritisch.",
-	"components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1": "ILS-Fragebogen (Vollständig)",
+	"components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1": "ILS-Fragebogen",
 	"components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1": "ILS-Fragebogen (Kurz)",
 	"components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2": "oder",
 	"components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK": "List-K-Fragebogen",
 	"components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1": "Um Ergebnisse anzuzeigen, müssen Sie zuerst den",
 	"components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2": "abschließen.",
 	"components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.ButtonText": "Fragebogen Ergebnisse",
+	"components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.MoreInformation": "Ich möchte mehr zum ILS und ListK erfahren",
 	"components.Questionnaire.QuestionnaireResults.Table.TableILS.Active": "Aktiv",
 	"components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced": "balanciert",
 	"components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension": "Dimension",
@@ -1678,6 +1780,5 @@
 	"universityKempten": "Hochschule Kempten",
 	"update": "Aktualisieren",
 	"User fetching error": "Es gab einen Fehler beim Abrufen der Benutzerdaten.",
-	"warning": "Warnung",
-	"components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.MoreInformation": "Ich möchte mehr zum ILS und ListK erfahren"
+	"warning": "Warnung"
 }

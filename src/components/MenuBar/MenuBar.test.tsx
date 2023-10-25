@@ -16,7 +16,7 @@ describe('MenuBar', () => {
   })
 
   test('ils-short can be closed after sending answers', async () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
           <MenuBar courseSelected={false} />
@@ -27,10 +27,16 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILSshort'))
 
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
+
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
     expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
 
     for (let i = 0; i < 6; i++) {
@@ -77,7 +83,7 @@ describe('MenuBar', () => {
   // If only the describe runs, the test passes without problems. Running all tests in jest, this test times out.
   // Adding a bigger timeout solved the problem
   test('ils-long can be closed after sending answers', async () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
           <MenuBar courseSelected={false} />
@@ -88,10 +94,16 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILS'))
 
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
+
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     for (let i = 0; i < 11; i++) {
       const RadioButton1 = getByTestId('ilsLongQuestionnaireILSButtonGroup1').querySelectorAll(
@@ -135,7 +147,7 @@ describe('MenuBar', () => {
   }, 20000)
 
   test('listk can be closed after sending answers', async () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
           <MenuBar courseSelected={false} />
@@ -146,10 +158,16 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireListk'))
 
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    fireEvent.click(startButton)
+
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     for (let i = 0; i < 8; i++) {
       if (i < 7) {
@@ -183,6 +201,7 @@ describe('MenuBar', () => {
         expect(RadioButton3.checked).toBe(true)
         expect(RadioButton4.checked).toBe(true)
         expect(RadioButton5.checked).toBe(true)
+        console.log('current step: ' + i)
         fireEvent.click(nextButton)
       }
       //Last step only has 4 radio buttongroups
@@ -500,7 +519,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('questionnaireILSshort'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
     expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9')
+      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')
     ).toBeInTheDocument()
   })
 
@@ -519,7 +538,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('questionnaireILSshort'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
     expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9')
+      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')
     ).toBeInTheDocument()
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
@@ -539,7 +558,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('questionnaireILS'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
     expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-1')
+      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')
     ).toBeInTheDocument()
   })
 
@@ -558,7 +577,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('questionnaireILS'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
     expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-1')
+      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')
     ).toBeInTheDocument()
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
@@ -578,7 +597,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('questionnaireListk'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
     expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1')
+      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')
     ).toBeInTheDocument()
   })
 
@@ -597,7 +616,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('questionnaireListk'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
     expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1')
+      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')
     ).toBeInTheDocument()
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()

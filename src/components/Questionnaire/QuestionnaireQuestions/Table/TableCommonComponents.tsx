@@ -62,6 +62,11 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
         sx={{ maxWidth: '50%', flexGrow: 1, align: 'center' }}
         nextButton={
           <Button
+            sx={{
+              '&.Mui-disabled': {
+                border: (theme) => theme.palette.primary.dark
+              }
+            }}
             variant="contained"
             color="primary"
             onClick={handleNext}
@@ -73,6 +78,11 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
         }
         backButton={
           <Button
+            sx={{
+              '&.Mui-disabled': {
+                border: (theme) => theme.palette.primary.dark
+              }
+            }}
             variant="contained"
             color="primary"
             onClick={handleBack}
@@ -107,7 +117,12 @@ export const SendButton = memo(
         color="primary"
         onClick={handleSend}
         disabled={isNextDisabled || !isValid || isSending || sendSuccess}
-        sx={{ m: 2 }}>
+        sx={{
+          m: 2,
+          '&.Mui-disabled': {
+            border: (theme) => theme.palette.primary.dark
+          }
+        }}>
         {isSending ? <CircularProgress size={24} /> : t('send')}
       </Button>
     )
@@ -115,3 +130,18 @@ export const SendButton = memo(
 )
 // eslint-disable-next-line immutable/no-mutation
 SendButton.displayName = 'MemoSendButton'
+
+export const StartButton = memo(({ handleNext }: { handleNext: () => void }) => {
+  return (
+    <Button
+      data-testid={`StartButtonQuestionnaire`}
+      variant="contained"
+      color="primary"
+      onClick={handleNext}
+      sx={{ mb: '2rem', width: '20rem' }}>
+      {'Start'}
+    </Button>
+  )
+})
+// eslint-disable-next-line immutable/no-mutation
+StartButton.displayName = 'MemoStartButton'

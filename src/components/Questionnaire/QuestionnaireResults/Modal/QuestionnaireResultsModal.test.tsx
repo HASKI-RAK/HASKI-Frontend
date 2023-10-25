@@ -4,7 +4,6 @@ import { fireEvent, getByTestId, render, waitFor } from '@testing-library/react'
 import * as React from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
-import log from 'loglevel'
 
 jest.mock('loglevel') // Mock the loglevel library
 
@@ -46,6 +45,21 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     expect(getByTestId('ILS and ListK Modal')).toBeInTheDocument()
+  })
+
+  test('More Information link can be opened', async () => {
+    const openSpy = jest.spyOn(window, 'open')
+
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={() => false} />
+      </MemoryRouter>
+    )
+
+    expect(getByTestId('ILS and ListK Modal')).toBeInTheDocument()
+    expect(getByTestId('MoreInformationQuestionnaireLink')).toBeInTheDocument()
+    fireEvent.click(getByTestId('MoreInformationQuestionnaireLink'))
+    expect(openSpy).toHaveBeenCalledWith('/files/Informationsdokument_ILS_ListK_HASKI.pdf', '_blank')
   })
 
   test('Modal without ILS data', async () => {

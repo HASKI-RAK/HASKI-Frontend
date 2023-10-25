@@ -11,12 +11,15 @@ import {
   RadioGroup,
   Stack,
   Typography,
-  TableCell
+  TableCell,
+  Fade,
+  Grid,
+  Avatar
 } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
-import { ButtonStack, SendButton, MemoTableRowQuestion } from './TableCommonComponents'
+import { ButtonStack, SendButton, MemoTableRowQuestion, StartButton } from './TableCommonComponents'
 import useHandleSend from './Questions.hooks'
 
 /**
@@ -219,67 +222,112 @@ export const TableILSQuestions = memo(
       [setQuestionnaireAnswers]
     )
 
+    const questionnaireType = ilsLong
+      ? t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')
+      : t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')
+
     return (
       <Box>
-        <Stack direction="column" justifyContent="space-around" alignItems="center">
-          <Typography variant="h6" component={Paper} sx={{ m: 2, p: 2 }}>
-            {ilsLong ? 'ILS-Long Questionnaire' : 'ILS-Short Questionnaire'}
-          </Typography>
-        </Stack>
-        <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
-          <ButtonStack
-            activeStep={activeStep}
-            handleNext={handleNext}
-            handleBack={handleBack}
-            steps={ilsLong ? 11 : 5}
-            idType={'ILS'}
-            disabled={ilsLong ? activeStep === 10 || isNextDisabled : activeStep === 4 || isNextDisabled}
-          />
-          <Stack direction="column" justifyContent="space-around" alignItems="center">
-            <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
-              <Table style={{ minWidth: '300px' }}>
-                <TableBody key={'TableILSBody'}>
-                  {stepsILSData[activeStep].map((page, row) => (
-                    <React.Fragment key={'QuestionnareILS Question: ' + row}>
-                      <MemoTableRowQuestion question={t(stepsILSData[activeStep][row].question)} />
-                      <MemoTableRowAnswers
-                        radioButtonGroup={radioButtonGroup[row].value}
-                        handleRadioChange={handleRadioChange}
-                        setRadioButtonGroup={(newValue) => {
-                          setRadioButtonGroup((prevState) => {
-                            return prevState.map((item, index) => {
-                              if (index === row) {
-                                return {
-                                  ...item,
-                                  value: newValue
-                                }
-                              }
-                              return item
-                            })
-                          })
-                        }}
-                        answerIndex={row}
-                        isIlsLong={ilsLong}
-                        t={t}
-                        activeStep={activeStep}
-                        stepsILSData={stepsILSData}
-                      />
-                    </React.Fragment>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <SendButton
-              t={t}
-              handleSend={handleSendClick}
-              isNextDisabled={isNextDisabled}
-              isValid={ilsLong ? activeStep === 10 : activeStep === 4}
-              idType={'ILS'}
-              isSending={isSending}
-              sendSuccess={successSend}
-            />
-          </Stack>
-        </Stack>
+        <>
+          {activeStep == 0 ? (
+            <>
+              <Grid
+                container
+                justifyContent="center"
+                sx={{
+                  mt: '7.5rem',
+                  mb: '3rem'
+                }}>
+                <Grid item xs={7}>
+                  <Typography variant="h3" align="center" sx={{ pt: '2.5rem' }}>
+                    {questionnaireType}
+                  </Typography>
+                  <Fade
+                    in={!!t('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')}
+                    easing="linear"
+                    timeout={1000}>
+                    <Typography align="center" sx={{ pt: '2.5rem', pb: '2.5rem', pr: '2rem' }} variant="h5">
+                      {t('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')}
+                    </Typography>
+                  </Fade>
+                </Grid>
+                <Divider flexItem orientation="vertical" />
+                <Grid container item justifyContent="center" sx={{ pt: '7.5rem', pb: '3rem' }} xs={4}>
+                  <Avatar
+                    alt="Advantages Teaching 3"
+                    src="/ProjectDescriptionImage03.jpg"
+                    sx={{
+                      height: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' },
+                      width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
+                    }}
+                  />
+                </Grid>
+              </Grid>
+            </>
+          ) : (
+            <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
+              <ButtonStack
+                activeStep={activeStep}
+                handleNext={handleNext}
+                handleBack={handleBack}
+                steps={ilsLong ? 12 : 6}
+                idType={'ILS'}
+                disabled={ilsLong ? activeStep === 11 || isNextDisabled : activeStep === 5 || isNextDisabled}
+              />
+              <Stack direction="column" justifyContent="space-around" alignItems="center">
+                <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
+                  <Table style={{ minWidth: '300px' }}>
+                    <TableBody key={'TableILSBody'}>
+                      {stepsILSData[activeStep].map((page, row) => (
+                        <React.Fragment key={'QuestionnareILS Question: ' + row}>
+                          <MemoTableRowQuestion question={t(stepsILSData[activeStep][row].question)} />
+                          <MemoTableRowAnswers
+                            radioButtonGroup={radioButtonGroup[row].value}
+                            handleRadioChange={handleRadioChange}
+                            setRadioButtonGroup={(newValue) => {
+                              setRadioButtonGroup((prevState) => {
+                                return prevState.map((item, index) => {
+                                  if (index === row) {
+                                    return {
+                                      ...item,
+                                      value: newValue
+                                    }
+                                  }
+                                  return item
+                                })
+                              })
+                            }}
+                            answerIndex={row}
+                            isIlsLong={ilsLong}
+                            t={t}
+                            activeStep={activeStep}
+                            stepsILSData={stepsILSData}
+                          />
+                        </React.Fragment>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <SendButton
+                  t={t}
+                  handleSend={handleSendClick}
+                  isNextDisabled={isNextDisabled}
+                  isValid={ilsLong ? activeStep === 11 : activeStep === 5}
+                  idType={'ILS'}
+                  isSending={isSending}
+                  sendSuccess={successSend}
+                />
+              </Stack>
+            </Stack>
+          )}
+        </>
+        <>
+          {activeStep == 0 && (
+            <Stack direction="column" justifyContent="space-around" alignItems="center">
+              <StartButton handleNext={handleNext} />
+            </Stack>
+          )}
+        </>
       </Box>
     )
   }
