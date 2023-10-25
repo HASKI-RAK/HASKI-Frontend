@@ -1,10 +1,7 @@
 import {
-  Avatar,
   Box,
   Divider,
-  Fade,
   FormControlLabel,
-  Grid,
   Paper,
   Radio,
   RadioGroup,
@@ -19,7 +16,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
-import { ButtonStack, MemoTableRowQuestion, SendButton, StartButton } from './TableCommonComponents'
+import { ButtonStack, MemoTableRowQuestion, SendButton, StartButton, CoverSheet } from './TableCommonComponents'
 import useHandleSend from './Questions.hooks'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 
@@ -300,38 +297,10 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
       <>
         {activeStep == 0 ? (
           <>
-            <Grid
-              container
-              justifyContent="center"
-              sx={{
-                mt: '7.5rem',
-                mb: '3rem'
-              }}>
-              <Grid item xs={7}>
-                <Typography variant="h3" align="center" sx={{ pt: '2.5rem' }}>
-                  {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
-                </Typography>
-                <Fade
-                  in={!!t('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')}
-                  easing="linear"
-                  timeout={1000}>
-                  <Typography align="center" sx={{ pt: '2.5rem', pb: '2.5rem', pr: '2rem' }} variant="h5">
-                    {t('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')}
-                  </Typography>
-                </Fade>
-              </Grid>
-              <Divider flexItem orientation="vertical" />
-              <Grid container item justifyContent="center" sx={{ pt: '7.5rem', pb: '3rem' }} xs={4}>
-                <Avatar
-                  alt="Advantages Teaching 3"
-                  src="/ProjectDescriptionImage03.jpg"
-                  sx={{
-                    height: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' },
-                    width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
-                  }}
-                />
-              </Grid>
-            </Grid>
+              <CoverSheet
+                  header={t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
+                  body={t('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')}
+              />
           </>
         ) : (
           <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>

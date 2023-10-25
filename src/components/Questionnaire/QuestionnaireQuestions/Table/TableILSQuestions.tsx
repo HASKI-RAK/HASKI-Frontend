@@ -12,14 +12,11 @@ import {
   Stack,
   Typography,
   TableCell,
-  Fade,
-  Grid,
-  Avatar
 } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
-import { ButtonStack, SendButton, MemoTableRowQuestion, StartButton } from './TableCommonComponents'
+import {ButtonStack, SendButton, MemoTableRowQuestion, StartButton, CoverSheet} from './TableCommonComponents'
 import useHandleSend from './Questions.hooks'
 
 /**
@@ -231,38 +228,7 @@ export const TableILSQuestions = memo(
         <>
           {activeStep == 0 ? (
             <>
-              <Grid
-                container
-                justifyContent="center"
-                sx={{
-                  mt: '7.5rem',
-                  mb: '3rem'
-                }}>
-                <Grid item xs={7}>
-                  <Typography variant="h3" align="center" sx={{ pt: '2.5rem' }}>
-                    {questionnaireType}
-                  </Typography>
-                  <Fade
-                    in={!!t('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')}
-                    easing="linear"
-                    timeout={1000}>
-                    <Typography align="center" sx={{ pt: '2.5rem', pb: '2.5rem', pr: '2rem' }} variant="h5">
-                      {t('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')}
-                    </Typography>
-                  </Fade>
-                </Grid>
-                <Divider flexItem orientation="vertical" />
-                <Grid container item justifyContent="center" sx={{ pt: '7.5rem', pb: '3rem' }} xs={4}>
-                  <Avatar
-                    alt="Advantages Teaching 3"
-                    src="/ProjectDescriptionImage03.jpg"
-                    sx={{
-                      height: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' },
-                      width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
-                    }}
-                  />
-                </Grid>
-              </Grid>
+                <CoverSheet header={questionnaireType} body={t('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')}/>
             </>
           ) : (
             <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
