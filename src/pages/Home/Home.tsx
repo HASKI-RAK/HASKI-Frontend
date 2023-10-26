@@ -51,7 +51,7 @@ export const Home = () => {
           })
           .catch((error) => {
             addSnackbar({
-              message: t('User fetching error'),
+              message: t('User.fetching.error'),
               severity: 'error',
               autoHideDuration: 5000
             })

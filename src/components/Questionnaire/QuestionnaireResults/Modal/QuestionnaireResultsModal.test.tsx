@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 import { QuestionnaireResultsModal } from '@components'
-import { fireEvent, getByTestId, render, waitFor } from '@testing-library/react'
-import * as React from 'react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
 

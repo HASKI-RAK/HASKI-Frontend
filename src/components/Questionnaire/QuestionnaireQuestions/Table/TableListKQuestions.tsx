@@ -294,56 +294,52 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
 
   return (
     <Box>
-      <>
-        {activeStep == 0 ? (
-          <CoverSheet
-            header={t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
-            body={t('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')}
+      {activeStep == 0 ? (
+        <CoverSheet
+          header={t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
+          body={t('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')}
+        />
+      ) : (
+        <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
+          <ButtonStack
+            activeStep={activeStep}
+            handleNext={handleNext}
+            handleBack={handleBack}
+            steps={9}
+            idType={'ListK'}
+            disabled={activeStep === 8 || isNextDisabled}
           />
-        ) : (
-          <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
-            <ButtonStack
-              activeStep={activeStep}
-              handleNext={handleNext}
-              handleBack={handleBack}
-              steps={9}
-              idType={'ListK'}
-              disabled={activeStep === 8 || isNextDisabled}
-            />
-            <Stack direction="column" justifyContent="space-around" alignItems="center">
-              <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
-                <Table style={{ minWidth: '300px' }}>
-                  <TableBody key={'TableListK'}>
-                    <>
-                      {stepsListK[activeStep].map((page, row) => (
-                        <React.Fragment key={'QuestionnareListK Question: ' + row}>
-                          {activeStep < 8 ? listKQuestionsJsx(row) : row < 4 ? listKQuestionsJsx(row) : undefined}
-                        </React.Fragment>
-                      ))}
-                    </>
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <SendButton
-                t={t}
-                handleSend={handleSendClick}
-                isNextDisabled={isNextDisabled}
-                isValid={activeStep === 8}
-                idType={'ListK'}
-                isSending={isSending}
-                sendSuccess={successSend}
-              />
-            </Stack>
-          </Stack>
-        )}
-      </>
-      <>
-        {activeStep == 0 && (
           <Stack direction="column" justifyContent="space-around" alignItems="center">
-            <StartButton handleNext={handleNext} />
+            <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
+              <Table style={{ minWidth: '300px' }}>
+                <TableBody key={'TableListK'}>
+                  <>
+                    {stepsListK[activeStep].map((page, row) => (
+                      <React.Fragment key={page.questionLabel}>
+                        {activeStep < 8 ? listKQuestionsJsx(row) : row < 4 ? listKQuestionsJsx(row) : undefined}
+                      </React.Fragment>
+                    ))}
+                  </>
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <SendButton
+              t={t}
+              handleSend={handleSendClick}
+              isNextDisabled={isNextDisabled}
+              isValid={activeStep === 8}
+              idType={'ListK'}
+              isSending={isSending}
+              sendSuccess={successSend}
+            />
           </Stack>
-        )}
-      </>
+        </Stack>
+      )}
+      {activeStep == 0 && (
+        <Stack direction="column" justifyContent="space-around" alignItems="center">
+          <StartButton handleNext={handleNext} />
+        </Stack>
+      )}
     </Box>
   )
 })

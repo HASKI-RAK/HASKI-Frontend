@@ -2,6 +2,7 @@ import { Table, TableBody, TableContainer, TableHead, TableRow, Paper } from '@c
 import { useTranslation } from 'react-i18next'
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireResultTableStyle'
 import { ILS } from '@core'
+import { memo } from 'react'
 
 //Returns the Interpretation of the ILS-Test (balanced, moderate, strong + Dimension (if score is not balanced))
 export const ILSInterpretation = (score: number, interpretationString: string, onlyEnglish?: boolean): string => {
@@ -87,7 +88,7 @@ type TableILSProps = {
   data: ILS
 }
 
-const TableILS = ({ data }: TableILSProps) => {
+const TableILS = memo(({ data }: TableILSProps) => {
   const { t } = useTranslation()
 
   const dimensionOneScore = data.processing_value
@@ -161,6 +162,7 @@ const TableILS = ({ data }: TableILSProps) => {
       </Table>
     </TableContainer>
   )
-}
-
+})
+// eslint-disable-next-line immutable/no-mutation
+TableILS.displayName = 'TableILS'
 export default TableILS

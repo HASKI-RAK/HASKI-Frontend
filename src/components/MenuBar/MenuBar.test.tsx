@@ -201,7 +201,6 @@ describe('MenuBar', () => {
         expect(RadioButton3.checked).toBe(true)
         expect(RadioButton4.checked).toBe(true)
         expect(RadioButton5.checked).toBe(true)
-        console.log('current step: ' + i)
         fireEvent.click(nextButton)
       }
       //Last step only has 4 radio buttongroups
