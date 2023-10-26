@@ -1,17 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  Box,
-  Button,
-  Modal,
-  Stepper,
-  Step,
-  StepButton,
-  Stack,
-  Typography,
-  Link,
-  Fab
-} from '@common/components'
+import { Box, Button, Modal, Stepper, Step, StepButton, Stack, Typography, Link, Fab } from '@common/components'
 import { ListItem } from '@mui/material'
 import { usePersistedStore } from '@store'
 import { ILS, ListK } from '@core'
@@ -197,15 +186,15 @@ const QuestionnaireResultsModal = ({
                   </Stack>
                 </Box>
               ) : (
-                  <Stack alignItems="center">
-                    <Typography variant="body2" data-testid={'ActiveStepILSNoData'}>
-                      {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
-                      <ListItem sx={{ display: 'list-item' }}>
-                        {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')}{' '}
-                        {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
-                      </ListItem>
-                    </Typography>
-                  </Stack>
+                <Stack alignItems="center">
+                  <Typography variant="body2" data-testid={'ActiveStepILSNoData'}>
+                    {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
+                    <ListItem sx={{ display: 'list-item' }}>
+                      {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')}{' '}
+                      {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+                    </ListItem>
+                  </Typography>
+                </Stack>
               )}
             </>
           ) : activeStep === 1 ? (
@@ -217,15 +206,15 @@ const QuestionnaireResultsModal = ({
                   </Stack>
                 </Box>
               ) : (
-                  <Stack alignItems="center">
-                    <Typography variant="body2" data-testid={'ActiveStepListKNoData'}>
-                      {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
-                      <ListItem sx={{ display: 'list-item' }}>
-                        {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}{' '}
-                        {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
-                      </ListItem>
-                    </Typography>
-                  </Stack>
+                <Stack alignItems="center">
+                  <Typography variant="body2" data-testid={'ActiveStepListKNoData'}>
+                    {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
+                    <ListItem sx={{ display: 'list-item' }}>
+                      {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}{' '}
+                      {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+                    </ListItem>
+                  </Typography>
+                </Stack>
               )}
             </>
           ) : null}

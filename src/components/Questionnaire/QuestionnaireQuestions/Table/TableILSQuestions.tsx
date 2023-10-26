@@ -11,12 +11,12 @@ import {
   RadioGroup,
   Stack,
   Typography,
-  TableCell,
+  TableCell
 } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
-import {ButtonStack, SendButton, MemoTableRowQuestion, StartButton, CoverSheet} from './TableCommonComponents'
+import { ButtonStack, SendButton, MemoTableRowQuestion, StartButton, CoverSheet } from './TableCommonComponents'
 import useHandleSend from './Questions.hooks'
 
 /**
@@ -227,7 +227,10 @@ export const TableILSQuestions = memo(
       <Box>
         <>
           {activeStep == 0 ? (
-                <CoverSheet header={questionnaireType} body={t('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')}/>
+            <CoverSheet
+              header={questionnaireType}
+              body={t('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')}
+            />
           ) : (
             <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
               <ButtonStack

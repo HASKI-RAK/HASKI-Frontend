@@ -296,10 +296,10 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
     <Box>
       <>
         {activeStep == 0 ? (
-              <CoverSheet
-                  header={t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
-                  body={t('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')}
-              />
+          <CoverSheet
+            header={t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
+            body={t('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')}
+          />
         ) : (
           <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
             <ButtonStack
