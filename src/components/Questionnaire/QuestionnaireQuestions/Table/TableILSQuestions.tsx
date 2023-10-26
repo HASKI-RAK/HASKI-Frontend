@@ -227,9 +227,7 @@ export const TableILSQuestions = memo(
       <Box>
         <>
           {activeStep == 0 ? (
-            <>
                 <CoverSheet header={questionnaireType} body={t('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')}/>
-            </>
           ) : (
             <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
               <ButtonStack

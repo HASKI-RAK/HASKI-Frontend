@@ -197,7 +197,6 @@ const QuestionnaireResultsModal = ({
                   </Stack>
                 </Box>
               ) : (
-                <>
                   <Stack alignItems="center">
                     <Typography variant="body2" data-testid={'ActiveStepILSNoData'}>
                       {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
@@ -207,7 +206,6 @@ const QuestionnaireResultsModal = ({
                       </ListItem>
                     </Typography>
                   </Stack>
-                </>
               )}
             </>
           ) : activeStep === 1 ? (
@@ -219,7 +217,6 @@ const QuestionnaireResultsModal = ({
                   </Stack>
                 </Box>
               ) : (
-                <>
                   <Stack alignItems="center">
                     <Typography variant="body2" data-testid={'ActiveStepListKNoData'}>
                       {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
@@ -229,7 +226,6 @@ const QuestionnaireResultsModal = ({
                       </ListItem>
                     </Typography>
                   </Stack>
-                </>
               )}
             </>
           ) : null}

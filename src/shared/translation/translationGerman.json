@@ -97,6 +97,7 @@
 	"components.Login.usernameError": "Bitte geben Sie einen gültigen Benutzernamen ein",
 	"components.Menubar.CloseDialog": "Sind Sie sicher, dass Sie den Fragebogen schließen möchten? Nicht abgeschickte Antworten werden nicht gespeichert.",
 	"components.MenuBar.Profile.Logout": "Ausloggen",
+	"components.MenuBar.Profile.Login": "Einloggen",
 	"components.MenuBar.TopicButton": "Themenbereiche",
 	"components.ProjectDescriptionContent.advantagesLearningBody": "Die Unterstützung wird ermöglicht, indem das HASKI-System Deine Daten aus Moodle ausliest und ein KI-Algorithmus auf Basis dieser Daten Dir einen personalisierten Lernpfad durch die Lernmaterialien vorschlägt. Natürlich bleibt die Entscheidung bei Dir, welches Material Du als Nächstes bearbeiten willst. Auch diese Präferenzen merkt sich HASKI und passt zukünftige Vorschläge an die neuen Begebenheiten an.",
 	"components.ProjectDescriptionContent.advantagesLearningBody2": "Die Datenbasis sind Fragebögen, individueller Wissensstand, ausgewertete Aufgaben und Verhaltensdaten aus Moodle. Ein Rückschluss der Lehrenden auf Dich wird durch Anonymisierung der Daten verhindert.",
