@@ -19,10 +19,12 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
 
     const filteredData = data.filter((entry) => entry.question_id !== '')
 
-    const reducedData = filteredData.filter((current, index, array) => {
-      // Returns always the last Item of duplicated question_ids
-      return !array.slice(index + 1).some((item) => item.question_id === current.question_id)
-    }).map((current) => current)
+    const reducedData = filteredData
+      .filter((current, index, array) => {
+        // Returns always the last Item of duplicated question_ids
+        return !array.slice(index + 1).some((item) => item.question_id === current.question_id)
+      })
+      .map((current) => current)
 
     const key = ils ? 'ils' : 'list_k'
     const outputJson: string = JSON.stringify({
