@@ -1,14 +1,10 @@
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { getStatement } from './getStatement'
 import { useMemo, useCallback } from 'react'
 import { usePersistedStore } from '@store'
 import xAPI from './xAPI.setup'
 import log from 'loglevel'
-
-import { getActor } from './getActor'
-import { getVerb } from './getVerb'
-import { getButtonObject } from './getObject'
-import { getContext } from './getContext'
 
 export enum xAPIComponent {
   Null,
@@ -33,10 +29,14 @@ export type StatementHookReturn = {
   readonly sendStatement: (verb: xAPIVerb) => Promise<void>
 }
 
+/**
+ *
+ */
 export const useStatement = (params?: useStatementHookParams): StatementHookReturn => {
   // Default values
   const { defaultComponentID = 'null', defaultComponent = xAPIComponent.Null } = params ?? {}
 
+  //
   const { t, i18n } = useTranslation()
   const location = useLocation()
 
@@ -60,21 +60,28 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
     [i18n, t]
   )
 
-  // TODO: Single file getStatement.tsx with all the statement get functions
-  const getClickedStatement = async (verb: string) => {
-    return {
-      actor: getActor(await lmsUserID),
-      verb: getVerb(verb),
-      object: getButtonObject(location.pathname.concat('#', defaultComponentID), defaultComponent),
-      context: getContext(location.pathname, getEnglishName),
-      timestamp: new Date().toISOString().replace('Z', '+00:00') //toLocaleString('sv')
-    }
-  }
-
   // Wraps function so send statements from components
   const sendStatement = useCallback(async (verb: xAPIVerb) => {
-    console.log(await getClickedStatement(xAPIVerb[verb]))
-    xAPI.sendStatement({ statement: await getClickedStatement(xAPIVerb[verb]) }) // Add statements to queue and send them in a batch every few minutes?
+    console.log(
+      getStatement(
+        await lmsUserID,
+        xAPIVerb[verb],
+        location.pathname,
+        defaultComponentID,
+        xAPIComponent[defaultComponent],
+        getEnglishName
+      )
+    )
+    xAPI.sendStatement({
+      statement: getStatement(
+        await lmsUserID,
+        xAPIVerb[verb],
+        location.pathname,
+        defaultComponentID,
+        xAPIComponent[defaultComponent],
+        getEnglishName
+      )
+    }) // Add statements to queue and send them in batch every few minutes?
   }, [])
 
   return useMemo(() => ({ sendStatement }), [sendStatement])
