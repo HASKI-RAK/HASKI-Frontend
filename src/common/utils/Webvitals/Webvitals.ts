@@ -1,4 +1,5 @@
 /* istanbul ignore file */
+import { getConfig } from '@shared'
 import { CLSReportCallback } from 'web-vitals'
 
 /**
@@ -7,7 +8,7 @@ import { CLSReportCallback } from 'web-vitals'
  */
 export const sendToAnalytics = (metric: object): void => {
   const body = JSON.stringify(metric)
-  const url = process.env.BACKEND + '/logs/frontend'
+  const url = getConfig().BACKEND + '/logs/frontend'
   // Use `navigator.sendBeacon()` if available, falling back to `fetch()`
   const headers = {
     type: 'application/json'

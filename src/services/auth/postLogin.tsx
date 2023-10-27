@@ -1,3 +1,4 @@
+import { getConfig } from '@shared'
 import { getData } from '../RequestResponse'
 
 export type LoginResponse = {
@@ -9,7 +10,8 @@ export type postLoginParams = {
 }
 export const postLogin = async (params?: postLoginParams): Promise<LoginResponse> => {
   const { nonce = '' } = params || {}
-  const response = await fetch(process.env.BACKEND + `/login`, {
+
+  const response = await fetch(getConfig().BACKEND + `/login`, {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify({ nonce: nonce }),
