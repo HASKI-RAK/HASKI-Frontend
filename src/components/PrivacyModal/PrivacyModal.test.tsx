@@ -33,7 +33,7 @@ describe('Test PrivacyModal', () => {
         <PrivacyModal />
       </MemoryRouter>
     )
-    const link = form.getByRole('button', { name: /pages.PrivacyPolicy/i })
+    const link = form.getByRole('button', { name: /pages.privacypolicy/i })
     fireEvent.click(link)
     expect(navigate).toHaveBeenCalledWith('/privacypolicy')
   })
@@ -45,7 +45,7 @@ describe('Test PrivacyModal', () => {
       </MemoryRouter>
     )
     const checkBox = new_form.getByRole('checkbox', {
-      name: /components.PrivacyModal.readPrivacypolicy pages.PrivacyPolicy/i
+      name: /components.PrivacyModal.readPrivacypolicy pages.privacypolicy/i
     })
     fireEvent.click(checkBox)
     expect(checkBox).toBeChecked()
