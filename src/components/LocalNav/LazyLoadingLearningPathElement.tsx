@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { Link, Skeleton, Typography } from '@common/components'
-import {useLearningPathElement as _useLearningPathElement, useLearningPathTopic} from './LocalNav.hooks'
+import {useLearningPathElement as _useLearningPathElement} from './LocalNav.hooks'
 import { LearningPathElement, Topic } from '@core'
 
 /**
@@ -30,7 +30,6 @@ const LazyLoadingLearningPathElement = ({
   useLearningPathElement = _useLearningPathElement
 }: LazyLoadingLearningPathElementProps) => {
   const { loadingElements, learningPaths } = useLearningPathElement(topic, courseId)
-  const { loading, topics } = useLearningPathTopic(courseId)
   const navigate = useNavigate()
 
   if (loadingElements) {
@@ -59,7 +58,7 @@ const LazyLoadingLearningPathElement = ({
               '&:hover': { backgroundColor: (theme) => theme.palette.primary.main }
             }}
             onClick={() => {
-              navigate(`/topics/${topic.name}/${learningElement.learning_element.name}`)
+              navigate(`/course/${courseId}/topic/${topic.id}`)
             }}>
             {learningElement.position} {learningElement.learning_element.name}
           </Link>
