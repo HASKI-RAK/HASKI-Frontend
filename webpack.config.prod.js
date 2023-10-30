@@ -3,12 +3,6 @@
   @file webpack.config.prod.js
   @see https://webpack.js.org/configuration/
 */
-const dotenv = require('dotenv').config({
-  path: './.env.production'
-})
-if (dotenv.error) {
-  throw dotenv.error
-}
 module.exports = {
   mode: 'production',
   devtool: false,

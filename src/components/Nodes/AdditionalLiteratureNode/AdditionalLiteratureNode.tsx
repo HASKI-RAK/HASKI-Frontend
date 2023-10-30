@@ -3,6 +3,7 @@ import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { Article } from '@common/icons'
 import { memo } from 'react'
+import { getConfig } from '@shared'
 
 /**
  * AdditionalLiteratureNode presents a component that displays a node with an icon and a name.
@@ -18,7 +19,7 @@ const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElemen
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()
-        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
+        data.handleSetUrl(getConfig().MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
       }}
       data-testid={'additionalLiteratureNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
