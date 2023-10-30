@@ -84,7 +84,7 @@ export const Home = () => {
           ) : (
             courses.map((course) => {
               return (
-                <Card key={course.id}>
+                <Card key={course.id} sx={{mb:"1rem"}}>
                   <CardContent>
                     <Typography variant="h5">{course.name}</Typography>
                     <Typography variant="body1">{course.university}</Typography>

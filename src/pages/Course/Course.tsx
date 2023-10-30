@@ -37,7 +37,7 @@ export const Course = () => {
   }, [])
 
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} sx={{ml:"1rem", mr:"1rem"}}>
       {loading ? (
         <Box>
           <Stack spacing={1}>
