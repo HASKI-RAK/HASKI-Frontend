@@ -42,7 +42,7 @@ export const Home = () => {
               })
               .catch((error) => {
                 addSnackbar({
-                  message: t('Courses fetching error'),
+                  message: t('Courses.fetching.error'),
                   severity: 'error',
                   autoHideDuration: 5000
                 })
