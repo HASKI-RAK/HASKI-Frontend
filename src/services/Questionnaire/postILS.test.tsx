@@ -1,3 +1,4 @@
+import { getConfig } from '@shared'
 import { postILS } from './postILS'
 
 global.fetch = jest.fn(() =>
@@ -25,7 +26,7 @@ describe('postILS has expected behaviour', () => {
 
     const result = await postILS({ studentId: 1, outputJson: '2' })
 
-    expect(fetch).toHaveBeenCalledWith(`${process.env.BACKEND}/lms/student/1/questionnaire/ils`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/lms/student/1/questionnaire/ils`, {
       body: '2',
       credentials: 'include',
       headers: {

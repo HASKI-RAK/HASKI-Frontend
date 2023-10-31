@@ -1,3 +1,4 @@
+import { getConfig } from '@shared'
 import { getData } from '../RequestResponse'
 import { ILS } from '@core'
 
@@ -7,7 +8,7 @@ interface PostILSProps {
 }
 
 export const postILS = async ({ studentId, outputJson }: PostILSProps): Promise<ILS> => {
-  const response = await fetch(process.env.BACKEND + `/lms/student/${studentId}/questionnaire/ils`, {
+  const response = await fetch(getConfig().BACKEND + `/lms/student/${studentId}/questionnaire/ils`, {
     method: 'POST',
     credentials: 'include',
     headers: {

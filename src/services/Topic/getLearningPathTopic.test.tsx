@@ -1,3 +1,4 @@
+import { getConfig } from '@shared'
 //Tests fail with shortened Path
 import { getLearningPathTopic } from './getLearningPathTopic'
 
@@ -31,7 +32,7 @@ describe('getLearningPathElement has expected behaviour', () => {
     const result = await getLearningPathTopic(userId, lmsUserId, studentId, courseId)
 
     expect(fetch).toHaveBeenCalledWith(
-      `${process.env.BACKEND}/user/${userId}/${lmsUserId}/student/${studentId}/course/${courseId}/topic`,
+      `${getConfig().BACKEND}/user/${userId}/${lmsUserId}/student/${studentId}/course/${courseId}/topic`,
       {
         method: 'GET',
         credentials: 'include',
