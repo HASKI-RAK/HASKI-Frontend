@@ -13,7 +13,7 @@ import {useTranslation} from 'react-i18next'
  * @category Components
  */
 
-const onlyNumbersRegex = /[0-9]/g
+const onlyNumbersRegex = /[0-9]/
 
 const BreadcrumbsContainer = () => {
     // UX Logic
@@ -42,10 +42,7 @@ const BreadcrumbsContainer = () => {
                             )
 
                         //do not display numbers in breadcrumbs
-                        if(onlyNumbersRegex.test(array[index+1]))
-                        {
-                            return
-                        }
+                        if(onlyNumbersRegex.test(array[index+1])) return
                         else{
                             return (
                                 <Link
