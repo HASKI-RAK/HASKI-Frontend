@@ -12,12 +12,15 @@ import {useTranslation} from 'react-i18next'
  *
  * @category Components
  */
+
+const onlyNumbersRegex = /[0-9]/g
+
 const BreadcrumbsContainer = () => {
     // UX Logic
     const {t} = useTranslation()
     const navigate = useNavigate()
     const location = useLocation()
-    const regex = /[0-9]/g
+
 
     return (
         <Box sx={{display: 'flex', justifyContent: 'center'}}>
@@ -39,11 +42,9 @@ const BreadcrumbsContainer = () => {
                             )
 
                         //do not display numbers in breadcrumbs
-                        if(regex.test(array[index+1]))
+                        if(onlyNumbersRegex.test(array[index+1]))
                         {
-                            return (
-                                ""
-                            )
+                            return
                         }
                         else{
                             return (
@@ -57,7 +58,7 @@ const BreadcrumbsContainer = () => {
                                             location.pathname.split('/').slice(0, index + 1).join('/')
                                         )
                                     }}>
-                                    {regex.test(array[index]) ? t(`pages.${array[index-1].replace(regex, '').replaceAll("/","")}`) : t(`pages.${path}`)}
+                                    {onlyNumbersRegex.test(array[index]) ? t(`pages.${array[index-1].replace(onlyNumbersRegex, '').replaceAll("/","")}`) : t(`pages.${path}`)}
                                 </Link>
                             )
                         }
