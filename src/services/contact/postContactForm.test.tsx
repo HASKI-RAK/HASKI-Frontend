@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom'
+// test not working when import shortened
 import { FormDataType, postContactForm } from './postContactForm'
 global.fetch = jest.fn(() =>
   Promise.resolve({

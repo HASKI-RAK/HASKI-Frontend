@@ -5,7 +5,6 @@ import { resetters } from '../Zustand/Store'
 /**
  * AuthSlice
  *
- * @description
  * This slice is used to store the expire timestamp of the JWT token.
  */
 export default interface AuthSlice {
