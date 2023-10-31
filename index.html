@@ -22,9 +22,11 @@
 <li>Install the project dependencies via <code>yarn install</code></li>
 <li>Modify the <code>.env.development</code> or <code>.env.production file</code> to your needs (see below).</li>
 </ul>
-<a id="md:env-files" class="tsd-anchor"></a><h3><a href="#md:env-files">.env files</a></h3><p>The content of the <code>.env.development</code> or <code>.env.production</code> file gets injected at build time. The values will not be available at runtime. The .env file is not tracked by git.</p>
-<pre><code class="language-sh"><span class="hl-0"># API</span><br/><span class="hl-0"># Change the urls</span><br/><span class="hl-1">BACKEND</span><span class="hl-2">=</span><span class="hl-3">&quot;http://fakedomain.com:5000&quot;</span><br/><span class="hl-1">MOODLE</span><span class="hl-2">=</span><span class="hl-3">&quot;http://fakedomain.com&quot;</span><br/><span class="hl-1">LOG_LEVEL</span><span class="hl-2">=</span><span class="hl-3">&quot;debug&quot;</span><span class="hl-2"> </span><span class="hl-0"># or info, warn, error</span><br/><span class="hl-1">NODE_ENV</span><span class="hl-2">=</span><span class="hl-3">&quot;development&quot;</span><span class="hl-2"> </span><span class="hl-0"># or production</span>
+<a id="md:environment-variables" class="tsd-anchor"></a><h3><a href="#md:environment-variables">Environment variables</a></h3><p>To make the variables available during execution, you have to create a <code>env.development.json</code> and a <code>env.production.json</code> file in the public/config/ directory of the project.
+The content of the files should look like this:</p>
+<pre><code class="language-json"><span class="hl-0">{</span><br/><span class="hl-0">    </span><span class="hl-1">BACKEND=</span><span class="hl-2">&quot;http://fakedomain.com:5000&quot;</span><br/><span class="hl-0">    </span><span class="hl-1">MOODLE=</span><span class="hl-2">&quot;http://fakedomain.com&quot;</span><br/><span class="hl-0">    </span><span class="hl-1">LOG_LEVEL=</span><span class="hl-2">&quot;debug&quot;</span><br/><span class="hl-0">    </span><span class="hl-1">NODE_ENV=</span><span class="hl-2">&quot;development&quot;</span><br/><span class="hl-0">}</span>
 </code><button>Copy</button></pre>
+<p>Adapt the values to your needs. The <code>BACKEND</code> variable is the URL of the backend API. The <code>MOODLE</code> variable is the URL of the Moodle instance. The <code>LOG_LEVEL</code> variable is the log level of the application (trace, debug, info, warn, error). The <code>NODE_ENV</code> variable is the environment of the application.</p>
 <a id="md:scripts" class="tsd-anchor"></a><h3><a href="#md:scripts">Scripts</a></h3><ul>
 <li>Run for development: <code>yarn start</code></li>
 <li>Build for production: <code>yarn build-prod</code></li>
@@ -32,9 +34,10 @@
 <li>Run tests: <code>yarn test</code></li>
 <li>For linting: <code>yarn lint</code></li>
 </ul>
-<a id="md:docker" class="tsd-anchor"></a><h3><a href="#md:docker">Docker</a></h3><ul>
+<a id="md:docker" class="tsd-anchor"></a><h3><a href="#md:docker">Docker</a></h3><p>The volume <code>/public/config</code> contains the configuration files for the application. You can mount a local directory to this volume to use your own configuration files. the nginx server will serve the files in this directory. The default configuration files are located in the <code>public/config</code> directory of the project.</p>
+<ul>
 <li>Build docker image: <code>docker build -t haski-frontend:latest .</code></li>
-<li>Run docker image: <code>docker run -p 8080:80 haski-frontend:latest</code></li>
+<li>Run docker image: <code>docker run -p 8080:80 -v /public/config:/usr/share/nginx/html/config haski-frontend:latest</code></li>
 </ul>
 <a id="md:development" class="tsd-anchor"></a><h2><a href="#md:development">Development</a></h2><a id="md:documentation" class="tsd-anchor"></a><h3><a href="#md:documentation">Documentation</a></h3><p>The documentation is located in the <a href="https://wiki.haski.app">wiki</a>. The project is structured in the following way:</p>
 <ul>
@@ -134,7 +137,7 @@ It also runs <code>unimported</code> to check for unused imports. You will be pr
 <li><a href="#md:setup"><span>Setup</span></a></li>
 <li>
 <ul>
-<li><a href="#md:env-files"><span>.env files</span></a></li>
+<li><a href="#md:environment-variables"><span>Environment variables</span></a></li>
 <li><a href="#md:scripts"><span>Scripts</span></a></li>
 <li><a href="#md:docker"><span>Docker</span></a></li></ul></li>
 <li><a href="#md:development"><span>Development</span></a></li>
