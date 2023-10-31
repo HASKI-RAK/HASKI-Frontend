@@ -10,7 +10,7 @@ describe('BreadcrumbsContainer', () => {
     jest.mock('react-router-dom', () => ({
       ...jest.requireActual('react-router-dom'),
       useLocation: () => ({
-        pathname: 'localhost:8080/'
+        pathname: 'localhost:8080'
       })
     }))
     const { getAllByText, getByText } = render(

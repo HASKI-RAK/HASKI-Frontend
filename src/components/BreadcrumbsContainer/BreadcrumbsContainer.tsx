@@ -13,7 +13,7 @@ import {useTranslation} from 'react-i18next'
  * @category Components
  */
 
-const onlyNumbersRegex = /[0-9]/
+const onlyNumbersRegex = /\d/
 
 const BreadcrumbsContainer = () => {
     // UX Logic
@@ -41,7 +41,8 @@ const BreadcrumbsContainer = () => {
                                 </Link>
                             )
 
-                        //do not display numbers in breadcrumbs
+                        //Do not display current path if the next is a number for example course/3
+                        //In this example course will be ignored, 3 will be changed to match the previous name (course)
                         if(onlyNumbersRegex.test(array[index+1])) return
                         else{
                             return (
