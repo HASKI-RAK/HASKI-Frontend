@@ -57,7 +57,7 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
          onClick={() => props.onClose()}
          style={{
            top: '-5%',
-           left: '105%'
+           left: '100%'
          }}>
           <Close />
         </Fab>
@@ -65,7 +65,7 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
           src={props.url}
           title={props.title}
           width="100%"
-          height="100%"
+          height="105%"
           style={{
             position: 'relative',
             border: 0,
