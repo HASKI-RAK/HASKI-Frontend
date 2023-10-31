@@ -7,14 +7,14 @@ const style_box = {
   position: 'absolute',
   top: '25%',
   left: '25%',
-  transform: 'translate(-20%, -20%)',
+  transform: 'translate(-20%, -25%)',
   width: '75%',
   height: '85%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
-  overflow: 'hidden'
+  overflow: 'visible'
 }
 
 type IFrameModalProps = {
@@ -56,8 +56,8 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
          color="primary"
          onClick={() => props.onClose()}
          style={{
-           top: '-2%',
-           left: '-1%'
+           top: '-5%',
+           left: '105%'
          }}>
           <Close />
         </Fab>
@@ -65,11 +65,11 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
           src={props.url}
           title={props.title}
           width="100%"
-          height="110%"
+          height="100%"
           style={{
             position: 'relative',
             border: 0,
-            top: '-15%',
+            top: '-10%',
           }}
         />
       </Box>
