@@ -13,7 +13,7 @@ type ButtonProps = DefaultButtonProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
-const Button = ({ useStatement = _useStatement, children, onClick, ...props }: ButtonProps) => {
+const Button = ({ useStatement = _useStatement, ...props }: ButtonProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Button
@@ -24,16 +24,16 @@ const Button = ({ useStatement = _useStatement, children, onClick, ...props }: B
       // Send statement on every button click
       sendStatement(xAPIVerb.clicked)
 
-      if (onClick) {
-        onClick(event)
+      if (props.onClick) {
+        props.onClick(event)
       }
     },
-    [onClick, sendStatement]
+    [props.onClick, sendStatement]
   )
 
   return (
     <DefaultButton onClick={handleClick} {...props}>
-      {children}
+      {props.children}
     </DefaultButton>
   )
 }

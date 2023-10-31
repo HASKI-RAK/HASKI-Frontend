@@ -8,10 +8,14 @@ import log from 'loglevel'
 
 export enum xAPIComponent {
   Null,
+  Alert,
   Button,
   Form,
+  Link,
   Modal,
-  Box
+  Box,
+  Popover,
+  IconButton
 }
 
 export enum xAPIVerb {
