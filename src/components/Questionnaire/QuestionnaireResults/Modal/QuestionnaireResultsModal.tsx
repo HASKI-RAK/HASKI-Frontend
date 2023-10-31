@@ -5,6 +5,9 @@ import { ListItem } from '@mui/material'
 import { usePersistedStore } from '@store'
 import { ILS, ListK } from '@core'
 import log from 'loglevel'
+import { getILS, getListK, SnackbarContext } from '@services'
+import { SkeletonList } from '@components'
+import { Close } from '@common/icons'
 
 //Can not shorten import, tests fail to recognize i18n.use...
 import GraphListK from '../Graph/GraphListK'
@@ -13,9 +16,6 @@ import ResultDescriptionILS from '../Text/ResultDescriptionILS'
 import ResultDescriptionListK from '../Text/ResultDescriptionListK'
 import GraphILS from '../Graph/GraphILS'
 import TableILS from '../Table/TableILS'
-import { getILS, getListK, SnackbarContext } from '@services'
-import { SkeletonList } from '../../../index'
-import { Close } from '@common/icons'
 
 type QuestionnaireResultsILSLoadingProps = {
   t: (key: string) => string
