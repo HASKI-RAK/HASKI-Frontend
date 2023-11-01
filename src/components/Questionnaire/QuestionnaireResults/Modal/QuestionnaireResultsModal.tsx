@@ -78,7 +78,7 @@ const QuestionnaireResultsModal = ({
       .catch((error) => {
         log.error(error)
         addSnackbar({
-          message: t('User fetching error'),
+          message: t('fetchUserError'),
           severity: 'error'
         })
       })

@@ -1,16 +1,16 @@
 import { SnackbarContext } from '@services'
 import { useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useCookies } from 'react-cookie'
+import { CookiesProvider, useCookies } from 'react-cookie'
 
 /**
- * @prop privacyPolicyCookieSet - Currently set cookie
+ * @prop privacyPolicyCookie - The currently set cookie
  * @prop handleAccept - sets the cookie and displays a Snackbar
  * @category Hooks
  */
 
 export type PrivacyModalHookReturn = {
-  readonly privacyPolicyCookie: boolean
+  readonly privacyPolicyCookie: CookiesProvider
   readonly handleAccept: (isAccepted: boolean) => void
 }
 
@@ -19,6 +19,7 @@ export type PrivacyModalHookReturn = {
  * Provides function for setting the cookie and a prop that returns the cookie.
  * @returns - cookie and handleAccept function.
  * @category Hooks
+ * @interface
  */
 
 export const usePrivacyModal = (): PrivacyModalHookReturn => {
@@ -48,7 +49,7 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
     },
     [addSnackbar, setCookie]
   )
-  const privacyPolicyCookie = cookies['privacy_accept_token'] != null
+  const privacyPolicyCookie = cookies['privacy_accept_token']
   return useMemo(
     () => ({
       privacyPolicyCookie,

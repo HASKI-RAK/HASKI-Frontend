@@ -43,7 +43,6 @@ export type PrivacyModalProps = {
  *
  * @remarks
  * PrivacyModal shows a Modal for the user to read and accept the PrivacyPolicy and other.
- * A Formcontrol label can be added for other documents that need to be read by the user.
  * The PrivacyModal gets shown upon entering HASKI.
  * Gets rendered in App.
  *
@@ -63,7 +62,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
     if (reason && reason == 'backdropClick') return
   }, [])
 
-  //setting the check so the button gets enabled
+  //Sets checkbox to enable button
   const handleChecked = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
       setChecked((event.target as HTMLInputElement).checked)
@@ -80,72 +79,77 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
     [handleAccept, setOpen]
   )
 
-  //load nothing if cookie is set or privacypolicy page is loaded
-  if (privacyPolicyCookie || currentLocation.pathname.includes('privacypolicy')) return null
-
   return (
-    <Modal
-      aria-labelledby="privacy-modal"
-      aria-describedby="makes-the-user-accept-the-privacypolicy-or-not"
-      open={open}
-      onClose={handleClose}
-      closeAfterTransition>
-      <Box sx={style}>
-        <Typography id="transition-modal-title" variant="h4" component="h2">
-          {t('components.PrivacyModal.termsOfService')}
-          <Typography id="modal-text" variant="subtitle1" component="h2">
-            {t('components.PrivacyModal.afterReading')}
-            <FormGroup>
-              <FormControlLabel
-                onClick={handleChecked}
-                control={<Checkbox />}
-                label={
-                  <>
-                    {t('components.PrivacyModal.readPrivacypolicy')}
-                    <Link
-                      marginX="0.2em"
-                      component="button"
-                      variant="subtitle1"
-                      color={'textSecondary'}
-                      href={'/privacypolicy'}
-                      underline="hover"
-                      onClick={() => navigate('/privacypolicy')}>
-                      {t('pages.PrivacyPolicy')}
-                    </Link>
-                    {t('components.PrivacyModal.readPrivacypolicy2')}
-                  </>
-                }
-              />
-            </FormGroup>
-          </Typography>
-          <Box
-            height={'20%'}
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between'
-            }}>
-            <Tooltip title={t('components.PrivacyModal.returnToMoodle')}>
-              <Button
-                variant={'contained'}
-                sx={{ alignSelf: 'end' }}
-                aria-multiline={'true'}
-                onClick={() => {
-                  handleModal(false), (window.location.href = 'https://moodle.hs-kempten.de/enrol/index.php?id=357')
-                }}>
-                {t('decline')}
-              </Button>
-            </Tooltip>
-            <Button
-              variant={'contained'}
-              sx={{ alignSelf: 'end' }}
-              disabled={!checked}
-              onClick={() => handleModal(true)}>
-              {t('accept')}
-            </Button>
-          </Box>
-        </Typography>
-      </Box>
-    </Modal>
+    <>
+      {
+        // Don't load anything, if the current page is privacy policy page or the privacy policy cookie is set.
+        !(currentLocation.pathname.includes('privacypolicy') || privacyPolicyCookie) && (
+          <Modal
+            aria-labelledby="privacy-modal"
+            aria-describedby="makes-the-user-accept-the-privacypolicy-or-not"
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition>
+            <Box sx={style}>
+              <Typography id="transition-modal-title" variant="h4" component="h2">
+                {t('components.PrivacyModal.termsOfService')}
+                <Typography id="modal-text" variant="subtitle1" component="h2">
+                  {t('components.PrivacyModal.afterReading')}
+                  <FormGroup>
+                    <FormControlLabel
+                      onClick={handleChecked}
+                      control={<Checkbox />}
+                      label={
+                        <>
+                          {t('components.PrivacyModal.readPrivacypolicy')}
+                          <Link
+                            marginX="0.2em"
+                            component="button"
+                            variant="subtitle1"
+                            color={'textSecondary'}
+                            href={'/privacypolicy'}
+                            underline="hover"
+                            onClick={() => navigate('/privacypolicy')}>
+                            {t('pages.privacypolicy')}
+                          </Link>
+                          {t('components.PrivacyModal.readPrivacypolicy2')}
+                        </>
+                      }
+                    />
+                  </FormGroup>
+                </Typography>
+                <Box
+                  height={'20%'}
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between'
+                  }}>
+                  <Tooltip title={t('components.PrivacyModal.returnToMoodle')}>
+                    <Button
+                      variant={'contained'}
+                      sx={{ alignSelf: 'end' }}
+                      aria-multiline={'true'}
+                      onClick={() => {
+                        handleModal(false),
+                          (window.location.href = 'https://moodle.hs-kempten.de/enrol/index.php?id=357')
+                      }}>
+                      {t('decline')}
+                    </Button>
+                  </Tooltip>
+                  <Button
+                    variant={'contained'}
+                    sx={{ alignSelf: 'end' }}
+                    disabled={!checked}
+                    onClick={() => handleModal(true)}>
+                    {t('accept')}
+                  </Button>
+                </Box>
+              </Typography>
+            </Box>
+          </Modal>
+        )
+      }
+    </>
   )
 }
 export default memo(PrivacyModal)
