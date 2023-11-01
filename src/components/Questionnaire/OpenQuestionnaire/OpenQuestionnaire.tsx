@@ -28,16 +28,21 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
     if (reason == 'backdropClick')
       if (window.confirm(t('components.Menubar.CloseDialog'))) {
         setModalOpenILSLong(false)
-        setCookie('questionnaire_sent_token', true, { path: '/' })
       }
   }
-  if (!privacyPolicyCookie || cookie['questionnaire_sent_token']) {
-    return null
+  const handleSend = () => {
+    setSuccessSendILSLong(true)
+    setCookie('questionnaire_sent_token', true, { path: '/' })
   }
+
   return (
-    <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
-      <TableILSQuestions ilsLong={true} successSend={successSendILSLong} setSuccessSend={setSuccessSendILSLong} />
-    </QuestionnaireQuestionsModal>
+    <>
+      {privacyPolicyCookie && !cookie['questionnaire_sent_token'] && (
+        <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
+          <TableILSQuestions ilsLong={true} successSend={successSendILSLong} setSuccessSend={handleSend} />
+        </QuestionnaireQuestionsModal>
+      )}
+    </>
   )
 }
 export default OpenQuestionnaire
