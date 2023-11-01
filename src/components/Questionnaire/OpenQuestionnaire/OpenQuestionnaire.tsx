@@ -8,6 +8,12 @@ import {
 } from 'src/components/PrivacyModal/PrivacyModal.hooks'
 import { useCookies } from 'react-cookie'
 
+//** Was macht OpenQuestionnaire? */
+//öffnet questionnaire sobald privaymodal geschlossen und akzeptiert wurde (fertig)
+//checkt ob ilslong daten schon da sind mit getILS -> backend benötigt
+//setzt ils cookie sobald questionnaire gesendet wurde
+//cookie gilt nur für das questionnaire popup
+//cookie in einen hook auslagern
 export type PrivacyModalProps = {
   usePrivacyModal?: () => PrivacyModalHookReturn
 }
