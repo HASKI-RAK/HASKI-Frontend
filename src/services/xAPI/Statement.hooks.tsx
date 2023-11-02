@@ -40,7 +40,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   // Default values
   const { defaultComponentID = 'null', defaultComponent = xAPIComponent.Null } = params ?? {}
 
-  //
+  // maybe useTranslation('en')
   const { t, i18n } = useTranslation()
   const location = useLocation()
 
@@ -54,6 +54,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
       return '-1'
     })
 
+  // Schauen, ob es eine direkte Übersetzungsmöglichkeit gibt t('key', 'en')
   const getEnglishName = useCallback(
     (key: string) => {
       i18n.changeLanguage('en')

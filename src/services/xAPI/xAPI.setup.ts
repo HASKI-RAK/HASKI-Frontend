@@ -5,7 +5,8 @@ import XAPI from '@xapi/xapi'
 // auth: string with basic auth credentials
 // version: used xAPI version
 /**
- *
+ * getConfig in config.ts
+ * variablen in public/config
  */
 const xAPI: XAPI = new XAPI({
   endpoint: 'http://127.0.0.1:5000/endpoint', //'https://dev.lrs.haski.app/xapi', //

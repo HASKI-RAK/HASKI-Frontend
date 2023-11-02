@@ -19,20 +19,13 @@ const Button = ({ useStatement = _useStatement, ...props }: ButtonProps) => {
     defaultComponent: xAPIComponent.Button
   })
 
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-      // Send statement on every button click
-      sendStatement(xAPIVerb.clicked)
-
-      if (props.onClick) {
-        props.onClick(event)
-      }
-    },
-    [props.onClick, sendStatement]
-  )
-
   return (
-    <DefaultButton onClick={handleClick} {...props}>
+    <DefaultButton
+      onClick={(event) => {
+        sendStatement(xAPIVerb.clicked)
+        props.onClick?.(event)
+      }}
+      {...props}>
       {props.children}
     </DefaultButton>
   )
