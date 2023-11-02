@@ -7,6 +7,7 @@ import { CookiesProvider, useCookies } from 'react-cookie'
  * @prop privacyPolicyCookie - The currently set cookie
  * @prop handleAccept - sets the cookie and displays a Snackbar
  * @category Hooks
+ * @interface
  */
 
 export type PrivacyModalHookReturn = {
@@ -19,7 +20,6 @@ export type PrivacyModalHookReturn = {
  * Provides function for setting the cookie and a prop that returns the cookie.
  * @returns - cookie and handleAccept function.
  * @category Hooks
- * @interface
  */
 
 export const usePrivacyModal = (): PrivacyModalHookReturn => {
