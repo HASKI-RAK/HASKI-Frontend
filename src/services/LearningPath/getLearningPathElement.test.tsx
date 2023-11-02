@@ -1,3 +1,5 @@
+import { getConfig } from '@shared'
+//Tests fail with shortened Path
 import { getLearningPathElement } from './getLearningPathElement'
 
 global.fetch = jest.fn(() =>
@@ -31,7 +33,9 @@ describe('getLearningPathElement has expected behaviour', () => {
     const result = await getLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)
 
     expect(fetch).toHaveBeenCalledWith(
-      `${process.env.BACKEND}/user/${userId}/${lmsUserId}/student/${studentId}/course/${courseId}/topic/${topicId}/learningPath`,
+      `${
+        getConfig().BACKEND
+      }/user/${userId}/${lmsUserId}/student/${studentId}/course/${courseId}/topic/${topicId}/learningPath`,
       {
         method: 'GET',
         credentials: 'include',

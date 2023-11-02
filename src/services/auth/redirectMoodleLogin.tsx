@@ -1,3 +1,4 @@
+import { getConfig } from '@shared'
 import { getData } from '../RequestResponse'
 
 export type LTILaunchViewResponse = {
@@ -10,7 +11,7 @@ export type LTILaunchViewResponse = {
  * @returns {Promise<RequestResponse>} - The response of the request.
  */
 export const redirectMoodleLogin = async (): Promise<LTILaunchViewResponse> => {
-  const response = await fetch(process.env.BACKEND + `/lti_launch_view`, {
+  const response = await fetch(getConfig().BACKEND + `/lti_launch_view`, {
     method: 'GET',
     credentials: 'include',
     headers: {

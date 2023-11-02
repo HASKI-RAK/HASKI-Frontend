@@ -1,3 +1,4 @@
+import { getConfig } from '@shared'
 import { getILS } from './getILS'
 
 global.fetch = jest.fn(() =>
@@ -49,7 +50,7 @@ describe('getILS has expected behaviour', () => {
 
     const result = await getILS(1, 1, 1)
 
-    expect(fetch).toHaveBeenCalledWith(`${process.env.BACKEND}/user/1/1/student/1/learningStyle`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/1/1/student/1/learningStyle`, {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -84,7 +85,7 @@ describe('getILS has expected behaviour', () => {
 
     const result = await getILS(1, 1, 1)
 
-    expect(fetch).toHaveBeenCalledWith(`${process.env.BACKEND}/user/1/1/student/1/learningStyle`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/1/1/student/1/learningStyle`, {
       method: 'GET',
       credentials: 'include',
       headers: {
