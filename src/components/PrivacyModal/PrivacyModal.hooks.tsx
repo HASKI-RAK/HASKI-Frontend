@@ -16,9 +16,13 @@ export type PrivacyModalHookReturn = {
 }
 
 /**
+ * usePrivacyModal hook.
+ * @remarks
  * Hook for the PrivacyModal logic.
  * Provides function for setting the cookie and a prop that returns the cookie.
+ *
  * @returns - cookie and handleAccept function.
+ *
  * @category Hooks
  */
 
@@ -26,6 +30,7 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
   const [cookies, setCookie] = useCookies(['privacy_accept_token'])
+  const privacyPolicyCookie = cookies['privacy_accept_token']
 
   //**Logic **//
   const handleAccept = useCallback(
@@ -49,7 +54,6 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
     },
     [addSnackbar, setCookie]
   )
-  const privacyPolicyCookie = cookies['privacy_accept_token']
   return useMemo(
     () => ({
       privacyPolicyCookie,

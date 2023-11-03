@@ -76,10 +76,6 @@ describe('Test PrivacyModal', () => {
   })
 
   test('Modal does not render if cookie is set', () => {
-    Object.defineProperty(window.document, 'cookie', {
-      writable: true,
-      value: 'privacy_accept_token = true'
-    })
     const form = render(
       <MemoryRouter>
         <PrivacyModal />

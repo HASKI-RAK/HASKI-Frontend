@@ -1823,33 +1823,5 @@
   "components.PrivacyModal.accepted": "Thank you for your trust. Data to improve your learning experience is now being collected.",
   "components.PrivacyModal.declined": "You cannot access HASKI without accepting the essential cookies.",
   "fetchUserError": "There was an Error fetching User data",
-  "pages.ProjectDescription.introductionHeader": "What is HASKI?",
-  "pages.ProjectDescription.introductionBody": "HASKI stands for \"Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt\" (\"Higher education teaching: Adaptive, self-directed, AI-assisted\") and is funded by the Federal Ministry of Education and Research with a project duration until December 2025. HASKI is a collaborative project of three Bavarian universities: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
-  "pages.ProjectDescription.advantagesTeachingHeader": "Benefits for higher education teaching",
-  "pages.ProjectDescription.advantagesTeachingBody": "The HASKI system aims to make a significant contribution to establishing interactive, personalized, and self-directed learning in higher education. Digital media and platforms can provide much more than the current practice of higher education, which is dominated by traditional classroom teaching, even in the context of the pandemic.",
-  "pages.ProjectDescription.advantagesTeachingHeader2": "Application in higher education",
-  "pages.ProjectDescription.advantagesTeachingBody2": "The idea behind HASKI is to harness the potential of AI in the courses offered at University of Applied Sciences Kempten. This is achieved by combining in-person teaching, the learning management system (e.g. Moodle), and the HASKI system. With this we provide a software component that utilizes AI algorithms to assist you in achieving your learning goals.",
-  "pages.ProjectDescription.advantagesLearningHeader": "Benefits for you in your studies",
-  "pages.ProjectDescription.advantagesLearningBody": "The support is enabled by the HASKI system reading your data from Moodle and using an AI algorithm based on this data to suggest a personalized learning path through the learning materials. Of course, the decision about which material you want to work on next remains with you. HASKI also remembers these preferences and adjusts future suggestions to new circumstances.",
-  "pages.ProjectDescription.advantagesLearningHeader2": "What data does HASKI work with?",
-  "pages.ProjectDescription.advantagesLearningBody2": "The data basis consists of questionnaires, individual knowledge levels, evaluated tasks, and behavioral data from Moodle. Through anonymization of data, a conclusion about you by instructors is prevented.",
-  "pages.ProjectDescription.approachesHeader": "What is our approach?",
-  "pages.ProjectDescription.approachesBody": [
-    "National exchange. Publication of scientific contributions. Presentations at german conferences.",
-    "Application of state-of-the-art technology. Combination of learning analytics and artificial intelligence.",
-    "Empirical investigations. Online surveys, evaluation studies, data analysis."
-  ],
-  "pages.ProjectDescription.goalsHeader": "Goals of the HASKI project",
-  "pages.ProjectDescription.goalsBody": [
-    "Improvement and expansion of existing courses in the field of software engineering through the production of high-quality, pedagogically meaningful, and varied learning content",
-    "Comprehensive digital representation of individual students and their characteristics",
-    "Development of an adaptive and AI-based learning system for generating personalized learning path recommendations",
-    "AI-based evaluation of exercises and helpful feedback",
-    "Visualization and preparation of learning analytics to reflect on learning behavior",
-    "Didactically relevant reports for lecturers to improve courses"
-  ],
-  "pages.ProjectDescription.imageSources": "",
-  "pages.ProjectDescription.imageSource1": "Image by katemangostar on Freepik",
-  "pages.ProjectDescription.imageSource2": "Image by natanaelginting on Freepik",
   "User.fetching.error": "There was an Error fetching User data"
 }
