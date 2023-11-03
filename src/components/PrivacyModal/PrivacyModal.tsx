@@ -56,7 +56,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   const [checked, setChecked] = useState(false)
   const { privacyPolicyCookie, handleAccept, checkUniversity } = usePrivacyModal()
   const currentLocation = useLocation()
-  console.log(checkUniversity())
+
   //Disable backdropClick so the Modal only closes via the buttons
   const handleClose = useCallback((_: React.MouseEvent<HTMLElement>, reason: string) => {
     if (reason && reason == 'backdropClick') return
@@ -132,12 +132,15 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                       aria-multiline={'true'}
                       onClick={() => {
                         handleModal(false)
-                        if (checkUniversity() == 'HS-AS') {
-                          window.location.assign('https://moodle.th-ab.de/')
-                        } else if (checkUniversity() == 'HS-KE') window.location.assign('https://moodle.hs-kempten.de/')
-                        else {
-                          t('error')
-                        }
+                        checkUniversity().then((university) => {
+                          if (university === 'HS-AS') {
+                            window.location.assign('https://moodle.th-ab.de/')
+                          } else if (university == 'HS-KE') {
+                            window.location.assign('https://moodle.hs-kempten.de/')
+                          } else {
+                            t('error')
+                          }
+                        })
                       }}>
                       {t('decline')}
                     </Button>

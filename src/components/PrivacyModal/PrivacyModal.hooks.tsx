@@ -14,7 +14,7 @@ import { usePersistedStore } from '@store'
 export type PrivacyModalHookReturn = {
   readonly privacyPolicyCookie: CookiesProvider
   readonly handleAccept: (isAccepted: boolean) => void
-  readonly checkUniversity: () => string
+  readonly checkUniversity: () => Promise<string>
 }
 
 /**
@@ -34,11 +34,10 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
   const [cookies, setCookie] = useCookies(['privacy_accept_token'])
   const privacyPolicyCookie = cookies['privacy_accept_token']
   const fetchUser = usePersistedStore((state) => state.fetchUser)
-  const [university, setUniversity] = useState(String)
 
-  const checkUniversity = () => {
-    fetchUser().then((user) => {
-      setUniversity(user.university)
+  const checkUniversity = async () => {
+    const university = await fetchUser().then((user) => {
+      return user.university
     })
     return university
   }
