@@ -8,6 +8,7 @@ import {
 } from 'src/components/PrivacyModal/PrivacyModal.hooks'
 import { useCookies } from 'react-cookie'
 import { useStore, usePersistedStore } from '@store'
+import { ILS } from '@core'
 
 //** Was macht OpenQuestionnaire? */
 //öffnet questionnaire sobald privaymodal geschlossen und akzeptiert wurde (fertig)
@@ -24,6 +25,7 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
   const [modalOpenILSLong, setModalOpenILSLong] = useState(true)
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [cookie, setCookie] = useCookies(['questionnaire_sent_token'])
+  const [ilsData, setILSData] = useState<ILS | undefined>(undefined)
   const { privacyPolicyCookie } = usePrivacyModal()
   const handleCloseILSLongModal = (event: object, reason: string) => {
     if (reason == 'backdropClick')
@@ -46,11 +48,16 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
         setILSData(data)
       })
     })
-  })
+  }, [])
+  //überprüft ob ils keine antworten hat
+  const checkIfNoContent = () => {
+    if (ilsData?.perception_dimension == undefined && ilsData?.perception_value == undefined) return true
+    return false
+  }
 
   return (
     <>
-      {privacyPolicyCookie && !cookie['questionnaire_sent_token'] && (
+      {privacyPolicyCookie && !cookie['questionnaire_sent_token'] && checkIfNoContent() && (
         <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
           <TableILSQuestions ilsLong={true} successSend={successSendILSLong} setSuccessSend={handleSend} />
         </QuestionnaireQuestionsModal>
