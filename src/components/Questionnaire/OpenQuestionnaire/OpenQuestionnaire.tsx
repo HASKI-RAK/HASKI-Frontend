@@ -1,18 +1,19 @@
 import { QuestionnaireQuestionsModal } from '@components'
 import { TableILSQuestions } from '../QuestionnaireQuestions/Table/TableILSQuestions'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   PrivacyModalHookReturn,
   usePrivacyModal as _usePrivacyModal
 } from 'src/components/PrivacyModal/PrivacyModal.hooks'
 import { useCookies } from 'react-cookie'
+import { useStore, usePersistedStore } from '@store'
 
 //** Was macht OpenQuestionnaire? */
 //öffnet questionnaire sobald privaymodal geschlossen und akzeptiert wurde (fertig)
 //checkt ob ilslong daten schon da sind mit getILS -> backend benötigt
-//setzt ils cookie sobald questionnaire gesendet wurde
-//cookie gilt nur für das questionnaire popup
+//setzt ils cookie sobald questionnaire gesendet wurde (fertig)
+//cookie gilt nur für das questionnaire popup (sollte)
 //cookie in einen hook auslagern
 export type PrivacyModalProps = {
   usePrivacyModal?: () => PrivacyModalHookReturn
@@ -34,6 +35,18 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
     setSuccessSendILSLong(true)
     setCookie('questionnaire_sent_token', true, { path: '/' })
   }
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const fetchILS = useStore((state) => state.fetchILS)
+  //aktuellen User holen
+  //ils von user holen
+  //ils daten bekommen
+  useEffect(() => {
+    fetchUser().then((user) => {
+      fetchILS(user.settings.user_id, user.lms_user_id, user.id).then((data) => {
+        setILSData(data)
+      })
+    })
+  })
 
   return (
     <>
