@@ -54,9 +54,9 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   const navigate = useNavigate()
   const [open, setOpen] = useState(true)
   const [checked, setChecked] = useState(false)
-  const { privacyPolicyCookie, handleAccept } = usePrivacyModal()
+  const { privacyPolicyCookie, handleAccept, checkUniversity } = usePrivacyModal()
   const currentLocation = useLocation()
-
+  console.log(checkUniversity())
   //Disable backdropClick so the Modal only closes via the buttons
   const handleClose = useCallback((_: React.MouseEvent<HTMLElement>, reason: string) => {
     if (reason && reason == 'backdropClick') return
@@ -83,6 +83,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
     <>
       {
         // Don't load anything, if the current page is privacy policy page or the privacy policy cookie is set.
+
         !(currentLocation.pathname.includes('privacypolicy') || privacyPolicyCookie) && (
           <Modal
             aria-labelledby="privacy-modal"
@@ -131,7 +132,12 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                       aria-multiline={'true'}
                       onClick={() => {
                         handleModal(false)
-                        window.location.assign('https://moodle.hs-kempten.de/enrol/index.php?id=357')
+                        if (checkUniversity() == 'HS-AS') {
+                          window.location.assign('https://moodle.th-ab.de/')
+                        } else if (checkUniversity() == 'HS-KE') window.location.assign('https://moodle.hs-kempten.de/')
+                        else {
+                          t('error')
+                        }
                       }}>
                       {t('decline')}
                     </Button>
