@@ -8,20 +8,30 @@ import log from 'loglevel'
 
 export enum xAPIComponent {
   Null,
+  Accordion,
   Alert,
   Button,
+  Fab,
   Form,
   Link,
   Modal,
+  Menu,
+  MenuItem,
   Box,
   Popover,
-  IconButton
+  IconButton,
+  StepButton,
+  Select,
+  TextField,
+  RadioGroup,
+  ToggleButtonGroup
 }
 
 export enum xAPIVerb {
   clicked,
   opened,
-  closed
+  closed,
+  changed
 }
 
 export type useStatementHookParams = {

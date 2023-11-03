@@ -1,5 +1,5 @@
 import { LinkProps as DefaultLinkProps } from '@common/components'
-import { MouseEvent, memo, useCallback } from 'react'
+import { MouseEvent, memo, useCallback, ReactElement, FC } from 'react'
 import DefaultLink from '@mui/material/Link'
 import {
   xAPIVerb,
@@ -13,7 +13,7 @@ type LinkProps = DefaultLinkProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
-const Link = ({ useStatement = _useStatement, ...props }: LinkProps) => {
+const Link = ({ useStatement = _useStatement, ...props }): ReactElement<LinkProps> => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Link
