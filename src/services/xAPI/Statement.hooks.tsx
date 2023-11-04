@@ -79,28 +79,30 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   )
 
   // Wraps function so send statements from components
-  const sendStatement = useCallback(async (verb: xAPIVerb) => {
-    console.log(
-      getStatement(
-        await lmsUserID,
-        xAPIVerb[verb],
-        location.pathname,
-        defaultComponentID,
-        xAPIComponent[defaultComponent],
-        getEnglishName
-      )
-    )
-    xAPI.sendStatement({
-      statement: getStatement(
-        await lmsUserID,
-        xAPIVerb[verb],
-        location.pathname,
-        defaultComponentID,
-        xAPIComponent[defaultComponent],
-        getEnglishName
-      )
-    }) // Add statements to queue and send them in batch every few minutes?
-  }, [])
+  const sendStatement = useCallback(
+    async (verb: xAPIVerb) => {
+      xAPI.sendStatement({
+        statement: getStatement(
+          await lmsUserID,
+          xAPIVerb[verb],
+          location.pathname,
+          defaultComponentID,
+          xAPIComponent[defaultComponent],
+          getEnglishName
+        )
+      }) // TODO: Add statements to queue and send them in batch every few minutes?
+    },
+    [
+      xAPI.sendStatement,
+      getStatement,
+      lmsUserID,
+      xAPIVerb,
+      location.pathname,
+      defaultComponentID,
+      xAPIComponent[defaultComponent],
+      getEnglishName
+    ]
+  )
 
   return useMemo(() => ({ sendStatement }), [sendStatement])
 }

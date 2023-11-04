@@ -10,9 +10,9 @@ import {
 } from './ProjectDescriptionStepper.hooks'
 
 /**
- * @props body - The body texts that can be stepped through.
- * @props header - The header text that is permanently displayed above the body texts.
- * @props useProjectDescriptionStepper - The hook that is used for the stepper logic.
+ * @prop body - The body texts that can be stepped through.
+ * @prop header - The header text that is permanently displayed above the body texts.
+ * @prop useProjectDescriptionStepper - The hook that is used for the stepper logic.
  * @interface
  */
 type ProjectDescriptionStepperProps = {
@@ -116,10 +116,7 @@ const ProjectDescriptionStepper = ({
               border: 0
             }}
             nextButton={
-              <Button
-                size="small"
-                onClick={handleNext}
-                disabled={activeStep === (props.body && props.body.length - 1)}>
+              <Button size="small" onClick={handleNext} disabled={activeStep === (props.body && props.body.length - 1)}>
                 {t('Next')}
                 <KeyboardArrowRight />
               </Button>

@@ -5,7 +5,7 @@ import { useState, Dispatch, SetStateAction, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * @props useGlossary - The hook that is used for the Glossary page logic.
+ * @prop useGlossary - The hook that is used for the Glossary page logic.
  * @interface
  */
 type GlossaryProps = {

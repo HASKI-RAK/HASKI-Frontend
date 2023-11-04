@@ -7,10 +7,10 @@ import {
 } from './ProjectDescriptionCard.hooks'
 
 /**
- * @props body - The body text that is displayed on the bottom left side.
- * @props children - The child element that is displayed on the right side.
- * @props header - The header text that is displayed on the top left side.
- * @props useProjectDescriptionCard - The hook that is used for the card logic.
+ * @prop body - The body text that is displayed on the bottom left side.
+ * @prop children - The child element that is displayed on the right side.
+ * @prop header - The header text that is displayed on the top left side.
+ * @prop useProjectDescriptionCard - The hook that is used for the card logic.
  * @interface
  */
 type ProjectDescriptionCardProps = {

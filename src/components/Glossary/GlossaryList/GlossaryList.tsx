@@ -3,13 +3,13 @@ import { GlossaryEntry, GlossaryEntryProps } from '@components'
 import { useEffect, useState, memo } from 'react'
 
 /**
- * @props glossaryEntries - The entries to be displayed in the list.
- * @props expandedList -  The list of terms of the currently expanded entries.
- * @props setExpandedList - The function to set the currently expanded entries.
- * @props searchQuery - The query to search for in the properties of the entries.
- * @props selectedIndexElement - The index element to filter the entries by.
- * @props selectedTags - The tags to filter the entries by.
- * @props useGlossaryList - The hook supplying expand, filter and search functions.
+ * @prop glossaryEntries - The entries to be displayed in the list.
+ * @prop expandedList -  The list of terms of the currently expanded entries.
+ * @prop setExpandedList - The function to set the currently expanded entries.
+ * @prop searchQuery - The query to search for in the properties of the entries.
+ * @prop selectedIndexElement - The index element to filter the entries by.
+ * @prop selectedTags - The tags to filter the entries by.
+ * @prop useGlossaryList - The hook supplying expand, filter and search functions.
  * @interface
  */
 export type GlossaryListProps = {

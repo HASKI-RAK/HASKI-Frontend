@@ -9,14 +9,12 @@ import {
   useStatement as _useStatement
 } from '@services'
 
-export { DefaultTypography as Typography }
-
 type TextWrapperProps<C extends ElementType, P = object> = DefaultTypographyProps<C, P> & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
-export const TextWrapper = memo(
-  <C extends ElementType, P = object>({
+const TextWrapper = memo(
+  <C extends ElementType>({
     useStatement = _useStatement,
     ...props
   }: TextWrapperProps<C, { component?: C }>): ReactElement => {
@@ -40,3 +38,6 @@ export const TextWrapper = memo(
     )
   }
 )
+
+TextWrapper.displayName = 'TextWrapper'
+export { DefaultTypography as Typography, TextWrapper }

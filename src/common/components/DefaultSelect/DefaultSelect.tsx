@@ -1,5 +1,5 @@
 ﻿import { SelectProps as DefaultSelectProps, SelectChangeEvent } from '@common/components'
-import { memo, useCallback, MouseEvent, ReactNode, ChangeEvent, ReactElement } from 'react'
+import { useCallback, MouseEvent, ReactNode } from 'react'
 import DefaultSelect from '@mui/material/Select'
 import {
   xAPIVerb,
@@ -9,26 +9,19 @@ import {
   useStatement as _useStatement
 } from '@services'
 
-type SelectProps = DefaultSelectProps<any> & {
+type SelectProps<T> = DefaultSelectProps<T> & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
-const Select = ({ useStatement = _useStatement, ...props }: SelectProps) => {
+const Select = <T, K extends T>({ useStatement = _useStatement, ...props }: SelectProps<K>) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Select
   })
 
-  const handle = useCallback(
-    <T, K extends T>(event: SelectChangeEvent<K>, child: ReactNode) => {
-      sendStatement(xAPIVerb.changed)
-      props.onChange?.(event, child)
-    },
-    [sendStatement, props.onClick]
-  )
-
   return (
     <DefaultSelect
+      {...props}
       onClick={useCallback(
         (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked)
@@ -37,16 +30,16 @@ const Select = ({ useStatement = _useStatement, ...props }: SelectProps) => {
         [sendStatement, props.onClick]
       )}
       onChange={useCallback(
-        <T, K extends T>(event: SelectChangeEvent<K>, child: ReactNode) => {
+        (event: SelectChangeEvent<K>, child: ReactNode) => {
           sendStatement(xAPIVerb.changed)
           props.onChange?.(event, child)
         },
-        [sendStatement, props.onClick]
-      )}
-      {...props}>
+        [sendStatement, props.onChange]
+      )}>
       {props.children}
     </DefaultSelect>
   )
 }
 
-export default memo(Select)
+// No memo, because Select cannot be wrapped
+export default Select

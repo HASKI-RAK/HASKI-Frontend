@@ -9,13 +9,11 @@ import {
   xAPIVerb
 } from '@services'
 
-export { DefaultBox as Box }
-
 type BoxProps = DefaultBoxProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
-export const NodeWrapper = memo(({ useStatement = _useStatement, ...props }: BoxProps) => {
+const NodeWrapper = memo(({ useStatement = _useStatement, ...props }: BoxProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Node
@@ -40,7 +38,7 @@ type ImageWrapperProps<C extends ElementType, P = object> = DefaultBoxProps<C, P
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
-export const ImageWrapper = memo(
+const ImageWrapper = memo(
   <C extends ElementType>({
     useStatement = _useStatement,
     ...props
@@ -65,3 +63,7 @@ export const ImageWrapper = memo(
     )
   }
 )
+
+NodeWrapper.displayName = 'NodeWrapper'
+ImageWrapper.displayName = 'ImageWrapper'
+export { DefaultBox as Box, NodeWrapper, ImageWrapper }
