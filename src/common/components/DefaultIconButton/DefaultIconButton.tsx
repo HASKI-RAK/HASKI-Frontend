@@ -19,20 +19,16 @@ const IconButton = ({ useStatement = _useStatement, ...props }: IconButtonProps)
     defaultComponent: xAPIComponent.IconButton
   })
 
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-      // Send statement on every icon button click
-      sendStatement(xAPIVerb.clicked)
-
-      if (props.onClick) {
-        props.onClick(event)
-      }
-    },
-    [props.onClick, sendStatement]
-  )
-
   return (
-    <DefaultIconButton onClick={handleClick} {...props}>
+    <DefaultIconButton
+      onClick={useCallback(
+        (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+          sendStatement(xAPIVerb.clicked)
+          props.onClick?.(event)
+        },
+        [props.onClick, sendStatement]
+      )}
+      {...props}>
       {props.children}
     </DefaultIconButton>
   )

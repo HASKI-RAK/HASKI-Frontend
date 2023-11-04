@@ -1,6 +1,6 @@
 import { ButtonProps as DefaultButtonProps } from '@common/components'
 import DefaultButton from '@mui/material/Button'
-import { memo } from 'react'
+import { memo, useCallback, MouseEvent } from 'react'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -21,10 +21,13 @@ const Button = ({ useStatement = _useStatement, ...props }: ButtonProps) => {
 
   return (
     <DefaultButton
-      onClick={(event) => {
-        sendStatement(xAPIVerb.clicked)
-        props.onClick?.(event)
-      }}
+      onClick={useCallback(
+        (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+          sendStatement(xAPIVerb.clicked)
+          props.onClick?.(event)
+        },
+        [sendStatement, props.onClick]
+      )}
       {...props}>
       {props.children}
     </DefaultButton>

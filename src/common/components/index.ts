@@ -32,7 +32,7 @@ export { Paper } from './DefaultPaper/DefaultPaper'
 export { default as TextField } from './DefaultTextField/DefaultTextField'
 export { Fade } from './DefaultFade/DefaultFade'
 export { MobileStepper } from './DefaultMobileStepper/DefaultMobileStepper'
-export { default as Alert } from './DefaultAlert/DefaultAlert'
+export { Alert } from './DefaultAlert/DefaultAlert'
 export { Slide } from './DefaultSlide/DefaultSlide'
 export { Grow } from './DefaultGrow/DefaultGrow'
 export { Snackbar } from './DefaultSnackbar/DefaultSnackbar'
@@ -71,7 +71,6 @@ export { TableHead } from './DefaultTableHead/DefaultTableHead'
 export type { ButtonProps } from './DefaultButtonProps/DefaultButtonProps'
 export type { ModalProps } from './DefaultModalProps/DefaultModalProps'
 export type { BoxProps } from './DefaultBoxProps/DefaultBoxProps'
-export type { AlertProps } from './DefaultAlertProps/DefaultAlertProps'
 export type { LinkProps } from './DefaultLinkProps/DefaultLinkProps'
 export type { PopoverProps } from './DefaultPopoverProps/DefaultPopoverProps'
 export type { IconButtonProps } from './DefaultIconButtonProps/DefaultIconButtonProps'
@@ -87,3 +86,11 @@ export type { ToggleButtonGroupProps } from './DefaultToggleButtonGroupProps/Def
 
 export { Network } from './Network/Network'
 export { Bar } from './Bar/Bar'
+
+/**
+ * Overwritten components
+ */
+
+/**
+ * Reusable types
+ */

@@ -19,6 +19,14 @@ const Select = ({ useStatement = _useStatement, ...props }: SelectProps) => {
     defaultComponent: xAPIComponent.Select
   })
 
+  const handle = useCallback(
+    <T, K extends T>(event: SelectChangeEvent<K>, child: ReactNode) => {
+      sendStatement(xAPIVerb.changed)
+      props.onChange?.(event, child)
+    },
+    [sendStatement, props.onClick]
+  )
+
   return (
     <DefaultSelect
       onClick={useCallback(
@@ -28,10 +36,13 @@ const Select = ({ useStatement = _useStatement, ...props }: SelectProps) => {
         },
         [sendStatement, props.onClick]
       )}
-      onChange={(event, child) => {
-        sendStatement(xAPIVerb.changed)
-        props.onChange?.(event, child)
-      }}
+      onChange={useCallback(
+        <T, K extends T>(event: SelectChangeEvent<K>, child: ReactNode) => {
+          sendStatement(xAPIVerb.changed)
+          props.onChange?.(event, child)
+        },
+        [sendStatement, props.onClick]
+      )}
       {...props}>
       {props.children}
     </DefaultSelect>

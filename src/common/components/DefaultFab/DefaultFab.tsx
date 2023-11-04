@@ -1,6 +1,6 @@
 import { FabProps as DefaultFabProps } from '@common/components'
+import { memo, useCallback, MouseEvent } from 'react'
 import DefaultFab from '@mui/material/Fab'
-import { memo } from 'react'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -21,10 +21,13 @@ const Fab = ({ useStatement = _useStatement, ...props }: FabProps) => {
 
   return (
     <DefaultFab
-      onClick={(event) => {
-        sendStatement(xAPIVerb.clicked)
-        props.onClick?.(event)
-      }}
+      onClick={useCallback(
+        (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+          sendStatement(xAPIVerb.clicked)
+          props.onClick?.(event)
+        },
+        [sendStatement, props.onClick]
+      )}
       {...props}>
       {props.children}
     </DefaultFab>

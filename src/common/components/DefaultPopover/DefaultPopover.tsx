@@ -1,6 +1,6 @@
 import { PopoverProps as DefaultPopoverProps } from '@common/components'
-import { memo, useCallback } from 'react'
 import DefaultPopover from '@mui/material/Popover'
+import { memo, useCallback } from 'react'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -19,20 +19,16 @@ const Popover = ({ useStatement = _useStatement, ...props }: PopoverProps) => {
     defaultComponent: xAPIComponent.Popover
   })
 
-  const handleClose = useCallback(
-    (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
-      // Send statement on every popover close
-      sendStatement(xAPIVerb.closed)
-
-      if (props.onClose) {
-        props.onClose(event, reason)
-      }
-    },
-    [props.onClose, sendStatement]
-  )
-
   return (
-    <DefaultPopover onClose={handleClose} {...props}>
+    <DefaultPopover
+      onClose={useCallback(
+        (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
+          sendStatement(xAPIVerb.closed)
+          props.onClose?.(event, reason)
+        },
+        [props.onClose, sendStatement]
+      )}
+      {...props}>
       {props.children}
     </DefaultPopover>
   )
