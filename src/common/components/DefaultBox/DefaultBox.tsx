@@ -1,5 +1,5 @@
 import { BoxProps as DefaultBoxProps } from '@common/components'
-import React, { MouseEvent, memo, useCallback, Component, ReactElement } from 'react'
+import { MouseEvent, memo, useCallback, ReactElement, ElementType } from 'react'
 import DefaultBox from '@mui/material/Box'
 import {
   useStatement as _useStatement,
@@ -9,36 +9,59 @@ import {
   xAPIVerb
 } from '@services'
 
+export { DefaultBox as Box }
+
 type BoxProps = DefaultBoxProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
-const Box = ({ useStatement = _useStatement, ...props }): ReactElement<BoxProps> => {
+export const NodeWrapper = memo(({ useStatement = _useStatement, ...props }: BoxProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.Box
+    defaultComponent: xAPIComponent.Node
   })
 
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-      sendStatement(xAPIVerb.clicked)
-
-      if (props.onClick) {
-        props.onClick(event)
-      }
-    },
-    [props.onClick, sendStatement]
-  )
-
   return (
-    <DefaultBox onClick={handleClick} {...props}>
+    <DefaultBox
+      onClick={useCallback(
+        (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
+          sendStatement(xAPIVerb.clicked)
+          props.onClick?.(event)
+        },
+        [props.onClick, sendStatement]
+      )}
+      {...props}>
       {props.children}
     </DefaultBox>
   )
+})
+
+type ImageWrapperProps<C extends ElementType, P = object> = DefaultBoxProps<C, P> & {
+  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
-export default memo(Box)
+export const ImageWrapper = memo(
+  <C extends ElementType>({
+    useStatement = _useStatement,
+    ...props
+  }: ImageWrapperProps<C, { alt?: string }>): ReactElement => {
+    const { sendStatement } = useStatement({
+      defaultComponentID: props.id,
+      defaultComponent: xAPIComponent.Image
+    })
 
-// NodeWrapper
-// ImageWrapper
-// TextWrapper
+    return (
+      <DefaultBox
+        onClick={useCallback(
+          (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
+            sendStatement(xAPIVerb.clicked)
+            props.onClick?.(event)
+          },
+          [props.onClick, sendStatement]
+        )}
+        {...props}>
+        {props.children}
+      </DefaultBox>
+    )
+  }
+)

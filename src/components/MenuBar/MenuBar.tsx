@@ -15,7 +15,9 @@ import {
   Popover,
   Divider,
   ListItemIcon,
-  Link
+  Link,
+  ImageWrapper,
+  TextWrapper
 } from '@common/components'
 
 import {
@@ -164,7 +166,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   return (
     <AppBar position="static">
       <Toolbar disableGutters>
-        <Box
+        <ImageWrapper
           component="img"
           sx={{
             mt: 2,
@@ -189,7 +191,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               textAlign: 'center',
               display: { xs: 'none', md: 'flex' }
             }}>
-            <Typography
+            <TextWrapper
               variant="h6"
               noWrap
               component="a"
@@ -204,7 +206,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               }}
               onClick={() => navigate('/')}>
               HASKI
-            </Typography>
+            </TextWrapper>
             {courseSelected && (
               <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
                 <Tooltip title="Open topics">

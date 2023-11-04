@@ -24,7 +24,10 @@ export enum xAPIComponent {
   Select,
   TextField,
   RadioGroup,
-  ToggleButtonGroup
+  ToggleButtonGroup,
+  Node,
+  Image,
+  Text
 }
 
 export enum xAPIVerb {

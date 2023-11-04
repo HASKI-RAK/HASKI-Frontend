@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from '@common/components'
+import { NodeWrapper, Paper, Typography } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
 import { ShortText } from '@common/icons'
 import { Handle, NodeProps, Position } from 'reactflow'
@@ -14,7 +14,7 @@ import { memo } from 'react'
  */
 const ShortTextualIntroductionNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
-    <Box
+    <NodeWrapper
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()
@@ -36,7 +36,7 @@ const ShortTextualIntroductionNode = ({ data }: NodeProps<LearningPathLearningEl
         {data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
-    </Box>
+    </NodeWrapper>
   )
 }
 
