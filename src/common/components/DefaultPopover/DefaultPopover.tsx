@@ -20,7 +20,7 @@ const Popover = ({ useStatement = _useStatement, ...props }: PopoverProps) => {
   })
 
   const handleClose = useCallback(
-    (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => {
+    (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
       // Send statement on every popover close
       sendStatement(xAPIVerb.closed)
 

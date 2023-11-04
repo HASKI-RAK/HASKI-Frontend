@@ -13,7 +13,7 @@ type LinkProps = DefaultLinkProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
-const Link = ({ useStatement = _useStatement, ...props }): ReactElement<LinkProps> => {
+const Link = ({ useStatement = _useStatement, ...props }: LinkProps): ReactElement<LinkProps> => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Link
