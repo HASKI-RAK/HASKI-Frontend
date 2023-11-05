@@ -1,7 +1,6 @@
 import { Button, Typography, Box } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { XapiTest } from '@components'
 // TODO: Added unfinished projectinformation page for routing purposes
 
 /**
@@ -32,7 +31,6 @@ export const ProjectInformation = () => {
           <Typography>{t('pages.glossary')}</Typography>
         </Button>
       </Box>
-      <XapiTest />
     </>
   )
 }

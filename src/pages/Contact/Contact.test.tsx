@@ -57,7 +57,9 @@ describe('Test Contactpage', () => {
   test('not sending', () => {
     render(
       <SnackbarContext.Provider value={mockSnackbarContext}>
-        <Contact />
+        <MemoryRouter>
+          <Contact />
+        </MemoryRouter>
       </SnackbarContext.Provider>
     )
     expect(useContact).not.toBeCalled()
@@ -81,7 +83,11 @@ describe('Test Contactpage', () => {
     fireEvent.click(submitButton)
     expect(useContact).toBeCalled()
 
-    render(<Contact />)
+    render(
+      <MemoryRouter>
+        <Contact />
+      </MemoryRouter>
+    )
   })
 
   test('test catch error', async () => {
@@ -165,7 +171,9 @@ describe('Test on submit Function', () => {
         const onSubmit = useContact({ setIsLoading: loadingMock })
         return onSubmit
       },
-      { wrapper: ({ children }) => <SnackbarContext.Provider value={my_context}>{children}</SnackbarContext.Provider> }
+      {
+        wrapper: ({ children }) => <SnackbarContext.Provider value={my_context}>{children}</SnackbarContext.Provider>
+      }
     )
 
     const onSubmit = result.result.current

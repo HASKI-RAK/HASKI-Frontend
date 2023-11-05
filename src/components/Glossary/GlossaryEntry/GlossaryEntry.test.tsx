@@ -1,5 +1,6 @@
 import GlossaryEntry, { GlossaryEntryProps, GlossaryAccordionEntryProps } from './GlossaryEntry'
 import { fireEvent, render } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
 
 const mockGlossaryEntry: GlossaryEntryProps = {
@@ -33,11 +34,13 @@ const mockGlossaryAccordionEntryProps2: GlossaryAccordionEntryProps = {
 describe('GlossaryEntry tests', () => {
   it('renders correctly with input', () => {
     const { getByTestId, getAllByTestId } = render(
-      <GlossaryEntry
-        expandedList={mockGlossaryAccordionEntryProps.expandedList}
-        setExpandedList={mockGlossaryAccordionEntryProps.setExpandedList}
-        {...mockGlossaryAccordionEntryProps}
-      />
+      <MemoryRouter>
+        <GlossaryEntry
+          expandedList={mockGlossaryAccordionEntryProps.expandedList}
+          setExpandedList={mockGlossaryAccordionEntryProps.setExpandedList}
+          {...mockGlossaryAccordionEntryProps}
+        />
+      </MemoryRouter>
     )
 
     const button = getByTestId('glossaryEntryTerm')
@@ -54,7 +57,11 @@ describe('GlossaryEntry tests', () => {
   })
 
   test('renders correctly', () => {
-    const { getByTestId } = render(<GlossaryEntry />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <GlossaryEntry />
+      </MemoryRouter>
+    )
 
     const button = getByTestId('glossaryEntryTerm')
     expect(button.textContent).toEqual('')
@@ -68,11 +75,13 @@ describe('GlossaryEntry tests', () => {
 
   it('can be openend', () => {
     const { getByRole } = render(
-      <GlossaryEntry
-        expandedList={mockGlossaryAccordionEntryProps2.expandedList}
-        setExpandedList={mockGlossaryAccordionEntryProps2.setExpandedList}
-        {...mockGlossaryAccordionEntryProps2}
-      />
+      <MemoryRouter>
+        <GlossaryEntry
+          expandedList={mockGlossaryAccordionEntryProps2.expandedList}
+          setExpandedList={mockGlossaryAccordionEntryProps2.setExpandedList}
+          {...mockGlossaryAccordionEntryProps2}
+        />
+      </MemoryRouter>
     )
     fireEvent.click(getByRole('button'))
     expect(mockGlossaryAccordionEntryProps2.setExpandedList).toHaveBeenCalled()
@@ -80,11 +89,13 @@ describe('GlossaryEntry tests', () => {
 
   it('can be closed', () => {
     const { getByRole } = render(
-      <GlossaryEntry
-        expandedList={mockGlossaryAccordionEntryProps.expandedList}
-        setExpandedList={mockGlossaryAccordionEntryProps.setExpandedList}
-        {...mockGlossaryAccordionEntryProps}
-      />
+      <MemoryRouter>
+        <GlossaryEntry
+          expandedList={mockGlossaryAccordionEntryProps.expandedList}
+          setExpandedList={mockGlossaryAccordionEntryProps.setExpandedList}
+          {...mockGlossaryAccordionEntryProps}
+        />
+      </MemoryRouter>
     )
     fireEvent.click(getByRole('button'))
     expect(mockGlossaryAccordionEntryProps.setExpandedList).toHaveBeenCalled()

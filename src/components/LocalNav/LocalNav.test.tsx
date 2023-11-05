@@ -142,7 +142,11 @@ describe('LocalNav tests', () => {
       useLearningPathElement: mockUseLearningPathElement
     }
 
-    const { getAllByTestId } = render(<LocalNav {...props} />)
+    const { getAllByTestId } = render(
+      <MemoryRouter>
+        <LocalNav {...props} />
+      </MemoryRouter>
+    )
 
     const topicAccordions = getAllByTestId(/topic-Accordion/)
     expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
@@ -173,7 +177,11 @@ describe('LocalNav tests', () => {
       useLearningPathElement: mockUseLearningPathElement
     }
 
-    const result = render(<LocalNav {...props} />)
+    const result = render(
+      <MemoryRouter>
+        <LocalNav {...props} />
+      </MemoryRouter>
+    )
     expect(result).toBeTruthy()
   })
 
@@ -193,7 +201,11 @@ describe('LocalNav tests', () => {
       useLearningPathElement: mockUseLearningPathElement
     }
 
-    const { getAllByTestId } = render(<LocalNav {...props} />)
+    const { getAllByTestId } = render(
+      <MemoryRouter>
+        <LocalNav {...props} />
+      </MemoryRouter>
+    )
 
     const topicAccordions = getAllByTestId(/topic-Accordion/)
     expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')

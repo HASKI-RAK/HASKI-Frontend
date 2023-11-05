@@ -3,6 +3,7 @@ import { TableListKQuestions } from './TableListKQuestions'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import { mockServices } from 'jest.setup'
+import { MemoryRouter } from 'react-router-dom'
 
 const mockNavigate = jest.fn()
 
@@ -26,7 +27,11 @@ describe('TableListKQuestions', () => {
   const setSuccessSend = jest.fn((successSend) => successSend)
 
   test('ListK RadioButtons can be checked', () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
 
     const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
       'input[type="radio"]'
@@ -61,7 +66,11 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK next Button is enabled, when all radioButtons are selected', () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -95,7 +104,11 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK next Button is enabled, when all radioButtons are selected (2 Pages)', () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
@@ -159,7 +172,11 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK next Button is disabled, when not all radioButtons are selected', () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -190,7 +207,11 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK values are stored', () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
 
     const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1'
     const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2'
@@ -319,7 +340,11 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK values can be send', async () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
@@ -409,7 +434,11 @@ describe('TableListKQuestions', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
 
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
@@ -492,7 +521,9 @@ describe('TableListKQuestions', () => {
 
   test('ListK Questions are undefined (40 instead of 39 questions)', async () => {
     const { getByTestId } = render(
-      <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} testUndefined={true} />
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} testUndefined={true} />
+      </MemoryRouter>
     )
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')

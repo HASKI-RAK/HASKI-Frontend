@@ -1,5 +1,6 @@
 import { render, renderHook } from '@testing-library/react'
 import { useGlossaryList } from './GlossaryList.hooks'
+import { MemoryRouter } from 'react-router-dom'
 import GlossaryList from './GlossaryList'
 import '@testing-library/jest-dom'
 
@@ -25,7 +26,11 @@ describe('GlossaryList tests', () => {
     setExpandedList: jest.fn()
   }
   it('renders with input', () => {
-    const { getByText } = render(<GlossaryList {...mockGlossaryListProps} />)
+    const { getByText } = render(
+      <MemoryRouter>
+        <GlossaryList {...mockGlossaryListProps} />
+      </MemoryRouter>
+    )
 
     expect(getByText(mockGlossaryListProps.glossaryEntries[0].term)).toBeInTheDocument()
     expect(getByText(mockGlossaryListProps.glossaryEntries[0].definition)).toBeInTheDocument()

@@ -1,4 +1,5 @@
 import { act, fireEvent, render } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
 import LoginForm from './LoginForm'
 
@@ -18,7 +19,11 @@ describe('Test LoginForm', () => {
     (username: string, password: string) => [username.length !== 0, password.length !== 0] as const
   )
   test('Login form no input', () => {
-    const loginForm = render(<LoginForm onSubmit={submit} onValidate={validate} />)
+    const loginForm = render(
+      <MemoryRouter>
+        <LoginForm onSubmit={submit} onValidate={validate} />
+      </MemoryRouter>
+    )
     const [passwordvisibilitybutton, button] = loginForm.getAllByRole('button')
     const username = loginForm.getAllByRole('textbox')[0]
     const password = loginForm.container.querySelector('#password') as HTMLElement
@@ -58,7 +63,11 @@ describe('Test LoginForm', () => {
   })
 
   test('Login form with default values', () => {
-    const loginForm = render(<LoginForm />)
+    const loginForm = render(
+      <MemoryRouter>
+        <LoginForm />
+      </MemoryRouter>
+    )
     const button = loginForm.getAllByRole('button')[1]
     const username = loginForm.getAllByRole('textbox')[0]
     const password = loginForm.container.querySelector('#password') as HTMLElement
@@ -79,7 +88,11 @@ describe('Test LoginForm', () => {
 
   test('the moodle login button', () => {
     const navigate = jest.fn()
-    const loginForm = render(<LoginForm moodleLogin onMoodleLogin={navigate} />)
+    const loginForm = render(
+      <MemoryRouter>
+        <LoginForm moodleLogin onMoodleLogin={navigate} />
+      </MemoryRouter>
+    )
     // get button with moodle-login-button data-testid
     const buttonLogin = loginForm.getByTestId('moodle-login-button')
     // Click on moodle login button
@@ -90,7 +103,11 @@ describe('Test LoginForm', () => {
   })
 
   test('the moodle login button with default hook', () => {
-    const loginForm = render(<LoginForm moodleLogin />)
+    const loginForm = render(
+      <MemoryRouter>
+        <LoginForm moodleLogin />
+      </MemoryRouter>
+    )
     // get button with moodle-login-button data-testid
     const buttonLogin = loginForm.getByTestId('moodle-login-button')
     // Click on moodle login button

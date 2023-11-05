@@ -1,7 +1,7 @@
 /**
  *
  */
-export const getActor = (lmsUserID: string) => {
+const getActor = (lmsUserID: string) => {
   return {
     account: {
       homePage: new URL(window.location.href).origin,
@@ -13,7 +13,7 @@ export const getActor = (lmsUserID: string) => {
 /**
  *
  */
-export const getVerb = (verb: string) => {
+const getVerb = (verb: string) => {
   return {
     id: 'https://wiki.haski.app/verbs/'.concat(verb), // URI of action in online directory + element -> hardcoded
     display: {
@@ -25,7 +25,7 @@ export const getVerb = (verb: string) => {
 /**
  *
  */
-export const getObject = (elementURL: string, component: string) => {
+const getObject = (elementURL: string, component: string) => {
   return {
     id: new URL(window.location.href).origin.concat(elementURL),
     definition: {
@@ -83,7 +83,7 @@ const getContextActivities = (path: string, getEnglishName: (key: string) => str
   }
 }
 
-export const getContext = (path: string, getEnglishName: (key: string) => string) => {
+const getContext = (path: string, getEnglishName: (key: string) => string) => {
   return {
     platform: 'Frontend',
     language: localStorage.getItem('i18nextLng') ?? '',

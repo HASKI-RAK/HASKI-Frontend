@@ -24,7 +24,11 @@ jest.mock('react-i18next', () => ({
 
 describe('Test ResultDescriptionListK with all Methods', () => {
   test('Modal does not open with optional props', async () => {
-    const { queryByTestId } = render(<QuestionnaireResultsModal />)
+    const { queryByTestId } = render(
+      <MemoryRouter>
+        <QuestionnaireResultsModal />
+      </MemoryRouter>
+    )
 
     const modal = queryByTestId('ILS and ListK Modal')
     expect(modal).not.toBeInTheDocument()

@@ -1,22 +1,35 @@
 import { PrivacyPolicy } from '@pages'
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 
 describe('Test the PrivacyPolicy page', () => {
   it('renders PrivacyPolicy', () => {
-    const { getByText } = render(<PrivacyPolicy />)
+    const { getByText } = render(
+      <MemoryRouter>
+        <PrivacyPolicy />
+      </MemoryRouter>
+    )
     expect(getByText('pages.PrivacyPolicy')).toBeTruthy()
   })
 
   it('renders the correct address details', () => {
-    const { getByText, getAllByText } = render(<PrivacyPolicy />)
+    const { getByText, getAllByText } = render(
+      <MemoryRouter>
+        <PrivacyPolicy />
+      </MemoryRouter>
+    )
     expect(getByText('Jim Haug (HS Kempten)')).toBeTruthy()
     expect(getAllByText('Bahnhofstraße 61')).toBeTruthy()
     expect(getAllByText('D - 87435 Kempten')).toBeTruthy()
   })
 
   it('displays the correct Privacy Policy information', () => {
-    const { getByText } = render(<PrivacyPolicy />)
+    const { getByText } = render(
+      <MemoryRouter>
+        <PrivacyPolicy />
+      </MemoryRouter>
+    )
     expect(getByText('1. pages.PrivacyPolicy.header.1')).toBeTruthy()
     expect(getByText('pages.PrivacyPolicy.header.1.Text')).toBeTruthy()
     expect(getByText('2. pages.PrivacyPolicy.header.2')).toBeTruthy()
