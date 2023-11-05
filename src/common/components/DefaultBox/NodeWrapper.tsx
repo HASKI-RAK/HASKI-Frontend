@@ -1,6 +1,7 @@
 import { BoxProps as DefaultBoxProps } from '@common/components'
 import { MouseEvent, memo, useCallback } from 'react'
 import { Box } from './DefaultBox'
+import log from 'loglevel'
 import {
   useStatement as _useStatement,
   useStatementHookParams,
@@ -23,7 +24,7 @@ const NodeWrapper = ({ useStatement = _useStatement, ...props }: NodeWrapperProp
     <Box
       onClick={useCallback(
         (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked)
+          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
           props.onClick?.(event)
         },
         [props.onClick, sendStatement]

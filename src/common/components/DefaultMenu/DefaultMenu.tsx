@@ -1,6 +1,7 @@
 import { MenuProps as DefaultMenuProps } from '@common/components'
 import DefaultMenu from '@mui/material/Menu'
 import { memo, useCallback } from 'react'
+import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -23,7 +24,7 @@ const Menu = ({ useStatement = _useStatement, ...props }: MenuProps) => {
     <DefaultMenu
       onClose={useCallback(
         (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
-          sendStatement(xAPIVerb.closed)
+          sendStatement(xAPIVerb.closed).catch((reason) => log.error(reason))
           props.onClose?.(event, reason)
         },
         [sendStatement, props.onClose]

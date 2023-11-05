@@ -43,6 +43,7 @@ export type useStatementHookParams = {
 }
 
 export type StatementHookReturn = {
+  readonly getEnglishName: (key: string) => string
   readonly sendStatement: (verb: xAPIVerb) => Promise<void>
 }
 
@@ -53,7 +54,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   // Default values
   const { defaultComponentID = 'null', defaultComponent = xAPIComponent.Null } = params ?? {}
 
-  // maybe useTranslation('en')
+  // TODO: maybe useTranslation('en')
   const { t, i18n } = useTranslation()
   const location = useLocation()
 
@@ -67,7 +68,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
       return '-1'
     })
 
-  // Schauen, ob es eine direkte Übersetzungsmöglichkeit gibt t('key', 'en')
+  // TODO: Schauen, ob es eine direkte Übersetzungsmöglichkeit gibt t('key', 'en')
   const getEnglishName = useCallback(
     (key: string) => {
       i18n.changeLanguage('en')
@@ -78,19 +79,24 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
     [i18n, t]
   )
 
+  // TODO: Add statements to queue and send them in batch every few minutes?
   // Wraps function so send statements from components
   const sendStatement = useCallback(
     async (verb: xAPIVerb) => {
-      xAPI.sendStatement({
-        statement: getStatement(
-          await lmsUserID,
-          xAPIVerb[verb],
-          location.pathname,
-          defaultComponentID,
-          xAPIComponent[defaultComponent],
-          getEnglishName
-        )
-      }) // TODO: Add statements to queue and send them in batch every few minutes?
+      xAPI
+        .sendStatement({
+          statement: getStatement(
+            await lmsUserID,
+            xAPIVerb[verb],
+            location.pathname,
+            defaultComponentID,
+            xAPIComponent[defaultComponent],
+            getEnglishName
+          )
+        })
+        .catch((error) => {
+          log.error(error) // Some tests in LocalNav and Contact fail if catch is missing, otherwise not needed.
+        })
     },
     [
       xAPI.sendStatement,
@@ -104,5 +110,5 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
     ]
   )
 
-  return useMemo(() => ({ sendStatement }), [sendStatement])
+  return useMemo(() => ({ getEnglishName, sendStatement }), [getEnglishName, sendStatement])
 }

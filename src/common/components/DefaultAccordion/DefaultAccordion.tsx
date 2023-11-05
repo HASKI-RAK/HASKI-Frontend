@@ -1,6 +1,7 @@
 import { AccordionProps as DefaultAccordionProps } from '@common/components'
 import DefaultAccordion from '@mui/material/Accordion'
 import { memo, useCallback, MouseEvent } from 'react'
+import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -23,7 +24,7 @@ const Accordion = ({ useStatement = _useStatement, ...props }: AccordionProps) =
     <DefaultAccordion
       onClick={useCallback(
         (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked)
+          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
           props.onClick?.(event)
         },
         [sendStatement, props.onClick]

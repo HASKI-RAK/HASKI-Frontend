@@ -1,6 +1,7 @@
 import { IconButtonProps as DefaultIconButtonProps } from '@common/components'
 import DefaultIconButton from '@mui/material/IconButton'
 import { MouseEvent, memo, useCallback } from 'react'
+import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -23,7 +24,7 @@ const IconButton = ({ useStatement = _useStatement, ...props }: IconButtonProps)
     <DefaultIconButton
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked)
+          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
           props.onClick?.(event)
         },
         [props.onClick, sendStatement]

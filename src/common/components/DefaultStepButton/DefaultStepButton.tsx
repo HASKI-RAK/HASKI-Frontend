@@ -1,6 +1,7 @@
 import { StepButtonProps as DefaultStepButtonProps } from '@common/components'
 import DefaultStepButton from '@mui/material/StepButton'
 import { memo, useCallback, MouseEvent } from 'react'
+import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -23,7 +24,7 @@ const StepButton = ({ useStatement = _useStatement, ...props }: StepButtonProps)
     <DefaultStepButton
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked)
+          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
           props.onClick?.(event)
         },
         [sendStatement, props.onClick]

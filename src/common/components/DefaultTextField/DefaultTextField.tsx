@@ -1,6 +1,7 @@
 import { TextFieldProps as DefaultTextFieldProps } from '@common/components'
 import DefaultTextField from '@mui/material/TextField'
 import { memo, useCallback, ChangeEvent } from 'react'
+import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -23,7 +24,7 @@ const TextField = ({ useStatement = _useStatement, ...props }: TextFieldProps) =
     <DefaultTextField
       onChange={useCallback(
         (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-          sendStatement(xAPIVerb.changed)
+          sendStatement(xAPIVerb.changed).catch((reason) => log.error(reason))
           props.onChange?.(event)
         },
         [sendStatement, props.onChange]

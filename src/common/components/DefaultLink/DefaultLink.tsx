@@ -1,6 +1,7 @@
 import { MouseEvent, memo, useCallback, ReactElement, ElementType } from 'react'
 import { LinkProps as DefaultLinkProps } from '@common/components'
 import DefaultLink from '@mui/material/Link'
+import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -30,7 +31,7 @@ const Link = <C extends ElementType>({
     <DefaultLink
       onClick={useCallback(
         (event: MouseEvent<HTMLSpanElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked)
+          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
           props.onClick?.(event)
         },
         [props.onClick, sendStatement]

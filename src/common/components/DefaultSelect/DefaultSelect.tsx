@@ -1,6 +1,7 @@
 ﻿import { SelectProps as DefaultSelectProps, SelectChangeEvent } from '@common/components'
 import { useCallback, MouseEvent, ReactNode } from 'react'
 import DefaultSelect from '@mui/material/Select'
+import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -24,14 +25,14 @@ const Select = <T, K extends T>({ useStatement = _useStatement, ...props }: Sele
       {...props}
       onClick={useCallback(
         (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked)
+          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
           props.onClick?.(event)
         },
         [sendStatement, props.onClick]
       )}
       onChange={useCallback(
         (event: SelectChangeEvent<K>, child: ReactNode) => {
-          sendStatement(xAPIVerb.changed)
+          sendStatement(xAPIVerb.changed).catch((reason) => log.error(reason))
           props.onChange?.(event, child)
         },
         [sendStatement, props.onChange]

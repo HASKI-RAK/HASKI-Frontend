@@ -45,9 +45,9 @@ const getParent = (path: string, getEnglishName: (key: string) => string) => {
     {
       id: new URL(window.location.href).origin.concat(path),
       definition: {
-        type: 'https://wiki.haski.app/pages/'.concat(path.split('/').pop() ?? ''),
+        type: 'https://wiki.haski.app/pages/'.concat(path.split('/').pop() ?? ''), // Cannot be undefined, but TS doesn't know that
         name: {
-          en: getEnglishName(path.split('/').pop() ?? '')
+          en: getEnglishName(path.split('/').pop() ?? '') // Cannot be undefined, but TS doesn't know that
         }
       }
     }
@@ -68,7 +68,7 @@ const getGrouping = () => {
   ]
 }
 
-const getContextActivities = (path: string, getEnglishName: (key: string) => string) => {
+export const getContextActivities = (path: string, getEnglishName: (key: string) => string) => {
   if (path === '/') {
     return {}
   } else if (path.split('/').length === 2) {
@@ -118,3 +118,5 @@ export const getStatement = (
     timestamp: new Date().toISOString().replace('Z', '+00:00')
   }
 }
+
+export default getStatement

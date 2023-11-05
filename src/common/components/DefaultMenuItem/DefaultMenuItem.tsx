@@ -1,6 +1,7 @@
 import { MenuItemProps as DefaultMenuItemProps } from '@common/components'
 import { memo, MouseEvent, useCallback } from 'react'
 import DefaultMenuItem from '@mui/material/MenuItem'
+import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -23,7 +24,7 @@ const MenuItem = ({ useStatement = _useStatement, ...props }: MenuItemProps) => 
     <DefaultMenuItem
       onClick={useCallback(
         (event: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked)
+          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
           props.onClick?.(event)
         },
         [sendStatement, props.onClick]
