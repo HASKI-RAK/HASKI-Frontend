@@ -6,49 +6,89 @@ import { usePersistedStore } from '@store'
 import xAPI from './xAPI.setup'
 import log from 'loglevel'
 
+/**
+ * xAPIComponent enum.
+ *
+ * @remarks
+ * xAPIComponent represents an enum that can be used to determine the component that sends the xAPI statement.
+ *
+ * @category Services
+ */
 export enum xAPIComponent {
-  Null,
   Accordion,
   Alert,
   Button,
   Fab,
   Form,
+  IconButton,
+  Image,
   Link,
-  Modal,
   Menu,
   MenuItem,
-  Box,
-  Popover,
-  IconButton,
-  StepButton,
-  Select,
-  TextField,
-  RadioGroup,
-  ToggleButtonGroup,
+  Modal,
   Node,
-  Image,
-  Text
+  Null,
+  Popover,
+  RadioGroup,
+  Select,
+  StepButton,
+  Text,
+  TextField,
+  ToggleButtonGroup
 }
 
+/**
+ * xAPIVerb enum.
+ *
+ * @remarks
+ * xAPIVerb represents an enum that can be used to determine the verb of an xAPI statement.
+ *
+ * @category Services
+ */
 export enum xAPIVerb {
   clicked,
-  opened,
   closed,
   changed
 }
 
+/**
+ * @prop defaultComponentID - The default value for the component ID.
+ * @prop defaultComponent - The default value for the component.
+ * @category Services
+ * @category Hooks
+ * @interface
+ */
 export type useStatementHookParams = {
   defaultComponentID?: string
   defaultComponent?: xAPIComponent
 }
 
+/**
+ * @prop getEnglishName - The function that returns the English name of a component.
+ * @prop sendStatement - The function that sends an xAPI statement to an predetermined LRS.
+ * @category Services
+ * @category Hooks
+ * @interface
+ */
 export type StatementHookReturn = {
   readonly getEnglishName: (key: string) => string
   readonly sendStatement: (verb: xAPIVerb) => Promise<void>
 }
 
 /**
+ * useStatement hook.
  *
+ * @param params - The default values for the statement.
+ *
+ * @remarks
+ * Hook for the Statement logic.
+ * Handles the logic to get parts of an xAPI Statement that can only be gathered inside a functional component or hook.
+ * Provides a function to send an xAPI statement.
+ *
+ * @returns - Logic to send an xAPI statement to an LRS.
+ *
+ * @category Services
+ * @category Hooks
  */
 export const useStatement = (params?: useStatementHookParams): StatementHookReturn => {
   // Default values
@@ -69,20 +109,31 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
     })
 
   // TODO: Schauen, ob es eine direkte Übersetzungsmöglichkeit gibt t('key', 'en')
+  // Function to get the english name of a page.
   const getEnglishName = useCallback(
     (key: string) => {
       i18n.changeLanguage('en')
       const translatedName = t('pages.'.concat(key))
       i18n.changeLanguage(localStorage.getItem('i18nextLng') ?? 'en')
       return translatedName
+      // return t('pages.'.concat(key), 'en')
     },
     [i18n, t]
   )
 
-  // TODO: Add statements to queue and send them in batch every few minutes?
   // Wraps function so send statements from components
   const sendStatement = useCallback(
     async (verb: xAPIVerb) => {
+      console.log(
+        getStatement(
+          await lmsUserID,
+          xAPIVerb[verb],
+          location.pathname,
+          defaultComponentID,
+          xAPIComponent[defaultComponent],
+          getEnglishName
+        )
+      )
       xAPI
         .sendStatement({
           statement: getStatement(

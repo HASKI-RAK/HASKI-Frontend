@@ -1,5 +1,14 @@
 /**
+ * getActor function.
  *
+ * @param lmsUserID - The LMS user ID of the current user.
+ *
+ * @remarks
+ * getActor presents a function that can be used to get the actor part of an xAPI statement.
+ *
+ * @returns - The actor part of an xAPI statement.
+ *
+ * @category Services
  */
 const getActor = (lmsUserID: string) => {
   return {
@@ -11,7 +20,16 @@ const getActor = (lmsUserID: string) => {
 }
 
 /**
+ * getVerb function.
  *
+ * @param verb - The verb of the xAPI statement.
+ *
+ * @remarks
+ * getVerb presents a function that can be used to get the verb part of an xAPI statement.
+ *
+ * @returns - The verb part of an xAPI statement.
+ *
+ * @category Services
  */
 const getVerb = (verb: string) => {
   return {
@@ -23,11 +41,21 @@ const getVerb = (verb: string) => {
 }
 
 /**
+ * getObject function.
  *
+ * @param componentURL - The URL of the component.
+ * @param component - The name of the component.
+ *
+ * @remarks
+ * getObject presents a function that can be used to get the object part of an xAPI statement.
+ *
+ * @returns - The object part of an xAPI statement.
+ *
+ * @category Services
  */
-const getObject = (elementURL: string, component: string) => {
+const getObject = (componentURL: string, component: string) => {
   return {
-    id: new URL(window.location.href).origin.concat(elementURL),
+    id: new URL(window.location.href).origin.concat(componentURL),
     definition: {
       name: {
         en: component
@@ -38,7 +66,17 @@ const getObject = (elementURL: string, component: string) => {
 }
 
 /**
+ * getParent function.
  *
+ * @param path - The path of the parent page.
+ * @param getEnglishName - The function to translate a page name to english.
+ *
+ * @remarks
+ * getParent presents a function that can be used to get the parent part of an xAPI statement.
+ *
+ * @returns - The parent part of an xAPI statement.
+ *
+ * @category Services
  */
 const getParent = (path: string, getEnglishName: (key: string) => string) => {
   return [
@@ -54,6 +92,16 @@ const getParent = (path: string, getEnglishName: (key: string) => string) => {
   ]
 }
 
+/**
+ * getGrouping function.
+ *
+ * @remarks
+ * getGrouping presents a function that can be used to get the grouping part of an xAPI statement.
+ *
+ * @returns - The grouping part of an xAPI statement.
+ *
+ * @category Services
+ */
 const getGrouping = () => {
   return [
     {
@@ -68,6 +116,19 @@ const getGrouping = () => {
   ]
 }
 
+/**
+ * getContextActivities function.
+ *
+ * @param path - The path of the parent page.
+ * @param getEnglishName - The function to translate a page name to english.
+ *
+ * @remarks
+ * getContextActivities presents a function that can be used to get the contextActivities part of an xAPI statement.
+ *
+ * @returns - The contextActivities part of an xAPI statement.
+ *
+ * @category Services
+ */
 export const getContextActivities = (path: string, getEnglishName: (key: string) => string) => {
   if (path === '/') {
     return {}
@@ -83,6 +144,19 @@ export const getContextActivities = (path: string, getEnglishName: (key: string)
   }
 }
 
+/**
+ * getContext function.
+ *
+ * @param path - The path of the parent page.
+ * @param getEnglishName - The function to translate a page name to english.
+ *
+ * @remarks
+ * getContext presents a function that can be used to get the context part of an xAPI statement.
+ *
+ * @returns - The context part of an xAPI statement.
+ *
+ * @category Services
+ */
 const getContext = (path: string, getEnglishName: (key: string) => string) => {
   return {
     platform: 'Frontend',
@@ -100,7 +174,22 @@ const getContext = (path: string, getEnglishName: (key: string) => string) => {
 }
 
 /**
+ * getStatement function.
  *
+ * @param lmsUserID - The LMS user ID of the current user.
+ * @param verb - The verb of the xAPI statement.
+ * @param path - The path of the parent page.
+ * @param componentID - The ID of the component.
+ * @param componentName - The name of the component.
+ * @param getEnglishName - The function to translate a page name to english.
+ *
+ * @remarks
+ * getStatement presents a function that can be used to get an xAPI statement.
+ * The resulting statement can be used to send data to an LRS.
+ *
+ * @returns - An xAPI statement.
+ *
+ * @category Services
  */
 export const getStatement = (
   lmsUserID: string,

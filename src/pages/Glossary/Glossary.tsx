@@ -12,7 +12,6 @@ type GlossaryProps = {
   useGlossary?: () => GlossaryHookReturn
 }
 
-//
 /**
  * getSelectedTagsWrapper function.
  *
