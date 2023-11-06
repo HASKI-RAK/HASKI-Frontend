@@ -1,12 +1,14 @@
 import { SnackbarContext } from '@services'
-import { useCallback, useContext, useMemo, useState } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CookiesProvider, useCookies } from 'react-cookie'
 import { usePersistedStore } from '@store'
+import log from 'loglevel'
 
 /**
  * @prop privacyPolicyCookie - The currently set cookie
  * @prop handleAccept - sets the cookie and displays a Snackbar
+ * @prop checkUniverity - returns the university of the user
  * @category Hooks
  * @interface
  */
@@ -35,14 +37,19 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
   const privacyPolicyCookie = cookies['privacy_accept_token']
   const fetchUser = usePersistedStore((state) => state.fetchUser)
 
+  //**Logic **//
+  //fetch the university from the current user and return university
   const checkUniversity = async () => {
-    const university = await fetchUser().then((user) => {
-      return user.university
-    })
-    return university
+    return fetchUser()
+      .then((user) => {
+        return user.university
+      })
+      .catch((reason) => {
+        log.error(reason)
+        return ''
+      })
   }
 
-  //**Logic **//
   const handleAccept = useCallback(
     (isAccepted: boolean) => {
       if (isAccepted) {

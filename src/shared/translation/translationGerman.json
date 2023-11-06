@@ -1792,6 +1792,5 @@
   "components.PrivacyModal.termsOfService": "Nutzungsbedingungen und Datenschutzerklärung",
   "components.PrivacyModal.accepted": "Danke für Ihr Vertrauen. Daten werden jetzt gesammelt, um Ihnen eine bessere Lernerfahrung zu bieten.",
   "components.PrivacyModal.declined": "Sie können HASKI nicht verwenden, ohne den essentiellen Cookies zuzustimmen.",
-  "fetchUserError": "There was an Error fetching User data",
   "User.fetching.error": "Es gab einen Fehler beim Abrufen der Benutzerdaten."
 }

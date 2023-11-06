@@ -133,12 +133,16 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                       onClick={() => {
                         handleModal(false)
                         checkUniversity().then((university) => {
-                          if (university === 'HS-AS') {
+                          if (university == 'TH-AB') {
                             window.location.assign('https://moodle.th-ab.de/')
                           } else if (university == 'HS-KE') {
                             window.location.assign('https://moodle.hs-kempten.de/')
                           } else {
-                            t('error')
+                            if (currentLocation.pathname == '/') {
+                              history.back()
+                            } else {
+                              history.go(-2)
+                            }
                           }
                         })
                       }}>
