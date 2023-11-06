@@ -58,7 +58,7 @@ const LazyLoadingLearningPathElement = ({
               '&:hover': { backgroundColor: (theme) => theme.palette.primary.main }
             }}
             onClick={() => {
-              navigate(`/topics/${topic.name}/${learningElement.learning_element.name}`)
+              navigate(`/course/${courseId}/topic/${topic.id}`)
             }}>
             {learningElement.position} {learningElement.learning_element.name}
           </Link>

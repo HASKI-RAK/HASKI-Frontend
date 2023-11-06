@@ -195,7 +195,7 @@ describe('Topic Page', () => {
             name: ''
           },
           position: {
-            x: -100,
+            x: -225,
             y: 0
           },
           style: {
@@ -203,7 +203,8 @@ describe('Topic Page', () => {
             border: '1px solid #9e9e9e',
             borderRadius: 8,
             cursor: 'pointer',
-            padding: 10
+            padding: 10,
+            width: 500
           }
         },
         {
@@ -221,7 +222,7 @@ describe('Topic Page', () => {
             name: ''
           },
           position: {
-            x: -100,
+            x: -225,
             y: 250
           },
           style: {
@@ -229,7 +230,8 @@ describe('Topic Page', () => {
             border: '1px solid #9e9e9e',
             borderRadius: 8,
             cursor: 'pointer',
-            padding: 10
+            padding: 10,
+            width: 500
           }
         }
       ],

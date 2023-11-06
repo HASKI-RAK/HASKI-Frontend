@@ -37,6 +37,6 @@ describe('MainFrame', () => {
       </MemoryRouter>
     )
 
-    expect(container.textContent).toContain('pages.home/pages.course/pages.2')
+    expect(container.textContent).toContain('pages.home/pages.course')
   })
 })
