@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { Link, Skeleton, Typography } from '@common/components'
-import {useLearningPathElement as _useLearningPathElement} from './LocalNav.hooks'
+import { useLearningPathElement as _useLearningPathElement } from './LocalNav.hooks'
 import { LearningPathElement, Topic } from '@core'
 
 /**

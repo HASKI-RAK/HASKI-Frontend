@@ -115,7 +115,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       }
 
       // Exercise nodes
-      const exerciseLearningElementChildNodes : Node[] = learningPathExercises.map((node, index) => {
+      const exerciseLearningElementChildNodes: Node[] = learningPathExercises.map((node, index) => {
         const nodeData: LearningPathLearningElementNode = {
           lmsId: node.learning_element.lms_id,
           name: node.learning_element.name,
