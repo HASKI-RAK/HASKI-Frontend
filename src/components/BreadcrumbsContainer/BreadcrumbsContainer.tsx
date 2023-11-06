@@ -11,7 +11,7 @@ const showCurrentBreadcrump = (
   navigate: NavigateFunction,
   t: (key: string) => string
 ) => {
-  return onlyNumbersRegex.test(array[index + 1]) ? undefined : (
+  return (
     <Link
       key={path}
       underline="hover"
