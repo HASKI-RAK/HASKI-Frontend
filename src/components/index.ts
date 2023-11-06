@@ -25,7 +25,7 @@ export { default as SnackbarTransition } from './Snackbar/SnackbarTransition/Sna
 export { default as IFrameModal } from './IFrameModal/IFrameModal'
 export { default as SkeletonList } from './SkeletonList/SkeletonList'
 export { default as Filter } from './Filter/Filter'
-export { default as GlossaryList } from './Glossary/GlossaryList/GlossaryList'	
+export { default as GlossaryList } from './Glossary/GlossaryList/GlossaryList'
 export { default as Searchbar } from './Searchbar/Searchbar'
 export { default as GlossaryIndex } from './Glossary/GlossaryIndex/GlossaryIndex'
 export { default as GlossaryEntry, type GlossaryEntryProps } from './Glossary/GlossaryEntry/GlossaryEntry'

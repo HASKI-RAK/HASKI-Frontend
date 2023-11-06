@@ -1,6 +1,7 @@
 .git
 .gitignore
 .github
+.gitmodules
 .husky
 node_modules
 Dockerfile*
@@ -8,3 +9,11 @@ docker-compose*
 README.md
 LICENSE
 .vscode
+.eslintrc
+.eslintignore
+.prettierrc
+.prettieriignore
+.unimportedrc.json
+sonar-project.properties
+tsdoc.json
+typedoc.json
