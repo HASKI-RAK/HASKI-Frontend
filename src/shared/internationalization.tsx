@@ -34,6 +34,7 @@ const resources = {
   }
 }
 
+// eslint-disable-next-line immutable/no-let
 let lng = ''
 
 /* istanbul ignore next */

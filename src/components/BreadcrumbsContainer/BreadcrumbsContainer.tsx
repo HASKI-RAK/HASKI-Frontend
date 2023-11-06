@@ -1,9 +1,12 @@
 import { Box, Breadcrumbs, Link, Typography } from '@common/components'
 import { useLocation, useNavigate, NavigateFunction } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { memo } from 'react'
 
+// Regex to check if a string contains numbers
 const onlyNumbersRegex = /\d/
 
+// Check if current index is number, if yes return the previous name
 const showCurrentBreadcrump = (
   path: string,
   index: number,
@@ -33,9 +36,11 @@ const showCurrentBreadcrump = (
 }
 
 /**
- *  The BreadcrumbsContainer that renders breadcrumbs.
+ * BreadcrumbsContainer component.
+ *
  * @example
- * Home / Page 1 / Page 2 / Page 3
+ * URL: Home / Page / 1 / Page / 2 / Page / 3
+ * Breadcrumbs: Home / Page / Page / Page
  *
  * @remarks
  * It contains the breadcrumbs of the application and is used in the main frame.
@@ -92,4 +97,4 @@ const BreadcrumbsContainer = () => {
   )
 }
 
-export default BreadcrumbsContainer
+export default memo(BreadcrumbsContainer)
