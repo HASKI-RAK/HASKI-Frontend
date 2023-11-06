@@ -14,18 +14,21 @@ The complete **technical documentation** can be found [here](https://wiki.haski.
 - Install the project dependencies via `yarn install`
 - Modify the `.env.development` or `.env.production file` to your needs (see below).
 
-### .env files
+### Environment variables
 
-The content of the `.env.development` or `.env.production` file gets injected at build time. The values will not be available at runtime. The .env file is not tracked by git.
+To make the variables available during execution, you have to create a `env.development.json` and a `env.production.json` file in the public/config/ directory of the project.
+The content of the files should look like this:
 
-```sh
-# API
-# Change the urls
-BACKEND="http://fakedomain.com:5000"
-MOODLE="http://fakedomain.com"
-LOG_LEVEL="debug" # or info, warn, error
-NODE_ENV="development" # or production
+```json
+{
+    BACKEND="http://fakedomain.com:5000"
+    MOODLE="http://fakedomain.com"
+    LOG_LEVEL="debug"
+    NODE_ENV="development"
+}
 ```
+
+Adapt the values to your needs. The `BACKEND` variable is the URL of the backend API. The `MOODLE` variable is the URL of the Moodle instance. The `LOG_LEVEL` variable is the log level of the application (trace, debug, info, warn, error). The `NODE_ENV` variable is the environment of the application.
 
 ### Scripts
 
@@ -37,8 +40,10 @@ NODE_ENV="development" # or production
 
 ### Docker
 
+The volume `/public/config` contains the configuration files for the application. You can mount a local directory to this volume to use your own configuration files. the nginx server will serve the files in this directory. The default configuration files are located in the `public/config` directory of the project.
+
 - Build docker image: `docker build -t haski-frontend:latest .`
-- Run docker image: `docker run -p 8080:80 haski-frontend:latest`
+- Run docker image: `docker run -p 8080:80 -v /public/config:/usr/share/nginx/html/config haski-frontend:latest`
 
 ## Development
 

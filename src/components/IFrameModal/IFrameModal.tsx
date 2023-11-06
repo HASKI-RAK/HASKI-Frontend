@@ -1,5 +1,4 @@
-import { Box, Modal } from '@common/components'
-import { Fab } from '@mui/material'
+import { Box, Modal, Fab } from '@common/components'
 import { memo } from 'react'
 import { Close } from '@common/icons'
 
@@ -37,17 +36,6 @@ type IFrameModalProps = {
  */
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
   const { url, title, isOpen, onClose } = props
-  // const [open, setOpen] = useState(false)
-
-  // const handleOpen = () => setOpen(true)
-  // const handleClose = () => {
-  //   setOpen(false)
-  //   props.onClose()
-  // }
-
-  // useEffect(() => {
-  //   setOpen(props.isOpen)
-  // }, [props.isOpen])
 
   return (
     <Modal open={props.isOpen} onClose={props.onClose}>

@@ -1,3 +1,4 @@
+import { getConfig } from '@shared'
 import { getCourses } from './getCourses'
 
 global.fetch = jest.fn(() =>
@@ -29,7 +30,7 @@ describe('getCourses has expected behaviour', () => {
     const result = await getCourses(userId, lmsUserId, studentId)
 
     expect(fetch).toHaveBeenCalledWith(
-      `${process.env.BACKEND}/user/${userId}/${lmsUserId}/student/${studentId}/course`,
+      `${getConfig().BACKEND}/user/${userId}/${lmsUserId}/student/${studentId}/course`,
       {
         method: 'GET',
         credentials: 'include',

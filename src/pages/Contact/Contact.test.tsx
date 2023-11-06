@@ -6,6 +6,7 @@ import { FormDataType, SnackbarContext, SnackbarContextType } from '@services'
 import { useContact } from './Contact.hooks'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
+import { getConfig } from '@shared'
 
 /*jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -92,7 +93,7 @@ describe('Test Contactpage', () => {
         }
       })
     ) as jest.Mock
-    const result = await fetch(process.env.BACKEND + `/contactform`)
+    const result = await fetch(getConfig().BACKEND + `/contactform`)
     expect(result.status).toBe(undefined)
   })
 })
@@ -192,20 +193,22 @@ describe('Test on submit Function', () => {
     }) as jest.Mock*/
 
     // When running the whole suite, getUser gets overwritten by previous test.
-    mockServices.getUser = jest.fn().mockImplementationOnce(() => Promise.resolve({
-      id: 1,
-      lms_user_id: 1,
-      name: 'Thaddäus Tentakel',
-      role: 'Tester',
-      role_id: 1,
-      settings: {
+    mockServices.getUser = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
         id: 1,
-        user_id: 1,
-        pswd: '1234',
-        theme: 'test'
-      },
-      university: 'HS Kempten'
-    }))
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'HS Kempten'
+      })
+    )
     mockServices.postContactForm = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
     const loadingMock = jest.fn()
     const addSnackbarMock = jest.fn()

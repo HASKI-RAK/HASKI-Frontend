@@ -57,4 +57,5 @@ Create _component_or_page_name_
 - [ ] Use Skeleton components if something has to be fetched (if necessary)
 - [ ] Error management: Components should handle undefined inputs
 - [ ] Components should be resuable (if possible)
+- [ ] Add new libraries to [license collection](https://lab.las3.de/nextcloud/index.php/apps/onlyoffice/616264?filePath=%2FHASKI-Extern%2F02-Software%2F02-Deployment%2FLizenzsammlung.xlsx) document
 - [ ] [Component Requirements](https://lab.las3.de/nextcloud/index.php/apps/onlyoffice/510074?filePath=%2FHASKI-Extern%2F06-Frontend%2F03-UX%2F04-Implementation%2FComponent_Requirements.docx) are met
