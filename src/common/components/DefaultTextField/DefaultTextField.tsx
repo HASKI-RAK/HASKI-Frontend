@@ -10,10 +10,22 @@ import {
   useStatement as _useStatement
 } from '@services'
 
+/**
+ * @prop DefaultTextFieldProps - The props of a mui TextField.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ */
 type TextFieldProps = DefaultTextFieldProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * TextField component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui TextField.
+ *
+ * @category Common
+ */
 const TextField = ({ useStatement = _useStatement, ...props }: TextFieldProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,

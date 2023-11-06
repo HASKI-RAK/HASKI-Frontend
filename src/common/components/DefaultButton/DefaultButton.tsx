@@ -10,10 +10,22 @@ import {
   useStatement as _useStatement
 } from '@services'
 
+/**
+ * @prop DefaultButtonProps - The props of a mui Button.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ */
 type ButtonProps = DefaultButtonProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * Button component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui Button.
+ *
+ * @category Common
+ */
 const Button = ({ useStatement = _useStatement, ...props }: ButtonProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
@@ -24,6 +36,7 @@ const Button = ({ useStatement = _useStatement, ...props }: ButtonProps) => {
     <DefaultButton
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+          console.log('hello')
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
           props.onClick?.(event)
         },

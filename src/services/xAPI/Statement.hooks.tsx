@@ -104,7 +104,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
       return user.id.toString()
     })
     .catch((error) => {
-      log.error(error)
+      // log.error(error)
       return '-1'
     })
 

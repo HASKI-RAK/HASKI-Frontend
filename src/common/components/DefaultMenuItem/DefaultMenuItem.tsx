@@ -10,10 +10,22 @@ import {
   useStatement as _useStatement
 } from '@services'
 
+/**
+ * @prop DefaultMenuItemProps - The props of a mui MenuItem.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ */
 type MenuItemProps = DefaultMenuItemProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * MenuItem component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui MenuItem.
+ *
+ * @category Common
+ */
 const MenuItem = ({ useStatement = _useStatement, ...props }: MenuItemProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,

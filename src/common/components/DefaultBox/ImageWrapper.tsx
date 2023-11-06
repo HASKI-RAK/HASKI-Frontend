@@ -10,10 +10,23 @@ import {
   xAPIVerb
 } from '@services'
 
+/**
+ * @prop DefaultBoxProps - The props of a mui Box.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ * @interface
+ */
 type ImageWrapperProps<C extends ElementType, P = object> = DefaultBoxProps<C, P> & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * ImageWrapper component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui Box.
+ *
+ * @category Common
+ */
 const ImageWrapper = <C extends ElementType>({
   useStatement = _useStatement,
   ...props

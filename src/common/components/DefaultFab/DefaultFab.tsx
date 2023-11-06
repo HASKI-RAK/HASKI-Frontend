@@ -10,10 +10,22 @@ import {
   useStatement as _useStatement
 } from '@services'
 
+/**
+ * @prop DefaultFabProps - The props of a mui Fab.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ */
 type FabProps = DefaultFabProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * Fab component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui Fab.
+ *
+ * @category Common
+ */
 const Fab = ({ useStatement = _useStatement, ...props }: FabProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,

@@ -10,10 +10,22 @@ import {
   xAPIVerb
 } from '@services'
 
+/**
+ * @prop DefaultModalProps - The props of a mui Modal.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ */
 type ModalProps = DefaultModalProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * Modal component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui Modal.
+ *
+ * @category Common
+ */
 const Modal = ({ useStatement = _useStatement, ...props }: ModalProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,

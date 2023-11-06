@@ -10,10 +10,22 @@ import {
   useStatement as _useStatement
 } from '@services'
 
+/**
+ * @prop DefaultSelectProps - The props of a mui Select.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ */
 type SelectProps<T> = DefaultSelectProps<T> & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * Select component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui Select.
+ *
+ * @category Common
+ */
 const Select = <T, K extends T>({ useStatement = _useStatement, ...props }: SelectProps<K>) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,

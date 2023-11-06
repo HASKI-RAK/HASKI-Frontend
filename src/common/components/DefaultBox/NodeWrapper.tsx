@@ -10,10 +10,23 @@ import {
   xAPIVerb
 } from '@services'
 
+/**
+ * @prop DefaultBoxProps - The props of a mui Box.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ * @interface
+ */
 type NodeWrapperProps = DefaultBoxProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * NodeWrapper component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui Box.
+ *
+ * @category Common
+ */
 const NodeWrapper = ({ useStatement = _useStatement, ...props }: NodeWrapperProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,

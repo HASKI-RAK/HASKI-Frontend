@@ -10,10 +10,22 @@ import {
   useStatement as _useStatement
 } from '@services'
 
+/**
+ * @prop DefaultIconButtonProps - The props of a mui IconButton.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ */
 type IconButtonProps = DefaultIconButtonProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * IconButton component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui IconButton.
+ *
+ * @category Common
+ */
 const IconButton = ({ useStatement = _useStatement, ...props }: IconButtonProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,

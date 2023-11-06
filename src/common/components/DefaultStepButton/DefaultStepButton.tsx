@@ -10,10 +10,22 @@ import {
   useStatement as _useStatement
 } from '@services'
 
+/**
+ * @prop DefaultStepButtonProps - The props of a mui StepButton.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ */
 type StepButtonProps = DefaultStepButtonProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * StepButton component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui StepButton.
+ *
+ * @category Common
+ */
 const StepButton = ({ useStatement = _useStatement, ...props }: StepButtonProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,

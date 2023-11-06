@@ -10,10 +10,22 @@ import {
   useStatement as _useStatement
 } from '@services'
 
+/**
+ * @prop DefaultPopoverProps - The props of a mui Popover.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ */
 type PopoverProps = DefaultPopoverProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * Popover component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui Popover.
+ *
+ * @category Common
+ */
 const Popover = ({ useStatement = _useStatement, ...props }: PopoverProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,

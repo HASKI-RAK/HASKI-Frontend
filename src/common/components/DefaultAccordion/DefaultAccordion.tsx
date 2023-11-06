@@ -10,10 +10,23 @@ import {
   useStatement as _useStatement
 } from '@services'
 
+/**
+ * @prop DefaultAccordionProps - The props of a mui Accordion.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ * @interface
+ */
 type AccordionProps = DefaultAccordionProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * Accordion component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui Accordion.
+ *
+ * @category Common
+ */
 const Accordion = ({ useStatement = _useStatement, ...props }: AccordionProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,

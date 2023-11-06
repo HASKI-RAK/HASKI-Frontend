@@ -10,10 +10,22 @@ import {
   useStatement as _useStatement
 } from '@services'
 
+/**
+ * @prop DefaultToggleButtonGroupProps - The props of a mui ToggleButtonGroup.
+ * @prop useStatement - Custom hook to send xAPI statements
+ * @category Common
+ */
 type ToggleButtonGroupProps = DefaultToggleButtonGroupProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
 }
 
+/**
+ * ToggleButtonGroup component.
+ *
+ * @param props - Props containing the useStatement hook and the props of a mui ToggleButtonGroup.
+ *
+ * @category Common
+ */
 const ToggleButtonGroup = ({ useStatement = _useStatement, ...props }: ToggleButtonGroupProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
