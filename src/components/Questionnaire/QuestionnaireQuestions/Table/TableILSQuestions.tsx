@@ -16,7 +16,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
-import { ButtonStack, SendButton, MemoTableRowQuestion } from './TableCommonComponents'
+import { ButtonStack, SendButton, MemoTableRowQuestion, StartButton, CoverSheet } from './TableCommonComponents'
 import useHandleSend from './Questions.hooks'
 
 /**
@@ -160,14 +160,14 @@ export const TableILSQuestions = memo(
       sendAnswers().then((res) => {
         if (res) {
           addSnackbar({
-            message: t('Data send successfull'),
+            message: t('Data.send.successfull'),
             severity: 'success',
             autoHideDuration: 5000
           })
           setSuccessSend(true)
         } else {
           addSnackbar({
-            message: t('Data send unsuccessfull'),
+            message: t('Data.send.unsuccessfull'),
             severity: 'error',
             autoHideDuration: 5000
           })
@@ -219,67 +219,78 @@ export const TableILSQuestions = memo(
       [setQuestionnaireAnswers]
     )
 
+    const questionnaireType = ilsLong
+      ? t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')
+      : t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')
+
     return (
       <Box>
-        <Stack direction="column" justifyContent="space-around" alignItems="center">
-          <Typography variant="h6" component={Paper} sx={{ m: 2, p: 2 }}>
-            {ilsLong ? 'ILS-Long Questionnaire' : 'ILS-Short Questionnaire'}
-          </Typography>
-        </Stack>
-        <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
-          <ButtonStack
-            activeStep={activeStep}
-            handleNext={handleNext}
-            handleBack={handleBack}
-            steps={ilsLong ? 11 : 5}
-            idType={'ILS'}
-            disabled={ilsLong ? activeStep === 10 || isNextDisabled : activeStep === 4 || isNextDisabled}
+        {activeStep == 0 ? (
+          <CoverSheet
+            header={questionnaireType}
+            body={t('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')}
           />
-          <Stack direction="column" justifyContent="space-around" alignItems="center">
-            <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
-              <Table style={{ minWidth: '300px' }}>
-                <TableBody key={'TableILSBody'}>
-                  {stepsILSData[activeStep].map((page, row) => (
-                    <React.Fragment key={'QuestionnareILS Question: ' + row}>
-                      <MemoTableRowQuestion question={t(stepsILSData[activeStep][row].question)} />
-                      <MemoTableRowAnswers
-                        radioButtonGroup={radioButtonGroup[row].value}
-                        handleRadioChange={handleRadioChange}
-                        setRadioButtonGroup={(newValue) => {
-                          setRadioButtonGroup((prevState) => {
-                            return prevState.map((item, index) => {
-                              if (index === row) {
-                                return {
-                                  ...item,
-                                  value: newValue
-                                }
-                              }
-                              return item
-                            })
-                          })
-                        }}
-                        answerIndex={row}
-                        isIlsLong={ilsLong}
-                        t={t}
-                        activeStep={activeStep}
-                        stepsILSData={stepsILSData}
-                      />
-                    </React.Fragment>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <SendButton
-              t={t}
-              handleSend={handleSendClick}
-              isNextDisabled={isNextDisabled}
-              isValid={ilsLong ? activeStep === 10 : activeStep === 4}
+        ) : (
+          <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
+            <ButtonStack
+              activeStep={activeStep}
+              handleNext={handleNext}
+              handleBack={handleBack}
+              steps={ilsLong ? 12 : 6}
               idType={'ILS'}
-              isSending={isSending}
-              sendSuccess={successSend}
+              disabled={ilsLong ? activeStep === 11 || isNextDisabled : activeStep === 5 || isNextDisabled}
             />
+            <Stack direction="column" justifyContent="space-around" alignItems="center">
+              <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
+                <Table style={{ minWidth: '300px' }}>
+                  <TableBody key={'TableILSBody'}>
+                    {stepsILSData[activeStep].map((page, row) => (
+                      <React.Fragment key={page.questionLabel}>
+                        <MemoTableRowQuestion question={t(stepsILSData[activeStep][row].question)} />
+                        <MemoTableRowAnswers
+                          radioButtonGroup={radioButtonGroup[row].value}
+                          handleRadioChange={handleRadioChange}
+                          setRadioButtonGroup={(newValue) => {
+                            setRadioButtonGroup((prevState) => {
+                              return prevState.map((item, index) => {
+                                if (index === row) {
+                                  return {
+                                    ...item,
+                                    value: newValue
+                                  }
+                                }
+                                return item
+                              })
+                            })
+                          }}
+                          answerIndex={row}
+                          isIlsLong={ilsLong}
+                          t={t}
+                          activeStep={activeStep}
+                          stepsILSData={stepsILSData}
+                        />
+                      </React.Fragment>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <SendButton
+                t={t}
+                handleSend={handleSendClick}
+                isNextDisabled={isNextDisabled}
+                isValid={ilsLong ? activeStep === 11 : activeStep === 5}
+                idType={'ILS'}
+                isSending={isSending}
+                sendSuccess={successSend}
+              />
+            </Stack>
           </Stack>
-        </Stack>
+        )}
+        {activeStep == 0 && (
+          <Stack direction="column" justifyContent="space-around" alignItems="center">
+            <StartButton handleNext={handleNext} />
+          </Stack>
+        )}
       </Box>
     )
   }

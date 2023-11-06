@@ -6,6 +6,7 @@ import { FormDataType, SnackbarContext, SnackbarContextType } from '@services'
 import { useContact } from './Contact.hooks'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
+import { getConfig } from '@shared'
 
 /*jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -92,7 +93,7 @@ describe('Test Contactpage', () => {
         }
       })
     ) as jest.Mock
-    const result = await fetch(process.env.BACKEND + `/contactform`)
+    const result = await fetch(getConfig().BACKEND + `/contactform`)
     expect(result.status).toBe(undefined)
   })
 })

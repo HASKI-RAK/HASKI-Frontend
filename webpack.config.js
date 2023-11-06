@@ -6,17 +6,11 @@ const CompressionPlugin = require('compression-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 const logging = require('webpack/lib/logging/runtime')
 const Logger = logging.getLogger('webpack-config')
-const dotenv = require('dotenv').config({
-  path: './.env.'.concat(process.env.NODE_ENV === 'production' ? 'production' : 'development')
-})
-if (dotenv.error) {
-  throw dotenv.error
-}
-Logger.info('dotenv parsed: ', dotenv.parsed)
+
 const module_to_merge = require('./webpack.config.'.concat(
   process.env.NODE_ENV === 'production' ? 'prod' : 'dev' + '.js'
 ))
-Logger.info('module_to_merge: ', module_to_merge)
+Logger.info('Module to merge: ', module_to_merge)
 
 module.exports = merge(module_to_merge, {
   context: path.resolve(__dirname, '.'),
@@ -72,7 +66,7 @@ module.exports = merge(module_to_merge, {
       template: path.join(__dirname, 'src', 'index.html')
     }),
     new DefinePlugin({
-      'process.env': JSON.stringify(dotenv.parsed)
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
     new CompressionPlugin()
   ]
