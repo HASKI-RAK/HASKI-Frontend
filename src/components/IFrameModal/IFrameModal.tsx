@@ -1,4 +1,5 @@
-import { Box, Modal, Fab } from '@common/components'
+import { Box, Modal } from '@common/components'
+import { Fab } from '@mui/material'
 import { memo } from 'react'
 import { Close } from '@common/icons'
 
@@ -13,7 +14,7 @@ const style_box = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
-  overflow: 'visible'
+  overflow: 'hidden'
 }
 
 type IFrameModalProps = {
@@ -35,17 +36,20 @@ type IFrameModalProps = {
  * @category Components
  */
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
-  const { url, title, isOpen, onClose } = props
+
+
 
   return (
-    <Modal open={props.isOpen} onClose={props.onClose}>
+    <Modal open={props.isOpen} onClose={props.onClose} data-testid={"IFrameModal"} >
       <Box sx={style_box}>
         <Fab
          color="primary"
+         data-testid={"IFrameModal-Close-Button"}
          onClick={() => props.onClose()}
          style={{
-           top: '-5%',
-           left: '100%'
+          position: 'absolute',
+           top: '2%',
+           left: '94.75%'
          }}>
           <Close />
         </Fab>
@@ -57,7 +61,6 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
           style={{
             position: 'relative',
             border: 0,
-            top: '-10%',
           }}
         />
       </Box>
