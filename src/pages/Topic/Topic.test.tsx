@@ -382,150 +382,150 @@ describe('Topic Page', () => {
 
     const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme)
     expect(nodesAndEdges).toStrictEqual({
-      "nodes": [
+      nodes: [
         {
           data: {
-            activityType: "",
-            classification: "",
+            activityType: '',
+            classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ""
+            name: ''
           },
-          id: "1",
+          id: '1',
           position: {
             x: 325,
             y: 0
           },
           style: {
-            background: "#1976d2",
-            border: "1px solid #9e9e9e",
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
-            cursor: "pointer",
+            cursor: 'pointer',
             padding: 10,
             width: 500
           },
-          type: ""
+          type: ''
         },
         {
           data: {
-            label: "Übungen"
+            label: 'Übungen'
           },
-          id: "2",
+          id: '2',
           position: {
             x: 0,
             y: 250
           },
           style: {
-            border: "1px solid #9e9e9e",
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
             height: 200,
             width: 1150
           },
-          type: "GROUP"
+          type: 'GROUP'
         },
         {
           data: {
-            activityType: "",
-            classification: "ÜB",
+            activityType: '',
+            classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ""
+            name: ''
           },
-          id: "2-1",
+          id: '2-1',
           position: {
             x: 50,
             y: 300
           },
           style: {
-            background: "#1976d2",
-            border: "1px solid #9e9e9e",
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
-            cursor: "pointer",
+            cursor: 'pointer',
             padding: 10,
             width: 500
           },
-          type: "ÜB"
+          type: 'ÜB'
         },
         {
           data: {
-            activityType: "",
-            classification: "ÜB",
+            activityType: '',
+            classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ""
+            name: ''
           },
-          id: "3-1",
+          id: '3-1',
           position: {
             x: 600,
             y: 300
           },
           style: {
-            background: "#1976d2",
-            border: "1px solid #9e9e9e",
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
-            cursor: "pointer",
+            cursor: 'pointer',
             padding: 10,
             width: 500
           },
-          type: "ÜB"
+          type: 'ÜB'
         },
         {
           data: {
-            activityType: "",
-            classification: "",
+            activityType: '',
+            classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ""
+            name: ''
           },
-          id: "5",
+          id: '5',
           position: {
             x: 325,
             y: 630
           },
           style: {
-            background: "#1976d2",
-            border: "1px solid #9e9e9e",
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
-            cursor: "pointer",
+            cursor: 'pointer',
             padding: 10,
             width: 500
           },
-          type: ""
+          type: ''
         }
       ],
       edges: [
         {
-          id: "Edge1",
-          source: "1",
-          target: "2"
+          id: 'Edge1',
+          source: '1',
+          target: '2'
         },
         {
-          id: "Edge2",
-          source: "2",
-          target: "5"
+          id: 'Edge2',
+          source: '2',
+          target: '5'
         },
         {
-          id: "Edge5",
-          source: "5",
+          id: 'Edge5',
+          source: '5',
           target: undefined
         }
-      ],
+      ]
     })
 
     act(() => {
@@ -744,231 +744,231 @@ describe('Topic Page', () => {
 
     const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme)
     expect(nodesAndEdges).toStrictEqual({
-      "nodes": [
+      nodes: [
         {
           data: {
-            activityType: "",
-            classification: "",
+            activityType: '',
+            classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ""
+            name: ''
           },
-          id: "1",
+          id: '1',
           position: {
             x: 875,
             y: 0
           },
           style: {
-            background: "#1976d2",
-            border: "1px solid #9e9e9e",
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
-            cursor: "pointer",
+            cursor: 'pointer',
             padding: 10,
             width: 500
           },
-          type: ""
+          type: ''
         },
         {
           data: {
-            label: "Übungen"
+            label: 'Übungen'
           },
-          id: "2",
+          id: '2',
           position: {
             x: 0,
             y: 250
           },
           style: {
-            border: "1px solid #9e9e9e",
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
             height: 325,
             width: 2250
           },
-          type: "GROUP"
+          type: 'GROUP'
         },
         {
           data: {
-            activityType: "",
-            classification: "ÜB",
+            activityType: '',
+            classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ""
+            name: ''
           },
-          id: "2-1",
+          id: '2-1',
           position: {
             x: 50,
             y: 300
           },
           style: {
-            background: "#1976d2",
-            border: "1px solid #9e9e9e",
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
-            cursor: "pointer",
+            cursor: 'pointer',
             padding: 10,
             width: 500
           },
-          type: "ÜB"
+          type: 'ÜB'
         },
         {
           data: {
-            activityType: "",
-            classification: "ÜB",
+            activityType: '',
+            classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ""
+            name: ''
           },
-          id: "3-1",
+          id: '3-1',
           position: {
             x: 600,
             y: 300
           },
           style: {
-            background: "#1976d2",
-            border: "1px solid #9e9e9e",
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
-            cursor: "pointer",
+            cursor: 'pointer',
             padding: 10,
             width: 500
           },
-          type: "ÜB"
+          type: 'ÜB'
         },
         {
           data: {
-            activityType: "",
-            classification: "ÜB",
+            activityType: '',
+            classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ""
+            name: ''
           },
-          id: "4-1",
+          id: '4-1',
           position: {
             x: 1150,
             y: 300
           },
           style: {
-            background: "#1976d2",
-            border: "1px solid #9e9e9e",
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
-            cursor: "pointer",
+            cursor: 'pointer',
             padding: 10,
             width: 500
           },
-          type: "ÜB"
+          type: 'ÜB'
         },
         {
           data: {
-            activityType: "",
-            classification: "ÜB",
+            activityType: '',
+            classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ""
+            name: ''
           },
-          id: "5-1",
+          id: '5-1',
           position: {
             x: 1700,
             y: 300
           },
           style: {
-            background: "#1976d2",
-            border: "1px solid #9e9e9e",
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
-            cursor: "pointer",
+            cursor: 'pointer',
             padding: 10,
             width: 500
           },
-          type: "ÜB"
+          type: 'ÜB'
         },
         {
           data: {
-            activityType: "",
-            classification: "ÜB",
+            activityType: '',
+            classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ""
+            name: ''
           },
-          id: "6-1",
+          id: '6-1',
           position: {
             x: 50,
             y: 425
           },
           style: {
-            background: "#1976d2",
-            border: "1px solid #9e9e9e",
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
-            cursor: "pointer",
+            cursor: 'pointer',
             padding: 10,
             width: 500
           },
-          type: "ÜB"
+          type: 'ÜB'
         },
         {
           data: {
-            activityType: "",
-            classification: "",
+            activityType: '',
+            classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ""
+            name: ''
           },
-          id: "8",
+          id: '8',
           position: {
             x: 875,
             y: 755
           },
           style: {
-            background: "#1976d2",
-            border: "1px solid #9e9e9e",
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
             borderRadius: 8,
-            cursor: "pointer",
+            cursor: 'pointer',
             padding: 10,
             width: 500
           },
-          type: ""
+          type: ''
         }
       ],
       edges: [
         {
-          id: "Edge1",
-          source: "1",
-          target: "2"
+          id: 'Edge1',
+          source: '1',
+          target: '2'
         },
         {
-          id: "Edge2",
-          source: "2",
-          target: "8"
+          id: 'Edge2',
+          source: '2',
+          target: '8'
         },
         {
-          id: "Edge8",
-          source: "8",
+          id: 'Edge8',
+          source: '8',
           target: undefined
         }
-      ],
+      ]
     })
 
     act(() => {
