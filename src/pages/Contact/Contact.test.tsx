@@ -184,7 +184,7 @@ describe('Test on submit Function', () => {
     })
 
     expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
-    expect(loadingMock).lastCalledWith(true)
+    expect(loadingMock).lastCalledWith(false)
   })
 
   test('Fetch throws an error, Snackbar error', async () => {
@@ -242,6 +242,6 @@ describe('Test on submit Function', () => {
     })
 
     expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
-    expect(loadingMock).lastCalledWith(true)
+    expect(loadingMock).lastCalledWith(false)
   })
 })

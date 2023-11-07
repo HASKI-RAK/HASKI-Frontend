@@ -169,9 +169,17 @@ export const HaskiTheme = createTheme({
     MuiLink: {
       styleOverrides: {
         root: {
-          color: defaultColors.black,
-          '&:hover': {
-            textDecoration: 'underline #FF8E00'
+          outlined: {
+            color: defaultColors.black,
+            '&:hover': {
+              textDecoration: 'underline #FF8E00'
+            }
+          },
+          contained: {
+            color: defaultColors.black,
+            '&:hover': {
+              textDecoration: 'fill #FF8E00'
+            }
           }
         }
       }

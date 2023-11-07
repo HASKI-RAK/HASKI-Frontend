@@ -43,21 +43,23 @@ export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookRetur
                 severity: 'success'
               })
             })
-            .catch((error) =>
+            .catch((error) => {
+              setIsLoading(false)
               addSnackbar({
                 message: t('pages.Contact.error') + error,
                 severity: 'error',
                 autoHideDuration: 3000
               })
-            )
+            })
         })
-        .catch((error) =>
+        .catch((error) => {
+          setIsLoading(false)
           addSnackbar({
             message: t('pages.Contact.error') + error,
             severity: 'error',
             autoHideDuration: 3000
           })
-        )
+        })
     },
     [t, addSnackbar, setIsLoading]
   )
