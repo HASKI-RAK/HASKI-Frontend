@@ -7,8 +7,10 @@ import {
   usePrivacyModal as _usePrivacyModal
 } from 'src/components/PrivacyModal/PrivacyModal.hooks'
 import { useCookies } from 'react-cookie'
-import { useStore, usePersistedStore } from '@store'
+import { usePersistedStore } from '@store'
 import { ILS } from '@core'
+import { getILS } from '@services'
+import log from 'loglevel'
 
 //** Was macht OpenQuestionnaire? */
 //öffnet questionnaire sobald privaymodal geschlossen und akzeptiert wurde (fertig)
@@ -25,7 +27,8 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
   const [modalOpenILSLong, setModalOpenILSLong] = useState(true)
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [cookie, setCookie] = useCookies(['questionnaire_sent_token'])
-  const [ilsData, setILSData] = useState<ILS | undefined>(undefined)
+  // const [ilsData, setILSData] = useState<ILS | undefined>(undefined)
+  const [qExsists, setQExsists] = useState(true)
   const { privacyPolicyCookie } = usePrivacyModal()
   const handleCloseILSLongModal = (event: object, reason: string) => {
     if (reason == 'backdropClick')
@@ -38,26 +41,32 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
     setCookie('questionnaire_sent_token', true, { path: '/' })
   }
   const fetchUser = usePersistedStore((state) => state.fetchUser)
-  const fetchILS = useStore((state) => state.fetchILS)
   //aktuellen User holen
   //ils von user holen
   //ils daten bekommen
+
   useEffect(() => {
-    fetchUser().then((user) => {
-      fetchILS(user.settings.user_id, user.lms_user_id, user.id).then((data) => {
-        setILSData(data)
+    if (!cookie['questionnaire_sent_token']) {
+      fetchUser().then((user) => {
+        return getILS(user.settings.user_id, user.lms_user_id, user.id)
+          .then((data) => {
+            if (data?.perception_dimension == undefined && data?.perception_value == undefined) {
+              setQExsists(false)
+            } else {
+              setCookie('questionnaire_sent_token', true, { path: '/' })
+            }
+          })
+          .catch((error) => {
+            log.error(error)
+            setQExsists(false)
+          })
       })
-    })
+    }
   }, [])
-  //überprüft ob ils keine antworten hat
-  const checkIfNoContent = () => {
-    if (ilsData?.perception_dimension == undefined && ilsData?.perception_value == undefined) return true
-    return false
-  }
 
   return (
     <>
-      {privacyPolicyCookie && !cookie['questionnaire_sent_token'] && checkIfNoContent() && (
+      {privacyPolicyCookie && !qExsists && (
         <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
           <TableILSQuestions ilsLong={true} successSend={successSendILSLong} setSuccessSend={handleSend} />
         </QuestionnaireQuestionsModal>
