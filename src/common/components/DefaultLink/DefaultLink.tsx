@@ -32,6 +32,7 @@ type LinkProps<C extends ElementType, P = object> = DefaultLinkProps<C, P> & {
  */
 const Link = <C extends ElementType>({
   useStatement = _useStatement,
+    onClick,
   ...props
 }: LinkProps<C, { component?: C }>): ReactElement => {
   const { sendStatement } = useStatement({
@@ -44,9 +45,9 @@ const Link = <C extends ElementType>({
       onClick={useCallback(
         (event: MouseEvent<HTMLSpanElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
-          props.onClick?.(event)
+          onClick?.(event)
         },
-        [props.onClick, sendStatement]
+        [onClick, sendStatement]
       )}
       {...props}>
       {props.children}
