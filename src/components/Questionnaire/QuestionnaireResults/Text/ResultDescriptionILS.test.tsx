@@ -57,11 +57,11 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       characteristic_id: 1,
       id: 1,
       input_dimension: 'test',
-      input_value: 5,
+      input_value: 3,
       perception_dimension: 'test',
       perception_value: 3,
       processing_dimension: 'test',
-      processing_value: 3,
+      processing_value: 5,
       understanding_dimension: 'test',
       understanding_value: 3
     }
@@ -81,11 +81,11 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       characteristic_id: 1,
       id: 1,
       input_dimension: 'test',
-      input_value: 9,
+      input_value: 3,
       perception_dimension: 'test',
       perception_value: 3,
       processing_dimension: 'test',
-      processing_value: 3,
+      processing_value: 9,
       understanding_dimension: 'test',
       understanding_value: 3
     }
@@ -105,11 +105,11 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       characteristic_id: 1,
       id: 1,
       input_dimension: 'test',
-      input_value: -5,
+      input_value: 3,
       perception_dimension: 'test',
       perception_value: 3,
       processing_dimension: 'test',
-      processing_value: 3,
+      processing_value: -5,
       understanding_dimension: 'test',
       understanding_value: 3
     }
@@ -129,11 +129,11 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       characteristic_id: 1,
       id: 1,
       input_dimension: 'test',
-      input_value: -9,
+      input_value: 3,
       perception_dimension: 'test',
       perception_value: 3,
       processing_dimension: 'test',
-      processing_value: 3,
+      processing_value: -9,
       understanding_dimension: 'test',
       understanding_value: 3
     }
@@ -153,11 +153,11 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       characteristic_id: 1,
       id: 1,
       input_dimension: 'test',
-      input_value: -3,
+      input_value: 5,
       perception_dimension: 'test',
       perception_value: 5,
       processing_dimension: 'test',
-      processing_value: 5,
+      processing_value: -3,
       understanding_dimension: 'test',
       understanding_value: 5
     }
@@ -295,11 +295,11 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       characteristic_id: 1,
       id: 1,
       input_dimension: 'test',
-      input_value: 3,
+      input_value: 5,
       perception_dimension: 'test',
       perception_value: 3,
       processing_dimension: 'test',
-      processing_value: 5,
+      processing_value: 3,
       understanding_dimension: 'test',
       understanding_value: 3
     }
@@ -318,11 +318,11 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       characteristic_id: 1,
       id: 1,
       input_dimension: 'test',
-      input_value: 3,
+      input_value: 9,
       perception_dimension: 'test',
       perception_value: 3,
       processing_dimension: 'test',
-      processing_value: 9,
+      processing_value: 3,
       understanding_dimension: 'test',
       understanding_value: 3
     }
@@ -341,11 +341,11 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       characteristic_id: 1,
       id: 1,
       input_dimension: 'test',
-      input_value: 3,
+      input_value: -5,
       perception_dimension: 'test',
       perception_value: 3,
       processing_dimension: 'test',
-      processing_value: -5,
+      processing_value: 3,
       understanding_dimension: 'test',
       understanding_value: 3
     }
@@ -364,11 +364,11 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       characteristic_id: 1,
       id: 1,
       input_dimension: 'test',
-      input_value: 3,
+      input_value: -9,
       perception_dimension: 'test',
       perception_value: 3,
       processing_dimension: 'test',
-      processing_value: -9,
+      processing_value: 3,
       understanding_dimension: 'test',
       understanding_value: 3
     }
@@ -387,11 +387,11 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       characteristic_id: 1,
       id: 1,
       input_dimension: 'test',
-      input_value: 5,
+      input_value: -3,
       perception_dimension: 'test',
       perception_value: 5,
       processing_dimension: 'test',
-      processing_value: -3,
+      processing_value: 5,
       understanding_dimension: 'test',
       understanding_value: 5
     }

@@ -110,11 +110,12 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         padding: 10,
         border: '1px solid ' + theme.palette.grey[500],
         borderRadius: 8,
-        cursor: 'pointer'
+        cursor: 'pointer',
+        width: 500
       }
 
       // Exercise nodes
-      const exerciseLearningElementChildNodes = learningPathExercises.map((node, index) => {
+      const exerciseLearningElementChildNodes: Node[] = learningPathExercises.map((node, index) => {
         const nodeData: LearningPathLearningElementNode = {
           lmsId: node.learning_element.lms_id,
           name: node.learning_element.name,
@@ -131,7 +132,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           type: node.learning_element.classification,
           data: nodeData,
           position: {
-            x: nodeOffsetX + 300 * index,
+            x: nodeOffsetX + 550 * index,
             y: 250 * (learningPathExercises[0].position - 1) + 50
           },
           style: learningElementStyle
@@ -152,7 +153,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
               style: {
                 border: '1px solid ' + theme.palette.grey[500],
                 borderRadius: 8,
-                width: 300 * learningPathExercises.length + nodeOffsetX,
+                width: 550 * learningPathExercises.length + nodeOffsetX,
                 height: groupHeight
               }
             }
@@ -185,7 +186,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           type: item.learning_element.classification,
           data: nodeData,
           position: {
-            x: nodeOffsetX + (300 * (learningPathExercises.length - 1)) / 2,
+            x: nodeOffsetX + (550 * (learningPathExercises.length - 1)) / 2,
             y: getNodeYPos()
           },
           style: learningElementStyle

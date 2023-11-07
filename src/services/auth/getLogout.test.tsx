@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom'
+//Tests fail with shortened Path
 import { getLogout } from './getLogout'
 
 global.fetch = jest.fn(() =>

@@ -18,6 +18,32 @@ const useTranslation = () => {
           return [
             [
               {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: ''
+              }
+            ],
+            [
+              {
                 question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-1',
                 questionLabel: 'AR_1_F1',
                 answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.1',
@@ -307,6 +333,32 @@ const useTranslation = () => {
           return [
             [
               {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: ''
+              }
+            ],
+            [
+              {
                 question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9',
                 questionLabel: 'AR_3_F9',
                 answer1: 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1',
@@ -438,6 +490,53 @@ const useTranslation = () => {
           ]
         case 'components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions':
           return [
+            [
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: '',
+                answer3: '',
+                answer4: '',
+                answer5: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: '',
+                answer3: '',
+                answer4: '',
+                answer5: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: '',
+                answer3: '',
+                answer4: '',
+                answer5: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: '',
+                answer3: '',
+                answer4: '',
+                answer5: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: '',
+                answer3: '',
+                answer4: '',
+                answer5: ''
+              }
+            ],
             [
               {
                 question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1',
@@ -808,6 +907,53 @@ const useTranslation = () => {
           ]
         case 'components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Undefined':
           return [
+            [
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: '',
+                answer3: '',
+                answer4: '',
+                answer5: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: '',
+                answer3: '',
+                answer4: '',
+                answer5: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: '',
+                answer3: '',
+                answer4: '',
+                answer5: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: '',
+                answer3: '',
+                answer4: '',
+                answer5: ''
+              },
+              {
+                question: '',
+                questionLabel: '',
+                answer1: '',
+                answer2: '',
+                answer3: '',
+                answer4: '',
+                answer5: ''
+              }
+            ],
             [
               {
                 question: 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1',

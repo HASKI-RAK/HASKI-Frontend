@@ -54,7 +54,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   const navigate = useNavigate()
   const [open, setOpen] = useState(true)
   const [checked, setChecked] = useState(false)
-  const { privacyPolicyCookie, handleAccept } = usePrivacyModal()
+  const { privacyPolicyCookie, handleAccept, checkUniversity } = usePrivacyModal()
   const currentLocation = useLocation()
 
   //Disable backdropClick so the Modal only closes via the buttons
@@ -83,6 +83,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
     <>
       {
         // Don't load anything, if the current page is privacy policy page or the privacy policy cookie is set.
+
         !(currentLocation.pathname.includes('privacypolicy') || privacyPolicyCookie) && (
           <Modal
             aria-labelledby="privacy-modal"
@@ -130,8 +131,20 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                       sx={{ alignSelf: 'end' }}
                       aria-multiline={'true'}
                       onClick={() => {
-                        handleModal(false),
-                          (window.location.href = 'https://moodle.hs-kempten.de/enrol/index.php?id=357')
+                        handleModal(false)
+                        checkUniversity().then((university) => {
+                          if (university == 'TH-AB') {
+                            window.location.assign('https://moodle.th-ab.de/')
+                          } else if (university == 'HS-KE') {
+                            window.location.assign('https://moodle.hs-kempten.de/')
+                          } else {
+                            if (currentLocation.pathname == '/') {
+                              history.back()
+                            } else {
+                              history.go(-2)
+                            }
+                          }
+                        })
                       }}>
                       {t('decline')}
                     </Button>

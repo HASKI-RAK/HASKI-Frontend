@@ -42,7 +42,7 @@ export const Home = () => {
               })
               .catch((error) => {
                 addSnackbar({
-                  message: t('Courses fetching error'),
+                  message: t('Courses.fetching.error'),
                   severity: 'error',
                   autoHideDuration: 5000
                 })
@@ -51,7 +51,7 @@ export const Home = () => {
           })
           .catch((error) => {
             addSnackbar({
-              message: t('fetchUserError'),
+              message: t('User.fetching.error'),
               severity: 'error',
               autoHideDuration: 5000
             })
@@ -84,7 +84,7 @@ export const Home = () => {
           ) : (
             courses.map((course) => {
               return (
-                <Card key={course.id}>
+                <Card key={course.id} sx={{ mb: '1rem' }}>
                   <CardContent>
                     <Typography variant="h5">{course.name}</Typography>
                     <Typography variant="body1">{course.university}</Typography>

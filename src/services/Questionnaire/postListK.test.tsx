@@ -1,4 +1,5 @@
 //Tests fail with shortened Path
+import { getConfig } from '@shared'
 import { postListK } from './postListK'
 
 global.fetch = jest.fn(() =>
@@ -26,7 +27,7 @@ describe('postListK has expected behaviour', () => {
 
     const result = await postListK({ studentId: 1, outputJson: '2' })
 
-    expect(fetch).toHaveBeenCalledWith(`${process.env.BACKEND}/lms/student/1/questionnaire/listk`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/lms/student/1/questionnaire/listk`, {
       body: '2',
       credentials: 'include',
       headers: {
