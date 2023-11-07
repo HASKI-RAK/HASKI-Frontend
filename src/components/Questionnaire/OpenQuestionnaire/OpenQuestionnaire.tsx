@@ -8,15 +8,14 @@ import {
 } from 'src/components/PrivacyModal/PrivacyModal.hooks'
 import { useCookies } from 'react-cookie'
 import { usePersistedStore } from '@store'
-import { ILS } from '@core'
 import { getILS } from '@services'
 import log from 'loglevel'
 
 //** Was macht OpenQuestionnaire? */
-//öffnet questionnaire sobald privaymodal geschlossen und akzeptiert wurde (fertig)
-//checkt ob ilslong daten schon da sind mit getILS -> backend benötigt
+//öffnet questionnaire sobald privacymodal geschlossen und akzeptiert wurde (fertig)
+//checkt ob ilslong daten schon da sind mit getILS -> backend benötigt(fertig)
 //setzt ils cookie sobald questionnaire gesendet wurde (fertig)
-//cookie gilt nur für das questionnaire popup (sollte)
+//cookie gilt nur für das questionnaire popup (ja)
 //cookie in einen hook auslagern
 export type PrivacyModalProps = {
   usePrivacyModal?: () => PrivacyModalHookReturn
@@ -27,24 +26,26 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
   const [modalOpenILSLong, setModalOpenILSLong] = useState(true)
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [cookie, setCookie] = useCookies(['questionnaire_sent_token'])
-  // const [ilsData, setILSData] = useState<ILS | undefined>(undefined)
   const [qExsists, setQExsists] = useState(true)
   const { privacyPolicyCookie } = usePrivacyModal()
+  const fetchUser = usePersistedStore((state) => state.fetchUser)
+
+  //closes the modal
   const handleCloseILSLongModal = (event: object, reason: string) => {
     if (reason == 'backdropClick')
       if (window.confirm(t('components.Menubar.CloseDialog'))) {
         setModalOpenILSLong(false)
       }
   }
+
+  //send ILS and set the cookie
   const handleSend = () => {
     setSuccessSendILSLong(true)
     setCookie('questionnaire_sent_token', true, { path: '/' })
   }
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
-  //aktuellen User holen
-  //ils von user holen
-  //ils daten bekommen
 
+  //only if there is no cookie, the ils data of the user gets fetched (different browser)
+  //check if there is already ils data
   useEffect(() => {
     if (!cookie['questionnaire_sent_token']) {
       fetchUser().then((user) => {
