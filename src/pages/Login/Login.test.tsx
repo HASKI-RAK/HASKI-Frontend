@@ -84,7 +84,7 @@ describe('Login Page', () => {
     )
     const buttonLogin = login.getAllByRole('button')[1]
     const username = login.getAllByRole('textbox')[0]
-    const password = login.container.querySelector('#password') as HTMLElement
+    const password = login.container.querySelector('#login-form-password-textfield') as HTMLElement
 
     act(() => {
       // Fill in username

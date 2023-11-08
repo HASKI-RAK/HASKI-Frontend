@@ -26,7 +26,7 @@ describe('Test LoginForm', () => {
     )
     const [passwordvisibilitybutton, button] = loginForm.getAllByRole('button')
     const username = loginForm.getAllByRole('textbox')[0]
-    const password = loginForm.container.querySelector('#password') as HTMLElement
+    const password = loginForm.container.querySelector('#login-form-password-textfield') as HTMLElement
     // No input yet so no submit
     fireEvent.click(button)
     expect(validate.mock.calls.length).toEqual(1)
@@ -70,7 +70,7 @@ describe('Test LoginForm', () => {
     )
     const button = loginForm.getAllByRole('button')[1]
     const username = loginForm.getAllByRole('textbox')[0]
-    const password = loginForm.container.querySelector('#password') as HTMLElement
+    const password = loginForm.container.querySelector('#login-form-password-textfield') as HTMLElement
     // No input yet so no submit
     fireEvent.click(button)
 

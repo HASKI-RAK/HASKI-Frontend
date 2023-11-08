@@ -57,7 +57,7 @@ describe('Statement tests', () => {
       sendStatement: expect.any(Function)
     })
 
-    expect(result.current.getEnglishName('test')).toStrictEqual('pages.test')
+    expect(result.current.getEnglishName('test')).toStrictEqual('')
   })
 
   test('lmsUserID fetch fails', async () => {

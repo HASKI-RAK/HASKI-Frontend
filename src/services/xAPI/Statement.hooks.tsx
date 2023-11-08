@@ -94,7 +94,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   // Default values
   const { defaultComponentID = 'null', defaultComponent = xAPIComponent.Null } = params ?? {}
 
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
   const en = i18n.getFixedT('en')
   const location = useLocation()
 
@@ -113,7 +113,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
     (key: string) => {
       return en('pages.'.concat(key))
     },
-    [i18n, t]
+    [en]
   )
 
   // Wraps function so send statements from components
