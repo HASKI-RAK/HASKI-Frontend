@@ -32,7 +32,7 @@ type LinkProps<C extends ElementType, P = object> = DefaultLinkProps<C, P> & {
  */
 const Link = <C extends ElementType>({
   useStatement = _useStatement,
-    onClick,
+  onClick,
   ...props
 }: LinkProps<C, { component?: C }>): ReactElement => {
   const { sendStatement } = useStatement({

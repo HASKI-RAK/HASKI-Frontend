@@ -104,7 +104,6 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
       return user.id.toString()
     })
     .catch((error) => {
-      log.error(error)
       return '-1'
     })
 
@@ -119,16 +118,6 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   // Wraps function so send statements from components
   const sendStatement = useCallback(
     async (verb: xAPIVerb) => {
-      console.log(
-        getStatement(
-          await lmsUserID,
-          xAPIVerb[verb],
-          location.pathname,
-          defaultComponentID,
-          xAPIComponent[defaultComponent],
-          getEnglishName
-        )
-      )
       xAPI
         .sendStatement({
           statement: getStatement(

@@ -36,7 +36,6 @@ const Button = ({ useStatement = _useStatement, onClick, ...props }: ButtonProps
     <DefaultButton
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-          console.log('hello')
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
           onClick?.(event)
         },
