@@ -1,7 +1,7 @@
 import { QuestionnaireQuestionsModal } from '@components'
 import { TableILSQuestions } from '../QuestionnaireQuestions/Table/TableILSQuestions'
 import { useTranslation } from 'react-i18next'
-import { useState, useEffect } from 'react'
+import {useState, useEffect, memo} from 'react'
 import {
   PrivacyModalHookReturn,
   usePrivacyModal as _usePrivacyModal
@@ -21,22 +21,20 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
   const [modalOpenILSLong, setModalOpenILSLong] = useState(true)
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [cookie, setCookie] = useCookies(['questionnaire_sent_token'])
-  const [qExsists, setQExsists] = useState(true)
+  const [questionnaireILSExists, setQuestionnaireILSExists] = useState(true)
   const { privacyPolicyCookie } = usePrivacyModal()
   const fetchUser = usePersistedStore((state) => state.fetchUser)
 
   //closes the modal
   const handleCloseILSLongModal = (event: object, reason: string) => {
-    if (reason == 'backdropClick')
-      if (window.confirm(t('components.Menubar.CloseDialog'))) {
+    if (!successSendILSLong) {
+      if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.CloseDialog'))){
         setModalOpenILSLong(false)
         window.location.reload()
       }
-  }
-
-  //send ILS and set the cookie
-  const handleSend = () => {
-    setSuccessSendILSLong(true)
+    } else {
+      setModalOpenILSLong(false)
+    }
   }
 
   //only if there is no cookie, the ils data of the user gets fetched (case: different browser)
@@ -47,24 +45,24 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
         return getILS(user.settings.user_id, user.lms_user_id, user.id)
           .then((data) => {
             if (data?.perception_dimension == 'sns' && data?.perception_value == 0) {
-              setQExsists(false)
+              setQuestionnaireILSExists(false)
             } else {
               setCookie('questionnaire_sent_token', true, { path: '/' })
             }
           })
           .catch((error) => {
             log.error(error)
-            setQExsists(false)
+            setQuestionnaireILSExists(false)
           })
       })
     }
-  }, [])
+  })
 
   return (
     <>
-      {privacyPolicyCookie && !qExsists && (
+      {privacyPolicyCookie && !questionnaireILSExists && (
         <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
-          <TableILSQuestions ilsLong={true} successSend={successSendILSLong} setSuccessSend={handleSend} />
+          <TableILSQuestions ilsLong={true} successSend={successSendILSLong} setSuccessSend={setSuccessSendILSLong} />
         </QuestionnaireQuestionsModal>
       )}
     </>

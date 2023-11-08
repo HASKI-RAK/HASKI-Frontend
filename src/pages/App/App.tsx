@@ -35,8 +35,6 @@ export const App = () => (
     <SnackbarProvider>
       <AuthProvider>
         <Router>
-          <PrivacyModal />
-          <OpenQuestionnaire />
           <Routes>
             <Route element={<MainFrame />}>
               <Route index element={<Home />} />
