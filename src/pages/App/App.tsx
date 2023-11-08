@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from '@common/theme'
-import { PrivacyModal, OpenQuestionnaire } from '@components'
+import { PrivacyModal } from '@components'
 import {
   MainFrame,
   Home,
@@ -36,7 +36,6 @@ export const App = () => (
       <AuthProvider>
         <Router>
           <PrivacyModal />
-          <OpenQuestionnaire />
           <Routes>
             <Route element={<MainFrame />}>
               <Route index element={<Home />} />
