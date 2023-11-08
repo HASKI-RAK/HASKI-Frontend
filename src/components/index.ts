@@ -24,6 +24,7 @@ export { default as SnackbarContainer } from './Snackbar/SnackbarContainer/Snack
 export { default as SnackbarTransition } from './Snackbar/SnackbarTransition/SnackbarTransition'
 export { default as IFrameModal } from './IFrameModal/IFrameModal'
 export { default as SkeletonList } from './SkeletonList/SkeletonList'
+export { default as PrivacyModal } from './PrivacyModal/PrivacyModal'
 export { default as Filter } from './Filter/Filter'
 export { default as GlossaryList } from './Glossary/GlossaryList/GlossaryList'
 export { default as Searchbar } from './Searchbar/Searchbar'

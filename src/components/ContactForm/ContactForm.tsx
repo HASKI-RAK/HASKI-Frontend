@@ -128,7 +128,6 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
               <FormControlLabel key={report.value} value={report.value} control={<Radio />} label={report.label} />
             ))}
           </RadioGroup>
-
           <FormControl>
             <TextField
               id="desc_input"
@@ -144,7 +143,6 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
               error={textfieldError}
               helperText={textfieldError ? t('components.ContactForm.error') : ''}
             />
-
             <Button
               variant="contained"
               color="primary"

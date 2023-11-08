@@ -1,6 +1,7 @@
 import { Outlet, useParams } from 'react-router-dom'
 import { Box, Divider, Stack, Grid } from '@common/components'
 import { MenuBar, Footer, BreadcrumbsContainer, LocalNav } from '@components'
+
 /**
  * # MainFrame Page
  * Wraps the application in a frame with a menu bar, breadcrumbs, local navigation and footer.

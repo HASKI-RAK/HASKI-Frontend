@@ -1810,6 +1810,17 @@
   "topic": "Topic",
   "universityKempten": "University of Applied Sciences Kempten",
   "update": "Updated",
-  "User.fetching.error": "There was an Error fetching User data",
-  "warning": "Warning"
+  "warning": "Warning",
+  "accept": "Accept",
+  "decline": "Decline",
+  "agree": "Agree",
+  "pages.privacypolicy": "privacypolicy",
+  "components.PrivacyModal.readPrivacypolicy": "I have read the \n",
+  "components.PrivacyModal.readPrivacypolicy2": "",
+  "components.PrivacyModal.returnToMoodle": "This will redirect you to Moodle",
+  "components.PrivacyModal.afterReading": "HASKI is using essential cookies. Further information about the collected data and its usage can be found in the privacy policy:",
+  "components.PrivacyModal.termsOfService": "Terms of service and privacy policy",
+  "components.PrivacyModal.accepted": "Thank you for your trust. Data to improve your learning experience is now being collected.",
+  "components.PrivacyModal.declined": "You cannot access HASKI without accepting the essential cookies.",
+  "User.fetching.error": "There was an Error fetching User data"
 }
