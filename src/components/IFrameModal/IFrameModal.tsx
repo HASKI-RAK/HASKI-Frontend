@@ -36,21 +36,18 @@ type IFrameModalProps = {
  * @category Components
  */
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
-
-
-
   return (
-    <Modal open={props.isOpen} onClose={props.onClose} data-testid={"IFrameModal"} >
+    <Modal open={props.isOpen} onClose={props.onClose} data-testid={'IFrameModal'}>
       <Box sx={style_box}>
         <Fab
-         color="primary"
-         data-testid={"IFrameModal-Close-Button"}
-         onClick={() => props.onClose()}
-         style={{
-          position: 'absolute',
-           top: '2%',
-           left: '94.75%'
-         }}>
+          color="primary"
+          data-testid={'IFrameModal-Close-Button'}
+          onClick={() => props.onClose()}
+          style={{
+            position: 'absolute',
+            top: '2%',
+            left: '94.75%'
+          }}>
           <Close />
         </Fab>
         <iframe
@@ -60,7 +57,7 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
           height="105%"
           style={{
             position: 'relative',
-            border: 0,
+            border: 0
           }}
         />
       </Box>
