@@ -8,6 +8,7 @@ import {
   PrivacyPolicy,
   Contact,
   ProjectDescription,
+  ProjectTeam,
   ProjectInformation,
   Imprint,
   Topic,
@@ -45,6 +46,7 @@ export const App = () => (
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />
               <Route path="/projectinformation" element={<ProjectInformation />} />
               <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
+              <Route path="/projectinformation/projectteam" element={<ProjectTeam />} />
               <Route path="/projectinformation/glossary" element={<Glossary />} />
               <Route path="/imprint" element={<Imprint />} />
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />

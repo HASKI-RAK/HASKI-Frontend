@@ -1,0 +1,38 @@
+.bgLogo {
+    margin-left:23.5%;
+    margin-top:9.5rem;
+    z-index:-100;
+    opacity:0.15;
+    position:absolute;
+}
+@media only screen and (max-width: 1100px) {
+    .bgLogo {
+        margin-left:15%;
+    }
+}
+@media only screen and (min-width: 2200px) {
+    .bgLogo {
+        margin-left:25%;
+    }
+}
+@media only screen and (min-width: 2400px) {
+    .bgLogo {
+        margin-left:26%;
+    }
+}
+
+.bgMap01, .bgMap02, .bgMap03 {
+    z-index:-100;
+    opacity:0.35;
+    position:absolute;
+    width:55.55%;
+    overflow:hidden;
+}
+
+.bgMap02, .bgMap03 {
+    left: 0;
+}
+
+.bgMap01 {
+    right: 0;
+}

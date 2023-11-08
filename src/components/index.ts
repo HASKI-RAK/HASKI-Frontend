@@ -15,6 +15,12 @@ export { default as LocalNav } from './LocalNav/LocalNav'
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
 export { default as ProjectDescriptionCard } from './ProjectDescription/ProjectDescriptionCard/ProjectDescriptionCard'
 export { default as ProjectDescriptionStepper } from './ProjectDescription/ProjectDescriptionStepper/ProjectDescriptionStepper'
+export { default as CollapsibleText } from './ProjectTeam/CollapsibleText/CollapsibleText'
+export { default as CollapsibleTextList } from './ProjectTeam/CollapsibleText/CollapsibleTextList'
+export { default as CollapsibleTextMultiList } from './ProjectTeam/CollapsibleText/CollapsibleTextMultiList'
+export { default as ImageCollection } from './ProjectTeam/ProjectTeamImageCollection/ProjectTeamImageCollection'
+export { default as ImageAttribute } from './ProjectTeam/ImageAttribute/ImageAttribute'
+export { default as MapPin } from './ProjectTeam/MapPin/MapPin'
 export {
   default as SnackbarMessage,
   type SnackbarMessageProps,

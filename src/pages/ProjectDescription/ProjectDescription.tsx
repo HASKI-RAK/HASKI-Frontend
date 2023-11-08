@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { ProjectDescriptionCard, ProjectDescriptionStepper } from '@components'
+import { ProjectDescriptionCard, ProjectDescriptionStepper, ImageAttribute } from '@components'
 import { Avatar, Box, Grid, Typography } from '@common/components'
 import { memo } from 'react'
 
@@ -95,16 +95,10 @@ const ProjectDescription = () => {
         }
       />
       <Grid container item justifyContent="center" xs={12}>
-        <Typography sx={{ pt: '1rem', pb: '1rem' }} variant="subtitle1">
-          {t('pages.ProjectDescription.imageSources') + t('universityKempten') + ', '}
-          <a href="https://de.freepik.com/fotos-kostenlos/close-up-der-studentin-schreiben-auf-laptop-am-tisch_1147740.htm">
-            {t('pages.ProjectDescription.imageSource1')}
-          </a>
-          {', '}
-          <a href="https://www.freepik.com/free-photo/cloud-upload-icon-line-connection-circuit-board_1198390.htm">
-            {t('pages.ProjectDescription.imageSource2')}
-          </a>
-        </Typography>
+          <ImageAttribute imageAttributes={
+              t('pages.ProjectDescription.imageSourcesDict', {
+                returnObjects: true,
+          }) as { text: string, url: string }[]}/>
       </Grid>
     </>
   )

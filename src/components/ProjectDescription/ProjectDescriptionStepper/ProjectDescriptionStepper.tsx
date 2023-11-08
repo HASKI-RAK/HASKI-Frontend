@@ -1,4 +1,4 @@
-import { Button, Fade, Grid, MobileStepper, Typography } from '@common/components'
+import {Avatar, Button, Fade, Grid, MobileStepper, Typography} from '@common/components'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import { useRef, useEffect, useCallback, useState, memo } from 'react'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
@@ -12,12 +12,20 @@ import {
 /**
  * @props body - The body texts that can be stepped through.
  * @props header - The header text that is permanently displayed above the body texts.
+ * @props withAvatar - If set, an avatar image, e.g. person will be displayed beneath.
+ * @props avatarSrc - Source image file for avatar, if none is set a default avatar will be displayed.
+ * @props avatarName - Line 1 of avatar description (mostly referred as name).
+ * @props avatarDescription - Line 2 of avatar description (mostly referred as title/description).
  * @props useProjectDescriptionStepper - The hook that is used for the stepper logic.
  * @interface
  */
 type ProjectDescriptionStepperProps = {
   body?: string[]
   header?: string
+  withAvatar?: boolean
+  avatarSrc?: string[]
+  avatarName?: string[]
+  avatarDescription?: string[]
   useProjectDescriptionStepper?: (
     params?: useProjectDescriptionStepperHookParams
   ) => ProjectDescriptionStepperHookReturn
@@ -26,11 +34,12 @@ type ProjectDescriptionStepperProps = {
 /**
  * ProjectDescriptionStepper component.
  *
- * @param props - Props containing the body and header texts aswell as a hook for the animation logic.
+ * @param props - Props containing the body and header texts and avatar info as well as a hook for the animation logic.
  *
  * @remarks
- * ProjectDescriptionCard presents a component that displays a header text on top and and multiple steppable body texts on the bottom of the element.
+ * ProjectDescriptionCard presents a component that displays a header text on top and multiple steppable body texts on the bottom of the element.
  * The header text is animated by using a typewriter effect. The body texts are animated by using a fade in effect.
+ * Optionally avatar images and titles can be used, those will be displayed beneath each body individually.
  * ProjectDescriptionCard can be used as a standalone component on a page.
  *
  * @category Components
@@ -78,8 +87,8 @@ const ProjectDescriptionStepper = ({
         container
         justifyContent="center"
         sx={{
-          mt: '7.5rem',
-          mb: '7.5rem'
+          mt: '1.5rem',
+          mb: '5.5rem'
         }}>
         <Grid container item justifyContent="center" xs={12} sx={{ maxWidth: { sm: '18.75rem', md: '37.5rem' } }}>
           <Typography
@@ -104,6 +113,40 @@ const ProjectDescriptionStepper = ({
             </Typography>
           </Fade>
         </Grid>
+        {props.withAvatar &&<Grid alignContent="center" container item justifyContent="center" xs={12}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <Avatar
+              alt={props.avatarName?.[activeStep] ??  "Default Avatar"}
+              src={props.avatarSrc?.[activeStep] ??  "/ProjectTeamPersonPlaceholder.png"}
+              sx={{
+                height: { xs: '6.5rem', sm: '6.5rem', md: '10.25rem', lg: '15.0rem' },
+                width: { xs: '6.5rem', sm: '6.5rem', md: '10.25rem', lg: '15.0rem' },
+                margin: '0'
+              }}
+          />
+          <Typography
+              align="center"
+              variant="h5"
+              sx={{
+                pt: '1.0rem',
+                width: { sm: '18.75rem', md: '37.5rem' },
+                margin: '0'
+              }}>
+            {props.avatarName?.[activeStep]}
+          </Typography>
+          <Typography
+              align="center"
+              variant="h5"
+              sx={{
+                pt: '0.5rem',
+                pb: '1.5rem',
+                width: { sm: '18.75rem', md: '37.5rem' },
+                margin: '0'
+              }}>
+            {props.avatarDescription?.[activeStep]}
+          </Typography>
+          </div>
+        </Grid>}
         <Grid alignContent="center" container item justifyContent="center" xs={12}>
           <MobileStepper
             variant="dots"

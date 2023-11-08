@@ -1,0 +1,121 @@
+.container {
+    top: -4.25rem;
+    left: 2.5rem;
+    margin-bottom: -8.5rem;
+}
+@media only screen and (min-width: 2200px) {
+    .container {
+        width: 45rem;
+        height: 30rem;
+    }
+}
+@media only screen and (max-width: 2200px) {
+    .container {
+        width: 35rem;
+        height: 20rem;
+    }
+}
+@media only screen and (max-width: 1700px) {
+    .container {
+        width: 30rem;
+        height: 15rem;
+    }
+}
+@media only screen and (max-width: 1400px) {
+    .container {
+        width: 25rem;
+        height: 10rem;
+    }
+}
+@media only screen and (max-width: 1100px) {
+    .container {
+        width: 20rem;
+        height: 5rem;
+    }
+}
+@media only screen and (max-width: 700px) {
+    .container {
+        width: 22rem;
+        height: 7rem;
+        top: -5.5rem;
+        left: 0;
+        opacity: 0.9;
+    }
+}
+
+.view {
+    bottom: 0;
+    left: inherit;
+    position: relative;
+    right: inherit;
+    top: inherit;
+    transform: skew(-10deg);
+    width: inherit;
+    height: inherit;
+}
+
+.left, .middle, .right {
+    bottom: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+}
+
+.left {
+    left: -5%;
+    right: 66%;
+}
+
+.middle {
+    left: 33%;
+    right: 33%;
+}
+
+.right {
+    left: 67%;
+    right: -5%;
+}
+
+.img1, .img2, .img3 {
+    bottom: -5%;
+    top: -15%;
+    position: absolute;
+    transform: skew(10deg);
+    background-position: center center;
+    background-size: cover;
+}
+
+.img1 {
+    left: -5%;
+    right: -10%;
+}
+
+.img2 {
+    left: -15%;
+    right: -15%;
+}
+
+.img3 {
+    left: -15%;
+    right: -5%;
+}
+
+.divider, .divider2 {
+    background-color: #f39322;
+    border-left: solid 2px #000;
+    border-right: solid 2px #000;
+    bottom: 0;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
+.divider {
+    left: 30.5%;
+    right: 67%;
+}
+
+.divider2 {
+    left: 66%;
+    right: 31.5%;
+}

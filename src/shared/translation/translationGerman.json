@@ -1629,6 +1629,7 @@
   "pages.PrivacyPolicy.PrivacySupport.Text": "Bei Rückfragen bezüglich datenschutzrechtlicher Themen, wenden Sie sich bitte an den Datenschutzbeauftragten. Dieser ist unter den folgenden Kontaktdaten erreichbar:",
   "pages.PrivacyPolicy.Support.Text": "Bei Rückfragen zur Studie, wenden Sie sich bitte an den Versuchsleiter. Im Falle dieser Studie handelt es sich dabei um:",
   "pages.projectdescription": "Projektbeschreibung",
+  "pages.projectteam": "Über uns",
   "pages.projectinformation": "Projektinformation",
   "pages.topic": "Thema",
   "post": "Post",
@@ -1677,6 +1678,45 @@
     "Didaktisch relevante Berichte für Lehrende zur Weiterentwicklung von Kursen"
   ],
   "pages.ProjectDescription.imageSources": "Bildquellen: ",
-  "pages.ProjectDescription.imageSource1": "Bild von katemangostar auf Freepik",
-  "pages.ProjectDescription.imageSource2": "Bild von natanaelginting auf Freepik"
+  "pages.ProjectDescription.imageSourcesDict": [
+    { "text": "HS Kempten", "url":  ""},
+    { "text": "Bild von katemangostar auf Freepik", "url":  "https://de.freepik.com/fotos-kostenlos/close-up-der-studentin-schreiben-auf-laptop-am-tisch_1147740.htm"},
+    { "text": "Bild von natanaelginting auf Freepik", "url":  "https://www.freepik.com/free-photo/cloud-upload-icon-line-connection-circuit-board_1198390.htm"}
+  ],
+  "pages.ProjectTeam.introductionHeader": "Wer ist HASKI?",
+  "pages.ProjectTeam.introductionBody": "HASKI ist ein Verbundprojekt der drei bayerischen Hochschulen: OTH Regensburg, TH Aschaffenburg & HS Kempten und umfasst gesamt <x> Beteiligte, davon <x> Dozenten, <x> wissenschaftliche Mitarbeiter, <x> studentische Hilfskräfte und <x> an der Verwaltung beteiligte Personen.",
+  "pages.ProjectTeam.ReasonsHeader": "Warum HASKI?",
+  "pages.ProjectTeam.ReasonsBody": [
+    {"quote": "Zitat 1 über Gründe, wie die Idee zu HASKI zustande kam.", "img": "", "name": "Max Muster", "description":  "Projektinitiator Uni A"},
+    {"quote": "Zitat 2 Gründe, wie die Idee zu HASKI zustande kam.", "img": "", "name": "Lisa Lorem", "description":  "Projektinitiator Uni B"}
+  ],
+  "pages.ProjectTeam.University.AschaffenburgHeader": "Team TH Aschaffenburg",
+  "pages.ProjectTeam.University.AschaffenburgBody": "Hauptaufgabengebiet des Aschaffenburger Teams stellt <Themengebiete> dar. Insgesamt sind <x> Personen am Projekt beteiligt: <Namen>",
+  "pages.ProjectTeam.University.RegensburgHeader": "Team OTH Regensburg",
+  "pages.ProjectTeam.University.RegensburgBody": "Hauptaufgabengebiet des Regensburger Teams stellt <Themengebiete> dar. Insgesamt sind <x> Personen am Projekt beteiligt: <Namen>",
+  "pages.ProjectTeam.University.KemptenHeader": "Team HS Kempten",
+  "pages.ProjectTeam.University.KemptenBody": "Hauptaufgabengebiet des Kemptener Teams stellt <Themengebiete> dar. Insgesamt sind <x> Personen am Projekt beteiligt: <Namen>",
+  "pages.ProjectTeam.InitVoicesHeader": "Stimmen des Projekts",
+  "pages.ProjectTeam.InitVoicesBody": [
+    {"quote": "Zitat 1 über Motivation, Ziele und eigene/Team-Arbeit.", "img": "", "name": "Max Muster", "description":  "Hauptaufgabenträger Fachgebiet A"},
+    {"quote": "Zitat 2 über Motivation, Ziele und eigene/Team-Arbeit.", "img": "", "name": "Lisa Lorem", "description":  "Hauptaufgabenträger Fachgebiet B"}
+  ],
+  "pages.ProjectTeam.StudentVoicesHeader": "Studentenmeinungen",
+  "pages.ProjectTeam.StudentVoicesBody": [
+    {"quote": "Zitat 1 über Meinung & Nutzungserfahrung."},
+    {"quote": "Zitat 2 über Meinung & Nutzungserfahrung."}
+  ],
+  "pages.ProjectTeam.interdisciplinaryHeader": "Interdisziplinäres Arbeiten – Ein Überblick",
+  "pages.ProjectTeam.interdisciplinaryBody": [
+    { "header": "Thema 1", "description": "Lorem ipsum dolor sit amet." },
+    { "header": "Thema 2", "description": "Lorem ipsum dolor sit amet." },
+    { "header": "Thema 3", "description": "Lorem ipsum dolor sit amet." }
+  ],
+  "pages.ProjectTeam.imageSourcesDict": [
+    { "text": "TH Aschaffenburg", "url":  ""},
+    { "text": "HS Kempten", "url":  ""},
+    { "text": "OTH Regensburg", "url":  ""},
+    { "text": "Bild von muammark auf Freepik", "url":  "https://www.freepik.com/free-vector/people-icon-collection_1157380.htm"},
+    { "text": "Bild von D-Maps.com", "url":  "https://d-maps.com/carte.php?num_car=6121&lang=de"}
+  ]
 }
