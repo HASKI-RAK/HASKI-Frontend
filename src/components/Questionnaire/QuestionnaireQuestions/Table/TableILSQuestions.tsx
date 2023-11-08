@@ -159,6 +159,7 @@ export const TableILSQuestions = memo(
     const handleSendClick = () => {
       sendAnswers().then((res) => {
         if (res) {
+
           addSnackbar({
             message: t('Data.send.successfull'),
             severity: 'success',

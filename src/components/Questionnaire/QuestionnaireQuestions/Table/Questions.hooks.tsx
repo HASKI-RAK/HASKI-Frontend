@@ -72,10 +72,44 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
 }
 
 //hardcoded courseId, topicId, algorithm for evaluation
+const course1TopicListKempten = [1, 2, 3]
+const course2TopicListKempten = [10, 11, 12, 13, 14]
+const algorithmListKempten1 = ["aco", "aco", "graf"]
+const algorithmListKempten2 = ["aco", "aco", "graf", "aco", "aco"]
+const exceptedUserIdKempten = [2]
+
+const topicListAschaffenburg = [2, 3, 6]
+const algorithmListAschaffenburg = ["aco", "ga", "graf"]
+
 const useCalculateLearningPath = (user: User) => {
-    postCalculateLearningPathILS(user.settings.user_id, user.lms_user_id, user.id, 1, 1, "aco").then((response) => {
-        console.log(response)
-    })
+    console.log("calculate learning path")
+    if(user.university == "HS-KE") {
+        if(exceptedUserIdKempten.includes(user.id)) {
+            console.log("excepted user")
+            return
+        }
+        course1TopicListKempten.map((topicId, index) => {
+            postCalculateLearningPathILS(user.settings.user_id, user.lms_user_id, user.id, 1, topicId, algorithmListKempten1[index]).then((response) => {
+                console.log(response)
+            })
+        })
+        course2TopicListKempten.map((topicId, index) => {
+            postCalculateLearningPathILS(user.settings.user_id, user.lms_user_id, user.id, 3, topicId, algorithmListKempten2[index]).then((response) => {
+                console.log(response)
+            })
+        })
+    }
+    else if(user.university == "TH-AB") {
+        topicListAschaffenburg.map((topicId, index) => {
+            postCalculateLearningPathILS(user.settings.user_id, user.lms_user_id, user.id, 1, topicId, algorithmListAschaffenburg[index]).then((response) => {
+                console.log(response)
+            })
+        })
+    }
+    else {
+        console.log("no learning path for this university")
+        console.log(user.university)
+    }
 }
 
 export default useHandleSend
