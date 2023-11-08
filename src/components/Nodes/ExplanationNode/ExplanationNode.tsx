@@ -15,6 +15,7 @@ import { memo } from 'react'
 const ExplanationNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
     <NodeWrapper
+      id="explanation-node"
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()

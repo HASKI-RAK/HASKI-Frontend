@@ -70,6 +70,7 @@ const MemoTableRowAnswers = memo(
       <TableRow>
         <TableCell>
           <RadioGroup
+            id="list-k-radio-group"
             value={radioButtonGroup}
             data-testid={`ListKQuestionnaireButtonGroup${answerIndex + 1}`}
             onChange={(e) => {

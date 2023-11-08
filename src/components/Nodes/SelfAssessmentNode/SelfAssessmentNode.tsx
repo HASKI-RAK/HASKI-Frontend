@@ -15,6 +15,7 @@ import { memo } from 'react'
 const SelfAssessmentNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
     <NodeWrapper
+      id="self-assessment-node"
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()

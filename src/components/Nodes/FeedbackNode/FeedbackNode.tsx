@@ -15,6 +15,7 @@ import { memo } from 'react'
 const FeedbackNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
     <NodeWrapper
+      id="feedback-node"
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()

@@ -15,6 +15,7 @@ import { memo } from 'react'
 const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
     <NodeWrapper
+      id="additional-literature-node"
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()

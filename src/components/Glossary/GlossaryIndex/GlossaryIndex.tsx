@@ -37,6 +37,7 @@ const GlossaryIndex = (props: GlossaryIndexProps) => {
 
   return (
     <ToggleButtonGroup
+      id="glossary-index-toggle-button-group"
       exclusive
       onChange={handleChange}
       orientation={props.orientation}

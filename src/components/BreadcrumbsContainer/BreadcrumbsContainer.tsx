@@ -27,6 +27,7 @@ const BreadcrumbsContainer = () => {
             if (path === '')
               return (
                 <Link
+                  id="home-link"
                   key={path}
                   underline="hover"
                   color="text.primary"
@@ -39,6 +40,7 @@ const BreadcrumbsContainer = () => {
 
             return (
               <Link
+                id={path.concat('-link')}
                 key={path}
                 underline="hover"
                 component={index === location.pathname.split('/').length - 1 ? 'span' : 'button'}
@@ -58,6 +60,7 @@ const BreadcrumbsContainer = () => {
         ) : (
           <Box display="flex">
             <Link
+              id="home-link"
               color="text.primary"
               onClick={() => {
                 navigate('/')

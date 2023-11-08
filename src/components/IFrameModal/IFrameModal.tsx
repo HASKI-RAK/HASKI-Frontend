@@ -48,7 +48,7 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
   // }, [props.isOpen])
 
   return (
-    <Modal open={props.isOpen} onClose={props.onClose}>
+    <Modal id="iframe-modal" open={props.isOpen} onClose={props.onClose}>
       <Box sx={style_box}>
         <iframe
           src={props.url}

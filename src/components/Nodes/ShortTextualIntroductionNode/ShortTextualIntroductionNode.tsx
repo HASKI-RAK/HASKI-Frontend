@@ -15,6 +15,7 @@ import { memo } from 'react'
 const ShortTextualIntroductionNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
     <NodeWrapper
+      id="short-textual-introduction-node"
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()

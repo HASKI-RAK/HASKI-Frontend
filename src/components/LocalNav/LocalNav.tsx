@@ -60,6 +60,7 @@ const LocalNav = ({
         <>
           {topics.map((topic, index) => (
             <Accordion
+              id="local-nav-accordion"
               disableGutters
               key={`topic-Accordion-${topic.id}`}
               sx={{

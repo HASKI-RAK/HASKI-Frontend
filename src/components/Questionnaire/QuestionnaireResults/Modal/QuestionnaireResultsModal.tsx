@@ -93,7 +93,7 @@ const QuestionnaireResultsModal = ({
   }
 
   return (
-    <Modal data-testid={'ILS and ListK Modal'} open={open} onClose={handleClose}>
+    <Modal id="questionnaire-results-modal" data-testid={'ILS and ListK Modal'} open={open} onClose={handleClose}>
       <Box
         sx={{
           position: 'absolute',
@@ -108,6 +108,7 @@ const QuestionnaireResultsModal = ({
           p: 1
         }}>
         <IconButton
+          id="close-icon-button"
           color="primary"
           sx={styleButtonClose}
           onClick={handleClose}
@@ -118,6 +119,7 @@ const QuestionnaireResultsModal = ({
           {steps.map((label, index) => (
             <Step key={label} data-testid={'StepperButton'}>
               <StepButton
+                id={label.concat('-step-button')}
                 color="inherit"
                 onClick={() => {
                   setActiveStep(index)
@@ -181,6 +183,7 @@ const QuestionnaireResultsModal = ({
           ) : null}
           <Stack direction="row" justifyContent="space-between" alignItems="center" m={2}>
             <Button
+              id="back-button"
               variant="contained"
               color="primary"
               onClick={handleBack}
@@ -189,6 +192,7 @@ const QuestionnaireResultsModal = ({
               {t('Back')}
             </Button>
             <Button
+              id="next-button"
               variant="contained"
               color="primary"
               onClick={handleNext}

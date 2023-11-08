@@ -66,7 +66,7 @@ const Searchbar = (props: SearchbarProps) => {
   return (
     <Typography variant="h4">
       <TextField
-        id="searchbar"
+        id="searchbar-textfield"
         fullWidth
         label={props.label}
         onChange={handleChange}
