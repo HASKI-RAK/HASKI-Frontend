@@ -26,7 +26,7 @@ type ModalProps = DefaultModalProps & {
  *
  * @category Common
  */
-const Modal = ({ useStatement = _useStatement, ...props }: ModalProps) => {
+const Modal = ({ useStatement = _useStatement, onClose, ...props }: ModalProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Modal
@@ -37,9 +37,9 @@ const Modal = ({ useStatement = _useStatement, ...props }: ModalProps) => {
       onClose={useCallback(
         (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
           sendStatement(xAPIVerb.closed).catch((reason) => log.error(reason))
-          props.onClose?.(event, reason)
+          onClose?.(event, reason)
         },
-        [sendStatement, props.onClose]
+        [sendStatement, onClose]
       )}
       {...props}>
       {props.children}

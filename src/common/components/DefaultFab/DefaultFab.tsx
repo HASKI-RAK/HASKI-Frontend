@@ -26,7 +26,7 @@ type FabProps = DefaultFabProps & {
  *
  * @category Common
  */
-const Fab = ({ useStatement = _useStatement, ...props }: FabProps) => {
+const Fab = ({ useStatement = _useStatement, onClick, ...props }: FabProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Fab
@@ -37,9 +37,9 @@ const Fab = ({ useStatement = _useStatement, ...props }: FabProps) => {
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
-          props.onClick?.(event)
+          onClick?.(event)
         },
-        [sendStatement, props.onClick]
+        [sendStatement, onClick]
       )}
       {...props}>
       {props.children}

@@ -26,7 +26,7 @@ type MenuProps = DefaultMenuProps & {
  *
  * @category Common
  */
-const Menu = ({ useStatement = _useStatement, ...props }: MenuProps) => {
+const Menu = ({ useStatement = _useStatement, onClose, ...props }: MenuProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Menu
@@ -37,9 +37,9 @@ const Menu = ({ useStatement = _useStatement, ...props }: MenuProps) => {
       onClose={useCallback(
         (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
           sendStatement(xAPIVerb.closed).catch((reason) => log.error(reason))
-          props.onClose?.(event, reason)
+          onClose?.(event, reason)
         },
-        [sendStatement, props.onClose]
+        [sendStatement, onClose]
       )}
       {...props}>
       {props.children}

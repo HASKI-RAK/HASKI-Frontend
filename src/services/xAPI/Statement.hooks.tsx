@@ -94,8 +94,8 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   // Default values
   const { defaultComponentID = 'null', defaultComponent = xAPIComponent.Null } = params ?? {}
 
-  // TODO: maybe useTranslation('en')
   const { t, i18n } = useTranslation()
+  const en = i18n.getFixedT('en')
   const location = useLocation()
 
   const fetchUser = usePersistedStore((state) => state.fetchUser)
@@ -104,19 +104,14 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
       return user.id.toString()
     })
     .catch((error) => {
-      // log.error(error)
+      log.error(error)
       return '-1'
     })
 
-  // TODO: Schauen, ob es eine direkte Übersetzungsmöglichkeit gibt t('key', 'en')
   // Function to get the english name of a page.
   const getEnglishName = useCallback(
     (key: string) => {
-      i18n.changeLanguage('en')
-      const translatedName = t('pages.'.concat(key))
-      i18n.changeLanguage(localStorage.getItem('i18nextLng') ?? 'en')
-      return translatedName
-      // return t('pages.'.concat(key), 'en')
+      return en('pages.'.concat(key))
     },
     [i18n, t]
   )

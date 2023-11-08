@@ -26,7 +26,7 @@ type PopoverProps = DefaultPopoverProps & {
  *
  * @category Common
  */
-const Popover = ({ useStatement = _useStatement, ...props }: PopoverProps) => {
+const Popover = ({ useStatement = _useStatement, onClose, ...props }: PopoverProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Popover
@@ -37,9 +37,9 @@ const Popover = ({ useStatement = _useStatement, ...props }: PopoverProps) => {
       onClose={useCallback(
         (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
           sendStatement(xAPIVerb.closed).catch((reason) => log.error(reason))
-          props.onClose?.(event, reason)
+          onClose?.(event, reason)
         },
-        [props.onClose, sendStatement]
+        [onClose, sendStatement]
       )}
       {...props}>
       {props.children}

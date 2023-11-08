@@ -26,7 +26,7 @@ type ToggleButtonGroupProps = DefaultToggleButtonGroupProps & {
  *
  * @category Common
  */
-const ToggleButtonGroup = ({ useStatement = _useStatement, ...props }: ToggleButtonGroupProps) => {
+const ToggleButtonGroup = ({ useStatement = _useStatement, onChange, ...props }: ToggleButtonGroupProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.ToggleButtonGroup
@@ -37,9 +37,9 @@ const ToggleButtonGroup = ({ useStatement = _useStatement, ...props }: ToggleBut
       onChange={useCallback(
         <T, K extends T>(event: MouseEvent<HTMLElement, globalThis.MouseEvent>, value: K) => {
           sendStatement(xAPIVerb.changed).catch((reason) => log.error(reason))
-          props.onChange?.(event, value)
+          onChange?.(event, value)
         },
-        [sendStatement, props.onChange]
+        [sendStatement, onChange]
       )}
       {...props}>
       {props.children}

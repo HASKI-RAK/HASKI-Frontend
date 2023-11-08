@@ -26,7 +26,7 @@ type StepButtonProps = DefaultStepButtonProps & {
  *
  * @category Common
  */
-const StepButton = ({ useStatement = _useStatement, ...props }: StepButtonProps) => {
+const StepButton = ({ useStatement = _useStatement, onClick, ...props }: StepButtonProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.StepButton
@@ -37,9 +37,9 @@ const StepButton = ({ useStatement = _useStatement, ...props }: StepButtonProps)
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
-          props.onClick?.(event)
+          onClick?.(event)
         },
-        [sendStatement, props.onClick]
+        [sendStatement, onClick]
       )}
       {...props}>
       {props.children}

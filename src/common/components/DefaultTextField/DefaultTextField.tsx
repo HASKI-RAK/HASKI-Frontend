@@ -26,7 +26,7 @@ type TextFieldProps = DefaultTextFieldProps & {
  *
  * @category Common
  */
-const TextField = ({ useStatement = _useStatement, ...props }: TextFieldProps) => {
+const TextField = ({ useStatement = _useStatement, onChange, ...props }: TextFieldProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.TextField
@@ -37,9 +37,9 @@ const TextField = ({ useStatement = _useStatement, ...props }: TextFieldProps) =
       onChange={useCallback(
         (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
           sendStatement(xAPIVerb.changed).catch((reason) => log.error(reason))
-          props.onChange?.(event)
+          onChange?.(event)
         },
-        [sendStatement, props.onChange]
+        [sendStatement, onChange]
       )}
       {...props}>
       {props.children}

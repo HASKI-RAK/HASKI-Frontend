@@ -27,7 +27,7 @@ type AccordionProps = DefaultAccordionProps & {
  *
  * @category Common
  */
-const Accordion = ({ useStatement = _useStatement, ...props }: AccordionProps) => {
+const Accordion = ({ useStatement = _useStatement, onClick, ...props }: AccordionProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Accordion
@@ -38,9 +38,9 @@ const Accordion = ({ useStatement = _useStatement, ...props }: AccordionProps) =
       onClick={useCallback(
         (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
-          props.onClick?.(event)
+          onClick?.(event)
         },
-        [sendStatement, props.onClick]
+        [sendStatement, onClick]
       )}
       {...props}>
       {props.children}

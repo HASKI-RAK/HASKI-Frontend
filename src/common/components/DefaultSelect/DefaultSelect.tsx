@@ -26,7 +26,7 @@ type SelectProps<T> = DefaultSelectProps<T> & {
  *
  * @category Common
  */
-const Select = <T, K extends T>({ useStatement = _useStatement, ...props }: SelectProps<K>) => {
+const Select = <T, K extends T>({ useStatement = _useStatement, onClick, onChange, ...props }: SelectProps<K>) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Select
@@ -38,16 +38,16 @@ const Select = <T, K extends T>({ useStatement = _useStatement, ...props }: Sele
       onClick={useCallback(
         (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
-          props.onClick?.(event)
+          onClick?.(event)
         },
-        [sendStatement, props.onClick]
+        [sendStatement, onClick]
       )}
       onChange={useCallback(
         (event: SelectChangeEvent<K>, child: ReactNode) => {
           sendStatement(xAPIVerb.changed).catch((reason) => log.error(reason))
-          props.onChange?.(event, child)
+          onChange?.(event, child)
         },
-        [sendStatement, props.onChange]
+        [sendStatement, onChange]
       )}>
       {props.children}
     </DefaultSelect>

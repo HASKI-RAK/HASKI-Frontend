@@ -26,7 +26,7 @@ type IconButtonProps = DefaultIconButtonProps & {
  *
  * @category Common
  */
-const IconButton = ({ useStatement = _useStatement, ...props }: IconButtonProps) => {
+const IconButton = ({ useStatement = _useStatement, onClick, ...props }: IconButtonProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.IconButton
@@ -37,9 +37,9 @@ const IconButton = ({ useStatement = _useStatement, ...props }: IconButtonProps)
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
-          props.onClick?.(event)
+          onClick?.(event)
         },
-        [props.onClick, sendStatement]
+        [onClick, sendStatement]
       )}
       {...props}>
       {props.children}

@@ -29,6 +29,7 @@ type ImageWrapperProps<C extends ElementType, P = object> = DefaultBoxProps<C, P
  */
 const ImageWrapper = <C extends ElementType>({
   useStatement = _useStatement,
+  onClick,
   ...props
 }: ImageWrapperProps<C, { alt?: string }>): ReactElement => {
   const { sendStatement } = useStatement({
@@ -41,9 +42,9 @@ const ImageWrapper = <C extends ElementType>({
       onClick={useCallback(
         (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
-          props.onClick?.(event)
+          onClick?.(event)
         },
-        [props.onClick, sendStatement]
+        [onClick, sendStatement]
       )}
       {...props}>
       {props.children}

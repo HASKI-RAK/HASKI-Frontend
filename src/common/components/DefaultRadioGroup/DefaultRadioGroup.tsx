@@ -26,7 +26,7 @@ type RadioGroupProps = DefaultRadioGroupProps & {
  *
  * @category Common
  */
-const RadioGroup = ({ useStatement = _useStatement, ...props }: RadioGroupProps) => {
+const RadioGroup = ({ useStatement = _useStatement, onChange, ...props }: RadioGroupProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.RadioGroup
@@ -37,9 +37,9 @@ const RadioGroup = ({ useStatement = _useStatement, ...props }: RadioGroupProps)
       onChange={useCallback(
         (event: ChangeEvent<HTMLInputElement>, value: string) => {
           sendStatement(xAPIVerb.changed).catch((reason) => log.error(reason))
-          props.onChange?.(event, value)
+          onChange?.(event, value)
         },
-        [sendStatement, props.onChange]
+        [sendStatement, onChange]
       )}
       {...props}>
       {props.children}

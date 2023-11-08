@@ -27,7 +27,7 @@ type NodeWrapperProps = DefaultBoxProps & {
  *
  * @category Common
  */
-const NodeWrapper = ({ useStatement = _useStatement, ...props }: NodeWrapperProps) => {
+const NodeWrapper = ({ useStatement = _useStatement, onClick, ...props }: NodeWrapperProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Node
@@ -38,9 +38,9 @@ const NodeWrapper = ({ useStatement = _useStatement, ...props }: NodeWrapperProp
       onClick={useCallback(
         (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
-          props.onClick?.(event)
+          onClick?.(event)
         },
-        [props.onClick, sendStatement]
+        [onClick, sendStatement]
       )}
       {...props}>
       {props.children}

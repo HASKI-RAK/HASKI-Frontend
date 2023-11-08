@@ -28,6 +28,7 @@ type TextWrapperProps<C extends ElementType, P = object> = DefaultTypographyProp
  */
 const TextWrapper = <C extends ElementType>({
   useStatement = _useStatement,
+  onClick,
   ...props
 }: TextWrapperProps<C, { component?: C }>): ReactElement => {
   const { sendStatement } = useStatement({
@@ -40,9 +41,9 @@ const TextWrapper = <C extends ElementType>({
       onClick={useCallback(
         (event: MouseEvent<HTMLSpanElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
-          props.onClick?.(event)
+          onClick?.(event)
         },
-        [props.onClick, sendStatement]
+        [onClick, sendStatement]
       )}
       {...props}>
       {props.children}

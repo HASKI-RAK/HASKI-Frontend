@@ -26,7 +26,7 @@ type ButtonProps = DefaultButtonProps & {
  *
  * @category Common
  */
-const Button = ({ useStatement = _useStatement, ...props }: ButtonProps) => {
+const Button = ({ useStatement = _useStatement, onClick, ...props }: ButtonProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Button
@@ -38,9 +38,9 @@ const Button = ({ useStatement = _useStatement, ...props }: ButtonProps) => {
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
           console.log('hello')
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
-          props.onClick?.(event)
+          onClick?.(event)
         },
-        [sendStatement, props.onClick]
+        [sendStatement, onClick]
       )}
       {...props}>
       {props.children}

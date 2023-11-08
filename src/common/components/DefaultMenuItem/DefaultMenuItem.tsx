@@ -26,7 +26,7 @@ type MenuItemProps = DefaultMenuItemProps & {
  *
  * @category Common
  */
-const MenuItem = ({ useStatement = _useStatement, ...props }: MenuItemProps) => {
+const MenuItem = ({ useStatement = _useStatement, onClick, ...props }: MenuItemProps) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.MenuItem
@@ -37,9 +37,9 @@ const MenuItem = ({ useStatement = _useStatement, ...props }: MenuItemProps) => 
       onClick={useCallback(
         (event: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
-          props.onClick?.(event)
+          onClick?.(event)
         },
-        [sendStatement, props.onClick]
+        [sendStatement, onClick]
       )}
       {...props}>
       {props.children}
