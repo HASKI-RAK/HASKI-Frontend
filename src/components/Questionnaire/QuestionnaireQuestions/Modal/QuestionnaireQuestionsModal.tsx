@@ -32,8 +32,8 @@ const QuestionnaireQuestionsModal = ({ open = false, handleClose, children }: Qu
           onClick={() => handleClose({} as object, 'backdropClick')}
           style={{
             position: 'absolute',
-            top: '4%',
-            left: '90.5%'
+            top: '1%',
+            left: '95.5%'
           }}>
           <Close />
         </Fab>

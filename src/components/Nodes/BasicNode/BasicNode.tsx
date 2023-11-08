@@ -3,6 +3,7 @@ import { LearningPathLearningElementNode } from '@components'
 import { Feedback } from '@common/icons'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
+import { getConfig } from '@shared'
 
 /**
  * BasicNode presents a component that displays a node with a name.
@@ -19,7 +20,7 @@ const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()
-        data.handleSetUrl(process.env.MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
+        data.handleSetUrl(getConfig().MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
       }}
       data-testid={'basicNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />

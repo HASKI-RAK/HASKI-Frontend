@@ -134,22 +134,32 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleOpenTopicsMenu = async (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElTopics(event.currentTarget)
-    fetchUser().then((user) => {
-      fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
-        .then((TopicResponse) => {
-          setTopicsPath(TopicResponse.topics)
-          setLoadingTopics(false)
-        })
-        .catch((error) => {
-          // 🍿 snackbar error
-          addSnackbar({
-            message: error.message,
-            severity: 'error',
-            autoHideDuration: 5000
+    fetchUser()
+      .then((user) => {
+        fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
+          .then((TopicResponse) => {
+            setTopicsPath(TopicResponse.topics)
+            setLoadingTopics(false)
           })
-          log.error(error.message)
+          .catch((error) => {
+            // 🍿 snackbar error
+            addSnackbar({
+              message: error.message,
+              severity: 'error',
+              autoHideDuration: 5000
+            })
+            log.error(error.message)
+          })
+      })
+      .catch((error) => {
+        // 🍿 snackbar error
+        addSnackbar({
+          message: error.message,
+          severity: 'error',
+          autoHideDuration: 5000
         })
-    })
+        log.error(error.message)
+      })
   }
 
   const handleCloseTopicsMenu = () => {
@@ -358,14 +368,18 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
-              <MenuItem
-                id="ils-long-menu-item"
-                data-testid="questionnaireILS"
-                key="questionnaireILS"
-                onClick={() => handleOpenILSLongModal()}>
-                <ListItemIcon>{isAuth && <LibraryBooksOutlined fontSize="small" />}</ListItemIcon>
-                <Typography textAlign="center">{isAuth && 'ILS Questionnaire'}</Typography>
-              </MenuItem>
+              {isAuth && (
+                <MenuItem
+                  id="ils-long-menu-item"
+                  data-testid="questionnaireILS"
+                  key="questionnaireILS"
+                  onClick={() => handleOpenILSLongModal()}>
+                  <ListItemIcon>
+                    <LibraryBooksOutlined fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{'ILS Questionnaire'}</Typography>
+                </MenuItem>
+              )}
               <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
                 <TableILSQuestions
                   ilsLong={true}
@@ -374,16 +388,20 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                 />
               </QuestionnaireQuestionsModal>
 
-              <MenuItem
-                id="ils-short-menu-item"
-                data-testid="questionnaireILSshort"
-                key="questionnaireILSshort"
-                onClick={() => {
-                  handleOpenILSShortModal()
-                }}>
-                <ListItemIcon>{isAuth && <AssignmentOutlined fontSize="small" />}</ListItemIcon>
-                <Typography textAlign="center">{isAuth && 'ILS Questionnaire shortend'}</Typography>
-              </MenuItem>
+              {isAuth && (
+                <MenuItem
+                  id="ils-short-menu-item"
+                  data-testid="questionnaireILSshort"
+                  key="questionnaireILSshort"
+                  onClick={() => {
+                    handleOpenILSShortModal()
+                  }}>
+                  <ListItemIcon>
+                    <AssignmentOutlined fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{'ILS Questionnaire shortend'}</Typography>
+                </MenuItem>
+              )}
               <QuestionnaireQuestionsModal open={modalOpenILSShort} handleClose={handleCloseILSShortModal}>
                 <TableILSQuestions
                   ilsLong={false}
@@ -392,14 +410,18 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                 />
               </QuestionnaireQuestionsModal>
 
-              <MenuItem
-                id="list-k-menu-item"
-                data-testid="questionnaireListk"
-                key="questionnaireListk"
-                onClick={() => handleOpenListKModal()}>
-                <ListItemIcon>{isAuth && <PlaylistAddCheckCircleOutlined fontSize="small" />}</ListItemIcon>
-                <Typography textAlign="center">{isAuth && 'List-K Questionnaire'}</Typography>
-              </MenuItem>
+              {isAuth && (
+                <MenuItem
+                  id="list-k-menu-item"
+                  data-testid="questionnaireListk"
+                  key="questionnaireListk"
+                  onClick={() => handleOpenListKModal()}>
+                  <ListItemIcon>
+                    <PlaylistAddCheckCircleOutlined fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{'List-K Questionnaire'}</Typography>
+                </MenuItem>
+              )}
               <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>
                 <TableListKQuestions successSend={successSendListK} setSuccessSend={setSuccessSendListK} />
               </QuestionnaireQuestionsModal>

@@ -99,6 +99,7 @@
   "components.Login.username": "Username",
   "components.Login.usernameError": "Please enter a valid username",
   "components.Menubar.CloseDialog": "Are you sure you want to close the Questionnaire? Unsent answers will not be saved.",
+  "components.MenuBar.Profile.Login": "Login",
   "components.MenuBar.Profile.Logout": "Logout",
   "components.MenuBar.TopicButton": "Topics",
   "components.ProjectDescriptionContent.advantagesLearningBody": "The support is enabled by the HASKI system reading your data from Moodle and using an AI algorithm based on this data to suggest a personalized learning path through the learning materials. Of course, the decision about which material you want to work on next remains with you. HASKI also remembers these preferences and adjusts future suggestions to new circumstances.",
@@ -130,6 +131,32 @@
   "components.ProjectDescriptionContent.introductionBody": "HASKI stands for \"Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt\" (\"Higher education teaching: Adaptive, self-directed, AI-assisted\") and is funded by the Federal Ministry of Education and Research with a project duration until December 2025. HASKI is a collaborative project of three Bavarian universities: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
   "components.ProjectDescriptionContent.introductionHeader": "What is HASKI?",
   "components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions": [
+    [
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      }
+    ],
     [
       {
         "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-1",
@@ -417,7 +444,34 @@
       }
     ]
   ],
+  "components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction": "Following this you will be asked questions that pertain to your style of information processing and organization, perception, and preferred presentation.  For each question, pick one of the two options that fits you best. If both or neither of the response options apply to you, then choose the one that tends to apply more often. These questions are based on the Index of Learning Styles (Felder & Solomon 1991).",
   "components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions": [
+    [
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      }
+    ],
     [
       {
         "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9",
@@ -550,6 +604,53 @@
     ]
   ],
   "components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions": [
+    [
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      }
+    ],
     [
       {
         "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1",
@@ -918,6 +1019,7 @@
       }
     ]
   ],
+  "components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction": "Following this you will be asked questions about what learning strategies you use. You will find a list of different learning activities. Please indicate how frequently each activity occurs for you. You can rate your answers from very rarely (1) to very often (5). The questions presented are based on the LIST-K (Klingsieck, 2019), which is a shortened version of the LIST (Wild & Schiefele, 1994).",
   "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.1": "have tried it.",
   "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.2": "have thought about it.",
   "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-10.1": "learn facts.",
@@ -1094,13 +1196,14 @@
   "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-7": "I question whether the text I am working on is really convincing.",
   "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-8": "I approach most texts critically.",
   "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-9": "I also critically examine what I am learning.",
-  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1": "ILS-Questionnaire-Long",
-  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1": "ILS-Questionnaire-Short",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1": "ILS-Questionnaire",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1": "ILS-Questionnaire (Shortened)",
   "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2": "or",
   "components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK": "List-K-Questionnaire",
   "components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1": "To see any results you need to complete the",
   "components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2": "first.",
   "components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.ButtonText": "Questionnaire Results",
+  "components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.MoreInformation": "I want to know more about the ILS and ListK",
   "components.Questionnaire.QuestionnaireResults.Table.TableILS.Active": "Active",
   "components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced": "balanced",
   "components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension": "Dimension",
@@ -1239,21 +1342,21 @@
   "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently not taking enough time for your learning. It would probably have a positive effect if you tried to create clear learning periods for yourself in order to make your learning more effective.",
   "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time Below3.Title": "Time has a value below 3",
   "contact": "Contact",
-  "Courses fetching error": "There was an Error fetching Courses data",
-  "Data send successfull": "Data send successfully",
-  "Data send unsuccessfull": "Data could not be sent",
+  "Courses.fetching.error": "There was an Error fetching Courses data",
+  "Data.send.successfull": "Data.send.successfully",
+  "Data.send.unsuccessfull": "Data could not be sent",
   "delete": "Deleted",
   "Dot": ".",
   "DSGVO": "GDPR",
   "error": "Error",
   "firstPage": "First",
   "help": "Help",
-  "ILS fetching error": "There was an Error fetching ILS Questionnaire data",
-  "ILS sending error": "ILS Questionnaire could not be sent.",
+  "ILS.fetching.error": "There was an Error fetching ILS Questionnaire data",
+  "ILS.sending.error": "ILS Questionnaire could not be sent.",
   "info": "Info",
   "lastPage": "Last",
-  "ListK fetching error": "There was an Error fetching ListK Questionnaire data",
-  "ListK sending error": "ListK Questionnaire could not be sent.",
+  "ListK.fetching.error": "There was an Error fetching ListK Questionnaire data",
+  "ListK.sending.error": "ListK Questionnaire could not be sent.",
   "loading": "Loading...",
   "Next": "Next",
   "nextText": "Next",
@@ -1659,6 +1762,34 @@
   "pages.PrivacyPolicy.PrivacySupport.Text": "For inquiries regarding data protection issues, please contact the data protection officer. The data protection officer can be reached at the following contact details:",
   "pages.PrivacyPolicy.Support.Text": "If you have any questions about the study, please contact the principal investigator. In the case of this study, the contact person is:",
   "pages.projectdescription": "Project Description",
+  "pages.ProjectDescription.advantagesLearningBody": "The support is enabled by the HASKI system reading your data from Moodle and using an AI algorithm based on this data to suggest a personalized learning path through the learning materials. Of course, the decision about which material you want to work on next remains with you. HASKI also remembers these preferences and adjusts future suggestions to new circumstances.",
+  "pages.ProjectDescription.advantagesLearningBody2": "The data basis consists of questionnaires, individual knowledge levels, evaluated tasks, and behavioral data from Moodle. Through anonymization of data, a conclusion about you by instructors is prevented.",
+  "pages.ProjectDescription.advantagesLearningHeader": "Benefits for you in your studies",
+  "pages.ProjectDescription.advantagesLearningHeader2": "What data does HASKI work with?",
+  "pages.ProjectDescription.advantagesTeachingBody": "The HASKI system aims to make a significant contribution to establishing interactive, personalized, and self-directed learning in higher education. Digital media and platforms can provide much more than the current practice of higher education, which is dominated by traditional classroom teaching, even in the context of the pandemic.",
+  "pages.ProjectDescription.advantagesTeachingBody2": "The idea behind HASKI is to harness the potential of AI in the courses offered at University of Applied Sciences Kempten. This is achieved by combining in-person teaching, the learning management system (e.g. Moodle), and the HASKI system. With this we provide a software component that utilizes AI algorithms to assist you in achieving your learning goals.",
+  "pages.ProjectDescription.advantagesTeachingHeader": "Benefits for higher education teaching",
+  "pages.ProjectDescription.advantagesTeachingHeader2": "Application in higher education",
+  "pages.ProjectDescription.approachesBody": [
+    "National exchange. Publication of scientific contributions. Presentations at german conferences.",
+    "Application of state-of-the-art technology. Combination of learning analytics and artificial intelligence.",
+    "Empirical investigations. Online surveys, evaluation studies, data analysis."
+  ],
+  "pages.ProjectDescription.approachesHeader": "What is our approach?",
+  "pages.ProjectDescription.goalsBody": [
+    "Improvement and expansion of existing courses in the field of software engineering through the production of high-quality, pedagogically meaningful, and varied learning content",
+    "Comprehensive digital representation of individual students and their characteristics",
+    "Development of an adaptive and AI-based learning system for generating personalized learning path recommendations",
+    "AI-based evaluation of exercises and helpful feedback",
+    "Visualization and preparation of learning analytics to reflect on learning behavior",
+    "Didactically relevant reports for lecturers to improve courses"
+  ],
+  "pages.ProjectDescription.goalsHeader": "Goals of the HASKI project",
+  "pages.ProjectDescription.imageSource1": "Image by katemangostar on Freepik",
+  "pages.ProjectDescription.imageSource2": "Image by natanaelginting on Freepik",
+  "pages.ProjectDescription.imageSources": "",
+  "pages.ProjectDescription.introductionBody": "HASKI stands for \"Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt\" (\"Higher education teaching: Adaptive, self-directed, AI-assisted\") and is funded by the Federal Ministry of Education and Research with a project duration until December 2025. HASKI is a collaborative project of three Bavarian universities: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
+  "pages.ProjectDescription.introductionHeader": "What is HASKI?",
   "pages.projectinformation": "Project Information",
   "pages.topic": "Topic",
   "post": "Posted",
@@ -1679,34 +1810,17 @@
   "topic": "Topic",
   "universityKempten": "University of Applied Sciences Kempten",
   "update": "Updated",
-  "User fetching error": "There was an Error fetching User data",
   "warning": "Warning",
-  "pages.ProjectDescription.introductionHeader": "What is HASKI?",
-  "pages.ProjectDescription.introductionBody": "HASKI stands for \"Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt\" (\"Higher education teaching: Adaptive, self-directed, AI-assisted\") and is funded by the Federal Ministry of Education and Research with a project duration until December 2025. HASKI is a collaborative project of three Bavarian universities: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
-  "pages.ProjectDescription.advantagesTeachingHeader": "Benefits for higher education teaching",
-  "pages.ProjectDescription.advantagesTeachingBody": "The HASKI system aims to make a significant contribution to establishing interactive, personalized, and self-directed learning in higher education. Digital media and platforms can provide much more than the current practice of higher education, which is dominated by traditional classroom teaching, even in the context of the pandemic.",
-  "pages.ProjectDescription.advantagesTeachingHeader2": "Application in higher education",
-  "pages.ProjectDescription.advantagesTeachingBody2": "The idea behind HASKI is to harness the potential of AI in the courses offered at University of Applied Sciences Kempten. This is achieved by combining in-person teaching, the learning management system (e.g. Moodle), and the HASKI system. With this we provide a software component that utilizes AI algorithms to assist you in achieving your learning goals.",
-  "pages.ProjectDescription.advantagesLearningHeader": "Benefits for you in your studies",
-  "pages.ProjectDescription.advantagesLearningBody": "The support is enabled by the HASKI system reading your data from Moodle and using an AI algorithm based on this data to suggest a personalized learning path through the learning materials. Of course, the decision about which material you want to work on next remains with you. HASKI also remembers these preferences and adjusts future suggestions to new circumstances.",
-  "pages.ProjectDescription.advantagesLearningHeader2": "What data does HASKI work with?",
-  "pages.ProjectDescription.advantagesLearningBody2": "The data basis consists of questionnaires, individual knowledge levels, evaluated tasks, and behavioral data from Moodle. Through anonymization of data, a conclusion about you by instructors is prevented.",
-  "pages.ProjectDescription.approachesHeader": "What is our approach?",
-  "pages.ProjectDescription.approachesBody": [
-    "National exchange. Publication of scientific contributions. Presentations at german conferences.",
-    "Application of state-of-the-art technology. Combination of learning analytics and artificial intelligence.",
-    "Empirical investigations. Online surveys, evaluation studies, data analysis."
-  ],
-  "pages.ProjectDescription.goalsHeader": "Goals of the HASKI project",
-  "pages.ProjectDescription.goalsBody": [
-    "Improvement and expansion of existing courses in the field of software engineering through the production of high-quality, pedagogically meaningful, and varied learning content",
-    "Comprehensive digital representation of individual students and their characteristics",
-    "Development of an adaptive and AI-based learning system for generating personalized learning path recommendations",
-    "AI-based evaluation of exercises and helpful feedback",
-    "Visualization and preparation of learning analytics to reflect on learning behavior",
-    "Didactically relevant reports for lecturers to improve courses"
-  ],
-  "pages.ProjectDescription.imageSources": "",
-  "pages.ProjectDescription.imageSource1": "Image by katemangostar on Freepik",
-  "pages.ProjectDescription.imageSource2": "Image by natanaelginting on Freepik"
+  "accept": "Accept",
+  "decline": "Decline",
+  "agree": "Agree",
+  "pages.privacypolicy": "privacypolicy",
+  "components.PrivacyModal.readPrivacypolicy": "I have read the \n",
+  "components.PrivacyModal.readPrivacypolicy2": "",
+  "components.PrivacyModal.returnToMoodle": "This will redirect you to Moodle",
+  "components.PrivacyModal.afterReading": "HASKI is using essential cookies. Further information about the collected data and its usage can be found in the privacy policy:",
+  "components.PrivacyModal.termsOfService": "Terms of service and privacy policy",
+  "components.PrivacyModal.accepted": "Thank you for your trust. Data to improve your learning experience is now being collected.",
+  "components.PrivacyModal.declined": "You cannot access HASKI without accepting the essential cookies.",
+  "User.fetching.error": "There was an Error fetching User data"
 }

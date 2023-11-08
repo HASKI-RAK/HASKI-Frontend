@@ -1,3 +1,4 @@
+import { getConfig } from '@shared'
 import { getUser } from './getUser'
 
 global.fetch = jest.fn(() =>
@@ -24,7 +25,7 @@ describe('getCourses has expected behaviour', () => {
 
     const result = await getUser()
 
-    expect(fetch).toHaveBeenCalledWith(`${process.env.BACKEND}/lms/user_from_cookie`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/lms/user_from_cookie`, {
       method: 'GET',
       credentials: 'include',
       headers: {

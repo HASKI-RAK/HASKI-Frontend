@@ -1,9 +1,10 @@
 import { ILS, ILSReturn } from '@core'
 import { getData } from '../RequestResponse'
+import { getConfig } from '@shared'
 
 export const getILS: ILSReturn = async (userId, lmsUserId, studentId) => {
   const response = await fetch(
-    process.env.BACKEND + `/user/${userId}/${lmsUserId}/student/${studentId}/learningStyle`,
+    getConfig().BACKEND + `/user/${userId}/${lmsUserId}/student/${studentId}/learningStyle`,
     {
       method: 'GET',
       credentials: 'include',

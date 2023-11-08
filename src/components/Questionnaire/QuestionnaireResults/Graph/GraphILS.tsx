@@ -21,7 +21,7 @@ export const useData = (data: ILS): { possibleDimensions: string; [Dimension: st
         t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Verbal') +
         ' / ' +
         t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Visual'),
-      [t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]: data.processing_value.toString()
+      [t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]: data.input_value.toString()
     },
     {
       possibleDimensions:
@@ -35,7 +35,7 @@ export const useData = (data: ILS): { possibleDimensions: string; [Dimension: st
         t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective') +
         ' / ' +
         t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Active'),
-      [t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]: data.input_value.toString()
+      [t('components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension')]: data.processing_value.toString()
     }
   ]
 }

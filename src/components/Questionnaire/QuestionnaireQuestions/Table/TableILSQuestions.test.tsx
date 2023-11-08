@@ -43,11 +43,17 @@ describe('Test TableILSQuestions Long with all Methods', () => {
   const setSuccessSend = jest.fn((successSend) => successSend)
 
   test('Long ILS radio Buttons can be checked', () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const RadioButton1 = getByTestId('ilsLongQuestionnaireILSButtonGroup1').querySelectorAll(
       'input[type="radio"]'
@@ -76,11 +82,17 @@ describe('Test TableILSQuestions Long with all Methods', () => {
   })
 
   test('Long ILS next button is enabled, when all radioButtons are selected', () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -113,11 +125,17 @@ describe('Test TableILSQuestions Long with all Methods', () => {
   })
 
   test('Long ILS next button is enabled, when all radioButtons are selected (2 Pages)', () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -200,11 +218,17 @@ describe('Test TableILSQuestions Long with all Methods', () => {
   })
 
   test('Long ILS next button is disabled, when not all radioButtons are selected', () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -257,11 +281,17 @@ describe('Test TableILSQuestions Long with all Methods', () => {
   })
 
   test('Long ILS values are stored', () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.1'
     const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1'
@@ -276,7 +306,7 @@ describe('Test TableILSQuestions Long with all Methods', () => {
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     const RadioButton1 = getByTestId('ilsLongQuestionnaireILSButtonGroup1').querySelectorAll(
       'input[type="radio"]'
@@ -341,20 +371,26 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 
     fireEvent.click(backButton)
     expect(nextButton).toBeEnabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
   })
 
   test('Long ILS values can be send', () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
 
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
+
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     for (let i = 0; i < 11; i++) {
       const RadioButton1 = getByTestId('ilsLongQuestionnaireILSButtonGroup1').querySelectorAll(
@@ -401,11 +437,17 @@ describe('Table ILS Questionnaire Short', () => {
   const setSuccessSend = jest.fn((successSend) => successSend)
 
   test('Short ILS radio Buttons can be checked', () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
       'input[type="radio"]'
@@ -434,11 +476,17 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('Short ILS next button is enabled, when all radioButtons are selected', () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -471,11 +519,17 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('Short ILS next button is enabled, when all radioButtons are selected (2 Pages)', () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -557,11 +611,17 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('Short ILS next button is disabled, when not all radioButtons are selected', () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -614,11 +674,17 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('Short ILS values are stored', () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
     const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1'
@@ -633,7 +699,7 @@ describe('Table ILS Questionnaire Short', () => {
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
       'input[type="radio"]'
@@ -698,7 +764,7 @@ describe('Table ILS Questionnaire Short', () => {
 
     fireEvent.click(backButton)
     expect(nextButton).toBeEnabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     const RadioButton1Back = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelector(
       'input[type="radio"]'
@@ -722,20 +788,26 @@ describe('Table ILS Questionnaire Short', () => {
     expect(RadioButton4Back.checked).toBe(true)
     expect(RadioButton4Back.value).toBe(ValuePage1RadioButton4)
     expect(nextButton).toBeEnabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
   })
 
   test('Short ILS values can be send', async () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
 
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
+
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
     expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
 
     for (let i = 0; i < 6; i++) {
@@ -788,16 +860,22 @@ describe('Table ILS Questionnaire Short', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
 
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
 
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
+
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     for (let i = 0; i < 6; i++) {
       const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
@@ -841,7 +919,7 @@ describe('Table ILS Questionnaire Short', () => {
   })
 
   test('ILS unexpected next/prev value in ilsStep list', async () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions
           ilsLong={false}
@@ -851,6 +929,12 @@ describe('Table ILS Questionnaire Short', () => {
         />
       </MemoryRouter>
     )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
     const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1'
@@ -865,7 +949,7 @@ describe('Table ILS Questionnaire Short', () => {
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
       'input[type="radio"]'
@@ -930,7 +1014,7 @@ describe('Table ILS Questionnaire Short', () => {
 
     fireEvent.click(backButton)
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     const RadioButton1Back = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelector(
       'input[type="radio"]'
@@ -954,20 +1038,26 @@ describe('Table ILS Questionnaire Short', () => {
     expect(RadioButton4Back.checked).toBe(false)
     expect(RadioButton4Back.value).toBe(ValuePage1RadioButton4)
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
   })
 
   test('Send question_id is not duplicated', async () => {
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <MemoryRouter>
         <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
       </MemoryRouter>
     )
 
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    fireEvent.click(startButton)
+
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
     expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
 
     for (let i = 0; i < 6; i++) {
