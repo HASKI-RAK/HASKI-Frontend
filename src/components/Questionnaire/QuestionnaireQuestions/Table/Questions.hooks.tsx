@@ -73,9 +73,9 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
 
 //hardcoded courseId, topicId, algorithm for evaluation
 const course1TopicListKempten = [1, 2, 3]
-const course2TopicListKempten = [10, 11, 12, 13, 14]
+const course2TopicListKempten = [15]
 const algorithmListKempten1 = ["aco", "aco", "graf"]
-const algorithmListKempten2 = ["aco", "aco", "graf", "aco", "aco"]
+const algorithmListKempten2 = ["aco"]
 const exceptedUserIdKempten = [2]
 
 const topicListAschaffenburg = [2, 3, 6]
