@@ -11,12 +11,7 @@ import { usePersistedStore } from '@store'
 import { getILS } from '@services'
 import log from 'loglevel'
 
-//** Was macht OpenQuestionnaire? */
-//öffnet questionnaire sobald privacymodal geschlossen und akzeptiert wurde (fertig)
-//checkt ob ilslong daten schon da sind mit getILS -> backend benötigt(fertig)
-//setzt ils cookie sobald questionnaire gesendet wurde (fertig)
-//cookie gilt nur für das questionnaire popup (ja)
-//cookie in einen hook auslagern
+//** usePrivacyPolicy gets the 'privacy_accept_token' from the hook */
 export type PrivacyModalProps = {
   usePrivacyModal?: () => PrivacyModalHookReturn
 }
@@ -35,23 +30,23 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
     if (reason == 'backdropClick')
       if (window.confirm(t('components.Menubar.CloseDialog'))) {
         setModalOpenILSLong(false)
+        window.location.reload()
       }
   }
 
   //send ILS and set the cookie
   const handleSend = () => {
     setSuccessSendILSLong(true)
-    setCookie('questionnaire_sent_token', true, { path: '/' })
   }
 
-  //only if there is no cookie, the ils data of the user gets fetched (different browser)
+  //only if there is no cookie, the ils data of the user gets fetched (case: different browser)
   //check if there is already ils data
   useEffect(() => {
     if (!cookie['questionnaire_sent_token']) {
       fetchUser().then((user) => {
         return getILS(user.settings.user_id, user.lms_user_id, user.id)
           .then((data) => {
-            if (data?.perception_dimension == undefined && data?.perception_value == undefined) {
+            if (data?.perception_dimension == 'sns' && data?.perception_value == 0) {
               setQExsists(false)
             } else {
               setCookie('questionnaire_sent_token', true, { path: '/' })
