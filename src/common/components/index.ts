@@ -66,7 +66,7 @@ export { Table } from './DefaultTable/DefaultTable'
 export { TableBody } from './DefaultTableBody/DefaultTableBody'
 export { TableContainer } from './DefaultTableContainer/DefaultTableContainer'
 export { TableHead } from './DefaultTableHead/DefaultTableHead'
-export { FormGroup }from './DefaultFormGroup/DefaultFormGroup'
+export { FormGroup } from './DefaultFormGroup/DefaultFormGroup'
 export type { SelectChangeEvent } from './DefaultSelectChangeEvent/DefaultSelectChangeEvent'
 
 export { Network } from './Network/Network'

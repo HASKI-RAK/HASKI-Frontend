@@ -1,7 +1,7 @@
 import { QuestionnaireQuestionsModal } from '@components'
 import { TableILSQuestions } from '../QuestionnaireQuestions/Table/TableILSQuestions'
 import { useTranslation } from 'react-i18next'
-import {useState, useEffect, memo} from 'react'
+import { useState, useEffect, memo } from 'react'
 import {
   PrivacyModalHookReturn,
   usePrivacyModal as _usePrivacyModal
@@ -28,10 +28,11 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
   //closes the modal
   const handleCloseILSLongModal = (event: object, reason: string) => {
     if (!successSendILSLong) {
-      if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.CloseDialog'))){
-        setModalOpenILSLong(false)
-        window.location.reload()
-      }
+      if (reason == 'backdropClick')
+        if (window.confirm(t('components.Menubar.CloseDialog'))) {
+          setModalOpenILSLong(false)
+          window.location.reload()
+        }
     } else {
       setModalOpenILSLong(false)
     }
