@@ -81,14 +81,14 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
 }
 
 //hardcoded courseId, topicId, algorithm for evaluation
-const course1TopicListKempten = [1, 2, 3]
-const course2TopicListKempten = [15]
-const algorithmListKempten1 = ['aco', 'aco', 'graf']
-const algorithmListKempten2 = ['graf']
-const exceptedUserIdKempten = [2]
+const course1TopicListKempten = [2, 6, 10, 12]
+const course2TopicListKempten = [16, 22]
+const algorithmListKempten1 = ['aco', 'graf', 'graf', 'aco']
+const algorithmListKempten2 = ['aco', 'graf']
+const exceptedUserIdKempten = [2, 3, 4, 5]
 
-const topicListAschaffenburg = [2, 3, 6]
-const algorithmListAschaffenburg = ['aco', 'ga', 'graf']
+const topicListAschaffenburg = [3, 5, 9]
+const algorithmListAschaffenburg = ['graf', 'aco', 'aco']
 
 const useCalculateLearningPath = (
   user: User,
