@@ -103,7 +103,8 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
     .then((user) => {
       return user.id.toString()
     })
-    .catch((error) => {
+    .catch((error: string) => {
+      log.error(error)
       return '-1'
     })
 
@@ -129,7 +130,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
             getEnglishName
           )
         })
-        .catch((error) => {
+        .catch((error: string) => {
           log.error(error) // Some tests in LocalNav and Contact fail if catch is missing, otherwise not needed.
         })
     },

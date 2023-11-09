@@ -1,3 +1,5 @@
+import { getConfig } from '@shared'
+
 /**
  * getActor function.
  *
@@ -33,7 +35,7 @@ const getActor = (lmsUserID: string) => {
  */
 const getVerb = (verb: string) => {
   return {
-    id: 'https://wiki.haski.app/verbs/'.concat(verb), // URI of action in online directory + element -> hardcoded
+    id: getConfig().WIKI?.concat('/verbs/').concat(verb) ?? '', // URI of action in online directory + element -> hardcoded
     display: {
       en: verb
     }
@@ -60,7 +62,7 @@ const getObject = (componentURL: string, component: string) => {
       name: {
         en: component
       },
-      type: 'https://wiki.haski.app/common/components/'.concat(component.toLowerCase()) // wiki url to component e.g. button (common) -> hardcoded // wiki url + componentName.toLowerCase()
+      type: getConfig().WIKI?.concat('p/common/components/').concat(component.toLowerCase()) ?? '' // wiki url to component e.g. button (common) -> hardcoded // wiki url + componentName.toLowerCase()
     }
   }
 }
@@ -83,9 +85,12 @@ const getParent = (path: string, getEnglishName: (key: string) => string) => {
     {
       id: new URL(window.location.href).origin.concat(path),
       definition: {
-        type: 'https://wiki.haski.app/pages/'.concat(path.split('/').pop() ?? ''), // Cannot be undefined, but TS doesn't know that
+        type:
+          getConfig()
+            .WIKI?.concat('/pages/')
+            .concat(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/) ?? '',
         name: {
-          en: getEnglishName(path.split('/').pop() ?? '') // Cannot be undefined, but TS doesn't know that
+          en: getEnglishName(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/) ?? ''
         }
       }
     }
@@ -107,7 +112,7 @@ const getGrouping = () => {
     {
       id: new URL(window.location.href).origin,
       definition: {
-        type: 'https://wiki.haski.app/pages/home',
+        type: getConfig().WIKI?.concat('/pages/home') ?? '',
         name: {
           en: 'Home'
         }
@@ -164,8 +169,8 @@ const getContext = (path: string, getEnglishName: (key: string) => string) => {
     extensions: {
       'http://lrs.learninglocker.net/define/extensions/info': {
         domain: new URL(window.location.href).origin,
-        domain_version: 'v1.0.0-alpha',
-        github: 'https://github.com/HASKI-RAK/HASKI-Frontend',
+        domain_version: getConfig().FRONTEND_VERSION ?? '',
+        github: getConfig().FRONTEND_GITHUB ?? '',
         event_function: 'src/common/components/DefaultButton/DefaultButton' // TODO: Create webpack plugin to overwrite __dirname and __filename to get project path of components
       }
     },
