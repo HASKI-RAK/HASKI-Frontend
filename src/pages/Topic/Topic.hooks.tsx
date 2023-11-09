@@ -176,9 +176,11 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         const getNodeYPos = () => {
           if (exerciseLearningElementParentNode && item.position >= parseInt(exerciseLearningElementParentNode.id)) {
             return (
-              250 * (item.position - exerciseLearningElementChildNodes.length) +
+              250 *
+                (item.position -
+                  parseInt(exerciseLearningElementChildNodes[exerciseLearningElementChildNodes.length - 1].id)) +
+              exerciseLearningElementParentNode.position.y +
               groupHeight +
-              Math.floor((learningPathExercises.length - 1) / 4) * 125 -
               70
             )
           } else {

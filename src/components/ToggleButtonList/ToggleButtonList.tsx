@@ -2,8 +2,8 @@ import { ToggleButton, Box } from '@common/components'
 import { memo } from 'react'
 
 /**
- * @props toggleButtonList - The list of elements to be displayed in the toggle button list
- * @props selectedElement - The currently selected element of the toggle button list
+ * @prop toggleButtonList - The list of elements to be displayed in the toggle button list
+ * @prop selectedElement - The currently selected element of the toggle button list
  * @interface
  */
 type ToggleButtonListProps = {

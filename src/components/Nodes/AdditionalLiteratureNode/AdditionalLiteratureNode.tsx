@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from '@common/components'
+import { NodeWrapper, Paper, Typography } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { Article } from '@common/icons'
@@ -15,7 +15,8 @@ import { getConfig } from '@shared'
  */
 const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
-    <Box
+    <NodeWrapper
+      id="additional-literature-node"
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()
@@ -37,7 +38,7 @@ const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElemen
         {data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
-    </Box>
+    </NodeWrapper>
   )
 }
 

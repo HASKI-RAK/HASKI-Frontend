@@ -18,6 +18,7 @@ import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
 import { ButtonStack, SendButton, MemoTableRowQuestion, StartButton, CoverSheet } from './TableCommonComponents'
 import useHandleSend from './Questions.hooks'
+import { useCookies } from 'react-cookie'
 
 /**
  * This component is used to display the questionnaire questions for the ILS questionnaire.
@@ -61,6 +62,7 @@ const MemoTableRowAnswers = memo(
       <TableRow>
         <TableCell>
           <RadioGroup
+            id="ils-answer-radio-group"
             value={radioButtonGroup}
             data-testid={`ils${isIlsLong ? 'Long' : 'Short'}QuestionnaireILSButtonGroup${answerIndex + 1}`}
             onChange={(e) => {
@@ -104,9 +106,9 @@ export const TableILSQuestions = memo(
   ({ ilsLong, successSend, setSuccessSend, testEmptyStep }: TableILSQuestionsProps) => {
     const [questionnaireAnswers, setQuestionnaireAnswers] = useState([{ question_id: '', answer: '' }])
     const { addSnackbar } = useContext(SnackbarContext)
-    const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, true)
-
+    const [cookie, setCookie] = useCookies(['questionnaire_sent_token'])
     const { t } = useTranslation()
+    const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, true)
 
     const stepsILSData = useMemo(() => {
       return [
@@ -159,6 +161,7 @@ export const TableILSQuestions = memo(
     const handleSendClick = () => {
       sendAnswers().then((res) => {
         if (res) {
+          setCookie('questionnaire_sent_token', true, { path: '/' })
           addSnackbar({
             message: t('Data.send.successfull'),
             severity: 'success',

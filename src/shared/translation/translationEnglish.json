@@ -1822,5 +1822,7 @@
   "components.PrivacyModal.termsOfService": "Terms of service and privacy policy",
   "components.PrivacyModal.accepted": "Thank you for your trust. Data to improve your learning experience is now being collected.",
   "components.PrivacyModal.declined": "You cannot access HASKI without accepting the essential cookies.",
-  "User.fetching.error": "There was an Error fetching User data"
+  "User.fetching.error": "There was an Error fetching User data",
+  "Data.calculated.successfull": "Your Learning Path was calculated successfully",
+  "Data.calculated.error": "There was an Error calculating your Learning Path"
 }

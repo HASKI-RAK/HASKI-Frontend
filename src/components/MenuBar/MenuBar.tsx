@@ -15,7 +15,9 @@ import {
   Popover,
   Divider,
   ListItemIcon,
-  Link
+  Link,
+  ImageWrapper,
+  TextWrapper
 } from '@common/components'
 
 import {
@@ -92,6 +94,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
       if (reason == 'backdropClick')
         if (window.confirm(t('components.Menubar.CloseDialog'))) setModalOpenILSShort(false)
     } else {
+      window.location.reload()
       setModalOpenILSShort(false)
     }
   }
@@ -105,6 +108,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     if (!successSendILSLong) {
       if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.CloseDialog'))) setModalOpenILSLong(false)
     } else {
+      window.location.reload()
       setModalOpenILSLong(false)
     }
   }
@@ -118,6 +122,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     if (!successSendListK) {
       if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.CloseDialog'))) setModalOpenListK(false)
     } else {
+      window.location.reload()
       setModalOpenListK(false)
     }
   }
@@ -174,7 +179,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   return (
     <AppBar position="static">
       <Toolbar disableGutters>
-        <Box
+        <ImageWrapper
           component="img"
           sx={{
             mt: 2,
@@ -199,7 +204,8 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               textAlign: 'center',
               display: { xs: 'none', md: 'flex' }
             }}>
-            <Typography
+            <TextWrapper
+              id="HASKI-text-menu-bar"
               variant="h6"
               noWrap
               component="a"
@@ -214,11 +220,12 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               }}
               onClick={() => navigate('/')}>
               HASKI
-            </Typography>
+            </TextWrapper>
             {courseSelected && (
               <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
                 <Tooltip title="Open topics">
                   <Button
+                    id="topics-button"
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
                     onClick={handleOpenTopicsMenu}
@@ -231,7 +238,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   </Button>
                 </Tooltip>
                 <Popover
-                  id="menu-appbar"
+                  id="topics-popover"
                   data-testid={'Menubar-TopicPopover'}
                   anchorEl={anchorElTopics}
                   anchorOrigin={{
@@ -258,6 +265,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                             <>
                               <Grid item xs={12} key={t(topic.name)}>
                                 <Link
+                                  id={topic.name.concat('-link')}
                                   key={topic.name}
                                   data-testid={`Menubar-Topic-${topic.name}`}
                                   underline="hover"
@@ -302,7 +310,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           {/** Questionnaire Results */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openQuestionnaireResults')}>
-              <IconButton onClick={() => setModalOpen(true)}>
+              <IconButton id="modal-icon-button" onClick={() => setModalOpen(true)}>
                 <Analytics data-testid="QuestionnaireResultsIcon" />
               </IconButton>
             </Tooltip>
@@ -313,6 +321,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('help')}>
               <IconButton
+                id="manual-icon-button"
                 onClick={() => {
                   window.open('/files/Bedienungsanleitung_von_HASKI_Alpha.pdf', '_blank')
                 }}>
@@ -325,6 +334,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openGlobalSettings')}>
               <IconButton
+                id="global-settings-icon-button"
                 onClick={() => {
                   addSnackbar({
                     message: t('components.MenubBar.GlobalSettings.Error'),
@@ -340,7 +350,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openSettings')}>
-              <IconButton onClick={handleOpenUserMenu} data-testid="useravatar">
+              <IconButton id="account-icon-button" onClick={handleOpenUserMenu} data-testid="useravatar">
                 <Avatar alt="Remy Sharp">
                   <Person />
                 </Avatar>
@@ -348,7 +358,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
-              id="menu-appbar"
+              id="account-menu"
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
@@ -363,6 +373,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               onClose={handleCloseUserMenu}>
               {isAuth && (
                 <MenuItem
+                  id="ils-long-menu-item"
                   data-testid="questionnaireILS"
                   key="questionnaireILS"
                   onClick={() => handleOpenILSLongModal()}>
@@ -382,6 +393,8 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
               {isAuth && (
                 <MenuItem
+                  id="ils-short-menu-item"
+                  disabled={true}
                   data-testid="questionnaireILSshort"
                   key="questionnaireILSshort"
                   onClick={() => {
@@ -403,6 +416,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
               {isAuth && (
                 <MenuItem
+                  id="list-k-menu-item"
                   data-testid="questionnaireListk"
                   key="questionnaireListk"
                   onClick={() => handleOpenListKModal()}>
@@ -417,6 +431,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               </QuestionnaireQuestionsModal>
 
               <MenuItem
+                id="login-logout-menu-item"
                 data-testid="usermenuitem"
                 key="usermenuitem"
                 onClick={() => {

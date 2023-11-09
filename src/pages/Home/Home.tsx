@@ -95,6 +95,7 @@ export const Home = () => {
                     <Typography variant="body1">{course.university}</Typography>
                     <Stack direction="row" justifyContent="center">
                       <Button
+                        id="course-button"
                         variant="contained"
                         color="primary"
                         disabled={courseDateReached('November 22, 2023 10:00:00', course.id)}

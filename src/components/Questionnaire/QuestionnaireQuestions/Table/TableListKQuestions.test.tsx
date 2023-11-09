@@ -3,6 +3,7 @@ import { TableListKQuestions } from './TableListKQuestions'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import { mockServices } from 'jest.setup'
+import { MemoryRouter } from 'react-router-dom'
 
 const mockNavigate = jest.fn()
 
@@ -27,7 +28,9 @@ describe('TableListKQuestions', () => {
 
   test('ListK RadioButtons can be checked', () => {
     const { getByTestId, getByText } = render(
-      <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -70,7 +73,9 @@ describe('TableListKQuestions', () => {
 
   test('ListK next Button is enabled, when all radioButtons are selected', () => {
     const { getByTestId, getByText } = render(
-      <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -112,7 +117,9 @@ describe('TableListKQuestions', () => {
 
   test('ListK next Button is enabled, when all radioButtons are selected (2 Pages)', () => {
     const { getByTestId, getByText } = render(
-      <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -184,7 +191,9 @@ describe('TableListKQuestions', () => {
 
   test('ListK next Button is disabled, when not all radioButtons are selected', () => {
     const { getByTestId, getByText } = render(
-      <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -223,7 +232,9 @@ describe('TableListKQuestions', () => {
 
   test('ListK values are stored', () => {
     const { getByTestId, getByText } = render(
-      <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -360,7 +371,9 @@ describe('TableListKQuestions', () => {
 
   test('ListK values can be send', async () => {
     const { getByTestId, getByText } = render(
-      <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -458,7 +471,9 @@ describe('TableListKQuestions', () => {
     // @ts-ignore
 
     const { getByTestId, getByText } = render(
-      <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -548,7 +563,9 @@ describe('TableListKQuestions', () => {
 
   test('ListK Questions are undefined (40 instead of 39 questions)', async () => {
     const { getByTestId, getByText } = render(
-      <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} testUndefined={true} />
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} testUndefined={true} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')

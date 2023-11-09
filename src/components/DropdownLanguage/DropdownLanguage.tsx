@@ -52,6 +52,7 @@ const DropdownLanguage = forwardRef((props, ref: ForwardedRef<HTMLDivElement | n
   return (
     <div {...props} ref={ref}>
       <Select
+        id="dropdown-language-button"
         className="LanguageDropdown"
         autoWidth={true}
         value={startingLanguage}
