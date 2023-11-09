@@ -105,6 +105,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     if (!successSendILSLong) {
       if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.CloseDialog'))) setModalOpenILSLong(false)
     } else {
+      window.location.reload()
       setModalOpenILSLong(false)
     }
   }
@@ -118,6 +119,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     if (!successSendListK) {
       if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.CloseDialog'))) setModalOpenListK(false)
     } else {
+      window.location.reload()
       setModalOpenListK(false)
     }
   }
@@ -382,6 +384,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
               {isAuth && (
                 <MenuItem
+                  disabled={true}
                   data-testid="questionnaireILSshort"
                   key="questionnaireILSshort"
                   onClick={() => {

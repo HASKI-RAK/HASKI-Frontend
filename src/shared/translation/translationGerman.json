@@ -1792,5 +1792,7 @@
   "components.PrivacyModal.termsOfService": "Nutzungsbedingungen und Datenschutzerklärung",
   "components.PrivacyModal.accepted": "Danke für Ihr Vertrauen. Daten werden jetzt gesammelt, um Ihnen eine bessere Lernerfahrung zu bieten.",
   "components.PrivacyModal.declined": "Sie können HASKI nicht verwenden, ohne den essentiellen Cookies zuzustimmen.",
-  "User.fetching.error": "Es gab einen Fehler beim Abrufen der Benutzerdaten."
+  "User.fetching.error": "Es gab einen Fehler beim Abrufen der Benutzerdaten.",
+  "Data.calculated.successfull": "Ihr Lernpfades wurde erfolgreich berechnet",
+  "Data.calculated.error": "Es gab einen Fehler beim Berechnen Ihres Lernpfades"
 }

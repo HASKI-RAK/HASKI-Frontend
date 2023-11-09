@@ -105,10 +105,9 @@ export const TableILSQuestions = memo(
   ({ ilsLong, successSend, setSuccessSend, testEmptyStep }: TableILSQuestionsProps) => {
     const [questionnaireAnswers, setQuestionnaireAnswers] = useState([{ question_id: '', answer: '' }])
     const { addSnackbar } = useContext(SnackbarContext)
-    const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, true)
-    const [cookie, setCookie] = useCookies(['questionnaire_sent_token'])
-
+    const [setCookie] = useCookies(['questionnaire_sent_token'])
     const { t } = useTranslation()
+    const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, true)
 
     const stepsILSData = useMemo(() => {
       return [

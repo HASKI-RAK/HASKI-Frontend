@@ -3,7 +3,9 @@ import {postILS, postListK, SnackbarContext} from '@services'
 import {usePersistedStore} from '@store'
 import {useTranslation} from 'react-i18next'
 import {User} from '@core'
-import {postCalculateLearningPathILS} from "../../../../services/LearningPath/postCalculateLearningPathILS";
+import {postCalculateLearningPathILS} from '@services';
+import {SnackbarMessageProps} from "@components";
+import log from "loglevel";
 
 type SendHookResult = {
     sendAnswers: () => Promise<boolean>
@@ -38,7 +40,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
             const studentId = user.id
             if(ils) {
                 return postILS({studentId, outputJson}).then((response) => {
-                    useCalculateLearningPath(user)
+                    useCalculateLearningPath(user, addSnackbar, t)
                     return !!response
                 }).catch(() => {
                     addSnackbar({
@@ -75,14 +77,13 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
 const course1TopicListKempten = [1, 2, 3]
 const course2TopicListKempten = [15]
 const algorithmListKempten1 = ["aco", "aco", "graf"]
-const algorithmListKempten2 = ["aco"]
+const algorithmListKempten2 = ["graf"]
 const exceptedUserIdKempten = [2]
 
 const topicListAschaffenburg = [2, 3, 6]
 const algorithmListAschaffenburg = ["aco", "ga", "graf"]
 
-const useCalculateLearningPath = (user: User) => {
-    console.log("calculate learning path")
+const useCalculateLearningPath = (user: User, addSnackbar: (newSnackbar: SnackbarMessageProps) => void, t: (key: string) => string) => {
     if(user.university == "HS-KE") {
         if(exceptedUserIdKempten.includes(user.id)) {
             console.log("excepted user")
@@ -90,25 +91,50 @@ const useCalculateLearningPath = (user: User) => {
         }
         course1TopicListKempten.map((topicId, index) => {
             postCalculateLearningPathILS(user.settings.user_id, user.lms_user_id, user.id, 1, topicId, algorithmListKempten1[index]).then((response) => {
-                console.log(response)
+                log.info(response)
+            }).catch(() => {
+                addSnackbar({
+                    message: t('Data.calculated.error'),
+                    severity: 'success',
+                    autoHideDuration: 5000
+                })
+                log.error("Error while calculating learning path in Kempten Course 1")
             })
         })
         course2TopicListKempten.map((topicId, index) => {
             postCalculateLearningPathILS(user.settings.user_id, user.lms_user_id, user.id, 3, topicId, algorithmListKempten2[index]).then((response) => {
-                console.log(response)
+                log.info(response)
+            }).catch(() => {
+                addSnackbar({
+                    message: t('Data.calculated.error'),
+                    severity: 'error',
+                    autoHideDuration: 5000
+                })
+                log.error("Error while calculating learning path in Kempten Course 2")
             })
         })
     }
     else if(user.university == "TH-AB") {
         topicListAschaffenburg.map((topicId, index) => {
             postCalculateLearningPathILS(user.settings.user_id, user.lms_user_id, user.id, 1, topicId, algorithmListAschaffenburg[index]).then((response) => {
-                console.log(response)
+                log.info(response)
+            }).catch(() => {
+                addSnackbar({
+                    message: t('Data.calculated.error'),
+                    severity: 'error',
+                    autoHideDuration: 5000
+                })
+                log.error("Error while calculating learning path in Aschaffenburg")
             })
         })
     }
     else {
-        console.log("no learning path for this university")
-        console.log(user.university)
+        addSnackbar({
+            message: t('Data.calculated.error'),
+            severity: 'error',
+            autoHideDuration: 5000
+        })
+        log.error(user.university)
     }
 }
 

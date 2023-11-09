@@ -496,7 +496,7 @@ describe('Topic Page', () => {
           id: '5',
           position: {
             x: 325,
-            y: 630
+            y: 770
           },
           style: {
             background: '#1976d2',
@@ -939,7 +939,7 @@ describe('Topic Page', () => {
           id: '8',
           position: {
             x: 875,
-            y: 755
+            y: 770
           },
           style: {
             background: '#1976d2',
