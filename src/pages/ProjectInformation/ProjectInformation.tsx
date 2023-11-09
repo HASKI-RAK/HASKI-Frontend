@@ -16,12 +16,18 @@ export const ProjectInformation = () => {
   return (
     <>
       <Box>
-        <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/projectdescription')}>
+        <Button
+          id="project-description-button"
+          sx={{ mt: '2rem', color: 'black' }}
+          onClick={() => navigate('/projectinformation/projectdescription')}>
           <Typography>{t('pages.projectdescription')}</Typography>
         </Button>
       </Box>
       <Box>
-        <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/glossary')}>
+        <Button
+          id="glossary-button"
+          sx={{ mt: '2rem', color: 'black' }}
+          onClick={() => navigate('/projectinformation/glossary')}>
           <Typography>{t('pages.glossary')}</Typography>
         </Button>
       </Box>

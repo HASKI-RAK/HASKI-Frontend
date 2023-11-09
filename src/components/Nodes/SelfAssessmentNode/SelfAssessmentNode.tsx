@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from '@common/components'
+import { NodeWrapper, Paper, Typography } from '@common/components'
 import { AssignmentInd } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
@@ -15,7 +15,8 @@ import { getConfig } from '@shared'
  */
 const SelfAssessmentNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   return (
-    <Box
+    <NodeWrapper
+      id="self-assessment-node"
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()
@@ -37,7 +38,7 @@ const SelfAssessmentNode = ({ data }: NodeProps<LearningPathLearningElementNode>
         {data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
-    </Box>
+    </NodeWrapper>
   )
 }
 

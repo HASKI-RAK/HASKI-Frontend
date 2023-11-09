@@ -1,5 +1,7 @@
 import { render, renderHook, fireEvent } from '@testing-library/react'
 import Glossary, { getSelectedTagsWrapper } from './Glossary'
+import { MemoryRouter } from 'react-router-dom'
+
 import { GlossaryEntryProps } from '@components'
 import { useGlossary } from './Glossary.hooks'
 import '@testing-library/jest-dom'
@@ -14,7 +16,11 @@ describe('Glossary page tests', () => {
   const mockSetExpandedList = jest.fn()
 
   it('renders glossary page', () => {
-    const { queryByText, queryAllByText } = render(<Glossary />)
+    const { queryByText, queryAllByText } = render(
+      <MemoryRouter>
+        <Glossary />
+      </MemoryRouter>
+    )
     expect(queryByText('pages.glossary.title')).toBeInTheDocument()
     expect(queryAllByText('pages.glossary.search').length).toBeGreaterThan(0)
     expect(queryAllByText('pages.glossary.filter').length).toBeGreaterThan(0)
@@ -24,14 +30,22 @@ describe('Glossary page tests', () => {
 
   // pres buttpms
   test('collapseAll button functionality', () => {
-    const { getByText } = render(<Glossary />)
+    const { getByText } = render(
+      <MemoryRouter>
+        <Glossary />
+      </MemoryRouter>
+    )
     const collapseAllButton = getByText('pages.glossary.collapseAll')
     expect(collapseAllButton).toBeInTheDocument()
     fireEvent.click(collapseAllButton)
   })
 
   test('expandAll button functionality', () => {
-    const { getByText } = render(<Glossary />)
+    const { getByText } = render(
+      <MemoryRouter>
+        <Glossary />
+      </MemoryRouter>
+    )
     const expandAllButton = getByText('pages.glossary.expandAll')
     expect(expandAllButton).toBeInTheDocument()
     fireEvent.click(expandAllButton)

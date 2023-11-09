@@ -3,10 +3,10 @@ import React, { useCallback, memo } from 'react'
 import { ToggleButtonList } from '@components'
 
 /**
- * @props orientation - The orientation of the index component
- * @props indexElements - The elements to be displayed in the index
- * @props selectedIndexElement - The currently selected element
- * @props setSelectedIndexElement - The function to set the currently selected element
+ * @prop orientation - The orientation of the index component
+ * @prop indexElements - The elements to be displayed in the index
+ * @prop selectedIndexElement - The currently selected element
+ * @prop setSelectedIndexElement - The function to set the currently selected element
  * @interface
  */
 export type GlossaryIndexProps = {
@@ -37,6 +37,7 @@ const GlossaryIndex = (props: GlossaryIndexProps) => {
 
   return (
     <ToggleButtonGroup
+      id="glossary-index-toggle-button-group"
       exclusive
       onChange={handleChange}
       orientation={props.orientation}

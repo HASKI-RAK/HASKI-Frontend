@@ -100,6 +100,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
           </Typography>
           <Stack spacing={2} direction="column">
             <TextField
+              id="login-form-username-textfield"
               required
               error={usernameHasError}
               helperText={usernameHasError ? t('components.Login.usernameError') : ''}
@@ -109,6 +110,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
               name="username"
             />
             <TextField
+              id="login-form-password-textfield"
               required
               error={passwordHasError}
               helperText={passwordHasError ? t('components.Login.passwordError') : ''}
@@ -117,7 +119,6 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
               type={showPassword ? 'text' : 'password'}
               onChange={passwordChangeHandler}
               name="password"
-              id="password"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

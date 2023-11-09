@@ -79,6 +79,7 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
         sx={{ maxWidth: '50%', flexGrow: 1, align: 'center' }}
         nextButton={
           <Button
+            id="next-button"
             sx={{
               '&.Mui-disabled': {
                 border: (theme) => theme.palette.primary.dark
@@ -95,6 +96,7 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
         }
         backButton={
           <Button
+            id="back-button"
             sx={{
               '&.Mui-disabled': {
                 border: (theme) => theme.palette.primary.dark
@@ -129,6 +131,7 @@ export const SendButton = memo(
   ({ handleSend, isNextDisabled, t, isValid, idType, isSending, sendSuccess }: SendButtonProps) => {
     return (
       <Button
+        id="send-button"
         data-testid={`sendButton${idType}Questionnaire`}
         variant="contained"
         color="primary"

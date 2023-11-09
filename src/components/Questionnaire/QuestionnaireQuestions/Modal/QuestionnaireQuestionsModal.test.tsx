@@ -1,5 +1,7 @@
-import { QuestionnaireQuestionsModal } from '@components'
 import { fireEvent, render } from '@testing-library/react'
+import { QuestionnaireQuestionsModal } from '@components'
+import { MemoryHistory } from 'history'
+import { MemoryRouter } from 'react-router-dom'
 
 const handleOpenILSShortModal = () => {
   return true
@@ -8,9 +10,11 @@ const handleOpenILSShortModal = () => {
 describe('QuestionnaireQuestionsModal', () => {
   it('is open', () => {
     const { queryByText } = render(
-      <QuestionnaireQuestionsModal open={true} handleClose={handleOpenILSShortModal}>
-        <div>Some Content</div>
-      </QuestionnaireQuestionsModal>
+      <MemoryRouter>
+        <QuestionnaireQuestionsModal open={true} handleClose={handleOpenILSShortModal}>
+          <div>Some Content</div>
+        </QuestionnaireQuestionsModal>
+      </MemoryRouter>
     )
 
     // Assert that the container exists
@@ -20,9 +24,11 @@ describe('QuestionnaireQuestionsModal', () => {
 
   it('is not open', () => {
     const { queryByText } = render(
-      <QuestionnaireQuestionsModal open={false} handleClose={handleOpenILSShortModal}>
-        <div>Some Content</div>
-      </QuestionnaireQuestionsModal>
+      <MemoryRouter>
+        <QuestionnaireQuestionsModal open={false} handleClose={handleOpenILSShortModal}>
+          <div>Some Content</div>
+        </QuestionnaireQuestionsModal>
+      </MemoryRouter>
     )
 
     const contentElement = queryByText('Some Content')
@@ -33,9 +39,11 @@ describe('QuestionnaireQuestionsModal', () => {
 
   it('is not open, by default', () => {
     const { queryByText } = render(
-      <QuestionnaireQuestionsModal handleClose={handleOpenILSShortModal}>
-        <div>Some Content</div>
-      </QuestionnaireQuestionsModal>
+      <MemoryRouter>
+        <QuestionnaireQuestionsModal handleClose={handleOpenILSShortModal}>
+          <div>Some Content</div>
+        </QuestionnaireQuestionsModal>
+      </MemoryRouter>
     )
 
     const contentElement = queryByText('Some Content')
@@ -46,9 +54,11 @@ describe('QuestionnaireQuestionsModal', () => {
 
   it('close button can be clicked', () => {
     const { getByTestId } = render(
-      <QuestionnaireQuestionsModal open={true} handleClose={handleOpenILSShortModal}>
-        <div></div>
-      </QuestionnaireQuestionsModal>
+      <MemoryRouter>
+        <QuestionnaireQuestionsModal open={true} handleClose={handleOpenILSShortModal}>
+          <div></div>
+        </QuestionnaireQuestionsModal>
+      </MemoryRouter>
     )
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument

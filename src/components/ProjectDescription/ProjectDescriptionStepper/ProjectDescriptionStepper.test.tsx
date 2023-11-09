@@ -1,6 +1,7 @@
 import { useProjectDescriptionStepper } from './ProjectDescriptionStepper.hooks'
 import { act, render, renderHook, fireEvent } from '@testing-library/react'
 import ProjectDescriptionStepper from './ProjectDescriptionStepper'
+import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
 
 const mockProjectDescriptionStepperProps = {
@@ -18,13 +19,21 @@ afterEach(() => {
 
 describe('Test ProjectDescriptionStepper', () => {
   test('ProjectDescriptionStepper renders without input', () => {
-    const { getByTestId } = render(<ProjectDescriptionStepper />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <ProjectDescriptionStepper />
+      </MemoryRouter>
+    )
     const projectDescriptionStepper = getByTestId('projectDescriptionStepper')
     expect(projectDescriptionStepper).toBeInTheDocument()
   })
 
   test('ProjectDescriptionCard without input can be scrolled', () => {
-    const { getByTestId } = render(<ProjectDescriptionStepper />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <ProjectDescriptionStepper />
+      </MemoryRouter>
+    )
     const projectDescriptionStepper = getByTestId('projectDescriptionStepper')
     window.dispatchEvent(new Event('scroll'))
     expect(projectDescriptionStepper).toBeInTheDocument()
@@ -32,10 +41,12 @@ describe('Test ProjectDescriptionStepper', () => {
 
   test('ProjectDescriptionCard renders with input', () => {
     const { getByTestId } = render(
-      <ProjectDescriptionStepper
-        body={mockProjectDescriptionStepperProps.body}
-        header={mockProjectDescriptionStepperProps.header}
-      />
+      <MemoryRouter>
+        <ProjectDescriptionStepper
+          body={mockProjectDescriptionStepperProps.body}
+          header={mockProjectDescriptionStepperProps.header}
+        />
+      </MemoryRouter>
     )
 
     const projectDescriptionStepper = getByTestId('projectDescriptionStepper')
@@ -44,10 +55,12 @@ describe('Test ProjectDescriptionStepper', () => {
 
   test('ProjectDescriptionCard with input can be scrolled', () => {
     const { getByText } = render(
-      <ProjectDescriptionStepper
-        body={mockProjectDescriptionStepperProps.body}
-        header={mockProjectDescriptionStepperProps.header}
-      />
+      <MemoryRouter>
+        <ProjectDescriptionStepper
+          body={mockProjectDescriptionStepperProps.body}
+          header={mockProjectDescriptionStepperProps.header}
+        />
+      </MemoryRouter>
     )
 
     act(() => {
@@ -62,10 +75,12 @@ describe('Test ProjectDescriptionStepper', () => {
 
   test('Step through all body texts of ProjectDescriptionStepper', () => {
     const { getByText, getAllByRole } = render(
-      <ProjectDescriptionStepper
-        body={mockProjectDescriptionStepperProps.body}
-        header={mockProjectDescriptionStepperProps.header}
-      />
+      <MemoryRouter>
+        <ProjectDescriptionStepper
+          body={mockProjectDescriptionStepperProps.body}
+          header={mockProjectDescriptionStepperProps.header}
+        />
+      </MemoryRouter>
     )
 
     act(() => {

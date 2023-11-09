@@ -1,5 +1,6 @@
 import { fireEvent, render, act } from '@testing-library/react'
 import Searchbar, { debouncedSearchQuery } from './Searchbar'
+import { MemoryRouter } from 'react-router-dom'
 import { ChangeEvent } from 'react'
 import '@testing-library/jest-dom'
 
@@ -19,17 +20,29 @@ describe('Searchbar tests', () => {
   }
 
   it('renders without input', () => {
-    const { getByDisplayValue } = render(<Searchbar />)
+    const { getByDisplayValue } = render(
+      <MemoryRouter>
+        <Searchbar />
+      </MemoryRouter>
+    )
     expect(getByDisplayValue('')).toBeInTheDocument()
   })
 
   it('renders with input', () => {
-    const { getAllByText } = render(<Searchbar {...mockSearchbarProps} />)
+    const { getAllByText } = render(
+      <MemoryRouter>
+        <Searchbar {...mockSearchbarProps} />
+      </MemoryRouter>
+    )
     expect(getAllByText(mockSearchbarProps.label).length).toEqual(2)
   })
 
   test('search query has changed', () => {
-    const { getByRole } = render(<Searchbar {...mockSearchbarProps} />)
+    const { getByRole } = render(
+      <MemoryRouter>
+        <Searchbar {...mockSearchbarProps} />
+      </MemoryRouter>
+    )
     const searchbarInput = getByRole('textbox')
 
     expect(setTimeout).toHaveBeenCalledTimes(0)
@@ -56,7 +69,11 @@ describe('Searchbar tests', () => {
       mockSearchbarProps.timeout
     )
 
-    render(<Searchbar {...mockSearchbarProps} />)
+    render(
+      <MemoryRouter>
+        <Searchbar {...mockSearchbarProps} />
+      </MemoryRouter>
+    )
 
     act(() => {
       mockDebouncedSearchQuery()

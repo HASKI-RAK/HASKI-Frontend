@@ -37,7 +37,7 @@ type IFrameModalProps = {
  */
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
   return (
-    <Modal open={props.isOpen} onClose={props.onClose} data-testid={'IFrameModal'}>
+    <Modal id="iframe-modal" open={props.isOpen} onClose={props.onClose} data-testid={'IFrameModal'}>
       <Box sx={style_box}>
         <Fab
           color="primary"
