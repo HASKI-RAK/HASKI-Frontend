@@ -5,14 +5,13 @@ import { useState, Dispatch, SetStateAction, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * @props useGlossary - The hook that is used for the Glossary page logic.
+ * @prop useGlossary - The hook that is used for the Glossary page logic.
  * @interface
  */
 type GlossaryProps = {
   useGlossary?: () => GlossaryHookReturn
 }
 
-//
 /**
  * getSelectedTagsWrapper function.
  *
@@ -135,10 +134,10 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
       </Grid>
       <Grid item xs={12} sm={12} sx={{ mt: '0.5rem', mb: '0.5rem' }}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-          <Button variant="outlined" onClick={() => collapseAll(setExpandedList)}>
+          <Button id="collapse-all-button" variant="outlined" onClick={() => collapseAll(setExpandedList)}>
             {t('pages.glossary.collapseAll')}
           </Button>
-          <Button variant="outlined" onClick={() => expandAll(setExpandedList, glossaryEntries)}>
+          <Button id="expand-all-button" variant="outlined" onClick={() => expandAll(setExpandedList, glossaryEntries)}>
             {t('pages.glossary.expandAll')}
           </Button>
         </Box>

@@ -62,6 +62,7 @@ const MemoTableRowAnswers = memo(
       <TableRow>
         <TableCell>
           <RadioGroup
+            id="ils-answer-radio-group"
             value={radioButtonGroup}
             data-testid={`ils${isIlsLong ? 'Long' : 'Short'}QuestionnaireILSButtonGroup${answerIndex + 1}`}
             onChange={(e) => {

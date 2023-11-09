@@ -1,7 +1,7 @@
 ---
 name: Technical
 about: Technical template for HASKI
-title: ''
+title: '[Technical]'
 labels: Technical
 assignees: ''
 
@@ -9,8 +9,10 @@ assignees: ''
 
 **Technical**
 
-_functionality_description_
- 
+<!--
+Short description of the needed functionality
+ -->
+
 **Problem description**
 
 <!--

@@ -3,6 +3,7 @@ import { DropdownLanguage } from '@components'
 import { fireEvent, render, act } from '@testing-library/react'
 import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
+import { MemoryRouter } from 'react-router-dom'
 import requireActual = jest.requireActual
 requireActual('console').error = jest.fn()
 
@@ -27,7 +28,11 @@ describe('Test the change-language dropdown component', () => {
       value: localStorageMock_withSetError
     })
 
-    const { getAllByRole, getByRole } = render(<DropdownLanguage />)
+    const { getAllByRole, getByRole } = render(
+      <MemoryRouter>
+        <DropdownLanguage />
+      </MemoryRouter>
+    )
 
     fireEvent.mouseDown(getByRole('button'))
     act(() => {
@@ -58,9 +63,11 @@ describe('Test the change-language dropdown component', () => {
 
     const { getByTestId } = render(
       // actually give translation to your component
-      <I18nextProvider i18n={i18next}>
-        <DropdownLanguage />
-      </I18nextProvider>
+      <MemoryRouter>
+        <I18nextProvider i18n={i18next}>
+          <DropdownLanguage />
+        </I18nextProvider>
+      </MemoryRouter>
     )
 
     const selectElement = getByTestId('LanguageDropdown')
@@ -87,10 +94,12 @@ describe('Test the change-language dropdown component', () => {
     })
     // actually give translation to your component
     const { getByRole, getByTestId } = render(
-      <I18nextProvider i18n={i18next}>
-        {' '}
-        <DropdownLanguage />
-      </I18nextProvider>
+      <MemoryRouter>
+        <I18nextProvider i18n={i18next}>
+          {' '}
+          <DropdownLanguage />
+        </I18nextProvider>
+      </MemoryRouter>
     )
 
     const selectElement = getByTestId('LanguageDropdown')

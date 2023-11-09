@@ -5,6 +5,7 @@ bin
 .vscode/launch.json
 coverage
 yarn.lock
+yarn-error.log
 .env.development
 .env.production
 docs

@@ -3,6 +3,7 @@ import { TableILSQuestions } from './TableILSQuestions'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import { mockServices } from 'jest.setup'
+import { MemoryRouter } from 'react-router-dom'
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -43,7 +44,9 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 
   test('Long ILS radio Buttons can be checked', () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -80,7 +83,9 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 
   test('Long ILS next button is enabled, when all radioButtons are selected', () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -121,7 +126,9 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 
   test('Long ILS next button is enabled, when all radioButtons are selected (2 Pages)', () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -212,7 +219,9 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 
   test('Long ILS next button is disabled, when not all radioButtons are selected', () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -273,7 +282,9 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 
   test('Long ILS values are stored', () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -365,7 +376,9 @@ describe('Test TableILSQuestions Long with all Methods', () => {
 
   test('Long ILS values can be send', () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={true} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -425,7 +438,9 @@ describe('Table ILS Questionnaire Short', () => {
 
   test('Short ILS radio Buttons can be checked', () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -462,7 +477,9 @@ describe('Table ILS Questionnaire Short', () => {
 
   test('Short ILS next button is enabled, when all radioButtons are selected', () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -503,7 +520,9 @@ describe('Table ILS Questionnaire Short', () => {
 
   test('Short ILS next button is enabled, when all radioButtons are selected (2 Pages)', () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -593,7 +612,9 @@ describe('Table ILS Questionnaire Short', () => {
 
   test('Short ILS next button is disabled, when not all radioButtons are selected', () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -654,7 +675,9 @@ describe('Table ILS Questionnaire Short', () => {
 
   test('Short ILS values are stored', () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -770,7 +793,9 @@ describe('Table ILS Questionnaire Short', () => {
 
   test('Short ILS values can be send', async () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -836,7 +861,9 @@ describe('Table ILS Questionnaire Short', () => {
     // @ts-ignore
 
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -893,12 +920,14 @@ describe('Table ILS Questionnaire Short', () => {
 
   test('ILS unexpected next/prev value in ilsStep list', async () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions
-        ilsLong={false}
-        successSend={successSend}
-        setSuccessSend={setSuccessSend}
-        testEmptyStep={true}
-      />
+      <MemoryRouter>
+        <TableILSQuestions
+          ilsLong={false}
+          successSend={successSend}
+          setSuccessSend={setSuccessSend}
+          testEmptyStep={true}
+        />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')
@@ -1014,7 +1043,9 @@ describe('Table ILS Questionnaire Short', () => {
 
   test('Send question_id is not duplicated', async () => {
     const { getByTestId, getByText } = render(
-      <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
     )
 
     const startButton = getByTestId('StartButtonQuestionnaire')

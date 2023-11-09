@@ -1,8 +1,8 @@
 import { useState, RefObject, useCallback, useMemo } from 'react'
 
 /**
- * @props defaultBodyState - The default value for the body state.
- * @props defaultHeaderState - The default value for the header state.
+ * @prop defaultBodyState - The default value for the body state.
+ * @prop defaultHeaderState - The default value for the header state.
  * @category Hooks
  * @interface
  */
@@ -12,14 +12,14 @@ export type useProjectDescriptionStepperHookParams = {
 }
 
 /**
- * @props bodyState - The state that is used to animate the body texts.
- * @props headerState - The state that is used to animate the header text.
- * @props setBodyState - The function that sets the body state.
- * @props setHeaderState - The function that sets the header state.
- * @props animateBody - The function that animates the body texts.
- * @props animateHeader - The function that animates the header text.
- * @props fadeInEffect - The function that realizes the fade in effect.
- * @props typewriterEffect - The function that realizes the typewriter effect.
+ * @prop bodyState - The state that is used to animate the body texts.
+ * @prop headerState - The state that is used to animate the header text.
+ * @prop setBodyState - The function that sets the body state.
+ * @prop setHeaderState - The function that sets the header state.
+ * @prop animateBody - The function that animates the body texts.
+ * @prop animateHeader - The function that animates the header text.
+ * @prop fadeInEffect - The function that realizes the fade in effect.
+ * @prop typewriterEffect - The function that realizes the typewriter effect.
  * @category Hooks
  * @interface
  */

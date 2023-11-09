@@ -3,9 +3,9 @@ import SearchIcon from '@mui/icons-material/Search'
 import { useCallback, memo } from 'react'
 
 /**
- * @props label - The label text of the searchbar.
- * @props setSearchQuery - The function to set the query that should be searched for.
- * @props timeout - The timeout in milliseconds to wait before searching.
+ * @prop label - The label text of the searchbar.
+ * @prop setSearchQuery - The function to set the query that should be searched for.
+ * @prop timeout - The timeout in milliseconds to wait before searching.
  * @interface
  */
 export type SearchbarProps = {
@@ -53,7 +53,7 @@ export const debouncedSearchQuery = (
  * The written search query gets debounced by a timeout before the value is set.
  * Searchbar can be used as a standalone component on a page.
  *
- * @catergory Components
+ * @category Components
  */
 const Searchbar = (props: SearchbarProps) => {
   const handleChange = useCallback(
@@ -66,7 +66,7 @@ const Searchbar = (props: SearchbarProps) => {
   return (
     <Typography variant="h4">
       <TextField
-        id="searchbar"
+        id="searchbar-textfield"
         fullWidth
         label={props.label}
         onChange={handleChange}

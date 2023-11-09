@@ -104,6 +104,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
           <FormControl required>
             <InputLabel id="select_label_contact">{t('topic')}</InputLabel>
             <Select
+              id="contactform-select"
               name="reporttopic"
               labelId="select_label_contact"
               label={t('topic')}
@@ -123,14 +124,19 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
           <FormLabel id="radio_contact_label" sx={{ mt: '0.6rem' }}>
             {t('components.ContactForm.reportType')}
           </FormLabel>
-          <RadioGroup row name="reporttype" value={reportType} onChange={reportTypeChangeHandler}>
+          <RadioGroup
+            row
+            id="contactform-radiogroup"
+            name="reporttype"
+            value={reportType}
+            onChange={reportTypeChangeHandler}>
             {reportTypes.map((report) => (
               <FormControlLabel key={report.value} value={report.value} control={<Radio />} label={report.label} />
             ))}
           </RadioGroup>
           <FormControl>
             <TextField
-              id="desc_input"
+              id="contactform-textfield"
               data-testid="desc_input"
               name="description"
               type="text"
@@ -144,6 +150,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
               helperText={textfieldError ? t('components.ContactForm.error') : ''}
             />
             <Button
+              id="contact-form-button"
               variant="contained"
               color="primary"
               sx={{ alignSelf: 'end', marginTop: '0.6rem' }}
