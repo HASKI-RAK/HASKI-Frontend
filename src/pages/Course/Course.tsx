@@ -14,7 +14,7 @@ import { SkeletonList } from '@components'
  * Uses the {@link useLearningPathTopic} hook to get the topics of the course.
  * @category Pages
  */
-export const Course = () => {
+const Course = () => {
   const { t } = useTranslation()
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
