@@ -85,7 +85,7 @@ const course1TopicListKempten = [2, 6, 10, 12]
 const course2TopicListKempten = [16, 22]
 const algorithmListKempten1 = ['aco', 'graf', 'graf', 'aco']
 const algorithmListKempten2 = ['aco', 'graf']
-const exceptedUserIdKempten = [2, 3, 4, 5]
+const exceptedUserIdKempten = [3, 4, 5, 6]
 
 const topicListAschaffenburg = [3, 5, 9]
 const algorithmListAschaffenburg = ['graf', 'aco', 'aco']
