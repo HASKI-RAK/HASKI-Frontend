@@ -126,7 +126,7 @@ const useCalculateLearningPath = (
         user.settings.user_id,
         user.lms_user_id,
         user.id,
-        3,
+        2,
         topicId,
         algorithmListKempten2[index]
       )
