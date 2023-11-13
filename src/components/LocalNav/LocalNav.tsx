@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { LearningPathElement, Topic } from '@core'
 import { Suspense, useState } from 'react'
+import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
 import {
+  SkeletonList,
   useLearningPathTopic as _useLearningPathTopic,
   useLearningPathElement as _useLearningPathElement
-} from './LocalNav.hooks'
-import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
-import { SkeletonList } from '@components'
+} from '@components'
 
 /**
  *  Local navigation component props.
