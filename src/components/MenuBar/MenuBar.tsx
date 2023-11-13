@@ -35,12 +35,17 @@ import {
 
 import { useTranslation } from 'react-i18next'
 import { AuthContext, SnackbarContext } from '@services'
-import { DropdownLanguage, SkeletonList, QuestionnaireQuestionsModal, QuestionnaireResultsModal } from '@components'
+import {
+  DropdownLanguage,
+  SkeletonList,
+  QuestionnaireQuestionsModal,
+  QuestionnaireResultsModal,
+  TableILSQuestions,
+  TableListKQuestions
+} from '@components'
 import { usePersistedStore, useStore } from '@store'
 import { Topic } from '@core'
 import log from 'loglevel'
-import { TableILSQuestions } from '../Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions'
-import { TableListKQuestions } from '../Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions'
 
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
@@ -380,7 +385,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   <ListItemIcon>
                     <LibraryBooksOutlined fontSize="small" />
                   </ListItemIcon>
-                  <Typography textAlign="center">{'ILS Questionnaire'}</Typography>
+                  <Typography textAlign="center">{t('Questionnaire.ILS')}</Typography>
                 </MenuItem>
               )}
               <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
@@ -403,7 +408,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   <ListItemIcon>
                     <AssignmentOutlined fontSize="small" />
                   </ListItemIcon>
-                  <Typography textAlign="center">{'ILS Questionnaire shortend'}</Typography>
+                  <Typography textAlign="center">{t('Questionnaire.ILS.shortened')}</Typography>
                 </MenuItem>
               )}
               <QuestionnaireQuestionsModal open={modalOpenILSShort} handleClose={handleCloseILSShortModal}>
@@ -423,7 +428,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   <ListItemIcon>
                     <PlaylistAddCheckCircleOutlined fontSize="small" />
                   </ListItemIcon>
-                  <Typography textAlign="center">{'List-K Questionnaire'}</Typography>
+                  <Typography textAlign="center">{t('Questionnaire.ListK')}</Typography>
                 </MenuItem>
               )}
               <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>

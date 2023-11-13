@@ -1,11 +1,11 @@
-import { QuestionnaireQuestionsModal } from '@components'
-import { TableILSQuestions } from '../QuestionnaireQuestions/Table/TableILSQuestions'
 import { useTranslation } from 'react-i18next'
-import { useState, useEffect, memo } from 'react'
+import { useState, useEffect } from 'react'
 import {
+  QuestionnaireQuestionsModal,
+  TableILSQuestions,
   PrivacyModalHookReturn,
   usePrivacyModal as _usePrivacyModal
-} from 'src/components/PrivacyModal/PrivacyModal.hooks'
+} from '@components'
 import { useCookies } from 'react-cookie'
 import { usePersistedStore } from '@store'
 import { getILS } from '@services'

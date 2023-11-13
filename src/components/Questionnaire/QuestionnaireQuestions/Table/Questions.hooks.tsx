@@ -1,9 +1,8 @@
 import { useState, useCallback, useContext } from 'react'
-import { postILS, postListK, SnackbarContext } from '@services'
+import { postILS, postListK, SnackbarContext, postCalculateLearningPathILS } from '@services'
 import { usePersistedStore } from '@store'
 import { useTranslation } from 'react-i18next'
 import { User } from '@core'
-import { postCalculateLearningPathILS } from '@services'
 import { SnackbarMessageProps } from '@components'
 import log from 'loglevel'
 
@@ -85,7 +84,7 @@ const course1TopicListKempten = [2, 6, 10, 12]
 const course2TopicListKempten = [16, 22]
 const algorithmListKempten1 = ['aco', 'graf', 'graf', 'aco']
 const algorithmListKempten2 = ['aco', 'graf']
-const exceptedUserIdKempten = [2, 3, 4, 5]
+const exceptedUserIdKempten = [3, 4, 5, 6]
 
 const topicListAschaffenburg = [3, 5, 9]
 const algorithmListAschaffenburg = ['graf', 'aco', 'aco']
@@ -97,7 +96,6 @@ const useCalculateLearningPath = (
 ) => {
   if (user.university == 'HS-KE') {
     if (exceptedUserIdKempten.includes(user.id)) {
-      console.log('excepted user')
       return
     }
     course1TopicListKempten.map((topicId, index) => {
@@ -126,7 +124,7 @@ const useCalculateLearningPath = (
         user.settings.user_id,
         user.lms_user_id,
         user.id,
-        3,
+        2,
         topicId,
         algorithmListKempten2[index]
       )

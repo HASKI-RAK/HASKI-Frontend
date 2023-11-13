@@ -7,6 +7,8 @@ export { default as GraphListK } from './Questionnaire/QuestionnaireResults/Grap
 export { default as ResultDescriptionListK } from './Questionnaire/QuestionnaireResults/Text/ResultDescriptionListK'
 export { default as QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResults/Modal/QuestionnaireResultsModal'
 export { default as QuestionnaireQuestionsModal } from './Questionnaire/QuestionnaireQuestions/Modal/QuestionnaireQuestionsModal'
+export { default as TableILSQuestions } from './Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions'
+export { default as TableListKQuestions } from './Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions'
 export { default as LoginForm, type LoginFormProps } from './LoginForm/LoginForm'
 export { default as MenuBar } from './MenuBar/MenuBar'
 export { default as ContactForm, type ContactFormProps } from './ContactForm/ContactForm'
@@ -31,6 +33,7 @@ export { default as Searchbar } from './Searchbar/Searchbar'
 export { default as GlossaryIndex } from './Glossary/GlossaryIndex/GlossaryIndex'
 export { default as GlossaryEntry, type GlossaryEntryProps } from './Glossary/GlossaryEntry/GlossaryEntry'
 export { default as OpenQuestionnaire } from './Questionnaire/OpenQuestionnaire/OpenQuestionnaire'
+export { usePrivacyModal, type PrivacyModalHookReturn } from './PrivacyModal/PrivacyModal.hooks'
 export { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
 
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure

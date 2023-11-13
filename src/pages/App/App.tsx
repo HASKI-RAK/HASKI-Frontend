@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from '@common/theme'
-import { PrivacyModal, OpenQuestionnaire } from '@components'
 import {
   MainFrame,
   Home,
