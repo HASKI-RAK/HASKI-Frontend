@@ -30,7 +30,7 @@ export const Home = () => {
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
       navigate('/login')
-    }, 5000)
+    }, 1000)
     const loadData = async () => {
       if (authcontext.isAuth) {
         clearTimeout(preventEndlessLoading)
