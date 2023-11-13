@@ -102,7 +102,9 @@ export const Home = () => {
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>
-                        {t('components.Home.Button.Course')}
+                        {courseDateReached('November 22, 2023 10:00:00', course.id)
+                            ? t('components.Home.Button.CourseNotAvailable') + ' ' + new Date('November 22, 2023').toLocaleDateString()
+                            : t('components.Home.Button.Course')}
                       </Button>
                     </Stack>
                   </CardContent>

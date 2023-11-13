@@ -1797,5 +1797,6 @@
   "universityKempten": "Hochschule Kempten",
   "update": "Aktualisieren",
   "User.fetching.error": "Es gab einen Fehler beim Abrufen der Benutzerdaten.",
-  "warning": "Warnung"
+  "warning": "Warnung",
+  "components.Home.Button.CourseNotAvailable": "Kurs nicht verfügbar bis: "
 }
