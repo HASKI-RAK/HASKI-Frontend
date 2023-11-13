@@ -1,9 +1,8 @@
 import { useState, useCallback, useContext } from 'react'
-import { postILS, postListK, SnackbarContext } from '@services'
+import { postILS, postListK, SnackbarContext, postCalculateLearningPathILS } from '@services'
 import { usePersistedStore } from '@store'
 import { useTranslation } from 'react-i18next'
 import { User } from '@core'
-import { postCalculateLearningPathILS } from '@services'
 import { SnackbarMessageProps } from '@components'
 import log from 'loglevel'
 
@@ -97,7 +96,6 @@ const useCalculateLearningPath = (
 ) => {
   if (user.university == 'HS-KE') {
     if (exceptedUserIdKempten.includes(user.id)) {
-      console.log('excepted user')
       return
     }
     course1TopicListKempten.map((topicId, index) => {

@@ -111,7 +111,7 @@ type TableListKQuestionsProps = {
 /**
  * This component is used to display the questionnaire questions for the ListK questionnaire.
  */
-export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUndefined }: TableListKQuestionsProps) => {
+const TableListKQuestions = memo(({ successSend, setSuccessSend, testUndefined }: TableListKQuestionsProps) => {
   const { addSnackbar } = useContext(SnackbarContext)
   const [questionnaireAnswers, setQuestionnaireAnswers] = useState([{ question_id: '', answer: '' }])
   const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, false)
@@ -346,3 +346,4 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
 })
 // eslint-disable-next-line immutable/no-mutation
 TableListKQuestions.displayName = 'TableListKQuestions'
+export default TableListKQuestions
