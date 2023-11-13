@@ -94,11 +94,16 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       // Sort learning path
       const sortedLearningPath = Array.from(learningPath.path).sort((a, b) => a.position - b.position)
 
+      const solvingPositionForDuplicates = sortedLearningPath.map((item, index) => {
+        item.position = index + 1; // Generate position based on array index
+        return item;
+      });
+
       // Every exercise learning element
-      const learningPathExercises = sortedLearningPath.filter((item) => item.learning_element.classification === 'ÜB')
+      const learningPathExercises = solvingPositionForDuplicates.filter((item) => item.learning_element.classification === 'ÜB')
 
       // Every learning element except exercises
-      const learningPathExcludingExercises = sortedLearningPath.filter(
+      const learningPathExcludingExercises = solvingPositionForDuplicates.filter(
         (item) => item.learning_element.classification !== 'ÜB'
       )
 
