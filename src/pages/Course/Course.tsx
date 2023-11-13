@@ -26,7 +26,7 @@ const Course = () => {
     const preventEndlessLoading = setTimeout(() => {
       log.log('Course timeout')
       navigate('/login')
-    }, 5000)
+    }, 1000)
     if (authContext.isAuth) {
       clearTimeout(preventEndlessLoading)
     }
