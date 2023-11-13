@@ -2,7 +2,11 @@ import '@testing-library/jest-dom'
 import { render, fireEvent } from '@testing-library/react'
 import PrivacyModal from './PrivacyModal'
 import { MemoryRouter } from 'react-router-dom'
+import { usePersistedStore } from '@store'
+import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
+import exp from 'constants'
+import { getUser } from '@services'
 
 const navigate = jest.fn()
 
@@ -82,5 +86,93 @@ describe('Test PrivacyModal', () => {
       </MemoryRouter>
     )
     expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
+  })
+
+  test('checkUniversity returns empty', async() => {
+    mockServices.getUser.mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: ''
+      })
+    )
+    const { fetchUser } = usePersistedStore.getState()
+    const result = await fetchUser()
+    const form = render(
+      <MemoryRouter initialEntries={['/projectinformation']}>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
+    const declineButton = form.getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+    fireEvent.click(declineButton)
+    //expect(async() => { await fetchUser()}).toThrowError()
+  })
+
+  //Tests for decline and redirect
+  test('Redirects the user to TH-AB', async() => {
+    mockServices.getUser.mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'TH-AB'
+      })
+    )
+    const { fetchUser } = usePersistedStore.getState()
+    const result = await fetchUser()
+    const form = render(
+      <MemoryRouter>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
+    const declineButton = form.getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+    fireEvent.click(declineButton)
+    expect(result.university).toBe('TH-AB')
+  })
+
+  test('Redirects the user to HS-KE', async() => {
+    mockServices.getUser.mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'HS-KE'
+      })
+    )
+    const { fetchUser } = usePersistedStore.getState()
+    const result = await fetchUser()
+    const form = render(
+      <MemoryRouter>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
+    const declineButton = form.getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+    fireEvent.click(declineButton)
+    expect(result.university).toBe('HS-KE')
   })
 })
