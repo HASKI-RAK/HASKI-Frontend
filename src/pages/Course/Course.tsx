@@ -4,8 +4,7 @@ import log from 'loglevel'
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useLearningPathTopic } from '../../components/LocalNav/LocalNav.hooks'
-import { SkeletonList } from '@components'
+import { SkeletonList, useLearningPathTopic } from '@components'
 
 /**
  * # Course Page
