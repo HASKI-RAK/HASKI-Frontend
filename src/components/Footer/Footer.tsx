@@ -18,7 +18,6 @@ const Footer = () => {
   const { t } = useTranslation()
 
   const footerComponents = [
-    { name: [new Date().getFullYear()], link: '' },
     { name: [t('pages.home')], link: '/' },
     { name: [t('pages.projectinformation')], link: '/projectinformation' },
     { name: [t('pages.contact')], link: '/contact' },
@@ -39,7 +38,7 @@ const Footer = () => {
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
               <Typography color="black" variant="h5">
-                {t('projectHASKI')}
+                {t('projectHASKI') + "™ " + new Date().getFullYear()}
               </Typography>
             </Grid>
             <Grid item xs={12} display="flex" width="100%" justifyContent="center">
