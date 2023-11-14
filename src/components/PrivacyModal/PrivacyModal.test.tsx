@@ -5,8 +5,6 @@ import { MemoryRouter } from 'react-router-dom'
 import { usePersistedStore } from '@store'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
-import exp from 'constants'
-import { getUser } from '@services'
 
 const navigate = jest.fn()
 
@@ -31,7 +29,7 @@ describe('Test PrivacyModal', () => {
     expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
-  test('click the link', () => {
+  test('click the link to privacypolicy', () => {
     const form = render(
       <MemoryRouter>
         <PrivacyModal />
@@ -70,7 +68,7 @@ describe('Test PrivacyModal', () => {
     expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
-  test('Modal does not render if on url', () => {
+  test('Modal does not render if on privacypolicy page', () => {
     const form = render(
       <MemoryRouter initialEntries={['/privacypolicy']}>
         <PrivacyModal />
@@ -114,7 +112,6 @@ describe('Test PrivacyModal', () => {
     )
     const declineButton = form.getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
     fireEvent.click(declineButton)
-    //expect(async() => { await fetchUser()}).toThrowError()
   })
 
   //Tests for decline and redirect
