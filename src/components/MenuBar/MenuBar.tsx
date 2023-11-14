@@ -313,14 +313,16 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           </Box>
 
           {/** Questionnaire Results */}
-          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('tooltip.openQuestionnaireResults')}>
-              <IconButton id="modal-icon-button" onClick={() => setModalOpen(true)}>
-                <Analytics data-testid="QuestionnaireResultsIcon" />
-              </IconButton>
-            </Tooltip>
-            <QuestionnaireResultsModal open={modalOpen} handleClose={() => setModalOpen(false)} />
-          </Box>
+          {isAuth && (
+            <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
+              <Tooltip title={t('tooltip.openQuestionnaireResults')}>
+                <IconButton id="modal-icon-button" onClick={() => setModalOpen(true)}>
+                  <Analytics data-testid="QuestionnaireResultsIcon" />
+                </IconButton>
+              </Tooltip>
+              <QuestionnaireResultsModal open={modalOpen} handleClose={() => setModalOpen(false)} />
+            </Box>
+          )}
 
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>

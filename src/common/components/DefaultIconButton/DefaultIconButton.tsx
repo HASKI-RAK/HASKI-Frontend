@@ -1,6 +1,6 @@
 import { IconButtonProps as DefaultIconButtonProps } from '@common/components'
 import DefaultIconButton from '@mui/material/IconButton'
-import { MouseEvent, memo, useCallback } from 'react'
+import { MouseEvent, RefObject, forwardRef, memo, useCallback } from 'react'
 import log from 'loglevel'
 import {
   xAPIVerb,
@@ -26,7 +26,10 @@ type IconButtonProps = DefaultIconButtonProps & {
  *
  * @category Common
  */
-const IconButton = ({ useStatement = _useStatement, onClick, ...props }: IconButtonProps) => {
+const IconButton = (
+  { useStatement = _useStatement, onClick, ...props }: IconButtonProps,
+  ref: ((instance: HTMLButtonElement | null) => void) | RefObject<HTMLButtonElement> | null | undefined
+) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.IconButton
@@ -34,6 +37,7 @@ const IconButton = ({ useStatement = _useStatement, onClick, ...props }: IconBut
 
   return (
     <DefaultIconButton
+      ref={ref}
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
@@ -47,4 +51,4 @@ const IconButton = ({ useStatement = _useStatement, onClick, ...props }: IconBut
   )
 }
 
-export default memo(IconButton)
+export default memo(forwardRef(IconButton))
