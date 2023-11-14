@@ -1,8 +1,9 @@
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { getStatement } from './getStatement'
-import { useMemo, useCallback } from 'react'
+import { useMemo, useCallback, useContext, useState, useEffect } from 'react'
 import { usePersistedStore } from '@store'
+import { AuthContext } from '@services'
 import xAPI from './xAPI.setup'
 import log from 'loglevel'
 
@@ -95,18 +96,12 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   const { defaultComponentID = 'null', defaultComponent = xAPIComponent.Null } = params ?? {}
 
   const { i18n } = useTranslation()
+  const { isAuth } = useContext(AuthContext)
   const en = i18n.getFixedT('en')
   const location = useLocation()
+  const [lmsUserID, setLmsUserID] = useState<string | undefined>(undefined)
 
   const fetchUser = usePersistedStore((state) => state.fetchUser)
-  const lmsUserID = fetchUser()
-    .then((user) => {
-      return user.id.toString()
-    })
-    .catch((error: string) => {
-      log.error(error)
-      return '-1'
-    })
 
   // Function to get the english name of a page.
   const getEnglishName = useCallback(
@@ -116,23 +111,36 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
     [en]
   )
 
+  useEffect(() => {
+    isAuth &&
+      fetchUser()
+        .then((user) => {
+          setLmsUserID(user.lms_user_id.toString())
+        })
+        .catch((error: string) => {
+          log.error(error)
+          return undefined
+        })
+  }, [fetchUser, isAuth])
+
   // Wraps function so send statements from components
   const sendStatement = useCallback(
     async (verb: xAPIVerb) => {
-      xAPI
-        .sendStatement({
-          statement: getStatement(
-            await lmsUserID,
-            xAPIVerb[verb],
-            location.pathname,
-            defaultComponentID,
-            xAPIComponent[defaultComponent],
-            getEnglishName
-          )
-        })
-        .catch((error: string) => {
-          log.error(error) // Some tests in LocalNav and Contact fail if catch is missing, otherwise not needed.
-        })
+      lmsUserID &&
+        xAPI
+          .sendStatement({
+            statement: getStatement(
+              lmsUserID,
+              xAPIVerb[verb],
+              location.pathname,
+              defaultComponentID,
+              xAPIComponent[defaultComponent],
+              getEnglishName
+            )
+          })
+          .catch((error: string) => {
+            log.error(error) // Some tests in LocalNav and Contact fail if catch is missing, otherwise not needed.
+          })
     },
     [
       xAPI.sendStatement,
@@ -142,7 +150,8 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
       location.pathname,
       defaultComponentID,
       xAPIComponent[defaultComponent],
-      getEnglishName
+      getEnglishName,
+      isAuth
     ]
   )
 

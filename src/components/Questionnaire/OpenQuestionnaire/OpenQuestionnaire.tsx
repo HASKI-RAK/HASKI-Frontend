@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import {
   QuestionnaireQuestionsModal,
   TableILSQuestions,
@@ -8,7 +8,7 @@ import {
 } from '@components'
 import { useCookies } from 'react-cookie'
 import { usePersistedStore } from '@store'
-import { getILS } from '@services'
+import { AuthContext, getILS } from '@services'
 import log from 'loglevel'
 
 //** usePrivacyPolicy gets the 'privacy_accept_token' from the hook */
@@ -18,6 +18,7 @@ export type PrivacyModalProps = {
 
 const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps) => {
   const { t } = useTranslation()
+  const { isAuth } = useContext(AuthContext)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(true)
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [cookie, setCookie] = useCookies(['questionnaire_sent_token'])
@@ -42,7 +43,7 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
   //only if there is no cookie, the ils data of the user gets fetched (case: different browser)
   //check if there is already ils data
   useEffect(() => {
-    if (!cookie['questionnaire_sent_token']) {
+    if (!cookie['questionnaire_sent_token'] && isAuth) {
       fetchUser().then((user) => {
         return getILS(user.settings.user_id, user.lms_user_id, user.id)
           .then((data) => {

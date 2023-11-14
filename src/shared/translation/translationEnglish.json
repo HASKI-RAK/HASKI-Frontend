@@ -1827,6 +1827,5 @@
   "universityKempten": "University of Applied Sciences Kempten",
   "update": "Updated",
   "User.fetching.error": "There was an Error fetching User data",
-  "warning": "Warning",
-  "components.Home.Button.CourseNotAvailable": "Course not available until: "
+  "warning": "Warning"
 }
