@@ -17,7 +17,7 @@ import {getConfig} from "@shared";
 
 const xAPI: XAPI = new XAPI({
   endpoint: 'https://lrs.haski.app/xapi',
-  auth: getConfig().LRS_AUTH,
+  auth: 'Basic ODJhZjczZDlkY2I0OWY5Mjg4N2I3ODNjOTdmNWM4OTZlZWVmM2Q2OGIxOTU2MTQxN2I3YTU0NjI3YzRiMjdhZjo4NDQ1MDIxOTQyY2YzZGMyYjNmZTZlODI0ZTliZDc5MzRhNzIzNDU3NTNhMDk3MTRmMjcxMzI1MzEzM2MzZjNm',
   version: '1.0.3'
 })
 
