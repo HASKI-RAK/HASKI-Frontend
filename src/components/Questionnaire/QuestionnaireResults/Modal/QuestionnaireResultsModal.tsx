@@ -108,7 +108,8 @@ const QuestionnaireResultsModal = memo(
           .then((user) => {
             return getListK(user.settings.user_id, user.lms_user_id, user.id)
               .then((data) => {
-                setListKData(data)
+                  if(data?.cogn_str == 0) return setListKLoading(false)
+                  setListKData(data)
               })
               .catch((error) => {
                 log.error(error)
@@ -138,7 +139,8 @@ const QuestionnaireResultsModal = memo(
           .then((user) => {
             return getILS(user.settings.user_id, user.lms_user_id, user.id)
               .then((data) => {
-                setILSData(data)
+                  if(data?.perception_value == 0) return setILSLoading(false)
+                      setILSData(data)
               })
               .catch((error) => {
                 log.error(error)
