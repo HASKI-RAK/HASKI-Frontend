@@ -95,7 +95,7 @@ const useCalculateLearningPath = (
   t: (key: string) => string
 ) => {
   if (user.university == 'HS-KE') {
-    if (exceptedUserIdKempten.includes(user.id)) {
+    if (exceptedUserIdKempten.includes(user.settings.user_id)) {
       return
     }
     course1TopicListKempten.map((topicId, index) => {
