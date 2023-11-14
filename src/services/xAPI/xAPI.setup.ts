@@ -14,15 +14,9 @@ import {getConfig} from "@shared";
  *
  * @category Services
  */
-const lrs = getConfig().LRS
-
-if (lrs === undefined) {
-  // Handle the case when LRS is undefined, e.g., provide a default value or throw an error
-  throw new Error('LRS is undefined')
-}
 
 const xAPI: XAPI = new XAPI({
-  endpoint: lrs,
+  endpoint: 'https://lrs.haski.app/xapi',
   auth: getConfig().LRS_AUTH,
   version: '1.0.3'
 })
