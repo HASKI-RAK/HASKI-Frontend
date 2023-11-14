@@ -1209,7 +1209,7 @@
   "components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1": "Um Ergebnisse anzuzeigen, müssen Sie zuerst den",
   "components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2": "abschließen.",
   "components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.ButtonText": "Fragebogen Ergebnisse",
-  "components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.MoreInformation": "Ich möchte mehr zum ILS und ListK erfahren",
+  "components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.MoreInformation": "Ich möchte mehr Details zum ILS und List-K Fragebogen",
   "components.Questionnaire.QuestionnaireResults.Table.TableILS.Active": "Aktiv",
   "components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced": "balanciert",
   "components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension": "Dimension",

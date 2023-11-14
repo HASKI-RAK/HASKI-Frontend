@@ -1212,7 +1212,7 @@
   "components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1": "To see any results you need to complete the",
   "components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2": "first.",
   "components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.ButtonText": "Questionnaire Results",
-  "components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.MoreInformation": "I want to know more about the ILS and ListK",
+  "components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.MoreInformation": "I want more details about the ILS and List-K Questionnaire.",
   "components.Questionnaire.QuestionnaireResults.Table.TableILS.Active": "Active",
   "components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced": "balanced",
   "components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension": "Dimension",
