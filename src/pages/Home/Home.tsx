@@ -98,12 +98,12 @@ export const Home = () => {
                         id="course-button"
                         variant="contained"
                         color="primary"
-                        disabled={courseDateReached('November 22, 2023 10:00:00', course.id)}
+                        disabled={courseDateReached('November 13, 2023 10:00:00', course.id)}
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>
-                        {courseDateReached('November 22, 2023 10:00:00', course.id)
-                            ? t('components.Home.Button.CourseNotAvailable') + ' ' + new Date('November 22, 2023').toLocaleDateString()
+                        {courseDateReached('November 13, 2023 10:00:00', course.id)
+                            ? t('components.Home.Button.CourseNotAvailable') + ' ' + new Date('November 13, 2023').toLocaleDateString()
                             : t('components.Home.Button.Course')}
                       </Button>
                     </Stack>
