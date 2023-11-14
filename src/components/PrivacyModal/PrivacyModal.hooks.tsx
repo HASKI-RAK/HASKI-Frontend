@@ -47,7 +47,7 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
         return user.university
       })
       .catch((reason) => {
-        //log.error(reason)
+        log.error(reason)
         return ''
       })
   }
