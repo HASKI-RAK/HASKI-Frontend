@@ -1,12 +1,6 @@
 {
-  "entry": [
-    "src/index.tsx"
-  ],
-  "extensions": [
-    ".ts",
-    ".js",
-    ".tsx"
-  ],
+  "entry": ["src/index.tsx"],
+  "extensions": [".ts", ".js", ".tsx"],
   "ignorePatterns": [
     "**/node_modules/**",
     "__mocks__/**",
@@ -24,10 +18,5 @@
     "src/shared/config.ts"
   ],
   "ignoreUnresolved": [],
-  "ignoreUnused": [
-    "@nivo/core",
-    "@nivo/tooltip",
-    "i",
-    "react-flow-renderer"
-  ]
+  "ignoreUnused": ["@nivo/core", "@nivo/tooltip", "i", "react-flow-renderer"]
 }
