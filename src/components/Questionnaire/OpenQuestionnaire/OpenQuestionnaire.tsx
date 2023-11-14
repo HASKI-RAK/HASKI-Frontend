@@ -34,6 +34,7 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
           window.location.reload()
         }
     } else {
+      window.location.reload()
       setModalOpenILSLong(false)
     }
   }
