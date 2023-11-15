@@ -286,7 +286,7 @@ describe('LocalNav tests', () => {
 })
 
 describe('getSortedLearningPath works as expected', () => {
-  const mockgetLearningPathElement = jest.fn().mockResolvedValue({
+  const mockGetLearningPathElement = jest.fn().mockResolvedValue({
     id: 99999,
     course_id: 99999,
     based_on: 'mock LearningPathElement',
@@ -352,7 +352,7 @@ describe('getSortedLearningPath works as expected', () => {
       mockStudentId,
       mockTopic,
       '2',
-      mockgetLearningPathElement
+      mockGetLearningPathElement
     )
     expect(result).toEqual({
       id: 99999,
@@ -387,7 +387,7 @@ describe('getSortedLearningPath works as expected', () => {
         }
       ]
     })
-    expect(mockgetLearningPathElement).toHaveBeenCalledWith(
+    expect(mockGetLearningPathElement).toHaveBeenCalledWith(
       mockUserId,
       mockLmsUserId,
       mockStudentId,
