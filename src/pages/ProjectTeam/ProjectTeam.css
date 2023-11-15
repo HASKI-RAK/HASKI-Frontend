@@ -25,14 +25,79 @@
     z-index:-100;
     opacity:0.35;
     position:absolute;
-    width:55.55%;
+    width:50rem;
     overflow:hidden;
 }
 
 .bgMap02, .bgMap03 {
-    left: 0;
+    left: -2.5%;
+}
+
+.bgMap03 {
+    margin-top: 35px;
+    margin-left: 35px;
 }
 
 .bgMap01 {
-    right: 0;
+    right: -2.5%;
+}
+@media only screen and (min-width: 2000px) {
+    .bgMap01, .bgMap02, .bgMap03 {
+        width:75rem;
+    }
+    .bgMap02, .bgMap03 {
+        margin-top: -65px;
+    }
+    .bgMap01 {
+        margin-top: -125px;
+    }
+    .bgMap03 {
+        margin-left: 75px;
+    }
+}
+@media only screen and (max-width: 2000px) {
+    .bgMap01, .bgMap02, .bgMap03 {
+        width:70rem;
+    }
+    .bgMap02, .bgMap03 {
+        margin-top: -30px;
+    }
+    .bgMap01 {
+        margin-top: -105px;
+    }
+}
+@media only screen and (max-width: 1800px) {
+    .bgMap01, .bgMap02, .bgMap03 {
+        width:60rem;
+    }
+    .bgMap03 {
+        margin-top: -20px;
+    }
+    .bgMap01 {
+        margin-top: -65px;
+    }
+    .bgMap02 {
+        margin-top: 0;
+    }
+}
+@media only screen and (max-width: 1500px) {
+    .bgMap01, .bgMap02, .bgMap03 {
+        width:50rem;
+    }
+    .bgMap01 {
+        margin-top: 0;
+    }
+    .bgMap03 {
+        margin-top: 35px;
+    }
+}
+@media only screen and (max-width: 1200px) {
+    .bgMap01, .bgMap02, .bgMap03 {
+        width:40rem;
+    }
+}
+@media only screen and (max-width: 900px) {
+    .bgMap01, .bgMap02, .bgMap03 {
+        width:33.5rem;
+    }
 }

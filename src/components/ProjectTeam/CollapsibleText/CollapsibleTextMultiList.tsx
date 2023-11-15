@@ -1,5 +1,5 @@
 import React from 'react';
-import { CollapsibleTextList } from '@components'
+import {CollapsibleTextList} from '@components'
 
 /**
  * @props content - A record list of several headers and bodies to be grouped.
@@ -22,20 +22,20 @@ interface CollapsibleTextMultiListProps {
  *
  * @category Components
  */
-const CollapsibleTextMultiList: React.FC<CollapsibleTextMultiListProps> = ({ content, columns }) => {
+const CollapsibleTextMultiList: React.FC<CollapsibleTextMultiListProps> = ({content, columns}) => {
     // Split the content into an array of columns
     const columnCount = Math.ceil(Object.keys(content).length / columns);
-    const columnContent: Record<string, string>[] = Array.from({ length: columns }, (_, i) => {
+    const columnContent: Record<string, string>[] = Array.from({length: columns}, (_, i) => {
         const startIndex = i * columnCount;
         const endIndex = startIndex + columnCount;
         return Object.fromEntries(Object.entries(content).slice(startIndex, endIndex));
     });
 
     return (
-        <div style={{ display: 'flex', gap: '16px' }}>
+        <div style={{display: 'flex', gap: '16px'}}>
             {columnContent.map((column, index) => (
-                <div key={index} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <CollapsibleTextList content={column} />
+                <div key={index} style={{flex: 1, display: 'flex', flexDirection: 'column', gap: '16px'}}>
+                    <CollapsibleTextList content={column}/>
                 </div>
             ))}
         </div>

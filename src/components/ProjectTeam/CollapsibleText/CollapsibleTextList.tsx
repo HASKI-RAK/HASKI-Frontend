@@ -1,5 +1,5 @@
 import React from 'react';
-import { CollapsibleText } from '@components'
+import {CollapsibleText} from '@components'
 
 /**
  * @props content - A record list of several headers and bodies to be grouped.
@@ -19,11 +19,11 @@ interface CollapsibleTextListProps {
  *
  * @category Components
  */
-const CollapsibleTextList: React.FC<CollapsibleTextListProps> = ({ content }) => {
+const CollapsibleTextList: React.FC<CollapsibleTextListProps> = ({content}) => {
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
             {Object.entries(content).map(([header, body], index) => (
-                <CollapsibleText key={index} header={header} body={body} />
+                <CollapsibleText key={index} header={header} body={body}/>
             ))}
         </div>
     );

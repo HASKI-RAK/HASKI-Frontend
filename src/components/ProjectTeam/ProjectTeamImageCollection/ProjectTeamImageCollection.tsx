@@ -25,7 +25,7 @@ interface ImageCollectionProps {
  *
  * @category Components
  */
-const ImageCollection: React.FC<ImageCollectionProps> = ({ img1Url, img2Url, img3Url }) => {
+const ImageCollection: React.FC<ImageCollectionProps> = ({img1Url, img2Url, img3Url}) => {
     return (
         <div className="container">
             <div className="view">

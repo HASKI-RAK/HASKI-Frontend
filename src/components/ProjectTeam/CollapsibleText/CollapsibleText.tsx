@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from 'react';
+import React, {useState, ReactNode} from 'react';
 import {
     Accordion,
     AccordionSummary,
@@ -30,7 +30,7 @@ interface CollapsibleTextProps {
  *
  * @category Components
  */
-const CollapsibleText: React.FC<CollapsibleTextProps> = ({ header, body }) => {
+const CollapsibleText: React.FC<CollapsibleTextProps> = ({header, body}) => {
     const [expanded, setExpanded] = useState(false);
 
     const toggleExpansion = () => {
@@ -44,7 +44,7 @@ const CollapsibleText: React.FC<CollapsibleTextProps> = ({ header, body }) => {
             <Accordion expanded={expanded} onChange={toggleExpansion}>
                 <div>
                     <AccordionSummary
-                        expandIcon={body ? <ExpandMoreIcon /> : null}
+                        expandIcon={body ? <ExpandMoreIcon/> : null}
                         aria-controls="panel-content"
                         id="panel-header"
                     >
@@ -54,7 +54,7 @@ const CollapsibleText: React.FC<CollapsibleTextProps> = ({ header, body }) => {
                     </AccordionSummary>
                 </div>
                 {body && (<div>
-                    <Divider variant="middle" />
+                    <Divider variant="middle"/>
                     <AccordionDetails>
                         <Typography>
                             {body}

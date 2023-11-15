@@ -21,13 +21,13 @@ interface ImageAttributeProps {
  *
  * @category Components
  */
-const ImageAttribute: React.FC<ImageAttributeProps> = ({ imageAttributes }) => {
-    const { t } = useTranslation()
+const ImageAttribute: React.FC<ImageAttributeProps> = ({imageAttributes}) => {
+    const {t} = useTranslation()
 
     return (
-        <Typography sx={{ pt: '1rem', pb: '1rem' }} variant="subtitle1">
+        <Typography sx={{pt: '1rem', pb: '1rem'}} variant="subtitle1">
             {t('pages.ProjectDescription.imageSources')}
-            {imageAttributes.map(({ text, url }, index) => (
+            {imageAttributes.map(({text, url}, index) => (
                 <span key={index}>
                     {!url && (text)}
                     {url && (<a href={url}>{text}</a>)}
