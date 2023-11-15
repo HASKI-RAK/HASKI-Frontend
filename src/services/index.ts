@@ -5,7 +5,7 @@
 export { AuthContext } from './AuthContext'
 export type { AuthContextType } from './AuthContext'
 export { AuthProvider } from './AuthProvider'
-export { getLearningPathElement } from './LearningPath'
+export { fetchLearningPathElement } from './LearningPath'
 export { getLearningPathTopic } from './Topic'
 export { postContactForm } from './contact'
 export type { FormDataType } from './contact'

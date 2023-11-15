@@ -35,7 +35,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const { courseId, topicId } = useParams()
   const { url, title, isOpen, handleClose, mapNodes } = useTopic()
   const getUser = usePersistedStore((state) => state.getUser)
-  const fetchLearningPathElement = useStore((state) => state.fetchLearningPathElement)
+  const getLearningPathElement = useStore((state) => state.getLearningPathElement)
 
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
@@ -50,7 +50,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       clearTimeout(preventEndlessLoading)
       getUser()
         .then((user) => {
-          fetchLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
+          getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
             .then((learningPathElementData) => {
               const { nodes, edges } = mapNodes(learningPathElementData, theme)
               setInitialNodes(nodes)
@@ -78,7 +78,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   }, [
     authContext.isAuth,
     courseId,
-    fetchLearningPathElement,
+    getLearningPathElement,
     getUser,
     theme,
     topicId,

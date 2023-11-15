@@ -84,9 +84,9 @@ describe('Topic Page', () => {
     })
   })
 
-  test('fetchLearningPathElement failed', async () => {
-    const mockGetLearningPathElement = jest.fn(() => Promise.reject(new Error('getLearningPathElement failed')))
-    mockServices.getLearningPathElement.mockImplementationOnce(mockGetLearningPathElement)
+  test('getLearningPathElement failed', async () => {
+    const mockfetchLearningPathElement = jest.fn(() => Promise.reject(new Error('fetchLearningPathElement failed')))
+    mockServices.fetchLearningPathElement.mockImplementationOnce(mockfetchLearningPathElement)
 
     act(() => {
       render(
@@ -99,7 +99,7 @@ describe('Topic Page', () => {
     })
 
     await waitFor(() => {
-      expect(mockGetLearningPathElement).toHaveBeenCalledTimes(1)
+      expect(mockfetchLearningPathElement).toHaveBeenCalledTimes(1)
     })
   })
 

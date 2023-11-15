@@ -286,7 +286,7 @@ describe('LocalNav tests', () => {
 })
 
 describe('getSortedLearningPath works as expected', () => {
-  const mockFetchLearningPathElement = jest.fn().mockResolvedValue({
+  const mockgetLearningPathElement = jest.fn().mockResolvedValue({
     id: 99999,
     course_id: 99999,
     based_on: 'mock LearningPathElement',
@@ -352,7 +352,7 @@ describe('getSortedLearningPath works as expected', () => {
       mockStudentId,
       mockTopic,
       '2',
-      mockFetchLearningPathElement
+      mockgetLearningPathElement
     )
     expect(result).toEqual({
       id: 99999,
@@ -387,7 +387,7 @@ describe('getSortedLearningPath works as expected', () => {
         }
       ]
     })
-    expect(mockFetchLearningPathElement).toHaveBeenCalledWith(
+    expect(mockgetLearningPathElement).toHaveBeenCalledWith(
       mockUserId,
       mockLmsUserId,
       mockStudentId,
@@ -606,9 +606,9 @@ describe('useLearningPathTopic', () => {
         visits: ['string']
       }
     }
-    mockServices.getLearningPathElement = jest
+    mockServices.fetchLearningPathElement = jest
       .fn()
-      .mockImplementationOnce(() => Promise.reject(new Error('getLearningPathElement failed')))
+      .mockImplementationOnce(() => Promise.reject(new Error('fetchLearningPathElement failed')))
 
     act(() => {
       const { result } = renderHook(() => useLearningPathElement(mockTopic, '2'))

@@ -1,6 +1,6 @@
 import { getConfig } from '@shared'
 //Tests fail with shortened Path
-import { getLearningPathElement } from './getLearningPathElement'
+import { fetchLearningPathElement } from './fetchLearningPathElement'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -12,7 +12,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('getLearningPathElement has expected behaviour', () => {
+describe('fetchLearningPathElement has expected behaviour', () => {
   it('should return the learning path element when the response is successful', async () => {
     const expectedData = { hello: 'test' }
     const mockResponse = {
@@ -30,7 +30,7 @@ describe('getLearningPathElement has expected behaviour', () => {
     const courseId = '2'
     const topicId = '2'
 
-    const result = await getLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)
+    const result = await fetchLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)
 
     expect(fetch).toHaveBeenCalledWith(
       `${
@@ -54,7 +54,7 @@ describe('getLearningPathElement has expected behaviour', () => {
     const courseId = undefined // Set to null to simulate a missing value
     const topicId = '2'
 
-    await expect(getLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)).rejects.toThrow(
+    await expect(fetchLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)).rejects.toThrow(
       'course_id and topic_id are required'
     )
   })
@@ -78,7 +78,7 @@ describe('getLearningPathElement has expected behaviour', () => {
     const courseId = '2'
     const topicId = '2'
 
-    await expect(getLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)).rejects.toThrow(
+    await expect(fetchLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)).rejects.toThrow(
       `${expectedMessage}`
     )
   })
@@ -99,6 +99,6 @@ describe('getLearningPathElement has expected behaviour', () => {
     const courseId = '2'
     const topicId = '2'
 
-    await expect(getLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)).rejects.toThrow('')
+    await expect(fetchLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)).rejects.toThrow('')
   })
 })

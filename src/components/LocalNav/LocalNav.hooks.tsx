@@ -69,7 +69,7 @@ export const useLearningPathElement = (
   const [loadingElements, setLoadingElements] = useState(true)
   const [learningPaths, setLearningPaths] = useState<LearningPathElement>()
   const getUser = usePersistedStore((state) => state.getUser)
-  const fetchLearningPathElement = useStore((state) => state.fetchLearningPathElement)
+  const getLearningPathElement = useStore((state) => state.getLearningPathElement)
 
   useEffect(() => {
     const effect = async () => {
@@ -82,7 +82,7 @@ export const useLearningPathElement = (
           user.id,
           topic,
           courseId,
-          fetchLearningPathElement
+          getLearningPathElement
         )
         setLearningPaths(dataLearningPath)
       } catch (error) {

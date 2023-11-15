@@ -57,7 +57,7 @@ const mockDataServices: MockDataServices = {
       university: 'HS Kempten'
     })
   ),
-  getLearningPathElement: jest.fn(() =>
+  fetchLearningPathElement: jest.fn(() =>
     Promise.resolve({
       id: 1,
       course_id: 2,
