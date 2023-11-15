@@ -184,7 +184,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('fetching ils data returns error', async () => {
     const handleClose = jest.fn()
-    mockServices.getILS.mockImplementationOnce(() => {
+    mockServices.fetchILS.mockImplementationOnce(() => {
       throw new Error('Backend down')
     })
 
@@ -205,7 +205,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('fetching ils data failed returns snackbar', async () => {
     const handleClose = jest.fn()
-    mockServices.getILS.mockImplementationOnce(async () => {
+    mockServices.fetchILS.mockImplementationOnce(async () => {
       throw new Error('id not found')
     })
 
@@ -223,7 +223,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('fetching ils data failed to fetch, returns loading', async () => {
     const handleClose = jest.fn()
-    mockServices.getILS.mockImplementationOnce(async () => {
+    mockServices.fetchILS.mockImplementationOnce(async () => {
       throw new Error('Failed to fetch')
     })
 

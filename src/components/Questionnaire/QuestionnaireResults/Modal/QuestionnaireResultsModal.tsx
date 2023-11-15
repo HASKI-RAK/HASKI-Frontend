@@ -5,7 +5,7 @@ import { ListItem } from '@mui/material'
 import { usePersistedStore } from '@store'
 import { ILS, ListK } from '@core'
 import log from 'loglevel'
-import { getILS, getListK, SnackbarContext } from '@services'
+import { fetchILS, getListK, SnackbarContext } from '@services'
 import { SkeletonList } from '@components'
 import { Close } from '@common/icons'
 
@@ -136,7 +136,7 @@ const QuestionnaireResultsModal = memo(
       if (activeStep === 0 && open === true) {
         getUser()
           .then((user) => {
-            return getILS(user.settings.user_id, user.lms_user_id, user.id)
+            return fetchILS(user.settings.user_id, user.lms_user_id, user.id)
               .then((data) => {
                 setILSData(data)
               })

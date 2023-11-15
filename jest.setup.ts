@@ -248,7 +248,7 @@ const mockDataServices: MockDataServices = {
       ]
     })
   ),
-  getILS: jest.fn(() =>
+  fetchILS: jest.fn(() =>
     Promise.resolve({
       characteristic_id: 1,
       id: 1,

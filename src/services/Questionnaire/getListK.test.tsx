@@ -12,7 +12,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('getILS has expected behaviour', () => {
+describe('fetchILS has expected behaviour', () => {
   it('should return the course when the response is successful', async () => {
     const expectedData = {
       course: 'dude where is my car',
