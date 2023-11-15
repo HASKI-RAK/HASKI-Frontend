@@ -16,7 +16,7 @@ const showCurrentBreadcrump = (
 ) => {
   return (
     <Link
-      id={path.concat('-link')}
+      id={path.concat('-link').replaceAll(' ', '-')}
       key={path}
       underline="hover"
       component={index === location.pathname.split('/').length - 1 ? 'span' : 'button'}
