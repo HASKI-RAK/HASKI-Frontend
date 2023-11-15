@@ -270,7 +270,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                             <>
                               <Grid item xs={12} key={t(topic.name)}>
                                 <Link
-                                  id={topic.name.concat('-link')}
+                                  id={topic.name.concat('-link').replaceAll(' ', '-')}
                                   key={topic.name}
                                   data-testid={`Menubar-Topic-${topic.name}`}
                                   underline="hover"

@@ -52,7 +52,7 @@ const Course = () => {
                   <Typography variant="h5">{topic.name}</Typography>
                   <Typography variant="body1">{topic.lms_id}</Typography>
                   <Button
-                    id={topic.name.concat('-button')}
+                    id={topic.name.concat('-button').replaceAll(' ', '-')}
                     variant="contained"
                     data-testid={'Course-Card-Topic-' + topic.name}
                     color="primary"

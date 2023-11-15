@@ -45,7 +45,7 @@ const Footer = () => {
               {footerComponents.map((component) => (
                 <React.Fragment key={component.link}>
                   <Link
-                    id={component.link.concat('-link')}
+                    id={component.link.concat('-link').replaceAll(' ', '-')}
                     marginX="0.2em"
                     component="button"
                     variant="subtitle1"
