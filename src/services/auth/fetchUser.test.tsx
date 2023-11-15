@@ -1,5 +1,5 @@
 import { getConfig } from '@shared'
-import { getUser } from './getUser'
+import { fetchUser } from './fetchUser'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -23,7 +23,7 @@ describe('getCourses has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const result = await getUser()
+    const result = await fetchUser()
 
     expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/lms/user_from_cookie`, {
       method: 'GET',
@@ -48,7 +48,7 @@ describe('getCourses has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    await expect(getUser()).rejects.toThrow(`${expectedMessage}`)
+    await expect(fetchUser()).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
@@ -61,6 +61,6 @@ describe('getCourses has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    await expect(getUser()).rejects.toThrow('')
+    await expect(fetchUser()).rejects.toThrow('')
   })
 })

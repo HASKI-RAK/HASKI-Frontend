@@ -24,7 +24,7 @@ export const Home = () => {
   const [courses, setCourses] = useState<Course[]>([])
 
   // Store
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const getUser = usePersistedStore((state) => state.getUser)
   const fetchCourses = useStore((state) => state.fetchCourses)
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export const Home = () => {
     const loadData = async () => {
       if (authcontext.isAuth) {
         clearTimeout(preventEndlessLoading)
-        fetchUser()
+        getUser()
           .then((user) => {
             fetchCourses(user.settings.user_id, user.lms_user_id, user.id)
               .then((CourseResponse) => {

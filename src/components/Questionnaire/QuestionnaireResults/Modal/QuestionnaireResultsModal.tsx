@@ -88,7 +88,7 @@ QuestionnaireResultsILSLoading.displayName = 'QuestionnaireResultsILSLoading'
 const QuestionnaireResultsModal = memo(
   ({ open = false, handleClose, activeStepForTesting = 0 }: QuestionnaireResultsModalProps) => {
     const { t } = useTranslation()
-    const fetchUser = usePersistedStore((state) => state.fetchUser)
+    const getUser = usePersistedStore((state) => state.getUser)
     const { addSnackbar } = useContext(SnackbarContext)
     const [ilsLoading, setILSLoading] = useState(true)
     const [listkLoading, setListKLoading] = useState(true)
@@ -104,7 +104,7 @@ const QuestionnaireResultsModal = memo(
 
     useEffect(() => {
       if (activeStep === 1 && open === true) {
-        fetchUser()
+        getUser()
           .then((user) => {
             return getListK(user.settings.user_id, user.lms_user_id, user.id)
               .then((data) => {
@@ -134,7 +134,7 @@ const QuestionnaireResultsModal = memo(
 
     useEffect(() => {
       if (activeStep === 0 && open === true) {
-        fetchUser()
+        getUser()
           .then((user) => {
             return getILS(user.settings.user_id, user.lms_user_id, user.id)
               .then((data) => {

@@ -34,7 +34,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   const { courseId, topicId } = useParams()
   const { url, title, isOpen, handleClose, mapNodes } = useTopic()
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const getUser = usePersistedStore((state) => state.getUser)
   const fetchLearningPathElement = useStore((state) => state.fetchLearningPathElement)
 
   // States
@@ -48,7 +48,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     }, 5000)
     if (authContext.isAuth && courseId && topicId) {
       clearTimeout(preventEndlessLoading)
-      fetchUser()
+      getUser()
         .then((user) => {
           fetchLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
             .then((learningPathElementData) => {
@@ -79,7 +79,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     authContext.isAuth,
     courseId,
     fetchLearningPathElement,
-    fetchUser,
+    getUser,
     theme,
     topicId,
     mapNodes,

@@ -66,9 +66,9 @@ describe('Topic Page', () => {
     expect(navigate).toBeCalledWith('/login')
   })
 
-  test('fetchUser failed', async () => {
-    const mockGetUser = jest.fn(() => Promise.reject(new Error('getUser failed')))
-    mockServices.getUser.mockImplementationOnce(mockGetUser)
+  test('getUser failed', async () => {
+    const mockfetchUser = jest.fn(() => Promise.reject(new Error('fetchUser failed')))
+    mockServices.fetchUser.mockImplementationOnce(mockfetchUser)
 
     act(() => {
       render(
@@ -80,7 +80,7 @@ describe('Topic Page', () => {
       )
     })
     await waitFor(() => {
-      expect(mockGetUser).toHaveBeenCalledTimes(1)
+      expect(mockfetchUser).toHaveBeenCalledTimes(1)
     })
   })
 

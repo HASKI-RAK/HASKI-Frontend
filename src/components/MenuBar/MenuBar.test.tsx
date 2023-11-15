@@ -282,7 +282,7 @@ describe('MenuBar', () => {
   })
 
   test('fetching user when opening Topics throws error ', async () => {
-    mockServices.getUser.mockImplementationOnce(() => {
+    mockServices.fetchUser.mockImplementationOnce(() => {
       throw new Error('Error')
     })
 
@@ -309,7 +309,7 @@ describe('MenuBar', () => {
   })
 
   test('fetching user when opening Questionnaire Results', async () => {
-    mockServices.getUser.mockImplementationOnce(() => {
+    mockServices.fetchUser.mockImplementationOnce(() => {
       throw new Error('Error')
     })
 

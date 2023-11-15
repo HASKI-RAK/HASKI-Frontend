@@ -35,14 +35,14 @@ export const getSortedLearningPath = async (
 export const useLearningPathTopic = (courseId: string): { loading: boolean; topics: Topic[] } => {
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const getUser = usePersistedStore((state) => state.getUser)
   const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
 
   useEffect(() => {
     const effect = async () => {
       setLoading(true)
       try {
-        const user = await fetchUser()
+        const user = await getUser()
         const fetchedTopics = await fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
         setTopics(fetchedTopics.topics)
       } catch (error) {
@@ -68,14 +68,14 @@ export const useLearningPathElement = (
 ): { loadingElements: boolean; learningPaths: LearningPathElement | undefined } => {
   const [loadingElements, setLoadingElements] = useState(true)
   const [learningPaths, setLearningPaths] = useState<LearningPathElement>()
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const getUser = usePersistedStore((state) => state.getUser)
   const fetchLearningPathElement = useStore((state) => state.fetchLearningPathElement)
 
   useEffect(() => {
     const effect = async () => {
       setLoadingElements(true)
       try {
-        const user = await fetchUser()
+        const user = await getUser()
         const dataLearningPath = await getSortedLearningPath(
           user.settings.user_id,
           user.lms_user_id,
