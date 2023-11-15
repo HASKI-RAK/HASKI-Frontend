@@ -48,7 +48,7 @@ const LazyLoadingLearningPathElement = ({
       {learningPaths?.path.map((learningElement) => (
         <Typography variant="body1" key={learningElement.learning_element.name}>
           <Link
-            id={learningElement.learning_element.name.concat('-link')}
+            id={learningElement.learning_element.name.concat('-link').replaceAll(' ', '-')}
             data-testid={learningElement.learning_element.name}
             underline="hover"
             variant="body2"
