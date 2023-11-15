@@ -2,7 +2,7 @@ import { LearningPathTopic, LearningPathTopicReturn } from '@core'
 import { getData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
-export const getLearningPathTopic: LearningPathTopicReturn = async (userId, lmsUserId, studentId, course_id) => {
+export const fetchLearningPathTopic: LearningPathTopicReturn = async (userId, lmsUserId, studentId, course_id) => {
   if (!course_id) {
     throw new Error('course_id is required')
   }

@@ -1,6 +1,6 @@
 import { getConfig } from '@shared'
 //Tests fail with shortened Path
-import { getLearningPathTopic } from './getLearningPathTopic'
+import { fetchLearningPathTopic } from './fetchLearningPathTopic'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -29,7 +29,7 @@ describe('fetchLearningPathElement has expected behaviour', () => {
     const studentId = 1
     const courseId = '2'
 
-    const result = await getLearningPathTopic(userId, lmsUserId, studentId, courseId)
+    const result = await fetchLearningPathTopic(userId, lmsUserId, studentId, courseId)
 
     expect(fetch).toHaveBeenCalledWith(
       `${getConfig().BACKEND}/user/${userId}/${lmsUserId}/student/${studentId}/course/${courseId}/topic`,
@@ -50,7 +50,7 @@ describe('fetchLearningPathElement has expected behaviour', () => {
     const studentId = 1
     const courseId = undefined // Set to null to simulate a missing value
 
-    await expect(getLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow('course_id is required')
+    await expect(fetchLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow('course_id is required')
   })
 
   it('should throw a specific error when the response has an error variable', async () => {
@@ -71,7 +71,7 @@ describe('fetchLearningPathElement has expected behaviour', () => {
     const studentId = 1
     const courseId = '2'
 
-    await expect(getLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow(`${expectedMessage}`)
+    await expect(fetchLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
@@ -89,6 +89,6 @@ describe('fetchLearningPathElement has expected behaviour', () => {
     const studentId = 1
     const courseId = '2'
 
-    await expect(getLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow('')
+    await expect(fetchLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow('')
   })
 })

@@ -167,7 +167,7 @@ const mockDataServices: MockDataServices = {
       ]
     })
   ),
-  getLearningPathTopic: jest.fn(() =>
+  fetchLearningPathTopic: jest.fn(() =>
     Promise.resolve({
       topics: [
         {

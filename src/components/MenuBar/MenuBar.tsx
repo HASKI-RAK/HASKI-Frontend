@@ -75,7 +75,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const [loadingTopics, setLoadingTopics] = useState(true)
   const [topicsPath, setTopicsPath] = useState<Topic[]>([])
   const getUser = usePersistedStore((state) => state.getUser)
-  const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
+  const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
@@ -136,7 +136,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     setAnchorElTopics(event.currentTarget)
     getUser()
       .then((user) => {
-        fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
+        getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
           .then((TopicResponse) => {
             setTopicsPath(TopicResponse.topics)
             setLoadingTopics(false)

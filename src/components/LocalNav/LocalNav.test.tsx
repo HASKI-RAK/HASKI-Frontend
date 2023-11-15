@@ -575,9 +575,9 @@ describe('useLearningPathTopic', () => {
   })
 
   test('fetch learningPathTopics fails', async () => {
-    mockServices.getLearningPathTopic = jest
+    mockServices.fetchLearningPathTopic = jest
       .fn()
-      .mockImplementationOnce(() => Promise.reject(new Error('getLearningPathTopic failed')))
+      .mockImplementationOnce(() => Promise.reject(new Error('fetchLearningPathTopic failed')))
 
     act(() => {
       const { result } = renderHook(() => useLearningPathTopic('2'))

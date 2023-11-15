@@ -333,7 +333,7 @@ describe('MenuBar', () => {
   })
 
   test('fetching topic throws error ', async () => {
-    mockServices.getLearningPathTopic.mockImplementationOnce(() => {
+    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => {
       throw new Error('Error')
     })
 
