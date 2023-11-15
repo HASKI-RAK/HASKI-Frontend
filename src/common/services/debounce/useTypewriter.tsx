@@ -1,53 +1,70 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Typography, TypographyProps } from '@mui/material'
 
 interface TypewriterProps {
-  text: string;
-  delay: number;
+  text: string
+  delay: number
 }
 
 interface TypewriterState {
-  currentIndex: number;
-  displayedText: string;
+  currentIndex: number
+  displayedText: string
 }
 
-class Typewriter extends Component<TypewriterProps, TypewriterState> {
-  private typewriterInterval: NodeJS.Timeout | null = null;
+class Typewriter2 extends Component<TypewriterProps, TypewriterState> {
+  private typewriterInterval: NodeJS.Timeout | null = null
 
   constructor(props: TypewriterProps) {
-    super(props);
+    super(props)
     this.state = {
       currentIndex: 0,
-      displayedText: '',
-    };
+      displayedText: ''
+    }
   }
 
   componentDidMount() {
-    this.typewriterInterval = setInterval(this.typeCharacter, this.props.delay);
+    this.typewriterInterval = setInterval(this.typeCharacter, this.props.delay)
   }
 
   componentWillUnmount() {
     if (this.typewriterInterval) {
-      clearInterval(this.typewriterInterval);
+      clearInterval(this.typewriterInterval)
     }
   }
 
   typeCharacter = () => {
-    const { text } = this.props;
-    const { currentIndex, displayedText } = this.state;
+    const { text } = this.props
+    const { currentIndex, displayedText } = this.state
 
     if (currentIndex < text.length) {
       this.setState((prevState) => ({
         currentIndex: prevState.currentIndex + 1,
-        displayedText: prevState.displayedText + text[currentIndex],
-      }));
+        displayedText: prevState.displayedText + text[currentIndex]
+      }))
     } else {
-      clearInterval(this.typewriterInterval!);
+      clearInterval(this.typewriterInterval!)
     }
-  };
+  }
 
   render() {
-    return <span>{this.state.displayedText}</span>;
+    return <span>{this.state.displayedText}</span>
   }
 }
 
-export default Typewriter;
+type TypeProps = {
+  children?: React.ReactElement<TypographyProps>
+}
+
+// if props.children.props.children is a string, TypeWriter
+
+const Typewriter = (props: TypeProps) => {
+  props.children?.props.children!
+  return (
+    <>
+      <>{props.children}</>
+      <Typography />
+    </>
+  )
+}
+
+export default Typewriter

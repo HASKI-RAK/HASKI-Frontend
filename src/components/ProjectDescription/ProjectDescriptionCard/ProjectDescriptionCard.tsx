@@ -5,7 +5,7 @@ import {
   useProjectDescriptionCardHookParams,
   ProjectDescriptionCardHookReturn
 } from './ProjectDescriptionCard.hooks'
-import { Typewriter } from '@services'
+// import { Typewriter } from '@services'
 
 /**
  * @prop body - The body text that is displayed on the bottom left side.
@@ -38,7 +38,7 @@ const ProjectDescriptionCard = ({
   ...props
 }: ProjectDescriptionCardProps) => {
   const ref = useRef<HTMLDivElement>(null)
-  
+
   /*
   const { bodyState, headerState, animateBody, animateHeader } = useProjectDescriptionCard()
 
@@ -53,14 +53,13 @@ const ProjectDescriptionCard = ({
   }, [animateBody, animateHeader, props.body, props.header])
   */
 
-  const { bodyState, animateBody } = useProjectDescriptionCard(); // Remove headerState and animateHeader
+  const { bodyState, animateBody } = useProjectDescriptionCard() // Remove headerState and animateHeader
 
   const handleScroll = useCallback(() => {
     if (props.body !== null && typeof props.body === 'string') {
-      animateBody(ref, props.body);
+      animateBody(ref, props.body)
     }
-  }, [animateBody, props.body]);
-
+  }, [animateBody, props.body])
 
   // Starts animation on component mount and continues already started animation.
   useEffect(() => {
@@ -70,7 +69,7 @@ const ProjectDescriptionCard = ({
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [ bodyState, handleScroll])
+  }, [bodyState, handleScroll])
 
   return (
     <div ref={ref} data-testid="projectDescriptionCard">
@@ -79,9 +78,8 @@ const ProjectDescriptionCard = ({
         justifyContent="center"
         sx={{
           mt: '7.5rem',
-          mb: '7.5rem',
-        }}
-      >
+          mb: '7.5rem'
+        }}>
         <Grid item xs={7}>
           <Typography
             variant="h3"
@@ -91,36 +89,28 @@ const ProjectDescriptionCard = ({
                 xs: '17.5rem',
                 sm: '14.063rem',
                 md: '10.625rem',
-                lg: '7.188rem',
+                lg: '7.188rem'
               },
-              pt: '2.5rem',
-            }}
-          >
-            <Typewriter text={props.header!} delay={100} />
+              pt: '2.5rem'
+            }}>
+            {
+              //<Typewriter text={props.header!} delay={100} />
+              props.header!
+            }
           </Typography>
           <Fade in={!!bodyState} easing="linear" timeout={1000}>
-            <Typography
-              align="center"
-              sx={{ pt: '2.5rem', pb: '2.5rem' }}
-              variant="h5"
-            >
+            <Typography align="center" sx={{ pt: '2.5rem', pb: '2.5rem' }} variant="h5">
               {bodyState}
             </Typography>
           </Fade>
         </Grid>
         <Divider flexItem orientation="vertical" />
-        <Grid
-          container
-          item
-          justifyContent="center"
-          sx={{ pt: '7.5rem', pb: '7.5rem' }}
-          xs={4}
-        >
+        <Grid container item justifyContent="center" sx={{ pt: '7.5rem', pb: '7.5rem' }} xs={4}>
           {props.children}
         </Grid>
       </Grid>
     </div>
-  );
-};
+  )
+}
 
 export default memo(ProjectDescriptionCard)

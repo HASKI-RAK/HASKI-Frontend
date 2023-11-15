@@ -1,5 +1,6 @@
-import { useState, RefObject } from 'react'
-import { useDebounce } from '@services'
+import { useState, RefObject, useCallback } from 'react'
+// import { useDebounce } from '@services'
+import { debounce } from '@services'
 
 /**
  * @typedef {Object} useProjectDescriptionStepperHookParams
@@ -79,12 +80,14 @@ export const useProjectDescriptionStepper = (
   }
 
   // Animates body text by setting the bodyState after a short timeout.
-  const fadeInEffect = (body: string[]) => {
-    const bodyTimeout = setTimeout(() => {
-      setBodyState(body)
-    }, 1000)
-    return () => clearTimeout(bodyTimeout)
-  }
+  const fadeInEffect = useCallback(
+    (body: string[]) => {
+      return debounce(() => {
+        setBodyState(body)
+      }, 1000)
+    },
+    [debounce, setBodyState]
+  )
 
   // Animates header text by writing one character at a time into the headerState with a short timeout.
   const typewriterEffect = (header: string) => {

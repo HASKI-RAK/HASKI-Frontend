@@ -1,9 +1,10 @@
 import SearchIcon from '@mui/icons-material/Search'
 import { useCallback, useEffect, memo } from 'react'
 import { Typography, TextField, InputAdornment } from '@common/components'
+import { debounce } from '@services'
 
 // mine -------------------------------------------------
-import {useDebounce} from '@services'
+// import { useDebounce } from '@services'
 // --------------------------------------------------------
 
 /**
@@ -32,7 +33,6 @@ export type SearchbarProps = {
  * @category Logic
  */
 
-/* original
 export const debouncedSearchQuery = (
   event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   setSearchQuery?: (query: string) => void,
@@ -44,14 +44,12 @@ export const debouncedSearchQuery = (
     } = event
 
     setSearchQuery?.(value)
-    console.log("Searchbar.debounceSearchQuery: event.target.value = ", value);
-    console.log("---------------------");
+    console.log('Searchbar.debounceSearchQuery: event.target.value = ', value)
+    console.log('---------------------')
   }, timeout)
 
   return () => clearTimeout(timer)
 }
-/*/
-
 
 /**
  * Searchbar component.
@@ -66,36 +64,28 @@ export const debouncedSearchQuery = (
  * @category Components
  */
 const Searchbar = (props: SearchbarProps) => {
-  
-  /* original
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      console.log("Searchbar.handleChange: event.target.value = ", event.target.value);
-      debouncedSearchQuery(event, props.setSearchQuery, props.timeout)
+      debounce(() => {
+        props.setSearchQuery?.(event.target.value)
+      }, props.timeout)
     },
     [props.setSearchQuery, props.timeout]
   )
-  */
-  
+
   ///* mine -------------------------------------------------
-  const { actualValue, debouncedValue, handleChange } = useDebounce(
-    300,
-    props.setSearchQuery || (() => {})
-  );  //*/--------------------------------------------------------
-  
+  // const { actualValue, debouncedValue, handleChange } = useDebounce(300, props.setSearchQuery || (() => {})) //*/--------------------------------------------------------
+
   return (
     <Typography variant="h4" data-testid="searchbar">
       <TextField
         id="searchbar-textfield"
         fullWidth
         label={props.label}
-        
-        
-        //onChange={handleChange}
-        //mine
-        value={actualValue}
         onChange={handleChange}
-
+        //mine
+        // value={actualValue}
+        //onChange={handleChange}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

@@ -1,4 +1,5 @@
 import { useState, RefObject, useMemo, useCallback } from 'react'
+import { debounce } from '@services'
 
 /**
  * @prop defaultBodyState - The default value for the body state.
@@ -60,11 +61,10 @@ export const useProjectDescriptionCard = (
   // Logic
   // Animates body text by setting the bodyState after a short timeout.
   const fadeInEffect = useCallback(
-    (body: string) => {
-      const bodyTimeout = setTimeout(() => {
-        setBodyState(body)
+    (bodyState: string) => {
+      return debounce(() => {
+        setBodyState(bodyState)
       }, 1000)
-      return () => clearTimeout(bodyTimeout)
     },
     [setBodyState]
   )
@@ -72,10 +72,9 @@ export const useProjectDescriptionCard = (
   // Animates header text by writing one character at a time into the headerState with a short timeout.
   const typewriterEffect = useCallback(
     (header: string) => {
-      const headerTimeout = setTimeout(() => {
+      return debounce(() => {
         setHeaderState(header.slice(0, headerState.length + 1))
       }, 50)
-      return () => clearTimeout(headerTimeout)
     },
     [setHeaderState, headerState]
   )

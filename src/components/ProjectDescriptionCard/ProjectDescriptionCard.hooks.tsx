@@ -1,5 +1,6 @@
-import { useState, RefObject, useEffect } from 'react'
-import { Typewriter } from '@services'
+import { useState, RefObject, useEffect, useCallback } from 'react'
+// import { Typewriter } from '@services'
+import { debounce } from '@services'
 
 /**
  * @typedef {Object} useProjectDescriptionCardHookParams
@@ -87,25 +88,25 @@ export const useProjectDescriptionCard = (
   */
 
   const animateHeader = (ref: RefObject<HTMLDivElement>, header: string) => {
-    const topPosition = ref.current?.getBoundingClientRect().top;
-    const viewportBottom = window.innerHeight;
+    const topPosition = ref.current?.getBoundingClientRect().top
+    const viewportBottom = window.innerHeight
 
     if (topPosition !== null && typeof topPosition === 'number') {
       if (topPosition <= viewportBottom) {
         // Now we don't need to manually manage the typewriter effect.
       }
     }
-  };
-  
-
+  }
 
   // Animates body text by setting the bodyState after a short timeout.
-  const fadeInEffect = (body: string) => {
-    const bodyTimeout = setTimeout(() => {
-      setBodyState(body)
-    }, 1000)
-    return () => clearTimeout(bodyTimeout)
-  }
+  const fadeInEffect = useCallback(
+    (body: string) => {
+      return debounce(() => {
+        setBodyState(body)
+      }, 1000)
+    },
+    [debounce, setBodyState]
+  )
 
   /*/ Animates header text by writing one character at a time into the headerState with a short timeout.
   const typewriterEffect = (header: string) => {
@@ -116,8 +117,6 @@ export const useProjectDescriptionCard = (
   }
   */
 
-
-
   return {
     bodyState,
     //headerState,
@@ -125,7 +124,7 @@ export const useProjectDescriptionCard = (
     //setHeaderState,
     animateBody,
     //animateHeader,
-    fadeInEffect,
+    fadeInEffect
     //typewriterEffect
   } as const
 }

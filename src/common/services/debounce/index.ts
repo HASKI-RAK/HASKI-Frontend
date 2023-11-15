@@ -1,5 +1,2 @@
-
 export { useDebounce } from './useDebounce'
-export { default as Typewriter } from './useTypewriter';
-
-
+export { default as Typewriter } from './useTypewriter'
