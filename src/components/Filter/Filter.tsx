@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, memo } from 'react'
 import {
   Box,
   Checkbox,
@@ -25,11 +25,11 @@ const MenuProps = {
 }
 
 /**
- * @typedef {Object} FilterProps
- * @property {string} [label] - The label text of the filter.
- * @property {string[]} [options] - The options of the filter for the user to select from.
- * @property {string[]} [selectedOptions] - The options that are currently selected.
- * @property {function} [setSelectedOptions] -  The function to set the selected options.
+ * @prop label - The label text of the filter.
+ * @prop options - The options of the filter for the user to select from.
+ * @prop selectedOptions - The options that are currently selected.
+ * @prop setSelectedOptions - The function to set the selected options.
+ * @interface
  */
 type FilterProps = {
   label?: string
@@ -39,20 +39,27 @@ type FilterProps = {
 }
 
 /**
+ * Filter component.
+ *
+ * @param props - Props containing label, options, selectedOptions and setSelectedOptions of the filter.
+ *
+ * @remarks
  * Filter presents a component for the user to select elements from a list of options.
  * It can be used as a standalone component on a page.
- * @param props - Props containing label, options, selectedOptions and setSelectedOptions of the filter.
- * @returns {JSX.Element} - The filter component.
+ *
  * @category Components
  */
 const Filter = (props: FilterProps) => {
   const [open, setOpen] = useState(false)
 
-  const handleChange = useCallback((event: SelectChangeEvent<typeof props.selectedOptions>) => {
-    if (props.setSelectedOptions) {
-      props.setSelectedOptions(event.target.value)
-    }
-  }, [])
+  const handleChange = useCallback(
+    (event: SelectChangeEvent<typeof props.selectedOptions>) => {
+      if (props.setSelectedOptions) {
+        props.setSelectedOptions(event.target.value)
+      }
+    },
+    [props]
+  )
 
   // Renders the selected options as chips.
   const renderValue = useCallback(
@@ -67,29 +74,34 @@ const Filter = (props: FilterProps) => {
   )
 
   return (
-    <FormControl fullWidth>
-      <InputLabel>
-        <Typography>{props.label}</Typography>
-      </InputLabel>
-      <Select
-        multiple
-        value={props.selectedOptions}
-        onClick={() => setOpen(!open)}
-        onChange={handleChange}
-        input={<OutlinedInput label={props.label} />}
-        inputProps={{ 'data-testid': 'filter' }}
-        renderValue={renderValue}
-        MenuProps={MenuProps}>
-        {props.options &&
-          Array.from(props.options).map((option) => (
-            <MenuItem key={option} value={option}>
-              <Checkbox checked={props.selectedOptions && props.selectedOptions.indexOf(option) >= 0} />
-              <ListItemText primary={option} />
-            </MenuItem>
-          ))}
-      </Select>
-    </FormControl>
+    <>
+      {props.selectedOptions && (
+        <FormControl fullWidth>
+          <InputLabel>
+            <Typography>{props.label}</Typography>
+          </InputLabel>
+          <Select
+            id="filter-select"
+            multiple
+            name="selectedOptions"
+            value={props.selectedOptions}
+            onClick={() => setOpen(!open)}
+            onChange={handleChange}
+            input={<OutlinedInput label={props.label} />}
+            inputProps={{ 'data-testid': 'filter', id: 'selectedOptions' }}
+            renderValue={renderValue}
+            MenuProps={MenuProps}>
+            {props.options?.map((option) => (
+              <MenuItem id={option.concat('-menu-item')} key={option} value={option}>
+                <Checkbox checked={props.selectedOptions && props.selectedOptions.indexOf(option) >= 0} />
+                <ListItemText primary={option} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      )}
+    </>
   )
 }
 
-export default Filter
+export default memo(Filter)

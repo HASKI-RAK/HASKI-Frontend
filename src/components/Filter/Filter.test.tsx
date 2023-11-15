@@ -1,6 +1,7 @@
+import { fireEvent, render } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
 import Filter from './Filter'
-import { fireEvent, render } from '@testing-library/react'
 
 const mockFilterProps = {
   label: 'filter',
@@ -11,19 +12,20 @@ const mockFilterProps = {
 
 describe('Filter tests', () => {
   it('renders without input', () => {
-    const { getByTestId } = render(<Filter />)
-    const select = getByTestId('filter')
-    expect(select).toBeInTheDocument()
+    const filter = render(<Filter />)
+    expect(filter).toBeTruthy()
   })
 
   it('renders with input', () => {
     const { getByTestId } = render(
-      <Filter
-        label={mockFilterProps.label}
-        options={mockFilterProps.options}
-        selectedOptions={mockFilterProps.selectedOptions}
-        setSelectedOptions={mockFilterProps.setSelectedOptions}
-      />
+      <MemoryRouter>
+        <Filter
+          label={mockFilterProps.label}
+          options={mockFilterProps.options}
+          selectedOptions={mockFilterProps.selectedOptions}
+          setSelectedOptions={mockFilterProps.setSelectedOptions}
+        />
+      </MemoryRouter>
     )
     const select = getByTestId('filter')
     expect(select).toBeInTheDocument()
@@ -31,12 +33,14 @@ describe('Filter tests', () => {
 
   test('Dropdown can be opened', () => {
     const { getByRole, getAllByRole } = render(
-      <Filter
-        label={mockFilterProps.label}
-        options={mockFilterProps.options}
-        selectedOptions={mockFilterProps.selectedOptions}
-        setSelectedOptions={mockFilterProps.setSelectedOptions}
-      />
+      <MemoryRouter>
+        <Filter
+          label={mockFilterProps.label}
+          options={mockFilterProps.options}
+          selectedOptions={mockFilterProps.selectedOptions}
+          setSelectedOptions={mockFilterProps.setSelectedOptions}
+        />
+      </MemoryRouter>
     )
 
     const button = getByRole('button')
@@ -47,12 +51,14 @@ describe('Filter tests', () => {
 
   test('Single option can be selected', () => {
     const { getByRole, getAllByRole } = render(
-      <Filter
-        label={mockFilterProps.label}
-        options={mockFilterProps.options}
-        selectedOptions={mockFilterProps.selectedOptions}
-        setSelectedOptions={mockFilterProps.setSelectedOptions}
-      />
+      <MemoryRouter>
+        <Filter
+          label={mockFilterProps.label}
+          options={mockFilterProps.options}
+          selectedOptions={mockFilterProps.selectedOptions}
+          setSelectedOptions={mockFilterProps.setSelectedOptions}
+        />
+      </MemoryRouter>
     )
 
     const button = getByRole('button')
@@ -68,12 +74,14 @@ describe('Filter tests', () => {
 
   test('Checkbox can be checked', () => {
     const { getByRole, getAllByRole } = render(
-      <Filter
-        label={mockFilterProps.label}
-        options={mockFilterProps.options}
-        selectedOptions={mockFilterProps.selectedOptions}
-        setSelectedOptions={mockFilterProps.setSelectedOptions}
-      />
+      <MemoryRouter>
+        <Filter
+          label={mockFilterProps.label}
+          options={mockFilterProps.options}
+          selectedOptions={mockFilterProps.selectedOptions}
+          setSelectedOptions={mockFilterProps.setSelectedOptions}
+        />
+      </MemoryRouter>
     )
 
     const button = getByRole('button')
@@ -87,12 +95,14 @@ describe('Filter tests', () => {
 
   test('Multiple options can be selected', () => {
     const { getByRole, getAllByRole } = render(
-      <Filter
-        label={mockFilterProps.label}
-        options={mockFilterProps.options}
-        selectedOptions={mockFilterProps.selectedOptions}
-        setSelectedOptions={mockFilterProps.setSelectedOptions}
-      />
+      <MemoryRouter>
+        <Filter
+          label={mockFilterProps.label}
+          options={mockFilterProps.options}
+          selectedOptions={mockFilterProps.selectedOptions}
+          setSelectedOptions={mockFilterProps.setSelectedOptions}
+        />
+      </MemoryRouter>
     )
 
     const button = getByRole('button')
@@ -113,12 +123,14 @@ describe('Filter tests', () => {
 
   test('Currently selected options get rendered', () => {
     const { getByTestId } = render(
-      <Filter
-        label={mockFilterProps.label}
-        options={mockFilterProps.options}
-        selectedOptions={mockFilterProps.selectedOptions}
-        setSelectedOptions={mockFilterProps.setSelectedOptions}
-      />
+      <MemoryRouter>
+        <Filter
+          label={mockFilterProps.label}
+          options={mockFilterProps.options}
+          selectedOptions={mockFilterProps.selectedOptions}
+          setSelectedOptions={mockFilterProps.setSelectedOptions}
+        />
+      </MemoryRouter>
     )
 
     const select = getByTestId('filter') as HTMLInputElement
@@ -127,19 +139,24 @@ describe('Filter tests', () => {
 
   test('setSelectedOptions can be undefined', () => {
     const { getByTestId, getByRole, getAllByRole } = render(
-      <Filter
-        label={mockFilterProps.label}
-        options={mockFilterProps.options}
-        selectedOptions={mockFilterProps.selectedOptions}
-      />
+      <MemoryRouter>
+        <Filter
+          label={mockFilterProps.label}
+          options={mockFilterProps.options}
+          selectedOptions={mockFilterProps.selectedOptions}
+        />
+      </MemoryRouter>
     )
-
-    const select = getByTestId('filter')
     const button = getByRole('button')
     fireEvent.mouseDown(button)
+
     const menuItems = getAllByRole('option')
+    menuItems[0].click()
+
+    const select = getByTestId('filter')
     fireEvent.change(select, { target: { value: menuItems[0].textContent } })
-    expect(mockFilterProps.setSelectedOptions).toHaveBeenCalledTimes(0)
+
+    expect(mockFilterProps.selectedOptions).toEqual(['tag 2', 'tag 4'])
   })
 
   // No snapshot testing

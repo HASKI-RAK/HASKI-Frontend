@@ -1,5 +1,4 @@
-import { createTheme } from '@mui/material/styles'
-import { yellow, red } from '@mui/material/colors'
+import { createTheme, yellow, red } from '@common/theme'
 
 export const defaultBehavior = {
   boxShadowSize: {
@@ -40,8 +39,8 @@ export const HaskiTheme = createTheme({
   palette: {
     primary: {
       main: yellow[900],
-      dark: yellow[800],
-      light: '#a4dddf'
+      dark: yellow[900],
+      light: yellow[100]
     },
     secondary: {
       main: red[900],
@@ -170,9 +169,17 @@ export const HaskiTheme = createTheme({
     MuiLink: {
       styleOverrides: {
         root: {
-          color: defaultColors.black,
-          '&:hover': {
-            textDecoration: 'underline #FF8E00'
+          outlined: {
+            color: defaultColors.black,
+            '&:hover': {
+              textDecoration: 'underline #FF8E00'
+            }
+          },
+          contained: {
+            color: defaultColors.black,
+            '&:hover': {
+              textDecoration: 'fill #FF8E00'
+            }
           }
         }
       }

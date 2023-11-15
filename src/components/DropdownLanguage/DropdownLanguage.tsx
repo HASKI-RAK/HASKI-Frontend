@@ -1,6 +1,6 @@
 ﻿import { useTranslation } from 'react-i18next'
-import { Select } from '@common/components'
-import { MenuItem } from '@mui/material'
+import { Select, MenuItem } from '@common/components'
+import { ForwardedRef, forwardRef } from 'react'
 import log from 'loglevel'
 
 /**
@@ -34,10 +34,9 @@ jest.mock('react-i18next', () => ({
     useTranslation: () => ({t: (key:string) => key})
 }));
 ```
- * @returns {JSX.Element} - The DropdownLanguage component.
+ * @returns - The DropdownLanguage component.
  */
-export const DropdownLanguage = () => {
-  log.setLevel('error')
+const DropdownLanguage = forwardRef((props, ref: ForwardedRef<HTMLDivElement | null>) => {
   const { i18n } = useTranslation()
   const startingLanguage = localStorage.getItem('i18nextLng') as string
   const onClickLanguageChange = (e: { target: { value: string } }) => {
@@ -51,8 +50,9 @@ export const DropdownLanguage = () => {
   }
 
   return (
-    <div>
+    <div {...props} ref={ref}>
       <Select
+        id="dropdown-language-button"
         className="LanguageDropdown"
         autoWidth={true}
         value={startingLanguage}
@@ -63,4 +63,7 @@ export const DropdownLanguage = () => {
       </Select>
     </div>
   )
-}
+})
+// eslint-disable-next-line immutable/no-mutation
+DropdownLanguage.displayName = 'DropdownLanguage'
+export default DropdownLanguage

@@ -1,11 +1,16 @@
-import '@testing-library/jest-dom'
-import { render } from '@testing-library/react'
 import ProjectDescription from './ProjectDescription'
+import { MemoryRouter } from 'react-router-dom'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
-describe('Test the ProjectDescription page', () => {
-  it('should render the ProjectDescription page', () => {
-    const projectDescription = render(<ProjectDescription />)
-
-    expect(projectDescription.container.querySelectorAll('span').length).toEqual(2)
+describe('ProjectDescription tests', () => {
+  test('ProjectDescription renders', () => {
+    const { getAllByTestId } = render(
+      <MemoryRouter>
+        <ProjectDescription />
+      </MemoryRouter>
+    )
+    expect(getAllByTestId('projectDescriptionCard').length).toBe(5)
+    expect(getAllByTestId('projectDescriptionStepper').length).toBe(2)
   })
 })

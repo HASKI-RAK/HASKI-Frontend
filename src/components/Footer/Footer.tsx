@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Container, Box, Grid, Link, Typography } from '@common/components'
 
 /**
- * The footer component. *
+ * Sticks to the bottom of the page and is always visible.
  *
  * @remarks
  * It contains the footer of the application and is used in the main frame.
@@ -23,7 +23,7 @@ const Footer = () => {
     { name: [t('pages.projectinformation')], link: '/projectinformation' },
     { name: [t('pages.contact')], link: '/contact' },
     { name: [t('pages.imprint')], link: '/imprint' },
-    { name: [t('pages.privacypolicy')], link: '/privacypolicy' }
+    { name: [t('pages.PrivacyPolicy')], link: '/privacypolicy' }
   ]
 
   return (
@@ -46,6 +46,7 @@ const Footer = () => {
               {footerComponents.map((component) => (
                 <React.Fragment key={component.link}>
                   <Link
+                    id={component.link.concat('-link')}
                     marginX="0.2em"
                     component="button"
                     variant="subtitle1"

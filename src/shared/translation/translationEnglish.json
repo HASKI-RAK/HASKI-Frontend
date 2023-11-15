@@ -1,145 +1,35 @@
 {
+  "Activities": "Activities",
+  "and": "and",
   "Back": "Back",
-  "components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText": "Questionnaire Results",
-  "components.QuestionnaireResults.ResultDescriptionILS.Active.moderate": "Your information processing tends to be active. It is recommended that you always create opportunities for yourself to process new information in the course of practical experiments and discussions with fellow students. This tends to help you learn faster.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Active.strong": "Your information processing is preferably active. It is recommended that you always create opportunities for yourself to process new information in the course of practical experiments and discussions with fellow students. This tends to help you learn faster.",
-  "components.QuestionnaireResults.ResultDescriptionILS.EverythingBalanced": "You do not show a clear tendency in any of the dimensions. This indicates that you can make use of both poles of the dimensions in the processing, perception, presentation and organization of information. According to the ILS results, you have the skillset to adapt flexibly here. The recommendation is therefore to continue learning in this balance.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Global.moderate": "With regard to the organization of information, there is a significant tendency for a global approach. This results in the recommendation to first obtain an overview of the context and the entirety of the topic when learning new content.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Global.strong": "With regard to the organization of information, there is a significant preference for a global approach. This results in the recommendation to first obtain an overview of the context and the entirety of the topic when learning new content.",
-  "components.QuestionnaireResults.ResultDescriptionILS.ILSResults": "ILS Results",
-  "components.QuestionnaireResults.ResultDescriptionILS.Intuitive.moderate": "You prefer rather an intuitive perception of information. It seems beneficial that you first learn new information based on principles and ideas. Exposure to additional theoretical literature can improve your understanding.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Intuitive.strong": "You prefer an intuitive perception of information. It seems beneficial that you first learn new information based on principles and ideas. Exposure to additional theoretical literature can improve your understanding.",
-  "components.QuestionnaireResults.ResultDescriptionILS.ListKResults": "List K Results",
-  "components.QuestionnaireResults.ResultDescriptionILS.Reflective.moderate": "Your information processing tends to be reflective. It is recommended that you always create opportunities for yourself to think intensively about new information before you put it into practice or experiment with it. This tends to help you learn faster.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Reflective.strong": "Your information processing is preferably reflective. It is recommended that you always create opportunities for yourself to think intensively about new information before you put it into practice or experiment with it. This tends to help you learn faster.",
-  "components.QuestionnaireResults.ResultDescriptionILS.RemainingDimensions": "Remaining dimensions",
-  "components.QuestionnaireResults.ResultDescriptionILS.Sensory.moderate": "You prefer rather a sensory perception of information. It seems beneficial that you learn new information based on facts or experiments. Dealing with examples you have thought up yourself can increase your learning speed.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Sensory.strong": "You prefer a sensory perception of information. It seems beneficial that you learn new information based on facts or experiments. Dealing with examples you have thought up yourself can increase your learning speed.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Sequential.moderate": "With regard to the organization of information, there is a significant tendency for sequential learning. This results in the recommendation to first create a hierarchical structure of the content when learning new content and then to work through it step by step.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Sequential.strong": "With regard to the organization of information, there is a significant preference for sequential learning. This results in the recommendation to first create a hierarchical structure of the content when learning new content and then to work through it step by step.",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.1": "one",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.2": "two",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.3": "three",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation": "organisation",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part1": "In",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part2": "of the four dimensions, you do not show any clear tendency. This indicates that you are not sure about the",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part3": "of information can make use of both poles of the dimension. According to the ILS result, you have the skillset to adapt flexibly here.",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception": "perception",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation": "presentation",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing": "processing",
-  "components.QuestionnaireResults.ResultDescriptionILS.Verbal.moderate": "In terms of presenting information, you tend to prefer a verbal focus. When dealing with difficult and complex content, you may find it helpful to verbalize it using your own written summaries or audio recordings to facilitate their learning.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Verbal.strong": "In terms of presenting information, you prefer a verbal focus. When dealing with difficult and complex content, you may find it helpful to verbalize it using your own written summaries or audio recordings to facilitate their learning.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Visual.moderate": "In terms of presenting information, you tend to prefer a visual focus. When dealing with difficult and complex content, it may help you to visualize it using graphs, charts, or the like to facilitate your learning.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Visual.strong": "In terms of presenting information, you prefer a visual focus. When dealing with difficult and complex content, it may help you to visualize it using graphs, charts, or the like to facilitate your learning.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. It would probably be beneficial if you try to create a suitable environment with as few disruptive factors as possible to make your learning more effective. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learningEnvironment Below3.Title": "Attention and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learningWithClassmates Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. It would probably be beneficial if you try to create a suitable environment with as few disruptive factors as possible to make your learning more effective. It would be beneficial if you try to find a study group with fellow student friends. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learningWithClassmates Below3.Title": "Attention and learning with classmates have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learnWithClassmates && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learnWithClassmates && learningEnvironment Below3.Title": "Attention, learning with classmates and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you should try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch && learningEnvironment Below3.Title": "Attention, learning with classmates, literature research and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch Below3.Title": "Attention, learning with classmates and literature research have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && literatureResearch && learningEnvironment Below3.Title": "Attention, literature research and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && literatureResearch Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. It would probably be beneficial if you try to create a suitable environment with as few disruptive factors as possible to make your learning more effective. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && literatureResearch Below3.Title": "Attention and literature research have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learningEnvironment Below3.Title": "Attention, time and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates && learningEnvironment Below3.Title": "Attention, time, learning with classmates and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch && learningEnvironment Below3.Title": "Attention, time, learning with classmates, literature research and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch Below3.Title": "Attention, time, learning with classmates and literature research have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective. It would be beneficial if you try to find a study group with fellow student friends. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates Below3.Title": "Attention, time and learning with classmates have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && literatureResearch && learningEnvironment Below3.Title": "Attention, time, literature research and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && literatureResearch Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && literatureResearch Below3.Title": "Attention, time and literature research have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time Below3.Title": "Attention and time have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention Below3.Description": "Regarding the management of internal resources, it can be seen that you find it difficult to focus. It would probably be good if you try to create a suitable environment with as few disruptive factors as possible to make your learning more effective.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention Below3.Title": "Attention has a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part1": "In terms of cognitive strategies, more intensive use would be beneficial to better understand and penetrate the learning content. Specifically, an increased",
-  "components.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part2": "of learning content may be useful for you.",
-  "components.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Description": "The LIST-K is basically about helping you look at your own learning strategies. Scores of 3 or higher indicate that, from your point of view, you use the respective strategy at least sometimes.",
-  "components.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Title": "General description of the LIST-K",
-  "components.QuestionnaireResults.ResultDescriptionListK.learningEnvironment Below3.Description": "In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.learningEnvironment Below3.Title": "Learning environment has a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates && learningEnvironment Below3.Description": "It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates && learningEnvironment Below3.Title": "Learning with classmates and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you should try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates && literatureResearch && learningEnvironment Below3.Title": "Learning with classmates, literature research and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates && literatureResearch Below3.Description": "It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates && literatureResearch Below3.Title": "Learning with classmates and literature research have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates Below3.Description": "It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives.",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates Below3.Title": "Learning with classmates has a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.literatureResearch && learningEnvironment Below3.Description": "To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.literatureResearch && learningEnvironment Below3.Title": "Literature research and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.literatureResearch Below3.Description": "To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.literatureResearch Below3.Title": "Literature research has a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Goals & Plans": "plan",
-  "components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Part1": "In terms of metacognitive strategies, it is recommended that you make the effort to frequently",
-  "components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Regulate": "reflect",
-  "components.QuestionnaireResults.ResultDescriptionListK.Score": "Score",
-  "components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3.2": "In your case, it appears that the use of learning strategies can still be improved in two areas in particular.",
-  "components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3.3": "In your case, it appears that the use of learning strategies can still be improved in three areas in particular.",
-  "components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3.4": "In your case, it appears that the use of learning strategies can still be improved in four areas in particular.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learningEnvironment Below3.Title": "Time and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates && learningEnvironment Below3.Title": "Time, learning with classmates and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates && literatureResearch && learningEnvironment Below3.Title": "Time, learning with classmates, literature research and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates && literatureResearch Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates && literatureResearch Below3.Title": "Time, learning with classmates and literature research have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective. It would be beneficial if you try to find a study group with fellow student friends. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates Below3.Title": "Time and learning with classmates have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && literatureResearch && learningEnvironment Below3.Title": "Time, literature research and learning environment have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && literatureResearch Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && literatureResearch Below3.Title": "Time and literature research have a value below 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently not taking enough time for your learning. It would probably have a positive effect if you tried to create clear learning periods for yourself in order to make your learning more effective.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time Below3.Title": "Time has a value below 3",
-  "components.QuestionnaireResults.TableILS.Active": "Active",
-  "components.QuestionnaireResults.TableILS.balanced": "balanced",
-  "components.QuestionnaireResults.TableILS.Dimension": "Dimension",
-  "components.QuestionnaireResults.TableILS.Global": "Global",
-  "components.QuestionnaireResults.TableILS.Interpretation": "Interpretation",
-  "components.QuestionnaireResults.TableILS.Intuitive": "Intuitive",
-  "components.QuestionnaireResults.TableILS.moderate": "moderate",
-  "components.QuestionnaireResults.TableILS.Reflective": "Reflective",
-  "components.QuestionnaireResults.TableILS.Score": "Score",
-  "components.QuestionnaireResults.TableILS.Sensory": "Sensory",
-  "components.QuestionnaireResults.TableILS.Sequential": "Sequential",
-  "components.QuestionnaireResults.TableILS.strong": "strong",
-  "components.QuestionnaireResults.TableILS.Verbal": "Verbal",
-  "components.QuestionnaireResults.TableILS.Visual": "Visual",
-  "components.QuestionnaireResults.TableListK.Attention": "Attention",
-  "components.QuestionnaireResults.TableListK.Cognitive strategies": "Cognitive strategies",
-  "components.QuestionnaireResults.TableListK.Control": "Control",
-  "components.QuestionnaireResults.TableListK.Critical review": "Critical review",
-  "components.QuestionnaireResults.TableListK.Effort": "Effort",
-  "components.QuestionnaireResults.TableListK.Elaborate": "Elaborate",
-  "components.QuestionnaireResults.TableListK.External resource management strategies": "External resource management strategies",
-  "components.QuestionnaireResults.TableListK.Factors & subscales": "Factors & subscales",
-  "components.QuestionnaireResults.TableListK.Goals & plans": "Goals & plans",
-  "components.QuestionnaireResults.TableListK.Internal resource management strategies": "Internal resource management strategies",
-  "components.QuestionnaireResults.TableListK.Learning environment": "Learning environment",
-  "components.QuestionnaireResults.TableListK.Learning with classmates": "Learning with classmates",
-  "components.QuestionnaireResults.TableListK.Literature research": "Literature research",
-  "components.QuestionnaireResults.TableListK.Metacognitive strategies": "Metacognitive strategies",
-  "components.QuestionnaireResults.TableListK.Organize": "Organize",
-  "components.QuestionnaireResults.TableListK.Regulate": "Regulate",
-  "components.QuestionnaireResults.TableListK.Repeat": "Repeat",
-  "components.QuestionnaireResults.TableListK.Score": "Score",
-  "components.QuestionnaireResults.TableListK.Time": "Time",
-  "components.ContactForm.contactform": "Contactform",
-  "components.ContactForm.reportType": "Reporttype",
+  "CloseWebsite": "Your changes might not be saved.",
   "components.ContactForm.briefDescription": "Give a brief description of your request",
+  "components.ContactForm.contactform": "Contactform",
+  "components.ContactForm.design": "Design",
+  "components.ContactForm.error": "Missing description. Please write something.",
+  "components.ContactForm.errorSelect": "Missing topic. Please select something.",
+  "components.ContactForm.learningelement": "Learningelement",
+  "components.ContactForm.reportType": "Reporttype",
+  "components.ContactForm.submit": "Submit",
+  "components.ContactForm.submitError": "The submit function has been called and an error occurred.",
+  "components.ContactForm.topics": [
+    {
+      "value": "le",
+      "label": "Learningelement"
+    },
+    {
+      "value": "ui",
+      "label": "UI"
+    },
+    {
+      "value": "design",
+      "label": "Design"
+    },
+    {
+      "value": "other",
+      "label": "other"
+    }
+  ],
   "components.ContactForm.types": [
     {
       "value": "issue",
@@ -162,89 +52,26 @@
       "label": "other"
     }
   ],
-  "components.ContactForm.topics": [
-    {
-      "value": "le",
-      "label": "Learningelement"
-    },
-    {
-      "value": "ui",
-      "label": "UI"
-    },
-    {
-      "value": "design",
-      "label": "Design"
-    },
-    {
-      "value": "other",
-      "label": "other"
-    }
-  ],
-  "components.ContactForm.submit": "Submit",
-  "components.ContactForm.learningelement": "Learningelement",
   "components.ContactForm.ui": "UI",
-  "components.ContactForm.design": "Design",
-  "components.ContactForm.error": "Missing description. Please write something.",
-  "components.ContactForm.errorSelect": "Missing topic. Please select something.",
-  "components.ContactForm.submitError": "The submit function has been called and an error occurred.",
-  "Dot": ".",
-  "components.Login.login": "Login",
-  "components.Login.orLoginWithMoodle": "or login with Moodle",
-  "components.Login.password": "Password",
-  "components.Login.passwordError": "Please enter a valid password",
-  "components.Login.subtitle": "Please login to continue",
-  "components.Login.title": "HASKI Login",
-  "components.Login.username": "Username",
-  "components.Login.usernameError": "Please enter a valid username",
-
-  "help": "Help",
-  "Next": "Next",
-  "contact": "Contact",
-  "topic": "Topic",
-  "pages.glossary": "Glossary",
-  "pages.home": "Home",
-  "pages.imprint": "Imprint",
-  "pages.login": "Login",
-  "pages.Login.redirect": "You will be redirected after a few seconds",
-  "pages.privacypolicy": "Privacy Policy",
-  "pages.projectinformation": "Project Information",
-  "pages.projectdescription": "Project Description",
-  "pages.Contact.success": "Your feedback has been sent successfully.",
-  "pages.Contact.error": "An error occurred while sending your feedback. Please try again later.",
-  "projectHASKi": "Project HASKI",
-  "tooltip.openGlobalSettings": "Open global settings",
-  "tooltip.openSettings": "Open settings",
-  "components.ProjectDescriptionContent.introductionHeader": "What is HASKI?",
-  "components.ProjectDescriptionContent.introductionBody": "HASKI stands for \"Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt\" (\"Higher education teaching: Adaptive, self-directed, AI-assisted\") and is funded by the Federal Ministry of Education and Research with a project duration until December 2025. HASKI is a collaborative project of three Bavarian universities: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
-  "components.ProjectDescriptionContent.advantagesTeachingHeader": "Benefits for higher education teaching",
-  "components.ProjectDescriptionContent.advantagesTeachingBody": "The HASKI system aims to make a significant contribution to establishing interactive, personalized, and self-directed learning in higher education. Digital media and platforms can provide much more than the current practice of higher education, which is dominated by traditional classroom teaching, even in the context of the pandemic.",
-  "components.ProjectDescriptionContent.advantagesTeachingHeader2": "Application in higher education",
-  "components.ProjectDescriptionContent.advantagesTeachingBody2": "The idea behind HASKI is to harness the potential of AI in the courses offered at University of Applied Sciences Kempten. This is achieved by combining in-person teaching, the learning management system (e.g. Moodle), and the HASKI system. With this we provide a software component that utilizes AI algorithms to assist you in achieving your learning goals.",
-  "components.ProjectDescriptionContent.advantagesLearningHeader": "Benefits for you in your studies",
-  "components.ProjectDescriptionContent.advantagesLearningBody": "The support is enabled by the HASKI system reading your data from Moodle and using an AI algorithm based on this data to suggest a personalized learning path through the learning materials. Of course, the decision about which material you want to work on next remains with you. HASKI also remembers these preferences and adjusts future suggestions to new circumstances.",
-  "components.ProjectDescriptionContent.advantagesLearningHeader2": "What data does HASKI work with?",
-  "components.ProjectDescriptionContent.advantagesLearningBody2": "The data basis consists of questionnaires, individual knowledge levels, evaluated tasks, and behavioral data from Moodle. Through anonymization of data, a conclusion about you by instructors is prevented.",
-  "components.ProjectDescriptionContent.approachesHeader": "What is our approach?",
-  "components.ProjectDescriptionContent.approachesBody": [
-    "National exchange. Publication of scientific contributions. Presentations at german conferences.",
-    "Application of state-of-the-art technology. Combination of learning analytics and artificial intelligence.",
-    "Empirical investigations. Online surveys, evaluation studies, data analysis."
-  ],
-  "components.ProjectDescriptionContent.goalsHeader": "Goals of the HASKI project",
-  "components.ProjectDescriptionContent.goalsBody": [
-    "Improvement and expansion of existing courses in the field of software engineering through the production of high-quality, pedagogically meaningful, and varied learning content",
-    "Comprehensive digital representation of individual students and their characteristics",
-    "Development of an adaptive and AI-based learning system for generating personalized learning path recommendations",
-    "AI-based evaluation of exercises and helpful feedback",
-    "Visualization and preparation of learning analytics to reflect on learning behavior",
-    "Didactically relevant reports for lecturers to improve courses"
-  ],
-  "components.ProjectDescriptionContent.imageSources": "",
-  "components.ProjectDescriptionContent.imageSource1": "Image by katemangostar on Freepik",
-  "components.ProjectDescriptionContent.imageSource2": "Image by natanaelginting on Freepik",
-  "universityKempten": "University of Applied Sciences Kempten",
-  "Activities": "Activities",
-  "and": "and",
+  "components.Course.Button.Topic": "Continue to topic",
+  "components.Home.Button.Course": "Continue to course",
+  "components.Home.NoCourses": "No courses found",
+  "components.Imprint.AsOf": "As of",
+  "components.Imprint.AuthorisedRepresentative": "Authorised representative",
+  "components.Imprint.AuthorisedRepresentative.Title": "Mr.",
+  "components.Imprint.Disclaimer": "Disclaimer",
+  "components.Imprint.Disclaimer.CopyrightAndTrademarkLaw": "Copyright and trademark law",
+  "components.Imprint.Disclaimer.CopyrightAndTrademarkLaw.Text": "Kempten University of Applied Sciences endeavours to respect the copyrights of the graphics, sound files, video clips and texts used in all publications; to use graphics, sound files, video clips and texts produced by itself; or to fall back on licence-free graphics, sound files, video clips and texts. All protected brand names and trademarks used throughout this website are fully protected by the applicable copyright laws pursuant to the intellectual property rights of their duly registered owners. Any simple mention on this site should not be construed to mean that such trademarks are not protected by third-party rights! The copyright for published objects created by the university remains solely with Kempten University of Applied Sciences. Reproduction or use of any such graphics, sound files, video clips or texts in other electronic or printed publications is not permitted without the explicit consent of the university.",
+  "components.Imprint.Disclaimer.DataProtection": "Data protection",
+  "components.Imprint.Disclaimer.DataProtection.Text": "Wherever the website offers the possibility of entering personal or business data (email addresses, names, addresses), any user revealing this information does so explicitly on a voluntary basis. The usage of all services provided is – as far as technically feasible and reasonable – also permitted without providing such details, or by providing anonymised data or a pseudonym. Third parties are not permitted to use the contact details published as part of the imprint or similar citations, such as postal addresses, telephone or fax numbers, and email addresses, for sending any information that has not been explicitly requested. The right is reserved to take legal steps against anyone sending “spam” emails in contravention of this prohibition.",
+  "components.Imprint.Disclaimer.LegalValidityOfDisclaimer": "Legal validity of this disclaimer",
+  "components.Imprint.Disclaimer.LegalValidityOfDisclaimer.Text": "This disclaimer is to be considered part of the website referring to this page. Insofar as parts or any specific phrasing within this text do not, no longer, or do not entirely correspond with the legislation in force, the content and validity of the rest of the document shall remain unaffected.",
+  "components.Imprint.Disclaimer.OnlineContent": "Online content",
+  "components.Imprint.Disclaimer.OnlineContent.Text": "Kempten University of Applied Sciences assumes no responsibility whatsoever for the validity, accuracy, entirety or quality of the information provided. Liability claims against the university relating to either material or conceptual damage caused by using or not using the information supplied, or by using erroneous or incomplete information, are fundamentally excluded, so far as the university cannot be proven to have acted with intent or gross negligence. All offers are non-binding and subject to amendment. Kempten University of Applied Sciences explicitly reserves the right to change, augment or delete parts of pages or the entire offering without special notice, or to temporarily or permanently cease publication.",
+  "components.Imprint.Disclaimer.ReferencesAndLinks": "References and links",
+  "components.Imprint.Disclaimer.ReferencesAndLinks.Text": "The university could only be held liable for direct or indirect references (“hyperlinks”) to third-party websites beyond the university’s realm of responsibility in such case where the university were to know of the content and it were to be technically possible and reasonable to expect it to prevent usage in the case of illicit content. Kempten University of Applied Sciences explicitly declares herewith that no illicit content was identifiable at the time when links were to be created to the pages in question. The university has no influence whatsoever over the current and future design, content or authorship of the linked/referenced pages. It therefore explicitly distances itself herewith from all content on all linked/referenced pages that have been changed since the link was created. This declarative statement applies to all links and references provided throughout the university’s website. The operator of the referenced website is solely responsible for illegal, faulty, or incomplete contents, and especially for damages resulting from the use or non-use of information presented in this way, and not the party that merely refers to the according publication via links.",
+  "components.Imprint.Subtitle": "HASKI Teaching/Learning Platform from the Software Development Lab at Kempten University",
+  "components.Imprint.Title": "Imprint",
   "components.ImprintContent.AsOf": "As of",
   "components.ImprintContent.AuthorisedRepresentative": "Authorised representative",
   "components.ImprintContent.AuthorisedRepresentative.Title": "Mr.",
@@ -263,25 +90,1301 @@
   "components.ImprintContent.Title": "Imprint",
   "components.LocalNav.Topics": "Topics",
   "components.LocalNav.Topics.NoLearningElements": "No learning elements found",
-  "components.login.login": "Login",
-  "components.login.password": "Password",
-  "components.login.passwordError": "Please enter a valid password",
-  "components.login.subtitle": "Please login to continue",
-  "components.login.title": "HASKI Login",
-  "components.login.username": "Username",
-  "components.login.usernameError": "Please enter a valid username",
+  "components.Login.login": "Login",
+  "components.Login.orLoginWithMoodle": "or login with Moodle",
+  "components.Login.password": "Password",
+  "components.Login.passwordError": "Please enter a valid password",
+  "components.Login.subtitle": "Please login to continue",
+  "components.Login.title": "HASKI Login",
+  "components.Login.username": "Username",
+  "components.Login.usernameError": "Please enter a valid username",
+  "components.Menubar.CloseDialog": "Are you sure you want to close the Questionnaire? Unsent answers will not be saved.",
+  "components.MenuBar.Profile.Login": "Login",
   "components.MenuBar.Profile.Logout": "Logout",
   "components.MenuBar.TopicButton": "Topics",
+  "components.ProjectDescriptionContent.advantagesLearningBody": "The support is enabled by the HASKI system reading your data from Moodle and using an AI algorithm based on this data to suggest a personalized learning path through the learning materials. Of course, the decision about which material you want to work on next remains with you. HASKI also remembers these preferences and adjusts future suggestions to new circumstances.",
+  "components.ProjectDescriptionContent.advantagesLearningBody2": "The data basis consists of questionnaires, individual knowledge levels, evaluated tasks, and behavioral data from Moodle. Through anonymization of data, a conclusion about you by instructors is prevented.",
+  "components.ProjectDescriptionContent.advantagesLearningHeader": "Benefits for you in your studies",
+  "components.ProjectDescriptionContent.advantagesLearningHeader2": "What data does HASKI work with?",
+  "components.ProjectDescriptionContent.advantagesTeachingBody": "The HASKI system aims to make a significant contribution to establishing interactive, personalized, and self-directed learning in higher education. Digital media and platforms can provide much more than the current practice of higher education, which is dominated by traditional classroom teaching, even in the context of the pandemic.",
+  "components.ProjectDescriptionContent.advantagesTeachingBody2": "The idea behind HASKI is to harness the potential of AI in the courses offered at University of Applied Sciences Kempten. This is achieved by combining in-person teaching, the learning management system (e.g. Moodle), and the HASKI system. With this we provide a software component that utilizes AI algorithms to assist you in achieving your learning goals.",
+  "components.ProjectDescriptionContent.advantagesTeachingHeader": "Benefits for higher education teaching",
+  "components.ProjectDescriptionContent.advantagesTeachingHeader2": "Application in higher education",
+  "components.ProjectDescriptionContent.approachesBody": [
+    "National exchange. Publication of scientific contributions. Presentations at german conferences.",
+    "Application of state-of-the-art technology. Combination of learning analytics and artificial intelligence.",
+    "Empirical investigations. Online surveys, evaluation studies, data analysis."
+  ],
+  "components.ProjectDescriptionContent.approachesHeader": "What is our approach?",
+  "components.ProjectDescriptionContent.goalsBody": [
+    "Improvement and expansion of existing courses in the field of software engineering through the production of high-quality, pedagogically meaningful, and varied learning content",
+    "Comprehensive digital representation of individual students and their characteristics",
+    "Development of an adaptive and AI-based learning system for generating personalized learning path recommendations",
+    "AI-based evaluation of exercises and helpful feedback",
+    "Visualization and preparation of learning analytics to reflect on learning behavior",
+    "Didactically relevant reports for lecturers to improve courses"
+  ],
+  "components.ProjectDescriptionContent.goalsHeader": "Goals of the HASKI project",
+  "components.ProjectDescriptionContent.imageSource1": "Image by katemangostar on Freepik",
+  "components.ProjectDescriptionContent.imageSource2": "Image by natanaelginting on Freepik",
+  "components.ProjectDescriptionContent.imageSources": "",
+  "components.ProjectDescriptionContent.introductionBody": "HASKI stands for \"Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt\" (\"Higher education teaching: Adaptive, self-directed, AI-assisted\") and is funded by the Federal Ministry of Education and Research with a project duration until December 2025. HASKI is a collaborative project of three Bavarian universities: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
+  "components.ProjectDescriptionContent.introductionHeader": "What is HASKI?",
+  "components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions": [
+    [
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-1",
+        "questionLabel": "AR_1_F1",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-2",
+        "questionLabel": "SI_1_F2",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-3",
+        "questionLabel": "VV_1_F3",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-3.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-3.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-4",
+        "questionLabel": "SG_1_F4",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-5",
+        "questionLabel": "AR_2_F5",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-5.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-5.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-6",
+        "questionLabel": "SI_2_F6",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-6.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-6.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-7",
+        "questionLabel": "VV_2_F7",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-8",
+        "questionLabel": "SG_2_F8",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9",
+        "questionLabel": "AR_3_F9",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-10",
+        "questionLabel": "SI_3_F10",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-10.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-10.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-11",
+        "questionLabel": "VV_3_F11",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-11.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-11.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-12",
+        "questionLabel": "SG_3_F12",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-12.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-12.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-13",
+        "questionLabel": "AR_4_F13",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-14",
+        "questionLabel": "SI_4_F14",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-15",
+        "questionLabel": "VV_4_F15",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-15.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-15.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-16",
+        "questionLabel": "SG_4_F16",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-16.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-16.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-17",
+        "questionLabel": "AR_5_F17",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-17.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-17.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-18",
+        "questionLabel": "SI_5_F18",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-18.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-18.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-19",
+        "questionLabel": "VV_5_F19",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-20",
+        "questionLabel": "SG_5_F20",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-20.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-20.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-21",
+        "questionLabel": "AR_6_F21",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-21.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-21.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-22",
+        "questionLabel": "SI_6_F22",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-22.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-22.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-23",
+        "questionLabel": "VV_6_F23",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-23.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-23.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-24",
+        "questionLabel": "SG_6_F24",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-24.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-24.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-25",
+        "questionLabel": "AR_7_F25",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-25.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-25.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-26",
+        "questionLabel": "SI_7_F26",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-26.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-26.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-27",
+        "questionLabel": "VV_7_F27",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-27.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-27.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-28",
+        "questionLabel": "SG_7_F28",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-28.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-28.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-29",
+        "questionLabel": "AR_8_F29",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-29.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-29.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-30",
+        "questionLabel": "SI_8_F30",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-30.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-30.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-31",
+        "questionLabel": "VV_8_F31",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-31.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-31.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-32",
+        "questionLabel": "SG_8_F32",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-32.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-32.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-33",
+        "questionLabel": "AR_9_F33",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-33.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-33.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-34",
+        "questionLabel": "SI_9_F34",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-34.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-34.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-35",
+        "questionLabel": "VV_9_F35",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-35.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-35.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-36",
+        "questionLabel": "SG_9_F36",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-36.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-36.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-37",
+        "questionLabel": "AR_10_F37",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-37.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-37.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-38",
+        "questionLabel": "SI_10_F38",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-38.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-38.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-39",
+        "questionLabel": "VV_10_F39",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-39.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-39.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-40",
+        "questionLabel": "SG_10_F40",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-40.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-40.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-41",
+        "questionLabel": "AR_11_F41",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-41.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-41.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-42",
+        "questionLabel": "SI_11_F42",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-42.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-42.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-43",
+        "questionLabel": "VV_11_F43",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-43.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-43.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-44",
+        "questionLabel": "SG_11_F44",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-44.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-44.2"
+      }
+    ]
+  ],
+  "components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction": "Following this you will be asked questions that pertain to your style of information processing and organization, perception, and preferred presentation.  For each question, pick one of the two options that fits you best. If both or neither of the response options apply to you, then choose the one that tends to apply more often. These questions are based on the Index of Learning Styles (Felder & Solomon 1991).",
+  "components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions": [
+    [
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9",
+        "questionLabel": "AR_3_F9",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-2",
+        "questionLabel": "SI_1_F2",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-7",
+        "questionLabel": "VV_2_F7",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-4",
+        "questionLabel": "SG_1_F4",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-13",
+        "questionLabel": "AR_4_F13",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-14",
+        "questionLabel": "SI_4_F14",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-19",
+        "questionLabel": "VV_5_F19",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-8",
+        "questionLabel": "SG_2_F8",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-21",
+        "questionLabel": "AR_6_F21",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-21.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-21.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-26",
+        "questionLabel": "SI_7_F26",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-26.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-26.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-27",
+        "questionLabel": "VV_7_F27",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-27.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-27.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-16",
+        "questionLabel": "SG_4_F16",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-16.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-16.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-25",
+        "questionLabel": "AR_7_F25",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-25.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-25.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-38",
+        "questionLabel": "SI_10_F38",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-38.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-38.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-39",
+        "questionLabel": "VV_10_F39",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-39.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-39.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-40",
+        "questionLabel": "SG_10_F40",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-40.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-40.2"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-29",
+        "questionLabel": "AR_8_F29",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-29.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-29.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-42",
+        "questionLabel": "SI_11_F42",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-42.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-42.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-43",
+        "questionLabel": "VV_11_F43",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-43.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-43.2"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-44",
+        "questionLabel": "SG_11_F44",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-44.1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-44.2"
+      }
+    ]
+  ],
+  "components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions": [
+    [
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1",
+        "questionLabel": "org1_f1",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-2",
+        "questionLabel": "org2_f2",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-3",
+        "questionLabel": "org3_f3",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-4",
+        "questionLabel": "elab1_f4",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-5",
+        "questionLabel": "elab2_f5",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-6",
+        "questionLabel": "elab3_f6",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-7",
+        "questionLabel": "crit_rev1_f7",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-8",
+        "questionLabel": "crit_rev2_f8",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-9",
+        "questionLabel": "crit_rev3_f9",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-10",
+        "questionLabel": "rep1_f10",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-11",
+        "questionLabel": "rep2_f11",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-12",
+        "questionLabel": "rep3_f12",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-13",
+        "questionLabel": "goal_plan1_f13",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-14",
+        "questionLabel": "goal_plan2_f14",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-15",
+        "questionLabel": "goal_plan3_f15",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-16",
+        "questionLabel": "con1_f16",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-17",
+        "questionLabel": "con2_f17",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-18",
+        "questionLabel": "con3_f18",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-19",
+        "questionLabel": "reg1_f19",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-20",
+        "questionLabel": "reg2_f20",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-21",
+        "questionLabel": "reg3_f21",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-22",
+        "questionLabel": "att1_f22",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-23",
+        "questionLabel": "att2_f23",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-24",
+        "questionLabel": "att3_f24",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-25",
+        "questionLabel": "eff1_f25",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-26",
+        "questionLabel": "eff2_f26",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-27",
+        "questionLabel": "eff3_f27",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-28",
+        "questionLabel": "time1_f28",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-29",
+        "questionLabel": "time2_f29",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-30",
+        "questionLabel": "time3_f30",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-31",
+        "questionLabel": "lrn_w_cls1_f31",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-32",
+        "questionLabel": "lrn_w_cls2_f32",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-33",
+        "questionLabel": "lrn_w_cls3_f33",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-34",
+        "questionLabel": "lit_res1_f34",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-35",
+        "questionLabel": "lit_res2_f35",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      }
+    ],
+    [
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-36",
+        "questionLabel": "lit_res3_f36",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-37",
+        "questionLabel": "lrn_env1_f37",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-38",
+        "questionLabel": "lrn_env2_f38",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      },
+      {
+        "question": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-39",
+        "questionLabel": "lrn_env3_f39",
+        "answer1": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1",
+        "answer2": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2",
+        "answer3": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3",
+        "answer4": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4",
+        "answer5": "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5"
+      }
+    ]
+  ],
+  "components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction": "Following this you will be asked questions about what learning strategies you use. You will find a list of different learning activities. Please indicate how frequently each activity occurs for you. You can rate your answers from very rarely (1) to very often (5). The questions presented are based on the LIST-K (Klingsieck, 2019), which is a shortened version of the LIST (Wild & Schiefele, 1994).",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.1": "have tried it.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.2": "have thought about it.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-10.1": "learn facts.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-10.2": "learn concepts.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-11.1": "examine the pictures and diagrams carefully.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-11.2": "focus on the written text.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-12.1": "I usually work step by step towards the solution.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-12.2": "I often see only the solutions but then have difficulty finding the steps to get there.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.1": "I have usually gotten to know many of the other students.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.2": "I have rarely gotten to know many of the other students.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.1": "teaches me new facts or shows me how to do something.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.2": "gives me new ideas to think about.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-15.1": "use many diagrams to present content.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-15.2": "take a lot of time to explain.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-16.1": "I think about the events and try to put them together to find the themes.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-16.2": "I know what the themes are after I finish reading and then have to go back to find the events that illustrate them.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-17.1": "start working on the solution right away.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-17.2": "try to fully understand the assignment first.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-18.1": "certainty.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-18.2": "theory.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.1": "see.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.2": "hear.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1": "imaginative.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.2": "innovative.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-20.1": "presents the material in clear, building steps.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-20.2": "gives me an overall picture and relates the material to other topics.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-21.1": "in a study group.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-21.2": "alone.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-22.1": "paying careful attention to the details of my work.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-22.2": "being creative in how I do my work.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-23.1": "a map.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-23.2": "written instructions.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-24.1": "at a fairly steady pace. If I study hard, I will eventually get it.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-24.2": "in bursts. I am totally confused and then suddenly it all makes sense.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-25.1": "try things out.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-25.2": "think about how I will do something.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-26.1": "clearly state what they mean.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-26.2": "deliver things in a creative, interesting way.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-27.1": "the picture.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-27.2": "what the teacher said about it.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-28.1": "focus on the details and miss the big picture.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-28.2": "try to understand the big picture before diving into the details.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-29.1": "that I have done.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-29.2": "that I have thought a lot about.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-3.1": "images.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-3.2": "words.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-30.1": "to find a way and perfect it.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-30.2": "to always come up with new ways to get it done.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-31.1": "tables and graphs.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-31.2": "a text that summarizes the results.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-32.1": "work on the introduction of the essay (thinking or writing) and then proceed.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-32.2": "work on different parts of the essay (thinking or writing) and then arrange them.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-33.1": "conduct a 'group brainstorming' where everyone contributes their ideas.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-33.2": "do an individual brainstorming and then come together as a group to compare ideas.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-34.1": "reasonable.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-34.2": "imaginative.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-35.1": "what they looked like.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-35.2": "what they said about themselves.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-36.1": "to focus on that topic and learn as much as possible about it.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-36.2": "to try to make connections between that topic and related topics.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-37.1": "open-minded.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-37.2": "reserved.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-38.1": "concrete material (facts, data).",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-38.2": "abstract material (concepts, theories).",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-39.1": "watch a movie or series.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-39.2": "read a book or listen to an audiobook.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.1": "understand the details of a topic, but not quite grasp the overall structure.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2": "understand the overall structure, but not quite grasp the details.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-40.1": "somewhat helpful.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-40.2": "very helpful.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-41.1": "sounds good to me.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-41.2": "does not appeal to me.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-42.1": "I tend to repeat all my steps and carefully check my work.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-42.2": "checking my work is tiring and I have to force myself to do it.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-43.1": "very well and in quite detail.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-43.2": "with difficulty and usually with little detail.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-44.1": "I think about the steps of the problem-solving process.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-44.2": "I think about the possible consequences or applications of the solution in different areas.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-5.1": "talk about it.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-5.2": "think about it.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-6.1": "facts and situations from real life.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-6.2": "ideas and theories.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1": "pictures, diagrams, charts, and maps.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.2": "written instructions over oral information.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.1": "understand all the components, I understand the big picture.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.2": "understand the big picture, I understand how the components fit together.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1": "be active and contribute my own ideas.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.2": "hold back and listen.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-1": "I understand something better after I",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-10": "I find it easier to",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-11": "In a document with many pictures and tables, I am likely to",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-12": "When solving mathematical problems,",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-13": "In the courses I have taken so far,",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-14": "When reading non-fiction texts, I prefer something that",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-15": "I like teachers who",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-16": "When analyzing a story or novel,",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-17": "When starting a homework assignment, I am more likely to",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-18": "I prefer the idea of",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-19": "I remember best what I",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-2": "I would rather be perceived as",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-20": "For me, it is more important that a teacher",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-21": "I prefer to learn",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-22": "I would rather be characterized as",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-23": "When given directions to a new place, I prefer",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-24": "I learn",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-25": "I would rather",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-26": "When engaging with content in my free time, I prefer producers who",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-27": "When I see a diagram or sketch in a course, I am most likely to remember",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-28": "When looking at information material, I tend to",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-29": "I can remember something more easily,",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-3": "When I think about what I did yesterday, I tend to remember",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-30": "When I have to fulfill a task, I prefer",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-31": "If someone shows me data, I prefer",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-32": "When I write an academic paper, I am more inclined to",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-33": "When I have to work on a group project, I prefer to",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-34": "I consider it a great compliment to call someone",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-35": "When I meet new people at a party, I am more likely to remember",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-36": "When I learn about a new topic, I prefer",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-37": "I am considered to be more",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-38": "I prefer courses that focus on",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-39": "For my entertainment, I would rather",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-4": "I tend to",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-40": "Some teachers begin their classes with an overview of the content. Such outlines are",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-41": "The idea of group assignments with a shared grade for all group members",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-42": "When I perform longer calculations,",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-43": "I can mentally visualize places I have been to",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-44": "When I solve problems in a group, it is more likely that",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-5": "When I learn something new, it helps me to",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-6": "If I were a teacher, I would prefer to teach a course that focuses on",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-7": "I prefer to receive new information through",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-8": "Once I",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Question-9": "In a study group working on difficult material, I am more likely to",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1": "very rare",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2": "rarely",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3": "sometimes",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4": "often",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5": "very often",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-1": "I am going through my notes and creating an outline with the most important points.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-10": "I memorize a self-created overview of the most important technical terms.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-11": "I memorize rules, technical terms, or formulas.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-12": "I memorize the study material based on scripts or other notes as much as possible.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-13": "I formulate learning goals that I then orient my learning towards.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-14": "I think about how I want to learn before I start learning.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-15": "I do not plan my approach to learning.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-16": "To identify knowledge gaps, I recap the most important content without using my notes for help.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-17": "I ask myself questions about the material to check whether I understand everything.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-18": "If the study material includes questions or tests, I use them to test myself.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-19": "I change my learning technique when I encounter difficulties.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-2": "I create brief summaries of lecture notes, scripts, or literature with the main ideas.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-20": "I change my study plans if I realize that they cannot be implemented.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-21": "If I realize that my approach to learning is not successful, I change it.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-22": "I find it difficult to stay focused.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-23": "I am easily distracted while studying.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-24": "I am easily distracted when studying.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-25": "If I have set a certain amount of material to learn, I try to achieve it.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-26": "I do not give up even if the material is very difficult or complex.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-27": "I also study late at night and on weekends if necessary.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-28": "I stick to a specific schedule when studying.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-29": "I schedule the hours that I spend studying each day through a timetable.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-3": "I compile important technical terms and definitions into my own lists.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-30": "I set a specific duration of time before each study phase.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-31": "I work on texts or tasks together with my fellow students.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-32": "I take time to discuss the material with my fellow students.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-33": "If something is unclear to me, I ask a fellow student for advice.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-34": "If certain content is not yet clear to me, I look for additional literature.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-35": "I gather missing information from various sources (e.g. lecture notes, books, technical journals).",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-36": "If my notes are incomplete, I refer to additional literature.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-37": "I design my environment so that I am as little distracted from learning as possible.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-38": "I always sit in the same place to study.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-39": "My workspace is designed so that I can find everything quickly.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-4": "I try to relate new terms or theories to terms and theories that I already know.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-5": "I come up with concrete examples for specific learning content.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-6": "I relate what I am learning to my own experiences.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-7": "I question whether the text I am working on is really convincing.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-8": "I approach most texts critically.",
+  "components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Question-9": "I also critically examine what I am learning.",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1": "ILS-Questionnaire",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1": "ILS-Questionnaire (Shortened)",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part2": "or",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK": "List-K-Questionnaire",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1": "To see any results you need to complete the",
+  "components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2": "first.",
+  "components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.ButtonText": "Questionnaire Results",
+  "components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.MoreInformation": "I want to know more about the ILS and ListK",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.Active": "Active",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced": "balanced",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension": "Dimension",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.Global": "Global",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.Interpretation": "Interpretation",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.Intuitive": "Intuitive",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate": "moderate",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective": "Reflective",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.Score": "Score",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.Sensory": "Sensory",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.Sequential": "Sequential",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.strong": "strong",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.Verbal": "Verbal",
+  "components.Questionnaire.QuestionnaireResults.Table.TableILS.Visual": "Visual",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention": "Attention",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies": "Cognitive strategies",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Control": "Control",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review": "Critical review",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort": "Effort",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate": "Elaborate",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies": "External resource management strategies",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Factors & subscales": "Factors & subscales",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans": "Goals & plans",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies": "Internal resource management strategies",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment": "Learning environment",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates": "Learning with classmates",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research": "Literature research",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies": "Metacognitive strategies",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize": "Organize",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate": "Regulate",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat": "Repeat",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Score": "Score",
+  "components.Questionnaire.QuestionnaireResults.Table.TableListK.Time": "Time",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Active.moderate": "Your information processing tends to be active. It is recommended that you always create opportunities for yourself to process new information in the course of practical experiments and discussions with fellow students. This tends to help you learn faster.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Active.strong": "Your information processing is preferably active. It is recommended that you always create opportunities for yourself to process new information in the course of practical experiments and discussions with fellow students. This tends to help you learn faster.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.AllDimensions": "All Dimensions",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.EverythingBalanced": "You do not show a clear tendency in any of the dimensions. This indicates that you can make use of both poles of the dimensions in the processing, perception, presentation and organization of information. According to the ILS results, you have the skillset to adapt flexibly here. The recommendation is therefore to continue learning in this balance.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Global.moderate": "With regard to the organization of information, there is a significant tendency for a global approach. This results in the recommendation to first obtain an overview of the context and the entirety of the topic when learning new content.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Global.strong": "With regard to the organization of information, there is a significant preference for a global approach. This results in the recommendation to first obtain an overview of the context and the entirety of the topic when learning new content.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults": "ILS Results",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Intuitive.moderate": "You prefer rather an intuitive perception of information. It seems beneficial that you first learn new information based on principles and ideas. Exposure to additional theoretical literature can improve your understanding.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Intuitive.strong": "You prefer an intuitive perception of information. It seems beneficial that you first learn new information based on principles and ideas. Exposure to additional theoretical literature can improve your understanding.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults": "List K Results",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Reflective.moderate": "Your information processing tends to be reflective. It is recommended that you always create opportunities for yourself to think intensively about new information before you put it into practice or experiment with it. This tends to help you learn faster.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Reflective.strong": "Your information processing is preferably reflective. It is recommended that you always create opportunities for yourself to think intensively about new information before you put it into practice or experiment with it. This tends to help you learn faster.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.RemainingDimensions": "Remaining dimensions",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Sensory.moderate": "You prefer rather a sensory perception of information. It seems beneficial that you learn new information based on facts or experiments. Dealing with examples you have thought up yourself can increase your learning speed.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Sensory.strong": "You prefer a sensory perception of information. It seems beneficial that you learn new information based on facts or experiments. Dealing with examples you have thought up yourself can increase your learning speed.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Sequential.moderate": "With regard to the organization of information, there is a significant tendency for sequential learning. This results in the recommendation to first create a hierarchical structure of the content when learning new content and then to work through it step by step.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Sequential.strong": "With regard to the organization of information, there is a significant preference for sequential learning. This results in the recommendation to first create a hierarchical structure of the content when learning new content and then to work through it step by step.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.1": "one",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.2": "two",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.3": "three",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.organisation": "organisation",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.Part1": "In",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.Part2": "of the four dimensions, you do not show any clear tendency. This indicates that you are not sure about the",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.Part3": "of information can make use of both poles of the dimension. According to the ILS result, you have the skillset to adapt flexibly here.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.perception": "perception",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.presentation": "presentation",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.processing": "processing",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Verbal.moderate": "In terms of presenting information, you tend to prefer a verbal focus. When dealing with difficult and complex content, you may find it helpful to verbalize it using your own written summaries or audio recordings to facilitate their learning.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Verbal.strong": "In terms of presenting information, you prefer a verbal focus. When dealing with difficult and complex content, you may find it helpful to verbalize it using your own written summaries or audio recordings to facilitate their learning.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Visual.moderate": "In terms of presenting information, you tend to prefer a visual focus. When dealing with difficult and complex content, it may help you to visualize it using graphs, charts, or the like to facilitate your learning.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.Visual.strong": "In terms of presenting information, you prefer a visual focus. When dealing with difficult and complex content, it may help you to visualize it using graphs, charts, or the like to facilitate your learning.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. It would probably be beneficial if you try to create a suitable environment with as few disruptive factors as possible to make your learning more effective. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && learningEnvironment Below3.Title": "Attention and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && learningWithClassmates Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. It would probably be beneficial if you try to create a suitable environment with as few disruptive factors as possible to make your learning more effective. It would be beneficial if you try to find a study group with fellow student friends. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && learningWithClassmates Below3.Title": "Attention and learning with classmates have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && learnWithClassmates && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && learnWithClassmates && learningEnvironment Below3.Title": "Attention, learning with classmates and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you should try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch && learningEnvironment Below3.Title": "Attention, learning with classmates, literature research and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch Below3.Title": "Attention, learning with classmates and literature research have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && literatureResearch && learningEnvironment Below3.Title": "Attention, literature research and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && literatureResearch Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently finding it difficult to focus. It would probably be beneficial if you try to create a suitable environment with as few disruptive factors as possible to make your learning more effective. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && literatureResearch Below3.Title": "Attention and literature research have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && learningEnvironment Below3.Title": "Attention, time and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && learnWithClassmates && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && learnWithClassmates && learningEnvironment Below3.Title": "Attention, time, learning with classmates and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch && learningEnvironment Below3.Title": "Attention, time, learning with classmates, literature research and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch Below3.Title": "Attention, time, learning with classmates and literature research have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && learnWithClassmates Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective. It would be beneficial if you try to find a study group with fellow student friends. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && learnWithClassmates Below3.Title": "Attention, time and learning with classmates have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && literatureResearch && learningEnvironment Below3.Title": "Attention, time, literature research and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && literatureResearch Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time && literatureResearch Below3.Title": "Attention, time and literature research have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning and finding it difficult to focus. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention && time Below3.Title": "Attention and time have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention Below3.Description": "Regarding the management of internal resources, it can be seen that you find it difficult to focus. It would probably be good if you try to create a suitable environment with as few disruptive factors as possible to make your learning more effective.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.attention Below3.Title": "Attention has a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.CognitiveStrategies Below3.Part1": "In terms of cognitive strategies, more intensive use would be beneficial to better understand and penetrate the learning content. Specifically, an increased",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.CognitiveStrategies Below3.Part2": "of learning content may be useful for you.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.GeneralDescription.Description": "The LIST-K is basically about helping you look at your own learning strategies. Scores of 3 or higher indicate that, from your point of view, you use the respective strategy at least sometimes.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.GeneralDescription.Title": "General description of the LIST-K",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.learningEnvironment Below3.Description": "In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.learningEnvironment Below3.Title": "Learning environment has a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.learnWithClassmates && learningEnvironment Below3.Description": "It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.learnWithClassmates && learningEnvironment Below3.Title": "Learning with classmates and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.learnWithClassmates && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you should try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.learnWithClassmates && literatureResearch && learningEnvironment Below3.Title": "Learning with classmates, literature research and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.learnWithClassmates && literatureResearch Below3.Description": "It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.learnWithClassmates && literatureResearch Below3.Title": "Learning with classmates and literature research have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.learnWithClassmates Below3.Description": "It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.learnWithClassmates Below3.Title": "Learning with classmates has a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.literatureResearch && learningEnvironment Below3.Description": "To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.literatureResearch && learningEnvironment Below3.Title": "Literature research and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.literatureResearch Below3.Description": "To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.literatureResearch Below3.Title": "Literature research has a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.MetacognitiveStrategies Below3.Goals & Plans": "plan",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.MetacognitiveStrategies Below3.Part1": "In terms of metacognitive strategies, it is recommended that you make the effort to frequently",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.MetacognitiveStrategies Below3.Regulate": "reflect",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score": "Score",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.SubscaleAverage Below3.2": "In your case, it appears that the use of learning strategies can still be improved in two areas in particular.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.SubscaleAverage Below3.3": "In your case, it appears that the use of learning strategies can still be improved in three areas in particular.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.SubscaleAverage Below3.4": "In your case, it appears that the use of learning strategies can still be improved in four areas in particular.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && learningEnvironment Below3.Title": "Time and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && learnWithClassmates && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && learnWithClassmates && learningEnvironment Below3.Title": "Time, learning with classmates and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && learnWithClassmates && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && learnWithClassmates && literatureResearch && learningEnvironment Below3.Title": "Time, learning with classmates, literature research and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && learnWithClassmates && literatureResearch Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. It would be useful if you try to find a study group with fellow students. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && learnWithClassmates && literatureResearch Below3.Title": "Time, learning with classmates and literature research have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && learnWithClassmates Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective. It would be beneficial if you try to find a study group with fellow student friends. This will give you the opportunity to deepen content in discussion as well as gain valuable other perspectives.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && learnWithClassmates Below3.Title": "Time and learning with classmates have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && literatureResearch && learningEnvironment Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant. In terms of external resource management strategies, it is clear to see that you should pay attention to their suitability when designing your learning environment.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && literatureResearch && learningEnvironment Below3.Title": "Time, literature research and learning environment have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && literatureResearch Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently taking too little time for your learning. It would probably be beneficial if you tried to create clear periods of time in with as few disruptive factors as possible to make your learning more effective. To ensure that you have the opportunity to reinforce content and gain valuable other perspectives, researching appropriate literature is highly relevant.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time && literatureResearch Below3.Title": "Time and literature research have a value below 3",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time Below3.Description": "In terms of internal resource management strategies, it is clear to see that you are currently not taking enough time for your learning. It would probably have a positive effect if you tried to create clear learning periods for yourself in order to make your learning more effective.",
+  "components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.time Below3.Title": "Time has a value below 3",
+  "contact": "Contact",
+  "Courses.fetching.error": "There was an Error fetching Courses data",
+  "Data.send.successfull": "Data.send.successfully",
+  "Data.send.unsuccessfull": "Data could not be sent",
   "delete": "Deleted",
+  "Dot": ".",
   "DSGVO": "GDPR",
   "error": "Error",
   "firstPage": "First",
+  "help": "Help",
+  "ILS.fetching.error": "There was an Error fetching ILS Questionnaire data",
+  "ILS.sending.error": "ILS Questionnaire could not be sent.",
   "info": "Info",
   "lastPage": "Last",
+  "ListK.fetching.error": "There was an Error fetching ListK Questionnaire data",
+  "ListK.sending.error": "ListK Questionnaire could not be sent.",
+  "loading": "Loading...",
+  "Next": "Next",
   "nextText": "Next",
   "Notifications": "Notifications",
   "offlineWarning": "You are currently offline. Please check your internet connection.",
   "onlineWarning": "You are online again.",
+  "pages.1": "1",
+  "pages.10": "10",
+  "pages.11": "11",
+  "pages.12": "12",
+  "pages.13": "13",
+  "pages.14": "14",
+  "pages.15": "15",
+  "pages.16": "16",
+  "pages.17": "17",
+  "pages.2": "2",
+  "pages.3": "3",
+  "pages.4": "4",
+  "pages.5": "5",
+  "pages.6": "6",
+  "pages.7": "7",
+  "pages.8": "8",
+  "pages.9": "9",
+  "pages.contact": "Contact",
+  "pages.Contact.error": "An error occurred while sending your feedback. Please try again later.",
+  "pages.Contact.success": "Your feedback has been sent successfully.",
+  "pages.course": "Course",
+  "pages.glossary": "Glossary",
   "pages.glossary.collapseAll": "Collapse All",
   "pages.glossary.elements": [
     {
@@ -625,15 +1728,99 @@
     "TestEnglish4"
   ],
   "pages.glossary.title": "Glossary",
-  "pages.login.redirect": "You will be redirected after a few seconds",
+  "pages.home": "Home",
+  "pages.imprint": "Imprint",
+  "pages.Login": "Login",
+  "pages.Login.redirect": "You will be redirected after a few seconds",
+  "pages.PrivacyPolicy": "Privacy Policy",
+  "pages.PrivacyPolicy.header.1": "Information about the Study",
+  "pages.PrivacyPolicy.header.1.Text": "Within the HASKI project, the OTH Regensburg, HS Kempten, and TH Aschaffenburg are investigating how artificial intelligence can be used to support students in their learning. The goal of the project is to create an adaptive learning management system that provides learners with the best possible learning materials. The first version of this system, called HASKI Alpha, will now be tested regarding the impact of learning style-based learning paths on the motivation, interest, and knowledge of participating students. The focus is on the different algorithms underlying the learning paths. This approach is being used and tested for the first time in the study presented to you.",
+  "pages.PrivacyPolicy.header.2": "Privacy Notice",
+  "pages.PrivacyPolicy.header.2.Text.1": "In the following, we will inform you about the privacy-compliant handling of your personal data. If you have any questions or difficulties understanding, please contact the study leader. We thank you for your participation and trust in our work! We comply with the provisions of the General Data Protection Regulation and all other data protection regulations. The following data will be collected as part of this study:",
+  "pages.PrivacyPolicy.header.2.Text.2": "We intend to use this data as outlined below:",
+  "pages.PrivacyPolicy.header.3": "Data Collection",
+  "pages.PrivacyPolicy.header.3.Text": "The data collection will be supervised by appropriately trained staff members of the HASKI project and conducted online using Moodle and the HASKI system. If you have any questions about the data collection process or need further information, please feel free to contact the designated persons listed below. The collected data will be processed confidentially.",
+  "pages.PrivacyPolicy.header.4": "Data Processing",
+  "pages.PrivacyPolicy.header.4.Text": "After recording, the data will be analyzed by scientific staff members of the HASKI project. The scientific staff members responsible for data analysis have no conflicts of interest with the participating individuals (e.g., evaluation situations). As part of the analysis, transcripts and/or copies of the data may be created. These copies will be anonymized, meaning that all names and other information that could identify you as an individual will be removed.",
+  "pages.PrivacyPolicy.header.5": "Data Storage and Access",
+  "pages.PrivacyPolicy.header.5.Text": "The data will be securely stored in digital form on the server of the HASKI project and will only be accessible to authorized staff members of the HASKI project. The data collected in this study will be kept in an anonymized form in a trusted archive for good scientific practice and will be used by other researchers. The anonymized data may also be used for educational purposes under controlled conditions. Your data will be retained by the HASKI project for a maximum of 10 years and will be irreversibly deleted after this period.",
+  "pages.PrivacyPolicy.header.6": "Publication",
+  "pages.PrivacyPolicy.header.6.Paragraph.1": "Art. 7(3) GDPR - Right to withdraw consent: You have the right to withdraw your consent at any time with effect for the future.",
+  "pages.PrivacyPolicy.header.6.Paragraph.2": "Art. 15 GDPR - Right of access: You have the right to obtain information about the personal data we process about you.",
+  "pages.PrivacyPolicy.header.6.Paragraph.3": "Art. 16 GDPR - Right to rectification: If the data concerning you is incorrect or incomplete, you have the right to have it rectified or completed.",
+  "pages.PrivacyPolicy.header.6.Paragraph.4": "Art. 17 GDPR - Right to erasure: You can request the deletion of your data at any time.",
+  "pages.PrivacyPolicy.header.6.Paragraph.5": "Art. 18 GDPR - Right to restriction of processing: You can request the restriction of processing of your personal data.",
+  "pages.PrivacyPolicy.header.6.Paragraph.6": "Art. 21 GDPR - Right to object: You can object to the processing of your personal data at any time.",
+  "pages.PrivacyPolicy.header.6.Paragraph.7": "Art. 77 GDPR - Right to lodge a complaint with a supervisory authority: If you believe that we have not complied with data protection regulations in the processing of your data, you have the right to lodge a complaint with the relevant supervisory authority, which will review your complaint.",
+  "pages.PrivacyPolicy.header.6.Text.1": "Research findings will be published in publications or conferences solely in anonymized form, and at no point will it allow any identification of you as an individual. No personal data (such as name or contact information) will be published.",
+  "pages.PrivacyPolicy.header.6.Text.2": "You have the right to exercise the following rights at any time:",
+  "pages.PrivacyPolicy.header.6.Text.3": "In any case, your participation in the data collection is voluntary. You have the right to withdraw at any time. Refusal or withdrawal will not result in any disadvantages for you.",
+  "pages.PrivacyPolicy.header.6.Text.4": "For compliance with data protection regulations in the case of this study, HS Kempten is responsible.",
+  "pages.PrivacyPolicy.LearningAnalytics": "Learning Analytics",
+  "pages.PrivacyPolicy.Name & Surname": "First and Last Name",
+  "pages.PrivacyPolicy.PrivacySupport.Name": "Data Protection Officer of HS Kempten",
+  "pages.PrivacyPolicy.PrivacySupport.Text": "For inquiries regarding data protection issues, please contact the data protection officer. The data protection officer can be reached at the following contact details:",
+  "pages.PrivacyPolicy.Support.Text": "If you have any questions about the study, please contact the principal investigator. In the case of this study, the contact person is:",
+  "pages.projectdescription": "Project Description",
+  "pages.ProjectDescription.advantagesLearningBody": "The support is enabled by the HASKI system reading your data from Moodle and using an AI algorithm based on this data to suggest a personalized learning path through the learning materials. Of course, the decision about which material you want to work on next remains with you. HASKI also remembers these preferences and adjusts future suggestions to new circumstances.",
+  "pages.ProjectDescription.advantagesLearningBody2": "The data basis consists of questionnaires, individual knowledge levels, evaluated tasks, and behavioral data from Moodle. Through anonymization of data, a conclusion about you by instructors is prevented.",
+  "pages.ProjectDescription.advantagesLearningHeader": "Benefits for you in your studies",
+  "pages.ProjectDescription.advantagesLearningHeader2": "What data does HASKI work with?",
+  "pages.ProjectDescription.advantagesTeachingBody": "The HASKI system aims to make a significant contribution to establishing interactive, personalized, and self-directed learning in higher education. Digital media and platforms can provide much more than the current practice of higher education, which is dominated by traditional classroom teaching, even in the context of the pandemic.",
+  "pages.ProjectDescription.advantagesTeachingBody2": "The idea behind HASKI is to harness the potential of AI in the courses offered at University of Applied Sciences Kempten. This is achieved by combining in-person teaching, the learning management system (e.g. Moodle), and the HASKI system. With this we provide a software component that utilizes AI algorithms to assist you in achieving your learning goals.",
+  "pages.ProjectDescription.advantagesTeachingHeader": "Benefits for higher education teaching",
+  "pages.ProjectDescription.advantagesTeachingHeader2": "Application in higher education",
+  "pages.ProjectDescription.approachesBody": [
+    "National exchange. Publication of scientific contributions. Presentations at german conferences.",
+    "Application of state-of-the-art technology. Combination of learning analytics and artificial intelligence.",
+    "Empirical investigations. Online surveys, evaluation studies, data analysis."
+  ],
+  "pages.ProjectDescription.approachesHeader": "What is our approach?",
+  "pages.ProjectDescription.goalsBody": [
+    "Improvement and expansion of existing courses in the field of software engineering through the production of high-quality, pedagogically meaningful, and varied learning content",
+    "Comprehensive digital representation of individual students and their characteristics",
+    "Development of an adaptive and AI-based learning system for generating personalized learning path recommendations",
+    "AI-based evaluation of exercises and helpful feedback",
+    "Visualization and preparation of learning analytics to reflect on learning behavior",
+    "Didactically relevant reports for lecturers to improve courses"
+  ],
+  "pages.ProjectDescription.goalsHeader": "Goals of the HASKI project",
+  "pages.ProjectDescription.imageSource1": "Image by katemangostar on Freepik",
+  "pages.ProjectDescription.imageSource2": "Image by natanaelginting on Freepik",
+  "pages.ProjectDescription.imageSources": "",
+  "pages.ProjectDescription.introductionBody": "HASKI stands for \"Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt\" (\"Higher education teaching: Adaptive, self-directed, AI-assisted\") and is funded by the Federal Ministry of Education and Research with a project duration until December 2025. HASKI is a collaborative project of three Bavarian universities: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
+  "pages.ProjectDescription.introductionHeader": "What is HASKI?",
+  "pages.projectinformation": "Project Information",
+  "pages.topic": "Topic",
   "post": "Posted",
   "previousText": "Previous",
-  "projecthaski": "Project HASKI",
+  "projectHASKI": "Project HASKI",
   "resultPagesText": "Results",
   "searchButtonText": "Search",
+  "send": "Send",
+  "services.AuthProvider.connectivityerror": "Error while checking login status. Check your connectivity",
+  "services.AuthProvider.cookienotfound": "Cookie not found. Please login again",
+  "services.AuthProvider.logout": "Logout successful",
   "sort": "Sort by:",
   "spellcheckText": "Did you mean:",
   "success": "Success",
+  "tooltip.openGlobalSettings": "Open global settings",
+  "tooltip.openQuestionnaireResults": "Learningtype",
+  "tooltip.openSettings": "Open settings",
+  "topic": "Topic",
+  "universityKempten": "University of Applied Sciences Kempten",
   "update": "Updated",
-  "warning": "Warning"
+  "warning": "Warning",
+  "accept": "Accept",
+  "decline": "Decline",
+  "agree": "Agree",
+  "pages.privacypolicy": "privacypolicy",
+  "components.PrivacyModal.readPrivacypolicy": "I have read the \n",
+  "components.PrivacyModal.readPrivacypolicy2": "",
+  "components.PrivacyModal.returnToMoodle": "This will redirect you to Moodle",
+  "components.PrivacyModal.afterReading": "HASKI is using essential cookies. Further information about the collected data and its usage can be found in the privacy policy:",
+  "components.PrivacyModal.termsOfService": "Terms of service and privacy policy",
+  "components.PrivacyModal.accepted": "Thank you for your trust. Data to improve your learning experience is now being collected.",
+  "components.PrivacyModal.declined": "You cannot access HASKI without accepting the essential cookies.",
+  "User.fetching.error": "There was an Error fetching User data"
 }
