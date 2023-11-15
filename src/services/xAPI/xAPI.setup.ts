@@ -1,5 +1,5 @@
 import XAPI from '@xapi/xapi'
-import {getConfig} from "@shared";
+import { getConfig } from '@shared'
 
 /**
  * xAPI object.

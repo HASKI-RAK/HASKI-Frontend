@@ -69,8 +69,8 @@ export const Home = () => {
   }, [loading])
 
   // In the upcoming Evaluation (Nov. 2023) a course is only available after a specific date
-  const courseDateReached = (date: string, courseId: number) : boolean => {
-    return courseId == 2 ? (new Date() <= new Date(date)) : false
+  const courseDateReached = (date: string, courseId: number): boolean => {
+    return courseId == 2 ? new Date() <= new Date(date) : false
   }
 
   // Card cointaining the courses with a button to the specific course
@@ -103,8 +103,10 @@ export const Home = () => {
                           navigate('/course/' + course.id)
                         }}>
                         {courseDateReached('November 22, 2023 10:00:00', course.id)
-                            ? t('components.Home.Button.CourseNotAvailable') + ' ' + new Date('November 22, 2023').toLocaleDateString()
-                            : t('components.Home.Button.Course')}
+                          ? t('components.Home.Button.CourseNotAvailable') +
+                            ' ' +
+                            new Date('November 22, 2023').toLocaleDateString()
+                          : t('components.Home.Button.Course')}
                       </Button>
                     </Stack>
                   </CardContent>
