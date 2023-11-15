@@ -5,7 +5,8 @@ import {
     CollapsibleTextMultiList,
     ImageCollection,
     ImageAttribute,
-    MapPin
+    MapPin,
+    ProjectTeamCompetenciesCard
 } from '@components'
 import {Avatar, Box, Grid, Typography} from '@common/components'
 import {memo} from 'react'
@@ -135,21 +136,14 @@ const ProjectTeam = () => {
                 withAvatar={true}
                 avatarName={quotesDev.map((quoteData) => quoteData.name)}
                 avatarDescription={quotesDev.map((quoteData) => quoteData.description)}/>
-            <div style={{width: '70%', margin: '0 auto', marginBottom: '9rem'}}>
-                {/* tbd: animate with typewriter effect; move to seperate file*/}
-                <Typography
-                    variant="h3"
-                    align="center"
-                    sx={{minHeight: {xs: '17.5rem', sm: '14.063rem', md: '10.625rem', lg: '7.188rem'}, pt: '2.5rem'}}>
-                    {t('pages.ProjectTeam.interdisciplinaryHeader')}
-                </Typography>
+            <ProjectTeamCompetenciesCard header={t('pages.ProjectTeam.interdisciplinaryHeader')}>
                 <MediaQuery minWidth={700}>
                     <CollapsibleTextMultiList content={content} columns={2}/>
                 </MediaQuery>
                 <MediaQuery maxWidth={700}>
                     <CollapsibleTextMultiList content={content} columns={1}/>
                 </MediaQuery>
-            </div>
+            </ProjectTeamCompetenciesCard>
             <ProjectDescriptionStepper
                 header={t('pages.ProjectTeam.StudentVoicesHeader')}
                 body={quotesDev.map((quoteData) => quoteData.quote)}
