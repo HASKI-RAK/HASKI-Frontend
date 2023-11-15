@@ -1,5 +1,5 @@
 import { getConfig } from '@shared'
-import { getCourses } from './getCourses'
+import { fetchCourses } from './fetchCourses'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -11,7 +11,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('getCourses has expected behaviour', () => {
+describe('fetchCourses has expected behaviour', () => {
   it('should return the course when the response is successful', async () => {
     const expectedData = { course: 'dude where is my car' }
     const mockResponse = {
@@ -27,7 +27,7 @@ describe('getCourses has expected behaviour', () => {
     const lmsUserId = 1
     const studentId = 1
 
-    const result = await getCourses(userId, lmsUserId, studentId)
+    const result = await fetchCourses(userId, lmsUserId, studentId)
 
     expect(fetch).toHaveBeenCalledWith(
       `${getConfig().BACKEND}/user/${userId}/${lmsUserId}/student/${studentId}/course`,
@@ -59,7 +59,7 @@ describe('getCourses has expected behaviour', () => {
     const lmsUserId = 1
     const studentId = 1
 
-    await expect(getCourses(userId, lmsUserId, studentId)).rejects.toThrow(`${expectedMessage}`)
+    await expect(fetchCourses(userId, lmsUserId, studentId)).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
@@ -76,6 +76,6 @@ describe('getCourses has expected behaviour', () => {
     const lmsUserId = 1
     const studentId = 1
 
-    await expect(getCourses(userId, lmsUserId, studentId)).rejects.toThrow('')
+    await expect(fetchCourses(userId, lmsUserId, studentId)).rejects.toThrow('')
   })
 })

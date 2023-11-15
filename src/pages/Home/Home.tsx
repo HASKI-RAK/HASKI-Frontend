@@ -25,7 +25,7 @@ export const Home = () => {
 
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
-  const fetchCourses = useStore((state) => state.fetchCourses)
+  const getCourses = useStore((state) => state.getCourses)
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
@@ -36,7 +36,7 @@ export const Home = () => {
         clearTimeout(preventEndlessLoading)
         getUser()
           .then((user) => {
-            fetchCourses(user.settings.user_id, user.lms_user_id, user.id)
+            getCourses(user.settings.user_id, user.lms_user_id, user.id)
               .then((CourseResponse) => {
                 setCourses(CourseResponse.courses)
               })

@@ -224,7 +224,7 @@ const mockDataServices: MockDataServices = {
       lti_launch_view: 'test'
     })
   ),
-  getCourses: jest.fn(() =>
+  fetchCourses: jest.fn(() =>
     Promise.resolve({
       courses: [
         {

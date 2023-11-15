@@ -16,7 +16,7 @@ describe('Test the Home page', () => {
   })
 
   test('fetching Course throws error', async () => {
-    mockServices.getCourses.mockImplementationOnce(() => {
+    mockServices.fetchCourses.mockImplementationOnce(() => {
       throw new Error('Error')
     })
 
@@ -99,7 +99,7 @@ describe('Test the Home page', () => {
   })
 
   test('fetching Course returns no courses', async () => {
-    mockServices.getCourses = jest.fn().mockImplementationOnce(() =>
+    mockServices.fetchCourses = jest.fn().mockImplementationOnce(() =>
       Promise.resolve({
         courses: []
       })
