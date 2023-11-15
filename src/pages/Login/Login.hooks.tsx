@@ -1,4 +1,4 @@
-import { AuthContext, SnackbarContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
+import { AuthContext, SnackbarContext, postLogin, postLoginCredentials, fetchRedirectMoodleLogin } from '@services'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useContext } from 'react'
 import { usePersistedStore } from '@store'
@@ -44,7 +44,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
 
   const onMoodleLogin = () => {
     props.setIsLoading(true)
-    redirectMoodleLogin()
+    fetchRedirectMoodleLogin()
       .then((response) =>
         // 👇️ redirects to Moodle LTI launch acticity
         window.location.replace(response.lti_launch_view)

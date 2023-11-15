@@ -219,7 +219,7 @@ const mockDataServices: MockDataServices = {
       expiration: 999999999999999
     })
   ),
-  redirectMoodleLogin: jest.fn(() =>
+  fetchRedirectMoodleLogin: jest.fn(() =>
     Promise.resolve({
       lti_launch_view: 'test'
     })
