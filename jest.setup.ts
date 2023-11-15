@@ -262,7 +262,7 @@ const mockDataServices: MockDataServices = {
       understanding_value: 1
     })
   ),
-  getListK: jest.fn(() =>
+  fetchListK: jest.fn(() =>
     Promise.resolve({
       att: 1,
       characteristic_id: 1,

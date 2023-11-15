@@ -240,7 +240,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('fetching user on ListK step failed to fetch, returns loading', async () => {
     const handleClose = jest.fn()
-    mockServices.getListK.mockImplementationOnce(() => {
+    mockServices.fetchListK.mockImplementationOnce(() => {
       throw new Error('Failed to fetch')
     })
 
@@ -260,7 +260,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('fetching listk data failed returns snackbar', async () => {
     const handleClose = jest.fn()
-    mockServices.getListK.mockImplementationOnce(async () => {
+    mockServices.fetchListK.mockImplementationOnce(async () => {
       throw new Error('id not found')
     })
 
@@ -278,7 +278,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('fetching listk data failed to fetch, returns loading', async () => {
     const handleClose = jest.fn()
-    mockServices.getListK.mockImplementationOnce(async () => {
+    mockServices.fetchListK.mockImplementationOnce(async () => {
       throw new Error('Failed to fetch')
     })
 
@@ -298,7 +298,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   it('renders null for activeStep 3', () => {
     const handleClose = jest.fn()
-    mockServices.getListK.mockImplementationOnce(() => {
+    mockServices.fetchListK.mockImplementationOnce(() => {
       throw new Error('Error')
     })
 

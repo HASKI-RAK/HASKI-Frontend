@@ -1,6 +1,6 @@
 //Tests fail with shortened Path
 import { getConfig } from '@shared'
-import { getListK } from './getListK'
+import { fetchListK } from './fetchListK'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -45,7 +45,7 @@ describe('fetchILS has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const result = await getListK(1, 1, 1)
+    const result = await fetchListK(1, 1, 1)
 
     expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/1/1/student/1/learningStrategy`, {
       method: 'GET',
@@ -70,7 +70,7 @@ describe('fetchILS has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    await expect(getListK()).rejects.toThrow(`${expectedMessage}`)
+    await expect(fetchListK()).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
@@ -83,6 +83,6 @@ describe('fetchILS has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    await expect(getListK()).rejects.toThrow('')
+    await expect(fetchListK()).rejects.toThrow('')
   })
 })
