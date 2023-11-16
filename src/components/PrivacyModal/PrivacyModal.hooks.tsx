@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { CookiesProvider, useCookies } from 'react-cookie'
 import { usePersistedStore } from '@store'
 import log from 'loglevel'
-import { error } from 'console'
 
 /**
  * @prop privacyPolicyCookie - The currently set cookie
@@ -43,7 +42,6 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
   const checkUniversity = async () => {
     return fetchUser()
       .then((user) => {
-        if (user.university == '') throw new Error('Error')
         return user.university
       })
       .catch((reason) => {
