@@ -51,11 +51,11 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
           data-testid={'Dimension: ' + dimensionArray[index] + ' Interpretation: ' + interpretationArray[index]}
           key={'Dimension: ' + dimensionArray[index] + ' Interpretation: ' + interpretationArray[index]}>
           <Typography variant="h6" gutterBottom>
-            {t('components.Questionnaire.QuestionnaireResults.Table.TableILS.' + dimensionArray[index])}
+            {t('components.TableILS.' + dimensionArray[index])}
           </Typography>
           <Typography variant="body2" gutterBottom>
             {t(
-              'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.' +
+              'components.ResultDescriptionILS.' +
                 dimensionArray[index] +
                 '.' +
                 interpretationArray[index]
@@ -73,10 +73,10 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
       return (
         <div key={'AllDimensionsAreBalancedDescription'}>
           <Typography variant="h6" gutterBottom>
-            {t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.AllDimensions')}
+            {t('components.ResultDescriptionILS.AllDimensions')}
           </Typography>
           <Typography variant="body2" gutterBottom>
-            {t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.EverythingBalanced')}
+            {t('components.ResultDescriptionILS.EverythingBalanced')}
           </Typography>
         </div>
       )
@@ -86,49 +86,49 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
           case 'Active.balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.processing'
+                'components.ResultDescriptionILS.SomethingBalanced.processing'
               ) + ' & '
             break
           case 'Reflective.balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.processing'
+                'components.ResultDescriptionILS.SomethingBalanced.processing'
               ) + ' & '
             break
           case 'Sensory.balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.perception'
+                'components.ResultDescriptionILS.SomethingBalanced.perception'
               ) + ' & '
             break
           case 'Intuitive.balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.perception'
+                'components.ResultDescriptionILS.SomethingBalanced.perception'
               ) + ' & '
             break
           case 'Verbal.balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.presentation'
+                'components.ResultDescriptionILS.SomethingBalanced.presentation'
               ) + ' & '
             break
           case 'Visual.balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.presentation'
+                'components.ResultDescriptionILS.SomethingBalanced.presentation'
               ) + ' & '
             break
           case 'Sequential.balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.organisation'
+                'components.ResultDescriptionILS.SomethingBalanced.organisation'
               ) + ' & '
             break
           case 'Global.balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.organisation'
+                'components.ResultDescriptionILS.SomethingBalanced.organisation'
               ) + ' & '
             break
           default:
@@ -143,18 +143,18 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
       )
 
       balancedDimensionsInterpretationString =
-        t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.Part1') +
+        t('components.ResultDescriptionILS.SomethingBalanced.Part1') +
         ' ' +
         t(
-          'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.' +
+          'components.ResultDescriptionILS.SomethingBalanced.' +
             balancedDimensionsArray.length
         ) +
         ' ' +
-        t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.Part2') +
+        t('components.ResultDescriptionILS.SomethingBalanced.Part2') +
         ' ' +
         balancedDimensionsKeyWordString +
         ' ' +
-        t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.SomethingBalanced.Part3')
+        t('components.ResultDescriptionILS.SomethingBalanced.Part3')
     }
   }
 
@@ -166,7 +166,7 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
       ) : (
         <div key={'InnerDivResultDescriptionILS'}>
           <Typography variant="h6" gutterBottom>
-            {t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.RemainingDimensions')}
+            {t('components.ResultDescriptionILS.RemainingDimensions')}
           </Typography>
           <Typography variant="body2" gutterBottom>
             {balancedDimensionsInterpretationString}

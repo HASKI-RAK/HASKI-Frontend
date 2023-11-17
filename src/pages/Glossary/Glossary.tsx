@@ -135,7 +135,7 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
       <Grid item xs={12} sm={12} sx={{ mt: '0.5rem', mb: '0.5rem' }}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
           <Button id="collapse-all-button" variant="outlined" onClick={() => collapseAll(setExpandedList)}>
-            {t('pages.glossary.collapseAll')}
+            {t('pages.glossary.collapseall')}
           </Button>
           <Button id="expand-all-button" variant="outlined" onClick={() => expandAll(setExpandedList, glossaryEntries)}>
             {t('pages.glossary.expandAll')}

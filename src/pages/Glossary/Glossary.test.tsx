@@ -24,7 +24,7 @@ describe('Glossary page tests', () => {
     expect(queryByText('pages.glossary.title')).toBeInTheDocument()
     expect(queryAllByText('pages.glossary.search').length).toBeGreaterThan(0)
     expect(queryAllByText('pages.glossary.filter').length).toBeGreaterThan(0)
-    expect(queryByText('pages.glossary.collapseAll')).toBeInTheDocument()
+    expect(queryByText('pages.glossary.collapseall')).toBeInTheDocument()
     expect(queryByText('pages.glossary.expandAll')).toBeInTheDocument()
   })
 
@@ -35,7 +35,7 @@ describe('Glossary page tests', () => {
         <Glossary />
       </MemoryRouter>
     )
-    const collapseAllButton = getByText('pages.glossary.collapseAll')
+    const collapseAllButton = getByText('pages.glossary.collapseall')
     expect(collapseAllButton).toBeInTheDocument()
     fireEvent.click(collapseAllButton)
   })

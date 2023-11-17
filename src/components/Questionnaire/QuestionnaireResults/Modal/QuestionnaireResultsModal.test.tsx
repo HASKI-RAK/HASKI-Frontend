@@ -14,7 +14,7 @@ jest.mock('react-i18next', () => ({
       i18n: {
         //changeLanguage: () => new Promise(() => {}),
         getFixedT: () => (str: string) => {
-          if (str === 'components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced') return 'balanced'
+          if (str === 'components.TableILS.balanced') return 'balanced'
           else return str
         }
         // You can include here any property your component may use
@@ -124,7 +124,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.ILSResults'))
       expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
     })
   })
@@ -137,7 +137,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.ListKResults'))
       expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
     })
   })
@@ -216,7 +216,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.ILSResults'))
       expect(queryByTestId('SkeletonList Element-0')).toBeFalsy()
     })
   })
@@ -251,7 +251,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.ListKResults'))
       expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
       expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
       expect(getByTestId('SkeletonList Element-2')).toBeInTheDocument()
@@ -271,7 +271,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.ListKResults'))
       expect(queryByTestId('SkeletonList Element-0')).toBeFalsy()
     })
   })
@@ -289,7 +289,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.ListKResults'))
       expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
       expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
       expect(getByTestId('SkeletonList Element-2')).toBeInTheDocument()

@@ -15,113 +15,113 @@ export const useData = (
 
   // Center the Score beneath the Subscale name. That is done with Whitespaces before the score.
   const organizeCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize') +
+    t('components.TableListK.Organize') +
     '\n' +
     centerString(
       data.org.toFixed(2),
-      t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize').length
+      t('components.TableListK.Organize').length
     )
   const elaborateCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate') +
+    t('components.TableListK.Elaborate') +
     '\n' +
     centerString(
       data.elab.toFixed(2),
-      t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate').length
+      t('components.TableListK.Elaborate').length
     )
   const criticalReviewCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review') +
+    t('components.TableListK.Critical review') +
     '\n' +
     centerString(
       data.crit_rev.toFixed(2),
-      t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review').length
+      t('components.TableListK.Critical review').length
     )
   const repeatCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat') +
+    t('components.TableListK.Repeat') +
     '\n' +
-    centerString(data.rep.toFixed(2), t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat').length)
+    centerString(data.rep.toFixed(2), t('components.TableListK.Repeat').length)
   const attentionCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention') +
+    t('components.TableListK.Attention') +
     '\n' +
     centerString(
       data.att.toFixed(2),
-      t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention').length
+      t('components.TableListK.Attention').length
     )
   const effortCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort') +
+    t('components.TableListK.Effort') +
     '\n' +
-    centerString(data.eff.toFixed(2), t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort').length)
+    centerString(data.eff.toFixed(2), t('components.TableListK.Effort').length)
   const timeCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Time') +
+    t('components.TableListK.Time') +
     '\n' +
-    centerString(data.time.toFixed(2), t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Time').length)
+    centerString(data.time.toFixed(2), t('components.TableListK.Time').length)
   const goalsPlansCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans') +
+    t('components.TableListK.Goals & plans') +
     '\n' +
     centerString(
       data.goal_plan.toFixed(2),
-      t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans').length
+      t('components.TableListK.Goals & plans').length
     )
   const controlCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Control') +
+    t('components.TableListK.Control') +
     '\n' +
     centerString(
       data.con.toFixed(2),
-      t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Control').length
+      t('components.TableListK.Control').length
     )
   const regulateCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate') +
+    t('components.TableListK.Regulate') +
     '\n' +
     centerString(
       data.reg.toFixed(2),
-      t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate').length
+      t('components.TableListK.Regulate').length
     )
   const learnWithClassmatesCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates') +
+    t('components.TableListK.Learning with classmates') +
     '\n' +
     centerString(
       data.lrn_w_cls.toFixed(2),
-      t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates').length
+      t('components.TableListK.Learning with classmates').length
     )
   const literatureResearchCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research') +
+    t('components.TableListK.Literature research') +
     '\n' +
     centerString(
       data.lit_res.toFixed(2),
-      t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research').length
+      t('components.TableListK.Literature research').length
     )
   const learningEnvironmentCentered =
-    t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment') +
+    t('components.TableListK.Learning environment') +
     '\n' +
     centerString(
       data.lrn_env.toFixed(2),
-      t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment').length
+      t('components.TableListK.Learning environment').length
     )
 
   return {
     nodes: [
       {
-        id: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'),
+        id: t('components.TableListK.Cognitive strategies'),
         height: 1,
         size: 12,
         score: data.cogn_str,
         color: 'rgb(97, 205, 187)'
       },
       {
-        id: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'),
+        id: t('components.TableListK.Internal resource management strategies'),
         height: 1,
         size: 12,
         score: data.int_res_mng_str,
         color: 'rgb(97, 205, 187)'
       },
       {
-        id: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'),
+        id: t('components.TableListK.Metacognitive strategies'),
         height: 1,
         size: 12,
         score: data.metacogn_str,
         color: 'rgb(97, 205, 187)'
       },
       {
-        id: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'),
+        id: t('components.TableListK.External resource management strategies'),
         height: 1,
         size: 12,
         score: data.ext_res_mng_str,
@@ -229,101 +229,101 @@ export const useData = (
     links: [
       {
         source: 'List K',
-        target: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'),
+        target: t('components.TableListK.Cognitive strategies'),
         distance: 60
       },
       {
-        source: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'),
+        source: t('components.TableListK.Cognitive strategies'),
         target: organizeCentered,
         distance: 50
       },
       {
-        source: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'),
+        source: t('components.TableListK.Cognitive strategies'),
         target: elaborateCentered,
         distance: 50
       },
       {
-        source: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'),
+        source: t('components.TableListK.Cognitive strategies'),
         target: criticalReviewCentered,
         distance: 50
       },
       {
-        source: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'),
+        source: t('components.TableListK.Cognitive strategies'),
         target: repeatCentered,
         distance: 50
       },
       {
         source: 'List K',
         target: t(
-          'components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'
+          'components.TableListK.Internal resource management strategies'
         ),
         distance: 50
       },
       {
         source: t(
-          'components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'
+          'components.TableListK.Internal resource management strategies'
         ),
         target: attentionCentered,
         distance: 70
       },
       {
         source: t(
-          'components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'
+          'components.TableListK.Internal resource management strategies'
         ),
         target: effortCentered,
         distance: 70
       },
       {
         source: t(
-          'components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'
+          'components.TableListK.Internal resource management strategies'
         ),
         target: timeCentered,
         distance: 55
       },
       {
         source: 'List K',
-        target: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'),
+        target: t('components.TableListK.Metacognitive strategies'),
         distance: 50
       },
       {
-        source: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'),
+        source: t('components.TableListK.Metacognitive strategies'),
         target: goalsPlansCentered,
         distance: 60
       },
       {
-        source: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'),
+        source: t('components.TableListK.Metacognitive strategies'),
         target: controlCentered,
         distance: 50
       },
       {
-        source: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'),
+        source: t('components.TableListK.Metacognitive strategies'),
         target: regulateCentered,
         distance: 50
       },
       {
         source: 'List K',
         target: t(
-          'components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'
+          'components.TableListK.External resource management strategies'
         ),
         distance: 70
       },
       {
         source: t(
-          'components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'
+          'components.TableListK.External resource management strategies'
         ),
         target: learnWithClassmatesCentered,
         distance: 60
       },
       {
         source: t(
-          'components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'
+          'components.TableListK.External resource management strategies'
         ),
         target: literatureResearchCentered,
         distance: 55
       },
       {
         source: t(
-          'components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'
+          'components.TableListK.External resource management strategies'
         ),
         target: learningEnvironmentCentered,
         distance: 50
@@ -341,15 +341,15 @@ const GraphListK = ({ data }: GraphListKProps) => {
 
   const graphListKData = useData(data)
 
-  const cognitiveStrategies = t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies')
+  const cognitiveStrategies = t('components.TableListK.Cognitive strategies')
   const intResMngtStrategies = t(
-    'components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'
+    'components.TableListK.Internal resource management strategies'
   )
   const metacognitiveStrategies = t(
-    'components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'
+    'components.TableListK.Metacognitive strategies'
   )
   const extResMngtStrategies = t(
-    'components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'
+    'components.TableListK.External resource management strategies'
   )
 
   return (
@@ -383,7 +383,7 @@ const GraphListK = ({ data }: GraphListKProps) => {
             id: cognitiveStrategies
           },
           note:
-            t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
+            t('components.ResultDescriptionListK.Score') +
             ': ' +
             (Math.round((data.cogn_str + Number.EPSILON) * 100) / 100).toFixed(2),
           noteX: -10,
@@ -408,7 +408,7 @@ const GraphListK = ({ data }: GraphListKProps) => {
             id: intResMngtStrategies
           },
           note:
-            t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
+            t('components.ResultDescriptionListK.Score') +
             ': ' +
             (Math.round((data.int_res_mng_str + Number.EPSILON) * 100) / 100).toFixed(2),
           noteWidth: 250,
@@ -435,7 +435,7 @@ const GraphListK = ({ data }: GraphListKProps) => {
             id: metacognitiveStrategies
           },
           note:
-            t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
+            t('components.ResultDescriptionListK.Score') +
             ': ' +
             (Math.round((data.metacogn_str + Number.EPSILON) * 100) / 100).toFixed(2),
           noteWidth: 145,
@@ -462,7 +462,7 @@ const GraphListK = ({ data }: GraphListKProps) => {
             id: extResMngtStrategies
           },
           note:
-            t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score') +
+            t('components.ResultDescriptionListK.Score') +
             ': ' +
             (Math.round((data.ext_res_mng_str + Number.EPSILON) * 100) / 100).toFixed(2),
           noteWidth: 250,

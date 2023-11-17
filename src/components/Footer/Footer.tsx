@@ -23,7 +23,7 @@ const Footer = () => {
     { name: [t('pages.projectinformation')], link: '/projectinformation' },
     { name: [t('pages.contact')], link: '/contact' },
     { name: [t('pages.imprint')], link: '/imprint' },
-    { name: [t('pages.PrivacyPolicy')], link: '/privacypolicy' }
+    { name: [t('pages.privacypolicy')], link: '/privacypolicy' }
   ]
 
   return (

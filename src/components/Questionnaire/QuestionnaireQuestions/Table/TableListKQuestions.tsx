@@ -129,8 +129,8 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
   }[][] = [
     ...(t<string>(
       !testUndefined
-        ? 'components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions'
-        : 'components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Undefined',
+        ? 'components.ListKQuestions'
+        : 'components.ListKQuestions.Undefined',
       {
         returnObjects: true
       }
@@ -297,8 +297,8 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
     <Box>
       {activeStep == 0 ? (
         <CoverSheet
-          header={t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
-          body={t('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')}
+          header={t('components.NoData.ListK')}
+          body={t('components.ListKQuestions.Introduction')}
         />
       ) : (
         <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>

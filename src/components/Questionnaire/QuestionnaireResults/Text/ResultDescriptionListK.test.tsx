@@ -7,13 +7,13 @@ jest.mock('react-i18next', () => ({
   useTranslation: () => {
     return {
       t: (str: string) => {
-        if (str === 'components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced') return 'balanced'
+        if (str === 'components.TableILS.balanced') return 'balanced'
         else return str
       },
       i18n: {
         //changeLanguage: () => new Promise(() => {}),
         getFixedT: () => (str: string) => {
-          if (str === 'components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced') return 'balanced'
+          if (str === 'components.TableILS.balanced') return 'balanced'
           else return str
         }
         // You can include here any property your component may use
@@ -149,7 +149,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     const container = ResultDescriptionListK({ data: mockListK })
 
-    expect(container.props.children[3][0].props.children[0].props.children.substring(74, 98)).toMatch(
+    expect(container.props.children[3][0].props.children[0].props.children.substring(34, 58)).toMatch(
       'attention && time Below3'
     )
   })
@@ -179,7 +179,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     const container = ResultDescriptionListK({ data: mockListK })
 
-    expect(container.props.children[3][0].props.children[0].props.children.substring(74, 90)).toMatch(
+    expect(container.props.children[3][0].props.children[0].props.children.substring(34, 50)).toMatch(
       'attention Below3'
     )
   })
@@ -209,7 +209,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     const container = ResultDescriptionListK({ data: mockListK })
 
-    expect(container.props.children[3][0].props.children[0].props.children.substring(74, 121)).toMatch(
+    expect(container.props.children[3][0].props.children[0].props.children.substring(34, 81)).toMatch(
       'attention && time && learnWithClassmates Below3'
     )
   })
@@ -239,7 +239,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     const container = ResultDescriptionListK({ data: mockListK })
 
-    expect(container.props.children[3][0].props.children[0].props.children.substring(74, 143)).toMatch(
+    expect(container.props.children[3][0].props.children[0].props.children.substring(34, 103)).toMatch(
       'attention && time && learnWithClassmates && literatureResearch Below3'
     )
   })
@@ -269,7 +269,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
     const container = ResultDescriptionListK({ data: mockListK })
 
-    expect(container.props.children[3][0].props.children[0].props.children.substring(74, 166)).toMatch(
+    expect(container.props.children[3][0].props.children[0].props.children.substring(34, 126)).toMatch(
       'attention && time && learnWithClassmates && literatureResearch && learningEnvironment Below3'
     )
   })

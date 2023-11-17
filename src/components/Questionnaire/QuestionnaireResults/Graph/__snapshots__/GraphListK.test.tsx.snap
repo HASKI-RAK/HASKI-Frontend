@@ -25,7 +25,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(0,0)"
           >
             <line
-              data-testid="link.List K.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies"
+              data-testid="link.List K.components.TableListK.Cognitive strategies"
               opacity="1"
               stroke="rgb(244, 117, 96)"
               stroke-linecap="round"
@@ -37,8 +37,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="163.48821265607646"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize
-                                                   1.00"
+              data-testid="link.components.TableListK.Cognitive strategies.components.TableListK.Organize
+                    1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -50,8 +50,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="171.62833317699446"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate
-                                                    1.00"
+              data-testid="link.components.TableListK.Cognitive strategies.components.TableListK.Elaborate
+                     1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -63,8 +63,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="133.05557448336216"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review
-                                                        1.00"
+              data-testid="link.components.TableListK.Cognitive strategies.components.TableListK.Critical review
+                         1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -76,8 +76,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="104.97626321448402"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat
-                                                 1.00"
+              data-testid="link.components.TableListK.Cognitive strategies.components.TableListK.Repeat
+                   1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -89,7 +89,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="108.13067079297608"
             />
             <line
-              data-testid="link.List K.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies"
+              data-testid="link.List K.components.TableListK.Internal resource management strategies"
               opacity="1"
               stroke="rgb(244, 117, 96)"
               stroke-linecap="round"
@@ -101,8 +101,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="165.4379264442183"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention
-                                                    1.00"
+              data-testid="link.components.TableListK.Internal resource management strategies.components.TableListK.Attention
+                     1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -114,8 +114,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="91.40173972664262"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort
-                                                 1.00"
+              data-testid="link.components.TableListK.Internal resource management strategies.components.TableListK.Effort
+                   1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -127,8 +127,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="121.81976719876603"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Time
-                                                1.00"
+              data-testid="link.components.TableListK.Internal resource management strategies.components.TableListK.Time
+                 1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -140,7 +140,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="163.2515951451468"
             />
             <line
-              data-testid="link.List K.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies"
+              data-testid="link.List K.components.TableListK.Metacognitive strategies"
               opacity="1"
               stroke="rgb(244, 117, 96)"
               stroke-linecap="round"
@@ -152,8 +152,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="272.08906158604367"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans
-                                                       1.00"
+              data-testid="link.components.TableListK.Metacognitive strategies.components.TableListK.Goals & plans
+                        1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -165,8 +165,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="339.5136367303902"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Control
-                                                  1.00"
+              data-testid="link.components.TableListK.Metacognitive strategies.components.TableListK.Control
+                   1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -178,8 +178,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="301.3981785809138"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate
-                                                   1.00"
+              data-testid="link.components.TableListK.Metacognitive strategies.components.TableListK.Regulate
+                    1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -191,7 +191,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="328.3546451022064"
             />
             <line
-              data-testid="link.List K.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies"
+              data-testid="link.List K.components.TableListK.External resource management strategies"
               opacity="1"
               stroke="rgb(244, 117, 96)"
               stroke-linecap="round"
@@ -203,8 +203,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="265.5876774428621"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates
-                                                               1.00"
+              data-testid="link.components.TableListK.External resource management strategies.components.TableListK.Learning with classmates
+                                1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -216,8 +216,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="283.68798187885875"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research
-                                                           1.00"
+              data-testid="link.components.TableListK.External resource management strategies.components.TableListK.Literature research
+                            1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -229,8 +229,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="237.56363153207565"
             />
             <line
-              data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment
-                                                            1.00"
+              data-testid="link.components.TableListK.External resource management strategies.components.TableListK.Learning environment
+                             1.00"
               opacity="1"
               stroke="rgb(97, 205, 187)"
               stroke-linecap="round"
@@ -242,7 +242,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               y2="314.9775342237182"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies"
+              data-testid="node.components.TableListK.Cognitive strategies"
               fill="rgb(97, 205, 187)"
               opacity="1"
               r="9.600000000000001"
@@ -251,7 +251,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(157.46256615925492,163.48821265607646) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies"
+              data-testid="node.components.TableListK.Internal resource management strategies"
               fill="rgb(97, 205, 187)"
               opacity="1"
               r="9.600000000000001"
@@ -260,7 +260,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(260.83569380937786,165.4379264442183) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies"
+              data-testid="node.components.TableListK.Metacognitive strategies"
               fill="rgb(97, 205, 187)"
               opacity="1"
               r="9.600000000000001"
@@ -269,7 +269,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(183.05388029669547,272.08906158604367) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies"
+              data-testid="node.components.TableListK.External resource management strategies"
               fill="rgb(97, 205, 187)"
               opacity="1"
               r="9.600000000000001"
@@ -287,8 +287,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(215.5512618491813,214.18920104250628) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize
-                                                   1.00"
+              data-testid="node.components.TableListK.Organize
+                    1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -297,8 +297,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(98.1094000369655,171.62833317699446) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate
-                                                    1.00"
+              data-testid="node.components.TableListK.Elaborate
+                     1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -307,8 +307,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(104.29125566144859,133.05557448336216) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review
-                                                        1.00"
+              data-testid="node.components.TableListK.Critical review
+                         1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -317,8 +317,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(169.08671129131397,104.97626321448402) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat
-                                                 1.00"
+              data-testid="node.components.TableListK.Repeat
+                   1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -327,8 +327,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(130.51915688572646,108.13067079297608) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention
-                                                    1.00"
+              data-testid="node.components.TableListK.Attention
+                     1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -337,8 +337,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(291.7411687249379,91.40173972664262) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort
-                                                 1.00"
+              data-testid="node.components.TableListK.Effort
+                   1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -347,8 +347,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(329.5847985120626,121.81976719876603) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Time
-                                                1.00"
+              data-testid="node.components.TableListK.Time
+                 1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -357,8 +357,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(323.83985887652057,163.2515951451468) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans
-                                                       1.00"
+              data-testid="node.components.TableListK.Goals & plans
+                        1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -367,8 +367,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(201.99855120694426,339.5136367303902) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Control
-                                                  1.00"
+              data-testid="node.components.TableListK.Control
+                   1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -377,8 +377,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(130.1963777942962,301.3981785809138) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate
-                                                   1.00"
+              data-testid="node.components.TableListK.Regulate
+                    1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -387,8 +387,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(160.66078673441098,328.3546451022064) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates
-                                                               1.00"
+              data-testid="node.components.TableListK.Learning with classmates
+                                1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -397,8 +397,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(351.9845410479338,283.68798187885875) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research
-                                                           1.00"
+              data-testid="node.components.TableListK.Literature research
+                            1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -407,8 +407,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               transform="translate(339.0636529474132,237.56363153207565) scale(1)"
             />
             <circle
-              data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment
-                                                            1.00"
+              data-testid="node.components.TableListK.Learning environment
+                             1.00"
               fill="rgb(232, 193, 160)"
               opacity="1"
               r="4"
@@ -443,14 +443,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               x="27.46256615925492"
               y="198.48821265607646"
             >
-              components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+              components.ResultDescriptionListK.Score: 1.00
             </text>
             <text
               style="font-size: 13px; font-family: sans-serif; fill: #333333;"
               x="27.46256615925492"
               y="198.48821265607646"
             >
-              components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+              components.ResultDescriptionListK.Score: 1.00
             </text>
             <path
               d="M151.98126103343378,185.41343315936095 L147.46256615925492,203.48821265607646 L27.46256615925492,203.48821265607646"
@@ -479,14 +479,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               x="27.46256615925492"
               y="218.48821265607646"
             >
-              components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies
+              components.TableListK.Cognitive strategies
             </text>
             <text
               style="font-size: 13px; font-family: sans-serif; fill: #333333;"
               x="27.46256615925492"
               y="218.48821265607646"
             >
-              components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies
+              components.TableListK.Cognitive strategies
             </text>
             <path
               d="M279.35033521310817,178.39817542682954 L310.83569380937786,200.4379264442183 L560.8356938093779,200.4379264442183"
@@ -515,14 +515,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               x="310.83569380937786"
               y="195.4379264442183"
             >
-              components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+              components.ResultDescriptionListK.Score: 1.00
             </text>
             <text
               style="font-size: 13px; font-family: sans-serif; fill: #333333;"
               x="310.83569380937786"
               y="195.4379264442183"
             >
-              components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+              components.ResultDescriptionListK.Score: 1.00
             </text>
             <path
               d="M279.35033521310817,178.39817542682954 L310.83569380937786,200.4379264442183 L560.8356938093779,200.4379264442183"
@@ -551,14 +551,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               x="310.83569380937786"
               y="215.4379264442183"
             >
-              components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies
+              components.TableListK.Internal resource management strategies
             </text>
             <text
               style="font-size: 13px; font-family: sans-serif; fill: #333333;"
               x="310.83569380937786"
               y="215.4379264442183"
             >
-              components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies
+              components.TableListK.Internal resource management strategies
             </text>
             <path
               d="M180.8050962468209,294.5769020847894 L173.05388029669547,372.08906158604367 L28.053880296695468,372.08906158604367"
@@ -587,14 +587,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               x="28.053880296695468"
               y="367.08906158604367"
             >
-              components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+              components.ResultDescriptionListK.Score: 1.00
             </text>
             <text
               style="font-size: 13px; font-family: sans-serif; fill: #333333;"
               x="28.053880296695468"
               y="367.08906158604367"
             >
-              components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+              components.ResultDescriptionListK.Score: 1.00
             </text>
             <path
               d="M180.8050962468209,294.5769020847894 L173.05388029669547,372.08906158604367 L28.053880296695468,372.08906158604367"
@@ -623,14 +623,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               x="28.053880296695468"
               y="387.08906158604367"
             >
-              components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies
+              components.TableListK.Metacognitive strategies
             </text>
             <text
               style="font-size: 13px; font-family: sans-serif; fill: #333333;"
               x="28.053880296695468"
               y="387.08906158604367"
             >
-              components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies
+              components.TableListK.Metacognitive strategies
             </text>
             <path
               d="M285.76858681575135,288.0494498464859 L293.2728343264598,355.5876774428621 L543.2728343264598,355.5876774428621"
@@ -659,14 +659,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               x="293.2728343264598"
               y="350.5876774428621"
             >
-              components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+              components.ResultDescriptionListK.Score: 1.00
             </text>
             <text
               style="font-size: 13px; font-family: sans-serif; fill: #333333;"
               x="293.2728343264598"
               y="350.5876774428621"
             >
-              components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+              components.ResultDescriptionListK.Score: 1.00
             </text>
             <path
               d="M285.76858681575135,288.0494498464859 L293.2728343264598,355.5876774428621 L543.2728343264598,355.5876774428621"
@@ -695,14 +695,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
               x="293.2728343264598"
               y="370.5876774428621"
             >
-              components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies
+              components.TableListK.External resource management strategies
             </text>
             <text
               style="font-size: 13px; font-family: sans-serif; fill: #333333;"
               x="293.2728343264598"
               y="370.5876774428621"
             >
-              components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies
+              components.TableListK.External resource management strategies
             </text>
           </g>
         </svg>
@@ -730,7 +730,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
           transform="translate(0,0)"
         >
           <line
-            data-testid="link.List K.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies"
+            data-testid="link.List K.components.TableListK.Cognitive strategies"
             opacity="1"
             stroke="rgb(244, 117, 96)"
             stroke-linecap="round"
@@ -742,8 +742,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="163.48821265607646"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize
-                                                   1.00"
+            data-testid="link.components.TableListK.Cognitive strategies.components.TableListK.Organize
+                    1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -755,8 +755,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="171.62833317699446"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate
-                                                    1.00"
+            data-testid="link.components.TableListK.Cognitive strategies.components.TableListK.Elaborate
+                     1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -768,8 +768,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="133.05557448336216"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review
-                                                        1.00"
+            data-testid="link.components.TableListK.Cognitive strategies.components.TableListK.Critical review
+                         1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -781,8 +781,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="104.97626321448402"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat
-                                                 1.00"
+            data-testid="link.components.TableListK.Cognitive strategies.components.TableListK.Repeat
+                   1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -794,7 +794,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="108.13067079297608"
           />
           <line
-            data-testid="link.List K.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies"
+            data-testid="link.List K.components.TableListK.Internal resource management strategies"
             opacity="1"
             stroke="rgb(244, 117, 96)"
             stroke-linecap="round"
@@ -806,8 +806,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="165.4379264442183"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention
-                                                    1.00"
+            data-testid="link.components.TableListK.Internal resource management strategies.components.TableListK.Attention
+                     1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -819,8 +819,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="91.40173972664262"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort
-                                                 1.00"
+            data-testid="link.components.TableListK.Internal resource management strategies.components.TableListK.Effort
+                   1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -832,8 +832,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="121.81976719876603"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Time
-                                                1.00"
+            data-testid="link.components.TableListK.Internal resource management strategies.components.TableListK.Time
+                 1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -845,7 +845,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="163.2515951451468"
           />
           <line
-            data-testid="link.List K.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies"
+            data-testid="link.List K.components.TableListK.Metacognitive strategies"
             opacity="1"
             stroke="rgb(244, 117, 96)"
             stroke-linecap="round"
@@ -857,8 +857,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="272.08906158604367"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans
-                                                       1.00"
+            data-testid="link.components.TableListK.Metacognitive strategies.components.TableListK.Goals & plans
+                        1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -870,8 +870,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="339.5136367303902"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Control
-                                                  1.00"
+            data-testid="link.components.TableListK.Metacognitive strategies.components.TableListK.Control
+                   1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -883,8 +883,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="301.3981785809138"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate
-                                                   1.00"
+            data-testid="link.components.TableListK.Metacognitive strategies.components.TableListK.Regulate
+                    1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -896,7 +896,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="328.3546451022064"
           />
           <line
-            data-testid="link.List K.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies"
+            data-testid="link.List K.components.TableListK.External resource management strategies"
             opacity="1"
             stroke="rgb(244, 117, 96)"
             stroke-linecap="round"
@@ -908,8 +908,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="265.5876774428621"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates
-                                                               1.00"
+            data-testid="link.components.TableListK.External resource management strategies.components.TableListK.Learning with classmates
+                                1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -921,8 +921,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="283.68798187885875"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research
-                                                           1.00"
+            data-testid="link.components.TableListK.External resource management strategies.components.TableListK.Literature research
+                            1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -934,8 +934,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="237.56363153207565"
           />
           <line
-            data-testid="link.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies.components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment
-                                                            1.00"
+            data-testid="link.components.TableListK.External resource management strategies.components.TableListK.Learning environment
+                             1.00"
             opacity="1"
             stroke="rgb(97, 205, 187)"
             stroke-linecap="round"
@@ -947,7 +947,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             y2="314.9775342237182"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies"
+            data-testid="node.components.TableListK.Cognitive strategies"
             fill="rgb(97, 205, 187)"
             opacity="1"
             r="9.600000000000001"
@@ -956,7 +956,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(157.46256615925492,163.48821265607646) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies"
+            data-testid="node.components.TableListK.Internal resource management strategies"
             fill="rgb(97, 205, 187)"
             opacity="1"
             r="9.600000000000001"
@@ -965,7 +965,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(260.83569380937786,165.4379264442183) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies"
+            data-testid="node.components.TableListK.Metacognitive strategies"
             fill="rgb(97, 205, 187)"
             opacity="1"
             r="9.600000000000001"
@@ -974,7 +974,7 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(183.05388029669547,272.08906158604367) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies"
+            data-testid="node.components.TableListK.External resource management strategies"
             fill="rgb(97, 205, 187)"
             opacity="1"
             r="9.600000000000001"
@@ -992,8 +992,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(215.5512618491813,214.18920104250628) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize
-                                                   1.00"
+            data-testid="node.components.TableListK.Organize
+                    1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1002,8 +1002,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(98.1094000369655,171.62833317699446) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate
-                                                    1.00"
+            data-testid="node.components.TableListK.Elaborate
+                     1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1012,8 +1012,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(104.29125566144859,133.05557448336216) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review
-                                                        1.00"
+            data-testid="node.components.TableListK.Critical review
+                         1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1022,8 +1022,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(169.08671129131397,104.97626321448402) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat
-                                                 1.00"
+            data-testid="node.components.TableListK.Repeat
+                   1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1032,8 +1032,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(130.51915688572646,108.13067079297608) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention
-                                                    1.00"
+            data-testid="node.components.TableListK.Attention
+                     1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1042,8 +1042,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(291.7411687249379,91.40173972664262) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort
-                                                 1.00"
+            data-testid="node.components.TableListK.Effort
+                   1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1052,8 +1052,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(329.5847985120626,121.81976719876603) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Time
-                                                1.00"
+            data-testid="node.components.TableListK.Time
+                 1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1062,8 +1062,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(323.83985887652057,163.2515951451468) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans
-                                                       1.00"
+            data-testid="node.components.TableListK.Goals & plans
+                        1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1072,8 +1072,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(201.99855120694426,339.5136367303902) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Control
-                                                  1.00"
+            data-testid="node.components.TableListK.Control
+                   1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1082,8 +1082,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(130.1963777942962,301.3981785809138) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate
-                                                   1.00"
+            data-testid="node.components.TableListK.Regulate
+                    1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1092,8 +1092,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(160.66078673441098,328.3546451022064) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates
-                                                               1.00"
+            data-testid="node.components.TableListK.Learning with classmates
+                                1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1102,8 +1102,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(351.9845410479338,283.68798187885875) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research
-                                                           1.00"
+            data-testid="node.components.TableListK.Literature research
+                            1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1112,8 +1112,8 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             transform="translate(339.0636529474132,237.56363153207565) scale(1)"
           />
           <circle
-            data-testid="node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment
-                                                            1.00"
+            data-testid="node.components.TableListK.Learning environment
+                             1.00"
             fill="rgb(232, 193, 160)"
             opacity="1"
             r="4"
@@ -1148,14 +1148,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             x="27.46256615925492"
             y="198.48821265607646"
           >
-            components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+            components.ResultDescriptionListK.Score: 1.00
           </text>
           <text
             style="font-size: 13px; font-family: sans-serif; fill: #333333;"
             x="27.46256615925492"
             y="198.48821265607646"
           >
-            components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+            components.ResultDescriptionListK.Score: 1.00
           </text>
           <path
             d="M151.98126103343378,185.41343315936095 L147.46256615925492,203.48821265607646 L27.46256615925492,203.48821265607646"
@@ -1184,14 +1184,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             x="27.46256615925492"
             y="218.48821265607646"
           >
-            components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies
+            components.TableListK.Cognitive strategies
           </text>
           <text
             style="font-size: 13px; font-family: sans-serif; fill: #333333;"
             x="27.46256615925492"
             y="218.48821265607646"
           >
-            components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies
+            components.TableListK.Cognitive strategies
           </text>
           <path
             d="M279.35033521310817,178.39817542682954 L310.83569380937786,200.4379264442183 L560.8356938093779,200.4379264442183"
@@ -1220,14 +1220,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             x="310.83569380937786"
             y="195.4379264442183"
           >
-            components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+            components.ResultDescriptionListK.Score: 1.00
           </text>
           <text
             style="font-size: 13px; font-family: sans-serif; fill: #333333;"
             x="310.83569380937786"
             y="195.4379264442183"
           >
-            components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+            components.ResultDescriptionListK.Score: 1.00
           </text>
           <path
             d="M279.35033521310817,178.39817542682954 L310.83569380937786,200.4379264442183 L560.8356938093779,200.4379264442183"
@@ -1256,14 +1256,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             x="310.83569380937786"
             y="215.4379264442183"
           >
-            components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies
+            components.TableListK.Internal resource management strategies
           </text>
           <text
             style="font-size: 13px; font-family: sans-serif; fill: #333333;"
             x="310.83569380937786"
             y="215.4379264442183"
           >
-            components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies
+            components.TableListK.Internal resource management strategies
           </text>
           <path
             d="M180.8050962468209,294.5769020847894 L173.05388029669547,372.08906158604367 L28.053880296695468,372.08906158604367"
@@ -1292,14 +1292,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             x="28.053880296695468"
             y="367.08906158604367"
           >
-            components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+            components.ResultDescriptionListK.Score: 1.00
           </text>
           <text
             style="font-size: 13px; font-family: sans-serif; fill: #333333;"
             x="28.053880296695468"
             y="367.08906158604367"
           >
-            components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+            components.ResultDescriptionListK.Score: 1.00
           </text>
           <path
             d="M180.8050962468209,294.5769020847894 L173.05388029669547,372.08906158604367 L28.053880296695468,372.08906158604367"
@@ -1328,14 +1328,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             x="28.053880296695468"
             y="387.08906158604367"
           >
-            components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies
+            components.TableListK.Metacognitive strategies
           </text>
           <text
             style="font-size: 13px; font-family: sans-serif; fill: #333333;"
             x="28.053880296695468"
             y="387.08906158604367"
           >
-            components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies
+            components.TableListK.Metacognitive strategies
           </text>
           <path
             d="M285.76858681575135,288.0494498464859 L293.2728343264598,355.5876774428621 L543.2728343264598,355.5876774428621"
@@ -1364,14 +1364,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             x="293.2728343264598"
             y="350.5876774428621"
           >
-            components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+            components.ResultDescriptionListK.Score: 1.00
           </text>
           <text
             style="font-size: 13px; font-family: sans-serif; fill: #333333;"
             x="293.2728343264598"
             y="350.5876774428621"
           >
-            components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score: 1.00
+            components.ResultDescriptionListK.Score: 1.00
           </text>
           <path
             d="M285.76858681575135,288.0494498464859 L293.2728343264598,355.5876774428621 L543.2728343264598,355.5876774428621"
@@ -1400,14 +1400,14 @@ exports[`Test GraphListK with all Methods GraphListK renders correctly 1`] = `
             x="293.2728343264598"
             y="370.5876774428621"
           >
-            components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies
+            components.TableListK.External resource management strategies
           </text>
           <text
             style="font-size: 13px; font-family: sans-serif; fill: #333333;"
             x="293.2728343264598"
             y="370.5876774428621"
           >
-            components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies
+            components.TableListK.External resource management strategies
           </text>
         </g>
       </svg>

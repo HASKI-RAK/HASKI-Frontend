@@ -45,68 +45,68 @@ describe('Test GraphListK with all Methods', () => {
     expect(data.links.length).toBe(17)
 
     expect(data.nodes[0].id).toMatch(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'
+      'components.TableListK.Cognitive strategies'
     )
     expect(data.nodes[1].id).toMatch(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'
+      'components.TableListK.Internal resource management strategies'
     )
     expect(data.nodes[2].id).toMatch(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'
+      'components.TableListK.Metacognitive strategies'
     )
     expect(data.nodes[3].id).toMatch(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'
+      'components.TableListK.External resource management strategies'
     )
     expect(data.nodes[4].id).toMatch('List K')
-    expect(data.nodes[5].id).toContain('components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize')
-    expect(data.nodes[6].id).toContain('components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate')
-    expect(data.nodes[7].id).toContain('components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review')
-    expect(data.nodes[8].id).toContain('components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat')
-    expect(data.nodes[9].id).toContain('components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention')
-    expect(data.nodes[10].id).toContain('components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort')
-    expect(data.nodes[11].id).toContain('components.Questionnaire.QuestionnaireResults.Table.TableListK.Time')
-    expect(data.nodes[12].id).toContain('components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans')
-    expect(data.nodes[13].id).toContain('components.Questionnaire.QuestionnaireResults.Table.TableListK.Control')
-    expect(data.nodes[14].id).toContain('components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate')
+    expect(data.nodes[5].id).toContain('components.TableListK.Organize')
+    expect(data.nodes[6].id).toContain('components.TableListK.Elaborate')
+    expect(data.nodes[7].id).toContain('components.TableListK.Critical review')
+    expect(data.nodes[8].id).toContain('components.TableListK.Repeat')
+    expect(data.nodes[9].id).toContain('components.TableListK.Attention')
+    expect(data.nodes[10].id).toContain('components.TableListK.Effort')
+    expect(data.nodes[11].id).toContain('components.TableListK.Time')
+    expect(data.nodes[12].id).toContain('components.TableListK.Goals & plans')
+    expect(data.nodes[13].id).toContain('components.TableListK.Control')
+    expect(data.nodes[14].id).toContain('components.TableListK.Regulate')
     expect(data.nodes[15].id).toContain(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates'
+      'components.TableListK.Learning with classmates'
     )
     expect(data.nodes[16].id).toContain(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research'
+      'components.TableListK.Literature research'
     )
     expect(data.nodes[17].id).toContain(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment'
+      'components.TableListK.Learning environment'
     )
 
     expect(data.links[0].source).toMatch('List K')
     expect(data.links[0].target).toMatch(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'
+      'components.TableListK.Cognitive strategies'
     )
     expect(data.links[1].source).toMatch(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'
+      'components.TableListK.Cognitive strategies'
     )
 
     expect(data.links[5].source).toMatch('List K')
     expect(data.links[5].target).toMatch(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'
+      'components.TableListK.Internal resource management strategies'
     )
     expect(data.links[6].source).toMatch(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'
+      'components.TableListK.Internal resource management strategies'
     )
 
     expect(data.links[9].source).toMatch('List K')
     expect(data.links[9].target).toMatch(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'
+      'components.TableListK.Metacognitive strategies'
     )
     expect(data.links[10].source).toMatch(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'
+      'components.TableListK.Metacognitive strategies'
     )
 
     expect(data.links[13].source).toMatch('List K')
     expect(data.links[13].target).toMatch(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'
+      'components.TableListK.External resource management strategies'
     )
     expect(data.links[14].source).toMatch(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'
+      'components.TableListK.External resource management strategies'
     )
   })
 
@@ -122,28 +122,28 @@ describe('Test GraphListK with all Methods', () => {
 
     expect(
       graphListK.getAllByText(
-        'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score' +
+        'components.ResultDescriptionListK.Score' +
           ': ' +
           (Math.round((averageCognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2)
       )[0]
     ).toBeInTheDocument()
     expect(
       graphListK.getAllByText(
-        'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score' +
+        'components.ResultDescriptionListK.Score' +
           ': ' +
           (Math.round((averageInternalResourceManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2)
       )[0]
     ).toBeInTheDocument()
     expect(
       graphListK.getAllByText(
-        'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score' +
+        'components.ResultDescriptionListK.Score' +
           ': ' +
           (Math.round((averageMetacognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2)
       )[0]
     ).toBeInTheDocument()
     expect(
       graphListK.getAllByText(
-        'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.Score' +
+        'components.ResultDescriptionListK.Score' +
           ': ' +
           (Math.round((averageExternalResourcesManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2)
       )[0]
@@ -156,16 +156,16 @@ describe('Test GraphListK with all Methods', () => {
     const { container } = render(<GraphListK data={mockListK} />)
 
     const cognitiveStrategiesNode = container.querySelector(
-      `circle[data-testid='node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies']`
+      `circle[data-testid='node.components.TableListK.Cognitive strategies']`
     )
     const InternResNode = container.querySelector(
-      `circle[data-testid='node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies']`
+      `circle[data-testid='node.components.TableListK.Internal resource management strategies']`
     )
     const MetacognitiveNode = container.querySelector(
-      `circle[data-testid='node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies']`
+      `circle[data-testid='node.components.TableListK.Metacognitive strategies']`
     )
     const ExternalResNode = container.querySelector(
-      `circle[data-testid='node.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies']`
+      `circle[data-testid='node.components.TableListK.External resource management strategies']`
     )
 
     expect(cognitiveStrategiesNode).not.toBe(null)
@@ -192,16 +192,16 @@ describe('Test GraphListK with all Methods', () => {
     const { container } = render(<GraphListK data={mockListK} />)
 
     const cognitiveStrategiesNode = container.querySelector(
-      `circle[data-testid='node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies']`
+      `circle[data-testid='node.components.TableListK.Cognitive strategies']`
     )
     const InternResNode = container.querySelector(
-      `circle[data-testid='node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies']`
+      `circle[data-testid='node.components.TableListK.Internal resource management strategies']`
     )
     const MetacognitiveNode = container.querySelector(
-      `circle[data-testid='node.components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies']`
+      `circle[data-testid='node.components.TableListK.Metacognitive strategies']`
     )
     const ExternalResNode = container.querySelector(
-      `circle[data-testid='node.components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies']`
+      `circle[data-testid='node.components.TableListK.External resource management strategies']`
     )
 
     if (

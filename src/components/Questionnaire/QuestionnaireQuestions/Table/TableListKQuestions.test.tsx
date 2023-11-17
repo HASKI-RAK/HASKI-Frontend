@@ -36,7 +36,7 @@ describe('TableListKQuestions', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    expect(getByText('components.ListKQuestions.Introduction'))
     fireEvent.click(startButton)
 
     const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
@@ -81,7 +81,7 @@ describe('TableListKQuestions', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    expect(getByText('components.ListKQuestions.Introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
@@ -125,7 +125,7 @@ describe('TableListKQuestions', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    expect(getByText('components.ListKQuestions.Introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
@@ -199,7 +199,7 @@ describe('TableListKQuestions', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    expect(getByText('components.ListKQuestions.Introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
@@ -240,20 +240,20 @@ describe('TableListKQuestions', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    expect(getByText('components.ListKQuestions.Introduction'))
     fireEvent.click(startButton)
 
-    const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1'
-    const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2'
-    const ValuePage1RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-3'
-    const ValuePage1RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-4'
-    const ValuePage1RadioButton5 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-5'
+    const ValuePage1RadioButton1 = 'components.TableListKQuestions.Answer-1'
+    const ValuePage1RadioButton2 = 'components.TableListKQuestions.Answer-2'
+    const ValuePage1RadioButton3 = 'components.TableListKQuestions.Answer-3'
+    const ValuePage1RadioButton4 = 'components.TableListKQuestions.Answer-4'
+    const ValuePage1RadioButton5 = 'components.TableListKQuestions.Answer-5'
 
-    const ValuePage2RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1'
-    const ValuePage2RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1'
-    const ValuePage2RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1'
-    const ValuePage2RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1'
-    const ValuePage2RadioButton5 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1'
+    const ValuePage2RadioButton1 = 'components.TableListKQuestions.Answer-1'
+    const ValuePage2RadioButton2 = 'components.TableListKQuestions.Answer-1'
+    const ValuePage2RadioButton3 = 'components.TableListKQuestions.Answer-1'
+    const ValuePage2RadioButton4 = 'components.TableListKQuestions.Answer-1'
+    const ValuePage2RadioButton5 = 'components.TableListKQuestions.Answer-1'
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
@@ -379,7 +379,7 @@ describe('TableListKQuestions', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    expect(getByText('components.ListKQuestions.Introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
@@ -479,7 +479,7 @@ describe('TableListKQuestions', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    expect(getByText('components.ListKQuestions.Introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
@@ -571,7 +571,7 @@ describe('TableListKQuestions', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    expect(getByText('components.ListKQuestions.Introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')

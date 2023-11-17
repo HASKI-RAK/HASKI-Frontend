@@ -45,10 +45,10 @@ const QuestionnaireResultsListKLoading = memo(({ t, listkLoading }: Questionnair
       ) : (
         <Stack alignItems="center">
           <Typography variant="body2" data-testid={'ActiveStepListKNoData'}>
-            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
+            {t('components.NoData.Part1')}
             <ListItem sx={{ display: 'list-item' }}>
-              {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}{' '}
-              {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+              {t('components.NoData.ListK')}{' '}
+              {t('components.NoData.Part2')}
             </ListItem>
           </Typography>
         </Stack>
@@ -71,10 +71,10 @@ const QuestionnaireResultsILSLoading = memo(({ t, ilsLoading }: QuestionnaireRes
       ) : (
         <Stack alignItems="center">
           <Typography variant="body2" data-testid={'ActiveStepILSNoData'}>
-            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
+            {t('components.NoData.Part1')}
             <ListItem sx={{ display: 'list-item' }}>
-              {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')}{' '}
-              {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+              {t('components.NoData.ILSLong.Part1')}{' '}
+              {t('components.NoData.Part2')}
             </ListItem>
           </Typography>
         </Stack>
@@ -94,8 +94,8 @@ const QuestionnaireResultsModal = memo(
     const [listkLoading, setListKLoading] = useState(true)
 
     const steps = [
-      t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults'),
-      t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults')
+      t('components.ResultDescriptionILS.ILSResults'),
+      t('components.ResultDescriptionILS.ListKResults')
     ]
 
     const [activeStep, setActiveStep] = useState(activeStepForTesting)
@@ -251,7 +251,7 @@ const QuestionnaireResultsModal = memo(
                   window.open('/files/Informationsdokument_ILS_ListK_HASKI.pdf', '_blank')
                 }}>
                 <Typography variant="body2" gutterBottom>
-                  {t('components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.MoreInformation')}
+                  {t('components.QuestionnaireResultsModal.MoreInformation')}
                 </Typography>
               </Link>
             </Stack>

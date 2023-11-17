@@ -44,7 +44,7 @@ const useGeneralSubscalesBelow3Element = (generalProps: GeneralSubscalesProps): 
     averageSubscaleBelow3String +=
       ' ' +
       t(
-        'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.SubscaleAverage Below3.' +
+        'components.ResultDescriptionListK.SubscaleAverage Below3.' +
           averageSubscaleBelow3Array.length
       )
   }
@@ -52,10 +52,10 @@ const useGeneralSubscalesBelow3Element = (generalProps: GeneralSubscalesProps): 
   return (
     <div key={'GeneralDescriptionListK'}>
       <Typography variant="h6" gutterBottom>
-        {t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.GeneralDescription.Title')} <br />
+        {t('components.ResultDescriptionListK.GeneralDescription.Title')} <br />
       </Typography>
       <Typography variant="body2" gutterBottom>
-        {t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.GeneralDescription.Description')}
+        {t('components.ResultDescriptionListK.GeneralDescription.Description')}
         {averageSubscaleBelow3String} <br />
       </Typography>
     </div>
@@ -66,7 +66,7 @@ const useCognitiveStrategiesBelow3Element = (generalProps: CognitiveStrategiesPr
   const { t } = useTranslation()
 
   let cognitiveStrategiesBelow3String = t(
-    'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.CognitiveStrategies Below3.Part1'
+    'components.ResultDescriptionListK.CognitiveStrategies Below3.Part1'
   )
   const cognitiveStrategiesBelow3Array = []
   const cognitiveStrategiesBelow3Html = []
@@ -74,22 +74,22 @@ const useCognitiveStrategiesBelow3Element = (generalProps: CognitiveStrategiesPr
   if (generalProps.organize < 3) {
     cognitiveStrategiesBelow3Array.push('Organize')
     cognitiveStrategiesBelow3String +=
-      ' ' + t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize') + ' &'
+      ' ' + t('components.TableListK.Organize') + ' &'
   }
   if (generalProps.elaborate < 3) {
     cognitiveStrategiesBelow3Array.push('Elaborate')
     cognitiveStrategiesBelow3String +=
-      ' ' + t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate') + ' &'
+      ' ' + t('components.TableListK.Elaborate') + ' &'
   }
   if (generalProps.criticalReview < 3) {
     cognitiveStrategiesBelow3Array.push('Critical review')
     cognitiveStrategiesBelow3String +=
-      ' ' + t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review') + ' &'
+      ' ' + t('components.TableListK.Critical review') + ' &'
   }
   if (generalProps.repeat < 3) {
     cognitiveStrategiesBelow3Array.push('Repeat')
     cognitiveStrategiesBelow3String +=
-      ' ' + t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat') + ' &'
+      ' ' + t('components.TableListK.Repeat') + ' &'
   }
 
   //Remove last " & "
@@ -98,11 +98,11 @@ const useCognitiveStrategiesBelow3Element = (generalProps: CognitiveStrategiesPr
   if (cognitiveStrategiesBelow3Array.length > 0) {
     cognitiveStrategiesBelow3String +=
       ' ' +
-      t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.CognitiveStrategies Below3.Part2')
+      t('components.ResultDescriptionListK.CognitiveStrategies Below3.Part2')
     cognitiveStrategiesBelow3Html.push(
       <div key={'CognitiveStrategiesDescriptionListK'}>
         <Typography variant={'h6'} gutterBottom>
-          {t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies')}
+          {t('components.TableListK.Cognitive strategies')}
         </Typography>
         <Typography variant="body2" gutterBottom>
           {cognitiveStrategiesBelow3String}
@@ -118,7 +118,7 @@ const useMetacognitiveStrategiesBelow3Element = (metacognitiveProps: MetaCogniti
   const { t } = useTranslation()
 
   let metacognitiveStrategiesBelow3String = t(
-    'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.MetacognitiveStrategies Below3.Part1'
+    'components.ResultDescriptionListK.MetacognitiveStrategies Below3.Part1'
   )
   const metacognitiveStrategiesBelow3Array = []
   const metacognitiveStrategiesBelow3Html = []
@@ -128,21 +128,21 @@ const useMetacognitiveStrategiesBelow3Element = (metacognitiveProps: MetaCogniti
     metacognitiveStrategiesBelow3String +=
       ' ' +
       t(
-        'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.MetacognitiveStrategies Below3.Goals & Plans'
+        'components.ResultDescriptionListK.MetacognitiveStrategies Below3.Goals & Plans'
       ) +
       ' &'
   }
   if (metacognitiveProps.control < 3) {
     metacognitiveStrategiesBelow3Array.push('Control')
     metacognitiveStrategiesBelow3String +=
-      ' ' + t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Control') + ' &'
+      ' ' + t('components.TableListK.Control') + ' &'
   }
   if (metacognitiveProps.regulate < 3) {
     metacognitiveStrategiesBelow3Array.push('Regulate')
     metacognitiveStrategiesBelow3String +=
       ' ' +
       t(
-        'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.MetacognitiveStrategies Below3.Regulate'
+        'components.ResultDescriptionListK.MetacognitiveStrategies Below3.Regulate'
       ) +
       ' &'
   }
@@ -158,7 +158,7 @@ const useMetacognitiveStrategiesBelow3Element = (metacognitiveProps: MetaCogniti
     metacognitiveStrategiesBelow3Html.push(
       <div key={'MetaCognitiveStrategiesDescriptionListK'}>
         <Typography variant={'h6'} gutterBottom>
-          {t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies')}
+          {t('components.TableListK.Metacognitive strategies')}
         </Typography>
         <Typography variant="body2" gutterBottom>
           {metacognitiveStrategiesBelow3String}
@@ -194,14 +194,14 @@ const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: { [key
       <div key={'RelevantSubscalesBelow3DescriptionListK'}>
         <Typography variant={'h6'} gutterBottom>
           {t(
-            'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.' +
+            'components.ResultDescriptionListK.' +
               subscalesBelow3Array.join('') +
               ' Below3.Title'
           )}
         </Typography>
         <Typography variant="body2" gutterBottom>
           {t(
-            'components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionListK.' +
+            'components.ResultDescriptionListK.' +
               subscalesBelow3Array.join('') +
               ' Below3.Description'
           )}

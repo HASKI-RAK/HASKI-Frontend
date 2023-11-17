@@ -30,7 +30,7 @@ describe('MenuBar', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.ILSQuestions.Introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -97,7 +97,7 @@ describe('MenuBar', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.ILSQuestions.Introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -161,7 +161,7 @@ describe('MenuBar', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    expect(getByText('components.ListKQuestions.Introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
@@ -518,7 +518,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('questionnaireILSshort'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
     expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')
+      getByText('components.ILSQuestions.Introduction')
     ).toBeInTheDocument()
   })
 
@@ -537,7 +537,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('questionnaireILSshort'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
     expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')
+      getByText('components.ILSQuestions.Introduction')
     ).toBeInTheDocument()
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
@@ -557,7 +557,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('questionnaireILS'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
     expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')
+      getByText('components.ILSQuestions.Introduction')
     ).toBeInTheDocument()
   })
 
@@ -576,7 +576,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('questionnaireILS'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
     expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')
+      getByText('components.ILSQuestions.Introduction')
     ).toBeInTheDocument()
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
@@ -596,7 +596,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('questionnaireListk'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
     expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')
+      getByText('components.ListKQuestions.Introduction')
     ).toBeInTheDocument()
   })
 
@@ -615,7 +615,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('questionnaireListk'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
     expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')
+      getByText('components.ListKQuestions.Introduction')
     ).toBeInTheDocument()
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()

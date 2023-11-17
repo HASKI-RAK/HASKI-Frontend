@@ -113,8 +113,8 @@ export const TableILSQuestions = memo(
       return [
         ...(t<string>(
           ilsLong
-            ? 'components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions'
-            : 'components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions',
+            ? 'components.ILSLongQuestions'
+            : 'components.ILSShortQuestions',
           {
             returnObjects: true
           }
@@ -221,15 +221,15 @@ export const TableILSQuestions = memo(
     )
 
     const questionnaireType = ilsLong
-      ? t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')
-      : t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')
+      ? t('components.NoData.ILSLong.Part1')
+      : t('components.NoData.ILSShort.Part1')
 
     return (
       <Box>
         {activeStep == 0 ? (
           <CoverSheet
             header={questionnaireType}
-            body={t('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')}
+            body={t('components.ILSQuestions.Introduction')}
           />
         ) : (
           <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
