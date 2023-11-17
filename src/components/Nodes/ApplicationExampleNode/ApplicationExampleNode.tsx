@@ -32,7 +32,7 @@ const ApplicationExampleNode = ({ data }: NodeProps<LearningPathLearningElementN
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <SettingsApplications  sx={{ fontSize: 50 }} />
+        <SettingsApplications sx={{ fontSize: 50 }} />
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}
