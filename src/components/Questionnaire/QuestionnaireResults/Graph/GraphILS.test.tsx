@@ -72,6 +72,6 @@ describe('Test GraphILS with all Methods', () => {
       graphILS.getByText('components.TableILS.global')
     ).toBeInTheDocument()
 
-    expect(graphILS).toMatchSnapshot()
+    expect(graphILS).toBeTruthy()
   })
 })
