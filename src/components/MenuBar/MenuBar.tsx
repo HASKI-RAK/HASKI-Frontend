@@ -316,7 +316,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('help')}>
+            <Tooltip title={t('AppGlobal.Help')}>
               <IconButton
                 id="manual-icon-button"
                 onClick={() => {

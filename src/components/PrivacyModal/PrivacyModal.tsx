@@ -146,7 +146,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                           }
                         })
                       }}>
-                      {t('decline')}
+                      {t('AppGlobal.Decline')}
                     </Button>
                   </Tooltip>
                   <Button
@@ -154,7 +154,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                     sx={{ alignSelf: 'end' }}
                     disabled={!checked}
                     onClick={() => handleModal(true)}>
-                    {t('accept')}
+                    {t('AppGlobal.Accept')}
                   </Button>
                 </Box>
               </Typography>

@@ -96,7 +96,7 @@ const ProjectDescription = () => {
       />
       <Grid container item justifyContent="center" xs={12}>
         <Typography sx={{ pt: '1rem', pb: '1rem' }} variant="subtitle1">
-          {t('pages.projectdescription.imageSources') + t('universityKempten') + ', '}
+          {t('pages.projectdescription.imageSources') + t('AppGlobal.universityKempten') + ', '}
           <a href="https://de.freepik.com/fotos-kostenlos/close-up-der-studentin-schreiben-auf-laptop-am-tisch_1147740.htm">
             {t('pages.projectdescription.imageSource-1')}
           </a>

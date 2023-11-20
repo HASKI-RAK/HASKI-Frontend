@@ -125,7 +125,7 @@ const QuestionnaireResultsModal = memo(
           .catch((error) => {
             log.error(error)
             addSnackbar({
-              message: t('User.fetching.error'),
+              message: t('Error.fetchUser'),
               severity: 'error'
             })
           })
@@ -155,7 +155,7 @@ const QuestionnaireResultsModal = memo(
           .catch((error) => {
             log.error(error)
             addSnackbar({
-              message: t('User.fetching.error'),
+              message: t('Error.fetchUser'),
               severity: 'error'
             })
           })
@@ -262,7 +262,7 @@ const QuestionnaireResultsModal = memo(
                 onClick={handleBack}
                 data-testid="backButton"
                 disabled={activeStep === 0}>
-                {t('Back')}
+                {t('AppGlobal.Back')}
               </Button>
               <Button
                 variant="contained"
@@ -270,7 +270,7 @@ const QuestionnaireResultsModal = memo(
                 onClick={handleNext}
                 data-testid="nextButton"
                 disabled={activeStep === 1}>
-                {t('Next')}
+                {t('AppGlobal.Next')}
               </Button>
             </Stack>
           </Stack>

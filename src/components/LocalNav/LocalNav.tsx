@@ -89,7 +89,7 @@ const LocalNav = ({
               </AccordionSummary>
               <AccordionDetails sx={{ flexDirection: 'column' }}>
                 {openAccordion === index && (
-                  <Suspense fallback={<div>{t('loading')}</div>}>
+                  <Suspense fallback={<div>{t('AppGlobal.Loading')}</div>}>
                     <LazyLoadingLearningPathElement
                       topic={topic}
                       courseId={courseId}
