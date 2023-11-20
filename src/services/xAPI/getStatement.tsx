@@ -35,7 +35,7 @@ const getActor = (lmsUserID: string) => {
  */
 const getVerb = (verb: string) => {
   return {
-    id: getConfig().WIKI?.concat('/verbs/').concat(verb) ?? '', // URI of action in online directory + element -> hardcoded
+    id: (getConfig().WIKI ?? '').concat('/verbs/').concat(verb), // URI of action in online directory + element -> hardcoded
     display: {
       en: verb
     }
@@ -62,7 +62,7 @@ const getObject = (componentURL: string, component: string) => {
       name: {
         en: component
       },
-      type: getConfig().WIKI?.concat('p/common/components/').concat(component.toLowerCase()) ?? '' // wiki url to component e.g. button (common) -> hardcoded // wiki url + componentName.toLowerCase()
+      type: (getConfig().WIKI ?? '').concat('/common/components/').concat(component.toLowerCase()) // wiki url to component e.g. button (common) -> hardcoded // wiki url + componentName.toLowerCase()
     }
   }
 }
@@ -86,9 +86,9 @@ const getParent = (path: string, getEnglishName: (key: string) => string) => {
       id: new URL(window.location.href).origin.concat(path),
       definition: {
         type:
-          getConfig()
-            .WIKI?.concat('/pages/')
-            .concat(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/) ?? '',
+          (getConfig()
+            .WIKI ?? '').concat('/pages/')
+            .concat(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/),
         name: {
           en: getEnglishName(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/) ?? ''
         }
@@ -112,7 +112,7 @@ const getGrouping = () => {
     {
       id: new URL(window.location.href).origin,
       definition: {
-        type: getConfig().WIKI?.concat('/pages/home') ?? '',
+        type: (getConfig().WIKI ?? '').concat('/pages/home'),
         name: {
           en: 'Home'
         }
