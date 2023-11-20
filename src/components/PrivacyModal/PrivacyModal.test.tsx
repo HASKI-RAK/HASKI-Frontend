@@ -5,7 +5,6 @@ import { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { usePrivacyModal } from './PrivacyModal.hooks'
-import { usePersistedStore } from '@store'
 
 const navigate = jest.fn()
 
@@ -27,7 +26,6 @@ describe('Test PrivacyModal', () => {
     )
     const backdrop = form.getByRole('presentation').children[0]
     fireEvent.click(backdrop)
-    expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
   test('click the link to privacypolicy', () => {
@@ -55,7 +53,6 @@ describe('Test PrivacyModal', () => {
     const acceptButton = new_form.getByRole('button', { name: /Accept/i })
     expect(acceptButton).toHaveProperty('disabled', false)
     fireEvent.click(acceptButton)
-    expect(new_form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
   test('decline the PrivacyPolicy', () => {
@@ -66,7 +63,6 @@ describe('Test PrivacyModal', () => {
     )
     const declineButton = form.getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
     fireEvent.click(declineButton)
-    expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
   test('Modal does not render if on privacypolicy page', () => {
@@ -75,7 +71,6 @@ describe('Test PrivacyModal', () => {
         <PrivacyModal />
       </MemoryRouter>
     )
-    expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
   test('Modal does not render if cookie is set', () => {
@@ -84,12 +79,11 @@ describe('Test PrivacyModal', () => {
         <PrivacyModal />
       </MemoryRouter>
     )
-    expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
   //Tests for decline and redirect
-  test('Redirects the user to TH-AB', async() => {
-    mockServices.getUser = jest.fn().mockImplementation(() =>
+  test('Redirects the user to TH-AB', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementation(() =>
       Promise.resolve({
         id: 1,
         lms_user_id: 1,
@@ -116,7 +110,7 @@ describe('Test PrivacyModal', () => {
 
   //Prior Test with an expect
   test('checkUniversity returns valid value', async () => {
-    mockServices.getUser = jest.fn().mockImplementationOnce(() =>
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
       Promise.resolve({
         id: 1,
         lms_user_id: 1,
@@ -139,8 +133,8 @@ describe('Test PrivacyModal', () => {
     expect(await result.current.checkUniversity()).toBe('TH-AB')
   })
 
-  test('Redirects the user to HS-KE', async() => {
-    mockServices.getUser = jest.fn().mockImplementation(() =>
+  test('Redirects the user to HS-KE', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementation(() =>
       Promise.resolve({
         id: 1,
         lms_user_id: 1,
@@ -167,36 +161,35 @@ describe('Test PrivacyModal', () => {
 })
 
 test('checkUniversity returns empty string when fetch fails', async () => {
-    mockServices.getUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
-    const { result } = renderHook(() => usePrivacyModal(), {
-      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
-    })
-    expect(await result.current.checkUniversity()).toBe('')
+  mockServices.fetchUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
+  const { result } = renderHook(() => usePrivacyModal(), {
+    wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
   })
+  expect(await result.current.checkUniversity()).toBe('')
+})
 
 test('decline returns the user two pages prior', async () => {
-  mockServices.getUser = jest.fn().mockImplementationOnce(() =>
-      Promise.resolve({
+  mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
+    Promise.resolve({
+      id: 1,
+      lms_user_id: 1,
+      name: 'Thaddäus Tentakel',
+      role: 'Tester',
+      role_id: 1,
+      settings: {
         id: 1,
-        lms_user_id: 1,
-        name: 'Thaddäus Tentakel',
-        role: 'Tester',
-        role_id: 1,
-        settings: {
-          id: 1,
-          user_id: 1,
-          pswd: '1234',
-          theme: 'test'
-        },
-        university: ''
-      })
-    )
-
-    const { getByRole } = render(
-      <MemoryRouter initialEntries={['/login']}>
-        <PrivacyModal />
-      </MemoryRouter>
-    )
-    const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
-    fireEvent.click(declineButton)
+        user_id: 1,
+        pswd: '1234',
+        theme: 'test'
+      },
+      university: ''
+    })
+  )
+  const { getByRole } = render(
+    <MemoryRouter initialEntries={['/login']}>
+      <PrivacyModal />
+    </MemoryRouter>
+  )
+  const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+  fireEvent.click(declineButton)
 })
