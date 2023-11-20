@@ -626,7 +626,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       useTranslation: () => {
         return {
           t: (str: string) => {
-            if (str === 'components.TableILS.balanced') return 'active-balanced'
+            if (str === 'components.TableILS.balanced') return 'balanced'
             else return str.substring(20, str.length)
           },
           i18n: {
@@ -668,7 +668,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
 
     expect(container.innerHTML.substring(693, 693 + '-1 '.length)).toBe('-1 ')
     expect(container.innerHTML.substring(800, 800 + '-2 '.length)).toBe('-2 ')
-    expect(container.innerHTML.substring(854, 854 + '-3'.length)).toBe('-3')
+    expect(container.innerHTML.substring(1019, 1019 + '-3'.length)).toBe('-3')
   })
 
   test('Switch default case', () => {
@@ -677,7 +677,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       useTranslation: () => {
         return {
           t: (str: string) => {
-            if (str === 'components.TableILS.balanced') return 'active-balanced'
+            if (str === 'components.TableILS.balanced') return 'balanced'
             else return str.substring(20, str.length)
           },
           i18n: {

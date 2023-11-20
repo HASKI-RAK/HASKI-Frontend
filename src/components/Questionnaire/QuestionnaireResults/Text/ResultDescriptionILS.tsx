@@ -77,7 +77,7 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
     } else {
       for (const dim in balancedDimensionsArray) {
         switch (balancedDimensionsArray[dim]) {
-          case 'activate-balanced':
+          case 'active-balanced':
             balancedDimensionsKeyWordString += t('components.ResultDescriptionILS.processingBalanced') + ' & '
             break
           case 'reflective-balanced':
