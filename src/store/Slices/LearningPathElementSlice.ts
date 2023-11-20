@@ -1,19 +1,19 @@
 import { LearningPathElement, LearningPathElementReturn } from '@core'
-import { getLearningPathElement } from '@services'
+import { fetchLearningPathElement } from '@services'
 import { StateCreator } from 'zustand'
 import { StoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
 export default interface LearningPathSlice {
   _cache_learningPathElement_record: Record<string, LearningPathElement | undefined>
-  fetchLearningPathElement: LearningPathElementReturn
+  getLearningPathElement: LearningPathElementReturn
 }
 
 export const createLearningPathElementSlice: StateCreator<StoreState, [], [], LearningPathSlice> = (set, get) => {
   resetters.push(() => set({ _cache_learningPathElement_record: {} }))
   return {
     _cache_learningPathElement_record: {},
-    fetchLearningPathElement: async (...arg) => {
+    getLearningPathElement: async (...arg) => {
       const [userId, lmsUserId, studentId, courseId, topicId] = arg
 
       // Check if we have the learning path cached
@@ -21,7 +21,7 @@ export const createLearningPathElementSlice: StateCreator<StoreState, [], [], Le
 
       if (!cached) {
         // If not, fetch it and cache it
-        const learningPathElement_response = await getLearningPathElement(
+        const learningPathElement_response = await fetchLearningPathElement(
           userId,
           lmsUserId,
           studentId,
