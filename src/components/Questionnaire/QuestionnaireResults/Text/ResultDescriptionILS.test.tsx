@@ -25,7 +25,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(300, 300 + 'EverythingBalanced'.length)).toBe('EverythingBalanced')
+    expect(container.innerHTML.substring(300, 300 + 'everythingBalanced'.length)).toBe('everythingBalanced')
   })
 
   test('all negative dimensions are balanced', () => {
@@ -49,7 +49,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(300, 300 + 'EverythingBalanced'.length)).toBe('EverythingBalanced')
+    expect(container.innerHTML.substring(300, 300 + 'everythingBalanced'.length)).toBe('everythingBalanced')
   })
 
   test('3 dimensions are balanced, 1 Dimension is active & moderate', () => {
@@ -73,7 +73,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(343, 343 + 'Active.moderate'.length)).toBe('Active.moderate')
+    expect(container.innerHTML.substring(343, 343 + 'active-moderate'.length)).toBe('active-moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is active & strong', () => {
@@ -97,7 +97,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(341, 341 + 'Active.strong'.length)).toBe('Active.strong')
+    expect(container.innerHTML.substring(341, 341 + 'active-strong'.length)).toBe('active-strong')
   })
 
   test('3 dimensions are balanced, 1 Dimension is reflective & moderate', () => {
@@ -121,7 +121,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(351, 351 + 'Reflective.moderate'.length)).toBe('Reflective.moderate')
+    expect(container.innerHTML.substring(351, 351 + 'reflective-moderate'.length)).toBe('reflective-moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is reflective & strong', () => {
@@ -145,7 +145,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(349, 349 + 'Reflective.strong'.length)).toBe('Reflective.strong')
+    expect(container.innerHTML.substring(349, 349 + 'reflective-strong'.length)).toBe('reflective-strong')
   })
 
   test('3 dimensions do not matter, 1 Dimension is reflective & balanced', () => {
@@ -168,8 +168,8 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(1594, 1594 + 'SomethingBalanced.processing'.length)).toBe(
-      'SomethingBalanced.processing'
+    expect(container.innerHTML.substring(1590, 1590 + 'processingBalanced'.length)).toBe(
+      'processingBalanced'
     )
   })
 
@@ -193,7 +193,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(345, 345 + 'Sensory.moderate'.length)).toBe('Sensory.moderate')
+    expect(container.innerHTML.substring(345, 345 + 'sensory-moderate'.length)).toBe('sensory-moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is sensory & strong', () => {
@@ -216,7 +216,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(343, 343 + 'Sensory.strong'.length)).toBe('Sensory.strong')
+    expect(container.innerHTML.substring(343, 343 + 'sensory-strong'.length)).toBe('sensory-strong')
   })
 
   test('3 dimensions are balanced, 1 Dimension is intuitive & moderate', () => {
@@ -239,7 +239,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(349, 349 + 'Intuitive.moderate'.length)).toBe('Intuitive.moderate')
+    expect(container.innerHTML.substring(349, 349 + 'intuitive-moderate'.length)).toBe('intuitive-moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is intuitive & strong', () => {
@@ -262,7 +262,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(347, 347 + 'Intuitive.strong'.length)).toBe('Intuitive.strong')
+    expect(container.innerHTML.substring(347, 347 + 'intuitive-strong'.length)).toBe('intuitive-strong')
   })
 
   test('3 dimensions do not matter, 1 Dimension is intuitive & balanced', () => {
@@ -285,8 +285,8 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(1591, 1591 + 'SomethingBalanced.perception'.length)).toBe(
-      'SomethingBalanced.perception'
+    expect(container.innerHTML.substring(1587, 1587 + 'perceptionBalanced'.length)).toBe(
+      'perceptionBalanced'
     )
   })
 
@@ -310,7 +310,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(343, 343 + 'Visual.moderate'.length)).toBe('Visual.moderate')
+    expect(container.innerHTML.substring(343, 343 + 'visual-moderate'.length)).toBe('visual-moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is visual & strong', () => {
@@ -333,7 +333,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(341, 341 + 'Visual.strong'.length)).toBe('Visual.strong')
+    expect(container.innerHTML.substring(341, 341 + 'visual-strong'.length)).toBe('visual-strong')
   })
 
   test('3 dimensions are balanced, 1 Dimension is verbal & moderate', () => {
@@ -356,7 +356,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(343, 343 + 'Verbal.moderate'.length)).toBe('Verbal.moderate')
+    expect(container.innerHTML.substring(343, 343 + 'verbal-moderate'.length)).toBe('verbal-moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is verbal & strong', () => {
@@ -379,7 +379,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(341, 341 + 'Verbal.strong'.length)).toBe('Verbal.strong')
+    expect(container.innerHTML.substring(341, 341 + 'verbal-strong'.length)).toBe('verbal-strong')
   })
 
   test('3 dimensions do not matter, 1 Dimension is verbal & balanced', () => {
@@ -402,8 +402,8 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(1594, 1594 + 'SomethingBalanced.presentation'.length)).toBe(
-      'SomethingBalanced.presentation'
+    expect(container.innerHTML.substring(1590, 1590 + 'presentationBalanced'.length)).toBe(
+      'presentationBalanced'
     )
   })
 
@@ -427,7 +427,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(351, 351 + 'Sequential.moderate'.length)).toBe('Sequential.moderate')
+    expect(container.innerHTML.substring(351, 351 + 'sequential-moderate'.length)).toBe('sequential-moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is sequential & strong', () => {
@@ -450,7 +450,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(349, 349 + 'Sequential.strong'.length)).toBe('Sequential.strong')
+    expect(container.innerHTML.substring(349, 349 + 'sequential-strong'.length)).toBe('sequential-strong')
   })
 
   test('3 dimensions are balanced, 1 Dimension is global & moderate', () => {
@@ -473,7 +473,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(343, 343 + 'Global.moderate'.length)).toBe('Global.moderate')
+    expect(container.innerHTML.substring(343, 343 + 'global-moderate'.length)).toBe('global-moderate')
   })
 
   test('3 dimensions are balanced, 1 Dimension is global & strong', () => {
@@ -496,7 +496,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(341, 341 + 'Global.strong'.length)).toBe('Global.strong')
+    expect(container.innerHTML.substring(341, 341 + 'global-strong'.length)).toBe('global-strong')
   })
 
   test('3 dimensions do not matter, 1 Dimension is global & balanced', () => {
@@ -519,8 +519,8 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(1582, 1582 + 'SomethingBalanced.organisation'.length)).toBe(
-      'SomethingBalanced.organisation'
+    expect(container.innerHTML.substring(1578, 1578 + 'organisationBalanced'.length)).toBe(
+      'organisationBalanced'
     )
   })
 
@@ -544,10 +544,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(713, 713 + 'Sensory.moderate'.length)).toBe('Sensory.moderate')
-    expect(container.innerHTML.substring(343, 343 + 'Active.moderate'.length)).toBe('Active.moderate')
-    expect(container.innerHTML.substring(1082, 1082 + 'Visual.moderate'.length)).toBe('Visual.moderate')
-    expect(container.innerHTML.substring(1458, 1458 + 'Sequential.moderate'.length)).toBe('Sequential.moderate')
+    expect(container.innerHTML.substring(713, 713 + 'sensory-moderate'.length)).toBe('sensory-moderate')
+    expect(container.innerHTML.substring(343, 343 + 'active-moderate'.length)).toBe('active-moderate')
+    expect(container.innerHTML.substring(1082, 1082 + 'visual-moderate'.length)).toBe('visual-moderate')
+    expect(container.innerHTML.substring(1458, 1458 + 'sequential-moderate'.length)).toBe('sequential-moderate')
   })
 
   test('all dimensions strong positive', () => {
@@ -570,10 +570,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(707, 707 + 'Sensory.strong'.length)).toBe('Sensory.strong')
-    expect(container.innerHTML.substring(341, 341 + 'Active.strong'.length)).toBe('Active.strong')
-    expect(container.innerHTML.substring(1072, 1072 + 'Visual.strong'.length)).toBe('Visual.strong')
-    expect(container.innerHTML.substring(1444, 1444 + 'Sequential.strong'.length)).toBe('Sequential.strong')
+    expect(container.innerHTML.substring(707, 707 + 'sensory-strong'.length)).toBe('sensory-strong')
+    expect(container.innerHTML.substring(341, 341 + 'active-strong'.length)).toBe('active-strong')
+    expect(container.innerHTML.substring(1072, 1072 + 'visual-strong'.length)).toBe('visual-strong')
+    expect(container.innerHTML.substring(1444, 1444 + 'sequential-strong'.length)).toBe('sequential-strong')
   })
 
   test('all dimensions moderate negative', () => {
@@ -596,10 +596,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(729, 729 + 'Intuitive.moderate'.length)).toBe('Intuitive.moderate')
-    expect(container.innerHTML.substring(351, 351 + 'Reflective.moderate'.length)).toBe('Reflective.moderate')
-    expect(container.innerHTML.substring(1100, 1100 + 'Verbal.moderate'.length)).toBe('Verbal.moderate')
-    expect(container.innerHTML.substring(1468, 1468 + 'Global.moderate'.length)).toBe('Global.moderate')
+    expect(container.innerHTML.substring(729, 729 + 'intuitive-moderate'.length)).toBe('intuitive-moderate')
+    expect(container.innerHTML.substring(351, 351 + 'reflective-moderate'.length)).toBe('reflective-moderate')
+    expect(container.innerHTML.substring(1100, 1100 + 'verbal-moderate'.length)).toBe('verbal-moderate')
+    expect(container.innerHTML.substring(1468, 1468 + 'global-moderate'.length)).toBe('global-moderate')
   })
 
   test('all dimensions strong negative', () => {
@@ -622,10 +622,10 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(723, 723 + 'Intuitive.strong'.length)).toBe('Intuitive.strong')
-    expect(container.innerHTML.substring(349, 349 + 'Reflective.strong'.length)).toBe('Reflective.strong')
-    expect(container.innerHTML.substring(1090, 1090 + 'Verbal.strong'.length)).toBe('Verbal.strong')
-    expect(container.innerHTML.substring(1454, 1454 + 'Global.strong'.length)).toBe('Global.strong')
+    expect(container.innerHTML.substring(723, 723 + 'intuitive-strong'.length)).toBe('intuitive-strong')
+    expect(container.innerHTML.substring(349, 349 + 'reflective-strong'.length)).toBe('reflective-strong')
+    expect(container.innerHTML.substring(1090, 1090 + 'verbal-strong'.length)).toBe('verbal-strong')
+    expect(container.innerHTML.substring(1454, 1454 + 'global-strong'.length)).toBe('global-strong')
   })
 
   test(' 3 Switch case', () => {
@@ -634,7 +634,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       useTranslation: () => {
         return {
           t: (str: string) => {
-            if (str === 'components.TableILS.balanced') return 'Active.balanced'
+            if (str === 'components.TableILS.balanced') return 'active-balanced'
             else return str.substring(20, str.length)
           },
           i18n: {
@@ -674,9 +674,9 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(693, 693 + 'Part1 '.length)).toBe('Part1 ')
-    expect(container.innerHTML.substring(801, 801 + 'Part2 '.length)).toBe('Part2 ')
-    expect(container.innerHTML.substring(1053, 1053 + 'Part3'.length)).toBe('Part3')
+    expect(container.innerHTML.substring(693, 693 + '-1 '.length)).toBe('-1 ')
+    expect(container.innerHTML.substring(800, 800 + '-2 '.length)).toBe('-2 ')
+    expect(container.innerHTML.substring(854, 854 + '-3'.length)).toBe('-3')
   })
 
   test('Switch default case', () => {
@@ -685,7 +685,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       useTranslation: () => {
         return {
           t: (str: string) => {
-            if (str === 'components.TableILS.balanced') return 'Active.balanced'
+            if (str === 'components.TableILS.balanced') return 'active-balanced'
             else return str.substring(20, str.length)
           },
           i18n: {
@@ -726,6 +726,6 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
     )
 
     //Because the switch case is not implemented for the string "test", the default case is used, thats why there are 2 spaces after Part2
-    expect(container.innerHTML.substring(795, 795 + 'Part2  '.length)).toBe('Part2  ')
+    expect(container.innerHTML.substring(794, 794 + '-2  '.length)).toBe('-2  ')
   })
 })

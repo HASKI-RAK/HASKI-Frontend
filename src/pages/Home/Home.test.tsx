@@ -72,7 +72,7 @@ describe('Test the Home page', () => {
     )
 
     await waitFor(() => {
-      const course = getAllByText('components.Home.Button.Course')
+      const course = getAllByText('pages.course.courseButton')
       fireEvent.click(course[1])
       expect(navigate).toHaveBeenCalledWith('/course/2')
     })
@@ -114,7 +114,7 @@ describe('Test the Home page', () => {
     )
 
     await waitFor(() => {
-      expect(getByText('components.Home.NoCourses')).toBeInTheDocument()
+      expect(getByText('pages.home.noCourses')).toBeInTheDocument()
     })
   })
 })

@@ -143,7 +143,7 @@ export const SendButton = memo(
             border: (theme) => theme.palette.primary.dark
           }
         }}>
-        {isSending ? <CircularProgress size={24} /> : t('send')}
+        {isSending ? <CircularProgress size={24} /> : t('Send')}
       </Button>
     )
   }

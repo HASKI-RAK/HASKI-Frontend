@@ -11,31 +11,31 @@ export const useData = (data: ILS): { possibleDimensions: string; [Dimension: st
   return [
     {
       possibleDimensions:
-        t('components.TableILS.Global') +
+        t('components.TableILS.global') +
         ' / ' +
-        t('components.TableILS.Sequential'),
-      [t('components.TableILS.Dimension')]: data.understanding_value.toString()
+        t('components.TableILS.sequential'),
+      [t('components.TableILS.dimension')]: data.understanding_value.toString()
     },
     {
       possibleDimensions:
-        t('components.TableILS.Verbal') +
+        t('components.TableILS.verbal') +
         ' / ' +
-        t('components.TableILS.Visual'),
-      [t('components.TableILS.Dimension')]: data.input_value.toString()
+        t('components.TableILS.visual'),
+      [t('components.TableILS.dimension')]: data.input_value.toString()
     },
     {
       possibleDimensions:
-        t('components.TableILS.Intuitive') +
+        t('components.TableILS.intuitive') +
         ' / ' +
-        t('components.TableILS.Sensory'),
-      [t('components.TableILS.Dimension')]: data.perception_value.toString()
+        t('components.TableILS.sensory'),
+      [t('components.TableILS.dimension')]: data.perception_value.toString()
     },
     {
       possibleDimensions:
-        t('components.TableILS.Reflective') +
+        t('components.TableILS.reflective') +
         ' / ' +
-        t('components.TableILS.Active'),
-      [t('components.TableILS.Dimension')]: data.processing_value.toString()
+        t('components.TableILS.active'),
+      [t('components.TableILS.dimension')]: data.processing_value.toString()
     }
   ]
 }
@@ -55,7 +55,7 @@ const GraphILS = ({ data }: GraphILSProps) => {
       width={750}
       height={300}
       data={graphILSdata}
-      keys={[t('components.TableILS.Dimension')]}
+      keys={[t('components.TableILS.dimension')]}
       indexBy={'possibleDimensions'}
       margin={{ top: 0, right: 100, bottom: 50, left: 80 }}
       padding={0.3}
@@ -64,7 +64,7 @@ const GraphILS = ({ data }: GraphILSProps) => {
         tickValues: [-11, -9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11],
         tickPadding: 5,
         tickRotation: 0,
-        legend: t('components.TableILS.Score'),
+        legend: t('components.TableILS.score'),
         legendPosition: 'middle',
         legendOffset: 32
       }}

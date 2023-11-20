@@ -54,31 +54,31 @@ export const ILSDimension = (dimensionNumber: number, score: number, onlyEnglish
     case 1:
       if (onlyEnglish) {
         const en = i18n.getFixedT('en')
-        if (score > 0) return en('components.TableILS.Active')
-        else return en('components.TableILS.Reflective')
-      } else if (score > 0) return t('components.TableILS.Active')
-      else return t('components.TableILS.Reflective')
+        if (score > 0) return en('components.TableILS.active')
+        else return en('components.TableILS.reflective')
+      } else if (score > 0) return t('components.TableILS.active')
+      else return t('components.TableILS.reflective')
     case 2:
       if (onlyEnglish) {
         const en = i18n.getFixedT('en')
-        if (score > 0) return en('components.TableILS.Sensory')
-        else return en('components.TableILS.Intuitive')
-      } else if (score > 0) return t('components.TableILS.Sensory')
-      else return t('components.TableILS.Intuitive')
+        if (score > 0) return en('components.TableILS.sensory')
+        else return en('components.TableILS.intuitive')
+      } else if (score > 0) return t('components.TableILS.sensory')
+      else return t('components.TableILS.intuitive')
     case 3:
       if (onlyEnglish) {
         const en = i18n.getFixedT('en')
-        if (score > 0) return en('components.TableILS.Visual')
-        else return en('components.TableILS.Verbal')
-      } else if (score > 0) return t('components.TableILS.Visual')
-      else return t('components.TableILS.Verbal')
+        if (score > 0) return en('components.TableILS.visual')
+        else return en('components.TableILS.verbal')
+      } else if (score > 0) return t('components.TableILS.visual')
+      else return t('components.TableILS.verbal')
     case 4:
       if (onlyEnglish) {
         const en = i18n.getFixedT('en')
-        if (score > 0) return en('components.TableILS.Sequential')
-        else return en('components.TableILS.Global')
-      } else if (score > 0) return t('components.TableILS.Sequential')
-      else return t('components.TableILS.Global')
+        if (score > 0) return en('components.TableILS.sequential')
+        else return en('components.TableILS.global')
+      } else if (score > 0) return t('components.TableILS.sequential')
+      else return t('components.TableILS.global')
     default:
       return 'No dimension found'
   }
@@ -99,36 +99,36 @@ const TableILS = memo(({ data }: TableILSProps) => {
   const rows = [
     {
       id: 1,
-      col1: t('components.TableILS.Dimension'),
+      col1: t('components.TableILS.dimension'),
       col2: '',
-      col3: t('components.TableILS.Interpretation'),
-      col4: t('components.TableILS.Score')
+      col3: t('components.TableILS.interpretation'),
+      col4: t('components.TableILS.score')
     },
     {
       id: 2,
-      col1: t('components.TableILS.Reflective'),
-      col2: t('components.TableILS.Active'),
+      col1: t('components.TableILS.reflective'),
+      col2: t('components.TableILS.active'),
       col3: ILSInterpretation(dimensionOneScore, ILSDimension(1, dimensionOneScore).toLowerCase()),
       col4: [dimensionOneScore].toString()
     },
     {
       id: 3,
-      col1: t('components.TableILS.Intuitive'),
-      col2: t('components.TableILS.Sensory'),
+      col1: t('components.TableILS.intuitive'),
+      col2: t('components.TableILS.sensory'),
       col3: ILSInterpretation(dimensionTwoScore, ILSDimension(2, dimensionTwoScore).toLowerCase()),
       col4: [dimensionTwoScore].toString()
     },
     {
       id: 4,
-      col1: t('components.TableILS.Verbal'),
-      col2: t('components.TableILS.Visual'),
+      col1: t('components.TableILS.verbal'),
+      col2: t('components.TableILS.visual'),
       col3: ILSInterpretation(dimensionThreeScore, ILSDimension(3, dimensionThreeScore).toLowerCase()),
       col4: [dimensionThreeScore].toString()
     },
     {
       id: 5,
-      col1: t('components.TableILS.Global'),
-      col2: t('components.TableILS.Sequential'),
+      col1: t('components.TableILS.global'),
+      col2: t('components.TableILS.sequential'),
       col3: ILSInterpretation(dimensionFourScore, ILSDimension(4, dimensionFourScore).toLowerCase()),
       col4: [dimensionFourScore].toString()
     }

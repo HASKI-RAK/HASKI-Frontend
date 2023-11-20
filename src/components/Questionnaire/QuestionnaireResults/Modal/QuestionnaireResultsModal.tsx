@@ -45,10 +45,10 @@ const QuestionnaireResultsListKLoading = memo(({ t, listkLoading }: Questionnair
       ) : (
         <Stack alignItems="center">
           <Typography variant="body2" data-testid={'ActiveStepListKNoData'}>
-            {t('components.NoData.Part1')}
+            {t('components.QuestionnaireResultsModal.noData-1')}
             <ListItem sx={{ display: 'list-item' }}>
-              {t('components.NoData.ListK')}{' '}
-              {t('components.NoData.Part2')}
+              {t('components.QuestionnaireResultsModal.listKNoData')}{' '}
+              {t('components.QuestionnaireResultsModal.noData-2')}
             </ListItem>
           </Typography>
         </Stack>
@@ -71,10 +71,10 @@ const QuestionnaireResultsILSLoading = memo(({ t, ilsLoading }: QuestionnaireRes
       ) : (
         <Stack alignItems="center">
           <Typography variant="body2" data-testid={'ActiveStepILSNoData'}>
-            {t('components.NoData.Part1')}
+            {t('components.QuestionnaireResultsModal.noData-1')}
             <ListItem sx={{ display: 'list-item' }}>
-              {t('components.NoData.ILSLong.Part1')}{' '}
-              {t('components.NoData.Part2')}
+              {t('components.QuestionnaireResultsModal.ilsLongNoData-1')}{' '}
+              {t('components.QuestionnaireResultsModal.noData-2')}
             </ListItem>
           </Typography>
         </Stack>
@@ -94,8 +94,8 @@ const QuestionnaireResultsModal = memo(
     const [listkLoading, setListKLoading] = useState(true)
 
     const steps = [
-      t('components.ResultDescriptionILS.ILSResults'),
-      t('components.ResultDescriptionILS.ListKResults')
+      t('components.ResultDescriptionILS.ilsResults'),
+      t('components.ResultDescriptionILS.listKResults')
     ]
 
     const [activeStep, setActiveStep] = useState(activeStepForTesting)
@@ -116,7 +116,7 @@ const QuestionnaireResultsModal = memo(
                   setListKLoading(false)
                 } else {
                   addSnackbar({
-                    message: t('ListK.fetching.error'),
+                    message: t('Error.getListK'),
                     severity: 'error'
                   })
                 }
@@ -146,7 +146,7 @@ const QuestionnaireResultsModal = memo(
                   setILSLoading(false)
                 } else {
                   addSnackbar({
-                    message: t('ILS.fetching.error'),
+                    message: t('Error.getILS'),
                     severity: 'error'
                   })
                 }
@@ -251,7 +251,7 @@ const QuestionnaireResultsModal = memo(
                   window.open('/files/Informationsdokument_ILS_ListK_HASKI.pdf', '_blank')
                 }}>
                 <Typography variant="body2" gutterBottom>
-                  {t('components.QuestionnaireResultsModal.MoreInformation')}
+                  {t('components.QuestionnaireResultsModal.moreInformation')}
                 </Typography>
               </Link>
             </Stack>

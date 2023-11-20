@@ -19,8 +19,8 @@ const ProjectDescription = () => {
   return (
     <>
       <ProjectDescriptionCard
-        header={t('pages.projectdescription.introductionheader')}
-        body={t('pages.projectdescription.introductionbody')}>
+        header={t('pages.projectdescription.introductionHeader')}
+        body={t('pages.projectdescription.introductionBody')}>
         <Box
           component="img"
           sx={{
@@ -31,16 +31,16 @@ const ProjectDescription = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionStepper
-        header={t('pages.projectdescription.approachesheader')}
+        header={t('pages.projectdescription.approachesHeader')}
         body={
-          t<string>('pages.projectdescription.approachesbody', {
+          t<string>('pages.projectdescription.approachesBody', {
             returnObjects: true
           }) as string[]
         }
       />
       <ProjectDescriptionCard
-        header={t('pages.projectdescription.advantagesteachingheader')}
-        body={t('pages.projectdescription.advantagesteachingbody')}>
+        header={t('pages.projectdescription.advantagesTeachingHeader')}
+        body={t('pages.projectdescription.advantagesTeachingBody')}>
         <Avatar
           alt="Advantages Teaching 1"
           src="/ProjectDescriptionImage01.jpg"
@@ -51,8 +51,8 @@ const ProjectDescription = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionCard
-        header={t('pages.projectdescription.advantagesteachingheader2')}
-        body={t('pages.projectdescription.advantagesteachingbody2')}>
+        header={t('pages.projectdescription.advantagesTeachingHeader-2')}
+        body={t('pages.projectdescription.advantagesTeachingBody-2')}>
         <Avatar
           alt="Advantages Teaching 2"
           src="/ProjectDescriptionImage02.jpg"
@@ -63,8 +63,8 @@ const ProjectDescription = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionCard
-        header={t('pages.projectdescription.advantageslearningheader')}
-        body={t('pages.projectdescription.advantageslearningbody')}>
+        header={t('pages.projectdescription.advantagesLearningHeader')}
+        body={t('pages.projectdescription.advantagesLearningBody')}>
         <Avatar
           alt="Advantages Learning 1"
           src="/ProjectDescriptionImage03.jpg"
@@ -75,8 +75,8 @@ const ProjectDescription = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionCard
-        header={t('pages.projectdescription.advantageslearningheader2')}
-        body={t('pages.projectdescription.advantageslearningbody2')}>
+        header={t('pages.projectdescription.advantagesLearningHeader-2')}
+        body={t('pages.projectdescription.advantagesLearningBody-2')}>
         <Avatar
           alt="Advantages Learning 2"
           src="/ProjectDescriptionImage04.jpg"
@@ -89,20 +89,20 @@ const ProjectDescription = () => {
       <ProjectDescriptionStepper
         header={t('pages.ProjectDescription.goalsHeader')}
         body={
-          t<string>('pages.projectdescription.goalsbody', {
+          t<string>('pages.projectdescription.goalsBody', {
             returnObjects: true
           }) as string[]
         }
       />
       <Grid container item justifyContent="center" xs={12}>
         <Typography sx={{ pt: '1rem', pb: '1rem' }} variant="subtitle1">
-          {t('pages.projectdescription.imagesources') + t('universityKempten') + ', '}
+          {t('pages.projectdescription.imageSources') + t('universityKempten') + ', '}
           <a href="https://de.freepik.com/fotos-kostenlos/close-up-der-studentin-schreiben-auf-laptop-am-tisch_1147740.htm">
-            {t('pages.projectdescription.imagesource1')}
+            {t('pages.projectdescription.imageSource-1')}
           </a>
           {', '}
           <a href="https://www.freepik.com/free-photo/cloud-upload-icon-line-connection-circuit-board_1198390.htm">
-            {t('pages.projectdescription.imagesource2')}
+            {t('pages.projectdescription.imageSource-2')}
           </a>
         </Typography>
       </Grid>

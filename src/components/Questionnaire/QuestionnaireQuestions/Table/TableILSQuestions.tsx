@@ -113,8 +113,8 @@ export const TableILSQuestions = memo(
       return [
         ...(t<string>(
           ilsLong
-            ? 'components.ILSLongQuestions'
-            : 'components.ILSShortQuestions',
+            ? 'components.TableILSQuestions.ilsLong'
+            : 'components.TableILSQuestions.ilsShort',
           {
             returnObjects: true
           }
@@ -161,14 +161,14 @@ export const TableILSQuestions = memo(
       sendAnswers().then((res) => {
         if (res) {
           addSnackbar({
-            message: t('Data.send.successfull'),
+            message: t('Send.datasuccessfull'),
             severity: 'success',
             autoHideDuration: 5000
           })
           setSuccessSend(true)
         } else {
           addSnackbar({
-            message: t('Data.send.unsuccessfull'),
+            message: t('Send.dataUnsuccessfull'),
             severity: 'error',
             autoHideDuration: 5000
           })
@@ -221,15 +221,15 @@ export const TableILSQuestions = memo(
     )
 
     const questionnaireType = ilsLong
-      ? t('components.NoData.ILSLong.Part1')
-      : t('components.NoData.ILSShort.Part1')
+      ? t('components.QuestionnaireResultsModal.ilsLongNoData-1')
+      : t('components.QuestionnaireResultsModal.ilsShortNoData-1')
 
     return (
       <Box>
         {activeStep == 0 ? (
           <CoverSheet
             header={questionnaireType}
-            body={t('components.ILSQuestions.Introduction')}
+            body={t('components.TableILSQuestions.introduction')}
           />
         ) : (
           <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>

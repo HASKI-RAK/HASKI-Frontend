@@ -17,17 +17,17 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
   const dimensionFourScore = data.understanding_value
 
   //active, reflective, sensory...etc, it´s mandatory in english because of internationalization name in .json file
-  const dimensionOne = ILSdim(1, dimensionOneScore, true)
-  const dimensionTwo = ILSdim(2, dimensionTwoScore, true)
-  const dimensionThree = ILSdim(3, dimensionThreeScore, true)
-  const dimensionFour = ILSdim(4, dimensionFourScore, true)
+  const dimensionOne = ILSdim(1, dimensionOneScore, true).toLowerCase()
+  const dimensionTwo = ILSdim(2, dimensionTwoScore, true).toLowerCase()
+  const dimensionThree = ILSdim(3, dimensionThreeScore, true).toLowerCase()
+  const dimensionFour = ILSdim(4, dimensionFourScore, true).toLowerCase()
   const dimensionArray = [dimensionOne, dimensionTwo, dimensionThree, dimensionFour]
 
   //balanced, moderate, strong
-  const interpretationDimensionOneScore = ILSInterpretation(dimensionOneScore, '', true).trim()
-  const interpretationDimensionTwoScore = ILSInterpretation(dimensionTwoScore, '', true).trim()
-  const interpretationDimensionThreeScore = ILSInterpretation(dimensionThreeScore, '', true).trim()
-  const interpretationDimensionFourScore = ILSInterpretation(dimensionFourScore, '', true).trim()
+  const interpretationDimensionOneScore = ILSInterpretation(dimensionOneScore, '', true).trim().toLowerCase()
+  const interpretationDimensionTwoScore = ILSInterpretation(dimensionTwoScore, '', true).trim().toLowerCase()
+  const interpretationDimensionThreeScore = ILSInterpretation(dimensionThreeScore, '', true).trim().toLowerCase()
+  const interpretationDimensionFourScore = ILSInterpretation(dimensionFourScore, '', true).trim().toLowerCase()
 
   const interpretationArray = [
     interpretationDimensionOneScore,
@@ -44,7 +44,7 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
   //All dimensions are processed here and balanced dimensions are stored in balancedDimensionsArray
   interpretationArray.forEach((item, index) => {
     if (item === 'balanced') {
-      balancedDimensionsArray.push(dimensionArray[index] + '.' + interpretationArray[index])
+      balancedDimensionsArray.push(dimensionArray[index] + '-' + interpretationArray[index])
     } else {
       unbalancedDimensionsArray.push(
         <div
@@ -57,7 +57,7 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
             {t(
               'components.ResultDescriptionILS.' +
                 dimensionArray[index] +
-                '.' +
+                '-' +
                 interpretationArray[index]
             )}{' '}
             <br />
@@ -73,62 +73,62 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
       return (
         <div key={'AllDimensionsAreBalancedDescription'}>
           <Typography variant="h6" gutterBottom>
-            {t('components.ResultDescriptionILS.AllDimensions')}
+            {t('components.ResultDescriptionILS.allDimensions')}
           </Typography>
           <Typography variant="body2" gutterBottom>
-            {t('components.ResultDescriptionILS.EverythingBalanced')}
+            {t('components.ResultDescriptionILS.everythingBalanced')}
           </Typography>
         </div>
       )
     } else {
       for (const dim in balancedDimensionsArray) {
         switch (balancedDimensionsArray[dim]) {
-          case 'Active.balanced':
+          case 'activate-balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.ResultDescriptionILS.SomethingBalanced.processing'
+                'components.ResultDescriptionILS.processingBalanced'
               ) + ' & '
             break
-          case 'Reflective.balanced':
+          case 'reflective-balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.ResultDescriptionILS.SomethingBalanced.processing'
+                'components.ResultDescriptionILS.processingBalanced'
               ) + ' & '
             break
-          case 'Sensory.balanced':
+          case 'sensory-balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.ResultDescriptionILS.SomethingBalanced.perception'
+                'components.ResultDescriptionILS.perceptionBalanced'
               ) + ' & '
             break
-          case 'Intuitive.balanced':
+          case 'intuitive-balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.ResultDescriptionILS.SomethingBalanced.perception'
+                'components.ResultDescriptionILS.perceptionBalanced'
               ) + ' & '
             break
-          case 'Verbal.balanced':
+          case 'verbal-balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.ResultDescriptionILS.SomethingBalanced.presentation'
+                'components.ResultDescriptionILS.presentationBalanced'
               ) + ' & '
             break
-          case 'Visual.balanced':
+          case 'visual-balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.ResultDescriptionILS.SomethingBalanced.presentation'
+                'components.ResultDescriptionILS.presentationBalanced'
               ) + ' & '
             break
-          case 'Sequential.balanced':
+          case 'sequential-balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.ResultDescriptionILS.SomethingBalanced.organisation'
+                'components.ResultDescriptionILS.organisationBalanced'
               ) + ' & '
             break
-          case 'Global.balanced':
+          case 'global-balanced':
             balancedDimensionsKeyWordString +=
               t(
-                'components.ResultDescriptionILS.SomethingBalanced.organisation'
+                'components.ResultDescriptionILS.organisationBalanced'
               ) + ' & '
             break
           default:
@@ -143,18 +143,18 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
       )
 
       balancedDimensionsInterpretationString =
-        t('components.ResultDescriptionILS.SomethingBalanced.Part1') +
+        t('components.ResultDescriptionILS.balancedDimensions-1') +
         ' ' +
         t(
-          'components.ResultDescriptionILS.SomethingBalanced.' +
+          'components.ResultDescriptionILS.balancedEnumeration-' +
             balancedDimensionsArray.length
         ) +
         ' ' +
-        t('components.ResultDescriptionILS.SomethingBalanced.Part2') +
+        t('components.ResultDescriptionILS.balancedDimensions-2') +
         ' ' +
         balancedDimensionsKeyWordString +
         ' ' +
-        t('components.ResultDescriptionILS.SomethingBalanced.Part3')
+        t('components.ResultDescriptionILS.balancedDimensions-3')
     }
   }
 
@@ -166,7 +166,7 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
       ) : (
         <div key={'InnerDivResultDescriptionILS'}>
           <Typography variant="h6" gutterBottom>
-            {t('components.ResultDescriptionILS.RemainingDimensions')}
+            {t('components.ResultDescriptionILS.remainingDimensions')}
           </Typography>
           <Typography variant="body2" gutterBottom>
             {balancedDimensionsInterpretationString}

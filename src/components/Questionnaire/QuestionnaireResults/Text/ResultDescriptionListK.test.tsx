@@ -150,7 +150,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     const container = ResultDescriptionListK({ data: mockListK })
 
     expect(container.props.children[3][0].props.children[0].props.children.substring(34, 58)).toMatch(
-      'attention && time Below3'
+      'attention && time below3'
     )
   })
 
@@ -180,7 +180,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     const container = ResultDescriptionListK({ data: mockListK })
 
     expect(container.props.children[3][0].props.children[0].props.children.substring(34, 50)).toMatch(
-      'attention Below3'
+      'attention below3'
     )
   })
 
@@ -210,7 +210,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     const container = ResultDescriptionListK({ data: mockListK })
 
     expect(container.props.children[3][0].props.children[0].props.children.substring(34, 81)).toMatch(
-      'attention && time && learnWithClassmates Below3'
+      'attention && time && learnWithClassmates below3'
     )
   })
 
@@ -240,7 +240,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     const container = ResultDescriptionListK({ data: mockListK })
 
     expect(container.props.children[3][0].props.children[0].props.children.substring(34, 103)).toMatch(
-      'attention && time && learnWithClassmates && literatureResearch Below3'
+      'attention && time && learnWithClassmates && literatureResearch below3'
     )
   })
 
@@ -270,7 +270,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     const container = ResultDescriptionListK({ data: mockListK })
 
     expect(container.props.children[3][0].props.children[0].props.children.substring(34, 126)).toMatch(
-      'attention && time && learnWithClassmates && literatureResearch && learningEnvironment Below3'
+      'attention && time && learnWithClassmates && literatureResearch && learningEnvironment below3'
     )
   })
 })

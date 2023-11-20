@@ -9,7 +9,7 @@ describe('Imprint Component', () => {
         <Imprint />
       </MemoryRouter>
     )
-    expect(getByText('components.Imprint.Title')).toBeTruthy()
+    expect(getByText('pages.imprint.title')).toBeTruthy()
   })
 
   it('displays the correct address details', () => {
@@ -29,17 +29,17 @@ describe('Imprint Component', () => {
         <Imprint />
       </MemoryRouter>
     )
-    expect(getByText('components.Imprint.Disclaimer')).toBeTruthy()
-    expect(getByText('1. ' + 'components.Imprint.Disclaimer.OnlineContent')).toBeTruthy()
-    expect(getByText('components.Imprint.Disclaimer.OnlineContent.Text')).toBeTruthy()
-    expect(getByText('2. ' + 'components.Imprint.Disclaimer.ReferencesAndLinks')).toBeTruthy()
-    expect(getByText('components.Imprint.Disclaimer.ReferencesAndLinks.Text')).toBeTruthy()
-    expect(getByText('3. ' + 'components.Imprint.Disclaimer.CopyrightAndTrademarkLaw')).toBeTruthy()
-    expect(getByText('components.Imprint.Disclaimer.CopyrightAndTrademarkLaw.Text')).toBeTruthy()
-    expect(getByText('4. ' + 'components.Imprint.Disclaimer.DataProtection')).toBeTruthy()
-    expect(getByText('components.Imprint.Disclaimer.DataProtection.Text')).toBeTruthy()
-    expect(getByText('5. ' + 'components.Imprint.Disclaimer.LegalValidityOfDisclaimer')).toBeTruthy()
-    expect(getByText('components.Imprint.Disclaimer.LegalValidityOfDisclaimer.Text')).toBeTruthy()
+    expect(getByText('pages.imprint.disclaimer')).toBeTruthy()
+    expect(getByText('1. ' + 'pages.imprint.onlineContent')).toBeTruthy()
+    expect(getByText('pages.imprint.onlineContentText')).toBeTruthy()
+    expect(getByText('2. ' + 'pages.imprint.referenceLinks')).toBeTruthy()
+    expect(getByText('pages.imprint.referenceLinksText')).toBeTruthy()
+    expect(getByText('3. ' + 'pages.imprint.copyrightAndTrademarkLaw')).toBeTruthy()
+    expect(getByText('pages.imprint.copyrightAndTrademarkLawText')).toBeTruthy()
+    expect(getByText('4. ' + 'pages.imprint.dataProtection')).toBeTruthy()
+    expect(getByText('pages.imprint.dataProtectionText')).toBeTruthy()
+    expect(getByText('5. ' + 'pages.imprint.legalValidity')).toBeTruthy()
+    expect(getByText('pages.imprint.legalValidityText')).toBeTruthy()
   })
 
   it('displays the correct contact information for the authorised representative', () => {
@@ -48,8 +48,8 @@ describe('Imprint Component', () => {
         <Imprint />
       </MemoryRouter>
     )
-    expect(getByText('components.Imprint.AuthorisedRepresentative')).toBeTruthy()
-    expect(getByText('components.Imprint.AuthorisedRepresentative.Title' + ' Prof. Dr. Georg Hagel')).toBeTruthy()
+    expect(getByText('pages.imprint.authorisedRepresentative')).toBeTruthy()
+    expect(getByText('pages.imprint.authorisedRepresentativeTitle' + ' Prof. Dr. Georg Hagel')).toBeTruthy()
     expect(getByText('Tel.:')).toBeTruthy()
     expect(getByText('+49 (0) 831 2523-471')).toBeTruthy()
     expect(getByText('E-Mail:')).toBeTruthy()

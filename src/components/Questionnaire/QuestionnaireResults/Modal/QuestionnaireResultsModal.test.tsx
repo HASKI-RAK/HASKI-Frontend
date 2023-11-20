@@ -124,7 +124,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.ResultDescriptionILS.ILSResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.ilsResults'))
       expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
     })
   })
@@ -137,7 +137,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.ResultDescriptionILS.ListKResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.listKResults'))
       expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
     })
   })
@@ -216,7 +216,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.ResultDescriptionILS.ILSResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.ilsResults'))
       expect(queryByTestId('SkeletonList Element-0')).toBeFalsy()
     })
   })
@@ -251,7 +251,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.ResultDescriptionILS.ListKResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.listKResults'))
       expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
       expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
       expect(getByTestId('SkeletonList Element-2')).toBeInTheDocument()
@@ -271,7 +271,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.ResultDescriptionILS.ListKResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.listKResults'))
       expect(queryByTestId('SkeletonList Element-0')).toBeFalsy()
     })
   })
@@ -289,7 +289,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.ResultDescriptionILS.ListKResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.listKResults'))
       expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
       expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
       expect(getByTestId('SkeletonList Element-2')).toBeInTheDocument()

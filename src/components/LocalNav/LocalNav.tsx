@@ -48,7 +48,7 @@ const LocalNav = ({
 
   return (
     <Box flexGrow={1}>
-      <Typography variant="h5">{t('components.LocalNav.Topics')}</Typography>
+      <Typography variant="h5">{t('components.LocalNav.topics')}</Typography>
       <Divider />
       {loading ? (
         <Box>

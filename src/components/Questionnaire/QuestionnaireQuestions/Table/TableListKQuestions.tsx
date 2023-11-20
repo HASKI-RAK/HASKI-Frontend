@@ -158,14 +158,14 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
     sendAnswers().then((res) => {
       if (res) {
         addSnackbar({
-          message: t('Data.send.successfull'),
+          message: t('Send.dataSuccessfull'),
           severity: 'success',
           autoHideDuration: 5000
         })
         setSuccessSend(true)
       } else {
         addSnackbar({
-          message: t('Data.send.unsuccessfull'),
+          message: t('Send.dataUnsuccessfull'),
           severity: 'error',
           autoHideDuration: 5000
         })
@@ -297,8 +297,8 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
     <Box>
       {activeStep == 0 ? (
         <CoverSheet
-          header={t('components.NoData.ListK')}
-          body={t('components.ListKQuestions.Introduction')}
+          header={t('components.QuestionnaireResultsModal.listKNoData')}
+          body={t('components.TableListKQuestions.introduction')}
         />
       ) : (
         <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
