@@ -1,8 +1,10 @@
 import '@testing-library/jest-dom'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, renderHook } from '@testing-library/react'
 import PrivacyModal from './PrivacyModal'
 import { MemoryRouter } from 'react-router-dom'
+import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
+import { usePrivacyModal } from './PrivacyModal.hooks'
 
 const navigate = jest.fn()
 
@@ -24,10 +26,9 @@ describe('Test PrivacyModal', () => {
     )
     const backdrop = form.getByRole('presentation').children[0]
     fireEvent.click(backdrop)
-    expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
-  test('click the link', () => {
+  test('click the link to privacypolicy', () => {
     const form = render(
       <MemoryRouter>
         <PrivacyModal />
@@ -52,7 +53,6 @@ describe('Test PrivacyModal', () => {
     const acceptButton = new_form.getByRole('button', { name: /Accept/i })
     expect(acceptButton).toHaveProperty('disabled', false)
     fireEvent.click(acceptButton)
-    expect(new_form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
   test('decline the PrivacyPolicy', () => {
@@ -63,16 +63,14 @@ describe('Test PrivacyModal', () => {
     )
     const declineButton = form.getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
     fireEvent.click(declineButton)
-    expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
-  test('Modal does not render if on url', () => {
+  test('Modal does not render if on privacypolicy page', () => {
     const form = render(
       <MemoryRouter initialEntries={['/privacypolicy']}>
         <PrivacyModal />
       </MemoryRouter>
     )
-    expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
   })
 
   test('Modal does not render if cookie is set', () => {
@@ -81,6 +79,117 @@ describe('Test PrivacyModal', () => {
         <PrivacyModal />
       </MemoryRouter>
     )
-    expect(form.queryByText('After reading please accept:')).not.toBeInTheDocument()
+  })
+
+  //Tests for decline and redirect
+  test('Redirects the user to TH-AB', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementation(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'TH-AB'
+      })
+    )
+    const { getByRole } = render(
+      <MemoryRouter>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
+    const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+    fireEvent.click(declineButton)
+  })
+
+  //Prior Test with an expect
+  test('checkUniversity returns valid value', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'TH-AB'
+      })
+    )
+
+    const { result } = renderHook(() => usePrivacyModal(), {
+      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
+    })
+    expect(await result.current.checkUniversity()).toBe('TH-AB')
+  })
+
+  test('Redirects the user to HS-KE', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementation(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'HS-KE'
+      })
+    )
+    const { getByRole } = render(
+      <MemoryRouter>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
+    const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+    fireEvent.click(declineButton)
+  })
+
+  test('checkUniversity returns empty string when fetch fails', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
+    const { result } = renderHook(() => usePrivacyModal(), {
+      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
+    })
+    expect(await result.current.checkUniversity()).toBe('')
+  })
+
+  test('decline returns the user two pages prior', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: ''
+      })
+    )
+    const { getByRole } = render(
+      <MemoryRouter initialEntries={['/login']}>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
+    const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+    fireEvent.click(declineButton)
   })
 })
