@@ -29,11 +29,11 @@ export type ContactHookReturn = {
 export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookReturn => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const getUser = usePersistedStore((state) => state.getUser)
   const onSubmitHandler = useCallback(
     (postBody: FormDataType) => {
       setIsLoading(true)
-      fetchUser()
+      getUser()
         .then((user) => {
           postContactForm(postBody, user.settings.user_id, user.lms_user_id)
             .then(() => {

@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 //Tests fail with shortened Path
-import { getLogout } from './getLogout'
+import { fetchLogout } from './fetchLogout'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -17,7 +17,7 @@ global.fetch = jest.fn(() =>
 
 describe('getLoginStatus', () => {
   it('should return logout success', async () => {
-    getLogout().then(() => {
+    fetchLogout().then(() => {
       expect(global.fetch).toHaveBeenCalledTimes(1)
     })
   })
