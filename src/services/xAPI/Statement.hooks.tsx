@@ -98,8 +98,8 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   const en = i18n.getFixedT('en')
   const location = useLocation()
 
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
-  const lmsUserID = fetchUser()
+  const getUser = usePersistedStore((state) => state.getUser)
+  const lmsUserID = getUser()
     .then((user) => {
       return user.id.toString()
     })

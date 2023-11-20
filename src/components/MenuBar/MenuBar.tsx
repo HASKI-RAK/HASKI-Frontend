@@ -74,8 +74,8 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const { t } = useTranslation()
   const [loadingTopics, setLoadingTopics] = useState(true)
   const [topicsPath, setTopicsPath] = useState<Topic[]>([])
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
-  const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
@@ -134,9 +134,9 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleOpenTopicsMenu = async (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElTopics(event.currentTarget)
-    fetchUser()
+    getUser()
       .then((user) => {
-        fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
+        getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
           .then((TopicResponse) => {
             setTopicsPath(TopicResponse.topics)
             setLoadingTopics(false)

@@ -5,7 +5,7 @@ import { ListItem } from '@mui/material'
 import { usePersistedStore } from '@store'
 import { ILS, ListK } from '@core'
 import log from 'loglevel'
-import { getILS, getListK, SnackbarContext } from '@services'
+import { fetchILS, fetchListK, SnackbarContext } from '@services'
 import { SkeletonList } from '@components'
 import { Close } from '@common/icons'
 
@@ -88,7 +88,7 @@ QuestionnaireResultsILSLoading.displayName = 'QuestionnaireResultsILSLoading'
 const QuestionnaireResultsModal = memo(
   ({ open = false, handleClose, activeStepForTesting = 0 }: QuestionnaireResultsModalProps) => {
     const { t } = useTranslation()
-    const fetchUser = usePersistedStore((state) => state.fetchUser)
+    const getUser = usePersistedStore((state) => state.getUser)
     const { addSnackbar } = useContext(SnackbarContext)
     const [ilsLoading, setILSLoading] = useState(true)
     const [listkLoading, setListKLoading] = useState(true)
@@ -101,9 +101,9 @@ const QuestionnaireResultsModal = memo(
 
     useEffect(() => {
       if (activeStep === 1 && open === true) {
-        fetchUser()
+        getUser()
           .then((user) => {
-            return getListK(user.settings.user_id, user.lms_user_id, user.id)
+            return fetchListK(user.settings.user_id, user.lms_user_id, user.id)
               .then((data) => {
                 setListKData(data)
               })
@@ -131,9 +131,9 @@ const QuestionnaireResultsModal = memo(
 
     useEffect(() => {
       if (activeStep === 0 && open === true) {
-        fetchUser()
+        getUser()
           .then((user) => {
-            return getILS(user.settings.user_id, user.lms_user_id, user.id)
+            return fetchILS(user.settings.user_id, user.lms_user_id, user.id)
               .then((data) => {
                 setILSData(data)
               })

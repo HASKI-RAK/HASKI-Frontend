@@ -1,6 +1,5 @@
-//Tests fail with shortened Path
 import { getConfig } from '@shared'
-import { getListK } from './getListK'
+import { fetchUser } from './fetchUser'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -12,30 +11,9 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('getILS has expected behaviour', () => {
+describe('fetchCourses has expected behaviour', () => {
   it('should return the course when the response is successful', async () => {
-    const expectedData = {
-      course: 'dude where is my car',
-      att: 1,
-      characteristic_id: 1,
-      cogn_str: 1,
-      con: 1,
-      crit_rev: 1,
-      eff: 1,
-      elab: 1,
-      ext_res_mng_str: 1,
-      goal_plan: 1,
-      id: 1,
-      int_res_mng_str: 1,
-      lit_res: 1,
-      lrn_env: 1,
-      lrn_w_cls: 1,
-      metacogn_str: 1,
-      org: 1,
-      reg: 1,
-      rep: 1,
-      time: 1
-    }
+    const expectedData = { course: 'dude where is my car' }
     const mockResponse = {
       ok: true,
       json: jest.fn().mockResolvedValue(expectedData)
@@ -45,9 +23,9 @@ describe('getILS has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const result = await getListK(1, 1, 1)
+    const result = await fetchUser()
 
-    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/1/1/student/1/learningStrategy`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/lms/user_from_cookie`, {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -70,7 +48,7 @@ describe('getILS has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    await expect(getListK()).rejects.toThrow(`${expectedMessage}`)
+    await expect(fetchUser()).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
@@ -83,6 +61,6 @@ describe('getILS has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    await expect(getListK()).rejects.toThrow('')
+    await expect(fetchUser()).rejects.toThrow('')
   })
 })

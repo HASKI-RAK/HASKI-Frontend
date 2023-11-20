@@ -1,1 +1,1 @@
-export { getCourses } from './getCourses'
+export { fetchCourses } from './fetchCourses'

@@ -1,5 +1,6 @@
 import { getConfig } from '@shared'
-import { getCourses } from './getCourses'
+//Tests fail with shortened Path
+import { fetchLearningPathTopic } from './fetchLearningPathTopic'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -11,9 +12,9 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('getCourses has expected behaviour', () => {
-  it('should return the course when the response is successful', async () => {
-    const expectedData = { course: 'dude where is my car' }
+describe('fetchLearningPathElement has expected behaviour', () => {
+  it('should return the learning path element when the response is successful', async () => {
+    const expectedData = { hello: 'test' }
     const mockResponse = {
       ok: true,
       json: jest.fn().mockResolvedValue(expectedData)
@@ -26,11 +27,12 @@ describe('getCourses has expected behaviour', () => {
     const userId = 1
     const lmsUserId = 1
     const studentId = 1
+    const courseId = '2'
 
-    const result = await getCourses(userId, lmsUserId, studentId)
+    const result = await fetchLearningPathTopic(userId, lmsUserId, studentId, courseId)
 
     expect(fetch).toHaveBeenCalledWith(
-      `${getConfig().BACKEND}/user/${userId}/${lmsUserId}/student/${studentId}/course`,
+      `${getConfig().BACKEND}/user/${userId}/${lmsUserId}/student/${studentId}/course/${courseId}/topic`,
       {
         method: 'GET',
         credentials: 'include',
@@ -40,6 +42,17 @@ describe('getCourses has expected behaviour', () => {
       }
     )
     expect(result).toEqual(expectedData)
+  })
+
+  it('should throw an error when course_id is missing', async () => {
+    const userId = 1
+    const lmsUserId = 1
+    const studentId = 1
+    const courseId = undefined // Set to null to simulate a missing value
+
+    await expect(fetchLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow(
+      'course_id is required'
+    )
   })
 
   it('should throw a specific error when the response has an error variable', async () => {
@@ -58,8 +71,9 @@ describe('getCourses has expected behaviour', () => {
     const userId = 1
     const lmsUserId = 1
     const studentId = 1
+    const courseId = '2'
 
-    await expect(getCourses(userId, lmsUserId, studentId)).rejects.toThrow(`${expectedMessage}`)
+    await expect(fetchLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
@@ -75,7 +89,8 @@ describe('getCourses has expected behaviour', () => {
     const userId = 1
     const lmsUserId = 1
     const studentId = 1
+    const courseId = '2'
 
-    await expect(getCourses(userId, lmsUserId, studentId)).rejects.toThrow('')
+    await expect(fetchLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow('')
   })
 })

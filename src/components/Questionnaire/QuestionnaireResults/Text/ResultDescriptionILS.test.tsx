@@ -654,15 +654,15 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 9
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // Modify the mock implementation of getILSDimension
-    const getILSDimension = jest.fn().mockImplementation((dim, score, something) => {
+    // Modify the mock implementation of fetchILSDimension
+    const fetchILSDimension = jest.fn().mockImplementation((dim, score, something) => {
       return 'Active' // Return the desired string directly
     })
 
     const { container } = render(
       <ResultDescriptionILS
         data={mockILS}
-        ILSdim={(n: number, b: number, c?: boolean | undefined) => getILSDimension(1, 1, true)}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => fetchILSDimension(1, 1, true)}
       />
     )
 
@@ -705,15 +705,15 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       understanding_value: 9
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // Modify the mock implementation of getILSDimension
-    const getILSDimension = jest.fn().mockImplementation((dim, score, something) => {
+    // Modify the mock implementation of fetchILSDimension
+    const fetchILSDimension = jest.fn().mockImplementation((dim, score, something) => {
       return 'test' // Return the desired string directly
     })
 
     const { container } = render(
       <ResultDescriptionILS
         data={mockILS}
-        ILSdim={(n: number, b: number, c?: boolean | undefined) => getILSDimension(1, 1, true)}
+        ILSdim={(n: number, b: number, c?: boolean | undefined) => fetchILSDimension(1, 1, true)}
       />
     )
 
