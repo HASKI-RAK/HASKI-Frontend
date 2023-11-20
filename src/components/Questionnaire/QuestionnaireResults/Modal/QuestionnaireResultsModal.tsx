@@ -93,10 +93,7 @@ const QuestionnaireResultsModal = memo(
     const [ilsLoading, setILSLoading] = useState(true)
     const [listkLoading, setListKLoading] = useState(true)
 
-    const steps = [
-      t('components.ResultDescriptionILS.ilsResults'),
-      t('components.ResultDescriptionILS.listKResults')
-    ]
+    const steps = [t('components.ResultDescriptionILS.ilsResults'), t('components.ResultDescriptionILS.listKResults')]
 
     const [activeStep, setActiveStep] = useState(activeStepForTesting)
     const [ilsData, setILSData] = useState<ILS | undefined>(undefined) // Initialize with null

@@ -10,31 +10,19 @@ export const useData = (data: ILS): { possibleDimensions: string; [Dimension: st
 
   return [
     {
-      possibleDimensions:
-        t('components.TableILS.global') +
-        ' / ' +
-        t('components.TableILS.sequential'),
+      possibleDimensions: t('components.TableILS.global') + ' / ' + t('components.TableILS.sequential'),
       [t('components.TableILS.dimension')]: data.understanding_value.toString()
     },
     {
-      possibleDimensions:
-        t('components.TableILS.verbal') +
-        ' / ' +
-        t('components.TableILS.visual'),
+      possibleDimensions: t('components.TableILS.verbal') + ' / ' + t('components.TableILS.visual'),
       [t('components.TableILS.dimension')]: data.input_value.toString()
     },
     {
-      possibleDimensions:
-        t('components.TableILS.intuitive') +
-        ' / ' +
-        t('components.TableILS.sensory'),
+      possibleDimensions: t('components.TableILS.intuitive') + ' / ' + t('components.TableILS.sensory'),
       [t('components.TableILS.dimension')]: data.perception_value.toString()
     },
     {
-      possibleDimensions:
-        t('components.TableILS.reflective') +
-        ' / ' +
-        t('components.TableILS.active'),
+      possibleDimensions: t('components.TableILS.reflective') + ' / ' + t('components.TableILS.active'),
       [t('components.TableILS.dimension')]: data.processing_value.toString()
     }
   ]

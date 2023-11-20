@@ -168,9 +168,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(1590, 1590 + 'processingBalanced'.length)).toBe(
-      'processingBalanced'
-    )
+    expect(container.innerHTML.substring(1590, 1590 + 'processingBalanced'.length)).toBe('processingBalanced')
   })
 
   test('3 dimensions are balanced, 1 Dimension is sensory & moderate', () => {
@@ -285,9 +283,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(1587, 1587 + 'perceptionBalanced'.length)).toBe(
-      'perceptionBalanced'
-    )
+    expect(container.innerHTML.substring(1587, 1587 + 'perceptionBalanced'.length)).toBe('perceptionBalanced')
   })
 
   test('3 dimensions are balanced, 1 Dimension is visual & moderate', () => {
@@ -402,9 +398,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(1590, 1590 + 'presentationBalanced'.length)).toBe(
-      'presentationBalanced'
-    )
+    expect(container.innerHTML.substring(1590, 1590 + 'presentationBalanced'.length)).toBe('presentationBalanced')
   })
 
   test('3 dimensions are balanced, 1 Dimension is sequential & moderate', () => {
@@ -519,9 +513,7 @@ describe('Test ResultDescriptionILS with all Score combinations', () => {
       />
     )
 
-    expect(container.innerHTML.substring(1578, 1578 + 'organisationBalanced'.length)).toBe(
-      'organisationBalanced'
-    )
+    expect(container.innerHTML.substring(1578, 1578 + 'organisationBalanced'.length)).toBe('organisationBalanced')
   })
 
   test('all dimensions moderate positive', () => {

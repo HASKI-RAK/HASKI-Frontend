@@ -17,24 +17,15 @@ export const useData = (
   const organizeCentered =
     t('components.TableListK.organize') +
     '\n' +
-    centerString(
-      data.org.toFixed(2),
-      t('components.TableListK.organize').length
-    )
+    centerString(data.org.toFixed(2), t('components.TableListK.organize').length)
   const elaborateCentered =
     t('components.TableListK.elaborate') +
     '\n' +
-    centerString(
-      data.elab.toFixed(2),
-      t('components.TableListK.elaborate').length
-    )
+    centerString(data.elab.toFixed(2), t('components.TableListK.elaborate').length)
   const criticalReviewCentered =
     t('components.TableListK.criticalReview') +
     '\n' +
-    centerString(
-      data.crit_rev.toFixed(2),
-      t('components.TableListK.criticalReview').length
-    )
+    centerString(data.crit_rev.toFixed(2), t('components.TableListK.criticalReview').length)
   const repeatCentered =
     t('components.TableListK.repeat') +
     '\n' +
@@ -42,60 +33,37 @@ export const useData = (
   const attentionCentered =
     t('components.TableListK.attention') +
     '\n' +
-    centerString(
-      data.att.toFixed(2),
-      t('components.TableListK.attention').length
-    )
+    centerString(data.att.toFixed(2), t('components.TableListK.attention').length)
   const effortCentered =
     t('components.TableListK.effort') +
     '\n' +
     centerString(data.eff.toFixed(2), t('components.TableListK.effort').length)
   const timeCentered =
-    t('components.TableListK.time') +
-    '\n' +
-    centerString(data.time.toFixed(2), t('components.TableListK.time').length)
+    t('components.TableListK.time') + '\n' + centerString(data.time.toFixed(2), t('components.TableListK.time').length)
   const goalsPlansCentered =
     t('components.TableListK.goalsAndPlans') +
     '\n' +
-    centerString(
-      data.goal_plan.toFixed(2),
-      t('components.TableListK.goalsAndPlans').length
-    )
+    centerString(data.goal_plan.toFixed(2), t('components.TableListK.goalsAndPlans').length)
   const controlCentered =
     t('components.TableListK.control') +
     '\n' +
-    centerString(
-      data.con.toFixed(2),
-      t('components.TableListK.control').length
-    )
+    centerString(data.con.toFixed(2), t('components.TableListK.control').length)
   const regulateCentered =
     t('components.TableListK.regulate') +
     '\n' +
-    centerString(
-      data.reg.toFixed(2),
-      t('components.TableListK.regulate').length
-    )
+    centerString(data.reg.toFixed(2), t('components.TableListK.regulate').length)
   const learnWithClassmatesCentered =
     t('components.TableListK.learningWithClassmates') +
     '\n' +
-    centerString(
-      data.lrn_w_cls.toFixed(2),
-      t('components.TableListK.learningWithClassmates').length
-    )
+    centerString(data.lrn_w_cls.toFixed(2), t('components.TableListK.learningWithClassmates').length)
   const literatureResearchCentered =
     t('components.TableListK.literatureResearch') +
     '\n' +
-    centerString(
-      data.lit_res.toFixed(2),
-      t('components.TableListK.literatureResearch').length
-    )
+    centerString(data.lit_res.toFixed(2), t('components.TableListK.literatureResearch').length)
   const learningEnvironmentCentered =
     t('components.TableListK.learningEnvironment') +
     '\n' +
-    centerString(
-      data.lrn_env.toFixed(2),
-      t('components.TableListK.learningEnvironment').length
-    )
+    centerString(data.lrn_env.toFixed(2), t('components.TableListK.learningEnvironment').length)
 
   return {
     nodes: [
@@ -254,29 +222,21 @@ export const useData = (
       },
       {
         source: 'List K',
-        target: t(
-          'components.TableListK.internalResourceManagementStrategies'
-        ),
+        target: t('components.TableListK.internalResourceManagementStrategies'),
         distance: 50
       },
       {
-        source: t(
-          'components.TableListK.internalResourceManagementStrategies'
-        ),
+        source: t('components.TableListK.internalResourceManagementStrategies'),
         target: attentionCentered,
         distance: 70
       },
       {
-        source: t(
-          'components.TableListK.internalResourceManagementStrategies'
-        ),
+        source: t('components.TableListK.internalResourceManagementStrategies'),
         target: effortCentered,
         distance: 70
       },
       {
-        source: t(
-          'components.TableListK.internalResourceManagementStrategies'
-        ),
+        source: t('components.TableListK.internalResourceManagementStrategies'),
         target: timeCentered,
         distance: 55
       },
@@ -302,29 +262,21 @@ export const useData = (
       },
       {
         source: 'List K',
-        target: t(
-          'components.TableListK.externalResourceManagementStrategies'
-        ),
+        target: t('components.TableListK.externalResourceManagementStrategies'),
         distance: 70
       },
       {
-        source: t(
-          'components.TableListK.externalResourceManagementStrategies'
-        ),
+        source: t('components.TableListK.externalResourceManagementStrategies'),
         target: learnWithClassmatesCentered,
         distance: 60
       },
       {
-        source: t(
-          'components.TableListK.externalResourceManagementStrategies'
-        ),
+        source: t('components.TableListK.externalResourceManagementStrategies'),
         target: literatureResearchCentered,
         distance: 55
       },
       {
-        source: t(
-          'components.TableListK.externalResourceManagementStrategies'
-        ),
+        source: t('components.TableListK.externalResourceManagementStrategies'),
         target: learningEnvironmentCentered,
         distance: 50
       }
@@ -342,15 +294,9 @@ const GraphListK = ({ data }: GraphListKProps) => {
   const graphListKData = useData(data)
 
   const cognitiveStrategies = t('components.TableListK.cognitiveStrategies')
-  const intResMngtStrategies = t(
-    'components.TableListK.internalResourceManagementStrategies'
-  )
-  const metacognitiveStrategies = t(
-    'components.TableListK.metacognitiveStrategies'
-  )
-  const extResMngtStrategies = t(
-    'components.TableListK.externalResourceManagementStrategies'
-  )
+  const intResMngtStrategies = t('components.TableListK.internalResourceManagementStrategies')
+  const metacognitiveStrategies = t('components.TableListK.metacognitiveStrategies')
+  const extResMngtStrategies = t('components.TableListK.externalResourceManagementStrategies')
 
   return (
     <Network

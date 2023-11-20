@@ -127,14 +127,9 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
     answer4: string
     answer5: string
   }[][] = [
-    ...(t<string>(
-      !testUndefined
-        ? 'components.ListKQuestions'
-        : 'components.ListKQuestions.Undefined',
-      {
-        returnObjects: true
-      }
-    ) as {
+    ...(t<string>(!testUndefined ? 'components.ListKQuestions' : 'components.ListKQuestions.Undefined', {
+      returnObjects: true
+    }) as {
       question: string
       questionLabel: string
       answer1: string

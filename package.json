@@ -11,7 +11,7 @@
     "build-prod": "cross-env NODE_ENV=production webpack --progress --profile --color",
     "build": "cross-env NODE_ENV=development webpack --progress --profile --color",
     "watch": "cross-env NODE_ENV=production webpack --progress --profile --color --watch",
-    "lint": "eslint ./src/** --ext .ts,.tsx --fix && prettier --loglevel silent --write \"**/*.{ts,tsx,js,css,html,json}\" && npx unimported",
+    "lint": "eslint ./src/** --ext .ts,.tsx --fix && prettier --loglevel silent --write \"**/*.{ts,tsx,js,css,html,json}\" && npx unimported && yarn run ts-node src/shared/auto-order-json-translations.ts",
     "pull": "git pull && del node_modules && yarn install",
     "test": "jest",
     "wiki": "yarn run typedoc --out pages&&npx serve pages"

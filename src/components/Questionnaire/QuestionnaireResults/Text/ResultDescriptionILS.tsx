@@ -54,13 +54,7 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
             {t('components.TableILS.' + dimensionArray[index])}
           </Typography>
           <Typography variant="body2" gutterBottom>
-            {t(
-              'components.ResultDescriptionILS.' +
-                dimensionArray[index] +
-                '-' +
-                interpretationArray[index]
-            )}{' '}
-            <br />
+            {t('components.ResultDescriptionILS.' + dimensionArray[index] + '-' + interpretationArray[index])} <br />
           </Typography>
         </div>
       )
@@ -84,52 +78,28 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
       for (const dim in balancedDimensionsArray) {
         switch (balancedDimensionsArray[dim]) {
           case 'activate-balanced':
-            balancedDimensionsKeyWordString +=
-              t(
-                'components.ResultDescriptionILS.processingBalanced'
-              ) + ' & '
+            balancedDimensionsKeyWordString += t('components.ResultDescriptionILS.processingBalanced') + ' & '
             break
           case 'reflective-balanced':
-            balancedDimensionsKeyWordString +=
-              t(
-                'components.ResultDescriptionILS.processingBalanced'
-              ) + ' & '
+            balancedDimensionsKeyWordString += t('components.ResultDescriptionILS.processingBalanced') + ' & '
             break
           case 'sensory-balanced':
-            balancedDimensionsKeyWordString +=
-              t(
-                'components.ResultDescriptionILS.perceptionBalanced'
-              ) + ' & '
+            balancedDimensionsKeyWordString += t('components.ResultDescriptionILS.perceptionBalanced') + ' & '
             break
           case 'intuitive-balanced':
-            balancedDimensionsKeyWordString +=
-              t(
-                'components.ResultDescriptionILS.perceptionBalanced'
-              ) + ' & '
+            balancedDimensionsKeyWordString += t('components.ResultDescriptionILS.perceptionBalanced') + ' & '
             break
           case 'verbal-balanced':
-            balancedDimensionsKeyWordString +=
-              t(
-                'components.ResultDescriptionILS.presentationBalanced'
-              ) + ' & '
+            balancedDimensionsKeyWordString += t('components.ResultDescriptionILS.presentationBalanced') + ' & '
             break
           case 'visual-balanced':
-            balancedDimensionsKeyWordString +=
-              t(
-                'components.ResultDescriptionILS.presentationBalanced'
-              ) + ' & '
+            balancedDimensionsKeyWordString += t('components.ResultDescriptionILS.presentationBalanced') + ' & '
             break
           case 'sequential-balanced':
-            balancedDimensionsKeyWordString +=
-              t(
-                'components.ResultDescriptionILS.organisationBalanced'
-              ) + ' & '
+            balancedDimensionsKeyWordString += t('components.ResultDescriptionILS.organisationBalanced') + ' & '
             break
           case 'global-balanced':
-            balancedDimensionsKeyWordString +=
-              t(
-                'components.ResultDescriptionILS.organisationBalanced'
-              ) + ' & '
+            balancedDimensionsKeyWordString += t('components.ResultDescriptionILS.organisationBalanced') + ' & '
             break
           default:
             break
@@ -145,10 +115,7 @@ const ResultDescriptionILS = ({ data, ILSdim = ILSDimension }: ResultDescription
       balancedDimensionsInterpretationString =
         t('components.ResultDescriptionILS.balancedDimensions-1') +
         ' ' +
-        t(
-          'components.ResultDescriptionILS.balancedEnumeration-' +
-            balancedDimensionsArray.length
-        ) +
+        t('components.ResultDescriptionILS.balancedEnumeration-' + balancedDimensionsArray.length) +
         ' ' +
         t('components.ResultDescriptionILS.balancedDimensions-2') +
         ' ' +

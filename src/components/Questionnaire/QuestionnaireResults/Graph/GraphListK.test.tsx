@@ -44,18 +44,10 @@ describe('Test GraphListK with all Methods', () => {
     expect(data.nodes.length).toBe(18)
     expect(data.links.length).toBe(17)
 
-    expect(data.nodes[0].id).toMatch(
-      'components.TableListK.cognitiveStrategies'
-    )
-    expect(data.nodes[1].id).toMatch(
-      'components.TableListK.internalResourceManagementStrategies'
-    )
-    expect(data.nodes[2].id).toMatch(
-      'components.TableListK.metacognitiveStrategies'
-    )
-    expect(data.nodes[3].id).toMatch(
-      'components.TableListK.externalResourceManagementStrategies'
-    )
+    expect(data.nodes[0].id).toMatch('components.TableListK.cognitiveStrategies')
+    expect(data.nodes[1].id).toMatch('components.TableListK.internalResourceManagementStrategies')
+    expect(data.nodes[2].id).toMatch('components.TableListK.metacognitiveStrategies')
+    expect(data.nodes[3].id).toMatch('components.TableListK.externalResourceManagementStrategies')
     expect(data.nodes[4].id).toMatch('List K')
     expect(data.nodes[5].id).toContain('components.TableListK.organize')
     expect(data.nodes[6].id).toContain('components.TableListK.elaborate')
@@ -67,47 +59,25 @@ describe('Test GraphListK with all Methods', () => {
     expect(data.nodes[12].id).toContain('components.TableListK.goalsAndPlans')
     expect(data.nodes[13].id).toContain('components.TableListK.control')
     expect(data.nodes[14].id).toContain('components.TableListK.regulate')
-    expect(data.nodes[15].id).toContain(
-      'components.TableListK.learningWithClassmates'
-    )
-    expect(data.nodes[16].id).toContain(
-      'components.TableListK.literatureResearch'
-    )
-    expect(data.nodes[17].id).toContain(
-      'components.TableListK.learningEnvironment'
-    )
+    expect(data.nodes[15].id).toContain('components.TableListK.learningWithClassmates')
+    expect(data.nodes[16].id).toContain('components.TableListK.literatureResearch')
+    expect(data.nodes[17].id).toContain('components.TableListK.learningEnvironment')
 
     expect(data.links[0].source).toMatch('List K')
-    expect(data.links[0].target).toMatch(
-      'components.TableListK.cognitiveStrategies'
-    )
-    expect(data.links[1].source).toMatch(
-      'components.TableListK.cognitiveStrategies'
-    )
+    expect(data.links[0].target).toMatch('components.TableListK.cognitiveStrategies')
+    expect(data.links[1].source).toMatch('components.TableListK.cognitiveStrategies')
 
     expect(data.links[5].source).toMatch('List K')
-    expect(data.links[5].target).toMatch(
-      'components.TableListK.internalResourceManagementStrategies'
-    )
-    expect(data.links[6].source).toMatch(
-      'components.TableListK.internalResourceManagementStrategies'
-    )
+    expect(data.links[5].target).toMatch('components.TableListK.internalResourceManagementStrategies')
+    expect(data.links[6].source).toMatch('components.TableListK.internalResourceManagementStrategies')
 
     expect(data.links[9].source).toMatch('List K')
-    expect(data.links[9].target).toMatch(
-      'components.TableListK.metacognitiveStrategies'
-    )
-    expect(data.links[10].source).toMatch(
-      'components.TableListK.metacognitiveStrategies'
-    )
+    expect(data.links[9].target).toMatch('components.TableListK.metacognitiveStrategies')
+    expect(data.links[10].source).toMatch('components.TableListK.metacognitiveStrategies')
 
     expect(data.links[13].source).toMatch('List K')
-    expect(data.links[13].target).toMatch(
-      'components.TableListK.externalResourceManagementStrategies'
-    )
-    expect(data.links[14].source).toMatch(
-      'components.TableListK.externalResourceManagementStrategies'
-    )
+    expect(data.links[13].target).toMatch('components.TableListK.externalResourceManagementStrategies')
+    expect(data.links[14].source).toMatch('components.TableListK.externalResourceManagementStrategies')
   })
 
   test('GraphListK renders correctly', async () => {

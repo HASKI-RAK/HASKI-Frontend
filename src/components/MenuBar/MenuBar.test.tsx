@@ -517,9 +517,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILSshort'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(
-      getByText('components.TableILSQuestions.introduction')
-    ).toBeInTheDocument()
+    expect(getByText('components.TableILSQuestions.introduction')).toBeInTheDocument()
   })
 
   it('closes the ils-short questionnaire', async () => {
@@ -536,9 +534,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILSshort'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(
-      getByText('components.TableILSQuestions.introduction')
-    ).toBeInTheDocument()
+    expect(getByText('components.TableILSQuestions.introduction')).toBeInTheDocument()
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
     fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
@@ -556,9 +552,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILS'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(
-      getByText('components.TableILSQuestions.introduction')
-    ).toBeInTheDocument()
+    expect(getByText('components.TableILSQuestions.introduction')).toBeInTheDocument()
   })
 
   it('close the ils-long questionnaire', async () => {
@@ -575,9 +569,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILS'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(
-      getByText('components.TableILSQuestions.introduction')
-    ).toBeInTheDocument()
+    expect(getByText('components.TableILSQuestions.introduction')).toBeInTheDocument()
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
     fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
@@ -595,9 +587,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireListk'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(
-      getByText('components.TableListKQuestions.introduction')
-    ).toBeInTheDocument()
+    expect(getByText('components.TableListKQuestions.introduction')).toBeInTheDocument()
   })
 
   it('close the listk questionnaire', async () => {
@@ -614,9 +604,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireListk'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(
-      getByText('components.TableListKQuestions.introduction')
-    ).toBeInTheDocument()
+    expect(getByText('components.TableListKQuestions.introduction')).toBeInTheDocument()
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
     fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))

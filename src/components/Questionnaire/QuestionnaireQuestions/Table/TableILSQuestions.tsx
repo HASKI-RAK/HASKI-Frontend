@@ -111,14 +111,9 @@ export const TableILSQuestions = memo(
 
     const stepsILSData = useMemo(() => {
       return [
-        ...(t<string>(
-          ilsLong
-            ? 'components.TableILSQuestions.ilsLong'
-            : 'components.TableILSQuestions.ilsShort',
-          {
-            returnObjects: true
-          }
-        ) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
+        ...(t<string>(ilsLong ? 'components.TableILSQuestions.ilsLong' : 'components.TableILSQuestions.ilsShort', {
+          returnObjects: true
+        }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
       ]
     }, [])
 
@@ -227,10 +222,7 @@ export const TableILSQuestions = memo(
     return (
       <Box>
         {activeStep == 0 ? (
-          <CoverSheet
-            header={questionnaireType}
-            body={t('components.TableILSQuestions.introduction')}
-          />
+          <CoverSheet header={questionnaireType} body={t('components.TableILSQuestions.introduction')} />
         ) : (
           <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
             <ButtonStack

@@ -23,55 +23,25 @@ describe('Test TableILS with all Methods', () => {
   test('Table values are correct', () => {
     const { getAllByRole } = render(<TableILS data={mockILS} />)
 
-    expect(getAllByRole('columnheader')[0]).toHaveTextContent(
-      'components.TableILS.dimension'
-    )
+    expect(getAllByRole('columnheader')[0]).toHaveTextContent('components.TableILS.dimension')
     expect(getAllByRole('columnheader')[1]).toHaveTextContent('')
-    expect(getAllByRole('columnheader')[2]).toHaveTextContent(
-      'components.TableILS.interpretation'
-    )
-    expect(getAllByRole('columnheader')[3]).toHaveTextContent(
-      'components.TableILS.score'
-    )
-    expect(getAllByRole('cell')[1]).toHaveTextContent(
-      'components.TableILS.active'
-    )
-    expect(getAllByRole('cell')[0]).toHaveTextContent(
-      'components.TableILS.reflective'
-    )
-    expect(getAllByRole('cell')[5]).toHaveTextContent(
-      'components.TableILS.sensory'
-    )
-    expect(getAllByRole('cell')[4]).toHaveTextContent(
-      'components.TableILS.intuitive'
-    )
-    expect(getAllByRole('cell')[9]).toHaveTextContent(
-      'components.TableILS.visual'
-    )
-    expect(getAllByRole('cell')[8]).toHaveTextContent(
-      'components.TableILS.verbal'
-    )
-    expect(getAllByRole('cell')[13]).toHaveTextContent(
-      'components.TableILS.sequential'
-    )
-    expect(getAllByRole('cell')[12]).toHaveTextContent(
-      'components.TableILS.global'
-    )
+    expect(getAllByRole('columnheader')[2]).toHaveTextContent('components.TableILS.interpretation')
+    expect(getAllByRole('columnheader')[3]).toHaveTextContent('components.TableILS.score')
+    expect(getAllByRole('cell')[1]).toHaveTextContent('components.TableILS.active')
+    expect(getAllByRole('cell')[0]).toHaveTextContent('components.TableILS.reflective')
+    expect(getAllByRole('cell')[5]).toHaveTextContent('components.TableILS.sensory')
+    expect(getAllByRole('cell')[4]).toHaveTextContent('components.TableILS.intuitive')
+    expect(getAllByRole('cell')[9]).toHaveTextContent('components.TableILS.visual')
+    expect(getAllByRole('cell')[8]).toHaveTextContent('components.TableILS.verbal')
+    expect(getAllByRole('cell')[13]).toHaveTextContent('components.TableILS.sequential')
+    expect(getAllByRole('cell')[12]).toHaveTextContent('components.TableILS.global')
   })
 
   test('Dimension interpretation is correct', () => {
-    expect(ILSInterpretation(-1, 'components.TableILS.reflective')).toBe(
-      'components.TableILS.balanced'
-    )
-    expect(ILSInterpretation(1, 'components.TableILS.reflective')).toBe(
-      'components.TableILS.balanced'
-    )
-    expect(ILSInterpretation(-3, 'components.TableILS.reflective')).toBe(
-      'components.TableILS.balanced'
-    )
-    expect(ILSInterpretation(3, 'components.TableILS.reflective')).toBe(
-      'components.TableILS.balanced'
-    )
+    expect(ILSInterpretation(-1, 'components.TableILS.reflective')).toBe('components.TableILS.balanced')
+    expect(ILSInterpretation(1, 'components.TableILS.reflective')).toBe('components.TableILS.balanced')
+    expect(ILSInterpretation(-3, 'components.TableILS.reflective')).toBe('components.TableILS.balanced')
+    expect(ILSInterpretation(3, 'components.TableILS.reflective')).toBe('components.TableILS.balanced')
     expect(ILSInterpretation(-5, 'components.TableILS.reflective')).toBe(
       'components.TableILS.moderate components.TableILS.reflective'
     )
@@ -100,39 +70,23 @@ describe('Test TableILS with all Methods', () => {
     expect(ILSInterpretation(-1, 'components.TableILS.reflective', true)).toBe(
       'balanced components.TableILS.reflective'
     )
-    expect(ILSInterpretation(1, 'components.TableILS.reflective', true)).toBe(
-      'balanced components.TableILS.reflective'
-    )
+    expect(ILSInterpretation(1, 'components.TableILS.reflective', true)).toBe('balanced components.TableILS.reflective')
     expect(ILSInterpretation(-3, 'components.TableILS.reflective', true)).toBe(
       'balanced components.TableILS.reflective'
     )
-    expect(ILSInterpretation(3, 'components.TableILS.reflective', true)).toBe(
-      'balanced components.TableILS.reflective'
-    )
+    expect(ILSInterpretation(3, 'components.TableILS.reflective', true)).toBe('balanced components.TableILS.reflective')
     expect(ILSInterpretation(-5, 'components.TableILS.reflective', true)).toBe(
       'moderate components.TableILS.reflective'
     )
-    expect(ILSInterpretation(5, 'components.TableILS.reflective', true)).toBe(
-      'moderate components.TableILS.reflective'
-    )
+    expect(ILSInterpretation(5, 'components.TableILS.reflective', true)).toBe('moderate components.TableILS.reflective')
     expect(ILSInterpretation(-7, 'components.TableILS.reflective', true)).toBe(
       'moderate components.TableILS.reflective'
     )
-    expect(ILSInterpretation(7, 'components.TableILS.reflective', true)).toBe(
-      'moderate components.TableILS.reflective'
-    )
-    expect(ILSInterpretation(-9, 'components.TableILS.reflective', true)).toBe(
-      'strong components.TableILS.reflective'
-    )
-    expect(ILSInterpretation(9, 'components.TableILS.reflective', true)).toBe(
-      'strong components.TableILS.reflective'
-    )
-    expect(
-      ILSInterpretation(-11, 'components.TableILS.reflective', true)
-    ).toBe('strong components.TableILS.reflective')
-    expect(ILSInterpretation(11, 'components.TableILS.reflective', true)).toBe(
-      'strong components.TableILS.reflective'
-    )
+    expect(ILSInterpretation(7, 'components.TableILS.reflective', true)).toBe('moderate components.TableILS.reflective')
+    expect(ILSInterpretation(-9, 'components.TableILS.reflective', true)).toBe('strong components.TableILS.reflective')
+    expect(ILSInterpretation(9, 'components.TableILS.reflective', true)).toBe('strong components.TableILS.reflective')
+    expect(ILSInterpretation(-11, 'components.TableILS.reflective', true)).toBe('strong components.TableILS.reflective')
+    expect(ILSInterpretation(11, 'components.TableILS.reflective', true)).toBe('strong components.TableILS.reflective')
   })
 
   test('Returned dimensions are correct', () => {

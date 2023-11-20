@@ -19,9 +19,7 @@ export const Imprint = () => {
       <Typography variant="body2">D - 87435 Kempten</Typography>
       <Typography paragraph variant="body2" />
       <Typography variant="h6">{t('pages.imprint.authorisedRepresentative')}</Typography>
-      <Typography variant="body2">
-        {t('pages.imprint.authorisedRepresentativeTitle')} Prof. Dr. Georg Hagel
-      </Typography>
+      <Typography variant="body2">{t('pages.imprint.authorisedRepresentativeTitle')} Prof. Dr. Georg Hagel</Typography>
       <Typography variant="body2">
         <Typography sx={{ fontWeight: 'bold', display: 'inline' }}>Tel.:</Typography> +49 (0) 831 2523-471
       </Typography>

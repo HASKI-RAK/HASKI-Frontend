@@ -42,11 +42,7 @@ const useGeneralSubscalesBelow3Element = (generalProps: GeneralSubscalesProps): 
   }
   if (averageSubscaleBelow3Array.length > 1) {
     averageSubscaleBelow3String +=
-      ' ' +
-      t(
-        'components.ResultDescriptionListK.subscaleAverage below3-' +
-          averageSubscaleBelow3Array.length
-      )
+      ' ' + t('components.ResultDescriptionListK.subscaleAverage below3-' + averageSubscaleBelow3Array.length)
   }
 
   return (
@@ -65,40 +61,32 @@ const useGeneralSubscalesBelow3Element = (generalProps: GeneralSubscalesProps): 
 const useCognitiveStrategiesBelow3Element = (generalProps: CognitiveStrategiesProps) => {
   const { t } = useTranslation()
 
-  let cognitiveStrategiesBelow3String = t(
-    'components.ResultDescriptionListK.cognitiveStrategies below3-1'
-  )
+  let cognitiveStrategiesBelow3String = t('components.ResultDescriptionListK.cognitiveStrategies below3-1')
   const cognitiveStrategiesBelow3Array = []
   const cognitiveStrategiesBelow3Html = []
 
   if (generalProps.organize < 3) {
     cognitiveStrategiesBelow3Array.push('Organize')
-    cognitiveStrategiesBelow3String +=
-      ' ' + t('components.TableListK.organize') + ' &'
+    cognitiveStrategiesBelow3String += ' ' + t('components.TableListK.organize') + ' &'
   }
   if (generalProps.elaborate < 3) {
     cognitiveStrategiesBelow3Array.push('Elaborate')
-    cognitiveStrategiesBelow3String +=
-      ' ' + t('components.TableListK.elaborate') + ' &'
+    cognitiveStrategiesBelow3String += ' ' + t('components.TableListK.elaborate') + ' &'
   }
   if (generalProps.criticalReview < 3) {
     cognitiveStrategiesBelow3Array.push('Critical review')
-    cognitiveStrategiesBelow3String +=
-      ' ' + t('components.TableListK.criticalReview') + ' &'
+    cognitiveStrategiesBelow3String += ' ' + t('components.TableListK.criticalReview') + ' &'
   }
   if (generalProps.repeat < 3) {
     cognitiveStrategiesBelow3Array.push('Repeat')
-    cognitiveStrategiesBelow3String +=
-      ' ' + t('components.TableListK.repeat') + ' &'
+    cognitiveStrategiesBelow3String += ' ' + t('components.TableListK.repeat') + ' &'
   }
 
   //Remove last " & "
   cognitiveStrategiesBelow3String = cognitiveStrategiesBelow3String.slice(0, cognitiveStrategiesBelow3String.length - 2)
 
   if (cognitiveStrategiesBelow3Array.length > 0) {
-    cognitiveStrategiesBelow3String +=
-      ' ' +
-      t('components.ResultDescriptionListK.cognitiveStrategies below3-2')
+    cognitiveStrategiesBelow3String += ' ' + t('components.ResultDescriptionListK.cognitiveStrategies below3-2')
     cognitiveStrategiesBelow3Html.push(
       <div key={'CognitiveStrategiesDescriptionListK'}>
         <Typography variant={'h6'} gutterBottom>
@@ -117,34 +105,23 @@ const useCognitiveStrategiesBelow3Element = (generalProps: CognitiveStrategiesPr
 const useMetacognitiveStrategiesBelow3Element = (metacognitiveProps: MetaCognitiveStrategiesProps) => {
   const { t } = useTranslation()
 
-  let metacognitiveStrategiesBelow3String = t(
-    'components.ResultDescriptionListK.metacognitiveStrategies below3-1'
-  )
+  let metacognitiveStrategiesBelow3String = t('components.ResultDescriptionListK.metacognitiveStrategies below3-1')
   const metacognitiveStrategiesBelow3Array = []
   const metacognitiveStrategiesBelow3Html = []
 
   if (metacognitiveProps.goalsPlans < 3) {
     metacognitiveStrategiesBelow3Array.push('Goals and plans')
     metacognitiveStrategiesBelow3String +=
-      ' ' +
-      t(
-        'components.ResultDescriptionListK.metacognitiveStrategies below3.GoalsAndPlans'
-      ) +
-      ' &'
+      ' ' + t('components.ResultDescriptionListK.metacognitiveStrategies below3.GoalsAndPlans') + ' &'
   }
   if (metacognitiveProps.control < 3) {
     metacognitiveStrategiesBelow3Array.push('Control')
-    metacognitiveStrategiesBelow3String +=
-      ' ' + t('components.TableListK.control') + ' &'
+    metacognitiveStrategiesBelow3String += ' ' + t('components.TableListK.control') + ' &'
   }
   if (metacognitiveProps.regulate < 3) {
     metacognitiveStrategiesBelow3Array.push('Regulate')
     metacognitiveStrategiesBelow3String +=
-      ' ' +
-      t(
-        'components.ResultDescriptionListK.metacognitiveStrategies below3.regulate'
-      ) +
-      ' &'
+      ' ' + t('components.ResultDescriptionListK.metacognitiveStrategies below3.regulate') + ' &'
   }
 
   //Remove last " & "
@@ -193,18 +170,10 @@ const useRelevantSubscalesBelow3Element = (subScalesRelevantCombinations: { [key
     subscalesBelow3MessageString.push(
       <div key={'RelevantSubscalesBelow3DescriptionListK'}>
         <Typography variant={'h6'} gutterBottom>
-          {t(
-            'components.ResultDescriptionListK.' +
-              subscalesBelow3Array.join('') +
-              ' below3-Title'
-          )}
+          {t('components.ResultDescriptionListK.' + subscalesBelow3Array.join('') + ' below3-Title')}
         </Typography>
         <Typography variant="body2" gutterBottom>
-          {t(
-            'components.ResultDescriptionListK.' +
-              subscalesBelow3Array.join('') +
-              ' below3-Description'
-          )}
+          {t('components.ResultDescriptionListK.' + subscalesBelow3Array.join('') + ' below3-Description')}
         </Typography>
       </div>
     )
