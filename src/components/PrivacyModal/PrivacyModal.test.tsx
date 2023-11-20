@@ -158,38 +158,38 @@ describe('Test PrivacyModal', () => {
     const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
     fireEvent.click(declineButton)
   })
-})
 
-test('checkUniversity returns empty string when fetch fails', async () => {
-  mockServices.fetchUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
-  const { result } = renderHook(() => usePrivacyModal(), {
-    wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
-  })
-  expect(await result.current.checkUniversity()).toBe('')
-})
-
-test('decline returns the user two pages prior', async () => {
-  mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
-    Promise.resolve({
-      id: 1,
-      lms_user_id: 1,
-      name: 'Thaddäus Tentakel',
-      role: 'Tester',
-      role_id: 1,
-      settings: {
-        id: 1,
-        user_id: 1,
-        pswd: '1234',
-        theme: 'test'
-      },
-      university: ''
+  test('checkUniversity returns empty string when fetch fails', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
+    const { result } = renderHook(() => usePrivacyModal(), {
+      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
     })
-  )
-  const { getByRole } = render(
-    <MemoryRouter initialEntries={['/login']}>
-      <PrivacyModal />
-    </MemoryRouter>
-  )
-  const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
-  fireEvent.click(declineButton)
+    expect(await result.current.checkUniversity()).toBe('')
+  })
+
+  test('decline returns the user two pages prior', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: ''
+      })
+    )
+    const { getByRole } = render(
+      <MemoryRouter initialEntries={['/login']}>
+        <PrivacyModal />
+      </MemoryRouter>
+    )
+    const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+    fireEvent.click(declineButton)
+  })
 })
