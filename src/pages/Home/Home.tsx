@@ -42,7 +42,7 @@ export const Home = () => {
               })
               .catch((error) => {
                 addSnackbar({
-                  message: t('Error.fetchCourses'),
+                  message: t('Error.getCourses'),
                   severity: 'error',
                   autoHideDuration: 5000
                 })
@@ -51,7 +51,7 @@ export const Home = () => {
           })
           .catch((error) => {
             addSnackbar({
-              message: t('Error.fetchUser'),
+              message: t('Error.getUser'),
               severity: 'error',
               autoHideDuration: 5000
             })
