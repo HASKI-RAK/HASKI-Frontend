@@ -113,7 +113,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                             onClick={() => navigate('/privacypolicy')}>
                             {t('pages.privacypolicy')}
                           </Link>
-                          {t('components.PrivacyModal.readPrivacypolicy-2')}
+                          {t('components.PrivacyModal.readPrivacyPolicy-2')}
                         </>
                       }
                     />
@@ -146,7 +146,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                           }
                         })
                       }}>
-                      {t('AppGlobal.Decline')}
+                      {t('appGlobal.decline')}
                     </Button>
                   </Tooltip>
                   <Button
@@ -154,7 +154,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                     sx={{ alignSelf: 'end' }}
                     disabled={!checked}
                     onClick={() => handleModal(true)}>
-                    {t('AppGlobal.Accept')}
+                    {t('appGlobal.accept')}
                   </Button>
                 </Box>
               </Typography>

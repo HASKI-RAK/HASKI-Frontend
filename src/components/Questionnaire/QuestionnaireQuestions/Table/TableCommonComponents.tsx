@@ -90,7 +90,7 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
             onClick={handleNext}
             data-testid={`nextButton${idType}Questionnaire`}
             disabled={disabled}>
-            {t('AppGlobal.Next')}
+            {t('appGlobal.next')}
             <KeyboardArrowRight />
           </Button>
         }
@@ -108,7 +108,7 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
             data-testid={`backButton${idType}Questionnaire`}
             disabled={activeStep === 0}>
             <KeyboardArrowLeft />
-            {t('AppGlobal.Back')}
+            {t('appGlobal.back')}
           </Button>
         }
       />
@@ -143,7 +143,7 @@ export const SendButton = memo(
             border: (theme) => theme.palette.primary.dark
           }
         }}>
-        {isSending ? <CircularProgress size={24} /> : t('AppGlobal.Send')}
+        {isSending ? <CircularProgress size={24} /> : t('appGlobal.send')}
       </Button>
     )
   }

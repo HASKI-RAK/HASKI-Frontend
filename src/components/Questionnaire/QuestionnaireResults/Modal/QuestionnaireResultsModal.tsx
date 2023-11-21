@@ -259,7 +259,7 @@ const QuestionnaireResultsModal = memo(
                 onClick={handleBack}
                 data-testid="backButton"
                 disabled={activeStep === 0}>
-                {t('AppGlobal.Back')}
+                {t('appGlobal.back')}
               </Button>
               <Button
                 variant="contained"
@@ -267,7 +267,7 @@ const QuestionnaireResultsModal = memo(
                 onClick={handleNext}
                 data-testid="nextButton"
                 disabled={activeStep === 1}>
-                {t('AppGlobal.Next')}
+                {t('appGlobal.next')}
               </Button>
             </Stack>
           </Stack>

@@ -131,7 +131,7 @@ const useMetacognitiveStrategiesBelow3Element = (metacognitiveProps: MetaCogniti
   )
 
   if (metacognitiveStrategiesBelow3Array.length > 0) {
-    metacognitiveStrategiesBelow3String += t('AppGlobal.Dot')
+    metacognitiveStrategiesBelow3String += t('appGlobal.dot')
     metacognitiveStrategiesBelow3Html.push(
       <div key={'MetaCognitiveStrategiesDescriptionListK'}>
         <Typography variant={'h6'} gutterBottom>

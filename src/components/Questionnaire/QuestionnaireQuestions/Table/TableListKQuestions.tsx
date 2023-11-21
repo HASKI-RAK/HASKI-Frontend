@@ -153,14 +153,14 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
     sendAnswers().then((res) => {
       if (res) {
         addSnackbar({
-          message: t('Send.dataSuccessfull'),
+          message: t('appGlobal.dataSendSuccessful'),
           severity: 'success',
           autoHideDuration: 5000
         })
         setSuccessSend(true)
       } else {
         addSnackbar({
-          message: t('Send.dataUnsuccessfull'),
+          message: t('appGlobal.dataSendUnsuccessful'),
           severity: 'error',
           autoHideDuration: 5000
         })

@@ -26,7 +26,7 @@ const SnackbarContainer = () => {
       setRecentlyOffline(true)
       addSnackbar({
         severity: 'warning',
-        message: t('Warning.offline'),
+        message: t('warning.offline'),
         autoHideDuration: undefined
       })
     }
@@ -35,12 +35,12 @@ const SnackbarContainer = () => {
       setRecentlyOffline(false)
       addSnackbar({
         severity: 'warning',
-        message: t('Warning.online'),
+        message: t('warning.online'),
         autoHideDuration: 3000
       })
       updateSnackbar({
         severity: 'warning',
-        message: t('Warning.offline'),
+        message: t('warning.offline'),
         autoHideDuration: 1
       })
     }

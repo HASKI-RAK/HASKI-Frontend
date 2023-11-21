@@ -102,12 +102,12 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
           </Typography>
 
           <FormControl required>
-            <InputLabel id="select_label_contact">{t('AppGlobal.Topic')}</InputLabel>
+            <InputLabel id="select_label_contact">{t('component.ContactForm.topic')}</InputLabel>
             <Select
               id="contactform-select"
               name="reporttopic"
               labelId="select_label_contact"
-              label={t('AppGlobal.Topic')}
+              label={t('component.ContactForm.topic')}
               required
               onChange={reportTopicChangeHandler}
               value={reportTopic}

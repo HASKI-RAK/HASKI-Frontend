@@ -48,7 +48,7 @@ const LocalNav = ({
 
   return (
     <Box flexGrow={1}>
-      <Typography variant="h5">{t('components.LocalNav.topics')}</Typography>
+      <Typography variant="h5">{t('appGlobal.topics')}</Typography>
       <Divider />
       {loading ? (
         <Box>
@@ -89,7 +89,7 @@ const LocalNav = ({
               </AccordionSummary>
               <AccordionDetails sx={{ flexDirection: 'column' }}>
                 {openAccordion === index && (
-                  <Suspense fallback={<div>{t('AppGlobal.Loading')}</div>}>
+                  <Suspense fallback={<div>{t('appGlobal.loading')}</div>}>
                     <LazyLoadingLearningPathElement
                       topic={topic}
                       courseId={courseId}

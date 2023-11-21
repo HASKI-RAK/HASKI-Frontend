@@ -274,7 +274,7 @@ describe('MenuBar', () => {
     )
 
     await waitFor(async () => {
-      fireEvent.click(getByText('components.MenuBar.topicButton'))
+      fireEvent.click(getByText('appGlobal.topics'))
       await waitFor(() => {
         expect(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0]).toBeInTheDocument()
       })
@@ -301,7 +301,7 @@ describe('MenuBar', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.MenuBar.topicButton'))
+      fireEvent.click(getByText('appGlobal.topics'))
       waitFor(() => {
         expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
       })
@@ -352,7 +352,7 @@ describe('MenuBar', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.MenuBar.topicButton'))
+      fireEvent.click(getByText('appGlobal.topics'))
       waitFor(() => {
         expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
       })
@@ -496,7 +496,7 @@ describe('MenuBar', () => {
     )
 
     await waitFor(async () => {
-      fireEvent.click(getByText('components.MenuBar.topicButton'))
+      fireEvent.click(getByText('appGlobal.topics'))
       await waitFor(() => {
         expect(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0]).toBeInTheDocument()
         fireEvent.click(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0])

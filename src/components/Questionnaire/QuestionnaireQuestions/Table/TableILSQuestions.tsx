@@ -163,7 +163,7 @@ export const TableILSQuestions = memo(
           setSuccessSend(true)
         } else {
           addSnackbar({
-            message: t('Send.dataUnsuccessfull'),
+            message: t('appGlobal.dataSendUnsuccessful'),
             severity: 'error',
             autoHideDuration: 5000
           })
