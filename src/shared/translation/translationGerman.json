@@ -490,7 +490,7 @@
   "components.PrivacyModal.afterReading": "HASKI verwendet essentielle Cookies. Weitere Informationen über die gesammelten Daten und deren Verwendung können in der Datenschutzerklärung nachgelesen werden:",
   "components.PrivacyModal.declined": "Sie können HASKI nicht verwenden, ohne den essentiellen Cookies zuzustimmen.",
   "components.PrivacyModal.readPrivacypolicy": "Ich habe die \n",
-  "components.PrivacyModal.readPrivacypolicy2": "gelesen",
+  "components.PrivacyModal.readPrivacypolicy-2": "gelesen",
   "components.PrivacyModal.returnToMoodle": "Dies wird Sie zu Moodle weiterleiten",
   "components.PrivacyModal.termsOfService": "Nutzungsbedingungen und Datenschutzerklärung",
   "components.ProjectDescriptionContent.advantagesLearningBody": "Die Unterstützung wird ermöglicht, indem das HASKI-System Deine Daten aus Moodle ausliest und ein KI-Algorithmus auf Basis dieser Daten Dir einen personalisierten Lernpfad durch die Lernmaterialien vorschlägt. Natürlich bleibt die Entscheidung bei Dir, welches Material Du als Nächstes bearbeiten willst. Auch diese Präferenzen merkt sich HASKI und passt zukünftige Vorschläge an die neuen Begebenheiten an.",
@@ -1743,9 +1743,9 @@
   "pages.topic": "Thema",
   "Send.dataSuccessfull": "Daten wurden erfolgreich gesendet",
   "Send.dataUnsuccessfull": "Daten konnten nicht gesendet werden",
-  "tooltip.openGlobalSettings": "Globale Einstellungen",
-  "tooltip.openQuestionnaireResults": "Lerntyp",
-  "tooltip.openSettings": "Einstellungen",
+  "Tooltip.openGlobalSettings": "Globale Einstellungen",
+  "Tooltip.openQuestionnaireResults": "Lerntyp",
+  "Tooltip.openSettings": "Einstellungen",
   "Warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
   "Warning.online": "Sie sind wieder online."
 }

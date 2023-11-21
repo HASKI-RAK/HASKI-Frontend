@@ -493,7 +493,7 @@
   "components.PrivacyModal.afterReading": "HASKI is using essential cookies. Further information about the collected data and its usage can be found in the privacy policy:",
   "components.PrivacyModal.declined": "You cannot access HASKI without accepting the essential cookies.",
   "components.PrivacyModal.readPrivacypolicy": "I have read the \n",
-  "components.PrivacyModal.readPrivacypolicy2": "",
+  "components.PrivacyModal.readPrivacypolicy-2": "",
   "components.PrivacyModal.returnToMoodle": "This will redirect you to Moodle",
   "components.PrivacyModal.termsOfService": "Terms of service and privacy policy",
   "components.QuestionnaireResultsModal.ilsLongNoData-1": "ILS-Questionnaire",
@@ -1746,9 +1746,9 @@
   "pages.topic": "Topic",
   "Send.dataSuccessfull": "Send.dataSuccessfully",
   "Send.dataUnsuccessfull": "Data could not be sent",
-  "tooltip.openGlobalSettings": "Open global settings",
-  "tooltip.openQuestionnaireResults": "Learningtype",
-  "tooltip.openSettings": "Open settings",
+  "Tooltip.openGlobalSettings": "Open global settings",
+  "Tooltip.openQuestionnaireResults": "Learningtype",
+  "Tooltip.openSettings": "Open settings",
   "Warning.offline": "You are currently offline. Please check your internet connection.",
   "Warning.online": "You are online again."
 }

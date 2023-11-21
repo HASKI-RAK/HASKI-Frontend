@@ -113,7 +113,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                             onClick={() => navigate('/privacypolicy')}>
                             {t('pages.privacypolicy')}
                           </Link>
-                          {t('components.PrivacyModal.readPrivacypolicy2')}
+                          {t('components.PrivacyModal.readPrivacypolicy-2')}
                         </>
                       }
                     />

@@ -306,7 +306,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
           {/** Questionnaire Results */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('tooltip.openQuestionnaireResults')}>
+            <Tooltip title={t('Tooltip.openQuestionnaireResults')}>
               <IconButton id="modal-icon-button" onClick={() => setModalOpen(true)}>
                 <Analytics data-testid="QuestionnaireResultsIcon" />
               </IconButton>
@@ -329,7 +329,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
           {/** Settings button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('tooltip.openGlobalSettings')}>
+            <Tooltip title={t('Tooltip.openGlobalSettings')}>
               <IconButton
                 id="global-settings-icon-button"
                 onClick={() => {
@@ -346,7 +346,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('tooltip.openSettings')}>
+            <Tooltip title={t('Tooltip.openSettings')}>
               <IconButton id="account-icon-button" onClick={handleOpenUserMenu} data-testid="useravatar">
                 <Avatar alt="Remy Sharp">
                   <Person />
