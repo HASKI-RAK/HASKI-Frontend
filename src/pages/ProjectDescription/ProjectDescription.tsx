@@ -87,7 +87,7 @@ const ProjectDescription = () => {
         />
       </ProjectDescriptionCard>
       <ProjectDescriptionStepper
-        header={t('pages.ProjectDescription.goalsHeader')}
+        header={t('pages.projectdescription.goalsHeader')}
         body={
           t<string>('pages.projectdescription.goalsBody', {
             returnObjects: true
