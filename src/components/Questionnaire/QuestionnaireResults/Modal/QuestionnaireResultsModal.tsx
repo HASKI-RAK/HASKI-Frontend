@@ -113,7 +113,7 @@ const QuestionnaireResultsModal = memo(
                   setListKLoading(false)
                 } else {
                   addSnackbar({
-                    message: t('Error.fetchListK'),
+                    message: t('error.fetchListK'),
                     severity: 'error'
                   })
                 }
@@ -122,7 +122,7 @@ const QuestionnaireResultsModal = memo(
           .catch((error) => {
             log.error(error)
             addSnackbar({
-              message: t('Error.getUser'),
+              message: t('error.getUser'),
               severity: 'error'
             })
           })
@@ -143,7 +143,7 @@ const QuestionnaireResultsModal = memo(
                   setILSLoading(false)
                 } else {
                   addSnackbar({
-                    message: t('Error.fetchILS'),
+                    message: t('error.fetchILS'),
                     severity: 'error'
                   })
                 }
@@ -152,7 +152,7 @@ const QuestionnaireResultsModal = memo(
           .catch((error) => {
             log.error(error)
             addSnackbar({
-              message: t('Error.getUser'),
+              message: t('error.getUser'),
               severity: 'error'
             })
           })
