@@ -7,10 +7,11 @@
  *
  * @example
  *  "verb": {
- *     "id": "https://wiki.haski.app/variables/xapi.answered", // URI of action in online directory
+ *     "id": "https://wiki.haski.app/variables/xapi.answered",
  *     "display": {
- *       "en": "submitted" // en required
+ *       "en": "answered"
  *     }
+ *  },
  *
  * @category verbs
  */

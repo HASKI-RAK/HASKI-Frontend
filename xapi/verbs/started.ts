@@ -5,7 +5,12 @@
  * The "started" verb is used to indicate that the user started something.
  *
  * @example
- * The user started...
+ * "verb": {
+ *     "id": "https://wiki.haski.app/variables/xapi.started",
+ *     "display": {
+ *       "en": "started"
+ *     }
+ *  },
  *
  * @category verbs
  */
