@@ -1,5 +1,5 @@
 import { LearningPathElement, LearningPathElementReturn } from '@core'
-import { getData } from '../RequestResponse'
+import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
 export const getLearningPathElement: LearningPathElementReturn = async (
@@ -12,7 +12,7 @@ export const getLearningPathElement: LearningPathElementReturn = async (
   if (!course_id || !topic_id) {
     throw new Error('course_id and topic_id are required')
   }
-  const response = await fetch(
+  return fetchData<LearningPathElement>(
     getConfig().BACKEND +
       `/user/${userId}/${lmsUserId}/student/${studentId}/course/${course_id}/topic/${topic_id}/learningPath`,
     {
@@ -23,5 +23,4 @@ export const getLearningPathElement: LearningPathElementReturn = async (
       }
     }
   )
-  return getData<LearningPathElement>(response)
 }

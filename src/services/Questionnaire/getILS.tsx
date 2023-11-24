@@ -1,20 +1,17 @@
 import { ILS, ILSReturn } from '@core'
-import { getData } from '../RequestResponse'
+import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
 export const getILS: ILSReturn = async (userId, lmsUserId, studentId) => {
-  const response = await fetch(
-    getConfig().BACKEND + `/user/${userId}/${lmsUserId}/student/${studentId}/learningStyle`,
-    {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+  return await fetchData<ILS>(getConfig().BACKEND + `/user/${userId}/${lmsUserId}/student/${studentId}/learningStyle`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
     }
-  )
+  })
 
-  const originalData = getData<ILS>(response)
+  /*const originalData = fetchData<ILS>(response)
 
   return originalData.then((originalData) => {
     const newData: ILS = {
@@ -31,4 +28,5 @@ export const getILS: ILSReturn = async (userId, lmsUserId, studentId) => {
     }
     return newData
   })
+  */
 }

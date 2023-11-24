@@ -55,8 +55,14 @@ type Response = {
  * @param contentType - The content type of the response. Default is 'application/json'. Another example is 'text/html'.
  * @returns The data of type T of the response
  */
-export const getData = async <T>(response: Response): Promise<T> => {
-  const contentData = await content<T>(response)
+export const fetchData = async <T>(input: RequestInfo | URL, init?: RequestInit | undefined): Promise<T> => {
+  const response = await fetch(input, init).then((response)=>{
+    if(response.ok)return response
+    else throw new Error(`HTTP error${response.status}`)}).catch((error)=>{
+      throw new Error(error)
+    })
+    
+  const contentData = content<T>(response)
   if (response.ok) return contentData
   else {
     const data: ErrorRequestResponse = await content<ErrorRequestResponse>(response)

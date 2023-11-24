@@ -1,5 +1,5 @@
 import { getConfig } from '@shared'
-import { getData } from '../RequestResponse'
+import { fetchData } from '../RequestResponse'
 
 /**
  * Sends a GET request to the backend to logout the user
@@ -8,12 +8,11 @@ import { getData } from '../RequestResponse'
  * @returns {Promise<void>} The response of the request.
  */
 export const getLogout = async (): Promise<void> => {
-  const response = await fetch(getConfig().BACKEND + `/logout`, {
+  return fetchData<undefined>(getConfig().BACKEND + `/logout`, {
     method: 'GET',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     }
   })
-  return getData<undefined>(response)
 }
