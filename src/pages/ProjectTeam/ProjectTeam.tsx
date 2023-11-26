@@ -9,7 +9,7 @@ import {
     ProjectTeamCompetenciesCard
 } from '@components'
 import {Avatar, Box, Grid, Typography} from '@common/components'
-import {memo} from 'react'
+import React, {memo} from 'react'
 import MediaQuery from 'react-responsive'
 import './ProjectTeam.css'
 
@@ -26,31 +26,36 @@ const ProjectTeam = () => {
     // Translation
     const {t} = useTranslation()
 
-    const quotesReasons = t('pages.ProjectTeam.ReasonsBody', {
+    let quotesReasons = t('pages.ProjectTeam.ReasonsBody', {
         returnObjects: true,
-    }) as { quote: string; img: string, name: string, description: string }[];
-    const quotesDev = t('pages.ProjectTeam.InitVoicesBody', {
+    }) as { quote: string; img: string, name: string, description: string }[] ?? [];
+    quotesReasons = Array.isArray(quotesReasons) ? quotesReasons : [];
+    let quotesDev = t('pages.ProjectTeam.InitVoicesBody', {
         returnObjects: true,
-    }) as { quote: string; img: string, name: string, description: string }[];
-    const quotesStudent = t('pages.ProjectTeam.StudentVoicesBody', {
+    }) as { quote: string; img: string, name: string, description: string }[] ?? [];
+    quotesDev = Array.isArray(quotesDev) ? quotesDev : [];
+    let quotesStudent = t('pages.ProjectTeam.StudentVoicesBody', {
         returnObjects: true,
-    }) as { quote: string }[];
-    const interdisciplinary = t('pages.ProjectTeam.interdisciplinaryBody', {
+    }) as { quote: string }[] ?? [];
+    quotesStudent = Array.isArray(quotesStudent) ? quotesStudent : [];
+    let interdisciplinary = t('pages.ProjectTeam.interdisciplinaryBody', {
         returnObjects: true,
-    }) as { header: string; description: string }[];
+    }) as { header: string; description: string }[] ?? [];
+    interdisciplinary = Array.isArray(interdisciplinary) ? interdisciplinary : [];
     const content: { [key: string]: string } = {}; // Add the index signature
     interdisciplinary.forEach((item, index) => {
         const headerKey = item.header;
         content[headerKey] = item.description;
     });
-    const imageAttributes = t('pages.ProjectTeam.imageSourcesDict', {
+    let imageAttributes = t('pages.ProjectTeam.imageSourcesDict', {
         returnObjects: true,
-    }) as { text: string, url: string }[];
+    }) as { text: string, url: string }[] ?? [];
+    imageAttributes = Array.isArray(imageAttributes) ? imageAttributes : [];
 
     return (
         <>
             <MediaQuery minWidth={700}>
-                <div className="bgLogo">
+                <div className="bgLogo" data-testid="BgLogo">
                     <img src="/LogoPng.png" width="300" height="300"/>
                 </div>
             </MediaQuery>
@@ -71,7 +76,7 @@ const ProjectTeam = () => {
             <div>
                 <div>
                     <MediaQuery minWidth={700}>
-                        <div className="bgMap02">
+                        <div className="bgMap02" data-testid="BgMap">
                             <img src="/ProjectTeam/map02.gif" width="100%"/>
                         </div>
                     </MediaQuery>
@@ -91,7 +96,7 @@ const ProjectTeam = () => {
                 </div>
                 <div>
                     <MediaQuery minWidth={700}>
-                        <div className="bgMap01">
+                        <div className="bgMap01" data-testid="BgMap">
                             <img src="/ProjectTeam/map01.gif" width="100%"/>
                         </div>
                     </MediaQuery>
@@ -111,7 +116,7 @@ const ProjectTeam = () => {
                 </div>
                 <div>
                     <MediaQuery minWidth={700}>
-                        <div className="bgMap03">
+                        <div className="bgMap03" data-testid="BgMap">
                             <img src="/ProjectTeam/map03.gif" width="100%"/>
                         </div>
                     </MediaQuery>
@@ -146,7 +151,7 @@ const ProjectTeam = () => {
             </ProjectTeamCompetenciesCard>
             <ProjectDescriptionStepper
                 header={t('pages.ProjectTeam.StudentVoicesHeader')}
-                body={quotesDev.map((quoteData) => quoteData.quote)}
+                body={quotesStudent.map((quoteData) => quoteData.quote)}
             />
             <Grid container item justifyContent="center" xs={12}>
                 <ImageAttribute imageAttributes={imageAttributes}/>

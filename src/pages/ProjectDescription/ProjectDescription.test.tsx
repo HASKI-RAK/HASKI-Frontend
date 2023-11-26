@@ -7,5 +7,6 @@ describe('ProjectDescription tests', () => {
     const { getAllByTestId } = render(<ProjectDescription />)
     expect(getAllByTestId('projectDescriptionCard').length).toBe(5)
     expect(getAllByTestId('projectDescriptionStepper').length).toBe(2)
+    expect(getAllByTestId('ImageAttribute').length).toBe(1)
   })
 })

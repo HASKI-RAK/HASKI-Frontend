@@ -3,9 +3,9 @@ import './MapPin.css';
 
 const MapPin = () => {
     return (
-        <div>
-            <div className="pin"></div>
-            <div className="pulse"></div>
+        <div data-testid="MapPin">
+            <div className="pin" data-testid="Pin"></div>
+            <div className="pulse" data-testid="Pulse"></div>
         </div>
     );
 };

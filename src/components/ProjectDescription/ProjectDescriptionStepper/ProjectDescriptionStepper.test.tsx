@@ -1,11 +1,18 @@
 import { useProjectDescriptionStepper } from './ProjectDescriptionStepper.hooks'
-import { act, render, renderHook, fireEvent } from '@testing-library/react'
+import {act, render, renderHook, fireEvent, getByAltText, screen} from '@testing-library/react'
 import ProjectDescriptionStepper from './ProjectDescriptionStepper'
 import '@testing-library/jest-dom'
 
 const mockProjectDescriptionStepperProps = {
   body: ['body1', 'body2', 'body3'],
   header: 'header'
+}
+
+const mockProjectDescriptionStepperAvatarProps = {
+  ...mockProjectDescriptionStepperProps,
+  withAvatar: true,
+  avatarName: ['name1', 'name2', 'name3'],
+  avatarDescription: ['description1', 'description2', 'description3']
 }
 
 jest.useFakeTimers()
@@ -17,37 +24,42 @@ afterEach(() => {
 })
 
 describe('Test ProjectDescriptionStepper', () => {
+  const testId = 'projectDescriptionStepper';
+
   test('ProjectDescriptionStepper renders without input', () => {
     const { getByTestId } = render(<ProjectDescriptionStepper />)
-    const projectDescriptionStepper = getByTestId('projectDescriptionStepper')
+    const projectDescriptionStepper = getByTestId(testId)
     expect(projectDescriptionStepper).toBeInTheDocument()
   })
 
   test('ProjectDescriptionCard without input can be scrolled', () => {
     const { getByTestId } = render(<ProjectDescriptionStepper />)
-    const projectDescriptionStepper = getByTestId('projectDescriptionStepper')
+    const projectDescriptionStepper = getByTestId(testId)
     window.dispatchEvent(new Event('scroll'))
     expect(projectDescriptionStepper).toBeInTheDocument()
   })
 
   test('ProjectDescriptionCard renders with input', () => {
     const { getByTestId } = render(
-      <ProjectDescriptionStepper
-        body={mockProjectDescriptionStepperProps.body}
-        header={mockProjectDescriptionStepperProps.header}
-      />
+      <ProjectDescriptionStepper {...mockProjectDescriptionStepperProps} />
     )
 
-    const projectDescriptionStepper = getByTestId('projectDescriptionStepper')
+    const projectDescriptionStepper = getByTestId(testId)
+    expect(projectDescriptionStepper).toBeInTheDocument()
+  })
+
+  test('ProjectDescriptionCard renders with input and avatar', () => {
+    const { getByTestId } = render(
+        <ProjectDescriptionStepper {...mockProjectDescriptionStepperAvatarProps} />
+    )
+
+    const projectDescriptionStepper = getByTestId(testId)
     expect(projectDescriptionStepper).toBeInTheDocument()
   })
 
   test('ProjectDescriptionCard with input can be scrolled', () => {
     const { getByText } = render(
-      <ProjectDescriptionStepper
-        body={mockProjectDescriptionStepperProps.body}
-        header={mockProjectDescriptionStepperProps.header}
-      />
+        <ProjectDescriptionStepper {...mockProjectDescriptionStepperProps} />
     )
 
     act(() => {
@@ -60,35 +72,89 @@ describe('Test ProjectDescriptionStepper', () => {
     expect(getByText(mockProjectDescriptionStepperProps.header.slice(0, 1))).toBeInTheDocument()
   })
 
-  test('Step through all body texts of ProjectDescriptionStepper', () => {
-    const { getByText, getAllByRole } = render(
-      <ProjectDescriptionStepper
-        body={mockProjectDescriptionStepperProps.body}
-        header={mockProjectDescriptionStepperProps.header}
-      />
+  test('ProjectDescriptionCard with input and avatar can be scrolled', () => {
+    const { getByText } = render(
+        <ProjectDescriptionStepper {...mockProjectDescriptionStepperAvatarProps} />
     )
 
     act(() => {
       window.dispatchEvent(new Event('scroll'))
       jest.runAllTimers()
     })
-    expect(getByText(mockProjectDescriptionStepperProps.body[0])).toBeInTheDocument()
+
+    expect(setTimeout).toHaveBeenCalledTimes(6)
+    expect(getByText(mockProjectDescriptionStepperAvatarProps.body[0])).toBeInTheDocument()
+    expect(screen.getByAltText(mockProjectDescriptionStepperAvatarProps.avatarName[0])).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarName[0])).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarDescription[0])).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperAvatarProps.header.slice(0, 1))).toBeInTheDocument()
+  })
+
+  test('Step through all body texts of ProjectDescriptionStepper', () => {
+    const { getByText, getAllByRole } = render(
+        <ProjectDescriptionStepper {...mockProjectDescriptionStepperProps} />
+    )
+
+    act(() => {
+      window.dispatchEvent(new Event('scroll'))
+      jest.runAllTimers()
+    })
+
+    const checkContent = (index:number) => {
+      expect(getByText(mockProjectDescriptionStepperProps.body[index])).toBeInTheDocument()
+    }
+
     expect(getByText(mockProjectDescriptionStepperProps.header.slice(0, 1))).toBeInTheDocument()
+    checkContent(0)
 
-    // Steps to the right
     const buttons = getAllByRole('button')
-    fireEvent.click(buttons[1])
-    expect(getByText(mockProjectDescriptionStepperProps.body[1])).toBeInTheDocument()
-    fireEvent.click(buttons[1])
-    expect(getByText(mockProjectDescriptionStepperProps.body[2])).toBeInTheDocument()
-    fireEvent.click(buttons[1])
-    expect(getByText(mockProjectDescriptionStepperProps.body[2])).toBeInTheDocument()
-
+    // Steps to the right
+    for (let i = 1; i < mockProjectDescriptionStepperProps.body.length; i++) {
+      fireEvent.click(buttons[1]);
+      const index = i < mockProjectDescriptionStepperAvatarProps.body.length ? i : i - 1; // -1 to test if next button is disabled after last element
+      checkContent(index)
+    }
     // Steps to the left
-    fireEvent.click(buttons[0])
-    expect(getByText(mockProjectDescriptionStepperProps.body[1])).toBeInTheDocument()
-    fireEvent.click(buttons[0])
-    expect(getByText(mockProjectDescriptionStepperProps.body[0])).toBeInTheDocument()
+    for (let i = mockProjectDescriptionStepperProps.body.length - 1; i >= 0; i--) {
+      fireEvent.click(buttons[0]);
+      const index = i < 1 ? 0 : i - 1; // cap to 0 to check if back button gets disabled
+      checkContent(index)
+    }
+  })
+
+  test('Step through all body texts of ProjectDescriptionStepper with avatars', () => {
+    const { getByText, getAllByRole } = render(
+        <ProjectDescriptionStepper {...mockProjectDescriptionStepperAvatarProps} />
+    )
+
+    act(() => {
+      window.dispatchEvent(new Event('scroll'))
+      jest.runAllTimers()
+    })
+
+    const checkContent = (index:number) => {
+      expect(getByText(mockProjectDescriptionStepperAvatarProps.body[index])).toBeInTheDocument();
+      expect(screen.getByAltText(mockProjectDescriptionStepperAvatarProps.avatarName[index])).toBeInTheDocument();
+      expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarName[index])).toBeInTheDocument();
+      expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarDescription[index])).toBeInTheDocument();
+    }
+
+    expect(getByText(mockProjectDescriptionStepperAvatarProps.header.slice(0, 1))).toBeInTheDocument()
+    checkContent(0)
+
+    const buttons = getAllByRole('button')
+    // Steps to the right
+    for (let i = 1; i < mockProjectDescriptionStepperAvatarProps.body.length; i++) {
+      fireEvent.click(buttons[1]);
+      const index = i < mockProjectDescriptionStepperAvatarProps.body.length ? i : i - 1; // -1 to test if next button is disabled after last element
+      checkContent(index)
+    }
+    // Steps to the left
+    for (let i = mockProjectDescriptionStepperAvatarProps.body.length - 1; i >= 0; i--) {
+      fireEvent.click(buttons[0]);
+      const index = i < 1 ? 0 : i - 1; // cap to 0 to check if back button gets disabled
+      checkContent(index)
+    }
   })
 
   test('General functionality of ProjectDescriptionCard hook', () => {

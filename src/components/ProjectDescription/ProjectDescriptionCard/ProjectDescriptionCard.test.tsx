@@ -17,15 +17,16 @@ afterEach(() => {
 })
 
 describe('Test ProjectDescriptionCard', () => {
+  const testId = 'projectDescriptionCard';
   test('ProjectDescriptionCard renders without input', () => {
     const { getByTestId } = render(<ProjectDescriptionCard />)
-    const projectDescriptionCard = getByTestId('projectDescriptionCard')
+    const projectDescriptionCard = getByTestId(testId)
     expect(projectDescriptionCard).toBeInTheDocument()
   })
 
   test('ProjectDescriptionCard without input can be scrolled', () => {
     const { getByTestId } = render(<ProjectDescriptionCard />)
-    const projectDescriptionCard = getByTestId('projectDescriptionCard')
+    const projectDescriptionCard = getByTestId(testId)
     window.dispatchEvent(new Event('scroll'))
     expect(projectDescriptionCard).toBeInTheDocument()
   })
@@ -39,7 +40,21 @@ describe('Test ProjectDescriptionCard', () => {
       </ProjectDescriptionCard>
     )
 
-    const projectDescriptionCard = getByTestId('projectDescriptionCard')
+    const projectDescriptionCard = getByTestId(testId)
+    expect(projectDescriptionCard).toBeInTheDocument()
+  })
+
+  test('ProjectDescriptionCard renders with input when reversed', () => {
+    const { getByTestId } = render(
+        <ProjectDescriptionCard
+            body={mockProjectDescriptionCardProps.body}
+            header={mockProjectDescriptionCardProps.header}
+            isLeft={true}>
+          <>Text</>
+        </ProjectDescriptionCard>
+    )
+
+    const projectDescriptionCard = getByTestId(testId)
     expect(projectDescriptionCard).toBeInTheDocument()
   })
 
@@ -50,6 +65,25 @@ describe('Test ProjectDescriptionCard', () => {
         header={mockProjectDescriptionCardProps.header}>
         <>Text</>
       </ProjectDescriptionCard>
+    )
+    act(() => {
+      window.dispatchEvent(new Event('scroll'))
+      jest.runAllTimers()
+    })
+
+    expect(setTimeout).toHaveBeenCalledTimes(6)
+    expect(getByText(mockProjectDescriptionCardProps.body)).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionCardProps.header.slice(0, 1))).toBeInTheDocument()
+  })
+
+  test('ProjectDescriptionCard with input and reversed layout can be scrolled', () => {
+    const { getByText } = render(
+        <ProjectDescriptionCard
+            body={mockProjectDescriptionCardProps.body}
+            header={mockProjectDescriptionCardProps.header}
+            isLeft={true}>
+          <>Text</>
+        </ProjectDescriptionCard>
     )
     act(() => {
       window.dispatchEvent(new Event('scroll'))

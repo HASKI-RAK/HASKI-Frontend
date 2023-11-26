@@ -7,6 +7,7 @@ const config: Config.InitialOptions = {
   moduleNameMapper: {
     'react-i18next': '<rootDir>/__mocks__/react-i18next',
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    '^.+\\.(css|less)$': '<rootDir>/__mocks__/CSSStub',
     ...pathsToModuleNameMapper(compilerOptions.paths)
   },
   modulePaths: ['<rootDir>', '<rootDir>/src'],

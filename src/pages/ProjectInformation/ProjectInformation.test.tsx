@@ -30,13 +30,24 @@ describe('ProjectInformation tests', () => {
     expect(navigate).toBeCalledWith('/projectinformation/projectdescription')
   })
 
-  test('second button navigates to Glossary page', () => {
+  test('second button navigates to ProjectTeam page', () => {
+    const { getAllByRole } = render(
+        <MemoryRouter initialEntries={['/home', '/projectteam']}>
+          <ProjectInformation />
+        </MemoryRouter>
+    )
+
+    fireEvent.click(getAllByRole('button')[1])
+    expect(navigate).toBeCalledWith('/projectinformation/projectteam')
+  })
+
+  test('third button navigates to Glossary page', () => {
     const { getAllByRole } = render(
       <MemoryRouter initialEntries={['/home', '/projectinformation']}>
         <ProjectInformation />
       </MemoryRouter>
     )
-    fireEvent.click(getAllByRole('button')[1])
+    fireEvent.click(getAllByRole('button')[2])
     expect(navigate).toBeCalledWith('/projectinformation/glossary')
   })
 })

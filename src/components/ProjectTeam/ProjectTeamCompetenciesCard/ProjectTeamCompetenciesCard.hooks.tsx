@@ -27,7 +27,7 @@ export type ProjectTeamCompetenciesCardHookReturn = {
 /**
  * useProjectTeamCompetenciesCard hook.
  *
- * @param props - The default values for the card.
+ * @param params - The default values for the card.
  *
  * @remarks
  * Hook for the ProjectTeamCompetenciesCard logic.

@@ -23,6 +23,14 @@ interface CollapsibleTextMultiListProps {
  * @category Components
  */
 const CollapsibleTextMultiList: React.FC<CollapsibleTextMultiListProps> = ({content, columns}) => {
+    // for test
+    if (!content || typeof content !== 'object') {
+        return (
+            <div data-testid="CollapsibleTextMultiList"></div>
+        );
+    }
+
+    columns ??= 1;
     // Split the content into an array of columns
     const columnCount = Math.ceil(Object.keys(content).length / columns);
     const columnContent: Record<string, string>[] = Array.from({length: columns}, (_, i) => {
@@ -32,7 +40,8 @@ const CollapsibleTextMultiList: React.FC<CollapsibleTextMultiListProps> = ({cont
     });
 
     return (
-        <div style={{display: 'flex', gap: '16px'}}>
+        <div style={{display: 'flex', gap: '16px'}}
+             className="CollapsibleTextMultiList" data-testid="CollapsibleTextMultiList">
             {columnContent.map((column, index) => (
                 <div key={index} style={{flex: 1, display: 'flex', flexDirection: 'column', gap: '16px'}}>
                     <CollapsibleTextList content={column}/>

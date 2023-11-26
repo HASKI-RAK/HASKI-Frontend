@@ -9,9 +9,9 @@ import './ProjectTeamImageCollection.css';
  * @interface
  */
 interface ImageCollectionProps {
-    img1Url: string;
-    img2Url: string;
-    img3Url: string;
+    img1Url?: string;
+    img2Url?: string;
+    img3Url?: string;
 }
 
 /**
@@ -26,19 +26,23 @@ interface ImageCollectionProps {
  * @category Components
  */
 const ImageCollection: React.FC<ImageCollectionProps> = ({img1Url, img2Url, img3Url}) => {
+    if (!img1Url || !img2Url || !img3Url) {
+        return (<div data-testid="NoImageCollection"/>);
+    }
+
     return (
-        <div className="container">
+        <div className="container" data-testid="ImageCollection">
             <div className="view">
                 <div className="left">
-                    <div className="img1" style={{backgroundImage: `url(${img1Url})`}}></div>
+                    <div className="img1" style={{backgroundImage: `url(${img1Url})`}} role="img"></div>
                 </div>
-                <div className="divider2"></div>
+                <div className="divider2" data-testid="divider2"></div>
                 <div className="middle">
-                    <div className="img2" style={{backgroundImage: `url(${img2Url})`}}></div>
+                    <div className="img2" style={{backgroundImage: `url(${img2Url})`}} role="img"></div>
                 </div>
-                <div className="divider"></div>
+                <div className="divider" data-testid="divider1"></div>
                 <div className="right">
-                    <div className="img3" style={{backgroundImage: `url(${img3Url})`}}></div>
+                    <div className="img3" style={{backgroundImage: `url(${img3Url})`}} role="img"></div>
                 </div>
             </div>
         </div>

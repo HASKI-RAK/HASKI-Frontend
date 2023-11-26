@@ -21,7 +21,8 @@ interface CollapsibleTextListProps {
  */
 const CollapsibleTextList: React.FC<CollapsibleTextListProps> = ({content}) => {
     return (
-        <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
+        <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}
+             className="CollapsibleTextList" data-testid="CollapsibleTextList">
             {Object.entries(content).map(([header, body], index) => (
                 <CollapsibleText key={index} header={header} body={body}/>
             ))}

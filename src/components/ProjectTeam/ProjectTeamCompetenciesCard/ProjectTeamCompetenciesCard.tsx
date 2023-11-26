@@ -32,13 +32,11 @@ const ProjectTeamCompetenciesCard = ({
                                          useProjectTeamCompetenciesCard = _useProjectTeamCompetenciesCard,
                                          ...props
                                      }: ProjectTeamCompetenciesCardProps) => {
-    const {t} = useTranslation()
     const ref = useRef<HTMLDivElement>(null)
-    const [activeStep, setActiveStep] = useState(0)
     const {headerState, animateHeader} = useProjectTeamCompetenciesCard()
 
     const handleScroll = useCallback(() => {
-        if (props.header != null && typeof props.header === 'string') {
+        if (props.header !== null && typeof props.header === 'string') {
             animateHeader(ref, props.header)
         }
     }, [animateHeader, props.header])
