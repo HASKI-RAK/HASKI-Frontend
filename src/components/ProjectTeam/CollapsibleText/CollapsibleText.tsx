@@ -1,4 +1,4 @@
-import React, {useState, ReactNode, useRef} from 'react';
+import React, {useState, ReactNode, useRef, memo } from 'react';
 import {
     Accordion,
     AccordionSummary,
@@ -68,4 +68,4 @@ const CollapsibleText: React.FC<CollapsibleTextProps> = ({header, body}) => {
 };
 
 
-export default CollapsibleText;
+export default memo(CollapsibleText);

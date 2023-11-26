@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {CollapsibleText} from '@components'
 
 /**
@@ -30,4 +30,4 @@ const CollapsibleTextList: React.FC<CollapsibleTextListProps> = ({content}) => {
     );
 };
 
-export default CollapsibleTextList;
+export default memo(CollapsibleTextList);

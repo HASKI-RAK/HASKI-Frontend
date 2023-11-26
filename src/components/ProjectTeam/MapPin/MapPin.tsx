@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './MapPin.css';
 
 const MapPin = () => {
@@ -10,4 +10,4 @@ const MapPin = () => {
     );
 };
 
-export default MapPin;
+export default memo(MapPin);

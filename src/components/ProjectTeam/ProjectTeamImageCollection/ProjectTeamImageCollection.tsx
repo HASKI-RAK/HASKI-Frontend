@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import './ProjectTeamImageCollection.css';
 
@@ -55,4 +55,4 @@ ImageCollection.propTypes = {
     img3Url: PropTypes.string.isRequired,
 };
 
-export default ImageCollection;
+export default memo(ImageCollection);
