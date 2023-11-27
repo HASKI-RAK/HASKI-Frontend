@@ -10,7 +10,7 @@ export type LTILaunchViewResponse = {
  * Expects a 200 response. If the response is not 200, an error is thrown.
  * @returns {Promise<RequestResponse>} - The response of the request.
  */
-export const redirectMoodleLogin = async (): Promise<LTILaunchViewResponse> => {
+export const fetchRedirectMoodleLogin = async (): Promise<LTILaunchViewResponse> => {
   return fetchData<LTILaunchViewResponse>(getConfig().BACKEND + `/lti_launch_view`, {
     method: 'GET',
     credentials: 'include',

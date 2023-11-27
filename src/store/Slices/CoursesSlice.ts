@@ -1,20 +1,20 @@
 import { CourseReturn } from '@core'
 import { StateCreator } from 'zustand'
 import { StoreState } from '@store'
-import { getCourses } from '@services'
+import { fetchCourses } from '@services'
 import { resetters } from '../Zustand/Store'
 import { CourseResponse } from '../../core/Course/Course'
 
 export default interface CoursesSlice {
   _cache_Courses_record: Record<string, CourseResponse>
-  fetchCourses: CourseReturn
+  getCourses: CourseReturn
 }
 
 export const createCoursesSlice: StateCreator<StoreState, [], [], CoursesSlice> = (set, get) => {
   resetters.push(() => set({ _cache_Courses_record: {} }))
   return {
     _cache_Courses_record: {},
-    fetchCourses: async (...arg) => {
+    getCourses: async (...arg) => {
       const [userId, lmsUserId, studentId] = arg
 
       // Check if we have the courses in cache
@@ -22,7 +22,7 @@ export const createCoursesSlice: StateCreator<StoreState, [], [], CoursesSlice> 
 
       if (!cached) {
         // If not, fetch it and cache it
-        const coursesResponse = await getCourses(userId, lmsUserId, studentId)
+        const coursesResponse = await fetchCourses(userId, lmsUserId, studentId)
         set({
           _cache_Courses_record: {
             ...get()._cache_Courses_record,

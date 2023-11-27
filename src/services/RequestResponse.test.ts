@@ -1,4 +1,4 @@
-import { RequestResponse, fetchData } from '../RequestResponse'
+import { RequestResponse, fetchData } from './RequestResponse'
 
 describe('RequestResponse', () => {
   const response = {

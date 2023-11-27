@@ -35,12 +35,12 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
   const { addSnackbar } = useContext(SnackbarContext)
   const [cookies, setCookie] = useCookies(['privacy_accept_token'])
   const privacyPolicyCookie = cookies['privacy_accept_token']
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const getUser = usePersistedStore((state) => state.getUser)
 
   //**Logic **//
   //fetch the university from the current user and return university
   const checkUniversity = async () => {
-    return fetchUser()
+    return getUser()
       .then((user) => {
         return user.university
       })

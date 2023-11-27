@@ -34,8 +34,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   const { courseId, topicId } = useParams()
   const { url, title, isOpen, handleClose, mapNodes } = useTopic()
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
-  const fetchLearningPathElement = useStore((state) => state.fetchLearningPathElement)
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getLearningPathElement = useStore((state) => state.getLearningPathElement)
 
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
@@ -48,9 +48,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     }, 5000)
     if (authContext.isAuth && courseId && topicId) {
       clearTimeout(preventEndlessLoading)
-      fetchUser()
+      getUser()
         .then((user) => {
-          fetchLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
+          getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
             .then((learningPathElementData) => {
               const { nodes, edges } = mapNodes(learningPathElementData, theme)
               setInitialNodes(nodes)
@@ -78,8 +78,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   }, [
     authContext.isAuth,
     courseId,
-    fetchLearningPathElement,
-    fetchUser,
+    getLearningPathElement,
+    getUser,
     theme,
     topicId,
     mapNodes,

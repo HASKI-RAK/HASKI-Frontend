@@ -6,34 +6,34 @@ import { mockServices } from 'jest.setup'
 const user = { id: 1, name: 'John Doe' }
 
 describe('UserSlice', () => {
-  mockServices.getUser = jest.fn().mockResolvedValueOnce(user)
+  mockServices.fetchUser = jest.fn().mockResolvedValueOnce(user)
 
   it('should fetch user from server and cache it', async () => {
-    const { fetchUser } = usePersistedStore.getState()
-    mockServices.getUser = jest.fn().mockResolvedValueOnce(user)
+    const { getUser } = usePersistedStore.getState()
+    mockServices.fetchUser = jest.fn().mockResolvedValueOnce(user)
 
-    const result = await fetchUser()
+    const result = await getUser()
 
     expect(result).toEqual(user)
-    expect(fetchUser).toBeDefined()
-    expect(fetchUser).toBeInstanceOf(Function)
-    expect(fetchUser).not.toThrow()
-    expect(mockServices.getUser).toHaveBeenCalledTimes(1)
+    expect(getUser).toBeDefined()
+    expect(getUser).toBeInstanceOf(Function)
+    expect(getUser).not.toThrow()
+    expect(mockServices.fetchUser).toHaveBeenCalledTimes(1)
     expect(usePersistedStore.getState()._user).toEqual(user)
   })
 
   it('should return cached user if available', async () => {
-    const { fetchUser } = usePersistedStore.getState()
+    const { getUser } = usePersistedStore.getState()
 
-    mockServices.getUser = jest.fn().mockResolvedValueOnce(user)
+    mockServices.fetchUser = jest.fn().mockResolvedValueOnce(user)
 
-    await fetchUser()
+    await getUser()
 
     expect(usePersistedStore.getState()._user).toEqual(user)
 
-    const cached = await fetchUser()
+    const cached = await getUser()
 
-    expect(mockServices.getUser).toHaveBeenCalledTimes(1)
+    expect(mockServices.fetchUser).toHaveBeenCalledTimes(1)
 
     expect(cached).toEqual(user)
   })

@@ -2,7 +2,7 @@ import { LearningPathElement, LearningPathElementReturn } from '@core'
 import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
-export const getLearningPathElement: LearningPathElementReturn = async (
+export const fetchLearningPathElement: LearningPathElementReturn = async (
   userId,
   lmsUserId,
   studentId,

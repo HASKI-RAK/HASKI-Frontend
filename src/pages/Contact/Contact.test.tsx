@@ -179,7 +179,7 @@ describe('Test on submit Function', () => {
 
     const onSubmit = result.result.current
 
-    mockServices.getUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('get User failed')))
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('get User failed')))
 
     await act(async () => {
       onSubmit.onSubmitHandler(testData)
@@ -200,8 +200,8 @@ describe('Test on submit Function', () => {
       throw new Error('Error')
     }) as jest.Mock*/
 
-    // When running the whole suite, getUser gets overwritten by previous test.
-    mockServices.getUser = jest.fn().mockImplementationOnce(() =>
+    // When running the whole suite, fetchUser gets overwritten by previous test.
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
       Promise.resolve({
         id: 1,
         lms_user_id: 1,
