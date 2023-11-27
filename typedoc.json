@@ -11,8 +11,7 @@
     "./src/store/index.ts",
     "./src/common/index.ts",
     "./src/shared/index.ts",
-    "./src/services/index.ts",
-    "./xapi/index.ts"
+    "./src/services/index.ts"
   ],
   "exclude": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx", "./node_modules/**/*"],
   "plugin": [
