@@ -1,5 +1,5 @@
-import { useProjectDescriptionStepper } from './ProjectDescriptionStepper.hooks'
-import {act, render, renderHook, fireEvent, getByAltText, screen} from '@testing-library/react'
+import {useProjectDescriptionStepper} from './ProjectDescriptionStepper.hooks'
+import {act, fireEvent, render, renderHook, screen} from '@testing-library/react'
 import ProjectDescriptionStepper from './ProjectDescriptionStepper'
 import '@testing-library/jest-dom'
 

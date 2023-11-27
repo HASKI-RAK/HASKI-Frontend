@@ -1,12 +1,12 @@
 import {Avatar, Button, Fade, Grid, MobileStepper, Typography} from '@common/components'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
-import {useRef, useEffect, useCallback, useState, memo} from 'react'
+import {memo, useCallback, useEffect, useRef, useState} from 'react'
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import {useTranslation} from 'react-i18next'
 import {
+    ProjectDescriptionStepperHookReturn,
     useProjectDescriptionStepper as _useProjectDescriptionStepper,
-    useProjectDescriptionStepperHookParams,
-    ProjectDescriptionStepperHookReturn
+    useProjectDescriptionStepperHookParams
 } from './ProjectDescriptionStepper.hooks'
 
 /**

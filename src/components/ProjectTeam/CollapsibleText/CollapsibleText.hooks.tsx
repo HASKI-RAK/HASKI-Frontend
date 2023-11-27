@@ -1,4 +1,4 @@
-import {useState, RefObject, useCallback, useMemo} from 'react'
+import {RefObject, useCallback, useMemo, useState} from 'react'
 
 /**
  * @props defaultAnimateState - The default value for the animate state (trigger for when animation should start).

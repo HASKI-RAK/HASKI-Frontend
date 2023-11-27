@@ -1,5 +1,5 @@
-import { useProjectDescriptionCard } from './ProjectDescriptionCard.hooks'
-import { act, render, renderHook } from '@testing-library/react'
+import {useProjectDescriptionCard} from './ProjectDescriptionCard.hooks'
+import {act, render, renderHook} from '@testing-library/react'
 import ProjectDescriptionCard from './ProjectDescriptionCard'
 import '@testing-library/jest-dom'
 

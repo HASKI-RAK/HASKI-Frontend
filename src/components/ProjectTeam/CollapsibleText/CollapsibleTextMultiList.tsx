@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, {memo} from 'react';
 import {CollapsibleTextList} from '@components'
 
 /**
@@ -45,7 +45,8 @@ const CollapsibleTextMultiList: React.FC<CollapsibleTextMultiListProps> = ({cont
              className="CollapsibleTextMultiList" data-testid="CollapsibleTextMultiList">
             {columnContent.map((column, index) => (
                 <div key={index} style={{flex: 1, display: 'flex', flexDirection: 'column', gap: '16px'}}>
-                    <CollapsibleTextList content={column} animate={animate ?? false} offset={(columnContent.length + 1) / (index + 1)}/>
+                    <CollapsibleTextList content={column} animate={animate ?? false}
+                                         offset={(columnContent.length + 1) / (index + 1)}/>
                 </div>
             ))}
         </div>

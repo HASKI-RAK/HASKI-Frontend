@@ -1,14 +1,13 @@
 import {useTranslation} from 'react-i18next'
 import {
+    CollapsibleTextMultiList,
+    ImageAttribute,
+    ImageCollection,
     ProjectDescriptionCard,
     ProjectDescriptionStepper,
-    CollapsibleTextMultiList,
-    ImageCollection,
-    ImageAttribute,
-    MapPin,
     ProjectTeamCompetenciesCard
 } from '@components'
-import {Avatar, Box, Grid, Typography} from '@common/components'
+import {Avatar, Grid} from '@common/components'
 import React, {memo} from 'react'
 import MediaQuery from 'react-responsive'
 import './ProjectTeam.css'

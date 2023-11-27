@@ -1,35 +1,35 @@
 import ImageAttribute from './ImageAttribute';
-import { render, screen, fireEvent } from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 describe('Test ImageAttribute Component', () => {
     const testId = 'ImageAttribute';
     const mockImageAttributes = [
-        { text: 'Image 1', url: 'https://picsum.photos/200' },
-        { text: 'Image 2', url: '' },
+        {text: 'Image 1', url: 'https://picsum.photos/200'},
+        {text: 'Image 2', url: ''},
     ];
 
     it('should render without errors', () => {
-        const { getByTestId } = render(<ImageAttribute />);
+        const {getByTestId} = render(<ImageAttribute/>);
         const imageAttribute = getByTestId(testId);
         expect(imageAttribute).toBeInTheDocument();
     });
 
     it('should display correct text content', () => {
-        render(<ImageAttribute imageAttributes={mockImageAttributes} />);
+        render(<ImageAttribute imageAttributes={mockImageAttributes}/>);
 
-        mockImageAttributes.forEach(({ text }) => {
+        mockImageAttributes.forEach(({text}) => {
             expect(screen.getByText(text)).toBeInTheDocument();
         });
     });
 
     it('should make links clickable or not if no valid url is provided', () => {
-        render(<ImageAttribute imageAttributes={mockImageAttributes} />);
+        render(<ImageAttribute imageAttributes={mockImageAttributes}/>);
 
-        const [link1, link2] = mockImageAttributes.map(({ text, url }) => {
+        const [link1, link2] = mockImageAttributes.map(({text, url}) => {
             const link = screen.getByText(text);
             expect(link).toBeInTheDocument();
-            return { link, url };
+            return {link, url};
         });
 
         // Test that the first link is clickable

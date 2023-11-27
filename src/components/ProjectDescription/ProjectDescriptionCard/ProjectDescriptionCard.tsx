@@ -1,10 +1,10 @@
-import { useRef, useEffect, useCallback, memo } from 'react'
+import {memo, useCallback, useEffect, useRef} from 'react'
 import MediaQuery from 'react-responsive'
-import { Divider, Fade, Grid, Typography } from '@common/components'
+import {Divider, Fade, Grid, Typography} from '@common/components'
 import {
+  ProjectDescriptionCardHookReturn,
   useProjectDescriptionCard as _useProjectDescriptionCard,
-  useProjectDescriptionCardHookParams,
-  ProjectDescriptionCardHookReturn
+  useProjectDescriptionCardHookParams
 } from './ProjectDescriptionCard.hooks'
 
 /**
@@ -32,7 +32,7 @@ type ProjectDescriptionCardProps = {
  * ProjectDescriptionCard presents a component that displays a header and a body text on the left side and a child element on the right side (or vice versa if isLeft is true).
  * The header text is animated by using a typewriter effect. The body text is animated by using a fade in effect.
  * ProjectDescriptionCard can be used as a standalone component on a page.
- * When screen size gets too small (<700) the divider will get removed and the child element moved onTop of the body.
+ * When screen size gets too small (less than 700px) the divider will get removed and the child element moved onTop of the body.
  *
  * @category Components
  */

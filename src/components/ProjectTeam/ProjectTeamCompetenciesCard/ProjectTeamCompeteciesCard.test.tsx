@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, screen } from '@testing-library/react';
+import {act, render, screen} from '@testing-library/react';
 import ProjectTeamCompetenciesCard from './ProjectTeamCompetenciesCard';
 import '@testing-library/jest-dom';
 
@@ -24,7 +24,7 @@ describe('ProjectTeamCompetenciesCard Component', () => {
     });
 
     it('should display the correct header text when being scrolled', () => {
-        const { getByText } = render(<ProjectTeamCompetenciesCard {...testProps} />);
+        const {getByText} = render(<ProjectTeamCompetenciesCard {...testProps} />);
         act(() => {
             window.dispatchEvent(new Event('scroll'))
             jest.runAllTimers()

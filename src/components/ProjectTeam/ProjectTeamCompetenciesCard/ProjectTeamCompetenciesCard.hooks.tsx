@@ -1,4 +1,4 @@
-import { useState, RefObject, useCallback, useMemo } from 'react'
+import {RefObject, useCallback, useMemo, useState} from 'react'
 
 /**
  * @props defaultHeaderState - The default value for the header state.
@@ -41,7 +41,7 @@ export const useProjectTeamCompetenciesCard = (
     params?: useProjectTeamCompetenciesCardHookParams
 ): ProjectTeamCompetenciesCardHookReturn => {
     // Default values
-    const { defaultHeaderState = '' } = params ?? {}
+    const {defaultHeaderState = ''} = params ?? {}
 
     // State data
     const [headerState, setHeaderState] = useState(defaultHeaderState)

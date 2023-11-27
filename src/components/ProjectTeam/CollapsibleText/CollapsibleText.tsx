@@ -1,17 +1,11 @@
-import React, {useState, ReactNode, useRef, memo, useCallback, useEffect} from 'react';
-import {
-    Accordion,
-    AccordionSummary,
-    AccordionDetails,
-    Divider,
-    Typography
-} from '@mui/material';
+import React, {memo, useCallback, useEffect, useRef, useState} from 'react';
+import {Accordion, AccordionDetails, AccordionSummary, Divider, Typography} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Zoom from '@mui/material/Zoom';
 import {
+    CollapsibleTextHookReturn,
     useCollapsibleText as _useCollapsibleText,
-    useCollapsibleTextHookParams,
-    CollapsibleTextHookReturn
+    useCollapsibleTextHookParams
 } from "./CollapsibleText.hooks";
 
 /**
@@ -41,8 +35,10 @@ interface CollapsibleTextProps {
  *
  * @category Components
  */
-const CollapsibleText: React.FC<CollapsibleTextProps> = ({header, body, animate, offset,
-                                                         useCollapsibleText = _useCollapsibleText}) => {
+const CollapsibleText: React.FC<CollapsibleTextProps> = ({
+                                                             header, body, animate, offset,
+                                                             useCollapsibleText = _useCollapsibleText
+                                                         }) => {
     const [expanded, setExpanded] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
@@ -100,7 +96,7 @@ const CollapsibleText: React.FC<CollapsibleTextProps> = ({header, body, animate,
                     )}
                 </Accordion>
             </div>
-            </Zoom>
+        </Zoom>
     );
 };
 

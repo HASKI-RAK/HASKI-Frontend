@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import ImageCollection from './ProjectTeamImageCollection';
 
 describe('ImageCollection Component', () => {
@@ -10,12 +10,12 @@ describe('ImageCollection Component', () => {
     };
 
     it('should not render without input', () => {
-        const { getAllByTestId } = render(<ImageCollection />);
+        const {getAllByTestId} = render(<ImageCollection/>);
         expect(getAllByTestId('NoImageCollection').length).toBe(1);
     })
 
     it('should render without errors', () => {
-        const { getAllByTestId } = render(<ImageCollection {...testImages} />);
+        const {getAllByTestId} = render(<ImageCollection {...testImages} />);
         expect(getAllByTestId('ImageCollection').length).toBe(1);
     });
 
@@ -26,7 +26,7 @@ describe('ImageCollection Component', () => {
     });
 
     it('should have 2 dividers', () => {
-        const { getAllByTestId } = render(<ImageCollection {...testImages} />);
+        const {getAllByTestId} = render(<ImageCollection {...testImages} />);
         expect(getAllByTestId('divider1').length).toBe(1);
         expect(getAllByTestId('divider2').length).toBe(1);
     });

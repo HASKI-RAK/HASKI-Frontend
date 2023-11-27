@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, screen, fireEvent, renderHook, act} from '@testing-library/react';
+import {act, fireEvent, render, renderHook, screen} from '@testing-library/react';
 import CollapsibleText from './CollapsibleText';
 import '@testing-library/jest-dom';
 import {useCollapsibleText} from "./CollapsibleText.hooks";

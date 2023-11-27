@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import CollapsibleTextMultiList from './CollapsibleTextMultiList';
 import '@testing-library/jest-dom';
 
@@ -23,16 +23,16 @@ describe('CollapsibleTextMultiList Component', () => {
     });
 
     it('should display correct headers and bodies in multiple columns', () => {
-        const { content, columns } = testProps;
+        const {content, columns} = testProps;
         Object.entries(content).forEach(([header, body]) => {
-            render(<CollapsibleTextMultiList content={{ [header]: body }} columns={columns} />);
+            render(<CollapsibleTextMultiList content={{[header]: body}} columns={columns}/>);
             expect(screen.getByText(header)).toBeInTheDocument();
             expect(screen.getByText(body)).toBeInTheDocument();
         });
     });
 
     it.each([1, 2, 3])('should render n CollapsibleTextList columns', (columns) => {
-        render(<CollapsibleTextMultiList {...{ ...testProps, columns }} />);
+        render(<CollapsibleTextMultiList {...{...testProps, columns}} />);
         const column = screen.queryAllByTestId(testIdChild);
         expect(column).toHaveLength(columns);
     });
