@@ -1,3 +1,18 @@
+.bgMap01, .bgMap02, .bgMap03 {
+    animation: fadeInMap 5s;
+}
+@keyframes fadeInMap {
+    0% { opacity: 0; }
+    100% { opacity: 0.35; }
+}
+.bgLogo {
+    animation: fadeInLogo 5s;
+}
+@keyframes fadeInLogo {
+    0% { opacity: 0; }
+    100% { opacity: 0.15; }
+}
+
 .bgLogo {
     margin-left:23.5%;
     margin-top:9.5rem;
@@ -41,18 +56,58 @@
 .bgMap01 {
     right: -2.5%;
 }
-@media only screen and (min-width: 2000px) {
+@media only screen and (min-width: 2600px) {
     .bgMap01, .bgMap02, .bgMap03 {
         width:75rem;
     }
     .bgMap02, .bgMap03 {
         margin-top: -65px;
     }
+    .bgMap02 {
+        margin-left: 200px;
+    }
     .bgMap01 {
         margin-top: -125px;
+        margin-right: 200px;
     }
     .bgMap03 {
-        margin-left: 75px;
+        margin-left: 275px;
+    }
+}
+@media only screen and (max-width: 2600px) {
+    .bgMap01, .bgMap02, .bgMap03 {
+        width:75rem;
+    }
+    .bgMap02, .bgMap03 {
+        margin-top: -65px;
+    }
+    .bgMap02 {
+        margin-left: 100px;
+    }
+    .bgMap01 {
+        margin-top: -125px;
+        margin-right: 100px;
+    }
+    .bgMap03 {
+        margin-left: 165px;
+    }
+}
+@media only screen and (max-width: 2300px) {
+    .bgMap01, .bgMap02, .bgMap03 {
+        width:75rem;
+    }
+    .bgMap02, .bgMap03 {
+        margin-top: -65px;
+    }
+    .bgMap02 {
+        margin-left: 0px;
+    }
+    .bgMap01 {
+        margin-top: -125px;
+        margin-right: 0px;
+    }
+    .bgMap03 {
+        margin-left: 77px;
     }
 }
 @media only screen and (max-width: 2000px) {

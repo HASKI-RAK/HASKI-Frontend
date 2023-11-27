@@ -1,10 +1,9 @@
-import React, {memo, useCallback, useEffect, useRef, useState} from 'react';
+import React, {memo, useCallback, useEffect, useRef} from 'react';
 import {
     ProjectTeamCompetenciesCardHookReturn,
     useProjectTeamCompetenciesCard as _useProjectTeamCompetenciesCard,
     useProjectTeamCompetenciesCardHookParams
 } from "../../ProjectTeam/ProjectTeamCompetenciesCard/ProjectTeamCompetenciesCard.hooks";
-import {useTranslation} from "react-i18next";
 import {Typography} from "@common/components";
 
 /**

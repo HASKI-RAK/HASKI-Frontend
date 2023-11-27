@@ -82,11 +82,11 @@ describe('Test ProjectDescriptionStepper', () => {
       jest.runAllTimers()
     })
 
-    expect(setTimeout).toHaveBeenCalledTimes(6)
+    expect(setTimeout).toHaveBeenCalledTimes(15)
     expect(getByText(mockProjectDescriptionStepperAvatarProps.body[0])).toBeInTheDocument()
     expect(screen.getByAltText(mockProjectDescriptionStepperAvatarProps.avatarName[0])).toBeInTheDocument()
-    expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarName[0])).toBeInTheDocument()
-    expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarDescription[0])).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarName[0].slice(0, 1))).toBeInTheDocument()
+    expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarDescription[0].slice(0, 1))).toBeInTheDocument()
     expect(getByText(mockProjectDescriptionStepperAvatarProps.header.slice(0, 1))).toBeInTheDocument()
   })
 
@@ -135,8 +135,8 @@ describe('Test ProjectDescriptionStepper', () => {
     const checkContent = (index:number) => {
       expect(getByText(mockProjectDescriptionStepperAvatarProps.body[index])).toBeInTheDocument();
       expect(screen.getByAltText(mockProjectDescriptionStepperAvatarProps.avatarName[index])).toBeInTheDocument();
-      expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarName[index])).toBeInTheDocument();
-      expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarDescription[index])).toBeInTheDocument();
+      expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarName[index].slice(0, 1))).toBeInTheDocument();
+      expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarDescription[index].slice(0, 1))).toBeInTheDocument();
     }
 
     expect(getByText(mockProjectDescriptionStepperAvatarProps.header.slice(0, 1))).toBeInTheDocument()
@@ -162,13 +162,25 @@ describe('Test ProjectDescriptionStepper', () => {
 
     expect(result.current).toMatchObject({
       bodyState: [],
+      avatarState: false,
+      avatarNameState: '',
+      avatarDescriptionState: '',
       headerState: '',
       setBodyState: expect.any(Function),
+      setAvatarState: expect.any(Function),
+      setAvatarNameState: expect.any(Function),
+      setAvatarDescriptionState: expect.any(Function),
       setHeaderState: expect.any(Function),
       animateBody: expect.any(Function),
+      animateAvatar: expect.any(Function),
+      animateAvatarName: expect.any(Function),
+      animateAvatarDescription: expect.any(Function),
+      fadeInEffectAvatar: expect.any(Function),
       animateHeader: expect.any(Function),
       fadeInEffect: expect.any(Function),
-      typewriterEffect: expect.any(Function)
+      typewriterEffect: expect.any(Function),
+      typewriterEffectAN: expect.any(Function),
+      typewriterEffectAD: expect.any(Function)
     })
 
     const mockDivElement = document.createElement('div')
@@ -180,22 +192,36 @@ describe('Test ProjectDescriptionStepper', () => {
     act(() => {
       result.current.animateBody(mockRef, ['body1', 'body2', 'body3'])
       result.current.animateHeader(mockRef, 'header')
+      result.current.animateAvatar(mockRef, true)
+      result.current.animateAvatarName(mockRef, 'name')
+      result.current.animateAvatarDescription(mockRef, 'description')
       jest.runAllTimers()
     })
 
     expect(result.current.bodyState).toStrictEqual(['body1', 'body2', 'body3'])
     expect(result.current.headerState).toBe('h')
+    expect(result.current.avatarState).toBe(true)
+    expect(result.current.avatarNameState).toBe('n')
+    expect(result.current.avatarDescriptionState).toBe('d')
 
     act(() => {
       result.current.setHeaderState('header')
+      result.current.setAvatarNameState('name')
+      result.current.setAvatarDescriptionState('description')
 
       // Animates body and header with passing the height condition and input equal to current states
       result.current.animateBody(mockRef, result.current.bodyState)
       result.current.animateHeader(mockRef, result.current.headerState)
+      result.current.animateAvatar(mockRef, true)
+      result.current.animateAvatarName(mockRef, 'name')
+      result.current.animateAvatarDescription(mockRef, 'description')
     })
 
     expect(result.current.bodyState).toStrictEqual(['body1', 'body2', 'body3'])
     expect(result.current.headerState).toBe('header')
+    expect(result.current.avatarState).toBe(true)
+    expect(result.current.avatarNameState).toBe('name')
+    expect(result.current.avatarDescriptionState).toBe('description')
   })
 
   test('Animation functionality of ProjectDescriptionCard hook with topPosition greater than viewportBottom', () => {
@@ -224,10 +250,16 @@ describe('Test ProjectDescriptionStepper', () => {
     act(() => {
       result.current.animateBody(mockRef, result.current.bodyState)
       result.current.animateHeader(mockRef, result.current.headerState)
+      result.current.animateAvatar(mockRef, result.current.avatarState)
+      result.current.animateAvatarName(mockRef, result.current.avatarNameState)
+      result.current.animateAvatarDescription(mockRef, result.current.avatarDescriptionState)
     })
 
     expect(result.current.bodyState).toStrictEqual([])
     expect(result.current.headerState).toBe('')
+    expect(result.current.avatarState).toBe(false)
+    expect(result.current.avatarNameState).toBe('')
+    expect(result.current.avatarDescriptionState).toBe('')
   })
 
   test('Animation functionality of ProjectDescriptionCard hook with undefined ref.current', () => {
@@ -239,39 +271,60 @@ describe('Test ProjectDescriptionStepper', () => {
     act(() => {
       result.current.animateBody(mockRef, ['body1', 'body2', 'body3'])
       result.current.animateHeader(mockRef, 'header')
+      result.current.animateAvatar(mockRef, true)
+      result.current.animateAvatarName(mockRef, 'name')
+      result.current.animateAvatarDescription(mockRef, 'description')
     })
 
     expect(result.current.bodyState).toStrictEqual([])
     expect(result.current.headerState).toBe('')
+    expect(result.current.avatarState).toBe(false)
+    expect(result.current.avatarNameState).toBe('')
+    expect(result.current.avatarDescriptionState).toBe('')
   })
 
   test('Effect functionality of ProjectDescriptionCard hook', () => {
     const { result } = renderHook(() => useProjectDescriptionStepper())
     expect(setTimeout).toHaveBeenCalledTimes(0)
     const fadeInEffect = result.current.fadeInEffect(['body1', 'body2', 'body3'])
+    const fadeInEffectAvatar = result.current.fadeInEffectAvatar(true)
     const typewriterEffect = result.current.typewriterEffect('header')
+    const typewriterEffectAN = result.current.typewriterEffectAN('name')
+    const typewriterEffectAD = result.current.typewriterEffectAD('description')
 
     // Call effect functions and run timers
     act(() => {
       fadeInEffect()
+      fadeInEffectAvatar()
       typewriterEffect()
+      typewriterEffectAN()
+      typewriterEffectAD()
       jest.runAllTimers()
     })
 
-    expect(setTimeout).toHaveBeenCalledTimes(2)
+    expect(setTimeout).toHaveBeenCalledTimes(5)
   })
 
   test('Setter functionality of ProjectDescriptionCard hook', () => {
     const { result } = renderHook(() => useProjectDescriptionStepper())
     expect(result.current.bodyState).toStrictEqual([])
     expect(result.current.headerState).toBe('')
+    expect(result.current.avatarState).toBe(false)
+    expect(result.current.avatarNameState).toBe('')
+    expect(result.current.avatarDescriptionState).toBe('')
 
     act(() => {
       result.current.setBodyState(['body1', 'body2', 'body3'])
       result.current.setHeaderState('header')
+      result.current.setAvatarState(true)
+      result.current.setAvatarNameState('name')
+      result.current.setAvatarDescriptionState('description')
     })
 
     expect(result.current.bodyState).toStrictEqual(['body1', 'body2', 'body3'])
     expect(result.current.headerState).toBe('header')
+    expect(result.current.avatarState).toBe(true)
+    expect(result.current.avatarNameState).toBe('name')
+    expect(result.current.avatarDescriptionState).toBe('description')
   })
 })

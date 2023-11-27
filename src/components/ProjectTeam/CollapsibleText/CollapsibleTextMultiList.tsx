@@ -9,6 +9,7 @@ import {CollapsibleTextList} from '@components'
 interface CollapsibleTextMultiListProps {
     content: Record<string, string>;
     columns: number;
+    animate?: boolean;
 }
 
 /**
@@ -22,7 +23,7 @@ interface CollapsibleTextMultiListProps {
  *
  * @category Components
  */
-const CollapsibleTextMultiList: React.FC<CollapsibleTextMultiListProps> = ({content, columns}) => {
+const CollapsibleTextMultiList: React.FC<CollapsibleTextMultiListProps> = ({content, columns, animate}) => {
     // for test
     if (!content || typeof content !== 'object') {
         return (
@@ -44,7 +45,7 @@ const CollapsibleTextMultiList: React.FC<CollapsibleTextMultiListProps> = ({cont
              className="CollapsibleTextMultiList" data-testid="CollapsibleTextMultiList">
             {columnContent.map((column, index) => (
                 <div key={index} style={{flex: 1, display: 'flex', flexDirection: 'column', gap: '16px'}}>
-                    <CollapsibleTextList content={column}/>
+                    <CollapsibleTextList content={column} animate={animate ?? false} offset={(columnContent.length + 1) / (index + 1)}/>
                 </div>
             ))}
         </div>

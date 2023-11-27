@@ -143,10 +143,10 @@ const ProjectTeam = () => {
                 avatarDescription={quotesDev.map((quoteData) => quoteData.description)}/>
             <ProjectTeamCompetenciesCard header={t('pages.ProjectTeam.interdisciplinaryHeader')}>
                 <MediaQuery minWidth={700}>
-                    <CollapsibleTextMultiList content={content} columns={2}/>
+                    <CollapsibleTextMultiList content={content} columns={2} animate={true}/>
                 </MediaQuery>
                 <MediaQuery maxWidth={700}>
-                    <CollapsibleTextMultiList content={content} columns={1}/>
+                    <CollapsibleTextMultiList content={content} columns={1} animate={true}/>
                 </MediaQuery>
             </ProjectTeamCompetenciesCard>
             <ProjectDescriptionStepper

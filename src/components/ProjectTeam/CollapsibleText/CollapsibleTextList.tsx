@@ -7,6 +7,8 @@ import {CollapsibleText} from '@components'
  */
 interface CollapsibleTextListProps {
     content: Record<string, string>;
+    animate?: boolean;
+    offset?: number;
 }
 
 /**
@@ -19,12 +21,12 @@ interface CollapsibleTextListProps {
  *
  * @category Components
  */
-const CollapsibleTextList: React.FC<CollapsibleTextListProps> = ({content}) => {
+const CollapsibleTextList: React.FC<CollapsibleTextListProps> = ({content, animate, offset=0}) => {
     return (
         <div style={{display: 'flex', flexDirection: 'column', gap: '16px'}}
              className="CollapsibleTextList" data-testid="CollapsibleTextList">
             {Object.entries(content).map(([header, body], index) => (
-                <CollapsibleText key={index} header={header} body={body}/>
+                <CollapsibleText key={index} header={header} body={body} animate={animate ?? false} offset={(offset + 1) * (index + 1)}/>
             ))}
         </div>
     );

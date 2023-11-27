@@ -1,4 +1,4 @@
-import React, {useState, ReactNode, useRef, memo } from 'react';
+import React, {useState, ReactNode, useRef, memo, useCallback, useEffect} from 'react';
 import {
     Accordion,
     AccordionSummary,
@@ -7,6 +7,12 @@ import {
     Typography
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Zoom from '@mui/material/Zoom';
+import {
+    useCollapsibleText as _useCollapsibleText,
+    useCollapsibleTextHookParams,
+    CollapsibleTextHookReturn
+} from "./CollapsibleText.hooks";
 
 /**
  * @props header - Header title to be displayed on collapsible component.
@@ -16,6 +22,11 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 interface CollapsibleTextProps {
     header: string;
     body?: string;
+    animate?: boolean;
+    offset?: number;
+    useCollapsibleText?: (
+        params?: useCollapsibleTextHookParams
+    ) => CollapsibleTextHookReturn
 }
 
 /**
@@ -30,40 +41,66 @@ interface CollapsibleTextProps {
  *
  * @category Components
  */
-const CollapsibleText: React.FC<CollapsibleTextProps> = ({header, body}) => {
+const CollapsibleText: React.FC<CollapsibleTextProps> = ({header, body, animate, offset,
+                                                         useCollapsibleText = _useCollapsibleText}) => {
     const [expanded, setExpanded] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
+    animate ??= false;
+    offset ??= 0;
+    offset = animate ? offset : 0;
+
+    const {
+        animateState,
+        animateObj
+    } = useCollapsibleText()
+
+    const handleScroll = useCallback(() => {
+        animateObj(ref, true);
+    }, [animateObj, animate])
+
+    // Starts animation on component mount and continues already started animation.
+    useEffect(() => {
+        handleScroll()
+        window.addEventListener('scroll', handleScroll)
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [animateState, handleScroll])
+
     const toggleExpansion = () => {
-        if (body && ref.current) {
+        if (body) {
             setExpanded(!expanded);
         }
     };
 
     return (
-        <div className="CollapsibleText" data-testid="CollapsibleText">
-            <Accordion expanded={expanded} onChange={toggleExpansion}>
-                <div>
-                    <AccordionSummary
-                        expandIcon={body ? <ExpandMoreIcon /> : null}
-                        aria-controls="panel-content"
-                        id="panel-header"
-                    >
-                        <Typography variant="h6">
-                            {header}
-                        </Typography>
-                    </AccordionSummary>
-                </div>
-                {body && (
+        <Zoom in={animateState} style={{transitionDelay: `${(offset * 100)}ms`}}>
+            <div ref={ref} className="CollapsibleText" data-testid="CollapsibleText">
+                <Accordion expanded={expanded} onChange={toggleExpansion}>
                     <div>
-                        <Divider variant="middle" />
-                        <AccordionDetails>
-                            <Typography>{body}</Typography>
-                        </AccordionDetails>
+                        <AccordionSummary
+                            expandIcon={body ? <ExpandMoreIcon/> : null}
+                            aria-controls="panel-content"
+                            id="panel-header"
+                        >
+                            <Typography variant="h6">
+                                {header}
+                            </Typography>
+                        </AccordionSummary>
                     </div>
-                )}
-            </Accordion>
-        </div>
+                    {body && (
+                        <div>
+                            <Divider variant="middle"/>
+                            <AccordionDetails>
+                                <Typography>{body}</Typography>
+                            </AccordionDetails>
+                        </div>
+                    )}
+                </Accordion>
+            </div>
+            </Zoom>
     );
 };
 

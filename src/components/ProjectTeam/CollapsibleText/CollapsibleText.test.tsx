@@ -1,7 +1,16 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import {render, screen, fireEvent, renderHook, act} from '@testing-library/react';
 import CollapsibleText from './CollapsibleText';
 import '@testing-library/jest-dom';
+import {useCollapsibleText} from "./CollapsibleText.hooks";
+
+jest.useFakeTimers()
+jest.spyOn(global, 'setTimeout')
+
+afterEach(() => {
+    jest.clearAllTimers()
+    jest.clearAllMocks()
+})
 
 describe('CollapsibleText Component', () => {
     const testId = 'CollapsibleText';
@@ -41,4 +50,62 @@ describe('CollapsibleText Component', () => {
         fireEvent.click(screen.getByTestId(testId)); // Expand the accordion
         expect(screen.getByText(testProps.body)).toBeInTheDocument();
     });
+
+    test('General functionality of ProjectDescriptionCard hook', () => {
+        const { result } = renderHook(() => useCollapsibleText())
+        expect(result.current).toMatchObject({
+            animateState: false,
+            setAnimateState: expect.any(Function),
+            animateObj: expect.any(Function),
+            zoomInEffectAnimate: expect.any(Function),
+        })
+        const mockDivElement = document.createElement('div')
+        const mockRef = {
+            current: mockDivElement
+        }
+        act(() => {
+            result.current.animateObj(mockRef, true)
+            jest.runAllTimers()
+        })
+        expect(result.current.animateState).toBe(true)
+    });
+
+    test('Animation functionality of ProjectDescriptionCard hook with topPosition greater than viewportBottom', () => {
+        const { result } = renderHook(() => useCollapsibleText())
+        const mockDivElement = document.createElement('div')
+        const mockRef = {
+            current: mockDivElement
+        }
+
+        mockDivElement.getBoundingClientRect = () => ({
+            top: 1000,
+            bottom: 0,
+            right: 0,
+            width: 0,
+            height: 0,
+            x: 0,
+            y: 0,
+            left: 0,
+            toJSON: jest.fn()
+        })
+        Object.defineProperty(mockRef.current, 'getBoundingClientRect', {
+            value: mockDivElement.getBoundingClientRect
+        })
+        act(() => {
+            result.current.animateObj(mockRef, result.current.animateState)
+        })
+        expect(result.current.animateState).toBe(false)
+    })
+
+    test('Animation functionality of ProjectDescriptionCard hook with undefined ref.current', () => {
+        const { result } = renderHook(() => useCollapsibleText())
+        const mockRef = {
+            current: null
+        }
+
+        act(() => {
+            result.current.animateObj(mockRef, true)
+        })
+        expect(result.current.animateState).toBe(false)
+    })
 });
