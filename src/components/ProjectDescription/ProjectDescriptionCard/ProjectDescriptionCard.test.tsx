@@ -1,5 +1,5 @@
-import {useProjectDescriptionCard} from './ProjectDescriptionCard.hooks'
-import {act, render, renderHook} from '@testing-library/react'
+import { useProjectDescriptionCard } from './ProjectDescriptionCard.hooks'
+import { act, render, renderHook } from '@testing-library/react'
 import ProjectDescriptionCard from './ProjectDescriptionCard'
 import '@testing-library/jest-dom'
 
@@ -17,7 +17,7 @@ afterEach(() => {
 })
 
 describe('Test ProjectDescriptionCard', () => {
-  const testId = 'projectDescriptionCard';
+  const testId = 'projectDescriptionCard'
   test('ProjectDescriptionCard renders without input', () => {
     const { getByTestId } = render(<ProjectDescriptionCard />)
     const projectDescriptionCard = getByTestId(testId)
@@ -46,12 +46,12 @@ describe('Test ProjectDescriptionCard', () => {
 
   test('ProjectDescriptionCard renders with input when reversed', () => {
     const { getByTestId } = render(
-        <ProjectDescriptionCard
-            body={mockProjectDescriptionCardProps.body}
-            header={mockProjectDescriptionCardProps.header}
-            isLeft={true}>
-          <>Text</>
-        </ProjectDescriptionCard>
+      <ProjectDescriptionCard
+        body={mockProjectDescriptionCardProps.body}
+        header={mockProjectDescriptionCardProps.header}
+        isLeft={true}>
+        <>Text</>
+      </ProjectDescriptionCard>
     )
 
     const projectDescriptionCard = getByTestId(testId)
@@ -78,12 +78,12 @@ describe('Test ProjectDescriptionCard', () => {
 
   test('ProjectDescriptionCard with input and reversed layout can be scrolled', () => {
     const { getByText } = render(
-        <ProjectDescriptionCard
-            body={mockProjectDescriptionCardProps.body}
-            header={mockProjectDescriptionCardProps.header}
-            isLeft={true}>
-          <>Text</>
-        </ProjectDescriptionCard>
+      <ProjectDescriptionCard
+        body={mockProjectDescriptionCardProps.body}
+        header={mockProjectDescriptionCardProps.header}
+        isLeft={true}>
+        <>Text</>
+      </ProjectDescriptionCard>
     )
     act(() => {
       window.dispatchEvent(new Event('scroll'))

@@ -1,7 +1,7 @@
-import {useTranslation} from 'react-i18next'
-import {ImageAttribute, ProjectDescriptionCard, ProjectDescriptionStepper} from '@components'
-import {Avatar, Box, Grid} from '@common/components'
-import {memo} from 'react'
+import { useTranslation } from 'react-i18next'
+import { ImageAttribute, ProjectDescriptionCard, ProjectDescriptionStepper } from '@components'
+import { Avatar, Box, Grid } from '@common/components'
+import { memo } from 'react'
 
 /**
  * ProjectDescription page.
@@ -95,10 +95,13 @@ const ProjectDescription = () => {
         }
       />
       <Grid container item justifyContent="center" xs={12}>
-          <ImageAttribute imageAttributes={
-              t('pages.ProjectDescription.imageSourcesDict', {
-                returnObjects: true,
-          }) as { text: string, url: string }[]}/>
+        <ImageAttribute
+          imageAttributes={
+            t('pages.ProjectDescription.imageSourcesDict', {
+              returnObjects: true
+            }) as { text: string; url: string }[]
+          }
+        />
       </Grid>
     </>
   )

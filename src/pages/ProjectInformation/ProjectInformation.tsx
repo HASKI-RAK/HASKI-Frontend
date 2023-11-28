@@ -23,11 +23,11 @@ export const ProjectInformation = () => {
           <Typography>{t('pages.projectdescription')}</Typography>
         </Button>
       </Box>
-        <Box>
-            <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/projectteam')}>
-                <Typography>{t('pages.projectteam')}</Typography>
-            </Button>
-        </Box>
+      <Box>
+        <Button sx={{ mt: '2rem', color: 'black' }} onClick={() => navigate('/projectinformation/projectteam')}>
+          <Typography>{t('pages.projectteam')}</Typography>
+        </Button>
+      </Box>
       <Box>
         <Button
           id="glossary-button"

@@ -32,9 +32,9 @@ describe('ProjectInformation tests', () => {
 
   test('second button navigates to ProjectTeam page', () => {
     const { getAllByRole } = render(
-        <MemoryRouter initialEntries={['/home', '/projectteam']}>
-          <ProjectInformation />
-        </MemoryRouter>
+      <MemoryRouter initialEntries={['/home', '/projectteam']}>
+        <ProjectInformation />
+      </MemoryRouter>
     )
 
     fireEvent.click(getAllByRole('button')[1])

@@ -1,5 +1,5 @@
-import {useProjectDescriptionStepper} from './ProjectDescriptionStepper.hooks'
-import {act, fireEvent, render, renderHook, screen} from '@testing-library/react'
+import { useProjectDescriptionStepper } from './ProjectDescriptionStepper.hooks'
+import { act, fireEvent, render, renderHook, screen } from '@testing-library/react'
 import ProjectDescriptionStepper from './ProjectDescriptionStepper'
 import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
@@ -25,7 +25,7 @@ afterEach(() => {
 })
 
 describe('Test ProjectDescriptionStepper', () => {
-  const testId = 'projectDescriptionStepper';
+  const testId = 'projectDescriptionStepper'
 
   test('ProjectDescriptionStepper renders without input', () => {
     const { getByTestId } = render(
@@ -51,7 +51,7 @@ describe('Test ProjectDescriptionStepper', () => {
   test('ProjectDescriptionCard renders with input', () => {
     const { getByTestId } = render(
       <MemoryRouter>
-       <ProjectDescriptionStepper {...mockProjectDescriptionStepperProps} />
+        <ProjectDescriptionStepper {...mockProjectDescriptionStepperProps} />
       </MemoryRouter>
     )
 
@@ -61,7 +61,9 @@ describe('Test ProjectDescriptionStepper', () => {
 
   test('ProjectDescriptionCard renders with input and avatar', () => {
     const { getByTestId } = render(
+      <MemoryRouter>
         <ProjectDescriptionStepper {...mockProjectDescriptionStepperAvatarProps} />
+      </MemoryRouter>
     )
 
     const projectDescriptionStepper = getByTestId(testId)
@@ -87,7 +89,9 @@ describe('Test ProjectDescriptionStepper', () => {
 
   test('ProjectDescriptionCard with input and avatar can be scrolled', () => {
     const { getByText } = render(
+      <MemoryRouter>
         <ProjectDescriptionStepper {...mockProjectDescriptionStepperAvatarProps} />
+      </MemoryRouter>
     )
 
     act(() => {
@@ -115,7 +119,7 @@ describe('Test ProjectDescriptionStepper', () => {
       jest.runAllTimers()
     })
 
-    const checkContent = (index:number) => {
+    const checkContent = (index: number) => {
       expect(getByText(mockProjectDescriptionStepperProps.body[index])).toBeInTheDocument()
     }
 
@@ -125,21 +129,23 @@ describe('Test ProjectDescriptionStepper', () => {
     const buttons = getAllByRole('button')
     // Steps to the right
     for (let i = 1; i < mockProjectDescriptionStepperProps.body.length; i++) {
-      fireEvent.click(buttons[1]);
-      const index = i < mockProjectDescriptionStepperAvatarProps.body.length ? i : i - 1; // -1 to test if next button is disabled after last element
+      fireEvent.click(buttons[1])
+      const index = i < mockProjectDescriptionStepperAvatarProps.body.length ? i : i - 1 // -1 to test if next button is disabled after last element
       checkContent(index)
     }
     // Steps to the left
     for (let i = mockProjectDescriptionStepperProps.body.length - 1; i >= 0; i--) {
-      fireEvent.click(buttons[0]);
-      const index = i < 1 ? 0 : i - 1; // cap to 0 to check if back button gets disabled
+      fireEvent.click(buttons[0])
+      const index = i < 1 ? 0 : i - 1 // cap to 0 to check if back button gets disabled
       checkContent(index)
     }
   })
 
   test('Step through all body texts of ProjectDescriptionStepper with avatars', () => {
     const { getByText, getAllByRole } = render(
+      <MemoryRouter>
         <ProjectDescriptionStepper {...mockProjectDescriptionStepperAvatarProps} />
+      </MemoryRouter>
     )
 
     act(() => {
@@ -147,11 +153,13 @@ describe('Test ProjectDescriptionStepper', () => {
       jest.runAllTimers()
     })
 
-    const checkContent = (index:number) => {
-      expect(getByText(mockProjectDescriptionStepperAvatarProps.body[index])).toBeInTheDocument();
-      expect(screen.getByAltText(mockProjectDescriptionStepperAvatarProps.avatarName[index])).toBeInTheDocument();
-      expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarName[index].slice(0, 1))).toBeInTheDocument();
-      expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarDescription[index].slice(0, 1))).toBeInTheDocument();
+    const checkContent = (index: number) => {
+      expect(getByText(mockProjectDescriptionStepperAvatarProps.body[index])).toBeInTheDocument()
+      expect(screen.getByAltText(mockProjectDescriptionStepperAvatarProps.avatarName[index])).toBeInTheDocument()
+      expect(getByText(mockProjectDescriptionStepperAvatarProps.avatarName[index].slice(0, 1))).toBeInTheDocument()
+      expect(
+        getByText(mockProjectDescriptionStepperAvatarProps.avatarDescription[index].slice(0, 1))
+      ).toBeInTheDocument()
     }
 
     expect(getByText(mockProjectDescriptionStepperAvatarProps.header.slice(0, 1))).toBeInTheDocument()
@@ -160,14 +168,14 @@ describe('Test ProjectDescriptionStepper', () => {
     const buttons = getAllByRole('button')
     // Steps to the right
     for (let i = 1; i < mockProjectDescriptionStepperAvatarProps.body.length; i++) {
-      fireEvent.click(buttons[1]);
-      const index = i < mockProjectDescriptionStepperAvatarProps.body.length ? i : i - 1; // -1 to test if next button is disabled after last element
+      fireEvent.click(buttons[1])
+      const index = i < mockProjectDescriptionStepperAvatarProps.body.length ? i : i - 1 // -1 to test if next button is disabled after last element
       checkContent(index)
     }
     // Steps to the left
     for (let i = mockProjectDescriptionStepperAvatarProps.body.length - 1; i >= 0; i--) {
-      fireEvent.click(buttons[0]);
-      const index = i < 1 ? 0 : i - 1; // cap to 0 to check if back button gets disabled
+      fireEvent.click(buttons[0])
+      const index = i < 1 ? 0 : i - 1 // cap to 0 to check if back button gets disabled
       checkContent(index)
     }
   })

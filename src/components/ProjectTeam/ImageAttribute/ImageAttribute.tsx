@@ -1,13 +1,13 @@
-import React, {memo} from 'react';
-import Typography from '@mui/material/Typography';
-import {useTranslation} from "react-i18next";
+import React, { memo } from 'react'
+import Typography from '@mui/material/Typography'
+import { useTranslation } from 'react-i18next'
 
 /**
- * @props imageAttributes - Array of dict of image text/title and url/source location.
+ * @prop imageAttributes - Array of dict of image text/title and url/source location.
  * @interface
  */
 interface ImageAttributeProps {
-    imageAttributes?: { text: string; url: string }[];
+  imageAttributes?: { text: string; url: string }[]
 }
 
 /**
@@ -21,28 +21,26 @@ interface ImageAttributeProps {
  *
  * @category Components
  */
-const ImageAttribute: React.FC<ImageAttributeProps> = ({imageAttributes}) => {
-    const {t} = useTranslation()
+const ImageAttribute: React.FC<ImageAttributeProps> = ({ imageAttributes }) => {
+  const { t } = useTranslation()
 
-    // for test
-    if (!Array.isArray(imageAttributes)) {
-        return (
-            <div data-testid="ImageAttribute"></div>
-        );
-    }
+  // for test
+  if (!Array.isArray(imageAttributes)) {
+    return <div data-testid="ImageAttribute"></div>
+  }
 
-    return (
-        <Typography sx={{pt: '1rem', pb: '1rem'}} variant="subtitle1" data-testid="ImageAttribute">
-            {t('pages.ProjectDescription.imageSources')}
-            {imageAttributes.map(({text, url}, index) => (
-                <span key={index}>
-                    {!url && (text)}
-                    {url && (<a href={url}>{text}</a>)}
-                    {index < imageAttributes?.length - 1 && ', '}
-                </span>
-            ))}
-        </Typography>
-    );
-};
+  return (
+    <Typography sx={{ pt: '1rem', pb: '1rem' }} variant="subtitle1" data-testid="ImageAttribute">
+      {t('pages.ProjectDescription.imageSources')}
+      {imageAttributes.map(({ text, url }, index) => (
+        <span key={index}>
+          {!url && text}
+          {url && <a href={url}>{text}</a>}
+          {index < imageAttributes?.length - 1 && ', '}
+        </span>
+      ))}
+    </Typography>
+  )
+}
 
-export default memo(ImageAttribute);
+export default memo(ImageAttribute)

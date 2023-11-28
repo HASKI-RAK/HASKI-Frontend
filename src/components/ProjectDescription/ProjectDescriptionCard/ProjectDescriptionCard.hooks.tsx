@@ -1,4 +1,4 @@
-import {RefObject, useCallback, useMemo, useState} from 'react'
+import { RefObject, useCallback, useMemo, useState } from 'react'
 
 /**
  * @prop defaultBodyState - The default value for the body state.

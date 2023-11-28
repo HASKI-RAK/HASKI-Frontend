@@ -1,27 +1,27 @@
-import {RefObject, useCallback, useMemo, useState} from 'react'
+import { RefObject, useCallback, useMemo, useState } from 'react'
 
 /**
- * @props defaultAnimateState - The default value for the animate state (trigger for when animation should start).
+ * @prop defaultAnimateState - The default value for the animate state (trigger for when animation should start).
  * @category Hooks
  * @interface
  */
 export type useCollapsibleTextHookParams = {
-    defaultAnimateState?: boolean
+  defaultAnimateState?: boolean
 }
 
 /**
- * @props animateState - The state that is used to animate the obj.
- * @props setAnimateState - The function that sets the animate state.
- * @props animateObj - The function that animates the obj.
- * @props zoomInEffectAnimate - The function that realizes the zoom in effect.
+ * @prop animateState - The state that is used to animate the obj.
+ * @prop setAnimateState - The function that sets the animate state.
+ * @prop animateObj - The function that animates the obj.
+ * @prop zoomInEffectAnimate - The function that realizes the zoom in effect.
  * @category Hooks
  * @interface
  */
 export type CollapsibleTextHookReturn = {
-    readonly animateState: boolean
-    readonly setAnimateState: (animate: boolean) => void
-    readonly animateObj: (ref: RefObject<HTMLDivElement>, animate: boolean) => void
-    readonly zoomInEffectAnimate: (animate: boolean) => () => void
+  readonly animateState: boolean
+  readonly setAnimateState: (animate: boolean) => void
+  readonly animateObj: (ref: RefObject<HTMLDivElement>, animate: boolean) => void
+  readonly zoomInEffectAnimate: (animate: boolean) => () => void
 }
 
 /**
@@ -35,52 +35,48 @@ export type CollapsibleTextHookReturn = {
  *
  * @category Hooks
  */
-export const useCollapsibleText = (
-    params?: useCollapsibleTextHookParams
-): CollapsibleTextHookReturn => {
-    // Default values
-    const {
-        defaultAnimateState = false,
-    } = params ?? {}
+export const useCollapsibleText = (params?: useCollapsibleTextHookParams): CollapsibleTextHookReturn => {
+  // Default values
+  const { defaultAnimateState = false } = params ?? {}
 
-    // State data
-    const [animateState, setAnimateState] = useState(defaultAnimateState)
+  // State data
+  const [animateState, setAnimateState] = useState(defaultAnimateState)
 
-    // Logic
-    const zoomInEffectAnimate = useCallback(
-        (animate: boolean) => {
-            const timeout = setTimeout(() => {
-                setAnimateState(animate)
-            }, 250)
-            return () => clearTimeout(timeout)
-        },
-        [animateState, setAnimateState]
-    )
+  // Logic
+  const zoomInEffectAnimate = useCallback(
+    (animate: boolean) => {
+      const timeout = setTimeout(() => {
+        setAnimateState(animate)
+      }, 250)
+      return () => clearTimeout(timeout)
+    },
+    [animateState, setAnimateState]
+  )
 
-    const isElementInViewport = (ref: RefObject<HTMLDivElement>): boolean => {
-        const topPosition = ref.current?.getBoundingClientRect().top;
-        const viewportBottom = window.innerHeight;
+  const isElementInViewport = (ref: RefObject<HTMLDivElement>): boolean => {
+    const topPosition = ref.current?.getBoundingClientRect().top
+    const viewportBottom = window.innerHeight
 
-        return topPosition !== null && typeof topPosition === 'number' && topPosition <= viewportBottom;
-    };
+    return topPosition !== null && typeof topPosition === 'number' && topPosition <= viewportBottom
+  }
 
-    const animateObj = useCallback(
-        (ref: RefObject<HTMLDivElement>, animate: boolean) => {
-            if (isElementInViewport(ref)) {
-                if (animate !== animateState) {
-                    zoomInEffectAnimate(animate)
-                }
-            }
-        },
-        [isElementInViewport, animateState, zoomInEffectAnimate]
-    )
-    return useMemo(
-        () => ({
-            animateState,
-            setAnimateState,
-            animateObj,
-            zoomInEffectAnimate
-        }),
-        [animateState, setAnimateState, animateObj, zoomInEffectAnimate]
-    )
+  const animateObj = useCallback(
+    (ref: RefObject<HTMLDivElement>, animate: boolean) => {
+      if (isElementInViewport(ref)) {
+        if (animate !== animateState) {
+          zoomInEffectAnimate(animate)
+        }
+      }
+    },
+    [isElementInViewport, animateState, zoomInEffectAnimate]
+  )
+  return useMemo(
+    () => ({
+      animateState,
+      setAnimateState,
+      animateObj,
+      zoomInEffectAnimate
+    }),
+    [animateState, setAnimateState, animateObj, zoomInEffectAnimate]
+  )
 }

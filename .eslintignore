@@ -12,3 +12,5 @@ auto-order-json-translations.js
 *.config.*
 RingBuffer.ts
 index.html
+*.css
+*.scss

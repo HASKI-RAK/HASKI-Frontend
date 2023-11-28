@@ -1,26 +1,24 @@
-import React, {memo, useCallback, useEffect, useRef, useState} from 'react';
-import {Accordion, AccordionDetails, AccordionSummary, Divider, Typography} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Zoom from '@mui/material/Zoom';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import Zoom from '@mui/material/Zoom'
 import {
-    CollapsibleTextHookReturn,
-    useCollapsibleText as _useCollapsibleText,
-    useCollapsibleTextHookParams
-} from "./CollapsibleText.hooks";
+  CollapsibleTextHookReturn,
+  useCollapsibleText as _useCollapsibleText,
+  useCollapsibleTextHookParams
+} from './CollapsibleText.hooks'
 
 /**
- * @props header - Header title to be displayed on collapsible component.
- * @props body - Conent to be displayed on collapsible component in expanded state.
+ * @prop header - Header title to be displayed on collapsible component.
+ * @prop body - Conent to be displayed on collapsible component in expanded state.
  * @interface
  */
 interface CollapsibleTextProps {
-    header: string;
-    body?: string;
-    animate?: boolean;
-    offset?: number;
-    useCollapsibleText?: (
-        params?: useCollapsibleTextHookParams
-    ) => CollapsibleTextHookReturn
+  header: string
+  body?: string
+  animate?: boolean
+  offset?: number
+  useCollapsibleText?: (params?: useCollapsibleTextHookParams) => CollapsibleTextHookReturn
 }
 
 /**
@@ -36,69 +34,65 @@ interface CollapsibleTextProps {
  * @category Components
  */
 const CollapsibleText: React.FC<CollapsibleTextProps> = ({
-                                                             header, body, animate, offset,
-                                                             useCollapsibleText = _useCollapsibleText
-                                                         }) => {
-    const [expanded, setExpanded] = useState(false);
-    const ref = useRef<HTMLDivElement>(null);
+  header,
+  body,
+  animate,
+  offset,
+  useCollapsibleText = _useCollapsibleText
+}) => {
+  const [expanded, setExpanded] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
 
-    animate ??= false;
-    offset ??= 0;
-    offset = animate ? offset : 0;
+  animate ??= false
+  offset ??= 0
+  offset = animate ? offset : 0
 
-    const {
-        animateState,
-        animateObj
-    } = useCollapsibleText()
+  const { animateState, animateObj } = useCollapsibleText()
 
-    const handleScroll = useCallback(() => {
-        animateObj(ref, true);
-    }, [animateObj, animate])
+  const handleScroll = useCallback(() => {
+    animateObj(ref, true)
+  }, [animateObj, animate])
 
-    // Starts animation on component mount and continues already started animation.
-    useEffect(() => {
-        handleScroll()
-        window.addEventListener('scroll', handleScroll)
+  // Starts animation on component mount and continues already started animation.
+  useEffect(() => {
+    handleScroll()
+    window.addEventListener('scroll', handleScroll)
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll)
-        }
-    }, [animateState, handleScroll])
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [animateState, handleScroll])
 
-    const toggleExpansion = () => {
-        if (body) {
-            setExpanded(!expanded);
-        }
-    };
+  const toggleExpansion = () => {
+    if (body) {
+      setExpanded(!expanded)
+    }
+  }
 
-    return (
-        <Zoom in={animateState} style={{transitionDelay: `${(offset * 100)}ms`}}>
-            <div ref={ref} className="CollapsibleText" data-testid="CollapsibleText">
-                <Accordion expanded={expanded} onChange={toggleExpansion}>
-                    <div>
-                        <AccordionSummary
-                            expandIcon={body ? <ExpandMoreIcon/> : null}
-                            aria-controls="panel-content"
-                            id="panel-header"
-                        >
-                            <Typography variant="h6">
-                                {header}
-                            </Typography>
-                        </AccordionSummary>
-                    </div>
-                    {body && (
-                        <div>
-                            <Divider variant="middle"/>
-                            <AccordionDetails>
-                                <Typography>{body}</Typography>
-                            </AccordionDetails>
-                        </div>
-                    )}
-                </Accordion>
+  return (
+    <Zoom in={animateState} style={{ transitionDelay: `${offset * 100}ms` }}>
+      <div ref={ref} className="CollapsibleText" data-testid="CollapsibleText">
+        <Accordion expanded={expanded} onChange={toggleExpansion}>
+          <div>
+            <AccordionSummary
+              expandIcon={body ? <ExpandMoreIcon /> : null}
+              aria-controls="panel-content"
+              id="panel-header">
+              <Typography variant="h6">{header}</Typography>
+            </AccordionSummary>
+          </div>
+          {body && (
+            <div>
+              <Divider variant="middle" />
+              <AccordionDetails>
+                <Typography>{body}</Typography>
+              </AccordionDetails>
             </div>
-        </Zoom>
-    );
-};
+          )}
+        </Accordion>
+      </div>
+    </Zoom>
+  )
+}
 
-
-export default memo(CollapsibleText);
+export default memo(CollapsibleText)

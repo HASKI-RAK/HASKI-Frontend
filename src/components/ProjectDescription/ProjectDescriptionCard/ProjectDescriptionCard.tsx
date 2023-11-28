@@ -1,6 +1,6 @@
 import { useRef, useEffect, useCallback, memo, ReactNode } from 'react'
 import MediaQuery from 'react-responsive'
-import {Divider, Fade, Grid, Typography} from '@common/components'
+import { Divider, Fade, Grid, Typography } from '@common/components'
 import {
   ProjectDescriptionCardHookReturn,
   useProjectDescriptionCard as _useProjectDescriptionCard,
@@ -73,10 +73,12 @@ const ProjectDescriptionCard = ({
           mb: '5.5rem'
         }}>
         <MediaQuery minWidth={700}>
-        {props.isLeft && <Grid container item justifyContent="center" sx={{ pt: '7.5rem', pb: '7.5rem' }} xs={4}>
-          {props.children}
-        </Grid>}
-        {props.isLeft && <Divider flexItem orientation="vertical" />}
+          {props.isLeft && (
+            <Grid container item justifyContent="center" sx={{ pt: '7.5rem', pb: '7.5rem' }} xs={4}>
+              {props.children}
+            </Grid>
+          )}
+          {props.isLeft && <Divider flexItem orientation="vertical" />}
         </MediaQuery>
         <Grid item xs={7}>
           <Typography
@@ -86,7 +88,14 @@ const ProjectDescriptionCard = ({
             {headerState}
           </Typography>
           <MediaQuery maxWidth={700}>
-            <div style={{alignSelf:'center', alignContent:'center', display:'flex', justifyContent:'center', alignItems:'center'}}>
+            <div
+              style={{
+                alignSelf: 'center',
+                alignContent: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
               {props.children}
             </div>
           </MediaQuery>
@@ -97,10 +106,12 @@ const ProjectDescriptionCard = ({
           </Fade>
         </Grid>
         <MediaQuery minWidth={700}>
-        {!props.isLeft && <Divider flexItem orientation="vertical" />}
-        {!props.isLeft && <Grid container item justifyContent="center" sx={{ pt: '7.5rem', pb: '7.5rem' }} xs={4}>
-          {props.children}
-        </Grid>}
+          {!props.isLeft && <Divider flexItem orientation="vertical" />}
+          {!props.isLeft && (
+            <Grid container item justifyContent="center" sx={{ pt: '7.5rem', pb: '7.5rem' }} xs={4}>
+              {props.children}
+            </Grid>
+          )}
         </MediaQuery>
       </Grid>
     </div>
