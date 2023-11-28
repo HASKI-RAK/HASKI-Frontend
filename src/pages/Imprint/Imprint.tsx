@@ -9,7 +9,7 @@ export const Imprint = () => {
   const { t } = useTranslation()
   return (
     <>
-      <Typography variant="h4">{t('pages.imprint.title')}</Typography>
+      <Typography variant="h4">{t('pages.imprint')}</Typography>
       <Typography paragraph variant="body2" />
       <Typography variant="h6">{t('pages.imprint.subtitle')}</Typography>
       <Typography variant="body2">{t('pages.imprint.asOf')} 26.04.2023</Typography>

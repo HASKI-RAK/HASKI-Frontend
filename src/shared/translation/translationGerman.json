@@ -747,13 +747,13 @@
 				"answer2": "components.TableILSQuestions.answer-2-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-3",
+				"question": "Wenn ich daran denke, was ich gestern gemacht habe, fallen mir eher",
 				"questionLabel": "VV_1_F3",
 				"answer1": "components.TableILSQuestions.answer-3-1",
 				"answer2": "components.TableILSQuestions.answer-3-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-4",
+				"question": "Ich neige dazu",
 				"questionLabel": "SG_1_F4",
 				"answer1": "components.TableILSQuestions.answer-4-1",
 				"answer2": "components.TableILSQuestions.answer-4-2"
@@ -897,19 +897,19 @@
 				"answer2": "components.TableILSQuestions.answer-25-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-26",
+				"question": "Wenn ich mich in meiner Freizeit mit Inhalten beschäftige, möchte ich, dass die Produzenten",
 				"questionLabel": "SI_7_F26",
 				"answer1": "components.TableILSQuestions.answer-26-1",
 				"answer2": "components.TableILSQuestions.answer-26-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-27",
+				"question": "Wenn ich in einem Kurs ein Diagramm oder eine Skizze sehe, erinnere ich mich am ehesten",
 				"questionLabel": "VV_7_F27",
 				"answer1": "components.TableILSQuestions.answer-27-1",
 				"answer2": "components.TableILSQuestions.answer-27-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-28",
+				"question": "Wenn ich Informationsmaterial anschaue, neige ich eher dazu",
 				"questionLabel": "SG_7_F28",
 				"answer1": "components.TableILSQuestions.answer-28-1",
 				"answer2": "components.TableILSQuestions.answer-28-2"
@@ -917,25 +917,25 @@
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-29",
+				"question": "Ich kann mich leichter an etwas erinnern,",
 				"questionLabel": "AR_8_F29",
 				"answer1": "components.TableILSQuestions.answer-29-1",
 				"answer2": "components.TableILSQuestions.answer-29-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-30",
+				"question": "Wenn ich eine Aufgabe erfüllen muss, bevorzuge ich es",
 				"questionLabel": "SI_8_F30",
 				"answer1": "components.TableILSQuestions.answer-30-1",
 				"answer2": "components.TableILSQuestions.answer-30-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-31",
+				"question": "Wenn jemand mir Daten zeigt, bevorzuge ich",
 				"questionLabel": "VV_8_F31",
 				"answer1": "components.TableILSQuestions.answer-31-1",
 				"answer2": "components.TableILSQuestions.answer-31-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-32",
+				"question": "Wenn ich eine Studienarbeit schreibe, bin ich eher dazu geneigt ",
 				"questionLabel": "SG_8_F32",
 				"answer1": "components.TableILSQuestions.answer-32-1",
 				"answer2": "components.TableILSQuestions.answer-32-2"
@@ -943,25 +943,25 @@
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-33",
+				"question": "Wenn ich an einem Gruppenprojekt arbeiten muss, möchte ich zuerst",
 				"questionLabel": "AR_9_F33",
 				"answer1": "components.TableILSQuestions.answer-33-1",
 				"answer2": "components.TableILSQuestions.answer-33-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-34",
+				"question": "Ich betrachte es als großes Lob jemanden als",
 				"questionLabel": "SI_9_F34",
 				"answer1": "components.TableILSQuestions.answer-34-1",
 				"answer2": "components.TableILSQuestions.answer-34-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-35",
+				"question": "Wenn ich auf einer Party neue Menschen kennenlerne, erinnere ich mich eher daran",
 				"questionLabel": "VV_9_F35",
 				"answer1": "components.TableILSQuestions.answer-35-1",
 				"answer2": "components.TableILSQuestions.answer-35-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-36",
+				"question": "Wenn ich ein neues Thema lerne, ziehe ich es vor",
 				"questionLabel": "SG_9_F36",
 				"answer1": "components.TableILSQuestions.answer-36-1",
 				"answer2": "components.TableILSQuestions.answer-36-2"
@@ -969,19 +969,19 @@
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-37",
+				"question": "Ich gelte eher als",
 				"questionLabel": "AR_10_F37",
 				"answer1": "components.TableILSQuestions.answer-37-1",
 				"answer2": "components.TableILSQuestions.answer-37-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-38",
+				"question": "Ich bevorzuge Kurse, die ihren Fokus auf ",
 				"questionLabel": "SI_10_F38",
 				"answer1": "components.TableILSQuestions.answer-38-1",
 				"answer2": "components.TableILSQuestions.answer-38-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-39",
+				"question": "Zu meiner Unterhaltung würde ich lieber",
 				"questionLabel": "VV_10_F39",
 				"answer1": "components.TableILSQuestions.answer-39-1",
 				"answer2": "components.TableILSQuestions.answer-39-2"
@@ -1067,7 +1067,7 @@
 				"answer2": "components.TableILSQuestions.answer-7-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-4",
+				"question": "Ich neige dazu",
 				"questionLabel": "SG_1_F4",
 				"answer1": "components.TableILSQuestions.answer-4-1",
 				"answer2": "components.TableILSQuestions.answer-4-2"
@@ -1107,13 +1107,13 @@
 				"answer2": "components.TableILSQuestions.answer-21-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-26",
+				"question": "Wenn ich mich in meiner Freizeit mit Inhalten beschäftige, möchte ich, dass die Produzenten",
 				"questionLabel": "SI_7_F26",
 				"answer1": "components.TableILSQuestions.answer-26-1",
 				"answer2": "components.TableILSQuestions.answer-26-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-27",
+				"question": "Wenn ich in einem Kurs ein Diagramm oder eine Skizze sehe, erinnere ich mich am ehesten",
 				"questionLabel": "VV_7_F27",
 				"answer1": "components.TableILSQuestions.answer-27-1",
 				"answer2": "components.TableILSQuestions.answer-27-2"
@@ -1133,13 +1133,13 @@
 				"answer2": "components.TableILSQuestions.answer-25-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-38",
+				"question": "Ich bevorzuge Kurse, die ihren Fokus auf ",
 				"questionLabel": "SI_10_F38",
 				"answer1": "components.TableILSQuestions.answer-38-1",
 				"answer2": "components.TableILSQuestions.answer-38-2"
 			},
 			{
-				"question": "components.TableILSQuestions.question-39",
+				"question": "Zu meiner Unterhaltung würde ich lieber",
 				"questionLabel": "VV_10_F39",
 				"answer1": "components.TableILSQuestions.answer-39-1",
 				"answer2": "components.TableILSQuestions.answer-39-2"
@@ -1153,7 +1153,7 @@
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-29",
+				"question": "Ich kann mich leichter an etwas erinnern,",
 				"questionLabel": "AR_8_F29",
 				"answer1": "components.TableILSQuestions.answer-29-1",
 				"answer2": "components.TableILSQuestions.answer-29-2"
@@ -1197,22 +1197,6 @@
 	"components.TableILSQuestions.question-23": "Wenn ich die Wegbeschreibung zu einem neuen Ort bekomme, bevorzuge ich",
 	"components.TableILSQuestions.question-24": "Ich lerne",
 	"components.TableILSQuestions.question-25": "Ich würde lieber zuerst ",
-	"components.TableILSQuestions.question-26": "Wenn ich mich in meiner Freizeit mit Inhalten beschäftige, möchte ich, dass die Produzenten",
-	"components.TableILSQuestions.question-27": "Wenn ich in einem Kurs ein Diagramm oder eine Skizze sehe, erinnere ich mich am ehesten",
-	"components.TableILSQuestions.question-28": "Wenn ich Informationsmaterial anschaue, neige ich eher dazu",
-	"components.TableILSQuestions.question-29": "Ich kann mich leichter an etwas erinnern,",
-	"components.TableILSQuestions.question-3": "Wenn ich daran denke, was ich gestern gemacht habe, fallen mir eher",
-	"components.TableILSQuestions.question-30": "Wenn ich eine Aufgabe erfüllen muss, bevorzuge ich es",
-	"components.TableILSQuestions.question-31": "Wenn jemand mir Daten zeigt, bevorzuge ich",
-	"components.TableILSQuestions.question-32": "Wenn ich eine Studienarbeit schreibe, bin ich eher dazu geneigt ",
-	"components.TableILSQuestions.question-33": "Wenn ich an einem Gruppenprojekt arbeiten muss, möchte ich zuerst",
-	"components.TableILSQuestions.question-34": "Ich betrachte es als großes Lob jemanden als",
-	"components.TableILSQuestions.question-35": "Wenn ich auf einer Party neue Menschen kennenlerne, erinnere ich mich eher daran",
-	"components.TableILSQuestions.question-36": "Wenn ich ein neues Thema lerne, ziehe ich es vor",
-	"components.TableILSQuestions.question-37": "Ich gelte eher als",
-	"components.TableILSQuestions.question-38": "Ich bevorzuge Kurse, die ihren Fokus auf ",
-	"components.TableILSQuestions.question-39": "Zu meiner Unterhaltung würde ich lieber",
-	"components.TableILSQuestions.question-4": "Ich neige dazu",
 	"components.TableILSQuestions.question-40": "Manche Lehrpersonen beginnen ihre Kurse mit einem Überblick über den Inhalt. Solche Gliederungen sind für mich",
 	"components.TableILSQuestions.question-41": "Die Idee von Gruppenhausaufgaben mit einer gemeinsamen Note für alle Gruppenmitglieder",
 	"components.TableILSQuestions.question-42": "Wenn ich längere Rechnungen durchführe,",
@@ -1677,7 +1661,6 @@
 	"pages.imprint.referenceLinks": "Verweise und Links",
 	"pages.imprint.referenceLinksText": "Bei direkten oder indirekten Verweisen auf fremde Webseiten (\"Hyperlinks\"), die außerhalb des Verantwortungsbereiches der Hochschule liegen, würde eine Haftungsverpflichtung ausschließlich in dem Fall in Kraft treten, in dem die Hochschule von den Inhalten Kenntnis hat und es ihm technisch möglich und zumutbar wäre, die Nutzung im Falle rechtswidriger Inhalte zu verhindern. Die Hochschule Kempten erklärt hiermit ausdrücklich, dass zum Zeitpunkt der Linksetzung keine illegalen Inhalte auf den zu verlinkenden Seiten erkennbar waren. Auf die aktuelle und zukünftige Gestaltung, die Inhalte oder die Urheberschaft der gelinkten/verknüpften Seiten hat die Hochschule keinerlei Einfluss. Deshalb distanziert sie sich hiermit ausdrücklich von allen Inhalten aller gelinkten /verknüpften Seiten, die nach der Linksetzung verändert wurden. Diese Feststellung gilt für alle innerhalb des eigenen Internetangebotes gesetzten Links und Verweise . Für illegale, fehlerhafte oder unvollständige Inhalte und insbesondere für Schäden, die aus der Nutzung oder Nichtnutzung solcherart dargebotener Informationen entstehen, haftet allein der Anbieter der Seite, auf welche verwiesen wurde, nicht derjenige, der über Links auf die jeweilige Veröffentlichung lediglich verweist.",
 	"pages.imprint.subtitle": "Lehr-/Lernplattform HASKI vom Labor Softwareentwicklung Hochschule Kempten",
-	"pages.imprint.title": "Impressum",
 	"pages.login": "Login",
 	"pages.login.redirect": "Sie werden weitergeleitet",
 	"pages.privacypolicy": "Datenschutzerklärung",

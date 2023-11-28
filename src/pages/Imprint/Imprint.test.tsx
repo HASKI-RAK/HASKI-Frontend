@@ -9,7 +9,7 @@ describe('Imprint Component', () => {
         <Imprint />
       </MemoryRouter>
     )
-    expect(getByText('pages.imprint.title')).toBeTruthy()
+    expect(getByText('pages.imprint')).toBeTruthy()
   })
 
   it('displays the correct address details', () => {
