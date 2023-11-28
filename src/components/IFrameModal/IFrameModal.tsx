@@ -1,11 +1,13 @@
 import { Box, Modal } from '@common/components'
+import { Fab } from '@mui/material'
 import { memo } from 'react'
+import { Close } from '@common/icons'
 
 const style_box = {
   position: 'absolute',
   top: '25%',
   left: '25%',
-  transform: 'translate(-20%, -20%)',
+  transform: 'translate(-20%, -25%)',
   width: '75%',
   height: '85%',
   bgcolor: 'background.paper',
@@ -34,31 +36,28 @@ type IFrameModalProps = {
  * @category Components
  */
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
-  const { url, title, isOpen, onClose } = props
-  // const [open, setOpen] = useState(false)
-
-  // const handleOpen = () => setOpen(true)
-  // const handleClose = () => {
-  //   setOpen(false)
-  //   props.onClose()
-  // }
-
-  // useEffect(() => {
-  //   setOpen(props.isOpen)
-  // }, [props.isOpen])
-
   return (
-    <Modal open={props.isOpen} onClose={props.onClose}>
+    <Modal id="iframe-modal" open={props.isOpen} onClose={props.onClose} data-testid={'IFrameModal'}>
       <Box sx={style_box}>
+        <Fab
+          color="primary"
+          data-testid={'IFrameModal-Close-Button'}
+          onClick={() => props.onClose()}
+          style={{
+            position: 'absolute',
+            top: '2%',
+            left: '94.75%'
+          }}>
+          <Close />
+        </Fab>
         <iframe
           src={props.url}
           title={props.title}
-          width="120%"
-          height="130%"
+          width="100%"
+          height="105%"
           style={{
             position: 'relative',
-            left: '-19%',
-            top: '-21%'
+            border: 0
           }}
         />
       </Box>

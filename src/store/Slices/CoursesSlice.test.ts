@@ -8,7 +8,7 @@ describe('CoursesSlice', () => {
   })
 
   it('should fetch courses from server and cache them', async () => {
-    const { fetchCourses } = useStore.getState()
+    const { getCourses } = useStore.getState()
     const courses = {
       courses: [
         {
@@ -36,33 +36,33 @@ describe('CoursesSlice', () => {
     const lmsUserId = 2
     const studentId = 3
 
-    const result = await fetchCourses(userId, lmsUserId, studentId)
+    const result = await getCourses(userId, lmsUserId, studentId)
 
     expect(result).toEqual(courses)
-    expect(fetchCourses).toBeDefined()
-    expect(fetchCourses).toBeInstanceOf(Function)
-    expect(mockServices.getCourses).toHaveBeenCalledTimes(1)
-    expect(mockServices.getCourses).toHaveBeenCalledWith(1, 2, 3)
+    expect(getCourses).toBeDefined()
+    expect(getCourses).toBeInstanceOf(Function)
+    expect(mockServices.fetchCourses).toHaveBeenCalledTimes(1)
+    expect(mockServices.fetchCourses).toHaveBeenCalledWith(1, 2, 3)
     expect(useStore.getState()._cache_Courses_record[`${userId}-${lmsUserId}-${studentId}`]).toEqual(courses)
-    expect(fetchCourses).not.toThrow() // counts as function call (fetchCourses), here it would be Called 2 times instead of 1
+    expect(getCourses).not.toThrow() // counts as function call (getCourses), here it would be Called 2 times instead of 1
   })
 
   it('should return cached courses if available', async () => {
-    const { fetchCourses } = useStore.getState()
+    const { getCourses } = useStore.getState()
     const courses = [{ id: 1, name: 'Math', description: 'Learn math' }]
-    mockServices.getCourses = jest.fn().mockResolvedValueOnce(courses)
+    mockServices.fetchCourses = jest.fn().mockResolvedValueOnce(courses)
 
     const userId = 1
     const lmsUserId = 2
     const studentId = 3
 
-    await fetchCourses(userId, lmsUserId, studentId)
+    await getCourses(userId, lmsUserId, studentId)
 
     expect(useStore.getState()._cache_Courses_record[`${userId}-${lmsUserId}-${studentId}`]).toEqual(courses)
 
-    const cached = await fetchCourses(1, 2, 3)
+    const cached = await getCourses(1, 2, 3)
 
-    expect(mockServices.getCourses).toHaveBeenCalledTimes(1)
+    expect(mockServices.fetchCourses).toHaveBeenCalledTimes(1)
 
     expect(cached).toEqual(courses)
   })

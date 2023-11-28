@@ -10,13 +10,13 @@ import {
 } from './ProjectDescriptionStepper.hooks'
 
 /**
- * @props body - The body texts that can be stepped through.
- * @props header - The header text that is permanently displayed above the body texts.
- * @props withAvatar - If set, an avatar image, e.g. person will be displayed beneath.
- * @props avatarSrc - Source image file for avatar, if none is set a default avatar will be displayed.
- * @props avatarName - Line 1 of avatar description (mostly referred as name).
- * @props avatarDescription - Line 2 of avatar description (mostly referred as title/description).
- * @props useProjectDescriptionStepper - The hook that is used for the stepper logic.
+ * @prop body - The body texts that can be stepped through.
+ * @prop header - The header text that is permanently displayed above the body texts.
+ * @prop withAvatar - If set, an avatar image, e.g. person will be displayed beneath.
+ * @prop avatarSrc - Source image file for avatar, if none is set a default avatar will be displayed.
+ * @prop avatarName - Line 1 of avatar description (mostly referred as name).
+ * @prop avatarDescription - Line 2 of avatar description (mostly referred as title/description).
+ * @prop useProjectDescriptionStepper - The hook that is used for the stepper logic.
  * @interface
  */
 type ProjectDescriptionStepperProps = {
@@ -198,17 +198,20 @@ const ProjectDescriptionStepper = ({
                             border: 0
                         }}
                         nextButton={
-                            <Button size="small" onClick={handleNext}
-                                    disabled={activeStep === (props.body && props.body.length - 1)}>
+                            <Button
+                                id="next-button"
+                                size="small"
+                                onClick={handleNext}
+                                disabled={activeStep === (props.body && props.body.length - 1)}>
                                 {t('Next')}
-                                <KeyboardArrowRight/>
+                                <KeyboardArrowRight />
                             </Button>
                         }
                         backButton={
-                            <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                                <KeyboardArrowLeft/>
+                            <Button id="back-button" size="small" onClick={handleBack} disabled={activeStep === 0}>
+                                <KeyboardArrowLeft />
                                 {t('Back')}
-                            </Button>
+                            </Button> 
                         }
                     />
                 </Grid>

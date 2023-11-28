@@ -14,11 +14,11 @@ import {
   Typography
 } from '@common/components'
 import { useTranslation } from 'react-i18next'
-import React, {memo, useCallback, useContext, useMemo, useState} from 'react'
+import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
-import { ButtonStack, MemoTableRowQuestion, SendButton } from './TableCommonComponents'
+import { ButtonStack, MemoTableRowQuestion, SendButton, StartButton, CoverSheet } from './TableCommonComponents'
 import useHandleSend from './Questions.hooks'
-import {ReactJSXElement} from "@emotion/react/types/jsx-namespace";
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 
 type TableRowAnswersProps = {
   t: (key: string) => string
@@ -70,6 +70,7 @@ const MemoTableRowAnswers = memo(
       <TableRow>
         <TableCell>
           <RadioGroup
+            id="list-k-radio-group"
             value={radioButtonGroup}
             data-testid={`ListKQuestionnaireButtonGroup${answerIndex + 1}`}
             onChange={(e) => {
@@ -157,14 +158,14 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
     sendAnswers().then((res) => {
       if (res) {
         addSnackbar({
-          message: t('Data send successfull'),
+          message: t('Data.send.successfull'),
           severity: 'success',
           autoHideDuration: 5000
         })
         setSuccessSend(true)
       } else {
         addSnackbar({
-          message: t('Data send unsuccessfull'),
+          message: t('Data.send.unsuccessfull'),
           severity: 'error',
           autoHideDuration: 5000
         })
@@ -180,7 +181,7 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
   const setRadioButtonGroups = (newActiveStep: number) => {
     setRadioButtonGroup((prevState) => {
       return prevState.map((item, index) => {
-        if (newActiveStep < 7 || index < 4) {
+        if (newActiveStep < 8 || index < 4) {
           return {
             ...item,
             value: setRadioButtonValue(stepsListK[newActiveStep][index])
@@ -294,45 +295,52 @@ export const TableListKQuestions = memo(({ successSend, setSuccessSend, testUnde
 
   return (
     <Box>
-      <Stack direction="column" justifyContent="space-around" alignItems="center">
-        <Typography variant="h6" component={Paper} sx={{ m: 2, p: 2 }}>
-          List-K Questionnaire
-        </Typography>
-      </Stack>
-      <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
-        <ButtonStack
-          activeStep={activeStep}
-          handleNext={handleNext}
-          handleBack={handleBack}
-          steps={8}
-          idType={'ListK'}
-          disabled={activeStep === 7 || isNextDisabled}
+      {activeStep == 0 ? (
+        <CoverSheet
+          header={t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
+          body={t('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')}
         />
-        <Stack direction="column" justifyContent="space-around" alignItems="center">
-          <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
-            <Table style={{ minWidth: '300px' }}>
-              <TableBody key={'TableListK'}>
-                <>
-                  {stepsListK[activeStep].map((page, row) => (
-                    <React.Fragment key={'QuestionnareListK Question: ' + row}>
-                      {activeStep < 7 ? listKQuestionsJsx(row) : row < 4 ? listKQuestionsJsx(row) : undefined}
-                    </React.Fragment>
-                  ))}
-                </>
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <SendButton
-            t={t}
-            handleSend={handleSendClick}
-            isNextDisabled={isNextDisabled}
-            isValid={activeStep === 7}
+      ) : (
+        <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
+          <ButtonStack
+            activeStep={activeStep}
+            handleNext={handleNext}
+            handleBack={handleBack}
+            steps={9}
             idType={'ListK'}
-            isSending={isSending}
-            sendSuccess={successSend}
+            disabled={activeStep === 8 || isNextDisabled}
           />
+          <Stack direction="column" justifyContent="space-around" alignItems="center">
+            <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
+              <Table style={{ minWidth: '300px' }}>
+                <TableBody key={'TableListK'}>
+                  <>
+                    {stepsListK[activeStep].map((page, row) => (
+                      <React.Fragment key={page.questionLabel}>
+                        {activeStep < 8 ? listKQuestionsJsx(row) : row < 4 ? listKQuestionsJsx(row) : undefined}
+                      </React.Fragment>
+                    ))}
+                  </>
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <SendButton
+              t={t}
+              handleSend={handleSendClick}
+              isNextDisabled={isNextDisabled}
+              isValid={activeStep === 8}
+              idType={'ListK'}
+              isSending={isSending}
+              sendSuccess={successSend}
+            />
+          </Stack>
         </Stack>
-      </Stack>
+      )}
+      {activeStep == 0 && (
+        <Stack direction="column" justifyContent="space-around" alignItems="center">
+          <StartButton handleNext={handleNext} />
+        </Stack>
+      )}
     </Box>
   )
 })

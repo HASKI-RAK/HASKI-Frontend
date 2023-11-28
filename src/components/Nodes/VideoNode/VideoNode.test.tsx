@@ -1,7 +1,8 @@
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
 import { render, fireEvent } from '@testing-library/react'
-import { mockReactFlow } from '@mocks'
+import { MemoryRouter } from 'react-router-dom'
 import ReactFlow, { Node } from 'reactflow'
+import { mockReactFlow } from '@mocks'
 import '@testing-library/jest-dom'
 
 describe('VideoNode tests', () => {
@@ -32,7 +33,11 @@ describe('VideoNode tests', () => {
   }
 
   it('renders correctly and can be clicked', () => {
-    const { getByTestId } = render(<ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
+      </MemoryRouter>
+    )
     const VideoNode = getByTestId('videoNode')
 
     expect(VideoNode).toBeInTheDocument()

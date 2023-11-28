@@ -1,6 +1,7 @@
 import {useProjectDescriptionStepper} from './ProjectDescriptionStepper.hooks'
 import {act, fireEvent, render, renderHook, screen} from '@testing-library/react'
 import ProjectDescriptionStepper from './ProjectDescriptionStepper'
+import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
 
 const mockProjectDescriptionStepperProps = {
@@ -27,13 +28,21 @@ describe('Test ProjectDescriptionStepper', () => {
   const testId = 'projectDescriptionStepper';
 
   test('ProjectDescriptionStepper renders without input', () => {
-    const { getByTestId } = render(<ProjectDescriptionStepper />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <ProjectDescriptionStepper />
+      </MemoryRouter>
+    )
     const projectDescriptionStepper = getByTestId(testId)
     expect(projectDescriptionStepper).toBeInTheDocument()
   })
 
   test('ProjectDescriptionCard without input can be scrolled', () => {
-    const { getByTestId } = render(<ProjectDescriptionStepper />)
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <ProjectDescriptionStepper />
+      </MemoryRouter>
+    )
     const projectDescriptionStepper = getByTestId(testId)
     window.dispatchEvent(new Event('scroll'))
     expect(projectDescriptionStepper).toBeInTheDocument()
@@ -41,7 +50,9 @@ describe('Test ProjectDescriptionStepper', () => {
 
   test('ProjectDescriptionCard renders with input', () => {
     const { getByTestId } = render(
-      <ProjectDescriptionStepper {...mockProjectDescriptionStepperProps} />
+      <MemoryRouter>
+       <ProjectDescriptionStepper {...mockProjectDescriptionStepperProps} />
+      </MemoryRouter>
     )
 
     const projectDescriptionStepper = getByTestId(testId)
@@ -59,7 +70,9 @@ describe('Test ProjectDescriptionStepper', () => {
 
   test('ProjectDescriptionCard with input can be scrolled', () => {
     const { getByText } = render(
+      <MemoryRouter>
         <ProjectDescriptionStepper {...mockProjectDescriptionStepperProps} />
+      </MemoryRouter>
     )
 
     act(() => {
@@ -92,7 +105,9 @@ describe('Test ProjectDescriptionStepper', () => {
 
   test('Step through all body texts of ProjectDescriptionStepper', () => {
     const { getByText, getAllByRole } = render(
+      <MemoryRouter>
         <ProjectDescriptionStepper {...mockProjectDescriptionStepperProps} />
+      </MemoryRouter>
     )
 
     act(() => {

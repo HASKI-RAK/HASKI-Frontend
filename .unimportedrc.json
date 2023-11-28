@@ -11,12 +11,12 @@
     "**/*.d.ts"
   ],
   "ignoreUnimported": [
-    "src/components/Nodes/AdditionalLiteratureNode/NodeTypes.ts",
-    "src/components/Nodes/BasicNode/BasicNode.tsx",
-    "src/shared/auto-order-json-translations.ts",
     "src/common/index.ts",
-    "src/index.tsx"
+    "src/components/Nodes/BasicNode/BasicNode.tsx",
+    "src/index.tsx",
+    "src/shared/auto-order-json-translations.js",
+    "src/shared/config.ts"
   ],
   "ignoreUnresolved": [],
-  "ignoreUnused": ["react-flow-renderer", "@nivo/core", "@nivo/tooltip"]
+  "ignoreUnused": ["@nivo/core", "@nivo/tooltip", "i", "react-flow-renderer"]
 }

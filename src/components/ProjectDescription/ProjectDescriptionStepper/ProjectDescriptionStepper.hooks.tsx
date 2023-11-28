@@ -1,11 +1,11 @@
 import {RefObject, useCallback, useMemo, useState} from 'react'
 
 /**
- * @props defaultBodyState - The default value for the body state.
- * @props defaultHeaderState - The default value for the header state.
- * @props defaultAvatarState - The default value for the avatar (picture) state.
- * @props defaultAvatarNameState - The default value for the avatar name state.
- * @props defaultAvatarDescriptionState - The default value for the avatar description state.
+ * @prop defaultBodyState - The default value for the body state.
+ * @prop defaultHeaderState - The default value for the header state.
+ * @prop defaultAvatarState - The default value for the avatar (picture) state.
+ * @prop defaultAvatarNameState - The default value for the avatar name state.
+ * @prop defaultAvatarDescriptionState - The default value for the avatar description state.
  * @category Hooks
  * @interface
  */
@@ -18,26 +18,26 @@ export type useProjectDescriptionStepperHookParams = {
 }
 
 /**
- * @props bodyState - The state that is used to animate the body texts.
- * @props avatarState - The state that is used to animate the avatar picture.
- * @props avatarNameState - The state that is used to animate the avatar name texts.
- * @props avatarDescriptionState - The state that is used to animate the avatar description texts.
- * @props headerState - The state that is used to animate the header text.
- * @props setBodyState - The function that sets the body state.
- * @props setAvatarState - The function that sets the avatar state.
- * @props setAvatarNameState - The function that sets the avatar name state.
- * @props setAvatarDescriptionState - The function that sets the avatar description state.
- * @props setHeaderState - The function that sets the header state.
- * @props animateBody - The function that animates the body texts.
- * @props animateAvatar - The function that animates the avatar picture.
- * @props animateAvatarName - The function that animates the avatar name texts.
- * @props animateAvatarDescription - The function that animates the avatar description texts.
- * @props animateHeader - The function that animates the header text.
- * @props fadeInEffect - The function that realizes the fade in effect for the body.
- * @props fadeInEffectAvatar - The function that realizes the fade in effect for the avatar picture.
- * @props typewriterEffect - The function that realizes the typewriter effect for the header.
- * @props typewriterEffectAN - The function that realizes the typewriter effect for the avatar name.
- * @props typewriterEffectAD - The function that realizes the typewriter effect for the avatar description.
+ * @prop bodyState - The state that is used to animate the body texts.
+ * @prop avatarState - The state that is used to animate the avatar picture.
+ * @prop avatarNameState - The state that is used to animate the avatar name texts.
+ * @prop avatarDescriptionState - The state that is used to animate the avatar description texts.
+ * @prop headerState - The state that is used to animate the header text.
+ * @prop setBodyState - The function that sets the body state.
+ * @prop setAvatarState - The function that sets the avatar state.
+ * @prop setAvatarNameState - The function that sets the avatar name state.
+ * @prop setAvatarDescriptionState - The function that sets the avatar description state.
+ * @prop setHeaderState - The function that sets the header state.
+ * @prop animateBody - The function that animates the body texts.
+ * @prop animateAvatar - The function that animates the avatar picture.
+ * @prop animateAvatarName - The function that animates the avatar name texts.
+ * @prop animateAvatarDescription - The function that animates the avatar description texts.
+ * @prop animateHeader - The function that animates the header text.
+ * @prop fadeInEffect - The function that realizes the fade in effect for the body.
+ * @prop fadeInEffectAvatar - The function that realizes the fade in effect for the avatar picture.
+ * @prop typewriterEffect - The function that realizes the typewriter effect for the header.
+ * @prop typewriterEffectAN - The function that realizes the typewriter effect for the avatar name.
+ * @prop typewriterEffectAD - The function that realizes the typewriter effect for the avatar description.
  * @category Hooks
  * @interface
  */

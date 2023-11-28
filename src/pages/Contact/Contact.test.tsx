@@ -6,6 +6,7 @@ import { FormDataType, SnackbarContext, SnackbarContextType } from '@services'
 import { useContact } from './Contact.hooks'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
+import { getConfig } from '@shared'
 
 /*jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -57,7 +58,9 @@ describe('Test Contactpage', () => {
   test('not sending', () => {
     render(
       <SnackbarContext.Provider value={mockSnackbarContext}>
-        <Contact />
+        <MemoryRouter>
+          <Contact />
+        </MemoryRouter>
       </SnackbarContext.Provider>
     )
     expect(useContact).not.toBeCalled()
@@ -81,7 +84,11 @@ describe('Test Contactpage', () => {
     fireEvent.click(submitButton)
     expect(useContact).toBeCalled()
 
-    render(<Contact />)
+    render(
+      <MemoryRouter>
+        <Contact />
+      </MemoryRouter>
+    )
   })
 
   test('test catch error', async () => {
@@ -92,7 +99,7 @@ describe('Test Contactpage', () => {
         }
       })
     ) as jest.Mock
-    const result = await fetch(process.env.BACKEND + `/contactform`)
+    const result = await fetch(getConfig().BACKEND + `/contactform`)
     expect(result.status).toBe(undefined)
   })
 })
@@ -165,12 +172,14 @@ describe('Test on submit Function', () => {
         const onSubmit = useContact({ setIsLoading: loadingMock })
         return onSubmit
       },
-      { wrapper: ({ children }) => <SnackbarContext.Provider value={my_context}>{children}</SnackbarContext.Provider> }
+      {
+        wrapper: ({ children }) => <SnackbarContext.Provider value={my_context}>{children}</SnackbarContext.Provider>
+      }
     )
 
     const onSubmit = result.result.current
 
-    mockServices.getUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('get User failed')))
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('get User failed')))
 
     await act(async () => {
       onSubmit.onSubmitHandler(testData)
@@ -183,7 +192,7 @@ describe('Test on submit Function', () => {
     })
 
     expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
-    expect(loadingMock).lastCalledWith(true)
+    expect(loadingMock).lastCalledWith(false)
   })
 
   test('Fetch throws an error, Snackbar error', async () => {
@@ -191,8 +200,8 @@ describe('Test on submit Function', () => {
       throw new Error('Error')
     }) as jest.Mock*/
 
-    // When running the whole suite, getUser gets overwritten by previous test.
-    mockServices.getUser = jest.fn().mockImplementationOnce(() =>
+    // When running the whole suite, fetchUser gets overwritten by previous test.
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
       Promise.resolve({
         id: 1,
         lms_user_id: 1,
@@ -241,6 +250,6 @@ describe('Test on submit Function', () => {
     })
 
     expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
-    expect(loadingMock).lastCalledWith(true)
+    expect(loadingMock).lastCalledWith(false)
   })
 })

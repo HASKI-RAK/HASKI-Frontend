@@ -223,7 +223,6 @@ const ResultDescriptionListK = ({ data }: ResultDescriptionListKProps) => {
   const criticalReview = data.crit_rev
   const repeat = data.rep
   const attention = data.att
-  const effort = data.eff
   const time = data.time
   const goalsPlans = data.goal_plan
   const control = data.con

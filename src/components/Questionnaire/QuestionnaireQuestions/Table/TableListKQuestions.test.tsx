@@ -3,6 +3,7 @@ import { TableListKQuestions } from './TableListKQuestions'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import { mockServices } from 'jest.setup'
+import { MemoryRouter } from 'react-router-dom'
 
 const mockNavigate = jest.fn()
 
@@ -26,7 +27,17 @@ describe('TableListKQuestions', () => {
   const setSuccessSend = jest.fn((successSend) => successSend)
 
   test('ListK RadioButtons can be checked', () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId, getByText } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
       'input[type="radio"]'
@@ -61,7 +72,17 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK next Button is enabled, when all radioButtons are selected', () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId, getByText } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -95,7 +116,17 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK next Button is enabled, when all radioButtons are selected (2 Pages)', () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId, getByText } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
@@ -159,7 +190,17 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK next Button is disabled, when not all radioButtons are selected', () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId, getByText } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
@@ -190,7 +231,17 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK values are stored', () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId, getByText } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-1'
     const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableListKQuestions.Answer-2'
@@ -207,7 +258,7 @@ describe('TableListKQuestions', () => {
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
       'input[type="radio"]'
@@ -315,16 +366,26 @@ describe('TableListKQuestions', () => {
     expect(RadioButton5Back.checked).toBe(true)
     expect(RadioButton5Back.value).toBe(ValuePage1RadioButton5)
     expect(nextButton).toBeEnabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
   })
 
   test('ListK values can be send', async () => {
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId, getByText } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     for (let i = 0; i < 8; i++) {
       if (i < 7) {
@@ -409,12 +470,22 @@ describe('TableListKQuestions', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
 
-    const { getByTestId } = render(<TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />)
+    const { getByTestId, getByText } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     for (let i = 0; i < 8; i++) {
       if (i < 7) {
@@ -491,14 +562,22 @@ describe('TableListKQuestions', () => {
   })
 
   test('ListK Questions are undefined (40 instead of 39 questions)', async () => {
-    const { getByTestId } = render(
-      <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} testUndefined={true} />
+    const { getByTestId, getByText } = render(
+      <MemoryRouter>
+        <TableListKQuestions successSend={successSend} setSuccessSend={setSuccessSend} testUndefined={true} />
+      </MemoryRouter>
     )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
     const backButton = getByTestId('backButtonListKQuestionnaire')
     expect(nextButton).toBeDisabled()
-    expect(backButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
 
     for (let i = 0; i < 8; i++) {
       if (i < 7) {

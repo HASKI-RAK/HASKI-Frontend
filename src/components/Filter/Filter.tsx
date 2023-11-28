@@ -81,6 +81,7 @@ const Filter = (props: FilterProps) => {
             <Typography>{props.label}</Typography>
           </InputLabel>
           <Select
+            id="filter-select"
             multiple
             name="selectedOptions"
             value={props.selectedOptions}
@@ -91,7 +92,7 @@ const Filter = (props: FilterProps) => {
             renderValue={renderValue}
             MenuProps={MenuProps}>
             {props.options?.map((option) => (
-              <MenuItem key={option} value={option}>
+              <MenuItem id={option.concat('-menu-item')} key={option} value={option}>
                 <Checkbox checked={props.selectedOptions && props.selectedOptions.indexOf(option) >= 0} />
                 <ListItemText primary={option} />
               </MenuItem>

@@ -1,3 +1,4 @@
+import { getConfig } from '@shared'
 import { getData } from '../RequestResponse'
 
 /**
@@ -19,7 +20,7 @@ export const postContactForm = async (
   userId?: number,
   lmsUserId?: number
 ): Promise<Response> => {
-  const response = await fetch(process.env.BACKEND + `/user/${userId}/${lmsUserId}/contactform`, {
+  const response = await fetch(getConfig().BACKEND + `/user/${userId}/${lmsUserId}/contactform`, {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify(responseBody),

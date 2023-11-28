@@ -1,1 +1,1 @@
-export { getLearningPathElement } from './getLearningPathElement'
+export { fetchLearningPathElement } from './fetchLearningPathElement'

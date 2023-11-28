@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { Link, Skeleton, Typography } from '@common/components'
 import { useLearningPathElement as _useLearningPathElement } from './LocalNav.hooks'
 import { LearningPathElement, Topic } from '@core'
+import { Theme } from '@common/theme'
 
 /**
  * @prop {@link Topic} to be displayed
@@ -47,6 +48,7 @@ const LazyLoadingLearningPathElement = ({
       {learningPaths?.path.map((learningElement) => (
         <Typography variant="body1" key={learningElement.learning_element.name}>
           <Link
+            id={learningElement.learning_element.name.concat('-link')}
             data-testid={learningElement.learning_element.name}
             underline="hover"
             variant="body2"
@@ -55,10 +57,10 @@ const LazyLoadingLearningPathElement = ({
               cursor: 'pointer',
               padding: '8px',
               borderRadius: 10,
-              '&:hover': { backgroundColor: (theme) => theme.palette.primary.main }
+              '&:hover': { backgroundColor: (theme: Theme) => theme.palette.primary.main }
             }}
             onClick={() => {
-              navigate(`/topics/${topic.name}/${learningElement.learning_element.name}`)
+              navigate(`/course/${courseId}/topic/${topic.id}`)
             }}>
             {learningElement.position} {learningElement.learning_element.name}
           </Link>

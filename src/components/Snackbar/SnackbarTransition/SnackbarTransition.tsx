@@ -3,10 +3,10 @@ import { SeverityType } from '@components'
 import { memo } from 'react'
 
 /**
- * @props children - The child element to be transitioned.
- * @props in - The condition for the transition to be triggered.
- * @props severity - The severity that determines the transition type.
- * @props timeout - The duration of the transition.
+ * @prop children - The child element to be transitioned.
+ * @prop in - The condition for the transition to be triggered.
+ * @prop severity - The severity that determines the transition type.
+ * @prop timeout - The duration of the transition.
  * @interface
  */
 export type SnackbarTransitionProps = {

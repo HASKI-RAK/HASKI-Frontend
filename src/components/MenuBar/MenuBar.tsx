@@ -15,7 +15,9 @@ import {
   Popover,
   Divider,
   ListItemIcon,
-  Link
+  Link,
+  ImageWrapper,
+  TextWrapper
 } from '@common/components'
 
 import {
@@ -72,8 +74,8 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const { t } = useTranslation()
   const [loadingTopics, setLoadingTopics] = useState(true)
   const [topicsPath, setTopicsPath] = useState<Topic[]>([])
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
-  const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
@@ -132,22 +134,32 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleOpenTopicsMenu = async (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElTopics(event.currentTarget)
-    fetchUser().then((user) => {
-      fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
-        .then((TopicResponse) => {
-          setTopicsPath(TopicResponse.topics)
-          setLoadingTopics(false)
-        })
-        .catch((error) => {
-          // 🍿 snackbar error
-          addSnackbar({
-            message: error.message,
-            severity: 'error',
-            autoHideDuration: 5000
+    getUser()
+      .then((user) => {
+        getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
+          .then((TopicResponse) => {
+            setTopicsPath(TopicResponse.topics)
+            setLoadingTopics(false)
           })
-          log.error(error.message)
+          .catch((error) => {
+            // 🍿 snackbar error
+            addSnackbar({
+              message: error.message,
+              severity: 'error',
+              autoHideDuration: 5000
+            })
+            log.error(error.message)
+          })
+      })
+      .catch((error) => {
+        // 🍿 snackbar error
+        addSnackbar({
+          message: error.message,
+          severity: 'error',
+          autoHideDuration: 5000
         })
-    })
+        log.error(error.message)
+      })
   }
 
   const handleCloseTopicsMenu = () => {
@@ -164,7 +176,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   return (
     <AppBar position="static">
       <Toolbar disableGutters>
-        <Box
+        <ImageWrapper
           component="img"
           sx={{
             mt: 2,
@@ -189,7 +201,8 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               textAlign: 'center',
               display: { xs: 'none', md: 'flex' }
             }}>
-            <Typography
+            <TextWrapper
+              id="HASKI-text-menu-bar"
               variant="h6"
               noWrap
               component="a"
@@ -204,11 +217,12 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               }}
               onClick={() => navigate('/')}>
               HASKI
-            </Typography>
+            </TextWrapper>
             {courseSelected && (
               <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
                 <Tooltip title="Open topics">
                   <Button
+                    id="topics-button"
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
                     onClick={handleOpenTopicsMenu}
@@ -221,7 +235,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   </Button>
                 </Tooltip>
                 <Popover
-                  id="menu-appbar"
+                  id="topics-popover"
                   data-testid={'Menubar-TopicPopover'}
                   anchorEl={anchorElTopics}
                   anchorOrigin={{
@@ -248,6 +262,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                             <>
                               <Grid item xs={12} key={t(topic.name)}>
                                 <Link
+                                  id={topic.name.concat('-link')}
                                   key={topic.name}
                                   data-testid={`Menubar-Topic-${topic.name}`}
                                   underline="hover"
@@ -292,7 +307,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           {/** Questionnaire Results */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openQuestionnaireResults')}>
-              <IconButton onClick={() => setModalOpen(true)}>
+              <IconButton id="modal-icon-button" onClick={() => setModalOpen(true)}>
                 <Analytics data-testid="QuestionnaireResultsIcon" />
               </IconButton>
             </Tooltip>
@@ -303,6 +318,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('help')}>
               <IconButton
+                id="manual-icon-button"
                 onClick={() => {
                   window.open('/files/Bedienungsanleitung_von_HASKI_Alpha.pdf', '_blank')
                 }}>
@@ -315,6 +331,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openGlobalSettings')}>
               <IconButton
+                id="global-settings-icon-button"
                 onClick={() => {
                   addSnackbar({
                     message: t('components.MenubBar.GlobalSettings.Error'),
@@ -330,7 +347,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openSettings')}>
-              <IconButton onClick={handleOpenUserMenu} data-testid="useravatar">
+              <IconButton id="account-icon-button" onClick={handleOpenUserMenu} data-testid="useravatar">
                 <Avatar alt="Remy Sharp">
                   <Person />
                 </Avatar>
@@ -338,7 +355,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
-              id="menu-appbar"
+              id="account-menu"
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
@@ -351,10 +368,18 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
-              <MenuItem data-testid="questionnaireILS" key="questionnaireILS" onClick={() => handleOpenILSLongModal()}>
-                <ListItemIcon>{isAuth && <LibraryBooksOutlined fontSize="small" />}</ListItemIcon>
-                <Typography textAlign="center">{isAuth && 'ILS Questionnaire'}</Typography>
-              </MenuItem>
+              {isAuth && (
+                <MenuItem
+                  id="ils-long-menu-item"
+                  data-testid="questionnaireILS"
+                  key="questionnaireILS"
+                  onClick={() => handleOpenILSLongModal()}>
+                  <ListItemIcon>
+                    <LibraryBooksOutlined fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{'ILS Questionnaire'}</Typography>
+                </MenuItem>
+              )}
               <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
                 <TableILSQuestions
                   ilsLong={true}
@@ -363,15 +388,20 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                 />
               </QuestionnaireQuestionsModal>
 
-              <MenuItem
-                data-testid="questionnaireILSshort"
-                key="questionnaireILSshort"
-                onClick={() => {
-                  handleOpenILSShortModal()
-                }}>
-                <ListItemIcon>{isAuth && <AssignmentOutlined fontSize="small" />}</ListItemIcon>
-                <Typography textAlign="center">{isAuth && 'ILS Questionnaire shortend'}</Typography>
-              </MenuItem>
+              {isAuth && (
+                <MenuItem
+                  id="ils-short-menu-item"
+                  data-testid="questionnaireILSshort"
+                  key="questionnaireILSshort"
+                  onClick={() => {
+                    handleOpenILSShortModal()
+                  }}>
+                  <ListItemIcon>
+                    <AssignmentOutlined fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{'ILS Questionnaire shortend'}</Typography>
+                </MenuItem>
+              )}
               <QuestionnaireQuestionsModal open={modalOpenILSShort} handleClose={handleCloseILSShortModal}>
                 <TableILSQuestions
                   ilsLong={false}
@@ -380,18 +410,24 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                 />
               </QuestionnaireQuestionsModal>
 
-              <MenuItem
-                data-testid="questionnaireListk"
-                key="questionnaireListk"
-                onClick={() => handleOpenListKModal()}>
-                <ListItemIcon>{isAuth && <PlaylistAddCheckCircleOutlined fontSize="small" />}</ListItemIcon>
-                <Typography textAlign="center">{isAuth && 'List-K Questionnaire'}</Typography>
-              </MenuItem>
+              {isAuth && (
+                <MenuItem
+                  id="list-k-menu-item"
+                  data-testid="questionnaireListk"
+                  key="questionnaireListk"
+                  onClick={() => handleOpenListKModal()}>
+                  <ListItemIcon>
+                    <PlaylistAddCheckCircleOutlined fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{'List-K Questionnaire'}</Typography>
+                </MenuItem>
+              )}
               <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>
                 <TableListKQuestions successSend={successSendListK} setSuccessSend={setSuccessSendListK} />
               </QuestionnaireQuestionsModal>
 
               <MenuItem
+                id="login-logout-menu-item"
                 data-testid="usermenuitem"
                 key="usermenuitem"
                 onClick={() => {

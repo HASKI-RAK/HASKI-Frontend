@@ -1,4 +1,4 @@
-import {memo, useCallback, useEffect, useRef} from 'react'
+import { useRef, useEffect, useCallback, memo, ReactNode } from 'react'
 import MediaQuery from 'react-responsive'
 import {Divider, Fade, Grid, Typography} from '@common/components'
 import {
@@ -8,16 +8,16 @@ import {
 } from './ProjectDescriptionCard.hooks'
 
 /**
- * @props body - The body text that is displayed on the bottom left side.
- * @props children - The child element that is displayed on the right side.
- * @props header - The header text that is displayed on the top left side.
- * @props isLeft - The child element and separator gets displayed on left side instead of right
- * @props useProjectDescriptionCard - The hook that is used for the card logic.
+ * @prop body - The body text that is displayed on the bottom left side.
+ * @prop children - The child element that is displayed on the right side.
+ * @prop header - The header text that is displayed on the top left side.
+ * @prop isLeft - The child element and separator gets displayed on left side instead of right
+ * @prop useProjectDescriptionCard - The hook that is used for the card logic.
  * @interface
  */
 type ProjectDescriptionCardProps = {
   body?: string
-  children?: React.ReactNode
+  children?: ReactNode
   header?: string
   isLeft?: boolean
   useProjectDescriptionCard?: (params?: useProjectDescriptionCardHookParams) => ProjectDescriptionCardHookReturn

@@ -24,8 +24,8 @@ export const Home = () => {
   const [courses, setCourses] = useState<Course[]>([])
 
   // Store
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
-  const fetchCourses = useStore((state) => state.fetchCourses)
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getCourses = useStore((state) => state.getCourses)
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
@@ -34,15 +34,15 @@ export const Home = () => {
     const loadData = async () => {
       if (authcontext.isAuth) {
         clearTimeout(preventEndlessLoading)
-        fetchUser()
+        getUser()
           .then((user) => {
-            fetchCourses(user.settings.user_id, user.lms_user_id, user.id)
+            getCourses(user.settings.user_id, user.lms_user_id, user.id)
               .then((CourseResponse) => {
                 setCourses(CourseResponse.courses)
               })
               .catch((error) => {
                 addSnackbar({
-                  message: t('Courses fetching error'),
+                  message: t('Courses.fetching.error'),
                   severity: 'error',
                   autoHideDuration: 5000
                 })
@@ -51,7 +51,7 @@ export const Home = () => {
           })
           .catch((error) => {
             addSnackbar({
-              message: t('User fetching error'),
+              message: t('User.fetching.error'),
               severity: 'error',
               autoHideDuration: 5000
             })
@@ -84,12 +84,13 @@ export const Home = () => {
           ) : (
             courses.map((course) => {
               return (
-                <Card key={course.id}>
+                <Card key={course.id} sx={{ mb: '1rem' }}>
                   <CardContent>
                     <Typography variant="h5">{course.name}</Typography>
                     <Typography variant="body1">{course.university}</Typography>
                     <Stack direction="row" justifyContent="center">
                       <Button
+                        id="course-button"
                         variant="contained"
                         color="primary"
                         onClick={() => {

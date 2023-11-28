@@ -37,7 +37,7 @@ export const Course = () => {
   }, [])
 
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} sx={{ ml: '1rem', mr: '1rem' }}>
       {loading ? (
         <Box>
           <Stack spacing={1}>
@@ -53,6 +53,7 @@ export const Course = () => {
                   <Typography variant="h5">{topic.name}</Typography>
                   <Typography variant="body1">{topic.lms_id}</Typography>
                   <Button
+                    id={topic.name.concat('-button')}
                     variant="contained"
                     data-testid={'Course-Card-Topic-' + topic.name}
                     color="primary"

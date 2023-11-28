@@ -142,7 +142,11 @@ describe('LocalNav tests', () => {
       useLearningPathElement: mockUseLearningPathElement
     }
 
-    const { getAllByTestId } = render(<LocalNav {...props} />)
+    const { getAllByTestId } = render(
+      <MemoryRouter>
+        <LocalNav {...props} />
+      </MemoryRouter>
+    )
 
     const topicAccordions = getAllByTestId(/topic-Accordion/)
     expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
@@ -173,7 +177,11 @@ describe('LocalNav tests', () => {
       useLearningPathElement: mockUseLearningPathElement
     }
 
-    const result = render(<LocalNav {...props} />)
+    const result = render(
+      <MemoryRouter>
+        <LocalNav {...props} />
+      </MemoryRouter>
+    )
     expect(result).toBeTruthy()
   })
 
@@ -193,7 +201,11 @@ describe('LocalNav tests', () => {
       useLearningPathElement: mockUseLearningPathElement
     }
 
-    const { getAllByTestId } = render(<LocalNav {...props} />)
+    const { getAllByTestId } = render(
+      <MemoryRouter>
+        <LocalNav {...props} />
+      </MemoryRouter>
+    )
 
     const topicAccordions = getAllByTestId(/topic-Accordion/)
     expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
@@ -274,7 +286,7 @@ describe('LocalNav tests', () => {
 })
 
 describe('getSortedLearningPath works as expected', () => {
-  const mockFetchLearningPathElement = jest.fn().mockResolvedValue({
+  const mockGetLearningPathElement = jest.fn().mockResolvedValue({
     id: 99999,
     course_id: 99999,
     based_on: 'mock LearningPathElement',
@@ -340,7 +352,7 @@ describe('getSortedLearningPath works as expected', () => {
       mockStudentId,
       mockTopic,
       '2',
-      mockFetchLearningPathElement
+      mockGetLearningPathElement
     )
     expect(result).toEqual({
       id: 99999,
@@ -375,7 +387,7 @@ describe('getSortedLearningPath works as expected', () => {
         }
       ]
     })
-    expect(mockFetchLearningPathElement).toHaveBeenCalledWith(
+    expect(mockGetLearningPathElement).toHaveBeenCalledWith(
       mockUserId,
       mockLmsUserId,
       mockStudentId,
@@ -563,9 +575,9 @@ describe('useLearningPathTopic', () => {
   })
 
   test('fetch learningPathTopics fails', async () => {
-    mockServices.getLearningPathTopic = jest
+    mockServices.fetchLearningPathTopic = jest
       .fn()
-      .mockImplementationOnce(() => Promise.reject(new Error('getLearningPathTopic failed')))
+      .mockImplementationOnce(() => Promise.reject(new Error('fetchLearningPathTopic failed')))
 
     act(() => {
       const { result } = renderHook(() => useLearningPathTopic('2'))
@@ -594,9 +606,9 @@ describe('useLearningPathTopic', () => {
         visits: ['string']
       }
     }
-    mockServices.getLearningPathElement = jest
+    mockServices.fetchLearningPathElement = jest
       .fn()
-      .mockImplementationOnce(() => Promise.reject(new Error('getLearningPathElement failed')))
+      .mockImplementationOnce(() => Promise.reject(new Error('fetchLearningPathElement failed')))
 
     act(() => {
       const { result } = renderHook(() => useLearningPathElement(mockTopic, '2'))
