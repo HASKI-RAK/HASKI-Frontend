@@ -1,8 +1,8 @@
 /**
  * # answered
  * @remarks
- * The "answered" verb is used to indicate that the user answered something.
- * The user answered a questions, h5p-questions, etc.
+ * The "answered" verb is used to indicate that the user answered something,
+ * such as a question, h5p-question, etc.
  *
  * @example
  *  "verb": {
@@ -15,6 +15,4 @@
  * @category verbs
  */
 
-const answered = 'verbs/answered'
-
-export default answered
+export default 'verbs/answered'

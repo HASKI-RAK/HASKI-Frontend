@@ -1,7 +1,7 @@
 /**
  * # started
  * @remarks
- * The "started" verb is used to indicate that the user started something.
+ * The verb "started" is used to indicate that the user has started something.
  *
  * @example
  * "verb": {
@@ -14,6 +14,4 @@
  * @category verbs
  */
 
-const started = 'verbs/started'
-
-export default started
+export default 'verbs/started'

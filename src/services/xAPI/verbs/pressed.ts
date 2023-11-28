@@ -1,11 +1,11 @@
 /**
  * # pressed
  * @remarks
- * The "pressed" verb is used to indicate that the user pressed something.
- * Peripherals such as keyboards, gamepads, and joysticks are common sources of this verb.
- * The user pressed the "s" key.
- * The user pressed the left button on the mouse.
-
+ * The verb "pressed" is used to indicate that the user has pressed something,
+ * such as the "s" key or the left button on a mouse.
+ * Peripherals such as keyboards, gamepads,
+ * and joysticks are common sources of this verb.
+ *
  * @example
  * "verb": {
  *     "id": "https://wiki.haski.app/variables/xapi.pressed",
@@ -17,6 +17,4 @@
  * @category verbs
  */
 
-const pressed = 'verbs/pressed'
-
-export default pressed
+export default 'verbs/pressed'

@@ -1,8 +1,8 @@
 /**
  * # selected
  * @remarks
- * The "answered" verb is used to indicate that the user answered something.
- * The user answered a questions, h5p-questions, etc.
+ *  The verb "selected" is used to indicate that the user has selected something,
+ *  such as an answer to a question, checkboxes or radio buttons.
  *
  * @example
  * "verb": {
@@ -15,6 +15,4 @@
  * @category verbs
  */
 
-const selected = 'verbs/selected'
-
-export default selected
+export default 'verbs/selected'

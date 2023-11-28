@@ -1,8 +1,8 @@
 /**
  * # clicked
  * @remarks
- * The "clicked" verb is used to indicate that the user clicked on something.
- * The user clicked on the button, h5p, box, etc.
+ * The verb "clicked" is used to indicate that the user has clicked on something,
+ * such as a button, h5p or box.
  *
  * @example
  * "verb": {
@@ -15,6 +15,4 @@
  * @category verbs
  */
 
-const clicked = 'verbs/clicked'
-
-export default clicked
+export default 'verbs/clicked'
