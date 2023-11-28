@@ -61,13 +61,8 @@ export const fetchData = async <T>(input: RequestInfo | URL, init?: RequestInit 
     else throw new Error(`HTTP error${response.status}`)}).catch((error)=>{
       throw new Error(error)
     })
-    
   const contentData = content<T>(response)
-  if (response.ok) return contentData
-  else {
-    const data: ErrorRequestResponse = await content<ErrorRequestResponse>(response)
-    throw new Error(data.message)
-  }
+  return contentData
 }
 
 const content = async <T>(response: Response): Promise<T> => {
@@ -77,7 +72,6 @@ const content = async <T>(response: Response): Promise<T> => {
     try {
       return (await response.text()) as unknown as T
     } catch (error) {
-      // If response data is empty, return undefined
       if (response.data === undefined) return undefined as unknown as T
       else throw new Error(`Content-Type ${response.headers.get('Content-Type')} is not supported`)
     }
