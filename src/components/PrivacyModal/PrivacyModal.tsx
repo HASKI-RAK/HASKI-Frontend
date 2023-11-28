@@ -102,7 +102,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                       control={<Checkbox />}
                       label={
                         <>
-                          {t('components.PrivacyModal.readPrivacypolicy')}
+                          {t('components.PrivacyModal.readPrivacypolicy') + ' \n'}
                           <Link
                             marginX="0.2em"
                             component="button"

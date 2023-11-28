@@ -4,23 +4,20 @@
 	"appGlobal.dataSendSuccessful": "Send.dataSuccessfully",
 	"appGlobal.dataSendUnsuccessful": "Data could not be sent",
 	"appGlobal.decline": "Decline",
-	"appGlobal.dot": ".",
 	"appGlobal.help": "Help",
 	"appGlobal.loading": "Loading...",
 	"appGlobal.next": "Next",
 	"appGlobal.send": "Send",
 	"appGlobal.topics": "Topics",
 	"appGlobal.universityKempten": "University of Applied Sciences Kempten",
-	"component.ContactForm.topic": "Topic",
 	"components.ContactForm.briefDescription": "Give a brief description of your request",
 	"components.ContactForm.contactform": "Contactform",
-	"components.ContactForm.design": "Design",
 	"components.ContactForm.error": "Missing description. Please write something.",
 	"components.ContactForm.errorSelect": "Missing topic. Please select something.",
-	"components.ContactForm.learningelement": "Learningelement",
 	"components.ContactForm.reportType": "Reporttype",
 	"components.ContactForm.submit": "Submit",
 	"components.ContactForm.submitError": "The submit function has been called and an error occurred.",
+	"components.ContactForm.topic": "Topic",
 	"components.ContactForm.topics": [
 		{
 			"value": "le",
@@ -61,7 +58,6 @@
 			"label": "other"
 		}
 	],
-	"components.ContactForm.ui": "UI",
 	"components.Footer.project": "Project",
 	"components.ListKQuestions": [
 		[
@@ -493,7 +489,7 @@
 	"components.PrivacyModal.accepted": "Thank you for your trust. Data to improve your learning experience is now being collected.",
 	"components.PrivacyModal.afterReading": "HASKI is using essential cookies. Further information about the collected data and its usage can be found in the privacy policy:",
 	"components.PrivacyModal.declined": "You cannot access HASKI without accepting the essential cookies.",
-	"components.PrivacyModal.readPrivacypolicy": "I have read the \n",
+	"components.PrivacyModal.readPrivacypolicy": "I have read the",
 	"components.PrivacyModal.readPrivacyPolicy-2": "",
 	"components.PrivacyModal.returnToMoodle": "This will redirect you to Moodle",
 	"components.PrivacyModal.termsOfService": "Terms of service and privacy policy",

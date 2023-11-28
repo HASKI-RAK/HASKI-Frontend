@@ -4,21 +4,20 @@
 	"appGlobal.dataSendSuccessful": "Daten wurden erfolgreich gesendet",
 	"appGlobal.dataSendUnsuccessful": "Daten konnten nicht gesendet werden",
 	"appGlobal.decline": "Ablehnen",
-	"appGlobal.dot": ".",
 	"appGlobal.help": "Hilfe",
 	"appGlobal.loading": "Lade...",
 	"appGlobal.next": "Weiter",
 	"appGlobal.send": "Senden",
 	"appGlobal.topics": "Themenbereiche",
 	"appGlobal.universityKempten": "Hochschule Kempten",
-	"component.ContactForm.topic": "Themenbereich",
 	"components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
 	"components.ContactForm.contactform": "Kontaktformular",
 	"components.ContactForm.error": "Es fehlt eine Beschreibung.",
 	"components.ContactForm.errorSelect": "Es wurde kein Thema ausgewählt.",
 	"components.ContactForm.reportType": "Reporttyp",
 	"components.ContactForm.submit": "Abschicken",
-	"components.ContactForm.submitError": "Die submit funktion wurde aufgerufen, jedoch gab es einen Fehler.",
+	"components.ContactForm.submitError": "Die Submit-Funktion wurde aufgerufen, jedoch gab es einen Fehler.",
+	"components.ContactForm.topic": "Themenbereich",
 	"components.ContactForm.topics": [
 		{
 			"value": "le",
@@ -490,38 +489,10 @@
 	"components.PrivacyModal.accepted": "Danke für Ihr Vertrauen. Daten werden jetzt gesammelt, um Ihnen eine bessere Lernerfahrung zu bieten.",
 	"components.PrivacyModal.afterReading": "HASKI verwendet essentielle Cookies. Weitere Informationen über die gesammelten Daten und deren Verwendung können in der Datenschutzerklärung nachgelesen werden:",
 	"components.PrivacyModal.declined": "Sie können HASKI nicht verwenden, ohne den essentiellen Cookies zuzustimmen.",
-	"components.PrivacyModal.readPrivacypolicy": "Ich habe die \n",
+	"components.PrivacyModal.readPrivacypolicy": "Ich habe die",
 	"components.PrivacyModal.readPrivacyPolicy-2": "gelesen",
 	"components.PrivacyModal.returnToMoodle": "Dies wird Sie zu Moodle weiterleiten",
 	"components.PrivacyModal.termsOfService": "Nutzungsbedingungen und Datenschutzerklärung",
-	"components.ProjectDescriptionContent.advantagesLearningBody": "Die Unterstützung wird ermöglicht, indem das HASKI-System Deine Daten aus Moodle ausliest und ein KI-Algorithmus auf Basis dieser Daten Dir einen personalisierten Lernpfad durch die Lernmaterialien vorschlägt. Natürlich bleibt die Entscheidung bei Dir, welches Material Du als Nächstes bearbeiten willst. Auch diese Präferenzen merkt sich HASKI und passt zukünftige Vorschläge an die neuen Begebenheiten an.",
-	"components.ProjectDescriptionContent.advantagesLearningBody2": "Die Datenbasis sind Fragebögen, individueller Wissensstand, ausgewertete Aufgaben und Verhaltensdaten aus Moodle. Ein Rückschluss der Lehrenden auf Dich wird durch Anonymisierung der Daten verhindert.",
-	"components.ProjectDescriptionContent.advantagesLearningHeader": "Vorteile für Dich im Studium",
-	"components.ProjectDescriptionContent.advantagesLearningHeader2": "Mit welchen Daten arbeitet HASKI?",
-	"components.ProjectDescriptionContent.advantagesTeachingBody": "Das HASKI-System möchte einen wichtigen Beitrag dazu leisten, interaktives, individuelles und selbstgesteuertes Lernen in der Hochschullehre besser zu etablieren. Digitale Medien und Plattformen können weit mehr gewährleisten als die derzeitige Praxis der Hochschullehre, in der auch im Zuge der Pandemie der Frontalunterricht dominiert.",
-	"components.ProjectDescriptionContent.advantagesTeachingBody2": "Die Idee von HASKI ist es, das Potenzial von KI in den Veranstaltungen der Hochschule Kempten zu nutzen. Kombiniert werden dazu die Präsenzveranstaltungen, das Learning Management System (z. B. Moodle) und das HASKI-System. Damit bieten wir eine Software-Komponente, die mithilfe von KI-Algorithmen Dich bei dem Erreichen Deiner Lernziele unterstützt.",
-	"components.ProjectDescriptionContent.advantagesTeachingHeader": "Vorteile für die Hochschullehre",
-	"components.ProjectDescriptionContent.advantagesTeachingHeader2": "Einsatz in der Hochschullehre",
-	"components.ProjectDescriptionContent.approachesBody": [
-		"Bundesweiter Austausch. Publikation von wissenschaftlichen Beiträgen. Vorträge auf deutschen Konferenzen.",
-		"Applikation von modernster Technologie. Kombination von Learning Analytics und Künstlicher Intelligenz.",
-		"Empirische Untersuchungen. Online-Fragebögen, Evaluationsstudien, Datenanalysen."
-	],
-	"components.ProjectDescriptionContent.approachesHeader": "Was ist unser Ansatz?",
-	"components.ProjectDescriptionContent.goalsBody": [
-		"Verbesserung und Erweiterung von bisherigen Kursen im Bereich „Software Engineering“, durch Produktion von qualitativ hochwertigen, pädagogisch sinnvollen und abwechslungsreichen Lerninhalten",
-		"Umfassende digitale Repräsentation von einzelnen Studierenden und deren Charakteristiken",
-		"Entwicklung eines adaptiven und KI-basierten Lernsystems zur Generierung von personalisierten Lernpfadempfehlungen",
-		"KI-basierte Auswertung von Aufgaben und hilfreiches Feedback",
-		"Visualisierung und Aufbereitung von Learning Analytics zur Reflektion des Lernverhaltens",
-		"Didaktisch relevante Berichte für Lehrende zur Weiterentwicklung von Kursen"
-	],
-	"components.ProjectDescriptionContent.goalsHeader": "Ziele des HASKI Projekts",
-	"components.ProjectDescriptionContent.imageSource1": "Bild von katemangostar auf Freepik",
-	"components.ProjectDescriptionContent.imageSource2": "Bild von natanaelginting auf Freepik",
-	"components.ProjectDescriptionContent.imageSources": "Bildquellen: ",
-	"components.ProjectDescriptionContent.introductionBody": "HASKI steht für „Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt“ und wird gefördert durch das Bundesministerium für Bildung und Forschung mit einer Projektlaufzeit bis Dezember 2025. HASKI ist ein Verbundprojekt von drei bayerischen Hochschulen: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
-	"components.ProjectDescriptionContent.introductionHeader": "Was ist HASKI?",
 	"components.QuestionnaireResultsModal.ilsLongNoData-1": "ILS-Fragebogen",
 	"components.QuestionnaireResultsModal.ilsShortNoData-1": "ILS-Fragebogen (Kurz)",
 	"components.QuestionnaireResultsModal.ilsShortNoData-2": "oder",
@@ -1489,6 +1460,13 @@
 			"fundamental": false
 		},
 		{
+			"term": "Lerner-Effizienz",
+			"definition": "Lerneffizienz ist ein Grad der Entwicklung in Bezug auf Gesamtleistungspräzision und Geschwindigkeit pro Studienzeit. https://www.ilearnlot.com/what-is-the-meaning-of-learning-efficiency/66945/",
+			"sources": "",
+			"tags": [],
+			"fundamental": false
+		},
+		{
 			"term": "Lernelement - LE",
 			"definition": "Lernelemente (engl. learning element) dienen der Kompetenzentwicklung der Lernenden und werden diesen in Lernräumen zur Verfügung gestellt. Sie treten als verbale Elemente (schriftliche Texte, Hypertexte, gesprochene Sprache) und/oder visuelle Elemente (statische oder bewegte Bilder) in Erscheinung und/oder haben interaktive Darstellungsformen (Simulationen, Spiele, 3D) (vgl. Arnold 2011, S. 138; Bartel, Dörringer & Klopp 2022, S.1). In der Hierarchie des Domänenmodells siedeln sich Lernelemente auf der untersten Stufe an und sind in Lernräumen verortet. Lernelemente können in unterschiedliche Klassifikationsarten differenziert werden.",
 			"sources": "Arnold 2011, S. 138; Bartel, Dörringer & Klopp 2022, S.1",
@@ -1499,6 +1477,13 @@
 			"term": "Lernempfehlung",
 			"definition": "Das HASKI-System kann Lernempfehlungen aufgrund von Daten des/der individuellen Lerner*in und der Struktur des Domänenmodells kommunizieren und so bei der Entscheidung im Hinblick auf den weiteren Lernweg unterstützen. Das geschieht durch ein visuelles Hervorheben der empfohlenen Lernelemente (vgl. Raj & Renumol 2022, S.114). Das Tutorielle Modell des HASKI-Systems füllt den Adaptionsmechanismus mit den Daten aus dem Lernenden Modell und dem Domänen-Modell um dann individualisierte Lernempfehlungen zu kommunizieren. ",
 			"sources": "Raj & Renumol 2022, S.114",
+			"tags": [],
+			"fundamental": false
+		},
+		{
+			"term": "Lernerleistung",
+			"definition": "https://www.igi-global.com/dictionary/gamified-learning/91338",
+			"sources": "",
 			"tags": [],
 			"fundamental": false
 		},
@@ -1520,6 +1505,20 @@
 			"term": "(Physischer) Lernraum",
 			"definition": "Physische Lernräume können „zunächst als bloßer physikalischer Behälter betrachtet werden“ (Wittwer & Diettrich 2015, S.18). Sie sind aufgrund der Tatsache, dass sich dort Lehrende und Lernende treffen „zugleich auch Wahrnehmungs- und Handlungsräume“ (ebd., S.18). Außerdem ist ein physischer Lernraum damit „immer auch sozialer Raum“ (ebd., S.18).  Im Rahmen von HASKI werden alle Präsenzveranstaltungen, die von Lehrenden, dem Blended Learning Ansatz folgend, in Kombination mit dem HASKI-System durchgeführt werden, als physische Lernräume bezeichnet.",
 			"sources": "Wittwer & Diettrich, 2015, S.18-19",
+			"tags": [],
+			"fundamental": false
+		},
+		{
+			"term": "Lernpräferenzen",
+			"definition": "Gemäß dem Oxford English Dictionary wird „Präferenz“ definiert als „eine größere Vorliebe für eine Alternative gegenüber einer anderen oder anderen“. Lernpräferenzen können daher als Vorlieben der Schüler für bestimmte Elemente des Lernens und ausgewählte Interaktionsweisen mit den Elementen des Lernens bezeichnet werden. In der Literatur fallen Studien zu Lernpräferenzen in zwei Kategorien. Eine betrifft die bevorzugten Arten von Umgebungs- oder Unterrichtsformaten der Lernenden, und die andere befasst sich mit den bevorzugten Arten kognitiver Aktivitäten der Lernenden. Studien in letzterer Kategorie erscheinen häufiger unter dem Begriff „Lernstile“. https://link.springer.com/referenceworkentry/10.1007/978-1-4419-1428-6_636",
+			"sources": "",
+			"tags": [],
+			"fundamental": false
+		},
+		{
+			"term": "Lernpfad",
+			"definition": "Ein Lernpfad bezieht sich auf die didaktisch geplante sequenzielle Zusammensetzung von Themen, Lernräumen und/oder Lernelementen. Lernpfade können von Lehrern und vom HASKI-System erstellt werden. Die ursprüngliche Unterteilung oder Strukturierung des Kurses, die von den Lehrern verwendet wird, wird vom HASKI-System als \"Standard\"-Lernpfad betrachtet. Am Ende eines Lernpfads erfolgt eine erfolgreiche Wissensgenerierung und Kompetenzentwicklung in Bezug auf den durchlaufenen Inhalt. Lernende können Lernpfade in ihrem individuellen Tempo durchlaufen (vgl. Pöhler 2018; Hessisches Kultusministerium 2016; Roth 2014). Es gibt zwei Arten von Lernpfaden: lineare, die die Lernelemente, Lernräume und Themen in derselben Reihenfolge für alle Lernenden verbinden, und adaptive, die sich individuell an die Lernenden anpassen. Dieser adaptive Lernpfad kann dann im Hinblick auf die enthaltenen Daten differenziert werden. Im Kontext von HASKI erfolgt die Anpassung durch das Tutorial-Modell auf der Grundlage der im Lernermodell verfügbaren Daten zu den jeweiligen Personen und der Grundstruktur des Domänenmodells (vgl. auch Niegemann & Heidig 2020, S. 362; Goertz 2015; Paramythis & Loidl-Reisinger 2004; Bartel, Dörringer & Klopp 2022, S.1).",
+			"sources": "Bartel, Dörringer & Klopp 2022, S.1; Goertz, 2015; Hessisches Kultusministerium, 2016; Niegemann & Heidig, 2020, S. 362; Paramythis & Loidl-Reisinger, 2004; Pöhler, 2018; Roth, 2014",
 			"tags": [],
 			"fundamental": false
 		},
