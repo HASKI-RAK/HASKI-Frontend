@@ -109,369 +109,369 @@
 		],
 		[
 			{
-				"question": "components.TableListKQuestions.question-1",
+				"question": "Ich gehe meine Aufzeichnungen durch und mache mir dazu eine Gliederung mit den wichtigsten Punkten.",
 				"questionLabel": "org1_f1",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-2",
+				"question": "Ich stelle mir aus Mitschrift, Skript oder Literatur kurze Zusammenfassungen mit den Hauptideen zusammen.",
 				"questionLabel": "org2_f2",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-3",
+				"question": "Ich stelle wichtige Fachausdrücke und Definitionen in eigenen Listen zusammen.",
 				"questionLabel": "org3_f3",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-4",
+				"question": "Ich versuche, neue Begriffe oder Theorien auf mir bereits bekannte Begriffe und Theorien zu beziehen.",
 				"questionLabel": "elab1_f4",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-5",
+				"question": "Ich denke mir konkrete Beispiele zu bestimmten Lerninhalten aus.",
 				"questionLabel": "elab2_f5",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			}
 		],
 		[
 			{
-				"question": "components.TableListKQuestions.question-6",
+				"question": "Ich beziehe das, was ich lerne, auf meine eigenen Erfahrungen.",
 				"questionLabel": "elab3_f6",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-7",
+				"question": "Ich frage mich, ob der Text, den ich gerade durcharbeite, wirklich überzeugend ist.",
 				"questionLabel": "crit_rev1_f7",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-8",
+				"question": "Ich gehe an die meisten Texte kritisch heran.",
 				"questionLabel": "crit_rev2_f8",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-9",
+				"question": "Das, was ich lerne, prüfe ich auch kritisch.",
 				"questionLabel": "crit_rev3_f9",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-10",
+				"question": "Ich lerne eine selbst erstellte Übersicht mit den wichtigsten Fachtermini auswendig.",
 				"questionLabel": "rep1_f10",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			}
 		],
 		[
 			{
-				"question": "components.TableListKQuestions.question-11",
+				"question": "Ich lerne Regeln, Fachbegriffe oder Formeln auswendig.",
 				"questionLabel": "rep2_f11",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-12",
+				"question": "Ich lerne den Lernstoff anhand von Skripten oder anderen Aufzeichnungen möglichst auswendig.",
 				"questionLabel": "rep3_f12",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-13",
+				"question": "Ich formuliere Lernziele, an denen ich dann mein Lernen ausrichte.",
 				"questionLabel": "goal_plan1_f13",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-14",
+				"question": "Ich mache mir vor dem Lernen Gedanken, wie ich lernen will.",
 				"questionLabel": "goal_plan2_f14",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-15",
+				"question": "Ich plane mein Vorgehen beim Lernen nicht.",
 				"questionLabel": "goal_plan3_f15",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			}
 		],
 		[
 			{
-				"question": "components.TableListKQuestions.question-16",
+				"question": "Um Wissenslücken festzustellen, rekapituliere ich die wichtigsten Inhalte, ohne meine Unterlagen zu Hilfe zu nehmen.",
 				"questionLabel": "con1_f16",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-17",
+				"question": "Ich stelle mir Fragen zum Stoff, um zu überprüfen, ob ich alles verstanden habe.",
 				"questionLabel": "con2_f17",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-18",
+				"question": "Falls im Lernstoff Fragen oder Tests enthalten sind, nutze ich diese, um mich selbst zu überprüfen.",
 				"questionLabel": "con3_f18",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-19",
+				"question": "Ich verändere meine Lerntechnik, wenn ich auf Schwierigkeiten stoße.",
 				"questionLabel": "reg1_f19",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-20",
+				"question": "Ich verändere meine Lernpläne, wenn ich merke, dass sie sich nicht umsetzen lassen.",
 				"questionLabel": "reg2_f20",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			}
 		],
 		[
 			{
-				"question": "components.TableListKQuestions.question-21",
+				"question": "Wenn ich merke, dass mein Vorgehen beim Lernen nicht erfolgreich ist, verändere ich es.",
 				"questionLabel": "reg3_f21",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-22",
+				"question": "Es fällt mir schwer, bei der Sache zu bleiben.",
 				"questionLabel": "att1_f22",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-23",
+				"question": "Beim Lernen bin ich unkonzentriert.",
 				"questionLabel": "att2_f23",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-24",
+				"question": "Wenn ich lerne, bin ich leicht abzulenken.",
 				"questionLabel": "att3_f24",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-25",
+				"question": "Wenn ich mir ein bestimmtes Pensum zum Lernen vorgenommen habe, bemühe ich mich, es auch zu schaffen.",
 				"questionLabel": "eff1_f25",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			}
 		],
 		[
 			{
-				"question": "components.TableListKQuestions.question-26",
+				"question": "Ich gebe nicht auf, auch wenn der Stoff sehr schwierig oder komplex ist.",
 				"questionLabel": "eff2_f26",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-27",
+				"question": "Ich lerne auch spätabends und am Wochenende, wenn es sein muss.",
 				"questionLabel": "eff3_f27",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-28",
+				"question": "Beim Lernen halte ich mich an einen bestimmten Zeitplan.",
 				"questionLabel": "time1_f28",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-29",
+				"question": "Ich lege die Stunden, die ich täglich mit Lernen verbringe, durch einen Zeitplan fest.",
 				"questionLabel": "time2_f29",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-30",
+				"question": "Ich lege vor jeder Lernphase eine bestimmte Zeitdauer fest.",
 				"questionLabel": "time3_f30",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			}
 		],
 		[
 			{
-				"question": "components.TableListKQuestions.question-31",
+				"question": "Ich bearbeite Texte oder Aufgaben zusammen mit meinen Studienkollegen.",
 				"questionLabel": "lrn_w_cls1_f31",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-32",
+				"question": "Ich nehme mir Zeit, um mit Studienkollegen über den Stoff zu diskutieren.",
 				"questionLabel": "lrn_w_cls2_f32",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-33",
+				"question": "Wenn mir etwas nicht klar ist, so frage ich einen Studienkollegen um Rat.",
 				"questionLabel": "lrn_w_cls3_f33",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-34",
+				"question": "Ich suche nach weiterführender Literatur, wenn mir bestimmte Inhalte noch nicht ganz klar sind.",
 				"questionLabel": "lit_res1_f34",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-35",
+				"question": "Fehlende Informationen suche ich mir aus verschiedenen Quellen zusammen (z. B. Mitschriften, Bücher, Fachzeitschriften).",
 				"questionLabel": "lit_res2_f35",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			}
 		],
 		[
 			{
-				"question": "components.TableListKQuestions.question-36",
+				"question": "Ich ziehe zusätzlich Literatur heran, wenn meine Aufzeichnungen unvollständig sind.",
 				"questionLabel": "lit_res3_f36",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-37",
+				"question": "Ich gestalte meine Umgebung so, dass ich möglichst wenig vom Lernen abgelenkt werde.",
 				"questionLabel": "lrn_env1_f37",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-38",
+				"question": "Zum Lernen sitze ich immer am selben Platz.",
 				"questionLabel": "lrn_env2_f38",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			},
 			{
-				"question": "components.TableListKQuestions.question-39",
+				"question": "Mein Arbeitsplatz ist so gestaltet, dass ich alles schnell finden kann.",
 				"questionLabel": "lrn_env3_f39",
-				"answer1": "components.TableListKQuestions.answer-1",
-				"answer2": "components.TableListKQuestions.answer-2",
-				"answer3": "components.TableListKQuestions.answer-3",
-				"answer4": "components.TableListKQuestions.answer-4",
-				"answer5": "components.TableListKQuestions.answer-5"
+				"answer1": "sehr selten",
+				"answer2": "selten",
+				"answer3": "manchmal",
+				"answer4": "oft",
+				"answer5": "sehr oft"
 			}
 		]
 	],
@@ -618,94 +618,6 @@
 	"components.TableILS.strong": "stark",
 	"components.TableILS.verbal": "Verbal",
 	"components.TableILS.visual": "Visuell",
-	"components.TableILSQuestions.answer-1-1": "es ausprobiert habe.",
-	"components.TableILSQuestions.answer-1-2": "darüber nachgedacht habe.",
-	"components.TableILSQuestions.answer-10-1": "Fakten zu lernen.",
-	"components.TableILSQuestions.answer-10-2": "Konzepte zu lernen.",
-	"components.TableILSQuestions.answer-11-1": "die Bilder und Diagramme sorgfältig betrachten.",
-	"components.TableILSQuestions.answer-11-2": "mich auf den geschriebenen Text konzentrieren.",
-	"components.TableILSQuestions.answer-12-1": "arbeite ich mich normalerweise Schritt für Schritt an die Lösung heran.",
-	"components.TableILSQuestions.answer-12-2": "sehe ich oft nur die Lösungen aber tue mir dann schwer die Schritte dorthin zu finden.",
-	"components.TableILSQuestions.answer-13-1": "habe ich für gewöhnlich viele der anderen Studierenden kennengelernt.",
-	"components.TableILSQuestions.answer-13-2": "habe ich selten viele der anderen Studierenden kennengelernt.",
-	"components.TableILSQuestions.answer-14-1": "etwas, das mir neue Fakten beibringt oder mir zeigt, wie ich etwas tun kann.",
-	"components.TableILSQuestions.answer-14-2": "etwas, das mir neue Ideen gibt, über die nachdenken kann.",
-	"components.TableILSQuestions.answer-15-1": "die viele Diagramme zur Inhaltspräsentation nutzen.",
-	"components.TableILSQuestions.answer-15-2": "die sich viel Zeit für Erklärungen nehmen. ",
-	"components.TableILSQuestions.answer-16-1": "denke ich an die Geschehnisse und versuche sie zusammenzufügen um die Themen herauszufinden.",
-	"components.TableILSQuestions.answer-16-2": "weiß ich, nachdem ich fertig mit dem Lesen bin, was die Themen sind und muss dann zurückgehen um die Geschehnisse zu finden, die diese veranschaulichen.",
-	"components.TableILSQuestions.answer-17-1": "sofort anfange an der Lösung zu arbeiten.",
-	"components.TableILSQuestions.answer-17-2": "zuerst versuche die Aufgabe vollständig zu verstehen.",
-	"components.TableILSQuestions.answer-18-1": "Gewissheit.",
-	"components.TableILSQuestions.answer-18-2": "Theorie.",
-	"components.TableILSQuestions.answer-19-1": "sehe.",
-	"components.TableILSQuestions.answer-19-2": "höre.",
-	"components.TableILSQuestions.answer-2-1": "realistisch.",
-	"components.TableILSQuestions.answer-2-2": "innovativ.",
-	"components.TableILSQuestions.answer-20-1": "den Lernstoff in klaren aufeinander aufbauenden Schritten darlegt.",
-	"components.TableILSQuestions.answer-20-2": "mir ein Gesamtbild vermittelt und den Lernstoff in Beziehung zu anderen Themen setzt.",
-	"components.TableILSQuestions.answer-21-1": "in einer Lerngruppe.",
-	"components.TableILSQuestions.answer-21-2": "alleine.",
-	"components.TableILSQuestions.answer-22-1": "dass ich sorgfältig auf die Details meiner Arbeit achte.",
-	"components.TableILSQuestions.answer-22-2": "dass ich kreativ bin, wenn es darum geht, wie ich meine Arbeit erledige.",
-	"components.TableILSQuestions.answer-23-1": "eine Karte.",
-	"components.TableILSQuestions.answer-23-2": "schriftliche Anweisungen.",
-	"components.TableILSQuestions.answer-24-1": "in einem ziemlich regelmäßigen Tempo. Wenn ich fleißig lerne, dann werde ich es „kapieren“.",
-	"components.TableILSQuestions.answer-24-2": "in Schüben. Ich bin total verwirrt und dann plötzlich macht es plötzlich „klick“.",
-	"components.TableILSQuestions.answer-25-1": "Dinge ausprobieren.",
-	"components.TableILSQuestions.answer-25-2": "darüber nachdenken, wie ich etwas mache werde.",
-	"components.TableILSQuestions.answer-26-1": "deutlich sagen, was sie meinen.",
-	"components.TableILSQuestions.answer-26-2": "die Dinge auf kreative, interessante Weise vermitteln.",
-	"components.TableILSQuestions.answer-27-1": "an das Bild.",
-	"components.TableILSQuestions.answer-27-2": "an das was die Lehrperson darüber gesagt hat.",
-	"components.TableILSQuestions.answer-28-1": "mich auf die Details zu konzentrieren und das große Ganze zu übersehen.",
-	"components.TableILSQuestions.answer-28-2": "zu versuchen das große Ganze zu verstehen bevor ich mich mit den Details befasse.",
-	"components.TableILSQuestions.answer-29-1": "das ich getan habe.",
-	"components.TableILSQuestions.answer-29-2": "über das ich viel nachgedacht habe.",
-	"components.TableILSQuestions.answer-3-1": "Bilder ein.",
-	"components.TableILSQuestions.answer-3-2": "Wörter ein.",
-	"components.TableILSQuestions.answer-30-1": "einen Weg dafür zu finden und diesen zu perfektionieren.",
-	"components.TableILSQuestions.answer-30-2": "mir immer neue Wege einfallen zu lassen, um sie zu erledigen.",
-	"components.TableILSQuestions.answer-31-1": "Tabellen und Graphen.",
-	"components.TableILSQuestions.answer-31-2": "einen Text, der die Ergebnisse zusammenfasst.",
-	"components.TableILSQuestions.answer-32-1": "an der Einleitung des Aufsatzes zu arbeiten (darüber nachzudenken oder zu schreiben) und dann voranzuschreiten.",
-	"components.TableILSQuestions.answer-32-2": "an verschiedenen Teilen des Aufsatzes zu arbeiten (darüber nachzudenken oder zu schreiben) und sie dann zu ordnen.",
-	"components.TableILSQuestions.answer-33-1": "ein „Gruppen-Brainstorming“ durchführen, bei dem jeder seine Ideen einbringt.",
-	"components.TableILSQuestions.answer-33-2": "ein individuelles Brainstorming und dann als Gruppe zusammenkommen, um Ideen zu vergleichen.",
-	"components.TableILSQuestions.answer-34-1": "vernünftig zu bezeichnen.",
-	"components.TableILSQuestions.answer-34-2": "phantasievoll zu bezeichnen.",
-	"components.TableILSQuestions.answer-35-1": "wie sie aussahen.",
-	"components.TableILSQuestions.answer-35-2": "was sie über sich selbst gesagt haben.",
-	"components.TableILSQuestions.answer-36-1": "mich auf dieses Thema zu konzentrieren und so viel wie möglich darüber zu lernen.",
-	"components.TableILSQuestions.answer-36-2": "zu versuchen Verbindungen zwischen diesem Thema und verwandten Themen herzustellen.",
-	"components.TableILSQuestions.answer-37-1": "aufgeschlossen.",
-	"components.TableILSQuestions.answer-37-2": "zurückhaltend.",
-	"components.TableILSQuestions.answer-38-1": "konkretes Material (Fakten, Daten) legen.",
-	"components.TableILSQuestions.answer-38-2": "abstraktes Material (Konzepte, Theorien) legen.",
-	"components.TableILSQuestions.answer-39-1": "einen Film oder eine Serie schauen.",
-	"components.TableILSQuestions.answer-39-2": "ein Buch lesen oder ein Hörbuch hören.",
-	"components.TableILSQuestions.answer-4-1": "die Details eines Themas zu verstehen, aber die Gesamtstruktur nicht ganz zu erfassen.",
-	"components.TableILSQuestions.answer-4-2": "die Gesamtstruktur zu verstehen, aber die Details nicht ganz zu erfassen.",
-	"components.TableILSQuestions.answer-40-1": "etwas hilfreich.",
-	"components.TableILSQuestions.answer-40-2": "sehr hilfreich.",
-	"components.TableILSQuestions.answer-41-1": "klingt für mich gut.",
-	"components.TableILSQuestions.answer-41-2": "gefällt mir nicht.",
-	"components.TableILSQuestions.answer-42-1": "tendiere ich dazu alle meine Schritte zu wiederholen und meine Arbeit sorgfältig zu überprüfen.",
-	"components.TableILSQuestions.answer-42-2": "ist es für mich ermüdend meine Arbeit zu überprüfen und ich muss mich zwingen es zu machen.",
-	"components.TableILSQuestions.answer-43-1": "sehr gut und ziemlich detailreich verbildlichen.",
-	"components.TableILSQuestions.answer-43-2": "mit Schwierigkeiten verbildlichen und meist mit wenig Details.",
-	"components.TableILSQuestions.answer-44-1": "dass ich an die Schritte des Lösungsprozess denke.",
-	"components.TableILSQuestions.answer-44-2": "dass ich an die möglichen Konsequenzen oder Anwendungen der Lösung in unterschiedlichen Bereichen denke.",
-	"components.TableILSQuestions.answer-5-1": "darüber zu sprechen.",
-	"components.TableILSQuestions.answer-5-2": "darüber nachzudenken.",
-	"components.TableILSQuestions.answer-6-1": "Fakten und Situationen aus dem wirklichen Leben geht.",
-	"components.TableILSQuestions.answer-6-2": "Ideen und Theorien geht.",
-	"components.TableILSQuestions.answer-7-1": "Bilder, Diagramme, Schaubilder und Karten.",
-	"components.TableILSQuestions.answer-7-2": "schriftliche Anweisungen zu mündlichen Informationen.",
-	"components.TableILSQuestions.answer-8-1": "alle Bestandteile verstehe, verstehe ich das große Ganze.",
-	"components.TableILSQuestions.answer-8-2": "das große Ganze verstehe, verstehe ich wie die Bestandteile zusammenpassen.",
-	"components.TableILSQuestions.answer-9-1": "aktiv bin und meine eigenen Ideen einbringe.",
-	"components.TableILSQuestions.answer-9-2": "mich zurückhalte und zuhöre.",
 	"components.TableILSQuestions.ilsLong": [
 		[
 			{
@@ -735,288 +647,288 @@
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-1",
+				"question": "Ich verstehe etwas besser nachdem ich",
 				"questionLabel": "AR_1_F1",
-				"answer1": "components.TableILSQuestions.answer-1-1",
-				"answer2": "components.TableILSQuestions.answer-1-2"
+				"answer1": "es ausprobiert habe.",
+				"answer2": "darüber nachgedacht habe."
 			},
 			{
-				"question": "components.TableILSQuestions.question-2",
+				"question": "Ich möchte lieber wahrgenommen werden als",
 				"questionLabel": "SI_1_F2",
-				"answer1": "components.TableILSQuestions.answer-2-1",
-				"answer2": "components.TableILSQuestions.answer-2-2"
+				"answer1": "realistisch.",
+				"answer2": "innovativ."
 			},
 			{
 				"question": "Wenn ich daran denke, was ich gestern gemacht habe, fallen mir eher",
 				"questionLabel": "VV_1_F3",
-				"answer1": "components.TableILSQuestions.answer-3-1",
-				"answer2": "components.TableILSQuestions.answer-3-2"
+				"answer1": "Bilder ein.",
+				"answer2": "Wörter ein."
 			},
 			{
 				"question": "Ich neige dazu",
 				"questionLabel": "SG_1_F4",
-				"answer1": "components.TableILSQuestions.answer-4-1",
-				"answer2": "components.TableILSQuestions.answer-4-2"
+				"answer1": "die Details eines Themas zu verstehen, aber die Gesamtstruktur nicht ganz zu erfassen.",
+				"answer2": "die Gesamtstruktur zu verstehen, aber die Details nicht ganz zu erfassen."
 			}
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-5",
+				"question": "Wenn ich etwas Neues lerne, hilft es mir",
 				"questionLabel": "AR_2_F5",
-				"answer1": "components.TableILSQuestions.answer-5-1",
-				"answer2": "components.TableILSQuestions.answer-5-2"
+				"answer1": "darüber zu sprechen.",
+				"answer2": "darüber nachzudenken."
 			},
 			{
-				"question": "components.TableILSQuestions.question-6",
+				"question": "Wenn ich ein Lehrperson wäre, würde ich lieber einen Kurs unterrichten in dem es um",
 				"questionLabel": "SI_2_F6",
-				"answer1": "components.TableILSQuestions.answer-6-1",
-				"answer2": "components.TableILSQuestions.answer-6-2"
+				"answer1": "Fakten und Situationen aus dem wirklichen Leben geht.",
+				"answer2": "Ideen und Theorien geht."
 			},
 			{
-				"question": "components.TableILSQuestions.question-7",
+				"question": "Ich erhalte neue Informationen lieber durch",
 				"questionLabel": "VV_2_F7",
-				"answer1": "components.TableILSQuestions.answer-7-1",
-				"answer2": "components.TableILSQuestions.answer-7-2"
+				"answer1": "Bilder, Diagramme, Schaubilder und Karten.",
+				"answer2": "schriftliche Anweisungen zu mündlichen Informationen."
 			},
 			{
-				"question": "components.TableILSQuestions.question-8",
+				"question": "Sobald ich",
 				"questionLabel": "SG_2_F8",
-				"answer1": "components.TableILSQuestions.answer-8-1",
-				"answer2": "components.TableILSQuestions.answer-8-2"
+				"answer1": "alle Bestandteile verstehe, verstehe ich das große Ganze.",
+				"answer2": "das große Ganze verstehe, verstehe ich wie die Bestandteile zusammenpassen."
 			}
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-9",
+				"question": "In einer Studiengruppe, die an schwierigem Material arbeitet, ist es wahrscheinlicher, dass ich",
 				"questionLabel": "AR_3_F9",
-				"answer1": "components.TableILSQuestions.answer-9-1",
-				"answer2": "components.TableILSQuestions.answer-9-2"
+				"answer1": "aktiv bin und meine eigenen Ideen einbringe.",
+				"answer2": "mich zurückhalte und zuhöre."
 			},
 			{
-				"question": "components.TableILSQuestions.question-10",
+				"question": "Mir fällt es leichter",
 				"questionLabel": "SI_3_F10",
-				"answer1": "components.TableILSQuestions.answer-10-1",
-				"answer2": "components.TableILSQuestions.answer-10-2"
+				"answer1": "Fakten zu lernen.",
+				"answer2": "Konzepte zu lernen."
 			},
 			{
-				"question": "components.TableILSQuestions.question-11",
+				"question": "In einem Dokument mit vielen Bildern und Tabellen werde ich wahrscheinlich",
 				"questionLabel": "VV_3_F11",
-				"answer1": "components.TableILSQuestions.answer-11-1",
-				"answer2": "components.TableILSQuestions.answer-11-2"
+				"answer1": "die Bilder und Diagramme sorgfältig betrachten.",
+				"answer2": "mich auf den geschriebenen Text konzentrieren."
 			},
 			{
-				"question": "components.TableILSQuestions.question-12",
+				"question": "Wenn ich mathematische Probleme löse",
 				"questionLabel": "SG_3_F12",
-				"answer1": "components.TableILSQuestions.answer-12-1",
-				"answer2": "components.TableILSQuestions.answer-12-2"
+				"answer1": "arbeite ich mich normalerweise Schritt für Schritt an die Lösung heran.",
+				"answer2": "sehe ich oft nur die Lösungen aber tue mir dann schwer die Schritte dorthin zu finden."
 			}
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-13",
+				"question": "In den Kursen, die ich bisher besucht habe,",
 				"questionLabel": "AR_4_F13",
-				"answer1": "components.TableILSQuestions.answer-13-1",
-				"answer2": "components.TableILSQuestions.answer-13-2"
+				"answer1": "habe ich für gewöhnlich viele der anderen Studierenden kennengelernt.",
+				"answer2": "habe ich selten viele der anderen Studierenden kennengelernt."
 			},
 			{
-				"question": "components.TableILSQuestions.question-14",
+				"question": "Beim Lesen von Sachtexten bevorzuge ich",
 				"questionLabel": "SI_4_F14",
-				"answer1": "components.TableILSQuestions.answer-14-1",
-				"answer2": "components.TableILSQuestions.answer-14-2"
+				"answer1": "etwas, das mir neue Fakten beibringt oder mir zeigt, wie ich etwas tun kann.",
+				"answer2": "etwas, das mir neue Ideen gibt, über die nachdenken kann."
 			},
 			{
-				"question": "components.TableILSQuestions.question-15",
+				"question": "Ich mag Lehrende,",
 				"questionLabel": "VV_4_F15",
-				"answer1": "components.TableILSQuestions.answer-15-1",
-				"answer2": "components.TableILSQuestions.answer-15-2"
+				"answer1": "die viele Diagramme zur Inhaltspräsentation nutzen.",
+				"answer2": "die sich viel Zeit für Erklärungen nehmen. "
 			},
 			{
 				"question": "components.TableILSQuestions.question-16",
 				"questionLabel": "SG_4_F16",
-				"answer1": "components.TableILSQuestions.answer-16-1",
-				"answer2": "components.TableILSQuestions.answer-16-2"
+				"answer1": "denke ich an die Geschehnisse und versuche sie zusammenzufügen um die Themen herauszufinden.",
+				"answer2": "weiß ich, nachdem ich fertig mit dem Lesen bin, was die Themen sind und muss dann zurückgehen um die Geschehnisse zu finden, die diese veranschaulichen."
 			}
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-17",
+				"question": "Wenn ich eine Hausaufgabe beginne, ist es wahrscheinlicher, dass ich",
 				"questionLabel": "AR_5_F17",
-				"answer1": "components.TableILSQuestions.answer-17-1",
-				"answer2": "components.TableILSQuestions.answer-17-2"
+				"answer1": "sofort anfange an der Lösung zu arbeiten.",
+				"answer2": "zuerst versuche die Aufgabe vollständig zu verstehen."
 			},
 			{
-				"question": "components.TableILSQuestions.question-18",
+				"question": "Ich bevorzuge die Vorstellung von",
 				"questionLabel": "SI_5_F18",
-				"answer1": "components.TableILSQuestions.answer-18-1",
-				"answer2": "components.TableILSQuestions.answer-18-2"
+				"answer1": "Gewissheit.",
+				"answer2": "Theorie."
 			},
 			{
-				"question": "components.TableILSQuestions.question-19",
+				"question": "Ich erinnere mich am besten an das, was ich",
 				"questionLabel": "VV_5_F19",
-				"answer1": "components.TableILSQuestions.answer-19-1",
-				"answer2": "components.TableILSQuestions.answer-19-2"
+				"answer1": "sehe.",
+				"answer2": "höre."
 			},
 			{
-				"question": "components.TableILSQuestions.question-20",
+				"question": "Für mich ist es wichtiger, dass eine Lehrperson",
 				"questionLabel": "SG_5_F20",
-				"answer1": "components.TableILSQuestions.answer-20-1",
-				"answer2": "components.TableILSQuestions.answer-20-2"
+				"answer1": "den Lernstoff in klaren aufeinander aufbauenden Schritten darlegt.",
+				"answer2": "mir ein Gesamtbild vermittelt und den Lernstoff in Beziehung zu anderen Themen setzt."
 			}
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-21",
+				"question": "Ich lerne am liebsten,",
 				"questionLabel": "AR_6_F21",
-				"answer1": "components.TableILSQuestions.answer-21-1",
-				"answer2": "components.TableILSQuestions.answer-21-2"
+				"answer1": "in einer Lerngruppe.",
+				"answer2": "alleine."
 			},
 			{
-				"question": "components.TableILSQuestions.question-22",
+				"question": "Ich würde eher damit charakterisiert werden,",
 				"questionLabel": "SI_6_F22",
-				"answer1": "components.TableILSQuestions.answer-22-1",
-				"answer2": "components.TableILSQuestions.answer-22-2"
+				"answer1": "dass ich sorgfältig auf die Details meiner Arbeit achte.",
+				"answer2": "dass ich kreativ bin, wenn es darum geht, wie ich meine Arbeit erledige."
 			},
 			{
-				"question": "components.TableILSQuestions.question-23",
+				"question": "Wenn ich die Wegbeschreibung zu einem neuen Ort bekomme, bevorzuge ich",
 				"questionLabel": "VV_6_F23",
-				"answer1": "components.TableILSQuestions.answer-23-1",
-				"answer2": "components.TableILSQuestions.answer-23-2"
+				"answer1": "eine Karte.",
+				"answer2": "schriftliche Anweisungen."
 			},
 			{
-				"question": "components.TableILSQuestions.question-24",
+				"question": "Ich lerne",
 				"questionLabel": "SG_6_F24",
-				"answer1": "components.TableILSQuestions.answer-24-1",
-				"answer2": "components.TableILSQuestions.answer-24-2"
+				"answer1": "in einem ziemlich regelmäßigen Tempo. Wenn ich fleißig lerne, dann werde ich es „kapieren“.",
+				"answer2": "in Schüben. Ich bin total verwirrt und dann plötzlich macht es plötzlich „klick“."
 			}
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-25",
+				"question": "Ich würde lieber zuerst ",
 				"questionLabel": "AR_7_F25",
-				"answer1": "components.TableILSQuestions.answer-25-1",
-				"answer2": "components.TableILSQuestions.answer-25-2"
+				"answer1": "Dinge ausprobieren.",
+				"answer2": "darüber nachdenken, wie ich etwas mache werde."
 			},
 			{
 				"question": "Wenn ich mich in meiner Freizeit mit Inhalten beschäftige, möchte ich, dass die Produzenten",
 				"questionLabel": "SI_7_F26",
-				"answer1": "components.TableILSQuestions.answer-26-1",
-				"answer2": "components.TableILSQuestions.answer-26-2"
+				"answer1": "deutlich sagen, was sie meinen.",
+				"answer2": "die Dinge auf kreative, interessante Weise vermitteln."
 			},
 			{
 				"question": "Wenn ich in einem Kurs ein Diagramm oder eine Skizze sehe, erinnere ich mich am ehesten",
 				"questionLabel": "VV_7_F27",
-				"answer1": "components.TableILSQuestions.answer-27-1",
-				"answer2": "components.TableILSQuestions.answer-27-2"
+				"answer1": "an das Bild.",
+				"answer2": "an das was die Lehrperson darüber gesagt hat."
 			},
 			{
 				"question": "Wenn ich Informationsmaterial anschaue, neige ich eher dazu",
 				"questionLabel": "SG_7_F28",
-				"answer1": "components.TableILSQuestions.answer-28-1",
-				"answer2": "components.TableILSQuestions.answer-28-2"
+				"answer1": "mich auf die Details zu konzentrieren und das große Ganze zu übersehen.",
+				"answer2": "zu versuchen das große Ganze zu verstehen bevor ich mich mit den Details befasse."
 			}
 		],
 		[
 			{
 				"question": "Ich kann mich leichter an etwas erinnern,",
 				"questionLabel": "AR_8_F29",
-				"answer1": "components.TableILSQuestions.answer-29-1",
-				"answer2": "components.TableILSQuestions.answer-29-2"
+				"answer1": "das ich getan habe.",
+				"answer2": "über das ich viel nachgedacht habe."
 			},
 			{
 				"question": "Wenn ich eine Aufgabe erfüllen muss, bevorzuge ich es",
 				"questionLabel": "SI_8_F30",
-				"answer1": "components.TableILSQuestions.answer-30-1",
-				"answer2": "components.TableILSQuestions.answer-30-2"
+				"answer1": "einen Weg dafür zu finden und diesen zu perfektionieren.",
+				"answer2": "mir immer neue Wege einfallen zu lassen, um sie zu erledigen."
 			},
 			{
 				"question": "Wenn jemand mir Daten zeigt, bevorzuge ich",
 				"questionLabel": "VV_8_F31",
-				"answer1": "components.TableILSQuestions.answer-31-1",
-				"answer2": "components.TableILSQuestions.answer-31-2"
+				"answer1": "Tabellen und Graphen.",
+				"answer2": "einen Text, der die Ergebnisse zusammenfasst."
 			},
 			{
 				"question": "Wenn ich eine Studienarbeit schreibe, bin ich eher dazu geneigt ",
 				"questionLabel": "SG_8_F32",
-				"answer1": "components.TableILSQuestions.answer-32-1",
-				"answer2": "components.TableILSQuestions.answer-32-2"
+				"answer1": "an der Einleitung des Aufsatzes zu arbeiten (darüber nachzudenken oder zu schreiben) und dann voranzuschreiten.",
+				"answer2": "an verschiedenen Teilen des Aufsatzes zu arbeiten (darüber nachzudenken oder zu schreiben) und sie dann zu ordnen."
 			}
 		],
 		[
 			{
 				"question": "Wenn ich an einem Gruppenprojekt arbeiten muss, möchte ich zuerst",
 				"questionLabel": "AR_9_F33",
-				"answer1": "components.TableILSQuestions.answer-33-1",
-				"answer2": "components.TableILSQuestions.answer-33-2"
+				"answer1": "ein „Gruppen-Brainstorming“ durchführen, bei dem jeder seine Ideen einbringt.",
+				"answer2": "ein individuelles Brainstorming und dann als Gruppe zusammenkommen, um Ideen zu vergleichen."
 			},
 			{
 				"question": "Ich betrachte es als großes Lob jemanden als",
 				"questionLabel": "SI_9_F34",
-				"answer1": "components.TableILSQuestions.answer-34-1",
-				"answer2": "components.TableILSQuestions.answer-34-2"
+				"answer1": "vernünftig zu bezeichnen.",
+				"answer2": "phantasievoll zu bezeichnen."
 			},
 			{
 				"question": "Wenn ich auf einer Party neue Menschen kennenlerne, erinnere ich mich eher daran",
 				"questionLabel": "VV_9_F35",
-				"answer1": "components.TableILSQuestions.answer-35-1",
-				"answer2": "components.TableILSQuestions.answer-35-2"
+				"answer1": "wie sie aussahen.",
+				"answer2": "was sie über sich selbst gesagt haben."
 			},
 			{
 				"question": "Wenn ich ein neues Thema lerne, ziehe ich es vor",
 				"questionLabel": "SG_9_F36",
-				"answer1": "components.TableILSQuestions.answer-36-1",
-				"answer2": "components.TableILSQuestions.answer-36-2"
+				"answer1": "mich auf dieses Thema zu konzentrieren und so viel wie möglich darüber zu lernen.",
+				"answer2": "zu versuchen Verbindungen zwischen diesem Thema und verwandten Themen herzustellen."
 			}
 		],
 		[
 			{
 				"question": "Ich gelte eher als",
 				"questionLabel": "AR_10_F37",
-				"answer1": "components.TableILSQuestions.answer-37-1",
-				"answer2": "components.TableILSQuestions.answer-37-2"
+				"answer1": "aufgeschlossen.",
+				"answer2": "zurückhaltend."
 			},
 			{
 				"question": "Ich bevorzuge Kurse, die ihren Fokus auf ",
 				"questionLabel": "SI_10_F38",
-				"answer1": "components.TableILSQuestions.answer-38-1",
-				"answer2": "components.TableILSQuestions.answer-38-2"
+				"answer1": "konkretes Material (Fakten, Daten) legen.",
+				"answer2": "abstraktes Material (Konzepte, Theorien) legen."
 			},
 			{
 				"question": "Zu meiner Unterhaltung würde ich lieber",
 				"questionLabel": "VV_10_F39",
-				"answer1": "components.TableILSQuestions.answer-39-1",
-				"answer2": "components.TableILSQuestions.answer-39-2"
+				"answer1": "einen Film oder eine Serie schauen.",
+				"answer2": "ein Buch lesen oder ein Hörbuch hören."
 			},
 			{
-				"question": "components.TableILSQuestions.question-40",
+				"question": "Manche Lehrpersonen beginnen ihre Kurse mit einem Überblick über den Inhalt. Solche Gliederungen sind für mich",
 				"questionLabel": "SG_10_F40",
-				"answer1": "components.TableILSQuestions.answer-40-1",
-				"answer2": "components.TableILSQuestions.answer-40-2"
+				"answer1": "etwas hilfreich.",
+				"answer2": "sehr hilfreich."
 			}
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-41",
+				"question": "Die Idee von Gruppenhausaufgaben mit einer gemeinsamen Note für alle Gruppenmitglieder",
 				"questionLabel": "AR_11_F41",
-				"answer1": "components.TableILSQuestions.answer-41-1",
-				"answer2": "components.TableILSQuestions.answer-41-2"
+				"answer1": "klingt für mich gut.",
+				"answer2": "gefällt mir nicht."
 			},
 			{
-				"question": "components.TableILSQuestions.question-42",
+				"question": "Wenn ich längere Rechnungen durchführe,",
 				"questionLabel": "SI_11_F42",
-				"answer1": "components.TableILSQuestions.answer-42-1",
-				"answer2": "components.TableILSQuestions.answer-42-2"
+				"answer1": "tendiere ich dazu alle meine Schritte zu wiederholen und meine Arbeit sorgfältig zu überprüfen.",
+				"answer2": "ist es für mich ermüdend meine Arbeit zu überprüfen und ich muss mich zwingen es zu machen."
 			},
 			{
-				"question": "components.TableILSQuestions.question-43",
+				"question": "Orte an denen ich bereits war kann ich mir mental",
 				"questionLabel": "VV_11_F43",
-				"answer1": "components.TableILSQuestions.answer-43-1",
-				"answer2": "components.TableILSQuestions.answer-43-2"
+				"answer1": "sehr gut und ziemlich detailreich verbildlichen.",
+				"answer2": "mit Schwierigkeiten verbildlichen und meist mit wenig Details."
 			},
 			{
-				"question": "components.TableILSQuestions.question-44",
+				"question": "Wenn ich Probleme in einer Gruppe löse, ist es wahrscheinlicher,",
 				"questionLabel": "SG_11_F44",
-				"answer1": "components.TableILSQuestions.answer-44-1",
-				"answer2": "components.TableILSQuestions.answer-44-2"
+				"answer1": "dass ich an die Schritte des Lösungsprozess denke.",
+				"answer2": "dass ich an die möglichen Konsequenzen oder Anwendungen der Lösung in unterschiedlichen Bereichen denke."
 			}
 		]
 	],
@@ -1049,164 +961,136 @@
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-9",
+				"question": "In einer Studiengruppe, die an schwierigem Material arbeitet, ist es wahrscheinlicher, dass ich",
 				"questionLabel": "AR_3_F9",
-				"answer1": "components.TableILSQuestions.answer-9-1",
-				"answer2": "components.TableILSQuestions.answer-9-2"
+				"answer1": "aktiv bin und meine eigenen Ideen einbringe.",
+				"answer2": "mich zurückhalte und zuhöre."
 			},
 			{
-				"question": "components.TableILSQuestions.question-2",
+				"question": "Ich möchte lieber wahrgenommen werden als",
 				"questionLabel": "SI_1_F2",
-				"answer1": "components.TableILSQuestions.answer-2-1",
-				"answer2": "components.TableILSQuestions.answer-2-2"
+				"answer1": "realistisch.",
+				"answer2": "innovativ."
 			},
 			{
-				"question": "components.TableILSQuestions.question-7",
+				"question": "Ich erhalte neue Informationen lieber durch",
 				"questionLabel": "VV_2_F7",
-				"answer1": "components.TableILSQuestions.answer-7-1",
-				"answer2": "components.TableILSQuestions.answer-7-2"
+				"answer1": "Bilder, Diagramme, Schaubilder und Karten.",
+				"answer2": "schriftliche Anweisungen zu mündlichen Informationen."
 			},
 			{
 				"question": "Ich neige dazu",
 				"questionLabel": "SG_1_F4",
-				"answer1": "components.TableILSQuestions.answer-4-1",
-				"answer2": "components.TableILSQuestions.answer-4-2"
+				"answer1": "die Details eines Themas zu verstehen, aber die Gesamtstruktur nicht ganz zu erfassen.",
+				"answer2": "die Gesamtstruktur zu verstehen, aber die Details nicht ganz zu erfassen."
 			}
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-13",
+				"question": "In den Kursen, die ich bisher besucht habe,",
 				"questionLabel": "AR_4_F13",
-				"answer1": "components.TableILSQuestions.answer-13-1",
-				"answer2": "components.TableILSQuestions.answer-13-2"
+				"answer1": "habe ich für gewöhnlich viele der anderen Studierenden kennengelernt.",
+				"answer2": "habe ich selten viele der anderen Studierenden kennengelernt."
 			},
 			{
-				"question": "components.TableILSQuestions.question-14",
+				"question": "Beim Lesen von Sachtexten bevorzuge ich",
 				"questionLabel": "SI_4_F14",
-				"answer1": "components.TableILSQuestions.answer-14-1",
-				"answer2": "components.TableILSQuestions.answer-14-2"
+				"answer1": "etwas, das mir neue Fakten beibringt oder mir zeigt, wie ich etwas tun kann.",
+				"answer2": "etwas, das mir neue Ideen gibt, über die nachdenken kann."
 			},
 			{
-				"question": "components.TableILSQuestions.question-19",
+				"question": "Ich erinnere mich am besten an das, was ich",
 				"questionLabel": "VV_5_F19",
-				"answer1": "components.TableILSQuestions.answer-19-1",
-				"answer2": "components.TableILSQuestions.answer-19-2"
+				"answer1": "sehe.",
+				"answer2": "höre."
 			},
 			{
-				"question": "components.TableILSQuestions.question-8",
+				"question": "Sobald ich",
 				"questionLabel": "SG_2_F8",
-				"answer1": "components.TableILSQuestions.answer-8-1",
-				"answer2": "components.TableILSQuestions.answer-8-2"
+				"answer1": "alle Bestandteile verstehe, verstehe ich das große Ganze.",
+				"answer2": "das große Ganze verstehe, verstehe ich wie die Bestandteile zusammenpassen."
 			}
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-21",
+				"question": "Ich lerne am liebsten,",
 				"questionLabel": "AR_6_F21",
-				"answer1": "components.TableILSQuestions.answer-21-1",
-				"answer2": "components.TableILSQuestions.answer-21-2"
+				"answer1": "in einer Lerngruppe.",
+				"answer2": "alleine."
 			},
 			{
 				"question": "Wenn ich mich in meiner Freizeit mit Inhalten beschäftige, möchte ich, dass die Produzenten",
 				"questionLabel": "SI_7_F26",
-				"answer1": "components.TableILSQuestions.answer-26-1",
-				"answer2": "components.TableILSQuestions.answer-26-2"
+				"answer1": "deutlich sagen, was sie meinen.",
+				"answer2": "die Dinge auf kreative, interessante Weise vermitteln."
 			},
 			{
 				"question": "Wenn ich in einem Kurs ein Diagramm oder eine Skizze sehe, erinnere ich mich am ehesten",
 				"questionLabel": "VV_7_F27",
-				"answer1": "components.TableILSQuestions.answer-27-1",
-				"answer2": "components.TableILSQuestions.answer-27-2"
+				"answer1": "an das Bild.",
+				"answer2": "an das was die Lehrperson darüber gesagt hat."
 			},
 			{
-				"question": "components.TableILSQuestions.question-16",
+				"question": "Wenn ich eine Geschichte oder einen Roman analysiere",
 				"questionLabel": "SG_4_F16",
-				"answer1": "components.TableILSQuestions.answer-16-1",
-				"answer2": "components.TableILSQuestions.answer-16-2"
+				"answer1": "denke ich an die Geschehnisse und versuche sie zusammenzufügen um die Themen herauszufinden.",
+				"answer2": "weiß ich, nachdem ich fertig mit dem Lesen bin, was die Themen sind und muss dann zurückgehen um die Geschehnisse zu finden, die diese veranschaulichen."
 			}
 		],
 		[
 			{
-				"question": "components.TableILSQuestions.question-25",
+				"question": "Ich würde lieber zuerst ",
 				"questionLabel": "AR_7_F25",
-				"answer1": "components.TableILSQuestions.answer-25-1",
-				"answer2": "components.TableILSQuestions.answer-25-2"
+				"answer1": "Dinge ausprobieren.",
+				"answer2": "darüber nachdenken, wie ich etwas mache werde."
 			},
 			{
 				"question": "Ich bevorzuge Kurse, die ihren Fokus auf ",
 				"questionLabel": "SI_10_F38",
-				"answer1": "components.TableILSQuestions.answer-38-1",
-				"answer2": "components.TableILSQuestions.answer-38-2"
+				"answer1": "konkretes Material (Fakten, Daten) legen.",
+				"answer2": "abstraktes Material (Konzepte, Theorien) legen."
 			},
 			{
 				"question": "Zu meiner Unterhaltung würde ich lieber",
 				"questionLabel": "VV_10_F39",
-				"answer1": "components.TableILSQuestions.answer-39-1",
-				"answer2": "components.TableILSQuestions.answer-39-2"
+				"answer1": "einen Film oder eine Serie schauen.",
+				"answer2": "ein Buch lesen oder ein Hörbuch hören."
 			},
 			{
-				"question": "components.TableILSQuestions.question-40",
+				"question": "Manche Lehrpersonen beginnen ihre Kurse mit einem Überblick über den Inhalt. Solche Gliederungen sind für mich",
 				"questionLabel": "SG_10_F40",
-				"answer1": "components.TableILSQuestions.answer-40-1",
-				"answer2": "components.TableILSQuestions.answer-40-2"
+				"answer1": "etwas hilfreich.",
+				"answer2": "sehr hilfreich."
 			}
 		],
 		[
 			{
 				"question": "Ich kann mich leichter an etwas erinnern,",
 				"questionLabel": "AR_8_F29",
-				"answer1": "components.TableILSQuestions.answer-29-1",
-				"answer2": "components.TableILSQuestions.answer-29-2"
+				"answer1": "das ich getan habe.",
+				"answer2": "über das ich viel nachgedacht habe."
 			},
 			{
-				"question": "components.TableILSQuestions.question-42",
+				"question": "Wenn ich längere Rechnungen durchführe,",
 				"questionLabel": "SI_11_F42",
-				"answer1": "components.TableILSQuestions.answer-42-1",
-				"answer2": "components.TableILSQuestions.answer-42-2"
+				"answer1": "tendiere ich dazu alle meine Schritte zu wiederholen und meine Arbeit sorgfältig zu überprüfen.",
+				"answer2": "ist es für mich ermüdend meine Arbeit zu überprüfen und ich muss mich zwingen es zu machen."
 			},
 			{
-				"question": "components.TableILSQuestions.question-43",
+				"question": "Orte an denen ich bereits war kann ich mir mental",
 				"questionLabel": "VV_11_F43",
-				"answer1": "components.TableILSQuestions.answer-43-1",
-				"answer2": "components.TableILSQuestions.answer-43-2"
+				"answer1": "sehr gut und ziemlich detailreich verbildlichen.",
+				"answer2": "mit Schwierigkeiten verbildlichen und meist mit wenig Details."
 			},
 			{
-				"question": "components.TableILSQuestions.question-44",
+				"question": "Wenn ich Probleme in einer Gruppe löse, ist es wahrscheinlicher,",
 				"questionLabel": "SG_11_F44",
-				"answer1": "components.TableILSQuestions.answer-44-1",
-				"answer2": "components.TableILSQuestions.answer-44-2"
+				"answer1": "dass ich an die Schritte des Lösungsprozess denke.",
+				"answer2": "dass ich an die möglichen Konsequenzen oder Anwendungen der Lösung in unterschiedlichen Bereichen denke."
 			}
 		]
 	],
 	"components.TableILSQuestions.introduction": "Im Folgenden werden Ihnen Fragen gestellt, welche sich auf Ihre Art der Informationsverarbeitung und -organisierung, Wahrnehmung und bevorzugte Präsentation beziehen. Geben Sie bitte für jede Frage eine der beiden Antwortmöglichkeiten an. Sollten beide oder auch keine der Antwortmöglichkeiten auf Sie zutreffen, dann wählen Sie die aus, welche tendenziell noch häufiger zutrifft. Die gestellten Fragen basieren auf dem Index of Learning Styles (Felder & Solomon 1991).",
-	"components.TableILSQuestions.question-1": "Ich verstehe etwas besser nachdem ich",
-	"components.TableILSQuestions.question-10": "Mir fällt es leichter",
-	"components.TableILSQuestions.question-11": "In einem Dokument mit vielen Bildern und Tabellen werde ich wahrscheinlich",
-	"components.TableILSQuestions.question-12": "Wenn ich mathematische Probleme löse",
-	"components.TableILSQuestions.question-13": "In den Kursen, die ich bisher besucht habe,",
-	"components.TableILSQuestions.question-14": "Beim Lesen von Sachtexten bevorzuge ich",
-	"components.TableILSQuestions.question-15": "Ich mag Lehrende,",
-	"components.TableILSQuestions.question-16": "Wenn ich eine Geschichte oder einen Roman analysiere",
-	"components.TableILSQuestions.question-17": "Wenn ich eine Hausaufgabe beginne, ist es wahrscheinlicher, dass ich",
-	"components.TableILSQuestions.question-18": "Ich bevorzuge die Vorstellung von",
-	"components.TableILSQuestions.question-19": "Ich erinnere mich am besten an das, was ich",
-	"components.TableILSQuestions.question-2": "Ich möchte lieber wahrgenommen werden als",
-	"components.TableILSQuestions.question-20": "Für mich ist es wichtiger, dass eine Lehrperson",
-	"components.TableILSQuestions.question-21": "Ich lerne am liebsten,",
-	"components.TableILSQuestions.question-22": "Ich würde eher damit charakterisiert werden,",
-	"components.TableILSQuestions.question-23": "Wenn ich die Wegbeschreibung zu einem neuen Ort bekomme, bevorzuge ich",
-	"components.TableILSQuestions.question-24": "Ich lerne",
-	"components.TableILSQuestions.question-25": "Ich würde lieber zuerst ",
-	"components.TableILSQuestions.question-40": "Manche Lehrpersonen beginnen ihre Kurse mit einem Überblick über den Inhalt. Solche Gliederungen sind für mich",
-	"components.TableILSQuestions.question-41": "Die Idee von Gruppenhausaufgaben mit einer gemeinsamen Note für alle Gruppenmitglieder",
-	"components.TableILSQuestions.question-42": "Wenn ich längere Rechnungen durchführe,",
-	"components.TableILSQuestions.question-43": "Orte an denen ich bereits war kann ich mir mental",
-	"components.TableILSQuestions.question-44": "Wenn ich Probleme in einer Gruppe löse, ist es wahrscheinlicher,",
-	"components.TableILSQuestions.question-5": "Wenn ich etwas Neues lerne, hilft es mir",
-	"components.TableILSQuestions.question-6": "Wenn ich ein Lehrperson wäre, würde ich lieber einen Kurs unterrichten in dem es um",
-	"components.TableILSQuestions.question-7": "Ich erhalte neue Informationen lieber durch",
-	"components.TableILSQuestions.question-8": "Sobald ich",
-	"components.TableILSQuestions.question-9": "In einer Studiengruppe, die an schwierigem Material arbeitet, ist es wahrscheinlicher, dass ich",
 	"components.TableListK.attention": "Aufmerksamkeit",
 	"components.TableListK.cognitiveStrategies": "Kognitive Strategien",
 	"components.TableListK.control": "Kontrollieren",
@@ -1226,51 +1110,7 @@
 	"components.TableListK.repeat": "Wiederholen",
 	"components.TableListK.score": "Wert",
 	"components.TableListK.time": "Zeit",
-	"components.TableListKQuestions.answer-1": "sehr selten",
-	"components.TableListKQuestions.answer-2": "selten",
-	"components.TableListKQuestions.answer-3": "manchmal",
-	"components.TableListKQuestions.answer-4": "oft",
-	"components.TableListKQuestions.answer-5": "sehr oft",
 	"components.TableListKQuestions.introduction": "Im Folgenden werden Ihnen Fragen darüber gestellt welche Lernstrategien Sie anwenden. Sie finden hier eine Liste verschiedener Lerntätigkeiten. Geben Sie bitte für jede Tätigkeit an, wie häufig diese bei Ihnen vorkommt. Sie können Ihre Antworten von sehr selten (1) bis sehr oft (5) abstufen. Die gestellten Fragen basieren auf dem LIST-K (Klingsieck, 2019), welcher eine gekürzte Form des LIST (Wild & Schiefele, 1994) darstellt.",
-	"components.TableListKQuestions.question-1": "Ich gehe meine Aufzeichnungen durch und mache mir dazu eine Gliederung mit den wichtigsten Punkten.",
-	"components.TableListKQuestions.question-10": "Ich lerne eine selbst erstellte Übersicht mit den wichtigsten Fachtermini auswendig.",
-	"components.TableListKQuestions.question-11": "Ich lerne Regeln, Fachbegriffe oder Formeln auswendig.",
-	"components.TableListKQuestions.question-12": "Ich lerne den Lernstoff anhand von Skripten oder anderen Aufzeichnungen möglichst auswendig.",
-	"components.TableListKQuestions.question-13": "Ich formuliere Lernziele, an denen ich dann mein Lernen ausrichte.",
-	"components.TableListKQuestions.question-14": "Ich mache mir vor dem Lernen Gedanken, wie ich lernen will.",
-	"components.TableListKQuestions.question-15": "Ich plane mein Vorgehen beim Lernen nicht.",
-	"components.TableListKQuestions.question-16": "Um Wissenslücken festzustellen, rekapituliere ich die wichtigsten Inhalte, ohne meine Unterlagen zu Hilfe zu nehmen.",
-	"components.TableListKQuestions.question-17": "Ich stelle mir Fragen zum Stoff, um zu überprüfen, ob ich alles verstanden habe.",
-	"components.TableListKQuestions.question-18": "Falls im Lernstoff Fragen oder Tests enthalten sind, nutze ich diese, um mich selbst zu überprüfen.",
-	"components.TableListKQuestions.question-19": "Ich verändere meine Lerntechnik, wenn ich auf Schwierigkeiten stoße.",
-	"components.TableListKQuestions.question-2": "Ich stelle mir aus Mitschrift, Skript oder Literatur kurze Zusammenfassungen mit den Hauptideen zusammen.",
-	"components.TableListKQuestions.question-20": "Ich verändere meine Lernpläne, wenn ich merke, dass sie sich nicht umsetzen lassen.",
-	"components.TableListKQuestions.question-21": "Wenn ich merke, dass mein Vorgehen beim Lernen nicht erfolgreich ist, verändere ich es.",
-	"components.TableListKQuestions.question-22": "Es fällt mir schwer, bei der Sache zu bleiben.",
-	"components.TableListKQuestions.question-23": "Beim Lernen bin ich unkonzentriert.",
-	"components.TableListKQuestions.question-24": "Wenn ich lerne, bin ich leicht abzulenken.",
-	"components.TableListKQuestions.question-25": "Wenn ich mir ein bestimmtes Pensum zum Lernen vorgenommen habe, bemühe ich mich, es auch zu schaffen.",
-	"components.TableListKQuestions.question-26": "Ich gebe nicht auf, auch wenn der Stoff sehr schwierig oder komplex ist.",
-	"components.TableListKQuestions.question-27": "Ich lerne auch spätabends und am Wochenende, wenn es sein muss.",
-	"components.TableListKQuestions.question-28": "Beim Lernen halte ich mich an einen bestimmten Zeitplan.",
-	"components.TableListKQuestions.question-29": "Ich lege die Stunden, die ich täglich mit Lernen verbringe, durch einen Zeitplan fest.",
-	"components.TableListKQuestions.question-3": "Ich stelle wichtige Fachausdrücke und Definitionen in eigenen Listen zusammen.",
-	"components.TableListKQuestions.question-30": "Ich lege vor jeder Lernphase eine bestimmte Zeitdauer fest.",
-	"components.TableListKQuestions.question-31": "Ich bearbeite Texte oder Aufgaben zusammen mit meinen Studienkollegen.",
-	"components.TableListKQuestions.question-32": "Ich nehme mir Zeit, um mit Studienkollegen über den Stoff zu diskutieren.",
-	"components.TableListKQuestions.question-33": "Wenn mir etwas nicht klar ist, so frage ich einen Studienkollegen um Rat.",
-	"components.TableListKQuestions.question-34": "Ich suche nach weiterführender Literatur, wenn mir bestimmte Inhalte noch nicht ganz klar sind.",
-	"components.TableListKQuestions.question-35": "Fehlende Informationen suche ich mir aus verschiedenen Quellen zusammen (z. B. Mitschriften, Bücher, Fachzeitschriften).",
-	"components.TableListKQuestions.question-36": "Ich ziehe zusätzlich Literatur heran, wenn meine Aufzeichnungen unvollständig sind.",
-	"components.TableListKQuestions.question-37": "Ich gestalte meine Umgebung so, dass ich möglichst wenig vom Lernen abgelenkt werde.",
-	"components.TableListKQuestions.question-38": "Zum Lernen sitze ich immer am selben Platz.",
-	"components.TableListKQuestions.question-39": "Mein Arbeitsplatz ist so gestaltet, dass ich alles schnell finden kann.",
-	"components.TableListKQuestions.question-4": "Ich versuche, neue Begriffe oder Theorien auf mir bereits bekannte Begriffe und Theorien zu beziehen.",
-	"components.TableListKQuestions.question-5": "Ich denke mir konkrete Beispiele zu bestimmten Lerninhalten aus.",
-	"components.TableListKQuestions.question-6": "Ich beziehe das, was ich lerne, auf meine eigenen Erfahrungen.",
-	"components.TableListKQuestions.question-7": "Ich frage mich, ob der Text, den ich gerade durcharbeite, wirklich überzeugend ist.",
-	"components.TableListKQuestions.question-8": "Ich gehe an die meisten Texte kritisch heran.",
-	"components.TableListKQuestions.question-9": "Das, was ich lerne, prüfe ich auch kritisch.",
 	"error.fetchILS": "Es gab einen Fehler beim Abrufen der ILS Fragebogen Daten.",
 	"error.fetchListK": "Es gab einen Fehler beim Abrufen der ListK Fragebogen Daten.",
 	"error.getCourses": "Es gab einen Fehler beim Abrufen der Kursdaten.",
