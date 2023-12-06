@@ -93,18 +93,18 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
       <Paper elevation={3}>
         <Stack direction="column" justifyContent="center" alignItems="center" margin={2}>
           <Typography variant="h4" component="h1" gutterBottom>
-            {t('components.Login.title')}
+            {t('components.LoginForm.title')}
           </Typography>
           <Typography variant="h6" component="h2" gutterBottom>
-            {t('components.Login.subtitle')}
+            {t('components.LoginForm.subtitle')}
           </Typography>
           <Stack spacing={2} direction="column">
             <TextField
               id="login-form-username-textfield"
               required
               error={usernameHasError}
-              helperText={usernameHasError ? t('components.Login.usernameError') : ''}
-              label={t('components.Login.username')}
+              helperText={usernameHasError ? t('components.LoginForm.usernameError') : ''}
+              label={t('components.LoginForm.username')}
               defaultValue={usernameDefault}
               onChange={usernameChangeHandler}
               name="username"
@@ -113,8 +113,8 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
               id="login-form-password-textfield"
               required
               error={passwordHasError}
-              helperText={passwordHasError ? t('components.Login.passwordError') : ''}
-              label={t('components.Login.password')}
+              helperText={passwordHasError ? t('components.LoginForm.passwordError') : ''}
+              label={t('components.LoginForm.password')}
               variant="outlined"
               type={showPassword ? 'text' : 'password'}
               onChange={passwordChangeHandler}
@@ -130,7 +130,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
               }}
             />
             <Button variant="contained" color="primary" onClick={handleSubmit}>
-              {t('components.Login.login')}
+              {t('components.LoginForm.login')}
             </Button>
             {moodleLogin && (
               <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={2}>
@@ -143,7 +143,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
                         fontSize: '0.8rem',
                         color: (theme) => theme.palette.secondary.dark
                       }}>
-                      {t('components.Login.orLoginWithMoodle')}
+                      {t('components.LoginForm.orLoginWithMoodle')}
                     </Typography>
                   </Divider>
                 </Grid>

@@ -23,7 +23,7 @@ const Footer = () => {
     { name: [t('pages.projectinformation')], link: '/projectinformation' },
     { name: [t('pages.contact')], link: '/contact' },
     { name: [t('pages.imprint')], link: '/imprint' },
-    { name: [t('pages.PrivacyPolicy')], link: '/privacypolicy' }
+    { name: [t('pages.privacypolicy')], link: '/privacypolicy' }
   ]
 
   return (
@@ -39,7 +39,7 @@ const Footer = () => {
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
               <Typography color="black" variant="h5">
-                {t('projectHASKI')}
+                {t('components.Footer.project') + ' HASKI'}
               </Typography>
             </Grid>
             <Grid item xs={12} display="flex" width="100%" justifyContent="center">

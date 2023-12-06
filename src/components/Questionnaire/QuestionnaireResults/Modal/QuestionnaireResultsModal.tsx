@@ -45,10 +45,10 @@ const QuestionnaireResultsListKLoading = memo(({ t, listkLoading }: Questionnair
       ) : (
         <Stack alignItems="center">
           <Typography variant="body2" data-testid={'ActiveStepListKNoData'}>
-            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
+            {t('components.QuestionnaireResultsModal.noData-1')}
             <ListItem sx={{ display: 'list-item' }}>
-              {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}{' '}
-              {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+              {t('components.QuestionnaireResultsModal.listKNoData')}{' '}
+              {t('components.QuestionnaireResultsModal.noData-2')}
             </ListItem>
           </Typography>
         </Stack>
@@ -71,10 +71,10 @@ const QuestionnaireResultsILSLoading = memo(({ t, ilsLoading }: QuestionnaireRes
       ) : (
         <Stack alignItems="center">
           <Typography variant="body2" data-testid={'ActiveStepILSNoData'}>
-            {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part1')}
+            {t('components.QuestionnaireResultsModal.noData-1')}
             <ListItem sx={{ display: 'list-item' }}>
-              {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')}{' '}
-              {t('components.Questionnaire.QuestionnaireResults.Modal.NoData.Part2')}
+              {t('components.QuestionnaireResultsModal.ilsLongNoData-1')}{' '}
+              {t('components.QuestionnaireResultsModal.noData-2')}
             </ListItem>
           </Typography>
         </Stack>
@@ -93,10 +93,7 @@ const QuestionnaireResultsModal = memo(
     const [ilsLoading, setILSLoading] = useState(true)
     const [listkLoading, setListKLoading] = useState(true)
 
-    const steps = [
-      t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults'),
-      t('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults')
-    ]
+    const steps = [t('components.ResultDescriptionILS.ilsResults'), t('components.ResultDescriptionILS.listKResults')]
 
     const [activeStep, setActiveStep] = useState(activeStepForTesting)
     const [ilsData, setILSData] = useState<ILS | undefined>(undefined) // Initialize with null
@@ -116,7 +113,7 @@ const QuestionnaireResultsModal = memo(
                   setListKLoading(false)
                 } else {
                   addSnackbar({
-                    message: t('ListK.fetching.error'),
+                    message: t('error.fetchListK'),
                     severity: 'error'
                   })
                 }
@@ -125,7 +122,7 @@ const QuestionnaireResultsModal = memo(
           .catch((error) => {
             log.error(error)
             addSnackbar({
-              message: t('User.fetching.error'),
+              message: t('error.getUser'),
               severity: 'error'
             })
           })
@@ -146,7 +143,7 @@ const QuestionnaireResultsModal = memo(
                   setILSLoading(false)
                 } else {
                   addSnackbar({
-                    message: t('ILS.fetching.error'),
+                    message: t('error.fetchILS'),
                     severity: 'error'
                   })
                 }
@@ -155,7 +152,7 @@ const QuestionnaireResultsModal = memo(
           .catch((error) => {
             log.error(error)
             addSnackbar({
-              message: t('User.fetching.error'),
+              message: t('error.getUser'),
               severity: 'error'
             })
           })
@@ -251,7 +248,7 @@ const QuestionnaireResultsModal = memo(
                   window.open('/files/Informationsdokument_ILS_ListK_HASKI.pdf', '_blank')
                 }}>
                 <Typography variant="body2" gutterBottom>
-                  {t('components.Questionnaire.QuestionnaireResults.Modal.QuestionnaireResultsModal.MoreInformation')}
+                  {t('components.QuestionnaireResultsModal.moreInformation')}
                 </Typography>
               </Link>
             </Stack>
@@ -262,7 +259,7 @@ const QuestionnaireResultsModal = memo(
                 onClick={handleBack}
                 data-testid="backButton"
                 disabled={activeStep === 0}>
-                {t('Back')}
+                {t('appGlobal.back')}
               </Button>
               <Button
                 variant="contained"
@@ -270,7 +267,7 @@ const QuestionnaireResultsModal = memo(
                 onClick={handleNext}
                 data-testid="nextButton"
                 disabled={activeStep === 1}>
-                {t('Next')}
+                {t('appGlobal.next')}
               </Button>
             </Stack>
           </Stack>

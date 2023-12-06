@@ -42,7 +42,7 @@ export const Home = () => {
               })
               .catch((error) => {
                 addSnackbar({
-                  message: t('Courses.fetching.error'),
+                  message: t('error.getCourses'),
                   severity: 'error',
                   autoHideDuration: 5000
                 })
@@ -51,7 +51,7 @@ export const Home = () => {
           })
           .catch((error) => {
             addSnackbar({
-              message: t('User.fetching.error'),
+              message: t('error.getUser'),
               severity: 'error',
               autoHideDuration: 5000
             })
@@ -78,7 +78,7 @@ export const Home = () => {
           {courses.length === 0 ? (
             <Card>
               <CardContent>
-                <Typography variant="h5">{t('components.Home.NoCourses')}</Typography>
+                <Typography variant="h5">{t('pages.home.noCourses')}</Typography>
               </CardContent>
             </Card>
           ) : (
@@ -96,7 +96,7 @@ export const Home = () => {
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>
-                        {t('components.Home.Button.Course')}
+                        {t('pages.course.courseButton')}
                       </Button>
                     </Stack>
                   </CardContent>

@@ -13,7 +13,7 @@
     "build-prod": "tsc && vite build --mode production",
     "preview": "vite preview --port 8080",
     "serve": "vite serve --port 8080",
-    "lint": "eslint ./src/** --ext .ts,.tsx --fix && prettier --loglevel silent --write \"**/*.{ts,tsx,js,css,html,json}\" && npx unimported",
+    "lint": "eslint ./src/** --ext .ts,.tsx --fix && prettier --loglevel silent --write \"**/*.{ts,tsx,js,css,html,json}\" && npx unimported && node src/shared/auto-order-json-translations.js",
     "pull": "git pull && del node_modules && yarn install",
     "test": "jest",
     "wiki": "yarn run typedoc --out pages&&npx serve pages"
