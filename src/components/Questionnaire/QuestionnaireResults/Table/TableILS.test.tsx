@@ -23,136 +23,90 @@ describe('Test TableILS with all Methods', () => {
   test('Table values are correct', () => {
     const { getAllByRole } = render(<TableILS data={mockILS} />)
 
-    expect(getAllByRole('columnheader')[0]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.Dimension'
-    )
+    expect(getAllByRole('columnheader')[0]).toHaveTextContent('components.TableILS.dimension')
     expect(getAllByRole('columnheader')[1]).toHaveTextContent('')
-    expect(getAllByRole('columnheader')[2]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.Interpretation'
-    )
-    expect(getAllByRole('columnheader')[3]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.Score'
-    )
-    expect(getAllByRole('cell')[1]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.Active'
-    )
-    expect(getAllByRole('cell')[0]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
-    expect(getAllByRole('cell')[5]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.Sensory'
-    )
-    expect(getAllByRole('cell')[4]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.Intuitive'
-    )
-    expect(getAllByRole('cell')[9]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.Visual'
-    )
-    expect(getAllByRole('cell')[8]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.Verbal'
-    )
-    expect(getAllByRole('cell')[13]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.Sequential'
-    )
-    expect(getAllByRole('cell')[12]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.Global'
-    )
+    expect(getAllByRole('columnheader')[2]).toHaveTextContent('components.TableILS.interpretation')
+    expect(getAllByRole('columnheader')[3]).toHaveTextContent('components.TableILS.score')
+    expect(getAllByRole('cell')[1]).toHaveTextContent('components.TableILS.active')
+    expect(getAllByRole('cell')[0]).toHaveTextContent('components.TableILS.reflective')
+    expect(getAllByRole('cell')[5]).toHaveTextContent('components.TableILS.sensory')
+    expect(getAllByRole('cell')[4]).toHaveTextContent('components.TableILS.intuitive')
+    expect(getAllByRole('cell')[9]).toHaveTextContent('components.TableILS.visual')
+    expect(getAllByRole('cell')[8]).toHaveTextContent('components.TableILS.verbal')
+    expect(getAllByRole('cell')[13]).toHaveTextContent('components.TableILS.sequential')
+    expect(getAllByRole('cell')[12]).toHaveTextContent('components.TableILS.global')
   })
 
   test('Dimension interpretation is correct', () => {
-    expect(ILSInterpretation(-1, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')).toBe(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced'
+    expect(ILSInterpretation(-1, 'components.TableILS.reflective')).toBe('components.TableILS.balanced')
+    expect(ILSInterpretation(1, 'components.TableILS.reflective')).toBe('components.TableILS.balanced')
+    expect(ILSInterpretation(-3, 'components.TableILS.reflective')).toBe('components.TableILS.balanced')
+    expect(ILSInterpretation(3, 'components.TableILS.reflective')).toBe('components.TableILS.balanced')
+    expect(ILSInterpretation(-5, 'components.TableILS.reflective')).toBe(
+      'components.TableILS.moderate components.TableILS.reflective'
     )
-    expect(ILSInterpretation(1, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')).toBe(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced'
+    expect(ILSInterpretation(5, 'components.TableILS.reflective')).toBe(
+      'components.TableILS.moderate components.TableILS.reflective'
     )
-    expect(ILSInterpretation(-3, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')).toBe(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced'
+    expect(ILSInterpretation(-7, 'components.TableILS.reflective')).toBe(
+      'components.TableILS.moderate components.TableILS.reflective'
     )
-    expect(ILSInterpretation(3, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')).toBe(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced'
+    expect(ILSInterpretation(7, 'components.TableILS.reflective')).toBe(
+      'components.TableILS.moderate components.TableILS.reflective'
     )
-    expect(ILSInterpretation(-5, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')).toBe(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
+    expect(ILSInterpretation(-9, 'components.TableILS.reflective')).toBe(
+      'components.TableILS.strong components.TableILS.reflective'
     )
-    expect(ILSInterpretation(5, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')).toBe(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
+    expect(ILSInterpretation(9, 'components.TableILS.reflective')).toBe(
+      'components.TableILS.strong components.TableILS.reflective'
     )
-    expect(ILSInterpretation(-7, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')).toBe(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
+    expect(ILSInterpretation(-11, 'components.TableILS.reflective')).toBe(
+      'components.TableILS.strong components.TableILS.reflective'
     )
-    expect(ILSInterpretation(7, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')).toBe(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.moderate components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
-    expect(ILSInterpretation(-9, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')).toBe(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.strong components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
-    expect(ILSInterpretation(9, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')).toBe(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.strong components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
-    expect(ILSInterpretation(-11, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')).toBe(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.strong components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
-    expect(ILSInterpretation(11, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')).toBe(
-      'components.Questionnaire.QuestionnaireResults.Table.TableILS.strong components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
+    expect(ILSInterpretation(11, 'components.TableILS.reflective')).toBe(
+      'components.TableILS.strong components.TableILS.reflective'
     )
 
-    expect(ILSInterpretation(-1, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)).toBe(
-      'balanced components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
+    expect(ILSInterpretation(-1, 'components.TableILS.reflective', true)).toBe(
+      'balanced components.TableILS.reflective'
     )
-    expect(ILSInterpretation(1, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)).toBe(
-      'balanced components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
+    expect(ILSInterpretation(1, 'components.TableILS.reflective', true)).toBe('balanced components.TableILS.reflective')
+    expect(ILSInterpretation(-3, 'components.TableILS.reflective', true)).toBe(
+      'balanced components.TableILS.reflective'
     )
-    expect(ILSInterpretation(-3, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)).toBe(
-      'balanced components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
+    expect(ILSInterpretation(3, 'components.TableILS.reflective', true)).toBe('balanced components.TableILS.reflective')
+    expect(ILSInterpretation(-5, 'components.TableILS.reflective', true)).toBe(
+      'moderate components.TableILS.reflective'
     )
-    expect(ILSInterpretation(3, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)).toBe(
-      'balanced components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
+    expect(ILSInterpretation(5, 'components.TableILS.reflective', true)).toBe('moderate components.TableILS.reflective')
+    expect(ILSInterpretation(-7, 'components.TableILS.reflective', true)).toBe(
+      'moderate components.TableILS.reflective'
     )
-    expect(ILSInterpretation(-5, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)).toBe(
-      'moderate components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
-    expect(ILSInterpretation(5, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)).toBe(
-      'moderate components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
-    expect(ILSInterpretation(-7, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)).toBe(
-      'moderate components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
-    expect(ILSInterpretation(7, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)).toBe(
-      'moderate components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
-    expect(ILSInterpretation(-9, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)).toBe(
-      'strong components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
-    expect(ILSInterpretation(9, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)).toBe(
-      'strong components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
-    expect(
-      ILSInterpretation(-11, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)
-    ).toBe('strong components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')
-    expect(ILSInterpretation(11, 'components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective', true)).toBe(
-      'strong components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective'
-    )
+    expect(ILSInterpretation(7, 'components.TableILS.reflective', true)).toBe('moderate components.TableILS.reflective')
+    expect(ILSInterpretation(-9, 'components.TableILS.reflective', true)).toBe('strong components.TableILS.reflective')
+    expect(ILSInterpretation(9, 'components.TableILS.reflective', true)).toBe('strong components.TableILS.reflective')
+    expect(ILSInterpretation(-11, 'components.TableILS.reflective', true)).toBe('strong components.TableILS.reflective')
+    expect(ILSInterpretation(11, 'components.TableILS.reflective', true)).toBe('strong components.TableILS.reflective')
   })
 
   test('Returned dimensions are correct', () => {
-    expect(ILSDimension(1, 3)).toBe('components.Questionnaire.QuestionnaireResults.Table.TableILS.Active')
-    expect(ILSDimension(1, -3)).toBe('components.Questionnaire.QuestionnaireResults.Table.TableILS.Reflective')
-    expect(ILSDimension(2, 3)).toBe('components.Questionnaire.QuestionnaireResults.Table.TableILS.Sensory')
-    expect(ILSDimension(2, -3)).toBe('components.Questionnaire.QuestionnaireResults.Table.TableILS.Intuitive')
-    expect(ILSDimension(3, 3)).toBe('components.Questionnaire.QuestionnaireResults.Table.TableILS.Visual')
-    expect(ILSDimension(3, -3)).toBe('components.Questionnaire.QuestionnaireResults.Table.TableILS.Verbal')
-    expect(ILSDimension(4, 3)).toBe('components.Questionnaire.QuestionnaireResults.Table.TableILS.Sequential')
-    expect(ILSDimension(4, -3)).toBe('components.Questionnaire.QuestionnaireResults.Table.TableILS.Global')
+    expect(ILSDimension(1, 3)).toBe('components.TableILS.active')
+    expect(ILSDimension(1, -3)).toBe('components.TableILS.reflective')
+    expect(ILSDimension(2, 3)).toBe('components.TableILS.sensory')
+    expect(ILSDimension(2, -3)).toBe('components.TableILS.intuitive')
+    expect(ILSDimension(3, 3)).toBe('components.TableILS.visual')
+    expect(ILSDimension(3, -3)).toBe('components.TableILS.verbal')
+    expect(ILSDimension(4, 3)).toBe('components.TableILS.sequential')
+    expect(ILSDimension(4, -3)).toBe('components.TableILS.global')
 
-    expect(ILSDimension(1, 3, true)).toBe('Active')
-    expect(ILSDimension(1, -3, true)).toBe('Reflective')
-    expect(ILSDimension(2, 3, true)).toBe('Sensory')
-    expect(ILSDimension(2, -3, true)).toBe('Intuitive')
-    expect(ILSDimension(3, 3, true)).toBe('Visual')
-    expect(ILSDimension(3, -3, true)).toBe('Verbal')
-    expect(ILSDimension(4, 3, true)).toBe('Sequential')
-    expect(ILSDimension(4, -3, true)).toBe('Global')
+    expect(ILSDimension(1, 3, true)).toBe('active')
+    expect(ILSDimension(1, -3, true)).toBe('reflective')
+    expect(ILSDimension(2, 3, true)).toBe('sensory')
+    expect(ILSDimension(2, -3, true)).toBe('intuitive')
+    expect(ILSDimension(3, 3, true)).toBe('visual')
+    expect(ILSDimension(3, -3, true)).toBe('verbal')
+    expect(ILSDimension(4, 3, true)).toBe('sequential')
+    expect(ILSDimension(4, -3, true)).toBe('global')
 
     expect(ILSDimension(100, 3)).toBe('No dimension found')
     expect(ILSDimension(100, 3, true)).toBe('No dimension found')

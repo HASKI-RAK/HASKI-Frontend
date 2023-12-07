@@ -111,14 +111,9 @@ export const TableILSQuestions = memo(
 
     const stepsILSData = useMemo(() => {
       return [
-        ...(t<string>(
-          ilsLong
-            ? 'components.Questionnaire.QuestionnaireQuestions.Table.ILSLongQuestions'
-            : 'components.Questionnaire.QuestionnaireQuestions.Table.ILSShortQuestions',
-          {
-            returnObjects: true
-          }
-        ) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
+        ...(t<string>(ilsLong ? 'components.TableILSQuestions.ilsLong' : 'components.TableILSQuestions.ilsShort', {
+          returnObjects: true
+        }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
       ]
     }, [])
 
@@ -161,14 +156,14 @@ export const TableILSQuestions = memo(
       sendAnswers().then((res) => {
         if (res) {
           addSnackbar({
-            message: t('Data.send.successfull'),
+            message: t('Send.datasuccessfull'),
             severity: 'success',
             autoHideDuration: 5000
           })
           setSuccessSend(true)
         } else {
           addSnackbar({
-            message: t('Data.send.unsuccessfull'),
+            message: t('appGlobal.dataSendUnsuccessful'),
             severity: 'error',
             autoHideDuration: 5000
           })
@@ -221,16 +216,13 @@ export const TableILSQuestions = memo(
     )
 
     const questionnaireType = ilsLong
-      ? t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSLong.Part1')
-      : t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ILSShort.Part1')
+      ? t('components.QuestionnaireResultsModal.ilsLongNoData-1')
+      : t('components.QuestionnaireResultsModal.ilsShortNoData-1')
 
     return (
       <Box>
         {activeStep == 0 ? (
-          <CoverSheet
-            header={questionnaireType}
-            body={t('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')}
-          />
+          <CoverSheet header={questionnaireType} body={t('components.TableILSQuestions.introduction')} />
         ) : (
           <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
             <ButtonStack

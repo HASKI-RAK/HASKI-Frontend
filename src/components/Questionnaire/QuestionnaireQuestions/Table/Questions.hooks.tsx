@@ -43,7 +43,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
           })
           .catch(() => {
             addSnackbar({
-              message: t('ILS.sending.error'),
+              message: t('error.postILS'),
               severity: 'error'
             })
             return false
@@ -59,7 +59,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
           })
           .catch(() => {
             addSnackbar({
-              message: t('ListK.sending.error'),
+              message: t('error.postListK'),
               severity: 'error'
             })
             return false

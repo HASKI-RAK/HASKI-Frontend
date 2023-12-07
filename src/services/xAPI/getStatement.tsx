@@ -85,10 +85,9 @@ const getParent = (path: string, getEnglishName: (key: string) => string) => {
     {
       id: new URL(window.location.href).origin.concat(path),
       definition: {
-        type:
-          (getConfig()
-            .WIKI ?? '').concat('/pages/')
-            .concat(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/),
+        type: (getConfig().WIKI ?? '')
+          .concat('/pages/')
+          .concat(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/),
         name: {
           en: getEnglishName(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/) ?? ''
         }

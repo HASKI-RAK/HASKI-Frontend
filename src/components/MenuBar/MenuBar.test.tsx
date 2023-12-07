@@ -30,7 +30,7 @@ describe('MenuBar', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -97,7 +97,7 @@ describe('MenuBar', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -161,7 +161,7 @@ describe('MenuBar', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction'))
+    expect(getByText('components.TableListKQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonListKQuestionnaire')
@@ -274,7 +274,7 @@ describe('MenuBar', () => {
     )
 
     await waitFor(async () => {
-      fireEvent.click(getByText('components.MenuBar.TopicButton'))
+      fireEvent.click(getByText('appGlobal.topics'))
       await waitFor(() => {
         expect(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0]).toBeInTheDocument()
       })
@@ -301,7 +301,7 @@ describe('MenuBar', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.MenuBar.TopicButton'))
+      fireEvent.click(getByText('appGlobal.topics'))
       waitFor(() => {
         expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
       })
@@ -352,7 +352,7 @@ describe('MenuBar', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.MenuBar.TopicButton'))
+      fireEvent.click(getByText('appGlobal.topics'))
       waitFor(() => {
         expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
       })
@@ -496,7 +496,7 @@ describe('MenuBar', () => {
     )
 
     await waitFor(async () => {
-      fireEvent.click(getByText('components.MenuBar.TopicButton'))
+      fireEvent.click(getByText('appGlobal.topics'))
       await waitFor(() => {
         expect(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0]).toBeInTheDocument()
         fireEvent.click(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0])
@@ -517,9 +517,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILSshort'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')
-    ).toBeInTheDocument()
+    expect(getByText('components.TableILSQuestions.introduction')).toBeInTheDocument()
   })
 
   it('closes the ils-short questionnaire', async () => {
@@ -536,9 +534,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILSshort'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')
-    ).toBeInTheDocument()
+    expect(getByText('components.TableILSQuestions.introduction')).toBeInTheDocument()
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
     fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
@@ -556,9 +552,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILS'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')
-    ).toBeInTheDocument()
+    expect(getByText('components.TableILSQuestions.introduction')).toBeInTheDocument()
   })
 
   it('close the ils-long questionnaire', async () => {
@@ -575,9 +569,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireILS'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction')
-    ).toBeInTheDocument()
+    expect(getByText('components.TableILSQuestions.introduction')).toBeInTheDocument()
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
     fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
@@ -595,9 +587,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireListk'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')
-    ).toBeInTheDocument()
+    expect(getByText('components.TableListKQuestions.introduction')).toBeInTheDocument()
   })
 
   it('close the listk questionnaire', async () => {
@@ -614,9 +604,7 @@ describe('MenuBar', () => {
     fireEvent.click(getByTestId('useravatar'))
     fireEvent.click(getByTestId('questionnaireListk'))
     expect(getByTestId('Questions Modal')).toBeInTheDocument()
-    expect(
-      getByText('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')
-    ).toBeInTheDocument()
+    expect(getByText('components.TableListKQuestions.introduction')).toBeInTheDocument()
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
     fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
@@ -632,7 +620,7 @@ describe('MenuBar', () => {
     )
 
     fireEvent.click(getByTestId('useravatar'))
-    fireEvent.click(getAllByText('components.MenuBar.Profile.Logout')[0])
+    fireEvent.click(getAllByText('components.MenuBar.profileLogout')[0])
     expect(navigate).toHaveBeenCalledWith('/login')
   })
 })

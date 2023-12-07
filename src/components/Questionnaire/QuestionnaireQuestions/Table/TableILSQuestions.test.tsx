@@ -52,7 +52,7 @@ describe('Test TableILSQuestions Long with all Methods', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const RadioButton1 = getByTestId('ilsLongQuestionnaireILSButtonGroup1').querySelectorAll(
@@ -91,7 +91,7 @@ describe('Test TableILSQuestions Long with all Methods', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -134,7 +134,7 @@ describe('Test TableILSQuestions Long with all Methods', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -161,21 +161,13 @@ describe('Test TableILSQuestions Long with all Methods', () => {
     fireEvent.click(RadioButton4)
 
     expect(RadioButton1.checked).toBe(true)
-    expect(RadioButton1.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.1'
-    )
+    expect(RadioButton1.value).toBe('components.TableILSQuestions.answer-1-1')
     expect(RadioButton2.checked).toBe(true)
-    expect(RadioButton2.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.2'
-    )
+    expect(RadioButton2.value).toBe('components.TableILSQuestions.answer-2-2')
     expect(RadioButton3.checked).toBe(true)
-    expect(RadioButton3.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-3.1'
-    )
+    expect(RadioButton3.value).toBe('components.TableILSQuestions.answer-3-1')
     expect(RadioButton4.checked).toBe(true)
-    expect(RadioButton4.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2'
-    )
+    expect(RadioButton4.value).toBe('components.TableILSQuestions.answer-4-2')
     expect(nextButton).toBeEnabled()
 
     fireEvent.click(nextButton)
@@ -199,21 +191,13 @@ describe('Test TableILSQuestions Long with all Methods', () => {
     fireEvent.click(RadioButton8)
 
     expect(RadioButton5.checked).toBe(true)
-    expect(RadioButton5.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-5.1'
-    )
+    expect(RadioButton5.value).toBe('components.TableILSQuestions.answer-5-1')
     expect(RadioButton6.checked).toBe(true)
-    expect(RadioButton6.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-6.1'
-    )
+    expect(RadioButton6.value).toBe('components.TableILSQuestions.answer-6-1')
     expect(RadioButton7.checked).toBe(true)
-    expect(RadioButton7.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1'
-    )
+    expect(RadioButton7.value).toBe('components.TableILSQuestions.answer-7-1')
     expect(RadioButton8.checked).toBe(true)
-    expect(RadioButton8.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.1'
-    )
+    expect(RadioButton8.value).toBe('components.TableILSQuestions.answer-8-1')
     expect(nextButton).toBeEnabled()
   })
 
@@ -227,7 +211,7 @@ describe('Test TableILSQuestions Long with all Methods', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -260,21 +244,13 @@ describe('Test TableILSQuestions Long with all Methods', () => {
     fireEvent.click(RadioButton4)
 
     expect(RadioButton1.checked).toBe(true)
-    expect(RadioButton1.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.1'
-    )
+    expect(RadioButton1.value).toBe('components.TableILSQuestions.answer-1-1')
     expect(RadioButton2.checked).toBe(true)
-    expect(RadioButton2.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.2'
-    )
+    expect(RadioButton2.value).toBe('components.TableILSQuestions.answer-2-2')
     expect(RadioButton3.checked).toBe(true)
-    expect(RadioButton3.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-3.1'
-    )
+    expect(RadioButton3.value).toBe('components.TableILSQuestions.answer-3-1')
     expect(RadioButton4.checked).toBe(true)
-    expect(RadioButton4.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2'
-    )
+    expect(RadioButton4.value).toBe('components.TableILSQuestions.answer-4-2')
     expect(nextButton).toBeEnabled()
 
     fireEvent.click(nextButton)
@@ -290,18 +266,18 @@ describe('Test TableILSQuestions Long with all Methods', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
-    const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-1.1'
-    const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1'
-    const ValuePage1RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-3.2'
-    const ValuePage1RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2'
+    const ValuePage1RadioButton1 = 'components.TableILSQuestions.answer-1-1'
+    const ValuePage1RadioButton2 = 'components.TableILSQuestions.answer-2-1'
+    const ValuePage1RadioButton3 = 'components.TableILSQuestions.answer-3-2'
+    const ValuePage1RadioButton4 = 'components.TableILSQuestions.answer-4-2'
 
-    const ValuePage2RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-5.1'
-    const ValuePage2RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-6.1'
-    const ValuePage2RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.2'
-    const ValuePage2RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.2'
+    const ValuePage2RadioButton1 = 'components.TableILSQuestions.answer-5-1'
+    const ValuePage2RadioButton2 = 'components.TableILSQuestions.answer-6-1'
+    const ValuePage2RadioButton3 = 'components.TableILSQuestions.answer-7-2'
+    const ValuePage2RadioButton4 = 'components.TableILSQuestions.answer-8-2'
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
@@ -384,7 +360,7 @@ describe('Test TableILSQuestions Long with all Methods', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -446,7 +422,7 @@ describe('Table ILS Questionnaire Short', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
@@ -485,7 +461,7 @@ describe('Table ILS Questionnaire Short', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -528,7 +504,7 @@ describe('Table ILS Questionnaire Short', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -555,21 +531,13 @@ describe('Table ILS Questionnaire Short', () => {
     fireEvent.click(RadioButton4)
 
     expect(RadioButton1.checked).toBe(true)
-    expect(RadioButton1.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
-    )
+    expect(RadioButton1.value).toBe('components.TableILSQuestions.answer-9-1')
     expect(RadioButton2.checked).toBe(true)
-    expect(RadioButton2.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.2'
-    )
+    expect(RadioButton2.value).toBe('components.TableILSQuestions.answer-2-2')
     expect(RadioButton3.checked).toBe(true)
-    expect(RadioButton3.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1'
-    )
+    expect(RadioButton3.value).toBe('components.TableILSQuestions.answer-7-1')
     expect(RadioButton4.checked).toBe(true)
-    expect(RadioButton4.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2'
-    )
+    expect(RadioButton4.value).toBe('components.TableILSQuestions.answer-4-2')
     expect(nextButton).toBeEnabled()
 
     fireEvent.click(nextButton)
@@ -592,21 +560,13 @@ describe('Table ILS Questionnaire Short', () => {
     fireEvent.click(RadioButton8)
 
     expect(RadioButton5.checked).toBe(true)
-    expect(RadioButton5.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.1'
-    )
+    expect(RadioButton5.value).toBe('components.TableILSQuestions.answer-13-1')
     expect(RadioButton6.checked).toBe(true)
-    expect(RadioButton6.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.1'
-    )
+    expect(RadioButton6.value).toBe('components.TableILSQuestions.answer-14-1')
     expect(RadioButton7.checked).toBe(true)
-    expect(RadioButton7.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.1'
-    )
+    expect(RadioButton7.value).toBe('components.TableILSQuestions.answer-19-1')
     expect(RadioButton8.checked).toBe(true)
-    expect(RadioButton8.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.1'
-    )
+    expect(RadioButton8.value).toBe('components.TableILSQuestions.answer-8-1')
     expect(nextButton).toBeEnabled()
   })
 
@@ -620,7 +580,7 @@ describe('Table ILS Questionnaire Short', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -653,21 +613,13 @@ describe('Table ILS Questionnaire Short', () => {
     fireEvent.click(RadioButton4)
 
     expect(RadioButton1.checked).toBe(true)
-    expect(RadioButton1.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
-    )
+    expect(RadioButton1.value).toBe('components.TableILSQuestions.answer-9-1')
     expect(RadioButton2.checked).toBe(true)
-    expect(RadioButton2.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.2'
-    )
+    expect(RadioButton2.value).toBe('components.TableILSQuestions.answer-2-2')
     expect(RadioButton3.checked).toBe(true)
-    expect(RadioButton3.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1'
-    )
+    expect(RadioButton3.value).toBe('components.TableILSQuestions.answer-7-1')
     expect(RadioButton4.checked).toBe(true)
-    expect(RadioButton4.value).toBe(
-      'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.2'
-    )
+    expect(RadioButton4.value).toBe('components.TableILSQuestions.answer-4-2')
     expect(nextButton).toBeEnabled()
 
     fireEvent.click(nextButton)
@@ -683,18 +635,18 @@ describe('Table ILS Questionnaire Short', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
-    const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
-    const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1'
-    const ValuePage1RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1'
-    const ValuePage1RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.1'
+    const ValuePage1RadioButton1 = 'components.TableILSQuestions.answer-9-1'
+    const ValuePage1RadioButton2 = 'components.TableILSQuestions.answer-2-1'
+    const ValuePage1RadioButton3 = 'components.TableILSQuestions.answer-7-1'
+    const ValuePage1RadioButton4 = 'components.TableILSQuestions.answer-4-1'
 
-    const ValuePage2RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.2'
-    const ValuePage2RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.2'
-    const ValuePage2RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.2'
-    const ValuePage2RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.2'
+    const ValuePage2RadioButton1 = 'components.TableILSQuestions.answer-13-2'
+    const ValuePage2RadioButton2 = 'components.TableILSQuestions.answer-14-2'
+    const ValuePage2RadioButton3 = 'components.TableILSQuestions.answer-19-2'
+    const ValuePage2RadioButton4 = 'components.TableILSQuestions.answer-8-2'
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
@@ -801,7 +753,7 @@ describe('Table ILS Questionnaire Short', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -869,7 +821,7 @@ describe('Table ILS Questionnaire Short', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
@@ -933,18 +885,18 @@ describe('Table ILS Questionnaire Short', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
-    const ValuePage1RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-9.1'
-    const ValuePage1RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-2.1'
-    const ValuePage1RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-7.1'
-    const ValuePage1RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-4.1'
+    const ValuePage1RadioButton1 = 'components.TableILSQuestions.answer-9-1'
+    const ValuePage1RadioButton2 = 'components.TableILSQuestions.answer-2-1'
+    const ValuePage1RadioButton3 = 'components.TableILSQuestions.answer-7-1'
+    const ValuePage1RadioButton4 = 'components.TableILSQuestions.answer-4-1'
 
-    const ValuePage2RadioButton1 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-13.2'
-    const ValuePage2RadioButton2 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-14.2'
-    const ValuePage2RadioButton3 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-19.2'
-    const ValuePage2RadioButton4 = 'components.Questionnaire.QuestionnaireQuestions.Table.TableILSQuestions.Answer-8.2'
+    const ValuePage2RadioButton1 = 'components.TableILSQuestions.answer-13-2'
+    const ValuePage2RadioButton2 = 'components.TableILSQuestions.answer-14-2'
+    const ValuePage2RadioButton3 = 'components.TableILSQuestions.answer-19-2'
+    const ValuePage2RadioButton4 = 'components.TableILSQuestions.answer-8-2'
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
     const backButton = getByTestId('backButtonILSQuestionnaire')
@@ -1051,7 +1003,7 @@ describe('Table ILS Questionnaire Short', () => {
     const startButton = getByTestId('StartButtonQuestionnaire')
 
     expect(startButton).toBeEnabled()
-    expect(getByText('components.Questionnaire.QuestionnaireQuestions.Table.ILSQuestions.Introduction'))
+    expect(getByText('components.TableILSQuestions.introduction'))
     fireEvent.click(startButton)
 
     const nextButton = getByTestId('nextButtonILSQuestionnaire')
