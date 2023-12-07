@@ -5,7 +5,7 @@ import {
   useProjectDescriptionCardHookParams,
   ProjectDescriptionCardHookReturn
 } from './ProjectDescriptionCard.hooks'
-// import { Typewriter } from '@services'
+import { Typewriter } from '@components'
 
 /**
  * @prop body - The body text that is displayed on the bottom left side.
@@ -81,7 +81,7 @@ const ProjectDescriptionCard = ({
           mb: '7.5rem'
         }}>
         <Grid item xs={7}>
-          <Typography
+          <Typewriter
             variant="h3"
             align="center"
             sx={{
@@ -93,11 +93,8 @@ const ProjectDescriptionCard = ({
               },
               pt: '2.5rem'
             }}>
-            {
-              //<Typewriter text={props.header!} delay={100} />
-              props.header!
-            }
-          </Typography>
+            {props.header!}
+          </Typewriter>
           <Fade in={!!bodyState} easing="linear" timeout={1000}>
             <Typography align="center" sx={{ pt: '2.5rem', pb: '2.5rem' }} variant="h5">
               {bodyState}
