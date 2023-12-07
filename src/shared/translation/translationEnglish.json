@@ -1,7 +1,7 @@
 {
 	"appGlobal.accept": "Accept",
 	"appGlobal.back": "Back",
-	"appGlobal.dataSendSuccessful": "Send.dataSuccessfully",
+	"appGlobal.dataSendSuccessful": "Data sent successfully",
 	"appGlobal.dataSendUnsuccessful": "Data could not be sent",
 	"appGlobal.decline": "Decline",
 	"appGlobal.help": "Help",

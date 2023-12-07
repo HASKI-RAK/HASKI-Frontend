@@ -152,7 +152,7 @@ const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmpt
       if (res) {
         setCookie('questionnaire_sent_token', true, { path: '/' })
         addSnackbar({
-          message: t('Send.datasuccessfull'),
+          message: t('appGlobal.dataSendSuccessful'),
           severity: 'success',
           autoHideDuration: 5000
         })
