@@ -48,70 +48,28 @@ describe('Test TableList-K with all Methods', () => {
   test('Table Values are correct', () => {
     const { getAllByRole } = render(<TableListK data={mockListK} />)
 
-    expect(getAllByRole('columnheader')[0]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Factors & subscales'
-    )
-    expect(getAllByRole('columnheader')[1]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Score'
-    )
-    expect(getAllByRole('columnheader')[2]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Factors & subscales'
-    )
-    expect(getAllByRole('columnheader')[3]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Score'
-    )
-    expect(getAllByRole('cell')[0]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'
-    )
-    expect(getAllByRole('cell')[2]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'
-    )
-    expect(getAllByRole('cell')[4]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize'
-    )
-    expect(getAllByRole('cell')[6]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention'
-    )
-    expect(getAllByRole('cell')[8]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate'
-    )
-    expect(getAllByRole('cell')[10]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort'
-    )
-    expect(getAllByRole('cell')[12]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review'
-    )
-    expect(getAllByRole('cell')[14]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Time'
-    )
-    expect(getAllByRole('cell')[16]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat'
-    )
+    expect(getAllByRole('columnheader')[0]).toHaveTextContent('components.TableListK.factorsAndSubscales')
+    expect(getAllByRole('columnheader')[1]).toHaveTextContent('components.TableListK.score')
+    expect(getAllByRole('columnheader')[2]).toHaveTextContent('components.TableListK.factorsAndSubscales')
+    expect(getAllByRole('columnheader')[3]).toHaveTextContent('components.TableListK.score')
+    expect(getAllByRole('cell')[0]).toHaveTextContent('components.TableListK.cognitiveStrategies')
+    expect(getAllByRole('cell')[2]).toHaveTextContent('components.TableListK.internalResourceManagementStrategies')
+    expect(getAllByRole('cell')[4]).toHaveTextContent('components.TableListK.organize')
+    expect(getAllByRole('cell')[6]).toHaveTextContent('components.TableListK.attention')
+    expect(getAllByRole('cell')[8]).toHaveTextContent('components.TableListK.elaborate')
+    expect(getAllByRole('cell')[10]).toHaveTextContent('components.TableListK.effort')
+    expect(getAllByRole('cell')[12]).toHaveTextContent('components.TableListK.criticalReview')
+    expect(getAllByRole('cell')[14]).toHaveTextContent('components.TableListK.time')
+    expect(getAllByRole('cell')[16]).toHaveTextContent('components.TableListK.repeat')
     expect(getAllByRole('cell')[18]).toHaveTextContent('')
-    expect(getAllByRole('cell')[20]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'
-    )
-    expect(getAllByRole('cell')[22]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'
-    )
-    expect(getAllByRole('cell')[24]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans'
-    )
-    expect(getAllByRole('cell')[26]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates'
-    )
-    expect(getAllByRole('cell')[28]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Control'
-    )
-    expect(getAllByRole('cell')[30]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research'
-    )
-    expect(getAllByRole('cell')[32]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate'
-    )
-    expect(getAllByRole('cell')[34]).toHaveTextContent(
-      'components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment'
-    )
+    expect(getAllByRole('cell')[20]).toHaveTextContent('components.TableListK.metacognitiveStrategies')
+    expect(getAllByRole('cell')[22]).toHaveTextContent('components.TableListK.externalResourceManagementStrategies')
+    expect(getAllByRole('cell')[24]).toHaveTextContent('components.TableListK.goalsAndPlans')
+    expect(getAllByRole('cell')[26]).toHaveTextContent('components.TableListK.learningWithClassmates')
+    expect(getAllByRole('cell')[28]).toHaveTextContent('components.TableListK.control')
+    expect(getAllByRole('cell')[30]).toHaveTextContent('components.TableListK.literatureResearch')
+    expect(getAllByRole('cell')[32]).toHaveTextContent('components.TableListK.regulate')
+    expect(getAllByRole('cell')[34]).toHaveTextContent('components.TableListK.learningEnvironment')
   })
 
   test('Table Score-values are numbers', () => {

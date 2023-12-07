@@ -101,7 +101,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   const location = useLocation()
   const [lmsUserID, setLmsUserID] = useState<string | undefined>(undefined)
 
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const getUser = usePersistedStore((state) => state.getUser)
 
   // Function to get the english name of a page.
   const getEnglishName = useCallback(
@@ -113,7 +113,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
 
   useEffect(() => {
     isAuth &&
-      fetchUser()
+    getUser()
         .then((user) => {
           setLmsUserID(user.lms_user_id.toString())
         })
@@ -121,7 +121,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
           log.error(error)
           return undefined
         })
-  }, [fetchUser, isAuth])
+  }, [getUser, isAuth])
 
   // Wraps function so send statements from components
   const sendStatement = useCallback(

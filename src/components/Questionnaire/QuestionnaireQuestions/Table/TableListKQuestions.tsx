@@ -127,14 +127,9 @@ const TableListKQuestions = memo(({ successSend, setSuccessSend, testUndefined }
     answer4: string
     answer5: string
   }[][] = [
-    ...(t<string>(
-      !testUndefined
-        ? 'components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions'
-        : 'components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Undefined',
-      {
-        returnObjects: true
-      }
-    ) as {
+    ...(t<string>(!testUndefined ? 'components.ListKQuestions' : 'components.ListKQuestions.Undefined', {
+      returnObjects: true
+    }) as {
       question: string
       questionLabel: string
       answer1: string
@@ -158,14 +153,14 @@ const TableListKQuestions = memo(({ successSend, setSuccessSend, testUndefined }
     sendAnswers().then((res) => {
       if (res) {
         addSnackbar({
-          message: t('Data.send.successfull'),
+          message: t('appGlobal.dataSendSuccessful'),
           severity: 'success',
           autoHideDuration: 5000
         })
         setSuccessSend(true)
       } else {
         addSnackbar({
-          message: t('Data.send.unsuccessfull'),
+          message: t('appGlobal.dataSendUnsuccessful'),
           severity: 'error',
           autoHideDuration: 5000
         })
@@ -297,8 +292,8 @@ const TableListKQuestions = memo(({ successSend, setSuccessSend, testUndefined }
     <Box>
       {activeStep == 0 ? (
         <CoverSheet
-          header={t('components.Questionnaire.QuestionnaireResults.Modal.NoData.ListK')}
-          body={t('components.Questionnaire.QuestionnaireQuestions.Table.ListKQuestions.Introduction')}
+          header={t('components.QuestionnaireResultsModal.listKNoData')}
+          body={t('components.TableListKQuestions.introduction')}
         />
       ) : (
         <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>

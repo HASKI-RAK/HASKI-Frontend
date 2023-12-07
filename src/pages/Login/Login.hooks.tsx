@@ -1,4 +1,4 @@
-import { AuthContext, SnackbarContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
+import { AuthContext, SnackbarContext, postLogin, postLoginCredentials, fetchRedirectMoodleLogin } from '@services'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useContext } from 'react'
 import { usePersistedStore } from '@store'
@@ -27,7 +27,7 @@ export type LoginHookReturn = {
 export const useLogin = (props: LoginHookParams): LoginHookReturn => {
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const getUser = usePersistedStore((state) => state.getUser)
   const { addSnackbar } = useContext(SnackbarContext)
 
   // Login with username and password
@@ -35,7 +35,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
     postLoginCredentials(Number(username), password).then((user) => {
       // supply auth context
       authContext.setExpire(9999999999)
-      fetchUser(user)
+      getUser(user)
 
       // then redirect to home page
       navigate('/', { replace: true })
@@ -44,7 +44,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
 
   const onMoodleLogin = () => {
     props.setIsLoading(true)
-    redirectMoodleLogin()
+    fetchRedirectMoodleLogin()
       .then((response) =>
         // 👇️ redirects to Moodle LTI launch acticity
         window.location.replace(response.lti_launch_view)

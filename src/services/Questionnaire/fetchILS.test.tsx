@@ -1,5 +1,5 @@
 import { getConfig } from '@shared'
-import { getILS } from './getILS'
+import { fetchILS } from './fetchILS'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -11,7 +11,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('getILS has expected behaviour', () => {
+describe('fetchILS has expected behaviour', () => {
   it('should return negative values when the response is successful (because of dimensions)', async () => {
     const inputData = {
       course: 'dude where is my car',
@@ -48,7 +48,7 @@ describe('getILS has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const result = await getILS(1, 1, 1)
+    const result = await fetchILS(1, 1, 1)
 
     expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/1/1/student/1/learningStyle`, {
       method: 'GET',
@@ -83,7 +83,7 @@ describe('getILS has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const result = await getILS(1, 1, 1)
+    const result = await fetchILS(1, 1, 1)
 
     expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/1/1/student/1/learningStyle`, {
       method: 'GET',

@@ -109,7 +109,7 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
   return (
     <Grid container columnSpacing={1} rowSpacing={1}>
       <Grid item xs={12} sm={12} sx={{ mt: '1rem', mb: '1rem' }}>
-        <Typography variant="h3">{t('pages.glossary.title')}</Typography>
+        <Typography variant="h3">{t('pages.glossary')}</Typography>
       </Grid>
       <Grid item xs={8} sm={6}>
         <Searchbar label={t('pages.glossary.search')} setSearchQuery={setSearchQuery} timeout={100} />

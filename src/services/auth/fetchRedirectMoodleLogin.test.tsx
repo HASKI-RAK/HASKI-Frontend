@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { redirectMoodleLogin } from './redirectMoodleLogin'
+import { fetchRedirectMoodleLogin } from './fetchRedirectMoodleLogin'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -12,9 +12,9 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('redirectMoodleLogin', () => {
+describe('fetchRedirectMoodleLogin', () => {
   it('should success', async () => {
-    const loginStatus = await redirectMoodleLogin()
+    const loginStatus = await fetchRedirectMoodleLogin()
     expect(loginStatus).toEqual({ lti_launch_view: 'https://moodle.test' })
   })
 })

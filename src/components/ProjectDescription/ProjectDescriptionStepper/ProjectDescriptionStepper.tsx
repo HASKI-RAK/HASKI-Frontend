@@ -121,14 +121,14 @@ const ProjectDescriptionStepper = ({
                 size="small"
                 onClick={handleNext}
                 disabled={activeStep === (props.body && props.body.length - 1)}>
-                {t('Next')}
+                {t('appGlobal.next')}
                 <KeyboardArrowRight />
               </Button>
             }
             backButton={
               <Button id="back-button" size="small" onClick={handleBack} disabled={activeStep === 0}>
                 <KeyboardArrowLeft />
-                {t('Back')}
+                {t('appGlobal.back')}
               </Button>
             }
           />
