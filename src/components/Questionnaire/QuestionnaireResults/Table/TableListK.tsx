@@ -48,70 +48,70 @@ const TableListK = ({ data }: TableListKProps) => {
   const rows = [
     {
       id: 1,
-      col1: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Factors & subscales'),
-      col2: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Score')
+      col1: t('components.TableListK.factorsAndSubscales'),
+      col2: t('components.TableListK.score')
     },
     {
       id: 2,
-      col1: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Cognitive strategies'),
+      col1: t('components.TableListK.cognitiveStrategies'),
       col2: (Math.round((averageCognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
-      col3: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Internal resource management strategies'),
+      col3: t('components.TableListK.internalResourceManagementStrategies'),
       col4: (Math.round((averageInternalResourceManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2)
     },
     {
       id: 3,
-      col1: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Organize'),
+      col1: t('components.TableListK.organize'),
       col2: organize.toFixed(2),
-      col3: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Attention'),
+      col3: t('components.TableListK.attention'),
       col4: attention.toFixed(2)
     },
     {
       id: 4,
-      col1: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Elaborate'),
+      col1: t('components.TableListK.elaborate'),
       col2: elaborate.toFixed(2),
-      col3: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Effort'),
+      col3: t('components.TableListK.effort'),
       col4: effort.toFixed(2)
     },
     {
       id: 5,
-      col1: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Critical review'),
+      col1: t('components.TableListK.criticalReview'),
       col2: criticalReview.toFixed(2),
-      col3: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Time'),
+      col3: t('components.TableListK.time'),
       col4: time.toFixed(2)
     },
     {
       id: 6,
-      col1: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Repeat'),
+      col1: t('components.TableListK.repeat'),
       col2: repeat.toFixed(2),
       col3: '',
       col4: ''
     },
     {
       id: 7,
-      col1: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Metacognitive strategies'),
+      col1: t('components.TableListK.metacognitiveStrategies'),
       col2: (Math.round((averageMetacognitiveStrategies + Number.EPSILON) * 100) / 100).toFixed(2),
-      col3: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.External resource management strategies'),
+      col3: t('components.TableListK.externalResourceManagementStrategies'),
       col4: (Math.round((averageExternalResourcesManagementStrategies + Number.EPSILON) * 100) / 100).toFixed(2)
     },
     {
       id: 8,
-      col1: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Goals & plans'),
+      col1: t('components.TableListK.goalsAndPlans'),
       col2: goalsPlans.toFixed(2),
-      col3: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning with classmates'),
+      col3: t('components.TableListK.learningWithClassmates'),
       col4: learnWithClassmates.toFixed(2)
     },
     {
       id: 9,
-      col1: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Control'),
+      col1: t('components.TableListK.control'),
       col2: control.toFixed(2),
-      col3: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Literature research'),
+      col3: t('components.TableListK.literatureResearch'),
       col4: literatureResearch.toFixed(2)
     },
     {
       id: 10,
-      col1: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Regulate'),
+      col1: t('components.TableListK.regulate'),
       col2: regulate.toFixed(2),
-      col3: t('components.Questionnaire.QuestionnaireResults.Table.TableListK.Learning environment'),
+      col3: t('components.TableListK.learningEnvironment'),
       col4: learningEnvironment.toFixed(2)
     }
   ]

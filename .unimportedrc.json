@@ -14,7 +14,7 @@
     "src/common/index.ts",
     "src/components/Nodes/BasicNode/BasicNode.tsx",
     "src/index.tsx",
-    "src/shared/auto-order-json-translations.ts",
+    "src/shared/auto-order-json-translations.js",
     "src/shared/config.ts"
   ],
   "ignoreUnresolved": [],

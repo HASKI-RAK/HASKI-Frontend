@@ -59,7 +59,7 @@ const Course = () => {
                     onClick={() => {
                       navigate('topic/' + topic.id)
                     }}>
-                    {t('components.Course.Button.Topic')}
+                    {t('pages.course.topicButton')}
                   </Button>
                 </CardContent>
               </Card>

@@ -11,6 +11,9 @@ import VideoNode from '../VideoNode/VideoNode'
 import BasicNode from '../BasicNode/BasicNode'
 import { NodeTypes } from 'reactflow'
 import type { LearningPathLearningElementNode } from './LearningPathLearningElementNode/LearningPathLearningElementNode'
+import ApplicationExampleNode from '../ApplicationExampleNode/ApplicationExampleNode'
+import ForumNode from '../ForumNode/ForumNode'
+import LearningObjectiveNode from '../LearningObjectiveNode/LearningObjectiveNode'
 
 /**
  * nodeTypes presents a object containing all node types.
@@ -19,11 +22,14 @@ import type { LearningPathLearningElementNode } from './LearningPathLearningElem
 export const nodeTypes: NodeTypes = {
   RQ: FeedbackNode,
   KÜ: ShortTextualIntroductionNode,
+  AB: ApplicationExampleNode,
   EK: ExplanationNode,
   AN: VideoNode,
   BE: ExampleNode,
+  FO: ForumNode,
   ÜB: ExerciseNode,
   ZF: SummaryNode,
+  LZ: LearningObjectiveNode,
   ZL: AdditionalLiteratureNode,
   SE: SelfAssessmentNode,
   GROUP: DefaultGroup,

@@ -1,2 +1,2 @@
-export { getLearningPathElement } from './getLearningPathElement'
+export { fetchLearningPathElement } from './fetchLearningPathElement'
 export { postCalculateLearningPathILS } from './postCalculateLearningPathILS'

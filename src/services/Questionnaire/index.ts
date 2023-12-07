@@ -1,6 +1,6 @@
-import { getILS } from './getILS'
-import { getListK } from './getListK'
+import { fetchILS } from './fetchILS'
+import { fetchListK } from './fetchListK'
 import { postListK } from './postListK'
 import { postILS } from './postILS'
 
-export { getILS, getListK, postListK, postILS }
+export { fetchILS, fetchListK, postListK, postILS }

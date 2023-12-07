@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react'
-import { AuthContextType, getLogout } from '@services'
+import { AuthContextType, fetchLogout } from '@services'
 import { usePersistedStore } from '@store'
 import log from 'loglevel'
 
@@ -28,7 +28,7 @@ const useAuthProvider = (): AuthContextType => {
   }, [expiration])
 
   const logout = useCallback(async () => {
-    return getLogout()
+    return fetchLogout()
       .then(() => {
         setExpire(0)
         log.debug('logout successful')

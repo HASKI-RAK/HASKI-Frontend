@@ -1,4 +1,4 @@
-import {getConfig} from '@shared'
+import { getConfig } from '@shared'
 
 /**
  * getActor function.
@@ -13,12 +13,12 @@ import {getConfig} from '@shared'
  * @category Services
  */
 const getActor = (lmsUserID: string) => {
-    return {
-        account: {
-            homePage: new URL(window.location.href).origin,
-            name: lmsUserID
-        }
+  return {
+    account: {
+      homePage: new URL(window.location.href).origin,
+      name: lmsUserID
     }
+  }
 }
 
 /**
@@ -34,12 +34,12 @@ const getActor = (lmsUserID: string) => {
  * @category Services
  */
 const getVerb = (verb: string) => {
-    return {
-        id: getConfig().WIKI?.concat('/verbs/').concat(verb) ?? '', // URI of action in online directory + element -> hardcoded
-        display: {
-            en: verb
-        }
+  return {
+    id: (getConfig().WIKI ?? '').concat('/verbs/').concat(verb), // URI of action in online directory + element -> hardcoded
+    display: {
+      en: verb
     }
+  }
 }
 
 /**
@@ -56,18 +56,15 @@ const getVerb = (verb: string) => {
  * @category Services
  */
 const getObject = (componentURL: string, component: string) => {
-    return {
-        id: new URL(window.location.href).origin.concat(componentURL),
-        definition: {
-            name: {
-                en: component
-            },
-            type: getConfig().WIKI?.concat('p/common/components/').concat(component.toLowerCase()) ?? '' // wiki url to component e.g.
-                                                                                                         // button (common) -> hardcoded //
-                                                                                                         // wiki url +
-                                                                                                         // componentName.toLowerCase()
-        }
+  return {
+    id: new URL(window.location.href).origin.concat(componentURL),
+    definition: {
+      name: {
+        en: component
+      },
+      type: (getConfig().WIKI ?? '').concat('/common/components/').concat(component.toLowerCase()) // wiki url to component e.g. button (common) -> hardcoded // wiki url + componentName.toLowerCase()
     }
+  }
 }
 
 /**
@@ -84,18 +81,19 @@ const getObject = (componentURL: string, component: string) => {
  * @category Services
  */
 const getParent = (path: string, getEnglishName: (key: string) => string) => {
-    return [
-        {
-            id: new URL(window.location.href).origin.concat(path),
-            definition: {
-                type:
-                    getConfig().WIKI?.concat('/pages/').concat(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/) ?? '',
-                name: {
-                    en: getEnglishName(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/) ?? ''
-                }
-            }
+  return [
+    {
+      id: new URL(window.location.href).origin.concat(path),
+      definition: {
+        type: (getConfig().WIKI ?? '')
+          .concat('/pages/')
+          .concat(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/),
+        name: {
+          en: getEnglishName(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/) ?? ''
         }
-    ]
+      }
+    }
+  ]
 }
 
 /**
@@ -109,17 +107,17 @@ const getParent = (path: string, getEnglishName: (key: string) => string) => {
  * @category Services
  */
 const getGrouping = () => {
-    return [
-        {
-            id: new URL(window.location.href).origin,
-            definition: {
-                type: getConfig().WIKI?.concat('/pages/home') ?? '',
-                name: {
-                    en: 'Home'
-                }
-            }
+  return [
+    {
+      id: new URL(window.location.href).origin,
+      definition: {
+        type: (getConfig().WIKI ?? '').concat('/pages/home'),
+        name: {
+          en: 'Home'
         }
-    ]
+      }
+    }
+  ]
 }
 
 /**
@@ -136,20 +134,18 @@ const getGrouping = () => {
  * @category Services
  */
 export const getContextActivities = (path: string, getEnglishName: (key: string) => string) => {
-    if(path === '/') {
-        return
+  if (path === '/') {
+    return
+  } else if (path.split('/').length === 2) {
+    return {
+      parent: getParent(path, getEnglishName)
     }
-    else if(path.split('/').length === 2) {
-        return {
-            parent: getParent(path, getEnglishName)
-        }
+  } else {
+    return {
+      parent: getParent(path, getEnglishName),
+      grouping: getGrouping()
     }
-    else {
-        return {
-            parent: getParent(path, getEnglishName),
-            grouping: getGrouping()
-        }
-    }
+  }
 }
 
 /**
@@ -166,37 +162,37 @@ export const getContextActivities = (path: string, getEnglishName: (key: string)
  * @category Services
  */
 const getContext = (path: string, getEnglishName: (key: string) => string) => {
-    if(getContextActivities(path, getEnglishName))
-        return {
-            platform: 'Frontend',
-            language: localStorage.getItem('i18nextLng') ?? '',
-            extensions: {
-                'http://lrs.learninglocker.net/define/extensions/info': {
-                    domain: new URL(window.location.href).origin,
-                    domain_version: getConfig().FRONTEND_VERSION ?? '',
-                    github: getConfig().FRONTEND_GITHUB ?? '',
-                    event_function: 'src/common/components/DefaultButton/DefaultButton' // TODO: Create webpack plugin to overwrite
-                                                                                        // __dirname and __filename to get project path of
-                                                                                        // components
-                }
-            },
-            contextActivities: getContextActivities(path, getEnglishName)
+  if (getContextActivities(path, getEnglishName))
+    return {
+      platform: 'Frontend',
+      language: localStorage.getItem('i18nextLng') ?? '',
+      extensions: {
+        'http://lrs.learninglocker.net/define/extensions/info': {
+          domain: new URL(window.location.href).origin,
+          domain_version: getConfig().FRONTEND_VERSION ?? '',
+          github: getConfig().FRONTEND_GITHUB ?? '',
+          event_function: 'src/common/components/DefaultButton/DefaultButton' // TODO: Create webpack plugin to overwrite
+          // __dirname and __filename to get project path of
+          // components
         }
-    else
-      return {
-        platform: 'Frontend',
-        language: localStorage.getItem('i18nextLng') ?? '',
-        extensions: {
-          'http://lrs.learninglocker.net/define/extensions/info': {
-            domain: new URL(window.location.href).origin,
-            domain_version: getConfig().FRONTEND_VERSION ?? '',
-            github: getConfig().FRONTEND_GITHUB ?? '',
-            event_function: 'src/common/components/DefaultButton/DefaultButton' // TODO: Create webpack plugin to overwrite
-                                                                                // __dirname and __filename to get project path of
-                                                                                // components
-          }
+      },
+      contextActivities: getContextActivities(path, getEnglishName)
+    }
+  else
+    return {
+      platform: 'Frontend',
+      language: localStorage.getItem('i18nextLng') ?? '',
+      extensions: {
+        'http://lrs.learninglocker.net/define/extensions/info': {
+          domain: new URL(window.location.href).origin,
+          domain_version: getConfig().FRONTEND_VERSION ?? '',
+          github: getConfig().FRONTEND_GITHUB ?? '',
+          event_function: 'src/common/components/DefaultButton/DefaultButton' // TODO: Create webpack plugin to overwrite
+          // __dirname and __filename to get project path of
+          // components
         }
       }
+    }
 }
 
 /**
@@ -218,20 +214,20 @@ const getContext = (path: string, getEnglishName: (key: string) => string) => {
  * @category Services
  */
 export const getStatement = (
-    lmsUserID: string,
-    verb: string,
-    path: string,
-    componentID: string,
-    componentName: string,
-    getEnglishName: (key: string) => string
+  lmsUserID: string,
+  verb: string,
+  path: string,
+  componentID: string,
+  componentName: string,
+  getEnglishName: (key: string) => string
 ) => {
-    return {
-        actor: getActor(lmsUserID),
-        verb: getVerb(verb),
-        object: getObject(path.concat('#', componentID), componentName),
-        context: getContext(path, getEnglishName),
-        timestamp: new Date().toISOString().replace('Z', '+00:00')
-    }
+  return {
+    actor: getActor(lmsUserID),
+    verb: getVerb(verb),
+    object: getObject(path.concat('#', componentID), componentName),
+    context: getContext(path, getEnglishName),
+    timestamp: new Date().toISOString().replace('Z', '+00:00')
+  }
 }
 
 export default getStatement

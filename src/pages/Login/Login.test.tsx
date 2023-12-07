@@ -112,7 +112,7 @@ describe('Login Page', () => {
     })
     window.location.replace = jest.fn()
     const mock = jest.fn(() => Promise.reject(new Error('moodel login failed')))
-    mockServices.redirectMoodleLogin.mockImplementationOnce(mock)
+    mockServices.fetchRedirectMoodleLogin.mockImplementationOnce(mock)
 
     const login = render(
       <MemoryRouter initialEntries={['']}>

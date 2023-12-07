@@ -14,7 +14,7 @@ jest.mock('react-i18next', () => ({
       i18n: {
         //changeLanguage: () => new Promise(() => {}),
         getFixedT: () => (str: string) => {
-          if (str === 'components.Questionnaire.QuestionnaireResults.Table.TableILS.balanced') return 'balanced'
+          if (str === 'components.TableILS.balanced') return 'balanced'
           else return str
         }
         // You can include here any property your component may use
@@ -124,7 +124,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.ilsResults'))
       expect(getByTestId('ActiveStepILS')).toBeInTheDocument()
     })
   })
@@ -137,7 +137,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.listKResults'))
       expect(getByTestId('ActiveStepListK')).toBeInTheDocument()
     })
   })
@@ -184,7 +184,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('fetching ils data returns error', async () => {
     const handleClose = jest.fn()
-    mockServices.getILS.mockImplementationOnce(() => {
+    mockServices.fetchILS.mockImplementationOnce(() => {
       throw new Error('Backend down')
     })
 
@@ -205,7 +205,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('fetching ils data failed returns snackbar', async () => {
     const handleClose = jest.fn()
-    mockServices.getILS.mockImplementationOnce(async () => {
+    mockServices.fetchILS.mockImplementationOnce(async () => {
       throw new Error('id not found')
     })
 
@@ -216,14 +216,14 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ILSResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.ilsResults'))
       expect(queryByTestId('SkeletonList Element-0')).toBeFalsy()
     })
   })
 
   test('fetching ils data failed to fetch, returns loading', async () => {
     const handleClose = jest.fn()
-    mockServices.getILS.mockImplementationOnce(async () => {
+    mockServices.fetchILS.mockImplementationOnce(async () => {
       throw new Error('Failed to fetch')
     })
 
@@ -240,7 +240,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('fetching user on ListK step failed to fetch, returns loading', async () => {
     const handleClose = jest.fn()
-    mockServices.getListK.mockImplementationOnce(() => {
+    mockServices.fetchListK.mockImplementationOnce(() => {
       throw new Error('Failed to fetch')
     })
 
@@ -251,7 +251,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.listKResults'))
       expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
       expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
       expect(getByTestId('SkeletonList Element-2')).toBeInTheDocument()
@@ -260,7 +260,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   test('fetching listk data failed returns snackbar', async () => {
     const handleClose = jest.fn()
-    mockServices.getListK.mockImplementationOnce(async () => {
+    mockServices.fetchListK.mockImplementationOnce(async () => {
       throw new Error('id not found')
     })
 
@@ -271,14 +271,14 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.listKResults'))
       expect(queryByTestId('SkeletonList Element-0')).toBeFalsy()
     })
   })
 
   test('fetching listk data failed to fetch, returns loading', async () => {
     const handleClose = jest.fn()
-    mockServices.getListK.mockImplementationOnce(async () => {
+    mockServices.fetchListK.mockImplementationOnce(async () => {
       throw new Error('Failed to fetch')
     })
 
@@ -289,7 +289,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getByText('components.Questionnaire.QuestionnaireResults.Text.ResultDescriptionILS.ListKResults'))
+      fireEvent.click(getByText('components.ResultDescriptionILS.listKResults'))
       expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
       expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
       expect(getByTestId('SkeletonList Element-2')).toBeInTheDocument()
@@ -298,7 +298,7 @@ describe('Test ResultDescriptionListK with all Methods', () => {
 
   it('renders null for activeStep 3', () => {
     const handleClose = jest.fn()
-    mockServices.getListK.mockImplementationOnce(() => {
+    mockServices.fetchListK.mockImplementationOnce(() => {
       throw new Error('Error')
     })
 

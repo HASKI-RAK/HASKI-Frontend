@@ -29,24 +29,24 @@ export type ContactHookReturn = {
 export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookReturn => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const getUser = usePersistedStore((state) => state.getUser)
   const onSubmitHandler = useCallback(
     (postBody: FormDataType) => {
       setIsLoading(true)
-      fetchUser()
+      getUser()
         .then((user) => {
           postContactForm(postBody, user.settings.user_id, user.lms_user_id)
             .then(() => {
               setIsLoading(false)
               addSnackbar({
-                message: t('pages.Contact.success'),
+                message: t('pages.contact.success'),
                 severity: 'success'
               })
             })
             .catch((error) => {
               setIsLoading(false)
               addSnackbar({
-                message: t('pages.Contact.error') + error,
+                message: t('pages.contact.error') + error,
                 severity: 'error',
                 autoHideDuration: 3000
               })
@@ -55,7 +55,7 @@ export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookRetur
         .catch((error) => {
           setIsLoading(false)
           addSnackbar({
-            message: t('pages.Contact.error') + error,
+            message: t('pages.contact.error') + error,
             severity: 'error',
             autoHideDuration: 3000
           })
