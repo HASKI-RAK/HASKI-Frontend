@@ -1,37 +1,29 @@
 import { Typography, TypographyProps } from '@common/components'
 import { useCallback, useEffect, useState } from 'react'
 import { debounce } from '@services'
-import { getPropertyAccessor } from '@nivo/core'
 
 type TypewriterProps = TypographyProps & {
   children: string[] | number[] | string | number
+  startAnimation: boolean
 }
 
 const Typewriter = (props: TypewriterProps) => {
   const [text, setText] = useState<string | string[]>('')
-  const [wholeText, setWholeText] = useState<string | string[]>(
-    Array.isArray(props.children) ? props.children.map(String) : props.children.toString()
-  )
+  const [wholeText, setWholeText] = useState<string | string[]>('')
 
-  // Animates header text by writing one character at a time into the headerState with a short timeout.
-  /*const typewriterEffect = useCallback(
-    (header: string) => {
-      return debounce(() => {
-        setText(header.slice(0, props.children?.length! + 1))
-      }, 50)
-    },
-    [setText, text]
-  )*/
-
+  // Start animation with useEffect hook
   useEffect(() => {
-    debounce(() => {
-      setText(wholeText?.slice(0, text.length + 1))
-    }, 50)
-  })
+    if (props.startAnimation) {
+      setWholeText(Array.isArray(props.children) ? props.children.map(String) : props.children.toString())
+      debounce(() => {
+        setText(wholeText.slice(0, text.length + 1))
+      }, 50)
+    }
+  }, [props.startAnimation, props.children, wholeText, text.length])
 
   /*useEffect(() => {
     if (Array.isArray(props.children)) props.children.map(String)
-    else props.child.toString()
+    else props.child.toString() 
 
     // Write children to state with delay between each character
     const writeText = (text: string) => {
@@ -45,7 +37,6 @@ const Typewriter = (props: TypewriterProps) => {
       }, 100)
     }
   })*/
-  // Start animation with useEffect hook
 
   return <Typography {...props}>{text ?? ''}</Typography>
 }

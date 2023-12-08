@@ -53,11 +53,32 @@ const ProjectDescriptionCard = ({
   }, [animateBody, animateHeader, props.body, props.header])
   */
 
-  const { bodyState, animateBody } = useProjectDescriptionCard() // Remove headerState and animateHeader
+  const { bodyState, animateBody } = useProjectDescriptionCard() // Removed headerState and animateHeader
 
   const handleScroll = useCallback(() => {
     if (props.body !== null && typeof props.body === 'string') {
       animateBody(ref, props.body)
+    }
+
+    if (props.header !== null && typeof props.header === 'string') {
+      // boolean for startAnimation
+      /* Uses logic of animateHeader function to set boolean
+        const animateHeader = useCallback(
+    (ref: RefObject<HTMLDivElement>, header: string) => {
+      const topPosition = ref.current?.getBoundingClientRect().top
+      const viewportBottom = window.innerHeight
+
+      if (topPosition !== null && typeof topPosition === 'number') {
+        if (topPosition <= viewportBottom) {
+          if (header !== headerState) {
+            typewriterEffect(header)
+          }
+        }
+      }
+    },
+    [headerState, typewriterEffect]
+  )
+       */
     }
   }, [animateBody, props.body])
 
@@ -82,6 +103,7 @@ const ProjectDescriptionCard = ({
         }}>
         <Grid item xs={7}>
           <Typewriter
+            startAnimation={true}
             variant="h3"
             align="center"
             sx={{
