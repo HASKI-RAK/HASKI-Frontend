@@ -161,7 +161,7 @@ export const getContextActivities = (path: string, getEnglishName: (key: string)
  *
  * @category Services
  */
-const getContext = (path: string, getEnglishName: (key: string) => string) => {
+const getContext = (path: string, getEnglishName: (key: string) => string, filePath: string) => {
   return {
     platform: 'Frontend',
     language: localStorage.getItem('i18nextLng') ?? '',
@@ -170,7 +170,7 @@ const getContext = (path: string, getEnglishName: (key: string) => string) => {
         domain: new URL(window.location.href).origin,
         domain_version: getConfig().FRONTEND_VERSION ?? '',
         github: getConfig().FRONTEND_GITHUB ?? '',
-        event_function: 'src/common/components/DefaultButton/DefaultButton' // TODO: Create webpack plugin to overwrite __dirname and __filename to get project path of components
+        event_function: 'src'.concat(filePath)
       }
     },
     contextActivities: getContextActivities(path, getEnglishName)
@@ -201,13 +201,14 @@ export const getStatement = (
   path: string,
   componentID: string,
   componentName: string,
-  getEnglishName: (key: string) => string
+  getEnglishName: (key: string) => string,
+  filePath: string
 ) => {
   return {
     actor: getActor(lmsUserID),
     verb: getVerb(verb),
     object: getObject(path.concat('#', componentID), componentName),
-    context: getContext(path, getEnglishName),
+    context: getContext(path, getEnglishName, filePath),
     timestamp: new Date().toISOString().replace('Z', '+00:00')
   }
 }

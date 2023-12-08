@@ -37,14 +37,14 @@ const Select = <T, K extends T>({ useStatement = _useStatement, onClick, onChang
       {...props}
       onClick={useCallback(
         (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
           onClick?.(event)
         },
         [sendStatement, onClick]
       )}
       onChange={useCallback(
         (event: SelectChangeEvent<K>, child: ReactNode) => {
-          sendStatement(xAPIVerb.changed).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
           onChange?.(event, child)
         },
         [sendStatement, onChange]

@@ -40,7 +40,7 @@ const TextWrapper = <C extends ElementType>({
     <Typography
       onClick={useCallback(
         (event: MouseEvent<HTMLSpanElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
           onClick?.(event)
         },
         [onClick, sendStatement]

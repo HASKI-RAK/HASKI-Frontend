@@ -36,7 +36,7 @@ const Modal = ({ useStatement = _useStatement, onClose, ...props }: ModalProps) 
     <DefaultModal
       onClose={useCallback(
         (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
-          sendStatement(xAPIVerb.closed).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.closed, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
           onClose?.(event, reason)
         },
         [sendStatement, onClose]

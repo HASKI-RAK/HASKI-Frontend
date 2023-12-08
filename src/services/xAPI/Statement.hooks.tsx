@@ -72,7 +72,7 @@ export type useStatementHookParams = {
  */
 export type StatementHookReturn = {
   readonly getEnglishName: (key: string) => string
-  readonly sendStatement: (verb: xAPIVerb) => Promise<void>
+  readonly sendStatement: (verb: xAPIVerb, filePath: string) => Promise<void>
 }
 
 /**
@@ -118,7 +118,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
 
   // Wraps function so send statements from components
   const sendStatement = useCallback(
-    async (verb: xAPIVerb) => {
+    async (verb: xAPIVerb, filePath: string) => {
       xAPI
         .sendStatement({
           statement: getStatement(
@@ -127,7 +127,8 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
             location.pathname,
             defaultComponentID,
             xAPIComponent[defaultComponent],
-            getEnglishName
+            getEnglishName,
+            filePath
           )
         })
         .catch((error: string) => {

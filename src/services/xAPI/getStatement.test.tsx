@@ -50,7 +50,17 @@ describe('getStatement tests', () => {
   })
 
   test('getStatement', () => {
-    expect(statement.getStatement('0', 'clicked', '/', '0', 'Button', () => 'pages.test')).toStrictEqual({
+    expect(
+      statement.getStatement(
+        '0',
+        'clicked',
+        '/',
+        '0',
+        'Button',
+        () => 'pages.test',
+        '/common/components/DefaultButton/DefaultButton'
+      )
+    ).toStrictEqual({
       actor: {
         account: {
           homePage: new URL(window.location.href).origin,
