@@ -31,7 +31,7 @@ describe('RequestResponse', () => {
     it('should have a json property if the content type is application/json', async () => {
       global.fetch = jest.fn(() =>
         Promise.resolve({
-          json: () => Promise.resolve('test'),
+          json: () => Promise.resolve({ data: 'test' }),
           ok: true,
           status: 200,
           message: 'OK',
@@ -49,7 +49,31 @@ describe('RequestResponse', () => {
         }
       })
 
-      expect(result).resolves.toBe('test')
+      expect(result).resolves.toEqual({ data: 'test' })
+    })
+
+    it('should have a text property if the content type is text/plain', async () => {
+      global.fetch = jest.fn(() =>
+        Promise.resolve({
+          text: () => Promise.resolve('test'),
+          ok: true,
+          status: 200,
+          message: 'OK',
+          headers: {
+            get: () => 'text/plain'
+          }
+        })
+      ) as jest.Mock
+
+      const result = fetchData<Response>(getConfig().BACKEND + `/user/1/1/contactform`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      expect(result).resolves.toEqual('test')
     })
 
     it('should throw an error if the response is not undefined', async () => {
@@ -119,7 +143,7 @@ describe('RequestResponse', () => {
     it('should throw an error if the response is not ok', async () => {
       global.fetch = jest.fn(() =>
         Promise.resolve({
-          json: () => Promise.resolve('test'),
+          json: () => Promise.resolve({ data: 'test' }),
           ok: false,
           status: 400,
           message: 'OK',
