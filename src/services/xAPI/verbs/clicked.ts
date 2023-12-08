@@ -5,12 +5,12 @@
  * such as a button, h5p or box.
  *
  * @example
- * "verb": {
+ * "verb": \{
  *     "id": "https://wiki.haski.app/variables/xapi.clicked",
- *     "display": {
+ *     "display": \{
  *       "en": "clicked"
- *     }
- *  },
+ *     \}
+ *  \},
  *
  * @category verbs
  */

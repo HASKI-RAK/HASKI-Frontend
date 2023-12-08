@@ -5,12 +5,12 @@
  * such as a course etc.
  *
  * @example
- *  "verb": {
+ *  "verb": \{
  *     "id": "https://wiki.haski.app/variables/xapi.completed",
- *     "display": {
+ *     "display": \{
  *       "en": "completed"
- *     }
- *  },
+ *     \}
+ *  \},
  *
  * @category verbs
  */

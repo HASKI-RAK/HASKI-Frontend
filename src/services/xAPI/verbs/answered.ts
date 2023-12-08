@@ -5,12 +5,12 @@
  * such as a question, h5p-question, etc.
  *
  * @example
- *  "verb": {
+ *  "verb": \{
  *     "id": "https://wiki.haski.app/variables/xapi.answered",
- *     "display": {
+ *     "display": \{
  *       "en": "answered"
- *     }
- *  },
+ *     \}
+ *  \},
  *
  * @category verbs
  */
