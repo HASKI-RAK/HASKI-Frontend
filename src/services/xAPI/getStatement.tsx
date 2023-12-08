@@ -153,6 +153,7 @@ export const getContextActivities = (path: string, getEnglishName: (key: string)
  *
  * @param path - The path of the parent page.
  * @param getEnglishName - The function to translate a page name to english.
+ * @param filePath - The file path of the component that sends an xAPI statement.
  *
  * @remarks
  * getContext presents a function that can be used to get the context part of an xAPI statement.
@@ -186,6 +187,7 @@ const getContext = (path: string, getEnglishName: (key: string) => string, fileP
  * @param componentID - The ID of the component.
  * @param componentName - The name of the component.
  * @param getEnglishName - The function to translate a page name to english.
+ * @param filePath - The file path of the component that sends an xAPI statement.
  *
  * @remarks
  * getStatement presents a function that can be used to get an xAPI statement.
