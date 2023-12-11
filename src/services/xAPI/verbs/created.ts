@@ -6,7 +6,7 @@
  *
  * @example
  *  "verb": \{
- *     "id": "https://wiki.haski.app/variables/xapi.created",
+ *     "id": "https://wiki.haski.app/variables/services.created",
  *     "display": \{
  *       "en": "created"
  *     \}

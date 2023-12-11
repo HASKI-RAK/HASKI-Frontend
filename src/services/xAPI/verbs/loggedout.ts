@@ -6,7 +6,7 @@
  *
  * @example
  *  "verb": \{
- *     "id": "https://wiki.haski.app/variables/xapi.loggedout",
+ *     "id": "https://wiki.haski.app/variables/services.loggedout",
  *     "display": \{
  *       "en": "loggedout"
  *     \}

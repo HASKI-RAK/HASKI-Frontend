@@ -35,7 +35,7 @@ const getActor = (lmsUserID: string) => {
  */
 const getVerb = (verb: string) => {
   return {
-    id: (getConfig().WIKI ?? '').concat('/verbs/').concat(verb), // URI of action in online directory + element -> hardcoded
+    id: (getConfig().WIKI ?? '').concat('/variables/services.').concat(verb),
     display: {
       en: verb
     }
@@ -62,7 +62,7 @@ const getObject = (componentURL: string, component: string) => {
       name: {
         en: component
       },
-      type: (getConfig().WIKI ?? '').concat('/common/components/').concat(component.toLowerCase()) // wiki url to component e.g. button (common) -> hardcoded // wiki url + componentName.toLowerCase()
+      type: (getConfig().WIKI ?? '').concat('/functions/common.').concat(component)
     }
   }
 }
@@ -111,7 +111,7 @@ const getGrouping = () => {
     {
       id: new URL(window.location.href).origin,
       definition: {
-        type: (getConfig().WIKI ?? '').concat('/pages/home'),
+        type: (getConfig().WIKI ?? '').concat('/functions/pages.Home'),
         name: {
           en: 'Home'
         }

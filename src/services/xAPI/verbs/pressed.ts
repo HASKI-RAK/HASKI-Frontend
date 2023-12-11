@@ -8,7 +8,7 @@
  *
  * @example
  * "verb": \{
- *     "id": "https://wiki.haski.app/variables/xapi.pressed",
+ *     "id": "https://wiki.haski.app/variables/services.pressed",
  *     "display": \{
  *       "en": "pressed"
  *     \}
