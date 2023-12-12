@@ -6,14 +6,6 @@ import { memo } from 'react'
 import { getConfig } from '@shared'
 
 /**
- * ShortTextualIntroductionNode presents a component that displays a node with an icon and a name.
- * It can be clicked to open a corresponding activity of the lms.
- * ShortTextualIntroductionNode can't be used as a standalone component and must be rendered via ReactFlow.
- * @param props - Props containing the data of the node.
- * @returns {JSX.Element} - The ShortTextualIntroductionNode component.
- * @category Components
- */
-/**
  * ShortTextualIntroductionNode component.
  *
  * @param props - Props containing the data of the node.
