@@ -14,6 +14,7 @@ import {
  * @prop DefaultPopoverProps - The props of a mui Popover.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type PopoverProps = DefaultPopoverProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn

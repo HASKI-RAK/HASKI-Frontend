@@ -14,6 +14,7 @@ import {
  * @prop DefaultRadioGroupProps - The props of a mui RadioGroup.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type RadioGroupProps = DefaultRadioGroupProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn

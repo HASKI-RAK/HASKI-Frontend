@@ -14,6 +14,7 @@ import {
  * @prop DefaultTypographyProps - The props of a mui Typography.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type TextWrapperProps<C extends ElementType, P = object> = DefaultTypographyProps<C, P> & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn

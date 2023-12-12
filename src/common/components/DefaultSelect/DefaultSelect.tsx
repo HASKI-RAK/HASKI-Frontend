@@ -14,6 +14,7 @@ import {
  * @prop DefaultSelectProps - The props of a mui Select.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type SelectProps<T> = DefaultSelectProps<T> & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn

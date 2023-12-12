@@ -5,10 +5,11 @@ import { Theme } from '@common/theme'
 import { LearningPathElement } from '@core'
 
 /**
- * @interface useTopicHookParams
- * @property {string} [defaultUrl] - The default url of a node
- * @property {string} [defaultTitle] - The default title of a node
- * @property {boolean} [defaultIsOpen] - The default bool value if a node is open
+ * @prop defaultUrl - The default url of a node
+ * @prop defaultTitle - The default title of a node
+ * @prop defaultIsOpen - The default bool value if a node is open
+ * @category Hooks
+ * @interface
  */
 export type useTopicHookParams = {
   defaultUrl?: string
@@ -17,15 +18,16 @@ export type useTopicHookParams = {
 }
 
 /**
- * @interface TopicHookReturn
- * @property {string} url - The url of a node
- * @property {string} title - The title of a node
- * @property {boolean} isOpen - The bool value if a node is open
- * @property {function} handleClose - The function to close a node
- * @property {function} handleOpen - The function to open a node
- * @property {function} handleSetUrl - The function to set the url of a node
- * @property {function} handleSetTitle - The function to set the title of a node
- * @property {function} mapNodes - The function to map the learning path to nodes and edges
+ * @prop url - The url of a node
+ * @prop title - The title of a node
+ * @prop isOpen - The bool value if a node is open
+ * @prop handleClose - The function to close a node
+ * @prop handleOpen - The function to open a node
+ * @prop handleSetUrl - The function to set the url of a node
+ * @prop handleSetTitle - The function to set the title of a node
+ * @prop mapNodes - The function to map the learning path to nodes and edges
+ * @category Hooks
+ * @interface
  */
 export type TopicHookReturn = {
   readonly url: string
@@ -49,6 +51,19 @@ export type TopicHookReturn = {
  * Handles states and provides functions to create nodes and edges.
  * @param params - The default values for url, title and isOpen.
  * @returns {TopicHookReturn} The Topic page logic.
+ */
+/**
+ * useTopic hook.
+ *
+ * @param params - The default values for url, title and isOpen.
+ *
+ * @remarks
+ * Hook for the Topic page logic.
+ * Handles states and provides functions to create nodes and edges.
+ *
+ * @returns - The Topic page logic.
+ *
+ * @category Hooks
  */
 export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   // Default values

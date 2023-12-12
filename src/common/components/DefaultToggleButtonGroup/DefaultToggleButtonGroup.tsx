@@ -14,6 +14,7 @@ import {
  * @prop DefaultToggleButtonGroupProps - The props of a mui ToggleButtonGroup.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type ToggleButtonGroupProps = DefaultToggleButtonGroupProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn

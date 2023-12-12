@@ -14,6 +14,7 @@ import {
  * @prop DefaultStepButtonProps - The props of a mui StepButton.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type StepButtonProps = DefaultStepButtonProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn

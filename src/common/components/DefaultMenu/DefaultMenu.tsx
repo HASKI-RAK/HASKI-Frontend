@@ -14,6 +14,7 @@ import {
  * @prop DefaultMenuProps - The props of a mui Menu.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type MenuProps = DefaultMenuProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn

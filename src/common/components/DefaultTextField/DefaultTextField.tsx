@@ -14,6 +14,7 @@ import {
  * @prop DefaultTextFieldProps - The props of a mui TextField.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type TextFieldProps = DefaultTextFieldProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn

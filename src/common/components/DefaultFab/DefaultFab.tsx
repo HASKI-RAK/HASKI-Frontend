@@ -14,6 +14,7 @@ import {
  * @prop DefaultFabProps - The props of a mui Fab.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type FabProps = DefaultFabProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn

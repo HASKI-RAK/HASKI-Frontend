@@ -14,6 +14,7 @@ import {
  * @prop DefaultIconButtonProps - The props of a mui IconButton.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type IconButtonProps = DefaultIconButtonProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn

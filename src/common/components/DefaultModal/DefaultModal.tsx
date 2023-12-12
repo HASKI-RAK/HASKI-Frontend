@@ -14,6 +14,7 @@ import {
  * @prop DefaultModalProps - The props of a mui Modal.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type ModalProps = DefaultModalProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
