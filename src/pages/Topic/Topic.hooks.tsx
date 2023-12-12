@@ -47,12 +47,6 @@ export type TopicHookReturn = {
 }
 
 /**
- * Hook for the Topic page logic.
- * Handles states and provides functions to create nodes and edges.
- * @param params - The default values for url, title and isOpen.
- * @returns {TopicHookReturn} The Topic page logic.
- */
-/**
  * useTopic hook.
  *
  * @param params - The default values for url, title and isOpen.
