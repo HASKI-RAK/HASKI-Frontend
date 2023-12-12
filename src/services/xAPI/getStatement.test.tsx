@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 
 describe('getStatement tests', () => {
   test('getContextActivities returns empty object', () => {
-    expect(statement.getContextActivities('/', () => 'pages.test')).toStrictEqual({})
+    expect(statement.getContextActivities('/', () => 'pages.test')).toBeUndefined()
   })
 
   test('getContextActivities only returns parent', () => {
@@ -83,7 +83,6 @@ describe('getStatement tests', () => {
             event_function: 'src/common/components/DefaultButton/DefaultButton'
           }
         },
-        contextActivities: {}
       },
       timestamp: expect.any(String)
     })

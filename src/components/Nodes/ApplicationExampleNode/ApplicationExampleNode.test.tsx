@@ -5,7 +5,7 @@ import ReactFlow, { Node } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import '@testing-library/jest-dom'
 
-describe('LearningObjectiveNode tests', () => {
+describe('ApplicationExampleNode tests', () => {
   beforeEach(() => {
     mockReactFlow()
   })
@@ -14,7 +14,7 @@ describe('LearningObjectiveNode tests', () => {
     lmsId: 1,
     name: 'testNode',
     activityType: 'testType',
-    classification: 'LZ',
+    classification: 'AB',
     isRecommended: true,
     handleSetUrl: jest.fn(),
     handleSetTitle: jest.fn(),
@@ -38,11 +38,11 @@ describe('LearningObjectiveNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const LearningObjectiveNode = getByTestId('LearningObjectiveNode')
+    const ForumNode = getByTestId('ApplicationExampleNode')
 
-    expect(LearningObjectiveNode).toBeInTheDocument()
+    expect(ForumNode).toBeInTheDocument()
 
-    fireEvent.click(LearningObjectiveNode)
+    fireEvent.click(ForumNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()
