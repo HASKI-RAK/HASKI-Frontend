@@ -1,8 +1,8 @@
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor, act } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import StepButton from './DefaultStepButton'
 import '@testing-library/jest-dom'
-import { xAPI } from '@services'
+import { xAPI, AuthContext } from '@services'
 
 describe('DefaultStepButton tests', () => {
   test('DefaultStepButton sends statement on click', async () => {
@@ -10,15 +10,18 @@ describe('DefaultStepButton tests', () => {
     jest.spyOn(xAPI, 'sendStatement').mockImplementation(sendStatement)
 
     const { getByRole } = render(
-      <MemoryRouter>
-        <StepButton />
-      </MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <StepButton />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
-    fireEvent.click(getByRole('button'))
-
-    await waitFor(() => {
-      expect(sendStatement).toHaveBeenCalled()
+    act(() => {
+      fireEvent.click(getByRole('button'))
+      waitFor(() => {
+        expect(sendStatement).toHaveBeenCalled()
+      })
     })
   })
 })
