@@ -14,6 +14,7 @@ import {
  * @prop DefaultPopoverProps - The props of a mui Popover.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type PopoverProps = DefaultPopoverProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
@@ -36,7 +37,7 @@ const Popover = ({ useStatement = _useStatement, onClose, ...props }: PopoverPro
     <DefaultPopover
       onClose={useCallback(
         (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
-          sendStatement(xAPIVerb.closed).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.closed, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
           onClose?.(event, reason)
         },
         [onClose, sendStatement]

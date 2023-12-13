@@ -9,6 +9,7 @@ import { SnackbarContext } from '@services'
  * @prop success - The success severity of a snackbar.
  * @prop warning - The warning severity of a snackbar.
  * @prop info - The info severity of a snackbar.
+ * @category Components
  * @interface
  */
 export type SeverityType = 'error' | 'success' | 'warning' | 'info'
@@ -17,6 +18,7 @@ export type SeverityType = 'error' | 'success' | 'warning' | 'info'
  * @prop autoHideDuration - The duration a snackbar stays before it autmatically disappears.
  * @prop message - The message that is displayed on a snackbar.
  * @prop severity - The severity type of a snackbar.
+ * @category Components
  * @interface
  */
 export type SnackbarMessageProps = {

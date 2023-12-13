@@ -5,12 +5,12 @@
  * most likely the system itself.
  *
  * @example
- *  "verb": {
- *     "id": "https://wiki.haski.app/variables/xapi.loggedin",
- *     "display": {
+ *  "verb": \{
+ *     "id": "https://wiki.haski.app/variables/services.loggedin",
+ *     "display": \{
  *       "en": "loggedin"
- *     }
- *  },
+ *     \}
+ *  \},
  *
  * @category verbs
  */

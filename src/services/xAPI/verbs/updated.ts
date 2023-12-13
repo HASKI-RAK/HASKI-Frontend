@@ -5,12 +5,12 @@
  * such as a file to an assessment etc.
  *
  * @example
- *  "verb": {
- *     "id": "https://wiki.haski.app/variables/xapi.updated",
- *     "display": {
+ *  "verb": \{
+ *     "id": "https://wiki.haski.app/variables/services.updated",
+ *     "display": \{
  *       "en": "updated"
- *     }
- *  },
+ *     \}
+ *  \},
  *
  * @category verbs
  */

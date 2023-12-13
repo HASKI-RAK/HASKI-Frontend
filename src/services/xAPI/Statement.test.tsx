@@ -25,7 +25,7 @@ describe('Statement tests', () => {
       sendStatement: expect.any(Function)
     })
 
-    result.current.sendStatement(xAPIVerb.clicked).catch((error) => log.error(error))
+    result.current.sendStatement(xAPIVerb.clicked, 'filePath').catch((error) => log.error(error))
 
     await waitFor(() => {
       expect(sendStatement).toHaveBeenCalled()
@@ -35,7 +35,8 @@ describe('Statement tests', () => {
         '/',
         'null',
         'Null',
-        expect.any(Function)
+        expect.any(Function),
+        'filePath'
       )
     })
   })
@@ -71,7 +72,7 @@ describe('Statement tests', () => {
       sendStatement: expect.any(Function)
     })
 
-    result.current.sendStatement(xAPIVerb.clicked).catch((error) => log.error(error))
+    result.current.sendStatement(xAPIVerb.clicked, 'filePath').catch((error) => log.error(error))
 
     await waitFor(() => {
       expect(sendStatement).toHaveBeenCalled()
@@ -81,7 +82,8 @@ describe('Statement tests', () => {
         '/',
         'null',
         'Null',
-        expect.any(Function)
+        expect.any(Function),
+        'filePath'
       )
     })
   })

@@ -1,3 +1,1 @@
-import { SnackbarContext, SnackbarContextType } from './SnackbarContext'
-export { SnackbarContext }
-export type { SnackbarContextType }
+export * from './SnackbarContext'

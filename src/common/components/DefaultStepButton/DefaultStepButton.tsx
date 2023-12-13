@@ -14,6 +14,7 @@ import {
  * @prop DefaultStepButtonProps - The props of a mui StepButton.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type StepButtonProps = DefaultStepButtonProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
@@ -36,7 +37,7 @@ const StepButton = ({ useStatement = _useStatement, onClick, ...props }: StepBut
     <DefaultStepButton
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
           onClick?.(event)
         },
         [sendStatement, onClick]

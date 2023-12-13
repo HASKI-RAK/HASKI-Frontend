@@ -9,6 +9,7 @@ import { memo } from 'react'
  * @prop sources - The sources of the term and definition texts
  * @prop tags - The tags that assigns the entry to different categories.
  * @prop fundamental - Whether the entry is fundamental or not.
+ * @category Components
  * @interface
  */
 export type GlossaryEntryProps = {
@@ -23,6 +24,7 @@ export type GlossaryEntryProps = {
  * @prop expandedList - The list of terms of the currently expanded entries.
  * @prop setExpandedList - The function to set the currently expanded entries.
  * @prop {@link GlossaryEntryProps} - The props of a single GlossaryEntry.
+ * @category Components
  * @interface
  */
 export type GlossaryAccordionEntryProps = GlossaryEntryProps & {

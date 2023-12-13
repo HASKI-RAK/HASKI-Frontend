@@ -1,11 +1,13 @@
 import { useSnackbarProvider as _useSnackbarProvider } from './SnackbarProvider.hooks'
 import { SnackbarContext, SnackbarContextType } from '@services'
 import { SnackbarContainer } from '@components'
+import { memo } from 'react'
 
 /**
- * @typedef {Object} SnackbarProviderProps
- * @property {React.ReactNode} children - The child element of the provider.
- * @property {function} useSnackbarProvider - The hook supplying the snackbar provider logic.
+ * @prop children - The child element of the provider.
+ * @prop useSnackbarProvider - The hook supplying the snackbar provider logic.
+ * @category Services
+ * @interface
  */
 type SnackbarProviderProps = {
   children: React.ReactNode
@@ -13,10 +15,14 @@ type SnackbarProviderProps = {
 }
 
 /**
+ * SnackbarProvider component.
+ *
+ * @param props - The props of the component.
+ *
+ * @remarks
  * SnackbarProvider presents a provider for the snackbars.
  * It can be used as a component by wrapping the application to provide snackbars on top of every page.
- * @param props - Props containing the child element and the hook for the provider logic.
- * @returns {JSX.Element} - The snackbar provider.
+ *
  * @category Services
  */
 const SnackbarProvider = ({ useSnackbarProvider = _useSnackbarProvider, ...props }: SnackbarProviderProps) => (
@@ -26,4 +32,4 @@ const SnackbarProvider = ({ useSnackbarProvider = _useSnackbarProvider, ...props
   </SnackbarContext.Provider>
 )
 
-export default SnackbarProvider
+export default memo(SnackbarProvider)

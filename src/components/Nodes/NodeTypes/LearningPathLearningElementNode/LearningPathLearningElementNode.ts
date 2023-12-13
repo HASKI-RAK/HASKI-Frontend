@@ -8,8 +8,12 @@
  * @prop handleSetTitle - The function that sets the title of the learning element.
  * @prop handleOpen - The function that opens the learning element.
  * @prop handleClose - The function that closes the learning element.
- * @interface LearningPathLearningElementNode
- * which represents the props of the {@link LearningPathLearningElementNode}.
+ *
+ * @remarks
+ * represents the props of a {@link LearningPathLearningElementNode}.
+ *
+ * @category Components
+ * @interface
  */
 export type LearningPathLearningElementNode = {
   /**
