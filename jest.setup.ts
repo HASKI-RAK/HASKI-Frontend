@@ -24,7 +24,7 @@ type MockDataServices = {
  * @see {@link https://jestjs.io/docs/mock-functions | Jest Mock Functions}
  */
 const mockDataServices: MockDataServices = {
-  getLogout: jest.fn(() => Promise.resolve()),
+  fetchLogout: jest.fn(() => Promise.resolve()),
   postLoginCredentials: jest.fn(() =>
     Promise.resolve({
       id: 1,
@@ -41,7 +41,7 @@ const mockDataServices: MockDataServices = {
       university: 'HS Kempten'
     })
   ),
-  getUser: jest.fn(() =>
+  fetchUser: jest.fn(() =>
     Promise.resolve({
       id: 1,
       lms_user_id: 1,
@@ -57,7 +57,7 @@ const mockDataServices: MockDataServices = {
       university: 'HS Kempten'
     })
   ),
-  getLearningPathElement: jest.fn(() =>
+  fetchLearningPathElement: jest.fn(() =>
     Promise.resolve({
       id: 1,
       course_id: 2,
@@ -167,7 +167,7 @@ const mockDataServices: MockDataServices = {
       ]
     })
   ),
-  getLearningPathTopic: jest.fn(() =>
+  fetchLearningPathTopic: jest.fn(() =>
     Promise.resolve({
       topics: [
         {
@@ -219,12 +219,12 @@ const mockDataServices: MockDataServices = {
       expiration: 999999999999999
     })
   ),
-  redirectMoodleLogin: jest.fn(() =>
+  fetchRedirectMoodleLogin: jest.fn(() =>
     Promise.resolve({
       lti_launch_view: 'test'
     })
   ),
-  getCourses: jest.fn(() =>
+  fetchCourses: jest.fn(() =>
     Promise.resolve({
       courses: [
         {
@@ -248,7 +248,7 @@ const mockDataServices: MockDataServices = {
       ]
     })
   ),
-  getILS: jest.fn(() =>
+  fetchILS: jest.fn(() =>
     Promise.resolve({
       characteristic_id: 1,
       id: 1,
@@ -262,7 +262,7 @@ const mockDataServices: MockDataServices = {
       understanding_value: 1
     })
   ),
-  getListK: jest.fn(() =>
+  fetchListK: jest.fn(() =>
     Promise.resolve({
       att: 1,
       characteristic_id: 1,

@@ -6,11 +6,15 @@ import { memo } from 'react'
 import { getConfig } from '@shared'
 
 /**
- * FeedbackNode presents a component that displays a node with an icon and a name.
- * It can be clicked to open a corresponding activity of the lms.
- * FeedbackNode can't be used as a standalone component and must be rendered via ReactFlow.
+ * FeedbackNode component.
+ *
  * @param props - Props containing the data of the node.
- * @returns {JSX.Element} - The FeedbackNode component.
+ *
+ * @remarks
+ * FeedbackNode presents a component that displays a node with an icon and a name.
+ * It can be clicked to open a corresponding activity of the LMS.
+ * FeedbackNode can't be used as a standalone component and must be rendered via ReactFlow.
+ *
  * @category Components
  */
 const FeedbackNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {

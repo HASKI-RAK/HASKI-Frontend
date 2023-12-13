@@ -12,7 +12,7 @@ describe('getStatement tests', () => {
         {
           id: new URL(window.location.href).origin.concat('/test'),
           definition: {
-            type: 'https://wiki.haski.app/pages/test',
+            type: '/pages/test',
             name: {
               en: 'pages.test'
             }
@@ -28,7 +28,7 @@ describe('getStatement tests', () => {
         {
           id: new URL(window.location.href).origin.concat('/test/test'),
           definition: {
-            type: 'https://wiki.haski.app/pages/test',
+            type: '/pages/test',
             name: {
               en: 'pages.test'
             }
@@ -39,7 +39,7 @@ describe('getStatement tests', () => {
         {
           id: new URL(window.location.href).origin,
           definition: {
-            type: 'https://wiki.haski.app/pages/home',
+            type: '/functions/pages.Home',
             name: {
               en: 'Home'
             }
@@ -50,7 +50,17 @@ describe('getStatement tests', () => {
   })
 
   test('getStatement', () => {
-    expect(statement.getStatement('0', 'clicked', '/', '0', 'Button', () => 'pages.test')).toStrictEqual({
+    expect(
+      statement.getStatement(
+        '0',
+        'clicked',
+        '/',
+        '0',
+        'Button',
+        () => 'pages.test',
+        '/common/components/DefaultButton/DefaultButton'
+      )
+    ).toStrictEqual({
       actor: {
         account: {
           homePage: new URL(window.location.href).origin,
@@ -58,7 +68,7 @@ describe('getStatement tests', () => {
         }
       },
       verb: {
-        id: 'https://wiki.haski.app/verbs/clicked',
+        id: '/variables/services.clicked',
         display: {
           en: 'clicked'
         }
@@ -69,7 +79,7 @@ describe('getStatement tests', () => {
           name: {
             en: 'Button'
           },
-          type: 'https://wiki.haski.app/common/components/button'
+          type: '/functions/common.Button'
         }
       },
       context: {
@@ -78,8 +88,8 @@ describe('getStatement tests', () => {
         extensions: {
           'http://lrs.learninglocker.net/define/extensions/info': {
             domain: new URL(window.location.href).origin,
-            domain_version: 'v1.0.0-alpha',
-            github: 'https://github.com/HASKI-RAK/HASKI-Frontend',
+            domain_version: '',
+            github: '',
             event_function: 'src/common/components/DefaultButton/DefaultButton'
           }
         },

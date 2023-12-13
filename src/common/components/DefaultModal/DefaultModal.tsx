@@ -14,6 +14,7 @@ import {
  * @prop DefaultModalProps - The props of a mui Modal.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type ModalProps = DefaultModalProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
@@ -36,7 +37,7 @@ const Modal = ({ useStatement = _useStatement, onClose, ...props }: ModalProps) 
     <DefaultModal
       onClose={useCallback(
         (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
-          sendStatement(xAPIVerb.closed).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.closed, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
           onClose?.(event, reason)
         },
         [sendStatement, onClose]

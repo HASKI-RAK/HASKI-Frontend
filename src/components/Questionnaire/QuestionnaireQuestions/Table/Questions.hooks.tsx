@@ -9,7 +9,7 @@ type SendHookResult = {
 }
 
 const useHandleSend = (data: { question_id: string; answer: string }[], ils: boolean): SendHookResult => {
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const getUser = usePersistedStore((state) => state.getUser)
   const [isSending, setIsSending] = useState<boolean>(false)
   const { addSnackbar } = useContext(SnackbarContext)
   const { t } = useTranslation()
@@ -34,7 +34,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
       }))
     })
 
-    return fetchUser().then((user) => {
+    return getUser().then((user) => {
       const studentId = user.id
       if (ils) {
         return postILS({ studentId, outputJson })
@@ -43,7 +43,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
           })
           .catch(() => {
             addSnackbar({
-              message: t('ILS.sending.error'),
+              message: t('error.postILS'),
               severity: 'error'
             })
             return false
@@ -59,7 +59,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
           })
           .catch(() => {
             addSnackbar({
-              message: t('ListK.sending.error'),
+              message: t('error.postListK'),
               severity: 'error'
             })
             return false

@@ -35,7 +35,7 @@ const getActor = (lmsUserID: string) => {
  */
 const getVerb = (verb: string) => {
   return {
-    id: getConfig().WIKI?.concat('/verbs/').concat(verb) ?? '', // URI of action in online directory + element -> hardcoded
+    id: (getConfig().WIKI ?? '').concat('/variables/services.').concat(verb),
     display: {
       en: verb
     }
@@ -62,7 +62,7 @@ const getObject = (componentURL: string, component: string) => {
       name: {
         en: component
       },
-      type: getConfig().WIKI?.concat('p/common/components/').concat(component.toLowerCase()) ?? '' // wiki url to component e.g. button (common) -> hardcoded // wiki url + componentName.toLowerCase()
+      type: (getConfig().WIKI ?? '').concat('/functions/common.').concat(component)
     }
   }
 }
@@ -85,10 +85,9 @@ const getParent = (path: string, getEnglishName: (key: string) => string) => {
     {
       id: new URL(window.location.href).origin.concat(path),
       definition: {
-        type:
-          getConfig()
-            .WIKI?.concat('/pages/')
-            .concat(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/) ?? '',
+        type: (getConfig().WIKI ?? '')
+          .concat('/pages/')
+          .concat(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/),
         name: {
           en: getEnglishName(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/) ?? ''
         }
@@ -112,7 +111,7 @@ const getGrouping = () => {
     {
       id: new URL(window.location.href).origin,
       definition: {
-        type: getConfig().WIKI?.concat('/pages/home') ?? '',
+        type: (getConfig().WIKI ?? '').concat('/functions/pages.Home'),
         name: {
           en: 'Home'
         }
@@ -154,6 +153,7 @@ export const getContextActivities = (path: string, getEnglishName: (key: string)
  *
  * @param path - The path of the parent page.
  * @param getEnglishName - The function to translate a page name to english.
+ * @param filePath - The file path of the component that sends an xAPI statement.
  *
  * @remarks
  * getContext presents a function that can be used to get the context part of an xAPI statement.
@@ -162,7 +162,7 @@ export const getContextActivities = (path: string, getEnglishName: (key: string)
  *
  * @category Services
  */
-const getContext = (path: string, getEnglishName: (key: string) => string) => {
+const getContext = (path: string, getEnglishName: (key: string) => string, filePath: string) => {
   return {
     platform: 'Frontend',
     language: localStorage.getItem('i18nextLng') ?? '',
@@ -171,7 +171,7 @@ const getContext = (path: string, getEnglishName: (key: string) => string) => {
         domain: new URL(window.location.href).origin,
         domain_version: getConfig().FRONTEND_VERSION ?? '',
         github: getConfig().FRONTEND_GITHUB ?? '',
-        event_function: 'src/common/components/DefaultButton/DefaultButton' // TODO: Create webpack plugin to overwrite __dirname and __filename to get project path of components
+        event_function: 'src'.concat(filePath)
       }
     },
     contextActivities: getContextActivities(path, getEnglishName)
@@ -187,6 +187,7 @@ const getContext = (path: string, getEnglishName: (key: string) => string) => {
  * @param componentID - The ID of the component.
  * @param componentName - The name of the component.
  * @param getEnglishName - The function to translate a page name to english.
+ * @param filePath - The file path of the component that sends an xAPI statement.
  *
  * @remarks
  * getStatement presents a function that can be used to get an xAPI statement.
@@ -202,13 +203,14 @@ export const getStatement = (
   path: string,
   componentID: string,
   componentName: string,
-  getEnglishName: (key: string) => string
+  getEnglishName: (key: string) => string,
+  filePath: string
 ) => {
   return {
     actor: getActor(lmsUserID),
     verb: getVerb(verb),
     object: getObject(path.concat('#', componentID), componentName),
-    context: getContext(path, getEnglishName),
+    context: getContext(path, getEnglishName, filePath),
     timestamp: new Date().toISOString().replace('Z', '+00:00')
   }
 }

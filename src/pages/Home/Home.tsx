@@ -24,8 +24,8 @@ export const Home = () => {
   const [courses, setCourses] = useState<Course[]>([])
 
   // Store
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
-  const fetchCourses = useStore((state) => state.fetchCourses)
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getCourses = useStore((state) => state.getCourses)
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
@@ -34,15 +34,15 @@ export const Home = () => {
     const loadData = async () => {
       if (authcontext.isAuth) {
         clearTimeout(preventEndlessLoading)
-        fetchUser()
+        getUser()
           .then((user) => {
-            fetchCourses(user.settings.user_id, user.lms_user_id, user.id)
+            getCourses(user.settings.user_id, user.lms_user_id, user.id)
               .then((CourseResponse) => {
                 setCourses(CourseResponse.courses)
               })
               .catch((error) => {
                 addSnackbar({
-                  message: t('Courses.fetching.error'),
+                  message: t('error.getCourses'),
                   severity: 'error',
                   autoHideDuration: 5000
                 })
@@ -51,7 +51,7 @@ export const Home = () => {
           })
           .catch((error) => {
             addSnackbar({
-              message: t('User.fetching.error'),
+              message: t('error.getUser'),
               severity: 'error',
               autoHideDuration: 5000
             })
@@ -78,7 +78,7 @@ export const Home = () => {
           {courses.length === 0 ? (
             <Card>
               <CardContent>
-                <Typography variant="h5">{t('components.Home.NoCourses')}</Typography>
+                <Typography variant="h5">{t('pages.home.noCourses')}</Typography>
               </CardContent>
             </Card>
           ) : (
@@ -96,7 +96,7 @@ export const Home = () => {
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>
-                        {t('components.Home.Button.Course')}
+                        {t('pages.course.courseButton')}
                       </Button>
                     </Stack>
                   </CardContent>

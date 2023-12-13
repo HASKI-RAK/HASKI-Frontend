@@ -16,7 +16,7 @@ describe('Test the Home page', () => {
   })
 
   test('fetching Course throws error', async () => {
-    mockServices.getCourses.mockImplementationOnce(() => {
+    mockServices.fetchCourses.mockImplementationOnce(() => {
       throw new Error('Error')
     })
 
@@ -72,14 +72,14 @@ describe('Test the Home page', () => {
     )
 
     await waitFor(() => {
-      const course = getAllByText('components.Home.Button.Course')
+      const course = getAllByText('pages.course.courseButton')
       fireEvent.click(course[1])
       expect(navigate).toHaveBeenCalledWith('/course/2')
     })
   })
 
   test('fetching User throws error', async () => {
-    mockServices.getUser = jest.fn().mockImplementationOnce(() => new Error('Error'))
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() => new Error('Error'))
 
     jest.spyOn(console, 'error').mockImplementation(() => {
       return
@@ -99,7 +99,7 @@ describe('Test the Home page', () => {
   })
 
   test('fetching Course returns no courses', async () => {
-    mockServices.getCourses = jest.fn().mockImplementationOnce(() =>
+    mockServices.fetchCourses = jest.fn().mockImplementationOnce(() =>
       Promise.resolve({
         courses: []
       })
@@ -114,7 +114,7 @@ describe('Test the Home page', () => {
     )
 
     await waitFor(() => {
-      expect(getByText('components.Home.NoCourses')).toBeInTheDocument()
+      expect(getByText('pages.home.noCourses')).toBeInTheDocument()
     })
   })
 })

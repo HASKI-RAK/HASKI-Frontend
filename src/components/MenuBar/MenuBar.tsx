@@ -74,8 +74,8 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const { t } = useTranslation()
   const [loadingTopics, setLoadingTopics] = useState(true)
   const [topicsPath, setTopicsPath] = useState<Topic[]>([])
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
-  const fetchLearningPathTopic = useStore((state) => state.fetchLearningPathTopic)
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
@@ -92,7 +92,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const handleCloseILSShortModal = (event: object, reason: string) => {
     if (!successSendILSShort) {
       if (reason == 'backdropClick')
-        if (window.confirm(t('components.Menubar.CloseDialog'))) setModalOpenILSShort(false)
+        if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSShort(false)
     } else {
       setModalOpenILSShort(false)
     }
@@ -105,7 +105,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleCloseILSLongModal = (event: object, reason: string) => {
     if (!successSendILSLong) {
-      if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.CloseDialog'))) setModalOpenILSLong(false)
+      if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSLong(false)
     } else {
       setModalOpenILSLong(false)
     }
@@ -118,7 +118,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleCloseListKModal = (event: object, reason: string) => {
     if (!successSendListK) {
-      if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.CloseDialog'))) setModalOpenListK(false)
+      if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenListK(false)
     } else {
       setModalOpenListK(false)
     }
@@ -134,9 +134,9 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleOpenTopicsMenu = async (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElTopics(event.currentTarget)
-    fetchUser()
+    getUser()
       .then((user) => {
-        fetchLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
+        getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
           .then((TopicResponse) => {
             setTopicsPath(TopicResponse.topics)
             setLoadingTopics(false)
@@ -231,7 +231,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                     endIcon={
                       anchorElTopics ? <ArrowDropDown sx={{ transform: 'rotate(180deg)' }} /> : <ArrowDropDown />
                     }>
-                    {t('components.MenuBar.TopicButton')}
+                    {t('appGlobal.topics')}
                   </Button>
                 </Tooltip>
                 <Popover
@@ -316,7 +316,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('help')}>
+            <Tooltip title={t('appGlobal.help')}>
               <IconButton
                 id="manual-icon-button"
                 onClick={() => {
@@ -436,7 +436,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                 }}>
                 <ListItemIcon>{isAuth ? <Logout fontSize="small" /> : <Login fontSize="small" />}</ListItemIcon>
                 <Typography textAlign="center">
-                  {isAuth ? t('components.MenuBar.Profile.Logout') : t('components.MenuBar.Profile.Login')}
+                  {isAuth ? t('components.MenuBar.profileLogout') : t('components.MenuBar.profileLogin')}
                 </Typography>
               </MenuItem>
             </Menu>

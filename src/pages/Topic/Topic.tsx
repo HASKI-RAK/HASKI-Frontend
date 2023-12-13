@@ -1,29 +1,30 @@
 import { useTopic as _useTopic, useTopicHookParams, TopicHookReturn } from './Topic.hooks'
-import { Box, Skeleton } from '@common/components'
 import ReactFlow, { Node, Edge, MiniMap, Controls, Background } from 'reactflow'
+import { useEffect, useState, useContext, memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext, SnackbarContext } from '@services'
-import { useEffect, useState, useContext } from 'react'
 import { useStore, usePersistedStore } from '@store'
 import { IFrameModal, nodeTypes } from '@components'
+import { Box, Skeleton } from '@common/components'
 import { useTheme } from '@common/hooks'
 
+/**
+ * @prop useTopic - Does the heavy work such as mapping nodes and edges and fetching.
+ * @interface
+ */
 export type TopicProps = {
-  /**
-   * {@link useTopic | Topic hook} does the heavy work such as mapping nodes and edges
-   *  and fetching.
-   * @remarks
-   * The hook is dependency injected.
-   * @defaultValue {@link _useTopic}
-   */
   useTopic?: (params?: useTopicHookParams) => TopicHookReturn
 }
 // TODO: URL-Struktur überlegen bspw. "localhost:3000/topic?topic=1"
 
 /**
- * # Topic Page
- * Presents a page that displays a learning path containing nodes of learning elements and edges.
+ * Topic page.
+ *
  * @param props - Dependency injects {@link useTopic}.
+ *
+ * @remarks
+ * Presents a page that displays a learning path containing nodes of learning elements and edges.
+ *
  * @category Pages
  */
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
@@ -34,8 +35,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   const { courseId, topicId } = useParams()
   const { url, title, isOpen, handleClose, mapNodes } = useTopic()
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
-  const fetchLearningPathElement = useStore((state) => state.fetchLearningPathElement)
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getLearningPathElement = useStore((state) => state.getLearningPathElement)
 
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
@@ -48,9 +49,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     }, 5000)
     if (authContext.isAuth && courseId && topicId) {
       clearTimeout(preventEndlessLoading)
-      fetchUser()
+      getUser()
         .then((user) => {
-          fetchLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
+          getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
             .then((learningPathElementData) => {
               const { nodes, edges } = mapNodes(learningPathElementData, theme)
               setInitialNodes(nodes)
@@ -78,8 +79,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   }, [
     authContext.isAuth,
     courseId,
-    fetchLearningPathElement,
-    fetchUser,
+    getLearningPathElement,
+    getUser,
     theme,
     topicId,
     mapNodes,
@@ -102,4 +103,4 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   )
 }
 
-export default Topic
+export default memo(Topic)

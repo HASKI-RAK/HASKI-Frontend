@@ -102,7 +102,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                       control={<Checkbox />}
                       label={
                         <>
-                          {t('components.PrivacyModal.readPrivacypolicy')}
+                          {t('components.PrivacyModal.readPrivacypolicy') + ' \n'}
                           <Link
                             marginX="0.2em"
                             component="button"
@@ -113,7 +113,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                             onClick={() => navigate('/privacypolicy')}>
                             {t('pages.privacypolicy')}
                           </Link>
-                          {t('components.PrivacyModal.readPrivacypolicy2')}
+                          {t('components.PrivacyModal.readPrivacyPolicy-2')}
                         </>
                       }
                     />
@@ -146,7 +146,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                           }
                         })
                       }}>
-                      {t('decline')}
+                      {t('appGlobal.decline')}
                     </Button>
                   </Tooltip>
                   <Button
@@ -154,7 +154,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                     sx={{ alignSelf: 'end' }}
                     disabled={!checked}
                     onClick={() => handleModal(true)}>
-                    {t('accept')}
+                    {t('appGlobal.accept')}
                   </Button>
                 </Box>
               </Typography>

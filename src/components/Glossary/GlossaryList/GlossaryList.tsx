@@ -10,6 +10,7 @@ import { useEffect, useState, memo } from 'react'
  * @prop selectedIndexElement - The index element to filter the entries by.
  * @prop selectedTags - The tags to filter the entries by.
  * @prop useGlossaryList - The hook supplying expand, filter and search functions.
+ * @category Components
  * @interface
  */
 export type GlossaryListProps = {

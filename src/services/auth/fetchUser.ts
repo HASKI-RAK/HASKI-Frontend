@@ -6,7 +6,7 @@ import { getConfig } from '@shared'
  *
  * @returns {@link User} object
  */
-export const getUser = async (): Promise<User> => {
+export const fetchUser = async (): Promise<User> => {
   const response = await fetch(getConfig().BACKEND + `/lms/user_from_cookie`, {
     method: 'GET',
     credentials: 'include',

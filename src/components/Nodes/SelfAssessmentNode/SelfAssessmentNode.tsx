@@ -6,11 +6,15 @@ import { memo } from 'react'
 import { getConfig } from '@shared'
 
 /**
- * SelfAssessmentNode presents a component that displays a node with an icon and a name.
- * It can be clicked to open a corresponding activity of the lms.
- * SelfAssessmentNode can't be used as a standalone component and must be rendered via ReactFlow.
+ * SelfAssessmentNode component.
+ *
  * @param props - Props containing the data of the node.
- * @returns {JSX.Element} - The SelfAssessmentNode component.
+ *
+ * @remarks
+ * SelfAssessmentNode presents a component that displays a node with an icon and a name.
+ * It can be clicked to open a corresponding activity of the LMS.
+ * SelfAssessmentNode can't be used as a standalone component and must be rendered via ReactFlow.
+ *
  * @category Components
  */
 const SelfAssessmentNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {

@@ -17,7 +17,7 @@ const SnackbarContainer = () => {
   const { snackbarsErrorWarning, snackbarsSuccessInfo, addSnackbar, updateSnackbar } = useContext(SnackbarContext)
 
   const { t } = useTranslation()
-  const isOnline = useNetworkStatus()
+  const { isOnline } = useNetworkStatus()
   const [recentlyOffline, setRecentlyOffline] = useState(false)
 
   // Respectively adds a snackbar when internet connection is lost and regained.
@@ -26,7 +26,7 @@ const SnackbarContainer = () => {
       setRecentlyOffline(true)
       addSnackbar({
         severity: 'warning',
-        message: t('offlineWarning'),
+        message: t('warning.offline'),
         autoHideDuration: undefined
       })
     }
@@ -35,12 +35,12 @@ const SnackbarContainer = () => {
       setRecentlyOffline(false)
       addSnackbar({
         severity: 'warning',
-        message: t('onlineWarning'),
+        message: t('warning.online'),
         autoHideDuration: 3000
       })
       updateSnackbar({
         severity: 'warning',
-        message: t('offlineWarning'),
+        message: t('warning.offline'),
         autoHideDuration: 1
       })
     }
