@@ -81,9 +81,12 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
 }
 
 //hardcoded courseId, topicId, algorithm for evaluation
-const courseList = getConfig().CALCULATED_COURSES as number[]
-const topicList = getConfig().CALCULATED_TOPICS as number[]
-const algorithmList = getConfig().CALCULATED_ALGORITHM as string[]
+// TODO: the postCalculateLearningPathILS has to be changed. Frontend should only give
+// notice when the calculation should start. What should be calculated should be
+// defined in the backend.
+const courseList = [1]
+const topicList = [2, 6, 10, 12]
+const algorithmList = ["aco", "graf", "graf", "aco"]
 
 const useCalculateLearningPath = (
   user: User,
