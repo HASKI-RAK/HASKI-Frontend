@@ -98,6 +98,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
           <Typography variant="h6" component="h2" gutterBottom>
             {t('components.LoginForm.subtitle')}
           </Typography>
+          {/**
           <Stack spacing={2} direction="column">
             <TextField
               id="login-form-username-textfield"
@@ -132,24 +133,16 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
             <Button variant="contained" color="primary" onClick={handleSubmit}>
               {t('components.LoginForm.login')}
             </Button>
+          */}
+          <Stack spacing={2} direction="column">
             {moodleLogin && (
-              <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={2}>
-                <Grid item sm={0} md={6}>
-                  <Divider flexItem>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        textAlign: 'center',
-                        fontSize: '0.8rem',
-                        color: (theme) => theme.palette.secondary.dark
-                      }}>
-                      {t('components.LoginForm.orLoginWithMoodle')}
-                    </Typography>
-                  </Divider>
-                </Grid>
+              <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={5}>
                 <Grid item display="flex" justifyContent="center" md={6}>
-                  <Button onClick={onMoodleLogin} data-testid="moodle-login-button">
-                    <img src="/LogoMoodle.png" alt="Moodle" style={{ width: '100px' }} />
+                  <Button onClick={onMoodleLogin} data-testid="moodle-login-button" variant="contained">
+                    <img src="/LogoMoodle.png" alt="Moodle" style={{ width: '150px' }} />
+                    {/**<Typography variant="h6" component="h2">
+                      {'Sign in with Moodle'}
+                    </Typography>*/}
                   </Button>
                 </Grid>
               </Grid>
