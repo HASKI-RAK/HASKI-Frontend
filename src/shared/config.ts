@@ -1,5 +1,5 @@
 export type Config = {
-  [key: string]: string | undefined
+  [key: string]: string | undefined | number[] | string[]
 }
 
 type GetConfig = () => Config

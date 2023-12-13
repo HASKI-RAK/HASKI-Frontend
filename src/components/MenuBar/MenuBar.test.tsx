@@ -309,7 +309,6 @@ describe('MenuBar', () => {
   })
 
   test('fetching user when opening Questionnaire Results', async () => {
-
     const props: MenuBarProps = {
       courseSelected: true
     }
