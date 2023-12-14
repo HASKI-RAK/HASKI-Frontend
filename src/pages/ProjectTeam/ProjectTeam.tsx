@@ -7,11 +7,27 @@ import {
   ProjectDescriptionStepper,
   ProjectTeamCompetenciesCard
 } from '@components'
-import { Avatar, Grid } from '@common/components'
-import React, { memo } from 'react'
+import { Avatar, Grid, Box, Fade, Divider, Typography } from '@common/components'
+import { memo, useEffect, useCallback, useRef, useState, RefObject } from 'react'
 import MediaQuery from 'react-responsive'
 import './ProjectTeam.css'
+//import { useProjectTeam as _useProjectTeam } from './ProjectTeam.hooks'
 
+const background_logo_style = {
+    marginLeft:{xl:'23.5%', lg:'23.5%', md:'23.5%', sm:'15%', xs:'15%'},
+    marginTop:'9.5rem',
+    zIndex:'-100',
+    opacity:'0.15',
+    position:'absolute',
+}
+
+const background_map_style = {
+    width:{xl:'50rem', lg:'40rem', md:'33.5rem', sm:'33.5rem', xs:'33.5rem'},
+    zIndex:'-100',
+    opacity:'0.35',
+    position:'absolute',
+    overflow:'hidden',
+}
 /**
  * ProjectTeam page.
  *
@@ -25,7 +41,7 @@ const ProjectTeam = () => {
   // Translation
   const { t } = useTranslation()
 
-  let quotesReasons =
+  let quotesReasons = 
     (t('pages.ProjectTeam.ReasonsBody', {
       returnObjects: true
     }) as { quote: string; img: string; name: string; description: string }[]) ?? []
@@ -43,25 +59,50 @@ const ProjectTeam = () => {
   let interdisciplinary =
     (t('pages.ProjectTeam.interdisciplinaryBody', {
       returnObjects: true
-    }) as { header: string; description: string }[]) ?? []
+    }) as []) ?? []
   interdisciplinary = Array.isArray(interdisciplinary) ? interdisciplinary : []
-  const content: { [key: string]: string } = {} // Add the index signature
-  interdisciplinary.forEach((item, index) => {
-    const headerKey = item.header
-    content[headerKey] = item.description
-  })
   let imageAttributes =
     (t('pages.ProjectTeam.imageSourcesDict', {
       returnObjects: true
     }) as { text: string; url: string }[]) ?? []
   imageAttributes = Array.isArray(imageAttributes) ? imageAttributes : []
 
+  const [animateState, setAnimateState] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  const animate = useCallback((ref: RefObject<HTMLDivElement>) => {
+    const topPosition = ref.current?.getBoundingClientRect().top
+    const viewportBottom = window.innerHeight
+    if (topPosition !== null && typeof topPosition === 'number') {
+        if (topPosition <= viewportBottom) {
+          setAnimateState(true)
+        }
+    }
+  },[setAnimateState])
+
+  const handleScroll = useCallback(() => {
+      animate(ref)
+  }, [animate])
+
+  useEffect(() => {
+    handleScroll()
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [animateState, handleScroll])
+
+
+ 
   return (
     <>
       <MediaQuery minWidth={700}>
-        <div className="bgLogo" data-testid="BgLogo">
-          <img src="/LogoPng.png" width="300" height="300" />
-        </div>
+        <Fade style={{opacity:'0.15'}} in={true} easing='linear' timeout={5000}>
+          <Box sx={{...background_logo_style}} data-testid="BgLogo">
+            <img src="/LogoPng.png" width="300" height="300" />
+          </Box>
+        </Fade>
       </MediaQuery>
       <ProjectDescriptionCard
         header={t('pages.ProjectTeam.introductionHeader')}
@@ -80,11 +121,13 @@ const ProjectTeam = () => {
         avatarDescription={quotesReasons.map((quoteData) => quoteData.description)}
       />
       <div>
-        <div>
+        <div ref={ref}>
           <MediaQuery minWidth={700}>
-            <div className="bgMap02" data-testid="BgMap">
-              <img src="/ProjectTeam/map02.gif" width="100%" />
-            </div>
+            <Fade style={{opacity:'1.0'}} in={animateState} easing='linear' timeout={10000}>
+              <Box sx={{...background_map_style, left:'-2.5%'}} data-testid="BgMap">
+                <img src="/ProjectTeam/map02.gif" width="100%" />
+              </Box>
+            </Fade>
           </MediaQuery>
           <ProjectDescriptionCard
             header={t('pages.ProjectTeam.University.AschaffenburgHeader')}
@@ -102,9 +145,11 @@ const ProjectTeam = () => {
         </div>
         <div>
           <MediaQuery minWidth={700}>
-            <div className="bgMap01" data-testid="BgMap">
-              <img src="/ProjectTeam/map01.gif" width="100%" />
-            </div>
+            <Fade style={{opacity: '0.35'}} in={animateState} easing='linear' timeout={5000}>
+              <Box sx={{...background_map_style, right:'3.5%'}} data-testid="BgMap">
+                <img src="/ProjectTeam/map01.gif" width="100%" />
+              </Box>
+            </Fade>
           </MediaQuery>
           <ProjectDescriptionCard
             header={t('pages.ProjectTeam.University.RegensburgHeader')}
@@ -122,9 +167,9 @@ const ProjectTeam = () => {
         </div>
         <div>
           <MediaQuery minWidth={700}>
-            <div className="bgMap03" data-testid="BgMap">
+            <Box sx={{...background_map_style, marginTop:'35px', left:'-2.5%'}} data-testid="BgMap">
               <img src="/ProjectTeam/map03.gif" width="100%" />
-            </div>
+            </Box>
           </MediaQuery>
           <ProjectDescriptionCard
             header={t('pages.ProjectTeam.University.KemptenHeader')}
@@ -141,25 +186,12 @@ const ProjectTeam = () => {
           </ProjectDescriptionCard>
         </div>
       </div>
-      <ProjectDescriptionStepper
-        header={t('pages.ProjectTeam.InitVoicesHeader')}
-        body={quotesDev.map((quoteData) => quoteData.quote)}
-        withAvatar={true}
-        avatarName={quotesDev.map((quoteData) => quoteData.name)}
-        avatarDescription={quotesDev.map((quoteData) => quoteData.description)}
-      />
       <ProjectTeamCompetenciesCard header={t('pages.ProjectTeam.interdisciplinaryHeader')}>
-        <MediaQuery minWidth={700}>
-          <CollapsibleTextMultiList content={content} columns={2} animate={true} />
-        </MediaQuery>
-        <MediaQuery maxWidth={700}>
-          <CollapsibleTextMultiList content={content} columns={1} animate={true} />
-        </MediaQuery>
+        {interdisciplinary.map((item:[]) => {
+          return (<><ul>{item.map((iterator:string, index:number)=>{
+            return(<li key={index}><Typography>{iterator}</Typography></li>)
+            })}</ul><Divider></Divider></>)})}
       </ProjectTeamCompetenciesCard>
-      <ProjectDescriptionStepper
-        header={t('pages.ProjectTeam.StudentVoicesHeader')}
-        body={quotesStudent.map((quoteData) => quoteData.quote)}
-      />
       <Grid container item justifyContent="center" xs={12}>
         <ImageAttribute imageAttributes={imageAttributes} />
       </Grid>

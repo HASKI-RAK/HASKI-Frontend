@@ -1804,53 +1804,54 @@
     }
   ],
   "pages.ProjectTeam.introductionHeader": "Wer ist HASKI?",
-  "pages.ProjectTeam.introductionBody": "HASKI ist ein Verbundprojekt der drei bayerischen Hochschulen: OTH Regensburg, TH Aschaffenburg & HS Kempten und umfasst gesamt <x> Beteiligte, davon <x> Dozenten, <x> wissenschaftliche Mitarbeiter, <x> studentische Hilfskräfte und <x> an der Verwaltung beteiligte Personen.",
+  "pages.ProjectTeam.introductionBody": "HASKI ist ein Verbundprojekt der drei bayerischen Hochschulen: OTH Regensburg, TH Aschaffenburg & HS Kempten und umfasst ein Team von über 20 Professor*innen, wissenschaftlichen Mitarbeiter*innen, studentischen Hilfskräften und an der Verwaltung beteiligten Personen. ",
   "pages.ProjectTeam.ReasonsHeader": "Warum HASKI?",
   "pages.ProjectTeam.ReasonsBody": [
     {
-      "quote": "Zitat 1 über Gründe, wie die Idee zu HASKI zustande kam.",
+      "quote": "\"Das Besondere am adaptiven Lernenden-Modell von HASKI ist, dass es sich den Lernenden anpasst und nicht umgekehrt – wie sonst üblich. Damit stellen wir die Lernenden in den Mittelpunkt des Lernprozesses.\"",
       "img": "",
-      "name": "Max Muster",
-      "description": "Projektinitiator Uni A"
-    },
-    {
-      "quote": "Zitat 2 Gründe, wie die Idee zu HASKI zustande kam.",
-      "img": "",
-      "name": "Lisa Lorem",
-      "description": "Projektinitiator Uni B"
+      "name": "Prof. Dr. Georg Hagel",
+      "description": "der das Projekt an der Hochschule Kempten koordiniert"
     }
   ],
   "pages.ProjectTeam.University.AschaffenburgHeader": "Team TH Aschaffenburg",
-  "pages.ProjectTeam.University.AschaffenburgBody": "Hauptaufgabengebiet des Aschaffenburger Teams stellt <Themengebiete> dar. Insgesamt sind <x> Personen am Projekt beteiligt: <Namen>",
+  "pages.ProjectTeam.University.AschaffenburgBody": "Folgende Personen sind am Projekt beteiligt: Prof. Dr.-Ing. Jörg Abke, Prof. Dr. Galia Weidl, Isabell Hock, Michael Münch, Marc Normann, Iryna Sapsai, Yeimy Valencia \nEhemalige:Doris Rebitzer",
   "pages.ProjectTeam.University.RegensburgHeader": "Team OTH Regensburg",
-  "pages.ProjectTeam.University.RegensburgBody": "Hauptaufgabengebiet des Regensburger Teams stellt <Themengebiete> dar. Insgesamt sind <x> Personen am Projekt beteiligt: <Namen>",
+  "pages.ProjectTeam.University.RegensburgBody": "Folgende Personen sind am Projekt beteiligt: Prof. Dr. Jürgen Mottok, Dominik Bittner, Flemming Bugert, Timur Ezer, Miriam Flannery, Lisa Grabinger, Florian Hauser, Vamsi Krishna Nadimpalli, Simon Roehrl, Susanne Staufer",
   "pages.ProjectTeam.University.KemptenHeader": "Team HS Kempten",
-  "pages.ProjectTeam.University.KemptenBody": "Hauptaufgabengebiet des Kemptener Teams stellt <Themengebiete> dar. Insgesamt sind <x> Personen am Projekt beteiligt: <Namen>",
-  "pages.ProjectTeam.InitVoicesHeader": "Stimmen des Projekts",
-  "pages.ProjectTeam.InitVoicesBody": [
-    {
-      "quote": "Zitat 1 über Motivation, Ziele und eigene/Team-Arbeit.",
-      "img": "",
-      "name": "Max Muster",
-      "description": "Hauptaufgabenträger Fachgebiet A"
-    },
-    {
-      "quote": "Zitat 2 über Motivation, Ziele und eigene/Team-Arbeit.",
-      "img": "",
-      "name": "Lisa Lorem",
-      "description": "Hauptaufgabenträger Fachgebiet B"
-    }
-  ],
-  "pages.ProjectTeam.StudentVoicesHeader": "Studentenmeinungen",
-  "pages.ProjectTeam.StudentVoicesBody": [
-    { "quote": "Zitat 1 über Meinung & Nutzungserfahrung." },
-    { "quote": "Zitat 2 über Meinung & Nutzungserfahrung." }
-  ],
+  "pages.ProjectTeam.University.KemptenBody": "Folgende Personen sind am Projekt beteiligt: Prof. Dr. Georg Hagel, Dimitri Bigler, David Fischer, Jim Haug, Kevin Lee, Julian Manz, Gesine Wagner, Martyna Dorosewicz (studentische Hilfskraft), Joel Scherer (studentische Hilfskraft), Cedric Steiert (studentische Hilfskraft) \nEhemalig: Jonathan Hilscher, Elena Gialamas (studentische Hilfskraft), Maximilian Jatzkowski (studentische Hilfskraft)",
   "pages.ProjectTeam.interdisciplinaryHeader": "Interdisziplinäres Arbeiten – Ein Überblick",
   "pages.ProjectTeam.interdisciplinaryBody": [
-    { "header": "Thema 1", "description": "Lorem ipsum dolor sit amet." },
-    { "header": "Thema 2", "description": "Lorem ipsum dolor sit amet." },
-    { "header": "Thema 3", "description": "Lorem ipsum dolor sit amet." }
+    ["Produktion von Lernelementen im Bereich des Software Engineerings mit mehrstufigem Reviewprozess",
+     "Konzeption eines literaturbasierten Kategoriensystems zur Typisierung von Lernelementen" ],
+    ["Erhebung und Analyse von Learning Analytics mit Persistierung in einem Learning Record Store (Data Lake)",
+     "Erfassung von studentischem Verhalten auf Moodle und Frontend in Form von Statements entsprechend des xAPI-Standards", 
+     "Entwerfen und implementieren von Designs für studentische Dashboards"],
+    ["Entwicklung von mehreren Moodle Plugins (xAPI, Moodle Theme und H5P-Report Feature)",
+     "Kommunikation mit Moodle mithilfe der zur Verfügung gestellten REST-API Schnittstelle",
+     "LTI-basierte Kommunikation zwischen Frontend und Moodle"],
+    ["React-Frontend-Entwicklung (modulare Entwicklung durch Components und Pages)",
+     "Jest-Frontend Testing und Pytest-Backend Testing",
+     "Entwicklung einer CI/CD Pipeline für Frontend und Backend in GitHub mithilfe von SonarLint",
+     "Python-Backend-Entwicklung",
+     "Kommunikation von Frontend und Backend mithilfe von API-Endpunkten mit Persistierung in einer Postgres-Datenbank",
+     "Branch-fokussierte Entwicklung mit Reviewprozess auf GitHub",
+     "Codenahe kommentarbasierte (inline source) Dokumentation im Frontend und Backend"],
+    ["Theoretische Vorkonzeptionierung eines adaptiven Lernsystems",
+     "Auswertungsalgorithmen für diverse Fragebögen (Index of Learning Styles - ILS und Lernstrategien im Studium, gekürzt – LIST-K)",
+     "Konzeption, Implementierung und Anwendung von KI-Algorithmen (bspw. Ameisenkolonie-Algorithmus und genetischer Algorithmus) zur Generierung von individualisierten Lernpfaden in einem multidimensionalen Hypercube",
+     "Implementierung und Anwendung von literaturbasierten Algorithmen auf Basis des Lernstils (z.B. nach Graf et al. 2010)", 
+     "Weiterentwicklung von reliablen, validierten und gekürzten Fragebogenversionen des ILS und des LIST-K mithilfe z.B. Faktorenanalyse, Exhaustive Feature Selection und Bayesschen Netzen",
+     "Zusammenarbeit von Frontend, Backend und Moodle zur automatischen Generierung von studentischen Lernpfaden",
+     "Modellierung des individuellen Wissensstandes mittels eines Rating Systems",
+     "Modellierung von studentischen Charakteristiken wie Lernstil und Lernstrategie",
+     "Literaturrecherche zu Adaptiven Lernsystemen, Learning Analytics, Knowledge Tracing, Rating Systems, Large Language Models und Natural Language Processing",
+     "Konzeption eines Tools zur Auswertung von Freitext-Aufgaben mithilfe von Large Language Models und Natural Language Processing"],
+     ["Planung und Durchführung von triangulierten (quantitativ und qualitativ) Evaluationen des Frontend und der Lernelemente",
+      "Ausarbeitung der Erkenntnisse in Form von peer-reviewten Beiträgen auf wissenschaftlichen Konferenzen",
+      "Disseminationsarbeit (Design von Flyern, Postern und Roll-Ups)", 
+      "Besuch von einschlägigen und fachlich relevanten (internationalen) Konferenzen",
+      "Interner und externer Austausch auf Workshops und Verbundtreffen"]
   ],
   "pages.ProjectTeam.imageSourcesDict": [
     { "text": "TH Aschaffenburg", "url": "" },

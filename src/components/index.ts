@@ -20,7 +20,6 @@ export { default as CollapsibleTextList } from './ProjectTeam/CollapsibleText/Co
 export { default as CollapsibleTextMultiList } from './ProjectTeam/CollapsibleText/CollapsibleTextMultiList'
 export { default as ImageCollection } from './ProjectTeam/ProjectTeamImageCollection/ProjectTeamImageCollection'
 export { default as ImageAttribute } from './ProjectTeam/ImageAttribute/ImageAttribute'
-export { default as MapPin } from './ProjectTeam/MapPin/MapPin'
 export { default as ProjectTeamCompetenciesCard } from './ProjectTeam/ProjectTeamCompetenciesCard/ProjectTeamCompetenciesCard'
 export {
   default as SnackbarMessage,
