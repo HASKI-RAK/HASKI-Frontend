@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ContactHookReturn | HASKI-Frontend Documentation</title><meta name="description" content="Documentation for HASKI-Frontend Documentation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>SelectProps | HASKI-Frontend Documentation</title><meta name="description" content="Documentation for HASKI-Frontend Documentation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -15,30 +15,33 @@
 <li><a href="../index.html">HASKI-Frontend Documentation</a></li>
 <li><a href="../modules/services.html">services</a></li>
 <li><a href="../modules/services.exports.html">exports</a></li>
-<li><a href="services.exports.ContactHookReturn.html">ContactHookReturn</a></li></ul>
-<h1>Type alias ContactHookReturn</h1></div>
-<div class="tsd-signature"><span class="tsd-kind-type-alias">Contact<wbr/>Hook<wbr/>Return</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">onSubmitHandler</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">postBody</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></div>
+<li><a href="services.exports.SelectProps.html">SelectProps</a></li></ul>
+<h1>Type alias SelectProps&lt;T&gt;</h1></div>
+<div class="tsd-signature"><span class="tsd-kind-type-alias">Select<wbr/>Props</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">DefaultSelectProps</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">useStatement</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">params</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/services.StatementHookReturn.html" class="tsd-signature-type tsd-kind-interface">StatementHookReturn</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></div>
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">T</span></h4></li></ul></section>
 <div class="tsd-type-declaration">
 <h4>Type declaration</h4>
 <ul class="tsd-parameters">
 <li class="tsd-parameter">
-<h5><span class="tsd-kind-property">on<wbr/>Submit<wbr/>Handler</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">postBody</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></h5>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">use<wbr/>Statement</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">params</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/services.StatementHookReturn.html" class="tsd-signature-type tsd-kind-interface">StatementHookReturn</a><span class="tsd-signature-symbol">)</span></h5>
 <ul class="tsd-parameters">
 <li class="tsd-parameter-signature">
 <ul class="tsd-signatures">
-<li class="tsd-signature" id="__type.onSubmitHandler.__type-1.__type-2"><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">postBody</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+<li class="tsd-signature"><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">params</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/services.StatementHookReturn.html" class="tsd-signature-type tsd-kind-interface">StatementHookReturn</a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>handles the submission of the values, that were inserted in the Contactform.</p>
-</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">postBody</span>: <a href="../interfaces/services.FormDataType.html" class="tsd-signature-type tsd-kind-interface">FormDataType</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-<div class="tsd-comment tsd-typography"></div></li></ul></li></ul></li></ul></div><aside class="tsd-sources">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">params</span>: <a href="../interfaces/services.useStatementHookParams.html" class="tsd-signature-type tsd-kind-interface">useStatementHookParams</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../interfaces/services.StatementHookReturn.html" class="tsd-signature-type tsd-kind-interface">StatementHookReturn</a></h4></li></ul></li></ul></li></ul></div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/pages/Contact/Contact.hooks.tsx#L10">src/pages/Contact/Contact.hooks.tsx:10</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/common/components/DefaultSelect/DefaultSelect.tsx#L18">src/common/components/DefaultSelect/DefaultSelect.tsx:18</a></li></ul></aside></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -100,7 +103,7 @@
 <li><a href="services.exports.Config.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Config</span></a></li>
 <li><a href="services.exports.ContactFormHookReturn.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Contact<wbr/>Form<wbr/>Hook<wbr/>Return</span></a></li>
 <li><a href="services.exports.ContactHookProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Contact<wbr/>Hook<wbr/>Props</span></a></li>
-<li><a href="services.exports.ContactHookReturn.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Contact<wbr/>Hook<wbr/>Return</span></a></li>
+<li><a href="services.exports.ContactHookReturn.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Contact<wbr/>Hook<wbr/>Return</span></a></li>
 <li><a href="services.exports.ContactProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Contact<wbr/>Props</span></a></li>
 <li><a href="services.exports.GraphILSProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>GraphILSProps</span></a></li>
 <li><a href="services.exports.GraphListKProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Graph<wbr/>ListKProps</span></a></li>
@@ -117,7 +120,7 @@
 <li><a href="services.exports.QuestionnaireResultsModalProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Questionnaire<wbr/>Results<wbr/>Modal<wbr/>Props</span></a></li>
 <li><a href="services.exports.ResultDescriptionILSProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Result<wbr/>DescriptionILSProps</span></a></li>
 <li><a href="services.exports.ResultDescriptionListKProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Result<wbr/>Description<wbr/>ListKProps</span></a></li>
-<li><a href="services.exports.SelectProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Select<wbr/>Props</span></a></li>
+<li><a href="services.exports.SelectProps.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Select<wbr/>Props</span></a></li>
 <li><a href="services.exports.SnackbarProviderProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Snackbar<wbr/>Provider<wbr/>Props</span></a></li>
 <li><a href="services.exports.TableILSProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>TableILSProps</span></a></li>
 <li><a href="services.exports.TableListKProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Table<wbr/>ListKProps</span></a></li>
