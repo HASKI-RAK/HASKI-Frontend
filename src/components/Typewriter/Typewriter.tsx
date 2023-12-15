@@ -1,44 +1,27 @@
 import { Typography, TypographyProps } from '@common/components'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 import { debounce } from '@services'
 
 type TypewriterProps = TypographyProps & {
-  children: string[] | number[] | string | number
-  startAnimation: boolean
+  children?: string[] | number[] | string | number
+  start?: boolean
+  timer?: number
 }
 
-const Typewriter = (props: TypewriterProps) => {
+const Typewriter = ({ start = true, ...props }: TypewriterProps) => {
   const [text, setText] = useState<string | string[]>('')
-  const [wholeText, setWholeText] = useState<string | string[]>('')
+  const wholeText = Array.isArray(props.children) ? props.children.map(String) : props.children?.toString()
 
   // Start animation with useEffect hook
   useEffect(() => {
-    if (props.startAnimation) {
-      setWholeText(Array.isArray(props.children) ? props.children.map(String) : props.children.toString())
+    if (start) {
       debounce(() => {
-        setText(wholeText.slice(0, text.length + 1))
-      }, 50)
+        setText(wholeText?.slice(0, text.length + 1) ?? '')
+      }, props.timer)
     }
-  }, [props.startAnimation, props.children, wholeText, text.length])
+  }, [start, wholeText, text.length, props.timer])
 
-  /*useEffect(() => {
-    if (Array.isArray(props.children)) props.children.map(String)
-    else props.child.toString() 
-
-    // Write children to state with delay between each character
-    const writeText = (text: string) => {
-      let charIndex = 0
-      const interval = setInterval(() => {
-        setText(text.substring(0, charIndex))
-        charIndex++
-        if (charIndex > text.length) {
-          clearInterval(interval)
-        }
-      }, 100)
-    }
-  })*/
-
-  return <Typography {...props}>{text ?? ''}</Typography>
+  return <Typography {...props}>{text}</Typography>
 }
 
-export default Typewriter
+export default memo(Typewriter)

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback, memo, ReactNode } from 'react'
+import { useRef, useEffect, useCallback, memo, ReactNode, useState } from 'react'
 import { Divider, Fade, Grid, Typography } from '@common/components'
 import {
   useProjectDescriptionCard as _useProjectDescriptionCard,
@@ -39,6 +39,8 @@ const ProjectDescriptionCard = ({
 }: ProjectDescriptionCardProps) => {
   const ref = useRef<HTMLDivElement>(null)
 
+  const [start, setStart] = useState(false)
+
   /*
   const { bodyState, headerState, animateBody, animateHeader } = useProjectDescriptionCard()
 
@@ -61,6 +63,9 @@ const ProjectDescriptionCard = ({
     }
 
     if (props.header !== null && typeof props.header === 'string') {
+      if (ref.current?.getBoundingClientRect().top! <= window.innerHeight) {
+        setStart(true)
+      }
       // boolean for startAnimation
       /* Uses logic of animateHeader function to set boolean
         const animateHeader = useCallback(
@@ -84,7 +89,8 @@ const ProjectDescriptionCard = ({
 
   // Starts animation on component mount and continues already started animation.
   useEffect(() => {
-    handleScroll()
+    // handleScroll()
+    setStart(true)
     window.addEventListener('scroll', handleScroll)
 
     return () => {
@@ -103,7 +109,8 @@ const ProjectDescriptionCard = ({
         }}>
         <Grid item xs={7}>
           <Typewriter
-            startAnimation={true}
+            start={start}
+            timer={50}
             variant="h3"
             align="center"
             sx={{
@@ -115,7 +122,7 @@ const ProjectDescriptionCard = ({
               },
               pt: '2.5rem'
             }}>
-            {props.header!}
+            {props.header}
           </Typewriter>
           <Fade in={!!bodyState} easing="linear" timeout={1000}>
             <Typography align="center" sx={{ pt: '2.5rem', pb: '2.5rem' }} variant="h5">
