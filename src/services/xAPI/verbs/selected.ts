@@ -5,12 +5,12 @@
  *  such as an answer to a question, checkboxes or radio buttons.
  *
  * @example
- * "verb": {
- *     "id": "https://wiki.haski.app/variables/xapi.selected",
- *     "display": {
+ * "verb": \{
+ *     "id": "https://wiki.haski.app/variables/services.selected",
+ *     "display": \{
  *       "en": "selected"
- *     }
- *  },
+ *     \}
+ *  \},
  *
  * @category verbs
  */

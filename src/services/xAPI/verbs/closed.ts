@@ -5,12 +5,12 @@
  * such as a modal or h5p-question.
  *
  * @example
- * "verb": {
- *     "id": "https://wiki.haski.app/variables/xapi.closed",
- *     "display": {
+ * "verb": \{
+ *     "id": "https://wiki.haski.app/variables/services.closed",
+ *     "display": \{
  *       "en": "closed"
- *     }
- *  },
+ *     \}
+ *  \},
  *
  * @category verbs
  */

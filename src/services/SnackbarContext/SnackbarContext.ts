@@ -2,14 +2,15 @@ import { SnackbarMessageProps } from '@components'
 import { createContext } from 'react'
 
 /**
- * @typedef {Object} SnackbarContextType
- * @property {SnackbarMessageProps[]} snackbarsErrorWarning - The array of error and warning snackbars.
- * @property {SnackbarMessageProps[]} snackbarsSuccessInfo - The array of success and info snackbars.
- * @property {function} setSnackbarsErrorWarning - The function to set the error and warning snackbars.
- * @property {function} setSnackbarsSuccessInfo - The function to set the success and info snackbars.
- * @property {function} addSnackbar - The function to add a single snackbar.
- * @property {function} updateSnackbar - The function to update a single snackbar.
- * @property {function} removeSnackbar - The function to remove a single snackbar.
+ * @prop snackbarsErrorWarning - The array of error and warning snackbars.
+ * @prop snackbarsSuccessInfo - The array of success and info snackbars.
+ * @prop setSnackbarsErrorWarning - The function to set the error and warning snackbars.
+ * @prop setSnackbarsSuccessInfo - The function to set the success and info snackbars.
+ * @prop addSnackbar - The function to add a single snackbar.
+ * @prop updateSnackbar - The function to update a single snackbar.
+ * @prop removeSnackbar - The function to remove a single snackbar.
+ * @category Services
+ * @interface
  */
 export type SnackbarContextType = {
   snackbarsErrorWarning: SnackbarMessageProps[]
@@ -22,9 +23,12 @@ export type SnackbarContextType = {
 }
 
 /**
+ * SnackbarContext context.
+ *
+ * @remarks
  * SnackbarContext presents a context of SnackbarContextType.
  * It can be used in different components to show snackbar messages.
- * @returns {Context<SnackbarContextType>} - The context of SnackbarContextType.
+ *
  * @category Services
  */
 export const SnackbarContext = createContext<SnackbarContextType>({
