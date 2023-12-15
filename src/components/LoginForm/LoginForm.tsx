@@ -1,18 +1,5 @@
 import { ChangeEvent, useState } from 'react'
-import { Visibility, VisibilityOff } from '@common/icons'
-import {
-  Backdrop,
-  Button,
-  CircularProgress,
-  IconButton,
-  InputAdornment,
-  Paper,
-  TextField,
-  Grid,
-  Typography,
-  Divider,
-  Stack
-} from '@common/components'
+import { Backdrop, Button, CircularProgress, Paper, Grid, Typography, Stack, ImageWrapper } from '@common/components'
 import {
   useLoginForm as _useLoginForm,
   useLoginFormHookParams as LoginFormHookParams,
@@ -139,10 +126,27 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
               <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={5}>
                 <Grid item display="flex" justifyContent="center" md={6}>
                   <Button onClick={onMoodleLogin} data-testid="moodle-login-button" variant="contained">
-                    <img src="/LogoMoodle.png" alt="Moodle" style={{ width: '150px' }} />
-                    {/**<Typography variant="h6" component="h2">
-                      {'Sign in with Moodle'}
-                    </Typography>*/}
+                    <ImageWrapper
+                      component="img"
+                      sx={{
+                        mt: 2,
+                        mb: 2,
+                        ml: { xs: 1, md: 2 },
+                        display: { xs: 'none', md: 'flex' },
+                        maxHeight: { xs: 20, md: 50 },
+                        maxWidth: { xs: 20, md: 50 },
+                        borderRadius: '50%',
+                        backgroundColor: 'white',
+                        cursor: 'pointer'
+                      }}
+                      alt="HASKI"
+                      src="/LogoPng.png"
+                    />
+                    {
+                      <Typography variant="h6" component="h2">
+                        {'Login HASKI'}
+                      </Typography>
+                    }
                   </Button>
                 </Grid>
               </Grid>
