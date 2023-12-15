@@ -129,15 +129,14 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
                     <ImageWrapper
                       component="img"
                       sx={{
-                        mt: 2,
-                        mb: 2,
+                        mt: 0,
+                        mb: 0,
                         ml: { xs: 1, md: 2 },
                         display: { xs: 'none', md: 'flex' },
                         maxHeight: { xs: 20, md: 50 },
                         maxWidth: { xs: 20, md: 50 },
-                        borderRadius: '50%',
-                        backgroundColor: 'white',
-                        cursor: 'pointer'
+
+                        backgroundColor: 'white'
                       }}
                       alt="HASKI"
                       src="/LogoPng.png"
