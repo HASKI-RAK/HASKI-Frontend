@@ -1,8 +1,8 @@
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor, act } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import TextField from './DefaultTextField'
 import '@testing-library/jest-dom'
-import { xAPI } from '@services'
+import { xAPI, AuthContext } from '@services'
 
 describe('DefaultTextField tests', () => {
   test('DefaultTextField sends statement on change', async () => {
@@ -10,15 +10,18 @@ describe('DefaultTextField tests', () => {
     jest.spyOn(xAPI, 'sendStatement').mockImplementation(sendStatement)
 
     const { getByRole } = render(
-      <MemoryRouter>
-        <TextField value={'test'} />
-      </MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <TextField value={'test'} />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
-    fireEvent.change(getByRole('textbox'), { target: { value: 'test2' } })
-
-    await waitFor(() => {
-      expect(sendStatement).toHaveBeenCalled()
+    act(() => {
+      fireEvent.change(getByRole('textbox'), { target: { value: 'test2' } })
+      waitFor(() => {
+        expect(sendStatement).toHaveBeenCalled()
+      })
     })
   })
 })

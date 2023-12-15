@@ -387,7 +387,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   <ListItemIcon>
                     <LibraryBooksOutlined fontSize="small" />
                   </ListItemIcon>
-                  <Typography textAlign="center">{t('Questionnaire.ILS')}</Typography>
+                  <Typography textAlign="center">{t('components.Menubar.questionnaireILS')}</Typography>
                 </MenuItem>
               )}
               <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
@@ -410,7 +410,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   <ListItemIcon>
                     <AssignmentOutlined fontSize="small" />
                   </ListItemIcon>
-                  <Typography textAlign="center">{t('Questionnaire.ILS.shortened')}</Typography>
+                  <Typography textAlign="center">{t('components.Menubar.questionnaireILSShortened')}</Typography>
                 </MenuItem>
               )}
               <QuestionnaireQuestionsModal open={modalOpenILSShort} handleClose={handleCloseILSShortModal}>
@@ -430,7 +430,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   <ListItemIcon>
                     <PlaylistAddCheckCircleOutlined fontSize="small" />
                   </ListItemIcon>
-                  <Typography textAlign="center">{t('Questionnaire.ListK')}</Typography>
+                  <Typography textAlign="center">{t('components.Menubar.questionnaireListK')}</Typography>
                 </MenuItem>
               )}
               <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>

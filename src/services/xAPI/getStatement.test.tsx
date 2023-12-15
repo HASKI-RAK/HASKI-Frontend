@@ -82,7 +82,7 @@ describe('getStatement tests', () => {
             github: '',
             event_function: 'src/common/components/DefaultButton/DefaultButton'
           }
-        },
+        }
       },
       timestamp: expect.any(String)
     })

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { User } from '@core'
 import { SnackbarMessageProps } from '@components'
 import log from 'loglevel'
+import { getConfig } from '@shared'
 
 type SendHookResult = {
   sendAnswers: () => Promise<boolean>
@@ -80,32 +81,27 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
 }
 
 //hardcoded courseId, topicId, algorithm for evaluation
-const course1TopicListKempten = [2, 6, 10, 12]
-const course2TopicListKempten = [16, 22]
-const algorithmListKempten1 = ['aco', 'graf', 'graf', 'aco']
-const algorithmListKempten2 = ['aco', 'graf']
-const exceptedUserIdKempten = [3, 4, 5, 6]
-
-const topicListAschaffenburg = [3, 5, 9]
-const algorithmListAschaffenburg = ['graf', 'aco', 'aco']
+// TODO: the postCalculateLearningPathILS has to be changed. Frontend should only give
+// notice when the calculation should start. What should be calculated should be
+// defined in the backend.
+const courseList = [1]
+const topicList = [2, 6, 10, 12]
+const algorithmList = ["aco", "graf", "graf", "aco"]
 
 const useCalculateLearningPath = (
   user: User,
   addSnackbar: (newSnackbar: SnackbarMessageProps) => void,
   t: (key: string) => string
 ) => {
-  if (user.university == 'HS-KE') {
-    if (exceptedUserIdKempten.includes(user.settings.user_id)) {
-      return
-    }
-    course1TopicListKempten.map((topicId, index) => {
+  courseList.map((courseId) => {
+    topicList.map((topicId, index) => {
       postCalculateLearningPathILS(
         user.settings.user_id,
         user.lms_user_id,
         user.id,
-        1,
+        courseId,
         topicId,
-        algorithmListKempten1[index]
+        algorithmList[index]
       )
         .then((response) => {
           log.info(response)
@@ -119,57 +115,7 @@ const useCalculateLearningPath = (
           log.error('Error while calculating learning path in Kempten Course 1')
         })
     })
-    course2TopicListKempten.map((topicId, index) => {
-      postCalculateLearningPathILS(
-        user.settings.user_id,
-        user.lms_user_id,
-        user.id,
-        2,
-        topicId,
-        algorithmListKempten2[index]
-      )
-        .then((response) => {
-          log.info(response)
-        })
-        .catch(() => {
-          addSnackbar({
-            message: t('Data.calculated.error'),
-            severity: 'error',
-            autoHideDuration: 5000
-          })
-          log.error('Error while calculating learning path in Kempten Course 2')
-        })
-    })
-  } else if (user.university == 'TH-AB') {
-    topicListAschaffenburg.map((topicId, index) => {
-      postCalculateLearningPathILS(
-        user.settings.user_id,
-        user.lms_user_id,
-        user.id,
-        1,
-        topicId,
-        algorithmListAschaffenburg[index]
-      )
-        .then((response) => {
-          log.info(response)
-        })
-        .catch(() => {
-          addSnackbar({
-            message: t('Data.calculated.error'),
-            severity: 'error',
-            autoHideDuration: 5000
-          })
-          log.error('Error while calculating learning path in Aschaffenburg')
-        })
-    })
-  } else {
-    addSnackbar({
-      message: t('Data.calculated.error'),
-      severity: 'error',
-      autoHideDuration: 5000
-    })
-    log.error(user.university)
-  }
+  })
 }
 
 export default useHandleSend

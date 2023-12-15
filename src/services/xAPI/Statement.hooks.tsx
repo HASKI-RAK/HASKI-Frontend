@@ -113,7 +113,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
 
   useEffect(() => {
     isAuth &&
-    getUser()
+      getUser()
         .then((user) => {
           setLmsUserID(user.lms_user_id.toString())
         })

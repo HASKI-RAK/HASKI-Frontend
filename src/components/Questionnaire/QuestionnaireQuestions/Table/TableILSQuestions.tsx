@@ -109,13 +109,13 @@ const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmpt
   const { t } = useTranslation()
   const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, true)
 
-    const stepsILSData = useMemo(() => {
-      return [
-        ...(t<string>(ilsLong ? 'components.TableILSQuestions.ilsLong' : 'components.TableILSQuestions.ilsShort', {
-          returnObjects: true
-        }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
-      ]
-    }, [])
+  const stepsILSData = useMemo(() => {
+    return [
+      ...(t<string>(ilsLong ? 'components.TableILSQuestions.ilsLong' : 'components.TableILSQuestions.ilsShort', {
+        returnObjects: true
+      }) as { question: string; questionLabel: string; answer1: string; answer2: string }[][])
+    ]
+  }, [])
 
   const [activeStep, setActiveStep] = useState(0)
   const [radioButtonGroup, setRadioButtonGroup] = useState([{ value: '' }, { value: '' }, { value: '' }, { value: '' }])
@@ -211,79 +211,78 @@ const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmpt
     [setQuestionnaireAnswers]
   )
 
-    const questionnaireType = ilsLong
-      ? t('components.QuestionnaireResultsModal.ilsLongNoData-1')
-      : t('components.QuestionnaireResultsModal.ilsShortNoData-1')
+  const questionnaireType = ilsLong
+    ? t('components.QuestionnaireResultsModal.ilsLongNoData-1')
+    : t('components.QuestionnaireResultsModal.ilsShortNoData-1')
 
-    return (
-      <Box>
-        {activeStep == 0 ? (
-          <CoverSheet header={questionnaireType} body={t('components.TableILSQuestions.introduction')} />
-        ) : (
-          <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
-            <ButtonStack
-              activeStep={activeStep}
-              handleNext={handleNext}
-              handleBack={handleBack}
-              steps={ilsLong ? 12 : 6}
-              idType={'ILS'}
-              disabled={ilsLong ? activeStep === 11 || isNextDisabled : activeStep === 5 || isNextDisabled}
-            />
-            <Stack direction="column" justifyContent="space-around" alignItems="center">
-              <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
-                <Table style={{ minWidth: '300px' }}>
-                  <TableBody key={'TableILSBody'}>
-                    {stepsILSData[activeStep].map((page, row) => (
-                      <React.Fragment key={page.questionLabel}>
-                        <MemoTableRowQuestion question={t(stepsILSData[activeStep][row].question)} />
-                        <MemoTableRowAnswers
-                          radioButtonGroup={radioButtonGroup[row].value}
-                          handleRadioChange={handleRadioChange}
-                          setRadioButtonGroup={(newValue) => {
-                            setRadioButtonGroup((prevState) => {
-                              return prevState.map((item, index) => {
-                                if (index === row) {
-                                  return {
-                                    ...item,
-                                    value: newValue
-                                  }
-                                }
-                                return item
-                              })
-                            })
-                          }}
-                          answerIndex={row}
-                          isIlsLong={ilsLong}
-                          t={t}
-                          activeStep={activeStep}
-                          stepsILSData={stepsILSData}
-                        />
-                      </React.Fragment>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <SendButton
-                t={t}
-                handleSend={handleSendClick}
-                isNextDisabled={isNextDisabled}
-                isValid={ilsLong ? activeStep === 11 : activeStep === 5}
-                idType={'ILS'}
-                isSending={isSending}
-                sendSuccess={successSend}
-              />
-            </Stack>
-          </Stack>
-        )}
-        {activeStep == 0 && (
+  return (
+    <Box>
+      {activeStep == 0 ? (
+        <CoverSheet header={questionnaireType} body={t('components.TableILSQuestions.introduction')} />
+      ) : (
+        <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
+          <ButtonStack
+            activeStep={activeStep}
+            handleNext={handleNext}
+            handleBack={handleBack}
+            steps={ilsLong ? 12 : 6}
+            idType={'ILS'}
+            disabled={ilsLong ? activeStep === 11 || isNextDisabled : activeStep === 5 || isNextDisabled}
+          />
           <Stack direction="column" justifyContent="space-around" alignItems="center">
-            <StartButton handleNext={handleNext} />
+            <TableContainer component={Paper} style={{ maxWidth: '90%' }}>
+              <Table style={{ minWidth: '300px' }}>
+                <TableBody key={'TableILSBody'}>
+                  {stepsILSData[activeStep].map((page, row) => (
+                    <React.Fragment key={page.questionLabel}>
+                      <MemoTableRowQuestion question={t(stepsILSData[activeStep][row].question)} />
+                      <MemoTableRowAnswers
+                        radioButtonGroup={radioButtonGroup[row].value}
+                        handleRadioChange={handleRadioChange}
+                        setRadioButtonGroup={(newValue) => {
+                          setRadioButtonGroup((prevState) => {
+                            return prevState.map((item, index) => {
+                              if (index === row) {
+                                return {
+                                  ...item,
+                                  value: newValue
+                                }
+                              }
+                              return item
+                            })
+                          })
+                        }}
+                        answerIndex={row}
+                        isIlsLong={ilsLong}
+                        t={t}
+                        activeStep={activeStep}
+                        stepsILSData={stepsILSData}
+                      />
+                    </React.Fragment>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <SendButton
+              t={t}
+              handleSend={handleSendClick}
+              isNextDisabled={isNextDisabled}
+              isValid={ilsLong ? activeStep === 11 : activeStep === 5}
+              idType={'ILS'}
+              isSending={isSending}
+              sendSuccess={successSend}
+            />
           </Stack>
-        )}
-      </Box>
-    )
-  }
-)
+        </Stack>
+      )}
+      {activeStep == 0 && (
+        <Stack direction="column" justifyContent="space-around" alignItems="center">
+          <StartButton handleNext={handleNext} />
+        </Stack>
+      )}
+    </Box>
+  )
+})
 // eslint-disable-next-line immutable/no-mutation
 TableILSQuestions.displayName = 'TableILSQuestions'
 
