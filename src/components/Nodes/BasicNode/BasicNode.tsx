@@ -6,11 +6,15 @@ import { memo } from 'react'
 import { getConfig } from '@shared'
 
 /**
- * BasicNode presents a component that displays a node with a name.
- * It can be clicked to open a corresponding activity of the lms.
- * BasicNode can't be used as a standalone component and must be rendered via ReactFlow.
+ * BasicNode component.
+ *
  * @param props - Props containing the data of the node.
- * @returns {JSX.Element} - The BasicNode component.
+ *
+ * @remarks
+ * BasicNode presents a component that displays a node with a name.
+ * It can be clicked to open a corresponding activity of the LMS.
+ * BasicNode can't be used as a standalone component and must be rendered via ReactFlow.
+ *
  * @category Components
  */
 const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {

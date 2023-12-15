@@ -5,12 +5,12 @@
  * most likely the system itself.
  *
  * @example
- *  "verb": {
- *     "id": "https://wiki.haski.app/variables/xapi.loggedout",
- *     "display": {
+ *  "verb": \{
+ *     "id": "https://wiki.haski.app/variables/services.loggedout",
+ *     "display": \{
  *       "en": "loggedout"
- *     }
- *  },
+ *     \}
+ *  \},
  *
  * @category verbs
  */

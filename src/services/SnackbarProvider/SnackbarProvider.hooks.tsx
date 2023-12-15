@@ -2,14 +2,16 @@ import { useState, useMemo, Dispatch, SetStateAction, useCallback } from 'react'
 import { SnackbarMessageProps } from '@components'
 
 /**
- * @typedef {Object} SnackbarProviderHookReturn
- * @property {SnackbarMessageProps[]} snackbarsErrorWarning - The array of error and warning snackbars.
- * @property {SnackbarMessageProps[]} snackbarsSuccessInfo - The array of success and info snackbars.
- * @property {function} setSnackbarsErrorWarning - The function to set the error and warning snackbars.
- * @property {function} setSnackbarsSuccessInfo - The function to set the success and info snackbars.
- * @property {function} addSnackbar - The function to add a single snackbar.
- * @property {function} updateSnackbar - The function to update a single snackbar.
- * @property {function} removeSnackbar - The function to remove a single snackbar.
+ * @prop snackbarsErrorWarning - The array of error and warning snackbars.
+ * @prop snackbarsSuccessInfo - The array of success and info snackbars.
+ * @prop setSnackbarsErrorWarning - The function to set the error and warning snackbars.
+ * @prop setSnackbarsSuccessInfo - The function to set the success and info snackbars.
+ * @prop addSnackbar - The function to add a single snackbar.
+ * @prop updateSnackbar - The function to update a single snackbar.
+ * @prop removeSnackbar - The function to remove a single snackbar.
+ * @category Services
+ * @category Hooks
+ * @interface
  */
 type SnackbarProviderHookReturn = {
   readonly snackbarsErrorWarning: SnackbarMessageProps[]
@@ -22,10 +24,16 @@ type SnackbarProviderHookReturn = {
 }
 
 /**
+ * useSnackbarProvider hook.
+ *
+ * @remarks
  * useSnackbarProvider presents a hook for the snackbar provider.
  * It can be used to inject the snackbar logic into a provider.
- * @returns {SnackbarProviderHookReturn} - The provider logic.
+ *
+ * @returns - The logic to add, update and remove snackbars.
+ *
  * @category Services
+ * @category Hooks
  */
 export const useSnackbarProvider = (): SnackbarProviderHookReturn => {
   const [snackbarsErrorWarning, setSnackbarsErrorWarning] = useState<SnackbarMessageProps[]>([])

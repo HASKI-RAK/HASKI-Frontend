@@ -39,7 +39,7 @@ describe('getStatement tests', () => {
         {
           id: new URL(window.location.href).origin,
           definition: {
-            type: '/pages/home',
+            type: '/functions/pages.Home',
             name: {
               en: 'Home'
             }
@@ -50,7 +50,17 @@ describe('getStatement tests', () => {
   })
 
   test('getStatement', () => {
-    expect(statement.getStatement('0', 'clicked', '/', '0', 'Button', () => 'pages.test')).toStrictEqual({
+    expect(
+      statement.getStatement(
+        '0',
+        'clicked',
+        '/',
+        '0',
+        'Button',
+        () => 'pages.test',
+        '/common/components/DefaultButton/DefaultButton'
+      )
+    ).toStrictEqual({
       actor: {
         account: {
           homePage: new URL(window.location.href).origin,
@@ -58,7 +68,7 @@ describe('getStatement tests', () => {
         }
       },
       verb: {
-        id: '/verbs/clicked',
+        id: '/variables/services.clicked',
         display: {
           en: 'clicked'
         }
@@ -69,7 +79,7 @@ describe('getStatement tests', () => {
           name: {
             en: 'Button'
           },
-          type: '/common/components/button'
+          type: '/functions/common.Button'
         }
       },
       context: {
