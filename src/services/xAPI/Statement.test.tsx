@@ -61,7 +61,9 @@ describe('Statement tests', () => {
   })
 
   test('lmsUserID fetch fails', async () => {
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() => new Error('Error'))
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
 
     const { result } = renderHook(() => useStatement(), {
       wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
@@ -71,7 +73,7 @@ describe('Statement tests', () => {
       sendStatement: expect.any(Function)
     })
 
-    result.current.sendStatement(xAPIVerb.clicked).catch((error) => log.error(error))
+    result.current.sendStatement(xAPIVerb.clicked)
 
     await waitFor(() => {
       expect(sendStatement).toHaveBeenCalled()
@@ -85,4 +87,29 @@ describe('Statement tests', () => {
       )
     })
   })
+
+  /*test('sendStatement fails', async () => {
+
+    jest.spyOn(xAPI, 'sendStatement').mockImplementation(() => {
+      throw new Error('Error has not been caught')
+    })
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { result } = renderHook(() => useStatement(), {
+      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
+    })
+
+    expect(result.current).toMatchObject({
+      sendStatement: expect.any(Function)
+    })
+
+    result.current.sendStatement(xAPIVerb.clicked)
+
+    await waitFor(() => {
+      expect(sendStatement).toHaveBeenCalled()
+    })
+  })*/
 })
