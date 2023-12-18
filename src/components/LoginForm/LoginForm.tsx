@@ -18,10 +18,7 @@ import { useTranslation } from 'react-i18next'
  * @prop useLoginForm - The hook to be used for the form logic.
  */
 export type LoginFormProps = {
-  onSubmit?: (username: string, password: string) => void
-  onValidate?: (username: string, password: string) => readonly [boolean, boolean]
   onMoodleLogin?: () => void
-  usernameDefaultValue?: string
   isLoading?: boolean
   moodleLogin?: boolean
   useLoginForm?: (params?: LoginFormHookParams) => LoginFormHookReturn
@@ -37,40 +34,11 @@ export type LoginFormProps = {
  * @category Components
  */
 const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) => {
-  // UX State
-  const [usernameHasError, setUsernameHasError] = useState(false)
-  const [passwordHasError, setPasswordHasError] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
-  const handleClickShowPassword = () => setShowPassword(!showPassword)
-
   // Application logic hooks
-  const { username, password, setUsername, setPassword, submit, validate, loginMoodle } = useLoginForm()
+  const { loginMoodle } = useLoginForm()
 
   // Props destructuring
-  const {
-    onSubmit = submit,
-    onValidate = validate,
-    onMoodleLogin = loginMoodle,
-    usernameDefaultValue: usernameDefault = '',
-    isLoading = false,
-    moodleLogin = false
-  } = props
-
-  // Event Handlers
-  const handleSubmit = () => {
-    const [usernameIsValid, passwordIsValid] = onValidate(username, password)
-    setUsernameHasError(!usernameIsValid)
-    setPasswordHasError(!passwordIsValid)
-    if (usernameIsValid && passwordIsValid) onSubmit(username, password)
-  }
-
-  const usernameChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-    setUsername(event.target.value)
-  }
-
-  const passwordChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-    setPassword(event.target.value)
-  }
+  const { onMoodleLogin = loginMoodle, isLoading = false, moodleLogin = false } = props
 
   // Translation
   const { t } = useTranslation()
@@ -85,42 +53,6 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
           <Typography variant="h6" component="h2" gutterBottom>
             {t('components.LoginForm.subtitle')}
           </Typography>
-          {/**
-          <Stack spacing={2} direction="column">
-            <TextField
-              id="login-form-username-textfield"
-              required
-              error={usernameHasError}
-              helperText={usernameHasError ? t('components.LoginForm.usernameError') : ''}
-              label={t('components.LoginForm.username')}
-              defaultValue={usernameDefault}
-              onChange={usernameChangeHandler}
-              name="username"
-            />
-            <TextField
-              id="login-form-password-textfield"
-              required
-              error={passwordHasError}
-              helperText={passwordHasError ? t('components.LoginForm.passwordError') : ''}
-              label={t('components.LoginForm.password')}
-              variant="outlined"
-              type={showPassword ? 'text' : 'password'}
-              onChange={passwordChangeHandler}
-              name="password"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword}>
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                )
-              }}
-            />
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
-              {t('components.LoginForm.login')}
-            </Button>
-          */}
           <Stack spacing={2} direction="column">
             {moodleLogin && (
               <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={5}>
@@ -129,7 +61,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
                     <img src="/LogoPng.png" alt="Haski" style={{ width: '50px' }} />
                     {
                       <Typography variant="h6" component="h2">
-                        {'Login HASKI'}
+                        {t('components.LoginForm.loginButton')}
                       </Typography>
                     }
                   </Button>

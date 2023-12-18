@@ -483,6 +483,7 @@
   "components.LoginForm.title": "HASKI Anmeldung",
   "components.LoginForm.username": "Benutzername",
   "components.LoginForm.usernameError": "Bitte geben Sie einen gültigen Benutzernamen ein",
+  "components.LoginForm.loginButton": "Mit HASKI anmelden",
   "components.Menubar.closeDialog": "Sind Sie sicher, dass Sie den Fragebogen schließen möchten? Nicht abgeschickte Antworten werden nicht gespeichert.",
   "components.MenuBar.profileLogin": "Einloggen",
   "components.MenuBar.profileLogout": "Ausloggen",
