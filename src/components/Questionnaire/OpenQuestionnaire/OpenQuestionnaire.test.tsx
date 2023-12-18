@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { OpenQuestionnaire } from '@components'
 import { AuthContext } from '@services'
 import { mockServices } from 'jest.setup'
@@ -34,7 +34,7 @@ describe('OpenQuestionnaire', () => {
       })
     )
 
-    const form = render(
+    const {getByTestId, getAllByRole, rerender}= render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <OpenQuestionnaire />
@@ -42,7 +42,7 @@ describe('OpenQuestionnaire', () => {
       </MemoryRouter>
     )
     await new Promise(process.nextTick)
-    form.rerender(
+    rerender(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <OpenQuestionnaire />
@@ -51,9 +51,20 @@ describe('OpenQuestionnaire', () => {
     )
 
     await act(async() => {
-      const closeButton = form.getAllByRole('button')[0]
+      const closeButton = getAllByRole('button')[0]
       fireEvent.click(closeButton)
 
+      await waitFor(() => {
+        new Promise(process.nextTick)
+        rerender(
+          <MemoryRouter>
+            <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+              <OpenQuestionnaire />
+            </AuthContext.Provider>
+          </MemoryRouter>
+        )
+        expect(getByTestId('Questions Modal'))
+      })
     })
   })
 
@@ -100,7 +111,6 @@ describe('OpenQuestionnaire', () => {
     await act(async() => {
       const closeButton = form.getAllByRole('button')[0]
       fireEvent.click(closeButton)
-
     })
   })
 
@@ -110,7 +120,7 @@ describe('OpenQuestionnaire', () => {
     jest.mock('react-cookie', () => ({
       useCookies: () => [jest.fn(), jest.fn()]
     }))
-    const form = render(
+    render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <OpenQuestionnaire />
       </AuthContext.Provider>
@@ -241,6 +251,9 @@ describe('OpenQuestionnaire', () => {
           fireEvent.click(sendButton)
         })
         fireEvent.click(form.getByTestId('QuestionnaireQuestionsModal-Close-Button'))
+        await waitFor(() => {
+          expect(form.queryByTestId('Questions Modal')).toBeNull()
+        })
       }
     }
   }, 20000)
