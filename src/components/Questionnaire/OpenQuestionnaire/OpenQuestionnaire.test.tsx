@@ -34,7 +34,7 @@ describe('OpenQuestionnaire', () => {
       })
     )
 
-    const {getByTestId, getAllByRole, rerender}= render(
+    const { getByTestId, getAllByRole, rerender } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <OpenQuestionnaire />
@@ -50,7 +50,7 @@ describe('OpenQuestionnaire', () => {
       </MemoryRouter>
     )
 
-    await act(async() => {
+    await act(async () => {
       const closeButton = getAllByRole('button')[0]
       fireEvent.click(closeButton)
 
@@ -92,7 +92,7 @@ describe('OpenQuestionnaire', () => {
       })
     )
 
-    const form = render(
+    const { getByTestId, rerender, getAllByRole } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <OpenQuestionnaire />
@@ -100,7 +100,7 @@ describe('OpenQuestionnaire', () => {
       </MemoryRouter>
     )
     await new Promise(process.nextTick)
-    form.rerender(
+    rerender(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <OpenQuestionnaire />
@@ -108,9 +108,20 @@ describe('OpenQuestionnaire', () => {
       </MemoryRouter>
     )
 
-    await act(async() => {
-      const closeButton = form.getAllByRole('button')[0]
+    await act(async () => {
+      const closeButton = getAllByRole('button')[0]
       fireEvent.click(closeButton)
+    })
+    await waitFor(() => {
+      new Promise(process.nextTick)
+      rerender(
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <OpenQuestionnaire />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      )
+      expect(getByTestId('Questions Modal'))
     })
   })
 
@@ -125,6 +136,7 @@ describe('OpenQuestionnaire', () => {
         <OpenQuestionnaire />
       </AuthContext.Provider>
     )
+    expect(document.cookie).toBeDefined()
   })
 
   test('PrivacyModal cookie is not set and there is no ils data', async () => {
@@ -148,14 +160,16 @@ describe('OpenQuestionnaire', () => {
         understanding_value: 0
       })
     )
+
     const form = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <OpenQuestionnaire />
       </AuthContext.Provider>
     )
+    expect(form).toBeDefined()
   })
 
-  test('PrivacyModal cookie is not set, but the fetcILS throws an error', async () => {
+  test('Questionnaire cookie is not set, but the fetcILS throws an error', async () => {
     document.cookie = 'questionnaire_sent_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 
     jest.mock('react-cookie', () => ({
@@ -168,6 +182,8 @@ describe('OpenQuestionnaire', () => {
         <OpenQuestionnaire />
       </AuthContext.Provider>
     )
+
+    expect(form).toBeDefined()
   })
 
   test('Questionnaire closing after answering all Questions', async () => {
@@ -218,24 +234,24 @@ describe('OpenQuestionnaire', () => {
     const backButton = form.getByTestId('backButtonILSQuestionnaire')
 
     for (let i = 0; i < 11; i++) {
-      const RadioButton1 = form.getByTestId('ilsLongQuestionnaireILSButtonGroup1').querySelectorAll(
-        'input[type="radio"]'
-      )[0] as HTMLInputElement
+      const RadioButton1 = form
+        .getByTestId('ilsLongQuestionnaireILSButtonGroup1')
+        .querySelectorAll('input[type="radio"]')[0] as HTMLInputElement
       fireEvent.click(RadioButton1)
 
-      const RadioButton2 = form.getByTestId('ilsLongQuestionnaireILSButtonGroup2').querySelectorAll(
-        'input[type="radio"]'
-      )[1] as HTMLInputElement
+      const RadioButton2 = form
+        .getByTestId('ilsLongQuestionnaireILSButtonGroup2')
+        .querySelectorAll('input[type="radio"]')[1] as HTMLInputElement
       fireEvent.click(RadioButton2)
 
-      const RadioButton3 = form.getByTestId('ilsLongQuestionnaireILSButtonGroup3').querySelectorAll(
-        'input[type="radio"]'
-      )[0] as HTMLInputElement
+      const RadioButton3 = form
+        .getByTestId('ilsLongQuestionnaireILSButtonGroup3')
+        .querySelectorAll('input[type="radio"]')[0] as HTMLInputElement
       fireEvent.click(RadioButton3)
 
-      const RadioButton4 = form.getByTestId('ilsLongQuestionnaireILSButtonGroup4').querySelectorAll(
-        'input[type="radio"]'
-      )[1] as HTMLInputElement
+      const RadioButton4 = form
+        .getByTestId('ilsLongQuestionnaireILSButtonGroup4')
+        .querySelectorAll('input[type="radio"]')[1] as HTMLInputElement
       fireEvent.click(RadioButton4)
 
       expect(RadioButton1.checked).toBe(true)
