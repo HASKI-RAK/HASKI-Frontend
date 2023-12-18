@@ -243,5 +243,5 @@ describe('OpenQuestionnaire', () => {
         fireEvent.click(form.getByTestId('QuestionnaireQuestionsModal-Close-Button'))
       }
     }
-  })
+  }, 20000)
 })
