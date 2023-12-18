@@ -6,7 +6,7 @@ import { CollapsibleText } from '@components'
  * @interface
  */
 interface CollapsibleTextListProps {
-  content: Record<string, string>
+  content: {header: string, body:[]}[]
   animate?: boolean
   offset?: number
 }
@@ -27,11 +27,11 @@ const CollapsibleTextList: React.FC<CollapsibleTextListProps> = ({ content, anim
       style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
       className="CollapsibleTextList"
       data-testid="CollapsibleTextList">
-      {Object.entries(content).map(([header, body], index) => (
+      {content.map((entry, index) => (
         <CollapsibleText
           key={index}
-          header={header}
-          body={body}
+          header={entry.header}
+          body={entry.body}
           animate={animate ?? false}
           offset={(offset + 1) * (index + 1)}
         />

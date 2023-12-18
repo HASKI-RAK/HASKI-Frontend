@@ -52,7 +52,7 @@ const ProjectTeamCompetenciesCard = ({
 
   return (
     <div ref={ref} data-testid="projectTeamCompetenciesCard">
-      <Typography variant="h3" align="center">
+      <Typography variant="h3" align="center" sx={{marginBottom: '4rem'}}>
         {headerState}
       </Typography>
       <div style={{ width: '70%', margin: '0 auto', marginBottom: '9rem' }}>{props.children}</div>

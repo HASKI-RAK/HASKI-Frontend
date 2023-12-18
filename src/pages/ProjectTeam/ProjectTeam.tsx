@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import {
   CollapsibleTextMultiList,
+  CollapsibleTextList,
   ImageAttribute,
   ImageCollection,
   ProjectDescriptionCard,
@@ -10,7 +11,6 @@ import {
 import { Avatar, Grid, Box, Fade, Divider, Typography } from '@common/components'
 import { memo, useEffect, useCallback, useRef, useState, RefObject } from 'react'
 import MediaQuery from 'react-responsive'
-import './ProjectTeam.css'
 //import { useProjectTeam as _useProjectTeam } from './ProjectTeam.hooks'
 
 const background_logo_style = {
@@ -41,11 +41,10 @@ const ProjectTeam = () => {
   // Translation
   const { t } = useTranslation()
 
-  let quotesReasons = 
+  const quotesReasons = 
     (t('pages.ProjectTeam.ReasonsBody', {
       returnObjects: true
     }) as { quote: string; img: string; name: string; description: string }[]) ?? []
-  quotesReasons = Array.isArray(quotesReasons) ? quotesReasons : []
   let quotesDev =
     (t('pages.ProjectTeam.InitVoicesBody', {
       returnObjects: true
@@ -59,7 +58,7 @@ const ProjectTeam = () => {
   let interdisciplinary =
     (t('pages.ProjectTeam.interdisciplinaryBody', {
       returnObjects: true
-    }) as []) ?? []
+    }) as {header: string, body:[]}[]) ?? []
   interdisciplinary = Array.isArray(interdisciplinary) ? interdisciplinary : []
   let imageAttributes =
     (t('pages.ProjectTeam.imageSourcesDict', {
@@ -69,6 +68,7 @@ const ProjectTeam = () => {
 
   const [animateState, setAnimateState] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  const listindex = useRef(0)
 
   const animate = useCallback((ref: RefObject<HTMLDivElement>) => {
     const topPosition = ref.current?.getBoundingClientRect().top
@@ -123,9 +123,9 @@ const ProjectTeam = () => {
       <div>
         <div ref={ref}>
           <MediaQuery minWidth={700}>
-            <Fade style={{opacity:'1.0'}} in={animateState} easing='linear' timeout={10000}>
+            <Fade style={{opacity:'0.35'}} in={animateState} easing='linear' timeout={10000}>
               <Box sx={{...background_map_style, left:'-2.5%'}} data-testid="BgMap">
-                <img src="/ProjectTeam/map02.gif" width="100%" />
+                <img src="/ProjectTeam/mapAschaffenburg.gif" width="100%" />
               </Box>
             </Fade>
           </MediaQuery>
@@ -146,8 +146,8 @@ const ProjectTeam = () => {
         <div>
           <MediaQuery minWidth={700}>
             <Fade style={{opacity: '0.35'}} in={animateState} easing='linear' timeout={5000}>
-              <Box sx={{...background_map_style, right:'3.5%'}} data-testid="BgMap">
-                <img src="/ProjectTeam/map01.gif" width="100%" />
+              <Box sx={{...background_map_style, right:'0%'}} data-testid="BgMap">
+                <img src="/ProjectTeam/mapRegensburg.gif" width="100%" />
               </Box>
             </Fade>
           </MediaQuery>
@@ -168,7 +168,7 @@ const ProjectTeam = () => {
         <div>
           <MediaQuery minWidth={700}>
             <Box sx={{...background_map_style, marginTop:'35px', left:'-2.5%'}} data-testid="BgMap">
-              <img src="/ProjectTeam/map03.gif" width="100%" />
+              <img src="/ProjectTeam/mapKempten.gif" width="100%" />
             </Box>
           </MediaQuery>
           <ProjectDescriptionCard
@@ -187,10 +187,7 @@ const ProjectTeam = () => {
         </div>
       </div>
       <ProjectTeamCompetenciesCard header={t('pages.ProjectTeam.interdisciplinaryHeader')}>
-        {interdisciplinary.map((item:[]) => {
-          return (<><ul>{item.map((iterator:string, index:number)=>{
-            return(<li key={index}><Typography>{iterator}</Typography></li>)
-            })}</ul><Divider></Divider></>)})}
+        <CollapsibleTextList content={interdisciplinary} animate={animateState} offset={listindex.current++}/>
       </ProjectTeamCompetenciesCard>
       <Grid container item justifyContent="center" xs={12}>
         <ImageAttribute imageAttributes={imageAttributes} />

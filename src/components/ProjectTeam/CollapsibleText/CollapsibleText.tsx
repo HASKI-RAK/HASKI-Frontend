@@ -15,7 +15,7 @@ import {
  */
 interface CollapsibleTextProps {
   header: string
-  body?: string
+  body?: []
   animate?: boolean
   offset?: number
   useCollapsibleText?: (params?: useCollapsibleTextHookParams) => CollapsibleTextHookReturn
@@ -70,7 +70,7 @@ const CollapsibleText: React.FC<CollapsibleTextProps> = ({
   }
 
   return (
-    <Zoom in={animateState} style={{ transitionDelay: `${offset * 100}ms` }}>
+    <Zoom in={animateState} style={{ transitionDelay: `${offset * 20}ms` }}>
       <div ref={ref} className="CollapsibleText" data-testid="CollapsibleText">
         <Accordion expanded={expanded} onChange={toggleExpansion}>
           <div>
@@ -85,7 +85,7 @@ const CollapsibleText: React.FC<CollapsibleTextProps> = ({
             <div>
               <Divider variant="middle" />
               <AccordionDetails>
-                <Typography>{body}</Typography>
+                <ul>{body.map((entry, index)=><li key = {index} ><Typography>{entry}</Typography></li>)}</ul>
               </AccordionDetails>
             </div>
           )}
