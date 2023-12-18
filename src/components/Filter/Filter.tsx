@@ -29,6 +29,7 @@ const MenuProps = {
  * @prop options - The options of the filter for the user to select from.
  * @prop selectedOptions - The options that are currently selected.
  * @prop setSelectedOptions - The function to set the selected options.
+ * @category Components
  * @interface
  */
 type FilterProps = {

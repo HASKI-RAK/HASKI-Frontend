@@ -3,10 +3,14 @@ import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
 
 /**
+ * DefaultGroup component.
+ *
+ * @param props - Props containing the data of the node aswell as an isConnectable boolean.
+ *
+ * @remarks
  * DefaultGroup presents a component that displays a label text for a group of nodes.
  * DefaultGroup can't be used as a standalone component and must be rendered via ReactFlow.
- * @param props - Props containing the data of the node aswell as a isConnectable boolean.
- * @returns {JSX.Element} - The DefaultGroup component.
+ *
  * @category Components
  */
 const DefaultGroup = ({ data, isConnectable }: NodeProps) => {

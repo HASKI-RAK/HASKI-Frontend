@@ -5,12 +5,12 @@
  * such as a comment etc.
  *
  * @example
- *  "verb": {
- *     "id": "https://wiki.haski.app/variables/xapi.deleted",
- *     "display": {
+ *  "verb": \{
+ *     "id": "https://wiki.haski.app/variables/services.deleted",
+ *     "display": \{
  *       "en": "deleted"
- *     }
- *  },
+ *     \}
+ *  \},
  *
  * @category verbs
  */

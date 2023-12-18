@@ -30,7 +30,23 @@ const config: Config.InitialOptions = {
   coverageReporters: ['lcov', 'text', 'html'],
   coveragePathIgnorePatterns: ['node_modules', 'Webvitals.ts', '<rootDir>/src/index.tsx', '.mock.ts', 'index.ts'],
   transform: {
-    'node_modules/variables/.+\\.(j|t)sx?$': 'ts-jest'
+    'node_modules/variables/.+\\.(j|t)sx?$': 'ts-jest',
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        diagnostics: {
+          ignoreCodes: [1343]
+        },
+        astTransformers: {
+          before: [
+            {
+              path: 'node_modules/ts-jest-mock-import-meta',
+              options: { metaObjectReplacement: { url: 'https://www.url.com' } }
+            }
+          ]
+        }
+      }
+    ]
   },
   transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$', 'node_modules/(?!variables/.*)'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts']
