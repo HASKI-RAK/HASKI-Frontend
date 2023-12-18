@@ -73,7 +73,7 @@ describe('Statement tests', () => {
       sendStatement: expect.any(Function)
     })
 
-    result.current.sendStatement(xAPIVerb.clicked)
+    result.current.sendStatement(xAPIVerb.clicked).catch((error) => log.error(error))
 
     await waitFor(() => {
       expect(sendStatement).toHaveBeenCalled()
