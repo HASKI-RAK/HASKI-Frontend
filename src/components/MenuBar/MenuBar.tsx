@@ -327,7 +327,8 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             </Tooltip>
           </Box>
 
-          {/** Settings button */}
+          {/** 
+          { Settings button }
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openGlobalSettings')}>
               <IconButton
@@ -343,6 +344,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               </IconButton>
             </Tooltip>
           </Box>
+*/}
 
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
