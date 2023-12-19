@@ -22,7 +22,7 @@ const ApplicationExampleNode = ({ data }: NodeProps<LearningPathLearningElementN
         data.handleOpen()
         data.handleSetUrl(getConfig().MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
       }}
-      data-testid={'applicationExampleNode'}>
+      data-testid={'ApplicationExampleNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
         sx={{

@@ -14,7 +14,7 @@ describe('ForumNode tests', () => {
     lmsId: 1,
     name: 'testNode',
     activityType: 'testType',
-    classification: 'ZL',
+    classification: 'FO',
     isRecommended: true,
     handleSetUrl: jest.fn(),
     handleSetTitle: jest.fn(),

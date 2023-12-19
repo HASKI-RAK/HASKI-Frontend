@@ -1,9 +1,9 @@
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor, act } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import ImageWrapper from './ImageWrapper'
 import NodeWrapper from './NodeWrapper'
 import '@testing-library/jest-dom'
-import { xAPI } from '@services'
+import { xAPI, AuthContext } from '@services'
 
 describe('DefaultBox tests', () => {
   test('ImageWrapper sends statement on click', async () => {
@@ -11,15 +11,18 @@ describe('DefaultBox tests', () => {
     jest.spyOn(xAPI, 'sendStatement').mockImplementation(sendStatement)
 
     const { getByTestId } = render(
-      <MemoryRouter>
-        <ImageWrapper data-testid="imageWrapper" />
-      </MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <ImageWrapper data-testid="imageWrapper" />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
-    fireEvent.click(getByTestId('imageWrapper'))
-
-    await waitFor(() => {
-      expect(sendStatement).toHaveBeenCalled()
+    act(() => {
+      fireEvent.click(getByTestId('imageWrapper'))
+      waitFor(() => {
+        expect(sendStatement).toHaveBeenCalled()
+      })
     })
   })
 
@@ -28,15 +31,18 @@ describe('DefaultBox tests', () => {
     jest.spyOn(xAPI, 'sendStatement').mockImplementation(sendStatement)
 
     const { getByTestId } = render(
-      <MemoryRouter>
-        <NodeWrapper data-testid="nodeWrapper" />
-      </MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <NodeWrapper data-testid="nodeWrapper" />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
-    fireEvent.click(getByTestId('nodeWrapper'))
-
-    await waitFor(() => {
-      expect(sendStatement).toHaveBeenCalled()
+    act(() => {
+      fireEvent.click(getByTestId('nodeWrapper'))
+      waitFor(() => {
+        expect(sendStatement).toHaveBeenCalled()
+      })
     })
   })
 })

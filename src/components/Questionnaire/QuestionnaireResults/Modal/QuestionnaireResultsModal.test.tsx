@@ -29,6 +29,69 @@ describe('Test ResultDescriptionListK with all Methods', () => {
     jest.restoreAllMocks()
   })
 
+  it('sets Loading false if student did not fill out ListK-questionnaire', async () => {
+    const handleClose = jest.fn()
+    mockServices.fetchListK.mockImplementationOnce(() => {
+      return Promise.resolve({
+        att: 0,
+        characteristic_id: 0,
+        cogn_str: 0,
+        con: 0,
+        crit_rev: 0,
+        eff: 0,
+        elab: 0,
+        ext_res_mng_str: 0,
+        goal_plan: 0,
+        id: 0,
+        int_res_mng_str: 0,
+        lit_res: 0,
+        lrn_env: 0,
+        lrn_w_cls: 0,
+        metacogn_str: 0,
+        org: 0,
+        reg: 0,
+        rep: 0,
+        time: 0
+      })
+    })
+
+      const { getByTestId } = render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+        </MemoryRouter>)
+        await waitFor(async() => {
+          fireEvent.click(getByTestId('nextButton'))
+          expect(getByTestId('ActiveStepListKNoData')).toBeInTheDocument()
+        })
+  })
+  
+  it('sets Loading false if student did not fill out ILS-questionnaire', async () => {
+    const handleClose = jest.fn()
+    mockServices.fetchILS.mockImplementationOnce(() => {
+      return Promise.resolve({
+        characteristic_id: 1,
+        id: 1,
+        input_dimension: 'test',
+        input_value: 0,
+        perception_dimension: 'test',
+        perception_value: 0,
+        processing_dimension: 'test',
+        processing_value: 0,
+        understanding_dimension: 'test',
+        understanding_value: 0
+      })
+    })
+
+      const { getByTestId } = render(
+        <MemoryRouter>
+          <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+        </MemoryRouter>
+      )
+      await waitFor(async() => {
+        expect(getByTestId('ActiveStepILSNoData')).toBeInTheDocument()
+      })
+  })
+
   test('Modal does not open with optional props', async () => {
     const { queryByTestId } = render(
       <MemoryRouter>

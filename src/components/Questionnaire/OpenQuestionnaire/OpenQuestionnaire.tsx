@@ -8,7 +8,7 @@ import {
 } from '@components'
 import { useCookies } from 'react-cookie'
 import { usePersistedStore } from '@store'
-import { AuthContext, getILS } from '@services'
+import { AuthContext, fetchILS } from '@services'
 import log from 'loglevel'
 
 //** usePrivacyPolicy gets the 'privacy_accept_token' from the hook */
@@ -24,7 +24,7 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
   const [cookie, setCookie] = useCookies(['questionnaire_sent_token'])
   const [questionnaireILSExists, setQuestionnaireILSExists] = useState(true)
   const { privacyPolicyCookie } = usePrivacyModal()
-  const fetchUser = usePersistedStore((state) => state.fetchUser)
+  const getUser = usePersistedStore((state) => state.getUser)
 
   //closes the modal
   const handleCloseILSLongModal = (event: object, reason: string) => {
@@ -44,8 +44,8 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
   //check if there is already ils data
   useEffect(() => {
     if (!cookie['questionnaire_sent_token'] && isAuth) {
-      fetchUser().then((user) => {
-        return getILS(user.settings.user_id, user.lms_user_id, user.id)
+      getUser().then((user) => {
+        return fetchILS(user.settings.user_id, user.lms_user_id, user.id)
           .then((data) => {
             if (data?.perception_dimension == 'sns' && data?.perception_value == 0) {
               setQuestionnaireILSExists(false)

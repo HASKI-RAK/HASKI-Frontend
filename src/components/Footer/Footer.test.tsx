@@ -20,13 +20,13 @@ describe('Footer', () => {
         <Footer />
       </Router>
     )
-    expect(getByText(new Date().getFullYear())).toBeInTheDocument()
+    expect(getByText('projectHASKI' + '™ ' + new Date().getFullYear())).toBeInTheDocument()
 
     // click on every button:
     getAllByRole('button').forEach((button) => {
       fireEvent.click(button)
     })
 
-    expect(navigate).toHaveBeenCalledTimes(6)
+    expect(navigate).toHaveBeenCalledTimes(5)
   })
 })
