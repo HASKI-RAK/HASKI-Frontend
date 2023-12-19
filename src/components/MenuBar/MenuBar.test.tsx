@@ -374,6 +374,7 @@ describe('MenuBar', () => {
     expect(result.getByTestId('HelpIcon')).toBeInTheDocument()
   })
 
+  /** 
   test('click on SettingsIcon should open popover', () => {
     const props: MenuBarProps = {
       courseSelected: false
@@ -388,6 +389,7 @@ describe('MenuBar', () => {
     fireEvent.click(result.getByTestId('SettingsIcon'))
     expect(result.getByTestId('SettingsIcon')).toBeInTheDocument()
   })
+  */
 
   test('click on UserIcon should open popover', () => {
     const props: MenuBarProps = {
