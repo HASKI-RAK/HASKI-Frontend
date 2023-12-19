@@ -127,18 +127,17 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   const sendStatement = useCallback(
     async (verb: xAPIVerb, filePath: string) => {
       lmsUserID &&
-        await xAPI
-          .sendStatement({
-            statement: getStatement(
-              await lmsUserID,
-              xAPIVerb[verb],
-              location.pathname,
-              defaultComponentID,
-              xAPIComponent[defaultComponent],
-              getEnglishName,
-              filePath
-            )
-          })
+        (await xAPI.sendStatement({
+          statement: getStatement(
+            await lmsUserID,
+            xAPIVerb[verb],
+            location.pathname,
+            defaultComponentID,
+            xAPIComponent[defaultComponent],
+            getEnglishName,
+            filePath
+          )
+        }))
     },
     [
       xAPI.sendStatement,

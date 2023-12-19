@@ -83,7 +83,7 @@ describe('Statement tests', () => {
       sendStatement: expect.any(Function)
     })
 
-    act( () => {
+    act(() => {
       result.current.sendStatement(xAPIVerb.clicked, 'filePath').catch((error) => log.error(error))
       waitFor(() => {
         expect(sendStatement).toHaveBeenCalled()

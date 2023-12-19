@@ -74,7 +74,7 @@ describe('Test the Home page', () => {
     await waitFor(() => {
       const course = getAllByText('pages.course.courseButton')
       fireEvent.click(course[1])
-      expect(navigate).toHaveBeenCalledWith('/course/1')
+      expect(navigate).toHaveBeenCalledWith('/course/2')
     })
   })
 

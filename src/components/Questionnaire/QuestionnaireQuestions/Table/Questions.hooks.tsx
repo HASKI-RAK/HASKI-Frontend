@@ -86,7 +86,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
 // defined in the backend.
 const courseList = [1]
 const topicList = [2, 6, 10, 12]
-const algorithmList = ["aco", "graf", "graf", "aco"]
+const algorithmList = ['aco', 'graf', 'graf', 'aco']
 
 const useCalculateLearningPath = (
   user: User,

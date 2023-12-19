@@ -1,6 +1,7 @@
 import { getConfig } from '@shared'
-import { getData } from '../RequestResponse'
+import { fetchData } from '../RequestResponse'
 import { LearningPathBasedOn } from '@core'
+import learningPathBasedOn from '../../core/CalculateLearningPath/LearningPathBasedOn'
 
 //algorithm can be: "graf", "aco", "ga"
 export const postCalculateLearningPathILS = async (
@@ -11,7 +12,7 @@ export const postCalculateLearningPathILS = async (
   topicId?: number,
   algorithm?: string
 ): Promise<LearningPathBasedOn> => {
-  const response = await fetch(
+  return fetchData<learningPathBasedOn>(
     getConfig().BACKEND +
       `/user/${userId}/${lmsUserId}/student/${studentId}/course/${courseId}/topic/${topicId}/learningPath`,
     {
@@ -23,6 +24,4 @@ export const postCalculateLearningPathILS = async (
       body: JSON.stringify({ algorithm: algorithm })
     }
   )
-
-  return getData<LearningPathBasedOn>(response)
 }

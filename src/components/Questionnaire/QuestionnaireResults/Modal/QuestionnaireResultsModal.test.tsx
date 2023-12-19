@@ -55,16 +55,17 @@ describe('Test ResultDescriptionListK with all Methods', () => {
       })
     })
 
-      const { getByTestId } = render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={handleClose} />
-        </MemoryRouter>)
-        await waitFor(async() => {
-          fireEvent.click(getByTestId('nextButton'))
-          expect(getByTestId('ActiveStepListKNoData')).toBeInTheDocument()
-        })
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+      </MemoryRouter>
+    )
+    await waitFor(async () => {
+      fireEvent.click(getByTestId('nextButton'))
+      expect(getByTestId('ActiveStepListKNoData')).toBeInTheDocument()
+    })
   })
-  
+
   it('sets Loading false if student did not fill out ILS-questionnaire', async () => {
     const handleClose = jest.fn()
     mockServices.fetchILS.mockImplementationOnce(() => {
@@ -82,14 +83,14 @@ describe('Test ResultDescriptionListK with all Methods', () => {
       })
     })
 
-      const { getByTestId } = render(
-        <MemoryRouter>
-          <QuestionnaireResultsModal open={true} handleClose={handleClose} />
-        </MemoryRouter>
-      )
-      await waitFor(async() => {
-        expect(getByTestId('ActiveStepILSNoData')).toBeInTheDocument()
-      })
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <QuestionnaireResultsModal open={true} handleClose={handleClose} />
+      </MemoryRouter>
+    )
+    await waitFor(async () => {
+      expect(getByTestId('ActiveStepILSNoData')).toBeInTheDocument()
+    })
   })
 
   test('Modal does not open with optional props', async () => {
