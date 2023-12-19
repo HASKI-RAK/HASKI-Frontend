@@ -89,29 +89,4 @@ describe('Statement tests', () => {
       )
     })
   })
-
-  /*test('sendStatement fails', async () => {
-
-    jest.spyOn(xAPI, 'sendStatement').mockImplementation(() => {
-      throw new Error('Error has not been caught')
-    })
-
-    jest.spyOn(console, 'error').mockImplementation(() => {
-      return
-    })
-
-    const { result } = renderHook(() => useStatement(), {
-      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
-    })
-
-    expect(result.current).toMatchObject({
-      sendStatement: expect.any(Function)
-    })
-
-    result.current.sendStatement(xAPIVerb.clicked)
-
-    await waitFor(() => {
-      expect(sendStatement).toHaveBeenCalled()
-    })
-  })*/
 })

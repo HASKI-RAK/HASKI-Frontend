@@ -37,7 +37,7 @@ const MenuItem = ({ useStatement = _useStatement, onClick, ...props }: MenuItemP
     <DefaultMenuItem
       onClick={useCallback(
         (event: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
           onClick?.(event)
         },
         [sendStatement, onClick]

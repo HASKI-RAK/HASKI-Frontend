@@ -37,7 +37,7 @@ const Accordion = ({ useStatement = _useStatement, onClick, ...props }: Accordio
     <DefaultAccordion
       onClick={useCallback(
         (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
           onClick?.(event)
         },
         [sendStatement, onClick]

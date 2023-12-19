@@ -37,7 +37,7 @@ const ToggleButtonGroup = ({ useStatement = _useStatement, onChange, ...props }:
     <DefaultToggleButtonGroup
       onChange={useCallback(
         <T, K extends T>(event: MouseEvent<HTMLElement, globalThis.MouseEvent>, value: K) => {
-          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname)
           onChange?.(event, value)
         },
         [sendStatement, onChange]
