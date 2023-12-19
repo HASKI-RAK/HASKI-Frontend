@@ -49,7 +49,7 @@ describe('getStatement tests', () => {
     })
   })
 
-  test('getStatement', () => {
+  test('getStatement with no ContextActivity', () => {
     expect(
       statement.getStatement(
         '0',
@@ -92,6 +92,79 @@ describe('getStatement tests', () => {
             github: '',
             event_function: 'src/common/components/DefaultButton/DefaultButton'
           }
+        }
+      },
+      timestamp: expect.any(String)
+    })
+  })
+
+  test('getStatement with ContextActivity', () => {
+    expect(
+      statement.getStatement(
+        '0',
+        'clicked',
+        '/course/2/topic/1',
+        '0',
+        'Button',
+        () => 'pages.test',
+        '/common/components/DefaultButton/DefaultButton'
+      )
+    ).toStrictEqual({
+      actor: {
+        account: {
+          homePage: new URL(window.location.href).origin,
+          name: '0'
+        }
+      },
+      verb: {
+        id: '/variables/services.clicked',
+        display: {
+          en: 'clicked'
+        }
+      },
+      object: {
+        id: new URL(window.location.href).origin.concat('/course/2/topic/1#0'),
+        definition: {
+          name: {
+            en: 'Button'
+          },
+          type: '/functions/common.Button'
+        }
+      },
+      context: {
+        platform: 'Frontend',
+        language: localStorage.getItem('i18nextLng') ?? '',
+        extensions: {
+          'http://lrs.learninglocker.net/define/extensions/info': {
+            domain: new URL(window.location.href).origin,
+            domain_version: '',
+            github: '',
+            event_function: 'src/common/components/DefaultButton/DefaultButton'
+          }
+        },
+        contextActivities: {
+          parent: [
+            {
+              id: new URL(window.location.href).origin.concat('/course/2/topic/1'),
+              definition: {
+                type: '/pages/1',
+                name: {
+                  en: 'pages.test'
+                }
+              }
+            }
+          ],
+          grouping: [
+            {
+              id: new URL(window.location.href).origin,
+              definition: {
+                type: '/functions/pages.Home',
+                name: {
+                  en: 'Home'
+                }
+              }
+            }
+          ]
         }
       },
       timestamp: expect.any(String)

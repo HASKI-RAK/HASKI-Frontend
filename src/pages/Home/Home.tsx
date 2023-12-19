@@ -68,11 +68,6 @@ export const Home = () => {
     }
   }, [loading])
 
-  // In the upcoming Evaluation (Nov. 2023) a course is only available after a specific date
-  const courseDateReached = (date: string, courseId: number): boolean => {
-    return courseId == 2 ? new Date() <= new Date(date) : false
-  }
-
   // Card cointaining the courses with a button to the specific course
   return loading ? (
     <Skeleton variant="rectangular" width="100%" height={118} />
@@ -98,15 +93,10 @@ export const Home = () => {
                         id="course-button"
                         variant="contained"
                         color="primary"
-                        disabled={courseDateReached('November 22, 2023 10:00:00', course.id)}
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>
-                        {courseDateReached('November 22, 2023 10:00:00', course.id)
-                          ? t('components.Home.Button.CourseNotAvailable') +
-                            ' ' +
-                            new Date('November 22, 2023').toLocaleDateString()
-                          : t('pages.course.courseButton')}
+                        {t('pages.course.courseButton')}
                       </Button>
                     </Stack>
                   </CardContent>
