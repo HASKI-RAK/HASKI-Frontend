@@ -16,8 +16,12 @@ import ForumNode from '../ForumNode/ForumNode'
 import LearningObjectiveNode from '../LearningObjectiveNode/LearningObjectiveNode'
 
 /**
+ * nodeTypes object.
+ *
+ * @remarks
  * nodeTypes presents a object containing all node types.
- * @returns {NodeTypes} - Returns a list of all node types.
+ *
+ * @category Components
  */
 export const nodeTypes: NodeTypes = {
   RQ: FeedbackNode,

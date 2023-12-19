@@ -14,6 +14,7 @@ import {
  * @prop DefaultFabProps - The props of a mui Fab.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type FabProps = DefaultFabProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
@@ -36,7 +37,7 @@ const Fab = ({ useStatement = _useStatement, onClick, ...props }: FabProps) => {
     <DefaultFab
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
           onClick?.(event)
         },
         [sendStatement, onClick]

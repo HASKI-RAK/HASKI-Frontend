@@ -6,11 +6,15 @@ import { memo } from 'react'
 import { getConfig } from '@shared'
 
 /**
- * ExplanationNode presents a component that displays a node with an icon and a name.
- * It can be clicked to open a corresponding activity of the lms.
- * ExplanationNode can't be used as a standalone component and must be rendered via ReactFlow.
+ * ExplanationNode component.
+ *
  * @param props - Props containing the data of the node.
- * @returns {JSX.Element} - The ExplanationNode component.
+ *
+ * @remarks
+ * ExplanationNode presents a component that displays a node with an icon and a name.
+ * It can be clicked to open a corresponding activity of the LMS.
+ * ExplanationNode can't be used as a standalone component and must be rendered via ReactFlow.
+ *
  * @category Components
  */
 const ExplanationNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {

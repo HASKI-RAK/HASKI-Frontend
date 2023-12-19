@@ -73,7 +73,7 @@ export type useStatementHookParams = {
  */
 export type StatementHookReturn = {
   readonly getEnglishName: (key: string) => string
-  readonly sendStatement: (verb: xAPIVerb) => Promise<void>
+  readonly sendStatement: (verb: xAPIVerb, filePath: string) => Promise<void>
 }
 
 /**
@@ -125,21 +125,19 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
 
   // Wraps function so send statements from components
   const sendStatement = useCallback(
-    async (verb: xAPIVerb) => {
+    async (verb: xAPIVerb, filePath: string) => {
       lmsUserID &&
-        xAPI
+        await xAPI
           .sendStatement({
             statement: getStatement(
-              lmsUserID,
+              await lmsUserID,
               xAPIVerb[verb],
               location.pathname,
               defaultComponentID,
               xAPIComponent[defaultComponent],
-              getEnglishName
+              getEnglishName,
+              filePath
             )
-          })
-          .catch((error: string) => {
-            log.error(error) // Some tests in LocalNav and Contact fail if catch is missing, otherwise not needed.
           })
     },
     [

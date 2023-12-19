@@ -14,6 +14,7 @@ import {
  * @prop DefaultIconButtonProps - The props of a mui IconButton.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type IconButtonProps = DefaultIconButtonProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
@@ -40,7 +41,7 @@ const IconButton = (
       ref={ref}
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
           onClick?.(event)
         },
         [onClick, sendStatement]

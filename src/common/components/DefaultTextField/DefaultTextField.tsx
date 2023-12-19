@@ -14,6 +14,7 @@ import {
  * @prop DefaultTextFieldProps - The props of a mui TextField.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type TextFieldProps = DefaultTextFieldProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
@@ -36,7 +37,7 @@ const TextField = ({ useStatement = _useStatement, onChange, ...props }: TextFie
     <DefaultTextField
       onChange={useCallback(
         (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-          sendStatement(xAPIVerb.changed).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname)
           onChange?.(event)
         },
         [sendStatement, onChange]

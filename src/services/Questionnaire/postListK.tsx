@@ -1,5 +1,5 @@
 import { ListK } from '@core'
-import { getData } from '../RequestResponse'
+import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
 interface PostListKProps {
@@ -8,7 +8,7 @@ interface PostListKProps {
 }
 
 export const postListK = async ({ studentId, outputJson }: PostListKProps): Promise<ListK> => {
-  const response = await fetch(`${getConfig().BACKEND}/lms/student/${studentId}/questionnaire/listk`, {
+  return fetchData<ListK>(`${getConfig().BACKEND}/lms/student/${studentId}/questionnaire/listk`, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -16,6 +16,4 @@ export const postListK = async ({ studentId, outputJson }: PostListKProps): Prom
     },
     body: outputJson
   })
-
-  return getData<ListK>(response)
 }

@@ -7,12 +7,12 @@
  * and joysticks are common sources of this verb.
  *
  * @example
- * "verb": {
- *     "id": "https://wiki.haski.app/variables/xapi.pressed",
- *     "display": {
+ * "verb": \{
+ *     "id": "https://wiki.haski.app/variables/services.pressed",
+ *     "display": \{
  *       "en": "pressed"
- *     }
- *  },
+ *     \}
+ *  \},
  *
  * @category verbs
  */

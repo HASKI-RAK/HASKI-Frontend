@@ -31,7 +31,7 @@ describe('Statement tests', () => {
     })
 
     act(() => {
-      result.current.sendStatement(xAPIVerb.clicked).catch((error) => log.error(error))
+      result.current.sendStatement(xAPIVerb.clicked, 'filePath').catch((error) => log.error(error))
       waitFor(() => {
         expect(sendStatement).toHaveBeenCalled()
         expect(getStatement).toHaveBeenCalledWith(
@@ -67,7 +67,9 @@ describe('Statement tests', () => {
   })
 
   test('lmsUserID fetch fails', async () => {
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() => new Error('Error'))
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
 
     const { result } = renderHook(() => useStatement(), {
       wrapper: ({ children }) => (
@@ -81,9 +83,9 @@ describe('Statement tests', () => {
       sendStatement: expect.any(Function)
     })
 
-    act(() => {
-      result.current.sendStatement(xAPIVerb.clicked).catch((error) => log.error(error))
-      waitFor(async () => {
+    act( () => {
+      result.current.sendStatement(xAPIVerb.clicked, 'filePath').catch((error) => log.error(error))
+      waitFor(() => {
         expect(sendStatement).toHaveBeenCalled()
         expect(getStatement).toHaveBeenCalledWith(
           '-1',
@@ -91,7 +93,8 @@ describe('Statement tests', () => {
           '/',
           'null',
           'Null',
-          expect.any(Function)
+          expect.any(Function),
+          'filePath'
         )
       })
     })

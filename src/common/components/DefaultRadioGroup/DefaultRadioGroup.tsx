@@ -14,6 +14,7 @@ import {
  * @prop DefaultRadioGroupProps - The props of a mui RadioGroup.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type RadioGroupProps = DefaultRadioGroupProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
@@ -36,7 +37,7 @@ const RadioGroup = ({ useStatement = _useStatement, onChange, ...props }: RadioG
     <DefaultRadioGroup
       onChange={useCallback(
         (event: ChangeEvent<HTMLInputElement>, value: string) => {
-          sendStatement(xAPIVerb.changed).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname)
           onChange?.(event, value)
         },
         [sendStatement, onChange]

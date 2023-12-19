@@ -14,6 +14,7 @@ import {
  * @prop DefaultMenuItemProps - The props of a mui MenuItem.
  * @prop useStatement - Custom hook to send xAPI statements
  * @category Common
+ * @interface
  */
 type MenuItemProps = DefaultMenuItemProps & {
   useStatement?: (params?: useStatementHookParams) => StatementHookReturn
@@ -36,7 +37,7 @@ const MenuItem = ({ useStatement = _useStatement, onClick, ...props }: MenuItemP
     <DefaultMenuItem
       onClick={useCallback(
         (event: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
           onClick?.(event)
         },
         [sendStatement, onClick]

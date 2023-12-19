@@ -90,6 +90,7 @@
     "source-map-loader": "^4.0.0",
     "style-loader": "^3.3.1",
     "ts-jest": "^29.0.3",
+    "ts-jest-mock-import-meta": "^1.1.0",
     "ts-loader": "^9.4.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths-jest": "^0.0.1",
