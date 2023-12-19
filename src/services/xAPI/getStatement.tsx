@@ -87,9 +87,9 @@ const getParent = (path: string, getEnglishName: (key: string) => string) => {
       definition: {
         type: (getConfig().WIKI ?? '')
           .concat('/pages/')
-          .concat(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/),
+          .concat(path.split('/').pop() as string /*Cannot be undefined, but TS doesn't know that*/),
         name: {
-          en: getEnglishName(path.split('/').pop() ?? '' /*Cannot be undefined, but TS doesn't know that*/) ?? ''
+          en: getEnglishName(path.split('/').pop() as string /*Cannot be undefined, but TS doesn't know that*/)
         }
       }
     }

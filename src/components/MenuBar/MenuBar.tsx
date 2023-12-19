@@ -151,7 +151,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             log.error(error.message)
           })
       })
-      .catch((error) => {
+      /*.catch((error) => { Is already catched in Statement.hooks
         // 🍿 snackbar error
         addSnackbar({
           message: error.message,
@@ -159,7 +159,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           autoHideDuration: 5000
         })
         log.error(error.message)
-      })
+      })*/
   }
 
   const handleCloseTopicsMenu = () => {

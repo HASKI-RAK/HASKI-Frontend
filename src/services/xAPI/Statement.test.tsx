@@ -62,7 +62,9 @@ describe('Statement tests', () => {
   })
 
   test('lmsUserID fetch fails', async () => {
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() => new Error('Error'))
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
 
     const { result } = renderHook(() => useStatement(), {
       wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>

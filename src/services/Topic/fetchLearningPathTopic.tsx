@@ -1,12 +1,12 @@
 import { LearningPathTopic, LearningPathTopicReturn } from '@core'
-import { getData } from '../RequestResponse'
+import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
 export const fetchLearningPathTopic: LearningPathTopicReturn = async (userId, lmsUserId, studentId, course_id) => {
   if (!course_id) {
     throw new Error('course_id is required')
   }
-  const response = await fetch(
+  return fetchData<LearningPathTopic>(
     getConfig().BACKEND + `/user/${userId}/${lmsUserId}/student/${studentId}/course/${course_id}/topic`,
     {
       method: 'GET',
@@ -16,5 +16,4 @@ export const fetchLearningPathTopic: LearningPathTopicReturn = async (userId, lm
       }
     }
   )
-  return getData<LearningPathTopic>(response)
 }

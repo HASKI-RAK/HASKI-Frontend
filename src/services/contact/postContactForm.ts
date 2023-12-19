@@ -1,5 +1,5 @@
 import { getConfig } from '@shared'
-import { getData } from '../RequestResponse'
+import { fetchData } from '../RequestResponse'
 
 /**
  * The data that is sent to the backend.
@@ -20,7 +20,7 @@ export const postContactForm = async (
   userId?: number,
   lmsUserId?: number
 ): Promise<Response> => {
-  const response = await fetch(getConfig().BACKEND + `/user/${userId}/${lmsUserId}/contactform`, {
+  return fetchData<Response>(getConfig().BACKEND + `/user/${userId}/${lmsUserId}/contactform`, {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify(responseBody),
@@ -28,5 +28,4 @@ export const postContactForm = async (
       'Content-Type': 'application/json'
     }
   })
-  return getData<Response>(response)
 }
