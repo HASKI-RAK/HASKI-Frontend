@@ -129,8 +129,6 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
           getEnglishName,
           filePath
         )
-      }).catch((error: string) => {
-        log.error(error)
       })
     },
     [
