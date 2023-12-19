@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import GraphILS, { useData } from './GraphILS'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import React from 'react'
 
 const mockILS = {
@@ -28,18 +28,21 @@ describe('Test GraphILS with all Methods', () => {
     expect(data[3].possibleDimensions).toMatch('components.TableILS.reflective' + ' / ' + 'components.TableILS.active')
   })
 
-  test('GraphILS renders without crashing', () => {
+  test('GraphILS renders without crashing', async() => {
     const graphILS = render(<GraphILS data={mockILS} />)
 
-    expect(graphILS.getByText('components.TableILS.active')).toBeInTheDocument()
-    expect(graphILS.getByText('components.TableILS.reflective')).toBeInTheDocument()
-    expect(graphILS.getByText('components.TableILS.sensory')).toBeInTheDocument()
-    expect(graphILS.getByText('components.TableILS.intuitive')).toBeInTheDocument()
-    expect(graphILS.getByText('components.TableILS.visual')).toBeInTheDocument()
-    expect(graphILS.getByText('components.TableILS.verbal')).toBeInTheDocument()
-    expect(graphILS.getByText('components.TableILS.sequential')).toBeInTheDocument()
-    expect(graphILS.getByText('components.TableILS.global')).toBeInTheDocument()
+    await waitFor(() => {
+        expect(graphILS.getByText('components.TableILS.active')).toBeInTheDocument()
+        expect(graphILS.getByText('components.TableILS.reflective')).toBeInTheDocument()
+        expect(graphILS.getByText('components.TableILS.sensory')).toBeInTheDocument()
+        expect(graphILS.getByText('components.TableILS.intuitive')).toBeInTheDocument()
+        expect(graphILS.getByText('components.TableILS.visual')).toBeInTheDocument()
+        expect(graphILS.getByText('components.TableILS.verbal')).toBeInTheDocument()
+        expect(graphILS.getByText('components.TableILS.sequential')).toBeInTheDocument()
+        expect(graphILS.getByText('components.TableILS.global')).toBeInTheDocument()
 
-    expect(graphILS).toBeTruthy()
+        expect(graphILS).toBeTruthy()
+      }
+    )
   })
 })
