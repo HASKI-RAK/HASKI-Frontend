@@ -406,7 +406,7 @@ describe('MenuBar', () => {
     // TODO 📑: will be implemented in the future. Current menu is mock.
   })
 
-  test('click on Learningtype should open Questionnaire Results Modal', () => {
+  test('click on Learningcharacteristic should open Questionnaire Results Modal', () => {
     const props: MenuBarProps = {
       courseSelected: false
     }
