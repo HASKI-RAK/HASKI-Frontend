@@ -37,7 +37,7 @@ const Searchbar = (props: SearchbarProps) => {
     [props.setSearchQuery, props.timeout]
   )
   return (
-    <Typography variant="h4" data-testid="searchbar">
+    <Typography variant="h4">
       <TextField
         id="searchbar-textfield"
         fullWidth
