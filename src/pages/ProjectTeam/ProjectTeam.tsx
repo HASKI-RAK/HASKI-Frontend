@@ -133,14 +133,6 @@ const ProjectTeam = () => {
             header={t('pages.ProjectTeam.University.AschaffenburgHeader')}
             body={t('pages.ProjectTeam.University.AschaffenburgBody')}
             isLeft={true}>
-            <Avatar
-              alt={t('pages.ProjectTeam.University.AschaffenburgHeader')}
-              src="/ProjectTeamTeamPlaceholder_50.png"
-              sx={{
-                height: { xs: '7rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' },
-                width: { xs: '7rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
-              }}
-            />
           </ProjectDescriptionCard>
         </div>
         <div>
@@ -155,14 +147,6 @@ const ProjectTeam = () => {
             header={t('pages.ProjectTeam.University.RegensburgHeader')}
             body={t('pages.ProjectTeam.University.RegensburgBody')}
             isLeft={false}>
-            <Avatar
-              alt={t('pages.ProjectTeam.University.RegensburgHeader')}
-              src="/ProjectTeamTeamPlaceholder_50.png"
-              sx={{
-                height: { xs: '7rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' },
-                width: { xs: '7rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
-              }}
-            />
           </ProjectDescriptionCard>
         </div>
         <div>
@@ -175,14 +159,6 @@ const ProjectTeam = () => {
             header={t('pages.ProjectTeam.University.KemptenHeader')}
             body={t('pages.ProjectTeam.University.KemptenBody')}
             isLeft={true}>
-            <Avatar
-              alt={t('pages.ProjectTeam.University.KemptenHeader')}
-              src="/ProjectTeamTeamPlaceholder_50.png"
-              sx={{
-                height: { xs: '7rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' },
-                width: { xs: '7rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
-              }}
-            />
           </ProjectDescriptionCard>
         </div>
       </div>
@@ -190,7 +166,7 @@ const ProjectTeam = () => {
         <CollapsibleTextList content={interdisciplinary} animate={animateState} offset={listindex.current++}/>
       </ProjectTeamCompetenciesCard>
       <Grid container item justifyContent="center" xs={12}>
-        <ImageAttribute imageAttributes={imageAttributes} />
+        <ImageAttribute imageAttributes={[...imageAttributes]} />
       </Grid>
     </>
   )

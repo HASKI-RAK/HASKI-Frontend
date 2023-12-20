@@ -72,23 +72,21 @@ const ImageCollection: React.FC<ImageCollectionProps> = ({ img1Url, img2Url, img
 
   return (
     <Fade in={true} easing="linear" timeout={2000}>
-      <Slide direction="up" in={true} mountOnEnter unmountOnExit timeout={1000}>
-        <Box sx={{...container_style}} data-testid="ImageCollection">
-          <Box sx={view_style}>
-            <Box sx={{bottom: 0, overflow: 'hidden', position: 'absolute', top:0, left:'-5%', right:'66%'}}>
-              <Box sx={{...image_style, left:'-5%', right:'-10%', backgroundImage: `url(${img1Url})` }} role="img alt"></Box>
-            </Box>
-            <Box sx={{...divider_style, left:'66%', right:'31.5%'}} data-testid="divider2"></Box>
-            <Box sx={{bottom: 0, overflow: 'hidden', position: 'absolute', top:0, left:'33%', right:'33%'}}>
-              <Box sx={{...image_style, left:'-15%', right:'-15%', backgroundImage: `url(${img2Url})` }} role="img alt"></Box>
-            </Box>
-            <Box sx={{...divider_style, left:'30.5%', right:'67%'}} data-testid="divider1"></Box>
-            <Box sx={{bottom: 0, overflow: 'hidden', position: 'absolute', top:0, left:'67%', right:'-5%'}}>
-              <Box sx={{...image_style, left:'-15%', right:'-5%', backgroundImage: `url(${img3Url})` }} role="img alt"></Box>
-            </Box>
+      <Box sx={{...container_style}} data-testid="ImageCollection">
+        <Box sx={view_style}>
+          <Box sx={{bottom: 0, overflow: 'hidden', position: 'absolute', top:0, left:'-5%', right:'66%'}}>
+            <Box sx={{...image_style, left:'-5%', right:'-10%', backgroundImage: `url(${img1Url})` }} role="img alt"></Box>
+          </Box>
+          <Box sx={{...divider_style, left:'66%', right:'31.5%'}} data-testid="divider2"></Box>
+          <Box sx={{bottom: 0, overflow: 'hidden', position: 'absolute', top:0, left:'33%', right:'33%'}}>
+            <Box sx={{...image_style, left:'-15%', right:'-15%', backgroundImage: `url(${img2Url})` }} role="img alt"></Box>
+          </Box>
+          <Box sx={{...divider_style, left:'30.5%', right:'67%'}} data-testid="divider1"></Box>
+          <Box sx={{bottom: 0, overflow: 'hidden', position: 'absolute', top:0, left:'67%', right:'-5%'}}>
+            <Box sx={{...image_style, left:'-15%', right:'-5%', backgroundImage: `url(${img3Url})` }} role="img alt"></Box>
           </Box>
         </Box>
-      </Slide>
+      </Box>
     </Fade>
   )
 }
