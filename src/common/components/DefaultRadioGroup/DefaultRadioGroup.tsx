@@ -37,7 +37,7 @@ const RadioGroup = ({ useStatement = _useStatement, onChange, ...props }: RadioG
     <DefaultRadioGroup
       onChange={useCallback(
         (event: ChangeEvent<HTMLInputElement>, value: string) => {
-          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname)
           onChange?.(event, value)
         },
         [sendStatement, onChange]

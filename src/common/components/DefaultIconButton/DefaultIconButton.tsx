@@ -37,7 +37,7 @@ const IconButton = ({ useStatement = _useStatement, onClick, ...props }: IconBut
     <DefaultIconButton
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
           onClick?.(event)
         },
         [onClick, sendStatement]

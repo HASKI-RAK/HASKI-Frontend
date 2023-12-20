@@ -37,7 +37,7 @@ const TextField = ({ useStatement = _useStatement, onChange, ...props }: TextFie
     <DefaultTextField
       onChange={useCallback(
         (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname)
           onChange?.(event)
         },
         [sendStatement, onChange]

@@ -37,7 +37,7 @@ const Menu = ({ useStatement = _useStatement, onClose, ...props }: MenuProps) =>
     <DefaultMenu
       onClose={useCallback(
         (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
-          sendStatement(xAPIVerb.closed, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.closed, new URL(import.meta.url).pathname)
           onClose?.(event, reason)
         },
         [sendStatement, onClose]

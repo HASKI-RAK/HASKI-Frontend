@@ -1,5 +1,5 @@
 import { getConfig } from '@shared'
-import { getData } from '../RequestResponse'
+import { fetchData } from '../RequestResponse'
 
 export type LoginResponse = {
   // Unix timestamp
@@ -11,7 +11,7 @@ export type postLoginParams = {
 export const postLogin = async (params?: postLoginParams): Promise<LoginResponse> => {
   const { nonce = '' } = params || {}
 
-  const response = await fetch(getConfig().BACKEND + `/login`, {
+  return fetchData<LoginResponse>(getConfig().BACKEND + `/login`, {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify({ nonce: nonce }),
@@ -19,5 +19,4 @@ export const postLogin = async (params?: postLoginParams): Promise<LoginResponse
       'Content-Type': 'application/json'
     }
   })
-  return getData<LoginResponse>(response)
 }
