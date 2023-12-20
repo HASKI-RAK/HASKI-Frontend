@@ -13,8 +13,9 @@ export { default as ContactForm, type ContactFormProps } from './ContactForm/Con
 export { default as Footer } from './Footer/Footer'
 export { default as LocalNav } from './LocalNav/LocalNav'
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
-export { default as ProjectDescriptionCard } from './ProjectDescription/ProjectDescriptionCard/ProjectDescriptionCard'
-export { default as ProjectDescriptionStepper } from './ProjectDescription/ProjectDescriptionStepper/ProjectDescriptionStepper'
+export { default as TextCardLeft } from './TextCard/TextCardLeft/TextCardLeft'
+export { default as TextCardRight } from './TextCard/TextCardRight/TextCardRight'
+export { default as TextStepper } from './TextStepper/TextStepper'
 export {
   default as SnackbarMessage,
   type SnackbarMessageProps,
