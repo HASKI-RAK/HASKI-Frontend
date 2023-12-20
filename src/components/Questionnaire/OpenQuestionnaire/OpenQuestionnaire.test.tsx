@@ -4,6 +4,7 @@ import { AuthContext } from '@services'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import { act } from 'react-test-renderer'
+import '@testing-library/jest-dom'
 
 describe('OpenQuestionnaire', () => {
   test('Standard OpenQuestionnaire functionality', () => {
@@ -63,7 +64,7 @@ describe('OpenQuestionnaire', () => {
             </AuthContext.Provider>
           </MemoryRouter>
         )
-        expect(getByTestId('Questions Modal'))
+        expect(getByTestId('Questions Modal')).toBeInTheDocument()
       })
     })
   })
@@ -121,7 +122,7 @@ describe('OpenQuestionnaire', () => {
           </AuthContext.Provider>
         </MemoryRouter>
       )
-      expect(getByTestId('Questions Modal'))
+      expect(getByTestId('Questions Modal')).toBeInTheDocument()
     })
   })
 
@@ -169,7 +170,7 @@ describe('OpenQuestionnaire', () => {
     expect(form).toBeDefined()
   })
 
-  test('Questionnaire cookie is not set, but the fetcILS throws an error', async () => {
+  test('Questionnaire cookie is not set, but the fetchILS throws an error', async () => {
     document.cookie = 'questionnaire_sent_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 
     jest.mock('react-cookie', () => ({
