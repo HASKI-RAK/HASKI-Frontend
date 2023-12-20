@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import { User } from '@core'
 import { SnackbarMessageProps } from '@components'
 import log from 'loglevel'
-import { getConfig } from '@shared'
 
 type SendHookResult = {
   sendAnswers: () => Promise<boolean>
@@ -43,7 +42,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
       if (ils) {
         return postILS({ studentId, outputJson })
           .then((response) => {
-            useCalculateLearningPath(user, addSnackbar, t)
+            calculateLearningPath(user, addSnackbar, t)
             return !!response
           })
           .catch(() => {
@@ -88,7 +87,7 @@ const courseList = [1]
 const topicList = [2, 6, 10, 12]
 const algorithmList = ['aco', 'graf', 'graf', 'aco']
 
-const useCalculateLearningPath = (
+const calculateLearningPath = (
   user: User,
   addSnackbar: (newSnackbar: SnackbarMessageProps) => void,
   t: (key: string) => string
