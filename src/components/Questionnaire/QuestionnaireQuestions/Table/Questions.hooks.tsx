@@ -92,8 +92,8 @@ const calculateLearningPath = (
   addSnackbar: (newSnackbar: SnackbarMessageProps) => void,
   t: (key: string) => string
 ) => {
-  courseList.map((courseId) => {
-    topicList.map((topicId, index) => {
+  courseList.forEach((courseId) => {
+    topicList.forEach((topicId, index) => {
       postCalculateLearningPathILS(
         user.settings.user_id,
         user.lms_user_id,

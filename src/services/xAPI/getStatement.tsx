@@ -168,7 +168,7 @@ const getContext = (path: string, getEnglishName: (key: string) => string, fileP
       platform: 'Frontend',
       language: localStorage.getItem('i18nextLng') ?? '',
       extensions: {
-        'http://lrs.learninglocker.net/define/extensions/info': {
+        'https://lrs.learninglocker.net/define/extensions/info': {
           domain: new URL(window.location.href).origin,
           domain_version: getConfig().FRONTEND_VERSION ?? '',
           github: getConfig().FRONTEND_GITHUB ?? '',
@@ -182,7 +182,7 @@ const getContext = (path: string, getEnglishName: (key: string) => string, fileP
       platform: 'Frontend',
       language: localStorage.getItem('i18nextLng') ?? '',
       extensions: {
-        'http://lrs.learninglocker.net/define/extensions/info': {
+        'https://lrs.learninglocker.net/define/extensions/info': {
           domain: new URL(window.location.href).origin,
           domain_version: getConfig().FRONTEND_VERSION ?? '',
           github: getConfig().FRONTEND_GITHUB ?? '',

@@ -86,7 +86,7 @@ describe('getStatement tests', () => {
         platform: 'Frontend',
         language: localStorage.getItem('i18nextLng') ?? '',
         extensions: {
-          'http://lrs.learninglocker.net/define/extensions/info': {
+          'https://lrs.learninglocker.net/define/extensions/info': {
             domain: new URL(window.location.href).origin,
             domain_version: '',
             github: '',
@@ -135,7 +135,7 @@ describe('getStatement tests', () => {
         platform: 'Frontend',
         language: localStorage.getItem('i18nextLng') ?? '',
         extensions: {
-          'http://lrs.learninglocker.net/define/extensions/info': {
+          'https://lrs.learninglocker.net/define/extensions/info': {
             domain: new URL(window.location.href).origin,
             domain_version: '',
             github: '',
