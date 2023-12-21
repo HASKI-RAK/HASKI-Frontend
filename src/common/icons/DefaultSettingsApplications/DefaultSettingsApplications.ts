@@ -1,2 +1,2 @@
-import DefaultSettingsApplicationsIcon from '@mui/icons-material/SettingsApplications'
+import DefaultSettingsApplications from '@mui/icons-material/SettingsApplications'
 export { DefaultSettingsApplicationsIcon as SettingsApplications }
