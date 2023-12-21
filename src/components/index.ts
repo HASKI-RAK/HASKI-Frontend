@@ -34,7 +34,7 @@ export { default as Searchbar } from './Searchbar/Searchbar'
 export { default as GlossaryIndex } from './Glossary/GlossaryIndex/GlossaryIndex'
 export { default as GlossaryEntry, type GlossaryEntryProps } from './Glossary/GlossaryEntry/GlossaryEntry'
 export { default as OpenQuestionnaire } from './Questionnaire/OpenQuestionnaire/OpenQuestionnaire'
-export { usePrivacyModal, type PrivacyModalHookReturn } from './PrivacyModal/PrivacyModal.hooks'
+export * from './PrivacyModal/PrivacyModal.hooks'
 export { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
 
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure
