@@ -1,5 +1,6 @@
 import create from 'zustand'
 import LearningPathElementSlice, { createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
+import LearningPathElementStatusSlice, { createLearningPathElementStatusSlice } from '../Slices/LearningPathElementStatusSlice'
 import UserSlice, { createUserSlice } from '../Slices/UserSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import CoursesSlice, { createCoursesSlice } from '../Slices/CoursesSlice'
@@ -9,7 +10,7 @@ import log from 'loglevel'
 import { devtools, persist } from 'zustand/middleware'
 
 export type StoreState = LearningPathElementSlice & CourseSlice & CoursesSlice & LearningPathTopicSlice
-export type PersistedStoreState = UserSlice & AuthSlice
+export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice
 
 export const resetters: (() => void)[] = []
 
@@ -25,6 +26,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
     persist(
       (...a) => ({
         ...createUserSlice(...a),
+        ...createLearningPathElementStatusSlice(...a),
         ...createAuthSlice(...a)
       }),
       {
@@ -32,6 +34,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
         // Here we can whitelist the keys we want to persist
         partialize: (state) => ({
           _user: state._user,
+          _learningPathElementStatus: state._learningPathElementStatus,
           expire: state.expire
         }),
         onRehydrateStorage: () => {

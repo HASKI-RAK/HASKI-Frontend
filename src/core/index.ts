@@ -28,6 +28,7 @@ import LearningElement from './LearningElement/LearningElement'
 import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
 import LearningPathElement from './LearningPathElement/LearningPathElement'
 import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
+import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
 import StudentLearningElement from './StudentLearningElement/StudentLearningElement'
 import Course, { CourseResponse } from './Course/Course'
 import Topic from './Topic/Topic'
@@ -42,12 +43,14 @@ export type {
   LearningPathTopic,
   LearningPathElement,
   LearningPathLearningElement,
+  LearningPathElementStatus,
   Topic,
   StudentLearningElement,
   ILS,
   ListK
 }
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
+export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'
 export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'
 export type { ListKReturn } from './QuestionnaireResults/ListK'
 export type { CourseReturn } from './Course/Course'
