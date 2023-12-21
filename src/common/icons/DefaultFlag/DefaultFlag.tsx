@@ -1,2 +1,2 @@
-import FlagIcon from '@mui/icons-material/Flag'
+import DefaultFlag from '@mui/icons-material/Flag'
 export { FlagIcon as Flag }
