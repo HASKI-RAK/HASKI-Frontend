@@ -1119,7 +1119,7 @@
   "error.fetchListK": "There was an Error fetching ListK Questionnaire data",
   "error.getCourses": "There was an Error fetching Courses data",
   "error.getUser": "There was an Error fetching User data",
-  "error.postCalculateLearningPathILS": "There was an Error calculating the Learning Path based on the ILS Questionnaire data",
+  "error.postCalculateLearningPathILS": "There was an error calculating the Learning Path based on the ILS questionnaire data",
   "error.postILS": "ILS Questionnaire could not be sent.",
   "error.postListK": "ListK Questionnaire could not be sent.",
   "info": "Info",
