@@ -76,6 +76,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const [topicsPath, setTopicsPath] = useState<Topic[]>([])
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
+  const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
@@ -345,6 +346,17 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             </Tooltip>
           </Box>
 */}
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
+              <IconButton
+                id="global-settings-icon-button"
+                onClick={() => {
+                  getLearningPathElementStatus("3", 7).then((response) => {
+                    console.log(response)
+                  })
+                }}>
+                <Settings data-testid="SettingsIcon" />
+              </IconButton>
+          </Box>
 
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>

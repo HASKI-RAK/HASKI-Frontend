@@ -11,7 +11,7 @@ export const fetchLearningPathElementStatus: LearningPathElementStatusReturn = a
   }
   return fetchData<LearningPathElementStatus>(
     getConfig().BACKEND +
-    `lms/course/${course_id}/student/${studentId}/activitystatus`,
+    `/lms/course/${course_id}/student/${studentId}/activitystatus`,
     {
       method: 'GET',
       credentials: 'include',
