@@ -46,29 +46,28 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
   return (
     <Stack justifyContent="center" alignItems="center">
       <Paper elevation={3}>
-        <Stack direction="column" justifyContent="center" alignItems="center" margin={2}>
+        <Stack direction="column" justifyContent="center" alignItems="center" margin={2} spacing={2}>
           <Typography variant="h4" component="h1" gutterBottom>
             {t('components.LoginForm.title')}
           </Typography>
-          <Typography variant="h6" component="h2" gutterBottom>
+          <Typography variant="h6" component="h2" gutterBottom maxWidth={400}>
             {t('components.LoginForm.subtitle')}
           </Typography>
-          <Stack spacing={2} direction="column">
-            {moodleLogin && (
-              <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={5}>
-                <Grid item display="flex" justifyContent="center" md={6}>
-                  <Button onClick={onMoodleLogin} data-testid="moodle-login-button" variant="text">
-                    <img src="/LogoPng.png" alt="Haski" style={{ width: '50px' }} />
-                    {
-                      <Typography variant="h6" component="h2">
-                        {t('components.LoginForm.loginButton')}
-                      </Typography>
-                    }
-                  </Button>
-                </Grid>
+
+          {moodleLogin && (
+            <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={1}>
+              <Grid item display="flex" justifyContent="center" md={5}>
+                <Button onClick={onMoodleLogin} data-testid="moodle-login-button" variant="text">
+                  <img src="/LogoPng.png" alt="Haski" style={{ width: '50px' }} />
+                  {
+                    <Typography variant="h6" component="h2">
+                      {t('components.LoginForm.loginButton')}
+                    </Typography>
+                  }
+                </Button>
               </Grid>
-            )}
-          </Stack>
+            </Grid>
+          )}
         </Stack>
         <Backdrop open={isLoading}>
           <CircularProgress color="inherit" />
