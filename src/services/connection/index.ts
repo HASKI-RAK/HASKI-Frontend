@@ -1,1 +1,1 @@
-export * from './useNetworkStatus'
+export * from './NetworkStatus.hooks'

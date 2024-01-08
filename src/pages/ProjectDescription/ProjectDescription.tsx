@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { ProjectDescriptionCard, ProjectDescriptionStepper } from '@components'
+import { TextCardRight, TextStepper, TextCardLeft } from '@components'
 import { Avatar, Grid, Typography, Box } from '@common/components'
 import { memo } from 'react'
 
@@ -8,7 +8,7 @@ import { memo } from 'react'
  *
  * @remarks
  * ProjectDescription presents a page with a description of the project.
- * It uses the ProjectDescriptionCard and ProjectDescriptionStepper components to present the content.
+ * It uses the TextCardRight, TextCardLeft and TextStepper components to present the content.
  *
  * @category Pages
  */
@@ -18,7 +18,7 @@ const ProjectDescription = () => {
 
   return (
     <>
-      <ProjectDescriptionCard
+      <TextCardRight
         header={t('pages.projectdescription.introductionHeader')}
         body={t('pages.projectdescription.introductionBody')}>
         <Box
@@ -29,8 +29,8 @@ const ProjectDescription = () => {
           }}
           src="/LogoPng.png"
         />
-      </ProjectDescriptionCard>
-      <ProjectDescriptionStepper
+      </TextCardRight>
+      <TextStepper
         header={t('pages.projectdescription.approachesHeader')}
         body={
           t<string>('pages.projectdescription.approachesBody', {
@@ -38,7 +38,7 @@ const ProjectDescription = () => {
           }) as string[]
         }
       />
-      <ProjectDescriptionCard
+      <TextCardLeft
         header={t('pages.projectdescription.advantagesTeachingHeader')}
         body={t('pages.projectdescription.advantagesTeachingBody')}>
         <Avatar
@@ -49,8 +49,8 @@ const ProjectDescription = () => {
             width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
           }}
         />
-      </ProjectDescriptionCard>
-      <ProjectDescriptionCard
+      </TextCardLeft>
+      <TextCardRight
         header={t('pages.projectdescription.advantagesTeachingHeader-2')}
         body={t('pages.projectdescription.advantagesTeachingBody-2')}>
         <Avatar
@@ -61,8 +61,8 @@ const ProjectDescription = () => {
             width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
           }}
         />
-      </ProjectDescriptionCard>
-      <ProjectDescriptionCard
+      </TextCardRight>
+      <TextCardLeft
         header={t('pages.projectdescription.advantagesLearningHeader')}
         body={t('pages.projectdescription.advantagesLearningBody')}>
         <Avatar
@@ -73,8 +73,8 @@ const ProjectDescription = () => {
             width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
           }}
         />
-      </ProjectDescriptionCard>
-      <ProjectDescriptionCard
+      </TextCardLeft>
+      <TextCardRight
         header={t('pages.projectdescription.advantagesLearningHeader-2')}
         body={t('pages.projectdescription.advantagesLearningBody-2')}>
         <Avatar
@@ -85,8 +85,8 @@ const ProjectDescription = () => {
             width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
           }}
         />
-      </ProjectDescriptionCard>
-      <ProjectDescriptionStepper
+      </TextCardRight>
+      <TextStepper
         header={t('pages.projectdescription.goalsHeader')}
         body={
           t<string>('pages.projectdescription.goalsBody', {
