@@ -31,6 +31,14 @@ export const ProjectInformation = () => {
           <Typography>{t('pages.glossary')}</Typography>
         </Button>
       </Box>
+      <Box>
+        <Button
+          id="about-us-button"
+          sx={{ mt: '2rem', color: 'black' }}
+          onClick={() => navigate('/projectinformation/aboutus')}>
+          <Typography>{t('pages.aboutUs')}</Typography>
+        </Button>
+      </Box>
     </>
   )
 }

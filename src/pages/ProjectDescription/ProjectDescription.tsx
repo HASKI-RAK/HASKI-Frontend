@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next'
-import { TextCardRight, TextStepper, TextCardLeft } from '@components'
 import { Avatar, Grid, Typography, Box } from '@common/components'
+import { TextCardRight, TextStepper, TextCardLeft } from '@components'
+import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
 
 /**

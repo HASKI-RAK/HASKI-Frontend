@@ -14,7 +14,8 @@ import {
   Topic,
   Course,
   PageNotFound,
-  Glossary
+  Glossary,
+  AboutUs
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { HaskiTheme } from '@utils'
@@ -48,6 +49,7 @@ export const App = () => (
               <Route path="/projectinformation" element={<ProjectInformation />} />
               <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
               <Route path="/projectinformation/glossary" element={<Glossary />} />
+              <Route path="/projectinformation/aboutus" element={<AboutUs />} />
               <Route path="/imprint" element={<Imprint />} />
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />
               <Route path="/🥚" element={<div>Ei</div>} />

@@ -33,5 +33,6 @@ export { default as GlossaryIndex } from './Glossary/GlossaryIndex/GlossaryIndex
 export { default as GlossaryEntry, type GlossaryEntryProps } from './Glossary/GlossaryEntry/GlossaryEntry'
 export { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
 export { default as Typewriter } from './Typewriter/Typewriter'
+export { default as ImageCollection } from './ImageCollection/ImageCollection'
 
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure

@@ -94,7 +94,7 @@ const TextStepper = (props: TextStepperProps) => {
                 width: { sm: '18.75rem', md: '37.5rem' },
                 height: { sm: '25rem', md: '12.5rem' }
               }}>
-              {props.body?.[activeStep]}
+              {props.body?.[activeStep]} // children?.[activeStep]
             </Typography>
           </Fade>
         </Grid>
