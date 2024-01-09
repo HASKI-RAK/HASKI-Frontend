@@ -4,7 +4,8 @@ import '@testing-library/jest-dom'
 
 const mockProps = {
   body: 'body',
-  header: 'header'
+  header: 'header',
+  backgroundImageURL: 'backgroundImageURL'
 }
 
 jest.useFakeTimers()
@@ -28,20 +29,12 @@ describe('TextCardRight tests', () => {
   })
 
   it('renders with input', () => {
-    const { getByTestId } = render(
-      <TextCardRight body={mockProps.body} header={mockProps.header}>
-        Text
-      </TextCardRight>
-    )
+    const { getByTestId } = render(<TextCardRight {...mockProps}>Text</TextCardRight>)
     expect(getByTestId('textCardRight')).toBeInTheDocument()
   })
 
   it('can be scrolled with input', () => {
-    const { getByText } = render(
-      <TextCardRight body={mockProps.body} header={mockProps.header}>
-        Text
-      </TextCardRight>
-    )
+    const { getByText } = render(<TextCardRight {...mockProps}>Text</TextCardRight>)
     act(() => {
       window.dispatchEvent(new Event('scroll'))
       jest.runAllTimers()

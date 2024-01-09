@@ -1,5 +1,5 @@
 import { useRef, useEffect, useCallback, memo, ReactNode, useState } from 'react'
-import { Divider, Fade, Grid, Typography } from '@common/components'
+import { Box, Divider, Fade, Grid, Typography } from '@common/components'
 import { Typewriter } from '@components'
 import { useViewport } from '@services'
 
@@ -13,6 +13,7 @@ type TextCardRight = {
   body?: string
   children?: ReactNode
   header?: string
+  backgroundImageURL?: string
 }
 
 /**
@@ -67,7 +68,7 @@ const TextCardRight = (props: TextCardRight) => {
           {props.children}
         </Grid>
         <Divider flexItem orientation="vertical" />
-        <Grid item xs={7}>
+        <Grid item xs={7} textAlign="center">
           <Typewriter
             startAnimation={startAnimation}
             delay={50}
@@ -89,6 +90,20 @@ const TextCardRight = (props: TextCardRight) => {
               {props.body ?? ''}
             </Typography>
           </Fade>
+          {props.backgroundImageURL && (
+            <Box
+              sx={{
+                marginLeft: '-7.5rem',
+                marginTop: '-16.5rem',
+                zIndex: '-100',
+                opacity: '0.15',
+                position: 'absolute',
+                width: '15rem'
+              }}
+              src={props.backgroundImageURL}
+              component="img"
+            />
+          )}
         </Grid>
       </Grid>
     </div>
