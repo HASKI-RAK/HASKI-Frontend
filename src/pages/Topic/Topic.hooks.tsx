@@ -134,7 +134,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           handleSetUrl: handleSetUrl,
           handleSetTitle: handleSetTitle,
           handleOpen: handleOpen,
-          handleClose: handleClose
+          handleClose: handleClose,
+          status: false
         }
         return {
           id: node.position.toString() + '-' + node.learning_element.lms_id,
@@ -179,7 +180,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           handleSetUrl: handleSetUrl,
           handleSetTitle: handleSetTitle,
           handleOpen: handleOpen,
-          handleClose: handleClose
+          handleClose: handleClose,
+          status: true
         }
 
         const getNodeYPos = () => {

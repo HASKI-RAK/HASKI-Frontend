@@ -1569,6 +1569,8 @@
   "tooltip.openGlobalSettings": "Globale Einstellungen",
   "tooltip.openQuestionnaireResults": "Lerntyp",
   "tooltip.openSettings": "Einstellungen",
+  "tooltip.completed": "Erledigt",
+  "tooltip.pending": "Offen",
   "warning": "Warnung",
   "warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
   "warning.online": "Sie sind wieder online."

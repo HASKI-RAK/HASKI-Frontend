@@ -1,6 +1,7 @@
 export { createTheme } from './DefaultCreateTheme/DefaultCreateTheme'
 export { yellow } from '../theme/DefaultYellow/DefaultYellow'
 export { red } from '../theme/DefaultRed/DefaultRed'
+export { green } from '../theme/DefaultGreen/DefaultGreen'
 export { styled } from '../theme/DefaultStyled/DefaultStyled'
 export { ThemeProvider } from '../theme/DefaultThemeProvider/DefaultThemeProvider'
 export type { Theme } from '../theme/DefaultTheme/DefaultTheme'

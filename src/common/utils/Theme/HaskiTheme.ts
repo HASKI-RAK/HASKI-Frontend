@@ -1,4 +1,4 @@
-import { createTheme, yellow, red } from '@common/theme'
+import { createTheme, yellow, red, green } from '@common/theme'
 
 export const defaultBehavior = {
   boxShadowSize: {
@@ -47,6 +47,11 @@ export const HaskiTheme = createTheme({
       dark: defaultColors.primary[900],
       contrastText: defaultColors.black,
       light: defaultColors.black
+    },
+    success: {
+      main: green[900],
+      dark: '#000000',
+      light: green[100]
     }
 
     /*action: {

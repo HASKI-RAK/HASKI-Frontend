@@ -28,4 +28,5 @@ export type LearningPathLearningElementNode = {
   handleSetTitle: (title: string) => void
   handleOpen: () => void
   handleClose: () => void
+  status: boolean
 }

@@ -41,7 +41,6 @@ import { Topic } from '@core'
 import log from 'loglevel'
 import { TableILSQuestions } from '../Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions'
 import { TableListKQuestions } from '../Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions'
-import user from '../../core/User/User'
 
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
@@ -350,9 +349,9 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             <IconButton
               id="global-settings-icon-button"
               onClick={() => {
-                  getLearningPathElementStatus(courseId, 50/*user.lms_user_id*/).then((response) => {
-                    console.log(response)
-                  })
+                getLearningPathElementStatus(courseId, 50 /*user.lms_user_id*/).then((response) => {
+                  console.log(response)
+                })
               }}>
               <Settings data-testid="SettingsIcon" />
             </IconButton>
