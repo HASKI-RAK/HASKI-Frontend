@@ -57,10 +57,10 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
           {moodleLogin && (
             <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={1}>
               <Grid item display="flex" justifyContent="center" md={5}>
-                <Button onClick={onMoodleLogin} data-testid="moodle-login-button" variant="text">
-                  <img src="/LogoPng.png" alt="Haski" style={{ width: '50px' }} />
+                <Button onClick={onMoodleLogin} data-testid="moodle-login-button" variant="contained">
+                  <img src="/path12.png" alt="Haski" style={{ width: '30px' }} />
                   {
-                    <Typography variant="h6" component="h2">
+                    <Typography variant="h6" component="h2" marginLeft={'10px'}>
                       {t('components.LoginForm.loginButton')}
                     </Typography>
                   }
