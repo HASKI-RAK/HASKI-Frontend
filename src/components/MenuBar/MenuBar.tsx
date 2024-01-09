@@ -41,6 +41,7 @@ import { Topic } from '@core'
 import log from 'loglevel'
 import { TableILSQuestions } from '../Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions'
 import { TableListKQuestions } from '../Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions'
+import user from '../../core/User/User'
 
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
@@ -135,24 +136,23 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleOpenTopicsMenu = async (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElTopics(event.currentTarget)
-    getUser()
-      .then((user) => {
-        getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
-          .then((TopicResponse) => {
-            setTopicsPath(TopicResponse.topics)
-            setLoadingTopics(false)
+    getUser().then((user) => {
+      getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
+        .then((TopicResponse) => {
+          setTopicsPath(TopicResponse.topics)
+          setLoadingTopics(false)
+        })
+        .catch((error) => {
+          // 🍿 snackbar error
+          addSnackbar({
+            message: error.message,
+            severity: 'error',
+            autoHideDuration: 5000
           })
-          .catch((error) => {
-            // 🍿 snackbar error
-            addSnackbar({
-              message: error.message,
-              severity: 'error',
-              autoHideDuration: 5000
-            })
-            log.error(error.message)
-          })
-      })
-      /*.catch((error) => { Is already catched in Statement.hooks
+          log.error(error.message)
+        })
+    })
+    /*.catch((error) => { Is already catched in Statement.hooks
         // 🍿 snackbar error
         addSnackbar({
           message: error.message,
@@ -347,15 +347,15 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           </Box>
 */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-              <IconButton
-                id="global-settings-icon-button"
-                onClick={() => {
-                  getLearningPathElementStatus("3", 7).then((response) => {
+            <IconButton
+              id="global-settings-icon-button"
+              onClick={() => {
+                  getLearningPathElementStatus(courseId, 50/*user.lms_user_id*/).then((response) => {
                     console.log(response)
                   })
-                }}>
-                <Settings data-testid="SettingsIcon" />
-              </IconButton>
+              }}>
+              <Settings data-testid="SettingsIcon" />
+            </IconButton>
           </Box>
 
           {/** User menu */}

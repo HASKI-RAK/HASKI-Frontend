@@ -1,6 +1,8 @@
 import create from 'zustand'
 import LearningPathElementSlice, { createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
-import LearningPathElementStatusSlice, { createLearningPathElementStatusSlice } from '../Slices/LearningPathElementStatusSlice'
+import LearningPathElementStatusSlice, {
+  createLearningPathElementStatusSlice
+} from '../Slices/LearningPathElementStatusSlice'
 import UserSlice, { createUserSlice } from '../Slices/UserSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import CoursesSlice, { createCoursesSlice } from '../Slices/CoursesSlice'

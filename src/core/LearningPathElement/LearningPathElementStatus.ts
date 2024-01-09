@@ -1,8 +1,4 @@
-
-type LearningPathElementStatusReturn = (
-  courseId?: string,
-  studentId?: number
-) => Promise<LearningPathElementStatus>
+type LearningPathElementStatusReturn = (courseId?: string, studentId?: number) => Promise<LearningPathElementStatus>
 
 type LearningPathElementStatus = {
   cmid: number //learning_element_id

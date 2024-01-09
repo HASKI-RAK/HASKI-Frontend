@@ -397,10 +397,10 @@ describe('getSortedLearningPath works as expected', () => {
   })
 
   test('fetches learning path topics and returns the loading state', async () => {
-    await act(async() => {
+    await act(async () => {
       const { result, waitForNextUpdate } = renderHook(() => useLearningPathTopic('2'))
 
-      await waitFor(()=>{
+      await waitFor(() => {
         expect(result.current.loading).toBe(false)
         expect(result.current.topics).toEqual([
           {
@@ -445,8 +445,7 @@ describe('getSortedLearningPath works as expected', () => {
           }
         ])
       })
-      })
-
+    })
   })
 
   test('fetches learning path elements for a topic and returns the loading state', async () => {

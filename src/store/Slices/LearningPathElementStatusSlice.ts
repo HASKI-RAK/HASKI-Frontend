@@ -9,7 +9,12 @@ export default interface LearningPathElementStatusSlice {
   getLearningPathElementStatus: LearningPathElementStatusReturn
 }
 
-export const createLearningPathElementStatusSlice: StateCreator<PersistedStoreState, [], [], LearningPathElementStatusSlice> = (set, get) => {
+export const createLearningPathElementStatusSlice: StateCreator<
+  PersistedStoreState,
+  [],
+  [],
+  LearningPathElementStatusSlice
+> = (set, get) => {
   resetters.push(() => set({ _learningPathElementStatus: {} }))
   return {
     _learningPathElementStatus: {},
@@ -19,14 +24,13 @@ export const createLearningPathElementStatusSlice: StateCreator<PersistedStoreSt
       const cached = get()._learningPathElementStatus[`${courseId}-${studentId}`]
 
       if (!cached) {
-        const learningPathElementStatusResponse = await fetchLearningPathElementStatus(
-          courseId,
-          studentId
-        )
-        set({ _learningPathElementStatus: {
-          ...get()._learningPathElementStatus,
-          [`${courseId}-${studentId}`]: learningPathElementStatusResponse
-          } })
+        const learningPathElementStatusResponse = await fetchLearningPathElementStatus(courseId, studentId)
+        set({
+          _learningPathElementStatus: {
+            ...get()._learningPathElementStatus,
+            [`${courseId}-${studentId}`]: learningPathElementStatusResponse
+          }
+        })
         return learningPathElementStatusResponse
       } else return cached
     }
