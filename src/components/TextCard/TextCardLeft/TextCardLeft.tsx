@@ -1,5 +1,5 @@
 import { useRef, useEffect, useCallback, memo, ReactNode, useState } from 'react'
-import { Divider, Fade, Grid, Typography } from '@common/components'
+import { Box, Divider, Fade, Grid, Typography } from '@common/components'
 import { Typewriter } from '@components'
 import { useViewport } from '@services'
 
@@ -56,6 +56,18 @@ const TextCardLeft = (props: TextCardLeft) => {
 
   return (
     <div ref={ref} data-testid="textCardLeft">
+      <Box
+        sx={{
+          marginLeft: { xl: '27%', lg: '25.5%', md: '23%', sm: '19.5%', xs: '12.5%' },
+          marginTop: '7.5rem',
+          zIndex: '-100',
+          opacity: '0.15',
+          position: 'absolute',
+          width: '15rem'
+        }}
+        src="/LogoPng.png"
+        component="img"
+      />
       <Grid
         container
         justifyContent="center"

@@ -3,7 +3,7 @@ import { TextCardLeft, TextCardRight, TextStepper, ImageCollection } from '@comp
 const AboutUs = () => {
   return (
     <>
-      <TextCardLeft header="wer ist haski" body="test">
+      <TextCardLeft header="wer ist haski" body="o  o i o  o">
         <ImageCollection
           leftImgURL="/images/AboutUsRegensburg.jpg"
           middleImgURL="/images/AboutUsAschaffenburg.jpg"
