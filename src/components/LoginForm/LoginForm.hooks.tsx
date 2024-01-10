@@ -1,13 +1,7 @@
-import { useState } from 'react'
-
 /**
  * @property {@link useLoginFormHookParams#defaultUsername} - The default value for the username field.
  * @property {@link useLoginFormHookParams#defaultPassword} - The default value for the password field.
  */
-export type useLoginFormHookParams = {
-  defaultUsername?: string
-  defaultPassword?: string
-}
 
 /**
  * @property {@link LoginFormHookReturn#username} - The current value of the username field.
@@ -27,7 +21,7 @@ export type LoginFormHookReturn = {
  * provides functions to validate and submit the form.
  * @param params - {@link useLoginFormHookParams}
  */
-export const useLoginForm = (params?: useLoginFormHookParams): LoginFormHookReturn => {
+export const useLoginForm = (): LoginFormHookReturn => {
   // Logic
   const loginMoodle = () => {
     return

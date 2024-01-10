@@ -1,9 +1,5 @@
 import { Backdrop, Button, CircularProgress, Paper, Grid, Typography, Stack } from '@common/components'
-import {
-  useLoginForm as _useLoginForm,
-  useLoginFormHookParams as LoginFormHookParams,
-  LoginFormHookReturn
-} from './LoginForm.hooks'
+import { useLoginForm as _useLoginForm, LoginFormHookReturn } from './LoginForm.hooks'
 import { useTranslation } from 'react-i18next'
 
 /**
@@ -20,7 +16,7 @@ export type LoginFormProps = {
   onMoodleLogin?: () => void
   isLoading?: boolean
   moodleLogin?: boolean
-  useLoginForm?: (params?: LoginFormHookParams) => LoginFormHookReturn
+  useLoginForm?: () => LoginFormHookReturn
 }
 /**
  *

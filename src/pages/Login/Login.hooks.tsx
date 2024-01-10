@@ -1,7 +1,6 @@
-import { AuthContext, SnackbarContext, postLogin, postLoginCredentials, fetchRedirectMoodleLogin } from '@services'
+import { AuthContext, SnackbarContext, postLogin, fetchRedirectMoodleLogin } from '@services'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useContext } from 'react'
-import { usePersistedStore } from '@store'
 
 export type LoginHookParams = {
   setIsLoading: (isLoading: boolean) => void
@@ -11,7 +10,6 @@ export type LoginHookParams = {
 }
 
 export type LoginHookReturn = {
-  readonly onSubmit: (username: string, password: string) => void
   /** Redirects the user to moddle for authorization */
   readonly onMoodleLogin: () => void
 }
@@ -27,20 +25,7 @@ export type LoginHookReturn = {
 export const useLogin = (props: LoginHookParams): LoginHookReturn => {
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
-  const getUser = usePersistedStore((state) => state.getUser)
   const { addSnackbar } = useContext(SnackbarContext)
-
-  // Login with username and password
-  const onSubmitHandler = (username: string, password: string) => {
-    postLoginCredentials(Number(username), password).then((user) => {
-      // supply auth context
-      authContext.setExpire(9999999999)
-      getUser(user)
-
-      // then redirect to home page
-      navigate('/', { replace: true })
-    })
-  }
 
   const onMoodleLogin = () => {
     props.setIsLoading(true)
@@ -75,7 +60,6 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
   }, [])
 
   return {
-    onSubmit: onSubmitHandler,
     onMoodleLogin
   } as const
 }
