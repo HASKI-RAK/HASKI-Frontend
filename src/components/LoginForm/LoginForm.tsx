@@ -1,5 +1,4 @@
-import { ChangeEvent, useState } from 'react'
-import { Backdrop, Button, CircularProgress, Paper, Grid, Typography, Stack, ImageWrapper } from '@common/components'
+import { Backdrop, Button, CircularProgress, Paper, Grid, Typography, Stack } from '@common/components'
 import {
   useLoginForm as _useLoginForm,
   useLoginFormHookParams as LoginFormHookParams,
@@ -50,7 +49,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
           <Typography variant="h4" component="h1" gutterBottom>
             {t('components.LoginForm.title')}
           </Typography>
-          <Typography variant="h6" component="h2" gutterBottom maxWidth={400}>
+          <Typography variant="h6" component="h2" gutterBottom maxWidth={400} align={'center'}>
             {t('components.LoginForm.subtitle')}
           </Typography>
 

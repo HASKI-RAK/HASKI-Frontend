@@ -30,10 +30,10 @@ export const Login = ({ useLogin = _useLogin }: LoginProps) => {
   const nonce = searchParams.get('nonce') || undefined
 
   // Application logic hooks
-  const { onSubmit, onMoodleLogin } = useLogin({ setIsLoading, nonce })
+  const { onMoodleLogin } = useLogin({ setIsLoading, nonce })
 
   if (nonce) return <Skeleton />
-  else return <LoginForm onSubmit={onSubmit} isLoading={isLoading} moodleLogin onMoodleLogin={onMoodleLogin} />
+  else return <LoginForm isLoading={isLoading} moodleLogin onMoodleLogin={onMoodleLogin} />
 }
 
 export default Login

@@ -19,12 +19,6 @@ export type useLoginFormHookParams = {
  * @property {@link LoginFormHookReturn#loginMoodle} - Logs the user in to moodle.
  */
 export type LoginFormHookReturn = {
-  readonly username: string
-  readonly password: string
-  readonly setUsername: (username: string) => void
-  readonly setPassword: (password: string) => void
-  readonly submit: () => void
-  readonly validate: () => readonly [boolean, boolean]
   readonly loginMoodle: () => void
 }
 
@@ -34,31 +28,12 @@ export type LoginFormHookReturn = {
  * @param params - {@link useLoginFormHookParams}
  */
 export const useLoginForm = (params?: useLoginFormHookParams): LoginFormHookReturn => {
-  // Default values
-  const { defaultUsername = '', defaultPassword = '' } = params ?? {}
-
-  // State data
-  const [username, setUsername] = useState(defaultUsername)
-  const [password, setPassword] = useState(defaultPassword)
-
   // Logic
-  const submit = () => {
-    return
-  }
-
-  const validate = () => [username.length !== 0, password.length !== 0] as const
-
   const loginMoodle = () => {
     return
   }
 
   return {
-    username,
-    password,
-    setUsername,
-    setPassword,
-    submit,
-    validate,
     loginMoodle
   } as const
 }
