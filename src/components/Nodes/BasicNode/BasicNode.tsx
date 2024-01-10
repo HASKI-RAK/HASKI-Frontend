@@ -48,7 +48,7 @@ const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
         {data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
-      {data.status ? (
+      {data.isDone ? (
         <Tooltip title={t("tooltip.completed")}>
           <CheckBoxIcon
             sx={{

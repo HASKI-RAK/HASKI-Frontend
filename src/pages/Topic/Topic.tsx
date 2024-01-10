@@ -7,6 +7,7 @@ import { useStore, usePersistedStore } from '@store'
 import { IFrameModal, nodeTypes } from '@components'
 import { Box, Skeleton } from '@common/components'
 import { useTheme } from '@common/hooks'
+import LearningPathElementStatus from '../../core/LearningPathElement/LearningPathElementStatus'
 
 /**
  * @prop useTopic - Does the heavy work such as mapping nodes and edges and fetching.
@@ -34,9 +35,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const { addSnackbar } = useContext(SnackbarContext)
 
   const { courseId, topicId } = useParams()
-  const { url, title, isOpen, handleClose, mapNodes } = useTopic()
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
+  const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
+  const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>([])
+  const { url, title, isOpen, handleClose, mapNodes } = useTopic()
 
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()

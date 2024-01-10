@@ -1,8 +1,11 @@
 import { LearningPathLearningElementNode } from '@components'
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import { Node, Edge } from 'reactflow'
 import { Theme } from '@common/theme'
 import { LearningPathElement } from '@core'
+import { usePersistedStore } from '@store'
+import { useParams } from 'react-router-dom'
+import LearningPathElementStatus from '../../core/LearningPathElement/LearningPathElementStatus'
 
 /**
  * @prop defaultUrl - The default url of a node
@@ -12,6 +15,7 @@ import { LearningPathElement } from '@core'
  * @interface
  */
 export type useTopicHookParams = {
+  learningPathElementStatus: LearningPathElementStatus[]
   defaultUrl?: string
   defaultTitle?: string
   defaultIsOpen?: boolean
@@ -62,6 +66,22 @@ export type TopicHookReturn = {
 export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   // Default values
   const { defaultUrl = '', defaultTitle = '', defaultIsOpen = false } = params ?? {}
+  const { courseId } = useParams<string>()
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
+  const [learningElementStatus, setLearningElementStatus] = useState<LearningPathElementStatus[]>([])
+
+  useEffect(() => {
+    getUser().then((user) => {
+      getLearningPathElementStatus(courseId, 50 /*user.lms_user_id*/).then((response) => {
+        setLearningElementStatus(response)
+        console.log(response)
+      })
+    }).catch((error) => {
+      // Handle errors if necessary
+      console.error('Error fetching data:', error);
+    })
+  }, [])
 
   // State data
   const [url, setUrl] = useState(defaultUrl)
@@ -135,8 +155,9 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           handleSetTitle: handleSetTitle,
           handleOpen: handleOpen,
           handleClose: handleClose,
-          status: false
+          isDone: (learningElementStatus?.find((item) => item.cmid === node.learning_element.lms_id)?.state === 1)
         }
+        console.log(learningElementStatus.map((item) => item.cmid))
         return {
           id: node.position.toString() + '-' + node.learning_element.lms_id,
           type: node.learning_element.classification,
@@ -181,7 +202,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           handleSetTitle: handleSetTitle,
           handleOpen: handleOpen,
           handleClose: handleClose,
-          status: true
+          isDone: (learningElementStatus?.find((status) => status.cmid === item.learning_element.lms_id)?.state === 1)
         }
 
         const getNodeYPos = () => {

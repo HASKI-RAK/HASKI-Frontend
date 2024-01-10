@@ -5,7 +5,7 @@ import { resetters } from '../Zustand/Store'
 import { fetchLearningPathElementStatus } from '@services'
 
 export default interface LearningPathElementStatusSlice {
-  _learningPathElementStatus: Record<string, LearningPathElementStatus>
+  _learningPathElementStatus: Record<string, LearningPathElementStatus[]>
   getLearningPathElementStatus: LearningPathElementStatusReturn
 }
 

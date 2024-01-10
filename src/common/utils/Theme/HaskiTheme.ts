@@ -49,9 +49,9 @@ export const HaskiTheme = createTheme({
       light: defaultColors.black
     },
     success: {
-      main: green[900],
+      main: green[700],
       dark: '#000000',
-      light: green[100]
+      light: green[500]
     }
 
     /*action: {

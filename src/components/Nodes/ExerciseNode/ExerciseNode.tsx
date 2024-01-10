@@ -7,7 +7,9 @@ import { getConfig } from '@shared'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import { useTheme } from '@common/hooks'
-import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
+import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined'
+import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined'
+import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
 import { useTranslation } from 'react-i18next'
 
 /**
@@ -49,32 +51,32 @@ const ExerciseNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
         {data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
-      {data.status ? (
+      {data.isDone ? (
         <Tooltip title={t("tooltip.completed")}>
           <CheckBoxIcon
             sx={{
-              fontSize: 35,
+              fontSize: 27,
               position: 'absolute',
-              top: -15,
-              right: -15,
-              color: theme.palette.success.main,
+              top: -13,
+              right: -13,
+              color: 'rgba(91,189,91,0.68)',
               backgroundColor: 'white',
-              border: '1px solid',
+              border: '1px solid #000',
               borderRadius: 1
             }}
           />
         </Tooltip>
       ) : (
-        <Tooltip title={t("tooltip.pending")}>
-          <CheckBoxOutlineBlankIcon
+        <Tooltip title={t("tooltip.uncompleted")}>
+          <SquareRoundedIcon
             sx={{
-              fontSize: 35,
+              fontSize: 25,
               position: 'absolute',
-              top: -15,
+              top: -13,
               right: -13,
-              color: theme.palette.success.main,
+              color: 'rgba(153,157,160,0.36)',
               backgroundColor: 'white',
-              border: '1px solid',
+              border: '1px solid #000',
               borderRadius: 1
             }}
           />
