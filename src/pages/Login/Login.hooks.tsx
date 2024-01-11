@@ -10,7 +10,7 @@ export type LoginHookParams = {
 }
 
 export type LoginHookReturn = {
-  /** Redirects the user to moddle for authorization */
+  /** Redirects the user to moodle for authorization */
   readonly onMoodleLogin: () => void
 }
 

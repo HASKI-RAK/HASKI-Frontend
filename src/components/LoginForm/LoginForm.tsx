@@ -1,4 +1,4 @@
-import { Backdrop, Button, CircularProgress, Paper, Grid, Typography, Stack } from '@common/components'
+import { Backdrop, Button, CircularProgress, Paper, Grid, Typography, Stack, Avatar } from '@common/components'
 import { useLoginForm as _useLoginForm, LoginFormHookReturn } from './LoginForm.hooks'
 import { useTranslation } from 'react-i18next'
 
@@ -33,7 +33,9 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
   const { loginMoodle } = useLoginForm()
 
   // Props destructuring
-  const { onMoodleLogin = loginMoodle, isLoading = false, moodleLogin = false } = props
+  const { onMoodleLogin = loginMoodle, isLoading = false, moodleLogin } = props
+
+  //moodleLogin macht probleme
 
   // Translation
   const { t } = useTranslation()
@@ -53,7 +55,20 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
             <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={1}>
               <Grid item display="flex" justifyContent="center" md={5}>
                 <Button onClick={onMoodleLogin} data-testid="moodle-login-button" variant="contained">
-                  <img src="/path12.png" alt="Haski" style={{ width: '30px' }} />
+                  <Avatar
+                    //src="/path12.png"
+                    alt="Haski"
+                    style={{
+                      border: '0.5px solid white',
+                      backgroundColor: 'transparent',
+                      padding: 5
+                    }}>
+                    <img
+                      src="/path12.png"
+                      style={{ height: 'inherit' }}
+                      className="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
+                    />
+                  </Avatar>
                   {
                     <Typography variant="h6" component="h2" marginLeft={'10px'}>
                       {t('components.LoginForm.loginButton')}

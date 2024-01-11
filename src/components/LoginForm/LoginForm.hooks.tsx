@@ -1,9 +1,4 @@
 /**
- * @property {@link useLoginFormHookParams#defaultUsername} - The default value for the username field.
- * @property {@link useLoginFormHookParams#defaultPassword} - The default value for the password field.
- */
-
-/**
  * @property {@link LoginFormHookReturn#username} - The current value of the username field.
  * @property {@link LoginFormHookReturn#password} - The current value of the password field.
  * @property {@link LoginFormHookReturn#setUsername} - Sets the value of the username field.
