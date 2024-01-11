@@ -30,14 +30,25 @@ const ProjectDescription = () => {
           src="/LogoPng.png"
         />
       </TextCardRight>
-      <TextStepper
-        header={t('pages.projectdescription.approachesHeader')}
-        body={
+      <TextStepper header={t('pages.projectdescription.approachesHeader')}>
+        {(
           t<string>('pages.projectdescription.approachesBody', {
             returnObjects: true
           }) as string[]
-        }
-      />
+        ).map((element) => (
+          <Typography
+            align="center"
+            key={element}
+            variant="h5"
+            sx={{
+              pt: '2.5rem',
+              width: { sm: '18.75rem', md: '37.5rem' },
+              height: { sm: '25rem', md: '12.5rem' }
+            }}>
+            {element}
+          </Typography>
+        ))}
+      </TextStepper>
       <TextCardLeft
         header={t('pages.projectdescription.advantagesTeachingHeader')}
         body={t('pages.projectdescription.advantagesTeachingBody')}>
@@ -86,14 +97,25 @@ const ProjectDescription = () => {
           }}
         />
       </TextCardRight>
-      <TextStepper
-        header={t('pages.projectdescription.goalsHeader')}
-        body={
+      <TextStepper header={t('pages.projectdescription.goalsHeader')}>
+        {(
           t<string>('pages.projectdescription.goalsBody', {
             returnObjects: true
           }) as string[]
-        }
-      />
+        ).map((element) => (
+          <Typography
+            align="center"
+            key={element}
+            variant="h5"
+            sx={{
+              pt: '2.5rem',
+              width: { sm: '18.75rem', md: '37.5rem' },
+              height: { sm: '25rem', md: '12.5rem' }
+            }}>
+            {element}
+          </Typography>
+        ))}
+      </TextStepper>
       <Grid container item justifyContent="center" xs={12}>
         <Typography sx={{ pt: '1rem', pb: '1rem' }} variant="subtitle1">
           {t('pages.projectdescription.imageSources') + t('appGlobal.universityKempten') + ', '}

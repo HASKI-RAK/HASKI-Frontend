@@ -1,4 +1,4 @@
-import { Button, Fade, Grid, MobileStepper, Typography } from '@common/components'
+import { Button, Fade, Grid, MobileStepper } from '@common/components'
 import { useRef, useEffect, useCallback, useState, memo } from 'react'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
 import { useTranslation } from 'react-i18next'
@@ -6,23 +6,23 @@ import { Typewriter } from '@components'
 import { useViewport } from '@services'
 
 /**
- * @prop body - The body texts that can be stepped through.
- * @prop header - The header text that is permanently displayed above the body texts.
+ * @prop children - The child elements that can be stepped through.
+ * @prop header - The header text that is permanently displayed above the child elements.
  * @interface
  */
 type TextStepperProps = {
-  body?: string[]
+  children?: JSX.Element[]
   header?: string
 }
 
 /**
  * TextStepper component.
  *
- * @param props - Props containing the body and header texts.
+ * @param props - Props containing the header text and child elements.
  *
  * @remarks
- * TextStepper presents a component that displays a header text on top and and multiple steppable body texts on the bottom of the element.
- * The header text is animated by using a typewriter effect. The body texts are animated by using a fade in effect.
+ * TextStepper presents a component that displays a header text on top and and multiple steppable child elements on the bottom of the element.
+ * The header text is animated by using a typewriter effect. The child elements are animated by using a fade in effect.
  * TextStepper can be used as a standalone component on a page.
  *
  * @category Components
@@ -86,22 +86,13 @@ const TextStepper = (props: TextStepperProps) => {
             {props.header}
           </Typewriter>
           <Fade in={startAnimation} easing="linear" timeout={2500}>
-            <Typography
-              align="center"
-              variant="h5"
-              sx={{
-                pt: '2.5rem',
-                width: { sm: '18.75rem', md: '37.5rem' },
-                height: { sm: '25rem', md: '12.5rem' }
-              }}>
-              {props.body?.[activeStep]} // children?.[activeStep]
-            </Typography>
+            <div>{props.children?.[activeStep] /*Fade does not render with fragment as child element*/}</div>
           </Fade>
         </Grid>
         <Grid alignContent="center" container item justifyContent="center" xs={12}>
           <MobileStepper
             variant="dots"
-            steps={props.body?.length ?? 0}
+            steps={props.children?.length ?? 0}
             position="static"
             activeStep={activeStep}
             sx={{
@@ -114,7 +105,7 @@ const TextStepper = (props: TextStepperProps) => {
                 id="next-button"
                 size="small"
                 onClick={handleNext}
-                disabled={activeStep === (props.body && props.body.length - 1)}>
+                disabled={activeStep === (props.children && props.children.length - 1)}>
                 {t('appGlobal.next')}
                 <KeyboardArrowRight />
               </Button>

@@ -86,7 +86,7 @@ const TextCardRight = (props: TextCardRight) => {
             {props.header}
           </Typewriter>
           <Fade in={startAnimation} easing="linear" timeout={2500}>
-            <Typography align="center" sx={{ pt: '2.5rem', pb: '2.5rem' }} variant="h5">
+            <Typography align="center" sx={{ pt: '2.5rem', pb: '2.5rem', whiteSpace: 'pre-wrap' }} variant="h5">
               {props.body ?? ''}
             </Typography>
           </Fade>
