@@ -6,7 +6,7 @@ export const fetchLearningPathElementStatus: LearningPathElementStatusReturn = a
   if (!course_id) {
     throw new Error('course_id are required')
   }
-  return fetchData<LearningPathElementStatus>(
+  return fetchData<LearningPathElementStatus[]>(
     getConfig().BACKEND + `/lms/course/${course_id}/student/${studentId}/activitystatus`,
     {
       method: 'GET',

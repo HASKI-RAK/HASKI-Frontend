@@ -51,35 +51,19 @@ const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElemen
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
       {data.isDone ? (
         <Tooltip title={t("tooltip.completed")}>
-          <CheckBoxIcon
-            sx={{
-              fontSize: 27,
-              position: 'absolute',
-              top: -13,
-              right: -13,
-              color: 'rgba(91,189,91,0.68)',
-              backgroundColor: 'white',
-              border: '1px solid #000',
-              borderRadius: 1
-            }}
+          <CheckBoxIcon viewBox={'3 -3 24 24'}
+                        sx={{
+                          fontSize: 29,
+                          position: 'absolute',
+                          top: -13,
+                          right: -13,
+                          color: 'rgba(91,189,91,0.99)',
+                          background: 'white',
+                          borderRadius: '10%'
+                        }}
           />
         </Tooltip>
-      ) : (
-        <Tooltip title={t("tooltip.uncompleted")}>
-          <SquareRoundedIcon
-            sx={{
-              fontSize: 25,
-              position: 'absolute',
-              top: -13,
-              right: -13,
-              color: 'rgba(153,157,160,0.36)',
-              backgroundColor: 'white',
-              border: '1px solid #000',
-              borderRadius: 1
-            }}
-          />
-        </Tooltip>
-      )}
+      ) : null }
     </NodeWrapper>
   )
 }

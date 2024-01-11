@@ -38,8 +38,12 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
-  const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>([])
+  const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
+  const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
+  const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
+
   const { url, title, isOpen, handleClose, mapNodes } = useTopic()
+
 
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
@@ -54,19 +58,22 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       clearTimeout(preventEndlessLoading)
       getUser()
         .then((user) => {
+        getLearningPathElementStatus(courseId, 50).then((learningPathElementStatusData) => {
+          setLearningPathElementStatus(learningPathElementStatusData)
           getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
-            .then((learningPathElementData) => {
-              const { nodes, edges } = mapNodes(learningPathElementData, theme)
-              setInitialNodes(nodes)
-              setInitialEdges(edges)
+          .then((learningPathElementData) => {
+            const { nodes, edges } = mapNodes(learningPathElementData, theme, learningPathElementStatusData)
+            setInitialNodes(nodes)
+            setInitialEdges(edges)
+          })
+           .catch((error: string) => {
+            addSnackbar({
+              message: error,
+              severity: 'error',
+              autoHideDuration: 3000
             })
-            .catch((error: string) => {
-              addSnackbar({
-                message: error,
-                severity: 'error',
-                autoHideDuration: 3000
-              })
-            })
+          })
+          })
         })
         .catch((error: string) => {
           addSnackbar({
@@ -92,14 +99,29 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     setInitialEdges
   ])
 
-  return initialNodes && initialEdges ? (
+  const handleOwnClose = () => {
+    getLearningPathElementSpecificStatus(courseId, 50, 441).then((data) => {
+      console.log(url)
+      setLearningPathElementSpecificStatus("1", 50, data[0])
+      return handleClose()
+    }).catch((error: string) => {
+      addSnackbar({
+        message: error,
+        severity: 'error',
+        autoHideDuration: 3000
+      })
+      return handleClose()
+    })
+  }
+
+  return initialNodes && initialEdges && learningPathElementStatus ? (
     <Box height={'100%'}>
       <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
         <Background gap={16} />
         <MiniMap nodeBorderRadius={2} />
         <Controls />
       </ReactFlow>
-      <IFrameModal url={url} title={title} isOpen={isOpen} onClose={handleClose} key={url} />
+      <IFrameModal url={url} title={title} isOpen={isOpen} onClose={handleOwnClose} key={url} />
     </Box>
   ) : (
     <Skeleton variant="rectangular" width={'80%'} height={'80%'} />

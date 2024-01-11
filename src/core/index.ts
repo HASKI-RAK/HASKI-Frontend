@@ -51,6 +51,7 @@ export type {
 }
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
 export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'
+export type { LearningPathElementSpecificStatusReturn } from './LearningPathElement/LearningPathElementStatus'
 export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'
 export type { ListKReturn } from './QuestionnaireResults/ListK'
 export type { CourseReturn } from './Course/Course'
