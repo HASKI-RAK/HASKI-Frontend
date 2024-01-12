@@ -345,17 +345,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             </Tooltip>
           </Box>
 */}
-          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <IconButton
-              id="global-settings-icon-button"
-              onClick={() => {
-                getLearningPathElementStatus(courseId, 50 /*user.lms_user_id*/).then((response) => {
-                  console.log(response)
-                })
-              }}>
-              <Settings data-testid="SettingsIcon" />
-            </IconButton>
-          </Box>
 
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>

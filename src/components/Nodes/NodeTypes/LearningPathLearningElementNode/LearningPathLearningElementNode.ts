@@ -26,6 +26,7 @@ export type LearningPathLearningElementNode = {
   isRecommended: boolean
   handleSetUrl: (url: string) => void
   handleSetTitle: (title: string) => void
+  handleSetLmsId: (lmsId: number) => void
   handleOpen: () => void
   handleClose: () => void
   isDone: boolean

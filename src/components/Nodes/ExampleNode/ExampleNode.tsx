@@ -32,6 +32,7 @@ const ExampleNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
       onClick={() => {
         data.handleOpen()
         data.handleSetUrl(getConfig().MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
+        data.handleSetLmsId(data.lmsId)
       }}
       data-testid={'exampleNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />

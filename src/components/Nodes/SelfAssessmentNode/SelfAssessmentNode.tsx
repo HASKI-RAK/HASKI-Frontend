@@ -32,6 +32,7 @@ const SelfAssessmentNode = ({ data }: NodeProps<LearningPathLearningElementNode>
       onClick={() => {
         data.handleOpen()
         data.handleSetUrl(getConfig().MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
+        data.handleSetLmsId(data.lmsId)
       }}
       data-testid={'selfAssessmentNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />

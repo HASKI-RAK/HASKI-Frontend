@@ -4,12 +4,8 @@ import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
 import { getConfig } from '@shared'
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import { useTheme } from '@common/hooks'
-import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined'
-import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined'
-import SquareRoundedIcon from '@mui/icons-material/SquareRounded'
 import { useTranslation } from 'react-i18next'
 
 /**
@@ -34,6 +30,7 @@ const ExerciseNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
       onClick={() => {
         data.handleOpen()
         data.handleSetUrl(getConfig().MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
+        data.handleSetLmsId(data.lmsId)
       }}
       data-testid={'exerciseNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />

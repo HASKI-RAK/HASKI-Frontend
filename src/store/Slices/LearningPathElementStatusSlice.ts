@@ -7,7 +7,7 @@ import { fetchLearningPathElementStatus } from '@services'
 export default interface LearningPathElementStatusSlice {
   _learningPathElementStatus: Record<string, LearningPathElementStatus[]>
   getLearningPathElementStatus: LearningPathElementStatusReturn
-  setLearningPathElementStatus: (courseId: string, studentId: number, newData: LearningPathElementStatus) => void
+  setLearningPathElementStatus: (courseId?: string, studentId?: number, newData?: LearningPathElementStatus) => Promise<LearningPathElementStatus[]>
 }
 
 export const createLearningPathElementStatusSlice: StateCreator<
@@ -38,19 +38,22 @@ export const createLearningPathElementStatusSlice: StateCreator<
     setLearningPathElementStatus: async (...arg) => {
       const [courseId, studentId, newData] = arg
 
+
       const cached = get()._learningPathElementStatus[`${courseId}-${studentId}`]
+      if(!newData) return cached
+
       const index = cached.findIndex((item) => item.cmid === newData.cmid)
-      console.log(newData.cmid)
 
       if (index !== -1) {
         // Create a new array with the updated state at the specified index
+        console.log('Learning Element Status before: ', cached[index])
+        console.log('Learning Element Status after: ', newData)
         const updatedState = [...cached]
         updatedState[index] = {
           cmid: newData.cmid,
           state: newData.state,
           timecompleted: newData.timecompleted
         }
-        console.log(updatedState)
 
         set((state) => ({
           _learningPathElementStatus: {
@@ -59,7 +62,7 @@ export const createLearningPathElementStatusSlice: StateCreator<
           }
         }))
 
-        return
+        return updatedState
       }
 
       set((state) => ({
@@ -68,6 +71,7 @@ export const createLearningPathElementStatusSlice: StateCreator<
           [`${courseId}-${studentId}`]: cached
         }
       }))
+      return cached
     }
   }
 }

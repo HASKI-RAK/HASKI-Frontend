@@ -42,7 +42,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
 
-  const { url, title, isOpen, handleClose, mapNodes } = useTopic()
+  const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
 
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
@@ -95,15 +95,20 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     mapNodes,
     navigate,
     setInitialNodes,
-    setInitialEdges
+    setInitialEdges,
+    learningPathElementStatus
   ])
 
   const handleOwnClose = () => {
-    getLearningPathElementSpecificStatus(courseId, 50, 441)
+    getLearningPathElementSpecificStatus(courseId, 50, lmsId)
       .then((data) => {
         console.log(url)
-        setLearningPathElementSpecificStatus('1', 50, data[0])
-        return handleClose()
+        console.log('Learning Element Moodle ID: ' + lmsId)
+        console.log(learningPathElementStatus)
+        setLearningPathElementSpecificStatus(courseId?.toString(), 50, data[0]).then((data) => {
+          setLearningPathElementStatus(data)
+          return handleClose()
+        })
       })
       .catch((error: string) => {
         addSnackbar({

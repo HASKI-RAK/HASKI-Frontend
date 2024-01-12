@@ -3,6 +3,7 @@ type LearningPathElementStatusReturn = (
   studentId?: number,
   learningElementId?: number
 ) => Promise<LearningPathElementStatus[]>
+
 type LearningPathElementSpecificStatusReturn = (
   courseId?: string,
   studentId?: number,
