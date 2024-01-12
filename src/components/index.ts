@@ -34,6 +34,10 @@ export { default as GlossaryEntry, type GlossaryEntryProps } from './Glossary/Gl
 export { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
 export { default as Typewriter } from './Typewriter/Typewriter'
 export { default as ImageCollection } from './ImageCollection/ImageCollection'
-export { default as CollapsibleList } from './CollapsibleList/CollapsibleList'
+export { default as CollapsibleList } from './CollapsibleList/CollapsibleList/CollapsibleList'
+export {
+  default as CollapsibleListEntry,
+  type CollapsibleListEntryContentProps
+} from './CollapsibleList/CollapsibleListEntry/CollapsibleListEntry'
 
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure

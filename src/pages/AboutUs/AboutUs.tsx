@@ -1,6 +1,14 @@
-import { Box, Typography } from '@common/components'
-import { TextCardLeft, TextCardRight, TextStepper, ImageCollection, CollapsibleList } from '@components'
+import { Box, Grid, Typography } from '@common/components'
+import {
+  TextCardLeft,
+  TextCardRight,
+  TextStepper,
+  ImageCollection,
+  CollapsibleList,
+  CollapsibleListEntryContentProps
+} from '@components'
 import { useTranslation } from 'react-i18next'
+import { memo } from 'react'
 
 type AboutUsQuotesProps = {
   quote: string
@@ -8,18 +16,13 @@ type AboutUsQuotesProps = {
   description: string
 }
 
-type CollapsibleListEntryProps = {
-  header?: string
-  body?: string[]
-} // header for list
-
 const AboutUs = () => {
   // Translation
   const { t } = useTranslation()
 
-  const test = t<string>('pages.aboutus.interdisciplinaryBody', {
+  const collapsibleListEntries = t<string>('pages.aboutus.interdisciplinaryBody', {
     returnObjects: true
-  }) as CollapsibleListEntryProps[]
+  }) as CollapsibleListEntryContentProps[]
 
   return (
     <>
@@ -114,10 +117,24 @@ const AboutUs = () => {
           component="img"
         />
       </TextCardRight>
-      <CollapsibleList content={test} />
-      <div>interdisziplinäres arbeiten</div>
+      <CollapsibleList content={collapsibleListEntries} header={t('pages.aboutus.interdisciplinaryHeader')} />
+      <Grid container item justifyContent="center" xs={12} sx={{ marginTop: '5rem' }}>
+        <Typography sx={{ pt: '1rem', pb: '1rem' }} variant="subtitle1">
+          {t('appGlobal.imageSources') +
+            ' ' +
+            t('appGlobal.othRegensburg') +
+            ', ' +
+            t('appGlobal.aschaffenburgUAS') +
+            ', ' +
+            t('appGlobal.universityKempten') +
+            ', '}
+          <a href="https://d-maps.com/carte.php?num_car=6121&lang=de">
+            {'https://d-maps.com/carte.php?num_car=6121&lang=de'}
+          </a>
+        </Typography>
+      </Grid>
     </>
   )
 }
 
-export default AboutUs
+export default memo(AboutUs)

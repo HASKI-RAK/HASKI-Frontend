@@ -1505,7 +1505,7 @@
   "pages.imprint.subtitle": "HASKI Teaching/Learning Platform from the Software Development Lab at Kempten University",
   "pages.login": "Login",
   "pages.login.redirect": "You will be redirected after a few seconds",
-  "pages.privacypolicy": "privacypolicy",
+  "pages.privacypolicy": "Privacy Policy",
   "pages.privacypolicy.dataCollection": "Data Collection",
   "pages.privacypolicy.dataCollectionText": "The data collection will be supervised by appropriately trained staff members of the HASKI project and conducted online using Moodle and the HASKI system. If you have any questions about the data collection process or need further information, please feel free to contact the designated persons listed below. The collected data will be processed confidentially.",
   "pages.privacypolicy.dataProcessing": "Data Processing",
@@ -1560,7 +1560,7 @@
   "pages.projectdescription.goalsHeader": "Goals of the HASKI project",
   "pages.projectdescription.imageSource-1": "Image by katemangostar on Freepik",
   "pages.projectdescription.imageSource-2": "Image by natanaelginting on Freepik",
-  "pages.projectdescription.imageSources": "Image sources:",
+  "appGlobal.imageSources": "Image sources:",
   "pages.projectdescription.introductionBody": "HASKI stands for \"Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt\" (\"Higher education teaching: Adaptive, self-directed, AI-assisted\") and is funded by the Federal Ministry of Education and Research with a project duration until December 2025. HASKI is a collaborative project of three Bavarian universities: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
   "pages.projectdescription.introductionHeader": "What is HASKI?",
   "pages.projectinformation": "Project Information",
@@ -1571,5 +1571,95 @@
   "tooltip.openSettings": "Open settings",
   "warning": "Warning",
   "warning.offline": "You are currently offline. Please check your internet connection.",
-  "warning.online": "You are online again."
+  "warning.online": "You are online again.",
+  "appGlobal.aschaffenburgUAS": "Aschaffenburg UAS",
+  "appGlobal.othRegensburg": "OTH Regensburg",
+  "pages.aboutus.membersAschaffenburgHeader": "Team Aschaffenburg UAS",
+  "pages.aboutus.membersAschaffenburgBody": "Project Lead:\nProf. Dr.-Ing. Jörg Abke \n\nEmployees:\nProf. Dr. Galia Weidl, Isabell Hock, Michael Münch, Marc Normann, Iryna Sapsai, Yeimy Valencia \n\nFormer: \nDoris Rebitzer",
+  "pages.aboutus.membersRegensburgHeader": "Team OTH Regensburg",
+  "pages.aboutus.membersRegensburgBody": "Project Lead:\nProf. Dr. Jürgen Mottok \n\nEmployees:\nDominik Bittner, Flemming Bugert, Timur Ezer, Miriam Flannery, Lisa Grabinger, Florian Hauser, Vamsi Krishna Nadimpalli, Simon Roehrl, Susanne Staufer",
+  "pages.aboutus.membersKemptenHeader": "Team UAS Kempten",
+  "pages.aboutus.membersKemptenBody": "Project Lead:\nProf. Dr. Georg Hagel\n\nEmployees:\nDimitri Bigler, David Fischer, Jim Haug, Kevin Lee, Julian Manz, Gesine Wagner\n\nStudent Assistents: \nMartyna Dorosewicz , Joel Scherer , Cedric Steiert \n\nFormer: \nJonathan Hilscher, Elena Gialamas (student assistant), Maximilian Jatzkowski (student assistant)",
+  "pages.aboutus.interdisciplinaryHeader": "Interdisciplinary work - an overview",
+  "pages.aboutus.interdisciplinaryBody": [
+    {
+      "header": "Learning Elements",
+      "body": [
+        "Production of Learning Elements in the field of Software Engineering with with a multi stage review process",
+        "Conception of a literature based category system for the typification of the learning elements"
+      ]
+    },
+    {
+      "header": "Learning Analytics",
+      "body": [
+        "Collection and analysis of learning analytics with persistence in a learning record store (data lake)",
+        "Recording of student behavior through Moodle and frontend in the form of statements according to the xAPI standard",
+        "Creation and implementation of designs for student dashboards"
+      ]
+    },
+    {
+      "header": "Connection to Moodle",
+      "body": [
+        "Development of multiple Moodle Plugins (xAPI, Moodle Theme and H5P-Report Feature)",
+        "Communication with Moodle using the provided REST-API interface. ",
+        "LTI based communication between frontend and Moodle"
+      ]
+    },
+    {
+      "header": "Frontend and Backend Development",
+      "body": [
+        "React-Frontend-development (modular development through Components and Pages)",
+        "Jest-Frontend Testing and Pytest-Backend Testing",
+        "Development of a CI/CD pipeline for frontend and backend in GitHub using SonarLint",
+        "Python-Backend-development",
+        "Communication between frontend and backend using API endpoints with persistence in a Postgres database",
+        "Branch-focused development with review process on GitHub",
+        "Code based inline source documentation in the form of comments in Frontend and Backend"
+      ]
+    },
+    {
+      "header": "Conception of a learning system",
+      "body": [
+        "Theoretical preliminary conceptualization of an adaptive learning system",
+        "Evaluation algorithms for various questionnaires (Index of Learning Styles - ILS and Lernstrategien im Studium, shortened - LIST-K)",
+        "Design, implementation and application of AI algorithms (e.g. ant colony algorithm and genetic algorithm) to generate individualized learning paths in a multidimensional hypercube",
+        "Implementation and application of literature-based algorithms based on the learning style (e.g. according to Graf et al. 2010)",
+        "Further development of reliable, validated and shortened questionnaire versions of the ILS and the LIST-K using e.g. factor analysis, exhaustive feature selection and Bayesian networks",
+        "Collaboration between frontend, backend and Moodle for the automatic generation of learning paths for students",
+        "Modeling the individual level of knowledge using a rating system",
+        "Modeling student characteristics such as learning style and learning strategy",
+        "Literature research about Adaptiven Lernsystemen, Learning Analytics, Knowledge Tracing, Rating Systems, Large Language Models und Natural Language Processing",
+        "Conception of a tool for the evaluation of free text tasks using Large Language Models and Natural Language Processing"
+      ]
+    },
+    {
+      "header": "Implementation of the Concepts",
+      "body": [
+        "Evaluation algorithms for various questionnaires (Index of Learning Styles - ILS and Learning Strategies in Studies, shortened - LIST-K)",
+        "Design, implementation and application of AI algorithms (e.g. ant colony algorithm and genetic algorithm) to generate individualized learning paths in a multidimensional hypercube",
+        "Implementation and application of literature-based algorithms based on the learning style (e.g. according to Graf et al. 2010)",
+        "Collaboration between frontend, backend and Moodle for the automatic generation of student learning paths"
+      ]
+    },
+    {
+      "header": "Evaluation and Exchange",
+      "body": [
+        "Planning and implementation of triangulated (quantitative and qualitative) evaluations of the front end and learning elements",
+        "Elaboration of the findings in the form of peer-reviewed contributions at scientific conferences",
+        "Dissemination work (design of flyers, posters and roll-ups)",
+        "Attendance at pertinent and technically relevant (international) conferences",
+        "Internal and external exchange at workshops and network meetings"
+      ]
+    }
+  ],
+  "pages.aboutus.introductionHeader": "Partcipants of the HASKI project",
+  "pages.aboutus.introductionBody": "HASKI is a joint project of the three Bavarian universities OTH Regensburg, Aschaffenburg UAS & UAS Kempten and comprises over 20, lecturers, scientific assistants, student assistants and persons involved in the administration.",
+  "pages.aboutus.quotesHeader": "Reasons for HASKI",
+  "pages.aboutus.quotesBody": [
+    {
+      "quote": "What is special about HASKI's adaptive learner model is that it adapts to the learner and not the other way around - as is usually the case. This puts the learner at the center of the learning process..",
+      "name": "Prof. Dr. Georg Hagel",
+      "description": "Project Lead at UAS Kempten"
+    }
+  ]
 }

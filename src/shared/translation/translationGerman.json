@@ -1560,7 +1560,7 @@
   "pages.projectdescription.goalsHeader": "Ziele des HASKI Projekts",
   "pages.projectdescription.imageSource-1": "Bild von katemangostar auf Freepik",
   "pages.projectdescription.imageSource-2": "Bild von natanaelginting auf Freepik",
-  "pages.projectdescription.imageSources": "Bildquellen: ",
+  "appGlobal.imageSources": "Bildquellen: ",
   "pages.projectdescription.introductionBody": "HASKI steht für „Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt“ und wird gefördert durch das Bundesministerium für Bildung und Forschung mit einer Projektlaufzeit bis Dezember 2025. HASKI ist ein Verbundprojekt von drei bayerischen Hochschulen: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
   "pages.projectdescription.introductionHeader": "Was ist HASKI?",
   "pages.projectinformation": "Projektinformation",
@@ -1660,5 +1660,7 @@
         "Interner und externer Austausch auf Workshops und Verbundtreffen"
       ]
     }
-  ]
+  ],
+  "appGlobal.othRegensburg": "OTH Regensburg",
+  "appGlobal.aschaffenburgUAS": "TH Aschaffenburg"
 }
