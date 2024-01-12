@@ -57,8 +57,8 @@ const ShortTextualIntroductionNode = ({ data }: NodeProps<LearningPathLearningEl
               position: 'absolute',
               top: -13,
               right: -13,
-              color: 'rgba(91,189,91,0.99)',
-              background: 'white',
+              color: theme.palette.success.main,
+              background: theme.palette.common.white,
               borderRadius: '10%'
             }}
           />

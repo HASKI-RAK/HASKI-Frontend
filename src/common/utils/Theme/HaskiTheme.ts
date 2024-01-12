@@ -49,7 +49,7 @@ export const HaskiTheme = createTheme({
       light: defaultColors.black
     },
     success: {
-      main: green[700],
+      main: '#5BBD5BFC',
       dark: '#000000',
       light: green[500]
     }
