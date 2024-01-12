@@ -19,7 +19,9 @@ describe('ShortTextualIntroductionNode tests', () => {
     handleSetUrl: jest.fn(),
     handleSetTitle: jest.fn(),
     handleOpen: jest.fn(),
-    handleClose: jest.fn()
+    handleClose: jest.fn(),
+    handleSetLmsId: jest.fn(),
+    isDone: false,
   }
 
   const mockNode: Node = {

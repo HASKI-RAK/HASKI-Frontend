@@ -6,6 +6,7 @@ import Router, { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
 import { useTopic } from './Topic.hooks'
 import Topic from './Topic'
+import { LearningPathElementStatus } from '@core'
 const { AuthContext } = jest.requireActual('@services')
 
 const navigate = jest.fn()
@@ -150,14 +151,14 @@ describe('Topic Page', () => {
           }
         },
         {
-          id: 1,
-          learning_element_id: 1,
+          id: 2,
+          learning_element_id: 2,
           learning_path_id: 1,
           recommended: true,
           position: 2,
           learning_element: {
-            id: 1,
-            lms_id: 1,
+            id: 2,
+            lms_id: 2,
             activity_type: '',
             classification: '',
             name: '',
@@ -168,7 +169,7 @@ describe('Topic Page', () => {
             student_learning_element: {
               id: 1,
               student_id: 1,
-              learning_element_id: 1,
+              learning_element_id: 2,
               done: false,
               done_at: ''
             }
@@ -177,7 +178,20 @@ describe('Topic Page', () => {
       ]
     }
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme)
+    const mockLearningElementStatus : LearningPathElementStatus[] = [
+      {
+        cmid: 1,
+        state: 0,
+        timecompleted: 1
+      },
+      {
+        cmid: 2,
+        state: 1,
+        timecompleted: 2
+      }
+    ]
+
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme, mockLearningElementStatus)
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -380,7 +394,20 @@ describe('Topic Page', () => {
       ]
     }
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme)
+    const mockLearningElementStatus : LearningPathElementStatus[] = [
+      {
+        cmid: 1,
+        state: 0,
+        timecompleted: 1
+      },
+      {
+        cmid: 2,
+        state: 1,
+        timecompleted: 2
+      }
+    ]
+
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme, mockLearningElementStatus)
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -742,7 +769,20 @@ describe('Topic Page', () => {
       ]
     }
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme)
+    const mockLearningElementStatus : LearningPathElementStatus[] = [
+      {
+        cmid: 1,
+        state: 0,
+        timecompleted: 1
+      },
+      {
+        cmid: 2,
+        state: 1,
+        timecompleted: 2
+      }
+    ]
+
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme, mockLearningElementStatus)
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
