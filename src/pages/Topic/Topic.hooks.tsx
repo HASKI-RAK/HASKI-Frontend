@@ -2,8 +2,7 @@ import { LearningPathLearningElementNode } from '@components'
 import { useState, useCallback, useMemo } from 'react'
 import { Node, Edge } from 'reactflow'
 import { Theme } from '@common/theme'
-import { LearningPathElement } from '@core'
-import LearningPathElementStatus from '../../core/LearningPathElement/LearningPathElementStatus'
+import { LearningPathElement, LearningPathElementStatus } from '@core'
 
 /**
  * @prop defaultUrl - The default url of a node

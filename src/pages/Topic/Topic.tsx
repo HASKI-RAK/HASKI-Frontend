@@ -7,7 +7,7 @@ import { useStore, usePersistedStore } from '@store'
 import { IFrameModal, nodeTypes } from '@components'
 import { Box, Skeleton } from '@common/components'
 import { useTheme } from '@common/hooks'
-import LearningPathElementStatus from '../../core/LearningPathElement/LearningPathElementStatus'
+import { LearningPathElementStatus } from '@core'
 
 /**
  * @prop useTopic - Does the heavy work such as mapping nodes and edges and fetching.
@@ -38,7 +38,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
-  const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
   const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
 
@@ -47,6 +46,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
+  const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
 
   // Get learning path for topic by request to backend
   useEffect(() => {
@@ -72,6 +72,12 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
                   autoHideDuration: 3000
                 })
               })
+          }).catch((error: string) => {
+            addSnackbar({
+              message: error,
+              severity: 'error',
+              autoHideDuration: 3000
+            })
           })
         })
         .catch((error: string) => {
@@ -102,11 +108,16 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const handleOwnClose = () => {
     getLearningPathElementSpecificStatus(courseId, 50, lmsId)
       .then((data) => {
-        console.log(url)
-        console.log('Learning Element Moodle ID: ' + lmsId)
-        console.log(learningPathElementStatus)
         setLearningPathElementSpecificStatus(courseId?.toString(), 50, data[0]).then((data) => {
           setLearningPathElementStatus(data)
+          return handleClose()
+        })
+        .catch((error: string) => {
+          addSnackbar({
+            message: error,
+            severity: 'error',
+            autoHideDuration: 3000
+          })
           return handleClose()
         })
       })
