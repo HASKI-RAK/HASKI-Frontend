@@ -7,8 +7,8 @@ export const fetchLearningPathElementSpecificStatus: LearningPathElementStatusRe
   studentId,
   learningElementId
 ) => {
-  if (!course_id) {
-    throw new Error('course_id are required')
+  if (!course_id || !studentId || !learningElementId) {
+    throw new Error('course_id, studentId and learningElementId are required')
   }
   return fetchData<LearningPathElementStatus[]>(
     getConfig().BACKEND +
