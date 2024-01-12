@@ -10,9 +10,15 @@ import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/
 import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import log from 'loglevel'
 import { devtools, persist } from 'zustand/middleware'
-import LearningPathElementSpecificStatusSlice, { createLearningPathElementSpecificStatusSlice } from '../Slices/LearningPathElementSpecificStatusSlice'
+import LearningPathElementSpecificStatusSlice, {
+  createLearningPathElementSpecificStatusSlice
+} from '../Slices/LearningPathElementSpecificStatusSlice'
 
-export type StoreState = LearningPathElementSlice & CourseSlice & CoursesSlice & LearningPathTopicSlice & LearningPathElementSpecificStatusSlice
+export type StoreState = LearningPathElementSlice &
+  CourseSlice &
+  CoursesSlice &
+  LearningPathTopicSlice &
+  LearningPathElementSpecificStatusSlice
 export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice
 
 export const resetters: (() => void)[] = []

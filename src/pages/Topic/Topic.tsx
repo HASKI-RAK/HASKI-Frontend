@@ -44,7 +44,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   const { url, title, isOpen, handleClose, mapNodes } = useTopic()
 
-
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
@@ -58,21 +57,21 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       clearTimeout(preventEndlessLoading)
       getUser()
         .then((user) => {
-        getLearningPathElementStatus(courseId, 50).then((learningPathElementStatusData) => {
-          setLearningPathElementStatus(learningPathElementStatusData)
-          getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
-          .then((learningPathElementData) => {
-            const { nodes, edges } = mapNodes(learningPathElementData, theme, learningPathElementStatusData)
-            setInitialNodes(nodes)
-            setInitialEdges(edges)
-          })
-           .catch((error: string) => {
-            addSnackbar({
-              message: error,
-              severity: 'error',
-              autoHideDuration: 3000
-            })
-          })
+          getLearningPathElementStatus(courseId, 50).then((learningPathElementStatusData) => {
+            setLearningPathElementStatus(learningPathElementStatusData)
+            getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
+              .then((learningPathElementData) => {
+                const { nodes, edges } = mapNodes(learningPathElementData, theme, learningPathElementStatusData)
+                setInitialNodes(nodes)
+                setInitialEdges(edges)
+              })
+              .catch((error: string) => {
+                addSnackbar({
+                  message: error,
+                  severity: 'error',
+                  autoHideDuration: 3000
+                })
+              })
           })
         })
         .catch((error: string) => {
@@ -100,18 +99,20 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   ])
 
   const handleOwnClose = () => {
-    getLearningPathElementSpecificStatus(courseId, 50, 441).then((data) => {
-      console.log(url)
-      setLearningPathElementSpecificStatus("1", 50, data[0])
-      return handleClose()
-    }).catch((error: string) => {
-      addSnackbar({
-        message: error,
-        severity: 'error',
-        autoHideDuration: 3000
+    getLearningPathElementSpecificStatus(courseId, 50, 441)
+      .then((data) => {
+        console.log(url)
+        setLearningPathElementSpecificStatus('1', 50, data[0])
+        return handleClose()
       })
-      return handleClose()
-    })
+      .catch((error: string) => {
+        addSnackbar({
+          message: error,
+          severity: 'error',
+          autoHideDuration: 3000
+        })
+        return handleClose()
+      })
   }
 
   return initialNodes && initialEdges && learningPathElementStatus ? (

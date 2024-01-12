@@ -48,15 +48,15 @@ export const createLearningPathElementStatusSlice: StateCreator<
         updatedState[index] = {
           cmid: newData.cmid,
           state: newData.state,
-          timecompleted: newData.timecompleted,
+          timecompleted: newData.timecompleted
         }
         console.log(updatedState)
 
         set((state) => ({
           _learningPathElementStatus: {
             ...state._learningPathElementStatus,
-            [`${courseId}-${studentId}`]: updatedState,
-          },
+            [`${courseId}-${studentId}`]: updatedState
+          }
         }))
 
         return
@@ -65,9 +65,9 @@ export const createLearningPathElementStatusSlice: StateCreator<
       set((state) => ({
         _learningPathElementStatus: {
           ...state._learningPathElementStatus,
-          [`${courseId}-${studentId}`]: cached,
-        },
+          [`${courseId}-${studentId}`]: cached
+        }
       }))
-    },
+    }
   }
 }

@@ -9,7 +9,7 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import { useTheme } from '@common/hooks'
 import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined'
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined'
-import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
+import SquareRoundedIcon from '@mui/icons-material/SquareRounded'
 import { useTranslation } from 'react-i18next'
 
 /**
@@ -26,7 +26,7 @@ import { useTranslation } from 'react-i18next'
  */
 const ExerciseNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   const theme = useTheme()
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   return (
     <NodeWrapper
       id="exercise-node"
@@ -52,8 +52,9 @@ const ExerciseNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
       {data.isDone ? (
-        <Tooltip title={t("tooltip.completed")}>
-          <CheckBoxIcon viewBox={'3 -3 24 24'}
+        <Tooltip title={t('tooltip.completed')}>
+          <CheckBoxIcon
+            viewBox={'3 -3 24 24'}
             sx={{
               fontSize: 29,
               position: 'absolute',
@@ -65,7 +66,7 @@ const ExerciseNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
             }}
           />
         </Tooltip>
-      ) : null }
+      ) : null}
     </NodeWrapper>
   )
 }

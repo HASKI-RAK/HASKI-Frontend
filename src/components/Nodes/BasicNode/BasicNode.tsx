@@ -23,7 +23,7 @@ import { useTranslation } from 'react-i18next'
  */
 const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
   const theme = useTheme()
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   return (
     <NodeWrapper
       id="basic-node"
@@ -49,20 +49,21 @@ const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
       {data.isDone ? (
-        <Tooltip title={t("tooltip.completed")}>
-          <CheckBoxIcon viewBox={'3 -3 24 24'}
-                        sx={{
-                          fontSize: 29,
-                          position: 'absolute',
-                          top: -13,
-                          right: -13,
-                          color: 'rgba(91,189,91,0.99)',
-                          background: 'white',
-                          borderRadius: '10%'
-                        }}
+        <Tooltip title={t('tooltip.completed')}>
+          <CheckBoxIcon
+            viewBox={'3 -3 24 24'}
+            sx={{
+              fontSize: 29,
+              position: 'absolute',
+              top: -13,
+              right: -13,
+              color: 'rgba(91,189,91,0.99)',
+              background: 'white',
+              borderRadius: '10%'
+            }}
           />
         </Tooltip>
-      ) : null }
+      ) : null}
     </NodeWrapper>
   )
 }

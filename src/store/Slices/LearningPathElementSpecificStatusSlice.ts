@@ -1,4 +1,8 @@
-import { LearningPathElementSpecificStatusReturn, LearningPathElementStatus, LearningPathElementStatusReturn } from '@core'
+import {
+  LearningPathElementSpecificStatusReturn,
+  LearningPathElementStatus,
+  LearningPathElementStatusReturn
+} from '@core'
 import { StateCreator } from 'zustand'
 import { StoreState } from '@store'
 import { resetters } from '../Zustand/Store'
@@ -24,7 +28,11 @@ export const createLearningPathElementSpecificStatusSlice: StateCreator<
       const cached = get()._learningPathElementSpecificStatus[`${courseId}-${studentId}-${learningElementId}`]
 
       if (!cached) {
-        const learningPathElementSpecificStatusResponse = await fetchLearningPathElementSpecificStatus(courseId, studentId, learningElementId)
+        const learningPathElementSpecificStatusResponse = await fetchLearningPathElementSpecificStatus(
+          courseId,
+          studentId,
+          learningElementId
+        )
         set({
           _learningPathElementSpecificStatus: {
             ...get()._learningPathElementSpecificStatus,

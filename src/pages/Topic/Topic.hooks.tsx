@@ -139,7 +139,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           handleSetTitle: handleSetTitle,
           handleOpen: handleOpen,
           handleClose: handleClose,
-          isDone: (learningPathStatus?.find((item) => item.cmid === node.learning_element.lms_id)?.state === 1)
+          isDone: learningPathStatus?.find((item) => item.cmid === node.learning_element.lms_id)?.state === 1
         }
         return {
           id: node.position.toString() + '-' + node.learning_element.lms_id,
@@ -185,7 +185,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           handleSetTitle: handleSetTitle,
           handleOpen: handleOpen,
           handleClose: handleClose,
-          isDone: (learningPathStatus?.find((status) => status.cmid === item.learning_element.lms_id)?.state === 1)
+          isDone: learningPathStatus?.find((status) => status.cmid === item.learning_element.lms_id)?.state === 1
         }
 
         const getNodeYPos = () => {
