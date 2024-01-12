@@ -5,10 +5,8 @@ import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
 import { getConfig } from '@shared'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { useTheme } from '@common/hooks'
 import { useTranslation } from 'react-i18next'
-import SquareRoundedIcon from '@mui/icons-material/SquareRounded'
 
 /**
  * ExampleNode component.

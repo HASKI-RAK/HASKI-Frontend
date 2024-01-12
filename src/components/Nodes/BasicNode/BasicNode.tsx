@@ -5,7 +5,6 @@ import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
 import { getConfig } from '@shared'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { useTheme } from '@common/hooks'
 import { useTranslation } from 'react-i18next'
 
@@ -31,6 +30,7 @@ const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
       onClick={() => {
         data.handleOpen()
         data.handleSetUrl(getConfig().MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
+        data.handleSetLmsId(data.lmsId)
       }}
       data-testid={'basicNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />

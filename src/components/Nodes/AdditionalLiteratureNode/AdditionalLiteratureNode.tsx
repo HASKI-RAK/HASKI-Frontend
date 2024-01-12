@@ -5,10 +5,8 @@ import { Article } from '@common/icons'
 import { memo } from 'react'
 import { getConfig } from '@shared'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { useTheme } from '@common/hooks'
 import { useTranslation } from 'react-i18next'
-import SquareRoundedIcon from '@mui/icons-material/SquareRounded'
 
 /**
  * AdditionalLiteratureNode component.
@@ -32,6 +30,7 @@ const AdditionalLiteratureNode = ({ data }: NodeProps<LearningPathLearningElemen
       onClick={() => {
         data.handleOpen()
         data.handleSetUrl(getConfig().MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
+        data.handleSetLmsId(data.lmsId)
       }}
       data-testid={'additionalLiteratureNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
