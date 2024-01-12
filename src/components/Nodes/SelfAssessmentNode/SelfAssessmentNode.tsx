@@ -1,10 +1,9 @@
 import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
-import { AssignmentInd } from '@common/icons'
+import { AssignmentInd, CheckBox } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
 import { getConfig } from '@shared'
-import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import { useTheme } from '@common/hooks'
 import { useTranslation } from 'react-i18next'
 
@@ -50,7 +49,7 @@ const SelfAssessmentNode = ({ data }: NodeProps<LearningPathLearningElementNode>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
       {data.isDone ? (
         <Tooltip title={t('tooltip.completed')}>
-          <CheckBoxIcon
+          <CheckBox
             viewBox={'3 -3 24 24'}
             sx={{
               fontSize: 29,

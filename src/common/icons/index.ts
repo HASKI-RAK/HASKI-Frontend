@@ -29,3 +29,4 @@ export { AssignmentOutlined } from './DefaultAssignmentOutlined/DefaultAssignmen
 export { LibraryBooksOutlined } from './DefaultLibraryBooksOutlined/DefaultLibraryBooksOutlined'
 export { PlaylistAddCheckCircleOutlined } from './DefaultPlaylistAddCheckCircleOutlined/DefaultPlaylistAddCheckCircleOutlined'
 export { Search } from './DefaultSearch/DefaultSearch'
+export { CheckBox } from './DefaultCheckBox/DefaultCheckBox'

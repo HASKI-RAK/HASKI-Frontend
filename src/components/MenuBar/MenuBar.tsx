@@ -76,7 +76,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const [topicsPath, setTopicsPath] = useState<Topic[]>([])
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
-  const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
