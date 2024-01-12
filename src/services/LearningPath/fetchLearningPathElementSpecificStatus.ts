@@ -1,8 +1,8 @@
-import { LearningPathElementStatus, LearningPathElementSpecificStatusReturn } from '@core'
+import { LearningPathElementStatus, LearningPathElementStatusReturn } from '@core'
 import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
-export const fetchLearningPathElementSpecificStatus: LearningPathElementSpecificStatusReturn = async (
+export const fetchLearningPathElementSpecificStatus: LearningPathElementStatusReturn = async (
   course_id,
   studentId,
   learningElementId
@@ -10,7 +10,7 @@ export const fetchLearningPathElementSpecificStatus: LearningPathElementSpecific
   if (!course_id) {
     throw new Error('course_id are required')
   }
-  return fetchData<LearningPathElementStatus>(
+  return fetchData<LearningPathElementStatus[]>(
     getConfig().BACKEND +
       `/lms/course/${course_id}/student/${studentId}/learningElementId/${learningElementId}/activitystatus`,
     {

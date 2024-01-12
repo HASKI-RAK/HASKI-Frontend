@@ -4,12 +4,6 @@ type LearningPathElementStatusReturn = (
   learningElementId?: number
 ) => Promise<LearningPathElementStatus[]>
 
-type LearningPathElementSpecificStatusReturn = (
-  courseId?: string,
-  studentId?: number,
-  learningElementId?: number
-) => Promise<LearningPathElementStatus[]>
-
 type LearningPathElementStatus = {
   cmid: number //learning_element_id
   state: number //status of the learning element (0 = not done, 1 = done)
@@ -17,4 +11,4 @@ type LearningPathElementStatus = {
 }
 
 export default LearningPathElementStatus
-export type { LearningPathElementStatusReturn, LearningPathElementSpecificStatusReturn }
+export type { LearningPathElementStatusReturn }
