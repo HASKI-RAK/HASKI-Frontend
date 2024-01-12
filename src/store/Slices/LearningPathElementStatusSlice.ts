@@ -46,14 +46,15 @@ export const createLearningPathElementStatusSlice: StateCreator<
 
       if (index !== -1) {
         // Create a new array with the updated state at the specified index
-        console.log('Learning Element Status before: ', cached[index])
-        console.log('Learning Element Status after: ', newData)
-        const updatedState = [...cached]
-        updatedState[index] = {
-          cmid: newData.cmid,
-          state: newData.state,
-          timecompleted: newData.timecompleted
-        }
+        const updatedState = [
+          ...cached.slice(0, index),
+          {
+            cmid: newData.cmid,
+            state: newData.state,
+            timecompleted: newData.timecompleted,
+          },
+          ...cached.slice(index + 1),
+        ]
 
         set((state) => ({
           _learningPathElementStatus: {
