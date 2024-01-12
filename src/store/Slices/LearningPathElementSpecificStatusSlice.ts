@@ -25,22 +25,14 @@ export const createLearningPathElementSpecificStatusSlice: StateCreator<
     getLearningPathElementSpecificStatus: async (...arg) => {
       const [courseId, studentId, learningElementId] = arg
 
-      const cached = get()._learningPathElementSpecificStatus[`${courseId}-${studentId}-${learningElementId}`]
-
-      if (!cached) {
         const learningPathElementSpecificStatusResponse = await fetchLearningPathElementSpecificStatus(
           courseId,
           studentId,
           learningElementId
         )
-        set({
-          _learningPathElementSpecificStatus: {
-            ...get()._learningPathElementSpecificStatus,
-            [`${courseId}-${studentId}-${learningElementId}`]: learningPathElementSpecificStatusResponse
-          }
-        })
+
         return learningPathElementSpecificStatusResponse
-      } else return cached
+
     }
   }
 }
