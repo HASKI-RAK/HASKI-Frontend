@@ -135,7 +135,7 @@ const getGrouping = () => {
  */
 export const getContextActivities = (path: string, getEnglishName: (key: string) => string) => {
   if (path === '/') {
-    return {}
+    return
   } else if (path.split('/').length === 2) {
     return {
       parent: getParent(path, getEnglishName)
@@ -163,19 +163,33 @@ export const getContextActivities = (path: string, getEnglishName: (key: string)
  * @category Services
  */
 const getContext = (path: string, getEnglishName: (key: string) => string, filePath: string) => {
-  return {
-    platform: 'Frontend',
-    language: localStorage.getItem('i18nextLng') ?? '',
-    extensions: {
-      'http://lrs.learninglocker.net/define/extensions/info': {
-        domain: new URL(window.location.href).origin,
-        domain_version: getConfig().FRONTEND_VERSION ?? '',
-        github: getConfig().FRONTEND_GITHUB ?? '',
-        event_function: 'src'.concat(filePath)
+  if (getContextActivities(path, getEnglishName))
+    return {
+      platform: 'Frontend',
+      language: localStorage.getItem('i18nextLng') ?? '',
+      extensions: {
+        'https://lrs.learninglocker.net/define/extensions/info': {
+          domain: new URL(window.location.href).origin,
+          domain_version: getConfig().FRONTEND_VERSION ?? '',
+          github: getConfig().FRONTEND_GITHUB ?? '',
+          event_function: 'src'.concat(filePath)
+        }
+      },
+      contextActivities: getContextActivities(path, getEnglishName)
+    }
+  else
+    return {
+      platform: 'Frontend',
+      language: localStorage.getItem('i18nextLng') ?? '',
+      extensions: {
+        'https://lrs.learninglocker.net/define/extensions/info': {
+          domain: new URL(window.location.href).origin,
+          domain_version: getConfig().FRONTEND_VERSION ?? '',
+          github: getConfig().FRONTEND_GITHUB ?? '',
+          event_function: 'src'.concat(filePath)
+        }
       }
-    },
-    contextActivities: getContextActivities(path, getEnglishName)
-  }
+    }
 }
 
 /**

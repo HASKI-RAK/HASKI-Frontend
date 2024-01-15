@@ -1,9 +1,9 @@
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor, act } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { MenuItem } from '@mui/material'
 import Select from './DefaultSelect'
 import '@testing-library/jest-dom'
-import { xAPI } from '@services'
+import { xAPI, AuthContext } from '@services'
 
 describe('DefaultSelect tests', () => {
   const sendStatement = jest.fn()
@@ -14,33 +14,41 @@ describe('DefaultSelect tests', () => {
 
   test('DefaultSelect sends statement on click', async () => {
     const { getByRole } = render(
-      <MemoryRouter>
-        <Select />
-      </MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <Select />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
-    fireEvent.click(getByRole('button'))
-
-    await waitFor(() => {
-      expect(sendStatement).toHaveBeenCalled()
+    act(() => {
+      fireEvent.click(getByRole('button'))
+      waitFor(() => {
+        expect(sendStatement).toHaveBeenCalled()
+      })
     })
   })
 
   test('DefaultSelect sends statement on change', async () => {
     const { getByRole, getAllByRole } = render(
-      <MemoryRouter>
-        <Select value={'test'}>
-          <MenuItem value={'test'} />
-          <MenuItem value={'test2'} />
-        </Select>
-      </MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <Select value={'test'}>
+            <MenuItem value={'test'} />
+            <MenuItem value={'test2'} />
+          </Select>
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
+    act(() => {
+      fireEvent.mouseDown(getByRole('button'))
+    })
 
-    fireEvent.mouseDown(getByRole('button'))
-    fireEvent.click(getAllByRole('option')[1])
-
-    await waitFor(() => {
-      expect(sendStatement).toHaveBeenCalled()
+    act(() => {
+      fireEvent.click(getAllByRole('option')[1])
+      waitFor(() => {
+        expect(sendStatement).toHaveBeenCalled()
+      })
     })
   })
 })

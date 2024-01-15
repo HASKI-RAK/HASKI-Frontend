@@ -309,22 +309,16 @@ describe('MenuBar', () => {
   })
 
   test('fetching user when opening Questionnaire Results', async () => {
-    mockServices.fetchUser.mockImplementationOnce(() => {
-      throw new Error('Error')
-    })
-
-    jest.spyOn(console, 'error').mockImplementation(() => {
-      return
-    })
-
     const props: MenuBarProps = {
       courseSelected: true
     }
 
     const { getByTestId } = render(
-      <MemoryRouter>
-        <MenuBar {...props} />
-      </MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <MenuBar {...props} />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
     await waitFor(() => {
@@ -412,15 +406,17 @@ describe('MenuBar', () => {
     // TODO 📑: will be implemented in the future. Current menu is mock.
   })
 
-  test('click on Learningtype should open Questionnaire Results Modal', () => {
+  test('click on learner characteristics should open Questionnaire Results Modal', () => {
     const props: MenuBarProps = {
       courseSelected: false
     }
 
     const result = render(
-      <MemoryRouter>
-        <MenuBar {...props} />
-      </MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <MenuBar {...props} />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
     // click on QuestionnaireResultsIcon:

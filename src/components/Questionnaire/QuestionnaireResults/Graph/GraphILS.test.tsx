@@ -28,21 +28,20 @@ describe('Test GraphILS with all Methods', () => {
     expect(data[3].possibleDimensions).toMatch('components.TableILS.reflective' + ' / ' + 'components.TableILS.active')
   })
 
-  test('GraphILS renders without crashing', async() => {
+  test('GraphILS renders without crashing', async () => {
     const graphILS = render(<GraphILS data={mockILS} />)
 
     await waitFor(() => {
-        expect(graphILS.getByText('components.TableILS.active')).toBeInTheDocument()
-        expect(graphILS.getByText('components.TableILS.reflective')).toBeInTheDocument()
-        expect(graphILS.getByText('components.TableILS.sensory')).toBeInTheDocument()
-        expect(graphILS.getByText('components.TableILS.intuitive')).toBeInTheDocument()
-        expect(graphILS.getByText('components.TableILS.visual')).toBeInTheDocument()
-        expect(graphILS.getByText('components.TableILS.verbal')).toBeInTheDocument()
-        expect(graphILS.getByText('components.TableILS.sequential')).toBeInTheDocument()
-        expect(graphILS.getByText('components.TableILS.global')).toBeInTheDocument()
+      expect(graphILS.getByText('components.TableILS.active')).toBeInTheDocument()
+      expect(graphILS.getByText('components.TableILS.reflective')).toBeInTheDocument()
+      expect(graphILS.getByText('components.TableILS.sensory')).toBeInTheDocument()
+      expect(graphILS.getByText('components.TableILS.intuitive')).toBeInTheDocument()
+      expect(graphILS.getByText('components.TableILS.visual')).toBeInTheDocument()
+      expect(graphILS.getByText('components.TableILS.verbal')).toBeInTheDocument()
+      expect(graphILS.getByText('components.TableILS.sequential')).toBeInTheDocument()
+      expect(graphILS.getByText('components.TableILS.global')).toBeInTheDocument()
 
-        expect(graphILS).toBeTruthy()
-      }
-    )
+      expect(graphILS).toBeTruthy()
+    })
   })
 })

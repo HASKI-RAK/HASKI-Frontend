@@ -35,12 +35,17 @@ import {
 
 import { useTranslation } from 'react-i18next'
 import { AuthContext, SnackbarContext } from '@services'
-import { DropdownLanguage, SkeletonList, QuestionnaireQuestionsModal, QuestionnaireResultsModal } from '@components'
+import {
+  DropdownLanguage,
+  SkeletonList,
+  QuestionnaireQuestionsModal,
+  QuestionnaireResultsModal,
+  TableILSQuestions,
+  TableListKQuestions
+} from '@components'
 import { usePersistedStore, useStore } from '@store'
 import { Topic } from '@core'
 import log from 'loglevel'
-import { TableILSQuestions } from '../Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions'
-import { TableListKQuestions } from '../Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions'
 
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
@@ -94,6 +99,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
       if (reason == 'backdropClick')
         if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSShort(false)
     } else {
+      window.location.reload()
       setModalOpenILSShort(false)
     }
   }
@@ -107,6 +113,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     if (!successSendILSLong) {
       if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSLong(false)
     } else {
+      window.location.reload()
       setModalOpenILSLong(false)
     }
   }
@@ -120,6 +127,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     if (!successSendListK) {
       if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenListK(false)
     } else {
+      window.location.reload()
       setModalOpenListK(false)
     }
   }
@@ -151,7 +159,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             log.error(error.message)
           })
       })
-      /*.catch((error) => { Is already catched in Statement.hooks
+      .catch((error) => {
         // 🍿 snackbar error
         addSnackbar({
           message: error.message,
@@ -159,7 +167,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           autoHideDuration: 5000
         })
         log.error(error.message)
-      })*/
+      })
   }
 
   const handleCloseTopicsMenu = () => {
@@ -262,7 +270,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                             <>
                               <Grid item xs={12} key={t(topic.name)}>
                                 <Link
-                                  id={topic.name.concat('-link')}
+                                  id={topic.name.concat('-link').replaceAll(' ', '-')}
                                   key={topic.name}
                                   data-testid={`Menubar-Topic-${topic.name}`}
                                   underline="hover"
@@ -305,14 +313,16 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           </Box>
 
           {/** Questionnaire Results */}
-          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('tooltip.openQuestionnaireResults')}>
-              <IconButton id="modal-icon-button" onClick={() => setModalOpen(true)}>
-                <Analytics data-testid="QuestionnaireResultsIcon" />
-              </IconButton>
-            </Tooltip>
-            <QuestionnaireResultsModal open={modalOpen} handleClose={() => setModalOpen(false)} />
-          </Box>
+          {isAuth && (
+            <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
+              <Tooltip title={t('tooltip.openQuestionnaireResults')}>
+                <IconButton id="modal-icon-button" onClick={() => setModalOpen(true)}>
+                  <Analytics data-testid="QuestionnaireResultsIcon" />
+                </IconButton>
+              </Tooltip>
+              <QuestionnaireResultsModal open={modalOpen} handleClose={() => setModalOpen(false)} />
+            </Box>
+          )}
 
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
@@ -320,7 +330,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               <IconButton
                 id="manual-icon-button"
                 onClick={() => {
-                  window.open('/files/Bedienungsanleitung_von_HASKI_Alpha.pdf', '_blank')
+                  window.open('/files/Tutorial_zur_Bedienung_von_HASKI_Nov23.pdf', '_blank')
                 }}>
                 <Help data-testid="HelpIcon" />
               </IconButton>
@@ -379,7 +389,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   <ListItemIcon>
                     <LibraryBooksOutlined fontSize="small" />
                   </ListItemIcon>
-                  <Typography textAlign="center">{'ILS Questionnaire'}</Typography>
+                  <Typography textAlign="center">{t('components.Menubar.questionnaireILS')}</Typography>
                 </MenuItem>
               )}
               <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
@@ -393,6 +403,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               {isAuth && (
                 <MenuItem
                   id="ils-short-menu-item"
+                  disabled={true}
                   data-testid="questionnaireILSshort"
                   key="questionnaireILSshort"
                   onClick={() => {
@@ -401,7 +412,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   <ListItemIcon>
                     <AssignmentOutlined fontSize="small" />
                   </ListItemIcon>
-                  <Typography textAlign="center">{'ILS Questionnaire shortend'}</Typography>
+                  <Typography textAlign="center">{t('components.Menubar.questionnaireILSShortened')}</Typography>
                 </MenuItem>
               )}
               <QuestionnaireQuestionsModal open={modalOpenILSShort} handleClose={handleCloseILSShortModal}>
@@ -421,7 +432,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
                   <ListItemIcon>
                     <PlaylistAddCheckCircleOutlined fontSize="small" />
                   </ListItemIcon>
-                  <Typography textAlign="center">{'List-K Questionnaire'}</Typography>
+                  <Typography textAlign="center">{t('components.Menubar.questionnaireListK')}</Typography>
                 </MenuItem>
               )}
               <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>

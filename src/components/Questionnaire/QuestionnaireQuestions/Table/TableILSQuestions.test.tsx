@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { TableILSQuestions } from './TableILSQuestions'
+import TableILSQuestions from './TableILSQuestions'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import { mockServices } from 'jest.setup'
