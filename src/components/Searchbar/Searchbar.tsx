@@ -1,6 +1,7 @@
 import { Typography, TextField, InputAdornment } from '@common/components'
-import SearchIcon from '@mui/icons-material/Search'
 import { useCallback, memo } from 'react'
+import { Search } from '@common/icons'
+import { debounce } from '@services'
 
 /**
  * @prop label - The label text of the searchbar.
@@ -15,41 +16,12 @@ export type SearchbarProps = {
 }
 
 /**
- * debouncedSearchQuery function.
- *
- * @param props - Props containing a change event, a function to set the search query and a timeout.
- *
- * @remarks
- * debouncedSearchQuery presents a function that can be used to debounce a query by a timeout before it gets written into a state.
- * debouncedSearchQuery can be used as a function in a component.
- *
- * @returns - Function that clears the timeout.
- *
- * @category Logic
- */
-export const debouncedSearchQuery = (
-  event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  setSearchQuery?: (query: string) => void,
-  timeout?: number
-) => {
-  const timer = setTimeout(() => {
-    const {
-      target: { value }
-    } = event
-
-    setSearchQuery?.(value)
-  }, timeout)
-
-  return () => clearTimeout(timer)
-}
-
-/**
  * Searchbar component.
  *
  * @param props - Props containing the label text, the function to set the search query and a timeout of the searchbar.
  *
  * @remarks
- * Searchbar presents a component that can be used to write a search query.
+ * Searchbar represents a component that can be used to write a search query.
  * The written search query gets debounced by a timeout before the value is set.
  * Searchbar can be used as a standalone component on a page.
  *
@@ -58,11 +30,12 @@ export const debouncedSearchQuery = (
 const Searchbar = (props: SearchbarProps) => {
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      debouncedSearchQuery(event, props.setSearchQuery, props.timeout)
+      debounce(() => {
+        props.setSearchQuery?.(event.target.value)
+      }, props.timeout)
     },
     [props.setSearchQuery, props.timeout]
   )
-
   return (
     <Typography variant="h4">
       <TextField
@@ -73,7 +46,7 @@ const Searchbar = (props: SearchbarProps) => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <SearchIcon />
+              <Search />
             </InputAdornment>
           )
         }}

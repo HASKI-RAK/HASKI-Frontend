@@ -10,7 +10,8 @@ describe('ProjectDescription tests', () => {
         <ProjectDescription />
       </MemoryRouter>
     )
-    expect(getAllByTestId('projectDescriptionCard').length).toBe(5)
-    expect(getAllByTestId('projectDescriptionStepper').length).toBe(2)
+    expect(getAllByTestId('textCardLeft').length).toBe(2)
+    expect(getAllByTestId('textCardRight').length).toBe(3)
+    expect(getAllByTestId('textStepper').length).toBe(2)
   })
 })

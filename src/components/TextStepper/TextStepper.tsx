@@ -1,49 +1,45 @@
 import { Button, Fade, Grid, MobileStepper, Typography } from '@common/components'
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import { useRef, useEffect, useCallback, useState, memo } from 'react'
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
 import { useTranslation } from 'react-i18next'
-import {
-  useProjectDescriptionStepper as _useProjectDescriptionStepper,
-  useProjectDescriptionStepperHookParams,
-  ProjectDescriptionStepperHookReturn
-} from './ProjectDescriptionStepper.hooks'
+import { Typewriter } from '@components'
+import { useViewport } from '@services'
 
 /**
  * @prop body - The body texts that can be stepped through.
  * @prop header - The header text that is permanently displayed above the body texts.
- * @prop useProjectDescriptionStepper - The hook that is used for the stepper logic.
  * @interface
  */
-type ProjectDescriptionStepperProps = {
+type TextStepperProps = {
   body?: string[]
   header?: string
-  useProjectDescriptionStepper?: (
-    params?: useProjectDescriptionStepperHookParams
-  ) => ProjectDescriptionStepperHookReturn
 }
 
 /**
- * ProjectDescriptionStepper component.
+ * TextStepper component.
  *
- * @param props - Props containing the body and header texts aswell as a hook for the animation logic.
+ * @param props - Props containing the body and header texts.
  *
  * @remarks
- * ProjectDescriptionCard presents a component that displays a header text on top and and multiple steppable body texts on the bottom of the element.
+ * TextStepper presents a component that displays a header text on top and and multiple steppable body texts on the bottom of the element.
  * The header text is animated by using a typewriter effect. The body texts are animated by using a fade in effect.
- * ProjectDescriptionCard can be used as a standalone component on a page.
+ * TextStepper can be used as a standalone component on a page.
  *
  * @category Components
  */
-const ProjectDescriptionStepper = ({
-  useProjectDescriptionStepper = _useProjectDescriptionStepper,
-  ...props
-}: ProjectDescriptionStepperProps) => {
-  const { t } = useTranslation()
-  const ref = useRef<HTMLDivElement>(null)
+const TextStepper = (props: TextStepperProps) => {
+  // States
+  const [startAnimation, setStartAnimation] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
-  const { bodyState, headerState, animateBody, animateHeader } = useProjectDescriptionStepper()
 
+  // Hooks
+  const { isInViewport } = useViewport()
+  const { t } = useTranslation()
+
+  // Ref
+  const ref = useRef<HTMLDivElement>(null)
+
+  // Logic
   const handleNext = useCallback(() => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
   }, [setActiveStep])
@@ -53,14 +49,10 @@ const ProjectDescriptionStepper = ({
   }, [setActiveStep])
 
   const handleScroll = useCallback(() => {
-    if (props.body !== null && typeof props.body === 'object') {
-      animateBody(ref, props.body)
+    if (isInViewport(ref)) {
+      setStartAnimation(true)
     }
-
-    if (props.header != null && typeof props.header === 'string') {
-      animateHeader(ref, props.header)
-    }
-  }, [animateBody, animateHeader, props.body, props.header])
+  }, [isInViewport, ref, setStartAnimation])
 
   // Starts animation on component mount and continues already started animation.
   useEffect(() => {
@@ -70,10 +62,10 @@ const ProjectDescriptionStepper = ({
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [headerState, bodyState, handleScroll])
+  }, [handleScroll])
 
   return (
-    <div ref={ref} data-testid="projectDescriptionStepper">
+    <div ref={ref} data-testid="textStepper">
       <Grid
         container
         justifyContent="center"
@@ -82,16 +74,18 @@ const ProjectDescriptionStepper = ({
           mb: '7.5rem'
         }}>
         <Grid container item justifyContent="center" xs={12} sx={{ maxWidth: { sm: '18.75rem', md: '37.5rem' } }}>
-          <Typography
+          <Typewriter
+            startAnimation={startAnimation}
+            delay={50}
             variant="h3"
             align="center"
             sx={{
               width: { sm: '18.75rem', md: '37.5rem' },
               height: { sm: '10.625rem', md: '6.25rem' }
             }}>
-            {headerState}
-          </Typography>
-          <Fade in={!!bodyState[activeStep]} easing="linear" timeout={1000}>
+            {props.header}
+          </Typewriter>
+          <Fade in={startAnimation} easing="linear" timeout={2500}>
             <Typography
               align="center"
               variant="h5"
@@ -100,7 +94,7 @@ const ProjectDescriptionStepper = ({
                 width: { sm: '18.75rem', md: '37.5rem' },
                 height: { sm: '25rem', md: '12.5rem' }
               }}>
-              {bodyState[activeStep]}
+              {props.body?.[activeStep]}
             </Typography>
           </Fade>
         </Grid>
@@ -138,4 +132,4 @@ const ProjectDescriptionStepper = ({
   )
 }
 
-export default memo(ProjectDescriptionStepper)
+export default memo(TextStepper)
