@@ -112,14 +112,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           setLearningPathElementStatus(data)
           return handleClose()
         })
-        .catch((error: string) => {
-          addSnackbar({
-            message: error,
-            severity: 'error',
-            autoHideDuration: 3000
-          })
-          return handleClose()
-        })
       })
       .catch((error: string) => {
         addSnackbar({

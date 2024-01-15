@@ -4,9 +4,12 @@ import { mockReactFlow } from '@mocks'
 import { createTheme } from '@common/theme'
 import Router, { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
-import { useTopic } from './Topic.hooks'
+import { useTopic, useTopicHookParams } from './Topic.hooks'
 import Topic from './Topic'
 import { LearningPathElementStatus } from '@core'
+import { createLearningPathElementStatusSlice } from '../../store/Slices/LearningPathElementStatusSlice'
+import { StateCreator } from 'zustand'
+
 const { AuthContext } = jest.requireActual('@services')
 
 const navigate = jest.fn()
@@ -26,8 +29,8 @@ describe('Topic Page', () => {
     jest.spyOn(Router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
   })
 
-  it('renders when Auth is true', async () => {
-    await act(async () => {
+  it('renders when Auth is true', async() => {
+    await act(async() => {
       const topic = render(
         <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -67,7 +70,7 @@ describe('Topic Page', () => {
     expect(navigate).toBeCalledWith('/login')
   })
 
-  test('getUser failed', async () => {
+  test('getUser failed', async() => {
     const mockfetchUser = jest.fn(() => Promise.reject(new Error('fetchUser failed')))
     mockServices.fetchUser.mockImplementationOnce(mockfetchUser)
 
@@ -85,7 +88,7 @@ describe('Topic Page', () => {
     })
   })
 
-  test('getLearningPathElement failed', async () => {
+  test('getLearningPathElement failed', async() => {
     const mockfetchLearningPathElement = jest.fn(() => Promise.reject(new Error('fetchLearningPathElement failed')))
     mockServices.fetchLearningPathElement.mockImplementationOnce(mockfetchLearningPathElement)
 
@@ -99,9 +102,24 @@ describe('Topic Page', () => {
       )
     })
 
-    /*await waitFor(() => {
+    await waitFor(() => {
       expect(mockfetchLearningPathElement).toHaveBeenCalledTimes(1)
-    })*/
+    })
+  })
+
+  test('getLearningPathElementStatus failed', async() => {
+    const mockfetchLearningPathElementStatus = jest.fn(() => Promise.reject(new Error('fetchLearningPathElementStatus failed')))
+    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(mockfetchLearningPathElementStatus)
+
+    act(() => {
+      render(
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Topic />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      )
+    })
   })
 
   test('General functionality of Topic hook', () => {
@@ -180,7 +198,7 @@ describe('Topic Page', () => {
       ]
     }
 
-    const mockLearningElementStatus : LearningPathElementStatus[] = [
+    const mockLearningElementStatus: LearningPathElementStatus[] = [
       {
         cmid: 1,
         state: 0,
@@ -402,7 +420,7 @@ describe('Topic Page', () => {
       ]
     }
 
-    const mockLearningElementStatus : LearningPathElementStatus[] = [
+    const mockLearningElementStatus: LearningPathElementStatus[] = [
       {
         cmid: 1,
         state: 0,
@@ -787,7 +805,7 @@ describe('Topic Page', () => {
       ]
     }
 
-    const mockLearningElementStatus : LearningPathElementStatus[] = [
+    const mockLearningElementStatus: LearningPathElementStatus[] = [
       {
         cmid: 1,
         state: 0,
@@ -1055,6 +1073,53 @@ describe('Topic Page', () => {
 
       result.current.handleSetUrl('testUrl')
       expect(result.current.url).toBe('')
+    })
+  })
+
+  test('IFrameModal can be closed', async() => {
+    const topicParams: useTopicHookParams = {
+      defaultUrl: 'hello',
+      defaultTitle: 'test',
+      defaultIsOpen: true,
+      defaultLmsId: 0
+    }
+
+
+    const { container, getByTestId, queryByTestId } = render(
+      <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Topic useTopic={() => useTopic(topicParams)} />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      getByTestId('IFrameModal-Close-Button').click()
+    })
+  })
+
+  test('IFrameModal fetchLearningPathElementSpecificStatus fetching error while closing', async() => {
+    const mockfetchLearningPathElementSpecificStatus = jest.fn(() => Promise.reject(new Error('fetchLearningPathElementSpecificStatus failed')))
+    mockServices.fetchLearningPathElementSpecificStatus.mockImplementationOnce(mockfetchLearningPathElementSpecificStatus)
+
+    const topicParams: useTopicHookParams = {
+      defaultUrl: 'hello',
+      defaultTitle: 'test',
+      defaultIsOpen: true,
+      defaultLmsId: 0
+    }
+
+
+    const { container, getByTestId, queryByTestId } = render(
+      <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Topic useTopic={() => useTopic(topicParams)} />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      getByTestId('IFrameModal-Close-Button').click()
     })
   })
 })
