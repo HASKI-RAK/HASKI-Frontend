@@ -105,6 +105,7 @@ const QuestionnaireResultsModal = memo(
           .then((user) => {
             return fetchListK(user.settings.user_id, user.lms_user_id, user.id)
               .then((data) => {
+                if (data?.cogn_str == 0) return setListKLoading(false)
                 setListKData(data)
               })
               .catch((error) => {
@@ -135,6 +136,7 @@ const QuestionnaireResultsModal = memo(
           .then((user) => {
             return fetchILS(user.settings.user_id, user.lms_user_id, user.id)
               .then((data) => {
+                if (data?.perception_value == 0) return setILSLoading(false)
                 setILSData(data)
               })
               .catch((error) => {

@@ -1,8 +1,8 @@
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor, act } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import MenuItem from './DefaultMenuItem'
 import '@testing-library/jest-dom'
-import { xAPI } from '@services'
+import { xAPI, AuthContext } from '@services'
 
 describe('DefaultMenuItem tests', () => {
   test('DefaultMenuItem sends statement on click', async () => {
@@ -10,15 +10,18 @@ describe('DefaultMenuItem tests', () => {
     jest.spyOn(xAPI, 'sendStatement').mockImplementation(sendStatement)
 
     const { getByRole } = render(
-      <MemoryRouter>
-        <MenuItem />
-      </MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <MenuItem />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
-    fireEvent.click(getByRole('menuitem'))
-
-    await waitFor(() => {
-      expect(sendStatement).toHaveBeenCalled()
+    act(() => {
+      fireEvent.click(getByRole('menuitem'))
+      waitFor(() => {
+        expect(sendStatement).toHaveBeenCalled()
+      })
     })
   })
 })

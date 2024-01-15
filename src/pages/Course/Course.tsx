@@ -4,8 +4,7 @@ import log from 'loglevel'
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useLearningPathTopic } from '../../components/LocalNav/LocalNav.hooks'
-import { SkeletonList } from '@components'
+import { SkeletonList, useLearningPathTopic } from '@components'
 
 /**
  * # Course Page
@@ -14,7 +13,7 @@ import { SkeletonList } from '@components'
  * Uses the {@link useLearningPathTopic} hook to get the topics of the course.
  * @category Pages
  */
-export const Course = () => {
+const Course = () => {
   const { t } = useTranslation()
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
@@ -26,7 +25,7 @@ export const Course = () => {
     const preventEndlessLoading = setTimeout(() => {
       log.log('Course timeout')
       navigate('/login')
-    }, 5000)
+    }, 1000)
     if (authContext.isAuth) {
       clearTimeout(preventEndlessLoading)
     }
@@ -53,7 +52,7 @@ export const Course = () => {
                   <Typography variant="h5">{topic.name}</Typography>
                   <Typography variant="body1">{topic.lms_id}</Typography>
                   <Button
-                    id={topic.name.concat('-button')}
+                    id={topic.name.concat('-button').replaceAll(' ', '-')}
                     variant="contained"
                     data-testid={'Course-Card-Topic-' + topic.name}
                     color="primary"

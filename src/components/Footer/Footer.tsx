@@ -18,7 +18,6 @@ const Footer = () => {
   const { t } = useTranslation()
 
   const footerComponents = [
-    { name: [new Date().getFullYear()], link: '' },
     { name: [t('pages.home')], link: '/' },
     { name: [t('pages.projectinformation')], link: '/projectinformation' },
     { name: [t('pages.contact')], link: '/contact' },
@@ -39,14 +38,14 @@ const Footer = () => {
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
               <Typography color="black" variant="h5">
-                {t('components.Footer.project') + ' HASKI'}
+                {t('components.Footer.project') + ' HASKI ' + new Date().getFullYear()}
               </Typography>
             </Grid>
             <Grid item xs={12} display="flex" width="100%" justifyContent="center">
               {footerComponents.map((component) => (
                 <React.Fragment key={component.link}>
                   <Link
-                    id={component.link.concat('-link')}
+                    id={component.link.concat('-link').replaceAll(' ', '-')}
                     marginX="0.2em"
                     component="button"
                     variant="subtitle1"
