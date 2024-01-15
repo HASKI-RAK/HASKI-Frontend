@@ -33,7 +33,7 @@ export const Login = ({ useLogin = _useLogin }: LoginProps) => {
   const { onMoodleLogin } = useLogin({ setIsLoading, nonce })
 
   if (nonce) return <Skeleton />
-  else return <LoginForm isLoading={isLoading} moodleLogin onMoodleLogin={onMoodleLogin} />
+  else return <LoginForm isLoading={isLoading} onMoodleLogin={onMoodleLogin} />
 }
 
 export default Login

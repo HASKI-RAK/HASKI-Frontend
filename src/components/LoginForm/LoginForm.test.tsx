@@ -18,7 +18,7 @@ describe('Test LoginForm', () => {
     const navigate = jest.fn()
     const loginForm = render(
       <MemoryRouter>
-        <LoginForm moodleLogin onMoodleLogin={navigate} />
+        <LoginForm onMoodleLogin={navigate} />
       </MemoryRouter>
     )
     // get button with moodle-login-button data-testid
@@ -33,7 +33,7 @@ describe('Test LoginForm', () => {
   test('the moodle login button with default hook', () => {
     const loginForm = render(
       <MemoryRouter>
-        <LoginForm moodleLogin />
+        <LoginForm />
       </MemoryRouter>
     )
     // get button with moodle-login-button data-testid

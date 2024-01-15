@@ -4,9 +4,6 @@ import { useTranslation } from 'react-i18next'
 
 /**
  * LoginFormProps is the type of the props object that must be passed to
- * @prop onSubmit - The function to be called when the form is submitted.
- * @prop onValidate - The function to be called when the form is validated.
- * @prop usernameDefaultValue - The default value for the username field.
  * @prop isLoading - Whether the form is loading or not.
  * @prop moodleLogin - Whether the form displays a moodle login button or not.
  * @prop onMoodleLogin - The function to be called when the moodle login button is clicked.
@@ -15,7 +12,6 @@ import { useTranslation } from 'react-i18next'
 export type LoginFormProps = {
   onMoodleLogin?: () => void
   isLoading?: boolean
-  moodleLogin?: boolean
   useLoginForm?: () => LoginFormHookReturn
 }
 /**
@@ -33,7 +29,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
   const { loginMoodle } = useLoginForm()
 
   // Props destructuring
-  const { onMoodleLogin = loginMoodle, isLoading = false, moodleLogin } = props
+  const { onMoodleLogin = loginMoodle, isLoading = false } = props
 
   //moodleLogin macht probleme
 
@@ -51,20 +47,19 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
             {t('components.LoginForm.subtitle')}
           </Typography>
 
-          {moodleLogin && (
+          {
             <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={1}>
               <Grid item display="flex" justifyContent="center" md={5}>
                 <Button onClick={onMoodleLogin} data-testid="moodle-login-button" variant="contained">
                   <Avatar
-                    //src="/path12.png"
                     alt="Haski"
                     style={{
                       border: '0.5px solid white',
-                      backgroundColor: 'transparent',
+                      backgroundColor: 'white ',
                       padding: 5
                     }}>
                     <img
-                      src="/path12.png"
+                      src="/LogoPng.png"
                       style={{ height: 'inherit' }}
                       className="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
                     />
@@ -77,7 +72,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
                 </Button>
               </Grid>
             </Grid>
-          )}
+          }
         </Stack>
         <Backdrop open={isLoading}>
           <CircularProgress color="inherit" />
