@@ -291,6 +291,9 @@ describe('Topic Page', () => {
 
       result.current.handleSetUrl('testUrl')
       expect(result.current.url).toBe('')
+
+      result.current.handleSetLmsId(1)
+      expect(result.current.lmsId).toBe(0)
     })
   })
 
@@ -601,6 +604,9 @@ describe('Topic Page', () => {
 
       result.current.handleSetUrl('testUrl')
       expect(result.current.url).toBe('')
+
+      result.current.handleSetLmsId(1)
+      expect(result.current.lmsId).toBe(0)
     })
   })
 
@@ -1073,6 +1079,9 @@ describe('Topic Page', () => {
 
       result.current.handleSetUrl('testUrl')
       expect(result.current.url).toBe('')
+
+      result.current.handleSetLmsId(1)
+      expect(result.current.lmsId).toBe(0)
     })
   })
 
