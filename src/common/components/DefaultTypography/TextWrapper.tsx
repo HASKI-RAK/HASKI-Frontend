@@ -1,7 +1,6 @@
 import { TypographyProps as DefaultTypographyProps } from '../DefaultTypographyProps/DefaultTypographyProps'
 import { memo, useCallback, MouseEvent, ElementType, ReactElement } from 'react'
 import { Typography } from './DefaultTypography'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

@@ -1,7 +1,6 @@
 import { MenuItemProps as DefaultMenuItemProps } from '@common/components'
 import { memo, MouseEvent, useCallback } from 'react'
 import DefaultMenuItem from '@mui/material/MenuItem'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

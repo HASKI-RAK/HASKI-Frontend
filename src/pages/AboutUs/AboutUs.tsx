@@ -1,4 +1,6 @@
 import { Box, Grid, Typography } from '@common/components'
+import { useTranslation } from 'react-i18next'
+import { memo } from 'react'
 import {
   TextCardLeft,
   TextCardRight,
@@ -7,15 +9,28 @@ import {
   CollapsibleList,
   CollapsibleListEntryContentProps
 } from '@components'
-import { useTranslation } from 'react-i18next'
-import { memo } from 'react'
 
+/**
+ * @prop quote - The quote to be displayed.
+ * @prop name - The name of the quoted person.
+ * @prop description - Additional info about the quoted person.
+ * @interface
+ */
 type AboutUsQuotesProps = {
   quote: string
   name: string
   description: string
 }
 
+/**
+ * AboutUs page.
+ *
+ * @remarks
+ * AboutUs represents a page with information about the team involved in the project and their tasks.
+ * It uses TextCardLeft, TextCardRight, TextStepper, ImageCollection and CollapsibleList components to present the content.
+ *
+ * @category Pages
+ */
 const AboutUs = () => {
   // Translation
   const { t } = useTranslation()
@@ -37,11 +52,11 @@ const AboutUs = () => {
         />
       </TextCardLeft>
       <TextStepper header={t('pages.aboutus.quotesHeader')}>
-        {(
-          t<string>('pages.aboutus.quotesBody', {
+        {[
+          ...(t<string>('pages.aboutus.quotesBody', {
             returnObjects: true
-          }) as AboutUsQuotesProps[]
-        ).map((element) => (
+          }) as AboutUsQuotesProps[])
+        ].map((element) => (
           <>
             <Typography
               align="center"
@@ -97,7 +112,7 @@ const AboutUs = () => {
             position: 'absolute',
             width: { xl: '50rem', lg: '40rem', md: '33.5rem', sm: '33.5rem', xs: '33.5rem' },
             right: '2%',
-            marginTop: '-9rem'
+            marginTop: '-8rem'
           }}
           src="/images/mapAschaffenburg.gif"
           component="img"
@@ -111,13 +126,13 @@ const AboutUs = () => {
             position: 'absolute',
             width: { xl: '50rem', lg: '40rem', md: '33.5rem', sm: '33.5rem', xs: '33.5rem' },
             left: '2%',
-            marginTop: '-9rem'
+            marginTop: '-3rem'
           }}
           src="/images/mapKempten.gif"
           component="img"
         />
       </TextCardRight>
-      <CollapsibleList content={collapsibleListEntries} header={t('pages.aboutus.interdisciplinaryHeader')} />
+      <CollapsibleList content={[...collapsibleListEntries]} header={t('pages.aboutus.interdisciplinaryHeader')} />
       <Grid container item justifyContent="center" xs={12} sx={{ marginTop: '5rem' }}>
         <Typography sx={{ pt: '1rem', pb: '1rem' }} variant="subtitle1">
           {t('appGlobal.imageSources') +

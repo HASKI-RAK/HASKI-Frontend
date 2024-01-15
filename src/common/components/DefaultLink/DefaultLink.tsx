@@ -1,7 +1,6 @@
 import { MouseEvent, memo, useCallback, ReactElement, ElementType } from 'react'
 import { LinkProps as DefaultLinkProps } from '@common/components'
 import DefaultLink from '@mui/material/Link'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

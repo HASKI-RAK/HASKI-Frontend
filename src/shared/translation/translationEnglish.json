@@ -1581,6 +1581,7 @@
   "pages.aboutus.membersKemptenHeader": "Team UAS Kempten",
   "pages.aboutus.membersKemptenBody": "Project Lead:\nProf. Dr. Georg Hagel\n\nEmployees:\nDimitri Bigler, David Fischer, Jim Haug, Kevin Lee, Julian Manz, Gesine Wagner\n\nStudent Assistents: \nMartyna Dorosewicz , Joel Scherer , Cedric Steiert \n\nFormer: \nJonathan Hilscher, Elena Gialamas (student assistant), Maximilian Jatzkowski (student assistant)",
   "pages.aboutus.interdisciplinaryHeader": "Interdisciplinary work - an overview",
+  "pages.aboutus": "About us",
   "pages.aboutus.interdisciplinaryBody": [
     {
       "header": "Learning Elements",

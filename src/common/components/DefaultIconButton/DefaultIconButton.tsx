@@ -1,7 +1,6 @@
 import { IconButtonProps as DefaultIconButtonProps } from '@common/components'
 import DefaultIconButton from '@mui/material/IconButton'
 import { MouseEvent, memo, useCallback } from 'react'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

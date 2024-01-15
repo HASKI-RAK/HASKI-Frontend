@@ -1,6 +1,7 @@
 import { Button, Typography, Box } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { memo } from 'react'
 // TODO: Added unfinished projectinformation page for routing purposes
 
 /**
@@ -36,11 +37,11 @@ export const ProjectInformation = () => {
           id="about-us-button"
           sx={{ mt: '2rem', color: 'black' }}
           onClick={() => navigate('/projectinformation/aboutus')}>
-          <Typography>{t('pages.aboutUs')}</Typography>
+          <Typography>{t('pages.aboutus')}</Typography>
         </Button>
       </Box>
     </>
   )
 }
 
-export default ProjectInformation
+export default memo(ProjectInformation)

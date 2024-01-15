@@ -21,7 +21,7 @@ type TextStepperProps = {
  * @param props - Props containing the header text and child elements.
  *
  * @remarks
- * TextStepper presents a component that displays a header text on top and and multiple steppable child elements on the bottom of the element.
+ * TextStepper represents a component that displays a header text on top and and multiple steppable child elements on the bottom of the element.
  * The header text is animated by using a typewriter effect. The child elements are animated by using a fade in effect.
  * TextStepper can be used as a standalone component on a page.
  *

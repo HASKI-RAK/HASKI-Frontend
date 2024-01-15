@@ -7,7 +7,7 @@ import { memo } from 'react'
  * ProjectDescription page.
  *
  * @remarks
- * ProjectDescription presents a page with a description of the project.
+ * ProjectDescription represents a page with a description of the project.
  * It uses the TextCardRight, TextCardLeft and TextStepper components to present the content.
  *
  * @category Pages
@@ -31,11 +31,11 @@ const ProjectDescription = () => {
         />
       </TextCardRight>
       <TextStepper header={t('pages.projectdescription.approachesHeader')}>
-        {(
-          t<string>('pages.projectdescription.approachesBody', {
+        {[
+          ...(t<string>('pages.projectdescription.approachesBody', {
             returnObjects: true
-          }) as string[]
-        ).map((element) => (
+          }) as string[])
+        ].map((element) => (
           <Typography
             align="center"
             key={element}
@@ -98,11 +98,11 @@ const ProjectDescription = () => {
         />
       </TextCardRight>
       <TextStepper header={t('pages.projectdescription.goalsHeader')}>
-        {(
-          t<string>('pages.projectdescription.goalsBody', {
+        {[
+          ...(t<string>('pages.projectdescription.goalsBody', {
             returnObjects: true
-          }) as string[]
-        ).map((element) => (
+          }) as string[])
+        ].map((element) => (
           <Typography
             align="center"
             key={element}

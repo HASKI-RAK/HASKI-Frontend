@@ -39,4 +39,14 @@ describe('ProjectInformation tests', () => {
     fireEvent.click(getAllByRole('button')[1])
     expect(navigate).toBeCalledWith('/projectinformation/glossary')
   })
+
+  test('third button navigates to about us page', () => {
+    const { getAllByRole } = render(
+      <MemoryRouter initialEntries={['/home', '/projectinformation']}>
+        <ProjectInformation />
+      </MemoryRouter>
+    )
+    fireEvent.click(getAllByRole('button')[2])
+    expect(navigate).toBeCalledWith('/projectinformation/aboutus')
+  })
 })

@@ -1,7 +1,6 @@
 import { RadioGroupProps as DefaultRadioGroupProps } from '@common/components'
 import DefaultRadioGroup from '@mui/material/RadioGroup'
 import { memo, useCallback, ChangeEvent } from 'react'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

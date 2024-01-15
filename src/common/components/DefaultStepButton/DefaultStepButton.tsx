@@ -1,7 +1,6 @@
 import { StepButtonProps as DefaultStepButtonProps } from '@common/components'
 import DefaultStepButton from '@mui/material/StepButton'
 import { memo, useCallback, MouseEvent } from 'react'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

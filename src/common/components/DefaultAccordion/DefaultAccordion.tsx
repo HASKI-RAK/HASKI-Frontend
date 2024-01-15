@@ -1,7 +1,6 @@
 import { AccordionProps as DefaultAccordionProps } from '@common/components'
 import DefaultAccordion from '@mui/material/Accordion'
 import { memo, useCallback, MouseEvent } from 'react'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

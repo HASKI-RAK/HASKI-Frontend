@@ -19,9 +19,9 @@ type ImageCollectionProps = {
  * @param props - Props containing image locations for three pictures.
  *
  * @remarks
- * ImageCollection represents a component that displays an image collection of three images, split by a tilted vertical separator line.
- * Visual effect to showcase three images in one.
- * Can be used as a standalone component on a page.
+ * ImageCollection represents a component that displays an image collection of three images, split by tilted vertical separator lines.
+ * It is a visual effect to showcase three images in one.
+ * It can be used as a standalone component on a page.
  *
  * @category Components
  */
