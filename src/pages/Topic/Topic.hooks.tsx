@@ -8,6 +8,7 @@ import { LearningPathElement, LearningPathElementStatus } from '@core'
  * @prop defaultUrl - The default url of a node
  * @prop defaultTitle - The default title of a node
  * @prop defaultIsOpen - The default bool value if a node is open
+ * @prop defaultLmsId - The default lms id of a node
  * @category Hooks
  * @interface
  */
@@ -21,11 +22,13 @@ export type useTopicHookParams = {
 /**
  * @prop url - The url of a node
  * @prop title - The title of a node
+ * @prop lmsId - The lms id of a node
  * @prop isOpen - The bool value if a node is open
  * @prop handleClose - The function to close a node
  * @prop handleOpen - The function to open a node
  * @prop handleSetUrl - The function to set the url of a node
  * @prop handleSetTitle - The function to set the title of a node
+ * @prop handleSetLmsId - The function to set the lms id of a node
  * @prop mapNodes - The function to map the learning path to nodes and edges
  * @category Hooks
  * @interface
@@ -53,7 +56,7 @@ export type TopicHookReturn = {
 /**
  * useTopic hook.
  *
- * @param params - The default values for url, title and isOpen.
+ * @param params - The default values for url, title, isOpen and lmsId.
  *
  * @remarks
  * Hook for the Topic page logic.
@@ -268,6 +271,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     []
   )
 
+  // Calculate nodes their status and edges
   const mapNodes = useCallback(
     (learningPathData: LearningPathElement, theme: Theme, learningPathStatus: LearningPathElementStatus[]) => {
       const nodes = mapLearningPathToNodes(

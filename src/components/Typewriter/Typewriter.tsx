@@ -3,10 +3,10 @@ import { useEffect, useState, memo } from 'react'
 import { debounce } from '@services'
 
 /**
- * @prop startAnimation - Indicates if the animation has started or not.
- * @prop delay - The delay between each animation step.
- * @prop children - The text, number or array that will be animated.
- * @prop {@link TypographyProps} - The props of the Typography component.
+ * @prop startAnimation Indicates if the animation has started or not.
+ * @prop delay The delay between each animation step.
+ * @prop children The text, number or array that will be animated.
+ * @prop {@link TypographyProps} The props of the Typography component.
  * @interface
  */
 type TypewriterProps = TypographyProps & {

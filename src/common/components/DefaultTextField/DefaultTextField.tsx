@@ -1,7 +1,6 @@
 import { TextFieldProps as DefaultTextFieldProps } from '@common/components'
 import DefaultTextField from '@mui/material/TextField'
 import { memo, useCallback, ChangeEvent } from 'react'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

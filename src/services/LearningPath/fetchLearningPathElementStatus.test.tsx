@@ -30,9 +30,7 @@ describe('fetchLearningPathElementStatus has expected behaviour', () => {
     const result = await fetchLearningPathElementStatus(courseId, studentId)
 
     expect(fetch).toHaveBeenCalledWith(
-      `${
-        getConfig().BACKEND
-      }/lms/course/${courseId}/student/${studentId}/activitystatus`,
+      `${getConfig().BACKEND}/lms/course/${courseId}/student/${studentId}/activitystatus`,
       {
         method: 'GET',
         credentials: 'include',
@@ -45,7 +43,6 @@ describe('fetchLearningPathElementStatus has expected behaviour', () => {
   })
 
   it('should throw an error when course_id or studentId are missing', async () => {
-
     const studentId = 1
     const courseId = undefined // Set to null to simulate a missing value
 
@@ -70,9 +67,7 @@ describe('fetchLearningPathElementStatus has expected behaviour', () => {
     const studentId = 1
     const courseId = '2'
 
-    await expect(fetchLearningPathElementStatus(courseId, studentId)).rejects.toThrow(
-      `${expectedMessage}`
-    )
+    await expect(fetchLearningPathElementStatus(courseId, studentId)).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {

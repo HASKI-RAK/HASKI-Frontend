@@ -1,7 +1,6 @@
 import { ToggleButtonGroupProps as DefaultToggleButtonGroupProps } from '@common/components'
 import DefaultToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import { memo, useCallback, MouseEvent } from 'react'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

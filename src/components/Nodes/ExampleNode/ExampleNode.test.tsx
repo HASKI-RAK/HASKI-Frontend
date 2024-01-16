@@ -35,7 +35,6 @@ describe('ExampleNode tests', () => {
       }
     }
 
-
     const { getByTestId } = render(
       <MemoryRouter>
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
@@ -75,7 +74,6 @@ describe('ExampleNode tests', () => {
         y: 0
       }
     }
-
 
     const { getByTestId } = render(
       <MemoryRouter>

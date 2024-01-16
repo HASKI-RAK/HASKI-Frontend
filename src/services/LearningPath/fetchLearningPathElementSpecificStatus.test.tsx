@@ -46,7 +46,6 @@ describe('fetchLearningPathElementStatus has expected behaviour', () => {
   })
 
   it('should throw an error when course_id or studentId are missing', async () => {
-
     const studentId = 1
     const courseId = undefined // Set to null to simulate a missing value
     const learningElementId = 3

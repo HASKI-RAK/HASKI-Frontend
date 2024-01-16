@@ -22,7 +22,7 @@ describe('ShortTextualIntroductionNode tests', () => {
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
-      isDone: false,
+      isDone: false
     }
 
     const mockNode: Node = {
@@ -34,7 +34,6 @@ describe('ShortTextualIntroductionNode tests', () => {
         y: 0
       }
     }
-
 
     const { getByTestId } = render(
       <MemoryRouter>
@@ -75,7 +74,6 @@ describe('ShortTextualIntroductionNode tests', () => {
         y: 0
       }
     }
-
 
     const { getByTestId } = render(
       <MemoryRouter>

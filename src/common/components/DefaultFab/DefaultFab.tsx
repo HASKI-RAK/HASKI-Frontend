@@ -1,7 +1,6 @@
 import { FabProps as DefaultFabProps } from '@common/components'
 import { memo, useCallback, MouseEvent } from 'react'
 import DefaultFab from '@mui/material/Fab'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

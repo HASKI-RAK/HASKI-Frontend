@@ -48,7 +48,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
 
-  // Get learning path for topic by request to backend
+  // Get status of every learning element for user by request to backend
+  // then get every learning element for topic by request to backend
+  // Map to nodes and edges and set them as initial nodes and edges
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
       navigate('/login')
@@ -57,28 +59,30 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       clearTimeout(preventEndlessLoading)
       getUser()
         .then((user) => {
-          getLearningPathElementStatus(courseId, 50).then((learningPathElementStatusData) => {
-            setLearningPathElementStatus(learningPathElementStatusData)
-            getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
-              .then((learningPathElementData) => {
-                const { nodes, edges } = mapNodes(learningPathElementData, theme, learningPathElementStatusData)
-                setInitialNodes(nodes)
-                setInitialEdges(edges)
-              })
-              .catch((error: string) => {
-                addSnackbar({
-                  message: error,
-                  severity: 'error',
-                  autoHideDuration: 3000
+          getLearningPathElementStatus(courseId, user.lms_user_id)
+            .then((learningPathElementStatusData) => {
+              setLearningPathElementStatus(learningPathElementStatusData)
+              getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
+                .then((learningPathElementData) => {
+                  const { nodes, edges } = mapNodes(learningPathElementData, theme, learningPathElementStatusData)
+                  setInitialNodes(nodes)
+                  setInitialEdges(edges)
                 })
-              })
-          }).catch((error: string) => {
-            addSnackbar({
-              message: error,
-              severity: 'error',
-              autoHideDuration: 3000
+                .catch((error: string) => {
+                  addSnackbar({
+                    message: error,
+                    severity: 'error',
+                    autoHideDuration: 3000
+                  })
+                })
             })
-          })
+            .catch((error: string) => {
+              addSnackbar({
+                message: error,
+                severity: 'error',
+                autoHideDuration: 3000
+              })
+            })
         })
         .catch((error: string) => {
           addSnackbar({
@@ -105,15 +109,20 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     learningPathElementStatus
   ])
 
+  // On Close of IFrameModal, fetch new LearningPathElementStatus, update it in
+  // the persisted store and return it. Then close the IFrameModal and rerender page.
+  // Catch for getUser is handled in the useEffect
   const handleOwnClose = () => {
-    getLearningPathElementSpecificStatus(courseId, 50, lmsId)
+    getUser()
+    .then((user) => {
+      getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
       .then((data) => {
-        setLearningPathElementSpecificStatus(courseId?.toString(), 50, data[0]).then((data) => {
+        setLearningPathElementSpecificStatus(courseId?.toString(), user.lms_user_id, data[0]).then((data) => {
           setLearningPathElementStatus(data)
           return handleClose()
         })
       })
-      .catch((error: string) => {
+       .catch((error: string) => {
         addSnackbar({
           message: error,
           severity: 'error',
@@ -121,8 +130,10 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         })
         return handleClose()
       })
+    })
   }
 
+  // Show Loading-Skeleton until Nodes, Edges and LearningPathElementStatus are loaded
   return initialNodes && initialEdges && learningPathElementStatus ? (
     <Box height={'100%'}>
       <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>

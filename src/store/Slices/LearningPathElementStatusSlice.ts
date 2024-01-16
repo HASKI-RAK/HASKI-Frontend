@@ -1,13 +1,33 @@
 import { LearningPathElementStatus, LearningPathElementStatusReturn } from '@core'
 import { StateCreator } from 'zustand'
 import { PersistedStoreState } from '@store'
+// import can not be shortened
 import { resetters } from '../Zustand/Store'
 import { fetchLearningPathElementStatus } from '@services'
+
+/*
+* get - Fetches all learning path element statuses for a given course and student
+* from the backend
+* @param courseId The course id
+* @param studentId The student id
+* @returns An array of learning path element statuses
+*
+* set - Set the learning path element status for a given course and student
+* @param courseId The course id
+* @param studentId The student id
+* @param newData The new data to set (just 1 element)
+* @returns An array of learning path element statuses with the updated state
+*
+* * */
 
 export default interface LearningPathElementStatusSlice {
   _learningPathElementStatus: Record<string, LearningPathElementStatus[]>
   getLearningPathElementStatus: LearningPathElementStatusReturn
-  setLearningPathElementStatus: (courseId?: string, studentId?: number, newData?: LearningPathElementStatus) => Promise<LearningPathElementStatus[]>
+  setLearningPathElementStatus: (
+    courseId?: string,
+    studentId?: number,
+    newData?: LearningPathElementStatus
+  ) => Promise<LearningPathElementStatus[]>
 }
 
 export const createLearningPathElementStatusSlice: StateCreator<
@@ -38,7 +58,8 @@ export const createLearningPathElementStatusSlice: StateCreator<
     setLearningPathElementStatus: async (...arg) => {
       const [courseId, studentId, newData] = arg
 
-      if(get()._learningPathElementStatus[`${courseId}-${studentId}`] === undefined){
+      // If the data is not cached, fetch it from the backend
+      if (get()._learningPathElementStatus[`${courseId}-${studentId}`] === undefined) {
         const learningPathElementStatusResponse = await fetchLearningPathElementStatus(courseId, studentId)
         set({
           _learningPathElementStatus: {
@@ -48,11 +69,11 @@ export const createLearningPathElementStatusSlice: StateCreator<
         })
       }
 
-
+      // Get the cached data and convert it to an array if it is not already
       const cached = get()._learningPathElementStatus[`${courseId}-${studentId}`]
       const cachedArray = Array.isArray(cached) ? cached : [cached]
 
-      if(!newData) return cachedArray
+      if (!newData) return cachedArray
 
       const index = cachedArray.findIndex((item) => item.cmid === newData.cmid)
 
@@ -63,9 +84,9 @@ export const createLearningPathElementStatusSlice: StateCreator<
           {
             cmid: newData.cmid,
             state: newData.state,
-            timecompleted: newData.timecompleted,
+            timecompleted: newData.timecompleted
           },
-          ...cachedArray.slice(index + 1),
+          ...cachedArray.slice(index + 1)
         ]
 
         set((state) => ({

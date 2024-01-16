@@ -7,8 +7,6 @@ import { mockServices } from 'jest.setup'
 import { useTopic, useTopicHookParams } from './Topic.hooks'
 import Topic from './Topic'
 import { LearningPathElementStatus } from '@core'
-import { createLearningPathElementStatusSlice } from '../../store/Slices/LearningPathElementStatusSlice'
-import { StateCreator } from 'zustand'
 
 const { AuthContext } = jest.requireActual('@services')
 
@@ -119,6 +117,9 @@ describe('Topic Page', () => {
           </AuthContext.Provider>
         </MemoryRouter>
       )
+    })
+    await waitFor(() => {
+      expect(mockfetchLearningPathElementStatus).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -1093,8 +1094,7 @@ describe('Topic Page', () => {
       defaultLmsId: 0
     }
 
-
-    const { container, getByTestId, queryByTestId } = render(
+    const { getByTestId, queryByTestId } = render(
       <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Topic useTopic={() => useTopic(topicParams)} />
@@ -1104,6 +1104,10 @@ describe('Topic Page', () => {
 
     await waitFor(() => {
       getByTestId('IFrameModal-Close-Button').click()
+    })
+
+    await waitFor(() => {
+      expect(queryByTestId('IFrameModal-Close-Button')).not.toBeInTheDocument()
     })
   })
 
@@ -1119,7 +1123,7 @@ describe('Topic Page', () => {
     }
 
 
-    const { container, getByTestId, queryByTestId } = render(
+    const { getByTestId, queryByTestId } = render(
       <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Topic useTopic={() => useTopic(topicParams)} />
@@ -1129,6 +1133,10 @@ describe('Topic Page', () => {
 
     await waitFor(() => {
       getByTestId('IFrameModal-Close-Button').click()
+    })
+
+    await waitFor(() => {
+      expect(queryByTestId('IFrameModal-Close-Button')).not.toBeInTheDocument()
     })
   })
 })

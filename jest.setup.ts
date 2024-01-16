@@ -1,5 +1,4 @@
 import { resetAllSlices } from '@store'
-import { fetchLearningPathElementSpecificStatus, fetchLearningPathElementStatus } from '@services'
 
 /**
  * Type definition for {@link mockDataServices}

@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 import { usePersistedStore } from '../Zustand/Store'
 import { mockServices } from 'jest.setup'
 
-const learningElementStatus = { cmid: 1, state: 0, timecompleted: 0}
+const learningElementStatus = { cmid: 1, state: 0, timecompleted: 0 }
 
 describe('LearningPathElementStatusSlice', () => {
   it('should return set data if setLearningPathElementStatus newData is given', async () => {
@@ -13,13 +13,13 @@ describe('LearningPathElementStatusSlice', () => {
     const studentId = 1
     await getLearningPathElementStatus(courseId, studentId)
     const getDataAfterSet = [
-      {"cmid": 1, "state": 0, "timecompleted": "1699967821"},
-      {"cmid": 2, "state": 0, "timecompleted": 0},
-      {"cmid": 3, "state": 1, "timecompleted": "1699967821"},
-      {"cmid": 4, "state": 0, "timecompleted": "1699967821"}
+      { cmid: 1, state: 0, timecompleted: '1699967821' },
+      { cmid: 2, state: 0, timecompleted: 0 },
+      { cmid: 3, state: 1, timecompleted: '1699967821' },
+      { cmid: 4, state: 0, timecompleted: '1699967821' }
     ]
 
-    const data = {cmid: 2, state: 0, timecompleted: 0}
+    const data = { cmid: 2, state: 0, timecompleted: 0 }
 
     setLearningPathElementStatus(courseId, studentId, data).then((result) => {
       expect(result).toEqual(getDataAfterSet)
@@ -33,13 +33,13 @@ describe('LearningPathElementStatusSlice', () => {
     const studentId = 1
     await getLearningPathElementStatus(courseId, studentId)
     const getDataAfterSet = [
-      {"cmid": 1, "state": 0, "timecompleted": "1699967821"},
-      {"cmid": 2, "state": 1, "timecompleted": "1699967821"},
-      {"cmid": 3, "state": 1, "timecompleted": "1699967821"},
-      {"cmid": 4, "state": 0, "timecompleted": "1699967821"}
+      { cmid: 1, state: 0, timecompleted: '1699967821' },
+      { cmid: 2, state: 1, timecompleted: '1699967821' },
+      { cmid: 3, state: 1, timecompleted: '1699967821' },
+      { cmid: 4, state: 0, timecompleted: '1699967821' }
     ]
 
-    const data = {cmid: 5, state: 0, timecompleted: 0}
+    const data = { cmid: 5, state: 0, timecompleted: 0 }
 
     setLearningPathElementStatus(courseId, studentId, data).then((result) => {
       expect(result).toEqual(getDataAfterSet)
@@ -60,9 +60,8 @@ describe('LearningPathElementStatusSlice', () => {
     expect(getLearningPathElementStatus).toBeDefined()
     expect(getLearningPathElementStatus).toBeInstanceOf(Function)
     expect(getLearningPathElementStatus).not.toThrow()
-    expect(usePersistedStore.getState()._learningPathElementStatus).toEqual({"1-1":learningElementStatus})
+    expect(usePersistedStore.getState()._learningPathElementStatus).toEqual({ '1-1': learningElementStatus })
   })
-
 
   it('should return cached LearningPathElementStatus if available', async () => {
     const { getLearningPathElementStatus } = usePersistedStore.getState()
@@ -73,14 +72,13 @@ describe('LearningPathElementStatusSlice', () => {
     const studentId = 1
     await getLearningPathElementStatus(courseId, studentId)
 
-    expect(usePersistedStore.getState()._learningPathElementStatus).toEqual({"1-1":learningElementStatus})
+    expect(usePersistedStore.getState()._learningPathElementStatus).toEqual({ '1-1': learningElementStatus })
 
     expect(mockServices.fetchLearningPathElementStatus).toHaveBeenCalledTimes(1)
     const cached = await getLearningPathElementStatus(courseId, studentId)
 
     expect(cached).toEqual(learningElementStatus)
   })
-
 
   it('should return cached data if setLearningPathElementStatus newData is empty', async () => {
     const { setLearningPathElementStatus } = usePersistedStore.getState()

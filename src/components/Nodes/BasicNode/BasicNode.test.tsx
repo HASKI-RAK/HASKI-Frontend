@@ -22,7 +22,7 @@ describe('BasicNode tests', () => {
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
-      isDone: false,
+      isDone: false
     }
 
     const mockNode: Node = {
@@ -62,7 +62,7 @@ describe('BasicNode tests', () => {
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
-      isDone: true,
+      isDone: true
     }
 
     const mockNode: Node = {

@@ -1,7 +1,6 @@
 import { ModalProps as DefaultModalProps } from '@common/components'
 import DefaultModal from '@mui/material/Modal'
 import { memo, useCallback } from 'react'
-import log from 'loglevel'
 import {
   useStatement as _useStatement,
   useStatementHookParams,
