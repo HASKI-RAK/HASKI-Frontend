@@ -117,11 +117,18 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       // Sort learning path
       const sortedLearningPath = Array.from(learningPath.path).sort((a, b) => a.position - b.position)
 
+      const solvingPositionForDuplicates = sortedLearningPath.map((item, index) => {
+        item.position = index + 1 // Generate position based on array index
+        return item
+      })
+
       // Every exercise learning element
-      const learningPathExercises = sortedLearningPath.filter((item) => item.learning_element.classification === 'ÜB')
+      const learningPathExercises = solvingPositionForDuplicates.filter(
+        (item) => item.learning_element.classification === 'ÜB'
+      )
 
       // Every learning element except exercises
-      const learningPathExcludingExercises = sortedLearningPath.filter(
+      const learningPathExcludingExercises = solvingPositionForDuplicates.filter(
         (item) => item.learning_element.classification !== 'ÜB'
       )
 
@@ -203,9 +210,11 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         const getNodeYPos = () => {
           if (exerciseLearningElementParentNode && item.position >= parseInt(exerciseLearningElementParentNode.id)) {
             return (
-              250 * (item.position - exerciseLearningElementChildNodes.length) +
+              250 *
+                (item.position -
+                  parseInt(exerciseLearningElementChildNodes[exerciseLearningElementChildNodes.length - 1].id)) +
+              exerciseLearningElementParentNode.position.y +
               groupHeight +
-              Math.floor((learningPathExercises.length - 1) / 4) * 125 -
               70
             )
           } else {

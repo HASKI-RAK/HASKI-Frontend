@@ -32,6 +32,7 @@ import LearningPathElementStatus from './LearningPathElement/LearningPathElement
 import StudentLearningElement from './StudentLearningElement/StudentLearningElement'
 import Course, { CourseResponse } from './Course/Course'
 import Topic from './Topic/Topic'
+import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
 /**
  * Holds all pure business logic. Does not rely on any other components.
  */
@@ -47,7 +48,8 @@ export type {
   Topic,
   StudentLearningElement,
   ILS,
-  ListK
+  ListK,
+  LearningPathBasedOn
 }
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
 export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'

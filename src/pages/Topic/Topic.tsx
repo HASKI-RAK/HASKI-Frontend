@@ -52,7 +52,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
       navigate('/login')
-    }, 5000)
+    }, 1000)
     if (authContext.isAuth && courseId && topicId) {
       clearTimeout(preventEndlessLoading)
       getUser()
