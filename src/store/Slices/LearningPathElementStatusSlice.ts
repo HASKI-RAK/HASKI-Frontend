@@ -38,22 +38,34 @@ export const createLearningPathElementStatusSlice: StateCreator<
     setLearningPathElementStatus: async (...arg) => {
       const [courseId, studentId, newData] = arg
 
+      if(get()._learningPathElementStatus[`${courseId}-${studentId}`] === undefined){
+        const learningPathElementStatusResponse = await fetchLearningPathElementStatus(courseId, studentId)
+        set({
+          _learningPathElementStatus: {
+            ...get()._learningPathElementStatus,
+            [`${courseId}-${studentId}`]: learningPathElementStatusResponse
+          }
+        })
+      }
+
 
       const cached = get()._learningPathElementStatus[`${courseId}-${studentId}`]
-      if(!newData) return cached
+      const cachedArray = Array.isArray(cached) ? cached : [cached]
 
-      const index = cached.findIndex((item) => item.cmid === newData.cmid)
+      if(!newData) return cachedArray
+
+      const index = cachedArray.findIndex((item) => item.cmid === newData.cmid)
 
       if (index !== -1) {
         // Create a new array with the updated state at the specified index
         const updatedState = [
-          ...cached.slice(0, index),
+          ...cachedArray.slice(0, index),
           {
             cmid: newData.cmid,
             state: newData.state,
             timecompleted: newData.timecompleted,
           },
-          ...cached.slice(index + 1),
+          ...cachedArray.slice(index + 1),
         ]
 
         set((state) => ({
@@ -69,10 +81,10 @@ export const createLearningPathElementStatusSlice: StateCreator<
       set((state) => ({
         _learningPathElementStatus: {
           ...state._learningPathElementStatus,
-          [`${courseId}-${studentId}`]: cached
+          [`${courseId}-${studentId}`]: cachedArray
         }
       }))
-      return cached
+      return cachedArray
     }
   }
 }
