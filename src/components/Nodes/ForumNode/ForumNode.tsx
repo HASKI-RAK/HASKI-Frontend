@@ -1,19 +1,27 @@
-import { NodeWrapper, Paper, Typography } from '@common/components'
+import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { Forum } from '@common/icons'
+import { CheckBox, Forum } from '@common/icons'
 import { memo } from 'react'
 import { getConfig } from '@shared'
+import { useTheme } from '@common/hooks'
+import { useTranslation } from 'react-i18next'
 
 /**
- * ForumNode presents a component that displays a node with an icon and a name.
- * It can be clicked to open a corresponding activity of the lms.
- * ForumNode can't be used as a standalone component and must be rendered via ReactFlow.
+ * ForumNode component.
+ *
  * @param props - Props containing the data of the node.
- * @returns {JSX.Element} - The ForumNode component.
+ *
+ * @remarks
+ * ForumNode presents a component that displays a node with an icon and a name.
+ * It can be clicked to open a corresponding activity of the LMS.
+ * ForumNode can't be used as a standalone component and must be rendered via ReactFlow.
+ *
  * @category Components
  */
 const ForumNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
+  const theme = useTheme()
+  const { t } = useTranslation()
   return (
     <NodeWrapper
       id="additional-literature-node"
@@ -21,6 +29,7 @@ const ForumNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
       onClick={() => {
         data.handleOpen()
         data.handleSetUrl(getConfig().MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
+        data.handleSetLmsId(data.lmsId)
       }}
       data-testid={'ForumNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
@@ -38,6 +47,22 @@ const ForumNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
         {data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
+      {data.isDone ? (
+        <Tooltip title={t('tooltip.completed')}>
+          <CheckBox
+            viewBox={'3 -3 24 24'}
+            sx={{
+              fontSize: 29,
+              position: 'absolute',
+              top: -13,
+              right: -13,
+              color: theme.palette.success.main,
+              background: theme.palette.common.white,
+              borderRadius: '10%'
+            }}
+          />
+        </Tooltip>
+      ) : null}
     </NodeWrapper>
   )
 }
