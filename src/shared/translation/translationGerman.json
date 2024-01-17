@@ -1579,7 +1579,7 @@
   "pages.aboutus": "Über uns",
   "pages.aboutus.introductionHeader": "Wer ist HASKI?",
   "pages.aboutus.introductionBody": "HASKI ist ein Verbundprojekt der drei bayerischen Hochschulen OTH Regensburg, TH Aschaffenburg & HS Kempten und umfasst ein Team von über 20 Professorinnen, wissenschaftlichen Mitarbeiterinnen, studentischen Hilfskräften und an der Verwaltung beteiligten Personen.",
-  "pages.aboutus.quotesHeader": "Warum HASKI?",
+  "pages.aboutus.quotesHeader": "Motivation",
   "pages.aboutus.quotesBody": [
     {
       "quote": "„Das Besondere am adaptiven Lernenden-Modell von HASKI ist, dass es sich den Lernenden anpasst und nicht umgekehrt – wie sonst üblich. Damit stellen wir die Lernenden in den Mittelpunkt des Lernprozesses.“",
@@ -1590,7 +1590,7 @@
   "pages.aboutus.membersRegensburgHeader": "Team OTH Regensburg",
   "pages.aboutus.membersRegensburgBody": "Projektleitung:\nProf. Dr. Jürgen Mottok \n\nMitarbeitende:\nDominik Bittner, Flemming Bugert, Timur Ezer, Miriam Flannery, Lisa Grabinger, Florian Hauser, Vamsi Krishna Nadimpalli, Simon Roehrl, Susanne Staufer",
   "pages.aboutus.membersAschaffenburgHeader": "Team TH Aschaffenburg",
-  "pages.aboutus.membersAschaffenburgBody": "Projektleitung:\nProf. Dr.-Ing. Jörg Abke \n\nMitarbeitende:\nProf. Dr. Galia Weidl, Isabell Hock, Michael Münch, Marc Normann, Iryna Sapsai, Yeimy Valencia \n\nEhemalig: \nDoris Rebitzer",
+  "pages.aboutus.membersAschaffenburgBody": "Projektleitung:\nProf. Dr.-Ing. Jörg Abke \n\nMitarbeitende:\nProf. Dr. Galia Weidl, Isabell Hock, Michael Münch, Marc Normann, PhD. Iryna Sapsai, Yeimy Valencia \n\nEhemalig: \nDoris Rebitzer",
   "pages.aboutus.membersKemptenHeader": "Team HS Kempten",
   "pages.aboutus.membersKemptenBody": "Projektleitung:\nProf. Dr. Georg Hagel\n\nMitarbeitende:\nDimitri Bigler, David Fischer, Jim Haug, Kevin Lee, Julian Manz, Gesine Wagner\n\nStudentische Hilfskräfte: \nMartyna Dorosewicz , Joel Scherer , Cedric Steiert \n\nEhemalige: \nJonathan Hilscher, Elena Gialamas (studentische Hilfskraft), Maximilian Jatzkowski (studentische Hilfskraft)",
   "pages.aboutus.interdisciplinaryHeader": "Interdisziplinäres Arbeiten – Ein Überblick",
@@ -1631,14 +1631,10 @@
       ]
     },
     {
-      "header": "Konzeptionierung eines Lernsystems",
+      "header": "Konzeptionierung des Systems",
       "body": [
         "Theoretische Vorkonzeptionierung eines adaptiven Lernsystems",
-        "Auswertungsalgorithmen für diverse Fragebögen (Index of Learning Styles - ILS und Lernstrategien im Studium, gekürzt – LIST-K)",
-        "Konzeption, Implementierung und Anwendung von KI-Algorithmen (bspw. Ameisenkolonie-Algorithmus und genetischer Algorithmus) zur Generierung von individualisierten Lernpfaden in einem multidimensionalen Hypercube",
-        "Implementierung und Anwendung von literaturbasierten Algorithmen auf Basis des Lernstils (z.B. nach Graf et al. 2010)",
         "Weiterentwicklung von reliablen, validierten und gekürzten Fragebogenversionen des ILS und des LIST-K mithilfe z.B. Faktorenanalyse, Exhaustive Feature Selection und Bayesschen Netzen",
-        "Zusammenarbeit von Frontend, Backend und Moodle zur automatischen Generierung von studentischen Lernpfaden",
         "Modellierung des individuellen Wissensstandes mittels eines Rating Systems",
         "Modellierung von studentischen Charakteristiken wie Lernstil und Lernstrategie",
         "Literaturrecherche zu Adaptiven Lernsystemen, Learning Analytics, Knowledge Tracing, Rating Systems, Large Language Models und Natural Language Processing",
@@ -1646,7 +1642,7 @@
       ]
     },
     {
-      "header": "Implementierung der Konzepte",
+      "header": "Lernpfadgenerierung",
       "body": [
         "Auswertungsalgorithmen für diverse Fragebögen (Index of Learning Styles - ILS und Lernstrategien im Studium, gekürzt – LIST-K)",
         "Konzeption, Implementierung und Anwendung von KI-Algorithmen (bspw. Ameisenkolonie-Algorithmus und genetischer Algorithmus) zur Generierung von individualisierten Lernpfaden in einem multidimensionalen Hypercube",
