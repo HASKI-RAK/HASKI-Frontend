@@ -190,7 +190,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             cursor: 'pointer'
           }}
           alt="HASKI Home"
-          src="/LogoPng.png"
+          src="/LogoHaskiCut2.png"
           onClick={() => navigate('/')}
         />
         <Box sx={{ flexGrow: 1, textAlign: 'center', display: 'flex' }}>
