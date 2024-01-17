@@ -19,7 +19,7 @@ export type LoginFormProps = {
  * LoginForm presents a form for the user to login.
  * It can be used as a standalone component on a page. The functionality
  * comes by default, but it can be overriden by custom functions passed as described
- * in {@link LoginFormProps.useLoginForm} or {@link LoginFormProps.onSubmit} and {@link LoginFormProps.onValidate}.
+ * in {@link LoginFormProps.useLoginForm}.
  * @param props - {@link LoginFormProps} Props containing the form logic and the form state.
  * @returns The Form component.
  * @category Components
@@ -30,8 +30,6 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
 
   // Props destructuring
   const { onMoodleLogin = loginMoodle, isLoading = false } = props
-
-  //moodleLogin macht probleme
 
   // Translation
   const { t } = useTranslation()

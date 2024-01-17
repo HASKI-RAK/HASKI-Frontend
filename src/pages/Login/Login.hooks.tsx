@@ -5,7 +5,7 @@ import { useEffect, useContext } from 'react'
 export type LoginHookParams = {
   setIsLoading: (isLoading: boolean) => void
   /** The nonce is a string that is passed to the login page back from the backend as part of the LTI flow.
-   * It is used to accociate the session in a short living authorization flow. */
+   * It is used to associate the session in a short living authorization flow. */
   nonce?: string
 }
 

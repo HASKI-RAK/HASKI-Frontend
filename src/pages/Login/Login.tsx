@@ -6,7 +6,7 @@ import { useLogin as _useLogin, LoginHookParams, LoginHookReturn } from './Login
 
 type LoginProps = {
   /**
-   * {@link useLogin | Login hook} to control both the submit on the page and the moodle login.
+   * {@link useLogin | Login hook} to control the moodle login.
    * @defaultValue {@link _useLogin}
    */
   useLogin?: (params: LoginHookParams) => LoginHookReturn
