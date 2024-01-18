@@ -1,7 +1,6 @@
 ﻿import { SelectProps as DefaultSelectProps, SelectChangeEvent } from '@common/components'
 import { useCallback, MouseEvent, ReactNode } from 'react'
 import DefaultSelect from '@mui/material/Select'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

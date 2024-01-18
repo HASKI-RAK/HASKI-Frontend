@@ -1,7 +1,6 @@
 import { MenuProps as DefaultMenuProps } from '@common/components'
 import DefaultMenu from '@mui/material/Menu'
 import { memo, useCallback } from 'react'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

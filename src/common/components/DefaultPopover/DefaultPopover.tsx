@@ -1,7 +1,6 @@
 import { PopoverProps as DefaultPopoverProps } from '@common/components'
 import DefaultPopover from '@mui/material/Popover'
 import { memo, useCallback } from 'react'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,

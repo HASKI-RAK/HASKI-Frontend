@@ -1,7 +1,6 @@
 import { BoxProps as DefaultBoxProps } from '@common/components'
 import { MouseEvent, memo, useCallback } from 'react'
 import { Box } from './DefaultBox'
-import log from 'loglevel'
 import {
   useStatement as _useStatement,
   useStatementHookParams,

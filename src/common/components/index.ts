@@ -52,6 +52,7 @@ export { TableBody } from './DefaultTableBody/DefaultTableBody'
 export { TableContainer } from './DefaultTableContainer/DefaultTableContainer'
 export { TableHead } from './DefaultTableHead/DefaultTableHead'
 export { FormGroup } from './DefaultFormGroup/DefaultFormGroup'
+export { Zoom } from './DefaultZoom/DefaultZoom'
 
 export { Network } from './Network/Network'
 export { Bar } from './Bar/Bar'

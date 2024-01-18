@@ -1,6 +1,6 @@
 import { Slide, Grow } from '@common/components'
 import { SeverityType } from '@components'
-import { memo } from 'react'
+import { memo, ReactElement } from 'react'
 
 /**
  * @prop children - The child element to be transitioned.
@@ -10,7 +10,7 @@ import { memo } from 'react'
  * @interface
  */
 export type SnackbarTransitionProps = {
-  children?: React.ReactElement
+  children?: ReactElement
   in?: boolean
   severity?: SeverityType
   timeout?: number
