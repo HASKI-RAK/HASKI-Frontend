@@ -1590,7 +1590,7 @@
     {
       "header": "Learning elements",
       "body": [
-        "Production of learning elements in the field of software engineering with with a multi stage review process",
+        "Production of learning elements in the field of software engineering with a multi-stage review process",
         "Conception of a literature-based category system for the typification of the learning elements"
       ]
     },
@@ -1606,15 +1606,15 @@
       "header": "Connection to Moodle",
       "body": [
         "Development of multiple Moodle Plugins (xAPI, Moodle Theme and H5P-Report Feature)",
-        "Communication with Moodle using the provided REST-API interface. ",
+        "Communication with Moodle using the provided REST-API",
         "LTI based communication between frontend and Moodle"
       ]
     },
     {
       "header": "Frontend and backend development",
       "body": [
-        "React-Frontend-development (modular development using components and pages)",
-        "Jest-frontend Testing and Pytest-backend testing",
+        "React-frontend-development (modular development using components and pages)",
+        "Jest-frontend and Pytest-backend testing",
         "Development of a CI/CD pipeline for frontend and backend in GitHub using SonarLint",
         "Python-backend-development",
         "Communication between frontend and backend using API endpoints with persistence in a Postgres database",
@@ -1623,7 +1623,7 @@
       ]
     },
     {
-      "header": "Conceptualization the system",
+      "header": "System conceptualization",
       "body": [
         "Theoretical preliminary conceptualization of an adaptive learning system",
         "Modeling the individual level of knowledge using a rating system",
@@ -1633,7 +1633,7 @@
       ]
     },
     {
-      "header": "Generation of learning paths",
+      "header": "Learning path generation",
       "body": [
         "Evaluation algorithms for various questionnaires (Index of Learning Styles - ILS and Learning Strategies in Studies, shortened - LIST-K)",
         "Design, implementation and application of AI algorithms (e.g. ant colony algorithm and genetic algorithm) to generate individualized learning paths in a multidimensional hypercube",
@@ -1652,14 +1652,14 @@
       ]
     }
   ],
-  "pages.aboutus.introductionHeader": "Partcipants of the HASKI project",
+  "pages.aboutus.introductionHeader": "Partcipants in the HASKI project",
   "pages.aboutus.introductionBody": "HASKI is a joint project of the three Bavarian universities OTH Regensburg, Aschaffenburg UAS & Kempten UAS and comprises over 20, lecturers, scientific assistants, student assistants and people involved in the administration.",
   "pages.aboutus.quotesHeader": "Motivation",
   "pages.aboutus.quotesBody": [
     {
       "quote": "\"What is special about HASKI's adaptive learner model is that it adapts to the learner and not the other way around - as is usually the case. This puts the learner at the center of the learning process.\"",
       "name": "Prof. Dr. Georg Hagel",
-      "description": "Project Lead, Kempten University"
+      "description": "Project Lead, Kempten UAS"
     }
   ]
 }
