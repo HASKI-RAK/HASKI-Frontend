@@ -1,7 +1,6 @@
 import { ToggleButtonGroupProps as DefaultToggleButtonGroupProps } from '@common/components'
 import DefaultToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import { memo, useCallback, MouseEvent } from 'react'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -37,7 +36,7 @@ const ToggleButtonGroup = ({ useStatement = _useStatement, onChange, ...props }:
     <DefaultToggleButtonGroup
       onChange={useCallback(
         <T, K extends T>(event: MouseEvent<HTMLElement, globalThis.MouseEvent>, value: K) => {
-          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname)
           onChange?.(event, value)
         },
         [sendStatement, onChange]

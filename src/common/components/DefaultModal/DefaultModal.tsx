@@ -1,7 +1,6 @@
 import { ModalProps as DefaultModalProps } from '@common/components'
 import DefaultModal from '@mui/material/Modal'
 import { memo, useCallback } from 'react'
-import log from 'loglevel'
 import {
   useStatement as _useStatement,
   useStatementHookParams,
@@ -37,7 +36,7 @@ const Modal = ({ useStatement = _useStatement, onClose, ...props }: ModalProps) 
     <DefaultModal
       onClose={useCallback(
         (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
-          sendStatement(xAPIVerb.closed, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.closed, new URL(import.meta.url).pathname)
           onClose?.(event, reason)
         },
         [sendStatement, onClose]

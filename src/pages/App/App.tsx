@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from '@common/theme'
-import { PrivacyModal } from '@components'
 import {
   MainFrame,
   Home,
@@ -14,7 +13,8 @@ import {
   Topic,
   Course,
   PageNotFound,
-  Glossary
+  Glossary,
+  AboutUs
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { HaskiTheme } from '@utils'
@@ -35,7 +35,6 @@ export const App = () => (
     <SnackbarProvider>
       <AuthProvider>
         <Router>
-          <PrivacyModal />
           <Routes>
             <Route element={<MainFrame />}>
               <Route index element={<Home />} />
@@ -48,6 +47,7 @@ export const App = () => (
               <Route path="/projectinformation" element={<ProjectInformation />} />
               <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
               <Route path="/projectinformation/glossary" element={<Glossary />} />
+              <Route path="/projectinformation/aboutus" element={<AboutUs />} />
               <Route path="/imprint" element={<Imprint />} />
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />
               <Route path="/🥚" element={<div>Ei</div>} />

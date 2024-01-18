@@ -7,14 +7,18 @@ export { default as GraphListK } from './Questionnaire/QuestionnaireResults/Grap
 export { default as ResultDescriptionListK } from './Questionnaire/QuestionnaireResults/Text/ResultDescriptionListK'
 export { default as QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResults/Modal/QuestionnaireResultsModal'
 export { default as QuestionnaireQuestionsModal } from './Questionnaire/QuestionnaireQuestions/Modal/QuestionnaireQuestionsModal'
+export { default as TableILSQuestions } from './Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions'
+export { default as TableListKQuestions } from './Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions'
 export { default as LoginForm, type LoginFormProps } from './LoginForm/LoginForm'
 export { default as MenuBar } from './MenuBar/MenuBar'
 export { default as ContactForm, type ContactFormProps } from './ContactForm/ContactForm'
 export { default as Footer } from './Footer/Footer'
 export { default as LocalNav } from './LocalNav/LocalNav'
+export * from './LocalNav/LocalNav.hooks'
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
-export { default as ProjectDescriptionCard } from './ProjectDescription/ProjectDescriptionCard/ProjectDescriptionCard'
-export { default as ProjectDescriptionStepper } from './ProjectDescription/ProjectDescriptionStepper/ProjectDescriptionStepper'
+export { default as TextCardLeft } from './TextCard/TextCardLeft/TextCardLeft'
+export { default as TextCardRight } from './TextCard/TextCardRight/TextCardRight'
+export { default as TextStepper } from './TextStepper/TextStepper'
 export {
   default as SnackbarMessage,
   type SnackbarMessageProps,
@@ -30,6 +34,15 @@ export { default as GlossaryList } from './Glossary/GlossaryList/GlossaryList'
 export { default as Searchbar } from './Searchbar/Searchbar'
 export { default as GlossaryIndex } from './Glossary/GlossaryIndex/GlossaryIndex'
 export { default as GlossaryEntry, type GlossaryEntryProps } from './Glossary/GlossaryEntry/GlossaryEntry'
+export { default as OpenQuestionnaire } from './Questionnaire/OpenQuestionnaire/OpenQuestionnaire'
+export * from './PrivacyModal/PrivacyModal.hooks'
 export { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
+export { default as Typewriter } from './Typewriter/Typewriter'
+export { default as ImageCollection } from './ImageCollection/ImageCollection'
+export { default as CollapsibleList } from './CollapsibleList/CollapsibleList/CollapsibleList'
+export {
+  default as CollapsibleListEntry,
+  type CollapsibleListEntryContentProps
+} from './CollapsibleList/CollapsibleListEntry/CollapsibleListEntry'
 
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure

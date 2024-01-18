@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { act, fireEvent, render } from '@testing-library/react'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
 import LocalNav, { LocalNavProps } from './LocalNav'
 import * as router from 'react-router'
 import { LearningPathElement, LearningPathLearningElement, Topic, LearningElement, StudentLearningElement } from '@core'
@@ -397,56 +397,55 @@ describe('getSortedLearningPath works as expected', () => {
   })
 
   test('fetches learning path topics and returns the loading state', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useLearningPathTopic('2'))
+    await act(async () => {
+      const { result, waitForNextUpdate } = renderHook(() => useLearningPathTopic('2'))
 
-    expect(result.current.loading).toBe(true)
-    expect(result.current.topics).toEqual([])
-
-    await waitForNextUpdate()
-
-    expect(result.current.loading).toBe(false)
-    expect(result.current.topics).toEqual([
-      {
-        contains_le: true,
-        created_at: 'string',
-        created_by: 'string',
-        id: 1,
-        is_topic: true,
-        last_updated: 'string',
-        lms_id: 1,
-        name: 'Wirtschaftsinformatik',
-        parent_id: 1,
-        university: 'HS-Kempten',
-        student_topic: {
-          done: true,
-          done_at: 'string',
-          id: 1,
-          student_id: 1,
-          topic_id: 1,
-          visits: ['string']
-        }
-      },
-      {
-        contains_le: true,
-        created_at: 'string',
-        created_by: 'string',
-        id: 2,
-        is_topic: true,
-        last_updated: 'string',
-        lms_id: 1,
-        name: 'Informatik',
-        parent_id: 1,
-        university: 'HS-Kempten',
-        student_topic: {
-          done: true,
-          done_at: 'string',
-          id: 2,
-          student_id: 1,
-          topic_id: 2,
-          visits: ['string']
-        }
-      }
-    ])
+      await waitFor(() => {
+        expect(result.current.loading).toBe(false)
+        expect(result.current.topics).toEqual([
+          {
+            contains_le: true,
+            created_at: 'string',
+            created_by: 'string',
+            id: 1,
+            is_topic: true,
+            last_updated: 'string',
+            lms_id: 1,
+            name: 'Wirtschaftsinformatik',
+            parent_id: 1,
+            university: 'HS-Kempten',
+            student_topic: {
+              done: true,
+              done_at: 'string',
+              id: 1,
+              student_id: 1,
+              topic_id: 1,
+              visits: ['string']
+            }
+          },
+          {
+            contains_le: true,
+            created_at: 'string',
+            created_by: 'string',
+            id: 2,
+            is_topic: true,
+            last_updated: 'string',
+            lms_id: 1,
+            name: 'Informatik',
+            parent_id: 1,
+            university: 'HS-Kempten',
+            student_topic: {
+              done: true,
+              done_at: 'string',
+              id: 2,
+              student_id: 1,
+              topic_id: 2,
+              visits: ['string']
+            }
+          }
+        ])
+      })
+    })
   })
 
   test('fetches learning path elements for a topic and returns the loading state', async () => {

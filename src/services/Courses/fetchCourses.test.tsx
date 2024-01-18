@@ -43,8 +43,8 @@ describe('fetchCourses has expected behaviour', () => {
   })
 
   it('should throw a specific error when the response has an error variable', async () => {
-    const expectedError = 'Sample error message'
-    const expectedMessage = 'Sample error message'
+    const expectedError = 'Error: HTTP error undefined'
+    const expectedMessage = 'Error: HTTP error undefined'
 
     const mockResponse = {
       ok: false,

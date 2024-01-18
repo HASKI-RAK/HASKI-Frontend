@@ -1,7 +1,10 @@
 import { useState, useCallback, useContext } from 'react'
-import { postILS, postListK, SnackbarContext } from '@services'
+import { postILS, postListK, SnackbarContext, postCalculateLearningPathILS } from '@services'
 import { usePersistedStore } from '@store'
 import { useTranslation } from 'react-i18next'
+import { User } from '@core'
+import { SnackbarMessageProps } from '@components'
+import log from 'loglevel'
 
 type SendHookResult = {
   sendAnswers: () => Promise<boolean>
@@ -39,6 +42,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
       if (ils) {
         return postILS({ studentId, outputJson })
           .then((response) => {
+            calculateLearningPath(user, addSnackbar, t)
             return !!response
           })
           .catch(() => {
@@ -73,6 +77,44 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
   }, [data])
 
   return { sendAnswers, isSending }
+}
+
+//hardcoded courseId, topicId, algorithm for evaluation
+// TODO: the postCalculateLearningPathILS has to be changed. Frontend should only give
+// notice when the calculation should start. What should be calculated should be
+// defined in the backend.
+const courseList = [1]
+const topicList = [2, 6, 10, 12]
+const algorithmList = ['aco', 'graf', 'graf', 'aco']
+
+const calculateLearningPath = (
+  user: User,
+  addSnackbar: (newSnackbar: SnackbarMessageProps) => void,
+  t: (key: string) => string
+) => {
+  courseList.forEach((courseId) => {
+    topicList.forEach((topicId, index) => {
+      postCalculateLearningPathILS(
+        user.settings.user_id,
+        user.lms_user_id,
+        user.id,
+        courseId,
+        topicId,
+        algorithmList[index]
+      )
+        .then((response) => {
+          log.info(response)
+        })
+        .catch(() => {
+          addSnackbar({
+            message: t('Data.calculated.error'),
+            severity: 'success',
+            autoHideDuration: 5000
+          })
+          log.error('Error while calculating learning path in Kempten Course 1')
+        })
+    })
+  })
 }
 
 export default useHandleSend

@@ -1,8 +1,8 @@
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor, act } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
 import Fab from './DefaultFab'
-import { xAPI } from '@services'
+import { xAPI, AuthContext } from '@services'
 
 describe('DefaultFab tests', () => {
   test('DefaultFab sends statement on click', async () => {
@@ -10,15 +10,18 @@ describe('DefaultFab tests', () => {
     jest.spyOn(xAPI, 'sendStatement').mockImplementation(sendStatement)
 
     const { getByRole } = render(
-      <MemoryRouter>
-        <Fab />
-      </MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <Fab />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
-    fireEvent.click(getByRole('button'))
-
-    await waitFor(() => {
-      expect(sendStatement).toHaveBeenCalled()
+    act(() => {
+      fireEvent.click(getByRole('button'))
+      waitFor(() => {
+        expect(sendStatement).toHaveBeenCalled()
+      })
     })
   })
 })

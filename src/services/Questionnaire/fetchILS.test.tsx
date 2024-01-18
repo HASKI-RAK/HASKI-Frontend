@@ -23,7 +23,7 @@ describe('fetchILS has expected behaviour', () => {
       perception_value: 3,
       processing_dimension: 'ref',
       processing_value: 7,
-      understanding_dimension: 'glb',
+      understanding_dimension: 'glo',
       understanding_value: 3
     }
     const expectedData = {
@@ -36,7 +36,7 @@ describe('fetchILS has expected behaviour', () => {
       perception_value: -3,
       processing_dimension: 'ref',
       processing_value: -7,
-      understanding_dimension: 'glb',
+      understanding_dimension: 'glo',
       understanding_value: -3
     }
     const mockResponse = {

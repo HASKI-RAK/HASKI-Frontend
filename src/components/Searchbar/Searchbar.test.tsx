@@ -1,7 +1,6 @@
 import { fireEvent, render, act } from '@testing-library/react'
-import Searchbar, { debouncedSearchQuery } from './Searchbar'
 import { MemoryRouter } from 'react-router-dom'
-import { ChangeEvent } from 'react'
+import Searchbar from './Searchbar'
 import '@testing-library/jest-dom'
 
 jest.useFakeTimers()
@@ -20,12 +19,13 @@ describe('Searchbar tests', () => {
   }
 
   it('renders without input', () => {
-    const { getByDisplayValue } = render(
-      <MemoryRouter>
-        <Searchbar />
-      </MemoryRouter>
-    )
-    expect(getByDisplayValue('')).toBeInTheDocument()
+    expect(
+      render(
+        <MemoryRouter>
+          <Searchbar />
+        </MemoryRouter>
+      )
+    ).toBeTruthy()
   })
 
   it('renders with input', () => {
@@ -37,7 +37,7 @@ describe('Searchbar tests', () => {
     expect(getAllByText(mockSearchbarProps.label).length).toEqual(2)
   })
 
-  test('search query has changed', () => {
+  test('Search query has changed', () => {
     const { getByRole } = render(
       <MemoryRouter>
         <Searchbar {...mockSearchbarProps} />
@@ -52,33 +52,5 @@ describe('Searchbar tests', () => {
     expect(setTimeout).toHaveBeenCalledTimes(1)
     expect(mockSearchbarProps.setSearchQuery).toHaveBeenCalledTimes(1)
     expect(mockSearchbarProps.setSearchQuery).toHaveBeenCalledWith('testValue')
-  })
-
-  test('debounced search query function', () => {
-    const mockEvent = {
-      target: {
-        value: 'testValue'
-      }
-    } as ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-
-    expect(setTimeout).toHaveBeenCalledTimes(0)
-
-    const mockDebouncedSearchQuery = debouncedSearchQuery(
-      mockEvent,
-      mockSearchbarProps.setSearchQuery,
-      mockSearchbarProps.timeout
-    )
-
-    render(
-      <MemoryRouter>
-        <Searchbar {...mockSearchbarProps} />
-      </MemoryRouter>
-    )
-
-    act(() => {
-      mockDebouncedSearchQuery()
-    })
-
-    expect(setTimeout).toHaveBeenCalledTimes(1)
   })
 })

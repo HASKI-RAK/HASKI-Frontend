@@ -1,14 +1,14 @@
-import { useTranslation } from 'react-i18next'
-import { ProjectDescriptionCard, ProjectDescriptionStepper } from '@components'
 import { Avatar, Grid, Typography, Box } from '@common/components'
+import { TextCardRight, TextStepper, TextCardLeft } from '@components'
+import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
 
 /**
  * ProjectDescription page.
  *
  * @remarks
- * ProjectDescription presents a page with a description of the project.
- * It uses the ProjectDescriptionCard and ProjectDescriptionStepper components to present the content.
+ * ProjectDescription represents a page with a description of the project.
+ * It uses the TextCardRight, TextCardLeft and TextStepper components to present the content.
  *
  * @category Pages
  */
@@ -18,7 +18,7 @@ const ProjectDescription = () => {
 
   return (
     <>
-      <ProjectDescriptionCard
+      <TextCardRight
         header={t('pages.projectdescription.introductionHeader')}
         body={t('pages.projectdescription.introductionBody')}>
         <Box
@@ -29,16 +29,27 @@ const ProjectDescription = () => {
           }}
           src="/LogoPng.png"
         />
-      </ProjectDescriptionCard>
-      <ProjectDescriptionStepper
-        header={t('pages.projectdescription.approachesHeader')}
-        body={
-          t<string>('pages.projectdescription.approachesBody', {
+      </TextCardRight>
+      <TextStepper header={t('pages.projectdescription.approachesHeader')}>
+        {[
+          ...(t<string>('pages.projectdescription.approachesBody', {
             returnObjects: true
-          }) as string[]
-        }
-      />
-      <ProjectDescriptionCard
+          }) as string[])
+        ].map((element) => (
+          <Typography
+            align="center"
+            key={element}
+            variant="h5"
+            sx={{
+              pt: '2.5rem',
+              width: { sm: '18.75rem', md: '37.5rem' },
+              height: { sm: '25rem', md: '12.5rem' }
+            }}>
+            {element}
+          </Typography>
+        ))}
+      </TextStepper>
+      <TextCardLeft
         header={t('pages.projectdescription.advantagesTeachingHeader')}
         body={t('pages.projectdescription.advantagesTeachingBody')}>
         <Avatar
@@ -49,8 +60,8 @@ const ProjectDescription = () => {
             width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
           }}
         />
-      </ProjectDescriptionCard>
-      <ProjectDescriptionCard
+      </TextCardLeft>
+      <TextCardRight
         header={t('pages.projectdescription.advantagesTeachingHeader-2')}
         body={t('pages.projectdescription.advantagesTeachingBody-2')}>
         <Avatar
@@ -61,8 +72,8 @@ const ProjectDescription = () => {
             width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
           }}
         />
-      </ProjectDescriptionCard>
-      <ProjectDescriptionCard
+      </TextCardRight>
+      <TextCardLeft
         header={t('pages.projectdescription.advantagesLearningHeader')}
         body={t('pages.projectdescription.advantagesLearningBody')}>
         <Avatar
@@ -73,8 +84,8 @@ const ProjectDescription = () => {
             width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
           }}
         />
-      </ProjectDescriptionCard>
-      <ProjectDescriptionCard
+      </TextCardLeft>
+      <TextCardRight
         header={t('pages.projectdescription.advantagesLearningHeader-2')}
         body={t('pages.projectdescription.advantagesLearningBody-2')}>
         <Avatar
@@ -85,18 +96,29 @@ const ProjectDescription = () => {
             width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
           }}
         />
-      </ProjectDescriptionCard>
-      <ProjectDescriptionStepper
-        header={t('pages.projectdescription.goalsHeader')}
-        body={
-          t<string>('pages.projectdescription.goalsBody', {
+      </TextCardRight>
+      <TextStepper header={t('pages.projectdescription.goalsHeader')}>
+        {[
+          ...(t<string>('pages.projectdescription.goalsBody', {
             returnObjects: true
-          }) as string[]
-        }
-      />
+          }) as string[])
+        ].map((element) => (
+          <Typography
+            align="center"
+            key={element}
+            variant="h5"
+            sx={{
+              pt: '2.5rem',
+              width: { sm: '18.75rem', md: '37.5rem' },
+              height: { sm: '25rem', md: '12.5rem' }
+            }}>
+            {element}
+          </Typography>
+        ))}
+      </TextStepper>
       <Grid container item justifyContent="center" xs={12}>
         <Typography sx={{ pt: '1rem', pb: '1rem' }} variant="subtitle1">
-          {t('pages.projectdescription.imageSources') + t('appGlobal.universityKempten') + ', '}
+          {t('appGlobal.imageSources') + ' ' + t('appGlobal.universityKempten') + ', '}
           <a href="https://de.freepik.com/fotos-kostenlos/close-up-der-studentin-schreiben-auf-laptop-am-tisch_1147740.htm">
             {t('pages.projectdescription.imageSource-1')}
           </a>

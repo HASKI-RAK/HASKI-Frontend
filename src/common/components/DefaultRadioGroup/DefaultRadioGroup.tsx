@@ -1,7 +1,6 @@
 import { RadioGroupProps as DefaultRadioGroupProps } from '@common/components'
 import DefaultRadioGroup from '@mui/material/RadioGroup'
 import { memo, useCallback, ChangeEvent } from 'react'
-import log from 'loglevel'
 import {
   xAPIVerb,
   xAPIComponent,
@@ -37,7 +36,7 @@ const RadioGroup = ({ useStatement = _useStatement, onChange, ...props }: RadioG
     <DefaultRadioGroup
       onChange={useCallback(
         (event: ChangeEvent<HTMLInputElement>, value: string) => {
-          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname)
           onChange?.(event, value)
         },
         [sendStatement, onChange]

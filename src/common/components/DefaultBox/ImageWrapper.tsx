@@ -1,7 +1,6 @@
 import { MouseEvent, memo, useCallback, ReactElement, ElementType } from 'react'
 import { BoxProps as DefaultBoxProps } from '@common/components'
 import { Box } from './DefaultBox'
-import log from 'loglevel'
 import {
   useStatement as _useStatement,
   useStatementHookParams,
@@ -41,7 +40,7 @@ const ImageWrapper = <C extends ElementType>({
     <Box
       onClick={useCallback(
         (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname).catch((reason) => log.error(reason))
+          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
           onClick?.(event)
         },
         [onClick, sendStatement]
