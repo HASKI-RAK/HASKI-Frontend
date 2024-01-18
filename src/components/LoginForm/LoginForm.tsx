@@ -49,24 +49,14 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
             <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={1}>
               <Grid item display="flex" justifyContent="center" md={5}>
                 <Button onClick={onMoodleLogin} data-testid="moodle-login-button" variant="contained">
-                  <Avatar
-                    alt="Haski"
-                    style={{
-                      border: '0.5px solid white',
-                      backgroundColor: 'white ',
-                      padding: 5
-                    }}>
-                    <img
-                      src="/LogoPng.png"
-                      style={{ height: 'inherit' }}
-                      className="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
-                    />
-                  </Avatar>
-                  {
-                    <Typography variant="h6" component="h2" marginLeft={'10px'}>
-                      {t('components.LoginForm.loginButton')}
-                    </Typography>
-                  }
+                  <img
+                    src="/LogoWhite.png"
+                    style={{ width: '30px' }}
+                    className="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
+                  />
+                  <Typography variant="h6" component="h2" marginLeft={'10px'}>
+                    {t('components.LoginForm.loginButton')}
+                  </Typography>
                 </Button>
               </Grid>
             </Grid>
