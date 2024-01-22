@@ -1,10 +1,20 @@
 import { act, render, fireEvent } from '@testing-library/react'
-import TextStepper from './TextStepper'
 import { MemoryRouter } from 'react-router-dom'
+import TextStepper from './TextStepper'
 import '@testing-library/jest-dom'
 
 const mockProps = {
-  body: ['body1', 'body2', 'body3'],
+  body: [
+    <div key={'body1'} data-testid="body1">
+      body1
+    </div>,
+    <div key={'body2'} data-testid="body2">
+      body2
+    </div>,
+    <div key={'body3'} data-testid="body3">
+      body3
+    </div>
+  ],
   header: 'header'
 }
 
@@ -39,16 +49,16 @@ describe('TextStepper tests', () => {
   it('renders with input', () => {
     const { getByTestId } = render(
       <MemoryRouter>
-        <TextStepper body={mockProps.body} header={mockProps.header} />
+        <TextStepper header={mockProps.header}>{mockProps.body}</TextStepper>
       </MemoryRouter>
     )
     expect(getByTestId('textStepper')).toBeInTheDocument()
   })
 
   it('can be scrolled with input', () => {
-    const { getByText } = render(
+    const { getByText, getByTestId } = render(
       <MemoryRouter>
-        <TextStepper body={mockProps.body} header={mockProps.header} />
+        <TextStepper header={mockProps.header}>{mockProps.body}</TextStepper>
       </MemoryRouter>
     )
 
@@ -58,14 +68,14 @@ describe('TextStepper tests', () => {
     })
 
     expect(setTimeout).toHaveBeenCalled()
-    expect(getByText(mockProps.body[0])).toBeInTheDocument()
+    expect(getByTestId('body1')).toBeInTheDocument()
     expect(getByText(mockProps.header.slice(0, 1))).toBeInTheDocument()
   })
 
   test('Step through all texts', () => {
-    const { getByText, getAllByRole } = render(
+    const { getByText, getAllByRole, getByTestId } = render(
       <MemoryRouter>
-        <TextStepper body={mockProps.body} header={mockProps.header} />
+        <TextStepper header={mockProps.header}>{mockProps.body}</TextStepper>
       </MemoryRouter>
     )
 
@@ -74,22 +84,22 @@ describe('TextStepper tests', () => {
       jest.runAllTimers()
     })
 
-    expect(getByText(mockProps.body[0])).toBeInTheDocument()
+    expect(getByTestId('body1')).toBeInTheDocument()
     expect(getByText(mockProps.header.slice(0, 1))).toBeInTheDocument()
 
     // Steps to the right
     const buttons = getAllByRole('button')
     fireEvent.click(buttons[1])
-    expect(getByText(mockProps.body[1])).toBeInTheDocument()
+    expect(getByTestId('body2')).toBeInTheDocument()
     fireEvent.click(buttons[1])
-    expect(getByText(mockProps.body[2])).toBeInTheDocument()
+    expect(getByTestId('body3')).toBeInTheDocument()
     fireEvent.click(buttons[1])
-    expect(getByText(mockProps.body[2])).toBeInTheDocument()
+    expect(getByTestId('body3')).toBeInTheDocument()
 
     // Steps to the left
     fireEvent.click(buttons[0])
-    expect(getByText(mockProps.body[1])).toBeInTheDocument()
+    expect(getByTestId('body2')).toBeInTheDocument()
     fireEvent.click(buttons[0])
-    expect(getByText(mockProps.body[0])).toBeInTheDocument()
+    expect(getByTestId('body1')).toBeInTheDocument()
   })
 })
