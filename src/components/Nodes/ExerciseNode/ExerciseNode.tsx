@@ -47,7 +47,7 @@ const ExerciseNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
         {data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
-      {data.isDone ? (
+      {data.isDone && (
         <Tooltip title={t('tooltip.completed')}>
           <CheckBox
             viewBox={'3 -3 24 24'}
@@ -62,7 +62,7 @@ const ExerciseNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
             }}
           />
         </Tooltip>
-      ) : null}
+      )}
     </NodeWrapper>
   )
 }
