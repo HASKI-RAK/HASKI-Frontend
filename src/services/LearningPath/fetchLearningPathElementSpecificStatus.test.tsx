@@ -1,5 +1,4 @@
 import { getConfig } from '@shared'
-//Tests fail with shortened Path
 import { fetchLearningPathElementSpecificStatus } from './fetchLearningPathElementSpecificStatus'
 
 global.fetch = jest.fn(() =>

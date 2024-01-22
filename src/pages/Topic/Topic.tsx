@@ -113,23 +113,22 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // the persisted store and return it. Then close the IFrameModal and rerender page.
   // Catch for getUser is handled in the useEffect
   const handleOwnClose = () => {
-    getUser()
-    .then((user) => {
+    getUser().then((user) => {
       getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
-      .then((data) => {
-        setLearningPathElementSpecificStatus(courseId?.toString(), user.lms_user_id, data[0]).then((data) => {
-          setLearningPathElementStatus(data)
+        .then((data) => {
+          setLearningPathElementSpecificStatus(courseId?.toString(), user.lms_user_id, data[0]).then((data) => {
+            setLearningPathElementStatus(data)
+            return handleClose()
+          })
+        })
+        .catch((error: string) => {
+          addSnackbar({
+            message: error,
+            severity: 'error',
+            autoHideDuration: 3000
+          })
           return handleClose()
         })
-      })
-       .catch((error: string) => {
-        addSnackbar({
-          message: error,
-          severity: 'error',
-          autoHideDuration: 3000
-        })
-        return handleClose()
-      })
     })
   }
 

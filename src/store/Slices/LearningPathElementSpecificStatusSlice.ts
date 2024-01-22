@@ -4,14 +4,14 @@ import { StoreState } from '@store'
 import { fetchLearningPathElementSpecificStatus } from '@services'
 
 /*
-* @prop courseId The course id
-* @prop studentId The student id
-* @prop learningElementId The learning element id (in Moodle)
-*
-* @remarks
-* get - Fetches a specific learning path element status
-* 
-* @interface
+ * @prop courseId The course id
+ * @prop studentId The student id
+ * @prop learningElementId The learning element id (in Moodle)
+ *
+ * @remarks
+ * get - Fetches a specific learning path element status
+ *
+ * @interface
  */
 type LearningPathElementSpecificStatusSlice = {
   getLearningPathElementSpecificStatus: LearningPathElementStatusReturn
