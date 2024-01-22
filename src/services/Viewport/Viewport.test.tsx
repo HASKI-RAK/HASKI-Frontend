@@ -1,4 +1,4 @@
-import { useViewport } from '@services'
+import { useViewport } from './Viewport.hooks'
 import '@testing-library/jest-dom'
 import { renderHook } from '@testing-library/react'
 
