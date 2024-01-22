@@ -1,4 +1,4 @@
-import { useStatement, xAPIVerb, xAPIComponent } from '@services'
+import { useStatement, xAPIVerb, xAPIComponent } from './Statement.hooks'
 import { renderHook, waitFor, act } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import * as statement from './getStatement'
