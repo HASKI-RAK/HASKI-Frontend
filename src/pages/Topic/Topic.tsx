@@ -112,13 +112,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // On Close of IFrameModal, fetch new LearningPathElementStatus, update it in
   // the persisted store and return it. Then close the IFrameModal and rerender page.
   // Catch for getUser is handled in the useEffect
-  const handleOwnClose = () => {
+  const getHandleClose = () => {
     getUser().then((user) => {
       getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
         .then((data) => {
           setLearningPathElementSpecificStatus(courseId?.toString(), user.lms_user_id, data[0]).then((data) => {
             setLearningPathElementStatus(data)
-            return handleClose()
+            return
           })
         })
         .catch((error: string) => {
@@ -127,9 +127,10 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             severity: 'error',
             autoHideDuration: 3000
           })
-          return handleClose()
+          return
         })
     })
+    return handleClose()
   }
 
   // Show Loading-Skeleton until Nodes, Edges and LearningPathElementStatus are loaded
@@ -140,7 +141,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         <MiniMap nodeBorderRadius={2} />
         <Controls />
       </ReactFlow>
-      <IFrameModal url={url} title={title} isOpen={isOpen} onClose={handleOwnClose} key={url} />
+      <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
     </Box>
   ) : (
     <Skeleton variant="rectangular" width={'80%'} height={'80%'} />
