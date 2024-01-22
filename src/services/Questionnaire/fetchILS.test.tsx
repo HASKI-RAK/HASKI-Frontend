@@ -1,5 +1,4 @@
 import { getConfig } from '@shared'
-//import can not be shortened
 import { fetchILS } from './fetchILS'
 
 global.fetch = jest.fn(() =>
