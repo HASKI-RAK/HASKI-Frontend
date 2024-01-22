@@ -118,7 +118,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         .then((data) => {
           setLearningPathElementSpecificStatus(courseId?.toString(), user.lms_user_id, data[0]).then((data) => {
             setLearningPathElementStatus(data)
-            return
           })
         })
         .catch((error: string) => {
@@ -127,7 +126,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             severity: 'error',
             autoHideDuration: 3000
           })
-          return
         })
     })
     return handleClose()
