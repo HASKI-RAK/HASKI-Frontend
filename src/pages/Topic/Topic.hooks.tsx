@@ -68,7 +68,7 @@ export type TopicHookReturn = {
  */
 export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   // Default values
-  const { defaultUrl = '', defaultTitle = '', defaultIsOpen = false, defaultLmsId = 0 } = params ?? {}
+  const { defaultUrl = '', defaultTitle = '', defaultIsOpen = false, defaultLmsId = -1 } = params ?? {}
 
   // State data
   const [url, setUrl] = useState(defaultUrl)
