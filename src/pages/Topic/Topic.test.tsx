@@ -131,7 +131,7 @@ describe('Topic Page', () => {
       url: '',
       title: '',
       isOpen: false,
-      lmsId: 0,
+      lmsId: -1,
       handleClose: expect.any(Function),
       handleOpen: expect.any(Function),
       handleSetTitle: expect.any(Function),
@@ -296,7 +296,7 @@ describe('Topic Page', () => {
       expect(result.current.url).toBe('')
 
       result.current.handleSetLmsId(1)
-      expect(result.current.lmsId).toBe(0)
+      expect(result.current.lmsId).toBe(-1)
     })
   })
 
@@ -311,7 +311,7 @@ describe('Topic Page', () => {
       handleSetTitle: expect.any(Function),
       handleSetUrl: expect.any(Function),
       mapNodes: expect.any(Function),
-      lmsId: 0,
+      lmsId: -1,
       handleSetLmsId: expect.any(Function)
     })
 
@@ -609,7 +609,7 @@ describe('Topic Page', () => {
       expect(result.current.url).toBe('')
 
       result.current.handleSetLmsId(1)
-      expect(result.current.lmsId).toBe(0)
+      expect(result.current.lmsId).toBe(-1)
     })
   })
 
@@ -624,7 +624,7 @@ describe('Topic Page', () => {
       handleSetTitle: expect.any(Function),
       handleSetUrl: expect.any(Function),
       mapNodes: expect.any(Function),
-      lmsId: 0,
+      lmsId: -1,
       handleSetLmsId: expect.any(Function)
     })
 
@@ -1084,7 +1084,7 @@ describe('Topic Page', () => {
       expect(result.current.url).toBe('')
 
       result.current.handleSetLmsId(1)
-      expect(result.current.lmsId).toBe(0)
+      expect(result.current.lmsId).toBe(-1)
     })
   })
 

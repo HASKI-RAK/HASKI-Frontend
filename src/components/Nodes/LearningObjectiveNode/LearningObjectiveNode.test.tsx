@@ -42,9 +42,9 @@ describe('LearningObjectiveNode tests', () => {
     )
     const learningObjectiveNode = getByTestId('LearningObjectiveNode')
 
-    expect(LearningObjectiveNode).toBeInTheDocument()
+    expect(learningObjectiveNode).toBeInTheDocument()
 
-    fireEvent.click(LearningObjectiveNode)
+    fireEvent.click(learningObjectiveNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()
