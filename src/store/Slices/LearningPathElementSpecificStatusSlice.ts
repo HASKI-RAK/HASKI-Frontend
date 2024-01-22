@@ -4,12 +4,16 @@ import { StoreState } from '@store'
 import { fetchLearningPathElementSpecificStatus } from '@services'
 
 /*
+* @prop courseId The course id
+* @prop studentId The student id
+* @prop learningElementId The learning element id (in Moodle)
+*
+* @remarks
 * get - Fetches a specific learning path element status
-* @param courseId The course id
-* @param studentId The student id
-* @param learningElementId The learning element id (in Moodle)
+* 
+* @interface
  */
-export default interface LearningPathElementSpecificStatusSlice {
+type LearningPathElementSpecificStatusSlice = {
   getLearningPathElementSpecificStatus: LearningPathElementStatusReturn
 }
 
@@ -27,3 +31,5 @@ export const createLearningPathElementSpecificStatusSlice: StateCreator<
     }
   }
 }
+
+export default LearningPathElementSpecificStatusSlice
