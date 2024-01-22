@@ -1,5 +1,5 @@
 import { renderHook, act, fireEvent } from '@testing-library/react'
-import { useNetworkStatus } from '@services'
+import { useNetworkStatus } from './NetworkStatus.hooks'
 import '@testing-library/jest-dom'
 
 describe('Test useNetworkStatus', () => {
