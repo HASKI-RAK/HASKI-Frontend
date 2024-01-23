@@ -2,11 +2,12 @@ import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 import { ILS } from '@core'
 
-/*
- * @param {string} studentId - student id
- * @param {string} outputJson - output json
+/* 
+  * @props studentId - student id
+  * @props outputJson - output json
+  * @interface
  */
-interface PostILSProps {
+type PostILSProps = {
   studentId: number
   outputJson: string
 }
