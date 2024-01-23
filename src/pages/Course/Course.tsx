@@ -5,6 +5,53 @@ import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SkeletonList, useLearningPathTopic } from '@components'
+import CircularProgress, {
+  CircularProgressProps,
+} from '@mui/material/CircularProgress'
+import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress'
+
+function CircularProgressWithLabel(
+  props: CircularProgressProps & { value: number } & { text: string},
+) {
+  return (
+    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+      <CircularProgress variant="determinate" {...props} />
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography
+          variant="caption"
+          component="div"
+          color="text.secondary"
+        >{`${(props.text)}`}</Typography>
+      </Box>
+    </Box>
+  );
+}
+
+function LinearProgressWithLabel(props: LinearProgressProps & { value: number } & { text: string}) {
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Box sx={{ width: '20%', mr: 1 }}>
+        <LinearProgress sx={{ml: 2}} variant="determinate" {...props} />
+      </Box>
+      <Box sx={{ minWidth: 35 }}>
+        <Typography variant="body2" color="text.secondary">{`${(
+          props.text
+        )}`}</Typography>
+      </Box>
+    </Box>
+  );
+}
 
 /**
  * # Course Page
@@ -50,7 +97,7 @@ const Course = () => {
               <Card key={topic.id}>
                 <CardContent>
                   <Typography variant="h5">{topic.name}</Typography>
-                  <Typography variant="body1">{topic.lms_id}</Typography>
+                  <Stack direction="row" spacing={2} alignItems="center">
                   <Button
                     id={topic.name.concat('-button').replaceAll(' ', '-')}
                     variant="contained"
@@ -61,7 +108,10 @@ const Course = () => {
                     }}>
                     {t('pages.course.topicButton')}
                   </Button>
+
+                  </Stack>
                 </CardContent>
+                <LinearProgressWithLabel value={80} text={"6/10"} />
               </Card>
             )
           })}
