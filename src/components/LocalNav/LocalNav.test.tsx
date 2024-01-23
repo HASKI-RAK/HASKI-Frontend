@@ -51,7 +51,7 @@ describe('LocalNav tests', () => {
 
   const mockLearningPathElement: LearningPathElement = {
     id: 1,
-    courseId: 1,
+    course_id: 1,
     based_on: 'some-Algorithm',
     calculated_on: 'today',
     path: mockLearningPathLearningElement
@@ -73,7 +73,7 @@ describe('LocalNav tests', () => {
         done_at: null,
         id: 1,
         student_id: 1,
-        topicId: 1,
+        topic_id: 1,
         visits: []
       },
       university: 'HS-KE'
@@ -93,7 +93,7 @@ describe('LocalNav tests', () => {
         done_at: null,
         id: 2,
         student_id: 1,
-        topicId: 1,
+        topic_id: 1,
         visits: []
       },
       university: 'HS-KE'
@@ -288,7 +288,7 @@ describe('LocalNav tests', () => {
 describe('getSortedLearningPath works as expected', () => {
   const mockGetLearningPathElement = jest.fn().mockResolvedValue({
     id: 99999,
-    courseId: 99999,
+    course_id: 99999,
     based_on: 'mock LearningPathElement',
     calculated_on: 'mock LearningPathElement',
     path: [
@@ -335,7 +335,7 @@ describe('getSortedLearningPath works as expected', () => {
       done_at: null,
       id: 1,
       student_id: 1,
-      topicId: 1,
+      topic_id: 1,
       visits: []
     },
     university: 'HS-KE'
@@ -356,7 +356,7 @@ describe('getSortedLearningPath works as expected', () => {
     )
     expect(result).toEqual({
       id: 99999,
-      courseId: 99999,
+      course_id: 99999,
       based_on: 'mock LearningPathElement',
       calculated_on: 'mock LearningPathElement',
       path: [
@@ -419,7 +419,7 @@ describe('getSortedLearningPath works as expected', () => {
               done_at: 'string',
               id: 1,
               student_id: 1,
-              topicId: 1,
+              topic_id: 1,
               visits: ['string']
             }
           },
@@ -439,7 +439,7 @@ describe('getSortedLearningPath works as expected', () => {
               done_at: 'string',
               id: 2,
               student_id: 1,
-              topicId: 2,
+              topic_id: 2,
               visits: ['string']
             }
           }
@@ -459,7 +459,7 @@ describe('getSortedLearningPath works as expected', () => {
     expect(result.current.loadingElements).toBe(false)
     expect(result.current.learningPaths).toEqual({
       id: 1,
-      courseId: 2,
+      course_id: 2,
       based_on: 'string',
       calculated_on: 'string',
       path: [
@@ -601,7 +601,7 @@ describe('useLearningPathTopic', () => {
         done_at: 'string',
         id: 1,
         student_id: 1,
-        topicId: 1,
+        topic_id: 1,
         visits: ['string']
       }
     }

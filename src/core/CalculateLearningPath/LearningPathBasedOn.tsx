@@ -1,11 +1,11 @@
 type LearningPathBasedOn = {
   based_on: string
   calculated_on: string
-  courseId: number
+  course_id: number
   id: number
   path: string
   student_id: number
-  topicId: number
+  topic_id: number
 }
 
 export default LearningPathBasedOn
