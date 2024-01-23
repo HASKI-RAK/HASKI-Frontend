@@ -9,7 +9,10 @@ import { fetchLearningPathElementSpecificStatus } from '@services'
  * @prop learningElementId - The learning element id (in Moodle)
  *
  * @remarks
- * get - Fetches a specific learning path element status
+ * getLearningPathElementSpecificStatus - Fetches a specific learning element status
+ * status for a student in a course from the backend and returns
+ * Promise<LearningPathElementStatus[]>
+ *
  *
  * @interface
  */
