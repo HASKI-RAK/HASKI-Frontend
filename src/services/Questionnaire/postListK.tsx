@@ -13,11 +13,17 @@ type PostListKProps = {
 }
 
 /*
+  * postListK function.
+  *
+  * @param studentId - student id
+  * @param outputJson - output json
+  *
+  * @remarks
   * Posts the ListK for a student
-  * @param {string} studentId - student id
-  * @param {string} outputJson - output json
-  * @returns {Promise<ListK>} - returns a promise with the ListK
-  * @throws {Error} - throws an error if studentId or outputJson are not provided
+  * Throws an error if studentId or outputJson are not provided.
+  *
+  * @returns - returns a promise with the ListK.
+  *
   * @category Services
  */
 
