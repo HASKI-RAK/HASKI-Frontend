@@ -3,15 +3,20 @@ import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
 /*
-  * Fetches all learning elements for a student for a course and topic
-  * @param {string} userId - user id
-  * @param {string} lmsUserId - lms user id
-  * @param {string} studentId - student id
-  * @param {string} course_id - course id
-  * @param {string} topic_id - topic id
-  * @returns {Promise<LearningPathElement[]>} - returns a promise with all learning
-  * elements for a course and topic
-  * @throws {Error} - throws an error if course_id or topic_id are not provided
+  * fetchLearningPathElement function.
+  *
+  * @param userId - user id
+  * @param lmsUserId - lms user id
+  * @param studentId - student id
+  * @param course_id - course id
+  * @param topic_id - topic id
+  *
+  * @remarks
+  * Fetches all learning elements for a student for a course and topic.
+  * Throws an error if course_id or topic_id are not provided elements for a course and topic.
+  *
+  * @returns - returns a promise with all learning
+  *
   * @category Services
  */
 
