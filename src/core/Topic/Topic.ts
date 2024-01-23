@@ -13,7 +13,7 @@ type Topic = {
     done_at: string | null
     id: number
     student_id: number
-    topic_id: number
+    topicId: number
     visits: string[]
   }
   university: string

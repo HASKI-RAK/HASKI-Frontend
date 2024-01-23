@@ -144,7 +144,7 @@ describe('Topic Page', () => {
 
     const mockLearningPath = {
       id: 1,
-      course_id: 1,
+      courseId: 1,
       based_on: '',
       calculated_on: '',
       path: [
@@ -319,7 +319,7 @@ describe('Topic Page', () => {
 
     const mockLearningPath = {
       id: 1,
-      course_id: 1,
+      courseId: 1,
       based_on: '',
       calculated_on: '',
       path: [
@@ -632,7 +632,7 @@ describe('Topic Page', () => {
 
     const mockLearningPath = {
       id: 1,
-      course_id: 1,
+      courseId: 1,
       based_on: '',
       calculated_on: '',
       path: [

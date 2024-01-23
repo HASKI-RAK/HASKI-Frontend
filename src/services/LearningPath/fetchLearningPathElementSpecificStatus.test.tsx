@@ -44,13 +44,13 @@ describe('fetchLearningPathElementStatus has expected behaviour', () => {
     expect(result).toEqual(expectedData)
   })
 
-  it('should throw an error when course_id or studentId are missing', async () => {
+  it('should throw an error when courseId or studentId are missing', async () => {
     const studentId = 1
     const courseId = undefined // Set to null to simulate a missing value
     const learningElementId = 3
 
     await expect(fetchLearningPathElementSpecificStatus(courseId, studentId, learningElementId)).rejects.toThrow(
-      'course_id, studentId and learningElementId are required'
+      'courseId, studentId and learningElementId are required'
     )
   })
 

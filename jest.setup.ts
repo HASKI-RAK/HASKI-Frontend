@@ -60,7 +60,7 @@ const mockDataServices: MockDataServices = {
   fetchLearningPathElement: jest.fn(() =>
     Promise.resolve({
       id: 1,
-      course_id: 2,
+      courseId: 2,
       based_on: 'string',
       calculated_on: 'string',
       path: [
@@ -186,7 +186,7 @@ const mockDataServices: MockDataServices = {
             done_at: 'string',
             id: 1,
             student_id: 1,
-            topic_id: 1,
+            topicId: 1,
             visits: ['string']
           }
         },
@@ -206,7 +206,7 @@ const mockDataServices: MockDataServices = {
             done_at: 'string',
             id: 2,
             student_id: 1,
-            topic_id: 2,
+            topicId: 2,
             visits: ['string']
           }
         }
