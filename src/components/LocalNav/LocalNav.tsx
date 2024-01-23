@@ -13,8 +13,8 @@ import {
 
 /**
  *  Local navigation component props.
- *  @prop {@link _useLearningPathTopic} hook to get learning path topics
- *  @prop {@link _useLearningPathElement} hook to get learning path elements
+ *  @prop {@link _useLearningPathTopic} - hook to get learning path topics
+ *  @prop {@link _useLearningPathElement} - hook to get learning path elements
  */
 export type LocalNavProps = {
   useLearningPathTopic?: (courseId: string) => { loading: boolean; topics: Topic[] }

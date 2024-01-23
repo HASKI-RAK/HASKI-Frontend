@@ -40,11 +40,11 @@ describe('SelfAssessmentNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const SelfAssessmentNode = getByTestId('selfAssessmentNode')
+    const selfAssessmentNode = getByTestId('selfAssessmentNode')
 
-    expect(SelfAssessmentNode).toBeInTheDocument()
+    expect(selfAssessmentNode).toBeInTheDocument()
 
-    fireEvent.click(SelfAssessmentNode)
+    fireEvent.click(selfAssessmentNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()
@@ -80,11 +80,11 @@ describe('SelfAssessmentNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const SelfAssessmentNode = getByTestId('selfAssessmentNode')
+    const selfAssessmentNode = getByTestId('selfAssessmentNode')
 
-    expect(SelfAssessmentNode).toBeInTheDocument()
+    expect(selfAssessmentNode).toBeInTheDocument()
 
-    fireEvent.click(SelfAssessmentNode)
+    fireEvent.click(selfAssessmentNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()

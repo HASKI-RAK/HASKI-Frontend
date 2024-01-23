@@ -40,11 +40,11 @@ describe('ForumNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const ForumNode = getByTestId('ForumNode')
+    const forumNode = getByTestId('ForumNode')
 
-    expect(ForumNode).toBeInTheDocument()
+    expect(forumNode).toBeInTheDocument()
 
-    fireEvent.click(ForumNode)
+    fireEvent.click(forumNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()

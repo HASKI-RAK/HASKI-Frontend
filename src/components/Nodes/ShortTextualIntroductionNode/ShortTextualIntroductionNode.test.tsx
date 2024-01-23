@@ -40,11 +40,11 @@ describe('ShortTextualIntroductionNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const ShortTextualIntroductionNode = getByTestId('shortTextualIntroductionNode')
+    const shortTextualIntroductionNode = getByTestId('shortTextualIntroductionNode')
 
-    expect(ShortTextualIntroductionNode).toBeInTheDocument()
+    expect(shortTextualIntroductionNode).toBeInTheDocument()
 
-    fireEvent.click(ShortTextualIntroductionNode)
+    fireEvent.click(shortTextualIntroductionNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()
@@ -80,11 +80,11 @@ describe('ShortTextualIntroductionNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const ShortTextualIntroductionNode = getByTestId('shortTextualIntroductionNode')
+    const shortTextualIntroductionNode = getByTestId('shortTextualIntroductionNode')
 
-    expect(ShortTextualIntroductionNode).toBeInTheDocument()
+    expect(shortTextualIntroductionNode).toBeInTheDocument()
 
-    fireEvent.click(ShortTextualIntroductionNode)
+    fireEvent.click(shortTextualIntroductionNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()

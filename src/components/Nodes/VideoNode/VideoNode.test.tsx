@@ -40,11 +40,11 @@ describe('VideoNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const VideoNode = getByTestId('videoNode')
+    const videoNode = getByTestId('videoNode')
 
-    expect(VideoNode).toBeInTheDocument()
+    expect(videoNode).toBeInTheDocument()
 
-    fireEvent.click(VideoNode)
+    fireEvent.click(videoNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()
@@ -80,11 +80,11 @@ describe('VideoNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const VideoNode = getByTestId('videoNode')
+    const videoNode = getByTestId('videoNode')
 
-    expect(VideoNode).toBeInTheDocument()
+    expect(videoNode).toBeInTheDocument()
 
-    fireEvent.click(VideoNode)
+    fireEvent.click(videoNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()

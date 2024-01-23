@@ -42,9 +42,9 @@ describe('ExerciseNode tests', () => {
     )
     const exerciseNode = getByTestId('exerciseNode')
 
-    expect(ExerciseNode).toBeInTheDocument()
+    expect(exerciseNode).toBeInTheDocument()
 
-    fireEvent.click(ExerciseNode)
+    fireEvent.click(exerciseNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()
@@ -80,11 +80,11 @@ describe('ExerciseNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const ExerciseNode = getByTestId('exerciseNode')
+    const exerciseNode = getByTestId('exerciseNode')
 
-    expect(ExerciseNode).toBeInTheDocument()
+    expect(exerciseNode).toBeInTheDocument()
 
-    fireEvent.click(ExerciseNode)
+    fireEvent.click(exerciseNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()

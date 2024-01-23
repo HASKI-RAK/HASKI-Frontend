@@ -40,11 +40,11 @@ describe('SummaryNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const SummaryNode = getByTestId('summaryNode')
+    const summaryNode = getByTestId('summaryNode')
 
-    expect(SummaryNode).toBeInTheDocument()
+    expect(summaryNode).toBeInTheDocument()
 
-    fireEvent.click(SummaryNode)
+    fireEvent.click(summaryNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()
@@ -80,11 +80,11 @@ describe('SummaryNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const SummaryNode = getByTestId('summaryNode')
+    const summaryNode = getByTestId('summaryNode')
 
-    expect(SummaryNode).toBeInTheDocument()
+    expect(summaryNode).toBeInTheDocument()
 
-    fireEvent.click(SummaryNode)
+    fireEvent.click(summaryNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()

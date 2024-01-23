@@ -40,11 +40,11 @@ describe('ApplicationExampleNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const forumNode = getByTestId('ApplicationExampleNode')
+    const applicationExampleNode = getByTestId('ApplicationExampleNode')
 
-    expect(ForumNode).toBeInTheDocument()
+    expect(applicationExampleNode).toBeInTheDocument()
 
-    fireEvent.click(ForumNode)
+    fireEvent.click(applicationExampleNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()
@@ -80,11 +80,11 @@ describe('ApplicationExampleNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const ForumNode = getByTestId('ApplicationExampleNode')
+    const applicationExampleNode = getByTestId('ApplicationExampleNode')
 
-    expect(ForumNode).toBeInTheDocument()
+    expect(applicationExampleNode).toBeInTheDocument()
 
-    fireEvent.click(ForumNode)
+    fireEvent.click(applicationExampleNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()
