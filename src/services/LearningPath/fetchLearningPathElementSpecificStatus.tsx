@@ -3,13 +3,18 @@ import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
 /*
-  * Fetches the status of a specific learning element for a student for a course
-  * @param {string} course_id - course id
-  * @param {string} studentId - student id
-  * @param {string} learningElementId - learning element id
-  * @returns {Promise<LearningPathElementStatus[]>} - returns a promise with the status
-  * of the learning element
-  * @throws {Error} - throws an error if course_id, studentId or learningElementId are not provided
+  * fetchLearningPathElementSpecificStatus function.
+  *
+  * @param course_id - course id
+  * @param studentId - student id
+  * @param learningElementId - learning element id
+  *
+  *@remarks
+  * Fetches the status of a specific learning element for a student for a course.
+  * Throws an error if course_id, studentId or learningElementId are not provided
+  *
+  * @returns - returns a promise with the status of the learning element
+  *
   * @category Services
  */
 
