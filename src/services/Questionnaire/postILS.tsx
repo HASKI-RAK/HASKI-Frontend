@@ -13,14 +13,19 @@ type PostILSProps = {
 }
 
 /*
-  * Posts the ILS for a student
-  * @param {string} studentId - student id
-  * @param {string} outputJson - output json
-  * @returns {Promise<ILS>} - returns a promise with the ILS
-  * @throws {Error} - throws an error if studentId or outputJson are not provided
+  * postILS function.
+  *
+  * @param studentId - student id
+  * @param outputJson - output json
+  *
+  * @remarks
+  * Posts the ILS for a student.
+  * Throws an error if studentId or outputJson are not provided.
+  *
+  * @returns - returns a promise with the ILS
+  *
   * @category Services
  */
-
 export const postILS = async ({ studentId, outputJson }: PostILSProps): Promise<ILS> => {
   return fetchData<ILS>(getConfig().BACKEND + `/lms/student/${studentId}/questionnaire/ils`, {
     method: 'POST',
