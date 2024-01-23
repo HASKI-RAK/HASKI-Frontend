@@ -18,7 +18,7 @@ import { fetchLearningPathElementStatus } from '@services'
  *
  * @interface
  */
-export default interface LearningPathElementStatusSlice {
+type LearningPathElementStatusSlice = {
   _learningPathElementStatus: Record<string, LearningPathElementStatus[]>
   getLearningPathElementStatus: LearningPathElementStatusReturn
   setLearningPathElementStatus: (
@@ -27,6 +27,8 @@ export default interface LearningPathElementStatusSlice {
     newData?: LearningPathElementStatus
   ) => Promise<LearningPathElementStatus[]>
 }
+
+export default LearningPathElementStatusSlice
 
 /*
  * getLearningPathElementStatus - Fetches all learning path element statuses
