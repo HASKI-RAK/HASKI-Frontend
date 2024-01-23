@@ -40,7 +40,7 @@ describe('ExplanationNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const ExplanationNode = getByTestId('explanationNode')
+    const explanationNode = getByTestId('explanationNode')
 
     expect(ExplanationNode).toBeInTheDocument()
 
