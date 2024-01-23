@@ -3,10 +3,11 @@ import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
 /*
-  * @param {string} studentId - student id
-  * @param {string} outputJson - output json
+  * @props studentId - student id
+  * @props outputJson - output json
+  * @interface
  */
-interface PostListKProps {
+type PostListKProps = {
   studentId: number
   outputJson: string
 }
