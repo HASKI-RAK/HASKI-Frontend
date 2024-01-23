@@ -1,12 +1,15 @@
 {
   "appGlobal.accept": "Accept",
+  "appGlobal.aschaffenburgUAS": "Aschaffenburg UAS",
   "appGlobal.back": "Back",
   "appGlobal.dataSendSuccessful": "Data sent successfully",
   "appGlobal.dataSendUnsuccessful": "Data could not be sent",
   "appGlobal.decline": "Decline",
   "appGlobal.help": "Help",
+  "appGlobal.imageSources": "Image sources:",
   "appGlobal.loading": "Loading...",
   "appGlobal.next": "Next",
+  "appGlobal.othRegensburg": "OTH Regensburg",
   "appGlobal.send": "Send",
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
@@ -1140,6 +1143,90 @@
   "pages.7": "7",
   "pages.8": "8",
   "pages.9": "9",
+  "pages.aboutus": "About us",
+  "pages.aboutus.interdisciplinaryBody": [
+    {
+      "header": "Learning elements",
+      "body": [
+        "Production of learning elements in the field of software engineering with a multi-stage review process",
+        "Conception of a literature-based category system for the typification of the learning elements"
+      ]
+    },
+    {
+      "header": "Learning Analytics",
+      "body": [
+        "Collection and analysis of learning analytics with persistence in a Learning Record Store (data lake)",
+        "Recording of student behavior through Moodle and frontend in the form of statements according to the xAPI standard",
+        "Creation and implementation of designs for student and teacher dashboards"
+      ]
+    },
+    {
+      "header": "Connection to Moodle",
+      "body": [
+        "Development of multiple Moodle Plugins (xAPI, Moodle Theme and H5P-Report Feature)",
+        "Communication with Moodle using the provided REST-API",
+        "LTI based communication between frontend and Moodle"
+      ]
+    },
+    {
+      "header": "Frontend and backend development",
+      "body": [
+        "React-frontend-development (modular development using components and pages)",
+        "Jest-frontend and Pytest-backend testing",
+        "Development of a CI/CD pipeline for frontend and backend in GitHub using SonarLint",
+        "Python-backend-development",
+        "Communication between frontend and backend using API endpoints with persistence in a Postgres database",
+        "Branch-focused development with review process on GitHub",
+        "Code based inline source documentation in the form of comments in frontend and backend"
+      ]
+    },
+    {
+      "header": "System conceptualization",
+      "body": [
+        "Theoretical preliminary conceptualization of an adaptive learning system",
+        "Modeling the individual level of knowledge using a rating system",
+        "Modeling student characteristics such as learning style and learning strategy",
+        "Literature research on adaptive learning systems, learning analytics, Knowledge Tracing, rating systems, large language models und natural language processing",
+        "Conception of a tool for the evaluation of free text tasks using large language models and natural language processing"
+      ]
+    },
+    {
+      "header": "Learning path generation",
+      "body": [
+        "Evaluation algorithms for various questionnaires (Index of Learning Styles - ILS and Learning Strategies in Studies, shortened - LIST-K)",
+        "Design, implementation and application of AI algorithms (e.g. ant colony algorithm and genetic algorithm) to generate individualized learning paths in a multidimensional hypercube",
+        "Implementation and application of literature-based algorithms based on the learning style (e.g. according to Graf et al. 2010)",
+        "Collaboration between frontend, backend and Moodle for the automatic generation of learning paths for students"
+      ]
+    },
+    {
+      "header": "Evaluation and exchange",
+      "body": [
+        "Planning and implementation of triangulated (quantitative and qualitative) evaluations of the frontend and learning elements",
+        "Elaboration of the findings in the form of peer-reviewed contributions at scientific conferences",
+        "Dissemination work (design of flyers, posters and roll-ups)",
+        "Attendance at pertinent and technically relevant (international) conferences",
+        "Internal and external exchange at workshops and network meetings"
+      ]
+    }
+  ],
+  "pages.aboutus.interdisciplinaryHeader": "Interdisciplinary work - an overview",
+  "pages.aboutus.introductionBody": "HASKI is a joint project of the three Bavarian universities OTH Regensburg, Aschaffenburg UAS & Kempten UAS and comprises over 20, lecturers, scientific assistants, student assistants and people involved in the administration.",
+  "pages.aboutus.introductionHeader": "Partcipants in the HASKI project",
+  "pages.aboutus.membersAschaffenburgBody": "Project Lead:\nProf. Dr.-Ing. Jörg Abke \n\nEmployees:\nProf. Dr. Galia Weidl, Isabell Hock, Michael Münch, Marc Normann, PhD. Iryna Sapsai, Yeimy Valencia \n\nFormer: \nDoris Rebitzer",
+  "pages.aboutus.membersAschaffenburgHeader": "Team Aschaffenburg UAS",
+  "pages.aboutus.membersKemptenBody": "Project Lead:\nProf. Dr. Georg Hagel\n\nEmployees:\nDimitri Bigler, David Fischer, Jim Haug, Kevin Lee, Julian Manz, Gesine Wagner\n\nStudent Assistents: \nMartyna Dorosewicz , Joel Scherer , Cedric Steiert \n\nFormer: \nJonathan Hilscher, Elena Gialamas (student assistant), Maximilian Jatzkowski (student assistant)",
+  "pages.aboutus.membersKemptenHeader": "Team Kempten UAS",
+  "pages.aboutus.membersRegensburgBody": "Project Lead:\nProf. Dr. Jürgen Mottok \n\nEmployees:\nDominik Bittner, Flemming Bugert, Timur Ezer, Miriam Flannery, Lisa Grabinger, Florian Hauser, Vamsi Krishna Nadimpalli, Simon Roehrl, Susanne Staufer",
+  "pages.aboutus.membersRegensburgHeader": "Team OTH Regensburg",
+  "pages.aboutus.quotesBody": [
+    {
+      "quote": "\"What is special about HASKI's adaptive learner model is that it adapts to the learner and not the other way around - as is usually the case. This puts the learner at the center of the learning process.\"",
+      "name": "Prof. Dr. Georg Hagel",
+      "description": "Project Lead, Kempten UAS"
+    }
+  ],
+  "pages.aboutus.quotesHeader": "Motivation",
   "pages.contact": "Contact",
   "pages.contact.error": "An error occurred while sending your feedback. Please try again later.",
   "pages.contact.success": "Your feedback has been sent successfully.",
@@ -1564,7 +1651,6 @@
   "pages.projectdescription.goalsHeader": "Goals of the HASKI project",
   "pages.projectdescription.imageSource-1": "Image by katemangostar on Freepik",
   "pages.projectdescription.imageSource-2": "Image by natanaelginting on Freepik",
-  "appGlobal.imageSources": "Image sources:",
   "pages.projectdescription.introductionBody": "HASKI stands for \"Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt\" (\"Higher education teaching: Adaptive, self-directed, AI-assisted\") and is funded by the Federal Ministry of Education and Research with a project duration until December 2025. HASKI is a collaborative project of three Bavarian universities: OTH Regensburg, Aschaffenburg UAS & Kempten UAS.",
   "pages.projectdescription.introductionHeader": "What is HASKI?",
   "pages.projectinformation": "Project Information",
@@ -1576,91 +1662,5 @@
   "tooltip.openSettings": "Open settings",
   "warning": "Warning",
   "warning.offline": "You are currently offline. Please check your internet connection.",
-  "warning.online": "You are online again.",
-  "appGlobal.aschaffenburgUAS": "Aschaffenburg UAS",
-  "appGlobal.othRegensburg": "OTH Regensburg",
-  "pages.aboutus.membersAschaffenburgHeader": "Team Aschaffenburg UAS",
-  "pages.aboutus.membersAschaffenburgBody": "Project Lead:\nProf. Dr.-Ing. Jörg Abke \n\nEmployees:\nProf. Dr. Galia Weidl, Isabell Hock, Michael Münch, Marc Normann, PhD. Iryna Sapsai, Yeimy Valencia \n\nFormer: \nDoris Rebitzer",
-  "pages.aboutus.membersRegensburgHeader": "Team OTH Regensburg",
-  "pages.aboutus.membersRegensburgBody": "Project Lead:\nProf. Dr. Jürgen Mottok \n\nEmployees:\nDominik Bittner, Flemming Bugert, Timur Ezer, Miriam Flannery, Lisa Grabinger, Florian Hauser, Vamsi Krishna Nadimpalli, Simon Roehrl, Susanne Staufer",
-  "pages.aboutus.membersKemptenHeader": "Team Kempten UAS",
-  "pages.aboutus.membersKemptenBody": "Project Lead:\nProf. Dr. Georg Hagel\n\nEmployees:\nDimitri Bigler, David Fischer, Jim Haug, Kevin Lee, Julian Manz, Gesine Wagner\n\nStudent Assistents: \nMartyna Dorosewicz , Joel Scherer , Cedric Steiert \n\nFormer: \nJonathan Hilscher, Elena Gialamas (student assistant), Maximilian Jatzkowski (student assistant)",
-  "pages.aboutus.interdisciplinaryHeader": "Interdisciplinary work - an overview",
-  "pages.aboutus": "About us",
-  "pages.aboutus.interdisciplinaryBody": [
-    {
-      "header": "Learning elements",
-      "body": [
-        "Production of learning elements in the field of software engineering with a multi-stage review process",
-        "Conception of a literature-based category system for the typification of the learning elements"
-      ]
-    },
-    {
-      "header": "Learning Analytics",
-      "body": [
-        "Collection and analysis of learning analytics with persistence in a Learning Record Store (data lake)",
-        "Recording of student behavior through Moodle and frontend in the form of statements according to the xAPI standard",
-        "Creation and implementation of designs for student and teacher dashboards"
-      ]
-    },
-    {
-      "header": "Connection to Moodle",
-      "body": [
-        "Development of multiple Moodle Plugins (xAPI, Moodle Theme and H5P-Report Feature)",
-        "Communication with Moodle using the provided REST-API",
-        "LTI based communication between frontend and Moodle"
-      ]
-    },
-    {
-      "header": "Frontend and backend development",
-      "body": [
-        "React-frontend-development (modular development using components and pages)",
-        "Jest-frontend and Pytest-backend testing",
-        "Development of a CI/CD pipeline for frontend and backend in GitHub using SonarLint",
-        "Python-backend-development",
-        "Communication between frontend and backend using API endpoints with persistence in a Postgres database",
-        "Branch-focused development with review process on GitHub",
-        "Code based inline source documentation in the form of comments in frontend and backend"
-      ]
-    },
-    {
-      "header": "System conceptualization",
-      "body": [
-        "Theoretical preliminary conceptualization of an adaptive learning system",
-        "Modeling the individual level of knowledge using a rating system",
-        "Modeling student characteristics such as learning style and learning strategy",
-        "Literature research on adaptive learning systems, learning analytics, Knowledge Tracing, rating systems, large language models und natural language processing",
-        "Conception of a tool for the evaluation of free text tasks using large language models and natural language processing"
-      ]
-    },
-    {
-      "header": "Learning path generation",
-      "body": [
-        "Evaluation algorithms for various questionnaires (Index of Learning Styles - ILS and Learning Strategies in Studies, shortened - LIST-K)",
-        "Design, implementation and application of AI algorithms (e.g. ant colony algorithm and genetic algorithm) to generate individualized learning paths in a multidimensional hypercube",
-        "Implementation and application of literature-based algorithms based on the learning style (e.g. according to Graf et al. 2010)",
-        "Collaboration between frontend, backend and Moodle for the automatic generation of learning paths for students"
-      ]
-    },
-    {
-      "header": "Evaluation and exchange",
-      "body": [
-        "Planning and implementation of triangulated (quantitative and qualitative) evaluations of the frontend and learning elements",
-        "Elaboration of the findings in the form of peer-reviewed contributions at scientific conferences",
-        "Dissemination work (design of flyers, posters and roll-ups)",
-        "Attendance at pertinent and technically relevant (international) conferences",
-        "Internal and external exchange at workshops and network meetings"
-      ]
-    }
-  ],
-  "pages.aboutus.introductionHeader": "Partcipants in the HASKI project",
-  "pages.aboutus.introductionBody": "HASKI is a joint project of the three Bavarian universities OTH Regensburg, Aschaffenburg UAS & Kempten UAS and comprises over 20, lecturers, scientific assistants, student assistants and people involved in the administration.",
-  "pages.aboutus.quotesHeader": "Motivation",
-  "pages.aboutus.quotesBody": [
-    {
-      "quote": "\"What is special about HASKI's adaptive learner model is that it adapts to the learner and not the other way around - as is usually the case. This puts the learner at the center of the learning process.\"",
-      "name": "Prof. Dr. Georg Hagel",
-      "description": "Project Lead, Kempten UAS"
-    }
-  ]
+  "warning.online": "You are online again."
 }
