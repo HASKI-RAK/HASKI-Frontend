@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Typography, Box, Stack } from '@common/components'
+import { Button, Card, CardContent, Typography, Box, Stack, Grid } from '@common/components'
 import { AuthContext } from '@services'
 import log from 'loglevel'
 import { useContext, useEffect } from 'react'
@@ -36,7 +36,7 @@ const Course = () => {
   }, [])
 
   return (
-    <Stack spacing={2} sx={{ ml: '1rem', mr: '1rem' }}>
+    <Stack spacing={2} sx={{ ml: '1rem', mr: '1rem', paddingLeft: '100px' }}>
       {loading ? (
         <Box>
           <Stack spacing={1}>
