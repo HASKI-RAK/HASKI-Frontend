@@ -232,7 +232,6 @@ describe('OpenQuestionnaire', () => {
     fireEvent.click(startButton)
 
     const nextButton = form.getByTestId('nextButtonILSQuestionnaire')
-    const backButton = form.getByTestId('backButtonILSQuestionnaire')
 
     for (let i = 0; i < 11; i++) {
       const RadioButton1 = form

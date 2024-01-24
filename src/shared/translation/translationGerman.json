@@ -1,12 +1,15 @@
 {
   "appGlobal.accept": "Akzeptieren",
+  "appGlobal.aschaffenburgUAS": "TH Aschaffenburg",
   "appGlobal.back": "Zurück",
   "appGlobal.dataSendSuccessful": "Daten wurden erfolgreich gesendet",
   "appGlobal.dataSendUnsuccessful": "Daten konnten nicht gesendet werden",
   "appGlobal.decline": "Ablehnen",
   "appGlobal.help": "Hilfe",
+  "appGlobal.imageSources": "Bildquellen:",
   "appGlobal.loading": "Lade...",
   "appGlobal.next": "Weiter",
+  "appGlobal.othRegensburg": "OTH Regensburg",
   "appGlobal.send": "Senden",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
@@ -1140,6 +1143,91 @@
   "pages.7": "7",
   "pages.8": "8",
   "pages.9": "9",
+  "pages.aboutus": "Über uns",
+  "pages.aboutus.interdisciplinaryBody": [
+    {
+      "header": "Lernelemente",
+      "body": [
+        "Produktion von Lernelementen im Bereich des Software Engineerings mit mehrstufigem Reviewprozess",
+        "Konzeption eines literaturbasierten Kategoriensystems zur Typisierung von Lernelementen"
+      ]
+    },
+    {
+      "header": "Lernanalyse",
+      "body": [
+        "Erhebung und Analyse von Learning Analytics mit Persistierung in einem Learning Record Store (Data Lake)",
+        "Erfassung von studentischem Verhalten auf Moodle und Frontend in Form von Statements entsprechend des xAPI-Standards",
+        "Entwerfen und implementieren von Designs für studentische und tutorielle Dashboards"
+      ]
+    },
+    {
+      "header": "Anbindung zu Moodle",
+      "body": [
+        "Entwicklung von mehreren Moodle-Plugins (xAPI, Moodle Theme und H5P-Report Feature)",
+        "Kommunikation mit Moodle mithilfe der zur Verfügung gestellten REST-API",
+        "LTI-basierte Kommunikation zwischen Frontend und Moodle"
+      ]
+    },
+    {
+      "header": "Frontend und Backend Entwicklung",
+      "body": [
+        "React-Frontend-Entwicklung (modulare Entwicklung durch Components und Pages)",
+        "Jest-Frontend Testing und Pytest-Backend Testing",
+        "Entwicklung einer CI/CD Pipeline für Frontend und Backend in GitHub mithilfe von SonarLint",
+        "Python-Backend-Entwicklung",
+        "Kommunikation von Frontend und Backend mithilfe von API-Endpunkten mit Persistierung in einer Postgres-Datenbank",
+        "Branch-fokussierte Entwicklung mit Reviewprozess auf GitHub",
+        "Codenahe, kommentarbasierte (inline source) Dokumentation im Frontend und Backend"
+      ]
+    },
+    {
+      "header": "Konzeptionierung des Systems",
+      "body": [
+        "Theoretische Vorkonzeptionierung eines adaptiven Lernsystems",
+        "Weiterentwicklung von reliablen, validierten und gekürzten Fragebogenversionen des ILS und des LIST-K mithilfe z.B. Faktorenanalyse, Exhaustive Feature Selection und Bayesschen Netzen",
+        "Modellierung des individuellen Wissensstandes mittels eines Rating Systems",
+        "Modellierung von studentischen Charakteristiken wie Lernstil und Lernstrategie",
+        "Literaturrecherche zu Adaptiven Lernsystemen, Learning Analytics, Knowledge Tracing, Rating Systems, Large Language Models und Natural Language Processing",
+        "Konzeption eines Tools zur Auswertung von Freitext-Aufgaben mithilfe von Large Language Models und Natural Language Processing"
+      ]
+    },
+    {
+      "header": "Lernpfadgenerierung",
+      "body": [
+        "Auswertungsalgorithmen für diverse Fragebögen (Index of Learning Styles - ILS und Lernstrategien im Studium, gekürzt – LIST-K)",
+        "Konzeption, Implementierung und Anwendung von KI-Algorithmen (bspw. Ameisenkolonie-Algorithmus und genetischer Algorithmus) zur Generierung von individualisierten Lernpfaden in einem multidimensionalen Hypercube",
+        "Implementierung und Anwendung von literaturbasierten Algorithmen auf Basis des Lernstils (z.B. nach Graf et al. 2010)",
+        "Zusammenarbeit von Frontend, Backend und Moodle zur automatischen Generierung von studentischen Lernpfaden"
+      ]
+    },
+    {
+      "header": "Auswertung und Austausch",
+      "body": [
+        "Planung und Durchführung von triangulierten (quantitativ und qualitativ) Evaluationen des Frontend und der Lernelemente",
+        "Ausarbeitung der Erkenntnisse in Form von peer-reviewten Beiträgen auf wissenschaftlichen Konferenzen",
+        "Disseminationsarbeit (Design von Flyern, Postern und Roll-Ups)",
+        "Besuch von einschlägigen und fachlich relevanten (internationalen) Konferenzen",
+        "Interner und externer Austausch auf Workshops und Verbundtreffen"
+      ]
+    }
+  ],
+  "pages.aboutus.interdisciplinaryHeader": "Interdisziplinäres Arbeiten – Ein Überblick",
+  "pages.aboutus.introductionBody": "HASKI ist ein Verbundprojekt der drei bayerischen Hochschulen OTH Regensburg, TH Aschaffenburg & HS Kempten und umfasst ein Team von über 20 ProfessorInnen, wissenschaftlichen MitarbeiterInnen, studentischen Hilfskräften und an der Verwaltung beteiligten Personen.",
+  "pages.aboutus.introductionHeader": "Wer ist HASKI?",
+  "pages.aboutus.membersAschaffenburgBody": "Projektleitung:\nProf. Dr.-Ing. Jörg Abke \n\nMitarbeitende:\nProf. Dr. Galia Weidl, Isabell Hock, Michael Münch, Marc Normann, PhD. Iryna Sapsai, Yeimy Valencia \n\nEhemalig: \nDoris Rebitzer",
+  "pages.aboutus.membersAschaffenburgHeader": "Team TH Aschaffenburg",
+  "pages.aboutus.membersKemptenBody": "Projektleitung:\nProf. Dr. Georg Hagel\n\nMitarbeitende:\nDimitri Bigler, David Fischer, Jim Haug, Kevin Lee, Julian Manz, Gesine Wagner\n\nStudentische Hilfskräfte: \nMartyna Dorosewicz , Joel Scherer , Cedric Steiert \n\nEhemalige: \nJonathan Hilscher, Elena Gialamas (studentische Hilfskraft), Maximilian Jatzkowski (studentische Hilfskraft)",
+  "pages.aboutus.membersKemptenHeader": "Team HS Kempten",
+  "pages.aboutus.membersRegensburgBody": "Projektleitung:\nProf. Dr. Jürgen Mottok \n\nMitarbeitende:\nDominik Bittner, Flemming Bugert, Timur Ezer, Miriam Flannery, Lisa Grabinger, Florian Hauser, Vamsi Krishna Nadimpalli, Simon Roehrl, Susanne Staufer",
+  "pages.aboutus.membersRegensburgHeader": "Team OTH Regensburg",
+  "pages.aboutus.quotesBody": [
+    {
+      "quote": "„Das Besondere am adaptiven Lernenden-Modell von HASKI ist, dass es sich den Lernenden anpasst und nicht umgekehrt – wie sonst üblich. Damit stellen wir die Lernenden in den Mittelpunkt des Lernprozesses.“",
+      "name": "Prof. Dr. Georg Hagel",
+      "description": "Projektleiter, Hochschule Kempten"
+    }
+  ],
+  "pages.aboutus.quotesHeader": "Motivation",
   "pages.contact": "Kontakt",
   "pages.contact.error": "Ihr Feedback konnte nicht versendet werden.",
   "pages.contact.success": "Ihr Feedback wurde erfolgreich versendet.",
@@ -1564,103 +1652,16 @@
   "pages.projectdescription.goalsHeader": "Ziele des HASKI Projekts",
   "pages.projectdescription.imageSource-1": "Bild von katemangostar auf Freepik",
   "pages.projectdescription.imageSource-2": "Bild von natanaelginting auf Freepik",
-  "appGlobal.imageSources": "Bildquellen: ",
   "pages.projectdescription.introductionBody": "HASKI steht für „Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt“ und wird gefördert durch das Bundesministerium für Bildung und Forschung mit einer Projektlaufzeit bis Dezember 2025. HASKI ist ein Verbundprojekt von drei bayerischen Hochschulen: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
   "pages.projectdescription.introductionHeader": "Was ist HASKI?",
   "pages.projectinformation": "Projektinformation",
   "pages.topic": "Thema",
   "success": "Erfolg",
+  "tooltip.completed": "Erledigt",
   "tooltip.openGlobalSettings": "Globale Einstellungen",
   "tooltip.openQuestionnaireResults": "Lerncharakteristik",
   "tooltip.openSettings": "Einstellungen",
   "warning": "Warnung",
   "warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
-  "warning.online": "Sie sind wieder online.",
-  "pages.aboutus": "Über uns",
-  "pages.aboutus.introductionHeader": "Wer ist HASKI?",
-  "pages.aboutus.introductionBody": "HASKI ist ein Verbundprojekt der drei bayerischen Hochschulen OTH Regensburg, TH Aschaffenburg & HS Kempten und umfasst ein Team von über 20 ProfessorInnen, wissenschaftlichen MitarbeiterInnen, studentischen Hilfskräften und an der Verwaltung beteiligten Personen.",
-  "pages.aboutus.quotesHeader": "Motivation",
-  "pages.aboutus.quotesBody": [
-    {
-      "quote": "„Das Besondere am adaptiven Lernenden-Modell von HASKI ist, dass es sich den Lernenden anpasst und nicht umgekehrt – wie sonst üblich. Damit stellen wir die Lernenden in den Mittelpunkt des Lernprozesses.“",
-      "name": "Prof. Dr. Georg Hagel",
-      "description": "Projektleiter, Hochschule Kempten"
-    }
-  ],
-  "pages.aboutus.membersRegensburgHeader": "Team OTH Regensburg",
-  "pages.aboutus.membersRegensburgBody": "Projektleitung:\nProf. Dr. Jürgen Mottok \n\nMitarbeitende:\nDominik Bittner, Flemming Bugert, Timur Ezer, Miriam Flannery, Lisa Grabinger, Florian Hauser, Vamsi Krishna Nadimpalli, Simon Roehrl, Susanne Staufer",
-  "pages.aboutus.membersAschaffenburgHeader": "Team TH Aschaffenburg",
-  "pages.aboutus.membersAschaffenburgBody": "Projektleitung:\nProf. Dr.-Ing. Jörg Abke \n\nMitarbeitende:\nProf. Dr. Galia Weidl, Isabell Hock, Michael Münch, Marc Normann, PhD. Iryna Sapsai, Yeimy Valencia \n\nEhemalig: \nDoris Rebitzer",
-  "pages.aboutus.membersKemptenHeader": "Team HS Kempten",
-  "pages.aboutus.membersKemptenBody": "Projektleitung:\nProf. Dr. Georg Hagel\n\nMitarbeitende:\nDimitri Bigler, David Fischer, Jim Haug, Kevin Lee, Julian Manz, Gesine Wagner\n\nStudentische Hilfskräfte: \nMartyna Dorosewicz , Joel Scherer , Cedric Steiert \n\nEhemalige: \nJonathan Hilscher, Elena Gialamas (studentische Hilfskraft), Maximilian Jatzkowski (studentische Hilfskraft)",
-  "pages.aboutus.interdisciplinaryHeader": "Interdisziplinäres Arbeiten – Ein Überblick",
-  "pages.aboutus.interdisciplinaryBody": [
-    {
-      "header": "Lernelemente",
-      "body": [
-        "Produktion von Lernelementen im Bereich des Software Engineerings mit mehrstufigem Reviewprozess",
-        "Konzeption eines literaturbasierten Kategoriensystems zur Typisierung von Lernelementen"
-      ]
-    },
-    {
-      "header": "Lernanalyse",
-      "body": [
-        "Erhebung und Analyse von Learning Analytics mit Persistierung in einem Learning Record Store (Data Lake)",
-        "Erfassung von studentischem Verhalten auf Moodle und Frontend in Form von Statements entsprechend des xAPI-Standards",
-        "Entwerfen und implementieren von Designs für studentische und tutorielle Dashboards"
-      ]
-    },
-    {
-      "header": "Anbindung zu Moodle",
-      "body": [
-        "Entwicklung von mehreren Moodle-Plugins (xAPI, Moodle Theme und H5P-Report Feature)",
-        "Kommunikation mit Moodle mithilfe der zur Verfügung gestellten REST-API",
-        "LTI-basierte Kommunikation zwischen Frontend und Moodle"
-      ]
-    },
-    {
-      "header": "Frontend und Backend Entwicklung",
-      "body": [
-        "React-Frontend-Entwicklung (modulare Entwicklung durch Components und Pages)",
-        "Jest-Frontend Testing und Pytest-Backend Testing",
-        "Entwicklung einer CI/CD Pipeline für Frontend und Backend in GitHub mithilfe von SonarLint",
-        "Python-Backend-Entwicklung",
-        "Kommunikation von Frontend und Backend mithilfe von API-Endpunkten mit Persistierung in einer Postgres-Datenbank",
-        "Branch-fokussierte Entwicklung mit Reviewprozess auf GitHub",
-        "Codenahe, kommentarbasierte (inline source) Dokumentation im Frontend und Backend"
-      ]
-    },
-    {
-      "header": "Konzeptionierung des Systems",
-      "body": [
-        "Theoretische Vorkonzeptionierung eines adaptiven Lernsystems",
-        "Weiterentwicklung von reliablen, validierten und gekürzten Fragebogenversionen des ILS und des LIST-K mithilfe z.B. Faktorenanalyse, Exhaustive Feature Selection und Bayesschen Netzen",
-        "Modellierung des individuellen Wissensstandes mittels eines Rating Systems",
-        "Modellierung von studentischen Charakteristiken wie Lernstil und Lernstrategie",
-        "Literaturrecherche zu Adaptiven Lernsystemen, Learning Analytics, Knowledge Tracing, Rating Systems, Large Language Models und Natural Language Processing",
-        "Konzeption eines Tools zur Auswertung von Freitext-Aufgaben mithilfe von Large Language Models und Natural Language Processing"
-      ]
-    },
-    {
-      "header": "Lernpfadgenerierung",
-      "body": [
-        "Auswertungsalgorithmen für diverse Fragebögen (Index of Learning Styles - ILS und Lernstrategien im Studium, gekürzt – LIST-K)",
-        "Konzeption, Implementierung und Anwendung von KI-Algorithmen (bspw. Ameisenkolonie-Algorithmus und genetischer Algorithmus) zur Generierung von individualisierten Lernpfaden in einem multidimensionalen Hypercube",
-        "Implementierung und Anwendung von literaturbasierten Algorithmen auf Basis des Lernstils (z.B. nach Graf et al. 2010)",
-        "Zusammenarbeit von Frontend, Backend und Moodle zur automatischen Generierung von studentischen Lernpfaden"
-      ]
-    },
-    {
-      "header": "Auswertung und Austausch",
-      "body": [
-        "Planung und Durchführung von triangulierten (quantitativ und qualitativ) Evaluationen des Frontend und der Lernelemente",
-        "Ausarbeitung der Erkenntnisse in Form von peer-reviewten Beiträgen auf wissenschaftlichen Konferenzen",
-        "Disseminationsarbeit (Design von Flyern, Postern und Roll-Ups)",
-        "Besuch von einschlägigen und fachlich relevanten (internationalen) Konferenzen",
-        "Interner und externer Austausch auf Workshops und Verbundtreffen"
-      ]
-    }
-  ],
-  "appGlobal.othRegensburg": "OTH Regensburg",
-  "appGlobal.aschaffenburgUAS": "TH Aschaffenburg"
+  "warning.online": "Sie sind wieder online."
 }

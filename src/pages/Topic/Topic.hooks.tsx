@@ -2,12 +2,13 @@ import { LearningPathLearningElementNode } from '@components'
 import { useState, useCallback, useMemo } from 'react'
 import { Node, Edge } from 'reactflow'
 import { Theme } from '@common/theme'
-import { LearningPathElement } from '@core'
+import { LearningPathElement, LearningPathElementStatus } from '@core'
 
 /**
  * @prop defaultUrl - The default url of a node
  * @prop defaultTitle - The default title of a node
  * @prop defaultIsOpen - The default bool value if a node is open
+ * @prop defaultLmsId - The default lms id of a node
  * @category Hooks
  * @interface
  */
@@ -15,16 +16,19 @@ export type useTopicHookParams = {
   defaultUrl?: string
   defaultTitle?: string
   defaultIsOpen?: boolean
+  defaultLmsId?: number
 }
 
 /**
  * @prop url - The url of a node
  * @prop title - The title of a node
+ * @prop lmsId - The lms id of a node
  * @prop isOpen - The bool value if a node is open
  * @prop handleClose - The function to close a node
  * @prop handleOpen - The function to open a node
  * @prop handleSetUrl - The function to set the url of a node
  * @prop handleSetTitle - The function to set the title of a node
+ * @prop handleSetLmsId - The function to set the lms id of a node
  * @prop mapNodes - The function to map the learning path to nodes and edges
  * @category Hooks
  * @interface
@@ -32,14 +36,17 @@ export type useTopicHookParams = {
 export type TopicHookReturn = {
   readonly url: string
   readonly title: string
+  readonly lmsId: number
   readonly isOpen: boolean
   readonly handleClose: () => void
   readonly handleOpen: () => void
   readonly handleSetUrl: (url: string) => void
   readonly handleSetTitle: (title: string) => void
+  readonly handleSetLmsId: (lmsId: number) => void
   readonly mapNodes: (
     learningPathData: LearningPathElement,
-    theme: Theme
+    theme: Theme,
+    learningPathStatus: LearningPathElementStatus[]
   ) => {
     nodes: Node[]
     edges: Edge[]
@@ -49,7 +56,7 @@ export type TopicHookReturn = {
 /**
  * useTopic hook.
  *
- * @param params - The default values for url, title and isOpen.
+ * @param params - The default values for url, title, isOpen and lmsId.
  *
  * @remarks
  * Hook for the Topic page logic.
@@ -61,12 +68,13 @@ export type TopicHookReturn = {
  */
 export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   // Default values
-  const { defaultUrl = '', defaultTitle = '', defaultIsOpen = false } = params ?? {}
+  const { defaultUrl = '', defaultTitle = '', defaultIsOpen = false, defaultLmsId = -1 } = params ?? {}
 
   // State data
   const [url, setUrl] = useState(defaultUrl)
   const [title, setTitle] = useState(defaultTitle)
   const [isOpen, setIsOpen] = useState(defaultIsOpen)
+  const [lmsId, setLmsId] = useState<number>(defaultLmsId)
 
   // Logic
   const handleOpen = useCallback(() => {
@@ -91,14 +99,23 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     [setTitle]
   )
 
+  const handleSetLmsId = useCallback(
+    (lmsId: number) => {
+      setLmsId(lmsId)
+    },
+    [setLmsId]
+  )
+
   const mapLearningPathToNodes = useCallback(
     (
       learningPath: LearningPathElement,
       theme: Theme,
       handleSetUrl: (url: string) => void,
       handleSetTitle: (title: string) => void,
+      handleSetLmsId: (lmsId: number) => void,
       handleOpen: () => void,
-      handleClose: () => void
+      handleClose: () => void,
+      learningPathStatus: LearningPathElementStatus[]
     ): Node[] => {
       // Sort learning path
       const sortedLearningPath = Array.from(learningPath.path).sort((a, b) => a.position - b.position)
@@ -140,8 +157,10 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           isRecommended: node.recommended,
           handleSetUrl: handleSetUrl,
           handleSetTitle: handleSetTitle,
+          handleSetLmsId: handleSetLmsId,
           handleOpen: handleOpen,
-          handleClose: handleClose
+          handleClose: handleClose,
+          isDone: learningPathStatus?.find((item) => item.cmid === node.learning_element.lms_id)?.state === 1
         }
         return {
           id: node.position.toString() + '-' + node.learning_element.lms_id,
@@ -185,8 +204,10 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           isRecommended: item.recommended,
           handleSetUrl: handleSetUrl,
           handleSetTitle: handleSetTitle,
+          handleSetLmsId: handleSetLmsId,
           handleOpen: handleOpen,
-          handleClose: handleClose
+          handleClose: handleClose,
+          isDone: learningPathStatus?.find((status) => status.cmid === item.learning_element.lms_id)?.state === 1
         }
 
         const getNodeYPos = () => {
@@ -250,15 +271,18 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     []
   )
 
+  // Calculate nodes their status and edges
   const mapNodes = useCallback(
-    (learningPathData: LearningPathElement, theme: Theme) => {
+    (learningPathData: LearningPathElement, theme: Theme, learningPathStatus: LearningPathElementStatus[]) => {
       const nodes = mapLearningPathToNodes(
         learningPathData,
         theme,
         handleSetUrl,
         handleSetTitle,
+        handleSetLmsId,
         handleOpen,
-        handleClose
+        handleClose,
+        learningPathStatus
       )
 
       // Id array of all nodes which types are not 'ÜB'
@@ -272,7 +296,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
 
       return { nodes, edges }
     },
-    [handleClose, handleOpen, handleSetTitle, handleSetUrl, mapLearningPathToNodes]
+    [handleClose, handleOpen, handleSetTitle, handleSetUrl, handleSetLmsId, mapLearningPathToNodes]
   )
 
   return useMemo(
@@ -280,13 +304,15 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       ({
         url,
         title,
+        lmsId,
         isOpen,
         handleClose,
         handleOpen,
         handleSetUrl,
         handleSetTitle,
+        handleSetLmsId,
         mapNodes
       } as const),
-    [url, title, isOpen, handleClose, handleOpen, handleSetUrl, handleSetTitle, mapNodes]
+    [url, title, lmsId, isOpen, handleClose, handleOpen, handleSetUrl, handleSetTitle, handleSetLmsId, mapNodes]
   )
 }
