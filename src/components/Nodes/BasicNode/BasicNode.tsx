@@ -1,33 +1,35 @@
 import { NodeWrapper, Paper, Typography, Tooltip } from '@common/components'
 import { LearningPathLearningElementNode } from '@components'
-import { Feedback, CheckBox } from '@common/icons'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { memo } from 'react'
-import { getConfig } from '@shared'
-import { useTheme } from '@common/hooks'
+import { Feedback, CheckBox } from '@common/icons'
 import { useTranslation } from 'react-i18next'
+import { getConfig } from '@shared'
+import { memo } from 'react'
 
-// TODO: Add comment
+/**
+ * @prop id - The id of the node.
+ * @prop children - The icon of the node.
+ * @prop {@link NodeProps<LearningPathLearningElementNode>} - The props of the node.
+ * @interface
+ */
 type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
   id?: string
   children?: JSX.Element
 }
 
-/** // TODO: Update comment
+/**
  * BasicNode component.
  *
- * @param props - Props containing the data of the node.
+ * @param props - Props containing the id, children and data of the node.
  *
  * @remarks
- * BasicNode presents a component that displays a node with a name.
+ * BasicNode represents a component that displays a node with a name.
  * It can be clicked to open a corresponding activity of the LMS.
  * BasicNode can't be used as a standalone component and must be rendered via ReactFlow.
  *
  * @category Components
  */
 const BasicNode = ({ id = 'basic-node', children = <Feedback sx={{ fontSize: 50 }} />, data }: BasicNodeProps) => {
-  // const theme = useTheme()
-
   const { t } = useTranslation()
   return (
     <NodeWrapper

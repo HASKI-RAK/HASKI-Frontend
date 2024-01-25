@@ -46,6 +46,7 @@ import {
 import { usePersistedStore, useStore } from '@store'
 import { Topic } from '@core'
 import log from 'loglevel'
+import LanguageIcon from '@mui/icons-material/Language'
 
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
@@ -310,6 +311,24 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           {/** Language dropdown */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <DropdownLanguage />
+          </Box>
+
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
+            <Tooltip title={t('appGlobal.language')}>
+              <IconButton onClick={() => {}}>
+                <Typography
+                  sx={{
+                    fontWeight: 'bold',
+                    position: 'absolute',
+                    padding: { left: '1.7rem', bottom: '1.7rem' }
+                  }}
+                  variant="body1"
+                  textAlign="center">
+                  {(localStorage.getItem('i18nextLng') as string).toUpperCase()}
+                </Typography>
+                <LanguageIcon />
+              </IconButton>
+            </Tooltip>
           </Box>
 
           {/** Questionnaire Results */}
