@@ -40,7 +40,7 @@ describe('VideoNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const videoNode = getByTestId('videoNode')
+    const videoNode = getByTestId('basicNode')
 
     expect(videoNode).toBeInTheDocument()
 
@@ -80,7 +80,7 @@ describe('VideoNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const videoNode = getByTestId('videoNode')
+    const videoNode = getByTestId('basicNode')
 
     expect(videoNode).toBeInTheDocument()
 

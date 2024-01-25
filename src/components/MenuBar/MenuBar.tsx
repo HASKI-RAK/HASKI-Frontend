@@ -313,6 +313,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             <DropdownLanguage />
           </Box>
 
+          {/**
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('appGlobal.language')}>
               <IconButton onClick={() => {}}>
@@ -330,6 +331,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               </IconButton>
             </Tooltip>
           </Box>
+          /*}
 
           {/** Questionnaire Results */}
           {isAuth && (

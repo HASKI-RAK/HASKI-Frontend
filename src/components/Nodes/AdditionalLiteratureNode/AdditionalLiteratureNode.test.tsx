@@ -40,7 +40,7 @@ describe('AdditionalLiteratureNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const additionalLiteratureNode = getByTestId('additionalLiteratureNode')
+    const additionalLiteratureNode = getByTestId('basicNode')
 
     expect(additionalLiteratureNode).toBeInTheDocument()
 
@@ -80,7 +80,7 @@ describe('AdditionalLiteratureNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const additionalLiteratureNode = getByTestId('additionalLiteratureNode')
+    const additionalLiteratureNode = getByTestId('basicNode')
 
     expect(additionalLiteratureNode).toBeInTheDocument()
 

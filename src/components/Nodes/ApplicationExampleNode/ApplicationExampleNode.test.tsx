@@ -40,7 +40,7 @@ describe('ApplicationExampleNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const applicationExampleNode = getByTestId('ApplicationExampleNode')
+    const applicationExampleNode = getByTestId('basicNode')
 
     expect(applicationExampleNode).toBeInTheDocument()
 
@@ -80,7 +80,7 @@ describe('ApplicationExampleNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const applicationExampleNode = getByTestId('ApplicationExampleNode')
+    const applicationExampleNode = getByTestId('basicNode')
 
     expect(applicationExampleNode).toBeInTheDocument()
 
