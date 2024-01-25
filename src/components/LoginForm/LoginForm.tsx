@@ -1,4 +1,4 @@
-import { Backdrop, Button, CircularProgress, Paper, Grid, Typography, Stack, Avatar } from '@common/components'
+import { Backdrop, Button, CircularProgress, Paper, Grid, Typography, Stack } from '@common/components'
 import { useLoginForm as _useLoginForm, LoginFormHookReturn } from './LoginForm.hooks'
 import { useTranslation } from 'react-i18next'
 
@@ -50,7 +50,8 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
               <Grid item display="flex" justifyContent="center" md={5}>
                 <Button onClick={onMoodleLogin} data-testid="moodle-login-button" variant="contained">
                   <img
-                    src="/LogoWhite.png"
+                    alt="Haski-logo-in-white"
+                    src="/LogoHaskiWhite.png"
                     style={{ width: '30px' }}
                     className="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
                   />
