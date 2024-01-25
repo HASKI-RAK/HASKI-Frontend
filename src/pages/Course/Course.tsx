@@ -1,13 +1,32 @@
 import { Button, Card, CardContent, Typography, Box, Grid } from '@common/components'
 import { AuthContext } from '@services'
 import log from 'loglevel'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { SkeletonList, useLearningPathTopic } from '@components'
+import { SkeletonList, useLearningPathElement, useLearningPathTopic } from '@components'
 import CircularProgress, {
   CircularProgressProps,
 } from '@mui/material/CircularProgress'
+import LinearProgress, {
+  LinearProgressProps,
+} from '@mui/material/LinearProgress'
+import { styled } from '@common/theme'
+import { linearProgressClasses } from '@mui/material'
+import { usePersistedStore, useStore } from '@store'
+import { LearningPathElementStatus } from '@core'
+
+const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
+  height: 7,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 3,
+  },
+}));
+
 
 
 function CircularProgressWithLabel(
@@ -37,6 +56,17 @@ function CircularProgressWithLabel(
   );
 }
 
+function LinearProgressWithLabel(props: LinearProgressProps & { value: number } & { text: string}) {
+  return (
+      <div>
+        <Typography sx={{ml: 90}} variant="body2" color="text.secondary">{`${
+          props.text
+        }%`}</Typography>
+        <LinearProgress variant="determinate" {...props} />
+      </div>
+  );
+}
+
 /**
  * # Course Page
  * Presents an overview of the course.
@@ -49,7 +79,11 @@ const Course = () => {
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
   const { courseId } = useParams() as { courseId: string }
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getLearningPathElement = useStore((state) => state.getLearningPathElement)
+  const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
 
+  const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
   const { loading, topics } = useLearningPathTopic(courseId)
 
   useEffect(() => {
@@ -101,12 +135,12 @@ const Course = () => {
                               alignItems="center">
                         <Typography variant="h5" sx={{ml:'4rem'}}>{topic.name}</Typography>
                         </Grid>
-                    <Grid container item md={1}
+                  {/*  <Grid container item md={1}
                           direction="row"
                           justifyContent="flex-end"
                           alignItems="center">
                         <CircularProgressWithLabel value={100} text={"10/10"} size={60} thickness={3}/>
-                    </Grid>
+                    </Grid>*/}
                   </Grid>
                   <Grid container item
                         direction="column"
@@ -125,6 +159,7 @@ const Course = () => {
                       </Button>
                     </Grid>
                 </CardContent>
+                <BorderLinearProgress value={80} text={"80/100"}/>
               </Card>
             )
           })}
