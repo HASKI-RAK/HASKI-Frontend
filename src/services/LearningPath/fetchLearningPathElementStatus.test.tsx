@@ -1,5 +1,5 @@
 import { getConfig } from '@shared'
-import { fetchLearningPathElement } from './fetchLearningPathElement'
+import { fetchLearningPathElementStatus } from './fetchLearningPathElementStatus'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -11,9 +11,9 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('fetchLearningPathElement has expected behaviour', () => {
-  it('should return the learning path element when the response is successful', async () => {
-    const expectedData = { hello: 'test' }
+describe('fetchLearningPathElementStatus has expected behaviour', () => {
+  it('should return the learning path element status when the response is successful', async () => {
+    const expectedData = { cmid: 1, status: 0, timecompleted: 0 }
     const mockResponse = {
       ok: true,
       json: jest.fn().mockResolvedValue(expectedData)
@@ -23,18 +23,13 @@ describe('fetchLearningPathElement has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const userId = 1
-    const lmsUserId = 1
     const studentId = 1
     const courseId = '2'
-    const topicId = '2'
 
-    const result = await fetchLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)
+    const result = await fetchLearningPathElementStatus(courseId, studentId)
 
     expect(fetch).toHaveBeenCalledWith(
-      `${
-        getConfig().BACKEND
-      }/user/${userId}/${lmsUserId}/student/${studentId}/course/${courseId}/topic/${topicId}/learningPath`,
+      `${getConfig().BACKEND}/lms/course/${courseId}/student/${studentId}/activitystatus`,
       {
         method: 'GET',
         credentials: 'include',
@@ -46,15 +41,12 @@ describe('fetchLearningPathElement has expected behaviour', () => {
     expect(result).toEqual(expectedData)
   })
 
-  it('should throw an error when courseId or topicId are missing', async () => {
-    const userId = 1
-    const lmsUserId = 1
+  it('should throw an error when courseId or studentId are missing', async () => {
     const studentId = 1
     const courseId = undefined // Set to null to simulate a missing value
-    const topicId = '2'
 
-    await expect(fetchLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)).rejects.toThrow(
-      'courseId and topicId are required'
+    await expect(fetchLearningPathElementStatus(courseId, studentId)).rejects.toThrow(
+      'courseId and student_id are required'
     )
   })
 
@@ -71,15 +63,10 @@ describe('fetchLearningPathElement has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const userId = 1
-    const lmsUserId = 1
     const studentId = 1
     const courseId = '2'
-    const topicId = '2'
 
-    await expect(fetchLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)).rejects.toThrow(
-      `${expectedMessage}`
-    )
+    await expect(fetchLearningPathElementStatus(courseId, studentId)).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
@@ -92,12 +79,9 @@ describe('fetchLearningPathElement has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const userId = 1
-    const lmsUserId = 1
     const studentId = 1
     const courseId = '2'
-    const topicId = '2'
 
-    await expect(fetchLearningPathElement(userId, lmsUserId, studentId, courseId, topicId)).rejects.toThrow('')
+    await expect(fetchLearningPathElementStatus(courseId, studentId)).rejects.toThrow('')
   })
 })

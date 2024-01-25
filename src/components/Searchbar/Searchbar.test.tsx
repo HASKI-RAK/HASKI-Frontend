@@ -1,4 +1,4 @@
-import { fireEvent, render, act } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Searchbar from './Searchbar'
 import '@testing-library/jest-dom'

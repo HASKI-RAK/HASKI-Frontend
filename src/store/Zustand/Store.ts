@@ -1,5 +1,8 @@
 import create from 'zustand'
 import LearningPathElementSlice, { createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
+import LearningPathElementStatusSlice, {
+  createLearningPathElementStatusSlice
+} from '../Slices/LearningPathElementStatusSlice'
 import UserSlice, { createUserSlice } from '../Slices/UserSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import CoursesSlice, { createCoursesSlice } from '../Slices/CoursesSlice'
@@ -7,9 +10,16 @@ import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/
 import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import log from 'loglevel'
 import { devtools, persist } from 'zustand/middleware'
+import LearningPathElementSpecificStatusSlice, {
+  createLearningPathElementSpecificStatusSlice
+} from '../Slices/LearningPathElementSpecificStatusSlice'
 
-export type StoreState = LearningPathElementSlice & CourseSlice & CoursesSlice & LearningPathTopicSlice
-export type PersistedStoreState = UserSlice & AuthSlice
+export type StoreState = LearningPathElementSlice &
+  CourseSlice &
+  CoursesSlice &
+  LearningPathTopicSlice &
+  LearningPathElementSpecificStatusSlice
+export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice
 
 export const resetters: (() => void)[] = []
 
@@ -17,7 +27,8 @@ export const useStore = create<StoreState>()((...a) => ({
   ...createLearningPathElementSlice(...a),
   ...createLearningPathTopicSlice(...a),
   ...createCourseSlice(...a),
-  ...createCoursesSlice(...a)
+  ...createCoursesSlice(...a),
+  ...createLearningPathElementSpecificStatusSlice(...a)
 }))
 
 export const usePersistedStore = create<PersistedStoreState>()(
@@ -25,6 +36,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
     persist(
       (...a) => ({
         ...createUserSlice(...a),
+        ...createLearningPathElementStatusSlice(...a),
         ...createAuthSlice(...a)
       }),
       {
@@ -32,6 +44,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
         // Here we can whitelist the keys we want to persist
         partialize: (state) => ({
           _user: state._user,
+          _learningPathElementStatus: state._learningPathElementStatus,
           expire: state.expire
         }),
         onRehydrateStorage: () => {

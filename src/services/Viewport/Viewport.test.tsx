@@ -1,6 +1,6 @@
 import { useViewport } from './Viewport.hooks'
 import '@testing-library/jest-dom'
-import { renderHook, act } from '@testing-library/react'
+import { renderHook } from '@testing-library/react'
 
 describe('Viewport hook tests', () => {
   test('General functionality of useViewport', () => {

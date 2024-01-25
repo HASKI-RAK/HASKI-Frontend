@@ -300,6 +300,54 @@ const mockDataServices: MockDataServices = {
       statusText: 'CREATED',
       url: 'http://fakedomain.com:5000/lms/student/1/questionnaire/listk'
     })
+  ),
+  fetchLearningPathElementStatus: jest.fn(() =>
+    Promise.resolve([
+      {
+        cmid: 1,
+        state: 0,
+        timecompleted: '1699967821'
+      },
+      {
+        cmid: 2,
+        state: 1,
+        timecompleted: '1699967821'
+      },
+      {
+        cmid: 3,
+        state: 1,
+        timecompleted: '1699967821'
+      },
+      {
+        cmid: 4,
+        state: 0,
+        timecompleted: '1699967821'
+      }
+    ])
+  ),
+  fetchLearningPathElementSpecificStatus: jest.fn(() =>
+    Promise.resolve([
+      {
+        cmid: 1,
+        state: 0,
+        timecompleted: '1699967821'
+      },
+      {
+        cmid: 2,
+        state: 1,
+        timecompleted: '1699967821'
+      },
+      {
+        cmid: 3,
+        state: 1,
+        timecompleted: '1699967821'
+      },
+      {
+        cmid: 4,
+        state: 0,
+        timecompleted: '1699967821'
+      }
+    ])
   )
 }
 /**

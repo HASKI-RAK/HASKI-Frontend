@@ -2,6 +2,21 @@ import { ILS, ILSReturn } from '@core'
 import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
+/*
+ * fetchILS function.
+ *
+ * @param userId - user id
+ * @param lmsUserId - lms user id
+ * @param studentId - student id
+ *
+ * @remarks
+ * Fetches the ILS for a student.
+ * Throws an error if userId, lmsUserId or studentId are not provided.
+ *
+ * @returns - returns a promise with the ILS
+ *
+ * @category Services
+ */
 export const fetchILS: ILSReturn = async (userId, lmsUserId, studentId) => {
   const originalData = await fetchData<ILS>(
     getConfig().BACKEND + `/user/${userId}/${lmsUserId}/student/${studentId}/learningStyle`,
