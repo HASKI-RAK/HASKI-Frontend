@@ -3,9 +3,9 @@ import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
 /*
-  * @props studentId - student id
-  * @props outputJson - output json
-  * @interface
+ * @props studentId - student id
+ * @props outputJson - output json
+ * @interface
  */
 type PostListKProps = {
   studentId: number
@@ -13,18 +13,18 @@ type PostListKProps = {
 }
 
 /*
-  * postListK function.
-  *
-  * @param studentId - student id
-  * @param outputJson - output json
-  *
-  * @remarks
-  * Posts the ListK for a student
-  * Throws an error if studentId or outputJson are not provided.
-  *
-  * @returns - returns a promise with the ListK.
-  *
-  * @category Services
+ * postListK function.
+ *
+ * @param studentId - student id
+ * @param outputJson - output json
+ *
+ * @remarks
+ * Posts the ListK for a student
+ * Throws an error if studentId or outputJson are not provided.
+ *
+ * @returns - returns a promise with the ListK.
+ *
+ * @category Services
  */
 
 export const postListK = async ({ studentId, outputJson }: PostListKProps): Promise<ListK> => {

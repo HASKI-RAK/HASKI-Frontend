@@ -3,21 +3,21 @@ import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
 
 /*
-  * fetchLearningPathElement function.
-  *
-  * @param userId - user id
-  * @param lmsUserId - lms user id
-  * @param studentId - student id
-  * @param courseId - course id
-  * @param topicId - topic id
-  *
-  * @remarks
-  * Fetches all learning elements for a student for a course and topic.
-  * Throws an error if courseId or topicId are not provided elements for a course and topic.
-  *
-  * @returns - returns a promise with all learning
-  *
-  * @category Services
+ * fetchLearningPathElement function.
+ *
+ * @param userId - user id
+ * @param lmsUserId - lms user id
+ * @param studentId - student id
+ * @param courseId - course id
+ * @param topicId - topic id
+ *
+ * @remarks
+ * Fetches all learning elements for a student for a course and topic.
+ * Throws an error if courseId or topicId are not provided elements for a course and topic.
+ *
+ * @returns - returns a promise with all learning
+ *
+ * @category Services
  */
 
 export const fetchLearningPathElement: LearningPathElementReturn = async (

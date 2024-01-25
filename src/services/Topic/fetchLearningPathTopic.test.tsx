@@ -50,9 +50,7 @@ describe('fetchLearningPathElement has expected behaviour', () => {
     const studentId = 1
     const courseId = undefined // Set to null to simulate a missing value
 
-    await expect(fetchLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow(
-      'courseId is required'
-    )
+    await expect(fetchLearningPathTopic(userId, lmsUserId, studentId, courseId)).rejects.toThrow('courseId is required')
   })
 
   it('should throw a specific error when the response has an error variable', async () => {

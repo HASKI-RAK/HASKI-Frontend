@@ -6,7 +6,7 @@ import { useLogin as _useLogin, LoginHookParams, LoginHookReturn } from './Login
 
 type LoginProps = {
   /**
-   * {@link useLogin | Login hook} to control both the submit on the page and the moodle login.
+   * {@link useLogin | Login hook} to control the moodle login.
    * @defaultValue {@link _useLogin}
    */
   useLogin?: (params: LoginHookParams) => LoginHookReturn
@@ -30,10 +30,10 @@ export const Login = ({ useLogin = _useLogin }: LoginProps) => {
   const nonce = searchParams.get('nonce') || undefined
 
   // Application logic hooks
-  const { onSubmit, onMoodleLogin } = useLogin({ setIsLoading, nonce })
+  const { onMoodleLogin } = useLogin({ setIsLoading, nonce })
 
   if (nonce) return <Skeleton />
-  else return <LoginForm onSubmit={onSubmit} isLoading={isLoading} moodleLogin onMoodleLogin={onMoodleLogin} />
+  else return <LoginForm isLoading={isLoading} onMoodleLogin={onMoodleLogin} />
 }
 
 export default Login
