@@ -7,7 +7,7 @@ import { getConfig } from '@shared'
 import { useTheme } from '@common/hooks'
 import { useTranslation } from 'react-i18next'
 
-/*
+/**
  * ApplicationExampleNode component.
  *
  * @param props - Props containing the data of the node.

@@ -7,7 +7,13 @@ import { getConfig } from '@shared'
 import { useTheme } from '@common/hooks'
 import { useTranslation } from 'react-i18next'
 
-/**
+// TODO: Add comment
+type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
+  id?: string
+  children?: JSX.Element
+}
+
+/** // TODO: Update comment
  * BasicNode component.
  *
  * @param props - Props containing the data of the node.
@@ -19,12 +25,13 @@ import { useTranslation } from 'react-i18next'
  *
  * @category Components
  */
-const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
-  const theme = useTheme()
+const BasicNode = ({ id = 'basic-node', children = <Feedback sx={{ fontSize: 50 }} />, data }: BasicNodeProps) => {
+  // const theme = useTheme()
+
   const { t } = useTranslation()
   return (
     <NodeWrapper
-      id="basic-node"
+      id={id}
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()
@@ -41,7 +48,7 @@ const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <Feedback sx={{ fontSize: 50 }} />
+        {children}
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}
@@ -56,8 +63,8 @@ const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
               position: 'absolute',
               top: -13,
               right: -13,
-              color: theme.palette.success.main,
-              background: theme.palette.common.white,
+              color: (theme) => theme.palette.success.main,
+              background: (theme) => theme.palette.common.white,
               borderRadius: '10%'
             }}
           />
