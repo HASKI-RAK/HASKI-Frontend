@@ -8,7 +8,7 @@ import log from 'loglevel'
 /**
  * @prop privacyPolicyCookie - The currently set cookie
  * @prop handleAccept - sets the cookie and displays a Snackbar
- * @prop checkUniverity - returns the university of the user
+ * @prop checkUniversity - returns the university of the user
  * @category Hooks
  * @interface
  */

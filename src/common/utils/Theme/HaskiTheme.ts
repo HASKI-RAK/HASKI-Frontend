@@ -47,6 +47,10 @@ export const HaskiTheme = createTheme({
       dark: defaultColors.primary[900],
       contrastText: defaultColors.black,
       light: defaultColors.black
+    },
+    success: {
+      main: '#5BBD5BFC',
+      dark: '#000000'
     }
 
     /*action: {
@@ -157,6 +161,23 @@ export const HaskiTheme = createTheme({
             border: defaultBehavior.border['default'],
             boxShadow: defaultBehavior.boxShadowSize['default'] + defaultColors.white,
             borderColor: defaultColors.white,
+            filter: 'var(--web-ui_button-filter-hover,brightness(1.1))'
+          },
+          '&:active': {
+            //transform: "translateY(4px) translateZ(0)",
+            boxShadow: 'unset'
+          }
+        },
+        //komplett gefüllter button aber in weiß
+        text: {
+          color: defaultColors.black,
+          backgroundColor: defaultColors.white,
+          boxShadow: defaultBehavior.boxShadowSize['default'] + defaultColors.black,
+          borderColor: defaultColors.black,
+          '&:hover': {
+            backgroundColor: defaultColors.white,
+            boxShadow: defaultBehavior.boxShadowSize['default'] + defaultColors.secondary[500],
+            borderColor: defaultColors.secondary[500],
             filter: 'var(--web-ui_button-filter-hover,brightness(1.1))'
           },
           '&:active': {

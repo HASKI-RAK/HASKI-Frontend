@@ -4,8 +4,10 @@ import { mockReactFlow } from '@mocks'
 import { createTheme } from '@common/theme'
 import Router, { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
-import { useTopic } from './Topic.hooks'
+import { useTopic, useTopicHookParams } from './Topic.hooks'
 import Topic from './Topic'
+import { LearningPathElementStatus } from '@core'
+
 const { AuthContext } = jest.requireActual('@services')
 
 const navigate = jest.fn()
@@ -103,16 +105,38 @@ describe('Topic Page', () => {
     })
   })
 
+  test('getLearningPathElementStatus failed', async () => {
+    const mockfetchLearningPathElementStatus = jest.fn(() =>
+      Promise.reject(new Error('fetchLearningPathElementStatus failed'))
+    )
+    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(mockfetchLearningPathElementStatus)
+
+    act(() => {
+      render(
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Topic />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      )
+    })
+    await waitFor(() => {
+      expect(mockfetchLearningPathElementStatus).toHaveBeenCalledTimes(1)
+    })
+  })
+
   test('General functionality of Topic hook', () => {
     const { result } = renderHook(() => useTopic())
     expect(result.current).toStrictEqual({
       url: '',
       title: '',
       isOpen: false,
+      lmsId: -1,
       handleClose: expect.any(Function),
       handleOpen: expect.any(Function),
       handleSetTitle: expect.any(Function),
       handleSetUrl: expect.any(Function),
+      handleSetLmsId: expect.any(Function),
       mapNodes: expect.any(Function)
     })
 
@@ -150,14 +174,14 @@ describe('Topic Page', () => {
           }
         },
         {
-          id: 1,
-          learning_element_id: 1,
+          id: 2,
+          learning_element_id: 2,
           learning_path_id: 1,
           recommended: true,
           position: 2,
           learning_element: {
-            id: 1,
-            lms_id: 1,
+            id: 2,
+            lms_id: 2,
             activity_type: '',
             classification: '',
             name: '',
@@ -168,7 +192,7 @@ describe('Topic Page', () => {
             student_learning_element: {
               id: 1,
               student_id: 1,
-              learning_element_id: 1,
+              learning_element_id: 2,
               done: false,
               done_at: ''
             }
@@ -177,7 +201,20 @@ describe('Topic Page', () => {
       ]
     }
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme)
+    const mockLearningElementStatus: LearningPathElementStatus[] = [
+      {
+        cmid: 1,
+        state: 0,
+        timecompleted: 1
+      },
+      {
+        cmid: 2,
+        state: 1,
+        timecompleted: 2
+      }
+    ]
+
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme, mockLearningElementStatus)
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -192,7 +229,9 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ''
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
           },
           position: {
             x: -225,
@@ -218,8 +257,10 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
-            lmsId: 1,
-            name: ''
+            lmsId: 2,
+            name: '',
+            isDone: true,
+            handleSetLmsId: expect.any(Function)
           },
           position: {
             x: -225,
@@ -253,6 +294,9 @@ describe('Topic Page', () => {
 
       result.current.handleSetUrl('testUrl')
       expect(result.current.url).toBe('')
+
+      result.current.handleSetLmsId(1)
+      expect(result.current.lmsId).toBe(-1)
     })
   })
 
@@ -266,7 +310,9 @@ describe('Topic Page', () => {
       handleOpen: expect.any(Function),
       handleSetTitle: expect.any(Function),
       handleSetUrl: expect.any(Function),
-      mapNodes: expect.any(Function)
+      mapNodes: expect.any(Function),
+      lmsId: -1,
+      handleSetLmsId: expect.any(Function)
     })
 
     const mockTheme = createTheme()
@@ -380,7 +426,20 @@ describe('Topic Page', () => {
       ]
     }
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme)
+    const mockLearningElementStatus: LearningPathElementStatus[] = [
+      {
+        cmid: 1,
+        state: 0,
+        timecompleted: 1
+      },
+      {
+        cmid: 2,
+        state: 1,
+        timecompleted: 2
+      }
+    ]
+
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme, mockLearningElementStatus)
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -393,7 +452,9 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ''
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
           },
           id: '1',
           position: {
@@ -437,7 +498,9 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ''
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
           },
           id: '2-1',
           position: {
@@ -464,7 +527,9 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ''
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
           },
           id: '3-1',
           position: {
@@ -491,7 +556,9 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ''
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
           },
           id: '5',
           position: {
@@ -540,6 +607,9 @@ describe('Topic Page', () => {
 
       result.current.handleSetUrl('testUrl')
       expect(result.current.url).toBe('')
+
+      result.current.handleSetLmsId(1)
+      expect(result.current.lmsId).toBe(-1)
     })
   })
 
@@ -553,7 +623,9 @@ describe('Topic Page', () => {
       handleOpen: expect.any(Function),
       handleSetTitle: expect.any(Function),
       handleSetUrl: expect.any(Function),
-      mapNodes: expect.any(Function)
+      mapNodes: expect.any(Function),
+      lmsId: -1,
+      handleSetLmsId: expect.any(Function)
     })
 
     const mockTheme = createTheme()
@@ -742,7 +814,20 @@ describe('Topic Page', () => {
       ]
     }
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme)
+    const mockLearningElementStatus: LearningPathElementStatus[] = [
+      {
+        cmid: 1,
+        state: 0,
+        timecompleted: 1
+      },
+      {
+        cmid: 2,
+        state: 1,
+        timecompleted: 2
+      }
+    ]
+
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme, mockLearningElementStatus)
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -755,7 +840,9 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ''
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
           },
           id: '1',
           position: {
@@ -799,7 +886,9 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ''
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
           },
           id: '2-1',
           position: {
@@ -826,7 +915,9 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ''
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
           },
           id: '3-1',
           position: {
@@ -853,7 +944,9 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ''
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
           },
           id: '4-1',
           position: {
@@ -880,7 +973,9 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ''
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
           },
           id: '5-1',
           position: {
@@ -907,7 +1002,9 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ''
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
           },
           id: '6-1',
           position: {
@@ -934,7 +1031,9 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
-            name: ''
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
           },
           id: '8',
           position: {
@@ -983,6 +1082,66 @@ describe('Topic Page', () => {
 
       result.current.handleSetUrl('testUrl')
       expect(result.current.url).toBe('')
+
+      result.current.handleSetLmsId(1)
+      expect(result.current.lmsId).toBe(-1)
+    })
+  })
+
+  test('IFrameModal can be closed', async () => {
+    const topicParams: useTopicHookParams = {
+      defaultUrl: 'hello',
+      defaultTitle: 'test',
+      defaultIsOpen: true,
+      defaultLmsId: 0
+    }
+
+    const { getByTestId, queryByTestId } = render(
+      <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Topic useTopic={() => useTopic(topicParams)} />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      getByTestId('IFrameModal-Close-Button').click()
+    })
+
+    await waitFor(() => {
+      expect(queryByTestId('IFrameModal-Close-Button')).not.toBeInTheDocument()
+    })
+  })
+
+  test('IFrameModal fetchLearningPathElementSpecificStatus fetching error while closing', async () => {
+    const mockfetchLearningPathElementSpecificStatus = jest.fn(() =>
+      Promise.reject(new Error('fetchLearningPathElementSpecificStatus failed'))
+    )
+    mockServices.fetchLearningPathElementSpecificStatus.mockImplementationOnce(
+      mockfetchLearningPathElementSpecificStatus
+    )
+
+    const topicParams: useTopicHookParams = {
+      defaultUrl: 'hello',
+      defaultTitle: 'test',
+      defaultIsOpen: true,
+      defaultLmsId: 0
+    }
+
+    const { getByTestId, queryByTestId } = render(
+      <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Topic useTopic={() => useTopic(topicParams)} />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      getByTestId('IFrameModal-Close-Button').click()
+    })
+
+    await waitFor(() => {
+      expect(queryByTestId('IFrameModal-Close-Button')).not.toBeInTheDocument()
     })
   })
 })

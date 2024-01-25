@@ -1,9 +1,11 @@
-import { NodeWrapper, Paper, Typography } from '@common/components'
-import { AssignmentInd } from '@common/icons'
+import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
+import { AssignmentInd, CheckBox } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
 import { getConfig } from '@shared'
+import { useTheme } from '@common/hooks'
+import { useTranslation } from 'react-i18next'
 
 /**
  * SelfAssessmentNode component.
@@ -18,6 +20,8 @@ import { getConfig } from '@shared'
  * @category Components
  */
 const SelfAssessmentNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
+  const theme = useTheme()
+  const { t } = useTranslation()
   return (
     <NodeWrapper
       id="self-assessment-node"
@@ -25,6 +29,7 @@ const SelfAssessmentNode = ({ data }: NodeProps<LearningPathLearningElementNode>
       onClick={() => {
         data.handleOpen()
         data.handleSetUrl(getConfig().MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
+        data.handleSetLmsId(data.lmsId)
       }}
       data-testid={'selfAssessmentNode'}>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
@@ -42,6 +47,22 @@ const SelfAssessmentNode = ({ data }: NodeProps<LearningPathLearningElementNode>
         {data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
+      {data.isDone && (
+        <Tooltip title={t('tooltip.completed')}>
+          <CheckBox
+            viewBox={'3 -3 24 24'}
+            sx={{
+              fontSize: 29,
+              position: 'absolute',
+              top: -13,
+              right: -13,
+              color: theme.palette.success.main,
+              background: theme.palette.common.white,
+              borderRadius: '10%'
+            }}
+          />
+        </Tooltip>
+      )}
     </NodeWrapper>
   )
 }

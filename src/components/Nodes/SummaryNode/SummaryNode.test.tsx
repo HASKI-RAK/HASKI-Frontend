@@ -10,39 +10,81 @@ describe('SummaryNode tests', () => {
     mockReactFlow()
   })
 
-  const mockData: LearningPathLearningElementNode = {
-    lmsId: 1,
-    name: 'testNode',
-    activityType: 'testType',
-    classification: 'ZF',
-    isRecommended: true,
-    handleSetUrl: jest.fn(),
-    handleSetTitle: jest.fn(),
-    handleOpen: jest.fn(),
-    handleClose: jest.fn()
-  }
-
-  const mockNode: Node = {
-    id: 'testId',
-    type: mockData.classification,
-    data: mockData,
-    position: {
-      x: 0,
-      y: 0
+  it('renders correctly and can be clicked, isDone is false', () => {
+    const mockData: LearningPathLearningElementNode = {
+      lmsId: 1,
+      name: 'testNode',
+      activityType: 'testType',
+      classification: 'ZF',
+      isRecommended: true,
+      handleSetUrl: jest.fn(),
+      handleSetTitle: jest.fn(),
+      handleOpen: jest.fn(),
+      handleClose: jest.fn(),
+      handleSetLmsId: jest.fn(),
+      isDone: false
     }
-  }
 
-  it('renders correctly and can be clicked', () => {
+    const mockNode: Node = {
+      id: 'testId',
+      type: mockData.classification,
+      data: mockData,
+      position: {
+        x: 0,
+        y: 0
+      }
+    }
+
     const { getByTestId } = render(
       <MemoryRouter>
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const SummaryNode = getByTestId('summaryNode')
+    const summaryNode = getByTestId('summaryNode')
 
-    expect(SummaryNode).toBeInTheDocument()
+    expect(summaryNode).toBeInTheDocument()
 
-    fireEvent.click(SummaryNode)
+    fireEvent.click(summaryNode)
+
+    expect(mockNode.data.handleOpen).toBeCalled()
+    expect(mockNode.data.handleSetUrl).toBeCalled()
+  })
+
+  it('renders correctly and can be clicked, isDone is true', () => {
+    const mockData: LearningPathLearningElementNode = {
+      lmsId: 1,
+      name: 'testNode',
+      activityType: 'testType',
+      classification: 'ZF',
+      isRecommended: true,
+      handleSetUrl: jest.fn(),
+      handleSetTitle: jest.fn(),
+      handleOpen: jest.fn(),
+      handleClose: jest.fn(),
+      handleSetLmsId: jest.fn(),
+      isDone: true
+    }
+
+    const mockNode: Node = {
+      id: 'testId',
+      type: mockData.classification,
+      data: mockData,
+      position: {
+        x: 0,
+        y: 0
+      }
+    }
+
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
+      </MemoryRouter>
+    )
+    const summaryNode = getByTestId('summaryNode')
+
+    expect(summaryNode).toBeInTheDocument()
+
+    fireEvent.click(summaryNode)
 
     expect(mockNode.data.handleOpen).toBeCalled()
     expect(mockNode.data.handleSetUrl).toBeCalled()

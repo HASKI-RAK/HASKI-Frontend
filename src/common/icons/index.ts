@@ -32,3 +32,4 @@ export { PlaylistAddCheckCircleOutlined } from './DefaultPlaylistAddCheckCircleO
 export { Search } from './DefaultSearch/DefaultSearch'
 export { Forum } from './DefaultForum/DefaultForum'
 export { Flag } from './DefaultFlag/DefaultFlag'
+export { CheckBox } from './DefaultCheckBox/DefaultCheckBox'
