@@ -36,7 +36,7 @@ const Course = () => {
   }, [])
 
   return (
-    <Stack spacing={2} sx={{ ml: '1rem', mr: '1rem', paddingLeft: '100px' }}>
+    <Stack spacing={2} sx={{ ml: '1rem', mr: '1rem', paddingLeft: '100px', maxWidth: '80%' }}>
       {loading ? (
         <Box>
           <Stack spacing={1}>
