@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Typography, Box, Stack } from '@common/components'
+import { Button, Card, CardContent, Typography, Box, Grid } from '@common/components'
 import { AuthContext } from '@services'
 import log from 'loglevel'
 import { useContext, useEffect } from 'react'
@@ -8,7 +8,7 @@ import { SkeletonList, useLearningPathTopic } from '@components'
 import CircularProgress, {
   CircularProgressProps,
 } from '@mui/material/CircularProgress'
-import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress'
+
 
 function CircularProgressWithLabel(
   props: CircularProgressProps & { value: number } & { text: string},
@@ -30,24 +30,8 @@ function CircularProgressWithLabel(
       >
         <Typography
           variant="caption"
-          component="div"
-          color="text.secondary"
+          color="text.primary"
         >{`${(props.text)}`}</Typography>
-      </Box>
-    </Box>
-  );
-}
-
-function LinearProgressWithLabel(props: LinearProgressProps & { value: number } & { text: string}) {
-  return (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <Box sx={{ width: '20%', mr: 1 }}>
-        <LinearProgress sx={{ml: 2}} variant="determinate" {...props} />
-      </Box>
-      <Box sx={{ minWidth: 35 }}>
-        <Typography variant="body2" color="text.secondary">{`${(
-          props.text
-        )}`}</Typography>
       </Box>
     </Box>
   );
@@ -83,41 +67,71 @@ const Course = () => {
   }, [])
 
   return (
-    <Stack spacing={2} sx={{ ml: '1rem', mr: '1rem' }}>
+    <>
       {loading ? (
-        <Box>
-          <Stack spacing={1}>
-            <SkeletonList />
-          </Stack>
+        <Box sx={{flewGrow: 1}}>
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center">
+            <Grid item xs zeroMinWidth>
+              <Box sx={{width: '30rem'}}>
+                <SkeletonList />
+              </Box>
+            </Grid>
+          </Grid>
         </Box>
       ) : (
         <>
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          >
           {topics.map((topic) => {
             return (
-              <Card key={topic.id}>
+              <Card key={topic.id} sx={{width: '50rem', mt:'1rem'}}>
                 <CardContent>
-                  <Typography variant="h5">{topic.name}</Typography>
-                  <Stack direction="row" spacing={2} alignItems="center">
-                  <Button
-                    id={topic.name.concat('-button').replaceAll(' ', '-')}
-                    variant="contained"
-                    data-testid={'Course-Card-Topic-' + topic.name}
-                    color="primary"
-                    onClick={() => {
-                      navigate('topic/' + topic.id)
-                    }}>
-                    {t('pages.course.topicButton')}
-                  </Button>
-
-                  </Stack>
+                  <Grid container spacing={1}>
+                        <Grid container item md={11}
+                              direction="row"
+                              justifyContent="center"
+                              alignItems="center">
+                        <Typography variant="h5" sx={{ml:'4rem'}}>{topic.name}</Typography>
+                        </Grid>
+                    <Grid container item md={1}
+                          direction="row"
+                          justifyContent="flex-end"
+                          alignItems="center">
+                        <CircularProgressWithLabel value={100} text={"10/10"} size={60} thickness={3}/>
+                    </Grid>
+                  </Grid>
+                  <Grid container item
+                        direction="column"
+                        justifyContent="center"
+                        alignItems="center">
+                      <Button
+                        id={topic.name.concat('-button').replaceAll(' ', '-')}
+                        sx={{ width: '15.625rem'}}
+                        variant="contained"
+                        data-testid={'Course-Card-Topic-' + topic.name}
+                        color="primary"
+                        onClick={() => {
+                          navigate('topic/' + topic.id)
+                        }}>
+                        {t('pages.course.topicButton')}
+                      </Button>
+                    </Grid>
                 </CardContent>
-                <LinearProgressWithLabel value={80} text={"6/10"} />
               </Card>
             )
           })}
+          </Grid>
         </>
       )}
-    </Stack>
+    </>
   )
 }
 
