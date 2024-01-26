@@ -121,8 +121,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       const sortedLearningPath = Array.from(learningPath.path).sort((a, b) => a.position - b.position)
 
       const solvingPositionForDuplicates = sortedLearningPath.map((item, index) => {
-        item.position = index + 1 // Generate position based on array index
-        return item
+        return { ...item, position: index + 1 } // Generate position based on array index
       })
 
       // Every exercise learning element
