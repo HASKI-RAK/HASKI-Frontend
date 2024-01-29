@@ -1,13 +1,15 @@
 import { Button, Card, CardContent, Typography, Box, Grid, Divider } from '@common/components'
-import { AuthContext } from '@services'
+import { AuthContext, SnackbarContext } from '@services'
 import log from 'loglevel'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SkeletonList, useLearningPathTopic } from '@components'
 import CircularProgress, {
   CircularProgressProps,
 } from '@mui/material/CircularProgress'
+import { LearningPathElementStatus, LearningPathLearningElement, Topic } from '@core'
+import { usePersistedStore, useStore } from '@store'
 
 
 function CircularProgressWithLabel(
@@ -34,7 +36,7 @@ function CircularProgressWithLabel(
         >{`${(props.text)}`}</Typography>
       </Box>
     </Box>
-  );
+  )
 }
 
 /**
@@ -49,7 +51,16 @@ const Course = () => {
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
   const { courseId } = useParams() as { courseId: string }
+  const { addSnackbar } = useContext(SnackbarContext)
 
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getLearningPathElement = useStore((state) => state.getLearningPathElement)
+  const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
+
+  const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>([])
+  const [learningElementStatusInTopic, setLearningElementStatusInTopic] = useState<Array<[LearningPathLearningElement[]]>>([])
+  const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
+  const [loadingTopicProgress, setLoadingTopicProgress] = useState<boolean>(true)
   const { loading, topics } = useLearningPathTopic(courseId)
 
   useEffect(() => {
@@ -57,14 +68,73 @@ const Course = () => {
       log.log('Course timeout')
       navigate('/login')
     }, 1000)
+
     if (authContext.isAuth) {
       clearTimeout(preventEndlessLoading)
+      const calculatedTopicProgressArray: number[][] = []
+      Promise.all(
+        topics.map((topic) => {
+          return getUser().then((user) => {
+            return getLearningPathElementStatus(courseId, user.lms_user_id)
+            .then((learningPathElementStatusData) => {
+              setLearningPathElementStatus(learningPathElementStatusData)
+              return getLearningPathElement(
+                user.settings.user_id,
+                user.lms_user_id,
+                user.id,
+                courseId,
+                topic.id.toString()
+              )
+              .then((learningPathElementData) => {
+                const oldArray = learningElementStatusInTopic
+                const newArray = oldArray.concat([learningPathElementData.path])
+                return newArray // Return the array for Promise.all
+              }).then((resultArray) => {
+
+                const smth = resultArray[0].map((learningElement) => {
+                        //console.log(learningElement)
+                        return learningElement.leanring_element_id
+                  })
+                //console.log(smth)
+
+                return [...calculatedTopicProgressArray, ...resultArray.map((result) => [1, result.length])]
+              })
+               .catch((error: string) => {
+                addSnackbar({
+                  message: error,
+                  severity: 'error',
+                  autoHideDuration: 3000,
+                })
+                return []
+              })
+            })
+             .catch((error: string) => {
+              addSnackbar({
+                message: error,
+                severity: 'error',
+                autoHideDuration: 3000,
+              })
+              return []
+            })
+          })
+        })
+      ).then((result) => {
+        // Handle results
+        const flattenedResult: number[][] = result.flat()
+        //console.log(flattenedResult)
+        setCalculatedTopicProgress(flattenedResult)
+        setLoadingTopicProgress(false)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
     }
 
     return () => {
       clearTimeout(preventEndlessLoading)
     }
-  }, [])
+  }, [authContext.isAuth, courseId, navigate, topics, getUser, getLearningPathElement, getLearningPathElementStatus, learningElementStatusInTopic])
+
 
   return (
     <>
@@ -90,7 +160,7 @@ const Course = () => {
             justifyContent="center"
             alignItems="center"
           >
-            {topics.map((topic) => {
+            {topics.map((topic, index) => {
               return (
                 <Card key={topic.id} sx={{width: '40rem', mt:'1rem'}}>
                   <CardContent>
@@ -130,7 +200,12 @@ const Course = () => {
                             direction="row"
                             justifyContent="flex-end"
                             alignItems="center">
-                        <CircularProgressWithLabel value={100} text={"10/10"} size={100} thickness={3}/>
+                        { loadingTopicProgress ? (
+                          <CircularProgressWithLabel value={0} text={"0/0"} size={100} thickness={3}/>
+                        ) : (
+                          <CircularProgressWithLabel value={50} text={calculatedTopicProgress[index]} size={100} thickness={3}/>
+                        )
+                        }
                       </Grid>
                     </Grid>
                   </CardContent>
