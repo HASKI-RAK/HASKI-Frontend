@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Typography, Box, Grid, Divider } from '@common/components'
+import { Button, Card, CardContent, Typography, Box, Grid } from '@common/components'
 import { AuthContext, SnackbarContext } from '@services'
 import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
@@ -8,9 +8,25 @@ import { SkeletonList, useLearningPathTopic } from '@components'
 import CircularProgress, {
   CircularProgressProps,
 } from '@mui/material/CircularProgress'
-import { LearningPathElementStatus, LearningPathLearningElement, Topic } from '@core'
+import { LearningPathLearningElement } from '@core'
+import LinearProgress, {
+  LinearProgressProps,
+} from '@mui/material/LinearProgress'
+import { styled } from '@common/theme'
+import { linearProgressClasses } from '@mui/material'
 import { usePersistedStore, useStore } from '@store'
+import { LearningPathElementStatus } from '@core'
 
+const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
+  height: 7,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 3,
+  },
+}))
 
 function CircularProgressWithLabel(
   props: CircularProgressProps & { value: number } & { text: string},
@@ -39,6 +55,18 @@ function CircularProgressWithLabel(
   )
 }
 
+function LinearProgressWithLabel(props: LinearProgressProps & { value: number } & { text: string}) {
+  return (
+    <div>
+      <Typography sx={{ml: 90}} variant="body2" color="text.secondary">{
+        props.text
+      }</Typography>
+      <LinearProgress variant="determinate" {...props} />
+    </div>
+  )
+}
+
+
 /**
  * # Course Page
  * Presents an overview of the course.
@@ -57,10 +85,9 @@ const Course = () => {
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
 
-  const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>([])
-  const [learningElementStatusInTopic, setLearningElementStatusInTopic] = useState<Array<[LearningPathLearningElement[]]>>([])
+  const [learningElementStatusInTopic, setLearningElementStatusInTopic] = useState<Array<LearningPathLearningElement[]>>([])
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
-  const [loadingTopicProgress, setLoadingTopicProgress] = useState<boolean>(true)
+  const [loadingTopicProgress, setLoadingTopicProgress] = useState<boolean>(false)
   const { loading, topics } = useLearningPathTopic(courseId)
 
   useEffect(() => {
@@ -77,7 +104,9 @@ const Course = () => {
           return getUser().then((user) => {
             return getLearningPathElementStatus(courseId, user.lms_user_id)
             .then((learningPathElementStatusData) => {
-              setLearningPathElementStatus(learningPathElementStatusData)
+              const onlyDone = learningPathElementStatusData.filter((learningPathElementStatus) => {
+                return learningPathElementStatus.state === 1
+              })
               return getLearningPathElement(
                 user.settings.user_id,
                 user.lms_user_id,
@@ -90,14 +119,17 @@ const Course = () => {
                 const newArray = oldArray.concat([learningPathElementData.path])
                 return newArray // Return the array for Promise.all
               }).then((resultArray) => {
-
                 const smth = resultArray[0].map((learningElement) => {
-                        //console.log(learningElement)
-                        return learningElement.leanring_element_id
-                  })
-                //console.log(smth)
+                  if (onlyDone.find((status) => status.cmid === learningElement.learning_element.lms_id)) {
+                    return true
+                  } else {
+                    return false
+                  }
+                })
 
-                return [...calculatedTopicProgressArray, ...resultArray.map((result) => [1, result.length])]
+                return [...calculatedTopicProgressArray, ...resultArray.map((result) => [smth.filter((stateDone) => {
+                  return stateDone === true
+                }).length, result.length])]
               })
                .catch((error: string) => {
                 addSnackbar({
@@ -121,9 +153,8 @@ const Course = () => {
       ).then((result) => {
         // Handle results
         const flattenedResult: number[][] = result.flat()
-        //console.log(flattenedResult)
         setCalculatedTopicProgress(flattenedResult)
-        setLoadingTopicProgress(false)
+        setLoadingTopicProgress(true)
       })
       .catch((error) => {
         console.error(error)
@@ -162,53 +193,43 @@ const Course = () => {
           >
             {topics.map((topic, index) => {
               return (
-                <Card key={topic.id} sx={{width: '40rem', mt:'1rem'}}>
+                <Card key={topic.id} sx={{width: '50rem', mt:'1rem'}}>
                   <CardContent>
-                    <Grid container item
-                          direction="row"
-                          justifyContent="flex-start"
-                          alignItems="center">
-                      <Grid container item md={8}
+                    <Grid container spacing={1}>
+                      <Grid container item md={11}
                             direction="row"
-                            justifyContent="flex-start"
+                            justifyContent="center"
                             alignItems="center">
-                        <Grid container item md={11}
-                              direction="row"
-                              justifyContent="flex-start"
-                              alignItems="center">
-                          <Typography variant="h5">{topic.name}</Typography>
-                        </Grid>
-                        <Grid container item
-                              direction="row"
-                              justifyContent="flex-start"
-                              alignItems="center">
-                          <Button
-                            id={topic.name.concat('-button').replaceAll(' ', '-')}
-                            sx={{ width: '15.625rem'}}
-                            variant="contained"
-                            data-testid={'Course-Card-Topic-' + topic.name}
-                            color="primary"
-                            onClick={() => {
-                              navigate('topic/' + topic.id)
-                            }}>
-                            {t('pages.course.topicButton')}
-                          </Button>
-                        </Grid>
-                      </Grid>
-                      <Divider orientation="vertical" variant="fullWidth" flexItem sx={{mr:'2rem'}}/>
-                      <Grid container item md={3}
-                            direction="row"
-                            justifyContent="flex-end"
-                            alignItems="center">
-                        { loadingTopicProgress ? (
-                          <CircularProgressWithLabel value={0} text={"0/0"} size={100} thickness={3}/>
-                        ) : (
-                          <CircularProgressWithLabel value={50} text={calculatedTopicProgress[index]} size={100} thickness={3}/>
-                        )
-                        }
+                        <Typography variant="h5" sx={{ml:'4rem'}}>{topic.name}</Typography>
                       </Grid>
                     </Grid>
+                    <Grid container item
+                          direction="column"
+                          justifyContent="center"
+                          alignItems="center">
+                      <Button
+                        id={topic.name.concat('-button').replaceAll(' ', '-')}
+                        sx={{ width: '15.625rem'}}
+                        variant="contained"
+                        data-testid={'Course-Card-Topic-' + topic.name}
+                        color="primary"
+                        onClick={() => {
+                          navigate('topic/' + topic.id)
+                        }}>
+                        {t('pages.course.topicButton')}
+                      </Button>
+                    </Grid>
                   </CardContent>
+                  {calculatedTopicProgress[index] ? (
+                    loadingTopicProgress ? (
+                      <BorderLinearProgress
+                        value={(calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100}
+                        text={calculatedTopicProgress[index][0] + "/" + calculatedTopicProgress[index][1]}
+                      />
+                    ) : (
+                      <BorderLinearProgress value={0} text={"0/100"} />
+                    )
+                  ) : <BorderLinearProgress value={0} text={"0/100"} />}
                 </Card>
               )
             })}
