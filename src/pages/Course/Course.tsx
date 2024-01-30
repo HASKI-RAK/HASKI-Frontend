@@ -10,6 +10,7 @@ import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgres
 import { styled, Theme } from '@common/theme'
 import { linearProgressClasses } from '@mui/material'
 import { usePersistedStore, useStore } from '@store'
+import BeenhereOutlinedIcon from '@mui/icons-material/BeenhereOutlined';
 
 /*
 import CircularProgress, {
@@ -46,7 +47,7 @@ function CircularProgressWithLabel(
 const LinearProgressWithLabel = (props: LinearProgressProps & { value: number } & { text: string }) => {
   return (
     <div>
-      <Typography sx={{ ml: 90 }} variant="body2" color="text.secondary">
+      <Typography sx={{ ml: '46rem' }} variant="body1" color="text.secondary">
         {props.text}
       </Typography>
       <LinearProgress variant="determinate" {...props} />
@@ -200,17 +201,19 @@ const Course = () => {
               return (
                 <Card key={topic.id} sx={{ width: '50rem', mt: '1rem' }}>
                   <CardContent>
-                    <Grid container spacing={1}>
-                      <Grid container item md={11} direction="row" justifyContent="center" alignItems="center">
-                        <Typography variant="h5" sx={{ ml: '4rem' }}>
-                          {topic.name}
-                        </Typography>
-                      </Grid>
+                    <Grid container item md={11} direction="column" justifyContent="center" alignItems="center">
+                      {calculatedTopicProgress[index] && (
+                        (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) == 1 &&
+                          <BeenhereOutlinedIcon sx={{ mt: '-1.06rem',ml: '45.5rem' }} color={"success"}/>
+                      )}
+                      <Typography variant="h5" sx={{ ml: '1rem' }}>
+                        {topic.name}
+                      </Typography>
                     </Grid>
                     <Grid container item direction="column" justifyContent="center" alignItems="center">
                       <Button
                         id={topic.name.concat('-button').replaceAll(' ', '-')}
-                        sx={{ width: '15.625rem' }}
+                        sx={{ width: '15.625rem', mt: '1.625rem' }}
                         variant="contained"
                         data-testid={'Course-Card-Topic-' + topic.name}
                         color="primary"
@@ -239,10 +242,10 @@ const Course = () => {
                         }
                       />
                     ) : (
-                      <BorderLinearProgress value={3} text={'loading...'} color={'info'} />
+                      <BorderLinearProgress value={3} text={'loading...'} color={'info'}/>
                     )
                   ) : (
-                    <BorderLinearProgress value={3} text={'loading...'} color={'info'} />
+                    <BorderLinearProgress value={3} text={'loading...'} color={'info'}/>
                   )}
                 </Card>
               )
