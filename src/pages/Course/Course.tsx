@@ -5,29 +5,19 @@ import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SkeletonList, useLearningPathTopic } from '@components'
-import CircularProgress, {
-  CircularProgressProps,
-} from '@mui/material/CircularProgress'
 import { LearningPathLearningElement } from '@core'
 import LinearProgress, {
   LinearProgressProps,
 } from '@mui/material/LinearProgress'
-import { styled } from '@common/theme'
+import { styled, Theme } from '@common/theme'
 import { linearProgressClasses } from '@mui/material'
 import { usePersistedStore, useStore } from '@store'
-import { LearningPathElementStatus } from '@core'
 
-const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
-  height: 7,
-  borderRadius: 5,
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 3,
-  },
-}))
 
+/*
+import CircularProgress, {
+  CircularProgressProps,
+} from '@mui/material/CircularProgress'
 function CircularProgressWithLabel(
   props: CircularProgressProps & { value: number } & { text: string},
 ) {
@@ -54,8 +44,9 @@ function CircularProgressWithLabel(
     </Box>
   )
 }
+*/
 
-function LinearProgressWithLabel(props: LinearProgressProps & { value: number } & { text: string}) {
+const LinearProgressWithLabel = (props: LinearProgressProps & { value: number } & { text: string}) => {
   return (
     <div>
       <Typography sx={{ml: 90}} variant="body2" color="text.secondary">{
@@ -66,6 +57,16 @@ function LinearProgressWithLabel(props: LinearProgressProps & { value: number } 
   )
 }
 
+const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
+  height: 7,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 3,
+  },
+}))
 
 /**
  * # Course Page
@@ -115,9 +116,7 @@ const Course = () => {
                 topic.id.toString()
               )
               .then((learningPathElementData) => {
-                const oldArray = learningElementStatusInTopic
-                const newArray = oldArray.concat([learningPathElementData.path])
-                return newArray // Return the array for Promise.all
+                return learningElementStatusInTopic.concat([learningPathElementData.path])
               }).then((resultArray) => {
                 const smth = resultArray[0].map((learningElement) => {
                   if (onlyDone.find((status) => status.cmid === learningElement.learning_element.lms_id)) {
@@ -223,13 +222,19 @@ const Course = () => {
                   {calculatedTopicProgress[index] ? (
                     loadingTopicProgress ? (
                       <BorderLinearProgress
-                        value={(calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100}
+                        value={((calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100)>1 ?
+                          ((calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100) : 3}
                         text={calculatedTopicProgress[index][0] + "/" + calculatedTopicProgress[index][1]}
+                        color={((calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100)==0 ?
+                          "error" :
+                          ((calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100) > 70
+                           ?
+                          "success" : "warning"}
                       />
                     ) : (
-                      <BorderLinearProgress value={0} text={"0/100"} />
+                      <BorderLinearProgress value={3} text={"loading..."} />
                     )
-                  ) : <BorderLinearProgress value={0} text={"0/100"} />}
+                  ) : <BorderLinearProgress value={3} text={"loading..."} />}
                 </Card>
               )
             })}
