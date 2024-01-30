@@ -93,7 +93,7 @@ export const Home = () => {
                         variant="contained"
                         color="primary"
                         sx={{
-                          mt: '1rem',
+                          mt: '1rem'
                         }}
                         onClick={() => {
                           navigate('/course/' + course.id)

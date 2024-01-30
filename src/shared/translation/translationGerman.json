@@ -479,6 +479,7 @@
     ]
   ],
   "components.LoginForm.login": "Anmelden",
+  "components.LoginForm.loginButton": "Anmelden",
   "components.LoginForm.orLoginWithMoodle": "oder mit Moodle anmelden",
   "components.LoginForm.password": "Passwort",
   "components.LoginForm.passwordError": "Bitte geben Sie ein gültiges Passwort ein",
@@ -486,7 +487,6 @@
   "components.LoginForm.title": "Willkommen bei HASKI",
   "components.LoginForm.username": "Benutzername",
   "components.LoginForm.usernameError": "Bitte geben Sie einen gültigen Benutzernamen ein",
-  "components.LoginForm.loginButton": "Anmelden",
   "components.Menubar.closeDialog": "Sind Sie sicher, dass Sie den Fragebogen schließen möchten? Nicht abgeschickte Antworten werden nicht gespeichert.",
   "components.MenuBar.profileLogin": "Einloggen",
   "components.MenuBar.profileLogout": "Ausloggen",

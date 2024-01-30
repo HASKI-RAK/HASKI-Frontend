@@ -6,13 +6,10 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SkeletonList, useLearningPathTopic } from '@components'
 import { LearningPathLearningElement } from '@core'
-import LinearProgress, {
-  LinearProgressProps,
-} from '@mui/material/LinearProgress'
+import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress'
 import { styled, Theme } from '@common/theme'
 import { linearProgressClasses } from '@mui/material'
 import { usePersistedStore, useStore } from '@store'
-
 
 /*
 import CircularProgress, {
@@ -46,12 +43,12 @@ function CircularProgressWithLabel(
 }
 */
 
-const LinearProgressWithLabel = (props: LinearProgressProps & { value: number } & { text: string}) => {
+const LinearProgressWithLabel = (props: LinearProgressProps & { value: number } & { text: string }) => {
   return (
     <div>
-      <Typography sx={{ml: 90}} variant="body2" color="text.secondary">{
-        props.text
-      }</Typography>
+      <Typography sx={{ ml: 90 }} variant="body2" color="text.secondary">
+        {props.text}
+      </Typography>
       <LinearProgress variant="determinate" {...props} />
     </div>
   )
@@ -61,11 +58,11 @@ const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
   height: 7,
   borderRadius: 5,
   [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800]
   },
   [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 3,
-  },
+    borderRadius: 3
+  }
 }))
 
 /**
@@ -86,7 +83,9 @@ const Course = () => {
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
 
-  const [learningElementStatusInTopic, setLearningElementStatusInTopic] = useState<Array<LearningPathLearningElement[]>>([])
+  const [learningElementStatusInTopic, setLearningElementStatusInTopic] = useState<
+    Array<LearningPathLearningElement[]>
+  >([])
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
   const [loadingTopicProgress, setLoadingTopicProgress] = useState<boolean>(false)
   const { loading, topics } = useLearningPathTopic(courseId)
@@ -104,79 +103,91 @@ const Course = () => {
         topics.map((topic) => {
           return getUser().then((user) => {
             return getLearningPathElementStatus(courseId, user.lms_user_id)
-            .then((learningPathElementStatusData) => {
-              const onlyDone = learningPathElementStatusData.filter((learningPathElementStatus) => {
-                return learningPathElementStatus.state === 1
-              })
-              return getLearningPathElement(
-                user.settings.user_id,
-                user.lms_user_id,
-                user.id,
-                courseId,
-                topic.id.toString()
-              )
-              .then((learningPathElementData) => {
-                return learningElementStatusInTopic.concat([learningPathElementData.path])
-              }).then((resultArray) => {
-                const smth = resultArray[0].map((learningElement) => {
-                  if (onlyDone.find((status) => status.cmid === learningElement.learning_element.lms_id)) {
-                    return true
-                  } else {
-                    return false
-                  }
+              .then((learningPathElementStatusData) => {
+                const onlyDone = learningPathElementStatusData.filter((learningPathElementStatus) => {
+                  return learningPathElementStatus.state === 1
                 })
+                return getLearningPathElement(
+                  user.settings.user_id,
+                  user.lms_user_id,
+                  user.id,
+                  courseId,
+                  topic.id.toString()
+                )
+                  .then((learningPathElementData) => {
+                    return learningElementStatusInTopic.concat([learningPathElementData.path])
+                  })
+                  .then((resultArray) => {
+                    const smth = resultArray[0].map((learningElement) => {
+                      if (onlyDone.find((status) => status.cmid === learningElement.learning_element.lms_id)) {
+                        return true
+                      } else {
+                        return false
+                      }
+                    })
 
-                return [...calculatedTopicProgressArray, ...resultArray.map((result) => [smth.filter((stateDone) => {
-                  return stateDone === true
-                }).length, result.length])]
+                    return [
+                      ...calculatedTopicProgressArray,
+                      ...resultArray.map((result) => [
+                        smth.filter((stateDone) => {
+                          return stateDone === true
+                        }).length,
+                        result.length
+                      ])
+                    ]
+                  })
+                  .catch((error: string) => {
+                    addSnackbar({
+                      message: error,
+                      severity: 'error',
+                      autoHideDuration: 3000
+                    })
+                    return []
+                  })
               })
-               .catch((error: string) => {
+              .catch((error: string) => {
                 addSnackbar({
                   message: error,
                   severity: 'error',
-                  autoHideDuration: 3000,
+                  autoHideDuration: 3000
                 })
                 return []
               })
-            })
-             .catch((error: string) => {
-              addSnackbar({
-                message: error,
-                severity: 'error',
-                autoHideDuration: 3000,
-              })
-              return []
-            })
           })
         })
-      ).then((result) => {
-        // Handle results
-        const flattenedResult: number[][] = result.flat()
-        setCalculatedTopicProgress(flattenedResult)
-        setLoadingTopicProgress(true)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+      )
+        .then((result) => {
+          // Handle results
+          const flattenedResult: number[][] = result.flat()
+          setCalculatedTopicProgress(flattenedResult)
+          setLoadingTopicProgress(true)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     }
 
     return () => {
       clearTimeout(preventEndlessLoading)
     }
-  }, [authContext.isAuth, courseId, navigate, topics, getUser, getLearningPathElement, getLearningPathElementStatus, learningElementStatusInTopic])
-
+  }, [
+    authContext.isAuth,
+    courseId,
+    navigate,
+    topics,
+    getUser,
+    getLearningPathElement,
+    getLearningPathElementStatus,
+    learningElementStatusInTopic
+  ])
 
   return (
     <>
       {loading ? (
-        <Box sx={{flewGrow: 1}}>
-          <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center">
+        <Box sx={{ flewGrow: 1 }}>
+          <Grid container direction="column" justifyContent="center" alignItems="center">
             <Grid item xs zeroMinWidth>
-              <Box sx={{width: '30rem'}}>
+              <Box sx={{ width: '30rem' }}>
                 <SkeletonList />
               </Box>
             </Grid>
@@ -184,31 +195,22 @@ const Course = () => {
         </Box>
       ) : (
         <>
-          <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-          >
+          <Grid container direction="column" justifyContent="center" alignItems="center">
             {topics.map((topic, index) => {
               return (
-                <Card key={topic.id} sx={{width: '50rem', mt:'1rem'}}>
+                <Card key={topic.id} sx={{ width: '50rem', mt: '1rem' }}>
                   <CardContent>
                     <Grid container spacing={1}>
-                      <Grid container item md={11}
-                            direction="row"
-                            justifyContent="center"
-                            alignItems="center">
-                        <Typography variant="h5" sx={{ml:'4rem'}}>{topic.name}</Typography>
+                      <Grid container item md={11} direction="row" justifyContent="center" alignItems="center">
+                        <Typography variant="h5" sx={{ ml: '4rem' }}>
+                          {topic.name}
+                        </Typography>
                       </Grid>
                     </Grid>
-                    <Grid container item
-                          direction="column"
-                          justifyContent="center"
-                          alignItems="center">
+                    <Grid container item direction="column" justifyContent="center" alignItems="center">
                       <Button
                         id={topic.name.concat('-button').replaceAll(' ', '-')}
-                        sx={{ width: '15.625rem'}}
+                        sx={{ width: '15.625rem' }}
                         variant="contained"
                         data-testid={'Course-Card-Topic-' + topic.name}
                         color="primary"
@@ -222,19 +224,26 @@ const Course = () => {
                   {calculatedTopicProgress[index] ? (
                     loadingTopicProgress ? (
                       <BorderLinearProgress
-                        value={((calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100)>1 ?
-                          ((calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100) : 3}
-                        text={calculatedTopicProgress[index][0] + "/" + calculatedTopicProgress[index][1]}
-                        color={((calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100)==0 ?
-                          "error" :
-                          ((calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100) > 70
-                           ?
-                          "success" : "warning"}
+                        value={
+                          (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100 > 1
+                            ? (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100
+                            : 3
+                        }
+                        text={calculatedTopicProgress[index][0] + '/' + calculatedTopicProgress[index][1]}
+                        color={
+                          (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100 == 0
+                            ? 'error'
+                            : (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100 > 70
+                            ? 'success'
+                            : 'warning'
+                        }
                       />
                     ) : (
-                      <BorderLinearProgress value={3} text={"loading..."} />
+                      <BorderLinearProgress value={3} text={'loading...'} color={'info'} />
                     )
-                  ) : <BorderLinearProgress value={3} text={"loading..."} />}
+                  ) : (
+                    <BorderLinearProgress value={3} text={'loading...'} color={'info'} />
+                  )}
                 </Card>
               )
             })}
