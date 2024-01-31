@@ -46,15 +46,17 @@ function CircularProgressWithLabel(
 }
 */
 
-const LinearProgressWithLabel = (props: LinearProgressProps & { value: number } & { text: string } & { textPosition: string}) => {
+const LinearProgressWithLabel = (
+  props: LinearProgressProps & { value: number } & { text: string } & { textPosition: string }
+) => {
   return (
     <div>
-      <Tooltip title={"Completed learning elements"}>
-      <Typography sx={{ ml: props.textPosition, mr: '0.5rem' }} variant="body1" color="text.secondary">
-        {'Learning progress: ' + props.text}
-      </Typography>
+      <Tooltip title={'Completed learning elements'}>
+        <Typography sx={{ ml: props.textPosition, mr: '0.5rem' }} variant="body1" color="text.secondary">
+          {'Learning progress: ' + props.text}
+        </Typography>
       </Tooltip>
-      <LinearProgress variant="determinate" {...props} sx={{ml: '-4rem'}} />
+      <LinearProgress variant="determinate" {...props} sx={{ ml: '-4rem' }} />
     </div>
   )
 }
@@ -71,23 +73,23 @@ const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
 }))
 
 const calculateTopicProgress = (learningElementProgressTopics: number[][], index: number) => {
-  return(
-  <BorderLinearProgress
-    value={
-      (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100 > 1
-        ? (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
-        : 6
-    }
-    text={learningElementProgressTopics[index][0] + '/' + learningElementProgressTopics[index][1]}
-    color={
-      (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100 == 0
-        ? 'error'
-        : (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100 > 70
+  return (
+    <BorderLinearProgress
+      value={
+        (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100 > 1
+          ? (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
+          : 6
+      }
+      text={learningElementProgressTopics[index][0] + '/' + learningElementProgressTopics[index][1]}
+      color={
+        (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100 == 0
+          ? 'error'
+          : (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100 > 70
           ? 'success'
           : 'warning'
-    }
-    textPosition={'34rem'}
-  />
+      }
+      textPosition={'34rem'}
+    />
   )
 }
 
@@ -109,9 +111,7 @@ const Course = () => {
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
 
-  const [learningElementStatusInTopic] = useState<
-    Array<LearningPathLearningElement[]>
-  >([])
+  const [learningElementStatusInTopic] = useState<Array<LearningPathLearningElement[]>>([])
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
   const [loadingTopicProgress, setLoadingTopicProgress] = useState<boolean>(false)
   const { loading, topics } = useLearningPathTopic(courseId)
@@ -220,53 +220,51 @@ const Course = () => {
           </Grid>
         </Box>
       ) : (
-          <Grid container direction="column" justifyContent="center" alignItems="center">
-            {topics.map((topic, index) => {
-              return (
-                <Card key={topic.id} sx={{ width: '50rem', mt: '1rem' }}>
-                  <CardContent>
-                    <Grid container direction="column" justifyContent="center" alignItems="center">
-                      <Grid item md={1}>
-                      {calculatedTopicProgress[index] && (
-                        (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) == 1 &&
-                          <CheckBox sx={{ mt: '-0.8rem',ml: '47rem', fontSize: 29,}} color={"success"}/>
-                      )}
-                      </Grid>
-                      <Grid item md={11}>
-                      <Typography variant="h5">
-                        {topic.name}
-                      </Typography>
-                      </Grid>
+        <Grid container direction="column" justifyContent="center" alignItems="center">
+          {topics.map((topic, index) => {
+            return (
+              <Card key={topic.id} sx={{ width: '50rem', mt: '1rem' }}>
+                <CardContent>
+                  <Grid container direction="column" justifyContent="center" alignItems="center">
+                    <Grid item md={1}>
+                      {calculatedTopicProgress[index] &&
+                        calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1] == 1 && (
+                          <CheckBox sx={{ mt: '-0.8rem', ml: '47rem', fontSize: 29 }} color={'success'} />
+                        )}
                     </Grid>
-                    <Grid container item direction="column" justifyContent="center" alignItems="center">
-                      <Button
-                        id={topic.name.concat('-button').replaceAll(' ', '-')}
-                        sx={{ width: '15.625rem', mt: '1.625rem' }}
-                        variant="contained"
-                        data-testid={'Course-Card-Topic-' + topic.name}
-                        color="primary"
-                        onClick={() => {
-                          navigate('topic/' + topic.id)
-                        }}>
-                        {t('pages.course.topicButton')}
-                      </Button>
+                    <Grid item md={11}>
+                      <Typography variant="h5">{topic.name}</Typography>
                     </Grid>
-                  </CardContent>
-                  <Grid container item direction="row" justifyContent="flex-end" alignItems="flex-end">
+                  </Grid>
+                  <Grid container item direction="column" justifyContent="center" alignItems="center">
+                    <Button
+                      id={topic.name.concat('-button').replaceAll(' ', '-')}
+                      sx={{ width: '15.625rem', mt: '1.625rem' }}
+                      variant="contained"
+                      data-testid={'Course-Card-Topic-' + topic.name}
+                      color="primary"
+                      onClick={() => {
+                        navigate('topic/' + topic.id)
+                      }}>
+                      {t('pages.course.topicButton')}
+                    </Button>
+                  </Grid>
+                </CardContent>
+                <Grid container item direction="row" justifyContent="flex-end" alignItems="flex-end">
                   {calculatedTopicProgress[index] ? (
                     loadingTopicProgress ? (
                       calculateTopicProgress(calculatedTopicProgress, index)
                     ) : (
-                      <BorderLinearProgress value={10} text={'loading...'} color={'info'} textPosition={'29rem'}/>
+                      <BorderLinearProgress value={10} text={'loading...'} color={'info'} textPosition={'29rem'} />
                     )
                   ) : (
-                    <BorderLinearProgress value={10} text={'loading...'} color={'info'} textPosition={'29rem'}/>
+                    <BorderLinearProgress value={10} text={'loading...'} color={'info'} textPosition={'29rem'} />
                   )}
-                  </Grid>
-                </Card>
-              )
-            })}
-          </Grid>
+                </Grid>
+              </Card>
+            )
+          })}
+        </Grid>
       )}
     </>
   )
