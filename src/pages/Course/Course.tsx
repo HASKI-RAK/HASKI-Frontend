@@ -70,6 +70,27 @@ const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
   }
 }))
 
+const calculateTopicProgress = (learningElementProgressTopics: number[][], index: number) => {
+  return(
+  <BorderLinearProgress
+    value={
+      (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100 > 1
+        ? (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
+        : 6
+    }
+    text={learningElementProgressTopics[index][0] + '/' + learningElementProgressTopics[index][1]}
+    color={
+      (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100 == 0
+        ? 'error'
+        : (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100 > 70
+          ? 'success'
+          : 'warning'
+    }
+    textPosition={'34rem'}
+  />
+  )
+}
+
 /**
  * # Course Page
  * Presents an overview of the course.
@@ -168,7 +189,7 @@ const Course = () => {
           setLoadingTopicProgress(true)
         })
         .catch((error) => {
-          console.error(error)
+          log.error(error)
         })
     }
 
@@ -234,22 +255,7 @@ const Course = () => {
                   <Grid container item direction="row" justifyContent="flex-end" alignItems="flex-end">
                   {calculatedTopicProgress[index] ? (
                     loadingTopicProgress ? (
-                      <BorderLinearProgress
-                        value={
-                          (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100 > 1
-                            ? (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100
-                            : 6
-                        }
-                        text={calculatedTopicProgress[index][0] + '/' + calculatedTopicProgress[index][1]}
-                        color={
-                          (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100 == 0
-                            ? 'error'
-                            : (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100 > 70
-                            ? 'success'
-                            : 'warning'
-                        }
-                        textPosition={'34rem'}
-                      />
+                      calculateTopicProgress(calculatedTopicProgress, index)
                     ) : (
                       <BorderLinearProgress value={10} text={'loading...'} color={'info'} textPosition={'29rem'}/>
                     )
