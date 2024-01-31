@@ -20,7 +20,7 @@ const showCurrentBreadcrump = (
       key={path}
       underline="hover"
       component={index === location.pathname.split('/').length - 1 ? 'span' : 'button'}
-      color={index === location.pathname.split('/').length - 1 ? 'text.primary' : 'inherit'}
+      color={index === location.pathname.split('/').length - 1 ? 'inherit' : 'text.primary'}
       onClick={() => {
         navigate(
           location.pathname
