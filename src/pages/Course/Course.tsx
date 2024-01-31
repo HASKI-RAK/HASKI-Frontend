@@ -1,102 +1,17 @@
-import { Button, Card, CardContent, Typography, Box, Grid, Tooltip } from '@common/components'
+import { Button, Card, CardContent, Typography, Box, Grid } from '@common/components'
 import { AuthContext, SnackbarContext } from '@services'
 import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SkeletonList, useLearningPathTopic } from '@components'
-import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress'
-import { styled } from '@common/theme'
-import { linearProgressClasses } from '@mui/material'
 import { usePersistedStore, useStore } from '@store'
 import { CheckBox } from '@common/icons'
+import { useCourse as _useCourse, CourseHookReturn } from './Course.hooks'
 
-/*
-Another possibility to show the progress of the course in a circle
-
-import CircularProgress, {
-  CircularProgressProps,
-} from '@mui/material/CircularProgress'
-function CircularProgressWithLabel(
-  props: CircularProgressProps & { value: number } & { text: string},
-) {
-  return (
-    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-      <CircularProgress variant="determinate" {...props} />
-      <Box
-        sx={{
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          position: 'absolute',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Typography
-          variant="caption"
-          color="text.primary"
-        >{`${(props.text)}`}</Typography>
-      </Box>
-    </Box>
-  )
+export type CourseProps = {
+  useCourse?: () => CourseHookReturn
 }
-*/
-
-const LinearProgressWithLabel = (
-  props: LinearProgressProps & { value: number } & { text: string } & { textposition: string }
-) => {
-  return (
-    <div>
-      <Tooltip title={'Completed learning elements'}>
-        <Typography sx={{ ml: props.textposition, mr: '0.5rem' }} variant="body1" color="text.secondary">
-          {'Learning progress: ' + props.text}
-        </Typography>
-      </Tooltip>
-      <LinearProgress variant="determinate" {...props} sx={{ ml: '-4rem' }} />
-    </div>
-  )
-}
-
-const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
-  height: 7,
-  borderRadius: 5,
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800]
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 3
-  }
-}))
-
-const calculateTopicProgress = (learningElementProgressTopics: number[][], index: number) => {
-  const percent = calculatePercent(learningElementProgressTopics, index)
-  //if the student solved anything show his progress, else show a set minimum (6)
-  const value = percent > 1 ? percent : 6
-  const color = colorByPercent(percent)
-
-  return (
-    <BorderLinearProgress
-      value={value}
-      text={`${learningElementProgressTopics[index][0]}/${learningElementProgressTopics[index][1]}`}
-      color={color}
-      textposition={'34rem'}
-    />
-  )
-}
-
-const calculatePercent = (learningElementProgressTopics: number[][], index: number) => {
-  return (
-    (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
-  )
-}
-
-const colorByPercent = (percent: number) => {
-  if(percent === 0) return 'error'
-  return percent < 70 ? 'warning' : 'success';
-};
 
 /**
  * # Course Page
@@ -105,7 +20,7 @@ const colorByPercent = (percent: number) => {
  * Uses the {@link useLearningPathTopic} hook to get the topics of the course.
  * @category Pages
  */
-const Course = () => {
+const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
   const { t } = useTranslation()
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
@@ -118,6 +33,7 @@ const Course = () => {
 
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
   const { loading, topics } = useLearningPathTopic(courseId)
+  const { calculateTopicProgress, BorderLinearProgress } = useCourse()
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
@@ -133,7 +49,8 @@ const Course = () => {
           return getUser().then((user) => {
             return getLearningPathElementStatus(courseId, user.lms_user_id)
               .then((learningPathElementStatusData) => {
-                const onlyDone = learningPathElementStatusData.filter((learningPathElementStatus) => {
+                //filter all learning elements with state 1 (done)
+                const allDoneLearningElements = learningPathElementStatusData.filter((learningPathElementStatus) => {
                   return learningPathElementStatus.state === 1
                 })
                 return getLearningPathElement(
@@ -143,26 +60,23 @@ const Course = () => {
                   courseId,
                   topic.id.toString()
                 )
-                  .then((learningPathElementData) => {
-                    return [learningPathElementData.path]
-                  })
-                  .then((resultArray) => {
-                    const smth = resultArray[0].map((learningElement) => {
-                      if (onlyDone.find((status) => status.cmid === learningElement.learning_element.lms_id)) {
-                        return true
-                      } else {
-                        return false
-                      }
+                  .then((allLearningElementsInTopic) => {
+                    //filter all learning elements in topic for done learning elements
+                    const allDoneLearningElementsInTopic = allLearningElementsInTopic.path.map((learningElement) => {
+                      //returns true if at least one element of the array is a match
+                      return allDoneLearningElements.some(
+                        (status) => status.cmid === learningElement.learning_element.lms_id
+                      )
                     })
-
+                    //build a array[][] with the number of done learning elements and the number of all learning elements in topic
+                    //do that for every topic, and lastly return an array with all the arrays for every topic
+                    //example: [[1,2],[2,2],[0,2]]
                     return [
                       ...calculatedTopicProgressArray,
-                      ...resultArray.map((result) => [
-                        smth.filter((stateDone) => {
-                          return stateDone
-                        }).length,
-                        result.length
-                      ])
+                      [
+                        allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
+                        allLearningElementsInTopic.path.length
+                      ]
                     ]
                   })
                   .catch((error: string) => {
@@ -186,27 +100,23 @@ const Course = () => {
         })
       )
         .then((result) => {
-          // Handle results
-          const flattenedResult: number[][] = result.flat()
-          setCalculatedTopicProgress(flattenedResult)
+          // Handle resulting array with calculated topic progress
+          setCalculatedTopicProgress(result.flat())
         })
         .catch((error) => {
           log.error(error)
+          addSnackbar({
+            message: error,
+            severity: 'error',
+            autoHideDuration: 3000
+          })
         })
     }
 
     return () => {
       clearTimeout(preventEndlessLoading)
     }
-  }, [
-    authContext.isAuth,
-    courseId,
-    navigate,
-    topics,
-    getUser,
-    getLearningPathElement,
-    getLearningPathElementStatus
-  ])
+  }, [authContext.isAuth, courseId, navigate, topics, getUser, getLearningPathElement, getLearningPathElementStatus])
 
   return (
     <>
@@ -253,11 +163,10 @@ const Course = () => {
                 </CardContent>
                 <Grid container item direction="row" justifyContent="flex-end" alignItems="flex-end">
                   {calculatedTopicProgress[index] ? (
-                      calculateTopicProgress(calculatedTopicProgress, index)
-                    ) : (
-                      <BorderLinearProgress value={10} text={'loading...'} color={'info'} textposition={'29rem'} />
-                    )
-                  }
+                    calculateTopicProgress(calculatedTopicProgress, index)
+                  ) : (
+                    <BorderLinearProgress value={10} text={'loading...'} color={'info'} textposition={'29rem'} />
+                  )}
                 </Grid>
               </Card>
             )
