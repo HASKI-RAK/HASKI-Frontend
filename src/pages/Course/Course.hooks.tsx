@@ -1,4 +1,4 @@
-import { Typography, Tooltip, LinearProgress,  LinearProgressProps, linearProgressClasses } from '@common/components'
+import { Typography, Tooltip, LinearProgress, LinearProgressProps, linearProgressClasses } from '@common/components'
 import { styled } from '@common/theme'
 import { useMemo } from 'react'
 import { StyledComponent } from '@emotion/styled'
