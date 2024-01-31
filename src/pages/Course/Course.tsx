@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SkeletonList, useLearningPathTopic } from '@components'
-import { LearningPathLearningElement } from '@core'
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress'
 import { styled } from '@common/theme'
 import { linearProgressClasses } from '@mui/material'
@@ -47,12 +46,12 @@ function CircularProgressWithLabel(
 */
 
 const LinearProgressWithLabel = (
-  props: LinearProgressProps & { value: number } & { text: string } & { textPosition: string }
+  props: LinearProgressProps & { value: number } & { text: string } & { textposition: string }
 ) => {
   return (
     <div>
       <Tooltip title={'Completed learning elements'}>
-        <Typography sx={{ ml: props.textPosition, mr: '0.5rem' }} variant="body1" color="text.secondary">
+        <Typography sx={{ ml: props.textposition, mr: '0.5rem' }} variant="body1" color="text.secondary">
           {'Learning progress: ' + props.text}
         </Typography>
       </Tooltip>
@@ -73,32 +72,31 @@ const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
 }))
 
 const calculateTopicProgress = (learningElementProgressTopics: number[][], index: number) => {
-  const percent = calculatePercent(learningElementProgressTopics, index);
+  const percent = calculatePercent(learningElementProgressTopics, index)
   //if the student solved anything show his progress, else show a set minimum (6)
-  const value = percent > 1 ? percent : 6;
-  const color =
-    percent === 0
-      ? 'error'
-      : percent < 70
-        ? 'warning'
-        : 'success';
+  const value = percent > 1 ? percent : 6
+  const color = colorByPercent(percent)
 
   return (
     <BorderLinearProgress
       value={value}
       text={`${learningElementProgressTopics[index][0]}/${learningElementProgressTopics[index][1]}`}
       color={color}
-      textPosition={'34rem'}
+      textposition={'34rem'}
     />
-  );
-};
-
+  )
+}
 
 const calculatePercent = (learningElementProgressTopics: number[][], index: number) => {
   return (
     (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
   )
 }
+
+const colorByPercent = (percent: number) => {
+  if(percent === 0) return 'error'
+  return percent < 70 ? 'warning' : 'success';
+};
 
 /**
  * # Course Page
@@ -118,7 +116,6 @@ const Course = () => {
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
 
-  const [learningElementStatusInTopic] = useState<Array<LearningPathLearningElement[]>>([])
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
   const { loading, topics } = useLearningPathTopic(courseId)
 
@@ -147,7 +144,7 @@ const Course = () => {
                   topic.id.toString()
                 )
                   .then((learningPathElementData) => {
-                    return learningElementStatusInTopic.concat([learningPathElementData.path])
+                    return [learningPathElementData.path]
                   })
                   .then((resultArray) => {
                     const smth = resultArray[0].map((learningElement) => {
@@ -208,8 +205,7 @@ const Course = () => {
     topics,
     getUser,
     getLearningPathElement,
-    getLearningPathElementStatus,
-    learningElementStatusInTopic
+    getLearningPathElementStatus
   ])
 
   return (
@@ -259,7 +255,7 @@ const Course = () => {
                   {calculatedTopicProgress[index] ? (
                       calculateTopicProgress(calculatedTopicProgress, index)
                     ) : (
-                      <BorderLinearProgress value={10} text={'loading...'} color={'info'} textPosition={'29rem'} />
+                      <BorderLinearProgress value={10} text={'loading...'} color={'info'} textposition={'29rem'} />
                     )
                   }
                 </Grid>
