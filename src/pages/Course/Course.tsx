@@ -73,23 +73,30 @@ const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
 }))
 
 const calculateTopicProgress = (learningElementProgressTopics: number[][], index: number) => {
+  const percent = calculatePercent(learningElementProgressTopics, index);
+  //if the student solved anything show his progress, else show a set minimum (6)
+  const value = percent > 1 ? percent : 6;
+  const color =
+    percent === 0
+      ? 'error'
+      : percent < 70
+        ? 'warning'
+        : 'success';
+
   return (
     <BorderLinearProgress
-      value={
-        (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100 > 1
-          ? (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
-          : 6
-      }
-      text={learningElementProgressTopics[index][0] + '/' + learningElementProgressTopics[index][1]}
-      color={
-        (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100 == 0
-          ? 'error'
-          : (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100 > 70
-          ? 'success'
-          : 'warning'
-      }
+      value={value}
+      text={`${learningElementProgressTopics[index][0]}/${learningElementProgressTopics[index][1]}`}
+      color={color}
       textPosition={'34rem'}
     />
+  );
+};
+
+
+const calculatePercent = (learningElementProgressTopics: number[][], index: number) => {
+  return (
+    (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
   )
 }
 
@@ -113,7 +120,6 @@ const Course = () => {
 
   const [learningElementStatusInTopic] = useState<Array<LearningPathLearningElement[]>>([])
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
-  const [loadingTopicProgress, setLoadingTopicProgress] = useState<boolean>(false)
   const { loading, topics } = useLearningPathTopic(courseId)
 
   useEffect(() => {
@@ -186,7 +192,6 @@ const Course = () => {
           // Handle results
           const flattenedResult: number[][] = result.flat()
           setCalculatedTopicProgress(flattenedResult)
-          setLoadingTopicProgress(true)
         })
         .catch((error) => {
           log.error(error)
@@ -252,14 +257,11 @@ const Course = () => {
                 </CardContent>
                 <Grid container item direction="row" justifyContent="flex-end" alignItems="flex-end">
                   {calculatedTopicProgress[index] ? (
-                    loadingTopicProgress ? (
                       calculateTopicProgress(calculatedTopicProgress, index)
                     ) : (
                       <BorderLinearProgress value={10} text={'loading...'} color={'info'} textPosition={'29rem'} />
                     )
-                  ) : (
-                    <BorderLinearProgress value={10} text={'loading...'} color={'info'} textPosition={'29rem'} />
-                  )}
+                  }
                 </Grid>
               </Card>
             )
