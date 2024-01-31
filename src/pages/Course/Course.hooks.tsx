@@ -1,7 +1,5 @@
-import { Typography, Tooltip } from '@common/components'
-import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress'
+import { Typography, Tooltip, LinearProgress,  LinearProgressProps, linearProgressClasses } from '@common/components'
 import { styled } from '@common/theme'
-import { linearProgressClasses } from '@mui/material'
 import { useMemo } from 'react'
 import { StyledComponent } from '@emotion/styled'
 
