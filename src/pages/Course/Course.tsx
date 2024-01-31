@@ -103,14 +103,6 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
           // Handle resulting array with calculated topic progress
           setCalculatedTopicProgress(result.flat())
         })
-        .catch((error) => {
-          log.error(error)
-          addSnackbar({
-            message: error,
-            severity: 'error',
-            autoHideDuration: 3000
-          })
-        })
     }
 
     return () => {
