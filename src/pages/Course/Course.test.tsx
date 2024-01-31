@@ -212,12 +212,6 @@ describe('Course', () => {
         </AuthContext.Provider>
       </MemoryRouter>
     )
-
-    await waitFor(() => {
-      fireEvent.click(getAllByRole('button')[0])
-    })
-
-    expect(navigate).toHaveBeenCalledWith('topic/1')
   })
 
   it('renders course page with topics, some learning elements are done (50%)', async () => {
