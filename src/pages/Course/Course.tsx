@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Typography, Box, Grid } from '@common/components'
+import { Button, Card, CardContent, Typography, Box, Grid, Tooltip } from '@common/components'
 import { AuthContext, SnackbarContext } from '@services'
 import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
@@ -7,12 +7,14 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { SkeletonList, useLearningPathTopic } from '@components'
 import { LearningPathLearningElement } from '@core'
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress'
-import { styled, Theme } from '@common/theme'
+import { styled } from '@common/theme'
 import { linearProgressClasses } from '@mui/material'
 import { usePersistedStore, useStore } from '@store'
-import BeenhereOutlinedIcon from '@mui/icons-material/BeenhereOutlined';
+import { CheckBox } from '@common/icons'
 
 /*
+Another possibility to show the progress of the course in a circle
+
 import CircularProgress, {
   CircularProgressProps,
 } from '@mui/material/CircularProgress'
@@ -44,13 +46,15 @@ function CircularProgressWithLabel(
 }
 */
 
-const LinearProgressWithLabel = (props: LinearProgressProps & { value: number } & { text: string }) => {
+const LinearProgressWithLabel = (props: LinearProgressProps & { value: number } & { text: string } & { textPosition: string}) => {
   return (
     <div>
-      <Typography sx={{ ml: '46rem' }} variant="body1" color="text.secondary">
-        {props.text}
+      <Tooltip title={"Completed learning elements"}>
+      <Typography sx={{ ml: props.textPosition, mr: '0.5rem' }} variant="body1" color="text.secondary">
+        {'Learning progress: ' + props.text}
       </Typography>
-      <LinearProgress variant="determinate" {...props} />
+      </Tooltip>
+      <LinearProgress variant="determinate" {...props} sx={{ml: '-4rem'}} />
     </div>
   )
 }
@@ -84,7 +88,7 @@ const Course = () => {
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
 
-  const [learningElementStatusInTopic, setLearningElementStatusInTopic] = useState<
+  const [learningElementStatusInTopic] = useState<
     Array<LearningPathLearningElement[]>
   >([])
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
@@ -131,7 +135,7 @@ const Course = () => {
                       ...calculatedTopicProgressArray,
                       ...resultArray.map((result) => [
                         smth.filter((stateDone) => {
-                          return stateDone === true
+                          return stateDone
                         }).length,
                         result.length
                       ])
@@ -195,20 +199,23 @@ const Course = () => {
           </Grid>
         </Box>
       ) : (
-        <>
           <Grid container direction="column" justifyContent="center" alignItems="center">
             {topics.map((topic, index) => {
               return (
                 <Card key={topic.id} sx={{ width: '50rem', mt: '1rem' }}>
                   <CardContent>
-                    <Grid container item md={11} direction="column" justifyContent="center" alignItems="center">
+                    <Grid container direction="column" justifyContent="center" alignItems="center">
+                      <Grid item md={1}>
                       {calculatedTopicProgress[index] && (
                         (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) == 1 &&
-                          <BeenhereOutlinedIcon sx={{ mt: '-1.06rem',ml: '45.5rem' }} color={"success"}/>
+                          <CheckBox sx={{ mt: '-0.8rem',ml: '47rem', fontSize: 29,}} color={"success"}/>
                       )}
-                      <Typography variant="h5" sx={{ ml: '1rem' }}>
+                      </Grid>
+                      <Grid item md={11}>
+                      <Typography variant="h5">
                         {topic.name}
                       </Typography>
+                      </Grid>
                     </Grid>
                     <Grid container item direction="column" justifyContent="center" alignItems="center">
                       <Button
@@ -224,13 +231,14 @@ const Course = () => {
                       </Button>
                     </Grid>
                   </CardContent>
+                  <Grid container item direction="row" justifyContent="flex-end" alignItems="flex-end">
                   {calculatedTopicProgress[index] ? (
                     loadingTopicProgress ? (
                       <BorderLinearProgress
                         value={
                           (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100 > 1
                             ? (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) * 100
-                            : 3
+                            : 6
                         }
                         text={calculatedTopicProgress[index][0] + '/' + calculatedTopicProgress[index][1]}
                         color={
@@ -240,18 +248,19 @@ const Course = () => {
                             ? 'success'
                             : 'warning'
                         }
+                        textPosition={'34rem'}
                       />
                     ) : (
-                      <BorderLinearProgress value={3} text={'loading...'} color={'info'}/>
+                      <BorderLinearProgress value={10} text={'loading...'} color={'info'} textPosition={'29rem'}/>
                     )
                   ) : (
-                    <BorderLinearProgress value={3} text={'loading...'} color={'info'}/>
+                    <BorderLinearProgress value={10} text={'loading...'} color={'info'} textPosition={'29rem'}/>
                   )}
+                  </Grid>
                 </Card>
               )
             })}
           </Grid>
-        </>
       )}
     </>
   )
