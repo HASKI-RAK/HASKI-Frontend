@@ -1,5 +1,5 @@
 import { mockServices } from 'jest.setup'
-import { render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
 import Course from './Course'
@@ -92,8 +92,8 @@ describe('Course1', () => {
       </MemoryRouter>
     )
 
-    await waitFor(() => {
-      expect(getByTestId('Course-Card-Topic-Progress-0'))
+    await waitFor(async () => {
+      expect(getByTestId('Course-Card-Topic-Progress').parentNode?.textContent).toBe('Learning progress: 0/2')
     })
   })
 })
@@ -187,7 +187,7 @@ describe('Course2', () => {
     )
 
     await waitFor(() => {
-      expect(getByTestId('Course-Card-Topic-Progress-0'))
+      expect(getByTestId('Course-Card-Topic-Progress').parentNode?.textContent).toBe('Learning progress: 1/2')
     })
   })
 })
@@ -280,8 +280,8 @@ describe('Course3', () => {
       </MemoryRouter>
     )
 
-    await waitFor(() => {
-      expect(getByTestId('Course-Card-Topic-Progress-0'))
+    await waitFor(async () => {
+      expect(getByTestId('Course-Card-Topic-Progress').parentNode?.textContent).toBe('Learning progress: 2/2')
     })
   })
 })

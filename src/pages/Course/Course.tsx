@@ -98,11 +98,10 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
               })
           })
         })
-      )
-        .then((result) => {
-          // Handle resulting array with calculated topic progress
-          setCalculatedTopicProgress(result.flat())
-        })
+      ).then((result) => {
+        // Handle resulting array with calculated topic progress
+        setCalculatedTopicProgress(result.flat())
+      })
     }
 
     return () => {

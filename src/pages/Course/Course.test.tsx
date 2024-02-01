@@ -125,9 +125,5 @@ describe('Course', () => {
         </AuthContext.Provider>
       </MemoryRouter>
     )
-
   })
 })
-
-
-
