@@ -79,6 +79,7 @@ export const useCourse = (): CourseHookReturn => {
 
     return (
       <BorderLinearProgress
+        data-testid={'Course-Card-Topic-Progress-' + index}
         value={value}
         text={`${learningElementProgressTopics[index][0]}/${learningElementProgressTopics[index][1]}`}
         color={color}
