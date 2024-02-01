@@ -18,7 +18,7 @@
 <h1>Function Course</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="Course"><span class="tsd-kind-call-signature">Course</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">__namedParameters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Element</span><a href="#Course" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="Course"><span class="tsd-kind-call-signature">Course</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">props</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Element</span><a href="#Course" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><a id="md:course-page" class="tsd-anchor"></a><h1><a href="#md:course-page">Course Page</a></h1><p>Presents an overview of the course.</p>
 </div>
@@ -26,13 +26,18 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">__namedParameters</span>: <a href="../types/services.exports.CourseProps.html" class="tsd-signature-type tsd-kind-type-alias">CourseProps</a></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Element</span></h4>
+<h5><span class="tsd-kind-parameter">props</span>: <a href="../types/services.exports.CourseProps.html" class="tsd-signature-type tsd-kind-type-alias">CourseProps</a></h5>
+<div class="tsd-comment tsd-typography"><p>The props object should be empty.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Element</span></h4><p>A JSX Element with the rendered course page.</p>
+
 <div class="tsd-comment tsd-typography">
-<h4>Remarks</h4><p>Uses the <a href="components.useLearningPathTopic.html" class="tsd-kind-function">useLearningPathTopic</a> hook to get the topics of the course.</p>
+<h4>Remarks</h4><p>Uses the <a href="components.useLearningPathTopic.html" class="tsd-kind-function">useLearningPathTopic</a> hook to get the topics of the course.
+Uses the useCourse hook to calculate the progress of each topic in the course.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/pages/Course/Course.tsx#L23">src/pages/Course/Course.tsx:23</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/pages/Course/Course.tsx#L26">src/pages/Course/Course.tsx:26</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
