@@ -10,6 +10,17 @@ export type CourseHookReturn = {
   >
 }
 
+/**
+ * # Course Hooks
+ * Hooks for the Course page.
+ * @returns An object with the functions calculateTopicProgress and BorderLinearProgress.
+ * @remarks
+ * Uses the {@link calculatePercent} function to calculate the progress of a topic.
+ * Uses the {@link colorByPercent} function to calculate the color of the progress bar.
+ * Uses the {@link calculateTopicProgress} function to calculate the progress of a topic.
+ * Uses the {@link BorderLinearProgress} styled component to style the progress bar.
+ * @category Hooks
+ */
 export const useCourse = (): CourseHookReturn => {
   /*
    Another possibility to show the progress of the course in a circle
@@ -45,6 +56,7 @@ export const useCourse = (): CourseHookReturn => {
    }
    */
 
+  //Linear Progress Bar with label
   const LinearProgressWithLabel = (
     props: LinearProgressProps & { value: number } & { text: string } & { textposition: string }
   ) => {
@@ -60,6 +72,7 @@ export const useCourse = (): CourseHookReturn => {
     )
   }
 
+  //styled Linear Progress Bar
   const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
     height: 7,
     borderRadius: 5,
@@ -71,6 +84,10 @@ export const useCourse = (): CourseHookReturn => {
     }
   }))
 
+  //calculate the progress of a topic and return a progress bar with variable text, color and value
+  //learningElementProgressTopics is an array of arrays with the progress of each topic
+  //first element of the array is the number of solved learning elements,
+  //second element is the number of total learning elements
   const calculateTopicProgress = (learningElementProgressTopics: number[][], index: number) => {
     const percent = calculatePercent(learningElementProgressTopics, index)
     //if the student solved anything show his progress, else show a set minimum (6)
@@ -92,6 +109,8 @@ export const useCourse = (): CourseHookReturn => {
     return (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
   }
 
+  //calculate the color of the progress bar
+  //red if 0%, yellow if <70%, green if >=70%
   const colorByPercent = (percent: number) => {
     if (percent === 0) return 'error'
     return percent < 70 ? 'warning' : 'success'

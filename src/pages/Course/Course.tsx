@@ -16,8 +16,11 @@ export type CourseProps = {
 /**
  * # Course Page
  * Presents an overview of the course.
+ * @param props - The props object should be empty.
+ * @returns A JSX Element with the rendered course page.
  * @remarks
  * Uses the {@link useLearningPathTopic} hook to get the topics of the course.
+ * Uses the {@link useCourse} hook to calculate the progress of each topic in the course.
  * @category Pages
  */
 const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
@@ -112,6 +115,7 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
   return (
     <>
       {loading ? (
+        //display skeleton list while loading
         <Box sx={{ flewGrow: 1 }}>
           <Grid container direction="column" justifyContent="center" alignItems="center">
             <Grid item xs zeroMinWidth>
@@ -122,6 +126,7 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
           </Grid>
         </Box>
       ) : (
+        //display topics once data is loaded
         <Grid container direction="column" justifyContent="center" alignItems="center">
           {topics.map((topic, index) => {
             return (
@@ -129,6 +134,7 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
                 <CardContent>
                   <Grid container direction="column" justifyContent="center" alignItems="center">
                     <Grid item md={1}>
+                      {/*if topic is done 100%, a checkbox is displayed*/}
                       {calculatedTopicProgress[index] &&
                         calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1] == 1 && (
                           <CheckBox sx={{ mt: '-0.8rem', ml: '47rem', fontSize: 29 }} color={'success'} />
@@ -152,10 +158,12 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
                     </Button>
                   </Grid>
                 </CardContent>
+                {/* Display topic progress bar */}
                 <Grid container item direction="row" justifyContent="flex-end" alignItems="flex-end">
                   {calculatedTopicProgress[index] ? (
                     calculateTopicProgress(calculatedTopicProgress, index)
                   ) : (
+                    // Display loading state if progress is not available yet
                     <BorderLinearProgress value={10} text={'loading...'} color={'info'} textposition={'29rem'} />
                   )}
                 </Grid>
