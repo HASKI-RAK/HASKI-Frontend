@@ -121,7 +121,7 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
       {loading ? (
         //display skeleton list while loading
         <Box sx={{ flewGrow: 1 }}>
-          <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ ml: '3rem'}}>
+          <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ ml: '3rem' }}>
             <Grid item xs zeroMinWidth>
               <Box sx={{ width: '30rem' }}>
                 <SkeletonList />
@@ -131,27 +131,39 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
         </Box>
       ) : (
         //display topics once data is loaded
-        <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ ml: '3rem'}}>
+        <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ ml: '3rem' }}>
           {topics.map((topic, index) => {
             return (
-              <Card key={topic.id} sx={{ width: { xs: '10rem', sm: '20rem', md: '40rem', lg: '50rem', xl: '70rem' }, mt: '1rem'}}>
+              <Card
+                key={topic.id}
+                sx={{ width: { xs: '10rem', sm: '20rem', md: '40rem', lg: '50rem', xl: '70rem' }, mt: '1rem' }}>
                 <CardContent>
                   <Grid container direction="column" justifyContent="center" alignItems="center">
                     <Grid item md={1}>
                       {/*if topic is done 100%, a checkbox is displayed*/}
                       {calculatedTopicProgress[index] &&
                         calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1] == 1 && (
-                          <CheckBox sx={{ mt: '-0.8rem', ml: { xs: '7rem', sm: '17rem', md: '37rem', lg: '47rem', xl:'67rem' }, fontSize: 29 }} color={'success'} />
+                          <CheckBox
+                            sx={{
+                              mt: '-0.8rem',
+                              ml: { xs: '7rem', sm: '17rem', md: '37rem', lg: '47rem', xl: '67rem' },
+                              fontSize: 29
+                            }}
+                            color={'success'}
+                          />
                         )}
                     </Grid>
                     <Grid item md={11}>
-                      <Typography variant={isSmOrDown ? 'subtitle1': "h5"}>{topic.name}</Typography>
+                      <Typography variant={isSmOrDown ? 'subtitle1' : 'h5'}>{topic.name}</Typography>
                     </Grid>
                   </Grid>
                   <Grid container item direction="column" justifyContent="center" alignItems="center">
                     <Button
                       id={topic.name.concat('-button').replaceAll(' ', '-')}
-                      sx={{ width: { xs: '6.625rem', sm: '9.625rem', md: '12.625rem', lg: '15.625rem', xl: '18.625rem' }, mt: '1.625rem' }}
+                      sx={{
+                        width: { xs: '6.625rem', sm: '9.625rem', md: '12.625rem', lg: '15.625rem', xl: '18.625rem' },
+                        mt: '1.625rem'
+                      }}
                       variant="contained"
                       data-testid={'Course-Card-Topic-' + topic.name}
                       color="primary"
@@ -168,7 +180,12 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
                     calculateTopicProgress(calculatedTopicProgress, index)
                   ) : (
                     // Display loading state if progress is not available yet
-                    <BorderLinearProgress value={10} text={'loading...'} color={'info'} textposition={{xs:'20rem', sm: '5rem', md: '15rem', lg:'25rem', xl:'45rem'}} />
+                    <BorderLinearProgress
+                      value={10}
+                      text={'loading...'}
+                      color={'info'}
+                      textposition={{ xs: '20rem', sm: '5rem', md: '15rem', lg: '25rem', xl: '45rem' }}
+                    />
                   )}
                 </Grid>
               </Card>

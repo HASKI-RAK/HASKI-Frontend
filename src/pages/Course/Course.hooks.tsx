@@ -6,7 +6,9 @@ import { StyledComponent } from '@emotion/styled'
 export type CourseHookReturn = {
   readonly calculateTopicProgress: (learningElementProgressTopics: number[][], index: number) => JSX.Element
   readonly BorderLinearProgress: StyledComponent<
-    LinearProgressProps & { value: number } & { text: string } & { textposition: { xs: string, sm: string, md: string, lg: string, xl: string } }
+    LinearProgressProps & { value: number } & { text: string } & {
+      textposition: { xs: string; sm: string; md: string; lg: string; xl: string }
+    }
   >
 }
 
@@ -58,7 +60,9 @@ export const useCourse = (): CourseHookReturn => {
 
   //Linear Progress Bar with label
   const LinearProgressWithLabel = (
-    props: LinearProgressProps & { value: number } & { text: string } & { textposition: { xs: string, sm: string, md: string, lg: string, xl: string } }
+    props: LinearProgressProps & { value: number } & { text: string } & {
+      textposition: { xs: string; sm: string; md: string; lg: string; xl: string }
+    }
   ) => {
     return (
       <div>
@@ -67,7 +71,11 @@ export const useCourse = (): CourseHookReturn => {
             {'Learning progress: ' + props.text}
           </Typography>
         </Tooltip>
-        <LinearProgress variant="determinate" {...props} sx={{ ml: { xs: '16rem', sm: '0rem', md: '-7rem', lg: '-7rem', xl: '-11rem' }}}  />
+        <LinearProgress
+          variant="determinate"
+          {...props}
+          sx={{ ml: { xs: '16rem', sm: '0rem', md: '-7rem', lg: '-7rem', xl: '-11rem' } }}
+        />
       </div>
     )
   }
