@@ -13,7 +13,7 @@ jest.mock('@mui/material', () => {
   }
 })
 
-describe('Course1', () => {
+describe('Course2', () => {
   jest.restoreAllMocks()
 
   it('renders course page with topics, none learning elements are done (0%)', async () => {
@@ -93,7 +93,7 @@ describe('Course1', () => {
       })
     )
 
-    const { getByTestId } = render(
+    const { getAllByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Course />
@@ -102,12 +102,12 @@ describe('Course1', () => {
     )
 
     await waitFor(async () => {
-      expect(getByTestId('Course-Card-Topic-Progress').parentNode?.textContent).toBe('Learning progress: 0/2')
+      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 0/2')
     })
   })
 })
 
-describe('Course2', () => {
+describe('Course3', () => {
   jest.restoreAllMocks()
 
   it('renders course page with topics, some learning elements are done (50%)', async () => {
@@ -187,7 +187,7 @@ describe('Course2', () => {
       })
     )
 
-    const { getByTestId } = render(
+    const { getAllByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Course />
@@ -196,12 +196,12 @@ describe('Course2', () => {
     )
 
     await waitFor(() => {
-      expect(getByTestId('Course-Card-Topic-Progress').parentNode?.textContent).toBe('Learning progress: 1/2')
+      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 1/2')
     })
   })
 })
 
-describe('Course3', () => {
+describe('Course4', () => {
   jest.restoreAllMocks()
 
   it('renders course page with topics, all learning elements are done (100%)', async () => {
@@ -281,7 +281,7 @@ describe('Course3', () => {
       })
     )
 
-    const { getByTestId } = render(
+    const { getAllByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Course />
@@ -290,7 +290,38 @@ describe('Course3', () => {
     )
 
     await waitFor(async () => {
-      expect(getByTestId('Course-Card-Topic-Progress').parentNode?.textContent).toBe('Learning progress: 2/2')
+      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 2/2')
+    })
+  })
+})
+
+describe('Course5', () => {
+  jest.restoreAllMocks()
+
+  it('renders course page with topics, some learning elements are done (50%)', async () => {
+    mockServices.fetchLearningPathElementStatus = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve([]))
+
+    mockServices.fetchLearningPathElement = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        course_id: 2,
+        based_on: 'string',
+        calculated_on: 'string',
+        path: []
+      })
+    )
+
+    const { getAllByTestId } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Course />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(getAllByTestId('Course-Card-Topic-Progress')[1].parentNode?.textContent).toBe('Learning progress: error..')
     })
   })
 })
