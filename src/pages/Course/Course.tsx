@@ -4,17 +4,21 @@ import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { SkeletonList, useLearningPathTopic } from '@components'
 import { usePersistedStore, useStore } from '@store'
 import { CheckBox } from '@common/icons'
-import { LinearProgressWithLabel as _linearProgressWithLabel, LinearProgressWithLabelReturn } from '@components'
+import {
+  LinearProgressWithLabel as _linearProgressWithLabel,
+  LinearProgressWithLabelReturn,
+  SkeletonList,
+  useLearningPathTopic
+} from '@components'
 import { useTheme, useMediaQuery } from '@common/hooks'
 
 /*
-  * @typedef CourseProps
-  * @property {function} [LinearProgressWithLabel] - The LinearProgressWithLabel function.
-  * @property {function} [LinearProgressWithLabel.calculateTopicProgress] - The calculateTopicProgress function.
-  * @property {function} [LinearProgressWithLabel.BorderLinearProgress] - The BorderLinearProgress function.
+ * @typedef CourseProps
+ * @property {function} [LinearProgressWithLabel] - The LinearProgressWithLabel function.
+ * @property {function} [LinearProgressWithLabel.calculateTopicProgress] - The calculateTopicProgress function.
+ * @property {function} [LinearProgressWithLabel.BorderLinearProgress] - The BorderLinearProgress function.
  */
 export type CourseProps = {
   LinearProgressWithLabel?: () => LinearProgressWithLabelReturn

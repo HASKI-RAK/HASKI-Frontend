@@ -6,8 +6,8 @@ import { Course } from '@pages'
 
 jest.mock('@common/hooks', () => ({
   ...jest.requireActual('@common/hooks'),
-  useMediaQuery: jest.fn().mockReturnValue(true),
-}));
+  useMediaQuery: jest.fn().mockReturnValue(true)
+}))
 
 describe('Course2', () => {
   jest.restoreAllMocks()

@@ -4,16 +4,16 @@ import { useMemo } from 'react'
 import { StyledComponent } from '@emotion/styled'
 
 /*
-  * @typedef LinearProgressWithLabelReturn
-  * @property {function} calculateTopicProgress - The calculateTopicProgress function.
-  * index is the index of the topic in the array that should be calculated
-  * learningElementProgressTopics is an array of arrays with the progress of each topic
-  * first element of the array is the number of solved learning elements,
-  * second element is the number of total learning elements
-  * example: [[1, 1] ,[1,6]]
-  * @property {function} BorderLinearProgress - The BorderLinearProgress function.
-  *
-  * @returns An object with the functions calculateTopicProgress and BorderLinearProgress.
+ * @typedef LinearProgressWithLabelReturn
+ * @property {function} calculateTopicProgress - The calculateTopicProgress function.
+ * index is the index of the topic in the array that should be calculated
+ * learningElementProgressTopics is an array of arrays with the progress of each topic
+ * first element of the array is the number of solved learning elements,
+ * second element is the number of total learning elements
+ * example: [[1, 1] ,[1,6]]
+ * @property {function} BorderLinearProgress - The BorderLinearProgress function.
+ *
+ * @returns An object with the functions calculateTopicProgress and BorderLinearProgress.
  */
 export type LinearProgressWithLabelReturn = {
   readonly calculateTopicProgress: (learningElementProgressTopics: number[][], index: number) => JSX.Element
