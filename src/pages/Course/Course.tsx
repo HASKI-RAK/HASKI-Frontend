@@ -50,7 +50,6 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
 
     if (authContext.isAuth) {
       clearTimeout(preventEndlessLoading)
-      const calculatedTopicProgressArray: number[][] = []
       Promise.all(
         topics.map((topic) => {
           return getUser().then((user) => {
@@ -70,7 +69,6 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
                   .then((allLearningElementsInTopic) => {
                     //filter all learning elements in topic for done learning elements
                     const allDoneLearningElementsInTopic = allLearningElementsInTopic.path.map((learningElement) => {
-                      //returns true if at least one element of the array is a match
                       return allDoneLearningElements.some(
                         (status) => status.cmid === learningElement.learning_element.lms_id
                       )
@@ -78,13 +76,12 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
                     //build a array[][] with the number of done learning elements and the number of all learning elements in topic
                     //do that for every topic, and lastly return an array with all the arrays for every topic
                     //example: [[1,2],[2,2],[0,2]]
-                    return [
-                      ...calculatedTopicProgressArray,
+                    return (
                       [
                         allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
                         allLearningElementsInTopic.path.length
                       ]
-                    ]
+                    )
                   })
                   .catch((error: string) => {
                     addSnackbar({
@@ -107,7 +104,7 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
         })
       ).then((result) => {
         // Handle resulting array with calculated topic progress
-        setCalculatedTopicProgress(result.flat())
+        setCalculatedTopicProgress(result)
       })
     }
 

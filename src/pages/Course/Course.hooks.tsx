@@ -106,7 +106,7 @@ export const useCourse = (): CourseHookReturn => {
       <BorderLinearProgress
         data-testid={'Course-Card-Topic-Progress'}
         value={value}
-        text={`${learningElementProgressTopics[index][0]}/${learningElementProgressTopics[index][1]}`}
+        text={`${learningElementProgressTopics[index].length === 0 ? 'error..' : learningElementProgressTopics[index][0] + '/' + learningElementProgressTopics[index][1]}`}
         color={color}
         textposition={{ xs: '20rem', sm: '9rem', md: '20rem', lg: '30rem', xl: '46rem' }}
       />
@@ -114,13 +114,15 @@ export const useCourse = (): CourseHookReturn => {
   }
 
   const calculatePercent = (learningElementProgressTopics: number[][], index: number) => {
+    if(learningElementProgressTopics[index].length === 0) return(-1)
     return (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
   }
 
   //calculate the color of the progress bar
-  //red if 0%, yellow if <70%, green if >=70%
+  //gray if error (-1), red if 0%, yellow if <70%, green if >=70%
   const colorByPercent = (percent: number) => {
     if (percent === 0) return 'error'
+    else if(percent < 0) return 'info'
     return percent < 70 ? 'warning' : 'success'
   }
 
