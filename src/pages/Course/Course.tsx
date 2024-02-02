@@ -76,12 +76,10 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
                     //build a array[][] with the number of done learning elements and the number of all learning elements in topic
                     //do that for every topic, and lastly return an array with all the arrays for every topic
                     //example: [[1,2],[2,2],[0,2]]
-                    return (
-                      [
-                        allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
-                        allLearningElementsInTopic.path.length
-                      ]
-                    )
+                    return [
+                      allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
+                      allLearningElementsInTopic.path.length
+                    ]
                   })
                   .catch((error: string) => {
                     addSnackbar({

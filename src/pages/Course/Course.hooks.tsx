@@ -21,43 +21,45 @@ export type CourseHookReturn = {
  * Uses the {@link colorByPercent} function to calculate the color of the progress bar.
  * Uses the {@link calculateTopicProgress} function to calculate the progress of a topic.
  * Uses the {@link BorderLinearProgress} styled component to style the progress bar.
+ * @example
+ * circular Progress
+ * ```
+ *
+ *    Another possibility to show the progress of the course in a circle
+ *
+ *    import CircularProgress, {
+ *    CircularProgressProps,
+ *    } from '@mui/material/CircularProgress'
+ *    function CircularProgressWithLabel(
+ *    props: CircularProgressProps & { value: number } & { text: string},
+ *    ) {
+ *    return (
+ *    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+ *    <CircularProgress variant="determinate" {...props} />
+ *    <Box
+ *    sx={{
+ *    top: 0,
+ *    left: 0,
+ *    bottom: 0,
+ *    right: 0,
+ *    position: 'absolute',
+ *    display: 'flex',
+ *    alignItems: 'center',
+ *    justifyContent: 'center',
+ *    }}
+ *    >
+ *    <Typography
+ *    variant="caption"
+ *    color="text.primary"
+ *    >{`${(props.text)}`}</Typography>
+ *    </Box>
+ *    </Box>
+ *    )
+ *    }
+ * ```
  * @category Hooks
  */
 export const useCourse = (): CourseHookReturn => {
-  /*
-   Another possibility to show the progress of the course in a circle
-
-   import CircularProgress, {
-   CircularProgressProps,
-   } from '@mui/material/CircularProgress'
-   function CircularProgressWithLabel(
-   props: CircularProgressProps & { value: number } & { text: string},
-   ) {
-   return (
-   <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-   <CircularProgress variant="determinate" {...props} />
-   <Box
-   sx={{
-   top: 0,
-   left: 0,
-   bottom: 0,
-   right: 0,
-   position: 'absolute',
-   display: 'flex',
-   alignItems: 'center',
-   justifyContent: 'center',
-   }}
-   >
-   <Typography
-   variant="caption"
-   color="text.primary"
-   >{`${(props.text)}`}</Typography>
-   </Box>
-   </Box>
-   )
-   }
-   */
-
   //Linear Progress Bar with label
   const LinearProgressWithLabel = (
     props: LinearProgressProps & { value: number } & { text: string } & {
@@ -106,7 +108,11 @@ export const useCourse = (): CourseHookReturn => {
       <BorderLinearProgress
         data-testid={'Course-Card-Topic-Progress'}
         value={value}
-        text={`${learningElementProgressTopics[index].length === 0 ? 'error..' : learningElementProgressTopics[index][0] + '/' + learningElementProgressTopics[index][1]}`}
+        text={`${
+          learningElementProgressTopics[index].length === 0
+            ? 'error..'
+            : learningElementProgressTopics[index][0] + '/' + learningElementProgressTopics[index][1]
+        }`}
         color={color}
         textposition={{ xs: '20rem', sm: '9rem', md: '20rem', lg: '30rem', xl: '46rem' }}
       />
@@ -114,7 +120,7 @@ export const useCourse = (): CourseHookReturn => {
   }
 
   const calculatePercent = (learningElementProgressTopics: number[][], index: number) => {
-    if(learningElementProgressTopics[index].length === 0) return(-1)
+    if (learningElementProgressTopics[index].length === 0) return -1
     return (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
   }
 
@@ -122,7 +128,7 @@ export const useCourse = (): CourseHookReturn => {
   //gray if error (-1), red if 0%, yellow if <70%, green if >=70%
   const colorByPercent = (percent: number) => {
     if (percent === 0) return 'error'
-    else if(percent < 0) return 'info'
+    else if (percent < 0) return 'info'
     return percent < 70 ? 'warning' : 'success'
   }
 

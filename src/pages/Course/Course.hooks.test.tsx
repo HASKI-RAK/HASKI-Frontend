@@ -299,8 +299,7 @@ describe('Course5', () => {
   jest.restoreAllMocks()
 
   it('renders course page with topics, some learning elements are done (50%)', async () => {
-    mockServices.fetchLearningPathElementStatus = jest.fn().mockImplementationOnce(() =>
-      Promise.resolve([]))
+    mockServices.fetchLearningPathElementStatus = jest.fn().mockImplementationOnce(() => Promise.resolve([]))
 
     mockServices.fetchLearningPathElement = jest.fn().mockImplementationOnce(() =>
       Promise.resolve({
