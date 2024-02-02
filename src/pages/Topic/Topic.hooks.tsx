@@ -2,7 +2,7 @@ import { LearningPathLearningElementNode } from '@components'
 import { useState, useCallback, useMemo } from 'react'
 import { Node, Edge } from 'reactflow'
 import { Theme } from '@common/theme'
-import { LearningPathElement, LearningPathElementStatus } from '@core'
+import { LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
 
 /**
  * @prop defaultUrl - The default url of a node
@@ -77,14 +77,17 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const [lmsId, setLmsId] = useState<number>(defaultLmsId)
 
   // Logic
+  // TODO: This function is not necessary. setIsOpen can be exported directly
   const handleOpen = useCallback(() => {
     setIsOpen(true)
   }, [setIsOpen])
 
+  // TODO: This function is not necessary. setIsOpen can be exported directly
   const handleClose = useCallback(() => {
     setIsOpen(false)
   }, [setIsOpen])
 
+  // TODO: This function is not necessary. setUrl can be exported directly
   const handleSetUrl = useCallback(
     (url: string) => {
       setUrl(url)
@@ -92,6 +95,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     [setUrl]
   )
 
+  // TODO: This function is not necessary. setTitle can be exported directly
   const handleSetTitle = useCallback(
     (title: string) => {
       setTitle(title)
@@ -99,6 +103,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     [setTitle]
   )
 
+  // TODO: This function is not necessary. setLmsId can be exported directly
   const handleSetLmsId = useCallback(
     (lmsId: number) => {
       setLmsId(lmsId)
@@ -106,7 +111,166 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     [setLmsId]
   )
 
+  const groupLearningElementsByClassification = (learningPath: LearningPathLearningElement[]) => {
+    return Object.values(
+      learningPath.reduce(
+        (
+          groupedLearningElements: { [classification: string]: LearningPathLearningElement[] },
+          learningPathLearningElement: LearningPathLearningElement
+        ) => {
+          const classification = learningPathLearningElement.learning_element.classification
+
+          groupedLearningElements = {
+            ...groupedLearningElements,
+            [classification]: groupedLearningElements[classification]
+              ? [...groupedLearningElements[classification]]
+              : []
+          }
+
+          groupedLearningElements[classification].push(learningPathLearningElement)
+          return groupedLearningElements
+        },
+        {}
+      )
+    )
+  }
+
+  // Creates aligned nodes of the passed LearningPathLearningElement array and returns them.
+  // Can be used to create child nodes of a specific classification for a group node.
+  const getLearningElementChildNodes = (
+    learningElements: LearningPathLearningElement[],
+    learningPathStatus: LearningPathElementStatus[],
+    theme: Theme
+  ): Node[] => {
+    const nodeOffsetX = 50 // Can be defined globally
+
+    const learningElementStyle = {
+      background: theme.palette.primary.main,
+      padding: 10,
+      border: '1px solid ' + theme.palette.grey[500],
+      borderRadius: 8,
+      cursor: 'pointer',
+      width: 500
+    } // Can be defined globally
+
+    return learningElements.map((node, index) => {
+      const nodeData: LearningPathLearningElementNode = {
+        lmsId: node.learning_element.lms_id,
+        name: node.learning_element.name,
+        activityType: node.learning_element.activity_type,
+        classification: node.learning_element.classification,
+        isRecommended: node.recommended,
+        handleSetUrl: handleSetUrl,
+        handleSetTitle: handleSetTitle,
+        handleSetLmsId: handleSetLmsId,
+        handleOpen: handleOpen,
+        handleClose: handleClose,
+        isDone: learningPathStatus?.find((item) => item.cmid === node.learning_element.lms_id)?.state === 1
+      }
+      return {
+        id: node.position.toString() + '-' + node.learning_element.lms_id,
+        type: node.learning_element.classification,
+        data: nodeData,
+        position: {
+          x: nodeOffsetX + 550 * (index - 4 * Math.floor(index / 4)),
+          y: 250 * (learningElements[0].position - 1) + Math.floor(index / 4) * 125 + 50
+        },
+        style: learningElementStyle
+      }
+    })
+  }
+
+  const getLearningElementParentNode = (learningElements: LearningPathLearningElement[], theme: Theme): Node => {
+    const nodeOffsetX = 50 // Can be defined globally
+    const groupHeight = 200 // Can be defined globally
+
+    return {
+      id: learningElements[0].position.toString(),
+      data: { label: 'Übungen' },
+      type: 'GROUP',
+      position: {
+        x: 0,
+        y: 250 * (learningElements[0].position - 1)
+      },
+      style: {
+        border: '1px solid ' + theme.palette.grey[500],
+        borderRadius: 8,
+        width: 550 * (learningElements.length > 3 ? 4 : learningElements.length) + nodeOffsetX,
+        height: groupHeight + Math.floor((learningElements.length - 1) / 4) * 125
+      }
+    }
+  }
+
+  const getGroupedNodes = (
+    learningPath: LearningPathLearningElement[],
+    learningPathStatus: LearningPathElementStatus[],
+    theme: Theme,
+    index: number
+  ): Node | Node[] => {
+    const learningElementStyle = {
+      background: theme.palette.primary.main,
+      padding: 10,
+      border: '1px solid ' + theme.palette.grey[500],
+      borderRadius: 8,
+      cursor: 'pointer',
+      width: 500
+    } // Can  be defined globally
+
+    if (learningPath.length === 1) {
+      const nodeData: LearningPathLearningElementNode = {
+        lmsId: learningPath[0].learning_element.lms_id,
+        name: learningPath[0].learning_element.name,
+        activityType: learningPath[0].learning_element.activity_type,
+        classification: learningPath[0].learning_element.classification,
+        isRecommended: learningPath[0].recommended,
+        handleSetUrl: handleSetUrl,
+        handleSetTitle: handleSetTitle,
+        handleSetLmsId: handleSetLmsId,
+        handleOpen: handleOpen,
+        handleClose: handleClose,
+        isDone:
+          learningPathStatus?.find((status) => status.cmid === learningPath[0].learning_element.lms_id)?.state === 1
+      }
+
+      return {
+        id: learningPath[0].position.toString(),
+        type: learningPath[0].learning_element.classification,
+        data: nodeData,
+        position: {
+          x: 0,
+          y: index * 250
+        },
+        style: learningElementStyle
+      }
+    }
+
+    return [
+      getLearningElementParentNode(learningPath, theme),
+      ...getLearningElementChildNodes(learningPath, learningPathStatus, theme)
+    ]
+  }
+
   const mapLearningPathToNodes = useCallback(
+    (learningPath: LearningPathElement, theme: Theme, learningPathStatus: LearningPathElementStatus[]): Node[] => {
+      // Sort learning path by position
+      const sortedLearningPath = Array.from(learningPath.path).sort((a, b) => a.position - b.position)
+
+      // Group learning elements by classification
+      const groupedElements = groupLearningElementsByClassification(sortedLearningPath)
+
+      // Create nodes and return them
+      const nodes = groupedElements.map((group, index) => {
+        return getGroupedNodes(group, learningPathStatus, theme, index)
+      })
+
+      //return []
+      // Dissovles the array of arrays into a single array.
+      return nodes.flatMap((nodes) => nodes)
+    },
+    []
+  )
+
+  const mapLearningPathToNodes2 = useCallback(
     (
       learningPath: LearningPathElement,
       theme: Theme,
@@ -147,51 +311,14 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       }
 
       // Exercise nodes
-      const exerciseLearningElementChildNodes: Node[] = learningPathExercises.map((node, index) => {
-        const nodeData: LearningPathLearningElementNode = {
-          lmsId: node.learning_element.lms_id,
-          name: node.learning_element.name,
-          activityType: node.learning_element.activity_type,
-          classification: node.learning_element.classification,
-          isRecommended: node.recommended,
-          handleSetUrl: handleSetUrl,
-          handleSetTitle: handleSetTitle,
-          handleSetLmsId: handleSetLmsId,
-          handleOpen: handleOpen,
-          handleClose: handleClose,
-          isDone: learningPathStatus?.find((item) => item.cmid === node.learning_element.lms_id)?.state === 1
-        }
-        return {
-          id: node.position.toString() + '-' + node.learning_element.lms_id,
-          type: node.learning_element.classification,
-          data: nodeData,
-          position: {
-            x: nodeOffsetX + 550 * (index - 4 * Math.floor(index / 4)),
-            y: 250 * (learningPathExercises[0].position - 1) + Math.floor(index / 4) * 125 + 50
-          },
-          style: learningElementStyle
-        }
-      })
+      const exerciseLearningElementChildNodes: Node[] = getLearningElementChildNodes(
+        learningPathExercises,
+        learningPathStatus,
+        theme
+      )
 
       // Parent node for exercise learning elements
-      const exerciseLearningElementParentNode =
-        learningPathExercises.length > 0
-          ? {
-              id: learningPathExercises[0].position.toString(),
-              data: { label: 'Übungen' },
-              type: 'GROUP',
-              position: {
-                x: 0,
-                y: 250 * (learningPathExercises[0].position - 1)
-              },
-              style: {
-                border: '1px solid ' + theme.palette.grey[500],
-                borderRadius: 8,
-                width: 550 * (learningPathExercises.length > 3 ? 4 : learningPathExercises.length) + nodeOffsetX,
-                height: groupHeight + Math.floor((learningPathExercises.length - 1) / 4) * 125
-              }
-            }
-          : null
+      const exerciseLearningElementParentNode = getLearningElementParentNode(learningPathExercises, theme)
 
       // Leftover learning elements
       const learningElementNodesExcludingExercises = learningPathExcludingExercises.map((item) => {
@@ -265,6 +392,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         ...learningElementNodesAfterExercisesElementParentNode
       ]
 
+      return []
       return learningElementNodes
     },
     []
@@ -276,11 +404,11 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       const nodes = mapLearningPathToNodes(
         learningPathData,
         theme,
-        handleSetUrl,
+        /*handleSetUrl,
         handleSetTitle,
         handleSetLmsId,
         handleOpen,
-        handleClose,
+        handleClose,*/
         learningPathStatus
       )
 
