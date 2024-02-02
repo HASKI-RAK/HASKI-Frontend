@@ -478,7 +478,6 @@
       }
     ]
   ],
-  "components.LoginForm.login": "Anmelden",
   "components.LoginForm.loginButton": "Anmelden",
   "components.LoginForm.orLoginWithMoodle": "oder mit Moodle anmelden",
   "components.LoginForm.password": "Passwort",

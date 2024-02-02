@@ -2,16 +2,12 @@ import { mockServices } from 'jest.setup'
 import { render, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
-import Course from './Course'
+import { Course } from '@pages'
 
-jest.mock('@mui/material', () => {
-  const originalModule = jest.requireActual('@mui/material')
-
-  return {
-    ...originalModule,
-    useMediaQuery: jest.fn().mockReturnValue(true) // Always return true for isSmOrDown
-  }
-})
+jest.mock('@common/hooks', () => ({
+  ...jest.requireActual('@common/hooks'),
+  useMediaQuery: jest.fn().mockReturnValue(true),
+}));
 
 describe('Course2', () => {
   jest.restoreAllMocks()

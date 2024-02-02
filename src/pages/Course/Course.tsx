@@ -7,12 +7,17 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { SkeletonList, useLearningPathTopic } from '@components'
 import { usePersistedStore, useStore } from '@store'
 import { CheckBox } from '@common/icons'
-import { useCourse as _useCourse, CourseHookReturn } from './Course.hooks'
-import { useMediaQuery } from '@mui/material'
-import { useTheme } from '@common/hooks'
+import { LinearProgressWithLabel as _linearProgressWithLabel, LinearProgressWithLabelReturn } from '@components'
+import { useTheme, useMediaQuery } from '@common/hooks'
 
+/*
+  * @typedef CourseProps
+  * @property {function} [LinearProgressWithLabel] - The LinearProgressWithLabel function.
+  * @property {function} [LinearProgressWithLabel.calculateTopicProgress] - The calculateTopicProgress function.
+  * @property {function} [LinearProgressWithLabel.BorderLinearProgress] - The BorderLinearProgress function.
+ */
 export type CourseProps = {
-  useCourse?: () => CourseHookReturn
+  LinearProgressWithLabel?: () => LinearProgressWithLabelReturn
 }
 
 /**
@@ -22,10 +27,10 @@ export type CourseProps = {
  * @returns A JSX Element with the rendered course page.
  * @remarks
  * Uses the {@link useLearningPathTopic} hook to get the topics of the course.
- * Uses the {@link useCourse} hook to calculate the progress of each topic in the course.
+ * Uses the {@link LinearProgressWithLabel} hook to calculate the progress of each topic in the course.
  * @category Pages
  */
-const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
+const Course = ({ LinearProgressWithLabel = _linearProgressWithLabel }: CourseProps): JSX.Element => {
   const { t } = useTranslation()
   const theme = useTheme()
   const authContext = useContext(AuthContext)
@@ -40,7 +45,7 @@ const Course = ({ useCourse = _useCourse }: CourseProps): JSX.Element => {
 
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
   const { loading, topics } = useLearningPathTopic(courseId)
-  const { calculateTopicProgress, BorderLinearProgress } = useCourse()
+  const { calculateTopicProgress, BorderLinearProgress } = LinearProgressWithLabel()
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
