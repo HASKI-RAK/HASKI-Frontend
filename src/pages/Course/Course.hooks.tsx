@@ -21,7 +21,7 @@ export type CourseHookReturn = {
  * Uses the {@link colorByPercent} function to calculate the color of the progress bar.
  * Uses the {@link calculateTopicProgress} function to calculate the progress of a topic.
  * Uses the {@link BorderLinearProgress} styled component to style the progress bar.
- * @example
+ * @example progress variation
  * circular Progress
  * ```
  *
