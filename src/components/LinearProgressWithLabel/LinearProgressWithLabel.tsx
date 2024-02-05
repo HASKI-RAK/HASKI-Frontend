@@ -3,7 +3,7 @@ import { styled } from '@common/theme'
 import { useMemo } from 'react'
 import { StyledComponent } from '@emotion/styled'
 
-/*
+/**
  * @typedef LinearProgressWithLabelReturn
  * @property {function} calculateTopicProgress - The calculateTopicProgress function.
  * index is the index of the topic in the array that should be calculated
