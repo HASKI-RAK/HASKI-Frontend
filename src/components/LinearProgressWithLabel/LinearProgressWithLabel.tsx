@@ -88,7 +88,7 @@ export const LinearProgressWithLabel = (): LinearProgressWithLabelReturn => {
           {...props}
           sx={{ ml: { xs: '16rem', sm: '0rem', md: '-7rem', lg: '-7rem', xl: '-11rem' } }}
         />
-      </div>
+      </>
     )
   }
 
