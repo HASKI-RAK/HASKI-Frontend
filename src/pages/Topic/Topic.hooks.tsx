@@ -1,5 +1,5 @@
 import { LearningPathLearningElementNode } from '@components'
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, CSSProperties } from 'react'
 import { Node, Edge } from 'reactflow'
 import { Theme } from '@common/theme'
 import { LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
@@ -111,6 +111,11 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     [setLmsId]
   )
 
+  const nodeOffsetX = 50 // Can be defined globally
+  const groupHeight = 200 // Can be defined globally
+
+  // ! 1.
+  // TODO: Add comments
   const groupLearningElementsByClassification = (learningPath: LearningPathLearningElement[]) => {
     return Object.values(
       learningPath.reduce(
@@ -135,24 +140,15 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     )
   }
 
+  // ! 2.
+  // TODO: Rename and comment
   // Creates aligned nodes of the passed LearningPathLearningElement array and returns them.
   // Can be used to create child nodes of a specific classification for a group node.
   const getLearningElementChildNodes = (
     learningElements: LearningPathLearningElement[],
     learningPathStatus: LearningPathElementStatus[],
-    theme: Theme
+    learningElementNodeStyle: CSSProperties
   ): Node[] => {
-    const nodeOffsetX = 50 // Can be defined globally
-
-    const learningElementStyle = {
-      background: theme.palette.primary.main,
-      padding: 10,
-      border: '1px solid ' + theme.palette.grey[500],
-      borderRadius: 8,
-      cursor: 'pointer',
-      width: 500
-    } // Can be defined globally
-
     return learningElements.map((node, index) => {
       const nodeData: LearningPathLearningElementNode = {
         lmsId: node.learning_element.lms_id,
@@ -175,15 +171,14 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           x: nodeOffsetX + 550 * (index - 4 * Math.floor(index / 4)),
           y: 250 * (learningElements[0].position - 1) + Math.floor(index / 4) * 125 + 50
         },
-        style: learningElementStyle
+        style: learningElementNodeStyle
       }
     })
   }
 
+  // ! 3.
+  // TODO: Rename and comment
   const getLearningElementParentNode = (learningElements: LearningPathLearningElement[], theme: Theme): Node => {
-    const nodeOffsetX = 50 // Can be defined globally
-    const groupHeight = 200 // Can be defined globally
-
     return {
       id: learningElements[0].position.toString(),
       data: { label: 'Übungen' },
@@ -201,22 +196,25 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     }
   }
 
-  const getGroupedNodes = (
+  // ! 4.
+  const groupNodes = (
     learningPath: LearningPathLearningElement[],
     learningPathStatus: LearningPathElementStatus[],
     theme: Theme,
     index: number
   ): Node | Node[] => {
-    const learningElementStyle = {
+    // TODO: Comment
+    const learningElementNodeStyle = {
       background: theme.palette.primary.main,
       padding: 10,
       border: '1px solid ' + theme.palette.grey[500],
       borderRadius: 8,
       cursor: 'pointer',
       width: 500
-    } // Can  be defined globally
+    }
 
     if (learningPath.length === 1) {
+      // TODO: Nearly the same as in getLearningElementChildNodes except for the position and id
       const nodeData: LearningPathLearningElementNode = {
         lmsId: learningPath[0].learning_element.lms_id,
         name: learningPath[0].learning_element.name,
@@ -231,7 +229,6 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         isDone:
           learningPathStatus?.find((status) => status.cmid === learningPath[0].learning_element.lms_id)?.state === 1
       }
-
       return {
         id: learningPath[0].position.toString(),
         type: learningPath[0].learning_element.classification,
@@ -240,18 +237,19 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           x: 0,
           y: index * 250
         },
-        style: learningElementStyle
+        style: learningElementNodeStyle
       }
     }
 
     return [
       getLearningElementParentNode(learningPath, theme),
-      ...getLearningElementChildNodes(learningPath, learningPathStatus, theme)
+      ...getLearningElementChildNodes(learningPath, learningPathStatus, learningElementNodeStyle)
     ]
   }
 
+  // ! 5.
   const mapLearningPathToNodes = useCallback(
-    (learningPath: LearningPathElement, theme: Theme, learningPathStatus: LearningPathElementStatus[]): Node[] => {
+    (learningPath: LearningPathElement, learningPathStatus: LearningPathElementStatus[], theme: Theme): Node[] => {
       // Sort learning path by position
       const sortedLearningPath = Array.from(learningPath.path).sort((a, b) => a.position - b.position)
 
@@ -260,17 +258,17 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
 
       // Create nodes and return them
       const nodes = groupedElements.map((group, index) => {
-        return getGroupedNodes(group, learningPathStatus, theme, index)
+        return groupNodes(group, learningPathStatus, theme, index)
       })
 
-      //return []
       // Dissovles the array of arrays into a single array.
       return nodes.flatMap((nodes) => nodes)
     },
     []
   )
 
-  const mapLearningPathToNodes2 = useCallback(
+  // ! Old implementation
+  /*const mapLearningPathToNodes2 = useCallback(
     (
       learningPath: LearningPathElement,
       theme: Theme,
@@ -396,24 +394,49 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       return learningElementNodes
     },
     []
-  )
+  )*/
 
+  // ! 6.
+  // TODO: Needs boolean to determine if nodes are grouped or not
   // Calculate nodes their status and edges
   const mapNodes = useCallback(
     (learningPathData: LearningPathElement, theme: Theme, learningPathStatus: LearningPathElementStatus[]) => {
       const nodes = mapLearningPathToNodes(
         learningPathData,
-        theme,
+        learningPathStatus,
+        theme
         /*handleSetUrl,
         handleSetTitle,
         handleSetLmsId,
         handleOpen,
         handleClose,*/
-        learningPathStatus
       )
 
+      // TODO: ÜB are nothing special anymore. How can I handle grouped nodes?
+      // TODO: GROUP nodes can be filtered. Or take the first node of each position and they are nodes with edges.
       // Id array of all nodes which types are not 'ÜB'
-      const nodesWithEdges = nodes.filter((node) => node.type !== 'ÜB').map((node) => node.id)
+      // const nodesWithEdges = nodes.filter((node) => node.type !== 'ÜB').map((node) => node.id)
+      // Get the first node of each classification
+
+      // TODO: Doesnt work
+      const nodesWithEdges = Object.values(
+        nodes.reduce(
+          (firstLearningElementsOfClassification: { [classification: string]: Node[] }, learningElementNode: Node) => {
+            const classification = learningElementNode.type!
+
+            firstLearningElementsOfClassification = {
+              ...firstLearningElementsOfClassification,
+              [classification]: firstLearningElementsOfClassification[classification]
+                ? [...firstLearningElementsOfClassification[classification]]
+                : []
+            }
+            return firstLearningElementsOfClassification
+          },
+          {}
+        )
+      )
+        .flatMap((nodes) => nodes)
+        .map((node) => node.id)
 
       const edges: Edge[] = nodesWithEdges.map((item, index) => ({
         id: 'Edge' + item.toString(),
