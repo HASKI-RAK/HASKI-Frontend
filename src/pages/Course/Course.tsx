@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { usePersistedStore, useStore } from '@store'
 import { CheckBox } from '@common/icons'
-import { SkeletonList, useLearningPathTopic, BorderLinearProgress } from '@components'
+import { SkeletonList, useLearningPathTopic, StyledLinearProgress } from '@components'
 import { useTheme, useMediaQuery } from '@common/hooks'
 
 /**
@@ -95,6 +95,7 @@ const Course = (): JSX.Element => {
         })
       ).then((result) => {
         // Handle resulting array with calculated topic progress
+        console.log(result)
         setCalculatedTopicProgress(result)
       })
     }
@@ -130,7 +131,7 @@ const Course = (): JSX.Element => {
                     <Grid item md={1}>
                       {/*if topic is done 100%, a checkbox is displayed*/}
                       {calculatedTopicProgress[index] &&
-                        calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1] == 1 && (
+                        (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) == 1 && (
                           <CheckBox
                             sx={{
                               mt: '-0.8rem',
@@ -165,10 +166,10 @@ const Course = (): JSX.Element => {
                 {/* Display topic progress bar */}
                 <Grid container item direction="row" justifyContent="flex-end" alignItems="flex-end">
                   {calculatedTopicProgress[index] ? (
-                    <BorderLinearProgress learningElementProgressTopics={calculatedTopicProgress} index={index} />
+                    <StyledLinearProgress learningElementProgressTopics={calculatedTopicProgress} index={index} />
                   ) : (
                     // Display loading state if progress is not available yet
-                    <BorderLinearProgress />
+                    <StyledLinearProgress />
                   )}
                 </Grid>
               </Card>

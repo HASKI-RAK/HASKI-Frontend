@@ -24,9 +24,9 @@ type BorderLinearProgressProps = {
 //learningElementProgressTopics is an array of arrays with the progress of each topic
 //first element of the array is the number of solved learning elements,
 //second element is the number of total learning elements
-export const BorderLinearProgress = ({ learningElementProgressTopics, index }: BorderLinearProgressProps) => {
+export const StyledLinearProgress = ({ learningElementProgressTopics, index }: BorderLinearProgressProps) => {
   const calculatePercent = useCallback(() => {
-    if (!index || !learningElementProgressTopics) return 10
+    if (index === undefined || learningElementProgressTopics === undefined) return 10
 
     if (learningElementProgressTopics[index].length === 0) return -1
 
@@ -44,7 +44,7 @@ export const BorderLinearProgress = ({ learningElementProgressTopics, index }: B
   }, [percent])
 
   const getText = useCallback(() => {
-    if (!index || !learningElementProgressTopics) return 'loading...'
+    if (index === undefined || learningElementProgressTopics === undefined) return 'loading...'
 
     return learningElementProgressTopics[index].length === 0
       ? 'error..'
@@ -52,7 +52,7 @@ export const BorderLinearProgress = ({ learningElementProgressTopics, index }: B
   }, [index, learningElementProgressTopics])
 
   const getTextPosition = useCallback(() => {
-    if (!index || !learningElementProgressTopics)
+    if (index === undefined || learningElementProgressTopics === undefined)
       return { xs: '20rem', sm: '5rem', md: '15rem', lg: '25rem', xl: '45rem' }
 
     return { xs: '20rem', sm: '9rem', md: '20rem', lg: '30rem', xl: '46rem' }
@@ -80,5 +80,3 @@ const StyledLinearProgressWithLabel = styled(LinearProgressWithLabel)(({ theme }
     borderRadius: 3
   }
 }))
-
-export default BorderLinearProgress
