@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import Course from './Course'
 import * as router from 'react-router'
+import { mockServices } from 'jest.setup'
 
 const navigate = jest.fn()
 jest.useFakeTimers()
@@ -70,5 +71,59 @@ describe('Course', () => {
       fireEvent.click(getByTestId('Course-Card-Topic-Informatik'))
       expect(navigate).toHaveBeenCalledWith('topic/2')
     })
+  })
+
+  it('renders course page with topics, getLearningPathElement throws error', async () => {
+    mockServices.fetchLearningPathElement.mockImplementationOnce(() => {
+      throw new Error('getLearningPathElement error')
+    })
+
+    const { getAllByRole } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Course />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getAllByRole('button')[0])
+    })
+
+    expect(navigate).toHaveBeenCalledWith('topic/1')
+  })
+
+  it('renders course page with topics, getLearningPathElementStatus throws error', async () => {
+    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(() => {
+      throw new Error('getLearningPathElement error')
+    })
+
+    const { getAllByRole } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Course />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getAllByRole('button')[0])
+    })
+
+    expect(navigate).toHaveBeenCalledWith('topic/1')
+  })
+
+  it('renders course page with topics, getUser throws error', async () => {
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('getLearningPathElement error')
+    })
+
+    render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Course />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
   })
 })
