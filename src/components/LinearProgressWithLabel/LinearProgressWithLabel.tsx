@@ -77,7 +77,7 @@ export const LinearProgressWithLabel = (): LinearProgressWithLabelReturn => {
     }
   ) => {
     return (
-      <>
+      <div>
         <Tooltip title={'Completed learning elements'}>
           <Typography sx={{ ml: props.textposition, mr: '0.5rem' }} variant="body1" color="text.secondary">
             {'Learning progress: ' + props.text}
@@ -88,7 +88,7 @@ export const LinearProgressWithLabel = (): LinearProgressWithLabelReturn => {
           {...props}
           sx={{ ml: { xs: '16rem', sm: '0rem', md: '-7rem', lg: '-7rem', xl: '-11rem' } }}
         />
-      </>
+      </div>
     )
   }
 
