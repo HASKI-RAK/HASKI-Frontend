@@ -1,27 +1,16 @@
-import { Typography, Tooltip, LinearProgress, LinearProgressProps, linearProgressClasses } from '@common/components'
-import { styled } from '@common/theme'
-import { useMemo } from 'react'
-import { StyledComponent } from '@emotion/styled'
+import { Typography, Tooltip, LinearProgress, LinearProgressProps } from '@common/components'
+import { memo } from 'react'
 
 /**
- * @typedef LinearProgressWithLabelReturn
- * @property {function} calculateTopicProgress - The calculateTopicProgress function.
- * index is the index of the topic in the array that should be calculated
- * learningElementProgressTopics is an array of arrays with the progress of each topic
- * first element of the array is the number of solved learning elements,
- * second element is the number of total learning elements
- * example: [[1, 1] ,[1,6]]
- * @property {function} BorderLinearProgress - The BorderLinearProgress function.
- *
- * @returns An object with the functions calculateTopicProgress and BorderLinearProgress.
+ * @prop value - The value of the progress bar.
+ * @prop text - The text of the progress bar.
+ * @prop textposition - The position of the text of the progress bar.
+ * @interface
  */
-export type LinearProgressWithLabelReturn = {
-  readonly calculateTopicProgress: (learningElementProgressTopics: number[][], index: number) => JSX.Element
-  readonly BorderLinearProgress: StyledComponent<
-    LinearProgressProps & { value: number } & { text: string } & {
-      textposition: { xs: string; sm: string; md: string; lg: string; xl: string }
-    }
-  >
+export type LinearProgressWithLabelProps = LinearProgressProps & {
+  value: number
+  text: string
+  textposition: { xs: string; sm: string; md: string; lg: string; xl: string }
 }
 
 /**
@@ -69,84 +58,21 @@ export type LinearProgressWithLabelReturn = {
  *    }
  * ```
  */
-export const LinearProgressWithLabel = (): LinearProgressWithLabelReturn => {
-  //Linear Progress Bar with label
-  const LinearProgressWithLabel = (
-    props: LinearProgressProps & { value: number } & { text: string } & {
-      textposition: { xs: string; sm: string; md: string; lg: string; xl: string }
-    }
-  ) => {
-    return (
-      <div>
-        <Tooltip title={'Completed learning elements'}>
-          <Typography sx={{ ml: props.textposition, mr: '0.5rem' }} variant="body1" color="text.secondary">
-            {'Learning progress: ' + props.text}
-          </Typography>
-        </Tooltip>
-        <LinearProgress
-          variant="determinate"
-          {...props}
-          sx={{ ml: { xs: '16rem', sm: '0rem', md: '-7rem', lg: '-7rem', xl: '-11rem' } }}
-        />
-      </div>
-    )
-  }
-
-  //styled Linear Progress Bar
-  const BorderLinearProgress = styled(LinearProgressWithLabel)(({ theme }) => ({
-    height: 7,
-    borderRadius: 5,
-    [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: theme.palette.grey[800]
-    },
-    [`& .${linearProgressClasses.bar}`]: {
-      borderRadius: 3
-    }
-  }))
-
-  //calculate the progress of a topic and return a progress bar with variable text, color and value
-  //learningElementProgressTopics is an array of arrays with the progress of each topic
-  //first element of the array is the number of solved learning elements,
-  //second element is the number of total learning elements
-  const calculateTopicProgress = (learningElementProgressTopics: number[][], index: number) => {
-    const percent = calculatePercent(learningElementProgressTopics, index)
-    //if the student solved anything show his progress, else show a set minimum (6)
-    const value = percent > 1 ? percent : 6
-    const color = colorByPercent(percent)
-
-    return (
-      <BorderLinearProgress
-        data-testid={'Course-Card-Topic-Progress'}
-        value={value}
-        text={`${
-          learningElementProgressTopics[index].length === 0
-            ? 'error..'
-            : learningElementProgressTopics[index][0] + '/' + learningElementProgressTopics[index][1]
-        }`}
-        color={color}
-        textposition={{ xs: '20rem', sm: '9rem', md: '20rem', lg: '30rem', xl: '46rem' }}
+const LinearProgressWithLabel = (props: LinearProgressWithLabelProps) => {
+  return (
+    <div>
+      <Tooltip title={'Completed learning elements'}>
+        <Typography sx={{ ml: props.textposition, mr: '0.5rem' }} variant="body1" color="text.secondary">
+          {'Learning progress: ' + props.text}
+        </Typography>
+      </Tooltip>
+      <LinearProgress
+        variant="determinate"
+        {...props}
+        sx={{ ml: { xs: '16rem', sm: '0rem', md: '-7rem', lg: '-7rem', xl: '-11rem' } }}
       />
-    )
-  }
-
-  const calculatePercent = (learningElementProgressTopics: number[][], index: number) => {
-    if (learningElementProgressTopics[index].length === 0) return -1
-    return (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
-  }
-
-  //calculate the color of the progress bar
-  //gray if error (-1), red if 0%, yellow if <70%, green if >=70%
-  const colorByPercent = (percent: number) => {
-    if (percent === 0) return 'error'
-    else if (percent < 0) return 'info'
-    return percent < 70 ? 'warning' : 'success'
-  }
-
-  return useMemo(
-    () => ({
-      calculateTopicProgress,
-      BorderLinearProgress
-    }),
-    []
+    </div>
   )
 }
+
+export default memo(LinearProgressWithLabel)

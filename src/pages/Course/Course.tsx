@@ -6,23 +6,8 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { usePersistedStore, useStore } from '@store'
 import { CheckBox } from '@common/icons'
-import {
-  LinearProgressWithLabel as _linearProgressWithLabel,
-  LinearProgressWithLabelReturn,
-  SkeletonList,
-  useLearningPathTopic
-} from '@components'
+import { SkeletonList, useLearningPathTopic, BorderLinearProgress } from '@components'
 import { useTheme, useMediaQuery } from '@common/hooks'
-
-/*
- * @typedef CourseProps
- * @property {function} [LinearProgressWithLabel] - The LinearProgressWithLabel function.
- * @property {function} [LinearProgressWithLabel.calculateTopicProgress] - The calculateTopicProgress function.
- * @property {function} [LinearProgressWithLabel.BorderLinearProgress] - The BorderLinearProgress function.
- */
-export type CourseProps = {
-  LinearProgressWithLabel?: () => LinearProgressWithLabelReturn
-}
 
 /**
  * # Course Page
@@ -34,7 +19,7 @@ export type CourseProps = {
  * Uses the {@link LinearProgressWithLabel} hook to calculate the progress of each topic in the course.
  * @category Pages
  */
-const Course = ({ LinearProgressWithLabel = _linearProgressWithLabel }: CourseProps): JSX.Element => {
+const Course = (): JSX.Element => {
   const { t } = useTranslation()
   const theme = useTheme()
   const authContext = useContext(AuthContext)
@@ -49,7 +34,6 @@ const Course = ({ LinearProgressWithLabel = _linearProgressWithLabel }: CoursePr
 
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
   const { loading, topics } = useLearningPathTopic(courseId)
-  const { calculateTopicProgress, BorderLinearProgress } = LinearProgressWithLabel()
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
@@ -63,43 +47,34 @@ const Course = ({ LinearProgressWithLabel = _linearProgressWithLabel }: CoursePr
         topics.map((topic) => {
           return getUser().then((user) => {
             return getLearningPathElementStatus(courseId, user.lms_user_id)
-              .then((learningPathElementStatusData) => {
-                //filter all learning elements with state 1 (done)
-                const allDoneLearningElements = learningPathElementStatusData.filter((learningPathElementStatus) => {
-                  return learningPathElementStatus.state === 1
-                })
-                return getLearningPathElement(
-                  user.settings.user_id,
-                  user.lms_user_id,
-                  user.id,
-                  courseId,
-                  topic.id.toString()
-                )
-                  .then((allLearningElementsInTopic) => {
-                    //filter all learning elements in topic for done learning elements
-                    const allDoneLearningElementsInTopic = allLearningElementsInTopic.path.map((learningElement) => {
-                      return allDoneLearningElements.some(
-                        (status) => status.cmid === learningElement.learning_element.lms_id
-                      )
-                    })
-                    //build a array[][] with the number of done learning elements and the number of all learning elements in topic
-                    //do that for every topic, and lastly return an array with all the arrays for every topic
-                    //example: [[1,2],[2,2],[0,2]]
-                    return [
-                      allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
-                      allLearningElementsInTopic.path.length
-                    ]
-                  })
-                  .catch((error: string) => {
-                    addSnackbar({
-                      message: error,
-                      severity: 'error',
-                      autoHideDuration: 3000
-                    })
-                    return []
-                  })
+            .then((learningPathElementStatusData) => {
+              //filter all learning elements with state 1 (done)
+              const allDoneLearningElements = learningPathElementStatusData.filter((learningPathElementStatus) => {
+                return learningPathElementStatus.state === 1
               })
-              .catch((error: string) => {
+              return getLearningPathElement(
+                user.settings.user_id,
+                user.lms_user_id,
+                user.id,
+                courseId,
+                topic.id.toString()
+              )
+              .then((allLearningElementsInTopic) => {
+                //filter all learning elements in topic for done learning elements
+                const allDoneLearningElementsInTopic = allLearningElementsInTopic.path.map((learningElement) => {
+                  return allDoneLearningElements.some(
+                    (status) => status.cmid === learningElement.learning_element.lms_id
+                  )
+                })
+                //build a array[][] with the number of done learning elements and the number of all learning elements in topic
+                //do that for every topic, and lastly return an array with all the arrays for every topic
+                //example: [[1,2],[2,2],[0,2]]
+                return [
+                  allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
+                  allLearningElementsInTopic.path.length
+                ]
+              })
+               .catch((error: string) => {
                 addSnackbar({
                   message: error,
                   severity: 'error',
@@ -107,6 +82,15 @@ const Course = ({ LinearProgressWithLabel = _linearProgressWithLabel }: CoursePr
                 })
                 return []
               })
+            })
+             .catch((error: string) => {
+              addSnackbar({
+                message: error,
+                severity: 'error',
+                autoHideDuration: 3000
+              })
+              return []
+            })
           })
         })
       ).then((result) => {
@@ -181,15 +165,10 @@ const Course = ({ LinearProgressWithLabel = _linearProgressWithLabel }: CoursePr
                 {/* Display topic progress bar */}
                 <Grid container item direction="row" justifyContent="flex-end" alignItems="flex-end">
                   {calculatedTopicProgress[index] ? (
-                    calculateTopicProgress(calculatedTopicProgress, index)
+                    <BorderLinearProgress learningElementProgressTopics={calculatedTopicProgress} index={index} />
                   ) : (
                     // Display loading state if progress is not available yet
-                    <BorderLinearProgress
-                      value={10}
-                      text={'loading...'}
-                      color={'info'}
-                      textposition={{ xs: '20rem', sm: '5rem', md: '15rem', lg: '25rem', xl: '45rem' }}
-                    />
+                    <BorderLinearProgress />
                   )}
                 </Grid>
               </Card>
