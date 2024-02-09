@@ -10,6 +10,7 @@ import {
   useLearningPathTopic as _useLearningPathTopic,
   useLearningPathElement as _useLearningPathElement
 } from '@components'
+import Drawer from '@mui/material/Drawer'
 
 /**
  *  Local navigation component props.
@@ -47,62 +48,78 @@ const LocalNav = ({
   }
 
   return (
-    <Box flexGrow={1}>
-      <Typography variant="h5">{t('appGlobal.topics')}</Typography>
-      <Divider />
-      {loading ? (
-        <Box>
-          <Stack spacing={1}>
-            <SkeletonList />
-          </Stack>
-        </Box>
-      ) : (
-        <>
-          {topics.map((topic, index) => (
-            <Accordion
-              id="local-nav-accordion"
-              disableGutters
-              key={`topic-Accordion-${topic.id}`}
-              sx={{
-                borderColor: 'divider',
-                boxShadow: (theme) => `0 1px 0 ${theme.palette.secondary.main}`,
-                border: '1px',
-                '&:last-of-type': {
-                  borderBottomLeftRadius: 0,
-                  borderBottomRightRadius: 0
-                }
-              }}
-              expanded={openAccordion === index}
-              onChange={() => handleAccordionClick(index)}>
-              <AccordionSummary
-                expandIcon={<ExpandMore />}
-                data-testid={`topic-AccordionSummary-${topic.id}`}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
+    <Drawer
+      variant="permanent"
+      sx={{
+        width: '250px',
+        flexShrink: 1,
+
+        [`& .MuiDrawer-paper`]: {
+          width: '250px',
+
+          marginTop: '100px',
+          boxSizing: 'border-box',
+          maxHeight: '70%'
+          /**marginTop: '20%'*/
+        }
+      }}>
+      <Box flexGrow={1} overflow={'auto'}>
+        <Typography variant="h5">{t('appGlobal.topics')}</Typography>
+        <Divider />
+        {loading ? (
+          <Box>
+            <Stack spacing={1}>
+              <SkeletonList />
+            </Stack>
+          </Box>
+        ) : (
+          <>
+            {topics.map((topic, index) => (
+              <Accordion
+                id="local-nav-accordion"
+                disableGutters
+                key={`topic-Accordion-${topic.id}`}
                 sx={{
-                  backgroundColor: 'white',
-                  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-                    transform: 'rotate(-90deg)'
+                  borderColor: 'divider',
+                  boxShadow: (theme) => `0 1px 0 ${theme.palette.secondary.main}`,
+                  border: '1px',
+                  '&:last-of-type': {
+                    borderBottomLeftRadius: 0,
+                    borderBottomRightRadius: 0
                   }
-                }}>
-                <Typography variant="h6">{topic.name}</Typography>
-              </AccordionSummary>
-              <AccordionDetails sx={{ flexDirection: 'column' }}>
-                {openAccordion === index && (
-                  <Suspense fallback={<div>{t('appGlobal.loading')}</div>}>
-                    <LazyLoadingLearningPathElement
-                      topic={topic}
-                      courseId={courseId}
-                      useLearningPathElement={useLearningPathElement}
-                    />
-                  </Suspense>
-                )}
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </>
-      )}
-    </Box>
+                }}
+                expanded={openAccordion === index}
+                onChange={() => handleAccordionClick(index)}>
+                <AccordionSummary
+                  expandIcon={<ExpandMore />}
+                  data-testid={`topic-AccordionSummary-${topic.id}`}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                  sx={{
+                    backgroundColor: 'white',
+                    '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+                      transform: 'rotate(-90deg)'
+                    }
+                  }}>
+                  <Typography variant="h6">{topic.name}</Typography>
+                </AccordionSummary>
+                <AccordionDetails sx={{ flexDirection: 'column' }}>
+                  {openAccordion === index && (
+                    <Suspense fallback={<div>{t('appGlobal.loading')}</div>}>
+                      <LazyLoadingLearningPathElement
+                        topic={topic}
+                        courseId={courseId}
+                        useLearningPathElement={useLearningPathElement}
+                      />
+                    </Suspense>
+                  )}
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </>
+        )}
+      </Box>
+    </Drawer>
   )
 }
 
