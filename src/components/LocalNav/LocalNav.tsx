@@ -1,15 +1,15 @@
-import { Accordion, Box, Divider, Typography, AccordionSummary, AccordionDetails, Stack } from '@common/components'
-import { ExpandMore } from '@common/icons'
+import { Box, Divider, Typography, Stack, List, ListItem, ListItemText } from '@common/components'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { LearningPathElement, Topic } from '@core'
-import { Suspense, useState } from 'react'
-import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
+import { useState } from 'react'
 import {
   SkeletonList,
   useLearningPathTopic as _useLearningPathTopic,
   useLearningPathElement as _useLearningPathElement
 } from '@components'
+import { ListItemButton } from '@mui/material'
+import { useMediaQuery, useTheme } from '@common/hooks'
 
 /**
  *  Local navigation component props.
@@ -32,19 +32,13 @@ export type LocalNavProps = {
  * @param param - component props. The {@link LocalNavProps#useLearningPathTopic} and {@link LocalNavProps#useLearningPathElement} are optional.
  * @returns
  */
-const LocalNav = ({
-  useLearningPathTopic = _useLearningPathTopic,
-  useLearningPathElement = _useLearningPathElement
-}: LocalNavProps) => {
+const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProps) => {
   const { t } = useTranslation()
+  const theme = useTheme()
   const { courseId } = useParams() as { courseId: string }
+  const navigate = useNavigate()
   const { loading, topics } = useLearningPathTopic(courseId)
-
-  const [openAccordion, setOpenAccordion] = useState<number | null>(null)
-
-  const handleAccordionClick = (index: number) => {
-    setOpenAccordion(openAccordion === index ? null : index)
-  }
+  const isSmOrDown = useMediaQuery(theme.breakpoints.down('sm'))
 
   return (
     <Box flexGrow={1}>
@@ -58,48 +52,32 @@ const LocalNav = ({
         </Box>
       ) : (
         <>
-          {topics.map((topic, index) => (
-            <Accordion
-              id="local-nav-accordion"
-              disableGutters
-              key={`topic-Accordion-${topic.id}`}
-              sx={{
-                borderColor: 'divider',
-                boxShadow: (theme) => `0 1px 0 ${theme.palette.secondary.main}`,
-                border: '1px',
-                '&:last-of-type': {
-                  borderBottomLeftRadius: 0,
-                  borderBottomRightRadius: 0
-                }
-              }}
-              expanded={openAccordion === index}
-              onChange={() => handleAccordionClick(index)}>
-              <AccordionSummary
-                expandIcon={<ExpandMore />}
-                data-testid={`topic-AccordionSummary-${topic.id}`}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-                sx={{
-                  backgroundColor: 'white',
-                  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-                    transform: 'rotate(-90deg)'
-                  }
-                }}>
-                <Typography variant="h6">{topic.name}</Typography>
-              </AccordionSummary>
-              <AccordionDetails sx={{ flexDirection: 'column' }}>
-                {openAccordion === index && (
-                  <Suspense fallback={<div>{t('appGlobal.loading')}</div>}>
-                    <LazyLoadingLearningPathElement
-                      topic={topic}
-                      courseId={courseId}
-                      useLearningPathElement={useLearningPathElement}
-                    />
-                  </Suspense>
-                )}
-              </AccordionDetails>
-            </Accordion>
-          ))}
+          <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            {topics.map((topic) => (
+              <ListItem key={topic.id}>
+                <ListItemButton
+                  key={topic.id}
+                  onClick={() => {
+                    navigate(`/course/${courseId}/topic/${topic.id}`)
+                  }}>
+                  <ListItemText
+                    primary={topic.name}
+                    primaryTypographyProps={
+                      isSmOrDown
+                        ? {
+                            fontSize: 12,
+                            fontWeight: 'medium'
+                          }
+                        : {
+                            fontSize: 18,
+                            fontWeight: 'medium'
+                          }
+                    }
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
         </>
       )}
     </Box>

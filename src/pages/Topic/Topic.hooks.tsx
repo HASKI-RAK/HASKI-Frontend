@@ -17,6 +17,7 @@ export type useTopicHookParams = {
   defaultTitle?: string
   defaultIsOpen?: boolean
   defaultLmsId?: number
+  defaultXYZoom?: { x: number; y: number; zoom: number }
 }
 
 /**
@@ -51,6 +52,8 @@ export type TopicHookReturn = {
     nodes: Node[]
     edges: Edge[]
   }
+  readonly handleXYZoom: (x: number, y: number, zoom: number) => void
+  readonly xyzoom: { x: number; y: number; zoom: number }
 }
 
 /**
@@ -68,18 +71,32 @@ export type TopicHookReturn = {
  */
 export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   // Default values
-  const { defaultUrl = '', defaultTitle = '', defaultIsOpen = false, defaultLmsId = -1 } = params ?? {}
+  const {
+    defaultUrl = '',
+    defaultTitle = '',
+    defaultIsOpen = false,
+    defaultLmsId = -1,
+    defaultXYZoom = { x: 0, y: 0, zoom: 1 }
+  } = params ?? {}
 
   // State data
   const [url, setUrl] = useState(defaultUrl)
   const [title, setTitle] = useState(defaultTitle)
   const [isOpen, setIsOpen] = useState(defaultIsOpen)
   const [lmsId, setLmsId] = useState<number>(defaultLmsId)
+  const [xyzoom, setXyzoom] = useState(defaultXYZoom)
 
   // Logic
   const handleOpen = useCallback(() => {
     setIsOpen(true)
   }, [setIsOpen])
+
+  const handleXYZoom = useCallback(
+    (x: number, y: number, zoom: number) => {
+      setXyzoom({ x, y, zoom })
+    },
+    [setXyzoom]
+  )
 
   const handleClose = useCallback(() => {
     setIsOpen(false)
@@ -296,7 +313,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
 
       return { nodes, edges }
     },
-    [handleClose, handleOpen, handleSetTitle, handleSetUrl, handleSetLmsId, mapLearningPathToNodes]
+    [handleClose, handleOpen, handleXYZoom, handleSetTitle, handleSetUrl, handleSetLmsId, mapLearningPathToNodes]
   )
 
   return useMemo(
@@ -307,12 +324,27 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         lmsId,
         isOpen,
         handleClose,
+        handleXYZoom,
+        xyzoom,
         handleOpen,
         handleSetUrl,
         handleSetTitle,
         handleSetLmsId,
         mapNodes
       } as const),
-    [url, title, lmsId, isOpen, handleClose, handleOpen, handleSetUrl, handleSetTitle, handleSetLmsId, mapNodes]
+    [
+      url,
+      title,
+      lmsId,
+      isOpen,
+      handleClose,
+      xyzoom,
+      handleXYZoom,
+      handleOpen,
+      handleSetUrl,
+      handleSetTitle,
+      handleSetLmsId,
+      mapNodes
+    ]
   )
 }

@@ -1,6 +1,6 @@
 import { useTopic as _useTopic, useTopicHookParams, TopicHookReturn } from './Topic.hooks'
-import ReactFlow, { Node, Edge, MiniMap, Controls, Background } from 'reactflow'
-import { useEffect, useState, useContext, memo } from 'react'
+import ReactFlow, { Node, Edge, MiniMap, Controls, Background, ReactFlowProvider, useReactFlow } from 'reactflow'
+import React, { useEffect, useState, useContext, memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext, SnackbarContext } from '@services'
 import { useStore, usePersistedStore } from '@store'
@@ -8,6 +8,25 @@ import { IFrameModal, nodeTypes } from '@components'
 import { Box, Skeleton } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { LearningPathElementStatus } from '@core'
+
+// custom fitView centering on first uncompleted element
+const CustomFitViewButton = ({ node }: { node: Node[] }) => {
+  const { fitView } = useReactFlow()
+  console.log(node)
+  const firstUncompletedElement = node[0]
+
+  const handleClick = () => {
+    //with setViewport (useReactFlow) it is possible to set the view to a specific position and zoom
+    //(for example first uncomplete node) ({ x: nodeX, y: nodeY, zoom: 1 }, { duration: 500 })
+    fitView({
+      padding: 5,
+      minZoom: 0.75,
+      nodes: [{ id: firstUncompletedElement.id }]
+    })
+  }
+
+  return <div id="customFitViewButton" style={{ display: 'none' }} onClick={handleClick} />
+}
 
 /**
  * @prop useTopic - Does the heavy work such as mapping nodes and edges and fetching.
@@ -47,6 +66,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialNodes, setInitialNodes] = useState<Node[]>()
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
+
+  // Function to fit the view
 
   // Get status of every learning element for user by request to backend
   // then get every learning element for topic by request to backend
@@ -131,14 +152,45 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     return handleClose()
   }
 
+  // Search for the 'fit view'-button of <Controls/> and trigger click event
+  const handleFitView = () => {
+    const fitViewButton = document.querySelector('.react-flow__controls-button.react-flow__controls-fitview')
+
+    if (fitViewButton) {
+      ;(fitViewButton as HTMLButtonElement).click()
+    }
+  }
+
+  // Trigger the click event of the custom 'fit view'-button
+  const handleCustomFitView = () => {
+    const fitViewButton = document.getElementById('customFitViewButton')
+
+    if (fitViewButton) {
+      fitViewButton.click()
+    }
+  }
+
   // Show Loading-Skeleton until Nodes, Edges and LearningPathElementStatus are loaded
   return initialNodes && initialEdges && learningPathElementStatus ? (
     <Box height={'100%'}>
-      <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
-        <Background gap={16} />
-        <MiniMap nodeBorderRadius={2} />
-        <Controls />
-      </ReactFlow>
+      <ReactFlowProvider>
+        <ReactFlow
+          nodes={initialNodes}
+          edges={initialEdges}
+          nodeTypes={nodeTypes}
+          fitView
+          fitViewOptions={{
+            padding: 5,
+            minZoom: 0.75,
+            nodes: [{ id: initialNodes[0].id }]
+          }}
+          onSelectionChange={handleCustomFitView}>
+          <CustomFitViewButton node={initialNodes} />
+          <Background gap={16} />
+          <MiniMap nodeBorderRadius={2} />
+          <Controls />
+        </ReactFlow>
+      </ReactFlowProvider>
       <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
     </Box>
   ) : (
