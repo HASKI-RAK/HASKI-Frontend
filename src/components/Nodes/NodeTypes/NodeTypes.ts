@@ -1,19 +1,18 @@
-import ShortTextualIntroductionNode from '../ShortTextualIntroductionNode/ShortTextualIntroductionNode'
+import { NodeTypes } from 'reactflow'
 import AdditionalLiteratureNode from '../AdditionalLiteratureNode/AdditionalLiteratureNode'
-import SelfAssessmentNode from '../SelfAssessmentNode/SelfAssessmentNode'
-import ExplanationNode from '../ExplanationNode/ExplanationNode'
-import FeedbackNode from '../FeedbackNode/FeedbackNode'
-import ExerciseNode from '../ExerciseNode/ExerciseNode'
+import ApplicationExampleNode from '../ApplicationExampleNode/ApplicationExampleNode'
+import BasicNode from '../BasicNode/BasicNode'
 import DefaultGroup from '../DefaultGroup/DefaultGroup'
 import ExampleNode from '../ExampleNode/ExampleNode'
-import SummaryNode from '../SummaryNode/SummaryNode'
-import VideoNode from '../VideoNode/VideoNode'
-import BasicNode from '../BasicNode/BasicNode'
-import { NodeTypes } from 'reactflow'
-import type { LearningPathLearningElementNode } from '../LearningPathLearningElementNode/LearningPathLearningElementNode'
-import ApplicationExampleNode from '../ApplicationExampleNode/ApplicationExampleNode'
+import ExerciseNode from '../ExerciseNode/ExerciseNode'
+import ExplanationNode from '../ExplanationNode/ExplanationNode'
+import FeedbackNode from '../FeedbackNode/FeedbackNode'
 import ForumNode from '../ForumNode/ForumNode'
 import LearningObjectiveNode from '../LearningObjectiveNode/LearningObjectiveNode'
+import SelfAssessmentNode from '../SelfAssessmentNode/SelfAssessmentNode'
+import ShortTextualIntroductionNode from '../ShortTextualIntroductionNode/ShortTextualIntroductionNode'
+import SummaryNode from '../SummaryNode/SummaryNode'
+import VideoNode from '../VideoNode/VideoNode'
 
 /**
  * nodeTypes object.
@@ -38,4 +37,21 @@ export const nodeTypes: NodeTypes = {
   SE: SelfAssessmentNode,
   GROUP: DefaultGroup,
   DEFAULT: BasicNode
+}
+
+// TODO: In translation file auslagern
+export const groupLabels: Record<string, string> = {
+  RQ: 'Feedbacks',
+  KÜ: 'Kurzübersichten',
+  AB: 'Anwendungsbeispiele',
+  EK: 'Erklärungen',
+  AN: 'Animationen',
+  BE: 'Beispiele',
+  FO: 'Foren',
+  ÜB: 'Übungen',
+  ZF: 'Zusammenfassungen',
+  LZ: 'Lernziele',
+  ZL: 'Zusatzliteratur',
+  SE: 'Selbstüberprüfungen',
+  DEFAULT: 'Default'
 }

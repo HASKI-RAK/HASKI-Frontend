@@ -1,10 +1,11 @@
-import { ModalProps as DefaultModalProps } from '@common/components'
 import DefaultModal from '@mui/material/Modal'
+// TODO: Replace with common/components
 import { memo, useCallback } from 'react'
+import { ModalProps as DefaultModalProps } from '@common/components'
 import {
+  StatementHookReturn,
   useStatement as _useStatement,
   useStatementHookParams,
-  StatementHookReturn,
   xAPIComponent,
   xAPIVerb
 } from '@services'

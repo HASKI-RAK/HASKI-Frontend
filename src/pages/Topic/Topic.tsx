@@ -1,13 +1,13 @@
-import { useTopic as _useTopic, useTopicHookParams, TopicHookReturn } from './Topic.hooks'
-import ReactFlow, { Node, Edge, MiniMap, Controls, Background } from 'reactflow'
-import { useEffect, useState, useContext, memo } from 'react'
+import { memo, useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { AuthContext, SnackbarContext } from '@services'
-import { useStore, usePersistedStore } from '@store'
-import { IFrameModal, nodeTypes } from '@components'
+import ReactFlow, { Background, Controls, Edge, MiniMap, Node } from 'reactflow'
 import { Box, Skeleton } from '@common/components'
 import { useTheme } from '@common/hooks'
+import { IFrameModal, nodeTypes } from '@components'
 import { LearningPathElementStatus } from '@core'
+import { AuthContext, SnackbarContext } from '@services'
+import { usePersistedStore, useStore } from '@store'
+import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
 
 /**
  * @prop useTopic - Does the heavy work such as mapping nodes and edges and fetching.
@@ -137,7 +137,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
         <Background gap={16} />
         <MiniMap nodeBorderRadius={2} />
-        <Controls />
+        <Controls showInteractive={false} />
       </ReactFlow>
       <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
     </Box>

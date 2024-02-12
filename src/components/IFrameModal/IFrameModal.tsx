@@ -1,6 +1,7 @@
-import { Box, Modal } from '@common/components'
 import { Fab } from '@mui/material'
+// TODO: Replace with common/components
 import { memo } from 'react'
+import { Box, Modal } from '@common/components'
 import { Close } from '@common/icons'
 
 const style_box = {

@@ -1,7 +1,7 @@
-import { LearningPathLearningElementNode } from '@components'
-import { useState, useCallback, useMemo, CSSProperties } from 'react'
-import { Node, Edge } from 'reactflow'
+import { CSSProperties, useCallback, useMemo, useState } from 'react'
+import { Edge, Node } from 'reactflow'
 import { Theme } from '@common/theme'
+import { LearningPathLearningElementNode, groupLabels } from '@components'
 import { LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
 
 /**
@@ -147,7 +147,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const getLearningElementChildNodes = (
     learningElements: LearningPathLearningElement[],
     learningPathStatus: LearningPathElementStatus[],
-    learningElementNodeStyle: CSSProperties
+    learningElementNodeStyle: CSSProperties,
+    position: number
   ): Node[] => {
     return learningElements.map((node, index) => {
       const nodeData: LearningPathLearningElementNode = {
@@ -168,8 +169,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         type: node.learning_element.classification,
         data: nodeData,
         position: {
-          x: nodeOffsetX + 550 * (index - 4 * Math.floor(index / 4)),
-          y: 250 * (learningElements[0].position - 1) + Math.floor(index / 4) * 125 + 50
+          x: -275 * (learningElements.length > 3 ? 4 : learningElements.length) + nodeOffsetX / 2 + 550 * (index % 4), // 550 * (index - 4 * Math.floor(index / 4)) + nodeOffsetX,
+          y: 300 * (position - 0.25) + 125 * Math.floor(index / 4) + 50 // TODO: Tweak the values
         },
         style: learningElementNodeStyle
       }
@@ -177,15 +178,23 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   }
 
   // ! 3.
-  // TODO: Rename and comment
-  const getLearningElementParentNode = (learningElements: LearningPathLearningElement[], theme: Theme): Node => {
+  // TODO: Comment
+  const getLearningElementParentNode = (
+    learningElements: LearningPathLearningElement[],
+    theme: Theme,
+    position: number,
+    yOffset?: number
+  ): Node => {
     return {
       id: learningElements[0].position.toString(),
-      data: { label: 'Übungen' },
+      data: {
+        classification: learningElements[0].learning_element.classification,
+        label: groupLabels[learningElements[0].learning_element.classification]
+      },
       type: 'GROUP',
       position: {
-        x: 0,
-        y: 250 * (learningElements[0].position - 1)
+        x: (-550 * (learningElements.length > 3 ? 4 : learningElements.length) - nodeOffsetX) / 2,
+        y: 300 * (position - 0.25) // TODO: Tweak the numbers
       },
       style: {
         border: '1px solid ' + theme.palette.grey[500],
@@ -195,6 +204,24 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       }
     }
   }
+  /*
+          const getNodeYPos = () => {
+          if (exerciseLearningElementParentNode && item.position >= parseInt(exerciseLearningElementParentNode.id)) {
+            return (
+              250 *
+                (item.position -
+                  parseInt(exerciseLearningElementChildNodes[exerciseLearningElementChildNodes.length - 1].id)) +
+              exerciseLearningElementParentNode.position.y +
+              groupHeight +
+              70
+            )
+          } else {
+            return 250 * (item.position - 1)
+          }
+        }
+  */
+
+  // const groupCount
 
   // ! 4.
   const groupNodes = (
@@ -234,20 +261,20 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         type: learningPath[0].learning_element.classification,
         data: nodeData,
         position: {
-          x: 0,
-          y: index * 250
+          x: -250,
+          y: 300 * (index === 0 ? 0.1 : index - 0.25)
         },
         style: learningElementNodeStyle
       }
     }
 
     return [
-      getLearningElementParentNode(learningPath, theme),
-      ...getLearningElementChildNodes(learningPath, learningPathStatus, learningElementNodeStyle)
+      getLearningElementParentNode(learningPath, theme, index),
+      ...getLearningElementChildNodes(learningPath, learningPathStatus, learningElementNodeStyle, index)
     ]
   }
 
-  // ! 5.
+  // ! 5. Comment
   const mapLearningPathToNodes = useCallback(
     (learningPath: LearningPathElement, learningPathStatus: LearningPathElementStatus[], theme: Theme): Node[] => {
       // Sort learning path by position
@@ -256,8 +283,14 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       // Group learning elements by classification
       const groupedElements = groupLearningElementsByClassification(sortedLearningPath)
 
+      // Variable to count the groups
+      //const [groupCount, setGroupCount] = useState(0)
+
       // Create nodes and return them
       const nodes = groupedElements.map((group, index) => {
+        if (group.length > 1) {
+          //setGroupCount(groupCount + 1)
+        }
         return groupNodes(group, learningPathStatus, theme, index)
       })
 
@@ -267,162 +300,18 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     []
   )
 
-  // ! Old implementation
-  /*const mapLearningPathToNodes2 = useCallback(
-    (
-      learningPath: LearningPathElement,
-      theme: Theme,
-      handleSetUrl: (url: string) => void,
-      handleSetTitle: (title: string) => void,
-      handleSetLmsId: (lmsId: number) => void,
-      handleOpen: () => void,
-      handleClose: () => void,
-      learningPathStatus: LearningPathElementStatus[]
-    ): Node[] => {
-      // Sort learning path
-      const sortedLearningPath = Array.from(learningPath.path).sort((a, b) => a.position - b.position)
-
-      const solvingPositionForDuplicates = sortedLearningPath.map((item, index) => {
-        return { ...item, position: index + 1 } // Generate position based on array index
-      })
-
-      // Every exercise learning element
-      const learningPathExercises = solvingPositionForDuplicates.filter(
-        (item) => item.learning_element.classification === 'ÜB'
-      )
-
-      // Every learning element except exercises
-      const learningPathExcludingExercises = solvingPositionForDuplicates.filter(
-        (item) => item.learning_element.classification !== 'ÜB'
-      )
-
-      const groupHeight = 200
-      const nodeOffsetX = 50
-
-      const learningElementStyle = {
-        background: theme.palette.primary.main,
-        padding: 10,
-        border: '1px solid ' + theme.palette.grey[500],
-        borderRadius: 8,
-        cursor: 'pointer',
-        width: 500
-      }
-
-      // Exercise nodes
-      const exerciseLearningElementChildNodes: Node[] = getLearningElementChildNodes(
-        learningPathExercises,
-        learningPathStatus,
-        theme
-      )
-
-      // Parent node for exercise learning elements
-      const exerciseLearningElementParentNode = getLearningElementParentNode(learningPathExercises, theme)
-
-      // Leftover learning elements
-      const learningElementNodesExcludingExercises = learningPathExcludingExercises.map((item) => {
-        const nodeData: LearningPathLearningElementNode = {
-          lmsId: item.learning_element.lms_id,
-          name: item.learning_element.name,
-          activityType: item.learning_element.activity_type,
-          classification: item.learning_element.classification,
-          isRecommended: item.recommended,
-          handleSetUrl: handleSetUrl,
-          handleSetTitle: handleSetTitle,
-          handleSetLmsId: handleSetLmsId,
-          handleOpen: handleOpen,
-          handleClose: handleClose,
-          isDone: learningPathStatus?.find((status) => status.cmid === item.learning_element.lms_id)?.state === 1
-        }
-
-        const getNodeYPos = () => {
-          if (exerciseLearningElementParentNode && item.position >= parseInt(exerciseLearningElementParentNode.id)) {
-            return (
-              250 *
-                (item.position -
-                  parseInt(exerciseLearningElementChildNodes[exerciseLearningElementChildNodes.length - 1].id)) +
-              exerciseLearningElementParentNode.position.y +
-              groupHeight +
-              70
-            )
-          } else {
-            return 250 * (item.position - 1)
-          }
-        }
-
-        return {
-          id: item.position.toString(),
-          type: item.learning_element.classification,
-          data: nodeData,
-          position: {
-            x: nodeOffsetX + (550 * ((learningPathExercises.length > 3 ? 4 : learningPathExercises.length) - 1)) / 2,
-            y: getNodeYPos()
-          },
-          style: learningElementStyle
-        }
-      })
-
-      // Insert exercise nodes into learning elements
-      const learningElementNodesBeforeExercises = learningElementNodesExcludingExercises.filter(
-        (item) =>
-          exerciseLearningElementParentNode && parseInt(item.id) < parseInt(exerciseLearningElementParentNode.id)
-      )
-
-      const learningElementNodesAfterExercises = learningElementNodesExcludingExercises.filter(
-        (item) =>
-          exerciseLearningElementParentNode && parseInt(item.id) > parseInt(exerciseLearningElementParentNode.id)
-      )
-
-      // Add 1 to the id of all elements (including exercises) after the exercise parent node
-      const learningElementNodesAfterExercisesElementParentNode = learningElementNodesAfterExercises.map((item) => {
-        return {
-          ...item,
-          id: (parseInt(item.id) + 1).toString()
-        }
-      })
-
-      const learningElementNodes = [
-        ...(learningElementNodesBeforeExercises.length > 0
-          ? learningElementNodesBeforeExercises
-          : learningElementNodesExcludingExercises),
-        ...(exerciseLearningElementParentNode
-          ? [exerciseLearningElementParentNode, ...exerciseLearningElementChildNodes]
-          : []),
-        ...learningElementNodesAfterExercisesElementParentNode
-      ]
-
-      return []
-      return learningElementNodes
-    },
-    []
-  )*/
-
   // ! 6.
   // TODO: Needs boolean to determine if nodes are grouped or not
   // Calculate nodes their status and edges
   const mapNodes = useCallback(
     (learningPathData: LearningPathElement, theme: Theme, learningPathStatus: LearningPathElementStatus[]) => {
-      const nodes = mapLearningPathToNodes(
-        learningPathData,
-        learningPathStatus,
-        theme
-        /*handleSetUrl,
-        handleSetTitle,
-        handleSetLmsId,
-        handleOpen,
-        handleClose,*/
-      )
+      const nodes = mapLearningPathToNodes(learningPathData, learningPathStatus, theme)
 
-      // TODO: ÜB are nothing special anymore. How can I handle grouped nodes?
-      // TODO: GROUP nodes can be filtered. Or take the first node of each position and they are nodes with edges.
-      // Id array of all nodes which types are not 'ÜB'
-      // const nodesWithEdges = nodes.filter((node) => node.type !== 'ÜB').map((node) => node.id)
-      // Get the first node of each classification
-
-      // TODO: Doesnt work
+      // TODO: Comment
       const nodesWithEdges = Object.values(
         nodes.reduce(
           (firstLearningElementsOfClassification: { [classification: string]: Node[] }, learningElementNode: Node) => {
-            const classification = learningElementNode.type!
+            const classification = learningElementNode.data.classification
 
             firstLearningElementsOfClassification = {
               ...firstLearningElementsOfClassification,
@@ -430,6 +319,11 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
                 ? [...firstLearningElementsOfClassification[classification]]
                 : []
             }
+
+            if (firstLearningElementsOfClassification[classification].length === 0) {
+              firstLearningElementsOfClassification[classification].push(learningElementNode)
+            }
+
             return firstLearningElementsOfClassification
           },
           {}
