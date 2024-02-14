@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom'
 import { act, render, renderHook, waitFor } from '@testing-library/react'
+import { mockServices } from 'jest.setup'
+import Router, { MemoryRouter } from 'react-router-dom'
 import { mockReactFlow } from '@mocks'
 import { createTheme } from '@common/theme'
-import Router, { MemoryRouter } from 'react-router-dom'
-import { mockServices } from 'jest.setup'
-import { useTopic, useTopicHookParams } from './Topic.hooks'
-import Topic from './Topic'
 import { LearningPathElementStatus } from '@core'
+import Topic from './Topic'
+import { useTopic, useTopicHookParams } from './Topic.hooks'
 
 const { AuthContext } = jest.requireActual('@services')
 

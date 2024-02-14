@@ -2,7 +2,6 @@ import { memo, useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, MiniMap, Node } from 'reactflow'
 import { Box, Skeleton } from '@common/components'
-import { useTheme } from '@common/hooks'
 import { IFrameModal, nodeTypes } from '@components'
 import { LearningPathElementStatus } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
@@ -29,7 +28,6 @@ export type TopicProps = {
  * @category Pages
  */
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
-  const theme = useTheme()
   const navigate = useNavigate()
   const authContext = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
@@ -64,7 +62,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               setLearningPathElementStatus(learningPathElementStatusData)
               getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
                 .then((learningPathElementData) => {
-                  const { nodes, edges } = mapNodes(learningPathElementData, theme, learningPathElementStatusData)
+                  const { nodes, edges } = mapNodes(learningPathElementData, learningPathElementStatusData)
                   setInitialNodes(nodes)
                   setInitialEdges(edges)
                 })
@@ -100,7 +98,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     courseId,
     getLearningPathElement,
     getUser,
-    theme,
     topicId,
     mapNodes,
     navigate,

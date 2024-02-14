@@ -1,8 +1,9 @@
-import { CSSProperties, useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Edge, Node } from 'reactflow'
+import { useTheme } from '@common/hooks'
 import { Theme } from '@common/theme'
 import { LearningPathLearningElementNode, groupLabels } from '@components'
-import { LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
+import { LearningElement, LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
 
 /**
  * @prop defaultUrl - The default url of a node
@@ -26,9 +27,6 @@ export type useTopicHookParams = {
  * @prop isOpen - The bool value if a node is open
  * @prop handleClose - The function to close a node
  * @prop handleOpen - The function to open a node
- * @prop handleSetUrl - The function to set the url of a node
- * @prop handleSetTitle - The function to set the title of a node
- * @prop handleSetLmsId - The function to set the lms id of a node
  * @prop mapNodes - The function to map the learning path to nodes and edges
  * @category Hooks
  * @interface
@@ -40,12 +38,8 @@ export type TopicHookReturn = {
   readonly isOpen: boolean
   readonly handleClose: () => void
   readonly handleOpen: () => void
-  readonly handleSetUrl: (url: string) => void
-  readonly handleSetTitle: (title: string) => void
-  readonly handleSetLmsId: (lmsId: number) => void
   readonly mapNodes: (
     learningPathData: LearningPathElement,
-    theme: Theme,
     learningPathStatus: LearningPathElementStatus[]
   ) => {
     nodes: Node[]
@@ -75,50 +69,26 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const [title, setTitle] = useState(defaultTitle)
   const [isOpen, setIsOpen] = useState(defaultIsOpen)
   const [lmsId, setLmsId] = useState<number>(defaultLmsId)
-  const [yOffset, setYOffset] = useState(0)
+  const theme = useTheme()
+
+  // Global variables
+  const nodeOffsetX = 50
+  const groupHeight = 200
 
   // Logic
-  // TODO: This function is not necessary. setIsOpen can be exported directly
   const handleOpen = useCallback(() => {
     setIsOpen(true)
   }, [setIsOpen])
 
-  // TODO: This function is not necessary. setIsOpen can be exported directly
   const handleClose = useCallback(() => {
     setIsOpen(false)
   }, [setIsOpen])
 
-  // TODO: This function is not necessary. setUrl can be exported directly
-  const handleSetUrl = useCallback(
-    (url: string) => {
-      setUrl(url)
-    },
-    [setUrl]
-  )
-
-  // TODO: This function is not necessary. setTitle can be exported directly
-  const handleSetTitle = useCallback(
-    (title: string) => {
-      setTitle(title)
-    },
-    [setTitle]
-  )
-
-  // TODO: This function is not necessary. setLmsId can be exported directly
-  const handleSetLmsId = useCallback(
-    (lmsId: number) => {
-      setLmsId(lmsId)
-    },
-    [setLmsId]
-  )
-
-  const nodeOffsetX = 50 // Can be defined globally
-  const groupHeight = 200 // Can be defined globally
-
-  // ! 1.
-  // TODO: Add comments
-  const groupLearningElementsByClassification = (learningPath: LearningPathLearningElement[]) => {
+  // Groups learning elements by classification.
+  const groupLearningElementsByClassification = useCallback((learningPath: LearningPathLearningElement[]) => {
+    // Returns an array containg the values of the object.
     return Object.values(
+      // Creates an object with the classification of learning elements as key and an array of learning elements as value.
       learningPath.reduce(
         (
           groupedLearningElements: { [classification: string]: LearningPathLearningElement[] },
@@ -139,53 +109,86 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         {}
       )
     )
-  }
+  }, [])
 
-  // ! 2.
-  // TODO: Rename and comment
-  // Creates aligned nodes of the passed LearningPathLearningElement array and returns them.
-  // Can be used to create child nodes of a specific classification for a group node.
-  const getLearningElementChildNodes = (
-    learningElements: LearningPathLearningElement[],
-    learningPathStatus: LearningPathElementStatus[],
-    learningElementNodeStyle: CSSProperties,
-    position: number,
-    yOffset: number
-  ): Node[] => {
-    return learningElements.map((node, index) => {
+  // Creates a single learning element node.
+  const getLearningElementNode = useCallback(
+    (
+      learningElement: LearningElement,
+      recommended: boolean,
+      learningPathStatus: LearningPathElementStatus[],
+      id: string,
+      position: { x: number; y: number }
+    ) => {
+      const learningElementNodeStyle = {
+        background: theme.palette.primary.main,
+        padding: 10,
+        border: '1px solid ' + theme.palette.grey[500],
+        borderRadius: 8,
+        cursor: 'pointer',
+        width: 500
+      }
+
       const nodeData: LearningPathLearningElementNode = {
-        lmsId: node.learning_element.lms_id,
-        name: node.learning_element.name,
-        activityType: node.learning_element.activity_type,
-        classification: node.learning_element.classification,
-        isRecommended: node.recommended,
-        handleSetUrl: handleSetUrl,
-        handleSetTitle: handleSetTitle,
-        handleSetLmsId: handleSetLmsId,
+        lmsId: learningElement.lms_id,
+        name: learningElement.name,
+        activityType: learningElement.activity_type,
+        classification: learningElement.classification,
+        isRecommended: recommended,
+        handleSetUrl: setUrl,
+        handleSetTitle: setTitle,
+        handleSetLmsId: setLmsId,
         handleOpen: handleOpen,
         handleClose: handleClose,
-        isDone: learningPathStatus?.find((item) => item.cmid === node.learning_element.lms_id)?.state === 1
+        isDone: learningPathStatus?.find((item) => item.cmid === learningElement.lms_id)?.state === 1
       }
+
       return {
-        id: node.position.toString() + '-' + node.learning_element.lms_id,
-        type: node.learning_element.classification,
+        id: id,
+        type: learningElement.classification,
         data: nodeData,
         position: {
-          x: -275 * (learningElements.length > 3 ? 4 : learningElements.length) + nodeOffsetX / 2 + 550 * (index % 4),
-          y: 250 * position + 125 * Math.floor(index / 4) + 50 + yOffset // TODO: Tweak the values
+          x: position.x,
+          y: position.y
         },
         style: learningElementNodeStyle
       }
-    })
-  }
+    },
+    [theme, handleOpen, handleClose, setUrl, setTitle, setLmsId]
+  )
+
+  // TODO: Rename and comment
+  // Creates aligned nodes of the passed LearningPathLearningElement array and returns them.
+  // Can be used to create child nodes of a specific classification for a group node.
+  const getLearningElementChildNodes = useCallback(
+    (
+      learningElements: LearningPathLearningElement[],
+      learningPathStatus: LearningPathElementStatus[],
+      position: number,
+      yOffset: number
+    ): Node[] => {
+      return learningElements.map((node, index) => {
+        return getLearningElementNode(
+          node.learning_element,
+          node.recommended,
+          learningPathStatus,
+          node.position.toString() + '-' + node.learning_element.lms_id,
+          {
+            x: -275 * (learningElements.length > 3 ? 4 : learningElements.length) + nodeOffsetX / 2 + 550 * (index % 4),
+            y: 250 * position + 125 * Math.floor(index / 4) + 50 + yOffset
+          }
+        )
+      })
+    },
+    [Math.floor, getLearningElementNode, nodeOffsetX]
+  )
 
   // ! 3.
   // TODO: Comment
   const getLearningElementParentNode = (
     learningElements: LearningPathLearningElement[],
-    theme: Theme,
     position: number,
-    yOffset?: number
+    yOffset: number
   ): Node => {
     return {
       id: learningElements[0].position.toString(),
@@ -196,7 +199,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       type: 'GROUP',
       position: {
         x: (-550 * (learningElements.length > 3 ? 4 : learningElements.length) - nodeOffsetX) / 2,
-        y: 250 * position + yOffset! // TODO: Tweak the numbers
+        y: 250 * position + yOffset // TODO: Tweak the numbers
       },
       style: {
         border: '1px solid ' + theme.palette.grey[500],
@@ -211,51 +214,25 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const groupNodes = (
     learningPath: LearningPathLearningElement[],
     learningPathStatus: LearningPathElementStatus[],
-    theme: Theme,
     index: number,
-    yOffset?: number
+    yOffset: number
   ): Node | Node[] => {
-    // TODO: Comment
-    const learningElementNodeStyle = {
-      background: theme.palette.primary.main,
-      padding: 10,
-      border: '1px solid ' + theme.palette.grey[500],
-      borderRadius: 8,
-      cursor: 'pointer',
-      width: 500
-    }
-
     if (learningPath.length === 1) {
-      // TODO: Nearly the same as in getLearningElementChildNodes except for the position and id
-      const nodeData: LearningPathLearningElementNode = {
-        lmsId: learningPath[0].learning_element.lms_id,
-        name: learningPath[0].learning_element.name,
-        activityType: learningPath[0].learning_element.activity_type,
-        classification: learningPath[0].learning_element.classification,
-        isRecommended: learningPath[0].recommended,
-        handleSetUrl: handleSetUrl,
-        handleSetTitle: handleSetTitle,
-        handleSetLmsId: handleSetLmsId,
-        handleOpen: handleOpen,
-        handleClose: handleClose,
-        isDone:
-          learningPathStatus?.find((status) => status.cmid === learningPath[0].learning_element.lms_id)?.state === 1
-      }
-      return {
-        id: learningPath[0].position.toString(),
-        type: learningPath[0].learning_element.classification,
-        data: nodeData,
-        position: {
+      return getLearningElementNode(
+        learningPath[0].learning_element,
+        learningPath[0].recommended,
+        learningPathStatus,
+        learningPath[0].position.toString(),
+        {
           x: -250,
-          y: 250 * index + yOffset!
-        },
-        style: learningElementNodeStyle
-      }
+          y: 250 * index + yOffset
+        }
+      )
     }
 
     return [
-      getLearningElementParentNode(learningPath, theme, index, yOffset),
-      ...getLearningElementChildNodes(learningPath, learningPathStatus, learningElementNodeStyle, index, yOffset!)
+      getLearningElementParentNode(learningPath, index, yOffset),
+      ...getLearningElementChildNodes(learningPath, learningPathStatus, index, yOffset)
     ]
   }
 
@@ -268,14 +245,15 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       // Group learning elements by classification
       const groupedElements = groupLearningElementsByClassification(sortedLearningPath)
 
-      // Create nodes and return them
-      const nodes = groupedElements.map((group, i) => {
+      // Calculate the offset between nodes/groups and create grouped nodes
+      const nodes = groupedElements.map((group, index) => {
         const yOffset = groupedElements
-          .filter((group, n) => group.length > 1 && n < i)
+          .slice(0, index)
+          .filter((group) => group.length)
           .map((group) => 125 * Math.floor((group.length - 1) / 4) + groupHeight / 2)
           .reduce((a, b) => a + b, 0)
 
-        return groupNodes(group, learningPathStatus, theme, i, yOffset)
+        return groupNodes(group, learningPathStatus, index, yOffset)
       })
 
       // Dissovles the array of arrays into a single array.
@@ -288,7 +266,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   // TODO: Needs boolean to determine if nodes are grouped or not
   // Calculate nodes their status and edges
   const mapNodes = useCallback(
-    (learningPathData: LearningPathElement, theme: Theme, learningPathStatus: LearningPathElementStatus[]) => {
+    (learningPathData: LearningPathElement, learningPathStatus: LearningPathElementStatus[]) => {
       const nodes = mapLearningPathToNodes(learningPathData, learningPathStatus, theme)
 
       // TODO: Comment
@@ -316,6 +294,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         .flatMap((nodes) => nodes)
         .map((node) => node.id)
 
+      // TODO: Comment
       const edges: Edge[] = nodesWithEdges.map((item, index) => ({
         id: 'Edge' + item.toString(),
         source: item,
@@ -324,7 +303,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
 
       return { nodes, edges }
     },
-    [handleClose, handleOpen, handleSetTitle, handleSetUrl, handleSetLmsId, mapLearningPathToNodes]
+    [handleClose, handleOpen, mapLearningPathToNodes]
   )
 
   return useMemo(
@@ -336,11 +315,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         isOpen,
         handleClose,
         handleOpen,
-        handleSetUrl,
-        handleSetTitle,
-        handleSetLmsId,
         mapNodes
       } as const),
-    [url, title, lmsId, isOpen, handleClose, handleOpen, handleSetUrl, handleSetTitle, handleSetLmsId, mapNodes]
+    [url, title, lmsId, isOpen, handleClose, handleOpen, mapNodes]
   )
 }
