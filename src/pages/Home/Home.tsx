@@ -87,12 +87,14 @@ export const Home = () => {
                 <Card key={course.id} sx={{ mb: '1rem' }}>
                   <CardContent>
                     <Typography variant="h5">{course.name}</Typography>
-                    <Typography variant="body1">{course.university}</Typography>
                     <Stack direction="row" justifyContent="center">
                       <Button
                         id="course-button"
                         variant="contained"
                         color="primary"
+                        sx={{
+                          mt: '1rem'
+                        }}
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>

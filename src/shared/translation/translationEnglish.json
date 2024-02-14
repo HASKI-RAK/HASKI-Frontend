@@ -478,12 +478,12 @@
       }
     ]
   ],
-  "components.LoginForm.login": "Login",
+  "components.LoginForm.loginButton": "Login",
   "components.LoginForm.orLoginWithMoodle": "or login with Moodle",
   "components.LoginForm.password": "Password",
   "components.LoginForm.passwordError": "Please enter a valid password",
-  "components.LoginForm.subtitle": "Please login to continue",
-  "components.LoginForm.title": "HASKI Login",
+  "components.LoginForm.subtitle": "Click the button below to enter your personalized learning environment.",
+  "components.LoginForm.title": "Welcome to HASKI",
   "components.LoginForm.username": "Username",
   "components.LoginForm.usernameError": "Please enter a valid username",
   "components.Menubar.closeDialog": "Are you sure you want to close the Questionnaire? Unsent answers will not be saved.",

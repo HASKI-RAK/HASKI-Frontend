@@ -478,12 +478,12 @@
       }
     ]
   ],
-  "components.LoginForm.login": "Anmelden",
+  "components.LoginForm.loginButton": "Anmelden",
   "components.LoginForm.orLoginWithMoodle": "oder mit Moodle anmelden",
   "components.LoginForm.password": "Passwort",
   "components.LoginForm.passwordError": "Bitte geben Sie ein gültiges Passwort ein",
-  "components.LoginForm.subtitle": "Bitte geben Sie Ihre Zugangsdaten ein",
-  "components.LoginForm.title": "HASKI Anmeldung",
+  "components.LoginForm.subtitle": "Klicken Sie den folgenden Button, um zu Ihrem persönlichen Lernbereich zu gelangen.",
+  "components.LoginForm.title": "Willkommen bei HASKI",
   "components.LoginForm.username": "Benutzername",
   "components.LoginForm.usernameError": "Bitte geben Sie einen gültigen Benutzernamen ein",
   "components.Menubar.closeDialog": "Sind Sie sicher, dass Sie den Fragebogen schließen möchten? Nicht abgeschickte Antworten werden nicht gespeichert.",
