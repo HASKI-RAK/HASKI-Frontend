@@ -40,7 +40,7 @@ export { OutlinedInput } from './DefaultOutlinedInput/DefaultOutlinedInput'
 export { TableCell } from './DefaultTableCell/DefaultTableCell'
 export { TableRow } from './DefaultTableRow/DefaultTableRow'
 export { CardActions } from './DefaultCardActions/DefaultCardActions'
-export { LinearProgress } from './DefaultLinearProgress/DefaultLinearProgress'
+export { LinearProgress, linearProgressClasses } from './DefaultLinearProgress/DefaultLinearProgress'
 export { Stepper } from './DefaultStepper/DefaultStepper'
 export { Step } from './DefaultStep/DefaultStep'
 export { List } from './DefaultList/DefaultList'
@@ -77,6 +77,7 @@ export type { RadioGroupProps } from './DefaultRadioGroupProps/DefaultRadioGroup
 export type { ToggleButtonGroupProps } from './DefaultToggleButtonGroupProps/DefaultToggleButtonGroupProps'
 export type { TypographyProps } from './DefaultTypographyProps/DefaultTypographyProps'
 export type { SelectChangeEvent } from './DefaultSelectChangeEvent/DefaultSelectChangeEvent'
+export type { LinearProgressProps } from './DefaultLinearProgress/DefaultLinearProgress'
 
 /**
  * Reusable objects

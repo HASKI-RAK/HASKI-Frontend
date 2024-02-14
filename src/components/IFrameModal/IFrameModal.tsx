@@ -51,10 +51,10 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
           <Close />
         </Fab>
         <iframe
-          src={props.url}
+          src={props.url + '&haski=true'}
           title={props.title}
           width="100%"
-          height="105%"
+          height="104%"
           style={{
             position: 'relative',
             border: 0
