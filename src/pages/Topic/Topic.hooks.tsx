@@ -75,6 +75,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const [title, setTitle] = useState(defaultTitle)
   const [isOpen, setIsOpen] = useState(defaultIsOpen)
   const [lmsId, setLmsId] = useState<number>(defaultLmsId)
+  const [yOffset, setYOffset] = useState(0)
 
   // Logic
   // TODO: This function is not necessary. setIsOpen can be exported directly
@@ -148,7 +149,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     learningElements: LearningPathLearningElement[],
     learningPathStatus: LearningPathElementStatus[],
     learningElementNodeStyle: CSSProperties,
-    position: number
+    position: number,
+    yOffset: number
   ): Node[] => {
     return learningElements.map((node, index) => {
       const nodeData: LearningPathLearningElementNode = {
@@ -169,8 +171,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         type: node.learning_element.classification,
         data: nodeData,
         position: {
-          x: -275 * (learningElements.length > 3 ? 4 : learningElements.length) + nodeOffsetX / 2 + 550 * (index % 4), // 550 * (index - 4 * Math.floor(index / 4)) + nodeOffsetX,
-          y: 300 * (position - 0.25) + 125 * Math.floor(index / 4) + 50 // TODO: Tweak the values
+          x: -275 * (learningElements.length > 3 ? 4 : learningElements.length) + nodeOffsetX / 2 + 550 * (index % 4),
+          y: 250 * position + 125 * Math.floor(index / 4) + 50 + yOffset // TODO: Tweak the values
         },
         style: learningElementNodeStyle
       }
@@ -194,41 +196,24 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       type: 'GROUP',
       position: {
         x: (-550 * (learningElements.length > 3 ? 4 : learningElements.length) - nodeOffsetX) / 2,
-        y: 300 * (position - 0.25) // TODO: Tweak the numbers
+        y: 250 * position + yOffset! // TODO: Tweak the numbers
       },
       style: {
         border: '1px solid ' + theme.palette.grey[500],
         borderRadius: 8,
         width: 550 * (learningElements.length > 3 ? 4 : learningElements.length) + nodeOffsetX,
-        height: groupHeight + Math.floor((learningElements.length - 1) / 4) * 125
+        height: 125 * Math.floor((learningElements.length - 1) / 4) + groupHeight // First term is number of additional rows.
       }
     }
   }
-  /*
-          const getNodeYPos = () => {
-          if (exerciseLearningElementParentNode && item.position >= parseInt(exerciseLearningElementParentNode.id)) {
-            return (
-              250 *
-                (item.position -
-                  parseInt(exerciseLearningElementChildNodes[exerciseLearningElementChildNodes.length - 1].id)) +
-              exerciseLearningElementParentNode.position.y +
-              groupHeight +
-              70
-            )
-          } else {
-            return 250 * (item.position - 1)
-          }
-        }
-  */
-
-  // const groupCount
 
   // ! 4.
   const groupNodes = (
     learningPath: LearningPathLearningElement[],
     learningPathStatus: LearningPathElementStatus[],
     theme: Theme,
-    index: number
+    index: number,
+    yOffset?: number
   ): Node | Node[] => {
     // TODO: Comment
     const learningElementNodeStyle = {
@@ -262,15 +247,15 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         data: nodeData,
         position: {
           x: -250,
-          y: 300 * (index === 0 ? 0.1 : index - 0.25)
+          y: 250 * index + yOffset!
         },
         style: learningElementNodeStyle
       }
     }
 
     return [
-      getLearningElementParentNode(learningPath, theme, index),
-      ...getLearningElementChildNodes(learningPath, learningPathStatus, learningElementNodeStyle, index)
+      getLearningElementParentNode(learningPath, theme, index, yOffset),
+      ...getLearningElementChildNodes(learningPath, learningPathStatus, learningElementNodeStyle, index, yOffset!)
     ]
   }
 
@@ -283,15 +268,14 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       // Group learning elements by classification
       const groupedElements = groupLearningElementsByClassification(sortedLearningPath)
 
-      // Variable to count the groups
-      //const [groupCount, setGroupCount] = useState(0)
-
       // Create nodes and return them
-      const nodes = groupedElements.map((group, index) => {
-        if (group.length > 1) {
-          //setGroupCount(groupCount + 1)
-        }
-        return groupNodes(group, learningPathStatus, theme, index)
+      const nodes = groupedElements.map((group, i) => {
+        const yOffset = groupedElements
+          .filter((group, n) => group.length > 1 && n < i)
+          .map((group) => 125 * Math.floor((group.length - 1) / 4) + groupHeight / 2)
+          .reduce((a, b) => a + b, 0)
+
+        return groupNodes(group, learningPathStatus, theme, i, yOffset)
       })
 
       // Dissovles the array of arrays into a single array.
