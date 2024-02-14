@@ -1,4 +1,4 @@
-import { Accordion, Box, Divider, Typography, AccordionSummary, AccordionDetails, Stack } from '@common/components'
+import { Accordion, Box, Divider, Drawer, Typography, AccordionSummary, AccordionDetails, Stack } from '@common/components'
 import { ExpandMore } from '@common/icons'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
@@ -10,7 +10,6 @@ import {
   useLearningPathTopic as _useLearningPathTopic,
   useLearningPathElement as _useLearningPathElement
 } from '@components'
-import Drawer from '@mui/material/Drawer'
 
 /**
  *  Local navigation component props.
@@ -43,22 +42,23 @@ const LocalNav = ({
 
   const [openAccordion, setOpenAccordion] = useState<number | null>(null)
 
+  const [open, setOpen] = useState(true)
   const handleAccordionClick = (index: number) => {
     setOpenAccordion(openAccordion === index ? null : index)
   }
 
   return (
     <Drawer
-      variant="permanent"
+      variant="persistent" 
+      open={open}
       sx={{
         width: '250px',
         flexShrink: 1,
-
         [`& .MuiDrawer-paper`]: {
           width: '250px',
-
+          borderRadius:'0px',
           marginTop: '100px',
-          boxSizing: 'border-box',
+          
           maxHeight: '70%'
           /**marginTop: '20%'*/
         }

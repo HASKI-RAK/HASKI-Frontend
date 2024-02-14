@@ -205,6 +205,20 @@ export const HaskiTheme = createTheme({
         }
       }
     },
+    /** style a drawer component */
+    MuiDrawer: {
+      styleOverrides: {
+        root: {
+          backgroundColor: defaultColors.lightgrey,
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            borderRadius: '0px',
+            color: defaultColors.black,
+            backgroundColor: defaultColors.lightgrey
+          }
+        }
+      }
+    },
     MuiRadio: {
       styleOverrides: {
         root: {
