@@ -10,6 +10,7 @@ import {
   useLearningPathTopic as _useLearningPathTopic,
   useLearningPathElement as _useLearningPathElement
 } from '@components'
+import { useTheme, useMediaQuery } from '@common/hooks'
 
 /**
  *  Local navigation component props.
@@ -41,25 +42,44 @@ const LocalNav = ({
   const { loading, topics } = useLearningPathTopic(courseId)
 
   const [openAccordion, setOpenAccordion] = useState<number | null>(null)
+ 
+  const [open, setDrawerOpen] = useState(true)
+  const maxDrawerWidth=1000
 
-  const [open, setOpen] = useState(true)
   const handleAccordionClick = (index: number) => {
     setOpenAccordion(openAccordion === index ? null : index)
   }
 
+  const handleDarwerClose = ()=>{
+    if(window.outerWidth<maxDrawerWidth)
+    {
+      setDrawerOpen(false)
+    }
+    else
+    {
+      setDrawerOpen(true)
+    }
+    
+  }
+  window.addEventListener('resize', handleDarwerClose)
   return (
     <Drawer
       variant="persistent" 
+      anchor='left'
       open={open}
+      
       sx={{
         width: '250px',
         flexShrink: 1,
+        
         [`& .MuiDrawer-paper`]: {
           width: '250px',
+          height:'450px',
           borderRadius:'0px',
           marginTop: '100px',
-          
-          maxHeight: '70%'
+          boxSizing: 'border-box',
+          maxHeight: '70%',
+          position:'relative'
           /**marginTop: '20%'*/
         }
       }}>
