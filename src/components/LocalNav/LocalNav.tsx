@@ -1,15 +1,13 @@
-import { Box, Divider, Typography, Stack, List, ListItem, ListItemText } from '@common/components'
+import { Box, Divider, Typography, Stack, List, ListItem, ListItemText, Grid } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { LearningPathElement, Topic } from '@core'
-import { useState } from 'react'
 import {
   SkeletonList,
   useLearningPathTopic as _useLearningPathTopic,
-  useLearningPathElement as _useLearningPathElement
 } from '@components'
 import { ListItemButton } from '@mui/material'
-import { useMediaQuery, useTheme } from '@common/hooks'
+import { useTheme, useMediaQuery } from '@common/hooks'
 
 /**
  *  Local navigation component props.
@@ -18,13 +16,6 @@ import { useMediaQuery, useTheme } from '@common/hooks'
  */
 export type LocalNavProps = {
   useLearningPathTopic?: (courseId: string) => { loading: boolean; topics: Topic[] }
-  useLearningPathElement?: (
-    topic: Topic,
-    courseId: string
-  ) => {
-    loadingElements: boolean
-    learningPaths: LearningPathElement | undefined
-  }
 }
 
 /**
@@ -42,7 +33,9 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
 
   return (
     <Box flexGrow={1}>
+      <Grid sx={{ml:'0.9rem'}}>
       <Typography variant="h5">{t('appGlobal.topics')}</Typography>
+      </Grid>
       <Divider />
       {loading ? (
         <Box>
@@ -52,11 +45,12 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
         </Box>
       ) : (
         <>
-          <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+          <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
             {topics.map((topic) => (
-              <ListItem key={topic.id}>
+              <ListItem key={topic.id} sx={{ width: '100%', p:0 }}>
                 <ListItemButton
                   key={topic.id}
+                  sx={{ width: '100%' }}
                   onClick={() => {
                     navigate(`/course/${courseId}/topic/${topic.id}`)
                   }}>
@@ -64,14 +58,8 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
                     primary={topic.name}
                     primaryTypographyProps={
                       isSmOrDown
-                        ? {
-                            fontSize: 12,
-                            fontWeight: 'medium'
-                          }
-                        : {
-                            fontSize: 18,
-                            fontWeight: 'medium'
-                          }
+                        ? { fontSize: 12, fontWeight: 'medium' }
+                        : { fontSize: 18, fontWeight: 'medium' }
                     }
                   />
                 </ListItemButton>

@@ -12,8 +12,9 @@ import { LearningPathElementStatus } from '@core'
 // custom fitView centering on first uncompleted element
 const CustomFitViewButton = ({ node }: { node: Node[] }) => {
   const { fitView } = useReactFlow()
-  console.log(node)
-  const firstUncompletedElement = node[0]
+  //console.log(node)
+  const firstUncompletedElement = /*node.find(node => !node.data?.isDone) || */node[0]
+  console.log(firstUncompletedElement)
 
   const handleClick = () => {
     //with setViewport (useReactFlow) it is possible to set the view to a specific position and zoom
