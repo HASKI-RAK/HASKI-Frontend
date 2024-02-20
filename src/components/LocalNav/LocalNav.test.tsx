@@ -153,6 +153,8 @@ describe('LocalNav tests', () => {
   })
 
   it('should render the LocalNav with all Topics, as text', () => {
+    jest.restoreAllMocks()
+
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
       topics: mockTopics

@@ -9,7 +9,7 @@ import { Box, Skeleton } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { LearningPathElementStatus } from '@core'
 
-// custom fitView centering on first uncompleted element
+// custom fitView centering on first uncompleted element, needs to be in the react-flow component
 const CustomFitViewButton = ({ node }: { node: Node[] }) => {
   const { fitView } = useReactFlow()
   //console.log(node)
@@ -36,7 +36,6 @@ const CustomFitViewButton = ({ node }: { node: Node[] }) => {
 export type TopicProps = {
   useTopic?: (params?: useTopicHookParams) => TopicHookReturn
 }
-// TODO: URL-Struktur überlegen bspw. "localhost:3000/topic?topic=1"
 
 /**
  * Topic page.
@@ -68,7 +67,33 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
 
-  // Function to fit the view
+  const [prevTopicId, setPrevTopicId] = useState<string | undefined>(undefined);
+
+  // Search for the 'fit view'-button of <Controls/> and trigger click event
+  /*const handleFitView = () => {
+    const fitViewButton = document.querySelector('.react-flow__controls-button.react-flow__controls-fitview')
+
+    if (fitViewButton) {
+      (fitViewButton as HTMLButtonElement).click()
+    }
+  }*/
+
+  // Trigger the click event of the custom 'fit view'-button
+  const handleCustomFitView = () => {
+    const fitViewButton = document.getElementById('customFitViewButton')
+
+    if (fitViewButton) {
+      fitViewButton.click()
+    }
+  }
+
+  // Effect to handle the fitting of the view when the topic changes with the LocalNav
+  useEffect(() => {
+    if (topicId !== prevTopicId) {
+      handleCustomFitView();
+      setPrevTopicId(topicId);
+    }
+  }, [topicId]);
 
   // Get status of every learning element for user by request to backend
   // then get every learning element for topic by request to backend
@@ -77,6 +102,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     const preventEndlessLoading = setTimeout(() => {
       navigate('/login')
     }, 1000)
+
     if (authContext.isAuth && courseId && topicId) {
       clearTimeout(preventEndlessLoading)
       getUser()
@@ -153,24 +179,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     return handleClose()
   }
 
-  // Search for the 'fit view'-button of <Controls/> and trigger click event
-  const handleFitView = () => {
-    const fitViewButton = document.querySelector('.react-flow__controls-button.react-flow__controls-fitview')
-
-    if (fitViewButton) {
-      ;(fitViewButton as HTMLButtonElement).click()
-    }
-  }
-
-  // Trigger the click event of the custom 'fit view'-button
-  const handleCustomFitView = () => {
-    const fitViewButton = document.getElementById('customFitViewButton')
-
-    if (fitViewButton) {
-      fitViewButton.click()
-    }
-  }
-
   // Show Loading-Skeleton until Nodes, Edges and LearningPathElementStatus are loaded
   return initialNodes && initialEdges && learningPathElementStatus ? (
     <Box height={'100%'}>
@@ -184,8 +192,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             padding: 5,
             minZoom: 0.75,
             nodes: [{ id: initialNodes[0].id }]
-          }}
-          onSelectionChange={handleCustomFitView}>
+          }}>
           <CustomFitViewButton node={initialNodes} />
           <Background gap={16} />
           <MiniMap nodeBorderRadius={2} />
