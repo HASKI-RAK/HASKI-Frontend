@@ -109,11 +109,6 @@ describe('LocalNav tests', () => {
     topics: mockTopics
   })
 
-  const mockUseLearningPathElement = jest.fn().mockReturnValue({
-    loadingElements: true,
-    learningPaths: mockLearningPathElement
-  })
-
   const props: LocalNavProps = {
     useLearningPathTopic: mockUseLearningPathTopic,
   }
@@ -133,11 +128,6 @@ describe('LocalNav tests', () => {
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
       topics: mockTopics
-    })
-
-    const mockUseLearningPathElement = jest.fn().mockReturnValue({
-      loadingElements: false,
-      learningPaths: mockLearningPathElement
     })
 
     const props: LocalNavProps = {
@@ -176,18 +166,13 @@ describe('LocalNav tests', () => {
     )
 
     const topicList = getAllByRole('list')
-    expect(topicList[0].textContent).toContain('testtest2')
+    expect(topicList[0].textContent).toContain('test/test2')
   })
 
   it('should render the LocalNav with all Topics, as listelements', () => {
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
       topics: mockTopics
-    })
-
-    const mockUseLearningPathElement = jest.fn().mockReturnValue({
-      loadingElements: false,
-      learningPaths: mockLearningPathElement
     })
 
     const props: LocalNavProps = {
@@ -209,11 +194,6 @@ describe('LocalNav tests', () => {
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
       topics: mockTopics
-    })
-
-    const mockUseLearningPathElement = jest.fn().mockReturnValue({
-      loadingElements: false,
-      learningPaths: mockLearningPathElement
     })
 
     const props: LocalNavProps = {
@@ -351,7 +331,7 @@ describe('getSortedLearningPath works as expected', () => {
 
   test('fetches learning path topics and returns the loading state', async () => {
     await act(async () => {
-      const { result, waitForNextUpdate } = renderHook(() => useLearningPathTopic('2'))
+      const { result } = renderHook(() => useLearningPathTopic('2'))
 
       await waitFor(() => {
         expect(result.current.loading).toBe(false)

@@ -14,7 +14,6 @@ const CustomFitViewButton = ({ node }: { node: Node[] }) => {
   const { fitView } = useReactFlow()
   //console.log(node)
   const firstUncompletedElement = /*node.find(node => !node.data?.isDone) || */node[0]
-  console.log(firstUncompletedElement)
 
   const handleClick = () => {
     //with setViewport (useReactFlow) it is possible to set the view to a specific position and zoom
@@ -88,12 +87,14 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   }
 
   // Effect to handle the fitting of the view when the topic changes with the LocalNav
+  // [handleCustomFitView] as dependency because inside of it the fitViewButton changes,
+  // that way the reactFlow background is changed before rendering it in a old position from the prev. topic
   useEffect(() => {
     if (topicId !== prevTopicId) {
-      handleCustomFitView();
-      setPrevTopicId(topicId);
+      handleCustomFitView()
+      setPrevTopicId(topicId)
     }
-  }, [topicId]);
+  }, [handleCustomFitView]);
 
   // Get status of every learning element for user by request to backend
   // then get every learning element for topic by request to backend
@@ -188,6 +189,10 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           edges={initialEdges}
           nodeTypes={nodeTypes}
           fitView
+          onInit={() => {
+            setTimeout(() => {
+              handleCustomFitView();
+            }, 0)}}
           fitViewOptions={{
             padding: 5,
             minZoom: 0.75,

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Topic } from '@core'
 import {
-  SkeletonList, StyledLinearProgress, useLearningPathTopic,
+  SkeletonList,
   useLearningPathTopic as _useLearningPathTopic
 } from '@components'
 import { ListItemButton } from '@mui/material'
@@ -12,7 +12,6 @@ import { useContext, useEffect, useState } from 'react'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import log from 'loglevel'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 
 /**
@@ -36,7 +35,8 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
   const { courseId, topicId } = useParams() as { courseId: string; topicId: string }
   const navigate = useNavigate()
   const { loading, topics } = useLearningPathTopic(courseId)
-  const isSmOrSmaller = useMediaQuery(theme.breakpoints.down('sm'))
+  const isMdOrSmaller = useMediaQuery(theme.breakpoints.down('lg'))
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
   const authContext = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
 
@@ -45,6 +45,19 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
 
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
+
+  interface FractionProps {
+    numerator: number;
+    denominator: number;
+  }
+
+  const Fraction = ({ numerator, denominator }: FractionProps) => {
+    return (
+      <Typography variant="body1" component="span" sx={{fontSize: isMdOrSmaller ? 13 : 16}}>
+        <sup>{numerator}</sup>/<sub>{denominator}</sub>
+      </Typography>
+    );
+  };
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
@@ -112,7 +125,7 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
   }, [authContext.isAuth, courseId, navigate, topics, getUser, getLearningPathElement, getLearningPathElementStatus])
 
   return (
-    <Box flexGrow={1}>
+    <Box flexGrow={1} sx={{minWidth: isLargeScreen ? '20rem' : '14rem'}}>
       <Grid sx={{ ml: '0.9rem' }}>
         <Typography variant="h5">{t('appGlobal.topics')}</Typography>
       </Grid>
@@ -124,7 +137,7 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
           </Stack>
         </Box>
       ) : (
-        <List sx={{ width: '100%', bgcolor: 'background.paper', padding: 0 }}>
+        <List sx={{ width: '100%', bgcolor: 'background.paper', p: 0 }}>
           {topics.map((topic, index) => (
             <Box key={topic.id}
                  sx={{ width: '100%', bgcolor: parseInt(topicId) == topic.id ? 'lightgrey' : 'background.paper', borderRadius: 2 }}>
@@ -143,22 +156,22 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
                   >
                     <FiberManualRecordIcon
                       sx={{ color: parseInt(topicId) == topic.id ? '#f2852b' : 'rgba(55,55,55,0.65)', width: '0.5rem' }} />
-                    <Grid item md={8}>
+                    <Grid item xs={7} sm={7} md={8} lg={8} xl={8}>
                       <ListItemText
                         primary={topic.name}
                         primaryTypographyProps={
-                          isSmOrSmaller ? { fontSize: 12, fontWeight: 'medium' } : { fontSize: 18, fontWeight: 'medium' }
+                          isMdOrSmaller ? { fontSize: 12} : { fontSize: 18 }
                         }
                       />
                     </Grid>
-                    <Grid item md={3}>
+                    <Grid item xs={3} sm={3} md={3} lg={2} xl={2}>
                       {calculatedTopicProgress[index] && (
                         <ListItemText
-                          primary={calculatedTopicProgress[index][0] + ' | ' + calculatedTopicProgress[index][1]}
+                          primary={<Fraction numerator={calculatedTopicProgress[index][0]} denominator={calculatedTopicProgress[index][1]} />}
                           primaryTypographyProps={
-                            isSmOrSmaller ? { fontSize: 8, fontWeight: 'medium' } : { fontSize: 14, fontWeight: 'medium' }
+                            { p:0.25, borderRadius:3, bgcolor:'#e9e9e8'}
                           }
-                          sx={{ border: 1, borderRadius: 3, borderColor: 'rgba(55,55,55,0.49)', textAlign: 'center', p: 0.25, bgcolor: '#fb9424' }}
+                          sx={{ textAlign: 'center'}}
                         />
                       )}
                     </Grid>
