@@ -13,7 +13,7 @@ import { LearningPathElementStatus } from '@core'
 const CustomFitViewButton = ({ node }: { node: Node[] }) => {
   const { fitView } = useReactFlow()
   //console.log(node)
-  const firstUncompletedElement = /*node.find(node => !node.data?.isDone) || */node[0]
+  const firstUncompletedElement = /*node.find(node => !node.data?.isDone) || */ node[0]
 
   const handleClick = () => {
     //with setViewport (useReactFlow) it is possible to set the view to a specific position and zoom
@@ -66,7 +66,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
 
-  const [prevTopicId, setPrevTopicId] = useState<string | undefined>(undefined);
+  const [prevTopicId, setPrevTopicId] = useState<string | undefined>(undefined)
 
   // Search for the 'fit view'-button of <Controls/> and trigger click event
   /*const handleFitView = () => {
@@ -94,7 +94,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       handleCustomFitView()
       setPrevTopicId(topicId)
     }
-  }, [handleCustomFitView]);
+  }, [handleCustomFitView])
 
   // Get status of every learning element for user by request to backend
   // then get every learning element for topic by request to backend
@@ -191,8 +191,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           fitView
           onInit={() => {
             setTimeout(() => {
-              handleCustomFitView();
-            }, 0)}}
+              handleCustomFitView()
+            }, 0)
+          }}
           fitViewOptions={{
             padding: 5,
             minZoom: 0.75,

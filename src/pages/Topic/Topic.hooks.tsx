@@ -178,20 +178,20 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       const exerciseLearningElementParentNode =
         learningPathExercises.length > 0
           ? {
-            id: learningPathExercises[0].position.toString(),
-            data: { label: 'Übungen' },
-            type: 'GROUP',
-            position: {
-              x: 0,
-              y: 250 * (learningPathExercises[0].position - 1)
-            },
-            style: {
-              border: '1px solid ' + theme.palette.grey[500],
-              borderRadius: 8,
-              width: 550 * (learningPathExercises.length > 3 ? 4 : learningPathExercises.length) + nodeOffsetX,
-              height: groupHeight + Math.floor((learningPathExercises.length - 1) / 4) * 125
+              id: learningPathExercises[0].position.toString(),
+              data: { label: 'Übungen' },
+              type: 'GROUP',
+              position: {
+                x: 0,
+                y: 250 * (learningPathExercises[0].position - 1)
+              },
+              style: {
+                border: '1px solid ' + theme.palette.grey[500],
+                borderRadius: 8,
+                width: 550 * (learningPathExercises.length > 3 ? 4 : learningPathExercises.length) + nodeOffsetX,
+                height: groupHeight + Math.floor((learningPathExercises.length - 1) / 4) * 125
+              }
             }
-          }
           : null
 
       // Leftover learning elements
@@ -214,8 +214,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           if (exerciseLearningElementParentNode && item.position >= parseInt(exerciseLearningElementParentNode.id)) {
             return (
               250 *
-              (item.position -
-                parseInt(exerciseLearningElementChildNodes[exerciseLearningElementChildNodes.length - 1].id)) +
+                (item.position -
+                  parseInt(exerciseLearningElementChildNodes[exerciseLearningElementChildNodes.length - 1].id)) +
               exerciseLearningElementParentNode.position.y +
               groupHeight +
               70

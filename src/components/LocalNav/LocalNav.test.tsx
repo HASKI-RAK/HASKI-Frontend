@@ -110,7 +110,7 @@ describe('LocalNav tests', () => {
   })
 
   const props: LocalNavProps = {
-    useLearningPathTopic: mockUseLearningPathTopic,
+    useLearningPathTopic: mockUseLearningPathTopic
   }
 
   it('should render the LocalNav', () => {
@@ -131,7 +131,7 @@ describe('LocalNav tests', () => {
     })
 
     const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic,
+      useLearningPathTopic: mockUseLearningPathTopic
     }
 
     const result = render(
@@ -150,13 +150,8 @@ describe('LocalNav tests', () => {
       topics: mockTopics
     })
 
-    const mockUseLearningPathElement = jest.fn().mockReturnValue({
-      loadingElements: false,
-      learningPaths: mockLearningPathElement
-    })
-
     const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic,
+      useLearningPathTopic: mockUseLearningPathTopic
     }
 
     const { getAllByRole } = render(
@@ -176,7 +171,7 @@ describe('LocalNav tests', () => {
     })
 
     const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic,
+      useLearningPathTopic: mockUseLearningPathTopic
     }
 
     const { getAllByRole } = render(
@@ -190,14 +185,13 @@ describe('LocalNav tests', () => {
   })
 
   it('should render the LocalNav with all Topics, clicking on 2nd element', () => {
-
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
       topics: mockTopics
     })
 
     const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic,
+      useLearningPathTopic: mockUseLearningPathTopic
     }
 
     const { getAllByRole } = render(
@@ -206,7 +200,7 @@ describe('LocalNav tests', () => {
       </MemoryRouter>
     )
 
-    act(async() => {
+    act(async () => {
       const topicList = getAllByRole('button')
       expect(topicList.length).toBe(2)
       fireEvent.click(topicList[1])
@@ -215,7 +209,6 @@ describe('LocalNav tests', () => {
       })
     })
   })
-
 })
 
 describe('getSortedLearningPath works as expected', () => {
