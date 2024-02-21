@@ -1,15 +1,13 @@
-import { Box, Divider, Typography, Stack, List, ListItem, ListItemText, Grid } from '@common/components'
+import { Box, Divider, Typography, Stack, List, ListItem, ListItemText, Grid, Skeleton } from '@common/components'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Topic } from '@core'
 import { SkeletonList, useLearningPathTopic as _useLearningPathTopic } from '@components'
 import { ListItemButton } from '@mui/material'
 import { useTheme, useMediaQuery } from '@common/hooks'
-import { useContext, useEffect, useState } from 'react'
-import { AuthContext, SnackbarContext } from '@services'
-import { usePersistedStore, useStore } from '@store'
-import log from 'loglevel'
+import React from 'react'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
+import { useLearningPathTopicProgress } from '../../pages/Course/Course.hook'
 
 /**
  *  Local navigation component props.
@@ -31,17 +29,11 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
   const theme = useTheme()
   const { courseId, topicId } = useParams() as { courseId: string; topicId: string }
   const navigate = useNavigate()
-  const { loading, topics } = useLearningPathTopic(courseId)
   const isMdOrSmaller = useMediaQuery(theme.breakpoints.down('lg'))
   const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'))
-  const authContext = useContext(AuthContext)
-  const { addSnackbar } = useContext(SnackbarContext)
 
-  const getUser = usePersistedStore((state) => state.getUser)
-  const getLearningPathElement = useStore((state) => state.getLearningPathElement)
-  const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
-
-  const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
+  const { topics, loading: topicLoading } = useLearningPathTopic(courseId)
+  const { calculatedTopicProgress, loading: progressLoading } = useLearningPathTopicProgress(courseId, topics)
 
   interface FractionProps {
     numerator: number
@@ -56,82 +48,13 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
     )
   }
 
-  useEffect(() => {
-    const preventEndlessLoading = setTimeout(() => {
-      log.log('Course timeout')
-      navigate('/login')
-    }, 1000)
-
-    if (authContext.isAuth) {
-      clearTimeout(preventEndlessLoading)
-      Promise.all(
-        topics.map((topic) => {
-          return getUser().then((user) => {
-            return getLearningPathElementStatus(courseId, user.lms_user_id)
-              .then((learningPathElementStatusData) => {
-                //filter all learning elements with state 1 (done)
-                const allDoneLearningElements = learningPathElementStatusData.filter((learningPathElementStatus) => {
-                  return learningPathElementStatus.state === 1
-                })
-                return getLearningPathElement(
-                  user.settings.user_id,
-                  user.lms_user_id,
-                  user.id,
-                  courseId,
-                  topic.id.toString()
-                )
-                  .then((allLearningElementsInTopic) => {
-                    //filter all learning elements in topic for done learning elements
-                    const allDoneLearningElementsInTopic = allLearningElementsInTopic.path.map((learningElement) => {
-                      return allDoneLearningElements.some(
-                        (status) => status.cmid === learningElement.learning_element.lms_id
-                      )
-                    })
-                    //build a array[][] with the number of done learning elements and the number of all learning elements in topic
-                    //do that for every topic, and lastly return an array with all the arrays for every topic
-                    //example: [[1,2],[2,2],[0,2]]
-                    return [
-                      allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
-                      allLearningElementsInTopic.path.length
-                    ]
-                  })
-                  .catch((error: string) => {
-                    addSnackbar({
-                      message: error,
-                      severity: 'error',
-                      autoHideDuration: 3000
-                    })
-                    return []
-                  })
-              })
-              .catch((error: string) => {
-                addSnackbar({
-                  message: error,
-                  severity: 'error',
-                  autoHideDuration: 3000
-                })
-                return []
-              })
-          })
-        })
-      ).then((result) => {
-        // Handle resulting array with calculated topic progress
-        setCalculatedTopicProgress(result)
-      })
-    }
-
-    return () => {
-      clearTimeout(preventEndlessLoading)
-    }
-  }, [authContext.isAuth, courseId, navigate, topics, getUser, getLearningPathElement, getLearningPathElementStatus])
-
   return (
     <Box flexGrow={1} sx={{ minWidth: isLargeScreen ? '20rem' : '14rem' }}>
       <Grid sx={{ ml: '0.9rem' }}>
         <Typography variant="h5">{t('appGlobal.topics')}</Typography>
       </Grid>
       <Divider />
-      {loading ? (
+      {topicLoading ? (
         <Box>
           <Stack spacing={1}>
             <SkeletonList />
@@ -165,7 +88,7 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
                       />
                     </Grid>
                     <Grid item xs={3} sm={3} md={3} lg={2} xl={2}>
-                      {calculatedTopicProgress[index] && (
+                      {calculatedTopicProgress[index] && !progressLoading ? (
                         <ListItemText
                           primary={
                             <Fraction
@@ -176,6 +99,8 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
                           primaryTypographyProps={{ p: 0.25, borderRadius: 3, bgcolor: '#e9e9e8' }}
                           sx={{ textAlign: 'center' }}
                         />
+                      ) : (
+                        <Skeleton variant="text" width={'70%'} height={20} sx={{ ml: 2 }} />
                       )}
                     </Grid>
                   </Grid>

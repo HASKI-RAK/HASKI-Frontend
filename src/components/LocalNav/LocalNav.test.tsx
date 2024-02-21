@@ -2,12 +2,13 @@ import '@testing-library/jest-dom'
 import { act, fireEvent, render, waitFor } from '@testing-library/react'
 import LocalNav, { LocalNavProps } from './LocalNav'
 import * as router from 'react-router'
-import { LearningPathElement, LearningPathLearningElement, Topic, LearningElement, StudentLearningElement } from '@core'
+import { LearningPathLearningElement, Topic, LearningElement, StudentLearningElement } from '@core'
 import { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
 import { renderHook } from '@testing-library/react-hooks'
 import { getSortedLearningPath, useLearningPathTopic, useLearningPathElement } from './LocalNav.hooks'
 import resetModules = jest.resetModules
+import { AuthContext } from '@services'
 
 jest.mock('@common/hooks', () => ({
   ...jest.requireActual('@common/hooks'),
@@ -52,14 +53,6 @@ describe('LocalNav tests', () => {
       learning_element: mockLearningElement
     }
   ]
-
-  const mockLearningPathElement: LearningPathElement = {
-    id: 1,
-    course_id: 1,
-    based_on: 'some-Algorithm',
-    calculated_on: 'today',
-    path: mockLearningPathLearningElement
-  }
 
   const mockTopics: Topic[] = [
     {
@@ -161,7 +154,7 @@ describe('LocalNav tests', () => {
     )
 
     const topicList = getAllByRole('list')
-    expect(topicList[0].textContent).toContain('test/test2')
+    expect(topicList[0].textContent).toContain('testtest2')
   })
 
   it('should render the LocalNav with all Topics, as listelements', () => {
@@ -184,7 +177,7 @@ describe('LocalNav tests', () => {
     expect(topicList.length).toBe(2)
   })
 
-  it('should render the LocalNav with all Topics, clicking on 2nd element', () => {
+  it('should render the LocalNav with all Topics, clicking on 2nd element', async() => {
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
       topics: mockTopics
@@ -195,17 +188,19 @@ describe('LocalNav tests', () => {
     }
 
     const { getAllByRole } = render(
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
       <MemoryRouter initialEntries={['/login']}>
         <LocalNav {...props} />
       </MemoryRouter>
+      </AuthContext.Provider>
     )
 
-    act(async () => {
+    await act(async() => {
       const topicList = getAllByRole('button')
       expect(topicList.length).toBe(2)
       fireEvent.click(topicList[1])
       await waitFor(() => {
-        expect(navigate).toHaveBeenCalled()
+        expect(navigate).toHaveBeenCalledWith('/course/undefined/topic/2')
       })
     })
   })

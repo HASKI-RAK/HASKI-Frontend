@@ -1,0 +1,84 @@
+import { useEffect, useState, useContext } from 'react'
+import log from 'loglevel'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext, SnackbarContext } from '@services'
+import { usePersistedStore, useStore } from '@store'
+import { Topic } from '@core'
+
+export const useLearningPathTopicProgress = (courseId: string, topics: Topic[]) => {
+  const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
+  const [loading, setLoading] = useState(true) // State for loading
+
+  const authContext = useContext(AuthContext)
+  const navigate = useNavigate()
+  const { addSnackbar } = useContext(SnackbarContext)
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getLearningPathElement = useStore((state) => state.getLearningPathElement)
+  const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
+
+  useEffect(() => {
+    const preventEndlessLoading = setTimeout(() => {
+      log.log('Course timeout')
+      navigate('/login')
+    }, 1000)
+
+    if (authContext.isAuth) {
+      clearTimeout(preventEndlessLoading)
+      Promise.all(
+        topics.map((topic) => {
+          return getUser().then((user) => {
+            return getLearningPathElementStatus(courseId, user.lms_user_id)
+              .then((learningPathElementStatusData) => {
+                const allDoneLearningElements = learningPathElementStatusData.filter((learningPathElementStatus) => {
+                  return learningPathElementStatus.state === 1
+                })
+                return getLearningPathElement(
+                  user.settings.user_id,
+                  user.lms_user_id,
+                  user.id,
+                  courseId,
+                  topic.id.toString()
+                )
+                  .then((allLearningElementsInTopic) => {
+                    const allDoneLearningElementsInTopic = allLearningElementsInTopic.path.map((learningElement) => {
+                      return allDoneLearningElements.some(
+                        (status) => status.cmid === learningElement.learning_element.lms_id
+                      )
+                    })
+                    return [
+                      allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
+                      allLearningElementsInTopic.path.length
+                    ]
+                  })
+                  .catch((error: string) => {
+                    addSnackbar({
+                      message: error,
+                      severity: 'error',
+                      autoHideDuration: 3000
+                    })
+                    return []
+                  })
+              })
+              .catch((error: string) => {
+                addSnackbar({
+                  message: error,
+                  severity: 'error',
+                  autoHideDuration: 3000
+                })
+                return []
+              })
+          })
+        })
+      ).then((result) => {
+        setCalculatedTopicProgress(result)
+        setLoading(false) // Update loading state when data fetching is complete
+      })
+    }
+
+    return () => {
+      clearTimeout(preventEndlessLoading)
+    }
+  }, [authContext.isAuth, courseId, navigate, topics, getUser, getLearningPathElement, getLearningPathElementStatus])
+
+  return { calculatedTopicProgress, loading }
+}
