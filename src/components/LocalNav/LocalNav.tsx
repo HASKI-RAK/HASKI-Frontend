@@ -65,6 +65,7 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
           {topics.map((topic, index) => (
             <Box
               key={topic.id}
+              data-testid={`topic-list-item-${topic.id}`}
               sx={{
                 width: '100%',
                 bgcolor: parseInt(topicId) == topic.id ? 'lightgrey' : 'background.paper',

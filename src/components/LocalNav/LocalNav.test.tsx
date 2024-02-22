@@ -12,14 +12,22 @@ import { AuthContext } from '@services'
 
 jest.mock('@common/hooks', () => ({
   ...jest.requireActual('@common/hooks'),
-  useMediaQuery: jest.fn().mockReturnValue(true)
+  useMediaQuery: jest.fn(),
+}));
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'), // Preserve the original module behavior
+  useParams: jest.fn(), // Mock useParams as a jest.fn()
 }))
 
 const navigate = jest.fn()
+const useParamsMock = jest.fn().mockReturnValue({ courseId: '1', topicId: '1' })
+
 
 describe('LocalNav tests', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+    jest.spyOn(router, 'useParams').mockImplementation(() => useParamsMock())
   })
 
   const mockStudentLearningElement: StudentLearningElement = {
@@ -200,7 +208,42 @@ describe('LocalNav tests', () => {
       expect(topicList.length).toBe(2)
       fireEvent.click(topicList[1])
       await waitFor(() => {
-        expect(navigate).toHaveBeenCalledWith('/course/undefined/topic/2')
+        expect(navigate).toHaveBeenCalledWith('/course/1/topic/2')
+      })
+    })
+  })
+
+  it('should highlight selected topic', async() => {
+    const useMediaQuery = jest.fn().mockReturnValue(true)
+
+
+    const mockUseLearningPathTopic = jest.fn().mockReturnValue({
+      loading: false,
+      topics: mockTopics
+    })
+
+    const props: LocalNavProps = {
+      useLearningPathTopic: mockUseLearningPathTopic
+    }
+
+    const { getAllByRole, getByTestId } = render(
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter initialEntries={['/course/1/topic/1']}>
+          <LocalNav {...props} />
+        </MemoryRouter>
+      </AuthContext.Provider>
+    )
+
+    await act(async() => {
+      const topicListButton = getAllByRole('button')
+      const topicList = getByTestId('topic-list-item-1')
+      expect(topicListButton.length).toBe(2)
+      expect(topicListButton[0].textContent).toContain('test')
+      expect(topicListButton[1].textContent).toContain('test2')
+      fireEvent.click(topicListButton[1])
+      await waitFor(() => {
+        expect(navigate).toHaveBeenCalledWith('/course/1/topic/2')
+        expect(topicList).toHaveStyle('background-color: lightgrey')
       })
     })
   })
