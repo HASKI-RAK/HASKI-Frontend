@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Edge, Node } from 'reactflow'
 import { useTheme } from '@common/hooks'
-import { Theme } from '@common/theme'
-import { LearningPathLearningElementNode, groupLabels } from '@components'
+import { LearningPathLearningElementNode, getGroupLabels } from '@components'
 import { LearningElement, LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
 
 /**
@@ -40,7 +40,8 @@ export type TopicHookReturn = {
   readonly handleOpen: () => void
   readonly mapNodes: (
     learningPathData: LearningPathElement,
-    learningPathStatus: LearningPathElementStatus[]
+    learningPathStatus: LearningPathElementStatus[],
+    nodesGrouped?: boolean
   ) => {
     nodes: Node[]
     edges: Edge[]
@@ -70,6 +71,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const [isOpen, setIsOpen] = useState(defaultIsOpen)
   const [lmsId, setLmsId] = useState<number>(defaultLmsId)
   const theme = useTheme()
+  const { t } = useTranslation()
 
   // Global variables
   const nodeOffsetX = 50
@@ -196,7 +198,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         id: learningElements[0].position.toString(),
         data: {
           classification: learningElements[0].learning_element.classification,
-          label: groupLabels[learningElements[0].learning_element.classification]
+          label: getGroupLabels(t)[learningElements[0].learning_element.classification]
         },
         type: 'GROUP',
         position: {
@@ -261,8 +263,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       const nodes = groupedElements.map((group, index) => {
         const yOffset = groupedElements
           .slice(0, index)
-          .filter((group) => group.length)
-          .map((group) => 125 * Math.floor((group.length - 1) / 4) + groupHeight / 2)
+          .filter((group) => group.length > 1)
+          .map((group) => (Math.ceil(group.length / 4) * groupHeight) / 1.75)
           .reduce((a, b) => a + b, 0)
 
         return groupNodes(group, learningPathStatus, index, yOffset)

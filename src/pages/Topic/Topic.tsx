@@ -62,7 +62,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               setLearningPathElementStatus(learningPathElementStatusData)
               getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
                 .then((learningPathElementData) => {
-                  const { nodes, edges } = mapNodes(learningPathElementData, learningPathElementStatusData)
+                  const { nodes, edges } = mapNodes(learningPathElementData, learningPathElementStatusData, true)
                   setInitialNodes(nodes)
                   setInitialEdges(edges)
                 })

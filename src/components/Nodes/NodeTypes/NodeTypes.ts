@@ -1,3 +1,4 @@
+import { TFunction } from 'i18next'
 import { NodeTypes } from 'reactflow'
 import AdditionalLiteratureNode from '../AdditionalLiteratureNode/AdditionalLiteratureNode'
 import ApplicationExampleNode from '../ApplicationExampleNode/ApplicationExampleNode'
@@ -39,19 +40,21 @@ export const nodeTypes: NodeTypes = {
   DEFAULT: BasicNode
 }
 
-// TODO: In translation file auslagern
-export const groupLabels: Record<string, string> = {
-  RQ: 'Feedbacks',
-  KÜ: 'Kurzübersichten',
-  AB: 'Anwendungsbeispiele',
-  EK: 'Erklärungen',
-  AN: 'Animationen',
-  BE: 'Beispiele',
-  FO: 'Foren',
-  ÜB: 'Übungen',
-  ZF: 'Zusammenfassungen',
-  LZ: 'Lernziele',
-  ZL: 'Zusatzliteratur',
-  SE: 'Selbstüberprüfungen',
-  DEFAULT: 'Default'
+// TODO: Add comments
+export const getGroupLabels = (t: TFunction): Record<string, string> => {
+  return {
+    AB: t('components.NodeTypes.ab'),
+    AN: t('components.NodeTypes.an'),
+    BE: t('components.NodeTypes.be'),
+    DEFAULT: 'Default',
+    EK: t('components.NodeTypes.ek'),
+    FO: t('components.NodeTypes.fo'),
+    LZ: t('components.NodeTypes.lz'),
+    KÜ: t('components.NodeTypes.kue'),
+    RQ: t('components.NodeTypes.rq'),
+    SE: t('components.NodeTypes.se'),
+    ÜB: t('components.NodeTypes.ueb'),
+    ZF: t('components.NodeTypes.zf'),
+    ZL: t('components.NodeTypes.zl')
+  }
 }

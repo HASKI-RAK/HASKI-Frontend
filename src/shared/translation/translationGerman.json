@@ -1663,5 +1663,17 @@
   "tooltip.openSettings": "Einstellungen",
   "warning": "Warnung",
   "warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
-  "warning.online": "Sie sind wieder online."
+  "warning.online": "Sie sind wieder online.",
+  "components.NodeTypes.ab": "Anwendungsbeispiele",
+  "components.NodeTypes.an": "Animationen",
+  "components.NodeTypes.be": "Beispiele",
+  "components.NodeTypes.ek": "Erklärungen",
+  "components.NodeTypes.fo": "Foren",
+  "components.NodeTypes.lz": "Lernziele",
+  "components.NodeTypes.kue": "Kurzübersichten",
+  "components.NodeTypes.rq": "Feedbacks",
+  "components.NodeTypes.se": "Selbsteinschätzungstests",
+  "components.NodeTypes.ueb": "Übungen",
+  "components.NodeTypes.zf": "Zusammenfassungen",
+  "components.NodeTypes.zl": "Zusatzliteratur"
 }

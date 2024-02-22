@@ -1,9 +1,8 @@
 import '@testing-library/jest-dom'
-import { act, render, renderHook, waitFor } from '@testing-library/react'
+import { act, render, renderHook, screen, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import Router, { MemoryRouter } from 'react-router-dom'
 import { mockReactFlow } from '@mocks'
-import { createTheme } from '@common/theme'
 import { LearningPathElementStatus } from '@core'
 import Topic from './Topic'
 import { useTopic, useTopicHookParams } from './Topic.hooks'
@@ -134,13 +133,8 @@ describe('Topic Page', () => {
       lmsId: -1,
       handleClose: expect.any(Function),
       handleOpen: expect.any(Function),
-      handleSetTitle: expect.any(Function),
-      handleSetUrl: expect.any(Function),
-      handleSetLmsId: expect.any(Function),
       mapNodes: expect.any(Function)
     })
-
-    const mockTheme = createTheme()
 
     const mockLearningPath = {
       id: 1,
@@ -214,7 +208,7 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme, mockLearningElementStatus)
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus)
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -225,13 +219,10 @@ describe('Topic Page', () => {
             classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
           position: {
             x: -225,
@@ -254,13 +245,10 @@ describe('Topic Page', () => {
             classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 2,
             name: '',
-            isDone: true,
-            handleSetLmsId: expect.any(Function)
+            isDone: true
           },
           position: {
             x: -225,
@@ -288,15 +276,6 @@ describe('Topic Page', () => {
 
       result.current.handleClose()
       expect(result.current.isOpen).toBe(false)
-
-      result.current.handleSetTitle('testTitle')
-      expect(result.current.title).toBe('')
-
-      result.current.handleSetUrl('testUrl')
-      expect(result.current.url).toBe('')
-
-      result.current.handleSetLmsId(1)
-      expect(result.current.lmsId).toBe(-1)
     })
   })
 
@@ -308,14 +287,9 @@ describe('Topic Page', () => {
       isOpen: false,
       handleClose: expect.any(Function),
       handleOpen: expect.any(Function),
-      handleSetTitle: expect.any(Function),
-      handleSetUrl: expect.any(Function),
-      mapNodes: expect.any(Function),
       lmsId: -1,
-      handleSetLmsId: expect.any(Function)
+      mapNodes: expect.any(Function)
     })
-
-    const mockTheme = createTheme()
 
     const mockLearningPath = {
       id: 1,
@@ -439,7 +413,7 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme, mockLearningElementStatus)
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus)
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -450,15 +424,15 @@ describe('Topic Page', () => {
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
           id: '1',
           position: {
-            x: 325,
+            x: -250,
             y: 0
           },
           style: {
@@ -523,13 +497,10 @@ describe('Topic Page', () => {
             classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
           id: '3-1',
           position: {
@@ -552,13 +523,10 @@ describe('Topic Page', () => {
             classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
           id: '5',
           position: {
@@ -601,15 +569,6 @@ describe('Topic Page', () => {
 
       result.current.handleClose()
       expect(result.current.isOpen).toBe(false)
-
-      result.current.handleSetTitle('testTitle')
-      expect(result.current.title).toBe('')
-
-      result.current.handleSetUrl('testUrl')
-      expect(result.current.url).toBe('')
-
-      result.current.handleSetLmsId(1)
-      expect(result.current.lmsId).toBe(-1)
     })
   })
 
@@ -621,14 +580,9 @@ describe('Topic Page', () => {
       isOpen: false,
       handleClose: expect.any(Function),
       handleOpen: expect.any(Function),
-      handleSetTitle: expect.any(Function),
-      handleSetUrl: expect.any(Function),
       mapNodes: expect.any(Function),
-      lmsId: -1,
-      handleSetLmsId: expect.any(Function)
+      lmsId: -1
     })
-
-    const mockTheme = createTheme()
 
     const mockLearningPath = {
       id: 1,
@@ -827,7 +781,7 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme, mockLearningElementStatus)
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus)
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -882,13 +836,10 @@ describe('Topic Page', () => {
             classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
           id: '2-1',
           position: {
@@ -911,13 +862,10 @@ describe('Topic Page', () => {
             classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
           id: '3-1',
           position: {
@@ -940,13 +888,10 @@ describe('Topic Page', () => {
             classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
           id: '4-1',
           position: {
@@ -969,13 +914,10 @@ describe('Topic Page', () => {
             classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
           id: '5-1',
           position: {
@@ -998,13 +940,10 @@ describe('Topic Page', () => {
             classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
           id: '6-1',
           position: {
@@ -1027,13 +966,10 @@ describe('Topic Page', () => {
             classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
           id: '8',
           position: {
@@ -1076,15 +1012,6 @@ describe('Topic Page', () => {
 
       result.current.handleClose()
       expect(result.current.isOpen).toBe(false)
-
-      result.current.handleSetTitle('testTitle')
-      expect(result.current.title).toBe('')
-
-      result.current.handleSetUrl('testUrl')
-      expect(result.current.url).toBe('')
-
-      result.current.handleSetLmsId(1)
-      expect(result.current.lmsId).toBe(-1)
     })
   })
 
