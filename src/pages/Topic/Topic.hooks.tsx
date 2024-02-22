@@ -206,14 +206,14 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           y: 250 * position + yOffset
         },
         style: {
-          border: '1px solid ' + theme.palette.grey[500],
+          border: '2px solid ' + theme.palette.grey[500],
           borderRadius: 8,
           width: 550 * (learningElements.length > 3 ? 4 : learningElements.length) + nodeOffsetX,
           height: 125 * Math.floor((learningElements.length - 1) / 4) + groupHeight // First term is number of additional rows.
         }
       }
     },
-    [theme, groupHeight, nodeOffsetX]
+    [theme, groupHeight, nodeOffsetX, t]
   )
 
   // Creates a group of nodes consisting of a parent node and its children or a single node from the passed LearningPathLearningElement array.
