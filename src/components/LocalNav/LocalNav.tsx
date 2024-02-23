@@ -2,9 +2,8 @@ import { Box, Divider, Typography, Stack, List, ListItem, ListItemText, Grid, Sk
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Topic } from '@core'
-import { SkeletonList, useLearningPathTopic as _useLearningPathTopic } from '@components'
+import { SkeletonList, useLearningPathTopic as _useLearningPathTopic, Fraction } from '@components'
 import { ListItemButton } from '@mui/material'
-import { useTheme } from '@common/hooks'
 import React from 'react'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import { useLearningPathTopicProgress } from '../../pages/Course/Course.hook'
@@ -31,19 +30,6 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
 
   const { topics, loading: topicLoading } = useLearningPathTopic(courseId)
   const { calculatedTopicProgress, loading: progressLoading } = useLearningPathTopicProgress(courseId, topics)
-
-  interface FractionProps {
-    numerator: number
-    denominator: number
-  }
-
-  const Fraction = ({ numerator, denominator }: FractionProps) => {
-    return (
-      <Typography variant="body1" component="span" sx={{ fontSize: 16 }}>
-        <sup>{numerator}</sup>/<sub>{denominator}</sub>
-      </Typography>
-    )
-  }
 
   return (
     <Box flexGrow={1} sx={{ minWidth: '20rem' }}>

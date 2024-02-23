@@ -40,6 +40,7 @@ export { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
 export { default as Typewriter } from './Typewriter/Typewriter'
 export { default as ImageCollection } from './ImageCollection/ImageCollection'
 export { default as CollapsibleList } from './CollapsibleList/CollapsibleList/CollapsibleList'
+export { default as Fraction } from './Fraction/Fraction'
 export {
   default as CollapsibleListEntry,
   type CollapsibleListEntryContentProps
