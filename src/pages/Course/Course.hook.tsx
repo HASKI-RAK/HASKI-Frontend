@@ -3,7 +3,52 @@ import log from 'loglevel'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import { Topic, User } from '@core'
+import { LearningPathElementReturn, LearningPathElementStatusReturn, Topic, User } from '@core'
+import { SnackbarMessageProps } from '@components'
+
+const fetchTopicProgress = async (user: User, courseId: string, topic: Topic, getLearningPathElement:  LearningPathElementReturn, getLearningPathElementStatus:  LearningPathElementStatusReturn, addSnackbar:  (newSnackbar: SnackbarMessageProps) => void) => {
+  return getLearningPathElementStatus(courseId, user.lms_user_id)
+  .then(async(learningPathElementStatusData) => {
+    const allDoneLearningElements = learningPathElementStatusData.filter((learningPathElementStatus) => {
+      return learningPathElementStatus.state === 1
+    })
+
+    return getLearningPathElement(
+      user.settings.user_id,
+      user.lms_user_id,
+      user.id,
+      courseId,
+      topic.id.toString()
+    )
+    .then((allLearningElementsInTopic) => {
+      const allDoneLearningElementsInTopic = allLearningElementsInTopic.path.map((learningElement) => {
+        return allDoneLearningElements.some(
+          (status) => status.cmid === learningElement.learning_element.lms_id
+        )
+      })
+      return [
+        allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
+        allLearningElementsInTopic.path.length
+      ]
+    })
+     .catch((error: string) => {
+      addSnackbar({
+        message: error,
+        severity: 'error',
+        autoHideDuration: 3000
+      })
+      return []
+    })
+  })
+   .catch((error: string) => {
+    addSnackbar({
+      message: error,
+      severity: 'error',
+      autoHideDuration: 3000
+    })
+    return []
+  })
+}
 
 export const useLearningPathTopicProgress = (courseId: string, topics: Topic[]) => {
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
@@ -16,49 +61,6 @@ export const useLearningPathTopicProgress = (courseId: string, topics: Topic[]) 
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
 
-  const fetchTopicProgress = async (user: User, topic: Topic) => {
-    return getLearningPathElementStatus(courseId, user.lms_user_id)
-    .then(async(learningPathElementStatusData) => {
-      const allDoneLearningElements = learningPathElementStatusData.filter((learningPathElementStatus) => {
-        return learningPathElementStatus.state === 1
-      })
-
-      return getLearningPathElement(
-        user.settings.user_id,
-        user.lms_user_id,
-        user.id,
-        courseId,
-        topic.id.toString()
-      )
-      .then((allLearningElementsInTopic) => {
-        const allDoneLearningElementsInTopic = allLearningElementsInTopic.path.map((learningElement) => {
-          return allDoneLearningElements.some(
-            (status) => status.cmid === learningElement.learning_element.lms_id
-          )
-        })
-        return [
-          allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
-          allLearningElementsInTopic.path.length
-        ]
-      })
-       .catch((error: string) => {
-        addSnackbar({
-          message: error,
-          severity: 'error',
-          autoHideDuration: 3000
-        })
-        return []
-      })
-    })
-     .catch((error: string) => {
-      addSnackbar({
-        message: error,
-        severity: 'error',
-        autoHideDuration: 3000
-      })
-      return []
-    })
-  }
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
@@ -70,7 +72,7 @@ export const useLearningPathTopicProgress = (courseId: string, topics: Topic[]) 
       clearTimeout(preventEndlessLoading)
       Promise.all(
         topics.map(async(topic) => {
-          return getUser().then((user) => fetchTopicProgress(user, topic))
+          return getUser().then((user) => fetchTopicProgress(user, courseId, topic, getLearningPathElement, getLearningPathElementStatus, addSnackbar))
         })
       ).then((result) => {
         setCalculatedTopicProgress(result)
