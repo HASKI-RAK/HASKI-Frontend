@@ -36,8 +36,7 @@ export const MainFrame = () => {
                 sx={{
                   display: 'flex',
                   flexDirection: 'row',
-                  alignItems: 'stretch',
-                  width: '250px'
+                  alignItems: 'stretch'
                 }}>
                 <LocalNav />
                 <Divider flexItem orientation="vertical" />

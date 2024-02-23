@@ -12,6 +12,7 @@ import {
 } from '@components'
 import { useTheme, useMediaQuery } from '@common/hooks'
 
+
 /**
  *  Local navigation component props.
  *  @prop {@link _useLearningPathTopic} - hook to get learning path topics
@@ -43,26 +44,14 @@ const LocalNav = ({
 
   const [openAccordion, setOpenAccordion] = useState<number | null>(null)
  
-  const [open, setDrawerOpen] = useState(true)
-  const maxDrawerWidth=1000
+  const theme = useTheme();
+  const open= useMediaQuery(theme.breakpoints.up('lg')); 
 
   const handleAccordionClick = (index: number) => {
     setOpenAccordion(openAccordion === index ? null : index)
   }
-
-  const handleDarwerClose = ()=>{
-    if(window.outerWidth<maxDrawerWidth)
-    {
-      setDrawerOpen(false)
-    }
-    else
-    {
-      setDrawerOpen(true)
-    }
-    
-  }
-  window.addEventListener('resize', handleDarwerClose)
   return (
+    <Box sx={{width: open ? '250px' : '0px'}}>
     <Drawer
       variant="persistent" 
       anchor='left'
@@ -73,14 +62,12 @@ const LocalNav = ({
         flexShrink: 1,
         
         [`& .MuiDrawer-paper`]: {
-          width: '250px',
+          width:  open ? '250px' : '0px',
           height:'450px',
           borderRadius:'0px',
-          marginTop: '100px',
           boxSizing: 'border-box',
           maxHeight: '70%',
-          position:'relative'
-          /**marginTop: '20%'*/
+          position:open ? 'relative':'fixed',
         }
       }}>
       <Box flexGrow={1} overflow={'auto'}>
@@ -140,6 +127,7 @@ const LocalNav = ({
         )}
       </Box>
     </Drawer>
+    </Box>
   )
 }
 
