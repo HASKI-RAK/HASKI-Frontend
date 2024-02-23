@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Topic } from '@core'
 import { SkeletonList, useLearningPathTopic as _useLearningPathTopic } from '@components'
 import { ListItemButton } from '@mui/material'
-import { useTheme, useMediaQuery } from '@common/hooks'
+import { useTheme } from '@common/hooks'
 import React from 'react'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import { useLearningPathTopicProgress } from '../../pages/Course/Course.hook'
@@ -26,11 +26,8 @@ export type LocalNavProps = {
  */
 const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProps) => {
   const { t } = useTranslation()
-  const theme = useTheme()
   const { courseId, topicId } = useParams() as { courseId: string; topicId: string }
   const navigate = useNavigate()
-  const isMdOrSmaller = useMediaQuery(theme.breakpoints.down('lg'))
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'))
 
   const { topics, loading: topicLoading } = useLearningPathTopic(courseId)
   const { calculatedTopicProgress, loading: progressLoading } = useLearningPathTopicProgress(courseId, topics)
@@ -42,14 +39,14 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
 
   const Fraction = ({ numerator, denominator }: FractionProps) => {
     return (
-      <Typography variant="body1" component="span" sx={{ fontSize: isMdOrSmaller ? 13 : 16 }}>
+      <Typography variant="body1" component="span" sx={{ fontSize: 16 }}>
         <sup>{numerator}</sup>/<sub>{denominator}</sub>
       </Typography>
     )
   }
 
   return (
-    <Box flexGrow={1} sx={{ minWidth: isLargeScreen ? '20rem' : '14rem' }}>
+    <Box flexGrow={1} sx={{ minWidth: '20rem' }}>
       <Grid sx={{ ml: '0.9rem' }}>
         <Typography variant="h5">{t('appGlobal.topics')}</Typography>
       </Grid>
@@ -85,7 +82,7 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
                     <Grid item xs={7} sm={7} md={8} lg={8} xl={8}>
                       <ListItemText
                         primary={topic.name}
-                        primaryTypographyProps={isMdOrSmaller ? { fontSize: 12 } : { fontSize: 18 }}
+                        primaryTypographyProps={{ fontSize: 18 }}
                       />
                     </Grid>
                     <Grid item xs={3} sm={3} md={3} lg={2} xl={2}>

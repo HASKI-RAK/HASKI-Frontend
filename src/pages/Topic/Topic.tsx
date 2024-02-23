@@ -66,8 +66,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
 
-  const [prevTopicId, setPrevTopicId] = useState<string | undefined>(undefined)
-
   // Search for the 'fit view'-button of <Controls/> and trigger click event
   /*const handleFitView = () => {
     const fitViewButton = document.querySelector('.react-flow__controls-button.react-flow__controls-fitview')
@@ -90,10 +88,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // [handleCustomFitView] as dependency because inside of it the fitViewButton changes,
   // that way the reactFlow background is changed before rendering it in a old position from the prev. topic
   useEffect(() => {
-    if (topicId !== prevTopicId) {
       handleCustomFitView()
-      setPrevTopicId(topicId)
-    }
   }, [handleCustomFitView])
 
   // Get status of every learning element for user by request to backend
