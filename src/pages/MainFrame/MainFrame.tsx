@@ -46,7 +46,6 @@ export const MainFrame = () => {
               <Outlet />
             </Box>
           </Box>
-          <Divider flexItem />
           <Footer />
         </Grid>
       </Stack>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Container, Box, Grid, Link, Typography } from '@common/components'
+import { Container, Box, Grid, Link, Typography, Divider } from '@common/components'
 
 /**
  * Sticks to the bottom of the page and is always visible.
@@ -27,6 +27,7 @@ const Footer = () => {
 
   return (
     <footer>
+        <Divider flexItem />
       <Box
         sx={{
           width: '100%',
