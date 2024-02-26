@@ -3,8 +3,28 @@ import log from 'loglevel'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import { LearningPathElementReturn, LearningPathElementStatusReturn, Topic, User } from '@core'
+import {
+  LearningPathElement,
+  LearningPathElementReturn,
+  LearningPathElementStatus,
+  LearningPathElementStatusReturn,
+  Topic,
+  User
+} from '@core'
 import { SnackbarMessageProps } from '@components'
+
+const calculateLearningElementProgress = (
+  allLearningElementsInTopic: LearningPathElement,
+  allDoneLearningElements: LearningPathElementStatus[]
+): [number, number] => {
+  const allDoneLearningElementsInTopic = allLearningElementsInTopic.path.map((learningElement) => {
+    return allDoneLearningElements.some((status) => status.cmid === learningElement.learning_element.lms_id);
+  });
+  return [
+    allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
+    allLearningElementsInTopic.path.length,
+  ];
+};
 
 const fetchTopicProgress = async (user: User, courseId: string, topic: Topic, getLearningPathElement:  LearningPathElementReturn, getLearningPathElementStatus:  LearningPathElementStatusReturn, addSnackbar:  (newSnackbar: SnackbarMessageProps) => void) => {
   return getLearningPathElementStatus(courseId, user.lms_user_id)
@@ -21,15 +41,7 @@ const fetchTopicProgress = async (user: User, courseId: string, topic: Topic, ge
       topic.id.toString()
     )
     .then((allLearningElementsInTopic) => {
-      const allDoneLearningElementsInTopic = allLearningElementsInTopic.path.map((learningElement) => {
-        return allDoneLearningElements.some(
-          (status) => status.cmid === learningElement.learning_element.lms_id
-        )
-      })
-      return [
-        allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
-        allLearningElementsInTopic.path.length
-      ]
+      return calculateLearningElementProgress(allLearningElementsInTopic, allDoneLearningElements)
     })
      .catch((error: string) => {
       addSnackbar({
