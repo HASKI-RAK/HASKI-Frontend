@@ -230,7 +230,7 @@ export const HaskiTheme = createTheme({
             boxSizing: 'border-box',
             borderRadius: '0px',
             color: defaultColors.black,
-            backgroundColor: defaultColors.lightgrey
+            backgroundColor: defaultColors.white
           }
         }
       }

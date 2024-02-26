@@ -28,8 +28,7 @@ export const MainFrame = () => {
       <Stack direction="column" sx={{ minHeight: 'inherit' }}>
         {renderMenuBar ? <MenuBar courseSelected={true} /> : <MenuBar courseSelected={false} />}
         <BreadcrumbsContainer />
-        <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
-          <Box sx={{ display: 'flex' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }} flex={1} >
             {renderLocalNav && ( // Render the LocalNav if courseId exists
               <Box
                 height={'100%'}
@@ -43,11 +42,22 @@ export const MainFrame = () => {
               </Box>
             )}
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            
+              {' '}
+              {/* Adjust the xs (Grid) value based on LocalNav */}
+              {/**💉 Pages get injected here through App routing */}
+              {/* <Container maxWidth="lg" sx={{ height: '100%' }}> */}
               <Outlet />
+              {/* </Container> */}
+            
+            {/** TODO 📑 add real gameification */}
+            {/* <Grid item xs={2}>
+                         <Typography variant="h4">Gamification</Typography>
+                         </Grid> */}
             </Box>
           </Box>
-          <Footer />
-        </Grid>
+       {/* </Grid> */}
+        <Footer />
       </Stack>
       <PrivacyModal />
       <OpenQuestionnaire />
