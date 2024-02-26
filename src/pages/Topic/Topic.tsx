@@ -25,7 +25,7 @@ const CustomFitViewButton = ({ node }: { node: Node[] }) => {
     })
   }
 
-  return <div id="customFitViewButton" style={{ display: 'none' }} onClick={handleClick} role="button"/>
+  return <button id="customFitViewButton" style={{ display: 'none' }} onClick={handleClick}/>
 }
 
 /**
