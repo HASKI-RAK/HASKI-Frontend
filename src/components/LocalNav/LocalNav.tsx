@@ -1,17 +1,27 @@
-import { Box, Divider, Typography, Stack, List, ListItem, ListItemText, Grid, Skeleton } from '@common/components'
+import {
+  Box,
+  Divider,
+  Typography,
+  Stack,
+  List,
+  ListItem,
+  ListItemText,
+  Grid,
+  Skeleton,
+  ListItemButton
+} from '@common/components'
+import { FiberManualRecord } from '@common/icons'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Topic } from '@core'
 import { SkeletonList, useLearningPathTopic as _useLearningPathTopic, Fraction } from '@components'
-import { ListItemButton } from '@mui/material'
 import React from 'react'
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
-import { useLearningPathTopicProgress } from '../../pages/Course/Course.hook'
+import { useLearningPathTopicProgress } from '@pages'
+import { Theme } from '@common/theme'
 
 /**
  *  Local navigation component props.
  *  @prop {@link _useLearningPathTopic} - hook to get learning path topics
- *  @prop {@link _useLearningPathElement} - hook to get learning path elements
  */
 export type LocalNavProps = {
   useLearningPathTopic?: (courseId: string) => { loading: boolean; topics: Topic[] }
@@ -62,14 +72,17 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
                     navigate(`/course/${courseId}/topic/${topic.id}`)
                   }}>
                   <Grid container direction="row" justifyContent="space-between" alignItems="center">
-                    <FiberManualRecordIcon
-                      sx={{ color: parseInt(topicId) == topic.id ? '#f2852b' : 'rgba(55,55,55,0.65)', width: '0.5rem' }}
+                    <FiberManualRecord
+                      sx={{
+                        color:
+                          parseInt(topicId) == topic.id
+                            ? (theme: Theme) => theme.palette.primary.main
+                            : (theme: Theme) => theme.palette.info.dark,
+                        width: '0.5rem'
+                      }}
                     />
                     <Grid item xs={7} sm={7} md={8} lg={8} xl={8}>
-                      <ListItemText
-                        primary={topic.name}
-                        primaryTypographyProps={{ fontSize: 18 }}
-                      />
+                      <ListItemText primary={topic.name} primaryTypographyProps={{ fontSize: 18 }} />
                     </Grid>
                     <Grid item xs={3} sm={3} md={3} lg={2} xl={2}>
                       {calculatedTopicProgress[index] && !progressLoading ? (
@@ -80,7 +93,11 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
                               denominator={calculatedTopicProgress[index][1]}
                             />
                           }
-                          primaryTypographyProps={{ p: 0.25, borderRadius: 3, bgcolor: '#e9e9e8' }}
+                          primaryTypographyProps={{
+                            p: 0.25,
+                            borderRadius: 3,
+                            bgcolor: (theme: Theme) => theme.palette.info.light
+                          }}
                           sx={{ textAlign: 'center' }}
                         />
                       ) : (

@@ -66,7 +66,7 @@ export const HaskiTheme = createTheme({
     info: {
       main: grey[700],
       dark: grey[500],
-      light: grey[300]
+      light: grey[200]
     }
 
     /*action: {

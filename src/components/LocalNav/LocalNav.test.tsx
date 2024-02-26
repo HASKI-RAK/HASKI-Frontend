@@ -12,17 +12,16 @@ import { AuthContext } from '@services'
 
 jest.mock('@common/hooks', () => ({
   ...jest.requireActual('@common/hooks'),
-  useMediaQuery: jest.fn(),
-}));
+  useMediaQuery: jest.fn()
+}))
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'), // Preserve the original module behavior
-  useParams: jest.fn(), // Mock useParams as a jest.fn()
+  useParams: jest.fn() // Mock useParams as a jest.fn()
 }))
 
 const navigate = jest.fn()
 const useParamsMock = jest.fn().mockReturnValue({ courseId: '1', topicId: '1' })
-
 
 describe('LocalNav tests', () => {
   beforeEach(() => {
@@ -185,7 +184,7 @@ describe('LocalNav tests', () => {
     expect(topicList.length).toBe(2)
   })
 
-  it('should render the LocalNav with all Topics, clicking on 2nd element', async() => {
+  it('should render the LocalNav with all Topics, clicking on 2nd element', async () => {
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
       topics: mockTopics
@@ -197,13 +196,13 @@ describe('LocalNav tests', () => {
 
     const { getAllByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-      <MemoryRouter initialEntries={['/login']}>
-        <LocalNav {...props} />
-      </MemoryRouter>
+        <MemoryRouter initialEntries={['/login']}>
+          <LocalNav {...props} />
+        </MemoryRouter>
       </AuthContext.Provider>
     )
 
-    await act(async() => {
+    await act(async () => {
       const topicList = getAllByRole('button')
       expect(topicList.length).toBe(2)
       fireEvent.click(topicList[1])
@@ -213,10 +212,7 @@ describe('LocalNav tests', () => {
     })
   })
 
-  it('should highlight selected topic', async() => {
-    const useMediaQuery = jest.fn().mockReturnValue(true)
-
-
+  it('should highlight selected topic', async () => {
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
       topics: mockTopics
@@ -234,7 +230,7 @@ describe('LocalNav tests', () => {
       </AuthContext.Provider>
     )
 
-    await act(async() => {
+    await act(async () => {
       const topicListButton = getAllByRole('button')
       const topicList = getByTestId('topic-list-item-1')
       expect(topicListButton.length).toBe(2)

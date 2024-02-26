@@ -25,7 +25,7 @@ const CustomFitViewButton = ({ node }: { node: Node[] }) => {
     })
   }
 
-  return <Button id="customFitViewButton" style={{ display: 'none' }} onClick={handleClick}/>
+  return <Button id="customFitViewButton" style={{ display: 'none' }} onClick={handleClick} />
 }
 
 /**
@@ -68,12 +68,12 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   // Search for the 'fit view'-button of <Controls/> and trigger click event
   /*const handleFitView = () => {
-    const fitViewButton = document.querySelector('.react-flow__controls-button.react-flow__controls-fitview')
+   const fitViewButton = document.querySelector('.react-flow__controls-button.react-flow__controls-fitview')
 
-    if (fitViewButton) {
-      (fitViewButton as HTMLButtonElement).click()
-    }
-  }*/
+   if (fitViewButton) {
+   (fitViewButton as HTMLButtonElement).click()
+   }
+   }*/
 
   // Trigger the click event of the custom 'fit view'-button
   const handleCustomFitView = () => {
@@ -84,7 +84,10 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     }
   }
 
-  const fetchLearningElementsWithStatus = async (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
+  const fetchLearningElementsWithStatus = async (
+    learningPathElementStatusData: LearningPathElementStatus[],
+    user: User
+  ) => {
     setLearningPathElementStatus(learningPathElementStatusData)
     getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
     .then((learningPathElementData) => {
@@ -105,7 +108,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // [handleCustomFitView] as dependency because inside of it the fitViewButton changes,
   // that way the reactFlow background is changed before rendering it in a old position from the prev. topic
   useEffect(() => {
-      handleCustomFitView()
+    handleCustomFitView()
   }, [handleCustomFitView])
 
   // Get status of every learning element for user by request to backend
@@ -119,26 +122,26 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     if (authContext.isAuth && courseId && topicId) {
       clearTimeout(preventEndlessLoading)
       getUser()
-        .then((user) => {
-          getLearningPathElementStatus(courseId, user.lms_user_id)
-            .then((learningPathElementStatusData) => {
-              return fetchLearningElementsWithStatus(learningPathElementStatusData, user)
-            })
-            .catch((error: string) => {
-              addSnackbar({
-                message: error,
-                severity: 'error',
-                autoHideDuration: 3000
-              })
-            })
+      .then((user) => {
+        getLearningPathElementStatus(courseId, user.lms_user_id)
+        .then((learningPathElementStatusData) => {
+          return fetchLearningElementsWithStatus(learningPathElementStatusData, user)
         })
-        .catch((error: string) => {
+         .catch((error: string) => {
           addSnackbar({
             message: error,
             severity: 'error',
             autoHideDuration: 3000
           })
         })
+      })
+       .catch((error: string) => {
+        addSnackbar({
+          message: error,
+          severity: 'error',
+          autoHideDuration: 3000
+        })
+      })
     }
     return () => {
       clearTimeout(preventEndlessLoading)
@@ -157,6 +160,10 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     learningPathElementStatus
   ])
 
+  /**
+   * Update the learning path element status for the user after he closes a learning Element (iframe)
+   * @param user
+   */
   const updateLearningPathElementStatus = async (user: User) => {
     getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
     .then((data) => {
