@@ -157,24 +157,28 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     learningPathElementStatus
   ])
 
+  const updateLearningPathElementStatus = async (user: User) => {
+    getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
+    .then((data) => {
+      setLearningPathElementSpecificStatus(courseId?.toString(), user.lms_user_id, data[0]).then((data) => {
+        setLearningPathElementStatus(data)
+      })
+    })
+     .catch((error: string) => {
+      addSnackbar({
+        message: error,
+        severity: 'error',
+        autoHideDuration: 3000
+      })
+    })
+  }
+
   // On Close of IFrameModal, fetch new LearningPathElementStatus, update it in
   // the persisted store and return it. Then close the IFrameModal and rerender page.
   // Catch for getUser is handled in the useEffect
   const getHandleClose = () => {
     getUser().then((user) => {
-      getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
-        .then((data) => {
-          setLearningPathElementSpecificStatus(courseId?.toString(), user.lms_user_id, data[0]).then((data) => {
-            setLearningPathElementStatus(data)
-          })
-        })
-        .catch((error: string) => {
-          addSnackbar({
-            message: error,
-            severity: 'error',
-            autoHideDuration: 3000
-          })
-        })
+      return updateLearningPathElementStatus(user)
     })
     return handleClose()
   }
