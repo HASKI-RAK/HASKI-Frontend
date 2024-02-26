@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext, SnackbarContext } from '@services'
 import { useStore, usePersistedStore } from '@store'
 import { IFrameModal, nodeTypes } from '@components'
-import { Box, Skeleton } from '@common/components'
+import { Box, Skeleton, Button } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { LearningPathElementStatus } from '@core'
 
@@ -25,7 +25,7 @@ const CustomFitViewButton = ({ node }: { node: Node[] }) => {
     })
   }
 
-  return <button id="customFitViewButton" style={{ display: 'none' }} onClick={handleClick}/>
+  return <Button id="customFitViewButton" style={{ display: 'none' }} onClick={handleClick}/>
 }
 
 /**
