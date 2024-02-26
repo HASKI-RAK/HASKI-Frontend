@@ -84,7 +84,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     }
   }
 
-  const fetchLearningElementsWithStatus = async (learningPathElementStatusData: LearningPathElementStatus[], user: User, ) => {
+  const fetchLearningElementsWithStatus = async (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
     setLearningPathElementStatus(learningPathElementStatusData)
     getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
     .then((learningPathElementData) => {
