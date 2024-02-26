@@ -7,7 +7,7 @@ import { useStore, usePersistedStore } from '@store'
 import { IFrameModal, nodeTypes } from '@components'
 import { Box, Skeleton, Button } from '@common/components'
 import { useTheme } from '@common/hooks'
-import { LearningPathElementStatus } from '@core'
+import { LearningPathElementStatus, User } from '@core'
 
 // custom fitView centering on first uncompleted element, needs to be in the react-flow component
 const CustomFitViewButton = ({ node }: { node: Node[] }) => {
@@ -84,6 +84,23 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     }
   }
 
+  const fetchLearningElementsWithStatus = async (learningPathElementStatusData: LearningPathElementStatus[], user: User, ) => {
+    setLearningPathElementStatus(learningPathElementStatusData)
+    getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
+    .then((learningPathElementData) => {
+      const { nodes, edges } = mapNodes(learningPathElementData, theme, learningPathElementStatusData)
+      setInitialNodes(nodes)
+      setInitialEdges(edges)
+    })
+     .catch((error: string) => {
+      addSnackbar({
+        message: error,
+        severity: 'error',
+        autoHideDuration: 3000
+      })
+    })
+  }
+
   // Effect to handle the fitting of the view when the topic changes with the LocalNav
   // [handleCustomFitView] as dependency because inside of it the fitViewButton changes,
   // that way the reactFlow background is changed before rendering it in a old position from the prev. topic
@@ -105,20 +122,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         .then((user) => {
           getLearningPathElementStatus(courseId, user.lms_user_id)
             .then((learningPathElementStatusData) => {
-              setLearningPathElementStatus(learningPathElementStatusData)
-              getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
-                .then((learningPathElementData) => {
-                  const { nodes, edges } = mapNodes(learningPathElementData, theme, learningPathElementStatusData)
-                  setInitialNodes(nodes)
-                  setInitialEdges(edges)
-                })
-                .catch((error: string) => {
-                  addSnackbar({
-                    message: error,
-                    severity: 'error',
-                    autoHideDuration: 3000
-                  })
-                })
+              return fetchLearningElementsWithStatus(learningPathElementStatusData, user)
             })
             .catch((error: string) => {
               addSnackbar({
