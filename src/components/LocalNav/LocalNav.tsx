@@ -16,7 +16,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Topic } from '@core'
 import { SkeletonList, useLearningPathTopic as _useLearningPathTopic, Fraction } from '@components'
 import React from 'react'
-import { useLearningPathTopicProgress } from '@pages'
+import { useLearningPathTopicProgress } from './../../pages/Course/Course.hook'
 import { Theme } from '@common/theme'
 
 /**
