@@ -1,9 +1,9 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import { AccordionSummary } from '@common/components'
-import { MemoryRouter } from 'react-router-dom'
-import Accordion from './DefaultAccordion'
 import '@testing-library/jest-dom'
-import { xAPI, AuthContext } from '@services'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { AccordionSummary } from '@common/components'
+import { AuthContext, xAPI } from '@services'
+import Accordion from './DefaultAccordion'
 
 describe('DefaultAccordion tests', () => {
   test('DefaultAccordion sends statement on click', async () => {

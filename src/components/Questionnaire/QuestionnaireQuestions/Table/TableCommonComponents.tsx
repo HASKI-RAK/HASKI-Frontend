@@ -1,19 +1,19 @@
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
-  Stack,
-  Typography,
-  MobileStepper,
+  Avatar,
   Button,
-  TableRow,
-  TableCell,
   CircularProgress,
-  Grid,
-  Fade,
   Divider,
-  Avatar
+  Fade,
+  Grid,
+  MobileStepper,
+  Stack,
+  TableCell,
+  TableRow,
+  Typography
 } from '@common/components'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
-import { useTranslation } from 'react-i18next'
 
 type ButtonStackProps = {
   activeStep: number

@@ -1,6 +1,6 @@
 import { Outlet, useParams } from 'react-router-dom'
-import { Box, Divider, Stack, Grid } from '@common/components'
-import { MenuBar, Footer, BreadcrumbsContainer, LocalNav, OpenQuestionnaire, PrivacyModal } from '@components'
+import { Box, Divider, Grid, Stack } from '@common/components'
+import { BreadcrumbsContainer, Footer, LocalNav, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
 
 /**
  * # MainFrame Page

@@ -1,10 +1,10 @@
-import { NodeWrapper, Paper, Typography, Tooltip } from '@common/components'
-import { LearningPathLearningElementNode } from '@components'
-import { Handle, NodeProps, Position } from 'reactflow'
-import { Feedback, CheckBox } from '@common/icons'
-import { useTranslation } from 'react-i18next'
-import { getConfig } from '@shared'
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Handle, NodeProps, Position } from 'reactflow'
+import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
+import { CheckBox, Feedback } from '@common/icons'
+import { LearningPathLearningElementNode } from '@components'
+import { getConfig } from '@shared'
 
 /**
  * @prop id - The id of the node.

@@ -1,8 +1,8 @@
+import { memo } from 'react'
+import { NodeProps } from 'reactflow'
+import { Videocam } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import BasicNode from '../BasicNode/BasicNode'
-import { Videocam } from '@common/icons'
-import { NodeProps } from 'reactflow'
-import { memo } from 'react'
 
 /**
  * VideoNode component.

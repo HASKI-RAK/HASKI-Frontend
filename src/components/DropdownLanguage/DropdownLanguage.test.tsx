@@ -1,9 +1,10 @@
 ﻿import '@testing-library/jest-dom'
-import { DropdownLanguage } from '@components'
-import { fireEvent, render, act } from '@testing-library/react'
-import { I18nextProvider } from 'react-i18next'
+import { act, fireEvent, render } from '@testing-library/react'
 import i18next from 'i18next'
+import { I18nextProvider } from 'react-i18next'
 import { MemoryRouter } from 'react-router-dom'
+import { DropdownLanguage } from '@components'
+
 import requireActual = jest.requireActual
 requireActual('console').error = jest.fn()
 

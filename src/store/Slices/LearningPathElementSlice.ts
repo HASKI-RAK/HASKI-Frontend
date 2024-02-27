@@ -1,6 +1,6 @@
+import { StateCreator } from 'zustand'
 import { LearningPathElement, LearningPathElementReturn } from '@core'
 import { fetchLearningPathElement } from '@services'
-import { StateCreator } from 'zustand'
 import { StoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 

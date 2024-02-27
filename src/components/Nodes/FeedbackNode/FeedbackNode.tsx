@@ -1,11 +1,11 @@
-import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
-import { LearningPathLearningElementNode } from '@components'
-import { Handle, NodeProps, Position } from 'reactflow'
-import { Feedback, CheckBox } from '@common/icons'
 import { memo } from 'react'
-import { getConfig } from '@shared'
-import { useTheme } from '@common/hooks'
 import { useTranslation } from 'react-i18next'
+import { Handle, NodeProps, Position } from 'reactflow'
+import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
+import { useTheme } from '@common/hooks'
+import { CheckBox, Feedback } from '@common/icons'
+import { LearningPathLearningElementNode } from '@components'
+import { getConfig } from '@shared'
 import BasicNode from '../BasicNode/BasicNode'
 
 /**

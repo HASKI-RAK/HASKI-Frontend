@@ -1,8 +1,8 @@
+import { memo } from 'react'
+import { NodeProps } from 'reactflow'
+import { Article } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import BasicNode from '../BasicNode/BasicNode'
-import { Article } from '@common/icons'
-import { NodeProps } from 'reactflow'
-import { memo } from 'react'
 
 /**
  * AdditionalLiteratureNode component.

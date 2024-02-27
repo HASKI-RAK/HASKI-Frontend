@@ -1,52 +1,50 @@
+import LanguageIcon from '@mui/icons-material/Language'
+import log from 'loglevel'
 import React, { useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  IconButton,
-  Menu,
-  Tooltip,
   Avatar,
-  MenuItem,
-  Grid,
+  Box,
   Button,
-  Popover,
   Divider,
-  ListItemIcon,
-  Link,
+  Grid,
+  IconButton,
   ImageWrapper,
-  TextWrapper
+  Link,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Popover,
+  TextWrapper,
+  Toolbar,
+  Tooltip,
+  Typography
 } from '@common/components'
-
 import {
   Analytics,
-  Settings,
-  Help,
   ArrowDropDown,
-  Person,
+  AssignmentOutlined,
+  Help,
+  LibraryBooksOutlined,
   Login,
   Logout,
-  AssignmentOutlined,
-  LibraryBooksOutlined,
-  PlaylistAddCheckCircleOutlined
+  Person,
+  PlaylistAddCheckCircleOutlined,
+  Settings
 } from '@common/icons'
-
-import { useTranslation } from 'react-i18next'
-import { AuthContext, SnackbarContext } from '@services'
 import {
   DropdownLanguage,
-  SkeletonList,
   QuestionnaireQuestionsModal,
   QuestionnaireResultsModal,
+  SkeletonList,
   TableILSQuestions,
   TableListKQuestions
 } from '@components'
-import { usePersistedStore, useStore } from '@store'
 import { Topic } from '@core'
-import log from 'loglevel'
-import LanguageIcon from '@mui/icons-material/Language'
+import { AuthContext, SnackbarContext } from '@services'
+import { usePersistedStore, useStore } from '@store'
 
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 

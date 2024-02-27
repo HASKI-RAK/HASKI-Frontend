@@ -1,6 +1,6 @@
-import { Typography } from '@common/components'
-import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
+import { Handle, NodeProps, Position } from 'reactflow'
+import { Typography } from '@common/components'
 
 /**
  * DefaultGroup component.

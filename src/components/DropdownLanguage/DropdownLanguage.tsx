@@ -1,7 +1,7 @@
-﻿import { useTranslation } from 'react-i18next'
-import { Select, MenuItem } from '@common/components'
+﻿import log from 'loglevel'
 import { ForwardedRef, forwardRef } from 'react'
-import log from 'loglevel'
+import { useTranslation } from 'react-i18next'
+import { MenuItem, Select } from '@common/components'
 
 /**
  * DropdownLanguage is a dropdown menu that allows the user to change the language of the application.

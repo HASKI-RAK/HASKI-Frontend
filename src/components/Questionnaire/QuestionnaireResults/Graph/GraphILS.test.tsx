@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
-import GraphILS, { useData } from './GraphILS'
 import { render, waitFor } from '@testing-library/react'
 import React from 'react'
+import GraphILS, { useData } from './GraphILS'
 
 const mockILS = {
   characteristic_id: 1,

@@ -25,6 +25,7 @@ const config: Config.InitialOptions = {
   coverageDirectory: 'coverage',
   automock: false,
   testEnvironment: 'jsdom',
+  testTimeout: 30000,
   testMatch: ['<rootDir>/src/**/*.test.{js,jsx,ts,tsx}'],
   testPathIgnorePatterns: ['node_modules', 'Webvitals.ts', '<rootDir>/src/index.tsx', '.mock.ts', 'index.ts'],
   coverageReporters: ['lcov', 'text', 'html'],

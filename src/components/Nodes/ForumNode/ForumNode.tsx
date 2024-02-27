@@ -1,8 +1,8 @@
-import { LearningPathLearningElementNode } from '@components'
-import BasicNode from '../BasicNode/BasicNode'
+import { memo } from 'react'
 import { NodeProps } from 'reactflow'
 import { Forum } from '@common/icons'
-import { memo } from 'react'
+import { LearningPathLearningElementNode } from '@components'
+import BasicNode from '../BasicNode/BasicNode'
 
 /**
  * ForumNode component.

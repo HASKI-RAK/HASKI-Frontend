@@ -1,8 +1,8 @@
-import { LearningPathLearningElementNode, nodeTypes } from '@components'
-import { mockReactFlow } from '@mocks'
+import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import ReactFlow, { Node } from 'reactflow'
-import '@testing-library/jest-dom'
+import { mockReactFlow } from '@mocks'
+import { LearningPathLearningElementNode, nodeTypes } from '@components'
 
 describe('DefaultGroup tests', () => {
   beforeEach(() => {

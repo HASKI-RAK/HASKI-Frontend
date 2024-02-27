@@ -1,8 +1,8 @@
+import { memo } from 'react'
+import { NodeProps } from 'reactflow'
+import { ShortText } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import BasicNode from '../BasicNode/BasicNode'
-import { ShortText } from '@common/icons'
-import { NodeProps } from 'reactflow'
-import { memo } from 'react'
 
 /**
  * ShortTextualIntroductionNode component.

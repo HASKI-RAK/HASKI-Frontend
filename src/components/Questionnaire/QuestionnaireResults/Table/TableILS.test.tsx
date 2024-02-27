@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
-import TableILS, { ILSInterpretation, ILSDimension } from './TableILS'
 import { render } from '@testing-library/react'
 import React from 'react'
+import TableILS, { ILSDimension, ILSInterpretation } from './TableILS'
 
 const mockILS = {
   characteristic_id: 1,

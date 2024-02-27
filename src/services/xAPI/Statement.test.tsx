@@ -1,12 +1,12 @@
-import { useStatement, xAPIVerb, xAPIComponent } from './Statement.hooks'
-import { renderHook, waitFor, act } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import * as statement from './getStatement'
-import { mockServices } from 'jest.setup'
 import '@testing-library/jest-dom'
-import xAPI from './xAPI.setup'
+import { act, renderHook, waitFor } from '@testing-library/react'
+import { mockServices } from 'jest.setup'
 import log from 'loglevel'
+import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
+import * as statement from './getStatement'
+import { useStatement, xAPIComponent, xAPIVerb } from './Statement.hooks'
+import xAPI from './xAPI.setup'
 
 describe('Statement tests', () => {
   const sendStatement = jest.fn()
