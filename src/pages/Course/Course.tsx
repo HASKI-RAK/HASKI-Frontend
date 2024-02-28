@@ -95,7 +95,6 @@ const Course = (): JSX.Element => {
         })
       ).then((result) => {
         // Handle resulting array with calculated topic progress
-        console.log(result)
         setCalculatedTopicProgress(result)
       })
     }

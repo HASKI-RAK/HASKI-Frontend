@@ -9,7 +9,7 @@ import { getConfig } from '@shared'
 /**
  * @prop id - The id of the node.
  * @prop children - The icon of the node.
- * @prop {@link NodeProps<LearningPathLearningElementNode>} - The props of the node.
+ * @prop {@link NodeProps} - The props of the node.
  * @interface
  */
 type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {

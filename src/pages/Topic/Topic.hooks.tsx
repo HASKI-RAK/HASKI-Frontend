@@ -213,7 +213,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         }
       }
     },
-    [theme, groupHeight, nodeOffsetX, t]
+    [theme, groupHeight, nodeOffsetX]
   )
 
   // Creates a group of nodes consisting of a parent node and its children or a single node from the passed LearningPathLearningElement array.

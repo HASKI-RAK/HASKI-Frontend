@@ -26,6 +26,6 @@ const DefaultGroup = ({ data, isConnectable }: NodeProps) => {
 }
 
 // https://stackoverflow.com/questions/41581130/what-is-react-component-displayname-used-for
-DefaultGroup.displayName = 'DefaultGroup'
+// DefaultGroup.displayName = 'DefaultGroup'
 
 export default memo(DefaultGroup)
