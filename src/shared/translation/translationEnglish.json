@@ -1669,6 +1669,7 @@
   "pages.topic": "Topic",
   "success": "Success",
   "tooltip.completed": "Completed",
+  "tooltip.languageSettings": "Language settings",
   "tooltip.openGlobalSettings": "Open global settings",
   "tooltip.openQuestionnaireResults": "Learner characteristics",
   "tooltip.openSettings": "Open settings",

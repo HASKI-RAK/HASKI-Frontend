@@ -1,4 +1,3 @@
-import LanguageIcon from '@mui/icons-material/Language'
 import log from 'loglevel'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -36,6 +35,7 @@ import {
 } from '@common/icons'
 import {
   DropdownLanguage,
+  LanguageMenu,
   QuestionnaireQuestionsModal,
   QuestionnaireResultsModal,
   SkeletonList,
@@ -305,32 +305,10 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           </Box>
           {/** Search bar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>
-
-          {/** Language dropdown */}
-          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <DropdownLanguage />
+          {/** Language menu */}
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }, mt: 1 }}>
+            <LanguageMenu />
           </Box>
-
-          {/**
-          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('appGlobal.language')}>
-              <IconButton onClick={() => {}}>
-                <Typography
-                  sx={{
-                    fontWeight: 'bold',
-                    position: 'absolute',
-                    padding: { left: '1.7rem', bottom: '1.7rem' }
-                  }}
-                  variant="body1"
-                  textAlign="center">
-                  {(localStorage.getItem('i18nextLng') as string).toUpperCase()}
-                </Typography>
-                <LanguageIcon />
-              </IconButton>
-            </Tooltip>
-          </Box>
-          /*}
-
           {/** Questionnaire Results */}
           {isAuth && (
             <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
@@ -342,7 +320,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               <QuestionnaireResultsModal open={modalOpen} handleClose={() => setModalOpen(false)} />
             </Box>
           )}
-
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('appGlobal.help')}>
@@ -355,7 +332,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               </IconButton>
             </Tooltip>
           </Box>
-
           {/** 
           { Settings button }
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
@@ -374,7 +350,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             </Tooltip>
           </Box>
 */}
-
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openSettings')}>

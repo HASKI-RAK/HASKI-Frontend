@@ -1673,6 +1673,7 @@
   "tooltip.openGlobalSettings": "Globale Einstellungen",
   "tooltip.openQuestionnaireResults": "Lerncharakteristik",
   "tooltip.openSettings": "Einstellungen",
+  "tooltip.languageSettings": "Spracheinstellungen",
   "warning": "Warnung",
   "warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
   "warning.online": "Sie sind wieder online."
