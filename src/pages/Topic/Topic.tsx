@@ -4,7 +4,7 @@ import { useEffect, useState, useContext, memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext, SnackbarContext } from '@services'
 import { useStore, usePersistedStore } from '@store'
-import { IFrameModal, nodeTypes } from '@components'
+import { IFrameModal, nodeTypes, WrappedMiniMap } from '@components'
 import { Box, Skeleton } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { LearningPathElementStatus } from '@core'
@@ -43,29 +43,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
 
-  const getMapTransform = () => {
-    if(window.innerWidth > 1920) {
-      return {transform: 'scale(1.5) translate(-1.5rem, -1.5rem)'}
-    }
-    if(window.innerWidth > theme.breakpoints.values.xl) {
-      return {transform: 'scale(1.2) translate(-1rem, -1rem)'}
-    }
-    if(window.innerWidth > theme.breakpoints.values.lg) {
-      return {transform: 'scale(1) translate(0rem, 0rem)'}
-    }
-    if(window.innerWidth > theme.breakpoints.values.md) {
-      return {transform: 'scale(0.75) translate(0rem, 0rem)'}
-    }
-    else {
-      return {transform: 'scale(0.5) translate(0rem, 0rem)'}
-    }
-  }
 
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
-  const [minimapSize, setMinimapSize] = useState(getMapTransform())
 
   // Get status of every learning element for user by request to backend
   // then get every learning element for topic by request to backend
@@ -150,29 +132,12 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     return handleClose()
   }
 
-const handleResize = () => {
-  setMinimapSize(getMapTransform())
-}
-
-useEffect(() => {
-  window.addEventListener('resize', handleResize)
-  return () => {
-    window.removeEventListener('resize', handleResize)
-  }
-}, [handleResize])
   // Show Loading-Skeleton until Nodes, Edges and LearningPathElementStatus are loaded
   return initialNodes && initialEdges && learningPathElementStatus ? (
     <Box height={'100%'}>
       <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
         <Background gap={16} />
-        <MiniMap
-         style={minimapSize}
-         nodeBorderRadius={2} 
-         nodeColor={theme.palette.primary.light}
-         maskStrokeColor='#000000' 
-         maskStrokeWidth={2} 
-         nodeStrokeColor={'#f57f17'} 
-         nodeStrokeWidth={5}/>
+        <WrappedMiniMap/>
         <Controls showInteractive = {false}/>
       </ReactFlow>
       <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />

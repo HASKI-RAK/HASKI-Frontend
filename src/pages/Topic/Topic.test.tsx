@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { act, fireEvent, render, renderHook, waitFor, screen } from '@testing-library/react'
+import { act, render, renderHook, waitFor} from '@testing-library/react'
 import { mockReactFlow } from '@mocks'
 import { createTheme } from '@common/theme'
 import Router, { MemoryRouter } from 'react-router-dom'
@@ -1144,45 +1144,4 @@ describe('Topic Page', () => {
       expect(queryByTestId('IFrameModal-Close-Button')).not.toBeInTheDocument()
     })
   })
-
-  test('Minimap resizes according to window size', async () => {
-    await act(async () => {
-      const {container, queryByTestId} = render(
-        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Topic />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      )
-
-    const initialWidth = container.clientWidth
-    const minimap = queryByTestId('minimap')
-    
-    window.innerWidth = 2000
-
-    fireEvent(window, new Event('resize'))
-
-    const resizedWidth = container.clientWidth
-
-    screen.debug()
-    console.log(minimap)
-    expect(resizedWidth).toEqual(initialWidth)
-
-
-    })
-  })
-    /*await act(async () => {
-      const {container} = render(
-        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Topic />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      )
-
-      window.innerWidth = 2000
-      window.dispatchEvent(new Event('resize'))
-      console.log(container)
-    })
-  })*/
 })
