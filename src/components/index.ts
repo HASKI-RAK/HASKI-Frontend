@@ -1,4 +1,4 @@
-export { default as DropdownLanguage, LanguageMenu } from './DropdownLanguage/DropdownLanguage'
+export { default as LanguageMenu } from './LanguageMenu/LanguageMenu'
 export { default as TableILS } from './Questionnaire/QuestionnaireResults/Table/TableILS'
 export { default as GraphILS } from './Questionnaire/QuestionnaireResults/Graph/GraphILS'
 export { default as ResultDescriptionILS } from './Questionnaire/QuestionnaireResults/Text/ResultDescriptionILS'

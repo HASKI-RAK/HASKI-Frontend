@@ -1,9 +1,8 @@
 ﻿import LanguageIcon from '@mui/icons-material/Language'
-import { TooltipProvider } from '@nivo/tooltip'
 import log from 'loglevel'
-import { ForwardedRef, forwardRef, useState } from 'react'
+import { ForwardedRef, forwardRef, memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IconButton, Menu, MenuItem, Select, Tooltip, Typography } from '@common/components'
+import { IconButton, Menu, MenuItem, Tooltip, Typography } from '@common/components'
 
 /**
  * DropdownLanguage is a dropdown menu that allows the user to change the language of the application.
@@ -38,58 +37,25 @@ jest.mock('react-i18next', () => ({
 ```
  * @returns - The DropdownLanguage component.
  */
-const DropdownLanguage = forwardRef((props, ref: ForwardedRef<HTMLDivElement | null>) => {
-  const { i18n } = useTranslation()
-  const startingLanguage = localStorage.getItem('i18nextLng') as string
-  const onClickLanguageChange = (e: { target: { value: string } }) => {
-    try {
-      i18n.changeLanguage(e.target.value)
-      log.trace('The language was changed to: ' + e.target.value)
-      localStorage.setItem('i18nextLng', e.target.value)
-    } catch (e: unknown) {
-      log.error('The language could not be changed. Error Message: ' + e)
-    }
-  }
-
-  return (
-    <div {...props} ref={ref}>
-      <Select
-        id="dropdown-language-button"
-        className="LanguageDropdown"
-        autoWidth={true}
-        value={startingLanguage}
-        inputProps={{ 'data-testid': 'LanguageDropdown' }}
-        onChange={onClickLanguageChange}>
-        <MenuItem value="de">Deutsch</MenuItem>
-        <MenuItem value="en">English</MenuItem>
-      </Select>
-    </div>
-  )
-})
-// eslint-disable-next-line immutable/no-mutation
-DropdownLanguage.displayName = 'DropdownLanguage'
-export default DropdownLanguage
-
 export const LanguageMenu = forwardRef((props, ref: ForwardedRef<HTMLDivElement | null>) => {
   // Translation
   const { t, i18n } = useTranslation()
 
   // State
-  const [currentLanguage, setCurrentLanguage] = useState((localStorage.getItem('i18nextLng') as string).toUpperCase())
+  const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('i18nextLng')?.toUpperCase())
 
   // TODO: Comment
   const changeLanguage = (key: string) => {
-    i18n
-      .changeLanguage(key)
-      .then(() => {
-        log.trace('The language was changed to: ' + key)
-        localStorage.setItem('i18nextLng', key)
-        setCurrentLanguage((localStorage.getItem('i18nextLng') as string).toUpperCase())
-      })
-      .catch((error: string) => {
-        log.error('The language could not be changed. Error Message: ' + error)
-      })
+    try {
+      i18n.changeLanguage(key)
+      log.trace('The language was changed to: ' + key)
+      localStorage.setItem('i18nextLng', key)
+      setCurrentLanguage(localStorage.getItem('i18nextLng')?.toUpperCase())
+    } catch (error: unknown) {
+      log.error('The language could not be changed. Error Message: ' + error)
+    }
   }
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
 
   //
@@ -105,12 +71,12 @@ export const LanguageMenu = forwardRef((props, ref: ForwardedRef<HTMLDivElement 
   return (
     <div {...props} ref={ref}>
       <Tooltip arrow title={t('tooltip.languageSettings')}>
-        <IconButton onClick={handleOpen}>
+        <IconButton id="language-menu-icon-button" onClick={handleOpen}>
           <Typography
             sx={{
               fontWeight: 'bold',
               position: 'absolute',
-              padding: { left: '1.70rem', bottom: '1.7rem' }
+              padding: { left: '1.7rem', bottom: '1.25rem' }
             }}
             variant="body1"
             textAlign="center">
@@ -134,10 +100,10 @@ export const LanguageMenu = forwardRef((props, ref: ForwardedRef<HTMLDivElement 
         }}
         open={!!anchorElUser}
         onClose={handleClose}>
-        <MenuItem id="de-menu-item" data-testid="questionnaireILSshort" onClick={() => changeLanguage('de')}>
+        <MenuItem id="de-menu-item" onClick={() => changeLanguage('de')}>
           <Typography textAlign="center">Deutsch</Typography>
         </MenuItem>
-        <MenuItem id="en-menu-item" data-testid="questionnaireILSshort" onClick={() => changeLanguage('en')}>
+        <MenuItem id="en-menu-item" onClick={() => changeLanguage('en')}>
           <Typography textAlign="center">English</Typography>
         </MenuItem>
       </Menu>
@@ -145,4 +111,7 @@ export const LanguageMenu = forwardRef((props, ref: ForwardedRef<HTMLDivElement 
   )
 })
 
+// eslint-disable-next-line immutable/no-mutation
 LanguageMenu.displayName = 'LanguageMenu'
+
+export default memo(LanguageMenu)

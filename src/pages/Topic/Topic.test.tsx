@@ -101,7 +101,7 @@ describe('Topic Page', () => {
     })
   })
 
-  test('getLearningPathElementStatus failed', async () => {
+  test('getLearningPathElement failed', async () => {
     const mockfetchLearningPathElement = jest.fn(() => Promise.reject(new Error('fetchLearningPathElement failed')))
     mockServices.fetchLearningPathElement.mockImplementationOnce(mockfetchLearningPathElement)
 

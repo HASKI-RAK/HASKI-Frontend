@@ -30,11 +30,9 @@ import {
   Login,
   Logout,
   Person,
-  PlaylistAddCheckCircleOutlined,
-  Settings
+  PlaylistAddCheckCircleOutlined
 } from '@common/icons'
 import {
-  DropdownLanguage,
   LanguageMenu,
   QuestionnaireQuestionsModal,
   QuestionnaireResultsModal,

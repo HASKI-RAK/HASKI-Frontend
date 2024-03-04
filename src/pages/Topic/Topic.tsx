@@ -1,3 +1,4 @@
+import { t } from 'i18next'
 import { memo, useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, MiniMap, Node } from 'reactflow'
