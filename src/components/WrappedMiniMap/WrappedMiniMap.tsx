@@ -18,10 +18,10 @@ const WrappedMiniMap: React.FC<MiniMapProps> = (props) => {
           return {transform: 'scale(1) translate(0rem, 0rem)'}
         }
         if(window.innerWidth > theme.breakpoints.values.md) {
-          return {transform: 'scale(0.75) translate(0rem, 0rem)'}
+          return {transform: 'scale(0.75) translate(1.5rem, 1.5rem)'}
         }
         else {
-          return {transform: 'scale(0.5) translate(0rem, 0rem)'}
+          return {transform: 'scale(0.5) translate(6rem, 5rem)'}
         }
     }
 
