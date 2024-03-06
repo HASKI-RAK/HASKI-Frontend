@@ -51,7 +51,7 @@ const LocalNav = ({
     setOpenAccordion(openAccordion === index ? null : index)
   }
   return (
-    <Box sx={{width: open ? '250px' : '0px'}}>
+    <Box sx={{width: open ? '250px' : '0px', paddingTop:'35px', paddingBottom:'25px' }}>
     <Drawer
       variant="persistent" 
       anchor='left'
@@ -60,11 +60,11 @@ const LocalNav = ({
       sx={{
         width: '250px',
         flexShrink: 1,
+        borderRadius:'1rem',
         
         [`& .MuiDrawer-paper`]: {
-          width:  open ? '250px' : '0px',
-          height:'450px',
-          borderRadius:'0px',
+          width:  open ? '100%' : '0px',
+          height:'100vh',
           boxSizing: 'border-box',
           maxHeight: '70%',
           position:open ? 'relative':'fixed',

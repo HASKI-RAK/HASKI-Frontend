@@ -225,12 +225,16 @@ export const HaskiTheme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         root: {
-          backgroundColor: defaultColors.lightgrey,
+          backgroundColor: defaultColors.white,
+          boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey',
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
-            borderRadius: '0px',
+            borderRadius: '1rem',
+            border: defaultBehavior.border.default + defaultColors.lightgrey,
+            /** color means the color of the Text */
             color: defaultColors.black,
-            backgroundColor: defaultColors.white
+            backgroundColor: defaultColors.white,
+            boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey'
           }
         }
       }
