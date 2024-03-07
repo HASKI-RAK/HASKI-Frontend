@@ -7,13 +7,11 @@ import { LearningPathLearningElementNode } from '@components'
 import { getConfig } from '@shared'
 
 /**
- * @prop id - The id of the node.
  * @prop children - The icon of the node.
  * @prop {@link NodeProps} - The props of the node.
  * @interface
  */
 type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
-  id?: string
   children?: JSX.Element
 }
 
@@ -29,11 +27,11 @@ type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
  *
  * @category Components
  */
-const BasicNode = ({ id = 'basic-node', children = <Feedback sx={{ fontSize: 50 }} />, data }: BasicNodeProps) => {
+const BasicNode = ({ id, children = <Feedback sx={{ fontSize: 50 }} />, data }: BasicNodeProps) => {
   const { t } = useTranslation()
   return (
     <NodeWrapper
-      id={id}
+      id={id + '-' + data.lmsId}
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()
