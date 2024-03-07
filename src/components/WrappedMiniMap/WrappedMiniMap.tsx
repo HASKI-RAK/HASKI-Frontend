@@ -43,7 +43,7 @@ const WrappedMiniMap: React.FC<MiniMapProps> = () => {
       nodeColor={theme.palette.primary.light}
       maskStrokeColor="#000000"
       maskStrokeWidth={2}
-      nodeStrokeColor={'#f57f17'}
+      nodeStrokeColor={theme.palette.primary.main}
       nodeStrokeWidth={5}
       data-testid="wrapped-minimap"
     />
