@@ -50,10 +50,10 @@ export const getGroupLabels = (t: TFunction): Record<string, string> => {
     EK: t('components.NodeTypes.ek'),
     FO: t('components.NodeTypes.fo'),
     LZ: t('components.NodeTypes.lz'),
-    KÜ: t('components.NodeTypes.kue'),
+    KÜ: t('components.NodeTypes.kü'),
     RQ: t('components.NodeTypes.rq'),
     SE: t('components.NodeTypes.se'),
-    ÜB: t('components.NodeTypes.ueb'),
+    ÜB: t('components.NodeTypes.üb'),
     ZF: t('components.NodeTypes.zf'),
     ZL: t('components.NodeTypes.zl')
   }
