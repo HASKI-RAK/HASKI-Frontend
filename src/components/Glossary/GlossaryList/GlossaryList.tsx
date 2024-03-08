@@ -35,7 +35,7 @@ export type GlossaryListProps = {
  * @category Components
  */
 const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: GlossaryListProps) => {
-  const [glossaryEntryState, setGlossaryEntryState] = useState<GlossaryEntryProps[]>([])
+  const [glossaryEntries, setGlossaryEntries] = useState<GlossaryEntryProps[]>([])
   const { filterByTags, filterByIndexElement, searchByQuery } = useGlossaryList()
 
   // Filters and searches the glossary entries
@@ -50,7 +50,7 @@ const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: Glossary
         bySelectedIndexElementFilteredGlossaryEntries,
         props.searchQuery
       )
-      setGlossaryEntryState(byQuerySearchedGlossaryEntries)
+      setGlossaryEntries(byQuerySearchedGlossaryEntries)
     }
   }, [
     props.glossaryEntries,
@@ -60,12 +60,12 @@ const GlossaryList = ({ useGlossaryList = _useGlossaryList, ...props }: Glossary
     filterByTags,
     filterByIndexElement,
     searchByQuery,
-    setGlossaryEntryState
+    setGlossaryEntries
   ])
 
   return (
     <>
-      {glossaryEntryState.map((glossaryEntry, index) => (
+      {glossaryEntries.map((glossaryEntry, index) => (
         <GlossaryEntry
           key={glossaryEntry.term ?? index}
           expandedList={props.expandedList}

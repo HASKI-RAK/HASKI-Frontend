@@ -61,6 +61,11 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
     }) as GlossaryEntryProps[])
   ]
 
+  // Sorts the glossary entries alphabetically by term.
+  const sortedGlossaryEntries = [...glossaryEntries].sort((a, b) =>
+    (a.term?.toLowerCase() ?? '').localeCompare(b.term?.toLowerCase() ?? '')
+  )
+
   // Deconstructing array of tags into array to prevent testing errors.
   const tags = [
     ...(t<string>('pages.glossary.tags', {
@@ -137,14 +142,17 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
           <Button id="collapse-all-button" variant="outlined" onClick={() => collapseAll(setExpandedList)}>
             {t('pages.glossary.collapseAll')}
           </Button>
-          <Button id="expand-all-button" variant="outlined" onClick={() => expandAll(setExpandedList, glossaryEntries)}>
+          <Button
+            id="expand-all-button"
+            variant="outlined"
+            onClick={() => expandAll(setExpandedList, sortedGlossaryEntries)}>
             {t('pages.glossary.expandAll')}
           </Button>
         </Box>
       </Grid>
       <Grid item xs={12} sm={12}>
         <GlossaryList
-          glossaryEntries={glossaryEntries}
+          glossaryEntries={sortedGlossaryEntries}
           expandedList={expandedList}
           setExpandedList={setExpandedList}
           searchQuery={searchQuery}
