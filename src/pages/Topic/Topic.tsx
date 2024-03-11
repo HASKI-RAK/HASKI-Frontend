@@ -1,4 +1,5 @@
-import { t } from 'i18next'
+import { DragHandle } from '@mui/icons-material'
+import { Fab, Switch, Typography } from '@mui/material'
 import { memo, useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, MiniMap, Node } from 'reactflow'
@@ -134,8 +135,15 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     <Box height={'100%'}>
       <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
         <Background gap={16} />
+        <Box>
+          <Fab disableFocusRipple disableRipple disableTouchRipple>
+            <Typography>Grouped</Typography>
+            <Switch sx={{}} />
+            <Typography>Single</Typography>
+          </Fab>
+        </Box>
         <MiniMap nodeBorderRadius={2} />
-        <Controls showInteractive={false} />
+        <Controls showInteractive={false} position="top-right"></Controls>
       </ReactFlow>
       <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
     </Box>

@@ -4,6 +4,7 @@ import AdditionalLiteratureNode from '../AdditionalLiteratureNode/AdditionalLite
 import ApplicationExampleNode from '../ApplicationExampleNode/ApplicationExampleNode'
 import BasicNode from '../BasicNode/BasicNode'
 import DefaultGroup from '../DefaultGroup/DefaultGroup'
+import EvaluationQuestionnaireNode from '../EvaluationQuestionnaireNode/EvaluationQuestionnaireNode'
 import ExampleNode from '../ExampleNode/ExampleNode'
 import ExerciseNode from '../ExerciseNode/ExerciseNode'
 import ExplanationNode from '../ExplanationNode/ExplanationNode'
@@ -28,6 +29,7 @@ export const nodeTypes: NodeTypes = {
   KÜ: ShortTextualIntroductionNode,
   AB: ApplicationExampleNode,
   EK: ExplanationNode,
+  EF: EvaluationQuestionnaireNode,
   AN: VideoNode,
   BE: ExampleNode,
   FO: ForumNode,
@@ -47,6 +49,7 @@ export const getGroupLabels = (t: TFunction): Record<string, string> => {
     AN: t('components.NodeTypes.an'),
     BE: t('components.NodeTypes.be'),
     DEFAULT: 'Default',
+    EF: t('components.NodeTypes.ef'),
     EK: t('components.NodeTypes.ek'),
     FO: t('components.NodeTypes.fo'),
     LZ: t('components.NodeTypes.lz'),
