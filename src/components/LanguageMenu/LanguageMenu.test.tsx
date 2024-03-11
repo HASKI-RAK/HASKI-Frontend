@@ -5,8 +5,6 @@ import { I18nextProvider } from 'react-i18next'
 import { MemoryRouter } from 'react-router-dom'
 import { LanguageMenu } from '@components'
 
-// tests for mui can be found https://github.com/mui/material-ui/blob/master/packages/mui-material/src // TODO: Move to Component Requirements
-
 describe('Language menu tests', () => {
   it('renders correctly', () => {
     const languageMenu = render(

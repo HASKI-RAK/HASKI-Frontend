@@ -42,7 +42,18 @@ export const nodeTypes: NodeTypes = {
   DEFAULT: BasicNode
 }
 
-// TODO: Add comments
+/**
+ * getGroupLabels function.
+ *
+ * @param t - The translation function from i18next.
+ *
+ * @remarks
+ * getGroupLabels represents a function that can be used to get the label of a group via key.
+ *
+ * @returns - Record containing all group labels.
+ *
+ * @category Components
+ */
 export const getGroupLabels = (t: TFunction): Record<string, string> => {
   return {
     AB: t('components.NodeTypes.ab'),

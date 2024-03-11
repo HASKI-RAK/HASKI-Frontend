@@ -1,11 +1,9 @@
-import { DragHandle } from '@mui/icons-material'
-import { Fab, Switch, Typography } from '@mui/material'
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, MiniMap, Node, Panel } from 'reactflow'
 import { Box, Skeleton } from '@common/components'
-import { IFrameModal, nodeTypes } from '@components'
+import { IFrameModal, LabeledSwitch, nodeTypes } from '@components'
 import { LearningPathElementStatus } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -143,16 +141,12 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         <MiniMap nodeBorderRadius={2} />
         <Background gap={16} />
         <Panel position="top-right">
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center'
-            }}>
-            <Typography>{t('pages.topic.grouped')}</Typography>
-            <Switch onChange={() => setIsGrouped(!isGrouped)} size="small" />
-            <Typography>{t('pages.topic.single')}</Typography>
-          </Box>
+          <LabeledSwitch
+            labelLeft={t('pages.topic.grouped')}
+            labelRight={t('pages.topic.single')}
+            isGrouped={isGrouped}
+            setIsGrouped={setIsGrouped}
+          />
         </Panel>
         <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
       </ReactFlow>

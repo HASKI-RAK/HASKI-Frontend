@@ -32,6 +32,7 @@ describe('Topic Page', () => {
           </AuthContext.Provider>
         </MemoryRouter>
       )
+
       expect(topic).toBeTruthy()
     })
   })
@@ -1358,7 +1359,7 @@ describe('Topic Page', () => {
         {
           data: {
             classification: 'ÜB',
-            label: 'components.NodeTypes.ueb'
+            label: 'components.NodeTypes.üb'
           },
           id: '3',
           position: {
