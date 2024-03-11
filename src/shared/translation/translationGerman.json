@@ -493,9 +493,9 @@
   "components.Menubar.questionnaireILSShortened": "ILS Fragebogen verkürzt",
   "components.Menubar.questionnaireListK": "List-K Fragebogen",
   "components.NodeTypes.ab": "Anwendungsbeispiele",
-  "components.NodeTypes.ef": "Evaluationsfragebögen",
   "components.NodeTypes.an": "Animationen",
   "components.NodeTypes.be": "Beispiele",
+  "components.NodeTypes.ef": "Evaluationsfragebögen",
   "components.NodeTypes.ek": "Erklärungen",
   "components.NodeTypes.fo": "Foren",
   "components.NodeTypes.kü": "Kurzübersichten",
@@ -1669,6 +1669,8 @@
   "pages.projectdescription.introductionHeader": "Was ist HASKI?",
   "pages.projectinformation": "Projektinformation",
   "pages.topic": "Thema",
+  "pages.topic.grouped": "Gruppiert",
+  "pages.topic.single": "Einzeln",
   "success": "Erfolg",
   "tooltip.completed": "Erledigt",
   "tooltip.languageSettings": "Spracheinstellungen",
@@ -1677,7 +1679,5 @@
   "tooltip.openSettings": "Einstellungen",
   "warning": "Warnung",
   "warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
-  "warning.online": "Sie sind wieder online.",
-  "pages.topic.grouped": "Gruppiert",
-  "pages.topic.single": "Einzeln"
+  "warning.online": "Sie sind wieder online."
 }
