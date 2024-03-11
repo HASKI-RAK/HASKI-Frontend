@@ -1,8 +1,9 @@
 import { DragHandle } from '@mui/icons-material'
 import { Fab, Switch, Typography } from '@mui/material'
 import { memo, useContext, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import ReactFlow, { Background, Controls, Edge, MiniMap, Node } from 'reactflow'
+import ReactFlow, { Background, Controls, Edge, MiniMap, Node, Panel } from 'reactflow'
 import { Box, Skeleton } from '@common/components'
 import { IFrameModal, nodeTypes } from '@components'
 import { LearningPathElementStatus } from '@core'
@@ -43,10 +44,14 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
 
+  // Translation
+  const { t } = useTranslation()
+
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
+  const [isGrouped, setIsGrouped] = useState(true)
 
   // Get status of every learning element for user by request to backend
   // then get every learning element for topic by request to backend
@@ -64,7 +69,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               setLearningPathElementStatus(learningPathElementStatusData)
               getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
                 .then((learningPathElementData) => {
-                  const { nodes, edges } = mapNodes(learningPathElementData, learningPathElementStatusData, true)
+                  const { nodes, edges } = mapNodes(learningPathElementData, learningPathElementStatusData, isGrouped)
                   setInitialNodes(nodes)
                   setInitialEdges(edges)
                 })
@@ -105,7 +110,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     navigate,
     setInitialNodes,
     setInitialEdges,
-    learningPathElementStatus
+    learningPathElementStatus,
+    isGrouped
   ])
 
   // On Close of IFrameModal, fetch new LearningPathElementStatus, update it in
@@ -134,16 +140,21 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   return initialNodes && initialEdges && learningPathElementStatus ? (
     <Box height={'100%'}>
       <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
-        <Background gap={16} />
-        <Box>
-          <Fab disableFocusRipple disableRipple disableTouchRipple>
-            <Typography>Grouped</Typography>
-            <Switch sx={{}} />
-            <Typography>Single</Typography>
-          </Fab>
-        </Box>
         <MiniMap nodeBorderRadius={2} />
-        <Controls showInteractive={false} position="top-right"></Controls>
+        <Background gap={16} />
+        <Panel position="top-right">
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}>
+            <Typography>{t('pages.topic.grouped')}</Typography>
+            <Switch onChange={() => setIsGrouped(!isGrouped)} size="small" />
+            <Typography>{t('pages.topic.single')}</Typography>
+          </Box>
+        </Panel>
+        <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
       </ReactFlow>
       <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
     </Box>
