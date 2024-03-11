@@ -1,6 +1,6 @@
-import { Box } from '@mui/material'
 import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
+import { Box } from '@common/components'
 import { IFrameModal } from '@components'
 
 describe('IFrameModal tests', () => {
