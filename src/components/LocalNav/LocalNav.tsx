@@ -46,15 +46,16 @@ const LocalNav = ({
  
   const theme = useTheme();
   const open= useMediaQuery(theme.breakpoints.up('lg'))
-  const [sticky, setSticky]=useState(true)
+  const [scrollable, setScrollable]=useState(false)
 
   useEffect(() => {
     window.onscroll = () => {
-      console.log(window.scrollY)
-      if(window.scrollY>=95)
-        setSticky(false)
-      else if(window.scrollY<=95)
-        setSticky(true)
+      //wenn scrollY unter 95 position ist absolut
+      if(window.scrollY<=100)
+      setScrollable(false)
+      //wenn scrollY ueber 95 position ist fixed(drawer bewegt sich mit scroll)
+      else if(window.scrollY>=95)
+      setScrollable(true)
     }
   }, [window.scrollY]) 
 
@@ -74,12 +75,11 @@ const LocalNav = ({
         borderRadius:'1rem',
         
         [`& .MuiDrawer-paper`]: {
-          //width:  open ? '100%' : '0px',
           height:'100vh',
           boxSizing: 'border-box',
           maxHeight: '70%',
-          marginTop:sticky? '150px' : '50px',
-          position: sticky?'absolute':'fixed'
+          marginTop:scrollable? '50px' : '150px',
+          position: scrollable?'fixed':'absolute'
         }
       }}>
       <Box flexGrow={1} overflow={'auto'}>
