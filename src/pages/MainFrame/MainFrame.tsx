@@ -1,5 +1,5 @@
 import { Outlet, useParams } from 'react-router-dom'
-import { Box, Divider, Stack, Grid } from '@common/components'
+import { Box, Stack } from '@common/components'
 import { MenuBar, Footer, BreadcrumbsContainer, LocalNav, OpenQuestionnaire, PrivacyModal } from '@components'
 
 /**

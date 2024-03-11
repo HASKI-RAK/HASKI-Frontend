@@ -3,7 +3,7 @@ import { ExpandMore } from '@common/icons'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { LearningPathElement, Topic } from '@core'
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
 import {
   SkeletonList,
@@ -45,13 +45,24 @@ const LocalNav = ({
   const [openAccordion, setOpenAccordion] = useState<number | null>(null)
  
   const theme = useTheme();
-  const open= useMediaQuery(theme.breakpoints.up('lg')); 
+  const open= useMediaQuery(theme.breakpoints.up('lg'))
+  const [sticky, setSticky]=useState(true)
+
+  useEffect(() => {
+    window.onscroll = () => {
+      console.log(window.scrollY)
+      if(window.scrollY>=95)
+        setSticky(false)
+      else if(window.scrollY<=95)
+        setSticky(true)
+    }
+  }, [window.scrollY]) 
 
   const handleAccordionClick = (index: number) => {
     setOpenAccordion(openAccordion === index ? null : index)
   }
   return (
-    <Box sx={{width: open ? '250px' : '0px', paddingTop:'35px', paddingBottom:'25px' }}>
+    <Box sx={{width: open ? '250px' : '0px', paddingBottom:'25px' }}>
     <Drawer
       variant="persistent" 
       anchor='left'
@@ -63,11 +74,12 @@ const LocalNav = ({
         borderRadius:'1rem',
         
         [`& .MuiDrawer-paper`]: {
-          width:  open ? '100%' : '0px',
+          //width:  open ? '100%' : '0px',
           height:'100vh',
           boxSizing: 'border-box',
           maxHeight: '70%',
-          position:open ? 'relative':'fixed',
+          marginTop:sticky? '150px' : '50px',
+          position: sticky?'absolute':'fixed'
         }
       }}>
       <Box flexGrow={1} overflow={'auto'}>
