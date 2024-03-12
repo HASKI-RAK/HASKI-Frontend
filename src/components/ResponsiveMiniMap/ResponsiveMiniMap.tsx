@@ -14,7 +14,7 @@ import { useEffect, useState, useCallback, memo } from 'react'
 const WrappedMiniMap = () => {
   const theme = useTheme()
 
-  // Add oneline comment to explain functionality of function
+  // Calculates the scaling and translation of the MiniMap according to the window size using a tanh function.
   const getMapTransform = useCallback(() => {
     const scaleoffset = 1
     const scalerange = 0.6

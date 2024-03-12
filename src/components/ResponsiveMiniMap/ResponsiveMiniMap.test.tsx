@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { act, fireEvent, render } from '@testing-library/react'
 import { mockReactFlow } from '@mocks'
 import { ReactFlow } from 'reactflow'
-import WrappedMiniMap from './WrappedMiniMap'
+import WrappedMiniMap from './ResponsiveMiniMap'
 
 describe('WrappedMiniMap component', () => {
   beforeEach(() => {
