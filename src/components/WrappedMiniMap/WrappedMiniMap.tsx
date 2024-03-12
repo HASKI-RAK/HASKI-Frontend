@@ -2,10 +2,20 @@ import { MiniMap } from 'reactflow'
 import { useTheme } from '@common/hooks'
 import { useEffect, useState, memo } from 'react'
 
-const WrappedMiniMap: React.FC<MiniMapProps> = () => {
+/**
+ * WrappedMiniMap component.
+ *
+ * @remarks
+ * WrappedMiniMap adds a resize functionality to the reactflow minimap.
+ * It can only be used inside a reactflow component to display a minimap of the flowchart.
+ *
+ * @category Components
+ */
+const WrappedMiniMap = () => {
   const theme = useTheme()
 
-  const getMapTransform = () => {
+// Add oneline comment to explain functionality of function
+const getMapTransform = useCallback(() => {
     if (window.innerWidth > 1920) {
       return { transform: 'scale(1.5) translate(-1.5rem, -1.5rem)' }
     }
@@ -20,13 +30,13 @@ const WrappedMiniMap: React.FC<MiniMapProps> = () => {
     } else {
       return { transform: 'scale(0.5) translate(6rem, 5rem)' }
     }
-  }
+  }, [])
 
   const [minimapSize, setMinimapSize] = useState(getMapTransform())
 
-  const handleResize = () => {
+  const handleResize = useCallback(() => {
     setMinimapSize(getMapTransform())
-  }
+  }, [setMiniMapSize, getMapTransform])
 
   useEffect(() => {
     window.addEventListener('resize', handleResize)
@@ -40,11 +50,10 @@ const WrappedMiniMap: React.FC<MiniMapProps> = () => {
       style={minimapSize}
       nodeBorderRadius={2}
       nodeColor={theme.palette.primary.light}
-      maskStrokeColor="#000000"
+      maskStrokeColor="black"
       maskStrokeWidth={2}
       nodeStrokeColor={theme.palette.primary.main}
       nodeStrokeWidth={5}
-      data-testid="wrapped-minimap"
     />
   )
 }
