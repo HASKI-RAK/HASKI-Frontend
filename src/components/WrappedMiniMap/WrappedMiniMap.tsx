@@ -1,5 +1,4 @@
 import { MiniMap } from 'reactflow'
-import { MiniMapProps } from '@reactflow/minimap/dist/esm/types'
 import { useTheme } from '@common/hooks'
 import { useEffect, useState, memo } from 'react'
 
