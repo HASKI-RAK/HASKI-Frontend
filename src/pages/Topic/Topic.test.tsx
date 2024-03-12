@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { act, render, renderHook, waitFor} from '@testing-library/react'
+import { act, render, renderHook, waitFor } from '@testing-library/react'
 import { mockReactFlow } from '@mocks'
 import { createTheme } from '@common/theme'
 import Router, { MemoryRouter } from 'react-router-dom'

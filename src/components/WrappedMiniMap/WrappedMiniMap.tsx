@@ -1,6 +1,6 @@
 import { MiniMap } from 'reactflow'
 import { useTheme } from '@common/hooks'
-import { useEffect, useState, memo } from 'react'
+import { useEffect, useState, useCallback, memo } from 'react'
 
 /**
  * WrappedMiniMap component.
@@ -14,28 +14,22 @@ import { useEffect, useState, memo } from 'react'
 const WrappedMiniMap = () => {
   const theme = useTheme()
 
-// Add oneline comment to explain functionality of function
-const getMapTransform = useCallback(() => {
-    if (window.innerWidth > 1920) {
-      return { transform: 'scale(1.5) translate(-1.5rem, -1.5rem)' }
-    }
-    if (window.innerWidth > theme.breakpoints.values.xl) {
-      return { transform: 'scale(1.2) translate(-1rem, -1rem)' }
-    }
-    if (window.innerWidth > theme.breakpoints.values.lg) {
-      return { transform: 'scale(1) translate(0rem, 0rem)' }
-    }
-    if (window.innerWidth > theme.breakpoints.values.md) {
-      return { transform: 'scale(0.75) translate(1.5rem, 1.5rem)' }
-    } else {
-      return { transform: 'scale(0.5) translate(6rem, 5rem)' }
-    }
+  // Add oneline comment to explain functionality of function
+  const getMapTransform = useCallback(() => {
+    const scaleoffset = 1
+    const scalerange = 0.6
+    const translationrange = 2.5
+    const translationoffest = 1
+    const scaling = scaleoffset + scalerange * Math.tanh(window.innerWidth / theme.breakpoints.values.xl - scaleoffset)
+    const translation =
+      -translationrange * Math.tanh(window.innerWidth / theme.breakpoints.values.xl - translationoffest)
+    return { transform: `scale(${scaling}) translate(${translation}rem, ${translation}rem)` }
   }, [])
 
-  const [minimapSize, setMinimapSize] = useState(getMapTransform())
+  const [minimapSize, setMiniMapSize] = useState(getMapTransform())
 
   const handleResize = useCallback(() => {
-    setMinimapSize(getMapTransform())
+    setMiniMapSize(getMapTransform())
   }, [setMiniMapSize, getMapTransform])
 
   useEffect(() => {

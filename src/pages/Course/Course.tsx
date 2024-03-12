@@ -47,34 +47,43 @@ const Course = (): JSX.Element => {
         topics.map((topic) => {
           return getUser().then((user) => {
             return getLearningPathElementStatus(courseId, user.lms_user_id)
-            .then((learningPathElementStatusData) => {
-              //filter all learning elements with state 1 (done)
-              const allDoneLearningElements = learningPathElementStatusData.filter((learningPathElementStatus) => {
-                return learningPathElementStatus.state === 1
-              })
-              return getLearningPathElement(
-                user.settings.user_id,
-                user.lms_user_id,
-                user.id,
-                courseId,
-                topic.id.toString()
-              )
-              .then((allLearningElementsInTopic) => {
-                //filter all learning elements in topic for done learning elements
-                const allDoneLearningElementsInTopic = allLearningElementsInTopic.path.map((learningElement) => {
-                  return allDoneLearningElements.some(
-                    (status) => status.cmid === learningElement.learning_element.lms_id
-                  )
+              .then((learningPathElementStatusData) => {
+                //filter all learning elements with state 1 (done)
+                const allDoneLearningElements = learningPathElementStatusData.filter((learningPathElementStatus) => {
+                  return learningPathElementStatus.state === 1
                 })
-                //build a array[][] with the number of done learning elements and the number of all learning elements in topic
-                //do that for every topic, and lastly return an array with all the arrays for every topic
-                //example: [[1,2],[2,2],[0,2]]
-                return [
-                  allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
-                  allLearningElementsInTopic.path.length
-                ]
+                return getLearningPathElement(
+                  user.settings.user_id,
+                  user.lms_user_id,
+                  user.id,
+                  courseId,
+                  topic.id.toString()
+                )
+                  .then((allLearningElementsInTopic) => {
+                    //filter all learning elements in topic for done learning elements
+                    const allDoneLearningElementsInTopic = allLearningElementsInTopic.path.map((learningElement) => {
+                      return allDoneLearningElements.some(
+                        (status) => status.cmid === learningElement.learning_element.lms_id
+                      )
+                    })
+                    //build a array[][] with the number of done learning elements and the number of all learning elements in topic
+                    //do that for every topic, and lastly return an array with all the arrays for every topic
+                    //example: [[1,2],[2,2],[0,2]]
+                    return [
+                      allDoneLearningElementsInTopic.filter((stateDone) => stateDone).length,
+                      allLearningElementsInTopic.path.length
+                    ]
+                  })
+                  .catch((error: string) => {
+                    addSnackbar({
+                      message: error,
+                      severity: 'error',
+                      autoHideDuration: 3000
+                    })
+                    return []
+                  })
               })
-               .catch((error: string) => {
+              .catch((error: string) => {
                 addSnackbar({
                   message: error,
                   severity: 'error',
@@ -82,15 +91,6 @@ const Course = (): JSX.Element => {
                 })
                 return []
               })
-            })
-             .catch((error: string) => {
-              addSnackbar({
-                message: error,
-                severity: 'error',
-                autoHideDuration: 3000
-              })
-              return []
-            })
           })
         })
       ).then((result) => {
@@ -131,7 +131,7 @@ const Course = (): JSX.Element => {
                     <Grid item md={1}>
                       {/*if topic is done 100%, a checkbox is displayed*/}
                       {calculatedTopicProgress[index] &&
-                        (calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1]) == 1 && (
+                        calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1] == 1 && (
                           <CheckBox
                             sx={{
                               mt: '-0.8rem',

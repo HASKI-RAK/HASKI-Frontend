@@ -1,5 +1,5 @@
 import { useTopic as _useTopic, useTopicHookParams, TopicHookReturn } from './Topic.hooks'
-import ReactFlow, { Node, Edge, MiniMap, Controls, Background } from 'reactflow'
+import ReactFlow, { Node, Edge, Controls, Background } from 'reactflow'
 import { useEffect, useState, useContext, memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext, SnackbarContext } from '@services'
@@ -42,7 +42,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
 
   const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
-
 
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
@@ -137,8 +136,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     <Box height={'100%'}>
       <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
         <Background gap={16} />
-        <WrappedMiniMap/>
-        <Controls showInteractive = {false}/>
+        <WrappedMiniMap />
+        <Controls showInteractive={false} />
       </ReactFlow>
       <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
     </Box>
