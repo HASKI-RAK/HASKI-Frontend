@@ -9,7 +9,7 @@ import { Box, Switch, Typography } from '@common/components'
  * @category Components
  * @interface
  */
-export type LabeledSwitch = {
+type LabeledSwitchProps = {
   labelLeft?: string
   labelRight?: string
   isGrouped?: boolean
@@ -28,7 +28,7 @@ export type LabeledSwitch = {
  *
  * @category Components
  */
-const SwitchPanel = (props: LabeledSwitch) => {
+const SwitchPanel = (props: LabeledSwitchProps) => {
   return (
     <Box
       sx={{
@@ -37,7 +37,7 @@ const SwitchPanel = (props: LabeledSwitch) => {
         alignItems: 'center'
       }}>
       {props.labelLeft && <Typography>{props.labelLeft}</Typography>}
-      <Switch onChange={() => props.setIsGrouped?.(!props.isGrouped)} size="small" sx={{ dataTestid: 'rip' }} />
+      <Switch onChange={() => props.setIsGrouped?.(!props.isGrouped)} size="small" />
       {props.labelRight && <Typography>{props.labelRight}</Typography>}
     </Box>
   )

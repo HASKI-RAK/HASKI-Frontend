@@ -1,5 +1,4 @@
 import DefaultModal from '@mui/material/Modal'
-// TODO: Replace with common/components
 import { memo, useCallback } from 'react'
 import { ModalProps as DefaultModalProps } from '@common/components'
 import {
