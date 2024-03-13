@@ -63,14 +63,14 @@ const LocalNav = ({
     setOpenAccordion(openAccordion === index ? null : index)
   }
   return (
-    <Box sx={{width: open ? '250px' : '0px', paddingBottom:'25px' }}>
+    <Box sx={{width: open ? '25vh' : '0p%' }}/** statt 25vh 250px */>
     <Drawer
       variant="persistent" 
       anchor='left'
       open={open}
       
       sx={{
-        width: '250px',
+        width: '100%',
         flexShrink: 1,
         borderRadius:'1rem',
         
@@ -78,7 +78,7 @@ const LocalNav = ({
           height:'100vh',
           boxSizing: 'border-box',
           maxHeight: '70%',
-          marginTop:scrollable? '50px' : '150px',
+          marginTop:scrollable? '3rem' : '150px',
           position: scrollable?'fixed':'absolute'
         }
       }}>
