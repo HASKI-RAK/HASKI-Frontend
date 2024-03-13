@@ -2,16 +2,16 @@ import '@testing-library/jest-dom'
 import { act, fireEvent, render } from '@testing-library/react'
 import { mockReactFlow } from '@mocks'
 import { ReactFlow } from 'reactflow'
-import WrappedMiniMap from './ResponsiveMiniMap'
+import ResponsiveMiniMap from './ResponsiveMiniMap'
 
-describe('WrappedMiniMap component', () => {
+describe('ResponsiveMiniMap component', () => {
   beforeEach(() => {
     mockReactFlow()
   })
   it('renders', () => {
     const { getByTestId } = render(
       <ReactFlow>
-        <WrappedMiniMap />
+        <ResponsiveMiniMap />
       </ReactFlow>
     )
     expect(getByTestId('rf__minimap')).toBeInTheDocument()
@@ -20,7 +20,7 @@ describe('WrappedMiniMap component', () => {
   it('resizes according to window size', () => {
     const { getByTestId } = render(
       <ReactFlow>
-        <WrappedMiniMap />
+        <ResponsiveMiniMap />
       </ReactFlow>
     )
     expect(getByTestId('rf__minimap')).toHaveStyle(

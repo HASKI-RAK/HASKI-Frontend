@@ -4,7 +4,7 @@ import { useEffect, useState, useContext, memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext, SnackbarContext } from '@services'
 import { useStore, usePersistedStore } from '@store'
-import { IFrameModal, nodeTypes, WrappedMiniMap } from '@components'
+import { IFrameModal, nodeTypes, ResponsiveMiniMap } from '@components'
 import { Box, Skeleton } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { LearningPathElementStatus } from '@core'
@@ -136,7 +136,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     <Box height={'100%'}>
       <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
         <Background gap={16} />
-        <WrappedMiniMap />
+        <ResponsiveMiniMap />
         <Controls showInteractive={false} />
       </ReactFlow>
       <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
