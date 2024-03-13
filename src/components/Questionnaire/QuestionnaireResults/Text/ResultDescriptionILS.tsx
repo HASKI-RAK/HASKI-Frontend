@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { Typography } from '@common/components'
-import { ILSDimension, ILSInterpretation } from '../Table/TableILS'
 import { ILS } from '@core'
+import { ILSDimension, ILSInterpretation } from '../Table/TableILS'
 
 // function can be replaced for test-purposes
 type ResultDescriptionILSProps = {

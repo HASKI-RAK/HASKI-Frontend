@@ -1,13 +1,13 @@
-import { MouseEvent, memo, useCallback, ReactElement, ElementType } from 'react'
+import { ElementType, MouseEvent, ReactElement, memo, useCallback } from 'react'
 import { BoxProps as DefaultBoxProps } from '@common/components'
-import { Box } from './DefaultBox'
 import {
+  StatementHookReturn,
   useStatement as _useStatement,
   useStatementHookParams,
-  StatementHookReturn,
   xAPIComponent,
   xAPIVerb
 } from '@services'
+import { Box } from './DefaultBox'
 
 /**
  * @prop DefaultBoxProps - The props of a mui Box.

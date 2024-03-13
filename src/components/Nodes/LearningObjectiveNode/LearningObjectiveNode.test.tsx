@@ -1,9 +1,9 @@
-import { LearningPathLearningElementNode, nodeTypes } from '@components'
-import { render, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import ReactFlow, { Node } from 'reactflow'
 import { mockReactFlow } from '@mocks'
-import '@testing-library/jest-dom'
+import { LearningPathLearningElementNode, nodeTypes } from '@components'
 
 describe('LearningObjectiveNode tests', () => {
   beforeEach(() => {
@@ -40,7 +40,7 @@ describe('LearningObjectiveNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const learningObjectiveNode = getByTestId('LearningObjectiveNode')
+    const learningObjectiveNode = getByTestId('basicNode')
 
     expect(learningObjectiveNode).toBeInTheDocument()
 
@@ -80,7 +80,7 @@ describe('LearningObjectiveNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    const learningObjectiveNode = getByTestId('LearningObjectiveNode')
+    const learningObjectiveNode = getByTestId('basicNode')
 
     expect(learningObjectiveNode).toBeInTheDocument()
 

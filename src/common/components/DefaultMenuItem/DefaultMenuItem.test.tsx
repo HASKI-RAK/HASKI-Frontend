@@ -1,8 +1,8 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import MenuItem from './DefaultMenuItem'
 import '@testing-library/jest-dom'
-import { xAPI, AuthContext } from '@services'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { AuthContext, xAPI } from '@services'
+import MenuItem from './DefaultMenuItem'
 
 describe('DefaultMenuItem tests', () => {
   test('DefaultMenuItem sends statement on click', async () => {

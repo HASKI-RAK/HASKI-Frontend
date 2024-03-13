@@ -1,13 +1,13 @@
-import { useTopic as _useTopic, useTopicHookParams, TopicHookReturn } from './Topic.hooks'
-import ReactFlow, { Node, Edge, Controls, Background } from 'reactflow'
+import { useTranslation } from 'react-i18next'
+import ReactFlow, { Node, Edge, Controls, Background, Panel } from 'reactflow'
 import { useEffect, useState, useContext, memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { AuthContext, SnackbarContext } from '@services'
-import { useStore, usePersistedStore } from '@store'
-import { IFrameModal, nodeTypes, ResponsiveMiniMap } from '@components'
+import { IFrameModal, nodeTypes, ResponsiveMiniMap, LabeledSwitch } from '@components'
 import { Box, Skeleton } from '@common/components'
-import { useTheme } from '@common/hooks'
 import { LearningPathElementStatus } from '@core'
+import { AuthContext, SnackbarContext } from '@services'
+import { usePersistedStore, useStore } from '@store'
+import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
 
 /**
  * @prop useTopic - Does the heavy work such as mapping nodes and edges and fetching.
@@ -29,7 +29,6 @@ export type TopicProps = {
  * @category Pages
  */
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
-  const theme = useTheme()
   const navigate = useNavigate()
   const authContext = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
@@ -43,10 +42,14 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
 
+  // Translation
+  const { t } = useTranslation()
+
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
+  const [isGrouped, setIsGrouped] = useState(true)
 
   // Get status of every learning element for user by request to backend
   // then get every learning element for topic by request to backend
@@ -64,7 +67,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               setLearningPathElementStatus(learningPathElementStatusData)
               getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
                 .then((learningPathElementData) => {
-                  const { nodes, edges } = mapNodes(learningPathElementData, theme, learningPathElementStatusData)
+                  const { nodes, edges } = mapNodes(learningPathElementData, learningPathElementStatusData, isGrouped)
                   setInitialNodes(nodes)
                   setInitialEdges(edges)
                 })
@@ -100,13 +103,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     courseId,
     getLearningPathElement,
     getUser,
-    theme,
     topicId,
     mapNodes,
     navigate,
     setInitialNodes,
     setInitialEdges,
-    learningPathElementStatus
+    learningPathElementStatus,
+    isGrouped
   ])
 
   // On Close of IFrameModal, fetch new LearningPathElementStatus, update it in
@@ -135,9 +138,17 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   return initialNodes && initialEdges && learningPathElementStatus ? (
     <Box height={'100%'}>
       <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
-        <Background gap={16} />
         <ResponsiveMiniMap />
-        <Controls showInteractive={false} />
+        <Background gap={16} />
+        <Panel position="top-right">
+          <LabeledSwitch
+            labelLeft={t('pages.topic.grouped')}
+            labelRight={t('pages.topic.single')}
+            isGrouped={isGrouped}
+            setIsGrouped={setIsGrouped}
+          />
+        </Panel>
+        <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
       </ReactFlow>
       <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
     </Box>

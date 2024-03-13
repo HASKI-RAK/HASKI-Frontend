@@ -1,12 +1,12 @@
-﻿import { SelectProps as DefaultSelectProps, SelectChangeEvent } from '@common/components'
-import { useCallback, MouseEvent, ReactNode } from 'react'
-import DefaultSelect from '@mui/material/Select'
+﻿import DefaultSelect from '@mui/material/Select'
+import { MouseEvent, ReactNode, useCallback } from 'react'
+import { SelectProps as DefaultSelectProps, SelectChangeEvent } from '@common/components'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
 
 /**

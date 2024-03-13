@@ -1,7 +1,7 @@
-import GlossaryEntry, { GlossaryEntryProps, GlossaryAccordionEntryProps } from './GlossaryEntry'
+import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import '@testing-library/jest-dom'
+import GlossaryEntry, { GlossaryAccordionEntryProps, GlossaryEntryProps } from './GlossaryEntry'
 
 const mockGlossaryEntry: GlossaryEntryProps = {
   term: 'testTerm',

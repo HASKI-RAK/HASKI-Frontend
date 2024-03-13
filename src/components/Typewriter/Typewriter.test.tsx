@@ -1,6 +1,6 @@
+import '@testing-library/jest-dom'
 import { act, render } from '@testing-library/react'
 import Typewriter from './Typewriter'
-import '@testing-library/jest-dom'
 
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')

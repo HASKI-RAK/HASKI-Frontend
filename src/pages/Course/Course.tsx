@@ -1,13 +1,13 @@
-import { Button, Card, CardContent, Typography, Box, Grid } from '@common/components'
-import { AuthContext, SnackbarContext } from '@services'
 import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { usePersistedStore, useStore } from '@store'
+import { Box, Button, Card, CardContent, Grid, Typography } from '@common/components'
+import { useMediaQuery, useTheme } from '@common/hooks'
 import { CheckBox } from '@common/icons'
-import { SkeletonList, useLearningPathTopic, StyledLinearProgress } from '@components'
-import { useTheme, useMediaQuery } from '@common/hooks'
+import { SkeletonList, StyledLinearProgress, useLearningPathTopic } from '@components'
+import { AuthContext, SnackbarContext } from '@services'
+import { usePersistedStore, useStore } from '@store'
 
 /**
  * # Course Page
@@ -95,7 +95,6 @@ const Course = (): JSX.Element => {
         })
       ).then((result) => {
         // Handle resulting array with calculated topic progress
-        console.log(result)
         setCalculatedTopicProgress(result)
       })
     }

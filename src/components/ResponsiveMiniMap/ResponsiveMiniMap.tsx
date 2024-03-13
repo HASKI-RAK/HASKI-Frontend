@@ -21,7 +21,8 @@ const ResponsiveMiniMap = () => {
     const translationRange = 2.5
     const translationOffset = 1
     const scaling = scaleOffset + scaleRange * Math.tanh(window.innerWidth / theme.breakpoints.values.xl - scaleOffset)
-    const translation = -translationRange * Math.tanh(window.innerWidth / theme.breakpoints.values.xl - translationOffset)
+    const translation =
+      -translationRange * Math.tanh(window.innerWidth / theme.breakpoints.values.xl - translationOffset)
     return { transform: `scale(${scaling}) translate(${translation}rem, ${translation}rem)` }
   }, [])
 

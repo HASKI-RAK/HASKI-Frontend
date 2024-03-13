@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom'
-import { QuestionnaireResultsModal } from '@components'
 import { fireEvent, render, waitFor } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
+import { MemoryRouter } from 'react-router-dom'
+import { QuestionnaireResultsModal } from '@components'
 
 jest.mock('loglevel') // Mock the loglevel library
 

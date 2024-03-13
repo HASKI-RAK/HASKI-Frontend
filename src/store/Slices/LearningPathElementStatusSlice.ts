@@ -1,8 +1,8 @@
-import { LearningPathElementStatus, LearningPathElementStatusReturn } from '@core'
 import { StateCreator } from 'zustand'
+import { LearningPathElementStatus, LearningPathElementStatusReturn } from '@core'
+import { fetchLearningPathElementStatus } from '@services'
 import { PersistedStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
-import { fetchLearningPathElementStatus } from '@services'
 
 /*
  * getLearningPathElementStatus

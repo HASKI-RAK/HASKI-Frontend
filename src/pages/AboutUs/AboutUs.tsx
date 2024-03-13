@@ -1,13 +1,13 @@
-import { Box, Grid, Typography } from '@common/components'
-import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Box, Grid, Typography } from '@common/components'
 import {
+  CollapsibleList,
+  CollapsibleListEntryContentProps,
+  ImageCollection,
   TextCardLeft,
   TextCardRight,
-  TextStepper,
-  ImageCollection,
-  CollapsibleList,
-  CollapsibleListEntryContentProps
+  TextStepper
 } from '@components'
 
 /**

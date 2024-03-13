@@ -1,5 +1,5 @@
-import LinearProgressWithLabel from './LinearProgressWithLabel'
 import { render } from '@testing-library/react'
+import LinearProgressWithLabel from './LinearProgressWithLabel'
 
 describe('LinearProgressWithLabel', () => {
   it('renders LinearProgressWithLabel', async () => {
