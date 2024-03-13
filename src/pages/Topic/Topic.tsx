@@ -1,9 +1,9 @@
-import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import ReactFlow, { Node, Edge, Controls, Background, Panel } from 'reactflow'
+import { useEffect, useState, useContext, memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import ReactFlow, { Background, Controls, Edge, MiniMap, Node, Panel } from 'reactflow'
+import { IFrameModal, nodeTypes, ResponsiveMiniMap, LabeledSwitch } from '@components'
 import { Box, Skeleton } from '@common/components'
-import { IFrameModal, LabeledSwitch, nodeTypes } from '@components'
 import { LearningPathElementStatus } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -138,7 +138,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   return initialNodes && initialEdges && learningPathElementStatus ? (
     <Box height={'100%'}>
       <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView>
-        <MiniMap nodeBorderRadius={2} />
+        <ResponsiveMiniMap />
         <Background gap={16} />
         <Panel position="top-right">
           <LabeledSwitch
