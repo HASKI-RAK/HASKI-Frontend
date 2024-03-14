@@ -1,16 +1,12 @@
 import { useTopic as _useTopic, useTopicHookParams, TopicHookReturn } from './Topic.hooks'
-import ReactFlow, { Node, Edge, MiniMap, Controls, Background, Panel,ReactFlowProvider, useReactFlow } from 'reactflow'
+import ReactFlow, { Node, Edge, Controls, Background, Panel, useReactFlow } from 'reactflow'
 import React, { useEffect, useState, useContext, memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { AuthContext, SnackbarContext } from '@services'
-import { useStore, usePersistedStore } from '@store'
 import { IFrameModal, nodeTypes, ResponsiveMiniMap, LabeledSwitch } from '@components'
 import { Box, Skeleton, Button } from '@common/components'
-import { useTheme } from '@common/hooks'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
 import { useTranslation } from 'react-i18next'
 
 // custom fitView centering on first uncompleted element, needs to be in the react-flow component
@@ -98,7 +94,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     setLearningPathElementStatus(learningPathElementStatusData)
     getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
     .then((learningPathElementData) => {
-      const { nodes, edges } = mapNodes(learningPathElementData, theme, learningPathElementStatusData)
+      const { nodes, edges } = mapNodes(learningPathElementData, learningPathElementStatusData, isGrouped)
       setInitialNodes(nodes)
       setInitialEdges(edges)
     })
@@ -200,7 +196,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // Show Loading-Skeleton until Nodes, Edges and LearningPathElementStatus are loaded
   return initialNodes && initialEdges && learningPathElementStatus ? (
     <Box height={'100%'}>
-      <ReactFlowProvider>
       <ReactFlow
         nodes={initialNodes}
         edges={initialEdges}
@@ -219,7 +214,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         <ResponsiveMiniMap />
         <CustomFitViewButton node={initialNodes} />
         <Background gap={16} />
-        <MiniMap nodeBorderRadius={2} />
         <Panel position="top-right">
           <LabeledSwitch
             labelLeft={t('pages.topic.grouped')}
@@ -230,7 +224,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         </Panel>
         <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
       </ReactFlow>
-      </ReactFlowProvider>
       <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
     </Box>
   ) : (

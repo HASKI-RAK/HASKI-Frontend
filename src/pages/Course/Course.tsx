@@ -1,5 +1,3 @@
-import log from 'loglevel'
-import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Card, CardContent, Grid, Typography } from '@common/components'
