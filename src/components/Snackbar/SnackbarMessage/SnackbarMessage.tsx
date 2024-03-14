@@ -1,7 +1,7 @@
-import { useState, useCallback, useEffect, useContext, memo } from 'react'
+import { memo, useCallback, useContext, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Alert, Typography } from '@common/components'
 import { SnackbarTransition } from '@components'
-import { useTranslation } from 'react-i18next'
 import { SnackbarContext } from '@services'
 
 /**

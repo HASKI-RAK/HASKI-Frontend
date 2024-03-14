@@ -1,12 +1,12 @@
-import { IconButtonProps as DefaultIconButtonProps } from '@common/components'
 import DefaultIconButton from '@mui/material/IconButton'
 import { MouseEvent, RefObject, forwardRef, memo, useCallback } from 'react'
+import { IconButtonProps as DefaultIconButtonProps } from '@common/components'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
 
 /**

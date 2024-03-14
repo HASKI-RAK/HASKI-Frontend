@@ -1,13 +1,13 @@
-import { TypographyProps as DefaultTypographyProps } from '../DefaultTypographyProps/DefaultTypographyProps'
-import { memo, useCallback, MouseEvent, ElementType, ReactElement } from 'react'
-import { Typography } from './DefaultTypography'
+import { ElementType, MouseEvent, ReactElement, memo, useCallback } from 'react'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
+import { TypographyProps as DefaultTypographyProps } from '../DefaultTypographyProps/DefaultTypographyProps'
+import { Typography } from './DefaultTypography'
 
 /**
  * @prop DefaultTypographyProps - The props of a mui Typography.

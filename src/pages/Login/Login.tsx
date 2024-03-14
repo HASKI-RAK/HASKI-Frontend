@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Skeleton } from '@common/components'
 import { LoginForm } from '@components'
-import { useLogin as _useLogin, LoginHookParams, LoginHookReturn } from './Login.hooks'
+import { LoginHookParams, LoginHookReturn, useLogin as _useLogin } from './Login.hooks'
 
 type LoginProps = {
   /**

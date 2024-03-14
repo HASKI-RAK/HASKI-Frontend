@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
-import TableListK, { getSubscaleScore } from './TableListK'
 import { render } from '@testing-library/react'
+import TableListK, { getSubscaleScore } from './TableListK'
 
 //we have to mock react-i18next otherwise a warning will appear
 //"You will need pass in an i18next instance by using initReactI18next" => mock is needed.

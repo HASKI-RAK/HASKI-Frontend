@@ -1,7 +1,7 @@
-import { User } from '@core'
 import { StateCreator } from 'zustand'
-import { PersistedStoreState } from '@store'
+import { User } from '@core'
 import { fetchUser } from '@services'
+import { PersistedStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
 export default interface UserSlice {

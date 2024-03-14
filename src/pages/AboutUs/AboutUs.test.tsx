@@ -1,6 +1,6 @@
-import { MemoryRouter } from 'react-router-dom'
-import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import AboutUs from './AboutUs'
 
 describe('AboutUs', () => {

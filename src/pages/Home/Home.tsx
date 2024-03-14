@@ -1,11 +1,11 @@
 import log from 'loglevel'
-import { Button, Skeleton, Typography, Card, CardContent, Stack } from '@common/components'
+import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState, useContext } from 'react'
-import { usePersistedStore, useStore } from '@store'
-import { AuthContext, SnackbarContext } from '@services'
 import { useNavigate } from 'react-router-dom'
+import { Button, Card, CardContent, Skeleton, Stack, Typography } from '@common/components'
 import { Course } from '@core'
+import { AuthContext, SnackbarContext } from '@services'
+import { usePersistedStore, useStore } from '@store'
 
 /**
  * # Home Page

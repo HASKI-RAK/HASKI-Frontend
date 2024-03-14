@@ -1,9 +1,10 @@
-import { LearningPathLearningElementNode, nodeTypes } from '@components'
-import { render, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import ReactFlow, { Node } from 'reactflow'
 import { mockReactFlow } from '@mocks'
-import '@testing-library/jest-dom'
+import { LearningPathLearningElementNode, nodeTypes } from '@components'
+import BasicNode from './BasicNode'
 
 describe('BasicNode tests', () => {
   beforeEach(() => {
@@ -13,7 +14,7 @@ describe('BasicNode tests', () => {
   it('renders correctly and can be clicked, isDone is false', () => {
     const mockData: LearningPathLearningElementNode = {
       lmsId: 1,
-      name: 'testNode',
+      name: 'basicNode',
       activityType: 'testType',
       classification: 'DEFAULT',
       isRecommended: true,
@@ -66,7 +67,7 @@ describe('BasicNode tests', () => {
     }
 
     const mockNode: Node = {
-      id: 'testId',
+      id: 'basic-node',
       type: mockData.classification,
       data: mockData,
       position: {
@@ -80,6 +81,8 @@ describe('BasicNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
+    screen.debug()
+
     const basicNode = getByTestId('basicNode')
 
     expect(basicNode).toBeInTheDocument()

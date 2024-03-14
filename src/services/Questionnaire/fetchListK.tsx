@@ -1,6 +1,6 @@
 import { ListK, ListKReturn } from '@core'
-import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
+import { fetchData } from '../RequestResponse'
 
 /*
  * fetchListK function.

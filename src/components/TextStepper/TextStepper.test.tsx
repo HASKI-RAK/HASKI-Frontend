@@ -1,7 +1,7 @@
-import { act, render, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { act, fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import TextStepper from './TextStepper'
-import '@testing-library/jest-dom'
 
 const mockProps = {
   body: [

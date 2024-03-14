@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
+import { mockServices } from 'jest.setup'
 // tests not working when shortened
 import { useStore } from '../Zustand/Store'
-import { mockServices } from 'jest.setup'
 
 const learningPathTopic = { id: 1, name: 'Math', description: 'Learn math' }
 describe('LearningPathTopicSlice ', () => {

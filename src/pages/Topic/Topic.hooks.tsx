@@ -1,8 +1,9 @@
-import { LearningPathLearningElementNode } from '@components'
-import { useState, useCallback, useMemo } from 'react'
-import { Node, Edge } from 'reactflow'
-import { Theme } from '@common/theme'
-import { LearningPathElement, LearningPathElementStatus } from '@core'
+import { useCallback, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Edge, Node } from 'reactflow'
+import { useTheme } from '@common/hooks'
+import { LearningPathLearningElementNode, getGroupLabels } from '@components'
+import { LearningElement, LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
 
 /**
  * @prop defaultUrl - The default url of a node
@@ -26,9 +27,6 @@ export type useTopicHookParams = {
  * @prop isOpen - The bool value if a node is open
  * @prop handleClose - The function to close a node
  * @prop handleOpen - The function to open a node
- * @prop handleSetUrl - The function to set the url of a node
- * @prop handleSetTitle - The function to set the title of a node
- * @prop handleSetLmsId - The function to set the lms id of a node
  * @prop mapNodes - The function to map the learning path to nodes and edges
  * @category Hooks
  * @interface
@@ -40,13 +38,10 @@ export type TopicHookReturn = {
   readonly isOpen: boolean
   readonly handleClose: () => void
   readonly handleOpen: () => void
-  readonly handleSetUrl: (url: string) => void
-  readonly handleSetTitle: (title: string) => void
-  readonly handleSetLmsId: (lmsId: number) => void
   readonly mapNodes: (
     learningPathData: LearningPathElement,
-    theme: Theme,
-    learningPathStatus: LearningPathElementStatus[]
+    learningPathStatus: LearningPathElementStatus[],
+    nodesGrouped?: boolean
   ) => {
     nodes: Node[]
     edges: Edge[]
@@ -75,6 +70,12 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const [title, setTitle] = useState(defaultTitle)
   const [isOpen, setIsOpen] = useState(defaultIsOpen)
   const [lmsId, setLmsId] = useState<number>(defaultLmsId)
+  const theme = useTheme()
+  const { t } = useTranslation()
+
+  // Global variables
+  const nodeOffsetX = 50
+  const groupHeight = 200
 
   // Logic
   const handleOpen = useCallback(() => {
@@ -85,60 +86,51 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     setIsOpen(false)
   }, [setIsOpen])
 
-  const handleSetUrl = useCallback(
-    (url: string) => {
-      setUrl(url)
+  // Groups learning elements by classification.
+  const groupLearningElementsByClassification = useCallback(
+    (learningPath: LearningPathLearningElement[], nodesGrouped: boolean) => {
+      // If nodes are not grouped, return an array of arrays, each containing a single learning element.
+      if (!nodesGrouped) {
+        return learningPath.map((learningElement) => [learningElement])
+      }
+
+      // Returns an array containg the values of the object.
+      return Object.values(
+        // Creates an object with the classification of learning elements as key and an array of learning elements as value.
+        learningPath.reduce(
+          (
+            groupedLearningElements: { [classification: string]: LearningPathLearningElement[] },
+            learningPathLearningElement: LearningPathLearningElement
+          ) => {
+            const classification = learningPathLearningElement.learning_element.classification
+
+            groupedLearningElements = {
+              ...groupedLearningElements,
+              [classification]: groupedLearningElements[classification]
+                ? [...groupedLearningElements[classification]]
+                : []
+            }
+
+            groupedLearningElements[classification].push(learningPathLearningElement)
+            return groupedLearningElements
+          },
+          {}
+        )
+      )
     },
-    [setUrl]
+    []
   )
 
-  const handleSetTitle = useCallback(
-    (title: string) => {
-      setTitle(title)
-    },
-    [setTitle]
-  )
-
-  const handleSetLmsId = useCallback(
-    (lmsId: number) => {
-      setLmsId(lmsId)
-    },
-    [setLmsId]
-  )
-
-  const mapLearningPathToNodes = useCallback(
+  // Creates a single learning element node.
+  const getLearningElementNode = useCallback(
     (
-      learningPath: LearningPathElement,
-      theme: Theme,
-      handleSetUrl: (url: string) => void,
-      handleSetTitle: (title: string) => void,
-      handleSetLmsId: (lmsId: number) => void,
-      handleOpen: () => void,
-      handleClose: () => void,
-      learningPathStatus: LearningPathElementStatus[]
-    ): Node[] => {
-      // Sort learning path
-      const sortedLearningPath = Array.from(learningPath.path).sort((a, b) => a.position - b.position)
-
-      const solvingPositionForDuplicates = sortedLearningPath.map((item, index) => {
-        item.position = index + 1 // Generate position based on array index
-        return item
-      })
-
-      // Every exercise learning element
-      const learningPathExercises = solvingPositionForDuplicates.filter(
-        (item) => item.learning_element.classification === 'ÜB'
-      )
-
-      // Every learning element except exercises
-      const learningPathExcludingExercises = solvingPositionForDuplicates.filter(
-        (item) => item.learning_element.classification !== 'ÜB'
-      )
-
-      const groupHeight = 200
-      const nodeOffsetX = 50
-
-      const learningElementStyle = {
+      learningElement: LearningElement,
+      recommended: boolean,
+      learningPathStatus: LearningPathElementStatus[],
+      id: string,
+      position: { x: number; y: number }
+    ) => {
+      const learningElementNodeStyle = {
         background: theme.palette.primary.main,
         padding: 10,
         border: '1px solid ' + theme.palette.grey[500],
@@ -147,147 +139,180 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         width: 500
       }
 
-      // Exercise nodes
-      const exerciseLearningElementChildNodes: Node[] = learningPathExercises.map((node, index) => {
-        const nodeData: LearningPathLearningElementNode = {
-          lmsId: node.learning_element.lms_id,
-          name: node.learning_element.name,
-          activityType: node.learning_element.activity_type,
-          classification: node.learning_element.classification,
-          isRecommended: node.recommended,
-          handleSetUrl: handleSetUrl,
-          handleSetTitle: handleSetTitle,
-          handleSetLmsId: handleSetLmsId,
-          handleOpen: handleOpen,
-          handleClose: handleClose,
-          isDone: learningPathStatus?.find((item) => item.cmid === node.learning_element.lms_id)?.state === 1
-        }
-        return {
-          id: node.position.toString() + '-' + node.learning_element.lms_id,
-          type: node.learning_element.classification,
-          data: nodeData,
-          position: {
-            x: nodeOffsetX + 550 * (index - 4 * Math.floor(index / 4)),
-            y: 250 * (learningPathExercises[0].position - 1) + Math.floor(index / 4) * 125 + 50
-          },
-          style: learningElementStyle
-        }
-      })
+      const nodeData: LearningPathLearningElementNode = {
+        lmsId: learningElement.lms_id,
+        name: learningElement.name,
+        activityType: learningElement.activity_type,
+        classification: learningElement.classification,
+        isRecommended: recommended,
+        handleSetUrl: setUrl,
+        handleSetTitle: setTitle,
+        handleSetLmsId: setLmsId,
+        handleOpen: handleOpen,
+        handleClose: handleClose,
+        isDone: learningPathStatus?.find((item) => item.cmid === learningElement.lms_id)?.state === 1
+      }
 
-      // Parent node for exercise learning elements
-      const exerciseLearningElementParentNode =
-        learningPathExercises.length > 0
-          ? {
-              id: learningPathExercises[0].position.toString(),
-              data: { label: 'Übungen' },
-              type: 'GROUP',
-              position: {
-                x: 0,
-                y: 250 * (learningPathExercises[0].position - 1)
-              },
-              style: {
-                border: '1px solid ' + theme.palette.grey[500],
-                borderRadius: 8,
-                width: 550 * (learningPathExercises.length > 3 ? 4 : learningPathExercises.length) + nodeOffsetX,
-                height: groupHeight + Math.floor((learningPathExercises.length - 1) / 4) * 125
-              }
-            }
-          : null
-
-      // Leftover learning elements
-      const learningElementNodesExcludingExercises = learningPathExcludingExercises.map((item) => {
-        const nodeData: LearningPathLearningElementNode = {
-          lmsId: item.learning_element.lms_id,
-          name: item.learning_element.name,
-          activityType: item.learning_element.activity_type,
-          classification: item.learning_element.classification,
-          isRecommended: item.recommended,
-          handleSetUrl: handleSetUrl,
-          handleSetTitle: handleSetTitle,
-          handleSetLmsId: handleSetLmsId,
-          handleOpen: handleOpen,
-          handleClose: handleClose,
-          isDone: learningPathStatus?.find((status) => status.cmid === item.learning_element.lms_id)?.state === 1
-        }
-
-        const getNodeYPos = () => {
-          if (exerciseLearningElementParentNode && item.position >= parseInt(exerciseLearningElementParentNode.id)) {
-            return (
-              250 *
-                (item.position -
-                  parseInt(exerciseLearningElementChildNodes[exerciseLearningElementChildNodes.length - 1].id)) +
-              exerciseLearningElementParentNode.position.y +
-              groupHeight +
-              70
-            )
-          } else {
-            return 250 * (item.position - 1)
-          }
-        }
-
-        return {
-          id: item.position.toString(),
-          type: item.learning_element.classification,
-          data: nodeData,
-          position: {
-            x: nodeOffsetX + (550 * ((learningPathExercises.length > 3 ? 4 : learningPathExercises.length) - 1)) / 2,
-            y: getNodeYPos()
-          },
-          style: learningElementStyle
-        }
-      })
-
-      // Insert exercise nodes into learning elements
-      const learningElementNodesBeforeExercises = learningElementNodesExcludingExercises.filter(
-        (item) =>
-          exerciseLearningElementParentNode && parseInt(item.id) < parseInt(exerciseLearningElementParentNode.id)
-      )
-
-      const learningElementNodesAfterExercises = learningElementNodesExcludingExercises.filter(
-        (item) =>
-          exerciseLearningElementParentNode && parseInt(item.id) > parseInt(exerciseLearningElementParentNode.id)
-      )
-
-      // Add 1 to the id of all elements (including exercises) after the exercise parent node
-      const learningElementNodesAfterExercisesElementParentNode = learningElementNodesAfterExercises.map((item) => {
-        return {
-          ...item,
-          id: (parseInt(item.id) + 1).toString()
-        }
-      })
-
-      const learningElementNodes = [
-        ...(learningElementNodesBeforeExercises.length > 0
-          ? learningElementNodesBeforeExercises
-          : learningElementNodesExcludingExercises),
-        ...(exerciseLearningElementParentNode
-          ? [exerciseLearningElementParentNode, ...exerciseLearningElementChildNodes]
-          : []),
-        ...learningElementNodesAfterExercisesElementParentNode
-      ]
-
-      return learningElementNodes
+      return {
+        id: id,
+        type: learningElement.classification,
+        data: nodeData,
+        position: {
+          x: position.x,
+          y: position.y
+        },
+        style: learningElementNodeStyle
+      }
     },
-    []
+    [theme, handleOpen, handleClose, setUrl, setTitle, setLmsId]
   )
 
-  // Calculate nodes their status and edges
+  // Creates aligned nodes of the passed LearningPathLearningElement array.
+  const getLearningElementChildNodes = useCallback(
+    (
+      learningElements: LearningPathLearningElement[],
+      learningPathStatus: LearningPathElementStatus[],
+      position: number,
+      yOffset: number
+    ): Node[] => {
+      return learningElements.map((node, index) => {
+        return getLearningElementNode(
+          node.learning_element,
+          node.recommended,
+          learningPathStatus,
+          node.position.toString() + '-' + node.learning_element.lms_id,
+          {
+            x: -275 * (learningElements.length > 3 ? 4 : learningElements.length) + nodeOffsetX / 2 + 550 * (index % 4),
+            y: 250 * position + 125 * Math.floor(index / 4) + 50 + yOffset
+          }
+        )
+      })
+    },
+    [getLearningElementNode, nodeOffsetX]
+  )
+
+  // Creates a parent node for the passed LearningPathLearningElement array.
+  const getLearningElementParentNode = useCallback(
+    (learningElements: LearningPathLearningElement[], position: number, yOffset: number): Node => {
+      return {
+        id: learningElements[0].position.toString(),
+        data: {
+          classification: learningElements[0].learning_element.classification,
+          label: getGroupLabels(t)[learningElements[0].learning_element.classification]
+        },
+        type: 'GROUP',
+        position: {
+          x: (-550 * (learningElements.length > 3 ? 4 : learningElements.length) - nodeOffsetX) / 2,
+          y: 250 * position + yOffset
+        },
+        style: {
+          border: '2px solid ' + theme.palette.grey[500],
+          borderRadius: 8,
+          width: 550 * (learningElements.length > 3 ? 4 : learningElements.length) + nodeOffsetX,
+          height: 125 * Math.floor((learningElements.length - 1) / 4) + groupHeight // First term is number of additional rows.
+        }
+      }
+    },
+    [theme, groupHeight, nodeOffsetX]
+  )
+
+  // Creates a group of nodes consisting of a parent node and its children or a single node from the passed LearningPathLearningElement array.
+  const groupNodes = useCallback(
+    (
+      learningElements: LearningPathLearningElement[],
+      learningPathStatus: LearningPathElementStatus[],
+      index: number,
+      yOffset: number
+    ): Node | Node[] => {
+      // If the learningPathLearningElement array has only one element, return a single node.
+      if (learningElements.length === 1) {
+        return getLearningElementNode(
+          learningElements[0].learning_element,
+          learningElements[0].recommended,
+          learningPathStatus,
+          learningElements[0].position.toString(),
+          {
+            x: -250,
+            y: 250 * index + yOffset
+          }
+        )
+      }
+
+      return [
+        getLearningElementParentNode(learningElements, index, yOffset),
+        ...getLearningElementChildNodes(learningElements, learningPathStatus, index, yOffset)
+      ]
+    },
+    [getLearningElementNode, getLearningElementParentNode, getLearningElementChildNodes, nodeOffsetX, groupHeight]
+  )
+
+  // Maps the learning path to nodes.
+  const mapLearningPathToNodes = useCallback(
+    (
+      learningPath: LearningPathElement,
+      learningPathStatus: LearningPathElementStatus[],
+      nodesGrouped: boolean
+    ): Node[] => {
+      // Sort learning path by position
+      const sortedLearningPath = Array.from(learningPath.path).sort((a, b) => a.position - b.position)
+
+      // Group learning elements by classification
+      const groupedElements = groupLearningElementsByClassification(sortedLearningPath, nodesGrouped)
+
+      // Calculate the offset between nodes/groups and create grouped nodes
+      const nodes = groupedElements.map((group, index) => {
+        const yOffset = groupedElements
+          .slice(0, index)
+          .filter((group) => group.length > 1)
+          .map((group) => (Math.ceil(group.length / 4) * groupHeight) / 1.75)
+          .reduce((a, b) => a + b, 0)
+
+        return groupNodes(group, learningPathStatus, index, yOffset)
+      })
+
+      // Dissovles the array of arrays into a single array.
+      return nodes.flatMap((nodes) => nodes)
+    },
+    [groupLearningElementsByClassification, groupNodes, groupHeight]
+  )
+
+  // Creates nodes and edges.
   const mapNodes = useCallback(
-    (learningPathData: LearningPathElement, theme: Theme, learningPathStatus: LearningPathElementStatus[]) => {
-      const nodes = mapLearningPathToNodes(
-        learningPathData,
-        theme,
-        handleSetUrl,
-        handleSetTitle,
-        handleSetLmsId,
-        handleOpen,
-        handleClose,
-        learningPathStatus
-      )
+    (learningPathData: LearningPathElement, learningPathStatus: LearningPathElementStatus[], nodesGrouped = false) => {
+      const nodes = mapLearningPathToNodes(learningPathData, learningPathStatus, nodesGrouped)
 
-      // Id array of all nodes which types are not 'ÜB'
-      const nodesWithEdges = nodes.filter((node) => node.type !== 'ÜB').map((node) => node.id)
+      // Creates an array of node ids to be used for creating edges.
+      const nodesWithEdges = nodesGrouped
+        ? Object.values(
+            // Creates an object with the classification of learning elements as key and an array of learning elements as value.
+            nodes.reduce(
+              (
+                firstLearningElementsOfClassification: { [classification: string]: Node[] },
+                learningElementNode: Node
+              ) => {
+                const classification = learningElementNode.data.classification
 
+                firstLearningElementsOfClassification = {
+                  ...firstLearningElementsOfClassification,
+                  [classification]: firstLearningElementsOfClassification[classification]
+                    ? [...firstLearningElementsOfClassification[classification]]
+                    : []
+                }
+
+                if (firstLearningElementsOfClassification[classification].length === 0) {
+                  firstLearningElementsOfClassification[classification].push(learningElementNode)
+                }
+
+                return firstLearningElementsOfClassification
+              },
+              {}
+            )
+          )
+            .flatMap((nodes) => nodes)
+            .map((node) => node.id)
+        : nodes.map((node) => node.id) // If nodes are not grouped, return an array of node ids.
+
+      // Creates an array of edges from the array of node ids.
       const edges: Edge[] = nodesWithEdges.map((item, index) => ({
         id: 'Edge' + item.toString(),
         source: item,
@@ -296,7 +321,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
 
       return { nodes, edges }
     },
-    [handleClose, handleOpen, handleSetTitle, handleSetUrl, handleSetLmsId, mapLearningPathToNodes]
+    [handleClose, handleOpen, mapLearningPathToNodes]
   )
 
   return useMemo(
@@ -308,11 +333,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         isOpen,
         handleClose,
         handleOpen,
-        handleSetUrl,
-        handleSetTitle,
-        handleSetLmsId,
         mapNodes
       } as const),
-    [url, title, lmsId, isOpen, handleClose, handleOpen, handleSetUrl, handleSetTitle, handleSetLmsId, mapNodes]
+    [url, title, lmsId, isOpen, handleClose, handleOpen, mapNodes]
   )
 }

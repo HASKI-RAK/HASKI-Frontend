@@ -1,12 +1,12 @@
-import { FabProps as DefaultFabProps } from '@common/components'
-import { memo, useCallback, MouseEvent } from 'react'
 import DefaultFab from '@mui/material/Fab'
+import { MouseEvent, memo, useCallback } from 'react'
+import { FabProps as DefaultFabProps } from '@common/components'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
 
 /**

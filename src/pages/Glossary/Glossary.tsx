@@ -1,8 +1,8 @@
-import { GlossaryList, Filter, Searchbar, GlossaryIndex, GlossaryEntryProps } from '@components'
-import { useGlossary as _useGlossary, GlossaryHookReturn } from './Glossary.hooks'
-import { Typography, Box, Grid, Button } from '@common/components'
-import { useState, Dispatch, SetStateAction, memo } from 'react'
+import { Dispatch, SetStateAction, memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Box, Button, Grid, Typography } from '@common/components'
+import { Filter, GlossaryEntryProps, GlossaryIndex, GlossaryList, Searchbar } from '@components'
+import { GlossaryHookReturn, useGlossary as _useGlossary } from './Glossary.hooks'
 
 /**
  * @prop useGlossary - The hook that is used for the Glossary page logic.
@@ -60,6 +60,11 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
       returnObjects: true
     }) as GlossaryEntryProps[])
   ]
+
+  // Sorts the glossary entries alphabetically by term.
+  const sortedGlossaryEntries = [...glossaryEntries].sort((a, b) =>
+    (a.term?.toLowerCase() ?? '').localeCompare(b.term?.toLowerCase() ?? '')
+  )
 
   // Deconstructing array of tags into array to prevent testing errors.
   const tags = [
@@ -137,14 +142,17 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
           <Button id="collapse-all-button" variant="outlined" onClick={() => collapseAll(setExpandedList)}>
             {t('pages.glossary.collapseAll')}
           </Button>
-          <Button id="expand-all-button" variant="outlined" onClick={() => expandAll(setExpandedList, glossaryEntries)}>
+          <Button
+            id="expand-all-button"
+            variant="outlined"
+            onClick={() => expandAll(setExpandedList, sortedGlossaryEntries)}>
             {t('pages.glossary.expandAll')}
           </Button>
         </Box>
       </Grid>
       <Grid item xs={12} sm={12}>
         <GlossaryList
-          glossaryEntries={glossaryEntries}
+          glossaryEntries={sortedGlossaryEntries}
           expandedList={expandedList}
           setExpandedList={setExpandedList}
           searchQuery={searchQuery}

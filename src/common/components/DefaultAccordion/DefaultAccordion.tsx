@@ -1,12 +1,12 @@
-import { AccordionProps as DefaultAccordionProps } from '@common/components'
 import DefaultAccordion from '@mui/material/Accordion'
-import { memo, useCallback, MouseEvent } from 'react'
+import { MouseEvent, memo, useCallback } from 'react'
+import { AccordionProps as DefaultAccordionProps } from '@common/components'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
 
 /**

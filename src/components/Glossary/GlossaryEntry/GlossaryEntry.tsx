@@ -1,7 +1,7 @@
-import { AccordionSummary, AccordionDetails, Accordion, Typography, Box, Grid, Chip } from '@common/components'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Chip, Grid, Typography } from '@common/components'
 
 /**
  * @prop term - The term this entry defines.

@@ -1,15 +1,15 @@
-import { ExpandMore } from '@common/icons'
 import { memo } from 'react'
 import {
+  Accordion,
   AccordionDetails,
   AccordionSummary,
-  Typography,
-  Accordion,
-  ListItem,
   Divider,
   List,
+  ListItem,
+  Typography,
   Zoom
 } from '@common/components'
+import { ExpandMore } from '@common/icons'
 
 /**
  * @prop body - The body text of an entry, displayed as a bullet points.

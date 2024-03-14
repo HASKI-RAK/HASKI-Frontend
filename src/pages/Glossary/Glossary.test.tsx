@@ -1,10 +1,9 @@
-import { render, renderHook, fireEvent } from '@testing-library/react'
-import Glossary, { getSelectedTagsWrapper } from './Glossary'
-import { MemoryRouter } from 'react-router-dom'
-
-import { GlossaryEntryProps } from '@components'
-import { useGlossary } from './Glossary.hooks'
 import '@testing-library/jest-dom'
+import { fireEvent, render, renderHook } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { GlossaryEntryProps } from '@components'
+import Glossary, { getSelectedTagsWrapper } from './Glossary'
+import { useGlossary } from './Glossary.hooks'
 
 describe('Glossary page tests', () => {
   const mockGlossaryEntryProps: GlossaryEntryProps[] = [

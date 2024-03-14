@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom'
-import TableILSQuestions from './TableILSQuestions'
 import { fireEvent, render, waitFor } from '@testing-library/react'
-import { act } from 'react-dom/test-utils'
 import { mockServices } from 'jest.setup'
+import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
+import TableILSQuestions from './TableILSQuestions'
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown

@@ -1,23 +1,23 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { ThemeProvider } from '@common/theme'
+import { HaskiTheme } from '@common/utils'
 import {
-  MainFrame,
-  Home,
-  ThemePresentation,
-  Login,
-  PrivacyPolicy,
+  AboutUs,
   Contact,
+  Course,
+  Glossary,
+  Home,
+  Imprint,
+  Login,
+  MainFrame,
+  PageNotFound,
+  PrivacyPolicy,
   ProjectDescription,
   ProjectInformation,
-  Imprint,
-  Topic,
-  Course,
-  PageNotFound,
-  Glossary,
-  AboutUs
+  ThemePresentation,
+  Topic
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
-import { HaskiTheme } from '@utils'
 
 /**
  * # App

@@ -1,8 +1,8 @@
-import { act } from 'react-test-renderer'
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
-import ContactForm from './ContactForm'
 import { MemoryRouter } from 'react-router-dom'
+import { act } from 'react-test-renderer'
+import ContactForm from './ContactForm'
 
 describe('Test ContactForm', () => {
   const send = jest.fn()

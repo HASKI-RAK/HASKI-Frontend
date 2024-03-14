@@ -1,6 +1,6 @@
+import { ILS } from '@core'
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
-import { ILS } from '@core'
 
 /*
  * @props studentId - student id

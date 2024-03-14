@@ -1,12 +1,12 @@
-import { MenuProps as DefaultMenuProps } from '@common/components'
 import DefaultMenu from '@mui/material/Menu'
 import { memo, useCallback } from 'react'
+import { MenuProps as DefaultMenuProps } from '@common/components'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
 
 /**

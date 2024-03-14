@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
-import GraphListK, { useData } from './GraphListK'
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
+import GraphListK, { useData } from './GraphListK'
 
 // Mocking the resize observer to prevent errors in the tests
 window.ResizeObserver = require('resize-observer-polyfill')

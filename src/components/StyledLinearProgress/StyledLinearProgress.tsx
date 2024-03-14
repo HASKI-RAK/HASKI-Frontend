@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
-import { LinearProgressWithLabel } from '@components'
-import { styled } from '@common/theme'
 import { linearProgressClasses } from '@common/components'
+import { styled } from '@common/theme'
+import { LinearProgressWithLabel } from '@components'
 
 /**
  * @prop learningElementProgressTopics - The learningElementProgressTopics array.

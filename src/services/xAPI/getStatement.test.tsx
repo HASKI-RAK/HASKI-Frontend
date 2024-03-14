@@ -1,5 +1,5 @@
-import * as statement from './getStatement'
 import '@testing-library/jest-dom'
+import * as statement from './getStatement'
 
 describe('getStatement tests', () => {
   test('getContextActivities returns empty object', () => {

@@ -1,51 +1,48 @@
+import log from 'loglevel'
 import React, { useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  IconButton,
-  Menu,
-  Tooltip,
   Avatar,
-  MenuItem,
-  Grid,
+  Box,
   Button,
-  Popover,
   Divider,
-  ListItemIcon,
-  Link,
+  Grid,
+  IconButton,
   ImageWrapper,
-  TextWrapper
+  Link,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Popover,
+  TextWrapper,
+  Toolbar,
+  Tooltip,
+  Typography
 } from '@common/components'
-
 import {
   Analytics,
-  Settings,
-  Help,
   ArrowDropDown,
-  Person,
+  AssignmentOutlined,
+  Help,
+  LibraryBooksOutlined,
   Login,
   Logout,
-  AssignmentOutlined,
-  LibraryBooksOutlined,
+  Person,
   PlaylistAddCheckCircleOutlined
 } from '@common/icons'
-
-import { useTranslation } from 'react-i18next'
-import { AuthContext, SnackbarContext } from '@services'
 import {
-  DropdownLanguage,
-  SkeletonList,
+  LanguageMenu,
   QuestionnaireQuestionsModal,
   QuestionnaireResultsModal,
+  SkeletonList,
   TableILSQuestions,
   TableListKQuestions
 } from '@components'
-import { usePersistedStore, useStore } from '@store'
 import { Topic } from '@core'
-import log from 'loglevel'
+import { AuthContext, SnackbarContext } from '@services'
+import { usePersistedStore, useStore } from '@store'
 
 // TODO: Move it into @common/hooks since it is reused in LocalNav
 
@@ -306,12 +303,10 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           </Box>
           {/** Search bar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>
-
-          {/** Language dropdown */}
-          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <DropdownLanguage />
+          {/** Language menu */}
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }, mt: 1 }}>
+            <LanguageMenu />
           </Box>
-
           {/** Questionnaire Results */}
           {isAuth && (
             <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
@@ -323,7 +318,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               <QuestionnaireResultsModal open={modalOpen} handleClose={() => setModalOpen(false)} />
             </Box>
           )}
-
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('appGlobal.help')}>
@@ -336,7 +330,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               </IconButton>
             </Tooltip>
           </Box>
-
           {/** 
           { Settings button }
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
@@ -355,7 +348,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             </Tooltip>
           </Box>
 */}
-
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openSettings')}>

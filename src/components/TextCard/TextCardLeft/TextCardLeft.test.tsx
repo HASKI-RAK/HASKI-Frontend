@@ -1,6 +1,6 @@
+import '@testing-library/jest-dom'
 import { act, render } from '@testing-library/react'
 import TextCardLeft from './TextCardLeft'
-import '@testing-library/jest-dom'
 
 const mockProps = {
   body: 'body',

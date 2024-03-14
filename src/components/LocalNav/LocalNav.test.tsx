@@ -1,14 +1,15 @@
 import '@testing-library/jest-dom'
 import { act, fireEvent, render, waitFor } from '@testing-library/react'
-import LocalNav, { LocalNavProps } from './LocalNav'
-import * as router from 'react-router'
-import { LearningPathElement, LearningPathLearningElement, Topic, LearningElement, StudentLearningElement } from '@core'
-import { MemoryRouter } from 'react-router-dom'
-import { mockServices } from 'jest.setup'
 import { renderHook } from '@testing-library/react-hooks'
-import { getSortedLearningPath, useLearningPathTopic, useLearningPathElement } from './LocalNav.hooks'
-import resetModules = jest.resetModules
+import { mockServices } from 'jest.setup'
+import * as router from 'react-router'
+import { MemoryRouter } from 'react-router-dom'
+import { LearningElement, LearningPathElement, LearningPathLearningElement, StudentLearningElement, Topic } from '@core'
 import LazyLoadingLearningPathElement, { LazyLoadingLearningPathElementProps } from './LazyLoadingLearningPathElement'
+import LocalNav, { LocalNavProps } from './LocalNav'
+import { getSortedLearningPath, useLearningPathElement, useLearningPathTopic } from './LocalNav.hooks'
+
+import resetModules = jest.resetModules
 
 const navigate = jest.fn()
 

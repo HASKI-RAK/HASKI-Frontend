@@ -1,10 +1,11 @@
 ﻿//Local Storage should be changed before importing i18n config file.
 //That way we can access the else statement in the i18n config file.
 import { act, render } from '@testing-library/react'
-import { Select, MenuItem } from '@common/components'
-import i18next from './internationalization' // your i18n config file
+// your i18n config file
 import { I18nextProvider, useTranslation } from 'react-i18next'
 import { MemoryRouter } from 'react-router-dom'
+import { MenuItem, Select } from '@common/components'
+import i18next from './internationalization'
 
 describe('i18n test', () => {
   localStorage.setItem('i18nextLng', 'en')

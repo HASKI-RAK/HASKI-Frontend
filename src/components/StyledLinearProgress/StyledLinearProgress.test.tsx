@@ -1,8 +1,8 @@
-import { mockServices } from 'jest.setup'
 import { render, waitFor } from '@testing-library/react'
+import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
-import { AuthContext } from '@services'
 import { Course } from '@pages'
+import { AuthContext } from '@services'
 
 jest.mock('@common/hooks', () => ({
   ...jest.requireActual('@common/hooks'),

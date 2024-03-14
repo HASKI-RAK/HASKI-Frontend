@@ -1,7 +1,7 @@
+import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Searchbar from './Searchbar'
-import '@testing-library/jest-dom'
 
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')

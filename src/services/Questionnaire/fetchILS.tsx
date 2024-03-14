@@ -1,6 +1,6 @@
 import { ILS, ILSReturn } from '@core'
-import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
+import { fetchData } from '../RequestResponse'
 
 /*
  * fetchILS function.

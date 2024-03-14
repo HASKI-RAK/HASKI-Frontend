@@ -1,7 +1,7 @@
-import { useSnackbarProvider as _useSnackbarProvider } from './SnackbarProvider.hooks'
-import { SnackbarContext, SnackbarContextType } from '@services'
-import { SnackbarContainer } from '@components'
 import { memo } from 'react'
+import { SnackbarContainer } from '@components'
+import { SnackbarContext, SnackbarContextType } from '@services'
+import { useSnackbarProvider as _useSnackbarProvider } from './SnackbarProvider.hooks'
 
 /**
  * @prop children - The child element of the provider.

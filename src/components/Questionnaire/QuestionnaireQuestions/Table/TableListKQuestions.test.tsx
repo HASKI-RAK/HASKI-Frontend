@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom'
-import TableListKQuestions from './TableListKQuestions'
 import { fireEvent, render, waitFor } from '@testing-library/react'
-import { act } from 'react-dom/test-utils'
 import { mockServices } from 'jest.setup'
+import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
+import TableListKQuestions from './TableListKQuestions'
 
 const mockNavigate = jest.fn()
 

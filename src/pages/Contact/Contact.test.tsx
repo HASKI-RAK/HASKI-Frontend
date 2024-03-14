@@ -1,12 +1,12 @@
-import { Contact } from '@pages'
 import '@testing-library/jest-dom'
-import { render, fireEvent, act, renderHook } from '@testing-library/react'
-import { ContactForm } from '@components'
-import { FormDataType, SnackbarContext, SnackbarContextType } from '@services'
-import { useContact } from './Contact.hooks'
+import { act, fireEvent, render, renderHook } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
+import { ContactForm } from '@components'
+import { Contact } from '@pages'
+import { FormDataType, SnackbarContext, SnackbarContextType } from '@services'
 import { getConfig } from '@shared'
+import { useContact } from './Contact.hooks'
 
 /*jest.mock('react', () => ({
   ...jest.requireActual('react'),

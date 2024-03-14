@@ -1,5 +1,5 @@
-import { Network } from '@common/components'
 import { useTranslation } from 'react-i18next'
+import { Network } from '@common/components'
 import { ListK } from '@core'
 
 // Center the Score beneath the Subscale name. That is done with Whitespaces before the score.

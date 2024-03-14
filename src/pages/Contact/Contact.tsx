@@ -1,6 +1,6 @@
-import { ContactForm } from '@components'
-import { useContact as _useContact, ContactHookReturn, ContactHookProps } from './Contact.hooks'
 import { useState } from 'react'
+import { ContactForm } from '@components'
+import { ContactHookProps, ContactHookReturn, useContact as _useContact } from './Contact.hooks'
 
 export type ContactProps = {
   /**

@@ -1,5 +1,5 @@
-import { Divider, Link, Typography } from '@common/components'
 import { useTranslation } from 'react-i18next'
+import { Divider, Link, Typography } from '@common/components'
 
 /**
  * # Imprint Page

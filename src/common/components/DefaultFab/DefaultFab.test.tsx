@@ -1,8 +1,8 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { AuthContext, xAPI } from '@services'
 import Fab from './DefaultFab'
-import { xAPI, AuthContext } from '@services'
 
 describe('DefaultFab tests', () => {
   test('DefaultFab sends statement on click', async () => {

@@ -1,17 +1,16 @@
-import { Accordion, Box, Divider, Drawer, Typography, AccordionSummary, AccordionDetails, Stack } from '@common/components'
-import { ExpandMore } from '@common/icons'
+import { Suspense, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { LearningPathElement, Topic } from '@core'
-import { Suspense, useState, useEffect } from 'react'
-import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Drawer, Stack, Typography } from '@common/components'
+import { ExpandMore } from '@common/icons'
 import {
   SkeletonList,
-  useLearningPathTopic as _useLearningPathTopic,
-  useLearningPathElement as _useLearningPathElement
+  useLearningPathElement as _useLearningPathElement,
+  useLearningPathTopic as _useLearningPathTopic
 } from '@components'
+import { LearningPathElement, Topic } from '@core'
+import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
 import { useTheme, useMediaQuery } from '@common/hooks'
-
 
 /**
  *  Local navigation component props.
@@ -43,7 +42,7 @@ const LocalNav = ({
   const { loading, topics } = useLearningPathTopic(courseId)
 
   const [openAccordion, setOpenAccordion] = useState<number | null>(null)
- 
+
   const theme = useTheme();
   const open= useMediaQuery(theme.breakpoints.up('lg'))
   const [scrollable, setScrollable]=useState(false)
@@ -65,26 +64,26 @@ const LocalNav = ({
 
       setFooterVisArray(Math.max(0, footerVisible))
     }
-  }, [window.scrollY]) 
+  }, [window.scrollY])
 
   const handleAccordionClick = (index: number) => {
     setOpenAccordion(openAccordion === index ? null : index)
   }
 
   //if the footer is visible move the drawer up so it doesnt hit the footer
-  const footerMargin = 50 - footerVisArray 
+  const footerMargin = 50 - footerVisArray
   return (
     <Box sx={{width: open ? '25vh' : '0%' }}/**25vh = 250px */>
     <Drawer
-      variant="persistent" 
+      variant="persistent"
       anchor='left'
       open={open}
-      
+
       sx={{
         width: '100%',
         flexShrink: 1,
         borderRadius:'1rem',
-        
+
         [`& .MuiDrawer-paper`]: {
           height:'100vh',
           boxSizing: 'border-box',

@@ -1,7 +1,7 @@
-import { LearningPathElementStatusReturn } from '@core'
 import { StateCreator } from 'zustand'
-import { StoreState } from '@store'
+import { LearningPathElementStatusReturn } from '@core'
 import { fetchLearningPathElementSpecificStatus } from '@services'
+import { StoreState } from '@store'
 
 /*
  * @prop courseId - The course id

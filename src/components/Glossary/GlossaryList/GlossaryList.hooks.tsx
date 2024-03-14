@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react'
-import { GlossaryEntryProps } from '@components'
 import { useTranslation } from 'react-i18next'
+import { GlossaryEntryProps } from '@components'
 
 /**
  * @prop filterByTags - Function to filter the glossary entries by tags.

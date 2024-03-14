@@ -1,8 +1,8 @@
+import '@testing-library/jest-dom'
 import { render, renderHook } from '@testing-library/react'
-import { useGlossaryList } from './GlossaryList.hooks'
 import { MemoryRouter } from 'react-router-dom'
 import GlossaryList from './GlossaryList'
-import '@testing-library/jest-dom'
+import { useGlossaryList } from './GlossaryList.hooks'
 
 describe('GlossaryList tests', () => {
   const mockGlossaryListProps = {

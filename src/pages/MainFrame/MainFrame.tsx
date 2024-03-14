@@ -1,6 +1,6 @@
 import { Outlet, useParams } from 'react-router-dom'
 import { Box, Stack } from '@common/components'
-import { MenuBar, Footer, BreadcrumbsContainer, LocalNav, OpenQuestionnaire, PrivacyModal } from '@components'
+import { BreadcrumbsContainer, Footer, LocalNav, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
 
 /**
  * # MainFrame Page
@@ -41,14 +41,14 @@ export const MainFrame = () => {
               </Box>
             )}
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-            
+
               {' '}
               {/* Adjust the xs (Grid) value based on LocalNav */}
               {/**💉 Pages get injected here through App routing */}
               {/* <Container maxWidth="lg" sx={{ height: '100%' }}> */}
               <Outlet />
               {/* </Container> */}
-            
+
             {/** TODO 📑 add real gameification */}
             {/* <Grid item xs={2}>
                          <Typography variant="h4">Gamification</Typography>

@@ -1,6 +1,6 @@
+import '@testing-library/jest-dom'
 import { act, fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import '@testing-library/jest-dom'
 import LoginForm from './LoginForm'
 
 global.fetch = jest.fn(() =>

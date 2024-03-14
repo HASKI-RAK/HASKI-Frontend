@@ -1,4 +1,4 @@
-import { setConfig, getConfig } from './config'
+import { getConfig, setConfig } from './config'
 
 describe('setConfig', () => {
   it('should use appConfig correctly', () => {

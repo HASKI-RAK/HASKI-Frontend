@@ -5,6 +5,7 @@ export { AccordionDetails } from './DefaultAccordionDetails/DefaultAccordionDeta
 export { AccordionSummary } from './DefaultAccordionSummary/DefaultAccordionSummary'
 export { Box } from './DefaultBox/DefaultBox'
 export { Breadcrumbs } from './DefaultBreadcrumbs/DefaultBreadcrumbs'
+export { Drawer } from './DefaultDrawer/DefaultDrawer'
 export { ListItemIcon } from './DefaultListItemIcon/DefaultListItemIcon'
 export { Typography } from './DefaultTypography/DefaultTypography'
 export { Grid } from './DefaultGrid/DefaultGrid'
@@ -53,7 +54,8 @@ export { TableContainer } from './DefaultTableContainer/DefaultTableContainer'
 export { TableHead } from './DefaultTableHead/DefaultTableHead'
 export { FormGroup } from './DefaultFormGroup/DefaultFormGroup'
 export { Zoom } from './DefaultZoom/DefaultZoom'
-export { Drawer } from './DefaultDrawer/DefaultDrawer'
+export { Switch } from './DefaultSwitch/DefaultSwitch'
+
 export { Network } from './Network/Network'
 export { Bar } from './Bar/Bar'
 

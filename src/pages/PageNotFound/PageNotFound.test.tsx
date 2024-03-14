@@ -1,9 +1,9 @@
-import { render, fireEvent } from '@testing-library/react'
-import { Router } from 'react-router-dom'
-import { createMemoryHistory } from 'history'
-import PageNotFound from './PageNotFound'
-import { mockReactFlow } from '@mocks'
 import '@testing-library/jest-dom'
+import { fireEvent, render } from '@testing-library/react'
+import { createMemoryHistory } from 'history'
+import { Router } from 'react-router-dom'
+import { mockReactFlow } from '@mocks'
+import PageNotFound from './PageNotFound'
 
 describe('PageNotFound', () => {
   beforeEach(() => {

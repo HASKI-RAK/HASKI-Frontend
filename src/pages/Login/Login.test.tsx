@@ -1,10 +1,11 @@
 import '@testing-library/jest-dom'
-import { Login } from '@pages'
 import { act, fireEvent, render } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import * as router from 'react-router'
-const { AuthContext } = jest.requireActual('@services')
 import { mockServices } from 'jest.setup'
+import * as router from 'react-router'
+import { MemoryRouter } from 'react-router-dom'
+import { Login } from '@pages'
+
+const { AuthContext } = jest.requireActual('@services')
 
 const navigate = jest.fn()
 

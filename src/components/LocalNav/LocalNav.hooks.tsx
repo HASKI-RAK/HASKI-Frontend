@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
-import { LearningPathElement, Topic, LearningPathElementReturn } from '@core'
 import log from 'loglevel'
-import { useStore, usePersistedStore } from '@store'
+import { useEffect, useState } from 'react'
+import { LearningPathElement, LearningPathElementReturn, Topic } from '@core'
+import { usePersistedStore, useStore } from '@store'
 
 /**
  * This function sorts the learning path elements by position.

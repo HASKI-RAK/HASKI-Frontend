@@ -1,12 +1,12 @@
-import { ToggleButtonGroupProps as DefaultToggleButtonGroupProps } from '@common/components'
 import DefaultToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-import { memo, useCallback, MouseEvent } from 'react'
+import { MouseEvent, memo, useCallback } from 'react'
+import { ToggleButtonGroupProps as DefaultToggleButtonGroupProps } from '@common/components'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
 
 /**

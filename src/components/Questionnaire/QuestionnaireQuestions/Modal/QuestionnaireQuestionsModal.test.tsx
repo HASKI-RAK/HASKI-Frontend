@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react'
-import { QuestionnaireQuestionsModal } from '@components'
 import { MemoryHistory } from 'history'
 import { MemoryRouter } from 'react-router-dom'
+import { QuestionnaireQuestionsModal } from '@components'
 
 const handleOpenILSShortModal = () => {
   return true

@@ -1,9 +1,9 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
 import { MenuItem } from '@mui/material'
-import Select from './DefaultSelect'
 import '@testing-library/jest-dom'
-import { xAPI, AuthContext } from '@services'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { AuthContext, xAPI } from '@services'
+import Select from './DefaultSelect'
 
 describe('DefaultSelect tests', () => {
   const sendStatement = jest.fn()

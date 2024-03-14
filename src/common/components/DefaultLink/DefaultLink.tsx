@@ -1,12 +1,12 @@
-import { MouseEvent, memo, useCallback, ReactElement, ElementType } from 'react'
-import { LinkProps as DefaultLinkProps } from '@common/components'
 import DefaultLink from '@mui/material/Link'
+import { ElementType, MouseEvent, ReactElement, memo, useCallback } from 'react'
+import { LinkProps as DefaultLinkProps } from '@common/components'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
 
 /**

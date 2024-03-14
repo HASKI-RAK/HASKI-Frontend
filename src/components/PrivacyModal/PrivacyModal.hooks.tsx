@@ -1,9 +1,9 @@
-import { SnackbarContext } from '@services'
-import { useCallback, useContext, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { CookiesProvider, useCookies } from 'react-cookie'
-import { usePersistedStore } from '@store'
 import log from 'loglevel'
+import { useCallback, useContext, useMemo } from 'react'
+import { CookiesProvider, useCookies } from 'react-cookie'
+import { useTranslation } from 'react-i18next'
+import { SnackbarContext } from '@services'
+import { usePersistedStore } from '@store'
 
 /**
  * @prop privacyPolicyCookie - The currently set cookie

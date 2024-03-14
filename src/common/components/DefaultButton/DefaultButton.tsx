@@ -1,12 +1,12 @@
-import { ButtonProps as DefaultButtonProps } from '@common/components'
-import { memo, useCallback, MouseEvent } from 'react'
 import DefaultButton from '@mui/material/Button'
+import { MouseEvent, memo, useCallback } from 'react'
+import { ButtonProps as DefaultButtonProps } from '@common/components'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
 
 /**

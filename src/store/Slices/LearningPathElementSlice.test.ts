@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
+import { mockServices } from 'jest.setup'
 //Tests fail with shortened Path
 import { useStore } from '../Zustand/Store'
-import { mockServices } from 'jest.setup'
 
 const learningPathElement = { id: 1, name: 'Math', description: 'Learn math' }
 

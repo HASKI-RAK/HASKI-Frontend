@@ -1,8 +1,8 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import Button from './DefaultButton'
 import '@testing-library/jest-dom'
-import { xAPI, AuthContext } from '@services'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { AuthContext, xAPI } from '@services'
+import Button from './DefaultButton'
 
 describe('DefaultButton tests', () => {
   test('DefaultButton sends statement on click', async () => {

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Typography, Link, Divider, List, ListItem, ListItemText, ListItemIcon } from '@common/components'
+import { Divider, Link, List, ListItem, ListItemIcon, ListItemText, Typography } from '@common/components'
 import { FiberManualRecord } from '@common/icons'
 
 /**

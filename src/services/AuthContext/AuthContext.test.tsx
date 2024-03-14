@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
-import AuthContext, { AuthContextType } from './AuthContext'
 import { render, renderHook } from '@testing-library/react'
 import { useContext } from 'react'
+import AuthContext, { AuthContextType } from './AuthContext'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
