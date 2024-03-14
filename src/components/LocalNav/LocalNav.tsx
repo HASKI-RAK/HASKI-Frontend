@@ -47,23 +47,34 @@ const LocalNav = ({
   const theme = useTheme();
   const open= useMediaQuery(theme.breakpoints.up('lg'))
   const [scrollable, setScrollable]=useState(false)
+  const [footerVisArray, setFooterVisArray] = useState(0)
 
   useEffect(() => {
     window.onscroll = () => {
-      //wenn scrollY unter 95 position ist absolut
+      //if scrollY is below 100 change drawer position to absolut
       if(window.scrollY<=100)
       setScrollable(false)
-      //wenn scrollY ueber 95 position ist fixed(drawer bewegt sich mit scroll)
+
+      //if scrollY is above 95 change drawer position to fixed so it moves with scroll
       else if(window.scrollY>=95)
       setScrollable(true)
+
+      const maxScrollArea = window.document.documentElement.scrollHeight - window.document.documentElement.clientHeight
+      const footerHeight = 80
+      const footerVisible = footerHeight - (maxScrollArea - window.scrollY)
+
+      setFooterVisArray(Math.max(0, footerVisible))
     }
   }, [window.scrollY]) 
 
   const handleAccordionClick = (index: number) => {
     setOpenAccordion(openAccordion === index ? null : index)
   }
+
+  //if the footer is visible move the drawer up so it doesnt hit the footer
+  const footerMargin = 50 - footerVisArray 
   return (
-    <Box sx={{width: open ? '25vh' : '0p%' }}/** statt 25vh 250px */>
+    <Box sx={{width: open ? '25vh' : '0%' }}/**25vh = 250px */>
     <Drawer
       variant="persistent" 
       anchor='left'
@@ -78,7 +89,7 @@ const LocalNav = ({
           height:'100vh',
           boxSizing: 'border-box',
           maxHeight: '70%',
-          marginTop:scrollable? '3rem' : '150px',
+          marginTop:scrollable? footerMargin + 'px' : '150px',
           position: scrollable?'fixed':'absolute'
         }
       }}>
