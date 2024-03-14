@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
-import { useStore } from '../Zustand/Store'
 import { mockServices } from 'jest.setup'
+import { useStore } from '../Zustand/Store'
 
 describe('CoursesSlice', () => {
   afterEach(() => {

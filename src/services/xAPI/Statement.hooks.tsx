@@ -1,11 +1,11 @@
-import { useLocation } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { getStatement } from './getStatement'
-import { useMemo, useCallback, useContext, useState, useEffect } from 'react'
-import { usePersistedStore } from '@store'
-import { AuthContext } from '@services'
-import xAPI from './xAPI.setup'
 import log from 'loglevel'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
+import { AuthContext } from '@services'
+import { usePersistedStore } from '@store'
+import { getStatement } from './getStatement'
+import xAPI from './xAPI.setup'
 
 /**
  * xAPIComponent enum.

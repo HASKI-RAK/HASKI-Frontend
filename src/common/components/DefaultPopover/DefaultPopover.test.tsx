@@ -1,8 +1,8 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import Popover from './DefaultPopover'
 import '@testing-library/jest-dom'
-import { xAPI, AuthContext } from '@services'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { AuthContext, xAPI } from '@services'
+import Popover from './DefaultPopover'
 
 describe('DefaultPopover tests', () => {
   test('DefaultPopover sends statement on close', async () => {

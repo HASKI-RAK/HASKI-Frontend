@@ -1,5 +1,5 @@
-import { Typography } from '@common/components'
 import { useTranslation } from 'react-i18next'
+import { Typography } from '@common/components'
 import { ListK } from '@core'
 
 type GeneralSubscalesProps = {

@@ -1,12 +1,12 @@
-import { TextFieldProps as DefaultTextFieldProps } from '@common/components'
 import DefaultTextField from '@mui/material/TextField'
-import { memo, useCallback, ChangeEvent } from 'react'
+import { ChangeEvent, memo, useCallback } from 'react'
+import { TextFieldProps as DefaultTextFieldProps } from '@common/components'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
 
 /**

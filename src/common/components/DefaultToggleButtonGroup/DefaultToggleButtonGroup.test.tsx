@@ -1,9 +1,9 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import ToggleButtonGroup from './DefaultToggleButtonGroup'
-import { ToggleButton } from '@common/components'
-import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
-import { xAPI, AuthContext } from '@services'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { ToggleButton } from '@common/components'
+import { AuthContext, xAPI } from '@services'
+import ToggleButtonGroup from './DefaultToggleButtonGroup'
 
 describe('DefaultToggleButtonGroup tests', () => {
   test('DefaultToggleButtonGroup sends statement on change', async () => {

@@ -1,7 +1,8 @@
-import { Button, Typography, Box } from '@common/components'
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { memo } from 'react'
+import { Box, Button, Typography } from '@common/components'
+
 // TODO: Added unfinished projectinformation page for routing purposes
 
 /**

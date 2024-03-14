@@ -1,8 +1,8 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import TextField from './DefaultTextField'
 import '@testing-library/jest-dom'
-import { xAPI, AuthContext } from '@services'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { AuthContext, xAPI } from '@services'
+import TextField from './DefaultTextField'
 
 describe('DefaultTextField tests', () => {
   test('DefaultTextField sends statement on change', async () => {

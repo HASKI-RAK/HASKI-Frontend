@@ -1,8 +1,8 @@
-import { fireEvent, render } from '@testing-library/react'
-import ProjectInformation from './ProjectInformation'
-import { MemoryRouter } from 'react-router-dom'
-import * as router from 'react-router'
 import '@testing-library/jest-dom'
+import { fireEvent, render } from '@testing-library/react'
+import * as router from 'react-router'
+import { MemoryRouter } from 'react-router-dom'
+import ProjectInformation from './ProjectInformation'
 
 const navigate = jest.fn()
 beforeEach(() => {

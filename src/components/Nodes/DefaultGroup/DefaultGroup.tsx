@@ -1,6 +1,6 @@
-import { Typography } from '@common/components'
-import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
+import { Handle, NodeProps, Position } from 'reactflow'
+import { Typography } from '@common/components'
 
 /**
  * DefaultGroup component.
@@ -26,6 +26,6 @@ const DefaultGroup = ({ data, isConnectable }: NodeProps) => {
 }
 
 // https://stackoverflow.com/questions/41581130/what-is-react-component-displayname-used-for
-DefaultGroup.displayName = 'DefaultGroup'
+// DefaultGroup.displayName = 'DefaultGroup'
 
 export default memo(DefaultGroup)

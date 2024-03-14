@@ -1,6 +1,6 @@
-import { useState, useContext } from 'react'
-import { FormDataType, SnackbarContext } from '@services'
+import { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { FormDataType, SnackbarContext } from '@services'
 
 /**
  * @property - The default report type of the form.

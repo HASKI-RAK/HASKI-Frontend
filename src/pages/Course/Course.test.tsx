@@ -1,9 +1,9 @@
-import { AuthContext } from '@services'
-import { MemoryRouter } from 'react-router-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
-import Course from './Course'
-import * as router from 'react-router'
 import { mockServices } from 'jest.setup'
+import * as router from 'react-router'
+import { MemoryRouter } from 'react-router-dom'
+import { AuthContext } from '@services'
+import Course from './Course'
 
 const navigate = jest.fn()
 jest.useFakeTimers()

@@ -1,6 +1,6 @@
-import SnackbarTransition, { SnackbarTransitionProps } from './SnackbarTransition'
-import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
+import SnackbarTransition, { SnackbarTransitionProps } from './SnackbarTransition'
 
 const mockErrorSnackbarTransitionProps: SnackbarTransitionProps = {
   children: <div>test</div>,

@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
+import { mockServices } from 'jest.setup'
 //Tests fail with shortened Path
 import { usePersistedStore } from '../Zustand/Store'
-import { mockServices } from 'jest.setup'
 
 const user = { id: 1, name: 'John Doe' }
 

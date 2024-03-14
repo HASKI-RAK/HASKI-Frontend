@@ -1,20 +1,15 @@
-import {
-  Box,
-  Divider,
-  Typography,
-  Stack,
-  List,
-  ListItem,
-  ListItemText,
-  Grid,
-  Skeleton,
-  ListItemButton
-} from '@common/components'
-import { FiberManualRecord } from '@common/icons'
+import { Suspense, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Topic } from '@core'
-import { SkeletonList, useLearningPathTopic as _useLearningPathTopic, Fraction } from '@components'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Stack, Typography } from '@common/components'
+import { ExpandMore } from '@common/icons'
+import {
+  SkeletonList,
+  useLearningPathElement as _useLearningPathElement,
+  useLearningPathTopic as _useLearningPathTopic
+} from '@components'
+import { LearningPathElement, Topic } from '@core'
+import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
 import React from 'react'
 import { useLearningPathTopicProgress } from './../../pages/Course/Course.hook'
 import { Theme } from '@common/theme'

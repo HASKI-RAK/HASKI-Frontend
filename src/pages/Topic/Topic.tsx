@@ -1,13 +1,17 @@
 import { useTopic as _useTopic, useTopicHookParams, TopicHookReturn } from './Topic.hooks'
-import ReactFlow, { Node, Edge, MiniMap, Controls, Background, ReactFlowProvider, useReactFlow } from 'reactflow'
+import ReactFlow, { Node, Edge, MiniMap, Controls, Background, Panel,ReactFlowProvider, useReactFlow } from 'reactflow'
 import React, { useEffect, useState, useContext, memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AuthContext, SnackbarContext } from '@services'
 import { useStore, usePersistedStore } from '@store'
-import { IFrameModal, nodeTypes } from '@components'
+import { IFrameModal, nodeTypes, ResponsiveMiniMap, LabeledSwitch } from '@components'
 import { Box, Skeleton, Button } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { LearningPathElementStatus, User } from '@core'
+import { AuthContext, SnackbarContext } from '@services'
+import { usePersistedStore, useStore } from '@store'
+import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
+import { useTranslation } from 'react-i18next'
 
 // custom fitView centering on first uncompleted element, needs to be in the react-flow component
 const CustomFitViewButton = ({ node }: { node: Node[] }) => {
@@ -47,7 +51,6 @@ export type TopicProps = {
  * @category Pages
  */
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
-  const theme = useTheme()
   const navigate = useNavigate()
   const authContext = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
@@ -61,10 +64,14 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
 
+  // Translation
+  const { t } = useTranslation()
+
   // States
   const [initialNodes, setInitialNodes] = useState<Node[]>()
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
+  const [isGrouped, setIsGrouped] = useState(true)
 
   // Search for the 'fit view'-button of <Controls/> and trigger click event
   /*const handleFitView = () => {
@@ -151,13 +158,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     courseId,
     getLearningPathElement,
     getUser,
-    theme,
     topicId,
     mapNodes,
     navigate,
     setInitialNodes,
     setInitialEdges,
-    learningPathElementStatus
+    learningPathElementStatus,
+    isGrouped
   ])
 
   /**
@@ -194,26 +201,35 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   return initialNodes && initialEdges && learningPathElementStatus ? (
     <Box height={'100%'}>
       <ReactFlowProvider>
-        <ReactFlow
-          nodes={initialNodes}
-          edges={initialEdges}
-          nodeTypes={nodeTypes}
-          fitView
-          onInit={() => {
-            setTimeout(() => {
-              handleCustomFitView()
-            }, 0)
-          }}
-          fitViewOptions={{
-            padding: 5,
-            minZoom: 0.75,
-            nodes: [{ id: initialNodes[0].id }]
-          }}>
-          <CustomFitViewButton node={initialNodes} />
-          <Background gap={16} />
-          <MiniMap nodeBorderRadius={2} />
-          <Controls />
-        </ReactFlow>
+      <ReactFlow
+        nodes={initialNodes}
+        edges={initialEdges}
+        nodeTypes={nodeTypes}
+        fitView
+        onInit={() => {
+          setTimeout(() => {
+            handleCustomFitView()
+          }, 0)
+        }}
+        fitViewOptions={{
+          padding: 5,
+          minZoom: 0.75,
+          nodes: [{ id: initialNodes[0].id }]
+        }}>
+        <ResponsiveMiniMap />
+        <CustomFitViewButton node={initialNodes} />
+        <Background gap={16} />
+        <MiniMap nodeBorderRadius={2} />
+        <Panel position="top-right">
+          <LabeledSwitch
+            labelLeft={t('pages.topic.grouped')}
+            labelRight={t('pages.topic.single')}
+            isGrouped={isGrouped}
+            setIsGrouped={setIsGrouped}
+          />
+        </Panel>
+        <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
+      </ReactFlow>
       </ReactFlowProvider>
       <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
     </Box>

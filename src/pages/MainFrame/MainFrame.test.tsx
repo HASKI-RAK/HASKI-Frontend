@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
-import { MainFrame } from './MainFrame'
 import Router, { MemoryRouter } from 'react-router-dom'
+import { MainFrame } from './MainFrame'
 
 const navigate = jest.fn()
 

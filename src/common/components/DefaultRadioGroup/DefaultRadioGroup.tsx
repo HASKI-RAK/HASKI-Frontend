@@ -1,12 +1,12 @@
-import { RadioGroupProps as DefaultRadioGroupProps } from '@common/components'
 import DefaultRadioGroup from '@mui/material/RadioGroup'
-import { memo, useCallback, ChangeEvent } from 'react'
+import { ChangeEvent, memo, useCallback } from 'react'
+import { RadioGroupProps as DefaultRadioGroupProps } from '@common/components'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
 
 /**

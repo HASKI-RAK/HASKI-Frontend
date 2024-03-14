@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
-import Footer from './Footer'
 import { createMemoryHistory } from 'history'
-import { Router } from 'react-router-dom'
 import * as router from 'react-router'
+import { Router } from 'react-router-dom'
+import Footer from './Footer'
 
 const navigate = jest.fn()
 

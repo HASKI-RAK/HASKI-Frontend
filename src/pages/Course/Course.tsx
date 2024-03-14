@@ -1,9 +1,11 @@
-import { Button, Card, CardContent, Typography, Box, Grid } from '@common/components'
+import log from 'loglevel'
+import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
+import { Box, Button, Card, CardContent, Grid, Typography } from '@common/components'
+import { useMediaQuery, useTheme } from '@common/hooks'
 import { CheckBox } from '@common/icons'
-import { SkeletonList, useLearningPathTopic, StyledLinearProgress } from '@components'
-import { useTheme, useMediaQuery } from '@common/hooks'
+import { SkeletonList, StyledLinearProgress, useLearningPathTopic } from '@components'
 import { useLearningPathTopicProgress } from './Course.hook'
 
 /**
