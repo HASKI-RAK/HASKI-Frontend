@@ -4,18 +4,29 @@ import { renderHook } from '@testing-library/react-hooks'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
-import { LearningElement, LearningPathElement, LearningPathLearningElement, StudentLearningElement, Topic } from '@core'
-import LazyLoadingLearningPathElement, { LazyLoadingLearningPathElementProps } from './LazyLoadingLearningPathElement'
+import { LearningElement, LearningPathLearningElement, StudentLearningElement, Topic } from '@core'
 import LocalNav, { LocalNavProps } from './LocalNav'
 import { getSortedLearningPath, useLearningPathElement, useLearningPathTopic } from './LocalNav.hooks'
-
 import resetModules = jest.resetModules
+import { AuthContext } from '@services'
+
+jest.mock('@common/hooks', () => ({
+  ...jest.requireActual('@common/hooks'),
+  useMediaQuery: jest.fn()
+}))
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'), // Preserve the original module behavior
+  useParams: jest.fn() // Mock useParams as a jest.fn()
+}))
 
 const navigate = jest.fn()
+const useParamsMock = jest.fn().mockReturnValue({ courseId: '1', topicId: '1' })
 
 describe('LocalNav tests', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+    jest.spyOn(router, 'useParams').mockImplementation(() => useParamsMock())
   })
 
   const mockStudentLearningElement: StudentLearningElement = {
@@ -49,14 +60,6 @@ describe('LocalNav tests', () => {
       learning_element: mockLearningElement
     }
   ]
-
-  const mockLearningPathElement: LearningPathElement = {
-    id: 1,
-    course_id: 1,
-    based_on: 'some-Algorithm',
-    calculated_on: 'today',
-    path: mockLearningPathLearningElement
-  }
 
   const mockTopics: Topic[] = [
     {
@@ -106,14 +109,8 @@ describe('LocalNav tests', () => {
     topics: mockTopics
   })
 
-  const mockUseLearningPathElement = jest.fn().mockReturnValue({
-    loadingElements: true,
-    learningPaths: mockLearningPathElement
-  })
-
   const props: LocalNavProps = {
-    useLearningPathTopic: mockUseLearningPathTopic,
-    useLearningPathElement: mockUseLearningPathElement
+    useLearningPathTopic: mockUseLearningPathTopic
   }
 
   it('should render the LocalNav', () => {
@@ -127,55 +124,14 @@ describe('LocalNav tests', () => {
     expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
   })
 
-  it('should render the LocalNav with Topic and learningElementPath loading Elements', () => {
-    const mockUseLearningPathTopic = jest.fn().mockReturnValue({
-      loading: false,
-      topics: mockTopics
-    })
-
-    const mockUseLearningPathElement = jest.fn().mockReturnValue({
-      loadingElements: true,
-      learningPaths: mockLearningPathElement
-    })
-
-    const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic,
-      useLearningPathElement: mockUseLearningPathElement
-    }
-
-    const { getAllByTestId } = render(
-      <MemoryRouter>
-        <LocalNav {...props} />
-      </MemoryRouter>
-    )
-
-    const topicAccordions = getAllByTestId(/topic-Accordion/)
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
-
-    fireEvent.click(topicAccordions[0])
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('true')
-
-    const loadingSkeletons = getAllByTestId(/LocalNav-Skeleton-Element/)
-    expect(loadingSkeletons).toHaveLength(1)
-
-    fireEvent.click(topicAccordions[0])
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
-  })
-
   it('should render the LocalNav with Topic and learningElementPath rendered', () => {
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
       topics: mockTopics
     })
 
-    const mockUseLearningPathElement = jest.fn().mockReturnValue({
-      loadingElements: false,
-      learningPaths: mockLearningPathElement
-    })
-
     const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic,
-      useLearningPathElement: mockUseLearningPathElement
+      useLearningPathTopic: mockUseLearningPathTopic
     }
 
     const result = render(
@@ -186,103 +142,106 @@ describe('LocalNav tests', () => {
     expect(result).toBeTruthy()
   })
 
-  it('should render the LocalNav with Topic and learningElementPath clicked (opened)', () => {
+  it('should render the LocalNav with all Topics, as text', () => {
+    jest.restoreAllMocks()
+
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
       topics: mockTopics
     })
 
-    const mockUseLearningPathElement = jest.fn().mockReturnValue({
-      loadingElements: false,
-      learningPaths: mockLearningPathElement
-    })
-
     const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic,
-      useLearningPathElement: mockUseLearningPathElement
+      useLearningPathTopic: mockUseLearningPathTopic
     }
 
-    const { getAllByTestId } = render(
-      <MemoryRouter>
+    const { getAllByRole } = render(
+      <MemoryRouter initialEntries={['/login']}>
         <LocalNav {...props} />
       </MemoryRouter>
     )
 
-    const topicAccordions = getAllByTestId(/topic-Accordion/)
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
-
-    fireEvent.click(topicAccordions[0])
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('true')
-
-    fireEvent.click(topicAccordions[0])
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
+    const topicList = getAllByRole('list')
+    expect(topicList[0].textContent).toContain('testtest2')
   })
 
-  it('should render the LocalNav with Topic and learningElementPath clicked on Element', () => {
+  it('should render the LocalNav with all Topics, as listelements', () => {
     const mockUseLearningPathTopic = jest.fn().mockReturnValue({
       loading: false,
       topics: mockTopics
     })
 
-    const mockUseLearningPathElement = jest.fn().mockReturnValue({
-      loadingElements: false,
-      learningPaths: mockLearningPathElement
-    })
-
     const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic,
-      useLearningPathElement: mockUseLearningPathElement
+      useLearningPathTopic: mockUseLearningPathTopic
     }
 
-    const { getByTestId, getAllByTestId } = render(
+    const { getAllByRole } = render(
       <MemoryRouter initialEntries={['/login']}>
         <LocalNav {...props} />
       </MemoryRouter>
     )
 
-    const topicAccordions = getAllByTestId(/topic-Accordion/)
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('false')
-
-    fireEvent.click(topicAccordions[0])
-    expect(topicAccordions[0].getAttribute('aria-expanded')).toBe('true')
-
-    fireEvent.click(getByTestId('Quiz on Chapter 3'))
+    const topicList = getAllByRole('listitem')
+    expect(topicList.length).toBe(2)
   })
 
-  it('should render the lazy learning path element with prop mock', () => {
-    const mockUseLearningPathElement = jest.fn().mockReturnValue({
-      loadingElements: false,
-      learningPaths: mockLearningPathElement
+  it('should render the LocalNav with all Topics, clicking on 2nd element', async () => {
+    const mockUseLearningPathTopic = jest.fn().mockReturnValue({
+      loading: false,
+      topics: mockTopics
     })
 
-    const props: LazyLoadingLearningPathElementProps = {
-      topic: mockTopics[0],
-      courseId: '2',
-      useLearningPathElement: mockUseLearningPathElement
+    const props: LocalNavProps = {
+      useLearningPathTopic: mockUseLearningPathTopic
     }
 
-    const { getByTestId } = render(
-      <MemoryRouter initialEntries={['/login']}>
-        <LazyLoadingLearningPathElement {...props} />
-      </MemoryRouter>
+    const { getAllByRole } = render(
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter initialEntries={['/login']}>
+          <LocalNav {...props} />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
-    fireEvent.click(getByTestId('Quiz on Chapter 3'))
+    await act(async () => {
+      const topicList = getAllByRole('button')
+      expect(topicList.length).toBe(2)
+      fireEvent.click(topicList[1])
+      await waitFor(() => {
+        expect(navigate).toHaveBeenCalledWith('/course/1/topic/2')
+      })
+    })
   })
 
-  it('should render the lazy learning path element without giving mock prop', () => {
-    const props: LazyLoadingLearningPathElementProps = {
-      topic: mockTopics[0],
-      courseId: '2'
+  it('should highlight selected topic', async () => {
+    const mockUseLearningPathTopic = jest.fn().mockReturnValue({
+      loading: false,
+      topics: mockTopics
+    })
+
+    const props: LocalNavProps = {
+      useLearningPathTopic: mockUseLearningPathTopic
     }
 
-    const { container } = render(
-      <MemoryRouter initialEntries={['/login']}>
-        <LazyLoadingLearningPathElement {...props} />
-      </MemoryRouter>
+    const { getAllByRole, getByTestId } = render(
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter initialEntries={['/course/1/topic/1']}>
+          <LocalNav {...props} />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
-    expect(container.innerHTML).toContain('MuiSkeleton-root')
+    await act(async () => {
+      const topicListButton = getAllByRole('button')
+      const topicList = getByTestId('topic-list-item-1')
+      expect(topicListButton.length).toBe(2)
+      expect(topicListButton[0].textContent).toContain('test')
+      expect(topicListButton[1].textContent).toContain('test2')
+      fireEvent.click(topicListButton[1])
+      await waitFor(() => {
+        expect(navigate).toHaveBeenCalledWith('/course/1/topic/2')
+        expect(topicList).toHaveStyle('background-color: lightgrey')
+      })
+    })
   })
 })
 
@@ -399,7 +358,7 @@ describe('getSortedLearningPath works as expected', () => {
 
   test('fetches learning path topics and returns the loading state', async () => {
     await act(async () => {
-      const { result, waitForNextUpdate } = renderHook(() => useLearningPathTopic('2'))
+      const { result } = renderHook(() => useLearningPathTopic('2'))
 
       await waitFor(() => {
         expect(result.current.loading).toBe(false)

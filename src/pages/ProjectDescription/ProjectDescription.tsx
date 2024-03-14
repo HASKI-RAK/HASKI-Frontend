@@ -27,7 +27,7 @@ const ProjectDescription = () => {
             maxHeight: { xs: '6.25rem', sm: '9.375rem', md: '15.625rem', lg: '18.75rem' },
             maxWidth: { xs: '6.25rem', sm: '9.375rem', md: '15.625rem', lg: '18.75rem' }
           }}
-          src="/LogoPng.png"
+          src="/LogoHaski.png"
         />
       </TextCardRight>
       <TextStepper header={t('pages.projectdescription.approachesHeader')}>

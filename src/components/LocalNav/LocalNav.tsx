@@ -1,106 +1,108 @@
-import { Suspense, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Stack, Typography } from '@common/components'
-import { ExpandMore } from '@common/icons'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Box, Divider, Stack, Typography, Grid, List, ListItem, ListItemButton, ListItemText, Skeleton } from '@common/components'
+import { FiberManualRecord } from '@common/icons'
 import {
   SkeletonList,
-  useLearningPathElement as _useLearningPathElement,
-  useLearningPathTopic as _useLearningPathTopic
+  useLearningPathTopic as _useLearningPathTopic,
+  Fraction
 } from '@components'
-import { LearningPathElement, Topic } from '@core'
-import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
+import { Topic } from '@core'
+import React from 'react'
+import { useLearningPathTopicProgress } from './../../pages/Course/Course.hook'
+import { Theme } from '@common/theme'
 
 /**
  *  Local navigation component props.
  *  @prop {@link _useLearningPathTopic} - hook to get learning path topics
- *  @prop {@link _useLearningPathElement} - hook to get learning path elements
  */
 export type LocalNavProps = {
   useLearningPathTopic?: (courseId: string) => { loading: boolean; topics: Topic[] }
-  useLearningPathElement?: (
-    topic: Topic,
-    courseId: string
-  ) => {
-    loadingElements: boolean
-    learningPaths: LearningPathElement | undefined
-  }
 }
 
 /**
  * Local navigation component.
- * @param param - component props. The {@link LocalNavProps#useLearningPathTopic} and {@link LocalNavProps#useLearningPathElement} are optional.
+ * @param param - component props. The {@link LocalNavProps#useLearningPathTopic} and {@link LocalNavProps#useLearningPathElement} are
+ *   optional.
  * @returns
  */
-const LocalNav = ({
-  useLearningPathTopic = _useLearningPathTopic,
-  useLearningPathElement = _useLearningPathElement
-}: LocalNavProps) => {
+const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProps) => {
   const { t } = useTranslation()
-  const { courseId } = useParams() as { courseId: string }
-  const { loading, topics } = useLearningPathTopic(courseId)
+  const { courseId, topicId } = useParams() as { courseId: string; topicId: string }
+  const navigate = useNavigate()
 
-  const [openAccordion, setOpenAccordion] = useState<number | null>(null)
-
-  const handleAccordionClick = (index: number) => {
-    setOpenAccordion(openAccordion === index ? null : index)
-  }
+  const { topics, loading: topicLoading } = useLearningPathTopic(courseId)
+  const { calculatedTopicProgress, loading: progressLoading } = useLearningPathTopicProgress(courseId, topics)
 
   return (
-    <Box flexGrow={1}>
-      <Typography variant="h5">{t('appGlobal.topics')}</Typography>
+    <Box flexGrow={1} sx={{ minWidth: '20rem' }}>
+      <Grid sx={{ ml: '0.9rem' }}>
+        <Typography variant="h5">{t('appGlobal.topics')}</Typography>
+      </Grid>
       <Divider />
-      {loading ? (
+      {topicLoading ? (
         <Box>
           <Stack spacing={1}>
             <SkeletonList />
           </Stack>
         </Box>
       ) : (
-        <>
+        <List sx={{ width: '100%', bgcolor: 'background.paper', p: 0 }}>
           {topics.map((topic, index) => (
-            <Accordion
-              id="local-nav-accordion"
-              disableGutters
-              key={`topic-Accordion-${topic.id}`}
+            <Box
+              key={topic.id}
+              data-testid={`topic-list-item-${topic.id}`}
               sx={{
-                borderColor: 'divider',
-                boxShadow: (theme) => `0 1px 0 ${theme.palette.secondary.main}`,
-                border: '1px',
-                '&:last-of-type': {
-                  borderBottomLeftRadius: 0,
-                  borderBottomRightRadius: 0
-                }
-              }}
-              expanded={openAccordion === index}
-              onChange={() => handleAccordionClick(index)}>
-              <AccordionSummary
-                expandIcon={<ExpandMore />}
-                data-testid={`topic-AccordionSummary-${topic.id}`}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-                sx={{
-                  backgroundColor: 'white',
-                  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-                    transform: 'rotate(-90deg)'
-                  }
-                }}>
-                <Typography variant="h6">{topic.name}</Typography>
-              </AccordionSummary>
-              <AccordionDetails sx={{ flexDirection: 'column' }}>
-                {openAccordion === index && (
-                  <Suspense fallback={<div>{t('appGlobal.loading')}</div>}>
-                    <LazyLoadingLearningPathElement
-                      topic={topic}
-                      courseId={courseId}
-                      useLearningPathElement={useLearningPathElement}
+                width: '100%',
+                bgcolor: parseInt(topicId) == topic.id ? 'lightgrey' : 'background.paper',
+                borderRadius: 2
+              }}>
+              <ListItem key={topic.id} sx={{ width: '100%', p: 0 }} color={'black'}>
+                <ListItemButton
+                  key={topic.id}
+                  sx={{ width: '100%' }}
+                  onClick={() => {
+                    navigate(`/course/${courseId}/topic/${topic.id}`)
+                  }}>
+                  <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                    <FiberManualRecord
+                      sx={{
+                        color:
+                          parseInt(topicId) == topic.id
+                            ? (theme: Theme) => theme.palette.primary.main
+                            : (theme: Theme) => theme.palette.info.dark,
+                        width: '0.5rem'
+                      }}
                     />
-                  </Suspense>
-                )}
-              </AccordionDetails>
-            </Accordion>
+                    <Grid item xs={7} sm={7} md={8} lg={8} xl={8}>
+                      <ListItemText primary={topic.name} primaryTypographyProps={{ fontSize: 18 }} />
+                    </Grid>
+                    <Grid item xs={3} sm={3} md={3} lg={2} xl={2}>
+                      {calculatedTopicProgress[index] && !progressLoading ? (
+                        <ListItemText
+                          primary={
+                            <Fraction
+                              numerator={calculatedTopicProgress[index][0]}
+                              denominator={calculatedTopicProgress[index][1]}
+                            />
+                          }
+                          primaryTypographyProps={{
+                            p: 0.25,
+                            borderRadius: 3,
+                            bgcolor: (theme: Theme) => theme.palette.info.light
+                          }}
+                          sx={{ textAlign: 'center' }}
+                        />
+                      ) : (
+                        <Skeleton variant="text" width={'70%'} height={20} sx={{ ml: 2 }} />
+                      )}
+                    </Grid>
+                  </Grid>
+                </ListItemButton>
+              </ListItem>
+            </Box>
           ))}
-        </>
+        </List>
       )}
     </Box>
   )
