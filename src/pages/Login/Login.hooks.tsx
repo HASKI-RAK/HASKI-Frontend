@@ -1,6 +1,6 @@
 import { AuthContext, SnackbarContext, postLogin, fetchRedirectMoodleLogin } from '@services'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useRef } from 'react'
 
 export type LoginHookParams = {
   setIsLoading: (isLoading: boolean) => void
@@ -26,14 +26,26 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
   const { addSnackbar } = useContext(SnackbarContext)
+  const popup = useRef<Window | null>(null)
 
   const onMoodleLogin = () => {
     props.setIsLoading(true)
     fetchRedirectMoodleLogin()
-      .then((response) =>
+      .then((response) =>{
         // 👇️ redirects to Moodle LTI launch acticity
-        window.location.replace(response.lti_launch_view)
-      )
+        //window.location.replace(response.lti_launch_view)
+        popup.current = window.open(response.lti_launch_view, 'login_window', 'popup=true, width=600, height=600, left=500, locationbar=0')
+        if (popup.current) {
+          popup.current.focus()
+          window.addEventListener('message', (event) => {
+            if(event.source === popup.current && event.data === 'login_success'){
+                navigate('/', { replace: true })
+              }
+            })
+        } else {
+          window.location.replace(response.lti_launch_view)
+        }
+  })
       .catch((error) => {
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
       })
@@ -42,7 +54,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
       })
   }
 
-  // on mount, read search param 'nounce' and set it to state
+  // on mount, read search param 'nonce' and set it to state
   useEffect(() => {
     if (!props.nonce) return
 
@@ -51,11 +63,16 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
         // supply auth context
         authContext.setExpire(response.expiration)
         // then redirect to home page
+        
         navigate('/', { replace: true })
+        if(window.opener !== null) {
+          window.opener.postMessage('login_success', window.location.origin)
+          window.close()
+        }
       })
       .catch((error: string) => {
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
-        navigate('/login', { replace: true })
+        navigate('/', { replace: true })
       })
   }, [])
 

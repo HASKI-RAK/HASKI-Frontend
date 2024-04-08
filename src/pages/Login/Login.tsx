@@ -19,7 +19,7 @@ type LoginProps = {
  * The nonce is passed by the LTI provider and is used to authenticate the user.
  * If the user is already authenticated, the page redirects to the home page.
  * This is done in the {@link useLogin | useLogin hook}.
- * @param props - Dependency injects {@link useLogin} to control the sumbit on the page. Also displays a lodaing indicator when submitting.
+ * @param props - Dependency injects {@link useLogin} to control the sumbit on the page. Also displays a loading indicator when submitting.
  * @category Pages
  */
 export const Login = ({ useLogin = _useLogin }: LoginProps) => {
