@@ -72,7 +72,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
       })
       .catch((error: string) => {
         addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
-        navigate('/', { replace: true })
+        navigate('/login', { replace: true })
       })
   }, [])
 
