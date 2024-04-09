@@ -48,5 +48,6 @@ export { default as LinearProgressWithLabel } from './StyledLinearProgress/Linea
 export { StyledLinearProgress } from './StyledLinearProgress/StyledLinearProgress'
 export { default as LabeledSwitch } from './LabeledSwitch/LabeledSwitch'
 export { default as ResponsiveMiniMap } from './ResponsiveMiniMap/ResponsiveMiniMap'
+export { default as Newsbanner } from './Newsbanner/Newsbanner'
 
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure
