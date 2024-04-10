@@ -13,13 +13,14 @@ import LearningPathElementStatusSlice, {
 } from '../Slices/LearningPathElementStatusSlice'
 import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
 import UserSlice, { createUserSlice } from '../Slices/UserSlice'
+import NewsSlice, { createNewsSlice } from '../Slices/NewsSlice'
 
 export type StoreState = LearningPathElementSlice &
   CourseSlice &
   CoursesSlice &
   LearningPathTopicSlice &
   LearningPathElementSpecificStatusSlice
-export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice
+export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & NewsSlice
 
 export const resetters: (() => void)[] = []
 
@@ -36,6 +37,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
     persist(
       (...a) => ({
         ...createUserSlice(...a),
+        ...createNewsSlice(...a),
         ...createLearningPathElementStatusSlice(...a),
         ...createAuthSlice(...a)
       }),
@@ -44,6 +46,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
         // Here we can whitelist the keys we want to persist
         partialize: (state) => ({
           _user: state._user,
+          _news: state._news,
           _learningPathElementStatus: state._learningPathElementStatus,
           expire: state.expire
         }),
