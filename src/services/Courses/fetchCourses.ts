@@ -1,6 +1,6 @@
-import { CourseReturn, CourseResponse } from '@core'
-import { fetchData } from '../RequestResponse'
+import { CourseResponse, CourseReturn } from '@core'
 import { getConfig } from '@shared'
+import { fetchData } from '../RequestResponse'
 
 /*
  * fetchCourses function.

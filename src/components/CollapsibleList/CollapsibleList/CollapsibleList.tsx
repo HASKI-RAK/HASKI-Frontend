@@ -1,6 +1,6 @@
-import { Typewriter, CollapsibleListEntry, CollapsibleListEntryContentProps } from '@components'
-import { useCallback, useEffect, useRef, useState, memo } from 'react'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { Grid } from '@common/components'
+import { CollapsibleListEntry, CollapsibleListEntryContentProps, Typewriter } from '@components'
 import { useViewport } from '@services'
 
 /**

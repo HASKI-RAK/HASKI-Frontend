@@ -1,6 +1,5 @@
-import { Box, Modal } from '@common/components'
-import { Fab } from '@mui/material'
 import { memo } from 'react'
+import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
 
 const style_box = {

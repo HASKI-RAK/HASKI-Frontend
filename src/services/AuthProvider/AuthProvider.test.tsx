@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom'
-import { AuthProvider } from '@services'
 import { act, render, renderHook } from '@testing-library/react'
-import { useAuthProvider } from './AuthProvider.hooks'
 import { mockServices } from 'jest.setup'
+import { AuthProvider } from '@services'
+import { useAuthProvider } from './AuthProvider.hooks'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({

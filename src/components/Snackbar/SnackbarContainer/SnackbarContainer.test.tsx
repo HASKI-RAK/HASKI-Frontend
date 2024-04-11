@@ -1,7 +1,7 @@
-import { SnackbarContext, SnackbarContextType } from '@services'
-import { act, fireEvent, render } from '@testing-library/react'
-import SnackbarContainer from './SnackbarContainer'
 import '@testing-library/jest-dom'
+import { act, fireEvent, render } from '@testing-library/react'
+import { SnackbarContext, SnackbarContextType } from '@services'
+import SnackbarContainer from './SnackbarContainer'
 
 const mockContext = {
   snackbarsErrorWarning: [

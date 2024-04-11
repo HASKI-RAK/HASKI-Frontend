@@ -1,28 +1,27 @@
 ﻿import i18next from 'i18next'
+import log from 'loglevel'
+import React from 'react'
 import { initReactI18next } from 'react-i18next'
 import { SnackbarContext } from '@services'
-import React from 'react'
-
-// Custom type options for i18next prevents return type of null
-// https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
-declare module 'i18next' {
-  interface CustomTypeOptions {
-    returnNull: false
-  }
-}
-
-// Custom type options for i18next prevents return type of null
-// https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
-declare module 'i18next' {
-  interface CustomTypeOptions {
-    returnNull: false
-  }
-}
-
 // Import all translation files
 import translationEnglish from './translation/translationEnglish.json'
 import translationGerman from './translation/translationGerman.json'
-import log from 'loglevel'
+
+// Custom type options for i18next prevents return type of null
+// https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    returnNull: false
+  }
+}
+
+// Custom type options for i18next prevents return type of null
+// https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    returnNull: false
+  }
+}
 
 //define the available languages
 const resources = {

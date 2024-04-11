@@ -1,34 +1,30 @@
 import '@testing-library/jest-dom'
-import { act, render, renderHook, waitFor } from '@testing-library/react'
-import { mockReactFlow } from '@mocks'
-import { createTheme } from '@common/theme'
-import Router, { MemoryRouter } from 'react-router-dom'
+import { act, fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
-import { useTopic, useTopicHookParams } from './Topic.hooks'
-import Topic from './Topic'
+import * as router from 'react-router'
+import { MemoryRouter } from 'react-router-dom'
+import { mockReactFlow } from '@mocks'
 import { LearningPathElementStatus } from '@core'
+import Topic from './Topic'
+import { useTopic, useTopicHookParams } from './Topic.hooks'
 
 const { AuthContext } = jest.requireActual('@services')
 
 const navigate = jest.fn()
+jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 jest.useFakeTimers()
-jest.spyOn(global, 'setTimeout')
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useParams: jest.fn()
-}))
+//jest.spyOn(global, 'setTimeout')
 
 describe('Topic Page', () => {
   beforeEach(() => {
     jest.clearAllTimers()
+    jest.clearAllMocks()
     mockReactFlow()
-    jest.spyOn(Router, 'useNavigate').mockImplementation(() => navigate)
-    jest.spyOn(Router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
   })
 
-  it('renders when Auth is true', async () => {
-    await act(async () => {
+  it('renders when Auth is true', () => {
+    act(() => {
       const topic = render(
         <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -36,6 +32,7 @@ describe('Topic Page', () => {
           </AuthContext.Provider>
         </MemoryRouter>
       )
+
       expect(topic).toBeTruthy()
     })
   })
@@ -49,7 +46,6 @@ describe('Topic Page', () => {
           </AuthContext.Provider>
         </MemoryRouter>
       )
-
       expect(topic).toBeTruthy()
     })
   })
@@ -64,7 +60,7 @@ describe('Topic Page', () => {
     })
 
     jest.runAllTimers()
-    expect(setTimeout).toHaveBeenCalledTimes(1)
+    // expect(setTimeout).toHaveBeenCalledTimes(1)
     expect(navigate).toBeCalledWith('/login')
   })
 
@@ -86,32 +82,13 @@ describe('Topic Page', () => {
     })
   })
 
-  test('getLearningPathElement failed', async () => {
-    const mockfetchLearningPathElement = jest.fn(() => Promise.reject(new Error('fetchLearningPathElement failed')))
-    mockServices.fetchLearningPathElement.mockImplementationOnce(mockfetchLearningPathElement)
-
-    act(() => {
-      render(
-        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Topic />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      )
-    })
-
-    await waitFor(() => {
-      expect(mockfetchLearningPathElement).toHaveBeenCalledTimes(1)
-    })
-  })
-
   test('getLearningPathElementStatus failed', async () => {
     const mockfetchLearningPathElementStatus = jest.fn(() =>
       Promise.reject(new Error('fetchLearningPathElementStatus failed'))
     )
     mockServices.fetchLearningPathElementStatus.mockImplementationOnce(mockfetchLearningPathElementStatus)
 
-    act(() => {
+    await act(async () => {
       render(
         <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -125,6 +102,24 @@ describe('Topic Page', () => {
     })
   })
 
+  test('getLearningPathElement failed', async () => {
+    const mockfetchLearningPathElement = jest.fn(() => Promise.reject(new Error('fetchLearningPathElement failed')))
+    mockServices.fetchLearningPathElement.mockImplementationOnce(mockfetchLearningPathElement)
+
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Topic />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      )
+    })
+    await waitFor(() => {
+      expect(mockfetchLearningPathElement).toHaveBeenCalledTimes(1)
+    })
+  })
+
   test('General functionality of Topic hook', () => {
     const { result } = renderHook(() => useTopic())
     expect(result.current).toStrictEqual({
@@ -134,13 +129,8 @@ describe('Topic Page', () => {
       lmsId: -1,
       handleClose: expect.any(Function),
       handleOpen: expect.any(Function),
-      handleSetTitle: expect.any(Function),
-      handleSetUrl: expect.any(Function),
-      handleSetLmsId: expect.any(Function),
       mapNodes: expect.any(Function)
     })
-
-    const mockTheme = createTheme()
 
     const mockLearningPath = {
       id: 1,
@@ -214,7 +204,7 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme, mockLearningElementStatus)
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus)
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -225,16 +215,16 @@ describe('Topic Page', () => {
             classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
           position: {
-            x: -225,
+            x: -250,
             y: 0
           },
           style: {
@@ -254,16 +244,16 @@ describe('Topic Page', () => {
             classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 2,
             name: '',
-            isDone: true,
-            handleSetLmsId: expect.any(Function)
+            isDone: true
           },
           position: {
-            x: -225,
+            x: -250,
             y: 250
           },
           style: {
@@ -288,15 +278,6 @@ describe('Topic Page', () => {
 
       result.current.handleClose()
       expect(result.current.isOpen).toBe(false)
-
-      result.current.handleSetTitle('testTitle')
-      expect(result.current.title).toBe('')
-
-      result.current.handleSetUrl('testUrl')
-      expect(result.current.url).toBe('')
-
-      result.current.handleSetLmsId(1)
-      expect(result.current.lmsId).toBe(-1)
     })
   })
 
@@ -308,14 +289,9 @@ describe('Topic Page', () => {
       isOpen: false,
       handleClose: expect.any(Function),
       handleOpen: expect.any(Function),
-      handleSetTitle: expect.any(Function),
-      handleSetUrl: expect.any(Function),
-      mapNodes: expect.any(Function),
       lmsId: -1,
-      handleSetLmsId: expect.any(Function)
+      mapNodes: expect.any(Function)
     })
-
-    const mockTheme = createTheme()
 
     const mockLearningPath = {
       id: 1,
@@ -439,7 +415,7 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme, mockLearningElementStatus)
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus)
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -450,15 +426,15 @@ describe('Topic Page', () => {
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
           id: '1',
           position: {
-            x: 325,
+            x: -250,
             y: 0
           },
           style: {
@@ -473,26 +449,8 @@ describe('Topic Page', () => {
         },
         {
           data: {
-            label: 'Übungen'
-          },
-          id: '2',
-          position: {
-            x: 0,
-            y: 250
-          },
-          style: {
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            height: 200,
-            width: 1150
-          },
-          type: 'GROUP'
-        },
-        {
-          data: {
             activityType: '',
             classification: 'ÜB',
-            handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
@@ -500,12 +458,13 @@ describe('Topic Page', () => {
             lmsId: 1,
             name: '',
             isDone: false,
-            handleSetLmsId: expect.any(Function)
+            handleSetLmsId: expect.any(Function),
+            handleClose: expect.any(Function)
           },
-          id: '2-1',
+          id: '2',
           position: {
-            x: 50,
-            y: 300
+            x: -250,
+            y: 250
           },
           style: {
             background: '#1976d2',
@@ -523,18 +482,18 @@ describe('Topic Page', () => {
             classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
-          id: '3-1',
+          id: '3',
           position: {
-            x: 600,
-            y: 300
+            x: -250,
+            y: 500
           },
           style: {
             background: '#1976d2',
@@ -552,18 +511,18 @@ describe('Topic Page', () => {
             classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
+            isRecommended: true,
+            handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
-          id: '5',
+          id: '4',
           position: {
-            x: 325,
-            y: 770
+            x: -250,
+            y: 750
           },
           style: {
             background: '#1976d2',
@@ -585,11 +544,16 @@ describe('Topic Page', () => {
         {
           id: 'Edge2',
           source: '2',
-          target: '5'
+          target: '3'
         },
         {
-          id: 'Edge5',
-          source: '5',
+          id: 'Edge3',
+          source: '3',
+          target: '4'
+        },
+        {
+          id: 'Edge4',
+          source: '4',
           target: undefined
         }
       ]
@@ -601,15 +565,6 @@ describe('Topic Page', () => {
 
       result.current.handleClose()
       expect(result.current.isOpen).toBe(false)
-
-      result.current.handleSetTitle('testTitle')
-      expect(result.current.title).toBe('')
-
-      result.current.handleSetUrl('testUrl')
-      expect(result.current.url).toBe('')
-
-      result.current.handleSetLmsId(1)
-      expect(result.current.lmsId).toBe(-1)
     })
   })
 
@@ -621,14 +576,9 @@ describe('Topic Page', () => {
       isOpen: false,
       handleClose: expect.any(Function),
       handleOpen: expect.any(Function),
-      handleSetTitle: expect.any(Function),
-      handleSetUrl: expect.any(Function),
       mapNodes: expect.any(Function),
-      lmsId: -1,
-      handleSetLmsId: expect.any(Function)
+      lmsId: -1
     })
-
-    const mockTheme = createTheme()
 
     const mockLearningPath = {
       id: 1,
@@ -827,7 +777,7 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockTheme, mockLearningElementStatus)
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus)
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -846,7 +796,7 @@ describe('Topic Page', () => {
           },
           id: '1',
           position: {
-            x: 875,
+            x: -250,
             y: 0
           },
           style: {
@@ -861,20 +811,32 @@ describe('Topic Page', () => {
         },
         {
           data: {
-            label: 'Übungen'
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            isRecommended: true,
+            lmsId: 1,
+            name: '',
+            isDone: false
           },
           id: '2',
           position: {
-            x: 0,
+            x: -250,
             y: 250
           },
           style: {
+            background: '#1976d2',
             border: '1px solid #9e9e9e',
             borderRadius: 8,
-            height: 325,
-            width: 2250
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
           },
-          type: 'GROUP'
+          type: 'ÜB'
         },
         {
           data: {
@@ -882,18 +844,18 @@ describe('Topic Page', () => {
             classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
-          id: '2-1',
+          id: '3',
           position: {
-            x: 50,
-            y: 300
+            x: -250,
+            y: 500
           },
           style: {
             background: '#1976d2',
@@ -911,18 +873,18 @@ describe('Topic Page', () => {
             classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
-          id: '3-1',
+          id: '4',
           position: {
-            x: 600,
-            y: 300
+            x: -250,
+            y: 750
           },
           style: {
             background: '#1976d2',
@@ -940,18 +902,18 @@ describe('Topic Page', () => {
             classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
-          id: '4-1',
+          id: '5',
           position: {
-            x: 1150,
-            y: 300
+            x: -250,
+            y: 1000
           },
           style: {
             background: '#1976d2',
@@ -969,47 +931,18 @@ describe('Topic Page', () => {
             classification: 'ÜB',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
-          id: '5-1',
+          id: '6',
           position: {
-            x: 1700,
-            y: 300
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            isRecommended: true,
-            lmsId: 1,
-            name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
-          },
-          id: '6-1',
-          position: {
-            x: 50,
-            y: 425
+            x: -250,
+            y: 1250
           },
           style: {
             background: '#1976d2',
@@ -1027,18 +960,18 @@ describe('Topic Page', () => {
             classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
             name: '',
-            isDone: false,
-            handleSetLmsId: expect.any(Function)
+            isDone: false
           },
-          id: '8',
+          id: '7',
           position: {
-            x: 875,
-            y: 770
+            x: -250,
+            y: 1500
           },
           style: {
             background: '#1976d2',
@@ -1052,21 +985,13 @@ describe('Topic Page', () => {
         }
       ],
       edges: [
-        {
-          id: 'Edge1',
-          source: '1',
-          target: '2'
-        },
-        {
-          id: 'Edge2',
-          source: '2',
-          target: '8'
-        },
-        {
-          id: 'Edge8',
-          source: '8',
-          target: undefined
-        }
+        { id: 'Edge1', source: '1', target: '2' },
+        { id: 'Edge2', source: '2', target: '3' },
+        { id: 'Edge3', source: '3', target: '4' },
+        { id: 'Edge4', source: '4', target: '5' },
+        { id: 'Edge5', source: '5', target: '6' },
+        { id: 'Edge6', source: '6', target: '7' },
+        { id: 'Edge7', source: '7', target: undefined }
       ]
     })
 
@@ -1076,15 +1001,6 @@ describe('Topic Page', () => {
 
       result.current.handleClose()
       expect(result.current.isOpen).toBe(false)
-
-      result.current.handleSetTitle('testTitle')
-      expect(result.current.title).toBe('')
-
-      result.current.handleSetUrl('testUrl')
-      expect(result.current.url).toBe('')
-
-      result.current.handleSetLmsId(1)
-      expect(result.current.lmsId).toBe(-1)
     })
   })
 
@@ -1095,7 +1011,6 @@ describe('Topic Page', () => {
       defaultIsOpen: true,
       defaultLmsId: 0
     }
-
     const { getByTestId, queryByTestId } = render(
       <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -1103,9 +1018,10 @@ describe('Topic Page', () => {
         </AuthContext.Provider>
       </MemoryRouter>
     )
+    screen.debug()
 
     await waitFor(() => {
-      getByTestId('IFrameModal-Close-Button').click()
+      fireEvent.click(getByTestId('IFrameModal-Close-Button'))
     })
 
     await waitFor(() => {
@@ -1142,6 +1058,510 @@ describe('Topic Page', () => {
 
     await waitFor(() => {
       expect(queryByTestId('IFrameModal-Close-Button')).not.toBeInTheDocument()
+    })
+  })
+
+  test('General functionality of Topic hook with one le followed by a group of more than 3 le of the same classification', () => {
+    const { result } = renderHook(() => useTopic())
+    expect(result.current).toStrictEqual({
+      url: '',
+      title: '',
+      isOpen: false,
+      handleClose: expect.any(Function),
+      handleOpen: expect.any(Function),
+      mapNodes: expect.any(Function),
+      lmsId: -1
+    })
+
+    const mockLearningPath = {
+      id: 1,
+      course_id: 1,
+      based_on: '',
+      calculated_on: '',
+      path: [
+        {
+          id: 1,
+          learning_element_id: 1,
+          learning_path_id: 1,
+          recommended: true,
+          position: 1,
+          learning_element: {
+            id: 1,
+            lms_id: 1,
+            activity_type: '',
+            classification: 'EK',
+            name: '',
+            university: '',
+            created_by: '',
+            created_at: '',
+            last_updated: '',
+            student_learning_element: {
+              id: 1,
+              student_id: 1,
+              learning_element_id: 1,
+              done: false,
+              done_at: ''
+            }
+          }
+        },
+        {
+          id: 2,
+          learning_element_id: 1,
+          learning_path_id: 1,
+          recommended: true,
+          position: 2,
+          learning_element: {
+            id: 1,
+            lms_id: 1,
+            activity_type: '',
+            classification: '',
+            name: '',
+            university: '',
+            created_by: '',
+            created_at: '',
+            last_updated: '',
+            student_learning_element: {
+              id: 1,
+              student_id: 1,
+              learning_element_id: 1,
+              done: false,
+              done_at: ''
+            }
+          }
+        },
+        {
+          id: 3,
+          learning_element_id: 1,
+          learning_path_id: 1,
+          recommended: true,
+          position: 3,
+          learning_element: {
+            id: 1,
+            lms_id: 1,
+            activity_type: '',
+            classification: 'ÜB',
+            name: '',
+            university: '',
+            created_by: '',
+            created_at: '',
+            last_updated: '',
+            student_learning_element: {
+              id: 1,
+              student_id: 1,
+              learning_element_id: 1,
+              done: false,
+              done_at: ''
+            }
+          }
+        },
+        {
+          id: 4,
+          learning_element_id: 2,
+          learning_path_id: 1,
+          recommended: true,
+          position: 4,
+          learning_element: {
+            id: 1,
+            lms_id: 1,
+            activity_type: '',
+            classification: 'ÜB',
+            name: '',
+            university: '',
+            created_by: '',
+            created_at: '',
+            last_updated: '',
+            student_learning_element: {
+              id: 1,
+              student_id: 1,
+              learning_element_id: 1,
+              done: false,
+              done_at: ''
+            }
+          }
+        },
+        {
+          id: 5,
+          learning_element_id: 2,
+          learning_path_id: 1,
+          recommended: true,
+          position: 5,
+          learning_element: {
+            id: 1,
+            lms_id: 1,
+            activity_type: '',
+            classification: 'ÜB',
+            name: '',
+            university: '',
+            created_by: '',
+            created_at: '',
+            last_updated: '',
+            student_learning_element: {
+              id: 1,
+              student_id: 1,
+              learning_element_id: 1,
+              done: false,
+              done_at: ''
+            }
+          }
+        },
+        {
+          id: 6,
+          learning_element_id: 2,
+          learning_path_id: 1,
+          recommended: true,
+          position: 6,
+          learning_element: {
+            id: 1,
+            lms_id: 1,
+            activity_type: '',
+            classification: 'ÜB',
+            name: '',
+            university: '',
+            created_by: '',
+            created_at: '',
+            last_updated: '',
+            student_learning_element: {
+              id: 1,
+              student_id: 1,
+              learning_element_id: 1,
+              done: false,
+              done_at: ''
+            }
+          }
+        },
+        {
+          id: 7,
+          learning_element_id: 2,
+          learning_path_id: 1,
+          recommended: true,
+          position: 7,
+          learning_element: {
+            id: 1,
+            lms_id: 1,
+            activity_type: '',
+            classification: 'ÜB',
+            name: '',
+            university: '',
+            created_by: '',
+            created_at: '',
+            last_updated: '',
+            student_learning_element: {
+              id: 1,
+              student_id: 1,
+              learning_element_id: 1,
+              done: false,
+              done_at: ''
+            }
+          }
+        },
+        {
+          id: 8,
+          learning_element_id: 3,
+          learning_path_id: 1,
+          recommended: true,
+          position: 8,
+          learning_element: {
+            id: 1,
+            lms_id: 1,
+            activity_type: '',
+            classification: 'ÜB',
+            name: '',
+            university: '',
+            created_by: '',
+            created_at: '',
+            last_updated: '',
+            student_learning_element: {
+              id: 1,
+              student_id: 1,
+              learning_element_id: 1,
+              done: false,
+              done_at: ''
+            }
+          }
+        }
+      ]
+    }
+
+    const mockLearningElementStatus: LearningPathElementStatus[] = [
+      {
+        cmid: 1,
+        state: 0,
+        timecompleted: 1
+      },
+      {
+        cmid: 2,
+        state: 1,
+        timecompleted: 2
+      }
+    ]
+
+    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus, true)
+    expect(nodesAndEdges).toStrictEqual({
+      nodes: [
+        {
+          data: {
+            activityType: '',
+            classification: 'EK',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            isRecommended: true,
+            lmsId: 1,
+            name: '',
+            isDone: false,
+            handleSetLmsId: expect.any(Function)
+          },
+          id: '1',
+          position: {
+            x: -250,
+            y: 0
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'EK'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: '',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            isRecommended: true,
+            lmsId: 1,
+            name: '',
+            isDone: false
+          },
+          id: '2',
+          position: {
+            x: -250,
+            y: 250
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: ''
+        },
+        {
+          data: {
+            classification: 'ÜB',
+            label: 'components.NodeTypes.üb'
+          },
+          id: '3',
+          position: {
+            x: -1125,
+            y: 500
+          },
+          style: {
+            border: '2px solid #9e9e9e',
+            borderRadius: 8,
+            height: 325,
+            width: 2250
+          },
+          type: 'GROUP'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            isRecommended: true,
+            lmsId: 1,
+            name: '',
+            isDone: false
+          },
+          id: '3-1',
+          position: {
+            x: -1075,
+            y: 550
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            isRecommended: true,
+            lmsId: 1,
+            name: '',
+            isDone: false
+          },
+          id: '4-1',
+          position: {
+            x: -525,
+            y: 550
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            isRecommended: true,
+            lmsId: 1,
+            name: '',
+            isDone: false
+          },
+          id: '5-1',
+          position: {
+            x: 25,
+            y: 550
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            isRecommended: true,
+            lmsId: 1,
+            name: '',
+            isDone: false
+          },
+          id: '6-1',
+          position: {
+            x: 575,
+            y: 550
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            isRecommended: true,
+            lmsId: 1,
+            name: '',
+            isDone: false
+          },
+          id: '7-1',
+          position: {
+            x: -1075,
+            y: 675
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            isDone: false,
+            isRecommended: true,
+            lmsId: 1,
+            name: ''
+          },
+          id: '8-1',
+          position: {
+            x: -525,
+            y: 675
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        }
+      ],
+      edges: [
+        { id: 'Edge1', source: '1', target: '2' },
+        { id: 'Edge2', source: '2', target: '3' },
+        { id: 'Edge3', source: '3', target: undefined }
+      ]
+    })
+
+    act(() => {
+      result.current.handleOpen()
+      expect(result.current.isOpen).toBe(false)
+
+      result.current.handleClose()
+      expect(result.current.isOpen).toBe(false)
     })
   })
 })

@@ -1,18 +1,18 @@
+import { memo, useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
-  Modal,
-  Typography,
   Box,
   Button,
-  Link,
-  FormGroup,
-  FormControlLabel,
   Checkbox,
-  Tooltip
+  FormControlLabel,
+  FormGroup,
+  Link,
+  Modal,
+  Tooltip,
+  Typography
 } from '@common/components'
-import { usePrivacyModal as _usePrivacyModal, PrivacyModalHookReturn } from './PrivacyModal.hooks'
-import { useTranslation } from 'react-i18next'
-import { useState, memo, useCallback } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { PrivacyModalHookReturn, usePrivacyModal as _usePrivacyModal } from './PrivacyModal.hooks'
 
 const style = {
   position: 'absolute',

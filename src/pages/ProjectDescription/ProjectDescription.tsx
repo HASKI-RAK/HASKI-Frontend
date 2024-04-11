@@ -1,7 +1,7 @@
-import { Avatar, Grid, Typography, Box } from '@common/components'
-import { TextCardRight, TextStepper, TextCardLeft } from '@components'
-import { useTranslation } from 'react-i18next'
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Avatar, Box, Grid, Typography } from '@common/components'
+import { TextCardLeft, TextCardRight, TextStepper } from '@components'
 
 /**
  * ProjectDescription page.

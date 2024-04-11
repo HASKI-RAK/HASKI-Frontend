@@ -1,6 +1,6 @@
-import SnackbarMessage, { SnackbarMessageProps } from './SnackbarMessage'
-import { act, fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { act, fireEvent, render } from '@testing-library/react'
+import SnackbarMessage, { SnackbarMessageProps } from './SnackbarMessage'
 
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')

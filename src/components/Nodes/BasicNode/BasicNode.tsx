@@ -1,30 +1,37 @@
-import { NodeWrapper, Paper, Typography, Tooltip } from '@common/components'
-import { LearningPathLearningElementNode } from '@components'
-import { Feedback, CheckBox } from '@common/icons'
-import { Handle, NodeProps, Position } from 'reactflow'
 import { memo } from 'react'
-import { getConfig } from '@shared'
-import { useTheme } from '@common/hooks'
 import { useTranslation } from 'react-i18next'
+import { Handle, NodeProps, Position } from 'reactflow'
+import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
+import { CheckBox, Feedback } from '@common/icons'
+import { LearningPathLearningElementNode } from '@components'
+import { getConfig } from '@shared'
+
+/**
+ * @prop children - The icon of the node.
+ * @prop {@link NodeProps} - The props of the node.
+ * @interface
+ */
+type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
+  children?: JSX.Element
+}
 
 /**
  * BasicNode component.
  *
- * @param props - Props containing the data of the node.
+ * @param props - Props containing the id, children and data of the node.
  *
  * @remarks
- * BasicNode presents a component that displays a node with a name.
+ * BasicNode represents a component that displays a node with a name.
  * It can be clicked to open a corresponding activity of the LMS.
  * BasicNode can't be used as a standalone component and must be rendered via ReactFlow.
  *
  * @category Components
  */
-const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
-  const theme = useTheme()
+const BasicNode = ({ id, children = <Feedback sx={{ fontSize: 50 }} />, data }: BasicNodeProps) => {
   const { t } = useTranslation()
   return (
     <NodeWrapper
-      id="basic-node"
+      id={id + '-' + data.lmsId}
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
         data.handleOpen()
@@ -41,7 +48,7 @@ const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <Feedback sx={{ fontSize: 50 }} />
+        {children}
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}
@@ -56,8 +63,8 @@ const BasicNode = ({ data }: NodeProps<LearningPathLearningElementNode>) => {
               position: 'absolute',
               top: -13,
               right: -13,
-              color: theme.palette.success.main,
-              background: theme.palette.common.white,
+              color: (theme) => theme.palette.success.main,
+              background: (theme) => theme.palette.common.white,
               borderRadius: '10%'
             }}
           />

@@ -1,10 +1,10 @@
+import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
-import { OpenQuestionnaire } from '@components'
-import { AuthContext } from '@services'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import { act } from 'react-test-renderer'
-import '@testing-library/jest-dom'
+import { OpenQuestionnaire } from '@components'
+import { AuthContext } from '@services'
 
 describe('OpenQuestionnaire', () => {
   test('Standard OpenQuestionnaire functionality', () => {

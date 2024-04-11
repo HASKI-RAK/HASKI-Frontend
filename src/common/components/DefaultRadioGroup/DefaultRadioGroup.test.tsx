@@ -1,9 +1,9 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import RadioGroup from './DefaultRadioGroup'
-import { Radio } from '@common/components'
 import '@testing-library/jest-dom'
-import { xAPI, AuthContext } from '@services'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { Radio } from '@common/components'
+import { AuthContext, xAPI } from '@services'
+import RadioGroup from './DefaultRadioGroup'
 
 describe('DefaultRadioGroup tests', () => {
   test('DefaultRadioGroup sends statement on change', async () => {

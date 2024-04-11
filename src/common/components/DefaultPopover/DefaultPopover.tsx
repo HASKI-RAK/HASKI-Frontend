@@ -1,12 +1,12 @@
-import { PopoverProps as DefaultPopoverProps } from '@common/components'
 import DefaultPopover from '@mui/material/Popover'
 import { memo, useCallback } from 'react'
+import { PopoverProps as DefaultPopoverProps } from '@common/components'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
 
 /**

@@ -1,4 +1,4 @@
-import { useCallback, useState, memo } from 'react'
+import { memo, useCallback, useState } from 'react'
 import {
   Box,
   Checkbox,

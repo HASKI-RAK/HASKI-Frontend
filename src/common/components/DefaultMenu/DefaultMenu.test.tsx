@@ -1,8 +1,8 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { AuthContext, xAPI } from '@services'
 import Menu from './DefaultMenu'
-import { xAPI, AuthContext } from '@services'
 
 describe('DefaultMenu tests', () => {
   test('DefaultMenu sends statement on close', async () => {
