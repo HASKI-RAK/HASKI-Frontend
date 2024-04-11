@@ -32,9 +32,9 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
     props.setIsLoading(true)
     fetchRedirectMoodleLogin()
       .then((response) =>{
-        // 👇️ redirects to Moodle LTI launch acticity
-        //window.location.replace(response.lti_launch_view)
-        popup.current = window.open(response.lti_launch_view, 'login_window', 'popup=true, width=600, height=600, left=500, locationbar=0')
+        // 👇️ if possible creates a popup linked to Moodle LTI launch acticity, otherwise redirects to it
+        const popupPosition = window.screenLeft+(window.outerWidth/2)-300
+        popup.current = window.open(response.lti_launch_view, 'login_window', `popup=true, width=600, height=600, left=${popupPosition}, locationbar=0`)
         if (popup.current) {
           popup.current.focus()
           window.addEventListener('message', (event) => {
@@ -63,7 +63,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
       .then((response) => {
         // supply auth context
         authContext.setExpire(response.expiration)
-        // then redirect to home page
+        // then redirect to home page through message event
         if(window.opener !== null) {
           window.opener.postMessage('login_success', window.location.origin)
           window.close()
