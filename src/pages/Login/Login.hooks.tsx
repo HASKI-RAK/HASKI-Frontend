@@ -40,6 +40,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
           window.addEventListener('message', (event) => {
             if(event.source === popup.current && event.data === 'login_success'){
                 navigate('/', { replace: true })
+                window.location.reload()
               }
             })
         } else {
@@ -63,8 +64,6 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
         // supply auth context
         authContext.setExpire(response.expiration)
         // then redirect to home page
-        
-        navigate('/', { replace: true })
         if(window.opener !== null) {
           window.opener.postMessage('login_success', window.location.origin)
           window.close()
