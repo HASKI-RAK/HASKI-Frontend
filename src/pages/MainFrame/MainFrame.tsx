@@ -1,6 +1,7 @@
 import { Outlet, useParams } from 'react-router-dom'
-import { Box, Divider, Grid, Stack } from '@common/components'
-import { BreadcrumbsContainer, Footer, LocalNav, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
+import { Box, Divider, Drawer, Stack, Grid } from '@common/components'
+import { MenuBar, Footer, BreadcrumbsContainer, LocalNav, OpenQuestionnaire, PrivacyModal } from '@components'
+import { useTheme, useMediaQuery } from '@common/hooks'
 
 /**
  * # MainFrame Page
@@ -22,6 +23,8 @@ export const MainFrame = () => {
   // !! converts courseId to a boolean
   const renderMenuBar = !!courseId
   const renderLocalNav = !!courseId
+  const theme = useTheme();
+  const open= useMediaQuery(theme.breakpoints.up('lg'))
 
   return (
     <>
@@ -30,8 +33,7 @@ export const MainFrame = () => {
         <BreadcrumbsContainer />
         <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
           <Grid container item flexGrow={1} sx={{ alignItems: 'stretch' }}>
-            <Grid item xs={renderLocalNav ? 2 : 0}>
-              {' '}
+            <Grid item xs={renderLocalNav && open ? 2 : 0}>
               {/* Set the xs value to 0 if LocalNav is not rendered.
                              xs is how much screen i want to reserve for this component */}
               {renderLocalNav && ( // Render the LocalNav if courseId exists
@@ -42,12 +44,33 @@ export const MainFrame = () => {
                     flexDirection: 'row',
                     alignItems: 'stretch'
                   }}>
+                  <Drawer
+                    variant="persistent"
+                    anchor='left'
+                    open={open}
+                    sx={{
+                      width: '100%',
+                      flexShrink: 1,
+                      borderRadius:'1rem',
+
+                      [`& .MuiDrawer-paper`]: {
+                        width: '100%',
+                        maxWidth: '26.5rem',
+                        position: 'absolute',
+                        top: '6rem',
+                        transition: 'top 0.3s',
+                        borderRadius:'0rem',
+                        border: 0,
+                        backgroundColor: 'white',
+                      }
+                    }}>
                   <LocalNav />
-                  <Divider flexItem orientation="vertical" />
+                    <Divider flexItem orientation="vertical" />
+                  </Drawer>
                 </Box>
               )}
             </Grid>
-            <Grid item xs={renderLocalNav ? 10 : 12}>
+            <Grid item xs={renderLocalNav && open ? 10 : 12}>
               {' '}
               {/* Adjust the xs (Grid) value based on LocalNav */}
               {/**💉 Pages get injected here through App routing */}
