@@ -243,6 +243,22 @@ describe('LocalNav tests', () => {
       })
     })
   })
+
+  it('should not render the drawer while the window has a small width', () => {
+    window.matchMedia = jest.fn().mockImplementation(query => ({
+      matches: query !== '(min-width: 240px) and (max-width: 767px)',
+      media: '',
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn()
+    }))
+    const result = render(
+      <MemoryRouter>
+        <LocalNav {...props} />
+      </MemoryRouter>
+    )
+    expect(result).toBeTruthy()
+  })
 })
 
 describe('getSortedLearningPath works as expected', () => {

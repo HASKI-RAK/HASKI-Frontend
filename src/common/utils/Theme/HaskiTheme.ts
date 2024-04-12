@@ -221,6 +221,24 @@ export const HaskiTheme = createTheme({
         }
       }
     },
+    /** style a drawer component */
+    MuiDrawer: {
+      styleOverrides: {
+        root: {
+          backgroundColor: defaultColors.white,
+          boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey',
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            borderRadius: '1rem',
+            border: defaultBehavior.border.default + defaultColors.lightgrey,
+            /** color means the color of the Text */
+            color: defaultColors.black,
+            backgroundColor: defaultColors.white,
+            boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey'
+          }
+        }
+      }
+    },
     MuiRadio: {
       styleOverrides: {
         root: {
