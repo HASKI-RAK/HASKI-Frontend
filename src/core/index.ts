@@ -30,7 +30,7 @@ import LearningPathLearningElement from './LearningPathLearningElement/LearningP
 import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
 import ILS from './QuestionnaireResults/ILS'
 import ListK from './QuestionnaireResults/ListK'
-import News from './News/News'
+import News, { NewsList } from './News/News'
 import StudentLearningElement from './StudentLearningElement/StudentLearningElement'
 import Topic from './Topic/Topic'
 import User from './User/User'
@@ -48,6 +48,7 @@ export type {
   LearningPathLearningElement,
   LearningPathElementStatus,
   News,
+  NewsList,
   Topic,
   StudentLearningElement,
   ILS,
