@@ -33,44 +33,47 @@ export const MainFrame = () => {
         <BreadcrumbsContainer />
         <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
           <Grid container item flexGrow={1} sx={{ alignItems: 'stretch' }}>
-            <Grid item xs={renderLocalNav && open ? 2 : 0}>
+            <Grid item sx={{width: renderLocalNav && open ? '26.5rem' : '0rem'}}>
               {/* Set the xs value to 0 if LocalNav is not rendered.
                              xs is how much screen i want to reserve for this component */}
-              {renderLocalNav && ( // Render the LocalNav if courseId exists
+              {renderLocalNav && open &&( // Render the LocalNav if courseId exists
                 <Box
                   height={'100%'}
                   sx={{
                     display: 'flex',
                     flexDirection: 'row',
-                    alignItems: 'stretch'
+                    alignItems: 'stretch',
+                    width: '26.5rem',
+                    backgroundColor: 'white'
                   }}>
                   <Drawer
                     variant="persistent"
                     anchor='left'
                     open={open}
                     sx={{
-                      width: '100%',
+                      width: '26.5rem',
                       flexShrink: 1,
+
                       borderRadius:'1rem',
 
                       [`& .MuiDrawer-paper`]: {
-                        width: '100%',
+                        width: '26.5rem',
                         maxWidth: '26.5rem',
                         position: 'absolute',
                         top: '6rem',
                         transition: 'top 0.3s',
                         borderRadius:'0rem',
                         border: 0,
-                        backgroundColor: 'white',
+                        backgroundColor: 'transparent',
                       }
                     }}>
                   <LocalNav />
-                    <Divider flexItem orientation="vertical" />
                   </Drawer>
+                  <Divider flexItem orientation="vertical"/>
                 </Box>
               )}
             </Grid>
-            <Grid item xs={renderLocalNav && open ? 10 : 12}>
+            <Grid item xs>
               {' '}
               {/* Adjust the xs (Grid) value based on LocalNav */}
               {/**💉 Pages get injected here through App routing */}

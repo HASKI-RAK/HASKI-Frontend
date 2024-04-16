@@ -46,7 +46,7 @@ const Course = (): JSX.Element => {
             return (
               <Card
                 key={topic.id}
-                sx={{ width: { xs: '10rem', sm: '20rem', md: '40rem', lg: '50rem', xl: '70rem' }, mt: '1rem' }}>
+                sx={{ width: { xs: '10rem', sm: '20rem', md: '40rem', lg: '40rem', xl: '60rem', xxl: '70rem', xxxl: '80rem' }, mt: '1rem' }}>
                 <CardContent>
                   <Grid container direction="column" justifyContent="center" alignItems="center">
                     <Grid item md={1}>
@@ -56,7 +56,7 @@ const Course = (): JSX.Element => {
                           <CheckBox
                             sx={{
                               mt: '-0.8rem',
-                              ml: { xs: '7rem', sm: '17rem', md: '37rem', lg: '47rem', xl: '67rem' },
+                              ml: { xs: '7rem', sm: '17rem', md: '37rem', lg: '37rem', xl: '57rem', xxl: '67rem', xxxl: '77rem' },
                               fontSize: 29
                             }}
                             color={'success'}

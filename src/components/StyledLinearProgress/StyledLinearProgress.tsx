@@ -40,7 +40,7 @@ export const StyledLinearProgress = ({ learningElementProgressTopics, index }: B
   const colorByPercent = useCallback(() => {
     if (percent === 0) return 'error'
     else if (percent < 0) return 'info'
-    return percent < 70 ? 'warning' : 'success'
+    return percent < 50 ? 'warning' : 'success'
   }, [percent])
 
   const getText = useCallback(() => {
@@ -53,15 +53,15 @@ export const StyledLinearProgress = ({ learningElementProgressTopics, index }: B
 
   const getTextPosition = useCallback(() => {
     if (index === undefined || learningElementProgressTopics === undefined)
-      return { xs: '20rem', sm: '5rem', md: '15rem', lg: '25rem', xl: '45rem' }
+      return { xs: '20rem', sm: '5rem', md: '15rem', lg: '25rem', xl: '45rem', xxl: '48rem', xxxl: '58rem' }
 
-    return { xs: '20rem', sm: '9rem', md: '20rem', lg: '30rem', xl: '46rem' }
+    return { xs: '20rem', sm: '9rem', md: '20rem', lg: '20rem', xl: '37rem', xxl: '48rem', xxxl: '60rem' }
   }, [index, learningElementProgressTopics])
 
   return (
     <StyledLinearProgressWithLabel
       data-testid="Course-Card-Topic-Progress"
-      value={percent > 1 ? percent : 6} //if the student solved anything show his progress, else show a set minimum (6)
+      value={percent > 1 ? percent : 10} //if the student solved anything show his progress, else show a set minimum (6)
       color={index || learningElementProgressTopics ? colorByPercent() : 'info'}
       text={getText()}
       textposition={getTextPosition()}

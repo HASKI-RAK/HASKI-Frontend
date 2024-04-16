@@ -1,4 +1,10 @@
 import { createTheme, green, grey, red, yellow } from '@common/theme'
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xxl: true; // adds the `xxl` breakpoint
+    xxxl: true;
+  }
+}
 
 export const defaultBehavior = {
   boxShadowSize: {
@@ -80,6 +86,17 @@ export const HaskiTheme = createTheme({
       selectedOpacity: 1,
       
     },*/
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+      xxl: 2000,
+      xxxl: 2500,
+    },
   },
 
   typography: {

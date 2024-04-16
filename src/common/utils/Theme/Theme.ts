@@ -43,6 +43,17 @@ export const Theme = createTheme({
       light: defaultColors.black
     }
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+      xxl: 2000,
+      xxxl: 2500,
+    },
+  },
   components: {
     // Name of the component
     MuiPaper: {
