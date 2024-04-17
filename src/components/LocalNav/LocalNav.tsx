@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Box, Divider, Stack, Typography, Grid, List, ListItem, ListItemButton, ListItemText, Skeleton } from '@common/components'
+import { Box, Divider, Drawer, Stack, Typography, Grid, List, ListItem, ListItemButton, ListItemText, Skeleton } from '@common/components'
 import { FiberManualRecord } from '@common/icons'
 import {
   SkeletonList,
@@ -8,9 +8,10 @@ import {
   Fraction
 } from '@components'
 import { Topic } from '@core'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLearningPathTopicProgress } from './../../pages/Course/Course.hook'
 import { Theme } from '@common/theme'
+import { useMediaQuery, useTheme } from '@common/hooks'
 
 
 /**
@@ -32,11 +33,43 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
   const { courseId, topicId } = useParams() as { courseId: string; topicId: string }
   const navigate = useNavigate()
 
+  const theme = useTheme()
+  const open = useMediaQuery(theme.breakpoints.up('lg'))
+  const [drawerHeight, setDrawerHeight] = useState(0)
+
+  //Resizing windows, also resizes drawer height
+  useEffect(() => {
+    const handleResize = () => {
+      setDrawerHeight(window.innerHeight - 200)
+    }
+
+    handleResize() // Set initial drawer height
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const { topics, loading: topicLoading } = useLearningPathTopic(courseId)
   const { calculatedTopicProgress, loading: progressLoading } = useLearningPathTopicProgress(courseId, topics)
 
   return (
     <Box>
+      <Drawer
+        variant='persistent'
+        anchor='left'
+        open={open}
+        sx={{
+          width: '26.5rem',
+          height: drawerHeight,
+          [`& .MuiDrawer-paper`]: {
+            maxWidth: '26.5rem',
+            position: 'relative',
+            borderRadius: '0rem',
+            border: 0,
+            backgroundColor: 'transparent',
+          },
+        }}
+      >
       <Grid sx={{ ml: '0.9rem' }}>
         <Typography variant="h5">{t('appGlobal.topics')}</Typography>
       </Grid>
@@ -106,7 +139,8 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
           ))}
         </List>
       )}
-    </Box>
+      </Drawer>
+      </Box>
   )
 }
 
