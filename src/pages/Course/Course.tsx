@@ -31,7 +31,7 @@ const Course = (): JSX.Element => {
       {topicLoading ? (
         //display skeleton list while loading
         <Box sx={{ flewGrow: 1 }}>
-          <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ ml: '3rem' }}>
+          <Grid container direction="column" justifyContent="center" alignItems="center">
             <Grid item xs zeroMinWidth>
               <Box sx={{ width: '30rem' }}>
                 <SkeletonList />
@@ -41,7 +41,7 @@ const Course = (): JSX.Element => {
         </Box>
       ) : (
         //display topics once data is loaded
-        <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ ml: '3rem' }}>
+        <Grid container direction="column" justifyContent="center" alignItems="center">
           {topics.map((topic, index) => {
             return (
               <Card

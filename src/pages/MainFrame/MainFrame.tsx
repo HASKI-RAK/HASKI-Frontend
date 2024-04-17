@@ -24,52 +24,48 @@ export const MainFrame = () => {
   const renderMenuBar = !!courseId
   const renderLocalNav = !!courseId
   const theme = useTheme();
-  const open= useMediaQuery(theme.breakpoints.up('lg'))
+  const open = useMediaQuery(theme.breakpoints.up('lg'))
 
   return (
     <>
-      <Stack direction="column" sx={{ minHeight: 'inherit' }}>
+      <Grid container direction="column" sx={{ minHeight: 'inherit' }}>
         {renderMenuBar ? <MenuBar courseSelected={true} /> : <MenuBar courseSelected={false} />}
         <BreadcrumbsContainer />
         <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
           <Grid container item flexGrow={1} sx={{ alignItems: 'stretch' }}>
-            <Grid item sx={{width: renderLocalNav && open ? '26.5rem' : '0rem'}}>
+            <Grid item sx={{ width: renderLocalNav && open ? '26.5rem' : '0rem' }}>
               {/* Set the xs value to 0 if LocalNav is not rendered.
                              xs is how much screen i want to reserve for this component */}
-              {renderLocalNav && open &&( // Render the LocalNav if courseId exists
+              {renderLocalNav && open && ( // Render the LocalNav if courseId exists
                 <Box
                   height={'100%'}
                   sx={{
                     display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'stretch',
                     width: '26.5rem',
-                    backgroundColor: 'white'
-                  }}>
+                  }}
+                >
                   <Drawer
                     variant="persistent"
                     anchor='left'
                     open={open}
                     sx={{
-                      width: '26.5rem',
-                      flexShrink: 1,
-
-                      borderRadius:'1rem',
-
+                      width: '100%',
+                      height: '100%',
                       [`& .MuiDrawer-paper`]: {
-                        width: '26.5rem',
+                        top: '6rem',
                         maxWidth: '26.5rem',
                         position: 'absolute',
-                        top: '6rem',
-                        transition: 'top 0.3s',
-                        borderRadius:'0rem',
+                        maxHeight: 'calc(100% - 12rem)', // Adjust as needed
+                        borderRadius: '0rem',
                         border: 0,
                         backgroundColor: 'transparent',
+                        boxSizing: 'border-box'
                       }
-                    }}>
-                  <LocalNav />
+                    }}
+                  >
+                    <LocalNav />
                   </Drawer>
-                  <Divider flexItem orientation="vertical"/>
+                  <Divider flexItem orientation="vertical" />
                 </Box>
               )}
             </Grid>
@@ -89,7 +85,7 @@ export const MainFrame = () => {
           <Divider flexItem />
           <Footer />
         </Grid>
-      </Stack>
+      </Grid>
       <PrivacyModal />
       <OpenQuestionnaire />
     </>
