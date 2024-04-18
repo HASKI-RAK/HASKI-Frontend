@@ -8,7 +8,17 @@ const navigate = jest.fn()
 //How can i use this mock for only one test without having it in an extra file?
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
+  ...jest.requireActual('@common/hooks'),
   useParams: jest.fn()
+}))
+
+jest.mock('common/hooks', () => ({
+  useTheme: () => ({
+    breakpoints: {
+      up: (size: string) => `@media (min-width:${size}px)`, // Simulate the 'up' method returning a media query string
+    },
+  }),
+  useMediaQuery: jest.fn().mockReturnValue(true), // Simulate the useMediaQuery hook returning true
 }))
 
 describe('MainFrame', () => {
