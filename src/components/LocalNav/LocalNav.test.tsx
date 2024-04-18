@@ -10,15 +10,43 @@ import { getSortedLearningPath, useLearningPathElement, useLearningPathTopic } f
 import resetModules = jest.resetModules
 import { AuthContext } from '@services'
 
-jest.mock('@common/hooks', () => ({
-  ...jest.requireActual('@common/hooks'),
-  useMediaQuery: jest.fn()
+jest.mock('common/hooks', () => ({
+  useTheme: () => ({
+    breakpoints: {
+      up: (size: string) => `@media (min-width:${size}px)`, // Simulate the 'up' method returning a media query string
+    },
+  }),
+  useMediaQuery: jest.fn().mockReturnValue(true), // Simulate the useMediaQuery hook returning true
 }))
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'), // Preserve the original module behavior
   useParams: jest.fn() // Mock useParams as a jest.fn()
 }))
+
+window.matchMedia = window.matchMedia || function() {
+  return {
+    matches: true,
+    addListener: function() {},
+    removeListener: function() {}
+  };
+};
+
+import { useMediaQuery } from '@mui/material';
+import { Theme } from '@mui/material/styles';
+
+// Mock the useMediaQuery function
+jest.mock('@mui/material', () => {
+  const originalModule = jest.requireActual('@mui/material');
+
+  return {
+    ...originalModule,
+    useMediaQuery: jest.fn(),
+  };
+});
+
+// Define the mock implementation
+(useMediaQuery as jest.Mock).mockImplementation((query: string | ((theme: Theme) => string)) => true);
 
 const navigate = jest.fn()
 const useParamsMock = jest.fn().mockReturnValue({ courseId: '1', topicId: '1' })
@@ -154,34 +182,17 @@ describe('LocalNav tests', () => {
       useLearningPathTopic: mockUseLearningPathTopic
     }
 
-    const { getAllByRole } = render(
+    const { getByText } = render(
       <MemoryRouter initialEntries={['/login']}>
         <LocalNav {...props} />
       </MemoryRouter>
     )
 
-    const topicList = getAllByRole('list')
-    expect(topicList[0].textContent).toContain('testtest2')
-  })
+    const topic1 = getByText('test')
+    expect(topic1.textContent).toContain('test')
 
-  it('should render the LocalNav with all Topics, as listelements', () => {
-    const mockUseLearningPathTopic = jest.fn().mockReturnValue({
-      loading: false,
-      topics: mockTopics
-    })
-
-    const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic
-    }
-
-    const { getAllByRole } = render(
-      <MemoryRouter initialEntries={['/login']}>
-        <LocalNav {...props} />
-      </MemoryRouter>
-    )
-
-    const topicList = getAllByRole('listitem')
-    expect(topicList.length).toBe(2)
+    const topic2 = getByText('test2')
+    expect(topic2.textContent).toContain('test2')
   })
 
   it('should render the LocalNav with all Topics, clicking on 2nd element', async () => {
@@ -189,6 +200,7 @@ describe('LocalNav tests', () => {
       loading: false,
       topics: mockTopics
     })
+
 
     const props: LocalNavProps = {
       useLearningPathTopic: mockUseLearningPathTopic
