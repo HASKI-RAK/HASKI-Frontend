@@ -1,4 +1,11 @@
 import { createTheme } from '@common/theme'
+// Module needs to be declared once in react
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xxl: true; // adds the `xxl` breakpoint
+    xxxl: true;
+  }
+}
 
 export const defaultBehavior = {
   boxShadowSize: {

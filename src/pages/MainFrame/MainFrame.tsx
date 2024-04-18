@@ -1,8 +1,22 @@
 import { Outlet, useParams } from 'react-router-dom'
-import { Box, Divider, Drawer, Grid } from '@common/components'
+import { Box, Divider, Grid } from '@common/components'
 import { MenuBar, Footer, BreadcrumbsContainer, LocalNav, OpenQuestionnaire, PrivacyModal } from '@components'
 import { useTheme, useMediaQuery } from '@common/hooks'
-import { useEffect, useState } from 'react'
+
+/**
+ * # MainFrame Page
+ * Wraps the application in a frame with a menu bar, breadcrumbs, local navigation and footer.
+ * @remarks
+ * Used in {@link pages.App | App} component.
+ * Here the other pages get rendered. This is done by the {@link Outlet} component.
+ *
+ * The footer is also included.
+ *
+ * It holds a layout for all pages.
+ * Help, Global settings and User settings are also included in the menu bar.
+ *
+ * @category Pages
+ */
 
 export const MainFrame = () => {
   const { courseId } = useParams()

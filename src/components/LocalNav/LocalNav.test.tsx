@@ -10,18 +10,9 @@ import { getSortedLearningPath, useLearningPathElement, useLearningPathTopic } f
 import resetModules = jest.resetModules
 import { AuthContext } from '@services'
 
-jest.mock('common/hooks', () => ({
-  useTheme: () => ({
-    breakpoints: {
-      up: (size: string) => `@media (min-width:${size}px)`, // Simulate the 'up' method returning a media query string
-    },
-  }),
-  useMediaQuery: jest.fn().mockReturnValue(true), // Simulate the useMediaQuery hook returning true
-}))
-
 jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'), // Preserve the original module behavior
-  useParams: jest.fn() // Mock useParams as a jest.fn()
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn()
 }))
 
 window.matchMedia = window.matchMedia || function() {
@@ -29,24 +20,8 @@ window.matchMedia = window.matchMedia || function() {
     matches: true,
     addListener: function() {},
     removeListener: function() {}
-  };
-};
-
-import { useMediaQuery } from '@mui/material';
-import { Theme } from '@mui/material/styles';
-
-// Mock the useMediaQuery function
-jest.mock('@mui/material', () => {
-  const originalModule = jest.requireActual('@mui/material');
-
-  return {
-    ...originalModule,
-    useMediaQuery: jest.fn(),
-  };
-});
-
-// Define the mock implementation
-(useMediaQuery as jest.Mock).mockImplementation((query: string | ((theme: Theme) => string)) => true);
+  }
+}
 
 const navigate = jest.fn()
 const useParamsMock = jest.fn().mockReturnValue({ courseId: '1', topicId: '1' })

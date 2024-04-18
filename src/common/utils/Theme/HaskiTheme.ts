@@ -1,10 +1,5 @@
 import { createTheme, green, grey, red, yellow } from '@common/theme'
-declare module '@mui/material/styles' {
-  interface BreakpointOverrides {
-    xxl: true; // adds the `xxl` breakpoint
-    xxxl: true;
-  }
-}
+
 
 export const defaultBehavior = {
   boxShadowSize: {

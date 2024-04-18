@@ -8,7 +8,7 @@ import {
   Fraction
 } from '@components'
 import { Topic } from '@core'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLearningPathTopicProgress } from './../../pages/Course/Course.hook'
 import { Theme } from '@common/theme'
 import { useMediaQuery, useTheme } from '@common/hooks'
@@ -37,7 +37,7 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
   const open = useMediaQuery(theme.breakpoints.up('lg'))
   const [drawerHeight, setDrawerHeight] = useState(0)
 
-  //Resizing windows, also resizes drawer height
+  //Resizing the window resizes drawer height
   useEffect(() => {
     const handleResize = () => {
       setDrawerHeight(window.innerHeight - 200)
