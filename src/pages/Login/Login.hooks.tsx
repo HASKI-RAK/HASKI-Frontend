@@ -29,6 +29,12 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
   const popup = useRef<Window | null>(null)
 
   const onMoodleLogin = () => {
+    const messageHandler = (event: MessageEvent) => {
+      if (event.source === popup.current && event.data === 'login_success') {
+        navigate('/', { replace: true })
+        window.location.reload()
+      }
+    }
     props.setIsLoading(true)
     fetchRedirectMoodleLogin()
       .then((response) => {
@@ -41,12 +47,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
         )
         if (popup.current) {
           popup.current.focus()
-          window.addEventListener('message', (event) => {
-            if (event.source === popup.current && event.data === 'login_success') {
-              navigate('/', { replace: true })
-              window.location.reload()
-            }
-          })
+          window.addEventListener('message', messageHandler)
         } else {
           window.location.replace(response.lti_launch_view)
         }
