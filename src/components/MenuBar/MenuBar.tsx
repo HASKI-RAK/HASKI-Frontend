@@ -33,6 +33,7 @@ import {
   PlaylistAddCheckCircleOutlined
 } from '@common/icons'
 import {
+  GlobalNavigationItem,
   LanguageMenu,
   QuestionnaireQuestionsModal,
   QuestionnaireResultsModal,
@@ -78,6 +79,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
   const [topicsPath, setTopicsPath] = useState<Topic[]>([])
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
+  const getCourses = useStore((state) => state.getCourses)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
@@ -223,83 +225,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               onClick={() => navigate('/')}>
               HASKI
             </TextWrapper>
-            {courseSelected && (
-              <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-                <Tooltip title="Open topics">
-                  <Button
-                    id="topics-button"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleOpenTopicsMenu}
-                    data-testid="Menubar-TopicButton"
-                    color="inherit"
-                    endIcon={
-                      anchorElTopics ? <ArrowDropDown sx={{ transform: 'rotate(180deg)' }} /> : <ArrowDropDown />
-                    }>
-                    {t('appGlobal.topics')}
-                  </Button>
-                </Tooltip>
-                <Popover
-                  id="topics-popover"
-                  data-testid={'Menubar-TopicPopover'}
-                  anchorEl={anchorElTopics}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left'
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left'
-                  }}
-                  open={Boolean(anchorElTopics)}
-                  onClose={handleCloseTopicsMenu}
-                  sx={{ minWidth: '500px' }}>
-                  <Box sx={{ p: 2 }}>
-                    <Grid container direction="column-reverse" spacing={2}>
-                      {loadingTopics ? ( // display Skeleton component while loading
-                        <Box width={400}>
-                          <SkeletonList />
-                        </Box>
-                      ) : (
-                        //For every Topic the LearningPathElement is displayed under it.
-                        <>
-                          {[...topicsPath].reverse().map((topic) => (
-                            <>
-                              <Grid item xs={12} key={t(topic.name)}>
-                                <Link
-                                  id={topic.name.concat('-link').replaceAll(' ', '-')}
-                                  key={topic.name}
-                                  data-testid={`Menubar-Topic-${topic.name}`}
-                                  underline="hover"
-                                  variant="h6"
-                                  component="span"
-                                  color="inherit"
-                                  sx={{ m: 1, cursor: 'pointer' }}
-                                  onClick={() => {
-                                    navigate(`course/${courseId}/topic/${topic.id}`)
-                                    handleCloseTopicsMenu()
-                                  }}>
-                                  {topic.name}
-                                </Link>
-                                <Box
-                                  sx={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    flexWrap: 'wrap',
-                                    justifyContent: 'start'
-                                  }}
-                                />
-                              </Grid>
-                              {topicsPath.indexOf(topic) !== topicsPath.length && <Divider flexItem />}
-                            </>
-                          ))}
-                        </>
-                      )}
-                    </Grid>
-                  </Box>
-                </Popover>
-              </Box>
-            )}
+            <GlobalNavigationItem courseSelected={courseSelected} />
           </Box>
           {/** Search bar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>
