@@ -4,7 +4,8 @@ import { usePersistedStore } from "@store"
 
 export type NewsbannerHookReturn = {
     //readonly handleClose:()=> void
-    readonly checkNews:()=>Promise<string>
+    readonly checkForNews:()=>Promise<string>
+    readonly receiveContent:()=>Promise<string>
 }
 
 export const useNewsbanner = ():NewsbannerHookReturn=> {
@@ -12,18 +13,32 @@ export const useNewsbanner = ():NewsbannerHookReturn=> {
 
     //** Logic **/
     //get the content of the news
-    const checkNews = async()=>{
+    const checkForNews = async()=>{
         return getNews()
         .then((news)=>{
-            return news.news_content
+            console.log(`New count ${news.length}`)
+            return news.length != 0
         })
         .catch((reason)=>{
             log.error(reason)
-            return ''
+            return false
         })
     }
+
+    const receiveContent = async()=>{
+        return getNews()
+        .then((news)=>{
+            console.log(`Newscontent ${JSON.stringify(news[0].news_content)}`)
+            return JSON.stringify(news[0].news_content)
+        })
+        .catch((reason)=>{
+            log.error(reason)
+            return null
+        })
+    }
+
     return useMemo(
-        () =>({checkNews}),
-        [checkNews]
+        () =>({checkForNews, receiveContent}),
+        [checkForNews, receiveContent]
     )
 }

@@ -1,8 +1,7 @@
 import { Alert, Box, Collapse, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { keyframes} from "@emotion/react"
-import { useTranslation } from "react-i18next";
 import { NewsbannerHookReturn, useNewsbanner as _useNewsbanner } from "./Newsbanner.hooks";
 
 const scrolling = keyframes`
@@ -26,22 +25,26 @@ export type NewsbannerProps={
  */
 
 const Newsbanner=({useNewsbanner=_useNewsbanner}:NewsbannerProps)=>{
-    const [open, setOpen]=useState(true)
-    const {t} = useTranslation()
-    const {checkNews}=useNewsbanner()
-    const handleNews = 
-        checkNews().then((content)=>{
-            if(content){
-            return false
-            }
-        })
+    const [open, setOpen]=useState(false)
+    const [text, setText]=useState('')
+    const {checkForNews, receiveContent}=useNewsbanner()
+
+    useEffect(() => {checkForNews().then(isNewsAvaliable => {
+        console.log(isNewsAvaliable)
+        setOpen(isNewsAvaliable)
+    })}, [])
+
+    useEffect(() => {receiveContent().then(showNews => {
+        console.log(showNews)
+        setText(showNews)
+    })}, [])
     
     //fetch von backend, localStorage abfrage ob schon gesehen, date, expirationdate, 
     //TODO: Text anpassen auf Bildschrimgroesse und textlaenge
     return(
         <>
         {
-        !(handleNews)&&(
+        (open)&&(
 
         <Box sx={{width:'100%'}}>
             
@@ -56,7 +59,9 @@ const Newsbanner=({useNewsbanner=_useNewsbanner}:NewsbannerProps)=>{
                 }
                 >
                     <Box sx={{ animation: `${scrolling} 30s linear infinite`, transform: `translateX(100%)`, width: `1600px` }} >
-                        
+                       <>
+                       {text}
+                       </>
                    
                     Due to unforseen circumstances we regret to inform you that aliens have taken over humanity and we are doomed on another note the animalpark munich just had another cute lion baby 
                     </Box>

@@ -6,8 +6,8 @@ import { NewsList } from '@core'
  * 
  * @returns {@link News} object
  */
-export const fetchNews =async():Promise<NewsList>=>{
-    return fetchData<NewsList>(getConfig().BACKEND + '/news',{
+export const fetchNews =async(languageId?:string):Promise<NewsList>=>{
+    return fetchData<NewsList>(getConfig().BACKEND + `/news?language_id=${languageId}`,{
         method:'GET',
         credentials:'include',
         headers:{

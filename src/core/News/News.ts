@@ -3,8 +3,7 @@ type NewsList = {
 }
 
 type News = {
-  expiration_date: Date
-  news_content: string
+  newsContent: string
 }
 export default News
 export type { NewsList }
