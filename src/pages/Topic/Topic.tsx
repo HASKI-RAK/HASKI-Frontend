@@ -3,13 +3,14 @@ import ReactFlow, { Node, Edge, Controls, Background, Panel, useReactFlow } from
 import React, { useEffect, useState, useContext, memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { IFrameModal, nodeTypes, ResponsiveMiniMap, LabeledSwitch } from '@components'
-import { Box, Skeleton, Button } from '@common/components'
+import { Grid, Skeleton, Button } from '@common/components'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { useTranslation } from 'react-i18next'
 
 // custom fitView centering on first uncompleted element, needs to be in the react-flow component
+// currently focuses on first element
 const CustomFitViewButton = ({ node }: { node: Node[] }) => {
   const { fitView } = useReactFlow()
   //console.log(node)
@@ -195,37 +196,39 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   // Show Loading-Skeleton until Nodes, Edges and LearningPathElementStatus are loaded
   return initialNodes && initialEdges && learningPathElementStatus ? (
-    <Box height={'100%'}>
-      <ReactFlow
-        nodes={initialNodes}
-        edges={initialEdges}
-        nodeTypes={nodeTypes}
-        fitView
-        onInit={() => {
-          setTimeout(() => {
-            handleCustomFitView()
-          }, 0)
-        }}
-        fitViewOptions={{
-          padding: 5,
-          minZoom: 0.75,
-          nodes: [{ id: initialNodes[0].id }]
-        }}>
-        <ResponsiveMiniMap />
-        <CustomFitViewButton node={initialNodes} />
-        <Background gap={16} />
-        <Panel position="top-right">
-          <LabeledSwitch
-            labelLeft={t('pages.topic.grouped')}
-            labelRight={t('pages.topic.single')}
-            isGrouped={isGrouped}
-            setIsGrouped={setIsGrouped}
-          />
-        </Panel>
-        <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
-      </ReactFlow>
-      <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
-    </Box>
+    <Grid container height={'100%'}>
+      <Grid item xs={12}>
+        <ReactFlow
+          nodes={initialNodes}
+          edges={initialEdges}
+          nodeTypes={nodeTypes}
+          fitView
+          onInit={() => {
+            setTimeout(() => {
+              handleCustomFitView()
+            }, 0)
+          }}
+          fitViewOptions={{
+            padding: 5,
+            minZoom: 0.75,
+            nodes: [{ id: initialNodes[0].id }]
+          }}>
+          <ResponsiveMiniMap />
+          <CustomFitViewButton node={initialNodes} />
+          <Background gap={16} />
+          <Panel position="top-right">
+            <LabeledSwitch
+              labelLeft={t('pages.topic.grouped')}
+              labelRight={t('pages.topic.single')}
+              isGrouped={isGrouped}
+              setIsGrouped={setIsGrouped}
+            />
+          </Panel>
+          <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
+        </ReactFlow>
+        <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
+      </Grid>
+    </Grid>
   ) : (
     <Skeleton variant="rectangular" width={'80%'} height={'80%'} />
   )
