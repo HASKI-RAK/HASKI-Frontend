@@ -38,12 +38,13 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
     props.setIsLoading(true)
     fetchRedirectMoodleLogin()
       .then((response) => {
-        // 👇️ if possible creates a popup linked to Moodle LTI launch acticity, otherwise redirects to it
-        const popupPosition = window.screenLeft + window.outerWidth / 2 - 300
+        // 👇️ if possible creates a popup linked to Moodle LTI launch activity, otherwise redirects to it
+        const popupPositionLeft = window.screenLeft + window.outerWidth / 2 - 300
+        const popupPositionTop = window.screenTop + window.outerHeight / 8
         popup.current = window.open(
           response.lti_launch_view,
           'login_window',
-          `popup=true, width=600, height=600, left=${popupPosition}, locationbar=0`
+          `popup=true, width=600, height=600, left=${popupPositionLeft}, top=${popupPositionTop}`
         )
         if (popup.current) {
           popup.current.focus()
