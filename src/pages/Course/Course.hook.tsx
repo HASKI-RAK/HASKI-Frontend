@@ -120,5 +120,5 @@ export const useLearningPathTopicProgress = (courseId: string, topics: Topic[]) 
     }
   }, [authContext.isAuth, courseId, navigate, topics, getUser, getLearningPathElement, getLearningPathElementStatus])
 
-  return { calculatedTopicProgress, loading }
+  return { topicProgress: calculatedTopicProgress, loading }
 }

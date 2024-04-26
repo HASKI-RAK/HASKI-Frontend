@@ -24,7 +24,7 @@ const Course = (): JSX.Element => {
   const isSmOrDown = useMediaQuery(theme.breakpoints.down('sm'))
 
   const { topics, loading: topicLoading } = useLearningPathTopic(courseId)
-  const { calculatedTopicProgress, loading: progressLoading } = useLearningPathTopicProgress(courseId, topics)
+  const { topicProgress, loading: progressLoading } = useLearningPathTopicProgress(courseId, topics)
 
   return (
     <>
@@ -51,8 +51,8 @@ const Course = (): JSX.Element => {
                   <Grid container direction="column" justifyContent="center" alignItems="center">
                     <Grid item md={1}>
                       {/*if topic is done 100%, a checkbox is displayed*/}
-                      {calculatedTopicProgress[index] &&
-                        calculatedTopicProgress[index][0] / calculatedTopicProgress[index][1] == 1 && (
+                      {topicProgress[index] &&
+                        topicProgress[index][0] / topicProgress[index][1] == 1 && (
                           <CheckBox
                             sx={{
                               mt: '-0.8rem',
@@ -86,8 +86,8 @@ const Course = (): JSX.Element => {
                 </CardContent>
                 {/* Display topic progress bar */}
                 <Grid container item direction="row" justifyContent="flex-end" alignItems="flex-end">
-                  {calculatedTopicProgress[index] && !progressLoading ? (
-                    <StyledLinearProgress learningElementProgressTopics={calculatedTopicProgress} index={index} />
+                  {topicProgress[index] && !progressLoading ? (
+                    <StyledLinearProgress learningElementProgressTopics={topicProgress} index={index} />
                   ) : (
                     // Display loading state if progress is not available yet
                     <StyledLinearProgress />
