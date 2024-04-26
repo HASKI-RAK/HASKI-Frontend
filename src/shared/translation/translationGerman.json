@@ -1679,5 +1679,19 @@
   "tooltip.openSettings": "Einstellungen",
   "warning": "Warnung",
   "warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
-  "warning.online": "Sie sind wieder online."
+  "warning.online": "Sie sind wieder online.",
+  "components.AlgorithmSettingsModal.headerLeft": "Lernpfadalgorithmus wählen",
+  "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
+  "components.AlgorithmSettingsModal.algorithmNames": [
+    "Bayesd",
+    "Graf",
+    "aco",
+    "Tyche"
+  ],
+  "components.AlgorithmSettingsModal.algorithmDescriptions": [
+    "Bayesd ist ein probabilistischer Algorithmus, der auf dem Bayes-Theorem basiert. Er wird verwendet, um die Wahrscheinlichkeit eines Ereignisses zu berechnen, basierend auf dem Wissen, das wir bereits haben.",
+    "Graf ist ein Algorithmus, der auf dem Prinzip der Graphentheorie basiert. Er wird verwendet, um die Beziehungen zwischen den Lernelementen zu analysieren und den besten Lernpfad zu berechnen.",
+    "Aco ist ein Algorithmus, der auf dem Prinzip des Ameisenalgorithmus basiert. Er wird verwendet, um den besten Lernpfad zu berechnen, indem er die Pheromonspuren der Ameisen simuliert.",
+    "Tyche ist ein Algorithmus, der auf dem Prinzip des Glücks basiert. Er wird verwendet, um den besten Lernpfad zu berechnen, indem er die Glücksfaktoren der Lernenden berücksichtigt."
+  ]
 }
