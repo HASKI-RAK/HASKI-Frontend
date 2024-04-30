@@ -1,2 +1,5 @@
 export { useTheme } from './DefaultUseTheme/DefaultUseTheme'
 export { useMediaQuery } from './DefaultMediaQuery/DefaultMediaQuery'
+export {  useLearningPathElement, getSortedLearningPath } from './DefaultLearningPathElement/DefaultLearningPathElement'
+export { useLearningPathTopic} from './DefaultLearningPathTopic/DefaultLearningPathTopic'
+export { useLearningPathTopicProgress } from './DefaultTopicProgress/DefaultTopicProgress'

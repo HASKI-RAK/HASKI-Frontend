@@ -11,10 +11,10 @@ import { useTranslation } from 'react-i18next'
 
 // custom fitView centering on first uncompleted element, needs to be in the react-flow component
 // currently focuses on first element
-const CustomFitViewButton = ({ node }: { node: Node[] }) => {
+// can also focus on first element that is uncomplete (node.find(node => !node.data?.isDone) || node[0])
+const CustomFitViewButton = ({ nodes }: { nodes: Node[] }) => {
   const { fitView } = useReactFlow()
-  //console.log(node)
-  const firstUncompletedElement = /*node.find(node => !node.data?.isDone) || */ node[0]
+  const firstUncompletedElement = nodes[0]
 
   const handleClick = () => {
     //with setViewport (useReactFlow) it is possible to set the view to a specific position and zoom
@@ -80,13 +80,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
    }*/
 
   // Trigger the click event of the custom 'fit view'-button
-  const handleCustomFitView = () => {
-    const fitViewButton = document.getElementById('customFitViewButton')
-
-    if (fitViewButton) {
-      fitViewButton.click()
-    }
-  }
+  const handleCustomFitView  = (): void => {
+    document.getElementById('customFitViewButton')?.click()
+  };
 
   const fetchLearningElementsWithStatus = async (
     learningPathElementStatusData: LearningPathElementStatus[],
@@ -214,7 +210,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             nodes: [{ id: initialNodes[0].id }]
           }}>
           <ResponsiveMiniMap />
-          <CustomFitViewButton node={initialNodes} />
+          <CustomFitViewButton nodes={initialNodes} />
           <Background gap={16} />
           <Panel position="top-right">
             <LabeledSwitch

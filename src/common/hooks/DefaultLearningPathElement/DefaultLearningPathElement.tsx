@@ -1,5 +1,5 @@
 import log from 'loglevel'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { LearningPathElement, LearningPathElementReturn, Topic } from '@core'
 import { usePersistedStore, useStore } from '@store'
 
@@ -30,39 +30,11 @@ export const getSortedLearningPath = async (
 }
 
 /**
- * @param courseId - course id
+ *
+ * @param topic
+ * @param courseId
  */
-export const useLearningPathTopic = (courseId: string): { loading: boolean; topics: Topic[] } => {
-  const [loading, setLoading] = useState(true)
-  const [topics, setTopics] = useState<Topic[]>([])
-  const getUser = usePersistedStore((state) => state.getUser)
-  const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
-
-  useEffect(() => {
-    const effect = async () => {
-      setLoading(true)
-      try {
-        const user = await getUser()
-        const fetchedTopics = await getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
-        setTopics(fetchedTopics.topics)
-      } catch (error) {
-        log.error(error)
-        throw error
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    effect().catch(() => {
-      log.error('An error occurred while fetching course topics in LocalNav.hooks')
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  return { loading, topics }
-}
-
-export const useLearningPathElement = (
+const useLearningPathElement = (
   topic: Topic,
   courseId: string
 ): { loadingElements: boolean; learningPaths: LearningPathElement | undefined } => {
@@ -99,5 +71,7 @@ export const useLearningPathElement = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return { loadingElements, learningPaths }
+  return useMemo ( () => ({ loadingElements, learningPaths }), [loadingElements, learningPaths])
 }
+
+export {useLearningPathElement}

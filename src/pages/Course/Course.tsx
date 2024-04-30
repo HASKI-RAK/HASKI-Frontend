@@ -1,10 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Card, CardContent, Grid, Typography } from '@common/components'
-import { useMediaQuery, useTheme } from '@common/hooks'
+import { useMediaQuery, useTheme, useLearningPathTopic, useLearningPathTopicProgress} from '@common/hooks'
 import { CheckBox } from '@common/icons'
-import { SkeletonList, StyledLinearProgress, useLearningPathTopic } from '@components'
-import { useLearningPathTopicProgress } from './Course.hook'
+import { SkeletonList, StyledLinearProgress } from '@components'
 
 /**
  * # Course Page
@@ -16,7 +15,7 @@ import { useLearningPathTopicProgress } from './Course.hook'
  * Uses the {@link LinearProgressWithLabel} hook to calculate the progress of each topic in the course.
  * @category Pages
  */
-const Course = (): JSX.Element => {
+const Course = () => {
   const { t } = useTranslation()
   const theme = useTheme()
   const navigate = useNavigate()

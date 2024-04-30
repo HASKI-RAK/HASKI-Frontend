@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { Link, Skeleton, Typography } from '@common/components'
 import { Theme } from '@common/theme'
 import { LearningPathElement, Topic } from '@core'
-import { useLearningPathElement as _useLearningPathElement } from './LocalNav.hooks'
+import { useLearningPathElement as _useLearningPathElement } from '@common/hooks'
 
 /**
  * @prop {@link Topic} to be displayed

@@ -6,7 +6,7 @@ import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
 import { LearningElement, LearningPathLearningElement, StudentLearningElement, Topic } from '@core'
 import LocalNav, { LocalNavProps } from './LocalNav'
-import { getSortedLearningPath, useLearningPathElement, useLearningPathTopic } from './LocalNav.hooks'
+import { getSortedLearningPath, useLearningPathElement, useLearningPathTopic } from '@common/hooks'
 import resetModules = jest.resetModules
 import { AuthContext } from '@services'
 
@@ -52,17 +52,6 @@ describe('LocalNav tests', () => {
     last_updated: '2023-04-20T15:45:00.000Z',
     student_learning_element: mockStudentLearningElement
   }
-
-  const mockLearningPathLearningElement: LearningPathLearningElement[] = [
-    {
-      id: 1,
-      learning_element_id: 1,
-      learning_path_id: 1,
-      recommended: true,
-      position: 1,
-      learning_element: mockLearningElement
-    }
-  ]
 
   const mockTopics: Topic[] = [
     {

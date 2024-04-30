@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, useMemo } from 'react'
 import log from 'loglevel'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext, SnackbarContext } from '@services'
@@ -84,7 +84,7 @@ const fetchTopicProgress = async (
  * @param topics
  * @returns - A tuple with the progress of the learning elements in a topic and a boolean indicating if the data is still loading
  */
-export const useLearningPathTopicProgress = (courseId: string, topics: Topic[]) => {
+const useLearningPathTopicProgress = (courseId: string, topics: Topic[]) => {
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
   const [loading, setLoading] = useState(true) // State for loading
 
@@ -120,5 +120,7 @@ export const useLearningPathTopicProgress = (courseId: string, topics: Topic[]) 
     }
   }, [authContext.isAuth, courseId, navigate, topics, getUser, getLearningPathElement, getLearningPathElementStatus])
 
-  return { topicProgress: calculatedTopicProgress, loading }
+  return useMemo(() => ({ topicProgress: calculatedTopicProgress, loading }), [calculatedTopicProgress, loading])
 }
+
+export { useLearningPathTopicProgress }

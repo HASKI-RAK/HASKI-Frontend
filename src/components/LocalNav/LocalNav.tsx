@@ -4,14 +4,20 @@ import { Divider, Drawer, Typography, Grid, List, ListItem, ListItemButton, List
 import { FiberManualRecord } from '@common/icons'
 import {
   SkeletonList,
-  useLearningPathTopic as _useLearningPathTopic,
   Fraction
 } from '@components'
 import { Topic } from '@core'
 import { useEffect, useState } from 'react'
-import { useLearningPathTopicProgress } from './../../pages/Course/Course.hook'
 import { Theme } from '@common/theme'
-import { useMediaQuery, useTheme } from '@common/hooks'
+import { useMediaQuery, useTheme, useLearningPathTopic as _useLearningPathTopic, useLearningPathTopicProgress } from '@common/hooks'
+
+type TopicListItemProps = {
+  topic: Topic;
+  topicProgress: number[];
+  isProgressLoading: boolean;
+  courseId: string;
+  topicId: string;
+}
 
 /**
  * Topic list item component, displaying a topic with its done learning elements out of total learning elements.
@@ -26,13 +32,7 @@ import { useMediaQuery, useTheme } from '@common/hooks'
  * A JSX Element with the rendered topic list item.
  */
 
-const TopicListItem = ({ topic, topicProgress, isProgressLoading, courseId, topicId,}: {
-  topic: Topic;
-  topicProgress: number[];
-  isProgressLoading: boolean;
-  courseId: string;
-  topicId: string;
-}) => {
+const TopicListItem = ({ topic, topicProgress, isProgressLoading, courseId, topicId}: TopicListItemProps) => {
   const navigate = useNavigate()
   return (
     <Grid
@@ -45,7 +45,7 @@ const TopicListItem = ({ topic, topicProgress, isProgressLoading, courseId, topi
         borderRadius: 2
       }}
     >
-      <ListItem key={topic.id} sx={{ width: '100%', p: 0 }} color={'black'}>
+      <ListItem key={topic.id} sx={{ width: '100%', p: 0 }}>
         <ListItemButton
           key={topic.id}
           sx={{ width: '100%' }}
@@ -71,6 +71,8 @@ const TopicListItem = ({ topic, topicProgress, isProgressLoading, courseId, topi
                 <ListItemText
                   primary={
                     <Fraction
+                      variant="body1"
+                      sx={{ fontSize: 16 }}
                       numerator={topicProgress[0]}
                       denominator={topicProgress[1]}
                     />
@@ -94,22 +96,30 @@ const TopicListItem = ({ topic, topicProgress, isProgressLoading, courseId, topi
 }
 /**
  *  Local navigation component props.
- *  @prop {@link _useLearningPathTopic} - hook to get learning path topics
+ *  @prop {@link useLearningPathTopic} - hook to get learning path topics
  */
 export type LocalNavProps = {
   useLearningPathTopic?: (courseId: string) => { loading: boolean; topics: Topic[] }
 }
 
+type RouteParams = {
+  courseId: string
+  topicId: string
+}
+
 /**
  * Local navigation component.
- * @param param - component props. The {@link LocalNavProps#useLearningPathTopic} and {@link LocalNavProps#useLearningPathElement} are
+ * @param param - component props. The {@link LocalNavProps#useLearningPathTopic} are
  *   optional.
  * @returns
  * A JSX Element with the rendered local navigation.
  */
 const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProps) => {
   const { t } = useTranslation()
-  const { courseId, topicId } = useParams() as { courseId: string; topicId: string }
+  const { courseId } = useParams<string>()
+  const { topicId } = useParams<string>()
+  const definedCourseId = courseId ?? "default"
+  const definedTopicId = topicId ?? "default"
 
   const theme = useTheme()
   const open = useMediaQuery(theme.breakpoints.up('lg'))
@@ -127,8 +137,8 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  const { topics, loading: topicLoading } = useLearningPathTopic(courseId)
-  const { topicProgress, loading: isProgressLoading } = useLearningPathTopicProgress(courseId, topics)
+  const { topics, loading: topicLoading } = useLearningPathTopic(definedCourseId)
+  const { topicProgress, loading: isProgressLoading } = useLearningPathTopicProgress(definedCourseId, topics)
 
   return (
     <Grid container>
@@ -166,8 +176,8 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
                 topic={topic}
                 topicProgress={topicProgress[index]}
                 isProgressLoading={isProgressLoading}
-                courseId={courseId}
-                topicId={topicId}
+                courseId={definedCourseId}
+                topicId={definedTopicId}
               />
             ))}
           </List>

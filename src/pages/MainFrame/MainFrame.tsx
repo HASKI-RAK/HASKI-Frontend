@@ -23,9 +23,8 @@ export const MainFrame = () => {
 
   // !! converts courseId to a boolean
   const renderMenuBar = !!courseId
-  const renderLocalNav = !!courseId
   const theme = useTheme()
-  const open = useMediaQuery(theme.breakpoints.up('lg'))
+  const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && !!courseId
 
   return (
     <>
@@ -33,7 +32,7 @@ export const MainFrame = () => {
         {renderMenuBar ? <MenuBar courseSelected={true} /> : <MenuBar courseSelected={false} />}
         <BreadcrumbsContainer />
         <Grid container sx={{ flex: 1, overflow: 'hidden' }}>
-          {renderLocalNav && open && (
+          {isLocalNavOpen && (
             <>
               <Grid item container sx={{ width: '26.5rem' }}>
                   <LocalNav />

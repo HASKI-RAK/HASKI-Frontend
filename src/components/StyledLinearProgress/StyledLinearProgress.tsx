@@ -60,7 +60,7 @@ export const StyledLinearProgress = ({ learningElementProgressTopics, index }: B
 
   return (
     <StyledLinearProgressWithLabel
-      data-testid="Course-Card-Topic-Progress"
+      data-testid="courseCardTopicProgress"
       value={percent > 1 ? percent : 10} //if the student solved anything show his progress, else show a set minimum (6)
       color={index || learningElementProgressTopics ? colorByPercent() : 'info'}
       text={getText()}
