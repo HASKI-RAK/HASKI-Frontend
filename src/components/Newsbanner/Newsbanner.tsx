@@ -59,11 +59,7 @@ const Newsbanner=({useNewsbanner=_useNewsbanner}:NewsbannerProps)=>{
                 }
                 >
                     <Box sx={{ animation: `${scrolling} 30s linear infinite`, transform: `translateX(100%)`, width: `1600px` }} >
-                       <>
                        {text}
-                       </>
-                   
-                    Due to unforseen circumstances we regret to inform you that aliens have taken over humanity and we are doomed on another note the animalpark munich just had another cute lion baby 
                     </Box>
                 </Alert>
             </Collapse>

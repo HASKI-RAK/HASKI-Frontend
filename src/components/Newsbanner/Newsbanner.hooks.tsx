@@ -1,6 +1,6 @@
 import log from 'loglevel'
 import { useMemo } from 'react'
-import { usePersistedStore } from "@store"
+import { useStore } from "@store"
 
 export type NewsbannerHookReturn = {
     //readonly handleClose:()=> void
@@ -9,7 +9,7 @@ export type NewsbannerHookReturn = {
 }
 
 export const useNewsbanner = ():NewsbannerHookReturn=> {
-    const getNews = usePersistedStore((state)=>state.getNews)
+    const getNews = useStore((state)=>state.getNews)
 
     //** Logic **/
     //get the content of the news

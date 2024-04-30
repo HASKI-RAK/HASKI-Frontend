@@ -13,17 +13,5 @@ export const fetchNews =async(languageId?:string):Promise<NewsList>=>{
         headers:{
             'Content-Type': 'application/json'
         }
-
-       /*
-       Backend Response: 
-        {"message": [
-            {"message": "",
-        "until":},
-        {"message": [
-            {"message": "",
-        "until":},
-        ...
-        ]}
-        */
     })
 }
