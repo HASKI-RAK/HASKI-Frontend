@@ -17,15 +17,17 @@ const CustomFitViewButton = ({ nodes }: { nodes: Node[] }) => {
   const firstUncompletedElement = nodes[0]
 
   const handleClick = () => {
+    setTimeout(() => {
+      fitView({
+        padding: 5,
+        minZoom: 0.75,
+        duration: 100,
+        nodes: [{ id: firstUncompletedElement.id }]
+      })
+    }, 10)
     //with setViewport (useReactFlow) it is possible to set the view to a specific position and zoom
     //(for example first uncomplete node) ({ x: nodeX, y: nodeY, zoom: 1 }, { duration: 500 })
-    fitView({
-      padding: 5,
-      minZoom: 0.75,
-      nodes: [{ id: firstUncompletedElement.id }]
-    })
   }
-
   return <Button id="customFitViewButton" style={{ display: 'none' }} onClick={handleClick} />
 }
 
