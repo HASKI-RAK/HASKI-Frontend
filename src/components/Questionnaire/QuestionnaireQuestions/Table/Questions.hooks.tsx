@@ -87,8 +87,8 @@ const courseList = [1]
 const courseList2 = [2]
 const topicList = [2, 6, 10, 12]
 const topicList2 = [16, 22]
-const algorithmList = ['aco', 'ga', 'graf', 'aco']
-const algorithmList2 = ['ga', 'graf']
+const algorithmList = ['ga', 'ga', 'ga', 'ga']
+const algorithmList2 = ['ga', 'ga']
 
 const calculateLearningPath = (
   user: User,
