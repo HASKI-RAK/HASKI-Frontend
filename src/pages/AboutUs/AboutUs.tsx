@@ -44,7 +44,7 @@ const AboutUs = () => {
       <TextCardLeft
         header={t('pages.aboutus.introductionHeader')}
         body={t('pages.aboutus.introductionBody')}
-        backgroundImageURL="/LogoPng.png">
+        backgroundImageURL="/LogoHaski.png">
         <ImageCollection
           leftImgURL="/images/AboutUsRegensburg.jpg"
           middleImgURL="/images/AboutUsAschaffenburg.jpg"

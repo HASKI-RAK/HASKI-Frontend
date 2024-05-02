@@ -49,5 +49,7 @@ export { StyledLinearProgress } from './StyledLinearProgress/StyledLinearProgres
 export { default as LabeledSwitch } from './LabeledSwitch/LabeledSwitch'
 export { default as ResponsiveMiniMap } from './ResponsiveMiniMap/ResponsiveMiniMap'
 export { default as GlobalNavigationItem } from './GlobalNavigationItem/GlobalNavigationItem'
+export { useCourse } from './GlobalNavigationItem/Course.hooks'
+export { useProjectDescription } from './GlobalNavigationItem/ProjectDescription.hooks'
 
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure
