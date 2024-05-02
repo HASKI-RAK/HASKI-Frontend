@@ -107,8 +107,8 @@ const calculateLearningPath = (
         })
         .catch(() => {
           addSnackbar({
-            message: t('Data.calculated.error'),
-            severity: 'success',
+            message: t('error.postCalculateLearningPathILS'),
+            severity: 'error',
             autoHideDuration: 5000
           })
           log.error('Error while calculating learning path in Kempten Course 1')
