@@ -3,9 +3,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { Topic } from '@core'
 import { usePersistedStore, useStore } from '@store'
 
-
 /**
  * @param courseId - course id
+ * @returns
+ * A tuple with the loading state and the topics for a course
  */
 const useLearningPathTopic = (courseId: string): { loading: boolean; topics: Topic[] } => {
   const [loading, setLoading] = useState(true)
