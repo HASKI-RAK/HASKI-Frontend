@@ -1678,5 +1678,39 @@
   "tooltip.openSettings": "Open settings",
   "warning": "Warning",
   "warning.offline": "You are currently offline. Please check your internet connection.",
-  "warning.online": "You are online again."
+  "warning.online": "You are online again.",
+  "components.AlgorithmSettingsModal.headerLeft": "Choose a learning path algorithm",
+  "components.AlgorithmSettingsModal.headerRight": "Description",
+  "components.AlgorithmSettingsModal.algorithms": [
+    {
+      "name": "Predetermined Order",
+      "description": "The learning elements are presented in a predetermined order.",
+      "key": "fixed"
+    },
+    {
+      "name": "Bayes",
+      "description": "Bayes is a probabilistic algorithm that calculates the learning path based on the probability for the best order for a learner.",
+      "key": "bayes"
+    },
+    {
+      "name": "Graf",
+      "description": "This algorithm is based on the learning adaptive mechanism by Graf et al. It calculates the learning path based on the learning style of the learner.",
+      "key": "graf"
+    },
+    {
+      "name": "ACO",
+      "description": "The Ant Colony Algorithm (ACO) is inspired by the behavior of ant workers. It calculates the learning path by simulating ants who leave behind pheromones to mark the best path.",
+      "key": "aco"
+    },
+    {
+      "name": "Genetic Algorithm",
+      "description": "The Genetic Algorithm is inspiered by evolution. It approximates the best learning path by simulating the process of mutation and selection. It is often used for its speed.",
+      "key": "genetic"
+    },
+    {
+      "name": "Tyche",
+      "description": "Tyche is an algorithm based on the principle of luck. It is used to calculate the best learning path by taking into account the learners' luck factors.",
+      "key": "tyche"
+    }
+  ]
 }

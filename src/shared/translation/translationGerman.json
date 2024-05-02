@@ -1682,16 +1682,36 @@
   "warning.online": "Sie sind wieder online.",
   "components.AlgorithmSettingsModal.headerLeft": "Lernpfadalgorithmus wählen",
   "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
-  "components.AlgorithmSettingsModal.algorithmNames": [
-    "Bayesd",
-    "Graf",
-    "aco",
-    "Tyche"
-  ],
-  "components.AlgorithmSettingsModal.algorithmDescriptions": [
-    "Bayesd ist ein probabilistischer Algorithmus, der auf dem Bayes-Theorem basiert. Er wird verwendet, um die Wahrscheinlichkeit eines Ereignisses zu berechnen, basierend auf dem Wissen, das wir bereits haben.",
-    "Graf ist ein Algorithmus, der auf dem Prinzip der Graphentheorie basiert. Er wird verwendet, um die Beziehungen zwischen den Lernelementen zu analysieren und den besten Lernpfad zu berechnen.",
-    "Aco ist ein Algorithmus, der auf dem Prinzip des Ameisenalgorithmus basiert. Er wird verwendet, um den besten Lernpfad zu berechnen, indem er die Pheromonspuren der Ameisen simuliert.",
-    "Tyche ist ein Algorithmus, der auf dem Prinzip des Glücks basiert. Er wird verwendet, um den besten Lernpfad zu berechnen, indem er die Glücksfaktoren der Lernenden berücksichtigt."
+  "components.AlgorithmSettingsModal.algorithms": [
+    {
+      "name": "Feste Reihenfolge",
+      "description": "Die Lernelemente werden in einer festen Reihenfolge angezeigt. Es wird kein Algorithmus verwendet.",
+      "key": "fixed"
+    },
+    {
+      "name": "Bayes",
+      "description": "Bayes ist ein probabilistischer Algorithmus, der auf dem Bayes-Theorem basiert. Er wird verwendet, um die Wahrscheinlichkeit eines Ereignisses zu berechnen, basierend auf dem Wissen, das wir bereits haben.",
+      "key": "bayes"
+    },
+    {
+      "name": "Graf",
+      "description": "Graf ist ein Algorithmus, der auf dem Adaptionsmechanismus nach Graf et al. basiert.",
+      "key": "graf"
+    },
+    {
+      "name": "Ameisenalgorithmus",
+      "description": "Der Ameisen algorithmus, im englischen ant colony algorithm genannt, ist ein heuristisches Verfahren, dass vom Verhalten von Ameisen inspiriert wurde. Er wird verwendet, um den besten Lernpfad zu berechnen, indem er die Pheromonspuren der Ameisen simuliert.",
+      "key": "aco"
+    },
+    {
+      "name": "Genetischer Algorithmus",
+      "description": "Der genetische Algorithmus ist ein Algorithmus, der auf dem Prinzip der natürlichen Selektion basiert. Er wird verwendet, um einen möglichst guten Lernpfad zu berechnen, indem er die besten Lernenden auswählt und ihre Lernwege kombiniert.",
+      "key": "genetic"
+    },
+    {
+      "name": "Tyche",
+      "description": "Tyche ist ein Algorithmus, der auf dem Prinzip des Glücks basiert. Er wird verwendet, um den besten Lernpfad zu berechnen, indem er die Glücksfaktoren der Lernenden berücksichtigt.",
+      "key": "tyche"
+    }
   ]
 }
