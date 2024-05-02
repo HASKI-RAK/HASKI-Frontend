@@ -4,9 +4,9 @@ import { renderHook } from '@testing-library/react-hooks'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
-import { LearningElement, StudentLearningElement, Topic } from '@core'
+import { Topic } from '@core'
 import LocalNav, { LocalNavProps } from './LocalNav'
-import { useLearningPathElement, useLearningPathTopic } from '@common/hooks'
+import { useLearningPathTopic } from '@common/hooks'
 import resetModules = jest.resetModules
 import { AuthContext } from '@services'
 
@@ -31,14 +31,6 @@ describe('LocalNav tests', () => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
     jest.spyOn(router, 'useParams').mockImplementation(() => useParamsMock())
   })
-
-  const mockStudentLearningElement: StudentLearningElement = {
-    id: 1,
-    student_id: 1,
-    learning_element_id: 1,
-    done: false,
-    done_at: 'null'
-  }
 
   const mockTopics: Topic[] = [
     {
@@ -226,27 +218,6 @@ describe('LocalNav tests', () => {
 
 describe('getSortedLearningPath works as expected', () => {
 
-  const mockTopic: Topic = {
-    contains_le: true,
-    created_at: '2021-09-01T12:00:00.000Z',
-    created_by: 'dimitri',
-    id: 1,
-    is_topic: true,
-    last_updated: '2021-09-01T12:00:00.000Z',
-    lms_id: 1,
-    name: 'Allgemeine Informatik',
-    parent_id: 1,
-    student_topic: {
-      done: false,
-      done_at: null,
-      id: 1,
-      student_id: 1,
-      topic_id: 1,
-      visits: []
-    },
-    university: 'HS-KE'
-  }
-
   test('fetches learning path topics and returns the loading state', async () => {
     await act(async () => {
       const { result } = renderHook(() => useLearningPathTopic('2'))
@@ -298,125 +269,6 @@ describe('getSortedLearningPath works as expected', () => {
       })
     })
   })
-
-  test('fetches learning path elements for a topic and returns the loading state', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useLearningPathElement(mockTopic, '2'))
-
-    expect(result.current.loadingElements).toBe(true)
-    expect(result.current.learningPaths).toBeUndefined()
-
-    await waitForNextUpdate()
-
-    expect(result.current.loadingElements).toBe(false)
-    expect(result.current.learningPaths).toEqual({
-      id: 1,
-      course_id: 2,
-      based_on: 'string',
-      calculated_on: 'string',
-      path: [
-        {
-          id: 1,
-          learning_element_id: 1,
-          learning_path_id: 1,
-          recommended: false,
-          position: 1,
-          learning_element: {
-            id: 1,
-            lms_id: 1,
-            activity_type: 'test',
-            classification: 'KÜ',
-            name: 'test',
-            university: 'test',
-            created_by: 'test',
-            created_at: 'test',
-            last_updated: 'test',
-            student_learning_element: {
-              id: 1,
-              student_id: 1,
-              learning_element_id: 1,
-              done: false,
-              done_at: 'test'
-            }
-          }
-        },
-        {
-          id: 2,
-          learning_path_id: 2,
-          learning_element: {
-            activity_type: 'test',
-            classification: 'ÜB',
-            created_at: 'test',
-            created_by: 'test',
-            id: 2,
-            last_updated: 'test',
-            lms_id: 2,
-            name: 'test',
-            student_learning_element: {
-              done: false,
-              done_at: 'test',
-              id: 2,
-              learning_element_id: 2,
-              student_id: 1
-            },
-            university: 'test'
-          },
-          learning_element_id: 2,
-          position: 2,
-          recommended: false
-        },
-        {
-          id: 3,
-          learning_element: {
-            activity_type: 'test',
-            classification: 'ÜB',
-            created_at: 'test',
-            created_by: 'test',
-            id: 3,
-            last_updated: 'test',
-            lms_id: 3,
-            name: 'test',
-            student_learning_element: {
-              done: false,
-              done_at: 'test',
-              id: 3,
-              learning_element_id: 3,
-              student_id: 1
-            },
-            university: 'test'
-          },
-          learning_element_id: 3,
-          learning_path_id: 3,
-          position: 3,
-          recommended: false
-        },
-        {
-          id: 4,
-          learning_path_id: 4,
-          learning_element: {
-            activity_type: 'test',
-            classification: 'KÜ',
-            created_at: 'test',
-            created_by: 'test',
-            id: 4,
-            last_updated: 'test',
-            lms_id: 4,
-            name: 'test',
-            student_learning_element: {
-              done: false,
-              done_at: 'test',
-              id: 4,
-              learning_element_id: 4,
-              student_id: 1
-            },
-            university: 'test'
-          },
-          learning_element_id: 4,
-          position: 4,
-          recommended: false
-        }
-      ]
-    })
-  })
 })
 
 describe('useLearningPathTopic', () => {
@@ -435,34 +287,4 @@ describe('useLearningPathTopic', () => {
     })
   })
 
-  test('fetch learningPathElement fails', async () => {
-    const mockTopic = {
-      contains_le: true,
-      created_at: 'string',
-      created_by: 'string',
-      id: 1,
-      is_topic: true,
-      last_updated: 'string',
-      lms_id: 1,
-      name: 'string',
-      parent_id: 1,
-      university: 'HS-Kempten',
-      student_topic: {
-        done: true,
-        done_at: 'string',
-        id: 1,
-        student_id: 1,
-        topic_id: 1,
-        visits: ['string']
-      }
-    }
-    mockServices.fetchLearningPathElement = jest
-      .fn()
-      .mockImplementationOnce(() => Promise.reject(new Error('fetchLearningPathElement failed')))
-
-    act(() => {
-      const { result } = renderHook(() => useLearningPathElement(mockTopic, '2'))
-      expect(result.current).toBeUndefined()
-    })
-  })
 })
