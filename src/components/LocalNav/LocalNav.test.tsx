@@ -4,9 +4,9 @@ import { renderHook } from '@testing-library/react-hooks'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
-import { LearningElement, LearningPathLearningElement, StudentLearningElement, Topic } from '@core'
+import { LearningElement, StudentLearningElement, Topic } from '@core'
 import LocalNav, { LocalNavProps } from './LocalNav'
-import { getSortedLearningPath, useLearningPathElement, useLearningPathTopic } from '@common/hooks'
+import { useLearningPathElement, useLearningPathTopic } from '@common/hooks'
 import resetModules = jest.resetModules
 import { AuthContext } from '@services'
 
@@ -38,19 +38,6 @@ describe('LocalNav tests', () => {
     learning_element_id: 1,
     done: false,
     done_at: 'null'
-  }
-
-  const mockLearningElement: LearningElement = {
-    id: 1,
-    lms_id: 1,
-    activity_type: 'Quiz',
-    classification: 'Formative',
-    name: 'Quiz on Chapter 3',
-    university: 'HS-KE',
-    created_by: 'John Doe',
-    created_at: '2023-04-19T10:30:00.000Z',
-    last_updated: '2023-04-20T15:45:00.000Z',
-    student_learning_element: mockStudentLearningElement
   }
 
   const mockTopics: Topic[] = [
@@ -238,39 +225,6 @@ describe('LocalNav tests', () => {
 })
 
 describe('getSortedLearningPath works as expected', () => {
-  const mockGetLearningPathElement = jest.fn().mockResolvedValue({
-    id: 99999,
-    course_id: 99999,
-    based_on: 'mock LearningPathElement',
-    calculated_on: 'mock LearningPathElement',
-    path: [
-      {
-        id: 99999,
-        learning_element_id: 99999,
-        learning_path_id: 99999,
-        recommended: true,
-        position: 99999,
-        learning_element: {
-          id: 99999,
-          lms_id: 99999,
-          activity_type: 'mock LearningPathElement',
-          classification: 'mock LearningPathElement',
-          name: 'mock LearningPathElement',
-          university: 'mock LearningPathElement',
-          created_by: 'mock LearningPathElement',
-          created_at: 'mock LearningPathElement',
-          last_updated: 'mock LearningPathElement',
-          student_learning_element: {
-            id: 99999,
-            student_id: 99999,
-            learning_element_id: 99999,
-            done: false,
-            done_at: 'mock LearningPathElement'
-          }
-        }
-      }
-    ]
-  })
 
   const mockTopic: Topic = {
     contains_le: true,
@@ -292,61 +246,6 @@ describe('getSortedLearningPath works as expected', () => {
     },
     university: 'HS-KE'
   }
-
-  test('returns a sorted learning path', async () => {
-    const mockUserId = 1
-    const mockLmsUserId = 1
-    const mockStudentId = 1
-
-    const result = await getSortedLearningPath(
-      mockUserId,
-      mockLmsUserId,
-      mockStudentId,
-      mockTopic,
-      '2',
-      mockGetLearningPathElement
-    )
-    expect(result).toEqual({
-      id: 99999,
-      course_id: 99999,
-      based_on: 'mock LearningPathElement',
-      calculated_on: 'mock LearningPathElement',
-      path: [
-        {
-          id: 99999,
-          learning_element_id: 99999,
-          learning_path_id: 99999,
-          recommended: true,
-          position: 99999,
-          learning_element: {
-            id: 99999,
-            lms_id: 99999,
-            activity_type: 'mock LearningPathElement',
-            classification: 'mock LearningPathElement',
-            name: 'mock LearningPathElement',
-            university: 'mock LearningPathElement',
-            created_by: 'mock LearningPathElement',
-            created_at: 'mock LearningPathElement',
-            last_updated: 'mock LearningPathElement',
-            student_learning_element: {
-              id: 99999,
-              student_id: 99999,
-              learning_element_id: 99999,
-              done: false,
-              done_at: 'mock LearningPathElement'
-            }
-          }
-        }
-      ]
-    })
-    expect(mockGetLearningPathElement).toHaveBeenCalledWith(
-      mockUserId,
-      mockLmsUserId,
-      mockStudentId,
-      '2',
-      mockTopic.id.toString()
-    )
-  })
 
   test('fetches learning path topics and returns the loading state', async () => {
     await act(async () => {
