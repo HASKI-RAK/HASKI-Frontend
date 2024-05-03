@@ -41,7 +41,7 @@ import {
   TableILSQuestions,
   TableListKQuestions
 } from '@components'
-import { useCourse, useProjectDescription } from '@components'
+import { CourseDropdown, ProjectInfoDropdown, useCourse, useProjectDescription } from '@components'
 import { Topic } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -226,8 +226,8 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               onClick={() => navigate('/')}>
               HASKI
             </TextWrapper>
-            <GlobalNavigationItem title={t('appGlobal.courses')} useGlobalNavigationItem={useCourse} />
-            <GlobalNavigationItem title={'Project Information'} useGlobalNavigationItem={useProjectDescription} />
+            <CourseDropdown />
+            <ProjectInfoDropdown />
           </Box>
           {/** Search bar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>

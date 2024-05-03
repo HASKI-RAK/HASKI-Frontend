@@ -2,10 +2,14 @@ import log from 'loglevel'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import { GlobalNavigationItemReturn } from './GlobalNavigationItem.hooks'
+
+export type CourseDropdownHookReturn = {
+  readonly content: { name: string; url: string }[]
+  readonly isLoading: boolean
+}
 
 // Comment
-export const useCourse = (): GlobalNavigationItemReturn => {
+export const useCourseDropdown = (): CourseDropdownHookReturn => {
   // States
   const [isLoading, setIsLoading] = useState(true)
   const [content, setContent] = useState<{ name: string; url: string }[]>([])
