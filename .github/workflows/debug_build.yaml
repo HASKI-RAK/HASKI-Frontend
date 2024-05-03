@@ -2,7 +2,7 @@ name: frontend
 on:
   push:
     branches:
-      - 273-localnav-should-center-on-clicked-learning-element-in-learning-path-view
+      - main
 jobs:
   publish_frontend:
     runs-on: ubuntu-latest

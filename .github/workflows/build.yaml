@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - 273-localnav-should-center-on-clicked-learning-element-in-learning-path-view
+      - main
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
