@@ -1,9 +1,9 @@
 type NewsList = {
-  newslist: News[]
+  news: News[]
 }
 
 type News = {
-  newsContent: string
+  news_content: string
 }
 export default News
 export type { NewsList }

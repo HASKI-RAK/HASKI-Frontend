@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand'
-import { News, NewsList } from '@core'
+import { NewsList } from '@core'
 import { fetchNews } from '@services'
 import { StoreState } from '@store'
 import { resetters } from '../Zustand/Store'
