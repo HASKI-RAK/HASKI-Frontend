@@ -4,7 +4,7 @@ import GlobalNavMenu from '../GlobalNavMenu/GlobalNavMenu'
 
 const FurtherInfoMenu = () => {
   const { t } = useTranslation()
-  const content = [
+  const furtherInfoComponents = [
     { name: t('pages.projectdescription'), url: '/projectinformation/projectdescription' },
     { name: t('pages.glossary'), url: '/projectinformation/glossary' },
     { name: t('pages.aboutus'), url: '/projectinformation/aboutus' }
@@ -14,7 +14,7 @@ const FurtherInfoMenu = () => {
     <GlobalNavMenu
       id="further-info"
       title={t('components.FurtherInfoMenu.title')}
-      content={content}
+      content={furtherInfoComponents}
       isLoading={false}
       tooltip={'tooltip.furtherInfoSelection'}
     />

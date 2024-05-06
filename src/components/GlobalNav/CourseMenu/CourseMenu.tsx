@@ -1,5 +1,6 @@
-import { memo } from 'react'
+import { memo, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import { AuthContext } from '@services'
 import GlobalNavMenu from '../GlobalNavMenu/GlobalNavMenu'
 import { CourseMenuHookReturn, useCourseMenu as _useCourseMenu } from './CourseMenu.hooks'
 
@@ -11,15 +12,22 @@ const CourseMenu = ({ useCourseMenu = _useCourseMenu }: CourseMenuProps) => {
   const { content, isLoading } = useCourseMenu()
   const { t } = useTranslation()
 
+  // Contexts
+  const { isAuth } = useContext(AuthContext)
+
   // Course Selection -> CourseDropdown.courseSelection
   return (
-    <GlobalNavMenu
-      id="course"
-      title={t('appGlobal.courses')}
-      content={content}
-      isLoading={isLoading}
-      tooltip={t('tooltip.courseSelection')}
-    />
+    <>
+      {isAuth && (
+        <GlobalNavMenu
+          id="course"
+          title={t('appGlobal.courses')}
+          content={content}
+          isLoading={isLoading}
+          tooltip={t('tooltip.courseSelection')}
+        />
+      )}
+    </>
   )
 }
 

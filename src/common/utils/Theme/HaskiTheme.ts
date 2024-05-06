@@ -1,4 +1,3 @@
-import { Opacity } from '@mui/icons-material'
 import { createTheme, green, grey, red, yellow } from '@common/theme'
 
 export const defaultBehavior = {
@@ -193,6 +192,7 @@ export const HaskiTheme = createTheme({
           fontFamily: 'monospace',
           fontWeight: 700,
           letterSpacing: '.3rem',
+          lineHeight: '1rem',
           textDecoration: 'none',
           opacity: 0.7,
           ':hover': {
