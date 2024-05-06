@@ -16,7 +16,7 @@ const FurtherInfoMenu = () => {
       title={t('components.FurtherInfoMenu.title')}
       content={furtherInfoComponents}
       isLoading={false}
-      tooltip={'tooltip.furtherInfoSelection'}
+      tooltip={t('tooltip.furtherInfoSelection')}
     />
   )
 }

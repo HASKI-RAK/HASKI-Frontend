@@ -17,7 +17,6 @@ const CourseMenu = ({ useCourseMenu = _useCourseMenu }: CourseMenuProps) => {
 
   // Contexts
   const { isAuth } = useContext(AuthContext)
-
   return (
     <>
       {isAuth && (
