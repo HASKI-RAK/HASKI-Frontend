@@ -1,8 +1,10 @@
 import log from 'loglevel'
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { CourseResponse } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
+// Type
 export type CourseMenuHookReturn = {
   readonly content: { name: string; url: string }[]
   readonly isLoading: boolean
@@ -21,12 +23,17 @@ export const useCourseMenu = (): CourseMenuHookReturn => {
   // Contexts
   const { addSnackbar } = useContext(SnackbarContext)
 
+  // Logic
+  const mapCourseToContent = useCallback((response: CourseResponse) => {
+    return response.courses.map((element) => ({ name: element.name, url: `/course/${element.id}` }))
+  }, [])
+
   useEffect(() => {
     getUser()
       .then((user) => {
         getCourses(user.settings.user_id, user.lms_user_id, user.id)
           .then((response) => {
-            setContent(response.courses.map((element) => ({ name: element.name, url: `/course/${element.id}` })))
+            setContent(mapCourseToContent(response))
             setIsLoading(false)
           })
           .catch((error) => {

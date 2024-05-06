@@ -1,77 +1,70 @@
-/*test('popover is rendered when Topics button is clicked', async () => {
-    const { getByText, getAllByTestId } = render(
+import '@testing-library/jest-dom'
+import { fireEvent, render } from '@testing-library/react'
+import * as router from 'react-router'
+import { MemoryRouter } from 'react-router-dom'
+import GlobalNavMenu from './GlobalNavMenu'
+
+const navigate = jest.fn()
+
+describe('FurtherInfoMenu tests', () => {
+  beforeEach(() => {
+    jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+  })
+
+  it('renders correctly with input and isLoading false', () => {
+    const mockProps = {
+      id: 'id',
+      content: [{ name: 'name', url: 'url' }],
+      title: 'title',
+      isLoading: false,
+      tooltip: 'tooltip'
+    }
+
+    const globalNavMenu = render(
       <MemoryRouter>
-        <MenuBar />
+        <GlobalNavMenu {...mockProps} />
       </MemoryRouter>
     )
 
-    await waitFor(async () => {
-      fireEvent.click(getByText('appGlobal.topics'))
-      await waitFor(() => {
-        expect(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0]).toBeInTheDocument()
-      })
-    })
-  })*/
+    expect(globalNavMenu).toBeTruthy()
+  })
 
-/*test('fetching user when opening Topics throws error ', async () => {
-    mockServices.fetchUser.mockImplementationOnce(() => {
-      throw new Error('Error')
-    })
+  it('renders correctly with input and isLoading true', () => {
+    const mockProps = {
+      id: 'id',
+      content: [{ name: 'name', url: 'url' }],
+      title: 'title',
+      isLoading: true,
+      tooltip: 'tooltip'
+    }
 
-    jest.spyOn(console, 'error').mockImplementation(() => {
-      return
-    })
-
-    const { container, getByText } = render(
+    const globalNavMenu = render(
       <MemoryRouter>
-        <MenuBar />
+        <GlobalNavMenu {...mockProps} />
       </MemoryRouter>
     )
 
-    await waitFor(() => {
-      fireEvent.click(getByText('appGlobal.topics'))
-      waitFor(() => {
-        expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
-      })
-    })
-  })*/
+    expect(globalNavMenu).toBeTruthy()
+  })
 
-/*test('fetching topic throws error ', async () => {
-    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => {
-      throw new Error('Error')
-    })
+  test('opens and closes menu', async () => {
+    const mockProps = {
+      id: 'id',
+      content: [{ name: 'name', url: 'url' }],
+      title: 'title',
+      isLoading: false,
+      tooltip: 'tooltip'
+    }
 
-    jest.spyOn(console, 'error').mockImplementation(() => {
-      return
-    })
-
-    const { container, getByText } = render(
+    const { getByRole } = render(
       <MemoryRouter>
-        <MenuBar />
+        <GlobalNavMenu {...mockProps} />
       </MemoryRouter>
     )
 
-    await waitFor(() => {
-      fireEvent.click(getByText('appGlobal.topics'))
-      waitFor(() => {
-        expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
-      })
-    })
-  })*/
+    fireEvent.click(getByRole('button'))
+    fireEvent.click(getByRole('menuitem'))
 
-/*it('should set anchorElTopics to null', async () => {
-    const { getByText, getAllByTestId } = render(
-      <MemoryRouter>
-        <MenuBar />
-      </MemoryRouter>
-    )
-
-    await waitFor(async () => {
-      fireEvent.click(getByText('appGlobal.topics'))
-      await waitFor(() => {
-        expect(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0]).toBeInTheDocument()
-        fireEvent.click(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0])
-        expect(navigate).toHaveBeenCalledWith('course/undefined/topic/1')
-      })
-    })
-  })*/
+    expect(navigate).toHaveBeenCalledTimes(1)
+  })
+})
