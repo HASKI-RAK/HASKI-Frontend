@@ -6,15 +6,15 @@ import { SkeletonList } from '@components'
 
 // Type
 export type GlobalNavMenuProps = {
-  id: string
-  content: { name: string; url: string }[]
-  title: string
-  isLoading: boolean
-  tooltip: string
+  id?: string
+  content?: { name: string; url: string }[]
+  title?: string
+  isLoading?: boolean
+  tooltip?: string
 }
 
 // Component
-const GlobalNavMenu = ({ id, content, title, isLoading, tooltip }: GlobalNavMenuProps) => {
+const GlobalNavMenu = ({ id = 'global-nav', content = [], title, isLoading, tooltip }: GlobalNavMenuProps) => {
   // Hooks
   const navigate = useNavigate()
 
@@ -50,7 +50,7 @@ const GlobalNavMenu = ({ id, content, title, isLoading, tooltip }: GlobalNavMenu
             data-testid="Menubar-TopicButton"
             sx={{ whiteSpace: 'pre-wrap', mt: 0.5 }}
             variant="text">
-            {title.replaceAll(' ', '\n')}
+            {title?.replaceAll(' ', '\n')}
           </Button>
         </Tooltip>
         <Menu

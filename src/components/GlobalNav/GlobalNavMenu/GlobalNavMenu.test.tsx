@@ -11,6 +11,16 @@ describe('FurtherInfoMenu tests', () => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
+  it('renders correctly with no input', () => {
+    const globalNavMenu = render(
+      <MemoryRouter>
+        <GlobalNavMenu />
+      </MemoryRouter>
+    )
+
+    expect(globalNavMenu).toBeTruthy()
+  })
+
   it('renders correctly with input and isLoading false', () => {
     const mockProps = {
       id: 'id',
