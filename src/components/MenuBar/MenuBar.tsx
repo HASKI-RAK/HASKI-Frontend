@@ -33,7 +33,6 @@ import {
   PlaylistAddCheckCircleOutlined
 } from '@common/icons'
 import {
-  GlobalNavigationItem,
   LanguageMenu,
   QuestionnaireQuestionsModal,
   QuestionnaireResultsModal,
@@ -41,7 +40,7 @@ import {
   TableILSQuestions,
   TableListKQuestions
 } from '@components'
-import { CourseDropdown, ProjectInfoDropdown, useCourse, useProjectDescription } from '@components'
+import { CourseDropdown, ProjectInfoDropdown } from '@components'
 import { Topic } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'

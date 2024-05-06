@@ -1,8 +1,8 @@
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-import GlobalNavDropdown from '../GlobalNavDropdown/GlobalNavDropdown'
+import GlobalNavMenu from '../GlobalNavMenu/GlobalNavMenu'
 
-const ProjectInfoDropdown = () => {
+const FurtherInfoMenu = () => {
   const { t } = useTranslation()
   const content = [
     { name: t('pages.projectdescription'), url: '/projectinformation/projectdescription' },
@@ -10,7 +10,15 @@ const ProjectInfoDropdown = () => {
     { name: t('pages.aboutus'), url: '/projectinformation/aboutus' }
   ].sort((a, b) => a.name.localeCompare(b.name))
 
-  return <GlobalNavDropdown title={t('pages.projectinformation')} content={content} isLoading={false} />
+  return (
+    <GlobalNavMenu
+      id="further-info"
+      title={t('components.FurtherInfoMenu.title')}
+      content={content}
+      isLoading={false}
+      tooltip={'tooltip.furtherInfoSelection'}
+    />
+  )
 }
 
-export default memo(ProjectInfoDropdown)
+export default memo(FurtherInfoMenu)

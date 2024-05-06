@@ -3,13 +3,13 @@ import { useContext, useEffect, useMemo, useState } from 'react'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
-export type CourseDropdownHookReturn = {
+export type CourseMenuHookReturn = {
   readonly content: { name: string; url: string }[]
   readonly isLoading: boolean
 }
 
 // Comment
-export const useCourseDropdown = (): CourseDropdownHookReturn => {
+export const useCourseMenu = (): CourseMenuHookReturn => {
   // States
   const [isLoading, setIsLoading] = useState(true)
   const [content, setContent] = useState<{ name: string; url: string }[]>([])

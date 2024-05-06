@@ -48,10 +48,6 @@ export { default as LinearProgressWithLabel } from './StyledLinearProgress/Linea
 export { StyledLinearProgress } from './StyledLinearProgress/StyledLinearProgress'
 export { default as LabeledSwitch } from './LabeledSwitch/LabeledSwitch'
 export { default as ResponsiveMiniMap } from './ResponsiveMiniMap/ResponsiveMiniMap'
-export { default as GlobalNavigationItem } from './GlobalNav/GlobalNavigationItem'
-export { useCourseDropdown as useCourse } from './GlobalNav/CourseDropdown/CourseDropdown.hooks'
-export { useProjectDescription } from './GlobalNav/ProjectDescription.hooks'
-export { default as CourseDropdown } from './GlobalNav/CourseDropdown/CourseDropdown'
-export { default as ProjectInfoDropdown } from './GlobalNav/ProjectInfoDropdown/ProjectInfoDropdown'
 
+export * from './GlobalNav'
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure

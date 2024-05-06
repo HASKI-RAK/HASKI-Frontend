@@ -1,29 +1,23 @@
 import { MouseEvent, memo, useCallback, useContext, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, Divider, Menu, MenuItem, Tooltip } from '@common/components'
 import { ArrowDropDown } from '@common/icons'
 import { SkeletonList } from '@components'
 import { AuthContext } from '@services'
-import {
-  GlobalNavigationItemReturn,
-  useGlobalNavigationItem as _useGlobalNavigationItem
-} from './GlobalNavigationItem.hooks'
 
-export type GlobalNavigationItemProps = {
+// Type
+export type GlobalNavMenuProps = {
+  id: string
+  content: { name: string; url: string }[]
   title: string
-  useGlobalNavigationItem?: () => GlobalNavigationItemReturn
+  isLoading: boolean
+  tooltip: string
 }
 
 // Component
-const GlobalNavigationItem = ({
-  title,
-  useGlobalNavigationItem = _useGlobalNavigationItem
-}: GlobalNavigationItemProps) => {
+const GlobalNavMenu = ({ id, content, title, isLoading, tooltip }: GlobalNavMenuProps) => {
   // Hooks
-  const { t } = useTranslation()
   const navigate = useNavigate()
-  const { content, isLoading } = useGlobalNavigationItem()
 
   // States
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null)
@@ -31,29 +25,26 @@ const GlobalNavigationItem = ({
   // Contexts
   const { isAuth } = useContext(AuthContext)
 
-  // Logic
+  // Sets the anchor element when opened.
   const handleOpen = async (event: MouseEvent<HTMLElement>) => {
     setAnchorElement(event.currentTarget)
   }
 
-  // Close
+  // Sets the anchor element to null when closed.
   const handleClose = useCallback(() => {
     setAnchorElement(null)
   }, [setAnchorElement])
 
-  // "Select a course"
-  // page title
-  // Isauth needed
-  //  tooltip
+  // test id deleten
   return (
     <>
       {isAuth && (
         <>
           <Divider orientation="vertical" flexItem />
           <Box sx={{ flexGrow: 0, ml: 1 }}>
-            <Tooltip title={t('appGlobal.courseSelection')}>
+            <Tooltip title={tooltip}>
               <Button
-                id="course-button"
+                id={id.concat('-menu-button')}
                 endIcon={
                   anchorElement ? (
                     <ArrowDropDown sx={{ transform: 'rotate(180deg)', ml: -1 }} />
@@ -63,12 +54,13 @@ const GlobalNavigationItem = ({
                 }
                 onClick={handleOpen}
                 data-testid="Menubar-TopicButton"
+                sx={{ whiteSpace: 'pre-wrap', mt: 5 }}
                 variant="text">
-                {title}
+                {title.replaceAll(' ', '\n')}
               </Button>
             </Tooltip>
             <Menu
-              id="basic-menu"
+              id={id.concat('-dropdown-menu')}
               anchorEl={anchorElement}
               open={Boolean(anchorElement)}
               transformOrigin={{
@@ -84,23 +76,23 @@ const GlobalNavigationItem = ({
                 textAlign: 'center'
               }}
               onClose={handleClose}>
-              {isLoading ? ( // display Skeleton component while loading
+              {isLoading ? (
                 <Box width={400}>
                   <SkeletonList />
                 </Box>
               ) : (
                 <>
-                  {[...content].reverse().map((course) => (
+                  {[...content].map((element) => (
                     <MenuItem
-                      id={course.name.concat('-link').replaceAll(' ', '-')}
-                      key={course.name}
-                      data-testid={`Menubar-Topic-${course.name}`}
+                      id={element.name.concat('-link').replaceAll(' ', '-')}
+                      key={element.name}
+                      data-testid={`Menubar-Topic-${element.name}`}
                       color="inherit"
                       onClick={() => {
-                        navigate(course.url)
+                        navigate(element.url)
                         handleClose()
                       }}>
-                      {course.name}
+                      {element.name}
                     </MenuItem>
                   ))}
                 </>
@@ -113,4 +105,4 @@ const GlobalNavigationItem = ({
   )
 }
 
-export default memo(GlobalNavigationItem)
+export default memo(GlobalNavMenu)

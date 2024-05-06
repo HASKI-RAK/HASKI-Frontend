@@ -1680,5 +1680,8 @@
   "tooltip.openSettings": "Einstellungen",
   "warning": "Warnung",
   "warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
-  "warning.online": "Sie sind wieder online."
+  "warning.online": "Sie sind wieder online.",
+  "tooltip.courseSelection": "Wählen Sie eine Kurs",
+  "tooltip.furtherInfoSelection": "Weitere Informationen über das Projekt",
+  "components.FurtherInfoMenu.title": "Weitere Informationen"
 }
