@@ -13,7 +13,6 @@ import {
   PageNotFound,
   PrivacyPolicy,
   ProjectDescription,
-  ProjectInformation,
   ThemePresentation,
   Topic
 } from '@pages'
@@ -44,10 +43,9 @@ export const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-              <Route path="/projectinformation" element={<ProjectInformation />} />
-              <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
-              <Route path="/projectinformation/glossary" element={<Glossary />} />
-              <Route path="/projectinformation/aboutus" element={<AboutUs />} />
+              <Route path="/projectdescription" element={<ProjectDescription />} />
+              <Route path="/glossary" element={<Glossary />} />
+              <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/imprint" element={<Imprint />} />
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />
               <Route path="/🥚" element={<div>Ei</div>} />

@@ -5,9 +5,9 @@ import GlobalNavMenu from '../GlobalNavMenu/GlobalNavMenu'
 const FurtherInfoMenu = () => {
   const { t } = useTranslation()
   const furtherInfoComponents = [
-    { name: t('pages.projectdescription'), url: '/projectinformation/projectdescription' },
-    { name: t('pages.glossary'), url: '/projectinformation/glossary' },
-    { name: t('pages.aboutus'), url: '/projectinformation/aboutus' }
+    { name: t('pages.projectdescription'), url: '/projectdescription' },
+    { name: t('pages.glossary'), url: '/glossary' },
+    { name: t('pages.aboutus'), url: '/aboutus' }
   ].sort((a, b) => a.name.localeCompare(b.name))
 
   return (
