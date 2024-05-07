@@ -11,6 +11,15 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn()
 }))
 
+jest.mock('common/hooks', () => ({
+  useTheme: () => ({
+    breakpoints: {
+      up: (size: string) => `@media (min-width:${size}px)`, // Simulate the 'up' method returning a media query string
+    },
+  }),
+  useMediaQuery: jest.fn().mockReturnValue(true), // Simulate the useMediaQuery hook returning true
+}))
+
 describe('MainFrame', () => {
   beforeEach(() => {
     jest.spyOn(Router, 'useNavigate').mockImplementation(() => navigate)
@@ -40,3 +49,5 @@ describe('MainFrame', () => {
     expect(container.textContent).toContain('pages.home/pages.course')
   })
 })
+
+

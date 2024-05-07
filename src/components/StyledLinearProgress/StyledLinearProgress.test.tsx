@@ -98,7 +98,7 @@ describe('Course2', () => {
     )
 
     await waitFor(async () => {
-      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 0/2')
+      expect(getAllByTestId('courseCardTopicProgress')[0].parentNode?.textContent).toBe('Learning progress: 0/2')
     })
   })
 })
@@ -106,7 +106,7 @@ describe('Course2', () => {
 describe('Course3', () => {
   jest.restoreAllMocks()
 
-  it('renders course page with topics, some learning elements are done (50%)', async () => {
+  it('renders course page with topics, some learning elements are done (33%)', async () => {
     mockServices.fetchLearningPathElementStatus = jest.fn().mockImplementationOnce(() =>
       Promise.resolve([
         {
@@ -117,6 +117,11 @@ describe('Course3', () => {
         {
           cmid: 2,
           state: 1,
+          timecompleted: '1699967821'
+        },
+        {
+          cmid: 3,
+          state: 0,
           timecompleted: '1699967821'
         }
       ])
@@ -178,6 +183,31 @@ describe('Course3', () => {
                 done_at: 'test'
               }
             }
+          },
+          {
+            id: 3,
+            learning_element_id: 3,
+            learning_path_id: 3,
+            recommended: false,
+            position: 3,
+            learning_element: {
+              id: 3,
+              lms_id: 3,
+              activity_type: 'test',
+              classification: 'ÜB',
+              name: 'test',
+              university: 'test',
+              created_at: 'test',
+              created_by: 'test',
+              last_updated: 'test',
+              student_learning_element: {
+                id: 3,
+                student_id: 1,
+                learning_element_id: 3,
+                done: false,
+                done_at: 'test'
+              }
+            }
           }
         ]
       })
@@ -192,7 +222,7 @@ describe('Course3', () => {
     )
 
     await waitFor(() => {
-      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 1/2')
+      expect(getAllByTestId('courseCardTopicProgress')[0].parentNode?.textContent).toBe('Learning progress: 1/3')
     })
   })
 })
@@ -286,7 +316,7 @@ describe('Course4', () => {
     )
 
     await waitFor(async () => {
-      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 2/2')
+      expect(getAllByTestId('courseCardTopicProgress')[0].parentNode?.textContent).toBe('Learning progress: 2/2')
     })
   })
 })
@@ -316,7 +346,7 @@ describe('Course5', () => {
     )
 
     await waitFor(() => {
-      expect(getAllByTestId('Course-Card-Topic-Progress')[1].parentNode?.textContent).toBe('Learning progress: error..')
+      expect(getAllByTestId('courseCardTopicProgress')[1].parentNode?.textContent).toBe('Learning progress: error..')
     })
   })
 })
