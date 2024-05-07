@@ -74,13 +74,13 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [isGrouped, setIsGrouped] = useState(true)
 
   // Search for the 'fit view'-button of <Controls/> and trigger click event
-  /*const handleFitView = () => {
+  const handleFitView = () => {
    const fitViewButton = document.querySelector('.react-flow__controls-button.react-flow__controls-fitview')
 
    if (fitViewButton) {
    (fitViewButton as HTMLButtonElement).click()
    }
-   }*/
+   }
 
   // Trigger the click event of the custom 'fit view'-button
   const handleCustomFitView  = (): void => {
@@ -111,8 +111,9 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // [handleCustomFitView] as dependency because inside of it the fitViewButton changes,
   // that way the reactFlow background is changed before rendering it in a old position from the prev. topic
   useEffect(() => {
-    handleCustomFitView()
-  }, [handleCustomFitView])
+    setTimeout(() => {
+    handleFitView(), 10})
+  }, [topicId])
 
   // Get status of every learning element for user by request to backend
   // then get every learning element for topic by request to backend
@@ -213,7 +214,6 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             nodes: [{ id: initialNodes[0].id }]
           }}>
           <ResponsiveMiniMap />
-          <CustomFitViewButton nodes={initialNodes} />
           <Background gap={16} />
           {/*<Panel position="top-right">
            <LabeledSwitch
