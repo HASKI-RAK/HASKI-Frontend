@@ -37,65 +37,67 @@ const GlobalNavMenu = forwardRef(
 
     // test id deleten
     return (
-      <div {...props} ref={ref}>
+      <>
         <Divider orientation="vertical" flexItem />
-        <Box sx={{ flexGrow: 0, ml: 1 }}>
-          <Tooltip arrow title={tooltip}>
-            <Button
-              id={id.concat('-menu-button')}
-              endIcon={
-                anchorElement ? (
-                  <ArrowDropDown sx={{ transform: 'rotate(180deg)', ml: -1 }} />
-                ) : (
-                  <ArrowDropDown sx={{ ml: -1 }} />
-                )
-              }
-              onClick={handleOpen}
-              data-testid="Menubar-TopicButton"
-              sx={{ whiteSpace: 'pre-wrap', mt: 0.5 }}
-              variant="text">
-              {title?.replaceAll(' ', '\n')}
-            </Button>
-          </Tooltip>
-          <Menu
-            id={id.concat('-dropdown-menu')}
-            anchorEl={anchorElement}
-            open={Boolean(anchorElement)}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'center'
-            }}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center'
-            }}
-            sx={{
-              alignItems: 'center',
-              textAlign: 'center'
-            }}
-            onClose={handleClose}>
-            {isLoading ? (
-              <Box width={400}>
-                <SkeletonList />
-              </Box>
-            ) : (
-              [...content].map((element) => (
-                <MenuItem
-                  id={element.name.concat('-link').replaceAll(' ', '-')}
-                  key={element.name}
-                  data-testid={`Menubar-Topic-${element.name}`}
-                  color="inherit"
-                  onClick={() => {
-                    navigate(element.url)
-                    handleClose()
-                  }}>
-                  {element.name}
-                </MenuItem>
-              ))
-            )}
-          </Menu>
-        </Box>
-      </div>
+        <div {...props} ref={ref}>
+          <Box sx={{ flexGrow: 0, ml: 1 }}>
+            <Tooltip arrow title={tooltip}>
+              <Button
+                id={id.concat('-menu-button')}
+                endIcon={
+                  anchorElement ? (
+                    <ArrowDropDown sx={{ transform: 'rotate(180deg)', ml: -1 }} />
+                  ) : (
+                    <ArrowDropDown sx={{ ml: -1 }} />
+                  )
+                }
+                onClick={handleOpen}
+                data-testid="Menubar-TopicButton"
+                sx={{ whiteSpace: 'pre-wrap', mt: 0.5 }}
+                variant="text">
+                {title?.replaceAll(' ', '\n')}
+              </Button>
+            </Tooltip>
+            <Menu
+              id={id.concat('-dropdown-menu')}
+              anchorEl={anchorElement}
+              open={Boolean(anchorElement)}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center'
+              }}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center'
+              }}
+              sx={{
+                alignItems: 'center',
+                textAlign: 'center'
+              }}
+              onClose={handleClose}>
+              {isLoading ? (
+                <Box width={400}>
+                  <SkeletonList />
+                </Box>
+              ) : (
+                [...content].map((element) => (
+                  <MenuItem
+                    id={element.name.concat('-link').replaceAll(' ', '-')}
+                    key={element.name}
+                    data-testid={`Menubar-Topic-${element.name}`}
+                    color="inherit"
+                    onClick={() => {
+                      navigate(element.url)
+                      handleClose()
+                    }}>
+                    {element.name}
+                  </MenuItem>
+                ))
+              )}
+            </Menu>
+          </Box>
+        </div>
+      </>
     )
   }
 )

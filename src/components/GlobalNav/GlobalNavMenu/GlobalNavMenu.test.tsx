@@ -6,7 +6,7 @@ import GlobalNavMenu from './GlobalNavMenu'
 
 const navigate = jest.fn()
 
-describe('FurtherInfoMenu tests', () => {
+describe('GlobalNavMenu tests', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
