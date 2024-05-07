@@ -6,7 +6,7 @@ import { resetters } from '../Zustand/Store'
 
 export default interface NewsSlice {
   _news: Record<string, NewsList>
-  getNews: (user?: NewsList) => Promise<NewsList>
+  getNews: (languageId?: NewsList, university?: NewsList) => Promise<NewsList>
 }
 
 export const createNewsSlice: StateCreator<StoreState, [], [], NewsSlice> = (set, get) => {
@@ -14,16 +14,16 @@ export const createNewsSlice: StateCreator<StoreState, [], [], NewsSlice> = (set
   return {
     _news: {},
     getNews: async (...arg) => {
-      const [languageId] = arg
+      const [languageId, university] = arg
 
-      const cached = get()._news[`${languageId}`]
+      const cached = get()._news[`${languageId}-${university}`]
 
       if (!cached) {
-        const news = await fetchNews('eng')
+        const news = await fetchNews('eng', 'HS-KE')
         set({
           _news: {
             ...get()._news,
-            [`${languageId}`]: news
+            [`${languageId}-${university}`]: news
           }
         })
         return news

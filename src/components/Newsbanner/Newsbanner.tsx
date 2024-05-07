@@ -30,7 +30,6 @@ const Newsbanner=({useNewsbanner=_useNewsbanner}:NewsbannerProps)=>{
     const {checkForNews, receiveContent}=useNewsbanner()
 
     useEffect(() => {checkForNews().then(isNewsAvaliable => {
-        console.log(isNewsAvaliable)
         setOpen(isNewsAvaliable)
     })}, [])
 
