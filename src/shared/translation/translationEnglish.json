@@ -2,6 +2,7 @@
   "appGlobal.accept": "Accept",
   "appGlobal.aschaffenburgUAS": "Aschaffenburg UAS",
   "appGlobal.back": "Back",
+  "appGlobal.courses": "Courses",
   "appGlobal.dataSendSuccessful": "Data sent successfully",
   "appGlobal.dataSendUnsuccessful": "Data could not be sent",
   "appGlobal.decline": "Decline",
@@ -62,6 +63,7 @@
     }
   ],
   "components.Footer.project": "Project",
+  "components.FurtherInfoMenu.title": "Further information",
   "components.ListKQuestions": [
     [
       {
@@ -1666,12 +1668,13 @@
   "pages.projectdescription.imageSource-2": "Image by natanaelginting on Freepik",
   "pages.projectdescription.introductionBody": "HASKI stands for \"Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt\" (\"Higher education teaching: Adaptive, self-directed, AI-assisted\") and is funded by the Federal Ministry of Education and Research with a project duration until December 2025. HASKI is a collaborative project of three Bavarian universities: OTH Regensburg, Aschaffenburg UAS & Kempten UAS.",
   "pages.projectdescription.introductionHeader": "What is HASKI?",
-  "pages.projectinformation": "Project Information",
   "pages.topic": "Topic",
   "pages.topic.grouped": "Grouped",
   "pages.topic.single": "Single",
   "success": "Success",
   "tooltip.completed": "Completed",
+  "tooltip.courseSelection": "Select a course",
+  "tooltip.furtherInfoSelection": "Further information about the project",
   "tooltip.languageSettings": "Language settings",
   "tooltip.openGlobalSettings": "Open global settings",
   "tooltip.openQuestionnaireResults": "Learner characteristics",

@@ -17,19 +17,17 @@ import { useTheme, useMediaQuery } from '@common/hooks'
  *
  * @category Pages
  */
-
 export const MainFrame = () => {
   const { courseId } = useParams()
 
   // !! converts courseId to a boolean
-  const renderMenuBar = !!courseId
   const theme = useTheme()
   const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && !!courseId
 
   return (
     <>
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        {renderMenuBar ? <MenuBar courseSelected={true} /> : <MenuBar courseSelected={false} />}
+        <MenuBar />
         <BreadcrumbsContainer />
         <Grid container sx={{ flex: 1, overflow: 'hidden' }}>
           {isLocalNavOpen && (

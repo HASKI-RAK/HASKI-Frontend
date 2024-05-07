@@ -198,6 +198,20 @@ export const HaskiTheme = createTheme({
         },
         //komplett gefüllter button aber in weiß
         text: {
+          background: 'none',
+          color: defaultColors.black,
+          border: 'none',
+          fontFamily: 'monospace',
+          fontWeight: 700,
+          letterSpacing: '.3rem',
+          lineHeight: '1rem',
+          textDecoration: 'none',
+          opacity: 0.7,
+          ':hover': {
+            opacity: 1
+          }
+        }
+        /*text: {
           color: defaultColors.black,
           backgroundColor: defaultColors.white,
           boxShadow: defaultBehavior.boxShadowSize['default'] + defaultColors.black,
@@ -212,7 +226,7 @@ export const HaskiTheme = createTheme({
             //transform: "translateY(4px) translateZ(0)",
             boxShadow: 'unset'
           }
-        }
+        }*/
       }
     },
     MuiLink: {

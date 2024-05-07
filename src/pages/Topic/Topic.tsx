@@ -38,6 +38,7 @@ const CustomFitViewButton = ({ nodes }: { nodes: Node[] }) => {
 export type TopicProps = {
   useTopic?: (params?: useTopicHookParams) => TopicHookReturn
 }
+// TODO: URL-Struktur überlegen bspw. "localhost:3000/topic?topic=1"
 
 /**
  * Topic page.
@@ -49,7 +50,7 @@ export type TopicProps = {
  *
  * @category Pages
  */
-export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
+const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const navigate = useNavigate()
   const authContext = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)

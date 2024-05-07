@@ -2,6 +2,7 @@
   "appGlobal.accept": "Akzeptieren",
   "appGlobal.aschaffenburgUAS": "TH Aschaffenburg",
   "appGlobal.back": "Zurück",
+  "appGlobal.courses": "Kurse",
   "appGlobal.dataSendSuccessful": "Daten wurden erfolgreich gesendet",
   "appGlobal.dataSendUnsuccessful": "Daten konnten nicht gesendet werden",
   "appGlobal.decline": "Ablehnen",
@@ -62,6 +63,7 @@
     }
   ],
   "components.Footer.project": "Projekt",
+  "components.FurtherInfoMenu.title": "Weitere Informationen",
   "components.ListKQuestions": [
     [
       {
@@ -1667,12 +1669,13 @@
   "pages.projectdescription.imageSource-2": "Bild von natanaelginting auf Freepik",
   "pages.projectdescription.introductionBody": "HASKI steht für „Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt“ und wird gefördert durch das Bundesministerium für Bildung und Forschung mit einer Projektlaufzeit bis Dezember 2025. HASKI ist ein Verbundprojekt von drei bayerischen Hochschulen: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
   "pages.projectdescription.introductionHeader": "Was ist HASKI?",
-  "pages.projectinformation": "Projektinformation",
   "pages.topic": "Thema",
   "pages.topic.grouped": "Gruppiert",
   "pages.topic.single": "Einzeln",
   "success": "Erfolg",
   "tooltip.completed": "Erledigt",
+  "tooltip.courseSelection": "Wählen Sie eine Kurs",
+  "tooltip.furtherInfoSelection": "Weitere Informationen über das Projekt",
   "tooltip.languageSettings": "Spracheinstellungen",
   "tooltip.openGlobalSettings": "Globale Einstellungen",
   "tooltip.openQuestionnaireResults": "Lerncharakteristik",

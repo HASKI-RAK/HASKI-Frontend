@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { act, fireEvent, render } from '@testing-library/react'
-import { mockReactFlow } from '@mocks'
 import { ReactFlow } from 'reactflow'
+import { mockReactFlow } from '@mocks'
 import ResponsiveMiniMap from './ResponsiveMiniMap'
 
 describe('ResponsiveMiniMap component', () => {

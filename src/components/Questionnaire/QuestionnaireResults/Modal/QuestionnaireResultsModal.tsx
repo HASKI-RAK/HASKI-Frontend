@@ -195,6 +195,7 @@ const QuestionnaireResultsModal = memo(
             p: 1
           }}>
           <Fab
+            id="questionnaire-results-close-button"
             color="primary"
             data-testid={'QuestionnaireResultsCloseButton'}
             onClick={handleClose}
