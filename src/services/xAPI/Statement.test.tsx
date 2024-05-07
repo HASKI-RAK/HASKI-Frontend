@@ -6,14 +6,12 @@ import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
 import * as statement from './getStatement'
 import { useStatement, xAPIComponent, xAPIVerb } from './Statement.hooks'
-import xAPI from './xAPI.setup'
 
 describe('Statement tests', () => {
   const sendStatement = jest.fn()
   const getStatement = jest.fn()
 
   beforeEach(() => {
-    jest.spyOn(xAPI, 'sendStatement').mockImplementation(sendStatement)
     jest.spyOn(statement, 'getStatement').mockImplementation(getStatement)
   })
 
