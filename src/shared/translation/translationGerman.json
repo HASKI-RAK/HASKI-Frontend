@@ -1682,5 +1682,6 @@
   "tooltip.openSettings": "Einstellungen",
   "warning": "Warnung",
   "warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
-  "warning.online": "Sie sind wieder online."
+  "warning.online": "Sie sind wieder online.",
+  "pages.home.available": "Verfügbar ab"
 }

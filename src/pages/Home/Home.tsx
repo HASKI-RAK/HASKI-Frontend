@@ -68,6 +68,12 @@ export const Home = () => {
     }
   }, [loading])
 
+  const isDisabled = (courseId: number) => {
+    const now = new Date();
+    const unlockDate = new Date('2025-05-15T10:00:00');
+    return courseId === 2 && now < unlockDate;
+  }
+
   // Card cointaining the courses with a button to the specific course
   return loading ? (
     <Skeleton variant="rectangular" width="100%" height={118} />
@@ -92,13 +98,14 @@ export const Home = () => {
                         id="course-button"
                         variant="contained"
                         color="primary"
+                        disabled={isDisabled(course.id)}
                         sx={{
                           mt: '1rem'
                         }}
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>
-                        {t('pages.course.courseButton')}
+                        {isDisabled(course.id) ? t('pages.home.available')+" 15.05.2024 10:00" : t('pages.course.courseButton')}
                       </Button>
                     </Stack>
                   </CardContent>
