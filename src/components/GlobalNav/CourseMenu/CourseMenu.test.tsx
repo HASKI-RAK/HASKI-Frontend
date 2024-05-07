@@ -6,7 +6,7 @@ import { AuthContext } from '@services'
 import CourseMenu from './CourseMenu'
 import { useCourseMenu } from './CourseMenu.hooks'
 
-describe('FurtherInfoMenu tests', () => {
+describe('CourseMenu tests', () => {
   it('renders correctly with isAuth false', () => {
     const courseMenu = render(
       <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -31,8 +31,39 @@ describe('FurtherInfoMenu tests', () => {
     expect(courseMenu).toBeTruthy()
   })
 
-  test('functionality of hook', async () => {
-    const { result } = renderHook(() => useCourseMenu())
+  test('functionality of hook with isAuth false', async () => {
+    const context = {
+      isAuth: false,
+      setExpire: jest.fn(),
+      logout: jest.fn()
+    }
+
+    const { result } = renderHook(() => useCourseMenu(), {
+      wrapper: ({ children }) => <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
+    })
+    const getContent = () => {
+      return result.current.content
+    }
+    const getIsLoading = () => {
+      return result.current.isLoading
+    }
+
+    await waitFor(() => {
+      expect(getContent()).toStrictEqual([])
+      expect(getIsLoading()).toBeTruthy()
+    })
+  })
+
+  test('functionality of hook with isAuth true', async () => {
+    const context = {
+      isAuth: true,
+      setExpire: jest.fn(),
+      logout: jest.fn()
+    }
+
+    const { result } = renderHook(() => useCourseMenu(), {
+      wrapper: ({ children }) => <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
+    })
     const getContent = () => {
       return result.current.content
     }
@@ -56,9 +87,17 @@ describe('FurtherInfoMenu tests', () => {
   })
 
   test('functionality of hook with fetchCourses failed', async () => {
+    const context = {
+      isAuth: true,
+      setExpire: jest.fn(),
+      logout: jest.fn()
+    }
+
     mockServices.fetchCourses.mockImplementationOnce(() => Promise.reject(new Error('getCourses failed')))
 
-    const { result } = renderHook(() => useCourseMenu())
+    const { result } = renderHook(() => useCourseMenu(), {
+      wrapper: ({ children }) => <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
+    })
     const getContent = () => {
       return result.current.content
     }
@@ -73,9 +112,17 @@ describe('FurtherInfoMenu tests', () => {
   })
 
   test('functionality of hook with fetchUser failed', async () => {
+    const context = {
+      isAuth: true,
+      setExpire: jest.fn(),
+      logout: jest.fn()
+    }
+
     mockServices.fetchUser.mockImplementationOnce(() => Promise.reject(new Error('getUser failed')))
 
-    const { result } = renderHook(() => useCourseMenu())
+    const { result } = renderHook(() => useCourseMenu(), {
+      wrapper: ({ children }) => <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
+    })
     const getContent = () => {
       return result.current.content
     }
