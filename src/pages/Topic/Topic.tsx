@@ -215,14 +215,14 @@ const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           <ResponsiveMiniMap />
           <CustomFitViewButton nodes={initialNodes} />
           <Background gap={16} />
-          <Panel position="top-right">
-            <LabeledSwitch
-              labelLeft={t('pages.topic.grouped')}
-              labelRight={t('pages.topic.single')}
-              isGrouped={isGrouped}
-              setIsGrouped={setIsGrouped}
-            />
-          </Panel>
+          {/*<Panel position="top-right">
+           <LabeledSwitch
+           labelLeft={t('pages.topic.grouped')}
+           labelRight={t('pages.topic.single')}
+           isGrouped={isGrouped}
+           setIsGrouped={setIsGrouped}
+           />
+           </Panel>*/}
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
         </ReactFlow>
         <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
