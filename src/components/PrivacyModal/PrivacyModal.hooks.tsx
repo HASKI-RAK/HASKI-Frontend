@@ -1,9 +1,7 @@
-import log from 'loglevel'
 import { useCallback, useContext, useMemo } from 'react'
 import { CookiesProvider, useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
 import { SnackbarContext } from '@services'
-import { usePersistedStore } from '@store'
 
 /**
  * @prop privacyPolicyCookie - The currently set cookie
@@ -16,7 +14,6 @@ import { usePersistedStore } from '@store'
 export type PrivacyModalHookReturn = {
   readonly privacyPolicyCookie: CookiesProvider
   readonly handleAccept: (isAccepted: boolean) => void
-  readonly checkUniversity: () => Promise<string>
 }
 
 /**
@@ -35,21 +32,8 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
   const { addSnackbar } = useContext(SnackbarContext)
   const [cookies, setCookie] = useCookies(['privacy_accept_token'])
   const privacyPolicyCookie = cookies['privacy_accept_token']
-  const getUser = usePersistedStore((state) => state.getUser)
 
   //**Logic **//
-  //fetch the university from the current user and return university
-  const checkUniversity = async () => {
-    return getUser()
-      .then((user) => {
-        return user.university
-      })
-      .catch((reason) => {
-        log.error(reason)
-        return ''
-      })
-  }
-
   const handleAccept = useCallback(
     (isAccepted: boolean) => {
       if (isAccepted) {
@@ -76,9 +60,8 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
   return useMemo(
     () => ({
       privacyPolicyCookie,
-      handleAccept,
-      checkUniversity
+      handleAccept
     }),
-    [privacyPolicyCookie, handleAccept, checkUniversity]
+    [privacyPolicyCookie, handleAccept]
   )
 }

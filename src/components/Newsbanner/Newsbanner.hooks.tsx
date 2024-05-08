@@ -1,18 +1,20 @@
 import log from 'loglevel'
 import { useCallback, useMemo, useState } from 'react'
+import { UniversityCheck as _UniversityCheck, UniversityCheck, UniversityCheckReturn } from '@common/utils'
 import { useStore } from '@store'
 
 export type NewsbannerHookReturn = {
   readonly checkForNews: () => Promise<boolean>
   readonly receiveContent: () => Promise<string>
-  readonly currentNewsLength: 0
+  readonly receiveUni:()=>void
 }
 
 export const useNewsbanner = (): NewsbannerHookReturn => {
   const getNews = useStore((state) => state.getNews)
-
+    const {checkUniversity} = UniversityCheck()
   //stores the character length of the news
   const [newsLength, setNewsLength] = useState(0)
+  const [uni, setUni] = useState("")
 
   //** Logic **/
   const checkLanguage = () => {
@@ -20,9 +22,17 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
     return lang
   }
 
+  const receiveUni = () => {
+    return checkUniversity().then((university) => {
+        setUni( university)
+    })
+
+  }
+
   //check if there are any news
   const checkForNews = async () => {
-    return getNews()
+    console.log(receiveUni())
+    return getNews(checkLanguage(), uni)
       .then((news) => {
         return news.news.length != 0
       })
@@ -34,7 +44,7 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
 
   //returns combined string of all the news
   const receiveContent = async () => {
-    return getNews()
+    return getNews(checkLanguage(), uni)
       .then((news) => {
         const contentA = news.news.map(({ news_content }) => news_content).join(', ')
         setNewsLength(contentA.length)
@@ -47,7 +57,7 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
   }
 
   return useMemo(
-    () => ({ checkForNews, receiveContent, checkLanguage, newsLength }),
-    [checkForNews, receiveContent, checkLanguage, newsLength]
+    () => ({ checkForNews, receiveContent, checkLanguage, receiveUni }),
+    [checkForNews, receiveContent, checkLanguage, receiveUni]
   )
 }

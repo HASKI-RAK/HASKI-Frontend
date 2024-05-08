@@ -1,12 +1,12 @@
 import { StateCreator } from 'zustand'
-import { NewsList } from '@core'
+import { NewsList, NewsReturn } from '@core'
 import { fetchNews } from '@services'
 import { StoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
 export default interface NewsSlice {
   _news: Record<string, NewsList>
-  getNews: (languageId?: NewsList, university?: NewsList) => Promise<NewsList>
+  getNews: NewsReturn
 }
 
 export const createNewsSlice: StateCreator<StoreState, [], [], NewsSlice> = (set, get) => {
@@ -19,7 +19,7 @@ export const createNewsSlice: StateCreator<StoreState, [], [], NewsSlice> = (set
       const cached = get()._news[`${languageId}-${university}`]
 
       if (!cached) {
-        const news = await fetchNews('eng', 'HS-KE')
+        const news = await fetchNews(languageId, university)
         set({
           _news: {
             ...get()._news,
