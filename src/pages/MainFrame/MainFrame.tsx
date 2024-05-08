@@ -1,6 +1,14 @@
 import { Outlet, useParams } from 'react-router-dom'
 import { Box, Divider, Grid, Stack } from '@common/components'
-import { BreadcrumbsContainer, Footer, LocalNav, MenuBar, OpenQuestionnaire, PrivacyModal, Newsbanner } from '@components'
+import {
+  BreadcrumbsContainer,
+  Footer,
+  LocalNav,
+  MenuBar,
+  OpenQuestionnaire,
+  PrivacyModal,
+  Newsbanner
+} from '@components'
 
 /**
  * # MainFrame Page
@@ -27,7 +35,7 @@ export const MainFrame = () => {
     <>
       <Stack direction="column" sx={{ minHeight: 'inherit' }}>
         {renderMenuBar ? <MenuBar courseSelected={true} /> : <MenuBar courseSelected={false} />}
-        <Newsbanner/>
+        <Newsbanner />
         <BreadcrumbsContainer />
         <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
           <Grid container item flexGrow={1} sx={{ alignItems: 'stretch' }}>
