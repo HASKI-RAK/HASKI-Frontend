@@ -162,7 +162,6 @@ const MenuBar = () => {
               onClick={() => navigate('/')}>
               HASKI
             </TextWrapper>
-            <CourseMenu />
             <FurtherInfoMenu />
           </Box>
           {/** Search bar */}
