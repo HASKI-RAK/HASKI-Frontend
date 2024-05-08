@@ -3,33 +3,12 @@ import ReactFlow, { Node, Edge, Controls, Background, Panel, useReactFlow } from
 import React, { useEffect, useState, useContext, memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { IFrameModal, nodeTypes, ResponsiveMiniMap, LabeledSwitch } from '@components'
-import { Grid, Skeleton, Button } from '@common/components'
+import { Grid, Skeleton } from '@common/components'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { useTranslation } from 'react-i18next'
 
-// custom fitView centering on first uncompleted element, needs to be in the react-flow component
-// currently focuses on first element
-// can also focus on first element that is uncomplete (node.find(node => !node.data?.isDone) || node[0])
-const CustomFitViewButton = ({ nodes }: { nodes: Node[] }) => {
-  const { fitView } = useReactFlow()
-  const firstUncompletedElement = nodes[0]
-
-  const handleClick = () => {
-    setTimeout(() => {
-      fitView({
-        padding: 5,
-        minZoom: 0.75,
-        duration: 100,
-        nodes: [{ id: firstUncompletedElement.id }]
-      })
-    }, 10)
-    //with setViewport (useReactFlow) it is possible to set the view to a specific position and zoom
-    //(for example first uncomplete node) ({ x: nodeX, y: nodeY, zoom: 1 }, { duration: 500 })
-  }
-  return <Button id="customFitViewButton" style={{ display: 'none' }} onClick={handleClick} />
-}
 
 /**
  * @prop useTopic - Does the heavy work such as mapping nodes and edges and fetching.
@@ -53,6 +32,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const navigate = useNavigate()
   const authContext = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
+  const { fitView } = useReactFlow()
 
   const { courseId, topicId } = useParams()
   const getUser = usePersistedStore((state) => state.getUser)
@@ -71,20 +51,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
   const [isGrouped, setIsGrouped] = useState(true)
-
-  // Search for the 'fit view'-button of <Controls/> and trigger click event
-  const handleFitView = () => {
-   const fitViewButton = document.querySelector('.react-flow__controls-button.react-flow__controls-fitview')
-
-   if (fitViewButton) {
-   (fitViewButton as HTMLButtonElement).click()
-   }
-   }
-
-  // Trigger the click event of the custom 'fit view'-button
-  const handleCustomFitView  = (): void => {
-    document.getElementById('customFitViewButton')?.click()
-  };
 
   const fetchLearningElementsWithStatus = async (
     learningPathElementStatusData: LearningPathElementStatus[],
@@ -109,10 +75,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // Effect to handle the fitting of the view when the topic changes with the LocalNav
   // [handleCustomFitView] as dependency because inside of it the fitViewButton changes,
   // that way the reactFlow background is changed before rendering it in a old position from the prev. topic
-  useEffect(() => {
-    setTimeout(() => {
-    handleFitView(), 10})
-  }, [topicId])
 
   // Get status of every learning element for user by request to backend
   // then get every learning element for topic by request to backend
@@ -163,6 +125,21 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     isGrouped
   ])
 
+  // custom fitView centering on first uncompleted element
+  // currently focuses on first element
+  // can also focus on first element that is uncomplete (node.find(node => !node.data?.isDone) || node[0])
+  useEffect(() => {
+    if(initialNodes) {
+      setTimeout(() => {
+        fitView({
+          padding: 5,
+          minZoom: 0.75,
+          duration: 100,
+          nodes: [{ id: initialNodes[0].id }]
+        })
+      }, 100)
+    }},[topicId])
+
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)
    * @param user
@@ -202,11 +179,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           edges={initialEdges}
           nodeTypes={nodeTypes}
           fitView
-          onInit={() => {
-            setTimeout(() => {
-              handleCustomFitView()
-            }, 0)
-          }}
           fitViewOptions={{
             padding: 5,
             minZoom: 0.75,

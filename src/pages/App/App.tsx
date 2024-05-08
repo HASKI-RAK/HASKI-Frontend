@@ -18,6 +18,7 @@ import {
   Topic
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
+import { ReactFlowProvider } from 'reactflow'
 
 /**
  * # App
@@ -32,6 +33,7 @@ import { AuthProvider, SnackbarProvider } from '@services'
  */
 export const App = () => (
   <ThemeProvider theme={HaskiTheme}>
+    <ReactFlowProvider>
     <SnackbarProvider>
       <AuthProvider>
         <Router>
@@ -58,6 +60,7 @@ export const App = () => (
         </Router>
       </AuthProvider>
     </SnackbarProvider>
+    </ReactFlowProvider>
   </ThemeProvider>
 )
 export default App
