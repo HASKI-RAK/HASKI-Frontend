@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - main
+      - th-eval-3
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:

@@ -84,11 +84,8 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
 // notice when the calculation should start. What should be calculated should be
 // defined in the backend.
 const courseList = [1]
-const courseList2 = [2]
-const topicList = [2, 6, 10, 12]
-const topicList2 = [16, 22]
-const algorithmList = ['aco', 'ga', 'graf', 'aco']
-const algorithmList2 = ['ga', 'graf']
+const topicList = [3, 5, 7, 11]
+const algorithmList = ['graf', 'aco', 'ga', 'ga']
 
 const calculateLearningPath = (
   user: User,
@@ -116,29 +113,6 @@ const calculateLearningPath = (
           })
           log.error('Error while calculating learning path in Course ' + courseId)
         })
-    })
-  })
-  courseList2.forEach((courseId) => {
-    topicList2.forEach((topicId, index) => {
-      postCalculateLearningPathILS(
-        user.settings.user_id,
-        user.lms_user_id,
-        user.id,
-        courseId,
-        topicId,
-        algorithmList2[index]
-      )
-      .then((response) => {
-        log.info(response)
-      })
-       .catch(() => {
-        addSnackbar({
-          message: t('error.postCalculateLearningPathILS'),
-          severity: 'error',
-          autoHideDuration: 5000
-        })
-        log.error('Error while calculating learning path in Course ' + courseId)
-      })
     })
   })
 }
