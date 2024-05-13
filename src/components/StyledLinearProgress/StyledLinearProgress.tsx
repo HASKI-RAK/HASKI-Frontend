@@ -28,7 +28,7 @@ export const StyledLinearProgress = ({ learningElementProgressTopics, index }: B
   const calculatePercent = useCallback(() => {
     if (index === undefined || learningElementProgressTopics === undefined) return 10
 
-    if (learningElementProgressTopics[index].length === 0) return -1
+    if (learningElementProgressTopics[index] === undefined) return -1
 
     return (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
   }, [index, learningElementProgressTopics])
@@ -46,7 +46,7 @@ export const StyledLinearProgress = ({ learningElementProgressTopics, index }: B
   const getText = useCallback(() => {
     if (index === undefined || learningElementProgressTopics === undefined) return 'loading...'
 
-    return learningElementProgressTopics[index].length === 0
+    return learningElementProgressTopics[index] === undefined
       ? 'error..'
       : learningElementProgressTopics[index][0] + '/' + learningElementProgressTopics[index][1]
   }, [index, learningElementProgressTopics])

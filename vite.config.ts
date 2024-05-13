@@ -9,7 +9,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 config()
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/',
   root: path.join(__dirname, 'src'),
   build: {
     sourcemap: false,
