@@ -2,12 +2,13 @@ import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Box, Button, Card, CardContent, Grid, Typography } from '@common/components'
+import { Box, Button, Card, CardContent, Grid, Typography, Menu, MenuItem, IconButton } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
-import { CheckBox } from '@common/icons'
-import { SkeletonList, StyledLinearProgress, useLearningPathTopic } from '@components'
+import { CheckBox, MoreVert, Settings } from '@common/icons'
+import { SkeletonList, StyledLinearProgress, useLearningPathTopic, AlgorithmSettingsModal } from '@components'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+
 
 /**
  * # Course Page
@@ -34,6 +35,26 @@ const Course = (): JSX.Element => {
 
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
   const { loading, topics } = useLearningPathTopic(courseId)
+  //TODO: Exchange this with an appropriate way to check if the user is a tutor
+  const [isTutor, setIsTutor] = useState(true)
+  const [isAlgorithmSettingsModalOpen, setIsAlgorithmSettingsModalOpen] = useState(false)
+  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
+  const [selectedTopicID, setSelectedTopicID] = useState<null | string>(null)
+  const openMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setMenuAnchorEl(event.currentTarget)
+    setSelectedTopicID(event.currentTarget?.dataset?.topicid ?? null)
+  }
+  const handleCloseMenu = () => {
+    setMenuAnchorEl(null)
+  }
+  const handleAlgorithmMenuOpen = () => {
+    handleCloseMenu()
+    setIsAlgorithmSettingsModalOpen(true)
+  }
+  const getIDs = () => {
+    return { courseID: null, topicID: selectedTopicID }
+  }
+
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
@@ -119,6 +140,8 @@ const Course = (): JSX.Element => {
         </Box>
       ) : (
         //display topics once data is loaded
+        <>
+        <AlgorithmSettingsModal isOpen={isAlgorithmSettingsModalOpen} handleClose={() => {setIsAlgorithmSettingsModalOpen(false)}} getIDs={getIDs}/>
         <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ ml: '3rem' }}>
           {topics.map((topic, index) => {
             return (
@@ -126,6 +149,16 @@ const Course = (): JSX.Element => {
                 key={topic.id}
                 sx={{ width: { xs: '10rem', sm: '20rem', md: '40rem', lg: '50rem', xl: '70rem' }, mt: '1rem' }}>
                 <CardContent>
+                  <IconButton sx={{right:'0.5rem'}} id='menu-button' onClick={openMenu} data-topicid={topic.id}><MoreVert/></IconButton>
+                  <Menu
+                    id='menu'
+                    anchorEl={menuAnchorEl}
+                    open={Boolean(menuAnchorEl)}
+                    onClose={handleCloseMenu}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    transformOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                      <MenuItem onClick={handleAlgorithmMenuOpen}>Select Algorithm</MenuItem>
+                    </Menu>
                   <Grid container direction="column" justifyContent="center" alignItems="center">
                     <Grid item md={1}>
                       {/*if topic is done 100%, a checkbox is displayed*/}
@@ -163,6 +196,8 @@ const Course = (): JSX.Element => {
                   </Grid>
                 </CardContent>
                 {/* Display topic progress bar */}
+                { (isTutor && !isSmOrDown) ?
+                <Grid container spacing={0} direction='row' alignItems={'center'} justifyContent={'center'} sx={{marginBottom:'1rem'}}><Typography>{'Lernpfadalgorithmus:\t'}</Typography><Button>Genetischer Algorithmus</Button></Grid>:
                 <Grid container item direction="row" justifyContent="flex-end" alignItems="flex-end">
                   {calculatedTopicProgress[index] ? (
                     <StyledLinearProgress learningElementProgressTopics={calculatedTopicProgress} index={index} />
@@ -170,11 +205,12 @@ const Course = (): JSX.Element => {
                     // Display loading state if progress is not available yet
                     <StyledLinearProgress />
                   )}
-                </Grid>
+                </Grid>}
               </Card>
             )
           })}
         </Grid>
+        </>
       )}
     </>
   )

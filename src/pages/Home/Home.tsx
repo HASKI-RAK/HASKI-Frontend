@@ -1,8 +1,11 @@
 import log from 'loglevel'
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardContent, Skeleton, Stack, Typography } from '@common/components'
+import { Button, Card, CardContent, Skeleton, Stack, Typography, Menu, MenuItem, IconButton } from '@common/components'
+import { CardHeader} from '@mui/material'
+import { AlgorithmSettingsModal } from '@components'
+import { MoreVert, Settings} from '@common/icons'
 import { Course } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -26,6 +29,26 @@ export const Home = () => {
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
+
+  //TODO: Find an actual way to check if the user is a tutor
+  const [isTutor, setIsTutor] = useState(true)
+  const [isAlgorithmSettingsModalOpen, setIsAlgorithmSettingsModalOpen] = useState(false)
+  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null)
+  const [selectedCourseID, setSelectedCourseID] = useState<null | string>(null)
+  const openMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setMenuAnchorEl(event.currentTarget)
+    setSelectedCourseID(event.currentTarget?.dataset?.courseid ?? null)
+  }
+  const handleCloseMenu = useCallback(() => {
+    setMenuAnchorEl(null)
+  },[setMenuAnchorEl])
+  const handleAlgorithmMenuOpen = useCallback(() => {
+    handleCloseMenu()
+    setIsAlgorithmSettingsModalOpen(true)
+  },[handleCloseMenu, setIsAlgorithmSettingsModalOpen])
+  const getIDs = useCallback(() => {
+    return { courseID: selectedCourseID, topicID: null }
+  },[selectedCourseID])
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
@@ -73,6 +96,7 @@ export const Home = () => {
     <Skeleton variant="rectangular" width="100%" height={118} />
   ) : (
     <div>
+      <AlgorithmSettingsModal isOpen={isAlgorithmSettingsModalOpen} handleClose={() => {setIsAlgorithmSettingsModalOpen(false)}} getIDs={getIDs}/>
       <Stack spacing={2} direction="row" justifyContent="center">
         <div>
           {courses.length === 0 ? (
@@ -85,16 +109,21 @@ export const Home = () => {
             courses.map((course) => {
               return (
                 <Card key={course.id} sx={{ mb: '1rem' }}>
+                  <CardHeader
+                    action={
+                      <IconButton onClick={openMenu} data-courseid={course.id}>
+                        <Settings />
+                      </IconButton>
+                    }
+                    title={course.name}/>
                   <CardContent>
-                    <Typography variant="h5">{course.name}</Typography>
+                    {/*<Typography variant="h5">{course.name}</Typography>
+                    <IconButton sx={{position:'absolute', top:'11rem', left:'55rem'}}><Settings/></IconButton>*/}
                     <Stack direction="row" justifyContent="center">
                       <Button
                         id="course-button"
                         variant="contained"
                         color="primary"
-                        sx={{
-                          mt: '1rem'
-                        }}
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>
@@ -106,6 +135,15 @@ export const Home = () => {
               )
             })
           )}
+          <Menu
+            id='menu'
+            anchorEl={menuAnchorEl}
+            open={Boolean(menuAnchorEl)}
+            onClose={handleCloseMenu}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}>
+              <MenuItem onClick={handleAlgorithmMenuOpen}>Select Algorithm</MenuItem>
+          </Menu>
         </div>
       </Stack>
     </div>
