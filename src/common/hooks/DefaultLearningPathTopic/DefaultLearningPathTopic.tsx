@@ -1,41 +1,54 @@
 import log from 'loglevel'
-import { useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { Topic } from '@core'
 import { usePersistedStore, useStore } from '@store'
+import { SnackbarContext } from '@services'
+
+
+export type LearningPathTopicHookReturn = {
+  loading: boolean
+  topics: Topic[]
+}
 
 /**
  * @param courseId - course id
  * @returns
  * A tuple with the loading state and the topics for a course
  */
-const useLearningPathTopic = (courseId: string): { loading: boolean; topics: Topic[] } => {
+const useLearningPathTopic = (courseId: string): LearningPathTopicHookReturn => {
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
+  const { addSnackbar } = useContext(SnackbarContext)
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
 
   useEffect(() => {
-    const effect = async () => {
+    const fetchData = () => {
       setLoading(true)
-      try {
-        const user = await getUser()
-        const fetchedTopics = await getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
-        setTopics(fetchedTopics.topics)
-      } catch (error) {
-        log.error(error)
-        throw error
-      } finally {
-        setLoading(false)
-      }
+      getUser()
+      .then(user => {
+        return getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId);
+      })
+       .then(fetchedTopics => {
+        setTopics(fetchedTopics.topics);
+      })
+       .catch(error => {
+        addSnackbar({
+          message: 'An error occurred while fetching course topics in DefaultLearningPathTopic',
+          severity: 'error',
+          autoHideDuration: 3000
+        })
+        log.error('An error occurred while fetching course topics in DefaultLearningPathTopic', error);
+      })
+       .finally(() => {
+        setLoading(false);
+      })
     }
 
-    effect().catch(() => {
-      log.error('An error occurred while fetching course topics in LocalNav.hooks')
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    fetchData();
+  }, [courseId]);
 
-  return useMemo ( () => ({ loading, topics }) , [loading, topics])
+  return useMemo(() => ({ loading, topics }), [loading, topics])
 }
 
-export {useLearningPathTopic}
+export { useLearningPathTopic }

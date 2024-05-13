@@ -1,6 +1,6 @@
 import { useTopic as _useTopic, useTopicHookParams, TopicHookReturn } from './Topic.hooks'
 import ReactFlow, { Node, Edge, Controls, Background, Panel, useReactFlow } from 'reactflow'
-import React, { useEffect, useState, useContext, memo } from 'react'
+import { useEffect, useState, useContext, memo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { IFrameModal, nodeTypes, ResponsiveMiniMap, LabeledSwitch } from '@components'
 import { Grid, Skeleton } from '@common/components'
@@ -8,6 +8,7 @@ import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { useTranslation } from 'react-i18next'
+import log from 'loglevel'
 
 
 /**
@@ -52,7 +53,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
   const [isGrouped, setIsGrouped] = useState(true)
 
-  const fetchLearningElementsWithStatus = async (
+  const getLearningElementsWithStatus = async (
     learningPathElementStatusData: LearningPathElementStatus[],
     user: User
   ) => {
@@ -90,7 +91,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       .then((user) => {
         getLearningPathElementStatus(courseId, user.lms_user_id)
         .then((learningPathElementStatusData) => {
-          return fetchLearningElementsWithStatus(learningPathElementStatusData, user)
+          return getLearningElementsWithStatus(learningPathElementStatusData, user)
         })
          .catch((error: string) => {
           addSnackbar({
@@ -144,7 +145,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
    * Update the learning path element status for the user after he closes a learning Element (iframe)
    * @param user
    */
-  const updateLearningPathElementStatus = async (user: User) => {
+  const updateLearningPathElementStatus = (user: User) => {
     getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
     .then((data) => {
       setLearningPathElementSpecificStatus(courseId?.toString(), user.lms_user_id, data[0]).then((data) => {
@@ -153,10 +154,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     })
      .catch((error: string) => {
       addSnackbar({
-        message: error,
+        message: 'An error occurred while updating a specific learning path element status',
         severity: 'error',
         autoHideDuration: 3000
       })
+      log.error('An error occurred while updating a specific learning path element status', error)
     })
   }
 
@@ -166,6 +168,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getHandleClose = () => {
     getUser().then((user) => {
       return updateLearningPathElementStatus(user)
+    }).catch((error: string) => {
+      addSnackbar({
+        message: 'An error occurred while updating a specific learning path element status after close',
+        severity: 'error',
+        autoHideDuration: 3000
+      })
+      log.error('An error occurred while updating a specific learning path element status after close', error)
     })
     return handleClose()
   }
