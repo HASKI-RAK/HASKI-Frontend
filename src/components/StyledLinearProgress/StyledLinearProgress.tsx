@@ -46,7 +46,7 @@ export const StyledLinearProgress = ({ learningElementProgressTopics, index }: B
   const getText = useCallback(() => {
     if (index === undefined || learningElementProgressTopics === undefined) return 'loading...'
 
-    return learningElementProgressTopics[index] === undefined
+    return learningElementProgressTopics[index].length === 0
       ? 'error..'
       : learningElementProgressTopics[index][0] + '/' + learningElementProgressTopics[index][1]
   }, [index, learningElementProgressTopics])

@@ -1,18 +1,22 @@
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, Grid, Typography } from '@common/components'
 import { CheckBox } from '@common/icons'
 import { StyledLinearProgress } from '@components'
 import { Topic } from '@core'
 
-type ContentProps = {
+// Type
+type TopicCardProps = {
   topic: Topic
   calculatedTopicProgress: number[][]
   index: number
   isSmOrDown: boolean
 }
 
-const Content = ({ topic, calculatedTopicProgress, index, isSmOrDown }: ContentProps) => {
+// Component
+const TopicCard = ({ topic, calculatedTopicProgress, index, isSmOrDown }: TopicCardProps) => {
+  // Hooks
   const navigate = useNavigate()
   const { t } = useTranslation()
 
@@ -70,4 +74,4 @@ const Content = ({ topic, calculatedTopicProgress, index, isSmOrDown }: ContentP
   )
 }
 
-export default Content
+export default memo(TopicCard)
