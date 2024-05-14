@@ -24,16 +24,20 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
 
   const receiveUni = () => {
     return checkUniversity().then((university) => {
-        setUni( university)
+        setUni(university)
+        console.log("university:", uni)
     })
-
+    .catch((reason) =>{
+        log.error(reason)
+        return ''
+    })
   }
 
   //check if there are any news
   const checkForNews = async () => {
-    console.log(receiveUni())
     return getNews(checkLanguage(), uni)
       .then((news) => {
+        console.log("news:",news, "lang", checkLanguage())
         return news.news.length != 0
       })
       .catch((reason) => {
