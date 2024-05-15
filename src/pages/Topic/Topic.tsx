@@ -64,12 +64,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       setInitialNodes(nodes)
       setInitialEdges(edges)
     })
-     .catch((error: string) => {
+     .catch((error) => {
       addSnackbar({
-        message: error,
+        message: t('error.mapNodes'),
         severity: 'error',
         autoHideDuration: 3000
       })
+      log.error(t('error.mapNodes') + 'Error: ' + error)
     })
   }
 
@@ -93,20 +94,22 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         .then((learningPathElementStatusData) => {
           return getLearningElementsWithStatus(learningPathElementStatusData, user)
         })
-         .catch((error: string) => {
+         .catch((error) => {
           addSnackbar({
-            message: error,
+            message: t('error.getLearningElementsWithStatus'),
             severity: 'error',
             autoHideDuration: 3000
           })
+          log.error(t('error.getLearningElementsWithStatus') + 'Error: ' + error)
         })
       })
-       .catch((error: string) => {
+       .catch((error) => {
         addSnackbar({
-          message: error,
+          message: t('error.getLearningElementStatus'),
           severity: 'error',
           autoHideDuration: 3000
         })
+        log.error(t('error.getLearningElementStatus') + 'Error: ' + error)
       })
     }
     return () => {
@@ -152,13 +155,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         setLearningPathElementStatus(data)
       })
     })
-     .catch((error: string) => {
+     .catch((error) => {
       addSnackbar({
-        message: 'An error occurred while updating a specific learning path element status',
+        message: t('error.setLearningPathElementSpecificStatus'),
         severity: 'error',
         autoHideDuration: 3000
       })
-      log.error('An error occurred while updating a specific learning path element status', error)
+      log.error(t('error.setLearningPathElementSpecificStatus') + 'Error: ' + error)
     })
   }
 
@@ -168,13 +171,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getHandleClose = () => {
     getUser().then((user) => {
       return updateLearningPathElementStatus(user)
-    }).catch((error: string) => {
+    }).catch((error) => {
       addSnackbar({
-        message: 'An error occurred while updating a specific learning path element status after close',
+        message: t('error.updateLearningPathElementStatus'),
         severity: 'error',
         autoHideDuration: 3000
       })
-      log.error('An error occurred while updating a specific learning path element status after close', error)
+      log.error(t('error.updateLearningPathElementStatus') + 'Error: ' + error)
     })
     return handleClose()
   }

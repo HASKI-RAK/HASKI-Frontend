@@ -3,6 +3,7 @@ import { useContext, useEffect, useMemo, useState } from 'react'
 import { Topic } from '@core'
 import { usePersistedStore, useStore } from '@store'
 import { SnackbarContext } from '@services'
+import { useTranslation } from 'react-i18next'
 
 
 export type LearningPathTopicHookReturn = {
@@ -16,11 +17,15 @@ export type LearningPathTopicHookReturn = {
  * A tuple with the loading state and the topics for a course
  */
 const useLearningPathTopic = (courseId: string): LearningPathTopicHookReturn => {
+  // State
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
+
+  // Hooks
   const { addSnackbar } = useContext(SnackbarContext)
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
+  const { t } = useTranslation()
 
   useEffect(() => {
     const fetchData = () => {
@@ -34,11 +39,11 @@ const useLearningPathTopic = (courseId: string): LearningPathTopicHookReturn => 
       })
        .catch(error => {
         addSnackbar({
-          message: 'An error occurred while fetching course topics in DefaultLearningPathTopic',
+          message: t('error.setTopics'),
           severity: 'error',
           autoHideDuration: 3000
         })
-        log.error('An error occurred while fetching course topics in DefaultLearningPathTopic', error);
+        log.error(t('error.setTopics') + "Error message: " + error);
       })
        .finally(() => {
         setLoading(false);

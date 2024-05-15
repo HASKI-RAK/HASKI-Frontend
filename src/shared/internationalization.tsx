@@ -55,12 +55,13 @@ i18next
   .catch((error) => {
     /* istanbul ignore next */
     const { addSnackbar } = React.useContext(SnackbarContext)
-    /* istanbul ignore next */
+    /* istanbul ignore next, can not be translation string as i18next is responsible for that*/
     addSnackbar({
-      message: 'Error while initializing i18next: ' + error,
+      message: 'Error while initializing i18next.',
       severity: 'error',
       autoHideDuration: 3000
     })
+    log.error('Error while initializing i18next.' + "Error message: " + error)
   })
 
 export default i18next

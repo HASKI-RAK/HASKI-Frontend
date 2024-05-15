@@ -149,21 +149,21 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           .catch((error) => {
             // 🍿 snackbar error
             addSnackbar({
-              message: error.message,
+              message: t('error.setTopicsPath'),
               severity: 'error',
               autoHideDuration: 5000
             })
-            log.error(error.message)
+            log.error(t('error.setTopicsPath') + 'Error: ' + error)
           })
       })
       .catch((error) => {
         // 🍿 snackbar error
         addSnackbar({
-          message: error.message,
+          message: t('error.getUser'),
           severity: 'error',
           autoHideDuration: 5000
         })
-        log.error(error.message)
+        log.error(t('error.getUser') + 'Error message: ' +error.message)
       })
   }
 
