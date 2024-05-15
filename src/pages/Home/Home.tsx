@@ -70,7 +70,7 @@ export const Home = () => {
 
   const isDisabled = (courseId: number) => {
     const now = new Date();
-    const unlockDate = new Date('2025-05-15T10:00:00');
+    const unlockDate = new Date('2024-05-15T10:00:00');
     return courseId === 2 && now < unlockDate;
   }
 
