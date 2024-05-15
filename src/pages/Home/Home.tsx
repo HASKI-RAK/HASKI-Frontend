@@ -46,7 +46,7 @@ export const Home = () => {
                   severity: 'error',
                   autoHideDuration: 5000
                 })
-                log.error(t('error.getCourses') + "Error Message: " + error.message)
+                log.error(t('error.getCourses'), 'Error: ' + error)
               })
           })
           .catch((error) => {
@@ -55,7 +55,7 @@ export const Home = () => {
               severity: 'error',
               autoHideDuration: 5000
             })
-            log.error(t('error.getUser') + "Error message: " + error.message)
+            log.error(t('error.getUser'), 'Error: ' + error)
           })
           .finally(() => {
             setLoading(false)

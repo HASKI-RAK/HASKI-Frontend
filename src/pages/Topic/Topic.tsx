@@ -70,7 +70,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         severity: 'error',
         autoHideDuration: 3000
       })
-      log.error(t('error.mapNodes') + 'Error: ' + error)
+      log.error(t('error.mapNodes'), 'Error: ' + error)
     })
   }
 
@@ -100,7 +100,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             severity: 'error',
             autoHideDuration: 3000
           })
-          log.error(t('error.getLearningElementsWithStatus') + 'Error: ' + error)
+          log.error(t('error.getLearningElementsWithStatus'), 'Error: ' + error)
         })
       })
        .catch((error) => {
@@ -109,7 +109,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           severity: 'error',
           autoHideDuration: 3000
         })
-        log.error(t('error.getLearningElementStatus') + 'Error: ' + error)
+        log.error(t('error.getLearningElementStatus'), 'Error: ' + error)
       })
     }
     return () => {
@@ -161,7 +161,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         severity: 'error',
         autoHideDuration: 3000
       })
-      log.error(t('error.setLearningPathElementSpecificStatus') + 'Error: ' + error)
+      log.error(t('error.setLearningPathElementSpecificStatus'), 'Error: ' + error)
     })
   }
 
@@ -177,7 +177,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         severity: 'error',
         autoHideDuration: 3000
       })
-      log.error(t('error.updateLearningPathElementStatus') + 'Error: ' + error)
+      log.error(t('error.updateLearningPathElementStatus'), 'Error: ' + error)
     })
     return handleClose()
   }

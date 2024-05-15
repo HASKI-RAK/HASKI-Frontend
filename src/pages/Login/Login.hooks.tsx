@@ -63,7 +63,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
             severity: 'error',
             autoHideDuration: 5000
           })
-        log.error(t('error.fetchRedirectMoodleLogin') + "Message error: " + error)
+        log.error(t('error.fetchRedirectMoodleLogin') + 'Error: ' + error)
       })
       .finally(() => {
         props.setIsLoading(false)
@@ -91,7 +91,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
             severity: 'error',
             autoHideDuration: 5000
           })
-        log.error(t('error.postLogin') + "Error message: " + error)
+        log.error(t('error.postLogin'), 'Error: ' + error)
         navigate('/login', { replace: true })
       })
   }, [])

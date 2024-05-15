@@ -43,7 +43,7 @@ const useLearningPathTopic = (courseId: string): LearningPathTopicHookReturn => 
           severity: 'error',
           autoHideDuration: 3000
         })
-        log.error(t('error.setTopics') + "Error message: " + error);
+        log.error(t('error.setTopics'), 'Error: ' + error);
       })
        .finally(() => {
         setLoading(false);

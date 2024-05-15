@@ -61,7 +61,7 @@ i18next
       severity: 'error',
       autoHideDuration: 3000
     })
-    log.error('Error while initializing i18next.' + "Error message: " + error)
+    log.error('Error while initializing i18next.' + 'Error: ' + error)
   })
 
 export default i18next

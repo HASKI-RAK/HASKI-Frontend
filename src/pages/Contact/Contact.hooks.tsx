@@ -2,6 +2,7 @@ import { useCallback, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FormDataType, SnackbarContext, postContactForm } from '@services'
 import { usePersistedStore } from '@store'
+import log from 'loglevel'
 
 export type ContactHookProps = {
   setIsLoading: (isLoading: boolean) => void
@@ -46,19 +47,21 @@ export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookRetur
             .catch((error) => {
               setIsLoading(false)
               addSnackbar({
-                message: t('pages.contact.error') + error,
+                message: t('pages.contact.error'),
                 severity: 'error',
                 autoHideDuration: 3000
               })
+              log.error(t('pages.contact.error'), 'Error: ' + error)
             })
         })
         .catch((error) => {
           setIsLoading(false)
           addSnackbar({
-            message: t('pages.contact.error') + error,
+            message: t('pages.contact.error'),
             severity: 'error',
             autoHideDuration: 3000
           })
+          log.error(t('pages.contact.error'), 'Error: ' + error)
         })
     },
     [t, addSnackbar, setIsLoading]

@@ -19,6 +19,7 @@ import {
 import { SnackbarContext } from '@services'
 import useHandleSend from './Questions.hooks'
 import { ButtonStack, CoverSheet, MemoTableRowQuestion, SendButton, StartButton } from './TableCommonComponents'
+import log from 'loglevel'
 
 /**
  * This component is used to display the questionnaire questions for the ILS questionnaire.
@@ -156,6 +157,7 @@ const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmpt
           severity: 'success',
           autoHideDuration: 5000
         })
+        log.info(t('appGlobal.dataSendSuccessful'))
         setSuccessSend(true)
       } else {
         addSnackbar({
@@ -163,6 +165,7 @@ const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmpt
           severity: 'error',
           autoHideDuration: 5000
         })
+        log.error(t('appGlobal.dataSendUnsuccessful'))
         setSuccessSend(false)
       }
     })

@@ -51,7 +51,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
               severity: 'error',
               autoHideDuration: 3000
             })
-            log.error(t('error.postILS') + 'Error: ' + error)
+            log.error(t('error.postILS'), 'Error: ' + error)
             return false
           })
           .finally(() => {
@@ -69,7 +69,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
               severity: 'error',
               autoHideDuration: 3000
             })
-            log.error(t('error.postListK') + 'Error: ' + error)
+            log.error(t('error.postListK'), 'Error: ' + error)
             return false
           })
           .finally(() => {
@@ -124,7 +124,7 @@ const calculateLearningPath = (
             + courseId
             + 'and topicId '
             + topicId
-            + "Error message: " + error.message)
+           , 'Error: ' + error)
         })
     })
   })
@@ -153,7 +153,7 @@ const calculateLearningPath = (
           + courseId
           + 'and topicId '
           + topicId
-          + "Error message: " + error.message)
+         , 'Error: ' + error)
       })
     })
   })
