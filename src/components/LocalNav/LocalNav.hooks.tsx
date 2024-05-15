@@ -1,6 +1,7 @@
 import log from 'loglevel'
-import { useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { LearningPathElement, LearningPathElementReturn, Topic } from '@core'
+import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 /**
@@ -32,7 +33,7 @@ export const getSortedLearningPath = async (
 /**
  * @param courseId - course id
  */
-// ! Something in here is fucked: Topic doesnt return the right values
+// Doesn't work in Course.test.tsx
 export const useLearningPathTopic = (courseId: string): { loading: boolean; topics: Topic[] } => {
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])

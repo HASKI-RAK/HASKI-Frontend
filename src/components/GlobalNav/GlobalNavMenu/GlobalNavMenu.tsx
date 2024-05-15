@@ -1,4 +1,6 @@
+import { Info } from '@mui/icons-material'
 import { ForwardedRef, MouseEvent, forwardRef, memo, useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, Divider, Menu, MenuItem, Tooltip } from '@common/components'
 import { ArrowDropDown } from '@common/icons'
@@ -7,7 +9,7 @@ import { SkeletonList } from '@components'
 // Type
 export type GlobalNavMenuProps = {
   id?: string
-  content?: { name: string; url: string }[]
+  content?: { name: string; url: string; isDisabled: boolean; availableAt: Date }[]
   title?: string
   isLoading?: boolean
   tooltip?: string
@@ -21,6 +23,7 @@ const GlobalNavMenu = forwardRef(
   ) => {
     // Hooks
     const navigate = useNavigate()
+    const { t } = useTranslation()
 
     // States
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null)
@@ -35,7 +38,7 @@ const GlobalNavMenu = forwardRef(
       setAnchorElement(null)
     }, [setAnchorElement])
 
-    // test id deleten
+    // TODO: test id deleten
     return (
       <>
         <Divider orientation="vertical" flexItem />
@@ -81,17 +84,38 @@ const GlobalNavMenu = forwardRef(
                 </Box>
               ) : (
                 [...content].map((element) => (
-                  <MenuItem
-                    id={element.name.concat('-link').replaceAll(' ', '-')}
-                    key={element.name}
-                    data-testid={`Menubar-Topic-${element.name}`}
-                    color="inherit"
-                    onClick={() => {
-                      navigate(element.url)
-                      handleClose()
-                    }}>
-                    {element.name}
-                  </MenuItem>
+                  <Box key={element.name} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <MenuItem
+                      id={element.name.concat('-link').replaceAll(' ', '-')}
+                      key={element.name}
+                      data-testid={`Menubar-Topic-${element.name}`}
+                      color="inherit"
+                      disabled={element.availableAt > new Date() && element.isDisabled}
+                      onClick={() => {
+                        navigate(element.url)
+                        handleClose()
+                      }}>
+                      {element.name}
+                    </MenuItem>
+                    {element.availableAt > new Date() && element.isDisabled && (
+                      <Tooltip
+                        title={
+                          t('tooltip.courseAvailableAt') +
+                          element.availableAt.toLocaleDateString('de-DE', {
+                            year: 'numeric',
+                            month: 'numeric',
+                            day: 'numeric',
+                            hour: 'numeric',
+                            minute: 'numeric'
+                          }) +
+                          t('appGlobal.timeEnding')
+                        }
+                        arrow
+                        placement="right">
+                        <Info color="disabled" sx={{ mt: 1, mr: 1, ml: -1, fontSize: 18 }} />
+                      </Tooltip>
+                    )}
+                  </Box>
                 ))
               )}
             </Menu>

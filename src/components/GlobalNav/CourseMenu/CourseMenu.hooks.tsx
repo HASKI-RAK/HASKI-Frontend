@@ -6,7 +6,7 @@ import { usePersistedStore, useStore } from '@store'
 
 // Type
 export type CourseMenuHookReturn = {
-  readonly content: { name: string; url: string }[]
+  readonly content: { name: string; url: string; isDisabled: boolean; availableAt: Date }[]
   readonly isLoading: boolean
 }
 
@@ -14,7 +14,7 @@ export type CourseMenuHookReturn = {
 export const useCourseMenu = (): CourseMenuHookReturn => {
   // States
   const [isLoading, setIsLoading] = useState(true)
-  const [content, setContent] = useState<{ name: string; url: string }[]>([])
+  const [content, setContent] = useState<{ name: string; url: string; isDisabled: boolean; availableAt: Date }[]>([]) // TODO: Custom type
 
   // Fetches
   const getUser = usePersistedStore((state) => state.getUser)
@@ -26,7 +26,12 @@ export const useCourseMenu = (): CourseMenuHookReturn => {
 
   // Logic
   const mapCourseToContent = useCallback((response: CourseResponse) => {
-    return response.courses.map((element) => ({ name: element.name, url: `/course/${element.id}` }))
+    return response.courses.map((element) => ({
+      name: element.name,
+      url: `/course/${element.id}`,
+      isDisabled: element.id === 2,
+      availableAt: new Date('2025-05-16T10:00:00')
+    }))
   }, [])
 
   useEffect(() => {
@@ -34,8 +39,8 @@ export const useCourseMenu = (): CourseMenuHookReturn => {
       getUser()
         .then((user) => {
           getCourses(user.settings.user_id, user.lms_user_id, user.id)
-            .then((response) => {
-              setContent(mapCourseToContent(response))
+            .then((courses) => {
+              setContent(mapCourseToContent(courses))
               setIsLoading(false)
             })
             .catch((error) => {

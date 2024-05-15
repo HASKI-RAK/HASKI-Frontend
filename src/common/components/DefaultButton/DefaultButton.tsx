@@ -34,8 +34,6 @@ const Button = (
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Button
   })
-  //
-  //ref={ref}
   return (
     <DefaultButton
       ref={ref}

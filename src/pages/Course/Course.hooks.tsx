@@ -1,6 +1,7 @@
 import log from 'loglevel'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useLearningPathTopic } from '@components'
 import { LearningPathElementStatus, LearningPathLearningElement, Topic, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -22,7 +23,7 @@ export const useCourse = (): CourseHookReturn => {
   // Hooks
   const navigate = useNavigate()
   const { courseId } = useParams() as { courseId: string }
-  // const { loading, topics } = useLearningPathTopic(courseId)
+  const { loading, topics } = useLearningPathTopic(courseId)
 
   // Stores
   const getUser = usePersistedStore((state) => state.getUser)
