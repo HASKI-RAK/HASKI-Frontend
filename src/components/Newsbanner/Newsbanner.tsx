@@ -27,16 +27,17 @@ export type NewsbannerProps = {
 const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
   const [open, setOpen] = useState(false)
   const [text, setText] = useState('')
-  const { checkForNews, receiveContent } = useNewsbanner()
+  const { checkForNews, newsItem } = useNewsbanner()
 
   useEffect(() => {
-    checkForNews().then((isNewsAvaliable) => {
-      setOpen(isNewsAvaliable)
-    })
+    if (newsItem){ 
+      setOpen(true)
+      console.log('bannerItem',newsItem)
+    }
   }, [])
 
   useEffect(() => {
-    receiveContent().then((showNews) => {
+    checkForNews().then((showNews) => {
       setText(showNews)
     })
   }, [])
