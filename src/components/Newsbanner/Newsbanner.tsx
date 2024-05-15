@@ -27,20 +27,21 @@ export type NewsbannerProps = {
 const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
   const [open, setOpen] = useState(false)
   const [text, setText] = useState('')
-  const { checkForNews, newsItem } = useNewsbanner()
+  const { checkForNews, hasItem } = useNewsbanner()
 
   useEffect(() => {
-    if (newsItem){ 
-      setOpen(true)
-      console.log('bannerItem',newsItem)
-    }
-  }, [])
+    checkForNews().then((showNews) => {
+      if(hasItem()){
+        setOpen(true)
+      }
+    })
+  }, [hasItem])
 
   useEffect(() => {
     checkForNews().then((showNews) => {
       setText(showNews)
     })
-  }, [])
+  }, [checkForNews])
 
   //fetch von backend, localStorage abfrage ob schon gesehen, date, expirationdate,
   //TODO: Text anpassen auf Bildschrimgroesse und textlaenge
