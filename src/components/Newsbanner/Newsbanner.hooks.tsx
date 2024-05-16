@@ -2,6 +2,7 @@ import log from 'loglevel'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { UniversityCheck as _UniversityCheck, UniversityCheck, UniversityCheckReturn } from '@common/utils'
 import { useStore } from '@store'
+import i18next from 'i18next'
 
 export type NewsbannerHookReturn = {
   readonly checkForNews: () => Promise<string>
@@ -11,12 +12,18 @@ export type NewsbannerHookReturn = {
 export const useNewsbanner = (): NewsbannerHookReturn => {
   const getNews = useStore((state) => state.getNews)
   const { checkUniversity } = UniversityCheck()
+  const [lang, setLang]=useState(localStorage.getItem('i18nextLng')?.toLowerCase())
   const [newsItem, setNewsItem] = useState(false)
   const [toggle, setToggle] = useState(false)
 
+  i18next.on('languageChanged', (lng: string) => {
+    console.log('Language changed to:', lng);
+    setLang(lng)
+    // Translate and log the new language
+    console.log(i18next.t('key'));
+  })
   //** Logic **/
   const checkLanguage = () => {
-    const lang = localStorage.getItem('i18nextLng')?.toLowerCase()
     return lang
   }
 
