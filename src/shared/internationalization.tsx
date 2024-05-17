@@ -61,6 +61,7 @@ i18next
       severity: 'error',
       autoHideDuration: 3000
     })
+    /* istanbul ignore next, can not be translation string as i18next is responsible for that*/
     log.error('Error while initializing i18next.' + 'Error: ' + error)
   })
 

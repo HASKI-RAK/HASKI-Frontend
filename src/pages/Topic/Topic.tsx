@@ -31,7 +31,7 @@ export type TopicProps = {
  */
 export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const navigate = useNavigate()
-  const authContext = useContext(AuthContext)
+  const { isAuth } = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
   const { fitView } = useReactFlow()
 
@@ -86,7 +86,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       navigate('/login')
     }, 1000)
 
-    if (authContext.isAuth && courseId && topicId) {
+    if (isAuth && courseId && topicId) {
       clearTimeout(preventEndlessLoading)
       getUser()
       .then((user) => {
@@ -116,7 +116,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       clearTimeout(preventEndlessLoading)
     }
   }, [
-    authContext.isAuth,
+    isAuth,
     courseId,
     getLearningPathElement,
     getUser,
@@ -142,7 +142,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           nodes: [{ id: initialNodes[0].id }]
         })
       }, 100)
-    }},[topicId])
+    }},[topicId, getLearningPathElement, getUser, navigate,  setInitialNodes, setInitialEdges, learningPathElementStatus])
 
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)
@@ -171,13 +171,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getHandleClose = () => {
     getUser().then((user) => {
       return updateLearningPathElementStatus(user)
-    }).catch((error) => {
-      addSnackbar({
-        message: t('error.updateLearningPathElementStatus'),
-        severity: 'error',
-        autoHideDuration: 3000
-      })
-      log.error(t('error.updateLearningPathElementStatus'), 'Error: ' + error)
     })
     return handleClose()
   }

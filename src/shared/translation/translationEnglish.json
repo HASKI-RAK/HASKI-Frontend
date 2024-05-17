@@ -1146,7 +1146,6 @@
   "error.getLearningElementsWithStatus": "There was an Error fetching Learning Elements with Status.",
   "error.getLearningElementStatus": "There was an Error fetching Learning Element Status.",
   "error.setLearningPathElementSpecificStatus": "There was an Error setting Learning Path Element Specific Status.",
-  "error.updateLearningPathElementStatus": "There was an Error updating a Learning Path Element Status.",
   "info": "Info",
   "pages.1": "1",
   "pages.10": "10",

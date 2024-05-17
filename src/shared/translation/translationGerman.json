@@ -1146,7 +1146,6 @@
   "error.getLearningElementsWithStatus": "Es gab einen Fehler beim Abrufen der Lernelemente (mit Status).",
   "error.getLearningElementStatus": "Es gab einen Fehler beim Abrufen des Lernelementstatus.",
   "error.setLearningPathElementSpecificStatus": "Es gab einen Fehler beim Festlegen des spezifischen Status eines Lernpfadelements.",
-  "error.updateLearningPathElementStatus": "Es gab einen Fehler beim Aktualisieren des Status eines Lernpfadelements.",
   "info": "Info",
   "pages.1": "1",
   "pages.10": "10",
