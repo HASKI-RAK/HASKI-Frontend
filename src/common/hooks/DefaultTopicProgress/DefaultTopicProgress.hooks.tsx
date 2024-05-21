@@ -5,13 +5,10 @@ import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import {
   LearningPathElement,
-  LearningPathElementReturn,
   LearningPathElementStatus,
-  LearningPathElementStatusReturn,
   Topic,
   User
 } from '@core'
-import { SnackbarMessageProps } from '@components'
 
 
 /**
@@ -100,13 +97,6 @@ const useLearningPathTopicProgress = (courseId: string, topics: Topic[]) => {
       ).then((result) => {
         setCalculatedTopicProgress(result)
         setLoading(false) // Update loading state when data fetching is complete
-      }).catch((error) => {
-        addSnackbar({
-          message: 'An error occurred while fetching topic progress in DefaultTopicProgress',
-          severity: 'error',
-          autoHideDuration: 3000
-        })
-        log.error('An error occurred while fetching topic progress in DefaultTopicProgress', error)
       })
     }
 
