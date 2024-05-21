@@ -131,7 +131,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       position: { x: number; y: number }
     ) => {
       const learningElementNodeStyle = {
-        background: 'rgba(255,142,0,0.87)',
+        background: theme.palette.primary.main,
         padding: 10,
         border: '1px solid ' + theme.palette.grey[500],
         borderRadius: 8,
