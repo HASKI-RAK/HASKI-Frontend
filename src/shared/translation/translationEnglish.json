@@ -1138,6 +1138,8 @@
   "error.postCalculateLearningPathILS": "There was an error calculating the Learning Path based on the ILS questionnaire data",
   "error.postILS": "ILS Questionnaire could not be sent.",
   "error.postListK": "ListK Questionnaire could not be sent.",
+  "error.getNews": "There was an Error fetching the news data.",
+  "error.getUniversity": "There was an Error fetching the university. Check if the user is valid.",
   "info": "Info",
   "pages.1": "1",
   "pages.10": "10",
