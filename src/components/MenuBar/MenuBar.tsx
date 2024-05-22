@@ -44,8 +44,6 @@ import { Topic } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
-// TODO: Move it into @common/hooks since it is reused in LocalNav
-
 /**
  *  Local navigation component props.
  *  The "loading" property is a boolean value that indicates whether the data is still being loaded.
