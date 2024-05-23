@@ -4,14 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { keyframes } from '@emotion/react'
 import { NewsbannerHookReturn, useNewsbanner as _useNewsbanner } from './Newsbanner.hooks'
 
-const scrolling = keyframes`
-    from {
-        transform: translateX(100%)
-    },
-    to {
-        transform: translateX(-100%)
-    }
-`
+
 export type NewsbannerProps = {
   useNewsbanner?: () => NewsbannerHookReturn
 }
@@ -43,6 +36,20 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
     })
   }, [checkForNews])
 
+
+  const text_len = text.length * 10
+  const screen_width = 1360
+  const text_percent = text_len / screen_width
+
+  const scrolling = keyframes`
+    from {
+        transform: translateX(100%)
+    },
+    to {
+        transform: translateX(-${text_percent * 100}%)
+    }
+`
+
   //fetch von backend, localStorage abfrage ob schon gesehen, date, expirationdate,
   //TODO: Text anpassen auf Bildschrimgroesse und textlaenge
   return (
@@ -69,7 +76,7 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
                 </IconButton>
               }>
               <Box
-                sx={{ animation: `${scrolling} 30s linear infinite`, transform: `translateX(100%)`, width: '960px' }}>
+                sx={{ animation: `${scrolling} 30s linear infinite`, transform: `translateX(100%)`, width: '1360px' }}>
                 {text}
               </Box>
             </Alert>
