@@ -38,8 +38,8 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
 
 
   const text_len = text.length * 10
-  const screen_width = 1360
-  const text_percent = text_len / screen_width
+  const window_width = window.innerWidth
+  const text_percent = text_len / window_width
 
   const scrolling = keyframes`
     from {
@@ -51,7 +51,6 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
 `
 
   //fetch von backend, localStorage abfrage ob schon gesehen, date, expirationdate,
-  //TODO: Text anpassen auf Bildschrimgroesse und textlaenge
   return (
     <>
       {open && (
@@ -76,7 +75,7 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
                 </IconButton>
               }>
               <Box
-                sx={{ animation: `${scrolling} 30s linear infinite`, transform: `translateX(100%)`, width: '1360px' }}>
+                sx={{ animation: `${scrolling} 30s linear infinite`, transform: `translateX(100%)`, width: window_width }}>
                 {text}
               </Box>
             </Alert>
