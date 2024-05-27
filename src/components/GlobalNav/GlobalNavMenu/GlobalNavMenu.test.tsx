@@ -21,10 +21,10 @@ describe('GlobalNavMenu tests', () => {
     expect(globalNavMenu).toBeTruthy()
   })
 
-  it('renders correctly with input and isLoading false', () => {
+  it('renders correctly with input, isLoading false', () => {
     const mockProps = {
       id: 'id',
-      content: [{ name: 'name', url: 'url' }],
+      content: [{ name: 'name', url: 'url', isDisabled: false, availableAt: new Date() }],
       title: 'title',
       isLoading: false,
       tooltip: 'tooltip'
@@ -39,10 +39,10 @@ describe('GlobalNavMenu tests', () => {
     expect(globalNavMenu).toBeTruthy()
   })
 
-  it('renders correctly with input and isLoading true', () => {
+  it('renders correctly with input, isLoading true', () => {
     const mockProps = {
       id: 'id',
-      content: [{ name: 'name', url: 'url' }],
+      content: [{ name: 'name', url: 'url', isDisabled: false, availableAt: new Date() }],
       title: 'title',
       isLoading: true,
       tooltip: 'tooltip'
@@ -60,20 +60,23 @@ describe('GlobalNavMenu tests', () => {
   test('opens and closes menu', async () => {
     const mockProps = {
       id: 'id',
-      content: [{ name: 'name', url: 'url' }],
+      content: [
+        { name: 'name', url: 'url', isDisabled: false, availableAt: new Date() },
+        { name: 'name', url: 'url', isDisabled: true, availableAt: new Date('3025-05-16T10:00:00') }
+      ],
       title: 'title',
       isLoading: false,
       tooltip: 'tooltip'
     }
 
-    const { getByRole } = render(
+    const { getByRole, getAllByRole } = render(
       <MemoryRouter>
         <GlobalNavMenu {...mockProps} />
       </MemoryRouter>
     )
 
     fireEvent.click(getByRole('button'))
-    fireEvent.click(getByRole('menuitem'))
+    fireEvent.click(getAllByRole('menuitem')[0])
 
     expect(navigate).toHaveBeenCalledTimes(1)
   })

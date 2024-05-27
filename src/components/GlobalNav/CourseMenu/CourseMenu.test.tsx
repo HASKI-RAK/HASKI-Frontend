@@ -75,11 +75,15 @@ describe('CourseMenu tests', () => {
       expect(getContent()).toStrictEqual([
         {
           name: 'test',
-          url: '/course/1'
+          url: '/course/1',
+          isDisabled: false,
+          availableAt: new Date('2025-05-16T08:00:00.000Z')
         },
         {
           name: 'test',
-          url: '/course/2'
+          url: '/course/2',
+          isDisabled: true,
+          availableAt: new Date('2025-05-16T08:00:00.000Z')
         }
       ])
       expect(getIsLoading()).toBeFalsy()

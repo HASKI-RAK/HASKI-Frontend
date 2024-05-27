@@ -1,7 +1,6 @@
-import { useParams } from 'react-router-dom'
 import { Box, Grid } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
-import { SkeletonList, TopicCard, useLearningPathTopic } from '@components'
+import { SkeletonList, TopicCard } from '@components'
 import { useCourse } from './Course.hooks'
 
 /**
@@ -17,14 +16,12 @@ import { useCourse } from './Course.hooks'
 const Course = () => {
   // Hooks
   const theme = useTheme()
-  const { courseId } = useParams() as { courseId: string }
   const isSmOrDown = useMediaQuery(theme.breakpoints.down('sm'))
-  const { loading, topics } = useLearningPathTopic(courseId)
-  const { calculatedTopicProgress } = useCourse()
+  const { calculatedTopicProgress, isLoading, topics } = useCourse()
 
   return (
     <>
-      {loading ? (
+      {isLoading ? (
         // Display skeleton list while loading
         <Box sx={{ flewGrow: 1 }}>
           <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ ml: '3rem' }}>
@@ -36,11 +33,11 @@ const Course = () => {
           </Grid>
         </Box>
       ) : (
-        // Display topics once data is loaded // TODO: Fix key
+        // Display topics once data is loaded
         <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ ml: '3rem' }}>
           {topics.map((topic, index) => (
             <TopicCard
-              key={''}
+              key={topic.id}
               topic={topic}
               calculatedTopicProgress={calculatedTopicProgress}
               index={index}

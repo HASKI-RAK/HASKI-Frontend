@@ -28,7 +28,7 @@ export const StyledLinearProgress = ({ learningElementProgressTopics, index }: B
   const calculatePercent = useCallback(() => {
     if (index === undefined || learningElementProgressTopics === undefined) return 10
 
-    if (learningElementProgressTopics[index] === undefined) return -1
+    if (learningElementProgressTopics[index] === undefined) return -1 // TODO: This line is unreachable
 
     return (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
   }, [index, learningElementProgressTopics])
@@ -39,14 +39,14 @@ export const StyledLinearProgress = ({ learningElementProgressTopics, index }: B
   //gray if error (-1), red if 0%, yellow if <70%, green if >=70%
   const colorByPercent = useCallback(() => {
     if (percent === 0) return 'error'
-    else if (percent < 0) return 'info'
+    else if (percent < 0) return 'info' // TODO: This line is unreachable
     return percent < 70 ? 'warning' : 'success'
   }, [percent])
 
   const getText = useCallback(() => {
     if (index === undefined || learningElementProgressTopics === undefined) return 'loading...'
 
-    return learningElementProgressTopics[index].length === 0
+    return learningElementProgressTopics[index].length === 0 // ! Throws error, if TODOs above are reached.
       ? 'error..'
       : learningElementProgressTopics[index][0] + '/' + learningElementProgressTopics[index][1]
   }, [index, learningElementProgressTopics])

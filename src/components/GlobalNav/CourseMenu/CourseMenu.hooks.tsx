@@ -3,10 +3,11 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { CourseResponse } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+import { GlobalNavContent } from '../GlobalNavMenu/GlobalNavMenu'
 
 // Type
 export type CourseMenuHookReturn = {
-  readonly content: { name: string; url: string; isDisabled: boolean; availableAt: Date }[]
+  readonly content: GlobalNavContent[]
   readonly isLoading: boolean
 }
 
@@ -14,7 +15,7 @@ export type CourseMenuHookReturn = {
 export const useCourseMenu = (): CourseMenuHookReturn => {
   // States
   const [isLoading, setIsLoading] = useState(true)
-  const [content, setContent] = useState<{ name: string; url: string; isDisabled: boolean; availableAt: Date }[]>([]) // TODO: Custom type
+  const [content, setContent] = useState<GlobalNavContent[]>([])
 
   // Fetches
   const getUser = usePersistedStore((state) => state.getUser)

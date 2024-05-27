@@ -1,7 +1,6 @@
 import log from 'loglevel'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useLearningPathTopic } from '@components'
 import { LearningPathElementStatus, LearningPathLearningElement, Topic, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -9,12 +8,16 @@ import { usePersistedStore, useStore } from '@store'
 // Type
 type CourseHookReturn = {
   calculatedTopicProgress: number[][]
+  isLoading: boolean
+  topics: Topic[]
 }
 
 // Hook
 export const useCourse = (): CourseHookReturn => {
   // States
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [topics, setTopics] = useState<Topic[]>([])
 
   // Contexts
   const { isAuth } = useContext(AuthContext)
@@ -23,7 +26,6 @@ export const useCourse = (): CourseHookReturn => {
   // Hooks
   const navigate = useNavigate()
   const { courseId } = useParams() as { courseId: string }
-  const { loading, topics } = useLearningPathTopic(courseId)
 
   // Stores
   const getUser = usePersistedStore((state) => state.getUser)
@@ -86,6 +88,8 @@ export const useCourse = (): CourseHookReturn => {
   )
 
   useEffect(() => {
+    setIsLoading(true)
+
     const preventEndlessLoading = setTimeout(() => {
       log.log('Course timeout')
       navigate('/login')
@@ -98,6 +102,8 @@ export const useCourse = (): CourseHookReturn => {
         .then((user) =>
           getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
             .then((learningPathTopic) => {
+              setIsLoading(false)
+              setTopics(learningPathTopic.topics)
               Promise.all(getAllTopicProgress(user, learningPathTopic.topics))
                 .then((allTopicProgress) =>
                   // Set the calculated progress for each topic
@@ -133,5 +139,5 @@ export const useCourse = (): CourseHookReturn => {
     }
   }, [isAuth, courseId, navigate, getUser, getLearningPathElement, getLearningPathElementStatus])
 
-  return useMemo(() => ({ calculatedTopicProgress }), [calculatedTopicProgress])
+  return useMemo(() => ({ calculatedTopicProgress, isLoading, topics }), [calculatedTopicProgress, isLoading, topics])
 }

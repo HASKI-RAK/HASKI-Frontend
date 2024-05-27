@@ -1,7 +1,6 @@
 import log from 'loglevel'
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { LearningPathElement, LearningPathElementReturn, Topic } from '@core'
-import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 /**

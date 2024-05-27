@@ -7,13 +7,17 @@ import { ArrowDropDown } from '@common/icons'
 import { SkeletonList } from '@components'
 
 // Type
+export type GlobalNavContent = { name: string; url: string; isDisabled: boolean; availableAt: Date }
+
+// Type
 export type GlobalNavMenuProps = {
   id?: string
-  content?: { name: string; url: string; isDisabled: boolean; availableAt: Date }[]
+  content?: GlobalNavContent[]
   title?: string
   isLoading?: boolean
   tooltip?: string
 }
+
 // Component
 const GlobalNavMenu = forwardRef(
   (
@@ -38,7 +42,6 @@ const GlobalNavMenu = forwardRef(
       setAnchorElement(null)
     }, [setAnchorElement])
 
-    // TODO: test id deleten
     return (
       <>
         <Divider orientation="vertical" flexItem />
@@ -55,7 +58,6 @@ const GlobalNavMenu = forwardRef(
                   )
                 }
                 onClick={handleOpen}
-                data-testid="Menubar-TopicButton"
                 sx={{ whiteSpace: 'pre-wrap', mt: 0.5 }}
                 variant="text">
                 {title?.replaceAll(' ', '\n')}
@@ -88,16 +90,15 @@ const GlobalNavMenu = forwardRef(
                     <MenuItem
                       id={element.name.concat('-link').replaceAll(' ', '-')}
                       key={element.name}
-                      data-testid={`Menubar-Topic-${element.name}`}
                       color="inherit"
-                      disabled={element.availableAt > new Date() && element.isDisabled}
+                      disabled={element.isDisabled && element.availableAt > new Date()}
                       onClick={() => {
                         navigate(element.url)
                         handleClose()
                       }}>
                       {element.name}
                     </MenuItem>
-                    {element.availableAt > new Date() && element.isDisabled && (
+                    {element.isDisabled && element.availableAt > new Date() && (
                       <Tooltip
                         title={
                           t('tooltip.courseAvailableAt') +

@@ -569,19 +569,32 @@ describe('getSortedLearningPath works as expected', () => {
   })
 })
 
-describe('useLearningPathTopic', () => {
+describe('useLearningPathTopic tests', () => {
   beforeEach(() => {
     resetModules()
   })
 
-  test('fetch learningPathTopics fails', async () => {
-    mockServices.fetchLearningPathTopic = jest
-      .fn()
-      .mockImplementationOnce(() => Promise.reject(new Error('fetchLearningPathTopic failed')))
+  test('getLearningPathTopic fails', async () => {
+    mockServices.fetchLearningPathTopic.mockImplementationOnce(() =>
+      Promise.reject(new Error('getLearningPathTopic failed'))
+    )
 
-    act(() => {
-      const { result } = renderHook(() => useLearningPathTopic('2'))
-      expect(result.current).toBeUndefined()
+    const { result } = renderHook(() => useLearningPathTopic('2'))
+
+    await waitFor(() => {
+      expect(result.current.loading).toBeTruthy()
+      expect(result.current.topics).toStrictEqual([])
+    })
+  })
+
+  test('getUser fails', async () => {
+    mockServices.fetchUser.mockImplementationOnce(() => Promise.reject(new Error('getUser failed')))
+
+    const { result } = renderHook(() => useLearningPathTopic('2'))
+
+    await waitFor(() => {
+      expect(result.current.loading).toBeTruthy()
+      expect(result.current.topics).toStrictEqual([])
     })
   })
 
