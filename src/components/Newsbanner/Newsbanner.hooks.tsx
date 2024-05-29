@@ -21,7 +21,6 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
   
 
   i18next.on('languageChanged', (lng: string) => {
-    console.log('Language changed to:', lng);
     setLang(lng)
   })
   //** Logic **/
@@ -42,7 +41,7 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
           .then((news) => {
             setNewsItem(news.news.length!=0)
             const contentA = news.news.map(({ news_content }) => news_content).join(', ')
-            console.log('news:', news, 'lang', checkLanguage(), 'university:', university)
+            //console.log('news:', news, 'lang', checkLanguage(), 'university:', university)
             return JSON.stringify(contentA)
           })
           .catch((error) => {

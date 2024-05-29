@@ -13,15 +13,18 @@ export type NewsbannerProps = {
  * Newsbanner component
  * @remarks
  * Newsbanner shows a banner between the menubar and the breadcrumbs,
- * but only if there are news.
+ * but only if there are news. The news get fitted by their charakter length. 
+ * The closed state gets saved in the localstorage
  * @category Components
  */
 
 const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
   const [open, setOpen] = useState(false)
+  const [close, setClose] = useState(localStorage.getItem('newsCloseState') == "true")
   const [text, setText] = useState('')
   const { checkForNews, hasItem } = useNewsbanner()
 
+  //checks if there are any news
   useEffect(() => {
     checkForNews().then((showNews) => {
       if(hasItem()){
@@ -30,13 +33,14 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
     })
   }, [hasItem])
 
+  //sets Text to be displayed
   useEffect(() => {
     checkForNews().then((showNews) => {
       setText(showNews)
     })
   }, [checkForNews])
 
-
+  //Animation logic
   const text_len = text.length * 10
   const window_width = window.innerWidth
   const text_percent = text_len / window_width
@@ -49,11 +53,10 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
         transform: translateX(-${text_percent * 100}%)
     }
 `
-
-  //fetch von backend, localStorage abfrage ob schon gesehen, date, expirationdate,
+  //+TODO: Option for reopening news
   return (
     <>
-      {open && (
+      {open && !close && (
         <Box sx={{ width: '100%' }}>
           <Collapse in={open} sx={{ overflow: 'hidden' }}>
             <Alert
@@ -69,7 +72,8 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
                   color="inherit"
                   size="small"
                   onClick={() => {
-                    setOpen(false)
+                    setClose(true)
+                    localStorage.setItem('newsCloseState', true ? "true" : "false")
                   }}>
                   <CloseIcon fontSize="inherit" />
                 </IconButton>
