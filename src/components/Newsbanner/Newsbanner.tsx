@@ -1,6 +1,6 @@
 import { Alert, Box, Collapse, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { keyframes } from '@emotion/react'
 import { NewsbannerHookReturn, useNewsbanner as _useNewsbanner } from './Newsbanner.hooks'
 
@@ -14,13 +14,13 @@ export type NewsbannerProps = {
  * @remarks
  * Newsbanner shows a banner between the menubar and the breadcrumbs,
  * but only if there are news. The news get fitted by their charakter length. 
- * The closed state gets saved in the localstorage
+ * The closed state gets saved in the sessionStorage and removed when the window closes.
  * @category Components
  */
 
 const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
   const [open, setOpen] = useState(false)
-  const [close, setClose] = useState(localStorage.getItem('newsCloseState') == "true")
+  const [close, setClose] = useState(sessionStorage.getItem('newsCloseState') == "true")
   const [text, setText] = useState('')
   const { checkForNews, hasItem } = useNewsbanner()
 
@@ -54,6 +54,7 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
     }
 `
   //+TODO: Option for reopening news
+  // Reopen new news
   return (
     <>
       {open && !close && (
@@ -73,7 +74,7 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
                   size="small"
                   onClick={() => {
                     setClose(true)
-                    localStorage.setItem('newsCloseState', true ? "true" : "false")
+                    sessionStorage.setItem('newsCloseState', true ? "true" : "false")
                   }}>
                   <CloseIcon fontSize="inherit" />
                 </IconButton>

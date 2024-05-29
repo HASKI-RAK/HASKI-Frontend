@@ -1,5 +1,5 @@
 import log from 'loglevel'
-import { useCallback, useMemo, useState, useContext } from 'react'
+import { useMemo, useState, useContext } from 'react'
 import { UniversityCheck as _UniversityCheck, UniversityCheck, UniversityCheckReturn } from '@common/utils'
 import { SnackbarContext } from '@services'
 import { useStore } from '@store'
