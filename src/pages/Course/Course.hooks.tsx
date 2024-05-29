@@ -71,6 +71,7 @@ export const useCourse = (): CourseHookReturn => {
                   severity: 'error',
                   autoHideDuration: 3000
                 })
+                log.error(error)
                 return []
               })
           )
@@ -80,6 +81,7 @@ export const useCourse = (): CourseHookReturn => {
               severity: 'error',
               autoHideDuration: 3000
             })
+            log.error(error)
             return []
           })
       })
@@ -104,18 +106,10 @@ export const useCourse = (): CourseHookReturn => {
             .then((learningPathTopic) => {
               setIsLoading(false)
               setTopics(learningPathTopic.topics)
-              Promise.all(getAllTopicProgress(user, learningPathTopic.topics))
-                .then((allTopicProgress) =>
-                  // Set the calculated progress for each topic
-                  setCalculatedTopicProgress(allTopicProgress)
-                )
-                .catch((error: string) => {
-                  addSnackbar({
-                    message: error,
-                    severity: 'error',
-                    autoHideDuration: 3000
-                  })
-                })
+              Promise.all(getAllTopicProgress(user, learningPathTopic.topics)).then((allTopicProgress) =>
+                // Set the calculated progress for each topic
+                setCalculatedTopicProgress(allTopicProgress)
+              )
             })
             .catch((error: string) => {
               addSnackbar({
@@ -123,6 +117,7 @@ export const useCourse = (): CourseHookReturn => {
                 severity: 'error',
                 autoHideDuration: 3000
               })
+              log.error(error)
             })
         )
         .catch((error: string) => {
@@ -131,6 +126,7 @@ export const useCourse = (): CourseHookReturn => {
             severity: 'error',
             autoHideDuration: 3000
           })
+          log.error(error)
         })
     }
 

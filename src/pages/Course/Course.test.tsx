@@ -16,11 +16,11 @@ describe('Course tests', () => {
 
   test('user is redirected to /login if not Authenticated', () => {
     render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+      <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
           <Course />
-        </AuthContext.Provider>
-      </MemoryRouter>
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
     jest.runAllTimers()
@@ -29,11 +29,11 @@ describe('Course tests', () => {
 
   it('renders course page with topics and clicking on first topic navigates to topic/1', async () => {
     const { getAllByRole } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
           <Course />
-        </AuthContext.Provider>
-      </MemoryRouter>
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
     await waitFor(() => {
@@ -45,11 +45,11 @@ describe('Course tests', () => {
 
   it('renders course page with topics and clicking on second topic navigates to topic/2', async () => {
     const { getAllByRole } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
           <Course />
-        </AuthContext.Provider>
-      </MemoryRouter>
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
     await waitFor(() => {
@@ -59,146 +59,101 @@ describe('Course tests', () => {
     expect(navigate).toHaveBeenCalledWith('topic/2')
   })
 
-  /*it('renders course page with topics, getLearningPathElement throws error', async () => {
-    // obsoolete
-    mockServices.fetchLearningPathElement.mockImplementationOnce(() => {
-      throw new Error('getLearningPathElement error')
-    })
-
-    const { getAllByRole } = render(
-      <MemoryRouter>
+  test('functionality of hook', async () => {
+    const { result } = renderHook(() => useCourse(), {
+      wrapper: ({ children }) => (
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Course />
+          <MemoryRouter>{children}</MemoryRouter>
         </AuthContext.Provider>
-      </MemoryRouter>
-    )
+      )
+    })
 
     await waitFor(() => {
-      fireEvent.click(getAllByRole('button')[0])
-    })
-
-    expect(navigate).toHaveBeenCalledWith('topic/1')
-  })
-
-  it('renders course page with topics, getLearningPathElementStatus throws error', async () => {
-    // obsolete
-    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(() => {
-      throw new Error('getLearningPathElement error')
-    })
-
-    const { getAllByRole } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Course />
-        </AuthContext.Provider>
-      </MemoryRouter>
-    )
-
-    await waitFor(() => {
-      fireEvent.click(getAllByRole('button')[0])
-    })
-
-    expect(navigate).toHaveBeenCalledWith('topic/1')
-  })
-
-  it('renders course page with topics, getUser throws error', async () => {
-    //obsolete
-    mockServices.fetchUser.mockImplementationOnce(() => {
-      throw new Error('getLearningPathElement error')
-    })
-
-    render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Course />
-        </AuthContext.Provider>
-      </MemoryRouter>
-    )
-  })*/
-
-  test('functionality of hook', () => {
-    const { result } = renderHook(() => useCourse(), {
-      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
-    })
-
-    console.log(result.current)
-
-    expect(result.current).toStrictEqual({
-      calculatedTopicProgress: [],
-      isLoading: true,
-      topics: []
+      expect(result.current.calculatedTopicProgress).toStrictEqual([
+        [2, 4],
+        [2, 4]
+      ])
+      expect(result.current.isLoading).toBeFalsy()
+      expect(result.current.topics.length).toStrictEqual(2)
     })
   })
 
-  test('functionality of hook with getLearningPathElement failed', () => {
-    mockServices.fetchLearningPathElement.mockImplementationOnce(() => {
-      throw new Error('getLearningPathElement error')
-    })
-
-    const { result } = renderHook(() => useCourse(), {
-      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
-    })
-
-    console.log(result.current)
-
-    expect(result.current).toStrictEqual({
-      calculatedTopicProgress: [],
-      isLoading: true,
-      topics: []
-    })
-  })
-
-  test('functionality of hook with getLearningPathElementStatus failed', () => {
-    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(() => {
-      throw new Error('getLearningPathElementStatus error')
-    })
-
-    const { result } = renderHook(() => useCourse(), {
-      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
-    })
-
-    console.log(result.current)
-
-    expect(result.current).toStrictEqual({
-      calculatedTopicProgress: [],
-      isLoading: true,
-      topics: []
-    })
-  })
-
-  test('functionality of hook with getLearningPathTopic failed', () => {
-    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => {
-      throw new Error('getLearningPathTopic error')
-    })
-
-    const { result } = renderHook(() => useCourse(), {
-      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
-    })
-
-    console.log(result.current)
-
-    expect(result.current).toStrictEqual({
-      calculatedTopicProgress: [],
-      isLoading: true,
-      topics: []
-    })
-  })
-
-  test('functionality of hook with getUser failed', () => {
+  test('functionality of hook with getUser failed', async () => {
     mockServices.fetchUser.mockImplementationOnce(() => {
       throw new Error('getUser error')
     })
 
     const { result } = renderHook(() => useCourse(), {
-      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
+      wrapper: ({ children }) => (
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>{children}</MemoryRouter>
+        </AuthContext.Provider>
+      )
     })
 
-    console.log(result.current)
+    await waitFor(() => {
+      expect(result.current.calculatedTopicProgress).toStrictEqual([])
+      expect(result.current.isLoading).toBeTruthy()
+      expect(result.current.topics.length).toStrictEqual(0)
+    })
+  })
 
-    expect(result.current).toStrictEqual({
-      calculatedTopicProgress: [],
-      isLoading: true,
-      topics: []
+  test('functionality of hook with getLearningPathTopic failed', async () => {
+    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => {
+      throw new Error('getLearningPathTopic error')
+    })
+
+    const { result } = renderHook(() => useCourse(), {
+      wrapper: ({ children }) => (
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>{children}</MemoryRouter>
+        </AuthContext.Provider>
+      )
+    })
+
+    await waitFor(() => {
+      expect(result.current.calculatedTopicProgress).toStrictEqual([])
+      expect(result.current.isLoading).toBeTruthy()
+      expect(result.current.topics.length).toStrictEqual(0)
+    })
+  })
+
+  test('functionality of hook with getLearningPathElementStatus failed', async () => {
+    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(() => {
+      throw new Error('getLearningPathElementStatus error')
+    })
+
+    const { result } = renderHook(() => useCourse(), {
+      wrapper: ({ children }) => (
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>{children}</MemoryRouter>
+        </AuthContext.Provider>
+      )
+    })
+    await waitFor(() => {
+      expect(result.current.calculatedTopicProgress).toStrictEqual([])
+      expect(result.current.isLoading).toBeTruthy()
+      expect(result.current.topics.length).toStrictEqual(0)
+    })
+  })
+
+  test('functionality of hook with getLearningPathElement failed', async () => {
+    mockServices.fetchLearningPathElement.mockImplementationOnce(() => {
+      throw new Error('getLearningPathElement error')
+    })
+
+    const { result } = renderHook(() => useCourse(), {
+      wrapper: ({ children }) => (
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>{children}</MemoryRouter>
+        </AuthContext.Provider>
+      )
+    })
+
+    await waitFor(() => {
+      expect(result.current.calculatedTopicProgress).toStrictEqual([])
+      expect(result.current.isLoading).toBeTruthy()
+      expect(result.current.topics.length).toStrictEqual(0)
     })
   })
 })

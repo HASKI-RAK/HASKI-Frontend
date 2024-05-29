@@ -39,8 +39,7 @@ const Course = () => {
             <TopicCard
               key={topic.id}
               topic={topic}
-              calculatedTopicProgress={calculatedTopicProgress}
-              index={index}
+              calculatedTopicProgress={calculatedTopicProgress[index]}
               isSmOrDown={isSmOrDown}
             />
           ))}

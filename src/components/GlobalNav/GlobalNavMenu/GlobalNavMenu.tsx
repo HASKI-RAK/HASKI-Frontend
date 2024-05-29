@@ -2,7 +2,7 @@ import { Info } from '@mui/icons-material'
 import { ForwardedRef, MouseEvent, forwardRef, memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Box, Button, Divider, Menu, MenuItem, Tooltip } from '@common/components'
+import { Box, Button, Divider, Menu, MenuItem, Tooltip, Typography } from '@common/components'
 import { ArrowDropDown } from '@common/icons'
 import { SkeletonList } from '@components'
 
@@ -47,7 +47,7 @@ const GlobalNavMenu = forwardRef(
         <Divider orientation="vertical" flexItem />
         <div {...props} ref={ref}>
           <Box sx={{ flexGrow: 0, ml: 1 }}>
-            <Tooltip arrow title={tooltip}>
+            <Tooltip arrow title={<Typography variant="body2">{tooltip}</Typography>}>
               <Button
                 id={id.concat('-menu-button')}
                 endIcon={
@@ -101,15 +101,19 @@ const GlobalNavMenu = forwardRef(
                     {element.isDisabled && element.availableAt > new Date() && (
                       <Tooltip
                         title={
-                          t('tooltip.courseAvailableAt') +
-                          element.availableAt.toLocaleDateString('de-DE', {
-                            year: 'numeric',
-                            month: 'numeric',
-                            day: 'numeric',
-                            hour: 'numeric',
-                            minute: 'numeric'
-                          }) +
-                          t('appGlobal.timeEnding')
+                          <Typography variant="body2">
+                            {t('tooltip.courseAvailableAt').concat(
+                              element.availableAt.toLocaleDateString('de-DE', {
+                                year: 'numeric',
+                                month: 'numeric',
+                                day: 'numeric',
+                                hour: 'numeric',
+                                minute: 'numeric'
+                              }),
+                              ' ',
+                              t('appGlobal.oClock')
+                            )}
+                          </Typography>
                         }
                         arrow
                         placement="right">
