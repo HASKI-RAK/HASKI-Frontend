@@ -6,6 +6,7 @@ import { Button, Card, CardContent, Skeleton, Stack, Typography } from '@common/
 import { Course } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 /**
  * # Home Page
@@ -68,20 +69,19 @@ export const Home = () => {
     }
   }, [loading])
 
-  // Card cointaining the courses with a button to the specific course
+  const commonButtonStyle = {
+    mt: '1rem',
+    width: '85%'
+  }
+
+  // Card containing the courses with a button to the specific course
   return loading ? (
     <Skeleton variant="rectangular" width="100%" height={118} />
   ) : (
     <div>
       <Stack spacing={2} direction="row" justifyContent="center">
         <div>
-          {courses.length === 0 ? (
-            <Card>
-              <CardContent>
-                <Typography variant="h5">{t('pages.home.noCourses')}</Typography>
-              </CardContent>
-            </Card>
-          ) : (
+          {courses.length !== 0 && (
             courses.map((course) => {
               return (
                 <Card key={course.id} sx={{ mb: '1rem' }}>
@@ -92,9 +92,7 @@ export const Home = () => {
                         id="course-button"
                         variant="contained"
                         color="primary"
-                        sx={{
-                          mt: '1rem'
-                        }}
+                        sx={commonButtonStyle}
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>
@@ -106,6 +104,19 @@ export const Home = () => {
               )
             })
           )}
+            <Card>
+              <CardContent>
+                <Stack direction="row" justifyContent="center">
+                <Button
+                  id="course-button"
+                  variant="contained"
+                  color="primary"
+                  sx={commonButtonStyle}>
+                  <AddCircleIcon/>
+                </Button>
+                </Stack>
+              </CardContent>
+            </Card>
         </div>
       </Stack>
     </div>
