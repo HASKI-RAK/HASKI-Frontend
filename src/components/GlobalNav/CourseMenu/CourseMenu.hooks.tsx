@@ -31,7 +31,7 @@ export const useCourseMenu = (): CourseMenuHookReturn => {
       name: element.name,
       url: `/course/${element.id}`,
       isDisabled: element.id === 2,
-      availableAt: new Date('2025-05-16T10:00:00')
+      availableAt: new Date('2025-05-16T10:00:00Z')
     }))
   }, [])
 

@@ -65,13 +65,13 @@ describe('CourseMenu tests', () => {
           name: 'test',
           url: '/course/1',
           isDisabled: false,
-          availableAt: new Date('2025-05-16T08:00:00.000Z')
+          availableAt: new Date('2025-05-16T10:00:00.000Z')
         },
         {
           name: 'test',
           url: '/course/2',
           isDisabled: true,
-          availableAt: new Date('2025-05-16T08:00:00.000Z')
+          availableAt: new Date('2025-05-16T10:00:00.000Z')
         }
       ])
       expect(result.current.isLoading).toBeFalsy()
