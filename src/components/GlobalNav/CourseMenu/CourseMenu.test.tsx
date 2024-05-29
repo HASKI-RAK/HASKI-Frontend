@@ -41,16 +41,10 @@ describe('CourseMenu tests', () => {
     const { result } = renderHook(() => useCourseMenu(), {
       wrapper: ({ children }) => <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
     })
-    const getContent = () => {
-      return result.current.content
-    }
-    const getIsLoading = () => {
-      return result.current.isLoading
-    }
 
     await waitFor(() => {
-      expect(getContent()).toStrictEqual([])
-      expect(getIsLoading()).toBeTruthy()
+      expect(result.current.content).toStrictEqual([])
+      expect(result.current.isLoading).toBeTruthy()
     })
   })
 
@@ -64,15 +58,9 @@ describe('CourseMenu tests', () => {
     const { result } = renderHook(() => useCourseMenu(), {
       wrapper: ({ children }) => <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
     })
-    const getContent = () => {
-      return result.current.content
-    }
-    const getIsLoading = () => {
-      return result.current.isLoading
-    }
 
     await waitFor(() => {
-      expect(getContent()).toStrictEqual([
+      expect(result.current.content).toStrictEqual([
         {
           name: 'test',
           url: '/course/1',
@@ -86,7 +74,7 @@ describe('CourseMenu tests', () => {
           availableAt: new Date('2025-05-16T08:00:00.000Z')
         }
       ])
-      expect(getIsLoading()).toBeFalsy()
+      expect(result.current.isLoading).toBeFalsy()
     })
   })
 
@@ -102,16 +90,10 @@ describe('CourseMenu tests', () => {
     const { result } = renderHook(() => useCourseMenu(), {
       wrapper: ({ children }) => <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
     })
-    const getContent = () => {
-      return result.current.content
-    }
-    const getIsLoading = () => {
-      return result.current.isLoading
-    }
 
     await waitFor(() => {
-      expect(getContent()).toStrictEqual([])
-      expect(getIsLoading()).toBeTruthy()
+      expect(result.current.content).toStrictEqual([])
+      expect(result.current.isLoading).toBeTruthy()
     })
   })
 
@@ -127,16 +109,10 @@ describe('CourseMenu tests', () => {
     const { result } = renderHook(() => useCourseMenu(), {
       wrapper: ({ children }) => <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
     })
-    const getContent = () => {
-      return result.current.content
-    }
-    const getIsLoading = () => {
-      return result.current.isLoading
-    }
 
     await waitFor(() => {
-      expect(getContent()).toStrictEqual([])
-      expect(getIsLoading()).toBeTruthy()
+      expect(result.current.content).toStrictEqual([])
+      expect(result.current.isLoading).toBeTruthy()
     })
   })
 })
