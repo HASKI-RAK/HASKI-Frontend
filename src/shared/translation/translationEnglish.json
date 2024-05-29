@@ -10,6 +10,7 @@
   "appGlobal.imageSources": "Image sources:",
   "appGlobal.loading": "Loading...",
   "appGlobal.next": "Next",
+  "appGlobal.oClock": "o'clock",
   "appGlobal.othRegensburg": "OTH Regensburg",
   "appGlobal.send": "Send",
   "appGlobal.topics": "Topics",
@@ -1673,15 +1674,14 @@
   "pages.topic.single": "Single",
   "success": "Success",
   "tooltip.completed": "Completed",
+  "tooltip.courseAvailableAt": "Course available at ",
   "tooltip.courseSelection": "Select a course",
   "tooltip.furtherInfoSelection": "Further information about the project",
   "tooltip.languageSettings": "Language settings",
   "tooltip.openGlobalSettings": "Open global settings",
   "tooltip.openQuestionnaireResults": "Learner characteristics",
   "tooltip.openSettings": "Open settings",
-  "tooltip.courseAvailableAt": "Course available at ",
   "warning": "Warning",
   "warning.offline": "You are currently offline. Please check your internet connection.",
-  "warning.online": "You are online again.",
-  "appGlobal.oClock": "o'clock"
+  "warning.online": "You are online again."
 }
