@@ -1670,6 +1670,13 @@
   "pages.topic": "Topic",
   "pages.topic.grouped": "Grouped",
   "pages.topic.single": "Single",
+  "pages.course.cardText": "Learning Path Algorithm: ",
+  "pages.course.fixed": "Predetermined Order",
+  "pages.course.bayes": "Bayes",
+  "pages.course.graf": "Graf",
+  "pages.course.aco": "ACO",
+  "pages.course.genetic": "Genetic Algorithm",
+  "pages.course.tyche": "Tyche",
   "success": "Success",
   "tooltip.completed": "Completed",
   "tooltip.languageSettings": "Language settings",
@@ -1714,3 +1721,4 @@
     }
   ]
 }
+
