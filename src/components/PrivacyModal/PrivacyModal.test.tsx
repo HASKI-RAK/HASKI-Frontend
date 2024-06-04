@@ -5,8 +5,10 @@ import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
 import PrivacyModal from './PrivacyModal'
 import { usePrivacyModal } from './PrivacyModal.hooks'
+import { UniversityCheck } from '@common/utils'
 
 const navigate = jest.fn()
+const { checkUniversity } = UniversityCheck()
 
 beforeEach(() => {
   jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)

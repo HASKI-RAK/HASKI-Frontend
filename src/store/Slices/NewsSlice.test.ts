@@ -15,17 +15,17 @@ describe('NewsSlice', () => {
           date: 'Thu, 13 Jul 2023 16:00:00 GMT',
           expiration_date: 'Sun, 20 Apr 2025 16:00:00 GMT',
           id: 1,
-          language_id: 'de',
+          language_id: 'en',
           news_content: 'We are currently testing the site',
-          university: null
+          university: 'HS-AS'
         },
         {
           date: 'Thu, 13 Jul 2023 16:00:00 GMT',
           expiration_date: 'Sun, 20 Apr 2025 16:00:00 GMT',
-          id: 1,
-          language_id: 'de',
+          id: 2,
+          language_id: 'en',
           news_content: 'We are currently testing the site',
-          university: null
+          university: 'HS-AS'
         }
       ]
     }
