@@ -628,4 +628,36 @@ describe('useLearningPathTopic tests', () => {
       expect(result.current).toBeUndefined()
     })
   })
+
+  test('useLearningPathElement getUser fails', async () => {
+    const mockTopic: Topic = {
+      contains_le: true,
+      created_at: '2021-09-01T12:00:00.000Z',
+      created_by: 'dimitri',
+      id: 1,
+      is_topic: true,
+      last_updated: '2021-09-01T12:00:00.000Z',
+      lms_id: 1,
+      name: 'test',
+      parent_id: 1,
+      student_topic: {
+        done: false,
+        done_at: null,
+        id: 1,
+        student_id: 1,
+        topic_id: 1,
+        visits: []
+      },
+      university: 'HS-KE'
+    }
+
+    mockServices.fetchUser.mockImplementationOnce(() => Promise.reject(new Error('getUser failed')))
+
+    const { result } = renderHook(() => useLearningPathElement(mockTopic, '2'))
+
+    await waitFor(() => {
+      expect(result.current.loadingElements).toBeTruthy()
+      expect(result.current.learningPaths).toStrictEqual(undefined)
+    })
+  })
 })
