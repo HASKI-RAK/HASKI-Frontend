@@ -7,11 +7,18 @@ import { resetters } from '../Zustand/Store'
 export default interface NewsSlice {
   _news: Record<string, NewsList>
   getNews: NewsReturn
+  setNewsCloseState(closeState: boolean): boolean
+  closeState: boolean
 }
 
 export const createNewsSlice: StateCreator<StoreState, [], [], NewsSlice> = (set, get) => {
-  resetters.push(() => set({ _news: {} }))
+  resetters.push(() => set({ _news: {} })), set({ closeState: {} as boolean })
   return {
+    closeState: {} as boolean,
+    setNewsCloseState: (closeState) => {
+      set({ closeState })
+      return closeState
+    },
     _news: {},
     getNews: async (...arg) => {
       const [languageId, university] = arg
