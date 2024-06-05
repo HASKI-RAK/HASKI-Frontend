@@ -8,7 +8,6 @@ import { usePrivacyModal } from './PrivacyModal.hooks'
 import { UniversityCheck } from '@common/utils'
 
 const navigate = jest.fn()
-const { checkUniversity } = UniversityCheck()
 
 beforeEach(() => {
   jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
@@ -129,7 +128,7 @@ describe('Test PrivacyModal', () => {
       })
     )
 
-    const { result } = renderHook(() => usePrivacyModal(), {
+    const { result } = renderHook(() => UniversityCheck(), {
       wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
     })
     expect(await result.current.checkUniversity()).toBe('TH-AB')
@@ -163,7 +162,7 @@ describe('Test PrivacyModal', () => {
 
   test('checkUniversity returns empty string when fetch fails', async () => {
     mockServices.fetchUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
-    const { result } = renderHook(() => usePrivacyModal(), {
+    const { result } = renderHook(() => UniversityCheck(), {
       wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
     })
     expect(await result.current.checkUniversity()).toBe('')
