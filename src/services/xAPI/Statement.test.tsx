@@ -14,7 +14,6 @@ describe('Statement tests', () => {
   const getStatement = jest.fn()
 
   beforeEach(() => {
-    // jest.spyOn(xAPI, 'sendStatement').mockImplementation(sendStatement)
     jest.spyOn(statement, 'getStatement').mockImplementation(getStatement)
   })
 

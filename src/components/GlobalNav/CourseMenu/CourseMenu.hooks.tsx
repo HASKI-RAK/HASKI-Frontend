@@ -1,5 +1,6 @@
 import log from 'loglevel'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { CourseResponse } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -16,6 +17,7 @@ export const useCourseMenu = (): CourseMenuHookReturn => {
   // States
   const [isLoading, setIsLoading] = useState(true)
   const [content, setContent] = useState<GlobalNavContent[]>([])
+  const { t } = useTranslation()
 
   // Fetches
   const getUser = usePersistedStore((state) => state.getUser)
@@ -31,7 +33,7 @@ export const useCourseMenu = (): CourseMenuHookReturn => {
       name: element.name,
       url: `/course/${element.id}`,
       isDisabled: element.id === 2,
-      availableAt: new Date('2025-05-16T10:00:00Z')
+      availableAt: new Date('3025-05-16T10:00:00Z')
     }))
   }, [])
 
@@ -45,23 +47,21 @@ export const useCourseMenu = (): CourseMenuHookReturn => {
               setIsLoading(false)
             })
             .catch((error) => {
-              // 🍿 snackbar error
               addSnackbar({
-                message: error.message,
+                message: t('error.fetchCourses'),
                 severity: 'error',
                 autoHideDuration: 5000
               })
-              log.error(error.message)
+              log.error(t('error.fetchCourses') + ' ' + error)
             })
         })
         .catch((error) => {
-          // 🍿 snackbar error
           addSnackbar({
-            message: error.message,
+            message: t('error.fetchUser'),
             severity: 'error',
             autoHideDuration: 5000
           })
-          log.error(error.message)
+          log.error(t('error.fetchUser') + ' ' + error)
         })
   }, [isAuth, addSnackbar, getUser, getCourses, mapCourseToContent])
 

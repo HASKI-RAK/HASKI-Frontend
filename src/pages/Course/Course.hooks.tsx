@@ -1,5 +1,6 @@
 import log from 'loglevel'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { LearningPathElementStatus, LearningPathLearningElement, Topic, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
@@ -18,6 +19,7 @@ export const useCourse = (): CourseHookReturn => {
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [topics, setTopics] = useState<Topic[]>([])
+  const { t } = useTranslation()
 
   // Contexts
   const { isAuth } = useContext(AuthContext)
@@ -67,21 +69,21 @@ export const useCourse = (): CourseHookReturn => {
               )
               .catch((error: string) => {
                 addSnackbar({
-                  message: error,
+                  message: t('error.fetchLearningPathElement'),
                   severity: 'error',
                   autoHideDuration: 3000
                 })
-                log.error(error)
+                log.error(t('error.fetchLearningPathElement') + ' ' + error)
                 return []
               })
           )
           .catch((error: string) => {
             addSnackbar({
-              message: error,
+              message: t('error.fetchLearningPathElementStatus'),
               severity: 'error',
               autoHideDuration: 3000
             })
-            log.error(error)
+            log.error(t('error.fetchLearningPathElementStatus') + ' ' + error)
             return []
           })
       })
@@ -113,20 +115,20 @@ export const useCourse = (): CourseHookReturn => {
             })
             .catch((error: string) => {
               addSnackbar({
-                message: error,
+                message: t('error.fetchLearningPathTopic'),
                 severity: 'error',
                 autoHideDuration: 3000
               })
-              log.error(error)
+              log.error(t('error.fetchLearningPathTopic') + ' ' + error)
             })
         )
         .catch((error: string) => {
           addSnackbar({
-            message: error,
+            message: t('error.fetchUser'),
             severity: 'error',
             autoHideDuration: 3000
           })
-          log.error(error)
+          log.error(t('error.fetchUser') + ' ' + error)
         })
     }
 
