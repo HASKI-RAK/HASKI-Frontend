@@ -1,14 +1,15 @@
+import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { Divider, Drawer, Typography, Grid, List } from '@common/components'
+import { Divider, Drawer, Grid, List, Typography } from '@common/components'
 import {
-  SkeletonList,
-  LocalNavItem
-} from '@components'
+  useLearningPathTopic as _useLearningPathTopic,
+  useLearningPathTopicProgress,
+  useMediaQuery,
+  useTheme
+} from '@common/hooks'
+import { LocalNavItem, SkeletonList } from '@components'
 import { Topic } from '@core'
-import { memo, useEffect, useState } from 'react'
-import { useMediaQuery, useTheme, useLearningPathTopic as _useLearningPathTopic, useLearningPathTopicProgress } from '@common/hooks'
-
 
 /**
  *  Local navigation component props.
@@ -37,12 +38,12 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
   const open = useMediaQuery(theme.breakpoints.up('lg'))
 
   //Default values
-  const definedCourseId = courseId ?? "default"
-  const definedTopicId = topicId ?? "default"
+  const definedCourseId = courseId ?? 'default'
+  const definedTopicId = topicId ?? 'default'
 
   //Hooks
   const { topics, loading: topicLoading } = useLearningPathTopic(definedCourseId)
-  const { topicProgress, loading: isProgressLoading } = useLearningPathTopicProgress(definedCourseId, topics)
+  const { topicProgress, loading: isProgressLoading } = useLearningPathTopicProgress(definedCourseId)
 
   //Resizing the window resizes drawer height
   useEffect(() => {
@@ -59,8 +60,8 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
   return (
     <Grid container>
       <Drawer
-        variant='persistent'
-        anchor='left'
+        variant="persistent"
+        anchor="left"
         open={open}
         sx={{
           width: '26.5rem',
@@ -70,10 +71,9 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
             position: 'relative',
             borderRadius: '0rem',
             border: 0,
-            backgroundColor: 'transparent',
-          },
-        }}
-      >
+            backgroundColor: 'transparent'
+          }
+        }}>
         <Grid item sx={{ ml: '0.9rem' }}>
           <Typography variant="h5">{t('appGlobal.topics')}</Typography>
         </Grid>

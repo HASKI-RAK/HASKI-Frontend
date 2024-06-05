@@ -3,11 +3,11 @@ import { act, fireEvent, render, renderHook, screen, waitFor } from '@testing-li
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
+import { ReactFlowProvider } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import { LearningPathElementStatus } from '@core'
 import Topic from './Topic'
 import { useTopic, useTopicHookParams } from './Topic.hooks'
-import { ReactFlowProvider } from 'reactflow'
 
 const { AuthContext } = jest.requireActual('@services')
 
@@ -27,11 +27,11 @@ describe('Topic Page', () => {
     act(() => {
       const topic = render(
         <ReactFlowProvider>
-        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Topic />
-          </AuthContext.Provider>
-        </MemoryRouter>
+          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+            <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+              <Topic />
+            </AuthContext.Provider>
+          </MemoryRouter>
         </ReactFlowProvider>
       )
 
@@ -43,11 +43,11 @@ describe('Topic Page', () => {
     act(() => {
       const topic = render(
         <ReactFlowProvider>
-        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-          <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Topic />
-          </AuthContext.Provider>
-        </MemoryRouter>
+          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+            <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+              <Topic />
+            </AuthContext.Provider>
+          </MemoryRouter>
         </ReactFlowProvider>
       )
       expect(topic).toBeTruthy()
@@ -58,10 +58,10 @@ describe('Topic Page', () => {
     act(() => {
       render(
         <ReactFlowProvider>
-        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-          <Topic />
-        </MemoryRouter>
-          </ReactFlowProvider>
+          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+            <Topic />
+          </MemoryRouter>
+        </ReactFlowProvider>
       )
     })
 
@@ -77,12 +77,12 @@ describe('Topic Page', () => {
     act(() => {
       render(
         <ReactFlowProvider>
-        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Topic />
-          </AuthContext.Provider>
-        </MemoryRouter>
-          </ReactFlowProvider>
+          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+            <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+              <Topic />
+            </AuthContext.Provider>
+          </MemoryRouter>
+        </ReactFlowProvider>
       )
     })
     await waitFor(() => {
@@ -99,12 +99,12 @@ describe('Topic Page', () => {
     await act(async () => {
       render(
         <ReactFlowProvider>
-        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Topic />
-          </AuthContext.Provider>
-        </MemoryRouter>
-          </ReactFlowProvider>
+          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+            <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+              <Topic />
+            </AuthContext.Provider>
+          </MemoryRouter>
+        </ReactFlowProvider>
       )
     })
     await waitFor(() => {
@@ -119,12 +119,12 @@ describe('Topic Page', () => {
     await act(async () => {
       render(
         <ReactFlowProvider>
-        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Topic />
-          </AuthContext.Provider>
-        </MemoryRouter>
-          </ReactFlowProvider>
+          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+            <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+              <Topic />
+            </AuthContext.Provider>
+          </MemoryRouter>
+        </ReactFlowProvider>
       )
     })
     await waitFor(() => {
@@ -1025,12 +1025,12 @@ describe('Topic Page', () => {
     }
     const { getByTestId, queryByTestId } = render(
       <ReactFlowProvider>
-      <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Topic useTopic={() => useTopic(topicParams)} />
-        </AuthContext.Provider>
-      </MemoryRouter>
-        </ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Topic useTopic={() => useTopic(topicParams)} />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
     )
     screen.debug()
 
@@ -1060,12 +1060,12 @@ describe('Topic Page', () => {
 
     const { getByTestId, queryByTestId } = render(
       <ReactFlowProvider>
-      <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Topic useTopic={() => useTopic(topicParams)} />
-        </AuthContext.Provider>
-      </MemoryRouter>
-        </ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Topic useTopic={() => useTopic(topicParams)} />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
     )
 
     await waitFor(() => {
@@ -1603,8 +1603,8 @@ describe('Topic Page', () => {
       defaultLmsId: 1
     }
 
-    const initialEntries = ['/course', '/2', '/topic/2'];
-    const historyEntries = ['/course', '/2', '/topic/3'];
+    const initialEntries = ['/course', '/2', '/topic/2']
+    const historyEntries = ['/course', '/2', '/topic/3']
 
     const { getByTestId, queryByTestId, rerender } = render(
       <ReactFlowProvider>
@@ -1630,13 +1630,11 @@ describe('Topic Page', () => {
       <ReactFlowProvider>
         <MemoryRouter initialEntries={historyEntries}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-              <Topic useTopic={() => useTopic(topicParams1)} />
+            <Topic useTopic={() => useTopic(topicParams1)} />
           </AuthContext.Provider>
         </MemoryRouter>
       </ReactFlowProvider>
     )
     screen.debug()
-
-
   })
 })

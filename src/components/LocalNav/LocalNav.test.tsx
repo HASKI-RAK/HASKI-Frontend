@@ -4,24 +4,27 @@ import { renderHook } from '@testing-library/react-hooks'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
-import { Topic } from '@core'
-import LocalNav, { LocalNavProps } from './LocalNav'
 import { useLearningPathTopic } from '@common/hooks'
-import resetModules = jest.resetModules
+import { Topic } from '@core'
 import { AuthContext } from '@services'
+import LocalNav, { LocalNavProps } from './LocalNav'
+
+import resetModules = jest.resetModules
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: jest.fn()
 }))
 
-window.matchMedia = window.matchMedia || function() {
-  return {
-    matches: true,
-    addListener: function() {},
-    removeListener: function() {}
+window.matchMedia =
+  window.matchMedia ||
+  function () {
+    return {
+      matches: true,
+      addListener: function () {},
+      removeListener: function () {}
+    }
   }
-}
 
 const navigate = jest.fn()
 const useParamsMock = jest.fn().mockReturnValue({ courseId: '1', topicId: '1' })
@@ -144,7 +147,6 @@ describe('LocalNav tests', () => {
       topics: mockTopics
     })
 
-
     const props: LocalNavProps = {
       useLearningPathTopic: mockUseLearningPathTopic
     }
@@ -200,7 +202,7 @@ describe('LocalNav tests', () => {
   })
 
   it('should not render the drawer while the window has a small width', () => {
-    window.matchMedia = jest.fn().mockImplementation(query => ({
+    window.matchMedia = jest.fn().mockImplementation((query) => ({
       matches: query !== '(min-width: 240px) and (max-width: 767px)',
       media: '',
       onchange: null,
@@ -217,7 +219,6 @@ describe('LocalNav tests', () => {
 })
 
 describe('getSortedLearningPath works as expected', () => {
-
   test('fetches learning path topics and returns the loading state', async () => {
     await act(async () => {
       const { result } = renderHook(() => useLearningPathTopic('2'))
@@ -286,5 +287,4 @@ describe('useLearningPathTopic', () => {
       expect(result.current).toBeUndefined()
     })
   })
-
 })

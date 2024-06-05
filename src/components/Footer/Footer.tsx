@@ -27,7 +27,7 @@ const Footer = () => {
 
   return (
     <footer>
-        <Divider flexItem />
+      <Divider flexItem />
       <Box
         sx={{
           width: '100%',

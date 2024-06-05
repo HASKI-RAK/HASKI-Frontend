@@ -106,17 +106,17 @@ const calculateLearningPath = (
         topicId,
         algorithmList[index]
       )
-      .then((response) => {
-        log.info(response)
-      })
-       .catch(() => {
-        addSnackbar({
-          message: t('Data.calculated.error'),
-          severity: 'success',
-          autoHideDuration: 5000
+        .then((response) => {
+          log.info(response)
         })
-        log.error('Error while calculating learning path in Kempten Course 1')
-      })
+        .catch(() => {
+          addSnackbar({
+            message: t('Data.calculated.error'),
+            severity: 'success',
+            autoHideDuration: 5000
+          })
+          log.error('Error while calculating learning path in Kempten Course 1')
+        })
     })
   })
 }

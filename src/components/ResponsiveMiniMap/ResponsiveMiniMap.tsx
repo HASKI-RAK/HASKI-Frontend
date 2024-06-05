@@ -1,6 +1,6 @@
+import { memo, useCallback, useEffect, useState } from 'react'
 import { MiniMap } from 'reactflow'
 import { useTheme } from '@common/hooks'
-import { useEffect, useState, useCallback, memo } from 'react'
 
 /**
  * ResponsiveMiniMap component.

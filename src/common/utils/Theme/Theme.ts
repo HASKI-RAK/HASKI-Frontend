@@ -1,9 +1,10 @@
 import { createTheme } from '@common/theme'
+
 // Module needs to be declared once in react
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
-    xxl: true; // adds the `xxl` breakpoint
-    xxxl: true;
+    xxl: true // adds the `xxl` breakpoint
+    xxxl: true
   }
 }
 
@@ -58,8 +59,8 @@ export const Theme = createTheme({
       lg: 1200,
       xl: 1536,
       xxl: 2000,
-      xxxl: 2500,
-    },
+      xxxl: 2500
+    }
   },
   components: {
     // Name of the component

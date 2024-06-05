@@ -14,10 +14,10 @@ jest.mock('react-router-dom', () => ({
 jest.mock('common/hooks', () => ({
   useTheme: () => ({
     breakpoints: {
-      up: (size: string) => `@media (min-width:${size}px)`, // Simulate the 'up' method returning a media query string
-    },
+      up: (size: string) => `@media (min-width:${size}px)` // Simulate the 'up' method returning a media query string
+    }
   }),
-  useMediaQuery: jest.fn().mockReturnValue(true), // Simulate the useMediaQuery hook returning true
+  useMediaQuery: jest.fn().mockReturnValue(true) // Simulate the useMediaQuery hook returning true
 }))
 
 describe('MainFrame', () => {
@@ -49,5 +49,3 @@ describe('MainFrame', () => {
     expect(container.textContent).toContain('pages.home/pages.course')
   })
 })
-
-

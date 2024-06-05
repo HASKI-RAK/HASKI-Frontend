@@ -1,16 +1,16 @@
+import { useNavigate } from 'react-router-dom'
 import { Grid, ListItem, ListItemButton, ListItemText, Skeleton } from '@common/components'
 import { FiberManualRecord } from '@common/icons'
 import { Theme } from '@common/theme'
-import { Topic } from '@core'
 import { Fraction } from '@components'
-import { useNavigate } from 'react-router-dom'
+import { Topic } from '@core'
 
 type LocalNavItemProps = {
-  topic: Topic;
-  topicProgress: number[];
-  isProgressLoading: boolean;
-  courseId: string;
-  topicId: string;
+  topic: Topic
+  topicProgress: number[]
+  isProgressLoading: boolean
+  courseId: string
+  topicId: string
 }
 
 /**
@@ -26,7 +26,7 @@ type LocalNavItemProps = {
  * A JSX Element with the rendered topic list item.
  */
 
-const LocalNavItem = ({ topic, topicProgress, isProgressLoading, courseId, topicId}: LocalNavItemProps) => {
+const LocalNavItem = ({ topic, topicProgress, isProgressLoading, courseId, topicId }: LocalNavItemProps) => {
   const navigate = useNavigate()
   return (
     <Grid
@@ -37,16 +37,14 @@ const LocalNavItem = ({ topic, topicProgress, isProgressLoading, courseId, topic
         width: '100%',
         bgcolor: parseInt(topicId) == topic.id ? 'lightgrey' : 'transparent',
         borderRadius: 2
-      }}
-    >
+      }}>
       <ListItem key={topic.id} sx={{ width: '100%', p: 0 }}>
         <ListItemButton
           key={topic.id}
           sx={{ width: '100%' }}
           onClick={() => {
             navigate(`/course/${courseId}/topic/${topic.id}`)
-          }}
-        >
+          }}>
           <Grid container direction="row" justifyContent="space-between" alignItems="center">
             <FiberManualRecord
               sx={{

@@ -1,15 +1,14 @@
-import { useTopic as _useTopic, useTopicHookParams, TopicHookReturn } from './Topic.hooks'
-import ReactFlow, { Node, Edge, Controls, Background, Panel, useReactFlow } from 'reactflow'
-import { useEffect, useState, useContext, memo } from 'react'
+import log from 'loglevel'
+import { memo, useContext, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { IFrameModal, nodeTypes, ResponsiveMiniMap, LabeledSwitch } from '@components'
+import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
 import { Grid, Skeleton } from '@common/components'
+import { IFrameModal, LabeledSwitch, ResponsiveMiniMap, nodeTypes } from '@components'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import { useTranslation } from 'react-i18next'
-import log from 'loglevel'
-
+import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
 
 /**
  * @prop useTopic - Does the heavy work such as mapping nodes and edges and fetching.
@@ -59,19 +58,19 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   ) => {
     setLearningPathElementStatus(learningPathElementStatusData)
     getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
-    .then((learningPathElementData) => {
-      const { nodes, edges } = mapNodes(learningPathElementData, learningPathElementStatusData, isGrouped)
-      setInitialNodes(nodes)
-      setInitialEdges(edges)
-    })
-     .catch((error) => {
-      addSnackbar({
-        message: t('error.mapNodes'),
-        severity: 'error',
-        autoHideDuration: 3000
+      .then((learningPathElementData) => {
+        const { nodes, edges } = mapNodes(learningPathElementData, learningPathElementStatusData, isGrouped)
+        setInitialNodes(nodes)
+        setInitialEdges(edges)
       })
-      log.error(t('error.mapNodes'), 'Error: ' + error)
-    })
+      .catch((error) => {
+        addSnackbar({
+          message: t('error.mapNodes'),
+          severity: 'error',
+          autoHideDuration: 3000
+        })
+        log.error(t('error.mapNodes'), 'Error: ' + error)
+      })
   }
 
   // Effect to handle the fitting of the view when the topic changes with the LocalNav
@@ -89,28 +88,28 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     if (isAuth && courseId && topicId) {
       clearTimeout(preventEndlessLoading)
       getUser()
-      .then((user) => {
-        getLearningPathElementStatus(courseId, user.lms_user_id)
-        .then((learningPathElementStatusData) => {
-          return getLearningElementsWithStatus(learningPathElementStatusData, user)
+        .then((user) => {
+          getLearningPathElementStatus(courseId, user.lms_user_id)
+            .then((learningPathElementStatusData) => {
+              return getLearningElementsWithStatus(learningPathElementStatusData, user)
+            })
+            .catch((error) => {
+              addSnackbar({
+                message: t('error.getLearningElementsWithStatus'),
+                severity: 'error',
+                autoHideDuration: 3000
+              })
+              log.error(t('error.getLearningElementsWithStatus'), 'Error: ' + error)
+            })
         })
-         .catch((error) => {
+        .catch((error) => {
           addSnackbar({
-            message: t('error.getLearningElementsWithStatus'),
+            message: t('error.getLearningElementStatus'),
             severity: 'error',
             autoHideDuration: 3000
           })
-          log.error(t('error.getLearningElementsWithStatus'), 'Error: ' + error)
+          log.error(t('error.getLearningElementStatus'), 'Error: ' + error)
         })
-      })
-       .catch((error) => {
-        addSnackbar({
-          message: t('error.getLearningElementStatus'),
-          severity: 'error',
-          autoHideDuration: 3000
-        })
-        log.error(t('error.getLearningElementStatus'), 'Error: ' + error)
-      })
     }
     return () => {
       clearTimeout(preventEndlessLoading)
@@ -133,7 +132,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // currently focuses on first element
   // can also focus on first element that is uncomplete (node.find(node => !node.data?.isDone) || node[0])
   useEffect(() => {
-    if(initialNodes) {
+    if (initialNodes) {
       setTimeout(() => {
         fitView({
           padding: 5,
@@ -142,7 +141,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           nodes: [{ id: initialNodes[0].id }]
         })
       }, 100)
-    }},[topicId, getLearningPathElement, getUser, navigate,  setInitialNodes, setInitialEdges, learningPathElementStatus])
+    }
+  }, [topicId, getLearningPathElement, getUser, navigate, setInitialNodes, setInitialEdges, learningPathElementStatus])
 
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)
@@ -150,19 +150,19 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
    */
   const updateLearningPathElementStatus = (user: User) => {
     getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
-    .then((data) => {
-      setLearningPathElementSpecificStatus(courseId?.toString(), user.lms_user_id, data[0]).then((data) => {
-        setLearningPathElementStatus(data)
+      .then((data) => {
+        setLearningPathElementSpecificStatus(courseId?.toString(), user.lms_user_id, data[0]).then((data) => {
+          setLearningPathElementStatus(data)
+        })
       })
-    })
-     .catch((error) => {
-      addSnackbar({
-        message: t('error.setLearningPathElementSpecificStatus'),
-        severity: 'error',
-        autoHideDuration: 3000
+      .catch((error) => {
+        addSnackbar({
+          message: t('error.setLearningPathElementSpecificStatus'),
+          severity: 'error',
+          autoHideDuration: 3000
+        })
+        log.error(t('error.setLearningPathElementSpecificStatus'), 'Error: ' + error)
       })
-      log.error(t('error.setLearningPathElementSpecificStatus'), 'Error: ' + error)
-    })
   }
 
   // On Close of IFrameModal, fetch new LearningPathElementStatus, update it in

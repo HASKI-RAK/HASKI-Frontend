@@ -1,3 +1,4 @@
+import log from 'loglevel'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
@@ -19,7 +20,6 @@ import {
 import { SnackbarContext } from '@services'
 import useHandleSend from './Questions.hooks'
 import { ButtonStack, CoverSheet, MemoTableRowQuestion, SendButton, StartButton } from './TableCommonComponents'
-import log from 'loglevel'
 
 /**
  * This component is used to display the questionnaire questions for the ILS questionnaire.

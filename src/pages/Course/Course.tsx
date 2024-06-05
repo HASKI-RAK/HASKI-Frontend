@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Card, CardContent, Grid, Typography } from '@common/components'
-import { useMediaQuery, useTheme, useLearningPathTopic, useLearningPathTopicProgress} from '@common/hooks'
+import { useLearningPathTopic, useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
 import { CheckBox } from '@common/icons'
 import { SkeletonList, StyledLinearProgress } from '@components'
 
@@ -23,7 +23,7 @@ const Course = () => {
   const isSmOrDown = useMediaQuery(theme.breakpoints.down('sm'))
 
   const { topics, loading: topicLoading } = useLearningPathTopic(courseId)
-  const { topicProgress, loading: progressLoading } = useLearningPathTopicProgress(courseId, topics)
+  const { topicProgress, loading: progressLoading } = useLearningPathTopicProgress(courseId)
 
   return (
     <>
@@ -45,22 +45,40 @@ const Course = () => {
             return (
               <Card
                 key={topic.id}
-                sx={{ width: { xs: '10rem', sm: '20rem', md: '40rem', lg: '40rem', xl: '60rem', xxl: '70rem', xxxl: '80rem' }, mt: '1rem' }}>
+                sx={{
+                  width: {
+                    xs: '10rem',
+                    sm: '20rem',
+                    md: '40rem',
+                    lg: '40rem',
+                    xl: '60rem',
+                    xxl: '70rem',
+                    xxxl: '80rem'
+                  },
+                  mt: '1rem'
+                }}>
                 <CardContent>
                   <Grid container direction="column" justifyContent="center" alignItems="center">
                     <Grid item md={1}>
                       {/*if topic is done 100%, a checkbox is displayed*/}
-                      {topicProgress[index] &&
-                        topicProgress[index][0] / topicProgress[index][1] == 1 && (
-                          <CheckBox
-                            sx={{
-                              mt: '-0.8rem',
-                              ml: { xs: '7rem', sm: '17rem', md: '37rem', lg: '37rem', xl: '57rem', xxl: '67rem', xxxl: '77rem' },
-                              fontSize: 29
-                            }}
-                            color={'success'}
-                          />
-                        )}
+                      {topicProgress[index] && topicProgress[index][0] / topicProgress[index][1] == 1 && (
+                        <CheckBox
+                          sx={{
+                            mt: '-0.8rem',
+                            ml: {
+                              xs: '7rem',
+                              sm: '17rem',
+                              md: '37rem',
+                              lg: '37rem',
+                              xl: '57rem',
+                              xxl: '67rem',
+                              xxxl: '77rem'
+                            },
+                            fontSize: 29
+                          }}
+                          color={'success'}
+                        />
+                      )}
                     </Grid>
                     <Grid item md={11}>
                       <Typography variant={isSmOrDown ? 'subtitle1' : 'h5'}>{topic.name}</Typography>

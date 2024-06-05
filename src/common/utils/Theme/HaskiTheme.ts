@@ -1,6 +1,5 @@
 import { createTheme, green, grey, red, yellow } from '@common/theme'
 
-
 export const defaultBehavior = {
   boxShadowSize: {
     default: '2px 2px 0',
@@ -90,8 +89,8 @@ export const HaskiTheme = createTheme({
       lg: 1200,
       xl: 1536,
       xxl: 2000,
-      xxxl: 2500,
-    },
+      xxxl: 2500
+    }
   },
 
   typography: {

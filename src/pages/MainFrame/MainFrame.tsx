@@ -1,7 +1,7 @@
 import { Outlet, useParams } from 'react-router-dom'
 import { Box, Divider, Grid } from '@common/components'
-import { MenuBar, Footer, BreadcrumbsContainer, LocalNav, OpenQuestionnaire, PrivacyModal } from '@components'
-import { useTheme, useMediaQuery } from '@common/hooks'
+import { useMediaQuery, useTheme } from '@common/hooks'
+import { BreadcrumbsContainer, Footer, LocalNav, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
 
 /**
  * # MainFrame Page
@@ -35,9 +35,9 @@ export const MainFrame = () => {
           {isLocalNavOpen && (
             <>
               <Grid item container sx={{ width: '26.5rem' }}>
-                  <LocalNav />
+                <LocalNav />
               </Grid>
-              <Divider flexItem orientation='vertical' />
+              <Divider flexItem orientation="vertical" />
             </>
           )}
           <Grid item sx={{ flex: 1, overflow: 'auto' }}>
