@@ -89,7 +89,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
           severity: 'error',
           autoHideDuration: 5000
         })
-        log.error(t('error.postLogin'), 'Error: ' + error)
+        log.error(t('error.postLogin') + ' ' + error)
         navigate('/login', { replace: true })
       })
   }, [])

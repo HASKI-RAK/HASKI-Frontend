@@ -42,7 +42,7 @@ export const useLearningPathTopic = (courseId: string): LearningPathTopicHookRet
               severity: 'error',
               autoHideDuration: 3000
             })
-            log.error(t('error.setTopics'), 'Error: ' + error)
+            log.error(t('error.setTopics') + ' ' + error)
           })
       })
       .catch((error) => {
@@ -51,7 +51,7 @@ export const useLearningPathTopic = (courseId: string): LearningPathTopicHookRet
           severity: 'error',
           autoHideDuration: 3000
         })
-        log.error(t('error.setTopics'), 'Error: ' + error)
+        log.error(t('error.setTopics') + ' ' + error)
       })
   }, [courseId, setTopics, getLearningPathTopic, getUser])
 

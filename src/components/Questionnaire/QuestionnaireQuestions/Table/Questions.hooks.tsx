@@ -51,7 +51,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
               severity: 'error',
               autoHideDuration: 3000
             })
-            log.error(t('error.postILS'), 'Error: ' + error)
+            log.error(t('error.postILS') + ' ' + error)
             return false
           })
           .finally(() => {
@@ -69,7 +69,7 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
               severity: 'error',
               autoHideDuration: 3000
             })
-            log.error(t('error.postListK'), 'Error: ' + error)
+            log.error(t('error.postListK') + ' ' + error)
             return false
           })
           .finally(() => {

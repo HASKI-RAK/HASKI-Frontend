@@ -151,7 +151,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               severity: 'error',
               autoHideDuration: 5000
             })
-            log.error(t('error.setTopicsPath'), 'Error: ' + error)
+            log.error(t('error.setTopicsPath') + ' ' + error)
           })
       })
       .catch((error) => {
@@ -161,7 +161,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
           severity: 'error',
           autoHideDuration: 5000
         })
-        log.error(t('error.getUser'), 'Error: ' + error)
+        log.error(t('error.getUser') + ' ' + error)
       })
   }
 

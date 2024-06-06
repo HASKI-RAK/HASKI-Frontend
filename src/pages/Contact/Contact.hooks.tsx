@@ -51,7 +51,7 @@ export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookRetur
                 severity: 'error',
                 autoHideDuration: 3000
               })
-              log.error(t('pages.contact.error'), 'Error: ' + error)
+              log.error(t('pages.contact.error') + ' ' + error)
             })
         })
         .catch((error) => {
@@ -61,7 +61,7 @@ export const useContact = ({ setIsLoading }: ContactHookProps): ContactHookRetur
             severity: 'error',
             autoHideDuration: 3000
           })
-          log.error(t('pages.contact.error'), 'Error: ' + error)
+          log.error(t('pages.contact.error') + ' ' + error)
         })
     },
     [t, addSnackbar, setIsLoading]
