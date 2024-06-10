@@ -14,6 +14,7 @@ type CourseHookReturn = {
 }
 
 // Hook
+// TODO: Durch useTopicProgress ersetzen
 export const useCourse = (): CourseHookReturn => {
   // States
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([])

@@ -17,7 +17,7 @@ const Course = () => {
   // Hooks
   const theme = useTheme()
   const isSmOrDown = useMediaQuery(theme.breakpoints.down('sm'))
-  const { calculatedTopicProgress, isLoading, topics } = useCourse()
+  const { calculatedTopicProgress, isLoading, topics } = useCourse() // TODO: Durch useTopicProgress ersetzen
 
   return (
     <>

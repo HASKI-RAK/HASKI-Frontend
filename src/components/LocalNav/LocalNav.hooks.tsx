@@ -33,6 +33,7 @@ export const getSortedLearningPath = async (
 /**
  * @param courseId - course id
  */
+// TODO: Durch useLearningPathTopic ersetzen
 export const useLearningPathTopic = (courseId: string): { loading: boolean; topics: Topic[] } => {
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
@@ -68,6 +69,7 @@ export const useLearningPathTopic = (courseId: string): { loading: boolean; topi
   )
 }
 
+// Durch useLearningPathElement ersetzen
 export const useLearningPathElement = (
   topic: Topic,
   courseId: string

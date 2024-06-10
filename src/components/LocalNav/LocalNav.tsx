@@ -27,6 +27,7 @@ export type LocalNavProps = {
  * A JSX Element with the rendered local navigation.
  */
 const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProps) => {
+  // TODO: Hook should be inserted directly and not via params
   //States
   const [drawerHeight, setDrawerHeight] = useState(0)
 
