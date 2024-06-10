@@ -1,5 +1,6 @@
 import log from 'loglevel'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { LearningPathElement, LearningPathElementReturn, Topic } from '@core'
 import { usePersistedStore, useStore } from '@store'
 
@@ -37,29 +38,34 @@ export const useLearningPathTopic = (courseId: string): { loading: boolean; topi
   const [topics, setTopics] = useState<Topic[]>([])
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
+  const { t } = useTranslation()
 
   useEffect(() => {
-    const effect = async () => {
-      setLoading(true)
-      try {
-        const user = await getUser()
-        const fetchedTopics = await getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
-        setTopics(fetchedTopics.topics)
-      } catch (error) {
-        log.error(error)
-        throw error
-      } finally {
-        setLoading(false)
-      }
-    }
+    setLoading(true)
 
-    effect().catch(() => {
-      log.error('An error occurred while fetching course topics in LocalNav.hooks')
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    getUser()
+      .then((user) => {
+        getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
+          .then((fetchedTopics) => {
+            setTopics(fetchedTopics.topics)
+            setLoading(false)
+          })
+          .catch((error) => {
+            log.error(t('error.fetchLearningPathTopic') + ' ' + error)
+          })
+      })
+      .catch((error) => {
+        log.error(t('error.fetchUser') + ' ' + error)
+      })
+  }, [courseId, setTopics, getLearningPathTopic, getUser])
 
-  return { loading, topics }
+  return useMemo(
+    () => ({
+      loading,
+      topics
+    }),
+    [loading, topics]
+  )
 }
 
 export const useLearningPathElement = (
@@ -70,34 +76,25 @@ export const useLearningPathElement = (
   const [learningPaths, setLearningPaths] = useState<LearningPathElement>()
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
+  const { t } = useTranslation()
 
   useEffect(() => {
-    const effect = async () => {
-      setLoadingElements(true)
-      try {
-        const user = await getUser()
-        const dataLearningPath = await getSortedLearningPath(
-          user.settings.user_id,
-          user.lms_user_id,
-          user.id,
-          topic,
-          courseId,
-          getLearningPathElement
-        )
-        setLearningPaths(dataLearningPath)
-      } catch (error) {
-        log.error(error)
-        throw error
-      } finally {
-        setLoadingElements(false)
-      }
-    }
-
-    effect().catch(() => {
-      log.error('An error occurred while fetching course Topic Elements in LocalNav.hooks')
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    setLoadingElements(true)
+    getUser()
+      .then((user) => {
+        getSortedLearningPath(user.settings.user_id, user.lms_user_id, user.id, topic, courseId, getLearningPathElement)
+          .then((dataLearningPath) => {
+            setLearningPaths(dataLearningPath)
+            setLoadingElements(false)
+          })
+          .catch((error) => {
+            log.error(t('error.getSortedLearningPath') + ' ' + error)
+          })
+      })
+      .catch((error) => {
+        log.error(t('error.fetchUser') + ' ' + error)
+      })
+  }, [setLoadingElements, setLearningPaths, getLearningPathElement, getUser, topic, courseId])
 
   return { loadingElements, learningPaths }
 }

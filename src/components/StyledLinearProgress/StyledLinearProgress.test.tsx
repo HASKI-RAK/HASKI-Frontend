@@ -3,6 +3,7 @@ import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import { Course } from '@pages'
 import { AuthContext } from '@services'
+import { StyledLinearProgress } from './StyledLinearProgress'
 
 jest.mock('@common/hooks', () => ({
   ...jest.requireActual('@common/hooks'),
@@ -318,5 +319,10 @@ describe('Course5', () => {
     await waitFor(() => {
       expect(getAllByTestId('Course-Card-Topic-Progress')[1].parentNode?.textContent).toBe('Learning progress: error..')
     })
+  })
+
+  it('renders styledLinearProgress without input', () => {
+    const styledLinearProgress = render(<StyledLinearProgress />)
+    expect(styledLinearProgress).toBeTruthy()
   })
 })
