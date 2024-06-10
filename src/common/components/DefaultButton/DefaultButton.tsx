@@ -1,12 +1,12 @@
-import { ButtonProps as DefaultButtonProps } from '@common/components'
-import { memo, useCallback, MouseEvent } from 'react'
 import DefaultButton from '@mui/material/Button'
+import { MouseEvent, RefObject, forwardRef, memo, useCallback } from 'react'
+import { ButtonProps as DefaultButtonProps } from '@common/components'
 import {
-  xAPIVerb,
-  xAPIComponent,
   StatementHookReturn,
+  useStatement as _useStatement,
   useStatementHookParams,
-  useStatement as _useStatement
+  xAPIComponent,
+  xAPIVerb
 } from '@services'
 
 /**
@@ -26,14 +26,17 @@ type ButtonProps = DefaultButtonProps & {
  *
  * @category Common
  */
-const Button = ({ useStatement = _useStatement, onClick, ...props }: ButtonProps) => {
+const Button = (
+  { useStatement = _useStatement, onClick, ...props }: ButtonProps,
+  ref: ((instance: HTMLButtonElement | null) => void) | RefObject<HTMLButtonElement> | null | undefined
+) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Button
   })
-
   return (
     <DefaultButton
+      ref={ref}
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
@@ -47,4 +50,4 @@ const Button = ({ useStatement = _useStatement, onClick, ...props }: ButtonProps
   )
 }
 
-export default memo(Button)
+export default memo(forwardRef(Button))

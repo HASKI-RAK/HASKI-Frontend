@@ -1,63 +1,40 @@
 import React, { useContext, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import {
   AppBar,
-  Toolbar,
-  Typography,
+  Avatar,
   Box,
   IconButton,
-  Menu,
-  Tooltip,
-  Avatar,
-  MenuItem,
-  Grid,
-  Button,
-  Popover,
-  Divider,
-  ListItemIcon,
-  Link,
   ImageWrapper,
-  TextWrapper
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  TextWrapper,
+  Toolbar,
+  Tooltip,
+  Typography
 } from '@common/components'
-
 import {
   Analytics,
-  Settings,
+  AssignmentOutlined,
   Help,
-  ArrowDropDown,
-  Person,
+  LibraryBooksOutlined,
   Login,
   Logout,
-  AssignmentOutlined,
-  LibraryBooksOutlined,
+  Person,
   PlaylistAddCheckCircleOutlined
 } from '@common/icons'
-
-import { useTranslation } from 'react-i18next'
-import { AuthContext, SnackbarContext } from '@services'
 import {
-  DropdownLanguage,
-  SkeletonList,
+  CourseMenu,
+  FurtherInfoMenu,
+  LanguageMenu,
   QuestionnaireQuestionsModal,
   QuestionnaireResultsModal,
   TableILSQuestions,
   TableListKQuestions
 } from '@components'
-import { usePersistedStore, useStore } from '@store'
-import { Topic } from '@core'
-import log from 'loglevel'
-
-// TODO: Move it into @common/hooks since it is reused in LocalNav
-
-/**
- *  Local navigation component props.
- *  The "loading" property is a boolean value that indicates whether the data is still being loaded.
- *  The "topics" property is an array of objects that represent the topics related to the current page.
- *  The "learningPaths" property is an array of objects that represent the available learning paths related to the current page.
- */
-export type MenuBarProps = {
-  courseSelected?: boolean
-}
+import { AuthContext } from '@services'
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -70,17 +47,10 @@ export type MenuBarProps = {
  * @category Components
  */
 
-const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
+const MenuBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
-  const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
-  const { addSnackbar } = useContext(SnackbarContext)
   const { isAuth, logout } = useContext(AuthContext)
-  const { courseId } = useParams<string>()
   const { t } = useTranslation()
-  const [loadingTopics, setLoadingTopics] = useState(true)
-  const [topicsPath, setTopicsPath] = useState<Topic[]>([])
-  const getUser = usePersistedStore((state) => state.getUser)
-  const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
@@ -123,7 +93,7 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
     setAnchorElUser(null)
   }
 
-  const handleCloseListKModal = (event: object, reason: string) => {
+  const handleCloseListKModal = (_: object, reason: string) => {
     if (!successSendListK) {
       if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenListK(false)
     } else {
@@ -138,40 +108,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
-  }
-
-  const handleOpenTopicsMenu = async (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElTopics(event.currentTarget)
-    getUser()
-      .then((user) => {
-        getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
-          .then((TopicResponse) => {
-            setTopicsPath(TopicResponse.topics)
-            setLoadingTopics(false)
-          })
-          .catch((error) => {
-            // 🍿 snackbar error
-            addSnackbar({
-              message: error.message,
-              severity: 'error',
-              autoHideDuration: 5000
-            })
-            log.error(error.message)
-          })
-      })
-      .catch((error) => {
-        // 🍿 snackbar error
-        addSnackbar({
-          message: error.message,
-          severity: 'error',
-          autoHideDuration: 5000
-        })
-        log.error(error.message)
-      })
-  }
-
-  const handleCloseTopicsMenu = () => {
-    setAnchorElTopics(null)
   }
 
   const handleUserLogout = () => {
@@ -226,92 +162,15 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               onClick={() => navigate('/')}>
               HASKI
             </TextWrapper>
-            {courseSelected && (
-              <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-                <Tooltip title="Open topics">
-                  <Button
-                    id="topics-button"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleOpenTopicsMenu}
-                    data-testid="Menubar-TopicButton"
-                    color="inherit"
-                    endIcon={
-                      anchorElTopics ? <ArrowDropDown sx={{ transform: 'rotate(180deg)' }} /> : <ArrowDropDown />
-                    }>
-                    {t('appGlobal.topics')}
-                  </Button>
-                </Tooltip>
-                <Popover
-                  id="topics-popover"
-                  data-testid={'Menubar-TopicPopover'}
-                  anchorEl={anchorElTopics}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left'
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left'
-                  }}
-                  open={Boolean(anchorElTopics)}
-                  onClose={handleCloseTopicsMenu}
-                  sx={{ minWidth: '500px' }}>
-                  <Box sx={{ p: 2 }}>
-                    <Grid container direction="column-reverse" spacing={2}>
-                      {loadingTopics ? ( // display Skeleton component while loading
-                        <Box width={400}>
-                          <SkeletonList />
-                        </Box>
-                      ) : (
-                        //For every Topic the LearningPathElement is displayed under it.
-                        <>
-                          {[...topicsPath].reverse().map((topic) => (
-                            <>
-                              <Grid item xs={12} key={t(topic.name)}>
-                                <Link
-                                  id={topic.name.concat('-link').replaceAll(' ', '-')}
-                                  key={topic.name}
-                                  data-testid={`Menubar-Topic-${topic.name}`}
-                                  underline="hover"
-                                  variant="h6"
-                                  component="span"
-                                  color="inherit"
-                                  sx={{ m: 1, cursor: 'pointer' }}
-                                  onClick={() => {
-                                    navigate(`course/${courseId}/topic/${topic.id}`)
-                                    handleCloseTopicsMenu()
-                                  }}>
-                                  {topic.name}
-                                </Link>
-                                <Box
-                                  sx={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    flexWrap: 'wrap',
-                                    justifyContent: 'start'
-                                  }}
-                                />
-                              </Grid>
-                              {topicsPath.indexOf(topic) !== topicsPath.length && <Divider flexItem />}
-                            </>
-                          ))}
-                        </>
-                      )}
-                    </Grid>
-                  </Box>
-                </Popover>
-              </Box>
-            )}
+            <CourseMenu />
+            <FurtherInfoMenu />
           </Box>
           {/** Search bar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>
-
-          {/** Language dropdown */}
-          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <DropdownLanguage />
+          {/** Language menu */}
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }, mt: 1 }}>
+            <LanguageMenu />
           </Box>
-
           {/** Questionnaire Results */}
           {isAuth && (
             <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
@@ -323,7 +182,24 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               <QuestionnaireResultsModal open={modalOpen} handleClose={() => setModalOpen(false)} />
             </Box>
           )}
-
+          {/** Theme button */}
+          {/**
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
+            <Tooltip title={'Change your theme'}>
+              <IconButton
+                id="global-settings-icon-button"
+                onClick={() => {
+                  addSnackbar({
+                    message: t('components.MenubBar.GlobalSettings.Error'),
+                    severity: 'warning',
+                    autoHideDuration: 5000
+                  })
+                }}>
+                <Contrast />
+              </IconButton>
+            </Tooltip>
+          </Box>
+           */}
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('appGlobal.help')}>
@@ -336,7 +212,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               </IconButton>
             </Tooltip>
           </Box>
-
           {/** 
           { Settings button }
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
@@ -355,7 +230,6 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
             </Tooltip>
           </Box>
 */}
-
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openSettings')}>

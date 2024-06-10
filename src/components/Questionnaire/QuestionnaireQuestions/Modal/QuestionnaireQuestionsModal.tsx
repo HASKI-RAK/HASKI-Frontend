@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
+import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
-import { Box, Modal, Fab } from '@common/components'
 
 const styleBox = {
   position: 'absolute',
@@ -26,7 +26,7 @@ const QuestionnaireQuestionsModal = ({ open = false, handleClose, children }: Qu
     <Modal data-testid={'Questions Modal'} open={open} onClose={handleClose}>
       <Box sx={styleBox}>
         <Fab
-          id="close-fab"
+          id="close-questionnaire-button"
           color="primary"
           data-testid={'QuestionnaireQuestionsModal-Close-Button'}
           onClick={() => handleClose({} as object, 'backdropClick')}

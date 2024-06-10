@@ -1,6 +1,5 @@
-import { Box, Modal } from '@common/components'
-import { Fab } from '@mui/material'
 import { memo } from 'react'
+import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
 
 const style_box = {
@@ -40,6 +39,7 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
     <Modal id="iframe-modal" open={props.isOpen} onClose={props.onClose} data-testid={'IFrameModal'}>
       <Box sx={style_box}>
         <Fab
+          id="iframe-modal-close-button"
           color="primary"
           data-testid={'IFrameModal-Close-Button'}
           onClick={() => props.onClose()}

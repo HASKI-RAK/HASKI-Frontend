@@ -1,7 +1,7 @@
-import { useMemo, useCallback } from 'react'
+import log from 'loglevel'
+import { useCallback, useMemo } from 'react'
 import { AuthContextType, fetchLogout } from '@services'
 import { usePersistedStore } from '@store'
-import log from 'loglevel'
 
 const useAuthProvider = (): AuthContextType => {
   // State data

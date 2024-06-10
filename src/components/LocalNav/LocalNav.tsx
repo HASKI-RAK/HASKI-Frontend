@@ -1,15 +1,15 @@
-import { Accordion, Box, Divider, Typography, AccordionSummary, AccordionDetails, Stack } from '@common/components'
-import { ExpandMore } from '@common/icons'
+import { Suspense, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { LearningPathElement, Topic } from '@core'
-import { Suspense, useState } from 'react'
-import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Stack, Typography } from '@common/components'
+import { ExpandMore } from '@common/icons'
 import {
   SkeletonList,
-  useLearningPathTopic as _useLearningPathTopic,
-  useLearningPathElement as _useLearningPathElement
+  useLearningPathElement as _useLearningPathElement,
+  useLearningPathTopic as _useLearningPathTopic
 } from '@components'
+import { LearningPathElement, Topic } from '@core'
+import LazyLoadingLearningPathElement from './LazyLoadingLearningPathElement'
 
 /**
  *  Local navigation component props.

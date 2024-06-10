@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 import { ResultDescriptionILS } from '@components'
 import { ILSDimension } from '../Table/TableILS'
-import { render } from '@testing-library/react'
 
 describe('Test ResultDescriptionILS with all Score combinations', () => {
   test('all positive dimensions are balanced', () => {

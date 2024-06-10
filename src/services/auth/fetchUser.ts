@@ -1,6 +1,6 @@
 import { User } from '@core'
-import { fetchData } from '../RequestResponse'
 import { getConfig } from '@shared'
+import { fetchData } from '../RequestResponse'
 
 /**
  *

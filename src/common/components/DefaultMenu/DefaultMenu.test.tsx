@@ -1,13 +1,25 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { AuthContext } from '@services'
 import Menu from './DefaultMenu'
-import { xAPI, AuthContext } from '@services'
 
 describe('DefaultMenu tests', () => {
   test('DefaultMenu sends statement on close', async () => {
-    const sendStatement = jest.fn()
-    jest.spyOn(xAPI, 'sendStatement').mockImplementation(sendStatement)
+    const usePersistedStore = jest.fn().mockReturnValue({
+      state: {
+        getXAPI: () => ({
+          sendStatement: jest.fn()
+        })
+      }
+    })
+
+    jest.mock('@store', () => ({
+      ...jest.requireActual('@store'),
+      usePersistedStore: () => usePersistedStore
+    }))
+
+    const sendStatement = usePersistedStore().state.getXAPI.sendStatement
 
     const { getByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>

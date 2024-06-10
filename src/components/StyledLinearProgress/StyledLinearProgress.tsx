@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
-import { LinearProgressWithLabel } from '@components'
-import { styled } from '@common/theme'
 import { linearProgressClasses } from '@common/components'
+import { styled } from '@common/theme'
+import { LinearProgressWithLabel } from '@components'
 
 /**
  * @prop learningElementProgressTopics - The learningElementProgressTopics array.
@@ -15,8 +15,7 @@ import { linearProgressClasses } from '@common/components'
  * @interface
  */
 type BorderLinearProgressProps = {
-  learningElementProgressTopics?: number[][]
-  index?: number
+  learningElementProgressTopics?: number[]
 }
 
 //Bordered Progress Bar
@@ -24,14 +23,18 @@ type BorderLinearProgressProps = {
 //learningElementProgressTopics is an array of arrays with the progress of each topic
 //first element of the array is the number of solved learning elements,
 //second element is the number of total learning elements
-export const StyledLinearProgress = ({ learningElementProgressTopics, index }: BorderLinearProgressProps) => {
+export const StyledLinearProgress = ({ learningElementProgressTopics }: BorderLinearProgressProps) => {
   const calculatePercent = useCallback(() => {
-    if (index === undefined || learningElementProgressTopics === undefined) return 10
+    if (
+      !learningElementProgressTopics ||
+      learningElementProgressTopics.length === 0 ||
+      learningElementProgressTopics[1] === 0
+    ) {
+      return -1
+    }
 
-    if (learningElementProgressTopics[index].length === 0) return -1
-
-    return (learningElementProgressTopics[index][0] / learningElementProgressTopics[index][1]) * 100
-  }, [index, learningElementProgressTopics])
+    return (learningElementProgressTopics[0] / learningElementProgressTopics[1]) * 100
+  }, [learningElementProgressTopics])
 
   const percent = calculatePercent()
 
@@ -44,25 +47,25 @@ export const StyledLinearProgress = ({ learningElementProgressTopics, index }: B
   }, [percent])
 
   const getText = useCallback(() => {
-    if (index === undefined || learningElementProgressTopics === undefined) return 'loading...'
+    if (learningElementProgressTopics === undefined) return 'loading...'
 
-    return learningElementProgressTopics[index].length === 0
+    return learningElementProgressTopics.length === 0
       ? 'error..'
-      : learningElementProgressTopics[index][0] + '/' + learningElementProgressTopics[index][1]
-  }, [index, learningElementProgressTopics])
+      : learningElementProgressTopics[0] + '/' + learningElementProgressTopics[1]
+  }, [learningElementProgressTopics])
 
   const getTextPosition = useCallback(() => {
-    if (index === undefined || learningElementProgressTopics === undefined)
+    if (learningElementProgressTopics === undefined)
       return { xs: '20rem', sm: '5rem', md: '15rem', lg: '25rem', xl: '45rem' }
 
     return { xs: '20rem', sm: '9rem', md: '20rem', lg: '30rem', xl: '46rem' }
-  }, [index, learningElementProgressTopics])
+  }, [learningElementProgressTopics])
 
   return (
     <StyledLinearProgressWithLabel
       data-testid="Course-Card-Topic-Progress"
       value={percent > 1 ? percent : 6} //if the student solved anything show his progress, else show a set minimum (6)
-      color={index || learningElementProgressTopics ? colorByPercent() : 'info'}
+      color={learningElementProgressTopics ? colorByPercent() : 'info'}
       text={getText()}
       textposition={getTextPosition()}
     />

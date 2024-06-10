@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom'
-import { render, fireEvent, renderHook } from '@testing-library/react'
-import PrivacyModal from './PrivacyModal'
-import { MemoryRouter } from 'react-router-dom'
+import { fireEvent, render, renderHook } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
+import { MemoryRouter } from 'react-router-dom'
+import PrivacyModal from './PrivacyModal'
 import { usePrivacyModal } from './PrivacyModal.hooks'
 
 const navigate = jest.fn()

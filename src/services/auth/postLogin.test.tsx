@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { postLogin, LoginResponse } from './postLogin'
+import { LoginResponse, postLogin } from './postLogin'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({

@@ -1,25 +1,26 @@
+import log from 'loglevel'
 import create from 'zustand'
-import LearningPathElementSlice, { createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
-import LearningPathElementStatusSlice, {
-  createLearningPathElementStatusSlice
-} from '../Slices/LearningPathElementStatusSlice'
-import UserSlice, { createUserSlice } from '../Slices/UserSlice'
+import { devtools, persist } from 'zustand/middleware'
+import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import CoursesSlice, { createCoursesSlice } from '../Slices/CoursesSlice'
-import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
-import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
-import log from 'loglevel'
-import { devtools, persist } from 'zustand/middleware'
+import LearningPathElementSlice, { createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
 } from '../Slices/LearningPathElementSpecificStatusSlice'
+import LearningPathElementStatusSlice, {
+  createLearningPathElementStatusSlice
+} from '../Slices/LearningPathElementStatusSlice'
+import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
+import UserSlice, { createUserSlice } from '../Slices/UserSlice'
+import xAPISlice, { createXAPISlice } from '../Slices/xAPISlice'
 
 export type StoreState = LearningPathElementSlice &
   CourseSlice &
   CoursesSlice &
   LearningPathTopicSlice &
   LearningPathElementSpecificStatusSlice
-export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice
+export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & xAPISlice
 
 export const resetters: (() => void)[] = []
 
@@ -37,7 +38,8 @@ export const usePersistedStore = create<PersistedStoreState>()(
       (...a) => ({
         ...createUserSlice(...a),
         ...createLearningPathElementStatusSlice(...a),
-        ...createAuthSlice(...a)
+        ...createAuthSlice(...a),
+        ...createXAPISlice(...a)
       }),
       {
         name: 'persisted_storage',

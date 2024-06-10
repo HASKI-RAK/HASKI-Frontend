@@ -1,7 +1,7 @@
-import GlossaryIndex, { GlossaryIndexProps } from './GlossaryIndex'
+import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import '@testing-library/jest-dom'
+import GlossaryIndex, { GlossaryIndexProps } from './GlossaryIndex'
 
 describe('GlossaryIndex tests', () => {
   const mockIndexProps: GlossaryIndexProps = {

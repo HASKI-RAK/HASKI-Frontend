@@ -1,6 +1,6 @@
-import { RequestResponse, fetchData } from './RequestResponse'
 import '@testing-library/jest-dom'
 import { getConfig } from '@shared'
+import { RequestResponse, fetchData } from './RequestResponse'
 
 describe('RequestResponse', () => {
   const response = {

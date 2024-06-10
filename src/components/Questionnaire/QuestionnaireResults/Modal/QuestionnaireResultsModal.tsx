@@ -1,21 +1,31 @@
-import React, { useContext, useEffect, useState, memo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Box, Button, Modal, Stepper, Step, StepButton, Stack, Typography, Link, Fab } from '@common/components'
-import { ListItem } from '@mui/material'
-import { usePersistedStore } from '@store'
-import { ILS, ListK } from '@core'
 import log from 'loglevel'
-import { fetchILS, fetchListK, SnackbarContext } from '@services'
-import { SkeletonList } from '@components'
+import { memo, useContext, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import {
+  Box,
+  Button,
+  Fab,
+  Link,
+  ListItem,
+  Modal,
+  Stack,
+  Step,
+  StepButton,
+  Stepper,
+  Typography
+} from '@common/components'
 import { Close } from '@common/icons'
-
+import { SkeletonList } from '@components'
+import { ILS, ListK } from '@core'
+import { SnackbarContext, fetchILS, fetchListK } from '@services'
+import { usePersistedStore } from '@store'
+import GraphILS from '../Graph/GraphILS'
 //Can not shorten import, tests fail to recognize i18n.use...
 import GraphListK from '../Graph/GraphListK'
+import TableILS from '../Table/TableILS'
 import TableListK from '../Table/TableListK'
 import ResultDescriptionILS from '../Text/ResultDescriptionILS'
 import ResultDescriptionListK from '../Text/ResultDescriptionListK'
-import GraphILS from '../Graph/GraphILS'
-import TableILS from '../Table/TableILS'
 
 type QuestionnaireResultsILSLoadingProps = {
   t: (key: string) => string
@@ -185,6 +195,7 @@ const QuestionnaireResultsModal = memo(
             p: 1
           }}>
           <Fab
+            id="questionnaire-results-close-button"
             color="primary"
             data-testid={'QuestionnaireResultsCloseButton'}
             onClick={handleClose}

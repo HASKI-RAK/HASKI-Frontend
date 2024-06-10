@@ -1,14 +1,26 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import ToggleButtonGroup from './DefaultToggleButtonGroup'
-import { ToggleButton } from '@common/components'
-import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
-import { xAPI, AuthContext } from '@services'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { ToggleButton } from '@common/components'
+import { AuthContext } from '@services'
+import ToggleButtonGroup from './DefaultToggleButtonGroup'
 
 describe('DefaultToggleButtonGroup tests', () => {
   test('DefaultToggleButtonGroup sends statement on change', async () => {
-    const sendStatement = jest.fn()
-    jest.spyOn(xAPI, 'sendStatement').mockImplementation(sendStatement)
+    const usePersistedStore = jest.fn().mockReturnValue({
+      state: {
+        getXAPI: () => ({
+          sendStatement: jest.fn()
+        })
+      }
+    })
+
+    jest.mock('@store', () => ({
+      ...jest.requireActual('@store'),
+      usePersistedStore: () => usePersistedStore
+    }))
+
+    const sendStatement = usePersistedStore().state.getXAPI.sendStatement
 
     const { getAllByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>

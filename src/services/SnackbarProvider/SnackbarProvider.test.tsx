@@ -1,7 +1,7 @@
-import { act, render, renderHook } from '@testing-library/react'
-import { useSnackbarProvider } from './SnackbarProvider.hooks'
-import { SnackbarProvider } from '@services'
 import '@testing-library/jest-dom'
+import { act, render, renderHook } from '@testing-library/react'
+import { SnackbarProvider } from '@services'
+import { useSnackbarProvider } from './SnackbarProvider.hooks'
 
 describe('Test SnackbarProvider', () => {
   test('SnackbarProvider renders correctly', () => {

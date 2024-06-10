@@ -1,6 +1,6 @@
-import debounce from './debounce'
 import '@testing-library/jest-dom'
 import { act } from '@testing-library/react'
+import debounce from './debounce'
 
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')

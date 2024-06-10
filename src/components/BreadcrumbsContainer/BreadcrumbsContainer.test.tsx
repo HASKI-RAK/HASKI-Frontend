@@ -1,9 +1,8 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
-import BreadcrumbsContainer from './BreadcrumbsContainer'
-import { MemoryRouter } from 'react-router-dom'
 import * as router from 'react-router'
-import '@testing-library/jest-dom'
+import { MemoryRouter } from 'react-router-dom'
+import BreadcrumbsContainer from './BreadcrumbsContainer'
 
 describe('BreadcrumbsContainer', () => {
   const navigate = jest.fn()

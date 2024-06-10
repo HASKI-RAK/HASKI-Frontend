@@ -1,6 +1,6 @@
 import { Outlet, useParams } from 'react-router-dom'
-import { Box, Divider, Stack, Grid } from '@common/components'
-import { MenuBar, Footer, BreadcrumbsContainer, LocalNav, OpenQuestionnaire, PrivacyModal } from '@components'
+import { Box, Divider, Grid, Stack } from '@common/components'
+import { BreadcrumbsContainer, Footer, LocalNav, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
 
 /**
  * # MainFrame Page
@@ -18,23 +18,20 @@ import { MenuBar, Footer, BreadcrumbsContainer, LocalNav, OpenQuestionnaire, Pri
  */
 export const MainFrame = () => {
   const { courseId } = useParams()
-
-  // !! converts courseId to a boolean
-  const renderMenuBar = !!courseId
-  const renderLocalNav = !!courseId
+  const isCourseLoaded = !!courseId
 
   return (
     <>
       <Stack direction="column" sx={{ minHeight: 'inherit' }}>
-        {renderMenuBar ? <MenuBar courseSelected={true} /> : <MenuBar courseSelected={false} />}
+        <MenuBar />
         <BreadcrumbsContainer />
         <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
           <Grid container item flexGrow={1} sx={{ alignItems: 'stretch' }}>
-            <Grid item xs={renderLocalNav ? 2 : 0}>
+            <Grid item xs={isCourseLoaded ? 2 : 0}>
               {' '}
               {/* Set the xs value to 0 if LocalNav is not rendered.
                              xs is how much screen i want to reserve for this component */}
-              {renderLocalNav && ( // Render the LocalNav if courseId exists
+              {isCourseLoaded && ( // Render the LocalNav if courseId exists
                 <Box
                   height={'100%'}
                   sx={{
@@ -47,7 +44,7 @@ export const MainFrame = () => {
                 </Box>
               )}
             </Grid>
-            <Grid item xs={renderLocalNav ? 10 : 12}>
+            <Grid item xs={isCourseLoaded ? 10 : 12}>
               {' '}
               {/* Adjust the xs (Grid) value based on LocalNav */}
               {/**💉 Pages get injected here through App routing */}

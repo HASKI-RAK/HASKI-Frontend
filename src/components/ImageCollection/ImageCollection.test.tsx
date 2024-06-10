@@ -1,6 +1,6 @@
-import ImageCollection from './ImageCollection'
-import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
+import ImageCollection from './ImageCollection'
 
 describe('ImageCollection tests', () => {
   it('renders without input', () => {

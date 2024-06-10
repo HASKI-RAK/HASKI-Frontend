@@ -1,11 +1,10 @@
-import { useLocation } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { getStatement } from './getStatement'
-import { useMemo, useCallback, useContext, useState, useEffect } from 'react'
-import { usePersistedStore } from '@store'
-import { AuthContext } from '@services'
-import xAPI from './xAPI.setup'
 import log from 'loglevel'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
+import { AuthContext } from '@services'
+import { usePersistedStore } from '@store'
+import { getStatement } from './getStatement'
 
 /**
  * xAPIComponent enum.
@@ -102,6 +101,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   const [lmsUserID, setLmsUserID] = useState<string | undefined>(undefined)
 
   const getUser = usePersistedStore((state) => state.getUser)
+  const getXAPI = usePersistedStore((state) => state.getXAPI)
 
   // Function to get the english name of a page.
   const getEnglishName = useCallback(
@@ -127,7 +127,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   const sendStatement = useCallback(
     async (verb: xAPIVerb, filePath: string) => {
       lmsUserID &&
-        (await xAPI.sendStatement({
+        (await getXAPI()?.sendStatement({
           statement: getStatement(
             await lmsUserID,
             xAPIVerb[verb],
@@ -140,7 +140,7 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
         }))
     },
     [
-      xAPI.sendStatement,
+      getXAPI()?.sendStatement,
       getStatement,
       lmsUserID,
       xAPIVerb,

@@ -1,13 +1,25 @@
-import { render, fireEvent, waitFor, act } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import IconButton from './DefaultIconButton'
 import '@testing-library/jest-dom'
-import { xAPI, AuthContext } from '@services'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { AuthContext } from '@services'
+import IconButton from './DefaultIconButton'
 
 describe('DefaultIconButton tests', () => {
   test('DefaultIconButton sends statement on click', async () => {
-    const sendStatement = jest.fn()
-    jest.spyOn(xAPI, 'sendStatement').mockImplementation(sendStatement)
+    const usePersistedStore = jest.fn().mockReturnValue({
+      state: {
+        getXAPI: () => ({
+          sendStatement: jest.fn()
+        })
+      }
+    })
+
+    jest.mock('@store', () => ({
+      ...jest.requireActual('@store'),
+      usePersistedStore: () => usePersistedStore
+    }))
+
+    const sendStatement = usePersistedStore().state.getXAPI.sendStatement
 
     const { getByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>

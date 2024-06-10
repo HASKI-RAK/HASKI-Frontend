@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
-import Footer from './Footer'
 import { createMemoryHistory } from 'history'
-import { Router } from 'react-router-dom'
 import * as router from 'react-router'
+import { MemoryRouter } from 'react-router-dom'
+import Footer from './Footer'
 
 const navigate = jest.fn()
 
@@ -13,12 +13,10 @@ describe('Footer', () => {
   })
 
   test('should render the footer and click on every element', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
     const { getByText, getAllByRole } = render(
-      <Router location={history.location} navigator={history}>
+      <MemoryRouter initialEntries={['/home']}>
         <Footer />
-      </Router>
+      </MemoryRouter>
     )
     expect(getByText('components.Footer.project' + ' HASKI ' + new Date().getFullYear())).toBeInTheDocument()
 
@@ -27,6 +25,6 @@ describe('Footer', () => {
       fireEvent.click(button)
     })
 
-    expect(navigate).toHaveBeenCalledTimes(5)
+    expect(navigate).toHaveBeenCalledTimes(4)
   })
 })

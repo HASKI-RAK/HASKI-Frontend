@@ -21,18 +21,19 @@
  * ```
  * @module core
  */
-import User from './User/User'
+import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
+import Course, { CourseResponse } from './Course/Course'
+import LearningElement from './LearningElement/LearningElement'
+import LearningPathElement from './LearningPathElement/LearningPathElement'
+import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
+import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
+import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
 import ILS from './QuestionnaireResults/ILS'
 import ListK from './QuestionnaireResults/ListK'
-import LearningElement from './LearningElement/LearningElement'
-import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
-import LearningPathElement from './LearningPathElement/LearningPathElement'
-import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
-import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
 import StudentLearningElement from './StudentLearningElement/StudentLearningElement'
-import Course, { CourseResponse } from './Course/Course'
 import Topic from './Topic/Topic'
-import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
+import User from './User/User'
+
 /**
  * Holds all pure business logic. Does not rely on any other components.
  */

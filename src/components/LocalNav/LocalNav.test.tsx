@@ -1,14 +1,15 @@
 import '@testing-library/jest-dom'
 import { act, fireEvent, render, waitFor } from '@testing-library/react'
-import LocalNav, { LocalNavProps } from './LocalNav'
-import * as router from 'react-router'
-import { LearningPathElement, LearningPathLearningElement, Topic, LearningElement, StudentLearningElement } from '@core'
-import { MemoryRouter } from 'react-router-dom'
-import { mockServices } from 'jest.setup'
 import { renderHook } from '@testing-library/react-hooks'
-import { getSortedLearningPath, useLearningPathTopic, useLearningPathElement } from './LocalNav.hooks'
-import resetModules = jest.resetModules
+import { mockServices } from 'jest.setup'
+import * as router from 'react-router'
+import { MemoryRouter } from 'react-router-dom'
+import { LearningElement, LearningPathElement, LearningPathLearningElement, StudentLearningElement, Topic } from '@core'
 import LazyLoadingLearningPathElement, { LazyLoadingLearningPathElementProps } from './LazyLoadingLearningPathElement'
+import LocalNav, { LocalNavProps } from './LocalNav'
+import { getSortedLearningPath, useLearningPathElement, useLearningPathTopic } from './LocalNav.hooks'
+
+import resetModules = jest.resetModules
 
 const navigate = jest.fn()
 
@@ -568,19 +569,32 @@ describe('getSortedLearningPath works as expected', () => {
   })
 })
 
-describe('useLearningPathTopic', () => {
+describe('useLearningPathTopic tests', () => {
   beforeEach(() => {
     resetModules()
   })
 
-  test('fetch learningPathTopics fails', async () => {
-    mockServices.fetchLearningPathTopic = jest
-      .fn()
-      .mockImplementationOnce(() => Promise.reject(new Error('fetchLearningPathTopic failed')))
+  test('getLearningPathTopic fails', async () => {
+    mockServices.fetchLearningPathTopic.mockImplementationOnce(() =>
+      Promise.reject(new Error('getLearningPathTopic failed'))
+    )
 
-    act(() => {
-      const { result } = renderHook(() => useLearningPathTopic('2'))
-      expect(result.current).toBeUndefined()
+    const { result } = renderHook(() => useLearningPathTopic('2'))
+
+    await waitFor(() => {
+      expect(result.current.loading).toBeTruthy()
+      expect(result.current.topics).toStrictEqual([])
+    })
+  })
+
+  test('getUser fails', async () => {
+    mockServices.fetchUser.mockImplementationOnce(() => Promise.reject(new Error('getUser failed')))
+
+    const { result } = renderHook(() => useLearningPathTopic('2'))
+
+    await waitFor(() => {
+      expect(result.current.loading).toBeTruthy()
+      expect(result.current.topics).toStrictEqual([])
     })
   })
 
@@ -612,6 +626,38 @@ describe('useLearningPathTopic', () => {
     act(() => {
       const { result } = renderHook(() => useLearningPathElement(mockTopic, '2'))
       expect(result.current).toBeUndefined()
+    })
+  })
+
+  test('useLearningPathElement getUser fails', async () => {
+    const mockTopic: Topic = {
+      contains_le: true,
+      created_at: '2021-09-01T12:00:00.000Z',
+      created_by: 'dimitri',
+      id: 1,
+      is_topic: true,
+      last_updated: '2021-09-01T12:00:00.000Z',
+      lms_id: 1,
+      name: 'test',
+      parent_id: 1,
+      student_topic: {
+        done: false,
+        done_at: null,
+        id: 1,
+        student_id: 1,
+        topic_id: 1,
+        visits: []
+      },
+      university: 'HS-KE'
+    }
+
+    mockServices.fetchUser.mockImplementationOnce(() => Promise.reject(new Error('getUser failed')))
+
+    const { result } = renderHook(() => useLearningPathElement(mockTopic, '2'))
+
+    await waitFor(() => {
+      expect(result.current.loadingElements).toBeTruthy()
+      expect(result.current.learningPaths).toStrictEqual(undefined)
     })
   })
 })
