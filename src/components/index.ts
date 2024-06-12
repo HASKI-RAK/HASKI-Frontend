@@ -13,7 +13,7 @@ export { default as LoginForm, type LoginFormProps } from './LoginForm/LoginForm
 export { default as MenuBar } from './MenuBar/MenuBar'
 export { default as ContactForm, type ContactFormProps } from './ContactForm/ContactForm'
 export { default as Footer } from './Footer/Footer'
-export { default as LocalNav } from './LocalNav/LocalNav'
+export { default as LocalNavBar } from './LocalNav/LocalNavBar/LocalNavBar'
 export { default as LocalNavItem } from './LocalNav/LocalNavItem/LocalNavItem'
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
 export { default as TextCardLeft } from './TextCard/TextCardLeft/TextCardLeft'

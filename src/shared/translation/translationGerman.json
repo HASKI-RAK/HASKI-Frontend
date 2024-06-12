@@ -1698,5 +1698,6 @@
   "tooltip.openSettings": "Einstellungen",
   "warning": "Warnung",
   "warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
-  "warning.online": "Sie sind wieder online."
+  "warning.online": "Sie sind wieder online.",
+  "log.learningPathTopicProgressTimeout": "Beim Laden des LearningPathTopicProgress-Hook ist ein Timout aufgetreten."
 }

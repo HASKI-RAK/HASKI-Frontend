@@ -12,7 +12,7 @@ import { LocalNavItem, SkeletonList } from '@components'
  * @returns
  * A JSX Element with the rendered local navigation.
  */
-const LocalNav = () => {
+const LocalNavBar = () => {
   //States
   const [drawerHeight, setDrawerHeight] = useState(0)
 
@@ -22,8 +22,6 @@ const LocalNav = () => {
   const { topicId } = useParams<string>()
   const theme = useTheme()
   const open = useMediaQuery(theme.breakpoints.up('lg'))
-
-  //Hooks
   const { isLoading, topics, topicProgress } = useLearningPathTopicProgress({ courseId })
 
   //Resizing the window resizes drawer height
@@ -85,4 +83,4 @@ const LocalNav = () => {
   )
 }
 
-export default memo(LocalNav)
+export default memo(LocalNavBar)

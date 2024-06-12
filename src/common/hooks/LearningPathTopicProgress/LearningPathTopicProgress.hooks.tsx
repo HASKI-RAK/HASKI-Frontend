@@ -109,7 +109,7 @@ export const useLearningPathTopicProgress = (
     setIsLoading(true)
 
     const preventEndlessLoading = setTimeout(() => {
-      log.log('Course timeout') // TODO: translation file log.topicProgressTimeout Loading useTopicProgress timed out.
+      log.log(t('log.learningPathTopicProgressTimeout'))
       navigate('/login')
     }, 1000)
 
@@ -156,7 +156,6 @@ export const useLearningPathTopicProgress = (
     clearTimeout,
     getUser,
     getLearningPathTopic,
-    setIsLoading,
     setTopics,
     getAllTopicProgress,
     setTopicProgress,

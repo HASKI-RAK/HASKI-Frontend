@@ -10,12 +10,19 @@ export type LearningPathTopicHookReturn = {
   topics: Topic[]
 }
 
+type LearningPathTopicHookParams = {
+  courseId?: string
+}
+
 /**
  * @param courseId - course id
  * @returns
  * A tuple with the loading state and the topics for a course
  */
-export const useLearningPathTopic = (courseId: string): LearningPathTopicHookReturn => {
+// TODO: UNUSED
+export const useLearningPathTopic = (params?: LearningPathTopicHookParams): LearningPathTopicHookReturn => {
+  const { courseId = undefined } = params ?? {}
+
   // State
   const [loading, setLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
