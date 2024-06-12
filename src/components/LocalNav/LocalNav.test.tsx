@@ -7,7 +7,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { useLearningPathTopic } from '@common/hooks'
 import { Topic } from '@core'
 import { AuthContext } from '@services'
-import LocalNav, { LocalNavProps } from './LocalNav'
+import LocalNav from './LocalNav'
 
 import resetModules = jest.resetModules
 
@@ -78,39 +78,21 @@ describe('LocalNav tests', () => {
     }
   ]
 
-  const mockUseLearningPathTopic = jest.fn().mockReturnValue({
-    loading: true,
-    topics: mockTopics
-  })
-
-  const props: LocalNavProps = {
-    useLearningPathTopic: mockUseLearningPathTopic
-  }
-
   it('should render the LocalNav', () => {
     const result = render(<LocalNav />)
     expect(result).toBeTruthy()
   })
 
   it('should render the LocalNav with Topic and learningElementPath loading Topics', () => {
-    const { container } = render(<LocalNav {...props} />)
+    const { container } = render(<LocalNav />)
 
     expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
   })
 
   it('should render the LocalNav with Topic and learningElementPath rendered', () => {
-    const mockUseLearningPathTopic = jest.fn().mockReturnValue({
-      loading: false,
-      topics: mockTopics
-    })
-
-    const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic
-    }
-
     const result = render(
       <MemoryRouter>
-        <LocalNav {...props} />
+        <LocalNav />
       </MemoryRouter>
     )
     expect(result).toBeTruthy()
@@ -119,18 +101,9 @@ describe('LocalNav tests', () => {
   it('should render the LocalNav with all Topics, as text', () => {
     jest.restoreAllMocks()
 
-    const mockUseLearningPathTopic = jest.fn().mockReturnValue({
-      loading: false,
-      topics: mockTopics
-    })
-
-    const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic
-    }
-
     const { getByText } = render(
       <MemoryRouter initialEntries={['/login']}>
-        <LocalNav {...props} />
+        <LocalNav />
       </MemoryRouter>
     )
 
@@ -142,19 +115,10 @@ describe('LocalNav tests', () => {
   })
 
   it('should render the LocalNav with all Topics, clicking on 2nd element', async () => {
-    const mockUseLearningPathTopic = jest.fn().mockReturnValue({
-      loading: false,
-      topics: mockTopics
-    })
-
-    const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic
-    }
-
     const { getAllByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter initialEntries={['/login']}>
-          <LocalNav {...props} />
+          <LocalNav />
         </MemoryRouter>
       </AuthContext.Provider>
     )
@@ -170,19 +134,10 @@ describe('LocalNav tests', () => {
   })
 
   it('should highlight selected topic', async () => {
-    const mockUseLearningPathTopic = jest.fn().mockReturnValue({
-      loading: false,
-      topics: mockTopics
-    })
-
-    const props: LocalNavProps = {
-      useLearningPathTopic: mockUseLearningPathTopic
-    }
-
     const { getAllByRole, getByTestId } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter initialEntries={['/course/1/topic/1']}>
-          <LocalNav {...props} />
+          <LocalNav />
         </MemoryRouter>
       </AuthContext.Provider>
     )
@@ -211,7 +166,7 @@ describe('LocalNav tests', () => {
     }))
     const result = render(
       <MemoryRouter>
-        <LocalNav {...props} />
+        <LocalNav />
       </MemoryRouter>
     )
     expect(result).toBeTruthy()

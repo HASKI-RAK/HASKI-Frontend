@@ -1,36 +1,49 @@
 import log from 'loglevel'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { LearningPathElementStatus, LearningPathLearningElement, Topic, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 // Type
-type CourseHookReturn = {
-  calculatedTopicProgress: number[][]
+type LearningPathTopicHookParams = {
+  courseId?: string
+}
+
+// Type
+type LearningPathTopicProgressHookReturn = {
+  topicProgress: number[][]
   isLoading: boolean
   topics: Topic[]
 }
 
-// Hook
-// TODO: Durch useTopicProgress ersetzen
-export const useCourse = (): CourseHookReturn => {
+/**
+ * Hook to get the progress of the learning elements in a topic, for each topic in a course
+ * @param courseId
+ * @param topics
+ * @returns - A tuple with the progress of the learning elements in a topic and a boolean indicating if the data is still loading
+ */
+export const useLearningPathTopicProgress = (
+  params?: LearningPathTopicHookParams
+): LearningPathTopicProgressHookReturn => {
+  // Default values
+  const { courseId = undefined } = params ?? {}
+
   // States
-  const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [topicProgress, setTopicProgress] = useState<number[][]>([[]])
+  const [isLoading, setIsLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
+
+  // Hooks
+  const navigate = useNavigate()
   const { t } = useTranslation()
 
   // Contexts
   const { isAuth } = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
 
-  // Hooks
-  const navigate = useNavigate()
-  const { courseId } = useParams() as { courseId: string }
-
-  // Stores
+  // Fetches
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
@@ -75,7 +88,7 @@ export const useCourse = (): CourseHookReturn => {
                   autoHideDuration: 3000
                 })
                 log.error(t('error.fetchLearningPathElement') + ' ' + error)
-                return []
+                return [] as number[]
               })
           )
           .catch((error: string) => {
@@ -85,7 +98,7 @@ export const useCourse = (): CourseHookReturn => {
               autoHideDuration: 3000
             })
             log.error(t('error.fetchLearningPathElementStatus') + ' ' + error)
-            return []
+            return [] as number[]
           })
       })
     },
@@ -96,7 +109,7 @@ export const useCourse = (): CourseHookReturn => {
     setIsLoading(true)
 
     const preventEndlessLoading = setTimeout(() => {
-      log.log('Course timeout')
+      log.log('Course timeout') // TODO: translation file log.topicProgressTimeout Loading useTopicProgress timed out.
       navigate('/login')
     }, 1000)
 
@@ -111,7 +124,7 @@ export const useCourse = (): CourseHookReturn => {
               setTopics(learningPathTopic.topics)
               Promise.all(getAllTopicProgress(user, learningPathTopic.topics)).then((allTopicProgress) =>
                 // Set the calculated progress for each topic
-                setCalculatedTopicProgress(allTopicProgress)
+                setTopicProgress(allTopicProgress)
               )
             })
             .catch((error: string) => {
@@ -136,7 +149,19 @@ export const useCourse = (): CourseHookReturn => {
     return () => {
       clearTimeout(preventEndlessLoading)
     }
-  }, [isAuth, courseId, navigate, getUser, getLearningPathElement, getLearningPathElementStatus])
+  }, [
+    isAuth,
+    setIsLoading,
+    navigate,
+    clearTimeout,
+    getUser,
+    getLearningPathTopic,
+    setIsLoading,
+    setTopics,
+    getAllTopicProgress,
+    setTopicProgress,
+    addSnackbar
+  ])
 
-  return useMemo(() => ({ calculatedTopicProgress, isLoading, topics }), [calculatedTopicProgress, isLoading, topics])
+  return useMemo(() => ({ topicProgress, isLoading, topics }), [topicProgress, isLoading, topics])
 }

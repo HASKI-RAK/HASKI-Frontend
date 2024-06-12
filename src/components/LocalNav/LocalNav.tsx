@@ -2,22 +2,8 @@ import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Divider, Drawer, Grid, List, Typography } from '@common/components'
-import {
-  useLearningPathTopic as _useLearningPathTopic,
-  useLearningPathTopicProgress,
-  useMediaQuery,
-  useTheme
-} from '@common/hooks'
+import { useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
 import { LocalNavItem, SkeletonList } from '@components'
-import { Topic } from '@core'
-
-/**
- *  Local navigation component props.
- *  @prop {@link useLearningPathTopic} - hook to get learning path topics
- */
-export type LocalNavProps = {
-  useLearningPathTopic?: (courseId: string) => { loading: boolean; topics: Topic[] }
-}
 
 /**
  * Local navigation component.
@@ -26,8 +12,7 @@ export type LocalNavProps = {
  * @returns
  * A JSX Element with the rendered local navigation.
  */
-const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProps) => {
-  // TODO: Hook should be inserted directly and not via params
+const LocalNav = () => {
   //States
   const [drawerHeight, setDrawerHeight] = useState(0)
 
@@ -38,13 +23,8 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
   const theme = useTheme()
   const open = useMediaQuery(theme.breakpoints.up('lg'))
 
-  //Default values
-  const definedCourseId = courseId ?? 'default'
-  const definedTopicId = topicId ?? 'default'
-
   //Hooks
-  const { topics, loading: topicLoading } = useLearningPathTopic(definedCourseId)
-  const { topicProgress, loading: isProgressLoading } = useLearningPathTopicProgress(definedCourseId)
+  const { isLoading, topics, topicProgress } = useLearningPathTopicProgress({ courseId })
 
   //Resizing the window resizes drawer height
   useEffect(() => {
@@ -79,7 +59,7 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
           <Typography variant="h5">{t('appGlobal.topics')}</Typography>
         </Grid>
         <Divider />
-        {topicLoading ? (
+        {isLoading ? (
           <Grid container>
             <Grid item>
               <SkeletonList />
@@ -92,11 +72,12 @@ const LocalNav = ({ useLearningPathTopic = _useLearningPathTopic }: LocalNavProp
                 key={topic.id}
                 topic={topic}
                 topicProgress={topicProgress[index]}
-                isProgressLoading={isProgressLoading}
-                courseId={definedCourseId}
-                topicId={definedTopicId}
+                isProgressLoading={isLoading}
+                courseId={courseId}
+                topicId={topicId}
               />
             ))}
+            <LocalNavItem courseId="1" />
           </List>
         )}
       </Drawer>

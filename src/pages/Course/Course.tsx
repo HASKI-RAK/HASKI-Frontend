@@ -1,7 +1,7 @@
+import { useParams } from 'react-router-dom'
 import { Box, Grid } from '@common/components'
-import { useMediaQuery, useTheme } from '@common/hooks'
+import { useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
 import { SkeletonList, TopicCard } from '@components'
-import { useCourse } from './Course.hooks'
 
 /**
  * # Course Page
@@ -17,7 +17,8 @@ const Course = () => {
   // Hooks
   const theme = useTheme()
   const isSmOrDown = useMediaQuery(theme.breakpoints.down('sm'))
-  const { calculatedTopicProgress, isLoading, topics } = useCourse() // TODO: Durch useTopicProgress ersetzen
+  const { courseId } = useParams() as { courseId: string }
+  const { topicProgress, isLoading, topics } = useLearningPathTopicProgress({ courseId })
 
   return (
     <>
@@ -39,7 +40,7 @@ const Course = () => {
             <TopicCard
               key={topic.id}
               topic={topic}
-              calculatedTopicProgress={calculatedTopicProgress[index]}
+              calculatedTopicProgress={topicProgress[index]}
               isSmOrDown={isSmOrDown}
             />
           ))}
