@@ -1,9 +1,8 @@
 import '@testing-library/jest-dom'
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
 import { Topic } from '@core'
-import { AuthContext } from '@services'
 import LocalNavItem from './LocalNavItem'
 
 describe('LocalNavItem tests', () => {
