@@ -99,7 +99,7 @@ describe('Course2', () => {
     )
 
     await waitFor(async () => {
-      expect(getAllByTestId('courseCardTopicProgress')[0].parentNode?.textContent).toBe('Learning progress: 0/2')
+      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 0/2')
     })
   })
 })
@@ -223,7 +223,7 @@ describe('Course3', () => {
     )
 
     await waitFor(() => {
-      expect(getAllByTestId('courseCardTopicProgress')[0].parentNode?.textContent).toBe('Learning progress: 1/3')
+      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 1/3')
     })
   })
 })
@@ -317,7 +317,7 @@ describe('Course4', () => {
     )
 
     await waitFor(async () => {
-      expect(getAllByTestId('courseCardTopicProgress')[0].parentNode?.textContent).toBe('Learning progress: 2/2')
+      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 2/2')
     })
   })
 })
@@ -347,7 +347,7 @@ describe('Course5', () => {
     )
 
     await waitFor(() => {
-      expect(getAllByTestId('courseCardTopicProgress')[1].parentNode?.textContent).toBe('Learning progress: error..')
+      expect(getAllByTestId('Course-Card-Topic-Progress')[1].parentNode?.textContent).toBe('Learning progress: error..')
     })
   })
 
