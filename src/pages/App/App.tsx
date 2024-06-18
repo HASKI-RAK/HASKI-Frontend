@@ -44,6 +44,7 @@ export const App = () => {
     <>
       {getXAPI() && (
         <ThemeProvider theme={HaskiTheme}>
+          <ReactFlowProvider>
           <SnackbarProvider>
             <AuthProvider>
               <Router>
@@ -69,6 +70,7 @@ export const App = () => {
               </Router>
             </AuthProvider>
           </SnackbarProvider>
+        </ReactFlowProvider>
         </ThemeProvider>
       )}
     </>
