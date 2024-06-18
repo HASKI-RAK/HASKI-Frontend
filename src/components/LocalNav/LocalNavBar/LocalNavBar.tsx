@@ -75,7 +75,6 @@ const LocalNavBar = () => {
                 topicId={topicId}
               />
             ))}
-            <LocalNavItem courseId="1" />
           </List>
         )}
       </Drawer>
