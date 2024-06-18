@@ -35,7 +35,7 @@ const Course = () => {
         </Box>
       ) : (
         // Display topics once data is loaded
-        <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ ml: '3rem' }}>
+        <Grid container direction="column" justifyContent="center" alignItems="center">
           {topics.map((topic, index) => (
             <TopicCard
               key={topic.id}
