@@ -102,7 +102,7 @@ export const useLearningPathTopicProgress = (
           })
       })
     },
-    [addSnackbar, getLearningPathElement, getLearningPathElementStatus, getTopicProgress, courseId]
+    [getLearningPathElement, getLearningPathElementStatus, getTopicProgress, courseId]
   )
 
   useEffect(() => {
@@ -154,12 +154,10 @@ export const useLearningPathTopicProgress = (
     setIsLoading,
     navigate,
     clearTimeout,
-    getUser,
     getLearningPathTopic,
     setTopics,
     getAllTopicProgress,
-    setTopicProgress,
-    addSnackbar
+    setTopicProgress
   ])
 
   return useMemo(() => ({ topicProgress, isLoading, topics }), [topicProgress, isLoading, topics])
