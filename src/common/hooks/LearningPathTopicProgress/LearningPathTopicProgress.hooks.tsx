@@ -31,8 +31,8 @@ export const useLearningPathTopicProgress = (
   const { courseId = undefined } = params ?? {}
 
   // States
-  const [topicProgress, setTopicProgress] = useState<number[][]>([[]])
-  const [isLoading, setIsLoading] = useState(true)
+  const [topicProgress, setTopicProgress] = useState<number[][]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [topics, setTopics] = useState<Topic[]>([])
 
   // Hooks
@@ -120,12 +120,12 @@ export const useLearningPathTopicProgress = (
         .then((user) =>
           getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
             .then((learningPathTopic) => {
-              setIsLoading(false)
               setTopics(learningPathTopic.topics)
               Promise.all(getAllTopicProgress(user, learningPathTopic.topics)).then((allTopicProgress) =>
                 // Set the calculated progress for each topic
                 setTopicProgress(allTopicProgress)
               )
+              setIsLoading(false)
             })
             .catch((error: string) => {
               addSnackbar({
@@ -151,13 +151,10 @@ export const useLearningPathTopicProgress = (
     }
   }, [
     isAuth,
-    setIsLoading,
     navigate,
     clearTimeout,
     getLearningPathTopic,
-    setTopics,
-    getAllTopicProgress,
-    setTopicProgress
+    getAllTopicProgress
   ])
 
   return useMemo(() => ({ topicProgress, isLoading, topics }), [topicProgress, isLoading, topics])
