@@ -149,13 +149,7 @@ export const useLearningPathTopicProgress = (
     return () => {
       clearTimeout(preventEndlessLoading)
     }
-  }, [
-    isAuth,
-    navigate,
-    clearTimeout,
-    getLearningPathTopic,
-    getAllTopicProgress
-  ])
+  }, [isAuth, navigate, clearTimeout, getLearningPathTopic, getAllTopicProgress])
 
   return useMemo(() => ({ topicProgress, isLoading, topics }), [topicProgress, isLoading, topics])
 }
