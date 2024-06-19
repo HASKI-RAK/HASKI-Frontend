@@ -109,13 +109,13 @@ const calculateLearningPath = (
         .then((response) => {
           log.info(response)
         })
-        .catch(() => {
+        .catch((error) => {
           addSnackbar({
-            message: t('Data.calculated.error'),
-            severity: 'success',
+            message: t('error.postCalculateLearningPathILS'),
+            severity: 'error',
             autoHideDuration: 5000
           })
-          log.error('Error while calculating learning path in Kempten Course 1')
+          log.error(t('error.postCalculateLearningPathILS') + '' + error)
         })
     })
   })
