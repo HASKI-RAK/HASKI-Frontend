@@ -23,7 +23,7 @@ describe('LearningPathTopicProgress tests', () => {
       )
     })
 
-    expect(result.current).toEqual({ isLoading: true, topicProgress: [[]], topics: [] })
+    expect(result.current).toEqual({ isLoading: true, topicProgress: [], topics: [] })
   })
 
   test('functionality of hook without input and isAuth false', () => {
@@ -72,7 +72,7 @@ describe('LearningPathTopicProgress tests', () => {
     })
 
     await waitFor(() => {
-      expect(result.current.topicProgress).toStrictEqual([[]])
+      expect(result.current.topicProgress).toStrictEqual([])
       expect(result.current.isLoading).toBeTruthy()
       expect(result.current.topics.length).toStrictEqual(0)
     })
@@ -92,7 +92,7 @@ describe('LearningPathTopicProgress tests', () => {
     })
 
     await waitFor(() => {
-      expect(result.current.topicProgress).toStrictEqual([[]])
+      expect(result.current.topicProgress).toStrictEqual([])
       expect(result.current.isLoading).toBeTruthy()
       expect(result.current.topics.length).toStrictEqual(0)
     })
@@ -111,7 +111,7 @@ describe('LearningPathTopicProgress tests', () => {
       )
     })
     await waitFor(() => {
-      expect(result.current.topicProgress).toStrictEqual([[]])
+      expect(result.current.topicProgress).toStrictEqual([])
       expect(result.current.isLoading).toBeTruthy()
       expect(result.current.topics.length).toStrictEqual(0)
     })
@@ -131,7 +131,7 @@ describe('LearningPathTopicProgress tests', () => {
     })
 
     await waitFor(() => {
-      expect(result.current.topicProgress).toStrictEqual([[]])
+      expect(result.current.topicProgress).toStrictEqual([])
       expect(result.current.isLoading).toBeTruthy()
       expect(result.current.topics.length).toStrictEqual(0)
     })
