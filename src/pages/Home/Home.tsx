@@ -78,15 +78,15 @@ export const Home = () => {
           {courses.length === 0 ? (
             <Card>
               <CardContent>
-                <Typography variant="h5">{t('pages.home.noCourses')}</Typography>
+                <Typography variant="h5" align="center">{t('pages.home.noCourses')}</Typography>
               </CardContent>
             </Card>
           ) : (
             courses.map((course) => {
               return (
-                <Card key={course.id} sx={{ mb: '1rem' }}>
+                <Card key={course.id} sx={{ mb: '1rem', width: { xs: '20rem', sm: '20rem', md: '20rem', lg: '30rem', xl: '40rem', xxl: '45rem', xxxl: '50rem' }, }}>
                   <CardContent>
-                    <Typography variant="h5">{course.name}</Typography>
+                    <Typography variant="h5" align="center">{course.name}</Typography>
                     <Stack direction="row" justifyContent="center">
                       <Button
                         id="course-button"
