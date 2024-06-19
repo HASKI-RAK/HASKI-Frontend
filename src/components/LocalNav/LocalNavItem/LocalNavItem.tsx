@@ -56,10 +56,10 @@ const LocalNavItem = ({ topic, topicProgress, isProgressLoading, courseId, topic
                 width: '0.5rem'
               }}
             />
-            <Grid item xs={7} sm={7} md={8} lg={8} xl={8}>
+            <Grid item xs={7} sm={7} md={8} lg={8} xl={8} xxl={8} xxxl={8}>
               <ListItemText primary={topic?.name} primaryTypographyProps={{ fontSize: 18 }} />
             </Grid>
-            <Grid item xs={3} sm={3} md={3} lg={2} xl={2}>
+            <Grid item xs={3} sm={3} md={3} lg={2} xl={2} xxl={2} xxxl={2}>
               {topicProgress && !isProgressLoading ? (
                 <ListItemText
                   primary={
