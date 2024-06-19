@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Divider, Drawer, Grid, List, Typography } from '@common/components'
@@ -59,7 +59,7 @@ const LocalNavBar = () => {
         <Divider />
         {isLoading ? (
           <Grid container>
-            <Grid item>
+            <Grid item sx={{ width: '24rem'}}>
               <SkeletonList />
             </Grid>
           </Grid>
