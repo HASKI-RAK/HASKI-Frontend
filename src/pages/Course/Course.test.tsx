@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor, prettyDOM, act, screen } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
@@ -27,7 +27,7 @@ describe('Course', () => {
   })
 
   it('renders course page with topics, clicking on first topic', async () => {
-    const { getAllByRole } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Course />
@@ -35,15 +35,16 @@ describe('Course', () => {
       </MemoryRouter>
     )
 
+    console.log(prettyDOM())
     await waitFor(() => {
-      fireEvent.click(getAllByRole('button')[0])
+      fireEvent.click(getByTestId('CourseCardTopicWirtschaftsinformatik'))
     })
 
     expect(navigate).toHaveBeenCalledWith('topic/1')
   })
 
   it('renders course page with topics, clicking on second topic', async () => {
-    const { getAllByRole } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Course />
@@ -51,8 +52,9 @@ describe('Course', () => {
       </MemoryRouter>
     )
 
+    console.log(prettyDOM())
     await waitFor(() => {
-      fireEvent.click(getAllByRole('button')[1])
+      fireEvent.click(getByTestId('CourseCardTopicInformatik'))
     })
 
     expect(navigate).toHaveBeenCalledWith('topic/2')
@@ -67,8 +69,9 @@ describe('Course', () => {
       </MemoryRouter>
     )
 
+    console.log(prettyDOM())
     await waitFor(() => {
-      fireEvent.click(getByTestId('Course-Card-Topic-Informatik'))
+      fireEvent.click(getByTestId('CourseCardTopicInformatik'))
       expect(navigate).toHaveBeenCalledWith('topic/2')
     })
   })
@@ -78,7 +81,7 @@ describe('Course', () => {
       throw new Error('getLearningPathElement error')
     })
 
-    const { getAllByRole } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Course />
@@ -87,7 +90,7 @@ describe('Course', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getAllByRole('button')[0])
+      fireEvent.click(getByTestId('CourseCardTopicWirtschaftsinformatik'))
     })
 
     expect(navigate).toHaveBeenCalledWith('topic/1')
@@ -98,7 +101,7 @@ describe('Course', () => {
       throw new Error('getLearningPathElement error')
     })
 
-    const { getAllByRole } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Course />
@@ -107,7 +110,7 @@ describe('Course', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getAllByRole('button')[0])
+      fireEvent.click(getByTestId('CourseCardTopicWirtschaftsinformatik'))
     })
 
     expect(navigate).toHaveBeenCalledWith('topic/1')
@@ -125,5 +128,43 @@ describe('Course', () => {
         </AuthContext.Provider>
       </MemoryRouter>
     )
+  })
+
+  test('settingsbutton opens menu', async () => {
+    const { getByTestId, getAllByTestId } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Course />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getAllByTestId('TopicSettingsButton')[0])
+    })
+
+    expect(getByTestId('TopicSettingsMenu')).toBeInTheDocument
+  })
+
+  test('modal can be opened and closed', async () => {
+    const { getByTestId, getAllByTestId, queryByTestId } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Course />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => act(() => {
+      fireEvent.click(getAllByTestId('TopicSettingsButton')[0])
+      expect(getByTestId('AlgorithmSettingsItem')).toBeInTheDocument
+        
+    }))
+    fireEvent.click(getByTestId('AlgorithmSettingsItem'))
+    expect(getByTestId('TopicSettingsMenu')).not.toBeInTheDocument
+    screen.debug(undefined, 300000)
+    expect(getByTestId('algorithm-modal')).toBeInTheDocument
+    fireEvent.click(getByTestId('algorithm-modal-close-button'))
+    expect(queryByTestId('algorithm-modal')).toBeNull()
   })
 })

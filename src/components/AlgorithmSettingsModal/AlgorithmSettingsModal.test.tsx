@@ -32,6 +32,8 @@ describe('AlgorithmSettingsModal', () => {
         expect(getByLabelText('option1')).toBeInTheDocument()
         expect(getByLabelText('option2')).toBeInTheDocument()
         expect(getByLabelText('option3')).toBeInTheDocument()
+        //TODO: Find a better way to test the icon appearing
+        expect(getByTestId('teacher-icon')).toBeInTheDocument()
     })
 
 

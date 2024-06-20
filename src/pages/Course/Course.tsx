@@ -1,10 +1,10 @@
 import log from 'loglevel'
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Box, Button, Card, CardContent, Grid, Typography, Menu, MenuItem, IconButton } from '@common/components'
+import { Box, Button, Card, CardContent, CardHeader, Grid, Typography, Menu, MenuItem, IconButton } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
-import { CheckBox, Edit} from '@common/icons'
+import { CheckBox, Edit, MoreVert} from '@common/icons'
 import { SkeletonList, StyledLinearProgress, useLearningPathTopic } from '@components'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -36,8 +36,6 @@ const Course = (): JSX.Element => {
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
   const { loading, topics } = useLearningPathTopic(courseId)
 
-  //TODO: Exchange this with an appropriate way to check if the user is a tutor
-  const [isTutor, setIsTutor] = useState(true)
   const [isAlgorithmSettingsModalOpen, setIsAlgorithmSettingsModalOpen] = useState(false)
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedTopicID, setSelectedTopicID] = useState<null | string>(null)
@@ -45,16 +43,19 @@ const Course = (): JSX.Element => {
     setMenuAnchorEl(event.currentTarget)
     setSelectedTopicID(event.currentTarget?.dataset?.topicid ?? null)
   }
-  const handleCloseMenu = () => {
+  const handleCloseMenu = useCallback(() => {
     setMenuAnchorEl(null)
-  }
-  const handleAlgorithmMenuOpen = () => {
+  },[setMenuAnchorEl])
+  const handleAlgorithmMenuOpen = useCallback(() => {
     handleCloseMenu()
     setIsAlgorithmSettingsModalOpen(true)
-  }
-  const getIDs = () => {
+  }, [handleCloseMenu, setIsAlgorithmSettingsModalOpen])
+  const handleAlgorithmModalClose = useCallback(() => {
+    setIsAlgorithmSettingsModalOpen(false)
+  }, [setIsAlgorithmSettingsModalOpen])
+  const getIDs = useCallback(() => {
     return { courseID: null, topicID: selectedTopicID }
-  }
+  }, [selectedTopicID])
  
 
   useEffect(() => {
@@ -149,6 +150,10 @@ const Course = (): JSX.Element => {
                   key={topic.id}
                   sx={{ width: { xs: '10rem', sm: '20rem', md: '40rem', lg: '50rem', xl: '70rem' }, mt: '1rem' }}>
                   <CardContent>
+                    <Grid  container direction="row" justifyContent="flex-end" alignItems="flex-start">
+                      <IconButton sx={{position: 'relative', left:'0', top: '0'}} onClick={openMenu} data-topicid={topic.id} data-testid='TopicSettingsButton'><MoreVert/></IconButton>
+                    </Grid>
+                    
                     <Grid container direction="column" justifyContent="center" alignItems="center">
                       <Grid item md={1}>
                         {/*if topic is done 100%, a checkbox is displayed*/}
@@ -176,7 +181,7 @@ const Course = (): JSX.Element => {
                           mt: '1.625rem'
                         }}
                         variant="contained"
-                        data-testid={'Course-Card-Topic-' + topic.name}
+                        data-testid={'CourseCardTopic' + topic.name}
                         color="primary"
                         onClick={() => {
                           navigate('topic/' + topic.id)
@@ -188,9 +193,9 @@ const Course = (): JSX.Element => {
                      direction='row' 
                      alignItems={'center'} 
                      justifyContent={'center'} 
-                     sx={{marginBottom:'1rem'}}>
-                      <Typography>{t('pages.course.cardText')}{t('pages.course.algorithmFixed')}</Typography>
-                      <IconButton onClick={openMenu}><Edit/></IconButton>
+                     sx={{mt:'0.5rem'}}>
+                      {/*TODO: change hardcoded name to fetched algorithm name*/}
+                      <Typography>{t('pages.course.cardText')}{t('pages.course.fixed')}</Typography>
                     </Grid>
                   </CardContent>
                   {/* Display topic progress bar */}
@@ -206,15 +211,16 @@ const Course = (): JSX.Element => {
               )
             })}
           </Grid>
-          <AlgorithmSettingsModal isOpen={isAlgorithmSettingsModalOpen} handleClose={() => {setIsAlgorithmSettingsModalOpen(false)}} getIDs={getIDs}/>
+          <AlgorithmSettingsModal isOpen={isAlgorithmSettingsModalOpen} handleClose={handleAlgorithmModalClose} getIDs={getIDs} />
           <Menu
                       id='menu'
                       anchorEl={menuAnchorEl}
                       open={Boolean(menuAnchorEl)}
                       onClose={handleCloseMenu}
-                      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                      transformOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                        <MenuItem onClick={handleAlgorithmMenuOpen}>Select Algorithm</MenuItem>
+                      anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+                      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                      data-testid='TopicSettingsMenu'>
+                        <MenuItem onClick={handleAlgorithmMenuOpen} data-testid='AlgorithmSettingsItem'>{t('pages.home.menuItemAlgorithms')}</MenuItem>
           </Menu>
         </>
       )}

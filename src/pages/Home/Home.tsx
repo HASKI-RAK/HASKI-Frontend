@@ -2,8 +2,7 @@ import log from 'loglevel'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardContent, Skeleton, Stack, Typography, Menu, MenuItem, IconButton } from '@common/components'
-import { CardHeader} from '@mui/material'
+import { Button, Card, CardContent, CardHeader, Skeleton, Stack, Typography, Menu, MenuItem, IconButton } from '@common/components'
 import { AlgorithmSettingsModal } from '@components'
 import { MoreVert, Settings} from '@common/icons'
 import { Course } from '@core'
@@ -46,6 +45,9 @@ export const Home = () => {
     handleCloseMenu()
     setIsAlgorithmSettingsModalOpen(true)
   },[handleCloseMenu, setIsAlgorithmSettingsModalOpen])
+  const handleAlgorithmModalClose = useCallback(() => {
+    setIsAlgorithmSettingsModalOpen(false)
+  },[setIsAlgorithmSettingsModalOpen])
   const getIDs = useCallback(() => {
     return { courseID: selectedCourseID, topicID: null }
   },[selectedCourseID])
@@ -96,7 +98,7 @@ export const Home = () => {
     <Skeleton variant="rectangular" width="100%" height={118} />
   ) : (
     <div>
-      <AlgorithmSettingsModal isOpen={isAlgorithmSettingsModalOpen} handleClose={() => {setIsAlgorithmSettingsModalOpen(false)}} getIDs={getIDs}/>
+      <AlgorithmSettingsModal isOpen={isAlgorithmSettingsModalOpen} handleClose={handleAlgorithmModalClose} getIDs={getIDs} data-testid='algorithm-modal'/>
       <Stack spacing={2} direction="row" justifyContent="center">
         <div>
           {courses.length === 0 ? (
@@ -111,14 +113,12 @@ export const Home = () => {
                 <Card key={course.id} sx={{ mb: '1rem' }}>
                   <CardHeader
                     action={
-                      <IconButton onClick={openMenu} data-courseid={course.id}>
-                        <Settings />
+                      <IconButton onClick={openMenu} data-courseid={course.id} data-testid='settings-button'>
+                        <MoreVert />
                       </IconButton>
                     }
                     title={course.name}/>
                   <CardContent>
-                    {/*<Typography variant="h5">{course.name}</Typography>
-                    <IconButton sx={{position:'absolute', top:'11rem', left:'55rem'}}><Settings/></IconButton>*/}
                     <Stack direction="row" justifyContent="center">
                       <Button
                         id="course-button"
@@ -129,6 +129,13 @@ export const Home = () => {
                         }}>
                         {t('pages.course.courseButton')}
                       </Button>
+                    </Stack>
+                    <Stack 
+                     direction='row' 
+                     alignItems={'center'} 
+                     justifyContent={'center'} 
+                     sx={{mt:'0.5rem'}}>
+                        <Typography variant='body1'>{t('pages.course.cardText')}{t('pages.course.fixed')}</Typography>
                     </Stack>
                   </CardContent>
                 </Card>
@@ -141,8 +148,9 @@ export const Home = () => {
             open={Boolean(menuAnchorEl)}
             onClose={handleCloseMenu}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}>
-              <MenuItem onClick={handleAlgorithmMenuOpen}>Select Algorithm</MenuItem>
+            transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+            data-testid='settings-menu'>
+              <MenuItem onClick={handleAlgorithmMenuOpen} data-testid='menu-item-algorithm'>{t('pages.home.menuItemAlgorithms')}</MenuItem>
           </Menu>
         </div>
       </Stack>
