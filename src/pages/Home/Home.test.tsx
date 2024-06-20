@@ -153,23 +153,22 @@ describe('Test the Home page', () => {
   })
 
   test('modal can be opened and closed', async () => {
-    await act ( async () => {const { getAllByTestId, getByTestId, queryByTestId } = render(
-      <MemoryRouter>
+      const { getAllByTestId, getByTestId, queryByTestId } = render(
+        <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Home />
         </AuthContext.Provider>
       </MemoryRouter>
     )
-
-      await waitFor(async () => {
-        fireEvent.click(getAllByTestId('settings-button')[0])
-        expect(getByTestId('settings-menu')).toBeInTheDocument()
-       })
-       expect(getByTestId('menu-item-algorithm')).toBeInTheDocument()
-       fireEvent.click(getByTestId('menu-item-algorithm'))
-       expect(getByTestId('algorithm-modal')).toBeInTheDocument
-       fireEvent.click(getByTestId('algorithm-modal-close-button'))
-       expect(queryByTestId('algorithm-modal')).toBeNull()
-    })
+    
+    await waitFor(() => act(() => {
+      fireEvent.click(getAllByTestId('settings-button')[0])
+      expect(getByTestId('settings-menu')).toBeInTheDocument()
+    }))
+    expect(getByTestId('menu-item-algorithm')).toBeInTheDocument()
+    fireEvent.click(getByTestId('menu-item-algorithm'))
+    expect(getByTestId('algorithm-modal')).toBeInTheDocument
+    fireEvent.click(getByTestId('algorithm-modal-close-button'))
+    expect(queryByTestId('algorithm-modal')).toBeNull()
   })
 })
