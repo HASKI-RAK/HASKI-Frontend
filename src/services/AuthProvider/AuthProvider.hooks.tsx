@@ -2,10 +2,14 @@ import log from 'loglevel'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { AuthContextType, fetchLogout } from '@services'
 import { usePersistedStore } from '@store'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 const useAuthProvider = (): AuthContextType => {
   const navigate = useNavigate()
+  const location = useLocation()
+
+  // Define paths to exclude from the authentication check
+  const excludedPaths = ['/aboutus', '/projectdescription', '/glossary', '/imprint']
 
   // State data
   const expiration = usePersistedStore((state) => state.expire)
@@ -13,7 +17,7 @@ const useAuthProvider = (): AuthContextType => {
   const [isAuthState, setIsAuthState] = useState(false)
 
   // Check UNIX timestamp against current time in seconds and return true if the token is still valid
-  const isAuth = useMemo(() => {
+  const checkAuth = useCallback(() => {
     const now = Math.floor(Date.now() / 1000)
     if (expiration < now) {
       log.warn('isAuth. Expired: ', expiration, now)
@@ -22,6 +26,8 @@ const useAuthProvider = (): AuthContextType => {
     log.debug('isAuth. Not expired: ', expiration, now)
     return true
   }, [expiration])
+
+  const isAuth = useMemo(checkAuth, [checkAuth])
 
   useEffect(() => {
     setIsAuthState(isAuth)
@@ -34,11 +40,12 @@ const useAuthProvider = (): AuthContextType => {
     }
   }, [])
 
+  // Check authentication state on URL path change
   useEffect(() => {
-    if (!isAuthState) {
+    if (!excludedPaths.includes(location.pathname) && !checkAuth()) {
       navigate('/login')
     }
-  }, [isAuthState, navigate])
+  }, [location.pathname, checkAuth, navigate, excludedPaths])
 
   // Called by components which are part of login. Sets the auth state to true.
   const setExpire = useCallback(
