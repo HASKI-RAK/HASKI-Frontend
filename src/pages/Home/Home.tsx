@@ -28,12 +28,8 @@ export const Home = () => {
   const getCourses = useStore((state) => state.getCourses)
 
   useEffect(() => {
-    // const preventEndlessLoading = setTimeout(() => {
-    //   navigate('/login')
-    // }, 1000)
     const loadData = async () => {
       if (authcontext.isAuth) {
-        // clearTimeout(preventEndlessLoading)
         getUser()
           .then((user) => {
             getCourses(user.settings.user_id, user.lms_user_id, user.id)
@@ -63,9 +59,6 @@ export const Home = () => {
       }
     }
     loadData()
-    return () => {
-      // clearTimeout(preventEndlessLoading)
-    }
   }, [loading])
 
   // Card cointaining the courses with a button to the specific course

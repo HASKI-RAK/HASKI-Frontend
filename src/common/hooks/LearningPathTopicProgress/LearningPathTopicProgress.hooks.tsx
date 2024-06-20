@@ -108,14 +108,7 @@ export const useLearningPathTopicProgress = (
   useEffect(() => {
     setIsLoading(true)
 
-    const preventEndlessLoading = setTimeout(() => {
-      log.log(t('log.learningPathTopicProgressTimeout'))
-      navigate('/login')
-    }, 1000)
-
     if (isAuth) {
-      clearTimeout(preventEndlessLoading)
-
       getUser()
         .then((user) =>
           getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
@@ -144,10 +137,6 @@ export const useLearningPathTopicProgress = (
           })
           log.error(t('error.fetchUser') + ' ' + error)
         })
-    }
-
-    return () => {
-      clearTimeout(preventEndlessLoading)
     }
   }, [isAuth, navigate, clearTimeout, getLearningPathTopic, getAllTopicProgress])
 

@@ -81,12 +81,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // then get every learning element for topic by request to backend
   // Map to nodes and edges and set them as initial nodes and edges
   useEffect(() => {
-    const preventEndlessLoading = setTimeout(() => {
-      navigate('/login')
-    }, 1000)
-
     if (isAuth && courseId && topicId) {
-      clearTimeout(preventEndlessLoading)
       getUser()
         .then((user) => {
           getLearningPathElementStatus(courseId, user.lms_user_id)
@@ -110,9 +105,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           })
           log.error(t('error.getLearningElementStatus') + ' ' + error)
         })
-    }
-    return () => {
-      clearTimeout(preventEndlessLoading)
     }
   }, [
     isAuth,
