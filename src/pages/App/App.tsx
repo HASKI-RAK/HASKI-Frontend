@@ -46,8 +46,8 @@ export const App = () => {
         <ThemeProvider theme={HaskiTheme}>
           <ReactFlowProvider>
             <SnackbarProvider>
-              <AuthProvider>
-                <Router>
+              <Router>
+                <AuthProvider>
                   <Routes>
                     <Route element={<MainFrame />}>
                       <Route index element={<Home />} />
@@ -67,8 +67,8 @@ export const App = () => {
                     </Route>
                     <Route path="*" element={<PageNotFound />} />
                   </Routes>
-                </Router>
-              </AuthProvider>
+                </AuthProvider>
+              </Router>
             </SnackbarProvider>
           </ReactFlowProvider>
         </ThemeProvider>

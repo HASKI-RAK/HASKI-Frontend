@@ -28,12 +28,12 @@ export const Home = () => {
   const getCourses = useStore((state) => state.getCourses)
 
   useEffect(() => {
-    const preventEndlessLoading = setTimeout(() => {
-      navigate('/login')
-    }, 1000)
+    // const preventEndlessLoading = setTimeout(() => {
+    //   navigate('/login')
+    // }, 1000)
     const loadData = async () => {
       if (authcontext.isAuth) {
-        clearTimeout(preventEndlessLoading)
+        // clearTimeout(preventEndlessLoading)
         getUser()
           .then((user) => {
             getCourses(user.settings.user_id, user.lms_user_id, user.id)
@@ -64,7 +64,7 @@ export const Home = () => {
     }
     loadData()
     return () => {
-      clearTimeout(preventEndlessLoading)
+      // clearTimeout(preventEndlessLoading)
     }
   }, [loading])
 
@@ -78,15 +78,32 @@ export const Home = () => {
           {courses.length === 0 ? (
             <Card>
               <CardContent>
-                <Typography variant="h5" align="center">{t('pages.home.noCourses')}</Typography>
+                <Typography variant="h5" align="center">
+                  {t('pages.home.noCourses')}
+                </Typography>
               </CardContent>
             </Card>
           ) : (
             courses.map((course) => {
               return (
-                <Card key={course.id} sx={{ mb: '1rem', width: { xs: '20rem', sm: '20rem', md: '20rem', lg: '30rem', xl: '40rem', xxl: '45rem', xxxl: '50rem' }, }}>
+                <Card
+                  key={course.id}
+                  sx={{
+                    mb: '1rem',
+                    width: {
+                      xs: '20rem',
+                      sm: '20rem',
+                      md: '20rem',
+                      lg: '30rem',
+                      xl: '40rem',
+                      xxl: '45rem',
+                      xxxl: '50rem'
+                    }
+                  }}>
                   <CardContent>
-                    <Typography variant="h5" align="center">{course.name}</Typography>
+                    <Typography variant="h5" align="center">
+                      {course.name}
+                    </Typography>
                     <Stack direction="row" justifyContent="center">
                       <Button
                         id="course-button"
