@@ -45,7 +45,7 @@ const useAuthProvider = (): AuthContextType => {
     if (!excludedPaths.includes(location.pathname) && !checkAuth()) {
       navigate('/login')
     }
-  }, [location.pathname, checkAuth, navigate, excludedPaths])
+  }, [location.pathname])
 
   // Called by components which are part of login. Sets the auth state to true.
   const setExpire = useCallback(
