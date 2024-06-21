@@ -23,6 +23,7 @@
  */
 import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
 import Course, { CourseResponse } from './Course/Course'
+import RemoteCourse from './RemoteCourse/RemoteCourse'
 import LearningElement from './LearningElement/LearningElement'
 import LearningPathElement from './LearningPathElement/LearningPathElement'
 import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
@@ -50,7 +51,8 @@ export type {
   StudentLearningElement,
   ILS,
   ListK,
-  LearningPathBasedOn
+  LearningPathBasedOn,
+  RemoteCourse
 }
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
 export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'

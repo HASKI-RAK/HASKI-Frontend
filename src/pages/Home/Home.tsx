@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, Skeleton, Stack, Typography } from '@common/components'
+import { CourseModal } from '@components'
 import { Course } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -23,10 +24,15 @@ export const Home = () => {
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
   const [courses, setCourses] = useState<Course[]>([])
+  const [modalOpen, setModalOpen] = useState(false)
 
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
+
+  const handleCloseCourseModal = () => {
+    setModalOpen(false)
+  }
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
@@ -111,11 +117,13 @@ export const Home = () => {
                   id="course-button"
                   variant="contained"
                   color="primary"
+                  onClick={ ()=> setModalOpen(true)}
                   sx={commonButtonStyle}>
                   <AddCircleIcon/>
                 </Button>
                 </Stack>
               </CardContent>
+              <CourseModal open={modalOpen} handleClose={handleCloseCourseModal}></CourseModal>
             </Card>
         </div>
       </Stack>
