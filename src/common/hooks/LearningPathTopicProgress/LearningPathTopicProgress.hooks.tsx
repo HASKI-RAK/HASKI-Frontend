@@ -88,7 +88,7 @@ export const useLearningPathTopicProgress = (
                   autoHideDuration: 3000
                 })
                 log.error(t('error.fetchLearningPathElement') + ' ' + error)
-                return [] as number[]
+                return []
               })
           )
           .catch((error: string) => {
@@ -98,7 +98,7 @@ export const useLearningPathTopicProgress = (
               autoHideDuration: 3000
             })
             log.error(t('error.fetchLearningPathElementStatus') + ' ' + error)
-            return [] as number[]
+            return []
           })
       })
     },

@@ -17,7 +17,7 @@ export const Home = () => {
   log.setLevel('error')
   // UX
   const { t } = useTranslation()
-  const authcontext = useContext(AuthContext)
+  const { isAuth } = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
@@ -28,8 +28,7 @@ export const Home = () => {
   const getCourses = useStore((state) => state.getCourses)
 
   useEffect(() => {
-    const loadData = async () => {
-      if (authcontext.isAuth) {
+      if (isAuth) {
         getUser()
           .then((user) => {
             getCourses(user.settings.user_id, user.lms_user_id, user.id)
@@ -53,13 +52,9 @@ export const Home = () => {
             })
             log.error(t('error.getUser') + ' ' + error)
           })
-          .finally(() => {
-            setLoading(false)
-          })
+        setLoading(false)
       }
-    }
-    loadData()
-  }, [loading])
+  }, [getUser, getCourses, setCourses, isAuth])
 
   // Card cointaining the courses with a button to the specific course
   return loading ? (
