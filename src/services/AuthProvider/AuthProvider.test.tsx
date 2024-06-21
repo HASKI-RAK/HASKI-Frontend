@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom'
 import { act, render, renderHook } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
+import { MemoryRouter } from 'react-router-dom'
 import { AuthProvider } from '@services'
 import { useAuthProvider } from './AuthProvider.hooks'
-import { MemoryRouter } from 'react-router-dom'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
