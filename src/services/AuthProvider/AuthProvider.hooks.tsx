@@ -33,13 +33,6 @@ const useAuthProvider = (): AuthContextType => {
     setIsAuthState(isAuth)
   }, [isAuth])
 
-  useEffect(() => {
-    log.debug('AuthProvider mounted')
-    return () => {
-      log.debug('AuthProvider unmounted')
-    }
-  }, [])
-
   // Check authentication state on URL path change
   useEffect(() => {
     if (!excludedPaths.includes(location.pathname) && !checkAuth()) {
