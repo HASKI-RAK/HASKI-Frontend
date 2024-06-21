@@ -1,8 +1,8 @@
 import log from 'loglevel'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { AuthContextType, fetchLogout } from '@services'
 import { usePersistedStore } from '@store'
-import { useNavigate, useLocation } from 'react-router-dom'
 
 const useAuthProvider = (): AuthContextType => {
   const navigate = useNavigate()

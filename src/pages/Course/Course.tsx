@@ -26,8 +26,8 @@ const Course = () => {
         // Display skeleton list while loading
         <Box sx={{ flewGrow: 1 }}>
           <Grid container direction="column" justifyContent="center" alignItems="center">
-            <Grid item xs sx={{width: '70%'}}>
-                <SkeletonList />
+            <Grid item xs sx={{ width: '70%' }}>
+              <SkeletonList />
             </Grid>
           </Grid>
         </Box>
