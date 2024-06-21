@@ -1,4 +1,4 @@
-import { Checkbox, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@common/components'
+import { Checkbox, Paper, Table, TableBody, TableContainer, TableHead, TableRow, Grid } from '@common/components'
 import {
   StyledTableCell,
   StyledTableCellWithoutBorder,
@@ -8,7 +8,9 @@ import { memo, useEffect, useState } from 'react'
 import { RemoteCourse } from '@core'
 import { fetchRemoteCourses } from '../../../services/RemoteCourses'
 import { SkeletonList } from '@components'
-import { Radio } from '@mui/material'
+import { ToggleButton, ToggleButtonGroup } from '@mui/material'
+import FormatAlignLeftIcon from '@mui/icons-material/ViewList'
+
 
 type TableCourseProps = {
   open?: boolean
@@ -23,6 +25,7 @@ const formatUnixDate = (unixTime: number): string => {
 const TableCourse = memo(({open=false}:TableCourseProps) => {
 
   const [LmsCourses,setLmsCourses] = useState<RemoteCourse[]>([])
+    const [view, setView] = useState('list')
 
   useEffect(() => {
     fetchRemoteCourses().then((response) => {
@@ -30,55 +33,35 @@ const TableCourse = memo(({open=false}:TableCourseProps) => {
     })
   }, [open])
 
-    const [selectedValue, setSelectedValue] = useState('a');
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSelectedValue(event.target.value);
-    };
+  const handleChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
+    setView(nextView);
+  }
 
-    const controlProps = (item: string) => ({
-      checked: selectedValue === item,
-      onChange: handleChange,
-      value: item,
-      name: 'color-radio-button-demo',
-      inputProps: { 'aria-label': item },
-    });
-
-  return (
-    <TableContainer component={Paper} style={{ minWidth: 300 }}>
-      <Table style={{ minWidth: 300 }} key={'TableCourse'}>
-        <TableHead key={'TableCourseHead'}>
-          <StyledTableCell align="left">{'Select'}</StyledTableCell>
-          <StyledTableCell align="left">{'ID'}</StyledTableCell>
-          <StyledTableCell align="left">{'Fullname'}</StyledTableCell>
-          <StyledTableCell align="left">{'Shortname'}</StyledTableCell>
-          <StyledTableCell align="left">{'Startdate'}</StyledTableCell>
-          <StyledTableCell align="left">{'Enddate'}</StyledTableCell>
-          <StyledTableCell align="left">{'Timecreated'}</StyledTableCell>
-          <StyledTableCell align="left">{'Timemodified'}</StyledTableCell>
-        </TableHead>
-          <TableBody key={'TableCourseBody'}>
+  return (<Grid container direction="column" justifyContent="center" alignItems="center">
           {LmsCourses.length === 0 ? (
             <TableRow key={'TableCourseTableRow'}>
               <SkeletonList/>
             </TableRow>
           ): (
-            LmsCourses.map((LmsCourse) => (
-                <TableRow key={'TableCourseTableRow'}>
-                  <StyledTableCell align="left"><Radio {...controlProps(LmsCourse.id.toString())} /></StyledTableCell>
-                  <StyledTableCell align="center">{LmsCourse.id}</StyledTableCell>
-                  <StyledTableCell align="left">{LmsCourse.fullname}</StyledTableCell>
-                  <StyledTableCell align="left">{LmsCourse.shortname}</StyledTableCell>
-                  <StyledTableCell align="center">{formatUnixDate(LmsCourse.startdate)}</StyledTableCell>
-                  <StyledTableCell align="center">{formatUnixDate(LmsCourse.enddate)}</StyledTableCell>
-                  <StyledTableCell align="center">{formatUnixDate(LmsCourse.timecreated)}</StyledTableCell>
-                  <StyledTableCell align="center">{formatUnixDate(LmsCourse.timemodified)}</StyledTableCell>
-                </TableRow>
-              ))
+            <ToggleButtonGroup
+              orientation="vertical"
+              value={view}
+              exclusive
+              onChange={handleChange}
+            >
+              {LmsCourses.map((LmsCourse) => (
+                    <ToggleButton value={LmsCourse.fullname} aria-label={LmsCourse.fullname} key={LmsCourse.id}>
+                      <Grid direction="column" justifyContent="center" alignItems="center">
+                        <Grid direction="row" justifyContent="flex-start" alignItems="center">
+                          {LmsCourse.fullname}
+                        </Grid>
+                      </Grid>
+                    </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
             )}
-          </TableBody>
-      </Table>
-    </TableContainer>
+    </Grid>
   )
 }
 )

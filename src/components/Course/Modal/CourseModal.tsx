@@ -27,12 +27,12 @@ const CourseModal = memo(({open = false, handleClose}: CourseModalProps) => {
 
   return (
     <Modal open={open} onClose={handleClose}>
-      <Grid>
+      <Grid container justifyContent="center" alignItems="center">
       <Box
         sx={{
           position: 'absolute',
-          left: '8%',
-          right: '8%',
+          left: '20%',
+          right: '20%',
           top: '10%',
           overflow: 'auto',
           maxHeight: '83%',
@@ -52,16 +52,18 @@ const CourseModal = memo(({open = false, handleClose}: CourseModalProps) => {
           }}>
           <Close />
         </Fab>
-        <Typography>
+        <Typography variant={'h3'} align={"center"} sx={{ mb: 1 }}>
           {'Kurse aus dem LMS'}
         </Typography>
         <TableCourse />
-        <Button
-          id="add-course-button"
-          variant="contained"
-          color="primary">
-          {'Create Course'}
-        </Button>
+        <Grid container justifyContent="center" alignItems="center" sx={{ mt: 2 }}>
+          <Button
+            id="add-course-button"
+            variant="contained"
+            color="primary">
+            {'Create Course'}
+          </Button>
+        </Grid>
       </Box>
       </Grid>
     </Modal>
