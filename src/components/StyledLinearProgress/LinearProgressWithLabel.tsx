@@ -10,7 +10,7 @@ import { LinearProgress, LinearProgressProps, Tooltip, Typography } from '@commo
 export type LinearProgressWithLabelProps = LinearProgressProps & {
   value: number
   text: string
-  textposition: { xs: string; sm: string; md: string; lg: string; xl: string, xxl: string, xxxl: string }
+  textposition: { xs: string; sm: string; md: string; lg: string; xl: string; xxl: string; xxxl: string }
 }
 
 /**

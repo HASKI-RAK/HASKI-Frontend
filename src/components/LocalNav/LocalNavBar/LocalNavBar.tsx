@@ -59,7 +59,7 @@ const LocalNavBar = () => {
         <Divider />
         {isLoading ? (
           <Grid container>
-            <Grid item sx={{ width: '24rem'}}>
+            <Grid item sx={{ width: '24rem' }}>
               <SkeletonList />
             </Grid>
           </Grid>
