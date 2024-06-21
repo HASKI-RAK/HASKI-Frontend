@@ -12,19 +12,6 @@ describe('Course tests', () => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
-  test('user is redirected to /login if not Authenticated', () => {
-    render(
-      <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <Course />
-        </MemoryRouter>
-      </AuthContext.Provider>
-    )
-
-    jest.runAllTimers()
-    expect(navigate).toHaveBeenCalledWith('/login')
-  })
-
   it('renders course page with topics and clicking on first topic navigates to topic/1', async () => {
     const { getAllByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>

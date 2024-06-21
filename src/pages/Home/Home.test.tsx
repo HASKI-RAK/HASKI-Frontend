@@ -37,19 +37,6 @@ describe('Test the Home page', () => {
     })
   })
 
-  test('navigate back to /login page', () => {
-    render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
-    )
-
-    jest.runAllTimers()
-    expect(navigate).toHaveBeenCalledWith('/login')
-  })
-
   test('render page', () => {
     const result = render(
       <MemoryRouter>

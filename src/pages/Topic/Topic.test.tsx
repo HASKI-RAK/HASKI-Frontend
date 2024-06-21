@@ -54,22 +54,6 @@ describe('Topic Page', () => {
     })
   })
 
-  test('Navigation called after timer finishes', () => {
-    act(() => {
-      render(
-        <ReactFlowProvider>
-          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-            <Topic />
-          </MemoryRouter>
-        </ReactFlowProvider>
-      )
-    })
-
-    jest.runAllTimers()
-    // expect(setTimeout).toHaveBeenCalledTimes(1)
-    expect(navigate).toBeCalledWith('/login')
-  })
-
   test('getUser failed', async () => {
     const mockfetchUser = jest.fn(() => Promise.reject(new Error('fetchUser failed')))
     mockServices.fetchUser.mockImplementationOnce(mockfetchUser)

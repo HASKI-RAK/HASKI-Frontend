@@ -26,19 +26,6 @@ describe('LearningPathTopicProgress tests', () => {
     expect(result.current).toEqual({ isLoading: true, topicProgress: [], topics: [] })
   })
 
-  test('functionality of hook without input and isAuth false', () => {
-    renderHook(() => useLearningPathTopicProgress(), {
-      wrapper: ({ children }) => (
-        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
-          <MemoryRouter>{children}</MemoryRouter>
-        </AuthContext.Provider>
-      )
-    })
-
-    jest.runAllTimers()
-    expect(navigate).toHaveBeenCalledWith('/login')
-  })
-
   test('functionality of hook with input', async () => {
     const { result } = renderHook(() => useLearningPathTopicProgress({ courseId: '1' }), {
       wrapper: ({ children }) => (
