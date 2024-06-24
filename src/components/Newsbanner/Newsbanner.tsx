@@ -72,6 +72,7 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
                   aria-label="close"
                   color="inherit"
                   size="small"
+                  data-testid="IconButton"
                   onClick={() => {
                     setClose(true)
                     sessionStorage.setItem('newsCloseState', true ? "true" : "false")
