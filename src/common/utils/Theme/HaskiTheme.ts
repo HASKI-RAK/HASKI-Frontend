@@ -66,7 +66,7 @@ export const HaskiTheme = createTheme({
     info: {
       main: grey[700],
       dark: grey[500],
-      light: grey[300]
+      light: grey[200]
     }
 
     /*action: {
@@ -80,6 +80,17 @@ export const HaskiTheme = createTheme({
       selectedOpacity: 1,
       
     },*/
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+      xxl: 2000,
+      xxxl: 2500
+    }
   },
 
   typography: {
@@ -231,6 +242,24 @@ export const HaskiTheme = createTheme({
             '&:hover': {
               textDecoration: 'fill #FF8E00'
             }
+          }
+        }
+      }
+    },
+    /** style a drawer component */
+    MuiDrawer: {
+      styleOverrides: {
+        root: {
+          backgroundColor: defaultColors.white,
+          boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey',
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            borderRadius: '1rem',
+            border: defaultBehavior.border.default + defaultColors.lightgrey,
+            /** color means the color of the Text */
+            color: defaultColors.black,
+            backgroundColor: defaultColors.white,
+            boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey'
           }
         }
       }

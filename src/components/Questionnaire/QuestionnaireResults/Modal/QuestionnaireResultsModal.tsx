@@ -119,7 +119,7 @@ const QuestionnaireResultsModal = memo(
                 setListKData(data)
               })
               .catch((error) => {
-                log.error(error)
+                log.error(t('error.fetchListK') + ' ' + error)
                 if (error.message !== 'Failed to fetch') {
                   setListKLoading(false)
                 } else {
@@ -131,11 +131,11 @@ const QuestionnaireResultsModal = memo(
               })
           })
           .catch((error) => {
-            log.error(error)
             addSnackbar({
               message: t('error.getUser'),
               severity: 'error'
             })
+            log.error(t('error.getUser') + ' ' + error)
           })
       }
     }, [activeStep, open])
@@ -150,7 +150,7 @@ const QuestionnaireResultsModal = memo(
                 setILSData(data)
               })
               .catch((error) => {
-                log.error(error)
+                log.error(t('error.fetchILS') + ' ' + error)
                 if (error.message !== 'Failed to fetch') {
                   setILSLoading(false)
                 } else {
@@ -162,7 +162,7 @@ const QuestionnaireResultsModal = memo(
               })
           })
           .catch((error) => {
-            log.error(error)
+            log.error(t('error.getUser') + ' ' + error)
             addSnackbar({
               message: t('error.getUser'),
               severity: 'error'

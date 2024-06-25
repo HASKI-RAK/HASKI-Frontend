@@ -15,14 +15,6 @@ declare module 'i18next' {
   }
 }
 
-// Custom type options for i18next prevents return type of null
-// https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
-declare module 'i18next' {
-  interface CustomTypeOptions {
-    returnNull: false
-  }
-}
-
 //define the available languages
 const resources = {
   en: {
@@ -63,12 +55,14 @@ i18next
   .catch((error) => {
     /* istanbul ignore next */
     const { addSnackbar } = React.useContext(SnackbarContext)
-    /* istanbul ignore next */
+    /* istanbul ignore next, can not be translation string as i18next is responsible for that*/
     addSnackbar({
-      message: 'Error while initializing i18next: ' + error,
+      message: 'Error while initializing i18next.',
       severity: 'error',
       autoHideDuration: 3000
     })
+    /* istanbul ignore next, can not be translation string as i18next is responsible for that*/
+    log.error('Error while initializing i18next.' + 'Error: ' + error)
   })
 
 export default i18next

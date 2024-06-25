@@ -1,4 +1,6 @@
+import log from 'loglevel'
 import { useContext, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext, SnackbarContext, fetchRedirectMoodleLogin, postLogin } from '@services'
 
@@ -26,6 +28,7 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
   const { addSnackbar } = useContext(SnackbarContext)
+  const { t } = useTranslation()
   const popup = useRef<Window | null>(null)
 
   const onMoodleLogin = () => {
@@ -54,7 +57,12 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
         }
       })
       .catch((error) => {
-        addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
+        addSnackbar({
+          message: t('error.fetchRedirectMoodleLogin'),
+          severity: 'error',
+          autoHideDuration: 5000
+        })
+        log.error(t('error.fetchRedirectMoodleLogin') + 'Error: ' + error)
       })
       .finally(() => {
         props.setIsLoading(false)
@@ -76,7 +84,12 @@ export const useLogin = (props: LoginHookParams): LoginHookReturn => {
         }
       })
       .catch((error: string) => {
-        addSnackbar({ message: error, severity: 'error', autoHideDuration: 5000 })
+        addSnackbar({
+          message: t('error.postLogin'),
+          severity: 'error',
+          autoHideDuration: 5000
+        })
+        log.error(t('error.postLogin') + ' ' + error)
         navigate('/login', { replace: true })
       })
   }, [])

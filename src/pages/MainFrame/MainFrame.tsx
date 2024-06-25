@@ -1,6 +1,7 @@
 import { Outlet, useParams } from 'react-router-dom'
-import { Box, Divider, Grid, Stack } from '@common/components'
-import { BreadcrumbsContainer, Footer, LocalNav, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
+import { Box, Divider, Grid } from '@common/components'
+import { useMediaQuery, useTheme } from '@common/hooks'
+import { BreadcrumbsContainer, Footer, LocalNavBar, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
 
 /**
  * # MainFrame Page
@@ -16,51 +17,32 @@ import { BreadcrumbsContainer, Footer, LocalNav, MenuBar, OpenQuestionnaire, Pri
  *
  * @category Pages
  */
+
 export const MainFrame = () => {
   const { courseId } = useParams()
-  const isCourseLoaded = !!courseId
+  const theme = useTheme()
+  const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && !!courseId
 
   return (
     <>
-      <Stack direction="column" sx={{ minHeight: 'inherit' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <MenuBar />
         <BreadcrumbsContainer />
-        <Grid flex={1} container sx={{ flexDirection: 'column', justifyContent: 'space-between' }}>
-          <Grid container item flexGrow={1} sx={{ alignItems: 'stretch' }}>
-            <Grid item xs={isCourseLoaded ? 2 : 0}>
-              {' '}
-              {/* Set the xs value to 0 if LocalNav is not rendered.
-                             xs is how much screen i want to reserve for this component */}
-              {isCourseLoaded && ( // Render the LocalNav if courseId exists
-                <Box
-                  height={'100%'}
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'stretch'
-                  }}>
-                  <LocalNav />
-                  <Divider flexItem orientation="vertical" />
-                </Box>
-              )}
-            </Grid>
-            <Grid item xs={isCourseLoaded ? 10 : 12}>
-              {' '}
-              {/* Adjust the xs (Grid) value based on LocalNav */}
-              {/**💉 Pages get injected here through App routing */}
-              {/* <Container maxWidth="lg" sx={{ height: '100%' }}> */}
-              <Outlet />
-              {/* </Container> */}
-            </Grid>
-            {/** TODO 📑 add real gameification */}
-            {/* <Grid item xs={2}>
-                         <Typography variant="h4">Gamification</Typography>
-                         </Grid> */}
+        <Grid container sx={{ flex: 1, overflow: 'hidden' }}>
+          {isLocalNavOpen && (
+            <>
+              <Grid item container sx={{ width: '26.5rem' }}>
+                <LocalNavBar />
+              </Grid>
+              <Divider flexItem orientation="vertical" />
+            </>
+          )}
+          <Grid item sx={{ flex: 1, overflow: 'auto' }}>
+            <Outlet />
           </Grid>
-          <Divider flexItem />
-          <Footer />
         </Grid>
-      </Stack>
+        <Footer />
+      </Box>
       <PrivacyModal />
       <OpenQuestionnaire />
     </>

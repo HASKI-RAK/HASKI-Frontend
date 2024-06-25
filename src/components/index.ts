@@ -13,8 +13,8 @@ export { default as LoginForm, type LoginFormProps } from './LoginForm/LoginForm
 export { default as MenuBar } from './MenuBar/MenuBar'
 export { default as ContactForm, type ContactFormProps } from './ContactForm/ContactForm'
 export { default as Footer } from './Footer/Footer'
-export { default as LocalNav } from './LocalNav/LocalNav'
-export * from './LocalNav/LocalNav.hooks'
+export { default as LocalNavBar } from './LocalNav/LocalNavBar/LocalNavBar'
+export { default as LocalNavItem } from './LocalNav/LocalNavItem/LocalNavItem'
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
 export { default as TextCardLeft } from './TextCard/TextCardLeft/TextCardLeft'
 export { default as TextCardRight } from './TextCard/TextCardRight/TextCardRight'
@@ -40,6 +40,7 @@ export { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
 export { default as Typewriter } from './Typewriter/Typewriter'
 export { default as ImageCollection } from './ImageCollection/ImageCollection'
 export { default as CollapsibleList } from './CollapsibleList/CollapsibleList/CollapsibleList'
+export { default as Fraction } from './Fraction/Fraction'
 export {
   default as CollapsibleListEntry,
   type CollapsibleListEntryContentProps

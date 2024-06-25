@@ -43,7 +43,7 @@ export const StyledLinearProgress = ({ learningElementProgressTopics }: BorderLi
   const colorByPercent = useCallback(() => {
     if (percent === 0) return 'error'
     else if (percent < 0) return 'info'
-    return percent < 70 ? 'warning' : 'success'
+    return percent < 50 ? 'warning' : 'success'
   }, [percent])
 
   const getText = useCallback(() => {
@@ -56,9 +56,9 @@ export const StyledLinearProgress = ({ learningElementProgressTopics }: BorderLi
 
   const getTextPosition = useCallback(() => {
     if (learningElementProgressTopics === undefined)
-      return { xs: '20rem', sm: '5rem', md: '15rem', lg: '25rem', xl: '45rem' }
+      return { xs: '20rem', sm: '5rem', md: '15rem', lg: '25rem', xl: '45rem', xxl: '45rem', xxxl: '45rem' }
 
-    return { xs: '20rem', sm: '9rem', md: '20rem', lg: '30rem', xl: '46rem' }
+    return { xs: '20rem', sm: '9rem', md: '20rem', lg: '30rem', xl: '46rem', xxl: '46rem', xxxl: '46rem' }
   }, [learningElementProgressTopics])
 
   return (

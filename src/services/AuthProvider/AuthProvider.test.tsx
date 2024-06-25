@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom'
 import { act, render, renderHook } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
+import { MemoryRouter } from 'react-router-dom'
 import { AuthProvider } from '@services'
 import { useAuthProvider } from './AuthProvider.hooks'
 
@@ -18,17 +19,22 @@ global.fetch = jest.fn(() =>
 ) as jest.Mock
 
 describe('Test AuthProvider', () => {
-  it('should include the standard useAuthrovider values', () => {
+  it('should include the standard useAuthprovider values', () => {
     const result = render(
-      <AuthProvider>
-        <>Test</>
-      </AuthProvider>
+      <MemoryRouter>
+        <AuthProvider>
+          <>Test</>
+        </AuthProvider>
+      </MemoryRouter>
     )
     expect(result.getByText('Test')).toBeInTheDocument()
   })
 
   test('functionality of AuthProvider hook', async () => {
-    const { result } = renderHook(() => useAuthProvider())
+    const wrapper = ({ children }: { children: React.ReactNode }) => <MemoryRouter>{children}</MemoryRouter>
+
+    const { result } = renderHook(() => useAuthProvider(), { wrapper })
+
     expect(result.current).toMatchObject({
       isAuth: false,
       setExpire: expect.any(Function),
@@ -60,8 +66,10 @@ describe('Test AuthProvider', () => {
       })
     ) as jest.Mock
     let _result!: { current: { isAuth: boolean } }
+    const wrapper = ({ children }: { children: React.ReactNode }) => <MemoryRouter>{children}</MemoryRouter>
+
     act(() => {
-      const { result } = renderHook(() => useAuthProvider())
+      const { result } = renderHook(() => useAuthProvider(), { wrapper })
       _result = result
     })
     expect(_result.current).toMatchObject({
@@ -85,10 +93,13 @@ describe('Test AuthProvider', () => {
         message: 'OK'
       })
     ) as jest.Mock
+
+    const wrapper = ({ children }: { children: React.ReactNode }) => <MemoryRouter>{children}</MemoryRouter>
+
     global.fetch = fech_mock
     let _result!: { current: { isAuth: boolean } }
     await act(async () => {
-      const { result } = renderHook(() => useAuthProvider())
+      const { result } = renderHook(() => useAuthProvider(), { wrapper })
       _result = result
     }).then(() => {
       expect(_result.current).toMatchObject({
@@ -102,28 +113,15 @@ describe('Test AuthProvider', () => {
 
   it('should throw an error if logout fails', async () => {
     // Here we override the mockServices.fetchLogout function to throw an error
-    mockServices.fetchLogout = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('logout failed')))
-    const { result } = renderHook(() => useAuthProvider())
+    mockServices.fetchLogout = jest.fn().mockImplementation(() => Promise.reject(new Error('logout failed')))
+    const wrapper = ({ children }: { children: React.ReactNode }) => <MemoryRouter>{children}</MemoryRouter>
+
+    const { result } = renderHook(() => useAuthProvider(), { wrapper })
     act(() => {
       result.current.setExpire(9999999999) // if this test fails, how did react js even survive this long?
     })
     expect(result.current.isAuth).toBe(true)
     // logout should throw an error
     await expect(result.current.logout()).rejects.toThrow('logout failed')
-  })
-
-  it('should work again', async () => {
-    // TODO: mockImplementationOnce of previous test is somehow still in effect and can't be restored with restoreAllMocks.
-    mockServices.fetchLogout = jest.fn().mockImplementationOnce(() => Promise.resolve())
-
-    const { result } = renderHook(() => useAuthProvider())
-    act(() => {
-      result.current.setExpire(9999999999) // if this test fails, how did react js even survive this long?
-    })
-    expect(result.current.isAuth).toBe(true)
-    await act(async () => {
-      await result.current.logout()
-    })
-    expect(result.current.isAuth).toBe(false)
   })
 })

@@ -1,3 +1,4 @@
+import log from 'loglevel'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
@@ -156,6 +157,7 @@ const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmpt
           severity: 'success',
           autoHideDuration: 5000
         })
+        log.info(t('appGlobal.dataSendSuccessful'))
         setSuccessSend(true)
       } else {
         addSnackbar({
@@ -163,6 +165,7 @@ const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmpt
           severity: 'error',
           autoHideDuration: 5000
         })
+        log.error(t('appGlobal.dataSendUnsuccessful'))
         setSuccessSend(false)
       }
     })

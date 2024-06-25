@@ -22,7 +22,10 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
   return (
     <Card
       key={topic?.id}
-      sx={{ width: { xs: '10rem', sm: '20rem', md: '40rem', lg: '50rem', xl: '70rem' }, mt: '1rem' }}>
+      sx={{
+        width: { xs: '10rem', sm: '20rem', md: '40rem', lg: '50rem', xl: '70rem', xxl: '85rem', xxxl: '110rem' },
+        mt: '1rem'
+      }}>
       <CardContent>
         <Grid container direction="column" justifyContent="center" alignItems="center">
           <Grid item md={1}>
@@ -31,7 +34,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
               <CheckBox
                 sx={{
                   mt: '-0.8rem',
-                  ml: { xs: '7rem', sm: '17rem', md: '37rem', lg: '47rem', xl: '67rem' },
+                  ml: { xs: '7rem', sm: '17rem', md: '37rem', lg: '47rem', xl: '67rem', xxl: '82rem', xxxl: '107rem' },
                   fontSize: 29
                 }}
                 color={'success'}
@@ -46,7 +49,15 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           <Button
             id={topic?.name.concat('-button').replaceAll(' ', '-')}
             sx={{
-              width: { xs: '6.625rem', sm: '9.625rem', md: '12.625rem', lg: '15.625rem', xl: '18.625rem' },
+              width: {
+                xs: '6.625rem',
+                sm: '9.625rem',
+                md: '12.625rem',
+                lg: '15.625rem',
+                xl: '18.625rem',
+                xxl: '21.625rem',
+                xxxl: '24.625rem'
+              },
               mt: '1.625rem'
             }}
             variant="contained"

@@ -1,35 +1,49 @@
 import log from 'loglevel'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { LearningPathElementStatus, LearningPathLearningElement, Topic, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 // Type
-type CourseHookReturn = {
-  calculatedTopicProgress: number[][]
+type LearningPathTopicHookParams = {
+  courseId?: string
+}
+
+// Type
+type LearningPathTopicProgressHookReturn = {
+  topicProgress: number[][]
   isLoading: boolean
   topics: Topic[]
 }
 
-// Hook
-export const useCourse = (): CourseHookReturn => {
+/**
+ * Hook to get the progress of the learning elements in a topic, for each topic in a course
+ * @param courseId
+ * @param topics
+ * @returns - A tuple with the progress of the learning elements in a topic and a boolean indicating if the data is still loading
+ */
+export const useLearningPathTopicProgress = (
+  params?: LearningPathTopicHookParams
+): LearningPathTopicProgressHookReturn => {
+  // Default values
+  const { courseId = undefined } = params ?? {}
+
   // States
-  const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([])
+  const [topicProgress, setTopicProgress] = useState<number[][]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [topics, setTopics] = useState<Topic[]>([])
+
+  // Hooks
+  const navigate = useNavigate()
   const { t } = useTranslation()
 
   // Contexts
   const { isAuth } = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
 
-  // Hooks
-  const navigate = useNavigate()
-  const { courseId } = useParams() as { courseId: string }
-
-  // Stores
+  // Fetches
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
@@ -88,30 +102,23 @@ export const useCourse = (): CourseHookReturn => {
           })
       })
     },
-    [addSnackbar, getLearningPathElement, getLearningPathElementStatus, getTopicProgress, courseId]
+    [getLearningPathElement, getLearningPathElementStatus, getTopicProgress, courseId]
   )
 
   useEffect(() => {
     setIsLoading(true)
 
-    const preventEndlessLoading = setTimeout(() => {
-      log.log('Course timeout')
-      navigate('/login')
-    }, 1000)
-
     if (isAuth) {
-      clearTimeout(preventEndlessLoading)
-
       getUser()
         .then((user) =>
           getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
             .then((learningPathTopic) => {
-              setIsLoading(false)
               setTopics(learningPathTopic.topics)
               Promise.all(getAllTopicProgress(user, learningPathTopic.topics)).then((allTopicProgress) =>
                 // Set the calculated progress for each topic
-                setCalculatedTopicProgress(allTopicProgress)
+                setTopicProgress(allTopicProgress)
               )
+              setIsLoading(false)
             })
             .catch((error: string) => {
               addSnackbar({
@@ -131,11 +138,7 @@ export const useCourse = (): CourseHookReturn => {
           log.error(t('error.fetchUser') + ' ' + error)
         })
     }
+  }, [isAuth, navigate, clearTimeout, getLearningPathTopic, getAllTopicProgress])
 
-    return () => {
-      clearTimeout(preventEndlessLoading)
-    }
-  }, [isAuth, courseId, navigate, getUser, getLearningPathElement, getLearningPathElementStatus])
-
-  return useMemo(() => ({ calculatedTopicProgress, isLoading, topics }), [calculatedTopicProgress, isLoading, topics])
+  return useMemo(() => ({ topicProgress, isLoading, topics }), [topicProgress, isLoading, topics])
 }
