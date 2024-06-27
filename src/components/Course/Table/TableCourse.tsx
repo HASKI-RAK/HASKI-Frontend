@@ -13,57 +13,69 @@ import FormatAlignLeftIcon from '@mui/icons-material/ViewList'
 
 
 type TableCourseProps = {
-  open?: boolean
+  open?: boolean,
+  onCourseSelect: (course: RemoteCourse) => void
 }
 
 const formatUnixDate = (unixTime: number): string => {
-  if(unixTime === 0 ) return '---'
+  if(unixTime === 0) return '---'
   const date = new Date(unixTime * 1000)
-  return date.toLocaleDateString('de-DE',{day:'2-digit', month:'2-digit', year:'numeric'})
+  return date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })
 }
 
-const TableCourse = memo(({open=false}:TableCourseProps) => {
+const TableCourse = memo(({ open = false, onCourseSelect }: TableCourseProps) => {
 
-  const [LmsCourses,setLmsCourses] = useState<RemoteCourse[]>([])
-    const [view, setView] = useState('list')
+    const [LmsCourses, setLmsCourses] = useState<RemoteCourse[]>([])
+    const [view, setView] = useState<string>('list')
 
-  useEffect(() => {
-    fetchRemoteCourses().then((response) => {
-      setLmsCourses(response)
-    })
-  }, [open])
+    useEffect(() => {
+      fetchRemoteCourses().then((response) => {
+        setLmsCourses(response)
+      })
+    }, [open])
 
 
-  const handleChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
-    setView(nextView);
+    const handleChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
+      setView(nextView)
+      if(nextView !== null) {
+        const selectedCourse = LmsCourses.find(course => course.fullname === nextView)
+        if(selectedCourse) {
+          onCourseSelect(selectedCourse)
+        }
+      }
+    }
+
+    return (<Grid container direction="column" justifyContent="center" alignItems="center">
+        {LmsCourses.length === 0 ? (
+          <TableRow key={'TableCourseTableRow'}>
+            <SkeletonList />
+          </TableRow>
+        ) : (
+          <ToggleButtonGroup
+            orientation="vertical"
+            value={view}
+            exclusive
+            onChange={handleChange}
+            sx={{
+              '& .MuiToggleButtonGroup-grouped:not(:first-of-type)': {
+                borderColor: 'black'
+              }
+            }}>
+            {LmsCourses.map((LmsCourse) => (
+              <ToggleButton value={LmsCourse.fullname} aria-label={LmsCourse.fullname} key={LmsCourse.id}
+                            sx={{ minWidth: '30rem', mb: 2, borderColor: 'black' }}>
+                <Grid direction="column" justifyContent="center" alignItems="center">
+                  <Grid direction="row" justifyContent="flex-start" alignItems="center">
+                    {LmsCourse.fullname}
+                  </Grid>
+                </Grid>
+              </ToggleButton>
+            ))}
+          </ToggleButtonGroup>
+        )}
+      </Grid>
+    )
   }
-
-  return (<Grid container direction="column" justifyContent="center" alignItems="center">
-          {LmsCourses.length === 0 ? (
-            <TableRow key={'TableCourseTableRow'}>
-              <SkeletonList/>
-            </TableRow>
-          ): (
-            <ToggleButtonGroup
-              orientation="vertical"
-              value={view}
-              exclusive
-              onChange={handleChange}
-            >
-              {LmsCourses.map((LmsCourse) => (
-                    <ToggleButton value={LmsCourse.fullname} aria-label={LmsCourse.fullname} key={LmsCourse.id}>
-                      <Grid direction="column" justifyContent="center" alignItems="center">
-                        <Grid direction="row" justifyContent="flex-start" alignItems="center">
-                          {LmsCourse.fullname}
-                        </Grid>
-                      </Grid>
-                    </ToggleButton>
-              ))}
-            </ToggleButtonGroup>
-            )}
-    </Grid>
-  )
-}
 )
 // eslint-disable-next-line immutable/no-mutation
 TableCourse.displayName = 'TableCourse'
