@@ -38,10 +38,10 @@ const Course = (): JSX.Element => {
 
   const [isAlgorithmSettingsModalOpen, setIsAlgorithmSettingsModalOpen] = useState(false)
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedTopicID, setSelectedTopicID] = useState<null | string>(null)
+  const [selectedTopicID, setSelectedTopicID] = useState<undefined | string>(undefined)
   const openMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setMenuAnchorEl(event.currentTarget)
-    setSelectedTopicID(event.currentTarget?.dataset?.topicid ?? null)
+    setSelectedTopicID(event.currentTarget?.dataset?.topicid)
   }
   const handleCloseMenu = useCallback(() => {
     setMenuAnchorEl(null)
@@ -53,9 +53,6 @@ const Course = (): JSX.Element => {
   const handleAlgorithmModalClose = useCallback(() => {
     setIsAlgorithmSettingsModalOpen(false)
   }, [setIsAlgorithmSettingsModalOpen])
-  const getIDs = useCallback(() => {
-    return { courseID: null, topicID: selectedTopicID }
-  }, [selectedTopicID])
  
 
   useEffect(() => {
@@ -142,7 +139,6 @@ const Course = (): JSX.Element => {
         </Box>
       ) : (
         //display topics once data is loaded
-        <>
           <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ ml: '3rem' }}>
             {topics.map((topic, index) => {
               return (
@@ -207,22 +203,24 @@ const Course = (): JSX.Element => {
                       <StyledLinearProgress />
                     )}
                   </Grid>
+                  <AlgorithmSettingsModal isOpen={ isAlgorithmSettingsModalOpen &&(topic.id === Number(selectedTopicID)) } 
+                  handleClose={handleAlgorithmModalClose} 
+                  getIDs={{ courseID: null, topicID: topic.id }} />
+                  
                 </Card>
               )
             })}
+            <Menu
+                id='menu'
+                anchorEl={menuAnchorEl}
+                open={Boolean(menuAnchorEl)}
+                onClose={handleCloseMenu}
+                anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                data-testid='TopicSettingsMenu'>
+                  <MenuItem onClick={handleAlgorithmMenuOpen} data-testid='AlgorithmSettingsItem'>{t('pages.home.menuItemAlgorithms')}</MenuItem>
+            </Menu>
           </Grid>
-          <AlgorithmSettingsModal isOpen={isAlgorithmSettingsModalOpen} handleClose={handleAlgorithmModalClose} getIDs={getIDs} />
-          <Menu
-                      id='menu'
-                      anchorEl={menuAnchorEl}
-                      open={Boolean(menuAnchorEl)}
-                      onClose={handleCloseMenu}
-                      anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-                      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                      data-testid='TopicSettingsMenu'>
-                        <MenuItem onClick={handleAlgorithmMenuOpen} data-testid='AlgorithmSettingsItem'>{t('pages.home.menuItemAlgorithms')}</MenuItem>
-          </Menu>
-        </>
       )}
     </>
   )

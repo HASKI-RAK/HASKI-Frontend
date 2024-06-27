@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, CardHeader, Skeleton, Stack, Typography, Menu, MenuItem, IconButton } from '@common/components'
 import { AlgorithmSettingsModal } from '@components'
-import { MoreVert, Settings} from '@common/icons'
+import { MoreVert } from '@common/icons'
 import { Course } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -33,10 +33,10 @@ export const Home = () => {
   const [isTutor, setIsTutor] = useState(true)
   const [isAlgorithmSettingsModalOpen, setIsAlgorithmSettingsModalOpen] = useState(false)
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null)
-  const [selectedCourseID, setSelectedCourseID] = useState<null | string>(null)
+  const [selectedCourseID, setSelectedCourseID] = useState<undefined | string>(undefined)
   const openMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setMenuAnchorEl(event.currentTarget)
-    setSelectedCourseID(event.currentTarget?.dataset?.courseid ?? null)
+    setSelectedCourseID(event.currentTarget.dataset.courseid)
   }
   const handleCloseMenu = useCallback(() => {
     setMenuAnchorEl(null)
@@ -47,11 +47,9 @@ export const Home = () => {
   },[handleCloseMenu, setIsAlgorithmSettingsModalOpen])
   const handleAlgorithmModalClose = useCallback(() => {
     setIsAlgorithmSettingsModalOpen(false)
+    setSelectedCourseID(undefined)
   },[setIsAlgorithmSettingsModalOpen])
-  const getIDs = useCallback(() => {
-    return { courseID: selectedCourseID, topicID: null }
-  },[selectedCourseID])
-
+  
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
       navigate('/login')
@@ -98,7 +96,6 @@ export const Home = () => {
     <Skeleton variant="rectangular" width="100%" height={118} />
   ) : (
     <div>
-      <AlgorithmSettingsModal isOpen={isAlgorithmSettingsModalOpen} handleClose={handleAlgorithmModalClose} getIDs={getIDs} data-testid='algorithm-modal'/>
       <Stack spacing={2} direction="row" justifyContent="center">
         <div>
           {courses.length === 0 ? (
@@ -138,7 +135,13 @@ export const Home = () => {
                         <Typography variant='body1'>{t('pages.course.cardText')}{t('pages.course.fixed')}</Typography>
                     </Stack>
                   </CardContent>
+                  <AlgorithmSettingsModal 
+                  isOpen={ isAlgorithmSettingsModalOpen && (course.id === Number(selectedCourseID)) } 
+                  handleClose={handleAlgorithmModalClose} 
+                  getIDs={{ courseID: course.id, topicID: null }} 
+                  data-testid='algorithm-modal'/>
                 </Card>
+                
               )
             })
           )}

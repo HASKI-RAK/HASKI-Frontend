@@ -157,14 +157,13 @@ describe('Course', () => {
 
     await waitFor(() => act(() => {
       fireEvent.click(getAllByTestId('TopicSettingsButton')[0])
-      expect(getByTestId('AlgorithmSettingsItem')).toBeInTheDocument
+      expect(getAllByTestId('AlgorithmSettingsItem')[0]).toBeInTheDocument
         
     }))
-    fireEvent.click(getByTestId('AlgorithmSettingsItem'))
+    fireEvent.click(getAllByTestId('AlgorithmSettingsItem')[0])
     expect(getByTestId('TopicSettingsMenu')).not.toBeInTheDocument
-    screen.debug(undefined, 300000)
-    expect(getByTestId('algorithm-modal')).toBeInTheDocument
-    fireEvent.click(getByTestId('algorithm-modal-close-button'))
+    expect(getAllByTestId('algorithm-modal')[0]).toBeInTheDocument
+    fireEvent.click(getAllByTestId('algorithm-modal-close-button')[0])
     expect(queryByTestId('algorithm-modal')).toBeNull()
   })
 })

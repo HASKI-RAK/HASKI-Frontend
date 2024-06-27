@@ -130,7 +130,7 @@ describe('Test the Home page', () => {
     )
     await waitFor(() => {
       fireEvent.click(getAllByTestId('settings-button')[0])
-      expect(getByTestId('settings-menu')).toBeInTheDocument()
+      expect(getAllByTestId('settings-menu')[0]).toBeInTheDocument()
 
     })
   })
@@ -147,13 +147,15 @@ describe('Test the Home page', () => {
     await waitFor(() => act(() => {
       fireEvent.click(getAllByTestId('settings-button')[0])
     }))
-    expect(getByTestId('settings-menu')).toBeInTheDocument()
+    expect(getAllByTestId('settings-menu')[0]).toBeInTheDocument()
     fireEvent.click(getByTestId('menu-item-algorithm'))
-    expect(queryByTestId('settings-menu')).not.toBeInDocument
+    await waitFor(() => {
+      expect(queryByTestId('settings-menu')).toBeNull()
+    })
   })
 
   test('modal can be opened and closed', async () => {
-      const { getAllByTestId, getByTestId, queryByTestId } = render(
+      const { getAllByTestId, queryByTestId } = render(
         <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <Home />
@@ -163,12 +165,12 @@ describe('Test the Home page', () => {
     
     await waitFor(() => act(() => {
       fireEvent.click(getAllByTestId('settings-button')[0])
-      expect(getByTestId('settings-menu')).toBeInTheDocument()
+      expect(getAllByTestId('settings-menu')[0]).toBeInTheDocument()
     }))
-    expect(getByTestId('menu-item-algorithm')).toBeInTheDocument()
-    fireEvent.click(getByTestId('menu-item-algorithm'))
-    expect(getByTestId('algorithm-modal')).toBeInTheDocument
-    fireEvent.click(getByTestId('algorithm-modal-close-button'))
+    expect(getAllByTestId('menu-item-algorithm')[0]).toBeInTheDocument()
+    fireEvent.click(getAllByTestId('menu-item-algorithm')[0])
+    expect(getAllByTestId('algorithm-modal')[0]).toBeInTheDocument
+    fireEvent.click(getAllByTestId('algorithm-modal-close-button')[0])
     expect(queryByTestId('algorithm-modal')).toBeNull()
   })
 })

@@ -23,7 +23,7 @@ export type TestRefType = {
 type AlgorithmSettingsModalProps = {
   isOpen: boolean
   handleClose: () => void
-  getIDs: () => { courseID: string | null, topicID: string | null}
+  getIDs: { courseID: number | null, topicID: number | null}
   options?: {name: string, description: string, key: string}[] //for 
   ref?: ForwardedRef<TestRefType> | null | undefined
 }

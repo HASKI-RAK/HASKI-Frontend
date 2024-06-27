@@ -23,7 +23,7 @@ describe('AlgorithmSettingsModal', () => {
         const open = true
         const { getByTestId, getByLabelText } = render(
             <MemoryRouter>
-                <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} getIDs={jest.fn()} options={mockOptions} />
+                <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} getIDs={{courseID: 1, topicID: 0}} options={mockOptions} />
             </MemoryRouter>
         )
 
@@ -42,7 +42,7 @@ describe('AlgorithmSettingsModal', () => {
         const open = true
         const { getByLabelText } = render(
             <MemoryRouter>
-                <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} getIDs={jest.fn()} options={mockOptions} />
+                <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} getIDs={{courseID: 1, topicID: 0}} options={mockOptions} />
             </MemoryRouter>
         )
 
@@ -62,7 +62,7 @@ describe('AlgorithmSettingsModal', () => {
         const handleClose = jest.fn()
         const { getByTestId } = render(
             <MemoryRouter>
-                <AlgorithmSettingsModal isOpen={open} handleClose={handleClose} getIDs={jest.fn()}/>
+                <AlgorithmSettingsModal isOpen={open} handleClose={handleClose} getIDs={{courseID: 1, topicID: 0}}/>
             </MemoryRouter>
         )
 
@@ -76,7 +76,7 @@ describe('AlgorithmSettingsModal', () => {
         const open = true
         const { getByTestId } = render(
             <MemoryRouter>
-                <AlgorithmSettingsModal isOpen={open} handleClose={handleClose} getIDs={jest.fn(() => {return {courseID: '1', topicID: '0'}})} options={mockOptions}/>
+                <AlgorithmSettingsModal isOpen={open} handleClose={handleClose} getIDs={{courseID: 1, topicID: 0}} options={mockOptions}/>
             </MemoryRouter>
         )
 
