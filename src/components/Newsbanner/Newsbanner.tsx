@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { keyframes } from '@emotion/react'
 import { NewsbannerHookReturn, useNewsbanner as _useNewsbanner } from './Newsbanner.hooks'
 
-
 export type NewsbannerProps = {
   useNewsbanner?: () => NewsbannerHookReturn
 }
@@ -13,21 +12,21 @@ export type NewsbannerProps = {
  * Newsbanner component
  * @remarks
  * Newsbanner shows a banner between the menubar and the breadcrumbs,
- * but only if there are news. The news get fitted by their charakter length. 
+ * but only if there are news. The news get fitted by their charakter length.
  * The closed state gets saved in the sessionStorage and removed when the window closes.
  * @category Components
  */
 
 const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
   const [open, setOpen] = useState(false)
-  const [close, setClose] = useState(sessionStorage.getItem('newsCloseState') == "true")
+  const [close, setClose] = useState(sessionStorage.getItem('newsCloseState') == 'true')
   const [text, setText] = useState('')
   const { checkForNews, hasItem } = useNewsbanner()
 
   //checks if there are any news
   useEffect(() => {
     checkForNews().then((showNews) => {
-      if(hasItem()){
+      if (hasItem()) {
         setOpen(true)
       }
     })
@@ -75,13 +74,17 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
                   data-testid="IconButton"
                   onClick={() => {
                     setClose(true)
-                    sessionStorage.setItem('newsCloseState', true ? "true" : "false")
+                    sessionStorage.setItem('newsCloseState', 'true')
                   }}>
                   <CloseIcon fontSize="inherit" />
                 </IconButton>
               }>
               <Box
-                sx={{ animation: `${scrolling} 30s linear infinite`, transform: `translateX(100%)`, width: window_width }}>
+                sx={{
+                  animation: `${scrolling} 30s linear infinite`,
+                  transform: `translateX(100%)`,
+                  width: window_width
+                }}>
                 {text}
               </Box>
             </Alert>

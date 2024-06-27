@@ -23,8 +23,8 @@ describe('Test the fetchNews functionalities', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const languageId='en'
-    const university='HS-AS'
+    const languageId = 'en'
+    const university = 'HS-AS'
 
     const result = await fetchNews(languageId, university)
 
@@ -54,8 +54,8 @@ describe('Test the fetchNews functionalities', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const languageId='en'
-    const university='HS-AS'
+    const languageId = 'en'
+    const university = 'HS-AS'
 
     await expect(fetchNews(languageId, university)).rejects.toThrow(`${expectedMessage}`)
   })
@@ -70,8 +70,8 @@ describe('Test the fetchNews functionalities', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const languageId='en'
-    const university='HS-AS'
+    const languageId = 'en'
+    const university = 'HS-AS'
 
     await expect(fetchNews(languageId, university)).rejects.toThrow('')
   })
