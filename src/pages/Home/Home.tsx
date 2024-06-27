@@ -2,7 +2,18 @@ import log from 'loglevel'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardContent, CardHeader, Skeleton, Stack, Typography, Menu, MenuItem, IconButton } from '@common/components'
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Skeleton,
+  Stack,
+  Typography,
+  Menu,
+  MenuItem,
+  IconButton
+} from '@common/components'
 import { AlgorithmSettingsModal } from '@components'
 import { MoreVert } from '@common/icons'
 import { Course } from '@core'
@@ -40,16 +51,16 @@ export const Home = () => {
   }
   const handleCloseMenu = useCallback(() => {
     setMenuAnchorEl(null)
-  },[setMenuAnchorEl])
+  }, [setMenuAnchorEl])
   const handleAlgorithmMenuOpen = useCallback(() => {
     handleCloseMenu()
     setIsAlgorithmSettingsModalOpen(true)
-  },[handleCloseMenu, setIsAlgorithmSettingsModalOpen])
+  }, [handleCloseMenu, setIsAlgorithmSettingsModalOpen])
   const handleAlgorithmModalClose = useCallback(() => {
     setIsAlgorithmSettingsModalOpen(false)
     setSelectedCourseID(undefined)
-  },[setIsAlgorithmSettingsModalOpen])
-  
+  }, [setIsAlgorithmSettingsModalOpen])
+
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
       navigate('/login')
@@ -110,11 +121,12 @@ export const Home = () => {
                 <Card key={course.id} sx={{ mb: '1rem' }}>
                   <CardHeader
                     action={
-                      <IconButton onClick={openMenu} data-courseid={course.id} data-testid='settings-button'>
+                      <IconButton onClick={openMenu} data-courseid={course.id} data-testid="settings-button">
                         <MoreVert />
                       </IconButton>
                     }
-                    title={course.name}/>
+                    title={course.name}
+                  />
                   <CardContent>
                     <Stack direction="row" justifyContent="center">
                       <Button
@@ -127,33 +139,34 @@ export const Home = () => {
                         {t('pages.course.courseButton')}
                       </Button>
                     </Stack>
-                    <Stack 
-                     direction='row' 
-                     alignItems={'center'} 
-                     justifyContent={'center'} 
-                     sx={{mt:'0.5rem'}}>
-                        <Typography variant='body1'>{t('pages.course.cardText')}{t('pages.course.fixed')}</Typography>
+                    <Stack direction="row" alignItems={'center'} justifyContent={'center'} sx={{ mt: '0.5rem' }}>
+                      <Typography variant="body1">
+                        {t('pages.course.cardText')}
+                        {t('pages.course.fixed')}
+                      </Typography>
                     </Stack>
                   </CardContent>
-                  <AlgorithmSettingsModal 
-                  isOpen={ isAlgorithmSettingsModalOpen && (course.id === Number(selectedCourseID)) } 
-                  handleClose={handleAlgorithmModalClose} 
-                  getIDs={{ courseID: course.id, topicID: null }} 
-                  data-testid='algorithm-modal'/>
+                  <AlgorithmSettingsModal
+                    isOpen={isAlgorithmSettingsModalOpen && course.id === Number(selectedCourseID)}
+                    handleClose={handleAlgorithmModalClose}
+                    getIDs={{ courseID: course.id, topicID: null }}
+                    data-testid="algorithm-modal"
+                  />
                 </Card>
-                
               )
             })
           )}
           <Menu
-            id='menu'
+            id="menu"
             anchorEl={menuAnchorEl}
             open={Boolean(menuAnchorEl)}
             onClose={handleCloseMenu}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-            data-testid='settings-menu'>
-              <MenuItem onClick={handleAlgorithmMenuOpen} data-testid='menu-item-algorithm'>{t('pages.home.menuItemAlgorithms')}</MenuItem>
+            data-testid="settings-menu">
+            <MenuItem onClick={handleAlgorithmMenuOpen} data-testid="menu-item-algorithm">
+              {t('pages.home.menuItemAlgorithms')}
+            </MenuItem>
           </Menu>
         </div>
       </Stack>

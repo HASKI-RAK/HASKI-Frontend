@@ -155,11 +155,12 @@ describe('Course', () => {
       </MemoryRouter>
     )
 
-    await waitFor(() => act(() => {
-      fireEvent.click(getAllByTestId('TopicSettingsButton')[0])
-      expect(getAllByTestId('AlgorithmSettingsItem')[0]).toBeInTheDocument
-        
-    }))
+    await waitFor(() =>
+      act(() => {
+        fireEvent.click(getAllByTestId('TopicSettingsButton')[0])
+        expect(getAllByTestId('AlgorithmSettingsItem')[0]).toBeInTheDocument
+      })
+    )
     fireEvent.click(getAllByTestId('AlgorithmSettingsItem')[0])
     expect(getByTestId('TopicSettingsMenu')).not.toBeInTheDocument
     expect(getAllByTestId('algorithm-modal')[0]).toBeInTheDocument

@@ -180,26 +180,4 @@ describe('Test the Home page', () => {
       expect(queryByTestId('settings-menu')).toBeNull()
     })
   })
-  /*
-  test('modal can be opened and closed', async () => {
-    await waitFor(() => {
-      const { getAllByTestId, queryByTestId } = render(
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Home />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      )
-      act(() => {
-        fireEvent.click(getAllByTestId('settings-button')[0])
-        expect(getAllByTestId('settings-menu')[0]).toBeInTheDocument()
-
-        expect(getAllByTestId('menu-item-algorithm')[0]).toBeInTheDocument()
-        fireEvent.click(getAllByTestId('menu-item-algorithm')[0])
-        expect(getAllByTestId('algorithm-modal')[0]).toBeInTheDocument
-        fireEvent.click(getAllByTestId('algorithm-modal-close-button')[0])
-        expect(queryByTestId('algorithm-modal')).toBeNull()
-      })
-    })
-  })*/
 })
