@@ -1,14 +1,7 @@
 import '@testing-library/jest-dom'
-import '@testing-library/jest-dom'
-import { createRef } from 'react'
-import { fireEvent, render, renderHook } from '@testing-library/react'
-import * as router from 'react-router'
+import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import AlgorithmSettingsModal from './AlgorithmSettingsModal'
-import { TestRefType } from './AlgorithmSettingsModal'
-import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
-import { get } from 'http'
-import exp from 'constants'
 
 const mockOptions = [
   { name: 'option1', description: 'description1', key: 'key1' },

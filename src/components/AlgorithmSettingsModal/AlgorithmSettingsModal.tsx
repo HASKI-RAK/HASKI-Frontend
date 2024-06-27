@@ -1,4 +1,4 @@
-import { ForwardedRef, memo, useCallback, useState, useImperativeHandle, forwardRef } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   FormControlLabel,
@@ -13,19 +13,22 @@ import {
   Tooltip
 } from '@common/components'
 import { Close, Save, School } from '@common/icons'
-import { useTheme } from '@common/hooks'
 import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
 
-export type TestRefType = {
-  handleSave: () => void
-}
 
+/**
+ * @prop isOpen - Boolean value to determine if the modal is open.
+ * @prop handleClose - function executed when closing the modal.
+ * @prop getIDs - Object containing the courseID and topicID.
+ * @prop options - Array of objects containing the name, description,
+ *  and key of the algorithms. Used in Tests instead of the translation output.
+ * @interface
+ */
 type AlgorithmSettingsModalProps = {
   isOpen: boolean
   handleClose: () => void
   getIDs: { courseID: number | null; topicID: number | null }
-  options?: { name: string; description: string; key: string }[] //for
-  ref?: ForwardedRef<TestRefType> | null | undefined
+  options?: { name: string; description: string; key: string }[] //for testing
 }
 
 type optionsType = {
@@ -33,7 +36,17 @@ type optionsType = {
   description: string
   key: string
 }[]
-
+/**
+ * 
+ * @param props allowing opening an closing of Modal and to give the ids of courses and topics
+ * 
+ * @remarks
+ * This component consists of a modal, that allows the user to set an algorithm for a topic or entire course tepending
+ * on the props. All available algorithms are displayed as radio buttons. A short description of the selected algorithm is displayed
+ * 
+ * 
+ * @category components
+ */
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
   //const [open, setOpen] = useState(true)
   const [selected, setSelected] = useState(0)
@@ -54,7 +67,6 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
     selected,
     getIDs: props.getIDs
   })
-  const theme = useTheme()
   //useImperativeHandle(props.ref, () => ({handleSave}), [handleSave])
 
   return (
