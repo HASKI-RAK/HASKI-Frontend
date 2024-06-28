@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Grid } from '@common/components'
 import { useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
@@ -18,7 +19,7 @@ const Course = () => {
   const { t } = useTranslation()
   const theme = useTheme()
   const isSmOrDown = useMediaQuery(theme.breakpoints.down('sm'))
-  const { courseId } = useParams<{courseId: string}>()
+  const { courseId } = useParams<{ courseId: string }>()
   const { topicProgress, isLoading, topics } = useLearningPathTopicProgress({ courseId })
 
   return (

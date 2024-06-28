@@ -1,3 +1,4 @@
+import AddCircleIcon from '@mui/icons-material/AddCircle'
 import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -7,7 +8,6 @@ import { CourseModal } from '@components'
 import { Course } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 /**
  * # Home Page
@@ -35,32 +35,32 @@ export const Home = () => {
   }
 
   useEffect(() => {
-      if (isAuth) {
-        getUser()
-          .then((user) => {
-            getCourses(user.settings.user_id, user.lms_user_id, user.id)
-              .then((CourseResponse) => {
-                setCourses(CourseResponse.courses)
-              })
-              .catch((error) => {
-                addSnackbar({
-                  message: t('error.getCourses'),
-                  severity: 'error',
-                  autoHideDuration: 5000
-                })
-                log.error(t('error.getCourses') + ' ' + error)
-              })
-          })
-          .catch((error) => {
-            addSnackbar({
-              message: t('error.getUser'),
-              severity: 'error',
-              autoHideDuration: 5000
+    if (isAuth) {
+      getUser()
+        .then((user) => {
+          getCourses(user.settings.user_id, user.lms_user_id, user.id)
+            .then((CourseResponse) => {
+              setCourses(CourseResponse.courses)
             })
-            log.error(t('error.getUser') + ' ' + error)
+            .catch((error) => {
+              addSnackbar({
+                message: t('error.getCourses'),
+                severity: 'error',
+                autoHideDuration: 5000
+              })
+              log.error(t('error.getCourses') + ' ' + error)
+            })
+        })
+        .catch((error) => {
+          addSnackbar({
+            message: t('error.getUser'),
+            severity: 'error',
+            autoHideDuration: 5000
           })
-        setLoading(false)
-      }
+          log.error(t('error.getUser') + ' ' + error)
+        })
+      setLoading(false)
+    }
   }, [getUser, getCourses, setCourses, isAuth])
 
   const commonButtonStyle = {
@@ -75,7 +75,7 @@ export const Home = () => {
     <div>
       <Stack spacing={2} direction="row" justifyContent="center">
         <div>
-          {courses.length !== 0 && (
+          {courses.length === 0 ? (
             <Card>
               <CardContent>
                 <Typography variant="h5" align="center">
@@ -121,21 +121,21 @@ export const Home = () => {
               )
             })
           )}
-            <Card>
-              <CardContent>
-                <Stack direction="row" justifyContent="center">
+          <Card>
+            <CardContent>
+              <Stack direction="row" justifyContent="center">
                 <Button
                   id="course-button"
                   variant="contained"
                   color="primary"
-                  onClick={ ()=> setModalOpen(true)}
+                  onClick={() => setModalOpen(true)}
                   sx={commonButtonStyle}>
-                  <AddCircleIcon/>
+                  <AddCircleIcon />
                 </Button>
-                </Stack>
-              </CardContent>
-              <CourseModal open={modalOpen} handleClose={handleCloseCourseModal}></CourseModal>
-            </Card>
+              </Stack>
+            </CardContent>
+            <CourseModal open={modalOpen} handleClose={handleCloseCourseModal}></CourseModal>
+          </Card>
         </div>
       </Stack>
     </div>
