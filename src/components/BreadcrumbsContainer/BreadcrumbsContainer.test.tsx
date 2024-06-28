@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom'
-import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'

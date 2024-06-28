@@ -1,7 +1,7 @@
-import React from 'react'
+import { Fragment, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Box, Container, Grid, Link, Typography } from '@common/components'
+import { Box, Container, Divider, Grid, Link, Typography } from '@common/components'
 
 /**
  * Sticks to the bottom of the page and is always visible.
@@ -19,7 +19,6 @@ const Footer = () => {
 
   const footerComponents = [
     { name: [t('pages.home')], link: '/' },
-    { name: [t('pages.projectinformation')], link: '/projectinformation' },
     { name: [t('pages.contact')], link: '/contact' },
     { name: [t('pages.imprint')], link: '/imprint' },
     { name: [t('pages.privacypolicy')], link: '/privacypolicy' }
@@ -27,6 +26,7 @@ const Footer = () => {
 
   return (
     <footer>
+      <Divider flexItem />
       <Box
         sx={{
           width: '100%',
@@ -43,7 +43,7 @@ const Footer = () => {
             </Grid>
             <Grid item xs={12} display="flex" width="100%" justifyContent="center">
               {footerComponents.map((component) => (
-                <React.Fragment key={component.link}>
+                <Fragment key={component.link}>
                   <Link
                     id={component.link.concat('-link').replaceAll(' ', '-')}
                     marginX="0.2em"
@@ -61,7 +61,7 @@ const Footer = () => {
                       |{' '}
                     </Typography>
                   )}
-                </React.Fragment>
+                </Fragment>
               ))}
             </Grid>
           </Grid>
@@ -71,4 +71,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default memo(Footer)

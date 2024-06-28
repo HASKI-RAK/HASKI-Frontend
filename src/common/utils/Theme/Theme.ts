@@ -1,5 +1,13 @@
 import { createTheme } from '@common/theme'
 
+// Module needs to be declared once in react
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xxl: true // adds the `xxl` breakpoint
+    xxxl: true
+  }
+}
+
 export const defaultBehavior = {
   boxShadowSize: {
     default: '0 2px 0 ',
@@ -41,6 +49,17 @@ export const Theme = createTheme({
       dark: defaultColors.primary[800],
       contrastText: defaultColors.black,
       light: defaultColors.black
+    }
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+      xxl: 2000,
+      xxxl: 2500
     }
   },
   components: {

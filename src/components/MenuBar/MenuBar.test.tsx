@@ -1,11 +1,11 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
-import MenuBar, { MenuBarProps } from './MenuBar'
+import MenuBar from './MenuBar'
 
 jest.requireActual('i18next')
 
@@ -20,7 +20,7 @@ describe('MenuBar', () => {
     const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
-          <MenuBar courseSelected={false} />
+          <MenuBar />
         </MemoryRouter>
       </AuthContext.Provider>
     )
@@ -87,7 +87,7 @@ describe('MenuBar', () => {
     const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
-          <MenuBar courseSelected={false} />
+          <MenuBar />
         </MemoryRouter>
       </AuthContext.Provider>
     )
@@ -151,7 +151,7 @@ describe('MenuBar', () => {
     const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
-          <MenuBar courseSelected={false} />
+          <MenuBar />
         </MemoryRouter>
       </AuthContext.Provider>
     )
@@ -263,61 +263,11 @@ describe('MenuBar', () => {
     expect(navigate).toHaveBeenCalledWith('/')
   })
 
-  test('popover is rendered when Topics button is clicked', async () => {
-    const props: MenuBarProps = {
-      courseSelected: true
-    }
-
-    const { getByText, getAllByTestId } = render(
-      <MemoryRouter>
-        <MenuBar {...props} />
-      </MemoryRouter>
-    )
-
-    await waitFor(async () => {
-      fireEvent.click(getByText('appGlobal.topics'))
-      await waitFor(() => {
-        expect(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0]).toBeInTheDocument()
-      })
-    })
-  })
-
-  test('fetching user when opening Topics throws error ', async () => {
-    mockServices.fetchUser.mockImplementationOnce(() => {
-      throw new Error('Error')
-    })
-
-    jest.spyOn(console, 'error').mockImplementation(() => {
-      return
-    })
-
-    const props: MenuBarProps = {
-      courseSelected: true
-    }
-
-    const { container, getByText } = render(
-      <MemoryRouter>
-        <MenuBar {...props} />
-      </MemoryRouter>
-    )
-
-    await waitFor(() => {
-      fireEvent.click(getByText('appGlobal.topics'))
-      waitFor(() => {
-        expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
-      })
-    })
-  })
-
   test('fetching user when opening Questionnaire Results', async () => {
-    const props: MenuBarProps = {
-      courseSelected: true
-    }
-
     const { getByTestId } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
-          <MenuBar {...props} />
+          <MenuBar />
         </MemoryRouter>
       </AuthContext.Provider>
     )
@@ -327,41 +277,10 @@ describe('MenuBar', () => {
     })
   })
 
-  test('fetching topic throws error ', async () => {
-    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => {
-      throw new Error('Error')
-    })
-
-    jest.spyOn(console, 'error').mockImplementation(() => {
-      return
-    })
-
-    const props: MenuBarProps = {
-      courseSelected: true
-    }
-
-    const { container, getByText } = render(
-      <MemoryRouter>
-        <MenuBar {...props} />
-      </MemoryRouter>
-    )
-
-    await waitFor(() => {
-      fireEvent.click(getByText('appGlobal.topics'))
-      waitFor(() => {
-        expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
-      })
-    })
-  })
-
   test('click on HelpIcon should open popover', () => {
-    const props: MenuBarProps = {
-      courseSelected: false
-    }
-
     const result = render(
       <MemoryRouter>
-        <MenuBar {...props} />
+        <MenuBar />
       </MemoryRouter>
     )
     // click on HelpIcon:
@@ -387,13 +306,9 @@ describe('MenuBar', () => {
   */
 
   test('click on UserIcon should open popover', () => {
-    const props: MenuBarProps = {
-      courseSelected: false
-    }
-
     const result = render(
       <MemoryRouter>
-        <MenuBar {...props} />
+        <MenuBar />
       </MemoryRouter>
     )
 
@@ -408,14 +323,10 @@ describe('MenuBar', () => {
   })
 
   test('click on learner characteristics should open Questionnaire Results Modal', () => {
-    const props: MenuBarProps = {
-      courseSelected: false
-    }
-
     const result = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
-          <MenuBar {...props} />
+          <MenuBar />
         </MemoryRouter>
       </AuthContext.Provider>
     )
@@ -430,13 +341,9 @@ describe('MenuBar', () => {
   })
 
   test('clicking logout should close popover', () => {
-    const props: MenuBarProps = {
-      courseSelected: true
-    }
-
     const { getByTestId, queryByTestId } = render(
       <MemoryRouter>
-        <MenuBar {...props} />
+        <MenuBar />
       </MemoryRouter>
     )
 
@@ -458,13 +365,9 @@ describe('MenuBar', () => {
   })
 
   test('clicking outside of Menu should close popover', () => {
-    const props: MenuBarProps = {
-      courseSelected: true
-    }
-
     const { getByTestId, queryByTestId } = render(
       <MemoryRouter>
-        <MenuBar {...props} />
+        <MenuBar />
       </MemoryRouter>
     )
 
@@ -483,32 +386,11 @@ describe('MenuBar', () => {
     expect(userMenu).toBeNull()
   })
 
-  it('should set anchorElTopics to null', async () => {
-    const props: MenuBarProps = {
-      courseSelected: true
-    }
-
-    const { getByText, getAllByTestId } = render(
-      <MemoryRouter>
-        <MenuBar {...props} />
-      </MemoryRouter>
-    )
-
-    await waitFor(async () => {
-      fireEvent.click(getByText('appGlobal.topics'))
-      await waitFor(() => {
-        expect(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0]).toBeInTheDocument()
-        fireEvent.click(getAllByTestId('Menubar-Topic-Wirtschaftsinformatik')[0])
-        expect(navigate).toHaveBeenCalledWith('course/undefined/topic/1')
-      })
-    })
-  })
-
   it('opens the ils-short questionnaire', async () => {
     const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
-          <MenuBar courseSelected={false} />
+          <MenuBar />
         </MemoryRouter>
       </AuthContext.Provider>
     )
@@ -525,7 +407,7 @@ describe('MenuBar', () => {
     const { getByTestId, getByText } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
-          <MenuBar courseSelected={false} />
+          <MenuBar />
         </MemoryRouter>
       </AuthContext.Provider>
     )

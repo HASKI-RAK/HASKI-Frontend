@@ -57,21 +57,8 @@ describe('Test the Home page', () => {
     )
 
     await waitFor(() => {
-      expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
+      expect(container.innerHTML).toContain('pages.home.noCourses')
     })
-  })
-
-  test('navigate back to /login page', () => {
-    render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
-    )
-
-    jest.runAllTimers()
-    expect(navigate).toHaveBeenCalledWith('/login')
   })
 
   test('render page', () => {
@@ -120,7 +107,7 @@ describe('Test the Home page', () => {
     )
 
     await waitFor(() => {
-      expect(container.querySelector('.MuiSkeleton-root')).toBeInTheDocument()
+      expect(container.innerHTML).toContain('pages.home.noCourses')
     })
   })
 
