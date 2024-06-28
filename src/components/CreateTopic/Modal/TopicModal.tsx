@@ -66,7 +66,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
               </Typography>
               <Grid container justifyContent="center" alignItems="center" sx={{ mt: 2 }}>
                 <Button id="add-course-button" variant="contained" color="primary" onClick={() => setActiveStep(1)}>
-                  {'Select Course'}
+                  {'Select Topics'}
                 </Button>
               </Grid>
             </Grid>
@@ -95,5 +95,5 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   )
 })
 // eslint-disable-next-line immutable/no-mutation
-TopicModal.displayName = 'CourseModal'
+TopicModal.displayName = 'TopicModal'
 export default TopicModal

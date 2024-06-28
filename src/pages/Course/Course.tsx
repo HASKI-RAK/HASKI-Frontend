@@ -1,8 +1,11 @@
+import AddCircleIcon from '@mui/icons-material/AddCircle'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { Box, Grid } from '@common/components'
+import { Box, Button, Card, CardContent, Grid, Stack } from '@common/components'
 import { useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
-import { SkeletonList, TopicCard } from '@components'
+import { SkeletonList, TopicCard, TopicModal } from '@components'
+import { usePersistedStore, useStore } from '@store'
 
 /**
  * # Course Page
@@ -21,6 +24,16 @@ const Course = () => {
   const isSmOrDown = useMediaQuery(theme.breakpoints.down('sm'))
   const { courseId } = useParams<{ courseId: string }>()
   const { topicProgress, isLoading, topics } = useLearningPathTopicProgress({ courseId })
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const handleCloseTopicModal = () => {
+    setModalOpen(false)
+  }
+
+  const commonButtonStyle = {
+    mt: '1rem',
+    width: '85%'
+  }
 
   return (
     <>
@@ -44,6 +57,37 @@ const Course = () => {
               isSmOrDown={isSmOrDown}
             />
           ))}
+          <Card
+            sx={{
+              width: { xs: '10rem', sm: '20rem', md: '40rem', lg: '50rem', xl: '70rem', xxl: '85rem', xxxl: '110rem' },
+              mt: '1rem',
+              mb: '1rem'
+            }}>
+            <CardContent>
+              <Stack direction="row" justifyContent="center">
+                <Button
+                  sx={{
+                    width: {
+                      xs: '6.625rem',
+                      sm: '9.625rem',
+                      md: '12.625rem',
+                      lg: '15.625rem',
+                      xl: '18.625rem',
+                      xxl: '21.625rem',
+                      xxxl: '24.625rem'
+                    },
+                    mt: '1.625rem'
+                  }}
+                  id="course-button"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setModalOpen(true)}>
+                  <AddCircleIcon />
+                </Button>
+              </Stack>
+            </CardContent>
+            <TopicModal open={modalOpen} handleClose={handleCloseTopicModal}></TopicModal>
+          </Card>
         </Grid>
       )}
     </>
