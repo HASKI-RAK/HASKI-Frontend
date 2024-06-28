@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 
 /**
- * 
+ *
  * @param handleClose - function executed when closing the modal.
  * @param options - Array of objects containing the name, description and key of the algorithms.
  * @param selected - index of the currently selected algorithm.
@@ -14,7 +14,7 @@ export type useAlgorithmSettingsModalHookParams = {
   getIDs: { courseID: number | null; topicID: number | null }
 }
 /**
- * 
+ *
  * @param params - neccesary parameters from the component to change algorithms for a topic or course in the backend.
  * @returns function that saves the selected algorithm for the course or topic in the backend.
  */

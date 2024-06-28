@@ -1,19 +1,8 @@
 import { memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  FormControlLabel,
-  Grid,
-  RadioGroup,
-  Modal,
-  Typography,
-  Radio,
-  Divider,
-  Fab,
-  Tooltip
-} from '@common/components'
+import { FormControlLabel, Grid, RadioGroup, Modal, Typography, Radio, Divider, Fab, Tooltip } from '@common/components'
 import { Close, Save, School } from '@common/icons'
 import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
-
 
 /**
  * @prop isOpen - Boolean value to determine if the modal is open.
@@ -36,20 +25,20 @@ type optionsType = {
   key: string
 }[]
 /**
- * 
+ *
  * @param props allowing opening an closing of Modal and to give the ids of courses and topics
- * 
+ *
  * @remarks
  * This component consists of a modal, that allows the user to set an algorithm for a topic or entire course tepending
  * on the props. All available algorithms are displayed as radio buttons. A short description of the selected algorithm is displayed
- * 
- * 
+ *
+ *
  * @category components
  */
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
-  //const [open, setOpen] = useState(true)
   const [selected, setSelected] = useState(0)
-  const [teacherselection, setteacherselection] = useState(0)
+  //change hardcoded teacher selection to fetched teacher selection 
+  const [teacherSelection, setTeacherSelection] = useState(0)
   const { t } = useTranslation()
   const options = props.options ?? [
     ...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as optionsType)
@@ -89,9 +78,8 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
           border: '2px solid #D4D4D4',
           borderRadius: 6,
           boxShadow: 24,
-          p: 4,
-        }}
-        >
+          p: 4
+        }}>
         <Grid item container direction="row" spacing={2}>
           <Grid item container direction="column" spacing={1} xs={5}>
             <Typography id="modal-title" variant="h6" component="h6" align="center">
@@ -106,7 +94,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
                     control={<Radio role="radio-button" checked={index === selected} />}
                     label={option.name}
                   />
-                  {teacherselection === index && (
+                  {teacherSelection === index && (
                     <Tooltip
                       arrow
                       title={t('components.AlgorithmSettingsModal.teacherIconTip')}
@@ -124,7 +112,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
               height: { xl: '3.5rem', md: '2rem', xs: '2rem' },
               position: 'absolute',
               top: '0.5rem',
-              right: '0.5rem',
+              right: '0.5rem'
             }}
             color="primary"
             onClick={props.handleClose}

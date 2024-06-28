@@ -43,14 +43,14 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         mt: '1rem'
       }}>
       <CardContent>
-      <Grid container direction="row" justifyContent="flex-end" alignItems="flex-start">
-                    <IconButton
-                      sx={{ position: 'relative', left: '0', top: '0' }}
-                      onClick={openMenu}
-                      data-topicid={topic?.id}
-                      data-testid="TopicSettingsButton">
-                      <MoreVert />
-                    </IconButton>
+        <Grid container direction="row" justifyContent="flex-end" alignItems="flex-start">
+          <IconButton
+            sx={{ position: 'relative', left: '0', top: '0' }}
+            onClick={openMenu}
+            data-topicid={topic?.id}
+            data-testid="TopicSettingsButton">
+            <MoreVert />
+          </IconButton>
         </Grid>
         <Grid container direction="column" justifyContent="center" alignItems="center">
           <Grid item md={1}>
@@ -118,10 +118,10 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         )}
       </Grid>
       <AlgorithmSettingsModal
-                  isOpen={isAlgorithmSettingsModalOpen}
-                  handleClose={handleAlgorithmModalClose}
-                  getIDs={{ courseID: null, topicID: topic?.id ?? null }}
-                />
+        isOpen={isAlgorithmSettingsModalOpen}
+        handleClose={handleAlgorithmModalClose}
+        getIDs={{ courseID: null, topicID: topic?.id ?? null }}
+      />
       <Menu
         id="menu"
         anchorEl={menuAnchorEl}

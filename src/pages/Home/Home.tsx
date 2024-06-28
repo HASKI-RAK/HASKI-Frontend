@@ -40,8 +40,7 @@ export const Home = () => {
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
 
-  //TODO: Find an actual way to check if the user is a tutor
-  const [isTutor, setIsTutor] = useState(true)
+
   const [isAlgorithmSettingsModalOpen, setIsAlgorithmSettingsModalOpen] = useState(false)
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null)
   const [selectedCourseID, setSelectedCourseID] = useState<undefined | string>(undefined)
@@ -62,32 +61,32 @@ export const Home = () => {
   }, [setIsAlgorithmSettingsModalOpen])
 
   useEffect(() => {
-      if (isAuth) {
-        getUser()
-          .then((user) => {
-            getCourses(user.settings.user_id, user.lms_user_id, user.id)
-              .then((CourseResponse) => {
-                setCourses(CourseResponse.courses)
-              })
-              .catch((error) => {
-                addSnackbar({
-                  message: t('error.getCourses'),
-                  severity: 'error',
-                  autoHideDuration: 5000
-                })
-                log.error(t('error.getCourses') + ' ' + error)
-              })
-          })
-          .catch((error) => {
-            addSnackbar({
-              message: t('error.getUser'),
-              severity: 'error',
-              autoHideDuration: 5000
+    if (isAuth) {
+      getUser()
+        .then((user) => {
+          getCourses(user.settings.user_id, user.lms_user_id, user.id)
+            .then((CourseResponse) => {
+              setCourses(CourseResponse.courses)
             })
-            log.error(t('error.getUser') + ' ' + error)
+            .catch((error) => {
+              addSnackbar({
+                message: t('error.getCourses'),
+                severity: 'error',
+                autoHideDuration: 5000
+              })
+              log.error(t('error.getCourses') + ' ' + error)
+            })
+        })
+        .catch((error) => {
+          addSnackbar({
+            message: t('error.getUser'),
+            severity: 'error',
+            autoHideDuration: 5000
           })
-        setLoading(false)
-      }
+          log.error(t('error.getUser') + ' ' + error)
+        })
+      setLoading(false)
+    }
   }, [getUser, getCourses, setCourses, isAuth])
 
   // Card cointaining the courses with a button to the specific course
