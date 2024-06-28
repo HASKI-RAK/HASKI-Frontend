@@ -16,7 +16,7 @@ import {
 } from '@common/components'
 import { Close } from '@common/icons'
 import { RemoteCourse } from '@core'
-import TableCourse from '../../Course/Table/TableCourse'
+import TableCourse from '../Table/TableCourse'
 import TableCourseDetails from '../Table/TableCourseDetails'
 
 type CourseModalProps = {

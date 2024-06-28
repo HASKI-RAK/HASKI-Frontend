@@ -1,11 +1,12 @@
+import AddCircleIcon from '@mui/icons-material/AddCircle'
 import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Box, Button, Card, CardContent, Grid, Typography } from '@common/components'
+import { Box, Button, Card, CardContent, Grid, Stack, Typography } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
 import { CheckBox } from '@common/icons'
-import { SkeletonList, StyledLinearProgress, useLearningPathTopic } from '@components'
+import { CourseModal, SkeletonList, StyledLinearProgress, useLearningPathTopic } from '@components'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
@@ -34,6 +35,17 @@ const Course = (): JSX.Element => {
 
   const [calculatedTopicProgress, setCalculatedTopicProgress] = useState<number[][]>([[]])
   const { loading, topics } = useLearningPathTopic(courseId)
+
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const handleCloseCourseModal = () => {
+    setModalOpen(false)
+  }
+
+  const commonButtonStyle = {
+    mt: '1rem',
+    width: '85%'
+  }
 
   useEffect(() => {
     const preventEndlessLoading = setTimeout(() => {
@@ -174,6 +186,21 @@ const Course = (): JSX.Element => {
               </Card>
             )
           })}
+          <Card>
+            <CardContent>
+              <Stack direction="row" justifyContent="center">
+                <Button
+                  id="topic-button"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setModalOpen(true)}
+                  sx={commonButtonStyle}>
+                  <AddCircleIcon />
+                </Button>
+              </Stack>
+            </CardContent>
+            <CourseModal open={modalOpen} handleClose={handleCloseCourseModal}></CourseModal>
+          </Card>
         </Grid>
       )}
     </>

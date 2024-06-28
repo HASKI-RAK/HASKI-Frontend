@@ -19,7 +19,7 @@ export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/Breadcru
 export { default as TextCardLeft } from './TextCard/TextCardLeft/TextCardLeft'
 export { default as TextCardRight } from './TextCard/TextCardRight/TextCardRight'
 export { default as TextStepper } from './TextStepper/TextStepper'
-export { default as CourseModal } from './Course/Modal/CourseModal'
+export { default as CourseModal } from './CreateCourse/Modal/CourseModal'
 export {
   default as SnackbarMessage,
   type SnackbarMessageProps,
