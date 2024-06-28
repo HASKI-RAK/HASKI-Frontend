@@ -19,7 +19,7 @@ export const Home = () => {
   log.setLevel('error')
   // UX
   const { t } = useTranslation()
-  const authcontext = useContext(AuthContext)
+  const { isAuth } = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
@@ -35,12 +35,7 @@ export const Home = () => {
   }
 
   useEffect(() => {
-    const preventEndlessLoading = setTimeout(() => {
-      navigate('/login')
-    }, 1000)
-    const loadData = async () => {
-      if (authcontext.isAuth) {
-        clearTimeout(preventEndlessLoading)
+      if (isAuth) {
         getUser()
           .then((user) => {
             getCourses(user.settings.user_id, user.lms_user_id, user.id)
@@ -53,7 +48,7 @@ export const Home = () => {
                   severity: 'error',
                   autoHideDuration: 5000
                 })
-                log.error(error.message)
+                log.error(t('error.getCourses') + ' ' + error)
               })
           })
           .catch((error) => {
@@ -62,18 +57,11 @@ export const Home = () => {
               severity: 'error',
               autoHideDuration: 5000
             })
-            log.error(error.message)
+            log.error(t('error.getUser') + ' ' + error)
           })
-          .finally(() => {
-            setLoading(false)
-          })
+        setLoading(false)
       }
-    }
-    loadData()
-    return () => {
-      clearTimeout(preventEndlessLoading)
-    }
-  }, [loading])
+  }, [getUser, getCourses, setCourses, isAuth])
 
   const commonButtonStyle = {
     mt: '1rem',
@@ -88,11 +76,34 @@ export const Home = () => {
       <Stack spacing={2} direction="row" justifyContent="center">
         <div>
           {courses.length !== 0 && (
+            <Card>
+              <CardContent>
+                <Typography variant="h5" align="center">
+                  {t('pages.home.noCourses')}
+                </Typography>
+              </CardContent>
+            </Card>
+          ) : (
             courses.map((course) => {
               return (
-                <Card key={course.id} sx={{ mb: '1rem' }}>
+                <Card
+                  key={course.id}
+                  sx={{
+                    mb: '1rem',
+                    width: {
+                      xs: '20rem',
+                      sm: '20rem',
+                      md: '20rem',
+                      lg: '30rem',
+                      xl: '40rem',
+                      xxl: '45rem',
+                      xxxl: '50rem'
+                    }
+                  }}>
                   <CardContent>
-                    <Typography variant="h5">{course.name}</Typography>
+                    <Typography variant="h5" align="center">
+                      {course.name}
+                    </Typography>
                     <Stack direction="row" justifyContent="center">
                       <Button
                         id="course-button"
