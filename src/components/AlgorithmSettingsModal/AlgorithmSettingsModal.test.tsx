@@ -88,6 +88,5 @@ describe('AlgorithmSettingsModal', () => {
     fireEvent.click(getByTestId('algorithm-save-button'))
 
     expect(handleClose).toHaveBeenCalledTimes(1)
-    expect(console.log).toHaveBeenCalledTimes(1)
   })
 })

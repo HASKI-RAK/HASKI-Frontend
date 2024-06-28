@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import {
   FormControlLabel,
   Grid,
-  Stack,
   RadioGroup,
   Modal,
   Typography,
@@ -77,8 +76,9 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
       aria-describedby="modal-modal-description"
       data-testid="algorithm-modal">
       <Grid
+        container
         sx={{
-          width: { xl: '50rem', lg: '40rem', md: '30rem', xs: '18rem' },
+          width: { xl: '50rem', lg: '40rem', md: '40rem', xs: '18rem' },
           height: '30rem',
           right: 50,
           bgcolor: 'background.paper',
@@ -90,45 +90,41 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
           borderRadius: 6,
           boxShadow: 24,
           p: 4,
-          display: 'flex'
-        }}>
-        <Stack direction="row" spacing={2}>
-          <Stack direction="column" spacing={2}>
+        }}
+        >
+        <Grid item container direction="row" spacing={2}>
+          <Grid item container direction="column" spacing={1} xs={5}>
             <Typography id="modal-title" variant="h6" component="h6" align="center">
-              {' '}
-              {t('components.AlgorithmSettingsModal.headerLeft')}{' '}
+              {t('components.AlgorithmSettingsModal.headerLeft')}
             </Typography>
             <RadioGroup onChange={handleSelect}>
-              {options.map((option, index) => {
-                return (
-                  <Stack direction="row" key={option.key}>
-                    <FormControlLabel
-                      sx={{ width: { xl: '16rem' } }}
-                      value={index}
-                      control={<Radio role="radio-button" checked={index === selected} />}
-                      label={option.name}
-                      key={option.key}
-                    />
-                    {teacherselection === index && (
-                      <Tooltip
-                        arrow
-                        title={t('components.AlgorithmSettingsModal.teacherIconTip')}
-                        data-testid="teacher-icon">
-                        <School />
-                      </Tooltip>
-                    )}
-                  </Stack>
-                )
-              })}
+              {options.map((option, index) => (
+                <Grid item container direction="row" key={option.key}>
+                  <FormControlLabel
+                    sx={{ width: { xl: '16rem' } }}
+                    value={index}
+                    control={<Radio role="radio-button" checked={index === selected} />}
+                    label={option.name}
+                  />
+                  {teacherselection === index && (
+                    <Tooltip
+                      arrow
+                      title={t('components.AlgorithmSettingsModal.teacherIconTip')}
+                      data-testid="teacher-icon">
+                      <School />
+                    </Tooltip>
+                  )}
+                </Grid>
+              ))}
             </RadioGroup>
-          </Stack>
+          </Grid>
           <Fab
             sx={{
               width: { xl: '3.5rem', md: '2rem', sm: '2rem', xs: '2rem' },
               height: { xl: '3.5rem', md: '2rem', xs: '2rem' },
               position: 'absolute',
               top: '0.5rem',
-              right: '0.5rem'
+              right: '0.5rem',
             }}
             color="primary"
             onClick={props.handleClose}
@@ -136,17 +132,15 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
             <Close />
           </Fab>
           <Divider orientation="vertical" sx={{ display: { xs: 'none', md: 'flex' } }} />
-          <Stack direction="column" spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Typography id="modal-description-header" variant="h6" component="p" align="center">
-              {' '}
-              {t('components.AlgorithmSettingsModal.headerRight')}{' '}
+          <Grid item container direction="column" spacing={1} sx={{ display: { xs: 'none', md: 'flex' } }} xs={6.5}>
+            <Typography id="modal-description-header" variant="h6" component="h6" align="center">
+              {t('components.AlgorithmSettingsModal.headerRight')}
             </Typography>
             <Typography id="modal-description" variant="body1" component="p" align="center">
-              {' '}
-              {options[selected].description}{' '}
+              {options[selected].description}
             </Typography>
-          </Stack>
-        </Stack>
+          </Grid>
+        </Grid>
         <Fab
           onClick={handleSave}
           aria-label="save"
