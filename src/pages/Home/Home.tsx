@@ -12,7 +12,8 @@ import {
   Typography,
   Menu,
   MenuItem,
-  IconButton
+  IconButton,
+  Grid
 } from '@common/components'
 import { AlgorithmSettingsModal } from '@components'
 import { MoreVert } from '@common/icons'
@@ -121,14 +122,12 @@ export const Home = () => {
                       xxxl: '50rem'
                     }
                   }}>
-                  <CardHeader
-                    action={
-                      <IconButton onClick={openMenu} data-courseid={course.id} data-testid="settings-button">
-                        <MoreVert />
-                      </IconButton>
-                    }
-                    title={course.name}
-                  />
+                  <Grid container direction="row" justifyContent="flex-end" alignItems="flex-start">
+                   <IconButton onClick={openMenu} data-courseid={course.id} data-testid="settings-button" sx={{ position: 'relative', left: '0', top: '0' }}>
+                      <MoreVert />
+                  </IconButton> 
+                  </Grid>
+                  <Typography variant="h5" align="center">{course.name}</Typography>
                   <CardContent>
                     <Stack direction="row" justifyContent="center">
                       <Button

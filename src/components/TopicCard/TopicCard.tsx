@@ -43,7 +43,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         mt: '1rem'
       }}>
       <CardContent>
-        <Grid container direction="row" justifyContent="flex-end" alignItems="flex-start">
+        <Grid container direction="row" justifyContent="flex-end" alignItems="center">
           <IconButton
             sx={{ position: 'relative', left: '0', top: '0' }}
             onClick={openMenu}
@@ -51,21 +51,20 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
             data-testid="TopicSettingsButton">
             <MoreVert />
           </IconButton>
-        </Grid>
-        <Grid container direction="column" justifyContent="center" alignItems="center">
-          <Grid item md={1}>
+          <Grid item>
             {/*if topic is done 100%, a checkbox is displayed*/}
-            {calculatedTopicProgress && calculatedTopicProgress[0] / calculatedTopicProgress[1] == 1 && (
+            {true && (
               <CheckBox
                 sx={{
-                  mt: '-0.8rem',
-                  ml: { xs: '7rem', sm: '17rem', md: '37rem', lg: '47rem', xl: '67rem', xxl: '82rem', xxxl: '107rem' },
                   fontSize: 29
                 }}
                 color={'success'}
               />
             )}
           </Grid>
+        </Grid>
+        <Grid container direction="column" justifyContent="center" alignItems="center">
+          
           <Grid item md={11}>
             <Typography variant={isSmOrDown ? 'subtitle1' : 'h5'}>{topic?.name}</Typography>
           </Grid>
