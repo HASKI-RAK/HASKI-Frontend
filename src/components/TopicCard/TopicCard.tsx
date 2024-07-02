@@ -53,7 +53,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           </IconButton>
           <Grid item>
             {/*if topic is done 100%, a checkbox is displayed*/}
-            {true && (
+            {calculatedTopicProgress && calculatedTopicProgress[0] / calculatedTopicProgress[1] == 1 && (
               <CheckBox
                 sx={{
                   fontSize: 29
