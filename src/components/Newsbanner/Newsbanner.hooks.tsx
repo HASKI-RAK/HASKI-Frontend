@@ -5,10 +5,30 @@ import { SnackbarContext } from '@services'
 import { useStore } from '@store'
 import { useTranslation } from 'react-i18next'
 
+/**
+ * @prop checkForNews - sets the newsItem if there is atleast one news
+ * and returns a string of all news
+ * @prop hasItem - check if there are any news
+ * @category Hooks
+ * @interface
+ */
+
 export type NewsbannerHookReturn = {
   readonly checkForNews: () => Promise<string>
   readonly hasItem: () => boolean
 }
+
+/**
+ * useNewsbanner hook.
+ * @remarks
+ * Hook for the Newsbanner logic.
+ * first checks if there are any news and then returns a string with all news items.
+ * also changes news if the language gets changed
+ *
+ * @returns - hasItem and all news as a string
+ *
+ * @category Hooks
+ */
 
 export const useNewsbanner = (): NewsbannerHookReturn => {
   const { t, i18n } = useTranslation()
@@ -16,7 +36,6 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
   const getNews = useStore((state) => state.getNews)
   const { checkUniversity } = UniversityCheck()
   const [newsItem, setNewsItem] = useState(false)
-
 
   //** Logic **/
   const checkLanguage = () => {
@@ -28,7 +47,7 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
   }
 
   //returns combined string of all the news
-  //and the amount of messages
+  //and checks if there are news
   const checkForNews = async () => {
     return checkUniversity().then((university) => {
       return getNews(checkLanguage(), university)

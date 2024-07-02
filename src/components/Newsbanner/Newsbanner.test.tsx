@@ -27,7 +27,6 @@ describe('Newsbanner tests', () => {
     )
 
     const { getByTestId, rerender } = render(
-        
       <MemoryRouter>
         <Newsbanner />
       </MemoryRouter>
@@ -70,7 +69,7 @@ describe('Newsbanner tests', () => {
       })
     )
 
-    const {container, getByTestId, rerender } = render(
+    const { container, getByTestId, rerender } = render(
       <MemoryRouter>
         <Newsbanner />
       </MemoryRouter>
@@ -104,7 +103,7 @@ describe('Newsbanner tests', () => {
     mockServices.fetchNews = jest.fn().mockImplementationOnce(() => {
       throw new Error('Error')
     })
-    const {container} = render(<Newsbanner />)
+    const { container } = render(<Newsbanner />)
     expect(container).toBeEmptyDOMElement()
   })
 
@@ -125,7 +124,7 @@ describe('Newsbanner tests', () => {
         news: [{}]
       })
     )
-    const {container} = render(<Newsbanner />)
+    const { container } = render(<Newsbanner />)
     expect(container).toBeEmptyDOMElement()
   })
 })
