@@ -37,7 +37,7 @@ type optionsType = {
  */
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
   const [selected, setSelected] = useState(0)
-  //change hardcoded teacher selection to fetched teacher selection 
+  //change hardcoded teacher selection to fetched teacher selection
   const [teacherSelection, setTeacherSelection] = useState(0)
   const { t } = useTranslation()
   const options = props.options ?? [

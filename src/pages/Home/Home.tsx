@@ -41,7 +41,6 @@ export const Home = () => {
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
 
-
   const [isAlgorithmSettingsModalOpen, setIsAlgorithmSettingsModalOpen] = useState(false)
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null)
   const [selectedCourseID, setSelectedCourseID] = useState<undefined | string>(undefined)
@@ -123,11 +122,17 @@ export const Home = () => {
                     }
                   }}>
                   <Grid container direction="row" justifyContent="flex-end" alignItems="flex-start">
-                   <IconButton onClick={openMenu} data-courseid={course.id} data-testid="settings-button" sx={{ position: 'relative', left: '0', top: '0' }}>
+                    <IconButton
+                      onClick={openMenu}
+                      data-courseid={course.id}
+                      data-testid="settings-button"
+                      sx={{ position: 'relative', left: '0', top: '0' }}>
                       <MoreVert />
-                  </IconButton> 
+                    </IconButton>
                   </Grid>
-                  <Typography variant="h5" align="center">{course.name}</Typography>
+                  <Typography variant="h5" align="center">
+                    {course.name}
+                  </Typography>
                   <CardContent>
                     <Stack direction="row" justifyContent="center">
                       <Button
