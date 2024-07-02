@@ -1,20 +1,21 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, act, renderHook, getByTestId } from '@testing-library/react'
+import { fireEvent, render, act, renderHook } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import Newsbanner from './Newsbanner'
 import { MemoryRouter } from 'react-router-dom'
 import { UniversityCheck } from '@common/utils'
 import { LanguageMenu } from '@components'
 import { I18nextProvider } from 'react-i18next'
-import { useNewsbanner } from './Newsbanner.hooks'
+import i18next from 'i18next'
+import { useNewsbanner, NewsbannerHookReturn } from './Newsbanner.hooks'
+import React from 'react'
+import { SnackbarContextType } from '@services'
 
 describe('Newsbanner tests', () => {
   beforeEach(() => {
-    window.localStorage.clear()
+    window.sessionStorage.clear()
   })
-  const useNewsbanner = jest.fn(()=>{
-    return{ handleLangChange: 'en'}
-  })
+
   test('Newsbanner is open', async () => {
     mockServices.fetchNews = jest.fn().mockImplementation(() =>
       Promise.resolve({
@@ -31,7 +32,8 @@ describe('Newsbanner tests', () => {
       })
     )
 
-    const { container, getByTestId, rerender } = render(
+    const { getByTestId, rerender } = render(
+        
       <MemoryRouter>
         <Newsbanner />
       </MemoryRouter>
@@ -118,53 +120,6 @@ describe('Newsbanner tests', () => {
       wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
     })
     expect(await result.current.checkUniversity()).toBe('')
-  })
-
-  test('Handle language change for the Newsbanner', async() => {
-    mockServices.fetchNews = jest.fn().mockImplementation(() =>
-        Promise.resolve({
-          news: [
-            {
-              date: 'Thu, 13 Jul 2023 16:00:00 GMT',
-              expiration_date: 'Sun, 20 Apr 2025 16:00:00 GMT',
-              id: 1,
-              language_id: 'en',
-              news_content: 'We are currently testing the site',
-              university: 'TH-AB'
-            }
-          ]
-        })
-      )
-  
-      const { getByTestId, rerender } = render(
-        <MemoryRouter>
-          <Newsbanner />
-        </MemoryRouter>
-      )
-  
-      await new Promise(process.nextTick)
-  
-      rerender(
-        <MemoryRouter>
-          <Newsbanner />
-        </MemoryRouter>
-      )
-  
-      await new Promise(process.nextTick)
-  
-      rerender(
-        <MemoryRouter>
-          <Newsbanner />
-        </MemoryRouter>
-      )
-      const result = renderHook(
-        ()=>{
-      const onLngChange = useNewsbanner({handleLangChange:'de'})
-      return 
-        })
-    const onLngChange = result.result.current
-      expect(useNewsbanner).toBeCalled()
-
   })
 
   test('Newsbanner doesnt open because no news', () => {

@@ -4,7 +4,6 @@ import { UniversityCheck as _UniversityCheck, UniversityCheck } from '@common/ut
 import { SnackbarContext } from '@services'
 import { useStore } from '@store'
 import { useTranslation } from 'react-i18next'
-import i18next from 'i18next'
 
 export type NewsbannerHookReturn = {
   readonly checkForNews: () => Promise<string>
@@ -12,22 +11,16 @@ export type NewsbannerHookReturn = {
 }
 
 export const useNewsbanner = (): NewsbannerHookReturn => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
   const getNews = useStore((state) => state.getNews)
   const { checkUniversity } = UniversityCheck()
-  const [lang, setLang] = useState(localStorage.getItem('i18nextLng')?.toLowerCase())
   const [newsItem, setNewsItem] = useState(false)
 
-  const handleLangChange = (lng: string) => {
-    setLang(lng)
-  }
-
-  i18next.on('languageChanged', handleLangChange )
 
   //** Logic **/
   const checkLanguage = () => {
-    return lang
+    return i18n.language
   }
 
   const hasItem = () => {
