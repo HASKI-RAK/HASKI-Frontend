@@ -45,11 +45,13 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
             calculateLearningPath(user, addSnackbar, t)
             return !!response
           })
-          .catch(() => {
+          .catch((error) => {
             addSnackbar({
               message: t('error.postILS'),
-              severity: 'error'
+              severity: 'error',
+              autoHideDuration: 3000
             })
+            log.error(t('error.postILS') + ' ' + error)
             return false
           })
           .finally(() => {
@@ -61,11 +63,13 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
           .then((response) => {
             return !!response
           })
-          .catch(() => {
+          .catch((error) => {
             addSnackbar({
               message: t('error.postListK'),
-              severity: 'error'
+              severity: 'error',
+              autoHideDuration: 3000
             })
+            log.error(t('error.postListK') + ' ' + error)
             return false
           })
           .finally(() => {
@@ -105,13 +109,13 @@ const calculateLearningPath = (
         .then((response) => {
           log.info(response)
         })
-        .catch(() => {
+        .catch((error) => {
           addSnackbar({
-            message: t('Data.calculated.error'),
-            severity: 'success',
+            message: t('error.postCalculateLearningPathILS'),
+            severity: 'error',
             autoHideDuration: 5000
           })
-          log.error('Error while calculating learning path in Kempten Course 1')
+          log.error(t('error.postCalculateLearningPathILS') + '' + error)
         })
     })
   })

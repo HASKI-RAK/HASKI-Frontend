@@ -14,6 +14,7 @@ import LearningPathElementStatusSlice, {
 import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
 import UserSlice, { createUserSlice } from '../Slices/UserSlice'
 import NewsSlice, { createNewsSlice } from '../Slices/NewsSlice'
+import xAPISlice, { createXAPISlice } from '../Slices/xAPISlice'
 
 export type StoreState = LearningPathElementSlice &
   CourseSlice &
@@ -21,7 +22,7 @@ export type StoreState = LearningPathElementSlice &
   NewsSlice &
   LearningPathTopicSlice &
   LearningPathElementSpecificStatusSlice
-export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice
+export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & xAPISlice
 
 export const resetters: (() => void)[] = []
 
@@ -40,7 +41,8 @@ export const usePersistedStore = create<PersistedStoreState>()(
       (...a) => ({
         ...createUserSlice(...a),
         ...createLearningPathElementStatusSlice(...a),
-        ...createAuthSlice(...a)
+        ...createAuthSlice(...a),
+        ...createXAPISlice(...a)
       }),
       {
         name: 'persisted_storage',

@@ -44,7 +44,7 @@ const AboutUs = () => {
       <TextCardLeft
         header={t('pages.aboutus.introductionHeader')}
         body={t('pages.aboutus.introductionBody')}
-        backgroundImageURL="/LogoPng.png">
+        backgroundImageURL="/LogoHaski.png">
         <ImageCollection
           leftImgURL="/images/AboutUsRegensburg.jpg"
           middleImgURL="/images/AboutUsAschaffenburg.jpg"
@@ -96,7 +96,15 @@ const AboutUs = () => {
             zIndex: '-100',
             opacity: '0.35',
             position: 'absolute',
-            width: { xl: '50rem', lg: '40rem', md: '33.5rem', sm: '33.5rem', xs: '33.5rem' },
+            width: {
+              xxxl: '70rem',
+              xxl: '60rem',
+              xl: '50rem',
+              lg: '40rem',
+              md: '33.5rem',
+              sm: '33.5rem',
+              xs: '33.5rem'
+            },
             left: '2%',
             marginTop: '-9rem'
           }}
@@ -110,7 +118,15 @@ const AboutUs = () => {
             zIndex: '-100',
             opacity: '0.35',
             position: 'absolute',
-            width: { xl: '50rem', lg: '40rem', md: '33.5rem', sm: '33.5rem', xs: '33.5rem' },
+            width: {
+              xxxl: '70rem',
+              xxl: '60rem',
+              xl: '50rem',
+              lg: '40rem',
+              md: '33.5rem',
+              sm: '33.5rem',
+              xs: '33.5rem'
+            },
             right: '2%',
             marginTop: '-8rem'
           }}
@@ -124,7 +140,15 @@ const AboutUs = () => {
             zIndex: '-100',
             opacity: '0.35',
             position: 'absolute',
-            width: { xl: '50rem', lg: '40rem', md: '33.5rem', sm: '33.5rem', xs: '33.5rem' },
+            width: {
+              xxxl: '70rem',
+              xxl: '60rem',
+              xl: '50rem',
+              lg: '40rem',
+              md: '33.5rem',
+              sm: '33.5rem',
+              xs: '33.5rem'
+            },
             left: '2%',
             marginTop: '-3rem'
           }}
