@@ -11,11 +11,18 @@ import {
   Grid,
   Link,
   Modal,
+  Step,
+  StepButton,
+  Stepper,
   Tooltip,
   Typography
 } from '@common/components'
 import { Close } from '@common/icons'
 import { RemoteCourse } from '@core'
+import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
+import TableAlgorithm from '../Table/TableAlgorithm'
+import TableLearningElement from '../Table/TableLearningElement'
+import TableTopic from '../Table/TableTopic'
 
 type CourseModalProps = {
   open?: boolean
@@ -26,10 +33,17 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [selectedCourse, setSelectedCourse] = useState<RemoteCourse>()
+  const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>([])
   const [activeStep, setActiveStep] = useState<number>(0)
+  const steps = ['Select Topics', 'Select Learning Elements', 'Select Algorithm']
 
-  const handleCourseSelection = (course: RemoteCourse) => {
-    setSelectedCourse(course)
+  const handleSetTopics = () => {
+    console.log('Selected Topics:', selectedTopics)
+    setActiveStep(1)
+  }
+
+  const handleTopicChange = (topics: RemoteTopic[]) => {
+    setSelectedTopics(topics)
   }
 
   return (
@@ -59,23 +73,44 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
             }}>
             <Close />
           </Fab>
+          <Stepper nonLinear activeStep={activeStep} sx={{ pt: '1rem' }}>
+            {steps.map((label, index) => (
+              <Step key={label} data-testid={'StepperButton'}>
+                <StepButton
+                  color="inherit"
+                  onClick={() => {
+                    setActiveStep(index)
+                  }}>
+                  {label}
+                </StepButton>
+              </Step>
+            ))}
+          </Stepper>
           {activeStep === 0 ? (
-            <Grid>
-              <Typography variant={'h3'} align={'center'} sx={{ mb: 1 }}>
-                {'Topics aus dem Kurs'}
-              </Typography>
-              <Grid container justifyContent="center" alignItems="center" sx={{ mt: 2 }}>
-                <Button id="add-course-button" variant="contained" color="primary" onClick={() => setActiveStep(1)}>
-                  {'Select Topics'}
+            <Grid container item>
+              <TableTopic open={open} onTopicChange={handleTopicChange} />
+              <Grid container justifyContent="flex-end" alignItems="flex-end" sx={{ mt: 2 }}>
+                <Button id="add-course-button" variant="contained" color="primary" onClick={handleSetTopics}>
+                  {'Next'}
                 </Button>
               </Grid>
             </Grid>
-          ) : (
-            <Grid>
-              <Typography variant={'h3'} align={'center'} sx={{ mb: 1 }}>
-                {'Kursdetails'}
-              </Typography>
+          ) : activeStep === 1 ? (
+            <Grid container item>
+              <TableLearningElement lmsRemoteTopics={selectedTopics} />
               <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
+                <Button id="add-course-button" variant="contained" color="primary" onClick={() => setActiveStep(0)}>
+                  {'Back'}
+                </Button>
+                <Button id="add-course-button" variant="contained" color="primary" onClick={() => setActiveStep(2)}>
+                  {'Next'}
+                </Button>
+              </Grid>
+            </Grid>
+          ) : activeStep === 2 ? (
+            <Grid container item>
+              <TableAlgorithm lmsRemoteTopics={selectedTopics} />
+              <Grid container item justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
                 <Button id="add-course-button" variant="contained" color="primary" onClick={() => setActiveStep(0)}>
                   {'Back'}
                 </Button>
@@ -84,11 +119,11 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                   variant="contained"
                   color="primary"
                   onClick={() => console.log('Selected Course:', selectedCourse)}>
-                  {'create Course'}
+                  {'create Topics'}
                 </Button>
               </Grid>
             </Grid>
-          )}
+          ) : null}
         </Box>
       </Grid>
     </Modal>
