@@ -4,12 +4,6 @@ import { mockServices } from 'jest.setup'
 import Newsbanner from './Newsbanner'
 import { MemoryRouter } from 'react-router-dom'
 import { UniversityCheck } from '@common/utils'
-import { LanguageMenu } from '@components'
-import { I18nextProvider } from 'react-i18next'
-import i18next from 'i18next'
-import { useNewsbanner, NewsbannerHookReturn } from './Newsbanner.hooks'
-import React from 'react'
-import { SnackbarContextType } from '@services'
 
 describe('Newsbanner tests', () => {
   beforeEach(() => {
@@ -76,7 +70,7 @@ describe('Newsbanner tests', () => {
       })
     )
 
-    const { container, getByTestId, rerender } = render(
+    const {container, getByTestId, rerender } = render(
       <MemoryRouter>
         <Newsbanner />
       </MemoryRouter>
@@ -102,13 +96,16 @@ describe('Newsbanner tests', () => {
       const closeButton = getByTestId('IconButton')
       fireEvent.click(closeButton)
     })
+
+    expect(container).toBeEmptyDOMElement()
   })
 
   test('Newsbanner has an error when fetching the News', () => {
     mockServices.fetchNews = jest.fn().mockImplementationOnce(() => {
       throw new Error('Error')
     })
-    const form = render(<Newsbanner />)
+    const {container} = render(<Newsbanner />)
+    expect(container).toBeEmptyDOMElement()
   })
 
   test('Newsbanner has an error when fetching the University', async () => {
@@ -128,6 +125,7 @@ describe('Newsbanner tests', () => {
         news: [{}]
       })
     )
-    const form = render(<Newsbanner />)
+    const {container} = render(<Newsbanner />)
+    expect(container).toBeEmptyDOMElement()
   })
 })
