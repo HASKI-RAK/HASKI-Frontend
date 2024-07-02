@@ -13,6 +13,7 @@ import {
   Typography
 } from '@common/components'
 import { PrivacyModalHookReturn, usePrivacyModal as _usePrivacyModal } from './PrivacyModal.hooks'
+import { UniversityCheck as _UniversityCheck, UniversityCheckReturn } from '@common/utils'
 
 const style = {
   position: 'absolute',
@@ -34,6 +35,7 @@ const style = {
 
 export type PrivacyModalProps = {
   usePrivacyModal?: () => PrivacyModalHookReturn
+  UniversityCheck?: () => UniversityCheckReturn
 }
 
 /**
@@ -49,12 +51,16 @@ export type PrivacyModalProps = {
  * @category Components
  */
 
-const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps) => {
+const PrivacyModal = ({
+  usePrivacyModal = _usePrivacyModal,
+  UniversityCheck = _UniversityCheck
+}: PrivacyModalProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [open, setOpen] = useState(true)
   const [checked, setChecked] = useState(false)
-  const { privacyPolicyCookie, handleAccept, checkUniversity } = usePrivacyModal()
+  const { privacyPolicyCookie, handleAccept } = usePrivacyModal()
+  const { checkUniversity } = UniversityCheck()
   const currentLocation = useLocation()
 
   //Disable backdropClick so the Modal only closes via the buttons

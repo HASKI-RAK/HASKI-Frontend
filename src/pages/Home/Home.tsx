@@ -28,32 +28,32 @@ export const Home = () => {
   const getCourses = useStore((state) => state.getCourses)
 
   useEffect(() => {
-      if (isAuth) {
-        getUser()
-          .then((user) => {
-            getCourses(user.settings.user_id, user.lms_user_id, user.id)
-              .then((CourseResponse) => {
-                setCourses(CourseResponse.courses)
-              })
-              .catch((error) => {
-                addSnackbar({
-                  message: t('error.getCourses'),
-                  severity: 'error',
-                  autoHideDuration: 5000
-                })
-                log.error(t('error.getCourses') + ' ' + error)
-              })
-          })
-          .catch((error) => {
-            addSnackbar({
-              message: t('error.getUser'),
-              severity: 'error',
-              autoHideDuration: 5000
+    if (isAuth) {
+      getUser()
+        .then((user) => {
+          getCourses(user.settings.user_id, user.lms_user_id, user.id)
+            .then((CourseResponse) => {
+              setCourses(CourseResponse.courses)
             })
-            log.error(t('error.getUser') + ' ' + error)
+            .catch((error) => {
+              addSnackbar({
+                message: t('error.getCourses'),
+                severity: 'error',
+                autoHideDuration: 5000
+              })
+              log.error(t('error.getCourses') + ' ' + error)
+            })
+        })
+        .catch((error) => {
+          addSnackbar({
+            message: t('error.getUser'),
+            severity: 'error',
+            autoHideDuration: 5000
           })
-        setLoading(false)
-      }
+          log.error(t('error.getUser') + ' ' + error)
+        })
+      setLoading(false)
+    }
   }, [getUser, getCourses, setCourses, isAuth])
 
   // Card cointaining the courses with a button to the specific course
