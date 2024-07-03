@@ -1,22 +1,15 @@
 import log from 'loglevel'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import {
   Button,
   Card,
   CardContent,
-  CardHeader,
   Skeleton,
   Stack,
   Typography,
-  Menu,
-  MenuItem,
-  IconButton,
-  Grid
 } from '@common/components'
-import { AlgorithmSettingsModal } from '@components'
-import { MoreVert } from '@common/icons'
 import { Course } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -41,7 +34,8 @@ export const Home = () => {
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
 
-  const [isAlgorithmSettingsModalOpen, setIsAlgorithmSettingsModalOpen] = useState(false)
+  /*
+  * Temporarily removed, because setting of topic algorithms is not implemented yet
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null)
   const [selectedCourseID, setSelectedCourseID] = useState<undefined | string>(undefined)
   const openMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -51,14 +45,7 @@ export const Home = () => {
   const handleCloseMenu = useCallback(() => {
     setMenuAnchorEl(null)
   }, [setMenuAnchorEl])
-  const handleAlgorithmMenuOpen = useCallback(() => {
-    handleCloseMenu()
-    setIsAlgorithmSettingsModalOpen(true)
-  }, [handleCloseMenu, setIsAlgorithmSettingsModalOpen])
-  const handleAlgorithmModalClose = useCallback(() => {
-    setIsAlgorithmSettingsModalOpen(false)
-    setSelectedCourseID(undefined)
-  }, [setIsAlgorithmSettingsModalOpen])
+  */
 
   useEffect(() => {
     if (isAuth) {
@@ -121,6 +108,9 @@ export const Home = () => {
                       xxxl: '50rem'
                     }
                   }}>
+                  {/*
+                  * Temporarily removed, because setting of topic algorithms is not implemented yet/
+                  * setting of learning path algorithm for all topics at once, will probably not be implemented
                   <Grid container direction="row" justifyContent="flex-end" alignItems="flex-start">
                     <IconButton
                       onClick={openMenu}
@@ -129,8 +119,8 @@ export const Home = () => {
                       sx={{ position: 'relative', mt:'0.4rem'}}>
                       <MoreVert />
                     </IconButton>
-                  </Grid>
-                  <Typography variant="h5" align="center">
+                  </Grid>*/}
+                  <Typography variant="h5" align="center" sx={{mt:'0.5rem'}}>
                     {course.name}
                   </Typography>
                   <CardContent>
@@ -152,16 +142,12 @@ export const Home = () => {
                       </Typography>
                     </Stack>
                   </CardContent>
-                  <AlgorithmSettingsModal
-                    isOpen={isAlgorithmSettingsModalOpen && course.id === Number(selectedCourseID)}
-                    handleClose={handleAlgorithmModalClose}
-                    getIDs={{ courseID: course.id, topicID: null }}
-                    data-testid="algorithm-modal"
-                  />
                 </Card>
               )
             })
           )}
+          {/*
+          * see other commented out code above
           <Menu
             id="menu"
             anchorEl={menuAnchorEl}
@@ -174,6 +160,7 @@ export const Home = () => {
               {t('pages.home.menuItemAlgorithms')}
             </MenuItem>
           </Menu>
+          */}
         </div>
       </Stack>
     </div>

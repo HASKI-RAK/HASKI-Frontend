@@ -17,27 +17,6 @@ describe('Test the Home page', () => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
-  test('modal can be opened and closed', async () => {
-    const { getAllByTestId, getByTestId, queryByTestId } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
-    )
-
-    await waitFor(() =>
-      act(() => {
-        fireEvent.click(getAllByTestId('settings-button')[0])
-        expect(getByTestId('settings-menu')).toBeInTheDocument()
-      })
-    )
-    expect(getByTestId('menu-item-algorithm')).toBeInTheDocument()
-    fireEvent.click(getByTestId('menu-item-algorithm'))
-    expect(getByTestId('algorithm-modal')).toBeInTheDocument
-    fireEvent.click(getByTestId('algorithm-modal-close-button'))
-    expect(queryByTestId('algorithm-modal')).toBeNull()
-  })
 
   test('fetching Course throws error', async () => {
     mockServices.fetchCourses.mockImplementationOnce(() => {
@@ -131,6 +110,8 @@ describe('Test the Home page', () => {
     })
   })
 
+  /*
+    * currently commented out because UI element is not used/commented out at the moment
   test('settings button opens menu', async () => {
     const { getAllByTestId, getByTestId } = render(
       <MemoryRouter>
@@ -167,4 +148,5 @@ describe('Test the Home page', () => {
       expect(queryByTestId('settings-menu')).toBeNull()
     })
   })
+  */
 })
