@@ -126,7 +126,7 @@ export const Home = () => {
                       onClick={openMenu}
                       data-courseid={course.id}
                       data-testid="settings-button"
-                      sx={{ position: 'relative', left: '0', top: '0' }}>
+                      sx={{ position: 'relative', mt:'0.4rem'}}>
                       <MoreVert />
                     </IconButton>
                   </Grid>
