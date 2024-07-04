@@ -1,5 +1,6 @@
+import { InputLabel } from '@mui/material'
 import { memo, useEffect, useState } from 'react'
-import { Checkbox, FormControlLabel, FormGroup, Grid, TableRow } from '@common/components'
+import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, TableRow, Typography } from '@common/components'
 import { SkeletonList } from '@components'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 import { fetchRemoteTopics } from '../../../services/RemoteTopics/fetchRemoteTopics'
@@ -14,9 +15,11 @@ const TableTopic = memo(({ open = false, onTopicChange }: TableTopicProps) => {
   const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>([])
 
   useEffect(() => {
-    fetchRemoteTopics(2).then((response) => {
-      setLmsTopics(response)
-    })
+    if (LmsTopics.length === 0) {
+      fetchRemoteTopics(2).then((response) => {
+        setLmsTopics(response)
+      })
+    }
   }, [open])
 
   const handleTopicChange = (topic: RemoteTopic, checked: boolean) => {
@@ -31,27 +34,36 @@ const TableTopic = memo(({ open = false, onTopicChange }: TableTopicProps) => {
   }
 
   return (
-    <Grid container direction="column" justifyContent="center" alignItems="center">
-      {LmsTopics.length === 0 ? (
-        <TableRow key={'TableTopicTableRow'}>
-          <SkeletonList />
-        </TableRow>
-      ) : (
-        <FormGroup>
-          {LmsTopics.map((LmsTopic) => (
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={selectedTopics.some((topic) => topic.topic_id === LmsTopic.topic_id)}
-                  onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
+    <Grid container direction="column" alignItems="center" spacing={3}>
+      <Grid item alignItems="center">
+        <Typography variant="h6" sx={{ mt: '1rem' }}>
+          Available Topics
+        </Typography>
+      </Grid>
+      <Grid item container alignItems="stretch" direction="row">
+        <Paper sx={{ padding: '1rem', width: '100%' }}>
+          {LmsTopics.length === 0 ? (
+            <TableRow key={'TableTopicTableRow'}>
+              <SkeletonList />
+            </TableRow>
+          ) : (
+            <FormGroup>
+              {LmsTopics.map((LmsTopic) => (
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={selectedTopics.some((topic) => topic.topic_id === LmsTopic.topic_id)}
+                      onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
+                    />
+                  }
+                  label={LmsTopic.topic_name}
+                  key={LmsTopic.topic_id}
                 />
-              }
-              label={LmsTopic.topic_name}
-              key={LmsTopic.topic_id}
-            />
-          ))}
-        </FormGroup>
-      )}
+              ))}
+            </FormGroup>
+          )}
+        </Paper>
+      </Grid>
     </Grid>
   )
 })
