@@ -1,7 +1,9 @@
-import { Fragment, memo } from 'react'
+import { Fragment, memo, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Box, Container, Divider, Grid, Link, Typography } from '@common/components'
+import { AuthContext } from '@services'
+import { useAuthProvider } from 'src/services/AuthProvider/AuthProvider.hooks'
 
 /**
  * Sticks to the bottom of the page and is always visible.
@@ -17,11 +19,13 @@ const Footer = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
+ const {isAuth}=useContext(AuthContext)
+
   const footerComponents = [
-    { name: [t('pages.home')], link: '/' },
-    { name: [t('pages.contact')], link: '/contact' },
-    { name: [t('pages.imprint')], link: '/imprint' },
-    { name: [t('pages.privacypolicy')], link: '/privacypolicy' }
+    { name: [t('pages.home')], link: '/', showOnlyWhenLoggin: false},
+    { name: [t('pages.contact')], link: '/contact', showOnlyWhenLoggin: true },
+    { name: [t('pages.imprint')], link: '/imprint', showOnlyWhenLoggin: false },
+    { name: [t('pages.privacypolicy')], link: '/privacypolicy', showOnlyWhenLoggin: false }
   ]
 
   return (
@@ -43,6 +47,8 @@ const Footer = () => {
             </Grid>
             <Grid item xs={12} display="flex" width="100%" justifyContent="center">
               {footerComponents.map((component) => (
+                
+                ((!component.showOnlyWhenLoggin) || isAuth) && 
                 <Fragment key={component.link}>
                   <Link
                     id={component.link.concat('-link').replaceAll(' ', '-')}
