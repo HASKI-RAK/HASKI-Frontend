@@ -88,7 +88,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
           </Stepper>
           {activeStep === 0 ? (
             <Grid container item>
-              <TableTopic open={open} onTopicChange={handleTopicChange} />
+              <TableTopic open={open} onTopicChange={handleTopicChange} selectedTopicsModal={selectedTopics} />
               <Grid container justifyContent="flex-end" alignItems="flex-end" sx={{ mt: 2 }}>
                 <Button id="add-course-button" variant="contained" color="primary" onClick={handleSetTopics}>
                   {'Next'}
