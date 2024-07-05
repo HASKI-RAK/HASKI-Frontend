@@ -1,7 +1,6 @@
-import FormatAlignLeftIcon from '@mui/icons-material/ViewList'
-import { InputLabel, ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { InputLabel } from '@mui/material'
 import Autocomplete from '@mui/material/Autocomplete'
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -20,16 +19,8 @@ import {
   Typography
 } from '@common/components'
 import { SkeletonList } from '@components'
-import { RemoteCourse } from '@core'
 import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
-import { fetchRemoteCourses } from '../../../services/RemoteCourses'
-import { fetchRemoteTopics } from '../../../services/RemoteTopics/fetchRemoteTopics'
-import {
-  StyledTableCell,
-  StyledTableCellWithoutBorder,
-  StyledTableRow
-} from '../../Questionnaire/QuestionnaireResults/Table/QuestionnaireResultTableStyle'
 
 type TableLearningElementProps = {
   lmsRemoteTopics?: RemoteTopic[]
@@ -99,51 +90,55 @@ const TableAlgorithm = memo(({ lmsRemoteTopics = [] }: TableLearningElementProps
       ) : (
         <Box>
           {lmsRemoteTopics.map((lmsLearningElementList, index) => (
-            <div key={lmsLearningElementList.topic_id}>
-              <Divider />
-              <Grid
-                container
-                item
-                direction="row"
-                alignItems="flex-start"
-                key={lmsLearningElementList.topic_id}
-                spacing={2}>
-                <Grid item xs={5}>
-                  <Grid container item direction="column">
-                    <Box bgcolor={'rgba(255,168,45,0.34)'}>
-                      <InputLabel
-                        sx={{
-                          mb: '1rem',
-                          mt: '1rem',
-                          whiteSpace: 'normal',
-                          overflow: 'visible',
-                          wordBreak: 'break-word',
-                          color: 'black'
-                        }}>
-                        {lmsLearningElementList.topic_name}
-                      </InputLabel>
-                    </Box>
-                    <FormGroup>
-                      <Autocomplete
-                        options={options}
-                        getOptionLabel={(option) => option.name}
-                        value={algorithmValues[index]}
-                        onChange={handleAlgorithmChange(index)}
-                        renderInput={(params) => <TextField {...params} label="Algorithmus" />}
-                        sx={{ mt: '1rem', mr: '1rem', mb: '1rem' }}
-                      />
-                    </FormGroup>
+            <Paper sx={{ padding: '1rem', mb: '1rem' }} key={lmsLearningElementList.topic_id}>
+              <div key={lmsLearningElementList.topic_id}>
+                <Grid
+                  container
+                  item
+                  direction="row"
+                  alignItems="flex-start"
+                  key={lmsLearningElementList.topic_id}
+                  spacing={2}>
+                  <Grid item xs={4}>
+                    <Grid container item direction="column">
+                      <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
+                        <Grid item container direction="column" justifyContent="center" alignItems="center">
+                          <InputLabel
+                            sx={{
+                              mb: '1rem',
+                              mt: '1rem',
+                              whiteSpace: 'normal',
+                              overflow: 'visible',
+                              wordBreak: 'break-word',
+                              color: 'black'
+                            }}>
+                            {lmsLearningElementList.topic_name}
+                          </InputLabel>
+                        </Grid>
+                      </Box>
+                      <FormGroup>
+                        <Autocomplete
+                          options={options}
+                          getOptionLabel={(option) => option.name}
+                          value={algorithmValues[index]}
+                          onChange={handleAlgorithmChange(index)}
+                          renderInput={(params) => <TextField {...params} label="Algorithmus" />}
+                          sx={{ mt: '1rem', mb: '1rem' }}
+                        />
+                      </FormGroup>
+                    </Grid>
+                  </Grid>
+                  <Grid item container xs={7}>
+                    <InputLabel shrink sx={{ ml: '1rem' }}>
+                      Description
+                    </InputLabel>
+                    <Typography id="modal-description" variant="body1" component="p" sx={{ ml: '2rem' }}>
+                      {algorithmValues[index].description}
+                    </Typography>
                   </Grid>
                 </Grid>
-                <Divider orientation="vertical" flexItem sx={{ mt: '1rem' }} />
-                <Grid item xs={6}>
-                  <Typography id="modal-description" variant="body1" component="p" sx={{ mt: '1rem' }}>
-                    {algorithmValues[index].description}
-                  </Typography>
-                </Grid>
-              </Grid>
-              {index === lmsRemoteTopics.length - 1 && <Divider />}
-            </div>
+              </div>
+            </Paper>
           ))}
         </Box>
       )}

@@ -1,4 +1,3 @@
-import { InputLabel } from '@mui/material'
 import { memo, useEffect, useState } from 'react'
 import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, TableRow, Typography } from '@common/components'
 import { SkeletonList } from '@components'
@@ -15,6 +14,11 @@ const TableTopic = memo(({ open = false, onTopicChange }: TableTopicProps) => {
   const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>([])
 
   useEffect(() => {
+    const savedTopics = localStorage.getItem('selectedTopics')
+    if (savedTopics) {
+      setSelectedTopics(JSON.parse(savedTopics))
+    }
+
     if (LmsTopics.length === 0) {
       fetchRemoteTopics(2).then((response) => {
         setLmsTopics(response)
@@ -23,13 +27,11 @@ const TableTopic = memo(({ open = false, onTopicChange }: TableTopicProps) => {
   }, [open])
 
   const handleTopicChange = (topic: RemoteTopic, checked: boolean) => {
-    let updatedTopics = []
-    if (checked) {
-      updatedTopics = [...selectedTopics, topic]
-    } else {
-      updatedTopics = selectedTopics.filter((t) => t.topic_id !== topic.topic_id)
-    }
+    const updatedTopics = checked
+      ? [...selectedTopics, topic]
+      : selectedTopics.filter((t) => t.topic_id !== topic.topic_id)
     setSelectedTopics(updatedTopics)
+    localStorage.setItem('selectedTopics', JSON.stringify(updatedTopics))
     onTopicChange(updatedTopics)
   }
 
