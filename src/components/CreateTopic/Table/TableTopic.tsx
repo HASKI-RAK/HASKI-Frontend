@@ -19,7 +19,7 @@ const TableTopic = memo(({ onTopicChange, selectedTopicsModal }: TableTopicProps
     getRemoteTopics(2).then((response) => {
       setLmsTopics(response)
     })
-  }, [open, selectedTopics, setSelectedTopics])
+  }, [selectedTopics, setSelectedTopics])
 
   const handleTopicChange = (topic: RemoteTopic, checked: boolean) => {
     const updatedTopics = checked

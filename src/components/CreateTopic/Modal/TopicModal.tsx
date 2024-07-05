@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Box, Button, Fab, Grid, Modal, Step, StepButton, Stepper, Typography } from '@common/components'
 import { Close } from '@common/icons'
 import { RemoteCourse } from '@core'
@@ -21,6 +21,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const [selectedCourse, setSelectedCourse] = useState<RemoteCourse>()
   const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>([])
   const [selectedLearningElements, setSelectedLearningElements] = useState<RemoteLearningElement[]>([])
+  const [selectedAlgorithms, setSelectedAlgorithms] = useState<[number, string][]>([])
   const [activeStep, setActiveStep] = useState<number>(0)
   const steps = ['Select Topics', 'Select Learning Elements', 'Select Algorithm']
 
@@ -43,6 +44,10 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
 
   const handleLearningElementChange = (learningElements: RemoteLearningElement[]) => {
     setSelectedLearningElements(learningElements)
+  }
+
+  const handleAlgorithmChange = (algorithms: [number, string][]) => {
+    setSelectedAlgorithms(algorithms)
   }
 
   return (
@@ -102,17 +107,29 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                 selectedLearningElementsState={selectedLearningElements}
               />
               <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
-                <Button id="add-course-button" variant="contained" color="primary" onClick={() => setActiveStep(0)}>
+                <Button
+                  id="add-course-button"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setActiveStep(activeStep - 1)}>
                   {'Back'}
                 </Button>
-                <Button id="add-course-button" variant="contained" color="primary" onClick={() => setActiveStep(2)}>
+                <Button
+                  id="add-course-button"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => console.log('Selected Algorithms:', selectedAlgorithms)}>
                   {'Next'}
                 </Button>
               </Grid>
             </Grid>
           ) : activeStep === 2 ? (
             <Grid container item>
-              <TableAlgorithm lmsRemoteTopics={selectedTopics} />
+              <TableAlgorithm
+                selectedTopicsModal={selectedTopics}
+                onAlgorithmChange={handleAlgorithmChange}
+                selectedAlgorithms={selectedAlgorithms}
+              />
               <Grid container item justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
                 <Button id="add-course-button" variant="contained" color="primary" onClick={() => setActiveStep(0)}>
                   {'Back'}
@@ -121,7 +138,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                   id="add-course-button"
                   variant="contained"
                   color="primary"
-                  onClick={() => console.log('Selected Course:', selectedCourse)}>
+                  onClick={() => console.log('Selected Algorithms:', selectedAlgorithms)}>
                   {'Create Topics'}
                 </Button>
               </Grid>
