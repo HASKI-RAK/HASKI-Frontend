@@ -20,9 +20,11 @@ const TableLearningElement = memo(({ lmsRemoteTopics = [] }: TableLearningElemen
         </Typography>
       </Grid>
       {lmsRemoteTopics.length === 0 ? (
-        <TableRow key={'TableTopicTableRow'}>
-          <SkeletonList />
-        </TableRow>
+        <Grid item alignItems="center">
+          <Typography variant="h6" sx={{ mt: '1rem' }}>
+            Select a topic to view learning elements
+          </Typography>
+        </Grid>
       ) : (
         lmsRemoteTopics.map((lmsTopic) => (
           <Grid item key={lmsTopic.topic_id} sx={{ width: '100%' }}>

@@ -82,11 +82,18 @@ const TableAlgorithm = memo(({ lmsRemoteTopics = [] }: TableLearningElementProps
   }
 
   return (
-    <Grid container direction="column" justifyContent="center" alignItems="center" sx={{ mt: '2rem' }}>
+    <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
+      <Grid item alignItems="center">
+        <Typography variant="h6" sx={{ mt: '1rem' }}>
+          Available Algorithms
+        </Typography>
+      </Grid>
       {lmsRemoteTopics.length === 0 ? (
-        <TableRow key={'TableTopicTableRow'}>
-          <SkeletonList />
-        </TableRow>
+        <Grid item alignItems="center">
+          <Typography variant="h6" sx={{ mt: '1rem' }}>
+            Select a topic to view algorithms
+          </Typography>
+        </Grid>
       ) : (
         <Box>
           {lmsRemoteTopics.map((lmsLearningElementList, index) => (

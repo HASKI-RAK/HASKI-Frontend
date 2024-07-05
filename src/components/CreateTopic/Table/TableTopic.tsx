@@ -45,12 +45,12 @@ const TableTopic = memo(({ open = false, onTopicChange, selectedTopicsModal }: T
         </Typography>
       </Grid>
       <Grid item container alignItems="stretch" direction="row">
-        <Paper sx={{ padding: '1rem', width: '100%' }}>
-          {LmsTopics.length === 0 ? (
-            <TableRow key={'TableTopicTableRow'}>
-              <SkeletonList />
-            </TableRow>
-          ) : (
+        {LmsTopics.length === 0 ? (
+          <Grid container direction="column" alignItems="center" xs sx={{ width: '70%' }}>
+            <SkeletonList />
+          </Grid>
+        ) : (
+          <Paper sx={{ padding: '1rem', width: '100%' }}>
             <FormGroup>
               {LmsTopics.map((LmsTopic) => (
                 <FormControlLabel
@@ -65,8 +65,8 @@ const TableTopic = memo(({ open = false, onTopicChange, selectedTopicsModal }: T
                 />
               ))}
             </FormGroup>
-          )}
-        </Paper>
+          </Paper>
+        )}
       </Grid>
     </Grid>
   )
