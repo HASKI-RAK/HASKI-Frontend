@@ -5,27 +5,20 @@ import { useStore } from '@store'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 
 type TableTopicProps = {
-  open?: boolean
   onTopicChange: (selectedTopics: RemoteTopic[]) => void
   selectedTopicsModal: RemoteTopic[]
 }
 
-const TableTopic = memo(({ open = false, onTopicChange, selectedTopicsModal }: TableTopicProps) => {
+const TableTopic = memo(({ onTopicChange, selectedTopicsModal }: TableTopicProps) => {
   const [LmsTopics, setLmsTopics] = useState<RemoteTopic[]>([])
   const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>([])
   const getRemoteTopics = useStore((state) => state.getRemoteTopic)
 
   useEffect(() => {
-    const savedTopics = selectedTopicsModal
-    if (savedTopics) {
-      setSelectedTopics(savedTopics)
-    }
-
-    if (LmsTopics.length === 0) {
-      getRemoteTopics(2).then((response) => {
-        setLmsTopics(response)
-      })
-    }
+    setSelectedTopics(selectedTopicsModal)
+    getRemoteTopics(2).then((response) => {
+      setLmsTopics(response)
+    })
   }, [open, selectedTopics, setSelectedTopics])
 
   const handleTopicChange = (topic: RemoteTopic, checked: boolean) => {

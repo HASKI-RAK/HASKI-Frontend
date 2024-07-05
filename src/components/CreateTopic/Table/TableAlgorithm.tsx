@@ -91,21 +91,15 @@ const TableAlgorithm = memo(({ lmsRemoteTopics = [] }: TableLearningElementProps
       {lmsRemoteTopics.length === 0 ? (
         <Grid item alignItems="center">
           <Typography variant="h6" sx={{ mt: '1rem' }}>
-            Select a topic to view algorithms
+            Select a topic to view learning elements
           </Typography>
         </Grid>
       ) : (
         <Box>
           {lmsRemoteTopics.map((lmsLearningElementList, index) => (
-            <Paper sx={{ padding: '1rem', mb: '1rem' }} key={lmsLearningElementList.topic_id}>
+            <Paper sx={{ padding: '1rem', mb: '1rem', ml: '2rem' }} key={lmsLearningElementList.topic_id}>
               <div key={lmsLearningElementList.topic_id}>
-                <Grid
-                  container
-                  item
-                  direction="row"
-                  alignItems="flex-start"
-                  key={lmsLearningElementList.topic_id}
-                  spacing={2}>
+                <Grid container item direction="row" alignItems="flex-start" key={lmsLearningElementList.topic_id}>
                   <Grid item xs={4}>
                     <Grid container item direction="column">
                       <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
