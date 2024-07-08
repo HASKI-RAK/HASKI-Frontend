@@ -10,7 +10,7 @@ type TableTopicProps = {
   remoteTopics: RemoteTopic[]
 }
 
-const TableTopic = memo(({ onTopicChange, selectedTopicsModal, remoteTopics }: TableTopicProps) => {
+const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopics }: TableTopicProps) => {
   const [LmsTopics, setLmsTopics] = useState<RemoteTopic[]>(remoteTopics)
   const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>(selectedTopicsModal)
   const getRemoteTopics = useStore((state) => state.getRemoteTopic)
@@ -37,7 +37,7 @@ const TableTopic = memo(({ onTopicChange, selectedTopicsModal, remoteTopics }: T
             <SkeletonList />
           </Grid>
         ) : (
-          <Paper sx={{ padding: '1rem', width: '100%' }}>
+          <Paper sx={{ padding: '1rem', width: '100%', maxWidth: '49rem' }}>
             <FormGroup>
               {LmsTopics.map((LmsTopic) => (
                 <FormControlLabel
@@ -59,5 +59,5 @@ const TableTopic = memo(({ onTopicChange, selectedTopicsModal, remoteTopics }: T
   )
 })
 // eslint-disable-next-line immutable/no-mutation
-TableTopic.displayName = 'TableTopic'
-export default TableTopic
+TableRemoteTopics.displayName = 'TableRemoteTopics'
+export default TableRemoteTopics

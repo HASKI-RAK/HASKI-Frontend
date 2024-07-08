@@ -24,7 +24,8 @@ import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 import { SkeletonList } from '../../index'
 import TableAlgorithm from '../Table/TableAlgorithm'
 import TableLearningElement from '../Table/TableLearningElement'
-import TableTopic from '../Table/TableTopic'
+import TableRemoteTopics from '../Table/TableRemoteTopics'
+import TableTopics from '../Table/TableTopics'
 
 type CourseModalProps = {
   open?: boolean
@@ -42,6 +43,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const getTopics = useStore((state) => state.getLearningPathTopic)
   const getUser = usePersistedStore((state) => state.getUser)
   const [topics, setTopics] = useState<LearningPathTopic>()
+  const [alreadyCreatedTopics, setAlreadyCreatedTopics] = useState<Topic[]>([])
 
   const options = [
     {
@@ -89,14 +91,17 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
 
   useEffect(() => {
     getUser().then((user) => {
-      getTopics(user.id, user.lms_user_id, user.settings.id, '1').then((topics) => {
+      getTopics(user.settings.user_id, user.lms_user_id, user.id, '2').then((topics) => {
         console.log(topics)
-        return setTopics(topics)
+        setTopics(topics)
+        getRemoteTopics(2).then((response) => {
+          console.log(response)
+          console.log(topics)
+          return setRemoteTopics(response.filter((topic) => !topics.topics.some((t) => t.lms_id === topic.topic_id)))
+        })
       })
     })
-    getRemoteTopics(2).then((response) => {
-      setRemoteTopics(response)
-    })
+
     selectedTopics.sort((a, b) => a.topic_id - b.topic_id)
     if (activeStep === 1) {
       // Gather all learning elements from the selected topics
@@ -164,18 +169,25 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
             ))}
           </Stepper>
           {activeStep === 0 ? (
-            <Grid container item>
-              <TableTopic
-                onTopicChange={handleTopicChange}
-                selectedTopicsModal={selectedTopics}
-                remoteTopics={remoteTopics}
-              />
-              <Grid container justifyContent="flex-end" alignItems="flex-end" sx={{ mt: 2 }}>
-                <Button id="add-course-button" variant="contained" color="primary" onClick={handleSetTopics}>
-                  {'Next'}
-                </Button>
+            <>
+              <Grid container item>
+                <TableRemoteTopics
+                  onTopicChange={handleTopicChange}
+                  selectedTopicsModal={selectedTopics}
+                  remoteTopics={remoteTopics}
+                />
+                <Grid container justifyContent="flex-end" alignItems="flex-end" sx={{ mt: 2 }}>
+                  <Button id="add-course-button" variant="contained" color="primary" onClick={handleSetTopics}>
+                    {'Next'}
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
+              {topics && (
+                <Grid container item>
+                  <TableTopics topics={topics} />
+                </Grid>
+              )}
+            </>
           ) : activeStep === 1 ? (
             <Grid container item>
               <TableLearningElement
@@ -221,22 +233,6 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
               </Grid>
             </Grid>
           ) : null}
-          {topics && (
-            <Grid item container alignItems="stretch" direction="row">
-              <Grid container item>
-                <Typography variant="h6" sx={{ mt: '1rem' }}>
-                  Already created Topics
-                </Typography>
-              </Grid>
-              <Paper sx={{ padding: '1rem', width: '100%' }}>
-                <FormGroup>
-                  {topics.topics.map((LmsTopic) => (
-                    <FormControlLabel control={<Checkbox />} label={LmsTopic.name} key={LmsTopic.name} />
-                  ))}
-                </FormGroup>
-              </Paper>
-            </Grid>
-          )}
         </Box>
       </Grid>
     </Modal>

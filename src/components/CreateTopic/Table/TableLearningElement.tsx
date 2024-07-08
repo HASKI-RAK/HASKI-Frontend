@@ -75,7 +75,7 @@ const TableLearningElement = memo(
         ) : (
           selectedTopicsModal.map((lmsTopic) => (
             <Grid item key={lmsTopic.topic_id} sx={{ width: '100%' }}>
-              <Paper sx={{ padding: '1rem', mb: '1rem' }}>
+              <Paper sx={{ padding: '1rem', mb: '1rem', maxWidth: '49rem' }}>
                 <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
                   <Grid item container justifyContent="center" alignItems="center">
                     <Typography variant="h6" gutterBottom>

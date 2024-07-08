@@ -86,7 +86,7 @@ const TableAlgorithm = memo(
               //console.log(algorithmValues)
               const currentAlgorithm = getAlgorithmByKey(currentAlgorithmKey)
               return (
-                <Paper sx={{ padding: '1rem', mb: '1rem', ml: '2rem' }} key={lmsTopic.topic_id}>
+                <Paper sx={{ padding: '1rem', mb: '1rem', ml: '2rem', maxWidth: '49rem' }} key={lmsTopic.topic_id}>
                   <Grid container item direction="row" alignItems="flex-start">
                     <Grid item xs={4}>
                       <Grid container item direction="column">
