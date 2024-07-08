@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Box, Container, Divider, Grid, Link, Typography } from '@common/components'
 import { AuthContext } from '@services'
-import { useAuthProvider } from 'src/services/AuthProvider/AuthProvider.hooks'
 
 /**
  * Sticks to the bottom of the page and is always visible.
@@ -19,13 +18,13 @@ const Footer = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
- const {isAuth}=useContext(AuthContext)
+  const { isAuth } = useContext(AuthContext)
 
   const footerComponents = [
-    { name: [t('pages.home')], link: '/', showOnlyWhenLoggin: false},
-    { name: [t('pages.contact')], link: '/contact', showOnlyWhenLoggin: true },
-    { name: [t('pages.imprint')], link: '/imprint', showOnlyWhenLoggin: false },
-    { name: [t('pages.privacypolicy')], link: '/privacypolicy', showOnlyWhenLoggin: false }
+    { name: [t('pages.home')], link: '/', showOnlyWhenLogin: false },
+    { name: [t('pages.contact')], link: '/contact', showOnlyWhenLogin: true },
+    { name: [t('pages.imprint')], link: '/imprint', showOnlyWhenLogin: false },
+    { name: [t('pages.privacypolicy')], link: '/privacypolicy', showOnlyWhenLogin: false }
   ]
 
   return (
@@ -46,29 +45,30 @@ const Footer = () => {
               </Typography>
             </Grid>
             <Grid item xs={12} display="flex" width="100%" justifyContent="center">
-              {footerComponents.map((component) => (
-                
-                ((!component.showOnlyWhenLoggin) || isAuth) && 
-                <Fragment key={component.link}>
-                  <Link
-                    id={component.link.concat('-link').replaceAll(' ', '-')}
-                    marginX="0.2em"
-                    component="button"
-                    variant="subtitle1"
-                    color={'textSecondary'}
-                    href={component.link}
-                    underline="hover"
-                    onClick={() => navigate(component.link)}>
-                    {component.name}
-                  </Link>
-                  {footerComponents.indexOf(component) !== footerComponents.length - 1 && (
-                    <Typography marginX="0.2em" color="textSecondary" variant="subtitle1">
-                      {' '}
-                      |{' '}
-                    </Typography>
-                  )}
-                </Fragment>
-              ))}
+              {footerComponents.map(
+                (component) =>
+                  (!component.showOnlyWhenLogin || isAuth) && (
+                    <Fragment key={component.link}>
+                      <Link
+                        id={component.link.concat('-link').replaceAll(' ', '-')}
+                        marginX="0.2em"
+                        component="button"
+                        variant="subtitle1"
+                        color={'textSecondary'}
+                        href={component.link}
+                        underline="hover"
+                        onClick={() => navigate(component.link)}>
+                        {component.name}
+                      </Link>
+                      {footerComponents.indexOf(component) !== footerComponents.length - 1 && (
+                        <Typography marginX="0.2em" color="textSecondary" variant="subtitle1">
+                          {' '}
+                          |{' '}
+                        </Typography>
+                      )}
+                    </Fragment>
+                  )
+              )}
             </Grid>
           </Grid>
         </Container>
