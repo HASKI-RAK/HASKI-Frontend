@@ -1,12 +1,14 @@
+import CheckBoxIcon from '@mui/icons-material/CheckBox'
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { memo, useEffect, useState } from 'react'
-import { Box, Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
+import { Box, Checkbox, Fab, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
 import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 
 type TableLearningElementProps = {
   selectedTopicsModal: RemoteTopic[]
   onLearningElementChange: (selectedLearningElements: RemoteLearningElement[]) => void
-  selectedLearningElementsState: RemoteLearningElement[] // add this prop
+  selectedLearningElementsState: RemoteLearningElement[]
 }
 
 const TableLearningElement = memo(
@@ -36,12 +38,33 @@ const TableLearningElement = memo(
       onLearningElementChange(updatedSelectedElements)
     }
 
+    const handleSelectAll = () => {
+      const allLearningElements = selectedTopicsModal.flatMap((topic) => topic.learning_elements)
+      setSelectedLearningElements(allLearningElements)
+      onLearningElementChange(allLearningElements)
+    }
+
+    const handleDeselectAll = () => {
+      setSelectedLearningElements([])
+      onLearningElementChange([])
+    }
+
     return (
       <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
-        <Grid item alignItems="center">
-          <Typography variant="h6" sx={{ mt: '1rem' }}>
-            Available Learning Elements
-          </Typography>
+        <Grid item container alignItems="center" justifyContent="space-between" direction="row">
+          <Grid item container xs={8.25} justifyContent="flex-end">
+            <Typography variant="h6" sx={{ mt: '1rem' }}>
+              Available Learning Elements
+            </Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Fab sx={{ mt: '1rem', mr: '1rem', color: '#f2852b', bgcolor: 'white' }} onClick={handleSelectAll}>
+              <CheckBoxIcon />
+            </Fab>
+            <Fab sx={{ mt: '1rem', color: '#f2852b', bgcolor: 'white' }} onClick={handleDeselectAll}>
+              <CheckBoxOutlineBlankIcon />
+            </Fab>
+          </Grid>
         </Grid>
         {selectedTopicsModal.length === 0 ? (
           <Grid item alignItems="center">

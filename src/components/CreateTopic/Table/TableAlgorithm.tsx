@@ -51,22 +51,16 @@ const TableAlgorithm = memo(
       }
     ]
 
-    const [algorithmValues, setAlgorithmValues] = useState<[number, string][]>(
-      selectedTopicsModal.map((topic) => [topic.topic_id, options[0].key])
-    )
-
-    useEffect(() => {
-      setAlgorithmValues(selectedAlgorithms)
-    }, [selectedTopicsModal])
+    const [algorithmValues, setAlgorithmValues] = useState<[number, string][]>(selectedAlgorithms)
 
     const handleAlgorithmChange = (topicId: number, newAlgorithm: string) => {
-      setAlgorithmValues((prevValues) => {
-        const newValues: [number, string][] = prevValues.map((item) =>
-          item[0] === topicId ? [topicId, newAlgorithm] : item
-        )
-        onAlgorithmChange(newValues) // Notify parent component of the change
-        return newValues
-      })
+      //search for item in array and replace it with new value
+      const newValues: [number, string][] = [
+        ...algorithmValues.filter((item) => item[0] !== topicId),
+        [topicId, newAlgorithm]
+      ]
+      setAlgorithmValues(newValues)
+      onAlgorithmChange(newValues) // communicate the change to the parent component
     }
 
     const getAlgorithmByKey = (key: string) => options.find((option) => option.key === key)
@@ -89,6 +83,7 @@ const TableAlgorithm = memo(
             {selectedTopicsModal.map((lmsTopic) => {
               const currentAlgorithmKey =
                 algorithmValues.find((item) => item[0] === lmsTopic.topic_id)?.[1] || options[0].key
+              //console.log(algorithmValues)
               const currentAlgorithm = getAlgorithmByKey(currentAlgorithmKey)
               return (
                 <Paper sx={{ padding: '1rem', mb: '1rem', ml: '2rem' }} key={lmsTopic.topic_id}>
@@ -114,7 +109,6 @@ const TableAlgorithm = memo(
                           <Select
                             value={currentAlgorithmKey}
                             onChange={(event) => handleAlgorithmChange(lmsTopic.topic_id, event.target.value)}
-                            displayEmpty
                             inputProps={{ 'aria-label': 'Without label' }}
                             sx={{ mt: '1rem', mb: '1rem' }}>
                             {options.map((option) => (
