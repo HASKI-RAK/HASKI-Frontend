@@ -2,19 +2,20 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { memo, useEffect, useState } from 'react'
 import { Box, Checkbox, Fab, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
+import { LearningPathLearningElement } from '@core'
 import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 
 type TableLearningElementProps = {
-  selectedTopicsModal: RemoteTopic[]
+  availableLearningElements: RemoteLearningElement[]
+  alreadyCreatedLearningElements: LearningPathLearningElement[]
   onLearningElementChange: (selectedLearningElements: RemoteLearningElement[]) => void
-  selectedLearningElementsState: RemoteLearningElement[]
 }
 
-const TableLearningElement = memo(
-  ({ selectedTopicsModal, onLearningElementChange, selectedLearningElementsState }: TableLearningElementProps) => {
+const TableAlreadyCreatedLearningElement = memo(
+  ({ availableLearningElements, alreadyCreatedLearningElements }: TableLearningElementProps) => {
     const [selectedLearningElements, setSelectedLearningElements] =
-      useState<RemoteLearningElement[]>(selectedLearningElementsState)
+      useState<RemoteLearningElement[]>(availableLearningElements)
 
     useEffect(() => {
       const allLearningElements = selectedTopicsModal.flatMap((topic) => topic.lms_learning_elements)
@@ -39,8 +40,7 @@ const TableLearningElement = memo(
     }
 
     const handleSelectAll = () => {
-      const allLearningElements = selectedTopicsModal.flatMap((topic) => topic.lms_learning_elements)
-      setSelectedLearningElements(allLearningElements)
+      setSelectedLearningElements(availableLearningElements)
       onLearningElementChange(allLearningElements)
     }
 
@@ -108,5 +108,5 @@ const TableLearningElement = memo(
   }
 )
 // eslint-disable-next-line immutable/no-mutation
-TableLearningElement.displayName = 'TableLearningElement'
-export default TableLearningElement
+TableAlreadyCreatedLearningElement.displayName = 'TableLearningElement'
+export default TableAlreadyCreatedLearningElement

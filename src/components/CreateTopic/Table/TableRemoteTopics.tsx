@@ -18,7 +18,7 @@ const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopi
   const handleTopicChange = (topic: RemoteTopic, checked: boolean) => {
     const updatedTopics = checked
       ? [...selectedTopics, topic]
-      : selectedTopics.filter((t) => t.topic_id !== topic.topic_id)
+      : selectedTopics.filter((t) => t.topic_lms_id !== topic.topic_lms_id)
     setSelectedTopics(updatedTopics)
     localStorage.setItem('selectedTopics', JSON.stringify(updatedTopics))
     onTopicChange(updatedTopics)
@@ -43,12 +43,12 @@ const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopi
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={selectedTopics.some((topic) => topic.topic_id === LmsTopic.topic_id)}
+                      checked={selectedTopics.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
                       onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
                     />
                   }
-                  label={LmsTopic.topic_name}
-                  key={LmsTopic.topic_id}
+                  label={LmsTopic.topic_lms_name}
+                  key={LmsTopic.topic_lms_id}
                 />
               ))}
             </FormGroup>

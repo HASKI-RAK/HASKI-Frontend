@@ -1,7 +1,7 @@
 type LearningElement = {
   lms_id: number
-  learning_element_name: string
-  activity_type: string
+  lms_learning_element_name: string
+  lms_activity_type: string
 }
 
 export default LearningElement

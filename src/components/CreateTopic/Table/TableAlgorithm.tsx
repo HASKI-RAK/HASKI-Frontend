@@ -82,10 +82,10 @@ const TableAlgorithm = memo(
           <Box>
             {selectedTopicsModal.map((lmsTopic) => {
               const currentAlgorithmKey =
-                algorithmValues.find((item) => item[0] === lmsTopic.topic_id)?.[1] || options[0].key
+                algorithmValues.find((item) => item[0] === lmsTopic.topic_lms_id)?.[1] || options[0].key
               const currentAlgorithm = getAlgorithmByKey(currentAlgorithmKey)
               return (
-                <Paper sx={{ padding: '1rem', mb: '1rem', ml: '2rem', maxWidth: '49rem' }} key={lmsTopic.topic_id}>
+                <Paper sx={{ padding: '1rem', mb: '1rem', ml: '2rem', maxWidth: '49rem' }} key={lmsTopic.topic_lms_id}>
                   <Grid container item direction="row" alignItems="flex-start">
                     <Grid item xs={4}>
                       <Grid container item direction="column">
@@ -100,14 +100,14 @@ const TableAlgorithm = memo(
                                 wordBreak: 'break-word',
                                 color: 'black'
                               }}>
-                              {lmsTopic.topic_name}
+                              {lmsTopic.topic_lms_name}
                             </InputLabel>
                           </Grid>
                         </Box>
                         <FormGroup>
                           <Select
                             value={currentAlgorithmKey}
-                            onChange={(event) => handleAlgorithmChange(lmsTopic.topic_id, event.target.value)}
+                            onChange={(event) => handleAlgorithmChange(lmsTopic.topic_lms_id, event.target.value)}
                             inputProps={{ 'aria-label': 'Without label' }}
                             sx={{ mt: '1rem', mb: '1rem' }}>
                             {options.map((option) => (

@@ -4,9 +4,9 @@ import RemoteLearningElement from '../RemoteLearningElement/RemoteLearningElemen
 type RemoteTopicReturn = (courseId: number) => Promise<RemoteTopic[]>
 
 type RemoteTopic = {
-  topic_id: number
-  topic_name: string
-  learning_elements: [RemoteLearningElement]
+  topic_lms_id: number
+  topic_lms_name: string
+  lms_learning_elements: [RemoteLearningElement]
 }
 
 export default RemoteTopic

@@ -5,10 +5,11 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
 import { Button, Grid, Skeleton } from '@common/components'
-import { IFrameModal, LabeledSwitch, ResponsiveMiniMap, nodeTypes } from '@components'
+import { IFrameModal, LabeledSwitch, ResponsiveMiniMap, TopicModal, nodeTypes } from '@components'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+import LearningElementModal from '../../components/CreateLearningElement/Modal/LearningElementModal'
 import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
 
 /**
@@ -42,6 +43,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
 
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const handleCloseLearningElementModal = () => {
+    setModalOpen(false)
+  }
   const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
 
   // Translation
@@ -191,9 +197,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               isGrouped={isGrouped}
               setIsGrouped={setIsGrouped}
             />
-            <Button variant="contained" sx={{ mt: '1rem', mr: '3rem', bgcolor: '#f2852b' }}>
-              Add Learning Element
+            <Button
+              variant="contained"
+              sx={{ mt: '1rem', mr: '3rem', bgcolor: '#f2852b' }}
+              onClick={() => setModalOpen(true)}>
+              Add Learning Elements
             </Button>
+            <LearningElementModal open={modalOpen} handleClose={handleCloseLearningElementModal}></LearningElementModal>
           </Panel>
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
         </ReactFlow>

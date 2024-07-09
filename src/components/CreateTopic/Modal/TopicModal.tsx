@@ -84,7 +84,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   ]
 
   const [selectedAlgorithms, setSelectedAlgorithms] = useState<[number, string][]>(
-    selectedTopics.map((topic) => [topic.topic_id, options[0].key])
+    selectedTopics.map((topic) => [topic.topic_lms_id, options[0].key])
   )
   const [activeStep, setActiveStep] = useState<number>(0)
   const steps = ['Select Topics', 'Select Learning Elements', 'Select Algorithm']
@@ -94,15 +94,17 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       getTopics(user.settings.user_id, user.lms_user_id, user.id, '2').then((topics) => {
         setTopics(topics)
         getRemoteTopics(2).then((response) => {
-          return setRemoteTopics(response.filter((topic) => !topics.topics.some((t) => t.lms_id === topic.topic_id)))
+          return setRemoteTopics(
+            response.filter((topic) => !topics.topics.some((t) => t.lms_id === topic.topic_lms_id))
+          )
         })
       })
     })
 
-    selectedTopics.sort((a, b) => a.topic_id - b.topic_id)
+    selectedTopics.sort((a, b) => a.topic_lms_id - b.topic_lms_id)
     if (activeStep === 1) {
       // Gather all learning elements from the selected topics
-      const allLearningElements = selectedTopics.flatMap((topic) => topic.learning_elements)
+      const allLearningElements = selectedTopics.flatMap((topic) => topic.lms_learning_elements)
       setSelectedLearningElements(allLearningElements)
     }
   }, [activeStep, selectedTopics])
