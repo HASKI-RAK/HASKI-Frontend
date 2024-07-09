@@ -8,7 +8,7 @@ type TableTopicsProps = {
 
 const TableTopics = memo(({ topics }: TableTopicsProps) => {
   return (
-    <Grid container direction="column" alignItems="center">
+    <Grid container direction="column" alignItems="center" spacing={3}>
       <Grid item alignItems="center">
         <Typography variant="h6" sx={{ mt: '1rem' }}>
           Already created Topics
@@ -19,7 +19,7 @@ const TableTopics = memo(({ topics }: TableTopicsProps) => {
           {topics.topics.map((LmsTopic) => (
             <FormControlLabel
               control={<Checkbox disabled checked={true} />}
-              label={LmsTopic.name}
+              label={<Typography>{LmsTopic.name}</Typography>}
               key={LmsTopic.name}
             />
           ))}

@@ -1,9 +1,10 @@
+import AddCircleIcon from '@mui/icons-material/AddCircle'
 import log from 'loglevel'
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
-import { Grid, Skeleton } from '@common/components'
+import { Button, Grid, Skeleton } from '@common/components'
 import { IFrameModal, LabeledSwitch, ResponsiveMiniMap, nodeTypes } from '@components'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
@@ -179,7 +180,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           fitViewOptions={{
             padding: 5,
             minZoom: 0.75,
-            nodes: [{ id: initialNodes[0].id }]
+            nodes: [{ id: initialNodes[0]?.id }]
           }}>
           <ResponsiveMiniMap />
           <Background gap={16} />
@@ -190,8 +191,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               isGrouped={isGrouped}
               setIsGrouped={setIsGrouped}
             />
+            <Button variant="contained" sx={{ mt: '1rem', mr: '3rem', bgcolor: '#f2852b' }}>
+              Add Learning Element
+            </Button>
           </Panel>
-          <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
+          <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
         </ReactFlow>
         <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
       </Grid>

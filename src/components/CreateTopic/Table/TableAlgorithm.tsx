@@ -83,7 +83,6 @@ const TableAlgorithm = memo(
             {selectedTopicsModal.map((lmsTopic) => {
               const currentAlgorithmKey =
                 algorithmValues.find((item) => item[0] === lmsTopic.topic_id)?.[1] || options[0].key
-              //console.log(algorithmValues)
               const currentAlgorithm = getAlgorithmByKey(currentAlgorithmKey)
               return (
                 <Paper sx={{ padding: '1rem', mb: '1rem', ml: '2rem', maxWidth: '49rem' }} key={lmsTopic.topic_id}>

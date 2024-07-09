@@ -92,11 +92,8 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   useEffect(() => {
     getUser().then((user) => {
       getTopics(user.settings.user_id, user.lms_user_id, user.id, '2').then((topics) => {
-        console.log(topics)
         setTopics(topics)
         getRemoteTopics(2).then((response) => {
-          console.log(response)
-          console.log(topics)
           return setRemoteTopics(response.filter((topic) => !topics.topics.some((t) => t.lms_id === topic.topic_id)))
         })
       })
@@ -111,7 +108,6 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   }, [activeStep, selectedTopics])
 
   const handleSetTopics = () => {
-    console.log('Selected Topics:', selectedTopics)
     setActiveStep(1)
   }
 
@@ -207,7 +203,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                   id="add-course-button"
                   variant="contained"
                   color="primary"
-                  onClick={() => console.log('Selected Algorithms:', selectedAlgorithms)}>
+                  onClick={() => setActiveStep(activeStep + 1)}>
                   {'Next'}
                 </Button>
               </Grid>
@@ -220,13 +216,18 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                 selectedAlgorithms={selectedAlgorithms}
               />
               <Grid container item justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
-                <Button id="add-course-button" variant="contained" color="primary" onClick={() => setActiveStep(0)}>
+                <Button
+                  id="add-course-button"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setActiveStep(activeStep - 1)}>
                   {'Back'}
                 </Button>
                 <Button
                   id="add-course-button"
                   variant="contained"
                   color="primary"
+                  disabled={selectedTopics.length === 0}
                   onClick={() => console.log('Selected Algorithms:', selectedAlgorithms)}>
                   {'Create Topics'}
                 </Button>
