@@ -60,23 +60,25 @@ const TableAvailableLearningElement = memo(
             </Typography>
           </Grid>
         ) : (
-          <Paper sx={{ padding: '1rem', mb: '1rem', maxWidth: '49rem' }}>
-            {availableLearningElements.map((lmsElement) => (
-              <Grid item key={lmsElement.lms_id} sx={{ width: '100%' }}>
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={selectedLearningElements.some((el) => el.lms_id === lmsElement.lms_id)}
-                        onChange={(event) => handleCheckboxChange(lmsElement, event.target.checked)}
-                      />
-                    }
-                    label={lmsElement.lms_learning_element_name}
-                  />
-                </FormGroup>
-              </Grid>
-            ))}
-          </Paper>
+          <Grid item sx={{ width: '100%' }}>
+            <Paper sx={{ padding: '1rem', mb: '1rem', maxWidth: '49rem' }}>
+              {availableLearningElements.map((lmsElement) => (
+                <Grid item key={lmsElement.lms_id} sx={{ width: '100%' }}>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={selectedLearningElements.some((el) => el.lms_id === lmsElement.lms_id)}
+                          onChange={(event) => handleCheckboxChange(lmsElement, event.target.checked)}
+                        />
+                      }
+                      label={lmsElement.lms_learning_element_name}
+                    />
+                  </FormGroup>
+                </Grid>
+              ))}
+            </Paper>
+          </Grid>
         )}
       </Grid>
     )

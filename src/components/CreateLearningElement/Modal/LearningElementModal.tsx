@@ -23,6 +23,7 @@ import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLea
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 import TableTopics from '../../CreateTopic/Table/TableTopics'
 import { SkeletonList } from '../../index'
+import TableAlreadyCreatedLearningElement from '../Table/TableAlreadyCreatedLearningElement'
 import TableAvailableLearningElement from '../Table/TableAvailableLearningElement'
 
 type CourseModalProps = {
@@ -40,8 +41,8 @@ const LearningElementModal = memo(({ open = false, handleClose }: CourseModalPro
   const [selectedLearningElements, setSelectedLearningElements] = useState<RemoteLearningElement[]>([])
   const getTopics = useStore((state) => state.getLearningPathTopic)
   const getUser = usePersistedStore((state) => state.getUser)
-  const [topics, setTopics] = useState<LearningPathTopic>()
   const [alreadyCreatedTopics, setAlreadyCreatedTopics] = useState<Topic[]>([])
+  const [currentTopic, setCurrentTopic] = useState<RemoteTopic>()
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const [alreadyCreatedLearningElements, setAlreadyCreatedLearningElements] = useState<LearningPathLearningElement[]>(
     []
@@ -60,6 +61,7 @@ const LearningElementModal = memo(({ open = false, handleClose }: CourseModalPro
           setRemoteTopics(remoteTopics)
           const currentTopic = remoteTopics.filter((topic) => topic.topic_lms_id === 93)[0]
           console.log(currentTopic.lms_learning_elements)
+          setCurrentTopic(currentTopic)
           return currentTopic.lms_learning_elements
         })
         .then((currentElements) => {
@@ -117,12 +119,15 @@ const LearningElementModal = memo(({ open = false, handleClose }: CourseModalPro
             <Close />
           </Fab>
           <>
+            <Grid container item justifyContent="center" alignItems="center">
+              <Typography variant={'h5'}>{currentTopic?.topic_lms_name}</Typography>
+            </Grid>
             <Grid container item>
               <TableAvailableLearningElement
                 availableLearningElements={availableLearningElements}
                 onLearningElementChange={handleLearningElementChange}
               />
-              <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
+              <Grid container justifyContent="flex-end" alignItems="center" sx={{ mt: 2 }}>
                 <Button
                   id="add-course-button"
                   variant="contained"
@@ -131,6 +136,9 @@ const LearningElementModal = memo(({ open = false, handleClose }: CourseModalPro
                   {'Create Learning Elements'}
                 </Button>
               </Grid>
+            </Grid>
+            <Grid container item>
+              <TableAlreadyCreatedLearningElement alreadyCreatedLearningElements={alreadyCreatedLearningElements} />
             </Grid>
           </>
         </Box>
