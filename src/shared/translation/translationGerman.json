@@ -1158,6 +1158,7 @@
   "error.setTopics": "Es gab einen Fehler beim Festlegen der Themen.",
   "error.setTopicsPath": "Es gab einen Fehler beim Festlegen des Themenpfads.",
   "info": "Info",
+  "info.postCalculateLearningPathILS": "Eine POST-Anfrage wurde erfolgreich gesendet, um den Lernpfad auf der Grundlage der Daten des ILS-Fragebogens zu berechnen.",
   "log.learningPathTopicProgressTimeout": "Beim Laden des LearningPathTopicProgress-Hook ist ein Timout aufgetreten.",
   "pages.1": "1",
   "pages.10": "10",
