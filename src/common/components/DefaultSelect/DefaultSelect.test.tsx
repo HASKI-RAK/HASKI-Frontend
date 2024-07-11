@@ -2,15 +2,24 @@ import { MenuItem } from '@mui/material'
 import '@testing-library/jest-dom'
 import { act, fireEvent, render, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { AuthContext, xAPI } from '@services'
+import { AuthContext } from '@services'
 import Select from './DefaultSelect'
 
 describe('DefaultSelect tests', () => {
-  const sendStatement = jest.fn()
-
-  beforeEach(() => {
-    jest.spyOn(xAPI, 'sendStatement').mockImplementation(sendStatement)
+  const usePersistedStore = jest.fn().mockReturnValue({
+    state: {
+      getXAPI: () => ({
+        sendStatement: jest.fn()
+      })
+    }
   })
+
+  jest.mock('@store', () => ({
+    ...jest.requireActual('@store'),
+    usePersistedStore: () => usePersistedStore
+  }))
+
+  const sendStatement = usePersistedStore().state.getXAPI.sendStatement
 
   test('DefaultSelect sends statement on click', async () => {
     const { getByRole } = render(

@@ -59,6 +59,7 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
           severity: 'success',
           autoHideDuration: 3000
         })
+        log.info(t('components.PrivacyModal.accepted'))
       } else {
         //if decline should set a cookie with expiration uncomment
         //const tomorrow = new Date()
@@ -69,6 +70,7 @@ export const usePrivacyModal = (): PrivacyModalHookReturn => {
           severity: 'warning',
           autoHideDuration: 3000
         })
+        log.info(t('components.PrivacyModal.declined'))
       }
     },
     [addSnackbar, setCookie]

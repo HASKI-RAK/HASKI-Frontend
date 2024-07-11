@@ -45,11 +45,13 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
             calculateLearningPath(user, addSnackbar, t)
             return !!response
           })
-          .catch(() => {
+          .catch((error) => {
             addSnackbar({
               message: t('error.postILS'),
-              severity: 'error'
+              severity: 'error',
+              autoHideDuration: 3000
             })
+            log.error(t('error.postILS') + ' ' + error)
             return false
           })
           .finally(() => {
@@ -61,11 +63,13 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
           .then((response) => {
             return !!response
           })
-          .catch(() => {
+          .catch((error) => {
             addSnackbar({
               message: t('error.postListK'),
-              severity: 'error'
+              severity: 'error',
+              autoHideDuration: 3000
             })
+            log.error(t('error.postListK') + ' ' + error)
             return false
           })
           .finally(() => {
@@ -79,42 +83,23 @@ const useHandleSend = (data: { question_id: string; answer: string }[], ils: boo
   return { sendAnswers, isSending }
 }
 
-//hardcoded courseId, topicId, algorithm for evaluation
-// TODO: the postCalculateLearningPathILS has to be changed. Frontend should only give
-// notice when the calculation should start. What should be calculated should be
-// defined in the backend.
-const courseList = [1]
-const topicList = [2, 6, 10, 12]
-const algorithmList = ['aco', 'graf', 'graf', 'aco']
-
 const calculateLearningPath = (
   user: User,
   addSnackbar: (newSnackbar: SnackbarMessageProps) => void,
   t: (key: string) => string
 ) => {
-  courseList.forEach((courseId) => {
-    topicList.forEach((topicId, index) => {
-      postCalculateLearningPathILS(
-        user.settings.user_id,
-        user.lms_user_id,
-        user.id,
-        courseId,
-        topicId,
-        algorithmList[index]
-      )
-        .then((response) => {
-          log.info(response)
-        })
-        .catch(() => {
-          addSnackbar({
-            message: t('Data.calculated.error'),
-            severity: 'success',
-            autoHideDuration: 5000
-          })
-          log.error('Error while calculating learning path in Kempten Course 1')
-        })
+  postCalculateLearningPathILS(user.settings.user_id, user.lms_user_id)
+    .then((response) => {
+      log.info(t('info.postCalculateLearningPathILS') + '' + response)
     })
-  })
+    .catch((error) => {
+      addSnackbar({
+        message: t('error.postCalculateLearningPathILS'),
+        severity: 'success',
+        autoHideDuration: 5000
+      })
+      log.error(t('error.postCalculateLearningPathILS') + '' + error)
+    })
 }
 
 export default useHandleSend

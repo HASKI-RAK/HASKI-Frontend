@@ -33,8 +33,8 @@ const ImageCollection = (props: ImageCollectionProps) => {
           top: '-4.25rem',
           left: '2.5rem',
           marginBottom: '-8.5rem',
-          width: { xl: '29rem', lg: '21.5rem', md: '15rem', sm: '8rem', xs: '8rem' },
-          height: { xl: '17rem', lg: '10rem', md: '5rem', sm: '5rem', xs: '2.5rem' }
+          width: { xxxl: '49rem', xxl: '39rem', xl: '29rem', lg: '21.5rem', md: '15rem', sm: '8rem', xs: '8rem' },
+          height: { xxxl: '17rem', xxl: '17rem', xl: '17rem', lg: '10rem', md: '5rem', sm: '5rem', xs: '2.5rem' }
         }}>
         <Box
           sx={{
