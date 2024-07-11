@@ -6,6 +6,7 @@ import { Button, Card, CardContent, Skeleton, Stack, Typography } from '@common/
 import { Course } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+import {useThemeContext} from "../../services/ThemeContext/ThemeContext";
 
 /**
  * # Home Page
@@ -18,6 +19,7 @@ export const Home = () => {
   // UX
   const { t } = useTranslation()
   const authcontext = useContext(AuthContext)
+  const {loadTheme} = useThemeContext()
   const { addSnackbar } = useContext(SnackbarContext)
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
@@ -36,6 +38,7 @@ export const Home = () => {
         clearTimeout(preventEndlessLoading)
         getUser()
           .then((user) => {
+            loadTheme(user.settings.theme)
             getCourses(user.settings.user_id, user.lms_user_id, user.id)
               .then((CourseResponse) => {
                 setCourses(CourseResponse.courses)

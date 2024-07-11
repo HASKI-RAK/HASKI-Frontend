@@ -18,6 +18,8 @@ import {
   Typography
 } from '@common/components'
 
+import {useThemeContext} from "../../services/ThemeContext/ThemeContext";
+
 const bull = (
   <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
     •
@@ -50,12 +52,23 @@ const card = (
 )
 
 export const ThemePresentation = () => {
+
+  const {updateTheme} = useThemeContext()
+
   return (
     <>
       <Container maxWidth="sm">
         <Typography variant="h3" component="div" gutterBottom>
           Theme Presentation
         </Typography>
+        <Typography variant="body1" gutterBottom>
+          The colour theme of the UI can be changed with these buttons
+        </Typography>
+        <Stack marginBottom={4} spacing={2} sx={{ height: '100%' }} direction="row">
+          <Button onClick={() => updateTheme("Standard")}> Haski-Standard </Button>
+          <Button onClick={() => updateTheme('dark')}> Haski-Dark </Button>
+          <Button onClick={() => updateTheme('light')}> Haski-Light </Button>
+        </Stack>
         <Typography variant="body1" gutterBottom>
           This site demonstrates the individual elements used in the HASKI UI. It serves as a reference, as well as a
           documentation.

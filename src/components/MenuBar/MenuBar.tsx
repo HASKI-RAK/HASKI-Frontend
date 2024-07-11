@@ -25,12 +25,14 @@ import {
   Analytics,
   ArrowDropDown,
   AssignmentOutlined,
+  Brush,
   Help,
   LibraryBooksOutlined,
   Login,
   Logout,
   Person,
-  PlaylistAddCheckCircleOutlined
+  PlaylistAddCheckCircleOutlined,
+  Settings
 } from '@common/icons'
 import {
   LanguageMenu,
@@ -68,6 +70,7 @@ export type MenuBarProps = {
  */
 
 const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
+  const [anchorElSettings, setAnchorElSettings] = useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
   const { addSnackbar } = useContext(SnackbarContext)
@@ -127,6 +130,14 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
       window.location.reload()
       setModalOpenListK(false)
     }
+  }
+
+  const handleOpenSettingsMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElSettings(event.currentTarget)
+  }
+
+  const handleCloseSettingsMenu = () => {
+    setAnchorElSettings(null)
   }
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -330,24 +341,42 @@ const MenuBar = ({ courseSelected = false }: MenuBarProps) => {
               </IconButton>
             </Tooltip>
           </Box>
-          {/** 
-          { Settings button }
+          {/** Settings button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openGlobalSettings')}>
-              <IconButton
-                id="global-settings-icon-button"
-                onClick={() => {
-                  addSnackbar({
-                    message: t('components.MenubBar.GlobalSettings.Error'),
-                    severity: 'warning',
-                    autoHideDuration: 5000
-                  })
-                }}>
+              <IconButton id="global-settings-icon-button" onClick={handleOpenSettingsMenu}>
                 <Settings data-testid="SettingsIcon" />
               </IconButton>
             </Tooltip>
+            <Menu
+                sx={{ mt: '45px' }}
+                id="account-menu"
+                anchorEl={anchorElSettings}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                open={Boolean(anchorElSettings)}
+                onClose={handleCloseSettingsMenu}>
+              <MenuItem
+                  id="change-theme-menu-item"
+                  //data-testid="settingsmenuitem"
+                  //key="settingsmenuitem"
+                  onClick={() => {navigate('/theme')
+                  }}>
+                <ListItemIcon>
+                  <Brush fontSize="small" />
+                </ListItemIcon>
+                <Typography textAlign="center">{ "Theme" /** t('components.SettingsBar.changeTheme') */}
+                </Typography>
+              </MenuItem>
+            </Menu>
           </Box>
-*/}
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openSettings')}>
