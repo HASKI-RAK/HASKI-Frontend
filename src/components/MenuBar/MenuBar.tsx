@@ -19,6 +19,7 @@ import {
   Analytics,
   AssignmentOutlined,
   Help,
+  Brush,
   LibraryBooksOutlined,
   Login,
   Logout,
@@ -168,7 +169,7 @@ const MenuBar = () => {
           {/** Search bar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>
           {/** Language menu */}
-          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }, mt: 1 }}>
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }}}>
             <LanguageMenu />
           </Box>
           {/** Questionnaire Results */}
@@ -183,23 +184,17 @@ const MenuBar = () => {
             </Box>
           )}
           {/** Theme button */}
-          {/**
+          {
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={'Change your theme'}>
               <IconButton
-                id="global-settings-icon-button"
-                onClick={() => {
-                  addSnackbar({
-                    message: t('components.MenubBar.GlobalSettings.Error'),
-                    severity: 'warning',
-                    autoHideDuration: 5000
-                  })
-                }}>
-                <Contrast />
+                id="theme-icon-button"
+                onClick={() => navigate('/theme')}>
+                <Brush data-testid="BrushIcon" />
               </IconButton>
             </Tooltip>
           </Box>
-           */}
+           }
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('appGlobal.help')}>
@@ -212,7 +207,7 @@ const MenuBar = () => {
               </IconButton>
             </Tooltip>
           </Box>
-          {/** 
+          {/**
           { Settings button }
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openGlobalSettings')}>

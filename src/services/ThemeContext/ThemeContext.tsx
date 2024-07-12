@@ -2,10 +2,8 @@ import React, {createContext, useContext, useState, ReactNode , FC} from "react"
 import {HaskiTheme, DarkTheme, Theme} from '@common/utils'
 import {ThemeProvider} from "@common/theme";
 
-import { AuthContext } from '@services'
 import {postUserSettings} from "../Theme/postUserSettings";
 import {usePersistedStore} from "@store";
-
 
 interface ThemeContextType {
     theme: typeof Theme;
@@ -27,21 +25,24 @@ interface ThemeContextProviderProps {
     children: ReactNode;
 }
 
+
+
 const ThemeContextProvider: FC<ThemeContextProviderProps> = ({ children }) => {
 
     const [theme, setTheme] = useState(HaskiTheme)
-    const authcontext = useContext(AuthContext)
     const getUser = usePersistedStore((state) => state.getUser)
+    const updateUser = usePersistedStore((state) => state.updateUser)
 
     const updateTheme = (themeName: string) => {
 
         loadTheme(themeName)
-        if(authcontext.isAuth) {
-            getUser().then((user) => {
-                //postUserSettings(themeName,8,8)
+
+        getUser().then((user) => {
+            if(user) {
                 postUserSettings(themeName, user.settings.user_id, user.lms_user_id)
-            })
-        }
+                updateUser( user.settings.user_id, user.lms_user_id, themeName )
+            }
+        })
     }
     const loadTheme = (themeName: string) => {
         switch (themeName) {
