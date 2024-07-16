@@ -1,5 +1,6 @@
 import log from 'loglevel'
 import { RingBuffer } from './RingBuffer'
+import { postBufferContent } from 'src/services/LogContent/postBufferContent'
 
 /**
  * This function is used to log all the messages in the console and also store them in a ring buffer.
@@ -31,4 +32,7 @@ export const logBuffer = () => {
       localStorage.setItem('ringBufferContent', JSON.stringify(GlobalRingBuffer))
     }
   }
+
+  const bufferBody = GlobalRingBuffer.remove()
+  postBufferContent(bufferBody)
 }

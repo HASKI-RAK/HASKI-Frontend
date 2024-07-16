@@ -28,6 +28,15 @@ export class RingBuffer<T> {
     this.add(...value)
   }
 
+  public get(element:number)
+  {
+    return this.buffer.at(element)
+  }
+
+  public remove(){
+    return this.buffer.pop()
+  }
+
   private crop() {
     while (this.buffer.length > this.size) {
       this.buffer.shift()
