@@ -2,6 +2,7 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
+import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
 import { Home } from '@pages'
 import { AuthContext } from '@services'
@@ -14,6 +15,7 @@ describe('Test the Home page', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
+
 
   test('fetching Course throws error', async () => {
     mockServices.fetchCourses.mockImplementationOnce(() => {
@@ -50,23 +52,25 @@ describe('Test the Home page', () => {
   })
 
   test('click on course navigates to course page', async () => {
-    const { getAllByText } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
-    )
-
     await waitFor(() => {
-      const course = getAllByText('pages.course.courseButton')
-      fireEvent.click(course[1])
-      expect(navigate).toHaveBeenCalledWith('/course/2')
+      const { getAllByText } = render(
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      )
+
+      act(() => {
+        const course = getAllByText('pages.course.courseButton')
+        fireEvent.click(course[1])
+        expect(navigate).toHaveBeenCalledWith('/course/2')
+      })
     })
   })
 
   test('fetching User throws error', async () => {
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() => new Error('Error'))
+    mockServices.fetchUser.mockImplementationOnce(() => new Error('Error'))
 
     jest.spyOn(console, 'error').mockImplementation(() => {
       return
@@ -86,7 +90,7 @@ describe('Test the Home page', () => {
   })
 
   test('fetching Course returns no courses', async () => {
-    mockServices.fetchCourses = jest.fn().mockImplementationOnce(() =>
+    mockServices.fetchCourses.mockImplementationOnce(() =>
       Promise.resolve({
         courses: []
       })
@@ -104,4 +108,44 @@ describe('Test the Home page', () => {
       expect(getByText('pages.home.noCourses')).toBeInTheDocument()
     })
   })
+
+  /*
+    * currently commented out because UI element is not used/commented out at the moment
+  test('settings button opens menu', async () => {
+    const { getAllByTestId, getByTestId } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+    await waitFor(() => {
+      act(() => {
+        fireEvent.click(getAllByTestId('settings-button')[0])
+        expect(getAllByTestId('settings-menu')[0]).toBeInTheDocument()
+      })
+    })
+  })
+
+  test('settings button closes menu', async () => {
+    const { getAllByTestId, getByTestId, queryByTestId } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() =>
+      act(() => {
+        fireEvent.click(getAllByTestId('settings-button')[0])
+      })
+    )
+    expect(getAllByTestId('settings-menu')[0]).toBeInTheDocument()
+    fireEvent.click(getByTestId('menu-item-algorithm'))
+    await waitFor(() => {
+      expect(queryByTestId('settings-menu')).toBeNull()
+    })
+  })
+  */
 })
