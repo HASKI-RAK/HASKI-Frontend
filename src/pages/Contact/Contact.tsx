@@ -25,7 +25,7 @@ export const Contact = ({ useContact = _useContact }: ContactProps) => {
   const { onSubmitHandler } = useContact({ setIsLoading })
   return (
     <>
-      (isAuth) && (<ContactForm onSubmit={onSubmitHandler} isLoading={isLoading} />)
+      {(isAuth) && (<ContactForm onSubmit={onSubmitHandler} isLoading={isLoading} />)}
     </>
   )
 }
