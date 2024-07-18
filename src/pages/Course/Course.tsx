@@ -17,7 +17,7 @@ const Course = () => {
   // Hooks
   const theme = useTheme()
   const isSmOrDown = useMediaQuery(theme.breakpoints.down('sm'))
-  const { courseId } = useParams<{ courseId: string }>()
+  const { courseId } = useParams<{courseId: string}>()
   const { topicProgress, isLoading, topics } = useLearningPathTopicProgress({ courseId })
 
   return (
