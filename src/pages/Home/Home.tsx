@@ -3,7 +3,7 @@ import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardContent, Skeleton, Stack, Typography } from '@common/components'
+import { Button, Card, CardContent, Grid, Skeleton, Typography } from '@common/components'
 import { CourseModal } from '@components'
 import { Course } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
@@ -73,10 +73,22 @@ export const Home = () => {
     <Skeleton variant="rectangular" width="100%" height={118} />
   ) : (
     <div>
-      <Stack spacing={2} direction="row" justifyContent="center">
-        <div>
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item>
           {courses.length === 0 ? (
-            <Card>
+            <Card
+              sx={{
+                mb: '1rem',
+                width: {
+                  xs: '20rem',
+                  sm: '20rem',
+                  md: '20rem',
+                  lg: '30rem',
+                  xl: '40rem',
+                  xxl: '45rem',
+                  xxxl: '50rem'
+                }
+              }}>
               <CardContent>
                 <Typography variant="h5" align="center">
                   {t('pages.home.noCourses')}
@@ -104,7 +116,7 @@ export const Home = () => {
                     <Typography variant="h5" align="center">
                       {course.name}
                     </Typography>
-                    <Stack direction="row" justifyContent="center">
+                    <Grid container justifyContent="center">
                       <Button
                         id="course-button"
                         variant="contained"
@@ -115,7 +127,7 @@ export const Home = () => {
                         }}>
                         {t('pages.course.courseButton')}
                       </Button>
-                    </Stack>
+                    </Grid>
                   </CardContent>
                 </Card>
               )
@@ -123,7 +135,7 @@ export const Home = () => {
           )}
           <Card>
             <CardContent>
-              <Stack direction="row" justifyContent="center">
+              <Grid container justifyContent="center">
                 <Button
                   id="course-button"
                   variant="contained"
@@ -132,12 +144,12 @@ export const Home = () => {
                   sx={commonButtonStyle}>
                   <AddCircleIcon />
                 </Button>
-              </Stack>
+              </Grid>
             </CardContent>
             <CourseModal open={modalOpen} handleClose={handleCloseCourseModal}></CourseModal>
           </Card>
-        </div>
-      </Stack>
+        </Grid>
+      </Grid>
     </div>
   )
 }
