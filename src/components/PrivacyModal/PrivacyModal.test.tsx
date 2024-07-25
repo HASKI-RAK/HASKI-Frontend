@@ -4,7 +4,7 @@ import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
 import PrivacyModal from './PrivacyModal'
-import { UniversityCheck } from '@common/utils'
+import { useUniversity } from '@common/hooks'
 
 const navigate = jest.fn()
 
@@ -127,10 +127,10 @@ describe('Test PrivacyModal', () => {
       })
     )
 
-    const { result } = renderHook(() => UniversityCheck(), {
+    const { result } = renderHook(() => useUniversity(), {
       wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
     })
-    expect(await result.current.checkUniversity()).toBe('TH-AB')
+    expect(await result.current.university()).toBe('TH-AB')
   })
 
   test('Redirects the user to HS-KE', async () => {
@@ -161,10 +161,10 @@ describe('Test PrivacyModal', () => {
 
   test('checkUniversity returns empty string when fetch fails', async () => {
     mockServices.fetchUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
-    const { result } = renderHook(() => UniversityCheck(), {
+    const { result } = renderHook(() => useUniversity(), {
       wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
     })
-    expect(await result.current.checkUniversity()).toBe('')
+    expect(await result.current.university()).toBe('')
   })
 
   test('decline returns the user two pages prior', async () => {

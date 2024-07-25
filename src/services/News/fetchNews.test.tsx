@@ -24,7 +24,7 @@ describe('Test the fetchNews functionalities', () => {
     fetch.mockResolvedValue(mockResponse)
 
     const languageId = 'en'
-    const university = 'HS-AS'
+    const university = 'TH-AB'
 
     const result = await fetchNews(languageId, university)
 
@@ -55,7 +55,7 @@ describe('Test the fetchNews functionalities', () => {
     fetch.mockResolvedValue(mockResponse)
 
     const languageId = 'en'
-    const university = 'HS-AS'
+    const university = 'TH-AB'
 
     await expect(fetchNews(languageId, university)).rejects.toThrow(`${expectedMessage}`)
   })
@@ -71,7 +71,7 @@ describe('Test the fetchNews functionalities', () => {
     fetch.mockResolvedValue(mockResponse)
 
     const languageId = 'en'
-    const university = 'HS-AS'
+    const university = 'TH-AB'
 
     await expect(fetchNews(languageId, university)).rejects.toThrow('')
   })

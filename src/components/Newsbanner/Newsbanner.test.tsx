@@ -3,7 +3,7 @@ import { fireEvent, render, act, renderHook } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import Newsbanner from './Newsbanner'
 import { MemoryRouter } from 'react-router-dom'
-import { UniversityCheck } from '@common/utils'
+import { useUniversity } from '@common/hooks'
 
 describe('Newsbanner tests', () => {
   beforeEach(() => {
@@ -18,8 +18,8 @@ describe('Newsbanner tests', () => {
             date: 'Thu, 13 Jul 2023 16:00:00 GMT',
             expiration_date: 'Sun, 20 Apr 2025 16:00:00 GMT',
             id: 1,
-            language_id: 'en',
-            news_content: 'We are currently testing the site',
+            language_id: 'de',
+            news_content: 'Wir testen die Seite',
             university: 'TH-AB'
           }
         ]
@@ -48,13 +48,14 @@ describe('Newsbanner tests', () => {
       </MemoryRouter>
     )
     await act(async () => {
-      const closeButton = getByTestId('IconButton')
+      expect(rerender).toContain('Wir testen die Seite')
+      const closeButton = getByTestId('NewsBannerCloseButton')
       expect(closeButton).toBeInTheDocument()
     })
   })
 
   test('Close the open Newsbanner', async () => {
-    mockServices.fetchNews = jest.fn().mockImplementation(() =>
+    mockServices.fetchNews.mockImplementation(() =>
       Promise.resolve({
         news: [
           {
@@ -92,7 +93,7 @@ describe('Newsbanner tests', () => {
     )
 
     await act(async () => {
-      const closeButton = getByTestId('IconButton')
+      const closeButton = getByTestId('NewsBannerCloseButton')
       fireEvent.click(closeButton)
     })
 
@@ -100,7 +101,7 @@ describe('Newsbanner tests', () => {
   })
 
   test('Newsbanner has an error when fetching the News', () => {
-    mockServices.fetchNews = jest.fn().mockImplementationOnce(() => {
+    mockServices.fetchNews.mockImplementationOnce(() => {
       throw new Error('Error')
     })
     const { container } = render(<Newsbanner />)
@@ -108,18 +109,18 @@ describe('Newsbanner tests', () => {
   })
 
   test('Newsbanner has an error when fetching the University', async () => {
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() => {
+    mockServices.fetchUser.mockImplementationOnce(() => {
       throw new Error('Error')
     })
 
-    const { result } = renderHook(() => UniversityCheck(), {
+    const { result } = renderHook(() => useUniversity(), {
       wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
     })
-    expect(await result.current.checkUniversity()).toBe('')
+    expect(await result.current.university).toBe('')
   })
 
   test('Newsbanner doesnt open because no news', () => {
-    mockServices.fetchNews = jest.fn().mockImplementationOnce(() =>
+    mockServices.fetchNews.mockImplementationOnce(() =>
       Promise.resolve({
         news: [{}]
       })

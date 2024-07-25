@@ -358,7 +358,7 @@ const mockDataServices: MockDataServices = {
           id: 1,
           language_id: 'en',
           news_content: 'We are currently testing the site',
-          university: 'HS-AS'
+          university: 'TH-AB'
         },
         {
           date: 'Thu, 13 Jul 2023 16:00:00 GMT',
@@ -366,7 +366,7 @@ const mockDataServices: MockDataServices = {
           id: 2,
           language_id: 'en',
           news_content: 'We are currently testing the site',
-          university: 'HS-AS'
+          university: 'TH-AB'
         }
       ]
     })

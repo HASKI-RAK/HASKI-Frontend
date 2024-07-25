@@ -1,9 +1,9 @@
 import log from 'loglevel'
 import { useMemo, useState, useContext } from 'react'
-import { UniversityCheck as _UniversityCheck, UniversityCheck } from '@common/utils'
 import { SnackbarContext } from '@services'
 import { useStore } from '@store'
 import { useTranslation } from 'react-i18next'
+import {useUniversity} from '@common/hooks'
 
 /**
  * @prop checkForNews - sets the newsItem if there is atleast one news
@@ -14,8 +14,10 @@ import { useTranslation } from 'react-i18next'
  */
 
 export type NewsbannerHookReturn = {
-  readonly checkForNews: () => Promise<string>
-  readonly hasItem: () => boolean
+  readonly checkForNews: ()=>Promise<void>
+  readonly isOpen:boolean
+  readonly isNewsAvailable: boolean
+  readonly newsText:string
 }
 
 /**
@@ -34,28 +36,19 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
   const { t, i18n } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
   const getNews = useStore((state) => state.getNews)
-  const { checkUniversity } = UniversityCheck()
-  const [newsItem, setNewsItem] = useState(false)
+  const { university } = useUniversity()
+  const [isNewsAvailable, setIsNewsAvailable] = useState(false)
+  const [newsText, setNewsText] = useState('')
+  const [ isOpen, setIsOpen]=useState(true)
 
   //** Logic **/
-  const checkLanguage = () => {
-    return i18n.language
-  }
-
-  const hasItem = () => {
-    return newsItem
-  }
-
   //returns combined string of all the news
   //and checks if there are news
   const checkForNews = async () => {
-    return checkUniversity().then((university) => {
-      return getNews(checkLanguage(), university)
-        .then((news) => {
-          setNewsItem(news.news.length != 0)
-          const contentA = news.news.map(({ news_content }) => news_content).join(', ')
-          //console.log('news:', news, 'lang', checkLanguage(), 'university:', university)
-          return JSON.stringify(contentA)
+      return getNews(i18n.language, university)
+        .then((response) => {
+          setIsNewsAvailable(response.news.length != 0)
+          return setNewsText(response.news.map(({ news_content }) => news_content).join(', '))
         })
         .catch((error) => {
           addSnackbar({
@@ -63,14 +56,14 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
             severity: 'error',
             autoHideDuration: 3000
           })
-          log.error('error.getNews', 'Error: ' + error)
-          return ''
+          log.error(t('error.getNews') + error)
+          return setNewsText('')
         })
-    })
+    
   }
 
   return useMemo(
-    () => ({ checkForNews, checkLanguage, hasItem, newsItem }),
-    [checkForNews, checkLanguage, hasItem, newsItem]
+    () => ({ checkForNews, isNewsAvailable, newsText, isOpen }),
+    [checkForNews, isNewsAvailable, newsText, isOpen]
   )
 }
