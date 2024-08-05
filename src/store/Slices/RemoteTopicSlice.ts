@@ -6,7 +6,7 @@ import { fetchRemoteTopics } from '../../services/RemoteTopics/fetchRemoteTopics
 import { resetters } from '../Zustand/Store'
 
 export default interface RemoteTopicSlice {
-  _cache_remoteTopic_record: Record<number, RemoteTopic[] | undefined>
+  _cache_remoteTopic_record: Record<string, RemoteTopic[] | undefined>
   getRemoteTopic: RemoteTopicReturn
 }
 

@@ -17,7 +17,7 @@ type PostCourseProps = {
  */
 
 export const postCourse = async ({ outputJson }: PostCourseProps): Promise<Course> => {
-  return fetchData<Course>(getConfig().BACKEND + `/lms/course`, {
+  return fetchData<Course>(getConfig().BACKEND + `/v2/lms/course`, {
     method: 'POST',
     credentials: 'include',
     headers: {

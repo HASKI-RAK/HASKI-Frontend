@@ -1,21 +1,7 @@
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
-import {
-  Box,
-  Button,
-  Checkbox,
-  Fab,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  Modal,
-  Paper,
-  Step,
-  StepButton,
-  Stepper,
-  Typography
-} from '@common/components'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Box, Button, Fab, Grid, Modal, Typography } from '@common/components'
 import { Close } from '@common/icons'
 import { LearningPathLearningElement, LearningPathTopic, RemoteCourse, Topic } from '@core'
 import { usePersistedStore, useStore } from '@store'
@@ -34,6 +20,7 @@ type CourseModalProps = {
 const LearningElementModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const { courseId } = useParams<{ courseId: string }>()
   const [selectedCourse, setSelectedCourse] = useState<RemoteCourse>()
   const [remoteTopics, setRemoteTopics] = useState<RemoteTopic[]>([])
   const getRemoteTopics = useStore((state) => state.getRemoteTopic)
@@ -56,7 +43,7 @@ const LearningElementModal = memo(({ open = false, handleClose }: CourseModalPro
 
   useEffect(() => {
     getUser().then((user) => {
-      getRemoteTopics(2)
+      getRemoteTopics(courseId)
         .then((remoteTopics) => {
           setRemoteTopics(remoteTopics)
           const currentTopic = remoteTopics.filter((topic) => topic.topic_lms_id === 93)[0]
@@ -88,7 +75,8 @@ const LearningElementModal = memo(({ open = false, handleClose }: CourseModalPro
     getLearningPathElement,
     setAvailableLearningElements,
     setAlreadyCreatedLearningElements,
-    open
+    open,
+    courseId
   ])
 
   return (

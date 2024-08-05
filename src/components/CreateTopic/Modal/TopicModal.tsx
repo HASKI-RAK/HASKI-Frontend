@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   Box,
   Button,
@@ -35,6 +35,7 @@ type CourseModalProps = {
 const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const { courseId } = useParams<{ courseId: string }>()
   const [selectedCourse, setSelectedCourse] = useState<RemoteCourse>()
   const [remoteTopics, setRemoteTopics] = useState<RemoteTopic[]>([])
   const getRemoteTopics = useStore((state) => state.getRemoteTopic)
@@ -93,7 +94,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     getUser().then((user) => {
       getTopics(user.settings.user_id, user.lms_user_id, user.id, '2').then((topics) => {
         setTopics(topics)
-        getRemoteTopics(2).then((response) => {
+        getRemoteTopics(courseId).then((response) => {
           return setRemoteTopics(
             response.filter((topic) => !topics.topics.some((t) => t.lms_id === topic.topic_lms_id))
           )

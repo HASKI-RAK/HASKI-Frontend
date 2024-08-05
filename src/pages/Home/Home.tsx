@@ -1,4 +1,5 @@
 import AddCircleIcon from '@mui/icons-material/AddCircle'
+import dayjs from 'dayjs'
 import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -68,6 +69,14 @@ export const Home = () => {
     width: '85%'
   }
 
+  const handleCourseStartDate = (courseStartDate: string) => {
+    return new Date(courseStartDate) > new Date()
+  }
+
+  const formatDate = (date: string) => {
+    return dayjs(date).format('DD.MM.YYYY - HH:mm')
+  }
+
   // Card containing the courses with a button to the specific course
   return loading ? (
     <Skeleton variant="rectangular" width="100%" height={118} />
@@ -122,10 +131,13 @@ export const Home = () => {
                         variant="contained"
                         color="primary"
                         sx={commonButtonStyle}
+                        disabled={handleCourseStartDate(course.start_date)}
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>
-                        {t('pages.course.courseButton')}
+                        {handleCourseStartDate(course.start_date)
+                          ? `Course is Available on ${formatDate(course.start_date)}`
+                          : t('pages.course.courseButton')}
                       </Button>
                     </Grid>
                   </CardContent>
