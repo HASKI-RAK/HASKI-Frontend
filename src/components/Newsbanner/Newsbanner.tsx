@@ -3,6 +3,7 @@ import { Close } from '@common/icons'
 import { useEffect, memo } from 'react'
 import { keyframes } from '@emotion/react'
 import { NewsbannerHookReturn, useNewsbanner as _useNewsbanner } from './Newsbanner.hooks'
+import { usePersistedSessionStore } from '@store'
 
 export type NewsbannerProps = {
   useNewsbanner?: () => NewsbannerHookReturn
@@ -18,7 +19,9 @@ export type NewsbannerProps = {
  */
 
 const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
-  const { checkForNews, isNewsAvailable, newsText, isOpen } = useNewsbanner()
+  const { checkForNews, isNewsAvailable, newsText } = useNewsbanner()
+  const setIsBannerOpen = usePersistedSessionStore((state)=>state.setIsBannerOpen)
+  const isBannerOpen = usePersistedSessionStore((state)=>state.isBannerOpen)
 
   useEffect(()=>{
     checkForNews()
@@ -40,7 +43,7 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
 
   return (
     <>
-      {isNewsAvailable && isOpen && (
+      {isNewsAvailable &&isBannerOpen && (
         <Box sx={{ width: '100%' }}>
           <Collapse in={isNewsAvailable} sx={{ overflow: 'hidden' }}>
             <Alert
@@ -57,6 +60,9 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
                   size="small"
                   id='newsbanner-close-icon-button'
                   data-testid="NewsBannerCloseButton"
+                  onClick={() => {
+                    setIsBannerOpen(false)
+                  }}
                   >
                   <Close fontSize="inherit" />
                 </IconButton>

@@ -29,7 +29,7 @@ describe('Test the fetchNews functionalities', () => {
     const result = await fetchNews(languageId, university)
 
     expect(fetch).toHaveBeenCalledWith(
-      `${getConfig().BACKEND}/news?language_id=${languageId}&university=${university}`,
+      `${getConfig().BACKEND}/news/language/${languageId}/university/${university}`,
       {
         method: 'GET',
         credentials: 'include',

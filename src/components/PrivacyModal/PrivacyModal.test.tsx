@@ -130,7 +130,7 @@ describe('Test PrivacyModal', () => {
     const { result } = renderHook(() => useUniversity(), {
       wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
     })
-    expect(await result.current.university()).toBe('TH-AB')
+    expect(await result.current.university).toBe('TH-AB')
   })
 
   test('Redirects the user to HS-KE', async () => {
@@ -164,7 +164,7 @@ describe('Test PrivacyModal', () => {
     const { result } = renderHook(() => useUniversity(), {
       wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
     })
-    expect(await result.current.university()).toBe('')
+    expect(await result.current.university).toBe('')
   })
 
   test('decline returns the user two pages prior', async () => {

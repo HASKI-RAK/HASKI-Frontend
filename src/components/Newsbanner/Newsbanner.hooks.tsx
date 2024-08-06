@@ -1,7 +1,7 @@
 import log from 'loglevel'
 import { useMemo, useState, useContext } from 'react'
 import { SnackbarContext } from '@services'
-import { useStore } from '@store'
+import { usePersistedSessionStore } from '@store'
 import { useTranslation } from 'react-i18next'
 import {useUniversity} from '@common/hooks'
 
@@ -15,7 +15,6 @@ import {useUniversity} from '@common/hooks'
 
 export type NewsbannerHookReturn = {
   readonly checkForNews: ()=>Promise<void>
-  readonly isOpen:boolean
   readonly isNewsAvailable: boolean
   readonly newsText:string
 }
@@ -35,11 +34,10 @@ export type NewsbannerHookReturn = {
 export const useNewsbanner = (): NewsbannerHookReturn => {
   const { t, i18n } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
-  const getNews = useStore((state) => state.getNews)
+  const getNews = usePersistedSessionStore((state) => state.getNews)
   const { university } = useUniversity()
   const [isNewsAvailable, setIsNewsAvailable] = useState(false)
   const [newsText, setNewsText] = useState('')
-  const [ isOpen, setIsOpen]=useState(true)
 
   //** Logic **/
   //returns combined string of all the news
@@ -63,7 +61,7 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
   }
 
   return useMemo(
-    () => ({ checkForNews, isNewsAvailable, newsText, isOpen }),
-    [checkForNews, isNewsAvailable, newsText, isOpen]
+    () => ({ checkForNews, isNewsAvailable, newsText }),
+    [checkForNews, isNewsAvailable, newsText]
   )
 }
