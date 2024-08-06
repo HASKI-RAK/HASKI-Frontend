@@ -21,6 +21,7 @@ import { LearningPathTopic, RemoteCourse, Topic } from '@core'
 import { usePersistedStore, useStore } from '@store'
 import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
+import { postTopic } from '../../../services/Topic/postTopic'
 import { SkeletonList } from '../../index'
 import TableAlgorithm from '../Table/TableAlgorithm'
 import TableLearningElement from '../Table/TableLearningElement'
@@ -84,8 +85,8 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     }
   ]
 
-  const [selectedAlgorithms, setSelectedAlgorithms] = useState<[number, string][]>(
-    selectedTopics.map((topic) => [topic.topic_lms_id, options[0].key])
+  const [selectedAlgorithms, setSelectedAlgorithms] = useState<[number, string, string][]>(
+    selectedTopics.map((topic) => [topic.topic_lms_id, topic.topic_lms_name, options[0].key])
   )
   const [activeStep, setActiveStep] = useState<number>(0)
   const steps = ['Select Topics', 'Select Learning Elements', 'Select Algorithm']
@@ -122,9 +123,39 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     setSelectedLearningElements(learningElements)
   }
 
-  const handleAlgorithmChange = (algorithms: [number, string][]) => {
+  const handleAlgorithmChange = (algorithms: [number, string, string][]) => {
     console.log(algorithms)
     setSelectedAlgorithms(algorithms)
+  }
+
+  const handleCreateTopics = (topicName: string, lmsCourseId: number, courseId: string) => {
+    const date = new Date()
+    const outputJson: string = JSON.stringify({
+      name: topicName,
+      lms_id: lmsCourseId,
+      is_topic: true,
+      contains_le: true,
+      created_by: 'Dimitri Bigler',
+      created_at: date.toISOString().split('.')[0] + 'Z',
+      updated_at: date.toISOString().split('.')[0] + 'Z',
+      university: 'HS-KE'
+    })
+    return postTopic({ courseId, lmsCourseId, outputJson })
+  }
+
+  //const handleCreateLearningElements = () => {}
+
+  //const handleCreateAlgorithms = () => {}
+
+  const handleCreate = (topicName: string, lmsCourseId: number, courseId?: string) => {
+    // ToDo: error in getting current courseId
+    if (courseId == undefined) return
+    handleCreateTopics(topicName, lmsCourseId, courseId).then((response) => {
+      console.log(response)
+    })
+
+    //handleCreateLearningElements()
+    //handleCreateAlgorithms()
   }
 
   return (
@@ -231,7 +262,19 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                   variant="contained"
                   color="primary"
                   disabled={selectedTopics.length === 0}
-                  onClick={() => console.log('Selected Algorithms:', selectedAlgorithms)}>
+                  onClick={() =>
+                    /*console.log(
+                      'Selected Algorithms:',
+                      selectedAlgorithms,
+                      'Selected Elements:',
+                      selectedLearningElements
+                    )*/
+                    selectedAlgorithms.map((selectedAlgorithm) => {
+                      //selectedAlgorithm[1], selectedAlgorithm[0], selectedAlgorithm[2]
+                      //General 23 bayes
+                      handleCreate(selectedAlgorithm[1], selectedAlgorithm[0], courseId)
+                    })
+                  }>
                   {'Create Topics'}
                 </Button>
               </Grid>

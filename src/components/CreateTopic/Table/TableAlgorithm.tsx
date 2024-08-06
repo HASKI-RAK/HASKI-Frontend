@@ -5,8 +5,8 @@ import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 
 type TableAlgorithmProps = {
   selectedTopicsModal: RemoteTopic[]
-  onAlgorithmChange: (selectedAlgorithms: [number, string][]) => void
-  selectedAlgorithms: [number, string][]
+  onAlgorithmChange: (selectedAlgorithms: [number, string, string][]) => void
+  selectedAlgorithms: [number, string, string][]
 }
 
 const TableAlgorithm = memo(
@@ -51,13 +51,13 @@ const TableAlgorithm = memo(
       }
     ]
 
-    const [algorithmValues, setAlgorithmValues] = useState<[number, string][]>(selectedAlgorithms)
+    const [algorithmValues, setAlgorithmValues] = useState<[number, string, string][]>(selectedAlgorithms)
 
-    const handleAlgorithmChange = (topicId: number, newAlgorithm: string) => {
+    const handleAlgorithmChange = (topicId: number, topicName: string, newAlgorithm: string) => {
       //search for item in array and replace it with new value
-      const newValues: [number, string][] = [
+      const newValues: [number, string, string][] = [
         ...algorithmValues.filter((item) => item[0] !== topicId),
-        [topicId, newAlgorithm]
+        [topicId, topicName, newAlgorithm]
       ]
       setAlgorithmValues(newValues)
       onAlgorithmChange(newValues) // communicate the change to the parent component
@@ -82,7 +82,7 @@ const TableAlgorithm = memo(
           <Box>
             {selectedTopicsModal.map((lmsTopic) => {
               const currentAlgorithmKey =
-                algorithmValues.find((item) => item[0] === lmsTopic.topic_lms_id)?.[1] || options[0].key
+                algorithmValues.find((item) => item[0] === lmsTopic.topic_lms_id)?.[2] || options[0].key
               const currentAlgorithm = getAlgorithmByKey(currentAlgorithmKey)
               return (
                 <Paper sx={{ padding: '1rem', mb: '1rem', ml: '2rem', maxWidth: '49rem' }} key={lmsTopic.topic_lms_id}>
@@ -107,7 +107,9 @@ const TableAlgorithm = memo(
                         <FormGroup>
                           <Select
                             value={currentAlgorithmKey}
-                            onChange={(event) => handleAlgorithmChange(lmsTopic.topic_lms_id, event.target.value)}
+                            onChange={(event) =>
+                              handleAlgorithmChange(lmsTopic.topic_lms_id, lmsTopic.topic_lms_name, event.target.value)
+                            }
                             inputProps={{ 'aria-label': 'Without label' }}
                             sx={{ mt: '1rem', mb: '1rem' }}>
                             {options.map((option) => (
