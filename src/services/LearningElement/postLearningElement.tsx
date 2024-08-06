@@ -1,4 +1,4 @@
-import { ListK, Topic } from '@core'
+import { LearningElement, ListK, Topic } from '@core'
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
@@ -7,8 +7,8 @@ import { fetchData } from '../RequestResponse'
  * @props outputJson - output json
  * @interface
  */
-type PostTopicProps = {
-  courseId: string
+type PostLearningElementProps = {
+  topicId: number
   outputJson: string
 }
 
@@ -27,8 +27,11 @@ type PostTopicProps = {
  * @category Services
  */
 
-export const postTopic = async ({ courseId, outputJson }: PostTopicProps): Promise<Topic> => {
-  return fetchData<Topic>(`${getConfig().BACKEND}/v2/lms/course/${courseId}/topic`, {
+export const postLearningElement = async ({
+  topicId,
+  outputJson
+}: PostLearningElementProps): Promise<LearningElement> => {
+  return fetchData<LearningElement>(`${getConfig().BACKEND}/v2/lms/topic/${topicId}/learningElement`, {
     method: 'POST',
     credentials: 'include',
     headers: {

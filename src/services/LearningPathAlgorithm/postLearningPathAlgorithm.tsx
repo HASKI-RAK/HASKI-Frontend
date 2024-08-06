@@ -7,13 +7,14 @@ import { fetchData } from '../RequestResponse'
  * @props outputJson - output json
  * @interface
  */
-type PostTopicProps = {
-  courseId: string
+type PostLearningPathAlgorithmProps = {
+  userId: number
+  topicId: number
   outputJson: string
 }
 
 /*
- * postTopic function.
+ * postLearningPathAlgorithm function.
  *
  * @param studentId - student id
  * @param outputJson - output json
@@ -27,8 +28,12 @@ type PostTopicProps = {
  * @category Services
  */
 
-export const postTopic = async ({ courseId, outputJson }: PostTopicProps): Promise<Topic> => {
-  return fetchData<Topic>(`${getConfig().BACKEND}/v2/lms/course/${courseId}/topic`, {
+export const postLearningPathAlgorithm = async ({
+  userId,
+  topicId,
+  outputJson
+}: PostLearningPathAlgorithmProps): Promise<Topic> => {
+  return fetchData<Topic>(`${getConfig().BACKEND}/user/${userId}/topic/${topicId}/teacherAlgorithm`, {
     method: 'POST',
     credentials: 'include',
     headers: {

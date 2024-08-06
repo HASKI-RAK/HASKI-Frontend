@@ -21,6 +21,8 @@ import { LearningPathTopic, RemoteCourse, Topic } from '@core'
 import { usePersistedStore, useStore } from '@store'
 import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
+import { postLearningElement } from '../../../services/LearningElement/postLearningElement'
+import { postLearningPathAlgorithm } from '../../../services/LearningPathAlgorithm/postLearningPathAlgorithm'
 import { postTopic } from '../../../services/Topic/postTopic'
 import { SkeletonList } from '../../index'
 import TableAlgorithm from '../Table/TableAlgorithm'
@@ -41,7 +43,9 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const [remoteTopics, setRemoteTopics] = useState<RemoteTopic[]>([])
   const getRemoteTopics = useStore((state) => state.getRemoteTopic)
   const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>([])
-  const [selectedLearningElements, setSelectedLearningElements] = useState<RemoteLearningElement[]>([])
+  const [selectedLearningElements, setSelectedLearningElements] = useState<{ [key: number]: RemoteLearningElement[] }>(
+    {}
+  )
   const getTopics = useStore((state) => state.getLearningPathTopic)
   const getUser = usePersistedStore((state) => state.getUser)
   const [topics, setTopics] = useState<LearningPathTopic>()
@@ -106,7 +110,10 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     selectedTopics.sort((a, b) => a.topic_lms_id - b.topic_lms_id)
     if (activeStep === 1) {
       // Gather all learning elements from the selected topics
-      const allLearningElements = selectedTopics.flatMap((topic) => topic.lms_learning_elements)
+      const allLearningElements = selectedTopics.reduce((acc, topic) => {
+        acc[topic.topic_lms_id] = topic.lms_learning_elements
+        return acc
+      }, {} as { [key: number]: RemoteLearningElement[] })
       setSelectedLearningElements(allLearningElements)
     }
   }, [activeStep, selectedTopics])
@@ -119,7 +126,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     setSelectedTopics(topics)
   }
 
-  const handleLearningElementChange = (learningElements: RemoteLearningElement[]) => {
+  const handleLearningElementChange = (learningElements: { [key: number]: RemoteLearningElement[] }) => {
     setSelectedLearningElements(learningElements)
   }
 
@@ -140,22 +147,54 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       updated_at: date.toISOString().split('.')[0] + 'Z',
       university: 'HS-KE'
     })
-    return postTopic({ courseId, lmsCourseId, outputJson })
+    return postTopic({ courseId, outputJson })
   }
 
-  //const handleCreateLearningElements = () => {}
+  const handleCreateLearningElements = (learningElementName: string, lmsLearningElementId: number, topicId: number) => {
+    const date = new Date()
+    const outputJson: string = JSON.stringify({
+      lms_id: lmsLearningElementId,
+      activity_type: 'h5pactivity',
+      classification: 'RQ',
+      name: learningElementName,
+      created_by: 'Dimitri Bigler',
+      created_at: date.toISOString().split('.')[0] + 'Z',
+      updated_at: date.toISOString().split('.')[0] + 'Z',
+      university: 'HS-KE'
+    })
+    return postLearningElement({ topicId, outputJson })
+  }
 
-  //const handleCreateAlgorithms = () => {}
+  const handleCreateAlgorithms = (userId: number, topicId: number, algorithmShortname: string) => {
+    const date = new Date()
+    const outputJson: string = JSON.stringify({
+      algorithm_s_name: algorithmShortname
+    })
+    return postLearningPathAlgorithm({ userId, topicId, outputJson })
+  }
 
-  const handleCreate = (topicName: string, lmsCourseId: number, courseId?: string) => {
+  const handleCreate = (
+    topicName: string,
+    lmsCourseId: number,
+    selectedLearningElements: { [key: number]: RemoteLearningElement[] },
+    algorithmShortName: string,
+    courseId?: string
+  ) => {
     // ToDo: error in getting current courseId
     if (courseId == undefined) return
-    handleCreateTopics(topicName, lmsCourseId, courseId).then((response) => {
-      console.log(response)
-    })
 
-    //handleCreateLearningElements()
-    //handleCreateAlgorithms()
+    handleCreateTopics(topicName, lmsCourseId, courseId).then((topic) => {
+      const topicId = topic.lms_id
+
+      if (selectedLearningElements[topicId]) {
+        selectedLearningElements[topicId].forEach((element) => {
+          handleCreateLearningElements(element.lms_learning_element_name, element.lms_id, topic.id)
+        })
+      }
+      getUser().then((user) => {
+        handleCreateAlgorithms(user.settings.user_id, topic.id, algorithmShortName)
+      })
+    })
   }
 
   return (
@@ -264,15 +303,22 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                   disabled={selectedTopics.length === 0}
                   onClick={() =>
                     /*console.log(
-                      'Selected Algorithms:',
-                      selectedAlgorithms,
-                      'Selected Elements:',
-                      selectedLearningElements
-                    )*/
+                       'Selected Algorithms:',
+                       selectedAlgorithms,
+                       'Selected Elements:',
+                       selectedLearningElements
+                       )*/
+                    //console.log(selectedLearningElements)
                     selectedAlgorithms.map((selectedAlgorithm) => {
                       //selectedAlgorithm[1], selectedAlgorithm[0], selectedAlgorithm[2]
                       //General 23 bayes
-                      handleCreate(selectedAlgorithm[1], selectedAlgorithm[0], courseId)
+                      handleCreate(
+                        selectedAlgorithm[1],
+                        selectedAlgorithm[0],
+                        selectedLearningElements,
+                        selectedAlgorithm[2],
+                        courseId
+                      )
                     })
                   }>
                   {'Create Topics'}

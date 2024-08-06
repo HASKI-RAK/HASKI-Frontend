@@ -7,46 +7,56 @@ import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 
 type TableLearningElementProps = {
   selectedTopicsModal: RemoteTopic[]
-  onLearningElementChange: (selectedLearningElements: RemoteLearningElement[]) => void
-  selectedLearningElementsState: RemoteLearningElement[]
+  onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
+  selectedLearningElementsState: { [key: number]: RemoteLearningElement[] }
 }
 
 const TableLearningElement = memo(
   ({ selectedTopicsModal, onLearningElementChange, selectedLearningElementsState }: TableLearningElementProps) => {
-    const [selectedLearningElements, setSelectedLearningElements] =
-      useState<RemoteLearningElement[]>(selectedLearningElementsState)
+    const [selectedLearningElements, setSelectedLearningElements] = useState<{
+      [key: number]: RemoteLearningElement[]
+    }>(selectedLearningElementsState)
 
     useEffect(() => {
-      const allLearningElements = selectedTopicsModal.flatMap((topic) => topic.lms_learning_elements)
-      const currentLearningElementIds = new Set(selectedLearningElements.map((el) => el.lms_id))
+      const allLearningElements = selectedTopicsModal.reduce((acc, topic) => {
+        acc[topic.topic_lms_id] = topic.lms_learning_elements
+        return acc
+      }, {} as { [key: number]: RemoteLearningElement[] })
 
-      // Merge existing selected elements with new learning elements
-      const mergedSelectedLearningElements = selectedLearningElements
-        .filter((el) => allLearningElements.some((newEl) => newEl.lms_id === el.lms_id))
-        .concat(allLearningElements.filter((el) => currentLearningElementIds.has(el.lms_id)))
-
-      setSelectedLearningElements(mergedSelectedLearningElements)
-      onLearningElementChange(mergedSelectedLearningElements)
+      setSelectedLearningElements(allLearningElements)
+      onLearningElementChange(allLearningElements)
     }, [selectedTopicsModal])
 
     const handleCheckboxChange = (topicId: number, element: RemoteLearningElement, checked: boolean) => {
-      const updatedSelectedElements = checked
-        ? [...selectedLearningElements, element]
-        : selectedLearningElements.filter((el) => el.lms_id !== element.lms_id)
+      const updatedSelectedElements = {
+        ...selectedLearningElements,
+        [topicId]: checked
+          ? [...(selectedLearningElements[topicId] || []), element]
+          : (selectedLearningElements[topicId] || []).filter((el) => el.lms_id !== element.lms_id)
+      }
 
       setSelectedLearningElements(updatedSelectedElements)
       onLearningElementChange(updatedSelectedElements)
     }
 
     const handleSelectAll = () => {
-      const allLearningElements = selectedTopicsModal.flatMap((topic) => topic.lms_learning_elements)
+      const allLearningElements = selectedTopicsModal.reduce((acc, topic) => {
+        acc[topic.topic_lms_id] = topic.lms_learning_elements
+        return acc
+      }, {} as { [key: number]: RemoteLearningElement[] })
+
       setSelectedLearningElements(allLearningElements)
       onLearningElementChange(allLearningElements)
     }
 
     const handleDeselectAll = () => {
-      setSelectedLearningElements([])
-      onLearningElementChange([])
+      const clearedElements = selectedTopicsModal.reduce((acc, topic) => {
+        acc[topic.topic_lms_id] = []
+        return acc
+      }, {} as { [key: number]: RemoteLearningElement[] })
+
+      setSelectedLearningElements(clearedElements)
+      onLearningElementChange(clearedElements)
     }
 
     return (
@@ -88,7 +98,9 @@ const TableLearningElement = memo(
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={selectedLearningElements.some((el) => el.lms_id === lmsLearningElement.lms_id)}
+                          checked={(selectedLearningElements[lmsTopic.topic_lms_id] || []).some(
+                            (el) => el.lms_id === lmsLearningElement.lms_id
+                          )}
                           onChange={(event) =>
                             handleCheckboxChange(lmsTopic.topic_lms_id, lmsLearningElement, event.target.checked)
                           }
