@@ -13,6 +13,7 @@ import {
   Typography
 } from '@common/components'
 import { PrivacyModalHookReturn, usePrivacyModal as _usePrivacyModal } from './PrivacyModal.hooks'
+import {useUniversity} from '@common/hooks'
 
 const style = {
   position: 'absolute',
@@ -49,12 +50,15 @@ export type PrivacyModalProps = {
  * @category Components
  */
 
-const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps) => {
+const PrivacyModal = ({
+  usePrivacyModal = _usePrivacyModal
+}: PrivacyModalProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [open, setOpen] = useState(true)
   const [checked, setChecked] = useState(false)
-  const { privacyPolicyCookie, handleAccept, checkUniversity } = usePrivacyModal()
+  const { privacyPolicyCookie, handleAccept } = usePrivacyModal()
+  const { university } = useUniversity()
   const currentLocation = useLocation()
 
   //Disable backdropClick so the Modal only closes via the buttons
@@ -132,7 +136,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                       aria-multiline={'true'}
                       onClick={() => {
                         handleModal(false)
-                        checkUniversity().then((university) => {
+                        
                           if (university == 'TH-AB') {
                             window.location.assign('https://moodle.th-ab.de/')
                           } else if (university == 'HS-KE') {
@@ -144,7 +148,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                               history.go(-2)
                             }
                           }
-                        })
+                        
                       }}>
                       {t('appGlobal.decline')}
                     </Button>
