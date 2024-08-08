@@ -23,10 +23,6 @@ export const Contact = ({ useContact = _useContact }: ContactProps) => {
   const { isAuth } = useContext(AuthContext)
 
   const { onSubmitHandler } = useContact({ setIsLoading })
-  return (
-    <>
-      {(isAuth) && (<ContactForm onSubmit={onSubmitHandler} isLoading={isLoading} />)}
-    </>
-  )
+  return <>{isAuth && <ContactForm onSubmit={onSubmitHandler} isLoading={isLoading} />}</>
 }
 export default Contact

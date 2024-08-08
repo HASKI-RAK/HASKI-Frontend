@@ -21,10 +21,10 @@ const Footer = () => {
   const { isAuth } = useContext(AuthContext)
 
   const footerComponents = [
-    { name: [t('pages.home')], link: '/', showOnlyWhenLogin: false },
-    { name: [t('pages.contact')], link: '/contact', showOnlyWhenLogin: true },
-    { name: [t('pages.imprint')], link: '/imprint', showOnlyWhenLogin: false },
-    { name: [t('pages.privacypolicy')], link: '/privacypolicy', showOnlyWhenLogin: false }
+    { name: [t('pages.home')], link: '/', isVisibleBeforeLogin: true },
+    { name: [t('pages.contact')], link: '/contact', isVisibleBeforeLogin: false },
+    { name: [t('pages.imprint')], link: '/imprint', isVisibleBeforeLogin: true },
+    { name: [t('pages.privacypolicy')], link: '/privacypolicy', isVisibleBeforeLogin: true }
   ]
 
   return (
@@ -47,7 +47,7 @@ const Footer = () => {
             <Grid item xs={12} display="flex" width="100%" justifyContent="center">
               {footerComponents.map(
                 (component) =>
-                  (!component.showOnlyWhenLogin || isAuth) && (
+                  (component.isVisibleBeforeLogin || isAuth) && (
                     <Fragment key={component.link}>
                       <Link
                         id={component.link.concat('-link').replaceAll(' ', '-')}
