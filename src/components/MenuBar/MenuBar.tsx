@@ -31,6 +31,7 @@ import {
   FurtherInfoMenu,
   LanguageMenu,
   QuestionnaireQuestionsModal,
+  ThemeModal,
   QuestionnaireResultsModal,
   TableILSQuestions,
   TableListKQuestions
@@ -53,12 +54,22 @@ const MenuBar = () => {
   const { isAuth, logout } = useContext(AuthContext)
   const { t } = useTranslation()
   const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpenTheme, setModalOpenTheme] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
   const [modalOpenListK, setModalOpenListK] = useState(false)
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [successSendILSShort, setSuccessSendILSShort] = useState(false)
   const [successSendListK, setSuccessSendListK] = useState(false)
+
+  const handleOpenThemeModal = () => {
+    setModalOpenTheme(true)
+    setAnchorElUser(null)
+  }
+
+  const handleCloseThemeModal = () => {
+      setModalOpenTheme(false)
+  }
 
   const handleOpenILSShortModal = () => {
     setModalOpenILSShort(true)
@@ -189,10 +200,11 @@ const MenuBar = () => {
             <Tooltip title={'Change your theme'}>
               <IconButton
                 id="theme-icon-button"
-                onClick={() => navigate('/theme')}>
+                onClick={() => handleOpenThemeModal()}>
                 <Brush data-testid="BrushIcon" />
               </IconButton>
             </Tooltip>
+            <ThemeModal open={modalOpenTheme} handleClose={() => handleCloseThemeModal()} />
           </Box>
            }
           {/** Help button */}

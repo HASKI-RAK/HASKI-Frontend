@@ -30,8 +30,19 @@ interface ThemeContextProviderProps {
 const ThemeContextProvider: FC<ThemeContextProviderProps> = ({ children }) => {
 
     const [theme, setTheme] = useState(HaskiTheme)
+    const [isUnset, setIsUnset] = useState(true)
     const getUser = usePersistedStore((state) => state.getUser)
     const updateUser = usePersistedStore((state) => state.updateUser)
+
+    if (isUnset){
+        getUser().then((user) => {
+            if(user) {
+                loadTheme(user.settings.theme)
+            }
+        })
+        setIsUnset(false)
+    }
+
 
     const updateTheme = (themeName: string) => {
 
