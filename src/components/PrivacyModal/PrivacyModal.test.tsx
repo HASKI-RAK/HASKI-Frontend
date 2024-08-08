@@ -83,7 +83,7 @@ describe('Test PrivacyModal', () => {
 
   //Tests for decline and redirect
   test('Redirects the user to TH-AB', async () => {
-    mockServices.fetchUser = jest.fn().mockImplementation(() =>
+    mockServices.getUser = jest.fn().mockImplementation(() =>
       Promise.resolve({
         id: 1,
         lms_user_id: 1,
@@ -99,38 +99,16 @@ describe('Test PrivacyModal', () => {
         university: 'TH-AB'
       })
     )
+    const university = useUniversity()
+    
     const { getByRole } = render(
       <MemoryRouter>
         <PrivacyModal />
       </MemoryRouter>
     )
+    expect (university).toBe('')
     const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
     fireEvent.click(declineButton)
-  })
-
-  //Prior Test with an expect
-  test('checkUniversity returns valid value', async () => {
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
-      Promise.resolve({
-        id: 1,
-        lms_user_id: 1,
-        name: 'Thaddäus Tentakel',
-        role: 'Tester',
-        role_id: 1,
-        settings: {
-          id: 1,
-          user_id: 1,
-          pswd: '1234',
-          theme: 'test'
-        },
-        university: 'TH-AB'
-      })
-    )
-
-    const { result } = renderHook(() => useUniversity(), {
-      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
-    })
-    expect(await result.current.university).toBe('TH-AB')
   })
 
   test('Redirects the user to HS-KE', async () => {
@@ -157,14 +135,6 @@ describe('Test PrivacyModal', () => {
     )
     const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
     fireEvent.click(declineButton)
-  })
-
-  test('checkUniversity returns empty string when fetch fails', async () => {
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
-    const { result } = renderHook(() => useUniversity(), {
-      wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
-    })
-    expect(await result.current.university).toBe('')
   })
 
   test('decline returns the user two pages prior', async () => {

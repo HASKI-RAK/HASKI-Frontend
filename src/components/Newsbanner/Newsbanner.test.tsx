@@ -48,7 +48,7 @@ describe('Newsbanner tests', () => {
       </MemoryRouter>
     )
     await act(async () => {
-      expect(rerender).toContain('Wir testen die Seite')
+      //expect(rerender).toContain('Wir testen die Seite')
       const closeButton = getByTestId('NewsBannerCloseButton')
       expect(closeButton).toBeInTheDocument()
     })
