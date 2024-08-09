@@ -18,7 +18,7 @@
 <h1>Function postCalculateLearningPathILS</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="postCalculateLearningPathILS"><span class="tsd-kind-call-signature">post<wbr/>Calculate<wbr/>Learning<wbr/>PathILS</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span><span class="tsd-signature-symbol">?</span>, <span class="tsd-kind-parameter">lmsUserId</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/core.LearningPathBasedOn.html" class="tsd-signature-type tsd-kind-type-alias">LearningPathBasedOn</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><a href="#postCalculateLearningPathILS" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="postCalculateLearningPathILS"><span class="tsd-kind-call-signature">post<wbr/>Calculate<wbr/>Learning<wbr/>PathILS</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span><span class="tsd-signature-symbol">?</span>, <span class="tsd-kind-parameter">lmsUserId</span><span class="tsd-signature-symbol">?</span>, <span class="tsd-kind-parameter">studentId</span><span class="tsd-signature-symbol">?</span>, <span class="tsd-kind-parameter">courseId</span><span class="tsd-signature-symbol">?</span>, <span class="tsd-kind-parameter">topicId</span><span class="tsd-signature-symbol">?</span>, <span class="tsd-kind-parameter">algorithm</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/core.LearningPathBasedOn.html" class="tsd-signature-type tsd-kind-type-alias">LearningPathBasedOn</a><span class="tsd-signature-symbol">&gt;</span><a href="#postCalculateLearningPathILS" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>postCalculateLearningPathILS function.</p>
 </div>
@@ -34,17 +34,37 @@
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">lmsUserId</span>: <span class="tsd-signature-type">number</span></h5>
 <div class="tsd-comment tsd-typography"><p>lms user id</p>
 </div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">studentId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>student id</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">courseId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>course id</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">topicId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>topic id</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">algorithm</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>algorithm to use, can be: &quot;graf&quot;, &quot;aco&quot;, &quot;ga&quot;</p>
+</div>
 <div class="tsd-comment tsd-typography"></div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/core.LearningPathBasedOn.html" class="tsd-signature-type tsd-kind-type-alias">LearningPathBasedOn</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4><ul>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/core.LearningPathBasedOn.html" class="tsd-signature-type tsd-kind-type-alias">LearningPathBasedOn</a><span class="tsd-signature-symbol">&gt;</span></h4><ul>
 <li>returns a promise with the learning path</li>
 </ul>
 
 <div class="tsd-comment tsd-typography">
 <h4>Remarks</h4><p>Sends a request to the backend to calculate the learning path for a student for a course.
-Throws an error if userId or lmsUserId is not provided.</p>
+Throws an error if userId, lmsUserId, studentId, courseId, topicId or algorithm are not provided.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/services/LearningPath/postCalculateLearningPathILS.tsx#L22">src/services/LearningPath/postCalculateLearningPathILS.tsx:22</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/services/LearningPath/postCalculateLearningPathILS.tsx#L25">src/services/LearningPath/postCalculateLearningPathILS.tsx:25</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -102,6 +122,8 @@ Throws an error if userId or lmsUserId is not provided.</p>
 <li><a href="services.fetchListK.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>fetch<wbr/>ListK</span></a></li>
 <li><a href="services.fetchLogout.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>fetch<wbr/>Logout</span></a></li>
 <li><a href="services.fetchRedirectMoodleLogin.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>fetch<wbr/>Redirect<wbr/>Moodle<wbr/>Login</span></a></li>
+<li><a href="services.fetchStudentLpLeAlg.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>fetch<wbr/>Student<wbr/>Lp<wbr/>Le<wbr/>Alg</span></a></li>
+<li><a href="services.fetchTeacherLpLeAlg.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>fetch<wbr/>Teacher<wbr/>Lp<wbr/>Le<wbr/>Alg</span></a></li>
 <li><a href="services.fetchUser.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>fetch<wbr/>User</span></a></li>
 <li><a href="services.getContextActivities.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>get<wbr/>Context<wbr/>Activities</span></a></li>
 <li><a href="services.getStatement.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>get<wbr/>Statement</span></a></li>
@@ -111,6 +133,8 @@ Throws an error if userId or lmsUserId is not provided.</p>
 <li><a href="services.postListK.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>post<wbr/>ListK</span></a></li>
 <li><a href="services.postLogin.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>post<wbr/>Login</span></a></li>
 <li><a href="services.postLoginCredentials.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>post<wbr/>Login<wbr/>Credentials</span></a></li>
+<li><a href="services.postStudentLpLeAlg.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>post<wbr/>Student<wbr/>Lp<wbr/>Le<wbr/>Alg</span></a></li>
+<li><a href="services.postTeacherLpLeAlg.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>post<wbr/>Teacher<wbr/>Lp<wbr/>Le<wbr/>Alg</span></a></li>
 <li><a href="services.useNetworkStatus.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>use<wbr/>Network<wbr/>Status</span></a></li>
 <li><a href="services.useStatement.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>use<wbr/>Statement</span></a></li>
 <li><a href="services.useViewport.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>use<wbr/>Viewport</span></a></li></ul></div></details></li>
