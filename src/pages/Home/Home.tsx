@@ -2,14 +2,7 @@ import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import {
-  Button,
-  Card,
-  CardContent,
-  Skeleton,
-  Stack,
-  Typography,
-} from '@common/components'
+import { Button, Card, CardContent, Skeleton, Stack, Typography } from '@common/components'
 import { Course } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -120,7 +113,7 @@ export const Home = () => {
                       <MoreVert />
                     </IconButton>
                   </Grid>*/}
-                  <Typography variant="h5" align="center" sx={{mt:'0.5rem'}}>
+                  <Typography variant="h5" align="center" sx={{ mt: '0.5rem' }}>
                     {course.name}
                   </Typography>
                   <CardContent>
