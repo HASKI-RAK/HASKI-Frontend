@@ -21,3 +21,9 @@ export { fetchILS, fetchListK, postILS, postListK } from './Questionnaire'
 export * from './debounce'
 export * from './Viewport'
 export { postCalculateLearningPathILS } from './LearningPath'
+export {
+  fetchStudentLpLeAlg,
+  fetchTeacherLpLeAlg,
+  postStudentLpLeAlg,
+  postTeacherLpLeAlg
+} from './LearningPathLearningElementAlgorithm'

@@ -1,4 +1,6 @@
 import { resetAllSlices } from '@store'
+import { ok } from 'assert'
+import { url } from 'inspector'
 
 /**
  * Type definition for {@link mockDataServices}
@@ -348,6 +350,38 @@ const mockDataServices: MockDataServices = {
         timecompleted: '1699967821'
       }
     ])
+  ),
+  fetchStudentLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      algorithms: [
+        {
+          algorithm_id: 1,
+          id: 1,
+          short_name: 'test',
+          student_id: 1,
+          topic_id: 1
+        }
+      ]
+    })
+  ),
+  fetchTeacherLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      algorithms: [
+        {
+          algorithm_id: 1,
+          short_name: 'test',
+          topic_id: 1
+        }
+      ]
+    })
+  ),
+  postStudentLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED',
+      url: 'http://fakedomain.com:5000/userId/topicId/studentAlgorithm'
+    })
   )
 }
 /**

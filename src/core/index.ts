@@ -27,6 +27,11 @@ import LearningElement from './LearningElement/LearningElement'
 import LearningPathElement from './LearningPathElement/LearningPathElement'
 import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
 import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
+import LearningPathLearningElementAlgorithm, {
+  LearningPathLearningElementAlgorithmResponse
+} from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
+import StudentLpLeAlgorithm, { StudentLpLeAlgorithmResponse } from './LearningPathAlgorithm/StudentLpLeAlgorithm'
+import TeacherLpLeAlgorithm, { TeacherLpLeAlgorithmResponse } from './LearningPathAlgorithm/TeacherLpLeAlgorithm'
 import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
 import ILS from './QuestionnaireResults/ILS'
 import ListK from './QuestionnaireResults/ListK'
@@ -46,6 +51,12 @@ export type {
   LearningPathElement,
   LearningPathLearningElement,
   LearningPathElementStatus,
+  LearningPathLearningElementAlgorithm,
+  LearningPathLearningElementAlgorithmResponse,
+  StudentLpLeAlgorithm,
+  StudentLpLeAlgorithmResponse,
+  TeacherLpLeAlgorithm,
+  TeacherLpLeAlgorithmResponse,
   Topic,
   StudentLearningElement,
   ILS,
@@ -55,6 +66,9 @@ export type {
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
 export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'
 export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'
+export type { LearningPathLearningElementAlgorithmReturn } from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
+export type { StudentLpLeAlgorithmReturn } from './LearningPathAlgorithm/StudentLpLeAlgorithm'
+export type { TeacherLpLeAlgorithmReturn } from './LearningPathAlgorithm/TeacherLpLeAlgorithm'
 export type { ListKReturn } from './QuestionnaireResults/ListK'
 export type { CourseReturn } from './Course/Course'
 export type { ILSReturn } from './QuestionnaireResults/ILS'
