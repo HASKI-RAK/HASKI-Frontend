@@ -22,6 +22,7 @@ import { usePersistedStore, useStore } from '@store'
 import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 import { postLearningElement } from '../../../services/LearningElement/postLearningElement'
+import { postCalculateLearningPath } from '../../../services/LearningPath/postCalculateLearningPath'
 import { postLearningPathAlgorithm } from '../../../services/LearningPathAlgorithm/postLearningPathAlgorithm'
 import { postTopic } from '../../../services/Topic/postTopic'
 import { SkeletonList } from '../../index'
@@ -162,6 +163,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       updated_at: date.toISOString().split('.')[0] + 'Z',
       university: 'HS-KE'
     })
+    console.log(learningElementName)
     return postLearningElement({ topicId, outputJson })
   }
 
@@ -171,6 +173,21 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       algorithm_s_name: algorithmShortname
     })
     return postLearningPathAlgorithm({ userId, topicId, outputJson })
+  }
+
+  const handleCalculateLearningPaths = (
+    userId: number,
+    userRole: string,
+    university: string,
+    courseId: string,
+    topicId: number
+  ) => {
+    const outputJson: string = JSON.stringify({
+      university: university,
+      role: userRole
+    })
+
+    return postCalculateLearningPath({ userId, courseId, topicId, outputJson })
   }
 
   const handleCreate = (
@@ -184,7 +201,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     if (courseId == undefined) return
 
     handleCreateTopics(topicName, lmsCourseId, courseId).then((topic) => {
-      const topicId = topic.lms_id
+      const topicId = topic.id
 
       if (selectedLearningElements[topicId]) {
         selectedLearningElements[topicId].forEach((element) => {
@@ -192,7 +209,9 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
         })
       }
       getUser().then((user) => {
-        handleCreateAlgorithms(user.settings.user_id, topic.id, algorithmShortName)
+        handleCreateAlgorithms(user.settings.user_id, topic.id, algorithmShortName).then((algorithm) => {
+          handleCalculateLearningPaths(user.settings.user_id, user.role, user.university, courseId, topicId)
+        })
       })
     })
   }
