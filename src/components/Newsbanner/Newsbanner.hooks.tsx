@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useUniversity } from '@common/hooks'
 
 /**
- * @prop checkForNews - sets the newsItem if there is atleast one news
+ * @prop  sets the newsItem if there is atleast one news
  * and returns a string of all news
  * @prop hasItem - check if there are any news
  * @category Hooks

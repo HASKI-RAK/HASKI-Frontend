@@ -1,6 +1,6 @@
 import { Alert, Box, Collapse, IconButton, Typography } from '@common/components'
 import { Close } from '@common/icons'
-import { useEffect, memo } from 'react'
+import { memo } from 'react'
 import { keyframes } from '@emotion/react'
 import { NewsbannerHookReturn, useNewsbanner as _useNewsbanner } from './Newsbanner.hooks'
 import { useSessionStore } from '@store'
@@ -19,14 +19,9 @@ export type NewsbannerProps = {
  */
 
 const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
-  const { checkForNews, isNewsAvailable, newsText } = useNewsbanner()
+  const { isNewsAvailable, newsText } = useNewsbanner()
   const setIsBannerOpen = useSessionStore((state) => state.setIsBannerOpen)
   const isBannerOpen = useSessionStore((state) => state.isBannerOpen)
-
-  useEffect(() => {
-    checkForNews()
-  }),
-    [checkForNews]
 
   //Animation logic
   const text_len = newsText.length * 10
