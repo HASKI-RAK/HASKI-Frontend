@@ -100,13 +100,13 @@ describe('Test PrivacyModal', () => {
       })
     )
     const university = useUniversity()
-    
+
     const { getByRole } = render(
       <MemoryRouter>
         <PrivacyModal />
       </MemoryRouter>
     )
-    expect (university).toBe('')
+    expect(university).toBe('')
     const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
     fireEvent.click(declineButton)
   })

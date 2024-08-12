@@ -13,7 +13,7 @@ import {
   Typography
 } from '@common/components'
 import { PrivacyModalHookReturn, usePrivacyModal as _usePrivacyModal } from './PrivacyModal.hooks'
-import {useUniversity} from '@common/hooks'
+import { useUniversity } from '@common/hooks'
 
 const style = {
   position: 'absolute',
@@ -50,9 +50,7 @@ export type PrivacyModalProps = {
  * @category Components
  */
 
-const PrivacyModal = ({
-  usePrivacyModal = _usePrivacyModal
-}: PrivacyModalProps) => {
+const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [open, setOpen] = useState(true)
@@ -136,19 +134,18 @@ const PrivacyModal = ({
                       aria-multiline={'true'}
                       onClick={() => {
                         handleModal(false)
-                        
-                          if (university == 'TH-AB') {
-                            window.location.assign('https://moodle.th-ab.de/')
-                          } else if (university == 'HS-KE') {
-                            window.location.assign('https://moodle.hs-kempten.de/')
+
+                        if (university == 'TH-AB') {
+                          window.location.assign('https://moodle.th-ab.de/')
+                        } else if (university == 'HS-KE') {
+                          window.location.assign('https://moodle.hs-kempten.de/')
+                        } else {
+                          if (currentLocation.pathname == '/') {
+                            history.back()
                           } else {
-                            if (currentLocation.pathname == '/') {
-                              history.back()
-                            } else {
-                              history.go(-2)
-                            }
+                            history.go(-2)
                           }
-                        
+                        }
                       }}>
                       {t('appGlobal.decline')}
                     </Button>

@@ -1,7 +1,7 @@
 import { StateCreator } from 'zustand'
 import { NewsResponse, NewsReturn } from '@core'
 import { fetchNews } from '@services'
-import { PersistedSessionStoreState } from '@store'
+import { SessionStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
 export default interface NewsSlice {
@@ -11,7 +11,7 @@ export default interface NewsSlice {
   setIsBannerOpen: (open?: boolean) => void
 }
 
-export const createNewsSlice: StateCreator<PersistedSessionStoreState, [], [], NewsSlice> = (set, get) => {
+export const createNewsSlice: StateCreator<SessionStoreState, [], [], NewsSlice> = (set, get) => {
   resetters.push(() => set({ _news: {}, isBannerOpen: true }))
   return {
     _news: {},

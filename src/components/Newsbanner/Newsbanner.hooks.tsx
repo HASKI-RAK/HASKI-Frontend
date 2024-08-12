@@ -1,9 +1,9 @@
 import log from 'loglevel'
-import { useMemo, useState, useContext } from 'react'
+import { useMemo, useState, useContext, useEffect } from 'react'
 import { SnackbarContext } from '@services'
-import { usePersistedSessionStore } from '@store'
+import { useSessionStore } from '@store'
 import { useTranslation } from 'react-i18next'
-import {useUniversity} from '@common/hooks'
+import { useUniversity } from '@common/hooks'
 
 /**
  * @prop checkForNews - sets the newsItem if there is atleast one news
@@ -14,9 +14,8 @@ import {useUniversity} from '@common/hooks'
  */
 
 export type NewsbannerHookReturn = {
-  readonly checkForNews: ()=>Promise<void>
   readonly isNewsAvailable: boolean
-  readonly newsText:string
+  readonly newsText: string
 }
 
 /**
@@ -34,7 +33,7 @@ export type NewsbannerHookReturn = {
 export const useNewsbanner = (): NewsbannerHookReturn => {
   const { t, i18n } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
-  const getNews = usePersistedSessionStore((state) => state.getNews)
+  const getNews = useSessionStore((state) => state.getNews)
   const { university } = useUniversity()
   const [isNewsAvailable, setIsNewsAvailable] = useState(false)
   const [newsText, setNewsText] = useState('')
@@ -42,26 +41,22 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
   //** Logic **/
   //returns combined string of all the news
   //and checks if there are news
-  const checkForNews = async () => {
-      return getNews(i18n.language, university)
-        .then((response) => {
-          setIsNewsAvailable(response.news.length != 0)
-          return setNewsText(response.news.map(({ news_content }) => news_content).join(', '))
+  useEffect(() => {
+    getNews(i18n.language, university)
+      .then((response) => {
+        setIsNewsAvailable(response.news.length != 0)
+        setNewsText(response.news.map(({ news_content }) => news_content).join(', '))
+      })
+      .catch((error) => {
+        addSnackbar({
+          message: t('error.getNews') + error,
+          severity: 'error',
+          autoHideDuration: 3000
         })
-        .catch((error) => {
-          addSnackbar({
-            message: t('error.getNews') + error,
-            severity: 'error',
-            autoHideDuration: 3000
-          })
-          log.error(t('error.getNews') + error)
-          return setNewsText('')
-        })
-    
-  }
+        log.error(t('error.getNews') + error)
+        setNewsText('')
+      })
+  }, [])
 
-  return useMemo(
-    () => ({ checkForNews, isNewsAvailable, newsText }),
-    [checkForNews, isNewsAvailable, newsText]
-  )
+  return useMemo(() => ({ isNewsAvailable, newsText }), [isNewsAvailable, newsText])
 }

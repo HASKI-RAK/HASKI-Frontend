@@ -22,7 +22,7 @@ export type StoreState = LearningPathElementSlice &
   LearningPathTopicSlice &
   LearningPathElementSpecificStatusSlice
 export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & xAPISlice
-export type PersistedSessionStoreState = NewsSlice
+export type SessionStoreState = NewsSlice
 
 export const resetters: (() => void)[] = []
 
@@ -59,14 +59,14 @@ export const usePersistedStore = create<PersistedStoreState>()(
     )
   )
 )
-export const usePersistedSessionStore = create<PersistedSessionStoreState>()(
+export const useSessionStore = create<SessionStoreState>()(
   devtools(
     persist(
       (...a) => ({
         ...createNewsSlice(...a)
       }),
       {
-        name: 'persisted_session_storage',
+        name: 'session_storage',
         // Here we can whitelist the keys we want to persist
         getStorage: () => sessionStorage,
         partialize: (state) => ({

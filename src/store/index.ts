@@ -1,2 +1,2 @@
-export { resetAllSlices, resetters, usePersistedStore, useStore, usePersistedSessionStore } from './Zustand/Store'
-export type { PersistedStoreState, StoreState, PersistedSessionStoreState } from './Zustand/Store'
+export { resetAllSlices, resetters, usePersistedStore, useStore, useSessionStore } from './Zustand/Store'
+export type { PersistedStoreState, StoreState, SessionStoreState } from './Zustand/Store'
