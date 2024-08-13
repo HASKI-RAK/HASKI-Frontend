@@ -4,6 +4,7 @@ import { SnackbarContext } from '@services'
 import { useSessionStore } from '@store'
 import { useTranslation } from 'react-i18next'
 import { useUniversity } from '@common/hooks'
+import i18next from 'i18next'
 
 /**
  * @prop  sets the newsItem if there is atleast one news
@@ -56,7 +57,7 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
         log.error(t('error.getNews') + error)
         setNewsText('')
       })
-  }, [])
+  }, [i18next.language])
 
   return useMemo(() => ({ isNewsAvailable, newsText }), [isNewsAvailable, newsText])
 }
