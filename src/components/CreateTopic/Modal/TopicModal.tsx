@@ -56,13 +56,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     {
       name: 'Fixed Order',
       description: 'The learning elements are presented in a predetermined order.',
-      key: 'fixed'
-    },
-    {
-      name: 'Bayes',
-      description:
-        'Bayes is a probabilistic algorithm that calculates the learning path based on the probability for the best order for a learner.',
-      key: 'bayes'
+      key: 'default'
     },
     {
       name: 'Graf',
@@ -80,7 +74,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       name: 'Genetic Algorithm',
       description:
         'The Genetic Algorithm is inspired by evolution. It approximates the best learning path by simulating the process of mutation and selection. It is often used for its speed.',
-      key: 'genetic'
+      key: 'ga'
     },
     {
       name: 'Tyche',
@@ -156,7 +150,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     const outputJson: string = JSON.stringify({
       lms_id: lmsLearningElementId,
       activity_type: 'h5pactivity',
-      classification: 'RQ',
+      classification: 'ÜB',
       name: learningElementName,
       created_by: 'Dimitri Bigler',
       created_at: date.toISOString().split('.')[0] + 'Z',
@@ -205,12 +199,11 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       const topicId = topic.id
       if (selectedLearningElements[topicLmsId]) {
         selectedLearningElements[topicLmsId].forEach((element) => {
-          handleCreateLearningElements(element.lms_learning_element_name, element.lms_id, topic.id).then(() => {
-            getUser().then((user) => {
-              handleCreateAlgorithms(user.settings.user_id, topic.id, algorithmShortName).then((algorithm) => {
-                handleCalculateLearningPaths(user.settings.user_id, user.role, user.university, courseId, topicId)
-              })
-            })
+          handleCreateLearningElements(element.lms_learning_element_name, element.lms_id, topic.id)
+        })
+        getUser().then((user) => {
+          handleCreateAlgorithms(user.settings.user_id, topic.id, algorithmShortName).then(() => {
+            handleCalculateLearningPaths(user.settings.user_id, user.role, user.university, courseId, topicId)
           })
         })
       }

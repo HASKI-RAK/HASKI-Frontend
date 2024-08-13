@@ -17,13 +17,7 @@ const TableAlgorithm = memo(
       {
         name: 'Fixed Order',
         description: 'The learning elements are presented in a predetermined order.',
-        key: 'fixed'
-      },
-      {
-        name: 'Bayes',
-        description:
-          'Bayes is a probabilistic algorithm that calculates the learning path based on the probability for the best order for a learner.',
-        key: 'bayes'
+        key: 'default'
       },
       {
         name: 'Graf',
@@ -41,7 +35,7 @@ const TableAlgorithm = memo(
         name: 'Genetic Algorithm',
         description:
           'The Genetic Algorithm is inspired by evolution. It approximates the best learning path by simulating the process of mutation and selection. It is often used for its speed.',
-        key: 'genetic'
+        key: 'ga'
       },
       {
         name: 'Tyche',
