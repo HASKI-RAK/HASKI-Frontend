@@ -98,7 +98,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
 
   useEffect(() => {
     getUser().then((user) => {
-      getTopics(user.settings.user_id, user.lms_user_id, user.id, '2').then((topics) => {
+      getTopics(user.settings.user_id, user.lms_user_id, user.id, courseId).then((topics) => {
         setTopics(topics)
         getRemoteTopics(courseId).then((response) => {
           return setRemoteTopics(
@@ -198,21 +198,22 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     courseId?: string
   ) => {
     // ToDo: error in getting current courseId
+
     if (courseId == undefined) return
-
     handleCreateTopics(topicName, lmsCourseId, courseId).then((topic) => {
+      const topicLmsId = topic.lms_id
       const topicId = topic.id
-
-      if (selectedLearningElements[topicId]) {
-        selectedLearningElements[topicId].forEach((element) => {
-          handleCreateLearningElements(element.lms_learning_element_name, element.lms_id, topic.id)
+      if (selectedLearningElements[topicLmsId]) {
+        selectedLearningElements[topicLmsId].forEach((element) => {
+          handleCreateLearningElements(element.lms_learning_element_name, element.lms_id, topic.id).then(() => {
+            getUser().then((user) => {
+              handleCreateAlgorithms(user.settings.user_id, topic.id, algorithmShortName).then((algorithm) => {
+                handleCalculateLearningPaths(user.settings.user_id, user.role, user.university, courseId, topicId)
+              })
+            })
+          })
         })
       }
-      getUser().then((user) => {
-        handleCreateAlgorithms(user.settings.user_id, topic.id, algorithmShortName).then((algorithm) => {
-          handleCalculateLearningPaths(user.settings.user_id, user.role, user.university, courseId, topicId)
-        })
-      })
     })
   }
 
@@ -234,7 +235,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
           }}>
           <Fab
             color="primary"
-            data-testid={'QuestionnaireResultsCloseButton'}
+            data-testid={'TopicModalCloseButton'}
             onClick={handleClose}
             sx={{
               position: 'sticky',
