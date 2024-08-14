@@ -1,14 +1,18 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, renderHook } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
 import PrivacyModal from './PrivacyModal'
 import { act } from '@testing-library/react'
-import { useUniversity } from '@common/hooks'
-import { useEffect } from 'react'
 
 const navigate = jest.fn()
+
+const assignSpy = jest.fn();
+
+Object.defineProperty(window, 'location', {
+  value: { assign: assignSpy }
+})
 
 beforeEach(() => {
   jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
@@ -95,28 +99,25 @@ describe('Test PrivacyModal', () => {
         university: 'TH-AB'
       })
     )
-   
-    //const university = useUniversity()
-
+    
     const { getByRole,rerender } = render(
       <MemoryRouter initialEntries={['/']}>
         <PrivacyModal />
       </MemoryRouter>
     )
     await new Promise(process.nextTick)
-
     rerender(
       <MemoryRouter>
         <PrivacyModal />
       </MemoryRouter>
     )
-    //expect(university).toBe('TH-AB')
     act(() => {
       const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+      expect(declineButton).toBeInTheDocument()
       fireEvent.click(declineButton)
     })
-    //expect(location).toBe('https://moodle.th-ab.de/')
-   
+    expect(window.location.assign).toHaveBeenCalled()
+    expect(window.location.assign).toHaveBeenCalledWith('https://moodle.th-ab.de/')
   })
 
   test('Redirects the user to HS-KE', async () => {
@@ -153,6 +154,8 @@ describe('Test PrivacyModal', () => {
       const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
       fireEvent.click(declineButton)
     })
+    expect(window.location.assign).toHaveBeenCalled()
+    expect(window.location.assign).toHaveBeenCalledWith('https://moodle.hs-kempten.de/')
   })
 
   test('decline returns the user two pages prior', async () => {
