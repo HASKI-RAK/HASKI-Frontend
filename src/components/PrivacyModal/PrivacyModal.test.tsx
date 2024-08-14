@@ -8,7 +8,7 @@ import { act } from '@testing-library/react'
 
 const navigate = jest.fn()
 
-const assignSpy = jest.fn();
+const assignSpy = jest.fn()
 
 Object.defineProperty(window, 'location', {
   value: { assign: assignSpy }
@@ -99,8 +99,8 @@ describe('Test PrivacyModal', () => {
         university: 'TH-AB'
       })
     )
-    
-    const { getByRole,rerender } = render(
+
+    const { getByRole, rerender } = render(
       <MemoryRouter initialEntries={['/']}>
         <PrivacyModal />
       </MemoryRouter>
@@ -137,7 +137,7 @@ describe('Test PrivacyModal', () => {
         university: 'HS-KE'
       })
     )
-    const { getByRole,rerender } = render(
+    const { getByRole, rerender } = render(
       <MemoryRouter>
         <PrivacyModal />
       </MemoryRouter>
