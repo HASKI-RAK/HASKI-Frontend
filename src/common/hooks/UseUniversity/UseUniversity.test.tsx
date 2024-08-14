@@ -1,11 +1,11 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, act, renderHook } from '@testing-library/react'
+import { renderHook, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import { useUniversity } from '@common/hooks'
 
-test('UniversityCheck returns university', () => {
-  test('checkUniversity returns valid value', async () => {
+
+test('useUniversity returns valid value', async () => {
     mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
       Promise.resolve({
         id: 1,
@@ -26,14 +26,16 @@ test('UniversityCheck returns university', () => {
     const { result } = renderHook(() => useUniversity(), {
       wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
     })
-    expect(await result.current.university).toBe('TH-AB')
+    await waitFor(() => {
+      expect(result.current.university).toStrictEqual('TH-AB')
+      
+    })
   })
 
-  test('checkUniversity returns empty string when fetch fails', async () => {
+  test('useUniversity returns empty string when fetch fails', async () => {
     mockServices.fetchUser = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
     const { result } = renderHook(() => useUniversity(), {
       wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
     })
     expect(await result.current.university).toBe('')
   })
-})
