@@ -28,12 +28,17 @@ import { postTopic } from '../../../services/Topic/postTopic'
 import { SkeletonList } from '../../index'
 import TableAlgorithm from '../Table/TableAlgorithm'
 import TableLearningElement from '../Table/TableLearningElement'
+import TableLearningElementClassification from '../Table/TableLearningElementClassification'
 import TableRemoteTopics from '../Table/TableRemoteTopics'
 import TableTopics from '../Table/TableTopics'
 
 type CourseModalProps = {
   open?: boolean
   handleClose: () => void
+}
+
+type LearningElementWithClassification = RemoteLearningElement & {
+  classification: string
 }
 
 const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
@@ -51,6 +56,9 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const getUser = usePersistedStore((state) => state.getUser)
   const [topics, setTopics] = useState<LearningPathTopic>()
   const [alreadyCreatedTopics, setAlreadyCreatedTopics] = useState<Topic[]>([])
+  const [selectedLearningElementsClassification, setSelectedLearningElementsClassifiction] = useState<{
+    [key: number]: LearningElementWithClassification[]
+  }>({})
 
   const options = [
     {
@@ -88,7 +96,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     selectedTopics.map((topic) => [topic.topic_lms_id, topic.topic_lms_name, options[0].key])
   )
   const [activeStep, setActiveStep] = useState<number>(0)
-  const steps = ['Select Topics', 'Select Learning Elements', 'Select Algorithm']
+  const steps = ['Topics', 'Learning Elements', 'Classifications', 'Algorithms']
 
   useEffect(() => {
     getUser().then((user) => {
@@ -111,6 +119,23 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       }, {} as { [key: number]: RemoteLearningElement[] })
       setSelectedLearningElements(allLearningElements)
     }
+    if (activeStep === 2) {
+      Object.keys(selectedLearningElements).forEach((topicId) => {
+        // Search for learning elements that do not have a classification yet
+        if (Object.keys(selectedLearningElementsClassification).indexOf(topicId) === -1) {
+          // set classification for new learning elements
+          const updatedElements = selectedLearningElements[parseInt(topicId)].map((element) => {
+            return { ...element, classification: '' }
+          })
+
+          // Update the state with the combined elements for this topic
+          setSelectedLearningElementsClassifiction((prev) => ({
+            ...prev,
+            [topicId]: updatedElements
+          }))
+        }
+      })
+    }
   }, [activeStep, selectedTopics])
 
   const handleSetTopics = () => {
@@ -123,6 +148,12 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
 
   const handleLearningElementChange = (learningElements: { [key: number]: RemoteLearningElement[] }) => {
     setSelectedLearningElements(learningElements)
+  }
+
+  const handleLearningElementClassification = (learningElementClassifications: {
+    [key: number]: LearningElementWithClassification[]
+  }) => {
+    setSelectedLearningElementsClassifiction(learningElementClassifications)
   }
 
   const handleAlgorithmChange = (algorithms: [number, string, string][]) => {
@@ -145,12 +176,18 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     return postTopic({ courseId, outputJson })
   }
 
-  const handleCreateLearningElements = (learningElementName: string, lmsLearningElementId: number, topicId: number) => {
+  const handleCreateLearningElements = (
+    learningElementName: string,
+    learningElementActivityType: string,
+    learningElementClassification: string,
+    lmsLearningElementId: number,
+    topicId: number
+  ) => {
     const date = new Date()
     const outputJson: string = JSON.stringify({
       lms_id: lmsLearningElementId,
-      activity_type: 'h5pactivity',
-      classification: 'ÜB',
+      activity_type: learningElementActivityType,
+      classification: learningElementClassification,
       name: learningElementName,
       created_by: 'Dimitri Bigler',
       created_at: date.toISOString().split('.')[0] + 'Z',
@@ -187,7 +224,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const handleCreate = (
     topicName: string,
     lmsCourseId: number,
-    selectedLearningElements: { [key: number]: RemoteLearningElement[] },
+    selectedLearningElementsClassification: { [key: number]: LearningElementWithClassification[] },
     algorithmShortName: string,
     courseId?: string
   ) => {
@@ -197,9 +234,15 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     handleCreateTopics(topicName, lmsCourseId, courseId).then((topic) => {
       const topicLmsId = topic.lms_id
       const topicId = topic.id
-      if (selectedLearningElements[topicLmsId]) {
-        selectedLearningElements[topicLmsId].forEach((element) => {
-          handleCreateLearningElements(element.lms_learning_element_name, element.lms_id, topic.id)
+      if (selectedLearningElementsClassification[topicLmsId]) {
+        selectedLearningElementsClassification[topicLmsId].forEach((element) => {
+          handleCreateLearningElements(
+            element.lms_learning_element_name,
+            element.lms_activity_type,
+            element.classification,
+            element.lms_id,
+            topic.id
+          )
         })
         getUser().then((user) => {
           handleCreateAlgorithms(user.settings.user_id, topic.id, algorithmShortName).then(() => {
@@ -208,6 +251,17 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
         })
       }
     })
+  }
+
+  const handleConsoleLog = (
+    topicName: string,
+    lmsCourseId: number,
+    selectedLearningElements: { [key: number]: LearningElementWithClassification[] },
+    algorithmShortName: string,
+    courseId?: string
+  ) => {
+    console.log(selectedLearningElements)
+    console.log(algorithmShortName)
   }
 
   return (
@@ -296,6 +350,30 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
             </Grid>
           ) : activeStep === 2 ? (
             <Grid container item>
+              <TableLearningElementClassification
+                selectedTopicsModal={selectedTopics}
+                LearningElements={selectedLearningElementsClassification}
+                onLearningElementChange={handleLearningElementClassification}
+              />
+              <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
+                <Button
+                  id="add-course-button"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setActiveStep(activeStep - 1)}>
+                  {'Back'}
+                </Button>
+                <Button
+                  id="add-course-button"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setActiveStep(activeStep + 1)}>
+                  {'Next'}
+                </Button>
+              </Grid>
+            </Grid>
+          ) : activeStep === 3 ? (
+            <Grid container item>
               <TableAlgorithm
                 selectedTopicsModal={selectedTopics}
                 onAlgorithmChange={handleAlgorithmChange}
@@ -315,20 +393,11 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                   color="primary"
                   disabled={selectedTopics.length === 0}
                   onClick={() =>
-                    /*console.log(
-                       'Selected Algorithms:',
-                       selectedAlgorithms,
-                       'Selected Elements:',
-                       selectedLearningElements
-                       )*/
-                    //console.log(selectedLearningElements)
                     selectedAlgorithms.map((selectedAlgorithm) => {
-                      //selectedAlgorithm[1], selectedAlgorithm[0], selectedAlgorithm[2]
-                      //General 23 bayes
                       handleCreate(
                         selectedAlgorithm[1],
                         selectedAlgorithm[0],
-                        selectedLearningElements,
+                        selectedLearningElementsClassification,
                         selectedAlgorithm[2],
                         courseId
                       )

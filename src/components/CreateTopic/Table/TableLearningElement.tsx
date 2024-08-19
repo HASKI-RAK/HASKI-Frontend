@@ -25,7 +25,7 @@ const TableLearningElement = memo(
 
       setSelectedLearningElements(allLearningElements)
       onLearningElementChange(allLearningElements)
-    }, [selectedTopicsModal])
+    }, [selectedTopicsModal, onLearningElementChange])
 
     const handleCheckboxChange = (topicId: number, element: RemoteLearningElement, checked: boolean) => {
       const updatedSelectedElements = {
@@ -61,64 +61,66 @@ const TableLearningElement = memo(
 
     return (
       <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
-        <Grid item container alignItems="center" justifyContent="space-between" direction="row">
-          <Grid item container xs={8.25} justifyContent="flex-end">
-            <Typography variant="h6" sx={{ mt: '1rem' }}>
-              Available Learning Elements
-            </Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Fab sx={{ mt: '1rem', mr: '1rem', color: '#f2852b', bgcolor: 'white' }} onClick={handleSelectAll}>
-              <CheckBoxIcon />
-            </Fab>
-            <Fab sx={{ mt: '1rem', color: '#f2852b', bgcolor: 'white' }} onClick={handleDeselectAll}>
-              <CheckBoxOutlineBlankIcon />
-            </Fab>
-          </Grid>
-        </Grid>
         {selectedTopicsModal.length === 0 ? (
-          <Grid item alignItems="center">
+          <Grid item>
             <Typography variant="h6" sx={{ mt: '1rem' }}>
               Select a topic to view learning elements
             </Typography>
           </Grid>
         ) : (
-          selectedTopicsModal.map((lmsTopic) => (
-            <Grid item key={lmsTopic.topic_lms_id} sx={{ width: '100%' }}>
-              <Paper sx={{ padding: '1rem', mb: '1rem', maxWidth: '49rem' }}>
-                <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
-                  <Grid item container justifyContent="center" alignItems="center">
-                    <Typography variant="h6" gutterBottom>
-                      {lmsTopic.topic_lms_name}
-                    </Typography>
-                  </Grid>
-                </Box>
-                <FormGroup>
-                  {lmsTopic.lms_learning_elements.map((lmsLearningElement) => (
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={(selectedLearningElements[lmsTopic.topic_lms_id] || []).some(
-                            (el) => el.lms_id === lmsLearningElement.lms_id
-                          )}
-                          onChange={(event) =>
-                            handleCheckboxChange(lmsTopic.topic_lms_id, lmsLearningElement, event.target.checked)
-                          }
-                        />
-                      }
-                      label={lmsLearningElement.lms_learning_element_name}
-                      key={lmsLearningElement.lms_id}
-                    />
-                  ))}
-                </FormGroup>
-              </Paper>
+          <>
+            <Grid item container alignItems="center" justifyContent="space-between" direction="row">
+              <Grid item container xs={8.25} justifyContent="flex-end">
+                <Typography variant="h6" sx={{ mt: '1rem' }}>
+                  Available Learning Elements
+                </Typography>
+              </Grid>
+              <Grid item xs={1.75}>
+                <Fab sx={{ mt: '1rem', mr: '0.5rem', color: '#f2852b', bgcolor: 'white', }} onClick={handleSelectAll} size='medium'>
+                  <CheckBoxIcon />
+                </Fab>
+                <Fab sx={{ mt: '1rem', color: '#f2852b', bgcolor: 'white' }} onClick={handleDeselectAll} size='medium'>
+                  <CheckBoxOutlineBlankIcon />
+                </Fab>
+              </Grid>
             </Grid>
-          ))
+            {selectedTopicsModal.map((lmsTopic) => (
+              <Grid item key={lmsTopic.topic_lms_id} sx={{ width: '100%' }}>
+                <Paper sx={{ padding: '1rem', mb: '1rem', maxWidth: '49rem' }}>
+                  <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
+                    <Grid container justifyContent="center" alignItems="center">
+                      <Typography variant="h6" gutterBottom>
+                        {lmsTopic.topic_lms_name}
+                      </Typography>
+                    </Grid>
+                  </Box>
+                  <FormGroup>
+                    {lmsTopic.lms_learning_elements.map((lmsLearningElement) => (
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={(selectedLearningElements[lmsTopic.topic_lms_id] || []).some(
+                              (el) => el.lms_id === lmsLearningElement.lms_id
+                            )}
+                            onChange={(event) =>
+                              handleCheckboxChange(lmsTopic.topic_lms_id, lmsLearningElement, event.target.checked)
+                            }
+                          />
+                        }
+                        label={lmsLearningElement.lms_learning_element_name}
+                        key={lmsLearningElement.lms_id}
+                      />
+                    ))}
+                  </FormGroup>
+                </Paper>
+              </Grid>
+            ))}
+          </>
         )}
       </Grid>
     )
   }
 )
-// eslint-disable-next-line immutable/no-mutation
+
 TableLearningElement.displayName = 'TableLearningElement'
 export default TableLearningElement
