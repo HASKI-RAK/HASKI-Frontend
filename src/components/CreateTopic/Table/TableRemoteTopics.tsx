@@ -1,5 +1,5 @@
-import { memo, useEffect, useState } from 'react'
-import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, TableRow, Typography } from '@common/components'
+import { ReactNode, SetStateAction, memo, useEffect, useState } from 'react'
+import { Button, Checkbox, FormControlLabel, FormGroup, Grid, Paper, TableRow, Typography } from '@common/components'
 import { SkeletonList } from '@components'
 import { useStore } from '@store'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
@@ -8,9 +8,10 @@ type TableTopicProps = {
   onTopicChange: (selectedTopics: RemoteTopic[]) => void
   selectedTopicsModal: RemoteTopic[]
   remoteTopics: RemoteTopic[]
+  children?: ReactNode
 }
 
-const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopics }: TableTopicProps) => {
+const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopics, children }: TableTopicProps) => {
   const [LmsTopics, setLmsTopics] = useState<RemoteTopic[]>(remoteTopics)
   const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>(selectedTopicsModal)
   const getRemoteTopics = useStore((state) => state.getRemoteTopic)
@@ -37,22 +38,25 @@ const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopi
             <SkeletonList />
           </Grid>
         ) : (
-          <Paper sx={{ padding: '1rem', width: '95%' }}>
-            <FormGroup>
-              {LmsTopics.map((LmsTopic) => (
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={selectedTopics.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
-                      onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
-                    />
-                  }
-                  label={LmsTopic.topic_lms_name}
-                  key={LmsTopic.topic_lms_id}
-                />
-              ))}
-            </FormGroup>
-          </Paper>
+          <>
+            <Paper sx={{ padding: '1rem', width: '95%' }}>
+              <FormGroup>
+                {LmsTopics.map((LmsTopic) => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={selectedTopics.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
+                        onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
+                      />
+                    }
+                    label={LmsTopic.topic_lms_name}
+                    key={LmsTopic.topic_lms_id}
+                  />
+                ))}
+              </FormGroup>
+            </Paper>
+            {children}
+          </>
         )}
       </Grid>
     </Grid>

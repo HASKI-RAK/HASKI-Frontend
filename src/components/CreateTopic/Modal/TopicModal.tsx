@@ -310,13 +310,20 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                 <TableRemoteTopics
                   onTopicChange={handleTopicChange}
                   selectedTopicsModal={selectedTopics}
-                  remoteTopics={remoteTopics}
-                />
-                <Grid container justifyContent="flex-end" alignItems="flex-end" sx={{ mt: 2 }}>
-                  <Button id="add-course-button" variant="contained" color="primary" onClick={handleSetTopics}>
-                    {'Next'}
-                  </Button>
-                </Grid>
+                  remoteTopics={remoteTopics}>
+                  <Box sx={{ padding: '1rem', width: '95%' }}>
+                    <Grid container justifyContent="flex-end" alignItems="flex-end">
+                      <Button
+                        id="add-course-button"
+                        variant="contained"
+                        color="primary"
+                        onClick={handleSetTopics}
+                        sx={{ mr: -2 }}>
+                        {'Next'}
+                      </Button>
+                    </Grid>
+                  </Box>
+                </TableRemoteTopics>
               </Grid>
               {topics && (
                 <Grid container item>
