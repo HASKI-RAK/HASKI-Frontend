@@ -291,7 +291,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
             }}>
             <Close />
           </Fab>
-          <Stepper nonLinear activeStep={activeStep} sx={{ pt: '1rem' }}>
+          <Stepper activeStep={activeStep} sx={{ pt: '1rem' }}>
             {steps.map((label, index) => (
               <Step key={label} data-testid={'StepperButton'}>
                 <StepButton

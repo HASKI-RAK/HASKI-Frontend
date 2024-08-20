@@ -64,15 +64,15 @@ const TableLearningElement = memo(
         {selectedTopicsModal.length === 0 ? (
           <Grid item>
             <Typography variant="h6" sx={{ mt: '1rem' }}>
-              Select a topic to view learning elements
+              Select a topic to set learning elements
             </Typography>
           </Grid>
         ) : (
           <>
             <Grid item container alignItems="center" justifyContent="space-between" direction="row">
-              <Grid item container xs={8.25} justifyContent="flex-end">
+              <Grid item container xs={7.75} justifyContent="flex-end">
                 <Typography variant="h6" sx={{ mt: '1rem' }}>
-                  Available Learning Elements
+                  Select learning elements
                 </Typography>
               </Grid>
               <Grid item xs={1.75}>
@@ -85,8 +85,8 @@ const TableLearningElement = memo(
               </Grid>
             </Grid>
             {selectedTopicsModal.map((lmsTopic) => (
-              <Grid item key={lmsTopic.topic_lms_id} sx={{ width: '100%' }}>
-                <Paper sx={{ padding: '1rem', mb: '1rem', maxWidth: '49rem' }}>
+              <Grid item container alignItems="center" justifyContent="center" direction="column">
+                <Paper sx={{ padding: '1rem', width: '95%' }}>
                   <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
                     <Grid container justifyContent="center" alignItems="center">
                       <Typography variant="h6" gutterBottom>

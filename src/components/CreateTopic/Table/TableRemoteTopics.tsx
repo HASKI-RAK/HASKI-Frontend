@@ -28,7 +28,7 @@ const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopi
     <Grid container direction="column" alignItems="center" spacing={3}>
       <Grid item alignItems="center">
         <Typography variant="h6" sx={{ mt: '1rem' }}>
-          Available Topics
+          Available topics
         </Typography>
       </Grid>
       <Grid item container alignItems="stretch" direction="row">
@@ -37,7 +37,7 @@ const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopi
             <SkeletonList />
           </Grid>
         ) : (
-          <Paper sx={{ padding: '1rem', width: '100%', maxWidth: '49rem' }}>
+          <Paper sx={{ padding: '1rem', width: '95%' }}>
             <FormGroup>
               {LmsTopics.map((LmsTopic) => (
                 <FormControlLabel

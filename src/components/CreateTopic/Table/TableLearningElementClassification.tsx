@@ -83,64 +83,64 @@ const TableLearningElementClassification = memo(
     return (
       <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
         {Object.keys(selectedLearningElements).length === 0 ? (
-          <Typography variant="h6" sx={{ mt: '1rem' }}>
-            No Learning Elements selected.
-          </Typography>
+          <Grid item>
+            <Typography variant="h6" sx={{ mt: '1rem' }}>
+              Select learning elements to set classification
+            </Typography>
+          </Grid>
         ) : (
           <>
-          <Grid item container alignItems="center" justifyContent="space-between" direction="row">
-            <Grid item container justifyContent="center">
-              <Typography variant="h6" sx={{ mt: '1rem' }}>
-                Set Learning Element Classification
-              </Typography>
+            <Grid item container alignItems="center" justifyContent="space-between" direction="row">
+              <Grid item container justifyContent="center">
+                <Typography variant="h6" sx={{ mt: '1rem' }}>
+                  Set learning element classification
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
-        {selectedTopicsModal.map((lmsTopic) => (
-            <Grid item key={lmsTopic.topic_lms_id} sx={{ width: '100%' }}>
-              <Paper sx={{ padding: '1rem', mb: '1rem', maxWidth: '49rem' }}>
-                <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
-                  <Grid item container justifyContent="center" alignItems="center">
-                    <Typography variant="h6" gutterBottom>
-                      {lmsTopic.topic_lms_name}
-                    </Typography>
-                  </Grid>
-                </Box>
-                {selectedLearningElements[lmsTopic.topic_lms_id]?.map((element) => (
-                  <Grid container alignItems="center" spacing={2} key={element.lms_id}>
-                    <Grid item xs={6}>
-                      <FormControlLabel
-                        control={<Checkbox checked={true} />}
-                        label={element.lms_learning_element_name}
-                      />
+            {selectedTopicsModal.map((lmsTopic) => (
+              <Grid item container alignItems="center" justifyContent="center" direction="column">
+                <Paper sx={{ padding: '1rem', width: '95%' }}>
+                  <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
+                    <Grid item container justifyContent="center" alignItems="center">
+                      <Typography variant="h6" gutterBottom>
+                        {lmsTopic.topic_lms_name}
+                      </Typography>
                     </Grid>
-                    <Grid item xs={6}>
-                      <FormControl sx={{ m: 1, width: '21rem', left: '10%' }} size="small">
-                      <Select
-                        value={element.classification}
-                        onChange={(event) =>
-                          handleClassificationChange(
-                            lmsTopic.topic_lms_id,
-                            element.lms_id,
-                            event.target.value as string
-                          )
-                        }
-                        displayEmpty>
-                        <MenuItem value="">
-                          Select Classification
-                        </MenuItem>
-                        {classifications.map((classification) => (
-                          <MenuItem key={classification.key} value={classification.key}>
-                            {classification.name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                      </FormControl>
+                  </Box>
+                  {selectedLearningElements[lmsTopic.topic_lms_id]?.map((element) => (
+                    <Grid container alignItems="center" spacing={2} key={element.lms_id}>
+                      <Grid item xs={6}>
+                        <FormControlLabel
+                          control={<Checkbox checked={true} />}
+                          label={element.lms_learning_element_name}
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormControl sx={{ m: 1, width: '21rem', left: '10%' }} size="small">
+                          <Select
+                            value={element.classification}
+                            onChange={(event) =>
+                              handleClassificationChange(
+                                lmsTopic.topic_lms_id,
+                                element.lms_id,
+                                event.target.value as string
+                              )
+                            }
+                            displayEmpty>
+                            <MenuItem value="">Select Classification</MenuItem>
+                            {classifications.map((classification) => (
+                              <MenuItem key={classification.key} value={classification.key}>
+                                {classification.name}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                ))}
-              </Paper>
-            </Grid>
-          ))}
+                  ))}
+                </Paper>
+              </Grid>
+            ))}
           </>
         )}
       </Grid>

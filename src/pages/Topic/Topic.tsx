@@ -9,7 +9,6 @@ import { IFrameModal, LabeledSwitch, ResponsiveMiniMap, TopicModal, nodeTypes } 
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import LearningElementModal from '../../components/CreateLearningElement/Modal/LearningElementModal'
 import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
 
 /**
@@ -197,13 +196,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               isGrouped={isGrouped}
               setIsGrouped={setIsGrouped}
             />
-            <Button
-              variant="contained"
-              sx={{ mt: '1rem', mr: '3rem', bgcolor: '#f2852b' }}
-              onClick={() => setModalOpen(true)}>
-              Add Learning Elements
-            </Button>
-            <LearningElementModal open={modalOpen} handleClose={handleCloseLearningElementModal}></LearningElementModal>
           </Panel>
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
         </ReactFlow>
