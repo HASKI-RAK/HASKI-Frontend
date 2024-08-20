@@ -306,113 +306,119 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
           </Stepper>
           {activeStep === 0 ? (
             <>
-              <Grid container item>
-                <TableRemoteTopics
-                  onTopicChange={handleTopicChange}
-                  selectedTopicsModal={selectedTopics}
-                  remoteTopics={remoteTopics}>
-                  <Box sx={{ padding: '1rem', width: '95%' }}>
-                    <Grid container justifyContent="flex-end" alignItems="flex-end">
-                      <Button
-                        id="add-course-button"
-                        variant="contained"
-                        color="primary"
-                        onClick={handleSetTopics}
-                        sx={{ mr: -2 }}>
-                        {'Next'}
-                      </Button>
-                    </Grid>
-                  </Box>
-                </TableRemoteTopics>
-              </Grid>
-              {topics && (
-                <Grid container item>
-                  <TableTopics topics={topics} />
-                </Grid>
-              )}
+              <TableRemoteTopics
+                onTopicChange={handleTopicChange}
+                selectedTopicsModal={selectedTopics}
+                remoteTopics={remoteTopics}>
+                <Box sx={{ padding: '1rem', width: '95%' }}>
+                  <Grid container justifyContent="flex-end" alignItems="flex-end">
+                    <Button
+                      id="add-course-button"
+                      variant="contained"
+                      color="primary"
+                      onClick={handleSetTopics}
+                      sx={{ mr: -2 }}>
+                      {'Next'}
+                    </Button>
+                  </Grid>
+                </Box>
+              </TableRemoteTopics>
+              {topics && <TableTopics topics={topics} />}
             </>
           ) : activeStep === 1 ? (
             <Grid container item>
               <TableLearningElement
                 selectedTopicsModal={selectedTopics}
                 onLearningElementChange={handleLearningElementChange}
-                selectedLearningElementsState={selectedLearningElements}
-              />
-              <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
-                <Button
-                  id="add-course-button"
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setActiveStep(activeStep - 1)}>
-                  {'Back'}
-                </Button>
-                <Button
-                  id="add-course-button"
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setActiveStep(activeStep + 1)}>
-                  {'Next'}
-                </Button>
-              </Grid>
+                selectedLearningElementsState={selectedLearningElements}>
+                <Box sx={{ padding: '1rem', width: '95%' }}>
+                  <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
+                    <Button
+                      id="add-course-button"
+                      variant="contained"
+                      color="primary"
+                      sx={{ ml: -2 }}
+                      onClick={() => setActiveStep(activeStep - 1)}>
+                      {'Back'}
+                    </Button>
+                    <Button
+                      id="add-course-button"
+                      variant="contained"
+                      color="primary"
+                      sx={{ mr: -2 }}
+                      onClick={() => setActiveStep(activeStep + 1)}>
+                      {'Next'}
+                    </Button>
+                  </Grid>
+                </Box>
+              </TableLearningElement>
             </Grid>
           ) : activeStep === 2 ? (
             <Grid container item>
               <TableLearningElementClassification
                 selectedTopicsModal={selectedTopics}
                 LearningElements={selectedLearningElementsClassification}
-                onLearningElementChange={handleLearningElementClassification}
-              />
-              <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
-                <Button
-                  id="add-course-button"
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setActiveStep(activeStep - 1)}>
-                  {'Back'}
-                </Button>
-                <Button
-                  id="add-course-button"
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setActiveStep(activeStep + 1)}>
-                  {'Next'}
-                </Button>
-              </Grid>
+                onLearningElementChange={handleLearningElementClassification}>
+                <Box sx={{ padding: '1rem', width: '95%' }}>
+                  <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
+                    <Button
+                      id="add-course-button"
+                      variant="contained"
+                      color="primary"
+                      sx={{ ml: -2 }}
+                      onClick={() => setActiveStep(activeStep - 1)}>
+                      {'Back'}
+                    </Button>
+                    <Button
+                      id="add-course-button"
+                      variant="contained"
+                      color="primary"
+                      sx={{ mr: -2 }}
+                      onClick={() => setActiveStep(activeStep + 1)}>
+                      {'Next'}
+                    </Button>
+                  </Grid>
+                </Box>
+              </TableLearningElementClassification>
             </Grid>
           ) : activeStep === 3 ? (
             <Grid container item>
               <TableAlgorithm
                 selectedTopicsModal={selectedTopics}
                 onAlgorithmChange={handleAlgorithmChange}
-                selectedAlgorithms={selectedAlgorithms}
-              />
-              <Grid container item justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
-                <Button
-                  id="add-course-button"
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setActiveStep(activeStep - 1)}>
-                  {'Back'}
-                </Button>
-                <Button
-                  id="add-course-button"
-                  variant="contained"
-                  color="primary"
-                  disabled={selectedTopics.length === 0}
-                  onClick={() =>
-                    selectedAlgorithms.map((selectedAlgorithm) => {
-                      handleCreate(
-                        selectedAlgorithm[1],
-                        selectedAlgorithm[0],
-                        selectedLearningElementsClassification,
-                        selectedAlgorithm[2],
-                        courseId
-                      )
-                    })
-                  }>
-                  {'Create Topics'}
-                </Button>
-              </Grid>
+                selectedAlgorithms={selectedAlgorithms}>
+                <Box sx={{ padding: '1rem', width: '95%' }}>
+                  <Grid container item justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
+                    <Button
+                      id="add-course-button"
+                      variant="contained"
+                      color="primary"
+                      sx={{ ml: -2 }}
+                      onClick={() => setActiveStep(activeStep - 1)}>
+                      {'Back'}
+                    </Button>
+                    <Button
+                      id="add-course-button"
+                      variant="contained"
+                      color="primary"
+                      disabled={selectedTopics.length === 0}
+                      sx={{ mr: -2 }}
+                      onClick={() =>
+                        selectedAlgorithms.map((selectedAlgorithm) => {
+                          handleCreate(
+                            selectedAlgorithm[1],
+                            selectedAlgorithm[0],
+                            selectedLearningElementsClassification,
+                            selectedAlgorithm[2],
+                            courseId
+                          )
+                        })
+                      }>
+                      {'Create Topics'}
+                    </Button>
+                  </Grid>
+                </Box>
+              </TableAlgorithm>
             </Grid>
           ) : null}
         </Box>

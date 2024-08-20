@@ -1,5 +1,5 @@
 import { Box, FormGroup, Grid, InputLabel, MenuItem, Paper, Select, Typography } from '@mui/material'
-import { memo, useEffect, useState } from 'react'
+import { ReactNode, memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 
@@ -7,10 +7,11 @@ type TableAlgorithmProps = {
   selectedTopicsModal: RemoteTopic[]
   onAlgorithmChange: (selectedAlgorithms: [number, string, string][]) => void
   selectedAlgorithms: [number, string, string][]
+  children?: ReactNode
 }
 
 const TableAlgorithm = memo(
-  ({ selectedTopicsModal = [], onAlgorithmChange, selectedAlgorithms }: TableAlgorithmProps) => {
+  ({ selectedTopicsModal = [], onAlgorithmChange, selectedAlgorithms, children }: TableAlgorithmProps) => {
     const { t } = useTranslation()
 
     const options = [
@@ -130,6 +131,7 @@ const TableAlgorithm = memo(
                       </Grid>
                     </Grid>
                   </Paper>
+                  {children}
                 </Grid>
               )
             })}

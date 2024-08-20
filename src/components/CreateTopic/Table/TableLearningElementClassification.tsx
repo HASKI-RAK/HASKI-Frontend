@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react'
+import { ReactNode, memo, useEffect, useState } from 'react'
 import {
   Box,
   Checkbox,
@@ -22,10 +22,16 @@ type TableLearningElementClassificationProps = {
   selectedTopicsModal: RemoteTopic[]
   LearningElements: { [key: number]: LearningElementWithClassification[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: LearningElementWithClassification[] }) => void
+  children?: ReactNode
 }
 
 const TableLearningElementClassification = memo(
-  ({ selectedTopicsModal, LearningElements, onLearningElementChange }: TableLearningElementClassificationProps) => {
+  ({
+    selectedTopicsModal,
+    LearningElements,
+    onLearningElementChange,
+    children
+  }: TableLearningElementClassificationProps) => {
     const [selectedLearningElements, setSelectedLearningElements] = useState<{
       [key: number]: LearningElementWithClassification[]
     }>(LearningElements)
@@ -139,6 +145,7 @@ const TableLearningElementClassification = memo(
                     </Grid>
                   ))}
                 </Paper>
+                {children}
               </Grid>
             ))}
           </>

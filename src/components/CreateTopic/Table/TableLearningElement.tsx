@@ -1,6 +1,6 @@
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
-import { memo, useEffect, useState } from 'react'
+import { ReactNode, memo, useEffect, useState } from 'react'
 import { Box, Checkbox, Fab, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
 import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
@@ -9,10 +9,16 @@ type TableLearningElementProps = {
   selectedTopicsModal: RemoteTopic[]
   onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
   selectedLearningElementsState: { [key: number]: RemoteLearningElement[] }
+  children?: ReactNode
 }
 
 const TableLearningElement = memo(
-  ({ selectedTopicsModal, onLearningElementChange, selectedLearningElementsState }: TableLearningElementProps) => {
+  ({
+    selectedTopicsModal,
+    onLearningElementChange,
+    selectedLearningElementsState,
+    children
+  }: TableLearningElementProps) => {
     const [selectedLearningElements, setSelectedLearningElements] = useState<{
       [key: number]: RemoteLearningElement[]
     }>(selectedLearningElementsState)
@@ -76,10 +82,13 @@ const TableLearningElement = memo(
                 </Typography>
               </Grid>
               <Grid item xs={1.75}>
-                <Fab sx={{ mt: '1rem', mr: '0.5rem', color: '#f2852b', bgcolor: 'white', }} onClick={handleSelectAll} size='medium'>
+                <Fab
+                  sx={{ mt: '1rem', mr: '0.5rem', color: '#f2852b', bgcolor: 'white' }}
+                  onClick={handleSelectAll}
+                  size="medium">
                   <CheckBoxIcon />
                 </Fab>
-                <Fab sx={{ mt: '1rem', color: '#f2852b', bgcolor: 'white' }} onClick={handleDeselectAll} size='medium'>
+                <Fab sx={{ mt: '1rem', color: '#f2852b', bgcolor: 'white' }} onClick={handleDeselectAll} size="medium">
                   <CheckBoxOutlineBlankIcon />
                 </Fab>
               </Grid>
@@ -113,6 +122,7 @@ const TableLearningElement = memo(
                     ))}
                   </FormGroup>
                 </Paper>
+                {children}
               </Grid>
             ))}
           </>
