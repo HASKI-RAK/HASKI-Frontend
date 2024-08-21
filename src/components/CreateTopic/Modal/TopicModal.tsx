@@ -101,6 +101,10 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     setActiveStep(1)
   }
 
+  const allAlgorithmsValid = () => {
+    return Object.values(selectedAlgorithms).every((algorithms) => algorithms[0].algorithmShortName != 'noKey')
+  }
+
   const handleTopicChange = (topics: RemoteTopic[]) => {
     setSelectedTopics(topics)
     /*    Object.keys(selectedLearningElements).forEach((topicId) => {
@@ -190,7 +194,6 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   }
 
   const handleCreateAlgorithms = (userId: number, topicId: number, algorithmShortname: string) => {
-    const date = new Date()
     const outputJson: string = JSON.stringify({
       algorithm_s_name: algorithmShortname
     })
@@ -378,6 +381,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
             <Grid container item>
               <TableAlgorithm
                 selectedTopicsModal={selectedTopics}
+                selectedLearningElementClassification={selectedLearningElementsClassification}
                 onAlgorithmChange={handleAlgorithmChange}
                 selectedAlgorithms={selectedAlgorithms}>
                 <Box sx={{ padding: '1rem', width: '95%' }}>
@@ -394,7 +398,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       id="add-course-button"
                       variant="contained"
                       color="primary"
-                      disabled={selectedTopics.length === 0}
+                      disabled={!allAlgorithmsValid()}
                       sx={{ mr: -2 }}
                       onClick={() =>
                         Object.entries(selectedAlgorithms).map(([topicId]) => {

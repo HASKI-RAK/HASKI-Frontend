@@ -1,7 +1,8 @@
 import { Box, FormGroup, Grid, InputLabel, MenuItem, Paper, Select, Typography } from '@mui/material'
-import { ReactNode, memo, useState } from 'react'
+import { ReactNode, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
+import type { LearningElementWithClassification } from '../Table/TableLearningElementClassification'
 
 export type TableAlgorithmNameProps = {
   topicName: string
@@ -10,16 +11,28 @@ export type TableAlgorithmNameProps = {
 
 type TableAlgorithmProps = {
   selectedTopicsModal: RemoteTopic[]
+  selectedLearningElementClassification: { [key: number]: LearningElementWithClassification[] }
   onAlgorithmChange: (selectedAlgorithms: { [key: number]: TableAlgorithmNameProps[] }) => void
   selectedAlgorithms: { [key: number]: TableAlgorithmNameProps[] }
   children?: ReactNode
 }
 
 const TableAlgorithm = memo(
-  ({ selectedTopicsModal = [], onAlgorithmChange, selectedAlgorithms, children }: TableAlgorithmProps) => {
+  ({
+    selectedTopicsModal = [],
+    selectedLearningElementClassification,
+    onAlgorithmChange,
+    selectedAlgorithms,
+    children
+  }: TableAlgorithmProps) => {
     const { t } = useTranslation()
 
     const options = [
+      {
+        name: 'Select Algorithm',
+        description: 'Please select an algorithm for the learning path calculation.',
+        key: 'noKey'
+      },
       {
         name: 'Fixed Order',
         description: 'The learning elements are presented in a predetermined order.',
@@ -51,16 +64,11 @@ const TableAlgorithm = memo(
       }
     ]
 
-    const [algorithmValues, setAlgorithmValues] = useState<{ [key: number]: TableAlgorithmNameProps[] }>(
-      selectedAlgorithms
-    )
-
     const handleAlgorithmChange = (topicId: number, topicName: string, newAlgorithm: string) => {
       const updatedAlgorithms = {
-        ...algorithmValues,
+        ...selectedAlgorithms,
         [topicId]: [{ topicName: topicName, algorithmShortName: newAlgorithm }]
       }
-      setAlgorithmValues(updatedAlgorithms)
       onAlgorithmChange(updatedAlgorithms)
     }
 
@@ -84,9 +92,13 @@ const TableAlgorithm = memo(
             </Grid>
             {selectedTopicsModal.map((lmsTopic) => {
               const currentAlgorithmKey =
-                algorithmValues[lmsTopic.topic_lms_id]?.[0]?.algorithmShortName || options[0].key
+                selectedAlgorithms[lmsTopic.topic_lms_id]?.[0]?.algorithmShortName || options[0].key
               const currentAlgorithm = getAlgorithmByKey(currentAlgorithmKey)
 
+              const hasLearningElementClassification =
+                Object.keys(selectedLearningElementClassification).indexOf(lmsTopic.topic_lms_id.toString()) !== -1
+
+              console.log(hasLearningElementClassification)
               return (
                 <Grid item container alignItems="center" justifyContent="center" direction="column">
                   <Paper sx={{ padding: '1rem', width: '95%' }}>
@@ -111,6 +123,7 @@ const TableAlgorithm = memo(
                           <FormGroup>
                             <Select
                               value={currentAlgorithmKey}
+                              disabled={!hasLearningElementClassification}
                               onChange={(event) =>
                                 handleAlgorithmChange(
                                   lmsTopic.topic_lms_id,
@@ -134,7 +147,9 @@ const TableAlgorithm = memo(
                           Description
                         </InputLabel>
                         <Typography id="modal-description" variant="body1" component="p" sx={{ ml: '2rem' }}>
-                          {currentAlgorithm?.description}
+                          {hasLearningElementClassification
+                            ? currentAlgorithm?.description
+                            : 'Please select classifications.'}
                         </Typography>
                       </Grid>
                     </Grid>

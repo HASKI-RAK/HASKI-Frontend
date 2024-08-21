@@ -14,18 +14,6 @@ type TableLearningElementProps = {
 
 const TableLearningElement = memo(
   ({ selectedTopicsModal, onLearningElementChange, selectedLearningElements, children }: TableLearningElementProps) => {
-    /*    useEffect(() => {
-      //initially select all learning elements
-      if (Object.keys(selectedLearningElements).length === 0) {
-        const allLearningElements = selectedTopicsModal.reduce((acc, topic) => {
-          acc[topic.topic_lms_id] = topic.lms_learning_elements
-          return acc
-        }, {} as { [key: number]: RemoteLearningElement[] })
-
-        onLearningElementChange(allLearningElements)
-      }
-    }, [selectedTopicsModal, onLearningElementChange])*/
-
     const handleCheckboxChange = (topicId: number, element: RemoteLearningElement, checked: boolean) => {
       const updatedSelectedElements = {
         ...selectedLearningElements,

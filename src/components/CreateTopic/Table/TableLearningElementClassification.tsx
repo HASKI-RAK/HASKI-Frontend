@@ -13,7 +13,7 @@ import {
 import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 
-type LearningElementWithClassification = RemoteLearningElement & {
+export type LearningElementWithClassification = RemoteLearningElement & {
   classification: string
 }
 
