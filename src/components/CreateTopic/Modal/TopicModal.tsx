@@ -12,6 +12,7 @@ import { postCalculateLearningPath } from '../../../services/LearningPath/postCa
 import { postLearningPathAlgorithm } from '../../../services/LearningPathAlgorithm/postLearningPathAlgorithm'
 import { postTopic } from '../../../services/Topic/postTopic'
 import TableAlgorithm from '../Table/TableAlgorithm'
+import type { TableAlgorithmNameProps } from '../Table/TableAlgorithm'
 import TableLearningElement from '../Table/TableLearningElement'
 import TableLearningElementClassification from '../Table/TableLearningElementClassification'
 import TableRemoteTopics from '../Table/TableRemoteTopics'
@@ -76,9 +77,8 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     }
   ]
 
-  const [selectedAlgorithms, setSelectedAlgorithms] = useState<[number, string, string][]>(
-    selectedTopics.map((topic) => [topic.topic_lms_id, topic.topic_lms_name, options[0].key])
-  )
+  const [selectedAlgorithms, setSelectedAlgorithms] = useState<{ [key: number]: TableAlgorithmNameProps[] }>({})
+
   const [activeStep, setActiveStep] = useState<number>(0)
   const steps = ['Topics', 'Learning Elements', 'Classifications', 'Algorithms']
 
@@ -148,8 +148,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     setSelectedLearningElementsClassifiction(learningElementClassifications)
   }
 
-  const handleAlgorithmChange = (algorithms: [number, string, string][]) => {
-    console.log(algorithms)
+  const handleAlgorithmChange = (algorithms: { [key: number]: TableAlgorithmNameProps[] }) => {
     setSelectedAlgorithms(algorithms)
   }
 
@@ -248,7 +247,6 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const handleConsoleLog = (
     topicName: string,
     lmsCourseId: number,
-    selectedLearningElements: { [key: number]: RemoteLearningElement[] },
     selectedLearningElementClassification: { [key: number]: LearningElementWithClassification[] },
     algorithmShortName: string,
     courseId?: string
@@ -399,13 +397,12 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       disabled={selectedTopics.length === 0}
                       sx={{ mr: -2 }}
                       onClick={() =>
-                        selectedAlgorithms.map((selectedAlgorithm) => {
+                        Object.entries(selectedAlgorithms).map(([topicId]) => {
                           handleConsoleLog(
-                            selectedAlgorithm[1],
-                            selectedAlgorithm[0],
-                            selectedLearningElements,
+                            selectedAlgorithms[parseInt(topicId)][0].topicName,
+                            parseInt(topicId),
                             selectedLearningElementsClassification,
-                            selectedAlgorithm[2],
+                            selectedAlgorithms[parseInt(topicId)][0].algorithmShortName,
                             courseId
                           )
                         })

@@ -3,15 +3,15 @@ import { ReactNode, memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 
-type TableAlgorithmNameProps = {
-  shortName: string
-  fullName: string
+export type TableAlgorithmNameProps = {
+  topicName: string
+  algorithmShortName: string
 }
 
 type TableAlgorithmProps = {
   selectedTopicsModal: RemoteTopic[]
-  onAlgorithmChange: (selectedAlgorithms: [number, string, string][]) => void
-  selectedAlgorithms: [number, string, string][]
+  onAlgorithmChange: (selectedAlgorithms: { [key: number]: TableAlgorithmNameProps[] }) => void
+  selectedAlgorithms: { [key: number]: TableAlgorithmNameProps[] }
   children?: ReactNode
 }
 
@@ -51,15 +51,17 @@ const TableAlgorithm = memo(
       }
     ]
 
-    const [algorithmValues, setAlgorithmValues] = useState<[number, string, string][]>(selectedAlgorithms)
+    const [algorithmValues, setAlgorithmValues] = useState<{ [key: number]: TableAlgorithmNameProps[] }>(
+      selectedAlgorithms
+    )
 
     const handleAlgorithmChange = (topicId: number, topicName: string, newAlgorithm: string) => {
-      const newValues: [number, string, string][] = [
-        ...algorithmValues.filter((item) => item[0] !== topicId),
-        [topicId, topicName, newAlgorithm]
-      ]
-      setAlgorithmValues(newValues)
-      onAlgorithmChange(newValues)
+      const updatedAlgorithms = {
+        ...algorithmValues,
+        [topicId]: [{ topicName: topicName, algorithmShortName: newAlgorithm }]
+      }
+      setAlgorithmValues(updatedAlgorithms)
+      onAlgorithmChange(updatedAlgorithms)
     }
 
     const getAlgorithmByKey = (key: string) => options.find((option) => option.key === key)
@@ -82,7 +84,7 @@ const TableAlgorithm = memo(
             </Grid>
             {selectedTopicsModal.map((lmsTopic) => {
               const currentAlgorithmKey =
-                algorithmValues.find((item) => item[0] === lmsTopic.topic_lms_id)?.[2] || options[0].key
+                algorithmValues[lmsTopic.topic_lms_id]?.[0]?.algorithmShortName || options[0].key
               const currentAlgorithm = getAlgorithmByKey(currentAlgorithmKey)
 
               return (
