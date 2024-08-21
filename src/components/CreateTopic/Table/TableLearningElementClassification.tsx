@@ -4,7 +4,6 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
-  FormGroup,
   Grid,
   MenuItem,
   Paper,
@@ -20,7 +19,8 @@ type LearningElementWithClassification = RemoteLearningElement & {
 
 type TableLearningElementClassificationProps = {
   selectedTopicsModal: RemoteTopic[]
-  LearningElements: { [key: number]: LearningElementWithClassification[] }
+  LearningElements: { [key: number]: RemoteLearningElement[] }
+  LearningElementsClassifcation: { [key: number]: LearningElementWithClassification[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: LearningElementWithClassification[] }) => void
   children?: ReactNode
 }
@@ -29,16 +29,31 @@ const TableLearningElementClassification = memo(
   ({
     selectedTopicsModal,
     LearningElements,
+    LearningElementsClassifcation,
     onLearningElementChange,
     children
   }: TableLearningElementClassificationProps) => {
-    const [selectedLearningElements, setSelectedLearningElements] = useState<{
+    const [selectedLearningElementClassification, setSelectedLearningElementClassification] = useState<{
       [key: number]: LearningElementWithClassification[]
-    }>(LearningElements)
+    }>(LearningElementsClassifcation)
 
     useEffect(() => {
-      setSelectedLearningElements(LearningElements)
-    }, [LearningElements])
+      Object.keys(LearningElements).forEach((topicId) => {
+        // Search for learning elements that do not have a classification yet
+        if (Object.keys(selectedLearningElementClassification).indexOf(topicId) === -1) {
+          // set classification for new learning elements
+          const updatedElements = LearningElements[parseInt(topicId)].map((element) => {
+            return { ...element, classification: '' }
+          })
+
+          // Update the state with the combined elements for this topic
+          setSelectedLearningElementClassification((prev) => ({
+            ...prev,
+            [topicId]: updatedElements
+          }))
+        }
+      })
+    }, [LearningElements, setSelectedLearningElementClassification, selectedLearningElementClassification])
 
     const classifications = [
       {
@@ -77,22 +92,23 @@ const TableLearningElementClassification = memo(
 
     const handleClassificationChange = (topicId: number, elementId: number, classificationKey: string) => {
       const updatedClassification = {
-        ...selectedLearningElements,
-        [topicId]: selectedLearningElements[topicId].map((element) =>
+        ...selectedLearningElementClassification,
+        [topicId]: selectedLearningElementClassification[topicId].map((element) =>
           element.lms_id === elementId ? { ...element, classification: classificationKey } : element
         )
       }
-      setSelectedLearningElements(updatedClassification)
+      setSelectedLearningElementClassification(updatedClassification)
       onLearningElementChange(updatedClassification) // Call the prop function to update the parent component
     }
 
     return (
       <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
-        {Object.keys(selectedLearningElements).length === 0 ? (
+        {Object.keys(selectedLearningElementClassification).length === 0 ? (
           <Grid item>
             <Typography variant="h6" sx={{ mt: '1rem' }}>
               Select learning elements to set classification
             </Typography>
+            {children}
           </Grid>
         ) : (
           <>
@@ -113,7 +129,7 @@ const TableLearningElementClassification = memo(
                       </Typography>
                     </Grid>
                   </Box>
-                  {selectedLearningElements[lmsTopic.topic_lms_id]?.map((element) => (
+                  {selectedLearningElementClassification[lmsTopic.topic_lms_id]?.map((element) => (
                     <Grid container alignItems="center" spacing={2} key={element.lms_id}>
                       <Grid item xs={6}>
                         <FormControlLabel
@@ -145,9 +161,9 @@ const TableLearningElementClassification = memo(
                     </Grid>
                   ))}
                 </Paper>
-                {children}
               </Grid>
             ))}
+            {children}
           </>
         )}
       </Grid>

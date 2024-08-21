@@ -14,7 +14,7 @@ const TableTopics = memo(({ topics }: TableTopicsProps) => {
           Already created topics
         </Typography>
       </Grid>
-      <Grid item container>
+      <Grid item container alignItems="center" justifyContent="center" direction="column">
         <Paper sx={{ padding: '1rem', width: '95%' }}>
           <FormGroup>
             {topics.topics.map((LmsTopic) => (

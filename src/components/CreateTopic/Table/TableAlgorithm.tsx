@@ -1,5 +1,5 @@
 import { Box, FormGroup, Grid, InputLabel, MenuItem, Paper, Select, Typography } from '@mui/material'
-import { ReactNode, memo, useEffect, useState } from 'react'
+import { ReactNode, memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 
@@ -66,6 +66,7 @@ const TableAlgorithm = memo(
             <Typography variant="h6" sx={{ mt: '1rem' }}>
               Select a topic to set algorithm
             </Typography>
+            {children}
           </Grid>
         ) : (
           <>
@@ -131,10 +132,10 @@ const TableAlgorithm = memo(
                       </Grid>
                     </Grid>
                   </Paper>
-                  {children}
                 </Grid>
               )
             })}
+            {children}
           </>
         )}
       </Grid>

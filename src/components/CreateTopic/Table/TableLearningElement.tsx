@@ -24,13 +24,15 @@ const TableLearningElement = memo(
     }>(selectedLearningElementsState)
 
     useEffect(() => {
-      const allLearningElements = selectedTopicsModal.reduce((acc, topic) => {
-        acc[topic.topic_lms_id] = topic.lms_learning_elements
-        return acc
-      }, {} as { [key: number]: RemoteLearningElement[] })
+      if (Object.keys(selectedLearningElements).length === 0) {
+        const allLearningElements = selectedTopicsModal.reduce((acc, topic) => {
+          acc[topic.topic_lms_id] = topic.lms_learning_elements
+          return acc
+        }, {} as { [key: number]: RemoteLearningElement[] })
 
-      setSelectedLearningElements(allLearningElements)
-      onLearningElementChange(allLearningElements)
+        setSelectedLearningElements(allLearningElements)
+        onLearningElementChange(allLearningElements)
+      }
     }, [selectedTopicsModal, onLearningElementChange])
 
     const handleCheckboxChange = (topicId: number, element: RemoteLearningElement, checked: boolean) => {
@@ -72,6 +74,7 @@ const TableLearningElement = memo(
             <Typography variant="h6" sx={{ mt: '1rem' }}>
               Select a topic to set learning elements
             </Typography>
+            {children}
           </Grid>
         ) : (
           <>
@@ -122,9 +125,9 @@ const TableLearningElement = memo(
                     ))}
                   </FormGroup>
                 </Paper>
-                {children}
               </Grid>
             ))}
+            {children}
           </>
         )}
       </Grid>

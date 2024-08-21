@@ -1,21 +1,7 @@
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import {
-  Box,
-  Button,
-  Checkbox,
-  Fab,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  Modal,
-  Paper,
-  Step,
-  StepButton,
-  Stepper,
-  Typography
-} from '@common/components'
+import { Box, Button, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
 import { LearningPathTopic, RemoteCourse, Topic } from '@core'
 import { usePersistedStore, useStore } from '@store'
@@ -25,7 +11,6 @@ import { postLearningElement } from '../../../services/LearningElement/postLearn
 import { postCalculateLearningPath } from '../../../services/LearningPath/postCalculateLearningPath'
 import { postLearningPathAlgorithm } from '../../../services/LearningPathAlgorithm/postLearningPathAlgorithm'
 import { postTopic } from '../../../services/Topic/postTopic'
-import { SkeletonList } from '../../index'
 import TableAlgorithm from '../Table/TableAlgorithm'
 import TableLearningElement from '../Table/TableLearningElement'
 import TableLearningElementClassification from '../Table/TableLearningElementClassification'
@@ -111,15 +96,16 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     })
 
     selectedTopics.sort((a, b) => a.topic_lms_id - b.topic_lms_id)
-    if (activeStep === 1) {
+    /*    if (activeStep === 1 && Object.keys(selectedLearningElements).length === 0) {
       // Gather all learning elements from the selected topics
+      console.log('wtf')
       const allLearningElements = selectedTopics.reduce((acc, topic) => {
         acc[topic.topic_lms_id] = topic.lms_learning_elements
         return acc
       }, {} as { [key: number]: RemoteLearningElement[] })
       setSelectedLearningElements(allLearningElements)
-    }
-    if (activeStep === 2) {
+    }*/
+    /* if (activeStep === 2) {
       Object.keys(selectedLearningElements).forEach((topicId) => {
         // Search for learning elements that do not have a classification yet
         if (Object.keys(selectedLearningElementsClassification).indexOf(topicId) === -1) {
@@ -135,7 +121,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
           }))
         }
       })
-    }
+    }*/
   }, [activeStep, selectedTopics])
 
   const handleSetTopics = () => {
@@ -337,7 +323,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       id="add-course-button"
                       variant="contained"
                       color="primary"
-                      sx={{ ml: -2 }}
+                      sx={{ ml: 1 }}
                       onClick={() => setActiveStep(activeStep - 1)}>
                       {'Back'}
                     </Button>
@@ -357,7 +343,8 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
             <Grid container item>
               <TableLearningElementClassification
                 selectedTopicsModal={selectedTopics}
-                LearningElements={selectedLearningElementsClassification}
+                LearningElements={selectedLearningElements}
+                LearningElementsClassifcation={selectedLearningElementsClassification}
                 onLearningElementChange={handleLearningElementClassification}>
                 <Box sx={{ padding: '1rem', width: '95%' }}>
                   <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
@@ -365,7 +352,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       id="add-course-button"
                       variant="contained"
                       color="primary"
-                      sx={{ ml: -2 }}
+                      sx={{ ml: 1 }}
                       onClick={() => setActiveStep(activeStep - 1)}>
                       {'Back'}
                     </Button>
@@ -393,7 +380,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       id="add-course-button"
                       variant="contained"
                       color="primary"
-                      sx={{ ml: -2 }}
+                      sx={{ ml: 1 }}
                       onClick={() => setActiveStep(activeStep - 1)}>
                       {'Back'}
                     </Button>

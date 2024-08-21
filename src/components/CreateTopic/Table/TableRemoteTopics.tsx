@@ -1,5 +1,5 @@
-import { ReactNode, SetStateAction, memo, useEffect, useState } from 'react'
-import { Button, Checkbox, FormControlLabel, FormGroup, Grid, Paper, TableRow, Typography } from '@common/components'
+import { ReactNode, memo, useState } from 'react'
+import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
 import { SkeletonList } from '@components'
 import { useStore } from '@store'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
@@ -39,22 +39,24 @@ const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopi
           </Grid>
         ) : (
           <>
-            <Paper sx={{ padding: '1rem', width: '95%' }}>
-              <FormGroup>
-                {LmsTopics.map((LmsTopic) => (
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={selectedTopics.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
-                        onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
-                      />
-                    }
-                    label={LmsTopic.topic_lms_name}
-                    key={LmsTopic.topic_lms_id}
-                  />
-                ))}
-              </FormGroup>
-            </Paper>
+            <Grid item container alignItems="center" justifyContent="center" direction="column">
+              <Paper sx={{ padding: '1rem', width: '95%' }}>
+                <FormGroup>
+                  {LmsTopics.map((LmsTopic) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={selectedTopics.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
+                          onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
+                        />
+                      }
+                      label={LmsTopic.topic_lms_name}
+                      key={LmsTopic.topic_lms_id}
+                    />
+                  ))}
+                </FormGroup>
+              </Paper>
+            </Grid>
             {children}
           </>
         )}
