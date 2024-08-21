@@ -3,6 +3,11 @@ import { ReactNode, memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 
+type TableAlgorithmNameProps = {
+  shortName: string
+  fullName: string
+}
+
 type TableAlgorithmProps = {
   selectedTopicsModal: RemoteTopic[]
   onAlgorithmChange: (selectedAlgorithms: [number, string, string][]) => void

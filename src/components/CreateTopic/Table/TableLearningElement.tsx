@@ -1,6 +1,6 @@
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
-import { ReactNode, memo, useEffect, useState } from 'react'
+import { ReactNode, memo, useEffect } from 'react'
 import { Box, Checkbox, Fab, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
 import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
@@ -8,32 +8,23 @@ import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 type TableLearningElementProps = {
   selectedTopicsModal: RemoteTopic[]
   onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
-  selectedLearningElementsState: { [key: number]: RemoteLearningElement[] }
+  selectedLearningElements: { [key: number]: RemoteLearningElement[] }
   children?: ReactNode
 }
 
 const TableLearningElement = memo(
-  ({
-    selectedTopicsModal,
-    onLearningElementChange,
-    selectedLearningElementsState,
-    children
-  }: TableLearningElementProps) => {
-    const [selectedLearningElements, setSelectedLearningElements] = useState<{
-      [key: number]: RemoteLearningElement[]
-    }>(selectedLearningElementsState)
-
-    useEffect(() => {
+  ({ selectedTopicsModal, onLearningElementChange, selectedLearningElements, children }: TableLearningElementProps) => {
+    /*    useEffect(() => {
+      //initially select all learning elements
       if (Object.keys(selectedLearningElements).length === 0) {
         const allLearningElements = selectedTopicsModal.reduce((acc, topic) => {
           acc[topic.topic_lms_id] = topic.lms_learning_elements
           return acc
         }, {} as { [key: number]: RemoteLearningElement[] })
 
-        setSelectedLearningElements(allLearningElements)
         onLearningElementChange(allLearningElements)
       }
-    }, [selectedTopicsModal, onLearningElementChange])
+    }, [selectedTopicsModal, onLearningElementChange])*/
 
     const handleCheckboxChange = (topicId: number, element: RemoteLearningElement, checked: boolean) => {
       const updatedSelectedElements = {
@@ -43,7 +34,6 @@ const TableLearningElement = memo(
           : (selectedLearningElements[topicId] || []).filter((el) => el.lms_id !== element.lms_id)
       }
 
-      setSelectedLearningElements(updatedSelectedElements)
       onLearningElementChange(updatedSelectedElements)
     }
 
@@ -53,7 +43,6 @@ const TableLearningElement = memo(
         return acc
       }, {} as { [key: number]: RemoteLearningElement[] })
 
-      setSelectedLearningElements(allLearningElements)
       onLearningElementChange(allLearningElements)
     }
 
@@ -63,7 +52,6 @@ const TableLearningElement = memo(
         return acc
       }, {} as { [key: number]: RemoteLearningElement[] })
 
-      setSelectedLearningElements(clearedElements)
       onLearningElementChange(clearedElements)
     }
 

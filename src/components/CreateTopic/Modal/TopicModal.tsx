@@ -40,7 +40,6 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const getTopics = useStore((state) => state.getLearningPathTopic)
   const getUser = usePersistedStore((state) => state.getUser)
   const [topics, setTopics] = useState<LearningPathTopic>()
-  const [alreadyCreatedTopics, setAlreadyCreatedTopics] = useState<Topic[]>([])
   const [selectedLearningElementsClassification, setSelectedLearningElementsClassifiction] = useState<{
     [key: number]: LearningElementWithClassification[]
   }>({})
@@ -96,32 +95,6 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     })
 
     selectedTopics.sort((a, b) => a.topic_lms_id - b.topic_lms_id)
-    /*    if (activeStep === 1 && Object.keys(selectedLearningElements).length === 0) {
-      // Gather all learning elements from the selected topics
-      console.log('wtf')
-      const allLearningElements = selectedTopics.reduce((acc, topic) => {
-        acc[topic.topic_lms_id] = topic.lms_learning_elements
-        return acc
-      }, {} as { [key: number]: RemoteLearningElement[] })
-      setSelectedLearningElements(allLearningElements)
-    }*/
-    /* if (activeStep === 2) {
-      Object.keys(selectedLearningElements).forEach((topicId) => {
-        // Search for learning elements that do not have a classification yet
-        if (Object.keys(selectedLearningElementsClassification).indexOf(topicId) === -1) {
-          // set classification for new learning elements
-          const updatedElements = selectedLearningElements[parseInt(topicId)].map((element) => {
-            return { ...element, classification: '' }
-          })
-
-          // Update the state with the combined elements for this topic
-          setSelectedLearningElementsClassifiction((prev) => ({
-            ...prev,
-            [topicId]: updatedElements
-          }))
-        }
-      })
-    }*/
   }, [activeStep, selectedTopics])
 
   const handleSetTopics = () => {
@@ -130,6 +103,39 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
 
   const handleTopicChange = (topics: RemoteTopic[]) => {
     setSelectedTopics(topics)
+    /*    Object.keys(selectedLearningElements).forEach((topicId) => {
+      if (topics.entries(topicId)) {
+        console.log('ist drin' + topicId)
+      } else {
+        console.log('ist nicht drin' + topicId)
+      }
+    })*/
+    const topicIds = topics.map((topic) => topic.topic_lms_id)
+    // selectedLearningElements where the topic is not selected anymore
+    const selectedLearningElementKeysNotInTopics = Object.keys(selectedLearningElements).filter(
+      (topicId) => !topicIds.includes(parseInt(topicId))
+    )
+    // Log or handle the keys that are not in topics
+    selectedLearningElementKeysNotInTopics.forEach((topicId) => {
+      console.log(`Key ${topicId} is beeing removed from selectedLearningElements`)
+      delete selectedLearningElements[parseInt(topicId)]
+    })
+
+    const selectedLearningElementClassificationKeysNotInTopics = Object.keys(
+      selectedLearningElementsClassification
+    ).filter((topicId) => !topicIds.includes(parseInt(topicId)))
+    selectedLearningElementClassificationKeysNotInTopics.forEach((topicId) => {
+      console.log(`Key ${topicId} is beeing removed from selectedLearningElementClassification`)
+      delete selectedLearningElementsClassification[parseInt(topicId)]
+    })
+
+    const selectedAlgorithmKeysNotInTopics = Object.keys(selectedAlgorithms).filter(
+      (topicId) => !topicIds.includes(parseInt(topicId))
+    )
+    selectedAlgorithmKeysNotInTopics.forEach((topicId) => {
+      console.log(`Key ${topicId} is beeing removed from selectedAlgorithms`)
+      delete selectedAlgorithms[parseInt(topicId)]
+    })
   }
 
   const handleLearningElementChange = (learningElements: { [key: number]: RemoteLearningElement[] }) => {
@@ -242,11 +248,13 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const handleConsoleLog = (
     topicName: string,
     lmsCourseId: number,
-    selectedLearningElements: { [key: number]: LearningElementWithClassification[] },
+    selectedLearningElements: { [key: number]: RemoteLearningElement[] },
+    selectedLearningElementClassification: { [key: number]: LearningElementWithClassification[] },
     algorithmShortName: string,
     courseId?: string
   ) => {
     console.log(selectedLearningElements)
+    console.log(selectedLearningElementClassification)
     console.log(algorithmShortName)
   }
 
@@ -316,7 +324,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
               <TableLearningElement
                 selectedTopicsModal={selectedTopics}
                 onLearningElementChange={handleLearningElementChange}
-                selectedLearningElementsState={selectedLearningElements}>
+                selectedLearningElements={selectedLearningElements}>
                 <Box sx={{ padding: '1rem', width: '95%' }}>
                   <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
                     <Button
@@ -392,9 +400,10 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       sx={{ mr: -2 }}
                       onClick={() =>
                         selectedAlgorithms.map((selectedAlgorithm) => {
-                          handleCreate(
+                          handleConsoleLog(
                             selectedAlgorithm[1],
                             selectedAlgorithm[0],
+                            selectedLearningElements,
                             selectedLearningElementsClassification,
                             selectedAlgorithm[2],
                             courseId
