@@ -45,38 +45,6 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     [key: number]: LearningElementWithClassification[]
   }>({})
 
-  const options = [
-    {
-      name: 'Fixed Order',
-      description: 'The learning elements are presented in a predetermined order.',
-      key: 'default'
-    },
-    {
-      name: 'Graf',
-      description:
-        'This algorithm is based on the learning adaptive mechanism by Graf et al. It calculates the learning path based on the learning style of the learner.',
-      key: 'graf'
-    },
-    {
-      name: 'ACO',
-      description:
-        'The Ant Colony Algorithm (ACO) is inspired by the behavior of ant workers. It calculates the learning path by simulating ants who leave behind pheromones to mark the best path.',
-      key: 'aco'
-    },
-    {
-      name: 'Genetic Algorithm',
-      description:
-        'The Genetic Algorithm is inspired by evolution. It approximates the best learning path by simulating the process of mutation and selection. It is often used for its speed.',
-      key: 'ga'
-    },
-    {
-      name: 'Tyche',
-      description:
-        "Tyche is an algorithm based on the principle of luck. It is used to calculate the best learning path by taking into account the learners' luck factors.",
-      key: 'tyche'
-    }
-  ]
-
   const [selectedAlgorithms, setSelectedAlgorithms] = useState<{ [key: number]: TableAlgorithmNameProps[] }>({})
 
   const [activeStep, setActiveStep] = useState<number>(0)
@@ -102,7 +70,12 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   }
 
   const allAlgorithmsValid = () => {
+    console.log(Object.values(selectedAlgorithms))
     return Object.values(selectedAlgorithms).every((algorithms) => algorithms[0].algorithmShortName != 'noKey')
+  }
+
+  const hasLearningElementClassification = () => {
+    return Object.keys(selectedLearningElementsClassification).length != 0
   }
 
   const handleTopicChange = (topics: RemoteTopic[]) => {
@@ -189,7 +162,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       updated_at: date.toISOString().split('.')[0] + 'Z',
       university: 'HS-KE'
     })
-    console.log(learningElementName)
+    //console.log(learningElementName)
     return postLearningElement({ topicId, outputJson })
   }
 
@@ -258,6 +231,11 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     console.log(selectedLearningElementClassification)
     console.log(algorithmShortName)
   }
+
+  const isAllValid = allAlgorithmsValid()
+  const hasClassification = hasLearningElementClassification()
+  const shouldDisable = !(isAllValid && hasClassification)
+  //console.log(shouldDisable)
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -398,7 +376,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       id="add-course-button"
                       variant="contained"
                       color="primary"
-                      disabled={!allAlgorithmsValid()}
+                      disabled={shouldDisable}
                       sx={{ mr: -2 }}
                       onClick={() =>
                         Object.entries(selectedAlgorithms).map(([topicId]) => {

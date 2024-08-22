@@ -1,5 +1,6 @@
 import { Box, FormGroup, Grid, InputLabel, MenuItem, Paper, Select, Typography } from '@mui/material'
-import { ReactNode, memo } from 'react'
+import { ReactNode, useEffect } from 'react'
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 import type { LearningElementWithClassification } from '../Table/TableLearningElementClassification'
@@ -64,6 +65,15 @@ const TableAlgorithm = memo(
       }
     ]
 
+    // Set initial algorithm
+    useEffect(() => {
+      selectedTopicsModal.forEach((lmsTopic) => {
+        if (!selectedAlgorithms[lmsTopic.topic_lms_id]) {
+          handleAlgorithmChange(lmsTopic.topic_lms_id, lmsTopic.topic_lms_name, options[0].key)
+        }
+      })
+    }, [selectedTopicsModal])
+
     const handleAlgorithmChange = (topicId: number, topicName: string, newAlgorithm: string) => {
       const updatedAlgorithms = {
         ...selectedAlgorithms,
@@ -98,9 +108,14 @@ const TableAlgorithm = memo(
               const hasLearningElementClassification =
                 Object.keys(selectedLearningElementClassification).indexOf(lmsTopic.topic_lms_id.toString()) !== -1
 
-              console.log(hasLearningElementClassification)
               return (
-                <Grid item container alignItems="center" justifyContent="center" direction="column">
+                <Grid
+                  item
+                  container
+                  alignItems="center"
+                  justifyContent="center"
+                  direction="column"
+                  key={lmsTopic.topic_lms_id}>
                   <Paper sx={{ padding: '1rem', width: '95%' }}>
                     <Grid container direction="row" alignItems="flex-start">
                       <Grid item xs={4}>
@@ -149,7 +164,7 @@ const TableAlgorithm = memo(
                         <Typography id="modal-description" variant="body1" component="p" sx={{ ml: '2rem' }}>
                           {hasLearningElementClassification
                             ? currentAlgorithm?.description
-                            : 'Please select classifications.'}
+                            : 'This topic will not be created. Please select learning element classifications to enable algorithm selection.'}
                         </Typography>
                       </Grid>
                     </Grid>
