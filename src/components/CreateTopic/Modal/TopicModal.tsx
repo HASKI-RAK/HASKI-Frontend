@@ -289,6 +289,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       id="add-course-button"
                       variant="contained"
                       color="primary"
+                      disabled={selectedTopics.length === 0}
                       onClick={handleSetTopics}
                       sx={{ mr: -2 }}>
                       {'Next'}
@@ -318,6 +319,13 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       id="add-course-button"
                       variant="contained"
                       color="primary"
+                      disabled={
+                        !selectedTopics.every(
+                          (topic) =>
+                            selectedLearningElements[topic.topic_lms_id] &&
+                            selectedLearningElements[topic.topic_lms_id].length > 0
+                        )
+                      }
                       sx={{ mr: -2 }}
                       onClick={() => setActiveStep(activeStep + 1)}>
                       {'Next'}
