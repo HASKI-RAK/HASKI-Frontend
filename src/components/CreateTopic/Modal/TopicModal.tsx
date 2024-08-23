@@ -70,12 +70,8 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   }
 
   const allAlgorithmsValid = () => {
-    console.log(Object.values(selectedAlgorithms))
+    //console.log(Object.values(selectedAlgorithms))
     return Object.values(selectedAlgorithms).every((algorithms) => algorithms[0].algorithmShortName != 'noKey')
-  }
-
-  const hasLearningElementClassification = () => {
-    return Object.keys(selectedLearningElementsClassification).length != 0
   }
 
   const handleTopicChange = (topics: RemoteTopic[]) => {
@@ -232,10 +228,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     console.log(algorithmShortName)
   }
 
-  const isAllValid = allAlgorithmsValid()
-  const hasClassification = hasLearningElementClassification()
-  const shouldDisable = !(isAllValid && hasClassification)
-  //console.log(shouldDisable)
+  const shouldDisable = !allAlgorithmsValid()
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -355,6 +348,15 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       id="add-course-button"
                       variant="contained"
                       color="primary"
+                      disabled={
+                        !selectedTopics.every(
+                          (topic) =>
+                            selectedLearningElementsClassification[topic.topic_lms_id] &&
+                            selectedLearningElementsClassification[topic.topic_lms_id].every(
+                              (element) => element.classification !== 'noKey'
+                            )
+                        )
+                      }
                       sx={{ mr: -2 }}
                       onClick={() => setActiveStep(activeStep + 1)}>
                       {'Next'}
@@ -384,7 +386,15 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       id="add-course-button"
                       variant="contained"
                       color="primary"
-                      disabled={shouldDisable}
+                      disabled={
+                        !selectedTopics.every(
+                          (topic) =>
+                            selectedAlgorithms[topic.topic_lms_id] &&
+                            selectedAlgorithms[topic.topic_lms_id].every(
+                              (element) => element.algorithmShortName !== 'noKey'
+                            )
+                        )
+                      }
                       sx={{ mr: -2 }}
                       onClick={() =>
                         Object.entries(selectedAlgorithms).map(([topicId]) => {

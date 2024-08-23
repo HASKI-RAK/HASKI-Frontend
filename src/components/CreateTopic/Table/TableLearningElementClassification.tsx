@@ -39,55 +39,31 @@ const TableLearningElementClassification = memo(
 
     useEffect(() => {
       Object.keys(LearningElements).forEach((topicId) => {
-        // Search for learning elements that do not have a classification yet
-        if (Object.keys(selectedLearningElementClassification).indexOf(topicId) === -1) {
-          // set classification for new learning elements
-          const updatedElements = LearningElements[parseInt(topicId)].map((element) => {
-            return { ...element, classification: '' }
-          })
+        const existingClassifications = selectedLearningElementClassification[parseInt(topicId)] || []
+        const newClassifications = LearningElements[parseInt(topicId)].map((element) => {
+          // Check if the element is already classified
+          const existingElement = existingClassifications.find((e) => e.lms_id === element.lms_id)
+          return existingElement || { ...element, classification: 'noKey' } // Use existing or set to 'noKey'
+        })
 
-          // Update the state with the combined elements for this topic
-          setSelectedLearningElementClassification((prev) => ({
-            ...prev,
-            [topicId]: updatedElements
-          }))
-        }
+        // Update state if there are any new or modified classifications
+        setSelectedLearningElementClassification((prev) => ({
+          ...prev,
+          [topicId]: newClassifications
+        }))
       })
-    }, [LearningElements, setSelectedLearningElementClassification, selectedLearningElementClassification])
+    }, [LearningElements, selectedLearningElementClassification])
 
     const classifications = [
-      {
-        name: 'KÜ - Kurzübersicht',
-        key: 'KÜ'
-      },
-      {
-        name: 'EK - Erklärung',
-        key: 'EK'
-      },
-      {
-        name: 'AN - Animation',
-        key: 'AN'
-      },
-      {
-        name: 'BE - Beispiel',
-        key: 'BE'
-      },
-      {
-        name: 'ÜB - Übung',
-        key: 'ÜB'
-      },
-      {
-        name: 'SE - Selbsteinschätzungstest',
-        key: 'SE'
-      },
-      {
-        name: 'ZL - Zusatzliteratur',
-        key: 'ZL'
-      },
-      {
-        name: 'ZF - Zusammenfassung',
-        key: 'ZF'
-      }
+      { name: 'Select Classification', key: 'noKey', disabled: true },
+      { name: 'KÜ - Kurzübersicht', key: 'KÜ' },
+      { name: 'EK - Erklärung', key: 'EK' },
+      { name: 'AN - Animation', key: 'AN' },
+      { name: 'BE - Beispiel', key: 'BE' },
+      { name: 'ÜB - Übung', key: 'ÜB' },
+      { name: 'SE - Selbsteinschätzungstest', key: 'SE' },
+      { name: 'ZL - Zusatzliteratur', key: 'ZL' },
+      { name: 'ZF - Zusammenfassung', key: 'ZF' }
     ]
 
     const handleClassificationChange = (topicId: number, elementId: number, classificationKey: string) => {
@@ -147,11 +123,13 @@ const TableLearningElementClassification = memo(
                                 element.lms_id,
                                 event.target.value as string
                               )
-                            }
-                            displayEmpty>
-                            <MenuItem value="">Select Classification</MenuItem>
+                            }>
                             {classifications.map((classification) => (
-                              <MenuItem key={classification.key} value={classification.key}>
+                              <MenuItem
+                                key={classification.key}
+                                value={classification.key}
+                                disabled={classification.disabled && element.classification !== ''} // Disable only if it’s the placeholder
+                              >
                                 {classification.name}
                               </MenuItem>
                             ))}

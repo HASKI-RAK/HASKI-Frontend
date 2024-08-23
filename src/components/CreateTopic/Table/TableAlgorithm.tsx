@@ -32,7 +32,8 @@ const TableAlgorithm = memo(
       {
         name: 'Select Algorithm',
         description: 'Please select an algorithm for the learning path calculation.',
-        key: 'noKey'
+        key: 'noKey',
+        disabled: true
       },
       {
         name: 'Fixed Order',
@@ -149,7 +150,7 @@ const TableAlgorithm = memo(
                               inputProps={{ 'aria-label': 'Without label' }}
                               sx={{ mt: '1rem', mb: '1rem' }}>
                               {options.map((option) => (
-                                <MenuItem key={option.key} value={option.key}>
+                                <MenuItem key={option.key} value={option.key} disabled={option.disabled}>
                                   {option.name}
                                 </MenuItem>
                               ))}
