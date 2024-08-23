@@ -7,14 +7,15 @@ type TableTopicsProps = {
 }
 
 const TableTopics = memo(({ topics }: TableTopicsProps) => {
+  console.log(topics)
   return (
     <Grid container direction="column" alignItems="center" spacing={3}>
-      <Grid item alignItems="center">
+      <Grid item>
         <Typography variant="h6" sx={{ mt: '1rem' }}>
           Already created topics
         </Typography>
       </Grid>
-      <Grid item container alignItems="center" justifyContent="center" direction="column">
+      <Grid item container>
         <Paper sx={{ padding: '1rem', width: '95%' }}>
           <FormGroup>
             {topics.topics.map((LmsTopic) => (

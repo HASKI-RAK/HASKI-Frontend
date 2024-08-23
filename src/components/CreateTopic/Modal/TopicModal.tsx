@@ -32,7 +32,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const { courseId } = useParams<{ courseId: string }>()
 
   const [remoteTopics, setRemoteTopics] = useState<RemoteTopic[]>([])
-  const [topics, setTopics] = useState<LearningPathTopic>()
+  const [alreadyCreatedTopics, setAlreadyCreatedTopics] = useState<LearningPathTopic>()
   const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>([])
   const [selectedLearningElements, setSelectedLearningElements] = useState<{ [key: number]: RemoteLearningElement[] }>(
     {}
@@ -51,7 +51,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   useEffect(() => {
     getUser().then((user) => {
       getTopics(user.settings.user_id, user.lms_user_id, user.id, courseId).then((topics) => {
-        setTopics(topics)
+        setAlreadyCreatedTopics(topics)
         getRemoteTopics(courseId).then((response) => {
           return setRemoteTopics(
             response.filter((topic) => !topics.topics.some((t) => t.lms_id === topic.topic_lms_id))
@@ -177,8 +177,6 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     algorithmShortName: string,
     courseId?: string
   ) => {
-    // ToDo: error in getting current courseId
-
     if (courseId == undefined) return
     handleCreateTopics(topicName, lmsCourseId, courseId).then((topic) => {
       const topicLmsId = topic.lms_id
@@ -276,7 +274,9 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                   </Grid>
                 </Box>
               </TableRemoteTopics>
-              {topics && <TableTopics topics={topics} />}
+              {alreadyCreatedTopics != undefined && alreadyCreatedTopics.topics.length > 0 && (
+                <TableTopics topics={alreadyCreatedTopics} />
+              )}
             </>
           ) : activeStep === 1 ? (
             <Grid container item>
