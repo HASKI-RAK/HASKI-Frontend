@@ -1,9 +1,9 @@
 import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Box, Button, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
-import { LearningPathTopic, RemoteCourse, Topic } from '@core'
+import { LearningPathTopic } from '@core'
 import { usePersistedStore, useStore } from '@store'
 import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
@@ -29,26 +29,24 @@ type LearningElementWithClassification = RemoteLearningElement & {
 
 const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const { t } = useTranslation()
-  const navigate = useNavigate()
   const { courseId } = useParams<{ courseId: string }>()
-  const [selectedCourse, setSelectedCourse] = useState<RemoteCourse>()
+
   const [remoteTopics, setRemoteTopics] = useState<RemoteTopic[]>([])
-  const getRemoteTopics = useStore((state) => state.getRemoteTopic)
+  const [topics, setTopics] = useState<LearningPathTopic>()
   const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>([])
   const [selectedLearningElements, setSelectedLearningElements] = useState<{ [key: number]: RemoteLearningElement[] }>(
     {}
   )
-  const getTopics = useStore((state) => state.getLearningPathTopic)
-  const getUser = usePersistedStore((state) => state.getUser)
-  const [topics, setTopics] = useState<LearningPathTopic>()
   const [selectedLearningElementsClassification, setSelectedLearningElementsClassifiction] = useState<{
     [key: number]: LearningElementWithClassification[]
   }>({})
-
   const [selectedAlgorithms, setSelectedAlgorithms] = useState<{ [key: number]: TableAlgorithmNameProps[] }>({})
-
   const [activeStep, setActiveStep] = useState<number>(0)
   const steps = ['Topics', 'Learning Elements', 'Classifications', 'Algorithms']
+
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getRemoteTopics = useStore((state) => state.getRemoteTopic)
+  const getTopics = useStore((state) => state.getLearningPathTopic)
 
   useEffect(() => {
     getUser().then((user) => {

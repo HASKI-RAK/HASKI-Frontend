@@ -38,21 +38,28 @@ const TableLearningElementClassification = memo(
     }>(LearningElementsClassifcation)
 
     useEffect(() => {
+      const updatedClassifications: { [key: number]: LearningElementWithClassification[] } = {}
+
       Object.keys(LearningElements).forEach((topicId) => {
         const existingClassifications = selectedLearningElementClassification[parseInt(topicId)] || []
+
+        // Keep only the elements that are still present in LearningElements
+        const filteredClassifications = existingClassifications.filter((existingElement) =>
+          LearningElements[parseInt(topicId)].some((newElement) => newElement.lms_id === existingElement.lms_id)
+        )
+
+        // Add elements that are in LearningElements but not yet classified
         const newClassifications = LearningElements[parseInt(topicId)].map((element) => {
-          // Check if the element is already classified
-          const existingElement = existingClassifications.find((e) => e.lms_id === element.lms_id)
-          return existingElement || { ...element, classification: 'noKey' } // Use existing or set to 'noKey'
+          const existingElement = filteredClassifications.find((e) => e.lms_id === element.lms_id)
+          return existingElement || { ...element, classification: 'noKey' }
         })
 
-        // Update state if there are any new or modified classifications
-        setSelectedLearningElementClassification((prev) => ({
-          ...prev,
-          [topicId]: newClassifications
-        }))
+        updatedClassifications[parseInt(topicId)] = newClassifications
       })
-    }, [LearningElements, selectedLearningElementClassification])
+
+      setSelectedLearningElementClassification(updatedClassifications)
+      onLearningElementChange(updatedClassifications) // Update the parent component
+    }, [LearningElements])
 
     const classifications = [
       { name: 'Select Classification', key: 'noKey', disabled: true },
