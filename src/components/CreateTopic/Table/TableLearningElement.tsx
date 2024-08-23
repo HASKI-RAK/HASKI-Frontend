@@ -1,6 +1,6 @@
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
-import { ReactNode, memo, useEffect } from 'react'
+import { ReactNode, memo, useCallback } from 'react'
 import { Box, Checkbox, Fab, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
 import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
@@ -25,23 +25,29 @@ const TableLearningElement = memo(
       onLearningElementChange(updatedSelectedElements)
     }
 
-    const handleSelectAll = () => {
-      const allLearningElements = selectedTopicsModal.reduce((acc, topic) => {
-        acc[topic.topic_lms_id] = topic.lms_learning_elements
-        return acc
-      }, {} as { [key: number]: RemoteLearningElement[] })
+    const handleSelectAll = useCallback(() => {
+      const allLearningElements = selectedTopicsModal.reduce(
+        (existing, topic) => ({
+          ...existing,
+          [topic.topic_lms_id]: topic.lms_learning_elements
+        }),
+        {} as { [key: number]: RemoteLearningElement[] }
+      )
 
       onLearningElementChange(allLearningElements)
-    }
+    }, [onLearningElementChange, selectedTopicsModal])
 
-    const handleDeselectAll = () => {
-      const clearedElements = selectedTopicsModal.reduce((acc, topic) => {
-        acc[topic.topic_lms_id] = []
-        return acc
-      }, {} as { [key: number]: RemoteLearningElement[] })
+    const handleDeselectAll = useCallback(() => {
+      const clearedElements = selectedTopicsModal.reduce(
+        (existing, topic) => ({
+          ...existing,
+          [topic.topic_lms_id]: []
+        }),
+        {} as { [key: number]: RemoteLearningElement[] }
+      )
 
       onLearningElementChange(clearedElements)
-    }
+    }, [onLearningElementChange, selectedTopicsModal])
 
     return (
       <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
@@ -54,7 +60,7 @@ const TableLearningElement = memo(
           </Grid>
         ) : (
           <>
-            <Grid item container alignItems="center" justifyContent="space-between" direction="row">
+            <Grid item container alignItems="center" justifyContent="space-between">
               <Grid item container xs={7.75} justifyContent="flex-end">
                 <Typography variant="h6" sx={{ mt: '1rem' }}>
                   Select learning elements
@@ -73,7 +79,12 @@ const TableLearningElement = memo(
               </Grid>
             </Grid>
             {selectedTopicsModal.map((lmsTopic) => (
-              <Grid item container alignItems="center" justifyContent="center" direction="column">
+              <Grid
+                item
+                container
+                alignItems="center"
+                direction="column"
+                key={'Learning Element Topic: ' + lmsTopic.topic_lms_id}>
                 <Paper sx={{ padding: '1rem', width: '95%' }}>
                   <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
                     <Grid container justifyContent="center" alignItems="center">
@@ -110,6 +121,6 @@ const TableLearningElement = memo(
     )
   }
 )
-
+// eslint-disable-next-line immutable/no-mutation
 TableLearningElement.displayName = 'TableLearningElement'
 export default TableLearningElement
