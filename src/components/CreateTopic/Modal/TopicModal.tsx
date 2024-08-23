@@ -63,35 +63,22 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     selectedTopics.sort((a, b) => a.topic_lms_id - b.topic_lms_id)
   }, [activeStep, selectedTopics])
 
-  const handleSetTopics = () => {
-    setActiveStep(1)
-  }
-
-  const allAlgorithmsValid = () => {
-    //console.log(Object.values(selectedAlgorithms))
-    return Object.values(selectedAlgorithms).every((algorithms) => algorithms[0].algorithmShortName != 'noKey')
-  }
-
   const handleTopicChange = (topics: RemoteTopic[]) => {
     setSelectedTopics(topics)
-    /*    Object.keys(selectedLearningElements).forEach((topicId) => {
-      if (topics.entries(topicId)) {
-        console.log('ist drin' + topicId)
-      } else {
-        console.log('ist nicht drin' + topicId)
-      }
-    })*/
+
     const topicIds = topics.map((topic) => topic.topic_lms_id)
     // selectedLearningElements where the topic is not selected anymore
+
+    // Remove all selectedLearningElements when Topic is deselected
     const selectedLearningElementKeysNotInTopics = Object.keys(selectedLearningElements).filter(
       (topicId) => !topicIds.includes(parseInt(topicId))
     )
-    // Log or handle the keys that are not in topics
     selectedLearningElementKeysNotInTopics.forEach((topicId) => {
       console.log(`Key ${topicId} is beeing removed from selectedLearningElements`)
       delete selectedLearningElements[parseInt(topicId)]
     })
 
+    // Remove all selectedLearningElementClassifications when Topic is deselected
     const selectedLearningElementClassificationKeysNotInTopics = Object.keys(
       selectedLearningElementsClassification
     ).filter((topicId) => !topicIds.includes(parseInt(topicId)))
@@ -100,6 +87,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       delete selectedLearningElementsClassification[parseInt(topicId)]
     })
 
+    // Remove all selectedAlgorithms when Topic is deselected
     const selectedAlgorithmKeysNotInTopics = Object.keys(selectedAlgorithms).filter(
       (topicId) => !topicIds.includes(parseInt(topicId))
     )
@@ -226,8 +214,6 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     console.log(algorithmShortName)
   }
 
-  const shouldDisable = !allAlgorithmsValid()
-
   return (
     <Modal open={open} onClose={handleClose}>
       <Grid container justifyContent="center" alignItems="center">
@@ -281,7 +267,9 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       variant="contained"
                       color="primary"
                       disabled={selectedTopics.length === 0}
-                      onClick={handleSetTopics}
+                      onClick={() => {
+                        setActiveStep(1)
+                      }}
                       sx={{ mr: -2 }}>
                       {'Next'}
                     </Button>

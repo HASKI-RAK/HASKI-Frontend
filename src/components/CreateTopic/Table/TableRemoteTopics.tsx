@@ -1,7 +1,6 @@
-import { ReactNode, memo, useState } from 'react'
+import { ReactNode, memo, useCallback } from 'react'
 import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
 import { SkeletonList } from '@components'
-import { useStore } from '@store'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 
 type TableTopicProps = {
@@ -12,53 +11,48 @@ type TableTopicProps = {
 }
 
 const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopics, children }: TableTopicProps) => {
-  const [LmsTopics, setLmsTopics] = useState<RemoteTopic[]>(remoteTopics)
-  const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>(selectedTopicsModal)
-  const getRemoteTopics = useStore((state) => state.getRemoteTopic)
-
-  const handleTopicChange = (topic: RemoteTopic, checked: boolean) => {
-    const updatedTopics = checked
-      ? [...selectedTopics, topic]
-      : selectedTopics.filter((t) => t.topic_lms_id !== topic.topic_lms_id)
-    setSelectedTopics(updatedTopics)
-    localStorage.setItem('selectedTopics', JSON.stringify(updatedTopics))
-    onTopicChange(updatedTopics)
-  }
+  const handleTopicChange = useCallback(
+    (topic: RemoteTopic, checked: boolean) => {
+      const updatedTopics = checked
+        ? [...selectedTopicsModal, topic]
+        : selectedTopicsModal.filter((t) => t.topic_lms_id !== topic.topic_lms_id)
+      onTopicChange(updatedTopics)
+    },
+    [onTopicChange, selectedTopicsModal]
+  )
 
   return (
     <Grid container direction="column" alignItems="center" spacing={3}>
-      <Grid item alignItems="center">
+      <Grid item>
         <Typography variant="h6" sx={{ mt: '1rem' }}>
           Available topics
         </Typography>
       </Grid>
       <Grid item container alignItems="stretch" direction="row">
-        {LmsTopics.length === 0 ? (
-          <Grid container direction="column" alignItems="center" xs sx={{ width: '70%' }}>
+        {remoteTopics.length === 0 ? (
+          <Grid container direction="column" alignItems="center" sx={{ width: '70%' }}>
             <SkeletonList />
           </Grid>
         ) : (
-          <>
-            <Grid item container alignItems="center" justifyContent="center" direction="column">
-              <Paper sx={{ padding: '1rem', width: '95%' }}>
-                <FormGroup>
-                  {LmsTopics.map((LmsTopic) => (
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={selectedTopics.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
-                          onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
-                        />
-                      }
-                      label={LmsTopic.topic_lms_name}
-                      key={LmsTopic.topic_lms_id}
-                    />
-                  ))}
-                </FormGroup>
-              </Paper>
-            </Grid>
+          <Grid item container direction="column" alignItems="center">
+            <Paper sx={{ padding: '1rem', width: '95%' }}>
+              <FormGroup>
+                {remoteTopics.map((LmsTopic) => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={selectedTopicsModal.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
+                        onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
+                      />
+                    }
+                    label={LmsTopic.topic_lms_name}
+                    key={LmsTopic.topic_lms_id}
+                  />
+                ))}
+              </FormGroup>
+            </Paper>
             {children}
-          </>
+          </Grid>
         )}
       </Grid>
     </Grid>
