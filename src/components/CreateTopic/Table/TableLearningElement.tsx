@@ -27,8 +27,8 @@ const TableLearningElement = memo(
 
     const handleSelectAll = useCallback(() => {
       const allLearningElements = selectedTopicsModal.reduce(
-        (existing, topic) => ({
-          ...existing,
+        (accumulator, topic) => ({
+          ...accumulator,
           [topic.topic_lms_id]: topic.lms_learning_elements
         }),
         {} as { [key: number]: RemoteLearningElement[] }
@@ -39,8 +39,8 @@ const TableLearningElement = memo(
 
     const handleDeselectAll = useCallback(() => {
       const clearedElements = selectedTopicsModal.reduce(
-        (existing, topic) => ({
-          ...existing,
+        (accumulator, topic) => ({
+          ...accumulator,
           [topic.topic_lms_id]: []
         }),
         {} as { [key: number]: RemoteLearningElement[] }
@@ -84,7 +84,7 @@ const TableLearningElement = memo(
                 container
                 alignItems="center"
                 direction="column"
-                key={'Learning Element Topic: ' + lmsTopic.topic_lms_id}>
+                key={'Create Topic - Learning Element: ' + lmsTopic.topic_lms_id}>
                 <Paper sx={{ padding: '1rem', width: '95%' }}>
                   <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
                     <Grid container justifyContent="center" alignItems="center">

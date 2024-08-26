@@ -1,4 +1,4 @@
-import { ReactNode, memo, useEffect, useState } from 'react'
+import { ReactNode, memo, useCallback, useEffect } from 'react'
 import {
   Box,
   Checkbox,
@@ -33,32 +33,26 @@ const TableLearningElementClassification = memo(
     onLearningElementChange,
     children
   }: TableLearningElementClassificationProps) => {
-    const [selectedLearningElementClassification, setSelectedLearningElementClassification] = useState<{
-      [key: number]: LearningElementWithClassification[]
-    }>(LearningElementsClassifcation)
-
     useEffect(() => {
-      const updatedClassifications: { [key: number]: LearningElementWithClassification[] } = {}
-
-      Object.keys(LearningElements).forEach((topicId) => {
-        const existingClassifications = selectedLearningElementClassification[parseInt(topicId)] || []
+      const updatedClassifications = Object.keys(LearningElements).reduce((accumulator, topicId) => {
+        const topicIdInt = parseInt(topicId)
+        const existingClassifications = LearningElementsClassifcation[topicIdInt] || []
 
         // Keep only the elements that are still present in LearningElements
         const filteredClassifications = existingClassifications.filter((existingElement) =>
-          LearningElements[parseInt(topicId)].some((newElement) => newElement.lms_id === existingElement.lms_id)
+          LearningElements[topicIdInt].some((newElement) => newElement.lms_id === existingElement.lms_id)
         )
 
         // Add elements that are in LearningElements but not yet classified
-        const newClassifications = LearningElements[parseInt(topicId)].map((element) => {
+        const newClassifications = LearningElements[topicIdInt].map((element) => {
           const existingElement = filteredClassifications.find((e) => e.lms_id === element.lms_id)
           return existingElement || { ...element, classification: 'noKey' }
         })
 
-        updatedClassifications[parseInt(topicId)] = newClassifications
-      })
+        return { ...accumulator, [topicIdInt]: newClassifications }
+      }, {})
 
-      setSelectedLearningElementClassification(updatedClassifications)
-      onLearningElementChange(updatedClassifications) // Update the parent component
+      onLearningElementChange(updatedClassifications)
     }, [LearningElements])
 
     const classifications = [
@@ -73,20 +67,22 @@ const TableLearningElementClassification = memo(
       { name: 'ZF - Zusammenfassung', key: 'ZF' }
     ]
 
-    const handleClassificationChange = (topicId: number, elementId: number, classificationKey: string) => {
-      const updatedClassification = {
-        ...selectedLearningElementClassification,
-        [topicId]: selectedLearningElementClassification[topicId].map((element) =>
-          element.lms_id === elementId ? { ...element, classification: classificationKey } : element
-        )
-      }
-      setSelectedLearningElementClassification(updatedClassification)
-      onLearningElementChange(updatedClassification) // Call the prop function to update the parent component
-    }
+    const handleClassificationChange = useCallback(
+      (topicId: number, elementId: number, classificationKey: string) => {
+        const updatedClassification = {
+          ...LearningElementsClassifcation,
+          [topicId]: LearningElementsClassifcation[topicId].map((element) =>
+            element.lms_id === elementId ? { ...element, classification: classificationKey } : element
+          )
+        }
+        onLearningElementChange(updatedClassification) // Call the prop function to update the parent component
+      },
+      [LearningElementsClassifcation, onLearningElementChange]
+    )
 
     return (
       <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
-        {Object.keys(selectedLearningElementClassification).length === 0 ? (
+        {Object.keys(LearningElementsClassifcation).length === 0 ? (
           <Grid item>
             <Typography variant="h6" sx={{ mt: '1rem' }}>
               Select learning elements to set classification
@@ -95,15 +91,19 @@ const TableLearningElementClassification = memo(
           </Grid>
         ) : (
           <>
-            <Grid item container alignItems="center" justifyContent="space-between" direction="row">
-              <Grid item container justifyContent="center">
-                <Typography variant="h6" sx={{ mt: '1rem' }}>
-                  Set learning element classification
-                </Typography>
-              </Grid>
+            <Grid item container justifyContent="center">
+              <Typography variant="h6" sx={{ mt: '1rem' }}>
+                Set learning element classification
+              </Typography>
             </Grid>
             {selectedTopicsModal.map((lmsTopic) => (
-              <Grid item container alignItems="center" justifyContent="center" direction="column">
+              <Grid
+                item
+                container
+                alignItems="center"
+                justifyContent="center"
+                direction="column"
+                key={'Create Topic - Learning Element Classification: ' + lmsTopic.topic_lms_id}>
                 <Paper sx={{ padding: '1rem', width: '95%' }}>
                   <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
                     <Grid item container justifyContent="center" alignItems="center">
@@ -112,7 +112,7 @@ const TableLearningElementClassification = memo(
                       </Typography>
                     </Grid>
                   </Box>
-                  {selectedLearningElementClassification[lmsTopic.topic_lms_id]?.map((element) => (
+                  {LearningElementsClassifcation[lmsTopic.topic_lms_id]?.map((element) => (
                     <Grid container alignItems="center" spacing={2} key={element.lms_id}>
                       <Grid item xs={6}>
                         <FormControlLabel
