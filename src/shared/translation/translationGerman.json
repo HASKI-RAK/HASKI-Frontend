@@ -15,66 +15,7 @@
   "appGlobal.send": "Senden",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
-  "components.AlgorithmSettingsModal.headerLeft": "Lernpfadalgorithmus wählen",
-  "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
-  "components.AlgorithmSettingsModal.teacherIconTip": "Empfehlung des Kursleiters",
-  "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
-  "components.ContactForm.contactform": "Kontaktformular",
-  "components.ContactForm.error": "Es fehlt eine Beschreibung.",
-  "components.ContactForm.errorSelect": "Es wurde kein Thema ausgewählt.",
-  "components.ContactForm.reportType": "Reporttyp",
-  "components.ContactForm.submit": "Abschicken",
-  "components.ContactForm.submitError": "Die Submit-Funktion wurde aufgerufen, jedoch gab es einen Fehler.",
-  "components.ContactForm.topic": "Themenbereich",
-  "components.TableLearningElementClassification.classifications": [
-    {
-      "name": "Klassifikation auswählen",
-      "key": "noKey",
-      "disabled": true
-    },
-    {
-      "name": "KÜ - Kurzübersicht",
-      "key": "KÜ",
-      "disabled": false
-    },
-    {
-      "name": "EK - Erklärung",
-      "key": "EK",
-      "disabled": false
-    },
-    {
-      "name": "AN - Animation",
-      "key": "AN",
-      "disabled": false
-    },
-    {
-      "name": "BE - Beispiel",
-      "key": "BE",
-      "disabled": false
-    },
-    {
-      "name": "ÜB - Übung",
-      "key": "ÜB",
-      "disabled": false
-    },
-    {
-      "name": "SE - Selbsteinschätzungstest",
-      "key": "SE",
-      "disabled": false
-    },
-    {
-      "name": "ZL - Zusatzliteratur",
-      "key": "ZL",
-      "disabled": false
-    },
-    {
-      "name": "ZF - Zusammenfassung",
-      "key": "ZF",
-      "disabled": false
-    }
-  ],
-  "components.AlgorithmSettingsModal.algorithms":
-  [
+  "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Algorithmus auswählen",
       "description": "Bitte wählen Sie einen Algorithmus für die Berechnung des Lernpfads aus.",
@@ -112,6 +53,17 @@
       "disabled": false
     }
   ],
+  "components.AlgorithmSettingsModal.headerLeft": "Lernpfadalgorithmus wählen",
+  "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
+  "components.AlgorithmSettingsModal.teacherIconTip": "Empfehlung des Kursleiters",
+  "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
+  "components.ContactForm.contactform": "Kontaktformular",
+  "components.ContactForm.error": "Es fehlt eine Beschreibung.",
+  "components.ContactForm.errorSelect": "Es wurde kein Thema ausgewählt.",
+  "components.ContactForm.reportType": "Reporttyp",
+  "components.ContactForm.submit": "Abschicken",
+  "components.ContactForm.submitError": "Die Submit-Funktion wurde aufgerufen, jedoch gab es einen Fehler.",
+  "components.ContactForm.topic": "Themenbereich",
   "components.ContactForm.topics": [
     {
       "value": "le",
@@ -1202,6 +1154,53 @@
     ]
   ],
   "components.TableILSQuestions.introduction": "Im Folgenden werden Ihnen Fragen gestellt, welche sich auf Ihre Art der Informationsverarbeitung und -organisierung, Wahrnehmung und bevorzugte Präsentation beziehen. Geben Sie bitte für jede Frage eine der beiden Antwortmöglichkeiten an. Sollten beide oder auch keine der Antwortmöglichkeiten auf Sie zutreffen, dann wählen Sie die aus, welche tendenziell noch häufiger zutrifft. Die gestellten Fragen basieren auf dem Index of Learning Styles (Felder & Solomon 1991).",
+  "components.TableLearningElementClassification.classifications": [
+    {
+      "name": "Klassifikation auswählen",
+      "key": "noKey",
+      "disabled": true
+    },
+    {
+      "name": "KÜ - Kurzübersicht",
+      "key": "KÜ",
+      "disabled": false
+    },
+    {
+      "name": "EK - Erklärung",
+      "key": "EK",
+      "disabled": false
+    },
+    {
+      "name": "AN - Animation",
+      "key": "AN",
+      "disabled": false
+    },
+    {
+      "name": "BE - Beispiel",
+      "key": "BE",
+      "disabled": false
+    },
+    {
+      "name": "ÜB - Übung",
+      "key": "ÜB",
+      "disabled": false
+    },
+    {
+      "name": "SE - Selbsteinschätzungstest",
+      "key": "SE",
+      "disabled": false
+    },
+    {
+      "name": "ZL - Zusatzliteratur",
+      "key": "ZL",
+      "disabled": false
+    },
+    {
+      "name": "ZF - Zusammenfassung",
+      "key": "ZF",
+      "disabled": false
+    }
+  ],
   "components.TableListK.attention": "Aufmerksamkeit",
   "components.TableListK.cognitiveStrategies": "Kognitive Strategien",
   "components.TableListK.control": "Kontrollieren",

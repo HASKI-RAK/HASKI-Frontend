@@ -15,53 +15,6 @@
   "appGlobal.send": "Send",
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
-  "components.TableLearningElementClassification.classifications": [
-    {
-      "name": "Select Classification",
-      "key": "noKey",
-      "disabled": true
-    },
-    {
-      "name": "KÜ - Overview",
-      "key": "KÜ",
-      "disabled": false
-    },
-    {
-      "name": "EK - Explanation",
-      "key": "EK",
-      "disabled": false
-    },
-    {
-      "name": "AN - Animation",
-      "key": "AN",
-      "disabled": false
-    },
-    {
-      "name": "BE - Example",
-      "key": "BE",
-      "disabled": false
-    },
-    {
-      "name": "ÜB - Exercise",
-      "key": "ÜB",
-      "disabled": false
-    },
-    {
-      "name": "SE - Self-Assessment Test",
-      "key": "SE",
-      "disabled": false
-    },
-    {
-      "name": "ZL - Additional Literature",
-      "key": "ZL",
-      "disabled": false
-    },
-    {
-      "name": "ZF - Summary",
-      "key": "ZF",
-      "disabled": false
-    }
-  ],
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Select Algorithm",
@@ -1201,6 +1154,53 @@
     ]
   ],
   "components.TableILSQuestions.introduction": "Following this you will be asked questions that pertain to your style of information processing and organization, perception, and preferred presentation.  For each question, pick one of the two options that fits you best. If both or neither of the response options apply to you, then choose the one that tends to apply more often. These questions are based on the Index of Learning Styles (Felder & Solomon 1991).",
+  "components.TableLearningElementClassification.classifications": [
+    {
+      "name": "Select Classification",
+      "key": "noKey",
+      "disabled": true
+    },
+    {
+      "name": "KÜ - Overview",
+      "key": "KÜ",
+      "disabled": false
+    },
+    {
+      "name": "EK - Explanation",
+      "key": "EK",
+      "disabled": false
+    },
+    {
+      "name": "AN - Animation",
+      "key": "AN",
+      "disabled": false
+    },
+    {
+      "name": "BE - Example",
+      "key": "BE",
+      "disabled": false
+    },
+    {
+      "name": "ÜB - Exercise",
+      "key": "ÜB",
+      "disabled": false
+    },
+    {
+      "name": "SE - Self-Assessment Test",
+      "key": "SE",
+      "disabled": false
+    },
+    {
+      "name": "ZL - Additional Literature",
+      "key": "ZL",
+      "disabled": false
+    },
+    {
+      "name": "ZF - Summary",
+      "key": "ZF",
+      "disabled": false
+    }
+  ],
   "components.TableListK.attention": "Attention",
   "components.TableListK.cognitiveStrategies": "Cognitive strategies",
   "components.TableListK.control": "Control",

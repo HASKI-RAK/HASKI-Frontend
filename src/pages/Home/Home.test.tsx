@@ -16,7 +16,6 @@ describe('Test the Home page', () => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
-
   test('fetching Course throws error', async () => {
     mockServices.fetchCourses.mockImplementationOnce(() => {
       throw new Error('Error')

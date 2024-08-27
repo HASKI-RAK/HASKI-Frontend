@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand'
-import { LearningPathElementReturn, RemoteTopic } from '@core'
+import { RemoteTopic } from '@core'
 import { StoreState } from '@store'
 import { RemoteTopicReturn } from '../../core/RemoteTopic/RemoteTopic'
 import { fetchRemoteTopics } from '../../services/RemoteTopics/fetchRemoteTopics'

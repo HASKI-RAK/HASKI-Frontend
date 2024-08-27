@@ -1,9 +1,9 @@
-import { memo, useState, useCallback } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardContent, Grid, Typography, IconButton, Menu, MenuItem } from '@common/components'
+import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Typography } from '@common/components'
 import { CheckBox, MoreVert } from '@common/icons'
-import { StyledLinearProgress, AlgorithmSettingsModal } from '@components'
+import { AlgorithmSettingsModal, StyledLinearProgress } from '@components'
 import { Topic } from '@core'
 
 // Type
