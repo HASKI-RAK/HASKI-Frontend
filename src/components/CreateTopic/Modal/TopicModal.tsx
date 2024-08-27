@@ -61,7 +61,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     })
 
     setSelectedTopics((prevSelectedTopics) => [...prevSelectedTopics].sort((a, b) => a.topic_lms_id - b.topic_lms_id))
-  }, [activeStep, selectedTopics, getTopics, getUser, getRemoteTopics])
+  }, [activeStep, getTopics, getUser, getRemoteTopics])
 
   const handleTopicChange = (topics: RemoteTopic[]) => {
     setSelectedTopics(topics)
