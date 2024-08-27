@@ -61,7 +61,7 @@ const TableLearningElementClassification = memo(
       return t('components.TableLearningElementClassification.classifications', {
         returnObjects: true
       }) as [{ name: string; key: string; disabled: boolean }]
-    }, [t])
+    }, [])
 
     const handleClassificationChange = useCallback(
       (topicId: number, elementId: number, classificationKey: string) => {

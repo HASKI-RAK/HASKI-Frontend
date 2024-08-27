@@ -32,7 +32,7 @@ const TableAlgorithm = memo(
       return t('components.AlgorithmSettingsModal.algorithms', {
         returnObjects: true
       }) as [{ name: string; description: string; key: string; disabled: boolean }]
-    }, [t])
+    }, [])
 
     const handleAlgorithmChange = useCallback(
       (topicId: number, topicName: string, newAlgorithm: string) => {

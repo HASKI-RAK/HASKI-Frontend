@@ -1,5 +1,5 @@
 import FormatAlignLeftIcon from '@mui/icons-material/ViewList'
-import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material'
+import { TableCell, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material'
 import log from 'loglevel'
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -9,11 +9,6 @@ import { Course, CourseResponse, RemoteCourse } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { fetchRemoteCourses } from '../../../services/RemoteCourses'
-import {
-  StyledTableCell,
-  StyledTableCellWithoutBorder,
-  StyledTableRow
-} from '../../Questionnaire/QuestionnaireResults/Table/QuestionnaireResultTableStyle'
 
 type TableCourseProps = {
   open?: boolean
@@ -28,7 +23,6 @@ const formatUnixDate = (unixTime: number): string => {
 
 const TableCourse = memo(({ open = false, onCourseSelect }: TableCourseProps) => {
   const [remoteLmsCourses, setRemoteLmsCourses] = useState<RemoteCourse[]>([])
-  const [courses, setCourses] = useState<Course[]>([])
   const [view, setView] = useState<string>('list')
   const [alreadyCreatedCourses, setAlreadyCreatedCourses] = useState<RemoteCourse[]>([])
   const [availableCourses, setAvailableCourses] = useState<RemoteCourse[]>([])
@@ -83,9 +77,15 @@ const TableCourse = memo(({ open = false, onCourseSelect }: TableCourseProps) =>
   return (
     <Grid container direction="column" justifyContent="center" alignItems="center">
       {remoteLmsCourses.length === 0 ? (
-        <TableRow key={'TableCourseTableRow'}>
-          <SkeletonList />
-        </TableRow>
+        <Table>
+          <TableHead>
+            <TableRow key={'TableCourseTableRow'}>
+              <TableCell>
+                <SkeletonList />
+              </TableCell>
+            </TableRow>
+          </TableHead>
+        </Table>
       ) : (
         <Grid>
           <Grid>
