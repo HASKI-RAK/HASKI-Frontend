@@ -9,6 +9,7 @@ import { CourseModal } from '@components'
 import { Course } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+import RoleContext from '../../services/RoleContext/RoleContext'
 
 /**
  * # Home Page
@@ -21,6 +22,7 @@ export const Home = () => {
   // UX
   const { t } = useTranslation()
   const { isAuth } = useContext(AuthContext)
+  const { isCourseCreatorRole } = useContext(RoleContext)
   const { addSnackbar } = useContext(SnackbarContext)
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
@@ -145,21 +147,23 @@ export const Home = () => {
               )
             })
           )}
-          <Card>
-            <CardContent>
-              <Grid container justifyContent="center">
-                <Button
-                  id="course-button"
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setModalOpen(true)}
-                  sx={commonButtonStyle}>
-                  <AddCircleIcon />
-                </Button>
-              </Grid>
-            </CardContent>
-            <CourseModal open={modalOpen} handleClose={handleCloseCourseModal}></CourseModal>
-          </Card>
+          {isCourseCreatorRole && (
+            <Card>
+              <CardContent>
+                <Grid container justifyContent="center">
+                  <Button
+                    id="course-button"
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setModalOpen(true)}
+                    sx={commonButtonStyle}>
+                    <AddCircleIcon />
+                  </Button>
+                </Grid>
+              </CardContent>
+              <CourseModal open={modalOpen} handleClose={handleCloseCourseModal}></CourseModal>
+            </Card>
+          )}
         </Grid>
       </Grid>
     </div>

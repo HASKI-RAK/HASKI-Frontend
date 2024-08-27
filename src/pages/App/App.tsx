@@ -21,6 +21,7 @@ import {
 import { AuthProvider, SnackbarProvider } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore } from '@store'
+import RoleProvider from '../../services/RoleProvider/RoleProvider'
 
 /**
  * # App
@@ -48,25 +49,27 @@ export const App = () => {
             <SnackbarProvider>
               <Router>
                 <AuthProvider>
-                  <Routes>
-                    <Route element={<MainFrame />}>
-                      <Route index element={<Home />} />
-                      <Route path="/course/:courseId" element={<Course />} />
-                      <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
-                      <Route path="/theme" element={<ThemePresentation />} />
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/contact" element={<Contact />} />
-                      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-                      <Route path="/projectdescription" element={<ProjectDescription />} />
-                      <Route path="/glossary" element={<Glossary />} />
-                      <Route path="/aboutus" element={<AboutUs />} />
-                      <Route path="/imprint" element={<Imprint />} />
-                      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-                      <Route path="/🥚" element={<div>Ei</div>} />
+                  <RoleProvider>
+                    <Routes>
+                      <Route element={<MainFrame />}>
+                        <Route index element={<Home />} />
+                        <Route path="/course/:courseId" element={<Course />} />
+                        <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
+                        <Route path="/theme" element={<ThemePresentation />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+                        <Route path="/projectdescription" element={<ProjectDescription />} />
+                        <Route path="/glossary" element={<Glossary />} />
+                        <Route path="/aboutus" element={<AboutUs />} />
+                        <Route path="/imprint" element={<Imprint />} />
+                        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+                        <Route path="/🥚" element={<div>Ei</div>} />
+                        <Route path="*" element={<PageNotFound />} />
+                      </Route>
                       <Route path="*" element={<PageNotFound />} />
-                    </Route>
-                    <Route path="*" element={<PageNotFound />} />
-                  </Routes>
+                    </Routes>
+                  </RoleProvider>
                 </AuthProvider>
               </Router>
             </SnackbarProvider>
