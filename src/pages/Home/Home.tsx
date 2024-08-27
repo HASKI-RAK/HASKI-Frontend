@@ -7,9 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, Grid, Skeleton, Typography } from '@common/components'
 import { CourseModal } from '@components'
 import { Course } from '@core'
-import { AuthContext, SnackbarContext } from '@services'
+import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import RoleContext from '../../services/RoleContext/RoleContext'
 
 /**
  * # Home Page

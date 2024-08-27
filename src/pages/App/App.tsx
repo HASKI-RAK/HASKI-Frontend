@@ -18,10 +18,9 @@ import {
   ThemePresentation,
   Topic
 } from '@pages'
-import { AuthProvider, SnackbarProvider } from '@services'
+import { AuthProvider, RoleProvider, SnackbarProvider } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore } from '@store'
-import RoleProvider from '../../services/RoleProvider/RoleProvider'
 
 /**
  * # App
