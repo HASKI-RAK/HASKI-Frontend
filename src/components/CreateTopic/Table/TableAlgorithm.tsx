@@ -1,5 +1,5 @@
 import { Box, FormGroup, Grid, InputLabel, MenuItem, Paper, Select, Typography } from '@mui/material'
-import { ReactNode, useCallback, useEffect } from 'react'
+import { ReactNode, useCallback, useEffect, useMemo } from 'react'
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
@@ -28,48 +28,11 @@ const TableAlgorithm = memo(
   }: TableAlgorithmProps) => {
     const { t } = useTranslation()
 
-    const options = [
-      {
-        name: 'Select Algorithm',
-        description: 'Please select an algorithm for the learning path calculation.',
-        key: 'noKey',
-        disabled: true
-      },
-      {
-        name: 'Fixed Order',
-        description: 'The learning elements are presented in a predetermined order.',
-        key: 'default',
-        disabled: false
-      },
-      {
-        name: 'Graf',
-        description:
-          'This algorithm is based on the learning adaptive mechanism by Graf et al. It calculates the learning path based on the learning style of the learner.',
-        key: 'graf',
-        disabled: false
-      },
-      {
-        name: 'ACO',
-        description:
-          'The Ant Colony Algorithm (ACO) is inspired by the behavior of ant workers. It calculates the learning path by simulating ants who leave behind pheromones to mark the best path.',
-        key: 'aco',
-        disabled: false
-      },
-      {
-        name: 'Genetic Algorithm',
-        description:
-          'The Genetic Algorithm is inspired by evolution. It approximates the best learning path by simulating the process of mutation and selection. It is often used for its speed.',
-        key: 'ga',
-        disabled: false
-      },
-      {
-        name: 'Tyche',
-        description:
-          "Tyche is an algorithm based on the principle of luck. It is used to calculate the best learning path by taking into account the learners' luck factors.",
-        key: 'tyche',
-        disabled: false
-      }
-    ]
+    const topicAlgorithmOptions = useMemo(() => {
+      return t('components.AlgorithmSettingsModal.algorithms', {
+        returnObjects: true
+      }) as [{ name: string; description: string; key: string; disabled: boolean }]
+    }, [t])
 
     const handleAlgorithmChange = useCallback(
       (topicId: number, topicName: string, newAlgorithm: string) => {
@@ -86,17 +49,17 @@ const TableAlgorithm = memo(
     useEffect(() => {
       selectedTopicsModal.forEach((lmsTopic) => {
         if (!selectedAlgorithms[lmsTopic.topic_lms_id]) {
-          handleAlgorithmChange(lmsTopic.topic_lms_id, lmsTopic.topic_lms_name, options[0].key)
+          handleAlgorithmChange(lmsTopic.topic_lms_id, lmsTopic.topic_lms_name, topicAlgorithmOptions[0].key)
         }
       })
     }, [selectedTopicsModal, selectedAlgorithms, handleAlgorithmChange])
 
-    const getAlgorithmByKey = (key: string) => options.find((option) => option.key === key)
+    const getAlgorithmByKey = (key: string) => topicAlgorithmOptions.find((option) => option.key === key)
 
     const algorithmCard = (lmsTopic: RemoteTopic) => {
       //if no algorithm has been chosen yet, the default [0] algorithm appears
       const currentAlgorithm = getAlgorithmByKey(
-        selectedAlgorithms[lmsTopic.topic_lms_id]?.[0]?.algorithmShortName || options[0].key
+        selectedAlgorithms[lmsTopic.topic_lms_id]?.[0]?.algorithmShortName || topicAlgorithmOptions[0].key
       )
 
       const hasLearningElementClassification =
@@ -136,7 +99,7 @@ const TableAlgorithm = memo(
                       }
                       inputProps={{ 'aria-label': 'Without label' }}
                       sx={{ mt: '1rem', mb: '1rem' }}>
-                      {options.map((option) => (
+                      {topicAlgorithmOptions.map((option) => (
                         <MenuItem key={option.key} value={option.key} disabled={option.disabled}>
                           {option.name}
                         </MenuItem>

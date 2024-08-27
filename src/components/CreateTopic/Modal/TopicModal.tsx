@@ -318,7 +318,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
               <TableLearningElementClassification
                 selectedTopicsModal={selectedTopics}
                 LearningElements={selectedLearningElements}
-                LearningElementsClassifcation={selectedLearningElementsClassification}
+                LearningElementsClassification={selectedLearningElementsClassification}
                 onLearningElementChange={handleLearningElementClassification}>
                 <Box sx={{ padding: '1rem', width: '95%' }}>
                   <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
@@ -339,7 +339,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                           (topic) =>
                             selectedLearningElementsClassification[topic.topic_lms_id] &&
                             selectedLearningElementsClassification[topic.topic_lms_id].every(
-                              (element) => element.classification !== 'noKey'
+                              (element) => element.classification !== ''
                             )
                         )
                       }
@@ -376,9 +376,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                         !selectedTopics.every(
                           (topic) =>
                             selectedAlgorithms[topic.topic_lms_id] &&
-                            selectedAlgorithms[topic.topic_lms_id].every(
-                              (element) => element.algorithmShortName !== 'noKey'
-                            )
+                            selectedAlgorithms[topic.topic_lms_id].every((element) => element.algorithmShortName !== '')
                         )
                       }
                       sx={{ mr: -2 }}

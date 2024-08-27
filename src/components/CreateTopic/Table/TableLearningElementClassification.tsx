@@ -1,4 +1,5 @@
-import { ReactNode, memo, useCallback, useEffect } from 'react'
+import { ReactNode, memo, useCallback, useEffect, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Box,
   Checkbox,
@@ -20,7 +21,7 @@ export type LearningElementWithClassification = RemoteLearningElement & {
 type TableLearningElementClassificationProps = {
   selectedTopicsModal: RemoteTopic[]
   LearningElements: { [key: number]: RemoteLearningElement[] }
-  LearningElementsClassifcation: { [key: number]: LearningElementWithClassification[] }
+  LearningElementsClassification: { [key: number]: LearningElementWithClassification[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: LearningElementWithClassification[] }) => void
   children?: ReactNode
 }
@@ -29,14 +30,15 @@ const TableLearningElementClassification = memo(
   ({
     selectedTopicsModal,
     LearningElements,
-    LearningElementsClassifcation,
+    LearningElementsClassification,
     onLearningElementChange,
     children
   }: TableLearningElementClassificationProps) => {
+    const { t } = useTranslation()
     useEffect(() => {
       const updatedClassifications = Object.keys(LearningElements).reduce((accumulator, topicId) => {
         const topicIdInt = parseInt(topicId)
-        const existingClassifications = LearningElementsClassifcation[topicIdInt] || []
+        const existingClassifications = LearningElementsClassification[topicIdInt] || []
 
         // Keep only the elements that are still present in LearningElements
         const filteredClassifications = existingClassifications.filter((existingElement) =>
@@ -55,34 +57,28 @@ const TableLearningElementClassification = memo(
       onLearningElementChange(updatedClassifications)
     }, [LearningElements])
 
-    const classifications = [
-      { name: 'Select Classification', key: 'noKey', disabled: true },
-      { name: 'KÜ - Kurzübersicht', key: 'KÜ' },
-      { name: 'EK - Erklärung', key: 'EK' },
-      { name: 'AN - Animation', key: 'AN' },
-      { name: 'BE - Beispiel', key: 'BE' },
-      { name: 'ÜB - Übung', key: 'ÜB' },
-      { name: 'SE - Selbsteinschätzungstest', key: 'SE' },
-      { name: 'ZL - Zusatzliteratur', key: 'ZL' },
-      { name: 'ZF - Zusammenfassung', key: 'ZF' }
-    ]
+    const learningElementClassifications = useMemo(() => {
+      return t('components.TableLearningElementClassification.classifications', {
+        returnObjects: true
+      }) as [{ name: string; key: string; disabled: boolean }]
+    }, [t])
 
     const handleClassificationChange = useCallback(
       (topicId: number, elementId: number, classificationKey: string) => {
         const updatedClassification = {
-          ...LearningElementsClassifcation,
-          [topicId]: LearningElementsClassifcation[topicId].map((element) =>
+          ...LearningElementsClassification,
+          [topicId]: LearningElementsClassification[topicId].map((element) =>
             element.lms_id === elementId ? { ...element, classification: classificationKey } : element
           )
         }
         onLearningElementChange(updatedClassification) // Call the prop function to update the parent component
       },
-      [LearningElementsClassifcation, onLearningElementChange]
+      [LearningElementsClassification, onLearningElementChange]
     )
 
     return (
       <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
-        {Object.keys(LearningElementsClassifcation).length === 0 ? (
+        {Object.keys(LearningElementsClassification).length === 0 ? (
           <Grid item>
             <Typography variant="h6" sx={{ mt: '1rem' }}>
               Select learning elements to set classification
@@ -112,7 +108,7 @@ const TableLearningElementClassification = memo(
                       </Typography>
                     </Grid>
                   </Box>
-                  {LearningElementsClassifcation[lmsTopic.topic_lms_id]?.map((element) => (
+                  {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
                     <Grid container alignItems="center" spacing={2} key={element.lms_id}>
                       <Grid item xs={6}>
                         <FormControlLabel
@@ -131,7 +127,7 @@ const TableLearningElementClassification = memo(
                                 event.target.value as string
                               )
                             }>
-                            {classifications.map((classification) => (
+                            {learningElementClassifications.map((classification) => (
                               <MenuItem
                                 key={classification.key}
                                 value={classification.key}

@@ -1,6 +1,6 @@
 import { memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FormControlLabel, Grid, RadioGroup, Modal, Typography, Radio, Divider, Fab, Tooltip } from '@common/components'
+import { Divider, Fab, FormControlLabel, Grid, Modal, Radio, RadioGroup, Tooltip, Typography } from '@common/components'
 import { Close, Save, School } from '@common/icons'
 import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
 
@@ -23,13 +23,14 @@ type optionsType = {
   name: string
   description: string
   key: string
+  disabled: true
 }[]
 /**
  *
  * @param props allowing opening an closing of Modal and to give the ids of courses and topics
  *
  * @remarks
- * This component consists of a modal, that allows the user to set an algorithm for a topic or entire course tepending
+ * This component consists of a modal, that allows the user to set an algorithm for a topic or entire course depending
  * on the props. All available algorithms are displayed as radio buttons. A short description of the selected algorithm is displayed
  *
  *
@@ -40,9 +41,9 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
   //change hardcoded teacher selection to fetched teacher selection
   const [teacherSelection, setTeacherSelection] = useState(0)
   const { t } = useTranslation()
-  const options = props.options ?? [
-    ...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as optionsType)
-  ]
+  const options = (
+    props.options ?? [...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as optionsType)]
+  ).slice(1)
   const handleSelect = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setSelected(parseInt(event.target.value))

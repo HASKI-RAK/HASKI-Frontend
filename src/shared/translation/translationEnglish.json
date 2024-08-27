@@ -15,36 +15,89 @@
   "appGlobal.send": "Send",
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
+  "components.TableLearningElementClassification.classifications": [
+    {
+      "name": "Select Classification",
+      "key": "noKey",
+      "disabled": true
+    },
+    {
+      "name": "KÜ - Overview",
+      "key": "KÜ",
+      "disabled": false
+    },
+    {
+      "name": "EK - Explanation",
+      "key": "EK",
+      "disabled": false
+    },
+    {
+      "name": "AN - Animation",
+      "key": "AN",
+      "disabled": false
+    },
+    {
+      "name": "BE - Example",
+      "key": "BE",
+      "disabled": false
+    },
+    {
+      "name": "ÜB - Exercise",
+      "key": "ÜB",
+      "disabled": false
+    },
+    {
+      "name": "SE - Self-Assessment Test",
+      "key": "SE",
+      "disabled": false
+    },
+    {
+      "name": "ZL - Additional Literature",
+      "key": "ZL",
+      "disabled": false
+    },
+    {
+      "name": "ZF - Summary",
+      "key": "ZF",
+      "disabled": false
+    }
+  ],
   "components.AlgorithmSettingsModal.algorithms": [
+    {
+      "name": "Select Algorithm",
+      "description": "Please select an algorithm for the learning path calculation.",
+      "key": "noKey",
+      "disabled": true
+    },
     {
       "name": "Fixed Order",
       "description": "The learning elements are presented in a predetermined order.",
-      "key": "fixed"
-    },
-    {
-      "name": "Bayes",
-      "description": "Bayes is a probabilistic algorithm that calculates the learning path based on the probability for the best order for a learner.",
-      "key": "bayes"
+      "key": "default",
+      "disabled": false
     },
     {
       "name": "Graf",
       "description": "This algorithm is based on the learning adaptive mechanism by Graf et al. It calculates the learning path based on the learning style of the learner.",
-      "key": "graf"
+      "key": "graf",
+      "disabled": false
     },
     {
       "name": "ACO",
       "description": "The Ant Colony Algorithm (ACO) is inspired by the behavior of ant workers. It calculates the learning path by simulating ants who leave behind pheromones to mark the best path.",
-      "key": "aco"
+      "key": "aco",
+      "disabled": false
     },
     {
       "name": "Genetic Algorithm",
-      "description": "The Genetic Algorithm is inspiered by evolution. It approximates the best learning path by simulating the process of mutation and selection. It is often used for its speed.",
-      "key": "genetic"
+      "description": "The Genetic Algorithm is inspired by evolution. It approximates the best learning path by simulating the process of mutation and selection. It is often used for its speed.",
+      "key": "ga",
+      "disabled": false
     },
     {
       "name": "Tyche",
       "description": "Tyche is an algorithm based on the principle of luck. It is used to calculate the best learning path by taking into account the learners' luck factors.",
-      "key": "tyche"
+      "key": "tyche",
+      "disabled": false
     }
   ],
   "components.AlgorithmSettingsModal.headerLeft": "Choose a learning path algorithm",
