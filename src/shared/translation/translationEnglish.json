@@ -54,6 +54,8 @@
     }
   ],
   "components.AlgorithmSettingsModal.headerLeft": "Choose a learning path algorithm",
+  "components.TopicModal.createTopics": "Create Topics",
+  "components.TableRemoteTopics": "Available topics",
   "components.AlgorithmSettingsModal.headerRight": "Description",
   "components.AlgorithmSettingsModal.teacherIconTip": "Recommended by tutor",
   "components.ContactForm.briefDescription": "Give a brief description of your request",

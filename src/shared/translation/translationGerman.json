@@ -55,6 +55,8 @@
   ],
   "components.AlgorithmSettingsModal.headerLeft": "Lernpfadalgorithmus wählen",
   "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
+  "components.TopicModal.createTopics": "Themenbereiche erstellen",
+  "components.TableRemoteTopics": "Verfügbare Themenbereiche",
   "components.AlgorithmSettingsModal.teacherIconTip": "Empfehlung des Kursleiters",
   "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
   "components.ContactForm.contactform": "Kontaktformular",

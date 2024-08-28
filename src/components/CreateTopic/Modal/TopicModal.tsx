@@ -74,7 +74,6 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       (topicId) => !topicIds.includes(parseInt(topicId))
     )
     selectedLearningElementKeysNotInTopics.forEach((topicId) => {
-      console.log(`Key ${topicId} is beeing removed from selectedLearningElements`)
       delete selectedLearningElements[parseInt(topicId)]
     })
 
@@ -83,7 +82,6 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       selectedLearningElementsClassification
     ).filter((topicId) => !topicIds.includes(parseInt(topicId)))
     selectedLearningElementClassificationKeysNotInTopics.forEach((topicId) => {
-      console.log(`Key ${topicId} is beeing removed from selectedLearningElementClassification`)
       delete selectedLearningElementsClassification[parseInt(topicId)]
     })
 
@@ -92,7 +90,6 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       (topicId) => !topicIds.includes(parseInt(topicId))
     )
     selectedAlgorithmKeysNotInTopics.forEach((topicId) => {
-      console.log(`Key ${topicId} is beeing removed from selectedAlgorithms`)
       delete selectedAlgorithms[parseInt(topicId)]
     })
   }
@@ -139,12 +136,15 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       activity_type: learningElementActivityType,
       classification: learningElementClassification,
       name: learningElementName,
-      created_by: 'Dimitri Bigler',
+      created_by: getUser().then((user) => {
+        return user.name
+      }),
       created_at: date.toISOString().split('.')[0] + 'Z',
       updated_at: date.toISOString().split('.')[0] + 'Z',
-      university: 'HS-KE'
+      university: getUser().then((user) => {
+        return user.university
+      })
     })
-    //console.log(learningElementName)
     return postLearningElement({ topicId, outputJson })
   }
 
@@ -230,7 +230,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
           }}>
           <Fab
             color="primary"
-            data-testid={'TopicModalCloseButton'}
+            id={'topic-modal-close-button'}
             onClick={handleClose}
             sx={{
               position: 'sticky',
@@ -244,6 +244,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
               <Step key={label} data-testid={'StepperButton'}>
                 <StepButton
                   color="inherit"
+                  id={'topic-modal-stepper'}
                   onClick={() => {
                     setActiveStep(index)
                   }}>
@@ -261,7 +262,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                 <Box sx={{ padding: '1rem', width: '95%' }}>
                   <Grid container justifyContent="flex-end" alignItems="flex-end">
                     <Button
-                      id="add-course-button"
+                      id="topic-modal-available-topics-next-button"
                       variant="contained"
                       color="primary"
                       disabled={selectedTopics.length === 0}
@@ -269,7 +270,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                         setActiveStep(1)
                       }}
                       sx={{ mr: -2 }}>
-                      {'Next'}
+                      {t('appGlobal.next')}
                     </Button>
                   </Grid>
                 </Box>
@@ -287,15 +288,15 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                 <Box sx={{ padding: '1rem', width: '95%' }}>
                   <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
                     <Button
-                      id="add-course-button"
+                      id="topic-modal-available-learning-elements-next-button"
                       variant="contained"
                       color="primary"
                       sx={{ ml: 1 }}
                       onClick={() => setActiveStep(activeStep - 1)}>
-                      {'Back'}
+                      {t('appGlobal.back')}
                     </Button>
                     <Button
-                      id="add-course-button"
+                      id="topic-modal-available-learning-elements-back-button"
                       variant="contained"
                       color="primary"
                       disabled={
@@ -307,7 +308,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       }
                       sx={{ mr: -2 }}
                       onClick={() => setActiveStep(activeStep + 1)}>
-                      {'Next'}
+                      {t('appGlobal.next')}
                     </Button>
                   </Grid>
                 </Box>
@@ -323,15 +324,15 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                 <Box sx={{ padding: '1rem', width: '95%' }}>
                   <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
                     <Button
-                      id="add-course-button"
+                      id="topic-modal-available-learning-element-classification-back-button"
                       variant="contained"
                       color="primary"
                       sx={{ ml: 1 }}
                       onClick={() => setActiveStep(activeStep - 1)}>
-                      {'Back'}
+                      {t('appGlobal.back')}
                     </Button>
                     <Button
-                      id="add-course-button"
+                      id="topic-modal-available-learning-element-classification-next-button"
                       variant="contained"
                       color="primary"
                       disabled={
@@ -345,7 +346,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                       }
                       sx={{ mr: -2 }}
                       onClick={() => setActiveStep(activeStep + 1)}>
-                      {'Next'}
+                      {t('appGlobal.next')}
                     </Button>
                   </Grid>
                 </Box>
@@ -361,15 +362,15 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                 <Box sx={{ padding: '1rem', width: '95%' }}>
                   <Grid container item justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
                     <Button
-                      id="add-course-button"
+                      id="topic-modal-available-topic-algorithms-back-button"
                       variant="contained"
                       color="primary"
                       sx={{ ml: 1 }}
                       onClick={() => setActiveStep(activeStep - 1)}>
-                      {'Back'}
+                      {t('appGlobal.back')}
                     </Button>
                     <Button
-                      id="add-course-button"
+                      id="topic-modal-create-topics-button"
                       variant="contained"
                       color="primary"
                       disabled={
@@ -391,7 +392,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                           )
                         })
                       }>
-                      {'Create Topics'}
+                      {t('components.TopicModal.createTopics')}
                     </Button>
                   </Grid>
                 </Box>

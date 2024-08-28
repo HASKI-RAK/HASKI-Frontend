@@ -1,4 +1,5 @@
 import { ReactNode, memo, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
 import { SkeletonList } from '@components'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
@@ -11,6 +12,7 @@ type TableTopicProps = {
 }
 
 const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopics, children }: TableTopicProps) => {
+  const { t } = useTranslation()
   const handleTopicChange = useCallback(
     (topic: RemoteTopic, checked: boolean) => {
       const updatedTopics = checked
@@ -25,12 +27,12 @@ const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopi
     <Grid container direction="column" alignItems="center" spacing={3}>
       <Grid item>
         <Typography variant="h6" sx={{ mt: '1rem' }}>
-          Available topics
+          {t('components.TableRemoteTopics')}
         </Typography>
       </Grid>
       <Grid item container alignItems="stretch" direction="row">
         {remoteTopics.length === 0 ? (
-          <Grid container direction="column" alignItems="center" sx={{ width: '70%' }}>
+          <Grid container direction="column" alignItems="center">
             <SkeletonList />
           </Grid>
         ) : (
@@ -43,6 +45,7 @@ const TableRemoteTopics = memo(({ onTopicChange, selectedTopicsModal, remoteTopi
                       <Checkbox
                         checked={selectedTopicsModal.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
                         onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
+                        id={'topic-modal-available-topics-checkbox-' + LmsTopic.topic_lms_name}
                       />
                     }
                     label={LmsTopic.topic_lms_name}
