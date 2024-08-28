@@ -104,6 +104,8 @@
       "label": "other"
     }
   ],
+  "components.CourseModal.selectCourse": "Select course",
+  "components.CreateCourseModal.createCourse": "Create Course",
   "components.Footer.project": "Project",
   "components.FurtherInfoMenu.title": "Further information",
   "components.ListKQuestions": [

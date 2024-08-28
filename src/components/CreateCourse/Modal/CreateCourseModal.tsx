@@ -1,22 +1,9 @@
 import dayjs, { Dayjs } from 'dayjs'
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useLocation, useNavigate } from 'react-router-dom'
-import {
-  Box,
-  Button,
-  Checkbox,
-  Fab,
-  FormControlLabel,
-  FormGroup,
-  Grid,
-  Link,
-  Modal,
-  Tooltip,
-  Typography
-} from '@common/components'
+import { Box, Button, Fab, Grid, Modal } from '@common/components'
 import { Close } from '@common/icons'
-import { Course, RemoteCourse, User } from '@core'
+import { RemoteCourse, User } from '@core'
 import { usePersistedStore } from '@store'
 import { postCourse } from '../../../services/Course/postCourse'
 import TableCourse from '../Table/TableCourse'
@@ -27,9 +14,8 @@ type CourseModalProps = {
   handleClose: () => void
 }
 
-const CourseModal = memo(({ open = false, handleClose }: CourseModalProps) => {
+const CreateCourseModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const { t } = useTranslation()
-  const navigate = useNavigate()
   const [selectedCourse, setSelectedCourse] = useState<RemoteCourse>()
   const [activeStep, setActiveStep] = useState<number>(0)
   const [value, setValue] = useState<Dayjs | null>(dayjs(new Date()))
@@ -50,7 +36,6 @@ const CourseModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     // Given Dateformat:Fri Jul 19 2024 08:47:15 GMT+0200 -
     // Returned Dateformat: 2024-07-18T14:23:09Z - YYYY-MM-DDTHH:MM:SSZ
     const formatDate = (date: Date) => {
-      console.log(date)
       return date.toISOString().split('.')[0] + 'Z'
     }
 
@@ -62,7 +47,6 @@ const CourseModal = memo(({ open = false, handleClose }: CourseModalProps) => {
       created_by: user?.settings.user_id || 1,
       created_at: formatDate(new Date())
     }
-    console.log(createCourse)
 
     postCourse({ outputJson: JSON.stringify(createCourse) })
   }
@@ -99,7 +83,7 @@ const CourseModal = memo(({ open = false, handleClose }: CourseModalProps) => {
               <TableCourse onCourseSelect={handleCourseSelection} />
               <Grid container justifyContent="center" alignItems="center" sx={{ mt: 2 }}>
                 <Button id="add-course-button" variant="contained" color="primary" onClick={() => setActiveStep(1)}>
-                  {'Select Course'}
+                  {t('components.CourseModal.selectCourse')}
                 </Button>
               </Grid>
             </Grid>
@@ -108,10 +92,10 @@ const CourseModal = memo(({ open = false, handleClose }: CourseModalProps) => {
               <TableCourseDetails course={selectedCourse} datePickerValue={value} setDatePickerValue={setValue} />
               <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
                 <Button id="add-course-button" variant="contained" color="primary" onClick={() => setActiveStep(0)}>
-                  {'Back'}
+                  {t('appGlobal.back')}
                 </Button>
                 <Button id="add-course-button" variant="contained" color="primary" onClick={() => handleCreateCourse()}>
-                  {'create Course'}
+                  {t('components.CreateCourseModal.createCourse')}
                 </Button>
               </Grid>
             </Grid>
@@ -122,5 +106,5 @@ const CourseModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   )
 })
 // eslint-disable-next-line immutable/no-mutation
-CourseModal.displayName = 'CourseModal'
-export default CourseModal
+CreateCourseModal.displayName = 'CourseModal'
+export default CreateCourseModal
