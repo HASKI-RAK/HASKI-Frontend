@@ -105,7 +105,10 @@
     }
   ],
   "components.CourseModal.selectCourse": "Kursauswahl",
+  "components.CreateCourseDetailsTable.startdate": "Startdatum",
   "components.CreateCourseModal.createCourse": "Kurs erstellen",
+  "components.CreateCourseTable.alreadyCreatedCourses": "Bereits erstellte Kurse",
+  "components.CreateCourseTable.lmsCourses": "Kurse aus dem LMS",
   "components.Footer.project": "Projekt",
   "components.FurtherInfoMenu.title": "Weitere Informationen",
   "components.ListKQuestions": [
