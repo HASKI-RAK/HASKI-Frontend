@@ -2,6 +2,7 @@ import { Box, FormGroup, Grid, InputLabel, MenuItem, Paper, Select, Typography }
 import { ReactNode, useCallback, useEffect, useMemo } from 'react'
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { SkeletonList } from '@components'
 import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
 import type { LearningElementWithClassification } from '../Table/TableLearningElementClassification'
 
@@ -54,10 +55,10 @@ const TableAlgorithm = memo(
       })
     }, [selectedTopicsModal, selectedAlgorithms, handleAlgorithmChange])
 
-    const getAlgorithmByKey = (key: string) => topicAlgorithmOptions.find((option) => option.key === key)
-
     const algorithmCard = (lmsTopic: RemoteTopic) => {
-      //if no algorithm has been chosen yet, the default [0] algorithm appears
+      const getAlgorithmByKey = (key: string) => topicAlgorithmOptions.find((option) => option.key === key)
+
+      //if no algorithm has been chosen yet, the default [0] algorithm is set
       const currentAlgorithm = getAlgorithmByKey(
         selectedAlgorithms[lmsTopic.topic_lms_id]?.[0]?.algorithmShortName || topicAlgorithmOptions[0].key
       )
@@ -110,12 +111,12 @@ const TableAlgorithm = memo(
               </Grid>
               <Grid item xs={7}>
                 <InputLabel shrink sx={{ ml: '1rem' }}>
-                  Description
+                  {t('components.AlgorithmSettingsModal.headerRight')}
                 </InputLabel>
                 <Typography id="modal-description" variant="body1" component="p" sx={{ ml: '2rem' }}>
                   {hasLearningElementClassification
                     ? currentAlgorithm?.description
-                    : 'This topic will not be created. Please select learning element classifications to enable algorithm selection.'}
+                    : t('components.TableAlgorithm.missingClassification')}
                 </Typography>
               </Grid>
             </Grid>
@@ -128,10 +129,8 @@ const TableAlgorithm = memo(
     if (selectedTopicsModal.length === 0) {
       return (
         <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
-          <Grid item>
-            <Typography variant="h6" sx={{ mt: '1rem' }}>
-              Select a topic to set algorithm
-            </Typography>
+          <Grid container direction="column" alignItems="center" sx={{ mt: '2rem' }}>
+            <SkeletonList />
             {children}
           </Grid>
         </Grid>

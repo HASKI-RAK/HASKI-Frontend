@@ -340,7 +340,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                           (topic) =>
                             selectedLearningElementsClassification[topic.topic_lms_id] &&
                             selectedLearningElementsClassification[topic.topic_lms_id].every(
-                              (element) => element.classification !== ''
+                              (element) => element.classification !== 'noKey'
                             )
                         )
                       }
@@ -377,7 +377,9 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                         !selectedTopics.every(
                           (topic) =>
                             selectedAlgorithms[topic.topic_lms_id] &&
-                            selectedAlgorithms[topic.topic_lms_id].every((element) => element.algorithmShortName !== '')
+                            selectedAlgorithms[topic.topic_lms_id].every(
+                              (element) => element.algorithmShortName !== 'noKey'
+                            )
                         )
                       }
                       sx={{ mr: -2 }}
