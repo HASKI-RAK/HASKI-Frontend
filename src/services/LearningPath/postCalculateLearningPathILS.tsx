@@ -10,13 +10,10 @@ import { fetchData } from '../RequestResponse'
   * @param userId - user id
   * @param lmsUserId - lms user id
   * @param studentId - student id
-  * @param courseId - course id
-  * @param topicId - topic id
-  * @param algorithm - algorithm to use, can be: "graf", "aco", "ga"
   *
   * @remarks
   * Sends a request to the backend to calculate the learning path for a student for a course.
-  * Throws an error if userId, lmsUserId, studentId, courseId, topicId or algorithm are not provided.
+  * Throws an error if userId or lmsUserId is not provided.
   *
   * @returns - returns a promise with the learning path
   *
@@ -24,22 +21,14 @@ import { fetchData } from '../RequestResponse'
  */
 export const postCalculateLearningPathILS = async (
   userId?: number,
-  lmsUserId?: number,
-  studentId?: number,
-  courseId?: number,
-  topicId?: number,
-  algorithm?: string
-): Promise<LearningPathBasedOn> => {
-  return fetchData<learningPathBasedOn>(
-    getConfig().BACKEND +
-      `/user/${userId}/${lmsUserId}/student/${studentId}/course/${courseId}/topic/${topicId}/learningPath`,
-    {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ algorithm: algorithm })
-    }
-  )
+  lmsUserId?: number
+): Promise<LearningPathBasedOn[]> => {
+  return fetchData<learningPathBasedOn[]>(getConfig().BACKEND + `/user/${userId}/${lmsUserId}/learningPath`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({})
+  })
 }
