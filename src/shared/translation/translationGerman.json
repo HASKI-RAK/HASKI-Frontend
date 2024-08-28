@@ -57,6 +57,7 @@
   "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
   "components.TopicModal.createTopics": "Themenbereiche erstellen",
   "components.TableRemoteTopics": "Verfügbare Themenbereiche",
+  "components.TableTopics": "Bereits erstellte Themenbereiche",
   "components.AlgorithmSettingsModal.teacherIconTip": "Empfehlung des Kursleiters",
   "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
   "components.ContactForm.contactform": "Kontaktformular",
