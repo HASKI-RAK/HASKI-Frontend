@@ -93,28 +93,34 @@ const CreateCourseTable = memo(({ open = false, onCourseSelect, selectedCourseNa
   return (
     <Grid container direction="column" justifyContent="center" alignItems="center">
       <Grid>
-        {availableCourses.length === 0 ? (
-          <Grid>
-            <Typography variant={'h4'} align={'center'} sx={{ mb: 1 }}>
-              {t('components.CreateCourseTable.noNewCourses')}
-            </Typography>
-          </Grid>
-        ) : (
-          <Grid>
-            <Typography variant={'h4'} align={'center'} sx={{ mb: 1 }}>
-              {t('components.CreateCourseTable.lmsCourses')}
-            </Typography>
-            <ToggleButtonGroup
-              orientation="vertical"
-              value={selectedCourseName}
-              exclusive
-              onChange={handleChange}
-              sx={{
-                '& .MuiToggleButtonGroup-grouped:not(:first-of-type)': {
-                  borderColor: (theme) => theme.palette.common.black
-                }
-              }}>
-              {availableCourses.map((LmsCourse) => (
+        <Grid>
+          <Typography variant={'h4'} align={'center'} sx={{ mb: 1 }}>
+            {t('components.CreateCourseTable.lmsCourses')}
+          </Typography>
+          <ToggleButtonGroup
+            orientation="vertical"
+            value={selectedCourseName}
+            exclusive
+            onChange={handleChange}
+            sx={{
+              '& .MuiToggleButtonGroup-grouped:not(:first-of-type)': {
+                borderColor: (theme) => theme.palette.common.black
+              }
+            }}>
+            {availableCourses.length === 0 ? (
+              <ToggleButton
+                value={t('components.CreateCourseTable.noCoursesFound')}
+                aria-label={t('components.CreateCourseTable.noCoursesFound')}
+                key={t('components.CreateCourseTable.noCoursesFound')}
+                sx={{ minWidth: '30rem', mb: 1, borderColor: (theme) => theme.palette.common.black }}>
+                <Grid item container direction="column" justifyContent="center" alignItems="center">
+                  <Typography variant={'subtitle1'} sx={{ color: (theme) => theme.palette.common.black }}>
+                    {t('components.CreateCourseTable.noCoursesFound')}
+                  </Typography>
+                </Grid>
+              </ToggleButton>
+            ) : (
+              availableCourses.map((LmsCourse) => (
                 <ToggleButton
                   value={LmsCourse.fullname}
                   aria-label={LmsCourse.fullname}
@@ -126,10 +132,10 @@ const CreateCourseTable = memo(({ open = false, onCourseSelect, selectedCourseNa
                     </Typography>
                   </Grid>
                 </ToggleButton>
-              ))}
-            </ToggleButtonGroup>
-          </Grid>
-        )}
+              ))
+            )}
+          </ToggleButtonGroup>
+        </Grid>
         <Grid>
           <Typography variant={'h4'} align={'center'} sx={{ mb: 1 }}>
             {t('components.CreateCourseTable.alreadyCreatedCourses')}

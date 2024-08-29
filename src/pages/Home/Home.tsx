@@ -33,14 +33,9 @@ export const Home = () => {
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
 
-  const handleCloseCourseModal = (event: object, reason: string) => {
-    if (!successRemoteCourseCreated) {
-      if (reason == 'backdropClick')
-        if (window.confirm(t('components.Menubar.closeDialog'))) setCreateCourseModalOpen(false)
-    } else {
-      window.location.reload()
-      setCreateCourseModalOpen(false)
-    }
+  const handleCloseCourseModal = () => {
+    setCreateCourseModalOpen(false)
+    successRemoteCourseCreated && window.location.reload()
   }
 
   useEffect(() => {

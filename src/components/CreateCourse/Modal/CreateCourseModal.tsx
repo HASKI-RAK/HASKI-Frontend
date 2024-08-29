@@ -13,7 +13,7 @@ type CreateCourseModalProps = {
   open?: boolean
   successRemoteCourseCreated: boolean
   setSuccessRemoteCourseCreated: React.Dispatch<React.SetStateAction<boolean>>
-  handleClose: (event: object, reason: string) => void
+  handleClose: () => void
 }
 
 const CreateCourseModal = memo(
@@ -102,7 +102,7 @@ const CreateCourseModal = memo(
             <Fab
               color="primary"
               id={'create-course-modal-close-button'}
-              onClick={() => handleClose({} as object, 'backdropClick')}
+              onClick={() => handleClose()}
               sx={{
                 position: 'sticky',
                 top: '0%',

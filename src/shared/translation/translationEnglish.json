@@ -107,7 +107,7 @@
   "components.CreateCourseModal.createCourse": "Select course",
   "components.CreateCourseDetailsTable.courseName": "Course name",
   "components.CreateCourseDetailsTable.startDate": "Start date",
-  "components.CreateCourseTable.noNewCourses": "No new courses available",
+  "components.CreateCourseTable.noCoursesFound": "No courses found...",
   "components.CreateCourseModal.createCourse": "Create Course",
   "components.CreateCourseTable.alreadyCreatedCourses": "Already created courses",
   "components.CreateCourseTable.lmsCourses": "Courses from the LMS",
