@@ -93,35 +93,43 @@ const CreateCourseTable = memo(({ open = false, onCourseSelect, selectedCourseNa
   return (
     <Grid container direction="column" justifyContent="center" alignItems="center">
       <Grid>
-        <Grid>
-          <Typography variant={'h4'} align={'center'} sx={{ mb: 1 }}>
-            {t('components.CreateCourseTable.lmsCourses')}
-          </Typography>
-          <ToggleButtonGroup
-            orientation="vertical"
-            value={selectedCourseName}
-            exclusive
-            onChange={handleChange}
-            sx={{
-              '& .MuiToggleButtonGroup-grouped:not(:first-of-type)': {
-                borderColor: (theme) => theme.palette.common.black
-              }
-            }}>
-            {availableCourses.map((LmsCourse) => (
-              <ToggleButton
-                value={LmsCourse.fullname}
-                aria-label={LmsCourse.fullname}
-                key={LmsCourse.id}
-                sx={{ minWidth: '30rem', mb: 1, borderColor: (theme) => theme.palette.common.black }}>
-                <Grid item container direction="column" justifyContent="center" alignItems="center">
-                  <Typography variant={'subtitle1'} sx={{ color: (theme) => theme.palette.common.black }}>
-                    {LmsCourse.fullname}
-                  </Typography>
-                </Grid>
-              </ToggleButton>
-            ))}
-          </ToggleButtonGroup>
-        </Grid>
+        {availableCourses.length === 0 ? (
+          <Grid>
+            <Typography variant={'h4'} align={'center'} sx={{ mb: 1 }}>
+              {t('components.CreateCourseTable.noNewCourses')}
+            </Typography>
+          </Grid>
+        ) : (
+          <Grid>
+            <Typography variant={'h4'} align={'center'} sx={{ mb: 1 }}>
+              {t('components.CreateCourseTable.lmsCourses')}
+            </Typography>
+            <ToggleButtonGroup
+              orientation="vertical"
+              value={selectedCourseName}
+              exclusive
+              onChange={handleChange}
+              sx={{
+                '& .MuiToggleButtonGroup-grouped:not(:first-of-type)': {
+                  borderColor: (theme) => theme.palette.common.black
+                }
+              }}>
+              {availableCourses.map((LmsCourse) => (
+                <ToggleButton
+                  value={LmsCourse.fullname}
+                  aria-label={LmsCourse.fullname}
+                  key={LmsCourse.id}
+                  sx={{ minWidth: '30rem', mb: 1, borderColor: (theme) => theme.palette.common.black }}>
+                  <Grid item container direction="column" justifyContent="center" alignItems="center">
+                    <Typography variant={'subtitle1'} sx={{ color: (theme) => theme.palette.common.black }}>
+                      {LmsCourse.fullname}
+                    </Typography>
+                  </Grid>
+                </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
+          </Grid>
+        )}
         <Grid>
           <Typography variant={'h4'} align={'center'} sx={{ mb: 1 }}>
             {t('components.CreateCourseTable.alreadyCreatedCourses')}

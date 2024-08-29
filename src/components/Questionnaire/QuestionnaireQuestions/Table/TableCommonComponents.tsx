@@ -131,7 +131,7 @@ export const SendButton = memo(
   ({ handleSend, isNextDisabled, t, isValid, idType, isSending, sendSuccess }: SendButtonProps) => {
     return (
       <Button
-        id="send-button"
+        id="questionnaire-send-button"
         data-testid={`sendButton${idType}Questionnaire`}
         variant="contained"
         color="primary"

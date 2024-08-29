@@ -104,8 +104,9 @@
       "label": "Sonstiges"
     }
   ],
-  "components.CourseModal.selectCourse": "Kursauswahl",
+  "components.CreateCourseModal.createCourse": "Kursauswahl",
   "components.CreateCourseDetailsTable.courseName": "Kursname",
+  "components.CreateCourseTable.noNewCourses": "Keine neuen Kurse verfügbar",
   "components.CreateCourseDetailsTable.startDate": "Startdatum",
   "components.CreateCourseModal.createCourse": "Kurs erstellen",
   "components.CreateCourseTable.alreadyCreatedCourses": "Bereits erstellte Kurse",

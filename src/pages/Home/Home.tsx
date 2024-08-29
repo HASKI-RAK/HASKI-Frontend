@@ -26,14 +26,21 @@ export const Home = () => {
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
   const [courses, setCourses] = useState<Course[]>([])
-  const [modalOpen, setModalOpen] = useState(false)
+  const [createCourseModalOpen, setCreateCourseModalOpen] = useState(false)
+  const [successRemoteCourseCreated, setSuccessRemoteCourseCreated] = useState(false)
 
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
 
-  const handleCloseCourseModal = () => {
-    setModalOpen(false)
+  const handleCloseCourseModal = (event: object, reason: string) => {
+    if (!successRemoteCourseCreated) {
+      if (reason == 'backdropClick')
+        if (window.confirm(t('components.Menubar.closeDialog'))) setCreateCourseModalOpen(false)
+    } else {
+      window.location.reload()
+      setCreateCourseModalOpen(false)
+    }
   }
 
   useEffect(() => {
@@ -154,13 +161,17 @@ export const Home = () => {
                     id="course-button"
                     variant="contained"
                     color="primary"
-                    onClick={() => setModalOpen(true)}
+                    onClick={() => setCreateCourseModalOpen(true)}
                     sx={commonButtonStyle}>
                     <AddCircleIcon />
                   </Button>
                 </Grid>
               </CardContent>
-              <CreateCourseModal open={modalOpen} handleClose={handleCloseCourseModal}></CreateCourseModal>
+              <CreateCourseModal
+                open={createCourseModalOpen}
+                handleClose={handleCloseCourseModal}
+                setSuccessRemoteCourseCreated={setSuccessRemoteCourseCreated}
+                successRemoteCourseCreated={successRemoteCourseCreated}></CreateCourseModal>
             </Card>
           )}
         </Grid>
