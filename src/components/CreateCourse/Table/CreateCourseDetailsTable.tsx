@@ -19,17 +19,17 @@ const CreateCourseDetailsTable = ({ remoteCourse, datePickerValue, setDatePicker
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Grid container direction="column" spacing={3}>
-        <Grid item container direction="row" justifyContent="space-between" alignItems="center">
+        <Grid item>
           <TextField
-            label="Kursname"
+            label={t('components.CreateCourseDetailsTable.courseName')}
             defaultValue={remoteCourse?.fullname}
             sx={{ width: '100%', mt: '1rem' }}
             required
           />
         </Grid>
-        <Grid item container direction="row" justifyContent="space-between" alignItems="center">
+        <Grid item>
           <DateTimePicker
-            label={t('components.CreateCourseDetailsTable.startdate')}
+            label={t('components.CreateCourseDetailsTable.startDate')}
             value={datePickerValue}
             onChange={setDatePickerValue}
             sx={{ width: '100%' }}

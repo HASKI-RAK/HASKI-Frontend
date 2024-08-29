@@ -105,7 +105,8 @@
     }
   ],
   "components.CourseModal.selectCourse": "Kursauswahl",
-  "components.CreateCourseDetailsTable.startdate": "Startdatum",
+  "components.CreateCourseDetailsTable.courseName": "Kursname",
+  "components.CreateCourseDetailsTable.startDate": "Startdatum",
   "components.CreateCourseModal.createCourse": "Kurs erstellen",
   "components.CreateCourseTable.alreadyCreatedCourses": "Bereits erstellte Kurse",
   "components.CreateCourseTable.lmsCourses": "Kurse aus dem LMS",
