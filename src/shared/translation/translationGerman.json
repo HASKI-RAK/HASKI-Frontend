@@ -104,13 +104,12 @@
       "label": "Sonstiges"
     }
   ],
-  "components.CreateCourseModal.createCourse": "Kursauswahl",
   "components.CreateCourseDetailsTable.courseName": "Kursname",
-  "components.CreateCourseTable.noCoursesFound": "Keine Kurse gefunden...",
   "components.CreateCourseDetailsTable.startDate": "Startdatum",
   "components.CreateCourseModal.createCourse": "Kurs erstellen",
   "components.CreateCourseTable.alreadyCreatedCourses": "Bereits erstellte Kurse",
   "components.CreateCourseTable.lmsCourses": "Kurse aus dem LMS",
+  "components.CreateCourseTable.noCoursesFound": "Keine Kurse gefunden...",
   "components.Footer.project": "Projekt",
   "components.FurtherInfoMenu.title": "Weitere Informationen",
   "components.ListKQuestions": [
