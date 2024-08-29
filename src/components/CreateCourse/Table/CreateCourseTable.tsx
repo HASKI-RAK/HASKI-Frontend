@@ -1,13 +1,20 @@
-import { TableCell, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material'
 import log from 'loglevel'
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Grid, Table, TableHead, TableRow } from '@common/components'
+import {
+  Grid,
+  Table,
+  TableCell,
+  TableHead,
+  TableRow,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography
+} from '@common/components'
 import { SkeletonList } from '@components'
 import { RemoteCourse } from '@core'
-import { SnackbarContext } from '@services'
+import { SnackbarContext, fetchRemoteCourses } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import { fetchRemoteCourses } from '../../../services/RemoteCourses'
 
 type TableCourseProps = {
   open?: boolean

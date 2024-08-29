@@ -3,11 +3,10 @@ import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Fab, Grid, Modal } from '@common/components'
 import { Close } from '@common/icons'
+import { CreateCourseDetailsTable, CreateCourseTable } from '@components'
 import { RemoteCourse, User } from '@core'
 import { postCourse } from '@services'
 import { usePersistedStore } from '@store'
-import CreateCourseDetailsTable from '../Table/CreateCourseDetailsTable'
-import CreateCourseTable from '../Table/CreateCourseTable'
 
 type CourseModalProps = {
   open?: boolean

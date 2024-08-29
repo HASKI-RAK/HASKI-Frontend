@@ -1,10 +1,13 @@
-import { renderTimeViewClock } from '@mui/x-date-pickers'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { Dayjs } from 'dayjs'
 import { useTranslation } from 'react-i18next'
-import { Grid, TextField } from '@common/components'
+import {
+  AdapterDayjs,
+  DateTimePicker,
+  Grid,
+  LocalizationProvider,
+  TextField,
+  renderTimeViewClock
+} from '@common/components'
 import { RemoteCourse } from '@core'
 
 type TableCourseDetailsProps = {
