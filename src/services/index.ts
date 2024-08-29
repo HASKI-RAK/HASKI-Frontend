@@ -12,7 +12,7 @@ export {
   fetchLearningPathElement,
   fetchLearningPathElementStatus,
   fetchLearningPathElementSpecificStatus,
-  postCalculateLearningPath
+  postCalculateLearningPathForAllStudents
 } from './LearningPath'
 export { fetchLearningPathTopic, postTopic } from './Topic'
 export { postContactForm } from './contact'

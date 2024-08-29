@@ -29,7 +29,7 @@ type PostCalculateLearningPathProps = {
  * @category Services
  */
 
-export const postCalculateLearningPath = async ({
+export const postCalculateLearningPathForAllStudents = async ({
   userId,
   courseId,
   topicId,

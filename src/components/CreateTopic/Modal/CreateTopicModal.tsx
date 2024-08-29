@@ -12,7 +12,12 @@ import {
   ExistingTopicsTable
 } from '@components'
 import { LearningPathTopic, RemoteLearningElement, RemoteTopic } from '@core'
-import { postCalculateLearningPath, postLearningElement, postLearningPathAlgorithm, postTopic } from '@services'
+import {
+  postCalculateLearningPathForAllStudents,
+  postLearningElement,
+  postLearningPathAlgorithm,
+  postTopic
+} from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 type CourseModalProps = {
@@ -164,7 +169,7 @@ const CreateTopicModal = memo(({ open = false, handleClose }: CourseModalProps) 
       role: userRole
     })
 
-    return postCalculateLearningPath({ userId, courseId, topicId, outputJson })
+    return postCalculateLearningPathForAllStudents({ userId, courseId, topicId, outputJson })
   }
 
   const handleCreate = (
