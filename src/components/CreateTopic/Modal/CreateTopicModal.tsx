@@ -3,20 +3,17 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Button, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
-import { LearningPathTopic } from '@core'
+import {
+  CreateAlgorithmTable,
+  CreateAlgorithmTableNameProps,
+  CreateLearningElementClassificationTable,
+  CreateLearningElementTable,
+  CreateRemoteTopicsTable,
+  ExistingTopicsTable
+} from '@components'
+import { LearningPathTopic, RemoteLearningElement, RemoteTopic } from '@core'
+import { postCalculateLearningPath, postLearningElement, postLearningPathAlgorithm, postTopic } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
-import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
-import { postLearningElement } from '../../../services/LearningElement/postLearningElement'
-import { postCalculateLearningPath } from '../../../services/LearningPath/postCalculateLearningPath'
-import { postLearningPathAlgorithm } from '../../../services/LearningPathAlgorithm/postLearningPathAlgorithm'
-import { postTopic } from '../../../services/Topic/postTopic'
-import TableAlgorithm from '../Table/TableAlgorithm'
-import type { TableAlgorithmNameProps } from '../Table/TableAlgorithm'
-import TableLearningElement from '../Table/TableLearningElement'
-import TableLearningElementClassification from '../Table/TableLearningElementClassification'
-import TableRemoteTopics from '../Table/TableRemoteTopics'
-import TableTopics from '../Table/TableTopics'
 
 type CourseModalProps = {
   open?: boolean
@@ -27,7 +24,7 @@ type LearningElementWithClassification = RemoteLearningElement & {
   classification: string
 }
 
-const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
+const CreateTopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const { t } = useTranslation()
   const { courseId } = useParams<{ courseId: string }>()
 
@@ -40,7 +37,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   const [selectedLearningElementsClassification, setSelectedLearningElementsClassifiction] = useState<{
     [key: number]: LearningElementWithClassification[]
   }>({})
-  const [selectedAlgorithms, setSelectedAlgorithms] = useState<{ [key: number]: TableAlgorithmNameProps[] }>({})
+  const [selectedAlgorithms, setSelectedAlgorithms] = useState<{ [key: number]: CreateAlgorithmTableNameProps[] }>({})
   const [activeStep, setActiveStep] = useState<number>(0)
   const steps = ['Topics', 'Learning Elements', 'Classifications', 'Algorithms']
 
@@ -104,7 +101,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
     setSelectedLearningElementsClassifiction(learningElementClassifications)
   }
 
-  const handleAlgorithmChange = (algorithms: { [key: number]: TableAlgorithmNameProps[] }) => {
+  const handleAlgorithmChange = (algorithms: { [key: number]: CreateAlgorithmTableNameProps[] }) => {
     setSelectedAlgorithms(algorithms)
   }
 
@@ -255,7 +252,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
           </Stepper>
           {activeStep === 0 ? (
             <>
-              <TableRemoteTopics
+              <CreateRemoteTopicsTable
                 onTopicChange={handleTopicChange}
                 selectedTopicsModal={selectedTopics}
                 remoteTopics={remoteTopics}>
@@ -274,14 +271,14 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                     </Button>
                   </Grid>
                 </Box>
-              </TableRemoteTopics>
+              </CreateRemoteTopicsTable>
               {alreadyCreatedTopics != undefined && alreadyCreatedTopics.topics.length > 0 && (
-                <TableTopics topics={alreadyCreatedTopics} />
+                <ExistingTopicsTable topics={alreadyCreatedTopics} />
               )}
             </>
           ) : activeStep === 1 ? (
             <Grid container item>
-              <TableLearningElement
+              <CreateLearningElementTable
                 selectedTopicsModal={selectedTopics}
                 onLearningElementChange={handleLearningElementChange}
                 selectedLearningElements={selectedLearningElements}>
@@ -312,11 +309,11 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                     </Button>
                   </Grid>
                 </Box>
-              </TableLearningElement>
+              </CreateLearningElementTable>
             </Grid>
           ) : activeStep === 2 ? (
             <Grid container item>
-              <TableLearningElementClassification
+              <CreateLearningElementClassificationTable
                 selectedTopicsModal={selectedTopics}
                 LearningElements={selectedLearningElements}
                 LearningElementsClassification={selectedLearningElementsClassification}
@@ -350,11 +347,11 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                     </Button>
                   </Grid>
                 </Box>
-              </TableLearningElementClassification>
+              </CreateLearningElementClassificationTable>
             </Grid>
           ) : activeStep === 3 ? (
             <Grid container item>
-              <TableAlgorithm
+              <CreateAlgorithmTable
                 selectedTopicsModal={selectedTopics}
                 selectedLearningElementClassification={selectedLearningElementsClassification}
                 onAlgorithmChange={handleAlgorithmChange}
@@ -398,7 +395,7 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
                     </Button>
                   </Grid>
                 </Box>
-              </TableAlgorithm>
+              </CreateAlgorithmTable>
             </Grid>
           ) : null}
         </Box>
@@ -407,5 +404,5 @@ const TopicModal = memo(({ open = false, handleClose }: CourseModalProps) => {
   )
 })
 // eslint-disable-next-line immutable/no-mutation
-TopicModal.displayName = 'TopicModal'
-export default TopicModal
+CreateTopicModal.displayName = 'TopicModal'
+export default CreateTopicModal

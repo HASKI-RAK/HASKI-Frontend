@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, Grid, Skeleton, Typography } from '@common/components'
-import { CourseModal } from '@components'
+import { CreateCourseModal } from '@components'
 import { Course } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -160,7 +160,7 @@ export const Home = () => {
                   </Button>
                 </Grid>
               </CardContent>
-              <CourseModal open={modalOpen} handleClose={handleCloseCourseModal}></CourseModal>
+              <CreateCourseModal open={modalOpen} handleClose={handleCloseCourseModal}></CreateCourseModal>
             </Card>
           )}
         </Grid>

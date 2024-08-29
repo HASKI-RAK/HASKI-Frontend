@@ -12,8 +12,7 @@ import {
   Typography
 } from '@common/components'
 import { SkeletonList } from '@components'
-import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
-import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
+import { RemoteLearningElement, RemoteTopic } from '@core'
 
 export type LearningElementWithClassification = RemoteLearningElement & {
   classification: string
@@ -27,7 +26,7 @@ type TableLearningElementClassificationProps = {
   children?: ReactNode
 }
 
-const TableLearningElementClassification = memo(
+const CreateLearningElementClassificationTable = memo(
   ({
     selectedTopicsModal,
     LearningElements,
@@ -150,5 +149,5 @@ const TableLearningElementClassification = memo(
   }
 )
 // eslint-disable-next-line immutable/no-mutation
-TableLearningElementClassification.displayName = 'TableLearningElementClassification'
-export default TableLearningElementClassification
+CreateLearningElementClassificationTable.displayName = 'TableLearningElementClassification'
+export default CreateLearningElementClassificationTable

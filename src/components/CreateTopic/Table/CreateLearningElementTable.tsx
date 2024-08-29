@@ -1,11 +1,9 @@
-import CheckBoxIcon from '@mui/icons-material/CheckBox'
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { ReactNode, memo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Checkbox, Fab, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
+import { CheckBox, CheckBoxOutlineBlank } from '@common/icons'
 import { SkeletonList } from '@components'
-import RemoteLearningElement from '../../../core/RemoteLearningElement/RemoteLearningElement'
-import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
+import { RemoteLearningElement, RemoteTopic } from '@core'
 
 type TableLearningElementProps = {
   selectedTopicsModal: RemoteTopic[]
@@ -14,7 +12,7 @@ type TableLearningElementProps = {
   children?: ReactNode
 }
 
-const TableLearningElement = memo(
+const CreateLearningElementTable = memo(
   ({ selectedTopicsModal, onLearningElementChange, selectedLearningElements, children }: TableLearningElementProps) => {
     const { t } = useTranslation()
     const handleCheckboxChange = (topicId: number, element: RemoteLearningElement, checked: boolean) => {
@@ -77,10 +75,10 @@ const TableLearningElement = memo(
               sx={{ mt: '1rem', mr: '0.5rem', color: '#f2852b', bgcolor: 'white' }}
               onClick={handleSelectAll}
               size="medium">
-              <CheckBoxIcon />
+              <CheckBox />
             </Fab>
             <Fab sx={{ mt: '1rem', color: '#f2852b', bgcolor: 'white' }} onClick={handleDeselectAll} size="medium">
-              <CheckBoxOutlineBlankIcon />
+              <CheckBoxOutlineBlank />
             </Fab>
           </Grid>
         </Grid>
@@ -126,5 +124,5 @@ const TableLearningElement = memo(
   }
 )
 // eslint-disable-next-line immutable/no-mutation
-TableLearningElement.displayName = 'TableLearningElement'
-export default TableLearningElement
+CreateLearningElementTable.displayName = 'TableLearningElement'
+export default CreateLearningElementTable

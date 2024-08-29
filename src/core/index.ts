@@ -31,6 +31,7 @@ import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
 import ILS from './QuestionnaireResults/ILS'
 import ListK from './QuestionnaireResults/ListK'
 import RemoteCourse from './RemoteCourse/RemoteCourse'
+import RemoteLearningElement from './RemoteLearningElement/RemoteLearningElement'
 import RemoteTopic from './RemoteTopic/RemoteTopic'
 import StudentLearningElement from './StudentLearningElement/StudentLearningElement'
 import Topic from './Topic/Topic'
@@ -54,7 +55,8 @@ export type {
   ListK,
   LearningPathBasedOn,
   RemoteCourse,
-  RemoteTopic
+  RemoteTopic,
+  RemoteLearningElement
 }
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
 export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'

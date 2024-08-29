@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Button, Card, CardContent, Grid, Stack } from '@common/components'
 import { useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
-import { SkeletonList, TopicCard, TopicModal } from '@components'
+import { CreateTopicModal, SkeletonList, TopicCard } from '@components'
 import { RoleContext } from '@services'
 
 /**
@@ -96,7 +96,7 @@ const Course = () => {
                   </Button>
                 </Stack>
               </CardContent>
-              <TopicModal open={modalOpen} handleClose={handleCloseTopicModal}></TopicModal>
+              <CreateTopicModal open={modalOpen} handleClose={handleCloseTopicModal}></CreateTopicModal>
             </Card>
           )}
         </Grid>

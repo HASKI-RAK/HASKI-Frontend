@@ -7,7 +7,7 @@ type TableTopicsProps = {
   topics: LearningPathTopic
 }
 
-const TableTopics = memo(({ topics }: TableTopicsProps) => {
+const ExistingTopicsTable = memo(({ topics }: TableTopicsProps) => {
   const { t } = useTranslation()
   return (
     <Grid container direction="column" alignItems="center" spacing={3}>
@@ -34,5 +34,5 @@ const TableTopics = memo(({ topics }: TableTopicsProps) => {
   )
 })
 // eslint-disable-next-line immutable/no-mutation
-TableTopics.displayName = 'TableTopics'
-export default TableTopics
+ExistingTopicsTable.displayName = 'TableTopics'
+export default ExistingTopicsTable

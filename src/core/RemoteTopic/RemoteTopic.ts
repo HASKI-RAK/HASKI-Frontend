@@ -1,4 +1,3 @@
-import LearningPathTopic from '../LearningPathTopic/LearningPathTopic'
 import RemoteLearningElement from '../RemoteLearningElement/RemoteLearningElement'
 
 type RemoteTopicReturn = (courseId?: string) => Promise<RemoteTopic[]>

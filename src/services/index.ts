@@ -8,10 +8,13 @@ export { AuthProvider } from './AuthProvider'
 export { RoleContext } from './RoleContext'
 export type { RoleContextType } from './RoleContext'
 export { RoleProvider } from './RoleProvider'
-export { fetchLearningPathElement } from './LearningPath'
-export { fetchLearningPathElementStatus } from './LearningPath'
-export { fetchLearningPathElementSpecificStatus } from './LearningPath'
-export { fetchLearningPathTopic } from './Topic'
+export {
+  fetchLearningPathElement,
+  fetchLearningPathElementStatus,
+  fetchLearningPathElementSpecificStatus,
+  postCalculateLearningPath
+} from './LearningPath'
+export { fetchLearningPathTopic, postTopic } from './Topic'
 export { postContactForm } from './contact'
 export type { FormDataType } from './contact'
 export * from './auth'
@@ -20,6 +23,8 @@ export { SnackbarProvider } from './SnackbarProvider'
 export * from './connection'
 export { fetchCourses } from './Courses'
 export { fetchRemoteCourses } from './RemoteCourses'
+export { postLearningElement } from './LearningElement'
+export { postLearningPathAlgorithm } from './LearningPathAlgorithm'
 export { postCourse } from './Course'
 export * from './xAPI'
 export { fetchILS, fetchListK, postILS, postListK } from './Questionnaire'

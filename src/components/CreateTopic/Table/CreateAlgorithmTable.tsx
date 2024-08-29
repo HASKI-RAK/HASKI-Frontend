@@ -1,32 +1,30 @@
-import { Box, FormGroup, Grid, InputLabel, MenuItem, Paper, Select, Typography } from '@mui/material'
-import { ReactNode, useCallback, useEffect, useMemo } from 'react'
-import { memo } from 'react'
+import { ReactNode, memo, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SkeletonList } from '@components'
-import RemoteTopic from '../../../core/RemoteTopic/RemoteTopic'
-import type { LearningElementWithClassification } from '../Table/TableLearningElementClassification'
+import { Box, FormGroup, Grid, InputLabel, MenuItem, Paper, Select, Typography } from '@common/components'
+import { LearningElementWithClassification, SkeletonList } from '@components'
+import { RemoteTopic } from '@core'
 
-export type TableAlgorithmNameProps = {
+export type CreateAlgorithmTableNameProps = {
   topicName: string
   algorithmShortName: string
 }
 
-type TableAlgorithmProps = {
+type CreateAlgorithmTableProps = {
   selectedTopicsModal: RemoteTopic[]
   selectedLearningElementClassification: { [key: number]: LearningElementWithClassification[] }
-  onAlgorithmChange: (selectedAlgorithms: { [key: number]: TableAlgorithmNameProps[] }) => void
-  selectedAlgorithms: { [key: number]: TableAlgorithmNameProps[] }
+  onAlgorithmChange: (selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps[] }) => void
+  selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps[] }
   children?: ReactNode
 }
 
-const TableAlgorithm = memo(
+const CreateAlgorithmTable = memo(
   ({
     selectedTopicsModal = [],
     selectedLearningElementClassification,
     onAlgorithmChange,
     selectedAlgorithms,
     children
-  }: TableAlgorithmProps) => {
+  }: CreateAlgorithmTableProps) => {
     const { t } = useTranslation()
 
     const topicAlgorithmOptions = useMemo(() => {
@@ -153,5 +151,5 @@ const TableAlgorithm = memo(
   }
 )
 // eslint-disable-next-line immutable/no-mutation
-TableAlgorithm.displayName = 'TableAlgorithm'
-export default TableAlgorithm
+CreateAlgorithmTable.displayName = 'TableAlgorithm'
+export default CreateAlgorithmTable

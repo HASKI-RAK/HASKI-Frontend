@@ -19,8 +19,6 @@ export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/Breadcru
 export { default as TextCardLeft } from './TextCard/TextCardLeft/TextCardLeft'
 export { default as TextCardRight } from './TextCard/TextCardRight/TextCardRight'
 export { default as TextStepper } from './TextStepper/TextStepper'
-export { default as CourseModal } from './CreateCourse/Modal/CreateCourseModal'
-export { default as TopicModal } from './CreateTopic/Modal/TopicModal'
 export {
   default as SnackbarMessage,
   type SnackbarMessageProps,
@@ -55,6 +53,19 @@ export { default as AlgorithmSettingsModal } from './AlgorithmSettingsModal/Algo
 export { default as TopicCard } from './TopicCard/TopicCard'
 export { default as CreateCourseDetailsTable } from './CreateCourse/Table/CreateCourseDetailsTable'
 export { default as CreateCourseTable } from './CreateCourse/Table/CreateCourseTable'
+export { default as CreateCourseModal } from './CreateCourse/Modal/CreateCourseModal'
+export { default as CreateRemoteTopicsTable } from './CreateTopic/Table/CreateRemoteTopicsTable'
+export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopicsTable'
+export { default as CreateLearningElementTable } from './CreateTopic/Table/CreateLearningElementTable'
+export {
+  default as CreateLearningElementClassificationTable,
+  type LearningElementWithClassification
+} from './CreateTopic/Table/CreateLearningElementClassificationTable'
+export {
+  default as CreateAlgorithmTable,
+  type CreateAlgorithmTableNameProps
+} from './CreateTopic/Table/CreateAlgorithmTable'
+export { default as CreateTopicModal } from './CreateTopic/Modal/CreateTopicModal'
 
 export * from './GlobalNav'
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure
