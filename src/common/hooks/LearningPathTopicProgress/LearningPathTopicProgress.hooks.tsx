@@ -1,5 +1,5 @@
 import log from 'loglevel'
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { LearningPathElementStatus, LearningPathLearningElement, Topic, User } from '@core'
@@ -51,6 +51,8 @@ export const useLearningPathTopicProgress = (
 
   // Trigger Reload of Fetches
   const ignoreLearningPathTopicCache = useStore((state) => state.ignoreLearningPathTopicCache)
+  const ignoreLearningElementCache = useStore((state) => state.ignoreLearningElementCache)
+  const ignoreLearningPathElementStatus = usePersistedStore((state) => state.ignoreLearningPathElementStatusCache)
 
   // Function
   const getTopicProgress = useCallback(
@@ -105,7 +107,14 @@ export const useLearningPathTopicProgress = (
           })
       })
     },
-    [getLearningPathElement, getLearningPathElementStatus, getTopicProgress, courseId]
+    [
+      getLearningPathElement,
+      getLearningPathElementStatus,
+      getTopicProgress,
+      courseId,
+      ignoreLearningElementCache,
+      ignoreLearningPathElementStatus
+    ]
   )
 
   useEffect(() => {

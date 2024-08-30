@@ -5,7 +5,7 @@ import { Box, Button, Card, CardContent, Grid, Stack } from '@common/components'
 import { useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
 import { CreateTopicModal, SkeletonList, TopicCard } from '@components'
 import { RoleContext } from '@services'
-import { useStore } from '@store'
+import { usePersistedStore, useStore } from '@store'
 
 /**
  * # Course Page
@@ -25,12 +25,16 @@ const Course = () => {
   const { courseId } = useParams<{ courseId: string }>()
   const { topicProgress, isLoading, topics } = useLearningPathTopicProgress({ courseId })
   const triggerLearningPathTopicReload = useStore((state) => state.triggerLearningPathTopicReload)
+  const triggerLearningElementReload = useStore((state) => state.triggerLearningElementReload)
+  const triggerLearningElementStatusReload = usePersistedStore((state) => state.triggerLearningPathElementStatusReload)
 
   const [createTopicModalOpen, setCreateTopicModalOpen] = useState<boolean>(false)
   const [successTopicCreated, setSuccessTopicCreated] = useState<boolean>(false)
 
   const handleCloseTopicModal = () => {
     triggerLearningPathTopicReload(true)
+    triggerLearningElementReload(true)
+    triggerLearningElementStatusReload(true)
     setCreateTopicModalOpen(false)
   }
 
