@@ -1,11 +1,11 @@
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { useContext, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Button, Card, CardContent, Grid, Stack } from '@common/components'
 import { useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
 import { CreateTopicModal, SkeletonList, TopicCard } from '@components'
 import { RoleContext } from '@services'
+import { useStore } from '@store'
 
 /**
  * # Course Page
@@ -24,11 +24,13 @@ const Course = () => {
   const { isCourseCreatorRole } = useContext(RoleContext)
   const { courseId } = useParams<{ courseId: string }>()
   const { topicProgress, isLoading, topics } = useLearningPathTopicProgress({ courseId })
+  const triggerLearningPathTopicReload = useStore((state) => state.triggerLearningPathTopicReload)
 
   const [createTopicModalOpen, setCreateTopicModalOpen] = useState<boolean>(false)
   const [successTopicCreated, setSuccessTopicCreated] = useState<boolean>(false)
 
   const handleCloseTopicModal = () => {
+    triggerLearningPathTopicReload(true)
     setCreateTopicModalOpen(false)
   }
 
