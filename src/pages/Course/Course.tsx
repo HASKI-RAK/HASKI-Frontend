@@ -19,21 +19,17 @@ import { RoleContext } from '@services'
  */
 const Course = () => {
   // Hooks
-  const { t } = useTranslation()
   const theme = useTheme()
   const isSmOrDown = useMediaQuery(theme.breakpoints.down('sm'))
   const { isCourseCreatorRole } = useContext(RoleContext)
   const { courseId } = useParams<{ courseId: string }>()
   const { topicProgress, isLoading, topics } = useLearningPathTopicProgress({ courseId })
-  const [modalOpen, setModalOpen] = useState(false)
+
+  const [createTopicModalOpen, setCreateTopicModalOpen] = useState<boolean>(false)
+  const [successTopicCreated, setSuccessTopicCreated] = useState<boolean>(false)
 
   const handleCloseTopicModal = () => {
-    setModalOpen(false)
-  }
-
-  const commonButtonStyle = {
-    mt: '1rem',
-    width: '85%'
+    setCreateTopicModalOpen(false)
   }
 
   return (
@@ -91,12 +87,16 @@ const Course = () => {
                     id="course-button"
                     variant="contained"
                     color="primary"
-                    onClick={() => setModalOpen(true)}>
+                    onClick={() => setCreateTopicModalOpen(true)}>
                     <AddCircleIcon />
                   </Button>
                 </Stack>
               </CardContent>
-              <CreateTopicModal open={modalOpen} handleClose={handleCloseTopicModal}></CreateTopicModal>
+              <CreateTopicModal
+                open={createTopicModalOpen}
+                handleClose={handleCloseTopicModal}
+                successTopicCreated={successTopicCreated}
+                setSuccessTopicCreated={setSuccessTopicCreated}></CreateTopicModal>
             </Card>
           )}
         </Grid>

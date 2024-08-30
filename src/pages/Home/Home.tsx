@@ -23,11 +23,11 @@ export const Home = () => {
   const { isAuth } = useContext(AuthContext)
   const { isCourseCreatorRole } = useContext(RoleContext)
   const { addSnackbar } = useContext(SnackbarContext)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState<boolean>(true)
   const navigate = useNavigate()
   const [courses, setCourses] = useState<Course[]>([])
-  const [createCourseModalOpen, setCreateCourseModalOpen] = useState(false)
-  const [successRemoteCourseCreated, setSuccessRemoteCourseCreated] = useState(false)
+  const [createCourseModalOpen, setCreateCourseModalOpen] = useState<boolean>(false)
+  const [successRemoteCourseCreated, setSuccessRemoteCourseCreated] = useState<boolean>(false)
 
   // Store
   const getUser = usePersistedStore((state) => state.getUser)

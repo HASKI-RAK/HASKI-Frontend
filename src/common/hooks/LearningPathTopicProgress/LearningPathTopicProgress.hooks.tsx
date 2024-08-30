@@ -138,7 +138,7 @@ export const useLearningPathTopicProgress = (
           log.error(t('error.fetchUser') + ' ' + error)
         })
     }
-  }, [isAuth, navigate, clearTimeout, getLearningPathTopic, getAllTopicProgress])
+  }, [isAuth, navigate, getLearningPathTopic, getAllTopicProgress])
 
   return useMemo(() => ({ topicProgress, isLoading, topics }), [topicProgress, isLoading, topics])
 }
