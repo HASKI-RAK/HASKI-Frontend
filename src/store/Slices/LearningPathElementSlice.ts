@@ -42,6 +42,6 @@ export const createLearningPathElementSlice: StateCreator<StoreState, [], [], Le
         return learningPathElement_response
       } else return cached
     },
-    triggerLearningElementReload: (reloadState: boolean) => set({ ignoreLearningPathTopicCache: reloadState })
+    triggerLearningElementReload: (reloadState: boolean) => set({ ignoreLearningElementCache: reloadState })
   }
 }

@@ -32,10 +32,12 @@ export const Home = () => {
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
+  const triggerCoursesReload = useStore((state) => state.triggerCoursesReload)
+  const ignoreCoursesCache = useStore((state) => state.ignoreCoursesCache)
 
   const handleCloseCourseModal = () => {
+    triggerCoursesReload(true)
     setCreateCourseModalOpen(false)
-    successRemoteCourseCreated && window.location.reload()
   }
 
   useEffect(() => {
@@ -65,7 +67,7 @@ export const Home = () => {
         })
       setLoading(false)
     }
-  }, [getUser, getCourses, setCourses, isAuth])
+  }, [getUser, getCourses, setCourses, isAuth, ignoreCoursesCache])
 
   const commonButtonStyle = {
     mt: '1rem',
