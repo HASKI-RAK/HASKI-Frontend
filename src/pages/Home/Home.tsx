@@ -47,6 +47,7 @@ export const Home = () => {
           getCourses(user.settings.user_id, user.lms_user_id, user.id)
             .then((CourseResponse) => {
               setCourses(CourseResponse.courses)
+              setLoading(false)
             })
             .catch((error) => {
               addSnackbar({
@@ -65,7 +66,6 @@ export const Home = () => {
           })
           log.error(t('error.getUser') + ' ' + error)
         })
-      setLoading(false)
     }
   }, [getUser, getCourses, setCourses, isAuth, ignoreCoursesCache])
 
@@ -83,13 +83,27 @@ export const Home = () => {
   }
 
   // Card containing the courses with a button to the specific course
-  return loading ? (
-    <Skeleton variant="rectangular" width="100%" height={118} />
-  ) : (
+  return (
     <div>
       <Grid container spacing={2} justifyContent="center">
         <Grid item>
-          {courses.length === 0 ? (
+          {loading ? (
+            <Card
+              sx={{
+                mb: '1rem',
+                width: {
+                  xs: '20rem',
+                  sm: '20rem',
+                  md: '20rem',
+                  lg: '30rem',
+                  xl: '40rem',
+                  xxl: '45rem',
+                  xxxl: '50rem'
+                }
+              }}>
+              <Skeleton variant="rectangular" width="100%" height={118} />
+            </Card>
+          ) : courses.length === 0 ? (
             <Card
               sx={{
                 mb: '1rem',
