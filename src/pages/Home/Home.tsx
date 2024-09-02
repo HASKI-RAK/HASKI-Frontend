@@ -76,12 +76,21 @@ export const Home = () => {
     width: '85%'
   }
 
-  const handleCourseStartDate = (courseStartDate: string) => {
-    return new Date(courseStartDate) > new Date()
+  const commonCardStyle = {
+    mb: '1rem',
+    width: {
+      xs: '20rem',
+      sm: '20rem',
+      md: '20rem',
+      lg: '30rem',
+      xl: '40rem',
+      xxl: '45rem',
+      xxxl: '50rem'
+    }
   }
 
-  const formatDate = (date: string) => {
-    return dayjs(date).format('DD.MM.YYYY - HH:mm')
+  const handleCourseStartDate = (courseStartDate: string) => {
+    return new Date(courseStartDate) > new Date()
   }
 
   // Card containing the courses with a button to the specific course
@@ -90,35 +99,11 @@ export const Home = () => {
       <Grid container spacing={2} justifyContent="center">
         <Grid item>
           {coursesLoading ? (
-            <Card
-              sx={{
-                mb: '1rem',
-                width: {
-                  xs: '20rem',
-                  sm: '20rem',
-                  md: '20rem',
-                  lg: '30rem',
-                  xl: '40rem',
-                  xxl: '45rem',
-                  xxxl: '50rem'
-                }
-              }}>
+            <Card sx={{ commonCardStyle }}>
               <Skeleton variant="rectangular" width="100%" height={118} />
             </Card>
           ) : courses.length === 0 ? (
-            <Card
-              sx={{
-                mb: '1rem',
-                width: {
-                  xs: '20rem',
-                  sm: '20rem',
-                  md: '20rem',
-                  lg: '30rem',
-                  xl: '40rem',
-                  xxl: '45rem',
-                  xxxl: '50rem'
-                }
-              }}>
+            <Card sx={{ commonCardStyle }}>
               <CardContent>
                 <Typography variant="h5" align="center">
                   {t('pages.home.noCourses')}
@@ -128,20 +113,7 @@ export const Home = () => {
           ) : (
             courses.map((course) => {
               return (
-                <Card
-                  key={course.id}
-                  sx={{
-                    mb: '1rem',
-                    width: {
-                      xs: '20rem',
-                      sm: '20rem',
-                      md: '20rem',
-                      lg: '30rem',
-                      xl: '40rem',
-                      xxl: '45rem',
-                      xxxl: '50rem'
-                    }
-                  }}>
+                <Card key={course.id} sx={{ commonCardStyle }}>
                   <CardContent>
                     <Typography variant="h5" align="center">
                       {course.name}
@@ -157,7 +129,7 @@ export const Home = () => {
                           navigate('/course/' + course.id)
                         }}>
                         {handleCourseStartDate(course.start_date)
-                          ? t('pages.home.courseDisabled') + ' ' + formatDate(course.start_date)
+                          ? t('pages.home.courseDisabled') + ' ' + dayjs(course.start_date).format('DD.MM.YYYY - HH:mm')
                           : t('pages.home.courseButton')}
                       </Button>
                     </Grid>
@@ -171,7 +143,7 @@ export const Home = () => {
               <CardContent>
                 <Grid container justifyContent="center">
                   <Button
-                    id="course-button"
+                    id="create-course-button"
                     variant="contained"
                     color="primary"
                     onClick={() => setCreateCourseModalOpen(true)}
@@ -181,8 +153,8 @@ export const Home = () => {
                 </Grid>
               </CardContent>
               <CreateCourseModal
-                open={createCourseModalOpen}
-                handleClose={handleCloseCourseModal}
+                openCreateCourseModal={createCourseModalOpen}
+                handleCloseCreateCourseModal={handleCloseCourseModal}
                 setSuccessRemoteCourseCreated={setSuccessRemoteCourseCreated}
                 successRemoteCourseCreated={successRemoteCourseCreated}></CreateCourseModal>
             </Card>

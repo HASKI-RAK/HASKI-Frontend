@@ -10,18 +10,18 @@ import { SnackbarContext, postCourse } from '@services'
 import { usePersistedStore } from '@store'
 
 type CreateCourseModalProps = {
-  open?: boolean
+  openCreateCourseModal?: boolean
   successRemoteCourseCreated: boolean
   setSuccessRemoteCourseCreated: React.Dispatch<React.SetStateAction<boolean>>
-  handleClose: () => void
+  handleCloseCreateCourseModal: () => void
 }
 
 const CreateCourseModal = memo(
   ({
-    open = false,
+    openCreateCourseModal = false,
     successRemoteCourseCreated,
     setSuccessRemoteCourseCreated,
-    handleClose
+    handleCloseCreateCourseModal
   }: CreateCourseModalProps) => {
     const { t } = useTranslation()
 
@@ -84,7 +84,7 @@ const CreateCourseModal = memo(
     }
 
     return (
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={openCreateCourseModal} onClose={handleCloseCreateCourseModal}>
         <Grid container justifyContent="center" alignItems="center">
           <Box
             sx={{
@@ -102,7 +102,7 @@ const CreateCourseModal = memo(
             <Fab
               color="primary"
               id={'create-course-modal-close-button'}
-              onClick={() => handleClose()}
+              onClick={() => handleCloseCreateCourseModal()}
               sx={{
                 position: 'sticky',
                 top: '0%',
@@ -118,7 +118,7 @@ const CreateCourseModal = memo(
                 />
                 <Grid container justifyContent="center" alignItems="center" sx={{ mt: 2 }}>
                   <Button
-                    id="add-course-button"
+                    id="create-course-modal-next-step"
                     variant="contained"
                     color="primary"
                     onClick={() => setActiveStep(1)}
@@ -135,11 +135,15 @@ const CreateCourseModal = memo(
                   setDatePickerValue={setCourseStartDateValue}
                 />
                 <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
-                  <Button id="add-course-button" variant="contained" color="primary" onClick={() => setActiveStep(0)}>
+                  <Button
+                    id="create-course-modal-back-step"
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setActiveStep(0)}>
                     {t('appGlobal.back')}
                   </Button>
                   <Button
-                    id="create-course-modal-send-button"
+                    id="create-course-modal-details-button"
                     variant="contained"
                     color="primary"
                     disabled={isSending || successRemoteCourseCreated}
