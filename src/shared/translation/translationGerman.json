@@ -1367,7 +1367,6 @@
   "pages.course.aco": "Ameisenalgorithmus",
   "pages.course.bayes": "Bayes",
   "pages.course.cardText": "Lernpfad: ",
-  "pages.course.courseButton": "Weiter zum Kurs",
   "pages.course.fixed": "Feste Reihenfolge",
   "pages.course.genetic": "Genetischer Algorithmus",
   "pages.course.graf": "Graf",
@@ -1717,6 +1716,8 @@
     "TestDeutsch4"
   ],
   "pages.home": "Startseite",
+  "pages.home.courseButton": "Weiter zum Kurs",
+  "pages.home.courseDisabled": "Kurs ist Verfügbar ab",
   "pages.home.menuItemAlgorithms": "Lernpfadalgorithmus wählen",
   "pages.home.noCourses": "Keine Kurse gefunden",
   "pages.imprint": "Impressum",

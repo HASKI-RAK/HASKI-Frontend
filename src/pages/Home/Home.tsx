@@ -23,9 +23,11 @@ export const Home = () => {
   const { isAuth } = useContext(AuthContext)
   const { isCourseCreatorRole } = useContext(RoleContext)
   const { addSnackbar } = useContext(SnackbarContext)
-  const [loading, setLoading] = useState<boolean>(true)
   const navigate = useNavigate()
+
+  // States
   const [courses, setCourses] = useState<Course[]>([])
+  const [coursesLoading, setCoursesLoading] = useState<boolean>(true)
   const [createCourseModalOpen, setCreateCourseModalOpen] = useState<boolean>(false)
   const [successRemoteCourseCreated, setSuccessRemoteCourseCreated] = useState<boolean>(false)
 
@@ -47,7 +49,7 @@ export const Home = () => {
           getCourses(user.settings.user_id, user.lms_user_id, user.id)
             .then((CourseResponse) => {
               setCourses(CourseResponse.courses)
-              setLoading(false)
+              setCoursesLoading(false)
             })
             .catch((error) => {
               addSnackbar({
@@ -67,7 +69,7 @@ export const Home = () => {
           log.error(t('error.getUser') + ' ' + error)
         })
     }
-  }, [getUser, getCourses, setCourses, isAuth, ignoreCoursesCache])
+  }, [getUser, getCourses, setCourses, isAuth, ignoreCoursesCache, coursesLoading])
 
   const commonButtonStyle = {
     mt: '1rem',
@@ -87,7 +89,7 @@ export const Home = () => {
     <div>
       <Grid container spacing={2} justifyContent="center">
         <Grid item>
-          {loading ? (
+          {coursesLoading ? (
             <Card
               sx={{
                 mb: '1rem',
@@ -155,8 +157,8 @@ export const Home = () => {
                           navigate('/course/' + course.id)
                         }}>
                         {handleCourseStartDate(course.start_date)
-                          ? `Course is Available on ${formatDate(course.start_date)}`
-                          : t('pages.course.courseButton')}
+                          ? t('pages.home.courseDisabled') + ' ' + formatDate(course.start_date)
+                          : t('pages.home.courseButton')}
                       </Button>
                     </Grid>
                   </CardContent>

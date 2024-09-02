@@ -1367,7 +1367,6 @@
   "pages.course.aco": "ACO",
   "pages.course.bayes": "Bayes",
   "pages.course.cardText": "Learning Path: ",
-  "pages.course.courseButton": "Continue to course",
   "pages.course.fixed": "Fixed Order",
   "pages.course.genetic": "Genetic Algorithm",
   "pages.course.graf": "Graf",
@@ -1717,6 +1716,8 @@
     "TestEnglish4"
   ],
   "pages.home": "Home",
+  "pages.home.courseButton": "Continue to course",
+  "pages.home.courseDisabled": "Course is Available on",
   "pages.home.menuItemAlgorithms": "Select learning path algorithm",
   "pages.home.noCourses": "No courses found",
   "pages.imprint": "Imprint",

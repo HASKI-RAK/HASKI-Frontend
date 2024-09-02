@@ -61,7 +61,7 @@ describe('Test the Home page', () => {
       )
 
       act(() => {
-        const course = getAllByText('pages.course.courseButton')
+        const course = getAllByText('pages.home.courseButton')
         fireEvent.click(course[1])
         expect(navigate).toHaveBeenCalledWith('/course/2')
       })
