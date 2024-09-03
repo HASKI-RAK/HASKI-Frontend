@@ -20,7 +20,7 @@ export type LearningElementWithClassification = RemoteLearningElement & {
 }
 
 type CreateLearningElementClassificationTableProps = {
-  selectedTopicsModal: RemoteTopic[]
+  selectedTopics: RemoteTopic[]
   LearningElements: { [key: number]: RemoteLearningElement[] }
   LearningElementsClassification: { [key: number]: LearningElementWithClassification[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: LearningElementWithClassification[] }) => void
@@ -29,17 +29,25 @@ type CreateLearningElementClassificationTableProps = {
 
 const CreateLearningElementClassificationTable = memo(
   ({
-    selectedTopicsModal,
+    selectedTopics,
     LearningElements,
     LearningElementsClassification,
     onLearningElementChange,
     children
   }: CreateLearningElementClassificationTableProps) => {
+    //Hooks
     const { t } = useTranslation()
     const { handleClassificationChange } = useCreateLearningElementClassificationTable({
       LearningElementsClassification,
       onLearningElementChange
     })
+
+    //Constants
+    const learningElementClassifications = useMemo(() => {
+      return t('components.CreateLearningElementClassificationTable.classifications', {
+        returnObjects: true
+      }) as [{ name: string; key: string; disabled: boolean }]
+    }, [])
 
     useEffect(() => {
       const updatedClassifications = Object.keys(LearningElements).reduce((accumulator, topicId) => {
@@ -51,7 +59,7 @@ const CreateLearningElementClassificationTable = memo(
           LearningElements[topicIdInt].some((newElement) => newElement.lms_id === existingElement.lms_id)
         )
 
-        // Add elements that are in LearningElements but not yet classified
+        // Give elements the default classification that are in LearningElements but not yet classified
         const newClassifications = LearningElements[topicIdInt].map((element) => {
           const existingElement = filteredClassifications.find((e) => e.lms_id === element.lms_id)
           return existingElement || { ...element, classification: 'noKey' }
@@ -62,12 +70,6 @@ const CreateLearningElementClassificationTable = memo(
 
       onLearningElementChange(updatedClassifications)
     }, [LearningElements])
-
-    const learningElementClassifications = useMemo(() => {
-      return t('components.CreateLearningElementClassificationTable.classifications', {
-        returnObjects: true
-      }) as [{ name: string; key: string; disabled: boolean }]
-    }, [])
 
     //Return early
     if (Object.keys(LearningElementsClassification).length === 0) {
@@ -88,7 +90,7 @@ const CreateLearningElementClassificationTable = memo(
             {t('components.CreateLearningElementClassificationTable.setLearningElementClassification')}
           </Typography>
         </Grid>
-        {selectedTopicsModal.map((lmsTopic) => (
+        {selectedTopics.map((lmsTopic) => (
           <Grid
             item
             container

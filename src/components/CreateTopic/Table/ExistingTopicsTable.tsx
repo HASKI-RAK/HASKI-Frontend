@@ -8,7 +8,9 @@ type ExistingTopicsTableProps = {
 }
 
 const ExistingTopicsTable = memo(({ existingTopics }: ExistingTopicsTableProps) => {
+  //Hooks
   const { t } = useTranslation()
+
   return (
     <Grid container direction="column" alignItems="center" spacing={3}>
       <Grid item>

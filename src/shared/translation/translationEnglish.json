@@ -676,7 +676,7 @@
   "components.ResultDescriptionListK.time && literatureResearch below3-Title": "Time and literature research have a value below 3",
   "components.ResultDescriptionListK.time below3-Description": "In terms of internal resource management strategies, it is clear to see that you are currently not taking enough time for your learning. It would probably have a positive effect if you tried to create clear learning periods for yourself in order to make your learning more effective.",
   "components.ResultDescriptionListK.time below3-Title": "Time has a value below 3",
-  "components.TableAlgorithm.missingClassification": "This topic will not be created. Please select learning element classifications to enable algorithm selection.",
+  "components.CreateAlgorithmTable.missingClassification": "This topic will not be created. Please select learning element classifications to enable algorithm selection.",
   "components.TableILS.active": "Active",
   "components.TableILS.balanced": "balanced",
   "components.TableILS.dimension": "Dimension",
@@ -1212,7 +1212,7 @@
     }
   ],
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Set learning element classification",
-  "components.TableLearningElements.selectLearningElements": "Select learning elements",
+  "components.CreateLearningElementTable.selectLearningElements": "Select learning elements",
   "components.TableListK.attention": "Attention",
   "components.TableListK.cognitiveStrategies": "Cognitive strategies",
   "components.TableListK.control": "Control",

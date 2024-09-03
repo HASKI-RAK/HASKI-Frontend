@@ -11,7 +11,7 @@ export type CreateAlgorithmTableNameProps = {
 }
 
 type CreateAlgorithmTableProps = {
-  selectedTopicsModal: RemoteTopic[]
+  selectedTopics: RemoteTopic[]
   selectedLearningElementClassification: { [key: number]: LearningElementWithClassification[] }
   onAlgorithmChange: (selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps[] }) => void
   selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps[] }
@@ -20,15 +20,17 @@ type CreateAlgorithmTableProps = {
 
 const CreateAlgorithmTable = memo(
   ({
-    selectedTopicsModal = [],
+    selectedTopics = [],
     selectedLearningElementClassification,
     onAlgorithmChange,
     selectedAlgorithms,
     children
   }: CreateAlgorithmTableProps) => {
+    //Hooks
     const { t } = useTranslation()
     const { handleAlgorithmChange } = useCreateAlgorithmTable({ selectedAlgorithms, onAlgorithmChange })
 
+    //Constants
     const topicAlgorithmOptions = useMemo(() => {
       return t('components.AlgorithmSettingsModal.algorithms', {
         returnObjects: true
@@ -37,12 +39,12 @@ const CreateAlgorithmTable = memo(
 
     // Set initial algorithm
     useEffect(() => {
-      selectedTopicsModal.forEach((lmsTopic) => {
+      selectedTopics.forEach((lmsTopic) => {
         if (!selectedAlgorithms[lmsTopic.topic_lms_id]) {
           handleAlgorithmChange(lmsTopic.topic_lms_id, lmsTopic.topic_lms_name, topicAlgorithmOptions[0].key)
         }
       })
-    }, [selectedTopicsModal, selectedAlgorithms, handleAlgorithmChange])
+    }, [selectedTopics, selectedAlgorithms, handleAlgorithmChange])
 
     const algorithmCard = (lmsTopic: RemoteTopic) => {
       const getAlgorithmByKey = (key: string) => topicAlgorithmOptions.find((option) => option.key === key)
@@ -105,7 +107,7 @@ const CreateAlgorithmTable = memo(
                 <Typography id="modal-description" variant="body1" component="p" sx={{ ml: '2rem' }}>
                   {hasLearningElementClassification
                     ? currentAlgorithm?.description
-                    : t('components.TableAlgorithm.missingClassification')}
+                    : t('components.CreateAlgorithmTable.missingClassification')}
                 </Typography>
               </Grid>
             </Grid>
@@ -115,7 +117,7 @@ const CreateAlgorithmTable = memo(
     }
 
     //return early
-    if (selectedTopicsModal.length === 0) {
+    if (selectedTopics.length === 0) {
       return (
         <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
           <Grid container direction="column" alignItems="center" sx={{ mt: '2rem' }}>
@@ -133,7 +135,7 @@ const CreateAlgorithmTable = memo(
             Select algorithms
           </Typography>
         </Grid>
-        {selectedTopicsModal.map((lmsTopic) => {
+        {selectedTopics.map((lmsTopic) => {
           return algorithmCard(lmsTopic)
         })}
         {children}

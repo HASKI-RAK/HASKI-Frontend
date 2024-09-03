@@ -4,13 +4,13 @@ import { RemoteLearningElement, RemoteTopic } from '@core'
 type useCreateTopicModalProps = {
   selectedLearningElements: { [p: number]: RemoteLearningElement[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
-  selectedTopicsModal: RemoteTopic[]
+  selectedTopics: RemoteTopic[]
 }
 
 export const useCreateLearningElementTable = ({
   selectedLearningElements,
   onLearningElementChange,
-  selectedTopicsModal
+  selectedTopics
 }: useCreateTopicModalProps) => {
   const handleLearningElementCheckboxChange = (topicId: number, element: RemoteLearningElement, checked: boolean) => {
     const updatedSelectedElements = {
@@ -24,7 +24,7 @@ export const useCreateLearningElementTable = ({
   }
 
   const handleSelectAllLearningElements = useCallback(() => {
-    const allLearningElements = selectedTopicsModal.reduce(
+    const allLearningElements = selectedTopics.reduce(
       (accumulator, topic) => ({
         ...accumulator,
         [topic.topic_lms_id]: topic.lms_learning_elements
@@ -33,10 +33,10 @@ export const useCreateLearningElementTable = ({
     )
 
     onLearningElementChange(allLearningElements)
-  }, [onLearningElementChange, selectedTopicsModal])
+  }, [onLearningElementChange, selectedTopics])
 
   const handleDeselectAllLearningElements = useCallback(() => {
-    const clearedElements = selectedTopicsModal.reduce(
+    const clearedElements = selectedTopics.reduce(
       (accumulator, topic) => ({
         ...accumulator,
         [topic.topic_lms_id]: []
@@ -45,7 +45,7 @@ export const useCreateLearningElementTable = ({
     )
 
     onLearningElementChange(clearedElements)
-  }, [onLearningElementChange, selectedTopicsModal])
+  }, [onLearningElementChange, selectedTopics])
 
   return useMemo(
     () => ({

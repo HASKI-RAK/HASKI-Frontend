@@ -40,7 +40,7 @@ const CreateTopicModal = memo(
     const { courseId } = useParams<{ courseId: string }>()
     const { addSnackbar } = useContext(SnackbarContext)
     const [remoteTopics, setRemoteTopics] = useState<RemoteTopic[]>([])
-    const [isSending, setIsSending] = useState<boolean>(false)
+    const [createTopicIsSending, setCreateTopicIsSending] = useState<boolean>(false)
     const [alreadyCreatedTopics, setAlreadyCreatedTopics] = useState<LearningPathTopic>()
     const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>([])
     const [selectedLearningElements, setSelectedLearningElements] = useState<{
@@ -58,7 +58,7 @@ const CreateTopicModal = memo(
       handleLearningElementClassification,
       handleAlgorithmChange
     } = useCreateTopicModal({
-      setCreateTopicIsSending: setIsSending,
+      setCreateTopicIsSending,
       setSuccessTopicCreated,
       setSelectedTopics,
       selectedLearningElements,
@@ -121,7 +121,7 @@ const CreateTopicModal = memo(
           log.error(t('error.getUser') + ' ' + error)
         })
 
-      //Sort topics after their creation (lower id is created before a higher id in LMS)
+      //Sort topics (lower id is created before a higher id in LMS)
       setSelectedTopics((prevSelectedTopics) => [...prevSelectedTopics].sort((a, b) => a.topic_lms_id - b.topic_lms_id))
     }, [activeStep, getTopics, getUser, getRemoteTopics])
 
@@ -170,7 +170,7 @@ const CreateTopicModal = memo(
               <>
                 <CreateRemoteTopicsTable
                   onTopicChange={handleTopicChange}
-                  selectedTopicsModal={selectedTopics}
+                  selectedTopics={selectedTopics}
                   remoteTopics={remoteTopics}>
                   <Box sx={{ padding: '1rem', width: '95%' }}>
                     <Grid container justifyContent="flex-end" alignItems="flex-end">
@@ -195,7 +195,7 @@ const CreateTopicModal = memo(
             ) : activeStep === 1 ? (
               <Grid container item>
                 <CreateLearningElementTable
-                  selectedTopicsModal={selectedTopics}
+                  selectedTopics={selectedTopics}
                   onLearningElementChange={handleLearningElementChange}
                   selectedLearningElements={selectedLearningElements}>
                   <Box sx={{ padding: '1rem', width: '95%' }}>
@@ -213,6 +213,7 @@ const CreateTopicModal = memo(
                         variant="contained"
                         color="primary"
                         disabled={
+                          //At least 1 Learning element in each topic has to be selected
                           !selectedTopics.every(
                             (topic) =>
                               selectedLearningElements[topic.topic_lms_id] &&
@@ -230,7 +231,7 @@ const CreateTopicModal = memo(
             ) : activeStep === 2 ? (
               <Grid container item>
                 <CreateLearningElementClassificationTable
-                  selectedTopicsModal={selectedTopics}
+                  selectedTopics={selectedTopics}
                   LearningElements={selectedLearningElements}
                   LearningElementsClassification={selectedLearningElementsClassification}
                   onLearningElementChange={handleLearningElementClassification}>
@@ -249,6 +250,7 @@ const CreateTopicModal = memo(
                         variant="contained"
                         color="primary"
                         disabled={
+                          //Every learning element has to have a classification set
                           !selectedTopics.every(
                             (topic) =>
                               selectedLearningElementsClassification[topic.topic_lms_id] &&
@@ -268,7 +270,7 @@ const CreateTopicModal = memo(
             ) : activeStep === 3 ? (
               <Grid container item>
                 <CreateAlgorithmTable
-                  selectedTopicsModal={selectedTopics}
+                  selectedTopics={selectedTopics}
                   selectedLearningElementClassification={selectedLearningElementsClassification}
                   onAlgorithmChange={handleAlgorithmChange}
                   selectedAlgorithms={selectedAlgorithms}>
@@ -287,6 +289,7 @@ const CreateTopicModal = memo(
                         variant="contained"
                         color="primary"
                         disabled={
+                          //Every Topic has to have an algorithm set
                           !selectedTopics.every(
                             (topic) =>
                               selectedAlgorithms[topic.topic_lms_id] &&
@@ -294,7 +297,7 @@ const CreateTopicModal = memo(
                                 (element) => element.algorithmShortName !== 'noKey'
                               )
                           ) ||
-                          isSending ||
+                          createTopicIsSending ||
                           successTopicCreated
                         }
                         sx={{ mr: -2 }}
@@ -309,7 +312,11 @@ const CreateTopicModal = memo(
                             )
                           })
                         }>
-                        {isSending ? <CircularProgress size={24} /> : t('components.CreateTopicModal.createTopics')}
+                        {createTopicIsSending ? (
+                          <CircularProgress size={24} />
+                        ) : (
+                          t('components.CreateTopicModal.createTopics')
+                        )}
                       </Button>
                     </Grid>
                   </Box>

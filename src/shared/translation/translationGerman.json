@@ -676,7 +676,7 @@
   "components.ResultDescriptionListK.time && literatureResearch below3-Title": "Zeit und Literaturrecherche haben einen Wert unter 3",
   "components.ResultDescriptionListK.time below3-Description": "Im Hinblick auf Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es würde sich wahrscheinlich positiv auswirken, wenn Sie versuchen, sich klare Lernzeiträume zu schaffen, um Ihr Lernen effektiver zu gestalten.",
   "components.ResultDescriptionListK.time below3-Title": "Zeit hat einen Wert unter 3",
-  "components.TableAlgorithm.missingClassification": "Dieser Themenbereich wird nicht erstellt. Es müssen alle verfügbaren Lernelement Klassifikationen ausgewählt werden, um die Algorithmusauswahl zu ermöglichen.",
+  "components.CreateAlgorithmTable.missingClassification": "Dieser Themenbereich wird nicht erstellt. Es müssen alle verfügbaren Lernelement Klassifikationen ausgewählt werden, um die Algorithmusauswahl zu ermöglichen.",
   "components.TableILS.active": "Aktiv",
   "components.TableILS.balanced": "balanciert",
   "components.TableILS.dimension": "Dimension",
@@ -1212,7 +1212,7 @@
     }
   ],
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Klassifikation der Lernelemente festlegen",
-  "components.TableLearningElements.selectLearningElements": "Lernelemente auswählen",
+  "components.CreateLearningElementTable.selectLearningElements": "Lernelemente auswählen",
   "components.TableListK.attention": "Aufmerksamkeit",
   "components.TableListK.cognitiveStrategies": "Kognitive Strategien",
   "components.TableListK.control": "Kontrollieren",

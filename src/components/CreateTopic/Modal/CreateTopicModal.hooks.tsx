@@ -202,7 +202,6 @@ export const useCreateTopicModal = ({
     setSelectedTopics(topics)
 
     const topicIds = topics.map((topic) => topic.topic_lms_id)
-    // selectedLearningElements where the topic is not selected anymore
 
     // Remove all selectedLearningElements when Topic is deselected
     const selectedLearningElementKeysNotInTopics = Object.keys(selectedLearningElements).filter(

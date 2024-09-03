@@ -7,15 +7,16 @@ import { useCreateRemoteTopicsTable } from './CreateRemoteTopicsTable.hooks'
 
 type CreateRemoteTopicsTableProps = {
   onTopicChange: (selectedTopics: RemoteTopic[]) => void
-  selectedTopicsModal: RemoteTopic[]
+  selectedTopics: RemoteTopic[]
   remoteTopics: RemoteTopic[]
   children?: ReactNode
 }
 
 const CreateRemoteTopicsTable = memo(
-  ({ onTopicChange, selectedTopicsModal, remoteTopics, children }: CreateRemoteTopicsTableProps) => {
+  ({ onTopicChange, selectedTopics, remoteTopics, children }: CreateRemoteTopicsTableProps) => {
+    //Hooks
     const { t } = useTranslation()
-    const { handleTopicChange } = useCreateRemoteTopicsTable({ onTopicChange, selectedTopicsModal })
+    const { handleTopicChange } = useCreateRemoteTopicsTable({ onTopicChange, selectedTopics })
 
     return (
       <Grid container direction="column" alignItems="center" spacing={3}>
@@ -37,7 +38,7 @@ const CreateRemoteTopicsTable = memo(
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={selectedTopicsModal.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
+                          checked={selectedTopics.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
                           onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
                           id={'create-topic-modal-available-topics-checkbox-' + LmsTopic.topic_lms_name}
                         />

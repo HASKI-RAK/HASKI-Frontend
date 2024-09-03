@@ -7,7 +7,7 @@ import { RemoteLearningElement, RemoteTopic } from '@core'
 import { useCreateLearningElementTable } from './CreateLearningElementTable.hooks'
 
 type CreateLearningElementTableProps = {
-  selectedTopicsModal: RemoteTopic[]
+  selectedTopics: RemoteTopic[]
   onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
   selectedLearningElements: { [key: number]: RemoteLearningElement[] }
   children?: ReactNode
@@ -15,17 +15,18 @@ type CreateLearningElementTableProps = {
 
 const CreateLearningElementTable = memo(
   ({
-    selectedTopicsModal,
+    selectedTopics,
     onLearningElementChange,
     selectedLearningElements,
     children
   }: CreateLearningElementTableProps) => {
+    //Hooks
     const { t } = useTranslation()
     const { handleLearningElementCheckboxChange, handleSelectAllLearningElements, handleDeselectAllLearningElements } =
-      useCreateLearningElementTable({ selectedLearningElements, onLearningElementChange, selectedTopicsModal })
+      useCreateLearningElementTable({ selectedLearningElements, onLearningElementChange, selectedTopics })
 
     // Return early
-    if (selectedTopicsModal.length === 0) {
+    if (selectedTopics.length === 0) {
       return (
         <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
           <Grid container direction="column" alignItems="center" sx={{ mt: '2rem' }}>
@@ -41,7 +42,7 @@ const CreateLearningElementTable = memo(
         <Grid item container alignItems="center" justifyContent="space-between">
           <Grid item container xs={7.75} justifyContent="flex-end">
             <Typography variant="h6" sx={{ mt: '1rem' }}>
-              {t('components.TableLearningElements.selectLearningElements')}
+              {t('components.CreateLearningElementTable.selectLearningElements')}
             </Typography>
           </Grid>
           <Grid item xs={1.75}>
@@ -59,7 +60,7 @@ const CreateLearningElementTable = memo(
             </Fab>
           </Grid>
         </Grid>
-        {selectedTopicsModal.map((lmsTopic) => (
+        {selectedTopics.map((lmsTopic) => (
           <Grid
             item
             container
