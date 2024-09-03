@@ -53,10 +53,10 @@ const CreateCourseModal = memo(
       }
 
       const createCourse = {
-        lms_id: selectedRemoteCourse?.id || 1,
-        name: selectedRemoteCourse?.fullname || 'Test',
+        lms_id: selectedRemoteCourse?.id || 99999,
+        name: selectedRemoteCourse?.fullname || 'No value given',
         start_date: courseStartDateValue ? formatDate(courseStartDateValue.toDate()) : formatDate(new Date()),
-        university: user?.university || 'Test',
+        university: user?.university || 'No value given',
         created_by: user?.settings.user_id || 1,
         created_at: formatDate(new Date())
       }

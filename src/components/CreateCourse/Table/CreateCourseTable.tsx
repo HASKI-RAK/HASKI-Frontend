@@ -17,12 +17,11 @@ import { SnackbarContext, fetchRemoteCourses } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 type TableCourseProps = {
-  open?: boolean
   onCourseSelect: (course: RemoteCourse) => void
   selectedCourseName: string
 }
 
-const CreateCourseTable = memo(({ open = false, onCourseSelect, selectedCourseName }: TableCourseProps) => {
+const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: TableCourseProps) => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
 
@@ -64,7 +63,7 @@ const CreateCourseTable = memo(({ open = false, onCourseSelect, selectedCourseNa
             })
         })
     })
-  }, [open])
+  }, [])
 
   const handleChange = (_event: React.MouseEvent<HTMLElement>, nextView: string) => {
     const selectedCourse = remoteLmsCourses.find((course) => course.fullname === nextView)

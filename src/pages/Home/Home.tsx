@@ -99,11 +99,11 @@ export const Home = () => {
       <Grid container spacing={2} justifyContent="center">
         <Grid item>
           {coursesLoading ? (
-            <Card sx={{ commonCardStyle }}>
+            <Card sx={commonCardStyle}>
               <Skeleton variant="rectangular" width="100%" height={118} />
             </Card>
           ) : courses.length === 0 ? (
-            <Card sx={{ commonCardStyle }}>
+            <Card sx={commonCardStyle}>
               <CardContent>
                 <Typography variant="h5" align="center">
                   {t('pages.home.noCourses')}
@@ -113,7 +113,7 @@ export const Home = () => {
           ) : (
             courses.map((course) => {
               return (
-                <Card key={course.id} sx={{ commonCardStyle }}>
+                <Card key={course.id} sx={commonCardStyle}>
                   <CardContent>
                     <Typography variant="h5" align="center">
                       {course.name}

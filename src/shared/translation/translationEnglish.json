@@ -1717,7 +1717,7 @@
   ],
   "pages.home": "Home",
   "pages.home.courseButton": "Continue to course",
-  "pages.home.courseDisabled": "Course is Available on",
+  "pages.home.courseDisabled": "The course is available on",
   "pages.home.menuItemAlgorithms": "Select learning path algorithm",
   "pages.home.noCourses": "No courses found",
   "pages.imprint": "Imprint",
