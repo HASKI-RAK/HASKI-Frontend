@@ -188,7 +188,7 @@ const CreateTopicModal = memo(
                   </Box>
                 </CreateRemoteTopicsTable>
                 {alreadyCreatedTopics != undefined && alreadyCreatedTopics.topics.length > 0 && (
-                  <ExistingTopicsTable topics={alreadyCreatedTopics} />
+                  <ExistingTopicsTable existingTopics={alreadyCreatedTopics} />
                 )}
               </>
             ) : activeStep === 1 ? (
