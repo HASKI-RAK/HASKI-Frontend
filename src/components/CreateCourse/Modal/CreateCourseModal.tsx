@@ -39,9 +39,18 @@ const CreateCourseModal = memo(
     }
 
     useEffect(() => {
-      getUser().then((user) => {
-        setUser(user)
-      })
+      getUser()
+        .then((user) => {
+          setUser(user)
+        })
+        .catch((error) => {
+          addSnackbar({
+            message: t('error.getUser'),
+            severity: 'error',
+            autoHideDuration: 5000
+          })
+          log.error(t('error.getUser') + ' ' + error)
+        })
     }, [])
 
     const handleCreateCourse = () => {
@@ -143,7 +152,7 @@ const CreateCourseModal = memo(
                     {t('appGlobal.back')}
                   </Button>
                   <Button
-                    id="create-course-modal-details-button"
+                    id="create-course-modal-create-button"
                     variant="contained"
                     color="primary"
                     disabled={isSending || successRemoteCourseCreated}
@@ -166,5 +175,5 @@ const CreateCourseModal = memo(
   }
 )
 // eslint-disable-next-line immutable/no-mutation
-CreateCourseModal.displayName = 'CourseModal'
+CreateCourseModal.displayName = 'CreateCourseModal'
 export default CreateCourseModal

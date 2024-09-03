@@ -16,12 +16,12 @@ import { RemoteCourse } from '@core'
 import { SnackbarContext, fetchRemoteCourses } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
-type TableCourseProps = {
+type CreateCourseTableProps = {
   onCourseSelect: (course: RemoteCourse) => void
   selectedCourseName: string
 }
 
-const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: TableCourseProps) => {
+const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: CreateCourseTableProps) => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
 
@@ -33,36 +33,50 @@ const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: TableCou
   const getUser = usePersistedStore((state) => state.getUser)
 
   useEffect(() => {
-    getUser().then((user) => {
-      fetchRemoteCourses()
-        .then((response) => {
-          setRemoteLmsCourses(response)
-          return response
-        })
-        .then((remoteCourses) => {
-          getCourses(user.settings.user_id, user.lms_user_id, user.id)
-            .then((CourseResponse) => {
-              setAlreadyCreatedCourses(
-                remoteCourses.filter((remoteCourse) => {
-                  return CourseResponse.courses.find((course) => course.lms_id === remoteCourse.id)
-                })
-              )
-              setAvailableCourses(
-                remoteCourses.filter((remoteCourse) => {
-                  return !CourseResponse.courses.find((course) => course.lms_id === remoteCourse.id)
-                })
-              )
-            })
-            .catch((error) => {
-              addSnackbar({
-                message: t('error.getCourses'),
-                severity: 'error',
-                autoHideDuration: 5000
+    getUser()
+      .then((user) => {
+        fetchRemoteCourses()
+          .then((remoteCourses) => {
+            setRemoteLmsCourses(remoteCourses)
+            getCourses(user.settings.user_id, user.lms_user_id, user.id)
+              .then((CourseResponse) => {
+                setAvailableCourses(
+                  remoteCourses.filter((remoteCourse) => {
+                    return !CourseResponse.courses.find((course) => course.lms_id === remoteCourse.id)
+                  })
+                )
+                setAlreadyCreatedCourses(
+                  remoteCourses.filter((remoteCourse) => {
+                    return CourseResponse.courses.find((course) => course.lms_id === remoteCourse.id)
+                  })
+                )
               })
-              log.error(t('error.getCourses') + ' ' + error)
+              .catch((error) => {
+                addSnackbar({
+                  message: t('error.getCourses'),
+                  severity: 'error',
+                  autoHideDuration: 5000
+                })
+                log.error(t('error.getCourses') + ' ' + error)
+              })
+          })
+          .catch((error) => {
+            addSnackbar({
+              message: t('error.getRemoteCourses'),
+              severity: 'error',
+              autoHideDuration: 5000
             })
+            log.error(t('error.getRemoteCourses') + ' ' + error)
+          })
+      })
+      .catch((error) => {
+        addSnackbar({
+          message: t('error.getUser'),
+          severity: 'error',
+          autoHideDuration: 5000
         })
-    })
+        log.error(t('error.getUser') + ' ' + error)
+      })
   }, [])
 
   const handleChange = (_event: React.MouseEvent<HTMLElement>, nextView: string) => {
@@ -78,7 +92,7 @@ const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: TableCou
       <Grid container direction="column" justifyContent="center" alignItems="center">
         <Table>
           <TableHead>
-            <TableRow key={'TableCourseTableRow'}>
+            <TableRow>
               <TableCell>
                 <SkeletonList />
               </TableCell>
@@ -108,6 +122,7 @@ const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: TableCou
             }}>
             {availableCourses.length === 0 ? (
               <ToggleButton
+                id="create-course-modal-no-courses-found"
                 value={t('components.CreateCourseTable.noCoursesFound')}
                 aria-label={t('components.CreateCourseTable.noCoursesFound')}
                 key={t('components.CreateCourseTable.noCoursesFound')}
@@ -121,6 +136,7 @@ const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: TableCou
             ) : (
               availableCourses.map((LmsCourse) => (
                 <ToggleButton
+                  id={'create-course-modal-' + LmsCourse.fullname + '-selected'}
                   value={LmsCourse.fullname}
                   aria-label={LmsCourse.fullname}
                   key={LmsCourse.id}
@@ -173,5 +189,5 @@ const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: TableCou
   )
 })
 // eslint-disable-next-line immutable/no-mutation
-CreateCourseTable.displayName = 'TableCourse'
+CreateCourseTable.displayName = 'CreateCourseTable'
 export default CreateCourseTable

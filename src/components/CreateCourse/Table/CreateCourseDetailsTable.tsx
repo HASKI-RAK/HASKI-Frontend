@@ -10,13 +10,17 @@ import {
 } from '@common/components'
 import { RemoteCourse } from '@core'
 
-type TableCourseDetailsProps = {
+type CreateCourseDetailsTableProps = {
   remoteCourse: RemoteCourse | undefined
   datePickerValue: Dayjs | null
   setDatePickerValue: (value: Dayjs | null) => void
 }
 
-const CreateCourseDetailsTable = ({ remoteCourse, datePickerValue, setDatePickerValue }: TableCourseDetailsProps) => {
+const CreateCourseDetailsTable = ({
+  remoteCourse,
+  datePickerValue,
+  setDatePickerValue
+}: CreateCourseDetailsTableProps) => {
   const { t } = useTranslation()
 
   return (
@@ -25,6 +29,7 @@ const CreateCourseDetailsTable = ({ remoteCourse, datePickerValue, setDatePicker
         <Grid item>
           <TextField
             label={t('components.CreateCourseDetailsTable.courseName')}
+            id="create-course-modal-details-course-name"
             defaultValue={remoteCourse?.fullname}
             sx={{ width: '100%', mt: '1rem' }}
             required
@@ -50,5 +55,5 @@ const CreateCourseDetailsTable = ({ remoteCourse, datePickerValue, setDatePicker
   )
 }
 // eslint-disable-next-line immutable/no-mutation
-CreateCourseDetailsTable.displayName = 'TableCourseDetails'
+CreateCourseDetailsTable.displayName = 'CreateCourseDetailsTable'
 export default CreateCourseDetailsTable
