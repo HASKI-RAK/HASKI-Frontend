@@ -1164,7 +1164,7 @@
     ]
   ],
   "components.TableILSQuestions.introduction": "Im Folgenden werden Ihnen Fragen gestellt, welche sich auf Ihre Art der Informationsverarbeitung und -organisierung, Wahrnehmung und bevorzugte Präsentation beziehen. Geben Sie bitte für jede Frage eine der beiden Antwortmöglichkeiten an. Sollten beide oder auch keine der Antwortmöglichkeiten auf Sie zutreffen, dann wählen Sie die aus, welche tendenziell noch häufiger zutrifft. Die gestellten Fragen basieren auf dem Index of Learning Styles (Felder & Solomon 1991).",
-  "components.TableLearningElementClassification.classifications": [
+  "components.CreateLearningElementClassificationTable.classifications": [
     {
       "name": "Klassifikation auswählen",
       "key": "noKey",
@@ -1211,7 +1211,7 @@
       "disabled": false
     }
   ],
-  "components.TableLearningElementClassification.setLearningElementClassification": "Klassifikation der Lernelemente festlegen",
+  "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Klassifikation der Lernelemente festlegen",
   "components.TableLearningElements.selectLearningElements": "Lernelemente auswählen",
   "components.TableListK.attention": "Aufmerksamkeit",
   "components.TableListK.cognitiveStrategies": "Kognitive Strategien",

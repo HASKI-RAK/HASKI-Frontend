@@ -1,8 +1,9 @@
-import { ReactNode, memo, useCallback } from 'react'
+import { ReactNode, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
 import { SkeletonList } from '@components'
 import { RemoteTopic } from '@core'
+import { useCreateRemoteTopicsTable } from './CreateRemoteTopicsTable.hooks'
 
 type CreateRemoteTopicsTableProps = {
   onTopicChange: (selectedTopics: RemoteTopic[]) => void
@@ -14,15 +15,7 @@ type CreateRemoteTopicsTableProps = {
 const CreateRemoteTopicsTable = memo(
   ({ onTopicChange, selectedTopicsModal, remoteTopics, children }: CreateRemoteTopicsTableProps) => {
     const { t } = useTranslation()
-    const handleTopicChange = useCallback(
-      (topic: RemoteTopic, checked: boolean) => {
-        const updatedTopics = checked
-          ? [...selectedTopicsModal, topic]
-          : selectedTopicsModal.filter((t) => t.topic_lms_id !== topic.topic_lms_id)
-        onTopicChange(updatedTopics)
-      },
-      [onTopicChange, selectedTopicsModal]
-    )
+    const { handleTopicChange } = useCreateRemoteTopicsTable({ onTopicChange, selectedTopicsModal })
 
     return (
       <Grid container direction="column" alignItems="center" spacing={3}>

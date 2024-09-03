@@ -1,11 +1,12 @@
-import { ReactNode, memo, useCallback } from 'react'
+import { ReactNode, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Checkbox, Fab, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
 import { CheckBox, CheckBoxOutlineBlank } from '@common/icons'
 import { SkeletonList } from '@components'
 import { RemoteLearningElement, RemoteTopic } from '@core'
+import { useCreateLearningElementTable } from './CreateLearningElementTable.hooks'
 
-type TableLearningElementProps = {
+type CreateLearningElementTableProps = {
   selectedTopicsModal: RemoteTopic[]
   onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
   selectedLearningElements: { [key: number]: RemoteLearningElement[] }
@@ -13,42 +14,15 @@ type TableLearningElementProps = {
 }
 
 const CreateLearningElementTable = memo(
-  ({ selectedTopicsModal, onLearningElementChange, selectedLearningElements, children }: TableLearningElementProps) => {
+  ({
+    selectedTopicsModal,
+    onLearningElementChange,
+    selectedLearningElements,
+    children
+  }: CreateLearningElementTableProps) => {
     const { t } = useTranslation()
-    const handleCheckboxChange = (topicId: number, element: RemoteLearningElement, checked: boolean) => {
-      const updatedSelectedElements = {
-        ...selectedLearningElements,
-        [topicId]: checked
-          ? [...(selectedLearningElements[topicId] || []), element]
-          : (selectedLearningElements[topicId] || []).filter((el) => el.lms_id !== element.lms_id)
-      }
-
-      onLearningElementChange(updatedSelectedElements)
-    }
-
-    const handleSelectAll = useCallback(() => {
-      const allLearningElements = selectedTopicsModal.reduce(
-        (accumulator, topic) => ({
-          ...accumulator,
-          [topic.topic_lms_id]: topic.lms_learning_elements
-        }),
-        {} as { [key: number]: RemoteLearningElement[] }
-      )
-
-      onLearningElementChange(allLearningElements)
-    }, [onLearningElementChange, selectedTopicsModal])
-
-    const handleDeselectAll = useCallback(() => {
-      const clearedElements = selectedTopicsModal.reduce(
-        (accumulator, topic) => ({
-          ...accumulator,
-          [topic.topic_lms_id]: []
-        }),
-        {} as { [key: number]: RemoteLearningElement[] }
-      )
-
-      onLearningElementChange(clearedElements)
-    }, [onLearningElementChange, selectedTopicsModal])
+    const { handleLearningElementCheckboxChange, handleSelectAllLearningElements, handleDeselectAllLearningElements } =
+      useCreateLearningElementTable({ selectedLearningElements, onLearningElementChange, selectedTopicsModal })
 
     // Return early
     if (selectedTopicsModal.length === 0) {
@@ -73,11 +47,14 @@ const CreateLearningElementTable = memo(
           <Grid item xs={1.75}>
             <Fab
               sx={{ mt: '1rem', mr: '0.5rem', color: '#f2852b', bgcolor: 'white' }}
-              onClick={handleSelectAll}
+              onClick={handleSelectAllLearningElements}
               size="medium">
               <CheckBox />
             </Fab>
-            <Fab sx={{ mt: '1rem', color: '#f2852b', bgcolor: 'white' }} onClick={handleDeselectAll} size="medium">
+            <Fab
+              sx={{ mt: '1rem', color: '#f2852b', bgcolor: 'white' }}
+              onClick={handleDeselectAllLearningElements}
+              size="medium">
               <CheckBoxOutlineBlank />
             </Fab>
           </Grid>
@@ -106,7 +83,11 @@ const CreateLearningElementTable = memo(
                           (el) => el.lms_id === lmsLearningElement.lms_id
                         )}
                         onChange={(event) =>
-                          handleCheckboxChange(lmsTopic.topic_lms_id, lmsLearningElement, event.target.checked)
+                          handleLearningElementCheckboxChange(
+                            lmsTopic.topic_lms_id,
+                            lmsLearningElement,
+                            event.target.checked
+                          )
                         }
                       />
                     }
@@ -124,5 +105,5 @@ const CreateLearningElementTable = memo(
   }
 )
 // eslint-disable-next-line immutable/no-mutation
-CreateLearningElementTable.displayName = 'TableLearningElement'
+CreateLearningElementTable.displayName = 'CreateLearningElementTable'
 export default CreateLearningElementTable

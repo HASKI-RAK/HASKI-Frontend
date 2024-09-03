@@ -1,8 +1,9 @@
-import { ReactNode, memo, useCallback, useEffect, useMemo } from 'react'
+import { ReactNode, memo, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, FormGroup, Grid, InputLabel, MenuItem, Paper, Select, Typography } from '@common/components'
 import { LearningElementWithClassification, SkeletonList } from '@components'
 import { RemoteTopic } from '@core'
+import { useCreateAlgorithmTable } from './CreateAlgorithmTable.hooks'
 
 export type CreateAlgorithmTableNameProps = {
   topicName: string
@@ -26,23 +27,13 @@ const CreateAlgorithmTable = memo(
     children
   }: CreateAlgorithmTableProps) => {
     const { t } = useTranslation()
+    const { handleAlgorithmChange } = useCreateAlgorithmTable({ selectedAlgorithms, onAlgorithmChange })
 
     const topicAlgorithmOptions = useMemo(() => {
       return t('components.AlgorithmSettingsModal.algorithms', {
         returnObjects: true
       }) as [{ name: string; description: string; key: string; disabled: boolean }]
     }, [])
-
-    const handleAlgorithmChange = useCallback(
-      (topicId: number, topicName: string, newAlgorithm: string) => {
-        const updatedAlgorithms = {
-          ...selectedAlgorithms,
-          [topicId]: [{ topicName: topicName, algorithmShortName: newAlgorithm }]
-        }
-        onAlgorithmChange(updatedAlgorithms)
-      },
-      [selectedAlgorithms, onAlgorithmChange]
-    )
 
     // Set initial algorithm
     useEffect(() => {
@@ -151,5 +142,5 @@ const CreateAlgorithmTable = memo(
   }
 )
 // eslint-disable-next-line immutable/no-mutation
-CreateAlgorithmTable.displayName = 'TableAlgorithm'
+CreateAlgorithmTable.displayName = 'CreateAlgorithmTable'
 export default CreateAlgorithmTable
