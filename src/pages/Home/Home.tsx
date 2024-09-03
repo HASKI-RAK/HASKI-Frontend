@@ -95,73 +95,71 @@ export const Home = () => {
 
   // Card containing the courses with a button to the specific course
   return (
-    <div>
-      <Grid container spacing={2} justifyContent="center">
-        <Grid item>
-          {coursesLoading ? (
-            <Card sx={commonCardStyle}>
-              <Skeleton variant="rectangular" width="100%" height={118} />
-            </Card>
-          ) : courses.length === 0 ? (
-            <Card sx={commonCardStyle}>
-              <CardContent>
-                <Typography variant="h5" align="center">
-                  {t('pages.home.noCourses')}
-                </Typography>
-              </CardContent>
-            </Card>
-          ) : (
-            courses.map((course) => {
-              return (
-                <Card key={course.id} sx={commonCardStyle}>
-                  <CardContent>
-                    <Typography variant="h5" align="center">
-                      {course.name}
-                    </Typography>
-                    <Grid container justifyContent="center">
-                      <Button
-                        id="course-button"
-                        variant="contained"
-                        color="primary"
-                        sx={commonButtonStyle}
-                        disabled={handleCourseStartDate(course.start_date)}
-                        onClick={() => {
-                          navigate('/course/' + course.id)
-                        }}>
-                        {handleCourseStartDate(course.start_date)
-                          ? t('pages.home.courseDisabled') + ' ' + dayjs(course.start_date).format('DD.MM.YYYY - HH:mm')
-                          : t('pages.home.courseButton')}
-                      </Button>
-                    </Grid>
-                  </CardContent>
-                </Card>
-              )
-            })
-          )}
-          {isCourseCreatorRole && (
-            <Card>
-              <CardContent>
-                <Grid container justifyContent="center">
-                  <Button
-                    id="create-course-button"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => setCreateCourseModalOpen(true)}
-                    sx={commonButtonStyle}>
-                    <AddCircleIcon />
-                  </Button>
-                </Grid>
-              </CardContent>
-              <CreateCourseModal
-                openCreateCourseModal={createCourseModalOpen}
-                handleCloseCreateCourseModal={handleCloseCourseModal}
-                setSuccessRemoteCourseCreated={setSuccessRemoteCourseCreated}
-                successRemoteCourseCreated={successRemoteCourseCreated}></CreateCourseModal>
-            </Card>
-          )}
-        </Grid>
+    <Grid container spacing={2} justifyContent="center">
+      <Grid item>
+        {coursesLoading ? (
+          <Card sx={commonCardStyle}>
+            <Skeleton variant="rectangular" width="100%" height={118} />
+          </Card>
+        ) : courses.length === 0 ? (
+          <Card sx={commonCardStyle}>
+            <CardContent>
+              <Typography variant="h5" align="center">
+                {t('pages.home.noCourses')}
+              </Typography>
+            </CardContent>
+          </Card>
+        ) : (
+          courses.map((course) => {
+            return (
+              <Card key={course.id} sx={commonCardStyle}>
+                <CardContent>
+                  <Typography variant="h5" align="center">
+                    {course.name}
+                  </Typography>
+                  <Grid container justifyContent="center">
+                    <Button
+                      id="course-button"
+                      variant="contained"
+                      color="primary"
+                      sx={commonButtonStyle}
+                      disabled={handleCourseStartDate(course.start_date)}
+                      onClick={() => {
+                        navigate('/course/' + course.id)
+                      }}>
+                      {handleCourseStartDate(course.start_date)
+                        ? t('pages.home.courseDisabled') + ' ' + dayjs(course.start_date).format('DD.MM.YYYY - HH:mm')
+                        : t('pages.home.courseButton')}
+                    </Button>
+                  </Grid>
+                </CardContent>
+              </Card>
+            )
+          })
+        )}
+        {isCourseCreatorRole && (
+          <Card>
+            <CardContent>
+              <Grid container justifyContent="center">
+                <Button
+                  id="create-course-button"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setCreateCourseModalOpen(true)}
+                  sx={commonButtonStyle}>
+                  <AddCircleIcon />
+                </Button>
+              </Grid>
+            </CardContent>
+            <CreateCourseModal
+              openCreateCourseModal={createCourseModalOpen}
+              handleCloseCreateCourseModal={handleCloseCourseModal}
+              setSuccessRemoteCourseCreated={setSuccessRemoteCourseCreated}
+              successRemoteCourseCreated={successRemoteCourseCreated}></CreateCourseModal>
+          </Card>
+        )}
       </Grid>
-    </div>
+    </Grid>
   )
 }
 export default Home
