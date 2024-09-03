@@ -24,18 +24,20 @@ const Course = () => {
   const { isCourseCreatorRole } = useContext(RoleContext)
   const { courseId } = useParams<{ courseId: string }>()
   const { topicProgress, isLoading, topics } = useLearningPathTopicProgress({ courseId })
+  const [createTopicModalOpen, setCreateTopicModalOpen] = useState<boolean>(false)
+  const [successTopicCreated, setSuccessTopicCreated] = useState<boolean>(false)
+
+  //Store
   const triggerLearningPathTopicReload = useStore((state) => state.triggerLearningPathTopicReload)
   const triggerLearningElementReload = useStore((state) => state.triggerLearningElementReload)
   const triggerLearningElementStatusReload = usePersistedStore((state) => state.triggerLearningPathElementStatusReload)
-
-  const [createTopicModalOpen, setCreateTopicModalOpen] = useState<boolean>(false)
-  const [successTopicCreated, setSuccessTopicCreated] = useState<boolean>(false)
 
   const handleCloseTopicModal = () => {
     triggerLearningPathTopicReload(true)
     triggerLearningElementReload(true)
     triggerLearningElementStatusReload(true)
     setCreateTopicModalOpen(false)
+    setSuccessTopicCreated(false)
   }
 
   return (
@@ -99,8 +101,8 @@ const Course = () => {
                 </Stack>
               </CardContent>
               <CreateTopicModal
-                open={createTopicModalOpen}
-                handleClose={handleCloseTopicModal}
+                openCreateTopicModal={createTopicModalOpen}
+                handleCloseCreateTopicModal={handleCloseTopicModal}
                 successTopicCreated={successTopicCreated}
                 setSuccessTopicCreated={setSuccessTopicCreated}></CreateTopicModal>
             </Card>

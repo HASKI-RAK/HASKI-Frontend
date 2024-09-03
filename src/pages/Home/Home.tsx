@@ -53,11 +53,11 @@ export const Home = () => {
             })
             .catch((error) => {
               addSnackbar({
-                message: t('error.getCourses'),
+                message: t('error.fetchCourses'),
                 severity: 'error',
                 autoHideDuration: 5000
               })
-              log.error(t('error.getCourses') + ' ' + error)
+              log.error(t('error.fetchCourses') + ' ' + error)
             })
         })
         .catch((error) => {
