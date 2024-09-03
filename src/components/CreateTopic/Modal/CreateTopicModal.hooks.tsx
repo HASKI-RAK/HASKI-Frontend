@@ -11,24 +11,24 @@ import {
   postTopic
 } from '@services'
 import { usePersistedStore } from '@store'
-import { LearningElementWithClassification } from './CreateTopicModal'
+import { RemoteLearningElementWithClassification } from './CreateTopicModal'
 
 type useCreateTopicModalProps = {
-  setIsSending: React.Dispatch<React.SetStateAction<boolean>>
+  setCreateTopicIsSending: React.Dispatch<React.SetStateAction<boolean>>
   setSuccessTopicCreated: React.Dispatch<React.SetStateAction<boolean>>
   setSelectedTopics: React.Dispatch<React.SetStateAction<RemoteTopic[]>>
   selectedLearningElements: { [p: number]: RemoteLearningElement[] }
   setSelectedLearningElements: React.Dispatch<React.SetStateAction<{ [p: number]: RemoteLearningElement[] }>>
-  selectedLearningElementsClassification: { [p: number]: LearningElementWithClassification[] }
+  selectedLearningElementsClassification: { [p: number]: RemoteLearningElementWithClassification[] }
   setSelectedLearningElementsClassification: React.Dispatch<
-    React.SetStateAction<{ [p: number]: LearningElementWithClassification[] }>
+    React.SetStateAction<{ [p: number]: RemoteLearningElementWithClassification[] }>
   >
   selectedAlgorithms: { [p: number]: CreateAlgorithmTableNameProps[] }
   setSelectedAlgorithms: React.Dispatch<React.SetStateAction<{ [p: number]: CreateAlgorithmTableNameProps[] }>>
 }
 
 export const useCreateTopicModal = ({
-  setIsSending,
+  setCreateTopicIsSending,
   setSuccessTopicCreated,
   setSelectedTopics,
   selectedLearningElements,
@@ -38,10 +38,11 @@ export const useCreateTopicModal = ({
   selectedAlgorithms,
   setSelectedAlgorithms
 }: useCreateTopicModalProps) => {
-  const { addSnackbar } = useContext(SnackbarContext)
-  const { t } = useTranslation()
-
   //Hooks
+  const { t } = useTranslation()
+  const { addSnackbar } = useContext(SnackbarContext)
+
+  //States
   const getUser = usePersistedStore((state) => state.getUser)
 
   const handleCreateTopics = (topicName: string, lmsCourseId: number, courseId: string, user: User) => {
@@ -106,7 +107,7 @@ export const useCreateTopicModal = ({
   const handleCreate = (
     topicName: string,
     lmsCourseId: number,
-    selectedLearningElementsClassification: { [key: number]: LearningElementWithClassification[] },
+    selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] },
     algorithmShortName: string,
     courseId?: string
   ) => {
@@ -116,7 +117,7 @@ export const useCreateTopicModal = ({
         handleCreateTopics(topicName, lmsCourseId, courseId, user).then((topic) => {
           const topicLmsId = topic.lms_id
           const topicId = topic.id
-          setIsSending(true)
+          setCreateTopicIsSending(true)
           Promise.all(
             selectedLearningElementsClassification[topicLmsId].map((element) =>
               handleCreateLearningElements(
@@ -155,7 +156,7 @@ export const useCreateTopicModal = ({
                       })
                       log.info(t('appGlobal.dataSendSuccessful'))
                       setSuccessTopicCreated(true)
-                      setIsSending(false)
+                      setCreateTopicIsSending(false)
                     } else {
                       addSnackbar({
                         message: t('error.postCalculateLearningPathForAllStudents'),
@@ -164,7 +165,7 @@ export const useCreateTopicModal = ({
                       })
                       log.error(t('error.postCalculateLearningPathForAllStudents'))
                       setSuccessTopicCreated(false)
-                      setIsSending(false)
+                      setCreateTopicIsSending(false)
                     }
                   })
                 })
@@ -233,7 +234,7 @@ export const useCreateTopicModal = ({
   }
 
   const handleLearningElementClassification = (learningElementClassifications: {
-    [key: number]: LearningElementWithClassification[]
+    [key: number]: RemoteLearningElementWithClassification[]
   }) => {
     setSelectedLearningElementsClassification(learningElementClassifications)
   }

@@ -61,7 +61,7 @@ const CreateAlgorithmTable = memo(
             <Grid container alignItems="flex-start">
               <Grid item xs={4}>
                 <Grid container direction="column">
-                  <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
+                  <Box bgcolor={(theme) => theme.palette.info.light} borderRadius={3}>
                     <Grid container justifyContent="center">
                       <InputLabel
                         sx={{

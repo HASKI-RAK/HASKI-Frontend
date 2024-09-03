@@ -46,13 +46,13 @@ const CreateLearningElementTable = memo(
           </Grid>
           <Grid item xs={1.75}>
             <Fab
-              sx={{ mt: '1rem', mr: '0.5rem', color: '#f2852b', bgcolor: 'white' }}
+              sx={{ mt: '1rem', mr: '0.5rem', color: (theme) => theme.palette.primary.main, bgcolor: 'white' }}
               onClick={handleSelectAllLearningElements}
               size="medium">
               <CheckBox />
             </Fab>
             <Fab
-              sx={{ mt: '1rem', color: '#f2852b', bgcolor: 'white' }}
+              sx={{ mt: '1rem', color: (theme) => theme.palette.primary.main, bgcolor: 'white' }}
               onClick={handleDeselectAllLearningElements}
               size="medium">
               <CheckBoxOutlineBlank />
@@ -67,7 +67,7 @@ const CreateLearningElementTable = memo(
             direction="column"
             key={'Create Topic - Learning Element: ' + lmsTopic.topic_lms_id}>
             <Paper sx={{ padding: '1rem', width: '95%' }}>
-              <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
+              <Box bgcolor={(theme) => theme.palette.info.light} borderRadius={3}>
                 <Grid container justifyContent="center" alignItems="center">
                   <Typography variant="h6" gutterBottom>
                     {lmsTopic.topic_lms_name}

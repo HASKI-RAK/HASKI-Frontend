@@ -97,7 +97,7 @@ const CreateLearningElementClassificationTable = memo(
             direction="column"
             key={'Create Topic - Learning Element Classification: ' + lmsTopic.topic_lms_id}>
             <Paper sx={{ padding: '1rem', width: '95%' }}>
-              <Box bgcolor={'rgba(255,168,45,0.34)'} borderRadius={3}>
+              <Box bgcolor={(theme) => theme.palette.info.light} borderRadius={3}>
                 <Grid item container justifyContent="center" alignItems="center">
                   <Typography variant="h6" gutterBottom>
                     {lmsTopic.topic_lms_name}

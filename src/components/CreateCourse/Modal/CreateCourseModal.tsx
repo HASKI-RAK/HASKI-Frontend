@@ -159,7 +159,7 @@ const CreateCourseModal = memo(
                     sx={{
                       m: 2,
                       '&.Mui-disabled': {
-                        border: (theme) => theme.palette.primary.dark
+                        border: (theme) => theme.palette.primary.main
                       }
                     }}
                     onClick={() => handleCreateCourse()}>

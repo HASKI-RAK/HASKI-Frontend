@@ -24,7 +24,7 @@ type CreateTopicModalProps = {
   handleCloseCreateTopicModal: () => void
 }
 
-export type LearningElementWithClassification = RemoteLearningElement & {
+export type RemoteLearningElementWithClassification = RemoteLearningElement & {
   classification: string
 }
 
@@ -35,30 +35,22 @@ const CreateTopicModal = memo(
     setSuccessTopicCreated,
     handleCloseCreateTopicModal
   }: CreateTopicModalProps) => {
-    const { t } = useTranslation()
-
     //Hooks
-    const [remoteTopics, setRemoteTopics] = useState<RemoteTopic[]>([])
+    const { t } = useTranslation()
     const { courseId } = useParams<{ courseId: string }>()
-    const [isSending, setIsSending] = useState<boolean>(false)
     const { addSnackbar } = useContext(SnackbarContext)
+    const [remoteTopics, setRemoteTopics] = useState<RemoteTopic[]>([])
+    const [isSending, setIsSending] = useState<boolean>(false)
     const [alreadyCreatedTopics, setAlreadyCreatedTopics] = useState<LearningPathTopic>()
     const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>([])
     const [selectedLearningElements, setSelectedLearningElements] = useState<{
       [key: number]: RemoteLearningElement[]
     }>({})
     const [selectedLearningElementsClassification, setSelectedLearningElementsClassification] = useState<{
-      [key: number]: LearningElementWithClassification[]
+      [key: number]: RemoteLearningElementWithClassification[]
     }>({})
     const [selectedAlgorithms, setSelectedAlgorithms] = useState<{ [key: number]: CreateAlgorithmTableNameProps[] }>({})
     const [activeStep, setActiveStep] = useState<number>(0)
-    const steps = [
-      t('appGlobal.topics'),
-      t('appGlobal.learningElements'),
-      t('appGlobal.classifications'),
-      t('appGlobal.algorithms')
-    ]
-
     const {
       handleCreate,
       handleTopicChange,
@@ -66,7 +58,7 @@ const CreateTopicModal = memo(
       handleLearningElementClassification,
       handleAlgorithmChange
     } = useCreateTopicModal({
-      setIsSending,
+      setCreateTopicIsSending: setIsSending,
       setSuccessTopicCreated,
       setSelectedTopics,
       selectedLearningElements,
@@ -79,8 +71,16 @@ const CreateTopicModal = memo(
 
     //Store
     const getUser = usePersistedStore((state) => state.getUser)
-    const getRemoteTopics = useStore((state) => state.getRemoteTopic)
     const getTopics = useStore((state) => state.getLearningPathTopic)
+    const getRemoteTopics = useStore((state) => state.getRemoteTopic)
+
+    //Constants
+    const createTopicModalStepperSteps = [
+      t('appGlobal.topics'),
+      t('appGlobal.learningElements'),
+      t('appGlobal.classifications'),
+      t('appGlobal.algorithms')
+    ]
 
     useEffect(() => {
       getUser()
@@ -121,6 +121,7 @@ const CreateTopicModal = memo(
           log.error(t('error.getUser') + ' ' + error)
         })
 
+      //Sort topics after their creation (lower id is created before a higher id in LMS)
       setSelectedTopics((prevSelectedTopics) => [...prevSelectedTopics].sort((a, b) => a.topic_lms_id - b.topic_lms_id))
     }, [activeStep, getTopics, getUser, getRemoteTopics])
 
@@ -152,7 +153,7 @@ const CreateTopicModal = memo(
               <Close />
             </Fab>
             <Stepper activeStep={activeStep} sx={{ pt: '1rem' }}>
-              {steps.map((label, index) => (
+              {createTopicModalStepperSteps.map((label, index) => (
                 <Step key={label}>
                   <StepButton
                     color="inherit"
