@@ -52,7 +52,13 @@ const CreateTopicModal = memo(
     }>({})
     const [selectedAlgorithms, setSelectedAlgorithms] = useState<{ [key: number]: CreateAlgorithmTableNameProps[] }>({})
     const [activeStep, setActiveStep] = useState<number>(0)
-    const steps = ['Topics', 'Learning Elements', 'Classifications', 'Algorithms']
+    const steps = [
+      t('appGlobal.topics'),
+      t('appGlobal.learningElements'),
+      t('appGlobal.classifications'),
+      t('appGlobal.algorithms')
+    ]
+
     const {
       handleCreate,
       handleTopicChange,

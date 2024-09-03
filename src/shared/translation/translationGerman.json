@@ -14,6 +14,9 @@
   "appGlobal.othRegensburg": "OTH Regensburg",
   "appGlobal.send": "Senden",
   "appGlobal.topics": "Themenbereiche",
+  "appGlobal.learningElements": "Lernelemente",
+  "appGlobal.classifications": "Klassifikationen",
+  "appGlobal.algorithms": "Algorithmen",
   "appGlobal.universityKempten": "Hochschule Kempten",
   "components.AlgorithmSettingsModal.algorithms": [
     {
