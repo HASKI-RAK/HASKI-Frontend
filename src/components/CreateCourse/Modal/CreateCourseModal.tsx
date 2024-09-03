@@ -23,14 +23,15 @@ const CreateCourseModal = memo(
     setSuccessRemoteCourseCreated,
     handleCloseCreateCourseModal
   }: CreateCourseModalProps) => {
+    //Hooks
     const { t } = useTranslation()
-
     const [selectedRemoteCourse, setSelectedRemoteCourse] = useState<RemoteCourse>()
     const [activeStep, setActiveStep] = useState<number>(0)
     const [courseStartDateValue, setCourseStartDateValue] = useState<Dayjs | null>(dayjs(new Date()))
     const [user, setUser] = useState<User>()
     const [isSending, setIsSending] = useState<boolean>(false)
 
+    //Stores
     const getUser = usePersistedStore((state) => state.getUser)
     const { addSnackbar } = useContext(SnackbarContext)
 

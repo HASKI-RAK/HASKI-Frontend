@@ -21,6 +21,7 @@ const CreateCourseDetailsTable = ({
   datePickerValue,
   setDatePickerValue
 }: CreateCourseDetailsTableProps) => {
+  //Hooks
   const { t } = useTranslation()
 
   return (

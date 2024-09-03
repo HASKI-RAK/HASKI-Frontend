@@ -22,13 +22,14 @@ type CreateCourseTableProps = {
 }
 
 const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: CreateCourseTableProps) => {
+  //Hooks
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
-
   const [remoteLmsCourses, setRemoteLmsCourses] = useState<RemoteCourse[]>([])
   const [alreadyCreatedCourses, setAlreadyCreatedCourses] = useState<RemoteCourse[]>([])
   const [availableCourses, setAvailableCourses] = useState<RemoteCourse[]>([])
 
+  //Stores
   const getCourses = useStore((state) => state.getCourses)
   const getUser = usePersistedStore((state) => state.getUser)
 
@@ -79,11 +80,9 @@ const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: CreateCo
       })
   }, [])
 
-  const handleChange = (_event: React.MouseEvent<HTMLElement>, nextView: string) => {
+  const handleSelectedCourseChange = (_event: React.MouseEvent<HTMLElement>, nextView: string) => {
     const selectedCourse = remoteLmsCourses.find((course) => course.fullname === nextView)
-    if (selectedCourse) {
-      onCourseSelect(selectedCourse)
-    }
+    selectedCourse && onCourseSelect(selectedCourse)
   }
 
   //Early return
@@ -114,7 +113,7 @@ const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: CreateCo
             orientation="vertical"
             value={selectedCourseName}
             exclusive
-            onChange={handleChange}
+            onChange={handleSelectedCourseChange}
             sx={{
               '& .MuiToggleButtonGroup-grouped:not(:first-of-type)': {
                 borderColor: (theme) => theme.palette.common.black
@@ -158,7 +157,7 @@ const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: CreateCo
           <ToggleButtonGroup
             orientation="vertical"
             value={selectedCourseName}
-            onChange={handleChange}
+            onChange={handleSelectedCourseChange}
             sx={{
               '& .MuiToggleButtonGroup-grouped:not(:first-of-type)': {
                 //is the exact same color as disabled togglebutton
