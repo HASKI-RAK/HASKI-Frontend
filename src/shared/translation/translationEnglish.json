@@ -1233,7 +1233,7 @@
   "components.TableListK.score": "Score",
   "components.TableListK.time": "Time",
   "components.TableListKQuestions.introduction": "Following this you will be asked questions about what learning strategies you use. You will find a list of different learning activities. Please indicate how frequently each activity occurs for you. You can rate your answers from very rarely (1) to very often (5). The questions presented are based on the LIST-K (Klingsieck, 2019), which is a shortened version of the LIST (Wild & Schiefele, 1994).",
-  "components.TableRemoteTopics": "Available topics",
+  "components.TableRemoteTopics.title": "Available topics",
   "components.TableTopics": "Already created topics",
   "components.CreateTopicModal.createTopics": "Create Topics",
   "error": "Error",

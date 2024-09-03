@@ -4,7 +4,7 @@ import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '
 import { SkeletonList } from '@components'
 import { RemoteTopic } from '@core'
 
-type TableTopicProps = {
+type CreateRemoteTopicsTableProps = {
   onTopicChange: (selectedTopics: RemoteTopic[]) => void
   selectedTopicsModal: RemoteTopic[]
   remoteTopics: RemoteTopic[]
@@ -12,7 +12,7 @@ type TableTopicProps = {
 }
 
 const CreateRemoteTopicsTable = memo(
-  ({ onTopicChange, selectedTopicsModal, remoteTopics, children }: TableTopicProps) => {
+  ({ onTopicChange, selectedTopicsModal, remoteTopics, children }: CreateRemoteTopicsTableProps) => {
     const { t } = useTranslation()
     const handleTopicChange = useCallback(
       (topic: RemoteTopic, checked: boolean) => {
@@ -28,7 +28,7 @@ const CreateRemoteTopicsTable = memo(
       <Grid container direction="column" alignItems="center" spacing={3}>
         <Grid item>
           <Typography variant="h6" sx={{ mt: '1rem' }}>
-            {t('components.TableRemoteTopics')}
+            {t('components.TableRemoteTopics.title')}
           </Typography>
         </Grid>
         <Grid item container alignItems="stretch" direction="row">
@@ -46,7 +46,7 @@ const CreateRemoteTopicsTable = memo(
                         <Checkbox
                           checked={selectedTopicsModal.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
                           onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
-                          id={'topic-modal-available-topics-checkbox-' + LmsTopic.topic_lms_name}
+                          id={'create-topic-modal-available-topics-checkbox-' + LmsTopic.topic_lms_name}
                         />
                       }
                       label={LmsTopic.topic_lms_name}
@@ -64,5 +64,5 @@ const CreateRemoteTopicsTable = memo(
   }
 )
 // eslint-disable-next-line immutable/no-mutation
-CreateRemoteTopicsTable.displayName = 'TableRemoteTopics'
+CreateRemoteTopicsTable.displayName = 'CreateRemoteTopicsTable'
 export default CreateRemoteTopicsTable
