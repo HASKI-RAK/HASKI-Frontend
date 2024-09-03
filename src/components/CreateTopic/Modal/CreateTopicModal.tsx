@@ -142,7 +142,7 @@ const CreateTopicModal = memo(
             }}>
             <Fab
               color="primary"
-              id={'topic-modal-close-button'}
+              id={'create-topic-modal-close-button'}
               onClick={handleCloseCreateTopicModal}
               sx={{
                 position: 'sticky',
@@ -153,10 +153,10 @@ const CreateTopicModal = memo(
             </Fab>
             <Stepper activeStep={activeStep} sx={{ pt: '1rem' }}>
               {steps.map((label, index) => (
-                <Step key={label} data-testid={'StepperButton'}>
+                <Step key={label}>
                   <StepButton
                     color="inherit"
-                    id={'topic-modal-stepper'}
+                    id={'create-topic-modal-stepper'}
                     onClick={() => {
                       setActiveStep(index)
                     }}>
@@ -174,7 +174,7 @@ const CreateTopicModal = memo(
                   <Box sx={{ padding: '1rem', width: '95%' }}>
                     <Grid container justifyContent="flex-end" alignItems="flex-end">
                       <Button
-                        id="topic-modal-available-topics-next-button"
+                        id="create-topic-modal-available-topics-next-button"
                         variant="contained"
                         color="primary"
                         disabled={selectedTopics.length === 0}
@@ -200,7 +200,7 @@ const CreateTopicModal = memo(
                   <Box sx={{ padding: '1rem', width: '95%' }}>
                     <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
                       <Button
-                        id="topic-modal-available-learning-elements-next-button"
+                        id="create-topic-modal-available-learning-elements-next-button"
                         variant="contained"
                         color="primary"
                         sx={{ ml: 1 }}
@@ -208,7 +208,7 @@ const CreateTopicModal = memo(
                         {t('appGlobal.back')}
                       </Button>
                       <Button
-                        id="topic-modal-available-learning-elements-back-button"
+                        id="create-topic-modal-available-learning-elements-back-button"
                         variant="contained"
                         color="primary"
                         disabled={
@@ -236,7 +236,7 @@ const CreateTopicModal = memo(
                   <Box sx={{ padding: '1rem', width: '95%' }}>
                     <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
                       <Button
-                        id="topic-modal-available-learning-element-classification-back-button"
+                        id="create-topic-modal-available-learning-element-classification-back-button"
                         variant="contained"
                         color="primary"
                         sx={{ ml: 1 }}
@@ -244,7 +244,7 @@ const CreateTopicModal = memo(
                         {t('appGlobal.back')}
                       </Button>
                       <Button
-                        id="topic-modal-available-learning-element-classification-next-button"
+                        id="create-topic-modal-available-learning-element-classification-next-button"
                         variant="contained"
                         color="primary"
                         disabled={
@@ -274,7 +274,7 @@ const CreateTopicModal = memo(
                   <Box sx={{ padding: '1rem', width: '95%' }}>
                     <Grid container item justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
                       <Button
-                        id="topic-modal-available-topic-algorithms-back-button"
+                        id="create-topic-modal-available-topic-algorithms-back-button"
                         variant="contained"
                         color="primary"
                         sx={{ ml: 1 }}
@@ -282,7 +282,7 @@ const CreateTopicModal = memo(
                         {t('appGlobal.back')}
                       </Button>
                       <Button
-                        id="topic-modal-create-topics-button"
+                        id="create-topic-modal-create-topics-button"
                         variant="contained"
                         color="primary"
                         disabled={
@@ -308,7 +308,7 @@ const CreateTopicModal = memo(
                             )
                           })
                         }>
-                        {isSending ? <CircularProgress size={24} /> : t('components.TopicModal.createTopics')}
+                        {isSending ? <CircularProgress size={24} /> : t('components.CreateTopicModal.createTopics')}
                       </Button>
                     </Grid>
                   </Box>
@@ -322,5 +322,5 @@ const CreateTopicModal = memo(
   }
 )
 // eslint-disable-next-line immutable/no-mutation
-CreateTopicModal.displayName = 'TopicModal'
+CreateTopicModal.displayName = 'CreateTopicModal'
 export default CreateTopicModal

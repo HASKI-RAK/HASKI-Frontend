@@ -1235,7 +1235,7 @@
   "components.TableListKQuestions.introduction": "Im Folgenden werden Ihnen Fragen darüber gestellt welche Lernstrategien Sie anwenden. Sie finden hier eine Liste verschiedener Lerntätigkeiten. Geben Sie bitte für jede Tätigkeit an, wie häufig diese bei Ihnen vorkommt. Sie können Ihre Antworten von sehr selten (1) bis sehr oft (5) abstufen. Die gestellten Fragen basieren auf dem LIST-K (Klingsieck, 2019), welcher eine gekürzte Form des LIST (Wild & Schiefele, 1994) darstellt.",
   "components.TableRemoteTopics": "Verfügbare Themenbereiche",
   "components.TableTopics": "Bereits erstellte Themenbereiche",
-  "components.TopicModal.createTopics": "Themenbereiche erstellen",
+  "components.CreateTopicModal.createTopics": "Themenbereiche erstellen",
   "error": "Fehler",
   "error.fetchCourses": "Beim Abrufen der Kursdaten ist ein Fehler aufgetreten.",
   "error.fetchILS": "Beim Abrufen der ILS-Fragebogendaten ist ein Fehler aufgetreten.",
