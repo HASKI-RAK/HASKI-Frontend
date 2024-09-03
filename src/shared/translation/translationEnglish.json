@@ -107,12 +107,64 @@
       "label": "other"
     }
   ],
+  "components.CreateAlgorithmTable.missingClassification": "This topic will not be created. Please select learning element classifications to enable algorithm selection.",
   "components.CreateCourseDetailsTable.courseName": "Course name",
   "components.CreateCourseDetailsTable.startDate": "Start date",
   "components.CreateCourseModal.createCourse": "Create Course",
   "components.CreateCourseTable.alreadyCreatedCourses": "Already created courses",
   "components.CreateCourseTable.lmsCourses": "Courses from the LMS",
   "components.CreateCourseTable.noCoursesFound": "No courses found...",
+  "components.CreateLearningElementClassificationTable.classifications": [
+    {
+      "name": "Select Classification",
+      "key": "noKey",
+      "disabled": true
+    },
+    {
+      "name": "KÜ - Overview",
+      "key": "KÜ",
+      "disabled": false
+    },
+    {
+      "name": "EK - Explanation",
+      "key": "EK",
+      "disabled": false
+    },
+    {
+      "name": "AN - Animation",
+      "key": "AN",
+      "disabled": false
+    },
+    {
+      "name": "BE - Example",
+      "key": "BE",
+      "disabled": false
+    },
+    {
+      "name": "ÜB - Exercise",
+      "key": "ÜB",
+      "disabled": false
+    },
+    {
+      "name": "SE - Self-Assessment Test",
+      "key": "SE",
+      "disabled": false
+    },
+    {
+      "name": "ZL - Additional Literature",
+      "key": "ZL",
+      "disabled": false
+    },
+    {
+      "name": "ZF - Summary",
+      "key": "ZF",
+      "disabled": false
+    }
+  ],
+  "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Set learning element classification",
+  "components.CreateLearningElementTable.selectLearningElements": "Select learning elements",
+  "components.CreateTopicModal.createTopics": "Create Topics",
+  "components.ExistingTopicsTable.title": "Already created topics",
   "components.Footer.project": "Project",
   "components.FurtherInfoMenu.title": "Further information",
   "components.ListKQuestions": [
@@ -676,7 +728,6 @@
   "components.ResultDescriptionListK.time && literatureResearch below3-Title": "Time and literature research have a value below 3",
   "components.ResultDescriptionListK.time below3-Description": "In terms of internal resource management strategies, it is clear to see that you are currently not taking enough time for your learning. It would probably have a positive effect if you tried to create clear learning periods for yourself in order to make your learning more effective.",
   "components.ResultDescriptionListK.time below3-Title": "Time has a value below 3",
-  "components.CreateAlgorithmTable.missingClassification": "This topic will not be created. Please select learning element classifications to enable algorithm selection.",
   "components.TableILS.active": "Active",
   "components.TableILS.balanced": "balanced",
   "components.TableILS.dimension": "Dimension",
@@ -1164,55 +1215,6 @@
     ]
   ],
   "components.TableILSQuestions.introduction": "Following this you will be asked questions that pertain to your style of information processing and organization, perception, and preferred presentation.  For each question, pick one of the two options that fits you best. If both or neither of the response options apply to you, then choose the one that tends to apply more often. These questions are based on the Index of Learning Styles (Felder & Solomon 1991).",
-  "components.CreateLearningElementClassificationTable.classifications": [
-    {
-      "name": "Select Classification",
-      "key": "noKey",
-      "disabled": true
-    },
-    {
-      "name": "KÜ - Overview",
-      "key": "KÜ",
-      "disabled": false
-    },
-    {
-      "name": "EK - Explanation",
-      "key": "EK",
-      "disabled": false
-    },
-    {
-      "name": "AN - Animation",
-      "key": "AN",
-      "disabled": false
-    },
-    {
-      "name": "BE - Example",
-      "key": "BE",
-      "disabled": false
-    },
-    {
-      "name": "ÜB - Exercise",
-      "key": "ÜB",
-      "disabled": false
-    },
-    {
-      "name": "SE - Self-Assessment Test",
-      "key": "SE",
-      "disabled": false
-    },
-    {
-      "name": "ZL - Additional Literature",
-      "key": "ZL",
-      "disabled": false
-    },
-    {
-      "name": "ZF - Summary",
-      "key": "ZF",
-      "disabled": false
-    }
-  ],
-  "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Set learning element classification",
-  "components.CreateLearningElementTable.selectLearningElements": "Select learning elements",
   "components.TableListK.attention": "Attention",
   "components.TableListK.cognitiveStrategies": "Cognitive strategies",
   "components.TableListK.control": "Control",
@@ -1234,8 +1236,6 @@
   "components.TableListK.time": "Time",
   "components.TableListKQuestions.introduction": "Following this you will be asked questions about what learning strategies you use. You will find a list of different learning activities. Please indicate how frequently each activity occurs for you. You can rate your answers from very rarely (1) to very often (5). The questions presented are based on the LIST-K (Klingsieck, 2019), which is a shortened version of the LIST (Wild & Schiefele, 1994).",
   "components.TableRemoteTopics.title": "Available topics",
-  "components.ExistingTopicsTable.title": "Already created topics",
-  "components.CreateTopicModal.createTopics": "Create Topics",
   "error": "Error",
   "error.fetchCourses": "An error occurred while fetching the courses data.",
   "error.fetchILS": "An error occurred while fetching the ILS questionnaire data.",
