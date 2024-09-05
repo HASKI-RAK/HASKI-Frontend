@@ -53,3 +53,4 @@ export { default as TopicCard } from './TopicCard/TopicCard'
 
 export * from './GlobalNav'
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure
+export * from './Dashboards'

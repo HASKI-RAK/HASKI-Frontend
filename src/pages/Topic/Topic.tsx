@@ -193,7 +193,14 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           </Panel>
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
         </ReactFlow>
-        <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
+        <IFrameModal
+          url={url}
+          title={title}
+          isOpen={isOpen}
+          onClose={getHandleClose}
+          key={url}
+          learningElementId={lmsId}
+        />
       </Grid>
     </Grid>
   ) : (

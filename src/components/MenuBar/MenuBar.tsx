@@ -31,6 +31,7 @@ import {
   LanguageMenu,
   QuestionnaireQuestionsModal,
   QuestionnaireResultsModal,
+  StatisticsMenu,
   TableILSQuestions,
   TableListKQuestions
 } from '@components'
@@ -163,6 +164,7 @@ const MenuBar = () => {
               HASKI
             </TextWrapper>
             <CourseMenu />
+            <StatisticsMenu />
             <FurtherInfoMenu />
           </Box>
           {/** Search bar */}

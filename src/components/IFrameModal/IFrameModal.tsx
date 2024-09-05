@@ -1,6 +1,10 @@
 import { memo } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
+import { User } from '@core'
+import { postCalculateRating } from '@services'
+import { usePersistedStore } from '@store'
 
 const style_box = {
   position: 'absolute',
@@ -20,6 +24,7 @@ type IFrameModalProps = {
   url: string
   title: string
   isOpen: boolean
+  learningElementId?: number
   onClose: () => void
 }
 
@@ -35,6 +40,17 @@ type IFrameModalProps = {
  * @category Components
  */
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
+  const getUser = usePersistedStore((state) => state.getUser)
+  const { courseId, topicId } = useParams()
+
+  const handleClose = () => {
+    getUser().then((user: User) => {
+      postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId).then((value) => {}) // TODO catch
+    }) // TODO catch
+
+    props.onClose()
+  }
+
   return (
     <Modal id="iframe-modal" open={props.isOpen} onClose={props.onClose} data-testid={'IFrameModal'}>
       <Box sx={style_box}>
@@ -42,7 +58,7 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
           id="iframe-modal-close-button"
           color="primary"
           data-testid={'IFrameModal-Close-Button'}
-          onClick={() => props.onClose()}
+          onClick={handleClose}
           style={{
             position: 'absolute',
             top: '2%',
