@@ -1,12 +1,12 @@
 type LearningElementRating = {
-  value: number
-  deviation: number
+  learning_element_id: number
+  topic_id: number
+  rating_value: number
+  rating_deviation: number
   timestamp: Date
 }
 
-type LearningElementRatingResponse = {
-  learningElementRatings: LearningElementRating[]
-}
+type LearningElementRatingResponse = LearningElementRating[]
 
 type LearningElementRatingReturn = (
   learningElementId?: number,
