@@ -1,15 +1,22 @@
 import React, {createContext, useContext, useState, ReactNode , FC} from "react"
-import {HaskiTheme, DarkTheme, Theme} from '@common/utils'
+import {HaskiTheme, DarkTheme, AltTheme} from '@common/utils'
 import {ThemeProvider} from "@common/theme";
 
 import {postUserSettings} from "../Theme/postUserSettings";
 import {usePersistedStore} from "@store";
 
 interface ThemeContextType {
-    theme: typeof Theme;
+    theme: typeof HaskiTheme;
     loadTheme: (themeName: string) => void;
     updateTheme: (themeName: string) => void;
 }
+
+/** ThemeContext provides access to a selected theme for its children
+ *
+ * @remarks
+ * Rolled out in {@link pages.App | App} for app wide access
+ * Posts preferred theme to DB and local storage on confirmation
+ */
 
 const ThemeContext = createContext<ThemeContextType|undefined>(undefined)
 
@@ -24,8 +31,6 @@ export const useThemeContext = (): ThemeContextType => {
 interface ThemeContextProviderProps {
     children: ReactNode;
 }
-
-
 
 const ThemeContextProvider: FC<ThemeContextProviderProps> = ({ children }) => {
 
@@ -43,7 +48,22 @@ const ThemeContextProvider: FC<ThemeContextProviderProps> = ({ children }) => {
         setIsUnset(false)
     }
 
+    //Sets rolled out theme
+    const loadTheme = (themeName: string) => {
+        switch (themeName) {
+            case 'AltTheme':
+                setTheme(AltTheme);
+                break;
+            case 'DarkTheme':
+                setTheme(DarkTheme);
+                break;
+            default:
+                setTheme(HaskiTheme);
+                break;
+        }
+    }
 
+    //sets rolled out theme and posts it to DB and local storage
     const updateTheme = (themeName: string) => {
 
         loadTheme(themeName)
@@ -54,19 +74,6 @@ const ThemeContextProvider: FC<ThemeContextProviderProps> = ({ children }) => {
                 updateUser( user.settings.user_id, user.lms_user_id, themeName )
             }
         })
-    }
-    const loadTheme = (themeName: string) => {
-        switch (themeName) {
-            case 'light':
-                setTheme(Theme);
-                break;
-            case 'dark':
-                setTheme(DarkTheme);
-                break;
-            default:
-                setTheme(HaskiTheme);
-                break;
-        }
     }
 
     return (

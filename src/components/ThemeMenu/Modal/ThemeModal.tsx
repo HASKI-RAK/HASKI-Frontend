@@ -1,40 +1,64 @@
-import React, {FC, memo, useState} from 'react'
-import { Box, Fab, Modal, Button, Stack, Divider } from '@common/components'
-import {Close, Check, ArrowForward, ArrowBack} from '@common/icons'
-import {Theme, HaskiTheme, DarkTheme} from "@common/utils";
-import {ThemePresentation, AboutUs, PrivacyPolicy} from "@pages";
-import { ThemeProvider } from "@mui/material";
+import React, {memo, useState, useEffect} from 'react'
+import {Box, Fab, Modal, Divider, Grid} from '@common/components'
+import {Close, Check, ArrowForward, ArrowBack, Brush, DarkMode, LightMode} from '@common/icons'
+import {HaskiTheme, DarkTheme, AltTheme} from "@common/utils";
+import {ThemePresentation, AboutUs, PrivacyPolicy, Course, Topic, Home} from "@pages";
+import {
+    ThemeProvider,
+    useTheme,
+    Radio,
+    RadioGroup,
+    FormLabel,
+    FormControl,
+    FormControlLabel,
+    Typography,
+    useMediaQuery
+} from "@mui/material";
 import {useThemeContext} from "../../../services/ThemeContext/ThemeContext";
-import {Theme as MuiThemeType} from '@mui/material/styles'
+import {BreadcrumbsContainer, Footer, MenuBar, OpenQuestionnaire, PrivacyModal} from "../../index";
+import {useTranslation} from "react-i18next";
+import {useAuthProvider} from "../../../services/AuthProvider/AuthProvider.hooks";
 
 const styleBox = {
     position: 'absolute',
-    left: '12%',
-    right: '12%',
+    left: '6%',
+    right: '6%',
     top: '10%',
-    height: '60%',
-    overflow: 'auto',
+    height: '77%',
     maxHeight: '83%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 1,
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: {xs: 'column', lg: 'row'},
 }
 
 const leftColumnStyle = {
     flex: '1',
-    display: 'flex',
+    top: '0%',
     alignItems: 'flex-start',
-    paddingRight: '2px', // Optional padding for better spacing
 };
 
+const leftColumnInner = {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+}
 
-const rightColumnStyleComponent: React.CSSProperties = {
-    flex: '3',
-    display: 'flex',
+const rightColumnStyleComponent = {
+    flex: '4',
+    position: 'relative',
     alignItems: 'flex-start',
+    overflow: 'auto',
+    marginTop: '3%',
+}
+
+const scaledPreview = {
+    transform: 'scale(0.8)',
+    transformOrigin: 'top center',
+    pointerEvents: 'none',
 }
 
 type ThemeModalProps = {
@@ -42,143 +66,180 @@ type ThemeModalProps = {
     handleClose: (event: object, reason: string) => void
 }
 
-interface PagePreviewProps {
-    themeProp: MuiThemeType
-}
+/**
+ * ThemeModal provides a modal to allow changing the application's theme
+ *
+ * Leveraging the ThemeContext to apply the theme changes across the application.
+ * User selection is dispatched to ThemeContext, which handles the theme update and storing.
+ *
+ * @returns A modal that allows the choice of a theme and renders a preview of different app pages based on the selection
+ * @category Components
+ */
 
+const ThemeModal = ({ open = false, handleClose}: ThemeModalProps) => {
 
-const PagePreview: FC<PagePreviewProps> = ({themeProp}) => {
+    const { t } = useTranslation()
 
+    //gets theme from user and provides string
+    const activeTheme = useTheme()
+    const activeThemeString = activeTheme === DarkTheme ? 'DarkTheme':
+        activeTheme === AltTheme ? 'AltTheme':
+            'HaskiTheme';
+
+    //presets first selection on currently active theme
+    const [selectedTheme, setSelectedTheme] = useState(activeTheme)
+    const [selectedThemeString, setSelectedThemeString] = useState(activeThemeString)
+
+    const {updateTheme} = useThemeContext()
+    const {isAuth} = useAuthProvider()
+    const isSmallScreen = useMediaQuery(activeTheme.breakpoints.down('lg'));
+
+    //handles the selection of a radio button
+    const handleThemeModalPreviewChange= (themeName: string) => {
+        setSelectedTheme(themeName === 'DarkTheme'? DarkTheme :
+            themeName ===  'AltTheme'? AltTheme :
+                HaskiTheme
+        );
+    }
+
+    //Will preset the user stored theme as the one shown in preview and selected on user auth
+    useEffect(() => {
+        setSelectedTheme(activeTheme)
+        setSelectedThemeString(activeThemeString)
+    }, [ isAuth]);
+
+    //PreviewPageChangerLogic
     const [pageIndex, setPageIndex] = useState(0)
-
     const pages = [
         <ThemePresentation key="theme"/>,
         <AboutUs key="about"/>,
-        <PrivacyPolicy key="privacy"/>]
+        <PrivacyPolicy key="privacy"/>,
+        <Course key="course"/>,
+        <Topic key="topic"/>,
+        <Home key=""/>
+    ]
+
+    //will iterate through the pages on use of arrow buttons
     const changePage = (direction : number) => {
         setPageIndex((prevIndex) =>
             (prevIndex + direction + pages.length) % pages.length)
     }
 
     return (
-        <div>
-            <nav>
-                <Fab
-                    id="switch-page-right-theme-button"
-                    color="primary"
-                    data-testid={'ThemeModal-Right-Button'}
-                    onClick={() => changePage(1)}
-                    style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '95.5%'
-                    }}>
-                    <ArrowForward />
-                </Fab>
-                <Fab
-                    id="switch-page-left-theme-button"
-                    color="primary"
-                    data-testid={'ThemeModal-Left-Button'}
-                    onClick={() => changePage(-1)}
-                    style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '26.5%'
-                    }}>
-                    <ArrowBack />
-                </Fab>
-            </nav>
-            <ThemeProvider theme={themeProp}>
-                <div style={{ pointerEvents: 'none' }}>
-                    {pages[pageIndex]}
-                </div>
-            </ThemeProvider>
-        </div>
-    )
-}
-
-const ThemeModal = ({ open = false, handleClose}: ThemeModalProps) => {
-
-    //const [selectedPage, setSelectedPage] = useState<React.ReactNode>(<ThemePresentation />);
-    const [selectedTheme, setSelectedTheme] = useState(Theme);
-    const [selectedThemeString, setSelectedThemeString] = useState('theme')
-    const {updateTheme} = useThemeContext()
-
-    const ButtonClickPlaceholder = (themeName: string) => {
-        setSelectedThemeString(themeName)
-        switch (themeName) {
-            case 'light':
-                setSelectedTheme(Theme);
-                break;
-            case 'dark':
-                setSelectedTheme(DarkTheme);
-                break;
-            default:
-                setSelectedTheme(HaskiTheme);
-                break;
-        }
-    }
-
-    return (
-        <Modal data-testid={'Questions Modal'} open={open} onClose={handleClose}>
+        <Modal data-testid={'Theme Modal'} open={open} onClose={handleClose}>
             <Box sx={styleBox}>
-                <Fab
-                    id="close-theme-button"
-                    color="primary"
-                    data-testid={'ThemeModal-Close-Button'}
-                    onClick={() => handleClose({} as object, 'backdropClick')}
-                    style={{
-                        position: 'absolute',
-                        top: '1%',
-                        left: '95.5%'
-                    }}>
-                    <Close />
-                </Fab>
-                <Fab
-                    id="accept-theme-button"
-                    color="success"
-                    data-testid={'ThemeModal-Accept-Button'}
-                    /** cast vermeiden s.u.*/
-                    onClick={() => {updateTheme(selectedThemeString);handleClose({} as object, 'backdropClick')}}
-                    style={{
-                        position: 'absolute',
-                        top: '1%',
-                        left: '90.5%'
-                    }}>
-                    <Check />
-                </Fab>
+                {/**Left column/Upper Row - Provides radio buttons for theme changing*/}
+                <Box sx={leftColumnStyle}>
+                    <FormControl sx={leftColumnInner}>
+                        <FormLabel id="demo-radio-buttons-group-label">{t('components.ThemeModal.radioHeader')}</FormLabel>
+                        <RadioGroup
+                            sx={{
+                                flexDirection: { xs: 'row', lg: 'column' },
+                                gap: 2
+                            }}
+                            value={selectedThemeString}
+                            onChange={(e) => {setSelectedThemeString(e.target.value); handleThemeModalPreviewChange(e.target.value)}}
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            name="radio-buttons-group"
+                        >
+                            <FormControlLabel value={'HaskiTheme'} control={<Radio />} label={<Box display="flex" alignItems="center">
+                                <Typography>{t('components.ThemeModal.standardTheme')}</Typography>
+                                <LightMode sx={{ mr: 1 }} />
+                            </Box>} />
+                            <FormControlLabel value={'DarkTheme'} control={<Radio />} label={<Box display="flex" alignItems="center">
+                                <Typography>{t('components.ThemeModal.darkTheme')}</Typography>
+                                <DarkMode sx={{ mr: 1 }} />
+                            </Box>} />
+                            <FormControlLabel value={'AltTheme'} control={<Radio />} label={<Box display="flex" alignItems="center">
+                                <Typography>{t('components.ThemeModal.altTheme')}</Typography>
+                                <Brush sx={{ mr: 1 }} />
+                            </Box>} />
+                        </RadioGroup>
+                    </FormControl>
+                </Box>
 
-                <div style={leftColumnStyle}>
-                    <Stack spacing={5}  alignItems="center" justifyContent="center" style={{ height: '100%' , width: '100%'}}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => ButtonClickPlaceholder('Haski')}>
-                            Light-Haski
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => ButtonClickPlaceholder('dark')}>
-                            Dark-Haski
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => ButtonClickPlaceholder('light')}>
-                            Light-Standard
-                        </Button>
-                </Stack>
-                </div>
-                <Divider orientation="vertical" flexItem />
-                    <div style={rightColumnStyleComponent}>
-                        <PagePreview themeProp={selectedTheme} />
-                    </div>
+                <Divider
+                    orientation={isSmallScreen ? 'horizontal' : 'vertical'}
+                    flexItem
+                    sx={{
+                    width: isSmallScreen ? '100%' : 'auto',
+                    height: isSmallScreen ? 'auto' : '100%',
+                }}/>
+
+                {/**Right Column / Lower Row - Provides themed preview of radio selection and operating buttons*/}
+                <Box sx={rightColumnStyleComponent}>
+                    <Fab
+                        id="switch-page-right-theme-button"
+                        color="primary"
+                        data-testid={'ThemeModal-Right-Button'}
+                        onClick={() => changePage(1)}
+                        style={{
+                            position: 'sticky',
+                            top: '45%',
+                            left: '93.5%'
+                        }}>
+                        <ArrowForward />
+                    </Fab>
+                    <Fab
+                        id="switch-page-left-theme-button"
+                        color="primary"
+                        data-testid={'ThemeModal-Left-Button'}
+                        onClick={() => changePage(-1)}
+                        style={{
+                            position: 'sticky',
+                            top: '45%',
+                            left: '1.5%'
+                        }}>
+                        <ArrowBack />
+                    </Fab>
+                    <Fab
+                        id="close-theme-button"
+                        color="primary"
+                        data-testid={'ThemeModal-Close-Button'}
+                        onClick={() => handleClose({} as object, 'backdropClick')}
+                        style={{
+                            position: 'sticky',
+                            top: '1%',
+                            left: '93.5%'
+                        }}>
+                        <Close />
+                    </Fab>
+                    <Fab
+                        id="accept-theme-button"
+                        color="success"
+                        data-testid={'ThemeModal-Accept-Button'}
+
+                        onClick={() => {updateTheme(selectedThemeString);handleClose({} as object, 'backdropClick')}}
+                        disabled={activeTheme === selectedTheme}
+                    style={{
+                            position: 'sticky',
+                            top: '90%',
+                            left: '93.5%',
+                        }}>
+                        <Check />
+                    </Fab>
+                    {/**preview block - Renders selected page sclaed down in chosen theme within right column/lower row*/}
+                    <ThemeProvider theme={selectedTheme}>
+                        <Box sx = {scaledPreview}>
+                            <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
+                                <MenuBar />
+                                <BreadcrumbsContainer />
+                                <Grid container sx={{ flex: 1, overflow: 'hidden' }}>
+                                    <Grid item sx={{ flex: 1, overflow: 'auto' }}>
+                                        {pages[pageIndex]}
+                                    </Grid>
+                                </Grid>
+                                <Footer />
+                            </Box>
+                            <PrivacyModal />
+                            <OpenQuestionnaire />
+                        </Box>
+                    </ThemeProvider>
+                </Box>
             </Box>
         </Modal>
     )
 }
-
 export default memo(ThemeModal)
 
 // eslint-disable-next-line immutable/no-mutation

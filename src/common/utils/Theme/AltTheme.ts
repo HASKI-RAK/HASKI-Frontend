@@ -1,4 +1,5 @@
 import { createTheme, green, grey, red, yellow } from '@common/theme'
+import {pink} from "@mui/material/colors";
 
 export const defaultBehavior = {
     boxShadowSize: {
@@ -19,9 +20,9 @@ export const defaultFonts = {
 export const defaultColors = {
     primary: {
         //orange
-        [100]: '#FF8E00', //light orange
-        [300]: '#FD7702', //strong orange
-        [900]: '#FF5003' //dark orange
+        [100]: '#f8bbd0', //light pink
+        [300]: '#e91e63', //strong pink
+        [900]: '#880e4f' //dark pink
     },
     secondary: {
         //blue
@@ -31,32 +32,22 @@ export const defaultColors = {
     },
 
     lightgrey: 'lightgrey',
-    darkgrey: 'darkgrey',
     white: 'white',
     black: '#000000'
 }
 
-export const DarkTheme = createTheme({
+export const AltTheme = createTheme({
     palette: {
-
         primary: {
-            main: yellow[900],
-            dark: yellow[900],
-            light: yellow[100]
+            main: pink[500],
+            dark: pink[900],
+            light: pink[100]
         },
         secondary: {
             main: red[900],
             dark: defaultColors.primary[900],
             contrastText: defaultColors.black,
             light: defaultColors.black
-        },
-        background: {
-            default: '#272727',
-            paper: '#676666'
-        },
-        text: {
-            primary: 'rgba(255,255,255,1.0)',
-            //secondary: 'lightgrey',
         },
         success: {
             main: green[600],
@@ -127,10 +118,10 @@ export const DarkTheme = createTheme({
             // Name of the rule
             styleOverrides: {
                 root: {
-                    //backgroundColor: 'lightgrey',
+                    backgroundColor: 'lightgrey',
                     border: defaultBehavior.border.default + defaultColors.lightgrey,
                     borderRadius: '1rem',
-                    //color: defaultColors.black, // text color
+                    color: defaultColors.black, // text color
                     boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey'
                 }
             }
@@ -144,12 +135,12 @@ export const DarkTheme = createTheme({
                 // Name of the slot
                 root: {
                     // Some CSS
-                    //color: defaultColors.lightgrey,
+                    color: defaultColors.lightgrey,
                     /*font:
                       "700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) " +
                       defaultFonts.default,*/
                     font: 'Courier New',
-                    //background: 'none',
+                    background: 'none',
                     border: defaultBehavior.border.default + defaultColors.lightgrey,
                     borderRadius: '0.2rem',
                     backgroundColor: 'white',
@@ -212,7 +203,7 @@ export const DarkTheme = createTheme({
                 //komplett gefüllter button aber in weiß
                 text: {
                     background: 'none',
-                    //color: defaultColors.white,
+                    color: defaultColors.black,
                     border: 'none',
                     fontFamily: 'monospace',
                     fontWeight: 700,
@@ -264,15 +255,15 @@ export const DarkTheme = createTheme({
         MuiDrawer: {
             styleOverrides: {
                 root: {
-                    //backgroundColor: defaultColors.white,
+                    backgroundColor: defaultColors.white,
                     boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey',
                     '& .MuiDrawer-paper': {
                         boxSizing: 'border-box',
                         borderRadius: '1rem',
                         border: defaultBehavior.border.default + defaultColors.lightgrey,
                         /** color means the color of the Text */
-                        //color: defaultColors.black,
-                        //ackgroundColor: defaultColors.white,
+                        color: defaultColors.black,
+                        backgroundColor: defaultColors.white,
                         boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey'
                     }
                 }
@@ -329,8 +320,8 @@ export const node_style = {
 }
 
 export const footer_style = {
-    //backgroundColor: '#FFCA3A',
-    //color: 'black',
+    backgroundColor: '#FFCA3A',
+    color: 'black',
     fontWeight: '400',
     textTransform: 'uppercase',
     fontFamily: 'monospace',
@@ -346,7 +337,7 @@ export const footer_style = {
 }
 export const header_style = {
     backgroundColor: '#FFCA3A',
-    //color: 'black',
+    color: 'black',
     fontWeight: '400',
     textTransform: 'uppercase',
     fontFamily: 'monospace',
@@ -362,7 +353,7 @@ export const header_style = {
 }
 
 export const middle_style = {
-    //backgroundColor: '#FFCA3A',
+    backgroundColor: '#FFCA3A',
     margin: '0rem',
     paddingTop: '0.1rem',
     paddingBottom: '0.1rem'

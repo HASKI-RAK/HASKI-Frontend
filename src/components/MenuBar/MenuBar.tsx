@@ -197,7 +197,7 @@ const MenuBar = () => {
           {/** Theme button */}
           {
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={'Change your theme'}>
+            <Tooltip title={t('components.ThemeModal.buttonDescription')}>
               <IconButton
                 id="theme-icon-button"
                 onClick={() => handleOpenThemeModal()}>
