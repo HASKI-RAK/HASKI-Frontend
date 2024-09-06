@@ -19,6 +19,7 @@ import {
   Analytics,
   AssignmentOutlined,
   Help,
+  Brush,
   LibraryBooksOutlined,
   Login,
   Logout,
@@ -30,6 +31,7 @@ import {
   FurtherInfoMenu,
   LanguageMenu,
   QuestionnaireQuestionsModal,
+  ThemeModal,
   QuestionnaireResultsModal,
   TableILSQuestions,
   TableListKQuestions
@@ -52,12 +54,22 @@ const MenuBar = () => {
   const { isAuth, logout } = useContext(AuthContext)
   const { t } = useTranslation()
   const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpenTheme, setModalOpenTheme] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
   const [modalOpenListK, setModalOpenListK] = useState(false)
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [successSendILSShort, setSuccessSendILSShort] = useState(false)
   const [successSendListK, setSuccessSendListK] = useState(false)
+
+  const handleOpenThemeModal = () => {
+    setModalOpenTheme(true)
+    setAnchorElUser(null)
+  }
+
+  const handleCloseThemeModal = () => {
+      setModalOpenTheme(false)
+  }
 
   const handleOpenILSShortModal = () => {
     setModalOpenILSShort(true)
@@ -168,7 +180,7 @@ const MenuBar = () => {
           {/** Search bar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>
           {/** Language menu */}
-          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }, mt: 1 }}>
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }}}>
             <LanguageMenu />
           </Box>
           {/** Questionnaire Results */}
@@ -183,23 +195,18 @@ const MenuBar = () => {
             </Box>
           )}
           {/** Theme button */}
-          {/**
+          {
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={'Change your theme'}>
+            <Tooltip title={t('components.ThemeModal.buttonDescription')}>
               <IconButton
-                id="global-settings-icon-button"
-                onClick={() => {
-                  addSnackbar({
-                    message: t('components.MenubBar.GlobalSettings.Error'),
-                    severity: 'warning',
-                    autoHideDuration: 5000
-                  })
-                }}>
-                <Contrast />
+                id="theme-icon-button"
+                onClick={() => handleOpenThemeModal()}>
+                <Brush data-testid="BrushIcon" />
               </IconButton>
             </Tooltip>
+            <ThemeModal open={modalOpenTheme} handleClose={() => handleCloseThemeModal()} />
           </Box>
-           */}
+           }
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('appGlobal.help')}>
@@ -212,7 +219,7 @@ const MenuBar = () => {
               </IconButton>
             </Tooltip>
           </Box>
-          {/** 
+          {/**
           { Settings button }
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openGlobalSettings')}>
