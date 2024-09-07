@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
-import { Histogram, LineGraph, Rating, SpiderGraph, Table, TableColumnProps } from 'react-rating-charts'
+import { memo, useEffect, useState } from 'react'
+import { LineGraph, Rating, SpiderGraph, Table, TableColumnProps } from 'react-rating-charts'
 import { FormControlLabel, Grid, Radio, RadioGroup } from '@common/components'
-import { StudentRating, User } from '@core'
-import { usePersistedStore } from '@store'
 import {
   StudentRatingDashboardHookReturn,
   useLearningElementRatingDashboard as _useLearningElementRatingDashboard
@@ -15,8 +13,12 @@ type StudentRatingDashboardProps = {
 const LearningElementRatingDashboard = ({
   useLearningElementRatingDashboard = _useLearningElementRatingDashboard
 }: StudentRatingDashboardProps) => {
+  // States.
+  const [chosenComponent, setChosenComponent] = useState('lineGraph')
+  const [transformedSpiderGraphData, setTransformedSpiderGraphData] = useState({})
+
+  // Hook.
   const {
-    studentRatings,
     isLoading,
     ratingValue,
     ratingDeviation,
@@ -25,16 +27,13 @@ const LearningElementRatingDashboard = ({
     ratingValueTrend,
     spiderGraphData,
     lineGraphData,
-    histogramData,
     topics
   } = useLearningElementRatingDashboard()
-  const getUser = usePersistedStore((state) => state.getUser)
 
-  const [transformedSpiderGraphData, setTransformedSpiderGraphData] = useState({})
-
+  // Map the topic ids to the topic names.
   useEffect(() => {
     if (topics.length > 0) {
-      const updatedSpiderGraphData = { ...spiderGraphData } // Copy the spiderGraphData locally
+      const updatedSpiderGraphData = { ...spiderGraphData }
 
       for (const topicId in updatedSpiderGraphData) {
         const topic = topics.find((topic) => topic.id === parseInt(topicId))
@@ -44,46 +43,47 @@ const LearningElementRatingDashboard = ({
         }
       }
 
-      // Store the transformed data in local state
       setTransformedSpiderGraphData(updatedSpiderGraphData)
     }
   }, [topics, spiderGraphData])
-  getUser().then((user: User) => {
-    // Get newest ratings of user_id for each topic
-    const newestRatingsOfStudentOnEveryTopic = studentRatings?.reduce((acc, rating) => {
-      if (rating.student_id == user.id) {
-        if (!acc[rating.topic_id] || acc[rating.topic_id].timestamp < rating.timestamp) {
-          acc[rating.topic_id] = rating
-        }
-      }
-      return acc
-    }, {} as Record<number, StudentRating>)
 
-    // console.log(newestRatingsOfStudentOnEveryTopic)
-  })
-  // Get average rating value over all topics
+  // General.
+  const color = 'orange'
 
-  /**
-   const averageRatingValue = 0
-   const averageRatingDeviation = 0
-   const maxRatingValue = 0
-   const maxRatingDeviation = 0
-   const ratingValueTrend = 0
-   */
+  // Rating title and tooltips.
+  const title = 'The current average rating of all learning elements' // 'Ihr derzeitiges durchschnittl. Rating' t('components.StudentRatingDashboard.ratingTitle)
+  const ratingTooltips = {
+    setDeviationTooltip: (value: number) => 'The current average rating deviation is ' + value + '.',
+    setDeviationTrendTooltip: (value: number) => 'The trend of the average rating deviation is ' + value + '.',
+    setValueTooltip: (value: number) => 'The current average rating value is ' + value + '.',
+    setValueTrendTooltip: (value: number) => 'The trend of the average rating value is ' + value + '.'
+  }
 
-  // Für Histogram
-  const newestRatingOfEveryStudent = studentRatings?.reduce((acc, rating) => {
-    if (!acc[rating.student_id] || acc[rating.student_id].timestamp < rating.timestamp) {
-      acc[rating.student_id] = rating
-    }
-    return acc
-  }, {} as Record<number, StudentRating>)
+  // Spider graph.
+  const spiderGraphTitle = 'The average learning element rating per topic'
+  const setTooltip = (concept: string, value: number) => 'The rating for ' + concept + ' is ' + value + '.'
 
-  const title = '1232'
-  const s = () => 'aaaaa'
-  const [choosenComponent, setChoosenChomponent] = useState('lineGraph')
+  // Line graph.
+  const lineGraphTitle = 'The progression of the average learning element rating'
+  const lineGraphTitles = {
+    title: lineGraphTitle,
+    xAxisTitle: 'Timestamp',
+    yAxisTitle: 'Rating'
+  }
+  const lineGraphTooltips = {
+    setXAxisTooltip: () => 'Shows the timestamps.',
+    setYAxisTooltip: () => 'Shows the rating values.',
+    setDataTooltip: (value: number, deviation: number, timestamp: string) =>
+      'On' + timestamp + ' the rating was ' + value + ' with a deviation of ' + deviation + '.',
+    setLowerDeviationTooltip: (value: number, timestamp: string) =>
+      'On ' + timestamp + ' the maximum rating was ' + value + '.',
+    setUpperDeviationTooltip: (value: number, timestamp: string) =>
+      'On ' + timestamp + ' the minimum rating was ' + value + '.'
+  }
 
   // Table.
+  const setRGBColor = (alpha: number) => 'rgba(255, 165, 0, ' + alpha + ')'
+  const setHeaderTooltip = (header: string) => 'Shows the ' + header + 's of the table.'
   const columns: TableColumnProps[] = [
     {
       header: 'Timestamp',
@@ -112,35 +112,48 @@ const LearningElementRatingDashboard = ({
                 ratingDeviationTrend={ratingDeviationTrend * 1.96}
                 maxRatingDeviation={maxRatingDeviation * 1.96}
                 title={title}
-                tooltips={{
-                  setDeviationTooltip: s,
-                  setDeviationTrendTooltip: s,
-                  setValueTooltip: s,
-                  setValueTrendTooltip: s
-                }}
+                tooltips={ratingTooltips}
               />
             </Grid>
             <Grid item>
-              <SpiderGraph data={transformedSpiderGraphData} minRatingValue={0} title={title} />
+              <SpiderGraph
+                color={color}
+                data={transformedSpiderGraphData}
+                minRatingValue={0}
+                title={spiderGraphTitle}
+                setTooltip={setTooltip}
+              />
             </Grid>
           </Grid>
           <Grid item>
-            <Grid container direction="column" alignItems="center" mb={5}>
+            <Grid container direction="column" alignItems="center" mb={5} gap={2}>
               <Grid item>
                 <RadioGroup
-                  id=""
+                  id="learning-element-rating-radio-group"
                   row
-                  onChange={(event) => setChoosenChomponent(event.target.value)}
-                  value={choosenComponent}>
+                  onChange={(event) => setChosenComponent(event.target.value)}
+                  value={chosenComponent}>
                   <FormControlLabel value="lineGraph" control={<Radio />} label="Line graph" />
                   <FormControlLabel value="table" control={<Radio />} label="Table" />
                 </RadioGroup>
               </Grid>
               <Grid item>
-                {choosenComponent == 'lineGraph' ? (
-                  <LineGraph data={lineGraphData} minRatingValue={0} />
+                {chosenComponent == 'lineGraph' ? (
+                  <LineGraph
+                    color={color}
+                    data={lineGraphData}
+                    minRatingValue={0}
+                    titles={lineGraphTitles}
+                    tooltips={lineGraphTooltips}
+                  />
                 ) : (
-                  <Table data={lineGraphData} columns={columns} />
+                  <Table
+                    data={lineGraphData}
+                    columns={columns}
+                    setRGBColor={setRGBColor}
+                    setHeaderTooltip={setHeaderTooltip}
+                    title={lineGraphTitle}
+                  />
                 )}
               </Grid>
             </Grid>
@@ -151,4 +164,4 @@ const LearningElementRatingDashboard = ({
   )
 }
 
-export default LearningElementRatingDashboard
+export default memo(LearningElementRatingDashboard)

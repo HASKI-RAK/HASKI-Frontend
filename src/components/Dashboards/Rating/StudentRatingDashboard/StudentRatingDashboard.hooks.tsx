@@ -22,13 +22,16 @@ export type StudentRatingDashboardHookReturn = {
 }
 
 export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn => {
-  //
+  // States
   const [isLoading, setIsLoading] = useState(true)
   const [studentRatings, setStudentRatings] = useState<StudentRating[]>([])
+  const [topics, setTopics] = useState<Topic[]>([])
+
+  // Store.
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
-  const [topics, setTopics] = useState<Topic[]>([])
+
   // Rating.
   const [ratingValue, setRatingValue] = useState<number>(0)
   const [ratingDeviation, setRatingDeviation] = useState<number>(0)

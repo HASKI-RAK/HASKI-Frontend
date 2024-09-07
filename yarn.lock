@@ -7783,10 +7783,10 @@ range-parser@^1.2.1, range-parser@~1.2.1:
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
-rating-charts.js@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/rating-charts.js/-/rating-charts.js-1.2.2.tgz#87599bfe4f62cb799ac35f09ac7138f469978bc2"
-  integrity sha512-iO2c3hA39bQevKH0mi1Qqm1GLYwoUVR9T+reh2anjgjxTe8wZ5HLbCMIzgyWRTiPMxRxZ4MAS4HY7HtnG7eVAw==
+rating-charts.js@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/rating-charts.js/-/rating-charts.js-1.2.8.tgz#8f3903687493ab48422f7be891d8f6a5e8e07a80"
+  integrity sha512-sU3SUEm9uFk5biZbDnFTMyLlasi3KXxw4xDaUkQPfEW+5N0MpgSzBJR9o8Ro7RYMFL8JAyRCS5hWZzEVeO46fg==
   dependencies:
     d3 "^7.9.0"
 
@@ -7884,15 +7884,15 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-rating-charts@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/react-rating-charts/-/react-rating-charts-1.3.2.tgz#61e9a15dcbb1f8f686677e1a6e0e0aaefe22228b"
-  integrity sha512-C2KQss02QtUNx3EMGD573K1fqv9qtpjwjKOVcJo1Uxns3/JCC5/rwAnl2Zk7rFCSqre6SUzqVrmgjTfz1MmdEg==
+react-rating-charts@^1.3.8:
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/react-rating-charts/-/react-rating-charts-1.3.8.tgz#00eb136f84b841c084a1024b815fc049342634bd"
+  integrity sha512-Bug5kxmVY241byLdaQLE5yNBxSePOOj0b9pV4aVf4rRA1/xZ50xEmDpwMcWgW/xKFIVaz79wN9+dLvN7t3X3bQ==
   dependencies:
     "@testing-library/react" "^16.0.1"
     "@types/react" "^18.3.4"
     "@types/react-dom" "^18.3.0"
-    rating-charts.js "^1.2.2"
+    rating-charts.js "^1.2.8"
     react "^18.3.1"
     react-dom "^18.3.1"
     ts-node "^10.9.2"
