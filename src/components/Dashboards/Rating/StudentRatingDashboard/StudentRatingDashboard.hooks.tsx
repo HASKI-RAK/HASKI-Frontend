@@ -1,244 +1,219 @@
-import { useEffect, useMemo, useState } from 'react'
+import log from 'loglevel'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { StudentRating, Topic, User } from '@core'
-import { fetchStudentRatings } from '@services'
+import { SnackbarContext, fetchStudentRatings } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 export type StudentRatingDashboardHookReturn = {
-  readonly ratingValue: number
-  readonly ratingDeviation: number
-  readonly maxRatingDeviation: number
-  readonly ratingValueTrend: number
-  readonly ratingDeviationTrend: number
-  readonly spiderGraphData: Record<string, number>
-  readonly lineGraphData: { 
+  ratingValue: number
+  ratingDeviation: number
+  maxRatingDeviation: number
+  ratingValueTrend: number
+  ratingDeviationTrend: number
+  spiderGraphData: Record<string, number>
+  lineGraphData: {
     value: number
     deviation: number
     timestamp: Date
   }[]
-  readonly histogramData: number[]
-  readonly studentRatings: StudentRating[]
-  readonly isLoading: boolean
-  readonly topics: Topic[]
+  histogramData: number[]
+  isLoading: boolean
+  topics: Topic[]
 }
 
 export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn => {
-  // States
+  // States.
   const [isLoading, setIsLoading] = useState(true)
-  const [studentRatings, setStudentRatings] = useState<StudentRating[]>([])
   const [topics, setTopics] = useState<Topic[]>([])
+  const [ratingStats, setRatingStats] = useState({
+    ratingValue: 0,
+    ratingDeviation: 0,
+    maxRatingDeviation: 0,
+    ratingValueTrend: 0,
+    ratingDeviationTrend: 0
+  })
+  const [spiderGraphData, setSpiderGraphData] = useState<Record<string, number>>({})
+  const [lineGraphData, setLineGraphData] = useState<{ value: number; deviation: number; timestamp: Date }[]>([])
+  const [histogramData, setHistogramData] = useState<number[]>([])
 
   // Store.
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
 
-  // Rating.
-  const [ratingValue, setRatingValue] = useState<number>(0)
-  const [ratingDeviation, setRatingDeviation] = useState<number>(0)
-  const [ratingValueTrend, setRatingValueTrend] = useState<number>(0)
-  const [ratingDeviationTrend, setRatingDeviationTrend] = useState<number>(0)
-  const [maxRatingDeviation, setMaxRatingDeviation] = useState<number>(0)
-
-  // Spider graph.
-  const [spiderGraphData, setSpiderGraphData] = useState<Record<string, number>>({})
-
-  // Line graph.
-  const [lineGraphData, setLineGraphData] = useState<
-    {
-      value: number
-      deviation: number
-      timestamp: Date
-    }[]
-  >([])
-
-  // Histogram.
-  const [histogramData, setHistogramData] = useState<number[]>([])
+  // Context.
+  const { addSnackbar } = useContext(SnackbarContext)
 
   useEffect(() => {
-    getUser().then((user: User) => {
-      getCourses(user.settings.user_id, user.lms_user_id, user.id).then((courseResponse) => {
-        const courseTopics: Topic[] = []
-        courseResponse.courses.map((course) =>
-          getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, course.id.toString()).then(
-            (learningPathTopicResponse) => {
-              courseTopics.push(...learningPathTopicResponse.topics)
-            }
-          )
-        )
-        setTopics(courseTopics)
-      }) // catch
+    getUser()
+      .then((user: User) => {
+        // Get courses of the user.
+        getCourses(user.settings.user_id, user.lms_user_id, user.id)
+          .then((courseResponse) => {
+            // Get all topics of the course.
+            const courseTopicsPromises = courseResponse.courses.map((course) =>
+              getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, course.id.toString())
+            )
+            Promise.all(courseTopicsPromises)
+              .then((courseTopicsResponses) => {
+                // Set all the topics.
+                const topics = courseTopicsResponses.flatMap((resp) => resp.topics)
+                setTopics(topics)
+              })
+              .catch((error) => {
+                addSnackbar({
+                  message: 'translation-file',
+                  severity: 'error',
+                  autoHideDuration: 3000
+                })
+                log.error('translationfile' + ' ' + error)
+              })
+          })
+          .catch((error) => {
+            addSnackbar({
+              message: 'translation-file',
+              severity: 'error',
+              autoHideDuration: 3000
+            })
+            log.error('translationfile' + ' ' + error)
+          })
 
-      fetchStudentRatings().then((studentRatingsResponse) => {
-        setStudentRatings(studentRatingsResponse)
+        // Fetch all ratings of all students.
+        fetchStudentRatings()
+          .then((ratings) => {
+            // Get all ratings of the user.
+            const userRatings = ratings.filter((rating) => rating.student_id === user.id)
 
-        // Get the maximum rating value and deviation.
-        const maxRatingValue = Math.max(...studentRatingsResponse.map((rating) => rating.rating_value))
-        setMaxRatingDeviation(Math.max(...studentRatingsResponse.map((rating) => rating.rating_deviation)))
+            // Categorize the ratings of the user into topics.
+            const categorizedRatings = userRatings.reduce((acc, rating) => {
+              if (!acc[rating.topic_id]) {
+                acc[rating.topic_id] = []
+              }
+              acc[rating.topic_id].push(rating)
+              return acc
+            }, {} as Record<string, StudentRating[]>)
 
-        // Get all ratings by student.
-        const ratingsByStudent = studentRatingsResponse.filter((rating) => rating.student_id == user.id)
+            // Set the data for the spider graph.
+            setSpiderGraphData(
+              Object.keys(categorizedRatings).reduce((acc: { [key: string]: number }, key) => {
+                acc[key] = categorizedRatings[key][0].rating_value
+                return acc
+              }, {})
+            )
 
-        // Sort all ratings of student by timestamp descending.
-        const sortedRatings = ratingsByStudent.toSorted((a, b) => {
-          const b_time = new Date(b.timestamp).getTime()
-          const a_time = new Date(a.timestamp).getTime()
-          return b_time - a_time
+            // Calculate the average rating value and deviation of the user.
+            const totals = Object.values(categorizedRatings).reduce(
+              (acc, ratings) => {
+                const [current, previous] = ratings
+                acc.current.ratingValue += current.rating_value
+                acc.current.ratingDeviation += current.rating_deviation
+
+                if (previous) {
+                  acc.previous.ratingValue += previous.rating_value
+                  acc.previous.ratingDeviation += previous.rating_deviation
+                }
+
+                return acc
+              },
+              {
+                current: { ratingValue: 0, ratingDeviation: 0 },
+                previous: { ratingValue: 0, ratingDeviation: 0 }
+              }
+            )
+
+            // Calculate the rating value trend and rating deviation trend of the user.
+            const count = Object.keys(categorizedRatings).length
+            const ratingValueTrend = (totals.current.ratingValue - totals.previous.ratingValue) / count
+            const ratingDeviationTrend = (totals.current.ratingDeviation - totals.previous.ratingDeviation) / count
+
+            // Set the rating stats of the user.
+            setRatingStats({
+              ratingValue: totals.current.ratingValue / count,
+              ratingDeviation: totals.current.ratingDeviation / count,
+              ratingValueTrend,
+              ratingDeviationTrend,
+              maxRatingDeviation: Math.max(
+                ...Object.values(categorizedRatings)
+                  .flat()
+                  .map((r) => r.rating_deviation)
+              )
+            })
+
+            // Sort the ratings by timestamp ascending.
+            const sortedRatings = [...userRatings].sort(
+              (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+            )
+
+            // Set the data for the line graph.
+            setLineGraphData(
+              sortedRatings.map((rating, idx) => {
+                const totalRatingValue = sortedRatings.slice(0, idx + 1).reduce((acc, r) => acc + r.rating_value, 0)
+                const totalRatingDeviation = sortedRatings
+                  .slice(0, idx + 1)
+                  .reduce((acc, r) => acc + r.rating_deviation, 0)
+                return {
+                  value: totalRatingValue / (idx + 1),
+                  deviation: (totalRatingDeviation / (idx + 1)) * 1.96,
+                  timestamp: new Date(rating.timestamp)
+                }
+              })
+            )
+
+            // Calculate the histogram data.
+            // Get the latest of each student-topic pair.
+            const latestRatings = ratings.reduce((acc, rating) => {
+              const key = `${rating.student_id}-${rating.topic_id}`
+              if (!acc[key] || new Date(rating.timestamp).getTime() > new Date(acc[key].timestamp).getTime()) {
+                acc[key] = rating
+              }
+              return acc
+            }, {} as { [key: string]: StudentRating })
+
+            // Calculate averages for each student.
+            const studentAverages = Object.values(latestRatings).reduce((acc, rating) => {
+              const { student_id, rating_value } = rating
+              if (!acc[student_id]) acc[student_id] = { sum: 0, count: 0 }
+              acc[student_id].sum += rating_value
+              acc[student_id].count += 1
+              return acc
+            }, {} as { [student_id: number]: { sum: number; count: number } })
+
+            // Set the histogram data.
+            setHistogramData(Object.values(studentAverages).map(({ sum, count }) => sum / count))
+
+            // Set loading to false.
+            setIsLoading(false)
+          })
+          .catch((error) => {
+            addSnackbar({
+              message: 'translation-file',
+              severity: 'error',
+              autoHideDuration: 3000
+            })
+            log.error('translationfile' + ' ' + error)
+          })
+      })
+      .catch((error) => {
+        addSnackbar({
+          message: 'translation-file',
+          severity: 'error',
+          autoHideDuration: 3000
         })
+        log.error('translationfile' + ' ' + error)
 
-        // Categorize ratings by topic_id.
-        const categorizedRatings = sortedRatings.reduce(
-          (acc: Record<string, StudentRating[]>, rating: StudentRating) => {
-            if (!acc[rating.topic_id]) {
-              acc[rating.topic_id] = []
-            }
-            acc[rating.topic_id].push(rating)
-            return acc
-          },
-          {}
-        )
-
-        const spiderData: Record<string, number> = {}
-
-        // Add first rating of student for each topic to spider graph data.
-        Object.keys(categorizedRatings).forEach((key) => {
-          const ratings = categorizedRatings[key]
-          const firstRating = ratings[0]
-          spiderData[firstRating.topic_id] = firstRating.rating_value
-        })
-
-        setSpiderGraphData(spiderData)
-
-        // Add up all rating values and deviations.
-        const { ratingValueTotal, ratingDeviationTotal, lastRatingValueTotal, lastRatingDeviationTotal } = Object.keys(
-          categorizedRatings
-        ).reduce(
-          (totals, key) => {
-            const ratings = categorizedRatings[key]
-            const currentRatingValue = ratings[0].rating_value
-            const currentRatingDeviation = ratings[0].rating_deviation
-
-            if (ratings.length > 1) {
-              totals.lastRatingValueTotal += ratings[1].rating_value
-              totals.lastRatingDeviationTotal += ratings[1].rating_deviation
-            }
-
-            totals.ratingValueTotal += currentRatingValue
-            totals.ratingDeviationTotal += currentRatingDeviation
-
-            return totals
-          },
-          {
-            ratingValueTotal: 0,
-            ratingDeviationTotal: 0,
-            lastRatingValueTotal: 0,
-            lastRatingDeviationTotal: 0
-          }
-        )
-
-        const categoryCount = Object.keys(categorizedRatings).length
-
-        setRatingValue(ratingValueTotal / categoryCount)
-        setRatingDeviation(ratingDeviationTotal / categoryCount)
-        setRatingValueTrend(ratingValueTotal / categoryCount - lastRatingValueTotal / categoryCount)
-        setRatingDeviationTrend(ratingDeviationTotal / categoryCount - lastRatingDeviationTotal / categoryCount)
-
-        // Reverse the array.
-        const reversedRatings = sortedRatings.toReversed()
-
-        // Calculate the average rating value and deviation over time.
-        const { studentRatingProgression } = reversedRatings.reduce(
-          (previous, rating, index) => {
-            const totalRatingValue = previous.totalRatingValue + rating.rating_value
-            const totalRatingDeviation = previous.totalRatingDeviation + rating.rating_deviation
-
-            const averageRatingValue = totalRatingValue / (index + 1)
-            const averageRatingDeviation = totalRatingDeviation / (index + 1)
-
-            const newStudentRating = {
-              value: averageRatingValue,
-              deviation: averageRatingDeviation * 1.96,
-              timestamp: new Date(rating.timestamp)
-            }
-
-            return {
-              totalRatingValue: totalRatingValue,
-              totalRatingDeviation: totalRatingDeviation,
-              studentRatingProgression: [...previous.studentRatingProgression, newStudentRating]
-            }
-          },
-          {
-            totalRatingValue: 0,
-            totalRatingDeviation: 0,
-            studentRatingProgression: [] as {
-              value: number
-              deviation: number
-              timestamp: Date
-            }[]
-          }
-        )
-
-        setLineGraphData(studentRatingProgression)
-
-        // Get the latest rating of every student on every topic.
-        const latestsRatingsOfStudentsOnConcepts = studentRatingsResponse.reduce((acc, rating) => {
-          const key = `${rating.student_id}-${rating.topic_id}`
-
-          if (!acc[key] || new Date(rating.timestamp).getTime() > new Date(acc[key].timestamp).getTime()) {
-            acc[key] = rating
-          }
-
-          return acc
-        }, {} as { [key: string]: StudentRating })
-
-        // Group all student ratings by student_id
-        const studentRatingsMap: { [studentId: number]: { sum: number; count: number } } = {}
-
-        // Calculate the average rating for each student.
-        Object.values(latestsRatingsOfStudentsOnConcepts).forEach((rating) => {
-          const { student_id, rating_value } = rating
-
-          if (!studentRatingsMap[student_id]) {
-            studentRatingsMap[student_id] = { sum: 0, count: 0 }
-          }
-
-          studentRatingsMap[student_id].sum += rating_value
-          studentRatingsMap[student_id].count += 1
-        })
-
-        // Map all average ratings to an array.
-        const averageRatings = Object.keys(studentRatingsMap).map((student_id) => {
-          const { sum, count } = studentRatingsMap[parseInt(student_id)]
-          return sum / count
-        })
-
-        setHistogramData(averageRatings)
-        setIsLoading(false)
-      }) // catch
-    }) // catch
-  }, []) // deps
+        setIsLoading(true)
+      })
+  }, [])
 
   return useMemo(
     () => ({
-      ratingValue: ratingValue,
-      ratingDeviation: ratingDeviation,
-      maxRatingDeviation: maxRatingDeviation,
-      ratingValueTrend: ratingValueTrend,
-      ratingDeviationTrend: ratingDeviationTrend,
-      spiderGraphData: spiderGraphData,
-      lineGraphData: lineGraphData,
-      histogramData: histogramData,
-      studentRatings: studentRatings,
-      isLoading: isLoading,
-      topics: topics
+      ...ratingStats,
+      spiderGraphData,
+      lineGraphData,
+      histogramData,
+      isLoading,
+      topics
     }),
-    [
-      ratingValue,
-      ratingDeviation,
-      maxRatingDeviation,
-      ratingValueTrend,
-      ratingDeviationTrend,
-      studentRatings,
-      isLoading
-    ]
+    [ratingStats, spiderGraphData, lineGraphData, histogramData, isLoading, topics]
   )
 }
