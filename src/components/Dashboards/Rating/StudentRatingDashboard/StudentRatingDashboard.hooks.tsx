@@ -10,7 +10,7 @@ export type StudentRatingDashboardHookReturn = {
   readonly ratingValueTrend: number
   readonly ratingDeviationTrend: number
   readonly spiderGraphData: Record<string, number>
-  readonly lineGraphData: {
+  readonly lineGraphData: { 
     value: number
     deviation: number
     timestamp: Date

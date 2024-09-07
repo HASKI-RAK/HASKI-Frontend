@@ -310,8 +310,8 @@ const GraphListK = ({ data }: GraphListKProps) => {
       nodeSize={(n: { size: number; score: number }) => n.size * (n.score * 0.6 + 1)}
       nodeColor={(e: { color: string }) => e.color}
       nodeBorderWidth={1.3}
-      nodeBorderColor={(data: { data: { score: number } }) => {
-        if (data.data.score >= 3) {
+      nodeBorderColor={(node) => {
+        if (node.data.score >= 3) {
           return 'black'
         } else {
           return '#9c3641'
