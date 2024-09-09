@@ -54,7 +54,7 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
           severity: 'error',
           autoHideDuration: 3000
         })
-        t('error.getNews') + error
+        log.error(t('error.getNews') + ' ' + error)
         setNewsText('')
       })
   }, [i18next.language])
