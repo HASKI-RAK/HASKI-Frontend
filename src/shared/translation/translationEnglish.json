@@ -1147,7 +1147,6 @@
   "error.getLearningElementsWithStatus": "There was an Error fetching Learning Elements with Status.",
   "error.getNews": "There was an Error fetching the news data.",
   "error.getSortedLearningPath": "There was an Error fetching and sorting the LearningPathLearningElement data.",
-  "error.getUniversity": "There was an Error fetching the university.",
   "error.getUser": "There was an Error fetching the user data.",
   "error.mapNodes": "There was an Error mapping the learning path Nodes.",
   "error.postCalculateLearningPathILS": "There was an Error calculating the learning path based on the ILS questionnaire data.",

@@ -18,7 +18,7 @@ export const useUniversity = (): UniversityHookReturn => {
         setUniversity(user.university)
       })
       .catch((error) => {
-        log.error(t('error.useUniversity') + error)
+        t('error.getUser') + error
         setUniversity('')
       })
   }, [])

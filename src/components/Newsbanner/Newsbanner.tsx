@@ -24,16 +24,16 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
   const isBannerOpen = useSessionStore((state) => state.isBannerOpen)
 
   //Animation logic
-  const text_len = newsText.length * 10
-  const window_width = window.innerWidth
-  const text_percent = text_len / window_width
+  const textLength = newsText.length * 10
+  const windowWidth = window.innerWidth
+  const textPercent = textLength / windowWidth
 
   const scrolling = keyframes`
     from {
         transform: translateX(100%)
     },
     to {
-        transform: translateX(-${text_percent * 100}%)
+        transform: translateX(-${textPercent * 100}%)
     }
 `
 
@@ -66,7 +66,7 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
                 sx={{
                   animation: `${scrolling} 30s linear infinite`,
                   transform: `translateX(100%)`,
-                  width: window_width
+                  width: windowWidth
                 }}>
                 {newsText}
               </Typography>

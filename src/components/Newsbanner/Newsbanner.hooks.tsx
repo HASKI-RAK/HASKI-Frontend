@@ -50,11 +50,11 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
       })
       .catch((error) => {
         addSnackbar({
-          message: t('error.getNews') + error,
+          message: t('error.getNews'),
           severity: 'error',
           autoHideDuration: 3000
         })
-        log.error(t('error.getNews') + error)
+        t('error.getNews') + error
         setNewsText('')
       })
   }, [i18next.language])

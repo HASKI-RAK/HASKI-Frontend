@@ -1,17 +1,14 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, act } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
 import PrivacyModal from './PrivacyModal'
-import { act } from '@testing-library/react'
 
 const navigate = jest.fn()
 
-const assignSpy = jest.fn()
-
 Object.defineProperty(window, 'location', {
-  value: { assign: assignSpy }
+  value: { assign: jest.fn() }
 })
 
 beforeEach(() => {
