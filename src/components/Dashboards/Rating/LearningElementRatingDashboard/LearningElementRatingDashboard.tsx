@@ -2,17 +2,17 @@ import { memo, useEffect, useState } from 'react'
 import { LineGraph, Rating, SpiderGraph, Table, TableColumnProps } from 'react-rating-charts'
 import { FormControlLabel, Grid, Radio, RadioGroup } from '@common/components'
 import {
-  StudentRatingDashboardHookReturn,
+  LearningElementRatingDashboardHookReturn,
   useLearningElementRatingDashboard as _useLearningElementRatingDashboard
 } from './LearningElementRatingDashboard.hooks'
 
-type StudentRatingDashboardProps = {
-  useLearningElementRatingDashboard?: () => StudentRatingDashboardHookReturn
+type LearningElementRatingDashboardProps = {
+  useLearningElementRatingDashboard?: () => LearningElementRatingDashboardHookReturn
 }
 
 const LearningElementRatingDashboard = ({
   useLearningElementRatingDashboard = _useLearningElementRatingDashboard
-}: StudentRatingDashboardProps) => {
+}: LearningElementRatingDashboardProps) => {
   // States.
   const [chosenComponent, setChosenComponent] = useState('lineGraph')
   const [transformedSpiderGraphData, setTransformedSpiderGraphData] = useState({})
@@ -32,12 +32,12 @@ const LearningElementRatingDashboard = ({
 
   // Map the topic ids to the topic names.
   useEffect(() => {
-    if (topics.length > 0) {
+    if (topics.length > 0 && spiderGraphData) {
       const updatedSpiderGraphData = { ...spiderGraphData }
 
       for (const topicId in updatedSpiderGraphData) {
         const topic = topics.find((topic) => topic.id === parseInt(topicId))
-        if (topic) {
+        if (topic && updatedSpiderGraphData[topicId] != null) {
           updatedSpiderGraphData[topic.name] = updatedSpiderGraphData[topicId]
           delete updatedSpiderGraphData[topicId]
         }

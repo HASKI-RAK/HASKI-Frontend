@@ -4,7 +4,7 @@ import { LearningElementRating, Topic, User } from '@core'
 import { SnackbarContext, fetchLearningElementRatings } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
-export type StudentRatingDashboardHookReturn = {
+export type LearningElementRatingDashboardHookReturn = {
   ratingValue: number
   ratingDeviation: number
   maxRatingDeviation: number
@@ -20,7 +20,7 @@ export type StudentRatingDashboardHookReturn = {
   topics: Topic[]
 }
 
-export const useLearningElementRatingDashboard = (): StudentRatingDashboardHookReturn => {
+export const useLearningElementRatingDashboard = (): LearningElementRatingDashboardHookReturn => {
   // States.
   const [topics, setTopics] = useState<Topic[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -66,18 +66,9 @@ export const useLearningElementRatingDashboard = (): StudentRatingDashboardHookR
                     log.error('translationfile' + ' ' + error)
                   })
               )
-            )
-              .then(() => {
-                setTopics(courseTopics)
-              })
-              .catch((error) => {
-                addSnackbar({
-                  message: 'translation-file',
-                  severity: 'error',
-                  autoHideDuration: 3000
-                })
-                log.error('translationfile' + ' ' + error)
-              })
+            ).then(() => {
+              setTopics(courseTopics)
+            })
           })
           .catch((error) => {
             addSnackbar({

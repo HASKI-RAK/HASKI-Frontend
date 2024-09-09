@@ -2,7 +2,7 @@ import { LearningElementRatingResponse, LearningElementRatingReturn } from '@cor
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
-export const fetchLearningElementRatingsOnTopics: LearningElementRatingReturn = async (
+export const fetchLearningElementRatingsOnTopic: LearningElementRatingReturn = async (
   learningElementId?: number,
   topicId?: number
 ) => {

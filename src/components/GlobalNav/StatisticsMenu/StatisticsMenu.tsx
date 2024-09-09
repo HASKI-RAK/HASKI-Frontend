@@ -12,7 +12,7 @@ const StatisticsMenu = () => {
       isDisabled: false,
       availableAt: new Date()
     }
-  ].sort((a, b) => a.name.localeCompare(b.name))
+  ]
 
   return (
     <>
