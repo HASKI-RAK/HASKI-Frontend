@@ -8,6 +8,8 @@ import { FormDataType, SnackbarContext, SnackbarContextType } from '@services'
 import { getConfig } from '@shared'
 import { useContact } from './Contact.hooks'
 
+const { AuthContext } = jest.requireActual('@services')
+
 /*jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useCallback: (a: any) => a
@@ -54,12 +56,25 @@ describe('Test Contactpage', () => {
   const useContact = jest.fn(() => {
     return { onSubmitHandler: submit }
   })
+  test('Contactform gets displayed and functions normally', () => {
+    render(
+      <SnackbarContext.Provider value={mockSnackbarContext}>
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true }}>
+            <Contact />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </SnackbarContext.Provider>
+    )
+  })
 
   test('not sending', () => {
     render(
       <SnackbarContext.Provider value={mockSnackbarContext}>
         <MemoryRouter>
-          <Contact />
+          <AuthContext.Provider value={{ isAuth: true }}>
+            <Contact />
+          </AuthContext.Provider>
         </MemoryRouter>
       </SnackbarContext.Provider>
     )
@@ -86,7 +101,9 @@ describe('Test Contactpage', () => {
 
     render(
       <MemoryRouter>
-        <Contact />
+        <AuthContext.Provider value={{ isAuth: true }}>
+          <Contact />
+        </AuthContext.Provider>
       </MemoryRouter>
     )
   })
