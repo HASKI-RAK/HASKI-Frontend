@@ -37,6 +37,9 @@ type IFrameModalProps = {
  * @prop boolean that determines if the modal is open or not
  * @prop function that is called when the modal is closed
  *
+ * @remarks
+ * On close the component sends a post request to calculate a new rating for the user and the learning element the user attempted.
+ *
  * @returns An element that renders an iframe in a modal
  * @category Components
  */

@@ -7,10 +7,33 @@ import {
   useStudentRatingDashboard as _useStudentRatingDashboard
 } from './StudentRatingDashboard.hooks'
 
+/**
+ * # StudentRatingDashboardProps type
+ *
+ * Represents the properties of the StudentRatingDashboard component.
+ *
+ * @props useStudentRatingDashboard - The hook for the StudentRatingDashboard component.
+ */
 type StudentRatingDashboardProps = {
   useStudentRatingDashboard?: () => StudentRatingDashboardHookReturn
 }
 
+/**
+ * # StudentRatingDashboard component
+ *
+ * Displays the student rating dashboard.
+ *
+ * @param props - The student rating data from the hook.
+ *
+ * @remarks
+ * Wraps the Rating, SpiderGraph, LineGraph, Histogram, and Table components with own properties.
+ * Returns empty if the data is loading.
+ *
+ * @example
+ * ```tsx
+ * <StudentRatingDashboard />
+ * ```
+ */
 const StudentRatingDashboard = ({
   useStudentRatingDashboard = _useStudentRatingDashboard
 }: StudentRatingDashboardProps) => {

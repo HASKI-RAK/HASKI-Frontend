@@ -7,10 +7,33 @@ import {
   useLearningElementRatingDashboard as _useLearningElementRatingDashboard
 } from './LearningElementRatingDashboard.hooks'
 
+/**
+ * # LearningElementRatingDashboardProps type
+ *
+ * Represents the properties of the LearningElementRatingDashboard component.
+ *
+ * @props useLearningElementRatingDashboard - The hook for the LearningElementRatingDashboard component.
+ */
 type LearningElementRatingDashboardProps = {
   useLearningElementRatingDashboard?: () => LearningElementRatingDashboardHookReturn
 }
 
+/**
+ * # LearningElementRatingDashboard component
+ *
+ * Displays the learning element rating dashboard.
+ *
+ * @param props - The learning element rating data from the hook.
+ *
+ * @remarks
+ * Wraps the Rating, SpiderGraph, LineGraph, and Table components with own properties.
+ * Returns empty if the data is loading.
+ *
+ * @example
+ * ```tsx
+ * <LearningElementRatingDashboard />
+ * ```
+ */
 const LearningElementRatingDashboard = ({
   useLearningElementRatingDashboard = _useLearningElementRatingDashboard
 }: LearningElementRatingDashboardProps) => {

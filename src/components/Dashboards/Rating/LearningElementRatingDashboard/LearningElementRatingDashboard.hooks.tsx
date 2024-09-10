@@ -5,6 +5,21 @@ import { LearningElementRating, Topic, User } from '@core'
 import { SnackbarContext, fetchLearningElementRatings } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
+/**
+ * # LearningElementRatingDashboardHookReturn type
+ *
+ * Represents the return type of the useLearningElementRatingDashboard hook.
+ *
+ * @props ratingValue - The average rating value of all learning elements.
+ * @props ratingDeviation - The average rating deviation of all learning elements.
+ * @props maxRatingDeviation - The maximum rating deviation of all learning elements.
+ * @props ratingValueTrend - The trend of the average rating value of all learning elements.
+ * @props ratingDeviationTrend - The trend of the average rating deviation of all learning elements.
+ * @props spiderGraphData - The data for the spider graph.
+ * @props lineGraphData - The data for the line graph.
+ * @props isLoading - The loading state.
+ * @props topics - A list of topics.
+ */
 export type LearningElementRatingDashboardHookReturn = {
   ratingValue: number
   ratingDeviation: number
@@ -21,10 +36,35 @@ export type LearningElementRatingDashboardHookReturn = {
   topics: Topic[]
 }
 
+/**
+ * # useLearningElementRatingDashboard hook
+ *
+ * Fetches the learning element ratings and calculates the data for the learning element rating dashboard.
+ *
+ * @returns {LearningElementRatingDashboardHookReturn}
+ *
+ * @remarks
+ * This hook is used in the LearningElementRatingDashboard component as default.
+ *
+ * @example
+ * ```tsx
+ * const {
+ * ratingValue,
+ * ratingDeviation,
+ * maxRatingDeviation,
+ * ratingValueTrend,
+ * ratingDeviationTrend,
+ * spiderGraphData,
+ * lineGraphData,
+ * isLoading,
+ * topics
+ * } = useLearningElementRatingDashboard()
+ * ```
+ */
 export const useLearningElementRatingDashboard = (): LearningElementRatingDashboardHookReturn => {
   // Hooks
   const { t } = useTranslation()
-  
+
   // States.
   const [topics, setTopics] = useState<Topic[]>([])
   const [isLoading, setIsLoading] = useState(true)

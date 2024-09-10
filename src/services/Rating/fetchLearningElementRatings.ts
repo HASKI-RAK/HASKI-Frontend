@@ -2,6 +2,14 @@ import { LearningElementRatingResponse, LearningElementRatingReturn } from '@cor
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
+/**
+ * # fetchLearningElementRatings service
+ *
+ * Fetches all learning element ratings from the backend.
+ *
+ * @remarks
+ * Returns an empty array, if there are no ratings present.
+ */
 export const fetchLearningElementRatings: LearningElementRatingReturn = async () => {
   return fetchData<LearningElementRatingResponse>(getConfig().BACKEND + `/learningElement/rating`, {
     method: 'GET',

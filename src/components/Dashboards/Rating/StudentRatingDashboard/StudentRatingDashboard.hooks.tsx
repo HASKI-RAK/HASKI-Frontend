@@ -5,6 +5,22 @@ import { StudentRating, Topic, User } from '@core'
 import { SnackbarContext, fetchStudentRatings } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
+/**
+ * # StudentRatingDashboardHookReturn type
+ *
+ * Represents the return type of the useStudentRatingDashboard hook.
+ *
+ * @props ratingValue - The average rating value of the user.
+ * @props ratingDeviation - The average rating deviation of the user.
+ * @props maxRatingDeviation - The maximum rating deviation of the user.
+ * @props ratingValueTrend - The rating value trend of the user.
+ * @props ratingDeviationTrend - The rating deviation trend of the user.
+ * @props spiderGraphData - The data for the spider graph.
+ * @props lineGraphData - The data for the line graph.
+ * @props histogramData - The data for the histogram.
+ * @props isLoading - The loading state of the data.
+ * @props topics - The topics of the user.
+ */
 export type StudentRatingDashboardHookReturn = {
   ratingValue: number
   ratingDeviation: number
@@ -22,6 +38,32 @@ export type StudentRatingDashboardHookReturn = {
   topics: Topic[]
 }
 
+/**
+ * # useStudentRatingDashboard hook
+ *
+ * Fetches the student ratings and calculates the data for student rating dashboard.
+ *
+ * @returns {StudentRatingDashboardHookReturn}
+ *
+ * @remarks
+ * This hook is used in the StudentRatingDashboard component as default.
+ *
+ * @example
+ * ```tsx
+ * const {
+ *  ratingValue,
+ * ratingDeviation,
+ * maxRatingDeviation,
+ * ratingValueTrend,
+ * ratingDeviationTrend,
+ * spiderGraphData,
+ * histogramData
+ * lineGraphData,
+ * isLoading,
+ * topics
+ * } = useStudentRatingDashboard()
+ * ```
+ */
 export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn => {
   // Hook.
   const { t } = useTranslation()

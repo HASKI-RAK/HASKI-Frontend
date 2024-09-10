@@ -4,6 +4,19 @@ import { Grid, ToggleButton, ToggleButtonGroup } from '@common/components'
 import { LearningElementRatingDashboard, StudentRatingDashboard } from '@components'
 import { AuthContext } from '@services'
 
+/**
+ * # RatingStatistics page
+ *
+ * Displays the student rating and learning element rating dashboard.
+ *
+ * @remarks
+ * The user can switch between both dashboard via ToggleButton.
+ *
+ * @example
+ * ```tsx
+ * <RatingStatistics />
+ * ```
+ */
 const RatingStatistics = () => {
   const { t } = useTranslation()
   const [selected, setSelected] = useState<string>('student')
