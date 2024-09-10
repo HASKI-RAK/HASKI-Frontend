@@ -1,5 +1,6 @@
 import log from 'loglevel'
 import { useContext, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { LearningElementRating, Topic, User } from '@core'
 import { SnackbarContext, fetchLearningElementRatings } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -21,6 +22,9 @@ export type LearningElementRatingDashboardHookReturn = {
 }
 
 export const useLearningElementRatingDashboard = (): LearningElementRatingDashboardHookReturn => {
+  // Hooks
+  const { t } = useTranslation()
+  
   // States.
   const [topics, setTopics] = useState<Topic[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -59,11 +63,11 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
                   })
                   .catch((error) => {
                     addSnackbar({
-                      message: 'translation-file',
+                      message: t('error.fetchLearningPathTopic'),
                       severity: 'error',
                       autoHideDuration: 3000
                     })
-                    log.error('translationfile' + ' ' + error)
+                    log.error(t('error.fetchLearningPathTopic') + ' ' + error)
                   })
               )
             ).then(() => {
@@ -72,11 +76,11 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
           })
           .catch((error) => {
             addSnackbar({
-              message: 'translation-file',
+              message: t('error.fetchCourses'),
               severity: 'error',
               autoHideDuration: 3000
             })
-            log.error('translationfile' + ' ' + error)
+            log.error(t('error.fetchCourses') + ' ' + error)
           })
 
         // Fetch all learning element ratings.
@@ -250,20 +254,20 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
           })
           .catch((error) => {
             addSnackbar({
-              message: 'translation-file',
+              message: t('error.fetchLearningElementRatings'),
               severity: 'error',
               autoHideDuration: 3000
             })
-            log.error('translationfile' + ' ' + error)
+            log.error(t('error.fetchLearningElementRatings') + ' ' + error)
           })
       })
       .catch((error) => {
         addSnackbar({
-          message: 'translation-file',
+          message: t('error.fetchUser'),
           severity: 'error',
           autoHideDuration: 3000
         })
-        log.error('translationfile' + ' ' + error)
+        log.error(t('error.fetchUser') + ' ' + error)
       })
   }, [])
 

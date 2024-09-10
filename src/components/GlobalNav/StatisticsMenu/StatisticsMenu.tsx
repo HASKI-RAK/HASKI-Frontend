@@ -1,13 +1,14 @@
 import { memo, useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import { AuthContext } from '@services'
 import GlobalNavMenu from '../GlobalNavMenu/GlobalNavMenu'
 
 const StatisticsMenu = () => {
   const { isAuth } = useContext(AuthContext)
-  //const { t } = useTranslation()
+  const { t } = useTranslation()
   const statisticsComponents = [
     {
-      name: 'Rating dashboard', // TODO: translation
+      name: t('pages.ratingdashboard'),
       url: '/ratingdashboard',
       isDisabled: false,
       availableAt: new Date()
@@ -19,10 +20,10 @@ const StatisticsMenu = () => {
       {isAuth && (
         <GlobalNavMenu
           id="statistics"
-          title={'Statistics'} // TODO translation
+          title={t('components.StatisticsMenu.title')}
           content={statisticsComponents}
           isLoading={false}
-          tooltip={'Select statistics'} // TODO translation
+          tooltip={t('tooltip.statisticsMenuSelection')}
         />
       )}
     </>

@@ -1,9 +1,11 @@
 import { MouseEvent, memo, useCallback, useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Grid, ToggleButton, ToggleButtonGroup } from '@common/components'
 import { LearningElementRatingDashboard, StudentRatingDashboard } from '@components'
 import { AuthContext } from '@services'
 
 const RatingStatistics = () => {
+  const { t } = useTranslation()
   const [selected, setSelected] = useState<string>('student')
   const { isAuth } = useContext(AuthContext)
 
@@ -20,8 +22,8 @@ const RatingStatistics = () => {
         <Grid container direction="column" alignItems="center" mt={5}>
           <Grid item>
             <ToggleButtonGroup value={selected} onChange={handleChange} exclusive>
-              <ToggleButton value="student">Student Rating</ToggleButton>
-              <ToggleButton value="learningElement">Learning Element Rating</ToggleButton>
+              <ToggleButton value="student">{t('pages.RatingStatistics.studentRating')}</ToggleButton>
+              <ToggleButton value="learningElement">{t('pages.RatingStatistics.learningElementRating')}</ToggleButton>
             </ToggleButtonGroup>
           </Grid>
           <Grid sx={{ mt: 5 }}>

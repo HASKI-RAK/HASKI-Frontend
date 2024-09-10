@@ -1,5 +1,6 @@
 import log from 'loglevel'
 import { useContext, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { StudentRating, Topic, User } from '@core'
 import { SnackbarContext, fetchStudentRatings } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -22,6 +23,9 @@ export type StudentRatingDashboardHookReturn = {
 }
 
 export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn => {
+  // Hook.
+  const { t } = useTranslation()
+
   // States.
   const [isLoading, setIsLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
@@ -62,20 +66,20 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
               })
               .catch((error) => {
                 addSnackbar({
-                  message: 'translation-file',
+                  message: t('error.fetchLearningPathTopic'),
                   severity: 'error',
                   autoHideDuration: 3000
                 })
-                log.error('translationfile' + ' ' + error)
+                log.error(t('error.fetchLearningPathTopic') + ' ' + error)
               })
           })
           .catch((error) => {
             addSnackbar({
-              message: 'translation-file',
+              message: t('error.fetchCourses'),
               severity: 'error',
               autoHideDuration: 3000
             })
-            log.error('translationfile' + ' ' + error)
+            log.error(t('error.fetchCourses') + ' ' + error)
           })
 
         // Fetch all ratings of all students.
@@ -186,20 +190,20 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
           })
           .catch((error) => {
             addSnackbar({
-              message: 'translation-file',
+              message: t('error.fetchStudentRatings'),
               severity: 'error',
               autoHideDuration: 3000
             })
-            log.error('translationfile' + ' ' + error)
+            log.error(t('error.fetchStudentRatings') + ' ' + error)
           })
       })
       .catch((error) => {
         addSnackbar({
-          message: 'translation-file',
+          message: t('error.fetchUser'),
           severity: 'error',
           autoHideDuration: 3000
         })
-        log.error('translationfile' + ' ' + error)
+        log.error(t('error.fetchUser') + ' ' + error)
 
         setIsLoading(true)
       })

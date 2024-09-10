@@ -1,4 +1,5 @@
 import { memo, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Histogram, LineGraph, Rating, SpiderGraph, Table, TableColumnProps } from 'react-rating-charts'
 import { FormControlLabel, Grid, Radio, RadioGroup } from '@common/components'
 import {
@@ -18,6 +19,7 @@ const StudentRatingDashboard = ({
   const [transformedSpiderGraphData, setTransformedSpiderGraphData] = useState({})
 
   // Hook.
+  const { t } = useTranslation()
   const {
     isLoading,
     ratingValue,
@@ -51,64 +53,74 @@ const StudentRatingDashboard = ({
   const color = 'orange'
 
   // Rating title and tooltips.
-  const title = 'Your current average rating' // 'Ihr derzeitiges durchschnittl. Rating' t('components.StudentRatingDashboard.ratingTitle)
+  const title = t('components.StudentRatingDashboard.ratingTitle') // 'Ihr derzeitiges durchschnittl. Rating' t('components.StudentRatingDashboard.ratingTitle)
   const ratingTooltips = {
-    setDeviationTooltip: (value: number) => 'Your current average rating deviation is ' + value + '.',
-    setDeviationTrendTooltip: (value: number) => 'The trend of your average rating deviation is ' + value + '.',
-    setValueTooltip: (value: number) => 'Your current average rating value is ' + value + '.',
-    setValueTrendTooltip: (value: number) => 'The trend of your average rating value is ' + value + '.'
+    setDeviationTooltip: (value: number) =>
+      t('components.StudentRatingDashboard.ratingDeviationTooltip', { value: value }),
+    setDeviationTrendTooltip: (value: number) =>
+      t('components.StudentRatingDashboard.ratingDeviationTrendTooltip', { value: value }),
+    setValueTooltip: (value: number) => t('components.StudentRatingDashboard.ratingValueTooltip', { value: value }),
+    setValueTrendTooltip: (value: number) =>
+      t('components.StudentRatingDashboard.ratingValueTrendTooltip', { value: value })
   }
 
   // Spider graph.
-  const spiderGraphTitle = 'Your average rating per topic'
-  const setTooltip = (concept: string, value: number) => 'Your rating for ' + concept + ' is ' + value + '.'
+  const spiderGraphTitle = t('components.StudentRatingDashboard.spiderGraphTitle')
+  const setTooltip = (concept: string, value: number) =>
+    t('components.StudentRatingDashboard.spiderGraphTooltip', { concept: concept, value: value })
 
   // Histogram.
-  const setUserInfo = (value: string, percentage: string) => 'Your rating'
+  const setUserInfo = (_value: string, _percentage: string) => t('components.StudentRatingDashboard.histogramUserInfo')
   const histogramTitles = {
-    title: 'The rating distribution of all students',
-    yAxisTitle: 'Number of students',
-    xAxisTitle: 'Rating'
+    title: t('components.StudentRatingDashboard.histogramTitle'),
+    yAxisTitle: t('components.RatingDashboard.histogramYAxisTitle'),
+    xAxisTitle: t('components.RatingDashboard.histogramXAxisTitle')
   }
   const histogramTooltips = {
     setUserInfoTooltip: (value: string, percentage: string) =>
-      'You are above ' + percentage + '% of all students with a rating of ' + value + '.',
-    setXAxisTooltip: (minValue: number | string, maxValue: number | string) => 'Shows the rating values.',
-    setYAxisTooltip: (minValue: number | string, maxValue: number | string) => 'Shows the number of students.'
+      t('components.StudentRatingDashboard.histogramUserInfoTooltip', { value: value, percentage: percentage }),
+    setXAxisTooltip: (_minValue: number | string, _maxValue: number | string) =>
+      t('components.RatingDashboard.histogramXAxisTooltip'),
+    setYAxisTooltip: (_minValue: number | string, _maxValue: number | string) =>
+      t('components.RatingDashboard.histogramYAxisTooltip')
   }
 
   // Line graph.
-  const lineGraphTitle = 'The progression of your average rating'
+  const lineGraphTitle = t('components.StudentRatingDashboard.lineGraphTitle')
   const lineGraphTitles = {
     title: lineGraphTitle,
-    xAxisTitle: 'Timestamp',
-    yAxisTitle: 'Rating'
+    xAxisTitle: t('components.RatingDashboard.lineGraphXAxisTitle'),
+    yAxisTitle: t('components.RatingDashboard.lineGraphYAxisTitle')
   }
   const lineGraphTooltips = {
     setXAxisTooltip: () => 'Shows the timestamps.',
     setYAxisTooltip: () => 'Shows the rating values.',
     setDataTooltip: (value: number, deviation: number, timestamp: string) =>
-      'On' + timestamp + ' your rating was ' + value + ' with a deviation of ' + deviation + '.',
+      t('components.StudentRatingDashboard.lineGraphDataTooltip', {
+        value: value,
+        deviation: deviation,
+        timestamp: timestamp
+      }),
     setLowerDeviationTooltip: (value: number, timestamp: string) =>
-      'On ' + timestamp + ' your maximum rating was ' + value + '.',
+      t('components.StudentRatingDashboard.lineGraphLowerDeviationTooltip', { value: value, timestamp: timestamp }),
     setUpperDeviationTooltip: (value: number, timestamp: string) =>
-      'On ' + timestamp + ' your minimum rating was ' + value + '.'
+      t('components.StudentRatingDashboard.lineGraphUpperDeviationTooltip', { value: value, timestamp: timestamp })
   }
 
   // Table.
   const setRGBColor = (alpha: number) => 'rgba(255, 165, 0, ' + alpha + ')'
-  const setHeaderTooltip = (header: string) => 'Shows the ' + header + 's of the table.'
+  const setHeaderTooltip = (header: string) => t('components.RatingDashboard.tableHeaderTooltip', { header: header })
   const columns: TableColumnProps[] = [
     {
-      header: 'Timestamp',
+      header: t('components.RatingDashboard.tableHeaderTimestamp'),
       key: 'timestamp'
     },
     {
-      header: 'Value',
+      header: t('components.RatingDashboard.tableHeaderValue'),
       key: 'value'
     },
     {
-      header: 'Deviation',
+      header: t('components.RatingDashboard.tableHeaderDeviation'),
       key: 'deviation'
     }
   ]
@@ -160,8 +172,8 @@ const StudentRatingDashboard = ({
                   row
                   onChange={(event) => setChosenComponent(event.target.value)}
                   value={chosenComponent}>
-                  <FormControlLabel value="lineGraph" control={<Radio />} label="Line graph" />
-                  <FormControlLabel value="table" control={<Radio />} label="Table" />
+                  <FormControlLabel value="lineGraph" control={<Radio />} label={t('appGlobal.lineGraph')} />
+                  <FormControlLabel value="table" control={<Radio />} label={t('appGlobal.table')} />
                 </RadioGroup>
               </Grid>
               <Grid item>

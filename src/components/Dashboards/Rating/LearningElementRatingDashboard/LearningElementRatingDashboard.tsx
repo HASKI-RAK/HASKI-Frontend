@@ -1,4 +1,5 @@
 import { memo, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { LineGraph, Rating, SpiderGraph, Table, TableColumnProps } from 'react-rating-charts'
 import { FormControlLabel, Grid, Radio, RadioGroup } from '@common/components'
 import {
@@ -18,6 +19,7 @@ const LearningElementRatingDashboard = ({
   const [transformedSpiderGraphData, setTransformedSpiderGraphData] = useState({})
 
   // Hook.
+  const { t } = useTranslation()
   const {
     isLoading,
     ratingValue,
@@ -51,50 +53,65 @@ const LearningElementRatingDashboard = ({
   const color = 'orange'
 
   // Rating title and tooltips.
-  const title = 'The current average rating of all learning elements' // 'Ihr derzeitiges durchschnittl. Rating' t('components.StudentRatingDashboard.ratingTitle)
+  const title = t('components.LearningElementRatingDashboard.ratingTitle') // 'Ihr derzeitiges durchschnittl. Rating' t('components.StudentRatingDashboard.ratingTitle)
   const ratingTooltips = {
-    setDeviationTooltip: (value: number) => 'The current average rating deviation is ' + value + '.',
-    setDeviationTrendTooltip: (value: number) => 'The trend of the average rating deviation is ' + value + '.',
-    setValueTooltip: (value: number) => 'The current average rating value is ' + value + '.',
-    setValueTrendTooltip: (value: number) => 'The trend of the average rating value is ' + value + '.'
+    setDeviationTooltip: (value: number) =>
+      t('components.LearningElementRatingDashboard.ratingDeviationTooltip', { value: value }),
+    setDeviationTrendTooltip: (value: number) =>
+      t('components.LearningElementRatingDashboard.ratingDeviationTrendTooltip', { value: value }),
+    setValueTooltip: (value: number) =>
+      t('components.LearningElementRatingDashboard.ratingValueTooltip', { value: value }),
+    setValueTrendTooltip: (value: number) =>
+      t('components.LearningElementRatingDashboard.ratingValueTrendTooltip', { value: value })
   }
 
   // Spider graph.
-  const spiderGraphTitle = 'The average learning element rating per topic'
-  const setTooltip = (concept: string, value: number) => 'The rating for ' + concept + ' is ' + value + '.'
+  const spiderGraphTitle = t('components.LearningElementRatingDashboard.spiderGraphTitle')
+  const setTooltip = (concept: string, value: number) =>
+    t('components.LearningElementRatingDashboard.spiderGraphTooltip', { concept: concept, value: value })
 
   // Line graph.
-  const lineGraphTitle = 'The progression of the average learning element rating'
+  const lineGraphTitle = t('components.LearningElementRatingDashboard.lineGraphTitle')
   const lineGraphTitles = {
     title: lineGraphTitle,
-    xAxisTitle: 'Timestamp',
-    yAxisTitle: 'Rating'
+    xAxisTitle: t('components.RatingDashboard.lineGraphXAxisTitle'),
+    yAxisTitle: t('components.RatingDashboard.lineGraphYAxisTitle')
   }
   const lineGraphTooltips = {
-    setXAxisTooltip: () => 'Shows the timestamps.',
-    setYAxisTooltip: () => 'Shows the rating values.',
+    setXAxisTooltip: () => t('components.RatingDashboard.lineGraphXAxisTooltip'),
+    setYAxisTooltip: () => t('components.RatingDashboard.lineGraphYAxisTooltip'),
     setDataTooltip: (value: number, deviation: number, timestamp: string) =>
-      'On' + timestamp + ' the rating was ' + value + ' with a deviation of ' + deviation + '.',
+      t('components.LearningElementRatingDashboard.lineGraphDataTooltip', {
+        value: value,
+        deviation: deviation,
+        timestamp: timestamp
+      }),
     setLowerDeviationTooltip: (value: number, timestamp: string) =>
-      'On ' + timestamp + ' the maximum rating was ' + value + '.',
+      t('components.LearningElementRatingDashboard.lineGraphLowerDeviationTooltip', {
+        value: value,
+        timestamp: timestamp
+      }),
     setUpperDeviationTooltip: (value: number, timestamp: string) =>
-      'On ' + timestamp + ' the minimum rating was ' + value + '.'
+      t('components.LearningElementRatingDashboard.lineGraphUpperDeviationTooltip', {
+        value: value,
+        timestamp: timestamp
+      })
   }
 
   // Table.
   const setRGBColor = (alpha: number) => 'rgba(255, 165, 0, ' + alpha + ')'
-  const setHeaderTooltip = (header: string) => 'Shows the ' + header + 's of the table.'
+  const setHeaderTooltip = (header: string) => t('components.RatingDashboard.tableHeaderTooltip', { header: header })
   const columns: TableColumnProps[] = [
     {
-      header: 'Timestamp',
+      header: t('components.RatingDashboard.tableHeaderTimestamp'),
       key: 'timestamp'
     },
     {
-      header: 'Value',
+      header: t('components.RatingDashboard.tableHeaderValue'),
       key: 'value'
     },
     {
-      header: 'Deviation',
+      header: t('components.RatingDashboard.tableHeaderDeviation'),
       key: 'deviation'
     }
   ]
@@ -133,8 +150,8 @@ const LearningElementRatingDashboard = ({
                   row
                   onChange={(event) => setChosenComponent(event.target.value)}
                   value={chosenComponent}>
-                  <FormControlLabel value="lineGraph" control={<Radio />} label="Line graph" />
-                  <FormControlLabel value="table" control={<Radio />} label="Table" />
+                  <FormControlLabel value="lineGraph" control={<Radio />} label={t('appGlobal.lineGraph')} />
+                  <FormControlLabel value="table" control={<Radio />} label={t('appGlobal.table')} />
                 </RadioGroup>
               </Grid>
               <Grid item>
