@@ -662,7 +662,7 @@
   "components.StudentRatingDashboard.ratingDeviationTooltip": "Your current average rating deviation is {{value}}.",
   "components.StudentRatingDashboard.ratingDeviationTrendTooltip": "The trend of your average rating deviation is {{value}}.",
   "components.StudentRatingDashboard.ratingTitle": "Your current average rating",
-  "components.StudentRatingDashboard.ratingValueTooltip": "'Your current average rating value is {{value}}.",
+  "components.StudentRatingDashboard.ratingValueTooltip": "Your current average rating value is {{value}}.",
   "components.StudentRatingDashboard.ratingValueTrendTooltip": "The trend of your average rating value is {{value}}.",
   "components.StudentRatingDashboard.spiderGraphTitle": "Your average rating per topic",
   "components.StudentRatingDashboard.spiderGraphTooltip": "Your rating for {{concept}} is {{value}}.",

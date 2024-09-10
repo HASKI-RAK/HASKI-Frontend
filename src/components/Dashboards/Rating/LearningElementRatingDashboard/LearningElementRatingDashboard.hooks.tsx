@@ -10,15 +10,15 @@ import { usePersistedStore, useStore } from '@store'
  *
  * Represents the return type of the useLearningElementRatingDashboard hook.
  *
- * @props ratingValue - The average rating value of all learning elements.
- * @props ratingDeviation - The average rating deviation of all learning elements.
- * @props maxRatingDeviation - The maximum rating deviation of all learning elements.
- * @props ratingValueTrend - The trend of the average rating value of all learning elements.
- * @props ratingDeviationTrend - The trend of the average rating deviation of all learning elements.
- * @props spiderGraphData - The data for the spider graph.
- * @props lineGraphData - The data for the line graph.
- * @props isLoading - The loading state.
- * @props topics - A list of topics.
+ * @prop ratingValue - The average rating value of all learning elements.
+ * @prop ratingDeviation - The average rating deviation of all learning elements.
+ * @prop maxRatingDeviation - The maximum rating deviation of all learning elements.
+ * @prop ratingValueTrend - The trend of the average rating value of all learning elements.
+ * @prop ratingDeviationTrend - The trend of the average rating deviation of all learning elements.
+ * @prop spiderGraphData - The data for the spider graph.
+ * @prop lineGraphData - The data for the line graph.
+ * @prop isLoading - The loading state.
+ * @prop topics - A list of topics.
  */
 export type LearningElementRatingDashboardHookReturn = {
   ratingValue: number
@@ -41,7 +41,7 @@ export type LearningElementRatingDashboardHookReturn = {
  *
  * Fetches the learning element ratings and calculates the data for the learning element rating dashboard.
  *
- * @returns {LearningElementRatingDashboardHookReturn}
+ * @returns LearningElementRatingDashboardHookReturn
  *
  * @remarks
  * This hook is used in the LearningElementRatingDashboard component as default.
@@ -129,35 +129,31 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
             // Group ratings by learning element and topic, keeping only the latest and second latest ratings.
             const groupedRatings = learningElementRatingResponse.reduce((acc, rating) => {
               const key = `${rating.learning_element_id}-${rating.topic_id}`
-              if (!acc[key]) {
-                acc[key] = [rating]
-              } else {
-                acc[key].push(rating)
-                acc[key].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
-                acc[key] = acc[key].slice(0, 2) // Keep only the two latest ratings
+              const updatedRatings = acc[key]
+                ? [...acc[key], rating]
+                    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+                    .slice(0, 2) // Keep only the two latest ratings
+                : [rating]
+              return {
+                ...acc,
+                [key]: updatedRatings
               }
-              return acc
             }, {} as { [key: string]: LearningElementRating[] })
 
-            // Create topic map.
-            const topicMap: {
-              [topicId: number]: { latest: LearningElementRating[]; secondLatest: LearningElementRating[] }
-            } = {}
-
             // Calculate averages for the latest and second latest ratings.
-            Object.values(groupedRatings).forEach((ratingsList) => {
+            const topicMap = Object.values(groupedRatings).reduce((acc, ratingsList) => {
               const latestRating = ratingsList[0]
               const secondLatestRating = ratingsList[1]
-              if (!topicMap[latestRating.topic_id]) {
-                topicMap[latestRating.topic_id] = { latest: [], secondLatest: [] }
+              return {
+                ...acc,
+                [latestRating.topic_id]: {
+                  latest: [...(acc[latestRating.topic_id]?.latest || []), latestRating],
+                  secondLatest: secondLatestRating
+                    ? [...(acc[latestRating.topic_id]?.secondLatest || []), secondLatestRating]
+                    : acc[latestRating.topic_id]?.secondLatest || []
+                }
               }
-              topicMap[latestRating.topic_id].latest.push(latestRating)
-              if (secondLatestRating) {
-                topicMap[latestRating.topic_id].secondLatest.push(secondLatestRating)
-              }
-            })
-
-            const spiderData: Record<string, number> = {}
+            }, {} as { [topicId: number]: { latest: LearningElementRating[]; secondLatest: LearningElementRating[] } })
 
             // Calculate the average rating for each topic.
             const topicAverages = Object.keys(topicMap).map((topicId) => {
@@ -165,21 +161,19 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
 
               // Calculate the sum of the latest ratings.
               const latestRatingsSum = topicData.latest.reduce(
-                (acc, rating) => {
-                  acc.ratingSum += rating.rating_value
-                  acc.deviationSum += rating.rating_deviation
-                  return acc
-                },
+                (acc, rating) => ({
+                  ratingSum: acc.ratingSum + rating.rating_value,
+                  deviationSum: acc.deviationSum + rating.rating_deviation
+                }),
                 { ratingSum: 0, deviationSum: 0 }
               )
 
               // Calculate the sum of the second latest ratings.
               const secondLatestRatingsSum = topicData.secondLatest.reduce(
-                (acc, rating) => {
-                  acc.ratingSum += rating.rating_value
-                  acc.deviationSum += rating.rating_deviation
-                  return acc
-                },
+                (acc, rating) => ({
+                  ratingSum: acc.ratingSum + rating.rating_value,
+                  deviationSum: acc.deviationSum + rating.rating_deviation
+                }),
                 { ratingSum: 0, deviationSum: 0 }
               )
 
@@ -195,9 +189,6 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
                 ? secondLatestRatingsSum.deviationSum / topicData.secondLatest.length
                 : 0
 
-              // Set the data of one topic for the spider graph.
-              spiderData[topicId] = latestAvgRating
-
               return {
                 topicId: parseInt(topicId),
                 latestAvgRating,
@@ -208,17 +199,23 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
             })
 
             // Set data for spider graph.
+            const spiderData = topicAverages.reduce((acc, { topicId, latestAvgRating }) => {
+              return {
+                ...acc,
+                [topicId]: latestAvgRating
+              }
+            }, {} as Record<string, number>)
+
             setSpiderGraphData(spiderData)
 
             // Calculate the overall averages.
             const overallAverages = topicAverages.reduce(
-              (acc, topic) => {
-                acc.latestRatingSum += topic.latestAvgRating
-                acc.latestDeviationSum += topic.latestAvgDeviation
-                acc.secondLatestRatingSum += topic.secondLatestAvgRating
-                acc.secondLatestDeviationSum += topic.secondLatestAvgDeviation
-                return acc
-              },
+              (acc, topic) => ({
+                latestRatingSum: acc.latestRatingSum + topic.latestAvgRating,
+                latestDeviationSum: acc.latestDeviationSum + topic.latestAvgDeviation,
+                secondLatestRatingSum: acc.secondLatestRatingSum + topic.secondLatestAvgRating,
+                secondLatestDeviationSum: acc.secondLatestDeviationSum + topic.secondLatestAvgDeviation
+              }),
               { latestRatingSum: 0, latestDeviationSum: 0, secondLatestRatingSum: 0, secondLatestDeviationSum: 0 }
             )
 
@@ -258,16 +255,23 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
               const relevantRatings = sortedRatings.filter(
                 (r) => new Date(r.timestamp).getTime() <= timestamp.getTime()
               )
-              const topicMap: { [topicId: number]: { sum: number; count: number; deviationSum: number } } = {}
-
-              relevantRatings.forEach((rating) => {
-                if (!topicMap[rating.topic_id]) {
-                  topicMap[rating.topic_id] = { sum: 0, count: 0, deviationSum: 0 }
-                }
-                topicMap[rating.topic_id].sum += rating.rating_value
-                topicMap[rating.topic_id].deviationSum += rating.rating_deviation
-                topicMap[rating.topic_id].count += 1
-              })
+              const topicMap = relevantRatings.reduce(
+                (acc, rating) => ({
+                  ...acc,
+                  [rating.topic_id]: acc[rating.topic_id]
+                    ? {
+                        sum: acc[rating.topic_id].sum + rating.rating_value,
+                        count: acc[rating.topic_id].count + 1,
+                        deviationSum: acc[rating.topic_id].deviationSum + rating.rating_deviation
+                      }
+                    : {
+                        sum: rating.rating_value,
+                        count: 1,
+                        deviationSum: rating.rating_deviation
+                      }
+                }),
+                {} as { [topicId: number]: { sum: number; count: number; deviationSum: number } }
+              )
 
               const topicAverages = Object.values(topicMap).map((topic) => ({
                 avgRating: topic.sum / topic.count,

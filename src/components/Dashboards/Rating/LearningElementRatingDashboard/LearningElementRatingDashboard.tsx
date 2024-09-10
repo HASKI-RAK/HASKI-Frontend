@@ -12,7 +12,7 @@ import {
  *
  * Represents the properties of the LearningElementRatingDashboard component.
  *
- * @props useLearningElementRatingDashboard - The hook for the LearningElementRatingDashboard component.
+ * @prop useLearningElementRatingDashboard - The hook for the LearningElementRatingDashboard component.
  */
 type LearningElementRatingDashboardProps = {
   useLearningElementRatingDashboard?: () => LearningElementRatingDashboardHookReturn
@@ -58,16 +58,19 @@ const LearningElementRatingDashboard = ({
   // Map the topic ids to the topic names.
   useEffect(() => {
     if (topics.length > 0 && spiderGraphData) {
-      const updatedSpiderGraphData = { ...spiderGraphData }
-
-      for (const topicId in updatedSpiderGraphData) {
+      const updatedSpiderGraphData = Object.keys(spiderGraphData).reduce((acc, topicId) => {
         const topic = topics.find((topic) => topic.id === parseInt(topicId))
-        if (topic && updatedSpiderGraphData[topicId] != null) {
-          updatedSpiderGraphData[topic.name] = updatedSpiderGraphData[topicId]
-          delete updatedSpiderGraphData[topicId]
+        if (topic && spiderGraphData[topicId] != null) {
+          return {
+            ...acc,
+            [topic.name]: spiderGraphData[topicId]
+          }
         }
-      }
-
+        return {
+          ...acc,
+          [topicId]: spiderGraphData[topicId]
+        }
+      }, {})
       setTransformedSpiderGraphData(updatedSpiderGraphData)
     }
   }, [topics, spiderGraphData])

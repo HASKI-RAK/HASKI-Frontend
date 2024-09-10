@@ -10,16 +10,16 @@ import { usePersistedStore, useStore } from '@store'
  *
  * Represents the return type of the useStudentRatingDashboard hook.
  *
- * @props ratingValue - The average rating value of the user.
- * @props ratingDeviation - The average rating deviation of the user.
- * @props maxRatingDeviation - The maximum rating deviation of the user.
- * @props ratingValueTrend - The rating value trend of the user.
- * @props ratingDeviationTrend - The rating deviation trend of the user.
- * @props spiderGraphData - The data for the spider graph.
- * @props lineGraphData - The data for the line graph.
- * @props histogramData - The data for the histogram.
- * @props isLoading - The loading state of the data.
- * @props topics - The topics of the user.
+ * @prop ratingValue - The average rating value of the user.
+ * @prop ratingDeviation - The average rating deviation of the user.
+ * @prop maxRatingDeviation - The maximum rating deviation of the user.
+ * @prop ratingValueTrend - The rating value trend of the user.
+ * @prop ratingDeviationTrend - The rating deviation trend of the user.
+ * @prop spiderGraphData - The data for the spider graph.
+ * @prop lineGraphData - The data for the line graph.
+ * @prop histogramData - The data for the histogram.
+ * @prop isLoading - The loading state of the data.
+ * @prop topics - The topics of the user.
  */
 export type StudentRatingDashboardHookReturn = {
   ratingValue: number
@@ -43,7 +43,7 @@ export type StudentRatingDashboardHookReturn = {
  *
  * Fetches the student ratings and calculates the data for student rating dashboard.
  *
- * @returns {StudentRatingDashboardHookReturn}
+ * @returns StudentRatingDashboardHookReturn
  *
  * @remarks
  * This hook is used in the StudentRatingDashboard component as default.
@@ -131,35 +131,41 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
             const userRatings = ratings.filter((rating) => rating.student_id === user.id)
 
             // Categorize the ratings of the user into topics.
-            const categorizedRatings = userRatings.reduce((acc, rating) => {
-              if (!acc[rating.topic_id]) {
-                acc[rating.topic_id] = []
-              }
-              acc[rating.topic_id].push(rating)
-              return acc
-            }, {} as Record<string, StudentRating[]>)
+            const categorizedRatings = userRatings.reduce(
+              (acc, rating) => ({
+                ...acc,
+                [rating.topic_id]: [...(acc[rating.topic_id] || []), rating]
+              }),
+              {} as Record<string, StudentRating[]>
+            )
 
             // Set the data for the spider graph.
             setSpiderGraphData(
-              Object.keys(categorizedRatings).reduce((acc: { [key: string]: number }, key) => {
-                acc[key] = categorizedRatings[key][0].rating_value
-                return acc
-              }, {})
+              Object.keys(categorizedRatings).reduce(
+                (acc: { [key: string]: number }, key) => ({
+                  ...acc,
+                  [key]: categorizedRatings[key][0].rating_value
+                }),
+                {}
+              )
             )
 
             // Calculate the average rating value and deviation of the user.
             const totals = Object.values(categorizedRatings).reduce(
               (acc, ratings) => {
                 const [current, previous] = ratings
-                acc.current.ratingValue += current.rating_value
-                acc.current.ratingDeviation += current.rating_deviation
-
-                if (previous) {
-                  acc.previous.ratingValue += previous.rating_value
-                  acc.previous.ratingDeviation += previous.rating_deviation
+                return {
+                  current: {
+                    ratingValue: acc.current.ratingValue + current.rating_value,
+                    ratingDeviation: acc.current.ratingDeviation + current.rating_deviation
+                  },
+                  previous: previous
+                    ? {
+                        ratingValue: acc.previous.ratingValue + previous.rating_value,
+                        ratingDeviation: acc.previous.ratingDeviation + previous.rating_deviation
+                      }
+                    : acc.previous
                 }
-
-                return acc
               },
               {
                 current: { ratingValue: 0, ratingDeviation: 0 },
@@ -209,19 +215,23 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
             // Get the latest of each student-topic pair.
             const latestRatings = ratings.reduce((acc, rating) => {
               const key = `${rating.student_id}-${rating.topic_id}`
-              if (!acc[key] || new Date(rating.timestamp).getTime() > new Date(acc[key].timestamp).getTime()) {
-                acc[key] = rating
-              }
-              return acc
+              const shouldUpdate =
+                !acc[key] || new Date(rating.timestamp).getTime() > new Date(acc[key].timestamp).getTime()
+              return shouldUpdate ? { ...acc, [key]: rating } : acc
             }, {} as { [key: string]: StudentRating })
 
             // Calculate averages for each student.
             const studentAverages = Object.values(latestRatings).reduce((acc, rating) => {
               const { student_id, rating_value } = rating
-              if (!acc[student_id]) acc[student_id] = { sum: 0, count: 0 }
-              acc[student_id].sum += rating_value
-              acc[student_id].count += 1
-              return acc
+              return {
+                ...acc,
+                [student_id]: acc[student_id]
+                  ? {
+                      sum: acc[student_id].sum + rating_value,
+                      count: acc[student_id].count + 1
+                    }
+                  : { sum: rating_value, count: 1 }
+              }
             }, {} as { [student_id: number]: { sum: number; count: number } })
 
             // Set the histogram data.

@@ -12,7 +12,7 @@ import {
  *
  * Represents the properties of the StudentRatingDashboard component.
  *
- * @props useStudentRatingDashboard - The hook for the StudentRatingDashboard component.
+ * @prop useStudentRatingDashboard - The hook for the StudentRatingDashboard component.
  */
 type StudentRatingDashboardProps = {
   useStudentRatingDashboard?: () => StudentRatingDashboardHookReturn
@@ -59,15 +59,19 @@ const StudentRatingDashboard = ({
   // Map the topic ids to the topic names.
   useEffect(() => {
     if (topics.length > 0) {
-      const updatedSpiderGraphData = { ...spiderGraphData }
-
-      for (const topicId in updatedSpiderGraphData) {
+      const updatedSpiderGraphData = Object.keys(spiderGraphData).reduce((acc, topicId) => {
         const topic = topics.find((topic) => topic.id === parseInt(topicId))
         if (topic) {
-          updatedSpiderGraphData[topic.name] = updatedSpiderGraphData[topicId]
-          delete updatedSpiderGraphData[topicId]
+          return {
+            ...acc,
+            [topic.name]: spiderGraphData[topicId]
+          }
         }
-      }
+        return {
+          ...acc,
+          [topicId]: spiderGraphData[topicId]
+        }
+      }, {})
       setTransformedSpiderGraphData(updatedSpiderGraphData)
     }
   }, [topics, spiderGraphData])
@@ -93,7 +97,7 @@ const StudentRatingDashboard = ({
     t('components.StudentRatingDashboard.spiderGraphTooltip', { concept: concept, value: value })
 
   // Histogram.
-  const setUserInfo = (_value: string, _percentage: string) => t('components.StudentRatingDashboard.histogramUserInfo')
+  const setUserInfo = () => t('components.StudentRatingDashboard.histogramUserInfo')
   const histogramTitles = {
     title: t('components.StudentRatingDashboard.histogramTitle'),
     yAxisTitle: t('components.RatingDashboard.histogramYAxisTitle'),
@@ -102,10 +106,8 @@ const StudentRatingDashboard = ({
   const histogramTooltips = {
     setUserInfoTooltip: (value: string, percentage: string) =>
       t('components.StudentRatingDashboard.histogramUserInfoTooltip', { value: value, percentage: percentage }),
-    setXAxisTooltip: (_minValue: number | string, _maxValue: number | string) =>
-      t('components.RatingDashboard.histogramXAxisTooltip'),
-    setYAxisTooltip: (_minValue: number | string, _maxValue: number | string) =>
-      t('components.RatingDashboard.histogramYAxisTooltip')
+    setXAxisTooltip: () => t('components.RatingDashboard.histogramXAxisTooltip'),
+    setYAxisTooltip: () => t('components.RatingDashboard.histogramYAxisTooltip')
   }
 
   // Line graph.

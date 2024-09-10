@@ -39,7 +39,6 @@ describe('StudentRatingDashboard', () => {
 
       const valueTrend = container.querySelectorAll('image.value-trend')
       fireEvent.mouseOver(valueTrend[0])
-      fs.writeFileSync('./rendered-dom.html', container.innerHTML)
 
       const deviation = screen.getByText('196')
       fireEvent.mouseOver(deviation)
