@@ -1,5 +1,3 @@
-import { Rating } from 'react-rating-charts'
-import { postCalculateRating } from '@services'
 import { resetAllSlices } from '@store'
 
 /**
@@ -358,14 +356,14 @@ const mockDataServices: MockDataServices = {
         topic_id: 1,
         rating_value: 1000,
         rating_deviation: 100,
-        timestamp: new Date('2023-01-01')
+        timestamp: new Date('2023-01-02')
       },
       {
         student_id: 1,
         topic_id: 1,
         rating_value: 1200,
         rating_deviation: 120,
-        timestamp: new Date('2023-01-02')
+        timestamp: new Date('2023-01-01')
       },
       {
         student_id: 2,
@@ -377,6 +375,13 @@ const mockDataServices: MockDataServices = {
       {
         student_id: 3,
         topic_id: 2,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        student_id: 1,
+        topic_id: 99,
         rating_value: 800,
         rating_deviation: 80,
         timestamp: new Date('2023-01-02')
@@ -441,6 +446,13 @@ const mockDataServices: MockDataServices = {
       {
         learning_element_id: 3,
         topic_id: 2,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        learning_element_id: 4,
+        topic_id: 99,
         rating_value: 800,
         rating_deviation: 80,
         timestamp: new Date('2023-01-02')

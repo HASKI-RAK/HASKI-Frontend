@@ -32,13 +32,13 @@ describe('LearningElementRatingDashboard', () => {
     )
 
     await waitFor(() => {
-      const value = getByText('1050')
+      const value = getByText('0.805')
       fireEvent.mouseOver(value)
 
       const valueTrend = container.querySelectorAll('image.value-trend')
       fireEvent.mouseOver(valueTrend[0])
 
-      const deviation = screen.getByText('205')
+      const deviation = screen.getByText('0.80')
       fireEvent.mouseOver(deviation)
 
       const deviationTrend = container.querySelectorAll('image.deviation-trend')
@@ -100,22 +100,22 @@ describe('LearningElementRatingDashboard', () => {
       expect(result.current.isLoading).toBe(false)
     })
 
-    expect(result.current.ratingValue).toEqual(1050)
-    expect(result.current.ratingDeviation).toEqual(105)
-    expect(result.current.maxRatingDeviation).toEqual(120)
-    expect(result.current.ratingDeviationTrend).toEqual(55)
-    expect(result.current.ratingValueTrend).toEqual(550)
-    expect(result.current.spiderGraphData).toEqual({ '1': 1200, '2': 900 })
+    expect(result.current.ratingValue).toEqual(0.8055555555555555)
+    expect(result.current.ratingDeviation).toEqual(0.8055555555555556)
+    expect(result.current.maxRatingDeviation).toEqual(1)
+    expect(result.current.ratingDeviationTrend).toEqual(0.5277777777777778)
+    expect(result.current.ratingValueTrend).toEqual(0.5277777777777777)
+    expect(result.current.spiderGraphData).toEqual({ '1': 1200, '2': 900, '99': 800 })
     expect(result.current.lineGraphData).toEqual([
       {
-        deviation: 100,
+        deviation: 196,
         timestamp: new Date('2023-01-01T00:00:00.000Z'),
         value: 1000
       },
       {
-        deviation: 100,
+        deviation: 182.9333333333333,
         timestamp: new Date('2023-01-02T00:00:00.000Z'),
-        value: 1000
+        value: 933.3333333333334
       }
     ])
     expect(result.current.topics).toEqual([

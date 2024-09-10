@@ -91,29 +91,34 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
   const { addSnackbar } = useContext(SnackbarContext)
 
   useEffect(() => {
+    // Get the user.
     getUser()
       .then((user: User) => {
         // Get courses of the user.
         getCourses(user.settings.user_id, user.lms_user_id, user.id)
           .then((courseResponse) => {
+            const courseTopics: Topic[] = []
             // Get all topics of the course.
-            const courseTopicsPromises = courseResponse.courses.map((course) =>
-              getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, course.id.toString())
-            )
-            Promise.all(courseTopicsPromises)
-              .then((courseTopicsResponses) => {
-                // Set all the topics.
-                const topics = courseTopicsResponses.flatMap((resp) => resp.topics)
-                setTopics(topics)
-              })
-              .catch((error) => {
-                addSnackbar({
-                  message: t('error.fetchLearningPathTopic'),
-                  severity: 'error',
-                  autoHideDuration: 3000
-                })
-                log.error(t('error.fetchLearningPathTopic') + ' ' + error)
-              })
+            Promise.all(
+              courseResponse.courses.map((course) =>
+                // Get all topics of the course.
+                getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, course.id.toString())
+                  .then((learningPathTopicResponse) => {
+                    courseTopics.push(...learningPathTopicResponse.topics)
+                  })
+                  .catch((error) => {
+                    addSnackbar({
+                      message: t('error.fetchLearningPathTopic'),
+                      severity: 'error',
+                      autoHideDuration: 3000
+                    })
+                    log.error(t('error.fetchLearningPathTopic') + ' ' + error)
+                  })
+              )
+            ).then(() => {
+              // Set all the topics.
+              setTopics(courseTopics)
+            })
           })
           .catch((error) => {
             addSnackbar({

@@ -126,6 +126,11 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
         // Fetch all learning element ratings.
         fetchLearningElementRatings()
           .then((learningElementRatingResponse) => {
+            // Get the max rating value.
+            const maxRatingValue = Math.max(...learningElementRatingResponse.map((r) => r.rating_value))
+            // Get the max rating deviation.
+            const maxRatingDeviation = Math.max(...learningElementRatingResponse.map((r) => r.rating_deviation))
+
             // Group ratings by learning element and topic, keeping only the latest and second latest ratings.
             const groupedRatings = learningElementRatingResponse.reduce((acc, rating) => {
               const key = `${rating.learning_element_id}-${rating.topic_id}`
@@ -222,18 +227,16 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
             // Set the rating stats.
             const totalTopics = topicAverages.length
             setRatingStats({
-              ratingValue: overallAverages.latestRatingSum / totalTopics,
-              ratingDeviation: overallAverages.latestDeviationSum / totalTopics,
+              ratingValue: overallAverages.latestRatingSum / totalTopics / maxRatingValue,
+              ratingDeviation: overallAverages.latestDeviationSum / totalTopics / maxRatingDeviation,
               ratingValueTrend:
-                overallAverages.latestRatingSum / totalTopics - overallAverages.secondLatestRatingSum / totalTopics,
+                (overallAverages.latestRatingSum / totalTopics - overallAverages.secondLatestRatingSum / totalTopics) /
+                maxRatingValue,
               ratingDeviationTrend:
-                overallAverages.latestDeviationSum / totalTopics -
-                overallAverages.secondLatestDeviationSum / totalTopics,
-              maxRatingDeviation: Math.max(
-                ...Object.values(groupedRatings)
-                  .flat()
-                  .map((r) => r.rating_deviation)
-              )
+                (overallAverages.latestDeviationSum / totalTopics -
+                  overallAverages.secondLatestDeviationSum / totalTopics) /
+                maxRatingDeviation,
+              maxRatingDeviation: 1
             })
 
             // Sort the ratings by timestamp ascending.
@@ -285,7 +288,7 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
 
               lineGraphData.push({
                 value: generalAvgRating,
-                deviation: generalAvgDeviation,
+                deviation: generalAvgDeviation * 1.96,
                 timestamp
               })
             })

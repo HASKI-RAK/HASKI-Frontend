@@ -58,10 +58,10 @@ const StudentRatingDashboard = ({
 
   // Map the topic ids to the topic names.
   useEffect(() => {
-    if (topics.length > 0) {
+    if (topics.length > 0 && spiderGraphData) {
       const updatedSpiderGraphData = Object.keys(spiderGraphData).reduce((acc, topicId) => {
         const topic = topics.find((topic) => topic.id === parseInt(topicId))
-        if (topic) {
+        if (topic && spiderGraphData[topicId] != null) {
           return {
             ...acc,
             [topic.name]: spiderGraphData[topicId]

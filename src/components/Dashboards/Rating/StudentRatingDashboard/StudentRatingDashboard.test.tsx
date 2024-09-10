@@ -33,14 +33,13 @@ describe('StudentRatingDashboard', () => {
     )
 
     await waitFor(() => {
-      screen.debug()
-      const value = getByText('1000')
+      const value = getByText('900.0')
       fireEvent.mouseOver(value)
 
       const valueTrend = container.querySelectorAll('image.value-trend')
       fireEvent.mouseOver(valueTrend[0])
 
-      const deviation = screen.getByText('196')
+      const deviation = screen.getByText('176')
       fireEvent.mouseOver(deviation)
 
       const deviationTrend = container.querySelectorAll('image.deviation-trend')
@@ -80,7 +79,6 @@ describe('StudentRatingDashboard', () => {
         <StudentRatingDashboard />
       </MemoryRouter>
     )
-    act(() => {})
 
     await waitFor(() => {
       // Re-renders the whole component.
@@ -108,25 +106,30 @@ describe('StudentRatingDashboard', () => {
       expect(result.current.isLoading).toBe(false)
     })
 
-    expect(result.current.ratingValue).toEqual(1000)
-    expect(result.current.ratingDeviation).toEqual(100)
+    expect(result.current.ratingValue).toEqual(900)
+    expect(result.current.ratingDeviation).toEqual(90)
     expect(result.current.maxRatingDeviation).toEqual(120)
-    expect(result.current.ratingDeviationTrend).toEqual(-20)
-    expect(result.current.ratingValueTrend).toEqual(-200)
-    expect(result.current.spiderGraphData).toEqual({ '1': 1000 })
+    expect(result.current.ratingDeviationTrend).toEqual(30)
+    expect(result.current.ratingValueTrend).toEqual(300)
+    expect(result.current.spiderGraphData).toEqual({ '1': 1000, '99': 800 })
     expect(result.current.lineGraphData).toEqual([
       {
-        deviation: 196,
+        deviation: 235.2,
         timestamp: new Date('2023-01-01T00:00:00.000Z'),
-        value: 1000
+        value: 1200
       },
       {
         deviation: 215.6,
         timestamp: new Date('2023-01-02T00:00:00.000Z'),
         value: 1100
+      },
+      {
+        deviation: 196,
+        timestamp: new Date('2023-01-02T00:00:00.000Z'),
+        value: 1000
       }
     ])
-    expect(result.current.histogramData).toEqual([1200, 1000, 800])
+    expect(result.current.histogramData).toEqual([900, 1000, 800])
     expect(result.current.topics).toEqual([
       {
         contains_le: true,
