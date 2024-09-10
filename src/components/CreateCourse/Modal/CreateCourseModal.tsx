@@ -14,6 +14,8 @@ type CreateCourseModalProps = {
   successRemoteCourseCreated: boolean
   setSuccessRemoteCourseCreated: React.Dispatch<React.SetStateAction<boolean>>
   handleCloseCreateCourseModal: () => void
+  activeStepCreateCourseModal: number
+  setActiveStepCreateCourseModal: React.Dispatch<React.SetStateAction<number>>
 }
 
 const CreateCourseModal = memo(
@@ -21,12 +23,13 @@ const CreateCourseModal = memo(
     openCreateCourseModal = false,
     successRemoteCourseCreated,
     setSuccessRemoteCourseCreated,
-    handleCloseCreateCourseModal
+    handleCloseCreateCourseModal,
+    activeStepCreateCourseModal,
+    setActiveStepCreateCourseModal
   }: CreateCourseModalProps) => {
     //Hooks
     const { t } = useTranslation()
     const [selectedRemoteCourse, setSelectedRemoteCourse] = useState<RemoteCourse>()
-    const [activeStep, setActiveStep] = useState<number>(0)
     const [courseStartDateValue, setCourseStartDateValue] = useState<Dayjs | null>(dayjs(new Date()))
     const [user, setUser] = useState<User>()
     const [isSending, setIsSending] = useState<boolean>(false)
@@ -120,7 +123,7 @@ const CreateCourseModal = memo(
               }}>
               <Close />
             </Fab>
-            {activeStep === 0 ? (
+            {activeStepCreateCourseModal === 0 ? (
               <Grid>
                 <CreateCourseTable
                   onCourseSelect={handleCourseSelection}
@@ -131,7 +134,7 @@ const CreateCourseModal = memo(
                     id="create-course-modal-next-step"
                     variant="contained"
                     color="primary"
-                    onClick={() => setActiveStep(1)}
+                    onClick={() => setActiveStepCreateCourseModal(1)}
                     disabled={selectedRemoteCourse === undefined}>
                     {t('components.CreateCourseModal.createCourse')}
                   </Button>
@@ -149,7 +152,7 @@ const CreateCourseModal = memo(
                     id="create-course-modal-back-step"
                     variant="contained"
                     color="primary"
-                    onClick={() => setActiveStep(0)}>
+                    onClick={() => setActiveStepCreateCourseModal(0)}>
                     {t('appGlobal.back')}
                   </Button>
                   <Button

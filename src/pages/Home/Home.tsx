@@ -28,6 +28,7 @@ export const Home = () => {
   // States
   const [courses, setCourses] = useState<Course[]>([])
   const [coursesLoading, setCoursesLoading] = useState<boolean>(true)
+  const [activeStepCreateCourseModal, setActiveStepCreateCourseModal] = useState<number>(0)
   const [createCourseModalOpen, setCreateCourseModalOpen] = useState<boolean>(false)
   const [successRemoteCourseCreated, setSuccessRemoteCourseCreated] = useState<boolean>(false)
 
@@ -40,6 +41,8 @@ export const Home = () => {
   const handleCloseCourseModal = () => {
     triggerCoursesReload(true)
     setCreateCourseModalOpen(false)
+    setSuccessRemoteCourseCreated(false)
+    setActiveStepCreateCourseModal(0)
   }
 
   useEffect(() => {
@@ -155,7 +158,9 @@ export const Home = () => {
               openCreateCourseModal={createCourseModalOpen}
               handleCloseCreateCourseModal={handleCloseCourseModal}
               setSuccessRemoteCourseCreated={setSuccessRemoteCourseCreated}
-              successRemoteCourseCreated={successRemoteCourseCreated}></CreateCourseModal>
+              successRemoteCourseCreated={successRemoteCourseCreated}
+              activeStepCreateCourseModal={activeStepCreateCourseModal}
+              setActiveStepCreateCourseModal={setActiveStepCreateCourseModal}></CreateCourseModal>
           </Card>
         )}
       </Grid>
