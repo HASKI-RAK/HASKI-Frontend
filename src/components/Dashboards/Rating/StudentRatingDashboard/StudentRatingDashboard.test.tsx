@@ -15,14 +15,6 @@ beforeAll(() => {
   SVGElement.prototype.getComputedTextLength = () => 100
 })
 
-jest.mock('react-rating-charts', () => ({
-  __esModule: true,
-  Rating: () => <div data-testid="mock-rating" />,
-  SpiderGraph: () => <div data-testid="mock-spidergraph" />,
-  LineGraph: () => <div data-testid="mock-linegraph" />,
-  Table: () => <div data-testid="mock-table" />
-}))
-
 describe('StudentRatingDashboard', () => {
   it('should render correctly', async () => {
     const { getByText, container, getAllByRole } = render(
@@ -38,7 +30,7 @@ describe('StudentRatingDashboard', () => {
       const valueTrend = container.querySelectorAll('image.value-trend')
       fireEvent.mouseOver(valueTrend[0])
 
-      const deviation = screen.getByText('0.75')
+      const deviation = getByText('0.75')
       fireEvent.mouseOver(deviation)
 
       const deviationTrend = container.querySelectorAll('image.deviation-trend')

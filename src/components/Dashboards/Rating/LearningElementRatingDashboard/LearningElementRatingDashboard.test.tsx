@@ -1,4 +1,4 @@
-import { act, fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import 'react-rating-charts'
 import { MemoryRouter } from 'react-router-dom'
@@ -15,14 +15,6 @@ beforeAll(() => {
   SVGElement.prototype.getComputedTextLength = () => 100
 })
 
-jest.mock('react-rating-charts', () => ({
-  __esModule: true,
-  Rating: () => <div data-testid="mock-rating" />,
-  SpiderGraph: () => <div data-testid="mock-spidergraph" />,
-  LineGraph: () => <div data-testid="mock-linegraph" />,
-  Table: () => <div data-testid="mock-table" />
-}))
-
 describe('LearningElementRatingDashboard', () => {
   it('should render correctly', async () => {
     const { getByText, container, getAllByRole } = render(
@@ -31,14 +23,14 @@ describe('LearningElementRatingDashboard', () => {
       </MemoryRouter>
     )
 
-    await waitFor(async () => {
+    await waitFor(() => {
       const value = getByText('0.805')
       fireEvent.mouseOver(value)
 
       const valueTrend = container.querySelectorAll('image.value-trend')
       fireEvent.mouseOver(valueTrend[0])
 
-      const deviation = screen.getByText('0.80')
+      const deviation = getByText('0.80')
       fireEvent.mouseOver(deviation)
 
       const deviationTrend = container.querySelectorAll('image.deviation-trend')
@@ -74,7 +66,7 @@ describe('LearningElementRatingDashboard', () => {
       </MemoryRouter>
     )
 
-    await waitFor(async () => {
+    await waitFor(() => {
       // Re-renders the whole component.
       const radioButton = getAllByRole('radio')
       fireEvent.click(radioButton[1])
@@ -95,7 +87,7 @@ describe('LearningElementRatingDashboard', () => {
     expect(result.current.lineGraphData).toEqual([])
     expect(result.current.topics).toEqual([])
 
-    await waitFor(() => {
+    await waitFor(async () => {
       expect(result.current.isLoading).toBe(false)
     })
 
