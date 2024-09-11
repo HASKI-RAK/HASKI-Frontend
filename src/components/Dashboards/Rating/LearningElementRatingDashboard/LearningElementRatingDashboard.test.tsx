@@ -31,7 +31,7 @@ describe('LearningElementRatingDashboard', () => {
       </MemoryRouter>
     )
 
-    await waitFor(() => {
+    await waitFor(async () => {
       const value = getByText('0.805')
       fireEvent.mouseOver(value)
 
@@ -73,9 +73,8 @@ describe('LearningElementRatingDashboard', () => {
         <LearningElementRatingDashboard />
       </MemoryRouter>
     )
-    act(() => {})
 
-    await waitFor(() => {
+    await waitFor(async () => {
       // Re-renders the whole component.
       const radioButton = getAllByRole('radio')
       fireEvent.click(radioButton[1])
@@ -96,7 +95,7 @@ describe('LearningElementRatingDashboard', () => {
     expect(result.current.lineGraphData).toEqual([])
     expect(result.current.topics).toEqual([])
 
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(result.current.isLoading).toBe(false)
     })
 

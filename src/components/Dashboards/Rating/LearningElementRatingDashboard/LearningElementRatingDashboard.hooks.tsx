@@ -10,11 +10,11 @@ import { usePersistedStore, useStore } from '@store'
  *
  * Represents the return type of the useLearningElementRatingDashboard hook.
  *
- * @prop ratingValue - The average rating value of all learning elements.
- * @prop ratingDeviation - The average rating deviation of all learning elements.
- * @prop maxRatingDeviation - The maximum rating deviation of all learning elements.
- * @prop ratingValueTrend - The trend of the average rating value of all learning elements.
- * @prop ratingDeviationTrend - The trend of the average rating deviation of all learning elements.
+ * @prop ratingValue - The average normalized rating value of all learning elements.
+ * @prop ratingDeviation - The average normalized rating deviation of all learning elements.
+ * @prop maxRatingDeviation - The maximum normalized rating deviation of all learning elements.
+ * @prop ratingValueTrend - The normalized trend of the average rating value of all learning elements.
+ * @prop ratingDeviationTrend - The normalized trend of the average rating deviation of all learning elements.
  * @prop spiderGraphData - The data for the spider graph.
  * @prop lineGraphData - The data for the line graph.
  * @prop isLoading - The loading state.

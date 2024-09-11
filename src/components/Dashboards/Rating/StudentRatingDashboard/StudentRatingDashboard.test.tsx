@@ -1,5 +1,4 @@
-import { act, fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react'
-import fs from 'fs'
+import { fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import 'react-rating-charts'
 import { MemoryRouter } from 'react-router-dom'

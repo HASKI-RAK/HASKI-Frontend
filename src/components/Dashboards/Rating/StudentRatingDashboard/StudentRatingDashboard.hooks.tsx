@@ -10,11 +10,12 @@ import { usePersistedStore, useStore } from '@store'
  *
  * Represents the return type of the useStudentRatingDashboard hook.
  *
- * @prop ratingValue - The average rating value of the user.
- * @prop ratingDeviation - The average rating deviation of the user.
- * @prop maxRatingDeviation - The maximum rating deviation of the user.
- * @prop ratingValueTrend - The rating value trend of the user.
- * @prop ratingDeviationTrend - The rating deviation trend of the user.
+ * @prop userRatingValue - The rating value of the user.
+ * @prop ratingValue - The average normalized rating value of the user.
+ * @prop ratingDeviation - The average normalized rating deviation of the user.
+ * @prop maxRatingDeviation - The maximum normalized rating deviation of the user.
+ * @prop ratingValueTrend - The normalized rating value trend of the user.
+ * @prop ratingDeviationTrend - The normalized rating deviation trend of the user.
  * @prop spiderGraphData - The data for the spider graph.
  * @prop lineGraphData - The data for the line graph.
  * @prop histogramData - The data for the histogram.
