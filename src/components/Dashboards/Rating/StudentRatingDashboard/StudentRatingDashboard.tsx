@@ -45,6 +45,7 @@ const StudentRatingDashboard = ({
   const { t } = useTranslation()
   const {
     isLoading,
+    userRatingValue,
     ratingValue,
     ratingDeviation,
     maxRatingDeviation,
@@ -158,10 +159,10 @@ const StudentRatingDashboard = ({
             <Grid item>
               <Rating
                 ratingValue={ratingValue}
-                ratingDeviation={ratingDeviation * 1.96}
+                ratingDeviation={ratingDeviation}
                 ratingValueTrend={ratingValueTrend}
-                ratingDeviationTrend={ratingDeviationTrend * 1.96}
-                maxRatingDeviation={maxRatingDeviation * 1.96}
+                ratingDeviationTrend={ratingDeviationTrend}
+                maxRatingDeviation={maxRatingDeviation}
                 title={title}
                 tooltips={ratingTooltips}
               />
@@ -181,7 +182,7 @@ const StudentRatingDashboard = ({
               <Histogram
                 color={color}
                 data={histogramData}
-                ratingValue={ratingValue}
+                ratingValue={userRatingValue}
                 minRatingValue={0}
                 setUserInfo={setUserInfo}
                 titles={histogramTitles}

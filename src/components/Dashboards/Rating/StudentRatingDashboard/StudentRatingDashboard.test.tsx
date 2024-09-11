@@ -33,13 +33,13 @@ describe('StudentRatingDashboard', () => {
     )
 
     await waitFor(() => {
-      const value = getByText('900.0')
+      const value = getByText('0.750')
       fireEvent.mouseOver(value)
 
       const valueTrend = container.querySelectorAll('image.value-trend')
       fireEvent.mouseOver(valueTrend[0])
 
-      const deviation = screen.getByText('176')
+      const deviation = screen.getByText('0.75')
       fireEvent.mouseOver(deviation)
 
       const deviationTrend = container.querySelectorAll('image.deviation-trend')
@@ -106,11 +106,11 @@ describe('StudentRatingDashboard', () => {
       expect(result.current.isLoading).toBe(false)
     })
 
-    expect(result.current.ratingValue).toEqual(900)
-    expect(result.current.ratingDeviation).toEqual(90)
-    expect(result.current.maxRatingDeviation).toEqual(120)
-    expect(result.current.ratingDeviationTrend).toEqual(30)
-    expect(result.current.ratingValueTrend).toEqual(300)
+    expect(result.current.ratingValue).toEqual(0.75)
+    expect(result.current.ratingDeviation).toEqual(0.75)
+    expect(result.current.maxRatingDeviation).toEqual(1)
+    expect(result.current.ratingDeviationTrend).toEqual(0.25)
+    expect(result.current.ratingValueTrend).toEqual(0.25)
     expect(result.current.spiderGraphData).toEqual({ '1': 1000, '99': 800 })
     expect(result.current.lineGraphData).toEqual([
       {

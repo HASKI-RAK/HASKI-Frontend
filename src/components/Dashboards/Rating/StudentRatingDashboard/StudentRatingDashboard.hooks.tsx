@@ -22,6 +22,7 @@ import { usePersistedStore, useStore } from '@store'
  * @prop topics - The topics of the user.
  */
 export type StudentRatingDashboardHookReturn = {
+  userRatingValue: number
   ratingValue: number
   ratingDeviation: number
   maxRatingDeviation: number
@@ -71,6 +72,7 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
   // States.
   const [isLoading, setIsLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
+  const [userRatingValue, setUserRatingValue] = useState(0)
   const [ratingStats, setRatingStats] = useState({
     ratingValue: 0,
     ratingDeviation: 0,
@@ -132,6 +134,12 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
         // Fetch all ratings of all students.
         fetchStudentRatings()
           .then((ratings) => {
+            // Get the maximum rating value.
+            const maxRatingValue = Math.max(...ratings.map((rating) => rating.rating_value))
+
+            // Get the maximum rating deviation.
+            const maxRatingDeviation = Math.max(...ratings.map((rating) => rating.rating_deviation))
+
             // Get all ratings of the user.
             const userRatings = ratings.filter((rating) => rating.student_id === user.id)
 
@@ -183,17 +191,16 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
             const ratingValueTrend = (totals.current.ratingValue - totals.previous.ratingValue) / count
             const ratingDeviationTrend = (totals.current.ratingDeviation - totals.previous.ratingDeviation) / count
 
+            // Set the user rating value.
+            setUserRatingValue(totals.current.ratingValue / count)
+
             // Set the rating stats of the user.
             setRatingStats({
-              ratingValue: totals.current.ratingValue / count,
-              ratingDeviation: totals.current.ratingDeviation / count,
-              ratingValueTrend,
-              ratingDeviationTrend,
-              maxRatingDeviation: Math.max(
-                ...Object.values(categorizedRatings)
-                  .flat()
-                  .map((r) => r.rating_deviation)
-              )
+              ratingValue: totals.current.ratingValue / count / maxRatingValue,
+              ratingDeviation: totals.current.ratingDeviation / count / maxRatingDeviation,
+              ratingValueTrend: ratingValueTrend / maxRatingValue,
+              ratingDeviationTrend: ratingDeviationTrend / maxRatingDeviation,
+              maxRatingDeviation: 1
             })
 
             // Sort the ratings by timestamp ascending.
@@ -269,12 +276,13 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
   return useMemo(
     () => ({
       ...ratingStats,
+      userRatingValue,
       spiderGraphData,
       lineGraphData,
       histogramData,
       isLoading,
       topics
     }),
-    [ratingStats, spiderGraphData, lineGraphData, histogramData, isLoading, topics]
+    [ratingStats, userRatingValue, spiderGraphData, lineGraphData, histogramData, isLoading, topics]
   )
 }
