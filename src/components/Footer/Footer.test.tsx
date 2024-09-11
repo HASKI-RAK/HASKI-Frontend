@@ -25,6 +25,6 @@ describe('Footer', () => {
       fireEvent.click(button)
     })
 
-    expect(navigate).toHaveBeenCalledTimes(4)
+    expect(navigate).toHaveBeenCalledTimes(3)
   })
 })
