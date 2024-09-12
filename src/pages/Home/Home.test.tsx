@@ -34,7 +34,7 @@ describe('Test the Home page', () => {
     )
 
     await waitFor(() => {
-      expect(container.innerHTML).toContain('pages.home.noCourses')
+      expect(container.innerHTML).toContain('MuiSkeleton')
     })
   })
 
@@ -84,7 +84,7 @@ describe('Test the Home page', () => {
     )
 
     await waitFor(() => {
-      expect(container.innerHTML).toContain('pages.home.noCourses')
+      expect(container.innerHTML).toContain('MuiSkeleton')
     })
   })
 

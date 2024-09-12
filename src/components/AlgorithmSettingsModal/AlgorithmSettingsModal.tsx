@@ -41,9 +41,9 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
   //change hardcoded teacher selection to fetched teacher selection
   const [teacherSelection, setTeacherSelection] = useState(0)
   const { t } = useTranslation()
-  const options = (
-    props.options ?? [...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as optionsType)]
-  ).slice(1)
+  const options =
+    props.options ??
+    [...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as optionsType)].slice(1)
   const handleSelect = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setSelected(parseInt(event.target.value))

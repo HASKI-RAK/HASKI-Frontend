@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom'
 import { render, renderHook } from '@testing-library/react'
 import { useContext } from 'react'
-import RoleContext, { AuthContextType } from './RoleContext'
+import { Typography } from '@common/components'
+import RoleContext, { RoleContextType } from './RoleContext'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -13,74 +14,55 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('Test Authcontext', () => {
+describe('Test Rolecontext', () => {
   // render custom component
   const TestComponent = () => {
     const context = useContext(RoleContext)
     return (
       <>
-        {context.isAuth ? (
-          <button onClick={() => context.logout()}>Logout</button>
+        {context.isStudentRole ? (
+          <Typography>Your are a student</Typography>
+        ) : context.isCourseCreatorRole ? (
+          <Typography>Your are a course creator</Typography>
         ) : (
-          <button onClick={() => context.setExpire(Math.round(new Date().getTime() / 1000) + 1000)}>Login</button>
+          <Typography>You have no role</Typography>
         )}
       </>
     )
   }
-  const providedContext = {
-    isAuth: false,
-    setExpire: jest.fn(),
-    logout: jest.fn()
-  } as AuthContextType
-  it('should render unauthorized', () => {
+  const studentContext = {
+    isStudentRole: true,
+    isCourseCreatorRole: false
+  } as RoleContextType
+
+  const courseCreatorContext = {
+    isStudentRole: false,
+    isCourseCreatorRole: true
+  } as RoleContextType
+
+  it('student role, should render text', () => {
     const renderResult = render(
-      <RoleContext.Provider value={providedContext}>
+      <RoleContext.Provider value={studentContext}>
         <TestComponent />
       </RoleContext.Provider>
     )
-    expect(renderResult.getByText('Login')).toBeInTheDocument()
-    renderResult.getByText('Login').click()
-    expect(providedContext.setExpire).toBeCalled()
+    expect(renderResult.getByText('Your are a student')).toBeInTheDocument()
   })
 
-  it('should render authorized', () => {
+  it('course creator role, should render text', () => {
     const renderResult = render(
-      <RoleContext.Provider value={{ ...providedContext, isAuth: true }}>
+      <RoleContext.Provider value={courseCreatorContext}>
         <TestComponent />
       </RoleContext.Provider>
     )
-    expect(renderResult.getByText('Logout')).toBeInTheDocument()
-    renderResult.getByText('Logout').click()
-    expect(providedContext.logout).toBeCalled()
+    expect(renderResult.getByText('Your are a course creator')).toBeInTheDocument()
   })
 
-  it('should return the default props of AuthContext', () => {
+  it('should return the default props of RoleContext', () => {
     const context = renderHook(() => useContext(RoleContext))
     expect(context.result.current).toMatchObject({
-      isAuth: false,
-      setExpire: expect.any(Function),
-      logout: expect.any(Function)
+      isStudentRole: false,
+      isCourseCreatorRole: false
     })
-  })
-
-  test('should change isAuth to true', () => {
-    const renderResult = render(
-      <RoleContext.Provider value={{ ...providedContext }}>
-        <TestComponent />
-      </RoleContext.Provider>
-    )
-    renderResult.getByText('Login').click()
-    expect(providedContext.setExpire).toBeCalled()
-  })
-
-  test('should change isAuth to false', () => {
-    const context = renderHook(() => useContext(RoleContext))
-    context.result.current.setExpire(0)
-    expect(context.result.current.isAuth).toBe(false)
-  })
-
-  it('should call default logout', () => {
-    const context = renderHook(() => useContext(RoleContext))
-    context.result.current.logout()
   })
 })

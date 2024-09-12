@@ -11,8 +11,8 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('fetchCourses has expected behaviour', () => {
-  it('should return the course when the response is successful', async () => {
+describe('fetchRemoteCourses has expected behaviour', () => {
+  it('should return the remote course when the response is successful', async () => {
     const expectedData = [
       {
         enddate: 1702166400,
@@ -59,27 +59,27 @@ describe('fetchCourses has expected behaviour', () => {
     const expectedError = 'Error: HTTP error undefined'
     const expectedMessage = 'Error: HTTP error undefined'
 
-    const mockResponse = {
+    const mockResponseRemoteCourse = {
       ok: false,
       json: jest.fn().mockResolvedValue({ error: expectedError, message: expectedMessage })
     }
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    fetch.mockResolvedValue(mockResponse)
+    fetch.mockResolvedValue(mockResponseRemoteCourse)
 
     await expect(fetchRemoteCourses()).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
-    const mockResponse = {
+    const mockResponseRemoteCourse = {
       ok: false,
       json: jest.fn().mockResolvedValue({})
     }
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    fetch.mockResolvedValue(mockResponse)
+    fetch.mockResolvedValue(mockResponseRemoteCourse)
 
     await expect(fetchRemoteCourses()).rejects.toThrow('')
   })
