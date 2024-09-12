@@ -1,6 +1,5 @@
 import { fireEvent, render, renderHook, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
-import 'react-rating-charts'
 import { MemoryRouter } from 'react-router-dom'
 import LearningElementRatingDashboard from './LearningElementRatingDashboard'
 import { useLearningElementRatingDashboard } from './LearningElementRatingDashboard.hooks'
