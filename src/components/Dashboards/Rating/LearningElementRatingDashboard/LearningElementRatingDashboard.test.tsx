@@ -15,8 +15,6 @@ beforeAll(() => {
 })
 
 describe('LearningElementRatingDashboard', () => {
-  jest.setTimeout(100000)
-
   it('should render correctly', async () => {
     const { getByText, container, getAllByRole } = render(
       <MemoryRouter>
@@ -25,43 +23,40 @@ describe('LearningElementRatingDashboard', () => {
     )
 
     console.log(container.innerHTML)
-    await waitFor(
-      () => {
-        const value = getByText('0.805')
-        fireEvent.mouseOver(value)
+    await waitFor(() => {
+      const value = getByText('0.805')
+      fireEvent.mouseOver(value)
 
-        const valueTrend = container.querySelectorAll('image.value-trend')
-        fireEvent.mouseOver(valueTrend[0])
+      const valueTrend = container.querySelectorAll('image.value-trend')
+      fireEvent.mouseOver(valueTrend[0])
 
-        const deviation = getByText('0.80')
-        fireEvent.mouseOver(deviation)
+      const deviation = getByText('0.80')
+      fireEvent.mouseOver(deviation)
 
-        const deviationTrend = container.querySelectorAll('image.deviation-trend')
-        fireEvent.mouseOver(deviationTrend[0])
+      const deviationTrend = container.querySelectorAll('image.deviation-trend')
+      fireEvent.mouseOver(deviationTrend[0])
 
-        const dataPoint = container.querySelectorAll('circle.data-point')
-        fireEvent.mouseOver(dataPoint[0])
+      const dataPoint = container.querySelectorAll('circle.data-point')
+      fireEvent.mouseOver(dataPoint[0])
 
-        const upperDeviation = container.querySelectorAll('circle.upper-deviation')
-        fireEvent.mouseOver(upperDeviation[0])
+      const upperDeviation = container.querySelectorAll('circle.upper-deviation')
+      fireEvent.mouseOver(upperDeviation[0])
 
-        const lowerDeviation = container.querySelectorAll('circle.lower-deviation')
-        fireEvent.mouseOver(lowerDeviation[0])
+      const lowerDeviation = container.querySelectorAll('circle.lower-deviation')
+      fireEvent.mouseOver(lowerDeviation[0])
 
-        const xAxis = container.querySelectorAll('g.x-axis')
-        fireEvent.mouseOver(xAxis[0])
+      const xAxis = container.querySelectorAll('g.x-axis')
+      fireEvent.mouseOver(xAxis[0])
 
-        const yAxis = container.querySelectorAll('g.y-axis')
-        fireEvent.mouseOver(yAxis[0])
+      const yAxis = container.querySelectorAll('g.y-axis')
+      fireEvent.mouseOver(yAxis[0])
 
-        const radioButton = getAllByRole('radio')
-        fireEvent.click(radioButton[1])
+      const radioButton = getAllByRole('radio')
+      fireEvent.click(radioButton[1])
 
-        const header = container.querySelectorAll('th')
-        fireEvent.mouseOver(header[0])
-      },
-      { timeout: 100000 }
-    )
+      const header = container.querySelectorAll('th')
+      fireEvent.mouseOver(header[0])
+    })
   })
 
   it('rerenders the chart and checks the tooltip of the spider graph', async () => {
