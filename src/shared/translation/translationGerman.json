@@ -1264,6 +1264,7 @@
   "error.setLearningPathElementSpecificStatus": "Beim Festlegen des spezifischen Status eines Lernpfadelements ist ein Fehler aufgetreten.",
   "error.setTopics": "Beim Festlegen der Themen ist ein Fehler aufgetreten.",
   "error.setTopicsPath": "Beim Festlegen des Themenpfads ist ein Fehler aufgetreten.",
+  "error.useUniversity": "Beim Abrufen der Universität ist ein Fehler aufgetreten.",
   "info": "Info",
   "info.postCalculateLearningPathILS": "Eine POST-Anfrage wurde erfolgreich gesendet, um den Lernpfad auf der Grundlage der Daten des ILS-Fragebogens zu berechnen.",
   "log.learningPathTopicProgressTimeout": "Beim Laden des LearningPathTopicProgress-Hook ist ein Timout aufgetreten.",

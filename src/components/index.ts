@@ -50,6 +50,7 @@ export { StyledLinearProgress } from './StyledLinearProgress/StyledLinearProgres
 export { default as LabeledSwitch } from './LabeledSwitch/LabeledSwitch'
 export { default as ResponsiveMiniMap } from './ResponsiveMiniMap/ResponsiveMiniMap'
 export { default as AlgorithmSettingsModal } from './AlgorithmSettingsModal/AlgorithmSettingsModal'
+export { default as Newsbanner } from './Newsbanner/Newsbanner'
 export { default as TopicCard } from './TopicCard/TopicCard'
 export { default as CreateCourseDetailsTable } from './CreateCourse/Table/CreateCourseDetailsTable'
 export { default as CreateCourseTable } from './CreateCourse/Table/CreateCourseTable'
