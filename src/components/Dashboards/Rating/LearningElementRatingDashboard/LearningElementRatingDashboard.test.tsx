@@ -30,41 +30,39 @@ describe('LearningElementRatingDashboard', () => {
       </MemoryRouter>
     )
 
-    await act(async () => {
-      const value = getByText('0.805')
-      fireEvent.mouseOver(value)
+    const value = getByText('0.805')
+    fireEvent.mouseOver(value)
 
-      const valueTrend = container.querySelectorAll('image.value-trend')
-      fireEvent.mouseOver(valueTrend[0])
+    const valueTrend = container.querySelectorAll('image.value-trend')
+    fireEvent.mouseOver(valueTrend[0])
 
-      const deviation = getByText('0.80')
-      fireEvent.mouseOver(deviation)
+    const deviation = getByText('0.80')
+    fireEvent.mouseOver(deviation)
 
-      const deviationTrend = container.querySelectorAll('image.deviation-trend')
-      fireEvent.mouseOver(deviationTrend[0])
+    const deviationTrend = container.querySelectorAll('image.deviation-trend')
+    fireEvent.mouseOver(deviationTrend[0])
 
-      const dataPoints = container.querySelectorAll('circle.data-point')
-      fireEvent.mouseOver(dataPoints[0])
-      fireEvent.mouseOver(dataPoints[4])
+    const dataPoints = container.querySelectorAll('circle.data-point')
+    fireEvent.mouseOver(dataPoints[0])
+    fireEvent.mouseOver(dataPoints[4])
 
-      const upperDeviation = container.querySelectorAll('circle.upper-deviation')
-      fireEvent.mouseOver(upperDeviation[0])
+    const upperDeviation = container.querySelectorAll('circle.upper-deviation')
+    fireEvent.mouseOver(upperDeviation[0])
 
-      const lowerDeviation = container.querySelectorAll('circle.lower-deviation')
-      fireEvent.mouseOver(lowerDeviation[0])
+    const lowerDeviation = container.querySelectorAll('circle.lower-deviation')
+    fireEvent.mouseOver(lowerDeviation[0])
 
-      const xAxis = container.querySelectorAll('g.x-axis')
-      fireEvent.mouseOver(xAxis[0])
+    const xAxis = container.querySelectorAll('g.x-axis')
+    fireEvent.mouseOver(xAxis[0])
 
-      const yAxis = container.querySelectorAll('g.y-axis')
-      fireEvent.mouseOver(yAxis[0])
+    const yAxis = container.querySelectorAll('g.y-axis')
+    fireEvent.mouseOver(yAxis[0])
 
-      const radioButton = getAllByRole('radio')
-      fireEvent.click(radioButton[1])
+    const radioButton = getAllByRole('radio')
+    fireEvent.click(radioButton[1])
 
-      const header = container.querySelectorAll('th')
-      fireEvent.mouseOver(header[0])
-    })
+    const header = container.querySelectorAll('th')
+    fireEvent.mouseOver(header[0])
   })
 
   test('Functionality of the hook', () => {
