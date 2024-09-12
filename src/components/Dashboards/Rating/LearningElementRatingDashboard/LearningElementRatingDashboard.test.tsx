@@ -25,7 +25,7 @@ describe('LearningElementRatingDashboard', () => {
     console.log(container.innerHTML)
     act(
       async () =>
-        await waitFor(async () => {
+        await waitFor(() => {
           const value = getByText('0.805')
           fireEvent.mouseOver(value)
 
