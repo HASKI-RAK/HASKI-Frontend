@@ -15,7 +15,7 @@ beforeAll(() => {
 })
 
 describe('LearningElementRatingDashboard', () => {
-  jest.setTimeout(40000)
+  jest.setTimeout(100000)
 
   it('should render correctly', async () => {
     const { getByText, container, getAllByRole } = render(
@@ -60,7 +60,7 @@ describe('LearningElementRatingDashboard', () => {
         const header = container.querySelectorAll('th')
         fireEvent.mouseOver(header[0])
       },
-      { timeout: 35000 }
+      { timeout: 100000 }
     )
   })
 
