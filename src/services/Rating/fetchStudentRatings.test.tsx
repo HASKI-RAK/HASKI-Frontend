@@ -32,7 +32,7 @@ describe('fetchStudentRatings', () => {
 
     const result = await fetchStudentRatings(1, 1)
 
-    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/student/rating`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/1/student/1/rating`, {
       method: 'GET',
       credentials: 'include',
       headers: {
