@@ -10,8 +10,12 @@ import { fetchData } from '../RequestResponse'
  * @remarks
  * Returns an empty array, if there are no ratings present.
  */
-export const fetchStudentRatings: StudentRatingReturn = async () => {
-  return fetchData<StudentRating[]>(getConfig().BACKEND + `/student/rating`, {
+export const fetchStudentRatings: StudentRatingReturn = async (userId?: number, studentId?: number) => {
+  if (!userId || !studentId) {
+    throw new Error('userId and studentId are required')
+  }
+
+  return fetchData<StudentRating[]>(getConfig().BACKEND + `/user/${userId}/student/${studentId}/rating`, {
     method: 'GET',
     credentials: 'include',
     headers: {

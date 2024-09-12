@@ -133,7 +133,7 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
           })
 
         // Fetch all ratings of all students.
-        fetchStudentRatings()
+        fetchStudentRatings(user.settings.user_id, user.id)
           .then((ratings) => {
             // Get the maximum rating value.
             const maxRatingValue = Math.max(...ratings.map((rating) => rating.rating_value))

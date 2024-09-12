@@ -30,7 +30,7 @@ describe('fetchStudentRatings', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const result = await fetchStudentRatings()
+    const result = await fetchStudentRatings(1, 1)
 
     expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/student/rating`, {
       method: 'GET',
@@ -41,5 +41,9 @@ describe('fetchStudentRatings', () => {
     })
 
     expect(result).toEqual(inputData)
+  })
+
+  it('should throw error on missing variable', async () => {
+    expect(fetchStudentRatings(1)).rejects.toThrow('userId and studentId are required')
   })
 })
