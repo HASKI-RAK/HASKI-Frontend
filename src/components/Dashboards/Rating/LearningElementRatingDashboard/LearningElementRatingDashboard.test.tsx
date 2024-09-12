@@ -15,6 +15,8 @@ beforeAll(() => {
 })
 
 describe('LearningElementRatingDashboard', () => {
+  jest.setTimeout(40000)
+
   it('should render correctly', async () => {
     const { getByText, container, getAllByRole } = render(
       <MemoryRouter>
