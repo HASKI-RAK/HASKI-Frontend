@@ -13,7 +13,27 @@ global.fetch = jest.fn(() =>
 
 describe('fetchCourses has expected behaviour', () => {
   it('should return the course when the response is successful', async () => {
-    const expectedData = { course: 'dude where is my car' }
+    const expectedData = [
+      {
+        enddate: 1702166400,
+        fullname: 'Kurs-1',
+        id: 2,
+        shortname: 'kurs',
+        startdate: 1670630400,
+        timecreated: 1670578503,
+        timemodified: 1670578503
+      },
+      {
+        enddate: 1718406000,
+        fullname: 'Kurs-2',
+        id: 3,
+        shortname: 'ku2',
+        startdate: 1686870000,
+        timecreated: 1686830366,
+        timemodified: 1692021711
+      }
+    ]
+
     const mockResponse = {
       ok: true,
       json: jest.fn().mockResolvedValue(expectedData)
@@ -23,22 +43,15 @@ describe('fetchCourses has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const userId = 1
-    const lmsUserId = 1
-    const studentId = 1
+    const result = await fetchRemoteCourses()
 
-    const result = await fetchRemoteCourses(userId, lmsUserId, studentId)
-
-    expect(fetch).toHaveBeenCalledWith(
-      `${getConfig().BACKEND}/user/${userId}/${lmsUserId}/student/${studentId}/course`,
-      {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/lms/remote/courses`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
       }
-    )
+    })
     expect(result).toEqual(expectedData)
   })
 
@@ -55,11 +68,7 @@ describe('fetchCourses has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const userId = 1
-    const lmsUserId = 1
-    const studentId = 1
-
-    await expect(fetchRemoteCourses(userId, lmsUserId, studentId)).rejects.toThrow(`${expectedMessage}`)
+    await expect(fetchRemoteCourses()).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
@@ -72,10 +81,6 @@ describe('fetchCourses has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const userId = 1
-    const lmsUserId = 1
-    const studentId = 1
-
-    await expect(fetchRemoteCourses(userId, lmsUserId, studentId)).rejects.toThrow('')
+    await expect(fetchRemoteCourses()).rejects.toThrow('')
   })
 })
