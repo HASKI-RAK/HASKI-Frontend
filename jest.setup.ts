@@ -496,7 +496,29 @@ const mockDataServices: MockDataServices = {
       student_rating: {},
       learning_element_rating: {}
     })
-  })
+  }),
+  fetchNews: jest.fn(() =>
+    Promise.resolve({
+      news: [
+        {
+          date: 'Thu, 13 Jul 2023 16:00:00 GMT',
+          expiration_date: 'Sun, 20 Apr 2025 16:00:00 GMT',
+          id: 1,
+          language_id: 'en',
+          news_content: 'We are currently testing the site',
+          university: 'TH-AB'
+        },
+        {
+          date: 'Thu, 13 Jul 2023 16:00:00 GMT',
+          expiration_date: 'Sun, 20 Apr 2025 16:00:00 GMT',
+          id: 2,
+          language_id: 'en',
+          news_content: 'We are currently testing the site',
+          university: 'TH-AB'
+        }
+      ]
+    })
+  )
 }
 /**
  * This object is used to store mocks. After each test, the object is cleaned up.
