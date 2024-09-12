@@ -13,6 +13,7 @@ import LearningPathElementStatusSlice, {
 } from '../Slices/LearningPathElementStatusSlice'
 import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
 import UserSlice, { createUserSlice } from '../Slices/UserSlice'
+import NewsSlice, { createNewsSlice } from '../Slices/NewsSlice'
 import xAPISlice, { createXAPISlice } from '../Slices/xAPISlice'
 
 export type StoreState = LearningPathElementSlice &
@@ -21,6 +22,7 @@ export type StoreState = LearningPathElementSlice &
   LearningPathTopicSlice &
   LearningPathElementSpecificStatusSlice
 export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & xAPISlice
+export type SessionStoreState = NewsSlice
 
 export const resetters: (() => void)[] = []
 
@@ -52,6 +54,25 @@ export const usePersistedStore = create<PersistedStoreState>()(
         onRehydrateStorage: () => {
           log.debug('PersistedStore hydration starts')
         },
+        version: 1.1 // When this changes, the persisted data will be discarded and the store reinitialized (Useful for migrations)
+      }
+    )
+  )
+)
+export const useSessionStore = create<SessionStoreState>()(
+  devtools(
+    persist(
+      (...a) => ({
+        ...createNewsSlice(...a)
+      }),
+      {
+        name: 'session_storage',
+        // Here we can whitelist the keys we want to persist
+        getStorage: () => sessionStorage,
+        partialize: (state) => ({
+          isBannerOpen: state.isBannerOpen
+        }),
+
         version: 1.1 // When this changes, the persisted data will be discarded and the store reinitialized (Useful for migrations)
       }
     )
