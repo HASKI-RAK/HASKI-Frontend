@@ -16,13 +16,21 @@ beforeAll(() => {
 
 describe('LearningElementRatingDashboard', () => {
   it('should render correctly', async () => {
-    const { getByText, container, getAllByRole } = render(
+    const { getByText, container, getAllByRole, rerender } = render(
       <MemoryRouter>
         <LearningElementRatingDashboard />
       </MemoryRouter>
     )
 
-    await waitFor(async () => {
+    await new Promise(process.nextTick)
+
+    rerender(
+      <MemoryRouter>
+        <LearningElementRatingDashboard />
+      </MemoryRouter>
+    )
+
+    await act(async () => {
       const value = getByText('0.805')
       fireEvent.mouseOver(value)
 
@@ -35,8 +43,9 @@ describe('LearningElementRatingDashboard', () => {
       const deviationTrend = container.querySelectorAll('image.deviation-trend')
       fireEvent.mouseOver(deviationTrend[0])
 
-      const dataPoint = container.querySelectorAll('circle.data-point')
-      fireEvent.mouseOver(dataPoint[0])
+      const dataPoints = container.querySelectorAll('circle.data-point')
+      fireEvent.mouseOver(dataPoints[0])
+      fireEvent.mouseOver(dataPoints[4])
 
       const upperDeviation = container.querySelectorAll('circle.upper-deviation')
       fireEvent.mouseOver(upperDeviation[0])
@@ -55,22 +64,6 @@ describe('LearningElementRatingDashboard', () => {
 
       const header = container.querySelectorAll('th')
       fireEvent.mouseOver(header[0])
-    })
-  })
-
-  it('rerenders the chart and checks the tooltip of the spider graph', async () => {
-    const { getAllByRole, container } = render(
-      <MemoryRouter>
-        <LearningElementRatingDashboard />
-      </MemoryRouter>
-    )
-
-    await waitFor(async () => {
-      // Re-renders the whole component.
-      const radioButton = getAllByRole('radio')
-      fireEvent.click(radioButton[1])
-      const dataPoints = container.querySelectorAll('circle.data-point')
-      fireEvent.mouseOver(dataPoints[0])
     })
   })
 
