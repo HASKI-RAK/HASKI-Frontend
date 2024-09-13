@@ -108,6 +108,7 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
                       autoHideDuration: 3000
                     })
                     log.error(t('error.fetchLearningPathTopic') + ' ' + error)
+                    setIsLoading(true)
                   })
               )
             ).then(() => {
@@ -121,6 +122,7 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
               autoHideDuration: 3000
             })
             log.error(t('error.fetchCourses') + ' ' + error)
+            setIsLoading(true)
           })
 
         // Fetch all learning element ratings.
@@ -306,6 +308,7 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
               autoHideDuration: 3000
             })
             log.error(t('error.fetchLearningElementRatings') + ' ' + error)
+            setIsLoading(true)
           })
       })
       .catch((error) => {
@@ -315,6 +318,7 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
           autoHideDuration: 3000
         })
         log.error(t('error.fetchUser') + ' ' + error)
+        setIsLoading(true)
       })
   }, [])
 

@@ -74,6 +74,9 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
   const [isLoading, setIsLoading] = useState(true)
   const [topics, setTopics] = useState<Topic[]>([])
   const [userRatingValue, setUserRatingValue] = useState(0)
+  const [spiderGraphData, setSpiderGraphData] = useState<Record<string, number>>({})
+  const [lineGraphData, setLineGraphData] = useState<{ value: number; deviation: number; timestamp: Date }[]>([])
+  const [histogramData, setHistogramData] = useState<number[]>([])
   const [ratingStats, setRatingStats] = useState({
     ratingValue: 0,
     ratingDeviation: 0,
@@ -81,9 +84,6 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
     ratingValueTrend: 0,
     ratingDeviationTrend: 0
   })
-  const [spiderGraphData, setSpiderGraphData] = useState<Record<string, number>>({})
-  const [lineGraphData, setLineGraphData] = useState<{ value: number; deviation: number; timestamp: Date }[]>([])
-  const [histogramData, setHistogramData] = useState<number[]>([])
 
   // Store.
   const getUser = usePersistedStore((state) => state.getUser)
@@ -116,6 +116,7 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
                       autoHideDuration: 3000
                     })
                     log.error(t('error.fetchLearningPathTopic') + ' ' + error)
+                    setIsLoading(true)
                   })
               )
             ).then(() => {
@@ -130,6 +131,7 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
               autoHideDuration: 3000
             })
             log.error(t('error.fetchCourses') + ' ' + error)
+            setIsLoading(true)
           })
 
         // Fetch all ratings of all students.
@@ -260,6 +262,7 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
               autoHideDuration: 3000
             })
             log.error(t('error.fetchStudentRatings') + ' ' + error)
+            setIsLoading(true)
           })
       })
       .catch((error) => {
@@ -269,7 +272,6 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
           autoHideDuration: 3000
         })
         log.error(t('error.fetchUser') + ' ' + error)
-
         setIsLoading(true)
       })
   }, [])
