@@ -1,4 +1,4 @@
-import React, {memo, useState, useEffect} from 'react'
+import React, {memo, useState, useEffect, useContext} from 'react'
 import {Box, Fab, Modal, Divider, Grid} from '@common/components'
 import {Close, Check, ArrowForward, ArrowBack, Brush, DarkMode, LightMode} from '@common/icons'
 import {HaskiTheme, DarkTheme, AltTheme} from "@common/utils";
@@ -12,12 +12,12 @@ import {
     FormControl,
     FormControlLabel,
     Typography,
-    useMediaQuery
+    useMediaQuery,
+    Theme
 } from "@mui/material";
-import {useThemeContext} from "../../../services/ThemeContext/ThemeContext";
-import {BreadcrumbsContainer, Footer, MenuBar, OpenQuestionnaire, PrivacyModal} from "../../index";
+import {useThemeContext, AuthContext} from "@services";
+import {BreadcrumbsContainer, Footer, MenuBar, OpenQuestionnaire, PrivacyModal} from "@components";
 import {useTranslation} from "react-i18next";
-import {useAuthProvider} from "../../../services/AuthProvider/AuthProvider.hooks";
 
 const styleBox = {
     position: 'absolute',
@@ -32,33 +32,6 @@ const styleBox = {
     p: 1,
     display: 'flex',
     flexDirection: {xs: 'column', lg: 'row'},
-}
-
-const leftColumnStyle = {
-    flex: '1',
-    top: '0%',
-    alignItems: 'flex-start',
-};
-
-const leftColumnInner = {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
-}
-
-const rightColumnStyleComponent = {
-    flex: '4',
-    position: 'relative',
-    alignItems: 'flex-start',
-    overflow: 'auto',
-    marginTop: '3%',
-}
-
-const scaledPreview = {
-    transform: 'scale(0.8)',
-    transformOrigin: 'top center',
-    pointerEvents: 'none',
 }
 
 type ThemeModalProps = {
@@ -87,15 +60,15 @@ const ThemeModal = ({ open = false, handleClose}: ThemeModalProps) => {
             'HaskiTheme';
 
     //presets first selection on currently active theme
-    const [selectedTheme, setSelectedTheme] = useState(activeTheme)
+    const [selectedTheme, setSelectedTheme] = useState<Theme>(activeTheme)
     const [selectedThemeString, setSelectedThemeString] = useState(activeThemeString)
 
     const {updateTheme} = useThemeContext()
-    const {isAuth} = useAuthProvider()
+    const {isAuth} = useContext(AuthContext)
     const isSmallScreen = useMediaQuery(activeTheme.breakpoints.down('lg'));
 
     //handles the selection of a radio button
-    const handleThemeModalPreviewChange= (themeName: string) => {
+    const handleThemeModalPreviewChange = (themeName: string) => {
         setSelectedTheme(themeName === 'DarkTheme'? DarkTheme :
             themeName ===  'AltTheme'? AltTheme :
                 HaskiTheme
@@ -129,8 +102,15 @@ const ThemeModal = ({ open = false, handleClose}: ThemeModalProps) => {
         <Modal data-testid={'Theme Modal'} open={open} onClose={handleClose}>
             <Box sx={styleBox}>
                 {/**Left column/Upper Row - Provides radio buttons for theme changing*/}
-                <Box sx={leftColumnStyle}>
-                    <FormControl sx={leftColumnInner}>
+                <Box sx={{ flex: '1',
+                    top: '0%',
+                    alignItems: 'flex-start'}}>
+                    <FormControl sx={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '100%',
+                        height: '100%',
+                    }}>
                         <FormLabel id="demo-radio-buttons-group-label">{t('components.ThemeModal.radioHeader')}</FormLabel>
                         <RadioGroup
                             sx={{
@@ -167,7 +147,13 @@ const ThemeModal = ({ open = false, handleClose}: ThemeModalProps) => {
                 }}/>
 
                 {/**Right Column / Lower Row - Provides themed preview of radio selection and operating buttons*/}
-                <Box sx={rightColumnStyleComponent}>
+                <Box sx={{
+                    flex: '4',
+                    position: 'relative',
+                    alignItems: 'flex-start',
+                    overflow: 'auto',
+                    marginTop: '3%',
+                }}>
                     <Fab
                         id="switch-page-right-theme-button"
                         color="primary"
@@ -211,16 +197,24 @@ const ThemeModal = ({ open = false, handleClose}: ThemeModalProps) => {
 
                         onClick={() => {updateTheme(selectedThemeString);handleClose({} as object, 'backdropClick')}}
                         disabled={activeTheme === selectedTheme}
-                    style={{
-                            position: 'sticky',
+                    style={{position: 'sticky',
                             top: '90%',
                             left: '93.5%',
                         }}>
                         <Check />
                     </Fab>
-                    {/**preview block - Renders selected page sclaed down in chosen theme within right column/lower row*/}
+                    {/**preview block - Renders selected page scaled down in chosen theme within right column/lower row*/}
                     <ThemeProvider theme={selectedTheme}>
-                        <Box sx = {scaledPreview}>
+                        <Box sx = {{
+                            backgroundColor: (theme) => theme.palette.background.default,
+                            color: (theme) => theme.palette.text.primary,
+                            border: '2px solid lightgrey',
+                            borderRadius: '8px',
+                            padding: '16px',
+                            transform: 'scale(0.8)',
+                            transformOrigin: 'top center',
+                            pointerEvents: 'none',
+                        }}>
                             <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
                                 <MenuBar />
                                 <BreadcrumbsContainer />

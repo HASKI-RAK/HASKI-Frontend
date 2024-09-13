@@ -1,8 +1,8 @@
-import React, {createContext, useContext, useState, ReactNode , FC} from "react"
+import React, {createContext, useContext, useState, ReactNode, FC, useEffect} from "react"
 import {HaskiTheme, DarkTheme, AltTheme} from '@common/utils'
 import {ThemeProvider} from "@common/theme";
-
-import {postUserSettings} from "../Theme/postUserSettings";
+import { Theme } from '@mui/material/styles';
+import {postUserSettings} from "@services";
 import {usePersistedStore} from "@store";
 
 interface ThemeContextType {
@@ -32,21 +32,19 @@ interface ThemeContextProviderProps {
     children: ReactNode;
 }
 
-const ThemeContextProvider: FC<ThemeContextProviderProps> = ({ children }) => {
+export const ThemeContextProvider: FC<ThemeContextProviderProps> = ({ children }) => {
 
-    const [theme, setTheme] = useState(HaskiTheme)
-    const [isUnset, setIsUnset] = useState(true)
+    const [theme, setTheme] = useState<Theme>(HaskiTheme)
     const getUser = usePersistedStore((state) => state.getUser)
     const updateUser = usePersistedStore((state) => state.updateUser)
 
-    if (isUnset){
-        getUser().then((user) => {
-            if(user) {
+    useEffect(() => {
+        getUser().then((user) =>{
+            if (user && user.settings.theme) {
                 loadTheme(user.settings.theme)
             }
         })
-        setIsUnset(false)
-    }
+    }, []);
 
     //Sets rolled out theme
     const loadTheme = (themeName: string) => {
@@ -84,5 +82,4 @@ const ThemeContextProvider: FC<ThemeContextProviderProps> = ({ children }) => {
         </ThemeContext.Provider>
     )
 }
-export default ThemeContextProvider
 

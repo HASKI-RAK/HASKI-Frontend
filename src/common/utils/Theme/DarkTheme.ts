@@ -144,7 +144,7 @@ export const DarkTheme = createTheme({
                 // Name of the slot
                 root: {
                     // Some CSS
-                    //color: defaultColors.lightgrey,
+                    color: defaultColors.white,
                     /*font:
                       "700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) " +
                       defaultFonts.default,*/

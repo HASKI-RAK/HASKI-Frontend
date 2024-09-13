@@ -180,7 +180,7 @@ const MenuBar = () => {
           {/** Search bar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>
           {/** Language menu */}
-          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }}}>
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }, mt: 1 }}>
             <LanguageMenu />
           </Box>
           {/** Questionnaire Results */}

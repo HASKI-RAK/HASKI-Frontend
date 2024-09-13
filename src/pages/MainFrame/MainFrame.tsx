@@ -2,6 +2,8 @@ import { Outlet, useParams } from 'react-router-dom'
 import { Box, Divider, Grid } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
 import { BreadcrumbsContainer, Footer, LocalNavBar, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
+import {CssBaseline} from "@mui/material";
+import React from "react";
 
 /**
  * # MainFrame Page
@@ -25,6 +27,7 @@ export const MainFrame = () => {
 
   return (
     <>
+        <CssBaseline />
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <MenuBar />
         <BreadcrumbsContainer />

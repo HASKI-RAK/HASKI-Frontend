@@ -4,9 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, Skeleton, Stack, Typography } from '@common/components'
 import { Course } from '@core'
-import { AuthContext, SnackbarContext } from '@services'
+import { AuthContext, SnackbarContext, useThemeContext} from '@services'
 import { usePersistedStore, useStore } from '@store'
-import {useThemeContext} from "../../services/ThemeContext/ThemeContext";
 
 /**
  * # Home Page

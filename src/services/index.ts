@@ -21,5 +21,6 @@ export { fetchILS, fetchListK, postILS, postListK } from './Questionnaire'
 export * from './debounce'
 export * from './Viewport'
 export { postCalculateLearningPathILS } from './LearningPath'
-
-export { default as ThemeContextProvider } from './ThemeContext/ThemeContext'
+export {postUserSettings} from './Theme/postUserSettings'
+export { ThemeContextProvider } from './ThemeContext/ThemeContext'
+export { useThemeContext } from './ThemeContext/ThemeContext'
