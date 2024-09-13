@@ -18,8 +18,8 @@ import {
 import {
   Analytics,
   AssignmentOutlined,
-  Help,
   Brush,
+  Help,
   LibraryBooksOutlined,
   Login,
   Logout,
@@ -31,10 +31,10 @@ import {
   FurtherInfoMenu,
   LanguageMenu,
   QuestionnaireQuestionsModal,
-  ThemeModal,
   QuestionnaireResultsModal,
   TableILSQuestions,
-  TableListKQuestions
+  TableListKQuestions,
+  ThemeModal
 } from '@components'
 import { AuthContext } from '@services'
 
@@ -68,7 +68,7 @@ const MenuBar = () => {
   }
 
   const handleCloseThemeModal = () => {
-      setModalOpenTheme(false)
+    setModalOpenTheme(false)
   }
 
   const handleOpenILSShortModal = () => {
@@ -196,17 +196,15 @@ const MenuBar = () => {
           )}
           {/** Theme button */}
           {
-          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('components.ThemeModal.buttonDescription')}>
-              <IconButton
-                id="theme-icon-button"
-                onClick={() => handleOpenThemeModal()}>
-                <Brush data-testid="BrushIcon" />
-              </IconButton>
-            </Tooltip>
-            <ThemeModal open={modalOpenTheme} handleClose={() => handleCloseThemeModal()} />
-          </Box>
-           }
+            <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
+              <Tooltip title={t('components.ThemeModal.buttonDescription')}>
+                <IconButton id="theme-icon-button" onClick={() => handleOpenThemeModal()}>
+                  <Brush data-testid="BrushIcon" />
+                </IconButton>
+              </Tooltip>
+              <ThemeModal open={modalOpenTheme} handleClose={() => handleCloseThemeModal()} />
+            </Box>
+          }
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('appGlobal.help')}>

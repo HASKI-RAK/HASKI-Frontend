@@ -50,7 +50,6 @@ const card = (
 )
 
 export const ThemePresentation = () => {
-
   return (
     <>
       <Container maxWidth="sm">

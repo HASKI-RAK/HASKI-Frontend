@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { ReactFlowProvider } from 'reactflow'
-import {ThemeContextProvider} from '@services'
 import {
   AboutUs,
   Contact,
@@ -17,6 +16,7 @@ import {
   ThemePresentation,
   Topic
 } from '@pages'
+import { ThemeContextProvider } from '@services'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore } from '@store'

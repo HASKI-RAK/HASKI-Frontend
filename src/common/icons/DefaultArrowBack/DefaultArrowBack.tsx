@@ -1,3 +1,3 @@
-import DefaultArrowBack from '@mui/icons-material/ArrowBackIosNew';
+import DefaultArrowBack from '@mui/icons-material/ArrowBackIosNew'
 
 export { DefaultArrowBack as ArrowBack }

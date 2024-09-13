@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, Skeleton, Stack, Typography } from '@common/components'
 import { Course } from '@core'
-import { AuthContext, SnackbarContext, useThemeContext} from '@services'
+import { AuthContext, SnackbarContext, useThemeContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 /**
@@ -18,7 +18,7 @@ export const Home = () => {
   // UX
   const { t } = useTranslation()
   const { isAuth } = useContext(AuthContext)
-  const {loadTheme} = useThemeContext()
+  const { loadTheme } = useThemeContext()
   const { addSnackbar } = useContext(SnackbarContext)
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
@@ -29,33 +29,33 @@ export const Home = () => {
   const getCourses = useStore((state) => state.getCourses)
 
   useEffect(() => {
-      if (isAuth) {
-        getUser()
-          .then((user) => {
-            loadTheme(user.settings.theme)
-            getCourses(user.settings.user_id, user.lms_user_id, user.id)
-              .then((CourseResponse) => {
-                setCourses(CourseResponse.courses)
-              })
-              .catch((error) => {
-                addSnackbar({
-                  message: t('error.getCourses'),
-                  severity: 'error',
-                  autoHideDuration: 5000
-                })
-                log.error(t('error.getCourses') + ' ' + error)
-              })
-          })
-          .catch((error) => {
-            addSnackbar({
-              message: t('error.getUser'),
-              severity: 'error',
-              autoHideDuration: 5000
+    if (isAuth) {
+      getUser()
+        .then((user) => {
+          loadTheme(user.settings.theme)
+          getCourses(user.settings.user_id, user.lms_user_id, user.id)
+            .then((CourseResponse) => {
+              setCourses(CourseResponse.courses)
             })
-            log.error(t('error.getUser') + ' ' + error)
+            .catch((error) => {
+              addSnackbar({
+                message: t('error.getCourses'),
+                severity: 'error',
+                autoHideDuration: 5000
+              })
+              log.error(t('error.getCourses') + ' ' + error)
+            })
+        })
+        .catch((error) => {
+          addSnackbar({
+            message: t('error.getUser'),
+            severity: 'error',
+            autoHideDuration: 5000
           })
-        setLoading(false)
-      }
+          log.error(t('error.getUser') + ' ' + error)
+        })
+      setLoading(false)
+    }
   }, [getUser, getCourses, setCourses, isAuth])
 
   // Card cointaining the courses with a button to the specific course
