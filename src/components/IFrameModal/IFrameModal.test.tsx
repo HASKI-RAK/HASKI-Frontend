@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react'
+import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import { Box } from '@common/components'
 import { IFrameModal } from '@components'
@@ -24,6 +25,24 @@ describe('IFrameModal tests', () => {
       <MemoryRouter>
         <Box>
           <IFrameModal url="fakedomain.com:8080" title="Modal is open" isOpen={open} onClose={handleClose} />
+        </Box>
+      </MemoryRouter>
+    )
+
+    fireEvent.click(getByTestId('IFrameModal-Close-Button'))
+    expect(handleClose).toHaveBeenCalledTimes(1)
+  })
+
+  test('postCalculateRating on close fails', () => {
+    mockServices.postCalculateRating.mockImplementationOnce(() =>
+      Promise.reject(new Error('postCalculateRating error'))
+    )
+
+    const handleClose = jest.fn()
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <Box>
+          <IFrameModal url="fakedomain.com:8080" title="Modal is open" isOpen={true} onClose={handleClose} />
         </Box>
       </MemoryRouter>
     )
