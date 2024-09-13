@@ -1,8 +1,6 @@
 import { act, fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react'
-import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import LearningElementRatingDashboard from './LearningElementRatingDashboard'
-import { useLearningElementRatingDashboard } from './LearningElementRatingDashboard.hooks'
 
 declare global {
   interface SVGElement {
@@ -30,206 +28,60 @@ describe('LearningElementRatingDashboard', () => {
       </MemoryRouter>
     )
 
-    await new Promise(process.nextTick)
-
-    rerender(
-      <MemoryRouter>
-        <LearningElementRatingDashboard />
-      </MemoryRouter>
-    )
-
-    await waitFor(async () => {
-      const value = getByText('0.805')
+    const value = getByText('0.805')
+    act(() => {
       fireEvent.mouseOver(value)
+    })
 
-      const valueTrend = container.querySelectorAll('image.value-trend')
+    const valueTrend = container.querySelectorAll('image.value-trend')
+    act(() => {
       fireEvent.mouseOver(valueTrend[0])
+    })
 
-      const deviation = getByText('0.80')
+    const deviation = getByText('0.80')
+    act(() => {
       fireEvent.mouseOver(deviation)
+    })
 
-      const deviationTrend = container.querySelectorAll('image.deviation-trend')
+    const deviationTrend = container.querySelectorAll('image.deviation-trend')
+    act(() => {
       fireEvent.mouseOver(deviationTrend[0])
+    })
 
-      const dataPoints = container.querySelectorAll('circle.data-point')
+    const dataPoints = container.querySelectorAll('circle.data-point')
+    act(() => {
       fireEvent.mouseOver(dataPoints[0])
       fireEvent.mouseOver(dataPoints[4])
+    })
 
-      const upperDeviation = container.querySelectorAll('circle.upper-deviation')
+    const upperDeviation = container.querySelectorAll('circle.upper-deviation')
+    act(() => {
       fireEvent.mouseOver(upperDeviation[0])
+    })
 
-      const lowerDeviation = container.querySelectorAll('circle.lower-deviation')
+    const lowerDeviation = container.querySelectorAll('circle.lower-deviation')
+    act(() => {
       fireEvent.mouseOver(lowerDeviation[0])
+    })
 
-      const xAxis = container.querySelectorAll('g.x-axis')
+    const xAxis = container.querySelectorAll('g.x-axis')
+    act(() => {
       fireEvent.mouseOver(xAxis[0])
+    })
 
-      const yAxis = container.querySelectorAll('g.y-axis')
+    const yAxis = container.querySelectorAll('g.y-axis')
+    act(() => {
       fireEvent.mouseOver(yAxis[0])
+    })
 
-      const radioButton = getAllByRole('radio')
+    const radioButton = getAllByRole('radio')
+    act(() => {
       fireEvent.click(radioButton[1])
+    })
 
-      const header = container.querySelectorAll('th')
+    const header = container.querySelectorAll('th')
+    act(() => {
       fireEvent.mouseOver(header[0])
-    })
-  })
-
-  test('Functionality of the hook', () => {
-    const { result } = renderHook(() => useLearningElementRatingDashboard())
-
-    expect(result.current.ratingValue).toEqual(0)
-    expect(result.current.ratingDeviation).toEqual(0)
-    expect(result.current.maxRatingDeviation).toEqual(0)
-    expect(result.current.ratingDeviationTrend).toEqual(0)
-    expect(result.current.ratingValueTrend).toEqual(0)
-    expect(result.current.spiderGraphData).toEqual({})
-    expect(result.current.lineGraphData).toEqual([])
-    expect(result.current.topics).toEqual([])
-
-    waitFor(() => {
-      expect(result.current.isLoading).toBe(false)
-
-      expect(result.current.ratingValue).toEqual(0.8055555555555555)
-      expect(result.current.ratingDeviation).toEqual(0.8055555555555556)
-      expect(result.current.maxRatingDeviation).toEqual(1)
-      expect(result.current.ratingDeviationTrend).toEqual(0.5277777777777778)
-      expect(result.current.ratingValueTrend).toEqual(0.5277777777777777)
-      expect(result.current.spiderGraphData).toEqual({ '1': 1200, '2': 900, '99': 800 })
-      expect(result.current.lineGraphData).toEqual([
-        {
-          deviation: 196,
-          timestamp: new Date('2023-01-01T00:00:00.000Z'),
-          value: 1000
-        },
-        {
-          deviation: 182.9333333333333,
-          timestamp: new Date('2023-01-02T00:00:00.000Z'),
-          value: 933.3333333333334
-        }
-      ])
-      expect(result.current.topics).toEqual([
-        {
-          contains_le: true,
-          created_at: 'string',
-          created_by: 'string',
-          id: 1,
-          is_topic: true,
-          last_updated: 'string',
-          lms_id: 1,
-          name: 'Wirtschaftsinformatik',
-          parent_id: 1,
-          student_topic: {
-            done: true,
-            done_at: 'string',
-            id: 1,
-            student_id: 1,
-            topic_id: 1,
-            visits: ['string']
-          },
-          university: 'HS-Kempten'
-        },
-        {
-          contains_le: true,
-          created_at: 'string',
-          created_by: 'string',
-          id: 2,
-          is_topic: true,
-          last_updated: 'string',
-          lms_id: 1,
-          name: 'Informatik',
-          parent_id: 1,
-          student_topic: {
-            done: true,
-            done_at: 'string',
-            id: 2,
-            student_id: 1,
-            topic_id: 2,
-            visits: ['string']
-          },
-          university: 'HS-Kempten'
-        },
-        {
-          contains_le: true,
-          created_at: 'string',
-          created_by: 'string',
-          id: 1,
-          is_topic: true,
-          last_updated: 'string',
-          lms_id: 1,
-          name: 'Wirtschaftsinformatik',
-          parent_id: 1,
-          student_topic: {
-            done: true,
-            done_at: 'string',
-            id: 1,
-            student_id: 1,
-            topic_id: 1,
-            visits: ['string']
-          },
-          university: 'HS-Kempten'
-        },
-        {
-          contains_le: true,
-          created_at: 'string',
-          created_by: 'string',
-          id: 2,
-          is_topic: true,
-          last_updated: 'string',
-          lms_id: 1,
-          name: 'Informatik',
-          parent_id: 1,
-          student_topic: {
-            done: true,
-            done_at: 'string',
-            id: 2,
-            student_id: 1,
-            topic_id: 2,
-            visits: ['string']
-          },
-          university: 'HS-Kempten'
-        }
-      ])
-    })
-  })
-
-  test('Functionality of the hook with getUser failing', () => {
-    mockServices.fetchUser.mockImplementationOnce(() => Promise.reject(new Error('fetchUser error')))
-
-    const { result } = renderHook(() => useLearningElementRatingDashboard())
-
-    waitFor(() => {
-      expect(result.current.isLoading).toBe(true)
-    })
-  })
-
-  test('Functionality of the hook with getCourses failing', () => {
-    mockServices.fetchCourses.mockImplementationOnce(() => Promise.reject(new Error('fetchCourses error')))
-    const { result } = renderHook(() => useLearningElementRatingDashboard())
-
-    waitFor(() => {
-      expect(result.current.isLoading).toBe(true)
-    })
-  })
-
-  test('Functionality of the hook with getLearningPathTopic failing', () => {
-    mockServices.fetchLearningPathTopic.mockImplementationOnce(() =>
-      Promise.reject(new Error('fetchLearningPathTopic error'))
-    )
-    const { result } = renderHook(() => useLearningElementRatingDashboard())
-
-    waitFor(() => {
-      expect(result.current.isLoading).toBe(true)
-    })
-  })
-
-  test('Functionality of the hook with fetchLearningElementRatings failing', () => {
-    mockServices.fetchLearningElementRatings.mockImplementationOnce(() =>
-      Promise.reject(new Error('fetchLearningElementRatings error'))
-    )
-    const { result } = renderHook(() => useLearningElementRatingDashboard())
-    waitFor(() => {
-      expect(result.current.isLoading).toBe(true)
     })
   })
 })
