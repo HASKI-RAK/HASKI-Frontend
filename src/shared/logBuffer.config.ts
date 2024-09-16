@@ -31,7 +31,7 @@ export const logBuffer = () => {
         console.log(GlobalRingBuffer)
       }
       const date = new Date().toUTCString()
-      const persistedStorage = localStorage.getItem('persisted_storage')
+      const persistedStorage = JSON.parse(localStorage.getItem('persisted_storage'))
       GlobalRingBuffer.add([date, message])
       if (isProd) {
         if (methodName === 'error') {
@@ -40,13 +40,10 @@ export const logBuffer = () => {
             timestamp: JSON.stringify(date),
             content: message
           }
-          postBufferContent(bufferBody, Number(persistedStorage?.at(24)))
-            .then(() => {
-              console.log(Number(persistedStorage?.at(24)))
-            })
-            .catch(() => {
-              console.log(bufferBody)
-            })
+
+          postBufferContent(bufferBody, persistedStorage.state._user.id).catch(() => {
+            console.log('buffer failed to send')
+          })
           //remove buffer content
           GlobalRingBuffer.clear()
         }
