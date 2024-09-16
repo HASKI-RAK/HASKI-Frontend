@@ -7,14 +7,17 @@ import { fetchData } from '../RequestResponse'
 
 //
 export interface bufferContent {
-    created_at: string
-    logMessage: string
+    timestamp: string
+    content: string
 }
 
 
 
-export const postBufferContent = async (bufferBody?: bufferContent): Promise<Response> => {
-  return fetchData<Response>(`${getConfig().BACKEND}/logs`, {
+export const postBufferContent = async (
+  bufferBody?: bufferContent, 
+  userId?: number
+): Promise<Response> => {
+  return fetchData<Response>(getConfig().BACKEND +`/user/${userId}/logbuffer`, {
     method: 'POST',
     credentials: 'include',
     headers: {

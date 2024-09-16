@@ -28,12 +28,7 @@ export class RingBuffer<T> {
     this.add(...value)
   }
 
-  public get(element:number)
-  {
-    return this.buffer.at(element)
-  }
-
-  public remove(){
+  public remove() {
     return this.buffer.pop()
   }
 

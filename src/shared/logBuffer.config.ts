@@ -1,11 +1,15 @@
 import log from 'loglevel'
 import { RingBuffer } from './RingBuffer'
+import { postBufferContent } from 'src/services/LogContent/postBufferContent'
+import { bufferContent } from 'src/services/LogContent/postBufferContent'
 
 /**
  * This function is used to log all the messages in the console and also store them in a ring buffer.
  * @category Shared
  */
 export const logBuffer = () => {
+  //
+  const isProd = process.env.NODE_ENV === 'development'
   const GlobalRingBuffer = new RingBuffer<[string, string]>(100)
   if (localStorage.getItem('ringBufferContent') !== null) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -19,7 +23,6 @@ export const logBuffer = () => {
   const originalFactory = log.methodFactory
   log.methodFactory = (methodName, logLevel, loggerName) => {
     const rawMethod = originalFactory(methodName, logLevel, loggerName)
-
     return (message) => {
       //show only warnings and error in console and log everything else in the GlobalRingBuffer?
       if (methodName === 'warn' || methodName === 'error') {
@@ -27,7 +30,28 @@ export const logBuffer = () => {
         // eslint-disable-next-line no-console
         console.log(GlobalRingBuffer)
       }
-      GlobalRingBuffer.add([new Date().toUTCString(), message])
+      const date = new Date().toUTCString()
+      const persistedStorage = localStorage.getItem('persisted_storage')
+      GlobalRingBuffer.add([date, message])
+      if (isProd) {
+        if (methodName === 'error') {
+          //send buffer content to backend
+          const bufferBody: bufferContent = {
+            timestamp: JSON.stringify(date),
+            content: message
+          }
+          postBufferContent(bufferBody, Number(persistedStorage?.at(24)))
+            .then(() => {
+              console.log(Number(persistedStorage?.at(24)))
+            })
+            .catch(() => {
+              console.log(bufferBody)
+            })
+          //remove buffer content
+          GlobalRingBuffer.clear()
+        }
+      }
+
       localStorage.setItem('ringBufferContent', JSON.stringify(GlobalRingBuffer))
     }
   }
