@@ -5,7 +5,6 @@ import { fetchData } from '../RequestResponse'
 /**
  * fetchTeacherLpLeAlg function.
  *
- * @param userId - The user's id
  * @param topicId - The topic id
  *
  * @remarks
@@ -16,9 +15,9 @@ import { fetchData } from '../RequestResponse'
  * @category Services
  */
 
-export const fetchTeacherLpLeAlg: TeacherLpLeAlgorithmReturn = async (userId?: number, topicId?: number) => {
+export const fetchTeacherLpLeAlg: TeacherLpLeAlgorithmReturn = async (topicId?: number) => {
   return fetchData<TeacherLpLeAlgorithmResponse>(
-    getConfig().BACKEND + `/user/${userId}/topic/${topicId}/teacherAlgorithm`,
+    getConfig().BACKEND + `/topic/${topicId}/teacherAlgorithm`,
     {
       method: 'GET',
       credentials: 'include',

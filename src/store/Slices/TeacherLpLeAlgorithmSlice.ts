@@ -16,15 +16,14 @@ export const createTeacherLpLeAlgorithmSlice: StateCreator<StoreState, [], [], T
   resetters.push(() => set({ _cache_TeacherLpLeAlgorithm_record: {} }))
   return {
     _cache_TeacherLpLeAlgorithm_record: {},
-    getTeacherLpLeAlgorithm: async (...arg) => {
-      const [userId, topicId] = arg
-      const cached = get()._cache_TeacherLpLeAlgorithm_record[`${userId}-${topicId}`]
+    getTeacherLpLeAlgorithm: async (topicId) => {
+      const cached = get()._cache_TeacherLpLeAlgorithm_record[`${topicId}`]
       if (!cached) {
-        const teacherLpLeAlgorithmResponse = await fetchTeacherLpLeAlg(userId)
+        const teacherLpLeAlgorithmResponse = await fetchTeacherLpLeAlg(topicId)
         set({
           _cache_TeacherLpLeAlgorithm_record: {
             ...get()._cache_TeacherLpLeAlgorithm_record,
-            [`${userId}-${topicId}`]: teacherLpLeAlgorithmResponse
+            [`${topicId}`]: teacherLpLeAlgorithmResponse
           }
         })
         return teacherLpLeAlgorithmResponse

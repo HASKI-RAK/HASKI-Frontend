@@ -1,8 +1,5 @@
-type TeacherLpLeAlgorithmReturn = (userId?: number, topicId?: number) => Promise<TeacherLpLeAlgorithmResponse>
+type TeacherLpLeAlgorithmReturn = (topicId?: number) => Promise<TeacherLpLeAlgorithm>
 
-type TeacherLpLeAlgorithmResponse = {
-  algorithms: TeacherLpLeAlgorithm[]
-}
 
 type TeacherLpLeAlgorithm = {
   algorithm_id: number
@@ -11,4 +8,4 @@ type TeacherLpLeAlgorithm = {
 }
 
 export default TeacherLpLeAlgorithm
-export type { TeacherLpLeAlgorithmReturn, TeacherLpLeAlgorithmResponse }
+export type { TeacherLpLeAlgorithmReturn, TeacherLpLeAlgorithm }

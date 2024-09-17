@@ -19,12 +19,7 @@
     {
       "name": "Fixed Order",
       "description": "The learning elements are presented in a predetermined order.",
-      "key": "fixed"
-    },
-    {
-      "name": "Bayes",
-      "description": "Bayes is a probabilistic algorithm that calculates the learning path based on the probability for the best order for a learner.",
-      "key": "bayes"
+      "key": "default"
     },
     {
       "name": "Graf",
@@ -39,12 +34,7 @@
     {
       "name": "Genetic Algorithm",
       "description": "The Genetic Algorithm is inspiered by evolution. It approximates the best learning path by simulating the process of mutation and selection. It is often used for its speed.",
-      "key": "genetic"
-    },
-    {
-      "name": "Tyche",
-      "description": "Tyche is an algorithm based on the principle of luck. It is used to calculate the best learning path by taking into account the learners' luck factors.",
-      "key": "tyche"
+      "key": "ga"
     }
   ],
   "components.AlgorithmSettingsModal.headerLeft": "Choose a learning path algorithm",
@@ -1168,6 +1158,13 @@
   "components.TableListK.score": "Score",
   "components.TableListK.time": "Time",
   "components.TableListKQuestions.introduction": "Following this you will be asked questions about what learning strategies you use. You will find a list of different learning activities. Please indicate how frequently each activity occurs for you. You can rate your answers from very rarely (1) to very often (5). The questions presented are based on the LIST-K (Klingsieck, 2019), which is a shortened version of the LIST (Wild & Schiefele, 1994).",
+  "components.TopicCard.learningPath": "Learning Path: ",
+  "components.TopicCard.default": "Fixed Order",
+  "components.TopicCard.aco": "Ant Colony Optimization",
+  "components.TopicCard.ga": "Genetic Algorithm",
+  "components.TopicCard.graf": "Graf Algorithm",
+  "components.TopicCard.tyche": "Tyche Algorithm",
+  "components.TopicCard.nestor": "Nestor Algorithm",
   "error": "Error",
   "error.fetchCourses": "There was an Error fetching the courses data.",
   "error.fetchILS": "There was an Error fetching the ILS questionnaire data.",

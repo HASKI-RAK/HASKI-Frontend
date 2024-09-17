@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useState} from 'react'
 import { useTranslation } from 'react-i18next'
 import { FormControlLabel, Grid, RadioGroup, Modal, Typography, Radio, Divider, Fab, Tooltip } from '@common/components'
 import { Close, Save, School } from '@common/icons'
@@ -15,7 +15,9 @@ import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
 type AlgorithmSettingsModalProps = {
   isOpen: boolean
   handleClose: () => void
-  getIDs: { courseID: number | null; topicID: number | null }
+  getIDs: { courseID: number | null; topicID: number | undefined }
+  teacherAlgorithm?: string
+  studentAlgorithm?: string
   options?: { name: string; description: string; key: string }[] //for testing
 }
 
@@ -26,7 +28,7 @@ type optionsType = {
 }[]
 /**
  *
- * @param props allowing opening an closing of Modal and to give the ids of courses and topics
+ * @param props - parameters allowing opening an closing of Modal and to give the ids of courses and topics
  *
  * @remarks
  * This component consists of a modal, that allows the user to set an algorithm for a topic or entire course tepending
@@ -36,9 +38,9 @@ type optionsType = {
  * @category components
  */
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
+  
   const [selected, setSelected] = useState(0)
   //change hardcoded teacher selection to fetched teacher selection
-  const [teacherSelection, setTeacherSelection] = useState(0)
   const { t } = useTranslation()
   const options = props.options ?? [
     ...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as optionsType)
@@ -55,7 +57,6 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
     selected,
     getIDs: props.getIDs
   })
-  //useImperativeHandle(props.ref, () => ({handleSave}), [handleSave])
 
   return (
     <Modal
@@ -94,7 +95,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
                     control={<Radio role="radio-button" checked={index === selected} />}
                     label={option.name}
                   />
-                  {teacherSelection === index && (
+                  {props.teacherAlgorithm === option.key && (
                     <Tooltip
                       arrow
                       title={t('components.AlgorithmSettingsModal.teacherIconTip')}

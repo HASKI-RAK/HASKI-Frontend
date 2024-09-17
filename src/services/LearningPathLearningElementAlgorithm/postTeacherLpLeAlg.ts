@@ -32,7 +32,7 @@ export const postTeacherLpLeAlg = async (
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ algorithm_s_name: algorithm_s_name })
+      body: JSON.stringify({ algorithm_short_name: algorithm_s_name })
     }
   )
 }

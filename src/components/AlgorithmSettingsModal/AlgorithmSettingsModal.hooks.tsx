@@ -1,6 +1,8 @@
 import { usePersistedStore } from '@store'
-import { useCallback } from 'react'
+import { useCallback, useContext } from 'react'
+import { postStudentLpLeAlg, postTeacherLpLeAlg, SnackbarContext } from '@services'
 import { useStore } from 'zustand'
+import { get } from 'http'
 
 /**
  *
@@ -13,7 +15,7 @@ export type useAlgorithmSettingsModalHookParams = {
   handleClose: () => void
   options: { name: string; description: string; key: string }[]
   selected: number
-  getIDs: { courseID: number | null; topicID: number | null }
+  getIDs: { courseID: number | null; topicID: number | undefined }
 }
 /**
  *
@@ -21,8 +23,22 @@ export type useAlgorithmSettingsModalHookParams = {
  * @returns function that saves the selected algorithm for the course or topic in the backend.
  */
 const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) => {
+  const {addSnackbar} = useContext(SnackbarContext)
+  const  getUser = usePersistedStore.getState().getUser
   const handleSave = useCallback(() => {
-    // TODO: Set the selected algorithm for the Course using getIDs() to get the courseID and topicID; string has to be converted to number
+    
+    getUser().then((user) => {
+      if(user.role === 'teacher'){
+        postTeacherLpLeAlg(user.settings.user_id, user.lms_user_id, params.getIDs.topicID, params.options[params.selected].key).catch((error) => {
+          addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 5000 })
+        })
+      }
+      else if(user.role === 'student') {
+        postStudentLpLeAlg(user.settings.user_id, params.getIDs.topicID, params.options[params.selected].key).catch((error) => {
+          addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 3000 })
+        })
+      }
+    })
     params.handleClose()
   }, [params.handleClose, params.options, params.selected, params.getIDs])
   return { handleSave } as const

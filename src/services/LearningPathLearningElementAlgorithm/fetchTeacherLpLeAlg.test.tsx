@@ -26,7 +26,7 @@ describe('fetchTeacherLpLeAlg has expected behaviour', () => {
     const userId = 1
     const topicId = 1
 
-    const result = await fetchTeacherLpLeAlg(userId, topicId)
+    const result = await fetchTeacherLpLeAlg(userId)
 
     expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/${userId}/topic/${topicId}/teacherAlgorithm`, {
       method: 'GET',
@@ -54,7 +54,7 @@ describe('fetchTeacherLpLeAlg has expected behaviour', () => {
     const userId = 1
     const topicId = 1
 
-    await expect(fetchTeacherLpLeAlg(userId, topicId)).rejects.toThrow(expectedMessage)
+    await expect(fetchTeacherLpLeAlg(userId)).rejects.toThrow(expectedMessage)
   })
 
   it('should throw an error unknown when the response is not ok', async () => {
@@ -70,6 +70,6 @@ describe('fetchTeacherLpLeAlg has expected behaviour', () => {
     const userId = 1
     const topicId = 1
 
-    await expect(fetchTeacherLpLeAlg(userId, topicId)).rejects.toThrow('Unknown error')
+    await expect(fetchTeacherLpLeAlg(userId)).rejects.toThrow('Unknown error')
   })
 })

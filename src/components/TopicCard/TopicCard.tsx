@@ -1,10 +1,11 @@
-import { memo, useState, useCallback } from 'react'
+import { memo, useState, useCallback, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, Grid, Typography, IconButton, Menu, MenuItem } from '@common/components'
 import { CheckBox, MoreVert } from '@common/icons'
 import { StyledLinearProgress, AlgorithmSettingsModal } from '@components'
 import { Topic } from '@core'
+import { useStore, usePersistedStore } from '@store'
 
 // Type
 type TopicCardProps = {
@@ -18,6 +19,17 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
   // Hooks
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const getTeacherAlgorithm = useStore((state) => state.getTeacherLpLeAlgorithm)
+  const getStudentAlgorithm = useStore((state) => state.getStudentLpLeAlgorithm)
+  const getUser = usePersistedStore((state) => state.getUser)
+
+  const [teacherSelection, setTeacherSelection] = useState<string| undefined>('')
+  const [studentSelection, setStudentSelection] = useState<string|undefined>('')
+
+  useEffect(() => {
+    getUser().then((user) => {getStudentAlgorithm(user.settings.user_id, topic?.id).then((res) => { setStudentSelection(res.short_name) }).catch(() => { setStudentSelection(undefined) })})
+    getTeacherAlgorithm(topic?.id).then((res) => { setTeacherSelection(res.short_name) }).catch(() => { setTeacherSelection(undefined) })
+  }, [getUser, getStudentAlgorithm, getTeacherAlgorithm, topic?.id])
 
   const [isAlgorithmSettingsModalOpen, setIsAlgorithmSettingsModalOpen] = useState(false)
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null)
@@ -92,9 +104,8 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           justifyContent={'center'}
           sx={{ mt: '0.5rem' }}>
           {/*TODO: change hardcoded name to fetched algorithm name*/}
-          <Typography>
-            {t('pages.course.cardText')}
-            {t('pages.course.fixed')}
+          <Typography sx={{mr: '0.5rem'}}>
+            {(studentSelection || teacherSelection) && (t('components.TopicCard.learningPath') + t(`components.TopicCard.${studentSelection ?? teacherSelection}`))}
           </Typography>
         </Grid>
       </CardContent>
@@ -110,7 +121,9 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
       <AlgorithmSettingsModal
         isOpen={isAlgorithmSettingsModalOpen}
         handleClose={handleAlgorithmModalClose}
-        getIDs={{ courseID: null, topicID: topic?.id ?? null }}
+        getIDs={{ courseID: null, topicID: topic?.id }}
+        teacherAlgorithm={teacherSelection}
+        studentAlgorithm={studentSelection}
       />
       <Menu
         id="menu"
