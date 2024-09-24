@@ -42,6 +42,7 @@ export const logBuffer = (config: any) => {
           //get userid from localStorage
           const persistedStorage = JSON.parse(localStorage.getItem('persisted_storage') || '{}')
           //send buffer content to backend
+          //persistedStorage.state._user.id
           postBufferContent(bufferBody, persistedStorage.state._user.id).catch(() => {
             console.log('buffer failed to send')
           })
