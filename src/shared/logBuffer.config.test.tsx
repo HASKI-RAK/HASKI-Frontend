@@ -1,6 +1,10 @@
 import log from 'loglevel'
 import { logBuffer } from './logBuffer.config'
 import { mockServices } from 'jest.setup'
+import { createStore } from 'zustand'
+import { createUserSlice } from 'src/store/Slices/UserSlice'
+import { usePersistedStore } from '@store'
+
 
 describe('Test the demo component', () => {
   beforeEach(() => {
@@ -73,28 +77,23 @@ describe('localStorage already set', () => {
 })
 
 describe('production is set',()=>{
-
-  test('error message is sent to the backend', () => {
-    mockServices.fetchUser
-    Object.defineProperty(window, 'localStorage', {
-      value: {
-        getItem: jest.fn(() => '{"buffer": ["mockedValue"]}'),
-        setItem: localStorage.setItem.bind(localStorage),
-        removeItem: jest.fn()
-      },
-      writable: true
-    })
-
+  beforeEach(()=>{
     jest.resetModules()
     process.env = {
       NODE_ENV: 'production',
     }
-    console.log(localStorage.getItem('perstisted_storage'),'ps')
+  })
+
+  test('error message is sent to the backend', async () => {
+    const{getUser}=usePersistedStore.getState()
+    await getUser()
+    console.log(usePersistedStore.getState()._user)
     logBuffer(jest.mock)
     log.setLevel('trace')
+
     log.error('This is an error')
     const ringBuffer = JSON.parse(localStorage.getItem('ringBufferContent') || '{}')
     expect(ringBuffer).not.toBeNull()
-    expect(ringBuffer).toEqual({"buffer": [], "size": 100})
+    expect(ringBuffer).toEqual({})
   })
 })

@@ -2,6 +2,7 @@ import log from 'loglevel'
 import { RingBuffer } from './RingBuffer'
 import { postBufferContent } from 'src/services/LogContent/postBufferContent'
 import { bufferContent } from 'src/services/LogContent/postBufferContent'
+import { usePersistedStore } from '@store'
 
 /**
  * This function is used to log all the messages in the console and also store them in a ring buffer.
@@ -40,12 +41,17 @@ export const logBuffer = (config: any) => {
             content: message
           }
           //get userid from localStorage
-          const persistedStorage = JSON.parse(localStorage.getItem('persisted_storage') || '{}')
+          //const persistedStorage = JSON.parse(localStorage.getItem('persisted_storage') || '{}')
+          const { getUser } = usePersistedStore.getState()
           //send buffer content to backend
           //persistedStorage.state._user.id
-          postBufferContent(bufferBody, persistedStorage.state._user.id).catch(() => {
-            console.log('buffer failed to send')
+          getUser().then((user) => {
+            postBufferContent(bufferBody, user.id).catch(() => {
+              //postBufferContent(bufferBody, persistedStorage.state._user.id).catch(() => {
+              console.log('buffer failed to send')
+            })
           })
+
           //remove buffer content
           GlobalRingBuffer.clear()
         }
