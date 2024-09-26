@@ -1,9 +1,5 @@
 import log from 'loglevel'
 import { logBuffer } from './logBuffer.config'
-import { mockServices } from 'jest.setup'
-import { createStore } from 'zustand'
-import { createUserSlice } from 'src/store/Slices/UserSlice'
-import { usePersistedStore } from '@store'
 
 describe('Test the demo component', () => {
   beforeEach(() => {
@@ -72,16 +68,6 @@ describe('localStorage already set', () => {
     // TODO: Find a better way to check if logBuffer is doing what it is supposed to do.
     expect(localStorage.getItem('ringBufferContent')).toEqual(undefined)
   })
-})
-
-beforeEach(() => {
-  Storage.prototype.getItem = jest.fn((key) => {
-    if (key === 'persisted_storage')
-      return '{"state":{"_user":{"id":1,"lms_user_id":7,"name":"Emily Johnson","role":"student","role_id":null,"settings":{"id":7,"pswd":"student","theme":"light","user_id":7},"university":"HS-AS","user_id":7},"_learningPathElementStatus":{"1-7":[{"cmid":2,"state":0,"timecompleted":0}]},"expire":1728651274},"version":1.1}'
-    return null
-  })
-
-  Storage.prototype.setItem = jest.fn()
 })
 
 describe('production is set', () => {
