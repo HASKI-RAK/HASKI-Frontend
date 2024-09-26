@@ -13,7 +13,7 @@ export interface bufferContent {
 }
 
 /*
- * postBufferContent 
+ * postBufferContent
  *
  * @props timestamp - time of the error message
  * @props content - error message
