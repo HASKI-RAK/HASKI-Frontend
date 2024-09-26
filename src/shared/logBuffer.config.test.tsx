@@ -76,18 +76,39 @@ describe('localStorage already set', () => {
   })
 })
 
+beforeEach(() => {
+  Storage.prototype.getItem = jest.fn((key) => {
+    if (key === 'persisted_storage') return '{"state":{"_user":{"id":1,"lms_user_id":7,"name":"Emily Johnson","role":"student","role_id":null,"settings":{"id":7,"pswd":"student","theme":"light","user_id":7},"university":"HS-AS","user_id":7},"_learningPathElementStatus":{"1-7":[{"cmid":2,"state":0,"timecompleted":0}]},"expire":1728651274},"version":1.1}'
+    return null;
+  })
+
+  Storage.prototype.setItem = jest.fn();
+})
+
 describe('production is set',()=>{
   beforeEach(()=>{
     jest.resetModules()
     process.env = {
       NODE_ENV: 'production',
     }
+
+  
   })
 
   test('error message is sent to the backend', async () => {
-    const{getUser}=usePersistedStore.getState()
-    await getUser()
-    console.log(usePersistedStore.getState()._user)
+   
+      Object.defineProperty(window, 'localStorage', {
+        value: {
+          getItem: jest.fn((key) => {
+            if (key === 'persisted_storage') return '{"state":{"_user":{"id":1,"lms_user_id":7,"name":"Emily Johnson","role":"student","role_id":null,"settings":{"id":7,"pswd":"student","theme":"light","user_id":7},"university":"HS-AS","user_id":7},"_learningPathElementStatus":{"1-7":[{"cmid":2,"state":0,"timecompleted":0}]},"expire":1728651274},"version":1.1}';
+            return null;
+          }),
+          setItem: jest.fn(),
+          removeItem: jest.fn(),
+          clear: jest.fn(),
+        },
+        writable: true,
+      })
     logBuffer(jest.mock)
     log.setLevel('trace')
 
