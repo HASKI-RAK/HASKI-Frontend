@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 import React, { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Divider, Fab, Grid, Modal } from '@common/components'
+import { Divider, Fab, Grid, Modal } from '@common/components'
 import { ArrowBack, ArrowForward, Brush, Check, Close, DarkMode, LightMode } from '@common/icons'
 import { AltTheme, DarkTheme, HaskiTheme } from '@common/utils'
 import { BreadcrumbsContainer, Footer, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
@@ -67,6 +67,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
 
   //handles the selection of a radio button
   const handleThemeModalPreviewChange = (themeName: string) => {
+    setSelectedThemeString(themeName)
     setSelectedTheme(themeName === 'DarkTheme' ? DarkTheme : themeName === 'AltTheme' ? AltTheme : HaskiTheme)
   }
 
@@ -94,9 +95,9 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
 
   return (
     <Modal data-testid={'Theme Modal'} open={open} onClose={handleClose}>
-      <Box sx={styleBox}>
+      <Grid sx={styleBox}>
         {/**Left column/Upper Row - Provides radio buttons for theme changing*/}
-        <Box sx={{ flex: '1', top: '0%', alignItems: 'flex-start' }}>
+        <Grid sx={{ flex: '1', top: '0%', alignItems: 'flex-start' }}>
           <FormControl
             sx={{
               alignItems: 'center',
@@ -112,7 +113,6 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
               }}
               value={selectedThemeString}
               onChange={(e) => {
-                setSelectedThemeString(e.target.value)
                 handleThemeModalPreviewChange(e.target.value)
               }}
               aria-labelledby="demo-radio-buttons-group-label"
@@ -121,35 +121,35 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
                 value={'HaskiTheme'}
                 control={<Radio />}
                 label={
-                  <Box display="flex" alignItems="center">
+                  <Grid display="flex" alignItems="center">
                     <Typography>{t('components.ThemeModal.standardTheme')}</Typography>
                     <LightMode sx={{ mr: 1 }} />
-                  </Box>
+                  </Grid>
                 }
               />
               <FormControlLabel
                 value={'DarkTheme'}
                 control={<Radio />}
                 label={
-                  <Box display="flex" alignItems="center">
+                  <Grid display="flex" alignItems="center">
                     <Typography>{t('components.ThemeModal.darkTheme')}</Typography>
                     <DarkMode sx={{ mr: 1 }} />
-                  </Box>
+                  </Grid>
                 }
               />
               <FormControlLabel
                 value={'AltTheme'}
                 control={<Radio />}
                 label={
-                  <Box display="flex" alignItems="center">
+                  <Grid display="flex" alignItems="center">
                     <Typography>{t('components.ThemeModal.altTheme')}</Typography>
                     <Brush sx={{ mr: 1 }} />
-                  </Box>
+                  </Grid>
                 }
               />
             </RadioGroup>
           </FormControl>
-        </Box>
+        </Grid>
 
         <Divider
           orientation={isSmallScreen ? 'horizontal' : 'vertical'}
@@ -161,7 +161,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
         />
 
         {/**Right Column / Lower Row - Provides themed preview of radio selection and operating buttons*/}
-        <Box
+        <Grid
           sx={{
             flex: '4',
             position: 'relative',
@@ -219,7 +219,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
           </Fab>
           {/**preview block - Renders selected page scaled down in chosen theme within right column/lower row*/}
           <ThemeProvider theme={selectedTheme}>
-            <Box
+            <Grid
               sx={{
                 backgroundColor: (theme) => theme.palette.background.default,
                 color: (theme) => theme.palette.text.primary,
@@ -230,7 +230,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
                 transformOrigin: 'top center',
                 pointerEvents: 'none'
               }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
+              <Grid sx={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
                 <MenuBar />
                 <BreadcrumbsContainer />
                 <Grid container sx={{ flex: 1, overflow: 'hidden' }}>
@@ -239,17 +239,17 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
                   </Grid>
                 </Grid>
                 <Footer />
-              </Box>
+              </Grid>
               <PrivacyModal />
               <OpenQuestionnaire />
-            </Box>
+            </Grid>
           </ThemeProvider>
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
     </Modal>
   )
 }
-export default memo(ThemeModal)
 
 // eslint-disable-next-line immutable/no-mutation
 ThemeModal.setDisplayName = 'ThemeModal'
+export default memo(ThemeModal)
