@@ -7,7 +7,6 @@ import {
   Theme,
   ThemeProvider,
   Typography,
-  useMediaQuery,
   useTheme
 } from '@mui/material'
 import React, { memo, useContext, useEffect, useState } from 'react'
@@ -31,7 +30,7 @@ const styleBox = {
   boxShadow: 24,
   p: 1,
   display: 'flex',
-  flexDirection: { xs: 'column', lg: 'row' }
+  flexDirection: 'column'
 }
 
 type ThemeModalProps = {
@@ -63,7 +62,6 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
 
   const { updateTheme } = useThemeContext()
   const { isAuth } = useContext(AuthContext)
-  const isSmallScreen = useMediaQuery(activeTheme.breakpoints.down('lg'))
 
   //handles the selection of a radio button
   const handleThemeModalPreviewChange = (themeName: string) => {
@@ -96,7 +94,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
   return (
     <Modal data-testid={'Theme Modal'} open={open} onClose={handleClose}>
       <Grid sx={styleBox}>
-        {/**Left column/Upper Row - Provides radio buttons for theme changing*/}
+        {/**Upper Row - Provides radio buttons for theme changing*/}
         <Grid sx={{ flex: '1', top: '0%', alignItems: 'flex-start' }}>
           <FormControl
             sx={{
@@ -105,10 +103,10 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
               width: '100%',
               height: '100%'
             }}>
-            <FormLabel id="demo-radio-buttons-group-label">{t('components.ThemeModal.radioHeader')}</FormLabel>
+            <FormLabel id="demo-radio-buttons-group-label" sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}>{t('components.ThemeModal.radioHeader')}</FormLabel>
             <RadioGroup
               sx={{
-                flexDirection: { xs: 'row', lg: 'column' },
+                flexDirection: 'row',
                 gap: 2
               }}
               value={selectedThemeString}
@@ -152,15 +150,10 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
         </Grid>
 
         <Divider
-          orientation={isSmallScreen ? 'horizontal' : 'vertical'}
-          flexItem
-          sx={{
-            width: isSmallScreen ? '100%' : 'auto',
-            height: isSmallScreen ? 'auto' : '100%'
-          }}
+          orientation= 'horizontal'
         />
 
-        {/**Right Column / Lower Row - Provides themed preview of radio selection and operating buttons*/}
+        {/**Lower Row - Provides themed preview of radio selection and operating buttons*/}
         <Grid
           sx={{
             flex: '4',
@@ -171,50 +164,53 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
           }}>
           <Fab
             id="switch-page-right-theme-button"
-            color="primary"
-            data-testid={'ThemeModal-Right-Button'}
-            onClick={() => changePage(1)}
-            style={{
+            sx={{
+              bgcolor: (theme) => theme.palette.primary.main,
               position: 'sticky',
               top: '45%',
               left: '93.5%'
-            }}>
+            }}
+            data-testid={'ThemeModal-Right-Button'}
+            onClick={() => changePage(1)}>
             <ArrowForward />
           </Fab>
           <Fab
             id="switch-page-left-theme-button"
-            color="primary"
-            data-testid={'ThemeModal-Left-Button'}
-            onClick={() => changePage(-1)}
-            style={{
+            sx={{
+              bgcolor: (theme) => theme.palette.primary.main,
               position: 'sticky',
               top: '45%',
               left: '1.5%'
-            }}>
+            }}
+            data-testid={'ThemeModal-Left-Button'}
+            onClick={() => changePage(-1)}>
             <ArrowBack />
           </Fab>
           <Fab
             id="close-theme-button"
-            color="primary"
-            data-testid={'ThemeModal-Close-Button'}
-            onClick={() => handleClose({} as object, 'backdropClick')}
-            style={{
+            sx={{
+              bgcolor: (theme) => theme.palette.error.main,
               position: 'sticky',
               top: '1%',
-              left: '93.5%'
-            }}>
+              left: '93.5%'}}
+            data-testid={'ThemeModal-Close-Button'}
+            onClick={() => handleClose({} as object, 'backdropClick')}>
             <Close />
           </Fab>
           <Fab
             id="accept-theme-button"
-            color="success"
+            sx={{
+              bgcolor: (theme) => theme.palette.success.main,
+              position: 'sticky',
+              top: '87.5%',
+              left: '93.5%'
+            }}
             data-testid={'ThemeModal-Accept-Button'}
             onClick={() => {
               updateTheme(selectedThemeString)
               handleClose({} as object, 'backdropClick')
             }}
-            disabled={activeTheme === selectedTheme}
-            style={{ position: 'sticky', top: '90%', left: '93.5%' }}>
+            disabled={activeTheme === selectedTheme}>
             <Check />
           </Fab>
           {/**preview block - Renders selected page scaled down in chosen theme within right column/lower row*/}
