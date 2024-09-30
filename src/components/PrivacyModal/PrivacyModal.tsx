@@ -13,6 +13,7 @@ import {
   Typography
 } from '@common/components'
 import { PrivacyModalHookReturn, usePrivacyModal as _usePrivacyModal } from './PrivacyModal.hooks'
+import { useUniversity } from '@common/hooks'
 
 const style = {
   position: 'absolute',
@@ -54,7 +55,8 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   const navigate = useNavigate()
   const [open, setOpen] = useState(true)
   const [checked, setChecked] = useState(false)
-  const { privacyPolicyCookie, handleAccept, checkUniversity } = usePrivacyModal()
+  const { privacyPolicyCookie, handleAccept } = usePrivacyModal()
+  const { university } = useUniversity()
   const currentLocation = useLocation()
 
   //Disable backdropClick so the Modal only closes via the buttons
@@ -132,19 +134,18 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                       aria-multiline={'true'}
                       onClick={() => {
                         handleModal(false)
-                        checkUniversity().then((university) => {
-                          if (university == 'TH-AB') {
-                            window.location.assign('https://moodle.th-ab.de/')
-                          } else if (university == 'HS-KE') {
-                            window.location.assign('https://moodle.hs-kempten.de/')
+
+                        if (university == 'TH-AB') {
+                          window.location.assign('https://moodle.th-ab.de/')
+                        } else if (university == 'HS-KE') {
+                          window.location.assign('https://moodle.hs-kempten.de/')
+                        } else {
+                          if (currentLocation.pathname == '/') {
+                            history.back()
                           } else {
-                            if (currentLocation.pathname == '/') {
-                              history.back()
-                            } else {
-                              history.go(-2)
-                            }
+                            history.go(-2)
                           }
-                        })
+                        }
                       }}>
                       {t('appGlobal.decline')}
                     </Button>

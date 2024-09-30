@@ -20,6 +20,7 @@ export * from './xAPI'
 export { fetchILS, fetchListK, postILS, postListK } from './Questionnaire'
 export * from './debounce'
 export * from './Viewport'
+export { fetchNews } from './News'
 export { postCalculateLearningPathILS } from './LearningPath'
 export {
   fetchStudentLpLeAlg,
