@@ -380,7 +380,7 @@ const mockDataServices: MockDataServices = {
       ok: true,
       status: 201,
       statusText: 'CREATED',
-      url: 'http://fakedomain.com:5000/userId/topicId/studentAlgorithm'
+      url: 'https://fakedomain.com:5000/userId/topicId/studentAlgorithm'
     })
   ),
   postTeacherLpLeAlg: jest.fn(() =>
@@ -388,7 +388,7 @@ const mockDataServices: MockDataServices = {
       ok: true,
       status: 201,
       statusText: 'CREATED',
-      url: 'http://fakedomain.com:5000/userId/topicId/teacherAlgorithm'
+      url: 'https://fakedomain.com:5000/userId/topicId/teacherAlgorithm'
     })
   ),
   fetchNews: jest.fn(() =>
