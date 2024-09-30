@@ -1,11 +1,11 @@
-import { memo, useState, useCallback, useEffect } from 'react'
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardContent, Grid, Typography, IconButton, Menu, MenuItem } from '@common/components'
-import { CheckBox, MoreVert } from '@common/icons'
-import { StyledLinearProgress, AlgorithmSettingsModal } from '@components'
+import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Typography } from '@common/components'
+import { MoreVert } from '@common/icons'
+import { AlgorithmSettingsModal, StyledLinearProgress } from '@components'
 import { Topic } from '@core'
-import { useStore, usePersistedStore } from '@store'
+import { useTopicCard } from './TopicCard.hooks'
 
 // Type
 type TopicCardProps = {
@@ -19,33 +19,18 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
   // Hooks
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const getTeacherAlgorithm = useStore((state) => state.getTeacherLpLeAlgorithm)
-  const getStudentAlgorithm = useStore((state) => state.getStudentLpLeAlgorithm)
-  const getUser = usePersistedStore((state) => state.getUser)
 
-  const [teacherSelection, setTeacherSelection] = useState<string| undefined>('')
-  const [studentSelection, setStudentSelection] = useState<string|undefined>('')
-
-  useEffect(() => {
-    getUser().then((user) => {getStudentAlgorithm(user.settings.user_id, topic?.id).then((res) => { setStudentSelection(res.short_name) }).catch(() => { setStudentSelection(undefined) })})
-    getTeacherAlgorithm(topic?.id).then((res) => { setTeacherSelection(res.short_name) }).catch(() => { setTeacherSelection(undefined) })
-  }, [getUser, getStudentAlgorithm, getTeacherAlgorithm, topic?.id])
-
-  const [isAlgorithmSettingsModalOpen, setIsAlgorithmSettingsModalOpen] = useState(false)
-  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null)
-  const openMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setMenuAnchorEl(event.currentTarget)
-  }
-  const handleCloseMenu = useCallback(() => {
-    setMenuAnchorEl(null)
-  }, [setMenuAnchorEl])
-  const handleAlgorithmMenuOpen = useCallback(() => {
-    handleCloseMenu()
-    setIsAlgorithmSettingsModalOpen(true)
-  }, [handleCloseMenu, setIsAlgorithmSettingsModalOpen])
-  const handleAlgorithmModalClose = useCallback(() => {
-    setIsAlgorithmSettingsModalOpen(false)
-  }, [setIsAlgorithmSettingsModalOpen])
+  const {
+    teacherSelection,
+    studentSelection,
+    isAlgorithmSettingsModalOpen,
+    menuAnchorEl,
+    openMenu,
+    handleCloseMenu,
+    handleAlgorithmMenuOpen,
+    handleAlgorithmModalClose,
+    changeObserver
+  } = useTopicCard({ topic, learningElementProgressTopics: calculatedTopicProgress })
 
   return (
     <Card
@@ -104,8 +89,10 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           justifyContent={'center'}
           sx={{ mt: '0.5rem' }}>
           {/*TODO: change hardcoded name to fetched algorithm name*/}
-          <Typography sx={{mr: '0.5rem'}}>
-            {(studentSelection || teacherSelection) && (t('components.TopicCard.learningPath') + t(`components.TopicCard.${studentSelection ?? teacherSelection}`))}
+          <Typography sx={{ mr: '0.5rem' }}>
+            {(studentSelection || teacherSelection) &&
+              t('components.TopicCard.learningPath') +
+                t(`components.TopicCard.${studentSelection ?? teacherSelection}`)}
           </Typography>
         </Grid>
       </CardContent>
@@ -121,6 +108,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
       <AlgorithmSettingsModal
         isOpen={isAlgorithmSettingsModalOpen}
         handleClose={handleAlgorithmModalClose}
+        changeObserver={changeObserver}
         getIDs={{ courseID: null, topicID: topic?.id }}
         teacherAlgorithm={teacherSelection}
         studentAlgorithm={studentSelection}

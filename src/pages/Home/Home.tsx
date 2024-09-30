@@ -27,7 +27,6 @@ export const Home = () => {
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
 
-
   useEffect(() => {
     if (isAuth) {
       getUser()

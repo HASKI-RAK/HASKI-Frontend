@@ -14,7 +14,7 @@ global.fetch = jest.fn(() =>
 describe('postStudentLpLeAlg has expected behaviour', () => {
   it('should return inputData if succesfull', async () => {
     const inputData = {
-      algorithm_s_name: 'test'
+      algorithm_short_name: 'test'
     }
 
     const mockResponse = {
@@ -33,7 +33,7 @@ describe('postStudentLpLeAlg has expected behaviour', () => {
     const result = await postStudentLpLeAlg(userId, topicId, algorithmName)
 
     expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/${userId}/topic/${topicId}/studentAlgorithm`, {
-      body: '2',
+      body: JSON.stringify({ algorithm_short_name: algorithmName }),
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'

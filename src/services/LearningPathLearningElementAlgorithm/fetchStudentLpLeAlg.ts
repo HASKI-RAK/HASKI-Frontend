@@ -1,5 +1,4 @@
-import { StudentLpLeAlgorithmResponse, StudentLpLeAlgorithmReturn } from '@core'
-
+import { StudentLpLeAlgorithm, StudentLpLeAlgorithmReturn } from '@core'
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
@@ -17,15 +16,16 @@ import { fetchData } from '../RequestResponse'
  * @category Services
  */
 
-export const fetchStudentLpLeAlg: StudentLpLeAlgorithmReturn = async (userId?: number, topicId?: number) => {
-  return fetchData<StudentLpLeAlgorithmResponse>(
-    getConfig().BACKEND + `/user/${userId}/topic/${topicId}/studentAlgorithm`,
-    {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+export const fetchStudentLpLeAlg: StudentLpLeAlgorithmReturn = async (
+  ingnoreCache: boolean,
+  userId?: number,
+  topicId?: number
+) => {
+  return fetchData<StudentLpLeAlgorithm>(getConfig().BACKEND + `/user/${userId}/topic/${topicId}/studentAlgorithm`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
     }
-  )
+  })
 }

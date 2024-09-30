@@ -1,12 +1,13 @@
-import { memo, useCallback, useState} from 'react'
+import { memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FormControlLabel, Grid, RadioGroup, Modal, Typography, Radio, Divider, Fab, Tooltip } from '@common/components'
+import { Divider, Fab, FormControlLabel, Grid, Modal, Radio, RadioGroup, Tooltip, Typography } from '@common/components'
 import { Close, Save, School } from '@common/icons'
 import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
 
 /**
  * @prop isOpen - Boolean value to determine if the modal is open.
  * @prop handleClose - function executed when closing the modal.
+ * @prop changeObserver - function executed when the algorithm is changed.
  * @prop getIDs - Object containing the courseID and topicID.
  * @prop options - Array of objects containing the name, description,
  *  and key of the algorithms. Used in Tests instead of the translation output.
@@ -15,6 +16,7 @@ import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
 type AlgorithmSettingsModalProps = {
   isOpen: boolean
   handleClose: () => void
+  changeObserver?: () => void
   getIDs: { courseID: number | null; topicID: number | undefined }
   teacherAlgorithm?: string
   studentAlgorithm?: string
@@ -38,7 +40,6 @@ type optionsType = {
  * @category components
  */
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
-  
   const [selected, setSelected] = useState(0)
   //change hardcoded teacher selection to fetched teacher selection
   const { t } = useTranslation()
@@ -53,6 +54,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
   )
   const { handleSave } = useAlgorithmSettingsModal({
     handleClose: props.handleClose,
+    changeObserver: props.changeObserver,
     options,
     selected,
     getIDs: props.getIDs

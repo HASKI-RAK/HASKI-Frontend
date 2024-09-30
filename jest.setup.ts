@@ -1,6 +1,6 @@
-import { resetAllSlices } from '@store'
 import { ok } from 'assert'
 import { url } from 'inspector'
+import { resetAllSlices } from '@store'
 
 /**
  * Type definition for {@link mockDataServices}
@@ -381,6 +381,14 @@ const mockDataServices: MockDataServices = {
       status: 201,
       statusText: 'CREATED',
       url: 'http://fakedomain.com:5000/userId/topicId/studentAlgorithm'
+    })
+  ),
+  postTeacherLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED',
+      url: 'http://fakedomain.com:5000/userId/topicId/teacherAlgorithm'
     })
   )
 }

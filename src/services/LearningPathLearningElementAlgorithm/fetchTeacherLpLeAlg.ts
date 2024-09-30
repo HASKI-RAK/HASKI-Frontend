@@ -1,4 +1,4 @@
-import { TeacherLpLeAlgorithmResponse, TeacherLpLeAlgorithmReturn } from '@core'
+import { TeacherLpLeAlgorithm, TeacherLpLeAlgorithmReturn } from '@core'
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
@@ -16,14 +16,11 @@ import { fetchData } from '../RequestResponse'
  */
 
 export const fetchTeacherLpLeAlg: TeacherLpLeAlgorithmReturn = async (topicId?: number) => {
-  return fetchData<TeacherLpLeAlgorithmResponse>(
-    getConfig().BACKEND + `/topic/${topicId}/teacherAlgorithm`,
-    {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+  return fetchData<TeacherLpLeAlgorithm>(getConfig().BACKEND + `/topic/${topicId}/teacherAlgorithm`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
     }
-  )
+  })
 }

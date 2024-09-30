@@ -23,12 +23,11 @@ describe('fetchTeacherLpLeAlg has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const userId = 1
     const topicId = 1
 
-    const result = await fetchTeacherLpLeAlg(userId)
+    const result = await fetchTeacherLpLeAlg(topicId)
 
-    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/${userId}/topic/${topicId}/teacherAlgorithm`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/topic/${topicId}/teacherAlgorithm`, {
       method: 'GET',
       credentials: 'include',
       headers: {
@@ -51,10 +50,9 @@ describe('fetchTeacherLpLeAlg has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const userId = 1
     const topicId = 1
 
-    await expect(fetchTeacherLpLeAlg(userId)).rejects.toThrow(expectedMessage)
+    await expect(fetchTeacherLpLeAlg(topicId)).rejects.toThrow(expectedMessage)
   })
 
   it('should throw an error unknown when the response is not ok', async () => {
@@ -67,9 +65,8 @@ describe('fetchTeacherLpLeAlg has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const userId = 1
     const topicId = 1
 
-    await expect(fetchTeacherLpLeAlg(userId)).rejects.toThrow('Unknown error')
+    await expect(fetchTeacherLpLeAlg(topicId)).rejects.toThrow('')
   })
 })

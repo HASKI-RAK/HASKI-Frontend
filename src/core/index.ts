@@ -24,14 +24,14 @@
 import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
 import Course, { CourseResponse } from './Course/Course'
 import LearningElement from './LearningElement/LearningElement'
-import LearningPathElement from './LearningPathElement/LearningPathElement'
-import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
-import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
 import LearningPathLearningElementAlgorithm, {
   LearningPathLearningElementAlgorithmResponse
 } from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
-import StudentLpLeAlgorithm, { StudentLpLeAlgorithmResponse } from './LearningPathAlgorithm/StudentLpLeAlgorithm'
-import TeacherLpLeAlgorithm, { TeacherLpLeAlgorithmResponse } from './LearningPathAlgorithm/TeacherLpLeAlgorithm'
+import StudentLpLeAlgorithm from './LearningPathAlgorithm/StudentLpLeAlgorithm'
+import TeacherLpLeAlgorithm from './LearningPathAlgorithm/TeacherLpLeAlgorithm'
+import LearningPathElement from './LearningPathElement/LearningPathElement'
+import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
+import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
 import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
 import ILS from './QuestionnaireResults/ILS'
 import ListK from './QuestionnaireResults/ListK'
@@ -54,9 +54,7 @@ export type {
   LearningPathLearningElementAlgorithm,
   LearningPathLearningElementAlgorithmResponse,
   StudentLpLeAlgorithm,
-  StudentLpLeAlgorithmResponse,
   TeacherLpLeAlgorithm,
-  TeacherLpLeAlgorithmResponse,
   Topic,
   StudentLearningElement,
   ILS,

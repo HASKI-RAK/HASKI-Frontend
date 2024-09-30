@@ -1,5 +1,8 @@
-type StudentLpLeAlgorithmReturn = (userId?: number, topicId?: number) => Promise<StudentLpLeAlgorithm>
-
+type StudentLpLeAlgorithmReturn = (
+  ignoreCache: boolean,
+  userId?: number,
+  topicId?: number
+) => Promise<StudentLpLeAlgorithm>
 
 type StudentLpLeAlgorithm = {
   algorithm_id: number
