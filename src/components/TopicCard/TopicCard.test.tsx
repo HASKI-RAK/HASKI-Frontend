@@ -226,6 +226,7 @@ describe('TopicCard tests', () => {
 
     await waitFor(() => {
       expect(queryByText('components.TopicCard.learningPath')).toBeInTheDocument
+      expect(queryByText('components.TopicCard.studentTest')).toBeInTheDocument
       expect(mockServices.fetchStudentLpLeAlg).toHaveBeenCalledTimes(2)
     })
   })
@@ -291,15 +292,15 @@ describe('TopicCard tests', () => {
         })
       )
 
-    mockServices.getStudentLpLeAlg = jest
+      mockServices.fetchStudentLpLeAlg = jest
       .fn()
-      .mockImplementationOnce(() => Promise.reject(new Error('Error')))
-      .mockImplementationOnce(() => Promise.reject(new Error('Error')))
+      .mockRejectedValueOnce(new Error('Error'))
+      .mockRejectedValueOnce(new Error('Error'))
 
-    mockServices.getTeacherLpLeAlgorithm = jest
+    mockServices.fetchTeacherLpLeAlg = jest
       .fn()
-      .mockImplementationOnce(() => Promise.reject(new Error('Error')))
-      .mockImplementationOnce(() => Promise.reject(new Error('Error')))
+      .mockRejectedValueOnce(new Error('Error'))
+      .mockRejectedValueOnce(new Error('Error'))
 
     const { getAllByTestId, getByTestId, queryByText } = render(
       <MemoryRouter>
@@ -320,6 +321,83 @@ describe('TopicCard tests', () => {
 
     await waitFor(() => {
       expect(queryByText('components.TopicCard.learningPath')).not.toBeInTheDocument
+    })
+  })
+
+  it('shows the teacher selected algorithm when students have not selected one', async () => {
+    const mockProps = {
+      topic: {
+        contains_le: true,
+        created_at: '2021-09-01T12:00:00.000Z',
+        created_by: 'dimitri',
+        id: 1,
+        is_topic: true,
+        last_updated: '2021-09-01T12:00:00.000Z',
+        lms_id: 1,
+        name: 'test',
+        parent_id: 1,
+        student_topic: {
+          done: false,
+          done_at: null,
+          id: 1,
+          student_id: 1,
+          topic_id: 1,
+          visits: []
+        },
+        university: 'HS-KE'
+      },
+      calculatedTopicProgress: [1, 1],
+      isSmOrDown: false
+    }
+
+    mockServices.fetchUser = jest
+      .fn()
+      .mockImplementationOnce(() =>
+        Promise.resolve({
+          id: 1,
+          lms_user_id: 1,
+          name: 'Sam Student',
+          role: 'student',
+          role_id: 1,
+          settings: {
+            id: 1,
+            user_id: 1,
+            pswd: '1234',
+            theme: 'test'
+          },
+          university: 'TH-AB'
+        })
+      )
+      .mockImplementationOnce(() =>
+        Promise.resolve({
+          id: 1,
+          lms_user_id: 1,
+          name: 'Sam Student',
+          role: 'student',
+          role_id: 1,
+          settings: {
+            id: 1,
+            user_id: 1,
+            pswd: '1234',
+            theme: 'test'
+          },
+          university: 'TH-AB'
+        })
+    )
+
+    mockServices.fetchStudentLpLeAlg = jest
+    .fn()
+    .mockRejectedValueOnce(new Error('Error'))
+    .mockRejectedValueOnce(new Error('Error'))
+
+    const { queryByText } = render(
+      <MemoryRouter>
+        <TopicCard {...mockProps} />
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(queryByText('components.TopicCard.teacherTest')).toBeInTheDocument
     })
   })
 })

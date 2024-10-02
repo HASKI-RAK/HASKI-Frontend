@@ -11,18 +11,15 @@ const mockOptions = [
   { name: 'option3', description: 'description3', key: 'key3' }
 ]
 
-const handleSave = jest.fn().mockName('handleSave')
 
 describe('AlgorithmSettingsModal', () => {
   it('is displayed with all options', () => {
     const open = true
     const teacherAlgorithm = 'key1'
-    const studentAlgorithm = 'key2'
     const { getByTestId, getByLabelText } = render(
       <MemoryRouter>
         <AlgorithmSettingsModal
           teacherAlgorithm={teacherAlgorithm}
-          studentAlgorithm={studentAlgorithm}
           isOpen={open}
           handleClose={jest.fn()}
           getIDs={{ courseID: 1, topicID: 0 }}

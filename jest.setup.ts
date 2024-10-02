@@ -1,5 +1,3 @@
-import { ok } from 'assert'
-import { url } from 'inspector'
 import { resetAllSlices } from '@store'
 
 /**
@@ -352,28 +350,24 @@ const mockDataServices: MockDataServices = {
     ])
   ),
   fetchStudentLpLeAlg: jest.fn(() =>
-    Promise.resolve({
-      algorithms: [
+    Promise.resolve(
         {
           algorithm_id: 1,
           id: 1,
-          short_name: 'test',
+          short_name: 'studentTest',
           student_id: 1,
           topic_id: 1
         }
-      ]
-    })
+    )
   ),
   fetchTeacherLpLeAlg: jest.fn(() =>
-    Promise.resolve({
-      algorithms: [
+    Promise.resolve(
         {
           algorithm_id: 1,
-          short_name: 'test',
+          short_name: 'teacherTest',
           topic_id: 1
         }
-      ]
-    })
+    )
   ),
   postStudentLpLeAlg: jest.fn(() =>
     Promise.resolve({

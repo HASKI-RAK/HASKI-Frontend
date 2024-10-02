@@ -88,7 +88,6 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           alignItems={'center'}
           justifyContent={'center'}
           sx={{ mt: '0.5rem' }}>
-          {/*TODO: change hardcoded name to fetched algorithm name*/}
           <Typography sx={{ mr: '0.5rem' }}>
             {(studentSelection || teacherSelection) &&
               t('components.TopicCard.learningPath') +
@@ -111,7 +110,6 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         changeObserver={changeObserver}
         getIDs={{ courseID: null, topicID: topic?.id }}
         teacherAlgorithm={teacherSelection}
-        studentAlgorithm={studentSelection}
       />
       <Menu
         id="menu"

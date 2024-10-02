@@ -19,7 +19,6 @@ type AlgorithmSettingsModalProps = {
   changeObserver?: () => void
   getIDs: { courseID: number | null; topicID: number | undefined }
   teacherAlgorithm?: string
-  studentAlgorithm?: string
   options?: { name: string; description: string; key: string }[] //for testing
 }
 
