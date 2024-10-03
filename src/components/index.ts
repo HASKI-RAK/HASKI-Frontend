@@ -50,6 +50,7 @@ export { default as LinearProgressWithLabel } from './StyledLinearProgress/Linea
 export { StyledLinearProgress } from './StyledLinearProgress/StyledLinearProgress'
 export { default as LabeledSwitch } from './LabeledSwitch/LabeledSwitch'
 export { default as ResponsiveMiniMap } from './ResponsiveMiniMap/ResponsiveMiniMap'
+export { default as Newsbanner } from './Newsbanner/Newsbanner'
 export { default as TopicCard } from './TopicCard/TopicCard'
 
 export * from './GlobalNav'

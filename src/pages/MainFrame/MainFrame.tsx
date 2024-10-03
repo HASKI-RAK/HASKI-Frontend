@@ -3,7 +3,15 @@ import React from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import { Box, Divider, Grid } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
-import { BreadcrumbsContainer, Footer, LocalNavBar, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
+import {
+  BreadcrumbsContainer,
+  Footer,
+  LocalNavBar,
+  MenuBar,
+  OpenQuestionnaire,
+  PrivacyModal,
+  Newsbanner
+} from '@components'
 
 /**
  * # MainFrame Page
@@ -30,6 +38,7 @@ export const MainFrame = () => {
       <CssBaseline />
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <MenuBar />
+        <Newsbanner />
         <BreadcrumbsContainer />
         <Grid container sx={{ flex: 1, overflow: 'hidden' }}>
           {isLocalNavOpen && (

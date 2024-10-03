@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { ContactForm } from '@components'
+import { AuthContext } from '@services'
 import { ContactHookProps, ContactHookReturn, useContact as _useContact } from './Contact.hooks'
 
 export type ContactProps = {
@@ -16,10 +17,12 @@ export type ContactProps = {
  * @param props - Dependency injects {@link useContact} to control the sumbit on the page. Also displays a lodaing indicator when submitting.
  * @category Pages
  */
+
 export const Contact = ({ useContact = _useContact }: ContactProps) => {
   const [isLoading, setIsLoading] = useState(false)
+  const { isAuth } = useContext(AuthContext)
 
   const { onSubmitHandler } = useContact({ setIsLoading })
-  return <ContactForm onSubmit={onSubmitHandler} isLoading={isLoading} />
+  return <>{isAuth && <ContactForm onSubmit={onSubmitHandler} isLoading={isLoading} />}</>
 }
 export default Contact
