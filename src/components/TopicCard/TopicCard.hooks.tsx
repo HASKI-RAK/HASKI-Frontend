@@ -56,7 +56,7 @@ export const useTopicCard = (params: TopicCardHookParams) => {
 
   const changeObserver = useCallback(() => {
     getUser().then((user) => {
-      getStudentAlgorithm(true, user.settings.user_id, params.topic?.id)
+      getStudentAlgorithm(user.settings.user_id, params.topic?.id)
         .then((res) => {
           setStudentSelection(res.short_name)
         })
@@ -75,7 +75,7 @@ export const useTopicCard = (params: TopicCardHookParams) => {
 
   useEffect(() => {
     getUser().then((user) => {
-      getStudentAlgorithm(false, user.settings.user_id, params.topic?.id)
+      getStudentAlgorithm(user.settings.user_id, params.topic?.id)
         .then((res) => {
           setStudentSelection(res.short_name)
         })

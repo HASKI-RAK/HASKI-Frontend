@@ -11,7 +11,6 @@ const mockOptions = [
   { name: 'option3', description: 'description3', key: 'key3' }
 ]
 
-
 describe('AlgorithmSettingsModal', () => {
   it('is displayed with all options', () => {
     const open = true

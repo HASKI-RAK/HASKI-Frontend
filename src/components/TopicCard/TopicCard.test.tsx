@@ -227,7 +227,7 @@ describe('TopicCard tests', () => {
     await waitFor(() => {
       expect(queryByText('components.TopicCard.learningPath')).toBeInTheDocument
       expect(queryByText('components.TopicCard.studentTest')).toBeInTheDocument
-      expect(mockServices.fetchStudentLpLeAlg).toHaveBeenCalledTimes(2)
+      expect(mockServices.fetchStudentLpLeAlg).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -292,7 +292,7 @@ describe('TopicCard tests', () => {
         })
       )
 
-      mockServices.fetchStudentLpLeAlg = jest
+    mockServices.fetchStudentLpLeAlg = jest
       .fn()
       .mockRejectedValueOnce(new Error('Error'))
       .mockRejectedValueOnce(new Error('Error'))
@@ -383,12 +383,12 @@ describe('TopicCard tests', () => {
           },
           university: 'TH-AB'
         })
-    )
+      )
 
     mockServices.fetchStudentLpLeAlg = jest
-    .fn()
-    .mockRejectedValueOnce(new Error('Error'))
-    .mockRejectedValueOnce(new Error('Error'))
+      .fn()
+      .mockRejectedValueOnce(new Error('Error'))
+      .mockRejectedValueOnce(new Error('Error'))
 
     const { queryByText } = render(
       <MemoryRouter>

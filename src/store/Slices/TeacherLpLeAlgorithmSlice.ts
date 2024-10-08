@@ -7,6 +7,7 @@ import { resetters } from '../Zustand/Store'
 export default interface TeacherLpLeAlgorithmSlice {
   _cache_TeacherLpLeAlgorithm_record: Record<string, TeacherLpLeAlgorithm>
   getTeacherLpLeAlgorithm: TeacherLpLeAlgorithmReturn
+  setTeacherLpLeAlgorithm: (topicId?: number, algorithmName?: string) => void
 }
 
 export const createTeacherLpLeAlgorithmSlice: StateCreator<StoreState, [], [], TeacherLpLeAlgorithmSlice> = (
@@ -28,6 +29,20 @@ export const createTeacherLpLeAlgorithmSlice: StateCreator<StoreState, [], [], T
         })
         return teacherLpLeAlgorithm
       } else return cached
+    },
+    setTeacherLpLeAlgorithm: (topicId, algorithmName) => {
+      if (topicId && algorithmName) {
+        const updatedState = {
+          short_name: algorithmName,
+          topic_id: topicId
+        }
+        set({
+          _cache_TeacherLpLeAlgorithm_record: {
+            ...get()._cache_TeacherLpLeAlgorithm_record,
+            [`${topicId}`]: updatedState
+          }
+        })
+      }
     }
   }
 }

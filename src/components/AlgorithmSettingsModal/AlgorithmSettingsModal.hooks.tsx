@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 import { SnackbarContext, postStudentLpLeAlg, postTeacherLpLeAlg } from '@services'
-import { usePersistedStore } from '@store'
+import { usePersistedStore, useStore } from '@store'
 
 /**
  *
@@ -25,6 +25,8 @@ export type useAlgorithmSettingsModalHookParams = {
 const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) => {
   const { addSnackbar } = useContext(SnackbarContext)
   const getUser = usePersistedStore.getState().getUser
+  const setStudentLpLeAlgorithm = useStore.getState().setStudentLpLeAlgorithm
+  const setTeacherLpLeAlgorithm = useStore.getState().setTeacherLpLeAlgorithm
 
   const handleSave = useCallback(() => {
     getUser().then((user) => {
@@ -36,6 +38,7 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
           params.options[params.selected].key
         )
           .then(() => {
+            setTeacherLpLeAlgorithm(params.getIDs.topicID, params.options[params.selected].key)
             if (params.changeObserver) params.changeObserver()
           })
           .catch((error) => {
@@ -44,6 +47,7 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
       } else if (user.role === 'student') {
         postStudentLpLeAlg(user.settings.user_id, params.getIDs.topicID, params.options[params.selected].key)
           .then(() => {
+            setStudentLpLeAlgorithm(user.settings.user_id, params.getIDs.topicID, params.options[params.selected].key)
             if (params.changeObserver) params.changeObserver()
           })
           .catch((error) => {
