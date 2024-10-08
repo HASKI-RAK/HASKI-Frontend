@@ -1,7 +1,7 @@
 import log from 'loglevel'
-import { usePersistedStore } from '@store'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useState, useEffect, useMemo } from 'react'
+import { usePersistedStore } from '@store'
 
 export type UniversityHookReturn = {
   readonly university: string

@@ -15,6 +15,31 @@
   "appGlobal.send": "Senden",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
+  "components.AlgorithmSettingsModal.algorithms": [
+    {
+      "name": "Feste Reihenfolge",
+      "description": "Die Lernelemente werden in einer festen Reihenfolge angezeigt. Es wird kein Algorithmus verwendet.",
+      "key": "default"
+    },
+    {
+      "name": "Graf",
+      "description": "Graf ist ein Algorithmus, der auf dem Adaptionsmechanismus nach Graf et al. basiert.",
+      "key": "graf"
+    },
+    {
+      "name": "Ameisenalgorithmus",
+      "description": "Der Ameisen algorithmus, im englischen ant colony algorithm genannt, ist ein heuristisches Verfahren, dass vom Verhalten von Ameisen inspiriert wurde. Er wird verwendet, um den besten Lernpfad zu berechnen, indem er die Pheromonspuren der Ameisen simuliert.",
+      "key": "aco"
+    },
+    {
+      "name": "Genetischer Algorithmus",
+      "description": "Der genetische Algorithmus ist ein Algorithmus, der auf dem Prinzip der natürlichen Selektion basiert. Er wird verwendet, um einen möglichst guten Lernpfad zu berechnen, indem er die besten Lernenden auswählt und ihre Lernwege kombiniert.",
+      "key": "ga"
+    }
+  ],
+  "components.AlgorithmSettingsModal.headerLeft": "Lernpfadalgorithmus wählen",
+  "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
+  "components.AlgorithmSettingsModal.teacherIconTip": "Empfehlung des Kursleiters",
   "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
   "components.ContactForm.contactform": "Kontaktformular",
   "components.ContactForm.error": "Es fehlt eine Beschreibung.",
@@ -1133,6 +1158,13 @@
   "components.TableListK.score": "Wert",
   "components.TableListK.time": "Zeit",
   "components.TableListKQuestions.introduction": "Im Folgenden werden Ihnen Fragen darüber gestellt welche Lernstrategien Sie anwenden. Sie finden hier eine Liste verschiedener Lerntätigkeiten. Geben Sie bitte für jede Tätigkeit an, wie häufig diese bei Ihnen vorkommt. Sie können Ihre Antworten von sehr selten (1) bis sehr oft (5) abstufen. Die gestellten Fragen basieren auf dem LIST-K (Klingsieck, 2019), welcher eine gekürzte Form des LIST (Wild & Schiefele, 1994) darstellt.",
+  "components.TopicCard.aco": "Ameisenalgorithmus",
+  "components.TopicCard.default": "Feste Reihenfolge",
+  "components.TopicCard.ga": "Genetischer Algorithmus",
+  "components.TopicCard.graf": "Graf Algorithmus",
+  "components.TopicCard.learningPath": "Lernpfad: ",
+  "components.TopicCard.nestor": "Nestor Algorithmus",
+  "components.TopicCard.tyche": "Tyche Algorithmus",
   "error": "Fehler",
   "error.fetchCourses": "Es gab einen Fehler beim Abrufen der Kursdaten.",
   "error.fetchILS": "Es gab einen Fehler beim Abrufen der ILS-Fragebogendaten.",
@@ -1266,8 +1298,15 @@
   "pages.contact.error": "Ihr Feedback konnte nicht versendet werden.",
   "pages.contact.success": "Ihr Feedback wurde erfolgreich versendet.",
   "pages.course": "Kurs",
+  "pages.course.aco": "Ameisenalgorithmus",
+  "pages.course.bayes": "Bayes",
+  "pages.course.cardText": "Lernpfad: ",
   "pages.course.courseButton": "Weiter zum Kurs",
+  "pages.course.fixed": "Feste Reihenfolge",
+  "pages.course.genetic": "Genetischer Algorithmus",
+  "pages.course.graf": "Graf",
   "pages.course.topicButton": "Weiter zum Thema",
+  "pages.course.tyche": "Tyche",
   "pages.glossary": "Glossar",
   "pages.glossary.collapseAll": "Alle schließen",
   "pages.glossary.elements": [
@@ -1612,6 +1651,7 @@
     "TestDeutsch4"
   ],
   "pages.home": "Startseite",
+  "pages.home.menuItemAlgorithms": "Lernpfadalgorithmus wählen",
   "pages.home.noCourses": "Keine Kurse gefunden",
   "pages.imprint": "Impressum",
   "pages.imprint.asOf": "Stand",

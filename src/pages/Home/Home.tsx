@@ -88,18 +88,15 @@ export const Home = () => {
                       xxxl: '50rem'
                     }
                   }}>
+                  <Typography variant="h5" align="center" sx={{ mt: '0.5rem' }}>
+                    {course.name}
+                  </Typography>
                   <CardContent>
-                    <Typography variant="h5" align="center">
-                      {course.name}
-                    </Typography>
                     <Stack direction="row" justifyContent="center">
                       <Button
                         id="course-button"
                         variant="contained"
                         color="primary"
-                        sx={{
-                          mt: '1rem'
-                        }}
                         onClick={() => {
                           navigate('/course/' + course.id)
                         }}>
