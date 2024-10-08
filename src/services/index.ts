@@ -5,10 +5,16 @@
 export { AuthContext } from './AuthContext'
 export type { AuthContextType } from './AuthContext'
 export { AuthProvider } from './AuthProvider'
-export { fetchLearningPathElement } from './LearningPath'
-export { fetchLearningPathElementStatus } from './LearningPath'
-export { fetchLearningPathElementSpecificStatus } from './LearningPath'
-export { fetchLearningPathTopic } from './Topic'
+export { RoleContext } from './RoleContext'
+export type { RoleContextType } from './RoleContext'
+export { RoleProvider } from './RoleProvider'
+export {
+  fetchLearningPathElement,
+  fetchLearningPathElementStatus,
+  fetchLearningPathElementSpecificStatus,
+  postCalculateLearningPathForAllStudents
+} from './LearningPath'
+export { fetchLearningPathTopic, postTopic } from './Topic'
 export { postContactForm } from './contact'
 export type { FormDataType } from './contact'
 export * from './auth'
@@ -16,6 +22,10 @@ export * from './SnackbarContext'
 export { SnackbarProvider } from './SnackbarProvider'
 export * from './connection'
 export { fetchCourses } from './Courses'
+export { fetchRemoteCourses } from './RemoteCourses'
+export { postLearningElement } from './LearningElement'
+export { postLearningPathAlgorithm } from './LearningPathAlgorithm'
+export { postCourse } from './Course'
 export * from './xAPI'
 export { fetchILS, fetchListK, postILS, postListK } from './Questionnaire'
 export * from './debounce'

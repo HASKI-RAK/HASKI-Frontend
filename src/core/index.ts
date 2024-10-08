@@ -28,9 +28,12 @@ import LearningPathElement from './LearningPathElement/LearningPathElement'
 import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
 import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
 import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
+import News, { NewsResponse } from './News/News'
 import ILS from './QuestionnaireResults/ILS'
 import ListK from './QuestionnaireResults/ListK'
-import News, { NewsResponse } from './News/News'
+import RemoteCourse from './RemoteCourse/RemoteCourse'
+import RemoteLearningElement from './RemoteLearningElement/RemoteLearningElement'
+import RemoteTopic from './RemoteTopic/RemoteTopic'
 import StudentLearningElement from './StudentLearningElement/StudentLearningElement'
 import Topic from './Topic/Topic'
 import User from './User/User'
@@ -53,7 +56,10 @@ export type {
   StudentLearningElement,
   ILS,
   ListK,
-  LearningPathBasedOn
+  LearningPathBasedOn,
+  RemoteCourse,
+  RemoteTopic,
+  RemoteLearningElement
 }
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
 export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'

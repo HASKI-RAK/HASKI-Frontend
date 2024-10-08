@@ -48,7 +48,7 @@ export const MemoTableRowQuestion = memo(({ question }: { question: string }) =>
       <TableCell
         align="left"
         sx={{
-          backgroundColor: (theme) => theme.palette.primary.dark,
+          backgroundColor: (theme) => theme.palette.primary.main,
           color: (theme) => theme.palette.secondary.contrastText
         }}>
         <Typography variant={'h5'}>{question}</Typography>
@@ -82,7 +82,7 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
             id="next-button"
             sx={{
               '&.Mui-disabled': {
-                border: (theme) => theme.palette.primary.dark
+                border: (theme) => theme.palette.primary.main
               }
             }}
             variant="contained"
@@ -99,7 +99,7 @@ export const ButtonStack = memo(({ activeStep, handleNext, handleBack, steps, id
             id="back-button"
             sx={{
               '&.Mui-disabled': {
-                border: (theme) => theme.palette.primary.dark
+                border: (theme) => theme.palette.primary.main
               }
             }}
             variant="contained"
@@ -131,7 +131,7 @@ export const SendButton = memo(
   ({ handleSend, isNextDisabled, t, isValid, idType, isSending, sendSuccess }: SendButtonProps) => {
     return (
       <Button
-        id="send-button"
+        id="questionnaire-send-button"
         data-testid={`sendButton${idType}Questionnaire`}
         variant="contained"
         color="primary"
@@ -140,7 +140,7 @@ export const SendButton = memo(
         sx={{
           m: 2,
           '&.Mui-disabled': {
-            border: (theme) => theme.palette.primary.dark
+            border: (theme) => theme.palette.primary.main
           }
         }}>
         {isSending ? <CircularProgress size={24} /> : t('appGlobal.send')}
