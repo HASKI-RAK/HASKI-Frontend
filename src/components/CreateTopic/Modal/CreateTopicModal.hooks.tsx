@@ -82,11 +82,11 @@ export const useCreateTopicModal = ({
     return postLearningElement({ topicId, outputJson })
   }
 
-  const handleCreateAlgorithms = (userId: number, topicId: number, algorithmShortname: string) => {
+  const handleCreateAlgorithms = (userId: number, lmsUserId: number, topicId: number, algorithmShortname: string) => {
     const outputJson: string = JSON.stringify({
-      algorithm_s_name: algorithmShortname
+      algorithm_short_name: algorithmShortname
     })
-    return postLearningPathAlgorithm({ userId, topicId, outputJson })
+    return postLearningPathAlgorithm({ userId, lmsUserId, topicId, outputJson })
   }
 
   const handleCalculateLearningPaths = (
@@ -139,7 +139,7 @@ export const useCreateTopicModal = ({
             )
           )
             .then(() => {
-              handleCreateAlgorithms(user.settings.user_id, topic.id, algorithmShortName)
+              handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topic.id, algorithmShortName)
                 .then(() => {
                   handleCalculateLearningPaths(
                     user.settings.user_id,

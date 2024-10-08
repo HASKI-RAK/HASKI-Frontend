@@ -1,4 +1,4 @@
-import { ListK, Topic } from '@core'
+import { Topic } from '@core'
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
@@ -9,6 +9,7 @@ import { fetchData } from '../RequestResponse'
  */
 type PostLearningPathAlgorithmProps = {
   userId: number
+  lmsUserId: number
   topicId: number
   outputJson: string
 }
@@ -30,10 +31,11 @@ type PostLearningPathAlgorithmProps = {
 
 export const postLearningPathAlgorithm = async ({
   userId,
+  lmsUserId,
   topicId,
   outputJson
 }: PostLearningPathAlgorithmProps): Promise<Topic> => {
-  return fetchData<Topic>(`${getConfig().BACKEND}/user/${userId}/topic/${topicId}/teacherAlgorithm`, {
+  return fetchData<Topic>(`${getConfig().BACKEND}/user/${userId}/${lmsUserId}/topic/${topicId}/teacherAlgorithm`, {
     method: 'POST',
     credentials: 'include',
     headers: {
