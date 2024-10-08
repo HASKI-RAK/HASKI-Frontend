@@ -16,7 +16,7 @@ export type TopicCardHookReturn = {
   handleCloseMenu: () => void
   handleAlgorithmMenuOpen: () => void
   handleAlgorithmModalClose: () => void
-  changeObserver: () => void
+  updateSelection: () => void
 }
 
 export const useTopicCard = (params: TopicCardHookParams) => {
@@ -54,7 +54,7 @@ export const useTopicCard = (params: TopicCardHookParams) => {
     getUser
   ])
 
-  const changeObserver = useCallback(() => {
+  const updateSelection = useCallback(() => {
     getUser().then((user) => {
       getStudentAlgorithm(user.settings.user_id, params.topic?.id)
         .then((res) => {
@@ -74,23 +74,8 @@ export const useTopicCard = (params: TopicCardHookParams) => {
   }, [getUser, getStudentAlgorithm, getTeacherAlgorithm, params.topic?.id])
 
   useEffect(() => {
-    getUser().then((user) => {
-      getStudentAlgorithm(user.settings.user_id, params.topic?.id)
-        .then((res) => {
-          setStudentSelection(res.short_name)
-        })
-        .catch(() => {
-          setStudentSelection(undefined)
-        })
-    })
-    getTeacherAlgorithm(params.topic?.id)
-      .then((res) => {
-        setTeacherSelection(res.short_name)
-      })
-      .catch(() => {
-        setTeacherSelection(undefined)
-      })
-  }, [getUser, getStudentAlgorithm, getTeacherAlgorithm, params.topic?.id])
+    updateSelection()
+  }, [updateSelection])
 
   return useMemo(
     () => ({
@@ -102,7 +87,7 @@ export const useTopicCard = (params: TopicCardHookParams) => {
       handleCloseMenu,
       handleAlgorithmMenuOpen,
       handleAlgorithmModalClose,
-      changeObserver
+      updateSelection: updateSelection
     }),
     [
       teacherSelection,
@@ -113,7 +98,7 @@ export const useTopicCard = (params: TopicCardHookParams) => {
       handleCloseMenu,
       handleAlgorithmMenuOpen,
       handleAlgorithmModalClose,
-      changeObserver
+      updateSelection
     ]
   )
 }

@@ -29,7 +29,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
     handleCloseMenu,
     handleAlgorithmMenuOpen,
     handleAlgorithmModalClose,
-    changeObserver
+    updateSelection
   } = useTopicCard({ topic, learningElementProgressTopics: calculatedTopicProgress })
 
   return (
@@ -107,7 +107,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
       <AlgorithmSettingsModal
         isOpen={isAlgorithmSettingsModalOpen}
         handleClose={handleAlgorithmModalClose}
-        changeObserver={changeObserver}
+        changeObserver={updateSelection}
         getIDs={{ courseID: null, topicID: topic?.id }}
         teacherAlgorithm={teacherSelection}
       />
