@@ -28,9 +28,9 @@ describe('postLearningPathAlgorithm has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const result = await postLearningPathAlgorithm({ userId: 1, topicId: 1, outputJson: output })
+    const result = await postLearningPathAlgorithm({ userId: 1, lmsUserId: 1, topicId: 1, outputJson: output })
 
-    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/1/topic/1/teacherAlgorithm`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/1/1/topic/1/teacherAlgorithm`, {
       body: output,
       credentials: 'include',
       headers: {
@@ -51,6 +51,8 @@ describe('postLearningPathAlgorithm has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    await expect(postLearningPathAlgorithm({ userId: 1, topicId: 1, outputJson: output })).rejects.toThrow('')
+    await expect(
+      postLearningPathAlgorithm({ userId: 1, lmsUserId: 1, topicId: 1, outputJson: output })
+    ).rejects.toThrow('')
   })
 })
