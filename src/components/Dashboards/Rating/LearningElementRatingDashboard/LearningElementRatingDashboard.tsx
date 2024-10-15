@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LineGraph, Rating, SpiderGraph, Table, TableColumnProps } from 'react-rating-charts'
 import { FormControlLabel, Grid, Radio, RadioGroup } from '@common/components'
@@ -81,20 +81,31 @@ const LearningElementRatingDashboard = ({
   // Rating title and tooltips.
   const title = t('components.LearningElementRatingDashboard.ratingTitle') // 'Ihr derzeitiges durchschnittl. Rating' t('components.StudentRatingDashboard.ratingTitle)
   const ratingTooltips = {
-    setDeviationTooltip: (value: number) =>
-      t('components.LearningElementRatingDashboard.ratingDeviationTooltip', { value: value }),
-    setDeviationTrendTooltip: (value: number) =>
-      t('components.LearningElementRatingDashboard.ratingDeviationTrendTooltip', { value: value }),
-    setValueTooltip: (value: number) =>
-      t('components.LearningElementRatingDashboard.ratingValueTooltip', { value: value }),
-    setValueTrendTooltip: (value: number) =>
-      t('components.LearningElementRatingDashboard.ratingValueTrendTooltip', { value: value })
+    setDeviationTooltip: useCallback(
+      (value: number) => t('components.LearningElementRatingDashboard.ratingDeviationTooltip', { value: value }),
+      []
+    ),
+    setDeviationTrendTooltip: useCallback(
+      (value: number) => t('components.LearningElementRatingDashboard.ratingDeviationTrendTooltip', { value: value }),
+      []
+    ),
+    setValueTooltip: useCallback(
+      (value: number) => t('components.LearningElementRatingDashboard.ratingValueTooltip', { value: value }),
+      []
+    ),
+    setValueTrendTooltip: useCallback(
+      (value: number) => t('components.LearningElementRatingDashboard.ratingValueTrendTooltip', { value: value }),
+      []
+    )
   }
 
   // Spider graph.
   const spiderGraphTitle = t('components.LearningElementRatingDashboard.spiderGraphTitle')
-  const setTooltip = (concept: string, value: number) =>
-    t('components.LearningElementRatingDashboard.spiderGraphTooltip', { concept: concept, value: value })
+  const setTooltip = useCallback(
+    (concept: string, value: number) =>
+      t('components.LearningElementRatingDashboard.spiderGraphTooltip', { concept: concept, value: value }),
+    []
+  )
 
   // Line graph.
   const lineGraphTitle = t('components.LearningElementRatingDashboard.lineGraphTitle')
@@ -104,29 +115,41 @@ const LearningElementRatingDashboard = ({
     yAxisTitle: t('components.RatingDashboard.lineGraphYAxisTitle')
   }
   const lineGraphTooltips = {
-    setXAxisTooltip: () => t('components.RatingDashboard.lineGraphXAxisTooltip'),
-    setYAxisTooltip: () => t('components.RatingDashboard.lineGraphYAxisTooltip'),
-    setDataTooltip: (value: number, deviation: number, timestamp: string) =>
-      t('components.LearningElementRatingDashboard.lineGraphDataTooltip', {
-        value: value,
-        deviation: deviation,
-        timestamp: timestamp
-      }),
-    setLowerDeviationTooltip: (value: number, timestamp: string) =>
-      t('components.LearningElementRatingDashboard.lineGraphLowerDeviationTooltip', {
-        value: value,
-        timestamp: timestamp
-      }),
-    setUpperDeviationTooltip: (value: number, timestamp: string) =>
-      t('components.LearningElementRatingDashboard.lineGraphUpperDeviationTooltip', {
-        value: value,
-        timestamp: timestamp
-      })
+    setXAxisTooltip: useCallback(() => t('components.RatingDashboard.lineGraphXAxisTooltip'), []),
+    setYAxisTooltip: useCallback(() => t('components.RatingDashboard.lineGraphYAxisTooltip'), []),
+    setDataTooltip: useCallback(
+      (value: number, deviation: number, timestamp: string) =>
+        t('components.LearningElementRatingDashboard.lineGraphDataTooltip', {
+          value: value,
+          deviation: deviation,
+          timestamp: timestamp
+        }),
+      []
+    ),
+    setLowerDeviationTooltip: useCallback(
+      (value: number, timestamp: string) =>
+        t('components.LearningElementRatingDashboard.lineGraphLowerDeviationTooltip', {
+          value: value,
+          timestamp: timestamp
+        }),
+      []
+    ),
+    setUpperDeviationTooltip: useCallback(
+      (value: number, timestamp: string) =>
+        t('components.LearningElementRatingDashboard.lineGraphUpperDeviationTooltip', {
+          value: value,
+          timestamp: timestamp
+        }),
+      []
+    )
   }
 
   // Table.
-  const setRGBColor = (alpha: number) => 'rgba(255, 165, 0, ' + alpha + ')'
-  const setHeaderTooltip = (header: string) => t('components.RatingDashboard.tableHeaderTooltip', { header: header })
+  const setRGBColor = useCallback((alpha: number) => 'rgba(255, 165, 0, ' + alpha + ')', [])
+  const setHeaderTooltip = useCallback(
+    (header: string) => t('components.RatingDashboard.tableHeaderTooltip', { header: header }),
+    []
+  )
   const columns: TableColumnProps[] = [
     {
       header: t('components.RatingDashboard.tableHeaderTimestamp'),

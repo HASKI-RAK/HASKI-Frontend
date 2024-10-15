@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Box, Drawer } from '@common/components'
 import { LearningElementRatingInfo, StudentRatingInfo } from '@components'
 
@@ -38,4 +39,4 @@ const DashboardInfoDrawer = ({ isOpen, selectedDashboard }: DashboardInfoDrawerP
   )
 }
 
-export default DashboardInfoDrawer // TODO: Memo
+export default memo(DashboardInfoDrawer)

@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Histogram, LineGraph, Rating, SpiderGraph, Table, TableColumnProps } from 'react-rating-charts'
 import { FormControlLabel, Grid, Radio, RadioGroup } from '@common/components'
@@ -83,32 +83,47 @@ const StudentRatingDashboard = ({
   // Rating title and tooltips.
   const title = t('components.StudentRatingDashboard.ratingTitle')
   const ratingTooltips = {
-    setDeviationTooltip: (value: number) =>
-      t('components.StudentRatingDashboard.ratingDeviationTooltip', { value: value }),
-    setDeviationTrendTooltip: (value: number) =>
-      t('components.StudentRatingDashboard.ratingDeviationTrendTooltip', { value: value }),
-    setValueTooltip: (value: number) => t('components.StudentRatingDashboard.ratingValueTooltip', { value: value }),
-    setValueTrendTooltip: (value: number) =>
-      t('components.StudentRatingDashboard.ratingValueTrendTooltip', { value: value })
+    setDeviationTooltip: useCallback(
+      (value: number) => t('components.StudentRatingDashboard.ratingDeviationTooltip', { value: value }),
+      []
+    ),
+    setDeviationTrendTooltip: useCallback(
+      (value: number) => t('components.StudentRatingDashboard.ratingDeviationTrendTooltip', { value: value }),
+      []
+    ),
+    setValueTooltip: useCallback(
+      (value: number) => t('components.StudentRatingDashboard.ratingValueTooltip', { value: value }),
+      []
+    ),
+    setValueTrendTooltip: useCallback(
+      (value: number) => t('components.StudentRatingDashboard.ratingValueTrendTooltip', { value: value }),
+      []
+    )
   }
 
   // Spider graph.
   const spiderGraphTitle = t('components.StudentRatingDashboard.spiderGraphTitle')
-  const setTooltip = (concept: string, value: number) =>
-    t('components.StudentRatingDashboard.spiderGraphTooltip', { concept: concept, value: value })
+  const setTooltip = useCallback(
+    (concept: string, value: number) =>
+      t('components.StudentRatingDashboard.spiderGraphTooltip', { concept: concept, value: value }),
+    []
+  )
 
   // Histogram.
-  const setUserInfo = () => t('components.StudentRatingDashboard.histogramUserInfo')
+  const setUserInfo = useCallback(() => t('components.StudentRatingDashboard.histogramUserInfo'), [])
   const histogramTitles = {
     title: t('components.StudentRatingDashboard.histogramTitle'),
     yAxisTitle: t('components.RatingDashboard.histogramYAxisTitle'),
     xAxisTitle: t('components.RatingDashboard.histogramXAxisTitle')
   }
   const histogramTooltips = {
-    setUserInfoTooltip: (value: string, percentage: string) =>
-      t('components.StudentRatingDashboard.histogramUserInfoTooltip', { value: value, percentage: percentage }),
-    setXAxisTooltip: () => t('components.RatingDashboard.histogramXAxisTooltip'),
-    setYAxisTooltip: () => t('components.RatingDashboard.histogramYAxisTooltip')
+    setUserInfoTooltip: useCallback(
+      (value: string, percentage: string) =>
+        t('components.StudentRatingDashboard.histogramUserInfoTooltip', { value: value, percentage: percentage }),
+      []
+    ),
+    setXAxisTooltip: useCallback(() => t('components.RatingDashboard.histogramXAxisTooltip'), []),
+    setYAxisTooltip: useCallback(() => t('components.RatingDashboard.histogramYAxisTooltip'), [])
   }
 
   // Line graph.
@@ -119,23 +134,35 @@ const StudentRatingDashboard = ({
     yAxisTitle: t('components.RatingDashboard.lineGraphYAxisTitle')
   }
   const lineGraphTooltips = {
-    setXAxisTooltip: () => t('components.RatingDashboard.lineGraphXAxisTooltip'),
-    setYAxisTooltip: () => t('components.RatingDashboard.lineGraphYAxisTooltip'),
-    setDataTooltip: (value: number, deviation: number, timestamp: string) =>
-      t('components.StudentRatingDashboard.lineGraphDataTooltip', {
-        value: value,
-        deviation: deviation,
-        timestamp: timestamp
-      }),
-    setLowerDeviationTooltip: (value: number, timestamp: string) =>
-      t('components.StudentRatingDashboard.lineGraphLowerDeviationTooltip', { value: value, timestamp: timestamp }),
-    setUpperDeviationTooltip: (value: number, timestamp: string) =>
-      t('components.StudentRatingDashboard.lineGraphUpperDeviationTooltip', { value: value, timestamp: timestamp })
+    setXAxisTooltip: useCallback(() => t('components.RatingDashboard.lineGraphXAxisTooltip'), []),
+    setYAxisTooltip: useCallback(() => t('components.RatingDashboard.lineGraphYAxisTooltip'), []),
+    setDataTooltip: useCallback(
+      (value: number, deviation: number, timestamp: string) =>
+        t('components.StudentRatingDashboard.lineGraphDataTooltip', {
+          value: value,
+          deviation: deviation,
+          timestamp: timestamp
+        }),
+      []
+    ),
+    setLowerDeviationTooltip: useCallback(
+      (value: number, timestamp: string) =>
+        t('components.StudentRatingDashboard.lineGraphLowerDeviationTooltip', { value: value, timestamp: timestamp }),
+      []
+    ),
+    setUpperDeviationTooltip: useCallback(
+      (value: number, timestamp: string) =>
+        t('components.StudentRatingDashboard.lineGraphUpperDeviationTooltip', { value: value, timestamp: timestamp }),
+      []
+    )
   }
 
   // Table.
-  const setRGBColor = (alpha: number) => 'rgba(255, 165, 0, ' + alpha + ')'
-  const setHeaderTooltip = (header: string) => t('components.RatingDashboard.tableHeaderTooltip', { header: header })
+  const setRGBColor = useCallback((alpha: number) => 'rgba(255, 165, 0, ' + alpha + ')', [])
+  const setHeaderTooltip = useCallback(
+    (header: string) => t('components.RatingDashboard.tableHeaderTooltip', { header: header }),
+    []
+  )
   const columns: TableColumnProps[] = [
     {
       header: t('components.RatingDashboard.tableHeaderTimestamp'),
