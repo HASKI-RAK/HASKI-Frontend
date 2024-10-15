@@ -27,7 +27,7 @@
     },
     {
       "name": "Feste Reihenfolge",
-      "description": "Die Lernelemente werden in einer vorgegebenen Reihenfolge präsentiert.",
+      "description": "Die Lernelemente werden in einer festen Reihenfolge angezeigt. Es wird kein Algorithmus verwendet.",
       "key": "default",
       "disabled": false
     },
@@ -45,14 +45,8 @@
     },
     {
       "name": "Genetischer Algorithmus",
-      "description": "Der genetische Algorithmus ist von der Evolution inspiriert. Er approximiert den besten Lernpfad, indem er den Prozess von Mutation und Selektion simuliert. Er wird oft wegen seiner Geschwindigkeit eingesetzt.",
+      "description": "Der genetische Algorithmus ist ein Algorithmus, der auf dem Prinzip der natürlichen Selektion basiert. Er wird verwendet, um einen möglichst guten Lernpfad zu berechnen, indem er die besten Lernenden auswählt und ihre Lernwege kombiniert.",
       "key": "ga",
-      "disabled": false
-    },
-    {
-      "name": "Tyche",
-      "description": "Tyche ist ein Algorithmus, der auf dem Prinzip des Glücks basiert. Er wird verwendet, um den besten Lernpfad zu berechnen, indem er die Glücksfaktoren der Lernenden berücksichtigt.",
-      "key": "tyche",
       "disabled": false
     }
   ],
@@ -1236,6 +1230,13 @@
   "components.TableListK.time": "Zeit",
   "components.TableListKQuestions.introduction": "Im Folgenden werden Ihnen Fragen darüber gestellt welche Lernstrategien Sie anwenden. Sie finden hier eine Liste verschiedener Lerntätigkeiten. Geben Sie bitte für jede Tätigkeit an, wie häufig diese bei Ihnen vorkommt. Sie können Ihre Antworten von sehr selten (1) bis sehr oft (5) abstufen. Die gestellten Fragen basieren auf dem LIST-K (Klingsieck, 2019), welcher eine gekürzte Form des LIST (Wild & Schiefele, 1994) darstellt.",
   "components.TableRemoteTopics.title": "Verfügbare Themenbereiche",
+  "components.TopicCard.aco": "Ameisenalgorithmus",
+  "components.TopicCard.default": "Feste Reihenfolge",
+  "components.TopicCard.ga": "Genetischer Algorithmus",
+  "components.TopicCard.graf": "Graf Algorithmus",
+  "components.TopicCard.learningPath": "Lernpfad: ",
+  "components.TopicCard.nestor": "Nestor Algorithmus",
+  "components.TopicCard.tyche": "Tyche Algorithmus",
   "error": "Fehler",
   "error.fetchCourses": "Beim Abrufen der Kursdaten ist ein Fehler aufgetreten.",
   "error.fetchILS": "Beim Abrufen der ILS-Fragebogendaten ist ein Fehler aufgetreten.",

@@ -7,6 +7,7 @@ import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
 /**
  * @prop isOpen - Boolean value to determine if the modal is open.
  * @prop handleClose - function executed when closing the modal.
+ * @prop changeObserver - function executed when the algorithm is changed.
  * @prop getIDs - Object containing the courseID and topicID.
  * @prop options - Array of objects containing the name, description,
  *  and key of the algorithms. Used in Tests instead of the translation output.
@@ -15,7 +16,9 @@ import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
 type AlgorithmSettingsModalProps = {
   isOpen: boolean
   handleClose: () => void
-  getIDs: { courseID: number | null; topicID: number | null }
+  changeObserver?: () => void
+  getIDs: { courseID: number | null; topicID: number | undefined }
+  teacherAlgorithm?: string
   options?: { name: string; description: string; key: string }[] //for testing
 }
 
@@ -27,7 +30,7 @@ type optionsType = {
 }[]
 /**
  *
- * @param props allowing opening an closing of Modal and to give the ids of courses and topics
+ * @param props - parameters allowing opening an closing of Modal and to give the ids of courses and topics
  *
  * @remarks
  * This component consists of a modal, that allows the user to set an algorithm for a topic or entire course depending
@@ -39,7 +42,6 @@ type optionsType = {
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
   const [selected, setSelected] = useState(0)
   //change hardcoded teacher selection to fetched teacher selection
-  const [teacherSelection, setTeacherSelection] = useState(0)
   const { t } = useTranslation()
   const options =
     props.options ??
@@ -52,11 +54,11 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
   )
   const { handleSave } = useAlgorithmSettingsModal({
     handleClose: props.handleClose,
+    changeObserver: props.changeObserver,
     options,
     selected,
     getIDs: props.getIDs
   })
-  //useImperativeHandle(props.ref, () => ({handleSave}), [handleSave])
 
   return (
     <Modal
@@ -95,7 +97,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
                     control={<Radio role="radio-button" checked={index === selected} />}
                     label={option.name}
                   />
-                  {teacherSelection === index && (
+                  {props.teacherAlgorithm === option.key && (
                     <Tooltip
                       arrow
                       title={t('components.AlgorithmSettingsModal.teacherIconTip')}

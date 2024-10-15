@@ -24,6 +24,11 @@
 import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
 import Course, { CourseResponse } from './Course/Course'
 import LearningElement from './LearningElement/LearningElement'
+import LearningPathLearningElementAlgorithm, {
+  LearningPathLearningElementAlgorithmResponse
+} from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
+import StudentLpLeAlgorithm from './LearningPathAlgorithm/StudentLpLeAlgorithm'
+import TeacherLpLeAlgorithm from './LearningPathAlgorithm/TeacherLpLeAlgorithm'
 import LearningPathElement from './LearningPathElement/LearningPathElement'
 import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
 import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
@@ -50,6 +55,10 @@ export type {
   LearningPathElement,
   LearningPathLearningElement,
   LearningPathElementStatus,
+  LearningPathLearningElementAlgorithm,
+  LearningPathLearningElementAlgorithmResponse,
+  StudentLpLeAlgorithm,
+  TeacherLpLeAlgorithm,
   News,
   NewsResponse,
   Topic,
@@ -64,6 +73,9 @@ export type {
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
 export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'
 export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'
+export type { LearningPathLearningElementAlgorithmReturn } from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
+export type { StudentLpLeAlgorithmReturn } from './LearningPathAlgorithm/StudentLpLeAlgorithm'
+export type { TeacherLpLeAlgorithmReturn } from './LearningPathAlgorithm/TeacherLpLeAlgorithm'
 export type { ListKReturn } from './QuestionnaireResults/ListK'
 export type { CourseReturn } from './Course/Course'
 export type { ILSReturn } from './QuestionnaireResults/ILS'

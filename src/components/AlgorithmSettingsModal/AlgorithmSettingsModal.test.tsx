@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
+import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
+import { SnackbarContext } from '@services'
 import AlgorithmSettingsModal from './AlgorithmSettingsModal'
 
 const mockOptions = [
@@ -9,14 +11,14 @@ const mockOptions = [
   { name: 'option3', description: 'description3', key: 'key3' }
 ]
 
-const handleSave = jest.fn().mockName('handleSave')
-
 describe('AlgorithmSettingsModal', () => {
   it('is displayed with all options', () => {
     const open = true
+    const teacherAlgorithm = 'key1'
     const { getByTestId, getByLabelText } = render(
       <MemoryRouter>
         <AlgorithmSettingsModal
+          teacherAlgorithm={teacherAlgorithm}
           isOpen={open}
           handleClose={jest.fn()}
           getIDs={{ courseID: 1, topicID: 0 }}
@@ -29,7 +31,6 @@ describe('AlgorithmSettingsModal', () => {
     expect(getByLabelText('option1')).toBeInTheDocument()
     expect(getByLabelText('option2')).toBeInTheDocument()
     expect(getByLabelText('option3')).toBeInTheDocument()
-    //TODO: Find a better way to test the icon appearing
     expect(getByTestId('teacher-icon')).toBeInTheDocument()
   })
 
@@ -88,5 +89,196 @@ describe('AlgorithmSettingsModal', () => {
     fireEvent.click(getByTestId('algorithm-save-button'))
 
     expect(handleClose).toHaveBeenCalledTimes(1)
+  })
+
+  it('should post the selected algorithm for students', async () => {
+    const mockObserverFunction = jest.fn()
+
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Sam Student',
+        role: 'student',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'TH-AB'
+      })
+    )
+    const open = true
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <AlgorithmSettingsModal
+          isOpen={open}
+          changeObserver={mockObserverFunction}
+          handleClose={jest.fn()}
+          getIDs={{ courseID: 1, topicID: 0 }}
+          options={mockOptions}
+        />
+      </MemoryRouter>
+    )
+
+    fireEvent.click(getByTestId('algorithm-save-button'))
+
+    await waitFor(() => {
+      expect(mockServices.postStudentLpLeAlg).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  it('should post the selected algorithm for teachers', async () => {
+    const mockObserverFunction = jest.fn()
+
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Tom Teacher',
+        role: 'teacher',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'TH-AB'
+      })
+    )
+    const open = true
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <AlgorithmSettingsModal
+          isOpen={open}
+          changeObserver={mockObserverFunction}
+          handleClose={jest.fn()}
+          getIDs={{ courseID: 1, topicID: 0 }}
+          options={mockOptions}
+        />
+      </MemoryRouter>
+    )
+
+    fireEvent.click(getByTestId('algorithm-save-button'))
+
+    await waitFor(() => {
+      expect(mockServices.postTeacherLpLeAlg).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  it('should show an error message if the teacher post request fails', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Tom Teacher',
+        role: 'teacher',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'TH-AB'
+      })
+    )
+
+    mockServices.postStudentLpLeAlg = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('Error')))
+    const addSnackbarMock = jest.fn()
+    const my_context = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+
+    mockServices.postTeacherLpLeAlg = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('Error')))
+
+    const open = true
+
+    const { getByTestId } = render(
+      <SnackbarContext.Provider value={my_context}>
+        <MemoryRouter>
+          <AlgorithmSettingsModal
+            isOpen={open}
+            handleClose={jest.fn()}
+            getIDs={{ courseID: 1, topicID: 0 }}
+            options={mockOptions}
+          />
+        </MemoryRouter>
+      </SnackbarContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('algorithm-save-button'))
+
+    await waitFor(() => {
+      expect(mockServices.postTeacherLpLeAlg).toHaveBeenCalledTimes(1)
+      expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
+    })
+  })
+
+  it('should show an error message if the student post request fails', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Sam Student',
+        role: 'student',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'TH-AB'
+      })
+    )
+
+    mockServices.postStudentLpLeAlg = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('Error')))
+    const addSnackbarMock = jest.fn()
+    const my_context = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+
+    const open = true
+    const { getByTestId } = render(
+      <SnackbarContext.Provider value={my_context}>
+        <MemoryRouter>
+          <AlgorithmSettingsModal
+            isOpen={open}
+            handleClose={jest.fn()}
+            getIDs={{ courseID: 1, topicID: 0 }}
+            options={mockOptions}
+          />
+        </MemoryRouter>
+      </SnackbarContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('algorithm-save-button'))
+
+    await waitFor(() => {
+      expect(mockServices.postStudentLpLeAlg).toHaveBeenCalledTimes(1)
+      expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
+    })
   })
 })

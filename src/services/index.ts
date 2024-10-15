@@ -32,3 +32,9 @@ export * from './debounce'
 export * from './Viewport'
 export { fetchNews } from './News'
 export { postCalculateLearningPathILS } from './LearningPath'
+export {
+  fetchStudentLpLeAlg,
+  fetchTeacherLpLeAlg,
+  postStudentLpLeAlg,
+  postTeacherLpLeAlg
+} from './LearningPathLearningElementAlgorithm'
