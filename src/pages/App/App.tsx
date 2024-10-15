@@ -10,6 +10,7 @@ import {
   Glossary,
   Home,
   Imprint,
+  LearnerCharacteristics,
   Login,
   MainFrame,
   PageNotFound,
@@ -64,6 +65,7 @@ export const App = () => {
                       <Route path="/imprint" element={<Imprint />} />
                       <Route path="/privacypolicy" element={<PrivacyPolicy />} />
                       <Route path="/ratingdashboard" element={<RatingStatistics />} />
+                      <Route path="/learnercharacteristics" element={<LearnerCharacteristics />} />
                       <Route path="/🥚" element={<div>Ei</div>} />
                       <Route path="*" element={<PageNotFound />} />
                     </Route>

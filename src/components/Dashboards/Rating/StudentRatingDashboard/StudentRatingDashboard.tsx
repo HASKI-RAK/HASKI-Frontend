@@ -81,7 +81,7 @@ const StudentRatingDashboard = ({
   const color = 'orange'
 
   // Rating title and tooltips.
-  const title = t('components.StudentRatingDashboard.ratingTitle') // 'Ihr derzeitiges durchschnittl. Rating' t('components.StudentRatingDashboard.ratingTitle)
+  const title = t('components.StudentRatingDashboard.ratingTitle')
   const ratingTooltips = {
     setDeviationTooltip: (value: number) =>
       t('components.StudentRatingDashboard.ratingDeviationTooltip', { value: value }),
@@ -119,8 +119,8 @@ const StudentRatingDashboard = ({
     yAxisTitle: t('components.RatingDashboard.lineGraphYAxisTitle')
   }
   const lineGraphTooltips = {
-    setXAxisTooltip: () => 'Shows the timestamps.',
-    setYAxisTooltip: () => 'Shows the rating values.',
+    setXAxisTooltip: () => t('components.RatingDashboard.lineGraphXAxisTooltip'),
+    setYAxisTooltip: () => t('components.RatingDashboard.lineGraphYAxisTooltip'),
     setDataTooltip: (value: number, deviation: number, timestamp: string) =>
       t('components.StudentRatingDashboard.lineGraphDataTooltip', {
         value: value,
