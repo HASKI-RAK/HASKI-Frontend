@@ -14,25 +14,25 @@ const DashboardInfoDrawer = ({ isOpen, selectedDashboard }: DashboardInfoDrawerP
       anchor="right"
       open={isOpen}
       sx={{
-        width: isOpen ? '22.5rem' : '0px',
-        position: 'relative',
-        transition: 'width 0.3s ease',
-        height: '100%',
+        width: isOpen ? '22.5rem' : 0,
+        position: 'absolute',
+        right: 0,
         [`& .MuiDrawer-paper`]: {
-          maxWidth: '22.5rem',
-          height: '100%',
-          position: 'relative',
+          width: isOpen ? '22.5rem' : 0,
+          position: 'absolute',
           borderRadius: '0rem',
           border: 0,
           backgroundColor: 'transparent',
-          borderLeft: '1px solid #ccc',
-          boxShadow: '-5px 0px 10px rgba(0, 0, 0, 0.2)',
-          marginLeft: '5px'
+          borderLeft: isOpen ? '1px solid #ccc' : 'none',
+          boxShadow: isOpen ? '-5px 0px 10px rgba(0, 0, 0, 0.2)' : 'none',
+          marginLeft: isOpen ? '5px' : '0',
+          height: 'auto',
+          overflowY: 'auto'
         }
       }}>
       {isOpen && (
         <Box sx={{ padding: '16px' }}>
-          {selectedDashboard == 'student' ? <StudentRatingInfo /> : <LearningElementRatingInfo />}
+          {selectedDashboard === 'student' ? <StudentRatingInfo /> : <LearningElementRatingInfo />}
         </Box>
       )}
     </Drawer>

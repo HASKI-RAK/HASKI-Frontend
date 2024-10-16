@@ -1,9 +1,12 @@
-import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
 import { MouseEvent, memo, useCallback, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Fab, Grid, ToggleButton, ToggleButtonGroup } from '@common/components'
-import { DashboardInfoDrawer, LearningElementRatingDashboard, StudentRatingDashboard } from '@components'
+import { Box, Grid, ToggleButton, ToggleButtonGroup } from '@common/components'
+import {
+  DashboardInfoDrawer,
+  DashboardInfoDrawerButton,
+  LearningElementRatingDashboard,
+  StudentRatingDashboard
+} from '@components'
 import { AuthContext } from '@services'
 
 /**
@@ -40,9 +43,10 @@ const RatingStatistics = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'flex-start',
-            minHeight: '100vh'
+            minHeight: '100vh',
+            overflow: 'hidden'
           }}>
-          <Grid container direction="column" xs={10} alignItems="center" sx={{ mt: 5 }}>
+          <Grid container direction="column" alignItems="center" sx={{ mt: 5 }}>
             <Grid item>
               <ToggleButtonGroup value={selected} onChange={handleChange} exclusive>
                 <ToggleButton value="student">{t('pages.RatingStatistics.studentRating')}</ToggleButton>
@@ -56,25 +60,10 @@ const RatingStatistics = () => {
           </Grid>
           <Box
             sx={{
-              right: 0,
-              top: 145,
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'flex-start',
-              position: 'absolute'
+              position: 'relative',
+              mt: 1
             }}>
-            {
-              // TODO: Tooltip
-            }
-            <Box sx={{ mr: 2, mt: 1 }}>
-              <Fab size="small" onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? (
-                  <KeyboardDoubleArrowRightIcon fontSize="large" />
-                ) : (
-                  <KeyboardDoubleArrowLeftIcon fontSize="large" />
-                )}
-              </Fab>
-            </Box>
+            <DashboardInfoDrawerButton isOpen={isOpen} setIsOpen={setIsOpen} />
             <DashboardInfoDrawer isOpen={isOpen} selectedDashboard={selected} />
           </Box>
         </Box>

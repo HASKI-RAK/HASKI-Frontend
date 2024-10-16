@@ -1765,5 +1765,7 @@
   "components.StudentRatingInfo.histogramTitle": "Histogram",
   "components.StudentRatingInfo.histogramText": "In the middle is the histogram. It provides an overview of the distribution of the average ratings of all students and is intended to enable a comparison with your rating, which is highlighted.",
   "components.StudentRatingInfo.lineGraphTitle": "Line graph / Table",
-  "components.StudentRatingInfo.lineGraphText": "The line graph and table are shown below. They display your average rating over time and thus provide an overview of the development of your knowledge level. While the line graph is a graphical representation, the table provides a detailed insight into your previous ratings."
+  "components.StudentRatingInfo.lineGraphText": "The line graph and table are shown below. They display your average rating over time and thus provide an overview of the development of your knowledge level. While the line graph is a graphical representation, the table provides a detailed insight into your previous ratings.",
+  "components.DashboardInfoDrawerButton.open": "Open the drawer for further dashboard information",
+  "components.DashboardInfoDrawerButton.close": "Close the drawer"
 }

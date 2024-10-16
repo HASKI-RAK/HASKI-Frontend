@@ -1766,5 +1766,7 @@
   "components.StudentRatingInfo.histogramTitle": "Histogramm",
   "components.StudentRatingInfo.histogramText": "Das Histogramm befindet sich in der Mitte. Es gibt einen Über-blick über die Verteilung der durchschnittlichen Wertungen aller Studierenden und soll so einen Vergleich mit Ihrer Wertung ermöglichen. Ihre Einstufung ist dabei hervorgehoben.",
   "components.StudentRatingInfo.lineGraphTitle": "Liniendiagramm / Tabelle",
-  "components.StudentRatingInfo.lineGraphText": "Das Liniendiagramm und die Tabelle sind unten abgebildet. Sie zeigen Ihre durchschnittliche Wertung im Verlauf der Zeit und ermöglichen so einen Überblick über die Entwicklung Ihres Wissensstandes. Während das Liniendiagramm eine grafische Aufbereitung darstellt, bietet die Tabelle einen detaillierten Einblick in Ihre bisherigen Wertungen."
+  "components.StudentRatingInfo.lineGraphText": "Das Liniendiagramm und die Tabelle sind unten abgebildet. Sie zeigen Ihre durchschnittliche Wertung im Verlauf der Zeit und ermöglichen so einen Überblick über die Entwicklung Ihres Wissensstandes. Während das Liniendiagramm eine grafische Aufbereitung darstellt, bietet die Tabelle einen detaillierten Einblick in Ihre bisherigen Wertungen.",
+  "components.DashboardInfoDrawerButton.open": "Drawer öffnen für weitere Dashboard-Informationen",
+  "components.DashboardInfoDrawerButton.close": "Drawer schließen"
 }
