@@ -225,8 +225,12 @@ const StudentRatingDashboard = ({
                   row
                   onChange={(event) => setChosenComponent(event.target.value)}
                   value={chosenComponent}>
-                  <FormControlLabel value="lineGraph" control={<Radio />} label={t('appGlobal.lineGraph')} />
-                  <FormControlLabel value="table" control={<Radio />} label={t('appGlobal.table')} />
+                  <FormControlLabel
+                    value="lineGraph"
+                    control={<Radio id={'line-graph-radio'} />}
+                    label={t('appGlobal.lineGraph')}
+                  />
+                  <FormControlLabel value="table" control={<Radio id={'table-radio'} />} label={t('appGlobal.table')} />
                 </RadioGroup>
               </Grid>
               <Grid item>
