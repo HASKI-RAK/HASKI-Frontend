@@ -349,6 +349,38 @@ const mockDataServices: MockDataServices = {
       }
     ])
   ),
+  fetchStudentLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      algorithm_id: 1,
+      id: 1,
+      short_name: 'studentTest',
+      student_id: 1,
+      topic_id: 1
+    })
+  ),
+  fetchTeacherLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      algorithm_id: 1,
+      short_name: 'teacherTest',
+      topic_id: 1
+    })
+  ),
+  postStudentLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED',
+      url: 'https://fakedomain.com:5000/userId/topicId/studentAlgorithm'
+    })
+  ),
+  postTeacherLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED',
+      url: 'https://fakedomain.com:5000/userId/topicId/teacherAlgorithm'
+    })
+  ),
   fetchNews: jest.fn(() =>
     Promise.resolve({
       news: [

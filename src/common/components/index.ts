@@ -49,6 +49,7 @@ export { ListItem } from './DefaultListItem/DefaultListItem'
 export { ListItemButton } from './DefaultListItemButton/DefaultListItemButton'
 export { Card } from './DefaultCard/DefaultCard'
 export { CardContent } from './DefaultCardContent/DefaultCardContent'
+export { CardHeader } from './DefaultCardHeader/DefaultCardHeader'
 export { Table } from './DefaultTable/DefaultTable'
 export { TableBody } from './DefaultTableBody/DefaultTableBody'
 export { TableContainer } from './DefaultTableContainer/DefaultTableContainer'
@@ -57,9 +58,13 @@ export { FormGroup } from './DefaultFormGroup/DefaultFormGroup'
 export { Zoom } from './DefaultZoom/DefaultZoom'
 export { Drawer } from './DefaultDrawer/DefaultDrawer'
 export { Switch } from './DefaultSwitch/DefaultSwitch'
+export { AdapterDayjs } from './XDatePickers/AdapterDayjs/AdapterDayjs'
+export { DateTimePicker } from './XDatePickers/DateTimePicker/DateTimePicker'
+export { LocalizationProvider } from './XDatePickers/LocalizationProvider/LocalizationProvider'
+export { renderTimeViewClock } from './XDatePickers/RenderTimeViewClock'
 
-export { Network } from './Network/Network'
-export { Bar } from './Bar/Bar'
+export { Network } from './Nivo/Network/Network'
+export { Bar } from './Nivo/Bar/Bar'
 
 /**
  * Reusable types
