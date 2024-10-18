@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, act, renderHook } from '@testing-library/react'
+import { act, fireEvent, render, renderHook } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
-import Newsbanner from './Newsbanner'
 import { MemoryRouter } from 'react-router-dom'
 import { useUniversity } from '@common/hooks'
+import Newsbanner from './Newsbanner'
 
 describe('Newsbanner tests', () => {
   beforeEach(() => {
