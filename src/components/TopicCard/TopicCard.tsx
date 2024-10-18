@@ -1,8 +1,8 @@
-import { memo, useCallback, useState } from 'react'
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Typography } from '@common/components'
-import { CheckBox, MoreVert } from '@common/icons'
+import { MoreVert } from '@common/icons'
 import { AlgorithmSettingsModal, StyledLinearProgress } from '@components'
 import { Topic } from '@core'
 import { useTopicCard } from './TopicCard.hooks'
@@ -47,6 +47,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
               ml: { xs: '6rem', sm: '16rem', md: '36rem', lg: '46rem', xl: '66rem', xxl: '82rem', xxxl: '109rem' }
             }}
             onClick={openMenu}
+            id='topic-menu'
             data-topicid={topic?.id}
             data-testid="TopicSettingsButton">
             <MoreVert />
@@ -108,7 +109,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         isOpen={isAlgorithmSettingsModalOpen}
         handleClose={handleAlgorithmModalClose}
         changeObserver={updateSelection}
-        getIDs={{ courseID: null, topicID: topic?.id }}
+        topicId={topic?.id}
         teacherAlgorithm={teacherSelection}
       />
       <Menu
@@ -119,7 +120,9 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         data-testid="TopicSettingsMenu">
-        <MenuItem onClick={handleAlgorithmMenuOpen} data-testid="AlgorithmSettingsItem">
+        <MenuItem onClick={handleAlgorithmMenuOpen}
+         id='algorithm-settings-menu-item'
+         data-testid="AlgorithmSettingsItem">
           {t('pages.home.menuItemAlgorithms')}
         </MenuItem>
       </Menu>

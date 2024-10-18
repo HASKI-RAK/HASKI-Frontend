@@ -1,6 +1,6 @@
 import { memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Divider, Fab, FormControlLabel, Grid, Modal, Radio, RadioGroup, Tooltip, Typography } from '@common/components'
+import { CircularProgress, Divider, Fab, FormControlLabel, Grid, Modal, Radio, RadioGroup, Tooltip, Typography } from '@common/components'
 import { Close, Save, School } from '@common/icons'
 import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
 
@@ -17,7 +17,7 @@ type AlgorithmSettingsModalProps = {
   isOpen: boolean
   handleClose: () => void
   changeObserver?: () => void
-  getIDs: { courseID: number | null; topicID: number | undefined }
+  topicId?: number
   teacherAlgorithm?: string
   options?: { name: string; description: string; key: string }[] //for testing
 }
@@ -52,12 +52,12 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
     },
     [setSelected]
   )
-  const { handleSave } = useAlgorithmSettingsModal({
+  const { handleSave, waitForBackend } = useAlgorithmSettingsModal({
     handleClose: props.handleClose,
     changeObserver: props.changeObserver,
     options,
     selected,
-    getIDs: props.getIDs
+    topicId: props.topicId
   })
 
   return (
@@ -88,13 +88,13 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
             <Typography id="modal-title" variant="h6" component="h6" align="center">
               {t('components.AlgorithmSettingsModal.headerLeft')}
             </Typography>
-            <RadioGroup onChange={handleSelect}>
+            <RadioGroup onChange={handleSelect} id='learning-path-algorithm-radio-group'>
               {options.map((option, index) => (
                 <Grid item container direction="row" key={option.key}>
                   <FormControlLabel
                     sx={{ width: { xl: '16rem' } }}
                     value={index}
-                    control={<Radio role="radio-button" checked={index === selected} />}
+                    control={<Radio id={option.key + '-radio'} role="radio-button" checked={index === selected} />}
                     label={option.name}
                   />
                   {props.teacherAlgorithm === option.key && (
@@ -118,6 +118,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
               right: '0.5rem'
             }}
             color="primary"
+            id='algorithm-modal-close'
             onClick={props.handleClose}
             data-testid="algorithm-modal-close-button">
             <Close />
@@ -132,9 +133,11 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
             </Typography>
           </Grid>
         </Grid>
+        {waitForBackend ?? <CircularProgress size={24} />}
         <Fab
           onClick={handleSave}
           aria-label="save"
+          id='algorithm-save-button'
           data-testid={'algorithm-save-button'}
           sx={{ position: 'absolute', right: '0.5rem', bottom: '0.5rem' }}>
           <Save />

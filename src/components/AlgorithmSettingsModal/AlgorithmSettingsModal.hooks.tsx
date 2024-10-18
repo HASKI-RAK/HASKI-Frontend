@@ -1,5 +1,6 @@
-import { useCallback, useContext } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import { SnackbarContext, postStudentLpLeAlg, postTeacherLpLeAlg } from '@services'
+import { useParams } from 'react-router-dom'
 import { usePersistedStore, useStore } from '@store'
 
 /**
@@ -15,7 +16,7 @@ export type useAlgorithmSettingsModalHookParams = {
   changeObserver?: () => void
   options: { name: string; description: string; key: string }[]
   selected: number
-  getIDs: { courseID: number | null; topicID: number | undefined }
+  topicId?: number
 }
 /**
  *
@@ -27,37 +28,56 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
   const getUser = usePersistedStore.getState().getUser
   const setStudentLpLeAlgorithm = useStore.getState().setStudentLpLeAlgorithm
   const setTeacherLpLeAlgorithm = useStore.getState().setTeacherLpLeAlgorithm
+  const [waitForBackend, setWaitForBackend] = useState(false)
+  const triggerLearningElementReload = useStore.getState().triggerLearningElementReload
+  const getLearningPathElement = useStore.getState().getLearningPathElement
+  const { courseId } = useParams<{ courseId: string }>()
 
   const handleSave = useCallback(() => {
     getUser().then((user) => {
       if (user.role === 'teacher') {
+        setWaitForBackend(true)
         postTeacherLpLeAlg(
           user.settings.user_id,
           user.lms_user_id,
-          params.getIDs.topicID,
+          params.topicId,
           params.options[params.selected].key
         )
           .then(() => {
-            setTeacherLpLeAlgorithm(params.getIDs.topicID, params.options[params.selected].key)
+            setTeacherLpLeAlgorithm(params.topicId, params.options[params.selected].key)
+            setWaitForBackend(false)
+            params.handleClose()
             if (params.changeObserver) params.changeObserver()
           })
           .catch((error) => {
             addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 5000 })
+            params.handleClose()
           })
       } else if (user.role === 'student') {
-        postStudentLpLeAlg(user.settings.user_id, params.getIDs.topicID, params.options[params.selected].key)
+        setWaitForBackend(true)
+        triggerLearningElementReload(true)
+        postStudentLpLeAlg(user.settings.user_id, user.lms_user_id, courseId, params.topicId, params.options[params.selected].key)
           .then(() => {
-            setStudentLpLeAlgorithm(user.settings.user_id, params.getIDs.topicID, params.options[params.selected].key)
+            setStudentLpLeAlgorithm(user.settings.user_id, params.topicId, params.options[params.selected].key)
+            // Fetch the new learning path then close the modal
+            getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, String(params.topicId)).then(() => {
+              setWaitForBackend(false)
+              params.handleClose()
+            }).catch((error) => {
+              addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 5000 })
+              params.handleClose()
+              setWaitForBackend(false)
+            })
             if (params.changeObserver) params.changeObserver()
           })
           .catch((error) => {
             addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 5000 })
+            params.handleClose()
           })
       }
     })
-    params.handleClose()
-  }, [params.handleClose, params.options, params.selected, params.getIDs])
-  return { handleSave } as const
+  }, [params.handleClose, params.options, params.selected, params.topicId])
+  return { handleSave, waitForBackend } as const
 }
 
 export default useAlgorithmSettingsModal

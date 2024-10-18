@@ -19,10 +19,12 @@ import { fetchData } from '../RequestResponse'
 
 export const postStudentLpLeAlg = async (
   userId?: number,
+  lmsUserId?: number,
+  courseId?: string,
   topicId?: number,
   algorithm_s_name?: string
 ): Promise<StudentLpLeAlgorithm> => {
-  return fetchData<StudentLpLeAlgorithm>(getConfig().BACKEND + `/user/${userId}/topic/${topicId}/studentAlgorithm`, {
+  return fetchData<StudentLpLeAlgorithm>(getConfig().BACKEND + `/user/${userId}/${lmsUserId}/course/${courseId}/topic/${topicId}/studentAlgorithm`, {
     method: 'POST',
     credentials: 'include',
     headers: {
