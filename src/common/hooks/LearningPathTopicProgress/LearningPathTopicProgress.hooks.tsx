@@ -51,7 +51,7 @@ export const useLearningPathTopicProgress = (
 
   // Trigger Reload of Fetches
   const ignoreLearningPathTopicCache = useStore((state) => state.ignoreLearningPathTopicCache)
-  const ignoreLearningElementCache = useStore((state) => state.ignoreLearningElementCache)
+  const ignoreLearningPathElementCache = useStore((state) => state.ignoreLearningPathElementCache)
   const ignoreLearningPathElementStatus = usePersistedStore((state) => state.ignoreLearningPathElementStatusCache)
 
   // Function
@@ -112,7 +112,7 @@ export const useLearningPathTopicProgress = (
       getLearningPathElementStatus,
       getTopicProgress,
       courseId,
-      ignoreLearningElementCache,
+      ignoreLearningPathElementCache,
       ignoreLearningPathElementStatus
     ]
   )

@@ -1,4 +1,5 @@
 import { Dayjs } from 'dayjs'
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   AdapterDayjs,
@@ -55,6 +56,5 @@ const CreateCourseDetailsTable = ({
     </LocalizationProvider>
   )
 }
-// eslint-disable-next-line immutable/no-mutation
-CreateCourseDetailsTable.displayName = 'CreateCourseDetailsTable'
-export default CreateCourseDetailsTable
+
+export default memo(CreateCourseDetailsTable)

@@ -110,15 +110,15 @@ export const useCreateTopicModal = ({
     selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] },
     algorithmShortName: string,
     courseId?: string
-  ) => {
-    if (courseId == undefined) return
-    getUser()
+  ): Promise<void> => {
+    if (courseId == undefined) return Promise.resolve()
+    return getUser()
       .then((user) => {
-        handleCreateTopics(topicName, lmsCourseId, courseId, user).then((topic) => {
+        return handleCreateTopics(topicName, lmsCourseId, courseId, user).then((topic) => {
           const topicLmsId = topic.lms_id
           const topicId = topic.id
           setCreateTopicIsSending(true)
-          Promise.all(
+          return Promise.all(
             selectedLearningElementsClassification[topicLmsId].map((element) =>
               handleCreateLearningElements(
                 element.lms_learning_element_name,
@@ -139,7 +139,7 @@ export const useCreateTopicModal = ({
             )
           )
             .then(() => {
-              handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topic.id, algorithmShortName)
+              return handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topic.id, algorithmShortName)
                 .then(() => {
                   handleCalculateLearningPaths(
                     user.settings.user_id,
@@ -199,33 +199,28 @@ export const useCreateTopicModal = ({
   }
 
   const handleTopicChange = (topics: RemoteTopic[]) => {
-    setSelectedTopics(topics)
+    const sortedTopics = [...topics].sort((a, b) => a.topic_lms_id - b.topic_lms_id)
+    setSelectedTopics(sortedTopics)
 
-    const topicIds = topics.map((topic) => topic.topic_lms_id)
+    const topicIds = sortedTopics.map((topic) => topic.topic_lms_id)
 
-    // Remove all selectedLearningElements when Topic is deselected
-    const selectedLearningElementKeysNotInTopics = Object.keys(selectedLearningElements).filter(
-      (topicId) => !topicIds.includes(parseInt(topicId))
+    // Filter selectedLearningElements to only include keys that are in topicIds
+    const filteredLearningElements = Object.fromEntries(
+      Object.entries(selectedLearningElements).filter(([topicId]) => topicIds.includes(parseInt(topicId)))
     )
-    selectedLearningElementKeysNotInTopics.forEach((topicId) => {
-      delete selectedLearningElements[parseInt(topicId)]
-    })
+    setSelectedLearningElements(filteredLearningElements)
 
-    // Remove all selectedLearningElementClassifications when Topic is deselected
-    const selectedLearningElementClassificationKeysNotInTopics = Object.keys(
-      selectedLearningElementsClassification
-    ).filter((topicId) => !topicIds.includes(parseInt(topicId)))
-    selectedLearningElementClassificationKeysNotInTopics.forEach((topicId) => {
-      delete selectedLearningElementsClassification[parseInt(topicId)]
-    })
-
-    // Remove all selectedAlgorithms when Topic is deselected
-    const selectedAlgorithmKeysNotInTopics = Object.keys(selectedAlgorithms).filter(
-      (topicId) => !topicIds.includes(parseInt(topicId))
+    // Filter selectedLearningElementClassifications to only include keys that are in topicIds
+    const filteredLearningElementClassifications = Object.fromEntries(
+      Object.entries(selectedLearningElementsClassification).filter(([topicId]) => topicIds.includes(parseInt(topicId)))
     )
-    selectedAlgorithmKeysNotInTopics.forEach((topicId) => {
-      delete selectedAlgorithms[parseInt(topicId)]
-    })
+    setSelectedLearningElementsClassification(filteredLearningElementClassifications)
+
+    // Filter selectedAlgorithms to only include keys that are in topicIds
+    const filteredAlgorithms = Object.fromEntries(
+      Object.entries(selectedAlgorithms).filter(([topicId]) => topicIds.includes(parseInt(topicId)))
+    )
+    setSelectedAlgorithms(filteredAlgorithms)
   }
 
   const handleLearningElementChange = (learningElements: { [key: number]: RemoteLearningElement[] }) => {

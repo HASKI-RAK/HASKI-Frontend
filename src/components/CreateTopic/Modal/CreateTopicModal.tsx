@@ -120,10 +120,7 @@ const CreateTopicModal = memo(
           })
           log.error(t('error.getUser') + ' ' + error)
         })
-
-      //Sort topics (lower id is created before a higher id in LMS)
-      setSelectedTopics((prevSelectedTopics) => [...prevSelectedTopics].sort((a, b) => a.topic_lms_id - b.topic_lms_id))
-    }, [activeStep, getTopics, getUser, getRemoteTopics])
+    }, [activeStep])
 
     return (
       <Modal open={openCreateTopicModal} onClose={handleCloseCreateTopicModal}>
@@ -301,17 +298,22 @@ const CreateTopicModal = memo(
                           successTopicCreated
                         }
                         sx={{ mr: -2 }}
-                        onClick={() =>
-                          Object.entries(selectedAlgorithms).map(([topicId]) => {
-                            handleCreate(
+                        onClick={async () => {
+                          setCreateTopicIsSending(true)
+
+                          // Ensure each handleCreate call finishes before the next one starts
+                          for (const [topicId] of Object.entries(selectedAlgorithms)) {
+                            await handleCreate(
                               selectedAlgorithms[parseInt(topicId)][0].topicName,
                               parseInt(topicId),
                               selectedLearningElementsClassification,
                               selectedAlgorithms[parseInt(topicId)][0].algorithmShortName,
                               courseId
                             )
-                          })
-                        }>
+                          }
+
+                          setCreateTopicIsSending(false)
+                        }}>
                         {createTopicIsSending ? (
                           <CircularProgress size={24} />
                         ) : (

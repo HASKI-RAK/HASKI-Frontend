@@ -22,7 +22,7 @@ type AlgorithmSettingsModalProps = {
   options?: { name: string; description: string; key: string }[] //for testing
 }
 
-type optionsType = {
+type OptionsType = {
   name: string
   description: string
   key: string
@@ -30,7 +30,7 @@ type optionsType = {
 }[]
 /**
  *
- * @param props - parameters allowing opening an closing of Modal and to give the ids of courses and topics
+ * @param props - parameters allowing opening and closing of Modal and to give the ids of courses and topics
  *
  * @remarks
  * This component consists of a modal, that allows the user to set an algorithm for a topic or entire course depending
@@ -41,11 +41,10 @@ type optionsType = {
  */
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
   const [selected, setSelected] = useState(0)
-  //change hardcoded teacher selection to fetched teacher selection
   const { t } = useTranslation()
   const options =
     props.options ??
-    [...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as optionsType)].slice(1)
+    [...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as OptionsType)].slice(1)
   const handleSelect = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setSelected(parseInt(event.target.value))

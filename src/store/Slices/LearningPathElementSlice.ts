@@ -8,7 +8,7 @@ export default interface LearningPathSlice {
   _cache_learningPathElement_record: Record<string, LearningPathElement | undefined>
   ignoreLearningElementCache: boolean
   getLearningPathElement: LearningPathElementReturn
-  triggerLearningElementReload: (reloadState: boolean) => void
+  triggerLearningPathElementReload: (reloadState: boolean) => void
 }
 
 export const createLearningPathElementSlice: StateCreator<StoreState, [], [], LearningPathSlice> = (set, get) => {
@@ -42,6 +42,6 @@ export const createLearningPathElementSlice: StateCreator<StoreState, [], [], Le
         return learningPathElement_response
       } else return cached
     },
-    triggerLearningElementReload: (reloadState: boolean) => set({ ignoreLearningElementCache: reloadState })
+    triggerLearningPathElementReload: (reloadState: boolean) => set({ ignoreLearningElementCache: reloadState })
   }
 }

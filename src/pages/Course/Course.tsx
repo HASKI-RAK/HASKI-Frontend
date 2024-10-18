@@ -29,12 +29,12 @@ const Course = () => {
 
   //Store
   const triggerLearningPathTopicReload = useStore((state) => state.triggerLearningPathTopicReload)
-  const triggerLearningElementReload = useStore((state) => state.triggerLearningElementReload)
+  const triggerLearningPathElementReload = useStore((state) => state.triggerLearningPathElementReload)
   const triggerLearningElementStatusReload = usePersistedStore((state) => state.triggerLearningPathElementStatusReload)
 
   const handleCloseTopicModal = () => {
     triggerLearningPathTopicReload(true)
-    triggerLearningElementReload(true)
+    triggerLearningPathElementReload(true)
     triggerLearningElementStatusReload(true)
     setCreateTopicModalOpen(false)
     setSuccessTopicCreated(false)

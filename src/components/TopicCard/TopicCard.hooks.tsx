@@ -7,18 +7,6 @@ export type TopicCardHookParams = {
   learningElementProgressTopics?: number[]
 }
 
-export type TopicCardHookReturn = {
-  teacherSelection: string | undefined
-  studentSelection: string | undefined
-  isAlgorithmSettingsModalOpen: boolean
-  menuAnchorEl: null | HTMLElement
-  openMenu: (event: React.MouseEvent<HTMLButtonElement>) => void
-  handleCloseMenu: () => void
-  handleAlgorithmMenuOpen: () => void
-  handleAlgorithmModalClose: () => void
-  updateSelection: () => void
-}
-
 export const useTopicCard = (params: TopicCardHookParams) => {
   const getTeacherAlgorithm = useStore((state) => state.getTeacherLpLeAlgorithm)
   const getStudentAlgorithm = useStore((state) => state.getStudentLpLeAlgorithm)

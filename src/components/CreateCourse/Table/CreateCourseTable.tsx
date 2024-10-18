@@ -21,7 +21,7 @@ type CreateCourseTableProps = {
   selectedCourseName: string
 }
 
-const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: CreateCourseTableProps) => {
+const CreateCourseTable = ({ onCourseSelect, selectedCourseName }: CreateCourseTableProps) => {
   //Hooks
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
@@ -186,7 +186,6 @@ const CreateCourseTable = memo(({ onCourseSelect, selectedCourseName }: CreateCo
       </Grid>
     </Grid>
   )
-})
-// eslint-disable-next-line immutable/no-mutation
-CreateCourseTable.displayName = 'CreateCourseTable'
-export default CreateCourseTable
+}
+
+export default memo(CreateCourseTable)

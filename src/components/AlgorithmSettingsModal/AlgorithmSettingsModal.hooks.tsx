@@ -19,7 +19,7 @@ export type useAlgorithmSettingsModalHookParams = {
 }
 /**
  *
- * @param params - neccesary parameters from the component to change algorithms for a topic or course in the backend.
+ * @param params - necessary parameters from the component to change algorithms for a topic or course in the backend.
  * @returns function that saves the selected algorithm for the course or topic in the backend.
  */
 const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) => {
