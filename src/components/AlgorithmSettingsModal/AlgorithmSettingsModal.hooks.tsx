@@ -1,4 +1,5 @@
-import { useCallback, useContext } from 'react'
+import { useCallback, useContext, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { SnackbarContext, postStudentLpLeAlg, postTeacherLpLeAlg } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
@@ -15,7 +16,7 @@ export type useAlgorithmSettingsModalHookParams = {
   changeObserver?: () => void
   options: { name: string; description: string; key: string }[]
   selected: number
-  getIDs: { courseID: number | null; topicID: number | undefined }
+  topicId?: number
 }
 /**
  *
@@ -24,40 +25,62 @@ export type useAlgorithmSettingsModalHookParams = {
  */
 const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) => {
   const { addSnackbar } = useContext(SnackbarContext)
-  const getUser = usePersistedStore.getState().getUser
-  const setStudentLpLeAlgorithm = useStore.getState().setStudentLpLeAlgorithm
-  const setTeacherLpLeAlgorithm = useStore.getState().setTeacherLpLeAlgorithm
+  const getUser = usePersistedStore((state) => state.getUser)
+  const setStudentLpLeAlgorithm = useStore((state) => state.setStudentLpLeAlgorithm)
+  const setTeacherLpLeAlgorithm = useStore((state) => state.setTeacherLpLeAlgorithm)
+  const [waitForBackend, setWaitForBackend] = useState(false)
+  const triggerLearningElementReload = useStore((state) => state.triggerLearningElementReload)
+  const getLearningPathElement = useStore((state) => state.getLearningPathElement)
+  const { courseId } = useParams<{ courseId: string }>()
 
   const handleSave = useCallback(() => {
     getUser().then((user) => {
       if (user.role === 'teacher') {
-        postTeacherLpLeAlg(
+        setWaitForBackend(true)
+        postTeacherLpLeAlg(user.settings.user_id, user.lms_user_id, params.topicId, params.options[params.selected].key)
+          .then(() => {
+            setTeacherLpLeAlgorithm(params.topicId, params.options[params.selected].key)
+            setWaitForBackend(false)
+            params.handleClose()
+            if (params.changeObserver) params.changeObserver()
+          })
+          .catch((error) => {
+            addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 5000 })
+            params.handleClose()
+          })
+      } else if (user.role === 'student') {
+        setWaitForBackend(true)
+        postStudentLpLeAlg(
           user.settings.user_id,
           user.lms_user_id,
-          params.getIDs.topicID,
+          courseId,
+          params.topicId,
           params.options[params.selected].key
         )
           .then(() => {
-            setTeacherLpLeAlgorithm(params.getIDs.topicID, params.options[params.selected].key)
+            setStudentLpLeAlgorithm(user.settings.user_id, params.topicId, params.options[params.selected].key)
+            // Fetch the new learning path then close the modal
+            triggerLearningElementReload(true)
+            getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, String(params.topicId))
+              .then(() => {
+                setWaitForBackend(false)
+                params.handleClose()
+              })
+              .catch((error) => {
+                addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 5000 })
+                params.handleClose()
+                setWaitForBackend(false)
+              })
             if (params.changeObserver) params.changeObserver()
           })
           .catch((error) => {
             addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 5000 })
-          })
-      } else if (user.role === 'student') {
-        postStudentLpLeAlg(user.settings.user_id, params.getIDs.topicID, params.options[params.selected].key)
-          .then(() => {
-            setStudentLpLeAlgorithm(user.settings.user_id, params.getIDs.topicID, params.options[params.selected].key)
-            if (params.changeObserver) params.changeObserver()
-          })
-          .catch((error) => {
-            addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 5000 })
+            params.handleClose()
           })
       }
     })
-    params.handleClose()
-  }, [params.handleClose, params.options, params.selected, params.getIDs])
-  return { handleSave } as const
+  }, [params.handleClose, params.options, params.selected, params.topicId])
+  return { handleSave, waitForBackend } as const
 }
 
 export default useAlgorithmSettingsModal
