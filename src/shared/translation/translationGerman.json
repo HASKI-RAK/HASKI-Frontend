@@ -52,6 +52,7 @@
   ],
   "components.AlgorithmSettingsModal.headerLeft": "Lernpfadalgorithmus wählen",
   "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
+  "components.AlgorithmSettingsModal.success": "Der Algorithmus wurde erfolgreich geändert",
   "components.AlgorithmSettingsModal.teacherIconTip": "Empfehlung des Kursleiters",
   "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
   "components.ContactForm.contactform": "Kontaktformular",

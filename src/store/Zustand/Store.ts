@@ -13,10 +13,10 @@ import LearningPathElementStatusSlice, {
 } from '../Slices/LearningPathElementStatusSlice'
 import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
 import NewsSlice, { createNewsSlice } from '../Slices/NewsSlice'
+import RemoteTopicSlice, { createRemoteTopicSlice } from '../Slices/RemoteTopicSlice'
 import StudentLpLeAlgorithmSlice, { createStudentLpLeAlgorithmSlice } from '../Slices/StudentLpLeAlgSlice'
 import TeacherLpLeAlgorithmSlice, { createTeacherLpLeAlgorithmSlice } from '../Slices/TeacherLpLeAlgorithmSlice'
 import UserSlice, { createUserSlice } from '../Slices/UserSlice'
-import RemoteTopicSlice, { createRemoteTopicSlice } from '../Slices/RemoteTopicSlice'
 import xAPISlice, { createXAPISlice } from '../Slices/xAPISlice'
 
 export type StoreState = LearningPathElementSlice &

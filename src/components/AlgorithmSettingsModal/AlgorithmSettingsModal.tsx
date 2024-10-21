@@ -1,6 +1,17 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CircularProgress, Divider, Fab, FormControlLabel, Grid, Modal, Radio, RadioGroup, Tooltip, Typography } from '@common/components'
+import {
+  CircularProgress,
+  Divider,
+  Fab,
+  FormControlLabel,
+  Grid,
+  Modal,
+  Radio,
+  RadioGroup,
+  Tooltip,
+  Typography
+} from '@common/components'
 import { Close, Save, School } from '@common/icons'
 import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
 
@@ -19,10 +30,11 @@ type AlgorithmSettingsModalProps = {
   changeObserver?: () => void
   topicId?: number
   teacherAlgorithm?: string
+  studentAlgorithm?: string
   options?: { name: string; description: string; key: string }[] //for testing
 }
 
-type OptionsType = {
+export type OptionsType = {
   name: string
   description: string
   key: string
@@ -40,24 +52,33 @@ type OptionsType = {
  * @category components
  */
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
-  const [selected, setSelected] = useState(0)
   const { t } = useTranslation()
   const options =
     props.options ??
     [...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as OptionsType)].slice(1)
+
+  const [selected, setSelected] = useState(0)
+
   const handleSelect = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setSelected(parseInt(event.target.value))
     },
     [setSelected]
   )
-  const { handleSave, waitForBackend } = useAlgorithmSettingsModal({
+  const { handleSave, waitForBackend, getSelected } = useAlgorithmSettingsModal({
     handleClose: props.handleClose,
     changeObserver: props.changeObserver,
     options,
     selected,
-    topicId: props.topicId
+    topicId: props.topicId,
+    studentAlgorithm: props.studentAlgorithm,
+    teacherAlgorithm: props.teacherAlgorithm
   })
+
+  useEffect(() => {
+    const newSelected = getSelected()
+    setSelected(newSelected)
+  }, [props.studentAlgorithm])
 
   return (
     <Modal
@@ -87,7 +108,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
             <Typography id="modal-title" variant="h6" component="h6" align="center">
               {t('components.AlgorithmSettingsModal.headerLeft')}
             </Typography>
-            <RadioGroup onChange={handleSelect} id='learning-path-algorithm-radio-group'>
+            <RadioGroup onChange={handleSelect} id="learning-path-algorithm-radio-group">
               {options.map((option, index) => (
                 <Grid item container direction="row" key={option.key}>
                   <FormControlLabel
@@ -117,7 +138,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
               right: '0.5rem'
             }}
             color="primary"
-            id='algorithm-modal-close'
+            id="algorithm-modal-close"
             onClick={props.handleClose}
             data-testid="algorithm-modal-close-button">
             <Close />
@@ -136,7 +157,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
         <Fab
           onClick={handleSave}
           aria-label="save"
-          id='algorithm-save-button'
+          id="algorithm-save-button"
           data-testid={'algorithm-save-button'}
           sx={{ position: 'absolute', right: '0.5rem', bottom: '0.5rem' }}>
           <Save />

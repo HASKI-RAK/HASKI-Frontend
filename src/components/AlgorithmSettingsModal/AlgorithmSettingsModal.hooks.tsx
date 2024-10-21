@@ -1,4 +1,5 @@
 import { useCallback, useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { SnackbarContext, postStudentLpLeAlg, postTeacherLpLeAlg } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -17,6 +18,8 @@ export type useAlgorithmSettingsModalHookParams = {
   options: { name: string; description: string; key: string }[]
   selected: number
   topicId?: number
+  studentAlgorithm?: string
+  teacherAlgorithm?: string
 }
 /**
  *
@@ -29,9 +32,10 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
   const setStudentLpLeAlgorithm = useStore((state) => state.setStudentLpLeAlgorithm)
   const setTeacherLpLeAlgorithm = useStore((state) => state.setTeacherLpLeAlgorithm)
   const [waitForBackend, setWaitForBackend] = useState(false)
-  const triggerLearningElementReload = useStore((state) => state.triggerLearningElementReload)
+  const triggerLearningElementReload = useStore((state) => state.triggerLearningPathElementReload)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const { courseId } = useParams<{ courseId: string }>()
+  const { t } = useTranslation()
 
   const handleSave = useCallback(() => {
     getUser().then((user) => {
@@ -41,6 +45,11 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
           .then(() => {
             setTeacherLpLeAlgorithm(params.topicId, params.options[params.selected].key)
             setWaitForBackend(false)
+            addSnackbar({
+              message: t('components.AlgorithmSettingsModal.success'),
+              severity: 'success',
+              autoHideDuration: 5000
+            })
             params.handleClose()
             if (params.changeObserver) params.changeObserver()
           })
@@ -64,6 +73,11 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
             getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, String(params.topicId))
               .then(() => {
                 setWaitForBackend(false)
+                addSnackbar({
+                  message: t('components.AlgorithmSettingsModal.success'),
+                  severity: 'success',
+                  autoHideDuration: 5000
+                })
                 params.handleClose()
               })
               .catch((error) => {
@@ -80,7 +94,17 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
       }
     })
   }, [params.handleClose, params.options, params.selected, params.topicId])
-  return { handleSave, waitForBackend } as const
+
+  const getSelected = useCallback(() => {
+    if (params.studentAlgorithm) {
+      return params.options.findIndex((option) => option.key === params.studentAlgorithm)
+    } else if (params.teacherAlgorithm) {
+      return params.options.findIndex((option) => option.key === params.teacherAlgorithm)
+    } else {
+      return 0
+    }
+  }, [params.studentAlgorithm, params.options])
+  return { handleSave, waitForBackend, getSelected } as const
 }
 
 export default useAlgorithmSettingsModal

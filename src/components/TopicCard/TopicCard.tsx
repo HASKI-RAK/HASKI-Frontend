@@ -47,7 +47,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
               ml: { xs: '6rem', sm: '16rem', md: '36rem', lg: '46rem', xl: '66rem', xxl: '82rem', xxxl: '109rem' }
             }}
             onClick={openMenu}
-            id='topic-menu'
+            id="topic-menu"
             data-topicid={topic?.id}
             data-testid="TopicSettingsButton">
             <MoreVert />
@@ -111,6 +111,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         changeObserver={updateSelection}
         topicId={topic?.id}
         teacherAlgorithm={teacherSelection}
+        studentAlgorithm={studentSelection}
       />
       <Menu
         id="menu"
@@ -120,9 +121,10 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         data-testid="TopicSettingsMenu">
-        <MenuItem onClick={handleAlgorithmMenuOpen}
-         id='algorithm-settings-menu-item'
-         data-testid="AlgorithmSettingsItem">
+        <MenuItem
+          onClick={handleAlgorithmMenuOpen}
+          id="algorithm-settings-menu-item"
+          data-testid="AlgorithmSettingsItem">
           {t('pages.home.menuItemAlgorithms')}
         </MenuItem>
       </Menu>

@@ -24,12 +24,15 @@ export const postStudentLpLeAlg = async (
   topicId?: number,
   algorithm_s_name?: string
 ): Promise<StudentLpLeAlgorithm> => {
-  return fetchData<StudentLpLeAlgorithm>(getConfig().BACKEND + `/user/${userId}/${lmsUserId}/course/${courseId}/topic/${topicId}/studentAlgorithm`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ algorithm_short_name: algorithm_s_name })
-  })
+  return fetchData<StudentLpLeAlgorithm>(
+    getConfig().BACKEND + `/user/${userId}/${lmsUserId}/course/${courseId}/topic/${topicId}/studentAlgorithm`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ algorithm_short_name: algorithm_s_name })
+    }
+  )
 }
