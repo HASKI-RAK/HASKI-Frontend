@@ -12,8 +12,8 @@ import {
   Tooltip,
   Typography
 } from '@common/components'
-import { PrivacyModalHookReturn, usePrivacyModal as _usePrivacyModal } from './PrivacyModal.hooks'
 import { useUniversity } from '@common/hooks'
+import { PrivacyModalHookReturn, usePrivacyModal as _usePrivacyModal } from './PrivacyModal.hooks'
 
 const style = {
   position: 'absolute',
