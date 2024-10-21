@@ -311,7 +311,6 @@ const CreateTopicModal = memo(
                               courseId
                             )
                           }
-
                           setCreateTopicIsSending(false)
                         }}>
                         {createTopicIsSending ? (

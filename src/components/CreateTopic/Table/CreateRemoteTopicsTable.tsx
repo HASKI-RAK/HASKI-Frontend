@@ -28,7 +28,15 @@ const CreateRemoteTopicsTable = memo(
         <Grid item container alignItems="stretch" direction="row">
           {remoteTopics.length === 0 ? (
             <Grid container direction="column" alignItems="center">
-              <SkeletonList />
+              <Paper sx={{ padding: '1rem', width: '95%' }}>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox checked={true} disabled={true} />}
+                    label={t('components.TableRemoteTopics.noAdditionalTopics')}
+                    key={t('components.TableRemoteTopics.noAdditionalTopics')}
+                  />
+                </FormGroup>
+              </Paper>
             </Grid>
           ) : (
             <Grid item container direction="column" alignItems="center">

@@ -156,7 +156,6 @@ export const useCreateTopicModal = ({
                       })
                       log.info(t('appGlobal.dataSendSuccessful'))
                       setSuccessTopicCreated(true)
-                      setCreateTopicIsSending(false)
                     } else {
                       addSnackbar({
                         message: t('error.postCalculateLearningPathForAllStudents'),
