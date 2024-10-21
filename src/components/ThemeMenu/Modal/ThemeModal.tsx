@@ -55,6 +55,8 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
   const activeTheme = useTheme()
   const activeThemeString =
     activeTheme === DarkTheme ? 'DarkTheme' : activeTheme === AltTheme ? 'AltTheme' : 'HaskiTheme'
+  //console.log(activeThemeString)
+  //console.log(activeTheme === DarkTheme ? 'DarkTheme' : activeTheme === AltTheme ? 'AltTheme' : 'HaskiTheme')
 
   //presets first selection on currently active theme
   const [selectedTheme, setSelectedTheme] = useState<Theme>(activeTheme)
@@ -66,6 +68,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
   //handles the selection of a radio button
   const handleThemeModalPreviewChange = (themeName: string) => {
     setSelectedThemeString(themeName)
+    console.log('whatever, point hit')
     setSelectedTheme(themeName === 'DarkTheme' ? DarkTheme : themeName === 'AltTheme' ? AltTheme : HaskiTheme)
   }
 
@@ -73,6 +76,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
   useEffect(() => {
     setSelectedTheme(activeTheme)
     setSelectedThemeString(activeThemeString)
+    //console.log(activeThemeString)
   }, [isAuth])
 
   //PreviewPageChangerLogic
@@ -92,7 +96,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
   }
 
   return (
-    <Modal data-testid={'Theme Modal'} open={open} onClose={handleClose}>
+    <Modal data-testid={'ThemeModal'} open={open} onClose={handleClose}>
       <Grid sx={styleBox}>
         {/**Upper Row - Provides radio buttons for theme changing*/}
         <Grid sx={{ flex: '1', top: '0%', alignItems: 'flex-start' }}>
@@ -103,7 +107,14 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
               width: '100%',
               height: '100%'
             }}>
-            <FormLabel id="demo-radio-buttons-group-label" sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}>{t('components.ThemeModal.radioHeader')}</FormLabel>
+            <FormLabel
+              id="theme-modal-radio-buttons-label"
+              sx={{
+                fontWeight: 'bold',
+                fontSize: '1.5rem'
+            }}>
+              {t('components.ThemeModal.radioHeader')}
+            </FormLabel>
             <RadioGroup
               sx={{
                 flexDirection: 'row',
@@ -113,9 +124,11 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
               onChange={(e) => {
                 handleThemeModalPreviewChange(e.target.value)
               }}
-              aria-labelledby="demo-radio-buttons-group-label"
+              aria-labelledby="theme-modal-radio-buttons"
               name="radio-buttons-group">
               <FormControlLabel
+                id="theme-modal-radio-button-haski-theme"
+                data-testid={"ThemeModal-radio-button-haski"}
                 value={'HaskiTheme'}
                 control={<Radio />}
                 label={
@@ -126,6 +139,8 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
                 }
               />
               <FormControlLabel
+                id="theme-modal-radio-button-dark-theme"
+                data-testid={"ThemeModal-radio-button-dark"}
                 value={'DarkTheme'}
                 control={<Radio />}
                 label={
@@ -136,6 +151,8 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
                 }
               />
               <FormControlLabel
+                id="theme-modal-radio-button-alt-theme"
+                data-testid={"ThemeModal-radio-button-alt"}
                 value={'AltTheme'}
                 control={<Radio />}
                 label={
@@ -163,7 +180,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
             marginTop: '3%'
           }}>
           <Fab
-            id="switch-page-right-theme-button"
+            id="theme-modal-switch-page-right"
             sx={{
               bgcolor: (theme) => theme.palette.primary.main,
               position: 'sticky',
@@ -175,7 +192,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
             <ArrowForward />
           </Fab>
           <Fab
-            id="switch-page-left-theme-button"
+            id="theme-modal-switch-page-left"
             sx={{
               bgcolor: (theme) => theme.palette.primary.main,
               position: 'sticky',
@@ -187,7 +204,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
             <ArrowBack />
           </Fab>
           <Fab
-            id="close-theme-button"
+            id="theme-modal-close-button"
             sx={{
               bgcolor: (theme) => theme.palette.error.main,
               position: 'sticky',
@@ -198,7 +215,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
             <Close />
           </Fab>
           <Fab
-            id="accept-theme-button"
+            id="theme-modal-accept-button"
             sx={{
               bgcolor: (theme) => theme.palette.success.main,
               position: 'sticky',
@@ -230,7 +247,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
                 <MenuBar />
                 <BreadcrumbsContainer />
                 <Grid container sx={{ flex: 1, overflow: 'hidden' }}>
-                  <Grid item sx={{ flex: 1, overflow: 'auto' }}>
+                  <Grid item sx={{ flex: 1, overflow: 'auto' }}data-testid={'page-preview-grid'}>
                     {pages[pageIndex]}
                   </Grid>
                 </Grid>
