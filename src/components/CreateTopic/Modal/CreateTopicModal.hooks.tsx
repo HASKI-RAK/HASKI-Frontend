@@ -155,6 +155,7 @@ export const useCreateTopicModal = ({
                         autoHideDuration: 5000
                       })
                       log.info(t('appGlobal.dataSendSuccessful'))
+                      setCreateTopicIsSending(false)
                       setSuccessTopicCreated(true)
                     } else {
                       addSnackbar({
