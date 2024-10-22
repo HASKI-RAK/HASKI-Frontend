@@ -40,12 +40,12 @@ const CreateLearningElementTable = memo(
     return (
       <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
         <Grid item container alignItems="center" justifyContent="space-between">
-          <Grid item container xs={7.75} justifyContent="flex-end">
+          <Grid item container xs={7} justifyContent="flex-end">
             <Typography variant="h6" sx={{ mt: '1rem' }}>
               {t('components.CreateLearningElementTable.selectLearningElements')}
             </Typography>
           </Grid>
-          <Grid item xs={1.75}>
+          <Grid item container xs={4} justifyContent="flex-end" sx={{ mr: '1%' }}>
             <Fab
               sx={{ mt: '1rem', mr: '0.5rem', color: (theme) => theme.palette.primary.main, bgcolor: 'white' }}
               onClick={handleSelectAllLearningElements}

@@ -18,7 +18,7 @@ const ExistingTopicsTable = memo(({ existingTopics }: ExistingTopicsTableProps) 
           {t('components.ExistingTopicsTable.title')}
         </Typography>
       </Grid>
-      <Grid item container>
+      <Grid item container alignItems="center" direction="column">
         <Paper sx={{ padding: '1rem', width: '95%' }}>
           <FormGroup>
             {existingTopics.topics.map((LmsTopic) => (

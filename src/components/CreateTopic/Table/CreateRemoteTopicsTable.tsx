@@ -24,7 +24,7 @@ const CreateRemoteTopicsTable = memo(
             {t('components.TableRemoteTopics.title')}
           </Typography>
         </Grid>
-        <Grid item container>
+        <Grid item container alignItems="center" direction="column">
           {remoteTopics.length === 0 ? (
             <Paper sx={{ padding: '1rem', width: '95%' }}>
               <FormGroup>
@@ -36,7 +36,7 @@ const CreateRemoteTopicsTable = memo(
               </FormGroup>
             </Paper>
           ) : (
-            <Grid item container>
+            <Grid item container alignItems="center" direction="column">
               <Paper sx={{ padding: '1rem', width: '95%' }}>
                 <FormGroup>
                   {remoteTopics.map((LmsTopic) => (
