@@ -39,7 +39,7 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
 
   const handleSave = useCallback(() => {
     getUser().then((user) => {
-      if (user.role === 'teacher') {
+      if (user.role === 'teacher' || user.role === 'course creator') {
         setWaitForBackend(true)
         postTeacherLpLeAlg(user.settings.user_id, user.lms_user_id, params.topicId, params.options[params.selected].key)
           .then(() => {
@@ -51,6 +51,38 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
               autoHideDuration: 5000
             })
             params.handleClose()
+            if (params.changeObserver) params.changeObserver()
+          })
+          .catch((error) => {
+            addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 5000 })
+            params.handleClose()
+          })
+        postStudentLpLeAlg(
+          user.settings.user_id,
+          user.lms_user_id,
+          courseId,
+          params.topicId,
+          params.options[params.selected].key
+        )
+          .then(() => {
+            setStudentLpLeAlgorithm(user.settings.user_id, params.topicId, params.options[params.selected].key)
+            // Fetch the new learning path then close the modal
+            triggerLearningPathElementReload(true)
+            getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, String(params.topicId))
+              .then(() => {
+                setWaitForBackend(false)
+                addSnackbar({
+                  message: t('components.AlgorithmSettingsModal.success'),
+                  severity: 'success',
+                  autoHideDuration: 5000
+                })
+                params.handleClose()
+              })
+              .catch((error) => {
+                addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 5000 })
+                params.handleClose()
+                setWaitForBackend(false)
+              })
             if (params.changeObserver) params.changeObserver()
           })
           .catch((error) => {
@@ -91,6 +123,13 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
             addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 5000 })
             params.handleClose()
           })
+      } else {
+        addSnackbar({
+          message: t('components.AlgorithmSettingsModal.wrongRole'),
+          severity: 'error',
+          autoHideDuration: 5000
+        })
+        params.handleClose()
       }
     })
   }, [params.handleClose, params.options, params.selected, params.topicId])

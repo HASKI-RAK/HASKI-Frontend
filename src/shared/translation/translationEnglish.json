@@ -54,6 +54,7 @@
   "components.AlgorithmSettingsModal.headerRight": "Description",
   "components.AlgorithmSettingsModal.success": "Algorithm changed successfully",
   "components.AlgorithmSettingsModal.teacherIconTip": "Recommended by tutor",
+  "components.AlgorithmSettingsModal.wrongRole": "You are not authorized to change the algorithm",
   "components.ContactForm.briefDescription": "Give a brief description of your request",
   "components.ContactForm.contactform": "Contactform",
   "components.ContactForm.error": "Missing description. Please write something.",

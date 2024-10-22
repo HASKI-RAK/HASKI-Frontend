@@ -54,6 +54,7 @@
   "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
   "components.AlgorithmSettingsModal.success": "Der Algorithmus wurde erfolgreich geändert",
   "components.AlgorithmSettingsModal.teacherIconTip": "Empfehlung des Kursleiters",
+  "components.AlgorithmSettingsModal.wrongRole": "Sie haben nicht die erforderlichen Berechtigungen, um den Algorithmus zu ändern",
   "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
   "components.ContactForm.contactform": "Kontaktformular",
   "components.ContactForm.error": "Es fehlt eine Beschreibung.",
