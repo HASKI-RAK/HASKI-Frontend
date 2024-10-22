@@ -1,3 +1,5 @@
+import { CssBaseline } from '@mui/material'
+import React from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import { Box, Divider, Grid } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
@@ -33,6 +35,7 @@ export const MainFrame = () => {
 
   return (
     <>
+      <CssBaseline />
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <MenuBar />
         <Newsbanner />

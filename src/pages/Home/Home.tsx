@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, Skeleton, Stack, Typography } from '@common/components'
 import { Course } from '@core'
-import { AuthContext, SnackbarContext } from '@services'
+import { AuthContext, SnackbarContext, useThemeContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 /**
@@ -18,6 +18,7 @@ export const Home = () => {
   // UX
   const { t } = useTranslation()
   const { isAuth } = useContext(AuthContext)
+  const { loadTheme } = useThemeContext()
   const { addSnackbar } = useContext(SnackbarContext)
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
@@ -31,6 +32,7 @@ export const Home = () => {
     if (isAuth) {
       getUser()
         .then((user) => {
+          loadTheme(user.settings.theme)
           getCourses(user.settings.user_id, user.lms_user_id, user.id)
             .then((CourseResponse) => {
               setCourses(CourseResponse.courses)
