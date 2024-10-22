@@ -100,11 +100,11 @@ const CreateAlgorithmTable = memo(
                   </FormGroup>
                 </Grid>
               </Grid>
-              <Grid item xs={7}>
-                <InputLabel shrink sx={{ ml: '1rem' }}>
+              <Grid item xs={8}>
+                <InputLabel shrink sx={{ ml: '0.75rem' }}>
                   {t('components.AlgorithmSettingsModal.headerRight')}
                 </InputLabel>
-                <Typography id="modal-description" variant="body1" component="p" sx={{ ml: '2rem' }}>
+                <Typography id="create-algorithm-modal-description" variant="body1" component="p" sx={{ ml: '1rem' }}>
                   {hasLearningElementClassification
                     ? currentAlgorithm?.description
                     : t('components.CreateAlgorithmTable.missingClassification')}

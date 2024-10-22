@@ -111,8 +111,8 @@ const CreateLearningElementClassificationTable = memo(
                   <Grid item xs={6}>
                     <FormControlLabel control={<Checkbox checked={true} />} label={element.lms_learning_element_name} />
                   </Grid>
-                  <Grid item xs={6}>
-                    <FormControl sx={{ m: 1, width: '21rem', left: '10%' }} size="small">
+                  <Grid item container xs={6} justifyContent="flex-end">
+                    <FormControl sx={{ m: 1, width: '21rem' }} size="small">
                       <Select
                         value={element.classification}
                         onChange={(event) =>
