@@ -155,6 +155,11 @@
       "name": "ZF - Summary",
       "key": "ZF",
       "disabled": false
+    },
+    {
+      "name": "RQ - Reflective Quiz",
+      "key": "RQ",
+      "disabled": false
     }
   ],
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Set learning element classification",
