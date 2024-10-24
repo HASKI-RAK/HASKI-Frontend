@@ -134,7 +134,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         })
       }, 100)
     }
-  }, [topicId, getLearningPathElement, getUser, navigate, setInitialNodes, setInitialEdges, learningPathElementStatus])
+  }, [topicId, navigate, setInitialNodes, setInitialEdges])
 
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)
