@@ -299,7 +299,7 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
             setLineGraphData(lineGraphData)
 
             // Set loading to false
-            if (ratingStats && spiderGraphData && lineGraphData && topics) setIsLoading(false)
+            if (ratingStats && spiderGraphData && lineGraphData.length > 0 && topics) setIsLoading(false)
           })
           .catch((error) => {
             addSnackbar({
