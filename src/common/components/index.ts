@@ -27,7 +27,6 @@ export { Alert } from './DefaultAlert/DefaultAlert'
 export { Slide } from './DefaultSlide/DefaultSlide'
 export { Grow } from './DefaultGrow/DefaultGrow'
 export { Snackbar } from './DefaultSnackbar/DefaultSnackbar'
-export { Radio } from './DefaultRadio/DefaultRadio'
 export { FormLabel } from './DefaultFormLabel/DefaultFormLabel'
 export { InputLabel } from './DefaultInputLabel/DefaultInputLabel'
 export { FormControl } from './DefaultFormControl/DefaultFormControl'
@@ -82,6 +81,7 @@ export type { ToggleButtonGroupProps } from './DefaultToggleButtonGroupProps/Def
 export type { TypographyProps } from './DefaultTypographyProps/DefaultTypographyProps'
 export type { SelectChangeEvent } from './DefaultSelectChangeEvent/DefaultSelectChangeEvent'
 export type { LinearProgressProps } from './DefaultLinearProgress/DefaultLinearProgress'
+export type { RadioProps } from './DefaultRadioProps/DefaultRadioProps'
 
 /**
  * Reusable objects
@@ -108,3 +108,4 @@ export { default as Button } from './DefaultButton/DefaultButton'
 export { default as ImageWrapper } from './DefaultBox/ImageWrapper'
 export { default as NodeWrapper } from './DefaultBox/NodeWrapper'
 export { default as Select } from './DefaultSelect/DefaultSelect'
+export { default as Radio } from './DefaultRadio/DefaultRadio'
