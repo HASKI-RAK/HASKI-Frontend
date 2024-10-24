@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Histogram, LineGraph, Rating, SpiderGraph, Table, TableColumnProps } from 'react-rating-charts'
 import { FormControlLabel, Grid, Radio, RadioGroup } from '@common/components'
+import { Typewriter } from '@components'
 import {
   StudentRatingDashboardHookReturn,
   useStudentRatingDashboard as _useStudentRatingDashboard
@@ -180,7 +181,7 @@ const StudentRatingDashboard = ({
 
   return (
     <>
-      {!isLoading && (
+      {!isLoading ? (
         <Grid container direction="column" justifyContent="center">
           <Grid container direction="row" alignItems="center" justifyContent="center" alignContent="center">
             <Grid item>
@@ -255,6 +256,10 @@ const StudentRatingDashboard = ({
             </Grid>
           </Grid>
         </Grid>
+      ) : (
+        <Typewriter delay={25} variant="h5" sx={{ minHeight: '50em' }} align="center">
+          {t('components.StudentRatingDashboard.empty')}
+        </Typewriter>
       )}
     </>
   )

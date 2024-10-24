@@ -1,5 +1,6 @@
 import log from 'loglevel'
 import { memo, useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
@@ -46,6 +47,7 @@ type IFrameModalProps = {
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
   const getUser = usePersistedStore((state) => state.getUser)
   const { courseId, topicId } = useParams()
+  const { t } = useTranslation()
 
   // Context.
   const { addSnackbar } = useContext(SnackbarContext)
@@ -55,20 +57,20 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
       .then((user: User) => {
         postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId).catch((error) => {
           addSnackbar({
-            message: 'translation-file',
+            message: t('error.postCalculateRating'),
             severity: 'error',
             autoHideDuration: 3000
           })
-          log.error('translationfile' + ' ' + error)
+          log.error(t('error.postCalculateRating') + ' ' + error)
         })
       })
       .catch((error) => {
         addSnackbar({
-          message: 'translation-file',
+          message: t('error.getUser'),
           severity: 'error',
           autoHideDuration: 3000
         })
-        log.error('translationfile' + ' ' + error)
+        log.error(t('error.getUser') + ' ' + error)
       })
 
     props.onClose()
