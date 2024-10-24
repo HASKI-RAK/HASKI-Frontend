@@ -78,7 +78,7 @@ const StudentRatingDashboard = ({
   }, [topics, spiderGraphData])
 
   // General.
-  const color = 'orange'
+  const color = 'darkorange'
 
   // Rating title and tooltips.
   const title = t('components.StudentRatingDashboard.ratingTitle')
