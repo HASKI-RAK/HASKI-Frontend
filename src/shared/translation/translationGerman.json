@@ -41,13 +41,13 @@
     },
     {
       "name": "ACO",
-      "description": "Der Ameisenalgorithmus (ACO) ist von dem Verhalten von Ameisenarbeitern inspiriert. Er berechnet den Lernpfad, indem er das Verhalten von Ameisen simuliert, die Pheromone hinterlassen, um den besten Weg zu markieren.",
+      "description": "Inspiriert vom Verhalten von Ameisen, berechnet dieser Algorithmus den Lernpfad durch Simulation von Pheromonspuren, um optimale Wege zu finden.",
       "key": "aco",
       "disabled": false
     },
     {
       "name": "Genetischer Algorithmus",
-      "description": "Der genetische Algorithmus ist ein Algorithmus, der auf dem Prinzip der natürlichen Selektion basiert. Er wird verwendet, um einen möglichst guten Lernpfad zu berechnen, indem er die besten Lernenden auswählt und ihre Lernwege kombiniert.",
+      "description": "Basierend auf natürlicher Selektion, kombiniert dieser Algorithmus Lernwege, um über Generationen den besten Lernpfad zu entwickeln.",
       "key": "ga",
       "disabled": false
     }

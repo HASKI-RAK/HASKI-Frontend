@@ -47,7 +47,7 @@
     },
     {
       "name": "Genetic Algorithm",
-      "description": "The Genetic Algorithm is inspired by evolution. It approximates the best learning path by simulating the process of mutation and selection. It is often used for its speed.",
+      "description": "Based on natural selection, it combines learning paths to evolve the best one over several iterations.",
       "key": "ga",
       "disabled": false
     }
