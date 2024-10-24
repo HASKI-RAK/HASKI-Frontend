@@ -79,4 +79,5 @@ export type { TeacherLpLeAlgorithmReturn } from './LearningPathAlgorithm/Teacher
 export type { ListKReturn } from './QuestionnaireResults/ListK'
 export type { CourseReturn } from './Course/Course'
 export type { ILSReturn } from './QuestionnaireResults/ILS'
+export * from './Rating'
 export type { NewsReturn } from './News/News'
