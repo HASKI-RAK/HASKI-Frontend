@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LineGraph, Rating, SpiderGraph, Table, TableColumnProps } from 'react-rating-charts'
 import { FormControlLabel, Grid, Radio, RadioGroup } from '@common/components'
+import { Typewriter } from '@components'
 import {
   LearningElementRatingDashboardHookReturn,
   useLearningElementRatingDashboard as _useLearningElementRatingDashboard
@@ -167,7 +168,7 @@ const LearningElementRatingDashboard = ({
 
   return (
     <>
-      {!isLoading && (
+      {!isLoading ? (
         <Grid container direction="column" justifyContent="center">
           <Grid container direction="row" alignItems="center" justifyContent="center" alignContent="center">
             <Grid item>
@@ -207,7 +208,7 @@ const LearningElementRatingDashboard = ({
                   <FormControlLabel value="table" control={<Radio id={'table-radio'} />} label={t('appGlobal.table')} />
                 </RadioGroup>
               </Grid>
-              <Grid item>
+              <Grid item justifyItems="center">
                 {chosenComponent == 'lineGraph' ? (
                   <LineGraph
                     color={color}
@@ -229,6 +230,10 @@ const LearningElementRatingDashboard = ({
             </Grid>
           </Grid>
         </Grid>
+      ) : (
+        <Typewriter delay={25} variant="h5" sx={{ minHeight: '45em' }} align="center">
+          {t('components.LearningElementRatingDashboard.empty')}
+        </Typewriter>
       )}
     </>
   )

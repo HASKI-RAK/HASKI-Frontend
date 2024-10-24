@@ -253,7 +253,7 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
             setHistogramData(Object.values(studentAverages).map(({ sum, count }) => sum / count))
 
             // Set loading to false.
-            setIsLoading(false)
+            if (ratingStats && spiderGraphData && lineGraphData && histogramData) setIsLoading(false)
           })
           .catch((error) => {
             addSnackbar({

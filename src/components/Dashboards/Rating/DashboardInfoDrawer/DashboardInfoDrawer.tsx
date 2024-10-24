@@ -38,4 +38,6 @@ const DashboardInfoDrawer = ({ isOpen, selectedDashboard }: DashboardInfoDrawerP
   )
 }
 
+// eslint-disable-next-line immutable/no-mutation
+DashboardInfoDrawer.displayName = 'DashboardInfoDrawer'
 export default memo(DashboardInfoDrawer)
