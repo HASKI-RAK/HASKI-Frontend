@@ -17,12 +17,12 @@ import { fetchData } from '../RequestResponse'
  * @category Services
  */
 
-export const fetchLearningPathElementStatus: LearningPathElementStatusReturn = async (courseId, studentId) => {
-  if (!courseId || !studentId) {
+export const fetchLearningPathElementStatus: LearningPathElementStatusReturn = async (courseId, lmsUserId) => {
+  if (!courseId || !lmsUserId) {
     throw new Error('courseId and student_id are required')
   }
   return fetchData<LearningPathElementStatus[]>(
-    getConfig().BACKEND + `/lms/course/${courseId}/student/${studentId}/activitystatus`,
+    getConfig().BACKEND + `/lms/course/${courseId}/student/${lmsUserId}/activitystatus`,
     {
       method: 'GET',
       credentials: 'include',

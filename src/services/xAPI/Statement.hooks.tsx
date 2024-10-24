@@ -30,6 +30,7 @@ export enum xAPIComponent {
   Null,
   Popover,
   RadioGroup,
+  Radio,
   Select,
   StepButton,
   Text,
