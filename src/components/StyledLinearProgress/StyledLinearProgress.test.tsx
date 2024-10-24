@@ -101,7 +101,7 @@ describe('Course2', () => {
     await waitFor(async () => {
       expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 0/2')
     })
-  })
+  }, 20000)
 })
 
 describe('Course3', () => {

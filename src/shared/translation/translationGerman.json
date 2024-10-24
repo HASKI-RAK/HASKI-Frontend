@@ -1,13 +1,16 @@
 {
   "appGlobal.accept": "Akzeptieren",
+  "appGlobal.algorithms": "Algorithmen",
   "appGlobal.aschaffenburgUAS": "TH Aschaffenburg",
   "appGlobal.back": "Zurück",
+  "appGlobal.classifications": "Klassifikationen",
   "appGlobal.courses": "Kurse",
   "appGlobal.dataSendSuccessful": "Daten wurden erfolgreich gesendet",
   "appGlobal.dataSendUnsuccessful": "Daten konnten nicht gesendet werden",
   "appGlobal.decline": "Ablehnen",
   "appGlobal.help": "Hilfe",
   "appGlobal.imageSources": "Bildquellen:",
+  "appGlobal.learningElements": "Lernelemente",
   "appGlobal.loading": "Lade...",
   "appGlobal.next": "Weiter",
   "appGlobal.oClock": "Uhr",
@@ -15,6 +18,43 @@
   "appGlobal.send": "Senden",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
+  "components.AlgorithmSettingsModal.algorithms": [
+    {
+      "name": "Algorithmus auswählen",
+      "description": "Bitte wählen Sie einen Algorithmus für die Berechnung des Lernpfads aus.",
+      "key": "noKey",
+      "disabled": true
+    },
+    {
+      "name": "Feste Reihenfolge",
+      "description": "Die Lernelemente werden in einer festen Reihenfolge angezeigt. Es wird kein Algorithmus verwendet.",
+      "key": "default",
+      "disabled": false
+    },
+    {
+      "name": "Graf",
+      "description": "Dieser Algorithmus basiert auf dem lernadaptiven Mechanismus von Graf et al. Er berechnet den Lernpfad basierend auf dem Lernstil des Lernenden.",
+      "key": "graf",
+      "disabled": false
+    },
+    {
+      "name": "ACO",
+      "description": "Der Ameisenalgorithmus (ACO) ist von dem Verhalten von Ameisenarbeitern inspiriert. Er berechnet den Lernpfad, indem er das Verhalten von Ameisen simuliert, die Pheromone hinterlassen, um den besten Weg zu markieren.",
+      "key": "aco",
+      "disabled": false
+    },
+    {
+      "name": "Genetischer Algorithmus",
+      "description": "Der genetische Algorithmus ist ein Algorithmus, der auf dem Prinzip der natürlichen Selektion basiert. Er wird verwendet, um einen möglichst guten Lernpfad zu berechnen, indem er die besten Lernenden auswählt und ihre Lernwege kombiniert.",
+      "key": "ga",
+      "disabled": false
+    }
+  ],
+  "components.AlgorithmSettingsModal.headerLeft": "Lernpfadalgorithmus wählen",
+  "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
+  "components.AlgorithmSettingsModal.success": "Der Algorithmus wurde erfolgreich geändert",
+  "components.AlgorithmSettingsModal.teacherIconTip": "Empfehlung des Kursleiters",
+  "components.AlgorithmSettingsModal.wrongRole": "Sie haben nicht die erforderlichen Berechtigungen, um den Algorithmus zu ändern",
   "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
   "components.ContactForm.contactform": "Kontaktformular",
   "components.ContactForm.error": "Es fehlt eine Beschreibung.",
@@ -63,6 +103,69 @@
       "label": "Sonstiges"
     }
   ],
+  "components.CreateAlgorithmTable.missingClassification": "Dieser Themenbereich wird nicht erstellt. Es müssen alle verfügbaren Lernelement Klassifikationen ausgewählt werden, um die Algorithmusauswahl zu ermöglichen.",
+  "components.CreateCourseDetailsTable.courseName": "Kursname",
+  "components.CreateCourseDetailsTable.startDate": "Startdatum",
+  "components.CreateCourseModal.createCourse": "Kurs erstellen",
+  "components.CreateCourseTable.alreadyCreatedCourses": "Bereits erstellte Kurse",
+  "components.CreateCourseTable.lmsCourses": "Kurse aus dem LMS",
+  "components.CreateCourseTable.noCoursesFound": "Keine Kurse gefunden...",
+  "components.CreateLearningElementClassificationTable.classifications": [
+    {
+      "name": "Klassifikation auswählen",
+      "key": "noKey",
+      "disabled": true
+    },
+    {
+      "name": "KÜ - Kurzübersicht",
+      "key": "KÜ",
+      "disabled": false
+    },
+    {
+      "name": "EK - Erklärung",
+      "key": "EK",
+      "disabled": false
+    },
+    {
+      "name": "AN - Animation",
+      "key": "AN",
+      "disabled": false
+    },
+    {
+      "name": "BE - Beispiel",
+      "key": "BE",
+      "disabled": false
+    },
+    {
+      "name": "ÜB - Übung",
+      "key": "ÜB",
+      "disabled": false
+    },
+    {
+      "name": "SE - Selbsteinschätzungstest",
+      "key": "SE",
+      "disabled": false
+    },
+    {
+      "name": "ZL - Zusatzliteratur",
+      "key": "ZL",
+      "disabled": false
+    },
+    {
+      "name": "ZF - Zusammenfassung",
+      "key": "ZF",
+      "disabled": false
+    },
+    {
+      "name": "RQ - Reflektives Quiz",
+      "key": "RQ",
+      "disabled": false
+    }
+  ],
+  "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Klassifikation der Lernelemente festlegen",
+  "components.CreateLearningElementTable.selectLearningElements": "Lernelemente auswählen",
+  "components.CreateTopicModal.createTopics": "Themenbereiche erstellen",
+  "components.ExistingTopicsTable.title": "Bereits erstellte Themenbereiche",
   "components.Footer.project": "Projekt",
   "components.FurtherInfoMenu.title": "Weitere Informationen",
   "components.ListKQuestions": [
@@ -1133,30 +1236,44 @@
   "components.TableListK.score": "Wert",
   "components.TableListK.time": "Zeit",
   "components.TableListKQuestions.introduction": "Im Folgenden werden Ihnen Fragen darüber gestellt welche Lernstrategien Sie anwenden. Sie finden hier eine Liste verschiedener Lerntätigkeiten. Geben Sie bitte für jede Tätigkeit an, wie häufig diese bei Ihnen vorkommt. Sie können Ihre Antworten von sehr selten (1) bis sehr oft (5) abstufen. Die gestellten Fragen basieren auf dem LIST-K (Klingsieck, 2019), welcher eine gekürzte Form des LIST (Wild & Schiefele, 1994) darstellt.",
+  "components.TableRemoteTopics.noAdditionalTopics": "Keine zusätzlichen Themenbereiche gefunden",
+  "components.TableRemoteTopics.title": "Verfügbare Themenbereiche",
+  "components.TopicCard.aco": "Ameisenalgorithmus",
+  "components.TopicCard.default": "Feste Reihenfolge",
+  "components.TopicCard.ga": "Genetischer Algorithmus",
+  "components.TopicCard.graf": "Graf Algorithmus",
+  "components.TopicCard.learningPath": "Lernpfad: ",
+  "components.TopicCard.nestor": "Nestor Algorithmus",
+  "components.TopicCard.tyche": "Tyche Algorithmus",
   "error": "Fehler",
-  "error.fetchCourses": "Es gab einen Fehler beim Abrufen der Kursdaten.",
-  "error.fetchILS": "Es gab einen Fehler beim Abrufen der ILS-Fragebogendaten.",
-  "error.fetchLearningPathElement": "Es gab einen Fehler beim Abrufen der LearningPathElement-Daten.",
-  "error.fetchLearningPathElementStatus": "Es gab einen Fehler beim Abrufen der LearningPathElementStatus-Daten.",
-  "error.fetchLearningPathTopic": "Es gab einen Fehler beim Abrufen der LearningPathTopic-Daten.",
-  "error.fetchListK": "Es gab einen Fehler beim Abrufen der ListK-Fragebogendaten.",
-  "error.fetchRedirectMoodleLogin": "Es gab einen Fehler beim Abrufen der Moodle-Login-URL.",
-  "error.fetchUser": "Es gab einen Fehler beim Abrufen der Nutzerdaten.",
-  "error.getCourses": "Es gab einen Fehler beim Abrufen der Kursdaten.",
-  "error.getLearningElementStatus": "Es gab einen Fehler beim Abrufen des Lernelementstatus.",
-  "error.getLearningElementsWithStatus": "Es gab einen Fehler beim Abrufen der Lernelemente (mit Status).",
-  "error.getNews": "Es gab einen Fehler beim Abrufen der News.",
-  "error.getSortedLearningPath": "Es gab einen Fehler beim Abrufen und Sortieren der LearningPathLearningElement-Daten.",
-  "error.getUser": "Es gab einen Fehler beim Abrufen der Benutzerdaten.",
-  "error.mapNodes": "Es gab einen Fehler beim Zuordnen der Lernpfad Nodes.",
-  "error.postCalculateLearningPathILS": "Es gab einen Fehler bei der Berechnung des Lernpfades auf Basis der ILS-Fragebogendaten.",
-  "error.postILS": "Es gab einen Fehler beim Senden der ILS-Fragebogendaten.",
-  "error.postListK": "Es gab einen Fehler beim Senden der ListK-Fragebogendaten.",
-  "error.postLogin": "Es gab einen Fehler beim Einloggen.",
-  "error.setLearningPathElementSpecificStatus": "Es gab einen Fehler beim Festlegen des spezifischen Status eines Lernpfadelements.",
-  "error.setTopics": "Es gab einen Fehler beim Festlegen der Themen.",
-  "error.setTopicsPath": "Es gab einen Fehler beim Festlegen des Themenpfads.",
-  "error.useUniversity": "Es gab einen Fehler beim Abrufen der Universität von dem Benutzer.",
+  "error.fetchCourses": "Beim Abrufen der Kursdaten ist ein Fehler aufgetreten.",
+  "error.fetchILS": "Beim Abrufen der ILS-Fragebogendaten ist ein Fehler aufgetreten.",
+  "error.fetchLearningPathElement": "Beim Abrufen der LearningPathElement-Daten ist ein Fehler aufgetreten.",
+  "error.fetchLearningPathElementStatus": "Beim Abrufen der LearningPathElementStatus-Daten ist ein Fehler aufgetreten.",
+  "error.fetchLearningPathTopic": "Beim Abrufen der LearningPathTopic-Daten ist ein Fehler aufgetreten.",
+  "error.fetchListK": "Beim Abrufen der ListK-Fragebogendaten ist ein Fehler aufgetreten.",
+  "error.fetchRedirectMoodleLogin": "Beim Abrufen der Moodle-Login-URL ist ein Fehler aufgetreten.",
+  "error.fetchUser": "Beim Abrufen der Nutzerdaten ist ein Fehler aufgetreten.",
+  "error.getLearningElementStatus": "Beim Abrufen des Lernelementstatus ist ein Fehler aufgetreten.",
+  "error.getLearningElementsWithStatus": "Beim Abrufen der Lernelemente mit Status ist ein Fehler aufgetreten.",
+  "error.getRemoteCourses": "Beim Abrufen der Kursdaten vom LMS ist ein Fehler aufgetreten.",
+  "error.getRemoteTopics": "Beim Abrufen der Themen vom LMS ist ein Fehler aufgetreten.",
+  "error.getSortedLearningPath": "Beim Abrufen und Sortieren der LearningPathLearningElement-Daten ist ein Fehler aufgetreten.",
+  "error.getTopics": "Beim Abrufen der LearningPathTopic-Daten ist ein Fehler aufgetreten.",
+  "error.getUser": "Beim Abrufen der Benutzerdaten ist ein Fehler aufgetreten.",
+  "error.mapNodes": "Beim Zuordnen der Lernpfad-Nodes ist ein Fehler aufgetreten.",
+  "error.postCalculateLearningPathForAllStudents": "Beim Senden der CalculateLearningPathForAllStudents-Daten ist ein Fehler aufgetreten.",
+  "error.postCalculateLearningPathILS": "Bei der Berechnung des Lernpfades auf Basis der ILS-Fragebogendaten ist ein Fehler aufgetreten.",
+  "error.postILS": "Beim Senden der ILS-Fragebogendaten ist ein Fehler aufgetreten.",
+  "error.postLearningElement": "Beim Senden der LearningElement-Daten ist ein Fehler aufgetreten.",
+  "error.postLearningPathAlgorithm": "Beim Senden der LearningPathAlgorithm-Daten ist ein Fehler aufgetreten.",
+  "error.postListK": "Beim Senden der ListK-Fragebogendaten ist ein Fehler aufgetreten.",
+  "error.postLogin": "Beim Einloggen ist ein Fehler aufgetreten.",
+  "error.postTopic": "Beim Senden der Themendaten ist ein Fehler aufgetreten.",
+  "error.setLearningPathElementSpecificStatus": "Beim Festlegen des spezifischen Status eines Lernpfadelements ist ein Fehler aufgetreten.",
+  "error.setTopics": "Beim Festlegen der Themen ist ein Fehler aufgetreten.",
+  "error.setTopicsPath": "Beim Festlegen des Themenpfads ist ein Fehler aufgetreten.",
+  "error.useUniversity": "Beim Abrufen der Universität ist ein Fehler aufgetreten.",
   "info": "Info",
   "info.postCalculateLearningPathILS": "Eine POST-Anfrage wurde erfolgreich gesendet, um den Lernpfad auf der Grundlage der Daten des ILS-Fragebogens zu berechnen.",
   "log.learningPathTopicProgressTimeout": "Beim Laden des LearningPathTopicProgress-Hook ist ein Timout aufgetreten.",
@@ -1266,8 +1383,14 @@
   "pages.contact.error": "Ihr Feedback konnte nicht versendet werden.",
   "pages.contact.success": "Ihr Feedback wurde erfolgreich versendet.",
   "pages.course": "Kurs",
-  "pages.course.courseButton": "Weiter zum Kurs",
+  "pages.course.aco": "Ameisenalgorithmus",
+  "pages.course.bayes": "Bayes",
+  "pages.course.cardText": "Lernpfad: ",
+  "pages.course.fixed": "Feste Reihenfolge",
+  "pages.course.genetic": "Genetischer Algorithmus",
+  "pages.course.graf": "Graf",
   "pages.course.topicButton": "Weiter zum Thema",
+  "pages.course.tyche": "Tyche",
   "pages.glossary": "Glossar",
   "pages.glossary.collapseAll": "Alle schließen",
   "pages.glossary.elements": [
@@ -1612,6 +1735,9 @@
     "TestDeutsch4"
   ],
   "pages.home": "Startseite",
+  "pages.home.courseButton": "Weiter zum Kurs",
+  "pages.home.courseDisabled": "Der Kurs ist Verfügbar ab",
+  "pages.home.menuItemAlgorithms": "Lernpfadalgorithmus wählen",
   "pages.home.noCourses": "Keine Kurse gefunden",
   "pages.imprint": "Impressum",
   "pages.imprint.asOf": "Stand",
