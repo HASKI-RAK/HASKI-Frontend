@@ -44,7 +44,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           <IconButton
             sx={{
               position: 'relative',
-              ml: { xs: '6rem', sm: '16rem', md: '36rem', lg: '46rem', xl: '66rem', xxl: '82rem', xxxl: '109rem' }
+              ml: { xs: '6rem', sm: '16rem', md: '36rem', lg: '46rem', xl: '66rem', xxl: '81rem', xxxl: '106rem' }
             }}
             onClick={openMenu}
             id="topic-menu"
@@ -114,7 +114,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         studentAlgorithm={studentSelection}
       />
       <Menu
-        id="menu"
+        id="topic-card-menu"
         anchorEl={menuAnchorEl}
         open={Boolean(menuAnchorEl)}
         onClose={handleCloseMenu}
