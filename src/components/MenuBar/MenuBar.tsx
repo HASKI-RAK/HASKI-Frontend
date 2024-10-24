@@ -16,7 +16,6 @@ import {
   Typography
 } from '@common/components'
 import {
-  Analytics,
   AssignmentOutlined,
   Help,
   LibraryBooksOutlined,
@@ -30,7 +29,6 @@ import {
   FurtherInfoMenu,
   LanguageMenu,
   QuestionnaireQuestionsModal,
-  QuestionnaireResultsModal,
   StatisticsMenu,
   TableILSQuestions,
   TableListKQuestions
@@ -52,7 +50,6 @@ const MenuBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const { isAuth, logout } = useContext(AuthContext)
   const { t } = useTranslation()
-  const [modalOpen, setModalOpen] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
   const [modalOpenListK, setModalOpenListK] = useState(false)

@@ -41,11 +41,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
 
-  const [modalOpen, setModalOpen] = useState(false)
-
-  const handleCloseLearningElementModal = () => {
-    setModalOpen(false)
-  }
   const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
 
   // Translation

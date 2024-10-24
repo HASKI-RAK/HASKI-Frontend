@@ -4,6 +4,7 @@ import { ForwardedRef, forwardRef, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Fab, Tooltip, Typography } from '@common/components'
 import { debounce } from '@services'
+import { ButtonStack } from '../../../Questionnaire/QuestionnaireQuestions/Table/TableCommonComponents'
 
 type DashboardInfoDrawerButtonProps = {
   isOpen: boolean
@@ -47,5 +48,8 @@ const DashboardInfoDrawerButton = forwardRef(
     )
   }
 )
+
+// eslint-disable-next-line immutable/no-mutation
+DashboardInfoDrawerButton.displayName = 'DashboardInfoDrawerButton'
 
 export default memo(DashboardInfoDrawerButton)

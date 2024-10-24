@@ -1,4 +1,4 @@
-import { ListK, Topic } from '@core'
+import { Topic } from '@core'
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 

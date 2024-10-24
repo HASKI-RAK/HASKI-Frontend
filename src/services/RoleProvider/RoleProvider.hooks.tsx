@@ -1,4 +1,3 @@
-import log from 'loglevel'
 import { useEffect, useState } from 'react'
 import { usePersistedStore } from '@store'
 import { RoleContextType } from '../RoleContext/RoleContext'
