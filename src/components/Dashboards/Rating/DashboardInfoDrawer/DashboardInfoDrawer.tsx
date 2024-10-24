@@ -22,7 +22,6 @@ const DashboardInfoDrawer = ({ isOpen, selectedDashboard }: DashboardInfoDrawerP
           position: 'absolute',
           borderRadius: '0rem',
           border: 0,
-          backgroundColor: 'transparent',
           borderLeft: isOpen ? '1px solid #ccc' : 'none',
           boxShadow: isOpen ? '-5px 0px 10px rgba(0, 0, 0, 0.2)' : 'none',
           marginLeft: isOpen ? '5px' : '0',
