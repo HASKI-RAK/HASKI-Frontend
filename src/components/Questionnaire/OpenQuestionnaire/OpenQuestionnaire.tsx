@@ -9,7 +9,7 @@ import {
   usePrivacyModal as _usePrivacyModal
 } from '@components'
 import { AuthContext, fetchILS } from '@services'
-import { usePersistedStore } from '@store'
+import { usePersistedStore, useStore } from '@store'
 
 //** usePrivacyPolicy gets the 'privacy_accept_token' from the hook */
 export type PrivacyModalProps = {
@@ -25,6 +25,9 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
   const [questionnaireILSExists, setQuestionnaireILSExists] = useState(true)
   const { privacyPolicyCookie } = usePrivacyModal()
   const getUser = usePersistedStore((state) => state.getUser)
+  const triggerLearningPathTopicCache = useStore((state) => state.triggerLearningPathTopicReload)
+  const triggerLearningPathElementCache = useStore((state) => state.triggerLearningPathElementReload)
+  const triggerLearningPathElementStatus = usePersistedStore((state) => state.triggerLearningPathElementStatusReload)
 
   //closes the modal
   const handleCloseILSLongModal = (event: object, reason: string) => {
@@ -35,7 +38,9 @@ const OpenQuestionnaire = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalP
           window.location.reload()
         }
     } else {
-      window.location.reload()
+      triggerLearningPathTopicCache(true)
+      triggerLearningPathElementCache(true)
+      triggerLearningPathElementStatus(true)
       setModalOpenILSLong(false)
     }
   }
