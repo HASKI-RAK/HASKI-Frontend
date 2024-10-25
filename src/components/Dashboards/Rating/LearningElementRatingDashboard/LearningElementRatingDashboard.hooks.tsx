@@ -1,7 +1,7 @@
 import log from 'loglevel'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { LearningElementRating, Topic, User } from '@core'
+import { LearningElementRating, LearningElementRatingResponse, Topic, User } from '@core'
 import { SnackbarContext, fetchLearningElementRatings } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
@@ -127,7 +127,7 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
 
         // Fetch all learning element ratings.
         fetchLearningElementRatings()
-          .then((learningElementRatingResponse) => {
+          .then((learningElementRatingResponse: LearningElementRatingResponse) => {
             // Get the max rating value.
             const maxRatingValue = Math.max(...learningElementRatingResponse.map((r) => r.rating_value))
             // Get the max rating deviation.
@@ -242,7 +242,7 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
             })
 
             // Sort the ratings by timestamp ascending.
-            const sortedRatings = learningElementRatingResponse.toSorted((a, b) => {
+            const sortedRatings = learningElementRatingResponse.sort((a, b) => {
               const aTime = new Date(a.timestamp).getTime()
               const bTime = new Date(b.timestamp).getTime()
               return aTime - bTime
