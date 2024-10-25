@@ -68,7 +68,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
   //handles the selection of a radio button
   const handleThemeModalPreviewChange = (themeName: string) => {
     setSelectedThemeString(themeName)
-    console.log('whatever, point hit')
+    console.log('marker point handleThemeModalPreviewChange')
     setSelectedTheme(themeName === 'DarkTheme' ? DarkTheme : themeName === 'AltTheme' ? AltTheme : HaskiTheme)
   }
 

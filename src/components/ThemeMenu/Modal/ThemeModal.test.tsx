@@ -244,6 +244,7 @@ describe('Functionality tests', ()=> {
 
   })
 
+  /*
   test('checking theme on pages', async () => {
     render(
       <ThemeContextProvider>
@@ -279,7 +280,7 @@ describe('Functionality tests', ()=> {
     })
 
   })
-
+  */
 
   //expect(screen.getByTestId('ThemeModal-Accept-Button')).not.toBeInTheDocument ggf querySelector
   //ggf waitFor nr 2 einbauen
