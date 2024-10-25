@@ -21,7 +21,6 @@ describe('AlgorithmSettingsModal', () => {
           teacherAlgorithm={teacherAlgorithm}
           isOpen={open}
           handleClose={jest.fn()}
-          getIDs={{ courseID: 1, topicID: 0 }}
           options={mockOptions}
         />
       </MemoryRouter>
@@ -38,12 +37,7 @@ describe('AlgorithmSettingsModal', () => {
     const open = true
     const { getByLabelText } = render(
       <MemoryRouter>
-        <AlgorithmSettingsModal
-          isOpen={open}
-          handleClose={jest.fn()}
-          getIDs={{ courseID: 1, topicID: 0 }}
-          options={mockOptions}
-        />
+        <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} options={mockOptions} />
       </MemoryRouter>
     )
 
@@ -63,7 +57,7 @@ describe('AlgorithmSettingsModal', () => {
     const handleClose = jest.fn()
     const { getByTestId } = render(
       <MemoryRouter>
-        <AlgorithmSettingsModal isOpen={open} handleClose={handleClose} getIDs={{ courseID: 1, topicID: 0 }} />
+        <AlgorithmSettingsModal isOpen={open} handleClose={handleClose} topicId={0} />
       </MemoryRouter>
     )
 
@@ -77,12 +71,7 @@ describe('AlgorithmSettingsModal', () => {
     const open = true
     const { getByTestId } = render(
       <MemoryRouter>
-        <AlgorithmSettingsModal
-          isOpen={open}
-          handleClose={handleClose}
-          getIDs={{ courseID: 1, topicID: 0 }}
-          options={mockOptions}
-        />
+        <AlgorithmSettingsModal isOpen={open} handleClose={handleClose} topicId={0} options={mockOptions} />
       </MemoryRouter>
     )
 
@@ -117,7 +106,7 @@ describe('AlgorithmSettingsModal', () => {
           isOpen={open}
           changeObserver={mockObserverFunction}
           handleClose={jest.fn()}
-          getIDs={{ courseID: 1, topicID: 0 }}
+          topicId={0}
           options={mockOptions}
         />
       </MemoryRouter>
@@ -156,7 +145,7 @@ describe('AlgorithmSettingsModal', () => {
           isOpen={open}
           changeObserver={mockObserverFunction}
           handleClose={jest.fn()}
-          getIDs={{ courseID: 1, topicID: 0 }}
+          topicId={0}
           options={mockOptions}
         />
       </MemoryRouter>
@@ -209,12 +198,7 @@ describe('AlgorithmSettingsModal', () => {
     const { getByTestId } = render(
       <SnackbarContext.Provider value={my_context}>
         <MemoryRouter>
-          <AlgorithmSettingsModal
-            isOpen={open}
-            handleClose={jest.fn()}
-            getIDs={{ courseID: 1, topicID: 0 }}
-            options={mockOptions}
-          />
+          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} options={mockOptions} />
         </MemoryRouter>
       </SnackbarContext.Provider>
     )
@@ -264,12 +248,7 @@ describe('AlgorithmSettingsModal', () => {
     const { getByTestId } = render(
       <SnackbarContext.Provider value={my_context}>
         <MemoryRouter>
-          <AlgorithmSettingsModal
-            isOpen={open}
-            handleClose={jest.fn()}
-            getIDs={{ courseID: 1, topicID: 0 }}
-            options={mockOptions}
-          />
+          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} options={mockOptions} />
         </MemoryRouter>
       </SnackbarContext.Provider>
     )
