@@ -253,7 +253,6 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
             setHistogramData(Object.values(studentAverages).map(({ sum, count }) => sum / count))
 
             // Set loading to false.
-            if (ratingStats && spiderGraphData && lineGraphData.length > 0 && histogramData) setIsLoading(false)
           })
           .catch((error) => {
             addSnackbar({
@@ -275,6 +274,11 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
         setIsLoading(true)
       })
   }, [])
+
+  useEffect(() => {
+    // Only toggle isLoading to false when lineGraphData has data.
+    if (ratingStats && spiderGraphData && lineGraphData.length > 0 && histogramData) setIsLoading(false)
+  }, [lineGraphData])
 
   return useMemo(
     () => ({
