@@ -19,7 +19,6 @@ import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
  * @prop isOpen - Boolean value to determine if the modal is open.
  * @prop handleClose - function executed when closing the modal.
  * @prop changeObserver - function executed when the algorithm is changed.
- * @prop getIDs - Object containing the courseID and topicID.
  * @prop options - Array of objects containing the name, description,
  *  and key of the algorithms. Used in Tests instead of the translation output.
  * @interface
@@ -153,14 +152,15 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
             </Typography>
           </Grid>
         </Grid>
-        {waitForBackend ?? <CircularProgress size={24} />}
         <Fab
           onClick={handleSave}
           aria-label="save"
           id="algorithm-save-button"
           data-testid={'algorithm-save-button'}
-          sx={{ position: 'absolute', right: '0.5rem', bottom: '0.5rem' }}>
-          <Save />
+          sx={{ position: 'absolute', right: '0.5rem', bottom: '0.5rem' }}
+          disabled={waitForBackend} // Disable while loading
+        >
+          {waitForBackend ? <CircularProgress size={24} /> : <Save />}
         </Fab>
       </Grid>
     </Modal>
