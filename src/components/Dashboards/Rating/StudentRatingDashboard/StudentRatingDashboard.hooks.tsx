@@ -144,7 +144,9 @@ export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn =>
             const maxRatingDeviation = Math.max(...ratings.map((rating) => rating.rating_deviation))
 
             // Get all ratings of the user.
-            const userRatings = ratings.filter((rating) => rating.student_id === user.id)
+            const userRatings = ratings
+              .filter((rating) => rating.student_id === user.id)
+              .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
 
             // Categorize the ratings of the user into topics.
             const categorizedRatings = userRatings.reduce(
