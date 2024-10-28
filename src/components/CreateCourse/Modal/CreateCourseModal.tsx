@@ -58,16 +58,15 @@ const CreateCourseModal = ({
 
   const handleCreateCourse = () => {
     setIsSending(true)
-    // Given Dateformat:Fri Jul 19 2024 08:47:15 GMT+0200 -
-    // Returned Dateformat: 2024-07-18T14:23:09Z - YYYY-MM-DDTHH:MM:SSZ
-    const formatDate = (date: Date) => {
-      return date.toISOString().split('.')[0] + 'Z'
+
+    const formatDate = (date: Dayjs) => {
+      return date.format('YYYY-MM-DDTHH:mm:ss[Z]') // Format without timezone adjustments
     }
 
     const createCourse = {
       lms_id: selectedRemoteCourse?.id,
       name: selectedRemoteCourse?.fullname,
-      start_date: courseStartDateValue ? formatDate(courseStartDateValue.toDate()) : formatDate(new Date()),
+      start_date: courseStartDateValue ? formatDate(courseStartDateValue) : formatDate(dayjs(new Date())),
       university: user?.university,
       created_by: user?.settings.user_id
     }
