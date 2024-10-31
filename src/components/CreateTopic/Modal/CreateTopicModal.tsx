@@ -2,19 +2,16 @@ import log from 'loglevel'
 import React, { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { Box, Button, CircularProgress, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
+import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
-import {
-  CreateAlgorithmTable,
-  CreateAlgorithmTableNameProps,
-  CreateLearningElementClassificationTable,
-  CreateLearningElementTable,
-  CreateRemoteTopicsTable,
-  ExistingTopicsTable
-} from '@components'
+import { CreateAlgorithmTableNameProps } from '@components'
 import { LearningPathTopic, RemoteLearningElement, RemoteTopic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+import CreateAlgorithmsStep from './CreateAlgorithmsStep'
+import CreateLearningElementClassificationsStep from './CreateLearningElementClassificationsStep'
+import CreateLearningElementsStep from './CreateLearningElementsStep'
+import CreateRemoteTopicsStep from './CreateRemoteTopicsStep'
 import { useCreateTopicModal } from './CreateTopicModal.hooks'
 
 type CreateTopicModalProps = {
@@ -81,6 +78,22 @@ const CreateTopicModal = memo(
       t('appGlobal.classifications'),
       t('appGlobal.algorithms')
     ]
+
+    const handleNext = () => setActiveStep((prevStep) => prevStep + 1)
+    const handleBack = () => setActiveStep((prevStep) => prevStep - 1)
+
+    const handleSubmit = async () => {
+      setCreateTopicIsSending(true)
+      for (const [topicId] of Object.entries(selectedAlgorithms)) {
+        await handleCreate(
+          selectedAlgorithms[parseInt(topicId)][0].topicName,
+          parseInt(topicId),
+          selectedLearningElementsClassification,
+          selectedAlgorithms[parseInt(topicId)][0].algorithmShortName,
+          courseId
+        )
+      }
+    }
 
     useEffect(() => {
       getUser()
@@ -163,166 +176,46 @@ const CreateTopicModal = memo(
                 </Step>
               ))}
             </Stepper>
-            {activeStep === 0 ? (
-              <>
-                <CreateRemoteTopicsTable
-                  onTopicChange={handleTopicChange}
-                  selectedTopics={selectedTopics}
-                  remoteTopics={remoteTopics}>
-                  <Box sx={{ padding: '1rem', width: '95%' }}>
-                    <Grid container justifyContent="flex-end" alignItems="flex-end">
-                      <Button
-                        id="create-topic-modal-available-topics-next-button"
-                        variant="contained"
-                        color="primary"
-                        disabled={selectedTopics.length === 0}
-                        onClick={() => {
-                          setActiveStep(1)
-                        }}
-                        sx={{ mr: -2 }}>
-                        {t('appGlobal.next')}
-                      </Button>
-                    </Grid>
-                  </Box>
-                </CreateRemoteTopicsTable>
-                {alreadyCreatedTopics != undefined && alreadyCreatedTopics.topics.length > 0 && (
-                  <ExistingTopicsTable existingTopics={alreadyCreatedTopics} />
-                )}
-              </>
-            ) : activeStep === 1 ? (
-              <Grid container item>
-                <CreateLearningElementTable
-                  selectedTopics={selectedTopics}
-                  onLearningElementChange={handleLearningElementChange}
-                  selectedLearningElements={selectedLearningElements}>
-                  <Box sx={{ padding: '1rem', width: '95%' }}>
-                    <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
-                      <Button
-                        id="create-topic-modal-available-learning-elements-next-button"
-                        variant="contained"
-                        color="primary"
-                        sx={{ ml: 1 }}
-                        onClick={() => setActiveStep(activeStep - 1)}>
-                        {t('appGlobal.back')}
-                      </Button>
-                      <Button
-                        id="create-topic-modal-available-learning-elements-back-button"
-                        variant="contained"
-                        color="primary"
-                        disabled={
-                          //At least 1 Learning element in each topic has to be selected
-                          !selectedTopics.every(
-                            (topic) =>
-                              selectedLearningElements[topic.topic_lms_id] &&
-                              selectedLearningElements[topic.topic_lms_id].length > 0
-                          )
-                        }
-                        sx={{ mr: -2 }}
-                        onClick={() => setActiveStep(activeStep + 1)}>
-                        {t('appGlobal.next')}
-                      </Button>
-                    </Grid>
-                  </Box>
-                </CreateLearningElementTable>
-              </Grid>
-            ) : activeStep === 2 ? (
-              <Grid container item>
-                <CreateLearningElementClassificationTable
-                  selectedTopics={selectedTopics}
-                  LearningElements={selectedLearningElements}
-                  LearningElementsClassification={selectedLearningElementsClassification}
-                  onLearningElementChange={handleLearningElementClassification}>
-                  <Box sx={{ padding: '1rem', width: '95%' }}>
-                    <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
-                      <Button
-                        id="create-topic-modal-available-learning-element-classification-back-button"
-                        variant="contained"
-                        color="primary"
-                        sx={{ ml: 1 }}
-                        onClick={() => setActiveStep(activeStep - 1)}>
-                        {t('appGlobal.back')}
-                      </Button>
-                      <Button
-                        id="create-topic-modal-available-learning-element-classification-next-button"
-                        variant="contained"
-                        color="primary"
-                        disabled={
-                          //Every learning element has to have a classification set
-                          !selectedTopics.every(
-                            (topic) =>
-                              selectedLearningElementsClassification[topic.topic_lms_id] &&
-                              selectedLearningElementsClassification[topic.topic_lms_id].every(
-                                (element) => element.classification !== 'noKey'
-                              )
-                          )
-                        }
-                        sx={{ mr: -2 }}
-                        onClick={() => setActiveStep(activeStep + 1)}>
-                        {t('appGlobal.next')}
-                      </Button>
-                    </Grid>
-                  </Box>
-                </CreateLearningElementClassificationTable>
-              </Grid>
-            ) : activeStep === 3 ? (
-              <Grid container item>
-                <CreateAlgorithmTable
-                  selectedTopics={selectedTopics}
-                  selectedLearningElementClassification={selectedLearningElementsClassification}
-                  onAlgorithmChange={handleAlgorithmChange}
-                  selectedAlgorithms={selectedAlgorithms}>
-                  <Box sx={{ padding: '1rem', width: '95%' }}>
-                    <Grid container item justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
-                      <Button
-                        id="create-topic-modal-available-topic-algorithms-back-button"
-                        variant="contained"
-                        color="primary"
-                        sx={{ ml: 1 }}
-                        onClick={() => setActiveStep(activeStep - 1)}>
-                        {t('appGlobal.back')}
-                      </Button>
-                      <Button
-                        id="create-topic-modal-create-topics-button"
-                        variant="contained"
-                        color="primary"
-                        disabled={
-                          //Every Topic has to have an algorithm set
-                          !selectedTopics.every(
-                            (topic) =>
-                              selectedAlgorithms[topic.topic_lms_id] &&
-                              selectedAlgorithms[topic.topic_lms_id].every(
-                                (element) => element.algorithmShortName !== 'noKey'
-                              )
-                          ) ||
-                          createTopicIsSending ||
-                          successTopicCreated
-                        }
-                        sx={{ mr: -2 }}
-                        onClick={async () => {
-                          setCreateTopicIsSending(true)
-
-                          // Ensure each handleCreate call finishes before the next one starts
-                          for (const [topicId] of Object.entries(selectedAlgorithms)) {
-                            await handleCreate(
-                              selectedAlgorithms[parseInt(topicId)][0].topicName,
-                              parseInt(topicId),
-                              selectedLearningElementsClassification,
-                              selectedAlgorithms[parseInt(topicId)][0].algorithmShortName,
-                              courseId
-                            )
-                          }
-                        }}>
-                        {createTopicIsSending ? (
-                          <CircularProgress size={24} />
-                        ) : (
-                          t('components.CreateTopicModal.createTopics')
-                        )}
-                      </Button>
-                    </Grid>
-                  </Box>
-                </CreateAlgorithmTable>
-              </Grid>
-            ) : null}
+            {activeStep === 0 && (
+              <CreateRemoteTopicsStep
+                remoteTopics={remoteTopics}
+                selectedTopics={selectedTopics}
+                alreadyCreatedTopics={alreadyCreatedTopics}
+                handleTopicChange={handleTopicChange}
+                onNext={handleNext}
+              />
+            )}
+            {activeStep === 1 && (
+              <CreateLearningElementsStep
+                selectedTopics={selectedTopics}
+                selectedLearningElements={selectedLearningElements}
+                handleLearningElementChange={handleLearningElementChange}
+                onNext={handleNext}
+                onBack={handleBack}
+              />
+            )}
+            {activeStep === 2 && (
+              <CreateLearningElementClassificationsStep
+                selectedTopics={selectedTopics}
+                selectedLearningElements={selectedLearningElements}
+                selectedLearningElementsClassification={selectedLearningElementsClassification}
+                handleLearningElementClassification={handleLearningElementClassification}
+                onNext={handleNext}
+                onBack={handleBack}
+              />
+            )}
+            {activeStep === 3 && (
+              <CreateAlgorithmsStep
+                selectedTopics={selectedTopics}
+                selectedLearningElementsClassification={selectedLearningElementsClassification}
+                selectedAlgorithms={selectedAlgorithms}
+                handleAlgorithmChange={handleAlgorithmChange}
+                createTopicIsSending={createTopicIsSending}
+                successTopicCreated={successTopicCreated}
+                onBack={handleBack}
+                onSubmit={handleSubmit}
+              />
+            )}
           </Box>
         </Grid>
       </Modal>
