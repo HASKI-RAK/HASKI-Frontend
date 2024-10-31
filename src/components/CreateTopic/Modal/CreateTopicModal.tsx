@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
-import { CreateAlgorithmTableNameProps } from '@components'
+import { CreateAlgorithmTableNameProps, HandleError } from '@components'
 import { LearningPathTopic, RemoteLearningElement, RemoteTopic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -46,7 +46,7 @@ const CreateTopicModal = memo(
     const [selectedLearningElementsClassification, setSelectedLearningElementsClassification] = useState<{
       [key: number]: RemoteLearningElementWithClassification[]
     }>({})
-    const [selectedAlgorithms, setSelectedAlgorithms] = useState<{ [key: number]: CreateAlgorithmTableNameProps[] }>({})
+    const [selectedAlgorithms, setSelectedAlgorithms] = useState<{ [key: number]: CreateAlgorithmTableNameProps }>({})
     const [activeStep, setActiveStep] = useState<number>(0)
     const {
       handleCreate,
@@ -86,10 +86,10 @@ const CreateTopicModal = memo(
       setCreateTopicIsSending(true)
       for (const [topicId] of Object.entries(selectedAlgorithms)) {
         await handleCreate(
-          selectedAlgorithms[parseInt(topicId)][0].topicName,
+          selectedAlgorithms[parseInt(topicId)].topicName,
           parseInt(topicId),
           selectedLearningElementsClassification,
-          selectedAlgorithms[parseInt(topicId)][0].algorithmShortName,
+          selectedAlgorithms[parseInt(topicId)].algorithmShortName,
           courseId
         )
       }
@@ -108,21 +108,11 @@ const CreateTopicModal = memo(
                   )
                 })
                 .catch((error) => {
-                  addSnackbar({
-                    message: t('error.getRemoteTopics'),
-                    severity: 'error',
-                    autoHideDuration: 5000
-                  })
-                  log.error(t('error.getRemoteTopics') + ' ' + error)
+                  HandleError(t, addSnackbar, 'error.getRemoteTopics', error)
                 })
             })
             .catch((error) => {
-              addSnackbar({
-                message: t('error.getTopics'),
-                severity: 'error',
-                autoHideDuration: 5000
-              })
-              log.error(t('error.getTopics') + ' ' + error)
+              HandleError(t, addSnackbar, 'error.getTopics', error)
             })
         })
         .catch((error) => {
@@ -132,6 +122,7 @@ const CreateTopicModal = memo(
             autoHideDuration: 5000
           })
           log.error(t('error.getUser') + ' ' + error)
+          HandleError(t, addSnackbar, 'error.getUser', error)
         })
     }, [activeStep])
 

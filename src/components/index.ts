@@ -26,6 +26,7 @@ export {
 } from './Snackbar/SnackbarMessage/SnackbarMessage'
 export { default as SnackbarContainer } from './Snackbar/SnackbarContainer/SnackbarContainer'
 export { default as SnackbarTransition } from './Snackbar/SnackbarTransition/SnackbarTransition'
+export { default as HandleError } from './Snackbar/HandleError'
 export { default as IFrameModal } from './IFrameModal/IFrameModal'
 export { default as SkeletonList } from './SkeletonList/SkeletonList'
 export { default as PrivacyModal } from './PrivacyModal/PrivacyModal'

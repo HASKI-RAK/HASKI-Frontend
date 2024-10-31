@@ -1,5 +1,4 @@
-import log from 'loglevel'
-import React, { useContext, useMemo } from 'react'
+import React, { useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CreateAlgorithmTableNameProps } from '@components'
 import { RemoteLearningElement, RemoteTopic, User } from '@core'
@@ -17,49 +16,42 @@ type useCreateTopicModalProps = {
   setCreateTopicIsSending: React.Dispatch<React.SetStateAction<boolean>>
   setSuccessTopicCreated: React.Dispatch<React.SetStateAction<boolean>>
   setSelectedTopics: React.Dispatch<React.SetStateAction<RemoteTopic[]>>
-  selectedLearningElements: { [p: number]: RemoteLearningElement[] }
   setSelectedLearningElements: React.Dispatch<React.SetStateAction<{ [p: number]: RemoteLearningElement[] }>>
-  selectedLearningElementsClassification: { [p: number]: RemoteLearningElementWithClassification[] }
   setSelectedLearningElementsClassification: React.Dispatch<
     React.SetStateAction<{ [p: number]: RemoteLearningElementWithClassification[] }>
   >
-  selectedAlgorithms: { [p: number]: CreateAlgorithmTableNameProps[] }
-  setSelectedAlgorithms: React.Dispatch<React.SetStateAction<{ [p: number]: CreateAlgorithmTableNameProps[] }>>
+  setSelectedAlgorithms: React.Dispatch<React.SetStateAction<{ [p: number]: CreateAlgorithmTableNameProps }>>
 }
 
 export const useCreateTopicModal = ({
   setCreateTopicIsSending,
   setSuccessTopicCreated,
   setSelectedTopics,
-  selectedLearningElements,
   setSelectedLearningElements,
-  selectedLearningElementsClassification,
   setSelectedLearningElementsClassification,
-  selectedAlgorithms,
   setSelectedAlgorithms
 }: useCreateTopicModalProps) => {
-  //Hooks
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
-
-  //States
   const getUser = usePersistedStore((state) => state.getUser)
 
+  // Helper function for creating a topic
   const handleCreateTopics = (topicName: string, lmsCourseId: number, courseId: string, user: User) => {
-    const date = new Date()
-    const outputJson: string = JSON.stringify({
+    const date = new Date().toISOString().split('.')[0] + 'Z'
+    const outputJson = JSON.stringify({
       name: topicName,
       lms_id: lmsCourseId,
       is_topic: true,
       contains_le: true,
       created_by: user.name,
-      created_at: date.toISOString().split('.')[0] + 'Z',
-      updated_at: date.toISOString().split('.')[0] + 'Z',
+      created_at: date,
+      updated_at: date,
       university: user.university
     })
     return postTopic({ courseId, outputJson })
   }
 
+  // Helper function for creating learning elements
   const handleCreateLearningElements = (
     learningElementName: string,
     learningElementActivityType: string,
@@ -68,24 +60,22 @@ export const useCreateTopicModal = ({
     topicId: number,
     user: User
   ) => {
-    const date = new Date()
-    const outputJson: string = JSON.stringify({
+    const date = new Date().toISOString().split('.')[0] + 'Z'
+    const outputJson = JSON.stringify({
       lms_id: lmsLearningElementId,
       activity_type: learningElementActivityType,
       classification: learningElementClassification,
       name: learningElementName,
       created_by: user.name,
-      created_at: date.toISOString().split('.')[0] + 'Z',
-      updated_at: date.toISOString().split('.')[0] + 'Z',
+      created_at: date,
+      updated_at: date,
       university: user.university
     })
     return postLearningElement({ topicId, outputJson })
   }
 
   const handleCreateAlgorithms = (userId: number, lmsUserId: number, topicId: number, algorithmShortname: string) => {
-    const outputJson: string = JSON.stringify({
-      algorithm_short_name: algorithmShortname
-    })
+    const outputJson = JSON.stringify({ algorithm_short_name: algorithmShortname })
     return postLearningPathAlgorithm({ userId, lmsUserId, topicId, outputJson })
   }
 
@@ -96,146 +86,121 @@ export const useCreateTopicModal = ({
     courseId: string,
     topicId: number
   ) => {
-    const outputJson: string = JSON.stringify({
-      university: university,
-      role: userRole
-    })
-
+    const outputJson = JSON.stringify({ university, role: userRole })
     return postCalculateLearningPathForAllStudents({ userId, courseId, topicId, outputJson })
   }
 
-  const handleCreate = (
-    topicName: string,
-    lmsCourseId: number,
-    selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] },
-    algorithmShortName: string,
-    courseId?: string
-  ): Promise<void> => {
-    if (courseId == undefined) return Promise.resolve()
-    return getUser()
-      .then((user) => {
-        return handleCreateTopics(topicName, lmsCourseId, courseId, user).then((topic) => {
-          const topicLmsId = topic.lms_id
-          const topicId = topic.id
-          setCreateTopicIsSending(true)
-          return Promise.all(
-            selectedLearningElementsClassification[topicLmsId].map((element) =>
-              handleCreateLearningElements(
-                element.lms_learning_element_name,
-                element.lms_activity_type,
-                element.classification,
-                element.lms_id,
-                topic.id,
-                user
-              ).catch((error) => {
-                addSnackbar({
-                  message: t('error.postLearningElement') + ' ' + element.lms_learning_element_name,
-                  severity: 'error',
-                  autoHideDuration: 5000
-                })
-                log.error(t('error.postLearningElement') + '' + error + '' + element.lms_learning_element_name)
-                throw error
-              })
+  const handleCreate = useCallback(
+    async (
+      topicName: string,
+      lmsCourseId: number,
+      selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] },
+      algorithmShortName: string,
+      courseId?: string
+    ) => {
+      if (!courseId) return
+      try {
+        const user = await getUser()
+        const topic = await handleCreateTopics(topicName, lmsCourseId, courseId, user)
+        const topicLmsId = topic.lms_id
+        const topicId = topic.id
+        setCreateTopicIsSending(true)
+
+        await Promise.all(
+          selectedLearningElementsClassification[topicLmsId].map(async (element) => {
+            await handleCreateLearningElements(
+              element.lms_learning_element_name,
+              element.lms_activity_type,
+              element.classification,
+              element.lms_id,
+              topicId,
+              user
             )
-          )
-            .then(() => {
-              return handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topic.id, algorithmShortName)
-                .then(() => {
-                  handleCalculateLearningPaths(
-                    user.settings.user_id,
-                    user.role,
-                    user.university,
-                    courseId,
-                    topicId
-                  ).then((response) => {
-                    if (response) {
-                      addSnackbar({
-                        message: t('appGlobal.dataSendSuccessful'),
-                        severity: 'success',
-                        autoHideDuration: 5000
-                      })
-                      log.info(t('appGlobal.dataSendSuccessful'))
-                      setCreateTopicIsSending(false)
-                      setSuccessTopicCreated(true)
-                    } else {
-                      addSnackbar({
-                        message: t('error.postCalculateLearningPathForAllStudents'),
-                        severity: 'error',
-                        autoHideDuration: 5000
-                      })
-                      log.error(t('error.postCalculateLearningPathForAllStudents'))
-                      setSuccessTopicCreated(false)
-                      setCreateTopicIsSending(false)
-                    }
-                  })
-                })
-                .catch((error) => {
-                  addSnackbar({
-                    message: t('error.postLearningPathAlgorithm'),
-                    severity: 'error',
-                    autoHideDuration: 5000
-                  })
-                  log.error(t('error.postLearningPathAlgorithm') + '' + error)
-                })
-            })
-            .catch((error) => {
-              addSnackbar({
-                message: t('error.postTopic'),
-                severity: 'error',
-                autoHideDuration: 5000
-              })
-              log.error(t('error.postTopic') + '' + error)
-            })
-        })
-      })
-      .catch((error) => {
+          })
+        )
+
+        await handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topicId, algorithmShortName)
+        const response = await handleCalculateLearningPaths(
+          user.settings.user_id,
+          user.role,
+          user.university,
+          courseId,
+          topicId
+        )
+
+        if (response) {
+          addSnackbar({
+            message: t('appGlobal.dataSendSuccessful'),
+            severity: 'success',
+            autoHideDuration: 5000
+          })
+          setSuccessTopicCreated(true)
+        } else {
+          throw new Error(t('error.postCalculateLearningPathForAllStudents'))
+        }
+      } catch (error) {
         addSnackbar({
-          message: t('error.getUser'),
+          message: error instanceof Error ? error.message : t('error.genericError'),
           severity: 'error',
-          autoHideDuration: 3000
+          autoHideDuration: 5000
         })
-        log.error(t('error.getUser') + '' + error)
-      })
-  }
+        setSuccessTopicCreated(false)
+      } finally {
+        setCreateTopicIsSending(false)
+      }
+    },
+    [
+      getUser,
+      handleCreateTopics,
+      handleCreateLearningElements,
+      handleCreateAlgorithms,
+      handleCalculateLearningPaths,
+      addSnackbar,
+      t,
+      setCreateTopicIsSending,
+      setSuccessTopicCreated
+    ]
+  )
 
-  const handleTopicChange = (topics: RemoteTopic[]) => {
-    const sortedTopics = [...topics].sort((a, b) => a.topic_lms_id - b.topic_lms_id)
-    setSelectedTopics(sortedTopics)
+  const handleTopicChange = useCallback(
+    (topics: RemoteTopic[]) => {
+      const sortedTopics = topics.slice().sort((a, b) => a.topic_lms_id - b.topic_lms_id)
+      setSelectedTopics(sortedTopics)
 
-    const topicIds = sortedTopics.map((topic) => topic.topic_lms_id)
+      const topicIds = sortedTopics.map((topic) => topic.topic_lms_id)
+      setSelectedLearningElements((elements) =>
+        Object.fromEntries(Object.entries(elements).filter(([key]) => topicIds.includes(Number(key))))
+      )
+      setSelectedLearningElementsClassification((classifications) =>
+        Object.fromEntries(Object.entries(classifications).filter(([key]) => topicIds.includes(Number(key))))
+      )
+      setSelectedAlgorithms((algorithms) =>
+        Object.fromEntries(Object.entries(algorithms).filter(([key]) => topicIds.includes(Number(key))))
+      )
+    },
+    [setSelectedTopics, setSelectedLearningElements, setSelectedLearningElementsClassification, setSelectedAlgorithms]
+  )
 
-    // Filter selectedLearningElements to only include keys that are in topicIds
-    const filteredLearningElements = Object.fromEntries(
-      Object.entries(selectedLearningElements).filter(([topicId]) => topicIds.includes(parseInt(topicId)))
-    )
-    setSelectedLearningElements(filteredLearningElements)
+  const handleLearningElementChange = useCallback(
+    (learningElements: { [key: number]: RemoteLearningElement[] }) => {
+      setSelectedLearningElements(learningElements)
+    },
+    [setSelectedLearningElements]
+  )
 
-    // Filter selectedLearningElementClassifications to only include keys that are in topicIds
-    const filteredLearningElementClassifications = Object.fromEntries(
-      Object.entries(selectedLearningElementsClassification).filter(([topicId]) => topicIds.includes(parseInt(topicId)))
-    )
-    setSelectedLearningElementsClassification(filteredLearningElementClassifications)
+  const handleLearningElementClassification = useCallback(
+    (learningElementClassifications: { [key: number]: RemoteLearningElementWithClassification[] }) => {
+      setSelectedLearningElementsClassification(learningElementClassifications)
+    },
+    [setSelectedLearningElementsClassification]
+  )
 
-    // Filter selectedAlgorithms to only include keys that are in topicIds
-    const filteredAlgorithms = Object.fromEntries(
-      Object.entries(selectedAlgorithms).filter(([topicId]) => topicIds.includes(parseInt(topicId)))
-    )
-    setSelectedAlgorithms(filteredAlgorithms)
-  }
-
-  const handleLearningElementChange = (learningElements: { [key: number]: RemoteLearningElement[] }) => {
-    setSelectedLearningElements(learningElements)
-  }
-
-  const handleLearningElementClassification = (learningElementClassifications: {
-    [key: number]: RemoteLearningElementWithClassification[]
-  }) => {
-    setSelectedLearningElementsClassification(learningElementClassifications)
-  }
-
-  const handleAlgorithmChange = (algorithms: { [key: number]: CreateAlgorithmTableNameProps[] }) => {
-    setSelectedAlgorithms(algorithms)
-  }
+  const handleAlgorithmChange = useCallback(
+    (algorithms: { [key: number]: CreateAlgorithmTableNameProps }) => {
+      setSelectedAlgorithms(algorithms)
+    },
+    [setSelectedAlgorithms]
+  )
 
   return useMemo(
     () => ({

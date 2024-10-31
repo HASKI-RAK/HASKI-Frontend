@@ -12,7 +12,7 @@ const useRoleProvider = (): RoleContextType => {
       setIsStudentState(user.role === 'student')
       setIsCourseCreatorState(user.role === 'course creator')
     })
-  }, [getUser, setIsStudentState, setIsCourseCreatorState])
+  }, [getUser])
 
   return {
     isStudentRole: isStudentState,

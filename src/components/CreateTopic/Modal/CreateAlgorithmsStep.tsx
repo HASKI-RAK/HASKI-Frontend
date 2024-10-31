@@ -9,8 +9,8 @@ import { RemoteLearningElementWithClassification } from './CreateTopicModal'
 type CreateAlgorithmsStepProps = {
   selectedTopics: RemoteTopic[]
   selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
-  selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps[] }
-  handleAlgorithmChange: (algorithms: { [key: number]: CreateAlgorithmTableNameProps[] }) => void
+  selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps }
+  handleAlgorithmChange: (algorithms: { [key: number]: CreateAlgorithmTableNameProps }) => void
   createTopicIsSending: boolean
   successTopicCreated: boolean
   onBack: () => void
@@ -29,6 +29,14 @@ const CreateAlgorithmsStep: React.FC<CreateAlgorithmsStepProps> = ({
 }) => {
   const { t } = useTranslation()
 
+  const isSubmitDisabled =
+    !selectedTopics.every(
+      (topic) =>
+        selectedAlgorithms[topic.topic_lms_id] && selectedAlgorithms[topic.topic_lms_id].algorithmShortName !== 'noKey'
+    ) ||
+    createTopicIsSending ||
+    successTopicCreated
+
   return (
     <Grid container item>
       <CreateAlgorithmTable
@@ -41,18 +49,7 @@ const CreateAlgorithmsStep: React.FC<CreateAlgorithmsStepProps> = ({
             <Button variant="contained" color="primary" onClick={onBack} sx={{ ml: 1 }}>
               {t('appGlobal.back')}
             </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              disabled={
-                !selectedTopics.every((topic) =>
-                  selectedAlgorithms[topic.topic_lms_id]?.every((el) => el.algorithmShortName !== 'noKey')
-                ) ||
-                createTopicIsSending ||
-                successTopicCreated
-              }
-              onClick={onSubmit}
-              sx={{ mr: -2 }}>
+            <Button variant="contained" color="primary" disabled={isSubmitDisabled} onClick={onSubmit} sx={{ mr: -2 }}>
               {createTopicIsSending ? <CircularProgress size={24} /> : t('components.CreateTopicModal.createTopics')}
             </Button>
           </Grid>

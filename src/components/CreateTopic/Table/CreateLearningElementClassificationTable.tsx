@@ -1,4 +1,5 @@
-import { ReactNode, memo, useEffect, useMemo } from 'react'
+import { SelectChangeEvent } from '@mui/material'
+import { ReactNode, memo, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -46,8 +47,8 @@ const CreateLearningElementClassificationTable = memo(
     const learningElementClassifications = useMemo(() => {
       return t('components.CreateLearningElementClassificationTable.classifications', {
         returnObjects: true
-      }) as [{ name: string; key: string; disabled: boolean }]
-    }, [])
+      }) as { name: string; key: string; disabled: boolean }[]
+    }, [t])
 
     useEffect(() => {
       const updatedClassifications = Object.keys(LearningElements).reduce((accumulator, topicId) => {
@@ -70,6 +71,13 @@ const CreateLearningElementClassificationTable = memo(
 
       onLearningElementChange(updatedClassifications)
     }, [LearningElements])
+
+    const handleSelectChange = useCallback(
+      (lmsTopic: RemoteTopic, element: LearningElementWithClassification) => (event: SelectChangeEvent) => {
+        handleClassificationChange(lmsTopic.topic_lms_id, element.lms_id, event.target.value as string)
+      },
+      [handleClassificationChange]
+    )
 
     //Return early
     if (Object.keys(LearningElementsClassification).length === 0) {
@@ -113,15 +121,7 @@ const CreateLearningElementClassificationTable = memo(
                   </Grid>
                   <Grid item container xs={6} justifyContent="flex-end">
                     <FormControl sx={{ m: 1, width: '21rem' }} size="small">
-                      <Select
-                        value={element.classification}
-                        onChange={(event) =>
-                          handleClassificationChange(
-                            lmsTopic.topic_lms_id,
-                            element.lms_id,
-                            event.target.value as string
-                          )
-                        }>
+                      <Select value={element.classification} onChange={handleSelectChange(lmsTopic, element)}>
                         {learningElementClassifications.map((classification) => (
                           <MenuItem
                             key={classification.key}
