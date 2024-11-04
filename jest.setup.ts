@@ -234,7 +234,8 @@ const mockDataServices: MockDataServices = {
           university: 'test',
           created_at: 'test',
           created_by: 'test',
-          last_updated: 'test'
+          last_updated: 'test',
+          start_date: 'Thu, 31 Oct 2024 15:05:57 GMT'
         },
         {
           id: 2,
@@ -243,7 +244,8 @@ const mockDataServices: MockDataServices = {
           university: 'test',
           created_at: 'test',
           created_by: 'test',
-          last_updated: 'test'
+          last_updated: 'test',
+          start_date: 'Thu, 31 Oct 3024 15:05:57 GMT'
         }
       ]
     })

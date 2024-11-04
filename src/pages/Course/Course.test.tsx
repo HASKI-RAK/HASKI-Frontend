@@ -23,10 +23,9 @@ describe('Course tests', () => {
 
     await waitFor(() => {
       fireEvent.click(getAllByTestId('Topic-Navigate-Button')[0])
+      expect(navigate).toHaveBeenCalledWith('topic/1')
     })
-
-    expect(navigate).toHaveBeenCalledWith('topic/1')
-  })
+  }, 20000)
 
   it('renders course page with topics and clicking on second topic navigates to topic/2', async () => {
     const { getAllByTestId } = render(

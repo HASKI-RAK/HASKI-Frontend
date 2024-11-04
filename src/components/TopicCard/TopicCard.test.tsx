@@ -13,14 +13,11 @@ describe('TopicCard tests', () => {
   })
 
   it('renders without input', async () => {
-    let topicCard
-    await act(async () => {
-      topicCard = render(
-        <MemoryRouter>
-          <TopicCard />
-        </MemoryRouter>
-      )
-    })
+    const topicCard = render(
+      <MemoryRouter>
+        <TopicCard />
+      </MemoryRouter>
+    )
 
     expect(topicCard).toBeTruthy()
   })

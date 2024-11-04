@@ -65,7 +65,7 @@ describe('AlgorithmSettingsModal', () => {
     expect(handleClose).toHaveBeenCalledTimes(1)
   })
 
-  test('if the save button works', () => {
+  test('if the save button works', async () => {
     console.log = jest.fn()
     const handleClose = jest.fn()
     const open = true
@@ -76,8 +76,9 @@ describe('AlgorithmSettingsModal', () => {
     )
 
     fireEvent.click(getByTestId('algorithm-save-button'))
-
-    expect(handleClose).toHaveBeenCalledTimes(1)
+    await waitFor(() => {
+      expect(handleClose).toHaveBeenCalledTimes(1)
+    })
   })
 
   it('should post the selected algorithm for students', async () => {

@@ -18,7 +18,8 @@ describe('CoursesSlice', () => {
           last_updated: 'test',
           lms_id: 1,
           name: 'test',
-          university: 'test'
+          university: 'test',
+          start_date: 'Thu, 31 Oct 2024 15:05:57 GMT'
         },
         {
           created_at: 'test',
@@ -27,7 +28,8 @@ describe('CoursesSlice', () => {
           last_updated: 'test',
           lms_id: 2,
           name: 'test',
-          university: 'test'
+          university: 'test',
+          start_date: 'Thu, 31 Oct 3024 15:05:57 GMT'
         }
       ]
     }

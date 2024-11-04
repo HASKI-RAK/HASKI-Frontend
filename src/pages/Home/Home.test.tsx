@@ -51,19 +51,18 @@ describe('Test the Home page', () => {
   })
 
   test('click on course navigates to course page', async () => {
+    const { getAllByText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
     await waitFor(() => {
-      const { getAllByText } = render(
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Home />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      )
-
       act(() => {
         const course = getAllByText('pages.home.courseButton')
-        fireEvent.click(course[1])
-        expect(navigate).toHaveBeenCalledWith('/course/2')
+        fireEvent.click(course[0])
+        expect(navigate).toHaveBeenCalledWith('/course/1')
       })
     })
   })

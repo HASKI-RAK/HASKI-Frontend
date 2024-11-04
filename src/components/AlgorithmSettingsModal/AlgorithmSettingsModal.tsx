@@ -148,7 +148,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
               {t('components.AlgorithmSettingsModal.headerRight')}
             </Typography>
             <Typography id="modal-description" variant="body1" component="p" align="center">
-              {options[selected].description}
+              {options[selected]?.description}
             </Typography>
           </Grid>
         </Grid>
