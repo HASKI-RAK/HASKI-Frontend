@@ -68,4 +68,26 @@ describe('CoursesSlice', () => {
 
     expect(cached).toEqual(courses)
   })
+
+  it('should trigger a reload even if cache is available', async () => {
+    const { getCourses } = useStore.getState()
+    const courses = [{ id: 1, name: 'Math', description: 'Learn math' }]
+    mockServices.fetchCourses = jest.fn().mockResolvedValueOnce(courses)
+
+    const userId = 1
+    const lmsUserId = 2
+    const studentId = 3
+
+    await getCourses(userId, lmsUserId, studentId)
+
+    expect(useStore.getState()._cache_Courses_record[`${userId}-${lmsUserId}-${studentId}`]).toEqual(courses)
+    const cached = await getCourses(1, 2, 3)
+    expect(mockServices.fetchCourses).toHaveBeenCalledTimes(1)
+    expect(cached).toEqual(courses)
+
+    const { triggerCoursesReload } = useStore.getState()
+    triggerCoursesReload(true)
+    await getCourses(1, 2, 3)
+    expect(mockServices.fetchCourses).toHaveBeenCalledTimes(2)
+  })
 })
