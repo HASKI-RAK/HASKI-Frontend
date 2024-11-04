@@ -58,11 +58,8 @@ const CreateTopicModal = memo(
       setCreateTopicIsSending,
       setSuccessTopicCreated,
       setSelectedTopics,
-      selectedLearningElements,
       setSelectedLearningElements,
-      selectedLearningElementsClassification,
       setSelectedLearningElementsClassification,
-      selectedAlgorithms,
       setSelectedAlgorithms
     })
 
