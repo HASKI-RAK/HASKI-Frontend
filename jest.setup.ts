@@ -552,6 +552,64 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
+  ),
+  fetchRemoteTopics: jest.fn(() =>
+    Promise.resolve([
+      {
+        lms_learning_elements: [
+          {
+            lms_activity_type: 'forum',
+            lms_id: 1,
+            lms_learning_element_name: 'Announcements'
+          },
+          {
+            lms_activity_type: 'resource',
+            lms_id: 38,
+            lms_learning_element_name: 'superKnowledge.pdf'
+          },
+          {
+            lms_activity_type: 'h5pactivity',
+            lms_id: 39,
+            lms_learning_element_name: 'Strategie Übung - Leicht'
+          }
+        ],
+        topic_lms_id: 1,
+        topic_lms_name: 'General'
+      },
+      {
+        lms_learning_elements: [
+          {
+            lms_activity_type: 'h5pactivity',
+            lms_id: 4,
+            lms_learning_element_name: 'DefinitionDeklaration und AufrufeinerFunktion'
+          }
+        ],
+        topic_lms_id: 2,
+        topic_lms_name: 'Bekannte Entwurfsmuster'
+      }
+    ])
+  ),
+  fetchRemoteCourses: jest.fn(() =>
+    Promise.resolve([
+      {
+        enddate: 1702166400,
+        fullname: 'Kurs-1',
+        id: 2,
+        shortname: 'kurs',
+        startdate: 1670630400,
+        timecreated: 1670578503,
+        timemodified: 1670578503
+      },
+      {
+        enddate: 1718406000,
+        fullname: 'Kurs-2',
+        id: 3,
+        shortname: 'ku2',
+        startdate: 1686870000,
+        timecreated: 1686830366,
+        timemodified: 1692021711
+      }
+    ])
   )
 }
 /**

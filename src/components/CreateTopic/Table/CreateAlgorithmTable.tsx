@@ -2,7 +2,7 @@ import { ChangeEvent, ReactNode, memo, useCallback, useEffect, useMemo } from 'r
 import { useTranslation } from 'react-i18next'
 import { Box, FormGroup, Grid, InputLabel, MenuItem, Paper, Select, Typography } from '@common/components'
 import { LearningElementWithClassification, SkeletonList } from '@components'
-import { RemoteTopic } from '@core'
+import { RemoteTopics } from '@core'
 import { useCreateAlgorithmTable } from './CreateAlgorithmTable.hooks'
 
 export type CreateAlgorithmTableNameProps = {
@@ -11,7 +11,7 @@ export type CreateAlgorithmTableNameProps = {
 }
 
 type CreateAlgorithmTableProps = {
-  selectedTopics: RemoteTopic[]
+  selectedTopics: RemoteTopics[]
   selectedLearningElementClassification: { [key: number]: LearningElementWithClassification[] }
   onAlgorithmChange: (selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps }) => void
   selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps }
@@ -59,76 +59,73 @@ const CreateAlgorithmTable = memo(
     }
 
     // Callback for rendering the algorithm card
-    const algorithmCard = useCallback(
-      (lmsTopic: RemoteTopic) => {
-        const getAlgorithmByKey = (key: string) => topicAlgorithmOptions.find((option) => option.key === key)
+    const algorithmCard = (lmsTopic: RemoteTopics) => {
+      const getAlgorithmByKey = (key: string) => topicAlgorithmOptions.find((option) => option.key === key)
 
-        // If no algorithm has been chosen yet, the default [0] algorithm is set
-        const currentAlgorithm = getAlgorithmByKey(
-          selectedAlgorithms[lmsTopic.topic_lms_id]?.algorithmShortName || topicAlgorithmOptions[0].key
-        )
+      // If no algorithm has been chosen yet, the default [0] algorithm is set
+      const currentAlgorithm = getAlgorithmByKey(
+        selectedAlgorithms[lmsTopic.topic_lms_id]?.algorithmShortName || topicAlgorithmOptions[0].key
+      )
 
-        const handleSelectChange = useCallback(
-          (event: (Event & { target: { value: string; name: string } }) | ChangeEvent<HTMLInputElement>) => {
-            handleAlgorithmChange(lmsTopic.topic_lms_id, lmsTopic.topic_lms_name, event.target.value as string)
-          },
-          [lmsTopic.topic_lms_id, lmsTopic.topic_lms_name, handleAlgorithmChange]
-        )
+      const useHandleSelectChange = useCallback(
+        (event: (Event & { target: { value: string; name: string } }) | ChangeEvent<HTMLInputElement>) => {
+          handleAlgorithmChange(lmsTopic.topic_lms_id, lmsTopic.topic_lms_name, event.target.value as string)
+        },
+        [lmsTopic.topic_lms_id, lmsTopic.topic_lms_name, handleAlgorithmChange]
+      )
 
-        const hasLearningElementClassification = lmsTopic.topic_lms_id in selectedLearningElementClassification
+      const hasLearningElementClassification = lmsTopic.topic_lms_id in selectedLearningElementClassification
 
-        return (
-          <Grid item container alignItems="center" direction="column" key={lmsTopic.topic_lms_id}>
-            <Paper sx={{ padding: '1rem', width: '95%' }}>
-              <Grid container alignItems="flex-start">
-                <Grid item xs={4}>
-                  <Grid container direction="column">
-                    <Box bgcolor={(theme) => theme.palette.info.light} borderRadius={3}>
-                      <Grid container justifyContent="center">
-                        <InputLabel
-                          sx={{
-                            mb: '1rem',
-                            mt: '1rem',
-                            wordBreak: 'break-word',
-                            color: 'black'
-                          }}>
-                          {lmsTopic.topic_lms_name}
-                        </InputLabel>
-                      </Grid>
-                    </Box>
-                    <FormGroup>
-                      <Select
-                        value={currentAlgorithm?.key}
-                        disabled={!hasLearningElementClassification}
-                        onChange={handleSelectChange}
-                        inputProps={{ 'aria-label': 'Without label' }}
-                        sx={{ mt: '1rem', mb: '1rem' }}>
-                        {topicAlgorithmOptions.map((option) => (
-                          <MenuItem key={option.key} value={option.key} disabled={option.disabled}>
-                            {option.name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormGroup>
-                  </Grid>
-                </Grid>
-                <Grid item xs={8}>
-                  <InputLabel shrink sx={{ ml: '0.75rem' }}>
-                    {t('components.AlgorithmSettingsModal.headerRight')}
-                  </InputLabel>
-                  <Typography id="create-algorithm-modal-description" variant="body1" component="p" sx={{ ml: '1rem' }}>
-                    {hasLearningElementClassification
-                      ? currentAlgorithm?.description
-                      : t('components.CreateAlgorithmTable.missingClassification')}
-                  </Typography>
+      return (
+        <Grid item container alignItems="center" direction="column" key={lmsTopic.topic_lms_id}>
+          <Paper sx={{ padding: '1rem', width: '95%' }}>
+            <Grid container alignItems="flex-start">
+              <Grid item xs={4}>
+                <Grid container direction="column">
+                  <Box bgcolor={(theme) => theme.palette.info.light} borderRadius={3}>
+                    <Grid container justifyContent="center">
+                      <InputLabel
+                        sx={{
+                          mb: '1rem',
+                          mt: '1rem',
+                          wordBreak: 'break-word',
+                          color: 'black'
+                        }}>
+                        {lmsTopic.topic_lms_name}
+                      </InputLabel>
+                    </Grid>
+                  </Box>
+                  <FormGroup>
+                    <Select
+                      value={currentAlgorithm?.key}
+                      disabled={!hasLearningElementClassification}
+                      onChange={useHandleSelectChange}
+                      inputProps={{ 'aria-label': 'Without label' }}
+                      sx={{ mt: '1rem', mb: '1rem' }}>
+                      {topicAlgorithmOptions.map((option) => (
+                        <MenuItem key={option.key} value={option.key} disabled={option.disabled}>
+                          {option.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormGroup>
                 </Grid>
               </Grid>
-            </Paper>
-          </Grid>
-        )
-      },
-      [topicAlgorithmOptions, selectedAlgorithms, selectedLearningElementClassification, handleAlgorithmChange, t]
-    )
+              <Grid item xs={8}>
+                <InputLabel shrink sx={{ ml: '0.75rem' }}>
+                  {t('components.AlgorithmSettingsModal.headerRight')}
+                </InputLabel>
+                <Typography id="create-algorithm-modal-description" variant="body1" component="p" sx={{ ml: '1rem' }}>
+                  {hasLearningElementClassification
+                    ? currentAlgorithm?.description
+                    : t('components.CreateAlgorithmTable.missingClassification')}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+      )
+    }
 
     return (
       <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>

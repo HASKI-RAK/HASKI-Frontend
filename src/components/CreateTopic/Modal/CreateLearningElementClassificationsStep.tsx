@@ -2,11 +2,11 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
 import { CreateLearningElementClassificationTable } from '@components'
-import { RemoteLearningElement, RemoteTopic } from '@core'
+import { RemoteLearningElement, RemoteTopics } from '@core'
 import { RemoteLearningElementWithClassification } from './CreateTopicModal'
 
 type CreateLearningElementClassificationsStepProps = {
-  selectedTopics: RemoteTopic[]
+  selectedTopics: RemoteTopics[]
   selectedLearningElements: { [key: number]: RemoteLearningElement[] }
   selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
   handleLearningElementClassification: (classification: {

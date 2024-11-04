@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
 import { CreateAlgorithmTableNameProps, HandleError } from '@components'
-import { LearningPathTopic, RemoteLearningElement, RemoteTopic } from '@core'
+import { LearningPathTopic, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import CreateAlgorithmsStep from './CreateAlgorithmsStep'
@@ -36,10 +36,10 @@ const CreateTopicModal = memo(
     const { t } = useTranslation()
     const { courseId } = useParams<{ courseId: string }>()
     const { addSnackbar } = useContext(SnackbarContext)
-    const [remoteTopics, setRemoteTopics] = useState<RemoteTopic[]>([])
+    const [remoteTopics, setRemoteTopics] = useState<RemoteTopics[]>([])
     const [createTopicIsSending, setCreateTopicIsSending] = useState<boolean>(false)
     const [alreadyCreatedTopics, setAlreadyCreatedTopics] = useState<LearningPathTopic>()
-    const [selectedTopics, setSelectedTopics] = useState<RemoteTopic[]>([])
+    const [selectedTopics, setSelectedTopics] = useState<RemoteTopics[]>([])
     const [selectedLearningElements, setSelectedLearningElements] = useState<{
       [key: number]: RemoteLearningElement[]
     }>({})
@@ -66,7 +66,7 @@ const CreateTopicModal = memo(
     //Store
     const getUser = usePersistedStore((state) => state.getUser)
     const getTopics = useStore((state) => state.getLearningPathTopic)
-    const getRemoteTopics = useStore((state) => state.getRemoteTopic)
+    const getRemoteTopics = useStore((state) => state.getRemoteTopics)
 
     //Constants
     const createTopicModalStepperSteps = [

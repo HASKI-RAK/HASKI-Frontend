@@ -2,13 +2,13 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
 import { CreateRemoteTopicsTable, ExistingTopicsTable } from '@components'
-import { LearningPathTopic, RemoteTopic } from '@core'
+import { LearningPathTopic, RemoteTopics } from '@core'
 
 type CreateRemoteTopicsStepProps = {
-  remoteTopics: RemoteTopic[]
-  selectedTopics: RemoteTopic[]
+  remoteTopics: RemoteTopics[]
+  selectedTopics: RemoteTopics[]
   alreadyCreatedTopics: LearningPathTopic | undefined
-  handleTopicChange: (selectedTopics: RemoteTopic[]) => void
+  handleTopicChange: (selectedTopics: RemoteTopics[]) => void
   onNext: () => void
 }
 

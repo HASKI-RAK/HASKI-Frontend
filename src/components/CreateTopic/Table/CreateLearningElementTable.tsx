@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { Box, Checkbox, Fab, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
 import { CheckBox, CheckBoxOutlineBlank } from '@common/icons'
 import { SkeletonList } from '@components'
-import { RemoteLearningElement, RemoteTopic } from '@core'
+import { RemoteLearningElement, RemoteTopics } from '@core'
 import { useCreateLearningElementTable } from './CreateLearningElementTable.hooks'
 
 type CreateLearningElementTableProps = {
-  selectedTopics: RemoteTopic[]
+  selectedTopics: RemoteTopics[]
   onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
   selectedLearningElements: { [key: number]: RemoteLearningElement[] }
   children?: ReactNode

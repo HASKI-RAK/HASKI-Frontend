@@ -13,7 +13,7 @@ import {
   Typography
 } from '@common/components'
 import { SkeletonList } from '@components'
-import { RemoteLearningElement, RemoteTopic } from '@core'
+import { RemoteLearningElement, RemoteTopics } from '@core'
 import { useCreateLearningElementClassificationTable } from './CreateLearningElementClassificationTable.hooks'
 
 export type LearningElementWithClassification = RemoteLearningElement & {
@@ -21,7 +21,7 @@ export type LearningElementWithClassification = RemoteLearningElement & {
 }
 
 type CreateLearningElementClassificationTableProps = {
-  selectedTopics: RemoteTopic[]
+  selectedTopics: RemoteTopics[]
   LearningElements: { [key: number]: RemoteLearningElement[] }
   LearningElementsClassification: { [key: number]: LearningElementWithClassification[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: LearningElementWithClassification[] }) => void
@@ -63,7 +63,7 @@ const CreateLearningElementClassificationTable = memo(
         // Give elements the default classification that are in LearningElements but not yet classified
         const newClassifications = LearningElements[topicIdInt].map((element) => {
           const existingElement = filteredClassifications.find((e) => e.lms_id === element.lms_id)
-          return existingElement || { ...element, classification: 'noKey' }
+          return existingElement ?? { ...element, classification: 'noKey' }
         })
 
         return { ...accumulator, [topicIdInt]: newClassifications }
@@ -73,7 +73,7 @@ const CreateLearningElementClassificationTable = memo(
     }, [LearningElements])
 
     const handleSelectChange = useCallback(
-      (lmsTopic: RemoteTopic, element: LearningElementWithClassification) => (event: SelectChangeEvent) => {
+      (lmsTopic: RemoteTopics, element: LearningElementWithClassification) => (event: SelectChangeEvent) => {
         handleClassificationChange(lmsTopic.topic_lms_id, element.lms_id, event.target.value as string)
       },
       [handleClassificationChange]

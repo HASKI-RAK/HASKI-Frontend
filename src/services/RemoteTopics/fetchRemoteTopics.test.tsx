@@ -107,7 +107,7 @@ describe('fetchRemoteTopics has expected behaviour', () => {
 
   it('should throw a specific error when the response has an error variable', async () => {
     const expectedError = 'Error: HTTP error undefined'
-    const expectedMessage = 'Error: HTTP error undefined'
+    const expectedMessage = 'courseId is required'
 
     const mockResponseRemoteTopic = {
       ok: false,

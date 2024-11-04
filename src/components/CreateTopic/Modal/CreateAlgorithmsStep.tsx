@@ -2,12 +2,12 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, CircularProgress, Grid } from '@common/components'
 import { CreateAlgorithmTable } from '@components'
-import { RemoteTopic } from '@core'
-import { CreateAlgorithmTableNameProps } from '../Table/CreateAlgorithmTable'
+import { CreateAlgorithmTableNameProps } from '@components'
+import { RemoteTopics } from '@core'
 import { RemoteLearningElementWithClassification } from './CreateTopicModal'
 
 type CreateAlgorithmsStepProps = {
-  selectedTopics: RemoteTopic[]
+  selectedTopics: RemoteTopics[]
   selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
   selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps }
   handleAlgorithmChange: (algorithms: { [key: number]: CreateAlgorithmTableNameProps }) => void

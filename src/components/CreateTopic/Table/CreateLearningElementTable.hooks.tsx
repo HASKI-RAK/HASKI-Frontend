@@ -1,10 +1,10 @@
 import { useCallback, useMemo } from 'react'
-import { RemoteLearningElement, RemoteTopic } from '@core'
+import { RemoteLearningElement, RemoteTopics } from '@core'
 
 type useCreateTopicModalProps = {
   selectedLearningElements: { [p: number]: RemoteLearningElement[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
-  selectedTopics: RemoteTopic[]
+  selectedTopics: RemoteTopics[]
 }
 
 export const useCreateLearningElementTable = ({

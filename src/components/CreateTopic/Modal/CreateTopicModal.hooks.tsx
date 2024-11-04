@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CreateAlgorithmTableNameProps } from '@components'
-import { RemoteLearningElement, RemoteTopic, User } from '@core'
+import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {
   SnackbarContext,
   postCalculateLearningPathForAllStudents,
@@ -15,7 +15,7 @@ import { RemoteLearningElementWithClassification } from './CreateTopicModal'
 type useCreateTopicModalProps = {
   setCreateTopicIsSending: React.Dispatch<React.SetStateAction<boolean>>
   setSuccessTopicCreated: React.Dispatch<React.SetStateAction<boolean>>
-  setSelectedTopics: React.Dispatch<React.SetStateAction<RemoteTopic[]>>
+  setSelectedTopics: React.Dispatch<React.SetStateAction<RemoteTopics[]>>
   setSelectedLearningElements: React.Dispatch<React.SetStateAction<{ [p: number]: RemoteLearningElement[] }>>
   setSelectedLearningElementsClassification: React.Dispatch<
     React.SetStateAction<{ [p: number]: RemoteLearningElementWithClassification[] }>
@@ -163,7 +163,7 @@ export const useCreateTopicModal = ({
   )
 
   const handleTopicChange = useCallback(
-    (topics: RemoteTopic[]) => {
+    (topics: RemoteTopics[]) => {
       const sortedTopics = topics.slice().sort((a, b) => a.topic_lms_id - b.topic_lms_id)
       setSelectedTopics(sortedTopics)
 

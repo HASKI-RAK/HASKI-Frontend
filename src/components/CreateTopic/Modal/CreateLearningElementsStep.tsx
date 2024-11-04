@@ -2,10 +2,10 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
 import { CreateLearningElementTable } from '@components'
-import { RemoteLearningElement, RemoteTopic } from '@core'
+import { RemoteLearningElement, RemoteTopics } from '@core'
 
 type CreateLearningElementsStepProps = {
-  selectedTopics: RemoteTopic[]
+  selectedTopics: RemoteTopics[]
   selectedLearningElements: { [key: number]: RemoteLearningElement[] }
   handleLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
   onNext: () => void

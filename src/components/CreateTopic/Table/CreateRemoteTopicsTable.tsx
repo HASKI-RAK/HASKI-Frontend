@@ -1,13 +1,13 @@
 import { ReactNode, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
-import { RemoteTopic } from '@core'
+import { RemoteTopics } from '@core'
 import { useCreateRemoteTopicsTable } from './CreateRemoteTopicsTable.hooks'
 
 type CreateRemoteTopicsTableProps = {
-  onTopicChange: (selectedTopics: RemoteTopic[]) => void
-  selectedTopics: RemoteTopic[]
-  remoteTopics: RemoteTopic[]
+  onTopicChange: (selectedTopics: RemoteTopics[]) => void
+  selectedTopics: RemoteTopics[]
+  remoteTopics: RemoteTopics[]
   children?: ReactNode
 }
 
