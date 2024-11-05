@@ -5,7 +5,6 @@ export { default as ResultDescriptionILS } from './Questionnaire/QuestionnaireRe
 export { default as TableListK } from './Questionnaire/QuestionnaireResults/Table/TableListK'
 export { default as GraphListK } from './Questionnaire/QuestionnaireResults/Graph/GraphListK'
 export { default as ResultDescriptionListK } from './Questionnaire/QuestionnaireResults/Text/ResultDescriptionListK'
-export { default as QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResults/Modal/QuestionnaireResultsModal'
 export { default as QuestionnaireQuestionsModal } from './Questionnaire/QuestionnaireQuestions/Modal/QuestionnaireQuestionsModal'
 export { default as TableILSQuestions } from './Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions'
 export { default as TableListKQuestions } from './Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions'

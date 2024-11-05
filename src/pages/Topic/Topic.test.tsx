@@ -2,10 +2,12 @@ import '@testing-library/jest-dom'
 import { act, fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { ReactFlowProvider } from 'reactflow'
 import { mockReactFlow } from '@mocks'
-import { LearningPathElementStatus } from '@core'
+import { LocalNavBar } from '@components'
+import { LearningPathElementStatus, Topic as TopicType } from '@core'
+import LocalNavItem from '../../components/LocalNav/LocalNavItem/LocalNavItem'
 import Topic from './Topic'
 import { useTopic, useTopicHookParams } from './Topic.hooks'
 
@@ -15,6 +17,7 @@ const navigate = jest.fn()
 jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
 jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 jest.useFakeTimers()
+jest.spyOn(global, 'setTimeout')
 
 describe('Topic Page', () => {
   beforeEach(() => {
@@ -1566,13 +1569,6 @@ describe('Topic Page', () => {
   })
 
   test('FitView is called on topic change', async () => {
-    jest.mock('react-router-dom', () => ({
-      ...jest.requireActual('react-router-dom'),
-      useParams: jest.fn()
-    }))
-    const useParamsMock = jest.fn().mockReturnValue({ courseId: '2', topicId: '4' })
-    jest.spyOn(router, 'useParams').mockImplementation(() => useParamsMock())
-
     const topicParams: useTopicHookParams = {
       defaultUrl: 'hello',
       defaultTitle: 'test',
@@ -1587,14 +1583,35 @@ describe('Topic Page', () => {
       defaultLmsId: 1
     }
 
-    const initialEntries = ['/course', '/2', '/topic/2']
-    const historyEntries = ['/course', '/2', '/topic/3']
+    const topic: TopicType = {
+      contains_le: true,
+      created_at: '2021-09-01T12:00:00.000Z',
+      created_by: 'dimitri',
+      id: 1,
+      is_topic: true,
+      last_updated: '2021-09-01T12:00:00.000Z',
+      lms_id: 1,
+      name: 'test_topic',
+      parent_id: 1,
+      student_topic: {
+        done: false,
+        done_at: null,
+        id: 1,
+        student_id: 1,
+        topic_id: 1,
+        visits: []
+      },
+      university: 'HS-KE'
+    }
 
-    const { getByTestId, queryByTestId, rerender } = render(
+    const initialEntries = ['/course', '/2', '/topic/20']
+
+    const { getByTestId, queryByTestId, getByRole, getByText } = render(
       <ReactFlowProvider>
         <MemoryRouter initialEntries={initialEntries}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <Topic useTopic={() => useTopic(topicParams)} />
+            <LocalNavBar />
           </AuthContext.Provider>
         </MemoryRouter>
       </ReactFlowProvider>
@@ -1607,18 +1624,14 @@ describe('Topic Page', () => {
 
     await waitFor(() => {
       expect(queryByTestId('IFrameModal-Close-Button')).not.toBeInTheDocument()
+      act(() => {
+        fireEvent.click(getByText('Wirtschaftsinformatik'))
+        expect(navigate).toHaveBeenCalledWith('/course/2/topic/1')
+        act(() => {
+          // Replace runAllTimers with a more controlled approach
+          jest.advanceTimersByTime(200) // Adjust timing as needed
+        })
+      })
     })
-    jest.runAllTimers()
-
-    rerender(
-      <ReactFlowProvider>
-        <MemoryRouter initialEntries={historyEntries}>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Topic useTopic={() => useTopic(topicParams1)} />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      </ReactFlowProvider>
-    )
-    screen.debug()
   })
 })

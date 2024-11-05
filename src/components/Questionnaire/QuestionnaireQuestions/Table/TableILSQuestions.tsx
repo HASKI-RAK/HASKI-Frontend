@@ -215,8 +215,8 @@ const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmpt
   )
 
   const questionnaireType = ilsLong
-    ? t('components.QuestionnaireResultsModal.ilsLongNoData-1')
-    : t('components.QuestionnaireResultsModal.ilsShortNoData-1')
+    ? t('components.LearnerCharacteristics.ilsLongNoData-1')
+    : t('components.LearnerCharacteristics.ilsShortNoData-1')
 
   return (
     <Box>
