@@ -142,6 +142,7 @@ const CreateTopicModal = memo(
             <Fab
               color="primary"
               id={'create-topic-modal-close-button'}
+              data-testid={'create-topic-modal-close-button'}
               onClick={handleCloseCreateTopicModal}
               sx={{
                 position: 'sticky',
@@ -156,6 +157,7 @@ const CreateTopicModal = memo(
                   <StepButton
                     color="inherit"
                     id={'create-topic-modal-stepper'}
+                    data-testid={'create-topic-modal-stepper'}
                     onClick={() => {
                       setActiveStep(index)
                     }}>

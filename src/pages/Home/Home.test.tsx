@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, getAllByRole, render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { act } from 'react-dom/test-utils'
@@ -108,7 +108,7 @@ describe('Test the Home page', () => {
     })
   })
 
-  test('students do not see create Course Button', async () => {
+  test('students do not see create course button', async () => {
     const studentContext = {
       isStudentRole: true,
       isCourseCreatorRole: false

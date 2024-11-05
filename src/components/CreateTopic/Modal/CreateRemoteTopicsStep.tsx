@@ -32,6 +32,7 @@ const CreateRemoteTopicsStep: React.FC<CreateRemoteTopicsStepProps> = ({
             <Button
               variant="contained"
               color="primary"
+              data-test-id={'create-topic-modal-remote-topics-next-step'}
               disabled={selectedTopics.length === 0}
               onClick={onNext}
               sx={{ mr: -2 }}>

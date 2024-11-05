@@ -92,7 +92,8 @@ const Course = () => {
                       },
                       mt: '1.625rem'
                     }}
-                    id="course-button"
+                    id="create-topic-button"
+                    data-testid="create-topic-button"
                     variant="contained"
                     color="primary"
                     onClick={() => setCreateTopicModalOpen(true)}>
