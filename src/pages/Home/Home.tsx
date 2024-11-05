@@ -152,6 +152,7 @@ export const Home = () => {
               <Grid container justifyContent="center">
                 <Button
                   id="create-course-button"
+                  data-testid={'create-course-button'}
                   variant="contained"
                   color="primary"
                   onClick={() => setCreateCourseModalOpen(true)}

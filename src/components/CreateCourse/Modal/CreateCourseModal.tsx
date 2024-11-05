@@ -112,6 +112,7 @@ const CreateCourseModal = ({
           <Fab
             color="primary"
             id={'create-course-modal-close-button'}
+            data-testid={'create-course-modal-close-button'}
             onClick={() => handleCloseCreateCourseModal()}
             sx={{
               position: 'sticky',
@@ -129,6 +130,7 @@ const CreateCourseModal = ({
               <Grid container justifyContent="center" alignItems="center" sx={{ mt: 2 }}>
                 <Button
                   id="create-course-modal-next-step"
+                  data-testid={'create-course-modal-next-step'}
                   variant="contained"
                   color="primary"
                   onClick={() => setActiveStepCreateCourseModal(1)}
