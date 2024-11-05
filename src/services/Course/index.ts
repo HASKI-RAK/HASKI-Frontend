@@ -1,0 +1,1 @@
+export { postCourse } from './postCourse'

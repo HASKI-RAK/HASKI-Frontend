@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, act } from '@testing-library/react'
+import { act, fireEvent, render } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'

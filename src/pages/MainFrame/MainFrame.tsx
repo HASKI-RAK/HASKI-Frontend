@@ -6,9 +6,9 @@ import {
   Footer,
   LocalNavBar,
   MenuBar,
+  Newsbanner,
   OpenQuestionnaire,
-  PrivacyModal,
-  Newsbanner
+  PrivacyModal
 } from '@components'
 
 /**

@@ -234,7 +234,8 @@ const mockDataServices: MockDataServices = {
           university: 'test',
           created_at: 'test',
           created_by: 'test',
-          last_updated: 'test'
+          last_updated: 'test',
+          start_date: 'Thu, 31 Oct 2024 15:05:57 GMT'
         },
         {
           id: 2,
@@ -243,7 +244,8 @@ const mockDataServices: MockDataServices = {
           university: 'test',
           created_at: 'test',
           created_by: 'test',
-          last_updated: 'test'
+          last_updated: 'test',
+          start_date: 'Thu, 31 Oct 3024 15:05:57 GMT'
         }
       ]
     })
@@ -349,6 +351,186 @@ const mockDataServices: MockDataServices = {
       }
     ])
   ),
+  fetchStudentLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      algorithm_id: 1,
+      id: 1,
+      short_name: 'studentTest',
+      student_id: 1,
+      topic_id: 1
+    })
+  ),
+  fetchTeacherLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      algorithm_id: 1,
+      short_name: 'teacherTest',
+      topic_id: 1
+    })
+  ),
+  postStudentLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED',
+      url: 'https://fakedomain.com:5000/userId/topicId/studentAlgorithm'
+    })
+  ),
+  postTeacherLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED',
+      url: 'https://fakedomain.com:5000/userId/topicId/teacherAlgorithm'
+    })
+  ),
+  fetchStudentRatings: jest.fn(() =>
+    Promise.resolve([
+      {
+        student_id: 1,
+        topic_id: 1,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        student_id: 1,
+        topic_id: 1,
+        rating_value: 1200,
+        rating_deviation: 120,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        student_id: 2,
+        topic_id: 2,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        student_id: 3,
+        topic_id: 2,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        student_id: 1,
+        topic_id: 99,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      }
+    ])
+  ),
+  fetchStudentRatingsOnTopic: jest.fn((topic_id: number) =>
+    Promise.resolve([
+      {
+        student_id: 1,
+        topic_id: topic_id,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        student_id: 1,
+        topic_id: topic_id,
+        rating_value: 1200,
+        rating_deviation: 120,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        student_id: 2,
+        topic_id: topic_id,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        student_id: 3,
+        topic_id: topic_id,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      }
+    ])
+  ),
+  fetchLearningElementRatings: jest.fn(() =>
+    Promise.resolve([
+      {
+        learning_element_id: 1,
+        topic_id: 1,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        learning_element_id: 1,
+        topic_id: 1,
+        rating_value: 1200,
+        rating_deviation: 120,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        learning_element_id: 2,
+        topic_id: 2,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        learning_element_id: 3,
+        topic_id: 2,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        learning_element_id: 4,
+        topic_id: 99,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      }
+    ])
+  ),
+  fetchLearningElementRatingsOnTopic: jest.fn((topic_id: number) =>
+    Promise.resolve([
+      {
+        learning_element_id: 1,
+        topic_id: topic_id,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        learning_element_id: 1,
+        topic_id: topic_id,
+        rating_value: 1200,
+        rating_deviation: 120,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        learning_element_id: 2,
+        topic_id: topic_id,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        learning_element_id: 3,
+        topic_id: topic_id,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      }
+    ])
+  ),
+  postCalculateRating: jest.fn(() => {
+    Promise.resolve({
+      student_rating: {},
+      learning_element_rating: {}
+    })
+  }),
   fetchNews: jest.fn(() =>
     Promise.resolve({
       news: [
@@ -370,6 +552,64 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
+  ),
+  fetchRemoteTopics: jest.fn(() =>
+    Promise.resolve([
+      {
+        lms_learning_elements: [
+          {
+            lms_activity_type: 'forum',
+            lms_id: 1,
+            lms_learning_element_name: 'Announcements'
+          },
+          {
+            lms_activity_type: 'resource',
+            lms_id: 38,
+            lms_learning_element_name: 'superKnowledge.pdf'
+          },
+          {
+            lms_activity_type: 'h5pactivity',
+            lms_id: 39,
+            lms_learning_element_name: 'Strategie Übung - Leicht'
+          }
+        ],
+        topic_lms_id: 1,
+        topic_lms_name: 'General'
+      },
+      {
+        lms_learning_elements: [
+          {
+            lms_activity_type: 'h5pactivity',
+            lms_id: 4,
+            lms_learning_element_name: 'DefinitionDeklaration und AufrufeinerFunktion'
+          }
+        ],
+        topic_lms_id: 2,
+        topic_lms_name: 'Bekannte Entwurfsmuster'
+      }
+    ])
+  ),
+  fetchRemoteCourses: jest.fn(() =>
+    Promise.resolve([
+      {
+        enddate: 1702166400,
+        fullname: 'Kurs-1',
+        id: 2,
+        shortname: 'kurs',
+        startdate: 1670630400,
+        timecreated: 1670578503,
+        timemodified: 1670578503
+      },
+      {
+        enddate: 1718406000,
+        fullname: 'Kurs-2',
+        id: 3,
+        shortname: 'ku2',
+        startdate: 1686870000,
+        timecreated: 1686830366,
+        timemodified: 1692021711
+      }
+    ])
   )
 }
 /**

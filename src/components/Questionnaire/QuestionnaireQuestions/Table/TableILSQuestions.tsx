@@ -78,12 +78,12 @@ const MemoTableRowAnswers = memo(
               divider={<Divider orientation="horizontal" flexItem />}>
               <FormControlLabel
                 value={stepsILSData[activeStep][answerIndex].answer1}
-                control={<Radio />}
+                control={<Radio id={stepsILSData[activeStep][answerIndex].questionLabel + '-answer-1-radio'} />}
                 label={<Typography variant={'h6'}>{t(stepsILSData[activeStep][answerIndex].answer1)}</Typography>}
               />
               <FormControlLabel
                 value={stepsILSData[activeStep][answerIndex].answer2}
-                control={<Radio />}
+                control={<Radio id={stepsILSData[activeStep][answerIndex].questionLabel + '-answer-1-radio'} />}
                 label={<Typography variant={'h6'}>{t(stepsILSData[activeStep][answerIndex].answer2)}</Typography>}
               />
             </Stack>
@@ -106,7 +106,7 @@ type TableILSQuestionsProps = {
 const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmptyStep }: TableILSQuestionsProps) => {
   const [questionnaireAnswers, setQuestionnaireAnswers] = useState([{ question_id: '', answer: '' }])
   const { addSnackbar } = useContext(SnackbarContext)
-  const [cookie, setCookie] = useCookies(['questionnaire_sent_token'])
+  const [, setCookie] = useCookies(['questionnaire_sent_token'])
   const { t } = useTranslation()
   const { sendAnswers, isSending } = useHandleSend(questionnaireAnswers, true)
 
