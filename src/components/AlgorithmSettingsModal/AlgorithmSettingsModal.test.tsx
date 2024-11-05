@@ -81,6 +81,109 @@ describe('AlgorithmSettingsModal', () => {
     })
   })
 
+  it('shows a snackbar with an error message, when fetching the new learning path fails and user is a student', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Sam Student',
+        role: 'student',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'TH-AB'
+      })
+    )
+
+    const addSnackbarMock = jest.fn()
+    const mockfetchLearningPathElement = jest.fn(() => Promise.reject(new Error('fetchLearningPathElement failed')))
+    mockServices.fetchLearningPathElement.mockImplementationOnce(mockfetchLearningPathElement)
+    const my_context = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+
+    const open = true
+    const { getByTestId } = render(
+      <SnackbarContext.Provider value={my_context}>
+        <MemoryRouter>
+          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} options={mockOptions} />
+        </MemoryRouter>
+      </SnackbarContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('algorithm-save-button'))
+
+    await waitFor(() => {
+      expect(mockfetchLearningPathElement).toHaveBeenCalledTimes(1)
+      expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
+    })
+  })
+
+  it('shows a snackbar with an error message, when fetching the new learning path fails and user is a teacher', async () => {
+    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Tom Teacher',
+        role: 'teacher',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'TH-AB'
+      })
+    )
+
+    const mockfetchLearningPathElement = jest.fn(() => Promise.reject(new Error('fetchLearningPathElement failed')))
+    mockServices.fetchLearningPathElement.mockImplementationOnce(mockfetchLearningPathElement)
+
+    const addSnackbarMock = jest.fn()
+    const my_context = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+
+    const open = true
+    const { getByTestId } = render(
+      <SnackbarContext.Provider value={my_context}>
+        <MemoryRouter>
+          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} options={mockOptions} />
+        </MemoryRouter>
+      </SnackbarContext.Provider>
+    )
+
+    fireEvent.click(getByTestId('algorithm-save-button'))
+
+    await waitFor(() => {
+      expect(mockfetchLearningPathElement).toHaveBeenCalledTimes(1)
+      expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
+    })
+  })
+
   it('should post the selected algorithm for students', async () => {
     const mockObserverFunction = jest.fn()
 
