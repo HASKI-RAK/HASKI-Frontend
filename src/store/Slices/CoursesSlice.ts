@@ -1,8 +1,7 @@
 import { StateCreator } from 'zustand'
-import { CourseReturn } from '@core'
+import { CourseResponse, CourseReturn } from '@core'
 import { fetchCourses } from '@services'
 import { StoreState } from '@store'
-import { CourseResponse } from '../../core/Course/Course'
 import { resetters } from '../Zustand/Store'
 
 export default interface CoursesSlice {

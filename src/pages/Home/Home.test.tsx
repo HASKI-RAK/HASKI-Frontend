@@ -5,8 +5,7 @@ import * as router from 'react-router'
 import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
 import { Home } from '@pages'
-import { AuthContext, RoleContextType } from '@services'
-import RoleContext from '../../services/RoleContext/RoleContext'
+import { AuthContext, RoleContext, RoleContextType } from '@services'
 
 const navigate = jest.fn()
 
