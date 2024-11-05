@@ -119,8 +119,18 @@
       "disabled": true
     },
     {
+      "name": "LZ - Lernziel",
+      "key": "LZ",
+      "disabled": false
+    },
+    {
       "name": "KÜ - Kurzübersicht",
       "key": "KÜ",
+      "disabled": false
+    },
+    {
+      "name": "FO - Forum",
+      "key": "FO",
       "disabled": false
     },
     {
@@ -136,6 +146,11 @@
     {
       "name": "BE - Beispiel",
       "key": "BE",
+      "disabled": false
+    },
+    {
+      "name": "AB - Anwendungsbeispiel",
+      "key": "AB",
       "disabled": false
     },
     {

@@ -119,8 +119,18 @@
       "disabled": true
     },
     {
+      "name": "LZ - Learning Objective",
+      "key": "LZ",
+      "disabled": false
+    },
+    {
       "name": "KÜ - Overview",
       "key": "KÜ",
+      "disabled": false
+    },
+    {
+      "name": "FO - Forum",
+      "key": "FO",
       "disabled": false
     },
     {
@@ -136,6 +146,11 @@
     {
       "name": "BE - Example",
       "key": "BE",
+      "disabled": false
+    },
+    {
+      "name": "AB - Application Example",
+      "key": "AB",
       "disabled": false
     },
     {
