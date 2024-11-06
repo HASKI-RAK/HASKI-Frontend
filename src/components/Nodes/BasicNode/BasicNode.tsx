@@ -1,7 +1,7 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
+import { NodeWrapper, Paper, Tooltip, Typography, Star, StarOutline, IconButton, ToggleButton } from '@common/components'
 import { CheckBox, Feedback } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import { getConfig } from '@shared'
@@ -29,6 +29,7 @@ type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
  */
 const BasicNode = ({ id, children = <Feedback sx={{ fontSize: 50 }} />, data }: BasicNodeProps) => {
   const { t } = useTranslation()
+  const [on, setOn]=useState(false)
   return (
     <NodeWrapper
       id={id + '-' + data.lmsId}
@@ -53,6 +54,12 @@ const BasicNode = ({ id, children = <Feedback sx={{ fontSize: 50 }} />, data }: 
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {data.name}
       </Typography>
+
+<IconButton
+  onClick={(e) => {e.stopPropagation(),setOn(!on)}}
+>
+  {on?<Star/>:<StarOutline/>}
+</IconButton>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
       {data.isDone && (
         <Tooltip title={t('tooltip.completed')}>

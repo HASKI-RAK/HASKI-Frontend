@@ -57,6 +57,8 @@ export { FormGroup } from './DefaultFormGroup/DefaultFormGroup'
 export { Zoom } from './DefaultZoom/DefaultZoom'
 export { Drawer } from './DefaultDrawer/DefaultDrawer'
 export { Switch } from './DefaultSwitch/DefaultSwitch'
+export { Star } from './DefaultStar/DefaultStar'
+export { StarOutline } from './DefaultStarOutline/DefaultStarOutline'
 
 export { Network } from './Network/Network'
 export { Bar } from './Bar/Bar'
