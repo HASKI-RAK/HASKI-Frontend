@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
 import { CreateLearningElementTable } from '@components'
@@ -12,13 +12,13 @@ type CreateLearningElementsStepProps = {
   onBack: () => void
 }
 
-const CreateLearningElementsStep: React.FC<CreateLearningElementsStepProps> = ({
+const CreateLearningElementsStep = ({
   selectedTopics,
   selectedLearningElements,
   handleLearningElementChange,
   onNext,
   onBack
-}) => {
+}: CreateLearningElementsStepProps) => {
   const { t } = useTranslation()
 
   return (
@@ -47,4 +47,4 @@ const CreateLearningElementsStep: React.FC<CreateLearningElementsStepProps> = ({
   )
 }
 
-export default CreateLearningElementsStep
+export default memo(CreateLearningElementsStep)

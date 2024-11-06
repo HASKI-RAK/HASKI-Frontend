@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
 import { CreateRemoteTopicsTable, ExistingTopicsTable } from '@components'
@@ -12,13 +12,13 @@ type CreateRemoteTopicsStepProps = {
   onNext: () => void
 }
 
-const CreateRemoteTopicsStep: React.FC<CreateRemoteTopicsStepProps> = ({
+const CreateRemoteTopicsStep = ({
   remoteTopics,
   selectedTopics,
   alreadyCreatedTopics,
   handleTopicChange,
   onNext
-}) => {
+}: CreateRemoteTopicsStepProps) => {
   const { t } = useTranslation()
 
   return (
@@ -48,4 +48,4 @@ const CreateRemoteTopicsStep: React.FC<CreateRemoteTopicsStepProps> = ({
   )
 }
 
-export default CreateRemoteTopicsStep
+export default memo(CreateRemoteTopicsStep)

@@ -102,7 +102,7 @@ export const Home = () => {
 
   // Card containing the courses with a button to the specific course
   return (
-    <Grid container spacing={2} justifyContent="center">
+    <Grid container direction="row" spacing={2} justifyContent="center">
       <Grid item>
         {coursesLoading ? (
           <Card sx={commonCardStyle}>

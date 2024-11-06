@@ -11,7 +11,7 @@ import {
   ToggleButtonGroup,
   Typography
 } from '@common/components'
-import { SkeletonList } from '@components'
+import { HandleError, SkeletonList } from '@components'
 import { RemoteCourse } from '@core'
 import { SnackbarContext, fetchRemoteCourses } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -53,30 +53,15 @@ const CreateCourseTable = ({ onCourseSelect, selectedCourseName }: CreateCourseT
                 )
               })
               .catch((error) => {
-                addSnackbar({
-                  message: t('error.fetchCourses'),
-                  severity: 'error',
-                  autoHideDuration: 5000
-                })
-                log.error(t('error.fetchCourses') + ' ' + error)
+                HandleError(t, addSnackbar, 'error.fetchCourses', error)
               })
           })
           .catch((error) => {
-            addSnackbar({
-              message: t('error.getRemoteCourses'),
-              severity: 'error',
-              autoHideDuration: 5000
-            })
-            log.error(t('error.getRemoteCourses') + ' ' + error)
+            HandleError(t, addSnackbar, 'error.getRemoteCourses', error)
           })
       })
       .catch((error) => {
-        addSnackbar({
-          message: t('error.getUser'),
-          severity: 'error',
-          autoHideDuration: 5000
-        })
-        log.error(t('error.getUser') + ' ' + error)
+        HandleError(t, addSnackbar, 'error.getUser', error)
       })
   }, [])
 
