@@ -2,7 +2,6 @@ import '@testing-library/jest-dom'
 import { render, waitFor } from '@testing-library/react'
 import dayjs, { Dayjs } from 'dayjs'
 import { MemoryRouter } from 'react-router-dom'
-import { act } from 'react-test-renderer'
 import { CreateCourseDetailsTable } from '@components'
 import { AuthContext } from '@services'
 
@@ -24,23 +23,23 @@ describe('CreateCourseDetailsTable', () => {
   })
 
   it('renders the component', async () => {
-    await act(() => {
-      const { container, getByText } = render(
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <CreateCourseDetailsTable
-              datePickerValue={dayjs(new Date())}
-              remoteCourse={selectedCourse}
-              setDatePickerValue={setDatePickerValueMock}
-            />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      )
-      waitFor(() => {
-        expect(container).toBeTruthy()
-        expect(getByText('components.CreateCourseDetailsTable.courseName')).toBeInTheDocument()
-        expect(getByText('components.CreateCourseDetailsTable.startDate')).toBeInTheDocument()
-      })
+    const { container, getByText, getAllByText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <CreateCourseDetailsTable
+            datePickerValue={dayjs(new Date())}
+            remoteCourse={selectedCourse}
+            setDatePickerValue={setDatePickerValueMock}
+          />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(container).toBeTruthy()
+      expect(getByText('components.CreateCourseDetailsTable.courseName')).toBeInTheDocument()
+      //Datetime-picker is twice in the document
+      expect(getAllByText('components.CreateCourseDetailsTable.startDate')).toHaveLength(2)
     })
   })
 })
