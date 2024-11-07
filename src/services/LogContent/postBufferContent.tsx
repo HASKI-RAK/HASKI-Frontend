@@ -7,7 +7,7 @@ import { fetchData } from '../RequestResponse'
  * @interface
  */
 
-export interface bufferContent {
+export type BufferContent = {
   timestamp: string
   content: string
 }
@@ -25,7 +25,7 @@ export interface bufferContent {
  * @returns - returns a promise with the Response
  */
 
-export const postBufferContent = async (bufferBody?: bufferContent, userId?: number): Promise<Response> => {
+export const postBufferContent = async (bufferBody?: BufferContent, userId?: number): Promise<Response> => {
   return fetchData<Response>(getConfig().BACKEND + `/user/${userId}/logbuffer`, {
     method: 'POST',
     credentials: 'include',

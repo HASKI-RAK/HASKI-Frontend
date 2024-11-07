@@ -1,7 +1,6 @@
 import log from 'loglevel'
 import { RingBuffer } from './RingBuffer'
-import { postBufferContent } from 'src/services/LogContent/postBufferContent'
-import { bufferContent } from 'src/services/LogContent/postBufferContent'
+import { postBufferContent, BufferContent } from 'src/services/LogContent/postBufferContent'
 
 /**
  * This function is used to log all the messages in the console and also store them in a ring buffer.
@@ -36,12 +35,12 @@ export const logBuffer = (config: any) => {
       //send buffer if in production or if send is true in development
       if (isProd || sendLogs) {
         if (methodName === 'error') {
-          const bufferBody: bufferContent = {
+          const bufferBody: BufferContent = {
             timestamp: JSON.stringify(date),
             content: message
           }
           //get userid from localStorage
-          const persistedStorage = JSON.parse(localStorage.getItem('persisted_storage') || '{}')
+          const persistedStorage = JSON.parse(localStorage.getItem('persisted_storage') ?? '{}')
           postBufferContent(bufferBody, persistedStorage.state._user.id).catch(() => {
             console.log('buffer failed to send')
           })
