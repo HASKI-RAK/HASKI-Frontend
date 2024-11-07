@@ -1,5 +1,5 @@
 import DefaultFab from '@mui/material/Fab'
-import { MouseEvent, memo, useCallback } from 'react'
+import { MouseEvent, RefObject, forwardRef, memo, useCallback } from 'react'
 import { FabProps as DefaultFabProps } from '@common/components'
 import {
   StatementHookReturn,
@@ -26,7 +26,10 @@ type FabProps = DefaultFabProps & {
  *
  * @category Common
  */
-const Fab = ({ useStatement = _useStatement, onClick, ...props }: FabProps) => {
+const Fab = (
+  { useStatement = _useStatement, onClick, ...props }: FabProps,
+  ref: ((instance: HTMLButtonElement | null) => void) | RefObject<HTMLButtonElement> | null | undefined
+) => {
   const { sendStatement } = useStatement({
     defaultComponentID: props.id,
     defaultComponent: xAPIComponent.Fab
@@ -34,6 +37,7 @@ const Fab = ({ useStatement = _useStatement, onClick, ...props }: FabProps) => {
 
   return (
     <DefaultFab
+      ref={ref}
       onClick={useCallback(
         (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
           sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
@@ -47,4 +51,4 @@ const Fab = ({ useStatement = _useStatement, onClick, ...props }: FabProps) => {
   )
 }
 
-export default memo(Fab)
+export default memo(forwardRef(Fab))

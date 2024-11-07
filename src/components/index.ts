@@ -5,7 +5,6 @@ export { default as ResultDescriptionILS } from './Questionnaire/QuestionnaireRe
 export { default as TableListK } from './Questionnaire/QuestionnaireResults/Table/TableListK'
 export { default as GraphListK } from './Questionnaire/QuestionnaireResults/Graph/GraphListK'
 export { default as ResultDescriptionListK } from './Questionnaire/QuestionnaireResults/Text/ResultDescriptionListK'
-export { default as QuestionnaireResultsModal } from './Questionnaire/QuestionnaireResults/Modal/QuestionnaireResultsModal'
 export { default as QuestionnaireQuestionsModal } from './Questionnaire/QuestionnaireQuestions/Modal/QuestionnaireQuestionsModal'
 export { default as TableILSQuestions } from './Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions'
 export { default as TableListKQuestions } from './Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions'
@@ -26,6 +25,7 @@ export {
 } from './Snackbar/SnackbarMessage/SnackbarMessage'
 export { default as SnackbarContainer } from './Snackbar/SnackbarContainer/SnackbarContainer'
 export { default as SnackbarTransition } from './Snackbar/SnackbarTransition/SnackbarTransition'
+export { default as HandleError } from './Snackbar/HandleError'
 export { default as IFrameModal } from './IFrameModal/IFrameModal'
 export { default as SkeletonList } from './SkeletonList/SkeletonList'
 export { default as PrivacyModal } from './PrivacyModal/PrivacyModal'
@@ -49,8 +49,25 @@ export { default as LinearProgressWithLabel } from './StyledLinearProgress/Linea
 export { StyledLinearProgress } from './StyledLinearProgress/StyledLinearProgress'
 export { default as LabeledSwitch } from './LabeledSwitch/LabeledSwitch'
 export { default as ResponsiveMiniMap } from './ResponsiveMiniMap/ResponsiveMiniMap'
+export { default as AlgorithmSettingsModal } from './AlgorithmSettingsModal/AlgorithmSettingsModal'
 export { default as Newsbanner } from './Newsbanner/Newsbanner'
 export { default as TopicCard } from './TopicCard/TopicCard'
+export { default as CreateCourseDetailsTable } from './CreateCourse/Table/CreateCourseDetailsTable'
+export { default as CreateCourseTable } from './CreateCourse/Table/CreateCourseTable'
+export { default as CreateCourseModal } from './CreateCourse/Modal/CreateCourseModal'
+export { default as CreateRemoteTopicsTable } from './CreateTopic/Table/CreateRemoteTopicsTable'
+export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopicsTable'
+export { default as CreateLearningElementTable } from './CreateTopic/Table/CreateLearningElementTable'
+export {
+  default as CreateLearningElementClassificationTable,
+  type LearningElementWithClassification
+} from './CreateTopic/Table/CreateLearningElementClassificationTable'
+export {
+  default as CreateAlgorithmTable,
+  type CreateAlgorithmTableNameProps
+} from './CreateTopic/Table/CreateAlgorithmTable'
+export { default as CreateTopicModal } from './CreateTopic/Modal/CreateTopicModal'
 
 export * from './GlobalNav'
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure
+export * from './Dashboards'

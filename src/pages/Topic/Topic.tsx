@@ -134,7 +134,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         })
       }, 100)
     }
-  }, [topicId, getLearningPathElement, getUser, navigate, setInitialNodes, setInitialEdges, learningPathElementStatus])
+  }, [topicId, navigate, setInitialNodes, setInitialEdges])
 
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)
@@ -179,21 +179,28 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           fitViewOptions={{
             padding: 5,
             minZoom: 0.75,
-            nodes: [{ id: initialNodes[0].id }]
+            nodes: [{ id: initialNodes[0]?.id }]
           }}>
           <ResponsiveMiniMap />
           <Background gap={16} />
-          <Panel position="top-right">
+          {/*<Panel position="top-right">
             <LabeledSwitch
               labelLeft={t('pages.topic.grouped')}
               labelRight={t('pages.topic.single')}
               isGrouped={isGrouped}
               setIsGrouped={setIsGrouped}
             />
-          </Panel>
-          <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
+          </Panel>*/}
+          <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
         </ReactFlow>
-        <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
+        <IFrameModal
+          url={url}
+          title={title}
+          isOpen={isOpen}
+          onClose={getHandleClose}
+          key={url}
+          learningElementId={lmsId}
+        />
       </Grid>
     </Grid>
   ) : (
