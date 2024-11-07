@@ -48,6 +48,7 @@ export const useLearningPathTopicProgress = (
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
+  const learningPathLearningElementStatus = usePersistedStore((state) => state._learningPathElementStatus)
 
   // Trigger Reload of Fetches
   const ignoreLearningPathTopicCache = useStore((state) => state.ignoreLearningPathTopicCache)
@@ -70,7 +71,7 @@ export const useLearningPathTopicProgress = (
       // Number of all learning elements in the current topic
       allLearningElementsInTopic.length
     ],
-    []
+    [learningPathLearningElementStatus]
   )
 
   // Function
