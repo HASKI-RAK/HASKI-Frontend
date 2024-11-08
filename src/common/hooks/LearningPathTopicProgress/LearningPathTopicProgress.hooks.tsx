@@ -48,12 +48,11 @@ export const useLearningPathTopicProgress = (
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
-  const learningPathLearningElementStatus = usePersistedStore((state) => state._learningPathElementStatus)
 
-  // Trigger Reload of Fetches
-  const ignoreLearningPathTopicCache = useStore((state) => state.ignoreLearningPathTopicCache)
-  const ignoreLearningPathElementCache = useStore((state) => state.ignoreLearningPathElementCache)
-  const ignoreLearningPathElementStatus = usePersistedStore((state) => state.ignoreLearningPathElementStatusCache)
+  // Reload store on cache changes
+  const learningPathTopicCache = useStore((state) => state._cache_learningPathTopic_record)
+  const learningPathElementCache = useStore((state) => state._cache_learningPathElement_record)
+  const learningPathLearningElementStatusCache = usePersistedStore((state) => state._learningPathElementStatus)
 
   // Function
   const getTopicProgress = useCallback(
@@ -71,7 +70,7 @@ export const useLearningPathTopicProgress = (
       // Number of all learning elements in the current topic
       allLearningElementsInTopic.length
     ],
-    [learningPathLearningElementStatus]
+    [learningPathLearningElementStatusCache]
   )
 
   // Function
@@ -113,8 +112,8 @@ export const useLearningPathTopicProgress = (
       getLearningPathElementStatus,
       getTopicProgress,
       courseId,
-      ignoreLearningPathElementCache,
-      ignoreLearningPathElementStatus
+      learningPathElementCache,
+      learningPathLearningElementStatusCache
     ]
   )
 
@@ -151,7 +150,7 @@ export const useLearningPathTopicProgress = (
           log.error(t('error.fetchUser') + ' ' + error)
         })
     }
-  }, [isAuth, navigate, getLearningPathTopic, getAllTopicProgress, ignoreLearningPathTopicCache])
+  }, [isAuth, navigate, getLearningPathTopic, getAllTopicProgress, learningPathTopicCache])
 
   return useMemo(() => ({ topicProgress, isLoading, topics }), [topicProgress, isLoading, topics])
 }

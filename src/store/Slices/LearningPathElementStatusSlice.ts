@@ -20,8 +20,7 @@ import { resetters } from '../Zustand/Store'
  */
 export default interface LearningPathElementStatusSlice {
   _learningPathElementStatus: Record<string, LearningPathElementStatus[]>
-  ignoreLearningPathElementStatusCache: boolean
-  triggerLearningPathElementStatusReload: (reloadState: boolean) => void
+  clearLearningPathElementStatusCache: () => void
   getLearningPathElementStatus: LearningPathElementStatusReturn
   setLearningPathElementStatus: (
     courseId?: string,
@@ -46,21 +45,21 @@ export const createLearningPathElementStatusSlice: StateCreator<
   resetters.push(() => set({ _learningPathElementStatus: {} }))
   return {
     _learningPathElementStatus: {},
-    ignoreLearningPathElementStatusCache: false,
+    clearLearningPathElementStatusCache: () => {
+      set({ _learningPathElementStatus: {} })
+    },
     getLearningPathElementStatus: async (...arg) => {
       const [courseId, studentId] = arg
 
-      const { ignoreLearningPathElementStatusCache } = get()
       const cached = get()._learningPathElementStatus[`${courseId}-${studentId}`]
 
-      if (!cached || ignoreLearningPathElementStatusCache) {
+      if (!cached) {
         const learningPathElementStatusResponse = await fetchLearningPathElementStatus(courseId, studentId)
         set({
           _learningPathElementStatus: {
             ...get()._learningPathElementStatus,
             [`${courseId}-${studentId}`]: learningPathElementStatusResponse
-          },
-          ignoreLearningPathElementStatusCache: false
+          }
         })
         return learningPathElementStatusResponse
       } else return cached
@@ -116,8 +115,6 @@ export const createLearningPathElementStatusSlice: StateCreator<
         }
       }))
       return cachedArray
-    },
-    triggerLearningPathElementStatusReload: (reloadState: boolean) =>
-      set({ ignoreLearningPathElementStatusCache: reloadState })
+    }
   }
 }

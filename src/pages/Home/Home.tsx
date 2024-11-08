@@ -35,11 +35,11 @@ export const Home = () => {
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
-  const triggerCoursesReload = useStore((state) => state.triggerCoursesReload)
-  const ignoreCoursesCache = useStore((state) => state.ignoreCoursesCache)
+  const clearCoursesCache = useStore((state) => state.clearCoursesCache)
+  const coursesCache = useStore((state) => state._cache_Courses_record)
 
   const handleCloseCourseModal = () => {
-    triggerCoursesReload(true)
+    clearCoursesCache()
     setCreateCourseModalOpen(false)
     setSuccessRemoteCourseCreated(false)
     setActiveStepCreateCourseModal(0)
@@ -72,7 +72,7 @@ export const Home = () => {
           log.error(t('error.getUser') + ' ' + error)
         })
     }
-  }, [getUser, getCourses, setCourses, isAuth, ignoreCoursesCache, coursesLoading])
+  }, [getUser, getCourses, setCourses, isAuth, coursesCache, coursesLoading])
 
   const commonButtonStyle = {
     mt: '1rem',

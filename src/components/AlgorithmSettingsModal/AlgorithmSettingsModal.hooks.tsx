@@ -32,7 +32,7 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
   const setStudentLpLeAlgorithm = useStore((state) => state.setStudentLpLeAlgorithm)
   const setTeacherLpLeAlgorithm = useStore((state) => state.setTeacherLpLeAlgorithm)
   const [waitForBackend, setWaitForBackend] = useState(false)
-  const triggerLearningPathElementReload = useStore((state) => state.triggerLearningPathElementReload)
+  const clearLearningPathElementCache = useStore((state) => state.clearLearningPathElementCache)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const { courseId } = useParams<{ courseId: string }>()
   const { t } = useTranslation()
@@ -67,7 +67,7 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
           .then(() => {
             setStudentLpLeAlgorithm(user.settings.user_id, params.topicId, params.options[params.selected].key)
             // Fetch the new learning path then close the modal
-            triggerLearningPathElementReload(true)
+            clearLearningPathElementCache()
             getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, String(params.topicId))
               .then(() => {
                 setWaitForBackend(false)
@@ -101,7 +101,7 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
           .then(() => {
             setStudentLpLeAlgorithm(user.settings.user_id, params.topicId, params.options[params.selected].key)
             // Fetch the new learning path then close the modal
-            triggerLearningPathElementReload(true)
+            clearLearningPathElementCache()
             getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, String(params.topicId))
               .then(() => {
                 setWaitForBackend(false)

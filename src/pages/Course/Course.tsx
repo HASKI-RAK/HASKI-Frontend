@@ -12,9 +12,6 @@ import { usePersistedStore, useStore } from '@store'
  * Presents an overview of the course.
  * @param props - The props object should be empty.
  * @returns A JSX Element with the rendered course page.
- * @remarks
- * Uses the {@link useLearningPathTopic} hook to get the topics of the course.
- * Uses the {@link LinearProgressWithLabel} hook to calculate the progress of each topic in the course.
  * @category Pages
  */
 const Course = () => {
@@ -28,14 +25,14 @@ const Course = () => {
   const [successTopicCreated, setSuccessTopicCreated] = useState<boolean>(false)
 
   //Store
-  const triggerLearningPathTopicReload = useStore((state) => state.triggerLearningPathTopicReload)
-  const triggerLearningPathElementReload = useStore((state) => state.triggerLearningPathElementReload)
-  const triggerLearningElementStatusReload = usePersistedStore((state) => state.triggerLearningPathElementStatusReload)
+  const clearLearningPathTopicCache = useStore((state) => state.clearLearningPathTopicCache)
+  const clearLearningPathElementCache = useStore((state) => state.clearLearningPathElementCache)
+  const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
 
   const handleCloseTopicModal = () => {
-    triggerLearningPathTopicReload(true)
-    triggerLearningPathElementReload(true)
-    triggerLearningElementStatusReload(true)
+    clearLearningPathTopicCache()
+    clearLearningPathElementCache()
+    clearLearningPathElementStatusCache()
     setCreateTopicModalOpen(false)
     setSuccessTopicCreated(false)
   }

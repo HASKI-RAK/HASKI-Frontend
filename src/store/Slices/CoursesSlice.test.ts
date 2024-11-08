@@ -85,8 +85,8 @@ describe('CoursesSlice', () => {
     expect(mockServices.fetchCourses).toHaveBeenCalledTimes(1)
     expect(cached).toEqual(courses)
 
-    const { triggerCoursesReload } = useStore.getState()
-    triggerCoursesReload(true)
+    const { clearCoursesCache } = useStore.getState()
+    clearCoursesCache()
     await getCourses(1, 2, 3)
     expect(mockServices.fetchCourses).toHaveBeenCalledTimes(2)
   })

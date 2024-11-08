@@ -6,24 +6,24 @@ import { resetters } from '../Zustand/Store'
 
 export default interface LearningPathSlice {
   _cache_learningPathElement_record: Record<string, LearningPathElement | undefined>
-  ignoreLearningPathElementCache: boolean
+  clearLearningPathElementCache: () => void
   getLearningPathElement: LearningPathElementReturn
-  triggerLearningPathElementReload: (reloadState: boolean) => void
 }
 
 export const createLearningPathElementSlice: StateCreator<StoreState, [], [], LearningPathSlice> = (set, get) => {
   resetters.push(() => set({ _cache_learningPathElement_record: {} }))
   return {
     _cache_learningPathElement_record: {},
-    ignoreLearningPathElementCache: false,
+    clearLearningPathElementCache: () => {
+      set({ _cache_learningPathElement_record: {} })
+    },
     getLearningPathElement: async (...arg) => {
       const [userId, lmsUserId, studentId, courseId, topicId] = arg
-      const { ignoreLearningPathElementCache } = get()
 
       // Check if we have the learning path cached
       const cached = get()._cache_learningPathElement_record[`${courseId}-${topicId}`]
 
-      if (!cached || ignoreLearningPathElementCache) {
+      if (!cached) {
         // If not, fetch it and cache it
         const learningPathElement_response = await fetchLearningPathElement(
           userId,
@@ -36,12 +36,10 @@ export const createLearningPathElementSlice: StateCreator<StoreState, [], [], Le
           _cache_learningPathElement_record: {
             ...get()._cache_learningPathElement_record,
             [`${courseId}-${topicId}`]: learningPathElement_response
-          },
-          ignoreLearningPathElementCache: false
+          }
         })
         return learningPathElement_response
       } else return cached
-    },
-    triggerLearningPathElementReload: (reloadState: boolean) => set({ ignoreLearningPathElementCache: reloadState })
+    }
   }
 }

@@ -9,9 +9,8 @@ import { AuthContext, RoleContext, RoleContextType } from '@services'
 
 const navigate = jest.fn()
 
-jest.useFakeTimers()
-
 describe('Test the Home page', () => {
+  jest.useFakeTimers()
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
@@ -84,26 +83,6 @@ describe('Test the Home page', () => {
 
     await waitFor(() => {
       expect(container.innerHTML).toContain('MuiSkeleton')
-    })
-  })
-
-  test('fetching Course returns no courses', async () => {
-    mockServices.fetchCourses.mockImplementationOnce(() =>
-      Promise.resolve({
-        courses: []
-      })
-    )
-
-    const { getByText } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
-    )
-
-    await waitFor(() => {
-      expect(getByText('pages.home.noCourses')).toBeInTheDocument()
     })
   })
 
@@ -188,6 +167,26 @@ describe('Test the Home page', () => {
     })
   })
 
+  test('fetching Course returns no courses', async () => {
+    mockServices.fetchCourses.mockImplementation(() => {
+      courses: []
+    })
+
+    await waitFor(async () => {
+      const { getByText } = render(
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      )
+
+      waitFor(() => {
+        expect(getByText('pages.home.noCourses')).toBeInTheDocument()
+      })
+    })
+  })
+
   /*
     * currently commented out because UI element is not used/commented out at the moment
   test('settings button opens menu', async () => {
@@ -228,3 +227,27 @@ describe('Test the Home page', () => {
   })
   */
 })
+
+/*
+describe('Home2', () => {
+  test('fetching Course returns no courses', async () => {
+    mockServices.fetchCourses.mockImplementation(() => {
+      courses: []
+    })
+
+    await waitFor(async () => {
+      const { getByText } = render(
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      )
+
+      waitFor(() => {
+        expect(getByText('pages.home.noCourses')).toBeInTheDocument()
+      })
+    })
+  })
+})
+*/

@@ -55,8 +55,8 @@ describe('LearningPathElementSlice', () => {
     expect(mockServices.fetchLearningPathElement).toHaveBeenCalledTimes(1)
 
     expect(cached).toEqual(learningPath)
-    const { triggerLearningPathElementReload } = useStore.getState()
-    triggerLearningPathElementReload(true)
+    const { clearLearningPathElementCache } = useStore.getState()
+    clearLearningPathElementCache()
     await getLearningPathElement(1, 2, 3, courseId, topicId)
     expect(mockServices.fetchLearningPathElement).toHaveBeenCalledTimes(2)
   })
