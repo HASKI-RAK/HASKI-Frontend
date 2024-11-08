@@ -70,7 +70,7 @@ export const useLearningPathTopicProgress = (
       // Number of all learning elements in the current topic
       allLearningElementsInTopic.length
     ],
-    []
+    [ignoreLearningPathElementStatus]
   )
 
   // Function
