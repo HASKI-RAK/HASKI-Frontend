@@ -1,13 +1,16 @@
 {
   "appGlobal.accept": "Accept",
+  "appGlobal.algorithms": "Algorithms",
   "appGlobal.aschaffenburgUAS": "Aschaffenburg UAS",
   "appGlobal.back": "Back",
+  "appGlobal.classifications": "Classifications",
   "appGlobal.courses": "Courses",
   "appGlobal.dataSendSuccessful": "Data sent successfully",
   "appGlobal.dataSendUnsuccessful": "Data could not be sent",
   "appGlobal.decline": "Decline",
   "appGlobal.help": "Help",
   "appGlobal.imageSources": "Image sources:",
+  "appGlobal.learningElements": "Learning Elements",
   "appGlobal.loading": "Loading...",
   "appGlobal.next": "Next",
   "appGlobal.oClock": "o'clock",
@@ -15,6 +18,43 @@
   "appGlobal.send": "Send",
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
+  "components.AlgorithmSettingsModal.algorithms": [
+    {
+      "name": "Select Algorithm",
+      "description": "Please select an algorithm for the learning path calculation.",
+      "key": "noKey",
+      "disabled": true
+    },
+    {
+      "name": "Fixed Order",
+      "description": "The learning elements are presented in a predetermined order.",
+      "key": "default",
+      "disabled": false
+    },
+    {
+      "name": "Graf",
+      "description": "This algorithm is based on the learning adaptive mechanism by Graf et al. It calculates the learning path based on the learning style of the learner.",
+      "key": "graf",
+      "disabled": false
+    },
+    {
+      "name": "ACO",
+      "description": "The Ant Colony Algorithm (ACO) is inspired by the behavior of ant workers. It calculates the learning path by simulating ants who leave behind pheromones to mark the best path.",
+      "key": "aco",
+      "disabled": false
+    },
+    {
+      "name": "Genetic Algorithm",
+      "description": "The Genetic Algorithm is inspired by evolution. It approximates the best learning path by simulating the process of mutation and selection. It is often used for its speed.",
+      "key": "ga",
+      "disabled": false
+    }
+  ],
+  "components.AlgorithmSettingsModal.headerLeft": "Choose a learning path algorithm",
+  "components.AlgorithmSettingsModal.headerRight": "Description",
+  "components.AlgorithmSettingsModal.success": "Algorithm changed successfully",
+  "components.AlgorithmSettingsModal.teacherIconTip": "Recommended by tutor",
+  "components.AlgorithmSettingsModal.wrongRole": "You are not authorized to change the algorithm",
   "components.ContactForm.briefDescription": "Give a brief description of your request",
   "components.ContactForm.contactform": "Contactform",
   "components.ContactForm.error": "Missing description. Please write something.",
@@ -63,6 +103,69 @@
       "label": "other"
     }
   ],
+  "components.CreateAlgorithmTable.missingClassification": "This topic will not be created. Please select learning element classifications to enable algorithm selection.",
+  "components.CreateCourseDetailsTable.courseName": "Course name",
+  "components.CreateCourseDetailsTable.startDate": "Start date",
+  "components.CreateCourseModal.createCourse": "Create Course",
+  "components.CreateCourseTable.alreadyCreatedCourses": "Already created courses",
+  "components.CreateCourseTable.lmsCourses": "Courses from the LMS",
+  "components.CreateCourseTable.noCoursesFound": "No courses found...",
+  "components.CreateLearningElementClassificationTable.classifications": [
+    {
+      "name": "Select Classification",
+      "key": "noKey",
+      "disabled": true
+    },
+    {
+      "name": "KÜ - Overview",
+      "key": "KÜ",
+      "disabled": false
+    },
+    {
+      "name": "EK - Explanation",
+      "key": "EK",
+      "disabled": false
+    },
+    {
+      "name": "AN - Animation",
+      "key": "AN",
+      "disabled": false
+    },
+    {
+      "name": "BE - Example",
+      "key": "BE",
+      "disabled": false
+    },
+    {
+      "name": "ÜB - Exercise",
+      "key": "ÜB",
+      "disabled": false
+    },
+    {
+      "name": "SE - Self-Assessment Test",
+      "key": "SE",
+      "disabled": false
+    },
+    {
+      "name": "ZL - Additional Literature",
+      "key": "ZL",
+      "disabled": false
+    },
+    {
+      "name": "ZF - Summary",
+      "key": "ZF",
+      "disabled": false
+    },
+    {
+      "name": "RQ - Reflective Quiz",
+      "key": "RQ",
+      "disabled": false
+    }
+  ],
+  "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Set learning element classification",
+  "components.CreateLearningElementTable.selectLearningElements": "Select learning elements",
+  "components.CreateTopicModal.createTopics": "Create Topics",
+  "components.ExistingTopicsTable.title": "Already created topics",
   "components.Footer.project": "Project",
   "components.FurtherInfoMenu.title": "Further information",
   "components.ListKQuestions": [
@@ -1133,30 +1236,44 @@
   "components.TableListK.score": "Score",
   "components.TableListK.time": "Time",
   "components.TableListKQuestions.introduction": "Following this you will be asked questions about what learning strategies you use. You will find a list of different learning activities. Please indicate how frequently each activity occurs for you. You can rate your answers from very rarely (1) to very often (5). The questions presented are based on the LIST-K (Klingsieck, 2019), which is a shortened version of the LIST (Wild & Schiefele, 1994).",
+  "components.TableRemoteTopics.noAdditionalTopics": "No additional Topics found",
+  "components.TableRemoteTopics.title": "Available topics",
+  "components.TopicCard.aco": "Ant Colony Optimization",
+  "components.TopicCard.default": "Fixed Order",
+  "components.TopicCard.ga": "Genetic Algorithm",
+  "components.TopicCard.graf": "Graf Algorithm",
+  "components.TopicCard.learningPath": "Learning Path: ",
+  "components.TopicCard.nestor": "Nestor Algorithm",
+  "components.TopicCard.tyche": "Tyche Algorithm",
   "error": "Error",
-  "error.fetchCourses": "There was an Error fetching the courses data.",
-  "error.fetchILS": "There was an Error fetching the ILS questionnaire data.",
-  "error.fetchLearningPathElement": "There was an Error fetching the LearningPathElement data.",
-  "error.fetchLearningPathElementStatus": "There was an Error fetching the LearningPathElementStatus data.",
-  "error.fetchLearningPathTopic": "There was an Error fetching the LearningPathTopic data.",
-  "error.fetchListK": "There was an Error fetching the ListK questionnaire data.",
-  "error.fetchRedirectMoodleLogin": "There was an Error fetching the Moodle Login URL.",
-  "error.fetchUser": "There was an Error fetching the user data.",
-  "error.getCourses": "There was an Error fetching the courses data.",
-  "error.getLearningElementStatus": "There was an Error Learning Element Status.",
-  "error.getLearningElementsWithStatus": "There was an Error fetching Learning Elements with Status.",
-  "error.getNews": "There was an Error fetching the news data.",
-  "error.getSortedLearningPath": "There was an Error fetching and sorting the LearningPathLearningElement data.",
-  "error.getUser": "There was an Error fetching the user data.",
-  "error.mapNodes": "There was an Error mapping the learning path Nodes.",
-  "error.postCalculateLearningPathILS": "There was an Error calculating the learning path based on the ILS questionnaire data.",
-  "error.postILS": "There was an Error sending the ILS questionnaire data.",
-  "error.postListK": "There was an Error sending the ListK questionnaire data.",
-  "error.postLogin": "There was an Error logging in.",
-  "error.setLearningPathElementSpecificStatus": "There was an Error setting Learning Path Element Specific Status.",
-  "error.setTopics": "There was an Error setting Topics.",
-  "error.setTopicsPath": "There was an Error setting Topics Path.",
-  "error.useUniversity": "There was an Error getting the University of the User.",
+  "error.fetchCourses": "An error occurred while fetching the courses data.",
+  "error.fetchILS": "An error occurred while fetching the ILS questionnaire data.",
+  "error.fetchLearningPathElement": "An error occurred while fetching the LearningPathElement data.",
+  "error.fetchLearningPathElementStatus": "An error occurred while fetching the LearningPathElementStatus data.",
+  "error.fetchLearningPathTopic": "An error occurred while fetching the LearningPathTopic data.",
+  "error.fetchListK": "An error occurred while fetching the ListK questionnaire data.",
+  "error.fetchRedirectMoodleLogin": "An error occurred while fetching the Moodle login URL.",
+  "error.fetchUser": "An error occurred while fetching the user data.",
+  "error.getLearningElementStatus": "An error occurred while fetching the Learning Element Status.",
+  "error.getLearningElementsWithStatus": "An error occurred while fetching the Learning Elements with Status.",
+  "error.getRemoteCourses": "An error occurred while fetching the remote courses data from the LMS",
+  "error.getRemoteTopics": "An error occured while fetching the remote topics data from the LMS",
+  "error.getSortedLearningPath": "An error occurred while fetching and sorting the LearningPathLearningElement data.",
+  "error.getTopics": "An error occurred while fetching the LearningPathTopic data.",
+  "error.getUser": "An error occurred while fetching the user data.",
+  "error.mapNodes": "An error occurred while mapping the learning path nodes.",
+  "error.postCalculateLearningPathForAllStudents": "An error occurred while sending the CalculateLearningPathForAllStudents data",
+  "error.postCalculateLearningPathILS": "An error occurred while calculating the learning path based on the ILS questionnaire data.",
+  "error.postILS": "An error occurred while sending the ILS questionnaire data.",
+  "error.postLearningElement": "An error occurred while sending the LearningElement data",
+  "error.postLearningPathAlgorithm": "An error occurred while sending the LearningPathAlgorithm data",
+  "error.postListK": "An error occurred while sending the ListK questionnaire data.",
+  "error.postLogin": "An error occurred while logging in.",
+  "error.postTopic": "An error occurred while sending the Topic data",
+  "error.setLearningPathElementSpecificStatus": "An error occurred while setting the Learning Path Element Specific Status.",
+  "error.setTopics": "An error occurred while setting topics.",
+  "error.setTopicsPath": "An error occurred while setting the topics path.",
+  "error.useUniversity": "An error occurred while getting the Users University.",
   "info": "Info",
   "info.postCalculateLearningPathILS": "A POST request was successfully sent to calculate the learning path based on the ILS questionnaire data.",
   "log.learningPathTopicProgressTimeout": "A timeout occured while loading the LearningPathTopicProgress hook.",
@@ -1218,6 +1335,7 @@
       "header": "System conceptualization",
       "body": [
         "Theoretical preliminary conceptualization of an adaptive learning system",
+        "Further development of reliable, validated, and shortened questionnaire versions of the ILS and LIST-K using methods such as factor analysis, exhaustive feature selection, and Bayesian networks.",
         "Modeling the individual level of knowledge using a rating system",
         "Modeling student characteristics such as learning style and learning strategy",
         "Literature research on adaptive learning systems, learning analytics, Knowledge Tracing, rating systems, large language models und natural language processing",
@@ -1265,8 +1383,14 @@
   "pages.contact.error": "An error occurred while sending your feedback. Please try again later.",
   "pages.contact.success": "Your feedback has been sent successfully.",
   "pages.course": "Course",
-  "pages.course.courseButton": "Continue to course",
+  "pages.course.aco": "ACO",
+  "pages.course.bayes": "Bayes",
+  "pages.course.cardText": "Learning Path: ",
+  "pages.course.fixed": "Fixed Order",
+  "pages.course.genetic": "Genetic Algorithm",
+  "pages.course.graf": "Graf",
   "pages.course.topicButton": "Continue to topic",
+  "pages.course.tyche": "Tyche",
   "pages.glossary": "Glossary",
   "pages.glossary.collapseAll": "Collapse All",
   "pages.glossary.elements": [
@@ -1611,6 +1735,9 @@
     "TestEnglish4"
   ],
   "pages.home": "Home",
+  "pages.home.courseButton": "Continue to course",
+  "pages.home.courseDisabled": "The course is available on",
+  "pages.home.menuItemAlgorithms": "Select learning path algorithm",
   "pages.home.noCourses": "No courses found",
   "pages.imprint": "Imprint",
   "pages.imprint.asOf": "As of",

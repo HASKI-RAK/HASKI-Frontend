@@ -13,7 +13,7 @@ describe('Course tests', () => {
   })
 
   it('renders course page with topics and clicking on first topic navigates to topic/1', async () => {
-    const { getAllByRole } = render(
+    const { getAllByTestId } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
           <Course />
@@ -22,14 +22,14 @@ describe('Course tests', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getAllByRole('button')[0])
+      fireEvent.click(getAllByTestId('Topic-Navigate-Button')[0])
     })
 
     expect(navigate).toHaveBeenCalledWith('topic/1')
   })
 
   it('renders course page with topics and clicking on second topic navigates to topic/2', async () => {
-    const { getAllByRole } = render(
+    const { getAllByTestId } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
           <Course />
@@ -38,7 +38,7 @@ describe('Course tests', () => {
     )
 
     await waitFor(() => {
-      fireEvent.click(getAllByRole('button')[1])
+      fireEvent.click(getAllByTestId('Topic-Navigate-Button')[1])
     })
 
     expect(navigate).toHaveBeenCalledWith('topic/2')
