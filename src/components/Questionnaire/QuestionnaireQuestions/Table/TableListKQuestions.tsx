@@ -87,7 +87,16 @@ const MemoTableRowAnswers = memo(
                 <React.Fragment key={'QuestionnaireListK Answer: ' + answer}>
                   <FormControlLabel
                     value={answer}
-                    control={<Radio />}
+                    control={
+                      <Radio
+                        id={
+                          stepsListK[activeStep][answerIndex].questionLabel +
+                          '-answer-' +
+                          (answerValues.indexOf(answer) + 1) +
+                          '-radio'
+                        }
+                      />
+                    }
                     label={<Typography variant={'h6'}>{t(answer)}</Typography>}
                   />
                 </React.Fragment>

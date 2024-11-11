@@ -31,6 +31,7 @@ import {
   LanguageMenu,
   QuestionnaireQuestionsModal,
   QuestionnaireResultsModal,
+  StatisticsMenu,
   TableILSQuestions,
   TableListKQuestions
 } from '@components'
@@ -163,6 +164,7 @@ const MenuBar = () => {
               HASKI
             </TextWrapper>
             <CourseMenu />
+            <StatisticsMenu />
             <FurtherInfoMenu />
           </Box>
           {/** Search bar */}
@@ -171,17 +173,6 @@ const MenuBar = () => {
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }, mt: 1 }}>
             <LanguageMenu />
           </Box>
-          {/** Questionnaire Results */}
-          {isAuth && (
-            <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-              <Tooltip title={t('tooltip.openQuestionnaireResults')}>
-                <IconButton id="modal-icon-button" onClick={() => setModalOpen(true)}>
-                  <Analytics data-testid="QuestionnaireResultsIcon" />
-                </IconButton>
-              </Tooltip>
-              <QuestionnaireResultsModal open={modalOpen} handleClose={() => setModalOpen(false)} />
-            </Box>
-          )}
           {/** Theme button */}
           {/**
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
