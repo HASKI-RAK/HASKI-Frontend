@@ -48,13 +48,15 @@ const CreateLearningElementTable = ({
           <Fab
             sx={{ mt: '1rem', mr: '0.5rem', color: (theme) => theme.palette.primary.main, bgcolor: 'white' }}
             onClick={handleSelectAllLearningElements}
-            size="medium">
+            size="medium"
+            data-testid={'createLearningElementTable-Select-All-Button'}>
             <CheckBox />
           </Fab>
           <Fab
             sx={{ mt: '1rem', color: (theme) => theme.palette.primary.main, bgcolor: 'white' }}
             onClick={handleDeselectAllLearningElements}
-            size="medium">
+            size="medium"
+            data-testid={'createLearningElementTable-Deselect-All-Button'}>
             <CheckBoxOutlineBlank />
           </Fab>
         </Grid>

@@ -17,7 +17,7 @@ export const useCreateLearningElementTable = ({
       ...selectedLearningElements,
       [topicId]: checked
         ? [...(selectedLearningElements[topicId] || []), element]
-        : (selectedLearningElements[topicId] || []).filter((el) => el.lms_id !== element.lms_id)
+        : selectedLearningElements[topicId].filter((el) => el.lms_id !== element.lms_id)
     }
 
     onLearningElementChange(updatedSelectedElements)

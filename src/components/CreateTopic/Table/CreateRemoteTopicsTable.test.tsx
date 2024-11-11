@@ -3,35 +3,29 @@ import { fireEvent, render, waitFor } from '@testing-library/react'
 import { CreateRemoteTopicsTable } from '@components'
 import { RemoteTopics } from '@core'
 
-jest.mock('./CreateRemoteTopicsTable.hooks', () => ({
-  useCreateRemoteTopicsTable: jest.fn().mockImplementation(() => ({
-    handleTopicChange: jest.fn()
-  }))
-}))
-
-const mockHandleTopicChange = jest.fn()
-
-const mockSelectedTopics: RemoteTopics[] = [
-  {
-    topic_lms_id: 1,
-    topic_lms_name: 'Topic 1',
-    lms_learning_elements: [{ lms_id: 101, lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity' }]
-  }
-]
-const mockRemoteTopics: RemoteTopics[] = [
-  {
-    topic_lms_id: 1,
-    topic_lms_name: 'Topic 1',
-    lms_learning_elements: [{ lms_id: 101, lms_learning_element_name: 'Element 2', lms_activity_type: 'Activity' }]
-  },
-  {
-    topic_lms_id: 2,
-    topic_lms_name: 'Topic 2',
-    lms_learning_elements: [{ lms_id: 103, lms_learning_element_name: 'Element 4', lms_activity_type: 'Activity' }]
-  }
-]
-
 describe('CreateRemoteTopicsTable', () => {
+  const mockHandleTopicChange = jest.fn()
+
+  const mockSelectedTopics: RemoteTopics[] = [
+    {
+      topic_lms_id: 1,
+      topic_lms_name: 'Topic 1',
+      lms_learning_elements: [{ lms_id: 101, lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity' }]
+    }
+  ]
+  const mockRemoteTopics: RemoteTopics[] = [
+    {
+      topic_lms_id: 1,
+      topic_lms_name: 'Topic 1',
+      lms_learning_elements: [{ lms_id: 101, lms_learning_element_name: 'Element 2', lms_activity_type: 'Activity' }]
+    },
+    {
+      topic_lms_id: 2,
+      topic_lms_name: 'Topic 2',
+      lms_learning_elements: [{ lms_id: 103, lms_learning_element_name: 'Element 4', lms_activity_type: 'Activity' }]
+    }
+  ]
+
   it('renders correctly', () => {
     const { container } = render(
       <CreateRemoteTopicsTable
@@ -41,6 +35,26 @@ describe('CreateRemoteTopicsTable', () => {
       />
     )
     expect(container).toBeTruthy()
+  })
+
+  it('renders correctly with undefined remoteTopics', () => {
+    const { container, getByTestId } = render(
+      <CreateRemoteTopicsTable onTopicChange={mockHandleTopicChange} selectedTopics={mockSelectedTopics} />
+    )
+    expect(container).toBeTruthy()
+    expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
+  })
+
+  it('renders correctly with empty remoteTopics array', () => {
+    const { container, getByText } = render(
+      <CreateRemoteTopicsTable
+        onTopicChange={mockHandleTopicChange}
+        selectedTopics={mockSelectedTopics}
+        remoteTopics={[]}
+      />
+    )
+    expect(container).toBeTruthy()
+    expect(getByText('components.TableRemoteTopics.noAdditionalTopics')).toBeInTheDocument()
   })
 
   it('renders with a child', () => {
