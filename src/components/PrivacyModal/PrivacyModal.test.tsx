@@ -71,7 +71,7 @@ describe('Test PrivacyModal', () => {
   })
 
   test('Modal does not render if on privacypolicy page', () => {
-    const form = render(
+    render(
       <MemoryRouter initialEntries={['/privacypolicy']}>
         <PrivacyModal />
       </MemoryRouter>
@@ -185,7 +185,7 @@ describe('Test PrivacyModal', () => {
 })
 
 test('Modal does not render if cookie is set', () => {
-  const form = render(
+  render(
     <MemoryRouter>
       <PrivacyModal />
     </MemoryRouter>

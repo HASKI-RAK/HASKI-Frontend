@@ -26,7 +26,7 @@ describe('CreateCourseTable', () => {
     timemodified: 1670578503
   }
 
-  const mockOnCourseSelect = jest.fn((course: RemoteCourse) => {})
+  const mockOnCourseSelect = jest.fn((_course: RemoteCourse) => {})
 
   it('should render the CreateCourseTable', () => {
     render(

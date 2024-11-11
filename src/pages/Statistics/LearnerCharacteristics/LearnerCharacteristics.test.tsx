@@ -33,7 +33,6 @@ describe('LearnerCharacteristics', () => {
   })
 
   it('sets Loading false if student did not fill out ListK-questionnaire', async () => {
-    const handleClose = jest.fn()
     mockServices.fetchListK.mockImplementationOnce(() => {
       return Promise.resolve({
         att: 0,
@@ -209,7 +208,6 @@ describe('LearnerCharacteristics', () => {
   })
 
   test('fetching ils data returns error', async () => {
-    const handleClose = jest.fn()
     mockServices.fetchILS.mockImplementationOnce(() => {
       throw new Error('Backend down')
     })
@@ -230,7 +228,6 @@ describe('LearnerCharacteristics', () => {
   })
 
   test('fetching ils data failed returns snackbar', async () => {
-    const handleClose = jest.fn()
     mockServices.fetchILS.mockImplementationOnce(async () => {
       throw new Error('id not found')
     })
@@ -248,7 +245,6 @@ describe('LearnerCharacteristics', () => {
   })
 
   test('fetching ils data failed to fetch, returns loading', async () => {
-    const handleClose = jest.fn()
     mockServices.fetchILS.mockImplementationOnce(async () => {
       throw new Error('Failed to fetch')
     })
@@ -265,7 +261,6 @@ describe('LearnerCharacteristics', () => {
   })
 
   test('fetching user on ListK step failed to fetch, returns loading', async () => {
-    const handleClose = jest.fn()
     mockServices.fetchListK.mockImplementationOnce(() => {
       throw new Error('Failed to fetch')
     })
@@ -285,7 +280,6 @@ describe('LearnerCharacteristics', () => {
   })
 
   test('fetching listk data failed returns snackbar', async () => {
-    const handleClose = jest.fn()
     mockServices.fetchListK.mockImplementationOnce(async () => {
       throw new Error('id not found')
     })
@@ -303,7 +297,6 @@ describe('LearnerCharacteristics', () => {
   })
 
   test('fetching listk data failed to fetch, returns loading', async () => {
-    const handleClose = jest.fn()
     mockServices.fetchListK.mockImplementationOnce(async () => {
       throw new Error('Failed to fetch')
     })
@@ -323,7 +316,6 @@ describe('LearnerCharacteristics', () => {
   })
 
   it('renders null for activeStep 3', () => {
-    const handleClose = jest.fn()
     mockServices.fetchListK.mockImplementationOnce(() => {
       throw new Error('Error')
     })
