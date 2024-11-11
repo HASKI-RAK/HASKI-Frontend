@@ -57,7 +57,7 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
         log.error(t('error.getNews') + ' ' + error)
         setNewsText('')
       })
-  }, [i18next.language])
+  }, [i18next.language, university])
 
   return useMemo(() => ({ isNewsAvailable, newsText }), [isNewsAvailable, newsText])
 }
