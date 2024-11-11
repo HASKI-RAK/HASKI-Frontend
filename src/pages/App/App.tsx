@@ -1,8 +1,6 @@
 import { useEffect } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { ReactFlowProvider } from 'reactflow'
-import { ThemeProvider } from '@common/theme'
-import { HaskiTheme } from '@common/utils'
 import {
   AboutUs,
   Contact,
@@ -18,6 +16,7 @@ import {
   ThemePresentation,
   Topic
 } from '@pages'
+import { ThemeContextProvider } from '@services'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore } from '@store'
@@ -28,7 +27,8 @@ import { usePersistedStore } from '@store'
  * @remarks
  * This is the main component of the application and the entry point after the index.tsx.
  * It contains the {@link MainFrame} and the routes to the other pages.
- * The {@link HaskiTheme} is injected here. Additionally, the {@link AuthProvider} is used to provide the authentication context.
+ * The {@link ThemeContextProvider} provides the theme context.
+ * The {@link AuthProvider} is used to provide the authentication context.
  * The {@link SnackbarProvider} is used to provide the snackbars to all pages.
  *
  * @category Pages
@@ -43,7 +43,7 @@ export const App = () => {
   return (
     <>
       {getXAPI() && (
-        <ThemeProvider theme={HaskiTheme}>
+        <ThemeContextProvider>
           <ReactFlowProvider>
             <SnackbarProvider>
               <Router>
@@ -71,7 +71,7 @@ export const App = () => {
               </Router>
             </SnackbarProvider>
           </ReactFlowProvider>
-        </ThemeProvider>
+        </ThemeContextProvider>
       )}
     </>
   )

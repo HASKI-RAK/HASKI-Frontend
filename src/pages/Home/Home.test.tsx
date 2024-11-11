@@ -4,7 +4,7 @@ import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
 import { Home } from '@pages'
-import { AuthContext } from '@services'
+import { AuthContext, ThemeContextProvider } from '@services'
 
 const navigate = jest.fn()
 
@@ -25,11 +25,13 @@ describe('Test the Home page', () => {
     })
 
     const { container } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
+      <ThemeContextProvider>
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ThemeContextProvider>
     )
 
     await waitFor(() => {
@@ -39,11 +41,13 @@ describe('Test the Home page', () => {
 
   test('render page', () => {
     const result = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
+      <ThemeContextProvider>
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ThemeContextProvider>
     )
 
     expect(result).toBeTruthy()
@@ -51,11 +55,13 @@ describe('Test the Home page', () => {
 
   test('click on course navigates to course page', async () => {
     const { getAllByText } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
+      <ThemeContextProvider>
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ThemeContextProvider>
     )
 
     await waitFor(() => {
@@ -73,11 +79,13 @@ describe('Test the Home page', () => {
     })
 
     const { container } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
+      <ThemeContextProvider>
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ThemeContextProvider>
     )
 
     await waitFor(() => {
@@ -93,11 +101,13 @@ describe('Test the Home page', () => {
     )
 
     const { getByText } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
+      <ThemeContextProvider>
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ThemeContextProvider>
     )
 
     await waitFor(() => {
