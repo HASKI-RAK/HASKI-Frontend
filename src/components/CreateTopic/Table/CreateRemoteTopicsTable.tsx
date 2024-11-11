@@ -1,13 +1,14 @@
 import { ReactNode, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
+import { SkeletonList } from '@components'
 import { RemoteTopics } from '@core'
 import { useCreateRemoteTopicsTable } from './CreateRemoteTopicsTable.hooks'
 
 type CreateRemoteTopicsTableProps = {
   onTopicChange: (selectedTopics: RemoteTopics[]) => void
   selectedTopics: RemoteTopics[]
-  remoteTopics: RemoteTopics[]
+  remoteTopics?: RemoteTopics[]
   children?: ReactNode
 }
 
@@ -29,7 +30,11 @@ const CreateRemoteTopicsTable = ({
         </Typography>
       </Grid>
       <Grid item container alignItems="center" direction="column">
-        {remoteTopics.length === 0 ? (
+        {remoteTopics === undefined ? (
+          <Paper sx={{ padding: '1rem', width: '95%' }}>
+            <SkeletonList />
+          </Paper>
+        ) : remoteTopics.length === 0 ? (
           <Paper sx={{ padding: '1rem', width: '95%' }}>
             <FormGroup>
               <FormControlLabel

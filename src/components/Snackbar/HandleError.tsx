@@ -6,13 +6,14 @@ const HandleError = (
   t: TFunction,
   addSnackbar: (newSnackbar: SnackbarMessageProps) => void,
   errorTranslationMessage: string,
-  error: any
+  error: any,
+  hideDuration: number
 ) => {
   const message = t(errorTranslationMessage)
   addSnackbar({
     message,
     severity: 'error',
-    autoHideDuration: 5000
+    autoHideDuration: hideDuration
   })
   log.error(`${message} ${error}`)
 }

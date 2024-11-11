@@ -1,4 +1,3 @@
-import log from 'loglevel'
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
@@ -53,15 +52,15 @@ const CreateCourseTable = ({ onCourseSelect, selectedCourseName }: CreateCourseT
                 )
               })
               .catch((error) => {
-                HandleError(t, addSnackbar, 'error.fetchCourses', error)
+                HandleError(t, addSnackbar, 'error.fetchCourses', error, 5000)
               })
           })
           .catch((error) => {
-            HandleError(t, addSnackbar, 'error.getRemoteCourses', error)
+            HandleError(t, addSnackbar, 'error.getRemoteCourses', error, 5000)
           })
       })
       .catch((error) => {
-        HandleError(t, addSnackbar, 'error.getUser', error)
+        HandleError(t, addSnackbar, 'error.getUser', error, 5000)
       })
   }, [])
 

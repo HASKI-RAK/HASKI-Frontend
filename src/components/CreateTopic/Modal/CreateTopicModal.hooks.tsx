@@ -147,7 +147,8 @@ export const useCreateTopicModal = ({
                     t,
                     addSnackbar,
                     'error.postCalculateLearningPathForAllStudents',
-                    new Error('Network Error: No response from server')
+                    new Error('Network Error: No response from server'),
+                    5000
                   )
                   setSuccessTopicCreated(false)
                   setCreateTopicIsSending(false)
@@ -156,7 +157,7 @@ export const useCreateTopicModal = ({
             })
         })
         .catch((error) => {
-          HandleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error)
+          HandleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error, 5000)
           setSuccessTopicCreated(false)
         })
         .finally(() => {

@@ -9,13 +9,14 @@ describe('HandleError', () => {
   it('adds a snackbar and logs.error', () => {
     const { t } = useTranslation()
     const error = new Error('An error occurred')
+    const autoHideDuration = 5000
 
-    HandleError(t, mockAddSnackbar, 'error.translationString', error)
+    HandleError(t, mockAddSnackbar, 'error.translationString', error, autoHideDuration)
     expect(mockLogError).toHaveBeenCalledWith('error.translationString Error: An error occurred')
     expect(mockAddSnackbar).toHaveBeenCalledWith({
       message: 'error.translationString',
       severity: 'error',
-      autoHideDuration: 5000
+      autoHideDuration: autoHideDuration
     })
   })
 })

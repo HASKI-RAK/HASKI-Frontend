@@ -47,7 +47,7 @@ const CreateCourseModal = ({
         setUser(user)
       })
       .catch((error) => {
-        HandleError(t, addSnackbar, 'error.getUser', error)
+        HandleError(t, addSnackbar, 'error.getUser', error, 5000)
       })
   }, [])
 

@@ -1,4 +1,3 @@
-import log from 'loglevel'
 import React, { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
@@ -35,7 +34,7 @@ const CreateTopicModal = ({
   const { t } = useTranslation()
   const { courseId } = useParams<{ courseId: string }>()
   const { addSnackbar } = useContext(SnackbarContext)
-  const [remoteTopics, setRemoteTopics] = useState<RemoteTopics[]>([])
+  const [remoteTopics, setRemoteTopics] = useState<RemoteTopics[]>()
   const [createTopicIsSending, setCreateTopicIsSending] = useState<boolean>(false)
   const [alreadyCreatedTopics, setAlreadyCreatedTopics] = useState<LearningPathTopic>()
   const [selectedTopics, setSelectedTopics] = useState<RemoteTopics[]>([])
@@ -104,21 +103,18 @@ const CreateTopicModal = ({
                 )
               })
               .catch((error) => {
-                HandleError(t, addSnackbar, 'error.getRemoteTopics', error)
+                HandleError(t, addSnackbar, 'error.getRemoteTopics', error, 5000)
+                setRemoteTopics([])
               })
           })
           .catch((error) => {
-            HandleError(t, addSnackbar, 'error.getTopics', error)
+            HandleError(t, addSnackbar, 'error.getTopics', error, 5000)
+            setRemoteTopics([])
           })
       })
       .catch((error) => {
-        addSnackbar({
-          message: t('error.getUser'),
-          severity: 'error',
-          autoHideDuration: 5000
-        })
-        log.error(t('error.getUser') + ' ' + error)
-        HandleError(t, addSnackbar, 'error.getUser', error)
+        HandleError(t, addSnackbar, 'error.getUser', error, 5000)
+        setRemoteTopics([])
       })
   }, [activeStep])
 
