@@ -16,6 +16,80 @@ beforeAll(() => {
 
 describe('StudentRatingDashboard', () => {
   it('should render correctly', async () => {
+    mockServices.fetchCourses.mockImplementationOnce(() => {
+      Promise.resolve({
+        courses: [
+          {
+            id: 1,
+            lms_id: 1,
+            name: 'test',
+            university: 'test',
+            created_at: 'test',
+            created_by: 'test',
+            last_updated: 'test',
+            start_date: 'Thu, 31 Oct 2024 15:05:57 GMT'
+          },
+          {
+            id: 2,
+            lms_id: 2,
+            name: 'test',
+            university: 'test',
+            created_at: 'test',
+            created_by: 'test',
+            last_updated: 'test',
+            start_date: 'Thu, 31 Oct 3024 15:05:57 GMT'
+          }
+        ]
+      })
+    })
+
+    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => {
+      Promise.resolve({
+        topics: [
+          {
+            contains_le: true,
+            created_at: 'string',
+            created_by: 'string',
+            id: 1,
+            is_topic: true,
+            last_updated: 'string',
+            lms_id: 1,
+            name: 'Wirtschaftsinformatik',
+            parent_id: 1,
+            university: 'HS-Kempten',
+            student_topic: {
+              done: true,
+              done_at: 'string',
+              id: 1,
+              student_id: 1,
+              topic_id: 1,
+              visits: ['string']
+            }
+          },
+          {
+            contains_le: true,
+            created_at: 'string',
+            created_by: 'string',
+            id: 2,
+            is_topic: true,
+            last_updated: 'string',
+            lms_id: 1,
+            name: 'Informatik',
+            parent_id: 1,
+            university: 'HS-Kempten',
+            student_topic: {
+              done: true,
+              done_at: 'string',
+              id: 2,
+              student_id: 1,
+              topic_id: 2,
+              visits: ['string']
+            }
+          }
+        ]
+      })
+    })
+
     const { getByText, container, getAllByRole } = render(
       <MemoryRouter>
         <StudentRatingDashboard />
