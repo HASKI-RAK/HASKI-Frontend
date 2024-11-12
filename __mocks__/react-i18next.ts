@@ -4,6 +4,74 @@ const useTranslation = () => {
   return {
     t: (str: string) => {
       switch (str) {
+        case 'components.CreateLearningElementClassificationTable.classifications':
+          return [
+            {
+              name: 'Select Classification',
+              key: 'noKey',
+              disabled: true
+            },
+            {
+              name: 'LZ - Learning Objective',
+              key: 'LZ',
+              disabled: false
+            },
+            {
+              name: 'KÜ - Overview',
+              key: 'KÜ',
+              disabled: false
+            },
+            {
+              name: 'FO - Forum',
+              key: 'FO',
+              disabled: false
+            },
+            {
+              name: 'EK - Explanation',
+              key: 'EK',
+              disabled: false
+            },
+            {
+              name: 'AN - Animation',
+              key: 'AN',
+              disabled: false
+            },
+            {
+              name: 'BE - Example',
+              key: 'BE',
+              disabled: false
+            },
+            {
+              name: 'AB - Application Example',
+              key: 'AB',
+              disabled: false
+            },
+            {
+              name: 'ÜB - Exercise',
+              key: 'ÜB',
+              disabled: false
+            },
+            {
+              name: 'SE - Self-Assessment Test',
+              key: 'SE',
+              disabled: false
+            },
+            {
+              name: 'ZL - Additional Literature',
+              key: 'ZL',
+              disabled: false
+            },
+            {
+              name: 'ZF - Summary',
+              key: 'ZF',
+              disabled: false
+            },
+            {
+              name: 'RQ - Reflective Quiz',
+              key: 'RQ',
+              disabled: false
+            }
+          ]
         case 'components.ContactForm.types':
           return [
             { value: '1', label: 'issue' },

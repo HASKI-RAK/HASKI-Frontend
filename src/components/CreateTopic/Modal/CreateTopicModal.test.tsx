@@ -1,14 +1,28 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import React from 'react'
 import Router, { MemoryRouter } from 'react-router-dom'
-import { AuthContext, RoleContext, RoleContextType, SnackbarContext } from '@services'
-import { usePersistedStore, useStore } from '@store'
-import CreateTopicModal, { CreateTopicModalProps } from './CreateTopicModal'
+import { AuthContext, RoleContext, RoleContextType } from '@services'
+import CreateTopicModal from './CreateTopicModal'
 
 jest.mock('react-i18next', () => ({
+  ...jest.requireActual('react-i18next'),
+  // This mock makes sure any components using the useTranslation hook can use it without warnings
   useTranslation: () => ({
-    t: (key: string) => key
+    t: (key: string) => {
+      if (key === 'components.CreateLearningElementClassificationTable.classifications') {
+        return [
+          { name: 'Select Classification', key: 'noKey', disabled: true },
+          { name: 'LZ - Learning Objective', key: 'LZ', disabled: false },
+          { name: 'KÜ - Overview', key: 'KÜ', disabled: false }
+        ]
+      }
+      return key // Return the key itself if no specific mock value is provided
+    },
+    i18n: {
+      getFixedT: () => (key: string) => key
+      // Other properties your component may use
+    }
   })
 }))
 
@@ -98,7 +112,7 @@ describe('CreateTopicModal', () => {
   })
 
   it('calls handleCreate on submit in the last step', async () => {
-    jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
+    jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '1' })
     const handleCloseCreateTopicModal = jest.fn()
     const { getByText, getAllByRole } = render(
       <MemoryRouter>
@@ -115,8 +129,18 @@ describe('CreateTopicModal', () => {
       </MemoryRouter>
     )
 
-    await waitFor(() => {
+    await waitFor(async () => {
       expect(getAllByRole('checkbox').length).toEqual(4)
+      fireEvent.click(getAllByRole('checkbox')[0])
+      await waitFor(async () => {
+        fireEvent.click(getByText('appGlobal.next'))
+        expect(getByText('superKnowledge.pdf')).toBeInTheDocument()
+        fireEvent.click(getAllByRole('checkbox')[0])
+        fireEvent.click(getByText('appGlobal.next'))
+        await waitFor(() => {
+          expect(getByText('classification')).toBeInTheDocument()
+        })
+      })
     })
 
     // Navigate to the last step

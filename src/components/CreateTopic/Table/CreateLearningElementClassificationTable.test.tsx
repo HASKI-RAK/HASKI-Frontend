@@ -2,32 +2,12 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
-import { act } from 'react-test-renderer'
 import { RemoteLearningElement, RemoteTopics } from '@core'
 import CreateLearningElementClassificationTable, {
   CreateLearningElementClassificationTableOptionsType,
   LearningElementWithClassification
 } from './CreateLearningElementClassificationTable'
 
-jest.mock('react-i18next', () => ({
-  // This mock makes sure any components using the useTranslation hook can use it without warnings
-  useTranslation: () => ({
-    t: (key: string) => {
-      if (key === 'components.CreateLearningElementClassificationTable.classifications') {
-        return [
-          { name: 'Select Classification', key: 'noKey', disabled: true },
-          { name: 'LZ - Learning Objective', key: 'LZ', disabled: false },
-          { name: 'KÜ - Overview', key: 'KÜ', disabled: false }
-        ]
-      }
-      return key // Return the key itself if no specific mock value is provided
-    },
-    i18n: {
-      getFixedT: () => (key: string) => key
-      // Other properties your component may use
-    }
-  })
-}))
 describe('CreateLearningElementClassificationTable', () => {
   const mockOptions: CreateLearningElementClassificationTableOptionsType = [
     {
@@ -48,6 +28,51 @@ describe('CreateLearningElementClassificationTable', () => {
     {
       name: 'FO - Forum',
       key: 'FO',
+      disabled: false
+    },
+    {
+      name: 'EK - Explanation',
+      key: 'EK',
+      disabled: false
+    },
+    {
+      name: 'AN - Animation',
+      key: 'AN',
+      disabled: false
+    },
+    {
+      name: 'BE - Example',
+      key: 'BE',
+      disabled: false
+    },
+    {
+      name: 'AB - Application Example',
+      key: 'AB',
+      disabled: false
+    },
+    {
+      name: 'ÜB - Exercise',
+      key: 'ÜB',
+      disabled: false
+    },
+    {
+      name: 'SE - Self-Assessment Test',
+      key: 'SE',
+      disabled: false
+    },
+    {
+      name: 'ZL - Additional Literature',
+      key: 'ZL',
+      disabled: false
+    },
+    {
+      name: 'ZF - Summary',
+      key: 'ZF',
+      disabled: false
+    },
+    {
+      name: 'RQ - Reflective Quiz',
+      key: 'RQ',
       disabled: false
     }
   ]
@@ -85,7 +110,6 @@ describe('CreateLearningElementClassificationTable', () => {
           LearningElements={{}}
           LearningElementsClassification={{}}
           onLearningElementChange={mockOnLearningElementChange}
-          options={mockOptions}
         />
       </MemoryRouter>
     )
@@ -93,7 +117,7 @@ describe('CreateLearningElementClassificationTable', () => {
     expect(screen.getByTestId('SkeletonList Element-1')).toBeInTheDocument()
   })
 
-  /*it('renders topics with learning elements and no test classifications', () => {
+  it('renders topics with learning elements and no test classifications', async () => {
     const { getAllByRole, getByText, getByLabelText, getAllByText, queryByLabelText } = render(
       <MemoryRouter>
         <CreateLearningElementClassificationTable
@@ -101,30 +125,6 @@ describe('CreateLearningElementClassificationTable', () => {
           LearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
-        />
-      </MemoryRouter>
-    )
-
-    expect(getByText('Topic 1')).toBeInTheDocument()
-    expect(getByLabelText('Element 1')).toBeInTheDocument()
-    expect(getByLabelText('Element 2')).toBeInTheDocument()
-    expect(queryByLabelText('LZ - Learning Objective')).not.toBeInTheDocument()
-
-    const button = getAllByRole('combobox')[0]
-    fireEvent.mouseDown(button)
-    const menuItems = getAllByRole('option')
-    expect(menuItems).toHaveLength(1)
-  })*/
-
-  it('renders topics with learning elements and classifications', () => {
-    const { getAllByRole, getByText, getByLabelText, getAllByText, queryByLabelText } = render(
-      <MemoryRouter>
-        <CreateLearningElementClassificationTable
-          selectedTopics={mockSelectedTopics}
-          LearningElements={mockLearningElements}
-          LearningElementsClassification={mockLearningElementsClassification}
-          onLearningElementChange={mockOnLearningElementChange}
-          options={mockOptions}
         />
       </MemoryRouter>
     )
@@ -138,6 +138,10 @@ describe('CreateLearningElementClassificationTable', () => {
     fireEvent.mouseDown(button)
     const menuItems = getAllByRole('option')
     expect(menuItems).toHaveLength(mockOptions.length)
+    fireEvent.click(getAllByRole('option')[1])
+    await waitFor(() => {
+      expect(getByText('LZ - Learning Objective')).toBeInTheDocument()
+    })
   })
 
   it('calls handleClassificationChange when classification is changed in the dropdown', async () => {
@@ -148,7 +152,6 @@ describe('CreateLearningElementClassificationTable', () => {
           LearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
-          options={mockOptions}
         />
       </MemoryRouter>
     )
@@ -169,7 +172,6 @@ describe('CreateLearningElementClassificationTable', () => {
           LearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
-          options={mockOptions}
         />
       </MemoryRouter>
     )
@@ -193,8 +195,7 @@ describe('CreateLearningElementClassificationTable', () => {
           selectedTopics={mockSelectedTopics}
           LearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
-          onLearningElementChange={mockOnLearningElementChange}
-          options={mockOptions}>
+          onLearningElementChange={mockOnLearningElementChange}>
           <div data-testid="child">Child Content</div>
         </CreateLearningElementClassificationTable>
       </MemoryRouter>
