@@ -1,14 +1,14 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
+import { act } from 'react-test-renderer'
 import { RemoteLearningElement, RemoteTopics } from '@core'
 import CreateLearningElementClassificationTable, {
   CreateLearningElementClassificationTableOptionsType,
   LearningElementWithClassification
 } from './CreateLearningElementClassificationTable'
 
-//Does not work anyway... On first render, maybe if component is clicked.
 jest.mock('react-i18next', () => ({
   // This mock makes sure any components using the useTranslation hook can use it without warnings
   useTranslation: () => ({
@@ -117,7 +117,7 @@ describe('CreateLearningElementClassificationTable', () => {
   })*/
 
   it('renders topics with learning elements and classifications', () => {
-    const { getAllByRole, getByText, getByLabelText, queryByLabelText } = render(
+    const { getAllByRole, getByText, getByLabelText, getAllByText, queryByLabelText } = render(
       <MemoryRouter>
         <CreateLearningElementClassificationTable
           selectedTopics={mockSelectedTopics}
