@@ -20,20 +20,28 @@ export type LearningElementWithClassification = RemoteLearningElement & {
   classification: string
 }
 
-type CreateLearningElementClassificationTableProps = {
+export type CreateLearningElementClassificationTableProps = {
   selectedTopics: RemoteTopics[]
   LearningElements: { [key: number]: RemoteLearningElement[] }
   LearningElementsClassification: { [key: number]: LearningElementWithClassification[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: LearningElementWithClassification[] }) => void
   children?: ReactNode
+  options?: { name: string; key: string; disabled: boolean }[] //for testing
 }
+
+export type CreateLearningElementClassificationTableOptionsType = {
+  name: string
+  key: string
+  disabled: boolean
+}[]
 
 const CreateLearningElementClassificationTable = ({
   selectedTopics,
   LearningElements,
   LearningElementsClassification,
   onLearningElementChange,
-  children
+  children,
+  options
 }: CreateLearningElementClassificationTableProps) => {
   //Hooks
   const { t } = useTranslation()
@@ -44,10 +52,13 @@ const CreateLearningElementClassificationTable = ({
 
   //Constants
   const learningElementClassifications = useMemo(() => {
-    return t('components.CreateLearningElementClassificationTable.classifications', {
-      returnObjects: true
-    }) as { name: string; key: string; disabled: boolean }[]
-  }, [t])
+    return (
+      options ??
+      (t('components.CreateLearningElementClassificationTable.classifications', {
+        returnObjects: true
+      }) as [{ name: string; key: string; disabled: boolean }])
+    )
+  }, [t, options])
 
   useEffect(() => {
     const updatedClassifications = Object.keys(LearningElements).reduce((accumulator, topicId) => {
