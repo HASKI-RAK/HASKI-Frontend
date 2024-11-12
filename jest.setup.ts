@@ -573,7 +573,7 @@ const mockDataServices: MockDataServices = {
             lms_learning_element_name: 'Strategie Übung - Leicht'
           }
         ],
-        topic_lms_id: 1,
+        topic_lms_id: 3,
         topic_lms_name: 'General'
       },
       {
@@ -584,7 +584,7 @@ const mockDataServices: MockDataServices = {
             lms_learning_element_name: 'DefinitionDeklaration und AufrufeinerFunktion'
           }
         ],
-        topic_lms_id: 2,
+        topic_lms_id: 4,
         topic_lms_name: 'Bekannte Entwurfsmuster'
       }
     ])

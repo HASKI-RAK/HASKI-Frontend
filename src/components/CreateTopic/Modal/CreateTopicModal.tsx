@@ -13,7 +13,7 @@ import CreateLearningElementsStep from './CreateLearningElementsStep'
 import CreateRemoteTopicsStep from './CreateRemoteTopicsStep'
 import { useCreateTopicModal } from './CreateTopicModal.hooks'
 
-type CreateTopicModalProps = {
+export type CreateTopicModalProps = {
   openCreateTopicModal?: boolean
   successTopicCreated: boolean
   setSuccessTopicCreated: React.Dispatch<React.SetStateAction<boolean>>
