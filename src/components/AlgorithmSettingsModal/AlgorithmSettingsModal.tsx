@@ -30,7 +30,6 @@ type AlgorithmSettingsModalProps = {
   topicId?: number
   teacherAlgorithm?: string
   studentAlgorithm?: string
-  options?: { name: string; description: string; key: string }[] //for testing
 }
 
 export type OptionsType = {
@@ -53,7 +52,6 @@ export type OptionsType = {
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
   const { t } = useTranslation()
   const options =
-    props.options ??
     [...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as OptionsType)].slice(1)
 
   const [selected, setSelected] = useState(0)

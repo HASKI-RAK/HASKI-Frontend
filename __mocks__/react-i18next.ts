@@ -1399,6 +1399,39 @@ const useTranslation = () => {
               }
             ]
           ]
+        case 'components.AlgorithmSettingsModal.algorithms':
+          return  [
+            {
+              "name": "Select Algorithm",
+              "description": "Please select an algorithm for the learning path calculation.",
+              "key": "noKey",
+              "disabled": true
+            },
+            {
+              "name": "Fixed Order",
+              "description": "The learning elements are presented in a predetermined order.",
+              "key": "default",
+              "disabled": false
+            },
+            {
+              "name": "Graf",
+              "description": "This algorithm is based on the learning adaptive mechanism by Graf et al. It calculates the learning path based on the learning style of the learner.",
+              "key": "graf",
+              "disabled": false
+            },
+            {
+              "name": "ACO",
+              "description": "The Ant Colony Algorithm (ACO) is inspired by the behavior of ant workers. It calculates the learning path by simulating ants who leave behind pheromones to mark the best path.",
+              "key": "aco",
+              "disabled": false
+            },
+            {
+              "name": "Genetic Algorithm",
+              "description": "Based on natural selection, it combines learning paths to evolve the best one over several iterations.",
+              "key": "ga",
+              "disabled": false
+            }
+          ]
         default:
           return str
       }

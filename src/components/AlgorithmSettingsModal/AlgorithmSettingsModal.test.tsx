@@ -5,44 +5,40 @@ import { MemoryRouter } from 'react-router-dom'
 import { SnackbarContext } from '@services'
 import AlgorithmSettingsModal from './AlgorithmSettingsModal'
 
-const mockOptions = [
-  { name: 'option1', description: 'description1', key: 'key1' },
-  { name: 'option2', description: 'description2', key: 'key2' },
-  { name: 'option3', description: 'description3', key: 'key3' }
-]
 
 describe('AlgorithmSettingsModal', () => {
-  it('is displayed with all options', () => {
+  it('is displayed with all options', async () => {
     const open = true
-    const teacherAlgorithm = 'key1'
+    const teacherAlgorithm = 'default'
     const { getByTestId, getByLabelText } = render(
       <MemoryRouter>
         <AlgorithmSettingsModal
           teacherAlgorithm={teacherAlgorithm}
           isOpen={open}
           handleClose={jest.fn()}
-          options={mockOptions}
         />
       </MemoryRouter>
     )
 
-    expect(getByTestId('algorithm-modal')).toBeInTheDocument()
-    expect(getByLabelText('option1')).toBeInTheDocument()
-    expect(getByLabelText('option2')).toBeInTheDocument()
-    expect(getByLabelText('option3')).toBeInTheDocument()
-    expect(getByTestId('teacher-icon')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(getByTestId('algorithm-modal')).toBeInTheDocument()
+      expect(getByLabelText('Fixed Order')).toBeInTheDocument()
+      expect(getByLabelText('ACO')).toBeInTheDocument()
+      expect(getByLabelText('Genetic Algorithm')).toBeInTheDocument()
+      expect(getByTestId('teacher-icon')).toBeInTheDocument()
+    })
   })
 
   test('if the radio buttons work', () => {
     const open = true
     const { getByLabelText } = render(
       <MemoryRouter>
-        <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} options={mockOptions} />
+        <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
       </MemoryRouter>
     )
 
-    const button1 = getByLabelText('option1') as HTMLInputElement
-    const button2 = getByLabelText('option2') as HTMLInputElement
+    const button1 = getByLabelText('Fixed Order') as HTMLInputElement
+    const button2 = getByLabelText('Graf') as HTMLInputElement
 
     expect(button1.checked).toBe(true)
     expect(button2.checked).toBe(false)
@@ -71,7 +67,7 @@ describe('AlgorithmSettingsModal', () => {
     const open = true
     const { getByTestId } = render(
       <MemoryRouter>
-        <AlgorithmSettingsModal isOpen={open} handleClose={handleClose} topicId={0} options={mockOptions} />
+        <AlgorithmSettingsModal isOpen={open} handleClose={handleClose} topicId={0} />
       </MemoryRouter>
     )
 
@@ -119,7 +115,7 @@ describe('AlgorithmSettingsModal', () => {
     const { getByTestId } = render(
       <SnackbarContext.Provider value={my_context}>
         <MemoryRouter>
-          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} options={mockOptions} />
+          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
         </MemoryRouter>
       </SnackbarContext.Provider>
     )
@@ -171,7 +167,7 @@ describe('AlgorithmSettingsModal', () => {
     const { getByTestId } = render(
       <SnackbarContext.Provider value={my_context}>
         <MemoryRouter>
-          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} options={mockOptions} />
+          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
         </MemoryRouter>
       </SnackbarContext.Provider>
     )
@@ -211,7 +207,6 @@ describe('AlgorithmSettingsModal', () => {
           changeObserver={mockObserverFunction}
           handleClose={jest.fn()}
           topicId={0}
-          options={mockOptions}
         />
       </MemoryRouter>
     )
@@ -250,7 +245,6 @@ describe('AlgorithmSettingsModal', () => {
           changeObserver={mockObserverFunction}
           handleClose={jest.fn()}
           topicId={0}
-          options={mockOptions}
         />
       </MemoryRouter>
     )
@@ -302,7 +296,7 @@ describe('AlgorithmSettingsModal', () => {
     const { getByTestId } = render(
       <SnackbarContext.Provider value={my_context}>
         <MemoryRouter>
-          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} options={mockOptions} />
+          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
         </MemoryRouter>
       </SnackbarContext.Provider>
     )
@@ -352,7 +346,7 @@ describe('AlgorithmSettingsModal', () => {
     const { getByTestId } = render(
       <SnackbarContext.Provider value={my_context}>
         <MemoryRouter>
-          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} options={mockOptions} />
+          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
         </MemoryRouter>
       </SnackbarContext.Provider>
     )
