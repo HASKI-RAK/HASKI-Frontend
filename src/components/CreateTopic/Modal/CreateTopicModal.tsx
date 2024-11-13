@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
-import { CreateAlgorithmTableNameProps, HandleError } from '@components'
+import { CreateAlgorithmTableNameProps, handleError } from '@components'
 import { LearningPathTopic, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -103,20 +103,22 @@ const CreateTopicModal = ({
                 )
               })
               .catch((error) => {
-                HandleError(t, addSnackbar, 'error.getRemoteTopics', error, 5000)
+                handleError(t, addSnackbar, 'error.getRemoteTopics', error, 5000)
                 setRemoteTopics([])
               })
           })
           .catch((error) => {
-            HandleError(t, addSnackbar, 'error.getTopics', error, 5000)
+            handleError(t, addSnackbar, 'error.getTopics', error, 5000)
             setRemoteTopics([])
+            setAlreadyCreatedTopics({ topics: [] })
           })
       })
       .catch((error) => {
-        HandleError(t, addSnackbar, 'error.getUser', error, 5000)
+        handleError(t, addSnackbar, 'error.getUser', error, 5000)
         setRemoteTopics([])
+        setAlreadyCreatedTopics({ topics: [] })
       })
-  }, [activeStep])
+  }, [activeStep, getUser, getTopics, getRemoteTopics])
 
   return (
     <Modal open={openCreateTopicModal} onClose={handleCloseCreateTopicModal}>

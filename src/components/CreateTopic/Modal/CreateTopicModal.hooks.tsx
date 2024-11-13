@@ -1,7 +1,7 @@
 import log from 'loglevel'
 import React, { useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CreateAlgorithmTableNameProps, HandleError } from '@components'
+import { CreateAlgorithmTableNameProps, handleError } from '@components'
 import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {
   SnackbarContext,
@@ -143,7 +143,7 @@ export const useCreateTopicModal = ({
                   log.info(t('appGlobal.dataSendSuccessful'))
                   setSuccessTopicCreated(true)
                 } else {
-                  HandleError(
+                  handleError(
                     t,
                     addSnackbar,
                     'error.postCalculateLearningPathForAllStudents',
@@ -157,7 +157,7 @@ export const useCreateTopicModal = ({
             })
         })
         .catch((error) => {
-          HandleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error, 5000)
+          handleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error, 5000)
           setSuccessTopicCreated(false)
         })
         .finally(() => {

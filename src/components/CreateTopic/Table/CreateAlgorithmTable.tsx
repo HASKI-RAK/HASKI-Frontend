@@ -11,7 +11,7 @@ export type CreateAlgorithmTableNameProps = {
   algorithmShortName: string
 }
 
-type CreateAlgorithmTableProps = {
+export type CreateAlgorithmTableProps = {
   selectedTopics: RemoteTopics[]
   selectedLearningElementClassification: { [key: number]: LearningElementWithClassification[] }
   onAlgorithmChange: (selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps }) => void
@@ -20,7 +20,7 @@ type CreateAlgorithmTableProps = {
 }
 
 const CreateAlgorithmTable = ({
-  selectedTopics = [],
+  selectedTopics,
   selectedLearningElementClassification,
   onAlgorithmChange,
   selectedAlgorithms,

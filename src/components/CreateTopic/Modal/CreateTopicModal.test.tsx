@@ -1,30 +1,10 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { fireEvent, getByText, render, waitFor } from '@testing-library/react'
+import { mockServices } from 'jest.setup'
 import React from 'react'
 import Router, { MemoryRouter } from 'react-router-dom'
 import { AuthContext, RoleContext, RoleContextType } from '@services'
 import CreateTopicModal from './CreateTopicModal'
-
-jest.mock('react-i18next', () => ({
-  ...jest.requireActual('react-i18next'),
-  // This mock makes sure any components using the useTranslation hook can use it without warnings
-  useTranslation: () => ({
-    t: (key: string) => {
-      if (key === 'components.CreateLearningElementClassificationTable.classifications') {
-        return [
-          { name: 'Select Classification', key: 'noKey', disabled: true },
-          { name: 'LZ - Learning Objective', key: 'LZ', disabled: false },
-          { name: 'KÜ - Overview', key: 'KÜ', disabled: false }
-        ]
-      }
-      return key // Return the key itself if no specific mock value is provided
-    },
-    i18n: {
-      getFixedT: () => (key: string) => key
-      // Other properties your component may use
-    }
-  })
-}))
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -39,7 +19,7 @@ describe('CreateTopicModal', () => {
 
   it('renders the modal with the first step', async () => {
     jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
-    const { getByTestId, getByText } = render(
+    const { getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
@@ -64,7 +44,7 @@ describe('CreateTopicModal', () => {
   it('closes the modal when close button is clicked', () => {
     jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
     const handleCloseCreateTopicModal = jest.fn()
-    const { getByTestId, getByText } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
@@ -114,14 +94,15 @@ describe('CreateTopicModal', () => {
   it('calls handleCreate on submit in the last step', async () => {
     jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '1' })
     const handleCloseCreateTopicModal = jest.fn()
-    const { getByText, getAllByRole } = render(
+    const handleSetSuccessTopicCreated = jest.fn()
+    const { getByText, getAllByRole, getByRole, queryByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
             <CreateTopicModal
               openCreateTopicModal={true}
               successTopicCreated={false}
-              setSuccessTopicCreated={jest.fn()}
+              setSuccessTopicCreated={handleSetSuccessTopicCreated}
               handleCloseCreateTopicModal={handleCloseCreateTopicModal}
             />
           </RoleContext.Provider>
@@ -129,82 +110,120 @@ describe('CreateTopicModal', () => {
       </MemoryRouter>
     )
 
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(getAllByRole('checkbox').length).toEqual(4)
       fireEvent.click(getAllByRole('checkbox')[0])
-      await waitFor(async () => {
-        fireEvent.click(getByText('appGlobal.next'))
-        expect(getByText('superKnowledge.pdf')).toBeInTheDocument()
-        fireEvent.click(getAllByRole('checkbox')[0])
-        fireEvent.click(getByText('appGlobal.next'))
-        await waitFor(() => {
-          expect(getByText('classification')).toBeInTheDocument()
-        })
-      })
+    })
+    await waitFor(() => {
+      fireEvent.click(getByText('appGlobal.next'))
+      expect(getByText('superKnowledge.pdf')).toBeInTheDocument()
+      fireEvent.click(getAllByRole('checkbox')[0])
+      fireEvent.click(getByText('appGlobal.next'))
     })
 
-    // Navigate to the last step
-    /* for (let i = 0; i < 2; i++) {
-
-        fireEvent.click(screen.getByText('Next'))
-      await waitFor(() => expect(screen.getByText(createTopicModalStepperSteps[i + 1])).toBeInTheDocument())
-    }
-
-    // Submit the form
-    const submitButton = screen.getByText('Submit')
-    fireEvent.click(submitButton)
+    await waitFor(() => {
+      const button = getAllByRole('combobox')[0]
+      fireEvent.mouseDown(button)
+      const menuItems = getAllByRole('option')
+      expect(menuItems).toHaveLength(13)
+      fireEvent.click(getAllByRole('option')[1])
+      fireEvent.click(getByText('appGlobal.next'))
+    })
 
     await waitFor(() => {
-      expect(mockHandleCreate).toHaveBeenCalled()
-      expect(defaultProps.setSuccessTopicCreated).toHaveBeenCalledWith(true)
-    })*/
-  })
-  /*
-  it('shows an error snackbar when getUser API call fails', async () => {
-    mockGetUser.mockRejectedValue(new Error('User fetch failed'))
-
-    renderWithContext(defaultProps)
+      const button = getAllByRole('combobox')[0]
+      fireEvent.mouseDown(button)
+      const menuItems = getAllByRole('option')
+      expect(menuItems).toHaveLength(5)
+      fireEvent.click(getAllByRole('option')[1])
+      fireEvent.click(getByText('components.CreateTopicModal.createTopics'))
+    })
 
     await waitFor(() => {
-      expect(mockAddSnackbar).toHaveBeenCalledWith(
-        expect.objectContaining({ message: 'error.getUser', severity: 'error' })
-      )
+      expect(queryByText('components.CreateTopicModal.createTopics')).not.toBeInTheDocument()
+      expect(getByRole('progressbar')).toBeInTheDocument()
     })
   })
 
-  it('displays a loading state while fetching topics and remote topics', async () => {
-    renderWithContext(defaultProps)
+  it('renders empty remoteTopics when getUser API call fails', async () => {
+    mockServices.fetchUser.mockImplementationOnce(() => new Error('Error'))
 
-    expect(screen.getByText('Loading translations...')).toBeInTheDocument()
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { getByText } = render(
+      <MemoryRouter>
+        <CreateTopicModal
+          openCreateTopicModal={true}
+          successTopicCreated={false}
+          setSuccessTopicCreated={jest.fn()}
+          handleCloseCreateTopicModal={jest.fn()}
+        />
+      </MemoryRouter>
+    )
 
     await waitFor(() => {
-      expect(mockGetUser).toHaveBeenCalled()
-      expect(mockGetTopics).toHaveBeenCalled()
-      expect(mockGetRemoteTopics).toHaveBeenCalled()
+      expect(getByText('components.TableRemoteTopics.noAdditionalTopics')).toBeInTheDocument()
     })
   })
 
-  it('shows an error snackbar when getRemoteTopics API call fails', async () => {
-    mockGetRemoteTopics.mockRejectedValue(new Error('Remote topics fetch failed'))
+  it('renders empty remoteTopics when getTopics API call fails', async () => {
+    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => new Error('Error'))
 
-    renderWithContext(defaultProps)
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { getByText } = render(
+      <MemoryRouter>
+        <CreateTopicModal
+          openCreateTopicModal={true}
+          successTopicCreated={false}
+          setSuccessTopicCreated={jest.fn()}
+          handleCloseCreateTopicModal={jest.fn()}
+        />
+      </MemoryRouter>
+    )
 
     await waitFor(() => {
-      expect(mockAddSnackbar).toHaveBeenCalledWith(
-        expect.objectContaining({ message: 'error.getRemoteTopics', severity: 'error' })
-      )
+      expect(getByText('components.TableRemoteTopics.noAdditionalTopics')).toBeInTheDocument()
     })
   })
 
-  it('navigates correctly between steps when Back and Next are clicked', async () => {
-    renderWithContext(defaultProps)
+  /*it('displays a loading state while fetching topics and remote topics', async () => {
+     renderWithContext(defaultProps)
 
-    // Click next button to navigate to step 2
-    fireEvent.click(screen.getByText('Next'))
-    await waitFor(() => expect(screen.getByText('appGlobal.learningElements')).toBeInTheDocument())
+     expect(screen.getByText('Loading translations...')).toBeInTheDocument()
 
-    // Click back button to navigate to step 1
-    fireEvent.click(screen.getByText('Back'))
-    await waitFor(() => expect(screen.getByText('appGlobal.topics')).toBeInTheDocument())
-  })*/
+     await waitFor(() => {
+     expect(mockGetUser).toHaveBeenCalled()
+     expect(mockGetTopics).toHaveBeenCalled()
+     expect(mockGetRemoteTopics).toHaveBeenCalled()
+     })
+     })
+
+     it('shows an error snackbar when getRemoteTopics API call fails', async () => {
+     mockGetRemoteTopics.mockRejectedValue(new Error('Remote topics fetch failed'))
+
+     renderWithContext(defaultProps)
+
+     await waitFor(() => {
+     expect(mockAddSnackbar).toHaveBeenCalledWith(
+     expect.objectContaining({ message: 'error.getRemoteTopics', severity: 'error' })
+     )
+     })
+     })
+
+     it('navigates correctly between steps when Back and Next are clicked', async () => {
+     renderWithContext(defaultProps)
+
+     // Click next button to navigate to step 2
+     fireEvent.click(screen.getByText('Next'))
+     await waitFor(() => expect(screen.getByText('appGlobal.learningElements')).toBeInTheDocument())
+
+     // Click back button to navigate to step 1
+     fireEvent.click(screen.getByText('Back'))
+     await waitFor(() => expect(screen.getByText('appGlobal.topics')).toBeInTheDocument())
+     })*/
 })

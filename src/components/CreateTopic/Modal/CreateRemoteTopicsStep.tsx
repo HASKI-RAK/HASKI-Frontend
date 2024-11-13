@@ -41,7 +41,7 @@ const CreateRemoteTopicsStep = ({
           </Grid>
         </Box>
       </CreateRemoteTopicsTable>
-      {alreadyCreatedTopics && alreadyCreatedTopics.topics.length > 0 && (
+      {alreadyCreatedTopics && alreadyCreatedTopics?.topics.length > 0 && (
         <ExistingTopicsTable existingTopics={alreadyCreatedTopics} />
       )}
     </>

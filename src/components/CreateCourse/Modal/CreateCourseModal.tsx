@@ -1,11 +1,11 @@
 import dayjs, { Dayjs } from 'dayjs'
 import log from 'loglevel'
-import { Dispatch, SetStateAction, memo, useContext, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, memo, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, CircularProgress, Fab, Grid, Modal } from '@common/components'
 import { Close } from '@common/icons'
-import { CreateCourseDetailsTable, CreateCourseTable, HandleError } from '@components'
-import { RemoteCourse, User } from '@core'
+import { CreateCourseDetailsTable, CreateCourseTable } from '@components'
+import { RemoteCourse } from '@core'
 import { SnackbarContext, postCourse } from '@services'
 import { usePersistedStore } from '@store'
 
@@ -30,7 +30,6 @@ const CreateCourseModal = ({
   const { t } = useTranslation()
   const [selectedRemoteCourse, setSelectedRemoteCourse] = useState<RemoteCourse>()
   const [courseStartDateValue, setCourseStartDateValue] = useState<Dayjs | null>(dayjs(new Date()))
-  const [user, setUser] = useState<User>()
   const [isSending, setIsSending] = useState<boolean>(false)
 
   //Stores
@@ -40,18 +39,7 @@ const CreateCourseModal = ({
   const handleCourseSelection = (course: RemoteCourse) => {
     setSelectedRemoteCourse(course)
   }
-
-  useEffect(() => {
-    getUser()
-      .then((user) => {
-        setUser(user)
-      })
-      .catch((error) => {
-        HandleError(t, addSnackbar, 'error.getUser', error, 5000)
-      })
-  }, [])
-
-  const handleCreateCourse = () => {
+  const handleCreateCourse = async () => {
     setIsSending(true)
 
     const formatDate = (date: Dayjs) => {
@@ -62,12 +50,16 @@ const CreateCourseModal = ({
       lms_id: selectedRemoteCourse?.id,
       name: selectedRemoteCourse?.fullname,
       start_date: courseStartDateValue ? formatDate(courseStartDateValue) : formatDate(dayjs(new Date())),
-      university: user?.university,
-      created_by: user?.settings.user_id
+      university: await getUser().then((user) => {
+        return user.university
+      }),
+      created_by: await getUser().then((user) => {
+        return user.settings.user_id
+      })
     }
 
-    postCourse({ outputJson: JSON.stringify(createCourse) }).then((response) => {
-      if (response) {
+    postCourse({ outputJson: JSON.stringify(createCourse) }).then((course) => {
+      if (course) {
         addSnackbar({
           message: t('appGlobal.dataSendSuccessful'),
           severity: 'success',
@@ -106,8 +98,8 @@ const CreateCourseModal = ({
           }}>
           <Fab
             color="primary"
-            id={'create-course-modal-close-button'}
-            data-testid={'create-course-modal-close-button'}
+            id="create-course-modal-close-button"
+            data-testid="create-course-modal-close-button"
             onClick={() => handleCloseCreateCourseModal()}
             sx={{
               position: 'sticky',
@@ -118,10 +110,7 @@ const CreateCourseModal = ({
           </Fab>
           {activeStepCreateCourseModal === 0 ? (
             <Grid>
-              <CreateCourseTable
-                onCourseSelect={handleCourseSelection}
-                selectedCourseName={selectedRemoteCourse?.fullname ?? ''}
-              />
+              <CreateCourseTable onCourseSelect={handleCourseSelection} selectedCourse={selectedRemoteCourse} />
               <Grid container justifyContent="center" alignItems="center" sx={{ mt: 2 }}>
                 <Button
                   id="create-course-modal-next-step"

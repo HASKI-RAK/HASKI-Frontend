@@ -2,7 +2,7 @@ import { TFunction } from 'i18next'
 import log from 'loglevel'
 import { SnackbarMessageProps } from '@components'
 
-const HandleError = (
+const handleError = (
   t: TFunction,
   addSnackbar: (newSnackbar: SnackbarMessageProps) => void,
   errorTranslationMessage: string,
@@ -18,4 +18,4 @@ const HandleError = (
   log.error(`${message} ${error}`)
 }
 
-export default HandleError
+export default handleError
