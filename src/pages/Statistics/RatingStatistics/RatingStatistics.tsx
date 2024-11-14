@@ -25,7 +25,7 @@ import { AuthContext } from '@services'
 const RatingStatistics = () => {
   const { t } = useTranslation()
   const [selected, setSelected] = useState<string>('student')
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
   const { isAuth } = useContext(AuthContext)
 
   const handleChange = useCallback(
