@@ -32,7 +32,7 @@ describe('CreateCourseTable', () => {
     render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <CreateCourseTable onCourseSelect={mockOnCourseSelect} selectedCourseName={selectedCourse['fullname']} />
+          <CreateCourseTable onCourseSelect={mockOnCourseSelect} selectedCourse={selectedCourse} />
         </AuthContext.Provider>
       </MemoryRouter>
     )
@@ -42,7 +42,7 @@ describe('CreateCourseTable', () => {
     const { getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <CreateCourseTable onCourseSelect={mockOnCourseSelect} selectedCourseName={selectedCourse['fullname']} />
+          <CreateCourseTable onCourseSelect={mockOnCourseSelect} selectedCourse={selectedCourse} />
         </AuthContext.Provider>
       </MemoryRouter>
     )
@@ -62,7 +62,7 @@ describe('CreateCourseTable', () => {
     const { getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <CreateCourseTable onCourseSelect={mockOnCourseSelect} selectedCourseName={selectedCourse['fullname']} />
+          <CreateCourseTable onCourseSelect={mockOnCourseSelect} selectedCourse={selectedCourse} />
         </AuthContext.Provider>
       </MemoryRouter>
     )
@@ -80,7 +80,7 @@ describe('CreateCourseTable', () => {
     const { getByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <CreateCourseTable onCourseSelect={mockOnCourseSelect} selectedCourseName={selectedCourse['fullname']} />
+          <CreateCourseTable onCourseSelect={mockOnCourseSelect} selectedCourse={selectedCourse} />
         </AuthContext.Provider>
       </MemoryRouter>
     )
@@ -100,7 +100,7 @@ describe('CreateCourseTable', () => {
     const { getByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <CreateCourseTable onCourseSelect={mockOnCourseSelect} selectedCourseName={selectedCourse['fullname']} />
+          <CreateCourseTable onCourseSelect={mockOnCourseSelect} selectedCourse={selectedCourse} />
         </AuthContext.Provider>
       </MemoryRouter>
     )
@@ -119,7 +119,7 @@ describe('CreateCourseTable', () => {
     const { getByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <CreateCourseTable onCourseSelect={mockOnCourseSelect} selectedCourseName={selectedCourse['fullname']} />
+          <CreateCourseTable onCourseSelect={mockOnCourseSelect} selectedCourse={selectedCourse} />
         </AuthContext.Provider>
       </MemoryRouter>
     )
