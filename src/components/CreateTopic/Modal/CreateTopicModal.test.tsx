@@ -3,7 +3,7 @@ import { fireEvent, getByText, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import React from 'react'
 import Router, { MemoryRouter } from 'react-router-dom'
-import { AuthContext, RoleContext, RoleContextType } from '@services'
+import { AuthContext, RoleContext, RoleContextType, fetchRemoteTopics } from '@services'
 import CreateTopicModal from './CreateTopicModal'
 
 jest.mock('react-router-dom', () => ({
@@ -145,7 +145,7 @@ describe('CreateTopicModal', () => {
     })
   })
 
-  it('renders empty remoteTopics when getUser API call fails', async () => {
+  it('renders empty remoteTopics and alreadyCreatedTopics when getUser API call fails', async () => {
     mockServices.fetchUser.mockImplementationOnce(() => new Error('Error'))
 
     jest.spyOn(console, 'error').mockImplementation(() => {
@@ -168,8 +168,31 @@ describe('CreateTopicModal', () => {
     })
   })
 
-  it('renders empty remoteTopics when getTopics API call fails', async () => {
+  it('renders empty remoteTopics and alreadyCreatedTopics when getTopics API call fails', async () => {
     mockServices.fetchLearningPathTopic.mockImplementationOnce(() => new Error('Error'))
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { getByText } = render(
+      <MemoryRouter>
+        <CreateTopicModal
+          openCreateTopicModal={true}
+          successTopicCreated={false}
+          setSuccessTopicCreated={jest.fn()}
+          handleCloseCreateTopicModal={jest.fn()}
+        />
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(getByText('components.TableRemoteTopics.noAdditionalTopics')).toBeInTheDocument()
+    })
+  })
+
+  it('renders empty getRemoteTopics and alreadyCreatedTopics when getTopics API call fails', async () => {
+    mockServices.fetchRemoteTopics.mockImplementationOnce(() => new Error('Error'))
 
     jest.spyOn(console, 'error').mockImplementation(() => {
       return

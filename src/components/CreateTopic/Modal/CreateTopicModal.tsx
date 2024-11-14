@@ -105,6 +105,7 @@ const CreateTopicModal = ({
               .catch((error) => {
                 handleError(t, addSnackbar, 'error.getRemoteTopics', error, 5000)
                 setRemoteTopics([])
+                setAlreadyCreatedTopics({ topics: [] })
               })
           })
           .catch((error) => {
@@ -118,7 +119,7 @@ const CreateTopicModal = ({
         setRemoteTopics([])
         setAlreadyCreatedTopics({ topics: [] })
       })
-  }, [activeStep, getUser, getTopics, getRemoteTopics])
+  }, [activeStep])
 
   return (
     <Modal open={openCreateTopicModal} onClose={handleCloseCreateTopicModal}>
