@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom'
-import { fireEvent, getByText, render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import React from 'react'
 import Router, { MemoryRouter } from 'react-router-dom'
-import { AuthContext, RoleContext, RoleContextType, fetchRemoteTopics } from '@services'
+import { AuthContext, RoleContext, RoleContextType } from '@services'
 import CreateTopicModal from './CreateTopicModal'
 
 jest.mock('react-router-dom', () => ({
@@ -16,6 +16,29 @@ describe('CreateTopicModal', () => {
     isStudentRole: false,
     isCourseCreatorRole: true
   } as RoleContextType
+
+  it('does not render the modal with open false', async () => {
+    jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
+    const { queryByText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <CreateTopicModal
+              successTopicCreated={false}
+              setSuccessTopicCreated={jest.fn()}
+              handleCloseCreateTopicModal={jest.fn()}
+            />
+          </RoleContext.Provider>
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    // Verify the modal is open and the first step is displayed
+    expect(queryByText('appGlobal.topics')).not.toBeInTheDocument()
+    expect(queryByText('appGlobal.learningElements')).not.toBeInTheDocument()
+    expect(queryByText('appGlobal.classifications')).not.toBeInTheDocument()
+    expect(queryByText('appGlobal.algorithms')).not.toBeInTheDocument()
+  })
 
   it('renders the modal with the first step', async () => {
     jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
@@ -91,6 +114,39 @@ describe('CreateTopicModal', () => {
     })
   })
 
+  it('clicks on back button', async () => {
+    jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
+    const handleCloseCreateTopicModal = jest.fn()
+    const { getByText, getAllByRole } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <CreateTopicModal
+              openCreateTopicModal={true}
+              successTopicCreated={false}
+              setSuccessTopicCreated={jest.fn()}
+              handleCloseCreateTopicModal={handleCloseCreateTopicModal}
+            />
+          </RoleContext.Provider>
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(getAllByRole('checkbox').length).toEqual(4)
+      fireEvent.click(getAllByRole('checkbox')[0])
+    })
+    await waitFor(() => {
+      fireEvent.click(getByText('appGlobal.next'))
+      expect(getByText('superKnowledge.pdf')).toBeInTheDocument()
+      fireEvent.click(getAllByRole('checkbox')[0])
+      fireEvent.click(getByText('appGlobal.back'))
+    })
+    await waitFor(() => {
+      expect(getAllByRole('checkbox').length).toEqual(4)
+    })
+  })
+
   it('calls handleCreate on submit in the last step', async () => {
     jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '1' })
     const handleCloseCreateTopicModal = jest.fn()
@@ -146,7 +202,9 @@ describe('CreateTopicModal', () => {
   })
 
   it('renders empty remoteTopics and alreadyCreatedTopics when getUser API call fails', async () => {
-    mockServices.fetchUser.mockImplementationOnce(() => new Error('Error'))
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
 
     jest.spyOn(console, 'error').mockImplementation(() => {
       return
@@ -169,7 +227,10 @@ describe('CreateTopicModal', () => {
   })
 
   it('renders empty remoteTopics and alreadyCreatedTopics when getTopics API call fails', async () => {
-    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => new Error('Error'))
+    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => {
+      throw new Error('getLearningPathTopic error')
+    })
+    jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
 
     jest.spyOn(console, 'error').mockImplementation(() => {
       return
@@ -192,7 +253,9 @@ describe('CreateTopicModal', () => {
   })
 
   it('renders empty getRemoteTopics and alreadyCreatedTopics when getTopics API call fails', async () => {
-    mockServices.fetchRemoteTopics.mockImplementationOnce(() => new Error('Error'))
+    mockServices.fetchRemoteTopics.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
 
     jest.spyOn(console, 'error').mockImplementation(() => {
       return

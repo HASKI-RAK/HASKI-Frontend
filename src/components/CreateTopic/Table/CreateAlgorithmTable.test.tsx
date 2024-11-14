@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
 import { LearningElementWithClassification } from '@components'
 import CreateAlgorithmTable, { CreateAlgorithmTableProps } from './CreateAlgorithmTable'
@@ -74,6 +75,26 @@ describe('CreateAlgorithmTable', () => {
     jest.clearAllMocks()
   })
 
+  it('renders topics with skeleton', async () => {
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <CreateAlgorithmTable
+          selectedLearningElementClassification={notAllSelectedLearningElementClassifications}
+          selectedTopics={[]}
+          selectedAlgorithms={[]}
+          onAlgorithmChange={defaultProps.onAlgorithmChange}
+          children={defaultProps.children}
+        />
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      act(() => {
+        expect(getByTestId('SkeletonList Element-0')).toBeInTheDocument()
+      })
+    })
+  })
+
   it('renders topics with initial algorithm selection', async () => {
     const { getAllByRole } = render(
       <MemoryRouter>
@@ -108,7 +129,6 @@ describe('CreateAlgorithmTable', () => {
     await waitFor(() => {
       const selectElement1 = getAllByRole('combobox')[0]
       expect(selectElement1).toBeEnabled()
-      const selectElement2 = getAllByRole('combobox')[1]
       expect(getByText('components.CreateAlgorithmTable.missingClassification')).toBeInTheDocument()
     })
   })
