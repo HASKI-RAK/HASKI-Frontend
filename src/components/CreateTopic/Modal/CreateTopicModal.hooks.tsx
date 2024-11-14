@@ -1,6 +1,7 @@
+import log from 'loglevel'
 import React, { useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CreateAlgorithmTableNameProps } from '@components'
+import { CreateAlgorithmTableNameProps, HandleError } from '@components'
 import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {
   SnackbarContext,
@@ -91,7 +92,7 @@ export const useCreateTopicModal = ({
   }
 
   const handleCreate = useCallback(
-    async (
+    (
       topicName: string,
       lmsCourseId: number,
       selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] },
@@ -99,55 +100,68 @@ export const useCreateTopicModal = ({
       courseId?: string
     ) => {
       if (!courseId) return
-      try {
-        const user = await getUser()
-        const topic = await handleCreateTopics(topicName, lmsCourseId, courseId, user)
-        const topicLmsId = topic.lms_id
-        const topicId = topic.id
-        setCreateTopicIsSending(true)
+      return getUser()
+        .then((user) => {
+          return handleCreateTopics(topicName, lmsCourseId, courseId, user)
+            .then((topic) => {
+              const topicLmsId = topic.lms_id
+              const topicId = topic.id
+              setCreateTopicIsSending(true)
 
-        await Promise.all(
-          selectedLearningElementsClassification[topicLmsId].map(async (element) => {
-            await handleCreateLearningElements(
-              element.lms_learning_element_name,
-              element.lms_activity_type,
-              element.classification,
-              element.lms_id,
-              topicId,
-              user
-            )
-          })
-        )
-
-        await handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topicId, algorithmShortName)
-        const response = await handleCalculateLearningPaths(
-          user.settings.user_id,
-          user.role,
-          user.university,
-          courseId,
-          topicId
-        )
-
-        if (response) {
-          addSnackbar({
-            message: t('appGlobal.dataSendSuccessful'),
-            severity: 'success',
-            autoHideDuration: 5000
-          })
-          setSuccessTopicCreated(true)
-        } else {
-          throw new Error(t('error.postCalculateLearningPathForAllStudents'))
-        }
-      } catch (error) {
-        addSnackbar({
-          message: error instanceof Error ? error.message : t('error.genericError'),
-          severity: 'error',
-          autoHideDuration: 5000
+              return Promise.all(
+                selectedLearningElementsClassification[topicLmsId].map((element) =>
+                  handleCreateLearningElements(
+                    element.lms_learning_element_name,
+                    element.lms_activity_type,
+                    element.classification,
+                    element.lms_id,
+                    topicId,
+                    user
+                  )
+                )
+              ).then(() => ({ topicId, user }))
+            })
+            .then(({ topicId, user }) => {
+              return handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topicId, algorithmShortName).then(
+                () => ({ topicId, user })
+              )
+            })
+            .then(({ topicId, user }) => {
+              return handleCalculateLearningPaths(
+                user.settings.user_id,
+                user.role,
+                user.university,
+                courseId,
+                topicId
+              ).then((response) => {
+                if (response) {
+                  addSnackbar({
+                    message: t('appGlobal.dataSendSuccessful'),
+                    severity: 'success',
+                    autoHideDuration: 5000
+                  })
+                  log.info(t('appGlobal.dataSendSuccessful'))
+                  setSuccessTopicCreated(true)
+                } else {
+                  HandleError(
+                    t,
+                    addSnackbar,
+                    'error.postCalculateLearningPathForAllStudents',
+                    new Error('Network Error: No response from server')
+                  )
+                  setSuccessTopicCreated(false)
+                  setCreateTopicIsSending(false)
+                }
+              })
+            })
         })
-        setSuccessTopicCreated(false)
-      } finally {
-        setCreateTopicIsSending(false)
-      }
+        .catch((error) => {
+          HandleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error)
+          setSuccessTopicCreated(false)
+        })
+        .finally(() => {
+          setCreateTopicIsSending(false)
+        })
     },
     [
       getUser,

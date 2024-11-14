@@ -7,7 +7,7 @@ type ExistingTopicsTableProps = {
   existingTopics: LearningPathTopic
 }
 
-const ExistingTopicsTable = memo(({ existingTopics }: ExistingTopicsTableProps) => {
+const ExistingTopicsTable = ({ existingTopics }: ExistingTopicsTableProps) => {
   //Hooks
   const { t } = useTranslation()
 
@@ -34,7 +34,5 @@ const ExistingTopicsTable = memo(({ existingTopics }: ExistingTopicsTableProps) 
       </Grid>
     </Grid>
   )
-})
-// eslint-disable-next-line immutable/no-mutation
-ExistingTopicsTable.displayName = 'ExistingTopicsTable'
-export default ExistingTopicsTable
+}
+export default memo(ExistingTopicsTable)

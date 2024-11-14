@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, CircularProgress, Grid } from '@common/components'
 import { CreateAlgorithmTable } from '@components'
@@ -17,7 +17,7 @@ type CreateAlgorithmsStepProps = {
   onSubmit: () => Promise<void>
 }
 
-const CreateAlgorithmsStep: React.FC<CreateAlgorithmsStepProps> = ({
+const CreateAlgorithmsStep = ({
   selectedTopics,
   selectedLearningElementsClassification,
   selectedAlgorithms,
@@ -26,7 +26,7 @@ const CreateAlgorithmsStep: React.FC<CreateAlgorithmsStepProps> = ({
   successTopicCreated,
   onBack,
   onSubmit
-}) => {
+}: CreateAlgorithmsStepProps) => {
   const { t } = useTranslation()
 
   const isSubmitDisabled =
@@ -59,4 +59,4 @@ const CreateAlgorithmsStep: React.FC<CreateAlgorithmsStepProps> = ({
   )
 }
 
-export default CreateAlgorithmsStep
+export default memo(CreateAlgorithmsStep)

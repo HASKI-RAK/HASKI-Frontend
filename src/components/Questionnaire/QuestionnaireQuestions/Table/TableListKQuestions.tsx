@@ -301,7 +301,7 @@ const TableListKQuestions = memo(({ successSend, setSuccessSend, testUndefined }
     <Box>
       {activeStep == 0 ? (
         <CoverSheet
-          header={t('components.QuestionnaireResultsModal.listKNoData')}
+          header={t('components.LearnerCharacteristics.listKNoData')}
           body={t('components.TableListKQuestions.introduction')}
         />
       ) : (

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, getByTestId, getByText, render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { act } from 'react-dom/test-utils'

@@ -25,7 +25,7 @@ type QuestionnaireResultsListKLoadingProps = {
   listkLoading: boolean
 }
 
-type QuestionnaireResultsModalProps = {
+type LearnerCharacteristicsProps = {
   open?: boolean
   handleClose?: () => void
   activeStepForTesting?: number
@@ -43,10 +43,9 @@ const QuestionnaireResultsListKLoading = memo(({ t, listkLoading }: Questionnair
       ) : (
         <Stack alignItems="center">
           <Typography variant="body2" data-testid={'ActiveStepListKNoData'}>
-            {t('components.QuestionnaireResultsModal.noData-1')}
+            {t('components.LearnerCharacteristics.noData-1')}
             <ListItem sx={{ display: 'list-item' }}>
-              {t('components.QuestionnaireResultsModal.listKNoData')}{' '}
-              {t('components.QuestionnaireResultsModal.noData-2')}
+              {t('components.LearnerCharacteristics.listKNoData')} {t('components.LearnerCharacteristics.noData-2')}
             </ListItem>
           </Typography>
         </Stack>
@@ -69,10 +68,9 @@ const QuestionnaireResultsILSLoading = memo(({ t, ilsLoading }: QuestionnaireRes
       ) : (
         <Stack alignItems="center">
           <Typography variant="body2" data-testid={'ActiveStepILSNoData'}>
-            {t('components.QuestionnaireResultsModal.noData-1')}
+            {t('components.LearnerCharacteristics.noData-1')}
             <ListItem sx={{ display: 'list-item' }}>
-              {t('components.QuestionnaireResultsModal.ilsLongNoData-1')}{' '}
-              {t('components.QuestionnaireResultsModal.noData-2')}
+              {t('components.LearnerCharacteristics.ilsLongNoData-1')} {t('components.LearnerCharacteristics.noData-2')}
             </ListItem>
           </Typography>
         </Stack>
@@ -83,7 +81,7 @@ const QuestionnaireResultsILSLoading = memo(({ t, ilsLoading }: QuestionnaireRes
 // eslint-disable-next-line immutable/no-mutation
 QuestionnaireResultsILSLoading.displayName = 'QuestionnaireResultsILSLoading'
 
-const QuestionnaireResultsModal = memo(({ open = true, activeStepForTesting = 0 }: QuestionnaireResultsModalProps) => {
+const LearnerCharacteristics = memo(({ open = true, activeStepForTesting = 0 }: LearnerCharacteristicsProps) => {
   const { t } = useTranslation()
   const getUser = usePersistedStore((state) => state.getUser)
   const { addSnackbar } = useContext(SnackbarContext)
@@ -227,7 +225,7 @@ const QuestionnaireResultsModal = memo(({ open = true, activeStepForTesting = 0 
               window.open('/files/Informationsdokument_ILS_ListK_HASKI.pdf', '_blank')
             }}>
             <Typography variant="body2" gutterBottom>
-              {t('components.QuestionnaireResultsModal.moreInformation')}
+              {t('components.LearnerCharacteristics.moreInformation')}
             </Typography>
           </Link>
         </Stack>
@@ -254,6 +252,6 @@ const QuestionnaireResultsModal = memo(({ open = true, activeStepForTesting = 0 
   )
 })
 // eslint-disable-next-line immutable/no-mutation
-QuestionnaireResultsModal.displayName = 'QuestionnaireResultsModal'
+LearnerCharacteristics.displayName = 'LearnerCharacteristics'
 
-export default QuestionnaireResultsModal
+export default LearnerCharacteristics

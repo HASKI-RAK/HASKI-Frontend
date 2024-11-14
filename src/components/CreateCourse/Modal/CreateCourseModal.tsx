@@ -1,10 +1,10 @@
 import dayjs, { Dayjs } from 'dayjs'
 import log from 'loglevel'
-import React, { Dispatch, SetStateAction, memo, useContext, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, CircularProgress, Fab, Grid, Modal } from '@common/components'
 import { Close } from '@common/icons'
-import { CreateCourseDetailsTable, CreateCourseTable } from '@components'
+import { CreateCourseDetailsTable, CreateCourseTable, HandleError } from '@components'
 import { RemoteCourse, User } from '@core'
 import { SnackbarContext, postCourse } from '@services'
 import { usePersistedStore } from '@store'
@@ -47,12 +47,7 @@ const CreateCourseModal = ({
         setUser(user)
       })
       .catch((error) => {
-        addSnackbar({
-          message: t('error.getUser'),
-          severity: 'error',
-          autoHideDuration: 5000
-        })
-        log.error(t('error.getUser') + ' ' + error)
+        HandleError(t, addSnackbar, 'error.getUser', error)
       })
   }, [])
 
