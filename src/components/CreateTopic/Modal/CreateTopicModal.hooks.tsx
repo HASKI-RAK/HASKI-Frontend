@@ -13,7 +13,7 @@ import {
 import { usePersistedStore } from '@store'
 import { RemoteLearningElementWithClassification } from './CreateTopicModal'
 
-type useCreateTopicModalProps = {
+export type useCreateTopicModalProps = {
   setCreateTopicIsSending: React.Dispatch<React.SetStateAction<boolean>>
   setSuccessTopicCreated: React.Dispatch<React.SetStateAction<boolean>>
   setSelectedTopics: React.Dispatch<React.SetStateAction<RemoteTopics[]>>

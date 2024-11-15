@@ -1,14 +1,14 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
+import * as router from 'react-router'
 import React from 'react'
-import Router, { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import { AuthContext, RoleContext, RoleContextType } from '@services'
 import CreateTopicModal from './CreateTopicModal'
 
 jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useParams: jest.fn()
+  ...jest.requireActual('react-router-dom')
 }))
 
 describe('CreateTopicModal', () => {
@@ -17,8 +17,12 @@ describe('CreateTopicModal', () => {
     isCourseCreatorRole: true
   } as RoleContextType
 
+  jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2' })
+
+  const handleCloseCreateTopicModal = jest.fn()
+  const handleSetSuccessTopicCreated = jest.fn()
+
   it('does not render the modal with open false', async () => {
-    jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
     const { queryByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -41,7 +45,6 @@ describe('CreateTopicModal', () => {
   })
 
   it('renders the modal with the first step', async () => {
-    jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
     const { getByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -65,7 +68,6 @@ describe('CreateTopicModal', () => {
   })
 
   it('closes the modal when close button is clicked', () => {
-    jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
     const handleCloseCreateTopicModal = jest.fn()
     const { getByTestId } = render(
       <MemoryRouter>
@@ -88,7 +90,6 @@ describe('CreateTopicModal', () => {
   })
 
   it('displays the next step when Next button is clicked', async () => {
-    jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
     const handleCloseCreateTopicModal = jest.fn()
     const { getByText } = render(
       <MemoryRouter>
@@ -115,8 +116,6 @@ describe('CreateTopicModal', () => {
   })
 
   it('clicks on back button', async () => {
-    jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
-    const handleCloseCreateTopicModal = jest.fn()
     const { getByText, getAllByRole } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -124,7 +123,7 @@ describe('CreateTopicModal', () => {
             <CreateTopicModal
               openCreateTopicModal={true}
               successTopicCreated={false}
-              setSuccessTopicCreated={jest.fn()}
+              setSuccessTopicCreated={handleSetSuccessTopicCreated}
               handleCloseCreateTopicModal={handleCloseCreateTopicModal}
             />
           </RoleContext.Provider>
@@ -148,10 +147,7 @@ describe('CreateTopicModal', () => {
   })
 
   it('calls handleCreate on submit in the last step', async () => {
-    jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '1' })
-    const handleCloseCreateTopicModal = jest.fn()
-    const handleSetSuccessTopicCreated = jest.fn()
-    const { getByText, getAllByRole, getByRole, queryByText } = render(
+    const { getByText, getAllByRole, getByTestId, queryByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
@@ -196,8 +192,83 @@ describe('CreateTopicModal', () => {
     })
 
     await waitFor(() => {
-      expect(queryByText('components.CreateTopicModal.createTopics')).not.toBeInTheDocument()
-      expect(getByRole('progressbar')).toBeInTheDocument()
+      expect(mockServices.postTopic).toHaveBeenCalled()
+    })
+
+    await waitFor(() => {
+      expect(mockServices.postLearningElement).toHaveBeenCalled()
+      expect(mockServices.postLearningPathAlgorithm).toHaveBeenCalled()
+      expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
+      expect(handleSetSuccessTopicCreated).toHaveBeenCalledWith(true)
+      expect(queryByText('components.CreateTopicModal.createTopics')).toBeInTheDocument()
+    })
+
+    await waitFor(() => {
+      fireEvent.click(getByTestId('create-topic-modal-close-button'))
+    })
+  })
+
+  it('calls handleCreate on submit in the last step, but calculation fails', async () => {
+    mockServices.postCalculateLearningPathForAllStudents.mockImplementationOnce(() => Promise.resolve())
+
+    const { getByText, getAllByRole, getByTestId, queryByText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <CreateTopicModal
+              openCreateTopicModal={true}
+              successTopicCreated={false}
+              setSuccessTopicCreated={handleSetSuccessTopicCreated}
+              handleCloseCreateTopicModal={handleCloseCreateTopicModal}
+            />
+          </RoleContext.Provider>
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(getAllByRole('checkbox').length).toEqual(4)
+      fireEvent.click(getAllByRole('checkbox')[0])
+    })
+    await waitFor(() => {
+      fireEvent.click(getByText('appGlobal.next'))
+      expect(getByText('superKnowledge.pdf')).toBeInTheDocument()
+      fireEvent.click(getAllByRole('checkbox')[0])
+      fireEvent.click(getByText('appGlobal.next'))
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox')[0]
+      fireEvent.mouseDown(button)
+      const menuItems = getAllByRole('option')
+      expect(menuItems).toHaveLength(13)
+      fireEvent.click(getAllByRole('option')[1])
+      fireEvent.click(getByText('appGlobal.next'))
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox')[0]
+      fireEvent.mouseDown(button)
+      const menuItems = getAllByRole('option')
+      expect(menuItems).toHaveLength(5)
+      fireEvent.click(getAllByRole('option')[1])
+      fireEvent.click(getByText('components.CreateTopicModal.createTopics'))
+    })
+
+    await waitFor(() => {
+      expect(mockServices.postTopic).toHaveBeenCalled()
+    })
+
+    await waitFor(() => {
+      expect(mockServices.postLearningElement).toHaveBeenCalled()
+      expect(mockServices.postLearningPathAlgorithm).toHaveBeenCalled()
+      expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
+      expect(handleSetSuccessTopicCreated).toHaveBeenCalledWith(false)
+      expect(queryByText('components.CreateTopicModal.createTopics')).toBeInTheDocument()
+    })
+
+    await waitFor(() => {
+      fireEvent.click(getByTestId('create-topic-modal-close-button'))
     })
   })
 
@@ -230,7 +301,6 @@ describe('CreateTopicModal', () => {
     mockServices.fetchLearningPathTopic.mockImplementationOnce(() => {
       throw new Error('getLearningPathTopic error')
     })
-    jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
 
     jest.spyOn(console, 'error').mockImplementation(() => {
       return
@@ -277,39 +347,148 @@ describe('CreateTopicModal', () => {
     })
   })
 
-  /*it('displays a loading state while fetching topics and remote topics', async () => {
-     renderWithContext(defaultProps)
+  it('calls handleCreate on submit in the last step, but returns without give courseId', async () => {
+    mockServices.postCalculateLearningPathForAllStudents.mockImplementationOnce(() => Promise.resolve())
+    jest.spyOn(router, 'useParams').mockReturnValue({})
 
-     expect(screen.getByText('Loading translations...')).toBeInTheDocument()
+    const { getByText, getAllByRole } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <CreateTopicModal
+              openCreateTopicModal={true}
+              successTopicCreated={false}
+              setSuccessTopicCreated={handleSetSuccessTopicCreated}
+              handleCloseCreateTopicModal={handleCloseCreateTopicModal}
+            />
+          </RoleContext.Provider>
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
 
-     await waitFor(() => {
-     expect(mockGetUser).toHaveBeenCalled()
-     expect(mockGetTopics).toHaveBeenCalled()
-     expect(mockGetRemoteTopics).toHaveBeenCalled()
-     })
-     })
+    await waitFor(() => {
+      expect(getAllByRole('checkbox').length).toEqual(4)
+      fireEvent.click(getAllByRole('checkbox')[0])
+    })
+    await waitFor(() => {
+      fireEvent.click(getByText('appGlobal.next'))
+      expect(getByText('superKnowledge.pdf')).toBeInTheDocument()
+      fireEvent.click(getAllByRole('checkbox')[0])
+      fireEvent.click(getByText('appGlobal.next'))
+    })
 
-     it('shows an error snackbar when getRemoteTopics API call fails', async () => {
-     mockGetRemoteTopics.mockRejectedValue(new Error('Remote topics fetch failed'))
+    await waitFor(() => {
+      const button = getAllByRole('combobox')[0]
+      fireEvent.mouseDown(button)
+      const menuItems = getAllByRole('option')
+      expect(menuItems).toHaveLength(13)
+      fireEvent.click(getAllByRole('option')[1])
+      fireEvent.click(getByText('appGlobal.next'))
+    })
 
-     renderWithContext(defaultProps)
+    await waitFor(() => {
+      const button = getAllByRole('combobox')[0]
+      fireEvent.mouseDown(button)
+      const menuItems = getAllByRole('option')
+      expect(menuItems).toHaveLength(5)
+      fireEvent.click(getAllByRole('option')[1])
+      fireEvent.click(getByText('components.CreateTopicModal.createTopics'))
+    })
 
-     await waitFor(() => {
-     expect(mockAddSnackbar).toHaveBeenCalledWith(
-     expect.objectContaining({ message: 'error.getRemoteTopics', severity: 'error' })
-     )
-     })
-     })
+    await waitFor(() => {
+      expect(mockServices.postTopic).not.toHaveBeenCalled()
+      expect(handleSetSuccessTopicCreated).not.toHaveBeenCalled()
+    })
+  })
 
-     it('navigates correctly between steps when Back and Next are clicked', async () => {
-     renderWithContext(defaultProps)
+  it('changes topic after elements, classifications and algorithms are set', async () => {
+    const { getByText, getAllByRole } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <CreateTopicModal
+              openCreateTopicModal={true}
+              successTopicCreated={false}
+              setSuccessTopicCreated={handleSetSuccessTopicCreated}
+              handleCloseCreateTopicModal={handleCloseCreateTopicModal}
+            />
+          </RoleContext.Provider>
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
 
-     // Click next button to navigate to step 2
-     fireEvent.click(screen.getByText('Next'))
-     await waitFor(() => expect(screen.getByText('appGlobal.learningElements')).toBeInTheDocument())
+    await waitFor(() => {
+      expect(getAllByRole('checkbox').length).toEqual(4)
+      fireEvent.click(getAllByRole('checkbox')[0])
+    })
+    await waitFor(() => {
+      fireEvent.click(getByText('appGlobal.next'))
+      expect(getByText('superKnowledge.pdf')).toBeInTheDocument()
+      fireEvent.click(getAllByRole('checkbox')[0])
+      fireEvent.click(getByText('appGlobal.next'))
+    })
 
-     // Click back button to navigate to step 1
-     fireEvent.click(screen.getByText('Back'))
-     await waitFor(() => expect(screen.getByText('appGlobal.topics')).toBeInTheDocument())
-     })*/
+    await waitFor(() => {
+      const button = getAllByRole('combobox')[0]
+      fireEvent.mouseDown(button)
+      const menuItems = getAllByRole('option')
+      expect(menuItems).toHaveLength(13)
+      fireEvent.click(getAllByRole('option')[1])
+      fireEvent.click(getByText('appGlobal.next'))
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox')[0]
+      fireEvent.mouseDown(button)
+      const menuItems = getAllByRole('option')
+      expect(menuItems).toHaveLength(5)
+      fireEvent.click(getAllByRole('option')[1])
+    })
+
+    await waitFor(() => {
+      expect(getByText('appGlobal.back')).toBeInTheDocument()
+      fireEvent.click(getByText('appGlobal.back'))
+    })
+
+    await waitFor(() => {
+      expect(getByText('appGlobal.back')).toBeInTheDocument()
+      fireEvent.click(getByText('appGlobal.back'))
+    })
+
+    await waitFor(() => {
+      expect(getByText('appGlobal.back')).toBeInTheDocument()
+      fireEvent.click(getByText('appGlobal.back'))
+    })
+
+    await waitFor(() => {
+      expect(getAllByRole('checkbox').length).toEqual(4)
+      fireEvent.click(getAllByRole('checkbox')[0])
+      expect(getAllByRole('checkbox')[0]).not.toBeChecked()
+    })
+  })
+
+  it('renders empty remoteTopics and alreadyCreatedTopics when getUser API call fails', async () => {
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { getByText } = render(
+      <MemoryRouter>
+        <CreateTopicModal
+          openCreateTopicModal={true}
+          successTopicCreated={false}
+          setSuccessTopicCreated={jest.fn()}
+          handleCloseCreateTopicModal={jest.fn()}
+        />
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(getByText('components.TableRemoteTopics.noAdditionalTopics')).toBeInTheDocument()
+    })
+  })
 })

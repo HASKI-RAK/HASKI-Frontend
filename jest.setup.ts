@@ -167,6 +167,27 @@ const mockDataServices: MockDataServices = {
       ]
     })
   ),
+  postLearningElement: jest.fn(() =>
+    Promise.resolve({
+      id: 1,
+      lms_id: 1,
+      activity_type: 'h5p',
+      classification: 'KÜ',
+      name: 'Introduction to Machine Learning',
+      university: 'University of Example',
+      created_by: 'Dr. John Smith',
+      created_at: '2023-08-10T10:45:00Z',
+      last_updated: '2023-09-01T14:30:00Z',
+      student_learning_element: {
+        id: 10,
+        student_id: 11,
+        learning_element_id: 1,
+        done: true,
+        done_at: '2023-09-05T09:15:00Z',
+        visits: ['2023-08-12T13:00:00Z', '2023-08-15T15:30:00Z', '2023-09-05T09:00:00Z']
+      }
+    })
+  ),
   fetchLearningPathTopic: jest.fn(() =>
     Promise.resolve({
       topics: [
@@ -211,6 +232,39 @@ const mockDataServices: MockDataServices = {
           }
         }
       ]
+    })
+  ),
+  postTopic: jest.fn(() =>
+    Promise.resolve({
+      contains_le: true,
+      created_at: '2023-09-15T14:30:00Z',
+      created_by: 'Professor Jane Doe',
+      id: 3,
+      is_topic: true,
+      last_updated: '2023-10-01T12:00:00Z',
+      lms_id: 3,
+      name: 'Introduction to Data Science',
+      parent_id: null,
+      student_topic: {
+        done: false,
+        done_at: null,
+        id: 2,
+        student_id: 10,
+        topic_id: 1,
+        visits: ['2023-09-16T09:00:00Z', '2023-09-17T10:30:00Z', '2023-09-18T11:00:00Z']
+      },
+      university: 'HS-KE'
+    })
+  ),
+  postCalculateLearningPathForAllStudents: jest.fn(() =>
+    Promise.resolve({
+      based_on: 'aco',
+      calculated_on: '2023-10-10T08:30:00Z',
+      course_id: 1,
+      id: 5,
+      path: '1,2,3,4,5',
+      student_id: 1,
+      topic_id: 2
     })
   ),
   postContactForm: jest.fn(() => Promise.resolve({ status: undefined })),
@@ -350,6 +404,28 @@ const mockDataServices: MockDataServices = {
         timecompleted: '1699967821'
       }
     ])
+  ),
+  postLearningPathAlgorithm: jest.fn(() =>
+    Promise.resolve({
+      contains_le: true,
+      created_at: '2023-09-15T14:30:00Z',
+      created_by: 'Professor Jane Doe',
+      id: 101,
+      is_topic: true,
+      last_updated: '2023-10-01T12:00:00Z',
+      lms_id: 2001,
+      name: 'Introduction to Artificial Intelligence',
+      parent_id: null,
+      student_topic: {
+        done: true,
+        done_at: '2023-10-05T15:00:00Z',
+        id: 501,
+        student_id: 1001,
+        topic_id: 101,
+        visits: ['2023-09-16T09:00:00Z', '2023-09-17T10:30:00Z', '2023-09-18T11:00:00Z', '2023-10-01T14:00:00Z']
+      },
+      university: 'HS-KE'
+    })
   ),
   fetchStudentLpLeAlg: jest.fn(() =>
     Promise.resolve({
@@ -525,12 +601,12 @@ const mockDataServices: MockDataServices = {
       }
     ])
   ),
-  postCalculateRating: jest.fn(() => {
+  postCalculateRating: jest.fn(() =>
     Promise.resolve({
       student_rating: {},
       learning_element_rating: {}
     })
-  }),
+  ),
   fetchNews: jest.fn(() =>
     Promise.resolve({
       news: [
