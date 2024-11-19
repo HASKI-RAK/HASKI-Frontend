@@ -32,12 +32,13 @@ export const logBuffer = (config: any) => {
       }
       const date = new Date().toUTCString()
       GlobalRingBuffer.add([date, message])
+      const array = GlobalRingBuffer.toArray()
       //send buffer if in production or if send is true in development
       if (isProd || sendLogs) {
         if (methodName === 'error') {
           const bufferBody: BufferContent = {
             timestamp: JSON.stringify(date),
-            content: message
+            content: array.slice(Math.max(array.length - config.BUFFER_LOG_SIZE, 0), array.length)
           }
           //get userid from localStorage
           const persistedStorage = JSON.parse(localStorage.getItem('persisted_storage') ?? '{}')

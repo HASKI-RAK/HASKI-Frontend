@@ -1,6 +1,6 @@
 //Tests fail with shortened Path
 import { getConfig } from '@shared'
-import { postBufferContent, bufferContent } from './postBufferContent'
+import { postBufferContent, BufferContent } from './postBufferContent'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -14,8 +14,8 @@ global.fetch = jest.fn(() =>
 
 describe('postBufferContent has expected behaviour', () => {
   it('should return inputData if succesfull', async () => {
-    const testData: bufferContent = {
-      content: 'some text',
+    const testData: BufferContent = {
+      content: [["text","timestamp"]],
       timestamp: 'some date'
     }
     const inputData = ['question-1', '2']
@@ -32,7 +32,7 @@ describe('postBufferContent has expected behaviour', () => {
     const result = await postBufferContent(testData, 2)
 
     expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/2/logbuffer`, {
-      body: '{"content":"some text","timestamp":"some date"}',
+      body: '{"content":[["text","timestamp"]],"timestamp":"some date"}',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ describe('postBufferContent has expected behaviour', () => {
       ok: false,
       json: jest.fn().mockResolvedValue({})
     }
-    const testFail: bufferContent = { timestamp: '', content: '' }
+    const testFail: BufferContent = { timestamp: '', content: [["",""]] }
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)

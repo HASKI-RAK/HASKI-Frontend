@@ -9,7 +9,7 @@ import { fetchData } from '../RequestResponse'
 
 export type BufferContent = {
   timestamp: string
-  content: string
+  content: [string,string][]
 }
 
 /*
