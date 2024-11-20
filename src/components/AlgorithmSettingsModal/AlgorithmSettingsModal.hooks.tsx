@@ -37,8 +37,8 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
   const { isCourseCreatorRole, isStudentRole } = useContext(RoleContext)
   const getStudentAlgorithm = useStore((state) => state.getStudentLpLeAlgorithm)
   const getTeacherAlgorithm = useStore((state) => state.getTeacherLpLeAlgorithm)
-  const [studentAlgorithm, setStudentAlgorithm] = useState<string | undefined>('')
-  const [teacherAlgorithm, setTeacherAlgorithm] = useState<string | undefined>('')
+  const [studentAlgorithm, setStudentAlgorithm] = useState<string | undefined>('default')
+  const [teacherAlgorithm, setTeacherAlgorithm] = useState<string | undefined>('default')
   const { t } = useTranslation()
 
   const postTeacherAlgorithm = useCallback((userId: number, lmsUserId: number) => {
@@ -54,10 +54,9 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
       })
       .catch((error) => {
         handleError(t, addSnackbar, 'error.postTeacherLpLeAlg', error, 5000)
-        addSnackbar({ message: error.message, severity: 'error', autoHideDuration: 5000 })
         setWaitForBackend(false)
       })
-  }, [params.handleClose, params.options, params.topicId])
+  }, [params.options, params.topicId])
 
   const postStudentAlgorithm = useCallback((userId: number, lmsUserId: number) => {
     postStudentLpLeAlg(userId, lmsUserId, courseId, params.topicId, params.options[selected].key)

@@ -224,7 +224,7 @@ describe('TopicCard tests', () => {
     await waitFor(() => {
       expect(queryByText('components.TopicCard.learningPath')).toBeInTheDocument
       expect(queryByText('components.TopicCard.studentTest')).toBeInTheDocument
-      expect(mockServices.fetchStudentLpLeAlg).toHaveBeenCalledTimes(1)
+      expect(mockServices.fetchStudentLpLeAlg).toHaveBeenCalledTimes(2)
     })
   })
 

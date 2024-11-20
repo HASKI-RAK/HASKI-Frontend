@@ -2,16 +2,15 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
-import { SnackbarContext } from '@services'
+import { SnackbarContext, RoleContext, RoleContextType } from '@services'
 import AlgorithmSettingsModal from './AlgorithmSettingsModal'
 
 describe('AlgorithmSettingsModal', () => {
   it('is displayed with all options', async () => {
     const open = true
-    const teacherAlgorithm = 'default'
     const { getByTestId, getByLabelText } = render(
       <MemoryRouter>
-        <AlgorithmSettingsModal teacherAlgorithm={teacherAlgorithm} isOpen={open} handleClose={jest.fn()} />
+        <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} />
       </MemoryRouter>
     )
 
@@ -20,7 +19,7 @@ describe('AlgorithmSettingsModal', () => {
       expect(getByLabelText('Fixed Order')).toBeInTheDocument()
       expect(getByLabelText('ACO')).toBeInTheDocument()
       expect(getByLabelText('Genetic Algorithm')).toBeInTheDocument()
-      expect(getByTestId('teacher-icon')).toBeInTheDocument()
+      expect(getByTestId('algorithm-settings-modal-teacher-recommendation-icon')).toBeInTheDocument()
     })
   })
 
@@ -73,22 +72,10 @@ describe('AlgorithmSettingsModal', () => {
   })
 
   it('shows a snackbar with an error message, when fetching the new learning path fails and user is a student', async () => {
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
-      Promise.resolve({
-        id: 1,
-        lms_user_id: 1,
-        name: 'Sam Student',
-        role: 'student',
-        role_id: 1,
-        settings: {
-          id: 1,
-          user_id: 1,
-          pswd: '1234',
-          theme: 'test'
-        },
-        university: 'TH-AB'
-      })
-    )
+    const courseCreatorContext = {
+      isStudentRole: true,
+      isCourseCreatorRole: false
+    } as RoleContextType
 
     const addSnackbarMock = jest.fn()
     const mockfetchLearningPathElement = jest.fn(() => Promise.reject(new Error('fetchLearningPathElement failed')))
@@ -110,7 +97,9 @@ describe('AlgorithmSettingsModal', () => {
     const { getByTestId } = render(
       <SnackbarContext.Provider value={my_context}>
         <MemoryRouter>
-          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
+          <RoleContext.Provider value={courseCreatorContext}>
+            <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
+          </RoleContext.Provider>
         </MemoryRouter>
       </SnackbarContext.Provider>
     )
@@ -124,22 +113,10 @@ describe('AlgorithmSettingsModal', () => {
   })
 
   it('shows a snackbar with an error message, when fetching the new learning path fails and user is a teacher', async () => {
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
-      Promise.resolve({
-        id: 1,
-        lms_user_id: 1,
-        name: 'Tom Teacher',
-        role: 'teacher',
-        role_id: 1,
-        settings: {
-          id: 1,
-          user_id: 1,
-          pswd: '1234',
-          theme: 'test'
-        },
-        university: 'TH-AB'
-      })
-    )
+    const courseCreatorContext = {
+      isStudentRole: false,
+      isCourseCreatorRole: true
+    } as RoleContextType
 
     const mockfetchLearningPathElement = jest.fn(() => Promise.reject(new Error('fetchLearningPathElement failed')))
     mockServices.fetchLearningPathElement.mockImplementationOnce(mockfetchLearningPathElement)
@@ -160,11 +137,13 @@ describe('AlgorithmSettingsModal', () => {
 
     const open = true
     const { getByTestId } = render(
-      <SnackbarContext.Provider value={my_context}>
-        <MemoryRouter>
-          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
-        </MemoryRouter>
-      </SnackbarContext.Provider>
+      <RoleContext.Provider value={courseCreatorContext}>
+        <SnackbarContext.Provider value={my_context}>
+          <MemoryRouter>
+            <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
+          </MemoryRouter>
+        </SnackbarContext.Provider>
+      </RoleContext.Provider>
     )
 
     fireEvent.click(getByTestId('algorithm-settings-modal-save-button'))
@@ -176,34 +155,24 @@ describe('AlgorithmSettingsModal', () => {
   })
 
   it('should post the selected algorithm for students', async () => {
+    const courseCreatorContext = {
+      isStudentRole: true,
+      isCourseCreatorRole: false
+    } as RoleContextType
     const mockObserverFunction = jest.fn()
 
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
-      Promise.resolve({
-        id: 1,
-        lms_user_id: 1,
-        name: 'Sam Student',
-        role: 'student',
-        role_id: 1,
-        settings: {
-          id: 1,
-          user_id: 1,
-          pswd: '1234',
-          theme: 'test'
-        },
-        university: 'TH-AB'
-      })
-    )
     const open = true
     const { getByTestId } = render(
-      <MemoryRouter>
-        <AlgorithmSettingsModal
-          isOpen={open}
-          changeObserver={mockObserverFunction}
-          handleClose={jest.fn()}
-          topicId={0}
-        />
-      </MemoryRouter>
+      <RoleContext.Provider value={courseCreatorContext}>
+        <MemoryRouter>
+          <AlgorithmSettingsModal
+            isOpen={open}
+            changeObserver={mockObserverFunction}
+            handleClose={jest.fn()}
+            topicId={0}
+          />
+        </MemoryRouter>
+      </RoleContext.Provider>
     )
 
     fireEvent.click(getByTestId('algorithm-settings-modal-save-button'))
@@ -214,34 +183,24 @@ describe('AlgorithmSettingsModal', () => {
   })
 
   it('should post the selected algorithm for teachers', async () => {
+    const courseCreatorContext = {  
+      isStudentRole: false,
+      isCourseCreatorRole: true
+    } as RoleContextType
     const mockObserverFunction = jest.fn()
 
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
-      Promise.resolve({
-        id: 1,
-        lms_user_id: 1,
-        name: 'Tom Teacher',
-        role: 'teacher',
-        role_id: 1,
-        settings: {
-          id: 1,
-          user_id: 1,
-          pswd: '1234',
-          theme: 'test'
-        },
-        university: 'TH-AB'
-      })
-    )
     const open = true
     const { getByTestId } = render(
-      <MemoryRouter>
-        <AlgorithmSettingsModal
-          isOpen={open}
-          changeObserver={mockObserverFunction}
-          handleClose={jest.fn()}
-          topicId={0}
-        />
-      </MemoryRouter>
+      <RoleContext.Provider value={courseCreatorContext}>
+        <MemoryRouter>
+          <AlgorithmSettingsModal
+            isOpen={open}
+            changeObserver={mockObserverFunction}
+            handleClose={jest.fn()}
+            topicId={0}
+          />
+        </MemoryRouter>
+      </RoleContext.Provider>
     )
 
     fireEvent.click(getByTestId('algorithm-settings-modal-save-button'))
@@ -252,22 +211,10 @@ describe('AlgorithmSettingsModal', () => {
   })
 
   it('should show an error message if the teacher post request fails', async () => {
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
-      Promise.resolve({
-        id: 1,
-        lms_user_id: 1,
-        name: 'Tom Teacher',
-        role: 'teacher',
-        role_id: 1,
-        settings: {
-          id: 1,
-          user_id: 1,
-          pswd: '1234',
-          theme: 'test'
-        },
-        university: 'TH-AB'
-      })
-    )
+    const courseCreatorContext = {
+      isStudentRole: false,
+      isCourseCreatorRole: true
+    } as RoleContextType
 
     mockServices.postStudentLpLeAlg = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('Error')))
     const addSnackbarMock = jest.fn()
@@ -289,11 +236,13 @@ describe('AlgorithmSettingsModal', () => {
     const open = true
 
     const { getByTestId } = render(
-      <SnackbarContext.Provider value={my_context}>
-        <MemoryRouter>
-          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
-        </MemoryRouter>
-      </SnackbarContext.Provider>
+      <RoleContext.Provider value={courseCreatorContext}>
+        <SnackbarContext.Provider value={my_context}>
+          <MemoryRouter>
+            <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
+          </MemoryRouter>
+        </SnackbarContext.Provider>
+      </RoleContext.Provider>
     )
 
     fireEvent.click(getByTestId('algorithm-settings-modal-save-button'))
@@ -305,22 +254,10 @@ describe('AlgorithmSettingsModal', () => {
   })
 
   it('should show an error message if the student post request fails', async () => {
-    mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
-      Promise.resolve({
-        id: 1,
-        lms_user_id: 1,
-        name: 'Sam Student',
-        role: 'student',
-        role_id: 1,
-        settings: {
-          id: 1,
-          user_id: 1,
-          pswd: '1234',
-          theme: 'test'
-        },
-        university: 'TH-AB'
-      })
-    )
+    const courseCreatorContext = {
+      isStudentRole: true,
+      isCourseCreatorRole: false
+    } as RoleContextType
 
     mockServices.postStudentLpLeAlg = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('Error')))
     const addSnackbarMock = jest.fn()
@@ -339,11 +276,13 @@ describe('AlgorithmSettingsModal', () => {
 
     const open = true
     const { getByTestId } = render(
-      <SnackbarContext.Provider value={my_context}>
-        <MemoryRouter>
-          <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
-        </MemoryRouter>
-      </SnackbarContext.Provider>
+      <RoleContext.Provider value={courseCreatorContext}>
+        <SnackbarContext.Provider value={my_context}>
+          <MemoryRouter>
+            <AlgorithmSettingsModal isOpen={open} handleClose={jest.fn()} topicId={0} />
+          </MemoryRouter>
+        </SnackbarContext.Provider>
+      </RoleContext.Provider>
     )
 
     fireEvent.click(getByTestId('algorithm-settings-modal-save-button'))
