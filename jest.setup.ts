@@ -256,6 +256,18 @@ const mockDataServices: MockDataServices = {
       university: 'HS-KE'
     })
   ),
+  postCourse: jest.fn(() =>
+    Promise.resolve({
+      id: 2,
+      lms_id: 2,
+      name: 'Introduction to Computer Science',
+      university: 'HS-KE',
+      created_at: '2024-01-15T10:00:00Z',
+      created_by: 1,
+      last_updated: '2024-02-10T14:30:00Z',
+      start_date: '2024-03-01T09:00:00Z'
+    })
+  ),
   postCalculateLearningPathForAllStudents: jest.fn(() =>
     Promise.resolve({
       based_on: 'aco',
