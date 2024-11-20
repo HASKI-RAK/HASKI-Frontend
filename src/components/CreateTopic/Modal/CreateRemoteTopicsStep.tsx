@@ -7,7 +7,7 @@ import { LearningPathTopic, RemoteTopics } from '@core'
 type CreateRemoteTopicsStepProps = {
   remoteTopics?: RemoteTopics[]
   selectedTopics: RemoteTopics[]
-  alreadyCreatedTopics: LearningPathTopic | undefined
+  alreadyCreatedTopics?: LearningPathTopic
   handleTopicChange: (selectedTopics: RemoteTopics[]) => void
   onNext: () => void
 }
