@@ -136,11 +136,11 @@ describe('TopicCard tests', () => {
 
     const algorithmMenuItem = getByTestId('AlgorithmSettingsItem')
     fireEvent.click(algorithmMenuItem)
-    expect(getByTestId('algorithm-modal')).toBeInTheDocument
+    expect(getByTestId('algorithm-settings-modal')).toBeInTheDocument
 
-    const closeButton = getByTestId('algorithm-modal-close-button')
+    const closeButton = getByTestId('algorithm-settings-modal-close-button')
     fireEvent.click(closeButton)
-    expect(queryByTestId('algorithm-modal')).toBeNull()
+    expect(queryByTestId('algorithm-settings-modal')).toBeNull()
   })
 
   it('changes the displayed algorithm, after the user changed it', async () => {
@@ -216,9 +216,9 @@ describe('TopicCard tests', () => {
 
     const algorithmMenuItem = getByTestId('AlgorithmSettingsItem')
     fireEvent.click(algorithmMenuItem)
-    expect(getByTestId('algorithm-modal')).toBeInTheDocument
+    expect(getByTestId('algorithm-settings-modal')).toBeInTheDocument
 
-    const saveButton = getByTestId('algorithm-save-button')
+    const saveButton = getByTestId('algorithm-settings-modal-save-button')
     fireEvent.click(saveButton)
 
     await waitFor(() => {
@@ -311,9 +311,9 @@ describe('TopicCard tests', () => {
 
     const algorithmMenuItem = getByTestId('AlgorithmSettingsItem')
     fireEvent.click(algorithmMenuItem)
-    expect(getByTestId('algorithm-modal')).toBeInTheDocument
+    expect(getByTestId('algorithm-settings-modal')).toBeInTheDocument
 
-    const saveButton = getByTestId('algorithm-save-button')
+    const saveButton = getByTestId('algorithm-settings-modal-save-button')
     fireEvent.click(saveButton)
 
     await waitFor(() => {

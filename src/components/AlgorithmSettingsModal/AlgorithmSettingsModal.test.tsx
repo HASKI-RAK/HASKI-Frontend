@@ -5,23 +5,18 @@ import { MemoryRouter } from 'react-router-dom'
 import { SnackbarContext } from '@services'
 import AlgorithmSettingsModal from './AlgorithmSettingsModal'
 
-
 describe('AlgorithmSettingsModal', () => {
   it('is displayed with all options', async () => {
     const open = true
     const teacherAlgorithm = 'default'
     const { getByTestId, getByLabelText } = render(
       <MemoryRouter>
-        <AlgorithmSettingsModal
-          teacherAlgorithm={teacherAlgorithm}
-          isOpen={open}
-          handleClose={jest.fn()}
-        />
+        <AlgorithmSettingsModal teacherAlgorithm={teacherAlgorithm} isOpen={open} handleClose={jest.fn()} />
       </MemoryRouter>
     )
 
     await waitFor(() => {
-      expect(getByTestId('algorithm-modal')).toBeInTheDocument()
+      expect(getByTestId('algorithm-settings-modal')).toBeInTheDocument()
       expect(getByLabelText('Fixed Order')).toBeInTheDocument()
       expect(getByLabelText('ACO')).toBeInTheDocument()
       expect(getByLabelText('Genetic Algorithm')).toBeInTheDocument()
@@ -57,7 +52,7 @@ describe('AlgorithmSettingsModal', () => {
       </MemoryRouter>
     )
 
-    fireEvent.click(getByTestId('algorithm-modal-close-button'))
+    fireEvent.click(getByTestId('algorithm-settings-modal-close-button'))
     expect(handleClose).toHaveBeenCalledTimes(1)
   })
 
@@ -71,7 +66,7 @@ describe('AlgorithmSettingsModal', () => {
       </MemoryRouter>
     )
 
-    fireEvent.click(getByTestId('algorithm-save-button'))
+    fireEvent.click(getByTestId('algorithm-settings-modal-save-button'))
     await waitFor(() => {
       expect(handleClose).toHaveBeenCalledTimes(1)
     })
@@ -120,7 +115,7 @@ describe('AlgorithmSettingsModal', () => {
       </SnackbarContext.Provider>
     )
 
-    fireEvent.click(getByTestId('algorithm-save-button'))
+    fireEvent.click(getByTestId('algorithm-settings-modal-save-button'))
 
     await waitFor(() => {
       expect(mockfetchLearningPathElement).toHaveBeenCalledTimes(1)
@@ -172,7 +167,7 @@ describe('AlgorithmSettingsModal', () => {
       </SnackbarContext.Provider>
     )
 
-    fireEvent.click(getByTestId('algorithm-save-button'))
+    fireEvent.click(getByTestId('algorithm-settings-modal-save-button'))
 
     await waitFor(() => {
       expect(mockfetchLearningPathElement).toHaveBeenCalledTimes(1)
@@ -211,7 +206,7 @@ describe('AlgorithmSettingsModal', () => {
       </MemoryRouter>
     )
 
-    fireEvent.click(getByTestId('algorithm-save-button'))
+    fireEvent.click(getByTestId('algorithm-settings-modal-save-button'))
 
     await waitFor(() => {
       expect(mockServices.postStudentLpLeAlg).toHaveBeenCalledTimes(1)
@@ -249,7 +244,7 @@ describe('AlgorithmSettingsModal', () => {
       </MemoryRouter>
     )
 
-    fireEvent.click(getByTestId('algorithm-save-button'))
+    fireEvent.click(getByTestId('algorithm-settings-modal-save-button'))
 
     await waitFor(() => {
       expect(mockServices.postTeacherLpLeAlg).toHaveBeenCalledTimes(1)
@@ -301,7 +296,7 @@ describe('AlgorithmSettingsModal', () => {
       </SnackbarContext.Provider>
     )
 
-    fireEvent.click(getByTestId('algorithm-save-button'))
+    fireEvent.click(getByTestId('algorithm-settings-modal-save-button'))
 
     await waitFor(() => {
       expect(mockServices.postTeacherLpLeAlg).toHaveBeenCalledTimes(1)
@@ -351,7 +346,7 @@ describe('AlgorithmSettingsModal', () => {
       </SnackbarContext.Provider>
     )
 
-    fireEvent.click(getByTestId('algorithm-save-button'))
+    fireEvent.click(getByTestId('algorithm-settings-modal-save-button'))
 
     await waitFor(() => {
       expect(mockServices.postStudentLpLeAlg).toHaveBeenCalledTimes(1)

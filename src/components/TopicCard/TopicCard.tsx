@@ -110,8 +110,6 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         handleClose={handleAlgorithmModalClose}
         changeObserver={updateSelection}
         topicId={topic?.id}
-        teacherAlgorithm={teacherSelection}
-        studentAlgorithm={studentSelection}
       />
       <Menu
         id="topic-card-menu"
