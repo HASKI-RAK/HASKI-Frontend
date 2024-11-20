@@ -90,7 +90,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
                     sx={{ width: { xl: '16rem' } }}
                     value={index}
                     control={
-                      <Radio id={option.key + '-algorithm-radio-button'} role="radio-button" checked={index === selected} />
+                      <Radio id={option.key + '-algorithm-settings-modal-radio-button'} role="radio-button" checked={index === selected} />
                     }
                     label={option.name}
                   />
