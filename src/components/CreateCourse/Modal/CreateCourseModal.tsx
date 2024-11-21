@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, memo, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, CircularProgress, Fab, Grid, Modal } from '@common/components'
 import { Close } from '@common/icons'
-import { CreateCourseDetailsTable, CreateCourseTable } from '@components'
+import { CreateCourseDetailsTable, CreateCourseTable, handleError } from '@components'
 import { RemoteCourse } from '@core'
 import { SnackbarContext, postCourse } from '@services'
 import { usePersistedStore } from '@store'
@@ -29,7 +29,7 @@ const CreateCourseModal = ({
   //Hooks
   const { t } = useTranslation()
   const [selectedRemoteCourse, setSelectedRemoteCourse] = useState<RemoteCourse>()
-  const [courseStartDateValue, setCourseStartDateValue] = useState<Dayjs | null>(dayjs(new Date()))
+  const [courseStartDateValue, setCourseStartDateValue] = useState<Dayjs>(dayjs(new Date()))
   const [isSending, setIsSending] = useState<boolean>(false)
 
   //Stores
@@ -49,7 +49,7 @@ const CreateCourseModal = ({
     const createCourse = {
       lms_id: selectedRemoteCourse?.id,
       name: selectedRemoteCourse?.fullname,
-      start_date: courseStartDateValue ? formatDate(courseStartDateValue) : formatDate(dayjs(new Date())),
+      start_date: formatDate(courseStartDateValue),
       university: await getUser().then((user) => {
         return user.university
       }),
@@ -58,8 +58,8 @@ const CreateCourseModal = ({
       })
     }
 
-    postCourse({ outputJson: JSON.stringify(createCourse) }).then((course) => {
-      if (course) {
+    postCourse({ outputJson: JSON.stringify(createCourse) })
+      .then(() => {
         addSnackbar({
           message: t('appGlobal.dataSendSuccessful'),
           severity: 'success',
@@ -67,17 +67,13 @@ const CreateCourseModal = ({
         })
         log.info(t('appGlobal.dataSendSuccessful'))
         setSuccessRemoteCourseCreated(true)
-      } else {
-        addSnackbar({
-          message: t('appGlobal.dataSendUnsuccessful'),
-          severity: 'error',
-          autoHideDuration: 5000
-        })
-        log.error(t('appGlobal.dataSendUnsuccessful'))
+        setIsSending(false)
+      })
+      .catch((error) => {
+        handleError(t, addSnackbar, 'appGlobal.dataSendUnsuccessful', error, 5000)
         setSuccessRemoteCourseCreated(false)
-      }
-      setIsSending(false)
-    })
+        setIsSending(false)
+      })
   }
 
   return (

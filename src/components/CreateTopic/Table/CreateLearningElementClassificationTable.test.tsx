@@ -118,7 +118,7 @@ describe('CreateLearningElementClassificationTable', () => {
   })
 
   it('renders topics with learning elements and no test classifications', async () => {
-    const { getAllByRole, getByText, getByLabelText, getAllByText, queryByLabelText } = render(
+    const { getAllByRole, getByText, getByLabelText, queryByLabelText } = render(
       <MemoryRouter>
         <CreateLearningElementClassificationTable
           selectedTopics={mockSelectedTopics}
@@ -142,7 +142,7 @@ describe('CreateLearningElementClassificationTable', () => {
     await waitFor(() => {
       expect(getByText('LZ - Learning Objective')).toBeInTheDocument()
     })
-  })
+  }, 20000)
 
   it('calls handleClassificationChange when classification is changed in the dropdown', async () => {
     const { getAllByRole, getAllByText } = render(

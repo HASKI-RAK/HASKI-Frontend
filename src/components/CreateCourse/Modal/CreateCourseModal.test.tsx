@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
-import { fireEvent, getByLabelText, render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
+import { mockServices } from 'jest.setup'
 import React from 'react'
 import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
@@ -26,6 +27,25 @@ describe('CreateCourseModal', () => {
     updateSnackbar: (a: any) => a,
     removeSnackbar: (a: any) => a
   }
+
+  it('does not render modal when not open', () => {
+    const { queryByTestId, queryByText } = render(
+      <SnackbarContext.Provider value={mockAddSnackbar}>
+        <MemoryRouter>
+          <CreateCourseModal
+            successRemoteCourseCreated={false}
+            setSuccessRemoteCourseCreated={mockSetSuccessRemoteCourseCreated}
+            handleCloseCreateCourseModal={mockHandleCloseCreateCourseModal}
+            activeStepCreateCourseModal={0}
+            setActiveStepCreateCourseModal={mockSetActiveStepCreateCourseModal}
+          />
+        </MemoryRouter>
+      </SnackbarContext.Provider>
+    )
+
+    expect(queryByTestId('create-course-modal-close-button')).not.toBeInTheDocument()
+    expect(queryByText('components.CreateCourseModal.createCourse')).not.toBeInTheDocument()
+  })
 
   it('renders the modal with the first step', () => {
     const { getByTestId, getByText } = render(
@@ -120,7 +140,7 @@ describe('CreateCourseModal', () => {
   })
 
   it('moves to the next step when the next button is clicked', async () => {
-    const { getByText, getAllByRole, getByLabelText } = render(
+    const { getByText, getAllByRole } = render(
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
           <CreateCourseModal
@@ -213,6 +233,41 @@ describe('CreateCourseModal', () => {
     await waitFor(() => {
       act(() => {
         expect(mockSetActiveStepCreateCourseModal).toHaveBeenCalledWith(0)
+        expect(getByText('components.CreateCourseModal.createCourse')).not.toBeDisabled()
+      })
+    })
+  })
+
+  it('handles error on postCourse error', async () => {
+    mockServices.postCourse.mockImplementationOnce(() => Promise.reject(new Error('Error')))
+
+    const { getByText } = render(
+      <SnackbarContext.Provider value={mockAddSnackbar}>
+        <MemoryRouter>
+          <CreateCourseModal
+            openCreateCourseModal={true}
+            successRemoteCourseCreated={false}
+            setSuccessRemoteCourseCreated={mockSetSuccessRemoteCourseCreated}
+            handleCloseCreateCourseModal={mockHandleCloseCreateCourseModal}
+            activeStepCreateCourseModal={1}
+            setActiveStepCreateCourseModal={mockSetActiveStepCreateCourseModal}
+          />
+        </MemoryRouter>
+      </SnackbarContext.Provider>
+    )
+
+    await waitFor(() => {
+      act(() => {
+        const createButton = getByText('components.CreateCourseModal.createCourse')
+        expect(createButton).not.toBeDisabled()
+        fireEvent.click(getByText('components.CreateCourseModal.createCourse'))
+      })
+    })
+    await waitFor(() => {
+      act(() => {
+        /*     const snackbarMessage = queryByText('appGlobal.dataSendUnsuccessful')
+        expect(snackbarMessage).toBeInTheDocument()*/
+        expect(mockSetSuccessRemoteCourseCreated).toHaveBeenCalledWith(false)
         expect(getByText('components.CreateCourseModal.createCourse')).not.toBeDisabled()
       })
     })

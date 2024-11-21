@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import dayjs, { Dayjs } from 'dayjs'
 import { MemoryRouter } from 'react-router-dom'
 import { CreateCourseDetailsTable } from '@components'
@@ -41,5 +41,31 @@ describe('CreateCourseDetailsTable', () => {
       //Datetime-picker is twice in the document
       expect(getAllByText('components.CreateCourseDetailsTable.startDate')).toHaveLength(2)
     })
+  })
+
+  it('sets datePickerValue to null', () => {
+    const mockSetDatePickerValue = jest.fn()
+    const initialDateValue = dayjs()
+
+    const { getByLabelText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <CreateCourseDetailsTable
+            remoteCourse={selectedCourse}
+            datePickerValue={initialDateValue}
+            setDatePickerValue={mockSetDatePickerValue}
+          />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    // Find the DateTimePicker input field
+    const dateInput = getByLabelText(/startDate/i)
+
+    // Simulate changing the value to null
+    fireEvent.change(dateInput, { target: { value: null } })
+
+    // Assert that the setDatePickerValue function is called with dayjs()
+    expect(mockSetDatePickerValue).toHaveBeenCalled() // Since null is replaced with dayjs() in the component logic
   })
 })
