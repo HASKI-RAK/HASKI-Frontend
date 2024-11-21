@@ -95,7 +95,7 @@ const calculateLearningPath = (
     .catch((error) => {
       addSnackbar({
         message: t('error.postCalculateLearningPathILS'),
-        severity: 'success',
+        severity: 'error',
         autoHideDuration: 5000
       })
       log.error(t('error.postCalculateLearningPathILS') + '' + error)

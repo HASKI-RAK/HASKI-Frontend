@@ -4,6 +4,74 @@ const useTranslation = () => {
   return {
     t: (str: string) => {
       switch (str) {
+        case 'components.CreateLearningElementClassificationTable.classifications':
+          return [
+            {
+              name: 'Select Classification',
+              key: 'noKey',
+              disabled: true
+            },
+            {
+              name: 'LZ - Learning Objective',
+              key: 'LZ',
+              disabled: false
+            },
+            {
+              name: 'KÜ - Overview',
+              key: 'KÜ',
+              disabled: false
+            },
+            {
+              name: 'FO - Forum',
+              key: 'FO',
+              disabled: false
+            },
+            {
+              name: 'EK - Explanation',
+              key: 'EK',
+              disabled: false
+            },
+            {
+              name: 'AN - Animation',
+              key: 'AN',
+              disabled: false
+            },
+            {
+              name: 'BE - Example',
+              key: 'BE',
+              disabled: false
+            },
+            {
+              name: 'AB - Application Example',
+              key: 'AB',
+              disabled: false
+            },
+            {
+              name: 'ÜB - Exercise',
+              key: 'ÜB',
+              disabled: false
+            },
+            {
+              name: 'SE - Self-Assessment Test',
+              key: 'SE',
+              disabled: false
+            },
+            {
+              name: 'ZL - Additional Literature',
+              key: 'ZL',
+              disabled: false
+            },
+            {
+              name: 'ZF - Summary',
+              key: 'ZF',
+              disabled: false
+            },
+            {
+              name: 'RQ - Reflective Quiz',
+              key: 'RQ',
+              disabled: false
+            }
+          ]
         case 'components.ContactForm.types':
           return [
             { value: '1', label: 'issue' },
@@ -1330,6 +1398,42 @@ const useTranslation = () => {
                 answer5: 'Undefined.Answer-5'
               }
             ]
+          ]
+        case 'components.AlgorithmSettingsModal.algorithms':
+          return [
+            {
+              name: 'Select Algorithm',
+              description: 'Please select an algorithm for the learning path calculation.',
+              key: 'noKey',
+              disabled: true
+            },
+            {
+              name: 'Fixed Order',
+              description: 'The learning elements are presented in a predetermined order.',
+              key: 'default',
+              disabled: false
+            },
+            {
+              name: 'Graf',
+              description:
+                'This algorithm is based on the learning adaptive mechanism by Graf et al. It calculates the learning path based on the learning style of the learner.',
+              key: 'graf',
+              disabled: false
+            },
+            {
+              name: 'ACO',
+              description:
+                'The Ant Colony Algorithm (ACO) is inspired by the behavior of ant workers. It calculates the learning path by simulating ants who leave behind pheromones to mark the best path.',
+              key: 'aco',
+              disabled: false
+            },
+            {
+              name: 'Genetic Algorithm',
+              description:
+                'Based on natural selection, it combines learning paths to evolve the best one over several iterations.',
+              key: 'ga',
+              disabled: false
+            }
           ]
         default:
           return str
