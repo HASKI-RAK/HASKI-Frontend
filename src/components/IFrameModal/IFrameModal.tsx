@@ -1,4 +1,3 @@
-import log from 'loglevel'
 import { memo, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
@@ -7,6 +6,7 @@ import { Close } from '@common/icons'
 import { User } from '@core'
 import { SnackbarContext, postCalculateRating } from '@services'
 import { usePersistedStore } from '@store'
+import { handleError } from '../index'
 
 const style_box = {
   position: 'absolute',
@@ -56,23 +56,12 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
     getUser()
       .then((user: User) => {
         postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId).catch((error) => {
-          addSnackbar({
-            message: t('error.postCalculateRating'),
-            severity: 'error',
-            autoHideDuration: 3000
-          })
-          log.error(t('error.postCalculateRating') + ' ' + error)
+          handleError(t, addSnackbar, 'error.postCalculateRating', error, 3000)
         })
       })
       .catch((error) => {
-        addSnackbar({
-          message: t('error.getUser'),
-          severity: 'error',
-          autoHideDuration: 3000
-        })
-        log.error(t('error.getUser') + ' ' + error)
+        handleError(t, addSnackbar, 'error.getUser', error, 3000)
       })
-
     props.onClose()
   }
 

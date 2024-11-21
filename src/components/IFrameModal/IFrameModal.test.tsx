@@ -50,4 +50,20 @@ describe('IFrameModal tests', () => {
     fireEvent.click(getByTestId('IFrameModal-Close-Button'))
     expect(handleClose).toHaveBeenCalledTimes(1)
   })
+
+  test('getUser error on close', () => {
+    mockServices.fetchUser.mockImplementationOnce(() => Promise.reject(new Error('fetchUser error')))
+
+    const handleClose = jest.fn()
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <Box>
+          <IFrameModal url="fakedomain.com:8080" title="Modal is open" isOpen={true} onClose={handleClose} />
+        </Box>
+      </MemoryRouter>
+    )
+
+    fireEvent.click(getByTestId('IFrameModal-Close-Button'))
+    expect(handleClose).toHaveBeenCalledTimes(1)
+  })
 })
