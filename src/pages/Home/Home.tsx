@@ -72,7 +72,7 @@ export const Home = () => {
           log.error(t('error.getUser') + ' ' + error)
         })
     }
-  }, [getUser, getCourses, setCourses, isAuth, coursesCache, coursesLoading])
+  }, [getUser, getCourses, isAuth, coursesCache, coursesLoading])
 
   const commonButtonStyle = {
     mt: '1rem',

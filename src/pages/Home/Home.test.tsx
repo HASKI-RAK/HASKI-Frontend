@@ -9,16 +9,38 @@ import { AuthContext, RoleContext, RoleContextType } from '@services'
 
 const navigate = jest.fn()
 
-describe('Test the Home page', () => {
+describe('Test the Home page-1', () => {
+  jest.useFakeTimers()
+  jest.mock('@common/hooks', () => ({
+    ...jest.requireActual('@common/hooks'),
+    useMediaQuery: jest.fn().mockReturnValue(true)
+  }))
+
+  test('fetching Course returns no courses', async () => {
+    mockServices.fetchCourses.mockResolvedValueOnce({ courses: [] })
+
+    const { getByText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(getByText('pages.home.noCourses')).toBeInTheDocument()
+    })
+  })
+})
+
+describe('Test the Home page-2', () => {
   jest.useFakeTimers()
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
   test('fetching Course throws error', async () => {
-    mockServices.fetchCourses.mockImplementationOnce(() => {
-      throw new Error('Error')
-    })
+    mockServices.fetchCourses.mockRejectedValueOnce(new Error('Error'))
 
     jest.spyOn(console, 'error').mockImplementationOnce(() => {
       return
@@ -163,26 +185,6 @@ describe('Test the Home page', () => {
     await waitFor(() => {
       act(() => {
         expect(queryByTestId('create-course-modal-close-button')).not.toBeInTheDocument()
-      })
-    })
-  })
-
-  test('fetching Course returns no courses', async () => {
-    mockServices.fetchCourses.mockImplementation(() => {
-      courses: []
-    })
-
-    await waitFor(async () => {
-      const { getByText } = render(
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Home />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      )
-
-      waitFor(() => {
-        expect(getByText('pages.home.noCourses')).toBeInTheDocument()
       })
     })
   })
