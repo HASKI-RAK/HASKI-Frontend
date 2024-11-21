@@ -1,112 +1,16 @@
 import { render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
+import { StyledLinearProgress } from '@components'
 import { Course } from '@pages'
 import { AuthContext } from '@services'
-import { StyledLinearProgress } from './StyledLinearProgress'
 
 jest.mock('@common/hooks', () => ({
   ...jest.requireActual('@common/hooks'),
-  useMediaQuery: jest.fn().mockReturnValue(true),
-  useStore: jest.fn(() => ({ clearLearningPathTopicCache: jest.fn(), clearLearningPathElementCache: jest.fn() })),
-  usePersistedStore: jest.fn(() => ({ clearLearningPathElementStatusCache: jest.fn() }))
+  useMediaQuery: jest.fn().mockReturnValue(true)
 }))
 
-describe('Course2', () => {
-  beforeEach(() => {
-    // Set up fresh mocks for each test
-    mockServices.fetchLearningPathElementStatus.mockImplementation(() => [])
-    mockServices.fetchLearningPathElement.mockImplementation(() => [])
-  })
-
-  it('renders course page with topics, none learning elements are done (0%)', async () => {
-    mockServices.fetchLearningPathElementStatus.mockImplementation(() => [
-      {
-        cmid: 1,
-        state: 0,
-        timecompleted: '1699967821'
-      },
-      {
-        cmid: 2,
-        state: 0,
-        timecompleted: '1699967821'
-      }
-    ])
-
-    mockServices.fetchLearningPathElement.mockImplementation(() => ({
-      id: 1,
-      course_id: 2,
-      based_on: 'string',
-      calculated_on: 'string',
-      path: [
-        {
-          id: 1,
-          learning_element_id: 1,
-          learning_path_id: 1,
-          recommended: false,
-          position: 1,
-          learning_element: {
-            id: 1,
-            lms_id: 1,
-            activity_type: 'test',
-            classification: 'KÜ',
-            name: 'test',
-            university: 'test',
-            created_at: 'test',
-            created_by: 'test',
-            last_updated: 'test',
-            student_learning_element: {
-              id: 1,
-              student_id: 1,
-              learning_element_id: 1,
-              done: false,
-              done_at: 'test'
-            }
-          }
-        },
-        {
-          id: 2,
-          learning_element_id: 2,
-          learning_path_id: 2,
-          recommended: false,
-          position: 2,
-          learning_element: {
-            id: 2,
-            lms_id: 2,
-            activity_type: 'test',
-            classification: 'ÜB',
-            name: 'test',
-            university: 'test',
-            created_at: 'test',
-            created_by: 'test',
-            last_updated: 'test',
-            student_learning_element: {
-              id: 2,
-              student_id: 1,
-              learning_element_id: 2,
-              done: false,
-              done_at: 'test'
-            }
-          }
-        }
-      ]
-    }))
-
-    await waitFor(async () => {
-      const { getAllByTestId } = render(
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Course />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      )
-
-      await waitFor(() => {
-        expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 0/2')
-      })
-    })
-  })
-
+describe('StyledLinearProgress-1', () => {
   it('renders course page with topics, some learning elements are done (33%)', async () => {
     mockServices.fetchLearningPathElementStatus.mockImplementation(() => [
       {
@@ -210,18 +114,16 @@ describe('Course2', () => {
       ]
     }))
 
-    await waitFor(() => {
-      const { getAllByTestId } = render(
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Course />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      )
+    const { getAllByTestId } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Course />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
 
-      waitFor(() => {
-        expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 1/3')
-      })
+    await waitFor(() => {
+      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 1/3')
     })
   })
 
@@ -492,5 +394,92 @@ describe('Course2', () => {
   it('renders styledLinearProgress without input', () => {
     const styledLinearProgress = render(<StyledLinearProgress />)
     expect(styledLinearProgress).toBeTruthy()
+  })
+})
+describe('Course3', () => {
+  it('renders course page with topics, none learning elements are done (0%)', async () => {
+    mockServices.fetchLearningPathElementStatus.mockImplementation(() => [
+      {
+        cmid: 1,
+        state: 0,
+        timecompleted: '1699967821'
+      },
+      {
+        cmid: 2,
+        state: 0,
+        timecompleted: '1699967821'
+      }
+    ])
+
+    mockServices.fetchLearningPathElement.mockImplementation(() => ({
+      id: 1,
+      course_id: 2,
+      based_on: 'string',
+      calculated_on: 'string',
+      path: [
+        {
+          id: 1,
+          learning_element_id: 1,
+          learning_path_id: 1,
+          recommended: false,
+          position: 1,
+          learning_element: {
+            id: 1,
+            lms_id: 1,
+            activity_type: 'test',
+            classification: 'KÜ',
+            name: 'test',
+            university: 'test',
+            created_at: 'test',
+            created_by: 'test',
+            last_updated: 'test',
+            student_learning_element: {
+              id: 1,
+              student_id: 1,
+              learning_element_id: 1,
+              done: false,
+              done_at: 'test'
+            }
+          }
+        },
+        {
+          id: 2,
+          learning_element_id: 2,
+          learning_path_id: 2,
+          recommended: false,
+          position: 2,
+          learning_element: {
+            id: 2,
+            lms_id: 2,
+            activity_type: 'test',
+            classification: 'ÜB',
+            name: 'test',
+            university: 'test',
+            created_at: 'test',
+            created_by: 'test',
+            last_updated: 'test',
+            student_learning_element: {
+              id: 2,
+              student_id: 1,
+              learning_element_id: 2,
+              done: false,
+              done_at: 'test'
+            }
+          }
+        }
+      ]
+    }))
+
+    const { getAllByTestId } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Course />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 0/2')
+    })
   })
 })
