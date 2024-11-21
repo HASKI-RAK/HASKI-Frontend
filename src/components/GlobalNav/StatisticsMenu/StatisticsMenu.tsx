@@ -22,12 +22,6 @@ const StatisticsMenu = () => {
   const { t } = useTranslation()
   const statisticsComponents = [
     {
-      name: t('pages.ratingdashboard'),
-      url: '/ratingdashboard',
-      isDisabled: false,
-      availableAt: new Date()
-    },
-    {
       name: t('pages.learnercharacteristics'),
       url: '/learnercharacteristics',
       isDisabled: false,

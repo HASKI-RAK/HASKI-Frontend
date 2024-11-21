@@ -1,5 +1,0 @@
-export * from './postCalculateRating'
-export * from './fetchStudentRatings'
-export * from './fetchStudentRatingsOnTopic'
-export * from './fetchLearningElementRatings'
-export * from './fetchLearningElementRatingsOnTopic'

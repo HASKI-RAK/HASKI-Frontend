@@ -70,4 +70,3 @@ export { default as CreateTopicModal } from './CreateTopic/Modal/CreateTopicModa
 
 export * from './GlobalNav'
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure
-export * from './Dashboards'
