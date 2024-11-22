@@ -115,7 +115,6 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
   )
 
   useEffect(() => {
-    if (studentAlgorithm === undefined) {
       getUser().then((user) => {
         getStudentAlgorithm(user.settings.user_id, params.topicId)
           .then((res) => {
@@ -126,8 +125,6 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
             setStudentAlgorithm(undefined)
           })
       })
-    }
-    if (teacherAlgorithm === undefined) {
       getTeacherAlgorithm(params.topicId)
         .then((res) => {
           setTeacherAlgorithm(res.short_name)
@@ -136,7 +133,6 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
           handleError(t, addSnackbar, 'error.fetchTeacherLpLeAlg', error, 5000)
           setTeacherAlgorithm(undefined)
         })
-    }
   }, [params])
 
   useEffect(() => {
@@ -144,7 +140,7 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
       const newSelected = params.options.findIndex((option) => option.key === studentAlgorithm)
       setSelected(newSelected)
     }
-  }, [studentAlgorithm, params.options])
+  }, [studentAlgorithm])
 
   return { handleSave, handleSelect, waitForBackend, selected, studentAlgorithm, teacherAlgorithm } as const
 }
