@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
-import { SnackbarContext, RoleContext, RoleContextType } from '@services'
+import { RoleContext, RoleContextType, SnackbarContext } from '@services'
 import AlgorithmSettingsModal from './AlgorithmSettingsModal'
 
 describe('AlgorithmSettingsModal', () => {
@@ -23,7 +23,7 @@ describe('AlgorithmSettingsModal', () => {
     })
   })
 
-  test('if the radio buttons work', () => {
+  test('if the radio buttons work', async () => {
     const open = true
     const { getByLabelText } = render(
       <MemoryRouter>
@@ -38,8 +38,11 @@ describe('AlgorithmSettingsModal', () => {
     expect(button2.checked).toBe(false)
 
     fireEvent.click(button2)
-    expect(button1.checked).toBe(false)
-    expect(button2.checked).toBe(true)
+
+    await waitFor(() => {
+      expect(button1.checked).toBe(false)
+      expect(button2.checked).toBe(true)
+    })
   })
 
   test('if the close button works', () => {
@@ -183,7 +186,7 @@ describe('AlgorithmSettingsModal', () => {
   })
 
   it('should post the selected algorithm for teachers', async () => {
-    const courseCreatorContext = {  
+    const courseCreatorContext = {
       isStudentRole: false,
       isCourseCreatorRole: true
     } as RoleContextType

@@ -37,54 +37,60 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
   const { isCourseCreatorRole, isStudentRole } = useContext(RoleContext)
   const getStudentAlgorithm = useStore((state) => state.getStudentLpLeAlgorithm)
   const getTeacherAlgorithm = useStore((state) => state.getTeacherLpLeAlgorithm)
-  const [studentAlgorithm, setStudentAlgorithm] = useState<string | undefined>('default')
-  const [teacherAlgorithm, setTeacherAlgorithm] = useState<string | undefined>('default')
+  const [studentAlgorithm, setStudentAlgorithm] = useState<string | undefined>(undefined)
+  const [teacherAlgorithm, setTeacherAlgorithm] = useState<string | undefined>(undefined)
   const { t } = useTranslation()
 
-  const postTeacherAlgorithm = useCallback((userId: number, lmsUserId: number) => {
-    postTeacherLpLeAlg(userId, lmsUserId, params.topicId, params.options[selected].key)
-      .then(() => {
-        setTeacherLpLeAlgorithm(params.topicId, params.options[selected].key)
-        addSnackbar({
-          message: t('components.AlgorithmSettingsModal.success'),
-          severity: 'success',
-          autoHideDuration: 5000
+  const postTeacherAlgorithm = useCallback(
+    (userId: number, lmsUserId: number) => {
+      postTeacherLpLeAlg(userId, lmsUserId, params.topicId, params.options[selected].key)
+        .then(() => {
+          setTeacherLpLeAlgorithm(params.topicId, params.options[selected].key)
+          addSnackbar({
+            message: t('components.AlgorithmSettingsModal.success'),
+            severity: 'success',
+            autoHideDuration: 5000
+          })
+          if (params.changeObserver) params.changeObserver()
         })
-        if (params.changeObserver) params.changeObserver()
-      })
-      .catch((error) => {
-        handleError(t, addSnackbar, 'error.postTeacherLpLeAlg', error, 5000)
-        setWaitForBackend(false)
-      })
-  }, [params.options, params.topicId])
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.postTeacherLpLeAlg', error, 5000)
+          setWaitForBackend(false)
+        })
+    },
+    [params.options, params.topicId]
+  )
 
-  const postStudentAlgorithm = useCallback((userId: number, lmsUserId: number) => {
-    postStudentLpLeAlg(userId, lmsUserId, courseId, params.topicId, params.options[selected].key)
-      .then(() => {
-        setStudentLpLeAlgorithm(userId, params.topicId, params.options[selected].key)
-        // Fetch the new learning path then close the modal
-        clearLearningPathElementCache()
-        getLearningPathElement(userId, lmsUserId, userId, courseId, String(params.topicId))
-          .then(() => {
-            setWaitForBackend(false)
-            addSnackbar({
-              message: t('components.AlgorithmSettingsModal.success'),
-              severity: 'success',
-              autoHideDuration: 5000
+  const postStudentAlgorithm = useCallback(
+    (userId: number, lmsUserId: number) => {
+      postStudentLpLeAlg(userId, lmsUserId, courseId, params.topicId, params.options[selected].key)
+        .then(() => {
+          setStudentLpLeAlgorithm(userId, params.topicId, params.options[selected].key)
+          // Fetch the new learning path then close the modal
+          clearLearningPathElementCache()
+          getLearningPathElement(userId, lmsUserId, userId, courseId, String(params.topicId))
+            .then(() => {
+              setWaitForBackend(false)
+              addSnackbar({
+                message: t('components.AlgorithmSettingsModal.success'),
+                severity: 'success',
+                autoHideDuration: 5000
+              })
+              params.handleClose()
             })
-            params.handleClose()
-          })
-          .catch((error) => {
-            handleError(t, addSnackbar, 'error.getLearningPathElement', error, 5000)
-            setWaitForBackend(false)
-          })
-        if (params.changeObserver) params.changeObserver()
-      })
-      .catch((error) => {
-        handleError(t, addSnackbar, 'error.postStudentLpLeAlg', error, 5000)
-        setWaitForBackend(false)
-      })
-  }, [params.handleClose, params.options, params.topicId])
+            .catch((error) => {
+              handleError(t, addSnackbar, 'error.getLearningPathElement', error, 5000)
+              setWaitForBackend(false)
+            })
+          if (params.changeObserver) params.changeObserver()
+        })
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.postStudentLpLeAlg', error, 5000)
+          setWaitForBackend(false)
+        })
+    },
+    [params.handleClose, params.options, params.topicId]
+  )
 
   const handleSave = useCallback(() => {
     setWaitForBackend(true)
@@ -101,16 +107,6 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
     })
   }, [params.handleClose, params.options, params.topicId])
 
-  const getSelected = useCallback(() => {
-    if (studentAlgorithm) {
-      return params.options.findIndex((option) => option.key === studentAlgorithm)
-    } else if (teacherAlgorithm) {
-      return params.options.findIndex((option) => option.key === teacherAlgorithm)
-    } else {
-      return 0
-    }
-  }, [studentAlgorithm, params.options])
-
   const handleSelect = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setSelected(parseInt(event.target.value))
@@ -119,28 +115,36 @@ const useAlgorithmSettingsModal = (params: useAlgorithmSettingsModalHookParams) 
   )
 
   useEffect(() => {
-    getUser().then((user) => {
-      getStudentAlgorithm(user.settings.user_id, params.topicId)
+    if (studentAlgorithm === undefined) {
+      getUser().then((user) => {
+        getStudentAlgorithm(user.settings.user_id, params.topicId)
+          .then((res) => {
+            setStudentAlgorithm(res.short_name)
+          })
+          .catch((error) => {
+            handleError(t, addSnackbar, 'error.fetchStudentLpLeAlg', error, 5000)
+            setStudentAlgorithm(undefined)
+          })
+      })
+    }
+    if (teacherAlgorithm === undefined) {
+      getTeacherAlgorithm(params.topicId)
         .then((res) => {
-          setStudentAlgorithm(res.short_name)
+          setTeacherAlgorithm(res.short_name)
         })
-        .catch(() => {
-          setStudentAlgorithm(undefined)
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.fetchTeacherLpLeAlg', error, 5000)
+          setTeacherAlgorithm(undefined)
         })
-    })
-    getTeacherAlgorithm(params.topicId)
-      .then((res) => {
-        setTeacherAlgorithm(res.short_name)
-      })
-      .catch(() => {
-        setTeacherAlgorithm(undefined)
-      })
-  }, [])
+    }
+  }, [params])
 
   useEffect(() => {
-    const newSelected = getSelected()
-    setSelected(newSelected)
-  }, [studentAlgorithm])
+    if (studentAlgorithm) {
+      const newSelected = params.options.findIndex((option) => option.key === studentAlgorithm)
+      setSelected(newSelected)
+    }
+  }, [studentAlgorithm, params.options])
 
   return { handleSave, handleSelect, waitForBackend, selected, studentAlgorithm, teacherAlgorithm } as const
 }

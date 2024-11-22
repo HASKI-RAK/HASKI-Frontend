@@ -1273,6 +1273,8 @@
   "error.fetchLearningPathTopic": "Beim Abrufen der LearningPathTopic-Daten ist ein Fehler aufgetreten.",
   "error.fetchListK": "Beim Abrufen der ListK-Fragebogendaten ist ein Fehler aufgetreten.",
   "error.fetchRedirectMoodleLogin": "Beim Abrufen der Moodle-Login-URL ist ein Fehler aufgetreten.",
+  "error.fetchStudentLpLeAlg": "Beim Abrufen des Algorithmus, den der Nutzer für das Topic gewählt hat, ist ein Fehler aufgetreten.",
+  "error.fetchTeacherLpLeAlg": "Beim Abrufen des empfohlenen Algorithmus für das Topic ist ein Fehler aufgetreten.",
   "error.fetchUser": "Beim Abrufen der Nutzerdaten ist ein Fehler aufgetreten.",
   "error.getLearningElementStatus": "Beim Abrufen des Lernelementstatus ist ein Fehler aufgetreten.",
   "error.getLearningElementsWithStatus": "Beim Abrufen der Lernelemente mit Status ist ein Fehler aufgetreten.",

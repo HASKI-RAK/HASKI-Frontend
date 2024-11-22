@@ -443,7 +443,7 @@ const mockDataServices: MockDataServices = {
     Promise.resolve({
       algorithm_id: 1,
       id: 1,
-      short_name: 'studentTest',
+      short_name: 'default',
       student_id: 1,
       topic_id: 1
     })
@@ -451,7 +451,7 @@ const mockDataServices: MockDataServices = {
   fetchTeacherLpLeAlg: jest.fn(() =>
     Promise.resolve({
       algorithm_id: 1,
-      short_name: 'teacherTest',
+      short_name: 'default',
       topic_id: 1
     })
   ),

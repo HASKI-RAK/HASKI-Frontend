@@ -1273,6 +1273,8 @@
   "error.fetchLearningPathTopic": "An error occurred while fetching the LearningPathTopic data.",
   "error.fetchListK": "An error occurred while fetching the ListK questionnaire data.",
   "error.fetchRedirectMoodleLogin": "An error occurred while fetching the Moodle login URL.",
+  "error.fetchStudentLpLeAlg": "An error occurred while fetching the algorithm the user has chosen to the topic.",
+  "error.fetchTeacherLpLeAlg": "An error occurred while fetching the recommended algorithm for the topic.",
   "error.fetchUser": "An error occurred while fetching the user data.",
   "error.getLearningElementStatus": "An error occurred while fetching the Learning Element Status.",
   "error.getLearningElementsWithStatus": "An error occurred while fetching the Learning Elements with Status.",

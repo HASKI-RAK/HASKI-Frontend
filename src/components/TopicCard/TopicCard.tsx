@@ -21,7 +21,6 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
   const { t } = useTranslation()
 
   const {
-    teacherSelection,
     studentSelection,
     isAlgorithmSettingsModalOpen,
     menuAnchorEl,
@@ -90,9 +89,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           justifyContent={'center'}
           sx={{ mt: '0.5rem' }}>
           <Typography sx={{ mr: '0.5rem' }}>
-            {(studentSelection || teacherSelection) &&
-              t('components.TopicCard.learningPath') +
-                t(`components.TopicCard.${studentSelection ?? teacherSelection}`)}
+            {studentSelection && t('components.TopicCard.learningPath') + t(`components.TopicCard.${studentSelection}`)}
           </Typography>
         </Grid>
       </CardContent>
