@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { Dispatch, SetStateAction, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
 import { CreateLearningElementTable } from '@components'
@@ -8,6 +8,8 @@ type CreateLearningElementsStepProps = {
   selectedTopics: RemoteTopics[]
   selectedLearningElements: { [key: number]: RemoteLearningElement[] }
   handleLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
+  selectAllLearningElementsChecked: boolean
+  setSelectAllLearningElementsChecked: Dispatch<SetStateAction<boolean>>
   onNext: () => void
   onBack: () => void
 }
@@ -16,6 +18,8 @@ const CreateLearningElementsStep = ({
   selectedTopics,
   selectedLearningElements,
   handleLearningElementChange,
+  selectAllLearningElementsChecked,
+  setSelectAllLearningElementsChecked,
   onNext,
   onBack
 }: CreateLearningElementsStepProps) => {
@@ -26,7 +30,9 @@ const CreateLearningElementsStep = ({
       <CreateLearningElementTable
         selectedTopics={selectedTopics}
         onLearningElementChange={handleLearningElementChange}
-        selectedLearningElements={selectedLearningElements}>
+        selectedLearningElements={selectedLearningElements}
+        selectAllLearningElementsChecked={selectAllLearningElementsChecked}
+        setSelectAllLearningElementsChecked={setSelectAllLearningElementsChecked}>
         <Box sx={{ padding: '1rem', width: '95%' }}>
           <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
             <Button variant="contained" color="primary" onClick={onBack} sx={{ ml: 1 }}>

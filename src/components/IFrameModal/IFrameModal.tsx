@@ -20,7 +20,6 @@ type IFrameModalProps = {
   url: string
   title: string
   isOpen: boolean
-  learningElementId?: number
   onClose: () => void
 }
 

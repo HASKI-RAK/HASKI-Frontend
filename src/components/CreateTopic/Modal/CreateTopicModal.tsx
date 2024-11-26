@@ -40,6 +40,7 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
   }>({})
   const [selectedAlgorithms, setSelectedAlgorithms] = useState<{ [key: number]: CreateAlgorithmTableNameProps }>({})
   const [activeStep, setActiveStep] = useState<number>(0)
+  const [selectAllLearningElementsChecked, setSelectAllLearningElementsChecked] = useState(false)
   const {
     handleCreate,
     handleTopicChange,
@@ -169,6 +170,8 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
               selectedTopics={selectedTopics}
               selectedLearningElements={selectedLearningElements}
               handleLearningElementChange={handleLearningElementChange}
+              selectAllLearningElementsChecked={selectAllLearningElementsChecked}
+              setSelectAllLearningElementsChecked={setSelectAllLearningElementsChecked}
               onNext={handleNext}
               onBack={handleBack}
             />

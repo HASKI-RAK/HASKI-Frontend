@@ -1,16 +1,18 @@
-import { useCallback, useMemo } from 'react'
+import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react'
 import { RemoteLearningElement, RemoteTopics } from '@core'
 
 type useCreateTopicModalProps = {
   selectedLearningElements: { [p: number]: RemoteLearningElement[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
   selectedTopics: RemoteTopics[]
+  setSelectAllLearningElementsChecked: Dispatch<SetStateAction<boolean>>
 }
 
 export const useCreateLearningElementTable = ({
   selectedLearningElements,
   onLearningElementChange,
-  selectedTopics
+  selectedTopics,
+  setSelectAllLearningElementsChecked
 }: useCreateTopicModalProps) => {
   const handleLearningElementCheckboxChange = (topicId: number, element: RemoteLearningElement, checked: boolean) => {
     const updatedSelectedElements = {
@@ -47,12 +49,20 @@ export const useCreateLearningElementTable = ({
     onLearningElementChange(clearedElements)
   }, [onLearningElementChange, selectedTopics])
 
+  const handleToggleAll = (isChecked: boolean) => {
+    setSelectAllLearningElementsChecked(isChecked)
+    if (isChecked) {
+      handleSelectAllLearningElements()
+    } else {
+      handleDeselectAllLearningElements()
+    }
+  }
+
   return useMemo(
     () => ({
       handleLearningElementCheckboxChange,
-      handleSelectAllLearningElements,
-      handleDeselectAllLearningElements
+      handleToggleAll
     }),
-    [handleLearningElementCheckboxChange, handleSelectAllLearningElements, handleDeselectAllLearningElements]
+    [handleLearningElementCheckboxChange, handleToggleAll]
   )
 }

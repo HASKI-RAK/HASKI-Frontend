@@ -122,7 +122,10 @@ const CreateLearningElementClassificationTable = ({
             {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
               <Grid container alignItems="center" spacing={2} key={element.lms_id}>
                 <Grid item xs={6}>
-                  <FormControlLabel control={<Checkbox checked={true} />} label={element.lms_learning_element_name} />
+                  <FormControlLabel
+                    control={<Checkbox checked={true} disabled={true} />}
+                    label={<Typography>{element.lms_learning_element_name}</Typography>}
+                  />
                 </Grid>
                 <Grid item container xs={6} justifyContent="flex-end">
                   <FormControl sx={{ m: 1, width: '21rem' }} size="small">
