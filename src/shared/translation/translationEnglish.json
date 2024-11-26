@@ -1260,7 +1260,7 @@
   "components.TopicCard.default": "Fixed Order",
   "components.TopicCard.ga": "Genetic Algorithm",
   "components.TopicCard.graf": "Graf Algorithm",
-  "components.TopicCard.learningPath": "Learning Path: ",
+  "components.TopicCard.learningPath": "Learning Path",
   "components.TopicCard.nestor": "Nestor Algorithm",
   "components.TopicCard.tyche": "Tyche Algorithm",
   "error": "Error",
