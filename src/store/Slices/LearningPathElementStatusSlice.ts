@@ -18,7 +18,7 @@ import { resetters } from '../Zustand/Store'
  *
  * @interface
  */
-export default interface LearningPathElementStatusSlice {
+export type LearningPathElementStatusSlice = {
   _learningPathElementStatus: Record<string, LearningPathElementStatus[]>
   clearLearningPathElementStatusCache: () => void
   getLearningPathElementStatus: LearningPathElementStatusReturn

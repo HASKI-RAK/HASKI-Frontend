@@ -30,7 +30,7 @@ const CreateRemoteTopicsTable = ({
         </Typography>
       </Grid>
       <Grid item container alignItems="center" direction="column">
-        {remoteTopics === undefined ? (
+        {!remoteTopics ? (
           <Paper sx={{ padding: '1rem', width: '95%' }}>
             <SkeletonList />
           </Paper>

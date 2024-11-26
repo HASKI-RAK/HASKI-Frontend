@@ -29,19 +29,15 @@ const StatisticsMenu = () => {
     }
   ]
 
-  return (
-    <>
-      {isAuth && (
-        <GlobalNavMenu
-          id="statistics"
-          title={t('components.StatisticsMenu.title')}
-          content={statisticsComponents}
-          isLoading={false}
-          tooltip={t('tooltip.statisticsMenuSelection')}
-        />
-      )}
-    </>
-  )
+  return isAuth ? (
+    <GlobalNavMenu
+      id="statistics"
+      title={t('components.StatisticsMenu.title')}
+      content={statisticsComponents}
+      isLoading={false}
+      tooltip={t('tooltip.statisticsMenuSelection')}
+    />
+  ) : null
 }
 
 export default memo(StatisticsMenu)

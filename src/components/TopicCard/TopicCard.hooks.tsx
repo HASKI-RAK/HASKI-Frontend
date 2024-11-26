@@ -68,7 +68,7 @@ export const useTopicCard = (params: TopicCardHookParams) => {
       handleCloseMenu,
       handleAlgorithmMenuOpen,
       handleAlgorithmModalClose,
-      updateSelection: updateSelection
+      updateSelection
     }),
     [
       teacherSelection,

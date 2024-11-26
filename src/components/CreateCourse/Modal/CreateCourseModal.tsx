@@ -11,8 +11,6 @@ import { usePersistedStore } from '@store'
 
 type CreateCourseModalProps = {
   openCreateCourseModal?: boolean
-  successRemoteCourseCreated: boolean
-  setSuccessRemoteCourseCreated: Dispatch<SetStateAction<boolean>>
   handleCloseCreateCourseModal: () => void
   activeStepCreateCourseModal: number
   setActiveStepCreateCourseModal: Dispatch<SetStateAction<number>>
@@ -20,8 +18,6 @@ type CreateCourseModalProps = {
 
 const CreateCourseModal = ({
   openCreateCourseModal = false,
-  successRemoteCourseCreated,
-  setSuccessRemoteCourseCreated,
   handleCloseCreateCourseModal,
   activeStepCreateCourseModal,
   setActiveStepCreateCourseModal
@@ -66,12 +62,11 @@ const CreateCourseModal = ({
           autoHideDuration: 5000
         })
         log.info(t('appGlobal.dataSendSuccessful'))
-        setSuccessRemoteCourseCreated(true)
         setIsSending(false)
+        handleCloseCreateCourseModal()
       })
       .catch((error) => {
         handleError(t, addSnackbar, 'appGlobal.dataSendUnsuccessful', error, 5000)
-        setSuccessRemoteCourseCreated(false)
         setIsSending(false)
       })
   }
@@ -138,7 +133,7 @@ const CreateCourseModal = ({
                   id="create-course-modal-create-button"
                   variant="contained"
                   color="primary"
-                  disabled={isSending || successRemoteCourseCreated}
+                  disabled={isSending}
                   sx={{
                     m: 2,
                     '&.Mui-disabled': {

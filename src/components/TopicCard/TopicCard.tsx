@@ -47,7 +47,6 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
             }}
             onClick={openMenu}
             id="topic-menu"
-            data-topicid={topic?.id}
             data-testid="TopicSettingsButton">
             <MoreVert />
           </IconButton>

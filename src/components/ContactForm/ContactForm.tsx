@@ -134,7 +134,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
               <FormControlLabel
                 key={report.value}
                 value={report.value}
-                control={<Radio id={report.label + '-radio'} />}
+                control={<Radio id={'contactform-' + report.label + '-radio'} />}
                 label={report.label}
               />
             ))}

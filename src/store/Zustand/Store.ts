@@ -8,7 +8,8 @@ import LearningPathElementSlice, { createLearningPathElementSlice } from '../Sli
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
 } from '../Slices/LearningPathElementSpecificStatusSlice'
-import LearningPathElementStatusSlice, {
+import {
+  LearningPathElementStatusSlice,
   createLearningPathElementStatusSlice
 } from '../Slices/LearningPathElementStatusSlice'
 import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'

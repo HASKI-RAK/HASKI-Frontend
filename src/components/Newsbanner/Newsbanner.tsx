@@ -31,7 +31,7 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
   const scrolling = keyframes`
       from {
           transform: translateX(100%)
-      }
+      },
       to {
           transform: translateX(-${textPercent * 100}%)
       }

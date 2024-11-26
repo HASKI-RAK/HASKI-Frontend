@@ -30,7 +30,6 @@ export const Home = () => {
   const [coursesLoading, setCoursesLoading] = useState<boolean>(true)
   const [activeStepCreateCourseModal, setActiveStepCreateCourseModal] = useState<number>(0)
   const [createCourseModalOpen, setCreateCourseModalOpen] = useState<boolean>(false)
-  const [successRemoteCourseCreated, setSuccessRemoteCourseCreated] = useState<boolean>(false)
 
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
@@ -41,7 +40,6 @@ export const Home = () => {
   const handleCloseCourseModal = () => {
     clearCoursesCache()
     setCreateCourseModalOpen(false)
-    setSuccessRemoteCourseCreated(false)
     setActiveStepCreateCourseModal(0)
   }
 
@@ -164,8 +162,6 @@ export const Home = () => {
             <CreateCourseModal
               openCreateCourseModal={createCourseModalOpen}
               handleCloseCreateCourseModal={handleCloseCourseModal}
-              setSuccessRemoteCourseCreated={setSuccessRemoteCourseCreated}
-              successRemoteCourseCreated={successRemoteCourseCreated}
               activeStepCreateCourseModal={activeStepCreateCourseModal}
               setActiveStepCreateCourseModal={setActiveStepCreateCourseModal}></CreateCourseModal>
           </Card>
