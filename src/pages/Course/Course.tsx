@@ -22,7 +22,6 @@ const Course = () => {
   const { courseId } = useParams<{ courseId: string }>()
   const { topicProgress, isLoading, topics } = useLearningPathTopicProgress({ courseId })
   const [createTopicModalOpen, setCreateTopicModalOpen] = useState<boolean>(false)
-  const [successTopicCreated, setSuccessTopicCreated] = useState<boolean>(false)
 
   //Store
   const clearLearningPathTopicCache = useStore((state) => state.clearLearningPathTopicCache)
@@ -34,7 +33,6 @@ const Course = () => {
     clearLearningPathElementCache()
     clearLearningPathElementStatusCache()
     setCreateTopicModalOpen(false)
-    setSuccessTopicCreated(false)
   }
 
   return (
@@ -100,9 +98,7 @@ const Course = () => {
               </CardContent>
               <CreateTopicModal
                 openCreateTopicModal={createTopicModalOpen}
-                handleCloseCreateTopicModal={handleCloseTopicModal}
-                successTopicCreated={successTopicCreated}
-                setSuccessTopicCreated={setSuccessTopicCreated}></CreateTopicModal>
+                handleCloseCreateTopicModal={handleCloseTopicModal}></CreateTopicModal>
             </Card>
           )}
         </Grid>

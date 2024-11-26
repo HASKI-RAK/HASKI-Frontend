@@ -15,22 +15,22 @@ import { RemoteLearningElementWithClassification } from './CreateTopicModal'
 
 export type useCreateTopicModalProps = {
   setCreateTopicIsSending: React.Dispatch<React.SetStateAction<boolean>>
-  setSuccessTopicCreated: React.Dispatch<React.SetStateAction<boolean>>
   setSelectedTopics: React.Dispatch<React.SetStateAction<RemoteTopics[]>>
   setSelectedLearningElements: React.Dispatch<React.SetStateAction<{ [p: number]: RemoteLearningElement[] }>>
   setSelectedLearningElementsClassification: React.Dispatch<
     React.SetStateAction<{ [p: number]: RemoteLearningElementWithClassification[] }>
   >
   setSelectedAlgorithms: React.Dispatch<React.SetStateAction<{ [p: number]: CreateAlgorithmTableNameProps }>>
+  setSuccessfullyCreatedTopicsCount: React.Dispatch<React.SetStateAction<number>>
 }
 
 export const useCreateTopicModal = ({
   setCreateTopicIsSending,
-  setSuccessTopicCreated,
   setSelectedTopics,
   setSelectedLearningElements,
   setSelectedLearningElementsClassification,
-  setSelectedAlgorithms
+  setSelectedAlgorithms,
+  setSuccessfullyCreatedTopicsCount
 }: useCreateTopicModalProps) => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
@@ -127,41 +127,23 @@ export const useCreateTopicModal = ({
               )
             })
             .then(({ topicId, user }) => {
-              return handleCalculateLearningPaths(
-                user.settings.user_id,
-                user.role,
-                user.university,
-                courseId,
-                topicId
-              ).then((response) => {
-                if (response) {
+              return handleCalculateLearningPaths(user.settings.user_id, user.role, user.university, courseId, topicId)
+                .then(() => {
                   addSnackbar({
                     message: t('appGlobal.dataSendSuccessful'),
                     severity: 'success',
                     autoHideDuration: 5000
                   })
                   log.info(t('appGlobal.dataSendSuccessful'))
-                  setSuccessTopicCreated(true)
-                } else {
-                  handleError(
-                    t,
-                    addSnackbar,
-                    'error.postCalculateLearningPathForAllStudents',
-                    new Error('Network Error: No response from server'),
-                    5000
-                  )
-                  setSuccessTopicCreated(false)
-                  setCreateTopicIsSending(false)
-                }
-              })
+                  setSuccessfullyCreatedTopicsCount((prevCount) => prevCount + 1)
+                })
+                .catch((error) => {
+                  handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
+                })
             })
         })
         .catch((error) => {
           handleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error, 5000)
-          setSuccessTopicCreated(false)
-        })
-        .finally(() => {
-          setCreateTopicIsSending(false)
         })
     },
     [
@@ -172,8 +154,7 @@ export const useCreateTopicModal = ({
       handleCalculateLearningPaths,
       addSnackbar,
       t,
-      setCreateTopicIsSending,
-      setSuccessTopicCreated
+      setCreateTopicIsSending
     ]
   )
 

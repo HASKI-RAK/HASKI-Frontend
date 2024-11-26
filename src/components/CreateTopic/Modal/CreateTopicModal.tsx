@@ -15,8 +15,6 @@ import { useCreateTopicModal } from './CreateTopicModal.hooks'
 
 export type CreateTopicModalProps = {
   openCreateTopicModal?: boolean
-  successTopicCreated: boolean
-  setSuccessTopicCreated: React.Dispatch<React.SetStateAction<boolean>>
   handleCloseCreateTopicModal: () => void
 }
 
@@ -24,18 +22,14 @@ export type RemoteLearningElementWithClassification = RemoteLearningElement & {
   classification: string
 }
 
-const CreateTopicModal = ({
-  openCreateTopicModal = false,
-  successTopicCreated,
-  setSuccessTopicCreated,
-  handleCloseCreateTopicModal
-}: CreateTopicModalProps) => {
+const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopicModal }: CreateTopicModalProps) => {
   //Hooks
   const { t } = useTranslation()
   const { courseId } = useParams<{ courseId: string }>()
   const { addSnackbar } = useContext(SnackbarContext)
   const [remoteTopics, setRemoteTopics] = useState<RemoteTopics[]>()
   const [createTopicIsSending, setCreateTopicIsSending] = useState<boolean>(false)
+  const [successfullyCreatedTopicsCount, setSuccessfullyCreatedTopicsCount] = useState<number>(0)
   const [alreadyCreatedTopics, setAlreadyCreatedTopics] = useState<LearningPathTopic>()
   const [selectedTopics, setSelectedTopics] = useState<RemoteTopics[]>([])
   const [selectedLearningElements, setSelectedLearningElements] = useState<{
@@ -54,11 +48,11 @@ const CreateTopicModal = ({
     handleAlgorithmChange
   } = useCreateTopicModal({
     setCreateTopicIsSending,
-    setSuccessTopicCreated,
     setSelectedTopics,
     setSelectedLearningElements,
     setSelectedLearningElementsClassification,
-    setSelectedAlgorithms
+    setSelectedAlgorithms,
+    setSuccessfullyCreatedTopicsCount
   })
 
   //Store
@@ -79,15 +73,12 @@ const CreateTopicModal = ({
 
   const handleSubmit = async () => {
     setCreateTopicIsSending(true)
-    for (const [topicId] of Object.entries(selectedAlgorithms)) {
-      await handleCreate(
-        selectedAlgorithms[parseInt(topicId)].topicName,
-        parseInt(topicId),
-        selectedLearningElementsClassification,
-        selectedAlgorithms[parseInt(topicId)].algorithmShortName,
-        courseId
-      )
+    for (const key in selectedAlgorithms) {
+      const { topicName, algorithmShortName } = selectedAlgorithms[key]
+      await handleCreate(topicName, parseInt(key), selectedLearningElementsClassification, algorithmShortName, courseId)
     }
+    setCreateTopicIsSending(false)
+    handleCloseCreateTopicModal()
   }
 
   useEffect(() => {
@@ -199,9 +190,9 @@ const CreateTopicModal = ({
               selectedAlgorithms={selectedAlgorithms}
               handleAlgorithmChange={handleAlgorithmChange}
               createTopicIsSending={createTopicIsSending}
-              successTopicCreated={successTopicCreated}
               onBack={handleBack}
               onSubmit={handleSubmit}
+              successfullyCreatedTopicsCount={successfullyCreatedTopicsCount}
             />
           )}
         </Box>

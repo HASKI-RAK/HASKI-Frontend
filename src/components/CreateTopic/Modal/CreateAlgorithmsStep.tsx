@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Button, CircularProgress, Grid } from '@common/components'
+import { Box, Button, CircularProgress, Grid, Typography } from '@common/components'
 import { CreateAlgorithmTable } from '@components'
 import { CreateAlgorithmTableNameProps } from '@components'
 import { RemoteTopics } from '@core'
@@ -12,9 +12,9 @@ type CreateAlgorithmsStepProps = {
   selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps }
   handleAlgorithmChange: (algorithms: { [key: number]: CreateAlgorithmTableNameProps }) => void
   createTopicIsSending: boolean
-  successTopicCreated: boolean
   onBack: () => void
   onSubmit: () => Promise<void>
+  successfullyCreatedTopicsCount: number
 }
 
 const CreateAlgorithmsStep = ({
@@ -23,9 +23,9 @@ const CreateAlgorithmsStep = ({
   selectedAlgorithms,
   handleAlgorithmChange,
   createTopicIsSending,
-  successTopicCreated,
   onBack,
-  onSubmit
+  onSubmit,
+  successfullyCreatedTopicsCount
 }: CreateAlgorithmsStepProps) => {
   const { t } = useTranslation()
 
@@ -33,9 +33,7 @@ const CreateAlgorithmsStep = ({
     !selectedTopics.every(
       (topic) =>
         selectedAlgorithms[topic.topic_lms_id] && selectedAlgorithms[topic.topic_lms_id].algorithmShortName !== 'noKey'
-    ) ||
-    createTopicIsSending ||
-    successTopicCreated
+    ) || createTopicIsSending
 
   return (
     <Grid container item>
@@ -50,7 +48,16 @@ const CreateAlgorithmsStep = ({
               {t('appGlobal.back')}
             </Button>
             <Button variant="contained" color="primary" disabled={isSubmitDisabled} onClick={onSubmit} sx={{ mr: -2 }}>
-              {createTopicIsSending ? <CircularProgress size={24} /> : t('components.CreateTopicModal.createTopics')}
+              {createTopicIsSending ? (
+                <Box display="flex" alignItems="center">
+                  <CircularProgress size={24} />
+                  <Typography sx={{ ml: 1 }}>
+                    {successfullyCreatedTopicsCount}/{Object.keys(selectedAlgorithms).length}
+                  </Typography>
+                </Box>
+              ) : (
+                t('components.CreateTopicModal.createTopics')
+              )}
             </Button>
           </Grid>
         </Box>
