@@ -30,7 +30,7 @@ const CreateLearningElementClassificationsStep = ({
     <Grid container item>
       <CreateLearningElementClassificationTable
         selectedTopics={selectedTopics}
-        LearningElements={selectedLearningElements}
+        selectedLearningElements={selectedLearningElements}
         LearningElementsClassification={selectedLearningElementsClassification}
         onLearningElementChange={handleLearningElementClassification}>
         <Box sx={{ padding: '1rem', width: '95%' }}>
@@ -43,9 +43,7 @@ const CreateLearningElementClassificationsStep = ({
               color="primary"
               disabled={
                 !selectedTopics.every((topic) =>
-                  selectedLearningElementsClassification[topic.topic_lms_id]?.every(
-                    (el) => el.classification !== 'noKey'
-                  )
+                  selectedLearningElementsClassification[topic.topic_lms_id]?.every((el) => el.classification !== '')
                 )
               }
               onClick={onNext}

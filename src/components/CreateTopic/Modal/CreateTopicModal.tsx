@@ -189,7 +189,6 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
           {activeStep === 3 && (
             <CreateAlgorithmsStep
               selectedTopics={selectedTopics}
-              selectedLearningElementsClassification={selectedLearningElementsClassification}
               selectedAlgorithms={selectedAlgorithms}
               handleAlgorithmChange={handleAlgorithmChange}
               createTopicIsSending={createTopicIsSending}

@@ -107,7 +107,7 @@ describe('CreateLearningElementClassificationTable', () => {
       <MemoryRouter>
         <CreateLearningElementClassificationTable
           selectedTopics={mockSelectedTopics}
-          LearningElements={{}}
+          selectedLearningElements={{}}
           LearningElementsClassification={{}}
           onLearningElementChange={mockOnLearningElementChange}
         />
@@ -122,7 +122,7 @@ describe('CreateLearningElementClassificationTable', () => {
       <MemoryRouter>
         <CreateLearningElementClassificationTable
           selectedTopics={mockSelectedTopics}
-          LearningElements={mockLearningElements}
+          selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
         />
@@ -149,7 +149,7 @@ describe('CreateLearningElementClassificationTable', () => {
       <MemoryRouter>
         <CreateLearningElementClassificationTable
           selectedTopics={mockSelectedTopics}
-          LearningElements={mockLearningElements}
+          selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
         />
@@ -169,7 +169,7 @@ describe('CreateLearningElementClassificationTable', () => {
       <MemoryRouter>
         <CreateLearningElementClassificationTable
           selectedTopics={mockSelectedTopics}
-          LearningElements={mockLearningElements}
+          selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
         />
@@ -193,7 +193,7 @@ describe('CreateLearningElementClassificationTable', () => {
       <MemoryRouter>
         <CreateLearningElementClassificationTable
           selectedTopics={mockSelectedTopics}
-          LearningElements={mockLearningElements}
+          selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}>
           <div data-testid="child">Child Content</div>

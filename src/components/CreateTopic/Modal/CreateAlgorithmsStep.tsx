@@ -4,11 +4,9 @@ import { Box, Button, CircularProgress, Grid, Typography } from '@common/compone
 import { CreateAlgorithmTable } from '@components'
 import { CreateAlgorithmTableNameProps } from '@components'
 import { RemoteTopics } from '@core'
-import { RemoteLearningElementWithClassification } from './CreateTopicModal'
 
 type CreateAlgorithmsStepProps = {
   selectedTopics: RemoteTopics[]
-  selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
   selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps }
   handleAlgorithmChange: (algorithms: { [key: number]: CreateAlgorithmTableNameProps }) => void
   createTopicIsSending: boolean
@@ -19,7 +17,6 @@ type CreateAlgorithmsStepProps = {
 
 const CreateAlgorithmsStep = ({
   selectedTopics,
-  selectedLearningElementsClassification,
   selectedAlgorithms,
   handleAlgorithmChange,
   createTopicIsSending,
@@ -32,14 +29,13 @@ const CreateAlgorithmsStep = ({
   const isSubmitDisabled =
     !selectedTopics.every(
       (topic) =>
-        selectedAlgorithms[topic.topic_lms_id] && selectedAlgorithms[topic.topic_lms_id].algorithmShortName !== 'noKey'
+        selectedAlgorithms[topic.topic_lms_id] && selectedAlgorithms[topic.topic_lms_id].algorithmShortName !== ''
     ) || createTopicIsSending
 
   return (
     <Grid container item>
       <CreateAlgorithmTable
         selectedTopics={selectedTopics}
-        selectedLearningElementClassification={selectedLearningElementsClassification}
         onAlgorithmChange={handleAlgorithmChange}
         selectedAlgorithms={selectedAlgorithms}>
         <Box sx={{ padding: '1rem', width: '95%' }}>

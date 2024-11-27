@@ -129,7 +129,7 @@ describe('CreateAlgorithmTable', () => {
     await waitFor(() => {
       const selectElement1 = getAllByRole('combobox')[0]
       expect(selectElement1).toBeEnabled()
-      expect(getByText('components.CreateAlgorithmTable.missingClassification')).toBeInTheDocument()
+      expect(getByText('components.CreateAlgorithmTable.initialAlgorithmDescription')).toBeInTheDocument()
     })
   })
 

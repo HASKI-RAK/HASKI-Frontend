@@ -1,8 +1,8 @@
 import { SelectChangeEvent } from '@mui/material'
 import { ReactNode, memo, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, FormGroup, Grid, InputLabel, MenuItem, Paper, Select, Typography } from '@common/components'
-import { LearningElementWithClassification, SkeletonList } from '@components'
+import { Box, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography } from '@common/components'
+import { SkeletonList } from '@components'
 import { RemoteTopics } from '@core'
 import { useCreateAlgorithmTable } from './CreateAlgorithmTable.hooks'
 
@@ -13,7 +13,6 @@ export type CreateAlgorithmTableNameProps = {
 
 export type CreateAlgorithmTableProps = {
   selectedTopics: RemoteTopics[]
-  selectedLearningElementClassification: { [key: number]: LearningElementWithClassification[] }
   onAlgorithmChange: (selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps }) => void
   selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps }
   children?: ReactNode
@@ -21,7 +20,6 @@ export type CreateAlgorithmTableProps = {
 
 const CreateAlgorithmTable = ({
   selectedTopics,
-  selectedLearningElementClassification,
   onAlgorithmChange,
   selectedAlgorithms,
   children
@@ -33,17 +31,25 @@ const CreateAlgorithmTable = ({
   const topicAlgorithmOptions = useMemo(() => {
     return t('components.AlgorithmSettingsModal.algorithms', {
       returnObjects: true
-    }) as { name: string; description: string; key: string; disabled: boolean }[]
+    }) as { name: string; description: string; key: string }[]
   }, [t])
 
-  // Set initial algorithm for topics if none is selected
+  // Set initial algorithm for topics
   useEffect(() => {
-    selectedTopics.forEach((lmsTopic) => {
-      if (!selectedAlgorithms[lmsTopic.topic_lms_id]) {
-        handleAlgorithmChange(lmsTopic.topic_lms_id, lmsTopic.topic_lms_name, topicAlgorithmOptions[0].key)
+    const updatedAlgorithms = selectedTopics.reduce((acc, lmsTopic) => {
+      const existingAlgorithm = selectedAlgorithms[lmsTopic.topic_lms_id]
+
+      return {
+        ...acc,
+        [lmsTopic.topic_lms_id]: existingAlgorithm ?? {
+          topicName: lmsTopic.topic_lms_name,
+          algorithmShortName: ''
+        }
       }
-    })
-  }, [selectedTopics, selectedAlgorithms, topicAlgorithmOptions, handleAlgorithmChange])
+    }, {})
+
+    onAlgorithmChange(updatedAlgorithms)
+  }, [selectedTopics])
 
   // Handle selection change for algorithm
   const handleSelectChange = useCallback(
@@ -71,15 +77,11 @@ const CreateAlgorithmTable = ({
           {t('components.AlgorithmSettingsModal.selectAlgorithms')}
         </Typography>
       </Grid>
-      {selectedTopics.map((lmsTopic) => {
-        const hasLearningElementClassification = lmsTopic.topic_lms_id in selectedLearningElementClassification
-
-        const currentAlgorithmKey =
-          selectedAlgorithms[lmsTopic.topic_lms_id]?.algorithmShortName || topicAlgorithmOptions[0].key
-        const currentAlgorithm = topicAlgorithmOptions.find((option) => option.key === currentAlgorithmKey)
-
+      {Object.entries(selectedAlgorithms).map(([key, value]) => {
+        console.log(key, value)
+        const topic = selectedTopics.find((topic) => topic.topic_lms_name === value.topicName) || selectedTopics[0]
         return (
-          <Grid item container alignItems="center" direction="column" key={lmsTopic.topic_lms_id}>
+          <Grid item container alignItems="center" direction="column" key={key}>
             <Paper sx={{ padding: '1rem', width: '95%' }}>
               <Grid container alignItems="flex-start">
                 <Grid item xs={4}>
@@ -88,29 +90,27 @@ const CreateAlgorithmTable = ({
                       <Grid container justifyContent="center">
                         <InputLabel
                           sx={{
-                            mb: '1rem',
-                            mt: '1rem',
+                            m: '1rem',
                             wordBreak: 'break-word',
                             color: 'black'
                           }}>
-                          {lmsTopic.topic_lms_name}
+                          {value.topicName}
                         </InputLabel>
                       </Grid>
                     </Box>
-                    <FormGroup>
+                    <FormControl sx={{ mt: 1.5 }}>
+                      <InputLabel>{t('appGlobal.algorithm')}</InputLabel>
                       <Select
-                        value={currentAlgorithm?.key}
-                        disabled={!hasLearningElementClassification}
-                        onChange={handleSelectChange(lmsTopic.topic_lms_id, lmsTopic.topic_lms_name)}
-                        inputProps={{ 'aria-label': 'Without label' }}
-                        sx={{ mt: '1rem', mb: '1rem' }}>
+                        value={value.algorithmShortName}
+                        onChange={handleSelectChange(topic.topic_lms_id, value.topicName)}
+                        label={t('appGlobal.algorithm')}>
                         {topicAlgorithmOptions.map((option) => (
-                          <MenuItem key={option.key} value={option.key} disabled={option.disabled}>
+                          <MenuItem key={option.key} value={option.key}>
                             {option.name}
                           </MenuItem>
                         ))}
                       </Select>
-                    </FormGroup>
+                    </FormControl>
                   </Grid>
                 </Grid>
                 <Grid item xs={8}>
@@ -118,9 +118,8 @@ const CreateAlgorithmTable = ({
                     {t('components.AlgorithmSettingsModal.headerRight')}
                   </InputLabel>
                   <Typography id="create-algorithm-modal-description" variant="body1" component="p" sx={{ ml: '1rem' }}>
-                    {hasLearningElementClassification
-                      ? currentAlgorithm?.description
-                      : t('components.CreateAlgorithmTable.missingClassification')}
+                    {topicAlgorithmOptions.find((algorithm) => algorithm.key === value.algorithmShortName)
+                      ?.description || t('components.CreateAlgorithmTable.initialAlgorithmDescription')}
                   </Typography>
                 </Grid>
               </Grid>

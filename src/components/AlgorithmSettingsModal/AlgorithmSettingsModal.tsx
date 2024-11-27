@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   CircularProgress,
@@ -34,7 +34,6 @@ export type OptionsType = {
   name: string
   description: string
   key: string
-  disabled: true
 }[]
 /**
  *
@@ -49,9 +48,7 @@ export type OptionsType = {
  */
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
   const { t } = useTranslation()
-  const options = [
-    ...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as OptionsType)
-  ].slice(1)
+  const options = [...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as OptionsType)]
 
   const { handleSave, handleSelect, waitForBackend, selected, teacherAlgorithm } = useAlgorithmSettingsModal({
     handleClose: props.handleClose,

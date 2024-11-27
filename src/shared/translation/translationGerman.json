@@ -1,9 +1,11 @@
 {
   "appGlobal.accept": "Akzeptieren",
   "appGlobal.algorithms": "Algorithmen",
+  "appGlobal.algorithm": "Algorithmus",
   "appGlobal.aschaffenburgUAS": "TH Aschaffenburg",
   "appGlobal.back": "Zurück",
   "appGlobal.classifications": "Klassifikationen",
+  "appGlobal.classification": "Klassifikation",
   "appGlobal.courses": "Kurse",
   "appGlobal.dataSendSuccessful": "Daten wurden erfolgreich gesendet",
   "appGlobal.dataSendUnsuccessful": "Daten konnten nicht gesendet werden",
@@ -22,34 +24,24 @@
   "appGlobal.universityKempten": "Hochschule Kempten",
   "components.AlgorithmSettingsModal.algorithms": [
     {
-      "name": "Algorithmus auswählen",
-      "description": "Bitte wählen Sie einen Algorithmus für die Berechnung des Lernpfads aus.",
-      "key": "noKey",
-      "disabled": true
-    },
-    {
       "name": "Feste Reihenfolge",
       "description": "Die Lernelemente werden in einer festen Reihenfolge angezeigt. Es wird kein Algorithmus verwendet.",
-      "key": "default",
-      "disabled": false
+      "key": "default"
     },
     {
       "name": "Graf",
       "description": "Dieser Algorithmus basiert auf dem lernadaptiven Mechanismus von Graf et al. Er berechnet den Lernpfad basierend auf dem Lernstil des Lernenden.",
-      "key": "graf",
-      "disabled": false
+      "key": "graf"
     },
     {
       "name": "ACO",
       "description": "Inspiriert vom Verhalten von Ameisen, berechnet dieser Algorithmus den Lernpfad durch Simulation von Pheromonspuren, um optimale Wege zu finden.",
-      "key": "aco",
-      "disabled": false
+      "key": "aco"
     },
     {
       "name": "Genetischer Algorithmus",
       "description": "Basierend auf natürlicher Selektion, kombiniert dieser Algorithmus Lernwege, um über Generationen den besten Lernpfad zu entwickeln.",
-      "key": "ga",
-      "disabled": false
+      "key": "ga"
     }
   ],
   "components.AlgorithmSettingsModal.headerLeft": "Lernpfadalgorithmus wählen",
@@ -106,7 +98,7 @@
       "label": "Sonstiges"
     }
   ],
-  "components.CreateAlgorithmTable.missingClassification": "Dieser Themenbereich wird nicht erstellt. Es müssen alle verfügbaren Lernelement Klassifikationen ausgewählt werden, um die Algorithmusauswahl zu ermöglichen.",
+  "components.CreateAlgorithmTable.initialAlgorithmDescription": "Bitte wählen Sie einen Algorithmus für die Berechnung des Lernpfads aus.",
   "components.CreateCourseDetailsTable.courseName": "Kursname",
   "components.CreateCourseDetailsTable.startDate": "Startdatum",
   "components.CreateCourseModal.createCourse": "Kurs erstellen",
@@ -115,69 +107,52 @@
   "components.CreateCourseTable.noCoursesFound": "Keine Kurse gefunden...",
   "components.CreateLearningElementClassificationTable.classifications": [
     {
-      "name": "Klassifikation auswählen",
-      "key": "noKey",
-      "disabled": true
-    },
-    {
       "name": "LZ - Lernziel",
-      "key": "LZ",
-      "disabled": false
+      "key": "LZ"
     },
     {
       "name": "KÜ - Kurzübersicht",
-      "key": "KÜ",
-      "disabled": false
+      "key": "KÜ"
     },
     {
       "name": "FO - Forum",
-      "key": "FO",
-      "disabled": false
+      "key": "FO"
     },
     {
       "name": "EK - Erklärung",
-      "key": "EK",
-      "disabled": false
+      "key": "EK"
     },
     {
       "name": "AN - Animation",
-      "key": "AN",
-      "disabled": false
+      "key": "AN"
     },
     {
       "name": "BE - Beispiel",
-      "key": "BE",
-      "disabled": false
+      "key": "BE"
     },
     {
       "name": "AB - Anwendungsbeispiel",
-      "key": "AB",
-      "disabled": false
+      "key": "AB"
     },
     {
       "name": "ÜB - Übung",
-      "key": "ÜB",
-      "disabled": false
+      "key": "ÜB"
     },
     {
       "name": "SE - Selbsteinschätzungstest",
-      "key": "SE",
-      "disabled": false
+      "key": "SE"
     },
     {
       "name": "ZL - Zusatzliteratur",
-      "key": "ZL",
-      "disabled": false
+      "key": "ZL"
     },
     {
       "name": "ZF - Zusammenfassung",
-      "key": "ZF",
-      "disabled": false
+      "key": "ZF"
     },
     {
       "name": "RQ - Reflektives Quiz",
-      "key": "RQ",
-      "disabled": false
+      "key": "RQ"
     }
   ],
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Klassifikation der Lernelemente festlegen",

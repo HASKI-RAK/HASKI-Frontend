@@ -7,6 +7,7 @@ import {
   FormControl,
   FormControlLabel,
   Grid,
+  InputLabel,
   MenuItem,
   Paper,
   Select,
@@ -22,7 +23,7 @@ export type LearningElementWithClassification = RemoteLearningElement & {
 
 export type CreateLearningElementClassificationTableProps = {
   selectedTopics: RemoteTopics[]
-  LearningElements: { [key: number]: RemoteLearningElement[] }
+  selectedLearningElements: { [key: number]: RemoteLearningElement[] }
   LearningElementsClassification: { [key: number]: LearningElementWithClassification[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: LearningElementWithClassification[] }) => void
   children?: ReactNode
@@ -36,7 +37,7 @@ export type CreateLearningElementClassificationTableOptionsType = {
 
 const CreateLearningElementClassificationTable = ({
   selectedTopics,
-  LearningElements,
+  selectedLearningElements,
   LearningElementsClassification,
   onLearningElementChange,
   children
@@ -52,30 +53,30 @@ const CreateLearningElementClassificationTable = ({
   const learningElementClassifications = useMemo(() => {
     return t('components.CreateLearningElementClassificationTable.classifications', {
       returnObjects: true
-    }) as [{ name: string; key: string; disabled: boolean }]
+    }) as [{ name: string; key: string }]
   }, [t])
 
   useEffect(() => {
-    const updatedClassifications = Object.keys(LearningElements).reduce((accumulator, topicId) => {
+    const updatedClassifications = Object.keys(selectedLearningElements).reduce((accumulator, topicId) => {
       const topicIdInt = parseInt(topicId)
       const existingClassifications = LearningElementsClassification[topicIdInt] || []
 
       // Keep only the elements that are still present in LearningElements
       const filteredClassifications = existingClassifications.filter((existingElement) =>
-        LearningElements[topicIdInt].some((newElement) => newElement.lms_id === existingElement.lms_id)
+        selectedLearningElements[topicIdInt].some((newElement) => newElement.lms_id === existingElement.lms_id)
       )
 
       // Give elements the default classification that are in LearningElements but not yet classified
-      const newClassifications = LearningElements[topicIdInt].map((element) => {
+      const newClassifications = selectedLearningElements[topicIdInt].map((element) => {
         const existingElement = filteredClassifications.find((e) => e.lms_id === element.lms_id)
-        return existingElement ?? { ...element, classification: 'noKey' }
+        return existingElement ?? { ...element, classification: '' }
       })
 
       return { ...accumulator, [topicIdInt]: newClassifications }
     }, {})
 
     onLearningElementChange(updatedClassifications)
-  }, [LearningElements])
+  }, [selectedLearningElements])
 
   const handleSelectChange = useCallback(
     (lmsTopic: RemoteTopics, element: LearningElementWithClassification) => (event: SelectChangeEvent) => {
@@ -119,30 +120,33 @@ const CreateLearningElementClassificationTable = ({
                 </Typography>
               </Grid>
             </Box>
-            {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
-              <Grid container alignItems="center" spacing={2} key={element.lms_id}>
-                <Grid item xs={6}>
-                  <FormControlLabel
-                    control={<Checkbox checked={true} disabled={true} />}
-                    label={<Typography>{element.lms_learning_element_name}</Typography>}
-                  />
+            {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => {
+              return (
+                <Grid container alignItems="center" spacing={2} key={element.lms_id}>
+                  <Grid item xs={6}>
+                    <FormControlLabel
+                      control={<Checkbox checked={true} disabled={true} />}
+                      label={<Typography>{element.lms_learning_element_name}</Typography>}
+                    />
+                  </Grid>
+                  <Grid item container xs={6} justifyContent="flex-end">
+                    <FormControl sx={{ m: 1, width: '21rem' }} size="small">
+                      <InputLabel>{t('appGlobal.classification')}</InputLabel>
+                      <Select
+                        value={element.classification}
+                        onChange={handleSelectChange(lmsTopic, element)}
+                        label={t('appGlobal.classification')}>
+                        {learningElementClassifications.map((classification) => (
+                          <MenuItem key={classification.key} value={classification.key}>
+                            {classification.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
                 </Grid>
-                <Grid item container xs={6} justifyContent="flex-end">
-                  <FormControl sx={{ m: 1, width: '21rem' }} size="small">
-                    <Select value={element.classification} onChange={handleSelectChange(lmsTopic, element)}>
-                      {learningElementClassifications.map((classification) => (
-                        <MenuItem
-                          key={classification.key}
-                          value={classification.key}
-                          disabled={classification.disabled && element.classification !== 'noKey'}>
-                          {classification.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-              </Grid>
-            ))}
+              )
+            })}
           </Paper>
         </Grid>
       ))}
