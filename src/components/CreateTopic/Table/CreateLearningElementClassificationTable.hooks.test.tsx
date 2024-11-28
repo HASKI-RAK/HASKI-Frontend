@@ -5,7 +5,7 @@ import { useCreateLearningElementClassificationTable } from './CreateLearningEle
 describe('useCreateLearningElementClassificationTable', () => {
   const initialLearningElementsClassification: { [key: number]: LearningElementWithClassification[] } = {
     1: [
-      { lms_id: 101, lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity', classification: 'noKey' },
+      { lms_id: 101, lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity', classification: '' },
       { lms_id: 102, lms_learning_element_name: 'Element 2', lms_activity_type: 'Activity', classification: 'LZ' }
     ]
   }

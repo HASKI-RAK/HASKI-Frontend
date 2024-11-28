@@ -9,6 +9,7 @@ describe('CreateAlgorithmsStep', () => {
   const mockOnBack = jest.fn()
   const mockOnSubmit = jest.fn()
   const mockHandleAlgorithmChange = jest.fn()
+  const mockSuccessTopicCreated = 1
 
   const mockLearningElement = {
     lms_id: 101,
@@ -21,14 +22,6 @@ describe('CreateAlgorithmsStep', () => {
     { topic_lms_id: 2, topic_lms_name: 'Topic 2', lms_learning_elements: [mockLearningElement] }
   ]
 
-  const selectedLearningElementsClassification = {
-    1: [
-      { lms_id: 101, classification: 'KÜ', lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity' },
-      { lms_id: 102, classification: 'EK', lms_learning_element_name: 'Element 2', lms_activity_type: 'Activity' }
-    ],
-    2: [{ lms_id: 201, classification: 'BE', lms_learning_element_name: 'Element 3', lms_activity_type: 'Activity' }]
-  }
-
   const selectedAlgorithms = {
     1: { topicName: 'Topic 1', algorithmShortName: 'aco' },
     2: { topicName: 'Topic 2', algorithmShortName: 'default' }
@@ -39,13 +32,12 @@ describe('CreateAlgorithmsStep', () => {
       <MemoryRouter>
         <CreateAlgorithmsStep
           selectedTopics={selectedTopics}
-          selectedLearningElementsClassification={selectedLearningElementsClassification}
           selectedAlgorithms={selectedAlgorithms}
           handleAlgorithmChange={mockHandleAlgorithmChange}
           createTopicIsSending={false}
-          successTopicCreated={false}
           onBack={mockOnBack}
           onSubmit={mockOnSubmit}
+          successfullyCreatedTopicsCount={mockSuccessTopicCreated}
         />
       </MemoryRouter>
     )
@@ -57,20 +49,19 @@ describe('CreateAlgorithmsStep', () => {
   it('disables the Submit button if algorithms are not selected for all topics', () => {
     const incompleteAlgorithms = {
       1: { topicName: 'Topic 1', algorithmShortName: 'aco' },
-      2: { topicName: 'Topic 2', algorithmShortName: 'noKey' }
+      2: { topicName: 'Topic 2', algorithmShortName: '' }
     }
 
     const { getByText } = render(
       <MemoryRouter>
         <CreateAlgorithmsStep
           selectedTopics={selectedTopics}
-          selectedLearningElementsClassification={selectedLearningElementsClassification}
           selectedAlgorithms={incompleteAlgorithms}
           handleAlgorithmChange={mockHandleAlgorithmChange}
           createTopicIsSending={false}
-          successTopicCreated={false}
           onBack={mockOnBack}
           onSubmit={mockOnSubmit}
+          successfullyCreatedTopicsCount={mockSuccessTopicCreated}
         />
       </MemoryRouter>
     )
@@ -84,13 +75,12 @@ describe('CreateAlgorithmsStep', () => {
       <MemoryRouter>
         <CreateAlgorithmsStep
           selectedTopics={selectedTopics}
-          selectedLearningElementsClassification={selectedLearningElementsClassification}
           selectedAlgorithms={selectedAlgorithms}
           handleAlgorithmChange={mockHandleAlgorithmChange}
           createTopicIsSending={true}
-          successTopicCreated={false}
           onBack={mockOnBack}
           onSubmit={mockOnSubmit}
+          successfullyCreatedTopicsCount={mockSuccessTopicCreated}
         />
       </MemoryRouter>
     )
@@ -103,13 +93,12 @@ describe('CreateAlgorithmsStep', () => {
       <MemoryRouter>
         <CreateAlgorithmsStep
           selectedTopics={selectedTopics}
-          selectedLearningElementsClassification={selectedLearningElementsClassification}
           selectedAlgorithms={selectedAlgorithms}
           handleAlgorithmChange={mockHandleAlgorithmChange}
           createTopicIsSending={true}
-          successTopicCreated={false}
           onBack={mockOnBack}
           onSubmit={mockOnSubmit}
+          successfullyCreatedTopicsCount={mockSuccessTopicCreated}
         />
       </MemoryRouter>
     )
@@ -122,13 +111,12 @@ describe('CreateAlgorithmsStep', () => {
       <MemoryRouter>
         <CreateAlgorithmsStep
           selectedTopics={selectedTopics}
-          selectedLearningElementsClassification={selectedLearningElementsClassification}
           selectedAlgorithms={selectedAlgorithms}
           handleAlgorithmChange={mockHandleAlgorithmChange}
           createTopicIsSending={false}
-          successTopicCreated={false}
           onBack={mockOnBack}
           onSubmit={mockOnSubmit}
+          successfullyCreatedTopicsCount={mockSuccessTopicCreated}
         />
       </MemoryRouter>
     )
@@ -144,13 +132,12 @@ describe('CreateAlgorithmsStep', () => {
       <MemoryRouter>
         <CreateAlgorithmsStep
           selectedTopics={selectedTopics}
-          selectedLearningElementsClassification={selectedLearningElementsClassification}
           selectedAlgorithms={selectedAlgorithms}
           handleAlgorithmChange={mockHandleAlgorithmChange}
           createTopicIsSending={false}
-          successTopicCreated={false}
           onBack={mockOnBack}
           onSubmit={mockOnSubmit}
+          successfullyCreatedTopicsCount={mockSuccessTopicCreated}
         />
       </MemoryRouter>
     )
@@ -168,13 +155,12 @@ describe('CreateAlgorithmsStep', () => {
       <MemoryRouter>
         <CreateAlgorithmsStep
           selectedTopics={selectedTopics}
-          selectedLearningElementsClassification={selectedLearningElementsClassification}
           selectedAlgorithms={selectedAlgorithms}
           handleAlgorithmChange={mockHandleAlgorithmChange}
           createTopicIsSending={false}
-          successTopicCreated={false}
           onBack={mockOnBack}
           onSubmit={mockOnSubmit}
+          successfullyCreatedTopicsCount={mockSuccessTopicCreated}
         />
       </MemoryRouter>
     )

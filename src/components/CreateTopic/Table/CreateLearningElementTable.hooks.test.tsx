@@ -6,6 +6,7 @@ import { useCreateLearningElementTable } from './CreateLearningElementTable.hook
 
 describe('CreateLearningElementTable.hooks', () => {
   const mockOnLearningElementChange = jest.fn()
+  const mockSetSelectedAllLearningElementsChecked = jest.fn()
 
   const mockSelectedTopics: RemoteTopics[] = [
     {
@@ -29,7 +30,8 @@ describe('CreateLearningElementTable.hooks', () => {
       useCreateLearningElementTable({
         selectedLearningElements: mockSelectedLearningElements,
         onLearningElementChange: mockOnLearningElementChange,
-        selectedTopics: mockSelectedTopics
+        selectedTopics: mockSelectedTopics,
+        setSelectAllLearningElementsChecked: mockSetSelectedAllLearningElementsChecked
       })
     )
 
@@ -54,7 +56,8 @@ describe('CreateLearningElementTable.hooks', () => {
       useCreateLearningElementTable({
         selectedLearningElements: mockSelectedLearningElements,
         onLearningElementChange: mockOnLearningElementChange,
-        selectedTopics: mockSelectedTopics
+        selectedTopics: mockSelectedTopics,
+        setSelectAllLearningElementsChecked: mockSetSelectedAllLearningElementsChecked
       })
     )
 
@@ -79,12 +82,13 @@ describe('CreateLearningElementTable.hooks', () => {
       useCreateLearningElementTable({
         selectedLearningElements: mockSelectedLearningElements,
         onLearningElementChange: mockOnLearningElementChange,
-        selectedTopics: mockSelectedTopics
+        selectedTopics: mockSelectedTopics,
+        setSelectAllLearningElementsChecked: mockSetSelectedAllLearningElementsChecked
       })
     )
 
     act(() => {
-      result.current.handleSelectAllLearningElements()
+      result.current.handleToggleAll(true)
     })
 
     expect(mockOnLearningElementChange).toHaveBeenCalledWith({
@@ -98,12 +102,13 @@ describe('CreateLearningElementTable.hooks', () => {
       useCreateLearningElementTable({
         selectedLearningElements: mockSelectedLearningElements,
         onLearningElementChange: mockOnLearningElementChange,
-        selectedTopics: mockSelectedTopics
+        selectedTopics: mockSelectedTopics,
+        setSelectAllLearningElementsChecked: mockSetSelectedAllLearningElementsChecked
       })
     )
 
     act(() => {
-      result.current.handleDeselectAllLearningElements()
+      result.current.handleToggleAll(false)
     })
 
     expect(mockOnLearningElementChange).toHaveBeenCalledWith({

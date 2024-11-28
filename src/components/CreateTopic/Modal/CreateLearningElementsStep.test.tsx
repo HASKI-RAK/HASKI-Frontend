@@ -9,6 +9,8 @@ describe('CreateLearningElementsStep', () => {
   const mockOnNext = jest.fn()
   const mockOnBack = jest.fn()
   const mockHandleLearningElementChange = jest.fn()
+  const mockSetSelectAllLearningElementsChecked = jest.fn()
+
   const mockLearningElement = {
     lms_id: 101,
     lms_learning_element_name: 'Element 1',
@@ -34,6 +36,8 @@ describe('CreateLearningElementsStep', () => {
           handleLearningElementChange={mockHandleLearningElementChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          setSelectAllLearningElementsChecked={mockSetSelectAllLearningElementsChecked}
+          selectAllLearningElementsChecked={false}
         />
       </MemoryRouter>
     )
@@ -51,6 +55,8 @@ describe('CreateLearningElementsStep', () => {
           handleLearningElementChange={mockHandleLearningElementChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          setSelectAllLearningElementsChecked={mockSetSelectAllLearningElementsChecked}
+          selectAllLearningElementsChecked={false}
         />
       </MemoryRouter>
     )
@@ -73,6 +79,8 @@ describe('CreateLearningElementsStep', () => {
           handleLearningElementChange={mockHandleLearningElementChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          setSelectAllLearningElementsChecked={mockSetSelectAllLearningElementsChecked}
+          selectAllLearningElementsChecked={false}
         />
       </MemoryRouter>
     )
@@ -90,6 +98,8 @@ describe('CreateLearningElementsStep', () => {
           handleLearningElementChange={mockHandleLearningElementChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          setSelectAllLearningElementsChecked={mockSetSelectAllLearningElementsChecked}
+          selectAllLearningElementsChecked={false}
         />
       </MemoryRouter>
     )
@@ -114,6 +124,8 @@ describe('CreateLearningElementsStep', () => {
           handleLearningElementChange={mockHandleLearningElementChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          setSelectAllLearningElementsChecked={mockSetSelectAllLearningElementsChecked}
+          selectAllLearningElementsChecked={false}
         />
       </MemoryRouter>
     )
@@ -135,6 +147,8 @@ describe('CreateLearningElementsStep', () => {
           handleLearningElementChange={mockHandleLearningElementChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          setSelectAllLearningElementsChecked={mockSetSelectAllLearningElementsChecked}
+          selectAllLearningElementsChecked={false}
         />
       </MemoryRouter>
     )

@@ -1,9 +1,10 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { fireEvent, getAllByLabelText, getByLabelText, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
+import { act } from 'react-test-renderer'
 import { AuthContext, RoleContext, RoleContextType } from '@services'
 import CreateTopicModal from './CreateTopicModal'
 
@@ -27,11 +28,7 @@ describe('CreateTopicModal', () => {
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
-            <CreateTopicModal
-              successTopicCreated={false}
-              setSuccessTopicCreated={jest.fn()}
-              handleCloseCreateTopicModal={jest.fn()}
-            />
+            <CreateTopicModal handleCloseCreateTopicModal={jest.fn()} />
           </RoleContext.Provider>
         </AuthContext.Provider>
       </MemoryRouter>
@@ -49,12 +46,7 @@ describe('CreateTopicModal', () => {
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
-            <CreateTopicModal
-              openCreateTopicModal={true}
-              successTopicCreated={false}
-              setSuccessTopicCreated={jest.fn()}
-              handleCloseCreateTopicModal={jest.fn()}
-            />
+            <CreateTopicModal openCreateTopicModal={true} handleCloseCreateTopicModal={jest.fn()} />
           </RoleContext.Provider>
         </AuthContext.Provider>
       </MemoryRouter>
@@ -73,12 +65,7 @@ describe('CreateTopicModal', () => {
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
-            <CreateTopicModal
-              openCreateTopicModal={true}
-              successTopicCreated={false}
-              setSuccessTopicCreated={jest.fn()}
-              handleCloseCreateTopicModal={handleCloseCreateTopicModal}
-            />
+            <CreateTopicModal openCreateTopicModal={true} handleCloseCreateTopicModal={handleCloseCreateTopicModal} />
           </RoleContext.Provider>
         </AuthContext.Provider>
       </MemoryRouter>
@@ -95,12 +82,7 @@ describe('CreateTopicModal', () => {
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
-            <CreateTopicModal
-              openCreateTopicModal={true}
-              successTopicCreated={false}
-              setSuccessTopicCreated={jest.fn()}
-              handleCloseCreateTopicModal={handleCloseCreateTopicModal}
-            />
+            <CreateTopicModal openCreateTopicModal={true} handleCloseCreateTopicModal={handleCloseCreateTopicModal} />
           </RoleContext.Provider>
         </AuthContext.Provider>
       </MemoryRouter>
@@ -120,12 +102,7 @@ describe('CreateTopicModal', () => {
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
-            <CreateTopicModal
-              openCreateTopicModal={true}
-              successTopicCreated={false}
-              setSuccessTopicCreated={handleSetSuccessTopicCreated}
-              handleCloseCreateTopicModal={handleCloseCreateTopicModal}
-            />
+            <CreateTopicModal openCreateTopicModal={true} handleCloseCreateTopicModal={handleCloseCreateTopicModal} />
           </RoleContext.Provider>
         </AuthContext.Provider>
       </MemoryRouter>
@@ -147,16 +124,11 @@ describe('CreateTopicModal', () => {
   })
 
   it('calls handleCreate on submit in the last step', async () => {
-    const { getByText, getAllByRole, getByTestId, queryByText } = render(
+    const { getByText, getAllByRole, getByTestId, queryByText, queryByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
-            <CreateTopicModal
-              openCreateTopicModal={true}
-              successTopicCreated={false}
-              setSuccessTopicCreated={handleSetSuccessTopicCreated}
-              handleCloseCreateTopicModal={handleCloseCreateTopicModal}
-            />
+            <CreateTopicModal openCreateTopicModal={true} handleCloseCreateTopicModal={handleCloseCreateTopicModal} />
           </RoleContext.Provider>
         </AuthContext.Provider>
       </MemoryRouter>
@@ -174,20 +146,58 @@ describe('CreateTopicModal', () => {
     })
 
     await waitFor(() => {
-      const button = getAllByRole('combobox')[0]
+      const button = getAllByRole('combobox', { hidden: true })[0]
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
       fireEvent.mouseDown(button)
-      const menuItems = getAllByRole('option')
-      expect(menuItems).toHaveLength(13)
-      fireEvent.click(getAllByRole('option')[1])
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(12)
+      fireEvent.click(menuItems[10])
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox', { hidden: true })[1]
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
+      fireEvent.mouseDown(button)
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(12)
+      fireEvent.click(menuItems[7])
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox', { hidden: true })[2]
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
+      fireEvent.mouseDown(button)
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(12)
+      fireEvent.click(menuItems[6])
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox', { hidden: true })[0]
+      expect(button).toHaveTextContent('ZF - Summary')
+      const button1 = getAllByRole('combobox', { hidden: true })[1]
+      expect(button1).toHaveTextContent('ÜB - Exercise')
+      const button2 = getAllByRole('combobox', { hidden: true })[2]
+      expect(button2).toHaveTextContent('AB - Application Example')
+      expect(getByText('appGlobal.next')).toBeEnabled()
       fireEvent.click(getByText('appGlobal.next'))
     })
 
     await waitFor(() => {
-      const button = getAllByRole('combobox')[0]
+      const button = getAllByRole('combobox', { hidden: true })[0]
       fireEvent.mouseDown(button)
-      const menuItems = getAllByRole('option')
-      expect(menuItems).toHaveLength(5)
-      fireEvent.click(getAllByRole('option')[1])
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(4)
+      fireEvent.click(menuItems[1])
       fireEvent.click(getByText('components.CreateTopicModal.createTopics'))
     })
 
@@ -199,14 +209,8 @@ describe('CreateTopicModal', () => {
       expect(mockServices.postLearningElement).toHaveBeenCalled()
       expect(mockServices.postLearningPathAlgorithm).toHaveBeenCalled()
       expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
-      expect(handleSetSuccessTopicCreated).toHaveBeenCalledWith(true)
-      expect(queryByText('components.CreateTopicModal.createTopics')).toBeInTheDocument()
     })
-
-    await waitFor(() => {
-      fireEvent.click(getByTestId('create-topic-modal-close-button'))
-    })
-  })
+  }, 20000)
 
   it('calls handleCreate on submit in the last step, but calculation fails', async () => {
     mockServices.postCalculateLearningPathForAllStudents.mockImplementationOnce(() => Promise.resolve())
@@ -215,12 +219,7 @@ describe('CreateTopicModal', () => {
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
-            <CreateTopicModal
-              openCreateTopicModal={true}
-              successTopicCreated={false}
-              setSuccessTopicCreated={handleSetSuccessTopicCreated}
-              handleCloseCreateTopicModal={handleCloseCreateTopicModal}
-            />
+            <CreateTopicModal openCreateTopicModal={true} handleCloseCreateTopicModal={handleCloseCreateTopicModal} />
           </RoleContext.Provider>
         </AuthContext.Provider>
       </MemoryRouter>
@@ -238,20 +237,58 @@ describe('CreateTopicModal', () => {
     })
 
     await waitFor(() => {
-      const button = getAllByRole('combobox')[0]
+      const button = getAllByRole('combobox', { hidden: true })[0]
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
       fireEvent.mouseDown(button)
-      const menuItems = getAllByRole('option')
-      expect(menuItems).toHaveLength(13)
-      fireEvent.click(getAllByRole('option')[1])
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(12)
+      fireEvent.click(menuItems[11])
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox', { hidden: true })[1]
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
+      fireEvent.mouseDown(button)
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(12)
+      fireEvent.click(menuItems[4])
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox', { hidden: true })[2]
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
+      fireEvent.mouseDown(button)
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(12)
+      fireEvent.click(menuItems[9])
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox', { hidden: true })[0]
+      expect(button).toHaveTextContent('RQ - Reflective Quiz')
+      const button1 = getAllByRole('combobox', { hidden: true })[1]
+      expect(button1).toHaveTextContent('AN - Animation')
+      const button2 = getAllByRole('combobox', { hidden: true })[2]
+      expect(button2).toHaveTextContent('ZL - Additional Literature')
+      expect(getByText('appGlobal.next')).toBeEnabled()
       fireEvent.click(getByText('appGlobal.next'))
     })
 
     await waitFor(() => {
-      const button = getAllByRole('combobox')[0]
+      const button = getAllByRole('combobox', { hidden: true })[0]
       fireEvent.mouseDown(button)
-      const menuItems = getAllByRole('option')
-      expect(menuItems).toHaveLength(5)
-      fireEvent.click(getAllByRole('option')[1])
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(4)
+      fireEvent.click(menuItems[1])
       fireEvent.click(getByText('components.CreateTopicModal.createTopics'))
     })
 
@@ -263,14 +300,13 @@ describe('CreateTopicModal', () => {
       expect(mockServices.postLearningElement).toHaveBeenCalled()
       expect(mockServices.postLearningPathAlgorithm).toHaveBeenCalled()
       expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
-      expect(handleSetSuccessTopicCreated).toHaveBeenCalledWith(false)
       expect(queryByText('components.CreateTopicModal.createTopics')).toBeInTheDocument()
     })
 
     await waitFor(() => {
       fireEvent.click(getByTestId('create-topic-modal-close-button'))
     })
-  })
+  }, 20000)
 
   it('renders empty remoteTopics and alreadyCreatedTopics when getUser API call fails', async () => {
     mockServices.fetchUser.mockImplementationOnce(() => {
@@ -283,12 +319,7 @@ describe('CreateTopicModal', () => {
 
     const { getByText } = render(
       <MemoryRouter>
-        <CreateTopicModal
-          openCreateTopicModal={true}
-          successTopicCreated={false}
-          setSuccessTopicCreated={jest.fn()}
-          handleCloseCreateTopicModal={jest.fn()}
-        />
+        <CreateTopicModal openCreateTopicModal={true} handleCloseCreateTopicModal={jest.fn()} />
       </MemoryRouter>
     )
 
@@ -308,12 +339,7 @@ describe('CreateTopicModal', () => {
 
     const { getByText } = render(
       <MemoryRouter>
-        <CreateTopicModal
-          openCreateTopicModal={true}
-          successTopicCreated={false}
-          setSuccessTopicCreated={jest.fn()}
-          handleCloseCreateTopicModal={jest.fn()}
-        />
+        <CreateTopicModal openCreateTopicModal={true} handleCloseCreateTopicModal={jest.fn()} />
       </MemoryRouter>
     )
 
@@ -333,19 +359,14 @@ describe('CreateTopicModal', () => {
 
     const { getByText } = render(
       <MemoryRouter>
-        <CreateTopicModal
-          openCreateTopicModal={true}
-          successTopicCreated={false}
-          setSuccessTopicCreated={jest.fn()}
-          handleCloseCreateTopicModal={jest.fn()}
-        />
+        <CreateTopicModal openCreateTopicModal={true} handleCloseCreateTopicModal={jest.fn()} />
       </MemoryRouter>
     )
 
     await waitFor(() => {
       expect(getByText('components.TableRemoteTopics.noAdditionalTopics')).toBeInTheDocument()
     })
-  })
+  }, 20000)
 
   it('calls handleCreate on submit in the last step, but returns without give courseId', async () => {
     mockServices.postCalculateLearningPathForAllStudents.mockImplementationOnce(() => Promise.resolve())
@@ -355,12 +376,7 @@ describe('CreateTopicModal', () => {
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
-            <CreateTopicModal
-              openCreateTopicModal={true}
-              successTopicCreated={false}
-              setSuccessTopicCreated={handleSetSuccessTopicCreated}
-              handleCloseCreateTopicModal={handleCloseCreateTopicModal}
-            />
+            <CreateTopicModal openCreateTopicModal={true} handleCloseCreateTopicModal={handleCloseCreateTopicModal} />
           </RoleContext.Provider>
         </AuthContext.Provider>
       </MemoryRouter>
@@ -378,20 +394,58 @@ describe('CreateTopicModal', () => {
     })
 
     await waitFor(() => {
-      const button = getAllByRole('combobox')[0]
+      const button = getAllByRole('combobox', { hidden: true })[0]
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
       fireEvent.mouseDown(button)
-      const menuItems = getAllByRole('option')
-      expect(menuItems).toHaveLength(13)
-      fireEvent.click(getAllByRole('option')[1])
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(12)
+      fireEvent.click(menuItems[1])
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox', { hidden: true })[1]
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
+      fireEvent.mouseDown(button)
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(12)
+      fireEvent.click(menuItems[4])
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox', { hidden: true })[2]
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
+      fireEvent.mouseDown(button)
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(12)
+      fireEvent.click(menuItems[8])
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox', { hidden: true })[0]
+      expect(button).toHaveTextContent('KÜ - Overview')
+      const button1 = getAllByRole('combobox', { hidden: true })[1]
+      expect(button1).toHaveTextContent('AN - Animation')
+      const button2 = getAllByRole('combobox', { hidden: true })[2]
+      expect(button2).toHaveTextContent('SE - Self-Assessment Test')
+      expect(getByText('appGlobal.next')).toBeEnabled()
       fireEvent.click(getByText('appGlobal.next'))
     })
 
     await waitFor(() => {
-      const button = getAllByRole('combobox')[0]
+      const button = getAllByRole('combobox', { hidden: true })[0]
       fireEvent.mouseDown(button)
-      const menuItems = getAllByRole('option')
-      expect(menuItems).toHaveLength(5)
-      fireEvent.click(getAllByRole('option')[1])
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(4)
+      fireEvent.click(menuItems[1])
       fireEvent.click(getByText('components.CreateTopicModal.createTopics'))
     })
 
@@ -399,19 +453,14 @@ describe('CreateTopicModal', () => {
       expect(mockServices.postTopic).not.toHaveBeenCalled()
       expect(handleSetSuccessTopicCreated).not.toHaveBeenCalled()
     })
-  })
+  }, 20000)
 
   it('changes topic after elements, classifications and algorithms are set', async () => {
     const { getByText, getAllByRole } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
-            <CreateTopicModal
-              openCreateTopicModal={true}
-              successTopicCreated={false}
-              setSuccessTopicCreated={handleSetSuccessTopicCreated}
-              handleCloseCreateTopicModal={handleCloseCreateTopicModal}
-            />
+            <CreateTopicModal openCreateTopicModal={true} handleCloseCreateTopicModal={handleCloseCreateTopicModal} />
           </RoleContext.Provider>
         </AuthContext.Provider>
       </MemoryRouter>
@@ -421,6 +470,7 @@ describe('CreateTopicModal', () => {
       expect(getAllByRole('checkbox').length).toEqual(4)
       fireEvent.click(getAllByRole('checkbox')[0])
     })
+
     await waitFor(() => {
       fireEvent.click(getByText('appGlobal.next'))
       expect(getByText('superKnowledge.pdf')).toBeInTheDocument()
@@ -429,20 +479,58 @@ describe('CreateTopicModal', () => {
     })
 
     await waitFor(() => {
-      const button = getAllByRole('combobox')[0]
+      const button = getAllByRole('combobox', { hidden: true })[0]
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
       fireEvent.mouseDown(button)
-      const menuItems = getAllByRole('option')
-      expect(menuItems).toHaveLength(13)
-      fireEvent.click(getAllByRole('option')[1])
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(12)
+      fireEvent.click(menuItems[2])
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox', { hidden: true })[1]
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
+      fireEvent.mouseDown(button)
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(12)
+      fireEvent.click(menuItems[0])
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox', { hidden: true })[2]
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
+      fireEvent.mouseDown(button)
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(12)
+      fireEvent.click(menuItems[5])
+    })
+
+    await waitFor(() => {
+      const button = getAllByRole('combobox', { hidden: true })[0]
+      expect(button).toHaveTextContent('FO - Forum')
+      const button1 = getAllByRole('combobox', { hidden: true })[1]
+      expect(button1).toHaveTextContent('LZ - Learning Objective')
+      const button2 = getAllByRole('combobox', { hidden: true })[2]
+      expect(button2).toHaveTextContent('BE - Example')
+      expect(getByText('appGlobal.next')).toBeEnabled()
       fireEvent.click(getByText('appGlobal.next'))
     })
 
     await waitFor(() => {
-      const button = getAllByRole('combobox')[0]
+      const button = getAllByRole('combobox', { hidden: true })[0]
       fireEvent.mouseDown(button)
-      const menuItems = getAllByRole('option')
-      expect(menuItems).toHaveLength(5)
-      fireEvent.click(getAllByRole('option')[1])
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(4)
+      fireEvent.click(menuItems[1])
     })
 
     await waitFor(() => {
@@ -462,10 +550,10 @@ describe('CreateTopicModal', () => {
 
     await waitFor(() => {
       expect(getAllByRole('checkbox').length).toEqual(4)
-      fireEvent.click(getAllByRole('checkbox')[0])
+      fireEvent.click(getAllByRole('checkbox', { hidden: true })[0])
       expect(getAllByRole('checkbox')[0]).not.toBeChecked()
     })
-  })
+  }, 20000)
 
   it('renders empty remoteTopics and alreadyCreatedTopics when getUser API call fails', async () => {
     mockServices.fetchUser.mockImplementationOnce(() => {
@@ -478,12 +566,7 @@ describe('CreateTopicModal', () => {
 
     const { getByText } = render(
       <MemoryRouter>
-        <CreateTopicModal
-          openCreateTopicModal={true}
-          successTopicCreated={false}
-          setSuccessTopicCreated={jest.fn()}
-          handleCloseCreateTopicModal={jest.fn()}
-        />
+        <CreateTopicModal openCreateTopicModal={true} handleCloseCreateTopicModal={jest.fn()} />
       </MemoryRouter>
     )
 

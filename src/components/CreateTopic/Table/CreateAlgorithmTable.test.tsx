@@ -10,43 +10,29 @@ describe('CreateAlgorithmTable', () => {
 
   const mockAlgorithmOptions = [
     {
-      name: 'Select Algorithm',
-      description: 'Please select an algorithm for the learning path calculation.',
-      key: 'noKey',
-      disabled: true
-    },
-    {
       name: 'Fixed Order',
       description: 'The learning elements are presented in a predetermined order.',
-      key: 'default',
-      disabled: false
+      key: 'default'
     },
     {
       name: 'Graf',
       description:
         'This algorithm is based on the learning adaptive mechanism by Graf et al. It calculates the learning path based on the learning style of the learner.',
-      key: 'graf',
-      disabled: false
+      key: 'graf'
     },
     {
       name: 'ACO',
       description:
         'The Ant Colony Algorithm (ACO) is inspired by the behavior of ant workers. It calculates the learning path by simulating ants who leave behind pheromones to mark the best path.',
-      key: 'aco',
-      disabled: false
+      key: 'aco'
     },
     {
       name: 'Genetic Algorithm',
       description:
         'Based on natural selection, it combines learning paths to evolve the best one over several iterations.',
-      key: 'ga',
-      disabled: false
+      key: 'ga'
     }
   ]
-
-  const notAllSelectedLearningElementClassifications: { [key: number]: LearningElementWithClassification[] } = {
-    1: [{ lms_id: 101, lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity', classification: 'KÜ' }]
-  }
 
   const defaultProps: CreateAlgorithmTableProps = {
     selectedTopics: [
@@ -61,13 +47,10 @@ describe('CreateAlgorithmTable', () => {
         lms_learning_elements: [{ lms_id: 102, lms_learning_element_name: 'Element 2', lms_activity_type: 'Activity' }]
       }
     ],
-    selectedLearningElementClassification: {
-      1: [{ lms_id: 101, lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity', classification: 'KÜ' }],
-      2: [{ lms_id: 102, lms_learning_element_name: 'Element 2', lms_activity_type: 'Activity', classification: 'LZ' }]
-    },
     onAlgorithmChange: mockHandleAlgorithmChange,
     selectedAlgorithms: {
-      1: { topicName: 'Topic 1', algorithmShortName: 'algo1' }
+      1: { topicName: 'Topic 1', algorithmShortName: 'graf' },
+      2: { topicName: 'Topic 2', algorithmShortName: '' }
     }
   }
 
@@ -79,7 +62,6 @@ describe('CreateAlgorithmTable', () => {
     const { getByTestId } = render(
       <MemoryRouter>
         <CreateAlgorithmTable
-          selectedLearningElementClassification={notAllSelectedLearningElementClassifications}
           selectedTopics={[]}
           selectedAlgorithms={[]}
           onAlgorithmChange={defaultProps.onAlgorithmChange}
@@ -106,11 +88,11 @@ describe('CreateAlgorithmTable', () => {
     expect(screen.getByText('Topic 1')).toBeInTheDocument()
     expect(screen.getByText('Topic 2')).toBeInTheDocument()
 
-    const selectElements = getAllByRole('combobox')
+    const selectElements = getAllByRole('combobox', { hidden: true })
     fireEvent.mouseDown(selectElements[0])
-    const menuItems = getAllByRole('option')
+    const menuItems = getAllByRole('option', { hidden: true })
     expect(menuItems).toHaveLength(mockAlgorithmOptions.length)
-    fireEvent.click(getAllByRole('option')[1])
+    fireEvent.click(menuItems[1])
     expect(selectElements[0]).toHaveTextContent(mockAlgorithmOptions[1].name)
   })
 
@@ -118,7 +100,6 @@ describe('CreateAlgorithmTable', () => {
     const { getByText, getAllByRole } = render(
       <MemoryRouter>
         <CreateAlgorithmTable
-          selectedLearningElementClassification={notAllSelectedLearningElementClassifications}
           selectedTopics={defaultProps.selectedTopics}
           selectedAlgorithms={defaultProps.selectedAlgorithms}
           onAlgorithmChange={defaultProps.onAlgorithmChange}
@@ -141,14 +122,15 @@ describe('CreateAlgorithmTable', () => {
     )
 
     // Open dropdown and select a new algorithm
-    const selectElement = getAllByRole('combobox')[0]
+    const selectElement = getAllByRole('combobox', { hidden: true })[0]
     fireEvent.mouseDown(selectElement)
     const newAlgorithmOption = getByText('ACO')
     fireEvent.click(newAlgorithmOption)
 
     await waitFor(() => {
       expect(mockHandleAlgorithmChange).toHaveBeenCalledWith({
-        1: { topicName: 'Topic 1', algorithmShortName: 'aco' }
+        1: { topicName: 'Topic 1', algorithmShortName: 'aco' },
+        2: { topicName: 'Topic 2', algorithmShortName: '' }
       })
     })
   })

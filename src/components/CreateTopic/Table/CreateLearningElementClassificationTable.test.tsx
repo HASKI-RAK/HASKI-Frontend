@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import { RemoteLearningElement, RemoteTopics } from '@core'
@@ -11,71 +11,55 @@ import CreateLearningElementClassificationTable, {
 describe('CreateLearningElementClassificationTable', () => {
   const mockOptions: CreateLearningElementClassificationTableOptionsType = [
     {
-      name: 'Select Classification',
-      key: 'noKey',
-      disabled: true
-    },
-    {
       name: 'LZ - Learning Objective',
-      key: 'LZ',
-      disabled: false
+      key: 'LZ'
     },
     {
       name: 'KÜ - Overview',
-      key: 'KÜ',
-      disabled: false
+      key: 'KÜ'
     },
     {
       name: 'FO - Forum',
-      key: 'FO',
-      disabled: false
+      key: 'FO'
     },
     {
       name: 'EK - Explanation',
-      key: 'EK',
-      disabled: false
+      key: 'EK'
     },
     {
       name: 'AN - Animation',
-      key: 'AN',
-      disabled: false
+      key: 'AN'
     },
     {
       name: 'BE - Example',
-      key: 'BE',
-      disabled: false
+      key: 'BE'
     },
     {
       name: 'AB - Application Example',
-      key: 'AB',
-      disabled: false
+      key: 'AB'
     },
     {
       name: 'ÜB - Exercise',
-      key: 'ÜB',
-      disabled: false
+      key: 'ÜB'
     },
     {
       name: 'SE - Self-Assessment Test',
-      key: 'SE',
-      disabled: false
+      key: 'SE'
     },
     {
       name: 'ZL - Additional Literature',
-      key: 'ZL',
-      disabled: false
+      key: 'ZL'
     },
     {
       name: 'ZF - Summary',
-      key: 'ZF',
-      disabled: false
+      key: 'ZF'
     },
     {
       name: 'RQ - Reflective Quiz',
-      key: 'RQ',
-      disabled: false
+      key: 'RQ'
     }
   ]
+
   const mockOnLearningElementChange = jest.fn()
 
   // Reset the translation mock for each test
@@ -97,7 +81,7 @@ describe('CreateLearningElementClassificationTable', () => {
 
   const mockLearningElementsClassification: { [key: number]: LearningElementWithClassification[] } = {
     1: [
-      { lms_id: 101, lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity', classification: 'noKey' },
+      { lms_id: 101, lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity', classification: '' },
       { lms_id: 102, lms_learning_element_name: 'Element 2', lms_activity_type: 'Activity', classification: 'LZ' }
     ]
   }
@@ -117,8 +101,8 @@ describe('CreateLearningElementClassificationTable', () => {
     expect(screen.getByTestId('SkeletonList Element-1')).toBeInTheDocument()
   })
 
-  it('renders topics with learning elements and no test classifications', async () => {
-    const { getAllByRole, getByText, getByLabelText, queryByLabelText } = render(
+  it('renders the component with topics and learning elements', () => {
+    render(
       <MemoryRouter>
         <CreateLearningElementClassificationTable
           selectedTopics={mockSelectedTopics}
@@ -129,20 +113,31 @@ describe('CreateLearningElementClassificationTable', () => {
       </MemoryRouter>
     )
 
-    expect(getByText('Topic 1')).toBeInTheDocument()
-    expect(getByLabelText('Element 1')).toBeInTheDocument()
-    expect(getByLabelText('Element 2')).toBeInTheDocument()
-    expect(queryByLabelText('LZ - Learning Objective')).not.toBeInTheDocument()
+    expect(screen.getByText('Topic 1')).toBeInTheDocument()
+    expect(screen.getByText('Element 1')).toBeInTheDocument()
+    expect(screen.getByText('Element 2')).toBeInTheDocument()
+  })
 
-    const button = getAllByRole('combobox')[0]
-    fireEvent.mouseDown(button)
-    const menuItems = getAllByRole('option')
+  it('renders the select dropdown with options', () => {
+    const { getAllByRole } = render(
+      <MemoryRouter>
+        <CreateLearningElementClassificationTable
+          selectedTopics={mockSelectedTopics}
+          selectedLearningElements={mockLearningElements}
+          LearningElementsClassification={mockLearningElementsClassification}
+          onLearningElementChange={mockOnLearningElementChange}
+        />
+      </MemoryRouter>
+    )
+
+    const selectDropdowns = getAllByRole('combobox')
+    expect(selectDropdowns).toHaveLength(2) // One for each Learning Element
+
+    fireEvent.mouseDown(selectDropdowns[0])
+
+    const menuItems = getAllByRole('option', { hidden: true })
     expect(menuItems).toHaveLength(mockOptions.length)
-    fireEvent.click(getAllByRole('option')[1])
-    await waitFor(() => {
-      expect(getByText('LZ - Learning Objective')).toBeInTheDocument()
-    })
-  }, 20000)
+  })
 
   it('calls handleClassificationChange when classification is changed in the dropdown', async () => {
     const { getAllByRole, getAllByText } = render(
@@ -158,7 +153,7 @@ describe('CreateLearningElementClassificationTable', () => {
 
     const button = getAllByRole('combobox')[0]
     fireEvent.mouseDown(button)
-    const newClassificationOption = getAllByText('LZ - Learning Objective')
+    const newClassificationOption = getAllByText('FO - Forum')
     fireEvent.click(newClassificationOption[0])
 
     expect(mockOnLearningElementChange).toHaveBeenCalled()

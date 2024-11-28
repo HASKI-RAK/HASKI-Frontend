@@ -78,7 +78,6 @@ const CreateAlgorithmTable = ({
         </Typography>
       </Grid>
       {Object.entries(selectedAlgorithms).map(([key, value]) => {
-        console.log(key, value)
         const topic = selectedTopics.find((topic) => topic.topic_lms_name === value.topicName) || selectedTopics[0]
         return (
           <Grid item container alignItems="center" direction="column" key={key}>

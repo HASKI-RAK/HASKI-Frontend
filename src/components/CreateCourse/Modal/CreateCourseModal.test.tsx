@@ -33,8 +33,6 @@ describe('CreateCourseModal', () => {
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
           <CreateCourseModal
-            successRemoteCourseCreated={false}
-            setSuccessRemoteCourseCreated={mockSetSuccessRemoteCourseCreated}
             handleCloseCreateCourseModal={mockHandleCloseCreateCourseModal}
             activeStepCreateCourseModal={0}
             setActiveStepCreateCourseModal={mockSetActiveStepCreateCourseModal}
@@ -53,8 +51,6 @@ describe('CreateCourseModal', () => {
         <MemoryRouter>
           <CreateCourseModal
             openCreateCourseModal={true}
-            successRemoteCourseCreated={false}
-            setSuccessRemoteCourseCreated={mockSetSuccessRemoteCourseCreated}
             handleCloseCreateCourseModal={mockHandleCloseCreateCourseModal}
             activeStepCreateCourseModal={0}
             setActiveStepCreateCourseModal={mockSetActiveStepCreateCourseModal}
@@ -73,8 +69,6 @@ describe('CreateCourseModal', () => {
         <MemoryRouter>
           <CreateCourseModal
             openCreateCourseModal={true}
-            successRemoteCourseCreated={false}
-            setSuccessRemoteCourseCreated={mockSetSuccessRemoteCourseCreated}
             handleCloseCreateCourseModal={mockHandleCloseCreateCourseModal}
             activeStepCreateCourseModal={0}
             setActiveStepCreateCourseModal={mockSetActiveStepCreateCourseModal}
@@ -94,8 +88,6 @@ describe('CreateCourseModal', () => {
         <MemoryRouter>
           <CreateCourseModal
             openCreateCourseModal={true}
-            successRemoteCourseCreated={false}
-            setSuccessRemoteCourseCreated={mockSetSuccessRemoteCourseCreated}
             handleCloseCreateCourseModal={mockHandleCloseCreateCourseModal}
             activeStepCreateCourseModal={0}
             setActiveStepCreateCourseModal={mockSetActiveStepCreateCourseModal}
@@ -114,8 +106,6 @@ describe('CreateCourseModal', () => {
         <MemoryRouter>
           <CreateCourseModal
             openCreateCourseModal={true}
-            successRemoteCourseCreated={false}
-            setSuccessRemoteCourseCreated={mockSetSuccessRemoteCourseCreated}
             handleCloseCreateCourseModal={mockHandleCloseCreateCourseModal}
             activeStepCreateCourseModal={0}
             setActiveStepCreateCourseModal={mockSetActiveStepCreateCourseModal}
@@ -145,8 +135,6 @@ describe('CreateCourseModal', () => {
         <MemoryRouter>
           <CreateCourseModal
             openCreateCourseModal={true}
-            successRemoteCourseCreated={false}
-            setSuccessRemoteCourseCreated={mockSetSuccessRemoteCourseCreated}
             handleCloseCreateCourseModal={mockHandleCloseCreateCourseModal}
             activeStepCreateCourseModal={0}
             setActiveStepCreateCourseModal={mockSetActiveStepCreateCourseModal}
@@ -182,8 +170,6 @@ describe('CreateCourseModal', () => {
         <MemoryRouter>
           <CreateCourseModal
             openCreateCourseModal={true}
-            successRemoteCourseCreated={false}
-            setSuccessRemoteCourseCreated={mockSetSuccessRemoteCourseCreated}
             handleCloseCreateCourseModal={mockHandleCloseCreateCourseModal}
             activeStepCreateCourseModal={1}
             setActiveStepCreateCourseModal={mockSetActiveStepCreateCourseModal}
@@ -201,7 +187,6 @@ describe('CreateCourseModal', () => {
     })
     await waitFor(() => {
       act(() => {
-        expect(mockSetSuccessRemoteCourseCreated).toHaveBeenCalledWith(true)
         expect(getByText('components.CreateCourseModal.createCourse')).not.toBeDisabled()
       })
     })
@@ -213,8 +198,6 @@ describe('CreateCourseModal', () => {
         <MemoryRouter>
           <CreateCourseModal
             openCreateCourseModal={true}
-            successRemoteCourseCreated={false}
-            setSuccessRemoteCourseCreated={mockSetSuccessRemoteCourseCreated}
             handleCloseCreateCourseModal={mockHandleCloseCreateCourseModal}
             activeStepCreateCourseModal={1}
             setActiveStepCreateCourseModal={mockSetActiveStepCreateCourseModal}
@@ -246,8 +229,6 @@ describe('CreateCourseModal', () => {
         <MemoryRouter>
           <CreateCourseModal
             openCreateCourseModal={true}
-            successRemoteCourseCreated={false}
-            setSuccessRemoteCourseCreated={mockSetSuccessRemoteCourseCreated}
             handleCloseCreateCourseModal={mockHandleCloseCreateCourseModal}
             activeStepCreateCourseModal={1}
             setActiveStepCreateCourseModal={mockSetActiveStepCreateCourseModal}
@@ -267,82 +248,8 @@ describe('CreateCourseModal', () => {
       act(() => {
         /*     const snackbarMessage = queryByText('appGlobal.dataSendUnsuccessful')
         expect(snackbarMessage).toBeInTheDocument()*/
-        expect(mockSetSuccessRemoteCourseCreated).toHaveBeenCalledWith(false)
         expect(getByText('components.CreateCourseModal.createCourse')).not.toBeDisabled()
       })
     })
   })
-  /*
-  it('renders the second step with course details', () => {
-    const { getByText } = getComponent({ activeStepCreateCourseModal: 1 })
-
-    expect(getByText('appGlobal.back')).toBeInTheDocument()
-    expect(getByText('components.CreateCourseModal.createCourse')).toBeInTheDocument()
-  })
-
-  it('goes back to the first step when the back button is clicked', () => {
-    const { getByText } = getComponent({ activeStepCreateCourseModal: 1 })
-
-    fireEvent.click(getByText('appGlobal.back'))
-
-    expect(mockSetActiveStepCreateCourseModal).toHaveBeenCalledWith(0)
-  })
-
-  it('disables the create button when isSending is true', () => {
-    const { getByText } = getComponent({
-      activeStepCreateCourseModal: 1,
-      isSending: true
-    })
-
-    const createButton = getByText('components.CreateCourseModal.createCourse')
-    expect(createButton).toBeDisabled()
-  })
-
-  it('shows a loading spinner when isSending is true', () => {
-    const { getByRole } = getComponent({
-      activeStepCreateCourseModal: 1,
-      isSending: true
-    })
-
-    expect(getByRole('progressbar')).toBeInTheDocument()
-  })
-
-  it('calls handleCreateCourse when the create button is clicked', async () => {
-    const mockPostCourseResponse = { id: 1, fullname: 'Test Course' }
-    ;(postCourse as jest.Mock).mockResolvedValueOnce(mockPostCourseResponse)
-
-    const { getByText } = getComponent({
-      activeStepCreateCourseModal: 1,
-      selectedRemoteCourse: { id: 1, fullname: 'Test Course' }
-    })
-
-    fireEvent.click(getByText('components.CreateCourseModal.createCourse'))
-
-    await waitFor(() => {
-      expect(postCourse).toHaveBeenCalled()
-      expect(mockAddSnackbar).toHaveBeenCalledWith(
-        expect.objectContaining({ message: 'appGlobal.dataSendSuccessful', severity: 'success' })
-      )
-      expect(mockSetSuccessRemoteCourseCreated).toHaveBeenCalledWith(true)
-    })
-  })
-
-  it('handles course creation failure', async () => {
-    ;(postCourse as jest.Mock).mockResolvedValueOnce(null)
-
-    const { getByText } = getComponent({
-      activeStepCreateCourseModal: 1,
-      selectedRemoteCourse: { id: 1, fullname: 'Test Course' }
-    })
-
-    fireEvent.click(getByText('components.CreateCourseModal.createCourse'))
-
-    await waitFor(() => {
-      expect(postCourse).toHaveBeenCalled()
-      expect(mockAddSnackbar).toHaveBeenCalledWith(
-        expect.objectContaining({ message: 'appGlobal.dataSendUnsuccessful', severity: 'error' })
-      )
-      expect(mockSetSuccessRemoteCourseCreated).toHaveBeenCalledWith(false)
-    })
-  })*/
 })

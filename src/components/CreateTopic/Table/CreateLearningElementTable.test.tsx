@@ -9,6 +9,7 @@ describe('CreateLearningElementTable', () => {
   const mockOnLearningElementChange = jest.fn(
     (_selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => {}
   )
+  const mockSetSelectedAllLearningElementsChecked = jest.fn()
 
   const mockSelectedTopics: RemoteTopics[] = [
     {
@@ -34,6 +35,8 @@ describe('CreateLearningElementTable', () => {
           selectedTopics={[]}
           onLearningElementChange={jest.fn()}
           selectedLearningElements={{}}
+          selectAllLearningElementsChecked={false}
+          setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}
         />
       </MemoryRouter>
     )
@@ -48,6 +51,8 @@ describe('CreateLearningElementTable', () => {
           selectedTopics={mockSelectedTopics}
           onLearningElementChange={jest.fn()}
           selectedLearningElements={mockSelectedLearningElements}
+          selectAllLearningElementsChecked={false}
+          setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}
         />
       </MemoryRouter>
     )
@@ -66,6 +71,8 @@ describe('CreateLearningElementTable', () => {
           selectedTopics={mockSelectedTopics}
           onLearningElementChange={mockOnLearningElementChange}
           selectedLearningElements={mockSelectedLearningElements}
+          selectAllLearningElementsChecked={false}
+          setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}
         />
       </MemoryRouter>
     )
@@ -83,11 +90,13 @@ describe('CreateLearningElementTable', () => {
           selectedTopics={mockSelectedTopics}
           onLearningElementChange={mockOnLearningElementChange}
           selectedLearningElements={mockSelectedLearningElements}
+          selectAllLearningElementsChecked={false}
+          setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}
         />
       </MemoryRouter>
     )
 
-    const selectAllButton = getByTestId('createLearningElementTable-Select-All-Button')
+    const selectAllButton = getByTestId('createLearningElementTable-Toggle-All-Checkbox')
     fireEvent.click(selectAllButton)
 
     expect(mockOnLearningElementChange).toHaveBeenCalled()
@@ -100,11 +109,13 @@ describe('CreateLearningElementTable', () => {
           selectedTopics={mockSelectedTopics}
           onLearningElementChange={mockOnLearningElementChange}
           selectedLearningElements={mockSelectedLearningElements}
+          selectAllLearningElementsChecked={true}
+          setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}
         />
       </MemoryRouter>
     )
 
-    const deselectAllButton = getByTestId('createLearningElementTable-Deselect-All-Button')
+    const deselectAllButton = getByTestId('createLearningElementTable-Toggle-All-Checkbox')
     fireEvent.click(deselectAllButton)
 
     expect(mockOnLearningElementChange).toHaveBeenCalled()
@@ -116,7 +127,9 @@ describe('CreateLearningElementTable', () => {
         <CreateLearningElementTable
           selectedTopics={mockSelectedTopics}
           onLearningElementChange={jest.fn()}
-          selectedLearningElements={mockSelectedLearningElements}>
+          selectedLearningElements={mockSelectedLearningElements}
+          selectAllLearningElementsChecked={false}
+          setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}>
           <div data-testid="child">Child Content</div>
         </CreateLearningElementTable>
       </MemoryRouter>

@@ -32,7 +32,7 @@ describe('CreateLearningElementClassificationsStep', () => {
   const selectedLearningElementsClassification = {
     1: [
       { lms_id: 101, classification: 'KÜ', lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity' },
-      { lms_id: 102, classification: 'noKey', lms_learning_element_name: 'Element 2', lms_activity_type: 'Activity' }
+      { lms_id: 102, classification: '', lms_learning_element_name: 'Element 2', lms_activity_type: 'Activity' }
     ],
     2: [{ lms_id: 201, classification: 'EK', lms_learning_element_name: 'Element 3', lms_activity_type: 'Activity' }]
   }

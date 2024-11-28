@@ -1,11 +1,11 @@
 {
   "appGlobal.accept": "Accept",
-  "appGlobal.algorithms": "Algorithms",
   "appGlobal.algorithm": "Algorithm",
+  "appGlobal.algorithms": "Algorithms",
   "appGlobal.aschaffenburgUAS": "Aschaffenburg UAS",
   "appGlobal.back": "Back",
-  "appGlobal.classifications": "Classifications",
   "appGlobal.classification": "Classification",
+  "appGlobal.classifications": "Classifications",
   "appGlobal.courses": "Courses",
   "appGlobal.dataSendSuccessful": "Data sent successfully",
   "appGlobal.dataSendUnsuccessful": "Data could not be sent",
@@ -23,11 +23,6 @@
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
   "components.AlgorithmSettingsModal.algorithms": [
-    {
-      "name": "Select Algorithm",
-      "description": "Please select an algorithm for the learning path calculation.",
-      "key": "noKey"
-    },
     {
       "name": "Fixed Order",
       "description": "The learning elements are presented in a predetermined order.",
@@ -162,6 +157,7 @@
     }
   ],
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Set learning element classification",
+  "components.CreateLearningElementTable.selectAllToggle": "Select all",
   "components.CreateLearningElementTable.selectLearningElements": "Select learning elements",
   "components.CreateTopicModal.createTopics": "Create Topics",
   "components.ExistingTopicsTable.title": "Already created topics",
@@ -1737,7 +1733,6 @@
   "pages.home.courseButton": "Continue to course",
   "pages.home.courseDisabled": "The course is available on",
   "pages.home.menuItemAlgorithms": "Select learning path algorithm",
-  "components.CreateLearningElementTable.selectAllToggle": "Select all",
   "pages.home.noCourses": "No courses found",
   "pages.imprint": "Imprint",
   "pages.imprint.asOf": "As of",

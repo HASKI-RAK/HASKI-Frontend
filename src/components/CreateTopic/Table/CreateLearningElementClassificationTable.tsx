@@ -32,7 +32,6 @@ export type CreateLearningElementClassificationTableProps = {
 export type CreateLearningElementClassificationTableOptionsType = {
   name: string
   key: string
-  disabled: boolean
 }[]
 
 const CreateLearningElementClassificationTable = ({

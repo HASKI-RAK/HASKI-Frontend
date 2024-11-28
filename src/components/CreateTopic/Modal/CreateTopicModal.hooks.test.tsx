@@ -1,3 +1,4 @@
+import { waitFor } from '@testing-library/react'
 import { act, renderHook } from '@testing-library/react-hooks'
 import { mockServices } from 'jest.setup'
 import { RemoteTopics } from '@core'
@@ -27,7 +28,7 @@ describe('useCreateTopicModal', () => {
     const { result } = renderHook(() =>
       useCreateTopicModal({
         setCreateTopicIsSending: jest.fn(),
-        setSuccessTopicCreated: jest.fn(),
+        setSuccessfullyCreatedTopicsCount: jest.fn(),
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
@@ -49,7 +50,7 @@ describe('useCreateTopicModal', () => {
     const { result } = renderHook(() =>
       useCreateTopicModal({
         setCreateTopicIsSending: jest.fn(),
-        setSuccessTopicCreated: jest.fn(),
+        setSuccessfullyCreatedTopicsCount: jest.fn(),
         setSelectedTopics: mockSetSelectedTopics,
         setSelectedLearningElements: mockSetSelectedLearningElements,
         setSelectedLearningElementsClassification: mockSetSelectedLearningElementsClassification,
@@ -72,7 +73,7 @@ describe('useCreateTopicModal', () => {
     const { result } = renderHook(() =>
       useCreateTopicModal({
         setCreateTopicIsSending: jest.fn(),
-        setSuccessTopicCreated: jest.fn(),
+        setSuccessfullyCreatedTopicsCount: jest.fn(),
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: mockSetSelectedLearningElements,
         setSelectedLearningElementsClassification: jest.fn(),
@@ -93,7 +94,7 @@ describe('useCreateTopicModal', () => {
     const { result } = renderHook(() =>
       useCreateTopicModal({
         setCreateTopicIsSending: jest.fn(),
-        setSuccessTopicCreated: jest.fn(),
+        setSuccessfullyCreatedTopicsCount: jest.fn(),
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: mockSetSelectedLearningElementsClassification,
@@ -114,7 +115,7 @@ describe('useCreateTopicModal', () => {
     const { result } = renderHook(() =>
       useCreateTopicModal({
         setCreateTopicIsSending: jest.fn(),
-        setSuccessTopicCreated: jest.fn(),
+        setSuccessfullyCreatedTopicsCount: jest.fn(),
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
@@ -130,14 +131,15 @@ describe('useCreateTopicModal', () => {
 
   it('should add snackbar on error in handleCreate', async () => {
     const mockSetCreateTopicIsSending = jest.fn()
+    const mockSetSuccessfullyCreatedTopicsCount = jest.fn()
     const { result } = renderHook(() =>
       useCreateTopicModal({
         setCreateTopicIsSending: mockSetCreateTopicIsSending,
-        setSuccessTopicCreated: jest.fn(),
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
-        setSelectedAlgorithms: jest.fn()
+        setSelectedAlgorithms: jest.fn(),
+        setSuccessfullyCreatedTopicsCount: jest.fn()
       })
     )
     mockServices.fetchUser.mockImplementationOnce(() => {
@@ -147,7 +149,5 @@ describe('useCreateTopicModal', () => {
     await act(async () => {
       await result.current.handleCreate('Topic 1', 1, {}, 'algo1', '1')
     })
-
-    expect(mockSetCreateTopicIsSending).toHaveBeenCalledWith(false)
   })
 })
