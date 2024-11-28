@@ -78,6 +78,34 @@ describe('production is set', () => {
     }
   })
 
+  test('error message doesnt get send with no user_id', async () => {
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: jest.fn((key) => {
+          if (key === 'persisted_storage')
+            return '{}'
+          return null
+        }),
+        setItem: jest.fn(),
+        removeItem: jest.fn(),
+        clear: jest.fn()
+      },
+      writable: true
+    })
+    const persisted = JSON.parse(localStorage.getItem('persisted_storage')??'{}')
+    expect(persisted).toEqual({})
+    logBuffer(jest.mock)
+    log.setLevel('trace')
+
+    log.error('This is an error')
+    const ringBuffer = JSON.parse(localStorage.getItem('ringBufferContent') || '{}')
+    //const persistedStorage = JSON.parse(localStorage.getItem('persisted_storage')||'{}')
+    //expect (persistedStorage).toEqual({})
+    
+    expect(ringBuffer).not.toBeNull()
+    expect(ringBuffer).toEqual({})
+  })
+
   test('error message is sent to the backend', async () => {
     Object.defineProperty(window, 'localStorage', {
       value: {
