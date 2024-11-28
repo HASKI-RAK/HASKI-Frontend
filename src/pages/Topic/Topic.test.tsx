@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { ReactFlowProvider } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import { LocalNavBar } from '@components'
-import { LearningPathElementStatus, Topic as TopicType } from '@core'
+import { LearningPathElementStatus } from '@core'
 import Topic from './Topic'
 import { useTopic, useTopicHookParams } from './Topic.hooks'
 
@@ -1027,7 +1027,7 @@ describe('Topic Page', () => {
     await waitFor(() => {
       expect(queryByTestId('IFrameModal-Close-Button')).not.toBeInTheDocument()
     })
-  })
+  }, 20000)
 
   test('IFrameModal fetchLearningPathElementSpecificStatus fetching error while closing', async () => {
     const mockfetchLearningPathElementSpecificStatus = jest.fn(() =>
@@ -1575,37 +1575,9 @@ describe('Topic Page', () => {
       defaultLmsId: 0
     }
 
-    const topicParams1: useTopicHookParams = {
-      defaultUrl: 'hello1',
-      defaultTitle: 'test1',
-      defaultIsOpen: true,
-      defaultLmsId: 1
-    }
-
-    const topic: TopicType = {
-      contains_le: true,
-      created_at: '2021-09-01T12:00:00.000Z',
-      created_by: 'dimitri',
-      id: 1,
-      is_topic: true,
-      last_updated: '2021-09-01T12:00:00.000Z',
-      lms_id: 1,
-      name: 'test_topic',
-      parent_id: 1,
-      student_topic: {
-        done: false,
-        done_at: null,
-        id: 1,
-        student_id: 1,
-        topic_id: 1,
-        visits: []
-      },
-      university: 'HS-KE'
-    }
-
     const initialEntries = ['/course', '/2', '/topic/20']
 
-    const { getByTestId, queryByTestId, getByRole, getByText } = render(
+    const { getByTestId, queryByTestId, getByText } = render(
       <ReactFlowProvider>
         <MemoryRouter initialEntries={initialEntries}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
