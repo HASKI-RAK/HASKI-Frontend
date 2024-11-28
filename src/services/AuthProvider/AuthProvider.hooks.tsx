@@ -9,7 +9,7 @@ const useAuthProvider = (): AuthContextType => {
   const location = useLocation()
 
   // Define paths to exclude from the authentication check
-  const excludedPaths = ['/aboutus', '/projectdescription', '/glossary', '/imprint']
+  const excludedPaths = ['/aboutus', '/projectdescription', '/glossary', '/imprint', '/privacypolicy']
 
   // State data
   const expiration = usePersistedStore((state) => state.expire)
