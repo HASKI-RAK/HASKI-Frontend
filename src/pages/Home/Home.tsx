@@ -91,11 +91,7 @@ export const Home = () => {
   }
 
   const handleCourseStartDate = (courseStartDate: string) => {
-    // Parse the backend date string as a local time
-    const courseStart = new Date(courseStartDate.replace('GMT', ''))
-
-    // Compare timestamps
-    return courseStart.getTime() > new Date().getTime()
+    return new Date(courseStartDate).getTime() > new Date().getTime()
   }
 
   // Card containing the courses with a button to the specific course
@@ -135,7 +131,7 @@ export const Home = () => {
                       {handleCourseStartDate(course.start_date)
                         ? t('pages.home.courseDisabled') +
                           ' ' +
-                          dayjs(new Date(course.start_date.replace('GMT', ''))).format('DD.MM.YYYY - HH:mm')
+                          dayjs(new Date(course.start_date)).format('DD.MM.YYYY - HH:mm')
                         : t('pages.home.courseButton')}
                     </Button>
                   </Grid>

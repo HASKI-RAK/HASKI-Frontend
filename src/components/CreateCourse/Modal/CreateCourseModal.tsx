@@ -1,4 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 import log from 'loglevel'
 import { Dispatch, SetStateAction, memo, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,6 +9,8 @@ import { CreateCourseDetailsTable, CreateCourseTable, handleError } from '@compo
 import { RemoteCourse } from '@core'
 import { SnackbarContext, postCourse } from '@services'
 import { usePersistedStore } from '@store'
+
+dayjs.extend(utc)
 
 type CreateCourseModalProps = {
   openCreateCourseModal?: boolean
@@ -39,7 +42,7 @@ const CreateCourseModal = ({
     setIsSending(true)
 
     const formatDate = (date: Dayjs) => {
-      return date.format('YYYY-MM-DDTHH:mm:ss[Z]') // Format without timezone adjustments
+      return date.utc().format('YYYY-MM-DDTHH:mm:ss[Z]') // Format without timezone adjustments for the Backend
     }
 
     const createCourse = {
