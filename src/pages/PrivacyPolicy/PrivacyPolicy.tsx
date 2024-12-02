@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next'
 import { Divider, Link, List, ListItem, ListItemIcon, ListItemText, Typography } from '@common/components'
 import { FiberManualRecord } from '@common/icons'
 
@@ -8,7 +7,7 @@ import { FiberManualRecord } from '@common/icons'
  * Contains legal information about the privacy policy.
  * @category Pages
  */
-export const PrivacyPolicy = () => {
+const PrivacyPolicy = () => {
   return (
     <>
       <Typography variant="h4">Informationen und Einwilligungserklärung</Typography>
@@ -49,6 +48,12 @@ export const PrivacyPolicy = () => {
         Bestimmungen. Im Rahmen dieser Studie werden folgende Daten erhoben:
       </Typography>
       <List>
+        <ListItem>
+          <ListItemIcon>
+            <FiberManualRecord />
+          </ListItemIcon>
+          <ListItemText primary="Vor- und Nachname" />
+        </ListItem>
         <ListItem>
           <ListItemIcon>
             <FiberManualRecord />
