@@ -212,7 +212,9 @@ describe('CreateTopicModal', () => {
   }, 20000)
 
   it('calls handleCreate on submit in the last step, but calculation fails', async () => {
-    mockServices.postCalculateLearningPathForAllStudents.mockImplementationOnce(() => Promise.resolve())
+    mockServices.postCalculateLearningPathForAllStudents.mockImplementationOnce(() => {
+      throw new Error('getLearningPathTopic error')
+    })
 
     const { getByText, getAllByRole, getByTestId, queryByText } = render(
       <MemoryRouter>
@@ -368,9 +370,7 @@ describe('CreateTopicModal', () => {
   }, 20000)
 
   it('calls handleCreate on submit in the last step, but returns without give courseId', async () => {
-    mockServices.postCalculateLearningPathForAllStudents.mockImplementationOnce(() => {
-      throw new Error('Error')
-    })
+    mockServices.postCalculateLearningPathForAllStudents.mockImplementationOnce(() => Promise.resolve())
     jest.spyOn(router, 'useParams').mockReturnValue({})
 
     const { getByText, getAllByRole } = render(
