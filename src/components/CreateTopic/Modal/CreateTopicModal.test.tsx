@@ -213,7 +213,7 @@ describe('CreateTopicModal', () => {
 
   it('calls handleCreate on submit in the last step, but calculation fails', async () => {
     mockServices.postCalculateLearningPathForAllStudents.mockImplementationOnce(() => {
-      throw new Error('getLearningPathTopic error')
+      throw new Error('postCalculateLearningPathForAllStudents error')
     })
 
     const { getByText, getAllByRole, getByTestId, queryByText } = render(

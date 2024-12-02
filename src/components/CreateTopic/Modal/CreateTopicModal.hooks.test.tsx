@@ -1,4 +1,3 @@
-import { waitFor } from '@testing-library/react'
 import { act, renderHook } from '@testing-library/react-hooks'
 import { mockServices } from 'jest.setup'
 import { RemoteTopics } from '@core'
@@ -131,7 +130,6 @@ describe('useCreateTopicModal', () => {
 
   it('should add snackbar on error in handleCreate', async () => {
     const mockSetCreateTopicIsSending = jest.fn()
-    const mockSetSuccessfullyCreatedTopicsCount = jest.fn()
     const { result } = renderHook(() =>
       useCreateTopicModal({
         setCreateTopicIsSending: mockSetCreateTopicIsSending,

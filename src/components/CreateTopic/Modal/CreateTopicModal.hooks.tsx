@@ -127,19 +127,24 @@ export const useCreateTopicModal = ({
               )
             })
             .then(({ topicId, user }) => {
-              return handleCalculateLearningPaths(user.settings.user_id, user.role, user.university, courseId, topicId)
-                .then(() => {
-                  addSnackbar({
-                    message: t('appGlobal.dataSendSuccessful'),
-                    severity: 'success',
-                    autoHideDuration: 5000
-                  })
-                  log.info(t('appGlobal.dataSendSuccessful'))
-                  setSuccessfullyCreatedTopicsCount((prevCount) => prevCount + 1)
+              return handleCalculateLearningPaths(
+                user.settings.user_id,
+                user.role,
+                user.university,
+                courseId,
+                topicId
+              ).then(() => {
+                addSnackbar({
+                  message: t('appGlobal.dataSendSuccessful'),
+                  severity: 'success',
+                  autoHideDuration: 5000
                 })
-                .catch((error) => {
-                  handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
-                })
+                log.info(t('appGlobal.dataSendSuccessful'))
+                setSuccessfullyCreatedTopicsCount((prevCount) => prevCount + 1)
+              })
+            })
+            .catch((error) => {
+              handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
             })
         })
         .catch((error) => {
