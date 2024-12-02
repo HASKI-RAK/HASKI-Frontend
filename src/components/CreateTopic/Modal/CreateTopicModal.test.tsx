@@ -1,10 +1,9 @@
 import '@testing-library/jest-dom'
-import { fireEvent, getAllByLabelText, getByLabelText, render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
-import { act } from 'react-test-renderer'
 import { AuthContext, RoleContext, RoleContextType } from '@services'
 import CreateTopicModal from './CreateTopicModal'
 
@@ -124,7 +123,7 @@ describe('CreateTopicModal', () => {
   })
 
   it('calls handleCreate on submit in the last step', async () => {
-    const { getByText, getAllByRole, getByTestId, queryByText, queryByTestId } = render(
+    const { getByText, getAllByRole } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
           <RoleContext.Provider value={courseCreatorContext}>
@@ -369,7 +368,9 @@ describe('CreateTopicModal', () => {
   }, 20000)
 
   it('calls handleCreate on submit in the last step, but returns without give courseId', async () => {
-    mockServices.postCalculateLearningPathForAllStudents.mockImplementationOnce(() => Promise.resolve())
+    mockServices.postCalculateLearningPathForAllStudents.mockImplementationOnce(() => {
+      throw new Error('Error')
+    })
     jest.spyOn(router, 'useParams').mockReturnValue({})
 
     const { getByText, getAllByRole } = render(

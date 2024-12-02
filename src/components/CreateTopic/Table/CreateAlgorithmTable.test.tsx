@@ -2,7 +2,6 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
-import { LearningElementWithClassification } from '@components'
 import CreateAlgorithmTable, { CreateAlgorithmTableProps } from './CreateAlgorithmTable'
 
 describe('CreateAlgorithmTable', () => {
@@ -54,6 +53,11 @@ describe('CreateAlgorithmTable', () => {
     }
   }
 
+  const faultySelectedAlgorithms = {
+    1: { topicName: 'Topic 1', algorithmShortName: 'graf' },
+    2: { topicName: 'Topic 100', algorithmShortName: '' }
+  }
+
   beforeEach(() => {
     jest.clearAllMocks()
   })
@@ -87,6 +91,30 @@ describe('CreateAlgorithmTable', () => {
     // Verify topic names and initial algorithms
     expect(screen.getByText('Topic 1')).toBeInTheDocument()
     expect(screen.getByText('Topic 2')).toBeInTheDocument()
+
+    const selectElements = getAllByRole('combobox', { hidden: true })
+    fireEvent.mouseDown(selectElements[0])
+    const menuItems = getAllByRole('option', { hidden: true })
+    expect(menuItems).toHaveLength(mockAlgorithmOptions.length)
+    fireEvent.click(menuItems[1])
+    expect(selectElements[0]).toHaveTextContent(mockAlgorithmOptions[1].name)
+  })
+
+  it('renders topics with default algorithm instead of faulty one', async () => {
+    const { getAllByRole } = render(
+        <MemoryRouter>
+          <CreateAlgorithmTable
+              selectedTopics={defaultProps.selectedTopics}
+              selectedAlgorithms={faultySelectedAlgorithms}
+              onAlgorithmChange={defaultProps.onAlgorithmChange}
+              children={defaultProps.children}
+          />
+        </MemoryRouter>
+    )
+
+    // Verify topic names and initial algorithms
+    expect(screen.getByText('Topic 1')).toBeInTheDocument()
+    expect(screen.getByText('Topic 100')).toBeInTheDocument()
 
     const selectElements = getAllByRole('combobox', { hidden: true })
     fireEvent.mouseDown(selectElements[0])
