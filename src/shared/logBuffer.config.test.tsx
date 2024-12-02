@@ -82,8 +82,7 @@ describe('production is set', () => {
     Object.defineProperty(window, 'localStorage', {
       value: {
         getItem: jest.fn((key) => {
-          if (key === 'persisted_storage')
-            return '{}'
+          if (key === 'persisted_storage') return '{}'
           return null
         }),
         setItem: jest.fn(),
@@ -92,7 +91,7 @@ describe('production is set', () => {
       },
       writable: true
     })
-    const persisted = JSON.parse(localStorage.getItem('persisted_storage')??'{}')
+    const persisted = JSON.parse(localStorage.getItem('persisted_storage') ?? '{}')
     expect(persisted).toEqual({})
     logBuffer(jest.mock)
     log.setLevel('trace')
@@ -101,7 +100,7 @@ describe('production is set', () => {
     const ringBuffer = JSON.parse(localStorage.getItem('ringBufferContent') || '{}')
     //const persistedStorage = JSON.parse(localStorage.getItem('persisted_storage')||'{}')
     //expect (persistedStorage).toEqual({})
-    
+
     expect(ringBuffer).not.toBeNull()
     expect(ringBuffer).toEqual({})
   })

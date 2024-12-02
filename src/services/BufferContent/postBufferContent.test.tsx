@@ -1,4 +1,3 @@
-//Tests fail with shortened Path
 import { getConfig } from '@shared'
 import { postBufferContent } from './postBufferContent'
 
@@ -16,9 +15,8 @@ describe('postBufferContent has expected behaviour', () => {
   type StringTuple = [string, string]
   type StringTupleArray = StringTuple[]
   it('should return inputData if succesfull', async () => {
-    
-    const testData: StringTupleArray =[["time","content"]]
-  
+    const testData: StringTupleArray = [['time', 'content']]
+
     const inputData = ['question-1', '2']
 
     const mockResponse = {
@@ -42,13 +40,13 @@ describe('postBufferContent has expected behaviour', () => {
     })
     expect(result).toEqual(inputData)
   })
-  
+
   it('should throw an unknown error when the response does not have an error variable', async () => {
     const mockResponse = {
       ok: false,
       json: jest.fn().mockResolvedValue({})
     }
-    const testFail: StringTupleArray =[["",""]]
+    const testFail: StringTupleArray = [['', '']]
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)

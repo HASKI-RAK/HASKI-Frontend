@@ -14,7 +14,7 @@ import { fetchData } from '../RequestResponse'
  * @returns - returns a promise with the Response
  */
 
-export const postBufferContent = async (bufferBody?: [string,string][], userId?: number): Promise<Response> => {
+export const postBufferContent = async (bufferBody?: [string, string][], userId?: number): Promise<Response> => {
   return fetchData<Response>(getConfig().BACKEND + `/user/${userId}/logbuffer`, {
     method: 'POST',
     credentials: 'include',
