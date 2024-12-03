@@ -49,10 +49,10 @@ const CreateLearningElementClassificationTable = ({
   })
 
   //Constants
-  const learningElementClassifications = useMemo(() => {
+  const learningElementClassifications: CreateLearningElementClassificationTableOptionsType = useMemo(() => {
     return t('components.CreateLearningElementClassificationTable.classifications', {
       returnObjects: true
-    }) as [{ name: string; key: string }]
+    })
   }, [t])
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const CreateLearningElementClassificationTable = ({
 
   const handleSelectChange = useCallback(
     (lmsTopic: RemoteTopics, element: LearningElementWithClassification) => (event: SelectChangeEvent) => {
-      handleClassificationChange(lmsTopic.topic_lms_id, element.lms_id, event.target.value as string)
+      handleClassificationChange(lmsTopic.topic_lms_id, element.lms_id, event.target.value)
     },
     [handleClassificationChange]
   )

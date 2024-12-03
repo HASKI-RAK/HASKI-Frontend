@@ -22,6 +22,18 @@ const CreateRemoteTopicsTable = ({
   const { t } = useTranslation()
   const { handleTopicChange } = useCreateRemoteTopicsTable({ onTopicChange, selectedTopics })
 
+  const noAdditionalTopics = () => (
+    <Paper sx={{ padding: '1rem', width: '95%' }}>
+      <FormGroup>
+        <FormControlLabel
+          control={<Checkbox checked={true} disabled={true} />}
+          label={t('components.TableRemoteTopics.noAdditionalTopics')}
+          key={t('components.TableRemoteTopics.noAdditionalTopics')}
+        />
+      </FormGroup>
+    </Paper>
+  )
+
   return (
     <Grid container direction="column" alignItems="center" spacing={3}>
       <Grid item>
@@ -35,15 +47,7 @@ const CreateRemoteTopicsTable = ({
             <SkeletonList />
           </Paper>
         ) : remoteTopics.length === 0 ? (
-          <Paper sx={{ padding: '1rem', width: '95%' }}>
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox checked={true} disabled={true} />}
-                label={t('components.TableRemoteTopics.noAdditionalTopics')}
-                key={t('components.TableRemoteTopics.noAdditionalTopics')}
-              />
-            </FormGroup>
-          </Paper>
+          noAdditionalTopics()
         ) : (
           <Grid item container alignItems="center" direction="column">
             <Paper sx={{ padding: '1rem', width: '95%' }}>

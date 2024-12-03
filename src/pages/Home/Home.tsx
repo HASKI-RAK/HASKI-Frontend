@@ -94,6 +94,58 @@ export const Home = () => {
     return new Date(courseStartDate).getTime() > new Date().getTime()
   }
 
+  const courseCard = (course: Course) => {
+    return (
+      <Card key={course.id} sx={commonCardStyle}>
+        <CardContent>
+          <Typography variant="h5" align="center">
+            {course.name}
+          </Typography>
+          <Grid container justifyContent="center">
+            <Button
+              id="course-button"
+              variant="contained"
+              color="primary"
+              sx={commonButtonStyle}
+              disabled={handleCourseStartDate(course.start_date)}
+              onClick={() => {
+                navigate('/course/' + course.id)
+              }}>
+              {handleCourseStartDate(course.start_date)
+                ? t('pages.home.courseDisabled') + ' ' + dayjs(new Date(course.start_date)).format('DD.MM.YYYY - HH:mm')
+                : t('pages.home.courseButton')}
+            </Button>
+          </Grid>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  const courseCreatorView = () => {
+    return (
+      <Card>
+        <CardContent>
+          <Grid container justifyContent="center">
+            <Button
+              id="create-course-button"
+              data-testid={'create-course-button'}
+              variant="contained"
+              color="primary"
+              onClick={() => setCreateCourseModalOpen(true)}
+              sx={commonButtonStyle}>
+              <AddCircleIcon />
+            </Button>
+          </Grid>
+        </CardContent>
+        <CreateCourseModal
+          openCreateCourseModal={createCourseModalOpen}
+          handleCloseCreateCourseModal={handleCloseCourseModal}
+          activeStepCreateCourseModal={activeStepCreateCourseModal}
+          setActiveStepCreateCourseModal={setActiveStepCreateCourseModal}></CreateCourseModal>
+      </Card>
+    )
+  }
+
   // Card containing the courses with a button to the specific course
   return (
     <Grid container direction="row" spacing={2} justifyContent="center">
@@ -112,56 +164,10 @@ export const Home = () => {
           </Card>
         ) : (
           courses.map((course) => {
-            return (
-              <Card key={course.id} sx={commonCardStyle}>
-                <CardContent>
-                  <Typography variant="h5" align="center">
-                    {course.name}
-                  </Typography>
-                  <Grid container justifyContent="center">
-                    <Button
-                      id="course-button"
-                      variant="contained"
-                      color="primary"
-                      sx={commonButtonStyle}
-                      disabled={handleCourseStartDate(course.start_date)}
-                      onClick={() => {
-                        navigate('/course/' + course.id)
-                      }}>
-                      {handleCourseStartDate(course.start_date)
-                        ? t('pages.home.courseDisabled') +
-                          ' ' +
-                          dayjs(new Date(course.start_date)).format('DD.MM.YYYY - HH:mm')
-                        : t('pages.home.courseButton')}
-                    </Button>
-                  </Grid>
-                </CardContent>
-              </Card>
-            )
+            return courseCard(course)
           })
         )}
-        {isCourseCreatorRole && (
-          <Card>
-            <CardContent>
-              <Grid container justifyContent="center">
-                <Button
-                  id="create-course-button"
-                  data-testid={'create-course-button'}
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setCreateCourseModalOpen(true)}
-                  sx={commonButtonStyle}>
-                  <AddCircleIcon />
-                </Button>
-              </Grid>
-            </CardContent>
-            <CreateCourseModal
-              openCreateCourseModal={createCourseModalOpen}
-              handleCloseCreateCourseModal={handleCloseCourseModal}
-              activeStepCreateCourseModal={activeStepCreateCourseModal}
-              setActiveStepCreateCourseModal={setActiveStepCreateCourseModal}></CreateCourseModal>
-          </Card>
-        )}
+        {isCourseCreatorRole && courseCreatorView()}
       </Grid>
     </Grid>
   )

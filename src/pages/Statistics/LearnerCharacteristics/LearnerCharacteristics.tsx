@@ -26,8 +26,6 @@ type QuestionnaireResultsListKLoadingProps = {
 }
 
 type LearnerCharacteristicsProps = {
-  open?: boolean
-  handleClose?: () => void
   activeStepForTesting?: number
 }
 
@@ -81,21 +79,21 @@ const QuestionnaireResultsILSLoading = memo(({ t, ilsLoading }: QuestionnaireRes
 // eslint-disable-next-line immutable/no-mutation
 QuestionnaireResultsILSLoading.displayName = 'QuestionnaireResultsILSLoading'
 
-const LearnerCharacteristics = memo(({ open = true, activeStepForTesting = 0 }: LearnerCharacteristicsProps) => {
+const LearnerCharacteristics = memo(({ activeStepForTesting = 0 }: LearnerCharacteristicsProps) => {
   const { t } = useTranslation()
   const getUser = usePersistedStore((state) => state.getUser)
   const { addSnackbar } = useContext(SnackbarContext)
   const [ilsLoading, setILSLoading] = useState(true)
-  const [listkLoading, setListKLoading] = useState(true)
+  const [listKLoading, setListKLoading] = useState(true)
 
   const steps = [t('components.ResultDescriptionILS.ilsResults'), t('components.ResultDescriptionILS.listKResults')]
 
   const [activeStep, setActiveStep] = useState(activeStepForTesting)
   const [ilsData, setILSData] = useState<ILS | undefined>(undefined) // Initialize with null
-  const [listkData, setListKData] = useState<ListK | undefined>(undefined) // Initialize with null
+  const [listKData, setListKData] = useState<ListK | undefined>(undefined) // Initialize with null
 
   useEffect(() => {
-    if (activeStep === 1 && open === true) {
+    if (activeStep === 1) {
       getUser()
         .then((user) => {
           return fetchListK(user.settings.user_id, user.lms_user_id, user.id)
@@ -123,10 +121,10 @@ const LearnerCharacteristics = memo(({ open = true, activeStepForTesting = 0 }: 
           log.error(t('error.getUser') + ' ' + error)
         })
     }
-  }, [activeStep, open])
+  }, [activeStep])
 
   useEffect(() => {
-    if (activeStep === 0 && open === true) {
+    if (activeStep === 0) {
       getUser()
         .then((user) => {
           return fetchILS(user.settings.user_id, user.lms_user_id, user.id)
@@ -154,7 +152,7 @@ const LearnerCharacteristics = memo(({ open = true, activeStepForTesting = 0 }: 
           })
         })
     }
-  }, [activeStep, open])
+  }, [activeStep])
 
   const handleBack = () => {
     setActiveStep(activeStep - 1)
@@ -197,7 +195,7 @@ const LearnerCharacteristics = memo(({ open = true, activeStepForTesting = 0 }: 
             </Stack>
             <ResultDescriptionILS data={ilsData} />
           </Stack>
-        ) : activeStep === 1 && listkData ? (
+        ) : activeStep === 1 && listKData ? (
           <Stack
             direction="column"
             justifyContent="space-between"
@@ -205,15 +203,15 @@ const LearnerCharacteristics = memo(({ open = true, activeStepForTesting = 0 }: 
             m={2}
             data-testid={'ActiveStepListK'}>
             <Stack direction="row" justifyContent="space-between" alignItems="center">
-              <GraphListK data={listkData} />
-              <TableListK data={listkData} />
+              <GraphListK data={listKData} />
+              <TableListK data={listKData} />
             </Stack>
-            <ResultDescriptionListK data={listkData} />
+            <ResultDescriptionListK data={listKData} />
           </Stack>
         ) : activeStep === 0 ? (
           <QuestionnaireResultsILSLoading t={t} ilsLoading={ilsLoading} />
         ) : activeStep === 1 ? (
-          <QuestionnaireResultsListKLoading t={t} listkLoading={listkLoading} />
+          <QuestionnaireResultsListKLoading t={t} listkLoading={listKLoading} />
         ) : null}
         <Stack direction="row" justifyContent="flex-start" m={2}>
           <br />

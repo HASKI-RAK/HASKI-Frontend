@@ -124,7 +124,7 @@ const CreateAlgorithmTable = ({
                   </InputLabel>
                   <Typography id="create-algorithm-modal-description" variant="body1" component="p" sx={{ ml: '1rem' }}>
                     {topicAlgorithmOptions.find((algorithm) => algorithm.key === value.algorithmShortName)
-                      ?.description || t('components.CreateAlgorithmTable.initialAlgorithmDescription')}
+                      ?.description ?? t('components.CreateAlgorithmTable.initialAlgorithmDescription')}
                   </Typography>
                 </Grid>
               </Grid>
