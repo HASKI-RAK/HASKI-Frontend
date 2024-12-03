@@ -34,18 +34,27 @@ const CreateRemoteTopicsTable = ({
     </Paper>
   )
 
-  const remoteTopicRow = (LmsTopic: RemoteTopics) => (
-    <FormControlLabel
-      control={
-        <Checkbox
-          checked={selectedTopics.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
-          onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
-          id={'create-topic-modal-available-topics-checkbox-' + LmsTopic.topic_lms_name}
-        />
-      }
-      label={LmsTopic.topic_lms_name}
-      key={LmsTopic.topic_lms_id}
-    />
+  const remoteTopicRows = (remoteTopics: RemoteTopics[]) => (
+    <Grid item container alignItems="center" direction="column">
+      <Paper sx={{ padding: '1rem', width: '95%' }}>
+        <FormGroup>
+          {remoteTopics.map((LmsTopic) => (
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={selectedTopics.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
+                  onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
+                  id={`create-topic-modal-available-topics-checkbox-${LmsTopic.topic_lms_name}`}
+                />
+              }
+              label={LmsTopic.topic_lms_name}
+              key={LmsTopic.topic_lms_id}
+            />
+          ))}
+        </FormGroup>
+      </Paper>
+      {children}
+    </Grid>
   )
 
   return (
@@ -63,12 +72,7 @@ const CreateRemoteTopicsTable = ({
         ) : remoteTopics.length === 0 ? (
           noAdditionalTopics()
         ) : (
-          <Grid item container alignItems="center" direction="column">
-            <Paper sx={{ padding: '1rem', width: '95%' }}>
-              <FormGroup>{remoteTopics.map((LmsTopic) => remoteTopicRow(LmsTopic))}</FormGroup>
-            </Paper>
-            {children}
-          </Grid>
+          remoteTopicRows(remoteTopics)
         )}
       </Grid>
     </Grid>
