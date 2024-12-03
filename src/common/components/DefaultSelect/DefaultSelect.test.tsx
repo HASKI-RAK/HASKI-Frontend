@@ -31,7 +31,7 @@ describe('DefaultSelect tests', () => {
     )
 
     act(() => {
-      fireEvent.click(getByRole('button'))
+      fireEvent.click(getByRole('combobox'))
       waitFor(() => {
         expect(sendStatement).toHaveBeenCalled()
       })
@@ -50,7 +50,7 @@ describe('DefaultSelect tests', () => {
       </AuthContext.Provider>
     )
     act(() => {
-      fireEvent.mouseDown(getByRole('button'))
+      fireEvent.mouseDown(getByRole('combobox'))
     })
 
     act(() => {

@@ -6,6 +6,7 @@ import { resetters } from '../Zustand/Store'
 
 export default interface LearningPathSlice {
   _cache_learningPathElement_record: Record<string, LearningPathElement | undefined>
+  clearLearningPathElementCache: () => void
   getLearningPathElement: LearningPathElementReturn
 }
 
@@ -13,6 +14,9 @@ export const createLearningPathElementSlice: StateCreator<StoreState, [], [], Le
   resetters.push(() => set({ _cache_learningPathElement_record: {} }))
   return {
     _cache_learningPathElement_record: {},
+    clearLearningPathElementCache: () => {
+      set({ _cache_learningPathElement_record: {} })
+    },
     getLearningPathElement: async (...arg) => {
       const [userId, lmsUserId, studentId, courseId, topicId] = arg
 

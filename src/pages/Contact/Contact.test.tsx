@@ -92,7 +92,7 @@ describe('Test Contactpage', () => {
     const submitButton = form.getByText('components.ContactForm.submit')
     const input = form.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'text' } })
-    fireEvent.mouseDown(form.getByRole('button', { name: /Topic/i }))
+    fireEvent.mouseDown(form.getByRole('combobox', { name: /Topic/i }))
     act(() => {
       form.getAllByRole('option')[0].click()
     })

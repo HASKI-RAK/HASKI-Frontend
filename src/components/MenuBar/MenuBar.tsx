@@ -16,7 +16,6 @@ import {
   Typography
 } from '@common/components'
 import {
-  Analytics,
   AssignmentOutlined,
   Help,
   LibraryBooksOutlined,
@@ -30,7 +29,7 @@ import {
   FurtherInfoMenu,
   LanguageMenu,
   QuestionnaireQuestionsModal,
-  QuestionnaireResultsModal,
+  StatisticsMenu,
   TableILSQuestions,
   TableListKQuestions
 } from '@components'
@@ -51,7 +50,6 @@ const MenuBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const { isAuth, logout } = useContext(AuthContext)
   const { t } = useTranslation()
-  const [modalOpen, setModalOpen] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
   const [modalOpenListK, setModalOpenListK] = useState(false)
@@ -163,6 +161,7 @@ const MenuBar = () => {
               HASKI
             </TextWrapper>
             <CourseMenu />
+            <StatisticsMenu />
             <FurtherInfoMenu />
           </Box>
           {/** Search bar */}
@@ -171,17 +170,6 @@ const MenuBar = () => {
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }, mt: 1 }}>
             <LanguageMenu />
           </Box>
-          {/** Questionnaire Results */}
-          {isAuth && (
-            <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-              <Tooltip title={t('tooltip.openQuestionnaireResults')}>
-                <IconButton id="modal-icon-button" onClick={() => setModalOpen(true)}>
-                  <Analytics data-testid="QuestionnaireResultsIcon" />
-                </IconButton>
-              </Tooltip>
-              <QuestionnaireResultsModal open={modalOpen} handleClose={() => setModalOpen(false)} />
-            </Box>
-          )}
           {/** Theme button */}
           {/**
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
@@ -206,7 +194,7 @@ const MenuBar = () => {
               <IconButton
                 id="manual-icon-button"
                 onClick={() => {
-                  window.open('/files/Tutorial_zur_Bedienung_von_HASKI_Nov23.pdf', '_blank')
+                  window.open('/files/Tutorial_zur_Bedienung_von_HASKI_Okt24.pdf', '_blank')
                 }}>
                 <Help data-testid="HelpIcon" />
               </IconButton>

@@ -39,4 +39,25 @@ describe('LearningPathElementSlice', () => {
 
     expect(cached).toEqual(learningPath)
   })
+
+  it('should return cached learning path if available', async () => {
+    const { getLearningPathElement } = useStore.getState()
+    const learningPath = { id: 1, name: 'Math', description: 'Learn math' }
+    const courseId = '1'
+    const topicId = '2'
+
+    await getLearningPathElement(1, 2, 3, courseId, topicId)
+
+    expect(useStore.getState()._cache_learningPathElement_record[`${courseId}-${topicId}`]).toEqual(learningPath)
+
+    const cached = await getLearningPathElement(1, 2, 3, courseId, topicId)
+
+    expect(mockServices.fetchLearningPathElement).toHaveBeenCalledTimes(1)
+
+    expect(cached).toEqual(learningPath)
+    const { clearLearningPathElementCache } = useStore.getState()
+    clearLearningPathElementCache()
+    await getLearningPathElement(1, 2, 3, courseId, topicId)
+    expect(mockServices.fetchLearningPathElement).toHaveBeenCalledTimes(2)
+  })
 })
