@@ -1,8 +1,8 @@
-import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Button, Card, CardContent, Grid, Stack } from '@common/components'
 import { useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
+import { AddCircle } from '@common/icons'
 import { CreateTopicModal, SkeletonList, TopicCard } from '@components'
 import { RoleContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -92,7 +92,7 @@ const Course = () => {
                     variant="contained"
                     color="primary"
                     onClick={() => setCreateTopicModalOpen(true)}>
-                    <AddCircleIcon />
+                    <AddCircle />
                   </Button>
                 </Stack>
               </CardContent>

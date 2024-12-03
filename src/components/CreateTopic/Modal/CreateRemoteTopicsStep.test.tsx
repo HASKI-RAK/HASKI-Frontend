@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, getByText, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { LearningPathTopic, RemoteTopics, Topic } from '@core'
 import CreateRemoteTopicsStep from './CreateRemoteTopicsStep'

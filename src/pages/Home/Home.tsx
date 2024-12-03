@@ -1,10 +1,10 @@
-import AddCircleIcon from '@mui/icons-material/AddCircle'
 import dayjs from 'dayjs'
 import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, Grid, Skeleton, Typography } from '@common/components'
+import { AddCircle } from '@common/icons'
 import { CreateCourseModal } from '@components'
 import { Course } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
@@ -133,7 +133,7 @@ export const Home = () => {
               color="primary"
               onClick={() => setCreateCourseModalOpen(true)}
               sx={commonButtonStyle}>
-              <AddCircleIcon />
+              <AddCircle />
             </Button>
           </Grid>
         </CardContent>
