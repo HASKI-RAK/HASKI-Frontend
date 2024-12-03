@@ -34,6 +34,20 @@ const CreateRemoteTopicsTable = ({
     </Paper>
   )
 
+  const remoteTopicRow = (LmsTopic: RemoteTopics) => (
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={selectedTopics.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
+          onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
+          id={'create-topic-modal-available-topics-checkbox-' + LmsTopic.topic_lms_name}
+        />
+      }
+      label={LmsTopic.topic_lms_name}
+      key={LmsTopic.topic_lms_id}
+    />
+  )
+
   return (
     <Grid container direction="column" alignItems="center" spacing={3}>
       <Grid item>
@@ -51,21 +65,7 @@ const CreateRemoteTopicsTable = ({
         ) : (
           <Grid item container alignItems="center" direction="column">
             <Paper sx={{ padding: '1rem', width: '95%' }}>
-              <FormGroup>
-                {remoteTopics.map((LmsTopic) => (
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={selectedTopics.some((topic) => topic.topic_lms_id === LmsTopic.topic_lms_id)}
-                        onChange={(event) => handleTopicChange(LmsTopic, event.target.checked)}
-                        id={'create-topic-modal-available-topics-checkbox-' + LmsTopic.topic_lms_name}
-                      />
-                    }
-                    label={LmsTopic.topic_lms_name}
-                    key={LmsTopic.topic_lms_id}
-                  />
-                ))}
-              </FormGroup>
+              <FormGroup>{remoteTopics.map((LmsTopic) => remoteTopicRow(LmsTopic))}</FormGroup>
             </Paper>
             {children}
           </Grid>
