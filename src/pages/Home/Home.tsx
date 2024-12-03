@@ -94,8 +94,8 @@ export const Home = () => {
     return new Date(courseStartDate).getTime() > new Date().getTime()
   }
 
-  const courseCard = (course: Course) => {
-    return (
+  const courseCards = (courses: Course[]) => {
+    return courses.map((course) => (
       <Card key={course.id} sx={commonCardStyle}>
         <CardContent>
           <Typography variant="h5" align="center">
@@ -112,13 +112,13 @@ export const Home = () => {
                 navigate('/course/' + course.id)
               }}>
               {handleCourseStartDate(course.start_date)
-                ? t('pages.home.courseDisabled') + ' ' + dayjs(new Date(course.start_date)).format('DD.MM.YYYY - HH:mm')
+                ? t('pages.home.courseDisabled') + ' ' + dayjs(course.start_date).format('DD.MM.YYYY - HH:mm')
                 : t('pages.home.courseButton')}
             </Button>
           </Grid>
         </CardContent>
       </Card>
-    )
+    ))
   }
 
   const courseCreatorView = () => {
@@ -146,6 +146,18 @@ export const Home = () => {
     )
   }
 
+  const noCourses = () => {
+    return (
+      <Card sx={commonCardStyle}>
+        <CardContent>
+          <Typography variant="h5" align="center">
+            {t('pages.home.noCourses')}
+          </Typography>
+        </CardContent>
+      </Card>
+    )
+  }
+
   // Card containing the courses with a button to the specific course
   return (
     <Grid container direction="row" spacing={2} justifyContent="center">
@@ -155,17 +167,9 @@ export const Home = () => {
             <Skeleton variant="rectangular" width="100%" height={118} />
           </Card>
         ) : courses.length === 0 ? (
-          <Card sx={commonCardStyle}>
-            <CardContent>
-              <Typography variant="h5" align="center">
-                {t('pages.home.noCourses')}
-              </Typography>
-            </CardContent>
-          </Card>
+          noCourses()
         ) : (
-          courses.map((course) => {
-            return courseCard(course)
-          })
+          courseCards(courses)
         )}
         {isCourseCreatorRole && courseCreatorView()}
       </Grid>
