@@ -184,7 +184,7 @@ const PrivacyPolicy = () => {
         beschrieben, sind freiwillig. Sie haben jederzeit die Möglichkeit zu widerrufen. Durch Verweigerung oder
         Widerruf entstehen Ihnen keine Nachteile.
       </Typography>
-      <Typography paragraph variant="body2">
+      <Typography variant="body2">
         Für die Einhaltung der Datenschutzbestimmungen ist im Falle der vorliegenden Studie die TH Aschaffenburg
         verantwortlich.
       </Typography>
