@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
-import React from 'react'
 import { LearningPathTopic } from '@core'
 import ExistingTopicsTable from './ExistingTopicsTable'
 

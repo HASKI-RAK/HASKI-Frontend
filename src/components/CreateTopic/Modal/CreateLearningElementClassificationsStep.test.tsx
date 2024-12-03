@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
-import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import { RemoteTopics } from '@core'
 import CreateLearningElementClassificationsStep from './CreateLearningElementClassificationsStep'

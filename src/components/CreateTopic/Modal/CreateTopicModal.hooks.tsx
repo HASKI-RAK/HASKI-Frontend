@@ -1,5 +1,5 @@
 import log from 'loglevel'
-import React, { useCallback, useContext, useMemo } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CreateAlgorithmTableNameProps, handleError } from '@components'
 import { RemoteLearningElement, RemoteTopics, User } from '@core'

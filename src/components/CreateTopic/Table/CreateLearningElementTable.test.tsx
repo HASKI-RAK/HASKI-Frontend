@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
-import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import { RemoteLearningElement, RemoteTopics } from '@core'
 import CreateLearningElementTable from './CreateLearningElementTable'

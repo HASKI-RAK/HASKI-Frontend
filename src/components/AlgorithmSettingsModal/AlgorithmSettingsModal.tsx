@@ -48,7 +48,8 @@ export type OptionsType = {
  */
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
   const { t } = useTranslation()
-  const options = [...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as OptionsType)]
+
+  const options: OptionsType = t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true })
 
   const { handleSave, handleSelect, waitForBackend, selected, teacherAlgorithm } = useAlgorithmSettingsModal({
     handleClose: props.handleClose,

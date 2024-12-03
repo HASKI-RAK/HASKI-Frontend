@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, memo } from 'react'
+import { Dispatch, SetStateAction, memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
 import { CreateLearningElementTable } from '@components'

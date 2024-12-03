@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
-import React from 'react'
 import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
 import { SnackbarContext } from '@services'
@@ -11,7 +10,6 @@ jest.useFakeTimers()
 
 describe('CreateCourseModal', () => {
   const mockHandleCloseCreateCourseModal = jest.fn()
-  const mockSetSuccessRemoteCourseCreated = jest.fn()
   const mockSetActiveStepCreateCourseModal = jest.fn()
 
   const addSnackbarMock = jest.fn()

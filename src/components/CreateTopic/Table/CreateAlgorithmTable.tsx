@@ -18,6 +18,12 @@ export type CreateAlgorithmTableProps = {
   children?: ReactNode
 }
 
+export type topicAlgorithmOptionsType = {
+  name: string
+  description: string
+  key: string
+}[]
+
 const CreateAlgorithmTable = ({
   selectedTopics,
   onAlgorithmChange,
@@ -28,10 +34,10 @@ const CreateAlgorithmTable = ({
   const { handleAlgorithmChange } = useCreateAlgorithmTable({ selectedAlgorithms, onAlgorithmChange })
 
   // Memoized list of algorithm options from translations
-  const topicAlgorithmOptions = useMemo(() => {
+  const topicAlgorithmOptions: topicAlgorithmOptionsType = useMemo(() => {
     return t('components.AlgorithmSettingsModal.algorithms', {
       returnObjects: true
-    }) as { name: string; description: string; key: string }[]
+    })
   }, [t])
 
   // Set initial algorithm for topics
