@@ -74,27 +74,36 @@ const PrivacyPolicy = () => {
         </ListItem>
       </List>
       <Typography variant="body2">Diese Daten möchten wir wie im Folgenden dargelegt einsetzen:</Typography>
-      <Typography variant="h6">Datenerhebung</Typography>
+      <Typography paragraph variant="body2" />
+      <Divider />
+      <Typography variant="h6">3. Datenerhebung</Typography>
       <Typography variant="body2">
         Die Datenerhebungen werden von entsprechend geschulter Mitarbeiterinnen des HASKI-Projekts betreut und online
         mittels Moodle durchgeführt. Die erhobenen Daten werden ausschließlich vertraulich verarbeitet.
       </Typography>
-      <Typography variant="h6">Datenverarbeitung</Typography>
+      <Typography paragraph variant="body2" />
+      <Divider />
+      <Typography variant="h6">4. Datenverarbeitung</Typography>
       <Typography variant="body2">
         Nach Aufzeichnung werden die Daten durch wissenschaftliche MitarbeiterInnen anonymisiert ausgewertet. Es werden
         sämtliche Namen und Hinweise, die Rückschlüsse auf Personen ermöglichen könnten, entfernt.
       </Typography>
-      <Typography variant="h6">Aufbewahrung und Zugriff</Typography>
+      <Typography paragraph variant="body2" />
+      <Divider />
+      <Typography variant="h6">5. Aufbewahrung und Zugriff</Typography>
       <Typography variant="body2">
         Die Daten werden in digitaler Form auf dem Moodle-Server der TH Aschaffenburg aufbewahrt und nur berechtigten
         MitarbeiterInnen zugänglich gemacht. Anonymisierte Daten können im Sinne guter wissenschaftlicher Praxis
         archiviert und für Lehre genutzt werden.
       </Typography>
-      <Typography variant="h6">Veröffentlichung</Typography>
+      <Typography paragraph variant="body2" />
+      <Divider />
+      <Typography variant="h6">6. Veröffentlichung</Typography>
       <Typography variant="body2">
         Forschungsergebnisse werden ausschließlich anonymisiert veröffentlicht, ohne Rückschlüsse auf Personen
         zuzulassen.
       </Typography>
+      <Typography paragraph variant="body2" />
       <Typography variant="h6">Ihre Rechte</Typography>
       <List>
         <ListItem>
