@@ -47,12 +47,16 @@ export const logBuffer = (config: any) => {
               return
             }
 
-            postBufferContent(bufferBody, persistedStorage.state._user.id).catch(() => {
-              console.log('buffer failed to send')
-            })
-
-            //remove buffer content
-            GlobalRingBuffer.clear()
+            postBufferContent(bufferBody, persistedStorage.state._user.id)
+              .then(() => {
+                //remove buffer content
+                GlobalRingBuffer.clear()
+              })
+              .catch(() => {
+                //Snackbar cannot be used, log.errror will spamm the buffer
+                //console.log is used for the developer
+                console.log('logbuffer failed to send')
+              })
           }
         }
       }
