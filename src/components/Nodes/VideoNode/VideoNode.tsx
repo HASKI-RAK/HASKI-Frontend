@@ -18,8 +18,7 @@ import BasicNode from '../BasicNode/BasicNode'
  */
 const VideoNode = (data: NodeProps<LearningPathLearningElementNode>) => {
   return (
-    <BasicNode {...data} id="video-node">
-      <Videocam sx={{ fontSize: 50 }} />
+    <BasicNode {...data} id="video-node" icon={<Videocam sx={{ fontSize: 50 }} />}>
     </BasicNode>
   )
 }

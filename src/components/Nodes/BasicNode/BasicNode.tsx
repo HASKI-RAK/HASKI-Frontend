@@ -1,9 +1,10 @@
-import { memo } from 'react'
+import { memo, ReactNode, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
-import { CheckBox, Feedback } from '@common/icons'
+import { NodeWrapper, Paper, Tooltip, Typography, IconButton, Grid, Collapse } from '@common/components'
+import { CheckBox, Feedback, FavoriteBorderIcon, FavoriteIcon, Task } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
+import { useTheme } from '@common/hooks'
 import { getConfig } from '@shared'
 
 /**
@@ -11,8 +12,10 @@ import { getConfig } from '@shared'
  * @prop {@link NodeProps} - The props of the node.
  * @interface
  */
+
 type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
-  children?: JSX.Element
+  icon?: JSX.Element
+  children?: ReactNode
 }
 
 /**
@@ -27,18 +30,60 @@ type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
  *
  * @category Components
  */
-const BasicNode = ({ id, children = <Feedback sx={{ fontSize: 50 }} />, data }: BasicNodeProps) => {
+const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: BasicNodeProps) => {
   const { t } = useTranslation()
+  const theme = useTheme()
+  const [isFavorite, setIsFavorite] = useState(false)
+  const onMouseEnter = () => {
+    setIsHovered(true)
+  }
+  const onMouseLeave = () => {
+    setIsHovered(false)
+  }
+  const addToFavorites = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    setIsFavorite(!isFavorite)
+    event.stopPropagation()
+  }
+  const handleShowSolution = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    props.data.handleOpen()
+    props.data.handleSetUrl(getConfig().MOODLE + `/mod/${props.data.activityType}/view.php?id=${props.data.lmsId}`)
+    props.data.handleSetLmsId(props.data.lmsId)
+    event.stopPropagation()
+  }
+  const [isHovered, setIsHovered] = useState(false)
   return (
     <NodeWrapper
-      id={id + '-' + data.lmsId}
+      id={id + '-' + props.data.lmsId}
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       onClick={() => {
-        data.handleOpen()
-        data.handleSetUrl(getConfig().MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
-        data.handleSetLmsId(data.lmsId)
+        props.data.handleOpen()
+        props.data.handleSetUrl(getConfig().MOODLE + `/mod/${props.data.activityType}/view.php?id=${props.data.lmsId}`)
+        props.data.handleSetLmsId(props.data.lmsId)
       }}
-      data-testid={'basicNode'}>
+      data-testid={'basicNode'}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      >
+      <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '500ms'}}>
+        <Grid container direction="row" justifyContent="flex-end" alignItems="center" sx={{position: 'absolute', top: '-3rem', left: '0.2rem'}}>
+          <IconButton onClick={addToFavorites} sx={{
+            marginLeft: '1rem',
+            color: theme.palette.secondary.contrastText,
+            backgroundColor: theme.palette.primary.main
+            , border: '1px solid grey'
+            }}>
+            {isFavorite ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
+          </IconButton>
+          <IconButton onClick={handleShowSolution}
+          sx={{backgroundColor:theme.palette.primary.main,
+          marginLeft: '0.5rem',
+          border: '1px solid grey',
+          }}>
+            <Task/>
+          </IconButton>
+          {props.children}
+        </Grid>
+      </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
         sx={{
@@ -48,13 +93,13 @@ const BasicNode = ({ id, children = <Feedback sx={{ fontSize: 50 }} />, data }: 
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        {children}
+        {icon}
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
-        {data.name}
+        {props.data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
-      {data.isDone && (
+      {props.data.isDone && (
         <Tooltip title={t('tooltip.completed')}>
           <CheckBox
             viewBox={'3 -3 24 24'}

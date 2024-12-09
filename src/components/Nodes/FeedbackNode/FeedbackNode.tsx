@@ -18,8 +18,7 @@ import BasicNode from '../BasicNode/BasicNode'
  */
 const FeedbackNode = (data: NodeProps<LearningPathLearningElementNode>) => {
   return (
-    <BasicNode {...data} id="feedback-node">
-      <Feedback sx={{ fontSize: 50 }} />
+    <BasicNode {...data} id="feedback-node" icon={<Feedback sx={{ fontSize: 50 }} />}>
     </BasicNode>
   )
 }

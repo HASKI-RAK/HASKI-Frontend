@@ -18,8 +18,7 @@ import BasicNode from '../BasicNode/BasicNode'
  */
 const ApplicationExampleNode = (data: NodeProps<LearningPathLearningElementNode>) => {
   return (
-    <BasicNode {...data} id="application-example-node">
-      <SettingsApplications sx={{ fontSize: 50 }} />
+    <BasicNode {...data} id="application-example-node" icon={<SettingsApplications sx={{ fontSize: 50 }} />}>
     </BasicNode>
   )
 }

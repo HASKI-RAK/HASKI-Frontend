@@ -18,8 +18,7 @@ import BasicNode from '../BasicNode/BasicNode'
  */
 const AdditionalLiteratureNode = (data: NodeProps<LearningPathLearningElementNode>) => {
   return (
-    <BasicNode {...data} id="additional-literature-node">
-      <Article sx={{ fontSize: 50 }} />
+    <BasicNode {...data} id="additional-literature-node" icon={<Article sx={{ fontSize: 50 }} />}>
     </BasicNode>
   )
 }

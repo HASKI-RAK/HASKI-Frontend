@@ -18,8 +18,7 @@ import BasicNode from '../BasicNode/BasicNode'
  */
 const ForumNode = (data: NodeProps<LearningPathLearningElementNode>) => {
   return (
-    <BasicNode {...data} id="forum-node">
-      <Forum sx={{ fontSize: 50 }} />
+    <BasicNode {...data} id="forum-node" icon={<Forum sx={{ fontSize: 50 }} />}>
     </BasicNode>
   )
 }

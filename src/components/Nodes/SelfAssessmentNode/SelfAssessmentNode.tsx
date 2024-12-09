@@ -18,8 +18,7 @@ import BasicNode from '../BasicNode/BasicNode'
  */
 const SelfAssessmentNode = (data: NodeProps<LearningPathLearningElementNode>) => {
   return (
-    <BasicNode {...data} id="self-assessment-node">
-      <AssignmentInd sx={{ fontSize: 50 }} />
+    <BasicNode {...data} id="self-assessment-node" icon={<AssignmentInd sx={{ fontSize: 50 }}/>}>
     </BasicNode>
   )
 }
