@@ -4,6 +4,7 @@ import { devtools, persist } from 'zustand/middleware'
 import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import CoursesSlice, { createCoursesSlice } from '../Slices/CoursesSlice'
+import LearningElementSolutionSlice, { createLearningElementSolutionSlice} from '../Slices/LearningElementSolutionSlice'
 import LearningPathElementSlice, { createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
@@ -20,7 +21,8 @@ export type StoreState = LearningPathElementSlice &
   CourseSlice &
   CoursesSlice &
   LearningPathTopicSlice &
-  LearningPathElementSpecificStatusSlice
+  LearningPathElementSpecificStatusSlice &
+  LearningElementSolutionSlice
 export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & xAPISlice
 export type SessionStoreState = NewsSlice
 
@@ -31,7 +33,8 @@ export const useStore = create<StoreState>()((...a) => ({
   ...createLearningPathTopicSlice(...a),
   ...createCourseSlice(...a),
   ...createCoursesSlice(...a),
-  ...createLearningPathElementSpecificStatusSlice(...a)
+  ...createLearningPathElementSpecificStatusSlice(...a),
+  ...createLearningElementSolutionSlice(...a)
 }))
 
 export const usePersistedStore = create<PersistedStoreState>()(

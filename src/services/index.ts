@@ -5,6 +5,7 @@
 export { AuthContext } from './AuthContext'
 export type { AuthContextType } from './AuthContext'
 export { AuthProvider } from './AuthProvider'
+export { fetchLearningElementSolution } from './LearningPath'
 export { fetchLearningPathElement } from './LearningPath'
 export { fetchLearningPathElementStatus } from './LearningPath'
 export { fetchLearningPathElementSpecificStatus } from './LearningPath'

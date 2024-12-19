@@ -1,11 +1,19 @@
-import { memo, ReactNode, useState } from 'react'
+import { memo, ReactNode, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { NodeWrapper, Paper, Tooltip, Typography, IconButton, Grid, Collapse } from '@common/components'
+import { NodeWrapper,
+         Paper,
+         Tooltip,
+         Typography,
+         IconButton,
+         Grid,
+         Collapse } from '@common/components'
 import { CheckBox, Feedback, FavoriteBorderIcon, FavoriteIcon, Task } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import { useTheme } from '@common/hooks'
 import { getConfig } from '@shared'
+import { useStore } from '@store'
+import { get } from 'http'
 
 /**
  * @prop children - The icon of the node.
@@ -34,6 +42,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   const { t } = useTranslation()
   const theme = useTheme()
   const [isFavorite, setIsFavorite] = useState(false)
+  const [solutionLmsId, setSolutionLmsId] = useState<number>(-1)
   const onMouseEnter = () => {
     setIsHovered(true)
   }
@@ -45,12 +54,27 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
     event.stopPropagation()
   }
   const handleShowSolution = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    console.log('solutionLmsId', solutionLmsId)
     props.data.handleOpen()
-    props.data.handleSetUrl(getConfig().MOODLE + `/mod/${props.data.activityType}/view.php?id=${props.data.lmsId}`)
-    props.data.handleSetLmsId(props.data.lmsId)
+    props.data.handleSetUrl(getConfig().MOODLE + `/mod/${props.data.activityType}/view.php?id=${solutionLmsId}`)
+    props.data.handleSetLmsId(solutionLmsId)
     event.stopPropagation()
   }
   const [isHovered, setIsHovered] = useState(false)
+  const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
+
+  useEffect(() => {
+    console.log('id, ', id)
+    getLearningElementSolution(props.data.learningElementId).then((solution) => {
+      console.log('solution', solution)
+      setSolutionLmsId(solution.solution_lms_id)
+    })
+  },[getLearningElementSolution, setSolutionLmsId, id, props])
+
+  useEffect(() => {
+    console.log('solutionLmsId', solutionLmsId)
+  }, [solutionLmsId])
+
   return (
     <NodeWrapper
       id={id + '-' + props.data.lmsId}
@@ -64,7 +88,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       >
-      <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '500ms'}}>
+      <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '200ms'}}>
         <Grid container direction="row" justifyContent="flex-end" alignItems="center" sx={{position: 'absolute', top: '-3rem', left: '0.2rem'}}>
           <IconButton onClick={addToFavorites} sx={{
             marginLeft: '1rem',
@@ -74,13 +98,18 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
             }}>
             {isFavorite ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
           </IconButton>
-          <IconButton onClick={handleShowSolution}
-          sx={{backgroundColor:theme.palette.primary.main,
-          marginLeft: '0.5rem',
-          border: '1px solid grey',
-          }}>
-            <Task/>
-          </IconButton>
+          {
+          (solutionLmsId > 1) &&
+          <Tooltip title={t('tooltip.solution')}>
+            <IconButton onClick={handleShowSolution}
+            sx={{backgroundColor:theme.palette.primary.main,
+            marginLeft: '0.5rem',
+            border: '1px solid grey',
+            }}>
+              <Task/>
+            </IconButton>
+          </Tooltip>
+          }
           {props.children}
         </Grid>
       </Collapse>

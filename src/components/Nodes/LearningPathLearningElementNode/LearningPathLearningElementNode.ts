@@ -21,6 +21,7 @@ export type LearningPathLearningElementNode = {
   /**
    * The id of the learning element inside the LMS.
    */
+  learningElementId: number
   lmsId: number
   name: string
   activityType: string

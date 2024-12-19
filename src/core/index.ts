@@ -24,6 +24,7 @@
 import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
 import Course, { CourseResponse } from './Course/Course'
 import LearningElement from './LearningElement/LearningElement'
+import LearningElementSolution from './LearningElement/LearningElementSolution'
 import LearningPathElement from './LearningPathElement/LearningPathElement'
 import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
 import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
@@ -43,6 +44,7 @@ export type {
   Course,
   CourseResponse,
   LearningElement,
+  LearningElementSolution,
   LearningPathTopic,
   LearningPathElement,
   LearningPathLearningElement,
@@ -55,6 +57,7 @@ export type {
   ListK,
   LearningPathBasedOn
 }
+export type { LearningElementSolutionReturn } from './LearningElement/LearningElementSolution'
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
 export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'
 export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'

@@ -94,7 +94,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         return learningPath.map((learningElement) => [learningElement])
       }
 
-      // Returns an array containg the values of the object.
+      // Returns an array containing the values of the object.
       return Object.values(
         // Creates an object with the classification of learning elements as key and an array of learning elements as value.
         learningPath.reduce(
@@ -140,6 +140,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       }
 
       const nodeData: LearningPathLearningElementNode = {
+        learningElementId: learningElement.id,
         lmsId: learningElement.lms_id,
         name: learningElement.name,
         activityType: learningElement.activity_type,
