@@ -375,8 +375,7 @@ const mockDataServices: MockDataServices = {
     Promise.resolve({
       ok: true,
       status: 201,
-      statusText: 'CREATED',
-      url: 'http://fakedomain.com:5000/news/language/de/university/'
+      statusText: 'CREATED'
     })
   )
 }
