@@ -53,7 +53,7 @@ export const logBuffer = (config: any) => {
                 GlobalRingBuffer.clear()
               })
               .catch(() => {
-                //Snackbar cannot be used, log.errror will spamm the buffer
+                //Snackbar cannot be used, log.error will spamm the buffer
                 //console.log is used for the developer
                 console.log('logbuffer failed to send')
               })

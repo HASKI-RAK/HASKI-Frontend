@@ -370,6 +370,14 @@ const mockDataServices: MockDataServices = {
         }
       ]
     })
+  ),
+  postBufferContent: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED',
+      url: 'http://fakedomain.com:5000/news/language/de/university/'
+    })
   )
 }
 /**

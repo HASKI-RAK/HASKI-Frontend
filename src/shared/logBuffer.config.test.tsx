@@ -1,5 +1,7 @@
 import log from 'loglevel'
 import { logBuffer } from './logBuffer.config'
+import { waitFor } from '@testing-library/react'
+import { mockServices } from 'jest.setup'
 
 describe('Test the demo component', () => {
   beforeEach(() => {
@@ -79,6 +81,7 @@ describe('production is set', () => {
   })
 
   test('error message doesnt get send with no user_id', async () => {
+    mockServices.postBufferContent.mockImplementationOnce(() => Promise.reject(new Error('error')))
     Object.defineProperty(window, 'localStorage', {
       value: {
         getItem: jest.fn((key) => {
@@ -106,6 +109,11 @@ describe('production is set', () => {
   })
 
   test('error message is sent to the backend', async () => {
+    mockServices.postBufferContent.mockImplementation(() =>
+      Promise.resolve({
+        status: 200
+      })
+    )
     Object.defineProperty(window, 'localStorage', {
       value: {
         getItem: jest.fn((key) => {
@@ -119,7 +127,7 @@ describe('production is set', () => {
       },
       writable: true
     })
-    logBuffer(jest.mock)
+    await logBuffer(jest.mock)
     log.setLevel('trace')
 
     log.error('This is an error')
