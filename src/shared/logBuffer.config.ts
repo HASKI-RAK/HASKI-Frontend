@@ -43,7 +43,7 @@ export const logBuffer = (config: any) => {
           const storageData = localStorage.getItem('persisted_storage')
           if (storageData) {
             const persistedStorage = JSON.parse(storageData)
-            if (!(persistedStorage && persistedStorage.state && persistedStorage.state._user.id)) {
+            if (!persistedStorage?.state?._user.id) {
               return
             }
 
