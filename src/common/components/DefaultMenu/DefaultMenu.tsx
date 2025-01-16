@@ -1,4 +1,5 @@
 import DefaultMenu from '@mui/material/Menu'
+import xAPIWrapper2 from 'src/services/xAPI/xAPIWrapper'
 import { memo, useCallback } from 'react'
 import { MenuProps as DefaultMenuProps } from '@common/components'
 import {
@@ -47,4 +48,6 @@ const Menu = ({ useStatement = _useStatement, onClose, ...props }: MenuProps) =>
   )
 }
 
-export default memo(Menu)
+// export default memo(Menu)
+
+export default xAPIWrapper2(DefaultMenu, new URL(import.meta.url).pathname)
