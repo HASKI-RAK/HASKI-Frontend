@@ -39,3 +39,4 @@ export {
   postStudentLpLeAlg,
   postTeacherLpLeAlg
 } from './LearningPathLearningElementAlgorithm'
+export { postBufferContent } from './BufferContent'

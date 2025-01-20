@@ -550,6 +550,13 @@ const mockDataServices: MockDataServices = {
         timemodified: 1692021711
       }
     ])
+  ),
+  postBufferContent: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED'
+    })
   )
 }
 /**
