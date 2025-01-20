@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, act } from '@testing-library/react'
+import { act, fireEvent, render } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
@@ -71,7 +71,7 @@ describe('Test PrivacyModal', () => {
   })
 
   test('Modal does not render if on privacypolicy page', () => {
-    const form = render(
+    render(
       <MemoryRouter initialEntries={['/privacypolicy']}>
         <PrivacyModal />
       </MemoryRouter>
@@ -185,7 +185,7 @@ describe('Test PrivacyModal', () => {
 })
 
 test('Modal does not render if cookie is set', () => {
-  const form = render(
+  render(
     <MemoryRouter>
       <PrivacyModal />
     </MemoryRouter>

@@ -131,7 +131,12 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
             value={reportType}
             onChange={reportTypeChangeHandler}>
             {reportTypes.map((report) => (
-              <FormControlLabel key={report.value} value={report.value} control={<Radio />} label={report.label} />
+              <FormControlLabel
+                key={report.value}
+                value={report.value}
+                control={<Radio id={'contactform-' + report.label + '-radio'} />}
+                label={report.label}
+              />
             ))}
           </RadioGroup>
           <FormControl>
