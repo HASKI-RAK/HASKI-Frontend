@@ -1,4 +1,3 @@
-import { CssBaseline } from '@mui/material'
 import React from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import { Box, Divider, Grid } from '@common/components'
@@ -8,9 +7,9 @@ import {
   Footer,
   LocalNavBar,
   MenuBar,
+  Newsbanner,
   OpenQuestionnaire,
-  PrivacyModal,
-  Newsbanner
+  PrivacyModal
 } from '@components'
 
 /**
@@ -35,8 +34,13 @@ export const MainFrame = () => {
 
   return (
     <>
-      <CssBaseline />
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Box
+        sx={(theme) => ({
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '100vh',
+          bgcolor: theme.palette.background.default
+        })}>
         <MenuBar />
         <Newsbanner />
         <BreadcrumbsContainer />

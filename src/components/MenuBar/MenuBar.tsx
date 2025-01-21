@@ -162,15 +162,15 @@ const MenuBar = () => {
               variant="h6"
               noWrap
               component="a"
-              sx={{
+              sx={(theme) => ({
                 mr: 2,
                 ml: 2,
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
-                color: 'inherit',
+                color: theme.palette.secondary.contrastText,
                 textDecoration: 'none'
-              }}
+              })}
               onClick={() => navigate('/')}>
               HASKI
             </TextWrapper>
@@ -186,7 +186,7 @@ const MenuBar = () => {
           {/** Questionnaire Results */}
           {isAuth && (
             <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-              <Tooltip title={t('tooltip.openQuestionnaireResults')}>
+              <Tooltip title={<Typography variant={'body2'}>{t('tooltip.openQuestionnaireResults')}</Typography>}>
                 <IconButton id="modal-icon-button" onClick={() => setModalOpen(true)}>
                   <Analytics data-testid="QuestionnaireResultsIcon" />
                 </IconButton>
@@ -197,7 +197,8 @@ const MenuBar = () => {
           {/** Theme button */}
           {
             <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-              <Tooltip title={t('components.ThemeModal.buttonDescription')}>
+              <Tooltip
+                title={<Typography variant={'body2'}>{t('components.ThemeModal.buttonDescription')}</Typography>}>
                 <IconButton id="theme-icon-button" onClick={() => handleOpenThemeModal()}>
                   <Brush data-testid="BrushIcon" />
                 </IconButton>
@@ -207,7 +208,7 @@ const MenuBar = () => {
           }
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('appGlobal.help')}>
+            <Tooltip title={<Typography variant={'body2'}>{t('appGlobal.help')}</Typography>}>
               <IconButton
                 id="manual-icon-button"
                 onClick={() => {
@@ -237,7 +238,7 @@ const MenuBar = () => {
 */}
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('tooltip.openSettings')}>
+            <Tooltip title={<Typography variant={'body2'}>{t('tooltip.openSettings')}</Typography>}>
               <IconButton id="account-icon-button" onClick={handleOpenUserMenu} data-testid="useravatar">
                 <Avatar alt="Remy Sharp">
                   <Person />

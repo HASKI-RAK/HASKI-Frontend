@@ -49,6 +49,14 @@ export const AltTheme = createTheme({
       contrastText: defaultColors.black,
       light: defaultColors.black
     },
+    background: {
+      default: '#FFFFFF',
+      paper: '#FFFFFF'
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#6b3b13'
+    },
     success: {
       main: green[600],
       dark: green[900],

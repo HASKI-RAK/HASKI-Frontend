@@ -54,8 +54,8 @@ export const DarkTheme = createTheme({
       paper: '#676666'
     },
     text: {
-      primary: 'rgba(255,255,255,1.0)'
-      //secondary: 'lightgrey',
+      primary: '#FFFFFF',
+      secondary: '#6b3b13'
     },
     success: {
       main: green[600],
@@ -103,7 +103,10 @@ export const DarkTheme = createTheme({
   },
 
   typography: {
-    fontFamily: ['Courier New', 'regular'].join(',')
+    fontFamily: ['Courier New', 'regular'].join(','),
+    allVariants: {
+      color: '#FFFFFF'
+    }
   },
 
   components: {

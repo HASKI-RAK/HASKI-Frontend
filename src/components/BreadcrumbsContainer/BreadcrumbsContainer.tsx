@@ -29,9 +29,11 @@ const showCurrentBreadcrump = (
             .join('/')
         )
       }}>
-      {onlyNumbersRegex.test(array[index])
-        ? t(`pages.${array[index - 1].replace(onlyNumbersRegex, '').replaceAll('/', '')}`)
-        : t(`pages.${path}`)}
+      <Typography>
+        {onlyNumbersRegex.test(array[index])
+          ? t(`pages.${array[index - 1].replace(onlyNumbersRegex, '').replaceAll('/', '')}`)
+          : t(`pages.${path}`)}
+      </Typography>
     </Link>
   )
 }
@@ -58,7 +60,7 @@ const BreadcrumbsContainer = () => {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
       {/** Center */}
-      <Breadcrumbs aria-label="breadcrumb">
+      <Breadcrumbs aria-label="breadcrumb" separator={<Typography>/</Typography>}>
         {location.pathname !== '/' ? (
           location.pathname.split('/').map((path, index, array) => {
             if (path === '')
@@ -71,7 +73,7 @@ const BreadcrumbsContainer = () => {
                   onClick={() => {
                     navigate('/')
                   }}>
-                  {t('pages.home')}
+                  <Typography>{t('pages.home')}</Typography>
                 </Link>
               )
 
@@ -84,15 +86,12 @@ const BreadcrumbsContainer = () => {
           <Box display="flex">
             <Link
               id="home-link"
-              color="text.primary"
               onClick={() => {
                 navigate('/')
               }}>
-              {t('pages.home')}
+              <Typography ml="0.3rem">{t('pages.home')}</Typography>
             </Link>
-            <Typography ml="0.3rem" color="text.primary">
-              /
-            </Typography>
+            <Typography ml="0.3rem">/</Typography>
           </Box>
         )}
       </Breadcrumbs>

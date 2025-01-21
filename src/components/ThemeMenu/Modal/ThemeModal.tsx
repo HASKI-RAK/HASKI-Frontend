@@ -98,8 +98,19 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
   return (
     <Modal data-testid={'ThemeModal'} open={open} onClose={handleClose}>
       <Grid sx={styleBox}>
-        {/**Upper Row - Provides radio buttons for theme changing*/}
-        <Grid sx={{ flex: '1', top: '0%', alignItems: 'flex-start' }}>
+        <Fab
+          id="theme-modal-close-button"
+          color="primary"
+          sx={{
+            position: 'sticky',
+            top: '1%',
+            left: '93.5%'
+          }}
+          data-testid={'ThemeModal-Close-Button'}
+          onClick={() => handleClose({} as object, 'backdropClick')}>
+          <Close />
+        </Fab>
+        <Grid sx={{ flex: '1', alignItems: 'flex-start', height: '25%' }}>
           <FormControl
             sx={{
               alignItems: 'center',
@@ -109,11 +120,15 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
             }}>
             <FormLabel
               id="theme-modal-radio-buttons-label"
-              sx={{
+              sx={(theme) => ({
                 fontWeight: 'bold',
-                fontSize: '1.5rem'
-            }}>
-              {t('components.ThemeModal.radioHeader')}
+                fontSize: '1.5rem',
+                color: theme.palette.text.primary,
+                '&.Mui-focused': {
+                  color: theme.palette.text.primary // Prevent color change when focused
+                }
+              })}>
+              <Typography variant={'h4'}>{t('components.ThemeModal.radioHeader')}</Typography>
             </FormLabel>
             <RadioGroup
               sx={{
@@ -128,7 +143,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
               name="radio-buttons-group">
               <FormControlLabel
                 id="theme-modal-radio-button-haski-theme"
-                data-testid={"ThemeModal-radio-button-haski"}
+                data-testid={'ThemeModal-radio-button-haski'}
                 value={'HaskiTheme'}
                 control={<Radio />}
                 label={
@@ -140,7 +155,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
               />
               <FormControlLabel
                 id="theme-modal-radio-button-dark-theme"
-                data-testid={"ThemeModal-radio-button-dark"}
+                data-testid={'ThemeModal-radio-button-dark'}
                 value={'DarkTheme'}
                 control={<Radio />}
                 label={
@@ -152,7 +167,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
               />
               <FormControlLabel
                 id="theme-modal-radio-button-alt-theme"
-                data-testid={"ThemeModal-radio-button-alt"}
+                data-testid={'ThemeModal-radio-button-alt'}
                 value={'AltTheme'}
                 control={<Radio />}
                 label={
@@ -166,18 +181,14 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
           </FormControl>
         </Grid>
 
-        <Divider
-          orientation= 'horizontal'
-        />
+        <Divider orientation="horizontal" />
 
-        {/**Lower Row - Provides themed preview of radio selection and operating buttons*/}
         <Grid
           sx={{
             flex: '4',
             position: 'relative',
             alignItems: 'flex-start',
-            overflow: 'auto',
-            marginTop: '3%'
+            overflow: 'auto'
           }}>
           <Fab
             id="theme-modal-switch-page-right"
@@ -202,17 +213,6 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
             data-testid={'ThemeModal-Left-Button'}
             onClick={() => changePage(-1)}>
             <ArrowBack />
-          </Fab>
-          <Fab
-            id="theme-modal-close-button"
-            sx={{
-              bgcolor: (theme) => theme.palette.error.main,
-              position: 'sticky',
-              top: '1%',
-              left: '93.5%'}}
-            data-testid={'ThemeModal-Close-Button'}
-            onClick={() => handleClose({} as object, 'backdropClick')}>
-            <Close />
           </Fab>
           <Fab
             id="theme-modal-accept-button"
@@ -247,7 +247,7 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
                 <MenuBar />
                 <BreadcrumbsContainer />
                 <Grid container sx={{ flex: 1, overflow: 'hidden' }}>
-                  <Grid item sx={{ flex: 1, overflow: 'auto' }}data-testid={'page-preview-grid'}>
+                  <Grid item sx={{ flex: 1, overflow: 'auto' }} data-testid={'page-preview-grid'}>
                     {pages[pageIndex]}
                   </Grid>
                 </Grid>

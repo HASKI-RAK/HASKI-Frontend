@@ -1136,7 +1136,7 @@
   "components.ThemeModal.altTheme": "Haski alternative",
   "components.ThemeModal.buttonDescription": "Change color theme",
   "components.ThemeModal.darkTheme": "Haski dark",
-  "components.ThemeModal.radioHeader": "Available color themes:",
+  "components.ThemeModal.radioHeader": "Available color themes",
   "components.ThemeModal.standardTheme": "Haski standard",
   "error": "Error",
   "error.fetchCourses": "There was an Error fetching the courses data.",

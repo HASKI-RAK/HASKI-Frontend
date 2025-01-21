@@ -1136,7 +1136,7 @@
   "components.ThemeModal.altTheme": "Haski alternativ",
   "components.ThemeModal.buttonDescription": "Farbschema ändern",
   "components.ThemeModal.darkTheme": "Haski dunkel",
-  "components.ThemeModal.radioHeader": "Verfügbare Farbschemata:",
+  "components.ThemeModal.radioHeader": "Verfügbare Farbschemata",
   "components.ThemeModal.standardTheme": "Haski-Standard",
   "error": "Fehler",
   "error.fetchCourses": "Es gab einen Fehler beim Abrufen der Kursdaten.",
