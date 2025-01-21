@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, waitFor } from '@testing-library/react'
-import { mockServices } from 'jest.setup'
+import { fireEvent, render } from '@testing-library/react'
 import * as router from 'react-router'
 import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
@@ -336,7 +335,7 @@ describe('MenuBar', () => {
     // TODO 📑: will be implemented in the future. Current menu is mock.
   })
 
-  test('click on learner characteristics should open Questionnaire Results Modal', () => {
+  test('click on static dropdown and select learner characteristic', () => {
     const result = render(
       <ThemeContextProvider>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -347,13 +346,11 @@ describe('MenuBar', () => {
       </ThemeContextProvider>
     )
 
-    // click on QuestionnaireResultsIcon:
-    fireEvent.click(result.getByTestId('QuestionnaireResultsIcon'))
-    expect(result.getByTestId('ILS and ListK Modal')).toBeInTheDocument()
-
-    // click on close button
-    fireEvent.click(result.getByTestId('QuestionnaireResultsCloseButton'))
-    expect(result.queryByTestId('ILS and ListK Modal')).not.toBeInTheDocument()
+    fireEvent.click(result.getByText('components.StatisticsMenu.title'))
+    act(() => {
+      fireEvent.click(result.getByText('pages.learnercharacteristics'))
+      expect(navigate).toHaveBeenCalledWith('/learnercharacteristics')
+    })
   })
 
   test('clicking logout should close popover', () => {

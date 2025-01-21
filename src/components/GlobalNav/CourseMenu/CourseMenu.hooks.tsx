@@ -32,8 +32,8 @@ export const useCourseMenu = (): CourseMenuHookReturn => {
     return response.courses.map((element) => ({
       name: element.name,
       url: `/course/${element.id}`,
-      isDisabled: element.id === 2,
-      availableAt: new Date('3025-05-16T10:00:00Z')
+      isDisabled: new Date(element.start_date) >= new Date(),
+      availableAt: new Date(element.start_date)
     }))
   }, [])
 

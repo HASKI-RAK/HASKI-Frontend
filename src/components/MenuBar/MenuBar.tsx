@@ -16,7 +16,6 @@ import {
   Typography
 } from '@common/components'
 import {
-  Analytics,
   AssignmentOutlined,
   Brush,
   Help,
@@ -31,7 +30,7 @@ import {
   FurtherInfoMenu,
   LanguageMenu,
   QuestionnaireQuestionsModal,
-  QuestionnaireResultsModal,
+  StatisticsMenu,
   TableILSQuestions,
   TableListKQuestions,
   ThemeModal
@@ -175,6 +174,7 @@ const MenuBar = () => {
               HASKI
             </TextWrapper>
             <CourseMenu />
+            <StatisticsMenu />
             <FurtherInfoMenu />
           </Box>
           {/** Search bar */}
@@ -212,7 +212,7 @@ const MenuBar = () => {
               <IconButton
                 id="manual-icon-button"
                 onClick={() => {
-                  window.open('/files/Tutorial_zur_Bedienung_von_HASKI_Nov23.pdf', '_blank')
+                  window.open('/files/Tutorial_zur_Bedienung_von_HASKI_Okt24.pdf', '_blank')
                 }}>
                 <Help data-testid="HelpIcon" />
               </IconButton>

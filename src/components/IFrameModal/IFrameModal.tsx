@@ -31,10 +31,17 @@ type IFrameModalProps = {
  * @prop boolean that determines if the modal is open or not
  * @prop function that is called when the modal is closed
  *
+ * @remarks
+ * On close the component sends a post request to calculate a new rating for the user and the learning element the user attempted.
+ *
  * @returns An element that renders an iframe in a modal
  * @category Components
  */
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
+  const handleClose = () => {
+    props.onClose()
+  }
+
   return (
     <Modal id="iframe-modal" open={props.isOpen} onClose={props.onClose} data-testid={'IFrameModal'}>
       <Box sx={style_box}>
@@ -42,7 +49,7 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
           id="iframe-modal-close-button"
           color="primary"
           data-testid={'IFrameModal-Close-Button'}
-          onClick={() => props.onClose()}
+          onClick={handleClose}
           style={{
             position: 'absolute',
             top: '2%',
