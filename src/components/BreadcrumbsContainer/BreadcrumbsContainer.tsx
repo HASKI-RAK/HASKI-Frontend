@@ -20,7 +20,7 @@ const showCurrentBreadcrump = (
       key={path}
       underline="hover"
       component={index === location.pathname.split('/').length - 1 ? 'span' : 'button'}
-      color={index === location.pathname.split('/').length - 1 ? 'inherit' : 'text.primary'}
+      color={index === location.pathname.split('/').length - 1 ? 'textPrimary' : 'textPrimary'}
       onClick={() => {
         navigate(
           location.pathname
@@ -29,11 +29,9 @@ const showCurrentBreadcrump = (
             .join('/')
         )
       }}>
-      <Typography>
-        {onlyNumbersRegex.test(array[index])
-          ? t(`pages.${array[index - 1].replace(onlyNumbersRegex, '').replaceAll('/', '')}`)
-          : t(`pages.${path}`)}
-      </Typography>
+      {onlyNumbersRegex.test(array[index])
+        ? t(`pages.${array[index - 1].replace(onlyNumbersRegex, '').replaceAll('/', '')}`)
+        : t(`pages.${path}`)}
     </Link>
   )
 }
@@ -69,11 +67,11 @@ const BreadcrumbsContainer = () => {
                   id="home-link"
                   key={path}
                   underline="hover"
-                  color="text.primary"
+                  color="textPrimary"
                   onClick={() => {
                     navigate('/')
                   }}>
-                  <Typography>{t('pages.home')}</Typography>
+                  {t('pages.home')}
                 </Link>
               )
 
@@ -88,10 +86,11 @@ const BreadcrumbsContainer = () => {
               id="home-link"
               onClick={() => {
                 navigate('/')
-              }}>
-              <Typography ml="0.3rem">{t('pages.home')}</Typography>
+              }}
+              color="textPrimary">
+              {t('pages.home')}
             </Link>
-            <Typography ml="0.3rem">/</Typography>
+            /
           </Box>
         )}
       </Breadcrumbs>

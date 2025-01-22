@@ -26,13 +26,13 @@ const bull = (
 const card = (
   <>
     <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+      <Typography sx={{ fontSize: 14 }} color="textPrimary" gutterBottom>
         Word of the Day
       </Typography>
       <Typography variant="h5" component="div">
         be{bull}nev{bull}o{bull}lent
       </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+      <Typography sx={{ mb: 1.5 }} color="textPrimary">
         adjective
       </Typography>
       <Typography variant="body2">
@@ -153,17 +153,28 @@ export const ThemePresentation = () => {
         <Typography variant="h6" component="div" gutterBottom>
           Link
         </Typography>
-        <Link href="/">Go back to the Homepage</Link>
+        <Link href="/" color="textPrimary">
+          Go back to the Homepage
+        </Link>
 
         <Typography marginTop={5} variant="h6" component="div" gutterBottom>
           RadioButtons
         </Typography>
         <FormControl>
-          <FormLabel>Radio Button example </FormLabel>
+          <FormLabel
+            sx={(theme) => ({
+              color: theme.palette.text.primary
+            })}>
+            Radio Button example{' '}
+          </FormLabel>
           <RadioGroup row name="radio-buttons-group" defaultValue={'default'}>
             <FormControlLabel value="default" control={<Radio />} label="default" />
             <FormControlLabel value="unchecked" control={<Radio />} label="unchecked" />
-            <FormControlLabel value="disabled" control={<Radio />} label="disabled" disabled />
+            <FormControlLabel
+              value="disabled"
+              control={<Radio disabled={true} sx={(theme) => ({ color: theme.palette.text.primary })} />}
+              label="disabled"
+            />
           </RadioGroup>
         </FormControl>
         <Typography marginTop={5} variant="h6" component="div" gutterBottom>

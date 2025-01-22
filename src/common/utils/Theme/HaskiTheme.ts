@@ -293,7 +293,7 @@ export const HaskiTheme = createTheme({
             color: defaultColors.secondary[100],
             backgroundColor: defaultColors.secondary[100]
           },
-          ':disabled': {
+          '.Mui-disabled &': {
             color: defaultColors.lightgrey,
             cursor: 'not-allowed'
           }

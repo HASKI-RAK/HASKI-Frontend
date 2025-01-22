@@ -285,10 +285,8 @@ export const DarkTheme = createTheme({
           font: 'Courier Prime',
           width: 32,
           height: 32,
-          outline: '2px auto {defaultColors.black}',
-          backgroundColor: defaultColors.white,
-
-          color: defaultColors.black,
+          outline: '2px auto {defaultColors.lightgrey}',
+          color: defaultColors.white,
           '.Mui-focusVisible &': {
             outline: '2px auto rgba(19,124,189,.6)',
             outlineOffset: 2
@@ -300,7 +298,7 @@ export const DarkTheme = createTheme({
             color: defaultColors.secondary[100],
             backgroundColor: defaultColors.secondary[100]
           },
-          ':disabled': {
+          '.Mui-disabled&': {
             color: defaultColors.lightgrey,
             cursor: 'not-allowed'
           }
@@ -309,7 +307,77 @@ export const DarkTheme = createTheme({
           color: defaultColors.secondary[100],
           '&$checked': {
             color: defaultColors.secondary[100]
+          },
+          '&$disabled': {
+            color: defaultColors.white,
+            cursor: 'not-allowed'
           }
+        }
+      }
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          color: defaultColors.white,
+          '&.Mui-disabled': {
+            color: defaultColors.lightgrey
+          }
+        },
+        label: {
+          color: defaultColors.white,
+          '&.Mui-disabled': {
+            color: defaultColors.darkgrey
+          }
+        }
+      }
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          color: defaultColors.white,
+          '&.Mui-disabled': {
+            color: defaultColors.lightgrey
+          },
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'white'
+          },
+          '& .MuiSvgIcon-root': {
+            color: 'white'
+          }
+        },
+        outlined: {
+          // This ensures the outline is white
+          color: defaultColors.white
+        }
+      }
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          color: defaultColors.white,
+          '&.Mui-disabled': {
+            color: defaultColors.lightgrey
+          },
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'white'
+          },
+          '& .MuiSvgIcon-root': {
+            color: 'white'
+          }
+        }
+      }
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          color: defaultColors.white
+        }
+      }
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          backgroundColor: defaultColors.white
         }
       }
     }
