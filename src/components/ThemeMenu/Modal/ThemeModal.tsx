@@ -16,7 +16,7 @@ import { ArrowBack, ArrowForward, Brush, Check, Close, DarkMode, LightMode } fro
 import { AltTheme, DarkTheme, HaskiTheme } from '@common/utils'
 import { BreadcrumbsContainer, Footer, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
 import { AboutUs, Course, Home, PrivacyPolicy, ThemePresentation, Topic } from '@pages'
-import { AuthContext, useThemeContext } from '@services'
+import { AuthContext, useThemeProvider } from '@services'
 
 const styleBox = {
   position: 'absolute',
@@ -62,13 +62,12 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
   const [selectedTheme, setSelectedTheme] = useState<Theme>(activeTheme)
   const [selectedThemeString, setSelectedThemeString] = useState(activeThemeString)
 
-  const { updateTheme } = useThemeContext()
+  const { updateTheme } = useThemeProvider()
   const { isAuth } = useContext(AuthContext)
 
   //handles the selection of a radio button
   const handleThemeModalPreviewChange = (themeName: string) => {
     setSelectedThemeString(themeName)
-    console.log('marker point handleThemeModalPreviewChange')
     setSelectedTheme(themeName === 'DarkTheme' ? DarkTheme : themeName === 'AltTheme' ? AltTheme : HaskiTheme)
   }
 

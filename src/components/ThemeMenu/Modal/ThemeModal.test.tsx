@@ -1,19 +1,16 @@
-import '@testing-library/jest-dom';
-import { fireEvent, getByTestId, render, RenderResult, screen, waitFor } from '@testing-library/react'
-import ThemeModal from './ThemeModal';
-import {ThemeProvider} from '@mui/material'
+import { ThemeProvider as MuiThemeProvider } from '@mui/material'
+import '@testing-library/jest-dom'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { AltTheme, DarkTheme, HaskiTheme } from '@common/utils'
-import { AuthContext, ThemeContextProvider } from '@services'
-import { useTheme } from '@mui/material/styles';
-import { Simulate } from 'react-dom/test-utils'
-import click = Simulate.click // Importiere useTheme
+import { AuthContext, ThemeProvider } from '@services'
+import ThemeModal from './ThemeModal'
 
 // mock translation to return key
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key: string) => key,
-  }),
+    t: (key: string) => key
+  })
 }))
 
 /*
@@ -27,21 +24,18 @@ jest.mock('@mui/material', () => ({
 
 //jest.spyOn(require('@mui/material/styles'),'useTheme').mockReturnValue(DarkTheme)
 
-
 describe('Rendering tests', () => {
-
   test('should match the snapshot', () => {
-
     const modalElement = render(
-      <ThemeContextProvider>
-        <ThemeProvider theme={AltTheme}>
+      <ThemeProvider>
+        <MuiThemeProvider theme={AltTheme}>
           <MemoryRouter>
             <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
               <ThemeModal open={true} handleClose={jest.fn()} />
             </AuthContext.Provider>
           </MemoryRouter>
-        </ThemeProvider>
-      </ThemeContextProvider>
+        </MuiThemeProvider>
+      </ThemeProvider>
     )
 
     const { asFragment } = modalElement
@@ -49,17 +43,16 @@ describe('Rendering tests', () => {
   })
 
   test('interactive elements to be present', () => {
-
     render(
-      <ThemeContextProvider>
-        <ThemeProvider theme={AltTheme}>
+      <ThemeProvider>
+        <MuiThemeProvider theme={AltTheme}>
           <MemoryRouter>
             <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
               <ThemeModal open={true} handleClose={jest.fn()} />
             </AuthContext.Provider>
           </MemoryRouter>
-        </ThemeProvider>
-      </ThemeContextProvider>
+        </MuiThemeProvider>
+      </ThemeProvider>
     )
 
     const header = screen.getByText(/radioHeader/i)
@@ -88,31 +81,28 @@ describe('Rendering tests', () => {
   })
 
   //test('preview pages to be present')
-
 })
 
-
-describe('Functionality tests', ()=> {
-
-  test('accept button to be disabled when preview theme equal to active theme',  () => {
+describe('Functionality tests', () => {
+  test('accept button to be disabled when preview theme equal to active theme', () => {
     //needs mock-fn of useTheme to pass DarkTheme back
     //didnt work so far
     // Mock the useTheme function
     jest.mock('@mui/material/styles', () => ({
       ...jest.requireActual('@mui/material/styles'),
-      useTheme: () => DarkTheme,  // Mocking the return value
-    }));
+      useTheme: () => DarkTheme // Mocking the return value
+    }))
 
     render(
-      <ThemeContextProvider>
-        <ThemeProvider theme={AltTheme}>
+      <ThemeProvider>
+        <MuiThemeProvider theme={AltTheme}>
           <MemoryRouter>
             <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
               <ThemeModal open={true} handleClose={jest.fn()} />
             </AuthContext.Provider>
           </MemoryRouter>
-        </ThemeProvider>
-      </ThemeContextProvider>
+        </MuiThemeProvider>
+      </ThemeProvider>
     )
 
     const radioButton = screen.getByLabelText(/standardTheme/i)
@@ -123,23 +113,21 @@ describe('Functionality tests', ()=> {
   })
 
   test('buttons to be selected after clicking them', async () => {
-
     render(
-      <ThemeContextProvider>
-        <ThemeProvider theme={HaskiTheme}>
+      <ThemeProvider>
+        <MuiThemeProvider theme={HaskiTheme}>
           <MemoryRouter>
             <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
               <ThemeModal open={true} handleClose={jest.fn()} />
             </AuthContext.Provider>
           </MemoryRouter>
-        </ThemeProvider>
-      </ThemeContextProvider>
+        </MuiThemeProvider>
+      </ThemeProvider>
     )
 
     const RadioButton1 = screen.getByLabelText(/standardTheme/i) as HTMLInputElement
     const RadioButton2 = screen.getByLabelText(/darkTheme/i) as HTMLInputElement
     const RadioButton3 = screen.getByLabelText(/altTheme/i) as HTMLInputElement
-
 
     //checks StandardThemeButton
     await waitFor(() => {
@@ -164,23 +152,21 @@ describe('Functionality tests', ()=> {
       expect(RadioButton2.checked).toBe(false)
       expect(RadioButton1.checked).toBe(false)
     })
-
   })
 
   test('modal to be closed after clicking accept', async () => {
-
-    const handleClose = jest.fn();
+    const handleClose = jest.fn()
 
     render(
-      <ThemeContextProvider>
-        <ThemeProvider theme={AltTheme}>
+      <ThemeProvider>
+        <MuiThemeProvider theme={AltTheme}>
           <MemoryRouter>
             <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
               <ThemeModal open={true} handleClose={handleClose} />
             </AuthContext.Provider>
           </MemoryRouter>
-        </ThemeProvider>
-      </ThemeContextProvider>
+        </MuiThemeProvider>
+      </ThemeProvider>
     )
 
     const RadioButton1 = screen.getByLabelText(/darkTheme/i) as HTMLInputElement
@@ -196,38 +182,37 @@ describe('Functionality tests', ()=> {
       fireEvent.click(acceptButton)
       expect(handleClose).toHaveBeenCalled()
     })
-
   })
 
-  test('preview to deploy the same theme on startup as set by app', () =>{
+  test('preview to deploy the same theme on startup as set by app', () => {
     render(
-      <ThemeContextProvider>
-        <ThemeProvider theme={AltTheme}>
+      <ThemeProvider>
+        <MuiThemeProvider theme={AltTheme}>
           <MemoryRouter>
             <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
               <ThemeModal open={true} handleClose={jest.fn()} />
             </AuthContext.Provider>
           </MemoryRouter>
-        </ThemeProvider>
-      </ThemeContextProvider>
+        </MuiThemeProvider>
+      </ThemeProvider>
     )
     //screen.debug()
 
-    const radioButton1 = screen.getByLabelText(/standardTheme/i) as HTMLInputElement;
-    expect(radioButton1.checked).toBe(true);
+    const radioButton1 = screen.getByLabelText(/standardTheme/i) as HTMLInputElement
+    expect(radioButton1.checked).toBe(true)
   })
 
   test('switching preview pages', async () => {
     render(
-      <ThemeContextProvider>
-        <ThemeProvider theme={HaskiTheme}>
+      <ThemeProvider>
+        <MuiThemeProvider theme={HaskiTheme}>
           <MemoryRouter>
             <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
               <ThemeModal open={true} handleClose={jest.fn()} />
             </AuthContext.Provider>
           </MemoryRouter>
-        </ThemeProvider>
-      </ThemeContextProvider>
+        </MuiThemeProvider>
+      </ThemeProvider>
     )
 
     const leftButton = screen.getByTestId('ThemeModal-Left-Button')
@@ -241,7 +226,6 @@ describe('Functionality tests', ()=> {
       fireEvent.click(rightButton)
       expect(grid).toHaveTextContent('Regensburg')
     })
-
   })
 
   /*
@@ -284,5 +268,4 @@ describe('Functionality tests', ()=> {
 
   //expect(screen.getByTestId('ThemeModal-Accept-Button')).not.toBeInTheDocument ggf querySelector
   //ggf waitFor nr 2 einbauen
-
 })

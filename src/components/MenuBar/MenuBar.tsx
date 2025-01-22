@@ -52,7 +52,6 @@ const MenuBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const { isAuth, logout } = useContext(AuthContext)
   const { t } = useTranslation()
-  const [modalOpen, setModalOpen] = useState(false)
   const [modalOpenTheme, setModalOpenTheme] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
@@ -183,17 +182,6 @@ const MenuBar = () => {
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }, mt: 1 }}>
             <LanguageMenu />
           </Box>
-          {/** Questionnaire Results */}
-          {isAuth && (
-            <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-              <Tooltip title={<Typography variant={'body2'}>{t('tooltip.openQuestionnaireResults')}</Typography>}>
-                <IconButton id="modal-icon-button" onClick={() => setModalOpen(true)}>
-                  <Analytics data-testid="QuestionnaireResultsIcon" />
-                </IconButton>
-              </Tooltip>
-              <QuestionnaireResultsModal open={modalOpen} handleClose={() => setModalOpen(false)} />
-            </Box>
-          )}
           {/** Theme button */}
           {
             <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>

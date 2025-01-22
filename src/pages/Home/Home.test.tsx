@@ -5,7 +5,7 @@ import * as router from 'react-router'
 import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
 import { Home } from '@pages'
-import { AuthContext, ThemeContextProvider, RoleContext, RoleContextType } from '@services'
+import { AuthContext, RoleContext, RoleContextType, ThemeProvider } from '@services'
 
 const navigate = jest.fn()
 
@@ -20,11 +20,13 @@ describe('Test the Home page-1', () => {
     mockServices.fetchCourses.mockResolvedValueOnce({ courses: [] })
 
     const { getByText } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ThemeProvider>
     )
 
     await waitFor(() => {
@@ -47,13 +49,13 @@ describe('Test the Home page-2', () => {
     })
 
     const { container } = render(
-      <ThemeContextProvider>
+      <ThemeProvider>
         <MemoryRouter>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <Home />
           </AuthContext.Provider>
         </MemoryRouter>
-      </ThemeContextProvider>
+      </ThemeProvider>
     )
 
     await waitFor(() => {
@@ -63,13 +65,13 @@ describe('Test the Home page-2', () => {
 
   test('render page', () => {
     const result = render(
-      <ThemeContextProvider>
+      <ThemeProvider>
         <MemoryRouter>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <Home />
           </AuthContext.Provider>
         </MemoryRouter>
-      </ThemeContextProvider>
+      </ThemeProvider>
     )
 
     expect(result).toBeTruthy()
@@ -77,13 +79,13 @@ describe('Test the Home page-2', () => {
 
   test('click on course navigates to course page', async () => {
     const { getAllByText } = render(
-      <ThemeContextProvider>
+      <ThemeProvider>
         <MemoryRouter>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <Home />
           </AuthContext.Provider>
         </MemoryRouter>
-      </ThemeContextProvider>
+      </ThemeProvider>
     )
     await waitFor(() => {
       act(() => {
@@ -94,28 +96,6 @@ describe('Test the Home page-2', () => {
     })
   })
 
-  test('fetching User throws error', async () => {
-    mockServices.fetchUser.mockImplementationOnce(() => new Error('Error'))
-
-    jest.spyOn(console, 'error').mockImplementation(() => {
-      return
-    })
-
-    const { container } = render(
-      <ThemeContextProvider>
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Home />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      </ThemeContextProvider>
-    )
-
-    await waitFor(() => {
-      expect(container.innerHTML).toContain('MuiSkeleton')
-    })
-  })
-
   test('students do not see create course button', async () => {
     const studentContext = {
       isStudentRole: true,
@@ -123,13 +103,15 @@ describe('Test the Home page-2', () => {
     } as RoleContextType
 
     const { queryByText } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <RoleContext.Provider value={studentContext}>
-            <Home />
-          </RoleContext.Provider>
-        </AuthContext.Provider>
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <RoleContext.Provider value={studentContext}>
+              <Home />
+            </RoleContext.Provider>
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ThemeProvider>
     )
 
     await waitFor(() => {
@@ -146,13 +128,15 @@ describe('Test the Home page-2', () => {
     } as RoleContextType
 
     const { getByTestId } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <RoleContext.Provider value={courseCreatorContext}>
-            <Home />
-          </RoleContext.Provider>
-        </AuthContext.Provider>
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <RoleContext.Provider value={courseCreatorContext}>
+              <Home />
+            </RoleContext.Provider>
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ThemeProvider>
     )
 
     await waitFor(() => {
@@ -172,13 +156,15 @@ describe('Test the Home page-2', () => {
     } as RoleContextType
 
     const { getByTestId, queryByTestId } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <RoleContext.Provider value={courseCreatorContext}>
-            <Home />
-          </RoleContext.Provider>
-        </AuthContext.Provider>
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <RoleContext.Provider value={courseCreatorContext}>
+              <Home />
+            </RoleContext.Provider>
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ThemeProvider>
     )
 
     await waitFor(() => {
@@ -194,6 +180,28 @@ describe('Test the Home page-2', () => {
       act(() => {
         expect(queryByTestId('create-course-modal-close-button')).not.toBeInTheDocument()
       })
+    })
+  })
+
+  test('fetching User throws error', async () => {
+    mockServices.fetchUser.mockImplementationOnce(() => new Error('Error'))
+
+    jest.spyOn(console, 'error').mockImplementation(() => {
+      return
+    })
+
+    const { container } = render(
+      <ThemeProvider>
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ThemeProvider>
+    )
+
+    await waitFor(() => {
+      expect(container.innerHTML).toContain('MuiSkeleton')
     })
   })
 

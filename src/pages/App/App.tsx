@@ -17,7 +17,7 @@ import {
   ThemePresentation,
   Topic
 } from '@pages'
-import { AuthProvider, RoleProvider, SnackbarProvider, ThemeContextProvider } from '@services'
+import { AuthProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore } from '@store'
 
@@ -27,7 +27,7 @@ import { usePersistedStore } from '@store'
  * @remarks
  * This is the main component of the application and the entry point after the index.tsx.
  * It contains the {@link MainFrame} and the routes to the other pages.
- * The {@link ThemeContextProvider} provides the theme context.
+ * The {@link ThemeProvider} provides the custom theme context.
  * The {@link AuthProvider} is used to provide the authentication context.
  * The {@link SnackbarProvider} is used to provide the snackbars to all pages.
  *
@@ -43,7 +43,7 @@ export const App = () => {
   return (
     <>
       {getXAPI() && (
-        <ThemeContextProvider>
+        <ThemeProvider>
           <ReactFlowProvider>
             <SnackbarProvider>
               <Router>
@@ -73,7 +73,7 @@ export const App = () => {
               </Router>
             </SnackbarProvider>
           </ReactFlowProvider>
-        </ThemeContextProvider>
+        </ThemeProvider>
       )}
     </>
   )
