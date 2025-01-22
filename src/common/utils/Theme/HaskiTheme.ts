@@ -31,6 +31,7 @@ export const defaultColors = {
   },
 
   lightgrey: 'lightgrey',
+  darkgrey: 'darkgrey',
   white: 'white',
   black: '#000000'
 }

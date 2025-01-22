@@ -164,7 +164,7 @@ export const DarkTheme = createTheme({
           //padding: 'var(--web-ui_button-padding,0 16px)',
           '&:hover': {
             filter: 'var(--web-ui_button-filter-hover,brightness(1.1))',
-            backgroundColor: 'inherit'
+            backgroundColor: 'white'
           },
           '&:active': {
             transform: 'translateY(4px) translateZ(0)',
@@ -351,6 +351,22 @@ export const DarkTheme = createTheme({
         }
       }
     },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          color: defaultColors.white,
+          '&.Mui-disabled': {
+            color: defaultColors.lightgrey
+          },
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'white'
+          },
+          '& .MuiSvgIcon-root': {
+            color: 'white'
+          }
+        }
+      }
+    },
     MuiTextField: {
       styleOverrides: {
         root: {
@@ -378,6 +394,22 @@ export const DarkTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: defaultColors.white
+        }
+      }
+    },
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        root: {
+          backgroundColor: defaultColors.white,
+          '&.Mui-disabled': {
+            backgroundColor: defaultColors.lightgrey
+          },
+          '& .MuiToggleButton-root': {
+            color: defaultColors.black,
+            '&.Mui-selected': {
+              color: defaultColors.black
+            }
+          }
         }
       }
     }
