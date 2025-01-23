@@ -22,6 +22,7 @@
   "appGlobal.table": "Tabelle",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
+  "components.StyledLinearProgress.linearProgressWithLabel.learningProgress": "Lernfortschritt",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Feste Reihenfolge",

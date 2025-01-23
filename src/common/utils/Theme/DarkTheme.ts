@@ -45,7 +45,7 @@ export const DarkTheme = createTheme({
     },
     secondary: {
       main: red[900],
-      dark: defaultColors.primary[900],
+      dark: '#a8a8a8',
       contrastText: defaultColors.black,
       light: defaultColors.secondary[100]
     },
@@ -334,8 +334,8 @@ export const DarkTheme = createTheme({
       styleOverrides: {
         root: {
           color: defaultColors.white,
-          '&.Mui-disabled': {
-            color: defaultColors.lightgrey
+          '& .Mui-disabled': {
+            color: defaultColors.secondary[100]
           }
         },
         label: {
@@ -378,6 +378,20 @@ export const DarkTheme = createTheme({
           },
           '& .MuiSvgIcon-root': {
             color: 'white'
+          }
+        }
+      }
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          color: defaultColors.white,
+          '&.Mui-disabled': {
+            color: defaultColors.lightgrey
+          },
+          '&:hover': {
+            backgroundColor: defaultColors.lightgrey,
+            borderRadius: '50%'
           }
         }
       }
