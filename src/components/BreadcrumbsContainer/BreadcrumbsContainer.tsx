@@ -20,7 +20,7 @@ const showCurrentBreadcrump = (
       key={path}
       underline="hover"
       component={index === location.pathname.split('/').length - 1 ? 'span' : 'button'}
-      color={index === location.pathname.split('/').length - 1 ? 'textPrimary' : 'textPrimary'}
+      color={'textPrimary'}
       onClick={() => {
         navigate(
           location.pathname
@@ -90,7 +90,6 @@ const BreadcrumbsContainer = () => {
               color="textPrimary">
               {t('pages.home')}
             </Link>
-            /
           </Box>
         )}
       </Breadcrumbs>

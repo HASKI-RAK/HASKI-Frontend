@@ -170,6 +170,11 @@ export const DarkTheme = createTheme({
             transform: 'translateY(4px) translateZ(0)',
             boxShadow: 'unset',
             disableRipple: true
+          },
+          '&:disabled': {
+            color: defaultColors.lightgrey,
+            backgroundColor: defaultColors.darkgrey,
+            boxShadow: 'none'
           }
         },
         //komplett gefüllter button
@@ -311,6 +316,16 @@ export const DarkTheme = createTheme({
           '&$disabled': {
             color: defaultColors.white,
             cursor: 'not-allowed'
+          }
+        }
+      }
+    },
+    MuiStepIcon: {
+      styleOverrides: {
+        root: {
+          color: defaultColors.white,
+          '&.Mui-disabled': {
+            color: defaultColors.lightgrey
           }
         }
       }
