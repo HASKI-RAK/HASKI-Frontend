@@ -25,7 +25,7 @@ export const defaultColors = {
   },
   secondary: {
     //blue
-    [100]: '#003F7D', //blue
+    [100]: '#E4C2A2FF', //pastel orange
     [300]: '#003366', //blue, slightly darker
     [500]: '#002347' //blue, darker
   },
@@ -47,7 +47,7 @@ export const DarkTheme = createTheme({
       main: red[900],
       dark: defaultColors.primary[900],
       contrastText: defaultColors.black,
-      light: defaultColors.black
+      light: defaultColors.secondary[100]
     },
     background: {
       default: '#272727',
@@ -416,13 +416,18 @@ export const DarkTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: defaultColors.white,
-          '&.Mui-disabled': {
-            backgroundColor: defaultColors.lightgrey
+          '& .Mui-disabled': {
+            backgroundColor: defaultColors.lightgrey,
+            borderColor: defaultColors.darkgrey
           },
           '& .MuiToggleButton-root': {
             color: defaultColors.black,
             '&.Mui-selected': {
-              color: defaultColors.black
+              color: defaultColors.black,
+              backgroundColor: defaultColors.secondary['100']
+            },
+            '&:hover': {
+              backgroundColor: defaultColors.secondary['100']
             }
           }
         }
