@@ -1,10 +1,9 @@
-import log from 'loglevel'
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
 import { Grid, Skeleton } from '@common/components'
-import { IFrameModal, LabeledSwitch, ResponsiveMiniMap, nodeTypes } from '@components'
+import { IFrameModal, LabeledSwitch, ResponsiveMiniMap, handleError, nodeTypes } from '@components'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -64,12 +63,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         setInitialEdges(edges)
       })
       .catch((error) => {
-        addSnackbar({
-          message: t('error.mapNodes'),
-          severity: 'error',
-          autoHideDuration: 3000
-        })
-        log.error(t('error.mapNodes') + ' ' + error)
+        handleError(t, addSnackbar, 'error.mapNodes', error, 3000)
       })
   }
 
@@ -89,21 +83,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               return getLearningElementsWithStatus(learningPathElementStatusData, user)
             })
             .catch((error) => {
-              addSnackbar({
-                message: t('error.getLearningElementsWithStatus'),
-                severity: 'error',
-                autoHideDuration: 3000
-              })
-              log.error(t('error.getLearningElementsWithStatus') + ' ' + error)
+              handleError(t, addSnackbar, 'error.getLearningElementsWithStatus', error, 3000)
             })
         })
         .catch((error) => {
-          addSnackbar({
-            message: t('error.getLearningElementStatus'),
-            severity: 'error',
-            autoHideDuration: 3000
-          })
-          log.error(t('error.getLearningElementStatus') + ' ' + error)
+          handleError(t, addSnackbar, 'error.getLearningElementStatus', error, 3000)
         })
     }
   }, [
@@ -134,7 +118,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         })
       }, 100)
     }
-  }, [topicId, getLearningPathElement, getUser, navigate, setInitialNodes, setInitialEdges, learningPathElementStatus])
+  }, [topicId, navigate, initialNodes, initialEdges])
 
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)
@@ -148,12 +132,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         })
       })
       .catch((error) => {
-        addSnackbar({
-          message: t('error.setLearningPathElementSpecificStatus'),
-          severity: 'error',
-          autoHideDuration: 3000
-        })
-        log.error(t('error.setLearningPathElementSpecificStatus') + ' ' + error)
+        handleError(t, addSnackbar, 'error.setLearningPathElementSpecificStatus', error, 3000)
       })
   }
 
@@ -179,7 +158,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           fitViewOptions={{
             padding: 5,
             minZoom: 0.75,
-            nodes: [{ id: initialNodes[0].id }]
+            nodes: [{ id: initialNodes[0]?.id }]
           }}>
           <ResponsiveMiniMap />
           <Background gap={16} />
@@ -191,7 +170,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               setIsGrouped={setIsGrouped}
             />
           </Panel>
-          <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
+          <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
         </ReactFlow>
         <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
       </Grid>

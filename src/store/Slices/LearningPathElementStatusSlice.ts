@@ -18,8 +18,9 @@ import { resetters } from '../Zustand/Store'
  *
  * @interface
  */
-type LearningPathElementStatusSlice = {
+export type LearningPathElementStatusSlice = {
   _learningPathElementStatus: Record<string, LearningPathElementStatus[]>
+  clearLearningPathElementStatusCache: () => void
   getLearningPathElementStatus: LearningPathElementStatusReturn
   setLearningPathElementStatus: (
     courseId?: string,
@@ -27,8 +28,6 @@ type LearningPathElementStatusSlice = {
     newData?: LearningPathElementStatus
   ) => Promise<LearningPathElementStatus[]>
 }
-
-export default LearningPathElementStatusSlice
 
 /*
  * getLearningPathElementStatus - Fetches all learning path element statuses
@@ -46,6 +45,9 @@ export const createLearningPathElementStatusSlice: StateCreator<
   resetters.push(() => set({ _learningPathElementStatus: {} }))
   return {
     _learningPathElementStatus: {},
+    clearLearningPathElementStatusCache: () => {
+      set({ _learningPathElementStatus: {} })
+    },
     getLearningPathElementStatus: async (...arg) => {
       const [courseId, studentId] = arg
 

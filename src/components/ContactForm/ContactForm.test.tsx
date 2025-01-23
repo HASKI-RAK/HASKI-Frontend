@@ -16,7 +16,7 @@ describe('Test ContactForm', () => {
     const submitButton = form.getByText('components.ContactForm.submit')
     const input = form.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'text' } })
-    fireEvent.mouseDown(form.getByRole('button', { name: /Topic/i }))
+    fireEvent.mouseDown(form.getByRole('combobox', { name: /Topic/i }))
     act(() => {
       form.getAllByRole('option')[0].click()
     })
@@ -33,7 +33,7 @@ describe('Test ContactForm', () => {
     const submitButton = form.getByText('components.ContactForm.submit')
     const input = form.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'text' } })
-    fireEvent.mouseDown(form.getByRole('button', { name: /Topic/i }))
+    fireEvent.mouseDown(form.getByRole('combobox', { name: /Topic/i }))
     act(() => {
       form.getAllByRole('option')[0].click()
     })
@@ -48,7 +48,7 @@ describe('Test ContactForm', () => {
       </MemoryRouter>
     )
     const submitButton = form.getByText('components.ContactForm.submit')
-    fireEvent.mouseDown(form.getByRole('button', { name: /Topic/i }))
+    fireEvent.mouseDown(form.getByRole('combobox', { name: /Topic/i }))
     act(() => {
       form.getAllByRole('option')[0].click()
     })
@@ -77,11 +77,11 @@ describe('Test ContactForm', () => {
         <ContactForm />
       </MemoryRouter>
     )
-    fireEvent.mouseDown(getByRole('button', { name: /Topic/i }))
+    fireEvent.mouseDown(getByRole('combobox', { name: /Topic/i }))
     act(() => {
       getAllByRole('option')[0].click()
     })
-    expect(getByRole('button', { name: /Topic/i })).toHaveTextContent(/Learningelement/i)
+    expect(getByRole('combobox', { name: /Topic/i })).toHaveTextContent(/Learningelement/i)
   })
 
   test('Contactform form no input', () => {
@@ -92,7 +92,7 @@ describe('Test ContactForm', () => {
     )
     const submitButton = contactform.getByText('components.ContactForm.submit')
     const reporttype = contactform.getByRole('radio', { name: /issue/i })
-    const reporttopic = contactform.getByRole('button', { name: /Topic/i })
+    const reporttopic = contactform.getByRole('combobox', { name: /Topic/i })
 
     // No input yet so no submit
     fireEvent.mouseDown(reporttype)
