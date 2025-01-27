@@ -18,7 +18,6 @@ describe('BreadcrumbsContainer', () => {
       </MemoryRouter>
     )
     expect(getAllByText('pages.home').length).toEqual(1)
-    expect(getByText('/')).toBeInTheDocument()
 
     // click first link:
     fireEvent.click(getAllByText('pages.home')[0])

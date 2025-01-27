@@ -37,6 +37,7 @@ export const defaultColors = {
 }
 
 export const AltTheme = createTheme({
+  name: 'AltTheme',
   palette: {
     primary: {
       main: pink[500],

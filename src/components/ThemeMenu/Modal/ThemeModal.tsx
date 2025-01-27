@@ -1,22 +1,24 @@
+import { memo, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
+  Divider,
+  Fab,
   FormControl,
   FormControlLabel,
   FormLabel,
+  Grid,
+  Modal,
   Radio,
   RadioGroup,
-  Theme,
-  ThemeProvider,
-  Typography,
-  useTheme
-} from '@mui/material'
-import React, { memo, useContext, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Divider, Fab, Grid, Modal } from '@common/components'
+  Typography
+} from '@common/components'
+import { useTheme } from '@common/hooks'
 import { ArrowBack, ArrowForward, Brush, Check, Close, DarkMode, LightMode } from '@common/icons'
+import { Theme, ThemeProvider } from '@common/theme'
 import { AltTheme, DarkTheme, HaskiTheme } from '@common/utils'
 import { BreadcrumbsContainer, Footer, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
 import { AboutUs, Course, Home, PrivacyPolicy, ThemePresentation, Topic } from '@pages'
-import { AuthContext, useThemeProvider } from '@services'
+import { useThemeProvider } from '@services'
 
 const styleBox = {
   position: 'absolute',
@@ -53,17 +55,11 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
 
   //gets theme from user and provides string
   const activeTheme = useTheme()
-  const activeThemeString =
-    activeTheme === DarkTheme ? 'DarkTheme' : activeTheme === AltTheme ? 'AltTheme' : 'HaskiTheme'
-  //console.log(activeThemeString)
-  //console.log(activeTheme === DarkTheme ? 'DarkTheme' : activeTheme === AltTheme ? 'AltTheme' : 'HaskiTheme')
+  const { updateTheme } = useThemeProvider()
 
   //presets first selection on currently active theme
   const [selectedTheme, setSelectedTheme] = useState<Theme>(activeTheme)
-  const [selectedThemeString, setSelectedThemeString] = useState(activeThemeString)
-
-  const { updateTheme } = useThemeProvider()
-  const { isAuth } = useContext(AuthContext)
+  const [selectedThemeString, setSelectedThemeString] = useState(activeTheme.name)
 
   //handles the selection of a radio button
   const handleThemeModalPreviewChange = (themeName: string) => {
@@ -74,19 +70,18 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
   //Will preset the user stored theme as the one shown in preview and selected on user auth
   useEffect(() => {
     setSelectedTheme(activeTheme)
-    setSelectedThemeString(activeThemeString)
-    //console.log(activeThemeString)
-  }, [isAuth])
+    setSelectedThemeString(activeTheme.name)
+  }, [open])
 
   //PreviewPageChangerLogic
   const [pageIndex, setPageIndex] = useState(0)
   const pages = [
-    <ThemePresentation key="theme" />,
     <AboutUs key="about" />,
     <PrivacyPolicy key="privacy" />,
+    <Home key="" />,
+    <ThemePresentation key="theme" />,
     <Course key="course" />,
-    <Topic key="topic" />,
-    <Home key="" />
+    <Topic key="topic" />
   ]
 
   //will iterate through the pages on use of arrow buttons

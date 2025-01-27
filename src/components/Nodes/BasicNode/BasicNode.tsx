@@ -1,8 +1,8 @@
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
-import { CheckBox, Feedback } from '@common/icons'
+import { Checkbox, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
+import { Feedback } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import { getConfig } from '@shared'
 
@@ -50,22 +50,31 @@ const BasicNode = ({ id, children = <Feedback sx={{ fontSize: 50 }} />, data }: 
         }}>
         {children}
       </Paper>
-      <Typography variant="h6" style={{ marginLeft: '8px' }}>
+      <Typography variant="h5" sx={{ marginLeft: '8px', color: (theme) => theme.palette.secondary.contrastText }}>
         {data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
       {data.isDone && (
         <Tooltip title={t('tooltip.completed')}>
-          <CheckBox
-            viewBox={'3 -3 24 24'}
+          <Checkbox
+            defaultChecked
+            disabled
             sx={{
-              fontSize: 29,
               position: 'absolute',
-              top: -13,
-              right: -13,
-              color: (theme) => theme.palette.success.main,
+              top: -10,
+              right: -9,
+              backgroundSize: 'cover',
               background: (theme) => theme.palette.common.white,
-              borderRadius: '10%'
+              fontsize: 25,
+              borderRadius: 10,
+              padding: 0,
+              pointerEvents: 'none', // Prevent interaction with the checkbox
+              '& svg': {
+                scale: '1.4'
+              },
+              '&.Mui-disabled': {
+                color: (theme) => theme.palette.success.main // Override default disabled color
+              }
             }}
           />
         </Tooltip>

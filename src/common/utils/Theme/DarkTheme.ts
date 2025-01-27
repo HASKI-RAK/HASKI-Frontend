@@ -37,6 +37,7 @@ export const defaultColors = {
 }
 
 export const DarkTheme = createTheme({
+  name: 'DarkTheme',
   palette: {
     primary: {
       main: yellow[900],

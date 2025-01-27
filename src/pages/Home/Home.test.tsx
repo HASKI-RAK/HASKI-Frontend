@@ -184,10 +184,8 @@ describe('Test the Home page-2', () => {
   })
 
   test('fetching User throws error', async () => {
-    mockServices.fetchUser.mockImplementationOnce(() => new Error('Error'))
-
-    jest.spyOn(console, 'error').mockImplementation(() => {
-      return
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('getUser error')
     })
 
     const { container } = render(

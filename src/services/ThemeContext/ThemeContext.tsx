@@ -10,8 +10,8 @@ export type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: HaskiTheme,
-  loadTheme: () => {},
-  updateTheme: () => {}
+  loadTheme: () => undefined,
+  updateTheme: () => undefined
 })
 
 export default ThemeContext

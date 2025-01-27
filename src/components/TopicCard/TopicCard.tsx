@@ -43,7 +43,8 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           <IconButton
             sx={{
               position: 'relative',
-              ml: { xs: '6rem', sm: '16rem', md: '36rem', lg: '46rem', xl: '66rem', xxl: '81rem', xxxl: '106rem' }
+              ml: { xs: '6rem', sm: '16rem', md: '36rem', lg: '46rem', xl: '66rem', xxl: '81rem', xxxl: '106rem' },
+              color: (theme) => theme.palette.text.primary
             }}
             onClick={openMenu}
             id="topic-menu"

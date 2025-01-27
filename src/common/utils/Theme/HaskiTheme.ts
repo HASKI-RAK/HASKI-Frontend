@@ -37,6 +37,7 @@ export const defaultColors = {
 }
 
 export const HaskiTheme = createTheme({
+  name: 'HaskiTheme',
   palette: {
     primary: {
       main: yellow[900],

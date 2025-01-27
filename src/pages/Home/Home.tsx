@@ -7,7 +7,7 @@ import { Button, Card, CardContent, Grid, Skeleton, Typography } from '@common/c
 import { AddCircle } from '@common/icons'
 import { CreateCourseModal } from '@components'
 import { Course } from '@core'
-import { AuthContext, RoleContext, SnackbarContext, useThemeProvider } from '@services'
+import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 /**
@@ -21,7 +21,6 @@ export const Home = () => {
   // UX
   const { t } = useTranslation()
   const { isAuth } = useContext(AuthContext)
-  const { loadTheme } = useThemeProvider()
   const { isCourseCreatorRole } = useContext(RoleContext)
   const { addSnackbar } = useContext(SnackbarContext)
   const navigate = useNavigate()
@@ -48,7 +47,6 @@ export const Home = () => {
     if (isAuth) {
       getUser()
         .then((user) => {
-          loadTheme(user.settings.theme)
           getCourses(user.settings.user_id, user.lms_user_id, user.id)
             .then((CourseResponse) => {
               setCourses(CourseResponse.courses)
