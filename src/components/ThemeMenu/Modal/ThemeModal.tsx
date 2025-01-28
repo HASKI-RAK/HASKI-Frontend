@@ -17,7 +17,7 @@ import { ArrowBack, ArrowForward, Brush, Check, Close, DarkMode, LightMode } fro
 import { Theme, ThemeProvider } from '@common/theme'
 import { AltTheme, DarkTheme, HaskiTheme } from '@common/utils'
 import { BreadcrumbsContainer, Footer, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
-import { AboutUs, Course, Home, PrivacyPolicy, ThemePresentation, Topic } from '@pages'
+import { AboutUs, Home, PrivacyPolicy, ThemePresentation } from '@pages'
 import { useThemeProvider } from '@services'
 
 type ThemeModalProps = {
@@ -73,9 +73,7 @@ const ThemeModal = ({
     <AboutUs key="about" />,
     <PrivacyPolicy key="privacy" />,
     <Home key="" />,
-    <ThemePresentation key="theme" />,
-    <Course key="course" />,
-    <Topic key="topic" />
+    <ThemePresentation key="theme" />
   ]
 
   //will iterate through the pages on use of arrow buttons
@@ -183,27 +181,14 @@ const ThemeModal = ({
           </FormControl>
         </Grid>
 
-        <Divider orientation="horizontal" />
+        <Divider orientation="horizontal" sx={{ mt: 1 }} />
 
         <Grid
           sx={{
-            flex: '4',
             position: 'relative',
-            alignItems: 'flex-start',
+            flexDirection: 'column',
             overflow: 'auto'
           }}>
-          <Fab
-            id="theme-modal-switch-page-right"
-            sx={{
-              bgcolor: (theme) => theme.palette.primary.main,
-              position: 'sticky',
-              top: '45%',
-              left: '93.5%'
-            }}
-            data-testid={'ThemeModal-Right-Button'}
-            onClick={() => changePage(1)}>
-            <ArrowForward />
-          </Fab>
           <Fab
             id="theme-modal-switch-page-left"
             sx={{
@@ -215,6 +200,18 @@ const ThemeModal = ({
             data-testid={'ThemeModal-Left-Button'}
             onClick={() => changePage(-1)}>
             <ArrowBack />
+          </Fab>
+          <Fab
+            id="theme-modal-switch-page-right"
+            sx={{
+              bgcolor: (theme) => theme.palette.primary.main,
+              position: 'sticky',
+              top: '45%',
+              left: '93.5%'
+            }}
+            data-testid={'ThemeModal-Right-Button'}
+            onClick={() => changePage(1)}>
+            <ArrowForward />
           </Fab>
           <Fab
             id="theme-modal-accept-button"
