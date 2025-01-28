@@ -39,6 +39,7 @@ export const defaultColors = {
 }
 
 export const Theme = createTheme({
+  name: 'BlueTheme',
   palette: {
     primary: {
       main: defaultColors.primary[900],

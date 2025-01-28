@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react'
+import { memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Divider,
@@ -20,24 +20,13 @@ import { BreadcrumbsContainer, Footer, MenuBar, OpenQuestionnaire, PrivacyModal 
 import { AboutUs, Course, Home, PrivacyPolicy, ThemePresentation, Topic } from '@pages'
 import { useThemeProvider } from '@services'
 
-const styleBox = {
-  position: 'absolute',
-  left: '6%',
-  right: '6%',
-  top: '10%',
-  height: '77%',
-  maxHeight: '83%',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 1,
-  display: 'flex',
-  flexDirection: 'column'
-}
-
 type ThemeModalProps = {
   open?: boolean
   handleClose: (event: object, reason: string) => void
+  selectedTheme: Theme
+  setSelectedTheme: (theme: Theme) => void
+  selectedThemeString: string
+  setSelectedThemeString: (theme: string) => void
 }
 
 /**
@@ -50,28 +39,33 @@ type ThemeModalProps = {
  * @category Components
  */
 
-const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
+const ThemeModal = ({
+  open = false,
+  handleClose,
+  selectedTheme,
+  setSelectedTheme,
+  selectedThemeString,
+  setSelectedThemeString
+}: ThemeModalProps) => {
   const { t } = useTranslation()
-
-  //gets theme from user and provides string
   const activeTheme = useTheme()
-  const { updateTheme } = useThemeProvider()
 
-  //presets first selection on currently active theme
-  const [selectedTheme, setSelectedTheme] = useState<Theme>(activeTheme)
-  const [selectedThemeString, setSelectedThemeString] = useState(activeTheme.name)
-
-  //handles the selection of a radio button
-  const handleThemeModalPreviewChange = (themeName: string) => {
-    setSelectedThemeString(themeName)
-    setSelectedTheme(themeName === 'DarkTheme' ? DarkTheme : themeName === 'AltTheme' ? AltTheme : HaskiTheme)
+  const themeMap: Record<string, Theme> = {
+    HaskiTheme: HaskiTheme,
+    DarkTheme: DarkTheme,
+    AltTheme: AltTheme
   }
 
-  //Will preset the user stored theme as the one shown in preview and selected on user auth
-  useEffect(() => {
-    setSelectedTheme(activeTheme)
-    setSelectedThemeString(activeTheme.name)
-  }, [open])
+  //gets theme from user and provides string
+
+  const { updateTheme } = useThemeProvider()
+
+  //handles the selection of a radio button
+  const handleThemeModalPreviewChange = (themeString: string) => {
+    const theme = themeMap[themeString] ?? HaskiTheme
+    setSelectedThemeString(themeString)
+    setSelectedTheme(theme)
+  }
 
   //PreviewPageChangerLogic
   const [pageIndex, setPageIndex] = useState(0)
@@ -91,7 +85,21 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
 
   return (
     <Modal data-testid={'ThemeModal'} open={open} onClose={handleClose}>
-      <Grid sx={styleBox}>
+      <Grid
+        sx={{
+          position: 'absolute',
+          left: '6%',
+          right: '6%',
+          top: '10%',
+          height: '77%',
+          maxHeight: '83%',
+          bgcolor: (theme) => theme.palette.background.paper,
+          border: '2px solid #000',
+          boxShadow: 24,
+          p: 1,
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
         <Fab
           id="theme-modal-close-button"
           color="primary"
@@ -130,8 +138,8 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
                 gap: 2
               }}
               value={selectedThemeString}
-              onChange={(e) => {
-                handleThemeModalPreviewChange(e.target.value)
+              onChange={(event, value) => {
+                handleThemeModalPreviewChange(value)
               }}
               aria-labelledby="theme-modal-radio-buttons"
               name="radio-buttons-group">
@@ -229,13 +237,13 @@ const ThemeModal = ({ open = false, handleClose }: ThemeModalProps) => {
             <Grid
               sx={{
                 backgroundColor: (theme) => theme.palette.background.default,
-                color: (theme) => theme.palette.text.primary,
                 border: '2px solid lightgrey',
                 borderRadius: '8px',
                 padding: '16px',
                 transform: 'scale(0.8)',
                 transformOrigin: 'top center',
-                pointerEvents: 'none'
+                pointerEvents: 'none',
+                ml: 2
               }}>
               <Grid sx={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
                 <MenuBar />

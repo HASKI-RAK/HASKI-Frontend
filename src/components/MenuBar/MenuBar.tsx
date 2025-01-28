@@ -15,6 +15,7 @@ import {
   Tooltip,
   Typography
 } from '@common/components'
+import { useTheme } from '@common/hooks'
 import {
   AssignmentOutlined,
   Brush,
@@ -36,6 +37,7 @@ import {
   ThemeModal
 } from '@components'
 import { AuthContext } from '@services'
+import { Theme } from '../../common/theme/DefaultTheme/DefaultTheme'
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -51,6 +53,7 @@ import { AuthContext } from '@services'
 const MenuBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const { isAuth, logout } = useContext(AuthContext)
+  const activeTheme = useTheme()
   const { t } = useTranslation()
   const [modalOpenTheme, setModalOpenTheme] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
@@ -59,8 +62,12 @@ const MenuBar = () => {
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [successSendILSShort, setSuccessSendILSShort] = useState(false)
   const [successSendListK, setSuccessSendListK] = useState(false)
+  const [selectedTheme, setSelectedTheme] = useState<Theme>(activeTheme)
+  const [selectedThemeString, setSelectedThemeString] = useState(activeTheme.name)
 
   const handleOpenThemeModal = () => {
+    setSelectedTheme(activeTheme)
+    setSelectedThemeString(activeTheme.name)
     setModalOpenTheme(true)
     setAnchorElUser(null)
   }
@@ -191,7 +198,14 @@ const MenuBar = () => {
                   <Brush data-testid="BrushIcon" />
                 </IconButton>
               </Tooltip>
-              <ThemeModal open={modalOpenTheme} handleClose={() => handleCloseThemeModal()} />
+              <ThemeModal
+                open={modalOpenTheme}
+                handleClose={() => handleCloseThemeModal()}
+                selectedTheme={selectedTheme}
+                setSelectedTheme={setSelectedTheme}
+                selectedThemeString={selectedThemeString}
+                setSelectedThemeString={setSelectedThemeString}
+              />
             </Box>
           }
           {/** Help button */}
