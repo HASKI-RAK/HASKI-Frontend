@@ -187,7 +187,7 @@ const exampleLearningPathStatuses: LearningPathElementStatus[] = [
   }
 ]
 
-export const ThemePresentation = () => {
+export const LearningElementLearningPath = () => {
   const { mapNodes } = useTopic()
   const { fitView } = useReactFlow()
   const { nodes, edges } = mapNodes(mockLearningPathElement, exampleLearningPathStatuses, true)
@@ -219,4 +219,4 @@ export const ThemePresentation = () => {
     </Grid>
   )
 }
-export default ThemePresentation
+export default LearningElementLearningPath

@@ -1,1 +1,1 @@
-export { default as ThemePresentation } from './ThemePresentation'
+export { default as ThemePresentation } from './LearningElementLearningPath'
