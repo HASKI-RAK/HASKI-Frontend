@@ -1,195 +1,222 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Container,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  LinearProgress,
-  Link,
-  MenuItem,
-  Radio,
-  RadioGroup,
-  Select,
-  Stack,
-  Typography
-} from '@common/components'
+import { Grid } from '@mui/material'
+import { useEffect } from 'react'
+import ReactFlow, { Background, Controls, useReactFlow } from 'reactflow'
+import { ResponsiveMiniMap, nodeTypes } from '@components'
+import { LearningPathElement, LearningPathElementStatus } from '@core'
+import { useTopic } from '../Topic/Topic.hooks'
 
-const bull = (
-  <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
-    •
-  </Box>
-)
-const card = (
-  <>
-    <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="textPrimary" gutterBottom>
-        Word of the Day
-      </Typography>
-      <Typography variant="h5" component="div">
-        be{bull}nev{bull}o{bull}lent
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color="textPrimary">
-        adjective
-      </Typography>
-      <Typography variant="body2">
-        well meaning and kindly.
-        <br />
-        {'"a benevolent smile"'}
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button variant="contained" size="small">
-        Learn More
-      </Button>
-    </CardActions>
-  </>
-)
-
-export const ThemePresentation = () => {
-  return (
-    <>
-      <Container maxWidth="sm">
-        <Typography variant="h3" component="div" gutterBottom>
-          Theme Presentation
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          This site demonstrates the individual elements used in the HASKI UI. It serves as a reference, as well as a
-          documentation.
-        </Typography>
-        <Typography variant="h4" component="div" gutterBottom>
-          Buttons
-        </Typography>
-        <Typography variant="h6" component="div" gutterBottom>
-          Text Buttons
-        </Typography>
-        <Stack spacing={2} sx={{ height: '100%' }} direction="row">
-          <Button color="primary">Primary</Button>
-          <Button color="secondary" size="large">
-            Other
-          </Button>
-          <Button color="info">Info</Button>
-          <Button color="success">Success</Button>
-          <Button color="warning">Warning</Button>
-          <Button color="error">Error</Button>
-        </Stack>
-        <Typography variant="h6" component="div" gutterBottom>
-          Contained Buttons
-        </Typography>
-        <Stack spacing={2} sx={{ height: '100%' }} direction="row">
-          <Button variant="contained" color="primary">
-            Primary
-          </Button>
-          <Button variant="contained" color="secondary">
-            Other
-          </Button>
-          <Button variant="contained" color="info">
-            Info
-          </Button>
-          <Button variant="contained" color="success">
-            Success
-          </Button>
-          <Button variant="contained" color="warning">
-            Warning
-          </Button>
-          <Button variant="contained" color="error">
-            Error
-          </Button>
-        </Stack>
-        <Typography variant="h6" component="div" gutterBottom>
-          Outlined Buttons
-        </Typography>
-        <Stack spacing={2} sx={{ height: '100%' }} direction="row">
-          <Button variant="outlined" color="primary">
-            Primary
-          </Button>
-          <Button variant="outlined" color="secondary">
-            Other
-          </Button>
-          <Button variant="outlined" color="info">
-            Info
-          </Button>
-          <Button variant="outlined" color="success">
-            Success
-          </Button>
-          <Button variant="outlined" color="warning">
-            Warning
-          </Button>
-          <Button variant="outlined" color="error">
-            Error
-          </Button>
-        </Stack>
-
-        <Typography marginTop={5} variant="h4" component="div" gutterBottom>
-          Card
-        </Typography>
-        <Stack spacing={2} sx={{ height: '100%' }} direction="row">
-          <Stack spacing={2}>
-            <Typography variant="h6" component="div" gutterBottom>
-              Simple
-            </Typography>
-            <Card variant="elevation">{card}</Card>
-          </Stack>
-          <Stack spacing={2}>
-            <Typography variant="h6" component="div" gutterBottom>
-              Outlined
-            </Typography>
-            <Card variant="outlined">{card}</Card>
-          </Stack>
-        </Stack>
-        <Typography marginTop={5} variant="h4" component="div" gutterBottom>
-          Loading
-        </Typography>
-        <Typography variant="h6" component="div" gutterBottom>
-          Bar
-        </Typography>
-        <LinearProgress />
-        <Typography marginTop={5} variant="h4" component="div" gutterBottom>
-          Custom UI Elements
-        </Typography>
-        <Typography variant="h6" component="div" gutterBottom>
-          Link
-        </Typography>
-        <Link href="/" color="textPrimary">
-          Go back to the Homepage
-        </Link>
-
-        <Typography marginTop={5} variant="h6" component="div" gutterBottom>
-          RadioButtons
-        </Typography>
-        <FormControl>
-          <FormLabel
-            sx={(theme) => ({
-              color: theme.palette.text.primary
-            })}>
-            Radio Button example{' '}
-          </FormLabel>
-          <RadioGroup row name="radio-buttons-group" defaultValue={'default'}>
-            <FormControlLabel value="default" control={<Radio />} label="default" />
-            <FormControlLabel value="unchecked" control={<Radio />} label="unchecked" />
-            <FormControlLabel
-              value="disabled"
-              control={<Radio disabled={true} sx={(theme) => ({ color: theme.palette.text.primary })} />}
-              label="disabled"
-            />
-          </RadioGroup>
-        </FormControl>
-        <Typography marginTop={5} variant="h6" component="div" gutterBottom>
-          Select
-        </Typography>
-        <FormControl>
-          <Select name="Select" labelId="select_label_theme" label="Thema" defaultValue={1}>
-            <MenuItem value={1}>Option1</MenuItem>
-            <MenuItem value={2}>Option2</MenuItem>
-            <MenuItem value={3}>Option3</MenuItem>
-          </Select>
-        </FormControl>
-      </Container>
-    </>
-  )
+const mockLearningPathElement: LearningPathElement = {
+  based_on: 'aco',
+  calculated_on: 'Mon, 27 Jan 2025 13:02:21 GMT',
+  course_id: 2,
+  id: 13,
+  path: [
+    {
+      id: 23,
+      learning_element: {
+        activity_type: 'h5pactivity',
+        classification: 'KÜ',
+        created_at: 'Mon, 27 Jan 2025 00:00:00 GMT',
+        created_by: 'Admin User',
+        id: 8,
+        last_updated: 'null',
+        lms_id: 5,
+        name: 'Kurzübersicht',
+        student_learning_element: {
+          done: false,
+          done_at: 'null',
+          id: 25,
+          learning_element_id: 8,
+          student_id: 2
+        },
+        university: 'HS-KE'
+      },
+      learning_element_id: 8,
+      learning_path_id: 13,
+      position: 1,
+      recommended: true
+    },
+    {
+      id: 24,
+      learning_element: {
+        activity_type: 'lti',
+        classification: 'ÜB',
+        created_at: 'Mon, 27 Jan 2025 00:00:00 GMT',
+        created_by: 'Admin User',
+        id: 9,
+        last_updated: 'null',
+        lms_id: 6,
+        name: 'Übung 1 - Leicht',
+        student_learning_element: {
+          done: false,
+          done_at: 'null',
+          id: 26,
+          learning_element_id: 9,
+          student_id: 2
+        },
+        university: 'HS-KE'
+      },
+      learning_element_id: 9,
+      learning_path_id: 13,
+      position: 2,
+      recommended: false
+    },
+    {
+      id: 25,
+      learning_element: {
+        activity_type: 'resource',
+        classification: 'ÜB',
+        created_at: 'Mon, 27 Jan 2025 00:00:00 GMT',
+        created_by: 'Admin User',
+        id: 10,
+        last_updated: 'null',
+        lms_id: 27,
+        name: 'Übung 2 - Leicht',
+        student_learning_element: {
+          done: false,
+          done_at: 'null',
+          id: 27,
+          learning_element_id: 10,
+          student_id: 2
+        },
+        university: 'HS-KE'
+      },
+      learning_element_id: 10,
+      learning_path_id: 13,
+      position: 2,
+      recommended: false
+    },
+    {
+      id: 26,
+      learning_element: {
+        activity_type: 'h5pactivity',
+        classification: 'ÜB',
+        created_at: 'Mon, 27 Jan 2025 00:00:00 GMT',
+        created_by: 'Admin User',
+        id: 11,
+        last_updated: 'null',
+        lms_id: 40,
+        name: 'Übung 1 - Mittel',
+        student_learning_element: {
+          done: false,
+          done_at: 'null',
+          id: 28,
+          learning_element_id: 11,
+          student_id: 2
+        },
+        university: 'HS-KE'
+      },
+      learning_element_id: 11,
+      learning_path_id: 13,
+      position: 2,
+      recommended: false
+    },
+    {
+      id: 28,
+      learning_element: {
+        activity_type: 'h5p',
+        classification: 'ZF',
+        created_at: 'Mon, 27 Jan 2025 00:00:00 GMT',
+        created_by: 'Admin User',
+        id: 13,
+        last_updated: 'null',
+        lms_id: 87,
+        name: 'Zusammenfassung',
+        student_learning_element: {
+          done: false,
+          done_at: 'null',
+          id: 29,
+          learning_element_id: 13,
+          student_id: 2
+        },
+        university: 'HS-KE'
+      },
+      learning_element_id: 13,
+      learning_path_id: 13,
+      position: 3,
+      recommended: false
+    }
+  ]
 }
 
+const exampleLearningPathStatuses: LearningPathElementStatus[] = [
+  {
+    cmid: 6,
+    state: 0,
+    timecompleted: 0
+  },
+  {
+    cmid: 27,
+    state: 1,
+    timecompleted: 1692345921
+  },
+  {
+    cmid: 40,
+    state: 1,
+    timecompleted: 1695370718
+  },
+  {
+    cmid: 45,
+    state: 1,
+    timecompleted: 1696851553
+  },
+  {
+    cmid: 87,
+    state: 0,
+    timecompleted: 0
+  },
+  {
+    cmid: 11,
+    state: 0,
+    timecompleted: 1692012171
+  },
+  {
+    cmid: 17,
+    state: 0,
+    timecompleted: 0
+  },
+  {
+    cmid: 21,
+    state: 0,
+    timecompleted: 0
+  },
+  {
+    cmid: 25,
+    state: 0,
+    timecompleted: 0
+  }
+]
+
+export const ThemePresentation = () => {
+  const { mapNodes } = useTopic()
+  const { fitView } = useReactFlow()
+  const { nodes, edges } = mapNodes(mockLearningPathElement, exampleLearningPathStatuses, true)
+
+  useEffect(() => {
+    if (nodes) {
+      setTimeout(() => {
+        fitView({
+          padding: 5,
+          minZoom: 0.6,
+          duration: 100,
+          nodes: [{ id: nodes[3].id }]
+        })
+      }, 100)
+    }
+  }, [nodes, edges])
+
+  return (
+    <Grid
+      sx={{
+        height: '40rem',
+        width: '100%'
+      }}>
+      <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes} fitView proOptions={{ hideAttribution: true }}>
+        <ResponsiveMiniMap />
+        <Background gap={16} />
+        <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
+      </ReactFlow>
+    </Grid>
+  )
+}
 export default ThemePresentation

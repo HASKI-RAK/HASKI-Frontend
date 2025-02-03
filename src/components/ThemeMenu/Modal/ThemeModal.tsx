@@ -16,8 +16,8 @@ import { useTheme } from '@common/hooks'
 import { ArrowBack, ArrowForward, Brush, Check, Close, DarkMode, LightMode } from '@common/icons'
 import { Theme, ThemeProvider } from '@common/theme'
 import { AltTheme, DarkTheme, HaskiTheme } from '@common/utils'
-import { BreadcrumbsContainer, Footer, MenuBar, OpenQuestionnaire, PrivacyModal } from '@components'
-import { AboutUs, Home, PrivacyPolicy, ThemePresentation } from '@pages'
+import { BreadcrumbsContainer, Footer, MenuBar } from '@components'
+import { Glossary, Home, PrivacyPolicy, ThemePresentation } from '@pages'
 import { useThemeProvider } from '@services'
 
 type ThemeModalProps = {
@@ -70,10 +70,10 @@ const ThemeModal = ({
   //PreviewPageChangerLogic
   const [pageIndex, setPageIndex] = useState(0)
   const pages = [
-    <AboutUs key="about" />,
     <PrivacyPolicy key="privacy" />,
     <Home key="" />,
-    <ThemePresentation key="theme" />
+    <ThemePresentation key="themepresentation" />,
+    <Glossary key="glossary" />
   ]
 
   //will iterate through the pages on use of arrow buttons
@@ -98,18 +98,20 @@ const ThemeModal = ({
           display: 'flex',
           flexDirection: 'column'
         }}>
-        <Fab
-          id="theme-modal-close-button"
-          color="primary"
-          sx={{
-            position: 'sticky',
-            top: '1%',
-            left: '93.5%'
-          }}
-          data-testid={'ThemeModal-Close-Button'}
-          onClick={() => handleClose({} as object, 'backdropClick')}>
-          <Close />
-        </Fab>
+        <Grid sx={{ flex: '1', alignItems: 'flex-start', height: '25%' }}>
+          <Fab
+            id="theme-modal-close-button"
+            color="primary"
+            sx={{
+              position: 'sticky',
+              top: '3%',
+              left: '93.5%'
+            }}
+            data-testid={'ThemeModal-Close-Button'}
+            onClick={() => handleClose({} as object, 'backdropClick')}>
+            <Close />
+          </Fab>
+        </Grid>
         <Grid sx={{ flex: '1', alignItems: 'flex-start', height: '25%' }}>
           <FormControl
             sx={{
@@ -229,6 +231,7 @@ const ThemeModal = ({
             disabled={activeTheme === selectedTheme}>
             <Check />
           </Fab>
+
           {/**preview block - Renders selected page scaled down in chosen theme within right column/lower row*/}
           <ThemeProvider theme={selectedTheme}>
             <Grid
@@ -242,18 +245,10 @@ const ThemeModal = ({
                 pointerEvents: 'none',
                 ml: 2
               }}>
-              <Grid sx={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
-                <MenuBar />
-                <BreadcrumbsContainer />
-                <Grid container sx={{ flex: 1, overflow: 'hidden' }}>
-                  <Grid item sx={{ flex: 1, overflow: 'auto' }} data-testid={'page-preview-grid'}>
-                    {pages[pageIndex]}
-                  </Grid>
-                </Grid>
-                <Footer />
-              </Grid>
-              <PrivacyModal />
-              <OpenQuestionnaire />
+              <MenuBar />
+              <BreadcrumbsContainer />
+              {pages[pageIndex]}
+              <Footer />
             </Grid>
           </ThemeProvider>
         </Grid>

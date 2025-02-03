@@ -54,7 +54,7 @@ export const App = () => {
                         <Route index element={<Home />} />
                         <Route path="/course/:courseId" element={<Course />} />
                         <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
-                        <Route path="/theme" element={<ThemePresentation />} />
+                        <Route path="/themepresentation" element={<ThemePresentation />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
