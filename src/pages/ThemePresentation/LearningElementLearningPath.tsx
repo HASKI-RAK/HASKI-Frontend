@@ -187,7 +187,7 @@ const exampleLearningPathStatuses: LearningPathElementStatus[] = [
   }
 ]
 
-export const LearningElementLearningPath = () => {
+const LearningElementLearningPath = () => {
   const { mapNodes } = useTopic()
   const { fitView } = useReactFlow()
   const { nodes, edges } = mapNodes(mockLearningPathElement, exampleLearningPathStatuses, true)
