@@ -1,14 +1,17 @@
 import '@testing-library/jest-dom'
-import { render, waitFor } from '@testing-library/react'
+import { act, render, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 import { ReactFlowProvider } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import { AuthContext } from '@services'
 import LearningElementLearningPath from './LearningElementLearningPath'
 
+jest.useFakeTimers()
+
 describe('LearningElementLearningPath tests', () => {
   beforeEach(() => {
     mockReactFlow()
+    jest.clearAllTimers()
   })
   it('should render LearningElementLearningPath', async () => {
     const leLearningPath = render(
@@ -35,6 +38,13 @@ describe('LearningElementLearningPath tests', () => {
     )
     await waitFor(() => {
       expect(getByText('Kurzübersicht')).toBeInTheDocument()
+    })
+    act(() => {
+      // Replace runAllTimers with a more controlled approach
+      jest.advanceTimersByTime(200) // Adjust timing as needed
+    })
+    await waitFor(() => {
+      expect(getByText('Zusammenfassung')).toBeInTheDocument()
     })
   })
 })
