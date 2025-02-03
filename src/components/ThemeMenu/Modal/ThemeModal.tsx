@@ -17,7 +17,7 @@ import { ArrowBack, ArrowForward, Brush, Check, Close, DarkMode, LightMode } fro
 import { Theme, ThemeProvider } from '@common/theme'
 import { AltTheme, DarkTheme, HaskiTheme } from '@common/utils'
 import { BreadcrumbsContainer, Footer, MenuBar } from '@components'
-import { Glossary, Home, PrivacyPolicy, ThemePresentation } from '@pages'
+import { Glossary, Home, LearningElementLearningPath, PrivacyPolicy, TopicsLearningPath } from '@pages'
 import { useThemeProvider } from '@services'
 
 type ThemeModalProps = {
@@ -72,7 +72,8 @@ const ThemeModal = ({
   const pages = [
     <PrivacyPolicy key="privacy" />,
     <Home key="" />,
-    <ThemePresentation key="themepresentation" />,
+    <LearningElementLearningPath key="lelearningpath" />,
+    <TopicsLearningPath key="topicslearningpath" />,
     <Glossary key="glossary" />
   ]
 

@@ -9,13 +9,14 @@ import {
   Home,
   Imprint,
   LearnerCharacteristics,
+  LearningElementLearningPath,
   Login,
   MainFrame,
   PageNotFound,
   PrivacyPolicy,
   ProjectDescription,
-  ThemePresentation,
-  Topic
+  Topic,
+  TopicsLearningPath
 } from '@pages'
 import { AuthProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
 import { getConfig } from '@shared'
@@ -54,7 +55,8 @@ export const App = () => {
                         <Route index element={<Home />} />
                         <Route path="/course/:courseId" element={<Course />} />
                         <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
-                        <Route path="/themepresentation" element={<ThemePresentation />} />
+                        <Route path="/lelearningpath" element={<LearningElementLearningPath />} />
+                        <Route path="/topicslearningpath" element={<TopicsLearningPath />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
