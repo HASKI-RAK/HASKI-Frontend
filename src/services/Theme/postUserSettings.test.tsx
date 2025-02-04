@@ -16,7 +16,7 @@ const output = JSON.stringify({
 })
 
 describe('postUserSettings has expected behaviour', () => {
-  it('should return inputData if succesfull', async () => {
+  it('should return inputData if succesfull, without pwsd', async () => {
     const inputData = ['topic created']
 
     const mockResponse = {
@@ -32,6 +32,34 @@ describe('postUserSettings has expected behaviour', () => {
 
     expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/2/2/settings`, {
       body: output,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT'
+    })
+    expect(result).toEqual(inputData)
+  })
+
+  it('should return inputData if succesfull, with pwsd', async () => {
+    const inputData = ['topic created']
+
+    const mockResponse = {
+      ok: true,
+      json: jest.fn().mockResolvedValue(inputData)
+    }
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    fetch.mockResolvedValue(mockResponse)
+
+    const result = await postUserSettings('DarkTheme', 2, 2, 'password')
+
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/2/2/settings`, {
+      body: JSON.stringify({
+        theme: 'DarkTheme',
+        pswd: 'password'
+      }),
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'

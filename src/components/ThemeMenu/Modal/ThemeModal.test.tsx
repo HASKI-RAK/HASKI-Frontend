@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { HaskiTheme } from '@common/utils'
 import { AuthContext, ThemeProvider } from '@services'
@@ -12,16 +12,15 @@ jest.mock('react-i18next', () => ({
   })
 }))
 
-/*
-jest.mock('@mui/material', () => ({
-  //...jest.requireActual('@mui/material'),
-  useTheme: () => ({DarkTheme})
-}));
-*/
-
-// mockUseTheme = jest.fn(() => DarkTheme)
-
-//jest.spyOn(require('@mui/material/styles'),'useTheme').mockReturnValue(DarkTheme)
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ status: 200 }),
+    ok: true,
+    headers: {
+      get: () => 'application/json'
+    }
+  })
+) as jest.Mock
 
 describe('ThemeModal tests', () => {
   test('should render ThemeModal, closed', () => {
@@ -30,7 +29,6 @@ describe('ThemeModal tests', () => {
         <MemoryRouter>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <ThemeModal
-              open={false}
               handleClose={jest.fn()}
               selectedTheme={HaskiTheme}
               selectedThemeString={'HaskiTheme'}

@@ -62,7 +62,7 @@ const ThemeModal = ({
 
   //handles the selection of a radio button
   const handleThemeModalPreviewChange = (themeString: string) => {
-    const theme = themeMap[themeString] ?? HaskiTheme
+    const theme = themeMap[themeString]
     setSelectedThemeString(themeString)
     setSelectedTheme(theme)
   }
