@@ -1,7 +1,8 @@
 import { StateCreator } from 'zustand'
 import { LearningElementSolution, LearningElementSolutionReturn } from '@core'
-import { StoreState } from '@store'
+import {StoreState } from '@store'
 import { fetchLearningElementSolution } from '@services'
+import { resetters } from '../Zustand/Store'
 
 type LearningElementSolutionSlice = {
     _learningElementSolution: Record<string, LearningElementSolution>
@@ -15,6 +16,7 @@ type LearningElementSolutionSlice = {
 export default LearningElementSolutionSlice
 
 export const createLearningElementSolutionSlice: StateCreator<StoreState, [], [], LearningElementSolutionSlice> = (set, get) => {
+    resetters.push(() => set({ _learningElementSolution: {} }))
     return {
         _learningElementSolution: {},
         getLearningElementSolution: async (learningElementId : number) => {

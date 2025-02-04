@@ -13,7 +13,6 @@ import { LearningPathLearningElementNode } from '@components'
 import { useTheme } from '@common/hooks'
 import { getConfig } from '@shared'
 import { useStore } from '@store'
-import { get } from 'http'
 
 /**
  * @prop children - The icon of the node.
@@ -54,7 +53,6 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
     event.stopPropagation()
   }
   const handleShowSolution = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-    console.log('solutionLmsId', solutionLmsId)
     props.data.handleOpen()
     props.data.handleSetUrl(getConfig().MOODLE + `/mod/${props.data.activityType}/view.php?id=${solutionLmsId}`)
     props.data.handleSetLmsId(solutionLmsId)
@@ -64,16 +62,10 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
 
   useEffect(() => {
-    console.log('id, ', id)
     getLearningElementSolution(props.data.learningElementId).then((solution) => {
-      console.log('solution', solution)
       setSolutionLmsId(solution.solution_lms_id)
     })
   },[getLearningElementSolution, setSolutionLmsId, id, props])
-
-  useEffect(() => {
-    console.log('solutionLmsId', solutionLmsId)
-  }, [solutionLmsId])
 
   return (
     <NodeWrapper
@@ -90,7 +82,9 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
       >
       <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '200ms'}}>
         <Grid container direction="row" justifyContent="flex-end" alignItems="center" sx={{position: 'absolute', top: '-3rem', left: '0.2rem'}}>
-          <IconButton onClick={addToFavorites} sx={{
+          <IconButton onClick={addToFavorites}
+           data-testid={'favoriteButton'}
+           sx={{
             marginLeft: '1rem',
             color: theme.palette.secondary.contrastText,
             backgroundColor: theme.palette.primary.main
@@ -102,6 +96,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
           (solutionLmsId > 1) &&
           <Tooltip title={t('tooltip.solution')}>
             <IconButton onClick={handleShowSolution}
+            data-testid={'showSolutionButton'}
             sx={{backgroundColor:theme.palette.primary.main,
             marginLeft: '0.5rem',
             border: '1px solid grey',

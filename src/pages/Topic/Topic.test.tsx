@@ -215,6 +215,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -244,6 +245,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 2,
             lmsId: 2,
             name: '',
             isDone: true
@@ -424,6 +426,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             handleSetLmsId: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -451,6 +454,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false,
@@ -482,6 +486,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -508,6 +513,7 @@ describe('Topic Page', () => {
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
@@ -785,6 +791,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false,
@@ -815,6 +822,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -844,6 +852,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -873,6 +882,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -902,6 +912,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -931,6 +942,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -960,6 +972,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -1307,6 +1320,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false,
@@ -1337,6 +1351,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -1384,6 +1399,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -1413,6 +1429,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -1442,6 +1459,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -1471,6 +1489,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -1500,6 +1519,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false
@@ -1530,6 +1550,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isDone: false,
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: ''
           },
