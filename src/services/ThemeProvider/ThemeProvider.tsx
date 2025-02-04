@@ -10,7 +10,7 @@ type ThemeProviderComponentProps = {
 
 export const DefaultThemeProvider = ({
   children,
-  useThemeProvider: useThemeProvider = _useThemeProvider
+  useThemeProvider = _useThemeProvider
 }: ThemeProviderComponentProps) => {
   const { theme, loadTheme, updateTheme } = useThemeProvider()
 
