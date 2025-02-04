@@ -16,8 +16,8 @@ const output = JSON.stringify({
 })
 
 describe('postUserSettings has expected behaviour', () => {
-  it('should return inputData if succesfull, without pwsd', async () => {
-    const inputData = ['topic created']
+  it('should return inputData if successful, without pwsd', async () => {
+    const inputData = ['user updated']
 
     const mockResponse = {
       ok: true,
@@ -41,8 +41,8 @@ describe('postUserSettings has expected behaviour', () => {
     expect(result).toEqual(inputData)
   })
 
-  it('should return inputData if succesfull, with pwsd', async () => {
-    const inputData = ['topic created']
+  it('should return inputData if successful, with pwsd', async () => {
+    const inputData = ['user updated']
 
     const mockResponse = {
       ok: true,
