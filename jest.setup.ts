@@ -557,6 +557,14 @@ const mockDataServices: MockDataServices = {
       status: 201,
       statusText: 'CREATED'
     })
+  ),
+  postUserSetting: jest.fn(() =>
+    Promise.resolve({
+      id: 2,
+      pswd: null,
+      theme: 'HaskiTheme',
+      user_id: '2'
+    })
   )
 }
 /**

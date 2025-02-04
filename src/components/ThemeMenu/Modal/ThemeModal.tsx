@@ -122,7 +122,6 @@ const ThemeModal = ({
               height: '100%'
             }}>
             <FormLabel
-              id="theme-modal-radio-buttons-label"
               sx={(theme) => ({
                 fontWeight: 'bold',
                 fontSize: '1.5rem',
@@ -142,11 +141,9 @@ const ThemeModal = ({
               onChange={(event, value) => {
                 handleThemeModalPreviewChange(value)
               }}
-              aria-labelledby="theme-modal-radio-buttons"
-              name="radio-buttons-group">
+              aria-labelledby="theme-modal-radio-buttons">
               <FormControlLabel
                 id="theme-modal-radio-button-haski-theme"
-                data-testid={'ThemeModal-radio-button-haski'}
                 value={'HaskiTheme'}
                 control={<Radio />}
                 label={
@@ -158,7 +155,6 @@ const ThemeModal = ({
               />
               <FormControlLabel
                 id="theme-modal-radio-button-dark-theme"
-                data-testid={'ThemeModal-radio-button-dark'}
                 value={'DarkTheme'}
                 control={<Radio />}
                 label={
@@ -170,7 +166,6 @@ const ThemeModal = ({
               />
               <FormControlLabel
                 id="theme-modal-radio-button-alt-theme"
-                data-testid={'ThemeModal-radio-button-alt'}
                 value={'AltTheme'}
                 control={<Radio />}
                 label={
