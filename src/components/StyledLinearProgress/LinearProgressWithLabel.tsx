@@ -71,7 +71,7 @@ const LinearProgressWithLabel = (props: LinearProgressWithLabelProps) => {
       <LinearProgress
         variant="determinate"
         {...props}
-        sx={{ ml: { xs: '16rem', sm: '0rem', md: '-7rem', lg: '-7rem', xl: '-11rem', xxl: '-26rem', xxxl: '-51rem' } }}
+        sx={{ ml: { xs: '16rem', sm: '0rem', md: '-8rem', lg: '-9rem', xl: '-12rem', xxl: '-28rem', xxxl: '-52rem' } }}
       />
     </div>
   )

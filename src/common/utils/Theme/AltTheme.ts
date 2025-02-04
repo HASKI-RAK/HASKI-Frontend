@@ -22,7 +22,7 @@ export const defaultColors = {
     //orange
     [100]: '#f8bbd0', //light pink
     [300]: '#e91e63', //strong pink
-    [900]: '#880e4f' //dark pink
+    [900]: '#ca1674' //dark pink
   },
   secondary: {
     //blue
