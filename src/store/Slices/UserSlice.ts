@@ -7,7 +7,7 @@ import { resetters } from '../Zustand/Store'
 export default interface UserSlice {
   _user: User | undefined
   getUser: (user?: User) => Promise<User>
-  updateUserTheme: (theme: string) => void
+  updateUserTheme: (theme: string) => Promise<void>
 }
 
 export const createUserSlice: StateCreator<PersistedStoreState, [], [], UserSlice> = (set, get) => {
