@@ -11,7 +11,7 @@ export const useThemeProvider = () => {
   const { addSnackbar } = useContext(SnackbarContext)
   const [theme, setTheme] = useState<Theme>(HaskiTheme)
   const getUser = usePersistedStore((state) => state.getUser)
-  const updateUser = usePersistedStore((state) => state.updateUser)
+  const updateUserTheme = usePersistedStore((state) => state.updateUserTheme)
   const userCache = usePersistedStore((state) => state._user)
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export const useThemeProvider = () => {
     getUser()
       .then((user) => {
         postUserSettings(themeName, user.settings.user_id, user.lms_user_id)
-        updateUser(user.settings.user_id, user.lms_user_id, themeName)
+        updateUserTheme(themeName)
       })
       .catch((error) => {
         addSnackbar({

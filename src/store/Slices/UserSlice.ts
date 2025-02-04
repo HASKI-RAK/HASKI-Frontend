@@ -1,13 +1,13 @@
 import { StateCreator } from 'zustand'
 import { User } from '@core'
-import { fetchLearningPathElementStatus, fetchUser } from '@services'
+import { fetchUser } from '@services'
 import { PersistedStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
 export default interface UserSlice {
   _user: User | undefined
   getUser: (user?: User) => Promise<User>
-  updateUser: (user_id: number, lms_user_id: number, theme: string) => void
+  updateUserTheme: (theme: string) => void
 }
 
 export const createUserSlice: StateCreator<PersistedStoreState, [], [], UserSlice> = (set, get) => {
@@ -29,24 +29,19 @@ export const createUserSlice: StateCreator<PersistedStoreState, [], [], UserSlic
       } else return cached
     },
 
-    // Rework or specialization needed.
-    // Rework if: More potential use cases than just theme updating (most user types not accepted)
-    // Specialization if: only theme will ever be written to storage (updated data accepts too many values/types)
-    updateUser: async (user_id: number, lms_user_id: number, theme: string) => {
+    updateUserTheme: async (theme: string) => {
       const user = get()._user
 
       if (user) {
-        const updatedTheme = theme
-
-        const updatedData: User = {
-          ...user,
-          settings: {
-            ...user.settings,
-            theme: updatedTheme
+        set({
+          _user: {
+            ...user,
+            settings: {
+              ...user.settings,
+              theme
+            }
           }
-        }
-
-        set({ _user: updatedData })
+        })
       }
     }
   }

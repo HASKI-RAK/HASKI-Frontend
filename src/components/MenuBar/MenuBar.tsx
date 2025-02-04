@@ -190,24 +190,22 @@ const MenuBar = () => {
             <LanguageMenu />
           </Box>
           {/** Theme button */}
-          {
-            <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-              <Tooltip
-                title={<Typography variant={'body2'}>{t('components.ThemeModal.buttonDescription')}</Typography>}>
-                <IconButton id="theme-icon-button" onClick={() => handleOpenThemeModal()}>
-                  <Brush data-testid="BrushIcon" />
-                </IconButton>
-              </Tooltip>
-              <ThemeModal
-                open={modalOpenTheme}
-                handleClose={() => handleCloseThemeModal()}
-                selectedTheme={selectedTheme}
-                setSelectedTheme={setSelectedTheme}
-                selectedThemeString={selectedThemeString}
-                setSelectedThemeString={setSelectedThemeString}
-              />
-            </Box>
-          }
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
+            <Tooltip title={<Typography variant={'body2'}>{t('components.ThemeModal.buttonDescription')}</Typography>}>
+              <IconButton id="theme-icon-button" onClick={() => handleOpenThemeModal()}>
+                <Brush data-testid="BrushIcon" />
+              </IconButton>
+            </Tooltip>
+            <ThemeModal
+              open={modalOpenTheme}
+              handleClose={() => handleCloseThemeModal()}
+              selectedTheme={selectedTheme}
+              setSelectedTheme={setSelectedTheme}
+              selectedThemeString={selectedThemeString}
+              setSelectedThemeString={setSelectedThemeString}
+            />
+          </Box>
+
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={<Typography variant={'body2'}>{t('appGlobal.help')}</Typography>}>

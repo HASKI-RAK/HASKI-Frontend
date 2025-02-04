@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import * as router from 'react-router'
 import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
@@ -297,6 +297,40 @@ describe('MenuBar', () => {
     // click on HelpIcon:
     fireEvent.click(result.getByTestId('HelpIcon'))
     expect(result.getByTestId('HelpIcon')).toBeInTheDocument()
+  })
+
+  test('click on ThemeIcon should open ThemeModal', async () => {
+    const result = render(
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(result.getByTestId('BrushIcon'))
+    await waitFor(() => {
+      expect(result.getByTestId('ThemeModal')).toBeInTheDocument()
+    })
+  })
+
+  test('click on ThemeIcon should open ThemeModal, then close it', async () => {
+    const result = render(
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(result.getByTestId('BrushIcon'))
+    await waitFor(() => {
+      expect(result.getByTestId('ThemeModal')).toBeInTheDocument()
+      fireEvent.click(result.getByTestId('ThemeModal-Close-Button'))
+    })
+    await waitFor(() => {
+      expect(result.queryByTestId('ThemeModal')).toBeNull()
+    })
   })
 
   /** 
