@@ -371,7 +371,7 @@ const mockDataServices: MockDataServices = {
       ]
     })
   ),
-  fetchLearningElementSolution: jest.fn(()=>
+  fetchLearningElementSolution: jest.fn(() =>
     Promise.resolve({
       id: 1,
       learning_element_id: 1,

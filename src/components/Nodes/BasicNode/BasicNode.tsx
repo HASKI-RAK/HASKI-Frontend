@@ -1,16 +1,10 @@
-import { memo, ReactNode, useState, useEffect } from 'react'
+import { ReactNode, memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { NodeWrapper,
-         Paper,
-         Tooltip,
-         Typography,
-         IconButton,
-         Grid,
-         Collapse } from '@common/components'
-import { CheckBox, Feedback, FavoriteBorderIcon, FavoriteIcon, Task } from '@common/icons'
-import { LearningPathLearningElementNode } from '@components'
+import { Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
+import { CheckBox, FavoriteBorderIcon, FavoriteIcon, Feedback, Task } from '@common/icons'
+import { LearningPathLearningElementNode } from '@components'
 import { getConfig } from '@shared'
 import { useStore } from '@store'
 
@@ -65,7 +59,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
     getLearningElementSolution(props.data.learningElementId).then((solution) => {
       setSolutionLmsId(solution.solution_lms_id)
     })
-  },[getLearningElementSolution, setSolutionLmsId, id, props])
+  }, [getLearningElementSolution, setSolutionLmsId, id, props])
 
   return (
     <NodeWrapper
@@ -78,33 +72,35 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
       }}
       data-testid={'basicNode'}
       onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      >
-      <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '200ms'}}>
-        <Grid container direction="row" justifyContent="flex-end" alignItems="center" sx={{position: 'absolute', top: '-3rem', left: '0.2rem'}}>
-          <IconButton onClick={addToFavorites}
-           data-testid={'favoriteButton'}
-           sx={{
-            marginLeft: '1rem',
-            color: theme.palette.secondary.contrastText,
-            backgroundColor: theme.palette.primary.main
-            , border: '1px solid grey'
+      onMouseLeave={onMouseLeave}>
+      <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '200ms' }}>
+        <Grid
+          container
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="center"
+          sx={{ position: 'absolute', top: '-3rem', left: '0.2rem' }}>
+          <IconButton
+            onClick={addToFavorites}
+            data-testid={'favoriteButton'}
+            sx={{
+              marginLeft: '1rem',
+              color: theme.palette.secondary.contrastText,
+              backgroundColor: theme.palette.primary.main,
+              border: '1px solid grey'
             }}>
-            {isFavorite ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
+            {isFavorite ? <FavoriteIcon titleAccess="isFavorite" /> : <FavoriteBorderIcon titleAccess="notFavorite" />}
           </IconButton>
-          {
-          (solutionLmsId > 1) &&
-          <Tooltip title={t('tooltip.solution')}>
-            <IconButton onClick={handleShowSolution}
-            data-testid={'showSolutionButton'}
-            sx={{backgroundColor:theme.palette.primary.main,
-            marginLeft: '0.5rem',
-            border: '1px solid grey',
-            }}>
-              <Task/>
-            </IconButton>
-          </Tooltip>
-          }
+          {solutionLmsId > 1 && (
+            <Tooltip title={t('tooltip.solution')}>
+              <IconButton
+                onClick={handleShowSolution}
+                data-testid={'showSolutionButton'}
+                sx={{ backgroundColor: theme.palette.primary.main, marginLeft: '0.5rem', border: '1px solid grey' }}>
+                <Task />
+              </IconButton>
+            </Tooltip>
+          )}
           {props.children}
         </Grid>
       </Collapse>

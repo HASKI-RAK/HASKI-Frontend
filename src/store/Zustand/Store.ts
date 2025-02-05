@@ -4,7 +4,9 @@ import { devtools, persist } from 'zustand/middleware'
 import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import CoursesSlice, { createCoursesSlice } from '../Slices/CoursesSlice'
-import LearningElementSolutionSlice, { createLearningElementSolutionSlice} from '../Slices/LearningElementSolutionSlice'
+import LearningElementSolutionSlice, {
+  createLearningElementSolutionSlice
+} from '../Slices/LearningElementSolutionSlice'
 import LearningPathElementSlice, { createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
@@ -13,8 +15,8 @@ import LearningPathElementStatusSlice, {
   createLearningPathElementStatusSlice
 } from '../Slices/LearningPathElementStatusSlice'
 import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
-import UserSlice, { createUserSlice } from '../Slices/UserSlice'
 import NewsSlice, { createNewsSlice } from '../Slices/NewsSlice'
+import UserSlice, { createUserSlice } from '../Slices/UserSlice'
 import xAPISlice, { createXAPISlice } from '../Slices/xAPISlice'
 
 export type StoreState = LearningPathElementSlice &

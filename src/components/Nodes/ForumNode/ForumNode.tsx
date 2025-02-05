@@ -17,10 +17,7 @@ import BasicNode from '../BasicNode/BasicNode'
  * @category Components
  */
 const ForumNode = (data: NodeProps<LearningPathLearningElementNode>) => {
-  return (
-    <BasicNode {...data} id="forum-node" icon={<Forum sx={{ fontSize: 50 }} />}>
-    </BasicNode>
-  )
+  return <BasicNode {...data} id="forum-node" icon={<Forum sx={{ fontSize: 50 }} />}></BasicNode>
 }
 
 export default memo(ForumNode)

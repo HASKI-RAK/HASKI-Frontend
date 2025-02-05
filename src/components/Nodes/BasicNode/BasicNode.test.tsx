@@ -1,11 +1,9 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import ReactFlow, { Node } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
-//@ts-ignore
-import userEvent from '@testing-library/user-event' 
 
 describe('BasicNode tests', () => {
   beforeEach(() => {
@@ -96,7 +94,7 @@ describe('BasicNode tests', () => {
     expect(mockNode.data.handleSetUrl).toBeCalled()
   })
 
-  it('shows buttons when hovered', () => {
+  it('shows buttons when hovered and disappears when not', async () => {
     const mockData: LearningPathLearningElementNode = {
       learningElementId: 1,
       lmsId: 1,
@@ -130,9 +128,103 @@ describe('BasicNode tests', () => {
 
     const basicNode = getByTestId('basicNode')
 
-    userEvent.hover(basicNode)
+    act(() => {
+      fireEvent.mouseEnter(basicNode)
+    })
 
-    expect(getByTestId('favoriteButton')).toBeInTheDocument()
-    expect(getByTestId('showSolutionButton')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(getByTestId('showSolutionButton')).toBeInTheDocument()
+    })
+
+    act(() => {
+      fireEvent.mouseLeave(basicNode)
+    })
+    await waitFor(() => {
+      expect(getByTestId('showSolutionButton')).not.toBeVisible()
+    })
+  })
+
+  it('shows the solution when the button is clicked', async () => {
+    const mockData: LearningPathLearningElementNode = {
+      learningElementId: 1,
+      lmsId: 1,
+      name: 'testNode',
+      activityType: 'testType',
+      classification: 'DEFAULT',
+      isRecommended: true,
+      handleSetUrl: jest.fn(),
+      handleSetTitle: jest.fn(),
+      handleOpen: jest.fn(),
+      handleClose: jest.fn(),
+      handleSetLmsId: jest.fn(),
+      isDone: true
+    }
+
+    const mockNode: Node = {
+      id: 'basic-node',
+      type: mockData.classification,
+      data: mockData,
+      position: {
+        x: 0,
+        y: 0
+      }
+    }
+
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
+      </MemoryRouter>
+    )
+
+    const basicNode = getByTestId('basicNode')
+    fireEvent.mouseEnter(basicNode)
+
+    await waitFor(() => {
+      fireEvent.click(getByTestId('showSolutionButton'))
+      expect(mockNode.data.handleOpen).toBeCalled()
+      expect(mockNode.data.handleSetUrl).toBeCalled()
+    })
+  })
+
+  it('shows the filled favorite button when it is clicked', async () => {
+    const mockData: LearningPathLearningElementNode = {
+      learningElementId: 1,
+      lmsId: 1,
+      name: 'testNode',
+      activityType: 'testType',
+      classification: 'DEFAULT',
+      isRecommended: true,
+      handleSetUrl: jest.fn(),
+      handleSetTitle: jest.fn(),
+      handleOpen: jest.fn(),
+      handleClose: jest.fn(),
+      handleSetLmsId: jest.fn(),
+      isDone: true
+    }
+
+    const mockNode: Node = {
+      id: 'basic-node',
+      type: mockData.classification,
+      data: mockData,
+      position: {
+        x: 0,
+        y: 0
+      }
+    }
+
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
+      </MemoryRouter>
+    )
+
+    const basicNode = getByTestId('basicNode')
+    fireEvent.mouseEnter(basicNode)
+
+    await waitFor(() => {
+      expect(screen.getByTitle('notFavorite')).toBeInTheDocument()
+      fireEvent.click(getByTestId('favoriteButton'))
+      expect(screen.getByTitle('isFavorite')).toBeInTheDocument()
+    })
   })
 })

@@ -1,11 +1,11 @@
+import { Task } from '@mui/icons-material'
 import { memo } from 'react'
 import { NodeProps } from 'reactflow'
-import { AssignmentLate } from '@common/icons'
 import { IconButton, Typography } from '@common/components'
-import { LearningPathLearningElementNode } from '@components'
 import { useTheme } from '@common/hooks'
+import { AssignmentLate } from '@common/icons'
+import { LearningPathLearningElementNode } from '@components'
 import BasicNode from '../BasicNode/BasicNode'
-import { Task } from '@mui/icons-material'
 
 /**
  * ExerciseNode component.
@@ -20,10 +20,7 @@ import { Task } from '@mui/icons-material'
  * @category Components
  */
 const ExerciseNode = (data: NodeProps<LearningPathLearningElementNode>) => {
-  return (
-    <BasicNode {...data} id="exercise-node" icon={<AssignmentLate sx={{fontSize: 50}}/>}>
-    </BasicNode>
-  )
+  return <BasicNode {...data} id="exercise-node" icon={<AssignmentLate sx={{ fontSize: 50 }} />}></BasicNode>
 }
 
 export default memo(ExerciseNode)
