@@ -41,6 +41,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
 
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const handleCloseLearningElementModal = () => {
+    setModalOpen(false)
+  }
   const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
 
   // Translation
@@ -179,7 +184,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           fitViewOptions={{
             padding: 5,
             minZoom: 0.75,
-            nodes: [{ id: initialNodes[0].id }]
+            nodes: [{ id: initialNodes[0]?.id }]
           }}>
           <ResponsiveMiniMap />
           <Background gap={16} />
@@ -191,7 +196,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               setIsGrouped={setIsGrouped}
             />
           </Panel>
-          <Controls showInteractive={false} position="top-right" style={{ marginTop: 50 }} />
+          <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
         </ReactFlow>
         <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
       </Grid>

@@ -49,8 +49,24 @@ export { default as LinearProgressWithLabel } from './StyledLinearProgress/Linea
 export { StyledLinearProgress } from './StyledLinearProgress/StyledLinearProgress'
 export { default as LabeledSwitch } from './LabeledSwitch/LabeledSwitch'
 export { default as ResponsiveMiniMap } from './ResponsiveMiniMap/ResponsiveMiniMap'
+export { default as AlgorithmSettingsModal } from './AlgorithmSettingsModal/AlgorithmSettingsModal'
 export { default as Newsbanner } from './Newsbanner/Newsbanner'
 export { default as TopicCard } from './TopicCard/TopicCard'
+export { default as CreateCourseDetailsTable } from './CreateCourse/Table/CreateCourseDetailsTable'
+export { default as CreateCourseTable } from './CreateCourse/Table/CreateCourseTable'
+export { default as CreateCourseModal } from './CreateCourse/Modal/CreateCourseModal'
+export { default as CreateRemoteTopicsTable } from './CreateTopic/Table/CreateRemoteTopicsTable'
+export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopicsTable'
+export { default as CreateLearningElementTable } from './CreateTopic/Table/CreateLearningElementTable'
+export {
+  default as CreateLearningElementClassificationTable,
+  type LearningElementWithClassification
+} from './CreateTopic/Table/CreateLearningElementClassificationTable'
+export {
+  default as CreateAlgorithmTable,
+  type CreateAlgorithmTableNameProps
+} from './CreateTopic/Table/CreateAlgorithmTable'
+export { default as CreateTopicModal } from './CreateTopic/Modal/CreateTopicModal'
 
 export * from './GlobalNav'
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure
