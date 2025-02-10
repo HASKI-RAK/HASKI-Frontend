@@ -1,3 +1,4 @@
+import { Actor, Context, ContextActivity, Statement, StatementObject, Verb } from '@xapi/xapi'
 import { getConfig } from '@shared'
 
 /**
@@ -12,7 +13,7 @@ import { getConfig } from '@shared'
  *
  * @category Services
  */
-const getActor = (lmsUserID: string) => {
+const getActor = (lmsUserID: string): Actor => {
   return {
     account: {
       homePage: new URL(window.location.href).origin,
@@ -33,7 +34,7 @@ const getActor = (lmsUserID: string) => {
  *
  * @category Services
  */
-const getVerb = (verb: string) => {
+const getVerb = (verb: string): Verb => {
   return {
     id: (getConfig().WIKI ?? '').concat('/variables/services.').concat(verb),
     display: {
@@ -55,7 +56,7 @@ const getVerb = (verb: string) => {
  *
  * @category Services
  */
-const getObject = (componentURL: string, component: string) => {
+const getObject = (componentURL: string, component: string): StatementObject => {
   return {
     id: new URL(window.location.href).origin.concat(componentURL),
     definition: {
@@ -80,7 +81,7 @@ const getObject = (componentURL: string, component: string) => {
  *
  * @category Services
  */
-const getParent = (path: string, getEnglishName: (key: string) => string) => {
+const getParent = (path: string, getEnglishName: (key: string) => string): ContextActivity[] => {
   return [
     {
       id: new URL(window.location.href).origin.concat(path),
@@ -106,7 +107,7 @@ const getParent = (path: string, getEnglishName: (key: string) => string) => {
  *
  * @category Services
  */
-const getGrouping = () => {
+const getGrouping = (): ContextActivity[] => {
   return [
     {
       id: new URL(window.location.href).origin,
@@ -162,7 +163,7 @@ export const getContextActivities = (path: string, getEnglishName: (key: string)
  *
  * @category Services
  */
-const getContext = (path: string, getEnglishName: (key: string) => string, filePath: string) => {
+const getContext = (path: string, getEnglishName: (key: string) => string, filePath: string): Context => {
   if (getContextActivities(path, getEnglishName))
     return {
       platform: 'Frontend',
@@ -219,7 +220,7 @@ export const getStatement = (
   componentName: string,
   getEnglishName: (key: string) => string,
   filePath: string
-) => {
+): Statement => {
   return {
     actor: getActor(lmsUserID),
     verb: getVerb(verb),
