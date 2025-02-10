@@ -68,7 +68,7 @@ const ThemeModal = ({
   }
 
   //PreviewPageChangerLogic
-  const [pageIndex, setPageIndex] = useState(0)
+  const [activeStep, setActiveStep] = useState(0)
   const pages = [
     <PrivacyPolicy key="privacy" />,
     <Home key="" />,
@@ -79,7 +79,7 @@ const ThemeModal = ({
 
   //will iterate through the pages on use of arrow buttons
   const changePage = (direction: number) => {
-    setPageIndex((prevIndex) => (prevIndex + direction + pages.length) % pages.length)
+    setActiveStep((prevIndex) => (prevIndex + direction + pages.length) % pages.length)
   }
 
   return (
@@ -243,7 +243,7 @@ const ThemeModal = ({
               }}>
               <MenuBar />
               <BreadcrumbsContainer />
-              {pages[pageIndex]}
+              {pages[activeStep]}
               <Footer />
             </Grid>
           </ThemeProvider>
