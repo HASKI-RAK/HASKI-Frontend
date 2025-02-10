@@ -1,10 +1,9 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
-import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
-import { AuthContext } from '@services'
+import { AuthContext, ThemeProvider } from '@services'
 import MenuBar from './MenuBar'
 
 jest.requireActual('i18next')
@@ -18,11 +17,13 @@ describe('MenuBar', () => {
 
   test('ils-short can be closed after sending answers', async () => {
     const { getByTestId, getByText } = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <MenuBar />
-        </MemoryRouter>
-      </AuthContext.Provider>
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
@@ -85,11 +86,13 @@ describe('MenuBar', () => {
   // Adding a bigger timeout solved the problem
   test('ils-long can be closed after sending answers', async () => {
     const { getByTestId, getByText } = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <MenuBar />
-        </MemoryRouter>
-      </AuthContext.Provider>
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
@@ -149,11 +152,13 @@ describe('MenuBar', () => {
 
   test('listk can be closed after sending answers', async () => {
     const { getByTestId, getByText } = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <MenuBar />
-        </MemoryRouter>
-      </AuthContext.Provider>
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
@@ -245,9 +250,11 @@ describe('MenuBar', () => {
 
   it('should return to home when clicked on logo or text', () => {
     const { getAllByRole, getAllByText } = render(
-      <MemoryRouter>
-        <MenuBar />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
     )
 
     // Click on the logo:
@@ -263,29 +270,67 @@ describe('MenuBar', () => {
     expect(navigate).toHaveBeenCalledWith('/')
   })
 
-  test('fetching user when opening Questionnaire Results', async () => {
+  /*test('fetching user when opening Questionnaire Results', async () => {
     const { getByTestId } = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <MenuBar />
-        </MemoryRouter>
-      </AuthContext.Provider>
+      <ThemeContextProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeContextProvider>
     )
 
     await waitFor(() => {
       fireEvent.click(getByTestId('QuestionnaireResultsIcon'))
     })
-  })
+  })*/
 
   test('click on HelpIcon should open popover', () => {
     const result = render(
-      <MemoryRouter>
-        <MenuBar />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
     )
     // click on HelpIcon:
     fireEvent.click(result.getByTestId('HelpIcon'))
     expect(result.getByTestId('HelpIcon')).toBeInTheDocument()
+  })
+
+  test('click on ThemeIcon should open ThemeModal', async () => {
+    const result = render(
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(result.getByTestId('BrushIcon'))
+    await waitFor(() => {
+      expect(result.getByTestId('ThemeModal')).toBeInTheDocument()
+    })
+  })
+
+  test('click on ThemeIcon should open ThemeModal, then close it', async () => {
+    const result = render(
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(result.getByTestId('BrushIcon'))
+    await waitFor(() => {
+      expect(result.getByTestId('ThemeModal')).toBeInTheDocument()
+      fireEvent.click(result.getByTestId('ThemeModal-Close-Button'))
+    })
+    await waitFor(() => {
+      expect(result.queryByTestId('ThemeModal')).toBeNull()
+    })
   })
 
   /** 
@@ -307,9 +352,11 @@ describe('MenuBar', () => {
 
   test('click on UserIcon should open popover', () => {
     const result = render(
-      <MemoryRouter>
-        <MenuBar />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
     )
 
     // click on UserIcon:
@@ -322,29 +369,31 @@ describe('MenuBar', () => {
     // TODO 📑: will be implemented in the future. Current menu is mock.
   })
 
-  test('click on learner characteristics should open Questionnaire Results Modal', () => {
+  test('click on static dropdown and select learner characteristic', () => {
     const result = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <MenuBar />
-        </MemoryRouter>
-      </AuthContext.Provider>
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
     )
 
-    // click on QuestionnaireResultsIcon:
-    fireEvent.click(result.getByTestId('QuestionnaireResultsIcon'))
-    expect(result.getByTestId('ILS and ListK Modal')).toBeInTheDocument()
-
-    // click on close button
-    fireEvent.click(result.getByTestId('QuestionnaireResultsCloseButton'))
-    expect(result.queryByTestId('ILS and ListK Modal')).not.toBeInTheDocument()
+    fireEvent.click(result.getByText('components.StatisticsMenu.title'))
+    act(() => {
+      fireEvent.click(result.getByText('pages.learnercharacteristics'))
+      expect(navigate).toHaveBeenCalledWith('/learnercharacteristics')
+    })
   })
 
   test('clicking logout should close popover', () => {
     const { getByTestId, queryByTestId } = render(
-      <MemoryRouter>
-        <MenuBar />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
     )
 
     const userAvatarButton = getByTestId('useravatar')
@@ -366,9 +415,11 @@ describe('MenuBar', () => {
 
   test('clicking outside of Menu should close popover', () => {
     const { getByTestId, queryByTestId } = render(
-      <MemoryRouter>
-        <MenuBar />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
     )
 
     // get the user avatar button
@@ -388,11 +439,13 @@ describe('MenuBar', () => {
 
   it('opens the ils-short questionnaire', async () => {
     const { getByTestId, getByText } = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <MenuBar />
-        </MemoryRouter>
-      </AuthContext.Provider>
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
@@ -405,11 +458,13 @@ describe('MenuBar', () => {
     window.confirm = jest.fn(() => true) // always click 'yes'
 
     const { getByTestId, getByText } = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <MenuBar />
-        </MemoryRouter>
-      </AuthContext.Provider>
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
@@ -423,11 +478,13 @@ describe('MenuBar', () => {
 
   it('opens the questionnaire ils-long questionnaire', async () => {
     const { getByTestId, getByText } = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <MenuBar />
-        </MemoryRouter>
-      </AuthContext.Provider>
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
@@ -440,11 +497,13 @@ describe('MenuBar', () => {
     window.confirm = jest.fn(() => true) // always click 'yes'
 
     const { getByTestId, getByText } = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <MenuBar />
-        </MemoryRouter>
-      </AuthContext.Provider>
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
@@ -458,11 +517,13 @@ describe('MenuBar', () => {
 
   it('open the listk questionnaire', async () => {
     const { getByTestId, getByText } = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <MenuBar />
-        </MemoryRouter>
-      </AuthContext.Provider>
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
@@ -475,11 +536,13 @@ describe('MenuBar', () => {
     window.confirm = jest.fn(() => true) // always click 'yes'
 
     const { getByTestId, getByText } = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <MenuBar />
-        </MemoryRouter>
-      </AuthContext.Provider>
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
     )
 
     fireEvent.click(getByTestId('useravatar'))
@@ -493,11 +556,13 @@ describe('MenuBar', () => {
 
   it('navigates to logout page', async () => {
     const { getAllByText, getByTestId } = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <MenuBar />
-        </MemoryRouter>
-      </AuthContext.Provider>
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
     )
 
     fireEvent.click(getByTestId('useravatar'))

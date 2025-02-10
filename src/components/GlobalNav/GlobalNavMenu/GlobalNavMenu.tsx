@@ -58,7 +58,7 @@ const GlobalNavMenu = forwardRef(
                   )
                 }
                 onClick={handleOpen}
-                sx={{ whiteSpace: 'pre-wrap', mt: 0.5 }}
+                sx={(theme) => ({ whiteSpace: 'pre-wrap', mt: 0.5, color: theme.palette.secondary.contrastText })}
                 variant="text">
                 {title?.replaceAll(' ', '\n')}
               </Button>

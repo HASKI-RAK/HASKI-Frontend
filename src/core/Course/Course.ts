@@ -10,8 +10,9 @@ type Course = {
   name: string
   university: string
   created_at: string
-  created_by: string
+  created_by: number
   last_updated: string
+  start_date: string
 }
 
 export default Course
