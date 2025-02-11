@@ -5,6 +5,7 @@ import { CreateAlgorithmTableNameProps, handleError } from '@components'
 import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {
   SnackbarContext,
+  postAddAllStudentsToTopics,
   postCalculateLearningPathForAllStudents,
   postLearningElement,
   postLearningPathAlgorithm,
@@ -75,6 +76,10 @@ export const useCreateTopicModal = ({
     return postLearningElement({ topicId, outputJson })
   }
 
+  const handleAddAllStudentsToTopics = (courseId: string) => {
+    return postAddAllStudentsToTopics(courseId)
+  }
+
   const handleCreateAlgorithms = (userId: number, lmsUserId: number, topicId: number, algorithmShortname: string) => {
     const outputJson = JSON.stringify({ algorithm_short_name: algorithmShortname })
     return postLearningPathAlgorithm({ userId, lmsUserId, topicId, outputJson })
@@ -122,9 +127,11 @@ export const useCreateTopicModal = ({
               ).then(() => ({ topicId, user }))
             })
             .then(({ topicId, user }) => {
-              return handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topicId, algorithmShortName).then(
-                () => ({ topicId, user })
-              )
+              return handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topicId, algorithmShortName)
+                .then(() => {
+                  return handleAddAllStudentsToTopics(courseId)
+                })
+                .then(() => ({ topicId, user }))
             })
             .then(({ topicId, user }) => {
               return handleCalculateLearningPaths(

@@ -7,7 +7,7 @@ import { Box, Button, CircularProgress, Fab, Grid, Modal } from '@common/compone
 import { Close } from '@common/icons'
 import { CreateCourseDetailsTable, CreateCourseTable, handleError } from '@components'
 import { RemoteCourse } from '@core'
-import { SnackbarContext, postCourse } from '@services'
+import { SnackbarContext, postAddAllStudentsToCourse, postCourse } from '@services'
 import { usePersistedStore } from '@store'
 
 dayjs.extend(utc)
@@ -58,15 +58,17 @@ const CreateCourseModal = ({
     }
 
     postCourse({ outputJson: JSON.stringify(createCourse) })
-      .then(() => {
-        addSnackbar({
-          message: t('appGlobal.dataSendSuccessful'),
-          severity: 'success',
-          autoHideDuration: 5000
+      .then((course) => {
+        postAddAllStudentsToCourse(course.id).then(() => {
+          addSnackbar({
+            message: t('appGlobal.dataSendSuccessful'),
+            severity: 'success',
+            autoHideDuration: 5000
+          })
+          log.info(t('appGlobal.dataSendSuccessful'))
+          setIsSending(false)
+          handleCloseCreateCourseModal()
         })
-        log.info(t('appGlobal.dataSendSuccessful'))
-        setIsSending(false)
-        handleCloseCreateCourseModal()
       })
       .catch((error) => {
         handleError(t, addSnackbar, 'appGlobal.dataSendUnsuccessful', error, 5000)

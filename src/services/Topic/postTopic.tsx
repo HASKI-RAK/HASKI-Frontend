@@ -28,7 +28,7 @@ type PostTopicProps = {
  */
 
 export const postTopic = async ({ courseId, outputJson }: PostTopicProps): Promise<Topic> => {
-  return fetchData<Topic>(`${getConfig().BACKEND}/v2/lms/course/${courseId}/topic`, {
+  return fetchData<Topic>(`${getConfig().BACKEND}/lms/course/${courseId}/topic`, {
     method: 'POST',
     credentials: 'include',
     headers: {
