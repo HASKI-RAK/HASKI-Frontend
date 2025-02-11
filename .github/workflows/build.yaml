@@ -32,3 +32,9 @@ jobs:
         run: yarn global add eslint-cli
       - name: Run ESLint
         run: eslint ./src --ext .ts,.tsx
+      - name: Cache dependencies
+        uses: actions/cache@v3  # Updated version
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
