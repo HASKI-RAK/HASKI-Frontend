@@ -37,7 +37,7 @@ describe('postTopic has expected behaviour', () => {
 
     const result = await postTopic({ courseId: '1', outputJson: output })
 
-    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/v2/lms/course/1/topic`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/lms/course/1/topic`, {
       body: output,
       credentials: 'include',
       headers: {

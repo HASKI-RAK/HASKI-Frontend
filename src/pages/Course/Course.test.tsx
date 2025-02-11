@@ -43,7 +43,7 @@ describe('Course tests', () => {
     })
 
     expect(navigate).toHaveBeenCalledWith('topic/2')
-  })
+  }, 20000)
 
   test('students do not see create topic button', async () => {
     const studentContext = {

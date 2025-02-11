@@ -557,6 +557,20 @@ const mockDataServices: MockDataServices = {
       status: 201,
       statusText: 'CREATED'
     })
+  ),
+  postAddAllStudentsToTopics: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED'
+    })
+  ),
+  postAddAllStudentsToCourse: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED'
+    })
   )
 }
 /**
