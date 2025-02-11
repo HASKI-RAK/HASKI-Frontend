@@ -33,7 +33,7 @@ jobs:
       - name: Run ESLint
         run: eslint ./src --ext .ts,.tsx
       - name: Cache dependencies
-        uses: actions/cache@v3  # Updated version
+        uses: actions/cache@v4.2.0  # Updated version
         with:
           path: |
             node_modules
