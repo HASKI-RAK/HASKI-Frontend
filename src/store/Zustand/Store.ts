@@ -8,19 +8,26 @@ import LearningPathElementSlice, { createLearningPathElementSlice } from '../Sli
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
 } from '../Slices/LearningPathElementSpecificStatusSlice'
-import LearningPathElementStatusSlice, {
+import {
+  LearningPathElementStatusSlice,
   createLearningPathElementStatusSlice
 } from '../Slices/LearningPathElementStatusSlice'
 import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
-import UserSlice, { createUserSlice } from '../Slices/UserSlice'
 import NewsSlice, { createNewsSlice } from '../Slices/NewsSlice'
+import RemoteTopicsSlice, { createRemoteTopicsSlice } from '../Slices/RemoteTopicsSlice'
+import StudentLpLeAlgorithmSlice, { createStudentLpLeAlgorithmSlice } from '../Slices/StudentLpLeAlgSlice'
+import TeacherLpLeAlgorithmSlice, { createTeacherLpLeAlgorithmSlice } from '../Slices/TeacherLpLeAlgorithmSlice'
+import UserSlice, { createUserSlice } from '../Slices/UserSlice'
 import xAPISlice, { createXAPISlice } from '../Slices/xAPISlice'
 
 export type StoreState = LearningPathElementSlice &
   CourseSlice &
   CoursesSlice &
   LearningPathTopicSlice &
-  LearningPathElementSpecificStatusSlice
+  LearningPathElementSpecificStatusSlice &
+  RemoteTopicsSlice &
+  TeacherLpLeAlgorithmSlice &
+  StudentLpLeAlgorithmSlice
 export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & xAPISlice
 export type SessionStoreState = NewsSlice
 
@@ -31,7 +38,10 @@ export const useStore = create<StoreState>()((...a) => ({
   ...createLearningPathTopicSlice(...a),
   ...createCourseSlice(...a),
   ...createCoursesSlice(...a),
-  ...createLearningPathElementSpecificStatusSlice(...a)
+  ...createLearningPathElementSpecificStatusSlice(...a),
+  ...createRemoteTopicsSlice(...a),
+  ...createTeacherLpLeAlgorithmSlice(...a),
+  ...createStudentLpLeAlgorithmSlice(...a)
 }))
 
 export const usePersistedStore = create<PersistedStoreState>()(

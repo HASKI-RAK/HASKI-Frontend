@@ -6,6 +6,7 @@ import { resetters } from '../Zustand/Store'
 
 export default interface LearningPathTopicSlice {
   _cache_learningPathTopic_record: Record<string, LearningPathTopic | undefined>
+  clearLearningPathTopicCache: () => void
   getLearningPathTopic: LearningPathTopicReturn
 }
 
@@ -13,6 +14,9 @@ export const createLearningPathTopicSlice: StateCreator<StoreState, [], [], Lear
   resetters.push(() => set({ _cache_learningPathTopic_record: {} }))
   return {
     _cache_learningPathTopic_record: {},
+    clearLearningPathTopicCache: () => {
+      set({ _cache_learningPathTopic_record: {} })
+    },
     getLearningPathTopic: async (...arg) => {
       const [userId, lmsUserId, studentId, courseId] = arg
 

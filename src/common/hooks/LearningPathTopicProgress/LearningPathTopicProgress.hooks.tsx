@@ -49,6 +49,11 @@ export const useLearningPathTopicProgress = (
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
 
+  // Reload store on cache changes
+  const learningPathTopicCache = useStore((state) => state._cache_learningPathTopic_record)
+  const learningPathElementCache = useStore((state) => state._cache_learningPathElement_record)
+  const learningPathLearningElementStatusCache = usePersistedStore((state) => state._learningPathElementStatus)
+
   // Function
   const getTopicProgress = useCallback(
     (
@@ -65,7 +70,7 @@ export const useLearningPathTopicProgress = (
       // Number of all learning elements in the current topic
       allLearningElementsInTopic.length
     ],
-    []
+    [learningPathLearningElementStatusCache]
   )
 
   // Function
@@ -102,7 +107,14 @@ export const useLearningPathTopicProgress = (
           })
       })
     },
-    [getLearningPathElement, getLearningPathElementStatus, getTopicProgress, courseId]
+    [
+      getLearningPathElement,
+      getLearningPathElementStatus,
+      getTopicProgress,
+      courseId,
+      learningPathElementCache,
+      learningPathLearningElementStatusCache
+    ]
   )
 
   useEffect(() => {
@@ -138,7 +150,7 @@ export const useLearningPathTopicProgress = (
           log.error(t('error.fetchUser') + ' ' + error)
         })
     }
-  }, [isAuth, navigate, clearTimeout, getLearningPathTopic, getAllTopicProgress])
+  }, [isAuth, navigate, getLearningPathTopic, getAllTopicProgress, learningPathTopicCache])
 
   return useMemo(() => ({ topicProgress, isLoading, topics }), [topicProgress, isLoading, topics])
 }
