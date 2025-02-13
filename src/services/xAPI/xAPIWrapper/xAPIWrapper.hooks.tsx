@@ -1,41 +1,6 @@
-import log from 'loglevel'
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useLocation } from 'react-router-dom'
-import { AuthContext } from '@services'
-import { usePersistedStore } from '@store'
+import { useCallback, useMemo } from 'react'
 import { StatementProps, getStatement } from '../GetStatement/getStatement'
-
-/**
- * xAPIComponent enum.
- *
- * @remarks
- * xAPIComponent represents an enum that can be used to determine the component that sends the xAPI statement.
- *
- * @category Services
- */
-export enum xAPIComponent {
-  Accordion,
-  Alert,
-  Button,
-  Fab,
-  Form,
-  IconButton,
-  Image,
-  Link,
-  Menu,
-  MenuItem,
-  Modal,
-  Node,
-  Null,
-  Popover,
-  RadioGroup,
-  Select,
-  StepButton,
-  Text,
-  TextField,
-  ToggleButtonGroup
-}
+import { xAPIReturn } from '../setupXAPI'
 
 /**
  * xAPIVerb enum.
@@ -45,11 +10,7 @@ export enum xAPIComponent {
  *
  * @category Services
  */
-export enum xAPIVerb {
-  clicked,
-  closed,
-  changed
-}
+export type xAPIVerb = 'clicked' | 'closed' | 'changed'
 
 /**
  * @prop defaultComponentID - The default value for the component ID.
@@ -58,9 +19,11 @@ export enum xAPIVerb {
  * @category Hooks
  * @interface
  */
-export type useStatementHookParams = {
-  defaultComponentID?: string
-  defaultComponent?: xAPIComponent
+export type xAPIWrapperHookParams = {
+  componentID?: string
+  componentName?: string
+  filePath?: string
+  xAPIObject?: xAPIReturn
 }
 
 /**
@@ -70,9 +33,8 @@ export type useStatementHookParams = {
  * @category Hooks
  * @interface
  */
-export type StatementHookReturn = {
-  readonly getEnglishName: (key: string) => string
-  readonly sendStatement: (verb: xAPIVerb, filePath: string) => Promise<void>
+export type xAPIWrapperHookReturn = {
+  readonly sendStatement: (verb: xAPIVerb) => Promise<void>
 }
 
 /**
@@ -90,86 +52,35 @@ export type StatementHookReturn = {
  * @category Services
  * @category Hooks
  */
-export const useStatement = (params?: useStatementHookParams): StatementHookReturn => {
-  // Default values
-  const { defaultComponentID = 'null', defaultComponent = xAPIComponent.Null } = params ?? {}
+export const useXAPIWrapper = (params?: xAPIWrapperHookParams): xAPIWrapperHookReturn => {
+  const { componentID = '', componentName = '', filePath = '', xAPIObject = undefined } = params ?? {}
 
-  const { i18n } = useTranslation()
-  const { isAuth } = useContext(AuthContext)
-  const en = i18n.getFixedT('en')
-  const location = useLocation()
-  const [lmsUserID, setLmsUserID] = useState<string | undefined>(undefined)
-
-  const getUser = usePersistedStore((state) => state.getUser)
-  const getXAPI = usePersistedStore((state) => state.getXAPI)
-
-  // Function to get the english name of a page.
-  const getEnglishName = useCallback(
-    (key: string) => {
-      return en('pages.'.concat(key))
-    },
-    [en]
-  )
-
-  useEffect(() => {
-    isAuth &&
-      getUser()
-        .then((user) => {
-          setLmsUserID(user.lms_user_id.toString())
-        })
-        .catch((error: string) => {
-          log.error(error)
-          return undefined
-        })
-  }, [getUser, isAuth])
-
-  // Wraps function so send statements from components
   const sendStatement = useCallback(
-    async (verb: string, filePath: string) => {
-      const statement: StatementProps = {
-        userID: '-1',
-        verb: verb,
-        filePath: filePath,
-        component: 'component',
-        componentURL: 'componentURL', // Replace to ID
-        verbRepository: 'verbRepository',
-        componentRepository: 'componentRepository',
-        pageRepository: 'pageRepository',
-        domainVersion: '1',
-        gitHubURL: 'gitHubURL',
-        path: 'path',
-        translate: () => ''
+    async (verb: xAPIVerb) => {
+      if (xAPIObject?.isAuth) {
+        const statement: StatementProps = {
+          userID: xAPIObject.userID,
+          verb: verb,
+          filePath: filePath,
+          component: componentName,
+          componentURL: componentID,
+          verbRepository: xAPIObject.verbRepository,
+          componentRepository: xAPIObject.componentRepository,
+          pageRepository: xAPIObject.pageRepository,
+          domainVersion: xAPIObject.domainVersion,
+          gitHubURL: xAPIObject.gitHub,
+          path: xAPIObject.path,
+          translate: xAPIObject.translate
+        }
+
+        xAPIObject.xAPI.sendStatement({ statement: getStatement(statement) })
       }
-
-      console.log(statement)
-
-      console.log(getStatement(statement))
-
-      /*lmsUserID &&
-        (await getXAPI()?.sendStatement({
-          statement: getStatement(
-            await lmsUserID,
-            xAPIVerb[verb],
-            location.pathname,
-            defaultComponentID,
-            xAPIComponent[defaultComponent],
-            getEnglishName,
-            filePath
-          )
-        }))*/
     },
-    [
-      getXAPI()?.sendStatement,
-      getStatement,
-      lmsUserID,
-      xAPIVerb,
-      location.pathname,
-      defaultComponentID,
-      xAPIComponent[defaultComponent],
-      getEnglishName,
-      isAuth
-    ]
+    [componentID, componentName, filePath, xAPIObject]
   )
 
-  return useMemo(() => ({ getEnglishName, sendStatement }), [getEnglishName, sendStatement])
+  return useMemo(() => ({ sendStatement }), [sendStatement])
 }
+
+//! Inhaltlich done
+//TODO: RENAME xAPIObject simply to xAPI?

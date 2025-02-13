@@ -1,5 +1,5 @@
 import React, { ChangeEvent, ComponentType, MouseEvent } from 'react'
-import { xAPIReturnProps } from './getXAPIObject'
+import { xAPIReturn } from './setupXAPI'
 import { StatementHookReturn, useStatement, useStatementHookParams, xAPIComponent, xAPIVerb } from './xAPIWrapper.hooks'
 
 // custom type for xapi props
@@ -17,7 +17,7 @@ type EnhancedEventHandlers = {
 const xAPIWrapper = <P extends object>(
   WrappedComponent: ComponentType<P & EnhancedEventHandlers>,
   filePath: string,
-  xAPIObject: xAPIReturnProps
+  xAPIObject: xAPIReturn
 ): ComponentType<P & EnhancedEventHandlers> => {
   const EnhancedComponent = (props: P & EnhancedEventHandlers) => {
     const { onClick, onChange, onClose, ...rest } = props

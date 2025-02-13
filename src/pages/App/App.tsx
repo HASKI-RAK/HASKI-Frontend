@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { ReactFlowProvider } from 'reactflow'
 import { ThemeProvider } from '@common/theme'
@@ -19,8 +18,7 @@ import {
   Topic
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
-import { getConfig } from '@shared'
-import { usePersistedStore } from '@store'
+import { useApp } from './App.hooks'
 
 /**
  * # App
@@ -34,15 +32,11 @@ import { usePersistedStore } from '@store'
  * @category Pages
  */
 export const App = () => {
-  const setXAPI = usePersistedStore().setXAPI
-  const getXAPI = usePersistedStore().getXAPI
-  useEffect(() => {
-    setXAPI(getConfig().LRS ?? '', getConfig().LRS_AUTH_USERNAME ?? '', getConfig().LRS_AUTH_PASSWORD ?? '')
-  }, [])
-
+  const { isXAPIConfigured } = useApp()
+  
   return (
     <>
-      {getXAPI() && (
+      {isXAPIConfigured && (
         <ThemeProvider theme={HaskiTheme}>
           <ReactFlowProvider>
             <SnackbarProvider>

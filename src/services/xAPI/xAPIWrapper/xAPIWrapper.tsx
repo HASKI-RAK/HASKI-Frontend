@@ -1,6 +1,6 @@
-import React, { ChangeEvent, ComponentType, MouseEvent } from 'react'
-import { xAPIReturnProps } from './getXAPIObject'
-import { StatementHookReturn, useStatement, useStatementHookParams, xAPIComponent, xAPIVerb } from './xAPIWrapper.hooks'
+import { ChangeEvent, ComponentType, MouseEvent } from 'react'
+import { xAPIReturn } from '../setupXAPI'
+import { useXAPIWrapper } from './xAPIWrapper.hooks'
 
 // custom type for xapi props
 type EnhancedEventHandlers = {
@@ -9,49 +9,45 @@ type EnhancedEventHandlers = {
   onChange?: (e: ChangeEvent) => void
   onClose?: (e: MouseEvent) => void
 }
-/**
- * !TODO
- * - Add function of sending the statement to the hook
- * - How do i change the creation of the statement to a more meaningful file structure?
- */
+
 const xAPIWrapper = <P extends object>(
-  WrappedComponent: ComponentType<P & EnhancedEventHandlers>,
+  componentName: string,
   filePath: string,
-  xAPIObject: xAPIReturnProps
+  xAPIObject: xAPIReturn,
+  WrappedComponent: ComponentType<P & EnhancedEventHandlers>
 ): ComponentType<P & EnhancedEventHandlers> => {
   const EnhancedComponent = (props: P & EnhancedEventHandlers) => {
     const { onClick, onChange, onClose, ...rest } = props
-    const { sendStatement } = useStatement({
-      defaultComponentID: props.id,
-      defaultComponent: xAPIComponent.Menu //TODO: This one has to be filled dynamically
+
+    const { sendStatement } = useXAPIWrapper({
+      componentID: props.id,
+      componentName: componentName, // TODO: SOME KIND OF COMPONENT TYPE?
+      filePath: filePath,
+      xAPIObject: xAPIObject
     })
 
     // Overridden event handlers
     const handleClick = (e: MouseEvent) => {
-      console.log('xAPIWrapper handleClick')
+      sendStatement('clicked')
       if (onClick) {
         onClick(e)
       }
     }
 
     const handleChange = (e: ChangeEvent) => {
-      console.log('xAPIWrapper handleChange')
+      sendStatement('changed')
       if (onChange) {
         onChange(e)
       }
     }
 
     const handleClose = (e: MouseEvent) => {
-      console.log('xAPIWrapper handleClose' + props.id + filePath)
-      sendStatement(xAPIVerb.closed, filePath)
+      sendStatement('closed')
       if (onClose) {
         onClose(e)
       }
     }
 
-    // APIObject.sendStatement
-
-    // Pass down all props and override handlers if they exist
     return (
       <WrappedComponent
         {...(rest as P)}
