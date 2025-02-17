@@ -1,12 +1,12 @@
-import XAPI from '@xapi/xapi'
 import { StateCreator } from 'zustand'
 import { PersistedStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
+import { XAPI } from 'src/services/xAPI/library/setupXAPI' 
 
-export default interface xAPISlice /*NOSONAR*/ {
+export default interface XAPISlice {
   _xAPI: XAPI | undefined
   getXAPI: () => XAPI | undefined
-  setXAPI: (endpoint: string, username: string, password: string) => void
+  setXAPI: (xAPI: XAPI) => void
 }
 
 /**
@@ -22,7 +22,7 @@ export default interface xAPISlice /*NOSONAR*/ {
  *
  * @category Services
  */
-export const createXAPISlice: StateCreator<PersistedStoreState, [], [], xAPISlice> = (set, get) => {
+export const createXAPISlice: StateCreator<PersistedStoreState, [], [], XAPISlice> = (set, get) => {
   resetters.push(() => set({ _xAPI: undefined }))
   return {
     _xAPI: undefined,
@@ -30,12 +30,7 @@ export const createXAPISlice: StateCreator<PersistedStoreState, [], [], xAPISlic
       const xAPI = get()._xAPI
       return xAPI
     },
-    setXAPI: (endpoint: string, username: string, password: string) => {
-      const xAPI = new XAPI({
-        endpoint: endpoint,
-        auth: XAPI.toBasicAuth(username, password),
-        version: '1.0.3'
-      })
+    setXAPI: (xAPI: XAPI) => {
       set({ _xAPI: xAPI })
     }
   }

@@ -48,6 +48,6 @@ const Menu = ({ useStatement = _useStatement, onClose, ...props }: MenuProps) =>
   )
 }
 
-// export default memo(Menu)
+export default memo(Menu)
 
-export default xAPIWrapper2(DefaultMenu, new URL(import.meta.url).pathname)
+/// export default xAPIWrapper2(DefaultMenu, 'Menu', new URL(import.meta.url).pathname, DefaultMenu)

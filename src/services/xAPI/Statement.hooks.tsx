@@ -123,9 +123,18 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
         })
   }, [getUser, isAuth])
 
-  // Wraps function so send statements from components
+  // Wraps function so send statements from components.
   const sendStatement = useCallback(
     async (verb: xAPIVerb, filePath: string) => {
+      console.log(getStatement(
+        '-1',
+        xAPIVerb[verb],
+        location.pathname,
+        defaultComponentID,
+        xAPIComponent[defaultComponent],
+        getEnglishName,
+        filePath
+      ))
       lmsUserID &&
         (await getXAPI()?.sendStatement({
           statement: getStatement(

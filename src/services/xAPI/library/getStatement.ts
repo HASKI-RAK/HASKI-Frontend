@@ -4,30 +4,23 @@ import { getContext } from './getContext'
 import { getContextActivities } from './getContextActivities'
 import { getObject } from './getObject'
 import { getVerb } from './getVerb'
+import { XAPIRepositories } from './setupXAPI'
 
+/*
+TODO: Comment
+*/
 export type StatementProps = {
-  userID: string
-  verb: string
-  verbRepository: string
-  componentURL: string
-  component: string
-  componentRepository: string
-  pageRepository: string
-  path: string
-  translate: (key: string) => string
+  componentID: string
+  componentName: string
   filePath: string
-  domainVersion: string
-  gitHubURL: string
+  projectURL: string
+  projectVersion: string
+  repositories: XAPIRepositories
+  userID: string
+  userLocation: string
+  translateToEN: (key: string) => string
+  verbName: string
 }
-
-/**
-  userID: string,
-  verb: string,
-  path: string,
-  componentID: string,
-  componentName: string,
-  getEnglishName: (key: string) => string,
-  filePath: string */
 
 /**
  * getStatement function.
@@ -49,28 +42,26 @@ export type StatementProps = {
  * @category Services
  */
 export const getStatement = ({
-  userID,
-  verb,
-  verbRepository,
-  componentURL,
-  component,
-  componentRepository,
-  pageRepository,
-  domainVersion,
   filePath,
-  gitHubURL,
-  path,
-  translate
+  componentID,
+  componentName,
+  projectURL,
+  projectVersion,
+  repositories,
+  translateToEN,
+  userID,
+  userLocation,
+  verbName,
 }: StatementProps): Statement => {
   return {
     actor: getActor({ userID: userID }),
-    verb: getVerb({ verb: verb, verbRepository: verbRepository }),
-    object: getObject({ componentURL: componentURL, component: component, componentRepository: componentRepository }),
+    verb: getVerb({ verb: verbName, verbRepository: typeof repositories == 'string' ? repositories : repositories.verb }),
+    object: getObject({ componentURL: componentID, component: componentName, componentRepository: typeof repositories == 'string' ? repositories : repositories.component }),
     context: getContext({
-      domainVersion: domainVersion,
+      domainVersion: projectVersion,
       filePath: filePath,
-      gitHubURL: gitHubURL,
-      contextActivities: getContextActivities({ pageRepository, path, translate })
+      gitHubURL: projectURL,
+      contextActivities: getContextActivities({ pageRepository: typeof repositories == 'string' ? repositories : repositories.page, path: userLocation, translate: translateToEN })
     }),
     timestamp: new Date().toISOString().replace('Z', '+00:00')
   }

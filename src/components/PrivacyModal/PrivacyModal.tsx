@@ -106,6 +106,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                         <>
                           {t('components.PrivacyModal.readPrivacypolicy') + ' \n'}
                           <Link
+                            id='privacy-policy-link'
                             marginX="0.2em"
                             component="button"
                             variant="subtitle1"
@@ -129,6 +130,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                   }}>
                   <Tooltip title={t('components.PrivacyModal.returnToMoodle')}>
                     <Button
+                      id='decline-privacy-policy-button'
                       variant={'contained'}
                       sx={{ alignSelf: 'end' }}
                       aria-multiline={'true'}
@@ -151,6 +153,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                     </Button>
                   </Tooltip>
                   <Button
+                    id='accept-privacy-policy-button'
                     variant={'contained'}
                     sx={{ alignSelf: 'end' }}
                     disabled={!checked}

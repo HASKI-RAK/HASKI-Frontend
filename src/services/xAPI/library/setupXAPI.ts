@@ -1,15 +1,23 @@
-import XAPI from '@xapi/xapi'
+import BaseXAPI from '@xapi/xapi'
 import { Versions } from '@xapi/xapi/dist/types/constants'
+
+export type XAPIRepositories = {
+  component: string
+  page: string
+  verb: string
+} | string
 
 export type XAPIConfig = {
   projectURL: string
   projectVersion: string
-  repositories: { componentRepository: string; pageRepository: string; verbRepository: string } | string
+  repositories: XAPIRepositories
   translateToEN: (key: string) => string
   userAuthenticated: boolean
   userID: string
   userLocation: string
 }
+
+export type XAPI = XAPIConfig & { xAPI: BaseXAPI }
 
 export const setupXAPI = ({
   xAPI,
@@ -20,11 +28,13 @@ export const setupXAPI = ({
     endpoint: string
     version: Versions
   }
-}): XAPIConfig & { xAPI: XAPI } => ({
+}): XAPI => ({
   ...props,
-  xAPI: new XAPI({
-    auth: typeof xAPI.auth === 'string' ? xAPI.auth : XAPI.toBasicAuth(xAPI.auth.username, xAPI.auth.password),
+  xAPI: new BaseXAPI({
+    auth: typeof xAPI.auth === 'string' ? xAPI.auth : BaseXAPI.toBasicAuth(xAPI.auth.username, xAPI.auth.password),
     endpoint: xAPI.endpoint,
-    version: xAPI.version
+    version: xAPI.version,
+    adapter: 'fetch'
   })
 })
+

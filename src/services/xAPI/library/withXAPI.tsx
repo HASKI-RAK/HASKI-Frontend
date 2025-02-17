@@ -1,32 +1,30 @@
 import { ChangeEvent, ComponentType, MouseEvent } from 'react'
-import { xAPIReturn } from '../setupXAPI'
-import { useXAPIWrapper } from './xAPIWrapper.hooks'
+import { useXAPI as useXAPI } from './xAPIWrapper.hooks'
+import { XAPI } from './setupXAPI'
 
-// custom type for xapi props
-type EnhancedEventHandlers = {
+type EventHandlers = {
   id?: string
   onClick?: (e: MouseEvent) => void
   onChange?: (e: ChangeEvent) => void
   onClose?: (e: MouseEvent) => void
 }
 
-const xAPIWrapper = <P extends object>(
-  componentName: string,
-  filePath: string,
-  xAPIObject: xAPIReturn,
-  WrappedComponent: ComponentType<P & EnhancedEventHandlers>
-): ComponentType<P & EnhancedEventHandlers> => {
-  const EnhancedComponent = (props: P & EnhancedEventHandlers) => {
+export const withXAPI = <P extends object>(
+  WrappedComponent: ComponentType<P & EventHandlers>,
+  componentType?: string,
+  componentFilePath?: string,
+  xAPIConfig?: XAPI,
+): ComponentType<P & EventHandlers> => {
+  const EnhancedComponent = (props: P & EventHandlers) => {
     const { onClick, onChange, onClose, ...rest } = props
 
-    const { sendStatement } = useXAPIWrapper({
+    const { sendStatement } = useXAPI({
       componentID: props.id,
-      componentName: componentName, // TODO: SOME KIND OF COMPONENT TYPE?
-      filePath: filePath,
-      xAPIObject: xAPIObject
+      componentType: componentType,
+      filePath: componentFilePath,
+      xAPIConfig: xAPIConfig
     })
 
-    // Overridden event handlers
     const handleClick = (e: MouseEvent) => {
       sendStatement('clicked')
       if (onClick) {
@@ -60,5 +58,3 @@ const xAPIWrapper = <P extends object>(
 
   return EnhancedComponent
 }
-
-export default xAPIWrapper

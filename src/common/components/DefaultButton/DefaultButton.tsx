@@ -8,6 +8,7 @@ import {
   xAPIComponent,
   xAPIVerb
 } from '@services'
+import xAPIWrapper from 'src/services/xAPI/notlib/XAPIWrapper.hooks'
 
 /**
  * @prop DefaultButtonProps - The props of a mui Button.
@@ -50,4 +51,6 @@ const Button = (
   )
 }
 
-export default memo(forwardRef(Button))
+// const Button = () => useXAPIWrapper('Button', new URL(import.meta.url).pathname, DefaultButton)
+// export default memo(forwardRef(Button))
+export default xAPIWrapper('Button', new URL(import.meta.url).pathname, DefaultButton) //RENAME useXAPIWRAPPER

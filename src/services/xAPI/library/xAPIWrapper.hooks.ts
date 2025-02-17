@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react'
-import { StatementProps, getStatement } from '../GetStatement/getStatement'
-import { xAPIReturn } from '../setupXAPI'
+import { StatementProps, getStatement } from '../library/getStatement'
+import { XAPIConfig } from '../library/setupXAPI'
+import XAPI from '@xapi/xapi'
 
 /**
  * xAPIVerb enum.
@@ -19,11 +20,11 @@ export type xAPIVerb = 'clicked' | 'closed' | 'changed'
  * @category Hooks
  * @interface
  */
-export type xAPIWrapperHookParams = {
+export type XAPIWrapperHookParams = {
   componentID?: string
-  componentName?: string
+  componentType?: string
   filePath?: string
-  xAPIObject?: xAPIReturn
+  xAPIConfig?: XAPIConfig & { xAPI: XAPI }
 }
 
 /**
@@ -52,35 +53,33 @@ export type xAPIWrapperHookReturn = {
  * @category Services
  * @category Hooks
  */
-export const useXAPIWrapper = (params?: xAPIWrapperHookParams): xAPIWrapperHookReturn => {
-  const { componentID = '', componentName = '', filePath = '', xAPIObject = undefined } = params ?? {}
+export const useXAPI = (params?: XAPIWrapperHookParams): xAPIWrapperHookReturn => {
+  const { componentID = '', componentName = '', filePath = '', xAPIConfig = undefined } = params ?? {}
 
   const sendStatement = useCallback(
-    async (verb: xAPIVerb) => {
-      if (xAPIObject?.isAuth) {
+    async (verbName: xAPIVerb) => {
+      if (xAPIConfig?.userAuthenticated) {
+        const { translateToEN, userID, repositories, projectVersion, projectURL, userLocation, xAPI } = xAPIConfig
+
         const statement: StatementProps = {
-          userID: xAPIObject.userID,
-          verb: verb,
+          componentName: componentName,
+          componentID: componentID,
           filePath: filePath,
-          component: componentName,
-          componentURL: componentID,
-          verbRepository: xAPIObject.verbRepository,
-          componentRepository: xAPIObject.componentRepository,
-          pageRepository: xAPIObject.pageRepository,
-          domainVersion: xAPIObject.domainVersion,
-          gitHubURL: xAPIObject.gitHub,
-          path: xAPIObject.path,
-          translate: xAPIObject.translate
+          projectURL: projectURL,
+          projectVersion: projectVersion,
+          repositories: repositories,
+          userID: userID,
+          userLocation: userLocation,
+          translateToEN: translateToEN,
+          verbName: verbName,
         }
 
-        xAPIObject.xAPI.sendStatement({ statement: getStatement(statement) })
+        // xAPI.sendStatement({ statement: getStatement(statement) })
+        console.log(getStatement(statement))
       }
     },
-    [componentID, componentName, filePath, xAPIObject]
+    [componentID, componentName, filePath, xAPIConfig]
   )
 
   return useMemo(() => ({ sendStatement }), [sendStatement])
 }
-
-//! Inhaltlich done
-//TODO: RENAME xAPIObject simply to xAPI?

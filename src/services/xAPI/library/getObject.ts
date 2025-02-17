@@ -21,7 +21,7 @@ export type ObjectProps = {
  */
 export const getObject = ({ componentURL, component, componentRepository }: ObjectProps): StatementObject => {
   return {
-    id: new URL(window.location.href).origin.concat(componentURL),
+    id: window.location.href.concat('#' + componentURL),
     definition: {
       name: {
         en: component

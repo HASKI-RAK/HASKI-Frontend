@@ -19,10 +19,11 @@ export type ContextActivityProps = {
  *
  * @category Services
  */
+//TODO: Put in the Name of the page translated into english from above
 export const getParent = ({ pageRepository, path, translate }: ContextActivityProps): ContextActivity[] => {
   return [
     {
-      id: new URL(window.location.href).origin.concat(path),
+      id: window.location.href,
       definition: {
         type: pageRepository.concat(path.split('/').pop() as string /*Cannot be undefined, but TS doesn't know that*/),
         name: {

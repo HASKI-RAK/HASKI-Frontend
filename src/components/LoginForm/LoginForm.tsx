@@ -48,7 +48,7 @@ const LoginForm = ({ useLoginForm = _useLoginForm, ...props }: LoginFormProps) =
           {
             <Grid container sx={{ justifyContent: 'center' }} direction="column" rowSpacing={1}>
               <Grid item display="flex" justifyContent="center" md={5}>
-                <Button onClick={onMoodleLogin} data-testid="moodle-login-button" variant="contained">
+                <Button onClick={onMoodleLogin} data-testid="moodle-login-button" variant="contained" id='login-button'>
                   <img
                     alt="Haski-logo-in-white"
                     src="/LogoHaskiWhite.png"

@@ -1,5 +1,5 @@
 import React, { ChangeEvent, ComponentType, MouseEvent } from 'react'
-import { xAPIReturn } from './setupXAPI'
+import { xAPIReturn } from './library/setupXAPI'
 import { StatementHookReturn, useStatement, useStatementHookParams, xAPIComponent, xAPIVerb } from './xAPIWrapper.hooks'
 
 // custom type for xapi props
