@@ -8,7 +8,7 @@ import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Typography
 import { MoreVert } from '@common/icons'
 import { Course } from '@core'
 import { SnackbarContext, deleteCourse } from '@services'
-import DeleteCourseModal from '../DeleteCourseModal/DeleteCourseModal'
+import DeleteEntityModal from '../DeleteEntityModal/DeleteEntityModal'
 
 type CourseCardProps = {
   course: Course
@@ -137,13 +137,14 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
           </Tooltip>
         </MenuItem>
       </Menu>
-      <DeleteCourseModal
+      <DeleteEntityModal
         open={isDeleteCourseModalOpen}
         onClose={handleCloseDeleteCourseModal}
-        courseName={courseName}
-        courseId={courseId}
-        lmsCourseId={lmsCourseId}
+        entityName={courseName}
+        entityId={courseId}
+        extraId={lmsCourseId}
         onConfirm={handleAcceptDeleteCourseModal}
+        entityType={'course'}
       />
     </Card>
   )

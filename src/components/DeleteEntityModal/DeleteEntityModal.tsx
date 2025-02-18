@@ -3,21 +3,37 @@ import { Button, Checkbox, Grid, Modal, Typography } from '@mui/material'
 import { memo, useCallback, useState } from 'react'
 import { Divider, FormControlLabel } from '@common/components'
 
-type DeleteCourseModalProps = {
+type DeleteEntityModalProps = {
   open: boolean
-  courseName: string
-  courseId: number
-  lmsCourseId: number
+  entityName: string
+  entityType: string // e.g. "Kurs" or "Thema"
+  entityId: number
+  extraId: number // optional extra id, if needed (e.g. lmsCourseId)
   onClose: () => void
-  onConfirm: (courseId: number, lmsCourseId: number) => void
+  onConfirm: (entityId: number, extraId: number) => void
+  description?: string // optional custom description text
+  confirmLabel?: string // optional custom label for the checkbox
 }
 
-const DeleteCourseModal = ({ open, courseName, courseId, lmsCourseId, onClose, onConfirm }: DeleteCourseModalProps) => {
+const DeleteEntityModal = ({
+  open,
+  entityName,
+  entityType,
+  entityId,
+  extraId,
+  onClose,
+  onConfirm,
+  description,
+  confirmLabel
+}: DeleteEntityModalProps) => {
   const [checked, setChecked] = useState(false)
 
   const handleChecked = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setChecked((event.target as HTMLInputElement).checked)
   }, [])
+
+  const defaultDescription = `Mit dieser Aktion werden alle zugehörigen Inhalte aus dem HASKI-System unwiderruflich entfernt. Diese Aktion kann nicht rückgängig gemacht werden.`
+  const defaultConfirmLabel = `Den ${entityType} samt aller Inhalte aus dem HASKI-System unwiderruflich löschen`
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -45,38 +61,29 @@ const DeleteCourseModal = ({ open, courseName, courseId, lmsCourseId, onClose, o
             </Grid>
             <Grid item>
               <Typography variant="h6" color="error">
-                Kurs endgültig löschen
+                {entityType} endgültig löschen
               </Typography>
             </Grid>
           </Grid>
           <Divider />
           <Typography variant="body1" sx={{ mt: 2 }}>
-            Sie sind dabei, den Kurs{' '}
+            Sie sind dabei, den {entityType}{' '}
             <Typography component="span" sx={{ fontWeight: 'bold' }}>
-              {courseName}
+              {entityName}
             </Typography>{' '}
             zu löschen.
           </Typography>
           <Typography variant="body1" sx={{ mt: 2, textAlign: 'justify' }}>
-            Mit dieser Aktion werden alle zugehörigen Themenbereiche und deren enthaltene Lernelemente aus dem HASKI
-            System unwiderruflich entfernt. Diese Aktion kann{' '}
-            <Typography component="span" sx={{ fontWeight: 'bold' }}>
-              nicht
-            </Typography>{' '}
-            rückgängig gemacht werden.
+            {description || defaultDescription}
           </Typography>
           <Grid item xs={12}>
             <FormControlLabel
               onClick={handleChecked}
               control={<Checkbox />}
-              label={
-                <Typography variant="body2">
-                  Den Kurs samt aller Inhalte aus dem HASKI-System unwiderruflich löschen
-                </Typography>
-              }
+              label={<Typography variant="body2">{confirmLabel || defaultConfirmLabel}</Typography>}
               sx={{
                 width: '100%',
-                backgroundColor: 'action.hover', // subtle highlight
+                backgroundColor: 'action.hover',
                 border: '1px solid',
                 borderColor: 'divider',
                 borderRadius: 1,
@@ -93,7 +100,7 @@ const DeleteCourseModal = ({ open, courseName, courseId, lmsCourseId, onClose, o
             </Grid>
             <Grid item>
               <Button
-                onClick={() => onConfirm(courseId, lmsCourseId)}
+                onClick={() => onConfirm(entityId, extraId)}
                 variant="contained"
                 color="error"
                 disabled={!checked}>
@@ -107,4 +114,4 @@ const DeleteCourseModal = ({ open, courseName, courseId, lmsCourseId, onClose, o
   )
 }
 
-export default memo(DeleteCourseModal)
+export default memo(DeleteEntityModal)

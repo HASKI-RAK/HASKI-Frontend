@@ -1,13 +1,15 @@
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import PolylineIcon from '@mui/icons-material/Polyline'
 import { Tooltip } from '@mui/material'
-import { memo } from 'react'
+import { memo, useCallback, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Typography } from '@common/components'
 import { MoreVert } from '@common/icons'
 import { AlgorithmSettingsModal, StyledLinearProgress } from '@components'
 import { Topic } from '@core'
+import { SnackbarContext, deleteTopic } from '@services'
+import DeleteEntityModal from '../DeleteEntityModal/DeleteEntityModal'
 import { useTopicCard } from './TopicCard.hooks'
 
 // Type
@@ -22,6 +24,12 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
   // Hooks
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const { addSnackbar } = useContext(SnackbarContext)
+
+  const [isDeleteTopicModalOpen, setDeleteTopicModalOpen] = useState(false)
+  const [topicName, setTopicName] = useState<string>('')
+  const [topicId, setTopicId] = useState<number>(0)
+  const [lmsTopicId, setLmsTopicId] = useState<number>(0)
 
   const {
     studentSelection,
@@ -33,6 +41,35 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
     handleAlgorithmModalClose,
     updateSelection
   } = useTopicCard({ topic, learningElementProgressTopics: calculatedTopicProgress })
+
+  const handleOpenDeleteTopicModal = useCallback(
+    (topicName: string, topicId: number, lmsTopicId: number) => {
+      handleCloseMenu()
+      setDeleteTopicModalOpen(true)
+      setTopicName(topicName)
+      setTopicId(topicId)
+      setLmsTopicId(lmsTopicId)
+    },
+    [handleCloseMenu, setDeleteTopicModalOpen, setTopicName]
+  )
+
+  const handleCloseDeleteTopicModal = useCallback(() => {
+    setDeleteTopicModalOpen(false)
+  }, [setDeleteTopicModalOpen])
+
+  const handleAcceptDeleteTopicModal = useCallback(
+    (topicId: number, lmsTopicId: number) => {
+      deleteTopic(topicId, lmsTopicId).then(() => {
+        addSnackbar({
+          message: t('success.deleteTopic'),
+          severity: 'success',
+          autoHideDuration: 5000
+        })
+        setDeleteTopicModalOpen(false)
+      })
+    },
+    [setDeleteTopicModalOpen]
+  )
 
   return (
     <Card
@@ -131,10 +168,10 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           </Tooltip>
         </MenuItem>
         <MenuItem
-          onClick={handleAlgorithmMenuOpen}
+          onClick={() => handleOpenDeleteTopicModal(topic?.name || '', topic?.id || 0, topic?.lms_id || 0)}
           id="algorithm-settings-menu-item"
           data-testid="AlgorithmSettingsItem">
-          <Tooltip arrow title="Delete Course with all of its Content">
+          <Tooltip arrow title="Delete Topic with all of its Content">
             <Grid container direction={'row'}>
               <DeleteForeverIcon fontSize="small" />
               <Typography sx={{ ml: 1 }}>Löschen</Typography>
@@ -142,6 +179,15 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           </Tooltip>
         </MenuItem>
       </Menu>
+      <DeleteEntityModal
+        open={isDeleteTopicModalOpen}
+        onClose={handleCloseDeleteTopicModal}
+        entityName={topicName}
+        entityId={topicId}
+        extraId={lmsTopicId}
+        onConfirm={handleAcceptDeleteTopicModal}
+        entityType={'topic'}
+      />
     </Card>
   )
 }
