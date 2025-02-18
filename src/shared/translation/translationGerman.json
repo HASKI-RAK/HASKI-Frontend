@@ -44,7 +44,6 @@
       "key": "ga"
     }
   ],
-  "components.AlgorithmSettingsModal.headerLeft": "Lernpfadalgorithmus wählen",
   "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
   "components.AlgorithmSettingsModal.selectAlgorithms": "Algorithmen auswählen",
   "components.AlgorithmSettingsModal.success": "Der Algorithmus wurde erfolgreich geändert",
@@ -1731,7 +1730,7 @@
   "pages.home": "Startseite",
   "pages.home.courseButton": "Weiter zum Kurs",
   "pages.home.courseDisabled": "Der Kurs ist Verfügbar ab",
-  "pages.home.menuItemAlgorithms": "Lernpfadalgorithmus wählen",
+  "pages.topic.menuItemAlgorithms": "Lernpfadalgorithmus ändern",
   "pages.home.noCourses": "Keine Kurse gefunden",
   "pages.imprint": "Impressum",
   "pages.imprint.asOf": "Stand",

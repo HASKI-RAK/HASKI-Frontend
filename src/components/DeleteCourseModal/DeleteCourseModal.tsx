@@ -1,17 +1,18 @@
-import InfoIcon from '@mui/icons-material/Info'
 import WarningIcon from '@mui/icons-material/Warning'
 import { Button, Checkbox, Grid, Modal, Typography } from '@mui/material'
 import { memo, useCallback, useState } from 'react'
-import { Divider, FormControlLabel, Link } from '@common/components'
+import { Divider, FormControlLabel } from '@common/components'
 
 type DeleteCourseModalProps = {
   open: boolean
   courseName: string
+  courseId: number
+  lmsCourseId: number
   onClose: () => void
-  onConfirm: () => void
+  onConfirm: (courseId: number, lmsCourseId: number) => void
 }
 
-const DeleteCourseModal = ({ open, courseName, onClose, onConfirm }: DeleteCourseModalProps) => {
+const DeleteCourseModal = ({ open, courseName, courseId, lmsCourseId, onClose, onConfirm }: DeleteCourseModalProps) => {
   const [checked, setChecked] = useState(false)
 
   const handleChecked = useCallback((event: React.MouseEvent<HTMLElement>) => {
@@ -91,7 +92,11 @@ const DeleteCourseModal = ({ open, courseName, onClose, onConfirm }: DeleteCours
               </Button>
             </Grid>
             <Grid item>
-              <Button onClick={onConfirm} variant="contained" color="error" disabled={!checked}>
+              <Button
+                onClick={() => onConfirm(courseId, lmsCourseId)}
+                variant="contained"
+                color="error"
+                disabled={!checked}>
                 Löschen
               </Button>
             </Grid>

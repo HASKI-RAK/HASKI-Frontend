@@ -44,7 +44,6 @@
       "key": "ga"
     }
   ],
-  "components.AlgorithmSettingsModal.headerLeft": "Choose a learning path algorithm",
   "components.AlgorithmSettingsModal.headerRight": "Description",
   "components.AlgorithmSettingsModal.selectAlgorithms": "Select algorithms",
   "components.AlgorithmSettingsModal.success": "Algorithm changed successfully",
@@ -1732,7 +1731,7 @@
   "pages.home": "Home",
   "pages.home.courseButton": "Continue to course",
   "pages.home.courseDisabled": "The course is available on",
-  "pages.home.menuItemAlgorithms": "Select learning path algorithm",
+  "pages.topic.menuItemAlgorithms": "Change learning path algorithm",
   "pages.home.noCourses": "No courses found",
   "pages.imprint": "Imprint",
   "pages.imprint.asOf": "As of",

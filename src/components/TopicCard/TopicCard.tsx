@@ -1,3 +1,6 @@
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import PolylineIcon from '@mui/icons-material/Polyline'
+import { Tooltip } from '@mui/material'
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -120,7 +123,23 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           onClick={handleAlgorithmMenuOpen}
           id="algorithm-settings-menu-item"
           data-testid="AlgorithmSettingsItem">
-          {t('pages.home.menuItemAlgorithms')}
+          <Tooltip arrow title="Change Learning Path">
+            <Grid container direction={'row'}>
+              <PolylineIcon fontSize="small" />
+              <Typography sx={{ ml: 1 }}>{t('pages.topic.menuItemAlgorithms')}</Typography>
+            </Grid>
+          </Tooltip>
+        </MenuItem>
+        <MenuItem
+          onClick={handleAlgorithmMenuOpen}
+          id="algorithm-settings-menu-item"
+          data-testid="AlgorithmSettingsItem">
+          <Tooltip arrow title="Delete Course with all of its Content">
+            <Grid container direction={'row'}>
+              <DeleteForeverIcon fontSize="small" />
+              <Typography sx={{ ml: 1 }}>Löschen</Typography>
+            </Grid>
+          </Tooltip>
         </MenuItem>
       </Menu>
     </Card>

@@ -79,7 +79,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
         <Grid item container direction="row" spacing={2}>
           <Grid item container direction="column" spacing={1} xs={5}>
             <Typography id="modal-title" variant="h6" component="h6" align="center">
-              {t('components.AlgorithmSettingsModal.headerLeft')}
+              {t('pages.topic.menuItemAlgorithms')}
             </Typography>
             <RadioGroup onChange={handleSelect} id="learning-path-algorithm-radio-group">
               {options.map((option, index) => (

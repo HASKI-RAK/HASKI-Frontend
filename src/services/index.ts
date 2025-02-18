@@ -41,3 +41,5 @@ export {
   postTeacherLpLeAlg
 } from './LearningPathLearningElementAlgorithm'
 export { postBufferContent } from './BufferContent'
+
+export { deleteCourse } from './Course'
