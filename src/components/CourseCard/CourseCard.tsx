@@ -63,10 +63,6 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
     [handleCloseMenu, setDeleteCourseModalOpen, setCourseName]
   )
 
-  const handleCloseDeleteCourseModal = useCallback(() => {
-    setDeleteCourseModalOpen(false)
-  }, [setDeleteCourseModalOpen])
-
   const handleAcceptDeleteCourseModal = useCallback(
     (courseId: number, lmsCourseId: number) => {
       deleteCourse(courseId, lmsCourseId).then(() => {
@@ -129,7 +125,7 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
         <MenuItem
           onClick={() => handleOpenDeleteCourseModal(course.name, course.id, course.lms_id)}
           id="delete-course-settings-menu-item">
-          <Tooltip arrow title="Delete Course with all of its Content">
+          <Tooltip arrow title="Delete Course with all of its Content" placement="left">
             <Grid container direction={'row'}>
               <DeleteForeverIcon fontSize="small" />
               <Typography sx={{ ml: 1 }}>Löschen</Typography>
@@ -139,7 +135,7 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
       </Menu>
       <DeleteEntityModal
         open={isDeleteCourseModalOpen}
-        onClose={handleCloseDeleteCourseModal}
+        setDeleteEntityModalOpen={setDeleteCourseModalOpen}
         entityName={courseName}
         entityId={courseId}
         extraId={lmsCourseId}

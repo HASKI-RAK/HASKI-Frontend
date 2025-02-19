@@ -35,8 +35,8 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
 
   // Handle node click but ignore clicks that originated from the delete icon.
   const handleNodeClick = (event: React.MouseEvent) => {
-    if ((event.target as HTMLElement).closest('.delete-icon')) {
-      return // Skip the click action if it came from the delete button.
+    if ((event.target as HTMLElement).closest('.learning-element-delete-icon')) {
+      return // Skip the iframe action if it came from the delete button.
     }
     props.data.handleOpen()
     props.data.handleSetUrl(getConfig().MOODLE + `/mod/${props.data.activityType}/view.php?id=${props.data.lmsId}`)
@@ -49,10 +49,6 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
     setLearningElementId(props.data.learningElementId)
     setLmsLearningElementId(props.data.lmsId)
     setIsHovered(false)
-  }
-
-  const handleCloseDeleteLearningElementModal = () => {
-    setDeleteLearningElementModalOpen(false)
   }
 
   const handleAcceptDeleteLearningElementModal = (learningElementId: number, lmsLearningElementId: number) => {
@@ -81,18 +77,23 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
           justifyContent="flex-end"
           alignItems="center"
           sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
-          <IconButton
-            onClick={handleOpenDeleteLearningElementModal}
-            className="delete-icon"
-            sx={{
-              marginLeft: '1rem',
-              color: theme.palette.secondary.contrastText,
-              backgroundColor: theme.palette.primary.main,
-              border: '1px solid grey',
-              zIndex: 10
-            }}>
-            <DeleteForeverIcon />
-          </IconButton>
+          <Tooltip arrow title="Remove Learning Element" placement="top">
+            <IconButton
+              onClick={handleOpenDeleteLearningElementModal}
+              className="learning-element-delete-icon"
+              sx={{
+                marginLeft: '1rem',
+                color: 'white',
+                backgroundColor: theme.palette.error.dark,
+                border: '1px solid grey',
+                zIndex: 10,
+                '&:hover': {
+                  backgroundColor: theme.palette.error.light
+                }
+              }}>
+              <DeleteForeverIcon fontSize={'medium'} />
+            </IconButton>
+          </Tooltip>
           {props.children}
         </Grid>
       </Collapse>
@@ -129,7 +130,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
       )}
       <DeleteEntityModal
         open={isDeleteLearningElementModalOpen}
-        onClose={handleCloseDeleteLearningElementModal}
+        setDeleteEntityModalOpen={setDeleteLearningElementModalOpen}
         entityName={learningElementName}
         entityId={learningElementId}
         extraId={lmsLearningElementId}

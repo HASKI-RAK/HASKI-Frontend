@@ -1,6 +1,6 @@
 import WarningIcon from '@mui/icons-material/Warning'
-import { Button, Checkbox, Grid, Modal, Typography } from '@mui/material'
-import { memo, useCallback, useState } from 'react'
+import { Box, Button, Checkbox, Grid, Modal, Typography } from '@mui/material'
+import { SetStateAction, memo, useCallback, useState } from 'react'
 import { Divider, FormControlLabel } from '@common/components'
 
 type DeleteEntityModalProps = {
@@ -9,10 +9,30 @@ type DeleteEntityModalProps = {
   entityType: string // e.g. "Kurs" or "Thema"
   entityId: number
   extraId: number // optional extra id, if needed (e.g. lmsCourseId)
-  onClose: () => void
+  setDeleteEntityModalOpen: (value: SetStateAction<boolean>) => void
   onConfirm: (entityId: number, extraId: number) => void
   description?: string // optional custom description text
   confirmLabel?: string // optional custom label for the checkbox
+}
+
+const styleBox = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  backgroundColor: 'background.paper',
+  borderRadius: 2,
+  boxShadow: 24,
+  p: 3,
+  width: {
+    xs: '20rem',
+    sm: '20rem',
+    md: '20rem',
+    lg: '30rem',
+    xl: '40rem',
+    xxl: '45rem',
+    xxxl: '50rem'
+  }
 }
 
 const DeleteEntityModal = ({
@@ -21,7 +41,7 @@ const DeleteEntityModal = ({
   entityType,
   entityId,
   extraId,
-  onClose,
+  setDeleteEntityModalOpen,
   onConfirm,
   description,
   confirmLabel
@@ -36,25 +56,9 @@ const DeleteEntityModal = ({
   const defaultConfirmLabel = `Den ${entityType} samt aller Inhalte aus dem HASKI-System unwiderruflich löschen`
 
   return (
-    <Modal open={open} onClose={onClose}>
-      <Grid container alignItems="center" justifyContent="center" sx={{ minHeight: '100vh' }}>
-        <Grid
-          item
-          sx={{
-            backgroundColor: 'background.paper',
-            borderRadius: 2,
-            boxShadow: 24,
-            p: 3,
-            width: {
-              xs: '20rem',
-              sm: '20rem',
-              md: '20rem',
-              lg: '30rem',
-              xl: '40rem',
-              xxl: '45rem',
-              xxxl: '50rem'
-            }
-          }}>
+    <Modal open={open} onClose={() => setDeleteEntityModalOpen(false)} className="learning-element-delete-icon">
+      <Box sx={styleBox}>
+        <Grid item>
           <Grid container alignItems="center" spacing={1}>
             <Grid item>
               <WarningIcon color="error" sx={{ fontSize: '2rem' }} />
@@ -79,7 +83,7 @@ const DeleteEntityModal = ({
           <Grid item xs={12}>
             <FormControlLabel
               onClick={handleChecked}
-              className="delete-icon"
+              className="learning-element-delete-icon"
               control={<Checkbox />}
               label={<Typography variant="body2">{confirmLabel || defaultConfirmLabel}</Typography>}
               sx={{
@@ -95,14 +99,17 @@ const DeleteEntityModal = ({
           </Grid>
           <Grid container justifyContent="flex-end" spacing={2} sx={{ mt: 2 }}>
             <Grid item>
-              <Button onClick={onClose} variant="outlined" className="delete-icon">
+              <Button
+                onClick={() => setDeleteEntityModalOpen(false)}
+                variant="outlined"
+                className="learning-element-delete-icon">
                 Abbrechen
               </Button>
             </Grid>
             <Grid item>
               <Button
                 onClick={() => onConfirm(entityId, extraId)}
-                className="delete-icon"
+                className="learning-element-delete-icon"
                 variant="contained"
                 color="error"
                 disabled={!checked}>
@@ -111,7 +118,7 @@ const DeleteEntityModal = ({
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </Modal>
   )
 }

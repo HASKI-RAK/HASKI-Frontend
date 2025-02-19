@@ -53,10 +53,6 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
     [handleCloseMenu, setDeleteTopicModalOpen, setTopicName]
   )
 
-  const handleCloseDeleteTopicModal = useCallback(() => {
-    setDeleteTopicModalOpen(false)
-  }, [setDeleteTopicModalOpen])
-
   const handleAcceptDeleteTopicModal = useCallback(
     (topicId: number, lmsTopicId: number) => {
       deleteTopic(topicId, lmsTopicId).then(() => {
@@ -160,7 +156,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           onClick={handleAlgorithmMenuOpen}
           id="algorithm-settings-menu-item"
           data-testid="AlgorithmSettingsItem">
-          <Tooltip arrow title="Change Learning Path">
+          <Tooltip arrow title="Change Learning Path" placement="left">
             <Grid container direction={'row'}>
               <PolylineIcon fontSize="small" />
               <Typography sx={{ ml: 1 }}>{t('pages.topic.menuItemAlgorithms')}</Typography>
@@ -171,7 +167,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           onClick={() => handleOpenDeleteTopicModal(topic?.name || '', topic?.id || 0, topic?.lms_id || 0)}
           id="algorithm-settings-menu-item"
           data-testid="AlgorithmSettingsItem">
-          <Tooltip arrow title="Delete Topic with all of its Content">
+          <Tooltip arrow title="Delete Topic with all of its Content" placement="left">
             <Grid container direction={'row'}>
               <DeleteForeverIcon fontSize="small" />
               <Typography sx={{ ml: 1 }}>Löschen</Typography>
@@ -181,7 +177,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
       </Menu>
       <DeleteEntityModal
         open={isDeleteTopicModalOpen}
-        onClose={handleCloseDeleteTopicModal}
+        setDeleteEntityModalOpen={setDeleteTopicModalOpen}
         entityName={topicName}
         entityId={topicId}
         extraId={lmsTopicId}
