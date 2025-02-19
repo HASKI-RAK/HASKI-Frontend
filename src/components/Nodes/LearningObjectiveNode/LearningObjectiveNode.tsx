@@ -18,8 +18,7 @@ import BasicNode from '../BasicNode/BasicNode'
  */
 const LearningObjectiveNode = (data: NodeProps<LearningPathLearningElementNode>) => {
   return (
-    <BasicNode {...data} id="learning-objective-node">
-      <Flag sx={{ fontSize: 50 }} />
+    <BasicNode {...data} id="learning-objective-node" icon={<Flag sx={{ fontSize: 50 }} />}>
     </BasicNode>
   )
 }

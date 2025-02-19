@@ -18,8 +18,7 @@ import BasicNode from '../BasicNode/BasicNode'
  */
 const SummaryNode = (data: NodeProps<LearningPathLearningElementNode>) => {
   return (
-    <BasicNode {...data} id="summary-node">
-      <Description sx={{ fontSize: 50 }} />
+    <BasicNode {...data} id="summary-node" icon={<Description sx={{ fontSize: 50 }} />}>
     </BasicNode>
   )
 }

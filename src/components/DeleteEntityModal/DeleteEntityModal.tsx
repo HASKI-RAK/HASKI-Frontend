@@ -79,6 +79,7 @@ const DeleteEntityModal = ({
           <Grid item xs={12}>
             <FormControlLabel
               onClick={handleChecked}
+              className="delete-icon"
               control={<Checkbox />}
               label={<Typography variant="body2">{confirmLabel || defaultConfirmLabel}</Typography>}
               sx={{
@@ -94,13 +95,14 @@ const DeleteEntityModal = ({
           </Grid>
           <Grid container justifyContent="flex-end" spacing={2} sx={{ mt: 2 }}>
             <Grid item>
-              <Button onClick={onClose} variant="outlined">
+              <Button onClick={onClose} variant="outlined" className="delete-icon">
                 Abbrechen
               </Button>
             </Grid>
             <Grid item>
               <Button
                 onClick={() => onConfirm(entityId, extraId)}
+                className="delete-icon"
                 variant="contained"
                 color="error"
                 disabled={!checked}>
