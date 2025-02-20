@@ -1,11 +1,9 @@
-import { useContext, useEffect, useState } from 'react'
+import { setupXAPI } from 'src/services/xAPI/library/setupXAPI'
+import { useEffect } from 'react'
 import { getConfig } from '@shared'
 import { usePersistedStore } from '@store'
-import { setupXAPI} from 'src/services/xAPI/library/setupXAPI'
-import { useTranslation } from 'react-i18next'
-//import { useLocation } from 'react-router-dom'
-import { AuthContext } from '@services'
-import log from 'loglevel'
+
+// import { AuthContext } from '@services'
 
 type AppHookReturn = {
   isXAPIConfigured: boolean
@@ -15,15 +13,13 @@ export const useApp = (): AppHookReturn => {
   // xAPI functionality.
   const setXAPI = usePersistedStore().setXAPI
   const getXAPI = usePersistedStore().getXAPI
-  const getUser = usePersistedStore((state) => state.getUser)
-  const [lmsUserID, setLmsUserID] = useState<string | undefined>(undefined)
-  
-  const { i18n } = useTranslation()
-  const en = i18n.getFixedT('en')
-  // const location = useLocation()
-  const { isAuth } = useContext(AuthContext)
 
+  // Current browser language.
+  const currentLanguage = localStorage.getItem('i18nextLng') ?? ''
+
+  // Create the xAPI object.
   const xAPI = setupXAPI({
+    currentLanguage: currentLanguage,
     projectURL: getConfig().FRONTEND_GITHUB ?? '',
     projectVersion: getConfig().FRONTEND_VERSION ?? '',
     repositories: {
@@ -31,13 +27,9 @@ export const useApp = (): AppHookReturn => {
       page: (getConfig().WIKI ?? '').concat('/functions/pages.'),
       verb: (getConfig().WIKI ?? '').concat('/variables/services.')
     },
-    translateToEN: (key: string) => en('pages.'.concat(key)),
-    userAuthenticated: true, //isAuth,
-    userID: lmsUserID ?? '-1',
-    userLocation: new URL(window.location.href).pathname.toString(), //location.pathname,
     xAPI: {
       auth: {
-        username:getConfig().LRS_AUTH_USERNAME ?? '',
+        username: getConfig().LRS_AUTH_USERNAME ?? '',
         password: getConfig().LRS_AUTH_PASSWORD ?? ''
       },
       endpoint: getConfig().LRS ?? '',
@@ -45,19 +37,10 @@ export const useApp = (): AppHookReturn => {
     }
   })
 
+  // Set the xAPI object in the slice.
   useEffect(() => {
-    isAuth &&
-      getUser()
-        .then((user) => {
-          setLmsUserID(user.lms_user_id.toString())
-        })
-        .catch((error: string) => {
-          log.error(error)
-          return undefined
-        })
-        
     setXAPI(xAPI)
-  }, [getUser, isAuth, setXAPI, setLmsUserID])
+  }, [setXAPI]) //xAPI,
 
   return { isXAPIConfigured: !!getXAPI() }
 }

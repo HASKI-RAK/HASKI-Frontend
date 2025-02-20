@@ -1,14 +1,14 @@
 import { StatementObject } from '@xapi/xapi'
 
 export type ObjectProps = {
-  componentURL: string
   component: string
-  componentRepository: string
+  componentID: string
+  repository: string
 }
 
 /**
  * getObject function.
- *
+ *TODO
  * @param componentURL - The URL of the component.
  * @param component - The name of the component.
  *
@@ -19,14 +19,14 @@ export type ObjectProps = {
  *
  * @category Services
  */
-export const getObject = ({ componentURL, component, componentRepository }: ObjectProps): StatementObject => {
+export const getObject = ({ component, componentID, repository }: ObjectProps): StatementObject => {
   return {
-    id: window.location.href.concat('#' + componentURL),
+    id: window.location.href.concat('#' + componentID),
     definition: {
       name: {
         en: component
       },
-      type: componentRepository.concat(component)
+      type: repository.concat(component)
     }
   }
 }

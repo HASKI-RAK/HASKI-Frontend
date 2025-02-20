@@ -1,7 +1,7 @@
-import { useCallback, useMemo } from 'react'
-import { StatementProps, getStatement } from '../library/getStatement'
-import { XAPIConfig } from '../library/setupXAPI'
 import XAPI from '@xapi/xapi'
+import { useCallback, useMemo } from 'react'
+import { StatementProps, getStatement } from './getStatement'
+import { XAPIConfig } from './setupXAPI'
 
 /**
  * xAPIVerb enum.
@@ -20,10 +20,13 @@ export type xAPIVerb = 'clicked' | 'closed' | 'changed'
  * @category Hooks
  * @interface
  */
-export type XAPIWrapperHookParams = {
+export type XAPIHookParams = {
   componentID?: string
   componentType?: string
   filePath?: string
+  pageName?: string
+  userAuthenticated?: boolean
+  userID?: string
   xAPIConfig?: XAPIConfig & { xAPI: XAPI }
 }
 
@@ -34,13 +37,13 @@ export type XAPIWrapperHookParams = {
  * @category Hooks
  * @interface
  */
-export type xAPIWrapperHookReturn = {
+export type xAPIHookReturn = {
   readonly sendStatement: (verb: xAPIVerb) => Promise<void>
 }
 
 /**
  * useStatement hook.
- *
+ *TODO
  * @param params - The default values for the statement.
  *
  * @remarks
@@ -53,32 +56,40 @@ export type xAPIWrapperHookReturn = {
  * @category Services
  * @category Hooks
  */
-export const useXAPI = (params?: XAPIWrapperHookParams): xAPIWrapperHookReturn => {
-  const { componentID = '', componentName = '', filePath = '', xAPIConfig = undefined } = params ?? {}
+export const useXAPI = (params?: XAPIHookParams): xAPIHookReturn => {
+  const {
+    componentID = '',
+    componentType = '',
+    filePath = '',
+    pageName = window.location.pathname.split('/').pop() ?? '',
+    userAuthenticated = false,
+    userID = '',
+    xAPIConfig = undefined
+  } = params ?? {}
 
   const sendStatement = useCallback(
     async (verbName: xAPIVerb) => {
-      if (xAPIConfig?.userAuthenticated) {
-        const { translateToEN, userID, repositories, projectVersion, projectURL, userLocation, xAPI } = xAPIConfig
+      if (userAuthenticated && xAPIConfig) {
+        const { currentLanguage, projectURL, projectVersion, repositories, xAPI } = xAPIConfig
 
         const statement: StatementProps = {
-          componentName: componentName,
+          componentName: componentType,
           componentID: componentID,
+          currentLanguage: currentLanguage,
           filePath: filePath,
+          pageName: pageName,
           projectURL: projectURL,
           projectVersion: projectVersion,
           repositories: repositories,
           userID: userID,
-          userLocation: userLocation,
-          translateToEN: translateToEN,
-          verbName: verbName,
+          verbName: verbName
         }
 
-        // xAPI.sendStatement({ statement: getStatement(statement) })
+        // TODO: xAPI.sendStatement({ statement: getStatement(statement) })
         console.log(getStatement(statement))
       }
     },
-    [componentID, componentName, filePath, xAPIConfig]
+    [componentID, componentType, filePath, xAPIConfig]
   )
 
   return useMemo(() => ({ sendStatement }), [sendStatement])

@@ -12,19 +12,19 @@ TODO: Comment
 export type StatementProps = {
   componentID: string
   componentName: string
+  currentLanguage?: string
   filePath: string
+  pageName: string
   projectURL: string
   projectVersion: string
   repositories: XAPIRepositories
   userID: string
-  userLocation: string
-  translateToEN: (key: string) => string
   verbName: string
 }
 
 /**
  * getStatement function.
- *!TODO: RENAME
+ *TODO: RENAME
  * @param lmsUserID - The LMS user ID of the current user.
  * @param verb - The verb of the xAPI statement.
  * @param path - The path of the parent page.
@@ -43,25 +43,33 @@ export type StatementProps = {
  */
 export const getStatement = ({
   filePath,
+  currentLanguage,
   componentID,
   componentName,
+  pageName,
   projectURL,
   projectVersion,
   repositories,
-  translateToEN,
   userID,
-  userLocation,
-  verbName,
+  verbName
 }: StatementProps): Statement => {
   return {
     actor: getActor({ userID: userID }),
-    verb: getVerb({ verb: verbName, verbRepository: typeof repositories == 'string' ? repositories : repositories.verb }),
-    object: getObject({ componentURL: componentID, component: componentName, componentRepository: typeof repositories == 'string' ? repositories : repositories.component }),
+    verb: getVerb({ verb: verbName, repository: typeof repositories == 'string' ? repositories : repositories.verb }),
+    object: getObject({
+      componentID,
+      component: componentName,
+      repository: typeof repositories == 'string' ? repositories : repositories.component
+    }),
     context: getContext({
+      contextActivities: getContextActivities({
+        page: pageName,
+        repository: typeof repositories == 'string' ? repositories : repositories.page
+      }),
       domainVersion: projectVersion,
       filePath: filePath,
-      gitHubURL: projectURL,
-      contextActivities: getContextActivities({ pageRepository: typeof repositories == 'string' ? repositories : repositories.page, path: userLocation, translate: translateToEN })
+      gitHub: projectURL,
+      language: currentLanguage
     }),
     timestamp: new Date().toISOString().replace('Z', '+00:00')
   }

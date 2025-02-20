@@ -1,6 +1,6 @@
 import { ChangeEvent, ComponentType, MouseEvent } from 'react'
-import { useXAPI as useXAPI } from './xAPIWrapper.hooks'
 import { XAPI } from './setupXAPI'
+import { useXAPI } from './xAPI.hooks'
 
 type EventHandlers = {
   id?: string
@@ -13,7 +13,10 @@ export const withXAPI = <P extends object>(
   WrappedComponent: ComponentType<P & EventHandlers>,
   componentType?: string,
   componentFilePath?: string,
-  xAPIConfig?: XAPI,
+  pageName?: string,
+  userAuthenticated?: boolean,
+  userID?: string,
+  xAPIConfig?: XAPI
 ): ComponentType<P & EventHandlers> => {
   const EnhancedComponent = (props: P & EventHandlers) => {
     const { onClick, onChange, onClose, ...rest } = props
@@ -22,6 +25,9 @@ export const withXAPI = <P extends object>(
       componentID: props.id,
       componentType: componentType,
       filePath: componentFilePath,
+      pageName: pageName,
+      userAuthenticated: userAuthenticated,
+      userID: userID,
       xAPIConfig: xAPIConfig
     })
 

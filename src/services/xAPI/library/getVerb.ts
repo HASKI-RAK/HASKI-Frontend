@@ -1,15 +1,14 @@
 import { Verb } from '@xapi/xapi'
-import { string } from 'prop-types'
 
-//! Comment
+//TODO: Comment
 export type VerbProps = {
   verb: string
-  verbRepository: string
+  repository: string
 }
 
 /**
  * getVerb function.
- *
+ *TODO
  * @param verb - The verb of the xAPI statement.
  *
  * @remarks
@@ -19,9 +18,9 @@ export type VerbProps = {
  *
  * @category Services
  */
-export const getVerb = ({ verb, verbRepository }: VerbProps): Verb => {
+export const getVerb = ({ verb, repository }: VerbProps): Verb => {
   return {
-    id: verbRepository.concat(verb),
+    id: repository.concat(verb),
     display: {
       en: verb
     }

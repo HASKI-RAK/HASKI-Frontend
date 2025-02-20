@@ -1,4 +1,5 @@
 import DefaultFab from '@mui/material/Fab'
+import xAPIWrapper from 'src/services/xAPI/notlib/XAPIWrapper.hooks'
 import { MouseEvent, memo, useCallback } from 'react'
 import { FabProps as DefaultFabProps } from '@common/components'
 import {
@@ -47,4 +48,6 @@ const Fab = ({ useStatement = _useStatement, onClick, ...props }: FabProps) => {
   )
 }
 
-export default memo(Fab)
+// export default memo(Fab)
+
+export default xAPIWrapper('Fab', new URL(import.meta.url).pathname, DefaultFab) //RENAME useXAPIWRAPPER

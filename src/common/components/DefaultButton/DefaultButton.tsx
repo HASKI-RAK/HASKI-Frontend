@@ -1,4 +1,5 @@
 import DefaultButton from '@mui/material/Button'
+import xAPIWrapper from 'src/services/xAPI/notlib/XAPIWrapper.hooks'
 import { MouseEvent, RefObject, forwardRef, memo, useCallback } from 'react'
 import { ButtonProps as DefaultButtonProps } from '@common/components'
 import {
@@ -8,7 +9,6 @@ import {
   xAPIComponent,
   xAPIVerb
 } from '@services'
-import xAPIWrapper from 'src/services/xAPI/notlib/XAPIWrapper.hooks'
 
 /**
  * @prop DefaultButtonProps - The props of a mui Button.

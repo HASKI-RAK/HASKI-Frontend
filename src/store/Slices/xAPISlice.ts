@@ -1,7 +1,7 @@
+import { XAPI } from 'src/services/xAPI/library/setupXAPI'
 import { StateCreator } from 'zustand'
 import { PersistedStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
-import { XAPI } from 'src/services/xAPI/library/setupXAPI' 
 
 export default interface XAPISlice {
   _xAPI: XAPI | undefined

@@ -12,8 +12,8 @@ import LearningPathElementStatusSlice, {
   createLearningPathElementStatusSlice
 } from '../Slices/LearningPathElementStatusSlice'
 import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
-import UserSlice, { createUserSlice } from '../Slices/UserSlice'
 import NewsSlice, { createNewsSlice } from '../Slices/NewsSlice'
+import UserSlice, { createUserSlice } from '../Slices/UserSlice'
 import xAPISlice, { createXAPISlice } from '../Slices/xAPISlice'
 
 export type StoreState = LearningPathElementSlice &

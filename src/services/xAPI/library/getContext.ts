@@ -1,16 +1,21 @@
 import { Context, ContextActivity } from '@xapi/xapi'
-import { getContextActivities } from './getContextActivities'
 
 export type ContextProps = {
-  contextActivities?: any
-  filePath: string
+  contextActivities?: {
+    parent?: ContextActivity[]
+    grouping?: ContextActivity[]
+    category?: ContextActivity[]
+    her?: ContextActivity[]
+  }
   domainVersion: string
-  gitHubURL: string
+  filePath: string
+  gitHub: string
+  language?: string
 }
 
 /**
  * getContext function.
- *
+ *TODO
  * @param path - The path of the parent page.
  * @param getEnglishName - The function to translate a page name to english.
  * @param filePath - The file path of the component that sends an xAPI statement.
@@ -22,17 +27,23 @@ export type ContextProps = {
  *
  * @category Services
  */
-export const getContext = ({ contextActivities, filePath, domainVersion, gitHubURL }: ContextProps): Context => {
+export const getContext = ({
+  contextActivities,
+  domainVersion,
+  filePath,
+  gitHub,
+  language = navigator.language
+}: ContextProps): Context => {
   if (contextActivities)
     return {
       platform: 'Frontend',
-      language: localStorage.getItem('i18nextLng') ?? '',
+      language: language,
       extensions: {
         'https://lrs.learninglocker.net/define/extensions/info': {
-          domain: new URL(window.location.href).origin,
+          domain: window.location.origin,
           domain_version: domainVersion,
-          github: gitHubURL,
-          event_function: 'src'.concat(filePath)
+          github: gitHub,
+          event_function: `src${filePath}`
         }
       },
       contextActivities: contextActivities
@@ -40,13 +51,13 @@ export const getContext = ({ contextActivities, filePath, domainVersion, gitHubU
   else
     return {
       platform: 'Frontend',
-      language: localStorage.getItem('i18nextLng') ?? '',
+      language: language,
       extensions: {
         'https://lrs.learninglocker.net/define/extensions/info': {
-          domain: new URL(window.location.href).origin,
+          domain: window.location.origin,
           domain_version: domainVersion,
-          github: gitHubURL,
-          event_function: 'src'.concat(filePath)
+          github: gitHub,
+          event_function: `src${filePath}`
         }
       }
     }

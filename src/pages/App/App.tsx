@@ -33,7 +33,7 @@ import { useApp } from './App.hooks'
  */
 export const App = () => {
   const { isXAPIConfigured } = useApp()
-  
+
   return (
     <>
       {isXAPIConfigured && (

@@ -1,13 +1,13 @@
 import { Actor } from '@xapi/xapi'
 
-//! TODO: DOKU
+//TODO: DOKU
 export type ActorProps = {
   userID: string
 }
 
 /**
  * getActor function.
- *! TODO
+ *TODO
  * @param lmsUserID - The LMS user ID of the current user.
  *
  * @remarks
@@ -20,7 +20,7 @@ export type ActorProps = {
 export const getActor = ({ userID }: ActorProps): Actor => {
   return {
     account: {
-      homePage: new URL(window.location.href).origin,
+      homePage: window.location.origin,
       name: userID
     }
   }

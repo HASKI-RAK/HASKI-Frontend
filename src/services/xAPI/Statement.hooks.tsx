@@ -126,15 +126,17 @@ export const useStatement = (params?: useStatementHookParams): StatementHookRetu
   // Wraps function so send statements from components.
   const sendStatement = useCallback(
     async (verb: xAPIVerb, filePath: string) => {
-      console.log(getStatement(
-        '-1',
-        xAPIVerb[verb],
-        location.pathname,
-        defaultComponentID,
-        xAPIComponent[defaultComponent],
-        getEnglishName,
-        filePath
-      ))
+      console.log(
+        getStatement(
+          '-1',
+          xAPIVerb[verb],
+          location.pathname,
+          defaultComponentID,
+          xAPIComponent[defaultComponent],
+          getEnglishName,
+          filePath
+        )
+      )
       lmsUserID &&
         (await getXAPI()?.sendStatement({
           statement: getStatement(

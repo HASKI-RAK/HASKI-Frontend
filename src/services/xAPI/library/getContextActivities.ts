@@ -1,14 +1,13 @@
 import { Context, ContextActivity } from '@xapi/xapi'
 
 export type ContextActivityProps = {
-  pageRepository: string
-  path: string
-  translate: (key: string) => string
+  page: string
+  repository: string
 }
 
 /**
  * getParent function.
- *
+ *TODO
  * @param path - The path of the parent page.
  * @param getEnglishName - The function to translate a page name to english.
  *
@@ -19,15 +18,14 @@ export type ContextActivityProps = {
  *
  * @category Services
  */
-//TODO: Put in the Name of the page translated into english from above
-export const getParent = ({ pageRepository, path, translate }: ContextActivityProps): ContextActivity[] => {
+export const getParent = ({ page, repository }: ContextActivityProps): ContextActivity[] => {
   return [
     {
       id: window.location.href,
       definition: {
-        type: pageRepository.concat(path.split('/').pop() as string /*Cannot be undefined, but TS doesn't know that*/),
+        type: `${repository}${page}`,
         name: {
-          en: translate(path.split('/').pop() as string /*Cannot be undefined, but TS doesn't know that*/)
+          en: page
         }
       }
     }
@@ -36,7 +34,7 @@ export const getParent = ({ pageRepository, path, translate }: ContextActivityPr
 
 /**
  * getGrouping function.
- *
+ *TODO
  * @remarks
  * getGrouping presents a function that can be used to get the grouping part of an xAPI statement.
  *
@@ -44,12 +42,12 @@ export const getParent = ({ pageRepository, path, translate }: ContextActivityPr
  *
  * @category Services
  */
-export const getGrouping = (pageRepository: ContextActivityProps['pageRepository']): ContextActivity[] => {
+export const getGrouping = (repository: ContextActivityProps['repository']): ContextActivity[] => {
   return [
     {
-      id: new URL(window.location.href).origin,
+      id: window.location.origin,
       definition: {
-        type: pageRepository.concat('Home'),
+        type: `${repository}Home`,
         name: {
           en: 'Home'
         }
@@ -60,7 +58,7 @@ export const getGrouping = (pageRepository: ContextActivityProps['pageRepository
 
 /**
  * getContextActivities function.
- *
+ *TODO
  * @param path - The path of the parent page.
  * @param getEnglishName - The function to translate a page name to english.
  *
@@ -71,21 +69,15 @@ export const getGrouping = (pageRepository: ContextActivityProps['pageRepository
  *
  * @category Services
  */
-export const getContextActivities = ({
-  pageRepository,
-  path,
-  translate
-}: ContextActivityProps): Context['contextActivities'] => {
-  if (path === '/') {
-    return
-  } else if (path.split('/').length === 2) {
+export const getContextActivities = ({ page, repository }: ContextActivityProps): Context['contextActivities'] => {
+  if (window.location.pathname === '/') {
     return {
-      parent: getParent({ pageRepository, path, translate })
+      parent: getGrouping(repository)
     }
   } else {
     return {
-      parent: getParent({ pageRepository, path, translate }),
-      grouping: getGrouping(pageRepository)
+      parent: getParent({ page, repository }),
+      grouping: getGrouping(repository)
     }
   }
 }

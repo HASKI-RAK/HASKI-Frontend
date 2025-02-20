@@ -1,20 +1,19 @@
 import BaseXAPI from '@xapi/xapi'
 import { Versions } from '@xapi/xapi/dist/types/constants'
 
-export type XAPIRepositories = {
-  component: string
-  page: string
-  verb: string
-} | string
+export type XAPIRepositories =
+  | {
+      component: string
+      page: string
+      verb: string
+    }
+  | string
 
 export type XAPIConfig = {
+  currentLanguage?: string
   projectURL: string
   projectVersion: string
   repositories: XAPIRepositories
-  translateToEN: (key: string) => string
-  userAuthenticated: boolean
-  userID: string
-  userLocation: string
 }
 
 export type XAPI = XAPIConfig & { xAPI: BaseXAPI }
@@ -34,7 +33,6 @@ export const setupXAPI = ({
     auth: typeof xAPI.auth === 'string' ? xAPI.auth : BaseXAPI.toBasicAuth(xAPI.auth.username, xAPI.auth.password),
     endpoint: xAPI.endpoint,
     version: xAPI.version,
-    adapter: 'fetch'
+    adapter: 'fetch' // TODO: WHY DOES IT NOT WORK? UPDATE LIBRARY???
   })
 })
-
