@@ -4,7 +4,6 @@ import { MemoryRouter } from 'react-router-dom'
 import ReactFlow, { Node } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
-import BasicNode from './BasicNode'
 
 describe('BasicNode tests', () => {
   beforeEach(() => {
@@ -13,6 +12,7 @@ describe('BasicNode tests', () => {
 
   it('renders correctly and can be clicked, isDone is false', () => {
     const mockData: LearningPathLearningElementNode = {
+      learningElementId: 1,
       lmsId: 1,
       name: 'basicNode',
       activityType: 'testType',
@@ -53,6 +53,7 @@ describe('BasicNode tests', () => {
 
   it('renders correctly and can be clicked, isDone is true', () => {
     const mockData: LearningPathLearningElementNode = {
+      learningElementId: 1,
       lmsId: 1,
       name: 'testNode',
       activityType: 'testType',

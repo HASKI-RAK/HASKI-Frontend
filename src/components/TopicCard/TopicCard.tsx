@@ -154,7 +154,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         data-testid="TopicSettingsMenu">
         <MenuItem
           onClick={handleAlgorithmMenuOpen}
-          id="algorithm-settings-menu-item"
+          id="algorithm-settings-menu-algorithm-item"
           data-testid="AlgorithmSettingsItem">
           <Tooltip arrow title="Change Learning Path" placement="left">
             <Grid container direction={'row'}>
@@ -165,8 +165,8 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         </MenuItem>
         <MenuItem
           onClick={() => handleOpenDeleteTopicModal(topic?.name || '', topic?.id || 0, topic?.lms_id || 0)}
-          id="algorithm-settings-menu-item"
-          data-testid="AlgorithmSettingsItem">
+          id="algorithm-settings-menu-delete-item"
+          data-testid="DeleteTopicItem">
           <Tooltip arrow title="Delete Topic with all of its Content" placement="left">
             <Grid container direction={'row'}>
               <DeleteForeverIcon fontSize="small" />

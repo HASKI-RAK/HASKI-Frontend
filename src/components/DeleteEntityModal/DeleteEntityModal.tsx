@@ -6,7 +6,7 @@ import { Divider, FormControlLabel } from '@common/components'
 type DeleteEntityModalProps = {
   open: boolean
   entityName: string
-  entityType: string // e.g. "Kurs" or "Thema"
+  entityType: string // e.g. "Kurs", "Thema", "Lern Element"
   entityId: number
   extraId: number // optional extra id, if needed (e.g. lmsCourseId)
   setDeleteEntityModalOpen: (value: SetStateAction<boolean>) => void

@@ -7,6 +7,7 @@ import { IFrameModal, LabeledSwitch, ResponsiveMiniMap, handleError, nodeTypes }
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+import CreateLearningElement from '../../components/CreateLearningElement/CreateLearningElement'
 import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
 
 /**
@@ -162,13 +163,18 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           }}>
           <ResponsiveMiniMap />
           <Background gap={16} />
-          <Panel position="top-right">
+          {/*
+            <Panel position="top-right">
             <LabeledSwitch
               labelLeft={t('pages.topic.grouped')}
               labelRight={t('pages.topic.single')}
               isGrouped={isGrouped}
               setIsGrouped={setIsGrouped}
             />
+          </Panel>
+          */}
+          <Panel position={'top-right'} style={{ right: '2rem', top: '2.5rem' }}>
+            <CreateLearningElement />
           </Panel>
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
         </ReactFlow>
