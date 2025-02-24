@@ -213,6 +213,8 @@ export const useCreateTopicModal = ({
   return useMemo(
     () => ({
       handleCreate,
+      handleCreateLearningElements,
+      handleCalculateLearningPaths,
       handleTopicChange,
       handleLearningElementChange,
       handleLearningElementClassification,
@@ -220,6 +222,8 @@ export const useCreateTopicModal = ({
     }),
     [
       handleCreate,
+      handleCreateLearningElements,
+      handleCalculateLearningPaths,
       handleTopicChange,
       handleLearningElementChange,
       handleLearningElementClassification,

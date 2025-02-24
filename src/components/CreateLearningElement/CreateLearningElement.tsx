@@ -23,7 +23,7 @@ const CreateLearningElement = () => {
         setCurrentTopic(learningPathTopic.topics.filter((topic) => topic.id === parseInt(topicId ?? '0'))[0])
       })
     })
-  }, [])
+  }, [topicId])
 
   return (
     <Grid>

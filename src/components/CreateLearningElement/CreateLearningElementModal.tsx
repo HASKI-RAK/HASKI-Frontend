@@ -46,10 +46,10 @@ const CreateLearningElementModal = ({
   const [selectAllLearningElementsChecked, setSelectAllLearningElementsChecked] = useState(false)
   const {
     handleCreate,
-    handleTopicChange,
+    handleCreateLearningElements,
+    handleCalculateLearningPaths,
     handleLearningElementChange,
-    handleLearningElementClassification,
-    handleAlgorithmChange
+    handleLearningElementClassification
   } = useCreateTopicModal({
     setCreateTopicIsSending,
     setSelectedTopics,
@@ -72,12 +72,34 @@ const CreateLearningElementModal = ({
   const handleBack = () => setActiveStep((prevStep) => prevStep - 1)
 
   const handleSubmit = async () => {
-    setCreateTopicIsSending(true)
-    for (const key in selectedAlgorithms) {
-      const { topicName, algorithmShortName } = selectedAlgorithms[key]
-      await handleCreate(topicName, parseInt(key), selectedLearningElementsClassification, algorithmShortName, courseId)
-    }
-    setCreateTopicIsSending(false)
+    getUser().then((user) => {
+      return Promise.all(
+        selectedLearningElementsClassification[currentTopicLmsId].map((element) =>
+          handleCreateLearningElements(
+            element.lms_learning_element_name,
+            element.lms_activity_type,
+            element.classification,
+            element.lms_id,
+            parseInt(topicId || '0'),
+            user
+          )
+        )
+      ).then(() => {
+        return handleCalculateLearningPaths(
+          user.settings.user_id,
+          user.role,
+          user.university,
+          courseId || '0',
+          parseInt(topicId || '0')
+        ).then(() => {
+          addSnackbar({
+            message: t('appGlobal.dataSendSuccessful'),
+            severity: 'success',
+            autoHideDuration: 5000
+          })
+        })
+      })
+    })
     handleCloseCreateTopicModal()
   }
 
@@ -113,7 +135,7 @@ const CreateLearningElementModal = ({
           }
         )
       })
-  }, [activeStep, openCreateTopicModal])
+  }, [activeStep, openCreateTopicModal, topicId])
 
   return (
     <Modal open={openCreateTopicModal} onClose={handleCloseCreateTopicModal}>
