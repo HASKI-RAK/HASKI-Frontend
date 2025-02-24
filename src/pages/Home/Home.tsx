@@ -1,11 +1,7 @@
-import dayjs from 'dayjs'
 import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardContent, Grid, IconButton, Skeleton, Typography } from '@common/components'
-import { AddCircle, MoreVert } from '@common/icons'
-import { CreateCourseModal } from '@components'
+import { Card, CardContent, Grid, Skeleton, Typography } from '@common/components'
 import { Course } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -26,7 +22,6 @@ export const Home = () => {
   const { isAuth } = useContext(AuthContext)
   const { isCourseCreatorRole } = useContext(RoleContext)
   const { addSnackbar } = useContext(SnackbarContext)
-  const navigate = useNavigate()
 
   // States
   const [courses, setCourses] = useState<Course[]>([])

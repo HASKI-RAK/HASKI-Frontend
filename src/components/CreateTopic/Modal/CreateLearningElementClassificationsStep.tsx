@@ -14,6 +14,7 @@ type CreateLearningElementClassificationsStepProps = {
   }) => void
   onNext: () => void
   onBack: () => void
+  nextButtonText: string
 }
 
 const CreateLearningElementClassificationsStep = ({
@@ -22,7 +23,8 @@ const CreateLearningElementClassificationsStep = ({
   selectedLearningElementsClassification,
   handleLearningElementClassification,
   onNext,
-  onBack
+  onBack,
+  nextButtonText
 }: CreateLearningElementClassificationsStepProps) => {
   const { t } = useTranslation()
 
@@ -48,7 +50,7 @@ const CreateLearningElementClassificationsStep = ({
               }
               onClick={onNext}
               sx={{ mr: -2 }}>
-              {t('appGlobal.next')}
+              {nextButtonText}
             </Button>
           </Grid>
         </Box>

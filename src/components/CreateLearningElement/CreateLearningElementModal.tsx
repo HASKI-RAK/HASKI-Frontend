@@ -1,11 +1,9 @@
-import { memo, useContext, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
-import { CreateAlgorithmTableNameProps, handleError } from '@components'
-import { LearningPathElement, LearningPathTopic, RemoteLearningElement, RemoteTopics } from '@core'
-import { SnackbarContext } from '@services'
+import { LearningPathElement, RemoteLearningElement, RemoteTopics } from '@core'
 import { usePersistedStore, useStore } from '@store'
 import CreateLearningElementClassificationsStep from '../CreateTopic/Modal/CreateLearningElementClassificationsStep'
 import CreateLearningElementsStep from '../CreateTopic/Modal/CreateLearningElementsStep'
@@ -15,6 +13,12 @@ export type CreateTopicModalProps = {
   openCreateTopicModal?: boolean
   currentTopicLmsId: number
   handleCloseCreateTopicModal: () => void
+  selectedLearningElements: { [key: number]: RemoteLearningElement[] }
+  setSelectedLearningElements: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElement[] }>>
+  selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
+  setSelectedLearningElementsClassification: Dispatch<
+    SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>
+  >
 }
 
 export type RemoteLearningElementWithClassification = RemoteLearningElement & {
@@ -24,85 +28,39 @@ export type RemoteLearningElementWithClassification = RemoteLearningElement & {
 const CreateLearningElementModal = ({
   openCreateTopicModal = false,
   currentTopicLmsId,
-  handleCloseCreateTopicModal
+  handleCloseCreateTopicModal,
+  selectedLearningElements,
+  setSelectedLearningElements,
+  selectedLearningElementsClassification,
+  setSelectedLearningElementsClassification
 }: CreateTopicModalProps) => {
   //Hooks
   const { t } = useTranslation()
   const { courseId, topicId } = useParams()
-  const { addSnackbar } = useContext(SnackbarContext)
   const [remoteTopic, setRemoteTopic] = useState<RemoteTopics[]>([])
-  const [createTopicIsSending, setCreateTopicIsSending] = useState<boolean>(false)
-  const [successfullyCreatedTopicsCount, setSuccessfullyCreatedTopicsCount] = useState<number>(0)
-  const [alreadyCreatedTopics, setAlreadyCreatedTopics] = useState<LearningPathTopic>()
-  const [selectedTopics, setSelectedTopics] = useState<RemoteTopics[]>([])
-  const [selectedLearningElements, setSelectedLearningElements] = useState<{
-    [key: number]: RemoteLearningElement[]
-  }>({})
-  const [selectedLearningElementsClassification, setSelectedLearningElementsClassification] = useState<{
-    [key: number]: RemoteLearningElementWithClassification[]
-  }>({})
-  const [selectedAlgorithms, setSelectedAlgorithms] = useState<{ [key: number]: CreateAlgorithmTableNameProps }>({})
   const [activeStep, setActiveStep] = useState<number>(0)
   const [selectAllLearningElementsChecked, setSelectAllLearningElementsChecked] = useState(false)
   const {
-    handleCreate,
-    handleCreateLearningElements,
-    handleCalculateLearningPaths,
+    handleCreateLearningElementsInExistingTopic,
     handleLearningElementChange,
     handleLearningElementClassification
   } = useCreateTopicModal({
-    setCreateTopicIsSending,
-    setSelectedTopics,
     setSelectedLearningElements,
-    setSelectedLearningElementsClassification,
-    setSelectedAlgorithms,
-    setSuccessfullyCreatedTopicsCount
+    setSelectedLearningElementsClassification
   })
 
   //Store
   const getUser = usePersistedStore((state) => state.getUser)
-  const getTopics = useStore((state) => state.getLearningPathTopic)
   const getRemoteTopics = useStore((state) => state.getRemoteTopics)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
 
   //Constants
-  const createTopicModalStepperSteps = [t('appGlobal.learningElements'), t('appGlobal.classifications')]
+  const createLearningElementModalStepperSteps = [t('appGlobal.learningElements'), t('appGlobal.classifications')]
 
   const handleNext = () => setActiveStep((prevStep) => prevStep + 1)
   const handleBack = () => setActiveStep((prevStep) => prevStep - 1)
 
-  const handleSubmit = async () => {
-    getUser().then((user) => {
-      return Promise.all(
-        selectedLearningElementsClassification[currentTopicLmsId].map((element) =>
-          handleCreateLearningElements(
-            element.lms_learning_element_name,
-            element.lms_activity_type,
-            element.classification,
-            element.lms_id,
-            parseInt(topicId || '0'),
-            user
-          )
-        )
-      ).then(() => {
-        return handleCalculateLearningPaths(
-          user.settings.user_id,
-          user.role,
-          user.university,
-          courseId || '0',
-          parseInt(topicId || '0')
-        ).then(() => {
-          addSnackbar({
-            message: t('appGlobal.dataSendSuccessful'),
-            severity: 'success',
-            autoHideDuration: 5000
-          })
-        })
-      })
-    })
-    handleCloseCreateTopicModal()
-  }
-
+  //filter out the learning elements that are already in the learning path
   useEffect(() => {
     getUser()
       .then((user) => {
@@ -135,7 +93,15 @@ const CreateLearningElementModal = ({
           }
         )
       })
-  }, [activeStep, openCreateTopicModal, topicId])
+  }, [
+    activeStep,
+    openCreateTopicModal,
+    topicId,
+    selectedLearningElements,
+    selectedLearningElementsClassification,
+    setSelectedLearningElements,
+    setSelectedLearningElementsClassification
+  ])
 
   return (
     <Modal open={openCreateTopicModal} onClose={handleCloseCreateTopicModal}>
@@ -155,8 +121,8 @@ const CreateLearningElementModal = ({
           }}>
           <Fab
             color="primary"
-            id={'create-topic-modal-close-button'}
-            data-testid={'create-topic-modal-close-button'}
+            id={'create-learning-elements-modal-close-button'}
+            data-testid={'create-learning-elements-modal-close-button'}
             onClick={handleCloseCreateTopicModal}
             sx={{
               position: 'sticky',
@@ -166,12 +132,12 @@ const CreateLearningElementModal = ({
             <Close />
           </Fab>
           <Stepper activeStep={activeStep} sx={{ pt: '1rem' }}>
-            {createTopicModalStepperSteps.map((label, index) => (
+            {createLearningElementModalStepperSteps.map((label, index) => (
               <Step key={label}>
                 <StepButton
                   color="inherit"
-                  id={'create-topic-modal-stepper'}
-                  data-testid={'create-topic-modal-stepper'}
+                  id={'create-learning-element-modal-stepper'}
+                  data-testid={'create-learning-element-modal-stepper'}
                   onClick={() => {
                     setActiveStep(index)
                   }}>
@@ -196,9 +162,20 @@ const CreateLearningElementModal = ({
               selectedTopics={remoteTopic}
               selectedLearningElements={selectedLearningElements}
               selectedLearningElementsClassification={selectedLearningElementsClassification}
+              onNext={() =>
+                handleCreateLearningElementsInExistingTopic(
+                  currentTopicLmsId,
+                  selectedLearningElementsClassification,
+                  topicId,
+                  courseId
+                ).then(() => {
+                  handleCloseCreateTopicModal()
+                  setActiveStep(0)
+                })
+              }
               handleLearningElementClassification={handleLearningElementClassification}
-              onNext={handleSubmit}
               onBack={handleBack}
+              nextButtonText={t('components.CreateLearningElementModal.createLearningElements')}
             />
           )}
         </Box>

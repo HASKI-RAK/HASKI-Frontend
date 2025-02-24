@@ -8,6 +8,7 @@ import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Typography
 import { MoreVert } from '@common/icons'
 import { Course } from '@core'
 import { SnackbarContext, deleteCourse } from '@services'
+import { useStore } from '@store'
 import DeleteEntityModal from '../DeleteEntityModal/DeleteEntityModal'
 
 type CourseCardProps = {
@@ -37,6 +38,7 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { addSnackbar } = useContext(SnackbarContext)
+  const clearCoursesCache = useStore((state) => state.clearCoursesCache)
 
   const [isDeleteCourseModalOpen, setDeleteCourseModalOpen] = useState(false)
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null)
@@ -71,6 +73,7 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
           severity: 'success',
           autoHideDuration: 5000
         })
+        clearCoursesCache()
         setDeleteCourseModalOpen(false)
       })
     },

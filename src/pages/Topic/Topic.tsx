@@ -41,6 +41,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
 
+  const learningPathElementCache = useStore((state) => state._cache_learningPathElement_record)
+  const learningPathLearningElementStatusCache = usePersistedStore((state) => state._learningPathElementStatus)
+
   const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
 
   // Translation
@@ -102,7 +105,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     setInitialNodes,
     setInitialEdges,
     learningPathElementStatus,
-    isGrouped
+    isGrouped,
+    learningPathLearningElementStatusCache
   ])
 
   // custom fitView centering on first uncompleted element
@@ -119,7 +123,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         })
       }, 100)
     }
-  }, [topicId, navigate, initialNodes, initialEdges])
+  }, [topicId, navigate, initialNodes, initialEdges, learningPathElementCache])
 
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)

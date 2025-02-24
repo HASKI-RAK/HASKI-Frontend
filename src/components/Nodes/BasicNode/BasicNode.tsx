@@ -8,6 +8,7 @@ import { CheckBox, Feedback } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import { SnackbarContext, deleteLearningElement } from '@services'
 import { getConfig } from '@shared'
+import { usePersistedStore, useStore } from '@store'
 import DeleteEntityModal from '../../DeleteEntityModal/DeleteEntityModal'
 
 type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
@@ -25,6 +26,9 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   const [learningElementId, setLearningElementId] = useState<number>(0)
   const [lmsLearningElementId, setLmsLearningElementId] = useState<number>(0)
   const [isHovered, setIsHovered] = useState(false)
+
+  const clearLearningPathElement = useStore((state) => state.clearLearningPathElementCache)
+  const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
 
   const onMouseEnter = () => {
     setIsHovered(true)
@@ -60,6 +64,8 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
       })
       setDeleteLearningElementModalOpen(false)
     })
+    clearLearningPathElement()
+    clearLearningPathElementStatusCache()
   }
 
   return (

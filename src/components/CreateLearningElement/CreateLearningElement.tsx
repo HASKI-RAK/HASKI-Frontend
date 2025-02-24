@@ -2,9 +2,9 @@ import { Grid } from '@mui/material'
 import { memo, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Button } from '@common/components'
-import { Topic } from '@core'
+import { RemoteLearningElement, Topic } from '@core'
 import { usePersistedStore, useStore } from '@store'
-import CreateLearningElementModal from './CreateLearningElementModal'
+import CreateLearningElementModal, { RemoteLearningElementWithClassification } from './CreateLearningElementModal'
 
 const CreateLearningElement = () => {
   const [createLearningElementModalOpen, setCreateLearningElementModalOpen] = useState(false)
@@ -12,8 +12,16 @@ const CreateLearningElement = () => {
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
   const [currentTopic, setCurrentTopic] = useState<Topic>()
+  const [selectedLearningElements, setSelectedLearningElements] = useState<{
+    [key: number]: RemoteLearningElement[]
+  }>({})
+  const [selectedLearningElementsClassification, setSelectedLearningElementsClassification] = useState<{
+    [key: number]: RemoteLearningElementWithClassification[]
+  }>({})
 
   const handleCloseLearningElementModal = () => {
+    setSelectedLearningElements({})
+    setSelectedLearningElementsClassification({})
     setCreateLearningElementModalOpen(false)
   }
 
@@ -38,7 +46,13 @@ const CreateLearningElement = () => {
       <CreateLearningElementModal
         openCreateTopicModal={createLearningElementModalOpen}
         currentTopicLmsId={currentTopic?.lms_id ?? 0}
-        handleCloseCreateTopicModal={handleCloseLearningElementModal}></CreateLearningElementModal>
+        handleCloseCreateTopicModal={handleCloseLearningElementModal}
+        selectedLearningElements={selectedLearningElements}
+        setSelectedLearningElements={setSelectedLearningElements}
+        selectedLearningElementsClassification={selectedLearningElementsClassification}
+        setSelectedLearningElementsClassification={
+          setSelectedLearningElementsClassification
+        }></CreateLearningElementModal>
     </Grid>
   )
 }

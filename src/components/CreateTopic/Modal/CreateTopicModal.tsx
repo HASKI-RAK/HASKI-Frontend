@@ -184,6 +184,7 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
               handleLearningElementClassification={handleLearningElementClassification}
               onNext={handleNext}
               onBack={handleBack}
+              nextButtonText={t('appGlobal.next')}
             />
           )}
           {activeStep === 3 && (

@@ -158,6 +158,7 @@
   "components.CreateLearningElementTable.selectAllToggle": "Alle auswählen",
   "components.CreateLearningElementTable.selectLearningElements": "Lernelemente auswählen",
   "components.CreateTopicModal.createTopics": "Themenbereiche erstellen",
+  "components.CreateLearningElementModal.createLearningElements": "Lernelemente erstellen",
   "components.ExistingTopicsTable.title": "Bereits erstellte Themenbereiche",
   "components.Footer.project": "Projekt",
   "components.FurtherInfoMenu.title": "Weitere Informationen",

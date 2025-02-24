@@ -9,6 +9,7 @@ import { MoreVert } from '@common/icons'
 import { AlgorithmSettingsModal, StyledLinearProgress } from '@components'
 import { Topic } from '@core'
 import { SnackbarContext, deleteTopic } from '@services'
+import { useStore } from '@store'
 import DeleteEntityModal from '../DeleteEntityModal/DeleteEntityModal'
 import { useTopicCard } from './TopicCard.hooks'
 
@@ -25,6 +26,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
+  const clearLearningPathTopic = useStore((state) => state.clearLearningPathTopicCache)
 
   const [isDeleteTopicModalOpen, setDeleteTopicModalOpen] = useState(false)
   const [topicName, setTopicName] = useState<string>('')
@@ -61,6 +63,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           severity: 'success',
           autoHideDuration: 5000
         })
+        clearLearningPathTopic()
         setDeleteTopicModalOpen(false)
       })
     },
