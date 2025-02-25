@@ -28,7 +28,7 @@
   "components.CourseCard.deleteTooltip": "Delete Course with all of its Content",
   "components.TopicCard.deleteTooltip": "Delete Topic with all of its Content",
   "components.BasicNode.deleteTooltip": "Delete Learning Element",
-  "components.DeleteEntityModal.header": "deletion confirmation",
+  "components.DeleteEntityModal.header": "deletion",
   "components.DeleteEntityModal.title-1": "You are about to delete",
   "components.DeleteEntityModal.title-2": ".",
   "components.DeleteEntityModal.description": "This action will permanently remove all data and associated content from the HASKI system. This action cannot be undone. Content in Moodle remains unaffected.",

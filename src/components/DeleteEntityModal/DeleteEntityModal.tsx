@@ -25,13 +25,13 @@ const styleBox = {
   boxShadow: 24,
   p: 3,
   width: {
-    xs: '20rem',
-    sm: '20rem',
-    md: '20rem',
-    lg: '30rem',
-    xl: '40rem',
-    xxl: '45rem',
-    xxxl: '50rem'
+    xs: '25rem',
+    sm: '25rem',
+    md: '25rem',
+    lg: '35rem',
+    xl: '45rem',
+    xxl: '50rem',
+    xxxl: '55rem'
   }
 }
 
@@ -60,7 +60,7 @@ const DeleteEntityModal = ({
               <WarningIcon color="error" sx={{ fontSize: '2rem' }} />
             </Grid>
             <Grid item>
-              <Typography variant="subtitle1" color="error">
+              <Typography variant="h6" color="error">
                 {entityType + ' ' + t('components.DeleteEntityModal.header')}
               </Typography>
             </Grid>
