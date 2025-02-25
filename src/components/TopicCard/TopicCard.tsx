@@ -1,16 +1,12 @@
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
-import PolylineIcon from '@mui/icons-material/Polyline'
-import { Tooltip } from '@mui/material'
 import { memo, useCallback, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Typography } from '@common/components'
-import { MoreVert } from '@common/icons'
-import { AlgorithmSettingsModal, StyledLinearProgress } from '@components'
+import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Tooltip, Typography } from '@common/components'
+import { DeleteForever, MoreVert, Polyline } from '@common/icons'
+import { AlgorithmSettingsModal, DeleteEntityModal, StyledLinearProgress } from '@components'
 import { Topic } from '@core'
 import { SnackbarContext, deleteTopic } from '@services'
 import { useStore } from '@store'
-import DeleteEntityModal from '../DeleteEntityModal/DeleteEntityModal'
 import { useTopicCard } from './TopicCard.hooks'
 
 // Type
@@ -162,7 +158,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown, isCourseCreator
           data-testid="AlgorithmSettingsItem">
           <Tooltip arrow title="Change Learning Path" placement="left">
             <Grid container direction={'row'}>
-              <PolylineIcon fontSize="small" />
+              <Polyline fontSize="small" />
               <Typography sx={{ ml: 1 }}>{t('pages.topic.menuItemAlgorithms')}</Typography>
             </Grid>
           </Tooltip>
@@ -174,7 +170,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown, isCourseCreator
             data-testid="DeleteTopicItem">
             <Tooltip arrow title={t('components.TopicCard.deleteTooltip')} placement="left">
               <Grid container direction={'row'}>
-                <DeleteForeverIcon fontSize="small" />
+                <DeleteForever fontSize="small" />
                 <Typography sx={{ ml: 1 }}>{t('appGlobal.delete')}</Typography>
               </Grid>
             </Tooltip>
