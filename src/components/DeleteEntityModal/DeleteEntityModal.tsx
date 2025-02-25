@@ -1,6 +1,8 @@
 import WarningIcon from '@mui/icons-material/Warning'
 import { Box, Button, Checkbox, Grid, Modal, Typography } from '@mui/material'
 import { SetStateAction, memo, useCallback, useState } from 'react'
+import { MouseEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Divider, FormControlLabel } from '@common/components'
 
 type DeleteEntityModalProps = {
@@ -8,11 +10,9 @@ type DeleteEntityModalProps = {
   entityName: string
   entityType: string // e.g. "Kurs", "Thema", "Lern Element"
   entityId: number
-  extraId: number // optional extra id, if needed (e.g. lmsCourseId)
+  entityLmsId: number // optional extra id, if needed (e.g. lmsCourseId)
   setDeleteEntityModalOpen: (value: SetStateAction<boolean>) => void
   onConfirm: (entityId: number, extraId: number) => void
-  description?: string // optional custom description text
-  confirmLabel?: string // optional custom label for the checkbox
 }
 
 const styleBox = {
@@ -40,20 +40,16 @@ const DeleteEntityModal = ({
   entityName,
   entityType,
   entityId,
-  extraId,
+  entityLmsId,
   setDeleteEntityModalOpen,
-  onConfirm,
-  description,
-  confirmLabel
+  onConfirm
 }: DeleteEntityModalProps) => {
+  const { t } = useTranslation()
   const [checked, setChecked] = useState(false)
 
-  const handleChecked = useCallback((event: React.MouseEvent<HTMLElement>) => {
+  const handleChecked = useCallback((event: MouseEvent<HTMLElement>) => {
     setChecked((event.target as HTMLInputElement).checked)
   }, [])
-
-  const defaultDescription = `Mit dieser Aktion werden alle zugehörigen Inhalte aus dem HASKI-System unwiderruflich entfernt. Diese Aktion kann nicht rückgängig gemacht werden.`
-  const defaultConfirmLabel = `Den ${entityType} samt aller Inhalte aus dem HASKI-System unwiderruflich löschen`
 
   return (
     <Modal open={open} onClose={() => setDeleteEntityModalOpen(false)} className="learning-element-delete-icon">
@@ -64,28 +60,32 @@ const DeleteEntityModal = ({
               <WarningIcon color="error" sx={{ fontSize: '2rem' }} />
             </Grid>
             <Grid item>
-              <Typography variant="h6" color="error">
-                {entityType} endgültig löschen
+              <Typography variant="subtitle1" color="error">
+                {entityType + ' ' + t('components.DeleteEntityModal.header')}
               </Typography>
             </Grid>
           </Grid>
           <Divider />
           <Typography variant="body1" sx={{ mt: 2 }}>
-            Sie sind dabei, den {entityType}{' '}
+            {t('components.DeleteEntityModal.title-1') + ' ' + entityType + ' '}
             <Typography component="span" sx={{ fontWeight: 'bold' }}>
               {entityName}
-            </Typography>{' '}
-            zu löschen.
+            </Typography>
+            {t('components.DeleteEntityModal.title-2')}
           </Typography>
           <Typography variant="body1" sx={{ mt: 2, textAlign: 'justify' }}>
-            {description || defaultDescription}
+            {t('components.DeleteEntityModal.description')}
           </Typography>
           <Grid item xs={12}>
             <FormControlLabel
               onClick={handleChecked}
               className="learning-element-delete-icon"
               control={<Checkbox />}
-              label={<Typography variant="body2">{confirmLabel || defaultConfirmLabel}</Typography>}
+              label={
+                <Typography variant="body2">
+                  {entityType + ' ' + t('components.DeleteEntityModal.confirmLabel')}
+                </Typography>
+              }
               sx={{
                 width: '100%',
                 backgroundColor: 'action.hover',
@@ -103,17 +103,17 @@ const DeleteEntityModal = ({
                 onClick={() => setDeleteEntityModalOpen(false)}
                 variant="outlined"
                 className="learning-element-delete-icon">
-                Abbrechen
+                {t('appGlobal.cancel')}
               </Button>
             </Grid>
             <Grid item>
               <Button
-                onClick={() => onConfirm(entityId, extraId)}
+                onClick={() => onConfirm(entityId, entityLmsId)}
                 className="learning-element-delete-icon"
                 variant="contained"
                 color="error"
                 disabled={!checked}>
-                Löschen
+                {t('appGlobal.delete')}
               </Button>
             </Grid>
           </Grid>

@@ -18,10 +18,11 @@ type TopicCardProps = {
   topic?: Topic
   calculatedTopicProgress?: number[]
   isSmOrDown?: boolean
+  isCourseCreatorRole?: boolean
 }
 
 // Component
-const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProps) => {
+const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown, isCourseCreatorRole }: TopicCardProps) => {
   // Hooks
   const navigate = useNavigate()
   const { t } = useTranslation()
@@ -59,7 +60,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
     (topicId: number, lmsTopicId: number) => {
       deleteTopic(topicId, lmsTopicId).then(() => {
         addSnackbar({
-          message: t('success.deleteTopic'),
+          message: t('components.TopicCard.deleteTopicSuccessful'),
           severity: 'success',
           autoHideDuration: 5000
         })
@@ -166,26 +167,28 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
             </Grid>
           </Tooltip>
         </MenuItem>
-        <MenuItem
-          onClick={() => handleOpenDeleteTopicModal(topic?.name || '', topic?.id || 0, topic?.lms_id || 0)}
-          id="algorithm-settings-menu-delete-item"
-          data-testid="DeleteTopicItem">
-          <Tooltip arrow title="Delete Topic with all of its Content" placement="left">
-            <Grid container direction={'row'}>
-              <DeleteForeverIcon fontSize="small" />
-              <Typography sx={{ ml: 1 }}>Löschen</Typography>
-            </Grid>
-          </Tooltip>
-        </MenuItem>
+        {isCourseCreatorRole && (
+          <MenuItem
+            onClick={() => handleOpenDeleteTopicModal(topic?.name || '', topic?.id || 0, topic?.lms_id || 0)}
+            id="algorithm-settings-menu-delete-item"
+            data-testid="DeleteTopicItem">
+            <Tooltip arrow title={t('components.TopicCard.deleteTooltip')} placement="left">
+              <Grid container direction={'row'}>
+                <DeleteForeverIcon fontSize="small" />
+                <Typography sx={{ ml: 1 }}>{t('appGlobal.delete')}</Typography>
+              </Grid>
+            </Tooltip>
+          </MenuItem>
+        )}
       </Menu>
       <DeleteEntityModal
         open={isDeleteTopicModalOpen}
         setDeleteEntityModalOpen={setDeleteTopicModalOpen}
         entityName={topicName}
         entityId={topicId}
-        extraId={lmsTopicId}
+        entityLmsId={lmsTopicId}
         onConfirm={handleAcceptDeleteTopicModal}
-        entityType={'topic'}
+        entityType={t('components.ContactForm.topic')}
       />
     </Card>
   )

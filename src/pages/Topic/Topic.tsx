@@ -5,7 +5,7 @@ import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from
 import { Grid, Skeleton } from '@common/components'
 import { IFrameModal, LabeledSwitch, ResponsiveMiniMap, handleError, nodeTypes } from '@components'
 import { LearningPathElementStatus, User } from '@core'
-import { AuthContext, SnackbarContext } from '@services'
+import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import CreateLearningElement from '../../components/CreateLearningElement/CreateLearningElement'
 import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
@@ -33,6 +33,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const { isAuth } = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
   const { fitView } = useReactFlow()
+  const { isCourseCreatorRole } = useContext(RoleContext)
 
   const { courseId, topicId } = useParams()
   const getUser = usePersistedStore((state) => state.getUser)
@@ -177,9 +178,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             />
           </Panel>
           */}
-          <Panel position={'top-right'} style={{ right: '2rem', top: '2.5rem' }}>
-            <CreateLearningElement />
-          </Panel>
+          {isCourseCreatorRole && (
+            <Panel position={'top-right'} style={{ right: '2rem', top: '2.5rem' }}>
+              <CreateLearningElement />
+            </Panel>
+          )}
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
         </ReactFlow>
         <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />

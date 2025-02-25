@@ -1,25 +1,25 @@
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
-import { memo, useContext, useState } from 'react'
+import { MouseEvent, ReactElement, ReactNode, memo, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
+import { DeleteForever } from '@common/icons'
 import { CheckBox, Feedback } from '@common/icons'
-import { LearningPathLearningElementNode } from '@components'
-import { SnackbarContext, deleteLearningElement } from '@services'
+import { DeleteEntityModal, LearningPathLearningElementNode } from '@components'
+import { RoleContext, SnackbarContext, deleteLearningElement } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
-import DeleteEntityModal from '../../DeleteEntityModal/DeleteEntityModal'
 
 type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
-  icon?: JSX.Element
-  children?: React.ReactNode
+  icon?: ReactElement
+  children?: ReactNode
 }
 
 const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: BasicNodeProps) => {
   const { t } = useTranslation()
   const theme = useTheme()
   const { addSnackbar } = useContext(SnackbarContext)
+  const { isCourseCreatorRole } = useContext(RoleContext)
 
   const [isDeleteLearningElementModalOpen, setDeleteLearningElementModalOpen] = useState(false)
   const [learningElementName, setLearningElementName] = useState<string>('')
@@ -38,7 +38,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   }
 
   // Handle node click but ignore clicks that originated from the delete icon.
-  const handleNodeClick = (event: React.MouseEvent) => {
+  const handleNodeClick = (event: MouseEvent) => {
     if ((event.target as HTMLElement).closest('.learning-element-delete-icon')) {
       return // Skip the iframe action if it came from the delete button.
     }
@@ -58,7 +58,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   const handleAcceptDeleteLearningElementModal = (learningElementId: number, lmsLearningElementId: number) => {
     deleteLearningElement(learningElementId, lmsLearningElementId).then(() => {
       addSnackbar({
-        message: t('success.deleteLearningElement'),
+        message: t('components.BasicNode.deleteLearningElementSuccessful'),
         severity: 'success',
         autoHideDuration: 5000
       })
@@ -77,31 +77,33 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}>
       <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '200ms' }}>
-        <Grid
-          container
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="center"
-          sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
-          <Tooltip arrow title="Remove Learning Element" placement="top">
-            <IconButton
-              onClick={handleOpenDeleteLearningElementModal}
-              className="learning-element-delete-icon"
-              sx={{
-                marginLeft: '1rem',
-                color: 'white',
-                backgroundColor: theme.palette.error.dark,
-                border: '1px solid grey',
-                zIndex: 10,
-                '&:hover': {
-                  backgroundColor: theme.palette.error.light
-                }
-              }}>
-              <DeleteForeverIcon fontSize={'medium'} />
-            </IconButton>
-          </Tooltip>
-          {props.children}
-        </Grid>
+        {isCourseCreatorRole && (
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+            sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
+            <Tooltip arrow title={t('components.BasicNode.deleteTooltip')} placement="top">
+              <IconButton
+                onClick={handleOpenDeleteLearningElementModal}
+                className="learning-element-delete-icon"
+                sx={{
+                  marginLeft: '1rem',
+                  color: 'white',
+                  backgroundColor: theme.palette.error.dark,
+                  border: '1px solid grey',
+                  zIndex: 10,
+                  '&:hover': {
+                    backgroundColor: theme.palette.error.light
+                  }
+                }}>
+                <DeleteForever fontSize={'medium'} />
+              </IconButton>
+            </Tooltip>
+            {props.children}
+          </Grid>
+        )}
       </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
@@ -139,9 +141,9 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
         setDeleteEntityModalOpen={setDeleteLearningElementModalOpen}
         entityName={learningElementName}
         entityId={learningElementId}
-        extraId={lmsLearningElementId}
+        entityLmsId={lmsLearningElementId}
         onConfirm={handleAcceptDeleteLearningElementModal}
-        entityType="Learning Element"
+        entityType={t('appGlobal.learningElement')}
       />
     </NodeWrapper>
   )

@@ -55,6 +55,7 @@ const Course = () => {
               topic={topic}
               calculatedTopicProgress={topicProgress[index]}
               isSmOrDown={isSmOrDown}
+              isCourseCreatorRole={isCourseCreatorRole}
             />
           ))}
           {isCourseCreatorRole && (
