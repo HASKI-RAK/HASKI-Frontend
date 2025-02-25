@@ -1,10 +1,9 @@
-import { Grid } from '@mui/material'
 import { memo, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Button } from '@common/components'
+import { Button, Grid } from '@common/components'
+import { CreateLearningElementModal, RemoteLearningElementWithClassification } from '@components'
 import { RemoteLearningElement, Topic } from '@core'
 import { usePersistedStore, useStore } from '@store'
-import CreateLearningElementModal, { RemoteLearningElementWithClassification } from './CreateLearningElementModal'
 
 const CreateLearningElement = () => {
   const [createLearningElementModalOpen, setCreateLearningElementModalOpen] = useState(false)

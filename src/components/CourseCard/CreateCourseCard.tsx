@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, memo } from 'react'
 import { Button, Card, CardContent, Grid } from '@common/components'
-import { AddCircle, MoreVert } from '@common/icons'
+import { AddCircle } from '@common/icons'
 import { CreateCourseModal } from '@components'
 import { commonButtonStyle } from '../CourseCard/CourseCard'
 

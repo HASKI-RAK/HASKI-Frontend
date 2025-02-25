@@ -59,6 +59,10 @@ export { default as CreateCourseModal } from './CreateCourse/Modal/CreateCourseM
 export { default as CreateRemoteTopicsTable } from './CreateTopic/Table/CreateRemoteTopicsTable'
 export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopicsTable'
 export { default as CreateLearningElementTable } from './CreateTopic/Table/CreateLearningElementTable'
+export { default as CourseCard } from './CourseCard/CourseCard'
+export { default as CreateCourseCard } from './CourseCard/CreateCourseCard'
+export { default as CreateLearningElementModal } from './CreateLearningElement/CreateLearningElementModal'
+export { default as CreateLearningElement } from './CreateLearningElement/CreateLearningElement'
 export {
   default as CreateLearningElementClassificationTable,
   type LearningElementWithClassification
@@ -67,7 +71,14 @@ export {
   default as CreateAlgorithmTable,
   type CreateAlgorithmTableNameProps
 } from './CreateTopic/Table/CreateAlgorithmTable'
-export { default as CreateTopicModal } from './CreateTopic/Modal/CreateTopicModal'
+export {
+  default as CreateTopicModal,
+  type RemoteLearningElementWithClassification
+} from './CreateTopic/Modal/CreateTopicModal'
+export { default as CreateLearningElementClassificationsStep } from './CreateTopic/Modal/CreateLearningElementClassificationsStep'
+export { default as CreateLearningElementsStep } from './CreateTopic/Modal/CreateLearningElementsStep'
+export { default as CreateRemoteTopicsStep } from './CreateTopic/Modal/CreateRemoteTopicsStep'
+export { default as CreateAlgorithmsStep } from './CreateTopic/Modal/CreateAlgorithmsStep'
 
 export * from './GlobalNav'
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure

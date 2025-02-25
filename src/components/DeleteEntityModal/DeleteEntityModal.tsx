@@ -1,16 +1,14 @@
-import WarningIcon from '@mui/icons-material/Warning'
-import { Box, Button, Checkbox, Grid, Modal, Typography } from '@mui/material'
-import { SetStateAction, memo, useCallback, useState } from 'react'
-import { MouseEvent } from 'react'
+import { MouseEvent, SetStateAction, memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Divider, FormControlLabel } from '@common/components'
+import { Box, Button, Checkbox, Divider, FormControlLabel, Grid, Modal, Typography } from '@common/components'
+import { Warning } from '@common/icons'
 
 type DeleteEntityModalProps = {
   open: boolean
   entityName: string
-  entityType: string // e.g. "Kurs", "Thema", "Lern Element"
+  entityType: string // e.g. "Course", "Topic", "Learning Element"
   entityId: number
-  entityLmsId: number // optional extra id, if needed (e.g. lmsCourseId)
+  entityLmsId: number
   setDeleteEntityModalOpen: (value: SetStateAction<boolean>) => void
   onConfirm: (entityId: number, extraId: number) => void
 }
@@ -57,7 +55,7 @@ const DeleteEntityModal = ({
         <Grid item>
           <Grid container alignItems="center" spacing={1}>
             <Grid item>
-              <WarningIcon color="error" sx={{ fontSize: '2rem' }} />
+              <Warning color="error" sx={{ fontSize: '2rem' }} />
             </Grid>
             <Grid item>
               <Typography variant="h6" color="error">

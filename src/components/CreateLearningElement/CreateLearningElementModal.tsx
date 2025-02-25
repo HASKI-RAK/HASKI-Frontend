@@ -3,10 +3,13 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
+import {
+  CreateLearningElementClassificationsStep,
+  CreateLearningElementsStep,
+  RemoteLearningElementWithClassification
+} from '@components'
 import { LearningPathElement, RemoteLearningElement, RemoteTopics } from '@core'
 import { usePersistedStore, useStore } from '@store'
-import CreateLearningElementClassificationsStep from '../CreateTopic/Modal/CreateLearningElementClassificationsStep'
-import CreateLearningElementsStep from '../CreateTopic/Modal/CreateLearningElementsStep'
 import { useCreateTopicModal } from '../CreateTopic/Modal/CreateTopicModal.hooks'
 
 export type CreateTopicModalProps = {
@@ -19,10 +22,6 @@ export type CreateTopicModalProps = {
   setSelectedLearningElementsClassification: Dispatch<
     SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>
   >
-}
-
-export type RemoteLearningElementWithClassification = RemoteLearningElement & {
-  classification: string
 }
 
 const CreateLearningElementModal = ({
