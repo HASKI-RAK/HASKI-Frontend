@@ -28,6 +28,10 @@ export type RemoteLearningElementWithClassification = RemoteLearningElement & {
   classification: string
 }
 
+export type RemoteLearningElementWithSolution = RemoteLearningElement & {
+  solutionLmsId: number
+}
+
 const CreateTopicModal = memo(
   ({
     openCreateTopicModal = false,
@@ -46,6 +50,8 @@ const CreateTopicModal = memo(
     const [selectedLearningElements, setSelectedLearningElements] = useState<{
       [key: number]: RemoteLearningElement[]
     }>({})
+    const [selectedSolutions, setSelectedSolutions] = useState<{ [key: number]: number[] }>({})
+    const [selectedLearningElementSolution, setSelectedLearningElementSolution] = useState<{ [topicId: number]: RemoteLearningElementWithSolution[]}>({})
     const [selectedLearningElementsClassification, setSelectedLearningElementsClassification] = useState<{
       [key: number]: RemoteLearningElementWithClassification[]
     }>({})
@@ -55,7 +61,9 @@ const CreateTopicModal = memo(
       handleCreate,
       handleTopicChange,
       handleLearningElementChange,
+      handleLearningElementSolutionChange,
       handleLearningElementClassification,
+      handleSolutionsChange,
       handleAlgorithmChange
     } = useCreateTopicModal({
       setCreateTopicIsSending,
@@ -63,6 +71,10 @@ const CreateTopicModal = memo(
       setSelectedTopics,
       selectedLearningElements,
       setSelectedLearningElements,
+      selectedLearningElementSolution,
+      setSelectedLearningElementSolution,
+      selectedSolutions,
+      setSelectedSolutions,
       selectedLearningElementsClassification,
       setSelectedLearningElementsClassification,
       selectedAlgorithms,
@@ -231,7 +243,9 @@ const CreateTopicModal = memo(
                   selectedTopics={selectedTopics}
                   LearningElements={selectedLearningElements}
                   LearningElementsClassification={selectedLearningElementsClassification}
-                  onLearningElementChange={handleLearningElementClassification}>
+                  selectedSolutions={selectedSolutions}
+                  onLearningElementChange={handleLearningElementClassification}
+                  onSolutionChange={handleSolutionsChange}>
                   <Box sx={{ padding: '1rem', width: '95%' }}>
                     <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
                       <Button

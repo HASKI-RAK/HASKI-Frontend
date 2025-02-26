@@ -34,6 +34,7 @@ import LearningPathElement from './LearningPathElement/LearningPathElement'
 import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
 import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
 import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
+import LearningElementWithSolution from './RemoteLearningElementWithSolution/RemoteLearningElementWithSolution'
 import News, { NewsResponse } from './News/News'
 import ILS from './QuestionnaireResults/ILS'
 import ListK from './QuestionnaireResults/ListK'
@@ -59,6 +60,7 @@ export type {
   LearningPathElementStatus,
   LearningPathLearningElementAlgorithm,
   LearningPathLearningElementAlgorithmResponse,
+  LearningElementWithSolution,
   StudentLpLeAlgorithm,
   TeacherLpLeAlgorithm,
   News,

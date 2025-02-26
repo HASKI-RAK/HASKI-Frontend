@@ -9,6 +9,10 @@ import {
   MenuItem,
   Paper,
   Select,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
   Typography
 } from '@common/components'
 import { SkeletonList } from '@components'
@@ -23,7 +27,9 @@ type CreateLearningElementClassificationTableProps = {
   selectedTopics: RemoteTopic[]
   LearningElements: { [key: number]: RemoteLearningElement[] }
   LearningElementsClassification: { [key: number]: LearningElementWithClassification[] }
+  selectedSolutions: { [key: number]: number[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: LearningElementWithClassification[] }) => void
+  onSolutionChange: (selectedSolutions: { [key: number]: number[] }) => void
   children?: ReactNode
 }
 
@@ -32,14 +38,18 @@ const CreateLearningElementClassificationTable = memo(
     selectedTopics,
     LearningElements,
     LearningElementsClassification,
+    selectedSolutions,
     onLearningElementChange,
+    onSolutionChange,
     children
   }: CreateLearningElementClassificationTableProps) => {
     //Hooks
     const { t } = useTranslation()
-    const { handleClassificationChange } = useCreateLearningElementClassificationTable({
+    const { handleClassificationChange, handleSolutionchange } = useCreateLearningElementClassificationTable({
       LearningElementsClassification,
-      onLearningElementChange
+      selectedSolutions,
+      onLearningElementChange,
+      onSolutionChange
     })
 
     //Constants
@@ -106,7 +116,48 @@ const CreateLearningElementClassificationTable = memo(
                   </Typography>
                 </Grid>
               </Box>
-              {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>{t('Learning Element')}</TableCell>
+                    <TableCell>{t('Klassifikation')}</TableCell>
+                    <TableCell>{t('Ist Lösung')}</TableCell>
+                  </TableRow>
+                </TableHead>
+                {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
+                  <TableRow key={element.lms_id}>
+                    <TableCell>
+                      <FormControlLabel control={<Checkbox checked={true} />} label={element.lms_learning_element_name} />
+                    </TableCell>
+                    <TableCell>
+                      <FormControl sx={{ m: 1, width: '21rem' }} size="small">
+                        <Select
+                          value={element.classification}
+                          onChange={(event) =>
+                            handleClassificationChange(
+                              lmsTopic.topic_lms_id,
+                              element.lms_id,
+                              event.target.value as string
+                            )
+                          }>
+                          {learningElementClassifications.map((classification) => (
+                            <MenuItem
+                              key={classification.key}
+                              value={classification.key}
+                              disabled={classification.disabled && element.classification !== 'noKey'}>
+                              {classification.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </TableCell>
+                    <TableCell>
+                      <Checkbox checked={(selectedSolutions[lmsTopic.topic_lms_id] || []).indexOf(element.lms_id) > -1} onChange={(event)=>handleSolutionchange(lmsTopic.topic_lms_id, element.lms_id, event.target.checked)}/>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </Table>
+              {/*LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
                 <Grid container alignItems="center" spacing={2} key={element.lms_id}>
                   <Grid item xs={6}>
                     <FormControlLabel control={<Checkbox checked={true} />} label={element.lms_learning_element_name} />
@@ -132,9 +183,10 @@ const CreateLearningElementClassificationTable = memo(
                         ))}
                       </Select>
                     </FormControl>
+                    <Checkbox/>
                   </Grid>
                 </Grid>
-              ))}
+              ))*/}
             </Paper>
           </Grid>
         ))}

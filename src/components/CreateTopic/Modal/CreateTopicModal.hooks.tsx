@@ -7,11 +7,12 @@ import {
   SnackbarContext,
   postCalculateLearningPathForAllStudents,
   postLearningElement,
+  postLearningElementSolution,
   postLearningPathAlgorithm,
-  postTopic
+  postTopic,
 } from '@services'
 import { usePersistedStore } from '@store'
-import { RemoteLearningElementWithClassification } from './CreateTopicModal'
+import { RemoteLearningElementWithClassification, RemoteLearningElementWithSolution } from './CreateTopicModal'
 
 type useCreateTopicModalProps = {
   setCreateTopicIsSending: React.Dispatch<React.SetStateAction<boolean>>
@@ -20,6 +21,10 @@ type useCreateTopicModalProps = {
   selectedLearningElements: { [p: number]: RemoteLearningElement[] }
   setSelectedLearningElements: React.Dispatch<React.SetStateAction<{ [p: number]: RemoteLearningElement[] }>>
   selectedLearningElementsClassification: { [p: number]: RemoteLearningElementWithClassification[] }
+  selectedLearningElementSolution: { [topicId: number]: RemoteLearningElementWithSolution[] }
+  setSelectedLearningElementSolution: React.Dispatch<React.SetStateAction<{ [topicId: number]: RemoteLearningElementWithSolution[]}>>
+  selectedSolutions: { [topicId: number]: number[] }
+  setSelectedSolutions: React.Dispatch<React.SetStateAction<{ [topicId: number]: number[] }>>
   setSelectedLearningElementsClassification: React.Dispatch<
     React.SetStateAction<{ [p: number]: RemoteLearningElementWithClassification[] }>
   >
@@ -35,6 +40,10 @@ export const useCreateTopicModal = ({
   setSelectedLearningElements,
   selectedLearningElementsClassification,
   setSelectedLearningElementsClassification,
+  selectedLearningElementSolution,
+  setSelectedLearningElementSolution,
+  selectedSolutions,
+  setSelectedSolutions,
   selectedAlgorithms,
   setSelectedAlgorithms
 }: useCreateTopicModalProps) => {
@@ -102,6 +111,10 @@ export const useCreateTopicModal = ({
     })
 
     return postCalculateLearningPathForAllStudents({ userId, courseId, topicId, outputJson })
+  }
+
+  const handleCreateSolutions = (learningElementId: number, solutionLmsId: number) => {
+    return postLearningElementSolution( {learningElementId, solutionLmsId} )
   }
 
   const handleCreate = (
@@ -210,6 +223,17 @@ export const useCreateTopicModal = ({
     )
     setSelectedLearningElements(filteredLearningElements)
 
+    // Filter Solutions to only include keys that are in topicIds
+    const filteredSolutions = Object.fromEntries(
+      Object.entries(selectedSolutions).filter(([topicId]) => topicIds.includes(parseInt(topicId)))
+    )
+    setSelectedSolutions(filteredSolutions)
+    // Filter selectedLearningElementSolution to only include keys that are in topicIds
+    const filteredLearningElementSolution = Object.fromEntries(
+      Object.entries(selectedLearningElementSolution).filter(([topicId]) => topicIds.includes(parseInt(topicId)))
+    )
+    setSelectedLearningElementSolution(filteredLearningElementSolution)
+
     // Filter selectedLearningElementClassifications to only include keys that are in topicIds
     const filteredLearningElementClassifications = Object.fromEntries(
       Object.entries(selectedLearningElementsClassification).filter(([topicId]) => topicIds.includes(parseInt(topicId)))
@@ -225,6 +249,14 @@ export const useCreateTopicModal = ({
 
   const handleLearningElementChange = (learningElements: { [key: number]: RemoteLearningElement[] }) => {
     setSelectedLearningElements(learningElements)
+  }
+
+  const handleSolutionsChange = (solutions: { [topicId: number]: number[] }) => {
+    setSelectedSolutions(solutions)
+  }
+
+  const handleLearningElementSolutionChange = (learningElementSolution: { [topicId: number]: RemoteLearningElementWithSolution[]}) => {
+    setSelectedLearningElementSolution(learningElementSolution)
   }
 
   const handleLearningElementClassification = (learningElementClassifications: {
@@ -243,6 +275,8 @@ export const useCreateTopicModal = ({
       handleTopicChange,
       handleLearningElementChange,
       handleLearningElementClassification,
+      handleLearningElementSolutionChange,
+      handleSolutionsChange,
       handleAlgorithmChange
     }),
     [
@@ -250,6 +284,8 @@ export const useCreateTopicModal = ({
       handleTopicChange,
       handleLearningElementChange,
       handleLearningElementClassification,
+      handleLearningElementSolutionChange,
+      handleSolutionsChange,
       handleAlgorithmChange
     ]
   )

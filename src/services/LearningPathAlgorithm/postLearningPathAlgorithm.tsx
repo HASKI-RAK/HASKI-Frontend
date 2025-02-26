@@ -1,10 +1,12 @@
-import { Topic } from '@core'
+import { LearningPathLearningElementAlgorithm } from '@core'
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
-/*
- * @props studentId - student id
- * @props outputJson - output json
+/**
+ * @prop userId - user id
+ * @prop lmsUserId - lms user id
+ * @prop topicId - topic id
+ * @prop outputJson - output json
  * @interface
  */
 type PostLearningPathAlgorithmProps = {
@@ -14,17 +16,19 @@ type PostLearningPathAlgorithmProps = {
   outputJson: string
 }
 
-/*
+/**
  * postLearningPathAlgorithm function.
  *
- * @param studentId - student id
+ * @param userId - user id
+ * @param lmsUserId - lms user id
+ * @param topicId - topic id
  * @param outputJson - output json
  *
  * @remarks
- * Posts the ListK for a student
- * Throws an error if studentId or outputJson are not provided.
+ * Posts the learning path algorithm for a specific topic.
+ * It does so for the whole topic, if the user is a course creator, otherwise just for themselves.
  *
- * @returns - returns a promise with the ListK.
+ * @returns - returns a promise with the changed data entry.
  *
  * @category Services
  */
@@ -34,8 +38,8 @@ export const postLearningPathAlgorithm = async ({
   lmsUserId,
   topicId,
   outputJson
-}: PostLearningPathAlgorithmProps): Promise<Topic> => {
-  return fetchData<Topic>(`${getConfig().BACKEND}/user/${userId}/${lmsUserId}/topic/${topicId}/teacherAlgorithm`, {
+}: PostLearningPathAlgorithmProps): Promise<LearningPathLearningElementAlgorithm> => {
+  return fetchData<LearningPathLearningElementAlgorithm>(`${getConfig().BACKEND}/user/${userId}/${lmsUserId}/topic/${topicId}/teacherAlgorithm`, {
     method: 'POST',
     credentials: 'include',
     headers: {
