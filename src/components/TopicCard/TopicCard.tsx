@@ -42,7 +42,8 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown, isCourseCreator
   } = useTopicCard({ topic, learningElementProgressTopics: calculatedTopicProgress })
 
   const handleOpenDeleteTopicModal = useCallback(
-    (topicName: string, topicId: number, lmsTopicId: number) => {
+    (topicName?: string, topicId?: number, lmsTopicId?: number) => {
+      if (!topicName || !topicId || !lmsTopicId) return
       handleCloseMenu()
       setDeleteTopicModalOpen(true)
       setTopicName(topicName)
@@ -165,7 +166,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown, isCourseCreator
         </MenuItem>
         {isCourseCreatorRole && (
           <MenuItem
-            onClick={() => handleOpenDeleteTopicModal(topic?.name || '', topic?.id || 0, topic?.lms_id || 0)}
+            onClick={() => handleOpenDeleteTopicModal(topic?.name, topic?.id, topic?.lms_id)}
             id="algorithm-settings-menu-delete-item"
             data-testid="DeleteTopicItem">
             <Tooltip arrow title={t('components.TopicCard.deleteTooltip')} placement="left">
@@ -178,12 +179,12 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown, isCourseCreator
         )}
       </Menu>
       <DeleteEntityModal
-        open={isDeleteTopicModalOpen}
+        openDeleteEntityModal={isDeleteTopicModalOpen}
         setDeleteEntityModalOpen={setDeleteTopicModalOpen}
         entityName={topicName}
         entityId={topicId}
         entityLmsId={lmsTopicId}
-        onConfirm={handleAcceptDeleteTopicModal}
+        onDeleteConfirm={handleAcceptDeleteTopicModal}
         entityType={t('components.ContactForm.topic')}
       />
     </Card>

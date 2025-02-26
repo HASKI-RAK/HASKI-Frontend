@@ -4,13 +4,13 @@ import { Box, Button, Checkbox, Divider, FormControlLabel, Grid, Modal, Typograp
 import { Warning } from '@common/icons'
 
 type DeleteEntityModalProps = {
-  open: boolean
+  openDeleteEntityModal: boolean
   entityName: string
   entityType: string // e.g. "Course", "Topic", "Learning Element"
   entityId: number
   entityLmsId: number
   setDeleteEntityModalOpen: (value: SetStateAction<boolean>) => void
-  onConfirm: (entityId: number, extraId: number) => void
+  onDeleteConfirm: (entityId: number, extraId: number) => void
 }
 
 const styleBox = {
@@ -34,13 +34,13 @@ const styleBox = {
 }
 
 const DeleteEntityModal = ({
-  open,
+  openDeleteEntityModal,
   entityName,
   entityType,
   entityId,
   entityLmsId,
   setDeleteEntityModalOpen,
-  onConfirm
+  onDeleteConfirm
 }: DeleteEntityModalProps) => {
   const { t } = useTranslation()
   const [checked, setChecked] = useState(false)
@@ -50,7 +50,10 @@ const DeleteEntityModal = ({
   }, [])
 
   return (
-    <Modal open={open} onClose={() => setDeleteEntityModalOpen(false)} className="learning-element-delete-icon">
+    <Modal
+      open={openDeleteEntityModal}
+      onClose={() => setDeleteEntityModalOpen(false)}
+      className="learning-element-delete-icon">
       <Box sx={styleBox}>
         <Grid item>
           <Grid container alignItems="center" spacing={1}>
@@ -77,6 +80,7 @@ const DeleteEntityModal = ({
           <Grid item xs={12}>
             <FormControlLabel
               onClick={handleChecked}
+              id={`delete-entity-modal-${entityType}-accept-label`}
               className="learning-element-delete-icon"
               control={<Checkbox />}
               label={
@@ -98,6 +102,7 @@ const DeleteEntityModal = ({
           <Grid container justifyContent="flex-end" spacing={2} sx={{ mt: 2 }}>
             <Grid item>
               <Button
+                id={`delete-entity-modal-${entityType}-cancel-button`}
                 onClick={() => setDeleteEntityModalOpen(false)}
                 variant="outlined"
                 className="learning-element-delete-icon">
@@ -106,7 +111,8 @@ const DeleteEntityModal = ({
             </Grid>
             <Grid item>
               <Button
-                onClick={() => onConfirm(entityId, entityLmsId)}
+                id={`delete-entity-modal-${entityType}-delete-button`}
+                onClick={() => onDeleteConfirm(entityId, entityLmsId)}
                 className="learning-element-delete-icon"
                 variant="contained"
                 color="error"

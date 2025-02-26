@@ -139,12 +139,12 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
         </MenuItem>
       </Menu>
       <DeleteEntityModal
-        open={isDeleteCourseModalOpen}
+        openDeleteEntityModal={isDeleteCourseModalOpen}
         setDeleteEntityModalOpen={setDeleteCourseModalOpen}
         entityName={courseName}
         entityId={courseId}
         entityLmsId={lmsCourseId}
-        onConfirm={handleAcceptDeleteCourseModal}
+        onDeleteConfirm={handleAcceptDeleteCourseModal}
         entityType={t('pages.course')}
       />
     </Card>

@@ -136,12 +136,12 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
         </Tooltip>
       )}
       <DeleteEntityModal
-        open={isDeleteLearningElementModalOpen}
+        openDeleteEntityModal={isDeleteLearningElementModalOpen}
         setDeleteEntityModalOpen={setDeleteLearningElementModalOpen}
         entityName={learningElementName}
         entityId={learningElementId}
         entityLmsId={lmsLearningElementId}
-        onConfirm={handleAcceptDeleteLearningElementModal}
+        onDeleteConfirm={handleAcceptDeleteLearningElementModal}
         entityType={t('appGlobal.learningElement')}
       />
     </NodeWrapper>
