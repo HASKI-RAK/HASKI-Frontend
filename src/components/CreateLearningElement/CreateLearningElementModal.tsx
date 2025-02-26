@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, memo, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
@@ -6,9 +6,11 @@ import { Close } from '@common/icons'
 import {
   CreateLearningElementClassificationsStep,
   CreateLearningElementsStep,
-  RemoteLearningElementWithClassification
+  RemoteLearningElementWithClassification,
+  handleError
 } from '@components'
 import { LearningPathElement, RemoteLearningElement, RemoteTopics } from '@core'
+import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { useCreateTopicModal } from '../CreateTopic/Modal/CreateTopicModal.hooks'
 
@@ -39,6 +41,7 @@ const CreateLearningElementModal = ({
 }: CreateTopicModalProps) => {
   //Hooks
   const { t } = useTranslation()
+  const { addSnackbar } = useContext(SnackbarContext)
   const { courseId, topicId } = useParams()
   const [remoteTopic, setRemoteTopic] = useState<RemoteTopics[]>([])
   const [selectAllLearningElementsChecked, setSelectAllLearningElementsChecked] = useState(false)
@@ -65,35 +68,40 @@ const CreateLearningElementModal = ({
   //filter out the learning elements that are already in the learning path
   useEffect(() => {
     getUser()
-      .then((user) => {
-        return getRemoteTopics(courseId).then((topics: RemoteTopics[]) => {
-          // Filter remote topics by matching current topic LMS id
-          const filteredTopics = topics.filter((topic) => topic.topic_lms_id === currentTopicLmsId)
-          return { user, filteredTopics }
-        })
-      })
-      .then(({ user, filteredTopics }) => {
-        return getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId).then(
+      .then((user) =>
+        getRemoteTopics(courseId)
+          .then((topics: RemoteTopics[]) => {
+            // Filter remote topics by matching the current topic LMS ID
+            const filteredTopics = topics.filter((topic) => topic.topic_lms_id === currentTopicLmsId)
+            return { user, filteredTopics }
+          })
+          .catch((error) => {
+            handleError(t, addSnackbar, 'error.fetchRemoteTopics', error, 3000)
+            throw error
+          })
+      )
+      .then(({ user, filteredTopics }) =>
+        getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId).then(
           (learningPathElementData: LearningPathElement) => {
-            // Get IDs of learning elements already in the learning path
+            // Extract LMS IDs of learning elements already in the learning path
             const existingLearningElementIds = learningPathElementData.path.map(
               (element) => element.learning_element.lms_id
             )
 
-            // For each topic, filter out learning elements already in the learning path.
-            // If lms_learning_elements is undefined, fallback to an empty array.
-            return setRemoteTopic(
-              filteredTopics.map((topic) => ({
-                ...topic,
-                lms_learning_elements: topic.lms_learning_elements
-                  ? topic.lms_learning_elements.filter(
-                      (learningElement) => !existingLearningElementIds.includes(learningElement.lms_id)
-                    )
-                  : []
-              }))
-            )
+            // Update remote topics by filtering out elements that already exist in the learning path
+            const updatedTopics = filteredTopics.map((topic) => ({
+              ...topic,
+              lms_learning_elements: (topic.lms_learning_elements || []).filter(
+                (learningElement) => !existingLearningElementIds.includes(learningElement.lms_id)
+              )
+            }))
+
+            setRemoteTopic(updatedTopics)
           }
         )
+      )
+      .catch((error) => {
+        handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 3000)
       })
   }, [
     activeStep,
