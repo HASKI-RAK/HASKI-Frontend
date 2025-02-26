@@ -180,7 +180,6 @@ const CreateLearningElementModal = ({
                   courseId
                 ).then(() => {
                   handleCloseCreateTopicModal()
-                  setActiveStep(0)
                 })
               }
               handleLearningElementClassification={handleLearningElementClassification}

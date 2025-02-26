@@ -1,7 +1,7 @@
 import log from 'loglevel'
 import { Dispatch, SetStateAction, useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CreateAlgorithmTableNameProps, handleError } from '@components'
+import { CreateAlgorithmTableNameProps, RemoteLearningElementWithClassification, handleError } from '@components'
 import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {
   SnackbarContext,
@@ -12,7 +12,6 @@ import {
   postTopic
 } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import { RemoteLearningElementWithClassification } from './CreateTopicModal'
 
 export type useCreateTopicModalProps = {
   setCreateTopicIsSending?: Dispatch<SetStateAction<boolean>>
@@ -107,43 +106,44 @@ export const useCreateTopicModal = ({
   }
 
   const handleCreateLearningElementsInExistingTopic = useCallback(
-    (
+    async (
       topicLmsId: number,
       selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] },
       topicId?: string,
       courseId?: string
-    ) => {
+    ): Promise<void> => {
       if (!topicId || !courseId) return Promise.resolve()
-      return getUser().then((user) => {
-        return Promise.all(
-          selectedLearningElementsClassification[topicLmsId].map((element) =>
-            handleCreateLearningElements(
-              element.lms_learning_element_name,
-              element.lms_activity_type,
-              element.classification,
-              element.lms_id,
-              parseInt(topicId),
-              user
+
+      return getUser()
+        .then((user) =>
+          Promise.all(
+            selectedLearningElementsClassification[topicLmsId].map((element) =>
+              handleCreateLearningElements(
+                element.lms_learning_element_name,
+                element.lms_activity_type,
+                element.classification,
+                element.lms_id,
+                parseInt(topicId),
+                user
+              )
             )
-          )
-        ).then(() => {
-          return handleCalculateLearningPaths(
-            user.settings.user_id,
-            user.role,
-            user.university,
-            courseId,
-            parseInt(topicId)
-          ).then(() => {
-            clearLearningPathElement()
-            clearLearningPathElementStatusCache()
-            addSnackbar({
-              message: t('appGlobal.dataSendSuccessful'),
-              severity: 'success',
-              autoHideDuration: 5000
-            })
+          ).then(() => user)
+        )
+        .then((user) =>
+          handleCalculateLearningPaths(user.settings.user_id, user.role, user.university, courseId, parseInt(topicId))
+        )
+        .then(() => {
+          clearLearningPathElement()
+          clearLearningPathElementStatusCache()
+          addSnackbar({
+            message: t('appGlobal.dataSendSuccessful'),
+            severity: 'success',
+            autoHideDuration: 5000
           })
         })
-      })
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
+        })
     },
     [getUser, handleCreateLearningElements, handleCalculateLearningPaths, addSnackbar, t]
   )
