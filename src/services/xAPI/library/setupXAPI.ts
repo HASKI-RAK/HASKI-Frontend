@@ -33,6 +33,6 @@ export const setupXAPI = ({
     auth: typeof xAPI.auth === 'string' ? xAPI.auth : BaseXAPI.toBasicAuth(xAPI.auth.username, xAPI.auth.password),
     endpoint: xAPI.endpoint,
     version: xAPI.version,
-    adapter: 'fetch' // TODO: WHY DOES IT NOT WORK? UPDATE LIBRARY???
+    adapter: 'fetch'
   })
 })

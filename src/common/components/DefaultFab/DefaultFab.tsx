@@ -1,5 +1,5 @@
 import DefaultFab from '@mui/material/Fab'
-import xAPIWrapper from 'src/services/xAPI/notlib/XAPIWrapper.hooks'
+import { xAPIWrapper } from 'src/services/xAPI/notlib/XAPIWrapper.hooks'
 import { MouseEvent, memo, useCallback } from 'react'
 import { FabProps as DefaultFabProps } from '@common/components'
 import {

@@ -1,5 +1,4 @@
 import DefaultMenu from '@mui/material/Menu'
-import xAPIWrapper2 from 'src/services/xAPI/xAPIWrapper'
 import { memo, useCallback } from 'react'
 import { MenuProps as DefaultMenuProps } from '@common/components'
 import {

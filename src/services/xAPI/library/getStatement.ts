@@ -10,10 +10,10 @@ import { XAPIRepositories } from './setupXAPI'
 TODO: Comment
 */
 export type StatementProps = {
+  componentFilePath: string
   componentID: string
-  componentName: string
+  componentType: string
   currentLanguage?: string
-  filePath: string
   pageName: string
   projectURL: string
   projectVersion: string
@@ -42,10 +42,10 @@ export type StatementProps = {
  * @category Services
  */
 export const getStatement = ({
-  filePath,
+  componentFilePath: filePath,
   currentLanguage,
   componentID,
-  componentName,
+  componentType,
   pageName,
   projectURL,
   projectVersion,
@@ -58,7 +58,7 @@ export const getStatement = ({
     verb: getVerb({ verb: verbName, repository: typeof repositories == 'string' ? repositories : repositories.verb }),
     object: getObject({
       componentID,
-      component: componentName,
+      component: componentType,
       repository: typeof repositories == 'string' ? repositories : repositories.component
     }),
     context: getContext({

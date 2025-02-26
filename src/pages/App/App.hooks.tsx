@@ -1,4 +1,6 @@
-import { setupXAPI } from 'src/services/xAPI/library/setupXAPI'
+import { setupXAPI
+  , XAPI
+ } from 'src/services/xAPI/library/setupXAPI'
 import { useEffect } from 'react'
 import { getConfig } from '@shared'
 import { usePersistedStore } from '@store'
@@ -7,6 +9,7 @@ import { usePersistedStore } from '@store'
 
 type AppHookReturn = {
   isXAPIConfigured: boolean
+  xAPI: XAPI
 }
 
 export const useApp = (): AppHookReturn => {
@@ -42,5 +45,8 @@ export const useApp = (): AppHookReturn => {
     setXAPI(xAPI)
   }, [setXAPI]) //xAPI,
 
-  return { isXAPIConfigured: !!getXAPI() }
+  return { isXAPIConfigured: !!getXAPI(), xAPI: xAPI } // TODO: RETURN XAPI OBJECT
 }
+
+
+// ! PROBLEM: THE XAPI OBJECT MIGHT NOT WORK WITH THE INTENDED FIELDS-> LOOK UP GEKRITZEL

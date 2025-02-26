@@ -19,6 +19,8 @@ import {
 } from '@pages'
 import { AuthProvider, SnackbarProvider } from '@services'
 import { useApp } from './App.hooks'
+import { InteractionTracker } from 'src/services/xAPI/library/InteractionTracker'
+import { XAPIProvider } from 'src/services/xAPI/library/XAPIProvider'
 
 /**
  * # App
@@ -32,7 +34,7 @@ import { useApp } from './App.hooks'
  * @category Pages
  */
 export const App = () => {
-  const { isXAPIConfigured } = useApp()
+  const { isXAPIConfigured, xAPI } = useApp() // TODO: MUST RETURN SETUP XAPI OBJECT
 
   return (
     <>
@@ -42,6 +44,8 @@ export const App = () => {
             <SnackbarProvider>
               <Router>
                 <AuthProvider>
+                  <XAPIProvider value={xAPI}>
+                  <InteractionTracker />
                   <Routes>
                     <Route element={<MainFrame />}>
                       <Route index element={<Home />} />
@@ -61,6 +65,7 @@ export const App = () => {
                     </Route>
                     <Route path="*" element={<PageNotFound />} />
                   </Routes>
+                  </XAPIProvider>
                 </AuthProvider>
               </Router>
             </SnackbarProvider>
