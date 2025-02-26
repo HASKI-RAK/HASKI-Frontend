@@ -126,7 +126,7 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
         onClose={handleCloseCourseCardMenu}
         anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        data-testid="TopicSettingsMenu">
+        data-testid="CourseSettingsMenu">
         <MenuItem
           onClick={() => handleOpenDeleteCourseModal(course.name, course.id, course.lms_id)}
           id="delete-course-settings-menu-item">

@@ -81,6 +81,7 @@ const DeleteEntityModal = ({
             <FormControlLabel
               onClick={handleChecked}
               id={`delete-entity-modal-${entityType}-accept-label`}
+              data-testid={'delete-entity-modal-accept-label'}
               className="learning-element-delete-icon"
               control={<Checkbox />}
               label={
