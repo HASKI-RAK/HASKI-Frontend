@@ -14,7 +14,7 @@ type CourseCardProps = {
   isCourseCreatorRole: boolean
 }
 
-export const commonCardStyle = {
+export const courseCardStyle = {
   mb: '1rem',
   width: {
     xs: '20rem',
@@ -27,7 +27,7 @@ export const commonCardStyle = {
   }
 }
 
-export const commonButtonStyle = {
+export const courseCardButtonStyle = {
   mt: '1rem',
   width: '85%'
 }
@@ -87,7 +87,7 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
   }
 
   return (
-    <Card key={course.id} sx={commonCardStyle}>
+    <Card key={course.id} sx={courseCardStyle}>
       <CardContent sx={{ position: 'relative' }}>
         <Typography variant="h5" align="center">
           {course.name}
@@ -110,7 +110,7 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
             id="course-button"
             variant="contained"
             color="primary"
-            sx={commonButtonStyle}
+            sx={courseCardButtonStyle}
             disabled={handleCourseStartDate(course.start_date)}
             onClick={() => navigate('/course/' + course.id)}>
             {handleCourseStartDate(course.start_date)

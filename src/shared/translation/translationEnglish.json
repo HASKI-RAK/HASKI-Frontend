@@ -27,6 +27,7 @@
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
   "components.CourseCard.deleteTooltip": "Delete Course with all of its Content",
   "components.TopicCard.deleteTooltip": "Delete Topic with all of its Content",
+  "components.CreateLearningElement.createLearningElement": "Add Learning Element",
   "components.BasicNode.deleteTooltip": "Delete Learning Element",
   "components.DeleteEntityModal.header": "deletion",
   "components.DeleteEntityModal.title-1": "You are about to delete",

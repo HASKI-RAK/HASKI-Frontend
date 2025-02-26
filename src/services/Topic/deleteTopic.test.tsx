@@ -1,5 +1,5 @@
 import { getConfig } from '@shared'
-import { deleteCourse } from './deleteCourse'
+import { deleteTopic } from './deleteTopic'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -11,7 +11,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('deleteCourse has expected behaviour', () => {
+describe('deleteTopic has expected behaviour', () => {
   it('should return message string if successful', async () => {
     const inputData = ['deletion successful']
 
@@ -24,9 +24,9 @@ describe('deleteCourse has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const result = await deleteCourse(1, 1)
+    const result = await deleteTopic(1, 1)
 
-    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/lms/course/1/1`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/lms/topic/1/1`, {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
@@ -46,6 +46,6 @@ describe('deleteCourse has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    await expect(deleteCourse(1, 1)).rejects.toThrow('')
+    await expect(deleteTopic(1, 1)).rejects.toThrow('')
   })
 })

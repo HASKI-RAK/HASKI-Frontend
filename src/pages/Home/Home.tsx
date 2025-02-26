@@ -6,7 +6,7 @@ import { Course } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import CourseCard from '../../components/CourseCard/CourseCard'
-import { commonCardStyle } from '../../components/CourseCard/CourseCard'
+import { courseCardStyle } from '../../components/CourseCard/CourseCard'
 import CreateCourseCard from '../../components/CourseCard/CreateCourseCard'
 
 /**
@@ -72,7 +72,7 @@ export const Home = () => {
 
   const noCourses = () => {
     return (
-      <Card sx={commonCardStyle}>
+      <Card sx={courseCardStyle}>
         <CardContent>
           <Typography variant="h5" align="center">
             {t('pages.home.noCourses')}
@@ -87,7 +87,7 @@ export const Home = () => {
     <Grid container direction="row" spacing={2} justifyContent="center">
       <Grid item>
         {coursesLoading ? (
-          <Card sx={commonCardStyle}>
+          <Card sx={courseCardStyle}>
             <Skeleton variant="rectangular" width="100%" height={118} />
           </Card>
         ) : courses.length === 0 ? (

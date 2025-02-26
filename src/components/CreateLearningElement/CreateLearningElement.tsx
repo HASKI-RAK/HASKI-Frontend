@@ -1,15 +1,17 @@
-import { memo, useEffect, useState } from 'react'
+import { memo, useCallback, useContext, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Button, Grid } from '@common/components'
-import { CreateLearningElementModal, RemoteLearningElementWithClassification } from '@components'
+import { CreateLearningElementModal, RemoteLearningElementWithClassification, handleError } from '@components'
 import { RemoteLearningElement, Topic } from '@core'
+import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 const CreateLearningElement = () => {
+  const { t } = useTranslation()
+  const { addSnackbar } = useContext(SnackbarContext)
+
   const [createLearningElementModalOpen, setCreateLearningElementModalOpen] = useState(false)
-  const { courseId, topicId } = useParams()
-  const getUser = usePersistedStore((state) => state.getUser)
-  const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
   const [currentTopic, setCurrentTopic] = useState<Topic>()
   const [selectedLearningElements, setSelectedLearningElements] = useState<{
     [key: number]: RemoteLearningElement[]
@@ -17,30 +19,44 @@ const CreateLearningElement = () => {
   const [selectedLearningElementsClassification, setSelectedLearningElementsClassification] = useState<{
     [key: number]: RemoteLearningElementWithClassification[]
   }>({})
+  const [activeStep, setActiveStep] = useState<number>(0)
 
-  const handleCloseLearningElementModal = () => {
+  const { courseId, topicId } = useParams()
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
+
+  const handleCloseLearningElementModal = useCallback(() => {
     setSelectedLearningElements({})
     setSelectedLearningElementsClassification({})
     setCreateLearningElementModalOpen(false)
-  }
+    setActiveStep(0)
+  }, [setSelectedLearningElements, setCreateLearningElementModalOpen, setSelectedLearningElementsClassification])
 
   useEffect(() => {
-    getUser().then((user) => {
-      getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId).then((learningPathTopic) => {
-        setCurrentTopic(learningPathTopic.topics.filter((topic) => topic.id === parseInt(topicId ?? '0'))[0])
+    getUser()
+      .then((user) => {
+        getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
+          .then((learningPathTopic) => {
+            setCurrentTopic(learningPathTopic.topics.filter((topic) => topic.id === parseInt(topicId ?? '0'))[0])
+          })
+          .catch((error) => {
+            handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 5000)
+          })
       })
-    })
+      .catch((error) => {
+        handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
+      })
   }, [topicId])
 
   return (
     <Grid>
       <Button
-        id="contact-form-button"
+        id="create-learning-element-button"
         variant="contained"
         color="primary"
         sx={{ alignSelf: 'end', marginTop: '0.6rem' }}
         onClick={() => setCreateLearningElementModalOpen(true)}>
-        Add Learning Element
+        {t('components.CreateLearningElement.createLearningElement')}
       </Button>
       <CreateLearningElementModal
         openCreateTopicModal={createLearningElementModalOpen}
@@ -49,9 +65,9 @@ const CreateLearningElement = () => {
         selectedLearningElements={selectedLearningElements}
         setSelectedLearningElements={setSelectedLearningElements}
         selectedLearningElementsClassification={selectedLearningElementsClassification}
-        setSelectedLearningElementsClassification={
-          setSelectedLearningElementsClassification
-        }></CreateLearningElementModal>
+        setSelectedLearningElementsClassification={setSelectedLearningElementsClassification}
+        setActiveStep={setActiveStep}
+        activeStep={activeStep}></CreateLearningElementModal>
     </Grid>
   )
 }

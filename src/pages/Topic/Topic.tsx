@@ -94,6 +94,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         .catch((error) => {
           handleError(t, addSnackbar, 'error.getLearningElementStatus', error, 3000)
         })
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.getUser', error, 3000)
+        })
     }
   }, [
     isAuth,
@@ -107,6 +110,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     setInitialEdges,
     learningPathElementStatus,
     isGrouped,
+    learningPathElementCache,
     learningPathLearningElementStatusCache
   ])
 

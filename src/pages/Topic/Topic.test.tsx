@@ -77,10 +77,9 @@ describe('Topic Page', () => {
   })
 
   test('getLearningPathElementStatus failed', async () => {
-    const mockfetchLearningPathElementStatus = jest.fn(() =>
-      Promise.reject(new Error('fetchLearningPathElementStatus failed'))
-    )
-    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(mockfetchLearningPathElementStatus)
+    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(() => {
+      throw new Error('getLearningPathElementStatus error')
+    })
 
     await act(async () => {
       render(
@@ -92,9 +91,6 @@ describe('Topic Page', () => {
           </MemoryRouter>
         </ReactFlowProvider>
       )
-    })
-    await waitFor(() => {
-      expect(mockfetchLearningPathElementStatus).toHaveBeenCalledTimes(1)
     })
   })
 

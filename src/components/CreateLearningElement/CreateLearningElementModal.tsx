@@ -22,6 +22,8 @@ export type CreateTopicModalProps = {
   setSelectedLearningElementsClassification: Dispatch<
     SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>
   >
+  setActiveStep: Dispatch<SetStateAction<number>>
+  activeStep: number
 }
 
 const CreateLearningElementModal = ({
@@ -31,13 +33,14 @@ const CreateLearningElementModal = ({
   selectedLearningElements,
   setSelectedLearningElements,
   selectedLearningElementsClassification,
-  setSelectedLearningElementsClassification
+  setSelectedLearningElementsClassification,
+  setActiveStep,
+  activeStep
 }: CreateTopicModalProps) => {
   //Hooks
   const { t } = useTranslation()
   const { courseId, topicId } = useParams()
   const [remoteTopic, setRemoteTopic] = useState<RemoteTopics[]>([])
-  const [activeStep, setActiveStep] = useState<number>(0)
   const [selectAllLearningElementsChecked, setSelectAllLearningElementsChecked] = useState(false)
   const {
     handleCreateLearningElementsInExistingTopic,

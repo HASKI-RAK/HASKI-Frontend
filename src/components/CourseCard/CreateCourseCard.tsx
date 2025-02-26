@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, memo } from 'react'
 import { Button, Card, CardContent, Grid } from '@common/components'
 import { AddCircle } from '@common/icons'
 import { CreateCourseModal } from '@components'
-import { commonButtonStyle } from '../CourseCard/CourseCard'
+import { courseCardButtonStyle } from '../CourseCard/CourseCard'
 
 type CreateCourseCardProps = {
   setCreateCourseModalOpen: (value: SetStateAction<boolean>) => void
@@ -29,7 +29,7 @@ const CreateCourseCard = ({
             variant="contained"
             color="primary"
             onClick={() => setCreateCourseModalOpen(true)}
-            sx={commonButtonStyle}>
+            sx={courseCardButtonStyle}>
             <AddCircle />
           </Button>
         </Grid>

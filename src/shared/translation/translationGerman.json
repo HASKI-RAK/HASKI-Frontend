@@ -50,6 +50,7 @@
     }
   ],
   "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
+  "components.CreateLearningElement.createLearningElement": "Lernelement hinzufügen",
   "components.AlgorithmSettingsModal.selectAlgorithms": "Algorithmen auswählen",
   "components.CourseCard.deleteCourseSuccessful": "Der Kurs wurde erfolgreich gelöscht",
   "components.TopicCard.deleteTopicSuccessful": "Der Themenbereich wurde erfolgreich gelöscht",
