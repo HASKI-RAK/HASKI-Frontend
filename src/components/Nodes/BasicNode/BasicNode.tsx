@@ -85,6 +85,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
             sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
             <Tooltip arrow title={t('components.BasicNode.deleteTooltip')} placement="top">
               <IconButton
+                data-testid={'delete-learning-element-button'}
                 onClick={handleOpenDeleteLearningElementModal}
                 className="learning-element-delete-icon"
                 sx={{
