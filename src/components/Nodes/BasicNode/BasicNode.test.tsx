@@ -97,6 +97,11 @@ describe('BasicNode tests', () => {
     await waitFor(() => {
       expect(screen.getByTestId('delete-learning-element-button')).toBeVisible()
     })
+
+    fireEvent.mouseLeave(basicNode)
+    await waitFor(() => {
+      expect(screen.getByTestId('delete-learning-element-button')).not.toBeVisible()
+    })
   })
 
   test('clicking delete button opens delete modal', async () => {
