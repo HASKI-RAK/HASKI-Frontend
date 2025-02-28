@@ -1,52 +1,64 @@
-import { setupXAPI
-  , XAPI
- } from 'src/services/xAPI/library/setupXAPI'
-import { useEffect } from 'react'
+import log from 'loglevel'
+import { XAPI, setupXAPI } from 'src/services/xAPI/library/setupXAPI'
+import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { getConfig } from '@shared'
 import { usePersistedStore } from '@store'
 
-// import { AuthContext } from '@services'
-
+// TODO: Document the return type
 type AppHookReturn = {
-  isXAPIConfigured: boolean
-  xAPI: XAPI
+  xAPI: XAPI | null
 }
 
+// TODO: Document the hook
 export const useApp = (): AppHookReturn => {
-  // xAPI functionality.
-  const setXAPI = usePersistedStore().setXAPI
-  const getXAPI = usePersistedStore().getXAPI
+  // States.
+  const [lmsUserID, setLmsUserID] = useState<string | undefined>(undefined)
+  const [xAPI, setXAPI] = useState<XAPI | null>(null)
 
   // Current browser language.
   const currentLanguage = localStorage.getItem('i18nextLng') ?? ''
 
-  // Create the xAPI object.
-  const xAPI = setupXAPI({
-    currentLanguage: currentLanguage,
-    projectURL: getConfig().FRONTEND_GITHUB ?? '',
-    projectVersion: getConfig().FRONTEND_VERSION ?? '',
-    repositories: {
-      component: (getConfig().WIKI ?? '').concat('/functions/common.'),
-      page: (getConfig().WIKI ?? '').concat('/functions/pages.'),
-      verb: (getConfig().WIKI ?? '').concat('/variables/services.')
-    },
-    xAPI: {
-      auth: {
-        username: getConfig().LRS_AUTH_USERNAME ?? '',
-        password: getConfig().LRS_AUTH_PASSWORD ?? ''
-      },
-      endpoint: getConfig().LRS ?? '',
-      version: '1.0.3'
-    }
-  })
+  // Get the user from the store.
+  const getUser = usePersistedStore((state) => state.getUser)
 
-  // Set the xAPI object in the slice.
+  // Translate.
+  const { t } = useTranslation()
+
   useEffect(() => {
-    setXAPI(xAPI)
-  }, [setXAPI]) //xAPI,
+    // Set the current user.
+    getUser()
+      .then((user) => {
+        setLmsUserID(user.lms_user_id.toString())
+      })
+      .catch((error) => {
+        log.error(error) // TODO: Real error
+      })
 
-  return { isXAPIConfigured: !!getXAPI(), xAPI: xAPI } // TODO: RETURN XAPI OBJECT
+    // Setup the xAPI object.
+    setXAPI(
+      setupXAPI({
+        currentLanguage: currentLanguage,
+        onError: (error: string) => log.error(t('error.sendStatement') + ' ' + error), // TODOD: translation files
+        projectURL: getConfig().FRONTEND_GITHUB ?? '',
+        projectVersion: getConfig().FRONTEND_VERSION ?? '',
+        repositories: {
+          component: `${getConfig().WIKI ?? ''}/functions/common.`,
+          page: `${getConfig().WIKI ?? ''}/functions/pages.`,
+          verb: `${getConfig().WIKI ?? ''}/variables/services.`
+        },
+        userID: lmsUserID,
+        xAPI: {
+          auth: {
+            username: getConfig().LRS_AUTH_USERNAME ?? '',
+            password: getConfig().LRS_AUTH_PASSWORD ?? ''
+          },
+          endpoint: getConfig().LRS ?? '',
+          version: '1.0.3'
+        }
+      })
+    )
+  }, [getUser, lmsUserID, setLmsUserID, currentLanguage, getConfig, setXAPI])
+
+  return useMemo(() => ({ xAPI: xAPI }), [xAPI])
 }
-
-
-// ! PROBLEM: THE XAPI OBJECT MIGHT NOT WORK WITH THE INTENDED FIELDS-> LOOK UP GEKRITZEL

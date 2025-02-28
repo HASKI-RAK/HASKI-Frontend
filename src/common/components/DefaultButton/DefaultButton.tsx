@@ -1,7 +1,7 @@
 import DefaultButton from '@mui/material/Button'
-import {xAPIWrapper} from 'src/services/xAPI/notlib/XAPIWrapper.hooks'
-import { MouseEvent, RefObject, forwardRef, memo, useCallback } from 'react'
-import { ButtonProps as DefaultButtonProps } from '@common/components'
+import { withXAPIWrapper } from 'src/services/xAPI/notlib/withXAPIWrapper'
+import { MouseEvent, Ref, RefObject, forwardRef, memo, useCallback } from 'react'
+import { Button, ButtonProps as DefaultButtonProps } from '@common/components'
 import {
   StatementHookReturn,
   useStatement as _useStatement,
@@ -27,7 +27,7 @@ type ButtonProps = DefaultButtonProps & {
  *
  * @category Common
  */
-const Button = (
+/*const Button2 = (
   { useStatement = _useStatement, onClick, ...props }: ButtonProps,
   ref: ((instance: HTMLButtonElement | null) => void) | RefObject<HTMLButtonElement> | null | undefined
 ) => {
@@ -49,8 +49,23 @@ const Button = (
       {props.children}
     </DefaultButton>
   )
-}
+}*/
+
 
 // const Button = () => useXAPIWrapper('Button', new URL(import.meta.url).pathname, DefaultButton)
 // export default memo(forwardRef(Button))
-export default xAPIWrapper('Button', new URL(import.meta.url).pathname, DefaultButton) //RENAME useXAPIWRAPPER
+
+const Button2 = forwardRef((props: ButtonProps, ref: ((instance: HTMLButtonElement | null) => void) | RefObject<HTMLButtonElement> | null | undefined) => {
+  return (
+    <DefaultButton
+      ref={ref}
+      {...props}
+      >
+        {props.children}
+    </DefaultButton>
+  )
+})
+
+// eslint-disable-next-line
+Button2.displayName = 'Button2'
+export default withXAPIWrapper('Button', new URL(import.meta.url).pathname, memo(DefaultButton))

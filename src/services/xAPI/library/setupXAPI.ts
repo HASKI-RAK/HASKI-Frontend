@@ -1,6 +1,7 @@
 import BaseXAPI from '@xapi/xapi'
 import { Versions } from '@xapi/xapi/dist/types/constants'
 
+// TODO: Document the type
 export type XAPIRepositories =
   | {
       component: string
@@ -9,15 +10,20 @@ export type XAPIRepositories =
     }
   | string
 
+// TODO: Document the type
 export type XAPIConfig = {
   currentLanguage?: string
+  onError?: (error: string) => void
   projectURL: string
   projectVersion: string
   repositories: XAPIRepositories
+  userID?: string
 }
 
+// TODO: Document the type
 export type XAPI = XAPIConfig & { xAPI: BaseXAPI }
 
+// TODO: Document the function
 export const setupXAPI = ({
   xAPI,
   ...props
