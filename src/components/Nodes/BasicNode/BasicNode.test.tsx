@@ -127,6 +127,44 @@ describe('BasicNode tests', () => {
     expect(screen.getByTestId('delete-entity-modal-accept-label')).toBeInTheDocument()
   })
 
+  test('clicking delete button opens delete modal, clicking outside closes it', async () => {
+    const mockNode = getMockNode(false)
+
+    const courseCreatorContext = {
+      isStudentRole: false,
+      isCourseCreatorRole: true
+    } as RoleContextType
+
+    render(
+      <RoleContext.Provider value={courseCreatorContext}>
+        <MemoryRouter>
+          <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
+        </MemoryRouter>
+      </RoleContext.Provider>
+    )
+
+    // Hover over the node and open the delete modal
+    fireEvent.mouseEnter(screen.getByTestId('basicNode'))
+    const deleteButton = await screen.findByTestId('delete-learning-element-button')
+    fireEvent.click(deleteButton)
+
+    // Ensure the modal appears
+    const modal = screen.getByTestId('delete-entity-modal')
+    expect(modal).toBeInTheDocument()
+
+    const backdrop = document.querySelector('.MuiBackdrop-root')
+    if (!backdrop) {
+      throw new Error('Backdrop not found! Ensure your modal uses Material UI backdrop structure.')
+    }
+
+    fireEvent.mouseDown(backdrop)
+    fireEvent.click(backdrop)
+
+    await waitFor(() => {
+      expect(screen.queryByTestId('delete-entity-modal')).not.toBeInTheDocument()
+    })
+  })
+
   test('clicking delete button does not trigger handleOpen()', async () => {
     const mockNode = getMockNode(false)
 

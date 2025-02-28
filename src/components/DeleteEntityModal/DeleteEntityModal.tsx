@@ -53,7 +53,8 @@ const DeleteEntityModal = ({
     <Modal
       open={openDeleteEntityModal}
       onClose={() => setDeleteEntityModalOpen(false)}
-      className="learning-element-delete-icon">
+      className="learning-element-delete-icon"
+      data-testid={'delete-entity-modal'}>
       <Box sx={styleBox}>
         <Grid item>
           <Grid container alignItems="center" spacing={1}>

@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
@@ -26,7 +27,9 @@ describe('DeleteEntityModal Component', () => {
   const renderComponent = () => {
     return render(
       <MemoryRouter>
-        <DeleteEntityModal {...defaultProps} />
+        <Box>
+          <DeleteEntityModal {...defaultProps} />
+        </Box>
       </MemoryRouter>
     )
   }
