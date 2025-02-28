@@ -42,7 +42,8 @@ const CreateLearningElementModal = ({
   //Hooks
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
-  const { courseId, topicId } = useParams()
+  const { courseId } = useParams()
+  const { topicId } = useParams()
   const [remoteTopic, setRemoteTopic] = useState<RemoteTopics[]>([])
   const [selectAllLearningElementsChecked, setSelectAllLearningElementsChecked] = useState(false)
   const {
@@ -67,6 +68,7 @@ const CreateLearningElementModal = ({
 
   //filter out the learning elements that are already in the learning path
   useEffect(() => {
+    if (!courseId || !topicId) return
     getUser()
       .then((user) =>
         getRemoteTopics(courseId)
@@ -164,7 +166,6 @@ const CreateLearningElementModal = ({
               selectAllLearningElementsChecked={selectAllLearningElementsChecked}
               setSelectAllLearningElementsChecked={setSelectAllLearningElementsChecked}
               onNext={handleNext}
-              onBack={handleBack}
             />
           )}
           {activeStep === 1 && (
