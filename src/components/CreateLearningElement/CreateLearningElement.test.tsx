@@ -55,9 +55,26 @@ describe('CreateLearningElement Component', () => {
     fireEvent.click(screen.getByTestId('create-learning-elements-modal-close-button'))
   })
 
-  test('handles fetchUser error when fetching', async () => {
-    mockServices.fetchUser.mockImplementationOnce(() => {
-      throw new Error('getUser error')
+  test('handles fetchLearningPath errors when fetching', async () => {
+    mockServices.fetchUser.mockImplementation(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'TH-AB'
+      })
+    )
+
+    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => {
+      throw new Error('getLearningPathTopic error')
     })
 
     await act(async () => {
@@ -67,9 +84,9 @@ describe('CreateLearningElement Component', () => {
     expect(addSnackbarMock).toHaveBeenCalled()
   })
 
-  test('handles fetchLearningPath errors when fetching', async () => {
-    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => {
-      throw new Error('getLearningPathTopic error')
+  test('handles fetchUser error when fetching', async () => {
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('getUser error')
     })
 
     await act(async () => {
