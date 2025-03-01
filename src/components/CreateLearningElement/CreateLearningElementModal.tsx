@@ -93,7 +93,7 @@ const CreateLearningElementModal = ({
             // Update remote topics by filtering out elements that already exist in the learning path
             const updatedTopics = filteredTopics.map((topic) => ({
               ...topic,
-              lms_learning_elements: (topic.lms_learning_elements || []).filter(
+              lms_learning_elements: topic.lms_learning_elements.filter(
                 (learningElement) => !existingLearningElementIds.includes(learningElement.lms_id)
               )
             }))
