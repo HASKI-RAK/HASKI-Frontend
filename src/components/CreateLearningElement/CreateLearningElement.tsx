@@ -46,7 +46,7 @@ const CreateLearningElement = () => {
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
       })
-  }, [topicId])
+  }, [topicId, getUser, getLearningPathTopic, setCurrentTopic])
 
   return (
     <Grid>

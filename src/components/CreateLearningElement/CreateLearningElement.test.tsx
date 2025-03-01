@@ -25,10 +25,6 @@ describe('CreateLearningElement Component', () => {
     removeSnackbar: (a: any) => a
   }
 
-  beforeEach(() => {
-    jest.resetAllMocks()
-  })
-
   const renderComponent = () => {
     return render(
       <MemoryRouter>
@@ -45,8 +41,10 @@ describe('CreateLearningElement Component', () => {
     expect(createButton).toBeInTheDocument()
   })
 
-  test('opens the create learning element modal when button is clicked', () => {
-    renderComponent()
+  test('opens the create learning element modal when button is clicked', async () => {
+    await act(async () => {
+      renderComponent()
+    })
     const createButton = screen.getByText('components.CreateLearningElement.createLearningElement')
 
     fireEvent.click(createButton)
@@ -56,7 +54,7 @@ describe('CreateLearningElement Component', () => {
   })
 
   test('handles fetchLearningPath errors when fetching', async () => {
-    mockServices.fetchUser.mockImplementation(() =>
+    mockServices.fetchUser.mockImplementationOnce(() =>
       Promise.resolve({
         id: 1,
         lms_user_id: 1,
