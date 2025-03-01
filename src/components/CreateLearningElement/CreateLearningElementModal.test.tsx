@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
+import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
+import { act } from 'react-test-renderer'
 import { ReactFlowProvider } from 'reactflow'
 import { RemoteLearningElement } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
@@ -27,6 +29,49 @@ describe('CreateLearningElementModal Component', () => {
     removeSnackbar: (a: any) => a
   }
   const mockHandleCloseCreateTopicModal = jest.fn()
+
+  test('returns without courseId and topicId', async () => {
+    const { queryByTestId } = render(
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/1', '/topic', '/1']}>
+          <SnackbarContext.Provider value={mockAddSnackbar}>
+            <CreateLearningElementModal
+              openCreateTopicModal={false}
+              currentTopicLmsId={1}
+              handleCloseCreateTopicModal={jest.fn()}
+              selectedLearningElements={{}}
+              setSelectedLearningElements={jest.fn()}
+              selectedLearningElementsClassification={{}}
+              setSelectedLearningElementsClassification={jest.fn()}
+              activeStep={0}
+              setActiveStep={jest.fn()}
+            />
+          </SnackbarContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
+    )
+  })
+
+  test('Modal is closed without given parameters', async () => {
+    const { queryByTestId } = render(
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/1', '/topic', '/1']}>
+          <SnackbarContext.Provider value={mockAddSnackbar}>
+            <CreateLearningElementModal
+              currentTopicLmsId={1}
+              handleCloseCreateTopicModal={jest.fn()}
+              selectedLearningElements={{}}
+              setSelectedLearningElements={jest.fn()}
+              selectedLearningElementsClassification={{}}
+              setSelectedLearningElementsClassification={jest.fn()}
+              activeStep={0}
+              setActiveStep={jest.fn()}
+            />
+          </SnackbarContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
+    )
+  })
 
   test('renders the modal when closed', async () => {
     jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1' })
@@ -147,6 +192,44 @@ describe('CreateLearningElementModal Component', () => {
     expect(getByText('appGlobal.back')).toBeDisabled()
   })
 
+  test('displays step 1 (CreateLearningElementsStep) initially, with 0 Learning elements', () => {
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1' })
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+
+    mockServices.fetchRemoteTopics.mockImplementationOnce(() =>
+      Promise.resolve({
+        lms_learning_elements: [],
+        topic_lms_id: 3,
+        topic_lms_name: 'General'
+      })
+    )
+
+    const { getByText, queryByRole } = render(
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/1', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateLearningElementModal
+                openCreateTopicModal={true}
+                currentTopicLmsId={3}
+                handleCloseCreateTopicModal={jest.fn()}
+                selectedLearningElements={{}}
+                setSelectedLearningElements={jest.fn()}
+                selectedLearningElementsClassification={{}}
+                setSelectedLearningElementsClassification={jest.fn()}
+                activeStep={0}
+                setActiveStep={jest.fn()}
+              />
+            </SnackbarContext.Provider>
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
+    )
+
+    expect(queryByRole('checkbox')).not.toBeInTheDocument()
+    expect(getByText('appGlobal.back')).toBeDisabled()
+  })
+
   test('navigates to step 2 (CreateLearningElementClassificationsStep) when clicking Next', async () => {
     jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
     jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
@@ -255,8 +338,141 @@ describe('CreateLearningElementModal Component', () => {
     })
   })
 
-  /*test('handles errors when fetching user or learning path topic', async () => {
+  test('clicking directly on stepperbutton', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+
+    const handleSetActiveStep = jest.fn()
+
+    const selectedLearningElements: { [key: number]: RemoteLearningElement[] } = {
+      3: [
+        // ✅ Object with numeric keys
+        { lms_id: 38, lms_learning_element_name: 'superKnowledge.pdf', lms_activity_type: 'resource' },
+        { lms_id: 39, lms_learning_element_name: 'Strategie Übung - Leicht', lms_activity_type: 'h5pactivity' }
+      ]
+    }
+
+    const selectedLearningElementsClassification = {
+      3: [
+        {
+          lms_id: 38,
+          classification: 'KÜ',
+          lms_learning_element_name: 'superKnowledge.pdf',
+          lms_activity_type: 'resource'
+        },
+        {
+          lms_id: 39,
+          classification: 'KÜ',
+          lms_learning_element_name: 'Strategie Übung - Leicht',
+          lms_activity_type: 'h5pactivity'
+        }
+      ]
+    }
+
+    const { getAllByTestId } = render(
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/1', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateLearningElementModal
+                openCreateTopicModal={true}
+                currentTopicLmsId={3}
+                handleCloseCreateTopicModal={mockHandleCloseCreateTopicModal}
+                selectedLearningElements={{}}
+                setSelectedLearningElements={jest.fn()}
+                selectedLearningElementsClassification={{}}
+                setSelectedLearningElementsClassification={jest.fn()}
+                activeStep={1}
+                setActiveStep={handleSetActiveStep}
+              />
+            </SnackbarContext.Provider>
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
+    )
+
+    const stepperButtons = getAllByTestId('create-learning-element-modal-stepper')
+    fireEvent.click(stepperButtons[0])
+
+    await waitFor(() => {
+      expect(handleSetActiveStep).toHaveBeenCalled()
+    })
+  })
+
+  test('handles errors when fetching remote topics', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+
+    mockServices.fetchRemoteTopics.mockImplementationOnce(() => {
+      throw new Error('fetchRemoteTopics error')
+    })
+
+    await act(async () => {
+      const { getByTestId } = render(
+        <ReactFlowProvider>
+          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/2']}>
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateLearningElementModal
+                openCreateTopicModal={true}
+                currentTopicLmsId={3}
+                handleCloseCreateTopicModal={jest.fn()}
+                selectedLearningElements={{}}
+                setSelectedLearningElements={jest.fn()}
+                selectedLearningElementsClassification={{}}
+                setSelectedLearningElementsClassification={jest.fn()}
+                activeStep={1}
+                setActiveStep={jest.fn()}
+              />
+            </SnackbarContext.Provider>
+          </MemoryRouter>
+        </ReactFlowProvider>
+      )
+    })
+
+    expect(addSnackbarMock).toHaveBeenCalled()
+  })
+
+  test('handles errors when fetching learning path elements', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+
+    mockServices.fetchLearningPathElement.mockImplementationOnce(() => {
+      throw new Error('fetchLearningPathElement error')
+    })
+
+    await act(async () => {
+      const { getByTestId } = render(
+        <ReactFlowProvider>
+          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/2']}>
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateLearningElementModal
+                openCreateTopicModal={true}
+                currentTopicLmsId={3}
+                handleCloseCreateTopicModal={jest.fn()}
+                selectedLearningElements={{}}
+                setSelectedLearningElements={jest.fn()}
+                selectedLearningElementsClassification={{}}
+                setSelectedLearningElementsClassification={jest.fn()}
+                activeStep={1}
+                setActiveStep={jest.fn()}
+              />
+            </SnackbarContext.Provider>
+          </MemoryRouter>
+        </ReactFlowProvider>
+      )
+    })
+
+    expect(addSnackbarMock).toHaveBeenCalled()
+  })
+
+  test('handles errors when fetching user', async () => {
     //mockServices fetch user throw error
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('fetchUser error')
+    })
 
     await act(async () => {
       const { getByTestId } = render(
@@ -280,42 +496,6 @@ describe('CreateLearningElementModal Component', () => {
       )
     })
 
-    expect(handleError).toHaveBeenCalledWith(
-      expect.any(Function),
-      mockAddSnackbar,
-      'error.fetchUser',
-      expect.any(Error),
-      3000
-    )
-
-    await act(async () => {
-      const { getByTestId } = render(
-        <ReactFlowProvider>
-          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/2']}>
-            <SnackbarContext.Provider value={mockAddSnackbar}>
-              <CreateLearningElementModal
-                openCreateTopicModal={true}
-                currentTopicLmsId={3}
-                handleCloseCreateTopicModal={jest.fn()}
-                selectedLearningElements={{}}
-                setSelectedLearningElements={jest.fn()}
-                selectedLearningElementsClassification={{}}
-                setSelectedLearningElementsClassification={jest.fn()}
-                activeStep={1}
-                setActiveStep={jest.fn()}
-              />
-            </SnackbarContext.Provider>
-          </MemoryRouter>
-        </ReactFlowProvider>
-      )
-    })
-
-    expect(handleError).toHaveBeenCalledWith(
-      expect.any(Function),
-      mockAddSnackbar,
-      'error.fetchLearningPathElement',
-      expect.any(Error),
-      3000
-    )
-  })*/
+    expect(addSnackbarMock).toHaveBeenCalled()
+  })
 })
