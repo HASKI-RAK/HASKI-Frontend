@@ -5,7 +5,7 @@ import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Tooltip, T
 import { DeleteForever, MoreVert, Polyline } from '@common/icons'
 import { AlgorithmSettingsModal, DeleteEntityModal, StyledLinearProgress } from '@components'
 import { Topic } from '@core'
-import { SnackbarContext, deleteTopic } from '@services'
+import { RoleContext, SnackbarContext, deleteTopic } from '@services'
 import { useStore } from '@store'
 import { useTopicCard } from './TopicCard.hooks'
 
@@ -14,15 +14,15 @@ type TopicCardProps = {
   topic?: Topic
   calculatedTopicProgress?: number[]
   isSmOrDown?: boolean
-  isCourseCreatorRole?: boolean
 }
 
 // Component
-const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown, isCourseCreatorRole }: TopicCardProps) => {
+const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProps) => {
   // Hooks
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
+  const { isCourseCreatorRole } = useContext(RoleContext)
   const clearLearningPathTopic = useStore((state) => state.clearLearningPathTopicCache)
 
   const [isDeleteTopicModalOpen, setDeleteTopicModalOpen] = useState(false)
