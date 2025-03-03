@@ -21,7 +21,8 @@ const CreateLearningElement = () => {
   }>({})
   const [activeStep, setActiveStep] = useState<number>(0)
 
-  const { courseId, topicId } = useParams()
+  const { courseId } = useParams()
+  const { topicId } = useParams()
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
 
@@ -33,11 +34,12 @@ const CreateLearningElement = () => {
   }, [setSelectedLearningElements, setCreateLearningElementModalOpen, setSelectedLearningElementsClassification])
 
   useEffect(() => {
+    if (!courseId || !topicId) return
     getUser()
       .then((user) => {
         getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
           .then((learningPathTopic) => {
-            setCurrentTopic(learningPathTopic.topics.filter((topic) => topic.id === parseInt(topicId ?? '0'))[0])
+            setCurrentTopic(learningPathTopic.topics.filter((topic) => topic.id === parseInt(topicId))[0])
           })
           .catch((error) => {
             handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 5000)
@@ -46,7 +48,7 @@ const CreateLearningElement = () => {
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
       })
-  }, [topicId, getUser, getLearningPathTopic, setCurrentTopic])
+  }, [topicId, getUser, getLearningPathTopic, courseId, t, addSnackbar])
 
   return (
     <Grid>

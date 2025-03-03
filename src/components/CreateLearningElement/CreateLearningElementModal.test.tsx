@@ -29,9 +29,10 @@ describe('CreateLearningElementModal Component', () => {
     removeSnackbar: (a: any) => a
   }
   const mockHandleCloseCreateTopicModal = jest.fn()
+  const mockSetActiveStep = jest.fn()
 
   test('returns without courseId and topicId', async () => {
-    const { queryByTestId } = render(
+    render(
       <ReactFlowProvider>
         <MemoryRouter initialEntries={['/course', '/1', '/topic', '/1']}>
           <SnackbarContext.Provider value={mockAddSnackbar}>
@@ -44,7 +45,7 @@ describe('CreateLearningElementModal Component', () => {
               selectedLearningElementsClassification={{}}
               setSelectedLearningElementsClassification={jest.fn()}
               activeStep={0}
-              setActiveStep={jest.fn()}
+              setActiveStep={mockSetActiveStep}
             />
           </SnackbarContext.Provider>
         </MemoryRouter>
@@ -53,7 +54,7 @@ describe('CreateLearningElementModal Component', () => {
   })
 
   test('Modal is closed without given parameters', async () => {
-    const { queryByTestId } = render(
+    render(
       <ReactFlowProvider>
         <MemoryRouter initialEntries={['/course', '/1', '/topic', '/1']}>
           <SnackbarContext.Provider value={mockAddSnackbar}>
@@ -65,7 +66,7 @@ describe('CreateLearningElementModal Component', () => {
               selectedLearningElementsClassification={{}}
               setSelectedLearningElementsClassification={jest.fn()}
               activeStep={0}
-              setActiveStep={jest.fn()}
+              setActiveStep={mockSetActiveStep}
             />
           </SnackbarContext.Provider>
         </MemoryRouter>
@@ -90,7 +91,7 @@ describe('CreateLearningElementModal Component', () => {
               selectedLearningElementsClassification={{}}
               setSelectedLearningElementsClassification={jest.fn()}
               activeStep={0}
-              setActiveStep={jest.fn()}
+              setActiveStep={mockSetActiveStep}
             />
           </SnackbarContext.Provider>
         </MemoryRouter>
@@ -119,7 +120,7 @@ describe('CreateLearningElementModal Component', () => {
                 selectedLearningElementsClassification={{}}
                 setSelectedLearningElementsClassification={jest.fn()}
                 activeStep={0}
-                setActiveStep={jest.fn()}
+                setActiveStep={mockSetActiveStep}
               />
             </SnackbarContext.Provider>
           </AuthContext.Provider>
@@ -149,7 +150,7 @@ describe('CreateLearningElementModal Component', () => {
                 selectedLearningElementsClassification={{}}
                 setSelectedLearningElementsClassification={jest.fn()}
                 activeStep={0}
-                setActiveStep={jest.fn()}
+                setActiveStep={mockSetActiveStep}
               />
             </SnackbarContext.Provider>
           </AuthContext.Provider>
@@ -181,7 +182,7 @@ describe('CreateLearningElementModal Component', () => {
                 selectedLearningElementsClassification={{}}
                 setSelectedLearningElementsClassification={jest.fn()}
                 activeStep={0}
-                setActiveStep={jest.fn()}
+                setActiveStep={mockSetActiveStep}
               />
             </SnackbarContext.Provider>
           </AuthContext.Provider>
@@ -218,7 +219,7 @@ describe('CreateLearningElementModal Component', () => {
                 selectedLearningElementsClassification={{}}
                 setSelectedLearningElementsClassification={jest.fn()}
                 activeStep={0}
-                setActiveStep={jest.fn()}
+                setActiveStep={mockSetActiveStep}
               />
             </SnackbarContext.Provider>
           </AuthContext.Provider>
@@ -283,31 +284,6 @@ describe('CreateLearningElementModal Component', () => {
 
     const handleSetActiveStep = jest.fn()
 
-    const selectedLearningElements: { [key: number]: RemoteLearningElement[] } = {
-      3: [
-        // ✅ Object with numeric keys
-        { lms_id: 38, lms_learning_element_name: 'superKnowledge.pdf', lms_activity_type: 'resource' },
-        { lms_id: 39, lms_learning_element_name: 'Strategie Übung - Leicht', lms_activity_type: 'h5pactivity' }
-      ]
-    }
-
-    const selectedLearningElementsClassification = {
-      3: [
-        {
-          lms_id: 38,
-          classification: 'KÜ',
-          lms_learning_element_name: 'superKnowledge.pdf',
-          lms_activity_type: 'resource'
-        },
-        {
-          lms_id: 39,
-          classification: 'KÜ',
-          lms_learning_element_name: 'Strategie Übung - Leicht',
-          lms_activity_type: 'h5pactivity'
-        }
-      ]
-    }
-
     const { getByText } = render(
       <ReactFlowProvider>
         <MemoryRouter initialEntries={['/course', '/1', '/topic', '/1']}>
@@ -343,31 +319,6 @@ describe('CreateLearningElementModal Component', () => {
     jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
 
     const handleSetActiveStep = jest.fn()
-
-    const selectedLearningElements: { [key: number]: RemoteLearningElement[] } = {
-      3: [
-        // ✅ Object with numeric keys
-        { lms_id: 38, lms_learning_element_name: 'superKnowledge.pdf', lms_activity_type: 'resource' },
-        { lms_id: 39, lms_learning_element_name: 'Strategie Übung - Leicht', lms_activity_type: 'h5pactivity' }
-      ]
-    }
-
-    const selectedLearningElementsClassification = {
-      3: [
-        {
-          lms_id: 38,
-          classification: 'KÜ',
-          lms_learning_element_name: 'superKnowledge.pdf',
-          lms_activity_type: 'resource'
-        },
-        {
-          lms_id: 39,
-          classification: 'KÜ',
-          lms_learning_element_name: 'Strategie Übung - Leicht',
-          lms_activity_type: 'h5pactivity'
-        }
-      ]
-    }
 
     const { getAllByTestId } = render(
       <ReactFlowProvider>
@@ -408,7 +359,7 @@ describe('CreateLearningElementModal Component', () => {
     })
 
     await act(async () => {
-      const { getByTestId } = render(
+      render(
         <ReactFlowProvider>
           <MemoryRouter initialEntries={['/course', '/2', '/topic', '/2']}>
             <SnackbarContext.Provider value={mockAddSnackbar}>
@@ -421,7 +372,7 @@ describe('CreateLearningElementModal Component', () => {
                 selectedLearningElementsClassification={{}}
                 setSelectedLearningElementsClassification={jest.fn()}
                 activeStep={1}
-                setActiveStep={jest.fn()}
+                setActiveStep={mockSetActiveStep}
               />
             </SnackbarContext.Provider>
           </MemoryRouter>
@@ -441,7 +392,7 @@ describe('CreateLearningElementModal Component', () => {
     })
 
     await act(async () => {
-      const { getByTestId } = render(
+      render(
         <ReactFlowProvider>
           <MemoryRouter initialEntries={['/course', '/2', '/topic', '/2']}>
             <SnackbarContext.Provider value={mockAddSnackbar}>
@@ -454,7 +405,7 @@ describe('CreateLearningElementModal Component', () => {
                 selectedLearningElementsClassification={{}}
                 setSelectedLearningElementsClassification={jest.fn()}
                 activeStep={1}
-                setActiveStep={jest.fn()}
+                setActiveStep={mockSetActiveStep}
               />
             </SnackbarContext.Provider>
           </MemoryRouter>
@@ -475,7 +426,7 @@ describe('CreateLearningElementModal Component', () => {
     })
 
     await act(async () => {
-      const { getByTestId } = render(
+      render(
         <ReactFlowProvider>
           <MemoryRouter initialEntries={['/course', '/2', '/topic', '/2']}>
             <SnackbarContext.Provider value={mockAddSnackbar}>
@@ -488,7 +439,7 @@ describe('CreateLearningElementModal Component', () => {
                 selectedLearningElementsClassification={{}}
                 setSelectedLearningElementsClassification={jest.fn()}
                 activeStep={1}
-                setActiveStep={jest.fn()}
+                setActiveStep={mockSetActiveStep}
               />
             </SnackbarContext.Provider>
           </MemoryRouter>

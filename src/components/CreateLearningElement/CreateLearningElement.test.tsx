@@ -1,13 +1,20 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
+import * as router from 'react-router'
 import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
+import { ReactFlowProvider } from 'reactflow'
 import { SnackbarContext } from '@services'
 import CreateLearningElement from './CreateLearningElement'
 
 jest.mock('@components', () => ({
   handleError: jest.fn()
+}))
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn()
 }))
 
 describe('CreateLearningElement Component', () => {
@@ -27,11 +34,13 @@ describe('CreateLearningElement Component', () => {
 
   const renderComponent = () => {
     return render(
-      <MemoryRouter>
-        <SnackbarContext.Provider value={mockAddSnackbar}>
-          <CreateLearningElement />
-        </SnackbarContext.Provider>
-      </MemoryRouter>
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/1', '/topic', '/1']}>
+          <SnackbarContext.Provider value={mockAddSnackbar}>
+            <CreateLearningElement />
+          </SnackbarContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
     )
   }
 
@@ -53,7 +62,86 @@ describe('CreateLearningElement Component', () => {
     fireEvent.click(screen.getByTestId('create-learning-elements-modal-close-button'))
   })
 
+  test('opens the create learning element modal when button is clicked, next button works', async () => {
+    mockServices.fetchLearningPathTopic.mockImplementationOnce(() =>
+      Promise.resolve({
+        topics: [
+          {
+            contains_le: true,
+            created_at: 'string',
+            created_by: 'string',
+            id: 1,
+            is_topic: true,
+            last_updated: 'string',
+            lms_id: 1,
+            name: 'Wirtschaftsinformatik',
+            parent_id: 1,
+            university: 'HS-Kempten',
+            student_topic: {
+              done: true,
+              done_at: 'string',
+              id: 1,
+              student_id: 1,
+              topic_id: 1,
+              visits: ['string']
+            }
+          },
+          {
+            contains_le: true,
+            created_at: 'string',
+            created_by: 'string',
+            id: 2,
+            is_topic: true,
+            last_updated: 'string',
+            lms_id: 3,
+            name: 'Informatik',
+            parent_id: 1,
+            university: 'HS-Kempten',
+            student_topic: {
+              done: true,
+              done_at: 'string',
+              id: 2,
+              student_id: 1,
+              topic_id: 2,
+              visits: ['string']
+            }
+          }
+        ]
+      })
+    )
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+
+    await act(async () => {
+      render(
+        <ReactFlowProvider>
+          <MemoryRouter initialEntries={['/course', '/1', '/topic', '/2']}>
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateLearningElement />
+            </SnackbarContext.Provider>
+          </MemoryRouter>
+        </ReactFlowProvider>
+      )
+    })
+
+    await waitFor(() => {
+      const createButton = screen.getByText('components.CreateLearningElement.createLearningElement')
+      fireEvent.click(createButton)
+    })
+
+    fireEvent.click(screen.getAllByRole('checkbox')[1])
+    expect(screen.getByText('appGlobal.next')).toBeEnabled()
+    fireEvent.click(screen.getByText('appGlobal.next'))
+
+    expect(screen.getByText('components.CreateLearningElementModal.createLearningElements')).toBeInTheDocument()
+
+    expect(screen.getByText('appGlobal.back')).toBeEnabled()
+    fireEvent.click(screen.getByText('appGlobal.back'))
+    expect(screen.getByTestId('create-learning-elements-modal-close-button')).toBeInTheDocument()
+    fireEvent.click(screen.getByTestId('create-learning-elements-modal-close-button'))
+  })
+
   test('handles fetchLearningPath errors when fetching', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
     mockServices.fetchUser.mockImplementationOnce(() =>
       Promise.resolve({
         id: 1,
@@ -83,14 +171,23 @@ describe('CreateLearningElement Component', () => {
   })
 
   test('handles fetchUser error when fetching', async () => {
-    mockServices.fetchUser.mockImplementationOnce(() => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+
+    mockServices.fetchUser.mockImplementation(() => {
       throw new Error('getUser error')
     })
 
     await act(async () => {
-      renderComponent()
+      render(
+        <ReactFlowProvider>
+          <MemoryRouter initialEntries={['/course', '/1', '/topic', '/2']}>
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateLearningElement />
+            </SnackbarContext.Provider>
+          </MemoryRouter>
+        </ReactFlowProvider>
+      )
     })
-
     expect(addSnackbarMock).toHaveBeenCalled()
   })
 })

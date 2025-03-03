@@ -63,9 +63,6 @@ const CreateLearningElementModal = ({
   //Constants
   const createLearningElementModalStepperSteps = [t('appGlobal.learningElements'), t('appGlobal.classifications')]
 
-  const handleNext = () => setActiveStep((prevStep) => prevStep + 1)
-  const handleBack = () => setActiveStep((prevStep) => prevStep - 1)
-
   //filter out the learning elements that are already in the learning path
   useEffect(() => {
     if (!courseId || !topicId) return
@@ -107,8 +104,11 @@ const CreateLearningElementModal = ({
       })
   }, [
     activeStep,
+    setActiveStep,
     openCreateTopicModal,
     topicId,
+    courseId,
+    currentTopicLmsId,
     selectedLearningElements,
     selectedLearningElementsClassification,
     setSelectedLearningElements,
@@ -165,7 +165,9 @@ const CreateLearningElementModal = ({
               handleLearningElementChange={handleLearningElementChange}
               selectAllLearningElementsChecked={selectAllLearningElementsChecked}
               setSelectAllLearningElementsChecked={setSelectAllLearningElementsChecked}
-              onNext={handleNext}
+              onNext={() => {
+                setActiveStep((prevStep) => prevStep + 1)
+              }}
             />
           )}
           {activeStep === 1 && (
@@ -184,7 +186,9 @@ const CreateLearningElementModal = ({
                 })
               }
               handleLearningElementClassification={handleLearningElementClassification}
-              onBack={handleBack}
+              onBack={() => {
+                setActiveStep((prevStep) => prevStep - 1)
+              }}
               nextButtonText={t('components.CreateLearningElementModal.createLearningElements')}
             />
           )}
