@@ -25,7 +25,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
   const { isCourseCreatorRole } = useContext(RoleContext)
   const clearLearningPathTopic = useStore((state) => state.clearLearningPathTopicCache)
 
-  const [isDeleteTopicModalOpen, setDeleteTopicModalOpen] = useState(false)
+  const [deleteTopicModalOpen, setDeleteTopicModalOpen] = useState(false)
   const [topicName, setTopicName] = useState<string>('')
   const [topicId, setTopicId] = useState<number>(0)
   const [lmsTopicId, setLmsTopicId] = useState<number>(0)
@@ -179,7 +179,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         )}
       </Menu>
       <DeleteEntityModal
-        openDeleteEntityModal={isDeleteTopicModalOpen}
+        openDeleteEntityModal={deleteTopicModalOpen}
         setDeleteEntityModalOpen={setDeleteTopicModalOpen}
         entityName={topicName}
         entityId={topicId}

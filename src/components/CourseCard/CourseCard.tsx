@@ -37,7 +37,7 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
   const navigate = useNavigate()
   const { addSnackbar } = useContext(SnackbarContext)
 
-  const [isDeleteCourseModalOpen, setDeleteCourseModalOpen] = useState(false)
+  const [deleteCourseModalOpen, setDeleteCourseModalOpen] = useState(false)
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null)
   const [courseName, setCourseName] = useState<string>('')
   const [courseId, setCourseId] = useState<number>(0)
@@ -139,7 +139,7 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
         </MenuItem>
       </Menu>
       <DeleteEntityModal
-        openDeleteEntityModal={isDeleteCourseModalOpen}
+        openDeleteEntityModal={deleteCourseModalOpen}
         setDeleteEntityModalOpen={setDeleteCourseModalOpen}
         entityName={courseName}
         entityId={courseId}

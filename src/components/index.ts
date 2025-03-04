@@ -61,6 +61,7 @@ export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopi
 export { default as CreateLearningElementTable } from './CreateTopic/Table/CreateLearningElementTable'
 export { default as CourseCard } from './CourseCard/CourseCard'
 export { default as CreateCourseCard } from './CourseCard/CreateCourseCard'
+export { courseCardStyle } from './CourseCard/CourseCard'
 export { default as CreateLearningElementModal } from './CreateLearningElement/CreateLearningElementModal'
 export { default as CreateLearningElement } from './CreateLearningElement/CreateLearningElement'
 export {

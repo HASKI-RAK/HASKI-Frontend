@@ -20,7 +20,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   const { addSnackbar } = useContext(SnackbarContext)
   const { isCourseCreatorRole } = useContext(RoleContext)
 
-  const [isDeleteLearningElementModalOpen, setDeleteLearningElementModalOpen] = useState(false)
+  const [deleteLearningElementModalOpen, setdeleteLearningElementModalOpen] = useState(false)
   const [learningElementName, setLearningElementName] = useState<string>('')
   const [learningElementId, setLearningElementId] = useState<number>(0)
   const [lmsLearningElementId, setLmsLearningElementId] = useState<number>(0)
@@ -47,7 +47,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   }
 
   const handleOpenDeleteLearningElementModal = () => {
-    setDeleteLearningElementModalOpen(true)
+    setdeleteLearningElementModalOpen(true)
     setLearningElementName(props.data.name)
     setLearningElementId(props.data.learningElementId)
     setLmsLearningElementId(props.data.lmsId)
@@ -61,7 +61,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
         severity: 'success',
         autoHideDuration: 5000
       })
-      setDeleteLearningElementModalOpen(false)
+      setdeleteLearningElementModalOpen(false)
     })
     clearLearningPathElement()
     clearLearningPathElementStatusCache()
@@ -137,8 +137,8 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
         </Tooltip>
       )}
       <DeleteEntityModal
-        openDeleteEntityModal={isDeleteLearningElementModalOpen}
-        setDeleteEntityModalOpen={setDeleteLearningElementModalOpen}
+        openDeleteEntityModal={deleteLearningElementModalOpen}
+        setDeleteEntityModalOpen={setdeleteLearningElementModalOpen}
         entityName={learningElementName}
         entityId={learningElementId}
         entityLmsId={lmsLearningElementId}

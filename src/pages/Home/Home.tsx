@@ -2,12 +2,10 @@ import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Card, CardContent, Grid, Skeleton, Typography } from '@common/components'
+import { CourseCard, CreateCourseCard, courseCardStyle } from '@components'
 import { Course } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import CourseCard from '../../components/CourseCard/CourseCard'
-import { courseCardStyle } from '../../components/CourseCard/CourseCard'
-import CreateCourseCard from '../../components/CourseCard/CreateCourseCard'
 
 /**
  * # Home Page
