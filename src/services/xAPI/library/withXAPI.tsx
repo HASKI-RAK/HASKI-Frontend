@@ -1,8 +1,8 @@
-import { ChangeEvent, ComponentType, MouseEvent, useCallback, useMemo } from 'react'
+import { ChangeEvent, ComponentType, forwardRef, MouseEvent, Ref, useCallback, useMemo } from 'react'
 import { XAPIComponentProps, useXAPI } from './useXAPI'
 
 // TODO: Document this type
-type EventHandlers = {
+export type EventHandlers = {
   id?: string
   onClick?: (e: MouseEvent) => void
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
@@ -15,7 +15,7 @@ export const withXAPI = <P extends object>(
   { componentFilePath, componentType, pageName }: XAPIComponentProps
 ) => {
   // Create a new component that wraps the given component enhancing the event handlers with the ability to send xAPI statements.
-  const XAPIEnhancedComponent = (props: P & EventHandlers) => {
+  const XAPIEnhancedComponent = forwardRef((props: P & EventHandlers, ref: Ref<unknown>) => { //HTMLDivElement
     // Extract the event handlers from the props.
     const { id, onClick, onChange, onClose, ...rest } = props
 
@@ -59,13 +59,15 @@ export const withXAPI = <P extends object>(
     // Return the component with the enhanced event handlers.
     return (
       <WrappedComponent
+        ref={ref}
         {...(rest as P)}
         onClick={onClick ? handleClick : undefined}
         onChange={onChange ? handleChange : undefined}
         onClose={onClose ? handleClose : undefined}
       />
     )
-  }
+  })
 
+  XAPIEnhancedComponent.displayName = `withXAPI(${WrappedComponent.displayName ?? WrappedComponent.name})`
   return XAPIEnhancedComponent
 }
