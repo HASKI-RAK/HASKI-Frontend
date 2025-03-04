@@ -169,16 +169,16 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           }}>
           <ResponsiveMiniMap />
           <Background gap={16} />
-          {/*
+          {
             <Panel position="top-right">
-            <LabeledSwitch
-              labelLeft={t('pages.topic.grouped')}
-              labelRight={t('pages.topic.single')}
-              isGrouped={isGrouped}
-              setIsGrouped={setIsGrouped}
-            />
-          </Panel>
-          */}
+              <LabeledSwitch
+                labelLeft={t('pages.topic.grouped')}
+                labelRight={t('pages.topic.single')}
+                isGrouped={isGrouped}
+                setIsGrouped={setIsGrouped}
+              />
+            </Panel>
+          }
           {isCourseCreatorRole && (
             <Panel position={'top-right'} style={{ right: '2rem', top: '2.5rem' }}>
               <CreateLearningElement />
