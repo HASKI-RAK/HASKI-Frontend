@@ -7,6 +7,7 @@ import { ReactFlowProvider } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import { LocalNavBar } from '@components'
 import { LearningPathElementStatus } from '@core'
+import { RoleContext, RoleContextType } from '@services'
 import Topic from './Topic'
 import { useTopic, useTopicHookParams } from './Topic.hooks'
 
@@ -41,6 +42,29 @@ describe('Topic Page', () => {
     })
   })
 
+  it('renders when Auth is true, and role is course creator', async () => {
+    const courseCreatorContext = {
+      isStudentRole: false,
+      isCourseCreatorRole: true
+    } as RoleContextType
+
+    const { getByText } = render(
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <RoleContext.Provider value={courseCreatorContext}>
+              <Topic />
+            </RoleContext.Provider>
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
+    )
+
+    await waitFor(() => {
+      expect(getByText('components.CreateLearningElement.createLearningElement')).toBeVisible()
+    })
+  })
+
   it('renders when Auth is false', () => {
     act(() => {
       const topic = render(
@@ -57,6 +81,8 @@ describe('Topic Page', () => {
   })
 
   test('getUser failed', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
+
     const mockfetchUser = jest.fn(() => Promise.reject(new Error('fetchUser failed')))
     mockServices.fetchUser.mockImplementationOnce(mockfetchUser)
 

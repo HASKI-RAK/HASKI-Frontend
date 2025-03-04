@@ -88,11 +88,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               return getLearningElementsWithStatus(learningPathElementStatusData, user)
             })
             .catch((error) => {
-              handleError(t, addSnackbar, 'error.getLearningElementsWithStatus', error, 3000)
+              handleError(t, addSnackbar, 'error.getLearningElementStatus', error, 3000)
             })
-        })
-        .catch((error) => {
-          handleError(t, addSnackbar, 'error.getLearningElementStatus', error, 3000)
         })
         .catch((error) => {
           handleError(t, addSnackbar, 'error.getUser', error, 3000)
