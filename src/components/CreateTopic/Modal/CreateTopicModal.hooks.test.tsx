@@ -57,6 +57,20 @@ const mockRemoteLearningElementWithClassification: { [key: number]: RemoteLearni
       lms_activity_type: 'h5pactivity',
       classification: 'EXPERT'
     }
+  ],
+  3: [
+    {
+      lms_id: 301,
+      lms_learning_element_name: 'Deep Learning Advanced',
+      lms_activity_type: 'quiz',
+      classification: 'ADVANCED'
+    },
+    {
+      lms_id: 302,
+      lms_learning_element_name: 'Neural Networks in Theory',
+      lms_activity_type: 'h5pactivity',
+      classification: 'EXPERT'
+    }
   ]
 }
 
@@ -83,7 +97,7 @@ describe('useCreateTopicModal', () => {
     })
 
     await act(async () => {
-      await result.current.handleCreate('Topic 1', 1, {}, 'algo1', '1')
+      await result.current.handleCreate('Topic 1', 1, mockRemoteLearningElementWithClassification, 'algo1', '1')
     })
   })
 
