@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-// Adjust the path as needed
 import CreateCourseCard from './CreateCourseCard'
 
 describe('CreateCourseCard Component', () => {

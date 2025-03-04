@@ -1,6 +1,6 @@
 import log from 'loglevel'
-import { RingBuffer } from './RingBuffer'
 import { postBufferContent } from '@services'
+import { RingBuffer } from './RingBuffer'
 
 /**
  * This function is used to log all the messages in the console and also store them in a ring buffer.

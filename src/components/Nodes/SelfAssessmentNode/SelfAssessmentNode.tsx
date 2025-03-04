@@ -17,10 +17,7 @@ import BasicNode from '../BasicNode/BasicNode'
  * @category Components
  */
 const SelfAssessmentNode = (data: NodeProps<LearningPathLearningElementNode>) => {
-  return (
-    <BasicNode {...data} id="self-assessment-node" icon={<AssignmentInd sx={{ fontSize: 50 }}/>}>
-    </BasicNode>
-  )
+  return <BasicNode {...data} id="self-assessment-node" icon={<AssignmentInd sx={{ fontSize: 50 }} />}></BasicNode>
 }
 
 export default memo(SelfAssessmentNode)

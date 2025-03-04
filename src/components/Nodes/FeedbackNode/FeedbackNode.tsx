@@ -17,10 +17,7 @@ import BasicNode from '../BasicNode/BasicNode'
  * @category Components
  */
 const FeedbackNode = (data: NodeProps<LearningPathLearningElementNode>) => {
-  return (
-    <BasicNode {...data} id="feedback-node" icon={<Feedback sx={{ fontSize: 50 }} />}>
-    </BasicNode>
-  )
+  return <BasicNode {...data} id="feedback-node" icon={<Feedback sx={{ fontSize: 50 }} />}></BasicNode>
 }
 
 export default memo(FeedbackNode)
