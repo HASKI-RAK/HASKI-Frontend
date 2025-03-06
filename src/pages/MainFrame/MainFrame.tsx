@@ -10,6 +10,8 @@ import {
   OpenQuestionnaire,
   PrivacyModal
 } from '@components'
+import DraggableModal from '../../components/CreateDefaultLearningPath/CreateDefaultLearningPath'
+import DragDropFlow from '../../components/CreateDefaultLearningPath/CreateDefaultLearningPath'
 
 /**
  * # MainFrame Page
@@ -54,6 +56,7 @@ export const MainFrame = () => {
       </Box>
       <PrivacyModal />
       <OpenQuestionnaire />
+      <DragDropFlow />
     </>
   )
 }
