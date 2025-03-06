@@ -7,7 +7,7 @@ import { resetters } from '../Zustand/Store'
 type LearningElementSolutionSlice = {
   _learningElementSolution: Record<string, LearningElementSolution>
   getLearningElementSolution: LearningElementSolutionReturn
-  setLearningElementSolution?: (learningElementId: number, solutionLmsId: number) => Promise<LearningElementSolution>
+  setLearningElementSolution?: (learningElementLmsId: number, solutionLmsId: number) => Promise<LearningElementSolution>
 }
 
 export default LearningElementSolutionSlice
@@ -19,15 +19,15 @@ export const createLearningElementSolutionSlice: StateCreator<StoreState, [], []
   resetters.push(() => set({ _learningElementSolution: {} }))
   return {
     _learningElementSolution: {},
-    getLearningElementSolution: async (learningElementId: number) => {
-      const cached = get()._learningElementSolution[`${learningElementId}`]
+    getLearningElementSolution: async (learningElementLmsId: number) => {
+      const cached = get()._learningElementSolution[`${learningElementLmsId}`]
 
       if (!cached) {
-        const learningElementSolution = await fetchLearningElementSolution(learningElementId)
+        const learningElementSolution = await fetchLearningElementSolution(learningElementLmsId)
         set({
           _learningElementSolution: {
             ...get()._learningElementSolution,
-            [`${learningElementId}`]: learningElementSolution
+            [`${learningElementLmsId}`]: learningElementSolution
           }
         })
         return learningElementSolution

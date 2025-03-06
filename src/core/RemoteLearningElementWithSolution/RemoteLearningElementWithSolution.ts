@@ -1,7 +1,6 @@
-import LearningElement from "../LearningElement/LearningElement";
-
-type LearningElementWithSolution = LearningElement & {
-  lmsSolutionId: number
+type LearningElementWithSolution = {
+  learningElementLmsId: number
+  lmsSolutionId?: number
 }
 
 export default LearningElementWithSolution

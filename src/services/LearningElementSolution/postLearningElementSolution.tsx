@@ -29,10 +29,10 @@ type PostLearningElementSolutionProps = {
  */
 
 export const postLearningElementSolution = async ({
-    learningElementId,
+    learningElementId: learningElementLmsId,
     solutionLmsId
 }: PostLearningElementSolutionProps): Promise<LearningElementSolution> => {
-    return fetchData<LearningElementSolution>(`${getConfig().BACKEND}/learningElement/${learningElementId}/solution/${solutionLmsId}`, {
+    return fetchData<LearningElementSolution>(`${getConfig().BACKEND}/learningElement/${learningElementLmsId}/solution/${solutionLmsId}`, {
         method: 'POST',
         credentials: 'include',
         headers: {

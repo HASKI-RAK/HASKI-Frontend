@@ -8,6 +8,7 @@ import {
   CreateAlgorithmTable,
   CreateAlgorithmTableNameProps,
   CreateLearningElementClassificationTable,
+  CreateLearningElementSolutionTable,
   CreateLearningElementTable,
   CreateRemoteTopicsTable,
   ExistingTopicsTable
@@ -28,8 +29,14 @@ export type RemoteLearningElementWithClassification = RemoteLearningElement & {
   classification: string
 }
 
-export type RemoteLearningElementWithSolution = RemoteLearningElement & {
+export type RemoteLearningElementWithSolution = {
+  learningElementLmsId: number
+  solutionLmsId?: number
+}
+
+export type Solution = {
   solutionLmsId: number
+  solutionLmsName: string
 }
 
 const CreateTopicModal = memo(
@@ -50,7 +57,7 @@ const CreateTopicModal = memo(
     const [selectedLearningElements, setSelectedLearningElements] = useState<{
       [key: number]: RemoteLearningElement[]
     }>({})
-    const [selectedSolutions, setSelectedSolutions] = useState<{ [key: number]: number[] }>({})
+    const [selectedSolutions, setSelectedSolutions] = useState<{ [key: number]: Solution[] }>({})
     const [selectedLearningElementSolution, setSelectedLearningElementSolution] = useState<{ [topicId: number]: RemoteLearningElementWithSolution[]}>({})
     const [selectedLearningElementsClassification, setSelectedLearningElementsClassification] = useState<{
       [key: number]: RemoteLearningElementWithClassification[]
@@ -91,6 +98,7 @@ const CreateTopicModal = memo(
       t('appGlobal.topics'),
       t('appGlobal.learningElements'),
       t('appGlobal.classifications'),
+      t('appGlobal.solutions'),
       t('appGlobal.algorithms')
     ]
 
@@ -279,6 +287,47 @@ const CreateTopicModal = memo(
                 </CreateLearningElementClassificationTable>
               </Grid>
             ) : activeStep === 3 ? (
+              <Grid container item>
+                <CreateLearningElementSolutionTable
+                  selectedTopics={selectedTopics}
+                  LearningElements={selectedLearningElements}
+                  LearningElementsClassification={selectedLearningElementsClassification}
+                  selectedSolutions={selectedSolutions}
+                  learningElementsWithSolutions={selectedLearningElementSolution}
+                  onLearningElementSolutionChange={handleLearningElementSolutionChange}>
+                  <Box sx={{ padding: '1rem', width: '95%' }}>
+                    <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
+                      <Button
+                        id="create-topic-modal-available-learning-element-classification-back-button"
+                        variant="contained"
+                        color="primary"
+                        sx={{ ml: 1 }}
+                        onClick={() => setActiveStep(activeStep - 1)}>
+                        {t('appGlobal.back')}
+                      </Button>
+                      <Button
+                        id="create-topic-modal-available-learning-element-classification-next-button"
+                        variant="contained"
+                        color="primary"
+                        disabled={
+                          //Every learning element has to have a classification set
+                          !selectedTopics.every(
+                            (topic) =>
+                              selectedLearningElementsClassification[topic.topic_lms_id] &&
+                              selectedLearningElementsClassification[topic.topic_lms_id].every(
+                                (element) => element.classification !== 'noKey'
+                              )
+                          )
+                        }
+                        sx={{ mr: -2 }}
+                        onClick={() => setActiveStep(activeStep + 1)}>
+                        {t('appGlobal.next')}
+                      </Button>
+                    </Grid>
+                  </Box>
+                </CreateLearningElementSolutionTable>
+              </Grid>
+            ) : activeStep === 4 ? (
               <Grid container item>
                 <CreateAlgorithmTable
                   selectedTopics={selectedTopics}

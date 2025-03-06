@@ -12,7 +12,7 @@ import {
   postTopic,
 } from '@services'
 import { usePersistedStore } from '@store'
-import { RemoteLearningElementWithClassification, RemoteLearningElementWithSolution } from './CreateTopicModal'
+import { RemoteLearningElementWithClassification, RemoteLearningElementWithSolution, Solution } from './CreateTopicModal'
 
 type useCreateTopicModalProps = {
   setCreateTopicIsSending: React.Dispatch<React.SetStateAction<boolean>>
@@ -23,8 +23,8 @@ type useCreateTopicModalProps = {
   selectedLearningElementsClassification: { [p: number]: RemoteLearningElementWithClassification[] }
   selectedLearningElementSolution: { [topicId: number]: RemoteLearningElementWithSolution[] }
   setSelectedLearningElementSolution: React.Dispatch<React.SetStateAction<{ [topicId: number]: RemoteLearningElementWithSolution[]}>>
-  selectedSolutions: { [topicId: number]: number[] }
-  setSelectedSolutions: React.Dispatch<React.SetStateAction<{ [topicId: number]: number[] }>>
+  selectedSolutions: { [topicId: number]: Solution[] }
+  setSelectedSolutions: React.Dispatch<React.SetStateAction<{ [topicId: number]: Solution[] }>>
   setSelectedLearningElementsClassification: React.Dispatch<
     React.SetStateAction<{ [p: number]: RemoteLearningElementWithClassification[] }>
   >
@@ -251,7 +251,7 @@ export const useCreateTopicModal = ({
     setSelectedLearningElements(learningElements)
   }
 
-  const handleSolutionsChange = (solutions: { [topicId: number]: number[] }) => {
+  const handleSolutionsChange = (solutions: { [topicId: number]: Solution[] }) => {
     setSelectedSolutions(solutions)
   }
 

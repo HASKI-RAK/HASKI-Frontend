@@ -56,7 +56,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
 
   useEffect(() => {
-    getLearningElementSolution(props.data.learningElementId).then((solution) => {
+    getLearningElementSolution(props.data.lmsId).then((solution) => {
       setSolutionLmsId(solution.solution_lms_id)
     })
   }, [getLearningElementSolution, setSolutionLmsId, id, props])

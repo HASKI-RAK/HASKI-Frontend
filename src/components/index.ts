@@ -66,6 +66,7 @@ export {
   default as CreateAlgorithmTable,
   type CreateAlgorithmTableNameProps
 } from './CreateTopic/Table/CreateAlgorithmTable'
+export { default as CreateLearningElementSolutionTable } from './CreateTopic/Table/CreateLearningElementSolutionTable'
 export { default as CreateTopicModal } from './CreateTopic/Modal/CreateTopicModal'
 
 export * from './GlobalNav'
