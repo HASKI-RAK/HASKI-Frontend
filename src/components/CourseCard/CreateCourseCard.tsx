@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, memo } from 'react'
+import { Dispatch, SetStateAction, memo, useCallback } from 'react'
 import { Button, Card, CardContent, Grid } from '@common/components'
 import { AddCircle } from '@common/icons'
 import { CreateCourseModal, courseCardButtonStyle } from '@components'
@@ -18,6 +18,10 @@ const CreateCourseCard = ({
   activeStepCreateCourseModal,
   setActiveStepCreateCourseModal
 }: CreateCourseCardProps) => {
+  const handleClick = useCallback(() => {
+    setCreateCourseModalOpen(true)
+  }, [setCreateCourseModalOpen])
+
   return (
     <Card>
       <CardContent>
@@ -27,7 +31,7 @@ const CreateCourseCard = ({
             data-testid={'create-course-button'}
             variant="contained"
             color="primary"
-            onClick={() => setCreateCourseModalOpen(true)}
+            onClick={handleClick}
             sx={courseCardButtonStyle}>
             <AddCircle />
           </Button>

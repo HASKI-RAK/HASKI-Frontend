@@ -6,7 +6,6 @@ import { mockReactFlow } from '@mocks'
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
 import { RoleContext, RoleContextType, deleteLearningElement } from '@services'
 
-// ✅ Mock deleteLearningElement API call
 jest.mock('@services', () => ({
   ...jest.requireActual('@services'),
   deleteLearningElement: jest.fn().mockResolvedValue(undefined)

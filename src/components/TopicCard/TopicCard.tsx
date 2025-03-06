@@ -9,16 +9,13 @@ import { RoleContext, SnackbarContext, deleteTopic } from '@services'
 import { useStore } from '@store'
 import { useTopicCard } from './TopicCard.hooks'
 
-// Type
 type TopicCardProps = {
   topic?: Topic
   calculatedTopicProgress?: number[]
   isSmOrDown?: boolean
 }
 
-// Component
 const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProps) => {
-  // Hooks
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
@@ -52,6 +49,10 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
     },
     [handleCloseMenu, setDeleteTopicModalOpen, setTopicName]
   )
+
+  const handleDeleteClick = useCallback(() => {
+    handleOpenDeleteTopicModal(topic?.name, topic?.id, topic?.lms_id)
+  }, [handleOpenDeleteTopicModal, topic?.name, topic?.id, topic?.lms_id])
 
   const handleAcceptDeleteTopicModal = useCallback(
     (topicId: number, lmsTopicId: number) => {
@@ -165,10 +166,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           </Tooltip>
         </MenuItem>
         {isCourseCreatorRole && (
-          <MenuItem
-            onClick={() => handleOpenDeleteTopicModal(topic?.name, topic?.id, topic?.lms_id)}
-            id="algorithm-settings-menu-delete-item"
-            data-testid="DeleteTopicItem">
+          <MenuItem onClick={handleDeleteClick} id="algorithm-settings-menu-delete-item" data-testid="DeleteTopicItem">
             <Tooltip arrow title={t('components.TopicCard.deleteTooltip')} placement="left">
               <Grid container direction={'row'}>
                 <DeleteForever fontSize="small" />

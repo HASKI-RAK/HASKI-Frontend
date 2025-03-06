@@ -45,16 +45,13 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
 
   const clearCoursesCache = useStore((state) => state.clearCoursesCache)
 
-  const openCourseCardMenu = useCallback(
-    (event: MouseEvent<HTMLButtonElement>) => {
-      setMenuAnchorEl(event.currentTarget)
-    },
-    [setMenuAnchorEl]
-  )
+  const openCourseCardMenu = useCallback((event: MouseEvent<HTMLButtonElement>) => {
+    setMenuAnchorEl(event.currentTarget)
+  }, [])
 
   const handleCloseCourseCardMenu = useCallback(() => {
     setMenuAnchorEl(null)
-  }, [setMenuAnchorEl])
+  }, [])
 
   const handleOpenDeleteCourseModal = useCallback(
     (courseName: string, courseId: number, lmsCourseId: number) => {
@@ -79,7 +76,7 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
         setDeleteCourseModalOpen(false)
       })
     },
-    [setDeleteCourseModalOpen]
+    [addSnackbar, clearCoursesCache, t]
   )
 
   const handleCourseStartDate = (courseStartDate: string) => {
@@ -88,24 +85,23 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
 
   return (
     <Card key={course.id} sx={courseCardStyle}>
-      <CardContent sx={{ position: 'relative' }}>
-        <Typography variant="h5" align="center">
-          {course.name}
-        </Typography>
-        {isCourseCreatorRole && (
-          <IconButton
-            sx={{
-              position: 'absolute',
-              top: 8,
-              right: 8
-            }}
-            onClick={openCourseCardMenu}
-            id="course-card-menu"
-            data-testid="CourseSettingsButton">
-            <MoreVert />
-          </IconButton>
-        )}
-        <Grid container justifyContent="center" sx={{ mt: 2 }}>
+      <CardContent>
+        <Grid container alignItems="center">
+          <Grid item xs={1} />
+          <Grid item xs={10}>
+            <Typography variant="h5" align="center">
+              {course.name}
+            </Typography>
+          </Grid>
+          <Grid item xs={1} sx={{ textAlign: 'right' }}>
+            {isCourseCreatorRole && (
+              <IconButton onClick={openCourseCardMenu} id="course-card-menu" data-testid="CourseSettingsButton">
+                <MoreVert />
+              </IconButton>
+            )}
+          </Grid>
+        </Grid>
+        <Grid container item direction="column" justifyContent="center" alignItems="center">
           <Button
             id="course-button"
             variant="contained"
@@ -131,7 +127,7 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
           onClick={() => handleOpenDeleteCourseModal(course.name, course.id, course.lms_id)}
           id="delete-course-settings-menu-item">
           <Tooltip arrow title={t('components.CourseCard.deleteTooltip')} placement="left">
-            <Grid container direction={'row'}>
+            <Grid container direction="row">
               <DeleteForever fontSize="small" />
               <Typography sx={{ ml: 1 }}>{t('appGlobal.delete')}</Typography>
             </Grid>

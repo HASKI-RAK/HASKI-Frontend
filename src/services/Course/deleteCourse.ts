@@ -6,11 +6,9 @@ type DeleteCourseResponse = {
 }
 
 /*
- * postCourse function.
+ * deleteCourse function.
  *
- * @param outputJson - output json
- *
- * @returns - The created course
+ * @returns - message: string
  *
  * @category Services
  */

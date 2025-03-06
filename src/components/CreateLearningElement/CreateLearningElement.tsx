@@ -69,7 +69,8 @@ const CreateLearningElement = () => {
         selectedLearningElementsClassification={selectedLearningElementsClassification}
         setSelectedLearningElementsClassification={setSelectedLearningElementsClassification}
         setActiveStep={setActiveStep}
-        activeStep={activeStep}></CreateLearningElementModal>
+        activeStep={activeStep}
+      />
     </Grid>
   )
 }

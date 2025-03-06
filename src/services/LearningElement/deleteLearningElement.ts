@@ -6,11 +6,9 @@ type DeleteLearningElementResponse = {
 }
 
 /*
- * postCourse function.
+ * deleteLearningElement function.
  *
- * @param outputJson - output json
- *
- * @returns - The created course
+ * @returns - message: string
  *
  * @category Services
  */
