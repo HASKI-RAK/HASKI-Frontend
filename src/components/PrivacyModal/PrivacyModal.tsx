@@ -96,7 +96,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
             <Box sx={style}>
               <Typography id="transition-modal-title" variant="h4" component="h2">
                 {t('components.PrivacyModal.termsOfService')}
-                <Typography id="modal-text" variant="subtitle1" component="h2">
+                <Typography id="modal-text" variant="subtitle1" component="h3">
                   {t('components.PrivacyModal.afterReading')}
                   <FormGroup>
                     <FormControlLabel

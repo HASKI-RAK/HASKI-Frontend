@@ -1,50 +1,23 @@
 import DefaultTextField from '@mui/material/TextField'
-import { ChangeEvent, memo, useCallback } from 'react'
+import { usePageName } from 'src/services/xAPI/PageName.hooks'
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { TextFieldProps as DefaultTextFieldProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
 
-/**
- * @prop DefaultTextFieldProps - The props of a mui TextField.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
- * @interface
- */
-type TextFieldProps = DefaultTextFieldProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+// TODO: DOKU
+type TextFieldProps = DefaultTextFieldProps & EventHandlers
 
-/**
- * TextField component.
- *
- * @param props - Props containing the useStatement hook and the props of a mui TextField.
- *
- * @category Common
- */
-const TextField = ({ useStatement = _useStatement, onChange, ...props }: TextFieldProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.TextField
+// TODO: DOKU
+const TextField = ({ ...props }: TextFieldProps) => {
+  const { pageName } = usePageName()
+
+  const WrappedTextField = withXAPI(DefaultTextField, {
+    componentFilePath: new URL(import.meta.url).pathname,
+    componentType: 'TextField',
+    pageName
   })
 
-  return (
-    <DefaultTextField
-      onChange={useCallback(
-        (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname)
-          onChange?.(event)
-        },
-        [sendStatement, onChange]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultTextField>
-  )
+  return <WrappedTextField {...props} />
 }
 
 export default memo(TextField)

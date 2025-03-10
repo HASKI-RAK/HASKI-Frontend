@@ -1,50 +1,23 @@
 import DefaultRadioGroup from '@mui/material/RadioGroup'
-import { ChangeEvent, memo, useCallback } from 'react'
+import { usePageName } from 'src/services/xAPI/PageName.hooks'
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { RadioGroupProps as DefaultRadioGroupProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
 
-/**
- * @prop DefaultRadioGroupProps - The props of a mui RadioGroup.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
- * @interface
- */
-type RadioGroupProps = DefaultRadioGroupProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+// TODO: DOKU
+type RadioGroupProps = DefaultRadioGroupProps & EventHandlers
 
-/**
- * RadioGroup component.
- *
- * @param props - Props containing the useStatement hook and the props of a mui RadioGroup.
- *
- * @category Common
- */
-const RadioGroup = ({ useStatement = _useStatement, onChange, ...props }: RadioGroupProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.RadioGroup
+// TODO: DOKU
+const RadioGroup = ({ ...props }: RadioGroupProps) => {
+  const { pageName } = usePageName()
+
+  const WrappedRadioGroup = withXAPI(DefaultRadioGroup, {
+    componentType: 'RadioGroup',
+    componentFilePath: new URL(import.meta.url).pathname,
+    pageName
   })
 
-  return (
-    <DefaultRadioGroup
-      onChange={useCallback(
-        (event: ChangeEvent<HTMLInputElement>, value: string) => {
-          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname)
-          onChange?.(event, value)
-        },
-        [sendStatement, onChange]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultRadioGroup>
-  )
+  return <WrappedRadioGroup {...props} />
 }
 
 export default memo(RadioGroup)

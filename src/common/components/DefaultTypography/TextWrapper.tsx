@@ -1,54 +1,23 @@
-import { ElementType, MouseEvent, ReactElement, memo, useCallback } from 'react'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { usePageName } from 'src/services/xAPI/PageName.hooks'
+import {  memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { TypographyProps as DefaultTypographyProps } from '../DefaultTypographyProps/DefaultTypographyProps'
 import { Typography } from './DefaultTypography'
 
-/**
- * @prop DefaultTypographyProps - The props of a mui Typography.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
- * @interface
- */
-type TextWrapperProps<C extends ElementType, P = object> = DefaultTypographyProps<C, P> & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+// TODO: DOKU
+type TextWrapperProps = DefaultTypographyProps & EventHandlers
 
-/**
- * TextWrapper component.
- *
- * @param props - Props containing the useStatement hook and the props of a mui Typography.
- *
- * @category Common
- */
-const TextWrapper = <C extends ElementType>({
-  useStatement = _useStatement,
-  onClick,
-  ...props
-}: TextWrapperProps<C, { component?: C }>): ReactElement => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.Text
+// TODO: DOKU
+const TextWrapper = ({ ...props }: TextWrapperProps) => {
+  const { pageName } = usePageName()
+
+  const WrappedComponent = withXAPI(Typography, {
+    componentFilePath: new URL(import.meta.url).pathname,
+    pageName,
+    componentType: 'TextWrapper'
   })
 
-  return (
-    <Typography
-      onClick={useCallback(
-        (event: MouseEvent<HTMLSpanElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
-          onClick?.(event)
-        },
-        [onClick, sendStatement]
-      )}
-      {...props}>
-      {props.children}
-    </Typography>
-  )
+  return <WrappedComponent {...props} />
 }
 
 export default memo(TextWrapper)

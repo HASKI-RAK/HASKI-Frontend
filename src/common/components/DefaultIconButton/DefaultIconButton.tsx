@@ -1,54 +1,29 @@
 import DefaultIconButton from '@mui/material/IconButton'
-import { MouseEvent, RefObject, forwardRef, memo, useCallback } from 'react'
+import { usePageName } from 'src/services/xAPI/PageName.hooks'
+import {Ref,  forwardRef, memo,useMemo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { IconButtonProps as DefaultIconButtonProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
 
-/**
- * @prop DefaultIconButtonProps - The props of a mui IconButton.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
- * @interface
- */
-type IconButtonProps = DefaultIconButtonProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+// TODO: DOKU
+type IconButtonProps = DefaultIconButtonProps & EventHandlers
 
-/**
- * IconButton component.
- *
- * @param props - Props containing the useStatement hook and the props of a mui IconButton.
- *
- * @category Common
- */
-const IconButton = (
-  { useStatement = _useStatement, onClick, ...props }: IconButtonProps,
-  ref: ((instance: HTMLButtonElement | null) => void) | RefObject<HTMLButtonElement> | null | undefined
-) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.IconButton
-  })
+// TODO: DOKU
+const IconButton = forwardRef(({ ...props }: IconButtonProps, ref: Ref<HTMLButtonElement>) => {
+  const { pageName } = usePageName()
 
-  return (
-    <DefaultIconButton
-      ref={ref}
-      onClick={useCallback(
-        (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
-          onClick?.(event)
-        },
-        [onClick, sendStatement]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultIconButton>
+  const WrappedIconButton = useMemo(
+    () =>
+      withXAPI(DefaultIconButton, {
+        componentFilePath: new URL(import.meta.url).pathname,
+        componentType: 'IconButton',
+        pageName
+      }),
+    [pageName]
   )
-}
 
-export default memo(forwardRef(IconButton))
+  return <WrappedIconButton ref={ref} {...props} />
+})
+
+// eslint-disable-next-line
+IconButton.displayName = 'IconButton'
+export default memo(IconButton)

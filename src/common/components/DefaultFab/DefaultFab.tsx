@@ -1,57 +1,25 @@
 import DefaultFab from '@mui/material/Fab'
-import { withXAPIWrapper } from 'src/services/xAPI/notlib/withXAPIWrapper'
-import { MouseEvent, useCallback } from 'react'
+import { usePageName } from 'src/services/xAPI/PageName.hooks'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
+import { memo, useMemo } from 'react'
 import { FabProps as DefaultFabProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
 
-/**
- * @prop DefaultFabProps - The props of a mui Fab.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
- * @interface
- */
-type FabProps = DefaultFabProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+// TODO: DOKU
+type FabProps = DefaultFabProps & EventHandlers
 
-/**
- * Fab component.
- *
- * @param props - Props containing the useStatement hook and the props of a mui Fab.
- *
- * @category Common
- */
-const Fab = ({ useStatement = _useStatement, onClick, ...props }: FabProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.Fab
-  })
-
-  return (
-    <DefaultFab
-      onClick={useCallback(
-        (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
-          onClick?.(event)
-        },
-        [sendStatement, onClick]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultFab>
+// TODO: DOKU
+const Fab = ({ ...props }: FabProps) => {
+  const { pageName } = usePageName()
+  const WrappedComponent = useMemo(
+    () =>
+      withXAPI(DefaultFab, {
+        componentFilePath: new URL(import.meta.url).pathname,
+        componentType: 'Fab',
+        pageName: pageName
+      }),
+    [pageName]
   )
+  return <WrappedComponent {...props} />
 }
 
-// export default memo(Fab)
-
-
-
-
-
-export default withXAPIWrapper('Fab', new URL(import.meta.url).pathname, DefaultFab) //RENAME useXAPIWRAPPER
+export default memo(Fab)

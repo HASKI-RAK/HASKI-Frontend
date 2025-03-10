@@ -1,50 +1,23 @@
 import DefaultToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-import { MouseEvent, memo, useCallback } from 'react'
+import { usePageName } from 'src/services/xAPI/PageName.hooks'
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { ToggleButtonGroupProps as DefaultToggleButtonGroupProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
 
-/**
- * @prop DefaultToggleButtonGroupProps - The props of a mui ToggleButtonGroup.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
- * @interface
- */
-type ToggleButtonGroupProps = DefaultToggleButtonGroupProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+// TODO: DOKU 
+type ToggleButtonGroupProps = DefaultToggleButtonGroupProps & EventHandlers
 
-/**
- * ToggleButtonGroup component.
- *
- * @param props - Props containing the useStatement hook and the props of a mui ToggleButtonGroup.
- *
- * @category Common
- */
-const ToggleButtonGroup = ({ useStatement = _useStatement, onChange, ...props }: ToggleButtonGroupProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.ToggleButtonGroup
+// TODO: DOKU
+const ToggleButtonGroup = ({ ...props }: ToggleButtonGroupProps) => {
+  const { pageName } = usePageName()
+
+  const WrappedToggleButtonGroup = withXAPI(DefaultToggleButtonGroup, {
+    componentFilePath: new URL(import.meta.url).pathname,
+    componentType: 'ToggleButtonGroup',
+    pageName
   })
 
-  return (
-    <DefaultToggleButtonGroup
-      onChange={useCallback(
-        <T, K extends T>(event: MouseEvent<HTMLElement, globalThis.MouseEvent>, value: K) => {
-          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname)
-          onChange?.(event, value)
-        },
-        [sendStatement, onChange]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultToggleButtonGroup>
-  )
+  return <WrappedToggleButtonGroup {...props} />
 }
 
 export default memo(ToggleButtonGroup)
