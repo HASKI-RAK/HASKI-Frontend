@@ -1,6 +1,6 @@
 import DefaultLink from '@mui/material/Link'
 import { usePageName } from 'src/services/xAPI/PageName.hooks'
-import { EventHandlers, withXAPI } from 'src/services/xAPI/library/withXAPI'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import {memo, useMemo } from 'react'
 import { LinkProps as DefaultLinkProps } from '@common/components'
 

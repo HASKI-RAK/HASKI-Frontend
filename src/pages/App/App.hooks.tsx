@@ -1,5 +1,5 @@
 import log from 'loglevel'
-import { XAPI, setupXAPI } from 'src/services/xAPI/library/setupXAPI'
+import { XAPI, setupXAPI } from 'react-xapi-wrapper'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getConfig } from '@shared'

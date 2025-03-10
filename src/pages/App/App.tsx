@@ -1,5 +1,4 @@
-import { UserInteractionTracker } from 'src/services/xAPI/library/InteractionTracker'
-import { XAPIProvider } from 'src/services/xAPI/library/XAPIProvider'
+import { XAPIProvider, UserInteractionTracker } from 'react-xapi-wrapper'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { ReactFlowProvider } from 'reactflow'
 import { ThemeProvider } from '@common/theme'
