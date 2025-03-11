@@ -34,13 +34,12 @@ import { useTranslation } from 'react-i18next'
 // ----- Styled Components -----
 const DraggableContainer = styled(Paper)(({ theme }) => ({
   width: '100%',
-  minHeight: 50,
+  minHeight: 40,
   display: 'flex',
   alignItems: 'center',
   cursor: 'grab',
   border: `1px solid ${theme.palette.divider}`,
   backgroundColor: theme.palette.background.paper,
-  padding: theme.spacing(2),
   borderRadius: theme.shape.borderRadius,
   boxShadow: theme.shadows[1]
 }))
@@ -50,19 +49,17 @@ const DroppableContainer = styled(Paper, {
 })<{ isover: boolean }>(({ theme, isover }) => ({
   width: '100%',
   height: 600,
-  overflowY: 'auto',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'stretch',
   justifyContent: 'flex-start',
   border: `2px dashed ${theme.palette.divider}`,
   backgroundColor: isover ? theme.palette.action.hover : theme.palette.background.paper,
-  padding: theme.spacing(2),
   gap: theme.spacing(2),
   borderRadius: theme.shape.borderRadius
 }))
 
-const PositionBadge = styled(Box)(({ theme }) => ({
+const PositionBadge = styled(Paper)(({ theme }) => ({
   borderRadius: '50%',
   backgroundColor: theme.palette.primary.main,
   color: theme.palette.common.white,
@@ -86,13 +83,14 @@ interface ClassificationItem {
 interface DraggableProps {
   id: UniqueIdentifier
   children: React.ReactNode
+  label?: string
   icon?: React.ReactNode
   disabled?: boolean
 }
 
 // ----- Source Draggable (Left Column) -----
 // Added a "disabled" prop to conditionally apply styling and disable drag events.
-export const SourceDraggable: React.FC<DraggableProps> = ({ id, children, icon, disabled }) => {
+export const SourceDraggable: React.FC<DraggableProps> = ({ id, children, label, icon, disabled }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id })
   const style = {
     transform: transform ? CSS.Translate.toString(transform) : undefined,
@@ -106,10 +104,20 @@ export const SourceDraggable: React.FC<DraggableProps> = ({ id, children, icon, 
       // Disable drag listeners if the item is disabled.
       {...(disabled ? {} : listeners)}
       {...attributes}>
-      {icon}
-      <Typography variant="body1" sx={{ ml: 2 }}>
-        {children}
-      </Typography>
+      <Grid container alignItems="center" spacing={0}>
+        <Grid item xs={0.5} />
+        <Grid item xs={1}>
+          {icon}
+        </Grid>
+        <Grid item xs={9}>
+          <Typography variant="body1" sx={{ ml: 2 }}>
+            {label}
+          </Typography>
+        </Grid>
+        <Grid item xs={0.5}>
+          {children}
+        </Grid>
+      </Grid>
     </DraggableContainer>
   )
 }
@@ -124,8 +132,15 @@ export const SortableItem: React.FC<DraggableProps> = ({ id, children, icon }) =
   }
   return (
     <DraggableContainer ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      {icon}
-      {children}
+      <Grid container alignItems="center" spacing={0}>
+        <Grid item xs={0.5} />
+        <Grid item xs={1}>
+          {icon}
+        </Grid>
+        <Grid item xs={10}>
+          {children}
+        </Grid>
+      </Grid>
     </DraggableContainer>
   )
 }
@@ -143,10 +158,17 @@ export const Droppable: React.FC<{ id: UniqueIdentifier; children: React.ReactNo
 // ----- Drag Preview Component -----
 const DragPreview: React.FC<{ item: ClassificationItem }> = ({ item }) => (
   <DraggableContainer>
-    {item.icon}
-    <Typography variant="body1" sx={{ ml: 2 }}>
-      {item.label}
-    </Typography>
+    <Grid container alignItems="center" spacing={0}>
+      <Grid item xs={0.5} />
+      <Grid item xs={1}>
+        {item.icon}
+      </Grid>
+      <Grid item xs={10}>
+        <Typography variant="body1" sx={{ ml: 2 }}>
+          {item.label}
+        </Typography>
+      </Grid>
+    </Grid>
   </DraggableContainer>
 )
 
@@ -273,116 +295,145 @@ const CreateDefaultLearningPath: React.FC = () => {
   const activeItem = classificationItems.find((item) => item.key === activeId)
 
   return (
-    <DndContext
-      collisionDetection={closestCenter}
-      onDragEnd={handleDragEnd}
-      onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
-      onDragCancel={() => setActiveId(null)}>
-      <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
-      <Grid container spacing={2}>
-        {/* Left Column: Unassigned Items with Toggle Disable Button */}
-        <Grid item xs={4}>
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            Classification Items
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {unassignedItems.map((item) => {
-              const isDisabled = disabledItems.includes(item.key)
-              return (
-                <Box key={item.key} display="flex" alignItems="center" gap={1}>
-                  <SourceDraggable id={item.key} icon={item.icon} disabled={isDisabled}>
-                    <Box display="flex" alignItems="center" gap={1}>
-                      {item.label}
-                    </Box>
-                    <IconButton
-                      draggable={false}
-                      onPointerDown={(e) => {
-                        e.stopPropagation()
-                        e.preventDefault()
-                      }}
-                      onMouseDown={(e) => {
-                        e.stopPropagation()
-                        e.preventDefault()
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        e.preventDefault()
-                        handleToggleDisable(item.key)
-                      }}
-                      size="small"
-                      sx={{ color: 'text.secondary' }}>
-                      {isDisabled ? <ReplayIcon fontSize="medium" /> : <BlockIcon fontSize="medium" />}
-                    </IconButton>
-                  </SourceDraggable>
-                </Box>
-              )
-            })}
-          </Box>
-        </Grid>
-        <Grid item xs={1} />
-        {/* Right Column: Droppable Container */}
-        <Grid item xs={7}>
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            Order the Items
-          </Typography>
-          <Droppable id="droppable-container">
-            <SortableContext items={orderedItems} strategy={verticalListSortingStrategy}>
-              {orderedItems.map((key, index) => {
-                const item = classificationItems.find((ci) => ci.key === key)
-                return item ? (
-                  <SortableItem key={item.key} id={item.key} icon={item.icon}>
-                    <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">
-                      <Typography variant="body1">{item.label}</Typography>
-                      <Box display="flex" alignItems="center" gap={1}>
-                        <PositionBadge>{index + 1}</PositionBadge>
-                        <IconButton
-                          draggable={false}
-                          onPointerDown={(e) => {
-                            e.stopPropagation()
-                            e.preventDefault()
-                          }}
-                          onMouseDown={(e) => {
-                            e.stopPropagation()
-                            e.preventDefault()
-                          }}
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            e.preventDefault()
-                            handleResetItem(item.key)
-                          }}
-                          size="small"
-                          sx={{ color: 'text.secondary' }}>
-                          <CloseIcon fontSize="small" />
-                        </IconButton>
-                      </Box>
-                    </Box>
-                  </SortableItem>
-                ) : null
+    <Box
+      sx={{
+        position: 'absolute',
+        left: '12%',
+        right: '12%',
+        top: '10%',
+        overflow: 'auto',
+        height: '70%',
+        width: '80%',
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 2
+      }}>
+      <DndContext
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+        onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
+        onDragCancel={() => setActiveId(null)}>
+        <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
+        <Grid container sx={{ width: '100%' }}>
+          {/* Left Column: Unassigned Items with Toggle Disable Button */}
+          <Grid item xs={4}>
+            <Typography variant="h6" sx={{ mb: 2 }}>
+              Classification Items
+            </Typography>
+            <Grid container direction="column" spacing={2}>
+              {unassignedItems.map((item) => {
+                const isDisabled = disabledItems.includes(item.key)
+                return (
+                  <Grid item key={item.key}>
+                    <Grid container alignItems="center" spacing={1}>
+                      <Grid item xs>
+                        <SourceDraggable id={item.key} icon={item.icon} label={item.label} disabled={isDisabled}>
+                          <IconButton
+                            draggable={false}
+                            onPointerDown={(e) => {
+                              e.stopPropagation()
+                              e.preventDefault()
+                            }}
+                            onMouseDown={(e) => {
+                              e.stopPropagation()
+                              e.preventDefault()
+                            }}
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              e.preventDefault()
+                              handleToggleDisable(item.key)
+                            }}
+                            size="small"
+                            sx={{ color: 'text.secondary' }}>
+                            {isDisabled ? (
+                              <ReplayIcon fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
+                            ) : (
+                              <BlockIcon fontSize="medium" />
+                            )}
+                          </IconButton>
+                        </SourceDraggable>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                )
               })}
-            </SortableContext>
-          </Droppable>
+            </Grid>
+          </Grid>
+          <Grid item xs={1} />
+          {/* Right Column: Droppable Container */}
+          <Grid item xs={7} sx={{ width: '100%' }}>
+            <Typography variant="h6" sx={{ mb: 2 }}>
+              Order the Items
+            </Typography>
+            <Droppable id="droppable-container">
+              <SortableContext items={orderedItems} strategy={verticalListSortingStrategy}>
+                {orderedItems.map((key, index) => {
+                  const item = classificationItems.find((ci) => ci.key === key)
+                  return item ? (
+                    <SortableItem key={item.key} id={item.key} icon={item.icon}>
+                      <Grid container alignItems="center" justifyContent="space-between" style={{ width: '100%' }}>
+                        <Grid item>
+                          <Typography variant="body1">{item.label}</Typography>
+                        </Grid>
+                        <Grid item>
+                          <Grid container alignItems="center" spacing={1}>
+                            <Grid item>
+                              <PositionBadge>{index + 1}</PositionBadge>
+                            </Grid>
+                            <Grid item>
+                              <IconButton
+                                draggable={false}
+                                onPointerDown={(e) => {
+                                  e.stopPropagation()
+                                  e.preventDefault()
+                                }}
+                                onMouseDown={(e) => {
+                                  e.stopPropagation()
+                                  e.preventDefault()
+                                }}
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  e.preventDefault()
+                                  handleResetItem(item.key)
+                                }}
+                                size="small"
+                                sx={{ color: 'text.secondary' }}>
+                                <CloseIcon fontSize="small" />
+                              </IconButton>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </SortableItem>
+                  ) : null
+                })}
+              </SortableContext>
+            </Droppable>
+          </Grid>
+          <Grid container justifyContent="space-between" sx={{ mt: 2, width: '100%' }}>
+            <Fab id="reset-order-default-learning-path" color="error" onClick={handleRemoveAll}>
+              <ReplayIcon />
+            </Fab>
+            <Button variant="contained" disabled={!isSubmitActive} onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Grid>
         </Grid>
-        <Grid container justifyContent="space-between" sx={{ mt: 2 }}>
-          <Fab id="reset-order-default-learning-path" color="error" onClick={handleRemoveAll}>
-            <ReplayIcon />
-          </Fab>
-          <Button variant="contained" disabled={!isSubmitActive} onClick={handleSubmit}>
-            Submit
-          </Button>
-        </Grid>
-      </Grid>
-    </DndContext>
+      </DndContext>
+    </Box>
   )
 }
 
 const modalStyle = {
-  position: 'absolute' as const,
+  position: 'absolute',
   left: '12%',
   right: '12%',
   top: '10%',
   overflow: 'auto',
   height: '70%',
+  width: '80%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -393,9 +444,7 @@ const DefaultLearningPathModal: React.FC = () => {
   const [open, setOpen] = useState<boolean>(true)
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
-      <Box sx={modalStyle}>
-        <CreateDefaultLearningPath />
-      </Box>
+      <CreateDefaultLearningPath />
     </Modal>
   )
 }
