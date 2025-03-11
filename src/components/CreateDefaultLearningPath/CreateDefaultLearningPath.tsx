@@ -32,7 +32,6 @@ import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 // ----- Styled Components -----
-// These containers now have a bit more padding and rounded corners.
 const DraggableContainer = styled(Paper)(({ theme }) => ({
   width: '100%',
   minHeight: 50,
@@ -88,18 +87,25 @@ interface DraggableProps {
   id: UniqueIdentifier
   children: React.ReactNode
   icon?: React.ReactNode
+  disabled?: boolean
 }
 
 // ----- Source Draggable (Left Column) -----
-// Uses useDraggable for independent drag preview.
-export const SourceDraggable: React.FC<DraggableProps> = ({ id, children, icon }) => {
+// Added a "disabled" prop to conditionally apply styling and disable drag events.
+export const SourceDraggable: React.FC<DraggableProps> = ({ id, children, icon, disabled }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id })
   const style = {
     transform: transform ? CSS.Translate.toString(transform) : undefined,
-    opacity: isDragging ? 0.5 : 1
+    opacity: isDragging ? 0.5 : disabled ? 0.5 : 1,
+    cursor: disabled ? 'not-allowed' : 'grab'
   }
   return (
-    <DraggableContainer ref={setNodeRef} style={style} {...listeners} {...attributes}>
+    <DraggableContainer
+      ref={setNodeRef}
+      style={style}
+      // Disable drag listeners if the item is disabled.
+      {...(disabled ? {} : listeners)}
+      {...attributes}>
       {icon}
       <Typography variant="body1" sx={{ ml: 2 }}>
         {children}
@@ -109,7 +115,6 @@ export const SourceDraggable: React.FC<DraggableProps> = ({ id, children, icon }
 }
 
 // ----- Sortable Item (Inside Droppable) -----
-// Hides original element (opacity 0) when dragging.
 export const SortableItem: React.FC<DraggableProps> = ({ id, children, icon }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
   const style = {
@@ -126,7 +131,6 @@ export const SortableItem: React.FC<DraggableProps> = ({ id, children, icon }) =
 }
 
 // ----- Droppable Container -----
-// We assign an id to detect drops on empty space.
 export const Droppable: React.FC<{ id: UniqueIdentifier; children: React.ReactNode }> = ({ id, children }) => {
   const { isOver, setNodeRef } = useDroppable({ id })
   return (
@@ -186,17 +190,19 @@ const CreateDefaultLearningPath: React.FC = () => {
   const [disabledItems, setDisabledItems] = useState<string[]>([])
   const [activeId, setActiveId] = useState<null | string>(null)
 
-  // Only show left items that are not in droppable AND not disabled.
-  const unassignedItems = classificationItems.filter(
-    (item) => !orderedItems.includes(item.key) && !disabledItems.includes(item.key)
-  )
+  // Show left items that are not in droppable container.
+  const unassignedItems = classificationItems.filter((item) => !orderedItems.includes(item.key))
 
-  // When disabling an item, add it to disabledItems.
-  const handleDisable = (itemKey: string) => {
-    setDisabledItems((prev) => [...prev, itemKey])
+  // Toggle disable state of an item.
+  const handleToggleDisable = (itemKey: string) => {
+    if (disabledItems.includes(itemKey)) {
+      setDisabledItems((prev) => prev.filter((key) => key !== itemKey))
+    } else {
+      setDisabledItems((prev) => [...prev, itemKey])
+    }
   }
 
-  // Reset an item from the droppable container back to the left (removes from orderedItems).
+  // Reset an item from the droppable container back to the left.
   const handleResetItem = (itemKey: string) => {
     setOrderedItems((prev) => prev.filter((key) => key !== itemKey))
   }
@@ -275,28 +281,43 @@ const CreateDefaultLearningPath: React.FC = () => {
       onDragCancel={() => setActiveId(null)}>
       <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
       <Grid container spacing={2}>
-        {/* Left Column: Unassigned Items with Disable Button */}
+        {/* Left Column: Unassigned Items with Toggle Disable Button */}
         <Grid item xs={4}>
           <Typography variant="h6" sx={{ mb: 2 }}>
             Classification Items
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {unassignedItems.map((item) => (
-              <Box key={item.key} display="flex" alignItems="center" gap={1}>
-                <SourceDraggable id={item.key} icon={item.icon}>
-                  {item.label}
-                </SourceDraggable>
-                <IconButton
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    handleDisable(item.key)
-                  }}
-                  size="small"
-                  sx={{ color: 'text.secondary' }}>
-                  <BlockIcon fontSize="small" />
-                </IconButton>
-              </Box>
-            ))}
+            {unassignedItems.map((item) => {
+              const isDisabled = disabledItems.includes(item.key)
+              return (
+                <Box key={item.key} display="flex" alignItems="center" gap={1}>
+                  <SourceDraggable id={item.key} icon={item.icon} disabled={isDisabled}>
+                    <Box display="flex" alignItems="center" gap={1}>
+                      {item.label}
+                    </Box>
+                    <IconButton
+                      draggable={false}
+                      onPointerDown={(e) => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                      }}
+                      onMouseDown={(e) => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        handleToggleDisable(item.key)
+                      }}
+                      size="small"
+                      sx={{ color: 'text.secondary' }}>
+                      {isDisabled ? <ReplayIcon fontSize="medium" /> : <BlockIcon fontSize="medium" />}
+                    </IconButton>
+                  </SourceDraggable>
+                </Box>
+              )
+            })}
           </Box>
         </Grid>
         <Grid item xs={1} />
