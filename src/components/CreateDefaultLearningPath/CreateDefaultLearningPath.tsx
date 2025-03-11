@@ -1,4 +1,15 @@
-import { DndContext, DragEndEvent, UniqueIdentifier, pointerWithin, useDraggable, useDroppable } from '@dnd-kit/core'
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverEvent,
+  DragOverlay,
+  DragStartEvent,
+  UniqueIdentifier,
+  closestCenter,
+  useDraggable,
+  useDroppable
+} from '@dnd-kit/core'
+import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import AcUnitIcon from '@mui/icons-material/AcUnit'
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
@@ -7,103 +18,146 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import AirportShuttleIcon from '@mui/icons-material/AirportShuttle'
 import AllInboxIcon from '@mui/icons-material/AllInbox'
+import BlockIcon from '@mui/icons-material/Block'
+import CloseIcon from '@mui/icons-material/Close'
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions'
 import FingerprintIcon from '@mui/icons-material/Fingerprint'
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter'
 import ReplayIcon from '@mui/icons-material/Replay'
 import WhatshotIcon from '@mui/icons-material/Whatshot'
-import { Fab } from '@mui/material'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
-import Modal from '@mui/material/Modal'
-import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
+import { Box, Button, Fab, Grid, IconButton, Modal, Paper, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 // ----- Styled Components -----
+// These containers now have a bit more padding and rounded corners.
 const DraggableContainer = styled(Paper)(({ theme }) => ({
   width: '100%',
-  minHeight: 40,
+  minHeight: 50,
   display: 'flex',
   alignItems: 'center',
   cursor: 'grab',
-  border: `2px solid ${theme.palette.divider}`,
-  backgroundColor: theme.palette.common.white
+  border: `1px solid ${theme.palette.divider}`,
+  backgroundColor: theme.palette.background.paper,
+  padding: theme.spacing(2),
+  borderRadius: theme.shape.borderRadius,
+  boxShadow: theme.shadows[1]
 }))
 
 const DroppableContainer = styled(Paper, {
   shouldForwardProp: (prop) => prop !== 'isover'
 })<{ isover: boolean }>(({ theme, isover }) => ({
   width: '100%',
-  minHeight: 40,
+  height: 600,
+  overflowY: 'auto',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'stretch',
+  justifyContent: 'flex-start',
+  border: `2px dashed ${theme.palette.divider}`,
+  backgroundColor: isover ? theme.palette.action.hover : theme.palette.background.paper,
+  padding: theme.spacing(2),
+  gap: theme.spacing(2),
+  borderRadius: theme.shape.borderRadius
+}))
+
+const PositionBadge = styled(Box)(({ theme }) => ({
+  borderRadius: '50%',
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.common.white,
+  width: 32,
+  height: 32,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  border: `2px dashed ${theme.palette.divider}`,
-  backgroundColor: isover ? theme.palette.action.hover : theme.palette.background.paper
+  fontWeight: 'bold'
 }))
 
-// ----- Draggable Component -----
+// ----- Types -----
+interface ClassificationItem {
+  key: string
+  name: string
+  disabled?: boolean
+  label?: string
+  icon?: JSX.Element
+}
+
 interface DraggableProps {
   id: UniqueIdentifier
   children: React.ReactNode
   icon?: React.ReactNode
 }
 
-export const Draggable: React.FC<DraggableProps> = ({ id, children, icon }) => {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({ id })
+// ----- Source Draggable (Left Column) -----
+// Uses useDraggable for independent drag preview.
+export const SourceDraggable: React.FC<DraggableProps> = ({ id, children, icon }) => {
+  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id })
   const style = {
-    transform: transform ? CSS.Translate.toString(transform) : undefined
+    transform: transform ? CSS.Translate.toString(transform) : undefined,
+    opacity: isDragging ? 0.5 : 1
   }
-
   return (
     <DraggableContainer ref={setNodeRef} style={style} {...listeners} {...attributes}>
       {icon}
-      <Typography variant="body1" sx={{ ml: 1 }}>
+      <Typography variant="body1" sx={{ ml: 2 }}>
         {children}
       </Typography>
     </DraggableContainer>
   )
 }
 
-// ----- Droppable Component -----
-interface DroppableProps {
-  id: UniqueIdentifier
-  children: React.ReactNode
+// ----- Sortable Item (Inside Droppable) -----
+// Hides original element (opacity 0) when dragging.
+export const SortableItem: React.FC<DraggableProps> = ({ id, children, icon }) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
+  const style = {
+    transform: transform ? CSS.Transform.toString(transform) : undefined,
+    transition: transition || undefined,
+    opacity: isDragging ? 0 : 1
+  }
+  return (
+    <DraggableContainer ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      {icon}
+      {children}
+    </DraggableContainer>
+  )
 }
 
-export const Droppable: React.FC<DroppableProps> = ({ id, children }) => {
+// ----- Droppable Container -----
+// We assign an id to detect drops on empty space.
+export const Droppable: React.FC<{ id: UniqueIdentifier; children: React.ReactNode }> = ({ id, children }) => {
   const { isOver, setNodeRef } = useDroppable({ id })
   return (
-    <DroppableContainer ref={setNodeRef} isover={isOver}>
+    <DroppableContainer ref={setNodeRef} isover={isOver} id={id as string}>
       {children}
     </DroppableContainer>
   )
 }
 
-// ----- Type for Classification Item -----
-interface ClassificationItem {
-  key: string
-  name: string
-  disabled?: boolean
-}
+// ----- Drag Preview Component -----
+const DragPreview: React.FC<{ item: ClassificationItem }> = ({ item }) => (
+  <DraggableContainer>
+    {item.icon}
+    <Typography variant="body1" sx={{ ml: 2 }}>
+      {item.label}
+    </Typography>
+  </DraggableContainer>
+)
 
-// ----- Create Default Learning Path Component -----
+// ----- Main Component -----
 const CreateDefaultLearningPath: React.FC = () => {
   const { t } = useTranslation()
 
-  // Get classification items from the translation resource.
+  // Retrieve classification items from translations.
   const learningElementClassifications: ClassificationItem[] = useMemo(() => {
     return t('components.CreateLearningElementClassificationTable.classifications', {
       returnObjects: true
     })
   }, [t])
 
-  // Define an icon mapping based on classification key.
+  // Map icons to classification keys.
   const iconMapping: Record<string, JSX.Element> = {
     LZ: <DragIndicatorIcon />,
     KÜ: <AcUnitIcon />,
@@ -119,126 +173,177 @@ const CreateDefaultLearningPath: React.FC = () => {
     RQ: <WhatshotIcon />
   }
 
-  // Map the classification items to our internal format.
   const classificationItems = useMemo(() => {
     return learningElementClassifications.map((item) => ({
-      key: item.key,
+      ...item,
       label: item.name,
       icon: iconMapping[item.key] || <DragIndicatorIcon />
     }))
   }, [learningElementClassifications, iconMapping])
 
-  // Create droppable IDs based on the number of classification items.
-  const droppableIds = classificationItems.map((_, index) => `droppable-${index + 1}`)
+  // State arrays for items in the droppable container and disabled items.
+  const [orderedItems, setOrderedItems] = useState<string[]>([])
+  const [disabledItems, setDisabledItems] = useState<string[]>([])
+  const [activeId, setActiveId] = useState<null | string>(null)
 
-  // Build initial assignments: droppable id -> assigned draggable key (or null if unassigned).
-  const initialAssignments: Record<string, string | null> = {}
-  droppableIds.forEach((id) => (initialAssignments[id] = null))
-  const [assignments, setAssignments] = useState<Record<string, string | null>>(initialAssignments)
+  // Only show left items that are not in droppable AND not disabled.
+  const unassignedItems = classificationItems.filter(
+    (item) => !orderedItems.includes(item.key) && !disabledItems.includes(item.key)
+  )
 
-  // Compute unassigned items.
-  const assignedKeys = Object.values(assignments).filter((id) => id !== null) as string[]
-  const unassignedItems = classificationItems.filter((item) => !assignedKeys.includes(item.key))
+  // When disabling an item, add it to disabledItems.
+  const handleDisable = (itemKey: string) => {
+    setDisabledItems((prev) => [...prev, itemKey])
+  }
 
-  // Drag end handler: if dropped over a valid droppable, update assignment; otherwise, reset.
+  // Reset an item from the droppable container back to the left (removes from orderedItems).
+  const handleResetItem = (itemKey: string) => {
+    setOrderedItems((prev) => prev.filter((key) => key !== itemKey))
+  }
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
-    setAssignments((prev) => {
-      const newAssignments = { ...prev }
-      let origin: string | null = null
-      // Remove active item from all droppables.
-      Object.keys(newAssignments).forEach((dropId) => {
-        if (newAssignments[dropId] === active.id) {
-          if (!origin) {
-            origin = dropId
-          }
-          newAssignments[dropId] = null
+    setActiveId(null)
+    if (!over) return
+
+    const activeIdStr = active.id as string
+    const overIdStr = over.id as string
+
+    if (orderedItems.includes(activeIdStr)) {
+      if (overIdStr === 'droppable-container') {
+        const oldIndex = orderedItems.indexOf(activeIdStr)
+        const newIndex = orderedItems.length - 1
+        if (oldIndex !== newIndex) {
+          setOrderedItems(arrayMove(orderedItems, oldIndex, newIndex))
         }
-      })
-      // If dropped over a valid droppable, assign it.
-      const target = over ? (over.id as string) : null
-      if (target && droppableIds.includes(target)) {
-        const targetItem = newAssignments[target]
-        newAssignments[target] = active.id as string
-        // If the target already had an item and the active item came from a droppable, swap them.
-        if (targetItem && origin && origin !== target) {
-          newAssignments[origin] = targetItem
-        }
+      } else if (activeIdStr !== overIdStr && orderedItems.includes(overIdStr)) {
+        const oldIndex = orderedItems.indexOf(activeIdStr)
+        const newIndex = orderedItems.indexOf(overIdStr)
+        setOrderedItems(arrayMove(orderedItems, oldIndex, newIndex))
       }
-      return newAssignments
-    })
+      return
+    }
+
+    if (orderedItems.includes(overIdStr)) {
+      const newIndex = orderedItems.indexOf(overIdStr)
+      const newOrderedItems = [...orderedItems]
+      newOrderedItems.splice(newIndex, 0, activeIdStr)
+      setOrderedItems(newOrderedItems)
+    } else {
+      setOrderedItems([...orderedItems, activeIdStr])
+    }
   }
 
-  // Remove all: reset assignments to initial state.
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveId(event.active.id as string)
+  }
+
+  const handleDragOver = (event: DragOverEvent) => {
+    const { active, over } = event
+    if (!active || !over) return
+    const activeIdStr = active.id as string
+    if (orderedItems.includes(activeIdStr) && over.id === 'droppable-container') {
+      const currentIndex = orderedItems.indexOf(activeIdStr)
+      const lastIndex = orderedItems.length - 1
+      if (currentIndex !== lastIndex) {
+        setOrderedItems(arrayMove(orderedItems, currentIndex, lastIndex))
+      }
+    }
+  }
+
   const handleRemoveAll = () => {
-    setAssignments({ ...initialAssignments })
+    setOrderedItems([])
+    setDisabledItems([])
   }
 
-  // Submit handler: placeholder for further processing.
+  // The submit button is enabled only when every classification item is either dropped or disabled.
+  const isSubmitActive = orderedItems.length + disabledItems.length === classificationItems.length
+
   const handleSubmit = () => {
-    // Only called if all droppables have a partner.
-    console.log('Submitted assignments:', assignments)
+    console.log('Submitted order:', orderedItems)
+    console.log('Disabled items:', disabledItems)
   }
 
-  // Determine if submit button should be enabled (all droppables are filled).
-  const isSubmitActive = droppableIds.every((dropId) => assignments[dropId] !== null)
+  const activeItem = classificationItems.find((item) => item.key === activeId)
 
   return (
-    <DndContext collisionDetection={pointerWithin} onDragEnd={handleDragEnd}>
-      <Grid container>
-        {/* Left Column: Unassigned Classification Items */}
+    <DndContext
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragCancel={() => setActiveId(null)}>
+      <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
+      <Grid container spacing={2}>
+        {/* Left Column: Unassigned Items with Disable Button */}
         <Grid item xs={4}>
           <Typography variant="h6" sx={{ mb: 2 }}>
             Classification Items
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {unassignedItems.map((item) => (
-              <Draggable key={item.key} id={item.key} icon={item.icon}>
-                {item.label}
-              </Draggable>
+              <Box key={item.key} display="flex" alignItems="center" gap={1}>
+                <SourceDraggable id={item.key} icon={item.icon}>
+                  {item.label}
+                </SourceDraggable>
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleDisable(item.key)
+                  }}
+                  size="small"
+                  sx={{ color: 'text.secondary' }}>
+                  <BlockIcon fontSize="small" />
+                </IconButton>
+              </Box>
             ))}
           </Box>
         </Grid>
         <Grid item xs={1} />
+        {/* Right Column: Droppable Container */}
         <Grid item xs={7}>
           <Typography variant="h6" sx={{ mb: 2 }}>
             Order the Items
           </Typography>
-          <Grid container spacing={2} direction="column">
-            {droppableIds.map((dropId, index) => {
-              const assignedKey = assignments[dropId]
-              const assignedItem = classificationItems.find((item) => item.key === assignedKey)
-              return (
-                <Grid item key={dropId}>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Typography variant="subtitle1" sx={{ width: 30 }}>
-                      {index + 1}.
-                    </Typography>
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Droppable id={dropId}>
-                        {assignedItem ? (
-                          <Draggable id={assignedItem.key} icon={assignedItem.icon}>
-                            {assignedItem.label}
-                          </Draggable>
-                        ) : (
-                          <Typography variant="body2" color="textSecondary">
-                            Drop here
-                          </Typography>
-                        )}
-                      </Droppable>
+          <Droppable id="droppable-container">
+            <SortableContext items={orderedItems} strategy={verticalListSortingStrategy}>
+              {orderedItems.map((key, index) => {
+                const item = classificationItems.find((ci) => ci.key === key)
+                return item ? (
+                  <SortableItem key={item.key} id={item.key} icon={item.icon}>
+                    <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">
+                      <Typography variant="body1">{item.label}</Typography>
+                      <Box display="flex" alignItems="center" gap={1}>
+                        <PositionBadge>{index + 1}</PositionBadge>
+                        <IconButton
+                          draggable={false}
+                          onPointerDown={(e) => {
+                            e.stopPropagation()
+                            e.preventDefault()
+                          }}
+                          onMouseDown={(e) => {
+                            e.stopPropagation()
+                            e.preventDefault()
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            e.preventDefault()
+                            handleResetItem(item.key)
+                          }}
+                          size="small"
+                          sx={{ color: 'text.secondary' }}>
+                          <CloseIcon fontSize="small" />
+                        </IconButton>
+                      </Box>
                     </Box>
-                  </Box>
-                </Grid>
-              )
-            })}
-          </Grid>
+                  </SortableItem>
+                ) : null
+              })}
+            </SortableContext>
+          </Droppable>
         </Grid>
-        <Grid container justifyContent={'space-between'} sx={{ mt: 1 }}>
-          <Fab
-            id="reset-order-default-learning-path"
-            color="error"
-            data-testid={'QuestionnaireQuestionsModal-Close-Button'}
-            onClick={handleRemoveAll}>
+        <Grid container justifyContent="space-between" sx={{ mt: 2 }}>
+          <Fab id="reset-order-default-learning-path" color="error" onClick={handleRemoveAll}>
             <ReplayIcon />
           </Fab>
           <Button variant="contained" disabled={!isSubmitActive} onClick={handleSubmit}>
@@ -250,9 +355,8 @@ const CreateDefaultLearningPath: React.FC = () => {
   )
 }
 
-// ----- Modal and Box Wrapper -----
 const modalStyle = {
-  position: 'absolute',
+  position: 'absolute' as const,
   left: '12%',
   right: '12%',
   top: '10%',

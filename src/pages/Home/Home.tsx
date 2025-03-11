@@ -9,8 +9,6 @@ import { CreateCourseModal } from '@components'
 import { Course } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import CreateDefaultLearningPath from '../../components/CreateDefaultLearningPath/CreateDefaultLearningPath'
-import DraggableModal from '../../components/CreateDefaultLearningPath/CreateDefaultLearningPath'
 import DefaultLearningPathModal from '../../components/CreateDefaultLearningPath/CreateDefaultLearningPath'
 
 /**
