@@ -9,16 +9,15 @@ import { fetchData } from "../RequestResponse"
  * @interface
  */
 type PostLearningElementSolutionProps = {
-    learningElementId: number
+    learningElementLmsId: number
     solutionLmsId: number
     }
 
 /**
  * postLearningElementSolution function.
  * 
- * @param learningElementId - learning element id
+ * @param learningElementId - learning element lms id
  * @param solutionLmsId - solution lms id
- * @param outputJson - output json
  * 
  * @remarks
  * Posts the solution to be set for a specific learning element.
@@ -29,7 +28,7 @@ type PostLearningElementSolutionProps = {
  */
 
 export const postLearningElementSolution = async ({
-    learningElementId: learningElementLmsId,
+    learningElementLmsId,
     solutionLmsId
 }: PostLearningElementSolutionProps): Promise<LearningElementSolution> => {
     return fetchData<LearningElementSolution>(`${getConfig().BACKEND}/learningElement/${learningElementLmsId}/solution/${solutionLmsId}`, {

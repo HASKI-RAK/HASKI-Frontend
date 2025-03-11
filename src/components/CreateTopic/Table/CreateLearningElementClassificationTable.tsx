@@ -19,19 +19,15 @@ import { tableCellClasses } from '@mui/material'
 import { SkeletonList } from '@components'
 import { RemoteLearningElement, RemoteTopic } from '@core'
 import { useCreateLearningElementClassificationTable } from './CreateLearningElementClassificationTable.hooks'
-import { Solution } from '../Modal/CreateTopicModal'
+import { Solution, RemoteLearningElementWithClassification } from '../Modal/CreateTopicModal'
 
-export type LearningElementWithClassification = RemoteLearningElement & {
-  classification: string
-  disabled?: boolean
-}
 
 type CreateLearningElementClassificationTableProps = {
   selectedTopics: RemoteTopic[]
   LearningElements: { [key: number]: RemoteLearningElement[] }
-  LearningElementsClassification: { [key: number]: LearningElementWithClassification[] }
+  LearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
   selectedSolutions: { [key: number]: Solution[] }
-  onLearningElementChange: (selectedLearningElements: { [key: number]: LearningElementWithClassification[] }) => void
+  onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }) => void
   onSolutionChange: (selectedSolutions: { [key: number]: Solution[] }) => void
   children?: ReactNode
 }

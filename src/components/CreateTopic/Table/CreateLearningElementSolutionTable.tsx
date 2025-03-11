@@ -1,4 +1,4 @@
-import { ReactNode, memo, useEffect, useMemo } from 'react'
+import { ReactNode, memo, useEffect, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -14,16 +14,15 @@ import {
 import { SkeletonList } from '@components'
 import { RemoteLearningElement, RemoteTopic, LearningElementWithSolution } from '@core'
 import { useCreateLearningElementSolutionTable } from './CreateLearningElementSolutionTable.hooks'
-import { Solution, RemoteLearningElementWithSolution } from '../Modal/CreateTopicModal'
-import { LearningElementWithClassification } from './CreateLearningElementClassificationTable'
+import { Solution, RemoteLearningElementWithSolution, RemoteLearningElementWithClassification } from '../Modal/CreateTopicModal'
 
 type CreateLearningElementClassificationTableProps = {
   selectedTopics: RemoteTopic[]
   LearningElements: { [key: number]: RemoteLearningElement[] }
-  LearningElementsClassification: { [key: number]: LearningElementWithClassification[] }
+  LearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
   selectedSolutions: { [key: number]: Solution[] }
   learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }
-  onLearningElementSolutionChange: (selectedSolutions: { [key: number]: LearningElementWithSolution[] }) => void
+  onLearningElementSolutionChange: (selectedSolutions: { [key: number]: RemoteLearningElementWithSolution[] }) => void
   children?: ReactNode
 }
 
@@ -44,6 +43,7 @@ const CreateLearningElementClassificationTable = memo(
       selectedSolutions,
       onLearningElementSolutionChange
     })
+    const [displayedSolutions, setDisplayedSolutions] = useState<{ [key: number]: Solution[] }>([])
 
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const CreateLearningElementClassificationTable = memo(
         const newSolutions = LearningElementsClassification[topicIdInt].reduce((acc, element) => {
           const existingElement = existingLeElSolutions.find((e) => e.learningElementLmsId === element.lms_id)
           if (!existingElement && !element.disabled) {
-        return [...acc, { learningElementLmsId: element.lms_id, lmsSolutionId: 0 }]
+        return [...acc, { learningElementLmsId: element.lms_id, learningElementName: element.lms_learning_element_name, lmsSolutionId: 0 }]
           } else if (existingElement && element.disabled) {
         return acc.filter((e) => e.learningElementLmsId !== element.lms_id)
           }
@@ -65,10 +65,21 @@ const CreateLearningElementClassificationTable = memo(
       }, {})
 
       onLearningElementSolutionChange(updatedSolutions)
-    }, [LearningElements])
+    }, [LearningElementsClassification, onLearningElementSolutionChange])
+
+    useEffect(() => {
+      const updatedDisplayedSolutions = Object.keys(selectedSolutions).reduce((accumulator, topicId) => {
+        const topicIdInt = parseInt(topicId)
+        const newDisplayedSolutions = [{solutionLmsId: 0, solutionLmsName: 'No Solution Placeholder'}, ...(selectedSolutions[topicIdInt] || [])]
+
+        return { ...accumulator, [topicIdInt]: newDisplayedSolutions }
+      }, {})
+      setDisplayedSolutions(updatedDisplayedSolutions)
+    }
+    , [selectedSolutions])
 
     //Return early
-    if (Object.keys(LearningElementsClassification).length === 0) {
+    if (Object.keys(learningElementsWithSolutions).length === 0) {
       return (
         <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
           <Grid container direction="column" alignItems="center" sx={{ mt: '2rem' }}>
@@ -83,7 +94,7 @@ const CreateLearningElementClassificationTable = memo(
       <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
         <Grid item container justifyContent="center">
           <Typography variant="h6" sx={{ mt: '1rem' }}>
-            {t('components.CreateLearningElementClassificationTable.setLearningElementClassification')}
+            {t('components.CreateLearningElementSolutionTable.setLearningElementSolution')}
           </Typography>
         </Grid>
         {selectedTopics.map((lmsTopic) => (
@@ -102,23 +113,23 @@ const CreateLearningElementClassificationTable = memo(
                   </Typography>
                 </Grid>
               </Box>
-              {LearningElements[lmsTopic.topic_lms_id]?.map((element) => (
-                <Grid container alignItems="center" spacing={2} key={element.lms_id}>
+              {learningElementsWithSolutions[lmsTopic.topic_lms_id]?.map((element) => (
+                <Grid container alignItems="center" spacing={2} key={element.learningElementLmsId}>
                   <Grid item xs={6}>
-                    <FormControlLabel control={<Checkbox checked={true} />} label={element.lms_learning_element_name} />
+                    <FormControlLabel control={<Checkbox checked={true} />} label={element.learningElementName} />
                   </Grid>
                   <Grid item container xs={6} justifyContent="flex-end">
                     <FormControl sx={{ m: 1, width: '21rem' }} size="small">
                       <Select
-                        value={''}
+                        value={String(element.solutionLmsId ?? displayedSolutions[lmsTopic.topic_lms_id][0].solutionLmsId)}
                         onChange={(event) =>
                           handleSolutionChange(
                             lmsTopic.topic_lms_id,
-                            element.lms_id,
+                            element.learningElementLmsId,
                             parseInt(event.target.value)
                           )
                         }>
-                        {selectedSolutions[lmsTopic.topic_lms_id].map((solution) => (
+                        {displayedSolutions[lmsTopic.topic_lms_id].map((solution) => (
                           <MenuItem
                             key={solution.solutionLmsId}
                             value={solution.solutionLmsId}>

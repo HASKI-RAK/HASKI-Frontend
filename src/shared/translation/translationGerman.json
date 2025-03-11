@@ -18,6 +18,7 @@
   "appGlobal.send": "Senden",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
+  "appGlobal.solutions": "Lösungen",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Algorithmus auswählen",
@@ -165,6 +166,7 @@
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Klassifikation der Lernelemente festlegen",
   "components.CreateLearningElementTable.selectLearningElements": "Lernelemente auswählen",
   "components.CreateTopicModal.createTopics": "Themenbereiche erstellen",
+  "components.CreateLearningElementSolutionTable.setLearningElementSolution": "Lernelementen Lösungen zuweisen",
   "components.ExistingTopicsTable.title": "Bereits erstellte Themenbereiche",
   "components.Footer.project": "Projekt",
   "components.FurtherInfoMenu.title": "Weitere Informationen",

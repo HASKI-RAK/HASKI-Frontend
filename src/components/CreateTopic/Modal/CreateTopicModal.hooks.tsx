@@ -113,8 +113,8 @@ export const useCreateTopicModal = ({
     return postCalculateLearningPathForAllStudents({ userId, courseId, topicId, outputJson })
   }
 
-  const handleCreateSolutions = (learningElementId: number, solutionLmsId: number) => {
-    return postLearningElementSolution( {learningElementId, solutionLmsId} )
+  const handleCreateSolutions = (learningElementLmsId: number, solutionLmsId: number) => {
+    return postLearningElementSolution( {learningElementLmsId, solutionLmsId} )
   }
 
   const handleCreate = (
@@ -181,7 +181,7 @@ export const useCreateTopicModal = ({
                       setCreateTopicIsSending(false)
                     }
                   })
-                })
+                })        
                 .catch((error) => {
                   addSnackbar({
                     message: t('error.postLearningPathAlgorithm'),

@@ -5,7 +5,7 @@ import { Solution, RemoteLearningElementWithSolution } from "../Modal/CreateTopi
 type useCreateLearningElementSolutionTable = {
   learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }
   selectedSolutions: { [key: number]: Solution[] }
-  onLearningElementSolutionChange: (selectedSolutions: { [key: number]: LearningElementWithSolution[] }) => void
+  onLearningElementSolutionChange: (selectedSolutions: { [key: number]: RemoteLearningElementWithSolution[] }) => void
 }
 
 export const useCreateLearningElementSolutionTable = ({
