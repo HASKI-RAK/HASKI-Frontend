@@ -1,4 +1,4 @@
-import { DndContext, DragEndEvent, UniqueIdentifier, useDraggable, useDroppable } from '@dnd-kit/core'
+import { DndContext, DragEndEvent, UniqueIdentifier, pointerWithin, useDraggable, useDroppable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
 import AcUnitIcon from '@mui/icons-material/AcUnit'
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
@@ -11,8 +11,11 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions'
 import FingerprintIcon from '@mui/icons-material/Fingerprint'
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter'
+import ReplayIcon from '@mui/icons-material/Replay'
 import WhatshotIcon from '@mui/icons-material/Whatshot'
+import { Fab } from '@mui/material'
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Modal from '@mui/material/Modal'
 import Paper from '@mui/material/Paper'
@@ -23,9 +26,8 @@ import { useTranslation } from 'react-i18next'
 
 // ----- Styled Components -----
 const DraggableContainer = styled(Paper)(({ theme }) => ({
-  width: '90%',
-  padding: theme.spacing(1),
-  marginBottom: theme.spacing(1),
+  width: '100%',
+  minHeight: 40,
   display: 'flex',
   alignItems: 'center',
   cursor: 'grab',
@@ -36,8 +38,8 @@ const DraggableContainer = styled(Paper)(({ theme }) => ({
 const DroppableContainer = styled(Paper, {
   shouldForwardProp: (prop) => prop !== 'isover'
 })<{ isover: boolean }>(({ theme, isover }) => ({
-  width: '90%',
-  height: 40,
+  width: '100%',
+  minHeight: 40,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -129,7 +131,7 @@ const CreateDefaultLearningPath: React.FC = () => {
   // Create droppable IDs based on the number of classification items.
   const droppableIds = classificationItems.map((_, index) => `droppable-${index + 1}`)
 
-  // Initialize assignments: droppable id -> assigned draggable key (or null if unassigned).
+  // Build initial assignments: droppable id -> assigned draggable key (or null if unassigned).
   const initialAssignments: Record<string, string | null> = {}
   droppableIds.forEach((id) => (initialAssignments[id] = null))
   const [assignments, setAssignments] = useState<Record<string, string | null>>(initialAssignments)
@@ -138,13 +140,13 @@ const CreateDefaultLearningPath: React.FC = () => {
   const assignedKeys = Object.values(assignments).filter((id) => id !== null) as string[]
   const unassignedItems = classificationItems.filter((item) => !assignedKeys.includes(item.key))
 
-  // Updated drag end handler to allow swapping and prevent duplicates.
+  // Drag end handler: if dropped over a valid droppable, update assignment; otherwise, reset.
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
     setAssignments((prev) => {
       const newAssignments = { ...prev }
       let origin: string | null = null
-      // Remove active from all droppables and record the first occurrence as origin.
+      // Remove active item from all droppables.
       Object.keys(newAssignments).forEach((dropId) => {
         if (newAssignments[dropId] === active.id) {
           if (!origin) {
@@ -153,11 +155,12 @@ const CreateDefaultLearningPath: React.FC = () => {
           newAssignments[dropId] = null
         }
       })
+      // If dropped over a valid droppable, assign it.
       const target = over ? (over.id as string) : null
       if (target && droppableIds.includes(target)) {
         const targetItem = newAssignments[target]
         newAssignments[target] = active.id as string
-        // If a target item existed and the active item came from a droppable, swap them.
+        // If the target already had an item and the active item came from a droppable, swap them.
         if (targetItem && origin && origin !== target) {
           newAssignments[origin] = targetItem
         }
@@ -166,59 +169,83 @@ const CreateDefaultLearningPath: React.FC = () => {
     })
   }
 
+  // Remove all: reset assignments to initial state.
+  const handleRemoveAll = () => {
+    setAssignments({ ...initialAssignments })
+  }
+
+  // Submit handler: placeholder for further processing.
+  const handleSubmit = () => {
+    // Only called if all droppables have a partner.
+    console.log('Submitted assignments:', assignments)
+  }
+
+  // Determine if submit button should be enabled (all droppables are filled).
+  const isSubmitActive = droppableIds.every((dropId) => assignments[dropId] !== null)
+
   return (
-    <DndContext onDragEnd={handleDragEnd}>
-      <Box>
-        <Grid container spacing={2}>
-          {/* Left Column: Unassigned Classification Items */}
-          <Grid item xs={4}>
-            <Typography variant="h6" sx={{ mb: 2 }}>
-              Classification Items
-            </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              {unassignedItems.map((item) => (
-                <Draggable key={item.key} id={item.key} icon={item.icon}>
-                  {item.label}
-                </Draggable>
-              ))}
-            </Box>
-          </Grid>
-          {/* Right Column: Ordered Droppable Fields */}
-          <Grid item xs={8}>
-            <Typography variant="h6" sx={{ mb: 2 }}>
-              Order the Items
-            </Typography>
-            <Grid container spacing={2} direction="column">
-              {droppableIds.map((dropId, index) => {
-                const assignedKey = assignments[dropId]
-                const assignedItem = classificationItems.find((item) => item.key === assignedKey)
-                return (
-                  <Grid item key={dropId}>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <Typography variant="subtitle1" sx={{ width: 30 }}>
-                        {index + 1}.
-                      </Typography>
-                      <Box sx={{ flexGrow: 1 }}>
-                        <Droppable id={dropId}>
-                          {assignedItem ? (
-                            <Draggable id={assignedItem.key} icon={assignedItem.icon}>
-                              {assignedItem.label}
-                            </Draggable>
-                          ) : (
-                            <Typography variant="body2" color="textSecondary">
-                              Drop here
-                            </Typography>
-                          )}
-                        </Droppable>
-                      </Box>
+    <DndContext collisionDetection={pointerWithin} onDragEnd={handleDragEnd}>
+      <Grid container>
+        {/* Left Column: Unassigned Classification Items */}
+        <Grid item xs={4}>
+          <Typography variant="h6" sx={{ mb: 2 }}>
+            Classification Items
+          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            {unassignedItems.map((item) => (
+              <Draggable key={item.key} id={item.key} icon={item.icon}>
+                {item.label}
+              </Draggable>
+            ))}
+          </Box>
+        </Grid>
+        <Grid item xs={1} />
+        <Grid item xs={7}>
+          <Typography variant="h6" sx={{ mb: 2 }}>
+            Order the Items
+          </Typography>
+          <Grid container spacing={2} direction="column">
+            {droppableIds.map((dropId, index) => {
+              const assignedKey = assignments[dropId]
+              const assignedItem = classificationItems.find((item) => item.key === assignedKey)
+              return (
+                <Grid item key={dropId}>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Typography variant="subtitle1" sx={{ width: 30 }}>
+                      {index + 1}.
+                    </Typography>
+                    <Box sx={{ flexGrow: 1 }}>
+                      <Droppable id={dropId}>
+                        {assignedItem ? (
+                          <Draggable id={assignedItem.key} icon={assignedItem.icon}>
+                            {assignedItem.label}
+                          </Draggable>
+                        ) : (
+                          <Typography variant="body2" color="textSecondary">
+                            Drop here
+                          </Typography>
+                        )}
+                      </Droppable>
                     </Box>
-                  </Grid>
-                )
-              })}
-            </Grid>
+                  </Box>
+                </Grid>
+              )
+            })}
           </Grid>
         </Grid>
-      </Box>
+        <Grid container justifyContent={'space-between'} sx={{ mt: 1 }}>
+          <Fab
+            id="reset-order-default-learning-path"
+            color="error"
+            data-testid={'QuestionnaireQuestionsModal-Close-Button'}
+            onClick={handleRemoveAll}>
+            <ReplayIcon />
+          </Fab>
+          <Button variant="contained" disabled={!isSubmitActive} onClick={handleSubmit}>
+            Submit
+          </Button>
+        </Grid>
+      </Grid>
     </DndContext>
   )
 }

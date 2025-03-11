@@ -145,7 +145,6 @@ export const Home = () => {
           handleCloseCreateCourseModal={handleCloseCourseModal}
           activeStepCreateCourseModal={activeStepCreateCourseModal}
           setActiveStepCreateCourseModal={setActiveStepCreateCourseModal}></CreateCourseModal>
-        <DefaultLearningPathModal />
       </Card>
     )
   }
@@ -175,6 +174,7 @@ export const Home = () => {
         ) : (
           courseCards(courses)
         )}
+        <DefaultLearningPathModal />
         {isCourseCreatorRole && courseCreatorView()}
       </Grid>
     </Grid>
