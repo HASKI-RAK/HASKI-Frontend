@@ -303,112 +303,114 @@ const CreateDefaultLearningPath: React.FC = () => {
       onDragOver={handleDragOver}
       onDragCancel={() => setActiveId(null)}>
       <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
-      <Grid container sx={{ width: '100%', height: '90%' }}>
-        {/* Left Column: Unassigned Items with Toggle Disable Button */}
-        <Grid item direction={'row'} xs={4} sx={{ height: '100%' }}>
-          <Grid item>
-            <Typography variant="h6">Classification Items</Typography>
+      <Grid container>
+        <Grid container sx={{ width: '100%', height: '90%' }}>
+          {/* Left Column: Unassigned Items with Toggle Disable Button */}
+          <Grid item direction={'row'} xs={4} sx={{ height: '100%' }}>
+            <Grid item>
+              <Typography variant="h6">Classification Items</Typography>
+            </Grid>
+            <Grid item>
+              <Box height={24} />
+            </Grid>
+            <Grid item>
+              {unassignedItems.map((item) => {
+                const isDisabled = disabledItems.includes(item.key)
+                return (
+                  <Grid item key={item.key} direction="column" sx={{ mb: 2 }}>
+                    <SourceDraggable
+                      key={item.key}
+                      id={item.key}
+                      icon={item.icon}
+                      label={item.label}
+                      disabled={isDisabled}>
+                      <IconButton
+                        draggable={false}
+                        onPointerDown={(e) => {
+                          e.stopPropagation()
+                          e.preventDefault()
+                        }}
+                        onMouseDown={(e) => {
+                          e.stopPropagation()
+                          e.preventDefault()
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          e.preventDefault()
+                          handleToggleDisable(item.key)
+                        }}
+                        size="small"
+                        sx={{ color: 'text.secondary' }}>
+                        {isDisabled ? (
+                          <ReplayIcon fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
+                        ) : (
+                          <BlockIcon fontSize="medium" />
+                        )}
+                      </IconButton>
+                    </SourceDraggable>
+                  </Grid>
+                )
+              })}
+            </Grid>
           </Grid>
-          <Grid item>
-            <Box height={24} />
-          </Grid>
-          <Grid item>
-            {unassignedItems.map((item) => {
-              const isDisabled = disabledItems.includes(item.key)
-              return (
-                <Grid item key={item.key} direction="column" sx={{ mb: 2 }}>
-                  <SourceDraggable
-                    key={item.key}
-                    id={item.key}
-                    icon={item.icon}
-                    label={item.label}
-                    disabled={isDisabled}>
-                    <IconButton
-                      draggable={false}
-                      onPointerDown={(e) => {
-                        e.stopPropagation()
-                        e.preventDefault()
-                      }}
-                      onMouseDown={(e) => {
-                        e.stopPropagation()
-                        e.preventDefault()
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        e.preventDefault()
-                        handleToggleDisable(item.key)
-                      }}
-                      size="small"
-                      sx={{ color: 'text.secondary' }}>
-                      {isDisabled ? (
-                        <ReplayIcon fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
-                      ) : (
-                        <BlockIcon fontSize="medium" />
-                      )}
-                    </IconButton>
-                  </SourceDraggable>
-                </Grid>
-              )
-            })}
-          </Grid>
-        </Grid>
-        <Grid item xs={1} />
-        {/* Right Column: Droppable Container */}
-        <Grid item xs={7} sx={{ width: '100%' }}>
-          <Grid item>
-            <Typography variant="h6">Order the Items</Typography>
-          </Grid>
-          <Grid item>
-            <Box height={24} />
-          </Grid>
-          <Grid item sx={{ height: '100%' }}>
-            <Droppable id="droppable-container">
-              <SortableContext items={orderedItems} strategy={verticalListSortingStrategy}>
-                {orderedItems.map((key, index) => {
-                  const item = classificationItems.find((ci) => ci.key === key)
-                  return item ? (
-                    <SortableItem key={item.key} id={item.key} icon={item.icon}>
-                      <Grid container alignItems="center" justifyContent="space-between" style={{ width: '100%' }}>
-                        <Grid item>
-                          <Typography variant="body1">{item.label}</Typography>
-                        </Grid>
-                        <Grid item>
-                          <Grid container alignItems="center" spacing={1}>
-                            <Grid item>
-                              <PositionBadge>{index + 1}</PositionBadge>
-                            </Grid>
-                            <Grid item>
-                              <IconButton
-                                draggable={false}
-                                onPointerDown={(e) => {
-                                  e.stopPropagation()
-                                  e.preventDefault()
-                                }}
-                                onMouseDown={(e) => {
-                                  e.stopPropagation()
-                                  e.preventDefault()
-                                }}
-                                onClick={(e) => {
-                                  e.stopPropagation()
-                                  e.preventDefault()
-                                  handleResetItem(item.key)
-                                }}
-                                size="small"
-                                sx={{ color: 'text.secondary' }}>
-                                <CloseIcon fontSize="small" />
-                              </IconButton>
+          <Grid item xs={1} />
+          {/* Right Column: Droppable Container */}
+          <Grid item xs={7} sx={{ width: '100%' }}>
+            <Grid item>
+              <Typography variant="h6">Order the Items</Typography>
+            </Grid>
+            <Grid item>
+              <Box height={24} />
+            </Grid>
+            <Grid item sx={{ height: '100%' }}>
+              <Droppable id="droppable-container">
+                <SortableContext items={orderedItems} strategy={verticalListSortingStrategy}>
+                  {orderedItems.map((key, index) => {
+                    const item = classificationItems.find((ci) => ci.key === key)
+                    return item ? (
+                      <SortableItem key={item.key} id={item.key} icon={item.icon}>
+                        <Grid container alignItems="center" justifyContent="space-between" style={{ width: '100%' }}>
+                          <Grid item>
+                            <Typography variant="body1">{item.label}</Typography>
+                          </Grid>
+                          <Grid item>
+                            <Grid container alignItems="center" spacing={1}>
+                              <Grid item>
+                                <PositionBadge>{index + 1}</PositionBadge>
+                              </Grid>
+                              <Grid item>
+                                <IconButton
+                                  draggable={false}
+                                  onPointerDown={(e) => {
+                                    e.stopPropagation()
+                                    e.preventDefault()
+                                  }}
+                                  onMouseDown={(e) => {
+                                    e.stopPropagation()
+                                    e.preventDefault()
+                                  }}
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    e.preventDefault()
+                                    handleResetItem(item.key)
+                                  }}
+                                  size="small"
+                                  sx={{ color: 'text.secondary' }}>
+                                  <CloseIcon fontSize="small" />
+                                </IconButton>
+                              </Grid>
                             </Grid>
                           </Grid>
                         </Grid>
-                      </Grid>
-                    </SortableItem>
-                  ) : null
-                })}
-              </SortableContext>
-            </Droppable>
+                      </SortableItem>
+                    ) : null
+                  })}
+                </SortableContext>
+              </Droppable>
+            </Grid>
           </Grid>
         </Grid>
-        <Grid container justifyContent="space-between" sx={{ mt: 2, width: '100%' }}>
+        <Grid container justifyContent="space-between" sx={{ width: '100%' }}>
           <Fab id="reset-order-default-learning-path" color="error" onClick={handleRemoveAll}>
             <ReplayIcon />
           </Fab>
