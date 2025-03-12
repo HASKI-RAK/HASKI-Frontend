@@ -55,7 +55,7 @@ const DroppableContainer = styled(Paper, {
   justifyContent: 'flex-start',
   border: `2px dashed ${theme.palette.divider}`,
   backgroundColor: isover ? theme.palette.action.hover : theme.palette.background.paper,
-  gap: theme.spacing(2),
+  gap: 0, //theme.spacing(2),
   borderRadius: theme.shape.borderRadius
 }))
 
@@ -329,7 +329,12 @@ const CreateDefaultLearningPath: React.FC = () => {
                   <Grid item key={item.key}>
                     <Grid container alignItems="center" spacing={1}>
                       <Grid item xs>
-                        <SourceDraggable id={item.key} icon={item.icon} label={item.label} disabled={isDisabled}>
+                        <SourceDraggable
+                          key={item.key}
+                          id={item.key}
+                          icon={item.icon}
+                          label={item.label}
+                          disabled={isDisabled}>
                           <IconButton
                             draggable={false}
                             onPointerDown={(e) => {
