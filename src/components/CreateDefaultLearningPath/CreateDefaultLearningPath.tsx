@@ -30,6 +30,7 @@ import { Box, Button, Fab, Grid, IconButton, Modal, Paper, Typography } from '@m
 import { styled } from '@mui/material/styles'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Close } from '@common/icons'
 
 // ----- Styled Components -----
 const DraggableContainer = styled(Paper)(({ theme }) => ({
@@ -48,7 +49,7 @@ const DroppableContainer = styled(Paper, {
   shouldForwardProp: (prop) => prop !== 'isover'
 })<{ isover: boolean }>(({ theme, isover }) => ({
   width: '100%',
-  height: 600,
+  height: '90%',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'stretch',
@@ -295,83 +296,72 @@ const CreateDefaultLearningPath: React.FC = () => {
   const activeItem = classificationItems.find((item) => item.key === activeId)
 
   return (
-    <Box
-      sx={{
-        position: 'absolute',
-        left: '12%',
-        right: '12%',
-        top: '10%',
-        overflow: 'auto',
-        height: '70%',
-        width: '80%',
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
-        boxShadow: 24,
-        p: 2
-      }}>
-      <DndContext
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-        onDragStart={handleDragStart}
-        onDragOver={handleDragOver}
-        onDragCancel={() => setActiveId(null)}>
-        <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
-        <Grid container sx={{ width: '100%' }}>
-          {/* Left Column: Unassigned Items with Toggle Disable Button */}
-          <Grid item xs={4}>
-            <Typography variant="h6" sx={{ mb: 2 }}>
-              Classification Items
-            </Typography>
-            <Grid container direction="column" spacing={2}>
-              {unassignedItems.map((item) => {
-                const isDisabled = disabledItems.includes(item.key)
-                return (
-                  <Grid item key={item.key}>
-                    <Grid container alignItems="center" spacing={1}>
-                      <Grid item xs>
-                        <SourceDraggable
-                          key={item.key}
-                          id={item.key}
-                          icon={item.icon}
-                          label={item.label}
-                          disabled={isDisabled}>
-                          <IconButton
-                            draggable={false}
-                            onPointerDown={(e) => {
-                              e.stopPropagation()
-                              e.preventDefault()
-                            }}
-                            onMouseDown={(e) => {
-                              e.stopPropagation()
-                              e.preventDefault()
-                            }}
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              e.preventDefault()
-                              handleToggleDisable(item.key)
-                            }}
-                            size="small"
-                            sx={{ color: 'text.secondary' }}>
-                            {isDisabled ? (
-                              <ReplayIcon fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
-                            ) : (
-                              <BlockIcon fontSize="medium" />
-                            )}
-                          </IconButton>
-                        </SourceDraggable>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                )
-              })}
-            </Grid>
+    <DndContext
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragCancel={() => setActiveId(null)}>
+      <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
+      <Grid container sx={{ width: '100%', height: '90%' }}>
+        {/* Left Column: Unassigned Items with Toggle Disable Button */}
+        <Grid item direction={'row'} xs={4} sx={{ height: '100%' }}>
+          <Grid item>
+            <Typography variant="h6">Classification Items</Typography>
           </Grid>
-          <Grid item xs={1} />
-          {/* Right Column: Droppable Container */}
-          <Grid item xs={7} sx={{ width: '100%' }}>
-            <Typography variant="h6" sx={{ mb: 2 }}>
-              Order the Items
-            </Typography>
+          <Grid item>
+            <Box height={24} />
+          </Grid>
+          <Grid item>
+            {unassignedItems.map((item) => {
+              const isDisabled = disabledItems.includes(item.key)
+              return (
+                <Grid item key={item.key} direction="column" sx={{ mb: 2 }}>
+                  <SourceDraggable
+                    key={item.key}
+                    id={item.key}
+                    icon={item.icon}
+                    label={item.label}
+                    disabled={isDisabled}>
+                    <IconButton
+                      draggable={false}
+                      onPointerDown={(e) => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                      }}
+                      onMouseDown={(e) => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        handleToggleDisable(item.key)
+                      }}
+                      size="small"
+                      sx={{ color: 'text.secondary' }}>
+                      {isDisabled ? (
+                        <ReplayIcon fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
+                      ) : (
+                        <BlockIcon fontSize="medium" />
+                      )}
+                    </IconButton>
+                  </SourceDraggable>
+                </Grid>
+              )
+            })}
+          </Grid>
+        </Grid>
+        <Grid item xs={1} />
+        {/* Right Column: Droppable Container */}
+        <Grid item xs={7} sx={{ width: '100%' }}>
+          <Grid item>
+            <Typography variant="h6">Order the Items</Typography>
+          </Grid>
+          <Grid item>
+            <Box height={24} />
+          </Grid>
+          <Grid item sx={{ height: '100%' }}>
             <Droppable id="droppable-container">
               <SortableContext items={orderedItems} strategy={verticalListSortingStrategy}>
                 {orderedItems.map((key, index) => {
@@ -417,39 +407,55 @@ const CreateDefaultLearningPath: React.FC = () => {
               </SortableContext>
             </Droppable>
           </Grid>
-          <Grid container justifyContent="space-between" sx={{ mt: 2, width: '100%' }}>
-            <Fab id="reset-order-default-learning-path" color="error" onClick={handleRemoveAll}>
-              <ReplayIcon />
-            </Fab>
-            <Button variant="contained" disabled={!isSubmitActive} onClick={handleSubmit}>
-              Submit
-            </Button>
-          </Grid>
         </Grid>
-      </DndContext>
-    </Box>
+        <Grid container justifyContent="space-between" sx={{ mt: 2, width: '100%' }}>
+          <Fab id="reset-order-default-learning-path" color="error" onClick={handleRemoveAll}>
+            <ReplayIcon />
+          </Fab>
+          <Button variant="contained" disabled={!isSubmitActive} onClick={handleSubmit}>
+            Submit
+          </Button>
+        </Grid>
+      </Grid>
+    </DndContext>
   )
 }
 
-const modalStyle = {
-  position: 'absolute',
-  left: '12%',
-  right: '12%',
-  top: '10%',
-  overflow: 'auto',
-  height: '70%',
-  width: '80%',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 2
+type DefaultLearningPathModalProps = {
+  open?: boolean
+  handleClose: (event: object, reason: string) => void
 }
 
-const DefaultLearningPathModal: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(true)
+const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearningPathModalProps) => {
   return (
-    <Modal open={open} onClose={() => setOpen(false)}>
-      <CreateDefaultLearningPath />
+    <Modal open={open} onClose={handleClose}>
+      <Box
+        sx={{
+          position: 'absolute',
+          left: '12%',
+          right: '12%',
+          top: '10%',
+          overflow: 'auto',
+          height: '70%',
+          width: '80%',
+          bgcolor: 'background.paper',
+          border: '2px solid #000',
+          boxShadow: 24,
+          p: 2
+        }}>
+        <Fab
+          id="close-default-learning-path-modal-button"
+          color="primary"
+          onClick={() => handleClose({} as object, 'backdropClick')}
+          style={{
+            position: 'absolute',
+            top: '1%',
+            left: '94.5%'
+          }}>
+          <Close />
+        </Fab>
+        <CreateDefaultLearningPath />
+      </Box>
     </Modal>
   )
 }

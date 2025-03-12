@@ -34,6 +34,7 @@ import {
   TableListKQuestions
 } from '@components'
 import { AuthContext } from '@services'
+import DefaultLearningPathModal from '../CreateDefaultLearningPath/CreateDefaultLearningPath'
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -53,6 +54,7 @@ const MenuBar = () => {
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
   const [modalOpenListK, setModalOpenListK] = useState(false)
+  const [modalOpenDefaultLearningPath, setModalOpenDefaultLearningPath] = useState(false)
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [successSendILSShort, setSuccessSendILSShort] = useState(false)
   const [successSendListK, setSuccessSendListK] = useState(false)
@@ -91,6 +93,11 @@ const MenuBar = () => {
     setAnchorElUser(null)
   }
 
+  const handleOpenDefaultLearningPath = () => {
+    setModalOpenDefaultLearningPath(true)
+    setAnchorElUser(null)
+  }
+
   const handleCloseListKModal = (_: object, reason: string) => {
     if (!successSendListK) {
       if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenListK(false)
@@ -98,6 +105,10 @@ const MenuBar = () => {
       window.location.reload()
       setModalOpenListK(false)
     }
+  }
+
+  const handleCloseDefaultLearningPath = () => {
+    setModalOpenDefaultLearningPath(false)
   }
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -300,6 +311,19 @@ const MenuBar = () => {
               <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>
                 <TableListKQuestions successSend={successSendListK} setSuccessSend={setSuccessSendListK} />
               </QuestionnaireQuestionsModal>
+
+              {isAuth && (
+                <MenuItem id="default-learningpath-menu-item" onClick={() => handleOpenDefaultLearningPath()}>
+                  <ListItemIcon>
+                    <PlaylistAddCheckCircleOutlined fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{'Set Default Learning Path'}</Typography>
+                </MenuItem>
+              )}
+              <DefaultLearningPathModal
+                open={modalOpenDefaultLearningPath}
+                handleClose={handleCloseDefaultLearningPath}
+              />
 
               <MenuItem
                 id="login-logout-menu-item"

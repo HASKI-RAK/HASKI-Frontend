@@ -9,7 +9,6 @@ import { CreateCourseModal } from '@components'
 import { Course } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import DefaultLearningPathModal from '../../components/CreateDefaultLearningPath/CreateDefaultLearningPath'
 
 /**
  * # Home Page
@@ -172,7 +171,6 @@ export const Home = () => {
         ) : (
           courseCards(courses)
         )}
-        <DefaultLearningPathModal />
         {isCourseCreatorRole && courseCreatorView()}
       </Grid>
     </Grid>
