@@ -57,7 +57,9 @@ const CreateLearningElement = () => {
         variant="contained"
         color="primary"
         sx={{ alignSelf: 'end', marginTop: '0.6rem' }}
-        onClick={() => setCreateLearningElementModalOpen(true)}>
+        onClick={useCallback(() => {
+          setCreateLearningElementModalOpen(true)
+        }, [setCreateLearningElementModalOpen])}>
         {t('components.CreateLearningElement.createLearningElement')}
       </Button>
       <CreateLearningElementModal
