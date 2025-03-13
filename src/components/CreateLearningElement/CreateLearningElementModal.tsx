@@ -12,7 +12,7 @@ import {
 import { LearningPathElement, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import { useCreateTopicModal } from '../CreateTopic/Modal/CreateTopicModal.hooks'
+import { useCreateTopicModal } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal.hooks'
 
 export type CreateTopicModalProps = {
   openCreateTopicModal?: boolean
@@ -182,7 +182,9 @@ const CreateLearningElementModal = ({
                   topicId,
                   courseId
                 ).then(() => {
-                  handleCloseCreateTopicModal()
+                  setTimeout(() => {
+                    handleCloseCreateTopicModal()
+                  }, 3000)
                 })
               }
               handleLearningElementClassification={handleLearningElementClassification}

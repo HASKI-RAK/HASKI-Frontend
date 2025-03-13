@@ -1,9 +1,8 @@
 import { memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
-import { CreateLearningElementClassificationTable } from '@components'
+import { CreateLearningElementClassificationTable, RemoteLearningElementWithClassification } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
-import { RemoteLearningElementWithClassification } from './CreateTopicModal'
 
 type CreateLearningElementClassificationsStepProps = {
   selectedTopics: RemoteTopics[]
@@ -34,7 +33,7 @@ const CreateLearningElementClassificationsStep = ({
     onNext()
     setTimeout(() => {
       setIsNextDisabled(false)
-    }, 1000)
+    }, 3500)
   }
 
   return (
