@@ -9,12 +9,18 @@ import { RemoteLearningElement } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import CreateLearningElementModal from './CreateLearningElementModal'
 
+jest.useFakeTimers()
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: jest.fn()
 }))
 
 describe('CreateLearningElementModal Component', () => {
+  beforeEach(() => {
+    jest.clearAllTimers()
+  })
+
   const addSnackbarMock = jest.fn()
   const mockAddSnackbar = {
     snackbarsErrorWarning: [],
@@ -308,6 +314,11 @@ describe('CreateLearningElementModal Component', () => {
 
     const nextButton = getByText(/createLearningElements/i)
     fireEvent.click(nextButton)
+
+    act(() => {
+      // Replace runAllTimers with a more controlled approach
+      jest.advanceTimersByTime(5000) // Adjust timing as needed
+    })
 
     await waitFor(() => {
       expect(mockHandleCloseCreateTopicModal).toHaveBeenCalled()

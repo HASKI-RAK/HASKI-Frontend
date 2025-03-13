@@ -182,9 +182,7 @@ const CreateLearningElementModal = ({
                   topicId,
                   courseId
                 ).then(() => {
-                  setTimeout(() => {
-                    handleCloseCreateTopicModal()
-                  }, 3000)
+                  handleCloseCreateTopicModal()
                 })
               }
               handleLearningElementClassification={handleLearningElementClassification}

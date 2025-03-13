@@ -33,7 +33,7 @@ const CreateLearningElementClassificationsStep = ({
     onNext()
     setTimeout(() => {
       setIsNextDisabled(false)
-    }, 3500)
+    }, 1000)
   }
 
   return (
