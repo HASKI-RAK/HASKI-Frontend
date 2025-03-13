@@ -364,7 +364,7 @@ const CreateDefaultLearningPath: React.FC = () => {
                   const item = classificationItems.find((ci) => ci.key === key)
                   return item ? (
                     <SortableItem key={item.key} id={item.key} icon={item.icon} label={item.label}>
-                      <Grid container direction={'row'} justifyContent={'space-between'}>
+                      <Grid container direction={'row'} justifyContent={'space-around'}>
                         <PositionBadge>{index + 1}</PositionBadge>
                         <IconButton
                           draggable={false}
