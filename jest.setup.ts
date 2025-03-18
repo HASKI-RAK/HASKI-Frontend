@@ -57,6 +57,7 @@ const mockDataServices: MockDataServices = {
       university: 'HS Kempten'
     })
   ),
+  fetchDisabledClassifications: jest.fn(() => Promise.resolve(['KÜ', 'EK'])),
   fetchLearningPathElement: jest.fn(() =>
     Promise.resolve({
       id: 1,

@@ -1,8 +1,8 @@
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
-import { CheckBox, Feedback } from '@common/icons'
+import { Box, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
+import { CheckBox, Feedback, Warning } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import { getConfig } from '@shared'
 
@@ -54,7 +54,42 @@ const BasicNode = ({ id, children = <Feedback sx={{ fontSize: 50 }} />, data }: 
         {data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
-      {data.isDone && (
+      {data.isDisabled ? (
+        <Tooltip title="Classification is not set in the Default Learning Path">
+          <Box
+            sx={{
+              position: 'absolute',
+              top: -20,
+              right: -20,
+              width: 40,
+              height: 40
+            }}>
+            {/* The Typography component is used to "color" the ! inside the Warning Icon White */}
+            <Typography
+              variant="h4"
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                color: 'white',
+                fontWeight: 'bold',
+                lineHeight: 1
+              }}>
+              |
+            </Typography>
+            <Warning
+              sx={{
+                fontSize: 40,
+                color: (theme) => theme.palette.error.main,
+                position: 'absolute',
+                top: 0,
+                left: 0
+              }}
+            />
+          </Box>
+        </Tooltip>
+      ) : data.isDone ? (
         <Tooltip title={t('tooltip.completed')}>
           <CheckBox
             viewBox={'3 -3 24 24'}
@@ -69,7 +104,7 @@ const BasicNode = ({ id, children = <Feedback sx={{ fontSize: 50 }} />, data }: 
             }}
           />
         </Tooltip>
-      )}
+      ) : null}
     </NodeWrapper>
   )
 }
