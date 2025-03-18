@@ -22,7 +22,8 @@ import {
   Login,
   Logout,
   Person,
-  PlaylistAddCheckCircleOutlined
+  PlaylistAddCheckCircleOutlined,
+  Polyline
 } from '@common/icons'
 import {
   CourseMenu,
@@ -315,9 +316,9 @@ const MenuBar = () => {
               {isAuth && (
                 <MenuItem id="default-learningpath-menu-item" onClick={() => handleOpenDefaultLearningPath()}>
                   <ListItemIcon>
-                    <PlaylistAddCheckCircleOutlined fontSize="small" />
+                    <Polyline fontSize="small" />
                   </ListItemIcon>
-                  <Typography textAlign="center">{'Set Default Learning Path'}</Typography>
+                  <Typography textAlign="center">{'Fester Lernpfad'}</Typography>
                 </MenuItem>
               )}
               <DefaultLearningPathModal

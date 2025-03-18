@@ -11,26 +11,28 @@ import {
 } from '@dnd-kit/core'
 import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import AcUnitIcon from '@mui/icons-material/AcUnit'
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
-import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
-import AirportShuttleIcon from '@mui/icons-material/AirportShuttle'
-import AllInboxIcon from '@mui/icons-material/AllInbox'
-import BlockIcon from '@mui/icons-material/Block'
-import CloseIcon from '@mui/icons-material/Close'
-import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
-import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions'
-import FingerprintIcon from '@mui/icons-material/Fingerprint'
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter'
-import ReplayIcon from '@mui/icons-material/Replay'
-import WhatshotIcon from '@mui/icons-material/Whatshot'
-import { Box, Button, Fab, Grid, IconButton, Modal, Paper, Typography } from '@mui/material'
-import { styled } from '@mui/material/styles'
-import React, { useMemo, useState } from 'react'
+import { ReactNode } from 'react'
+import React, { ReactElement, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Close } from '@common/icons'
+import { Box, Button, Fab, Grid, IconButton, Modal, Paper, Typography } from '@common/components'
+import {
+  Article,
+  Assignment,
+  AssignmentInd,
+  AssignmentLate,
+  Block,
+  Close,
+  Description,
+  Feedback,
+  Flag,
+  Forum,
+  Replay,
+  SettingsApplications,
+  ShortText,
+  TipsAndUpdates,
+  Videocam
+} from '@common/icons'
+import { styled } from '@common/theme'
 
 // ----- Styled Components -----
 const DraggableContainer = styled(Paper)(({ theme }) => ({
@@ -73,26 +75,25 @@ const PositionBadge = styled(Paper)(({ theme }) => ({
   fontWeight: 'bold'
 }))
 
-// ----- Types -----
-interface ClassificationItem {
+type ClassificationItem = {
   key: string
   name: string
   disabled?: boolean
   label?: string
-  icon?: JSX.Element
+  icon?: ReactElement
 }
 
-interface DraggableProps {
+type DraggableProps = {
   id: UniqueIdentifier
-  children: React.ReactNode
+  children: ReactNode
   label?: string
-  icon?: React.ReactNode
+  icon?: ReactNode
   disabled?: boolean
 }
 
 // ----- Source Draggable (Left Column) -----
 // Added a "disabled" prop to conditionally apply styling and disable drag events.
-export const SourceDraggable: React.FC<DraggableProps> = ({ id, children, label, icon, disabled }) => {
+export const SourceDraggable = ({ id, children, label, icon, disabled }: DraggableProps) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id })
   const style = {
     transform: transform ? CSS.Translate.toString(transform) : undefined,
@@ -125,7 +126,7 @@ export const SourceDraggable: React.FC<DraggableProps> = ({ id, children, label,
 }
 
 // ----- Sortable Item (Inside Droppable) -----
-export const SortableItem: React.FC<DraggableProps> = ({ id, children, icon, label }) => {
+export const SortableItem = ({ id, children, icon, label }: DraggableProps) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
   const style = {
     transform: transform ? CSS.Transform.toString(transform) : undefined,
@@ -151,7 +152,7 @@ export const SortableItem: React.FC<DraggableProps> = ({ id, children, icon, lab
 }
 
 // ----- Droppable Container -----
-export const Droppable: React.FC<{ id: UniqueIdentifier; children: React.ReactNode }> = ({ id, children }) => {
+export const Droppable = ({ id, children }: { id: UniqueIdentifier; children: ReactNode }) => {
   const { isOver, setNodeRef } = useDroppable({ id })
   return (
     <DroppableContainer ref={setNodeRef} isover={isOver} id={id as string}>
@@ -160,8 +161,12 @@ export const Droppable: React.FC<{ id: UniqueIdentifier; children: React.ReactNo
   )
 }
 
+type DragPreviewProps = {
+  item: ClassificationItem
+}
+
 // ----- Drag Preview Component -----
-const DragPreview: React.FC<{ item: ClassificationItem }> = ({ item }) => (
+const DragPreview = ({ item }: DragPreviewProps) => (
   <DraggableContainer>
     <Grid container alignItems="center" spacing={0}>
       <Grid item xs={0.5} />
@@ -177,8 +182,7 @@ const DragPreview: React.FC<{ item: ClassificationItem }> = ({ item }) => (
   </DraggableContainer>
 )
 
-// ----- Main Component -----
-const CreateDefaultLearningPath: React.FC = () => {
+const CreateDefaultLearningPath = () => {
   const { t } = useTranslation()
 
   // Retrieve classification items from translations.
@@ -189,26 +193,26 @@ const CreateDefaultLearningPath: React.FC = () => {
   }, [t])
 
   // Map icons to classification keys.
-  const iconMapping: Record<string, JSX.Element> = {
-    LZ: <DragIndicatorIcon />,
-    KÜ: <AcUnitIcon />,
-    FO: <AccountCircleIcon />,
-    EK: <AccessAlarmIcon />,
-    AN: <AccessibilityNewIcon />,
-    BE: <AddShoppingCartIcon />,
-    AB: <AirportShuttleIcon />,
-    ÜB: <AllInboxIcon />,
-    SE: <EmojiEmotionsIcon />,
-    ZL: <FingerprintIcon />,
-    ZF: <FitnessCenterIcon />,
-    RQ: <WhatshotIcon />
+  const iconMapping: Record<string, ReactElement> = {
+    LZ: <Flag />,
+    KÜ: <ShortText />,
+    FO: <Forum />,
+    EK: <TipsAndUpdates />,
+    AN: <Videocam />,
+    BE: <Assignment />,
+    AB: <SettingsApplications />,
+    ÜB: <AssignmentLate />,
+    SE: <AssignmentInd />,
+    ZL: <Article />,
+    ZF: <Description />,
+    RQ: <Feedback />
   }
 
   const classificationItems = useMemo(() => {
     return learningElementClassifications.map((item) => ({
       ...item,
       label: item.name,
-      icon: iconMapping[item.key] || <DragIndicatorIcon />
+      icon: iconMapping[item.key]
     }))
   }, [learningElementClassifications, iconMapping])
 
@@ -341,9 +345,9 @@ const CreateDefaultLearningPath: React.FC = () => {
                       size="small"
                       sx={{ color: 'text.secondary' }}>
                       {isDisabled ? (
-                        <ReplayIcon fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
+                        <Replay fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
                       ) : (
-                        <BlockIcon fontSize="medium" />
+                        <Block fontSize="medium" />
                       )}
                     </IconButton>
                   </SourceDraggable>
@@ -383,7 +387,7 @@ const CreateDefaultLearningPath: React.FC = () => {
                           }}
                           size="small"
                           sx={{ color: 'text.secondary' }}>
-                          <CloseIcon fontSize="small" />
+                          <Close fontSize="small" />
                         </IconButton>
                       </Grid>
                     </SortableItem>
@@ -398,7 +402,7 @@ const CreateDefaultLearningPath: React.FC = () => {
         </Grid>
         <Grid container justifyContent="space-between" alignItems="flex-end" sx={{ width: '100%' }}>
           <Fab id="reset-order-default-learning-path" color="error" onClick={handleRemoveAll}>
-            <ReplayIcon />
+            <Replay />
           </Fab>
           <Button variant="contained" disabled={!isSubmitActive} onClick={handleSubmit}>
             Submit
