@@ -11,6 +11,7 @@ import {
 } from '@dnd-kit/core'
 import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { ListItemIcon } from '@mui/material'
 import { ReactNode } from 'react'
 import React, { ReactElement, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -51,8 +52,8 @@ const DroppableContainer = styled(Paper, {
   shouldForwardProp: (prop) => prop !== 'isover'
 })<{ isover: boolean }>(({ theme, isover }) => ({
   width: '100%',
-  height: '90%',
-  minHeight: 680,
+  height: '100%',
+  minHeight: 450,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'stretch',
@@ -92,7 +93,6 @@ type DraggableProps = {
 }
 
 // ----- Source Draggable (Left Column) -----
-// Added a "disabled" prop to conditionally apply styling and disable drag events.
 export const SourceDraggable = ({ id, children, label, icon, disabled }: DraggableProps) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id })
   const style = {
@@ -151,7 +151,7 @@ export const SortableItem = ({ id, children, icon, label }: DraggableProps) => {
   )
 }
 
-// ----- Droppable Container -----
+// ----- Droppable Container (Right Column) -----
 export const Droppable = ({ id, children }: { id: UniqueIdentifier; children: ReactNode }) => {
   const { isOver, setNodeRef } = useDroppable({ id })
   return (
@@ -310,66 +310,32 @@ const CreateDefaultLearningPath = () => {
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDragCancel={() => setActiveId(null)}>
-      <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
-      <Grid container sx={{ height: '100%' }}>
-        <Grid container sx={{ width: '100%', height: '90%' }}>
-          {/* Left Column: Unassigned Items with Toggle Disable Button */}
-          <Grid item direction={'row'} xs={4} sx={{ height: '100%' }}>
-            <Typography variant="h6">Classification Items</Typography>
-            <Box height={24} />
-            {unassignedItems.map((item) => {
-              const isDisabled = disabledItems.includes(item.key)
-              return (
-                <Grid item key={item.key} direction="column">
-                  <SourceDraggable
-                    key={item.key}
-                    id={item.key}
-                    icon={item.icon}
-                    label={item.label}
-                    disabled={isDisabled}>
-                    <IconButton
-                      draggable={false}
-                      onPointerDown={(e) => {
-                        e.stopPropagation()
-                        e.preventDefault()
-                      }}
-                      onMouseDown={(e) => {
-                        e.stopPropagation()
-                        e.preventDefault()
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        e.preventDefault()
-                        handleToggleDisable(item.key)
-                      }}
-                      size="small"
-                      sx={{ color: 'text.secondary' }}>
-                      {isDisabled ? (
-                        <Replay fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
-                      ) : (
-                        <Block fontSize="medium" />
-                      )}
-                    </IconButton>
-                  </SourceDraggable>
-                  <Box height={12} />
-                </Grid>
-              )
-            })}
-          </Grid>
-          {/* Spacing between the Columns*/}
-          <Grid item xs={1} />
-          {/* Right Column: Droppable Container */}
-          <Grid item xs={7} sx={{ width: '100%' }}>
-            <Typography variant="h6">Order the Items</Typography>
-            <Box height={24} />
-            <Droppable id="droppable-container">
-              <SortableContext items={orderedItems} strategy={verticalListSortingStrategy}>
-                {orderedItems.map((key, index) => {
-                  const item = classificationItems.find((ci) => ci.key === key)
-                  return item ? (
-                    <SortableItem key={item.key} id={item.key} icon={item.icon} label={item.label}>
-                      <Grid container direction={'row'} justifyContent={'space-around'}>
-                        <PositionBadge>{index + 1}</PositionBadge>
+      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
+        <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
+        <Box
+          sx={{
+            // Create space for buttons at bottom
+            flex: 1,
+            paddingBottom: (theme) => theme.spacing(10),
+            width: '100%',
+            overflowY: 'auto'
+          }}>
+          <Grid container item sx={{ width: '100%', height: '100%' }}>
+            {/* Left Column: Unassigned Items with Toggle Disable Button */}
+            <Grid item direction={'row'} xs={4} sx={{ height: '100%' }}>
+              <Typography variant="h6">Classification Items</Typography>
+              <Box height={24} />
+              {unassignedItems.map((item) => {
+                const isDisabled = disabledItems.includes(item.key)
+                return (
+                  <Grid item key={item.key} direction="column">
+                    <Grid item>
+                      <SourceDraggable
+                        key={item.key}
+                        id={item.key}
+                        icon={item.icon}
+                        label={item.label}
+                        disabled={isDisabled}>
                         <IconButton
                           draggable={false}
                           onPointerDown={(e) => {
@@ -383,32 +349,104 @@ const CreateDefaultLearningPath = () => {
                           onClick={(e) => {
                             e.stopPropagation()
                             e.preventDefault()
-                            handleResetItem(item.key)
+                            handleToggleDisable(item.key)
                           }}
                           size="small"
                           sx={{ color: 'text.secondary' }}>
-                          <Close fontSize="small" />
+                          {isDisabled ? (
+                            <Replay fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
+                          ) : (
+                            <Block fontSize="medium" />
+                          )}
                         </IconButton>
-                      </Grid>
-                    </SortableItem>
-                  ) : null
-                })}
-              </SortableContext>
-            </Droppable>
+                      </SourceDraggable>
+                    </Grid>
+                    <Grid item>
+                      <Box height={12} />
+                    </Grid>
+                  </Grid>
+                )
+              })}
+            </Grid>
+            {/* Spacing between the Columns*/}
+            <Grid item xs={1} />
+            {/* Right Column: Droppable Container */}
+            <Grid item xs={6.5} sx={{ width: '100%' }}>
+              <Grid item>
+                <Typography variant="h6">Order the Items</Typography>
+              </Grid>
+              <Grid item>
+                <Box height={24} />
+              </Grid>
+              <Grid item sx={{ height: '100%' }}>
+                <Droppable id="droppable-container">
+                  <SortableContext items={orderedItems} strategy={verticalListSortingStrategy}>
+                    {orderedItems.map((key, index) => {
+                      const item = classificationItems.find((ci) => ci.key === key)
+                      return item ? (
+                        <SortableItem key={item.key} id={item.key} icon={item.icon} label={item.label}>
+                          <Grid container direction={'row'} justifyContent={'space-around'}>
+                            <PositionBadge>{index + 1}</PositionBadge>
+                            <IconButton
+                              draggable={false}
+                              onPointerDown={(e) => {
+                                e.stopPropagation()
+                                e.preventDefault()
+                              }}
+                              onMouseDown={(e) => {
+                                e.stopPropagation()
+                                e.preventDefault()
+                              }}
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                e.preventDefault()
+                                handleResetItem(item.key)
+                              }}
+                              size="small"
+                              sx={{ color: 'text.secondary' }}>
+                              <Close fontSize="small" />
+                            </IconButton>
+                          </Grid>
+                        </SortableItem>
+                      ) : null
+                    })}
+                  </SortableContext>
+                </Droppable>
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
         <Grid container>
           <Box height={16} />
         </Grid>
-        <Grid container justifyContent="space-between" alignItems="flex-end" sx={{ width: '100%' }}>
-          <Fab id="reset-order-default-learning-path" color="error" onClick={handleRemoveAll}>
-            <Replay />
-          </Fab>
-          <Button variant="contained" disabled={!isSubmitActive} onClick={handleSubmit}>
-            Submit
-          </Button>
-        </Grid>
-      </Grid>
+        <Box
+          sx={{
+            padding: (theme) => theme.spacing(1, 0),
+            backgroundColor: (theme) => theme.palette.background.paper,
+            borderTop: (theme) => `1px solid ${theme.palette.divider}`,
+            zIndex: 10
+          }}>
+          <Grid container justifyContent="space-between" alignItems="flex-end">
+            <Button
+              id="reset-order-default-learning-path"
+              variant="contained"
+              sx={{ bgcolor: (theme) => theme.palette.error.light }}
+              onClick={handleRemoveAll}>
+              <ListItemIcon>
+                <Replay fontSize="small" />
+              </ListItemIcon>
+              <Typography textAlign="center">{t('Reset')}</Typography>
+            </Button>
+            <Button
+              id="submit-default-learning-path"
+              variant="contained"
+              disabled={!isSubmitActive}
+              onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Grid>
+        </Box>
+      </Box>
     </DndContext>
   )
 }
@@ -424,12 +462,12 @@ const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearning
       <Box
         sx={{
           position: 'absolute',
-          left: '12%',
-          right: '12%',
+          left: '9%',
+          right: '9%',
           top: '10%',
-          overflow: 'auto',
           height: '70%',
           width: '80%',
+          overflow: 'auto',
           bgcolor: 'background.paper',
           border: '2px solid #000',
           boxShadow: 24,
