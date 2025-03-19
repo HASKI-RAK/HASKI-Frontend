@@ -33,7 +33,7 @@ export type RemoteLearningElementWithClassification = RemoteLearningElement & {
 export type RemoteLearningElementWithSolution = {
   learningElementLmsId: number
   learningElementName: string
-  solutionLmsId?: number
+  solutionLmsId: number
 }
 
 export type Solution = {
@@ -292,7 +292,6 @@ const CreateTopicModal = memo(
               <Grid container item>
                 <CreateLearningElementSolutionTable
                   selectedTopics={selectedTopics}
-                  LearningElements={selectedLearningElements}
                   LearningElementsClassification={selectedLearningElementsClassification}
                   selectedSolutions={selectedSolutions}
                   learningElementsWithSolutions={selectedLearningElementSolution}
@@ -311,16 +310,19 @@ const CreateTopicModal = memo(
                         id="create-topic-modal-available-learning-element-classification-next-button"
                         variant="contained"
                         color="primary"
-                        //disabled={
-                        //  //Every Solution has to be used
-                        //  !selectedTopics.every(
-                        //    (topic) => 
-                        //      selectedSolutions[topic.topic_lms_id].every(
-                        //        (solution) => selectedLearningElementSolution[topic.topic_lms_id].some(
-                        //          (element) => element.solutionLmsId === solution.solutionLmsId
-                        //      )
-                        //    ))
-                        //}
+                        disabled={
+                          // Every Solution has to be used
+                          !selectedTopics.every(
+                            (topic) =>
+                              selectedSolutions[topic.topic_lms_id].every(
+                                (solution) =>
+                                  selectedLearningElementSolution[topic.topic_lms_id] &&
+                                  selectedLearningElementSolution[topic.topic_lms_id].some(
+                                    (element) => element.solutionLmsId === solution.solutionLmsId
+                                  )
+                              )
+                          )
+                        }
                         sx={{ mr: -2 }}
                         onClick={() => setActiveStep(activeStep + 1)}>
                         {t('appGlobal.next')}

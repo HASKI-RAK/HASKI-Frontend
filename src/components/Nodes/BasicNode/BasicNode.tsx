@@ -48,7 +48,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   }
   const handleShowSolution = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     props.data.handleOpen()
-    props.data.handleSetUrl(getConfig().MOODLE + `/mod/${props.data.activityType}/view.php?id=${solutionLmsId}`)
+    props.data.handleSetUrl(getConfig().MOODLE + `/mod/resource/view.php?id=${solutionLmsId}`)
     props.data.handleSetLmsId(solutionLmsId)
     event.stopPropagation()
   }

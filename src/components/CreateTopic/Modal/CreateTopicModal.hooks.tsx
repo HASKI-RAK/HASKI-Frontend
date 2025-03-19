@@ -130,9 +130,11 @@ export const useCreateTopicModal = ({
         return handleCreateTopics(topicName, lmsCourseId, courseId, user).then((topic) => {
           const topicLmsId = topic.lms_id
           const topicId = topic.id
+          // Filter out disabled learning elements, that are used as solutions
+          const filterdLearningElements = selectedLearningElementsClassification[topicLmsId].filter((element) => !element.disabled)
           setCreateTopicIsSending(true)
           return Promise.all(
-            selectedLearningElementsClassification[topicLmsId].map((element) =>
+            filterdLearningElements.map((element) =>
               handleCreateLearningElements(
                 element.lms_learning_element_name,
                 element.lms_activity_type,
@@ -150,7 +152,23 @@ export const useCreateTopicModal = ({
                 throw error
               })
             )
-          )
+          ).then(() => {
+            // Create solutions for each learning element
+              const elementswithSolution = Object.values(selectedLearningElementSolution).flat().filter((element) =>
+                 element.solutionLmsId && element.solutionLmsId > 0)
+              const solutionPromises = elementswithSolution.map((solution) =>
+                handleCreateSolutions(solution.learningElementLmsId, solution.solutionLmsId).catch((error) => {
+                  addSnackbar({
+                    message: t('error.postLearningElementSolution') + ' ' + solution.learningElementLmsId,
+                    severity: 'error',
+                    autoHideDuration: 5000
+                  })
+                  log.error(t('error.postLearningElementSolution') + '' + error + '' + solution.learningElementLmsId);
+                  throw error
+                })
+              )
+              return Promise.all(solutionPromises)
+          })
             .then(() => {
               return handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topic.id, algorithmShortName)
                 .then(() => {
@@ -181,7 +199,7 @@ export const useCreateTopicModal = ({
                       setCreateTopicIsSending(false)
                     }
                   })
-                })        
+                })
                 .catch((error) => {
                   addSnackbar({
                     message: t('error.postLearningPathAlgorithm'),

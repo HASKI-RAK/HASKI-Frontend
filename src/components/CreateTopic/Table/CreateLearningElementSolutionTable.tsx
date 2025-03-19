@@ -1,4 +1,4 @@
-import { ReactNode, memo, useEffect, useState, useMemo } from 'react'
+import { ReactNode, memo, useEffect, useState, useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -12,13 +12,13 @@ import {
   Typography
 } from '@common/components'
 import { SkeletonList } from '@components'
-import { RemoteLearningElement, RemoteTopic, LearningElementWithSolution } from '@core'
+import { RemoteTopic } from '@core'
 import { useCreateLearningElementSolutionTable } from './CreateLearningElementSolutionTable.hooks'
 import { Solution, RemoteLearningElementWithSolution, RemoteLearningElementWithClassification } from '../Modal/CreateTopicModal'
+import { Button } from '@mui/material'
 
 type CreateLearningElementClassificationTableProps = {
   selectedTopics: RemoteTopic[]
-  LearningElements: { [key: number]: RemoteLearningElement[] }
   LearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
   selectedSolutions: { [key: number]: Solution[] }
   learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }
@@ -29,34 +29,46 @@ type CreateLearningElementClassificationTableProps = {
 const CreateLearningElementClassificationTable = memo(
   ({
     selectedTopics,
-    LearningElements,
     LearningElementsClassification,
     selectedSolutions,
     learningElementsWithSolutions,
     onLearningElementSolutionChange,
     children
   }: CreateLearningElementClassificationTableProps) => {
+    const [displayedSolutions, setDisplayedSolutions] = useState<{ [key: number]: Solution[] }>({})
     //Hooks
     const { t } = useTranslation()
     const { handleSolutionChange } = useCreateLearningElementSolutionTable({
       learningElementsWithSolutions,
       selectedSolutions,
-      onLearningElementSolutionChange
+      onLearningElementSolutionChange,
+      displayedSolutions,
+      setDisplayedSolutions
     })
-    const [displayedSolutions, setDisplayedSolutions] = useState<{ [key: number]: Solution[] }>([])
+    
 
+    const reset = useCallback(() => {
+      const updatedLeElSolutions = Object.keys(learningElementsWithSolutions).reduce((accumulator, topicId) => {
+        const topicIdInt = parseInt(topicId)
+        const resetLeElsWithSolution = learningElementsWithSolutions[topicIdInt].map((element) => ({
+          ...element, solutionLmsId: 0 
+        }))
+        return { ...accumulator, [topicIdInt]: resetLeElsWithSolution }
+      }, {})
 
+      onLearningElementSolutionChange(updatedLeElSolutions)
+    }, [learningElementsWithSolutions, onLearningElementSolutionChange])
     useEffect(() => {
       const updatedSolutions = Object.keys(LearningElementsClassification).reduce((accumulator, topicId) => {
         const topicIdInt = parseInt(topicId)
         const existingLeElSolutions = learningElementsWithSolutions[topicIdInt] || []
 
-        const newSolutions = LearningElementsClassification[topicIdInt].reduce((acc, element) => {
+        const newSolutions = LearningElementsClassification[topicIdInt].reduce<RemoteLearningElementWithSolution[]>((acc, element) => {
           const existingElement = existingLeElSolutions.find((e) => e.learningElementLmsId === element.lms_id)
           if (!existingElement && !element.disabled) {
-        return [...acc, { learningElementLmsId: element.lms_id, learningElementName: element.lms_learning_element_name, lmsSolutionId: 0 }]
+            return [...acc, { learningElementLmsId: element.lms_id, learningElementName: element.lms_learning_element_name, solutionLmsId: 0 }]
           } else if (existingElement && element.disabled) {
-        return acc.filter((e) => e.learningElementLmsId !== element.lms_id)
+            return acc.filter((e) => e.learningElementLmsId !== element.lms_id)
           }
           return acc
         }, existingLeElSolutions)
@@ -78,6 +90,9 @@ const CreateLearningElementClassificationTable = memo(
     }
     , [selectedSolutions])
 
+    useEffect(() => {
+      reset()
+    }, [displayedSolutions])
     //Return early
     if (Object.keys(learningElementsWithSolutions).length === 0) {
       return (
@@ -121,7 +136,8 @@ const CreateLearningElementClassificationTable = memo(
                   <Grid item container xs={6} justifyContent="flex-end">
                     <FormControl sx={{ m: 1, width: '21rem' }} size="small">
                       <Select
-                        value={String(element.solutionLmsId ?? displayedSolutions[lmsTopic.topic_lms_id][0].solutionLmsId)}
+                        value={String( element.solutionLmsId > 0 ?
+                           element.solutionLmsId : (displayedSolutions[lmsTopic.topic_lms_id]?.[0].solutionLmsId ?? 0))}
                         onChange={(event) =>
                           handleSolutionChange(
                             lmsTopic.topic_lms_id,
@@ -129,10 +145,13 @@ const CreateLearningElementClassificationTable = memo(
                             parseInt(event.target.value)
                           )
                         }>
-                        {displayedSolutions[lmsTopic.topic_lms_id].map((solution) => (
+                        {(displayedSolutions[lmsTopic.topic_lms_id] || []).map((solution) => (
                           <MenuItem
                             key={solution.solutionLmsId}
-                            value={solution.solutionLmsId}>
+                            value={solution.solutionLmsId}
+                            disabled={learningElementsWithSolutions[lmsTopic.topic_lms_id]?.some((element) =>
+                               (element.solutionLmsId === solution.solutionLmsId && element.learningElementLmsId > 0))}
+                            >
                             {solution.solutionLmsName}
                           </MenuItem>
                         ))}
