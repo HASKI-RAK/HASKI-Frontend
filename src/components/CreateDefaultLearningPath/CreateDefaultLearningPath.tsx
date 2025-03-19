@@ -314,7 +314,6 @@ const CreateDefaultLearningPath = () => {
         <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
         <Box
           sx={{
-            // Create space for buttons at bottom
             flex: 1,
             paddingBottom: (theme) => theme.spacing(10),
             width: '100%',
@@ -430,7 +429,10 @@ const CreateDefaultLearningPath = () => {
             <Button
               id="reset-order-default-learning-path"
               variant="contained"
-              sx={{ bgcolor: (theme) => theme.palette.error.light }}
+              sx={{
+                bgcolor: (theme) => theme.palette.error.main,
+                '&:hover': { bgcolor: (theme) => theme.palette.error.light }
+              }}
               onClick={handleRemoveAll}>
               <ListItemIcon>
                 <Replay fontSize="small" />
