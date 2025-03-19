@@ -35,7 +35,7 @@ import {
   TableListKQuestions
 } from '@components'
 import { AuthContext } from '@services'
-import DefaultLearningPathModal from '../CreateDefaultLearningPath/CreateDefaultLearningPath'
+import DefaultLearningPathModal from '../CreateDefaultLearningPath/Modal/CreateDefaultLearningPathModal'
 
 /**
  * The MenuBar component is the top bar of the application.
