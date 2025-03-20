@@ -1,26 +1,13 @@
-import {
-  DndContext,
-  DragEndEvent,
-  DragOverEvent,
-  DragOverlay,
-  DragStartEvent,
-  UniqueIdentifier,
-  closestCenter,
-  useDraggable,
-  useDroppable
-} from '@dnd-kit/core'
-import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
-import { ReactNode } from 'react'
+import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, closestCenter } from '@dnd-kit/core'
+import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import React, { ReactElement, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Button, Grid, IconButton, ListItemIcon, Paper, Stack, Typography } from '@common/components'
+import { Box, Button, Grid, IconButton, ListItemIcon, Stack, Typography } from '@common/components'
 import {
   Article,
   Assignment,
   AssignmentInd,
   AssignmentLate,
-  Block,
   Close,
   Description,
   Feedback,
@@ -32,163 +19,10 @@ import {
   TipsAndUpdates,
   Videocam
 } from '@common/icons'
-import { styled } from '@common/theme'
 import { CoverSheet } from '@components'
-
-// ----- Styled Components -----
-const DraggableContainer = styled(Paper)(({ theme }) => ({
-  width: '100%',
-  minHeight: 40,
-  display: 'flex',
-  alignItems: 'center',
-  cursor: 'grab',
-  border: `1px solid ${theme.palette.divider}`,
-  backgroundColor: theme.palette.background.paper,
-  borderRadius: theme.shape.borderRadius,
-  boxShadow: theme.shadows[1]
-}))
-
-const DroppableContainer = styled(Paper, {
-  shouldForwardProp: (prop) => prop !== 'isover'
-})<{ isover: boolean }>(({ theme, isover }) => ({
-  width: '100%',
-  height: '100%',
-  minHeight: 450,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'stretch',
-  justifyContent: 'flex-start',
-  border: `2px dashed ${theme.palette.divider}`,
-  backgroundColor: isover ? theme.palette.action.hover : theme.palette.background.paper,
-  gap: 0, //theme.spacing(2),
-  borderRadius: theme.shape.borderRadius
-}))
-
-const PositionBadge = styled(Paper)(({ theme }) => ({
-  borderRadius: '50%',
-  backgroundColor: theme.palette.primary.main,
-  color: theme.palette.common.white,
-  width: 32,
-  height: 32,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontWeight: 'bold'
-}))
-
-type ClassificationItem = {
-  key: string
-  name: string
-  disabled?: boolean
-  label?: string
-  icon?: ReactElement
-}
-
-type SourceDraggableProps = {
-  id: UniqueIdentifier
-  label?: string
-  icon?: ReactNode
-  disabled?: boolean
-}
-
-type SortableItemProps = {
-  id: UniqueIdentifier
-  children: ReactNode
-  position: number
-  label?: string
-  icon?: ReactNode
-  disabled?: boolean
-}
-
-// ----- Source Draggable (Left Column) -----
-export const SourceDraggable = ({ id, label, icon, disabled }: SourceDraggableProps) => {
-  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id })
-  const style = {
-    transform: transform ? CSS.Translate.toString(transform) : undefined,
-    opacity: isDragging ? 0.5 : disabled ? 0.5 : 1,
-    cursor: disabled ? 'not-allowed' : 'grab'
-  }
-  return (
-    <DraggableContainer
-      ref={setNodeRef}
-      style={style}
-      // Disable drag listeners if the item is disabled.
-      {...(disabled ? {} : listeners)}
-      {...attributes}>
-      <Grid container alignItems="center" spacing={0}>
-        <Grid item xs={0.5} />
-        <Grid item xs={0.5}>
-          {icon}
-        </Grid>
-        <Grid item xs={11}>
-          <Typography variant="body1" sx={{ ml: 2 }}>
-            {label}
-          </Typography>
-        </Grid>
-      </Grid>
-    </DraggableContainer>
-  )
-}
-
-// ----- Sortable Item (Inside Droppable) -----
-export const SortableItem = ({ id, children, position, icon, label }: SortableItemProps) => {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
-  const style = {
-    transform: transform ? CSS.Transform.toString(transform) : undefined,
-    transition: transition || undefined,
-    opacity: isDragging ? 0 : 1
-  }
-  return (
-    <DraggableContainer ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <Grid container alignItems="center" spacing={0}>
-        <Grid item xs={0.5} />
-        <Grid item xs={1}>
-          <PositionBadge>{position}</PositionBadge>
-        </Grid>
-        <Grid item xs={0.5}>
-          {icon}
-        </Grid>
-        <Grid item xs={9}>
-          <Typography variant="body1">{label}</Typography>
-        </Grid>
-        <Grid item xs={0.5}>
-          {children}
-        </Grid>
-      </Grid>
-    </DraggableContainer>
-  )
-}
-
-// ----- Droppable Container (Right Column) -----
-export const Droppable = ({ id, children }: { id: UniqueIdentifier; children: ReactNode }) => {
-  const { isOver, setNodeRef } = useDroppable({ id })
-  return (
-    <DroppableContainer ref={setNodeRef} isover={isOver} id={id as string}>
-      {children}
-    </DroppableContainer>
-  )
-}
-
-type DragPreviewProps = {
-  item: ClassificationItem
-}
-
-// ----- Drag Preview Component -----
-const DragPreview = ({ item }: DragPreviewProps) => (
-  <DraggableContainer>
-    <Grid container alignItems="center" spacing={0}>
-      <Grid item xs={0.5} />
-      <Grid item xs={1}>
-        {item.icon}
-      </Grid>
-      <Grid item xs={10}>
-        <Typography variant="body1" sx={{ ml: 2 }}>
-          {item.label}
-        </Typography>
-      </Grid>
-    </Grid>
-  </DraggableContainer>
-)
+import UnassignedItem, { ClassificationItem, DragPreview } from './DraggableItem'
+import { Droppable } from './DroppableItem'
+import { SortableItem } from './SortableItem'
 
 const CreateDefaultLearningPathTable = () => {
   const { t } = useTranslation()
@@ -343,55 +177,12 @@ const CreateDefaultLearningPathTable = () => {
                 {unassignedItems.map((item) => {
                   const isDisabled = disabledItems.includes(item.key)
                   return (
-                    <Grid item key={item.key} direction="column">
-                      <Grid item key={item.key} direction="column" sx={{ position: 'relative' }}>
-                        <Grid item>
-                          <SourceDraggable
-                            key={item.key}
-                            id={item.key}
-                            icon={item.icon}
-                            label={item.label}
-                            disabled={isDisabled}
-                          />
-
-                          {/* When disabled, render the Replay icon absolutely so it won't inherit the parent's opacity */}
-                          <Box
-                            sx={{
-                              position: 'absolute',
-                              top: 5,
-                              right: 30,
-                              zIndex: 1
-                            }}>
-                            <IconButton
-                              draggable={false}
-                              onPointerDown={(e) => {
-                                e.stopPropagation()
-                                e.preventDefault()
-                              }}
-                              onMouseDown={(e) => {
-                                e.stopPropagation()
-                                e.preventDefault()
-                              }}
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                e.preventDefault()
-                                handleToggleDisable(item.key)
-                              }}
-                              size="small"
-                              sx={{ color: (theme) => theme.palette.primary.main }}>
-                              {isDisabled ? (
-                                <Replay fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
-                              ) : (
-                                <Block fontSize="medium" sx={{ color: (theme) => theme.palette.text.primary }} />
-                              )}
-                            </IconButton>
-                          </Box>
-                        </Grid>
-                      </Grid>
-                      <Grid item>
-                        <Box height={12} />
-                      </Grid>
-                    </Grid>
+                    <UnassignedItem
+                      key={item.key}
+                      item={item}
+                      isDisabled={isDisabled}
+                      handleToggleDisable={handleToggleDisable}
+                    />
                   )
                 })}
               </Grid>
