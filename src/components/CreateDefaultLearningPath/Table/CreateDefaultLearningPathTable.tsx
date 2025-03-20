@@ -11,11 +11,10 @@ import {
 } from '@dnd-kit/core'
 import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { ListItemIcon } from '@mui/material'
 import { ReactNode } from 'react'
 import React, { ReactElement, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Button, Fab, Grid, IconButton, Modal, Paper, Typography } from '@common/components'
+import { Box, Button, Grid, IconButton, ListItemIcon, Paper, Stack, Typography } from '@common/components'
 import {
   Article,
   Assignment,
@@ -34,6 +33,7 @@ import {
   Videocam
 } from '@common/icons'
 import { styled } from '@common/theme'
+import { CoverSheet } from '@components'
 
 // ----- Styled Components -----
 const DraggableContainer = styled(Paper)(({ theme }) => ({
@@ -88,12 +88,13 @@ type DraggableProps = {
   id: UniqueIdentifier
   children: ReactNode
   label?: string
+  position?: number
   icon?: ReactNode
   disabled?: boolean
 }
 
 // ----- Source Draggable (Left Column) -----
-export const SourceDraggable = ({ id, children, label, icon, disabled }: DraggableProps) => {
+export const SourceDraggable = ({ id, children, label, position, icon, disabled }: DraggableProps) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id })
   const style = {
     transform: transform ? CSS.Translate.toString(transform) : undefined,
@@ -126,7 +127,7 @@ export const SourceDraggable = ({ id, children, label, icon, disabled }: Draggab
 }
 
 // ----- Sortable Item (Inside Droppable) -----
-export const SortableItem = ({ id, children, icon, label }: DraggableProps) => {
+export const SortableItem = ({ id, children, position, icon, label }: DraggableProps) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
   const style = {
     transform: transform ? CSS.Transform.toString(transform) : undefined,
@@ -138,12 +139,15 @@ export const SortableItem = ({ id, children, icon, label }: DraggableProps) => {
       <Grid container alignItems="center" spacing={0}>
         <Grid item xs={0.5} />
         <Grid item xs={1}>
+          <PositionBadge>{position}</PositionBadge>
+        </Grid>
+        <Grid item xs={0.5}>
           {icon}
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={9}>
           <Typography variant="body1">{label}</Typography>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={0.5}>
           {children}
         </Grid>
       </Grid>
@@ -184,6 +188,7 @@ const DragPreview = ({ item }: DragPreviewProps) => (
 
 const CreateDefaultLearningPathTable = () => {
   const { t } = useTranslation()
+  const [activeStep, setActiveStep] = useState(0)
 
   // Retrieve classification items from translations.
   const learningElementClassifications: ClassificationItem[] = useMemo(() => {
@@ -310,145 +315,175 @@ const CreateDefaultLearningPathTable = () => {
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDragCancel={() => setActiveId(null)}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
-        <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
-        <Box
-          sx={{
-            flex: 1,
-            paddingBottom: (theme) => theme.spacing(10),
-            width: '100%',
-            overflowY: 'auto'
-          }}>
-          <Grid container item sx={{ width: '100%', height: '100%' }}>
-            {/* Left Column: Unassigned Items with Toggle Disable Button */}
-            <Grid item direction={'row'} xs={4} sx={{ height: '100%' }}>
-              <Typography variant="h6">Classification Items</Typography>
-              <Box height={24} />
-              {unassignedItems.map((item) => {
-                const isDisabled = disabledItems.includes(item.key)
-                return (
-                  <Grid item key={item.key} direction="column">
-                    <Grid item>
-                      <SourceDraggable
-                        key={item.key}
-                        id={item.key}
-                        icon={item.icon}
-                        label={item.label}
-                        disabled={isDisabled}>
-                        <IconButton
-                          draggable={false}
-                          onPointerDown={(e) => {
-                            e.stopPropagation()
-                            e.preventDefault()
-                          }}
-                          onMouseDown={(e) => {
-                            e.stopPropagation()
-                            e.preventDefault()
-                          }}
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            e.preventDefault()
-                            handleToggleDisable(item.key)
-                          }}
-                          size="small"
-                          sx={{ color: 'text.secondary' }}>
-                          {isDisabled ? (
-                            <Replay fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
-                          ) : (
-                            <Block fontSize="medium" />
-                          )}
-                        </IconButton>
-                      </SourceDraggable>
-                    </Grid>
-                    <Grid item>
-                      <Box height={12} />
-                    </Grid>
-                  </Grid>
-                )
-              })}
-            </Grid>
-            {/* Spacing between the Columns*/}
-            <Grid item xs={1} />
-            {/* Right Column: Droppable Container */}
-            <Grid item xs={6.5} sx={{ width: '100%' }}>
-              <Grid item>
-                <Typography variant="h6">Order the Items</Typography>
-              </Grid>
-              <Grid item>
+      {activeStep == 0 ? (
+        <CoverSheet
+          header={'Default Learning Path'}
+          body={t('components.CreateDefaultLearningPathTable.introduction')}
+          imagePath={'ProjectDescriptionImage04.jpg'}
+        />
+      ) : (
+        <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
+          <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
+          <Box
+            sx={{
+              flex: 1,
+              paddingBottom: (theme) => theme.spacing(10),
+              width: '100%',
+              overflowY: 'auto'
+            }}>
+            <Grid container item sx={{ width: '100%', height: '100%' }}>
+              {/* Left Column: Unassigned Items with Toggle Disable Button */}
+              <Grid item direction={'row'} xs={4} sx={{ height: '100%' }}>
+                <Typography variant="h6">Classification Items</Typography>
                 <Box height={24} />
+                {unassignedItems.map((item) => {
+                  const isDisabled = disabledItems.includes(item.key)
+                  return (
+                    <Grid item key={item.key} direction="column">
+                      <Grid item>
+                        <SourceDraggable
+                          key={item.key}
+                          id={item.key}
+                          icon={item.icon}
+                          label={item.label}
+                          disabled={isDisabled}>
+                          <IconButton
+                            draggable={false}
+                            onPointerDown={(e) => {
+                              e.stopPropagation()
+                              e.preventDefault()
+                            }}
+                            onMouseDown={(e) => {
+                              e.stopPropagation()
+                              e.preventDefault()
+                            }}
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              e.preventDefault()
+                              handleToggleDisable(item.key)
+                            }}
+                            size="small"
+                            sx={{ color: 'text.secondary' }}>
+                            {isDisabled ? (
+                              <Replay fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
+                            ) : (
+                              <Block fontSize="medium" />
+                            )}
+                          </IconButton>
+                        </SourceDraggable>
+                      </Grid>
+                      <Grid item>
+                        <Box height={12} />
+                      </Grid>
+                    </Grid>
+                  )
+                })}
               </Grid>
-              <Grid item sx={{ height: '100%' }}>
-                <Droppable id="droppable-container">
-                  <SortableContext items={orderedItems} strategy={verticalListSortingStrategy}>
-                    {orderedItems.map((key, index) => {
-                      const item = classificationItems.find((ci) => ci.key === key)
-                      return item ? (
-                        <SortableItem key={item.key} id={item.key} icon={item.icon} label={item.label}>
-                          <Grid container direction={'row'} justifyContent={'space-around'}>
-                            <PositionBadge>{index + 1}</PositionBadge>
-                            <IconButton
-                              draggable={false}
-                              onPointerDown={(e) => {
-                                e.stopPropagation()
-                                e.preventDefault()
-                              }}
-                              onMouseDown={(e) => {
-                                e.stopPropagation()
-                                e.preventDefault()
-                              }}
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                e.preventDefault()
-                                handleResetItem(item.key)
-                              }}
-                              size="small"
-                              sx={{ color: 'text.secondary' }}>
-                              <Close fontSize="small" />
-                            </IconButton>
-                          </Grid>
-                        </SortableItem>
-                      ) : null
-                    })}
-                  </SortableContext>
-                </Droppable>
+              {/* Spacing between the Columns*/}
+              <Grid item xs={1} />
+              {/* Right Column: Droppable Container */}
+              <Grid item xs={6.5} sx={{ width: '100%' }}>
+                <Grid item>
+                  <Typography variant="h6">Order the Items</Typography>
+                </Grid>
+                <Grid item>
+                  <Box height={24} />
+                </Grid>
+                <Grid item sx={{ height: '100%' }}>
+                  <Droppable id="droppable-container">
+                    <SortableContext items={orderedItems} strategy={verticalListSortingStrategy}>
+                      {orderedItems.map((key, index) => {
+                        const item = classificationItems.find((ci) => ci.key === key)
+                        return item ? (
+                          <SortableItem
+                            key={item.key}
+                            id={item.key}
+                            position={index + 1}
+                            icon={item.icon}
+                            label={item.label}>
+                            <Grid container direction={'row'} justifyContent={'space-around'}>
+                              <IconButton
+                                draggable={false}
+                                onPointerDown={(e) => {
+                                  e.stopPropagation()
+                                  e.preventDefault()
+                                }}
+                                onMouseDown={(e) => {
+                                  e.stopPropagation()
+                                  e.preventDefault()
+                                }}
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  e.preventDefault()
+                                  handleResetItem(item.key)
+                                }}
+                                size="small"
+                                sx={{ color: 'text.secondary' }}>
+                                <Close
+                                  fontSize="small"
+                                  sx={{
+                                    bgcolor: (theme) => theme.palette.error.main,
+                                    borderRadius: 10,
+                                    '&:hover': { bgcolor: (theme) => theme.palette.error.light }
+                                  }}
+                                />
+                              </IconButton>
+                            </Grid>
+                          </SortableItem>
+                        ) : null
+                      })}
+                    </SortableContext>
+                  </Droppable>
+                </Grid>
               </Grid>
             </Grid>
+          </Box>
+          <Grid container>
+            <Box height={16} />
           </Grid>
+          <Box
+            sx={{
+              padding: (theme) => theme.spacing(1, 0),
+              backgroundColor: (theme) => theme.palette.background.paper,
+              borderTop: (theme) => `1px solid ${theme.palette.divider}`,
+              zIndex: 10
+            }}>
+            <Grid container justifyContent="space-between" alignItems="flex-end">
+              <Button
+                id="reset-order-default-learning-path"
+                variant="contained"
+                sx={{
+                  bgcolor: (theme) => theme.palette.error.main,
+                  '&:hover': { bgcolor: (theme) => theme.palette.error.light }
+                }}
+                onClick={handleRemoveAll}>
+                <ListItemIcon>
+                  <Replay fontSize="small" />
+                </ListItemIcon>
+                <Typography textAlign="center">{t('Reset')}</Typography>
+              </Button>
+              <Button
+                id="submit-default-learning-path"
+                variant="contained"
+                disabled={!isSubmitActive}
+                onClick={handleSubmit}>
+                Submit
+              </Button>
+            </Grid>
+          </Box>
         </Box>
-        <Grid container>
-          <Box height={16} />
-        </Grid>
-        <Box
-          sx={{
-            padding: (theme) => theme.spacing(1, 0),
-            backgroundColor: (theme) => theme.palette.background.paper,
-            borderTop: (theme) => `1px solid ${theme.palette.divider}`,
-            zIndex: 10
-          }}>
-          <Grid container justifyContent="space-between" alignItems="flex-end">
-            <Button
-              id="reset-order-default-learning-path"
-              variant="contained"
-              sx={{
-                bgcolor: (theme) => theme.palette.error.main,
-                '&:hover': { bgcolor: (theme) => theme.palette.error.light }
-              }}
-              onClick={handleRemoveAll}>
-              <ListItemIcon>
-                <Replay fontSize="small" />
-              </ListItemIcon>
-              <Typography textAlign="center">{t('Reset')}</Typography>
-            </Button>
-            <Button
-              id="submit-default-learning-path"
-              variant="contained"
-              disabled={!isSubmitActive}
-              onClick={handleSubmit}>
-              Submit
-            </Button>
-          </Grid>
-        </Box>
-      </Box>
+      )}
+      {activeStep == 0 && (
+        <Stack direction="column" justifyContent="space-around" alignItems="center">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setActiveStep((prevActiveStep) => prevActiveStep + 1)}
+            sx={{ mb: '2rem', width: '20rem' }}>
+            {'Start'}
+          </Button>
+        </Stack>
+      )}
     </DndContext>
   )
 }

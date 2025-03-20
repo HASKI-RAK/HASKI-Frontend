@@ -17,9 +17,10 @@ import {
   TableRow,
   Typography
 } from '@common/components'
+import { CoverSheet } from '@components'
 import { SnackbarContext } from '@services'
 import useHandleSend from './Questions.hooks'
-import { ButtonStack, CoverSheet, MemoTableRowQuestion, SendButton, StartButton } from './TableCommonComponents'
+import { ButtonStack, MemoTableRowQuestion, SendButton, StartButton } from './TableCommonComponents'
 
 /**
  * This component is used to display the questionnaire questions for the ILS questionnaire.
@@ -221,7 +222,11 @@ const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmpt
   return (
     <Box>
       {activeStep == 0 ? (
-        <CoverSheet header={questionnaireType} body={t('components.TableILSQuestions.introduction')} />
+        <CoverSheet
+          header={questionnaireType}
+          body={t('components.TableILSQuestions.introduction')}
+          imagePath={'/ProjectDescriptionImage03.jpg'}
+        />
       ) : (
         <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
           <ButtonStack
