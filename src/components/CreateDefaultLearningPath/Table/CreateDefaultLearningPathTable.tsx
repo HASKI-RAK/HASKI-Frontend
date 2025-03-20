@@ -24,9 +24,28 @@ import UnassignedItem, { ClassificationItem, DragPreview } from './DraggableItem
 import { Droppable } from './DroppableItem'
 import { SortableItem } from './SortableItem'
 
+// Map icons to classification keys.
+const iconMapping: Record<string, ReactElement> = {
+  LZ: <Flag />,
+  KÜ: <ShortText />,
+  FO: <Forum />,
+  EK: <TipsAndUpdates />,
+  AN: <Videocam />,
+  BE: <Assignment />,
+  AB: <SettingsApplications />,
+  ÜB: <AssignmentLate />,
+  SE: <AssignmentInd />,
+  ZL: <Article />,
+  ZF: <Description />,
+  RQ: <Feedback />
+}
+
 const CreateDefaultLearningPathTable = () => {
   const { t } = useTranslation()
   const [activeStep, setActiveStep] = useState(0)
+  const [orderedItems, setOrderedItems] = useState<string[]>([])
+  const [disabledItems, setDisabledItems] = useState<string[]>([])
+  const [activeId, setActiveId] = useState<null | string>(null)
 
   // Retrieve classification items from translations.
   const learningElementClassifications: ClassificationItem[] = useMemo(() => {
@@ -34,22 +53,6 @@ const CreateDefaultLearningPathTable = () => {
       returnObjects: true
     })
   }, [t])
-
-  // Map icons to classification keys.
-  const iconMapping: Record<string, ReactElement> = {
-    LZ: <Flag />,
-    KÜ: <ShortText />,
-    FO: <Forum />,
-    EK: <TipsAndUpdates />,
-    AN: <Videocam />,
-    BE: <Assignment />,
-    AB: <SettingsApplications />,
-    ÜB: <AssignmentLate />,
-    SE: <AssignmentInd />,
-    ZL: <Article />,
-    ZF: <Description />,
-    RQ: <Feedback />
-  }
 
   const classificationItems = useMemo(() => {
     return learningElementClassifications.map((item) => ({
@@ -59,15 +62,10 @@ const CreateDefaultLearningPathTable = () => {
     }))
   }, [learningElementClassifications, iconMapping])
 
-  // State arrays for items in the droppable container and disabled items.
-  const [orderedItems, setOrderedItems] = useState<string[]>([])
-  const [disabledItems, setDisabledItems] = useState<string[]>([])
-  const [activeId, setActiveId] = useState<null | string>(null)
-
-  // Show left items that are not in droppable container.
+  // left items that are not assigned to the droppable container.
   const unassignedItems = classificationItems.filter((item) => !orderedItems.includes(item.key))
 
-  // Toggle disable state of an item.
+  // Toggle disable state of an item
   const handleToggleDisable = (itemKey: string) => {
     if (disabledItems.includes(itemKey)) {
       setDisabledItems((prev) => prev.filter((key) => key !== itemKey))
@@ -81,13 +79,30 @@ const CreateDefaultLearningPathTable = () => {
     setOrderedItems((prev) => prev.filter((key) => key !== itemKey))
   }
 
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveId(event.active.id as string)
+  }
+
+  const handleDragOver = (event: DragOverEvent) => {
+    const { active, over } = event
+    if (!active || !over) return
+    const activeIdStr = active.id as string
+    if (orderedItems.includes(activeIdStr) && over.id === 'droppable-container') {
+      const currentIndex = orderedItems.indexOf(activeIdStr)
+      const lastIndex = orderedItems.length - 1
+      if (currentIndex !== lastIndex) {
+        setOrderedItems(arrayMove(orderedItems, currentIndex, lastIndex))
+      }
+    }
+  }
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
     setActiveId(null)
     if (!over) return
 
-    const activeIdStr = active.id as string
-    const overIdStr = over.id as string
+    const activeIdStr = active.id.toString()
+    const overIdStr = over.id.toString()
 
     if (orderedItems.includes(activeIdStr)) {
       if (overIdStr === 'droppable-container') {
@@ -111,23 +126,6 @@ const CreateDefaultLearningPathTable = () => {
       setOrderedItems(newOrderedItems)
     } else {
       setOrderedItems([...orderedItems, activeIdStr])
-    }
-  }
-
-  const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id as string)
-  }
-
-  const handleDragOver = (event: DragOverEvent) => {
-    const { active, over } = event
-    if (!active || !over) return
-    const activeIdStr = active.id as string
-    if (orderedItems.includes(activeIdStr) && over.id === 'droppable-container') {
-      const currentIndex = orderedItems.indexOf(activeIdStr)
-      const lastIndex = orderedItems.length - 1
-      if (currentIndex !== lastIndex) {
-        setOrderedItems(arrayMove(orderedItems, currentIndex, lastIndex))
-      }
     }
   }
 
