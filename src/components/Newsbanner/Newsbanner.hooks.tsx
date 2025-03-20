@@ -1,10 +1,10 @@
+import i18next from 'i18next'
 import log from 'loglevel'
-import { useMemo, useState, useContext, useEffect } from 'react'
-import { SnackbarContext } from '@services'
-import { useSessionStore } from '@store'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useUniversity } from '@common/hooks'
-import i18next from 'i18next'
+import { SnackbarContext } from '@services'
+import { useSessionStore } from '@store'
 
 /**
  * @prop  sets the newsItem if there is atleast one news
@@ -57,7 +57,7 @@ export const useNewsbanner = (): NewsbannerHookReturn => {
         log.error(t('error.getNews') + ' ' + error)
         setNewsText('')
       })
-  }, [i18next.language])
+  }, [i18next.language, university])
 
   return useMemo(() => ({ isNewsAvailable, newsText }), [isNewsAvailable, newsText])
 }

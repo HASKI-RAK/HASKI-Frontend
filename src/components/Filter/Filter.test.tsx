@@ -43,7 +43,7 @@ describe('Filter tests', () => {
       </MemoryRouter>
     )
 
-    const button = getByRole('button')
+    const button = getByRole('combobox')
     fireEvent.mouseDown(button)
     const menuItems = getAllByRole('option')
     expect(menuItems).toHaveLength(mockFilterProps.options.length)
@@ -61,7 +61,7 @@ describe('Filter tests', () => {
       </MemoryRouter>
     )
 
-    const button = getByRole('button')
+    const button = getByRole('combobox')
     fireEvent.mouseDown(button)
     const menuItems = getAllByRole('option')
     fireEvent.click(menuItems[0])
@@ -84,7 +84,7 @@ describe('Filter tests', () => {
       </MemoryRouter>
     )
 
-    const button = getByRole('button')
+    const button = getByRole('combobox')
     fireEvent.mouseDown(button)
     const checkboxes = getAllByRole('checkbox')
     const checkbox = checkboxes[0] as HTMLInputElement
@@ -105,7 +105,7 @@ describe('Filter tests', () => {
       </MemoryRouter>
     )
 
-    const button = getByRole('button')
+    const button = getByRole('combobox')
     fireEvent.mouseDown(button)
     const menuItems = getAllByRole('option')
     fireEvent.click(menuItems[0])
@@ -147,7 +147,7 @@ describe('Filter tests', () => {
         />
       </MemoryRouter>
     )
-    const button = getByRole('button')
+    const button = getByRole('combobox')
     fireEvent.mouseDown(button)
 
     const menuItems = getAllByRole('option')
