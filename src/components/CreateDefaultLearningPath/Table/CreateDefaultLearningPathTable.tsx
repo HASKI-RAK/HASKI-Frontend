@@ -84,17 +84,24 @@ type ClassificationItem = {
   icon?: ReactElement
 }
 
-type DraggableProps = {
+type SourceDraggableProps = {
+  id: UniqueIdentifier
+  label?: string
+  icon?: ReactNode
+  disabled?: boolean
+}
+
+type SortableItemProps = {
   id: UniqueIdentifier
   children: ReactNode
+  position: number
   label?: string
-  position?: number
   icon?: ReactNode
   disabled?: boolean
 }
 
 // ----- Source Draggable (Left Column) -----
-export const SourceDraggable = ({ id, children, label, position, icon, disabled }: DraggableProps) => {
+export const SourceDraggable = ({ id, label, icon, disabled }: SourceDraggableProps) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id })
   const style = {
     transform: transform ? CSS.Translate.toString(transform) : undefined,
@@ -110,16 +117,13 @@ export const SourceDraggable = ({ id, children, label, position, icon, disabled 
       {...attributes}>
       <Grid container alignItems="center" spacing={0}>
         <Grid item xs={0.5} />
-        <Grid item xs={1}>
+        <Grid item xs={0.5}>
           {icon}
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={11}>
           <Typography variant="body1" sx={{ ml: 2 }}>
             {label}
           </Typography>
-        </Grid>
-        <Grid item xs={0.5}>
-          {children}
         </Grid>
       </Grid>
     </DraggableContainer>
@@ -127,7 +131,7 @@ export const SourceDraggable = ({ id, children, label, position, icon, disabled 
 }
 
 // ----- Sortable Item (Inside Droppable) -----
-export const SortableItem = ({ id, children, position, icon, label }: DraggableProps) => {
+export const SortableItem = ({ id, children, position, icon, label }: SortableItemProps) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
   const style = {
     transform: transform ? CSS.Transform.toString(transform) : undefined,
@@ -340,37 +344,52 @@ const CreateDefaultLearningPathTable = () => {
                   const isDisabled = disabledItems.includes(item.key)
                   return (
                     <Grid item key={item.key} direction="column">
-                      <Grid item>
-                        <SourceDraggable
-                          key={item.key}
-                          id={item.key}
-                          icon={item.icon}
-                          label={item.label}
-                          disabled={isDisabled}>
-                          <IconButton
-                            draggable={false}
-                            onPointerDown={(e) => {
-                              e.stopPropagation()
-                              e.preventDefault()
-                            }}
-                            onMouseDown={(e) => {
-                              e.stopPropagation()
-                              e.preventDefault()
-                            }}
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              e.preventDefault()
-                              handleToggleDisable(item.key)
-                            }}
-                            size="small"
-                            sx={{ color: 'text.secondary' }}>
-                            {isDisabled ? (
-                              <Replay fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
-                            ) : (
-                              <Block fontSize="medium" />
-                            )}
-                          </IconButton>
-                        </SourceDraggable>
+                      <Grid item key={item.key} direction="column" sx={{ position: 'relative' }}>
+                        <Grid item>
+                          <SourceDraggable
+                            key={item.key}
+                            id={item.key}
+                            icon={item.icon}
+                            label={item.label}
+                            disabled={isDisabled}
+                          />
+
+                          {/* When disabled, render the Replay icon absolutely so it won't inherit the parent's opacity */}
+                          <Box
+                            sx={{
+                              position: 'absolute',
+                              top: 5,
+                              right: 30,
+                              zIndex: 1
+                            }}>
+                            <IconButton
+                              draggable={false}
+                              onPointerDown={(e) => {
+                                e.stopPropagation()
+                                e.preventDefault()
+                              }}
+                              onMouseDown={(e) => {
+                                e.stopPropagation()
+                                e.preventDefault()
+                              }}
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                e.preventDefault()
+                                handleToggleDisable(item.key)
+                              }}
+                              size="small"
+                              sx={{ color: (theme) => theme.palette.primary.main }}>
+                              {isDisabled ? (
+                                <Replay fontSize="medium" sx={{ color: (theme) => theme.palette.primary.main }} />
+                              ) : (
+                                <Block fontSize="medium" sx={{ color: (theme) => theme.palette.text.primary }} />
+                              )}
+                            </IconButton>
+                          </Box>
+                        </Grid>
+                        <Grid item>
+                          <Box height={12} />
+                        </Grid>
                       </Grid>
                       <Grid item>
                         <Box height={12} />
