@@ -11,6 +11,7 @@ export const DraggableContainer = styled(Paper)(({ theme }) => ({
   minHeight: 40,
   display: 'flex',
   border: `1px solid ${theme.palette.divider}`,
+  cursor: 'grab',
   backgroundColor: theme.palette.background.paper,
   borderRadius: theme.shape.borderRadius,
   boxShadow: theme.shadows[1]
