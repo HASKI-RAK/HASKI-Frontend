@@ -33,14 +33,7 @@ export const useTopicCard = (params: TopicCardHookParams) => {
 
   const handleAlgorithmModalClose = useCallback(() => {
     setIsAlgorithmSettingsModalOpen(false)
-  }, [
-    setIsAlgorithmSettingsModalOpen,
-    setStudentSelection,
-    getStudentAlgorithm,
-    studentSelection,
-    params.topic?.id,
-    getUser
-  ])
+  }, [setIsAlgorithmSettingsModalOpen])
 
   const updateSelection = useCallback(() => {
     getUser().then((user) => {
@@ -75,7 +68,7 @@ export const useTopicCard = (params: TopicCardHookParams) => {
       handleCloseMenu,
       handleAlgorithmMenuOpen,
       handleAlgorithmModalClose,
-      updateSelection: updateSelection
+      updateSelection
     }),
     [
       teacherSelection,

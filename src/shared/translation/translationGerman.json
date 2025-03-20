@@ -1,8 +1,10 @@
 {
   "appGlobal.accept": "Akzeptieren",
+  "appGlobal.algorithm": "Algorithmus",
   "appGlobal.algorithms": "Algorithmen",
   "appGlobal.aschaffenburgUAS": "TH Aschaffenburg",
   "appGlobal.back": "Zurück",
+  "appGlobal.classification": "Klassifikation",
   "appGlobal.classifications": "Klassifikationen",
   "appGlobal.courses": "Kurse",
   "appGlobal.dataSendSuccessful": "Daten wurden erfolgreich gesendet",
@@ -11,48 +13,41 @@
   "appGlobal.help": "Hilfe",
   "appGlobal.imageSources": "Bildquellen:",
   "appGlobal.learningElements": "Lernelemente",
+  "appGlobal.lineGraph": "Liniendiagramm",
   "appGlobal.loading": "Lade...",
   "appGlobal.next": "Weiter",
   "appGlobal.oClock": "Uhr",
   "appGlobal.othRegensburg": "OTH Regensburg",
   "appGlobal.send": "Senden",
+  "appGlobal.table": "Tabelle",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
   "appGlobal.solutions": "Lösungen",
   "components.AlgorithmSettingsModal.algorithms": [
     {
-      "name": "Algorithmus auswählen",
-      "description": "Bitte wählen Sie einen Algorithmus für die Berechnung des Lernpfads aus.",
-      "key": "noKey",
-      "disabled": true
-    },
-    {
       "name": "Feste Reihenfolge",
       "description": "Die Lernelemente werden in einer festen Reihenfolge angezeigt. Es wird kein Algorithmus verwendet.",
-      "key": "default",
-      "disabled": false
+      "key": "default"
     },
     {
       "name": "Graf",
       "description": "Dieser Algorithmus basiert auf dem lernadaptiven Mechanismus von Graf et al. Er berechnet den Lernpfad basierend auf dem Lernstil des Lernenden.",
-      "key": "graf",
-      "disabled": false
+      "key": "graf"
     },
     {
       "name": "ACO",
-      "description": "Der Ameisenalgorithmus (ACO) ist von dem Verhalten von Ameisenarbeitern inspiriert. Er berechnet den Lernpfad, indem er das Verhalten von Ameisen simuliert, die Pheromone hinterlassen, um den besten Weg zu markieren.",
-      "key": "aco",
-      "disabled": false
+      "description": "Inspiriert vom Verhalten von Ameisen, berechnet dieser Algorithmus den Lernpfad durch Simulation von Pheromonspuren, um optimale Wege zu finden.",
+      "key": "aco"
     },
     {
       "name": "Genetischer Algorithmus",
-      "description": "Der genetische Algorithmus ist ein Algorithmus, der auf dem Prinzip der natürlichen Selektion basiert. Er wird verwendet, um einen möglichst guten Lernpfad zu berechnen, indem er die besten Lernenden auswählt und ihre Lernwege kombiniert.",
-      "key": "ga",
-      "disabled": false
+      "description": "Basierend auf natürlicher Selektion, kombiniert dieser Algorithmus Lernwege, um über Generationen den besten Lernpfad zu entwickeln.",
+      "key": "ga"
     }
   ],
   "components.AlgorithmSettingsModal.headerLeft": "Lernpfadalgorithmus wählen",
   "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
+  "components.AlgorithmSettingsModal.selectAlgorithms": "Algorithmen auswählen",
   "components.AlgorithmSettingsModal.success": "Der Algorithmus wurde erfolgreich geändert",
   "components.AlgorithmSettingsModal.teacherIconTip": "Empfehlung des Kursleiters",
   "components.AlgorithmSettingsModal.wrongRole": "Sie haben nicht die erforderlichen Berechtigungen, um den Algorithmus zu ändern",
@@ -104,7 +99,7 @@
       "label": "Sonstiges"
     }
   ],
-  "components.CreateAlgorithmTable.missingClassification": "Dieser Themenbereich wird nicht erstellt. Es müssen alle verfügbaren Lernelement Klassifikationen ausgewählt werden, um die Algorithmusauswahl zu ermöglichen.",
+  "components.CreateAlgorithmTable.initialAlgorithmDescription": "Bitte wählen Sie einen Algorithmus für die Berechnung des Lernpfads aus.",
   "components.CreateCourseDetailsTable.courseName": "Kursname",
   "components.CreateCourseDetailsTable.startDate": "Startdatum",
   "components.CreateCourseModal.createCourse": "Kurs erstellen",
@@ -113,63 +108,69 @@
   "components.CreateCourseTable.noCoursesFound": "Keine Kurse gefunden...",
   "components.CreateLearningElementClassificationTable.classifications": [
     {
-      "name": "Klassifikation auswählen",
-      "key": "noKey",
-      "disabled": true
+      "name": "LZ - Lernziel",
+      "key": "LZ"
     },
     {
       "name": "KÜ - Kurzübersicht",
-      "key": "KÜ",
-      "disabled": false
+      "key": "KÜ"
+    },
+    {
+      "name": "FO - Forum",
+      "key": "FO"
     },
     {
       "name": "EK - Erklärung",
-      "key": "EK",
-      "disabled": false
+      "key": "EK"
     },
     {
       "name": "AN - Animation",
-      "key": "AN",
-      "disabled": false
+      "key": "AN"
     },
     {
       "name": "BE - Beispiel",
-      "key": "BE",
-      "disabled": false
+      "key": "BE"
+    },
+    {
+      "name": "AB - Anwendungsbeispiel",
+      "key": "AB"
     },
     {
       "name": "ÜB - Übung",
-      "key": "ÜB",
-      "disabled": false
+      "key": "ÜB"
     },
     {
       "name": "SE - Selbsteinschätzungstest",
-      "key": "SE",
-      "disabled": false
+      "key": "SE"
     },
     {
       "name": "ZL - Zusatzliteratur",
-      "key": "ZL",
-      "disabled": false
+      "key": "ZL"
     },
     {
       "name": "ZF - Zusammenfassung",
-      "key": "ZF",
-      "disabled": false
+      "key": "ZF"
     },
     {
       "name": "RQ - Reflektives Quiz",
-      "key": "RQ",
-      "disabled": false
+      "key": "RQ"
     }
   ],
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Klassifikation der Lernelemente festlegen",
+  "components.CreateLearningElementTable.selectAllToggle": "Alle auswählen",
   "components.CreateLearningElementTable.selectLearningElements": "Lernelemente auswählen",
   "components.CreateTopicModal.createTopics": "Themenbereiche erstellen",
   "components.CreateLearningElementSolutionTable.setLearningElementSolution": "Lernelementen Lösungen zuweisen",
   "components.ExistingTopicsTable.title": "Bereits erstellte Themenbereiche",
   "components.Footer.project": "Projekt",
   "components.FurtherInfoMenu.title": "Weitere Informationen",
+  "components.LearnerCharacteristics.ilsLongNoData-1": "ILS-Fragebogen",
+  "components.LearnerCharacteristics.ilsShortNoData-1": "ILS-Fragebogen (Kurz)",
+  "components.LearnerCharacteristics.ilsShortNoData-2": "oder",
+  "components.LearnerCharacteristics.listKNoData": "List-K-Fragebogen",
+  "components.LearnerCharacteristics.moreInformation": "Ich möchte mehr zum ILS und ListK erfahren",
+  "components.LearnerCharacteristics.noData-1": "Um Ergebnisse anzuzeigen, müssen Sie zuerst den",
+  "components.LearnerCharacteristics.noData-2": "abschließen.",
   "components.ListKQuestions": [
     [
       {
@@ -620,13 +621,6 @@
   "components.PrivacyModal.readPrivacyPolicy-2": "gelesen",
   "components.PrivacyModal.returnToMoodle": "Dies wird Sie zu Moodle weiterleiten",
   "components.PrivacyModal.termsOfService": "Nutzungsbedingungen und Datenschutzerklärung",
-  "components.QuestionnaireResultsModal.ilsLongNoData-1": "ILS-Fragebogen",
-  "components.QuestionnaireResultsModal.ilsShortNoData-1": "ILS-Fragebogen (Kurz)",
-  "components.QuestionnaireResultsModal.ilsShortNoData-2": "oder",
-  "components.QuestionnaireResultsModal.listKNoData": "List-K-Fragebogen",
-  "components.QuestionnaireResultsModal.moreInformation": "Ich möchte mehr zum ILS und ListK erfahren",
-  "components.QuestionnaireResultsModal.noData-1": "Um Ergebnisse anzuzeigen, müssen Sie zuerst den",
-  "components.QuestionnaireResultsModal.noData-2": "abschließen.",
   "components.ResultDescriptionILS.active-moderate": "Ihre Informationsverarbeitung erfolgt bevorzugt eher aktiv. Es ist zu empfehlen, dass Sie stets Möglichkeiten für sich schaffen, neue Information im Zuge von praktischen Experimenten und Diskussionen mit Kommiliton*innen zu verarbeiten. So können Sie tendenziell schneller lernen.",
   "components.ResultDescriptionILS.active-strong": "Ihre Informationsverarbeitung erfolgt bevorzugt aktiv. Es ist zu empfehlen, dass Sie stets Möglichkeiten für sich schaffen, neue Information im Zuge von praktischen Experimenten und Diskussionen mit Kommiliton*innen zu verarbeiten. So können Sie tendenziell schneller lernen.",
   "components.ResultDescriptionILS.allDimensions": "Alle Dimensionen",
@@ -731,6 +725,7 @@
   "components.ResultDescriptionListK.time && literatureResearch below3-Title": "Zeit und Literaturrecherche haben einen Wert unter 3",
   "components.ResultDescriptionListK.time below3-Description": "Im Hinblick auf Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es würde sich wahrscheinlich positiv auswirken, wenn Sie versuchen, sich klare Lernzeiträume zu schaffen, um Ihr Lernen effektiver zu gestalten.",
   "components.ResultDescriptionListK.time below3-Title": "Zeit hat einen Wert unter 3",
+  "components.StatisticsMenu.title": "Statistiken",
   "components.TableILS.active": "Aktiv",
   "components.TableILS.balanced": "balanciert",
   "components.TableILS.dimension": "Dimension",
@@ -1244,7 +1239,7 @@
   "components.TopicCard.default": "Feste Reihenfolge",
   "components.TopicCard.ga": "Genetischer Algorithmus",
   "components.TopicCard.graf": "Graf Algorithmus",
-  "components.TopicCard.learningPath": "Lernpfad: ",
+  "components.TopicCard.learningPath": "Lernpfad",
   "components.TopicCard.nestor": "Nestor Algorithmus",
   "components.TopicCard.tyche": "Tyche Algorithmus",
   "error": "Fehler",
@@ -1255,9 +1250,13 @@
   "error.fetchLearningPathTopic": "Beim Abrufen der LearningPathTopic-Daten ist ein Fehler aufgetreten.",
   "error.fetchListK": "Beim Abrufen der ListK-Fragebogendaten ist ein Fehler aufgetreten.",
   "error.fetchRedirectMoodleLogin": "Beim Abrufen der Moodle-Login-URL ist ein Fehler aufgetreten.",
+  "error.fetchStudentLpLeAlg": "Beim Abrufen des Algorithmus, den der Nutzer für das Topic gewählt hat, ist ein Fehler aufgetreten.",
+  "error.fetchTeacherLpLeAlg": "Beim Abrufen des empfohlenen Algorithmus für das Topic ist ein Fehler aufgetreten.",
   "error.fetchUser": "Beim Abrufen der Nutzerdaten ist ein Fehler aufgetreten.",
   "error.getLearningElementStatus": "Beim Abrufen des Lernelementstatus ist ein Fehler aufgetreten.",
   "error.getLearningElementsWithStatus": "Beim Abrufen der Lernelemente mit Status ist ein Fehler aufgetreten.",
+  "error.getLearningPathElement": "Beim Abrufen des neuen Lernpfads ist ein Fehler aufgetreten.",
+  "error.getNews": "Beim Abrufen der Neuigkeiten ist ein Fehler aufgetreten.",
   "error.getRemoteCourses": "Beim Abrufen der Kursdaten vom LMS ist ein Fehler aufgetreten.",
   "error.getRemoteTopics": "Beim Abrufen der Themen vom LMS ist ein Fehler aufgetreten.",
   "error.getSortedLearningPath": "Beim Abrufen und Sortieren der LearningPathLearningElement-Daten ist ein Fehler aufgetreten.",
@@ -1271,6 +1270,8 @@
   "error.postLearningPathAlgorithm": "Beim Senden der LearningPathAlgorithm-Daten ist ein Fehler aufgetreten.",
   "error.postListK": "Beim Senden der ListK-Fragebogendaten ist ein Fehler aufgetreten.",
   "error.postLogin": "Beim Einloggen ist ein Fehler aufgetreten.",
+  "error.postStudentLpLeAlg": "Beim setzen des neuen Algorithmus für den Nutzer ist ein Fehler aufgetreten.",
+  "error.postTeacherLpLeAlg": "Beim setzen des neu empfohlenen Algorithmus für das Topic ist ein Fehler aufgetreten.",
   "error.postTopic": "Beim Senden der Themendaten ist ein Fehler aufgetreten.",
   "error.setLearningPathElementSpecificStatus": "Beim Festlegen des spezifischen Status eines Lernpfadelements ist ein Fehler aufgetreten.",
   "error.setTopics": "Beim Festlegen der Themen ist ein Fehler aufgetreten.",
@@ -1385,14 +1386,7 @@
   "pages.contact.error": "Ihr Feedback konnte nicht versendet werden.",
   "pages.contact.success": "Ihr Feedback wurde erfolgreich versendet.",
   "pages.course": "Kurs",
-  "pages.course.aco": "Ameisenalgorithmus",
-  "pages.course.bayes": "Bayes",
-  "pages.course.cardText": "Lernpfad: ",
-  "pages.course.fixed": "Feste Reihenfolge",
-  "pages.course.genetic": "Genetischer Algorithmus",
-  "pages.course.graf": "Graf",
   "pages.course.topicButton": "Weiter zum Thema",
-  "pages.course.tyche": "Tyche",
   "pages.glossary": "Glossar",
   "pages.glossary.collapseAll": "Alle schließen",
   "pages.glossary.elements": [
@@ -1757,6 +1751,7 @@
   "pages.imprint.referenceLinks": "Verweise und Links",
   "pages.imprint.referenceLinksText": "Bei direkten oder indirekten Verweisen auf fremde Webseiten (\"Hyperlinks\"), die außerhalb des Verantwortungsbereiches der Hochschule liegen, würde eine Haftungsverpflichtung ausschließlich in dem Fall in Kraft treten, in dem die Hochschule von den Inhalten Kenntnis hat und es ihm technisch möglich und zumutbar wäre, die Nutzung im Falle rechtswidriger Inhalte zu verhindern. Die Hochschule Kempten erklärt hiermit ausdrücklich, dass zum Zeitpunkt der Linksetzung keine illegalen Inhalte auf den zu verlinkenden Seiten erkennbar waren. Auf die aktuelle und zukünftige Gestaltung, die Inhalte oder die Urheberschaft der gelinkten/verknüpften Seiten hat die Hochschule keinerlei Einfluss. Deshalb distanziert sie sich hiermit ausdrücklich von allen Inhalten aller gelinkten /verknüpften Seiten, die nach der Linksetzung verändert wurden. Diese Feststellung gilt für alle innerhalb des eigenen Internetangebotes gesetzten Links und Verweise . Für illegale, fehlerhafte oder unvollständige Inhalte und insbesondere für Schäden, die aus der Nutzung oder Nichtnutzung solcherart dargebotener Informationen entstehen, haftet allein der Anbieter der Seite, auf welche verwiesen wurde, nicht derjenige, der über Links auf die jeweilige Veröffentlichung lediglich verweist.",
   "pages.imprint.subtitle": "Lehr-/Lernplattform HASKI vom Labor Softwareentwicklung Hochschule Kempten",
+  "pages.learnercharacteristics": "Lerncharakteristiken",
   "pages.login": "Login",
   "pages.login.redirect": "Sie werden weitergeleitet",
   "pages.privacypolicy": "Datenschutzerklärung",
@@ -1826,8 +1821,8 @@
   "tooltip.furtherInfoSelection": "Weitere Informationen über das Projekt",
   "tooltip.languageSettings": "Spracheinstellungen",
   "tooltip.openGlobalSettings": "Globale Einstellungen",
-  "tooltip.openQuestionnaireResults": "Lerncharakteristik",
   "tooltip.openSettings": "Einstellungen",
+  "tooltip.statisticsMenuSelection": "Verschiedene Informationen zu Ihrem Lernfortschritten.",
   "warning": "Warnung",
   "warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
   "warning.online": "Sie sind wieder online."

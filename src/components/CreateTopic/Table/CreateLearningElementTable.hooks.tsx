@@ -1,23 +1,25 @@
-import { useCallback, useMemo } from 'react'
-import { RemoteLearningElement, RemoteTopic } from '@core'
+import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
+import { RemoteLearningElement, RemoteTopics } from '@core'
 
 type useCreateTopicModalProps = {
   selectedLearningElements: { [p: number]: RemoteLearningElement[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
-  selectedTopics: RemoteTopic[]
+  selectedTopics: RemoteTopics[]
+  setSelectAllLearningElementsChecked: Dispatch<SetStateAction<boolean>>
 }
 
 export const useCreateLearningElementTable = ({
   selectedLearningElements,
   onLearningElementChange,
-  selectedTopics
+  selectedTopics,
+  setSelectAllLearningElementsChecked
 }: useCreateTopicModalProps) => {
   const handleLearningElementCheckboxChange = (topicId: number, element: RemoteLearningElement, checked: boolean) => {
     const updatedSelectedElements = {
       ...selectedLearningElements,
       [topicId]: checked
         ? [...(selectedLearningElements[topicId] || []), element]
-        : (selectedLearningElements[topicId] || []).filter((el) => el.lms_id !== element.lms_id)
+        : selectedLearningElements[topicId].filter((el) => el.lms_id !== element.lms_id)
     }
 
     onLearningElementChange(updatedSelectedElements)
@@ -47,12 +49,20 @@ export const useCreateLearningElementTable = ({
     onLearningElementChange(clearedElements)
   }, [onLearningElementChange, selectedTopics])
 
+  const handleToggleAll = (isChecked: boolean) => {
+    setSelectAllLearningElementsChecked(isChecked)
+    if (isChecked) {
+      handleSelectAllLearningElements()
+    } else {
+      handleDeselectAllLearningElements()
+    }
+  }
+
   return useMemo(
     () => ({
       handleLearningElementCheckboxChange,
-      handleSelectAllLearningElements,
-      handleDeselectAllLearningElements
+      handleToggleAll
     }),
-    [handleLearningElementCheckboxChange, handleSelectAllLearningElements, handleDeselectAllLearningElements]
+    [handleLearningElementCheckboxChange, handleToggleAll]
   )
 }

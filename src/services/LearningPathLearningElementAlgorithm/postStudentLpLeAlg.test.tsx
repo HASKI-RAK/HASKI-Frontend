@@ -27,19 +27,24 @@ describe('postStudentLpLeAlg has expected behaviour', () => {
     fetch.mockResolvedValue(mockResponse)
 
     const userId = 1
+    const lmsUserId = 1
+    const courseId = '1'
     const topicId = 1
     const algorithmName = 'test'
 
-    const result = await postStudentLpLeAlg(userId, topicId, algorithmName)
+    const result = await postStudentLpLeAlg(userId, lmsUserId, courseId, topicId, algorithmName)
 
-    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/${userId}/topic/${topicId}/studentAlgorithm`, {
-      body: JSON.stringify({ algorithm_short_name: algorithmName }),
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST'
-    })
+    expect(fetch).toHaveBeenCalledWith(
+      `${getConfig().BACKEND}/user/${userId}/${lmsUserId}/course/${courseId}/topic/${topicId}/studentAlgorithm`,
+      {
+        body: JSON.stringify({ algorithm_short_name: algorithmName }),
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST'
+      }
+    )
     expect(result).toEqual(inputData)
   })
 

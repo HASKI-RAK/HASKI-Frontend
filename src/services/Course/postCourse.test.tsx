@@ -35,7 +35,7 @@ describe('postCourse has expected behaviour', () => {
 
     const result = await postCourse({ outputJson: output })
 
-    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/v2/lms/course`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/lms/course`, {
       body: output,
       credentials: 'include',
       headers: {

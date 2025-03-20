@@ -21,7 +21,6 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
   const { t } = useTranslation()
 
   const {
-    teacherSelection,
     studentSelection,
     isAlgorithmSettingsModalOpen,
     menuAnchorEl,
@@ -44,11 +43,10 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           <IconButton
             sx={{
               position: 'relative',
-              ml: { xs: '6rem', sm: '16rem', md: '36rem', lg: '46rem', xl: '66rem', xxl: '82rem', xxxl: '109rem' }
+              ml: { xs: '6rem', sm: '16rem', md: '36rem', lg: '46rem', xl: '66rem', xxl: '81rem', xxxl: '106rem' }
             }}
             onClick={openMenu}
             id="topic-menu"
-            data-topicid={topic?.id}
             data-testid="TopicSettingsButton">
             <MoreVert />
           </IconButton>
@@ -90,9 +88,8 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           justifyContent={'center'}
           sx={{ mt: '0.5rem' }}>
           <Typography sx={{ mr: '0.5rem' }}>
-            {(studentSelection || teacherSelection) &&
-              t('components.TopicCard.learningPath') +
-                t(`components.TopicCard.${studentSelection ?? teacherSelection}`)}
+            {studentSelection &&
+              t('components.TopicCard.learningPath') + ': ' + t(`components.TopicCard.${studentSelection}`)}
           </Typography>
         </Grid>
       </CardContent>
@@ -110,11 +107,9 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         handleClose={handleAlgorithmModalClose}
         changeObserver={updateSelection}
         topicId={topic?.id}
-        teacherAlgorithm={teacherSelection}
-        studentAlgorithm={studentSelection}
       />
       <Menu
-        id="menu"
+        id="topic-card-menu"
         anchorEl={menuAnchorEl}
         open={Boolean(menuAnchorEl)}
         onClose={handleCloseMenu}

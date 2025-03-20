@@ -37,7 +37,7 @@ describe('postLearningElement has expected behaviour', () => {
 
     const result = await postLearningElement({ topicId: 1, outputJson: output })
 
-    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/v2/lms/topic/1/learningElement`, {
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/lms/topic/1/learningElement`, {
       body: output,
       credentials: 'include',
       headers: {

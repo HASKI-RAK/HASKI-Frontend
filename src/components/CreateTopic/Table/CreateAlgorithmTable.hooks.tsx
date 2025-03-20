@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from 'react'
 import { CreateAlgorithmTableNameProps } from '@components'
 
-type useCreateAlgorithmTableProps = {
-  selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps[] }
-  onAlgorithmChange: (selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps[] }) => void
+export type useCreateAlgorithmTableProps = {
+  selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps }
+  onAlgorithmChange: (selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps }) => void
 }
 
 export const useCreateAlgorithmTable = ({ selectedAlgorithms, onAlgorithmChange }: useCreateAlgorithmTableProps) => {
@@ -11,7 +11,7 @@ export const useCreateAlgorithmTable = ({ selectedAlgorithms, onAlgorithmChange 
     (topicId: number, topicName: string, newAlgorithm: string) => {
       const updatedAlgorithms = {
         ...selectedAlgorithms,
-        [topicId]: [{ topicName: topicName, algorithmShortName: newAlgorithm }]
+        [topicId]: { topicName: topicName, algorithmShortName: newAlgorithm }
       }
       onAlgorithmChange(updatedAlgorithms)
     },

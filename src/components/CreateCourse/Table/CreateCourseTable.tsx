@@ -1,4 +1,3 @@
-import log from 'loglevel'
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
@@ -11,17 +10,17 @@ import {
   ToggleButtonGroup,
   Typography
 } from '@common/components'
-import { SkeletonList } from '@components'
+import { SkeletonList, handleError } from '@components'
 import { RemoteCourse } from '@core'
 import { SnackbarContext, fetchRemoteCourses } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 type CreateCourseTableProps = {
   onCourseSelect: (course: RemoteCourse) => void
-  selectedCourseName: string
+  selectedCourse?: RemoteCourse
 }
 
-const CreateCourseTable = ({ onCourseSelect, selectedCourseName }: CreateCourseTableProps) => {
+const CreateCourseTable = ({ onCourseSelect, selectedCourse }: CreateCourseTableProps) => {
   //Hooks
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
@@ -53,35 +52,23 @@ const CreateCourseTable = ({ onCourseSelect, selectedCourseName }: CreateCourseT
                 )
               })
               .catch((error) => {
-                addSnackbar({
-                  message: t('error.fetchCourses'),
-                  severity: 'error',
-                  autoHideDuration: 5000
-                })
-                log.error(t('error.fetchCourses') + ' ' + error)
+                handleError(t, addSnackbar, 'error.fetchCourses', error, 5000)
               })
           })
           .catch((error) => {
-            addSnackbar({
-              message: t('error.getRemoteCourses'),
-              severity: 'error',
-              autoHideDuration: 5000
-            })
-            log.error(t('error.getRemoteCourses') + ' ' + error)
+            handleError(t, addSnackbar, 'error.getRemoteCourses', error, 5000)
           })
       })
       .catch((error) => {
-        addSnackbar({
-          message: t('error.getUser'),
-          severity: 'error',
-          autoHideDuration: 5000
-        })
-        log.error(t('error.getUser') + ' ' + error)
+        handleError(t, addSnackbar, 'error.getUser', error, 5000)
       })
   }, [])
 
-  const handleSelectedCourseChange = (_event: React.MouseEvent<HTMLElement>, nextView: string) => {
-    const selectedCourse = remoteLmsCourses.find((course) => course.fullname === nextView)
+  const handleSelectedCourseChange = (
+    _event: React.MouseEvent<HTMLElement>,
+    nextView: { name: string; id: number }
+  ) => {
+    const selectedCourse = remoteLmsCourses.find((course) => course.id === nextView.id)
     selectedCourse && onCourseSelect(selectedCourse)
   }
 
@@ -111,7 +98,7 @@ const CreateCourseTable = ({ onCourseSelect, selectedCourseName }: CreateCourseT
           </Typography>
           <ToggleButtonGroup
             orientation="vertical"
-            value={selectedCourseName}
+            value={{ name: selectedCourse?.fullname, id: selectedCourse?.id }}
             exclusive
             onChange={handleSelectedCourseChange}
             sx={{
@@ -136,7 +123,7 @@ const CreateCourseTable = ({ onCourseSelect, selectedCourseName }: CreateCourseT
               availableCourses.map((LmsCourse) => (
                 <ToggleButton
                   id={'create-course-modal-' + LmsCourse.fullname + '-selected'}
-                  value={LmsCourse.fullname}
+                  value={{ name: LmsCourse.fullname, id: LmsCourse.id }}
                   aria-label={LmsCourse.fullname}
                   key={LmsCourse.id}
                   sx={{ minWidth: '30rem', mb: 1, borderColor: (theme) => theme.palette.common.black }}>
@@ -156,7 +143,7 @@ const CreateCourseTable = ({ onCourseSelect, selectedCourseName }: CreateCourseT
           </Typography>
           <ToggleButtonGroup
             orientation="vertical"
-            value={selectedCourseName}
+            value={selectedCourse?.fullname}
             onChange={handleSelectedCourseChange}
             sx={{
               '& .MuiToggleButtonGroup-grouped:not(:first-of-type)': {

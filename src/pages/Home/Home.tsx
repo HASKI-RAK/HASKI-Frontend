@@ -1,10 +1,10 @@
-import AddCircleIcon from '@mui/icons-material/AddCircle'
 import dayjs from 'dayjs'
 import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardContent, Grid, Skeleton, Stack, Typography } from '@common/components'
+import { Button, Card, CardContent, Grid, Skeleton, Typography } from '@common/components'
+import { AddCircle } from '@common/icons'
 import { CreateCourseModal } from '@components'
 import { Course } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
@@ -30,18 +30,16 @@ export const Home = () => {
   const [coursesLoading, setCoursesLoading] = useState<boolean>(true)
   const [activeStepCreateCourseModal, setActiveStepCreateCourseModal] = useState<number>(0)
   const [createCourseModalOpen, setCreateCourseModalOpen] = useState<boolean>(false)
-  const [successRemoteCourseCreated, setSuccessRemoteCourseCreated] = useState<boolean>(false)
 
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
-  const triggerCoursesReload = useStore((state) => state.triggerCoursesReload)
-  const ignoreCoursesCache = useStore((state) => state.ignoreCoursesCache)
+  const clearCoursesCache = useStore((state) => state.clearCoursesCache)
+  const coursesCache = useStore((state) => state._cache_Courses_record)
 
   const handleCloseCourseModal = () => {
-    triggerCoursesReload(true)
+    clearCoursesCache()
     setCreateCourseModalOpen(false)
-    setSuccessRemoteCourseCreated(false)
     setActiveStepCreateCourseModal(0)
   }
 
@@ -72,7 +70,7 @@ export const Home = () => {
           log.error(t('error.getUser') + ' ' + error)
         })
     }
-  }, [getUser, getCourses, setCourses, isAuth, ignoreCoursesCache, coursesLoading])
+  }, [getUser, getCourses, isAuth, coursesCache, coursesLoading])
 
   const commonButtonStyle = {
     mt: '1rem',
@@ -93,76 +91,87 @@ export const Home = () => {
   }
 
   const handleCourseStartDate = (courseStartDate: string) => {
-    return new Date(courseStartDate) > new Date()
+    return new Date(courseStartDate).getTime() > new Date().getTime()
+  }
+
+  const courseCards = (courses: Course[]) => {
+    return courses.map((course) => (
+      <Card key={course.id} sx={commonCardStyle}>
+        <CardContent>
+          <Typography variant="h5" align="center">
+            {course.name}
+          </Typography>
+          <Grid container justifyContent="center">
+            <Button
+              id="course-button"
+              variant="contained"
+              color="primary"
+              sx={commonButtonStyle}
+              disabled={handleCourseStartDate(course.start_date)}
+              onClick={() => {
+                navigate('/course/' + course.id)
+              }}>
+              {handleCourseStartDate(course.start_date)
+                ? t('pages.home.courseDisabled') + ' ' + dayjs(course.start_date).format('DD.MM.YYYY - HH:mm')
+                : t('pages.home.courseButton')}
+            </Button>
+          </Grid>
+        </CardContent>
+      </Card>
+    ))
+  }
+
+  const courseCreatorView = () => {
+    return (
+      <Card>
+        <CardContent>
+          <Grid container justifyContent="center">
+            <Button
+              id="create-course-button"
+              data-testid={'create-course-button'}
+              variant="contained"
+              color="primary"
+              onClick={() => setCreateCourseModalOpen(true)}
+              sx={commonButtonStyle}>
+              <AddCircle />
+            </Button>
+          </Grid>
+        </CardContent>
+        <CreateCourseModal
+          openCreateCourseModal={createCourseModalOpen}
+          handleCloseCreateCourseModal={handleCloseCourseModal}
+          activeStepCreateCourseModal={activeStepCreateCourseModal}
+          setActiveStepCreateCourseModal={setActiveStepCreateCourseModal}></CreateCourseModal>
+      </Card>
+    )
+  }
+
+  const noCourses = () => {
+    return (
+      <Card sx={commonCardStyle}>
+        <CardContent>
+          <Typography variant="h5" align="center">
+            {t('pages.home.noCourses')}
+          </Typography>
+        </CardContent>
+      </Card>
+    )
   }
 
   // Card containing the courses with a button to the specific course
   return (
-    <Grid container spacing={2} justifyContent="center">
+    <Grid container direction="row" spacing={2} justifyContent="center">
       <Grid item>
         {coursesLoading ? (
           <Card sx={commonCardStyle}>
             <Skeleton variant="rectangular" width="100%" height={118} />
           </Card>
         ) : courses.length === 0 ? (
-          <Card sx={commonCardStyle}>
-            <CardContent>
-              <Typography variant="h5" align="center">
-                {t('pages.home.noCourses')}
-              </Typography>
-            </CardContent>
-          </Card>
+          noCourses()
         ) : (
-          courses.map((course) => {
-            return (
-              <Card key={course.id} sx={commonCardStyle}>
-                <CardContent>
-                  <Typography variant="h5" align="center">
-                    {course.name}
-                  </Typography>
-                  <Grid container justifyContent="center">
-                    <Button
-                      id="course-button"
-                      variant="contained"
-                      color="primary"
-                      sx={commonButtonStyle}
-                      disabled={handleCourseStartDate(course.start_date)}
-                      onClick={() => {
-                        navigate('/course/' + course.id)
-                      }}>
-                      {handleCourseStartDate(course.start_date)
-                        ? t('pages.home.courseDisabled') + ' ' + dayjs(course.start_date).format('DD.MM.YYYY - HH:mm')
-                        : t('pages.home.courseButton')}
-                    </Button>
-                  </Grid>
-                </CardContent>
-              </Card>
-            )
-          })
+          courseCards(courses)
         )}
-        {isCourseCreatorRole && (
-          <Card>
-            <CardContent>
-              <Grid container justifyContent="center">
-                <Button
-                  id="create-course-button"
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setCreateCourseModalOpen(true)}
-                  sx={commonButtonStyle}>
-                  <AddCircleIcon />
-                </Button>
-              </Grid>
-            </CardContent>
-            <CreateCourseModal
-              openCreateCourseModal={createCourseModalOpen}
-              handleCloseCreateCourseModal={handleCloseCourseModal}
-              setSuccessRemoteCourseCreated={setSuccessRemoteCourseCreated}
-              successRemoteCourseCreated={successRemoteCourseCreated}
-              activeStepCreateCourseModal={activeStepCreateCourseModal}
-              setActiveStepCreateCourseModal={setActiveStepCreateCourseModal}></CreateCourseModal>
-          </Card>
-        )}
+        {isCourseCreatorRole && courseCreatorView()}
       </Grid>
     </Grid>
   )

@@ -16,7 +16,7 @@ export {
   fetchLearningPathElementSpecificStatus,
   postCalculateLearningPathForAllStudents
 } from './LearningPath'
-export { fetchLearningPathTopic, postTopic } from './Topic'
+export { fetchLearningPathTopic, postTopic, postAddAllStudentsToTopics } from './Topic'
 export { postContactForm } from './contact'
 export type { FormDataType } from './contact'
 export * from './auth'
@@ -25,9 +25,11 @@ export { SnackbarProvider } from './SnackbarProvider'
 export * from './connection'
 export { fetchCourses } from './Courses'
 export { fetchRemoteCourses } from './RemoteCourses'
+export { fetchRemoteTopics } from './RemoteTopics'
 export { postLearningElement } from './LearningElement'
 export { postLearningPathAlgorithm } from './LearningPathAlgorithm'
 export { postCourse } from './Course'
+export { postAddAllStudentsToCourse } from './Course'
 export * from './xAPI'
 export { fetchILS, fetchListK, postILS, postListK } from './Questionnaire'
 export * from './debounce'
@@ -40,3 +42,4 @@ export {
   postStudentLpLeAlg,
   postTeacherLpLeAlg
 } from './LearningPathLearningElementAlgorithm'
+export { postBufferContent } from './BufferContent'

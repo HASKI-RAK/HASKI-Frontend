@@ -5,21 +5,42 @@ import * as router from 'react-router'
 import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
 import { Home } from '@pages'
-import { AuthContext } from '@services'
+import { AuthContext, RoleContext, RoleContextType } from '@services'
 
 const navigate = jest.fn()
 
-jest.useFakeTimers()
+describe('Test the Home page-1', () => {
+  jest.useFakeTimers()
+  jest.mock('@common/hooks', () => ({
+    ...jest.requireActual('@common/hooks'),
+    useMediaQuery: jest.fn().mockReturnValue(true)
+  }))
 
-describe('Test the Home page', () => {
+  test('fetching Course returns no courses', async () => {
+    mockServices.fetchCourses.mockResolvedValueOnce({ courses: [] })
+
+    const { getByText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      expect(getByText('pages.home.noCourses')).toBeInTheDocument()
+    })
+  })
+})
+
+describe('Test the Home page-2', () => {
+  jest.useFakeTimers()
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
   test('fetching Course throws error', async () => {
-    mockServices.fetchCourses.mockImplementationOnce(() => {
-      throw new Error('Error')
-    })
+    mockServices.fetchCourses.mockRejectedValueOnce(new Error('Error'))
 
     jest.spyOn(console, 'error').mockImplementationOnce(() => {
       return
@@ -51,19 +72,18 @@ describe('Test the Home page', () => {
   })
 
   test('click on course navigates to course page', async () => {
+    const { getAllByText } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Home />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
     await waitFor(() => {
-      const { getAllByText } = render(
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Home />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      )
-
       act(() => {
         const course = getAllByText('pages.home.courseButton')
-        fireEvent.click(course[1])
-        expect(navigate).toHaveBeenCalledWith('/course/2')
+        fireEvent.click(course[0])
+        expect(navigate).toHaveBeenCalledWith('/course/1')
       })
     })
   })
@@ -88,23 +108,84 @@ describe('Test the Home page', () => {
     })
   })
 
-  test('fetching Course returns no courses', async () => {
-    mockServices.fetchCourses.mockImplementationOnce(() =>
-      Promise.resolve({
-        courses: []
-      })
-    )
+  test('students do not see create course button', async () => {
+    const studentContext = {
+      isStudentRole: true,
+      isCourseCreatorRole: false
+    } as RoleContextType
 
-    const { getByText } = render(
+    const { queryByText } = render(
       <MemoryRouter>
         <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
+          <RoleContext.Provider value={studentContext}>
+            <Home />
+          </RoleContext.Provider>
         </AuthContext.Provider>
       </MemoryRouter>
     )
 
     await waitFor(() => {
-      expect(getByText('pages.home.noCourses')).toBeInTheDocument()
+      act(() => {
+        expect(queryByText('create-course-button')).not.toBeInTheDocument()
+      })
+    })
+  })
+
+  test('course creator can see create course button and open create course modal', async () => {
+    const courseCreatorContext = {
+      isStudentRole: false,
+      isCourseCreatorRole: true
+    } as RoleContextType
+
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <Home />
+          </RoleContext.Provider>
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      act(() => {
+        expect(getByTestId('create-course-button')).toBeInTheDocument()
+        fireEvent.click(getByTestId('create-course-button'))
+        expect(getByTestId('create-course-modal-close-button')).toBeInTheDocument()
+        //expect(getAllByTestId('settings-menu')[0]).toBeInTheDocument()
+      })
+    })
+  })
+
+  test('course creator can fill out create course details and close modal', async () => {
+    const courseCreatorContext = {
+      isStudentRole: false,
+      isCourseCreatorRole: true
+    } as RoleContextType
+
+    const { getByTestId, queryByTestId } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <Home />
+          </RoleContext.Provider>
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
+
+    await waitFor(() => {
+      act(() => {
+        expect(getByTestId('create-course-button')).toBeInTheDocument()
+        fireEvent.click(getByTestId('create-course-button'))
+        expect(getByTestId('create-course-modal-next-step')).toBeInTheDocument()
+        expect(getByTestId('create-course-modal-close-button')).toBeInTheDocument()
+        fireEvent.click(getByTestId('create-course-modal-close-button'))
+      })
+    })
+    await waitFor(() => {
+      act(() => {
+        expect(queryByTestId('create-course-modal-close-button')).not.toBeInTheDocument()
+      })
     })
   })
 
@@ -148,3 +229,27 @@ describe('Test the Home page', () => {
   })
   */
 })
+
+/*
+describe('Home2', () => {
+  test('fetching Course returns no courses', async () => {
+    mockServices.fetchCourses.mockImplementation(() => {
+      courses: []
+    })
+
+    await waitFor(async () => {
+      const { getByText } = render(
+        <MemoryRouter>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <Home />
+          </AuthContext.Provider>
+        </MemoryRouter>
+      )
+
+      waitFor(() => {
+        expect(getByText('pages.home.noCourses')).toBeInTheDocument()
+      })
+    })
+  })
+})
+*/

@@ -1,4 +1,4 @@
-import { Dayjs } from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
@@ -14,7 +14,7 @@ import { RemoteCourse } from '@core'
 type CreateCourseDetailsTableProps = {
   remoteCourse: RemoteCourse | undefined
   datePickerValue: Dayjs | null
-  setDatePickerValue: (value: Dayjs | null) => void
+  setDatePickerValue: (value: Dayjs) => void
 }
 
 const CreateCourseDetailsTable = ({
@@ -41,7 +41,7 @@ const CreateCourseDetailsTable = ({
           <DateTimePicker
             label={t('components.CreateCourseDetailsTable.startDate')}
             value={datePickerValue}
-            onChange={setDatePickerValue}
+            onChange={(newValue) => setDatePickerValue(newValue || dayjs())}
             sx={{ width: '100%' }}
             format="DD/MM/YYYY HH:mm"
             ampm={false}

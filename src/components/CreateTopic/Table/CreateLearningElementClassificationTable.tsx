@@ -1,4 +1,5 @@
-import { ReactNode, memo, useEffect, useMemo } from 'react'
+import { SelectChangeEvent } from '@mui/material'
+import { ReactNode, memo, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -6,6 +7,7 @@ import {
   FormControl,
   FormControlLabel,
   Grid,
+  InputLabel,
   MenuItem,
   Paper,
   Select,
@@ -17,80 +19,95 @@ import {
 } from '@common/components'
 import { tableCellClasses } from '@mui/material'
 import { SkeletonList } from '@components'
-import { RemoteLearningElement, RemoteTopic } from '@core'
+import { RemoteLearningElement, RemoteTopics } from '@core'
 import { useCreateLearningElementClassificationTable } from './CreateLearningElementClassificationTable.hooks'
-import { Solution, RemoteLearningElementWithClassification } from '../Modal/CreateTopicModal'
+import { Solution } from '../Modal/CreateTopicModal'
 
+export type LearningElementWithClassification = RemoteLearningElement & {
+  classification: string
+  disabled?: boolean
+}
 
-type CreateLearningElementClassificationTableProps = {
-  selectedTopics: RemoteTopic[]
-  LearningElements: { [key: number]: RemoteLearningElement[] }
-  LearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
+export type CreateLearningElementClassificationTableProps = {
+  selectedTopics: RemoteTopics[]
+  selectedLearningElements: { [key: number]: RemoteLearningElement[] }
+  LearningElementsClassification: { [key: number]: LearningElementWithClassification[] }
   selectedSolutions: { [key: number]: Solution[] }
-  onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }) => void
+  onLearningElementChange: (selectedLearningElements: { [key: number]: LearningElementWithClassification[] }) => void
   onSolutionChange: (selectedSolutions: { [key: number]: Solution[] }) => void
   children?: ReactNode
 }
 
-const CreateLearningElementClassificationTable = memo(
-  ({
-    selectedTopics,
-    LearningElements,
-    LearningElementsClassification,
+export type CreateLearningElementClassificationTableOptionsType = {
+  name: string
+  key: string
+}[]
+
+const CreateLearningElementClassificationTable = ({
+  selectedTopics,
+  selectedLearningElements,
+  LearningElementsClassification,
     selectedSolutions,
-    onLearningElementChange,
+  onLearningElementChange,
     onSolutionChange,
-    children
-  }: CreateLearningElementClassificationTableProps) => {
-    //Hooks
-    const { t } = useTranslation()
-    const { handleClassificationChange, handleSolutionchange } = useCreateLearningElementClassificationTable({
-      LearningElementsClassification,
+  children
+}: CreateLearningElementClassificationTableProps) => {
+  //Hooks
+  const { t } = useTranslation()
+  const { handleClassificationChange, handleSolutionchange } = useCreateLearningElementClassificationTable({
+    LearningElementsClassification,
       selectedSolutions,
-      onLearningElementChange,
+    onLearningElementChange,
       onSolutionChange
+  })
+
+  //Constants
+  const learningElementClassifications: CreateLearningElementClassificationTableOptionsType = useMemo(() => {
+    return t('components.CreateLearningElementClassificationTable.classifications', {
+      returnObjects: true
     })
+  }, [t])
 
-    //Constants
-    const learningElementClassifications = useMemo(() => {
-      return t('components.CreateLearningElementClassificationTable.classifications', {
-        returnObjects: true
-      }) as [{ name: string; key: string; disabled: boolean }]
-    }, [])
+  useEffect(() => {
+    const updatedClassifications = Object.keys(selectedLearningElements).reduce((accumulator, topicId) => {
+      const topicIdInt = parseInt(topicId)
+      const existingClassifications = LearningElementsClassification[topicIdInt] || []
 
-    useEffect(() => {
-      const updatedClassifications = Object.keys(LearningElements).reduce((accumulator, topicId) => {
-        const topicIdInt = parseInt(topicId)
-        const existingClassifications = LearningElementsClassification[topicIdInt] || []
-
-        // Keep only the elements that are still present in LearningElements
-        const filteredClassifications = existingClassifications.filter((existingElement) =>
-          LearningElements[topicIdInt].some((newElement) => newElement.lms_id === existingElement.lms_id)
-        )
-
-        // Give elements the default classification that are in LearningElements but not yet classified
-        const newClassifications = LearningElements[topicIdInt].map((element) => {
-          const existingElement = filteredClassifications.find((e) => e.lms_id === element.lms_id)
-          return existingElement || { ...element, classification: 'noKey' }
-        })
-
-        return { ...accumulator, [topicIdInt]: newClassifications }
-      }, {})
-
-      onLearningElementChange(updatedClassifications)
-    }, [LearningElements])
-
-    //Return early
-    if (Object.keys(LearningElementsClassification).length === 0) {
-      return (
-        <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
-          <Grid container direction="column" alignItems="center" sx={{ mt: '2rem' }}>
-            <SkeletonList />
-            {children}
-          </Grid>
-        </Grid>
+      // Keep only the elements that are still present in LearningElements
+      const filteredClassifications = existingClassifications.filter((existingElement) =>
+        selectedLearningElements[topicIdInt].some((newElement) => newElement.lms_id === existingElement.lms_id)
       )
-    }
+
+      // Give elements the default classification that are in LearningElements but not yet classified
+      const newClassifications = selectedLearningElements[topicIdInt].map((element) => {
+        const existingElement = filteredClassifications.find((e) => e.lms_id === element.lms_id)
+        return existingElement ?? { ...element, classification: '' }
+      })
+
+      return { ...accumulator, [topicIdInt]: newClassifications }
+    }, {})
+
+    onLearningElementChange(updatedClassifications)
+  }, [selectedLearningElements])
+
+  const handleSelectChange = useCallback(
+    (lmsTopic: RemoteTopics, element: LearningElementWithClassification) => (event: SelectChangeEvent) => {
+      handleClassificationChange(lmsTopic.topic_lms_id, element.lms_id, event.target.value)
+    },
+    [handleClassificationChange]
+  )
+
+  //Return early
+  if (Object.keys(LearningElementsClassification).length === 0) {
+    return (
+      <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
+        <Grid container direction="column" alignItems="center" sx={{ mt: '2rem' }}>
+          <SkeletonList />
+          {children}
+        </Grid>
+      </Grid>
+    )
+  }
 
     return (
       <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
@@ -134,10 +151,11 @@ const CreateLearningElementClassificationTable = memo(
                 {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
                   <TableRow key={element.lms_id}>
                     <TableCell sx={{padding: '0rem'}}>
-                      <FormControlLabel control={<Checkbox checked={true} />} label={element.lms_learning_element_name} />
+                      <FormControlLabel control={<Checkbox checked={true} disabled={true}/>} label={<Typography>element.lms_learning_element_name</Typography>} />
                     </TableCell>
                     <TableCell sx={{textAlign: 'center', padding: '0rem'}}>
                       <FormControl sx={{ m: 1, width: '21rem' }} size="small">
+                        <InputLabel>{t('appGlobal.classification')}</InputLabel>
                         <Select
                           value={element.classification}
                           onChange={(event) =>
@@ -147,12 +165,13 @@ const CreateLearningElementClassificationTable = memo(
                               event.target.value as string
                             )
                           }
+                          label={t('appGlobal.classification')}
                           disabled={element.disabled}>
                           {learningElementClassifications.map((classification) => (
                             <MenuItem
                               key={classification.key}
                               value={classification.key}
-                              disabled={classification.disabled && element.classification !== 'noKey'}>
+                              >
                               {classification.name}
                             </MenuItem>
                           ))}
@@ -173,7 +192,7 @@ const CreateLearningElementClassificationTable = memo(
       </Grid>
     )
   }
-)
+
 // eslint-disable-next-line immutable/no-mutation
 CreateLearningElementClassificationTable.displayName = 'CreateLearningElementClassificationTable'
-export default CreateLearningElementClassificationTable
+export default memo(CreateLearningElementClassificationTable)

@@ -57,13 +57,13 @@ export { FormGroup } from './DefaultFormGroup/DefaultFormGroup'
 export { Zoom } from './DefaultZoom/DefaultZoom'
 export { Drawer } from './DefaultDrawer/DefaultDrawer'
 export { Switch } from './DefaultSwitch/DefaultSwitch'
-export { AdapterDayjs } from './XDatePickers/AdapterDayjs/AdapterDayjs'
-export { DateTimePicker } from './XDatePickers/DateTimePicker/DateTimePicker'
-export { LocalizationProvider } from './XDatePickers/LocalizationProvider/LocalizationProvider'
-export { renderTimeViewClock } from './XDatePickers/RenderTimeViewClock'
+export { AdapterDayjs } from './DateTimePicker/AdapterDayjs'
+export { DateTimePicker } from './DateTimePicker/DateTimePicker'
+export { LocalizationProvider } from './DateTimePicker/LocalizationProvider'
+export { renderTimeViewClock } from './DateTimePicker/RenderTimeViewClock'
 
-export { Network } from './Nivo/Network/Network'
-export { Bar } from './Nivo/Bar/Bar'
+export { Network } from './Graphs/Network'
+export { Bar } from './Graphs/Bar'
 
 /**
  * Reusable types

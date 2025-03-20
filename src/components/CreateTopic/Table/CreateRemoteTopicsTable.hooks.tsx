@@ -1,14 +1,14 @@
 import { useCallback, useMemo } from 'react'
-import { RemoteTopic } from '@core'
+import { RemoteTopics } from '@core'
 
 type useCreateRemoteTopicsTableProps = {
-  onTopicChange: (selectedTopics: RemoteTopic[]) => void
-  selectedTopics: RemoteTopic[]
+  onTopicChange: (selectedTopics: RemoteTopics[]) => void
+  selectedTopics: RemoteTopics[]
 }
 
 export const useCreateRemoteTopicsTable = ({ onTopicChange, selectedTopics }: useCreateRemoteTopicsTableProps) => {
   const handleTopicChange = useCallback(
-    (topic: RemoteTopic, checked: boolean) => {
+    (topic: RemoteTopics, checked: boolean) => {
       const updatedTopics = checked
         ? [...selectedTopics, topic]
         : selectedTopics.filter((t) => t.topic_lms_id !== topic.topic_lms_id)

@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   CircularProgress,
@@ -19,7 +19,6 @@ import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
  * @prop isOpen - Boolean value to determine if the modal is open.
  * @prop handleClose - function executed when closing the modal.
  * @prop changeObserver - function executed when the algorithm is changed.
- * @prop getIDs - Object containing the courseID and topicID.
  * @prop options - Array of objects containing the name, description,
  *  and key of the algorithms. Used in Tests instead of the translation output.
  * @interface
@@ -29,16 +28,12 @@ type AlgorithmSettingsModalProps = {
   handleClose: () => void
   changeObserver?: () => void
   topicId?: number
-  teacherAlgorithm?: string
-  studentAlgorithm?: string
-  options?: { name: string; description: string; key: string }[] //for testing
 }
 
 export type OptionsType = {
   name: string
   description: string
   key: string
-  disabled: true
 }[]
 /**
  *
@@ -53,40 +48,18 @@ export type OptionsType = {
  */
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
   const { t } = useTranslation()
-  const options =
-    props.options ??
-    [...(t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true }) as OptionsType)].slice(1)
 
-  const [selected, setSelected] = useState(0)
+  const options: OptionsType = t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true })
 
-  const handleSelect = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSelected(parseInt(event.target.value))
-    },
-    [setSelected]
-  )
-  const { handleSave, waitForBackend, getSelected } = useAlgorithmSettingsModal({
+  const { handleSave, handleSelect, waitForBackend, selected, teacherAlgorithm } = useAlgorithmSettingsModal({
     handleClose: props.handleClose,
     changeObserver: props.changeObserver,
     options,
-    selected,
-    topicId: props.topicId,
-    studentAlgorithm: props.studentAlgorithm,
-    teacherAlgorithm: props.teacherAlgorithm
+    topicId: props.topicId
   })
 
-  useEffect(() => {
-    const newSelected = getSelected()
-    setSelected(newSelected)
-  }, [props.studentAlgorithm])
-
   return (
-    <Modal
-      open={props.isOpen}
-      onClose={props.handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-      data-testid="algorithm-modal">
+    <Modal open={props.isOpen} onClose={props.handleClose} data-testid="algorithm-settings-modal">
       <Grid
         container
         sx={{
@@ -114,14 +87,20 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
                   <FormControlLabel
                     sx={{ width: { xl: '16rem' } }}
                     value={index}
-                    control={<Radio id={option.key + '-radio'} role="radio-button" checked={index === selected} />}
+                    control={
+                      <Radio
+                        id={option.key + '-algorithm-settings-modal-radio-button'}
+                        role="radio-button"
+                        checked={index === selected}
+                      />
+                    }
                     label={option.name}
                   />
-                  {props.teacherAlgorithm === option.key && (
+                  {teacherAlgorithm === option.key && (
                     <Tooltip
                       arrow
                       title={t('components.AlgorithmSettingsModal.teacherIconTip')}
-                      data-testid="teacher-icon">
+                      data-testid="algorithm-settings-modal-teacher-recommendation-icon">
                       <School />
                     </Tooltip>
                   )}
@@ -138,29 +117,30 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
               right: '0.5rem'
             }}
             color="primary"
-            id="algorithm-modal-close"
+            id="algorithm-settings-modal-close-button"
             onClick={props.handleClose}
-            data-testid="algorithm-modal-close-button">
+            data-testid="algorithm-settings-modal-close-button">
             <Close />
           </Fab>
           <Divider orientation="vertical" sx={{ display: { xs: 'none', md: 'flex' } }} />
           <Grid item container direction="column" spacing={1} sx={{ display: { xs: 'none', md: 'flex' } }} xs={6.5}>
-            <Typography id="modal-description-header" variant="h6" component="h6" align="center">
+            <Typography variant="h6" component="h6" align="center">
               {t('components.AlgorithmSettingsModal.headerRight')}
             </Typography>
-            <Typography id="modal-description" variant="body1" component="p" align="center">
-              {options[selected].description}
+            <Typography variant="body1" component="p" align="center">
+              {options[selected]?.description}
             </Typography>
           </Grid>
         </Grid>
-        {waitForBackend ?? <CircularProgress size={24} />}
         <Fab
           onClick={handleSave}
           aria-label="save"
-          id="algorithm-save-button"
-          data-testid={'algorithm-save-button'}
-          sx={{ position: 'absolute', right: '0.5rem', bottom: '0.5rem' }}>
-          <Save />
+          id="algorithm-settings-modal-save-button"
+          data-testid={'algorithm-settings-modal-save-button'}
+          sx={{ position: 'absolute', right: '0.5rem', bottom: '0.5rem' }}
+          disabled={waitForBackend} // Disable while loading
+        >
+          {waitForBackend ? <CircularProgress size={24} /> : <Save />}
         </Fab>
       </Grid>
     </Modal>

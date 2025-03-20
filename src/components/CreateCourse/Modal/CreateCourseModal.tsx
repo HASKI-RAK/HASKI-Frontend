@@ -1,18 +1,19 @@
 import dayjs, { Dayjs } from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 import log from 'loglevel'
-import React, { Dispatch, SetStateAction, memo, useContext, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, memo, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, CircularProgress, Fab, Grid, Modal } from '@common/components'
 import { Close } from '@common/icons'
-import { CreateCourseDetailsTable, CreateCourseTable } from '@components'
-import { RemoteCourse, User } from '@core'
-import { SnackbarContext, postCourse } from '@services'
+import { CreateCourseDetailsTable, CreateCourseTable, handleError } from '@components'
+import { RemoteCourse } from '@core'
+import { SnackbarContext, postAddAllStudentsToCourse, postCourse } from '@services'
 import { usePersistedStore } from '@store'
+
+dayjs.extend(utc)
 
 type CreateCourseModalProps = {
   openCreateCourseModal?: boolean
-  successRemoteCourseCreated: boolean
-  setSuccessRemoteCourseCreated: Dispatch<SetStateAction<boolean>>
   handleCloseCreateCourseModal: () => void
   activeStepCreateCourseModal: number
   setActiveStepCreateCourseModal: Dispatch<SetStateAction<number>>
@@ -20,8 +21,6 @@ type CreateCourseModalProps = {
 
 const CreateCourseModal = ({
   openCreateCourseModal = false,
-  successRemoteCourseCreated,
-  setSuccessRemoteCourseCreated,
   handleCloseCreateCourseModal,
   activeStepCreateCourseModal,
   setActiveStepCreateCourseModal
@@ -29,8 +28,7 @@ const CreateCourseModal = ({
   //Hooks
   const { t } = useTranslation()
   const [selectedRemoteCourse, setSelectedRemoteCourse] = useState<RemoteCourse>()
-  const [courseStartDateValue, setCourseStartDateValue] = useState<Dayjs | null>(dayjs(new Date()))
-  const [user, setUser] = useState<User>()
+  const [courseStartDateValue, setCourseStartDateValue] = useState<Dayjs>(dayjs(new Date()))
   const [isSending, setIsSending] = useState<boolean>(false)
 
   //Stores
@@ -40,58 +38,42 @@ const CreateCourseModal = ({
   const handleCourseSelection = (course: RemoteCourse) => {
     setSelectedRemoteCourse(course)
   }
-
-  useEffect(() => {
-    getUser()
-      .then((user) => {
-        setUser(user)
-      })
-      .catch((error) => {
-        addSnackbar({
-          message: t('error.getUser'),
-          severity: 'error',
-          autoHideDuration: 5000
-        })
-        log.error(t('error.getUser') + ' ' + error)
-      })
-  }, [])
-
-  const handleCreateCourse = () => {
+  const handleCreateCourse = async () => {
     setIsSending(true)
-    // Given Dateformat:Fri Jul 19 2024 08:47:15 GMT+0200 -
-    // Returned Dateformat: 2024-07-18T14:23:09Z - YYYY-MM-DDTHH:MM:SSZ
-    const formatDate = (date: Date) => {
-      return date.toISOString().split('.')[0] + 'Z'
+
+    const formatDate = (date: Dayjs) => {
+      return date.utc().format('YYYY-MM-DDTHH:mm:ss[Z]') // Format without timezone adjustments for the Backend
     }
 
     const createCourse = {
       lms_id: selectedRemoteCourse?.id,
       name: selectedRemoteCourse?.fullname,
-      start_date: courseStartDateValue ? formatDate(courseStartDateValue.toDate()) : formatDate(new Date()),
-      university: user?.university,
-      created_by: user?.settings.user_id
+      start_date: formatDate(courseStartDateValue),
+      university: await getUser().then((user) => {
+        return user.university
+      }),
+      created_by: await getUser().then((user) => {
+        return user.settings.user_id
+      })
     }
 
-    postCourse({ outputJson: JSON.stringify(createCourse) }).then((response) => {
-      if (response) {
-        addSnackbar({
-          message: t('appGlobal.dataSendSuccessful'),
-          severity: 'success',
-          autoHideDuration: 5000
+    postCourse({ outputJson: JSON.stringify(createCourse) })
+      .then((course) => {
+        postAddAllStudentsToCourse(course.id).then(() => {
+          addSnackbar({
+            message: t('appGlobal.dataSendSuccessful'),
+            severity: 'success',
+            autoHideDuration: 5000
+          })
+          log.info(t('appGlobal.dataSendSuccessful'))
+          setIsSending(false)
+          handleCloseCreateCourseModal()
         })
-        log.info(t('appGlobal.dataSendSuccessful'))
-        setSuccessRemoteCourseCreated(true)
-      } else {
-        addSnackbar({
-          message: t('appGlobal.dataSendUnsuccessful'),
-          severity: 'error',
-          autoHideDuration: 5000
-        })
-        log.error(t('appGlobal.dataSendUnsuccessful'))
-        setSuccessRemoteCourseCreated(false)
-      }
-      setIsSending(false)
-    })
+      })
+      .catch((error) => {
+        handleError(t, addSnackbar, 'appGlobal.dataSendUnsuccessful', error, 5000)
+        setIsSending(false)
+      })
   }
 
   return (
@@ -112,7 +94,8 @@ const CreateCourseModal = ({
           }}>
           <Fab
             color="primary"
-            id={'create-course-modal-close-button'}
+            id="create-course-modal-close-button"
+            data-testid="create-course-modal-close-button"
             onClick={() => handleCloseCreateCourseModal()}
             sx={{
               position: 'sticky',
@@ -123,13 +106,11 @@ const CreateCourseModal = ({
           </Fab>
           {activeStepCreateCourseModal === 0 ? (
             <Grid>
-              <CreateCourseTable
-                onCourseSelect={handleCourseSelection}
-                selectedCourseName={selectedRemoteCourse?.fullname ?? ''}
-              />
+              <CreateCourseTable onCourseSelect={handleCourseSelection} selectedCourse={selectedRemoteCourse} />
               <Grid container justifyContent="center" alignItems="center" sx={{ mt: 2 }}>
                 <Button
                   id="create-course-modal-next-step"
+                  data-testid={'create-course-modal-next-step'}
                   variant="contained"
                   color="primary"
                   onClick={() => setActiveStepCreateCourseModal(1)}
@@ -157,7 +138,7 @@ const CreateCourseModal = ({
                   id="create-course-modal-create-button"
                   variant="contained"
                   color="primary"
-                  disabled={isSending || successRemoteCourseCreated}
+                  disabled={isSending}
                   sx={{
                     m: 2,
                     '&.Mui-disabled': {
