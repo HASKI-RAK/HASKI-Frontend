@@ -1,6 +1,6 @@
 import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
-import CreateDefaultLearningPathModal from '../Table/CreateDefaultLearningPathTable'
+import CreateDefaultLearningPathTable from '../Table/CreateDefaultLearningPathTable'
 
 type DefaultLearningPathModalProps = {
   open?: boolean
@@ -31,11 +31,11 @@ const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearning
           style={{
             position: 'absolute',
             top: '1%',
-            left: '94.5%'
+            left: '95%'
           }}>
           <Close />
         </Fab>
-        <CreateDefaultLearningPathModal />
+        <CreateDefaultLearningPathTable />
       </Box>
     </Modal>
   )

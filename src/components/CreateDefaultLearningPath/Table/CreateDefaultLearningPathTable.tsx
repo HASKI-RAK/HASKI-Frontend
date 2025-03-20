@@ -2,7 +2,7 @@ import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, c
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import React, { ReactElement, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Button, Grid, IconButton, ListItemIcon, Stack, Typography } from '@common/components'
+import { Box, Button, Grid, IconButton, ListItemIcon, Typography } from '@common/components'
 import {
   Article,
   Assignment,
@@ -153,12 +153,25 @@ const CreateDefaultLearningPathTable = () => {
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDragCancel={() => setActiveId(null)}>
-      {activeStep == 0 ? (
-        <CoverSheet
-          header={'Default Learning Path'}
-          body={t('components.CreateDefaultLearningPathTable.introduction')}
-          imagePath={'ProjectDescriptionImage04.jpg'}
-        />
+      {activeStep === 0 ? (
+        <Grid container direction="column" justifyContent="space-between" alignItems="center" sx={{ height: '100%' }}>
+          <Grid item>
+            <CoverSheet
+              header={'Default Learning Path'}
+              body={t('components.CreateDefaultLearningPathTable.introduction')}
+              imagePath={'ProjectDescriptionImage04.jpg'}
+            />
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setActiveStep((prevActiveStep) => prevActiveStep + 1)}
+              sx={{ mb: '2rem', width: '20rem' }}>
+              Start
+            </Button>
+          </Grid>
+        </Grid>
       ) : (
         <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
           <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
@@ -279,17 +292,6 @@ const CreateDefaultLearningPathTable = () => {
             </Grid>
           </Box>
         </Box>
-      )}
-      {activeStep == 0 && (
-        <Stack direction="column" justifyContent="space-around" alignItems="center">
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => setActiveStep((prevActiveStep) => prevActiveStep + 1)}
-            sx={{ mb: '2rem', width: '20rem' }}>
-            {'Start'}
-          </Button>
-        </Stack>
       )}
     </DndContext>
   )
