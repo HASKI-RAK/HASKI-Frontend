@@ -387,9 +387,6 @@ const CreateDefaultLearningPathTable = () => {
                             </IconButton>
                           </Box>
                         </Grid>
-                        <Grid item>
-                          <Box height={12} />
-                        </Grid>
                       </Grid>
                       <Grid item>
                         <Box height={12} />
