@@ -1,6 +1,6 @@
 import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, closestCenter } from '@dnd-kit/core'
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import React, { ReactElement, useMemo, useState } from 'react'
+import React, { ReactElement, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid, IconButton, ListItemIcon, Typography } from '@common/components'
 import {
@@ -20,6 +20,9 @@ import {
   Videocam
 } from '@common/icons'
 import { CoverSheet } from '@components'
+import { DefaultLearningPath } from '@core'
+import { postDefaultLearningPath } from '@services'
+import { usePersistedStore, useStore } from '@store'
 import UnassignedItem, { ClassificationItem, DragPreview } from './DraggableItem'
 import { Droppable } from './DroppableItem'
 import { SortableItem } from './SortableItem'
@@ -46,6 +49,9 @@ const CreateDefaultLearningPathTable = () => {
   const [orderedItems, setOrderedItems] = useState<string[]>([])
   const [disabledItems, setDisabledItems] = useState<string[]>([])
   const [activeId, setActiveId] = useState<null | string>(null)
+  const getUser = usePersistedStore((state) => state.getUser)
+  const clearDisabledClassificationsCache = usePersistedStore((state) => state.clearDisabledClassificationsCache)
+  const clearLearningPathElementCache = useStore((state) => state.clearLearningPathElementCache)
 
   // Retrieve classification items from translations.
   const learningElementClassifications: ClassificationItem[] = useMemo(() => {
@@ -138,8 +144,31 @@ const CreateDefaultLearningPathTable = () => {
   const isSubmitActive = orderedItems.length + disabledItems.length === classificationItems.length
 
   const handleSubmit = () => {
-    console.log('Submitted order:', orderedItems)
-    console.log('Disabled items:', disabledItems)
+    const orderedItemsData: DefaultLearningPath[] = orderedItems.map((key, index) => ({
+      classification: key,
+      position: index + 1,
+      disabled: disabledItems.includes(key),
+      university: 'HS-KE'
+    }))
+    disabledItems.map((key, index) =>
+      orderedItemsData.push({
+        classification: key,
+        position: index + 9000,
+        disabled: true,
+        university: 'HS-KE'
+      })
+    )
+    return getUser().then((user) => {
+      return postDefaultLearningPath({
+        userId: user.settings.id,
+        userLmsId: user.lms_user_id,
+        outputJson: JSON.stringify(orderedItemsData)
+      }).then((defaultLearningPath) => {
+        clearDisabledClassificationsCache()
+        clearLearningPathElementCache()
+        return console.log(defaultLearningPath)
+      })
+    })
   }
 
   const activeItem = classificationItems.find((item) => item.key === activeId)
