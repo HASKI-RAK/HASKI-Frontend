@@ -35,7 +35,7 @@ const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearning
           }}>
           <Close />
         </Fab>
-        <CreateDefaultLearningPathTable />
+        <CreateDefaultLearningPathTable handleClose={handleClose} />
       </Box>
     </Modal>
   )

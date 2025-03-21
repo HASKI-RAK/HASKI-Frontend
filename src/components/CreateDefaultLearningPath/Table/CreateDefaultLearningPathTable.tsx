@@ -1,8 +1,8 @@
 import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, closestCenter } from '@dnd-kit/core'
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import React, { ReactElement, useEffect, useMemo, useState } from 'react'
+import { ReactElement, useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Button, Grid, IconButton, ListItemIcon, Typography } from '@common/components'
+import { Box, Button, CircularProgress, Grid, IconButton, ListItemIcon, Typography } from '@common/components'
 import {
   Article,
   Assignment,
@@ -21,7 +21,7 @@ import {
 } from '@common/icons'
 import { CoverSheet } from '@components'
 import { DefaultLearningPath } from '@core'
-import { postDefaultLearningPath } from '@services'
+import { SnackbarContext, postDefaultLearningPath } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import UnassignedItem, { ClassificationItem, DragPreview } from './DraggableItem'
 import { Droppable } from './DroppableItem'
@@ -43,12 +43,22 @@ const iconMapping: Record<string, ReactElement> = {
   RQ: <Feedback />
 }
 
-const CreateDefaultLearningPathTable = () => {
+type createDefaultLearningPathTableProps = {
+  handleClose?: (event: object, reason: string) => void
+}
+
+const CreateDefaultLearningPathTable = ({
+  handleClose = () => {
+    /*not empty arrow function*/
+  }
+}: createDefaultLearningPathTableProps) => {
   const { t } = useTranslation()
   const [activeStep, setActiveStep] = useState(0)
+  const { addSnackbar } = useContext(SnackbarContext)
   const [orderedItems, setOrderedItems] = useState<string[]>([])
   const [disabledItems, setDisabledItems] = useState<string[]>([])
   const [activeId, setActiveId] = useState<null | string>(null)
+  const [isSending, setIsSending] = useState(false)
   const getUser = usePersistedStore((state) => state.getUser)
   const clearDisabledClassificationsCache = usePersistedStore((state) => state.clearDisabledClassificationsCache)
   const clearLearningPathElementCache = useStore((state) => state.clearLearningPathElementCache)
@@ -144,6 +154,7 @@ const CreateDefaultLearningPathTable = () => {
   const isSubmitActive = orderedItems.length + disabledItems.length === classificationItems.length
 
   const handleSubmit = () => {
+    setIsSending(true)
     const orderedItemsData: DefaultLearningPath[] = orderedItems.map((key, index) => ({
       classification: key,
       position: index + 1,
@@ -163,11 +174,20 @@ const CreateDefaultLearningPathTable = () => {
         userId: user.settings.id,
         userLmsId: user.lms_user_id,
         outputJson: JSON.stringify(orderedItemsData)
-      }).then((defaultLearningPath) => {
-        clearDisabledClassificationsCache()
-        clearLearningPathElementCache()
-        return console.log(defaultLearningPath)
       })
+        .then((defaultLearningPath) => {
+          clearDisabledClassificationsCache()
+          clearLearningPathElementCache()
+          setIsSending(false)
+          handleClose({}, 'backdropClick')
+        })
+        .then(() => {
+          addSnackbar({
+            message: t('appGlobal.dataSendSuccessful'),
+            severity: 'success',
+            autoHideDuration: 5000
+          })
+        })
     })
   }
 
@@ -312,9 +332,9 @@ const CreateDefaultLearningPathTable = () => {
               <Button
                 id="submit-default-learning-path"
                 variant="contained"
-                disabled={!isSubmitActive}
+                disabled={!isSubmitActive || isSending}
                 onClick={handleSubmit}>
-                Submit
+                {isSending ? <CircularProgress size={24} /> : t('Submit')}
               </Button>
             </Grid>
           </Box>
