@@ -25,6 +25,8 @@ describe('Topic Page', () => {
     mockReactFlow()
   })
 
+  const mocklearningPathDisabledClassifications: string[] = ['KÜ', 'EK']
+
   it('renders when Auth is true', () => {
     act(() => {
       const topic = render(
@@ -202,7 +204,11 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus)
+    const nodesAndEdges = result.current.mapNodes(
+      mockLearningPath,
+      mockLearningElementStatus,
+      mocklearningPathDisabledClassifications
+    )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -413,7 +419,11 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus)
+    const nodesAndEdges = result.current.mapNodes(
+      mockLearningPath,
+      mockLearningElementStatus,
+      mocklearningPathDisabledClassifications
+    )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -775,7 +785,11 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus)
+    const nodesAndEdges = result.current.mapNodes(
+      mockLearningPath,
+      mockLearningElementStatus,
+      mocklearningPathDisabledClassifications
+    )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -1297,7 +1311,12 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus, true)
+    const nodesAndEdges = result.current.mapNodes(
+      mockLearningPath,
+      mockLearningElementStatus,
+      mocklearningPathDisabledClassifications,
+      true
+    )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
