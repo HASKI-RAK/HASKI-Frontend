@@ -4,7 +4,6 @@ import { MemoryRouter } from 'react-router-dom'
 import ReactFlow, { Node } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
-import BasicNode from './BasicNode'
 
 describe('BasicNode tests', () => {
   beforeEach(() => {
@@ -23,7 +22,8 @@ describe('BasicNode tests', () => {
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
-      isDone: false
+      isDone: false,
+      isDisabled: false
     }
 
     const mockNode: Node = {
@@ -63,7 +63,8 @@ describe('BasicNode tests', () => {
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
-      isDone: true
+      isDone: true,
+      isDisabled: true
     }
 
     const mockNode: Node = {
