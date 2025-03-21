@@ -37,7 +37,6 @@ export const useCreateTopicModal = ({
   setSelectedLearningElementsClassification,
   selectedLearningElementSolution,
   setSelectedLearningElementSolution,
-  selectedSolutions,
   setSelectedSolutions,
   setSelectedAlgorithms,
   setSuccessfullyCreatedTopicsCount

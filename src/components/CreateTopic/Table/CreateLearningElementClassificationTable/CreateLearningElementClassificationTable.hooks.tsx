@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import { LearningElementWithClassification } from '@components'
-import { Solution } from '../Modal/CreateTopicModal'
+import { Solution } from '../../Modal/CreateTopicModal/CreateTopicModal'
 
 type useCreateLearningElementClassificationTableProps = {
   LearningElementsClassification: { [key: number]: LearningElementWithClassification[] }

@@ -1,6 +1,6 @@
 import { useCallback, useMemo, memo } from "react"
 import { LearningElementWithSolution } from "@core"
-import { Solution, RemoteLearningElementWithSolution } from "../Modal/CreateTopicModal"
+import { Solution, RemoteLearningElementWithSolution } from "../../Modal/CreateTopicModal/CreateTopicModal"
 
 type useCreateLearningElementSolutionTable = {
   learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }

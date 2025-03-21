@@ -12,13 +12,12 @@ import {
   Typography
 } from '@common/components'
 import { SkeletonList } from '@components'
-import { RemoteTopic } from '@core'
+import { RemoteTopics } from '@core'
 import { useCreateLearningElementSolutionTable } from './CreateLearningElementSolutionTable.hooks'
-import { Solution, RemoteLearningElementWithSolution, RemoteLearningElementWithClassification } from '../Modal/CreateTopicModal'
-import { Button } from '@mui/material'
+import { Solution, RemoteLearningElementWithSolution, RemoteLearningElementWithClassification } from '../../Modal/CreateTopicModal/CreateTopicModal'
 
 type CreateLearningElementClassificationTableProps = {
-  selectedTopics: RemoteTopic[]
+  selectedTopics: RemoteTopics[]
   LearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
   selectedSolutions: { [key: number]: Solution[] }
   learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }

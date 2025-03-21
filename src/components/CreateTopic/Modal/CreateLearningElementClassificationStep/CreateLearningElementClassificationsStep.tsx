@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
 import { CreateLearningElementClassificationTable } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
-import { RemoteLearningElementWithClassification } from './CreateTopicModal'
+import { RemoteLearningElementWithClassification, Solution } from '../CreateTopicModal/CreateTopicModal'
 
 type CreateLearningElementClassificationsStepProps = {
   selectedTopics: RemoteTopics[]
@@ -12,6 +12,8 @@ type CreateLearningElementClassificationsStepProps = {
   handleLearningElementClassification: (classification: {
     [key: number]: RemoteLearningElementWithClassification[]
   }) => void
+  selectedSolutions: { [key: number]: Solution[] }
+  onSolutionChange: (selectedSolutions: { [key: number]: Solution[] }) => void
   onNext: () => void
   onBack: () => void
 }
@@ -21,6 +23,8 @@ const CreateLearningElementClassificationsStep = ({
   selectedLearningElements,
   selectedLearningElementsClassification,
   handleLearningElementClassification,
+  selectedSolutions,
+  onSolutionChange,
   onNext,
   onBack
 }: CreateLearningElementClassificationsStepProps) => {
@@ -32,7 +36,9 @@ const CreateLearningElementClassificationsStep = ({
         selectedTopics={selectedTopics}
         selectedLearningElements={selectedLearningElements}
         LearningElementsClassification={selectedLearningElementsClassification}
-        onLearningElementChange={handleLearningElementClassification}>
+        onLearningElementChange={handleLearningElementClassification}
+        selectedSolutions={selectedSolutions}
+        onSolutionChange={onSolutionChange}>
         <Box sx={{ padding: '1rem', width: '95%' }}>
           <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
             <Button variant="contained" color="primary" onClick={onBack} sx={{ ml: 1 }}>
@@ -43,7 +49,7 @@ const CreateLearningElementClassificationsStep = ({
               color="primary"
               disabled={
                 !selectedTopics.every((topic) =>
-                  selectedLearningElementsClassification[topic.topic_lms_id]?.every((el) => el.classification !== '')
+                  selectedLearningElementsClassification[topic.topic_lms_id]?.every((el) => el.classification !== '' || el.disabled)
                 )
               }
               onClick={onNext}

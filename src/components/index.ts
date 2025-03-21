@@ -55,19 +55,19 @@ export { default as TopicCard } from './TopicCard/TopicCard'
 export { default as CreateCourseDetailsTable } from './CreateCourse/Table/CreateCourseDetailsTable'
 export { default as CreateCourseTable } from './CreateCourse/Table/CreateCourseTable'
 export { default as CreateCourseModal } from './CreateCourse/Modal/CreateCourseModal'
-export { default as CreateRemoteTopicsTable } from './CreateTopic/Table/CreateRemoteTopicsTable'
-export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopicsTable'
-export { default as CreateLearningElementTable } from './CreateTopic/Table/CreateLearningElementTable'
+export { default as CreateRemoteTopicsTable } from './CreateTopic/Table/CreateRemoteTopicsTabel/CreateRemoteTopicsTable'
+export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopicsTable/ExistingTopicsTable'
+export { default as CreateLearningElementTable } from './CreateTopic/Table/CreateLearningElementTable/CreateLearningElementTable'
 export {
   default as CreateLearningElementClassificationTable,
   type LearningElementWithClassification
-} from './CreateTopic/Table/CreateLearningElementClassificationTable'
+} from './CreateTopic/Table/CreateLearningElementClassificationTable/CreateLearningElementClassificationTable'
 export {
   default as CreateAlgorithmTable,
   type CreateAlgorithmTableNameProps
-} from './CreateTopic/Table/CreateAlgorithmTable'
-export { default as CreateLearningElementSolutionTable } from './CreateTopic/Table/CreateLearningElementSolutionTable'
-export { default as CreateTopicModal } from './CreateTopic/Modal/CreateTopicModal'
+} from './CreateTopic/Table/CreateAlgorithmTable/CreateAlgorithmTable'
+export { default as CreateLearningElementSolutionTable } from './CreateTopic/Table/CreateLearningElementSolutionTable/CreateLearningElementSolutionTable'
+export { default as CreateTopicModal } from './CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 
 export * from './GlobalNav'
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure

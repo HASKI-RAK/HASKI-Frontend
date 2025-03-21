@@ -21,7 +21,7 @@ import { tableCellClasses } from '@mui/material'
 import { SkeletonList } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
 import { useCreateLearningElementClassificationTable } from './CreateLearningElementClassificationTable.hooks'
-import { Solution } from '../Modal/CreateTopicModal'
+import { Solution } from '../../Modal/CreateTopicModal/CreateTopicModal'
 
 export type LearningElementWithClassification = RemoteLearningElement & {
   classification: string
@@ -151,7 +151,7 @@ const CreateLearningElementClassificationTable = ({
                 {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
                   <TableRow key={element.lms_id}>
                     <TableCell sx={{padding: '0rem'}}>
-                      <FormControlLabel control={<Checkbox checked={true} disabled={true}/>} label={<Typography>element.lms_learning_element_name</Typography>} />
+                      <FormControlLabel control={<Checkbox checked={true} disabled={true}/>} label={<Typography>{element.lms_learning_element_name}</Typography>} />
                     </TableCell>
                     <TableCell sx={{textAlign: 'center', padding: '0rem'}}>
                       <FormControl sx={{ m: 1, width: '21rem' }} size="small">
