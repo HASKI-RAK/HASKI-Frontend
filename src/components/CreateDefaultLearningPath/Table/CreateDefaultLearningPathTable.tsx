@@ -66,7 +66,6 @@ const CreateDefaultLearningPathTable = ({
   const [activeId, setActiveId] = useState<null | string>(null)
   const [isSending, setIsSending] = useState(false)
   const getUser = usePersistedStore((state) => state.getUser)
-  const getDefaultLearningPath = usePersistedStore((state) => state.getDefaultLearningPath)
   const clearDefaultLearningPathCache = usePersistedStore((state) => state.clearDefaultLearningPathCache)
   const clearLearningPathElementCache = useStore((state) => state.clearLearningPathElementCache)
 
@@ -186,7 +185,7 @@ const CreateDefaultLearningPathTable = ({
           clearDefaultLearningPathCache()
           clearLearningPathElementCache()
           setIsSending(false)
-          handleClose({}, 'backdropClick')
+          handleClose({}, 'closeButtonClick')
         })
         .then(() => {
           addSnackbar({

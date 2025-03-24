@@ -21,6 +21,7 @@ const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearning
     getUser().then((user) => {
       getDefaultLearningPath({ userId: user.settings.id, lmsUserId: user.lms_user_id }).then(
         (defaultLearningPathResponse) => {
+          console.log(defaultLearningPathResponse)
           setDefaultLearningPath(defaultLearningPathResponse)
           if (defaultLearningPathResponse.length > 0) {
             setOrderedItems(
@@ -34,7 +35,7 @@ const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearning
         }
       )
     })
-  }, [defaultLearningPath])
+  }, [defaultLearningPath, open])
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -55,7 +56,7 @@ const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearning
         <Fab
           id="close-default-learning-path-modal-button"
           color="primary"
-          onClick={() => handleClose({} as object, 'backdropClick')}
+          onClick={() => handleClose({} as object, 'closeButtonClick')}
           style={{
             position: 'absolute',
             top: '1%',
