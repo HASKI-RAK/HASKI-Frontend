@@ -93,11 +93,11 @@ const CreateLearningElementClassificationTable = memo(
       reset()
     }, [displayedSolutions])
     //Return early
-    if (Object.keys(learningElementsWithSolutions).length === 0) {
+    if (Object.keys(LearningElementsClassification).length === 0) {
       return (
         <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
           <Grid container direction="column" alignItems="center" sx={{ mt: '2rem' }}>
-            <SkeletonList />
+            <SkeletonList/>
             {children}
           </Grid>
         </Grid>

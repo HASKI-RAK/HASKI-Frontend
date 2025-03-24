@@ -93,6 +93,8 @@ describe('CreateLearningElementClassificationTable', () => {
           selectedLearningElements={{}}
           LearningElementsClassification={{}}
           onLearningElementChange={mockOnLearningElementChange}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -108,6 +110,8 @@ describe('CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -125,6 +129,8 @@ describe('CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -146,6 +152,8 @@ describe('CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -166,6 +174,8 @@ describe('CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn}
         />
       </MemoryRouter>
     )
@@ -189,7 +199,9 @@ describe('CreateLearningElementClassificationTable', () => {
           selectedTopics={mockSelectedTopics}
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
-          onLearningElementChange={mockOnLearningElementChange}>
+          onLearningElementChange={mockOnLearningElementChange}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}>
           <div data-testid="child">Child Content</div>
         </CreateLearningElementClassificationTable>
       </MemoryRouter>
