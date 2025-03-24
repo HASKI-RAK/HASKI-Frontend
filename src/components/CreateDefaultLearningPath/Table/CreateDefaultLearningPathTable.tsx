@@ -2,7 +2,7 @@ import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, c
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { Dispatch, ReactElement, SetStateAction, useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Button, CircularProgress, Grid, IconButton, ListItemIcon, Typography } from '@common/components'
+import { Box, Button, CircularProgress, Grid, IconButton, ListItemIcon, Tooltip, Typography } from '@common/components'
 import {
   Article,
   Assignment,
@@ -335,13 +335,19 @@ const CreateDefaultLearningPathTable = ({
                 </ListItemIcon>
                 <Typography textAlign="center">{t('Reset')}</Typography>
               </Button>
-              <Button
-                id="submit-default-learning-path"
-                variant="contained"
-                disabled={!isSubmitActive || isSending}
-                onClick={handleSubmit}>
-                {isSending ? <CircularProgress size={24} /> : t('Submit')}
-              </Button>
+              <Tooltip
+                arrow
+                title={!isSubmitActive || isSending ? 'Alle Elemente müssen zugeteilt oder deaktiviert sein.' : ''}>
+                <span>
+                  <Button
+                    id="submit-default-learning-path"
+                    variant="contained"
+                    disabled={!isSubmitActive || isSending}
+                    onClick={handleSubmit}>
+                    {isSending ? <CircularProgress size={24} /> : t('Submit')}
+                  </Button>
+                </span>
+              </Tooltip>
             </Grid>
           </Box>
         </Box>
