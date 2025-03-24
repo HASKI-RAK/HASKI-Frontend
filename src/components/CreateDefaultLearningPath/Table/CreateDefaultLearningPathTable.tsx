@@ -1,6 +1,6 @@
 import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, closestCenter } from '@dnd-kit/core'
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { ReactElement, useContext, useMemo, useState } from 'react'
+import { Dispatch, ReactElement, SetStateAction, useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, CircularProgress, Grid, IconButton, ListItemIcon, Typography } from '@common/components'
 import {
@@ -45,9 +45,17 @@ const iconMapping: Record<string, ReactElement> = {
 
 type createDefaultLearningPathTableProps = {
   handleClose?: (event: object, reason: string) => void
+  orderedItems: string[]
+  disabledItems: string[]
+  setOrderedItems: Dispatch<SetStateAction<string[]>>
+  setDisabledItems: Dispatch<SetStateAction<string[]>>
 }
 
 const CreateDefaultLearningPathTable = ({
+  orderedItems,
+  disabledItems,
+  setOrderedItems,
+  setDisabledItems,
   handleClose = () => {
     /*not empty arrow function*/
   }
@@ -55,12 +63,11 @@ const CreateDefaultLearningPathTable = ({
   const { t } = useTranslation()
   const [activeStep, setActiveStep] = useState(0)
   const { addSnackbar } = useContext(SnackbarContext)
-  const [orderedItems, setOrderedItems] = useState<string[]>([])
-  const [disabledItems, setDisabledItems] = useState<string[]>([])
   const [activeId, setActiveId] = useState<null | string>(null)
   const [isSending, setIsSending] = useState(false)
   const getUser = usePersistedStore((state) => state.getUser)
-  const clearDisabledClassificationsCache = usePersistedStore((state) => state.clearDisabledClassificationsCache)
+  const getDefaultLearningPath = usePersistedStore((state) => state.getDefaultLearningPath)
+  const clearDefaultLearningPathCache = usePersistedStore((state) => state.clearDefaultLearningPathCache)
   const clearLearningPathElementCache = useStore((state) => state.clearLearningPathElementCache)
 
   // Retrieve classification items from translations.
@@ -176,7 +183,7 @@ const CreateDefaultLearningPathTable = ({
         outputJson: JSON.stringify(orderedItemsData)
       })
         .then((defaultLearningPath) => {
-          clearDisabledClassificationsCache()
+          clearDefaultLearningPathCache()
           clearLearningPathElementCache()
           setIsSending(false)
           handleClose({}, 'backdropClick')
