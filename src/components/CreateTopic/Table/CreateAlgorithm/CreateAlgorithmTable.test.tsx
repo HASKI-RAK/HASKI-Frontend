@@ -102,14 +102,14 @@ describe('CreateAlgorithmTable', () => {
 
   it('renders topics with default algorithm instead of faulty one', async () => {
     const { getAllByRole } = render(
-        <MemoryRouter>
-          <CreateAlgorithmTable
-              selectedTopics={defaultProps.selectedTopics}
-              selectedAlgorithms={faultySelectedAlgorithms}
-              onAlgorithmChange={defaultProps.onAlgorithmChange}
-              children={defaultProps.children}
-          />
-        </MemoryRouter>
+      <MemoryRouter>
+        <CreateAlgorithmTable
+          selectedTopics={defaultProps.selectedTopics}
+          selectedAlgorithms={faultySelectedAlgorithms}
+          onAlgorithmChange={defaultProps.onAlgorithmChange}
+          children={defaultProps.children}
+        />
+      </MemoryRouter>
     )
 
     // Verify topic names and initial algorithms

@@ -29,6 +29,7 @@ export { default as handleError } from './Snackbar/handleError'
 export { default as IFrameModal } from './IFrameModal/IFrameModal'
 export { default as SkeletonList } from './SkeletonList/SkeletonList'
 export { default as PrivacyModal } from './PrivacyModal/PrivacyModal'
+export { default as DeleteEntityModal } from './DeleteEntityModal/DeleteEntityModal'
 export { default as Filter } from './Filter/Filter'
 export { default as GlossaryList } from './Glossary/GlossaryList/GlossaryList'
 export { default as Searchbar } from './Searchbar/Searchbar'
@@ -55,18 +56,31 @@ export { default as TopicCard } from './TopicCard/TopicCard'
 export { default as CreateCourseDetailsTable } from './CreateCourse/Table/CreateCourseDetailsTable'
 export { default as CreateCourseTable } from './CreateCourse/Table/CreateCourseTable'
 export { default as CreateCourseModal } from './CreateCourse/Modal/CreateCourseModal'
-export { default as CreateRemoteTopicsTable } from './CreateTopic/Table/CreateRemoteTopicsTable'
-export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopicsTable'
-export { default as CreateLearningElementTable } from './CreateTopic/Table/CreateLearningElementTable'
+export { default as CreateRemoteTopicsTable } from './CreateTopic/Table/CreateRemoteTopics/CreateRemoteTopicsTable'
+export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopics/ExistingTopicsTable'
+export { default as CreateLearningElementTable } from './CreateTopic/Table/CreateLearningElement/CreateLearningElementTable'
+export { default as CourseCard } from './CourseCard/CourseCard'
+export { default as CreateCourseCard } from './CourseCard/CreateCourseCard'
+export { courseCardStyle } from './CourseCard/CourseCard'
+export { courseCardButtonStyle } from './CourseCard/CourseCard'
+export { default as CreateLearningElementModal } from './CreateLearningElement/CreateLearningElementModal'
+export { default as CreateLearningElement } from './CreateLearningElement/CreateLearningElement'
 export {
   default as CreateLearningElementClassificationTable,
   type LearningElementWithClassification
-} from './CreateTopic/Table/CreateLearningElementClassificationTable'
+} from './CreateTopic/Table/CreateLearningElementClassification/CreateLearningElementClassificationTable'
 export {
   default as CreateAlgorithmTable,
   type CreateAlgorithmTableNameProps
-} from './CreateTopic/Table/CreateAlgorithmTable'
-export { default as CreateTopicModal } from './CreateTopic/Modal/CreateTopicModal'
+} from './CreateTopic/Table/CreateAlgorithm/CreateAlgorithmTable'
+export {
+  default as CreateTopicModal,
+  type RemoteLearningElementWithClassification
+} from './CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
+export { default as CreateLearningElementClassificationsStep } from './CreateTopic/Modal/CreateLearningElementClassificationsStep/CreateLearningElementClassificationsStep'
+export { default as CreateLearningElementsStep } from './CreateTopic/Modal/CreateLearningElementsStep/CreateLearningElementsStep'
+export { default as CreateRemoteTopicsStep } from './CreateTopic/Modal/CreateRemoteTopicsStep/CreateRemoteTopicsStep'
+export { default as CreateAlgorithmsStep } from './CreateTopic/Modal/CreateAlgorithmsStep/CreateAlgorithmsStep'
 
 export * from './GlobalNav'
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure

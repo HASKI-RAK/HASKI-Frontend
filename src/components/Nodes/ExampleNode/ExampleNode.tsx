@@ -17,11 +17,7 @@ import BasicNode from '../BasicNode/BasicNode'
  * @category Components
  */
 const ExampleNode = (data: NodeProps<LearningPathLearningElementNode>) => {
-  return (
-    <BasicNode {...data} id="example-node">
-      <Assignment sx={{ fontSize: 50 }} />
-    </BasicNode>
-  )
+  return <BasicNode {...data} id="example-node" icon={<Assignment sx={{ fontSize: 50 }} />}></BasicNode>
 }
 
 export default memo(ExampleNode)

@@ -17,11 +17,7 @@ import BasicNode from '../BasicNode/BasicNode'
  * @category Components
  */
 const AdditionalLiteratureNode = (data: NodeProps<LearningPathLearningElementNode>) => {
-  return (
-    <BasicNode {...data} id="additional-literature-node">
-      <Article sx={{ fontSize: 50 }} />
-    </BasicNode>
-  )
+  return <BasicNode {...data} id="additional-literature-node" icon={<Article sx={{ fontSize: 50 }} />}></BasicNode>
 }
 
 export default memo(AdditionalLiteratureNode)
