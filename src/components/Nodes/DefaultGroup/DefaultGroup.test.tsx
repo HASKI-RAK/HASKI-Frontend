@@ -10,6 +10,7 @@ describe('DefaultGroup tests', () => {
   })
 
   const mockData: LearningPathLearningElementNode = {
+    learningElementId: 1,
     lmsId: 1,
     name: 'testNode',
     activityType: 'testType',

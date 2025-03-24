@@ -1,11 +1,8 @@
-import dayjs from 'dayjs'
 import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardContent, Grid, Skeleton, Typography } from '@common/components'
-import { AddCircle } from '@common/icons'
-import { CreateCourseModal } from '@components'
+import { Card, CardContent, Grid, Skeleton, Typography } from '@common/components'
+import { CourseCard, CreateCourseCard, courseCardStyle } from '@components'
 import { Course } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -23,7 +20,6 @@ export const Home = () => {
   const { isAuth } = useContext(AuthContext)
   const { isCourseCreatorRole } = useContext(RoleContext)
   const { addSnackbar } = useContext(SnackbarContext)
-  const navigate = useNavigate()
 
   // States
   const [courses, setCourses] = useState<Course[]>([])
@@ -72,83 +68,9 @@ export const Home = () => {
     }
   }, [getUser, getCourses, isAuth, coursesCache, coursesLoading])
 
-  const commonButtonStyle = {
-    mt: '1rem',
-    width: '85%'
-  }
-
-  const commonCardStyle = {
-    mb: '1rem',
-    width: {
-      xs: '20rem',
-      sm: '20rem',
-      md: '20rem',
-      lg: '30rem',
-      xl: '40rem',
-      xxl: '45rem',
-      xxxl: '50rem'
-    }
-  }
-
-  const handleCourseStartDate = (courseStartDate: string) => {
-    return new Date(courseStartDate).getTime() > new Date().getTime()
-  }
-
-  const courseCards = (courses: Course[]) => {
-    return courses.map((course) => (
-      <Card key={course.id} sx={commonCardStyle}>
-        <CardContent>
-          <Typography variant="h5" align="center">
-            {course.name}
-          </Typography>
-          <Grid container justifyContent="center">
-            <Button
-              id="course-button"
-              variant="contained"
-              color="primary"
-              sx={commonButtonStyle}
-              disabled={handleCourseStartDate(course.start_date)}
-              onClick={() => {
-                navigate('/course/' + course.id)
-              }}>
-              {handleCourseStartDate(course.start_date)
-                ? t('pages.home.courseDisabled') + ' ' + dayjs(course.start_date).format('DD.MM.YYYY - HH:mm')
-                : t('pages.home.courseButton')}
-            </Button>
-          </Grid>
-        </CardContent>
-      </Card>
-    ))
-  }
-
-  const courseCreatorView = () => {
-    return (
-      <Card>
-        <CardContent>
-          <Grid container justifyContent="center">
-            <Button
-              id="create-course-button"
-              data-testid={'create-course-button'}
-              variant="contained"
-              color="primary"
-              onClick={() => setCreateCourseModalOpen(true)}
-              sx={commonButtonStyle}>
-              <AddCircle />
-            </Button>
-          </Grid>
-        </CardContent>
-        <CreateCourseModal
-          openCreateCourseModal={createCourseModalOpen}
-          handleCloseCreateCourseModal={handleCloseCourseModal}
-          activeStepCreateCourseModal={activeStepCreateCourseModal}
-          setActiveStepCreateCourseModal={setActiveStepCreateCourseModal}></CreateCourseModal>
-      </Card>
-    )
-  }
-
   const noCourses = () => {
     return (
-      <Card sx={commonCardStyle}>
+      <Card sx={courseCardStyle}>
         <CardContent>
           <Typography variant="h5" align="center">
             {t('pages.home.noCourses')}
@@ -163,15 +85,25 @@ export const Home = () => {
     <Grid container direction="row" spacing={2} justifyContent="center">
       <Grid item>
         {coursesLoading ? (
-          <Card sx={commonCardStyle}>
+          <Card sx={courseCardStyle}>
             <Skeleton variant="rectangular" width="100%" height={118} />
           </Card>
         ) : courses.length === 0 ? (
           noCourses()
         ) : (
-          courseCards(courses)
+          courses.map((course) => (
+            <CourseCard key={course.id} course={course} isCourseCreatorRole={isCourseCreatorRole} />
+          ))
         )}
-        {isCourseCreatorRole && courseCreatorView()}
+        {isCourseCreatorRole && (
+          <CreateCourseCard
+            createCourseModalOpen={createCourseModalOpen}
+            handleCloseCourseModal={handleCloseCourseModal}
+            activeStepCreateCourseModal={activeStepCreateCourseModal}
+            setActiveStepCreateCourseModal={setActiveStepCreateCourseModal}
+            setCreateCourseModalOpen={setCreateCourseModalOpen}
+          />
+        )}
       </Grid>
     </Grid>
   )

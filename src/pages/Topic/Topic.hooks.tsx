@@ -142,6 +142,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       }
 
       const nodeData: LearningPathLearningElementNode = {
+        learningElementId: learningElement.id,
         lmsId: learningElement.lms_id,
         name: learningElement.name,
         activityType: learningElement.activity_type,

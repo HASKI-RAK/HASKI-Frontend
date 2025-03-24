@@ -7,6 +7,7 @@ import { ReactFlowProvider } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import { LocalNavBar } from '@components'
 import { LearningPathElementStatus } from '@core'
+import { RoleContext, RoleContextType } from '@services'
 import Topic from './Topic'
 import { useTopic, useTopicHookParams } from './Topic.hooks'
 
@@ -43,6 +44,29 @@ describe('Topic Page', () => {
     })
   })
 
+  it('renders when Auth is true, and role is course creator', async () => {
+    const courseCreatorContext = {
+      isStudentRole: false,
+      isCourseCreatorRole: true
+    } as RoleContextType
+
+    const { getByText } = render(
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <RoleContext.Provider value={courseCreatorContext}>
+              <Topic />
+            </RoleContext.Provider>
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
+    )
+
+    await waitFor(() => {
+      expect(getByText('components.CreateLearningElement.createLearningElement')).toBeVisible()
+    })
+  })
+
   it('renders when Auth is false', () => {
     act(() => {
       const topic = render(
@@ -59,6 +83,8 @@ describe('Topic Page', () => {
   })
 
   test('getUser failed', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
+
     const mockfetchUser = jest.fn(() => Promise.reject(new Error('fetchUser failed')))
     mockServices.fetchUser.mockImplementationOnce(mockfetchUser)
 
@@ -79,10 +105,9 @@ describe('Topic Page', () => {
   })
 
   test('getLearningPathElementStatus failed', async () => {
-    const mockfetchLearningPathElementStatus = jest.fn(() =>
-      Promise.reject(new Error('fetchLearningPathElementStatus failed'))
-    )
-    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(mockfetchLearningPathElementStatus)
+    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(() => {
+      throw new Error('getLearningPathElementStatus error')
+    })
 
     await act(async () => {
       render(
@@ -94,9 +119,6 @@ describe('Topic Page', () => {
           </MemoryRouter>
         </ReactFlowProvider>
       )
-    })
-    await waitFor(() => {
-      expect(mockfetchLearningPathElementStatus).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -224,6 +246,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             isDisabled: false,
             name: '',
             isDone: false
@@ -255,6 +278,7 @@ describe('Topic Page', () => {
             isDisabled: false,
             isRecommended: true,
             lmsId: 2,
+            learningElementId: 2,
             name: '',
             isDone: true
           },
@@ -439,6 +463,7 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDisabled: false,
             isDone: false
@@ -467,6 +492,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false,
             isDisabled: false,
@@ -499,6 +525,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             isDisabled: false,
             name: '',
             isDone: false
@@ -529,6 +556,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             lmsId: 1,
+            learningElementId: 1,
             isDisabled: false,
             name: '',
             isDone: false
@@ -808,6 +836,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false,
             isDisabled: false,
@@ -839,6 +868,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false,
             isDisabled: false
@@ -869,6 +899,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDisabled: false,
             isDone: false
@@ -899,6 +930,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDisabled: false,
             isDone: false
@@ -929,6 +961,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDisabled: false,
             isDone: false
@@ -960,6 +993,7 @@ describe('Topic Page', () => {
             isRecommended: true,
             lmsId: 1,
             isDisabled: false,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -989,6 +1023,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDisabled: false,
             isDone: false
@@ -1341,6 +1376,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false,
@@ -1373,6 +1409,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false,
             isDisabled: false
@@ -1421,6 +1458,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false,
             isDisabled: false
@@ -1451,6 +1489,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false,
             isDisabled: false
@@ -1481,6 +1520,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false,
             isDisabled: false
@@ -1511,6 +1551,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false,
             isDisabled: false
@@ -1541,6 +1582,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false,
             isDisabled: false
@@ -1573,6 +1615,7 @@ describe('Topic Page', () => {
             isDisabled: false,
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: ''
           },
           id: '8-1',

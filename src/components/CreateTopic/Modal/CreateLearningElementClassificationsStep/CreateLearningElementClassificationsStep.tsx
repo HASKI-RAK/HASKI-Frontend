@@ -1,9 +1,8 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
-import { CreateLearningElementClassificationTable } from '@components'
+import { CreateLearningElementClassificationTable, RemoteLearningElementWithClassification } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
-import { RemoteLearningElementWithClassification } from './CreateTopicModal'
 
 type CreateLearningElementClassificationsStepProps = {
   selectedTopics: RemoteTopics[]
@@ -14,6 +13,7 @@ type CreateLearningElementClassificationsStepProps = {
   }) => void
   onNext: () => void
   onBack: () => void
+  nextButtonText: string
 }
 
 const CreateLearningElementClassificationsStep = ({
@@ -22,9 +22,19 @@ const CreateLearningElementClassificationsStep = ({
   selectedLearningElementsClassification,
   handleLearningElementClassification,
   onNext,
-  onBack
+  onBack,
+  nextButtonText
 }: CreateLearningElementClassificationsStepProps) => {
   const { t } = useTranslation()
+  const [isNextDisabled, setIsNextDisabled] = useState(false)
+
+  const handleNextClick = () => {
+    setIsNextDisabled(true)
+    onNext()
+    setTimeout(() => {
+      setIsNextDisabled(false)
+    }, 1000)
+  }
 
   return (
     <Grid container item>
@@ -44,11 +54,11 @@ const CreateLearningElementClassificationsStep = ({
               disabled={
                 !selectedTopics.every((topic) =>
                   selectedLearningElementsClassification[topic.topic_lms_id]?.every((el) => el.classification !== '')
-                )
+                ) || isNextDisabled
               }
-              onClick={onNext}
+              onClick={handleNextClick}
               sx={{ mr: -2 }}>
-              {t('appGlobal.next')}
+              {nextButtonText}
             </Button>
           </Grid>
         </Box>

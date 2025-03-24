@@ -12,6 +12,7 @@ describe('AdditionalLiteratureNode tests', () => {
 
   it('renders correctly and can be clicked, isDone is false', () => {
     const mockData: LearningPathLearningElementNode = {
+      learningElementId: 1,
       lmsId: 1,
       name: 'testNode',
       activityType: 'testType',
@@ -53,6 +54,7 @@ describe('AdditionalLiteratureNode tests', () => {
 
   it('renders correctly and can be clicked with, isDone is true ', () => {
     const mockData: LearningPathLearningElementNode = {
+      learningElementId: 1,
       lmsId: 1,
       name: 'testNode',
       activityType: 'testType',

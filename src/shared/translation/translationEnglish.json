@@ -4,14 +4,17 @@
   "appGlobal.algorithms": "Algorithms",
   "appGlobal.aschaffenburgUAS": "Aschaffenburg UAS",
   "appGlobal.back": "Back",
+  "appGlobal.cancel": "Cancel",
   "appGlobal.classification": "Classification",
   "appGlobal.classifications": "Classifications",
   "appGlobal.courses": "Courses",
   "appGlobal.dataSendSuccessful": "Data sent successfully",
   "appGlobal.dataSendUnsuccessful": "Data could not be sent",
   "appGlobal.decline": "Decline",
+  "appGlobal.delete": "Delete",
   "appGlobal.help": "Help",
   "appGlobal.imageSources": "Image sources:",
+  "appGlobal.learningElement": "Learning Element",
   "appGlobal.learningElements": "Learning Elements",
   "appGlobal.lineGraph": "Line graph",
   "appGlobal.loading": "Loading...",
@@ -44,12 +47,13 @@
       "key": "ga"
     }
   ],
-  "components.AlgorithmSettingsModal.headerLeft": "Choose a learning path algorithm",
   "components.AlgorithmSettingsModal.headerRight": "Description",
   "components.AlgorithmSettingsModal.selectAlgorithms": "Select algorithms",
   "components.AlgorithmSettingsModal.success": "Algorithm changed successfully",
   "components.AlgorithmSettingsModal.teacherIconTip": "Recommended by tutor",
   "components.AlgorithmSettingsModal.wrongRole": "You are not authorized to change the algorithm",
+  "components.BasicNode.deleteLearningElementSuccessful": "Learning Element deleted successfully",
+  "components.BasicNode.deleteTooltip": "Delete Learning Element",
   "components.ContactForm.briefDescription": "Give a brief description of your request",
   "components.ContactForm.contactform": "Contactform",
   "components.ContactForm.error": "Missing description. Please write something.",
@@ -98,6 +102,8 @@
       "label": "other"
     }
   ],
+  "components.CourseCard.deleteCourseSuccessful": "Course deleted successfully",
+  "components.CourseCard.deleteTooltip": "Delete Course with all of its Content",
   "components.CreateAlgorithmTable.initialAlgorithmDescription": "Please select an algorithm for the learning path calculation.",
   "components.CreateCourseDetailsTable.courseName": "Course name",
   "components.CreateCourseDetailsTable.startDate": "Start date",
@@ -105,6 +111,7 @@
   "components.CreateCourseTable.alreadyCreatedCourses": "Already created courses",
   "components.CreateCourseTable.lmsCourses": "Courses from the LMS",
   "components.CreateCourseTable.noCoursesFound": "No courses found...",
+  "components.CreateLearningElement.createLearningElement": "Add Learning Element",
   "components.CreateLearningElementClassificationTable.classifications": [
     {
       "name": "LZ - Learning Objective",
@@ -132,8 +139,7 @@
     },
     {
       "name": "AB - Application Example",
-      "key": "AB",
-      "disabled": false
+      "key": "AB"
     },
     {
       "name": "ÜB - Exercise",
@@ -157,9 +163,15 @@
     }
   ],
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Set learning element classification",
+  "components.CreateLearningElementModal.createLearningElements": "Create Learning Elements",
   "components.CreateLearningElementTable.selectAllToggle": "Select all",
   "components.CreateLearningElementTable.selectLearningElements": "Select learning elements",
   "components.CreateTopicModal.createTopics": "Create Topics",
+  "components.DeleteEntityModal.confirmLabel": "and all its content will be permanently deleted from the HASKI system (content in Moodle remains unaffected).",
+  "components.DeleteEntityModal.description": "This action will permanently remove all data and associated content from the HASKI system. This action cannot be undone. Content in Moodle remains unaffected.",
+  "components.DeleteEntityModal.header": "deletion",
+  "components.DeleteEntityModal.title-1": "You are about to delete",
+  "components.DeleteEntityModal.title-2": ".",
   "components.ExistingTopicsTable.title": "Already created topics",
   "components.Footer.project": "Project",
   "components.FurtherInfoMenu.title": "Further information",
@@ -1237,6 +1249,8 @@
   "components.TableRemoteTopics.title": "Available topics",
   "components.TopicCard.aco": "Ant Colony Optimization",
   "components.TopicCard.default": "Fixed Order",
+  "components.TopicCard.deleteTooltip": "Delete Topic with all of its Content",
+  "components.TopicCard.deleteTopicSuccessful": "Topic deleted successfully",
   "components.TopicCard.ga": "Genetic Algorithm",
   "components.TopicCard.graf": "Graf Algorithm",
   "components.TopicCard.learningPath": "Learning Path",
@@ -1733,7 +1747,6 @@
   "pages.home": "Home",
   "pages.home.courseButton": "Continue to course",
   "pages.home.courseDisabled": "The course is available on",
-  "pages.home.menuItemAlgorithms": "Select learning path algorithm",
   "pages.home.noCourses": "No courses found",
   "pages.imprint": "Imprint",
   "pages.imprint.asOf": "As of",
@@ -1813,6 +1826,7 @@
   "pages.projectdescription.introductionHeader": "What is HASKI?",
   "pages.topic": "Topic",
   "pages.topic.grouped": "Grouped",
+  "pages.topic.menuItemAlgorithms": "Change learning path algorithm",
   "pages.topic.single": "Single",
   "success": "Success",
   "tooltip.completed": "Completed",
