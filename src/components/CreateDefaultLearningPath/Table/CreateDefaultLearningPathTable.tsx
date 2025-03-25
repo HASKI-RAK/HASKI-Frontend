@@ -1,47 +1,16 @@
 import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, closestCenter } from '@dnd-kit/core'
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { Dispatch, ReactElement, SetStateAction, useContext, useMemo, useState } from 'react'
+import { Dispatch, SetStateAction, useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, CircularProgress, Grid, IconButton, ListItemIcon, Tooltip, Typography } from '@common/components'
-import {
-  Article,
-  Assignment,
-  AssignmentInd,
-  AssignmentLate,
-  Close,
-  Description,
-  Feedback,
-  Flag,
-  Forum,
-  Replay,
-  SettingsApplications,
-  ShortText,
-  TipsAndUpdates,
-  Videocam
-} from '@common/icons'
-import { CoverSheet } from '@components'
+import { Close, Replay } from '@common/icons'
+import { CoverSheet, getNodeIcon } from '@components'
 import { DefaultLearningPath } from '@core'
 import { SnackbarContext, postDefaultLearningPath } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import UnassignedItem, { ClassificationItem, DragPreview } from './DraggableItem'
 import { Droppable } from './DroppableItem'
 import { SortableItem } from './SortableItem'
-
-// Map icons to classification keys.
-const iconMapping: Record<string, ReactElement> = {
-  LZ: <Flag />,
-  KÜ: <ShortText />,
-  FO: <Forum />,
-  EK: <TipsAndUpdates />,
-  AN: <Videocam />,
-  BE: <Assignment />,
-  AB: <SettingsApplications />,
-  ÜB: <AssignmentLate />,
-  SE: <AssignmentInd />,
-  ZL: <Article />,
-  ZF: <Description />,
-  RQ: <Feedback />
-}
 
 type createDefaultLearningPathTableProps = {
   handleClose?: (event: object, reason: string) => void
@@ -80,9 +49,9 @@ const CreateDefaultLearningPathTable = ({
     return learningElementClassifications.map((item) => ({
       ...item,
       label: item.name,
-      icon: iconMapping[item.key]
+      icon: getNodeIcon(item.key, 20)
     }))
-  }, [learningElementClassifications, iconMapping])
+  }, [learningElementClassifications])
 
   // left items that are not assigned to the droppable container.
   const unassignedItems = classificationItems.filter((item) => !orderedItems.includes(item.key))

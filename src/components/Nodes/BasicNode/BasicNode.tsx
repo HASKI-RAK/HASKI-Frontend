@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { Box, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
-import { CheckBox, DeleteForever, Feedback, Warning } from '@common/icons'
-import { DeleteEntityModal, LearningPathLearningElementNode } from '@components'
+import { CheckBox, DeleteForever, Warning } from '@common/icons'
+import { DeleteEntityModal, LearningPathLearningElementNode, getNodeIcon } from '@components'
 import { RoleContext, SnackbarContext, deleteLearningElement } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
@@ -19,7 +19,7 @@ type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
   children?: ReactNode
 }
 
-const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: BasicNodeProps) => {
+const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProps) => {
   const { t } = useTranslation()
   const theme = useTheme()
   const { addSnackbar } = useContext(SnackbarContext)
