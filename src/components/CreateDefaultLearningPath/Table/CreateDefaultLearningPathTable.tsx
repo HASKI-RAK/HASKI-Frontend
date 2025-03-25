@@ -1,6 +1,6 @@
-import { DndContext, DragEndEvent, DragOverEvent, DragOverlay, DragStartEvent, closestCenter } from '@dnd-kit/core'
-import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { Dispatch, SetStateAction, useContext, useMemo, useState } from 'react'
+import { DndContext, DragOverlay, rectIntersection } from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { Dispatch, SetStateAction, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, CircularProgress, Grid, IconButton, ListItemIcon, Tooltip, Typography } from '@common/components'
 import { Close, Replay } from '@common/icons'
@@ -31,11 +31,6 @@ const CreateDefaultLearningPathTable = ({
   const [activeStep, setActiveStep] = useState(0)
   const [activeId, setActiveId] = useState<null | string>(null)
   const [isSending, setIsSending] = useState(false)
-  const { handleSubmit } = useCreateDefaultLearningPathTable({
-    setIsSending,
-    orderedItems,
-    disabledItems
-  })
 
   // Retrieve classification items from translations.
   const learningElementClassifications: ClassificationItem[] = useMemo(() => {
@@ -44,7 +39,25 @@ const CreateDefaultLearningPathTable = ({
     })
   }, [t])
 
-  const classificationItems = useMemo(() => {
+  const {
+    handleSubmit,
+    handleDragEnd,
+    handleDragOver,
+    handleToggleDisable,
+    handleResetItem,
+    handleDragStart,
+    handleRemoveAll
+  } = useCreateDefaultLearningPathTable({
+    setIsSending,
+    orderedItems,
+    disabledItems,
+    setActiveId,
+    setOrderedItems,
+    setDisabledItems
+  })
+
+  // Add a label and icon to the classifications
+  const classificationItems: ClassificationItem[] = useMemo(() => {
     return learningElementClassifications.map((item) => ({
       ...item,
       label: item.name,
@@ -55,83 +68,15 @@ const CreateDefaultLearningPathTable = ({
   // left items that are not assigned to the droppable container.
   const unassignedItems = classificationItems.filter((item) => !orderedItems.includes(item.key))
 
-  // Toggle disable state of an item
-  const handleToggleDisable = (itemKey: string) => {
-    if (disabledItems.includes(itemKey)) {
-      setDisabledItems((prev) => prev.filter((key) => key !== itemKey))
-    } else {
-      setDisabledItems((prev) => [...prev, itemKey])
-    }
-  }
-
-  // Reset an item from the droppable container back to the left.
-  const handleResetItem = (itemKey: string) => {
-    setOrderedItems((prev) => prev.filter((key) => key !== itemKey))
-  }
-
-  const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id as string)
-  }
-
-  const handleDragOver = (event: DragOverEvent) => {
-    const { active, over } = event
-    if (!active || !over) return
-    const activeIdStr = active.id as string
-    if (orderedItems.includes(activeIdStr) && over.id === 'droppable-container') {
-      const currentIndex = orderedItems.indexOf(activeIdStr)
-      const lastIndex = orderedItems.length - 1
-      if (currentIndex !== lastIndex) {
-        setOrderedItems(arrayMove(orderedItems, currentIndex, lastIndex))
-      }
-    }
-  }
-
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event
-    setActiveId(null)
-    if (!over) return
-
-    const activeIdStr = active.id.toString()
-    const overIdStr = over.id.toString()
-
-    if (orderedItems.includes(activeIdStr)) {
-      if (overIdStr === 'droppable-container') {
-        const oldIndex = orderedItems.indexOf(activeIdStr)
-        const newIndex = orderedItems.length - 1
-        if (oldIndex !== newIndex) {
-          setOrderedItems(arrayMove(orderedItems, oldIndex, newIndex))
-        }
-      } else if (activeIdStr !== overIdStr && orderedItems.includes(overIdStr)) {
-        const oldIndex = orderedItems.indexOf(activeIdStr)
-        const newIndex = orderedItems.indexOf(overIdStr)
-        setOrderedItems(arrayMove(orderedItems, oldIndex, newIndex))
-      }
-      return
-    }
-
-    if (orderedItems.includes(overIdStr)) {
-      const newIndex = orderedItems.indexOf(overIdStr)
-      const newOrderedItems = [...orderedItems]
-      newOrderedItems.splice(newIndex, 0, activeIdStr)
-      setOrderedItems(newOrderedItems)
-    } else {
-      setOrderedItems([...orderedItems, activeIdStr])
-    }
-  }
-
-  const handleRemoveAll = () => {
-    setOrderedItems([])
-    setDisabledItems([])
-  }
+  //item that is actively dragged
+  const activeItem = classificationItems.find((item) => item.key === activeId)
 
   // The submit button is enabled only when every classification item is either dropped or disabled.
   const isSubmitActive = orderedItems.length + disabledItems.length === classificationItems.length
 
-  const activeItem = classificationItems.find((item) => item.key === activeId)
-
   return (
     <DndContext
-      collisionDetection={closestCenter}
+      collisionDetection={rectIntersection}
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
