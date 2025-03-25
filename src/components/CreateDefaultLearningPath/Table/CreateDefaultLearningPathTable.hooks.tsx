@@ -30,73 +30,88 @@ export const useCreateDefaultLearningPathTable = ({
   const clearLearningPathElementCache = useStore((state) => state.clearLearningPathElementCache)
 
   // Toggle disable state of an item
-  const handleToggleDisable = (itemKey: string) => {
-    if (disabledItems.includes(itemKey)) {
-      setDisabledItems((prev) => prev.filter((key) => key !== itemKey))
-    } else {
-      setDisabledItems((prev) => [...prev, itemKey])
-    }
-  }
+  const handleToggleDisable = useCallback(
+    (itemKey: string) => {
+      if (disabledItems.includes(itemKey)) {
+        setDisabledItems((prev) => prev.filter((key) => key !== itemKey))
+      } else {
+        setDisabledItems((prev) => [...prev, itemKey])
+      }
+    },
+    [disabledItems, setDisabledItems]
+  )
 
   // Reset an item from the droppable container back to the left.
-  const handleResetItem = (itemKey: string) => {
-    setOrderedItems((prev) => prev.filter((key) => key !== itemKey))
-  }
+  const handleResetItem = useCallback(
+    (itemKey: string) => {
+      setOrderedItems((prev) => prev.filter((key) => key !== itemKey))
+    },
+    [setOrderedItems]
+  )
 
-  const handleRemoveAll = () => {
+  const handleRemoveAll = useCallback(() => {
     setOrderedItems([])
     setDisabledItems([])
-  }
+  }, [setOrderedItems, setDisabledItems])
 
-  const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id as string)
-  }
+  const handleDragStart = useCallback(
+    (event: DragStartEvent) => {
+      setActiveId(event.active.id as string)
+    },
+    [setActiveId]
+  )
 
-  const handleDragOver = (event: DragOverEvent) => {
-    const { active, over } = event
-    if (!active || !over) return
-    const activeIdStr = active.id as string
-    if (orderedItems.includes(activeIdStr) && over.id === 'droppable-container') {
-      const currentIndex = orderedItems.indexOf(activeIdStr)
-      const lastIndex = orderedItems.length - 1
-      if (currentIndex !== lastIndex) {
-        setOrderedItems(arrayMove(orderedItems, currentIndex, lastIndex))
+  const handleDragOver = useCallback(
+    (event: DragOverEvent) => {
+      const { active, over } = event
+      if (!active || !over) return
+      const activeIdStr = active.id as string
+      if (orderedItems.includes(activeIdStr) && over.id === 'droppable-container') {
+        const currentIndex = orderedItems.indexOf(activeIdStr)
+        const lastIndex = orderedItems.length - 1
+        if (currentIndex !== lastIndex) {
+          setOrderedItems(arrayMove(orderedItems, currentIndex, lastIndex))
+        }
       }
-    }
-  }
+    },
+    [orderedItems, setOrderedItems]
+  )
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event
-    setActiveId(null)
-    if (!over) return
+  const handleDragEnd = useCallback(
+    (event: DragEndEvent) => {
+      const { active, over } = event
+      setActiveId(null)
+      if (!over) return
 
-    const activeIdStr = active.id.toString()
-    const overIdStr = over.id.toString()
+      const activeIdStr = active.id.toString()
+      const overIdStr = over.id.toString()
 
-    if (orderedItems.includes(activeIdStr)) {
-      if (overIdStr === 'droppable-container') {
-        const oldIndex = orderedItems.indexOf(activeIdStr)
-        const newIndex = orderedItems.length - 1
-        if (oldIndex !== newIndex) {
+      if (orderedItems.includes(activeIdStr)) {
+        if (overIdStr === 'droppable-container') {
+          const oldIndex = orderedItems.indexOf(activeIdStr)
+          const newIndex = orderedItems.length - 1
+          if (oldIndex !== newIndex) {
+            setOrderedItems(arrayMove(orderedItems, oldIndex, newIndex))
+          }
+        } else if (activeIdStr !== overIdStr && orderedItems.includes(overIdStr)) {
+          const oldIndex = orderedItems.indexOf(activeIdStr)
+          const newIndex = orderedItems.indexOf(overIdStr)
           setOrderedItems(arrayMove(orderedItems, oldIndex, newIndex))
         }
-      } else if (activeIdStr !== overIdStr && orderedItems.includes(overIdStr)) {
-        const oldIndex = orderedItems.indexOf(activeIdStr)
-        const newIndex = orderedItems.indexOf(overIdStr)
-        setOrderedItems(arrayMove(orderedItems, oldIndex, newIndex))
+        return
       }
-      return
-    }
 
-    if (orderedItems.includes(overIdStr)) {
-      const newIndex = orderedItems.indexOf(overIdStr)
-      const newOrderedItems = [...orderedItems]
-      newOrderedItems.splice(newIndex, 0, activeIdStr)
-      setOrderedItems(newOrderedItems)
-    } else {
-      setOrderedItems([...orderedItems, activeIdStr])
-    }
-  }
+      if (orderedItems.includes(overIdStr)) {
+        const newIndex = orderedItems.indexOf(overIdStr)
+        const newOrderedItems = [...orderedItems]
+        newOrderedItems.splice(newIndex, 0, activeIdStr)
+        setOrderedItems(newOrderedItems)
+      } else {
+        setOrderedItems([...orderedItems, activeIdStr])
+      }
+    },
+    [orderedItems, setOrderedItems]
+  )
 
   const handleSubmit = useCallback(() => {
     setIsSending(true)
