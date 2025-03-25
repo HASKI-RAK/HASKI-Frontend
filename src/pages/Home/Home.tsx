@@ -31,7 +31,7 @@ export const Home = () => {
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
   const clearCoursesCache = useStore((state) => state.clearCoursesCache)
-  const coursesCache = useStore((state) => state._cache_defaultLearningPath_record)
+  const coursesCache = useStore((state) => state._cache_Courses_record)
 
   const handleCloseCourseModal = () => {
     clearCoursesCache()
