@@ -5,9 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Box, Button, CircularProgress, Grid, IconButton, ListItemIcon, Tooltip, Typography } from '@common/components'
 import { Close, Replay } from '@common/icons'
 import { CoverSheet, getNodeIcon } from '@components'
-import { DefaultLearningPath } from '@core'
-import { SnackbarContext, postDefaultLearningPath } from '@services'
-import { usePersistedStore, useStore } from '@store'
+import { useCreateDefaultLearningPathTable } from './CreateDefaultLearningPathTable.hooks'
 import UnassignedItem, { ClassificationItem, DragPreview } from './DraggableItem'
 import { Droppable } from './DroppableItem'
 import { SortableItem } from './SortableItem'
@@ -31,12 +29,13 @@ const CreateDefaultLearningPathTable = ({
 }: createDefaultLearningPathTableProps) => {
   const { t } = useTranslation()
   const [activeStep, setActiveStep] = useState(0)
-  const { addSnackbar } = useContext(SnackbarContext)
   const [activeId, setActiveId] = useState<null | string>(null)
   const [isSending, setIsSending] = useState(false)
-  const getUser = usePersistedStore((state) => state.getUser)
-  const clearDefaultLearningPathCache = usePersistedStore((state) => state.clearDefaultLearningPathCache)
-  const clearLearningPathElementCache = useStore((state) => state.clearLearningPathElementCache)
+  const { handleSubmit } = useCreateDefaultLearningPathTable({
+    setIsSending,
+    orderedItems,
+    disabledItems
+  })
 
   // Retrieve classification items from translations.
   const learningElementClassifications: ClassificationItem[] = useMemo(() => {
@@ -127,44 +126,6 @@ const CreateDefaultLearningPathTable = ({
 
   // The submit button is enabled only when every classification item is either dropped or disabled.
   const isSubmitActive = orderedItems.length + disabledItems.length === classificationItems.length
-
-  const handleSubmit = () => {
-    setIsSending(true)
-    const orderedItemsData: DefaultLearningPath[] = orderedItems.map((key, index) => ({
-      classification: key,
-      position: index + 1,
-      disabled: disabledItems.includes(key),
-      university: 'HS-KE'
-    }))
-    disabledItems.map((key, index) =>
-      orderedItemsData.push({
-        classification: key,
-        position: index + 9000,
-        disabled: true,
-        university: 'HS-KE'
-      })
-    )
-    return getUser().then((user) => {
-      return postDefaultLearningPath({
-        userId: user.settings.id,
-        userLmsId: user.lms_user_id,
-        outputJson: JSON.stringify(orderedItemsData)
-      })
-        .then((defaultLearningPath) => {
-          clearDefaultLearningPathCache()
-          clearLearningPathElementCache()
-          setIsSending(false)
-          handleClose({}, 'closeButtonClick')
-        })
-        .then(() => {
-          addSnackbar({
-            message: t('appGlobal.dataSendSuccessful'),
-            severity: 'success',
-            autoHideDuration: 5000
-          })
-        })
-    })
-  }
 
   const activeItem = classificationItems.find((item) => item.key === activeId)
 
@@ -312,7 +273,11 @@ const CreateDefaultLearningPathTable = ({
                     id="submit-default-learning-path"
                     variant="contained"
                     disabled={!isSubmitActive || isSending}
-                    onClick={handleSubmit}>
+                    onClick={() => {
+                      handleSubmit().then(() => {
+                        return handleClose({}, 'closeButtonClick')
+                      })
+                    }}>
                     {isSending ? <CircularProgress size={24} /> : t('Submit')}
                   </Button>
                 </span>
