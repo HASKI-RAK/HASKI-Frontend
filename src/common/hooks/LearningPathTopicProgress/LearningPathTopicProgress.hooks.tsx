@@ -39,6 +39,7 @@ export const useLearningPathTopicProgress = (
 
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
+  const getDefaultLearningPath = usePersistedStore((state) => state.getDefaultLearningPath)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
 
@@ -49,24 +50,24 @@ export const useLearningPathTopicProgress = (
   const getTopicProgress = useCallback(
     (
       learningPathElementStatusData: LearningPathElementStatus[],
-      allLearningElementsInTopic: LearningPathLearningElement[]
+      availableLearningElementsInTopic: LearningPathLearningElement[]
     ) => [
       //Number of done learning elements in the current topic
-      allLearningElementsInTopic.filter((learningElement) =>
+      availableLearningElementsInTopic.filter((learningElement) =>
         learningPathElementStatusData
           // Filter all learning elements with state 1 (done) and get the ones that are in the current topic
           .filter((learningElementStatus) => learningElementStatus.state === 1)
           .some((status) => status.cmid === learningElement.learning_element.lms_id)
       ).length,
       // Number of all learning elements in the current topic
-      allLearningElementsInTopic.length
+      availableLearningElementsInTopic.length
     ],
     [learningPathLearningElementStatusCache]
   )
 
   // Function
   const getAllTopicProgress = useCallback(
-    (user: User, topics: Topic[]) => {
+    (user: User, topics: Topic[], disabledClassificationList: string[]) => {
       //build a array[][] with the number of done learning elements and the number of all learning elements in topic
       //do that for every topic, and lastly return an array with all the arrays for every topic
       //example: [[1,2],[2,2],[0,2]]
@@ -74,9 +75,16 @@ export const useLearningPathTopicProgress = (
         return getLearningPathElementStatus(courseId, user.lms_user_id)
           .then((learningPathElementStatusData) =>
             getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topic.id.toString())
-              .then((allLearningElementsInTopic) =>
-                getTopicProgress(learningPathElementStatusData, allLearningElementsInTopic.path)
-              )
+              .then((allLearningElementsInTopic) => {
+                const availableLearningElements =
+                  allLearningElementsInTopic.based_on === 'default'
+                    ? allLearningElementsInTopic.path.filter(
+                        (learningElement: LearningPathLearningElement) =>
+                          !disabledClassificationList.includes(learningElement.learning_element.classification)
+                      )
+                    : allLearningElementsInTopic.path
+                return getTopicProgress(learningPathElementStatusData, availableLearningElements)
+              })
               .catch((error: string) => {
                 addSnackbar({
                   message: t('error.fetchLearningPathElement'),
@@ -113,25 +121,34 @@ export const useLearningPathTopicProgress = (
 
     if (isAuth) {
       getUser()
-        .then((user) =>
-          getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
-            .then((learningPathTopic) => {
-              setTopics(learningPathTopic.topics)
-              Promise.all(getAllTopicProgress(user, learningPathTopic.topics)).then((allTopicProgress) =>
-                // Set the calculated progress for each topic
-                setTopicProgress(allTopicProgress)
-              )
-              setIsLoading(false)
+        .then((user) => {
+          getDefaultLearningPath({ userId: user.settings.user_id, lmsUserId: user.lms_user_id })
+            .then((defaultLearningPath) => {
+              return defaultLearningPath
+                .filter((classificationElement) => classificationElement.disabled)
+                .map((classificationElement) => classificationElement.classification)
             })
-            .catch((error: string) => {
-              addSnackbar({
-                message: t('error.fetchLearningPathTopic'),
-                severity: 'error',
-                autoHideDuration: 3000
-              })
-              log.error(t('error.fetchLearningPathTopic') + ' ' + error)
+            .then((disabledClassificationsList) => {
+              getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
+                .then((learningPathTopic) => {
+                  setTopics(learningPathTopic.topics)
+                  Promise.all(getAllTopicProgress(user, learningPathTopic.topics, disabledClassificationsList)).then(
+                    (allTopicProgress) =>
+                      // Set the calculated progress for each topic
+                      setTopicProgress(allTopicProgress)
+                  )
+                  setIsLoading(false)
+                })
+                .catch((error: string) => {
+                  addSnackbar({
+                    message: t('error.fetchLearningPathTopic'),
+                    severity: 'error',
+                    autoHideDuration: 3000
+                  })
+                  log.error(t('error.fetchLearningPathTopic') + ' ' + error)
+                })
             })
-        )
+        })
         .catch((error: string) => {
           addSnackbar({
             message: t('error.fetchUser'),

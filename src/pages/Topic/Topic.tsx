@@ -63,32 +63,38 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
   const [isGrouped, setIsGrouped] = useState(true)
 
-  const getLearningElementsWithStatus = async (
-    learningPathElementStatusData: LearningPathElementStatus[],
-    user: User
-  ) => {
+  const getLearningElementsWithStatus = (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
     setLearningPathElementStatus(learningPathElementStatusData)
-    getDefaultLearningPath({ userId: user.settings.user_id, lmsUserId: user.lms_user_id }).then(
-      (defaultLearningpath) => {
-        const disabledClassificationsList = defaultLearningpath
-          .filter((classificationElement) => classificationElement.disabled)
-          .map((classificationElement) => classificationElement.classification)
-        getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
-          .then((learningPathElementData) => {
-            const { nodes, edges } = mapNodes(
-              learningPathElementData,
-              learningPathElementStatusData,
-              disabledClassificationsList,
-              isGrouped
-            )
-            setInitialNodes(nodes)
-            setInitialEdges(edges)
+
+    getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
+      .then((learningPathElementData) => {
+        if (learningPathElementData.based_on === 'default') {
+          return getDefaultLearningPath({
+            userId: user.settings.user_id,
+            lmsUserId: user.lms_user_id
+          }).then((defaultLearningPath) => {
+            const disabledClassificationsList = defaultLearningPath
+              .filter((classificationElement) => classificationElement.disabled)
+              .map((classificationElement) => classificationElement.classification)
+            return { learningPathElementData, disabledClassificationsList }
           })
-          .catch((error) => {
-            handleError(t, addSnackbar, 'error.mapNodes', error, 3000)
-          })
-      }
-    )
+        } else {
+          return { learningPathElementData, disabledClassificationsList: [] }
+        }
+      })
+      .then(({ learningPathElementData, disabledClassificationsList }) => {
+        const { nodes, edges } = mapNodes(
+          learningPathElementData,
+          learningPathElementStatusData,
+          disabledClassificationsList,
+          isGrouped
+        )
+        setInitialNodes(nodes)
+        setInitialEdges(edges)
+      })
+      .catch((error) => {
+        handleError(t, addSnackbar, 'error.mapNodes', error, 3000)
+      })
   }
 
   // Effect to handle the fitting of the view when the topic changes with the LocalNav
