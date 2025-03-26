@@ -23,7 +23,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const { t } = useTranslation()
   const theme = useTheme()
   const { addSnackbar } = useContext(SnackbarContext)
-  const { isCourseCreatorRole } = useContext(RoleContext)
+  const { isCourseCreatorRole, isStudentRole } = useContext(RoleContext)
 
   const [deleteLearningElementModalOpen, setdeleteLearningElementModalOpen] = useState(false)
   const [learningElementName, setLearningElementName] = useState<string>('')
@@ -70,6 +70,10 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
     })
     clearLearningPathElement()
     clearLearningPathElementStatusCache()
+  }
+
+  if (props.data.isDisabled && isStudentRole) {
+    return null
   }
 
   return (

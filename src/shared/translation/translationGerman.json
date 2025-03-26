@@ -25,6 +25,7 @@
   "appGlobal.table": "Tabelle",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
+  "components.CreateDefaultLearningPathTable.header": "Fester Lernpfad",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Feste Reihenfolge",

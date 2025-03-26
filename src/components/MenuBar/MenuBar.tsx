@@ -34,7 +34,7 @@ import {
   TableILSQuestions,
   TableListKQuestions
 } from '@components'
-import { AuthContext } from '@services'
+import { AuthContext, RoleContext } from '@services'
 import DefaultLearningPathModal from '../CreateDefaultLearningPath/Modal/CreateDefaultLearningPathModal'
 
 /**
@@ -49,9 +49,10 @@ import DefaultLearningPathModal from '../CreateDefaultLearningPath/Modal/CreateD
  */
 
 const MenuBar = () => {
+  const { t } = useTranslation()
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const { isAuth, logout } = useContext(AuthContext)
-  const { t } = useTranslation()
+  const { isCourseCreatorRole } = useContext(RoleContext)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
   const [modalOpenListK, setModalOpenListK] = useState(false)
@@ -313,7 +314,7 @@ const MenuBar = () => {
                 <TableListKQuestions successSend={successSendListK} setSuccessSend={setSuccessSendListK} />
               </QuestionnaireQuestionsModal>
 
-              {isAuth && (
+              {isAuth && isCourseCreatorRole && (
                 <MenuItem id="default-learningpath-menu-item" onClick={() => handleOpenDefaultLearningPath()}>
                   <ListItemIcon>
                     <Polyline fontSize="small" />

@@ -24,6 +24,7 @@
   "appGlobal.send": "Send",
   "appGlobal.table": "Table",
   "appGlobal.topics": "Topics",
+  "components.CreateDefaultLearningPathTable.header": "Default Learning Path",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
   "components.AlgorithmSettingsModal.algorithms": [
     {

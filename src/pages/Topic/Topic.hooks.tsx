@@ -1,9 +1,10 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Edge, Node } from 'reactflow'
 import { useTheme } from '@common/hooks'
 import { LearningPathLearningElementNode, getGroupLabels } from '@components'
 import { LearningElement, LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
+import { RoleContext } from '@services'
 
 /**
  * @prop defaultUrl - The default url of a node
@@ -65,6 +66,7 @@ export type TopicHookReturn = {
 export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   // Default values
   const { defaultUrl = '', defaultTitle = '', defaultIsOpen = false, defaultLmsId = -1 } = params ?? {}
+  const { isStudentRole } = useContext(RoleContext)
 
   // State data
   const [url, setUrl] = useState(defaultUrl)
@@ -134,9 +136,9 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     ) => {
       const learningElementNodeStyle = {
         background: disabledClassification ? theme.palette.info.dark : theme.palette.primary.main,
-        padding: 10,
-        border: '1px solid ' + theme.palette.grey[500],
-        borderRadius: 8,
+        padding: disabledClassification && isStudentRole ? 0 : 10,
+        border: disabledClassification && isStudentRole ? 0 : '1px solid ' + theme.palette.grey[500],
+        borderRadius: disabledClassification && isStudentRole ? 0 : 8,
         cursor: 'pointer',
         width: 500
       }

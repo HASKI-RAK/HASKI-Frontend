@@ -71,7 +71,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     getDefaultLearningPath({ userId: user.settings.user_id, lmsUserId: user.lms_user_id }).then(
       (defaultLearningpath) => {
         const disabledClassificationsList = defaultLearningpath
-          .filter((classificationElement) => classificationElement.disabled === true)
+          .filter((classificationElement) => classificationElement.disabled)
           .map((classificationElement) => classificationElement.classification)
         getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
           .then((learningPathElementData) => {
