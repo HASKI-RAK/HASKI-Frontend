@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { NodeProps } from 'reactflow'
-import { Flag } from '@common/icons'
-import { LearningPathLearningElementNode } from '@components'
+import { LearningPathLearningElementNode, getNodeIcon } from '@components'
 import BasicNode from '../BasicNode/BasicNode'
 
 /**
@@ -17,7 +16,7 @@ import BasicNode from '../BasicNode/BasicNode'
  * @category Components
  */
 const LearningObjectiveNode = (data: NodeProps<LearningPathLearningElementNode>) => {
-  return <BasicNode {...data} id="learning-objective-node" icon={<Flag sx={{ fontSize: 50 }} />}></BasicNode>
+  return <BasicNode {...data} id="learning-objective-node" icon={getNodeIcon('LZ', 50)} />
 }
 
 export default memo(LearningObjectiveNode)

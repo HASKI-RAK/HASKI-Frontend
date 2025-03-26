@@ -45,6 +45,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
+  const getDefaultLearningPath = usePersistedStore((state) => state.getDefaultLearningPath)
   const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
 
@@ -62,14 +63,32 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
   const [isGrouped, setIsGrouped] = useState(true)
 
-  const getLearningElementsWithStatus = async (
-    learningPathElementStatusData: LearningPathElementStatus[],
-    user: User
-  ) => {
+  const getLearningElementsWithStatus = (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
     setLearningPathElementStatus(learningPathElementStatusData)
+
     getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
       .then((learningPathElementData) => {
-        const { nodes, edges } = mapNodes(learningPathElementData, learningPathElementStatusData, isGrouped)
+        if (learningPathElementData.based_on === 'default') {
+          return getDefaultLearningPath({
+            userId: user.settings.user_id,
+            lmsUserId: user.lms_user_id
+          }).then((defaultLearningPath) => {
+            const disabledClassificationsList = defaultLearningPath
+              .filter((classificationElement) => classificationElement.disabled)
+              .map((classificationElement) => classificationElement.classification)
+            return { learningPathElementData, disabledClassificationsList }
+          })
+        } else {
+          return { learningPathElementData, disabledClassificationsList: [] }
+        }
+      })
+      .then(({ learningPathElementData, disabledClassificationsList }) => {
+        const { nodes, edges } = mapNodes(
+          learningPathElementData,
+          learningPathElementStatusData,
+          disabledClassificationsList,
+          isGrouped
+        )
         setInitialNodes(nodes)
         setInitialEdges(edges)
       })

@@ -37,6 +37,7 @@ export { default as GlossaryIndex } from './Glossary/GlossaryIndex/GlossaryIndex
 export { default as GlossaryEntry, type GlossaryEntryProps } from './Glossary/GlossaryEntry/GlossaryEntry'
 export { default as OpenQuestionnaire } from './Questionnaire/OpenQuestionnaire/OpenQuestionnaire'
 export * from './PrivacyModal/PrivacyModal.hooks'
+export { default as CoverSheet } from './CoverSheet/CoverSheet'
 export { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
 export { default as Typewriter } from './Typewriter/Typewriter'
 export { default as ImageCollection } from './ImageCollection/ImageCollection'

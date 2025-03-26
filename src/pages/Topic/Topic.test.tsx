@@ -26,6 +26,8 @@ describe('Topic Page', () => {
     mockReactFlow()
   })
 
+  const mocklearningPathDisabledClassifications: string[] = ['KÜ', 'EK']
+
   it('renders when Auth is true', () => {
     act(() => {
       const topic = render(
@@ -224,7 +226,11 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus)
+    const nodesAndEdges = result.current.mapNodes(
+      mockLearningPath,
+      mockLearningElementStatus,
+      mocklearningPathDisabledClassifications
+    )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -241,6 +247,7 @@ describe('Topic Page', () => {
             isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
+            isDisabled: false,
             name: '',
             isDone: false
           },
@@ -268,6 +275,7 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
+            isDisabled: false,
             isRecommended: true,
             lmsId: 2,
             learningElementId: 2,
@@ -437,7 +445,11 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus)
+    const nodesAndEdges = result.current.mapNodes(
+      mockLearningPath,
+      mockLearningElementStatus,
+      mocklearningPathDisabledClassifications
+    )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -453,6 +465,7 @@ describe('Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
+            isDisabled: false,
             isDone: false
           },
           id: '1',
@@ -482,6 +495,7 @@ describe('Topic Page', () => {
             learningElementId: 1,
             name: '',
             isDone: false,
+            isDisabled: false,
             handleSetLmsId: expect.any(Function),
             handleClose: expect.any(Function)
           },
@@ -512,6 +526,7 @@ describe('Topic Page', () => {
             isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
+            isDisabled: false,
             name: '',
             isDone: false
           },
@@ -542,6 +557,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             lmsId: 1,
             learningElementId: 1,
+            isDisabled: false,
             name: '',
             isDone: false
           },
@@ -803,7 +819,11 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus)
+    const nodesAndEdges = result.current.mapNodes(
+      mockLearningPath,
+      mockLearningElementStatus,
+      mocklearningPathDisabledClassifications
+    )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -819,6 +839,7 @@ describe('Topic Page', () => {
             learningElementId: 1,
             name: '',
             isDone: false,
+            isDisabled: false,
             handleSetLmsId: expect.any(Function)
           },
           id: '1',
@@ -849,7 +870,8 @@ describe('Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
-            isDone: false
+            isDone: false,
+            isDisabled: false
           },
           id: '2',
           position: {
@@ -879,6 +901,7 @@ describe('Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
+            isDisabled: false,
             isDone: false
           },
           id: '3',
@@ -909,6 +932,7 @@ describe('Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
+            isDisabled: false,
             isDone: false
           },
           id: '4',
@@ -939,6 +963,7 @@ describe('Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
+            isDisabled: false,
             isDone: false
           },
           id: '5',
@@ -967,6 +992,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            isDisabled: false,
             learningElementId: 1,
             name: '',
             isDone: false
@@ -999,6 +1025,7 @@ describe('Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
+            isDisabled: false,
             isDone: false
           },
           id: '7',
@@ -1332,7 +1359,12 @@ describe('Topic Page', () => {
       }
     ]
 
-    const nodesAndEdges = result.current.mapNodes(mockLearningPath, mockLearningElementStatus, true)
+    const nodesAndEdges = result.current.mapNodes(
+      mockLearningPath,
+      mockLearningElementStatus,
+      mocklearningPathDisabledClassifications,
+      true
+    )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
@@ -1348,6 +1380,7 @@ describe('Topic Page', () => {
             lmsId: 1,
             name: '',
             isDone: false,
+            isDisabled: true,
             handleSetLmsId: expect.any(Function)
           },
           id: '1',
@@ -1356,7 +1389,7 @@ describe('Topic Page', () => {
             y: 0
           },
           style: {
-            background: '#1976d2',
+            background: '#01579b',
             border: '1px solid #9e9e9e',
             borderRadius: 8,
             cursor: 'pointer',
@@ -1378,7 +1411,8 @@ describe('Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
-            isDone: false
+            isDone: false,
+            isDisabled: false
           },
           id: '2',
           position: {
@@ -1426,7 +1460,8 @@ describe('Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
-            isDone: false
+            isDone: false,
+            isDisabled: false
           },
           id: '3-1',
           position: {
@@ -1456,7 +1491,8 @@ describe('Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
-            isDone: false
+            isDone: false,
+            isDisabled: false
           },
           id: '4-1',
           position: {
@@ -1486,7 +1522,8 @@ describe('Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
-            isDone: false
+            isDone: false,
+            isDisabled: false
           },
           id: '5-1',
           position: {
@@ -1516,7 +1553,8 @@ describe('Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
-            isDone: false
+            isDone: false,
+            isDisabled: false
           },
           id: '6-1',
           position: {
@@ -1546,7 +1584,8 @@ describe('Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
-            isDone: false
+            isDone: false,
+            isDisabled: false
           },
           id: '7-1',
           position: {
@@ -1573,6 +1612,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isDone: false,
+            isDisabled: false,
             isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
