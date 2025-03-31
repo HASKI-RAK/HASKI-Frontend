@@ -4,8 +4,9 @@ import { act, render } from '@testing-library/react'
 // your i18n config file
 import { I18nextProvider, useTranslation } from 'react-i18next'
 import { MemoryRouter } from 'react-router-dom'
-import { MenuItem, Select } from '@common/components'
+import { MenuItem, Select, SelectChangeEvent } from '@common/components'
 import i18next from './internationalization'
+import { XAPIProvider } from 'react-xapi-wrapper'
 
 describe('i18n test', () => {
   localStorage.setItem('i18nextLng', 'en')
@@ -13,9 +14,12 @@ describe('i18n test', () => {
     const { i18n } = useTranslation()
     const startingLanguage = localStorage.getItem('i18nextLng') as string
 
-    const onClickLanguageChange = (e: { target: { value: string } }) => {
-      i18n.changeLanguage(e.target.value)
-      localStorage.setItem('i18nextLng', e.target.value)
+    const onClickLanguageChange = (event: SelectChangeEvent<unknown>) => {
+      const { value } = event.target
+      if(typeof value === 'string') {
+        i18n.changeLanguage(value)
+        localStorage.setItem('i18nextLng', value)
+      }
     }
 
     return (
@@ -35,10 +39,12 @@ describe('i18n test', () => {
     // actually give translation to your component
     render(
       <MemoryRouter>
+      <XAPIProvider>
         <I18nextProvider i18n={i18next}>
           {' '}
           <ArrangeElement />
         </I18nextProvider>
+        </XAPIProvider>
       </MemoryRouter>
     )
     // example if you have a key called example

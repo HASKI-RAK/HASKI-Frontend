@@ -7705,6 +7705,13 @@ react-transition-group@^4.4.5:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
+react-xapi-wrapper@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/react-xapi-wrapper/-/react-xapi-wrapper-0.0.1.tgz#5bd7c37cc0902aa7f1f338853a30e0843675ab03"
+  integrity sha512-T967gykfEi9G2V5ZttfZyMrS1P4hzUH99v6AKb7L/ScWHD8YxoV2G0DHMzRZjcSrjQC5IhbxhrMjhE64bBtZUA==
+  dependencies:
+    "@xapi/xapi" "^3.0.1"
+
 react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"

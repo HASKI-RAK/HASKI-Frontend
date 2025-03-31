@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { ReactNode, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Backdrop,
@@ -63,9 +63,14 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
   const reportTypeChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setReportType(event.target.value)
   }
-  const reportTopicChangeHandler = (event: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>): void => {
-    setReportTopic(event.target.value)
+
+  const reportTopicChangeHandler = (event: SelectChangeEvent<unknown>): void => {
+    const { value } = event.target
+    if (typeof value === 'string') {
+      setReportTopic(value)
+    }
   }
+  
   const descriptionChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setDescription(event.target.value)
   }

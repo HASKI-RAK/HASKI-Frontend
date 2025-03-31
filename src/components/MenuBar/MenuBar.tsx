@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState, MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -102,7 +102,7 @@ const MenuBar = () => {
     }
   }
 
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
   }
 

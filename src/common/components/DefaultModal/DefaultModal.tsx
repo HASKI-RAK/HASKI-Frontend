@@ -5,10 +5,10 @@ import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { ModalProps as DefaultModalProps } from '@common/components'
 
 // TODO: DOKU
-type ModalProps2 = DefaultModalProps & EventHandlers
+type ModalProps = DefaultModalProps & EventHandlers
 
 // TODO: DOKU
-const Modal2 = ({ ...props }: ModalProps2) => {
+const Modal = ({ ...props }: ModalProps) => {
   const { pageName } = usePageName()
 
   const WrappedComponent = withXAPI(DefaultModal, {
@@ -20,4 +20,4 @@ const Modal2 = ({ ...props }: ModalProps2) => {
   return <WrappedComponent {...props} />
 }
 
-export default memo(Modal2)
+export default memo(Modal)

@@ -2,6 +2,7 @@ import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Filter from './Filter'
+import { XAPIProvider } from 'react-xapi-wrapper'
 
 const mockFilterProps = {
   label: 'filter',
@@ -18,14 +19,16 @@ describe('Filter tests', () => {
 
   it('renders with input', () => {
     const { getByTestId } = render(
+      <XAPIProvider>
       <MemoryRouter>
         <Filter
           label={mockFilterProps.label}
           options={mockFilterProps.options}
           selectedOptions={mockFilterProps.selectedOptions}
           setSelectedOptions={mockFilterProps.setSelectedOptions}
-        />
+          />
       </MemoryRouter>
+      </XAPIProvider>
     )
     const select = getByTestId('filter')
     expect(select).toBeInTheDocument()

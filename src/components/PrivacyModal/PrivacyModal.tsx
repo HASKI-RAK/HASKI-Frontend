@@ -60,7 +60,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   const currentLocation = useLocation()
 
   //Disable backdropClick so the Modal only closes via the buttons
-  const handleClose = useCallback((_: React.MouseEvent<HTMLElement>, reason: string) => {
+  const handleClose = useCallback((_: object, reason: string) => {
     if (reason && reason == 'backdropClick') return
   }, [])
 
