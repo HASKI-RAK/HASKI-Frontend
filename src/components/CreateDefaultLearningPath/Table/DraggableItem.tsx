@@ -93,8 +93,8 @@ const UnassignedItem = ({ item, isDisabled, handleToggleDisable }: UnassignedIte
   const { setNodeRef, isDragging } = useDraggable({ id: item.key })
 
   return (
-    <Grid item key={item.key} direction="column">
-      <Grid item direction="column" sx={{ position: 'relative' }} ref={setNodeRef}>
+    <Grid container key={item.key} direction="column">
+      <Grid item sx={{ position: 'relative' }} ref={setNodeRef}>
         <Grid item>
           <SourceDraggable key={item.key} id={item.key} icon={item.icon} label={item.label} disabled={isDisabled} />
           <Box
