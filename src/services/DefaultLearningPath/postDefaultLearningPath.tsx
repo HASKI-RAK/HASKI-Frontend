@@ -1,4 +1,4 @@
-import { CourseResponse, DefaultLearningPath, DefaultLearningPathResponse } from '@core'
+import { DefaultLearningPath } from '@core'
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 

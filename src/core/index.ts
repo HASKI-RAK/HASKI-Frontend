@@ -23,7 +23,7 @@
  */
 import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
 import Course, { CourseResponse } from './Course/Course'
-import DefaultLearningPath, { DefaultLearningPathResponse } from './DefaultLearningPath/DefaultLearningPath'
+import DefaultLearningPath from './DefaultLearningPath/DefaultLearningPath'
 import LearningElement from './LearningElement/LearningElement'
 import LearningPathLearningElementAlgorithm, {
   LearningPathLearningElementAlgorithmResponse
