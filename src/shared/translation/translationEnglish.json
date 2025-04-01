@@ -23,6 +23,9 @@
   "appGlobal.othRegensburg": "OTH Regensburg",
   "appGlobal.send": "Send",
   "appGlobal.table": "Table",
+  "appGlobal.reset": "Reset",
+  "appGlobal.start": "Start",
+  "components.CreateDefaultLearningPathTable.submitRequirement": "All elements must either be selected or deactivated",
   "appGlobal.topics": "Topics",
   "components.CreateDefaultLearningPathTable.header": "Default Learning Path",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
@@ -60,7 +63,7 @@
   "components.ContactForm.error": "Missing description. Please write something.",
   "components.ContactForm.errorSelect": "Missing topic. Please select something.",
   "components.ContactForm.reportType": "Reporttype",
-  "components.ContactForm.submit": "Submit",
+  "appGlobal.submit": "Submit",
   "components.ContactForm.submitError": "The submit function has been called and an error occurred.",
   "components.ContactForm.topic": "Topic",
   "components.ContactForm.topics": [

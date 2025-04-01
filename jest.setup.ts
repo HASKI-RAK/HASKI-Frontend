@@ -286,6 +286,28 @@ const mockDataServices: MockDataServices = {
       expiration: 999999999999999
     })
   ),
+  postDefaultLearningPath: jest.fn(() =>
+    Promise.resolve([
+      {
+        classification: 'KÜ',
+        position: 1,
+        disabled: true,
+        university: 'HS-KE'
+      },
+      {
+        classification: 'EK',
+        position: 2,
+        disabled: true,
+        university: 'HS-KE'
+      },
+      {
+        classification: 'ÜB',
+        position: 3,
+        disabled: false,
+        university: 'HS-KE'
+      }
+    ])
+  ),
   fetchRedirectMoodleLogin: jest.fn(() =>
     Promise.resolve({
       lti_launch_view: 'test'

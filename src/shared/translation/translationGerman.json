@@ -23,6 +23,9 @@
   "appGlobal.othRegensburg": "OTH Regensburg",
   "appGlobal.send": "Senden",
   "appGlobal.table": "Tabelle",
+  "appGlobal.reset": "Zurücksetzen",
+  "appGlobal.start": "Start",
+  "components.CreateDefaultLearningPathTable.submitRequirement": "Alle Elemente müssen zugeteilt oder deaktiviert sein",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
   "components.CreateDefaultLearningPathTable.header": "Fester Lernpfad",
@@ -60,7 +63,7 @@
   "components.ContactForm.error": "Es fehlt eine Beschreibung.",
   "components.ContactForm.errorSelect": "Es wurde kein Thema ausgewählt.",
   "components.ContactForm.reportType": "Reporttyp",
-  "components.ContactForm.submit": "Abschicken",
+  "appGlobal.submit": "Abschicken",
   "components.ContactForm.submitError": "Die Submit-Funktion wurde aufgerufen, jedoch gab es einen Fehler.",
   "components.ContactForm.topic": "Themenbereich",
   "components.ContactForm.topics": [

@@ -1,6 +1,6 @@
 import { useDraggable } from '@dnd-kit/core'
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import UnassignedItem, { ClassificationItem } from './DraggableItem'
@@ -17,9 +17,9 @@ describe('UnassignedItem Component', () => {
   }
 
   const classificationItem: ClassificationItem = {
-    key: 'test-key',
-    name: 'Test Name',
-    label: 'Test Label',
+    key: 'KÜ',
+    name: 'KÜ - Overview',
+    label: 'Overview',
     icon: <span data-testid="test-icon">Icon</span>
   }
 
@@ -32,27 +32,27 @@ describe('UnassignedItem Component', () => {
   })
 
   it('renders the SourceDraggable with correct label and icon', () => {
-    render(
+    const { getByText, getByTestId } = render(
       <MemoryRouter>
         <UnassignedItem item={classificationItem} isDisabled={false} handleToggleDisable={handleToggleDisable} />
       </MemoryRouter>
     )
 
-    expect(screen.getByText('Test Label')).toBeInTheDocument()
-    expect(screen.getByTestId('test-icon')).toBeInTheDocument()
+    expect(getByText('Overview')).toBeInTheDocument()
+    expect(getByTestId('test-icon')).toBeInTheDocument()
   })
 
   it('calls handleToggleDisable with item key on IconButton click', () => {
-    render(
+    const { getAllByRole } = render(
       <MemoryRouter>
         <UnassignedItem item={classificationItem} isDisabled={false} handleToggleDisable={handleToggleDisable} />
       </MemoryRouter>
     )
 
-    const buttons = screen.getAllByRole('button')
+    const buttons = getAllByRole('button')
     const toggleButton = buttons[1]
     fireEvent.click(toggleButton)
-    expect(handleToggleDisable).toHaveBeenCalledWith('test-key')
+    expect(handleToggleDisable).toHaveBeenCalledWith('KÜ')
   })
 
   it('renders the Replay icon when isDisabled is true', () => {
@@ -71,12 +71,12 @@ describe('UnassignedItem Component', () => {
       setNodeRef: mockSetNodeRef,
       isDragging: true
     })
-    render(
+    const { getAllByRole } = render(
       <MemoryRouter>
         <UnassignedItem item={classificationItem} isDisabled={false} handleToggleDisable={handleToggleDisable} />
       </MemoryRouter>
     )
-    const buttons = screen.getAllByRole('button')
+    const buttons = getAllByRole('button')
     const toggleButton = buttons[1]
     expect(toggleButton.parentElement).toHaveStyle('display: block')
   })

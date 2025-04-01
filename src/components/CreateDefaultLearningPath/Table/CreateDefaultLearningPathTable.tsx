@@ -79,7 +79,7 @@ const CreateDefaultLearningPathTable = ({
       <Grid container direction="column" justifyContent="space-between" alignItems="center" sx={{ height: '100%' }}>
         <Grid item>
           <CoverSheet
-            header="Default Learning Path"
+            header={t('components.CreateDefaultLearningPathTable.header')}
             body={t('components.CreateDefaultLearningPathTable.introduction')}
             imagePath="ProjectDescriptionImage04.jpg"
           />
@@ -90,7 +90,7 @@ const CreateDefaultLearningPathTable = ({
             color="primary"
             onClick={() => setActiveStep((prev) => prev + 1)}
             sx={{ mb: '2rem', width: '20rem' }}>
-            Start
+            {t('appGlobal.start')}
           </Button>
         </Grid>
       </Grid>
@@ -115,7 +115,7 @@ const CreateDefaultLearningPathTable = ({
           }}>
           <Grid container item sx={{ width: '100%', height: '100%' }}>
             {/* Left Column: Unassigned Items with Toggle Disable Button */}
-            <Grid item direction={'row'} xs={4} sx={{ height: '100%' }}>
+            <Grid item xs={4} sx={{ height: '100%' }}>
               <Typography variant="h6">Classification Items</Typography>
               <Box height={24} />
               {unassignedItems.map((item) => {
@@ -211,11 +211,13 @@ const CreateDefaultLearningPathTable = ({
               <ListItemIcon>
                 <Replay fontSize="small" />
               </ListItemIcon>
-              <Typography textAlign="center">{t('Reset')}</Typography>
+              <Typography textAlign="center">{t('appGlobal.reset')}</Typography>
             </Button>
             <Tooltip
               arrow
-              title={!isSubmitActive || isSending ? 'Alle Elemente müssen zugeteilt oder deaktiviert sein.' : ''}>
+              title={
+                !isSubmitActive || isSending ? t('components.CreateDefaultLearningPathTable.submitRequirement') : ''
+              }>
               <span>
                 <Button
                   id="submit-default-learning-path"
@@ -226,7 +228,7 @@ const CreateDefaultLearningPathTable = ({
                       return handleClose({}, 'closeButtonClick')
                     })
                   }}>
-                  {isSending ? <CircularProgress size={24} /> : t('Submit')}
+                  {isSending ? <CircularProgress size={24} /> : t('appGlobal.submit')}
                 </Button>
               </span>
             </Tooltip>
