@@ -54,6 +54,7 @@ const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearning
         }}>
         <Fab
           id="close-default-learning-path-modal-button"
+          data-testid={'close-default-learning-path-modal-button'}
           color="primary"
           onClick={() => handleClose({}, 'closeButtonClick')}
           style={{
