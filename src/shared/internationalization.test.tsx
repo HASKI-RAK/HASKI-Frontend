@@ -6,7 +6,6 @@ import { I18nextProvider, useTranslation } from 'react-i18next'
 import { MemoryRouter } from 'react-router-dom'
 import { MenuItem, Select, SelectChangeEvent } from '@common/components'
 import i18next from './internationalization'
-import { XAPIProvider } from 'react-xapi-wrapper'
 
 describe('i18n test', () => {
   localStorage.setItem('i18nextLng', 'en')
@@ -39,12 +38,10 @@ describe('i18n test', () => {
     // actually give translation to your component
     render(
       <MemoryRouter>
-      <XAPIProvider>
         <I18nextProvider i18n={i18next}>
           {' '}
           <ArrangeElement />
         </I18nextProvider>
-        </XAPIProvider>
       </MemoryRouter>
     )
     // example if you have a key called example

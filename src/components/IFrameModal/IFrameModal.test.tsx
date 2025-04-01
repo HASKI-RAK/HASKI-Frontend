@@ -2,19 +2,16 @@ import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { Box } from '@common/components'
 import { IFrameModal } from '@components'
-import { XAPIProvider } from 'react-xapi-wrapper'
 
 describe('IFrameModal tests', () => {
   it('is displayed', () => {
     const open = true
     const { getByTestId } = render(
-      <XAPIProvider>
         <MemoryRouter>
           <Box>
             <IFrameModal url="fakedomain.com:8080" title="Modal is open" isOpen={open} onClose={jest.fn()} />
           </Box>
         </MemoryRouter>
-      </XAPIProvider>
     )
 
     expect(getByTestId('IFrameModal')).toBeInTheDocument
