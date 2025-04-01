@@ -21,14 +21,13 @@
   "appGlobal.next": "Weiter",
   "appGlobal.oClock": "Uhr",
   "appGlobal.othRegensburg": "OTH Regensburg",
-  "appGlobal.send": "Senden",
-  "appGlobal.table": "Tabelle",
   "appGlobal.reset": "Zurücksetzen",
+  "appGlobal.send": "Senden",
   "appGlobal.start": "Start",
-  "components.CreateDefaultLearningPathTable.submitRequirement": "Alle Elemente müssen zugeteilt oder deaktiviert sein",
+  "appGlobal.submit": "Abschicken",
+  "appGlobal.table": "Tabelle",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
-  "components.CreateDefaultLearningPathTable.header": "Fester Lernpfad",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Feste Reihenfolge",
@@ -63,7 +62,6 @@
   "components.ContactForm.error": "Es fehlt eine Beschreibung.",
   "components.ContactForm.errorSelect": "Es wurde kein Thema ausgewählt.",
   "components.ContactForm.reportType": "Reporttyp",
-  "appGlobal.submit": "Abschicken",
   "components.ContactForm.submitError": "Die Submit-Funktion wurde aufgerufen, jedoch gab es einen Fehler.",
   "components.ContactForm.topic": "Themenbereich",
   "components.ContactForm.topics": [
@@ -115,6 +113,9 @@
   "components.CreateCourseTable.alreadyCreatedCourses": "Bereits erstellte Kurse",
   "components.CreateCourseTable.lmsCourses": "Kurse aus dem LMS",
   "components.CreateCourseTable.noCoursesFound": "Keine Kurse gefunden...",
+  "components.CreateDefaultLearningPathTable.header": "Fester Lernpfad",
+  "components.CreateDefaultLearningPathTable.introduction": "Beim Erstellen eines festen Lernpfads werden alle Lerninhalte in einer vorgegebenen, unveränderlichen Reihenfolge angeordnet. Dieser strukturierte Ansatz bildet einen festen Algorithmus ab, der sicherstellt, dass Lernende Schritt für Schritt durch die einzelnen Themen geführt werden. Dadurch wird ein gezieltes und nachvollziehbares Lernen ermöglicht, bei dem aufeinander aufbauende Inhalte systematisch vermittelt und der Lernfortschritt transparent abgebildet wird.",
+  "components.CreateDefaultLearningPathTable.submitRequirement": "Alle Elemente müssen zugeteilt oder deaktiviert sein",
   "components.CreateLearningElement.createLearningElement": "Lernelement hinzufügen",
   "components.CreateLearningElementClassificationTable.classifications": [
     {
@@ -1228,7 +1229,6 @@
     ]
   ],
   "components.TableILSQuestions.introduction": "Im Folgenden werden Ihnen Fragen gestellt, welche sich auf Ihre Art der Informationsverarbeitung und -organisierung, Wahrnehmung und bevorzugte Präsentation beziehen. Geben Sie bitte für jede Frage eine der beiden Antwortmöglichkeiten an. Sollten beide oder auch keine der Antwortmöglichkeiten auf Sie zutreffen, dann wählen Sie die aus, welche tendenziell noch häufiger zutrifft. Die gestellten Fragen basieren auf dem Index of Learning Styles (Felder & Solomon 1991).",
-  "components.CreateDefaultLearningPathTable.introduction": "Beim Erstellen eines festen Lernpfads werden alle Lerninhalte in einer vorgegebenen, unveränderlichen Reihenfolge angeordnet. Dieser strukturierte Ansatz bildet einen festen Algorithmus ab, der sicherstellt, dass Lernende Schritt für Schritt durch die einzelnen Themen geführt werden. Dadurch wird ein gezieltes und nachvollziehbares Lernen ermöglicht, bei dem aufeinander aufbauende Inhalte systematisch vermittelt und der Lernfortschritt transparent abgebildet wird.",
   "components.TableListK.attention": "Aufmerksamkeit",
   "components.TableListK.cognitiveStrategies": "Kognitive Strategien",
   "components.TableListK.control": "Kontrollieren",

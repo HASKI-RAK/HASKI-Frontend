@@ -21,13 +21,12 @@
   "appGlobal.next": "Next",
   "appGlobal.oClock": "o'clock",
   "appGlobal.othRegensburg": "OTH Regensburg",
-  "appGlobal.send": "Send",
-  "appGlobal.table": "Table",
   "appGlobal.reset": "Reset",
+  "appGlobal.send": "Send",
   "appGlobal.start": "Start",
-  "components.CreateDefaultLearningPathTable.submitRequirement": "All elements must either be selected or deactivated",
+  "appGlobal.submit": "Submit",
+  "appGlobal.table": "Table",
   "appGlobal.topics": "Topics",
-  "components.CreateDefaultLearningPathTable.header": "Default Learning Path",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
   "components.AlgorithmSettingsModal.algorithms": [
     {
@@ -63,7 +62,6 @@
   "components.ContactForm.error": "Missing description. Please write something.",
   "components.ContactForm.errorSelect": "Missing topic. Please select something.",
   "components.ContactForm.reportType": "Reporttype",
-  "appGlobal.submit": "Submit",
   "components.ContactForm.submitError": "The submit function has been called and an error occurred.",
   "components.ContactForm.topic": "Topic",
   "components.ContactForm.topics": [
@@ -115,6 +113,9 @@
   "components.CreateCourseTable.alreadyCreatedCourses": "Already created courses",
   "components.CreateCourseTable.lmsCourses": "Courses from the LMS",
   "components.CreateCourseTable.noCoursesFound": "No courses found...",
+  "components.CreateDefaultLearningPathTable.header": "Default Learning Path",
+  "components.CreateDefaultLearningPathTable.introduction": "When creating a fixed learning path, all learning content is arranged in a predetermined, unchangeable sequence. This structured approach represents a fixed algorithm that ensures learners are guided through each topic step by step. It enables focused and coherent learning by systematically presenting interdependent content while transparently tracking progress.",
+  "components.CreateDefaultLearningPathTable.submitRequirement": "All elements must either be selected or deactivated",
   "components.CreateLearningElement.createLearningElement": "Add Learning Element",
   "components.CreateLearningElementClassificationTable.classifications": [
     {
@@ -1228,7 +1229,6 @@
     ]
   ],
   "components.TableILSQuestions.introduction": "Following this you will be asked questions that pertain to your style of information processing and organization, perception, and preferred presentation.  For each question, pick one of the two options that fits you best. If both or neither of the response options apply to you, then choose the one that tends to apply more often. These questions are based on the Index of Learning Styles (Felder & Solomon 1991).",
-  "components.CreateDefaultLearningPathTable.introduction": "When creating a fixed learning path, all learning content is arranged in a predetermined, unchangeable sequence. This structured approach represents a fixed algorithm that ensures learners are guided through each topic step by step. It enables focused and coherent learning by systematically presenting interdependent content while transparently tracking progress.",
   "components.TableListK.attention": "Attention",
   "components.TableListK.cognitiveStrategies": "Cognitive strategies",
   "components.TableListK.control": "Control",
