@@ -102,8 +102,7 @@ const CreateDefaultLearningPathTable = ({
       collisionDetection={rectIntersection}
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
-      onDragCancel={() => setActiveId(null)}>
+      onDragOver={handleDragOver}>
       <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
         <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
         <Box

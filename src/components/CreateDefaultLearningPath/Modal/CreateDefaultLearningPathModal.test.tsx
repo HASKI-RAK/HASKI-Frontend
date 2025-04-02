@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { fireEvent, queryByRole, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import { AuthContext, RoleContext, RoleContextType } from '@services'
@@ -13,6 +13,22 @@ const courseCreatorContext = {
 } as RoleContextType
 
 describe('DefaultLearningPathModal component', () => {
+  it('renders the modal and loads default learning path data without open parameter', async () => {
+    const { queryByRole } = render(
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <DefaultLearningPathModal handleClose={handleClose} />
+          </RoleContext.Provider>
+        </MemoryRouter>
+      </AuthContext.Provider>
+    )
+
+    await waitFor(() => {
+      expect(queryByRole('button', { name: /appGlobal.start/i })).not.toBeInTheDocument()
+    })
+  })
+
   it('renders the modal and loads default learning path data', async () => {
     const { getByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>

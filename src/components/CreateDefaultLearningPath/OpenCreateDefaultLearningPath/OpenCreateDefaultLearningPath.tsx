@@ -2,15 +2,11 @@ import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
-import { PrivacyModalHookReturn, usePrivacyModal as _usePrivacyModal } from '@components'
+import { usePrivacyModal as _usePrivacyModal } from '@components'
 import { AuthContext, RoleContext, fetchDefaultLearningPath } from '@services'
 import { usePersistedStore } from '@store'
+import type { PrivacyModalProps } from '../../PrivacyModal/PrivacyModal'
 import DefaultLearningPathModal from '../Modal/CreateDefaultLearningPathModal'
-
-//** usePrivacyPolicy gets the 'privacy_accept_token' from the hook */
-export type PrivacyModalProps = {
-  usePrivacyModal?: () => PrivacyModalHookReturn
-}
 
 const OpenCreateDefaultLearningPath = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps) => {
   const { t } = useTranslation()
@@ -22,7 +18,6 @@ const OpenCreateDefaultLearningPath = ({ usePrivacyModal = _usePrivacyModal }: P
   const getUser = usePersistedStore((state) => state.getUser)
   const { isCourseCreatorRole } = useContext(RoleContext)
 
-  //closes the modal
   const handleCloseDefaultLearningPathModal = (event: object, reason: string) => {
     if (reason == 'backdropClick') {
       if (!defaultLearningPathExists) {
@@ -40,20 +35,22 @@ const OpenCreateDefaultLearningPath = ({ usePrivacyModal = _usePrivacyModal }: P
   //check if there is already ils data
   useEffect(() => {
     if (!cookie['default_learningpath_sent_token'] && isAuth) {
-      getUser().then((user) => {
-        return fetchDefaultLearningPath({ userId: user.settings.user_id, lmsUserId: user.lms_user_id })
-          .then((data) => {
-            if (data.length > 0) {
-              setCookie('default_learningpath_sent_token', true, { path: '/' })
-            } else {
-              setDefaultLearningPathExists(false)
+      getUser()
+        .then((user) => {
+          return fetchDefaultLearningPath({ userId: user.settings.user_id, lmsUserId: user.lms_user_id }).then(
+            (data) => {
+              if (data.length > 0) {
+                setCookie('default_learningpath_sent_token', true, { path: '/' })
+              } else {
+                setDefaultLearningPathExists(false)
+              }
             }
-          })
-          .catch((error) => {
-            log.error(error)
-            setDefaultLearningPathExists(false)
-          })
-      })
+          )
+        })
+        .catch((error) => {
+          log.error(error)
+          setDefaultLearningPathExists(false)
+        })
     }
   })
 
