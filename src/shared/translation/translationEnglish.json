@@ -28,6 +28,8 @@
   "appGlobal.table": "Table",
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
+  "components.CreateDefaultLearningPathTable.leftHeader": "Classification Items",
+  "components.CreateDefaultLearningPathTable.rightHeader": "Order the Items",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Fixed Order",

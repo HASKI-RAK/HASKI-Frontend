@@ -28,6 +28,8 @@
   "appGlobal.table": "Tabelle",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
+  "components.CreateDefaultLearningPathTable.leftHeader": "Klassifikations Elemente",
+  "components.CreateDefaultLearningPathTable.rightHeader": "Sortierte Klassifikationen",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Feste Reihenfolge",

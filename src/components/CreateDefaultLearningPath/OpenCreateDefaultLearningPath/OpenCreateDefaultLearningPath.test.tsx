@@ -5,7 +5,7 @@ import { mockServices } from 'jest.setup'
 import React from 'react'
 import { useCookies } from 'react-cookie'
 import { MemoryRouter } from 'react-router-dom'
-import { AuthContext, RoleContext, RoleContextType, fetchDefaultLearningPath } from '@services'
+import { AuthContext, RoleContext, RoleContextType } from '@services'
 import OpenCreateDefaultLearningPath from './OpenCreateDefaultLearningPath'
 
 // --- Mocks --- //

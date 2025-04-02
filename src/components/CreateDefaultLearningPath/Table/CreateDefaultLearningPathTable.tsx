@@ -1,6 +1,6 @@
 import { DndContext, DragOverlay, rectIntersection } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { Dispatch, SetStateAction, useMemo, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, CircularProgress, Grid, IconButton, ListItemIcon, Tooltip, Typography } from '@common/components'
 import { Close, Replay } from '@common/icons'
@@ -23,9 +23,7 @@ const CreateDefaultLearningPathTable = ({
   disabledItems,
   setOrderedItems,
   setDisabledItems,
-  handleClose = () => {
-    /*not empty arrow function*/
-  }
+  handleClose
 }: createDefaultLearningPathTableProps) => {
   const { t } = useTranslation()
   const [activeStep, setActiveStep] = useState(0)
@@ -38,6 +36,19 @@ const CreateDefaultLearningPathTable = ({
       returnObjects: true
     })
   }, [t])
+
+  // Add a label and icon to the classifications
+  const classificationItems: ClassificationItem[] = useMemo(() => {
+    return learningElementClassifications.map((item) => ({
+      ...item,
+      label: item.name,
+      icon: getNodeIcon(item.key, 20)
+    }))
+  }, [learningElementClassifications])
+
+  const [activeItem, setActiveItem] = useState<ClassificationItem | undefined>(undefined)
+
+  // Update activeItem whenever activeId or classificationItems change.
 
   const {
     handleSubmit,
@@ -56,20 +67,12 @@ const CreateDefaultLearningPathTable = ({
     setDisabledItems
   })
 
-  // Add a label and icon to the classifications
-  const classificationItems: ClassificationItem[] = useMemo(() => {
-    return learningElementClassifications.map((item) => ({
-      ...item,
-      label: item.name,
-      icon: getNodeIcon(item.key, 20)
-    }))
-  }, [learningElementClassifications])
+  useEffect(() => {
+    setActiveItem(classificationItems.find((item) => item.key === activeId))
+  }, [activeId, classificationItems, handleDragStart])
 
   // left items that are not assigned to the droppable container.
   const unassignedItems = classificationItems.filter((item) => !orderedItems.includes(item.key))
-
-  //item that is actively dragged
-  const activeItem = classificationItems.find((item) => item.key === activeId)
 
   // The submit button is enabled only when every classification item is either dropped or disabled.
   const isSubmitActive = orderedItems.length + disabledItems.length === classificationItems.length
@@ -104,7 +107,7 @@ const CreateDefaultLearningPathTable = ({
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}>
       <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
-        <DragOverlay>{activeId && activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
+        <DragOverlay>{activeItem ? <DragPreview item={activeItem} data-testid="drag-preview" /> : null}</DragOverlay>
         <Box
           sx={{
             flex: 1,
@@ -115,7 +118,7 @@ const CreateDefaultLearningPathTable = ({
           <Grid container item sx={{ width: '100%', height: '100%' }}>
             {/* Left Column: Unassigned Items with Toggle Disable Button */}
             <Grid item xs={4} sx={{ height: '100%' }}>
-              <Typography variant="h6">Classification Items</Typography>
+              <Typography variant="h6">{t('components.CreateDefaultLearningPathTable.leftHeader')}</Typography>
               <Box height={24} />
               {unassignedItems.map((item) => {
                 const isDisabled = disabledItems.includes(item.key)
@@ -134,7 +137,7 @@ const CreateDefaultLearningPathTable = ({
             {/* Right Column: Droppable Container */}
             <Grid item xs={6.5} sx={{ width: '100%' }}>
               <Grid item>
-                <Typography variant="h6">Order the Items</Typography>
+                <Typography variant="h6">{t('components.CreateDefaultLearningPathTable.rightHeader')}</Typography>
               </Grid>
               <Grid item>
                 <Box height={24} />
@@ -171,6 +174,7 @@ const CreateDefaultLearningPathTable = ({
                               sx={{ color: 'text.secondary' }}>
                               <Close
                                 fontSize="small"
+                                data-testid={'remove-' + item.key + '-button'}
                                 sx={{
                                   bgcolor: (theme) => theme.palette.error.main,
                                   borderRadius: 10,
@@ -224,7 +228,7 @@ const CreateDefaultLearningPathTable = ({
                   disabled={!isSubmitActive || isSending}
                   onClick={() => {
                     handleSubmit().then(() => {
-                      return handleClose({}, 'closeButtonClick')
+                      handleClose?.({}, 'closeButtonClick')
                     })
                   }}>
                   {isSending ? <CircularProgress size={24} /> : t('appGlobal.submit')}
