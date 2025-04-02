@@ -1,18 +1,23 @@
 import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 import { RemoteLearningElement, RemoteTopics } from '@core'
+import { Solution } from '../../Modal/CreateTopicModal/CreateTopicModal'
 
 type useCreateTopicModalProps = {
   selectedLearningElements: { [p: number]: RemoteLearningElement[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
   selectedTopics: RemoteTopics[]
   setSelectAllLearningElementsChecked: Dispatch<SetStateAction<boolean>>
+  selectedSolutions: { [key: number]: Solution[] }
+  onSolutionChange: (selectedSolutions: { [key: number]: Solution[] }) => void
 }
 
 export const useCreateLearningElementTable = ({
   selectedLearningElements,
   onLearningElementChange,
   selectedTopics,
-  setSelectAllLearningElementsChecked
+  setSelectAllLearningElementsChecked,
+  selectedSolutions,
+  onSolutionChange
 }: useCreateTopicModalProps) => {
   const handleLearningElementCheckboxChange = (topicId: number, element: RemoteLearningElement, checked: boolean) => {
     const updatedSelectedElements = {
@@ -23,6 +28,15 @@ export const useCreateLearningElementTable = ({
     }
 
     onLearningElementChange(updatedSelectedElements)
+
+    const updatedSolutions = {
+      ...selectedSolutions,
+      [topicId]: checked
+        ? [...(selectedSolutions[topicId] || [])]
+        : (selectedSolutions[topicId] || []).filter((solution) => solution.solutionLmsId !== element.lms_id)
+    }
+
+    onSolutionChange(updatedSolutions)
   }
 
   const handleSelectAllLearningElements = useCallback(() => {

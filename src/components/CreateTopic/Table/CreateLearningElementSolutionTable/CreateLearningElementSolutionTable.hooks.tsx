@@ -1,42 +1,44 @@
-import { useCallback, useMemo, memo } from "react"
-import { LearningElementWithSolution } from "@core"
-import { Solution, RemoteLearningElementWithSolution } from "../../Modal/CreateTopicModal/CreateTopicModal"
+import { useCallback, useMemo } from 'react'
+import { RemoteLearningElementWithSolution, Solution } from '../../Modal/CreateTopicModal/CreateTopicModal'
 
 type useCreateLearningElementSolutionTable = {
   learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }
   selectedSolutions: { [key: number]: Solution[] }
   onLearningElementSolutionChange: (selectedSolutions: { [key: number]: RemoteLearningElementWithSolution[] }) => void
-  displayedSolutions: { [key: number]: Solution[] }
-  setDisplayedSolutions: (displayedSolutions: { [key: number]: Solution[] }) => void
 }
 
 export const useCreateLearningElementSolutionTable = ({
   learningElementsWithSolutions,
   selectedSolutions,
-  onLearningElementSolutionChange,
-  displayedSolutions,
-  setDisplayedSolutions} : useCreateLearningElementSolutionTable) => {
+  onLearningElementSolutionChange
+}: useCreateLearningElementSolutionTable) => {
+  const handleSolutionChange = useCallback(
+    (topicId: number, elementId: number, solutionLmsId: number, solutionLmsType: string | undefined) => {
+      const updatedLeElSolutions = {
+        ...learningElementsWithSolutions,
+        [topicId]: learningElementsWithSolutions[topicId].map((element) =>
+          element.learningElementLmsId === elementId ? { ...element, solutionLmsId, solutionLmsType } : element
+        )
+      }
+      //updateDisplayedSolutions(topicId)
+      onLearningElementSolutionChange(updatedLeElSolutions)
+    },
+    [learningElementsWithSolutions, onLearningElementSolutionChange]
+  )
 
-    const updateDisplayedSolutions = useCallback(
-      (topicId: number) => {
-        const availableSolutions = selectedSolutions[topicId].filter((solution) =>
-          !(learningElementsWithSolutions[topicId] || []).some((element) => element.solutionLmsId === solution.solutionLmsId))
-        const newDisplayedSolutions = [{solutionLmsId: 0, solutionLmsName: 'No Solution Placeholder'}, ...(availableSolutions || [])]
-        setDisplayedSolutions({ ...displayedSolutions, [topicId]: newDisplayedSolutions })
-      }, [learningElementsWithSolutions, displayedSolutions, setDisplayedSolutions])
+  const resetUnavailableSolutions = useCallback(
+    (elementsWithSolutions: RemoteLearningElementWithSolution[], topicId: number) => {
+      return elementsWithSolutions.map((element) =>
+        selectedSolutions[topicId].find((solution) => solution.solutionLmsId === element.solutionLmsId)
+          ? element
+          : { ...element, solutionLmsId: 0 }
+      )
+    },
+    [learningElementsWithSolutions, selectedSolutions, onLearningElementSolutionChange]
+  )
 
-    const handleSolutionChange = useCallback(
-      (topicId: number, elementId: number, solutionLmsId: number) => {
-        const updatedLeElSolutions = { ...learningElementsWithSolutions,
-          [topicId]: learningElementsWithSolutions[topicId].map((element) =>
-            element.learningElementLmsId === elementId ? { ...element, solutionLmsId } : element
-          )
-        }
-        //updateDisplayedSolutions(topicId)
-        onLearningElementSolutionChange(updatedLeElSolutions)
-      }, [learningElementsWithSolutions, onLearningElementSolutionChange])
-
-      return useMemo(() => ({ handleSolutionChange }), [handleSolutionChange])
-
-      
-  }
+  return useMemo(
+    () => ({ handleSolutionChange, resetUnavailableSolutions }),
+    [handleSolutionChange, resetUnavailableSolutions]
+  )
+}

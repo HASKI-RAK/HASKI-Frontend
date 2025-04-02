@@ -44,6 +44,8 @@ describe('CreateLearningElementClassificationsStep', () => {
           selectedLearningElements={selectedLearningElements}
           selectedLearningElementsClassification={selectedLearningElementsClassification}
           handleLearningElementClassification={mockHandleLearningElementClassification}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
           onNext={mockOnNext}
           onBack={mockOnBack}
         />
@@ -62,6 +64,8 @@ describe('CreateLearningElementClassificationsStep', () => {
           selectedLearningElements={selectedLearningElements}
           selectedLearningElementsClassification={selectedLearningElementsClassification}
           handleLearningElementClassification={mockHandleLearningElementClassification}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
           onNext={mockOnNext}
           onBack={mockOnBack}
         />
@@ -88,6 +92,8 @@ describe('CreateLearningElementClassificationsStep', () => {
           selectedLearningElements={selectedLearningElements}
           selectedLearningElementsClassification={updatedLearningElementsClassification}
           handleLearningElementClassification={mockHandleLearningElementClassification}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
           onNext={mockOnNext}
           onBack={mockOnBack}
         />
@@ -106,6 +112,8 @@ describe('CreateLearningElementClassificationsStep', () => {
           selectedLearningElements={selectedLearningElements}
           selectedLearningElementsClassification={selectedLearningElementsClassification}
           handleLearningElementClassification={mockHandleLearningElementClassification}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
           onNext={mockOnNext}
           onBack={mockOnBack}
         />
@@ -134,6 +142,8 @@ describe('CreateLearningElementClassificationsStep', () => {
           selectedLearningElements={selectedLearningElements}
           selectedLearningElementsClassification={updatedLearningElementsClassification}
           handleLearningElementClassification={mockHandleLearningElementClassification}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
           onNext={mockOnNext}
           onBack={mockOnBack}
         />
@@ -156,6 +166,8 @@ describe('CreateLearningElementClassificationsStep', () => {
           selectedLearningElements={selectedLearningElements}
           selectedLearningElementsClassification={selectedLearningElementsClassification}
           handleLearningElementClassification={mockHandleLearningElementClassification}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
           onNext={mockOnNext}
           onBack={mockOnBack}
         />

@@ -1,4 +1,5 @@
 import { SelectChangeEvent } from '@mui/material'
+import { tableCellClasses } from '@mui/material'
 import { ReactNode, memo, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
@@ -12,16 +13,15 @@ import {
   Paper,
   Select,
   Table,
+  TableCell,
   TableHead,
   TableRow,
-  TableCell,
   Typography
 } from '@common/components'
-import { tableCellClasses } from '@mui/material'
 import { SkeletonList } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
-import { useCreateLearningElementClassificationTable } from './CreateLearningElementClassificationTable.hooks'
 import { Solution } from '../../Modal/CreateTopicModal/CreateTopicModal'
+import { useCreateLearningElementClassificationTable } from './CreateLearningElementClassificationTable.hooks'
 
 export type LearningElementWithClassification = RemoteLearningElement & {
   classification: string
@@ -47,18 +47,18 @@ const CreateLearningElementClassificationTable = ({
   selectedTopics,
   selectedLearningElements,
   LearningElementsClassification,
-    selectedSolutions,
+  selectedSolutions,
   onLearningElementChange,
-    onSolutionChange,
+  onSolutionChange,
   children
 }: CreateLearningElementClassificationTableProps) => {
   //Hooks
   const { t } = useTranslation()
   const { handleClassificationChange, handleSolutionchange } = useCreateLearningElementClassificationTable({
     LearningElementsClassification,
-      selectedSolutions,
+    selectedSolutions,
     onLearningElementChange,
-      onSolutionChange
+    onSolutionChange
   })
 
   //Constants
@@ -109,89 +109,100 @@ const CreateLearningElementClassificationTable = ({
     )
   }
 
-    return (
-      <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
-        <Grid item container justifyContent="center">
-          <Typography variant="h6" sx={{ mt: '1rem' }}>
-            {t('components.CreateLearningElementClassificationTable.setLearningElementClassification')}
-          </Typography>
-        </Grid>
-        {selectedTopics.map((lmsTopic) => (
-          <Grid
-            item
-            container
-            alignItems="center"
-            justifyContent="center"
-            direction="column"
-            key={'Create Topic - Learning Element Classification: ' + lmsTopic.topic_lms_id}>
-            <Paper sx={{ padding: '1rem', width: '95%' }}>
-              <Box bgcolor={(theme) => theme.palette.info.light} borderRadius={3}>
-                <Grid item container justifyContent="center" alignItems="center">
-                  <Typography variant="h6" gutterBottom>
-                    {lmsTopic.topic_lms_name}
-                  </Typography>
-                </Grid>
-              </Box>
-              <Table
+  return (
+    <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
+      <Grid item container justifyContent="center">
+        <Typography variant="h6" sx={{ mt: '1rem' }}>
+          {t('components.CreateLearningElementClassificationTable.setLearningElementClassification')}
+        </Typography>
+      </Grid>
+      {selectedTopics.map((lmsTopic) => (
+        <Grid
+          item
+          container
+          alignItems="center"
+          justifyContent="center"
+          direction="column"
+          key={'Create Topic - Learning Element Classification: ' + lmsTopic.topic_lms_id}>
+          <Paper sx={{ padding: '1rem', width: '95%' }}>
+            <Box bgcolor={(theme) => theme.palette.info.light} borderRadius={3}>
+              <Grid item container justifyContent="center" alignItems="center">
+                <Typography variant="h6" gutterBottom>
+                  {lmsTopic.topic_lms_name}
+                </Typography>
+              </Grid>
+            </Box>
+            <Table
               sx={{
                 [`& .${tableCellClasses.root}`]: {
                   borderBottom: 'none'
                 },
-                [`& .${tableCellClasses.body}`]: { 
+                [`& .${tableCellClasses.body}`]: {
                   margin: '0rem'
                 }
               }}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell sx={{textAlign: 'center'}}>{t('Learning Element')}</TableCell>
-                    <TableCell sx={{textAlign: 'center'}}>{t('Klassifikation')}</TableCell>
-                    <TableCell sx={{textAlign: 'center'}}>{t('Ist Lösung')}</TableCell>
-                  </TableRow>
-                </TableHead>
-                {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
-                  <TableRow key={element.lms_id}>
-                    <TableCell sx={{padding: '0rem'}}>
-                      <FormControlLabel control={<Checkbox checked={true} disabled={true}/>} label={<Typography>{element.lms_learning_element_name}</Typography>} />
-                    </TableCell>
-                    <TableCell sx={{textAlign: 'center', padding: '0rem'}}>
-                      <FormControl sx={{ m: 1, width: '21rem' }} size="small">
-                        <InputLabel>{t('appGlobal.classification')}</InputLabel>
-                        <Select
-                          value={element.classification}
-                          onChange={(event) =>
-                            handleClassificationChange(
-                              lmsTopic.topic_lms_id,
-                              element.lms_id,
-                              event.target.value as string
-                            )
-                          }
-                          label={t('appGlobal.classification')}
-                          disabled={element.disabled}>
-                          {learningElementClassifications.map((classification) => (
-                            <MenuItem
-                              key={classification.key}
-                              value={classification.key}
-                              >
-                              {classification.name}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </TableCell>
-                    <TableCell sx={{textAlign: 'center', padding: '0rem'}}>
-                      <Checkbox checked={(selectedSolutions[lmsTopic.topic_lms_id] || []).some((el) => el.solutionLmsId === element.lms_id)}
-                       onChange={(event)=>handleSolutionchange(lmsTopic.topic_lms_id, element.lms_id, element.lms_learning_element_name, event.target.checked)}/>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </Table>
-            </Paper>
-          </Grid>
-        ))}
-        {children}
-      </Grid>
-    )
-  }
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ textAlign: 'center' }}>{t('Learning Element')}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>{t('Klassifikation')}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>{t('Ist Lösung')}</TableCell>
+                </TableRow>
+              </TableHead>
+              {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
+                <TableRow key={element.lms_id}>
+                  <TableCell sx={{ padding: '0rem' }}>
+                    <FormControlLabel
+                      control={<Checkbox checked={true} disabled={true} />}
+                      label={<Typography>{element.lms_learning_element_name}</Typography>}
+                    />
+                  </TableCell>
+                  <TableCell sx={{ textAlign: 'center', padding: '0rem' }}>
+                    <FormControl sx={{ m: 1, width: '21rem' }} size="small">
+                      <InputLabel>{t('appGlobal.classification')}</InputLabel>
+                      <Select
+                        value={element.classification}
+                        onChange={(event) =>
+                          handleClassificationChange(
+                            lmsTopic.topic_lms_id,
+                            element.lms_id,
+                            event.target.value as string
+                          )
+                        }
+                        label={t('appGlobal.classification')}
+                        disabled={element.disabled}>
+                        {learningElementClassifications.map((classification) => (
+                          <MenuItem key={classification.key} value={classification.key}>
+                            {classification.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </TableCell>
+                  <TableCell sx={{ textAlign: 'center', padding: '0rem' }}>
+                    <Checkbox
+                      checked={(selectedSolutions[lmsTopic.topic_lms_id] || []).some(
+                        (el) => el.solutionLmsId === element.lms_id
+                      )}
+                      onChange={(event) =>
+                        handleSolutionchange(
+                          lmsTopic.topic_lms_id,
+                          element.lms_id,
+                          element.lms_learning_element_name,
+                          event.target.checked
+                        )
+                      }
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </Table>
+          </Paper>
+        </Grid>
+      ))}
+      {children}
+    </Grid>
+  )
+}
 
 // eslint-disable-next-line immutable/no-mutation
 CreateLearningElementClassificationTable.displayName = 'CreateLearningElementClassificationTable'

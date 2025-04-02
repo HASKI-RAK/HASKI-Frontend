@@ -36,6 +36,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   const theme = useTheme()
   const [isFavorite, setIsFavorite] = useState(false)
   const [solutionLmsId, setSolutionLmsId] = useState<number>(-1)
+  const [solutionActivityType, setSolutionActivityType] = useState<string>('resource')
   const onMouseEnter = () => {
     setIsHovered(true)
   }
@@ -48,7 +49,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   }
   const handleShowSolution = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     props.data.handleOpen()
-    props.data.handleSetUrl(getConfig().MOODLE + `/mod/resource/view.php?id=${solutionLmsId}`)
+    props.data.handleSetUrl(getConfig().MOODLE + `/mod/${solutionActivityType}/view.php?id=${solutionLmsId}`)
     props.data.handleSetLmsId(solutionLmsId)
     event.stopPropagation()
   }
@@ -58,8 +59,9 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   useEffect(() => {
     getLearningElementSolution(props.data.lmsId).then((solution) => {
       setSolutionLmsId(solution.solution_lms_id)
+      setSolutionActivityType(solution.activity_type)
     })
-  }, [getLearningElementSolution, setSolutionLmsId, id, props])
+  }, [getLearningElementSolution, setSolutionLmsId, setSolutionActivityType, id, props])
 
   return (
     <NodeWrapper

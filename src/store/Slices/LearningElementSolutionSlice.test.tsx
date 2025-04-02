@@ -11,8 +11,9 @@ describe('LearningElementSolutionSlice', () => {
     const { getLearningElementSolution } = useStore.getState()
     const learningElementSolution = {
       id: 1,
-      learning_element_id: 1,
-      solution_lms_id: 4
+      learning_element_lms_id: 1,
+      solution_lms_id: 4,
+      activity_type: 'activity'
     }
 
     const learningElementId = 1
@@ -30,7 +31,7 @@ describe('LearningElementSolutionSlice', () => {
 
   it('should return cached learning element solution if available', async () => {
     const { getLearningElementSolution } = useStore.getState()
-    const learningElementSolution = { id: 1, learning_element_id: 1, solution_lms_id: 4 }
+    const learningElementSolution = { id: 1, learning_element_lms_id: 1, solution_lms_id: 4, activity_type: 'activity' }
 
     const learningElementId = 1
 

@@ -32,7 +32,7 @@ export const useCreateLearningElementClassificationTable = ({
       ...selectedSolutions,
       [topicId]: isChecked
         ? [...(selectedSolutions[topicId] || []), { solutionLmsId: elementLmsId, solutionLmsName: lmsName }]
-        : selectedSolutions[topicId].filter((solution) => solution.solutionLmsId !== elementLmsId)
+        : (selectedSolutions[topicId] || []).filter((solution) => solution.solutionLmsId !== elementLmsId)
     }
     const updatedClassification = {
       ...LearningElementsClassification,
@@ -43,7 +43,6 @@ export const useCreateLearningElementClassificationTable = ({
     onLearningElementChange(updatedClassification)
     onSolutionChange(updatedSolutions)
   }
-
 
   return useMemo(
     () => ({

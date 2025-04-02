@@ -18,8 +18,7 @@ import BasicNode from '../BasicNode/BasicNode'
  */
 const ShortTextualIntroductionNode = (data: NodeProps<LearningPathLearningElementNode>) => {
   return (
-    <BasicNode {...data} id="short-textual-introduction-node" icon={<ShortText sx={{ fontSize: 50 }} />}>
-    </BasicNode>
+    <BasicNode {...data} id="short-textual-introduction-node" icon={<ShortText sx={{ fontSize: 50 }} />}></BasicNode>
   )
 }
 

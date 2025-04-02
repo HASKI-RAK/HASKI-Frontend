@@ -576,7 +576,8 @@ const mockDataServices: MockDataServices = {
     Promise.resolve({
       id: 1,
       learning_element_lms_id: 1,
-      solution_lms_id: 4
+      solution_lms_id: 4,
+      activity_type: 'activity'
     })
   )
 }

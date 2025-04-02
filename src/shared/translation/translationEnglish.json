@@ -19,10 +19,10 @@
   "appGlobal.oClock": "o'clock",
   "appGlobal.othRegensburg": "OTH Regensburg",
   "appGlobal.send": "Send",
+  "appGlobal.solutions": "Solutions",
   "appGlobal.table": "Table",
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
-  "appGlobal.solutions": "Solutions",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Fixed Order",
@@ -158,10 +158,11 @@
     }
   ],
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Set learning element classification",
+  "components.CreateLearningElementSolutionTable.setLearningElementSolution": "Set learning element solution",
+  "components.CreateLearningElementSolutionTable.solution": "Select additional solution",
   "components.CreateLearningElementTable.selectAllToggle": "Select all",
   "components.CreateLearningElementTable.selectLearningElements": "Select learning elements",
   "components.CreateTopicModal.createTopics": "Create Topics",
-  "components.CreateLearningElementSolutionTabel.setLearningElementSolution": "Set learning element solution",
   "components.ExistingTopicsTable.title": "Already created topics",
   "components.Footer.project": "Project",
   "components.FurtherInfoMenu.title": "Further information",

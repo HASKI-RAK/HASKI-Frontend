@@ -39,12 +39,15 @@ export const postLearningPathAlgorithm = async ({
   topicId,
   outputJson
 }: PostLearningPathAlgorithmProps): Promise<LearningPathLearningElementAlgorithm> => {
-  return fetchData<LearningPathLearningElementAlgorithm>(`${getConfig().BACKEND}/user/${userId}/${lmsUserId}/topic/${topicId}/teacherAlgorithm`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: outputJson
-  })
+  return fetchData<LearningPathLearningElementAlgorithm>(
+    `${getConfig().BACKEND}/user/${userId}/${lmsUserId}/topic/${topicId}/teacherAlgorithm`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: outputJson
+    }
+  )
 }

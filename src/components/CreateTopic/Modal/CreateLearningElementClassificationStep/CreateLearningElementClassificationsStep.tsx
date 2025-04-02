@@ -49,7 +49,9 @@ const CreateLearningElementClassificationsStep = ({
               color="primary"
               disabled={
                 !selectedTopics.every((topic) =>
-                  selectedLearningElementsClassification[topic.topic_lms_id]?.every((el) => el.classification !== '' || el.disabled)
+                  selectedLearningElementsClassification[topic.topic_lms_id]?.every(
+                    (el) => el.classification !== '' || el.disabled
+                  )
                 )
               }
               onClick={onNext}
