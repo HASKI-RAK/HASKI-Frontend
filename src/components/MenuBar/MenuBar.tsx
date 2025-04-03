@@ -319,7 +319,7 @@ const MenuBar = () => {
                   <ListItemIcon>
                     <Polyline fontSize="small" />
                   </ListItemIcon>
-                  <Typography textAlign="center">{'Fester Lernpfad'}</Typography>
+                  <Typography textAlign="center">{t('components.Menubar.defaultLearningPath')}</Typography>
                 </MenuItem>
               )}
               <DefaultLearningPathModal

@@ -30,6 +30,7 @@
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
   "components.CreateDefaultLearningPathTable.leftHeader": "Classification Items",
   "components.CreateDefaultLearningPathTable.rightHeader": "Order the Items",
+  "components.Menubar.defaultLearningPath": "Default Learning Path",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Fixed Order",

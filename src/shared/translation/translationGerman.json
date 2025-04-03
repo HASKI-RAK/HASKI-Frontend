@@ -30,6 +30,7 @@
   "appGlobal.universityKempten": "Hochschule Kempten",
   "components.CreateDefaultLearningPathTable.leftHeader": "Klassifikations Elemente",
   "components.CreateDefaultLearningPathTable.rightHeader": "Sortierte Klassifikationen",
+  "components.Menubar.defaultLearningPath": "Fester Lernpfad",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Feste Reihenfolge",
