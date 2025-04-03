@@ -1,4 +1,3 @@
-// useCreateDefaultLearningPathTable.test.ts
 import { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
 import { act, renderHook } from '@testing-library/react-hooks'
@@ -7,28 +6,28 @@ import React from 'react'
 import { SnackbarContext } from '@services'
 import { useCreateDefaultLearningPathTable } from './CreateDefaultLearningPathTable.hooks'
 
+const setIsSending = jest.fn()
+const orderedItems = ['KÜ', 'AN', 'BE']
+const disabledItems = ['AN']
+const setActiveId = jest.fn()
+const setOrderedItems = jest.fn()
+const setDisabledItems = jest.fn()
+const addSnackbar = jest.fn()
+
+jest.spyOn(React, 'useContext').mockImplementation((context) => {
+  if (context === SnackbarContext) {
+    return { addSnackbar }
+  }
+  return {}
+})
+
 describe('useCreateDefaultLearningPathTable hook', () => {
-  const setIsSending = jest.fn()
-  const orderedItems = ['KÜ', 'AN', 'BE']
-  const disabledItems = ['AN']
-  const setActiveId = jest.fn()
-  const setOrderedItems = jest.fn()
-  const setDisabledItems = jest.fn()
-  const addSnackbar = jest.fn()
-
-  jest.spyOn(React, 'useContext').mockImplementation((context) => {
-    if (context === SnackbarContext) {
-      return { addSnackbar }
-    }
-    return {}
-  })
-
   it('handleToggleDisable adds and removes an item correctly', () => {
     const { result } = renderHook(() =>
       useCreateDefaultLearningPathTable({
         setIsSending,
         orderedItems,
-        disabledItems: [],
+        disabledItems,
         setActiveId,
         setOrderedItems,
         setDisabledItems
@@ -44,10 +43,10 @@ describe('useCreateDefaultLearningPathTable hook', () => {
     expect(addFn([])).toEqual(['KÜ'])
 
     act(() => {
-      result.current.handleToggleDisable('KÜ')
+      result.current.handleToggleDisable('AN')
     })
     const removeFn = setDisabledItems.mock.calls[1][0]
-    expect(removeFn(['KÜ'])).toEqual(['KÜ', 'KÜ'])
+    expect(removeFn(['KÜ'])).toEqual(['KÜ'])
   })
 
   it('handleResetItem removes the item from orderedItems', () => {
@@ -131,8 +130,77 @@ describe('useCreateDefaultLearningPathTable hook', () => {
     act(() => {
       result.current.handleDragOver(dummyDragOver)
     })
-    // For initialOrdered, 'B' at index 1 should be moved to index 2.
     expect(setOrderedItems).toHaveBeenCalledWith(arrayMove(initialOrdered, 1, 2))
+  })
+
+  it('handleDragOver returns if no overId is given', () => {
+    const initialOrdered = ['KÜ', 'AN', 'BE']
+    const { result } = renderHook(() =>
+      useCreateDefaultLearningPathTable({
+        setIsSending,
+        orderedItems: initialOrdered,
+        disabledItems,
+        setActiveId,
+        setOrderedItems,
+        setDisabledItems
+      })
+    )
+
+    const dummyDragOver = {
+      active: { id: 'AN' }
+    } as DragOverEvent
+
+    act(() => {
+      result.current.handleDragOver(dummyDragOver)
+    })
+    expect(setOrderedItems).not.toHaveBeenCalled()
+  })
+
+  it('handleDragOver returns if no activeId is given', () => {
+    const initialOrdered = ['KÜ', 'AN', 'BE']
+    const { result } = renderHook(() =>
+      useCreateDefaultLearningPathTable({
+        setIsSending,
+        orderedItems: initialOrdered,
+        disabledItems,
+        setActiveId,
+        setOrderedItems,
+        setDisabledItems
+      })
+    )
+
+    const dummyDragOver = {
+      over: { id: 'droppable-container' }
+    } as DragOverEvent
+
+    act(() => {
+      result.current.handleDragOver(dummyDragOver)
+    })
+    expect(setOrderedItems).not.toHaveBeenCalled()
+  })
+
+  it('handleDragEnd returns if no overId is given', () => {
+    const initialOrdered = ['KÜ', 'AN', 'BE']
+    const { result } = renderHook(() =>
+      useCreateDefaultLearningPathTable({
+        setIsSending,
+        orderedItems: initialOrdered,
+        disabledItems,
+        setActiveId,
+        setOrderedItems,
+        setDisabledItems
+      })
+    )
+
+    const dummyDragEnd = {
+      active: { id: 'AN' }
+    } as DragEndEvent
+
+    act(() => {
+      result.current.handleDragEnd(dummyDragEnd)
+    })
+
+    expect(setOrderedItems).not.toHaveBeenCalled()
   })
 
   it('handleDragEnd reorders items correctly when active is in orderedItems and over id is another ordered item', () => {
@@ -156,8 +224,80 @@ describe('useCreateDefaultLearningPathTable hook', () => {
     act(() => {
       result.current.handleDragEnd(dummyDragEnd)
     })
-    // 'B' (index 1) moved to where 'C' is (index 2)
+
     expect(setOrderedItems).toHaveBeenCalledWith(arrayMove(initialOrdered, 1, 2))
+  })
+
+  it('handleDragEnd adds item to droppable-container if drag ends over it', () => {
+    const initialOrdered = ['KÜ', 'FO', 'BE']
+    const { result } = renderHook(() =>
+      useCreateDefaultLearningPathTable({
+        setIsSending,
+        orderedItems: initialOrdered,
+        disabledItems,
+        setActiveId,
+        setOrderedItems,
+        setDisabledItems
+      })
+    )
+
+    const dummyDragEnd = {
+      active: { id: 'FO' },
+      over: { id: 'droppable-container' }
+    } as DragEndEvent
+
+    act(() => {
+      result.current.handleDragEnd(dummyDragEnd)
+    })
+    expect(setOrderedItems).toHaveBeenCalledWith(arrayMove(initialOrdered, 1, 2))
+  })
+
+  it('handleDragEnd adds item to droppable-container if drag ends over an ordered item', () => {
+    const initialOrdered = ['KÜ', 'FO', 'BE']
+    const { result } = renderHook(() =>
+      useCreateDefaultLearningPathTable({
+        setIsSending,
+        orderedItems: initialOrdered,
+        disabledItems,
+        setActiveId,
+        setOrderedItems,
+        setDisabledItems
+      })
+    )
+
+    const dummyDragEnd = {
+      active: { id: 'AN' },
+      over: { id: 'FO' }
+    } as DragEndEvent
+
+    act(() => {
+      result.current.handleDragEnd(dummyDragEnd)
+    })
+    expect(setOrderedItems).toHaveBeenCalledWith(arrayMove(['KÜ', 'FO', 'AN', 'BE'], 1, 2))
+  })
+
+  it('handleDragEnd adds item to droppable-container if drag does not end above overid or droppable-container', () => {
+    const initialOrdered = ['KÜ', 'FO', 'BE']
+    const { result } = renderHook(() =>
+      useCreateDefaultLearningPathTable({
+        setIsSending,
+        orderedItems: initialOrdered,
+        disabledItems,
+        setActiveId,
+        setOrderedItems,
+        setDisabledItems
+      })
+    )
+
+    const dummyDragEnd = {
+      active: { id: 'AN' },
+      over: { id: 'LZ' }
+    } as DragEndEvent
+
+    act(() => {
+      result.current.handleDragEnd(dummyDragEnd)
+    })
+    expect(setOrderedItems).toHaveBeenCalledWith(arrayMove(['KÜ', 'BE', 'FO', 'AN'], 1, 2))
   })
 
   it('handleSubmit posts default learning path and clears caches', async () => {

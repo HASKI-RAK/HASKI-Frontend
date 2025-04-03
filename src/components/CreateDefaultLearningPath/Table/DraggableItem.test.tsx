@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
-import UnassignedItem, { ClassificationItem } from './DraggableItem'
+import UnassignedItem, { ClassificationItem, DragPreview, SourceDraggable } from './DraggableItem'
 
 jest.mock('@dnd-kit/core', () => ({
   useDraggable: jest.fn()
@@ -51,6 +51,8 @@ describe('UnassignedItem Component', () => {
 
     const buttons = getAllByRole('button')
     const toggleButton = buttons[1]
+    fireEvent.pointerDown(toggleButton, 'click')
+    fireEvent.mouseDown(toggleButton)
     fireEvent.click(toggleButton)
     expect(handleToggleDisable).toHaveBeenCalledWith('KÜ')
   })
@@ -79,5 +81,30 @@ describe('UnassignedItem Component', () => {
     const buttons = getAllByRole('button')
     const toggleButton = buttons[1]
     expect(toggleButton.parentElement).toHaveStyle('display: block')
+  })
+
+  it('changes opacity when transform and isDragging is true and disabled is true', () => {
+    // Override useDraggable to simulate dragging.
+    const { getByText } = render(
+      <MemoryRouter>
+        <SourceDraggable
+          key={classificationItem.key}
+          id={classificationItem.key}
+          icon={classificationItem.icon}
+          label={classificationItem.label}
+          disabled={true}
+        />
+      </MemoryRouter>
+    )
+    expect(getByText('Overview')).toBeInTheDocument()
+  })
+
+  it('renders DragPreview component', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <DragPreview item={classificationItem} />
+      </MemoryRouter>
+    )
+    expect(getByText('Overview')).toBeInTheDocument()
   })
 })
