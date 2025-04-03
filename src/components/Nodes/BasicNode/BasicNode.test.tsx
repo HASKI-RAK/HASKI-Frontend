@@ -239,13 +239,13 @@ describe('BasicNode tests', () => {
   test('disabled classification nodes are seen by courseCreator', async () => {
     const mockNode = getMockNode(false, true)
 
-    const studentContext = {
-      isStudentRole: true,
-      isCourseCreatorRole: false
+    const courseCreatorContext = {
+      isStudentRole: false,
+      isCourseCreatorRole: true
     } as RoleContextType
 
     const { getByTestId } = render(
-      <RoleContext.Provider value={studentContext}>
+      <RoleContext.Provider value={courseCreatorContext}>
         <MemoryRouter>
           <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
         </MemoryRouter>
