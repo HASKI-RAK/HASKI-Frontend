@@ -21,10 +21,16 @@
   "appGlobal.next": "Weiter",
   "appGlobal.oClock": "Uhr",
   "appGlobal.othRegensburg": "OTH Regensburg",
+  "appGlobal.reset": "Zurücksetzen",
   "appGlobal.send": "Senden",
+  "appGlobal.start": "Start",
+  "appGlobal.submit": "Abschicken",
   "appGlobal.table": "Tabelle",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
+  "components.CreateDefaultLearningPathTable.leftHeader": "Klassifikations Elemente",
+  "components.CreateDefaultLearningPathTable.rightHeader": "Sortierte Klassifikationen",
+  "components.Menubar.defaultLearningPath": "Fester Lernpfad",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Feste Reihenfolge",
@@ -59,7 +65,6 @@
   "components.ContactForm.error": "Es fehlt eine Beschreibung.",
   "components.ContactForm.errorSelect": "Es wurde kein Thema ausgewählt.",
   "components.ContactForm.reportType": "Reporttyp",
-  "components.ContactForm.submit": "Abschicken",
   "components.ContactForm.submitError": "Die Submit-Funktion wurde aufgerufen, jedoch gab es einen Fehler.",
   "components.ContactForm.topic": "Themenbereich",
   "components.ContactForm.topics": [
@@ -111,6 +116,9 @@
   "components.CreateCourseTable.alreadyCreatedCourses": "Bereits erstellte Kurse",
   "components.CreateCourseTable.lmsCourses": "Kurse aus dem LMS",
   "components.CreateCourseTable.noCoursesFound": "Keine Kurse gefunden...",
+  "components.CreateDefaultLearningPathTable.header": "Fester Lernpfad",
+  "components.CreateDefaultLearningPathTable.introduction": "Beim Erstellen eines festen Lernpfads werden alle Lerninhalte in einer vorgegebenen, unveränderlichen Reihenfolge angeordnet. Dieser strukturierte Ansatz bildet einen festen Algorithmus ab, der sicherstellt, dass Lernende Schritt für Schritt durch die einzelnen Themen geführt werden. Dadurch wird ein gezieltes und nachvollziehbares Lernen ermöglicht, bei dem aufeinander aufbauende Inhalte systematisch vermittelt und der Lernfortschritt transparent abgebildet wird.",
+  "components.CreateDefaultLearningPathTable.submitRequirement": "Alle Elemente müssen zugeteilt oder deaktiviert sein",
   "components.CreateLearningElement.createLearningElement": "Lernelement hinzufügen",
   "components.CreateLearningElementClassificationTable.classifications": [
     {

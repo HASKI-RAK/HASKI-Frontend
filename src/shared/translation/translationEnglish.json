@@ -21,10 +21,16 @@
   "appGlobal.next": "Next",
   "appGlobal.oClock": "o'clock",
   "appGlobal.othRegensburg": "OTH Regensburg",
+  "appGlobal.reset": "Reset",
   "appGlobal.send": "Send",
+  "appGlobal.start": "Start",
+  "appGlobal.submit": "Submit",
   "appGlobal.table": "Table",
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
+  "components.CreateDefaultLearningPathTable.leftHeader": "Classification Items",
+  "components.CreateDefaultLearningPathTable.rightHeader": "Order the Items",
+  "components.Menubar.defaultLearningPath": "Default Learning Path",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Fixed Order",
@@ -59,7 +65,6 @@
   "components.ContactForm.error": "Missing description. Please write something.",
   "components.ContactForm.errorSelect": "Missing topic. Please select something.",
   "components.ContactForm.reportType": "Reporttype",
-  "components.ContactForm.submit": "Submit",
   "components.ContactForm.submitError": "The submit function has been called and an error occurred.",
   "components.ContactForm.topic": "Topic",
   "components.ContactForm.topics": [
@@ -111,6 +116,9 @@
   "components.CreateCourseTable.alreadyCreatedCourses": "Already created courses",
   "components.CreateCourseTable.lmsCourses": "Courses from the LMS",
   "components.CreateCourseTable.noCoursesFound": "No courses found...",
+  "components.CreateDefaultLearningPathTable.header": "Default Learning Path",
+  "components.CreateDefaultLearningPathTable.introduction": "When creating a fixed learning path, all learning content is arranged in a predetermined, unchangeable sequence. This structured approach represents a fixed algorithm that ensures learners are guided through each topic step by step. It enables focused and coherent learning by systematically presenting interdependent content while transparently tracking progress.",
+  "components.CreateDefaultLearningPathTable.submitRequirement": "All elements must either be selected or deactivated",
   "components.CreateLearningElement.createLearningElement": "Add Learning Element",
   "components.CreateLearningElementClassificationTable.classifications": [
     {
