@@ -1,7 +1,7 @@
 import log from 'loglevel'
-import { useCallback, useContext, useMemo } from 'react'
+import { Dispatch, SetStateAction, useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CreateAlgorithmTableNameProps, handleError } from '@components'
+import { CreateAlgorithmTableNameProps, RemoteLearningElementWithClassification, handleError } from '@components'
 import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {
   SnackbarContext,
@@ -12,7 +12,7 @@ import {
   postLearningPathAlgorithm,
   postTopic
 } from '@services'
-import { usePersistedStore } from '@store'
+import { usePersistedStore, useStore } from '@store'
 import {
   RemoteLearningElementWithClassification,
   RemoteLearningElementWithSolution,
@@ -20,8 +20,8 @@ import {
 } from './CreateTopicModal'
 
 export type useCreateTopicModalProps = {
-  setCreateTopicIsSending: React.Dispatch<React.SetStateAction<boolean>>
-  setSelectedTopics: React.Dispatch<React.SetStateAction<RemoteTopics[]>>
+  setCreateTopicIsSending?: React.Dispatch<React.SetStateAction<boolean>>
+  setSelectedTopics?: React.Dispatch<React.SetStateAction<RemoteTopics[]>>
   setSelectedLearningElements: React.Dispatch<React.SetStateAction<{ [p: number]: RemoteLearningElement[] }>>
   selectedLearningElementSolution: { [topicId: number]: RemoteLearningElementWithSolution[] }
   setSelectedLearningElementSolution: React.Dispatch<
@@ -31,25 +31,35 @@ export type useCreateTopicModalProps = {
   setSelectedSolutions: React.Dispatch<React.SetStateAction<{ [topicId: number]: Solution[] }>>
   setSelectedLearningElementsClassification: React.Dispatch<
     React.SetStateAction<{ [p: number]: RemoteLearningElementWithClassification[] }>
-  >
-  setSelectedAlgorithms: React.Dispatch<React.SetStateAction<{ [p: number]: CreateAlgorithmTableNameProps }>>
-  setSuccessfullyCreatedTopicsCount: React.Dispatch<React.SetStateAction<number>>
+    >
+  setSelectedAlgorithms?: Dispatch<SetStateAction<{ [p: number]: CreateAlgorithmTableNameProps }>>
+  setSuccessfullyCreatedTopicsCount?: Dispatch<SetStateAction<number>>
 }
 
 export const useCreateTopicModal = ({
-  setCreateTopicIsSending,
-  setSelectedTopics,
+  setCreateTopicIsSending = () => {
+    return false
+  },
+  setSelectedTopics = () => {
+    return []
+  },
   setSelectedLearningElements,
   setSelectedLearningElementsClassification,
   selectedLearningElementSolution,
   setSelectedLearningElementSolution,
   setSelectedSolutions,
-  setSelectedAlgorithms,
-  setSuccessfullyCreatedTopicsCount
+  setSelectedAlgorithms = () => {
+    return {}
+  },
+  setSuccessfullyCreatedTopicsCount = () => {
+    return 0
+  }
 }: useCreateTopicModalProps) => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
   const getUser = usePersistedStore((state) => state.getUser)
+  const clearLearningPathElement = useStore((state) => state.clearLearningPathElementCache)
+  const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
 
   // Helper function for creating a topic
   const handleCreateTopics = (topicName: string, lmsCourseId: number, courseId: string, user: User) => {
@@ -117,6 +127,48 @@ export const useCreateTopicModal = ({
     })
     return postLearningElementSolution({ learningElementLmsId, outputJson })
   }
+  const handleCreateLearningElementsInExistingTopic = useCallback(
+    async (
+      topicLmsId: number,
+      selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] },
+      topicId?: string,
+      courseId?: string
+    ): Promise<void> => {
+      if (!topicId || !courseId) return Promise.resolve()
+
+      return getUser()
+        .then((user) =>
+          Promise.all(
+            selectedLearningElementsClassification[topicLmsId].map((element) =>
+              handleCreateLearningElements(
+                element.lms_learning_element_name,
+                element.lms_activity_type,
+                element.classification,
+                element.lms_id,
+                parseInt(topicId),
+                user
+              )
+            )
+          ).then(() => user)
+        )
+        .then((user) =>
+          handleCalculateLearningPaths(user.settings.user_id, user.role, user.university, courseId, parseInt(topicId))
+        )
+        .then(() => {
+          clearLearningPathElement()
+          clearLearningPathElementStatusCache()
+          addSnackbar({
+            message: t('appGlobal.dataSendSuccessful'),
+            severity: 'success',
+            autoHideDuration: 5000
+          })
+        })
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
+        })
+    },
+    [getUser, handleCreateLearningElements, handleCalculateLearningPaths, addSnackbar, t]
+  )
 
   const handleCreate = useCallback(
     (
@@ -289,7 +341,10 @@ export const useCreateTopicModal = ({
 
   return useMemo(
     () => ({
+      handleCreateLearningElementsInExistingTopic,
       handleCreate,
+      handleCreateLearningElements,
+      handleCalculateLearningPaths,
       handleTopicChange,
       handleLearningElementChange,
       handleLearningElementClassification,
@@ -298,7 +353,10 @@ export const useCreateTopicModal = ({
       handleAlgorithmChange
     }),
     [
+      handleCreateLearningElementsInExistingTopic,
       handleCreate,
+      handleCreateLearningElements,
+      handleCalculateLearningPaths,
       handleTopicChange,
       handleLearningElementChange,
       handleLearningElementClassification,

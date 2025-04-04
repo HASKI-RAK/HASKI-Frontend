@@ -1,4 +1,3 @@
-import { SelectChangeEvent } from '@mui/material'
 import { tableCellClasses } from '@mui/material'
 import { ReactNode, memo, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -16,6 +15,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  SelectChangeEvent,
   Typography
 } from '@common/components'
 import { SkeletonList } from '@components'

@@ -1,9 +1,9 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
-import { CreateLearningElementClassificationTable } from '@components'
+import { CreateLearningElementClassificationTable, RemoteLearningElementWithClassification } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
-import { RemoteLearningElementWithClassification, Solution } from '../CreateTopicModal/CreateTopicModal'
+import { Solution } from '../CreateTopicModal/CreateTopicModal'
 
 type CreateLearningElementClassificationsStepProps = {
   selectedTopics: RemoteTopics[]
@@ -16,6 +16,7 @@ type CreateLearningElementClassificationsStepProps = {
   onSolutionChange: (selectedSolutions: { [key: number]: Solution[] }) => void
   onNext: () => void
   onBack: () => void
+  nextButtonText: string
 }
 
 const CreateLearningElementClassificationsStep = ({
@@ -26,9 +27,19 @@ const CreateLearningElementClassificationsStep = ({
   selectedSolutions,
   onSolutionChange,
   onNext,
-  onBack
+  onBack,
+  nextButtonText
 }: CreateLearningElementClassificationsStepProps) => {
   const { t } = useTranslation()
+  const [isNextDisabled, setIsNextDisabled] = useState(false)
+
+  const handleNextClick = () => {
+    setIsNextDisabled(true)
+    onNext()
+    setTimeout(() => {
+      setIsNextDisabled(false)
+    }, 1000)
+  }
 
   return (
     <Grid container item>
@@ -52,11 +63,11 @@ const CreateLearningElementClassificationsStep = ({
                   selectedLearningElementsClassification[topic.topic_lms_id]?.every(
                     (el) => el.classification !== '' || el.disabled
                   )
-                )
+                ) || isNextDisabled
               }
-              onClick={onNext}
+              onClick={handleNextClick}
               sx={{ mr: -2 }}>
-              {t('appGlobal.next')}
+              {nextButtonText}
             </Button>
           </Grid>
         </Box>

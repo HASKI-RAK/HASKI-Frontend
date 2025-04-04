@@ -1,24 +1,31 @@
-import { memo } from 'react'
+import { memo, useCallback, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Typography } from '@common/components'
-import { MoreVert } from '@common/icons'
-import { AlgorithmSettingsModal, StyledLinearProgress } from '@components'
+import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Tooltip, Typography } from '@common/components'
+import { DeleteForever, MoreVert, Polyline } from '@common/icons'
+import { AlgorithmSettingsModal, DeleteEntityModal, StyledLinearProgress } from '@components'
 import { Topic } from '@core'
+import { RoleContext, SnackbarContext, deleteTopic } from '@services'
+import { useStore } from '@store'
 import { useTopicCard } from './TopicCard.hooks'
 
-// Type
 type TopicCardProps = {
   topic?: Topic
   calculatedTopicProgress?: number[]
   isSmOrDown?: boolean
 }
 
-// Component
 const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProps) => {
-  // Hooks
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const { addSnackbar } = useContext(SnackbarContext)
+  const { isCourseCreatorRole } = useContext(RoleContext)
+  const clearLearningPathTopic = useStore((state) => state.clearLearningPathTopicCache)
+
+  const [deleteTopicModalOpen, setDeleteTopicModalOpen] = useState(false)
+  const [topicName, setTopicName] = useState<string>('')
+  const [topicId, setTopicId] = useState<number>(0)
+  const [lmsTopicId, setLmsTopicId] = useState<number>(0)
 
   const {
     studentSelection,
@@ -30,6 +37,37 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
     handleAlgorithmModalClose,
     updateSelection
   } = useTopicCard({ topic, learningElementProgressTopics: calculatedTopicProgress })
+
+  const handleOpenDeleteTopicModal = useCallback(
+    (topicName?: string, topicId?: number, lmsTopicId?: number) => {
+      if (!topicName || !topicId || !lmsTopicId) return
+      handleCloseMenu()
+      setDeleteTopicModalOpen(true)
+      setTopicName(topicName)
+      setTopicId(topicId)
+      setLmsTopicId(lmsTopicId)
+    },
+    [handleCloseMenu, setDeleteTopicModalOpen, setTopicName]
+  )
+
+  const handleDeleteClick = useCallback(() => {
+    handleOpenDeleteTopicModal(topic?.name, topic?.id, topic?.lms_id)
+  }, [handleOpenDeleteTopicModal, topic?.name, topic?.id, topic?.lms_id])
+
+  const handleAcceptDeleteTopicModal = useCallback(
+    (topicId: number, lmsTopicId: number) => {
+      deleteTopic(topicId, lmsTopicId).then(() => {
+        addSnackbar({
+          message: t('components.TopicCard.deleteTopicSuccessful'),
+          severity: 'success',
+          autoHideDuration: 5000
+        })
+        clearLearningPathTopic()
+        setDeleteTopicModalOpen(false)
+      })
+    },
+    [setDeleteTopicModalOpen]
+  )
 
   return (
     <Card
@@ -118,11 +156,35 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         data-testid="TopicSettingsMenu">
         <MenuItem
           onClick={handleAlgorithmMenuOpen}
-          id="algorithm-settings-menu-item"
+          id="algorithm-settings-menu-algorithm-item"
           data-testid="AlgorithmSettingsItem">
-          {t('pages.home.menuItemAlgorithms')}
+          <Tooltip arrow title="Change Learning Path" placement="left">
+            <Grid container direction={'row'}>
+              <Polyline fontSize="small" />
+              <Typography sx={{ ml: 1 }}>{t('pages.topic.menuItemAlgorithms')}</Typography>
+            </Grid>
+          </Tooltip>
         </MenuItem>
+        {isCourseCreatorRole && (
+          <MenuItem onClick={handleDeleteClick} id="algorithm-settings-menu-delete-item" data-testid="DeleteTopicItem">
+            <Tooltip arrow title={t('components.TopicCard.deleteTooltip')} placement="left">
+              <Grid container direction={'row'}>
+                <DeleteForever fontSize="small" />
+                <Typography sx={{ ml: 1 }}>{t('appGlobal.delete')}</Typography>
+              </Grid>
+            </Tooltip>
+          </MenuItem>
+        )}
       </Menu>
+      <DeleteEntityModal
+        openDeleteEntityModal={deleteTopicModalOpen}
+        setDeleteEntityModalOpen={setDeleteTopicModalOpen}
+        entityName={topicName}
+        entityId={topicId}
+        entityLmsId={lmsTopicId}
+        onDeleteConfirm={handleAcceptDeleteTopicModal}
+        entityType={t('components.ContactForm.topic')}
+      />
     </Card>
   )
 }

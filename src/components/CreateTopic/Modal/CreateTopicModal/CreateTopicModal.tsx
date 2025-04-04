@@ -3,16 +3,19 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
-import { CreateAlgorithmTableNameProps, handleError } from '@components'
+import {
+  CreateAlgorithmTableNameProps,
+  CreateAlgorithmsStep,
+  CreateLearningElementClassificationsStep,
+  CreateLearningElementsStep,
+  CreateRemoteTopicsStep,
+  handleError
+} from '@components'
 import { LearningPathTopic, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import CreateAlgorithmsStep from '../CreateAlgorithmStep/CreateAlgorithmsStep'
-import CreateLearningElementClassificationsStep from '../CreateLearningElementClassificationStep/CreateLearningElementClassificationsStep'
-import CreateLearningelementSolutionsStep from '../CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
-import CreateLearningElementsStep from '../CreateLearningElementStep/CreateLearningElementsStep'
-import CreateRemoteTopicsStep from '../CreateRemoteTopicsStep/CreateRemoteTopicsStep'
 import { useCreateTopicModal } from './CreateTopicModal.hooks'
+import CreateLearningelementSolutionsStep from '../CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
 
 export type CreateTopicModalProps = {
   openCreateTopicModal?: boolean
@@ -213,6 +216,7 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
               onSolutionChange={handleSolutionsChange}
               onNext={handleNext}
               onBack={handleBack}
+              nextButtonText={t('appGlobal.next')}
             />
           )}
           {activeStep === 3 && (

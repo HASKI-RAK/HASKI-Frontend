@@ -1,5 +1,7 @@
 import { act, renderHook } from '@testing-library/react-hooks'
 import { mockServices } from 'jest.setup'
+import * as router from 'react-router'
+import { RemoteLearningElementWithClassification } from '@components'
 import { RemoteTopics } from '@core'
 import { useCreateTopicModal } from './CreateTopicModal.hooks'
 
@@ -22,8 +24,85 @@ const mockRemoteTopics: RemoteTopics[] = [
   }
 ]
 
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn()
+}))
+
+const mockRemoteLearningElementWithClassification: { [key: number]: RemoteLearningElementWithClassification[] } = {
+  1: [
+    {
+      lms_id: 101,
+      lms_learning_element_name: 'Introduction to AI',
+      lms_activity_type: 'video',
+      classification: 'BEGINNER'
+    },
+    {
+      lms_id: 102,
+      lms_learning_element_name: 'AI Ethics',
+      lms_activity_type: 'article',
+      classification: 'INTERMEDIATE'
+    }
+  ],
+  2: [
+    {
+      lms_id: 201,
+      lms_learning_element_name: 'Deep Learning Basics',
+      lms_activity_type: 'quiz',
+      classification: 'ADVANCED'
+    },
+    {
+      lms_id: 202,
+      lms_learning_element_name: 'Neural Networks in Practice',
+      lms_activity_type: 'h5pactivity',
+      classification: 'EXPERT'
+    }
+  ],
+  3: [
+    {
+      lms_id: 301,
+      lms_learning_element_name: 'Deep Learning Advanced',
+      lms_activity_type: 'quiz',
+      classification: 'ADVANCED'
+    },
+    {
+      lms_id: 302,
+      lms_learning_element_name: 'Neural Networks in Theory',
+      lms_activity_type: 'h5pactivity',
+      classification: 'EXPERT'
+    }
+  ]
+}
+
 describe('useCreateTopicModal', () => {
+  it('should initialize correctly with default functions available', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+    const { result } = renderHook(() =>
+      useCreateTopicModal({
+        setSelectedLearningElements: jest.fn(),
+        setSelectedLearningElementsClassification: jest.fn()
+      })
+    )
+
+    act(() => {
+      result.current.handleTopicChange(mockRemoteTopics)
+    })
+
+    act(() => {
+      result.current.handleLearningElementChange({ 1: [mockLearningElement] })
+    })
+
+    act(() => {
+      result.current.handleAlgorithmChange({})
+    })
+
+    await act(async () => {
+      await result.current.handleCreate('Topic 1', 1, mockRemoteLearningElementWithClassification, 'algo1', '1')
+    })
+  })
+
   it('should initialize correctly with all functions available', () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
     const { result } = renderHook(() =>
       useCreateTopicModal({
         setCreateTopicIsSending: jest.fn(),
@@ -46,6 +125,7 @@ describe('useCreateTopicModal', () => {
   })
 
   it('should call setSelectedTopics and filter elements correctly in handleTopicChange', () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
     const mockSetSelectedTopics = jest.fn()
     const mockSetSelectedLearningElements = jest.fn()
     const mockSetSelectedLearningElementsClassification = jest.fn()
@@ -75,6 +155,7 @@ describe('useCreateTopicModal', () => {
   })
 
   it('should update learning elements on handleLearningElementChange', () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
     const mockSetSelectedLearningElements = jest.fn()
 
     const { result } = renderHook(() =>
@@ -101,6 +182,8 @@ describe('useCreateTopicModal', () => {
   })
 
   it('should update learning element classifications on handleLearningElementClassification', () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+
     const mockSetSelectedLearningElementsClassification = jest.fn()
     const { result } = renderHook(() =>
       useCreateTopicModal({
@@ -126,6 +209,8 @@ describe('useCreateTopicModal', () => {
   })
 
   it('should update algorithms on handleAlgorithmChange', () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+
     const mockSetSelectedAlgorithms = jest.fn()
     const { result } = renderHook(() =>
       useCreateTopicModal({
@@ -148,7 +233,54 @@ describe('useCreateTopicModal', () => {
     expect(mockSetSelectedAlgorithms).toHaveBeenCalledWith(algorithms)
   })
 
+  it('handleCreateLearningElementsInExistingTopic is returned without courseId or topicId', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+
+    const mockSetCreateTopicIsSending = jest.fn()
+    const { result } = renderHook(() =>
+      useCreateTopicModal({
+        setCreateTopicIsSending: mockSetCreateTopicIsSending,
+        setSelectedTopics: jest.fn(),
+        setSelectedLearningElements: jest.fn(),
+        setSelectedLearningElementsClassification: jest.fn(),
+        setSelectedAlgorithms: jest.fn(),
+        setSuccessfullyCreatedTopicsCount: jest.fn()
+      })
+    )
+
+    await act(async () => {
+      await result.current.handleCreateLearningElementsInExistingTopic(1, mockRemoteLearningElementWithClassification)
+    })
+  })
+
+  it('handleCreateLearningElementsInExistingTopic is working as intended', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+
+    const mockSetCreateTopicIsSending = jest.fn()
+    const { result } = renderHook(() =>
+      useCreateTopicModal({
+        setCreateTopicIsSending: mockSetCreateTopicIsSending,
+        setSelectedTopics: jest.fn(),
+        setSelectedLearningElements: jest.fn(),
+        setSelectedLearningElementsClassification: jest.fn(),
+        setSelectedAlgorithms: jest.fn(),
+        setSuccessfullyCreatedTopicsCount: jest.fn()
+      })
+    )
+
+    await act(async () => {
+      await result.current.handleCreateLearningElementsInExistingTopic(
+        1,
+        mockRemoteLearningElementWithClassification,
+        '2',
+        '1'
+      )
+    })
+  })
+
   it('should add snackbar on error in handleCreate', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+
     const mockSetCreateTopicIsSending = jest.fn()
     const { result } = renderHook(() =>
       useCreateTopicModal({

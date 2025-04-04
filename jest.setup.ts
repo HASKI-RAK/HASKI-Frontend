@@ -572,6 +572,21 @@ const mockDataServices: MockDataServices = {
       statusText: 'CREATED'
     })
   ),
+  deleteCourse: jest.fn(() =>
+    Promise.resolve({
+      message: 'Deletion successful!'
+    })
+  ),
+  deleteTopic: jest.fn(() =>
+    Promise.resolve({
+      message: 'Deletion successful!'
+    })
+  ),
+  deleteLearningElement: jest.fn(() =>
+    Promise.resolve({
+      message: 'Deletion successful!'
+    })
+  ),
   fetchLearningElementSolution: jest.fn(() =>
     Promise.resolve({
       id: 1,

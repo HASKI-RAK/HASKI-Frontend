@@ -1,4 +1,3 @@
-import { waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import log from 'loglevel'
 import { logBuffer } from './logBuffer.config'
