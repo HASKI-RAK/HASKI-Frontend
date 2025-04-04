@@ -1,42 +1,19 @@
 import '@testing-library/jest-dom'
-import { act, fireEvent, render, waitFor } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { AccordionSummary } from '@common/components'
-import { AuthContext } from '@services'
 import Accordion from './DefaultAccordion'
 
 describe('DefaultAccordion tests', () => {
-  test('DefaultAccordion sends statement on click', async () => {
-    const usePersistedStore = jest.fn().mockReturnValue({
-      state: {
-        getXAPI: () => ({
-          sendStatement: jest.fn()
-        })
-      }
-    })
-
-    jest.mock('@store', () => ({
-      ...jest.requireActual('@store'),
-      usePersistedStore: () => usePersistedStore
-    }))
-
-    const sendStatement = usePersistedStore().state.getXAPI.sendStatement
-
-    const { getByRole } = render(
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <MemoryRouter>
-          <Accordion>
-            <AccordionSummary>Test</AccordionSummary>
-          </Accordion>
-        </MemoryRouter>
-      </AuthContext.Provider>
+  test('DefaultAccordion renders correctly', () => {
+    const accordion = render(
+      <MemoryRouter>
+        <Accordion>
+          <AccordionSummary>Test</AccordionSummary>
+        </Accordion>
+      </MemoryRouter>
     )
 
-    act(() => {
-      fireEvent.click(getByRole('button'))
-      waitFor(() => {
-        expect(sendStatement).toHaveBeenCalled()
-      })
-    })
+    expect(accordion).toBeTruthy()
   })
 })

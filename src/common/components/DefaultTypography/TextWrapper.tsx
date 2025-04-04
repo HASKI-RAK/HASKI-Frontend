@@ -1,4 +1,4 @@
-import { usePageName } from 'src/services/xAPI/PageName.hooks'
+import { usePageName } from 'src/services/PageName/PageName.hooks'
 import {  ElementType, memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { TypographyProps as DefaultTypographyProps } from '../DefaultTypographyProps/DefaultTypographyProps'
@@ -8,16 +8,15 @@ import { Typography } from './DefaultTypography'
 type TextWrapperProps<C extends ElementType, P = object> = DefaultTypographyProps<C, P> & EventHandlers
 
 // TODO: DOKU
+const WrappedTextWrapper = withXAPI(Typography, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'TextWrapper'
+})
+
+// TODO: DOKU
 const TextWrapper = <C extends ElementType>({ ...props }: TextWrapperProps<C, { component?: C}>) => {
   const { pageName } = usePageName()
-
-  const WrappedComponent = withXAPI(Typography, {
-    componentFilePath: new URL(import.meta.url).pathname,
-    pageName,
-    componentType: 'TextWrapper'
-  })
-
-  return <WrappedComponent {...props} />
+  return <WrappedTextWrapper pageName={pageName} {...props} />
 }
 
 export default memo(TextWrapper)

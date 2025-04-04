@@ -1,6 +1,6 @@
 import DefaultButton from '@mui/material/Button'
-import { usePageName } from 'src/services/xAPI/PageName.hooks'
-import { Ref, forwardRef, memo, useMemo } from 'react'
+import { usePageName } from 'src/services/PageName/PageName.hooks'
+import { Ref, forwardRef, memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { ButtonProps as DefaultButtonProps } from '@common/components'
 
@@ -8,20 +8,15 @@ import { ButtonProps as DefaultButtonProps } from '@common/components'
 type ButtonProps = DefaultButtonProps & EventHandlers
 
 // TODO: Doku
+const WrappedButton = withXAPI(DefaultButton, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'Button'
+})
+
+// TODO: Doku
 const Button = forwardRef(({ ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) => {
   const { pageName } = usePageName()
-
-  const WrappedButton = useMemo(
-    () =>
-      withXAPI(DefaultButton, {
-        componentFilePath: new URL(import.meta.url).pathname,
-        componentType: 'Button',
-        pageName: pageName
-      }),
-    [pageName]
-  )
-
-  return <WrappedButton ref={ref} {...props} />
+  return <WrappedButton ref={ref} pageName={pageName} {...props} />
 })
 
 // eslint-disable-next-line

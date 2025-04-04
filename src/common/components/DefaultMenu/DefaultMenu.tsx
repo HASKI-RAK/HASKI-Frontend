@@ -1,25 +1,22 @@
 import DefaultMenu from '@mui/material/Menu'
-import { usePageName } from 'src/services/xAPI/PageName.hooks'
+import { usePageName } from 'src/services/PageName/PageName.hooks'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 import { MenuProps as DefaultMenuProps } from '@common/components'
 
+// TODO: Dokuq
 type MenuProps = DefaultMenuProps & EventHandlers
 
+// TODO: Doku
+const WrappedMenu = withXAPI(DefaultMenu, {
+      componentFilePath: new URL(import.meta.url).pathname,
+      componentType: 'Menu'
+})
+
+// TODO: Doku
 const Menu = ({ ...props }: MenuProps) => {
   const { pageName } = usePageName()
-
-  const WrappedMenu = useMemo(
-    () =>
-      withXAPI(DefaultMenu, {
-        componentFilePath: new URL(import.meta.url).pathname,
-        componentType: 'Menu',
-        pageName: pageName
-      }),
-    [pageName]
-  )
-
-  return <WrappedMenu {...props} />
+  return <WrappedMenu pageName={pageName} {...props} />
 }
 
 export default memo(Menu)

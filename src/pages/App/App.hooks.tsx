@@ -32,7 +32,7 @@ export const useApp = (): AppHookReturn => {
         setLmsUserID(user.lms_user_id.toString())
       })
       .catch((error) => {
-        log.error(error) // TODO: Real error
+        log.error(t('error.getUser') + ' ' + error)
       })
 
     // Setup the xAPI object.
@@ -60,5 +60,5 @@ export const useApp = (): AppHookReturn => {
     )
   }, [getUser, lmsUserID, setLmsUserID, currentLanguage, getConfig, setXAPI])
 
-  return useMemo(() => ({ xAPI: xAPI }), [xAPI])
+  return useMemo(() => ({ xAPI }), [xAPI])
 }

@@ -39,7 +39,7 @@
     "react-flow-renderer": "^10.3.17",
     "react-i18next": "^12.1.1",
     "react-router-dom": "^6.4.2",
-    "react-xapi-wrapper": "^0.0.1",
+    "react-xapi-wrapper": "^0.0.2",
     "reactflow": "^11.7.0",
     "zustand": "^4.1.1"
   },

@@ -1,6 +1,6 @@
-import { usePageName } from 'src/services/xAPI/PageName.hooks'
+import { usePageName } from 'src/services/PageName/PageName.hooks'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
-import { memo,  useMemo } from 'react'
+import { memo } from 'react'
 import { BoxProps as DefaultBoxProps } from '@common/components'
 import { Box } from './DefaultBox'
 
@@ -8,20 +8,15 @@ import { Box } from './DefaultBox'
 type NodeWrapperProps = DefaultBoxProps & EventHandlers
 
 // TODO: DOKU
+const WrappedNodeWrapper = withXAPI(Box, {
+      componentFilePath: new URL(import.meta.url).pathname,
+      componentType: 'Node',
+})
+
+// TODO: DOKU
 const NodeWrapper = ({ ...props }: NodeWrapperProps) => {
   const { pageName } = usePageName()
-
-  const WrappedNodeWrapper = useMemo(
-    () =>
-      withXAPI(Box, {
-        componentFilePath: new URL(import.meta.url).pathname,
-        componentType: 'Node',
-        pageName: pageName
-      }),
-    [pageName]
-  )
-
-  return <WrappedNodeWrapper {...props} />
+  return <WrappedNodeWrapper pageName={pageName} {...props} />
 }
 
 export default memo(NodeWrapper)
