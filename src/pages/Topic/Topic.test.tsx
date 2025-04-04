@@ -67,6 +67,29 @@ describe('Topic Page', () => {
     })
   })
 
+  it('renders when Auth is true, and role is student', async () => {
+    const studentContext = {
+      isStudentRole: true,
+      isCourseCreatorRole: false
+    } as RoleContextType
+
+    const { queryByText } = render(
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <RoleContext.Provider value={studentContext}>
+              <Topic />
+            </RoleContext.Provider>
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
+    )
+
+    await waitFor(() => {
+      expect(queryByText('components.CreateLearningElement.createLearningElement')).not.toBeInTheDocument()
+    })
+  })
+
   it('renders when Auth is false', () => {
     act(() => {
       const topic = render(
@@ -2195,6 +2218,273 @@ describe('Topic Page', () => {
         </MemoryRouter>
       </ReactFlowProvider>
     )
+
+    await waitFor(() => {
+      fireEvent.click(getByTestId('IFrameModal-Close-Button'))
+    })
+
+    await waitFor(() => {
+      expect(queryByTestId('IFrameModal-Close-Button')).not.toBeInTheDocument()
+      act(() => {
+        fireEvent.click(getByText('Wirtschaftsinformatik'))
+        expect(navigate).toHaveBeenCalledWith('/course/2/topic/1')
+      })
+    })
+    await waitFor(() => {
+      act(() => {
+        jest.advanceTimersByTime(100)
+      })
+    })
+    await waitFor(() => {
+      act(() => {
+        fireEvent.click(getByText('Informatik'))
+        expect(navigate).toHaveBeenCalledWith('/course/2/topic/2')
+      })
+    })
+    await waitFor(() => {
+      act(() => {
+        jest.advanceTimersByTime(100)
+      })
+    })
+  })
+
+  test('default learning path is handled correctly', async () => {
+    mockServices.fetchLearningPathElement.mockImplementationOnce(() =>
+      Promise.resolve({
+        id: 1,
+        course_id: 1,
+        based_on: 'default',
+        calculated_on: 'default',
+        path: [
+          {
+            id: 1,
+            learning_element_id: 1,
+            learning_path_id: 1,
+            recommended: true,
+            position: 1,
+            learning_element: {
+              id: 1,
+              lms_id: 1,
+              activity_type: '',
+              classification: 'EK',
+              name: '',
+              university: '',
+              created_by: '',
+              created_at: '',
+              last_updated: '',
+              student_learning_element: {
+                id: 1,
+                student_id: 1,
+                learning_element_id: 1,
+                done: false,
+                done_at: ''
+              }
+            }
+          },
+          {
+            id: 2,
+            learning_element_id: 1,
+            learning_path_id: 1,
+            recommended: true,
+            position: 2,
+            learning_element: {
+              id: 1,
+              lms_id: 1,
+              activity_type: '',
+              classification: '',
+              name: '',
+              university: '',
+              created_by: '',
+              created_at: '',
+              last_updated: '',
+              student_learning_element: {
+                id: 1,
+                student_id: 1,
+                learning_element_id: 1,
+                done: false,
+                done_at: ''
+              }
+            }
+          },
+          {
+            id: 3,
+            learning_element_id: 1,
+            learning_path_id: 1,
+            recommended: true,
+            position: 3,
+            learning_element: {
+              id: 1,
+              lms_id: 1,
+              activity_type: '',
+              classification: 'ÜB',
+              name: '',
+              university: '',
+              created_by: '',
+              created_at: '',
+              last_updated: '',
+              student_learning_element: {
+                id: 1,
+                student_id: 1,
+                learning_element_id: 1,
+                done: false,
+                done_at: ''
+              }
+            }
+          },
+          {
+            id: 4,
+            learning_element_id: 2,
+            learning_path_id: 1,
+            recommended: true,
+            position: 4,
+            learning_element: {
+              id: 1,
+              lms_id: 1,
+              activity_type: '',
+              classification: 'ÜB',
+              name: '',
+              university: '',
+              created_by: '',
+              created_at: '',
+              last_updated: '',
+              student_learning_element: {
+                id: 1,
+                student_id: 1,
+                learning_element_id: 1,
+                done: false,
+                done_at: ''
+              }
+            }
+          },
+          {
+            id: 5,
+            learning_element_id: 2,
+            learning_path_id: 1,
+            recommended: true,
+            position: 5,
+            learning_element: {
+              id: 1,
+              lms_id: 1,
+              activity_type: '',
+              classification: 'ÜB',
+              name: '',
+              university: '',
+              created_by: '',
+              created_at: '',
+              last_updated: '',
+              student_learning_element: {
+                id: 1,
+                student_id: 1,
+                learning_element_id: 1,
+                done: false,
+                done_at: ''
+              }
+            }
+          },
+          {
+            id: 6,
+            learning_element_id: 2,
+            learning_path_id: 1,
+            recommended: true,
+            position: 6,
+            learning_element: {
+              id: 1,
+              lms_id: 1,
+              activity_type: '',
+              classification: 'ÜB',
+              name: '',
+              university: '',
+              created_by: '',
+              created_at: '',
+              last_updated: '',
+              student_learning_element: {
+                id: 1,
+                student_id: 1,
+                learning_element_id: 1,
+                done: false,
+                done_at: ''
+              }
+            }
+          },
+          {
+            id: 7,
+            learning_element_id: 2,
+            learning_path_id: 1,
+            recommended: true,
+            position: 7,
+            learning_element: {
+              id: 1,
+              lms_id: 1,
+              activity_type: '',
+              classification: 'ÜB',
+              name: '',
+              university: '',
+              created_by: '',
+              created_at: '',
+              last_updated: '',
+              student_learning_element: {
+                id: 1,
+                student_id: 1,
+                learning_element_id: 1,
+                done: false,
+                done_at: ''
+              }
+            }
+          },
+          {
+            id: 8,
+            learning_element_id: 3,
+            learning_path_id: 1,
+            recommended: true,
+            position: 8,
+            learning_element: {
+              id: 1,
+              lms_id: 1,
+              activity_type: '',
+              classification: 'KÜ',
+              name: '',
+              university: '',
+              created_by: '',
+              created_at: '',
+              last_updated: '',
+              student_learning_element: {
+                id: 1,
+                student_id: 1,
+                learning_element_id: 1,
+                done: false,
+                done_at: ''
+              }
+            }
+          }
+        ]
+      })
+    )
+
+    const topicParams: useTopicHookParams = {
+      defaultUrl: 'hello',
+      defaultTitle: 'test',
+      defaultIsOpen: true,
+      defaultLmsId: 0
+    }
+
+    const initialEntries = ['/course', '/2', '/topic/20']
+    const studentContext = {
+      isStudentRole: true,
+      isCourseCreatorRole: false
+    } as RoleContextType
+
+    const { getByTestId, queryByTestId, getByText } = render(
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={initialEntries}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <RoleContext.Provider value={studentContext}>
+              <Topic useTopic={() => useTopic(topicParams)} />
+              <LocalNavBar />
+            </RoleContext.Provider>
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
+    )
     screen.debug()
 
     await waitFor(() => {
@@ -2207,8 +2497,7 @@ describe('Topic Page', () => {
         fireEvent.click(getByText('Wirtschaftsinformatik'))
         expect(navigate).toHaveBeenCalledWith('/course/2/topic/1')
         act(() => {
-          // Replace runAllTimers with a more controlled approach
-          jest.advanceTimersByTime(200) // Adjust timing as needed
+          jest.advanceTimersByTime(100)
         })
       })
     })

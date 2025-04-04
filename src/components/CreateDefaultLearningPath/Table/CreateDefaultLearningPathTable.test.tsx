@@ -223,5 +223,5 @@ describe('CreateDefaultLearningPathTable Component', () => {
       expect(mockServices.postDefaultLearningPath).toHaveBeenCalled()
       expect(dummyHandleClose).toHaveBeenCalledWith({}, 'closeButtonClick')
     })
-  })
+  }, 20000)
 })

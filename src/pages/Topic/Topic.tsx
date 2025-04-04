@@ -40,6 +40,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const { addSnackbar } = useContext(SnackbarContext)
   const { fitView } = useReactFlow()
   const { isCourseCreatorRole } = useContext(RoleContext)
+  const [hasCentered, setHasCentered] = useState(false)
 
   const { courseId, topicId } = useParams()
   const getUser = usePersistedStore((state) => state.getUser)
@@ -136,11 +137,15 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     learningPathLearningElementStatusCache
   ])
 
+  useEffect(() => {
+    setHasCentered(false)
+  }, [topicId])
+
   // custom fitView centering on first uncompleted element
   // currently focuses on first element
   // can also focus on first element that is uncomplete (node.find(node => !node.data?.isDone) || node[0])
   useEffect(() => {
-    if (initialNodes) {
+    if (initialNodes && !hasCentered) {
       setTimeout(() => {
         fitView({
           padding: 5,
@@ -148,9 +153,10 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           duration: 100,
           nodes: [{ id: initialNodes[0].id }]
         })
+        setHasCentered(true)
       }, 100)
     }
-  }, [topicId, navigate])
+  }, [initialNodes, navigate, hasCentered])
 
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)
