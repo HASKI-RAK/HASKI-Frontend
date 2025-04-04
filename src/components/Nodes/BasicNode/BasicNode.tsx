@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
-import { CheckBox, FavoriteBorderIcon, FavoriteIcon, DeleteForever, Feedback, Task } from '@common/icons'
+import { CheckBox, DeleteForever, Feedback, Task } from '@common/icons'
 import { DeleteEntityModal, LearningPathLearningElementNode } from '@components'
 import { RoleContext, SnackbarContext, deleteLearningElement } from '@services'
 import { getConfig } from '@shared'
@@ -31,7 +31,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
   const [learningElementId, setLearningElementId] = useState<number>(0)
   const [lmsLearningElementId, setLmsLearningElementId] = useState<number>(0)
   const [isHovered, setIsHovered] = useState(false)
-  const [isFavorite, setIsFavorite] = useState(false)
+  //const [isFavorite, setIsFavorite] = useState(false) commented out until feature is implemented
   const [solutionLmsId, setSolutionLmsId] = useState<number>(-1)
   const [solutionActivityType, setSolutionActivityType] = useState<string>('resource')
 
@@ -77,10 +77,13 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
     clearLearningPathElementStatusCache()
   }
 
+  /* placeholder for future favorite feature
   const addToFavorites = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     setIsFavorite(!isFavorite)
     event.stopPropagation()
   }
+  */
+
   const handleShowSolution = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     props.data.handleOpen()
     props.data.handleSetUrl(getConfig().MOODLE + `/mod/${solutionActivityType}/view.php?id=${solutionLmsId}`)
@@ -129,6 +132,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
                 <DeleteForever fontSize={'medium'} />
               </IconButton>
             </Tooltip>
+            {/* commented out until feature is implemented
             <IconButton
             onClick={addToFavorites}
             data-testid={'favoriteButton'}
@@ -140,6 +144,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
             }}>
             {isFavorite ? <FavoriteIcon titleAccess="isFavorite" /> : <FavoriteBorderIcon titleAccess="notFavorite" />}
           </IconButton>
+          */}
           {solutionLmsId > 1 && (
             <Tooltip title={t('tooltip.solution')}>
               <IconButton

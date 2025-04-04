@@ -101,7 +101,9 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
                       arrow
                       title={t('components.AlgorithmSettingsModal.teacherIconTip')}
                       data-testid="algorithm-settings-modal-teacher-recommendation-icon">
-                      <School />
+                        <Grid>
+                          <School />
+                        </Grid>
                     </Tooltip>
                   )}
                 </Grid>
