@@ -1,7 +1,6 @@
 import { UniqueIdentifier, useDraggable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
-import { ReactNode } from 'react'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { Box, Grid, IconButton, Paper, Typography } from '@common/components'
 import { Block, Replay } from '@common/icons'
 import { styled } from '@common/theme'
@@ -47,7 +46,7 @@ export const SourceDraggable = ({ id, label, icon, disabled }: SourceDraggablePr
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id })
   const style = {
     transform: transform ? CSS.Translate.toString(transform) : undefined,
-    opacity: isDragging ? 0.5 : disabled ? 0.5 : 1,
+    opacity: isDragging || disabled ? 0.5 : 1,
     cursor: disabled ? 'not-allowed' : 'grab'
   }
   return (

@@ -32,7 +32,7 @@ export const SortableItem = ({ id, children, position, icon, label }: SortableIt
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id })
   const style = {
     transform: transform ? CSS.Transform.toString(transform) : undefined,
-    transition: transition || undefined,
+    transition: transition ?? undefined,
     opacity: isDragging ? 0 : 1
   }
   return (

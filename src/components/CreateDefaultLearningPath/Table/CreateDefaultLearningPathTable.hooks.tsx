@@ -121,7 +121,7 @@ export const useCreateDefaultLearningPathTable = ({
       disabled: disabledItems.includes(key),
       university: 'HS-KE'
     }))
-    disabledItems.map((key, index) =>
+    disabledItems.forEach((key, index) =>
       orderedItemsData.push({
         classification: key,
         position: index + 9000,
@@ -135,7 +135,7 @@ export const useCreateDefaultLearningPathTable = ({
         userLmsId: user.lms_user_id,
         outputJson: JSON.stringify(orderedItemsData)
       })
-        .then((defaultLearningPath) => {
+        .then(() => {
           clearDefaultLearningPathCache()
           clearLearningPathElementCache()
           setIsSending(false)
