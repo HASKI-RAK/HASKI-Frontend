@@ -731,6 +731,59 @@ afterAll(() => {
 
 jest.mock('reactflow/dist/style.css', () => jest.fn())
 
+jest.mock('@dnd-kit/core', () => {
+  const originalModule = jest.requireActual('@dnd-kit/core')
+  return {
+    __esModule: true,
+    ...originalModule,
+    useDroppable: jest.fn(() => ({
+      isOver: true,
+      setNodeRef: jest.fn()
+    })),
+    useDraggable: jest.fn(() => ({
+      listeners: {},
+      attributes: {
+        role: 'button',
+        tabIndex: 0,
+        'aria-disabled': false,
+        'aria-roledescription': 'draggable',
+        'aria-describedby': ''
+      },
+      setNodeRef: jest.fn(),
+      isDragging: true,
+      transform: {
+        x: 0,
+        y: 0
+      }
+    }))
+  }
+})
+
+jest.mock('@dnd-kit/sortable', () => {
+  const originalModule = jest.requireActual('@dnd-kit/sortable')
+  return {
+    __esModule: true,
+    ...originalModule,
+    useSortable: jest.fn(() => ({
+      attributes: {
+        role: 'button',
+        tabIndex: 0,
+        'aria-disabled': false,
+        'aria-roledescription': 'draggable',
+        'aria-describedby': ''
+      },
+      listeners: { onClick: jest.fn() },
+      setNodeRef: jest.fn(),
+      transform: {
+        x: 0,
+        y: 0
+      },
+      transition: 'transform 250ms ease',
+      isDragging: true
+    }))
+  }
+})
+
 // ############################## Services ############################## //
 /**
  * This mock is used to mock all services. If a predefined mock exists, it is used. Otherwise, the actual implementation is used.

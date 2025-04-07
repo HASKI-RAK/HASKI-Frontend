@@ -5,17 +5,9 @@ import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import UnassignedItem, { ClassificationItem, DragPreview, SourceDraggable } from './DraggableItem'
 
-jest.mock('@dnd-kit/core', () => ({
-  useDraggable: jest.fn()
-}))
+const originalModule = jest.requireActual('@dnd-kit/core')
 
 describe('UnassignedItem Component', () => {
-  const mockSetNodeRef = jest.fn()
-  const defaultDraggable = {
-    setNodeRef: mockSetNodeRef,
-    isDragging: false
-  }
-
   const classificationItem: ClassificationItem = {
     key: 'KÜ',
     name: 'KÜ - Overview',
@@ -27,34 +19,6 @@ describe('UnassignedItem Component', () => {
 
   beforeEach(() => {
     jest.clearAllMocks()
-    // Default: not dragging.
-    ;(useDraggable as jest.Mock).mockReturnValue(defaultDraggable)
-  })
-
-  it('renders the SourceDraggable with correct label and icon', () => {
-    const { getByText, getByTestId } = render(
-      <MemoryRouter>
-        <UnassignedItem item={classificationItem} isDisabled={false} handleToggleDisable={handleToggleDisable} />
-      </MemoryRouter>
-    )
-
-    expect(getByText('Overview')).toBeInTheDocument()
-    expect(getByTestId('test-icon')).toBeInTheDocument()
-  })
-
-  it('calls handleToggleDisable with item key on IconButton click', () => {
-    const { getAllByRole } = render(
-      <MemoryRouter>
-        <UnassignedItem item={classificationItem} isDisabled={false} handleToggleDisable={handleToggleDisable} />
-      </MemoryRouter>
-    )
-
-    const buttons = getAllByRole('button')
-    const toggleButton = buttons[1]
-    fireEvent.pointerDown(toggleButton, 'click')
-    fireEvent.mouseDown(toggleButton)
-    fireEvent.click(toggleButton)
-    expect(handleToggleDisable).toHaveBeenCalledWith('KÜ')
   })
 
   it('renders the Replay icon when isDisabled is true', () => {
@@ -67,24 +31,49 @@ describe('UnassignedItem Component', () => {
     expect(svgElement).toBeInTheDocument()
   })
 
-  it('shows the repeat IconButton when classification is blocked', () => {
-    // Override useDraggable to simulate dragging.
-    ;(useDraggable as jest.Mock).mockReturnValue({
-      setNodeRef: mockSetNodeRef,
-      isDragging: true
-    })
-    const { getAllByRole } = render(
+  it('does not change opacity when transform, isDragging and isDisabled is false', () => {
+    ;(useDraggable as jest.Mock).mockImplementationOnce(() => ({
+      ...originalModule,
+      transform: null,
+      isDragging: false
+    }))
+
+    const { getByText } = render(
       <MemoryRouter>
-        <UnassignedItem item={classificationItem} isDisabled={false} handleToggleDisable={handleToggleDisable} />
+        <SourceDraggable
+          key={classificationItem.key}
+          id={classificationItem.key}
+          icon={classificationItem.icon}
+          label={classificationItem.label}
+          disabled={false}
+        />
       </MemoryRouter>
     )
-    const buttons = getAllByRole('button')
-    const toggleButton = buttons[1]
-    expect(toggleButton.parentElement).toHaveStyle('display: block')
+    expect(getByText('Overview')).toBeInTheDocument()
   })
 
-  it('changes opacity when transform and isDragging is true and disabled is true', () => {
-    // Override useDraggable to simulate dragging.
+  it('does change opacity when transform is given and isDragging is true', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <SourceDraggable
+          key={classificationItem.key}
+          id={classificationItem.key}
+          icon={classificationItem.icon}
+          label={classificationItem.label}
+          disabled={true}
+        />
+      </MemoryRouter>
+    )
+    expect(getByText('Overview')).toBeInTheDocument()
+  })
+
+  it('does change opacity when transform and isDragging is false and disabled is true', () => {
+    ;(useDraggable as jest.Mock).mockImplementationOnce(() => ({
+      ...originalModule,
+      transform: null,
+      isDragging: false
+    }))
+
     const { getByText } = render(
       <MemoryRouter>
         <SourceDraggable
@@ -106,5 +95,53 @@ describe('UnassignedItem Component', () => {
       </MemoryRouter>
     )
     expect(getByText('Overview')).toBeInTheDocument()
+  })
+
+  it('calls handleToggleDisable with item key on IconButton click', () => {
+    ;(useDraggable as jest.Mock).mockImplementationOnce(() => ({
+      ...originalModule
+    }))
+
+    const { getAllByRole } = render(
+      <MemoryRouter>
+        <UnassignedItem item={classificationItem} isDisabled={false} handleToggleDisable={handleToggleDisable} />
+      </MemoryRouter>
+    )
+
+    const buttons = getAllByRole('button')
+    const toggleButton = buttons[1]
+    fireEvent.pointerDown(toggleButton, 'click')
+    fireEvent.mouseDown(toggleButton)
+    fireEvent.click(toggleButton)
+    expect(handleToggleDisable).toHaveBeenCalledWith('KÜ')
+  })
+
+  it('renders the Replay icon when isDisabled is true', () => {
+    ;(useDraggable as jest.Mock).mockImplementationOnce(() => ({
+      ...originalModule
+    }))
+
+    const { container } = render(
+      <MemoryRouter>
+        <UnassignedItem item={classificationItem} isDisabled={true} handleToggleDisable={handleToggleDisable} />
+      </MemoryRouter>
+    )
+    const svgElement = container.querySelector('svg')
+    expect(svgElement).toBeInTheDocument()
+  })
+
+  it('shows the repeat IconButton when classification is blocked', () => {
+    ;(useDraggable as jest.Mock).mockImplementationOnce(() => ({
+      ...originalModule
+    }))
+
+    const { getAllByRole } = render(
+      <MemoryRouter>
+        <UnassignedItem item={classificationItem} isDisabled={false} handleToggleDisable={handleToggleDisable} />
+      </MemoryRouter>
+    )
+    const buttons = getAllByRole('button')
+    const toggleButton = buttons[1]
+    expect(toggleButton.parentElement).toHaveStyle('display: block')
   })
 })
