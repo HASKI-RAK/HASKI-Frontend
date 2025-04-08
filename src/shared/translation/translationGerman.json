@@ -28,9 +28,6 @@
   "appGlobal.table": "Tabelle",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
-  "components.CreateDefaultLearningPathTable.leftHeader": "Klassifikations Elemente",
-  "components.CreateDefaultLearningPathTable.rightHeader": "Sortierte Klassifikationen",
-  "components.Menubar.defaultLearningPath": "Fester Lernpfad",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Feste Reihenfolge",
@@ -117,7 +114,9 @@
   "components.CreateCourseTable.lmsCourses": "Kurse aus dem LMS",
   "components.CreateCourseTable.noCoursesFound": "Keine Kurse gefunden...",
   "components.CreateDefaultLearningPathTable.header": "Fester Lernpfad",
-  "components.CreateDefaultLearningPathTable.introduction": "Beim Erstellen eines festen Lernpfads werden alle Lerninhalte in einer vorgegebenen, unveränderlichen Reihenfolge angeordnet. Dieser strukturierte Ansatz bildet einen festen Algorithmus ab, der sicherstellt, dass Lernende Schritt für Schritt durch die einzelnen Themen geführt werden. Dadurch wird ein gezieltes und nachvollziehbares Lernen ermöglicht, bei dem aufeinander aufbauende Inhalte systematisch vermittelt und der Lernfortschritt transparent abgebildet wird.",
+  "components.CreateDefaultLearningPathTable.introduction": "Im Folgenden müssen Sie Ihren eigenen didaktischen Lernpfad durch Ihren Lerninhalt festlegen. Dieser repräsentiert eine unveränderliche Reihenfolge von Lernelementen, die Sie prinzipiell für alle Studierenden vorschlagen würden. Der didaktische Lernpfad dient als generelle Empfehlung für alle Studierenden, deren Datenbasis noch nicht ausreichend groß ist, um die Berechnung eines adaptiven Lernpfades zu gewährleisten. Des Weiteren haben die Studierenden in HASKI immer die Möglichkeit, den von Ihnen entworfenen didaktischem Lernpfad auszuwählen und diesem zu folgen.",
+  "components.CreateDefaultLearningPathTable.leftHeader": "Klassifikations Elemente",
+  "components.CreateDefaultLearningPathTable.rightHeader": "Sortierte Klassifikationen",
   "components.CreateDefaultLearningPathTable.submitRequirement": "Alle Elemente müssen zugeteilt oder deaktiviert sein",
   "components.CreateLearningElement.createLearningElement": "Lernelement hinzufügen",
   "components.CreateLearningElementClassificationTable.classifications": [
@@ -615,6 +614,7 @@
   "components.LoginForm.username": "Benutzername",
   "components.LoginForm.usernameError": "Bitte geben Sie einen gültigen Benutzernamen ein",
   "components.Menubar.closeDialog": "Sind Sie sicher, dass Sie den Fragebogen schließen möchten? Nicht abgeschickte Antworten werden nicht gespeichert.",
+  "components.Menubar.defaultLearningPath": "Fester Lernpfad",
   "components.MenuBar.profileLogin": "Einloggen",
   "components.MenuBar.profileLogout": "Ausloggen",
   "components.Menubar.questionnaireILS": "ILS Fragebogen",

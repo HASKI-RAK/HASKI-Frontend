@@ -28,9 +28,6 @@
   "appGlobal.table": "Table",
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
-  "components.CreateDefaultLearningPathTable.leftHeader": "Classification Items",
-  "components.CreateDefaultLearningPathTable.rightHeader": "Order the Items",
-  "components.Menubar.defaultLearningPath": "Default Learning Path",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Fixed Order",
@@ -117,7 +114,9 @@
   "components.CreateCourseTable.lmsCourses": "Courses from the LMS",
   "components.CreateCourseTable.noCoursesFound": "No courses found...",
   "components.CreateDefaultLearningPathTable.header": "Default Learning Path",
-  "components.CreateDefaultLearningPathTable.introduction": "When creating a fixed learning path, all learning content is arranged in a predetermined, unchangeable sequence. This structured approach represents a fixed algorithm that ensures learners are guided through each topic step by step. It enables focused and coherent learning by systematically presenting interdependent content while transparently tracking progress.",
+  "components.CreateDefaultLearningPathTable.introduction": "You are required to establish your own didactic learning pathway through your learning content. This pathway is an unchangeable sequence of learning elements that you would essentially recommend to every student. It acts as a general guideline for those whose data is not yet sufficient to enable the calculation of an adaptive learning path. Moreover, students in HASKI always have the option to choose and follow the didactic learning pathway you have designed.",
+  "components.CreateDefaultLearningPathTable.leftHeader": "Classification Items",
+  "components.CreateDefaultLearningPathTable.rightHeader": "Order the Items",
   "components.CreateDefaultLearningPathTable.submitRequirement": "All elements must either be selected or deactivated",
   "components.CreateLearningElement.createLearningElement": "Add Learning Element",
   "components.CreateLearningElementClassificationTable.classifications": [
@@ -615,6 +614,7 @@
   "components.LoginForm.username": "Username",
   "components.LoginForm.usernameError": "Please enter a valid username",
   "components.Menubar.closeDialog": "Are you sure you want to close the Questionnaire? Unsent answers will not be saved.",
+  "components.Menubar.defaultLearningPath": "Default Learning Path",
   "components.MenuBar.profileLogin": "Login",
   "components.MenuBar.profileLogout": "Logout",
   "components.Menubar.questionnaireILS": "ILS-Questionnaire",
