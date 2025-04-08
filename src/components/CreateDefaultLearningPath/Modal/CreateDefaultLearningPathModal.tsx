@@ -44,7 +44,7 @@ const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearning
           left: '9%',
           right: '9%',
           top: '5%',
-          height: '80%',
+          height: '85%',
           width: '80%',
           overflow: 'auto',
           bgcolor: 'background.paper',
