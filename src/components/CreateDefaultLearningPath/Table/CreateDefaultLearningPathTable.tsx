@@ -11,11 +11,13 @@ import { Droppable } from './DroppableItem'
 import { SortableItem } from './SortableItem'
 
 type createDefaultLearningPathTableProps = {
-  handleClose?: (event: object, reason: string) => void
   orderedItems: string[]
   disabledItems: string[]
   setOrderedItems: Dispatch<SetStateAction<string[]>>
   setDisabledItems: Dispatch<SetStateAction<string[]>>
+  handleClose?: (event: object, reason: string) => void
+  //Just for testing purposes
+  activeItemStartValue?: string
 }
 
 const CreateDefaultLearningPathTable = ({
@@ -23,11 +25,12 @@ const CreateDefaultLearningPathTable = ({
   disabledItems,
   setOrderedItems,
   setDisabledItems,
-  handleClose
+  handleClose,
+  activeItemStartValue
 }: createDefaultLearningPathTableProps) => {
   const { t } = useTranslation()
   const [activeStep, setActiveStep] = useState(0)
-  const [activeId, setActiveId] = useState<null | string>(null)
+  const [activeId, setActiveId] = useState<null | string>(activeItemStartValue ?? null)
   const [isSending, setIsSending] = useState(false)
 
   // Retrieve classification items from translations.
@@ -69,7 +72,7 @@ const CreateDefaultLearningPathTable = ({
 
   useEffect(() => {
     setActiveItem(classificationItems.find((item) => item.key === activeId))
-  }, [activeId, classificationItems, handleDragStart])
+  }, [activeId])
 
   // left items that are not assigned to the droppable container.
   const unassignedItems = classificationItems.filter((item) => !orderedItems.includes(item.key))
@@ -107,7 +110,7 @@ const CreateDefaultLearningPathTable = ({
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}>
       <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
-        <DragOverlay>{activeItem ? <DragPreview item={activeItem} data-testid="drag-preview" /> : null}</DragOverlay>
+        <DragOverlay>{activeItem ? <DragPreview item={activeItem} /> : null}</DragOverlay>
         <Box
           sx={{
             flex: 1,

@@ -6,10 +6,6 @@ import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import CreateDefaultLearningPathTable from './CreateDefaultLearningPathTable'
 
-jest.mock('./CreateDefaultLearningPathTable.hooks', () => ({
-  useCreateDefaultLearningPathTable: jest.fn()
-}))
-
 describe('CreateDefaultLearningPathTable Component', () => {
   const dummyOrderedItems: string[] = []
   const dummyDisabledItems: string[] = []
@@ -79,6 +75,31 @@ describe('CreateDefaultLearningPathTable Component', () => {
     fireEvent.dragStart(draggableItem)
     fireEvent.dragOver(anotherOne)
     fireEvent.drop(draggableItem)
+    await waitFor(() => {
+      expect(getByText('KÜ - Overview')).toBeInTheDocument()
+    })
+  })
+
+  it('drags an element with activeItem set', async () => {
+    const { getByRole, getByText } = render(
+      <MemoryRouter>
+        <CreateDefaultLearningPathTable
+          orderedItems={['KÜ', 'ÜB', 'AN']}
+          disabledItems={[]}
+          setOrderedItems={dummySetOrderedItems}
+          setDisabledItems={dummySetDisabledItems}
+          handleClose={dummyHandleClose}
+          activeItemStartValue={'KÜ'}
+        />
+      </MemoryRouter>
+    )
+
+    const startButton = getByRole('button', { name: /appGlobal.start/i })
+    fireEvent.click(startButton)
+
+    await waitFor(() => {
+      expect(getByText('components.CreateDefaultLearningPathTable.leftHeader')).toBeInTheDocument()
+    })
     await waitFor(() => {
       expect(getByText('KÜ - Overview')).toBeInTheDocument()
     })
