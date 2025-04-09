@@ -1265,6 +1265,8 @@
   "components.TopicCard.tyche": "Tyche Algorithm",
   "error": "Error",
   "error.fetchCourses": "An error occurred while fetching the courses data.",
+  "error.fetchDefaultLearningPath": "An error occurred while fetching the default learning path data.",
+  "error.postDefaultLearningPath": "An error occurred while sending the default learning path data.",
   "error.fetchILS": "An error occurred while fetching the ILS questionnaire data.",
   "error.fetchLearningPathElement": "An error occurred while fetching the LearningPathElement data.",
   "error.fetchLearningPathElementStatus": "An error occurred while fetching the LearningPathElementStatus data.",

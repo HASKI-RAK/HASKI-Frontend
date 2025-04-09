@@ -1,7 +1,7 @@
-import log from 'loglevel'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { handleError } from '@components'
 import { LearningPathElementStatus, LearningPathLearningElement, Topic, User } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -68,7 +68,7 @@ export const useLearningPathTopicProgress = (
   // Function
   const getAllTopicProgress = useCallback(
     (user: User, topics: Topic[], disabledClassificationList: string[]) => {
-      //build a array[][] with the number of done learning elements and the number of all learning elements in topic
+      //build an array[][] with one learning elements and all not disabled learning elements in topic
       //do that for every topic, and lastly return an array with all the arrays for every topic
       //example: [[1,2],[2,2],[0,2]]
       return topics.map((topic) => {
@@ -86,22 +86,12 @@ export const useLearningPathTopicProgress = (
                 return getTopicProgress(learningPathElementStatusData, availableLearningElements)
               })
               .catch((error: string) => {
-                addSnackbar({
-                  message: t('error.fetchLearningPathElement'),
-                  severity: 'error',
-                  autoHideDuration: 3000
-                })
-                log.error(t('error.fetchLearningPathElement') + ' ' + error)
+                handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 3000)
                 return []
               })
           )
           .catch((error: string) => {
-            addSnackbar({
-              message: t('error.fetchLearningPathElementStatus'),
-              severity: 'error',
-              autoHideDuration: 3000
-            })
-            log.error(t('error.fetchLearningPathElementStatus') + ' ' + error)
+            handleError(t, addSnackbar, 'error.fetchLearningPathElementStatus', error, 3000)
             return []
           })
       })
@@ -140,22 +130,15 @@ export const useLearningPathTopicProgress = (
                   setIsLoading(false)
                 })
                 .catch((error: string) => {
-                  addSnackbar({
-                    message: t('error.fetchLearningPathTopic'),
-                    severity: 'error',
-                    autoHideDuration: 3000
-                  })
-                  log.error(t('error.fetchLearningPathTopic') + ' ' + error)
+                  handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 3000)
                 })
+            })
+            .catch((error: string) => {
+              handleError(t, addSnackbar, 'error.fetchDefaultLearningPath', error, 3000)
             })
         })
         .catch((error: string) => {
-          addSnackbar({
-            message: t('error.fetchUser'),
-            severity: 'error',
-            autoHideDuration: 3000
-          })
-          log.error(t('error.fetchUser') + ' ' + error)
+          handleError(t, addSnackbar, 'error.fetchUser', error, 3000)
         })
     }
   }, [isAuth, navigate, getLearningPathTopic, getAllTopicProgress, learningPathTopicCache])

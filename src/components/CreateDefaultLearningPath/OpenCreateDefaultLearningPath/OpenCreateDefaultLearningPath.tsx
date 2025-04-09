@@ -1,15 +1,15 @@
-import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
-import { usePrivacyModal as _usePrivacyModal } from '@components'
-import { AuthContext, RoleContext, fetchDefaultLearningPath } from '@services'
+import { usePrivacyModal as _usePrivacyModal, handleError } from '@components'
+import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
 import type { PrivacyModalProps } from '../../PrivacyModal/PrivacyModal'
-import DefaultLearningPathModal from '../Modal/CreateDefaultLearningPathModal'
+import CreateDefaultLearningPathModal from '../Modal/CreateDefaultLearningPathModal'
 
 const OpenCreateDefaultLearningPath = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps) => {
   const { t } = useTranslation()
+  const { addSnackbar } = useContext(SnackbarContext)
   const { isAuth } = useContext(AuthContext)
   const [modalOpenDefaultLearningPath, setModalOpenDefaultLearningPath] = useState(true)
   const [cookie, setCookie] = useCookies(['default_learningpath_sent_token'])
@@ -17,6 +17,7 @@ const OpenCreateDefaultLearningPath = ({ usePrivacyModal = _usePrivacyModal }: P
   const { privacyPolicyCookie } = usePrivacyModal()
   const getUser = usePersistedStore((state) => state.getUser)
   const { isCourseCreatorRole } = useContext(RoleContext)
+  const getDefaultLearningPath = usePersistedStore((state) => state.getDefaultLearningPath)
 
   const handleCloseDefaultLearningPathModal = (event: object, reason: string) => {
     if (reason == 'backdropClick') {
@@ -37,18 +38,21 @@ const OpenCreateDefaultLearningPath = ({ usePrivacyModal = _usePrivacyModal }: P
     if (!cookie['default_learningpath_sent_token'] && isAuth) {
       getUser()
         .then((user) => {
-          return fetchDefaultLearningPath({ userId: user.settings.user_id, lmsUserId: user.lms_user_id }).then(
-            (data) => {
+          return getDefaultLearningPath({ userId: user.settings.user_id, lmsUserId: user.lms_user_id })
+            .then((data) => {
               if (data.length > 0) {
                 setCookie('default_learningpath_sent_token', true, { path: '/' })
               } else {
                 setDefaultLearningPathExists(false)
               }
-            }
-          )
+            })
+            .catch((error) => {
+              handleError(t, addSnackbar, 'error.fetchDefaultLearningPath', error, 3000)
+              setDefaultLearningPathExists(false)
+            })
         })
         .catch((error) => {
-          log.error(error)
+          handleError(t, addSnackbar, 'error.fetchUser', error, 3000)
           setDefaultLearningPathExists(false)
         })
     }
@@ -57,7 +61,7 @@ const OpenCreateDefaultLearningPath = ({ usePrivacyModal = _usePrivacyModal }: P
   return (
     <>
       {privacyPolicyCookie && !defaultLearningPathExists && isCourseCreatorRole && (
-        <DefaultLearningPathModal
+        <CreateDefaultLearningPathModal
           open={modalOpenDefaultLearningPath}
           handleClose={handleCloseDefaultLearningPathModal}
         />

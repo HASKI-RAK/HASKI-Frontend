@@ -35,7 +35,7 @@ import {
   TableListKQuestions
 } from '@components'
 import { AuthContext, RoleContext } from '@services'
-import DefaultLearningPathModal from '../CreateDefaultLearningPath/Modal/CreateDefaultLearningPathModal'
+import CreateDefaultLearningPathModal from '../CreateDefaultLearningPath/Modal/CreateDefaultLearningPathModal'
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -322,7 +322,7 @@ const MenuBar = () => {
                   <Typography textAlign="center">{t('components.Menubar.defaultLearningPath')}</Typography>
                 </MenuItem>
               )}
-              <DefaultLearningPathModal
+              <CreateDefaultLearningPathModal
                 open={modalOpenDefaultLearningPath}
                 handleClose={handleCloseDefaultLearningPath}
               />

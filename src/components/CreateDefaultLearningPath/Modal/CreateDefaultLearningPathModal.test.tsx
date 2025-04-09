@@ -1,24 +1,41 @@
 import '@testing-library/jest-dom'
-import { fireEvent, queryByRole, render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
+import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
-import { AuthContext, RoleContext, RoleContextType } from '@services'
-import DefaultLearningPathModal from './CreateDefaultLearningPathModal'
-
-const handleClose = jest.fn()
-
-const courseCreatorContext = {
-  isStudentRole: false,
-  isCourseCreatorRole: true
-} as RoleContextType
+import { AuthContext, RoleContext, RoleContextType, SnackbarContext } from '@services'
+import CreateDefaultLearningPathModal from './CreateDefaultLearningPathModal'
 
 describe('DefaultLearningPathModal component', () => {
+  const handleClose = jest.fn()
+
+  const courseCreatorContext = {
+    isStudentRole: false,
+    isCourseCreatorRole: true
+  } as RoleContextType
+
+  const addSnackbarMock = jest.fn()
+  const mockAddSnackbar = {
+    snackbarsErrorWarning: [],
+    snackbarsSuccessInfo: [],
+    setSnackbarsErrorWarning: (a: any[]) => a,
+    setSnackbarsSuccessInfo: (a: any) => a,
+    addSnackbar: (a: any) => {
+      addSnackbarMock(a)
+      return a
+    },
+    updateSnackbar: (a: any) => a,
+    removeSnackbar: (a: any) => a
+  }
+
   it('renders the modal and loads default learning path data without open parameter', async () => {
     const { queryByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>
-            <DefaultLearningPathModal handleClose={handleClose} />
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateDefaultLearningPathModal handleClose={handleClose} />
+            </SnackbarContext.Provider>
           </RoleContext.Provider>
         </MemoryRouter>
       </AuthContext.Provider>
@@ -34,7 +51,9 @@ describe('DefaultLearningPathModal component', () => {
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>
-            <DefaultLearningPathModal open={true} handleClose={handleClose} />
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateDefaultLearningPathModal open={true} handleClose={handleClose} />
+            </SnackbarContext.Provider>
           </RoleContext.Provider>
         </MemoryRouter>
       </AuthContext.Provider>
@@ -50,13 +69,13 @@ describe('DefaultLearningPathModal component', () => {
   })
 
   it('calls handleClose when the close button is clicked', async () => {
-    const handleClose = jest.fn()
-
     const { getByRole, getByTestId } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>
-            <DefaultLearningPathModal open={true} handleClose={handleClose} />
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateDefaultLearningPathModal open={true} handleClose={handleClose} />
+            </SnackbarContext.Provider>
           </RoleContext.Provider>
         </MemoryRouter>
       </AuthContext.Provider>
@@ -71,5 +90,50 @@ describe('DefaultLearningPathModal component', () => {
     fireEvent.click(closeButton)
 
     expect(handleClose).toHaveBeenCalledWith({}, 'closeButtonClick')
+  })
+
+  it('catches error when fetchDefaultLearningPath fails', async () => {
+    mockServices.fetchDefaultLearningPath.mockImplementationOnce(() => {
+      throw new Error('fetchDefaultLearningPath error')
+    })
+
+    const { getByRole, getByTestId } = render(
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateDefaultLearningPathModal open={true} handleClose={handleClose} />
+            </SnackbarContext.Provider>
+          </RoleContext.Provider>
+        </MemoryRouter>
+      </AuthContext.Provider>
+    )
+
+    // Wait for the modal content to be rendered.
+    await waitFor(() => {
+      expect(getByRole('button', { name: /appGlobal.start/i })).toBeInTheDocument()
+    })
+  })
+
+  it('catches error when fetchUser fails', async () => {
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('fetchUser error')
+    })
+
+    const { getByRole, getByTestId } = render(
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateDefaultLearningPathModal open={true} handleClose={handleClose} />
+            </SnackbarContext.Provider>
+          </RoleContext.Provider>
+        </MemoryRouter>
+      </AuthContext.Provider>
+    )
+
+    await waitFor(() => {
+      expect(getByRole('button', { name: /appGlobal.start/i })).toBeInTheDocument()
+    })
   })
 })

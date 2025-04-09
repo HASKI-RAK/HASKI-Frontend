@@ -1,4 +1,3 @@
-// OpenCreateDefaultLearningPath.test.tsx
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
@@ -15,6 +14,7 @@ jest.mock('react-cookie', () => ({
 
 // Mock the privacy modal hook to always return a truthy privacyPolicyCookie.
 jest.mock('@components', () => ({
+  ...jest.requireActual('@components'),
   usePrivacyModal: () => ({ privacyPolicyCookie: true })
 }))
 
@@ -105,7 +105,7 @@ describe('OpenCreateDefaultLearningPath component', () => {
     })
   })
 
-  it('renders the DefaultLearningPathModal when no cookie exists and fetch returns an empty array', async () => {
+  it('renders the DefaultLearningPathModal when no cookie exists and fetchDefaultLearningPath returns an empty array', async () => {
     // Simulate that no cookie exists.
     ;(useCookies as jest.Mock).mockReturnValue([{}, setCookieMock])
     // Simulate fetching returns an empty array (no default learning path exists).
@@ -123,12 +123,32 @@ describe('OpenCreateDefaultLearningPath component', () => {
     })
   })
 
-  it('renders the DefaultLearningPathModal when no cookie exists and fetch returns an error', async () => {
+  it('renders the DefaultLearningPathModal when no cookie exists and fetchDefaultLearningPath returns an error', async () => {
     // Simulate that no cookie exists.
     ;(useCookies as jest.Mock).mockReturnValue([{}, setCookieMock])
     // Simulate fetching returns an empty array (no default learning path exists).
     mockServices.fetchDefaultLearningPath.mockImplementationOnce(() => {
       throw new Error('fetchDefaultLearningPath error')
+    })
+
+    render(
+      <DummyProvider>
+        <OpenCreateDefaultLearningPath />
+      </DummyProvider>
+    )
+
+    // Wait for the useEffect to run and update state.
+    await waitFor(() => {
+      expect(screen.getByTestId('close-default-learning-path-modal-button')).toBeInTheDocument()
+    })
+  })
+
+  it('renders the DefaultLearningPathModal when no cookie exists and fetchUser returns an error', async () => {
+    // Simulate that no cookie exists.
+    ;(useCookies as jest.Mock).mockReturnValue([{}, setCookieMock])
+    // Simulate fetching returns an empty array (no default learning path exists).
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('fetchUser error')
     })
 
     render(

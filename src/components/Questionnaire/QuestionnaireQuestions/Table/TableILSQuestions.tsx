@@ -17,7 +17,7 @@ import {
   TableRow,
   Typography
 } from '@common/components'
-import { CoverSheet } from '@components'
+import { CoverSheet, handleError } from '@components'
 import { SnackbarContext } from '@services'
 import useHandleSend from './Questions.hooks'
 import { ButtonStack, MemoTableRowQuestion, SendButton, StartButton } from './TableCommonComponents'
@@ -161,12 +161,7 @@ const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmpt
         log.info(t('appGlobal.dataSendSuccessful'))
         setSuccessSend(true)
       } else {
-        addSnackbar({
-          message: t('appGlobal.dataSendUnsuccessful'),
-          severity: 'error',
-          autoHideDuration: 5000
-        })
-        log.error(t('appGlobal.dataSendUnsuccessful'))
+        handleError(t, addSnackbar, 'appGlobal.dataSendUnsuccessful', '', 5000)
         setSuccessSend(false)
       }
     })

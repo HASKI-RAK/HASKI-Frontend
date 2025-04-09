@@ -2,6 +2,7 @@ import { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
 import { Dispatch, SetStateAction, useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { handleError } from '@components'
 import { DefaultLearningPath } from '@core'
 import { SnackbarContext, postDefaultLearningPath } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -129,25 +130,29 @@ export const useCreateDefaultLearningPathTable = ({
         university: 'HS-KE'
       })
     )
-    return getUser().then((user) => {
-      return postDefaultLearningPath({
-        userId: user.settings.id,
-        userLmsId: user.lms_user_id,
-        outputJson: JSON.stringify(orderedItemsData)
-      })
-        .then(() => {
-          clearDefaultLearningPathCache()
-          clearLearningPathElementCache()
-          setIsSending(false)
+    return getUser()
+      .then((user) => {
+        return postDefaultLearningPath({
+          userId: user.settings.id,
+          userLmsId: user.lms_user_id,
+          outputJson: JSON.stringify(orderedItemsData)
         })
-        .then(() => {
-          addSnackbar({
-            message: t('appGlobal.dataSendSuccessful'),
-            severity: 'success',
-            autoHideDuration: 5000
+          .then(() => {
+            clearDefaultLearningPathCache()
+            clearLearningPathElementCache()
+            setIsSending(false)
           })
-        })
-    })
+          .then(() => {
+            addSnackbar({
+              message: t('appGlobal.dataSendSuccessful'),
+              severity: 'success',
+              autoHideDuration: 5000
+            })
+          })
+      })
+      .catch((error) => {
+        handleError(t, addSnackbar, 'error.postDefaultLearningPath', error, 3000)
+      })
   }, [
     setIsSending,
     disabledItems,

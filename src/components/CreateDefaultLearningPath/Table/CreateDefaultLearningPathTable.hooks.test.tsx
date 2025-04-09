@@ -328,4 +328,34 @@ describe('useCreateDefaultLearningPathTable hook', () => {
       autoHideDuration: 5000
     })
   })
+
+  it('handleSubmit catches error', async () => {
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('fetchUser error')
+    })
+    const dummyOrdered = ['KÜ', 'AN']
+    const dummyDisabled = ['AN']
+    const { result } = renderHook(() =>
+      useCreateDefaultLearningPathTable({
+        setIsSending,
+        orderedItems: dummyOrdered,
+        disabledItems: dummyDisabled,
+        setActiveId,
+        setOrderedItems,
+        setDisabledItems
+      })
+    )
+
+    await act(async () => {
+      await result.current.handleSubmit()
+    })
+
+    expect(setIsSending).toHaveBeenCalledWith(true)
+    expect(mockServices.fetchUser).toHaveBeenCalled()
+    expect(addSnackbar).toHaveBeenCalledWith({
+      message: 'error.postDefaultLearningPath',
+      severity: 'error',
+      autoHideDuration: 3000
+    })
+  })
 })

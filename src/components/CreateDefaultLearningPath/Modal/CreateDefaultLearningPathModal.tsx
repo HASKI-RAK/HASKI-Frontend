@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
+import { handleError } from '@components'
 import { DefaultLearningPathResponse } from '@core'
+import { SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
 import CreateDefaultLearningPathTable from '../Table/CreateDefaultLearningPathTable'
 
@@ -10,7 +13,9 @@ type DefaultLearningPathModalProps = {
   handleClose: (event: object, reason: string) => void
 }
 
-const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearningPathModalProps) => {
+const CreateDefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearningPathModalProps) => {
+  const { t } = useTranslation()
+  const { addSnackbar } = useContext(SnackbarContext)
   const [defaultLearningPath, setDefaultLearningPath] = useState<DefaultLearningPathResponse[]>([])
   const [orderedItems, setOrderedItems] = useState<string[]>([])
   const [disabledItems, setDisabledItems] = useState<string[]>([])
@@ -19,8 +24,8 @@ const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearning
 
   useEffect(() => {
     getUser().then((user) => {
-      getDefaultLearningPath({ userId: user.settings.id, lmsUserId: user.lms_user_id }).then(
-        (defaultLearningPathResponse) => {
+      getDefaultLearningPath({ userId: user.settings.id, lmsUserId: user.lms_user_id })
+        .then((defaultLearningPathResponse) => {
           setDefaultLearningPath(defaultLearningPathResponse)
           if (defaultLearningPathResponse.length > 0) {
             setOrderedItems(
@@ -31,8 +36,11 @@ const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearning
             )
             setDisabledItems(defaultLearningPath.filter((item) => item.disabled).map((item) => item.classification))
           }
-        }
-      )
+        })
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.fetchDefaultLearningPath', error, 3000)
+          setDefaultLearningPath([])
+        })
     })
   }, [defaultLearningPath, open])
 
@@ -76,4 +84,4 @@ const DefaultLearningPathModal = ({ open = false, handleClose }: DefaultLearning
   )
 }
 
-export default DefaultLearningPathModal
+export default CreateDefaultLearningPathModal
