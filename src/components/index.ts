@@ -75,7 +75,9 @@ export {
 } from './CreateTopic/Table/CreateAlgorithm/CreateAlgorithmTable'
 export {
   default as CreateTopicModal,
-  type RemoteLearningElementWithClassification
+  type RemoteLearningElementWithClassification,
+  type RemoteLearningElementWithSolution,
+  type Solution
 } from './CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 export { default as CreateLearningElementSolutionTable } from './CreateTopic/Table/CreateLearningElementSolution/CreateLearningElementSolutionTable'
 export { default as CreateLearningElementClassificationsStep } from './CreateTopic/Modal/CreateLearningElementClassificationsStep/CreateLearningElementClassificationsStep'

@@ -80,7 +80,11 @@ describe('useCreateTopicModal', () => {
     const { result } = renderHook(() =>
       useCreateTopicModal({
         setSelectedLearningElements: jest.fn(),
-        setSelectedLearningElementsClassification: jest.fn()
+        setSelectedLearningElementsClassification: jest.fn(),
+        selectedSolutions: {},
+        selectedLearningElementSolution: {},
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn()
       })
     )
 
@@ -244,7 +248,11 @@ describe('useCreateTopicModal', () => {
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
         setSelectedAlgorithms: jest.fn(),
-        setSuccessfullyCreatedTopicsCount: jest.fn()
+        setSuccessfullyCreatedTopicsCount: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn()
       })
     )
 
@@ -264,7 +272,11 @@ describe('useCreateTopicModal', () => {
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
         setSelectedAlgorithms: jest.fn(),
-        setSuccessfullyCreatedTopicsCount: jest.fn()
+        setSuccessfullyCreatedTopicsCount: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn()
       })
     )
 

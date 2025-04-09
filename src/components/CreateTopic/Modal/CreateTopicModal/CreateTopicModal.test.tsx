@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor, screen } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
@@ -143,18 +143,21 @@ describe('CreateTopicModal', () => {
       fireEvent.click(getByText('appGlobal.next'))
     })
 
+    // open classification menu for the first element
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[0]
       expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
       fireEvent.mouseDown(button)
     })
 
+    // all 12 possible classifications present select the 11th one
     await waitFor(() => {
       const menuItems = getAllByRole('option', { hidden: true })
       expect(menuItems).toHaveLength(12)
       fireEvent.click(menuItems[10])
     })
 
+    // select classification for second element
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[1]
       expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
@@ -167,6 +170,7 @@ describe('CreateTopicModal', () => {
       fireEvent.click(menuItems[7])
     })
 
+    // select classification for third element
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[2]
       expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
@@ -180,6 +184,7 @@ describe('CreateTopicModal', () => {
     })
 
     await waitFor(() => {
+      screen.debug()
       const button = getAllByRole('combobox', { hidden: true })[0]
       expect(button).toHaveTextContent('ZF - Summary')
       const button1 = getAllByRole('combobox', { hidden: true })[1]
@@ -187,6 +192,20 @@ describe('CreateTopicModal', () => {
       const button2 = getAllByRole('combobox', { hidden: true })[2]
       expect(button2).toHaveTextContent('AB - Application Example')
       expect(getByText('appGlobal.next')).toBeEnabled()
+      fireEvent.click(getByText('appGlobal.next'))
+    })
+
+    await waitFor(() => {
+      const dropdowns = getAllByRole('combobox', { hidden: true })
+      expect(dropdowns).toHaveLength(3)
+      expect(dropdowns[0]).toHaveTextContent('components.CreateLearningElementSolutionTable.noSolution')
+      fireEvent.click(dropdowns[0])
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(1)
+      fireEvent.click(menuItems[0])
       fireEvent.click(getByText('appGlobal.next'))
     })
 

@@ -90,13 +90,6 @@ const CreateLearningElementClassificationTable = ({
     onLearningElementChange(updatedClassifications)
   }, [selectedLearningElements])
 
-  const handleSelectChange = useCallback(
-    (lmsTopic: RemoteTopics, element: LearningElementWithClassification) => (event: SelectChangeEvent) => {
-      handleClassificationChange(lmsTopic.topic_lms_id, element.lms_id, event.target.value)
-    },
-    [handleClassificationChange]
-  )
-
   //Return early
   if (Object.keys(LearningElementsClassification).length === 0) {
     return (

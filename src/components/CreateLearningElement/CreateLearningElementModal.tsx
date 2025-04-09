@@ -13,6 +13,7 @@ import { LearningPathElement, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { useCreateTopicModal } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal.hooks'
+import { RemoteLearningElementWithSolution, Solution } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 
 export type CreateTopicModalProps = {
   openCreateTopicModal?: boolean
@@ -24,6 +25,10 @@ export type CreateTopicModalProps = {
   setSelectedLearningElementsClassification: Dispatch<
     SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>
   >
+  setSelectedLearningElementSolution: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithSolution[] }>>
+  setSelectedSolutions: Dispatch<SetStateAction<{ [key: number]: Solution[] }>>
+  selectedSolutions: { [key: number]: Solution[] }
+  selectedLearningElementSolution: { [key: number]: RemoteLearningElementWithSolution[] }
   setActiveStep: Dispatch<SetStateAction<number>>
   activeStep: number
 }
@@ -36,6 +41,10 @@ const CreateLearningElementModal = ({
   setSelectedLearningElements,
   selectedLearningElementsClassification,
   setSelectedLearningElementsClassification,
+  setSelectedLearningElementSolution,
+  setSelectedSolutions,
+  selectedSolutions,
+  selectedLearningElementSolution,
   setActiveStep,
   activeStep
 }: CreateTopicModalProps) => {
@@ -52,7 +61,11 @@ const CreateLearningElementModal = ({
     handleLearningElementClassification
   } = useCreateTopicModal({
     setSelectedLearningElements,
-    setSelectedLearningElementsClassification
+    setSelectedLearningElementsClassification,
+    setSelectedLearningElementSolution,
+    setSelectedSolutions,
+    selectedLearningElementSolution,
+    selectedSolutions
   })
 
   //Store
@@ -165,6 +178,8 @@ const CreateLearningElementModal = ({
               handleLearningElementChange={handleLearningElementChange}
               selectAllLearningElementsChecked={selectAllLearningElementsChecked}
               setSelectAllLearningElementsChecked={setSelectAllLearningElementsChecked}
+              selectedSolutions={selectedSolutions}
+              onSolutionChange={setSelectedSolutions}
               onNext={() => {
                 setActiveStep((prevStep) => prevStep + 1)
               }}
@@ -175,6 +190,8 @@ const CreateLearningElementModal = ({
               selectedTopics={remoteTopic}
               selectedLearningElements={selectedLearningElements}
               selectedLearningElementsClassification={selectedLearningElementsClassification}
+              selectedSolutions={selectedSolutions}
+              onSolutionChange={setSelectedSolutions}
               onNext={() =>
                 handleCreateLearningElementsInExistingTopic(
                   currentTopicLmsId,

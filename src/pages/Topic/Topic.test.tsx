@@ -241,7 +241,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -272,7 +271,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 2,
             lmsId: 2,
-            learningElementId: 2,
             name: '',
             isDone: true
           },
@@ -454,7 +452,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -483,7 +480,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false,
             handleSetLmsId: expect.any(Function),
@@ -516,7 +512,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -547,7 +542,6 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -823,7 +817,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false,
             handleSetLmsId: expect.any(Function)
@@ -855,7 +848,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -886,7 +878,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -917,7 +908,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -948,7 +938,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -979,7 +968,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1010,7 +998,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1390,7 +1377,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1439,7 +1425,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1470,7 +1455,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1501,7 +1485,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1532,7 +1515,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1563,7 +1545,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1595,7 +1576,6 @@ describe('Topic Page', () => {
             isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
-            learningElementId: 1,
             name: ''
           },
           id: '8-1',

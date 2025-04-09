@@ -1,12 +1,11 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { RemoteLearningElement, RemoteTopics } from '@core'
+import { RemoteTopics } from '@core'
 import {
-  RemoteLearningElementWithClassification,
   RemoteLearningElementWithSolution,
   Solution
 } from '../../Modal/CreateTopicModal/CreateTopicModal'
-import { LearningElementWithClassification } from '../CreateLearningElementClassificationTable/CreateLearningElementClassificationTable'
+import { LearningElementWithClassification } from '@components'
 import CreateLearningElementSolutionTable from './CreateLearningElementSolutionTable'
 
 describe('CreateLearningElementSolutionTable', () => {
