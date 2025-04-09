@@ -124,6 +124,26 @@ describe('LearningPathTopicProgress tests', () => {
     })
   })
 
+  test('functionality of hook with getDefaultLearningPath failed', async () => {
+    mockServices.fetchDefaultLearningPath.mockImplementationOnce(() => {
+      throw new Error('getDefaultLearningPath error')
+    })
+
+    const { result } = renderHook(() => useLearningPathTopicProgress(), {
+      wrapper: ({ children }) => (
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>{children}</MemoryRouter>
+        </AuthContext.Provider>
+      )
+    })
+
+    await waitFor(() => {
+      expect(result.current.topicProgress).toStrictEqual([])
+      expect(result.current.isLoading).toBeTruthy()
+      expect(result.current.topics.length).toStrictEqual(0)
+    })
+  })
+
   test('getTopicProgress ignores disabled classifications in default learning path', async () => {
     mockServices.fetchLearningPathElement.mockImplementationOnce(() =>
       Promise.resolve({
