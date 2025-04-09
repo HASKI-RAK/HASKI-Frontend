@@ -1,7 +1,8 @@
 import { StateCreator } from 'zustand'
 import { DefaultLearningPathResponse } from '@core'
 import { fetchDefaultLearningPath } from '@services'
-import { PersistedStoreState, resetters } from '../Zustand/Store'
+import { PersistedStoreState } from '@store'
+import { resetters } from '../Zustand/Store'
 
 type fetchDefaultLearningPathProps = {
   userId: number

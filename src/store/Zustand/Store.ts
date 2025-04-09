@@ -65,7 +65,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
         partialize: (state) => ({
           _user: state._user,
           _learningPathElementStatus: state._learningPathElementStatus,
-          _cache_defaultLearningPath: state._defaultLearningPath,
+          _defaultLearningPath: state._defaultLearningPath,
           expire: state.expire
         }),
         onRehydrateStorage: () => {
