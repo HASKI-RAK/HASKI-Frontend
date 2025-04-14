@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - main
+      - ke-eval-5
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
