@@ -1,24 +1,29 @@
 import { MouseEvent, ReactElement, ReactNode, memo, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
+import { Box, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
-import { CheckBox, DeleteForever, Feedback } from '@common/icons'
-import { DeleteEntityModal, LearningPathLearningElementNode } from '@components'
+import { CheckBox, DeleteForever, Warning } from '@common/icons'
+import { DeleteEntityModal, LearningPathLearningElementNode, getNodeIcon } from '@components'
 import { RoleContext, SnackbarContext, deleteLearningElement } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
 
+/**
+ * @prop children - The icon of the node.
+ * @prop {@link NodeProps} - The props of the node.
+ * @interface
+ */
 type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
   icon?: ReactElement
   children?: ReactNode
 }
 
-const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: BasicNodeProps) => {
+const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProps) => {
   const { t } = useTranslation()
   const theme = useTheme()
   const { addSnackbar } = useContext(SnackbarContext)
-  const { isCourseCreatorRole } = useContext(RoleContext)
+  const { isCourseCreatorRole, isStudentRole } = useContext(RoleContext)
 
   const [deleteLearningElementModalOpen, setdeleteLearningElementModalOpen] = useState(false)
   const [learningElementName, setLearningElementName] = useState<string>('')
@@ -65,6 +70,66 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
     })
     clearLearningPathElement()
     clearLearningPathElementStatusCache()
+  }
+
+  const renderNodeStatus = () => {
+    return props.data.isDisabled ? (
+      <Tooltip title="Classification is not set in the Default Learning Path">
+        <Box
+          sx={{
+            position: 'absolute',
+            top: -20,
+            right: -20,
+            width: 40,
+            height: 40
+          }}>
+          {/* The Typography component is used to "color" the ! inside the Warning Icon White */}
+          <Typography
+            variant="h4"
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              color: 'white',
+              fontWeight: 'bold',
+              lineHeight: 1
+            }}>
+            |
+          </Typography>
+          <Warning
+            sx={{
+              fontSize: 40,
+              color: (theme) => theme.palette.error.main,
+              position: 'absolute',
+              top: 0,
+              left: 0
+            }}
+          />
+        </Box>
+      </Tooltip>
+    ) : (
+      props.data.isDone && (
+        <Tooltip title={t('tooltip.completed')}>
+          <CheckBox
+            viewBox={'3 -3 24 24'}
+            sx={{
+              fontSize: 29,
+              position: 'absolute',
+              top: -13,
+              right: -13,
+              color: (theme) => theme.palette.success.main,
+              background: (theme) => theme.palette.common.white,
+              borderRadius: '10%'
+            }}
+          />
+        </Tooltip>
+      )
+    )
+  }
+
+  if (props.data.isDisabled && isStudentRole) {
+    return null
   }
 
   return (
@@ -120,22 +185,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
         {props.data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
-      {props.data.isDone && (
-        <Tooltip title={t('tooltip.completed')}>
-          <CheckBox
-            viewBox="3 -3 24 24"
-            sx={{
-              fontSize: 29,
-              position: 'absolute',
-              top: -13,
-              right: -13,
-              color: theme.palette.success.main,
-              background: theme.palette.common.white,
-              borderRadius: '10%'
-            }}
-          />
-        </Tooltip>
-      )}
+      {renderNodeStatus()}
       <DeleteEntityModal
         openDeleteEntityModal={deleteLearningElementModalOpen}
         setDeleteEntityModalOpen={setdeleteLearningElementModalOpen}

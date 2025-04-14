@@ -17,9 +17,10 @@ import {
   TableRow,
   Typography
 } from '@common/components'
+import { CoverSheet, handleError } from '@components'
 import { SnackbarContext } from '@services'
 import useHandleSend from './Questions.hooks'
-import { ButtonStack, CoverSheet, MemoTableRowQuestion, SendButton, StartButton } from './TableCommonComponents'
+import { ButtonStack, MemoTableRowQuestion, SendButton, StartButton } from './TableCommonComponents'
 
 /**
  * This component is used to display the questionnaire questions for the ILS questionnaire.
@@ -160,12 +161,7 @@ const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmpt
         log.info(t('appGlobal.dataSendSuccessful'))
         setSuccessSend(true)
       } else {
-        addSnackbar({
-          message: t('appGlobal.dataSendUnsuccessful'),
-          severity: 'error',
-          autoHideDuration: 5000
-        })
-        log.error(t('appGlobal.dataSendUnsuccessful'))
+        handleError(t, addSnackbar, 'appGlobal.dataSendUnsuccessful', '', 5000)
         setSuccessSend(false)
       }
     })
@@ -221,7 +217,11 @@ const TableILSQuestions = memo(({ ilsLong, successSend, setSuccessSend, testEmpt
   return (
     <Box>
       {activeStep == 0 ? (
-        <CoverSheet header={questionnaireType} body={t('components.TableILSQuestions.introduction')} />
+        <CoverSheet
+          header={questionnaireType}
+          body={t('components.TableILSQuestions.introduction')}
+          imagePath={'/ProjectDescriptionImage03.jpg'}
+        />
       ) : (
         <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>
           <ButtonStack

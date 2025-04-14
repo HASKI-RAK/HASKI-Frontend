@@ -23,6 +23,7 @@
  */
 import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
 import Course, { CourseResponse } from './Course/Course'
+import DefaultLearningPath from './DefaultLearningPath/DefaultLearningPath'
 import LearningElement from './LearningElement/LearningElement'
 import LearningPathLearningElementAlgorithm, {
   LearningPathLearningElementAlgorithmResponse
@@ -50,6 +51,7 @@ export type {
   User,
   Course,
   CourseResponse,
+  DefaultLearningPath,
   LearningElement,
   LearningPathTopic,
   LearningPathElement,
@@ -70,6 +72,7 @@ export type {
   RemoteTopics,
   RemoteLearningElement
 }
+export type { DefaultLearningPathResponse } from './DefaultLearningPath/DefaultLearningPath'
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
 export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'
 export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'

@@ -4,6 +4,7 @@ import { devtools, persist } from 'zustand/middleware'
 import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import CoursesSlice, { createCoursesSlice } from '../Slices/CoursesSlice'
+import DefaultLearningPathSlice, { createDefaultLearningPathSlice } from '../Slices/DefaultLearningPath'
 import LearningPathElementSlice, { createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
@@ -28,7 +29,11 @@ export type StoreState = LearningPathElementSlice &
   RemoteTopicsSlice &
   TeacherLpLeAlgorithmSlice &
   StudentLpLeAlgorithmSlice
-export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & xAPISlice
+export type PersistedStoreState = UserSlice &
+  AuthSlice &
+  LearningPathElementStatusSlice &
+  xAPISlice &
+  DefaultLearningPathSlice
 export type SessionStoreState = NewsSlice
 
 export const resetters: (() => void)[] = []
@@ -51,7 +56,8 @@ export const usePersistedStore = create<PersistedStoreState>()(
         ...createUserSlice(...a),
         ...createLearningPathElementStatusSlice(...a),
         ...createAuthSlice(...a),
-        ...createXAPISlice(...a)
+        ...createXAPISlice(...a),
+        ...createDefaultLearningPathSlice(...a)
       }),
       {
         name: 'persisted_storage',
@@ -59,6 +65,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
         partialize: (state) => ({
           _user: state._user,
           _learningPathElementStatus: state._learningPathElementStatus,
+          _defaultLearningPath: state._defaultLearningPath,
           expire: state.expire
         }),
         onRehydrateStorage: () => {
