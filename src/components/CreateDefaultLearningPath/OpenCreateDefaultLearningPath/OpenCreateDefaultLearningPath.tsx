@@ -38,7 +38,7 @@ const OpenCreateDefaultLearningPath = ({ usePrivacyModal = _usePrivacyModal }: P
     if (!cookie['default_learningpath_sent_token'] && isAuth) {
       getUser()
         .then((user) => {
-          return getDefaultLearningPath({ userId: user.settings.user_id, lmsUserId: user.lms_user_id })
+          return getDefaultLearningPath(user.settings.user_id, user.lms_user_id)
             .then((data) => {
               if (data.length > 0) {
                 setCookie('default_learningpath_sent_token', true, { path: '/' })

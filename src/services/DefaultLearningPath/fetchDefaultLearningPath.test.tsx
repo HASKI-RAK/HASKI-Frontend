@@ -32,7 +32,7 @@ describe('fetchDefaultLearningPath has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const result = await fetchDefaultLearningPath({ userId: 1, lmsUserId: 2 })
+    const result = await fetchDefaultLearningPath(1, 2)
 
     expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/user/1/2/defaultLearningPath`, {
       method: 'GET',
@@ -57,7 +57,7 @@ describe('fetchDefaultLearningPath has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    await expect(fetchDefaultLearningPath({ userId: 1, lmsUserId: 2 })).rejects.toThrow(`${expectedMessage}`)
+    await expect(fetchDefaultLearningPath(1, 2)).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
@@ -70,6 +70,6 @@ describe('fetchDefaultLearningPath has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    await expect(fetchDefaultLearningPath({ userId: 1, lmsUserId: 2 })).rejects.toThrow('')
+    await expect(fetchDefaultLearningPath(1, 2)).rejects.toThrow('')
   })
 })

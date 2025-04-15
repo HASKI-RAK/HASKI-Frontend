@@ -4,11 +4,6 @@ import { fetchDefaultLearningPath } from '@services'
 import { PersistedStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
-type fetchDefaultLearningPathProps = {
-  userId: number
-  lmsUserId: number
-}
-
 type DefaultLearningPathCache = {
   value?: DefaultLearningPathResponse[]
   promise?: Promise<DefaultLearningPathResponse[]>
@@ -16,10 +11,7 @@ type DefaultLearningPathCache = {
 
 export type DefaultLearningPathSlice = {
   _defaultLearningPath: Record<string, DefaultLearningPathCache>
-  getDefaultLearningPath: ({
-    userId,
-    lmsUserId
-  }: fetchDefaultLearningPathProps) => Promise<DefaultLearningPathResponse[]>
+  getDefaultLearningPath: (userId: number, lmsUserId: number) => Promise<DefaultLearningPathResponse[]>
   clearDefaultLearningPathCache: () => void
 }
 
@@ -34,7 +26,7 @@ export const createDefaultLearningPathSlice: StateCreator<PersistedStoreState, [
       set({ _defaultLearningPath: {} })
     },
     getDefaultLearningPath: async (...arg) => {
-      const [{ userId, lmsUserId }] = arg
+      const [userId, lmsUserId] = arg
       const key = `${userId}-${lmsUserId}`
 
       const cached = get()._defaultLearningPath[key]
@@ -48,7 +40,7 @@ export const createDefaultLearningPathSlice: StateCreator<PersistedStoreState, [
         return cached.promise
       }
 
-      const fetchPromise = fetchDefaultLearningPath({ userId, lmsUserId }).then(
+      const fetchPromise = fetchDefaultLearningPath(userId, lmsUserId).then(
         (response: DefaultLearningPathResponse[]) => {
           // Once the promise resolves, cache the response as the value.
           set({
