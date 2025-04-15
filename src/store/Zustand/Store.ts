@@ -3,9 +3,9 @@ import create from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
-import CoursesSlice, { createCoursesSlice } from '../Slices/CoursesSlice'
-import DefaultLearningPathSlice, { createDefaultLearningPathSlice } from '../Slices/DefaultLearningPath'
-import LearningPathElementSlice, { createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
+import { CoursesSlice, createCoursesSlice } from '../Slices/CoursesSlice'
+import { DefaultLearningPathSlice, createDefaultLearningPathSlice } from '../Slices/DefaultLearningPath'
+import { LearningPathElementSlice, createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
 } from '../Slices/LearningPathElementSpecificStatusSlice'
