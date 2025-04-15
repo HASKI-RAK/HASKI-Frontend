@@ -1,6 +1,16 @@
 import '@testing-library/jest-dom'
 import { mockServices } from 'jest.setup'
+import { RemoteTopics } from '@core'
 import { useStore } from '../Zustand/Store'
+
+const createDeferred = <T,>() => {
+  const deferred: { resolve?: (value: T) => void; reject?: (reason?: any) => void } = {}
+  const promise = new Promise<T>((res, rej) => {
+    deferred.resolve = res
+    deferred.reject = rej
+  })
+  return { promise, resolve: deferred.resolve!, reject: deferred.reject! }
+}
 
 const remoteTopic = [
   {
@@ -136,5 +146,33 @@ describe('RemoteTopicSlice ', () => {
 
     expect(mockServices.fetchRemoteTopics).toHaveBeenCalledTimes(1)
     expect(cached).toEqual(remoteTopic)
+  })
+
+  it('should return the cached promise if a fetch is already pending', async () => {
+    const deferred = createDeferred<RemoteTopics[]>()
+
+    mockServices.fetchRemoteTopics = jest.fn(() => deferred.promise)
+
+    const courseId = '1'
+
+    const { getRemoteTopics } = useStore.getState()
+
+    const promise1 = getRemoteTopics(courseId)
+    // Second call (before the promise resolves) should return the same in-flight promise.
+    const promise2 = getRemoteTopics(courseId)
+
+    // Ensure fetchRemoteTopics was called only once.
+    expect(mockServices.fetchRemoteTopics).toHaveBeenCalledTimes(1)
+    expect(mockServices.fetchRemoteTopics).toHaveBeenCalledWith(courseId)
+
+    deferred.resolve(remoteTopic)
+
+    // Await the resolution of the promise.
+    const result1 = await promise1
+    const result2 = await promise2
+
+    // Both results should match the remoteTopic object.
+    expect(result1).toEqual(remoteTopic)
+    expect(result2).toEqual(remoteTopic)
   })
 })

@@ -1,6 +1,16 @@
 import '@testing-library/jest-dom'
 import { mockServices } from 'jest.setup'
+import { NewsResponse } from '@core'
 import { useSessionStore } from '@store'
+
+const createDeferred = <T>() => {
+  const deferred: { resolve?: (value: T) => void; reject?: (reason?: any) => void } = {}
+  const promise = new Promise<T>((res, rej) => {
+    deferred.resolve = res
+    deferred.reject = rej
+  })
+  return { promise, resolve: deferred.resolve!, reject: deferred.reject! }
+}
 
 describe('NewsSlice', () => {
   afterEach(() => {
@@ -102,5 +112,42 @@ describe('NewsSlice', () => {
     expect(mockServices.fetchNews).toHaveBeenCalledTimes(1)
 
     expect(cached).toEqual(news)
+  })
+
+  it('should return the cached promise if a fetch is already pending', async () => {
+    const deferred = createDeferred<NewsResponse>()
+
+    mockServices.fetchNews = jest.fn(() => deferred.promise)
+
+    const languageId = 'en'
+    const university = 'TH-AB'
+
+    const { getNews } = useSessionStore.getState()
+
+    const promise1 = getNews(languageId, university)
+    // Second call (before the promise resolves) should return the same in-flight promise.
+    const promise2 = getNews(languageId, university)
+
+    // Ensure fetchNews was called only once.
+    expect(mockServices.fetchNews).toHaveBeenCalledTimes(1)
+    expect(mockServices.fetchNews).toHaveBeenCalledWith(languageId, university)
+
+    // Now resolve the deferred promise with a fake NewsResponse.
+    const fakeNews: NewsResponse = {
+      news: [
+        {
+          news_content: 'Thu, 13 Jul 2023 16:00:00 GMT, Hello everyone'
+        }
+      ]
+    }
+    deferred.resolve(fakeNews)
+
+    // Await the resolution of the promise.
+    const result1 = await promise1
+    const result2 = await promise2
+
+    // Both results should match the fakeNews object.
+    expect(result1).toEqual(fakeNews)
+    expect(result2).toEqual(fakeNews)
   })
 })

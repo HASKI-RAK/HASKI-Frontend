@@ -166,4 +166,28 @@ describe('LearningPathElementStatusSlice', () => {
     //nothing in cache yet, that is why it is undefined
     expect(cached).toEqual([])
   })
+
+  it('should return cached array data if setLearningPathElementStatus newData is empty', async () => {
+    mockServices.fetchLearningPathElementStatus = jest
+      .fn()
+      .mockImplementationOnce(() => Promise.resolve(learningElementStatus))
+
+    const { setLearningPathElementStatus } = usePersistedStore.getState()
+    mockServices.fetchLearningPathElementStatus = jest
+      .fn()
+      .mockImplementationOnce(() => Promise.resolve({ cmid: 1, state: 0, timecompleted: 0 }))
+
+    const courseId = '1'
+    const studentId = 1
+
+    const cached = await setLearningPathElementStatus(courseId, studentId)
+    //nothing in cache yet, that is why it is undefined
+    expect(cached).toEqual([
+      {
+        cmid: 1,
+        state: 0,
+        timecompleted: 0
+      }
+    ])
+  })
 })
