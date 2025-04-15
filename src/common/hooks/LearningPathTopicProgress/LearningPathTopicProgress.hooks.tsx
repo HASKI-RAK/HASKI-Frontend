@@ -112,7 +112,7 @@ export const useLearningPathTopicProgress = (
     if (isAuth) {
       getUser()
         .then((user) => {
-          getDefaultLearningPath({ userId: user.settings.user_id, lmsUserId: user.lms_user_id })
+          getDefaultLearningPath(user.settings.user_id, user.lms_user_id)
             .then((defaultLearningPath) => {
               return defaultLearningPath
                 .filter((classificationElement) => classificationElement.disabled)

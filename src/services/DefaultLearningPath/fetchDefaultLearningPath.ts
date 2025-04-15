@@ -2,11 +2,6 @@ import { DefaultLearningPathResponse } from '@core'
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
-type fetchDefaultLearningPathProps = {
-  userId: number
-  lmsUserId: number
-}
-
 /*
  * fetchDefaultLearningPath function.
  *
@@ -20,10 +15,10 @@ type fetchDefaultLearningPathProps = {
  * @category Services
  */
 
-export const fetchDefaultLearningPath = async ({
-  userId,
-  lmsUserId
-}: fetchDefaultLearningPathProps): Promise<DefaultLearningPathResponse[]> => {
+export const fetchDefaultLearningPath = async (
+  userId: number,
+  lmsUserId: number
+): Promise<DefaultLearningPathResponse[]> => {
   return fetchData<DefaultLearningPathResponse[]>(
     `${getConfig().BACKEND}/user/${userId}/${lmsUserId}/defaultLearningPath`,
     {

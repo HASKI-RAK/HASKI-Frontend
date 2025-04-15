@@ -4,7 +4,7 @@ import { devtools, persist } from 'zustand/middleware'
 import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import { CoursesSlice, createCoursesSlice } from '../Slices/CoursesSlice'
-import { DefaultLearningPathSlice, createDefaultLearningPathSlice } from '../Slices/DefaultLearningPath'
+import { DefaultLearningPathSlice, createDefaultLearningPathSlice } from '../Slices/DefaultLearningPathSlice'
 import { LearningPathElementSlice, createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
@@ -13,12 +13,12 @@ import {
   LearningPathElementStatusSlice,
   createLearningPathElementStatusSlice
 } from '../Slices/LearningPathElementStatusSlice'
-import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
-import NewsSlice, { createNewsSlice } from '../Slices/NewsSlice'
-import RemoteTopicsSlice, { createRemoteTopicsSlice } from '../Slices/RemoteTopicsSlice'
-import StudentLpLeAlgorithmSlice, { createStudentLpLeAlgorithmSlice } from '../Slices/StudentLpLeAlgSlice'
-import TeacherLpLeAlgorithmSlice, { createTeacherLpLeAlgorithmSlice } from '../Slices/TeacherLpLeAlgorithmSlice'
-import UserSlice, { createUserSlice } from '../Slices/UserSlice'
+import { LearningPathTopicSlice, createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
+import { NewsSlice, createNewsSlice } from '../Slices/NewsSlice'
+import { RemoteTopicsSlice, createRemoteTopicsSlice } from '../Slices/RemoteTopicsSlice'
+import { StudentLpLeAlgorithmSlice, createStudentLpLeAlgorithmSlice } from '../Slices/StudentLpLeAlgSlice'
+import { TeacherLpLeAlgorithmSlice, createTeacherLpLeAlgorithmSlice } from '../Slices/TeacherLpLeAlgorithmSlice'
+import { UserSlice, createUserSlice } from '../Slices/UserSlice'
 import xAPISlice, { createXAPISlice } from '../Slices/xAPISlice'
 
 export type StoreState = LearningPathElementSlice &

@@ -24,7 +24,7 @@ const CreateDefaultLearningPathModal = ({ open = false, handleClose }: DefaultLe
 
   useEffect(() => {
     getUser().then((user) => {
-      getDefaultLearningPath({ userId: user.settings.id, lmsUserId: user.lms_user_id })
+      getDefaultLearningPath(user.settings.id, user.lms_user_id)
         .then((defaultLearningPathResponse) => {
           setDefaultLearningPath(defaultLearningPathResponse)
           if (defaultLearningPathResponse.length > 0) {
