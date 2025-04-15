@@ -4,7 +4,7 @@ import { fetchCourses } from '@services'
 import { StoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
-export default interface CoursesSlice {
+export type CoursesSlice = {
   _cache_Courses_record: Record<string, CourseResponse>
   getCourses: CourseReturn
   clearCoursesCache: () => void

@@ -9,8 +9,13 @@ type fetchDefaultLearningPathProps = {
   lmsUserId: number
 }
 
-export default interface DefaultLearningPathSlice {
-  _defaultLearningPath: Record<string, DefaultLearningPathResponse[]>
+type DefaultLearningPathCache = {
+  value?: DefaultLearningPathResponse[]
+  promise?: Promise<DefaultLearningPathResponse[]>
+}
+
+export type DefaultLearningPathSlice = {
+  _defaultLearningPath: Record<string, DefaultLearningPathCache>
   getDefaultLearningPath: ({
     userId,
     lmsUserId
@@ -30,20 +35,41 @@ export const createDefaultLearningPathSlice: StateCreator<PersistedStoreState, [
     },
     getDefaultLearningPath: async (...arg) => {
       const [{ userId, lmsUserId }] = arg
-      // Check if we have the courses in cache
-      const cached = get()._defaultLearningPath[`${userId}-${lmsUserId}`]
+      const key = `${userId}-${lmsUserId}`
 
-      if (!cached) {
-        // If not, fetch it and cache it
-        const defaultLearningPathResponse = await fetchDefaultLearningPath({ userId, lmsUserId })
-        set({
-          _defaultLearningPath: {
-            ...get()._defaultLearningPath,
-            [`${userId}-${lmsUserId}`]: defaultLearningPathResponse
-          }
-        })
-        return defaultLearningPathResponse
-      } else return cached
+      const cached = get()._defaultLearningPath[key]
+
+      if (cached?.value) {
+        return cached.value
+      }
+
+      // If a fetch is already in progress, return that promise.
+      if (cached?.promise) {
+        return cached.promise
+      }
+
+      const fetchPromise = fetchDefaultLearningPath({ userId, lmsUserId }).then(
+        (response: DefaultLearningPathResponse[]) => {
+          // Once the promise resolves, cache the response as the value.
+          set({
+            _defaultLearningPath: {
+              ...get()._defaultLearningPath,
+              [key]: { value: response }
+            }
+          })
+          return response
+        }
+      )
+
+      // Cache the in-flight promise.
+      set({
+        _defaultLearningPath: {
+          ...get()._defaultLearningPath,
+          [key]: { promise: fetchPromise }
+        }
+      })
+
+      return fetchPromise
     }
   }
 }
