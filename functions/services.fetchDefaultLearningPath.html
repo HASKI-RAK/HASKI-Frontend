@@ -18,7 +18,7 @@
 <h1>Function fetchDefaultLearningPath</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="fetchDefaultLearningPath"><span class="tsd-kind-call-signature">fetch<wbr/>Default<wbr/>Learning<wbr/>Path</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">university</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/core.DefaultLearningPathResponse.html" class="tsd-signature-type tsd-kind-type-alias">DefaultLearningPathResponse</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><a href="#fetchDefaultLearningPath" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="fetchDefaultLearningPath"><span class="tsd-kind-call-signature">fetch<wbr/>Default<wbr/>Learning<wbr/>Path</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">userId</span>, <span class="tsd-kind-parameter">lmsUserId</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/core.DefaultLearningPathResponse.html" class="tsd-signature-type tsd-kind-type-alias">DefaultLearningPathResponse</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><a href="#fetchDefaultLearningPath" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>fetchDefaultLearningPath function.</p>
 </div>
@@ -26,10 +26,9 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">university</span>: <a href="../types/services.exports.fetchDefaultLearningPathProps.html" class="tsd-signature-type tsd-kind-type-alias">fetchDefaultLearningPathProps</a></h5>
-<div class="tsd-comment tsd-typography"><p>The user&#39;s university</p>
-</div>
-<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h5><span class="tsd-kind-parameter">userId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">lmsUserId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/core.DefaultLearningPathResponse.html" class="tsd-signature-type tsd-kind-type-alias">DefaultLearningPathResponse</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4><ul>
 <li>A string list of classifications that are disabled.</li>
 </ul>
@@ -38,7 +37,7 @@
 <h4>Remarks</h4><p>Fetches the disabled classifications for the default learning path for the given user.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/services/DefaultLearningPath/fetchDefaultLearningPath.ts#L23">src/services/DefaultLearningPath/fetchDefaultLearningPath.ts:23</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/services/DefaultLearningPath/fetchDefaultLearningPath.ts#L18">src/services/DefaultLearningPath/fetchDefaultLearningPath.ts:18</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
