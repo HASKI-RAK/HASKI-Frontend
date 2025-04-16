@@ -132,7 +132,9 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
                 <DeleteForever fontSize={'medium'} />
               </IconButton>
             </Tooltip>
-            {/* commented out until feature is implemented
+          </Grid>
+        )}
+        {/* commented out until feature is implemented
             <IconButton
             onClick={addToFavorites}
             data-testid={'favoriteButton'}
@@ -144,20 +146,18 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
             }}>
             {isFavorite ? <FavoriteIcon titleAccess="isFavorite" /> : <FavoriteBorderIcon titleAccess="notFavorite" />}
           </IconButton>
-          */}
-          {solutionLmsId > 1 && (
-            <Tooltip title={t('tooltip.solution')}>
-              <IconButton
-                onClick={handleShowSolution}
-                data-testid={'showSolutionButton'}
-                sx={{ backgroundColor: theme.palette.primary.main, marginLeft: '0.5rem', border: '1px solid grey' }}>
-                <Task />
-              </IconButton>
-            </Tooltip>
-          )}
-            {props.children}
-          </Grid>
+        */}
+        {solutionLmsId > 1 && (
+          <Tooltip title={t('tooltip.solution')}>
+            <IconButton
+              onClick={handleShowSolution}
+              data-testid={'showSolutionButton'}
+              sx={{ backgroundColor: theme.palette.primary.main, marginLeft: '0.5rem', border: '1px solid grey' }}>
+              <Task />
+            </IconButton>
+          </Tooltip>
         )}
+        {props.children}
       </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper

@@ -165,7 +165,7 @@
   ],
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Set learning element classification",
   "components.CreateLearningElementSolutionTable.setLearningElementSolution": "Set learning element solution",
-  "components.CreateLearningElementSolutionTable.solution": "Select additional solution",
+  "components.CreateLearningElementSolutionTable.noSolution": "Select additional solution",
   "components.CreateLearningElementModal.createLearningElements": "Create Learning Elements",
   "components.CreateLearningElementTable.selectAllToggle": "Select all",
   "components.CreateLearningElementTable.selectLearningElements": "Select learning elements",

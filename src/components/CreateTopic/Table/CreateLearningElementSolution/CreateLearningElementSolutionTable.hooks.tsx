@@ -28,13 +28,14 @@ export const useCreateLearningElementSolutionTable = ({
 
   const resetUnavailableSolutions = useCallback(
     (elementsWithSolutions: RemoteLearningElementWithSolution[], topicId: number) => {
+      const topicSolutions = selectedSolutions[topicId] || []
       return elementsWithSolutions.map((element) =>
-        selectedSolutions[topicId].find((solution) => solution.solutionLmsId === element.solutionLmsId)
+        topicSolutions.find((solution) => solution.solutionLmsId === element.solutionLmsId)
           ? element
           : { ...element, solutionLmsId: 0 }
       )
     },
-    [learningElementsWithSolutions, selectedSolutions, onLearningElementSolutionChange]
+    [selectedSolutions]
   )
 
   return useMemo(

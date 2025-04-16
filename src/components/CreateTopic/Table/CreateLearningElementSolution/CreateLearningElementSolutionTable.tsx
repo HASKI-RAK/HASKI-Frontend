@@ -79,7 +79,7 @@ const CreateLearningElementClassificationTable = memo(
       }, {})
 
       onLearningElementSolutionChange(updatedSolutions)
-    }, [LearningElementsClassification, onLearningElementSolutionChange])
+    }, [LearningElementsClassification, resetUnavailableSolutions])
 
     useEffect(() => {
       const updatedDisplayedSolutions = Object.keys(selectedSolutions).reduce((accumulator, topicId) => {
@@ -92,6 +92,7 @@ const CreateLearningElementClassificationTable = memo(
         return { ...accumulator, [topicIdInt]: newDisplayedSolutions }
       }, {})
       setDisplayedSolutions(updatedDisplayedSolutions)
+      console.log('displayedSolutions', displayedSolutions)
     }, [selectedSolutions])
 
     //useEffect(() => {

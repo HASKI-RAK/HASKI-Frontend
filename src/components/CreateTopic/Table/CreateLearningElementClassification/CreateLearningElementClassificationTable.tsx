@@ -1,4 +1,4 @@
-import { tableCellClasses } from '@mui/material'
+import { TableBody, tableCellClasses } from '@mui/material'
 import { ReactNode, memo, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
@@ -15,7 +15,6 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  SelectChangeEvent,
   Typography
 } from '@common/components'
 import { SkeletonList } from '@components'
@@ -141,53 +140,55 @@ const CreateLearningElementClassificationTable = ({
                   <TableCell sx={{ textAlign: 'center' }}>{t('Ist Lösung')}</TableCell>
                 </TableRow>
               </TableHead>
-              {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
-                <TableRow key={element.lms_id}>
-                  <TableCell sx={{ padding: '0rem' }}>
-                    <FormControlLabel
-                      control={<Checkbox checked={true} disabled={true} />}
-                      label={<Typography>{element.lms_learning_element_name}</Typography>}
-                    />
-                  </TableCell>
-                  <TableCell sx={{ textAlign: 'center', padding: '0rem' }}>
-                    <FormControl sx={{ m: 1, width: '21rem' }} size="small">
-                      <InputLabel>{t('appGlobal.classification')}</InputLabel>
-                      <Select
-                        value={element.classification}
+              <TableBody>
+                {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
+                  <TableRow key={element.lms_id}>
+                    <TableCell sx={{ padding: '0rem' }}>
+                      <FormControlLabel
+                        control={<Checkbox checked={true} disabled={true} />}
+                        label={<Typography>{element.lms_learning_element_name}</Typography>}
+                      />
+                    </TableCell>
+                    <TableCell sx={{ textAlign: 'center', padding: '0rem' }}>
+                      <FormControl sx={{ m: 1, width: '21rem' }} size="small">
+                        <InputLabel>{t('appGlobal.classification')}</InputLabel>
+                        <Select
+                          value={element.classification}
+                          onChange={(event) =>
+                            handleClassificationChange(
+                              lmsTopic.topic_lms_id,
+                              element.lms_id,
+                              event.target.value as string
+                            )
+                          }
+                          label={t('appGlobal.classification')}
+                          disabled={element.disabled}>
+                          {learningElementClassifications.map((classification) => (
+                            <MenuItem key={classification.key} value={classification.key}>
+                              {classification.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </TableCell>
+                    <TableCell sx={{ textAlign: 'center', padding: '0rem' }}>
+                      <Checkbox
+                        checked={(selectedSolutions[lmsTopic.topic_lms_id] || []).some(
+                          (el) => el.solutionLmsId === element.lms_id
+                        )}
                         onChange={(event) =>
-                          handleClassificationChange(
+                          handleSolutionchange(
                             lmsTopic.topic_lms_id,
                             element.lms_id,
-                            event.target.value as string
+                            element.lms_learning_element_name,
+                            event.target.checked
                           )
                         }
-                        label={t('appGlobal.classification')}
-                        disabled={element.disabled}>
-                        {learningElementClassifications.map((classification) => (
-                          <MenuItem key={classification.key} value={classification.key}>
-                            {classification.name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </TableCell>
-                  <TableCell sx={{ textAlign: 'center', padding: '0rem' }}>
-                    <Checkbox
-                      checked={(selectedSolutions[lmsTopic.topic_lms_id] || []).some(
-                        (el) => el.solutionLmsId === element.lms_id
-                      )}
-                      onChange={(event) =>
-                        handleSolutionchange(
-                          lmsTopic.topic_lms_id,
-                          element.lms_id,
-                          element.lms_learning_element_name,
-                          event.target.checked
-                        )
-                      }
-                    />
-                  </TableCell>
-                </TableRow>
-              ))}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </Table>
           </Paper>
         </Grid>
