@@ -1,7 +1,7 @@
 import { MouseEvent, ReactElement, ReactNode, memo, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { Box, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
+import { Box, Checkbox, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { CheckBox, DeleteForever, Warning } from '@common/icons'
 import { DeleteEntityModal, LearningPathLearningElementNode, getNodeIcon } from '@components'
@@ -9,11 +9,6 @@ import { RoleContext, SnackbarContext, deleteLearningElement } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
 
-/**
- * @prop children - The icon of the node.
- * @prop {@link NodeProps} - The props of the node.
- * @interface
- */
 type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
   icon?: ReactElement
   children?: ReactNode
@@ -111,18 +106,34 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
     ) : (
       props.data.isDone && (
         <Tooltip title={t('tooltip.completed')}>
-          <CheckBox
-            viewBox={'3 -3 24 24'}
+          <Box
             sx={{
-              fontSize: 29,
               position: 'absolute',
-              top: -13,
-              right: -13,
-              color: (theme) => theme.palette.success.main,
-              background: (theme) => theme.palette.common.white,
-              borderRadius: '10%'
-            }}
-          />
+              top: -14,
+              right: -25,
+              width: 40,
+              height: 40
+            }}>
+            <Checkbox
+              defaultChecked
+              disabled
+              sx={{
+                position: 'absolute',
+                backgroundSize: 'cover',
+                background: theme.palette.common.white,
+                fontsize: 25,
+                borderRadius: 10,
+                padding: 0,
+                pointerEvents: 'none', // Prevent interaction with the checkbox
+                '& svg': {
+                  scale: '1.4'
+                },
+                '&.Mui-disabled': {
+                  color: theme.palette.success.main // Override default disabled color
+                }
+              }}
+            />
+          </Box>
         </Tooltip>
       )
     )
@@ -181,7 +192,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
         }}>
         {icon}
       </Paper>
-      <Typography variant="h6" style={{ marginLeft: '8px' }}>
+      <Typography variant="h6" style={{ marginLeft: '8px', color: theme.palette.secondary.contrastText }}>
         {props.data.name}
       </Typography>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />

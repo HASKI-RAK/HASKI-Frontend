@@ -25,17 +25,19 @@ export const defaultColors = {
   },
   secondary: {
     //blue
-    [100]: '#003F7D', //blue
+    [100]: '#E4C2A2FF', //lightgrey
     [300]: '#003366', //blue, slightly darker
     [500]: '#002347' //blue, darker
   },
 
   lightgrey: 'lightgrey',
+  darkgrey: 'darkgrey',
   white: 'white',
   black: '#000000'
 }
 
 export const HaskiTheme = createTheme({
+  name: 'HaskiTheme',
   palette: {
     primary: {
       main: yellow[900],
@@ -44,9 +46,17 @@ export const HaskiTheme = createTheme({
     },
     secondary: {
       main: red[900],
-      dark: defaultColors.primary[900],
+      dark: '#a8a8a8',
       contrastText: defaultColors.black,
-      light: defaultColors.black
+      light: defaultColors.secondary[100]
+    },
+    background: {
+      default: '#FFFFFF',
+      paper: '#FFFFFF'
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#6b3b13'
     },
     success: {
       main: green[600],
@@ -285,7 +295,7 @@ export const HaskiTheme = createTheme({
             color: defaultColors.secondary[100],
             backgroundColor: defaultColors.secondary[100]
           },
-          ':disabled': {
+          '.Mui-disabled &': {
             color: defaultColors.lightgrey,
             cursor: 'not-allowed'
           }
@@ -294,6 +304,27 @@ export const HaskiTheme = createTheme({
           color: defaultColors.secondary[100],
           '&$checked': {
             color: defaultColors.secondary[100]
+          }
+        }
+      }
+    },
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        root: {
+          backgroundColor: defaultColors.white,
+          '& .Mui-disabled': {
+            backgroundColor: defaultColors.lightgrey,
+            borderColor: defaultColors.darkgrey
+          },
+          '& .MuiToggleButton-root': {
+            color: defaultColors.black,
+            '&.Mui-selected': {
+              color: defaultColors.black,
+              backgroundColor: defaultColors.secondary['100']
+            },
+            '&:hover': {
+              backgroundColor: defaultColors.secondary['100']
+            }
           }
         }
       }

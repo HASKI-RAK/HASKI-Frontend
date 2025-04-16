@@ -15,8 +15,10 @@ import {
   Tooltip,
   Typography
 } from '@common/components'
+import { useTheme } from '@common/hooks'
 import {
   AssignmentOutlined,
+  Brush,
   Help,
   LibraryBooksOutlined,
   Login,
@@ -32,10 +34,12 @@ import {
   QuestionnaireQuestionsModal,
   StatisticsMenu,
   TableILSQuestions,
-  TableListKQuestions
+  TableListKQuestions,
+  ThemeModal
 } from '@components'
 import { AuthContext, RoleContext } from '@services'
 import CreateDefaultLearningPathModal from '../CreateDefaultLearningPath/Modal/CreateDefaultLearningPathModal'
+import { Theme } from '../../common/theme/DefaultTheme/DefaultTheme'
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -53,6 +57,8 @@ const MenuBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const { isAuth, logout } = useContext(AuthContext)
   const { isCourseCreatorRole } = useContext(RoleContext)
+  const activeTheme = useTheme()
+  const [modalOpenTheme, setModalOpenTheme] = useState(false)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
   const [modalOpenListK, setModalOpenListK] = useState(false)
@@ -60,6 +66,19 @@ const MenuBar = () => {
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [successSendILSShort, setSuccessSendILSShort] = useState(false)
   const [successSendListK, setSuccessSendListK] = useState(false)
+  const [selectedTheme, setSelectedTheme] = useState<Theme>(activeTheme)
+  const [selectedThemeString, setSelectedThemeString] = useState(activeTheme.name)
+
+  const handleOpenThemeModal = () => {
+    setSelectedTheme(activeTheme)
+    setSelectedThemeString(activeTheme.name)
+    setModalOpenTheme(true)
+    setAnchorElUser(null)
+  }
+
+  const handleCloseThemeModal = () => {
+    setModalOpenTheme(false)
+  }
 
   const handleOpenILSShortModal = () => {
     setModalOpenILSShort(true)
@@ -161,15 +180,15 @@ const MenuBar = () => {
               variant="h6"
               noWrap
               component="a"
-              sx={{
+              sx={(theme) => ({
                 mr: 2,
                 ml: 2,
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
-                color: 'inherit',
+                color: theme.palette.secondary.contrastText,
                 textDecoration: 'none'
-              }}
+              })}
               onClick={() => navigate('/')}>
               HASKI
             </TextWrapper>
@@ -184,26 +203,25 @@ const MenuBar = () => {
             <LanguageMenu />
           </Box>
           {/** Theme button */}
-          {/**
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={'Change your theme'}>
-              <IconButton
-                id="global-settings-icon-button"
-                onClick={() => {
-                  addSnackbar({
-                    message: t('components.MenubBar.GlobalSettings.Error'),
-                    severity: 'warning',
-                    autoHideDuration: 5000
-                  })
-                }}>
-                <Contrast />
+            <Tooltip title={<Typography variant={'body2'}>{t('components.ThemeModal.buttonDescription')}</Typography>}>
+              <IconButton id="theme-icon-button" onClick={() => handleOpenThemeModal()}>
+                <Brush data-testid="BrushIcon" />
               </IconButton>
             </Tooltip>
+            <ThemeModal
+              open={modalOpenTheme}
+              handleClose={() => handleCloseThemeModal()}
+              selectedTheme={selectedTheme}
+              setSelectedTheme={setSelectedTheme}
+              selectedThemeString={selectedThemeString}
+              setSelectedThemeString={setSelectedThemeString}
+            />
           </Box>
-           */}
+
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('appGlobal.help')}>
+            <Tooltip title={<Typography variant={'body2'}>{t('appGlobal.help')}</Typography>}>
               <IconButton
                 id="manual-icon-button"
                 onClick={() => {
@@ -213,7 +231,7 @@ const MenuBar = () => {
               </IconButton>
             </Tooltip>
           </Box>
-          {/** 
+          {/**
           { Settings button }
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openGlobalSettings')}>
@@ -233,7 +251,7 @@ const MenuBar = () => {
 */}
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('tooltip.openSettings')}>
+            <Tooltip title={<Typography variant={'body2'}>{t('tooltip.openSettings')}</Typography>}>
               <IconButton id="account-icon-button" onClick={handleOpenUserMenu} data-testid="useravatar">
                 <Avatar alt="Remy Sharp">
                   <Person />

@@ -34,10 +34,12 @@ export const defaultColors = {
   },
   lightgrey: 'lightgrey',
   white: 'white',
-  black: 'black'
+  black: 'black',
+  boxcolor: 'white'
 }
 
 export const Theme = createTheme({
+  name: 'BlueTheme',
   palette: {
     primary: {
       main: defaultColors.primary[900],

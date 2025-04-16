@@ -44,7 +44,7 @@
     "react-flow-renderer": "^10.3.17",
     "react-i18next": "^12.1.1",
     "react-router-dom": "^6.4.2",
-    "reactflow": "^11.7.0",
+    "reactflow": "^11.11.4",
     "zustand": "^4.1.1"
   },
   "devDependencies": {

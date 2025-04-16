@@ -666,6 +666,14 @@ const mockDataServices: MockDataServices = {
     Promise.resolve({
       message: 'Deletion successful!'
     })
+  ),
+  postUserSetting: jest.fn(() =>
+    Promise.resolve({
+      id: 2,
+      pswd: null,
+      theme: 'HaskiTheme',
+      user_id: '2'
+    })
   )
 }
 /**

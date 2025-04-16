@@ -88,7 +88,7 @@ const CreateCourseModal = ({
             overflow: 'auto',
             maxHeight: '83%',
             bgcolor: 'background.paper',
-            border: (theme) => '2px solid' + theme.palette.secondary.dark,
+            border: (theme) => '2px solid' + theme.palette.primary.main,
             boxShadow: 24,
             p: 1
           }}>

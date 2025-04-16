@@ -28,6 +28,7 @@
   "appGlobal.table": "Tabelle",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
+  "components.StyledLinearProgress.linearProgressWithLabel.learningProgress": "Lernfortschritt",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Feste Reihenfolge",
@@ -1252,6 +1253,11 @@
   "components.TableListK.score": "Wert",
   "components.TableListK.time": "Zeit",
   "components.TableListKQuestions.introduction": "Im Folgenden werden Ihnen Fragen darüber gestellt welche Lernstrategien Sie anwenden. Sie finden hier eine Liste verschiedener Lerntätigkeiten. Geben Sie bitte für jede Tätigkeit an, wie häufig diese bei Ihnen vorkommt. Sie können Ihre Antworten von sehr selten (1) bis sehr oft (5) abstufen. Die gestellten Fragen basieren auf dem LIST-K (Klingsieck, 2019), welcher eine gekürzte Form des LIST (Wild & Schiefele, 1994) darstellt.",
+  "components.ThemeModal.altTheme": "Haski alternativ",
+  "components.ThemeModal.buttonDescription": "Farbschema ändern",
+  "components.ThemeModal.darkTheme": "Haski dunkel",
+  "components.ThemeModal.radioHeader": "Verfügbare Farbschemata",
+  "components.ThemeModal.standardTheme": "Haski-Standard",
   "components.TableRemoteTopics.noAdditionalTopics": "Keine zusätzlichen Themenbereiche gefunden",
   "components.TableRemoteTopics.title": "Verfügbare Themenbereiche",
   "components.TopicCard.aco": "Ameisenalgorithmus",

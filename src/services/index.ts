@@ -35,6 +35,9 @@ export * from './debounce'
 export * from './Viewport'
 export { fetchNews } from './News'
 export { postCalculateLearningPathILS } from './LearningPath'
+export { postUserSettings } from './Theme/postUserSettings'
+export { DefaultThemeProvider as ThemeProvider } from './ThemeProvider/ThemeProvider'
+export { useThemeProvider } from './ThemeProvider/ThemeProvider.hooks'
 export {
   fetchStudentLpLeAlg,
   fetchTeacherLpLeAlg,
