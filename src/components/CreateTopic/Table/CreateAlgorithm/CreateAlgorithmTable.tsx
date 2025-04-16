@@ -1,7 +1,16 @@
-import { SelectChangeEvent } from '@mui/material'
 import { ReactNode, memo, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography } from '@common/components'
+import {
+  Box,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  SelectChangeEvent,
+  Typography
+} from '@common/components'
 import { SkeletonList } from '@components'
 import { RemoteTopics } from '@core'
 import { useCreateAlgorithmTable } from './CreateAlgorithmTable.hooks'

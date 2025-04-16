@@ -558,6 +558,35 @@ const mockDataServices: MockDataServices = {
       statusText: 'CREATED'
     })
   ),
+  postAddAllStudentsToTopics: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED'
+    })
+  ),
+  postAddAllStudentsToCourse: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED'
+    })
+  ),
+  deleteCourse: jest.fn(() =>
+    Promise.resolve({
+      message: 'Deletion successful!'
+    })
+  ),
+  deleteTopic: jest.fn(() =>
+    Promise.resolve({
+      message: 'Deletion successful!'
+    })
+  ),
+  deleteLearningElement: jest.fn(() =>
+    Promise.resolve({
+      message: 'Deletion successful!'
+    })
+  ),
   postUserSetting: jest.fn(() =>
     Promise.resolve({
       id: 2,

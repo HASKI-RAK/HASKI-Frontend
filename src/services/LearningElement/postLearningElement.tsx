@@ -31,7 +31,7 @@ export const postLearningElement = async ({
   topicId,
   outputJson
 }: PostLearningElementProps): Promise<LearningElement> => {
-  return fetchData<LearningElement>(`${getConfig().BACKEND}/v2/lms/topic/${topicId}/learningElement`, {
+  return fetchData<LearningElement>(`${getConfig().BACKEND}/lms/topic/${topicId}/learningElement`, {
     method: 'POST',
     credentials: 'include',
     headers: {
