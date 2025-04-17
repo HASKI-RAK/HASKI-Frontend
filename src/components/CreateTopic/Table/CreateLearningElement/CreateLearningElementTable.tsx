@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Box, Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
 import { SkeletonList } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
+import { Solution } from '../../Modal/CreateTopicModal/CreateTopicModal'
 import { useCreateLearningElementTable } from './CreateLearningElementTable.hooks'
 
 type CreateLearningElementTableProps = {
@@ -11,6 +12,8 @@ type CreateLearningElementTableProps = {
   selectedLearningElements: { [key: number]: RemoteLearningElement[] }
   selectAllLearningElementsChecked: boolean
   setSelectAllLearningElementsChecked: Dispatch<SetStateAction<boolean>>
+  selectedSolutions: { [key: number]: Solution[] }
+  onSolutionChange: (selectedSolutions: { [key: number]: Solution[] }) => void
   children?: ReactNode
 }
 
@@ -20,6 +23,8 @@ const CreateLearningElementTable = ({
   selectedLearningElements,
   selectAllLearningElementsChecked,
   setSelectAllLearningElementsChecked,
+  selectedSolutions,
+  onSolutionChange,
   children
 }: CreateLearningElementTableProps) => {
   // Hooks
@@ -28,7 +33,9 @@ const CreateLearningElementTable = ({
     selectedLearningElements,
     onLearningElementChange,
     selectedTopics,
-    setSelectAllLearningElementsChecked
+    setSelectAllLearningElementsChecked,
+    selectedSolutions,
+    onSolutionChange
   })
 
   // Return early if no topics

@@ -1,5 +1,9 @@
+import { Task } from '@mui/icons-material'
 import { memo } from 'react'
 import { NodeProps } from 'reactflow'
+import { IconButton, Typography } from '@common/components'
+import { useTheme } from '@common/hooks'
+import { AssignmentLate } from '@common/icons'
 import { LearningPathLearningElementNode, getNodeIcon } from '@components'
 import BasicNode from '../BasicNode/BasicNode'
 

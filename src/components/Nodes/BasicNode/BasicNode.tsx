@@ -1,10 +1,10 @@
-import { MouseEvent, ReactElement, ReactNode, memo, useContext, useState } from 'react'
+import { MouseEvent, ReactElement, ReactNode, memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { Box, Checkbox, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
-import { CheckBox, DeleteForever, Warning } from '@common/icons'
-import { DeleteEntityModal, LearningPathLearningElementNode, getNodeIcon } from '@components'
+import { CheckBox, DeleteForever, Feedback, Warning, Task } from '@common/icons'
+import { DeleteEntityModal, LearningPathLearningElementNode } from '@components'
 import { RoleContext, SnackbarContext, deleteLearningElement } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
@@ -25,9 +25,13 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const [learningElementId, setLearningElementId] = useState<number>(0)
   const [lmsLearningElementId, setLmsLearningElementId] = useState<number>(0)
   const [isHovered, setIsHovered] = useState(false)
+  //const [isFavorite, setIsFavorite] = useState(false) commented out until feature is implemented
+  const [solutionLmsId, setSolutionLmsId] = useState<number>(-1)
+  const [solutionActivityType, setSolutionActivityType] = useState<string>('resource')
 
   const clearLearningPathElement = useStore((state) => state.clearLearningPathElementCache)
   const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
+  const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
 
   const onMouseEnter = () => {
     setIsHovered(true)
@@ -143,6 +147,27 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
     return null
   }
 
+  /* placeholder for future favorite feature
+  const addToFavorites = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    setIsFavorite(!isFavorite)
+    event.stopPropagation()
+  }
+  */
+
+  const handleShowSolution = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    props.data.handleOpen()
+    props.data.handleSetUrl(getConfig().MOODLE + `/mod/${solutionActivityType}/view.php?id=${solutionLmsId}`)
+    props.data.handleSetLmsId(solutionLmsId)
+    event.stopPropagation()
+  }
+
+  useEffect(() => {
+    getLearningElementSolution(props.data.lmsId).then((solution) => {
+      setSolutionLmsId(solution.solution_lms_id)
+      setSolutionActivityType(solution.activity_type)
+    })
+  }, [getLearningElementSolution, setSolutionLmsId, setSolutionActivityType, id, props])
+
   return (
     <NodeWrapper
       id={`${id}-${props.data.lmsId}`}
@@ -177,9 +202,32 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
                 <DeleteForever fontSize={'medium'} />
               </IconButton>
             </Tooltip>
-            {props.children}
           </Grid>
         )}
+        {/* commented out until feature is implemented
+            <IconButton
+            onClick={addToFavorites}
+            data-testid={'favoriteButton'}
+            sx={{
+              marginLeft: '1rem',
+              color: theme.palette.secondary.contrastText,
+              backgroundColor: theme.palette.primary.main,
+              border: '1px solid grey'
+            }}>
+            {isFavorite ? <FavoriteIcon titleAccess="isFavorite" /> : <FavoriteBorderIcon titleAccess="notFavorite" />}
+          </IconButton>
+        */}
+        {solutionLmsId > 1 && (
+          <Tooltip title={t('tooltip.solution')}>
+            <IconButton
+              onClick={handleShowSolution}
+              data-testid={'showSolutionButton'}
+              sx={{ backgroundColor: theme.palette.primary.main, marginLeft: '0.5rem', border: '1px solid grey' }}>
+              <Task />
+            </IconButton>
+          </Tooltip>
+        )}
+        {props.children}
       </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper

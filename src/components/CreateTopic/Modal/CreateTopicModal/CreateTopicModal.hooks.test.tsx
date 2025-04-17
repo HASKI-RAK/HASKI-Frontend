@@ -80,7 +80,11 @@ describe('useCreateTopicModal', () => {
     const { result } = renderHook(() =>
       useCreateTopicModal({
         setSelectedLearningElements: jest.fn(),
-        setSelectedLearningElementsClassification: jest.fn()
+        setSelectedLearningElementsClassification: jest.fn(),
+        selectedSolutions: {},
+        selectedLearningElementSolution: {},
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn()
       })
     )
 
@@ -110,7 +114,11 @@ describe('useCreateTopicModal', () => {
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
-        setSelectedAlgorithms: jest.fn()
+        setSelectedLearningElementSolution: jest.fn(),
+        setSelectedAlgorithms: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn()
       })
     )
     expect(result.current).toHaveProperty('handleCreate')
@@ -133,7 +141,11 @@ describe('useCreateTopicModal', () => {
         setSelectedTopics: mockSetSelectedTopics,
         setSelectedLearningElements: mockSetSelectedLearningElements,
         setSelectedLearningElementsClassification: mockSetSelectedLearningElementsClassification,
-        setSelectedAlgorithms: jest.fn()
+        setSelectedLearningElementSolution: jest.fn(),
+        setSelectedAlgorithms: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn()
       })
     )
 
@@ -157,7 +169,11 @@ describe('useCreateTopicModal', () => {
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: mockSetSelectedLearningElements,
         setSelectedLearningElementsClassification: jest.fn(),
-        setSelectedAlgorithms: jest.fn()
+        setSelectedLearningElementSolution: jest.fn(),
+        setSelectedAlgorithms: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn()
       })
     )
     const learningElements = {
@@ -180,7 +196,11 @@ describe('useCreateTopicModal', () => {
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: mockSetSelectedLearningElementsClassification,
-        setSelectedAlgorithms: jest.fn()
+        setSelectedLearningElementSolution: jest.fn(),
+        setSelectedAlgorithms: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn()
       })
     )
     const learningElementClassifications = {
@@ -203,7 +223,11 @@ describe('useCreateTopicModal', () => {
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
-        setSelectedAlgorithms: mockSetSelectedAlgorithms
+        setSelectedLearningElementSolution: jest.fn(),
+        setSelectedAlgorithms: mockSetSelectedAlgorithms,
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn()
       })
     )
     const algorithms = { 1: { topicName: 'Topic 1', algorithmShortName: 'algo1' } }
@@ -224,7 +248,11 @@ describe('useCreateTopicModal', () => {
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
         setSelectedAlgorithms: jest.fn(),
-        setSuccessfullyCreatedTopicsCount: jest.fn()
+        setSuccessfullyCreatedTopicsCount: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn()
       })
     )
 
@@ -244,7 +272,11 @@ describe('useCreateTopicModal', () => {
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
         setSelectedAlgorithms: jest.fn(),
-        setSuccessfullyCreatedTopicsCount: jest.fn()
+        setSuccessfullyCreatedTopicsCount: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn()
       })
     )
 
@@ -265,11 +297,15 @@ describe('useCreateTopicModal', () => {
     const { result } = renderHook(() =>
       useCreateTopicModal({
         setCreateTopicIsSending: mockSetCreateTopicIsSending,
+        setSuccessfullyCreatedTopicsCount: jest.fn(),
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn(),
         setSelectedAlgorithms: jest.fn(),
-        setSuccessfullyCreatedTopicsCount: jest.fn()
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn()
       })
     )
     mockServices.fetchUser.mockImplementationOnce(() => {

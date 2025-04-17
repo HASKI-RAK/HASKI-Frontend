@@ -1,24 +1,37 @@
 import log from 'loglevel'
 import { Dispatch, SetStateAction, useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CreateAlgorithmTableNameProps, RemoteLearningElementWithClassification, handleError } from '@components'
+import {
+  CreateAlgorithmTableNameProps,
+  RemoteLearningElementWithClassification,
+  RemoteLearningElementWithSolution,
+  Solution,
+  handleError
+} from '@components'
 import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {
   SnackbarContext,
   postAddAllStudentsToTopics,
   postCalculateLearningPathForAllStudents,
   postLearningElement,
+  postLearningElementSolution,
   postLearningPathAlgorithm,
   postTopic
 } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 export type useCreateTopicModalProps = {
-  setCreateTopicIsSending?: Dispatch<SetStateAction<boolean>>
-  setSelectedTopics?: Dispatch<SetStateAction<RemoteTopics[]>>
-  setSelectedLearningElements: Dispatch<SetStateAction<{ [p: number]: RemoteLearningElement[] }>>
-  setSelectedLearningElementsClassification: Dispatch<
-    SetStateAction<{ [p: number]: RemoteLearningElementWithClassification[] }>
+  setCreateTopicIsSending?: React.Dispatch<React.SetStateAction<boolean>>
+  setSelectedTopics?: React.Dispatch<React.SetStateAction<RemoteTopics[]>>
+  setSelectedLearningElements: React.Dispatch<React.SetStateAction<{ [p: number]: RemoteLearningElement[] }>>
+  selectedLearningElementSolution: { [topicId: number]: RemoteLearningElementWithSolution[] }
+  setSelectedLearningElementSolution: React.Dispatch<
+    React.SetStateAction<{ [topicId: number]: RemoteLearningElementWithSolution[] }>
+  >
+  selectedSolutions: { [topicId: number]: Solution[] }
+  setSelectedSolutions: React.Dispatch<React.SetStateAction<{ [topicId: number]: Solution[] }>>
+  setSelectedLearningElementsClassification: React.Dispatch<
+    React.SetStateAction<{ [p: number]: RemoteLearningElementWithClassification[] }>
   >
   setSelectedAlgorithms?: Dispatch<SetStateAction<{ [p: number]: CreateAlgorithmTableNameProps }>>
   setSuccessfullyCreatedTopicsCount?: Dispatch<SetStateAction<number>>
@@ -33,6 +46,9 @@ export const useCreateTopicModal = ({
   },
   setSelectedLearningElements,
   setSelectedLearningElementsClassification,
+  selectedLearningElementSolution,
+  setSelectedLearningElementSolution,
+  setSelectedSolutions,
   setSelectedAlgorithms = () => {
     return {}
   },
@@ -105,6 +121,13 @@ export const useCreateTopicModal = ({
     return postCalculateLearningPathForAllStudents({ userId, courseId, topicId, outputJson })
   }
 
+  const handleCreateSolutions = (learningElementLmsId: number, solutionLmsId: number, activityType: string) => {
+    const outputJson = JSON.stringify({
+      solution_lms_id: solutionLmsId,
+      activity_type: activityType
+    })
+    return postLearningElementSolution({ learningElementLmsId, outputJson })
+  }
   const handleCreateLearningElementsInExistingTopic = useCallback(
     async (
       topicLmsId: number,
@@ -155,56 +178,96 @@ export const useCreateTopicModal = ({
       selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] },
       algorithmShortName: string,
       courseId?: string
-    ) => {
-      if (!courseId) return
+    ): Promise<void> => {
+      if (!courseId) return Promise.resolve()
       return getUser()
         .then((user) => {
-          return handleCreateTopics(topicName, lmsCourseId, courseId, user)
-            .then((topic) => {
-              const topicLmsId = topic.lms_id
-              const topicId = topic.id
-              setCreateTopicIsSending(true)
+          return handleCreateTopics(topicName, lmsCourseId, courseId, user).then((topic) => {
+            const topicLmsId = topic.lms_id
+            const topicId = topic.id
+            // Filter out disabled learning elements, that are used as solutions
+            const filterdLearningElements = selectedLearningElementsClassification[topicLmsId].filter(
+              (element) => !element.disabled
+            )
+            setCreateTopicIsSending(true)
 
-              return Promise.all(
-                selectedLearningElementsClassification[topicLmsId].map((element) =>
-                  handleCreateLearningElements(
-                    element.lms_learning_element_name,
-                    element.lms_activity_type,
-                    element.classification,
-                    element.lms_id,
-                    topicId,
-                    user
+            // Step 1: Create learning elements
+            return Promise.all(
+              filterdLearningElements.map((element) =>
+                handleCreateLearningElements(
+                  element.lms_learning_element_name,
+                  element.lms_activity_type,
+                  element.classification,
+                  element.lms_id,
+                  topic.id,
+                  user
+                ).catch((error) => {
+                  addSnackbar({
+                    message: t('error.postLearningElement') + ' ' + element.lms_learning_element_name,
+                    severity: 'error',
+                    autoHideDuration: 5000
+                  })
+                  log.error(t('error.postLearningElement') + '' + error + '' + element.lms_learning_element_name)
+                  throw error
+                })
+              )
+            )
+              .then(() => {
+                // Step 2: Create solutions for learning elements
+                const elementsWithSolution = Object.values(selectedLearningElementSolution)
+                  .flat()
+                  .filter((element) => element.solutionLmsId && element.solutionLmsId > 0 && element.solutionLmsType)
+
+                return Promise.all(
+                  elementsWithSolution.map((solution) =>
+                    handleCreateSolutions(
+                      solution.learningElementLmsId,
+                      solution.solutionLmsId,
+                      solution.solutionLmsType ?? 'resource'
+                    ).catch((error) => {
+                      addSnackbar({
+                        message: t('error.postLearningElementSolution') + ' ' + solution.learningElementLmsId,
+                        severity: 'error',
+                        autoHideDuration: 5000
+                      })
+                      log.error(
+                        t('error.postLearningElementSolution') + ' ' + error + ' ' + solution.learningElementLmsId
+                      )
+                      throw error
+                    })
                   )
                 )
-              ).then(() => ({ topicId, user }))
-            })
-            .then(({ topicId, user }) => {
-              return handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topicId, algorithmShortName)
-                .then(() => {
-                  return handleAddAllStudentsToTopics(courseId)
-                })
-                .then(() => ({ topicId, user }))
-            })
-            .then(({ topicId, user }) => {
-              return handleCalculateLearningPaths(
-                user.settings.user_id,
-                user.role,
-                user.university,
-                courseId,
-                topicId
-              ).then(() => {
-                addSnackbar({
-                  message: t('appGlobal.dataSendSuccessful'),
-                  severity: 'success',
-                  autoHideDuration: 5000
-                })
-                log.info(t('appGlobal.dataSendSuccessful'))
-                setSuccessfullyCreatedTopicsCount((prevCount) => prevCount + 1)
               })
-            })
-            .catch((error) => {
-              handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
-            })
+              .then(() => {
+                // Step 3: Create algorithms and add students to topics
+                return handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topic.id, algorithmShortName)
+                  .then(() => {
+                    return handleAddAllStudentsToTopics(courseId)
+                  })
+                  .then(() => ({ topicId, user }))
+              })
+              .then(({ topicId, user }) => {
+                // Step 4: Calculate learning paths
+                return handleCalculateLearningPaths(
+                  user.settings.user_id,
+                  user.role,
+                  user.university,
+                  courseId,
+                  topicId
+                ).then(() => {
+                  addSnackbar({
+                    message: t('appGlobal.dataSendSuccessful'),
+                    severity: 'success',
+                    autoHideDuration: 5000
+                  })
+                  log.info(t('appGlobal.dataSendSuccessful'))
+                  setSuccessfullyCreatedTopicsCount((prevCount) => prevCount + 1)
+                })
+              })
+              .catch((error) => {
+                handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
+              })
+          })
         })
         .catch((error) => {
           handleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error, 5000)
@@ -237,6 +300,12 @@ export const useCreateTopicModal = ({
       setSelectedAlgorithms((algorithms) =>
         Object.fromEntries(Object.entries(algorithms).filter(([key]) => topicIds.includes(Number(key))))
       )
+      setSelectedSolutions((solutions) =>
+        Object.fromEntries(Object.entries(solutions).filter(([key]) => topicIds.includes(Number(key))))
+      )
+      setSelectedLearningElementSolution((learningElementSolution) =>
+        Object.fromEntries(Object.entries(learningElementSolution).filter(([key]) => topicIds.includes(Number(key))))
+      )
     },
     [setSelectedTopics, setSelectedLearningElements, setSelectedLearningElementsClassification, setSelectedAlgorithms]
   )
@@ -248,12 +317,21 @@ export const useCreateTopicModal = ({
     [setSelectedLearningElements]
   )
 
-  const handleLearningElementClassification = useCallback(
-    (learningElementClassifications: { [key: number]: RemoteLearningElementWithClassification[] }) => {
-      setSelectedLearningElementsClassification(learningElementClassifications)
-    },
-    [setSelectedLearningElementsClassification]
-  )
+  const handleSolutionsChange = (solutions: { [topicId: number]: Solution[] }) => {
+    setSelectedSolutions(solutions)
+  }
+
+  const handleLearningElementSolutionChange = (learningElementSolution: {
+    [topicId: number]: RemoteLearningElementWithSolution[]
+  }) => {
+    setSelectedLearningElementSolution(learningElementSolution)
+  }
+
+  const handleLearningElementClassification = (learningElementClassifications: {
+    [key: number]: RemoteLearningElementWithClassification[]
+  }) => {
+    setSelectedLearningElementsClassification(learningElementClassifications)
+  }
 
   const handleAlgorithmChange = useCallback(
     (algorithms: { [key: number]: CreateAlgorithmTableNameProps }) => {
@@ -271,6 +349,8 @@ export const useCreateTopicModal = ({
       handleTopicChange,
       handleLearningElementChange,
       handleLearningElementClassification,
+      handleLearningElementSolutionChange,
+      handleSolutionsChange,
       handleAlgorithmChange
     }),
     [
@@ -281,6 +361,8 @@ export const useCreateTopicModal = ({
       handleTopicChange,
       handleLearningElementChange,
       handleLearningElementClassification,
+      handleLearningElementSolutionChange,
+      handleSolutionsChange,
       handleAlgorithmChange
     ]
   )

@@ -9,6 +9,9 @@ import { LearningPathElementSlice, createLearningPathElementSlice } from '../Sli
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
 } from '../Slices/LearningPathElementSpecificStatusSlice'
+import LearningElementSolutionSlice, {
+  createLearningElementSolutionSlice
+} from '../Slices/LearningElementSolutionSlice'
 import {
   LearningPathElementStatusSlice,
   createLearningPathElementStatusSlice
@@ -27,6 +30,7 @@ export type StoreState = LearningPathElementSlice &
   LearningPathTopicSlice &
   LearningPathElementSpecificStatusSlice &
   RemoteTopicsSlice &
+  LearningElementSolutionSlice &
   TeacherLpLeAlgorithmSlice &
   StudentLpLeAlgorithmSlice
 export type PersistedStoreState = UserSlice &
@@ -43,6 +47,8 @@ export const useStore = create<StoreState>()((...a) => ({
   ...createLearningPathTopicSlice(...a),
   ...createCourseSlice(...a),
   ...createCoursesSlice(...a),
+  ...createLearningPathElementSpecificStatusSlice(...a),
+  ...createLearningElementSolutionSlice(...a),
   ...createLearningPathElementSpecificStatusSlice(...a),
   ...createRemoteTopicsSlice(...a),
   ...createTeacherLpLeAlgorithmSlice(...a),

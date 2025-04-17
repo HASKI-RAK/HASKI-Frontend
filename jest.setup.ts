@@ -1,3 +1,4 @@
+import { postLearningElementSolution } from '@services'
 import { resetAllSlices } from '@store'
 
 /**
@@ -519,6 +520,14 @@ const mockDataServices: MockDataServices = {
       university: 'HS-KE'
     })
   ),
+  postLearningElementSolution: jest.fn(() =>
+    Promise.resolve({
+      id: 1,
+      learning_element_lms_id: 1,
+      solution_lms_id: 4,
+      activity_type: 'activity'
+    })
+  ),
   fetchStudentLpLeAlg: jest.fn(() =>
     Promise.resolve({
       algorithm_id: 1,
@@ -673,6 +682,14 @@ const mockDataServices: MockDataServices = {
       pswd: null,
       theme: 'HaskiTheme',
       user_id: '2'
+    })
+  ),
+  fetchLearningElementSolution: jest.fn(() =>
+    Promise.resolve({
+      id: 1,
+      learning_element_lms_id: 1,
+      solution_lms_id: 4,
+      activity_type: 'activity'
     })
   )
 }

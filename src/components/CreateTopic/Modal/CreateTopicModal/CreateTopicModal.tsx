@@ -14,6 +14,7 @@ import {
 import { LearningPathTopic, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+import CreateLearningelementSolutionsStep from '../CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
 import { useCreateTopicModal } from './CreateTopicModal.hooks'
 
 export type CreateTopicModalProps = {
@@ -23,6 +24,19 @@ export type CreateTopicModalProps = {
 
 export type RemoteLearningElementWithClassification = RemoteLearningElement & {
   classification: string
+  disabled?: boolean
+}
+
+export type RemoteLearningElementWithSolution = {
+  learningElementLmsId: number
+  learningElementName: string
+  solutionLmsId: number
+  solutionLmsType?: string
+}
+
+export type Solution = {
+  solutionLmsId: number
+  solutionLmsName: string
 }
 
 const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopicModal }: CreateTopicModalProps) => {
@@ -38,6 +52,10 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
   const [selectedLearningElements, setSelectedLearningElements] = useState<{
     [key: number]: RemoteLearningElement[]
   }>({})
+  const [selectedSolutions, setSelectedSolutions] = useState<{ [key: number]: Solution[] }>({})
+  const [selectedLearningElementSolution, setSelectedLearningElementSolution] = useState<{
+    [topicId: number]: RemoteLearningElementWithSolution[]
+  }>({})
   const [selectedLearningElementsClassification, setSelectedLearningElementsClassification] = useState<{
     [key: number]: RemoteLearningElementWithClassification[]
   }>({})
@@ -48,12 +66,18 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
     handleCreate,
     handleTopicChange,
     handleLearningElementChange,
+    handleLearningElementSolutionChange,
     handleLearningElementClassification,
+    handleSolutionsChange,
     handleAlgorithmChange
   } = useCreateTopicModal({
     setCreateTopicIsSending,
     setSelectedTopics,
     setSelectedLearningElements,
+    selectedLearningElementSolution,
+    setSelectedLearningElementSolution,
+    selectedSolutions,
+    setSelectedSolutions,
     setSelectedLearningElementsClassification,
     setSelectedAlgorithms,
     setSuccessfullyCreatedTopicsCount
@@ -69,6 +93,7 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
     t('appGlobal.topics'),
     t('appGlobal.learningElements'),
     t('appGlobal.classifications'),
+    t('appGlobal.solutions'),
     t('appGlobal.algorithms')
   ]
 
@@ -172,6 +197,8 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
             <CreateLearningElementsStep
               selectedTopics={selectedTopics}
               selectedLearningElements={selectedLearningElements}
+              selectedSolutions={selectedSolutions}
+              onSolutionChange={handleSolutionsChange}
               handleLearningElementChange={handleLearningElementChange}
               selectAllLearningElementsChecked={selectAllLearningElementsChecked}
               setSelectAllLearningElementsChecked={setSelectAllLearningElementsChecked}
@@ -185,12 +212,25 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
               selectedLearningElements={selectedLearningElements}
               selectedLearningElementsClassification={selectedLearningElementsClassification}
               handleLearningElementClassification={handleLearningElementClassification}
+              selectedSolutions={selectedSolutions}
+              onSolutionChange={handleSolutionsChange}
               onNext={handleNext}
               onBack={handleBack}
               nextButtonText={t('appGlobal.next')}
             />
           )}
           {activeStep === 3 && (
+            <CreateLearningelementSolutionsStep
+              selectedTopics={selectedTopics}
+              LearningElementsClassification={selectedLearningElementsClassification}
+              selectedSolutions={selectedSolutions}
+              learningElementsWithSolutions={selectedLearningElementSolution}
+              onLearningElementSolutionChange={handleLearningElementSolutionChange}
+              onNext={handleNext}
+              onBack={handleBack}
+            />
+          )}
+          {activeStep === 4 && (
             <CreateAlgorithmsStep
               selectedTopics={selectedTopics}
               selectedAlgorithms={selectedAlgorithms}

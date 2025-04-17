@@ -2,7 +2,13 @@ import { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Button, Grid } from '@common/components'
-import { CreateLearningElementModal, RemoteLearningElementWithClassification, handleError } from '@components'
+import {
+  CreateLearningElementModal,
+  RemoteLearningElementWithClassification,
+  RemoteLearningElementWithSolution,
+  Solution,
+  handleError
+} from '@components'
 import { RemoteLearningElement, Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -18,6 +24,12 @@ const CreateLearningElement = () => {
   }>({})
   const [selectedLearningElementsClassification, setSelectedLearningElementsClassification] = useState<{
     [key: number]: RemoteLearningElementWithClassification[]
+  }>({})
+  const [selectedLearningElementSolution, setSelectedLearningElementSolution] = useState<{
+    [key: number]: RemoteLearningElementWithSolution[]
+  }>({})
+  const [selectedSolutions, setSelectedSolutions] = useState<{
+    [key: number]: Solution[]
   }>({})
   const [activeStep, setActiveStep] = useState<number>(0)
 
@@ -70,6 +82,10 @@ const CreateLearningElement = () => {
         setSelectedLearningElements={setSelectedLearningElements}
         selectedLearningElementsClassification={selectedLearningElementsClassification}
         setSelectedLearningElementsClassification={setSelectedLearningElementsClassification}
+        setSelectedLearningElementSolution={setSelectedLearningElementSolution}
+        selectedLearningElementSolution={selectedLearningElementSolution}
+        setSelectedSolutions={setSelectedSolutions}
+        selectedSolutions={selectedSolutions}
         setActiveStep={setActiveStep}
         activeStep={activeStep}
       />
