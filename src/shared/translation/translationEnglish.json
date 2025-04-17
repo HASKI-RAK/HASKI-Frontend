@@ -164,9 +164,9 @@
     }
   ],
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Set learning element classification",
-  "components.CreateLearningElementSolutionTable.setLearningElementSolution": "Set learning element solution",
-  "components.CreateLearningElementSolutionTable.noSolution": "Select additional solution",
   "components.CreateLearningElementModal.createLearningElements": "Create Learning Elements",
+  "components.CreateLearningElementSolutionTable.noSolution": "Select additional solution",
+  "components.CreateLearningElementSolutionTable.setLearningElementSolution": "Set learning element solution",
   "components.CreateLearningElementTable.selectAllToggle": "Select all",
   "components.CreateLearningElementTable.selectLearningElements": "Select learning elements",
   "components.CreateTopicModal.createTopics": "Create Topics",

@@ -216,7 +216,6 @@ describe('CreateTopicModal', () => {
       fireEvent.click(getByText('appGlobal.next'))
     })
 
-
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[0]
       fireEvent.mouseDown(button)

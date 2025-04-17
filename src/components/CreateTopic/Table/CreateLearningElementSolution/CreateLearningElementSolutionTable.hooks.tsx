@@ -1,5 +1,9 @@
 import { useCallback, useMemo } from 'react'
-import { RemoteLearningElementWithSolution, RemoteLearningElementWithClassification, Solution } from '../../Modal/CreateTopicModal/CreateTopicModal'
+import {
+  RemoteLearningElementWithClassification,
+  RemoteLearningElementWithSolution,
+  Solution
+} from '../../Modal/CreateTopicModal/CreateTopicModal'
 
 type useCreateLearningElementSolutionTable = {
   learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }
@@ -12,11 +16,13 @@ export const useCreateLearningElementSolutionTable = ({
   learningElementsWithSolutions,
   selectedSolutions,
   selectedLearningElementsClassification,
-  onLearningElementSolutionChange,
+  onLearningElementSolutionChange
 }: useCreateLearningElementSolutionTable) => {
   const handleSolutionChange = useCallback(
     (topicId: number, elementId: number, solutionLmsId: number) => {
-      const solutionLmsType = selectedLearningElementsClassification[topicId]?.find((element) => element.lms_id === elementId)?.lms_activity_type
+      const solutionLmsType = selectedLearningElementsClassification[topicId]?.find(
+        (element) => element.lms_id === elementId
+      )?.lms_activity_type
       const updatedLeElSolutions = {
         ...learningElementsWithSolutions,
         [topicId]: learningElementsWithSolutions[topicId].map((element) =>

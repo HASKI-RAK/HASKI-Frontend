@@ -38,7 +38,7 @@ export const useCreateLearningElementTable = ({
     }
 
     onLearningElementChange(updatedSelectedElements)
-    
+
     updateSolutions(topicId, checked, element)
   }
 

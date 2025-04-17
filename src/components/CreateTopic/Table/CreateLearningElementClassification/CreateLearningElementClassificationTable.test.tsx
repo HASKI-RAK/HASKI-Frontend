@@ -209,13 +209,13 @@ describe('CreateLearningElementClassificationTable', () => {
 
     expect(screen.getByTestId('child')).toBeInTheDocument()
   })
-  
+
   it('renders the checkbox with correct checked state and calls handleSolutionchange on change', () => {
     const mockOnSolutionChange = jest.fn()
     const mockSelectedSolutions = {
       1: [{ solutionLmsId: 101, solutionLmsName: 'Solution 1' }]
     }
-  
+
     const { getAllByRole } = render(
       <MemoryRouter>
         <CreateLearningElementClassificationTable
@@ -228,12 +228,12 @@ describe('CreateLearningElementClassificationTable', () => {
         />
       </MemoryRouter>
     )
-  
+
     const checkbox = getAllByRole('checkbox')[1]
     expect(checkbox).toBeChecked()
-  
+
     fireEvent.click(checkbox)
-  
+
     expect(mockOnSolutionChange).toHaveBeenCalledWith({
       1: []
     })

@@ -27,11 +27,20 @@ export const useCreateLearningElementClassificationTable = ({
     },
     [LearningElementsClassification, onLearningElementChange]
   )
-  const handleSolutionchange = (topicId: number, elementLmsId: number, lmsName: string, isChecked: boolean, activityType: string) => {
+  const handleSolutionchange = (
+    topicId: number,
+    elementLmsId: number,
+    lmsName: string,
+    isChecked: boolean,
+    activityType: string
+  ) => {
     const updatedSolutions = {
       ...selectedSolutions,
       [topicId]: isChecked
-        ? [...(selectedSolutions[topicId] || []), { solutionLmsId: elementLmsId, solutionLmsName: lmsName,  solutionLmsType: activityType }]
+        ? [
+            ...(selectedSolutions[topicId] || []),
+            { solutionLmsId: elementLmsId, solutionLmsName: lmsName, solutionLmsType: activityType }
+          ]
         : (selectedSolutions[topicId] || []).filter((solution) => solution.solutionLmsId !== elementLmsId)
     }
     const updatedClassification = {

@@ -164,9 +164,9 @@
     }
   ],
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Klassifikation der Lernelemente festlegen",
+  "components.CreateLearningElementModal.createLearningElements": "Lernelemente erstellen",
   "components.CreateLearningElementSolutionTable.noSolution": "Zusatzlösung zuweisen",
   "components.CreateLearningElementSolutionTable.setLearningElementSolution": "Lernelementen Lösungen zuweisen",
-  "components.CreateLearningElementModal.createLearningElements": "Lernelemente erstellen",
   "components.CreateLearningElementTable.selectAllToggle": "Alle auswählen",
   "components.CreateLearningElementTable.selectLearningElements": "Lernelemente auswählen",
   "components.CreateTopicModal.createTopics": "Themenbereiche erstellen",

@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next'
 import {
   CreateAlgorithmTableNameProps,
   RemoteLearningElementWithClassification,
-  handleError,
   RemoteLearningElementWithSolution,
-  Solution
+  Solution,
+  handleError
 } from '@components'
 import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {
@@ -32,7 +32,7 @@ export type useCreateTopicModalProps = {
   setSelectedSolutions: React.Dispatch<React.SetStateAction<{ [topicId: number]: Solution[] }>>
   setSelectedLearningElementsClassification: React.Dispatch<
     React.SetStateAction<{ [p: number]: RemoteLearningElementWithClassification[] }>
-    >
+  >
   setSelectedAlgorithms?: Dispatch<SetStateAction<{ [p: number]: CreateAlgorithmTableNameProps }>>
   setSuccessfullyCreatedTopicsCount?: Dispatch<SetStateAction<number>>
 }

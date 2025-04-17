@@ -54,25 +54,24 @@ const CreateLearningElementClassificationTable = memo(
         const topicIdInt = parseInt(topicId)
         const existingLeElSolutions = learningElementsWithSolutions[topicIdInt] || []
 
-        const newSolutions = selectedLearningElementsClassification[topicIdInt].reduce<RemoteLearningElementWithSolution[]>(
-          (acc, element) => {
-            const existingElement = existingLeElSolutions.find((e) => e.learningElementLmsId === element.lms_id)
-            if (!existingElement && !element.disabled) {
-              return [
-                ...acc,
-                {
-                  learningElementLmsId: element.lms_id,
-                  learningElementName: element.lms_learning_element_name,
-                  solutionLmsId: 0
-                }
-              ]
-            } else if (existingElement && element.disabled) {
-              return acc.filter((e) => e.learningElementLmsId !== element.lms_id)
-            }
-            return acc
-          },
-          existingLeElSolutions
-        )
+        const newSolutions = selectedLearningElementsClassification[topicIdInt].reduce<
+          RemoteLearningElementWithSolution[]
+        >((acc, element) => {
+          const existingElement = existingLeElSolutions.find((e) => e.learningElementLmsId === element.lms_id)
+          if (!existingElement && !element.disabled) {
+            return [
+              ...acc,
+              {
+                learningElementLmsId: element.lms_id,
+                learningElementName: element.lms_learning_element_name,
+                solutionLmsId: 0
+              }
+            ]
+          } else if (existingElement && element.disabled) {
+            return acc.filter((e) => e.learningElementLmsId !== element.lms_id)
+          }
+          return acc
+        }, existingLeElSolutions)
 
         const resetLeElsWithSolution = resetUnavailableSolutions(newSolutions, topicIdInt)
 

@@ -14,8 +14,8 @@ import {
 import { LearningPathTopic, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import { useCreateTopicModal } from './CreateTopicModal.hooks'
 import CreateLearningelementSolutionsStep from '../CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
+import { useCreateTopicModal } from './CreateTopicModal.hooks'
 
 export type CreateTopicModalProps = {
   openCreateTopicModal?: boolean

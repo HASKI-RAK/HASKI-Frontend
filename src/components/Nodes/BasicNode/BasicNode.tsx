@@ -1,4 +1,4 @@
-import { MouseEvent, ReactElement, ReactNode,  memo, useContext, useEffect, useState } from 'react'
+import { MouseEvent, ReactElement, ReactNode, memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
