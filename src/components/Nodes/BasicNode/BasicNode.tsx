@@ -107,34 +107,34 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}>
       <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '200ms' }}>
-        {isCourseCreatorRole && (
+        
           <Grid
             container
             direction="row"
             justifyContent="flex-end"
             alignItems="center"
             sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
-            <Tooltip arrow title={t('components.BasicNode.deleteTooltip')} placement="top">
-              <IconButton
-                data-testid={'delete-learning-element-button'}
-                onClick={handleOpenDeleteLearningElementModal}
-                className="learning-element-delete-icon"
-                sx={{
-                  marginLeft: '1rem',
-                  color: 'white',
-                  backgroundColor: theme.palette.error.dark,
-                  border: '1px solid grey',
-                  zIndex: 10,
-                  '&:hover': {
-                    backgroundColor: theme.palette.error.light
-                  }
-                }}>
-                <DeleteForever fontSize={'medium'} />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-        )}
-        {/* commented out until feature is implemented
+            {isCourseCreatorRole && (
+              <Tooltip arrow title={t('components.BasicNode.deleteTooltip')} placement="top">
+                <IconButton
+                  data-testid={'delete-learning-element-button'}
+                  onClick={handleOpenDeleteLearningElementModal}
+                  className="learning-element-delete-icon"
+                  sx={{
+                    marginLeft: '1rem',
+                    color: 'white',
+                    backgroundColor: theme.palette.error.dark,
+                    border: '1px solid grey',
+                    zIndex: 10,
+                    '&:hover': {
+                      backgroundColor: theme.palette.error.light
+                    }
+                  }}>
+                  <DeleteForever fontSize={'medium'} />
+                </IconButton>
+              </Tooltip>
+            )}
+            {/* commented out until feature is implemented
             <IconButton
             onClick={addToFavorites}
             data-testid={'favoriteButton'}
@@ -158,6 +158,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
           </Tooltip>
         )}
         {props.children}
+          </Grid>
       </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
