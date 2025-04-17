@@ -9,6 +9,12 @@ import { RoleContext, SnackbarContext, deleteLearningElement } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
 
+/**
+ * @prop children - The icon of the node.
+ * @prop {@link NodeProps} - The props of the node.
+ * @interface
+ */
+
 type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
   icon?: ReactElement
   children?: ReactNode
@@ -177,14 +183,13 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}>
       <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '200ms' }}>
-        
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="center"
-            sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
-            {/* commented out until feature is implemented
+        <Grid
+          container
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="center"
+          sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
+          {/* commented out until feature is implemented
             <IconButton
             onClick={addToFavorites}
             data-testid={'favoriteButton'}
@@ -196,15 +201,9 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
             }}>
             {isFavorite ? <FavoriteIcon titleAccess="isFavorite" /> : <FavoriteBorderIcon titleAccess="notFavorite" />}
           </IconButton>
-        */}
-        {solutionLmsId > 1 && (
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="center"
-            sx={{ position: 'absolute', top: '-3.25rem', left: '-3.4rem' }}>
-            <Tooltip title={t('tooltip.solution')}>
+          */}
+          {solutionLmsId > 1 && (
+            <Tooltip title={t('components.BasicNode.solutionTooltip')}>
               <IconButton
                 onClick={handleShowSolution}
                 data-testid={'showSolutionButton'}
@@ -212,30 +211,29 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
                 <Task />
               </IconButton>
             </Tooltip>
-          </Grid>
-        )}
-        {props.children}
-        {isCourseCreatorRole && (
-              <Tooltip arrow title={t('components.BasicNode.deleteTooltip')} placement="top">
-                <IconButton
-                  data-testid={'delete-learning-element-button'}
-                  onClick={handleOpenDeleteLearningElementModal}
-                  className="learning-element-delete-icon"
-                  sx={{
-                    marginLeft: '1rem',
-                    color: 'white',
-                    backgroundColor: theme.palette.error.dark,
-                    border: '1px solid grey',
-                    zIndex: 10,
-                    '&:hover': {
-                      backgroundColor: theme.palette.error.light
-                    }
-                  }}>
-                  <DeleteForever fontSize={'medium'} />
-                </IconButton>
-              </Tooltip>
-            )}
-          </Grid>
+          )}
+          {props.children}
+          {isCourseCreatorRole && (
+            <Tooltip arrow title={t('components.BasicNode.deleteTooltip')} placement="top">
+              <IconButton
+                data-testid={'delete-learning-element-button'}
+                onClick={handleOpenDeleteLearningElementModal}
+                className="learning-element-delete-icon"
+                sx={{
+                  marginLeft: '1rem',
+                  color: 'white',
+                  backgroundColor: theme.palette.error.dark,
+                  border: '1px solid grey',
+                  zIndex: 10,
+                  '&:hover': {
+                    backgroundColor: theme.palette.error.light
+                  }
+                }}>
+                <DeleteForever fontSize={'medium'} />
+              </IconButton>
+            </Tooltip>
+          )}
+        </Grid>
       </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
