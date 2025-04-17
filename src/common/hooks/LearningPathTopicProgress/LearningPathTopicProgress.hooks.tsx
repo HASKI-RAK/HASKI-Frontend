@@ -6,12 +6,10 @@ import { LearningPathElementStatus, LearningPathLearningElement, Topic, User } f
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
-// Type
 type LearningPathTopicHookParams = {
   courseId?: string
 }
 
-// Type
 type LearningPathTopicProgressHookReturn = {
   topicProgress: number[][]
   isLoading: boolean
@@ -27,34 +25,27 @@ type LearningPathTopicProgressHookReturn = {
 export const useLearningPathTopicProgress = (
   params?: LearningPathTopicHookParams
 ): LearningPathTopicProgressHookReturn => {
-  // Default values
   const { courseId = undefined } = params ?? {}
 
-  // States
   const [topicProgress, setTopicProgress] = useState<number[][]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [topics, setTopics] = useState<Topic[]>([])
 
-  // Hooks
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  // Contexts
   const { isAuth } = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
 
-  // Fetches
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
 
-  // Reload store on cache changes
   const learningPathTopicCache = useStore((state) => state._cache_learningPathTopic_record)
   const learningPathElementCache = useStore((state) => state._cache_learningPathElement_record)
   const learningPathLearningElementStatusCache = usePersistedStore((state) => state._learningPathElementStatus)
 
-  // Function
   const getTopicProgress = useCallback(
     (
       learningPathElementStatusData: LearningPathElementStatus[],

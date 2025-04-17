@@ -11,7 +11,7 @@ type CreateLearningElementsStepProps = {
   selectAllLearningElementsChecked: boolean
   setSelectAllLearningElementsChecked: Dispatch<SetStateAction<boolean>>
   onNext: () => void
-  onBack: () => void
+  onBack?: () => void
 }
 
 const CreateLearningElementsStep = ({
@@ -35,12 +35,19 @@ const CreateLearningElementsStep = ({
         setSelectAllLearningElementsChecked={setSelectAllLearningElementsChecked}>
         <Box sx={{ padding: '1rem', width: '95%' }}>
           <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
-            <Button variant="contained" color="primary" onClick={onBack} sx={{ ml: 1 }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={onBack}
+              disabled={!onBack}
+              sx={{ ml: 1 }}
+              id={'create-learning-element-step-back-button'}>
               {t('appGlobal.back')}
             </Button>
             <Button
               variant="contained"
               color="primary"
+              id={'create-learning-element-step-next-button'}
               disabled={!selectedTopics.every((topic) => selectedLearningElements[topic.topic_lms_id]?.length > 0)}
               onClick={onNext}
               sx={{ mr: -2 }}>

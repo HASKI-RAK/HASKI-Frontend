@@ -3,9 +3,16 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
 import { Grid, Skeleton } from '@common/components'
-import { IFrameModal, LabeledSwitch, ResponsiveMiniMap, handleError, nodeTypes } from '@components'
+import {
+  CreateLearningElement,
+  IFrameModal,
+  LabeledSwitch,
+  ResponsiveMiniMap,
+  handleError,
+  nodeTypes
+} from '@components'
 import { LearningPathElementStatus, User } from '@core'
-import { AuthContext, SnackbarContext } from '@services'
+import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
 
@@ -32,6 +39,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const { isAuth } = useContext(AuthContext)
   const { addSnackbar } = useContext(SnackbarContext)
   const { fitView } = useReactFlow()
+  const { isCourseCreatorRole } = useContext(RoleContext)
 
   const { courseId, topicId } = useParams()
   const getUser = usePersistedStore((state) => state.getUser)
@@ -39,6 +47,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
   const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
+
+  const learningPathElementCache = useStore((state) => state._cache_learningPathElement_record)
+  const learningPathLearningElementStatusCache = usePersistedStore((state) => state._learningPathElementStatus)
 
   const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
 
@@ -83,11 +94,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               return getLearningElementsWithStatus(learningPathElementStatusData, user)
             })
             .catch((error) => {
-              handleError(t, addSnackbar, 'error.getLearningElementsWithStatus', error, 3000)
+              handleError(t, addSnackbar, 'error.getLearningElementStatus', error, 3000)
             })
         })
         .catch((error) => {
-          handleError(t, addSnackbar, 'error.getLearningElementStatus', error, 3000)
+          handleError(t, addSnackbar, 'error.getUser', error, 3000)
         })
     }
   }, [
@@ -101,7 +112,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     setInitialNodes,
     setInitialEdges,
     learningPathElementStatus,
-    isGrouped
+    isGrouped,
+    learningPathElementCache,
+    learningPathLearningElementStatusCache
   ])
 
   // custom fitView centering on first uncompleted element
@@ -118,7 +131,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         })
       }, 100)
     }
-  }, [topicId, navigate, initialNodes, initialEdges])
+  }, [topicId, navigate])
 
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)
@@ -170,6 +183,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               setIsGrouped={setIsGrouped}
             />
           </Panel>
+          {isCourseCreatorRole && (
+            <Panel position={'top-right'} style={{ right: '2rem', top: '2.5rem' }}>
+              <CreateLearningElement />
+            </Panel>
+          )}
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
         </ReactFlow>
         <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />

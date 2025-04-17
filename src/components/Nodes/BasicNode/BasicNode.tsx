@@ -1,45 +1,57 @@
-import { memo, useState } from 'react'
+import { MouseEvent, ReactElement, ReactNode, memo, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { NodeWrapper, Paper, Tooltip, Typography, Star, StarOutline, IconButton, ToggleButton } from '@common/components'
+import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { CheckBox, Feedback } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
 import { getConfig } from '@shared'
+import { usePersistedStore, useStore } from '@store'
 
-/**
- * @prop children - The icon of the node.
- * @prop {@link NodeProps} - The props of the node.
- * @interface
- */
 type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
-  children?: JSX.Element
+  icon?: ReactElement
+  children?: ReactNode
 }
 
-/**
- * BasicNode component.
- *
- * @param props - Props containing the id, children and data of the node.
- *
- * @remarks
- * BasicNode represents a component that displays a node with a name.
- * It can be clicked to open a corresponding activity of the LMS.
- * BasicNode can't be used as a standalone component and must be rendered via ReactFlow.
- *
- * @category Components
- */
-const BasicNode = ({ id, children = <Feedback sx={{ fontSize: 50 }} />, data }: BasicNodeProps) => {
+const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: BasicNodeProps) => {
   const { t } = useTranslation()
-  const [on, setOn]=useState(false)
   return (
     <NodeWrapper
-      id={id + '-' + data.lmsId}
+      id={`${id}-${props.data.lmsId}`}
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      onClick={() => {
-        data.handleOpen()
-        data.handleSetUrl(getConfig().MOODLE + `/mod/${data.activityType}/view.php?id=${data.lmsId}`)
-        data.handleSetLmsId(data.lmsId)
-      }}
-      data-testid={'basicNode'}>
+      onClick={handleNodeClick}
+      data-testid="basicNode"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}>
+      <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '200ms' }}>
+        {isCourseCreatorRole && (
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+            sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
+            <Tooltip arrow title={t('components.BasicNode.deleteTooltip')} placement="top">
+              <IconButton
+                data-testid={'delete-learning-element-button'}
+                onClick={handleOpenDeleteLearningElementModal}
+                className="learning-element-delete-icon"
+                sx={{
+                  marginLeft: '1rem',
+                  color: 'white',
+                  backgroundColor: theme.palette.error.dark,
+                  border: '1px solid grey',
+                  zIndex: 10,
+                  '&:hover': {
+                    backgroundColor: theme.palette.error.light
+                  }
+                }}>
+                <DeleteForever fontSize={'medium'} />
+              </IconButton>
+            </Tooltip>
+            {props.children}
+          </Grid>
+        )}
+      </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
         sx={{
@@ -49,10 +61,10 @@ const BasicNode = ({ id, children = <Feedback sx={{ fontSize: 50 }} />, data }: 
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        {children}
+        {icon}
       </Paper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
-        {data.name}
+        {props.data.name}
       </Typography>
 
 <IconButton
@@ -61,22 +73,31 @@ const BasicNode = ({ id, children = <Feedback sx={{ fontSize: 50 }} />, data }: 
   {on?<Star/>:<StarOutline/>}
 </IconButton>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
-      {data.isDone && (
+      {props.data.isDone && (
         <Tooltip title={t('tooltip.completed')}>
           <CheckBox
-            viewBox={'3 -3 24 24'}
+            viewBox="3 -3 24 24"
             sx={{
               fontSize: 29,
               position: 'absolute',
               top: -13,
               right: -13,
-              color: (theme) => theme.palette.success.main,
-              background: (theme) => theme.palette.common.white,
+              color: theme.palette.success.main,
+              background: theme.palette.common.white,
               borderRadius: '10%'
             }}
           />
         </Tooltip>
       )}
+      <DeleteEntityModal
+        openDeleteEntityModal={deleteLearningElementModalOpen}
+        setDeleteEntityModalOpen={setdeleteLearningElementModalOpen}
+        entityName={learningElementName}
+        entityId={learningElementId}
+        entityLmsId={lmsLearningElementId}
+        onDeleteConfirm={handleAcceptDeleteLearningElementModal}
+        entityType={t('appGlobal.learningElement')}
+      />
     </NodeWrapper>
   )
 }
