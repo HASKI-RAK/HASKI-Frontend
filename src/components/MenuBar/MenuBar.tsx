@@ -38,8 +38,8 @@ import {
   ThemeModal
 } from '@components'
 import { AuthContext, RoleContext } from '@services'
-import CreateDefaultLearningPathModal from '../CreateDefaultLearningPath/Modal/CreateDefaultLearningPathModal'
 import { Theme } from '../../common/theme/DefaultTheme/DefaultTheme'
+import CreateDefaultLearningPathModal from '../CreateDefaultLearningPath/Modal/CreateDefaultLearningPathModal'
 
 /**
  * The MenuBar component is the top bar of the application.
