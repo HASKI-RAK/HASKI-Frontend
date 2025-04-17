@@ -177,34 +177,14 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}>
       <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '200ms' }}>
-        {isCourseCreatorRole && (
+        
           <Grid
             container
             direction="row"
             justifyContent="flex-end"
             alignItems="center"
             sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
-            <Tooltip arrow title={t('components.BasicNode.deleteTooltip')} placement="top">
-              <IconButton
-                data-testid={'delete-learning-element-button'}
-                onClick={handleOpenDeleteLearningElementModal}
-                className="learning-element-delete-icon"
-                sx={{
-                  marginLeft: '1rem',
-                  color: 'white',
-                  backgroundColor: theme.palette.error.dark,
-                  border: '1px solid grey',
-                  zIndex: 10,
-                  '&:hover': {
-                    backgroundColor: theme.palette.error.light
-                  }
-                }}>
-                <DeleteForever fontSize={'medium'} />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-        )}
-        {/* commented out until feature is implemented
+            {/* commented out until feature is implemented
             <IconButton
             onClick={addToFavorites}
             data-testid={'favoriteButton'}
@@ -235,6 +215,27 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           </Grid>
         )}
         {props.children}
+        {isCourseCreatorRole && (
+              <Tooltip arrow title={t('components.BasicNode.deleteTooltip')} placement="top">
+                <IconButton
+                  data-testid={'delete-learning-element-button'}
+                  onClick={handleOpenDeleteLearningElementModal}
+                  className="learning-element-delete-icon"
+                  sx={{
+                    marginLeft: '1rem',
+                    color: 'white',
+                    backgroundColor: theme.palette.error.dark,
+                    border: '1px solid grey',
+                    zIndex: 10,
+                    '&:hover': {
+                      backgroundColor: theme.palette.error.light
+                    }
+                  }}>
+                  <DeleteForever fontSize={'medium'} />
+                </IconButton>
+              </Tooltip>
+            )}
+          </Grid>
       </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
