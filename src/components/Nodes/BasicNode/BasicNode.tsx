@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { Box, Checkbox, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
-import { CheckBox, DeleteForever, Feedback, Warning, Task } from '@common/icons'
-import { DeleteEntityModal, LearningPathLearningElementNode } from '@components'
+import { DeleteForever, Task, Warning } from '@common/icons'
+import { DeleteEntityModal, LearningPathLearningElementNode, getNodeIcon } from '@components'
 import { RoleContext, SnackbarContext, deleteLearningElement } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
@@ -218,14 +218,21 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           </IconButton>
         */}
         {solutionLmsId > 1 && (
-          <Tooltip title={t('tooltip.solution')}>
-            <IconButton
-              onClick={handleShowSolution}
-              data-testid={'showSolutionButton'}
-              sx={{ backgroundColor: theme.palette.primary.main, marginLeft: '0.5rem', border: '1px solid grey' }}>
-              <Task />
-            </IconButton>
-          </Tooltip>
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center"
+            sx={{ position: 'absolute', top: '-3.25rem', left: '-3.4rem' }}>
+            <Tooltip title={t('tooltip.solution')}>
+              <IconButton
+                onClick={handleShowSolution}
+                data-testid={'showSolutionButton'}
+                sx={{ backgroundColor: theme.palette.primary.main, marginLeft: '0.5rem', border: '1px solid grey' }}>
+                <Task />
+              </IconButton>
+            </Tooltip>
+          </Grid>
         )}
         {props.children}
       </Collapse>
