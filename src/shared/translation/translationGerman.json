@@ -55,6 +55,7 @@
   "components.AlgorithmSettingsModal.wrongRole": "Sie haben nicht die erforderlichen Berechtigungen, um den Algorithmus zu ändern",
   "components.BasicNode.deleteLearningElementSuccessful": "Das Lernelement wurde erfolgreich gelöscht",
   "components.BasicNode.deleteTooltip": "Lernelement löschen",
+  "components.BasicNode.solutionTooltip": "Lösung anzeigen",
   "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
   "components.ContactForm.contactform": "Kontaktformular",
   "components.ContactForm.error": "Es fehlt eine Beschreibung.",
