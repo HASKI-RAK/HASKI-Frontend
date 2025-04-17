@@ -133,6 +133,7 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
                 data-testid={'showSolutionButton'}
                 sx={{ backgroundColor: theme.palette.success.main,
                    marginLeft: '0.5rem',
+                   color: 'white',
                    border: '1px solid grey',
                    '&:hover': {
                     backgroundColor: theme.palette.success.light
