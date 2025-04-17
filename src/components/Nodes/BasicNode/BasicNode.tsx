@@ -1,4 +1,4 @@
-import { MouseEvent, ReactElement, ReactNode, memo, useContext, useState } from 'react'
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
@@ -66,12 +66,6 @@ const BasicNode = ({ id, icon = <Feedback sx={{ fontSize: 50 }} />, ...props }: 
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {props.data.name}
       </Typography>
-
-<IconButton
-  onClick={(e) => {e.stopPropagation(),setOn(!on)}}
->
-  {on?<Star/>:<StarOutline/>}
-</IconButton>
       <Handle type="source" position={Position.Bottom} id="a" style={{ visibility: 'hidden' }} />
       {props.data.isDone && (
         <Tooltip title={t('tooltip.completed')}>
