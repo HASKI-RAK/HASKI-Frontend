@@ -1,3 +1,4 @@
+import { postLearningElementSolution } from '@services'
 import { resetAllSlices } from '@store'
 
 /**
@@ -437,6 +438,14 @@ const mockDataServices: MockDataServices = {
         visits: ['2023-09-16T09:00:00Z', '2023-09-17T10:30:00Z', '2023-09-18T11:00:00Z', '2023-10-01T14:00:00Z']
       },
       university: 'HS-KE'
+    })
+  ),
+  postLearningElementSolution: jest.fn(() =>
+    Promise.resolve({
+      id: 1,
+      learning_element_lms_id: 1,
+      solution_lms_id: 4,
+      activity_type: 'activity'
     })
   ),
   fetchStudentLpLeAlg: jest.fn(() =>

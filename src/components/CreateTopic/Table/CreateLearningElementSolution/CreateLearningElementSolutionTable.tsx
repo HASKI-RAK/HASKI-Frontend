@@ -22,7 +22,7 @@ import { useCreateLearningElementSolutionTable } from './CreateLearningElementSo
 
 type CreateLearningElementClassificationTableProps = {
   selectedTopics: RemoteTopics[]
-  LearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
+  selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
   selectedSolutions: { [key: number]: Solution[] }
   learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }
   onLearningElementSolutionChange: (selectedSolutions: { [key: number]: RemoteLearningElementWithSolution[] }) => void
@@ -32,7 +32,7 @@ type CreateLearningElementClassificationTableProps = {
 const CreateLearningElementClassificationTable = memo(
   ({
     selectedTopics,
-    LearningElementsClassification,
+    selectedLearningElementsClassification,
     selectedSolutions,
     learningElementsWithSolutions,
     onLearningElementSolutionChange,
@@ -44,16 +44,17 @@ const CreateLearningElementClassificationTable = memo(
     const { handleSolutionChange, resetUnavailableSolutions } = useCreateLearningElementSolutionTable({
       learningElementsWithSolutions,
       selectedSolutions,
+      selectedLearningElementsClassification,
       onLearningElementSolutionChange
     })
 
     useEffect(() => {
       // Create Solutions from LearningElementsClassification
-      const updatedSolutions = Object.keys(LearningElementsClassification).reduce((accumulator, topicId) => {
+      const updatedSolutions = Object.keys(selectedLearningElementsClassification).reduce((accumulator, topicId) => {
         const topicIdInt = parseInt(topicId)
         const existingLeElSolutions = learningElementsWithSolutions[topicIdInt] || []
 
-        const newSolutions = LearningElementsClassification[topicIdInt].reduce<RemoteLearningElementWithSolution[]>(
+        const newSolutions = selectedLearningElementsClassification[topicIdInt].reduce<RemoteLearningElementWithSolution[]>(
           (acc, element) => {
             const existingElement = existingLeElSolutions.find((e) => e.learningElementLmsId === element.lms_id)
             if (!existingElement && !element.disabled) {
@@ -79,7 +80,7 @@ const CreateLearningElementClassificationTable = memo(
       }, {})
 
       onLearningElementSolutionChange(updatedSolutions)
-    }, [LearningElementsClassification, resetUnavailableSolutions])
+    }, [selectedLearningElementsClassification, resetUnavailableSolutions])
 
     useEffect(() => {
       const updatedDisplayedSolutions = Object.keys(selectedSolutions).reduce((accumulator, topicId) => {
@@ -92,14 +93,10 @@ const CreateLearningElementClassificationTable = memo(
         return { ...accumulator, [topicIdInt]: newDisplayedSolutions }
       }, {})
       setDisplayedSolutions(updatedDisplayedSolutions)
-      console.log('displayedSolutions', displayedSolutions)
     }, [selectedSolutions])
 
-    //useEffect(() => {
-    //  reset()
-    //}, [displayedSolutions])
     //Return early
-    if (Object.keys(LearningElementsClassification).length === 0) {
+    if (Object.keys(selectedLearningElementsClassification).length === 0) {
       return (
         <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
           <Grid container direction="column" alignItems="center" sx={{ mt: '2rem' }}>
@@ -150,8 +147,7 @@ const CreateLearningElementClassificationTable = memo(
                           handleSolutionChange(
                             lmsTopic.topic_lms_id,
                             element.learningElementLmsId,
-                            parseInt(event.target.value),
-                            element.solutionLmsType
+                            parseInt(event.target.value)
                           )
                         }>
                         {(displayedSolutions[lmsTopic.topic_lms_id] || []).map((solution) => (

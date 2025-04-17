@@ -90,7 +90,7 @@ describe('useCreateLearningElementClassificationTable', () => {
 
     // Add solution and disable input
     act(() => {
-      result.current.handleSolutionchange(1, 101, 'Element 1', true)
+      result.current.handleSolutionchange(1, 101, 'Element 1', true, 'Activity')
     })
 
     expect(mockOnSolutionChange).toHaveBeenCalledWith({
@@ -117,7 +117,7 @@ describe('useCreateLearningElementClassificationTable', () => {
 
     // Remove solution and enable input
     act(() => {
-      result.current.handleSolutionchange(1, 101, 'Element 1', false)
+      result.current.handleSolutionchange(1, 101, 'Element 1', false, 'Activity')
     })
 
     expect(mockOnSolutionChange).toHaveBeenCalledWith({

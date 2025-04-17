@@ -69,7 +69,7 @@ describe('CreateLearningElementSolutionTable', () => {
       <MemoryRouter>
         <CreateLearningElementSolutionTable
           selectedTopics={[]}
-          LearningElementsClassification={{}}
+          selectedLearningElementsClassification={{}}
           selectedSolutions={{}}
           learningElementsWithSolutions={{}}
           onLearningElementSolutionChange={() => {}}
@@ -86,7 +86,7 @@ describe('CreateLearningElementSolutionTable', () => {
         <MemoryRouter>
           <CreateLearningElementSolutionTable
             selectedTopics={mockSelectedTopics}
-            LearningElementsClassification={mockLearningElementsClassification}
+            selectedLearningElementsClassification={mockLearningElementsClassification}
             selectedSolutions={mockSelectedSolutions}
             learningElementsWithSolutions={mockLearningElementsWithSolutions}
             onLearningElementSolutionChange={mockOnLearningElementSolutionChange}
@@ -118,7 +118,7 @@ describe('CreateLearningElementSolutionTable', () => {
         <MemoryRouter>
           <CreateLearningElementSolutionTable
             selectedTopics={mockSelectedTopics}
-            LearningElementsClassification={mockLearningElementsClassification}
+            selectedLearningElementsClassification={mockLearningElementsClassification}
             selectedSolutions={mockSelectedSolutions}
             learningElementsWithSolutions={mockLeElWithSolutions}
             onLearningElementSolutionChange={mockOnLearningElementSolutionChange}
@@ -146,7 +146,7 @@ describe('CreateLearningElementSolutionTable', () => {
         <MemoryRouter>
           <CreateLearningElementSolutionTable
             selectedTopics={mockSelectedTopics}
-            LearningElementsClassification={mockLearningElementsClassification}
+            selectedLearningElementsClassification={mockLearningElementsClassification}
             selectedSolutions={mockSelectedSolutions}
             learningElementsWithSolutions={mockLeElWithSolutions}
             onLearningElementSolutionChange={jest.fn()}
@@ -183,7 +183,7 @@ describe('CreateLearningElementSolutionTable', () => {
         <MemoryRouter>
           <CreateLearningElementSolutionTable
             selectedTopics={mockSelectedTopics}
-            LearningElementsClassification={mockLearningElementsClassification}
+            selectedLearningElementsClassification={mockLearningElementsClassification}
             selectedSolutions={mockSelectedSolutions}
             learningElementsWithSolutions={mockLeElWithSolutions}
             onLearningElementSolutionChange={jest.fn()}

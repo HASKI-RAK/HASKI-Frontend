@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, waitFor, screen, getByRole } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
@@ -233,6 +233,7 @@ describe('CreateTopicModal', () => {
     await waitFor(() => {
       expect(mockServices.postLearningElement).toHaveBeenCalled()
       expect(mockServices.postLearningPathAlgorithm).toHaveBeenCalled()
+      expect(mockServices.postLearningElementSolution).toHaveBeenCalled()
       expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
     })
   }, 20000)

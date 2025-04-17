@@ -1,5 +1,5 @@
 import { TableBody, tableCellClasses } from '@mui/material'
-import { ReactNode, memo, useCallback, useEffect, useMemo } from 'react'
+import { ReactNode, memo, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -181,7 +181,8 @@ const CreateLearningElementClassificationTable = ({
                             lmsTopic.topic_lms_id,
                             element.lms_id,
                             element.lms_learning_element_name,
-                            event.target.checked
+                            event.target.checked,
+                            element.lms_activity_type
                           )
                         }
                       />

@@ -34,7 +34,7 @@ const CreateLearningElementSolutionStep = ({
     <Grid container item>
       <CreateLearningElementSolutionTable
         selectedTopics={selectedTopics}
-        LearningElementsClassification={LearningElementsClassification}
+        selectedLearningElementsClassification={LearningElementsClassification}
         selectedSolutions={selectedSolutions}
         learningElementsWithSolutions={learningElementsWithSolutions}
         onLearningElementSolutionChange={onLearningElementSolutionChange}>
