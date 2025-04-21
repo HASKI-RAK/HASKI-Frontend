@@ -29,13 +29,13 @@ const Newsbanner = ({ useNewsbanner = _useNewsbanner }: NewsbannerProps) => {
   const textPercent = textLength / windowWidth
 
   const scrolling = keyframes`
-    from {
-        transform: translateX(100%)
-    },
-    to {
-        transform: translateX(-${textPercent * 100}%)
-    }
-`
+      from {
+          transform: translateX(100%)
+      },
+      to {
+          transform: translateX(-${textPercent * 100}%)
+      }
+  `
 
   return (
     <>

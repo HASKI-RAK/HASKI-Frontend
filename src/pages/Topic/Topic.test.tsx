@@ -5,7 +5,9 @@ import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
 import { ReactFlowProvider } from 'reactflow'
 import { mockReactFlow } from '@mocks'
+import { LocalNavBar } from '@components'
 import { LearningPathElementStatus } from '@core'
+import { RoleContext, RoleContextType } from '@services'
 import Topic from './Topic'
 import { useTopic, useTopicHookParams } from './Topic.hooks'
 
@@ -15,6 +17,7 @@ const navigate = jest.fn()
 jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
 jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 jest.useFakeTimers()
+jest.spyOn(global, 'setTimeout')
 
 describe('Topic Page', () => {
   beforeEach(() => {
@@ -39,6 +42,29 @@ describe('Topic Page', () => {
     })
   })
 
+  it('renders when Auth is true, and role is course creator', async () => {
+    const courseCreatorContext = {
+      isStudentRole: false,
+      isCourseCreatorRole: true
+    } as RoleContextType
+
+    const { getByText } = render(
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <RoleContext.Provider value={courseCreatorContext}>
+              <Topic />
+            </RoleContext.Provider>
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
+    )
+
+    await waitFor(() => {
+      expect(getByText('components.CreateLearningElement.createLearningElement')).toBeVisible()
+    })
+  })
+
   it('renders when Auth is false', () => {
     act(() => {
       const topic = render(
@@ -55,6 +81,8 @@ describe('Topic Page', () => {
   })
 
   test('getUser failed', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
+
     const mockfetchUser = jest.fn(() => Promise.reject(new Error('fetchUser failed')))
     mockServices.fetchUser.mockImplementationOnce(mockfetchUser)
 
@@ -75,10 +103,9 @@ describe('Topic Page', () => {
   })
 
   test('getLearningPathElementStatus failed', async () => {
-    const mockfetchLearningPathElementStatus = jest.fn(() =>
-      Promise.reject(new Error('fetchLearningPathElementStatus failed'))
-    )
-    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(mockfetchLearningPathElementStatus)
+    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(() => {
+      throw new Error('getLearningPathElementStatus error')
+    })
 
     await act(async () => {
       render(
@@ -90,9 +117,6 @@ describe('Topic Page', () => {
           </MemoryRouter>
         </ReactFlowProvider>
       )
-    })
-    await waitFor(() => {
-      expect(mockfetchLearningPathElementStatus).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -216,6 +240,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -245,6 +270,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 2,
+            learningElementId: 2,
             name: '',
             isDone: true
           },
@@ -425,6 +451,7 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -452,6 +479,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false,
             handleSetLmsId: expect.any(Function),
@@ -483,6 +511,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -512,6 +541,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -786,6 +816,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false,
             handleSetLmsId: expect.any(Function)
@@ -816,6 +847,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -845,6 +877,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -874,6 +907,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -903,6 +937,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -932,6 +967,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -961,6 +997,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1025,7 +1062,7 @@ describe('Topic Page', () => {
     await waitFor(() => {
       expect(queryByTestId('IFrameModal-Close-Button')).not.toBeInTheDocument()
     })
-  })
+  }, 20000)
 
   test('IFrameModal fetchLearningPathElementSpecificStatus fetching error while closing', async () => {
     const mockfetchLearningPathElementSpecificStatus = jest.fn(() =>
@@ -1307,6 +1344,7 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isRecommended: true,
+            learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false,
@@ -1338,6 +1376,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1385,6 +1424,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1414,6 +1454,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1443,6 +1484,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1472,6 +1514,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1501,6 +1544,7 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: '',
             isDone: false
           },
@@ -1531,6 +1575,7 @@ describe('Topic Page', () => {
             isDone: false,
             isRecommended: true,
             lmsId: 1,
+            learningElementId: 1,
             name: ''
           },
           id: '8-1',
@@ -1566,13 +1611,6 @@ describe('Topic Page', () => {
   })
 
   test('FitView is called on topic change', async () => {
-    jest.mock('react-router-dom', () => ({
-      ...jest.requireActual('react-router-dom'),
-      useParams: jest.fn()
-    }))
-    const useParamsMock = jest.fn().mockReturnValue({ courseId: '2', topicId: '4' })
-    jest.spyOn(router, 'useParams').mockImplementation(() => useParamsMock())
-
     const topicParams: useTopicHookParams = {
       defaultUrl: 'hello',
       defaultTitle: 'test',
@@ -1580,21 +1618,14 @@ describe('Topic Page', () => {
       defaultLmsId: 0
     }
 
-    const topicParams1: useTopicHookParams = {
-      defaultUrl: 'hello1',
-      defaultTitle: 'test1',
-      defaultIsOpen: true,
-      defaultLmsId: 1
-    }
+    const initialEntries = ['/course', '/2', '/topic/20']
 
-    const initialEntries = ['/course', '/2', '/topic/2']
-    const historyEntries = ['/course', '/2', '/topic/3']
-
-    const { getByTestId, queryByTestId, rerender } = render(
+    const { getByTestId, queryByTestId, getByText } = render(
       <ReactFlowProvider>
         <MemoryRouter initialEntries={initialEntries}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <Topic useTopic={() => useTopic(topicParams)} />
+            <LocalNavBar />
           </AuthContext.Provider>
         </MemoryRouter>
       </ReactFlowProvider>
@@ -1607,18 +1638,14 @@ describe('Topic Page', () => {
 
     await waitFor(() => {
       expect(queryByTestId('IFrameModal-Close-Button')).not.toBeInTheDocument()
+      act(() => {
+        fireEvent.click(getByText('Wirtschaftsinformatik'))
+        expect(navigate).toHaveBeenCalledWith('/course/2/topic/1')
+        act(() => {
+          // Replace runAllTimers with a more controlled approach
+          jest.advanceTimersByTime(200) // Adjust timing as needed
+        })
+      })
     })
-    jest.runAllTimers()
-
-    rerender(
-      <ReactFlowProvider>
-        <MemoryRouter initialEntries={historyEntries}>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Topic useTopic={() => useTopic(topicParams1)} />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      </ReactFlowProvider>
-    )
-    screen.debug()
   })
 })

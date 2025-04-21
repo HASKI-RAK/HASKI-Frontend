@@ -167,6 +167,27 @@ const mockDataServices: MockDataServices = {
       ]
     })
   ),
+  postLearningElement: jest.fn(() =>
+    Promise.resolve({
+      id: 1,
+      lms_id: 1,
+      activity_type: 'h5p',
+      classification: 'KÜ',
+      name: 'Introduction to Machine Learning',
+      university: 'University of Example',
+      created_by: 'Dr. John Smith',
+      created_at: '2023-08-10T10:45:00Z',
+      last_updated: '2023-09-01T14:30:00Z',
+      student_learning_element: {
+        id: 10,
+        student_id: 11,
+        learning_element_id: 1,
+        done: true,
+        done_at: '2023-09-05T09:15:00Z',
+        visits: ['2023-08-12T13:00:00Z', '2023-08-15T15:30:00Z', '2023-09-05T09:00:00Z']
+      }
+    })
+  ),
   fetchLearningPathTopic: jest.fn(() =>
     Promise.resolve({
       topics: [
@@ -213,6 +234,51 @@ const mockDataServices: MockDataServices = {
       ]
     })
   ),
+  postTopic: jest.fn(() =>
+    Promise.resolve({
+      contains_le: true,
+      created_at: '2023-09-15T14:30:00Z',
+      created_by: 'Professor Jane Doe',
+      id: 3,
+      is_topic: true,
+      last_updated: '2023-10-01T12:00:00Z',
+      lms_id: 3,
+      name: 'Introduction to Data Science',
+      parent_id: null,
+      student_topic: {
+        done: false,
+        done_at: null,
+        id: 2,
+        student_id: 10,
+        topic_id: 1,
+        visits: ['2023-09-16T09:00:00Z', '2023-09-17T10:30:00Z', '2023-09-18T11:00:00Z']
+      },
+      university: 'HS-KE'
+    })
+  ),
+  postCourse: jest.fn(() =>
+    Promise.resolve({
+      id: 2,
+      lms_id: 2,
+      name: 'Introduction to Computer Science',
+      university: 'HS-KE',
+      created_at: '2024-01-15T10:00:00Z',
+      created_by: 1,
+      last_updated: '2024-02-10T14:30:00Z',
+      start_date: '2024-03-01T09:00:00Z'
+    })
+  ),
+  postCalculateLearningPathForAllStudents: jest.fn(() =>
+    Promise.resolve({
+      based_on: 'aco',
+      calculated_on: '2023-10-10T08:30:00Z',
+      course_id: 1,
+      id: 5,
+      path: '1,2,3,4,5',
+      student_id: 1,
+      topic_id: 2
+    })
+  ),
   postContactForm: jest.fn(() => Promise.resolve({ status: undefined })),
   postLogin: jest.fn(() =>
     Promise.resolve({
@@ -234,7 +300,8 @@ const mockDataServices: MockDataServices = {
           university: 'test',
           created_at: 'test',
           created_by: 'test',
-          last_updated: 'test'
+          last_updated: 'test',
+          start_date: 'Thu, 31 Oct 2024 15:05:57 GMT'
         },
         {
           id: 2,
@@ -243,7 +310,8 @@ const mockDataServices: MockDataServices = {
           university: 'test',
           created_at: 'test',
           created_by: 'test',
-          last_updated: 'test'
+          last_updated: 'test',
+          start_date: 'Thu, 31 Oct 3024 15:05:57 GMT'
         }
       ]
     })
@@ -349,6 +417,60 @@ const mockDataServices: MockDataServices = {
       }
     ])
   ),
+  postLearningPathAlgorithm: jest.fn(() =>
+    Promise.resolve({
+      contains_le: true,
+      created_at: '2023-09-15T14:30:00Z',
+      created_by: 'Professor Jane Doe',
+      id: 101,
+      is_topic: true,
+      last_updated: '2023-10-01T12:00:00Z',
+      lms_id: 2001,
+      name: 'Introduction to Artificial Intelligence',
+      parent_id: null,
+      student_topic: {
+        done: true,
+        done_at: '2023-10-05T15:00:00Z',
+        id: 501,
+        student_id: 1001,
+        topic_id: 101,
+        visits: ['2023-09-16T09:00:00Z', '2023-09-17T10:30:00Z', '2023-09-18T11:00:00Z', '2023-10-01T14:00:00Z']
+      },
+      university: 'HS-KE'
+    })
+  ),
+  fetchStudentLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      algorithm_id: 1,
+      id: 1,
+      short_name: 'default',
+      student_id: 1,
+      topic_id: 1
+    })
+  ),
+  fetchTeacherLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      algorithm_id: 1,
+      short_name: 'default',
+      topic_id: 1
+    })
+  ),
+  postStudentLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED',
+      url: 'https://fakedomain.com:5000/userId/topicId/studentAlgorithm'
+    })
+  ),
+  postTeacherLpLeAlg: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED',
+      url: 'https://fakedomain.com:5000/userId/topicId/teacherAlgorithm'
+    })
+  ),
   fetchNews: jest.fn(() =>
     Promise.resolve({
       news: [
@@ -369,6 +491,100 @@ const mockDataServices: MockDataServices = {
           university: 'TH-AB'
         }
       ]
+    })
+  ),
+  fetchRemoteTopics: jest.fn(() =>
+    Promise.resolve([
+      {
+        lms_learning_elements: [
+          {
+            lms_activity_type: 'forum',
+            lms_id: 1,
+            lms_learning_element_name: 'Announcements'
+          },
+          {
+            lms_activity_type: 'resource',
+            lms_id: 38,
+            lms_learning_element_name: 'superKnowledge.pdf'
+          },
+          {
+            lms_activity_type: 'h5pactivity',
+            lms_id: 39,
+            lms_learning_element_name: 'Strategie Übung - Leicht'
+          }
+        ],
+        topic_lms_id: 3,
+        topic_lms_name: 'General'
+      },
+      {
+        lms_learning_elements: [
+          {
+            lms_activity_type: 'h5pactivity',
+            lms_id: 4,
+            lms_learning_element_name: 'DefinitionDeklaration und AufrufeinerFunktion'
+          }
+        ],
+        topic_lms_id: 4,
+        topic_lms_name: 'Bekannte Entwurfsmuster'
+      }
+    ])
+  ),
+  fetchRemoteCourses: jest.fn(() =>
+    Promise.resolve([
+      {
+        enddate: 1702166400,
+        fullname: 'Kurs-1',
+        id: 2,
+        shortname: 'kurs',
+        startdate: 1670630400,
+        timecreated: 1670578503,
+        timemodified: 1670578503
+      },
+      {
+        enddate: 1718406000,
+        fullname: 'Kurs-2',
+        id: 3,
+        shortname: 'ku2',
+        startdate: 1686870000,
+        timecreated: 1686830366,
+        timemodified: 1692021711
+      }
+    ])
+  ),
+  postBufferContent: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED'
+    })
+  ),
+  postAddAllStudentsToTopics: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED'
+    })
+  ),
+  postAddAllStudentsToCourse: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED'
+    })
+  ),
+  deleteCourse: jest.fn(() =>
+    Promise.resolve({
+      message: 'Deletion successful!'
+    })
+  ),
+  deleteTopic: jest.fn(() =>
+    Promise.resolve({
+      message: 'Deletion successful!'
+    })
+  ),
+  deleteLearningElement: jest.fn(() =>
+    Promise.resolve({
+      message: 'Deletion successful!'
     })
   )
 }

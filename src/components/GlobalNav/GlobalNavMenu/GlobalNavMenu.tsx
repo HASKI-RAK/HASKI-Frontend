@@ -5,10 +5,8 @@ import { Box, Button, Divider, Menu, MenuItem, Tooltip, Typography } from '@comm
 import { ArrowDropDown, Info } from '@common/icons'
 import { SkeletonList } from '@components'
 
-// Type
 export type GlobalNavContent = { name: string; url: string; isDisabled: boolean; availableAt: Date }
 
-// Type
 export type GlobalNavMenuProps = {
   id?: string
   content?: GlobalNavContent[]
@@ -17,21 +15,17 @@ export type GlobalNavMenuProps = {
   tooltip?: string
 }
 
-// Component
 const GlobalNavMenu = forwardRef(
   (
     { id = 'global-nav', content = [], title, isLoading, tooltip }: GlobalNavMenuProps,
     ref: ForwardedRef<HTMLDivElement | null>,
     ...props
   ) => {
-    // Hooks
     const navigate = useNavigate()
     const { t } = useTranslation()
 
-    // States
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null)
 
-    // Sets the anchor element when opened.
     const handleOpen = async (event: MouseEvent<HTMLElement>) => {
       setAnchorElement(event.currentTarget)
     }

@@ -5,16 +5,28 @@
 export { AuthContext } from './AuthContext'
 export type { AuthContextType } from './AuthContext'
 export { AuthProvider } from './AuthProvider'
-export { fetchLearningPathElement } from './LearningPath'
-export { fetchLearningPathElementStatus } from './LearningPath'
-export { fetchLearningPathElementSpecificStatus } from './LearningPath'
-export { fetchLearningPathTopic } from './Topic'
 export { postContactForm, type FormDataType } from './contact'
+export { RoleContext } from './RoleContext'
+export type { RoleContextType } from './RoleContext'
+export { RoleProvider } from './RoleProvider'
+export {
+  fetchLearningPathElement,
+  fetchLearningPathElementStatus,
+  fetchLearningPathElementSpecificStatus,
+  postCalculateLearningPathForAllStudents
+} from './LearningPath'
+export { fetchLearningPathTopic, postTopic, postAddAllStudentsToTopics } from './Topic'
 export * from './auth'
 export * from './SnackbarContext'
 export { SnackbarProvider } from './SnackbarProvider'
 export * from './connection'
 export { fetchCourses } from './Courses'
+export { fetchRemoteCourses } from './RemoteCourses'
+export { fetchRemoteTopics } from './RemoteTopics'
+export { postLearningElement } from './LearningElement'
+export { postLearningPathAlgorithm } from './LearningPathAlgorithm'
+export { postCourse } from './Course'
+export { postAddAllStudentsToCourse } from './Course'
 export * from './xAPI'
 export { fetchILS, fetchListK, postILS, postListK } from './Questionnaire'
 export * from './debounce'
@@ -22,3 +34,14 @@ export * from './Viewport'
 export { fetchNews } from './News'
 export { postCalculateLearningPathILS } from './LearningPath'
 export * from './PageName'
+export {
+  fetchStudentLpLeAlg,
+  fetchTeacherLpLeAlg,
+  postStudentLpLeAlg,
+  postTeacherLpLeAlg
+} from './LearningPathLearningElementAlgorithm'
+export { postBufferContent } from './BufferContent'
+
+export { deleteCourse } from './Course'
+export { deleteTopic } from './Topic'
+export { deleteLearningElement } from './LearningElement'

@@ -7,7 +7,6 @@ import { App } from '@pages'
 import { getConfig, logBuffer, setConfig } from '@shared'
 import './shared/internationalization'
 
-logBuffer()
 // Before the app starts, we need to load the config file which contains the backend URL and other env variables.
 fetch('/config/env.' + (process.env.NODE_ENV ?? 'development') + '.json')
   .then((response) => {
@@ -17,6 +16,7 @@ fetch('/config/env.' + (process.env.NODE_ENV ?? 'development') + '.json')
     return response.json()
   })
   .then((config) => {
+    logBuffer(config)
     log.setLevel((config.LOG_LEVEL as LogLevelDesc) || 'error')
     log.debug('Config loaded: ', config)
     setConfig(config)

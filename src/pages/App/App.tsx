@@ -10,6 +10,7 @@ import {
   Glossary,
   Home,
   Imprint,
+  LearnerCharacteristics,
   Login,
   MainFrame,
   PageNotFound,
@@ -18,8 +19,8 @@ import {
   ThemePresentation,
   Topic
 } from '@pages'
-import { AuthProvider, SnackbarProvider } from '@services'
 import { useApp } from './App.hooks'
+import { AuthProvider, RoleProvider, SnackbarProvider } from '@services'
 
 /**
  * # App
@@ -41,6 +42,7 @@ export const App = () => {
         <SnackbarProvider>
           <Router>
             <AuthProvider>
+            <RoleProvider>
               <XAPIProvider value={xAPI}>
                 <UserInteractionTracker
                   componentFilePath={new URL(import.meta.url).pathname}
@@ -60,6 +62,7 @@ export const App = () => {
                     <Route path="/glossary" element={<Glossary />} />
                     <Route path="/aboutus" element={<AboutUs />} />
                     <Route path="/imprint" element={<Imprint />} />
+                    <Route path="/learnercharacteristics" element={<LearnerCharacteristics />} />
                     <Route path="/privacypolicy" element={<PrivacyPolicy />} />
                     <Route path="/🥚" element={<div>Ei</div>} />
                     <Route path="*" element={<PageNotFound />} />
@@ -67,6 +70,7 @@ export const App = () => {
                   <Route path="*" element={<PageNotFound />} />
                 </Routes>
               </XAPIProvider>
+              </RoleProvider>
             </AuthProvider>
           </Router>
         </SnackbarProvider>

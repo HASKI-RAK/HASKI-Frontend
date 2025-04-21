@@ -6,34 +6,28 @@ import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { GlobalNavContent } from '../GlobalNavMenu/GlobalNavMenu'
 
-// Type
 export type CourseMenuHookReturn = {
   readonly content: GlobalNavContent[]
   readonly isLoading: boolean
 }
 
-// Comment
 export const useCourseMenu = (): CourseMenuHookReturn => {
-  // States
   const [isLoading, setIsLoading] = useState(true)
   const [content, setContent] = useState<GlobalNavContent[]>([])
   const { t } = useTranslation()
 
-  // Fetches
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
 
-  // Contexts
   const { addSnackbar } = useContext(SnackbarContext)
   const { isAuth } = useContext(AuthContext)
 
-  // Logic
   const mapCourseToContent = useCallback((response: CourseResponse) => {
     return response.courses.map((element) => ({
       name: element.name,
       url: `/course/${element.id}`,
-      isDisabled: element.id === 2,
-      availableAt: new Date('3025-05-16T10:00:00Z')
+      isDisabled: new Date(element.start_date) >= new Date(),
+      availableAt: new Date(element.start_date)
     }))
   }, [])
 
