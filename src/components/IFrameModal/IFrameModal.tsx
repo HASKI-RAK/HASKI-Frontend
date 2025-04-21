@@ -1,12 +1,6 @@
-import { memo, useContext } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { memo } from 'react'
 import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
-import { User } from '@core'
-import { SnackbarContext, postCalculateRating } from '@services'
-import { usePersistedStore } from '@store'
-import { handleError } from '../index'
 
 const style_box = {
   position: 'absolute',
@@ -44,23 +38,7 @@ type IFrameModalProps = {
  * @category Components
  */
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
-  const getUser = usePersistedStore((state) => state.getUser)
-  const { courseId, topicId } = useParams()
-  const { t } = useTranslation()
-
-  // Context.
-  const { addSnackbar } = useContext(SnackbarContext)
-
   const handleClose = () => {
-    getUser()
-      .then((user: User) => {
-        postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId).catch((error) => {
-          handleError(t, addSnackbar, 'error.postCalculateRating', error, 3000)
-        })
-      })
-      .catch((error) => {
-        handleError(t, addSnackbar, 'error.getUser', error, 3000)
-      })
     props.onClose()
   }
 
