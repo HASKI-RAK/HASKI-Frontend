@@ -19,8 +19,8 @@ import {
   ThemePresentation,
   Topic
 } from '@pages'
-import { useApp } from './App.hooks'
 import { AuthProvider, RoleProvider, SnackbarProvider } from '@services'
+import { useApp } from './App.hooks'
 
 /**
  * # App
@@ -42,34 +42,34 @@ export const App = () => {
         <SnackbarProvider>
           <Router>
             <AuthProvider>
-            <RoleProvider>
-              <XAPIProvider value={xAPI}>
-                <UserInteractionTracker
-                  componentFilePath={new URL(import.meta.url).pathname}
-                  componentType="UserInteractionTracker"
-                  pageName="App"
-                />
-                <Routes>
-                  <Route element={<MainFrame />}>
-                    <Route index element={<Home />} />
-                    <Route path="/course/:courseId" element={<Course />} />
-                    <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
-                    <Route path="/theme" element={<ThemePresentation />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-                    <Route path="/projectdescription" element={<ProjectDescription />} />
-                    <Route path="/glossary" element={<Glossary />} />
-                    <Route path="/aboutus" element={<AboutUs />} />
-                    <Route path="/imprint" element={<Imprint />} />
-                    <Route path="/learnercharacteristics" element={<LearnerCharacteristics />} />
-                    <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-                    <Route path="/🥚" element={<div>Ei</div>} />
+              <RoleProvider>
+                <XAPIProvider value={xAPI}>
+                  <UserInteractionTracker
+                    componentFilePath={new URL(import.meta.url).pathname}
+                    componentType="UserInteractionTracker"
+                    pageName="App"
+                  />
+                  <Routes>
+                    <Route element={<MainFrame />}>
+                      <Route index element={<Home />} />
+                      <Route path="/course/:courseId" element={<Course />} />
+                      <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
+                      <Route path="/theme" element={<ThemePresentation />} />
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+                      <Route path="/projectdescription" element={<ProjectDescription />} />
+                      <Route path="/glossary" element={<Glossary />} />
+                      <Route path="/aboutus" element={<AboutUs />} />
+                      <Route path="/imprint" element={<Imprint />} />
+                      <Route path="/learnercharacteristics" element={<LearnerCharacteristics />} />
+                      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+                      <Route path="/🥚" element={<div>Ei</div>} />
+                      <Route path="*" element={<PageNotFound />} />
+                    </Route>
                     <Route path="*" element={<PageNotFound />} />
-                  </Route>
-                  <Route path="*" element={<PageNotFound />} />
-                </Routes>
-              </XAPIProvider>
+                  </Routes>
+                </XAPIProvider>
               </RoleProvider>
             </AuthProvider>
           </Router>

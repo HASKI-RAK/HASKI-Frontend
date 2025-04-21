@@ -53,7 +53,7 @@ export const useApp = (): AppHookReturn => {
     setXAPI(
       setupXAPI({
         currentLanguage: currentLanguage,
-        onError: (error: string) => log.error(t('error.sendStatement') + ' ' + error), // TODOD: translation files
+        onError: (error: string) => log.error(t('error.sendStatement') + ' ' + error),
         projectURL: getConfig().FRONTEND_GITHUB ?? '',
         projectVersion: getConfig().FRONTEND_VERSION ?? '',
         repositories: {

@@ -12,7 +12,7 @@ describe('App tests', () => {
   })
 
   test('useApp hook', async () => {
-    jest.spyOn(log, 'error').mockImplementation((error: string) => error)
+    jest.spyOn(log, 'error').mockImplementationOnce((error: string) => error)
     mockServices.fetchUser.mockImplementationOnce(() =>
       Promise.resolve({
         id: 1,
@@ -51,10 +51,12 @@ describe('App tests', () => {
   })
 
   test('useApp hook with getUser failed', async () => {
-    const mockfetchUser = jest.fn(() => Promise.reject(new Error('fetchUser failed')))
-    mockServices.fetchUser.mockImplementationOnce(mockfetchUser)
+    const mockfetchUser = (mockServices.fetchUser = jest
+      .fn()
+      .mockImplementationOnce(() => Promise.reject(new Error('error'))))
 
     const { result } = renderHook(() => useApp())
+
     await waitFor(() => {
       expect(result.current.xAPI).toStrictEqual({
         currentLanguage: '',
@@ -69,6 +71,8 @@ describe('App tests', () => {
         userID: undefined,
         xAPI: expect.any(Object)
       })
+
+      expect(mockfetchUser).toHaveBeenCalled()
     })
   })
 })
