@@ -5,13 +5,13 @@ import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import { CoursesSlice, createCoursesSlice } from '../Slices/CoursesSlice'
 import { DefaultLearningPathSlice, createDefaultLearningPathSlice } from '../Slices/DefaultLearningPathSlice'
+import LearningElementSolutionSlice, {
+  createLearningElementSolutionSlice
+} from '../Slices/LearningElementSolutionSlice'
 import { LearningPathElementSlice, createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
 } from '../Slices/LearningPathElementSpecificStatusSlice'
-import LearningElementSolutionSlice, {
-  createLearningElementSolutionSlice
-} from '../Slices/LearningElementSolutionSlice'
 import {
   LearningPathElementStatusSlice,
   createLearningPathElementStatusSlice
