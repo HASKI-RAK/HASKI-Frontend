@@ -16,8 +16,8 @@ import {
   PrivacyPolicy,
   ProjectDescription,
   Topic,
-  TopicsLearningPath
-  RatingStatistics,
+  TopicsLearningPath,
+  RatingStatistics
 } from '@pages'
 import { AuthProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
 import { useApp } from './App.hooks'
