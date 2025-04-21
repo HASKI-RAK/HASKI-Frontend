@@ -39,7 +39,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
       (...a) => ({
         ...createUserSlice(...a),
         ...createLearningPathElementStatusSlice(...a),
-        ...createAuthSlice(...a),
+        ...createAuthSlice(...a)
       }),
       {
         name: 'persisted_storage',

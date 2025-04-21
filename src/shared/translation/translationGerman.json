@@ -1153,6 +1153,7 @@
   "error.postILS": "Es gab einen Fehler beim Senden der ILS-Fragebogendaten.",
   "error.postListK": "Es gab einen Fehler beim Senden der ListK-Fragebogendaten.",
   "error.postLogin": "Es gab einen Fehler beim Einloggen.",
+  "error.sendStatement": "Beim Senden eines xAPI-Statements ist ein Fehler aufgetreten.",
   "error.setLearningPathElementSpecificStatus": "Es gab einen Fehler beim Festlegen des spezifischen Status eines Lernpfadelements.",
   "error.setTopics": "Es gab einen Fehler beim Festlegen der Themen.",
   "error.setTopicsPath": "Es gab einen Fehler beim Festlegen des Themenpfads.",

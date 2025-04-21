@@ -65,14 +65,14 @@ const Filter = (props: FilterProps) => {
 
   // Renders the selected options as chips.
   const renderValue = useCallback(
-    (selected: unknown) => (
-      Array.isArray(selected) && 
+    (selected: unknown) =>
+      Array.isArray(selected) && (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
           {selected.map((value: string) => (
             <Chip key={value} role="chip" label={value} size="small" />
           ))}
         </Box>
-    ),
+      ),
     []
   )
 

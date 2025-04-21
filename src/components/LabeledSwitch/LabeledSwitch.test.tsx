@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
+import { MemoryRouter } from 'react-router-dom'
 import LabeledSwitch from './LabeledSwitch'
 
 const mockProps = {
@@ -12,17 +13,29 @@ const mockProps = {
 
 describe('LabeledSwitch tests', () => {
   it('renders correctly without input', () => {
-    const labeledSwitch = render(<LabeledSwitch />)
+    const labeledSwitch = render(
+      <MemoryRouter>
+        <LabeledSwitch />
+      </MemoryRouter>
+    )
     expect(labeledSwitch).toBeTruthy()
   })
 
   it('renders correctly with input', () => {
-    const labeledSwitch = render(<LabeledSwitch {...mockProps} />)
+    const labeledSwitch = render(
+      <MemoryRouter>
+        <LabeledSwitch {...mockProps} />
+      </MemoryRouter>
+    )
     expect(labeledSwitch).toBeTruthy()
   })
 
   test('Switch can be clicked', () => {
-    const { getByRole } = render(<LabeledSwitch {...mockProps} />)
+    const { getByRole } = render(
+      <MemoryRouter>
+        <LabeledSwitch {...mockProps} />
+      </MemoryRouter>
+    )
     const switchButton = getByRole('checkbox')
 
     act(() => {

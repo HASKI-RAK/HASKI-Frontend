@@ -6,7 +6,7 @@ import Select from './DefaultSelect'
 
 describe('DefaultSelect tests', () => {
   test('DefaultSelect renders correctly', () => {
-    const select= render(
+    const select = render(
       <MemoryRouter>
         <Select value={'test'}>
           <MenuItem value={'test'} />

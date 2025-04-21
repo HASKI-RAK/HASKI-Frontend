@@ -70,7 +70,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
       setReportTopic(value)
     }
   }
-  
+
   const descriptionChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setDescription(event.target.value)
   }

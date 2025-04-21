@@ -1,6 +1,6 @@
 ﻿import LanguageIcon from '@mui/icons-material/Language'
 import log from 'loglevel'
-import { ForwardedRef, forwardRef, memo, useCallback, useState, MouseEvent } from 'react'
+import { ForwardedRef, MouseEvent, forwardRef, memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IconButton, Menu, MenuItem, Tooltip, Typography } from '@common/components'
 

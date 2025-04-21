@@ -1153,6 +1153,7 @@
   "error.postILS": "There was an Error sending the ILS questionnaire data.",
   "error.postListK": "There was an Error sending the ListK questionnaire data.",
   "error.postLogin": "There was an Error logging in.",
+  "error.sendStatement": "An error occurred while sending an xAPI statement.",
   "error.setLearningPathElementSpecificStatus": "There was an Error setting Learning Path Element Specific Status.",
   "error.setTopics": "There was an Error setting Topics.",
   "error.setTopicsPath": "There was an Error setting Topics Path.",

@@ -24,7 +24,7 @@ describe('Filter tests', () => {
           options={mockFilterProps.options}
           selectedOptions={mockFilterProps.selectedOptions}
           setSelectedOptions={mockFilterProps.setSelectedOptions}
-          />
+        />
       </MemoryRouter>
     )
     const select = getByTestId('filter')

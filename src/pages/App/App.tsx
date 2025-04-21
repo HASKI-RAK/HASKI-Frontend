@@ -1,5 +1,5 @@
-import { XAPIProvider, UserInteractionTracker } from 'react-xapi-wrapper'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { UserInteractionTracker, XAPIProvider } from 'react-xapi-wrapper'
 import { ReactFlowProvider } from 'reactflow'
 import { ThemeProvider } from '@common/theme'
 import { HaskiTheme } from '@common/utils'
@@ -74,4 +74,5 @@ export const App = () => {
     </ThemeProvider>
   )
 }
+
 export default App

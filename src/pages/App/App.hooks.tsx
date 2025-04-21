@@ -1,16 +1,30 @@
 import log from 'loglevel'
-import { XAPI, setupXAPI } from 'react-xapi-wrapper'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { XAPI, setupXAPI } from 'react-xapi-wrapper'
 import { getConfig } from '@shared'
 import { usePersistedStore } from '@store'
 
-// TODO: Document the return type
+/**
+ * @prop xAPI - The xAPI object.
+ * @category Hooks
+ * @interface
+ */
 type AppHookReturn = {
-  xAPI: XAPI | null
+  readonly xAPI: XAPI | null
 }
 
-// TODO: Document the hook
+/**
+ * useApp hook.
+ *
+ * @remarks
+ * Hook for the App logic.
+ * Provides the xAPI object to send statements to the LRS.
+ *
+ * @returns - Logic to send xAPI statements to the LRS.
+ *
+ * @category Hooks
+ */
 export const useApp = (): AppHookReturn => {
   // States.
   const [lmsUserID, setLmsUserID] = useState<string | undefined>(undefined)

@@ -7,11 +7,11 @@ describe('IFrameModal tests', () => {
   it('is displayed', () => {
     const open = true
     const { getByTestId } = render(
-        <MemoryRouter>
-          <Box>
-            <IFrameModal url="fakedomain.com:8080" title="Modal is open" isOpen={open} onClose={jest.fn()} />
-          </Box>
-        </MemoryRouter>
+      <MemoryRouter>
+        <Box>
+          <IFrameModal url="fakedomain.com:8080" title="Modal is open" isOpen={open} onClose={jest.fn()} />
+        </Box>
+      </MemoryRouter>
     )
 
     expect(getByTestId('IFrameModal')).toBeInTheDocument

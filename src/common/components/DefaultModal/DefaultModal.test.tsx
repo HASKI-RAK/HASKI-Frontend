@@ -12,7 +12,7 @@ describe('DefaultModal tests', () => {
         </Modal>
       </MemoryRouter>
     )
-    
+
     expect(modal).toBeTruthy()
   })
 })

@@ -15,7 +15,7 @@ describe('i18n test', () => {
 
     const onClickLanguageChange = (event: SelectChangeEvent<unknown>) => {
       const { value } = event.target
-      if(typeof value === 'string') {
+      if (typeof value === 'string') {
         i18n.changeLanguage(value)
         localStorage.setItem('i18nextLng', value)
       }

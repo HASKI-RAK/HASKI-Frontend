@@ -1,10 +1,9 @@
 import '@testing-library/jest-dom'
 import { render, renderHook, waitFor } from '@testing-library/react'
-import { App } from './App'
-import { useApp } from './App.hooks'
 import { mockServices } from 'jest.setup'
 import log from 'loglevel'
-
+import { App } from './App'
+import { useApp } from './App.hooks'
 
 describe('App tests', () => {
   test('renders correctly', () => {
@@ -43,12 +42,12 @@ describe('App tests', () => {
           page: '/functions/pages.',
           verb: '/variables/services.'
         },
-        userID: "1",
+        userID: '1',
         xAPI: expect.any(Object)
       })
 
-        expect(result.current.xAPI?.onError?.('test')).toBe('error.sendStatement test')
-      })
+      expect(result.current.xAPI?.onError?.('test')).toBe('error.sendStatement test')
+    })
   })
 
   test('useApp hook with getUser failed', async () => {
@@ -73,4 +72,3 @@ describe('App tests', () => {
     })
   })
 })
-
