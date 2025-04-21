@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
+import { useTranslation } from 'react-i18next'
 import { MemoryRouter } from 'react-router-dom'
 import { RemoteTopics } from '@core'
 import CreateLearningElementClassificationsStep from './CreateLearningElementClassificationsStep'
@@ -37,6 +38,7 @@ describe('CreateLearningElementClassificationsStep', () => {
   }
 
   it('renders the CreateLearningElementClassificationTable and buttons', () => {
+    const { t } = useTranslation()
     const { getByText } = render(
       <MemoryRouter>
         <CreateLearningElementClassificationsStep
@@ -46,6 +48,7 @@ describe('CreateLearningElementClassificationsStep', () => {
           handleLearningElementClassification={mockHandleLearningElementClassification}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          nextButtonText={t('appGlobal.next')}
         />
       </MemoryRouter>
     )
@@ -55,6 +58,7 @@ describe('CreateLearningElementClassificationsStep', () => {
   })
 
   it('disables the Next button when not all classifications are set', () => {
+    const { t } = useTranslation()
     const { getByText } = render(
       <MemoryRouter>
         <CreateLearningElementClassificationsStep
@@ -64,6 +68,7 @@ describe('CreateLearningElementClassificationsStep', () => {
           handleLearningElementClassification={mockHandleLearningElementClassification}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          nextButtonText={t('appGlobal.next')}
         />
       </MemoryRouter>
     )
@@ -73,6 +78,7 @@ describe('CreateLearningElementClassificationsStep', () => {
   })
 
   it('enables the Next button when all classifications are set', () => {
+    const { t } = useTranslation()
     const updatedLearningElementsClassification = {
       1: [
         { lms_id: 101, classification: 'KÜ', lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity' },
@@ -90,6 +96,7 @@ describe('CreateLearningElementClassificationsStep', () => {
           handleLearningElementClassification={mockHandleLearningElementClassification}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          nextButtonText={t('appGlobal.next')}
         />
       </MemoryRouter>
     )
@@ -99,6 +106,7 @@ describe('CreateLearningElementClassificationsStep', () => {
   })
 
   it('calls onBack when the Back button is clicked', () => {
+    const { t } = useTranslation()
     const { getByText } = render(
       <MemoryRouter>
         <CreateLearningElementClassificationsStep
@@ -108,6 +116,7 @@ describe('CreateLearningElementClassificationsStep', () => {
           handleLearningElementClassification={mockHandleLearningElementClassification}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          nextButtonText={t('appGlobal.next')}
         />
       </MemoryRouter>
     )
@@ -119,6 +128,7 @@ describe('CreateLearningElementClassificationsStep', () => {
   })
 
   it('calls onNext when the Next button is clicked', async () => {
+    const { t } = useTranslation()
     const updatedLearningElementsClassification = {
       1: [
         { lms_id: 101, classification: 'KÜ', lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity' },
@@ -136,6 +146,7 @@ describe('CreateLearningElementClassificationsStep', () => {
           handleLearningElementClassification={mockHandleLearningElementClassification}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          nextButtonText={t('appGlobal.next')}
         />
       </MemoryRouter>
     )
@@ -149,6 +160,7 @@ describe('CreateLearningElementClassificationsStep', () => {
   })
 
   it('renders the CreateLearningElementClassificationTable with correct props', () => {
+    const { t } = useTranslation()
     const { getByText } = render(
       <MemoryRouter>
         <CreateLearningElementClassificationsStep
@@ -158,6 +170,7 @@ describe('CreateLearningElementClassificationsStep', () => {
           handleLearningElementClassification={mockHandleLearningElementClassification}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          nextButtonText={t('appGlobal.next')}
         />
       </MemoryRouter>
     )

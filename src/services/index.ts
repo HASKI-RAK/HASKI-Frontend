@@ -42,3 +42,7 @@ export {
 } from './LearningPathLearningElementAlgorithm'
 export * from './Rating'
 export { postBufferContent } from './BufferContent'
+
+export { deleteCourse } from './Course'
+export { deleteTopic } from './Topic'
+export { deleteLearningElement } from './LearningElement'
