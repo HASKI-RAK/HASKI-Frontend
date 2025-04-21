@@ -1,58 +1,46 @@
 ﻿import DefaultSelect from '@mui/material/Select'
-import { MouseEvent, ReactNode, useCallback } from 'react'
-import { SelectProps as DefaultSelectProps, SelectChangeEvent } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
+import { SelectProps as DefaultSelectProps } from '@common/components'
+import { usePageName } from '@services'
 
 /**
- * @prop DefaultSelectProps - The props of a mui Select.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
+ * @prop {@link DefaultSelectProps} - The props of the default Select component.
+ * @prop {@link EventHandlers} - The props containing the event handlers.
  * @interface
  */
-type SelectProps<T> = DefaultSelectProps<T> & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+type SelectProps = DefaultSelectProps & EventHandlers
+
+/**
+ * WrappedSelect component.
+ *
+ * @remarks
+ * The WrappedSelect component is a wrapper around the MUI Select component.
+ * It is enhanced with xAPI functionality to track user interactions.
+ * WrappedSelect can be used as a standalone component on a page.
+ *
+ * @category Components
+ */
+const WrappedSelect = withXAPI(DefaultSelect, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'Select'
+})
 
 /**
  * Select component.
  *
- * @param props - Props containing the useStatement hook and the props of a mui Select.
+ * @param props - Props containing the default Select props and event handlers.
  *
- * @category Common
+ * @remarks
+ * The Select component is a wrapper around the WrappedSelect component.
+ * It retrieves the page name from a hook and passes it to the WrappedSelect component.
+ * Select can be used as a standalone component on a page.
+ *
+ * @category Components
  */
-const Select = <T, K extends T>({ useStatement = _useStatement, onClick, onChange, ...props }: SelectProps<K>) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.Select
-  })
-
-  return (
-    <DefaultSelect
-      {...props}
-      onClick={useCallback(
-        (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
-          onClick?.(event)
-        },
-        [sendStatement, onClick]
-      )}
-      onChange={useCallback(
-        (event: SelectChangeEvent<K>, child: ReactNode) => {
-          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname)
-          onChange?.(event, child)
-        },
-        [sendStatement, onChange]
-      )}>
-      {props.children}
-    </DefaultSelect>
-  )
+const Select = ({ ...props }: SelectProps) => {
+  const { pageName } = usePageName()
+  return <WrappedSelect pageName={pageName} {...props} />
 }
 
-// No memo, because Select cannot be wrapped
-export default Select
+export default memo(Select)

@@ -1,50 +1,46 @@
 import DefaultMenu from '@mui/material/Menu'
-import { memo, useCallback } from 'react'
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { MenuProps as DefaultMenuProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { usePageName } from '@services'
 
 /**
- * @prop DefaultMenuProps - The props of a mui Menu.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
+ * @prop {@link DefaultMenuProps} - The props of the default Menu component.
+ * @prop {@link EventHandlers} - The props containing the event handlers.
  * @interface
  */
-type MenuProps = DefaultMenuProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+type MenuProps = DefaultMenuProps & EventHandlers
+
+/**
+ * WrappedMenu component.
+ *
+ * @remarks
+ * The WrappedMenu component is a wrapper around the MUI Menu component.
+ * It is enhanced with xAPI functionality to track user interactions.
+ * WrappedMenu can be used as a standalone component on a page.
+ *
+ * @category Components
+ */
+const WrappedMenu = withXAPI(DefaultMenu, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'Menu'
+})
 
 /**
  * Menu component.
  *
- * @param props - Props containing the useStatement hook and the props of a mui Menu.
+ * @param props - Props containing the default Menu props and event handlers.
  *
- * @category Common
+ * @remarks
+ * The Menu component is a wrapper around the WrappedMenu component.
+ * It retrieves the page name from a hook and passes it to the WrappedMenu component.
+ * Menu can be used as a standalone component on a page.
+ *
+ * @category Components
  */
-const Menu = ({ useStatement = _useStatement, onClose, ...props }: MenuProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.Menu
-  })
-
-  return (
-    <DefaultMenu
-      onClose={useCallback(
-        (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
-          sendStatement(xAPIVerb.closed, new URL(import.meta.url).pathname)
-          onClose?.(event, reason)
-        },
-        [sendStatement, onClose]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultMenu>
-  )
+const Menu = ({ ...props }: MenuProps) => {
+  const { pageName } = usePageName()
+  return <WrappedMenu pageName={pageName} {...props} />
 }
 
 export default memo(Menu)

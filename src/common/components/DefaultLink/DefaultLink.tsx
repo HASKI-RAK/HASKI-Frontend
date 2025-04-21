@@ -1,57 +1,46 @@
 import DefaultLink from '@mui/material/Link'
-import { ElementType, MouseEvent, ReactElement, memo, useCallback } from 'react'
+import { ElementType, memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { LinkProps as DefaultLinkProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { usePageName } from '@services'
 
 /**
- * @prop DefaultLinkProps - The props of a mui Link.
- * @prop useStatement - Custom hook to send xAPI statements
- * @remarks
- * https://github.com/mui/material-ui/issues/15827
- * https://www.typescriptlang.org/play?ssl=25&ssc=3&pln=12&pc=1#code/PQKhAIFkEMBcFMBOBLaAbAtAV2eARlrLAPYB24AxsQLYAOZ8ps48AHgqQM7Jni1rQAngHNExLKQAm4ABQAxYogDu0SYmkALZMI1JwiyXoBmEirB6kAlAChwEWxADK1dGj4CRYidNga44Tg1iJU5wQXFwIKVwEhZ2Rh9dcBcEFHRsXAIiXio6BiZwZHJYQVp4TgoUWmYlLTR4cHROYnAjRRVJIuFGyO1dRH11Y1NzMgA6cAdwABUtUP4hUXEpcCxOcrsAQXAAYQBVR2mAeUhwACUAUTlwAAUzo5uIWOgKLXgANwbfZE4xh2BJtZgACAJJ5RDMRDwACOOCh0kMZSkjAoyHK1mQ4OYZ3gL1gABpwABvVbrHFGcAAX1aYmo4AARFC8fSANwYrHgABChBI5CMtIZAAEUkhUJgcMAqFDgNzsqRWez6BDiVyxCEkGdxKlCQAZIoAaypNJoDKZZgwXlSGEkNAVQLA4Au8RWvgaIrS4syPN4ay6PQoaxIdKhFNoYlooRAwGsVC4zB2gZo5Ju4dlvPAAF5wAAeHZxDiSUI4vFjC71aiMWDTUrwAB8MlsfHDnAAXFzvaQU8QI9nG+Bdvi+yrcvRSJWAPxtnYs-Ad8mT864sxjcnZgAS00gOrTZDL8ArTFrVMbtesljbxeXl9ge4PzAzR6JjdjnGYJNeyDQakYhKyvPJhJjEBUKvkaWZht2nBsv2UKwFgiDkA2-b9tmO7kCGGZEn+ZDktSRJAWMIGwJSp7IchRIfl+UKkJSQ7ZjKHakeAlhspSbL2hAmySNIbCwIg0CtBITbdkgJR2NGL7xom1DJqmHZOnx0BdrQmY5nmvEJEWS6wKW5aVtWZT1o2EERm2aHKZwvZkTsg5ke+NCjhOU4ziYpALngxDEPU0CkDO2GkPOF7aSu8BGOum7bvJemHse-anuei4ltet6Vpmj7PmQoHvnU36kISrm-nOoWAcB5TMNS4HNtBhQUjIrmWMSQ4vl58BjGgxDCDI9KzD8hShK5ACEQ30ixja0TB8BwQhsh0Wh4AYVhRVGHhBFESRQ79hROXUeNyH0WhTGjWx1j2ouyIDNAtAqVG1hsEqzCGEY0BYGgzCuWYFjgJsV0yA1T79pJs5yuSqlrPA5IyKQL1oKNE1TYhs1qusiCaoQSBMWR2adO8lACJwnAAHLQBWGb0t9tD0gEJT1JhJKdJwCyCG29JGPUrD0vlbMACLIFCH1kMzVBoFg1DylS61kZjGgAEy1gpCTwNI7pihkQPpiO+SwKEvqkN0AkBq+JohsJtD0TLGOS7m0myd2aEbZLGtjkwmF6qQ+q7ZLyEkKTwAIK+9L22R-nkphwehR7nvgMC4CkMQsCuMEivvNAaR4DT3U1hUVTMIE4hfpQDkCEU4C1IwMRzH1qykLkd6KwNAeR8hr6CDTRIkngLz6ks3jMwAxHIcgAAxD4PlOUhHZEW57CaG8GoUm2rZCBzmwAz0GNu0Ady9W7PG9oQp-HKcvAMOZrLsGhPkve-SvtlQ3jeCaQmF8Vg8CX0HS2h0t7-IdHsfx2gdqSgk4p1QGneApMDLlEqMgaoAQggvWkCOIu5BS7FArr1UwNBa6SHrsfKmLcIFt3wJ3buUg+4AEZpYAGYACsA8OYF3aogPuRg2Fjx-lPSWa8jbzxMo-UgghF6kG3qva2oVlL73YIfcMXD6LYwtvtJGGotTo0bEdE6oAIA7G7EI2g0BXwNChLCXmisYiZ3ABgcARwCY6gAJrnAuAART2CCS4XNwAggJjMOxNwLiOB2GcEENxpi3B1JsOxABxe4ewCZcymFzBg+B4AUGeusfQFINBEFMsCYQyBfBYDwGMXIwBqDIEqMQZoRhYDACgY4GB1QMAAHV4B4G4AgYAPxOCv04MAaWg8ABsEx-i3VYPdQoTAkBPQoA0HR1BqBkAstmU4GkpChCOJ8RAKBJDQHAVAmAtAmKrMLOARw1NFZzMckwJZkAADaAByCgeNOAAGl4CCHuQAXXSgDZ5RMKwLlfCgXW1Vm71AXNeMYOxHCOGUqJNEUFrC0TuooZgJQyhcgMfAG5+ZNLWM2ds3Z9R9mXSPBmRsAAyKADyTKcC+ZS3Y2DFnNmWbWNkKLlTooaBspA2zsUssbCs50JyeVbOQDsvZNYDm2V2LitZiVlwpSYFA6wZKZr9ipZyLFNymJUqOGU2A2ZIWXM1hZJp+SNCrh2LWQk+p3nEApHMhZnYWWQFrPFdlYzUXmIxWhHYzy3lCPJf2AAPuAe5Yg473MbGG+5Ag8DwDQNG0N4aEDsGTeAWNabYApkxCnD5MbU28UcCksgOzEAFpTfcrUaAiiKwzbGmtdbJC5pcBWht4am1jkkCW2M5bK2ZvDbGeOzaO2PLICO7trb81juHdAZtvay0zsLfc+mRL4B7mTqMUgY62gGwAGo-GQOAsda7wGSFnV5RQIJSD9HyWO7NjhkAAC94DOFcA+4tL74A6hTsIeAY6u2Kyfa+99gDAOEFrd2kDP6-0AZXXOhd36wNJoQxO+d0Hv2-sQP+sd3BQMuHAyu-DsGcPwarSYQB5rJC+Dw-HCEIJYxjoSIxsgY7ylkBgyh9jsYYOQEVsgEWPHONYbg-c6qHLmBFFSNM2ZV6Bj-XALQwebYgVdGqhQweKmqbAuENVfp2m1MgsbNQrTqm+LqcbAAFjMzpyz-ZlOGYs8Z-sAzbNGb042AA7O55znn+wAA5fO6eqgATmC-Zr6mmnMhcbJsAz5nYv9k2DZmLkXNg+bS8Z5FXrlTSamS8BoaEtXrE2PzLgjV+x7rWIe7g4DfptneMQcVrFRnjK5TMcQrwziwP4PAf1BjXnvMzCuyNsAx1VD6xN3r9RavHvqNNq69QbgvU4HAcjg7Hk5VnTlHUuJ3hdB25+Ftq31viba96jrA38b-PgAc3MAbhvHNCB51SHm1U4ilJIB7g3A2Ene568Z+XECydOecyQJqnY5pZddobQjnt2d1m9vzPyo5gD7BAUVfLBhysSA0MFGxLr8DRD4ForoC55Ch38ZCN1fmDfKAuG4KdzDoB+zd4md3Lps7h+66qRQxwo1ChC4Kq4fKCDZUii7nKaxg58uWltMPCSw8Dbjl7fnCQ4gWcnNAoQEd2vCI61SY5Nlqv1fkqyA5GyPOeeUe5g7NfEG15wVV4AKWNjOYQiHp8odLOV+8o8VLFN0-ZwCxLkWJpGAXOpYVoQSQhgXEUIwehyRQKNOORcRhU9BSSqFbMEh9SxyUKQCXZECfC5LNC2F4Z4XlGqsdSTPqGjTC65amb-LIKqTOXLlOCvIIW8hRuLcmwiAoCyOUcKW4lWwBtY2ZvWButt794IF3gfnyViQO5Ty3lfJIsB5dmXxWsVL9UhGzy43NtnvqBezb1XOBzZPXvvLkyQeFfbHKEr8ASWmxuKpIklJCQeII6QpT6p5Zj3L+T3Ko60ptg-6r5kRaIbScTzTzxtADCYhlD8TmCfCNDla-CIGeLMABhbKVhoBCJkCkEBBYBXSoqhAAAGt+9+9Qv0tBOB261OZEtOyEeIFg5eV4ueh+pWuBJev86OksEAgo2gscUIiB+Bew6Svg-g-CsQ+i+MPQxssQ5OpAcAyA2B-kFOVyOk+BgoiIfM620gchDQtBIYLBRQhiqg7BNO0YH8wMQu2efBYU+ehexe1U-YCBYhniFItBL88AtBhI5Ok29QoQSgn4bgCalA6+8IDh-YEAsww2SgbGOc9GzA-g5ORBzQaBz+3BvA9A7SFgSR4kTUCRPWS28Am+LUPkPhaOIA+BqRBckyBQDq5cDQjslY5RnBAM20jAvBOk14BMxAhgjRfhHBAR4AQRiAr8oRXRJC6Seh0RgCyS4Al+isfRThyEWxkgdR2+kxoh0xIIgRwRix4RbeLAbCKSNQMRGx+xfR+BgABWSADwf+AOar4FqGodca6FCJXLHAQlBt0KgeAC2LfhgAdnVvUPgEIo9M9K9BMJyPjvBPAPgbEFoDoLWjoGikkImvuKlHgEIkTqQX6OsPopgfjuclERaksfQcQAekeuArDrdrQTsUOFsdUX1ocbiDvvAScTTjMXMQsWEUkCQPPhoPNNcaFEnmYCXA8XEU8Ygbsf2FsXPgvjUbyQ0UOFMUKWcbMRcWKQ0B3CsR2AqesX4NgQJPrh5D3q0IyWsNKTURyWRLftyeCm2B5PUfySIc0f4T1PMOGJQD5JEImipOKpWMgEYEIrUOUlKQSXeJEAYuALacQPabfn0TMEkE8oNjHBzhabEQ0KSSTiXLoOgg0ImalMIBhqEOTrfuXF4DoKme8naeoBMqkEUaQFmSCONqEAJPQKQUYA8WCeTrcpXuCZCdCfNvjgSWYIoJ8jIFkrADksAGoNANUr8BQPjEoMIGMIoMIMAOsPUPOYgJwBgFZsAL3K6BgFOcyfUBgBGPAFgDaJYFma0ZgRYOgA0GCTrN0N8P1LiFNA0Lcr1HdCgmYv0PAIucuauXkgUkUiUk0iCDsJEsAHeTCfAMAGnMQHgKUgYqkMAOBRhkgGMNQJIG+fgdsLcoOYIMOesakuQHEWDJIDBdkq2LkhaoUsUjQMAMhahehY6eedOeAg1M8EtiSbMRhTOSwbmaobEHHP0PoZrM7v4dGTHPAIrNsSqUOAwfef1n8hzoCn5scf6dMTsK4B3BQIaMOfCGWWXLkd7qlL1LfmYtEb4D0GmT3lmS0jECgMIP+hdLMWQAoAbLJZZZ3DEJ5K6chCFUJYwbUW4TpKFWsBcJ8EwGuHLvUIgNmGLsIb4QCIKFyr0maFJmrigGYEgEOPHHgDeoYKwMZbpoOlDNQAmogKZfgRZI0EtqWRoUkLQRqa3jUSwVWUwDFf2INR6e3hGIzszmKNmJNW3hZMIcdGqaFIibAJDpWG2FzNVHJXDmZB2B-kvq1g3sDqDljuKuul-pVibK2MSKtZsetS9JtU5UwElbpIScqjWHtY9kzIjp5jlkDs-qDvLFIAIZ-lKlzkKgWOsgSldZKmUAclAc2G2HcvcrSl8q7m-ryB-l-jSs2F8tVAiS9Vte9dSqus9a9GTeNp8r9b9u8mjQ8vtYGkTZLg3h1mhF-hbj-lmH-jKoATHgqjpCATLmARAS7lmGDZIBDdzYptAbcNjUHk0S0TmROqlJ0eTv5ONZQIMW5B9aMeMfAB1QGWrcwhkksT0WNQQZQdQRCHWUEPIboBWEwooA7f4C4HagEIwOkqORXFbYYWIaqa7YgFHvJibacecfMSEcacIoWY8T8OupIDrfsdqb6b4YKckcKUaTHC0ASVup9JgusMnTpWRFsZutoWQGnRHfqVHaKUsS2YIG2dIA2REQ0GsUWZsYneeind3fUClZwFNdXbqZnXYI6NFMwAsDMtIBuakJbXrTrSxrGMMSFHiGMRMSPWZbXYadHZcUkKsQ8fHF7VQUsZRm4NETRlKZ0fkqEIhgLjrWfdRr4MPQKVvVna0XsGcDqFFeAFBoaLEGgksXob1E8uUnaiXf4QaY9M2oSKGbQdACNRPfHcxcXY0A7UYmfrnYYDrRoPHmHi5n6arfjt+hbVrR2FmbQZwIRmgDYbriYtrqlH1Q0IYFwCaeaWCl0DrSRguPclQx+pthWJ0EJptgIGRudq-fgVPu4IVtIAmqgV8DmQvaXU3FkaxvrcLavWYOvcbZvUQ+AMnGkAULEGDDrQY6gEwDw9mnbo2pBqOptnffWnXsTVTa9ZTtteALtc+H9YdXKCdUihLhzQfh2Eso2ILbDRo6LRilmFzVDbQA8iTdTW9bTTKrzQ9ZLfirypGUsjE0jVzjcAATah42ykAA
- * @category Common
+ * @prop {@link DefaultLinkProps} - The props of the default Link component.
+ * @prop {@link EventHandlers} - The props containing the event handlers.
  * @interface
  */
-type LinkProps<C extends ElementType, P = object> = DefaultLinkProps<C, P> & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+type LinkProps<C extends ElementType, P = object> = DefaultLinkProps<C, P> & EventHandlers
+
+/**
+ * WrappedLink component.
+ *
+ * @remarks
+ * The WrappedLink component is a wrapper around the MUI Link component.
+ * It is enhanced with xAPI functionality to track user interactions.
+ * WrappedLink can be used as a standalone component on a page.
+ *
+ * @category Components
+ */
+const WrappedLink = withXAPI(DefaultLink, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'Link'
+})
 
 /**
  * Link component.
  *
- * @param props - Props containing the useStatement hook and the props of a mui Link.
+ * @param props - Props containing the default Link props and event handlers.
  *
- * @category Common
+ * @remarks
+ * The Link component is a wrapper around the WrappedLink component.
+ * It retrieves the page name from a hook and passes it to the WrappedLink component.
+ * Link can be used as a standalone component on a page.
+ *
+ * @category Components
  */
-const Link = <C extends ElementType>({
-  useStatement = _useStatement,
-  onClick,
-  ...props
-}: LinkProps<C, { component?: C }>): ReactElement => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.Link
-  })
-
-  return (
-    <DefaultLink
-      onClick={useCallback(
-        (event: MouseEvent<HTMLSpanElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
-          onClick?.(event)
-        },
-        [onClick, sendStatement]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultLink>
-  )
+const Link = <C extends ElementType>({ ...props }: LinkProps<C, { component?: C }>) => {
+  const { pageName } = usePageName()
+  return <WrappedLink pageName={pageName} {...props} />
 }
 
 export default memo(Link)

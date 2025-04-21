@@ -1,50 +1,46 @@
 import DefaultToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-import { MouseEvent, memo, useCallback } from 'react'
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { ToggleButtonGroupProps as DefaultToggleButtonGroupProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { usePageName } from '@services'
 
 /**
- * @prop DefaultToggleButtonGroupProps - The props of a mui ToggleButtonGroup.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
+ * @prop {@link DefaultToggleButtonGroupProps} - The props of the default ToggleButtonGroup component.
+ * @prop {@link EventHandlers} - The props containing the event handlers.
  * @interface
  */
-type ToggleButtonGroupProps = DefaultToggleButtonGroupProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+type ToggleButtonGroupProps = DefaultToggleButtonGroupProps & EventHandlers
+
+/**
+ * WrappedToggleButtonGroup component.
+ *
+ * @remarks
+ * The WrappedToggleButtonGroup component is a wrapper around the MUI ToggleButtonGroup component.
+ * It is enhanced with xAPI functionality to track user interactions.
+ * WrappedToggleButtonGroup can be used as a standalone component on a page.
+ *
+ * @category Components
+ */
+const WrappedToggleButtonGroup = withXAPI(DefaultToggleButtonGroup, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'ToggleButtonGroup'
+})
 
 /**
  * ToggleButtonGroup component.
  *
- * @param props - Props containing the useStatement hook and the props of a mui ToggleButtonGroup.
+ * @param props - Props containing the default ToggleButtonGroup props and event handlers.
  *
- * @category Common
+ * @remarks
+ * The ToggleButtonGroup component is a wrapper around the WrappedToggleButtonGroup component.
+ * It retrieves the page name from a hook and passes it to the WrappedToggleButtonGroup component.
+ * ToggleButtonGroup can be used as a standalone component on a page.
+ *
+ * @category Components
  */
-const ToggleButtonGroup = ({ useStatement = _useStatement, onChange, ...props }: ToggleButtonGroupProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.ToggleButtonGroup
-  })
-
-  return (
-    <DefaultToggleButtonGroup
-      onChange={useCallback(
-        <T, K extends T>(event: MouseEvent<HTMLElement, globalThis.MouseEvent>, value: K) => {
-          sendStatement(xAPIVerb.changed, new URL(import.meta.url).pathname)
-          onChange?.(event, value)
-        },
-        [sendStatement, onChange]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultToggleButtonGroup>
-  )
+const ToggleButtonGroup = ({ ...props }: ToggleButtonGroupProps) => {
+  const { pageName } = usePageName()
+  return <WrappedToggleButtonGroup pageName={pageName} {...props} />
 }
 
 export default memo(ToggleButtonGroup)

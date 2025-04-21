@@ -1,50 +1,46 @@
 import DefaultMenuItem from '@mui/material/MenuItem'
-import { MouseEvent, memo, useCallback } from 'react'
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { MenuItemProps as DefaultMenuItemProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { usePageName } from '@services'
 
 /**
- * @prop DefaultMenuItemProps - The props of a mui MenuItem.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
+ * @prop {@link DefaultMenuItemProps} - The props of the default MenuItem component.
+ * @prop {@link EventHandlers} - The props containing the event handlers.
  * @interface
  */
-type MenuItemProps = DefaultMenuItemProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+type MenuItemProps = DefaultMenuItemProps & EventHandlers
+
+/**
+ * WrappedMenuItem component.
+ *
+ * @remarks
+ * The WrappedMenuItem component is a wrapper around the MUI MenuItem component.
+ * It is enhanced with xAPI functionality to track user interactions.
+ * WrappedMenuItem can be used as a standalone component on a page.
+ *
+ * @category Components
+ */
+const WrappedMenuItem = withXAPI(DefaultMenuItem, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'MenuItem'
+})
 
 /**
  * MenuItem component.
  *
- * @param props - Props containing the useStatement hook and the props of a mui MenuItem.
+ * @param props - Props containing the default MenuItem props and event handlers.
  *
- * @category Common
+ * @remarks
+ * The MenuItem component is a wrapper around the WrappedMenuItem component.
+ * It retrieves the page name from a hook and passes it to the WrappedMenuItem component.
+ * MenuItem can be used as a standalone component on a page.
+ *
+ * @category Components
  */
-const MenuItem = ({ useStatement = _useStatement, onClick, ...props }: MenuItemProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.MenuItem
-  })
-
-  return (
-    <DefaultMenuItem
-      onClick={useCallback(
-        (event: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
-          onClick?.(event)
-        },
-        [sendStatement, onClick]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultMenuItem>
-  )
+const MenuItem = ({ ...props }: MenuItemProps) => {
+  const { pageName } = usePageName()
+  return <WrappedMenuItem pageName={pageName} {...props} />
 }
 
 export default memo(MenuItem)

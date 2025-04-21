@@ -48,6 +48,7 @@ export { FavoriteBorderIcon } from './DefaultFavoriteBorderIcon/DefaultFavoriteB
 export { Task } from './DefaultTask/DefaultTask'
 export { CheckBoxOutlineBlank } from './DefaultCheckBoxOutlineBlank/DefaultCheckBoxOutlineBlank'
 export * from './DefaultQuestionMark/DefaultQuestionMark'
+export * from './DefaultInfo/DefaultInfo'
 export { Save } from './DefaultSave/DefaultSave'
 export { MoreVert } from './DefaultMoreVert/DefaultMoreVert'
 export { Edit } from './DefaultEdit/DefaultEdit'

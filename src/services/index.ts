@@ -2,13 +2,11 @@
  * Reusable service calls go here.
  * ! Dont forget to mock them in jest.setup.ts
  */
-export { AuthContext } from './AuthContext'
-export type { AuthContextType } from './AuthContext'
+export { AuthContext, type AuthContextType } from './AuthContext'
 export { AuthProvider } from './AuthProvider'
-export { fetchLearningElementSolution } from './LearningElementSolution'
-export { postLearningElementSolution } from './LearningElementSolution'
-export { RoleContext } from './RoleContext'
-export type { RoleContextType } from './RoleContext'
+export { fetchLearningElementSolution, postLearningElementSolution } from './LearningElementSolution'
+export { postContactForm, type FormDataType } from './contact'
+export { RoleContext, type RoleContextType } from './RoleContext'
 export { RoleProvider } from './RoleProvider'
 export {
   fetchLearningPathElement,
@@ -17,8 +15,6 @@ export {
   postCalculateLearningPathForAllStudents
 } from './LearningPath'
 export { fetchLearningPathTopic, postTopic, postAddAllStudentsToTopics } from './Topic'
-export { postContactForm } from './contact'
-export type { FormDataType } from './contact'
 export * from './auth'
 export * from './SnackbarContext'
 export { SnackbarProvider } from './SnackbarProvider'
@@ -40,6 +36,7 @@ export { postCalculateLearningPathILS } from './LearningPath'
 export { postUserSettings } from './Theme/postUserSettings'
 export { DefaultThemeProvider as ThemeProvider } from './ThemeProvider/ThemeProvider'
 export { useThemeProvider } from './ThemeProvider/ThemeProvider.hooks'
+export * from './PageName'
 export {
   fetchStudentLpLeAlg,
   fetchTeacherLpLeAlg,
@@ -47,7 +44,6 @@ export {
   postTeacherLpLeAlg
 } from './LearningPathLearningElementAlgorithm'
 export { postBufferContent } from './BufferContent'
-
 export { deleteCourse } from './Course'
 export { deleteTopic } from './Topic'
 export { deleteLearningElement } from './LearningElement'
