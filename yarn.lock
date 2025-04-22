@@ -7907,10 +7907,10 @@ range-parser@^1.2.1, range-parser@~1.2.1:
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
-rating-charts.js@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/rating-charts.js/-/rating-charts.js-1.3.1.tgz#407749acedee216b472f9e584caf1edaae82c513"
-  integrity sha512-Oolt8hzv/OyKVWfCKf+Pz61osda0KYkuWS93RZjsiPlMR0xw0LzH4P1QS/5rA8G/lSPhC+vyoniT9QgzPK1Yxg==
+rating-charts.js@1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/rating-charts.js/-/rating-charts.js-1.3.2.tgz#24c4bdd37414cfb8dc137ff01cd8673276a56763"
+  integrity sha512-BCTXRIQOg0cBamFSmlFD27VPQIG7ye99cuK595Je5GFyFl4tlJ5INTzTzCF7lX87QSfIkiMrNlEXNdhcCOFKeg==
   dependencies:
     d3 "^7.9.0"
 
@@ -8000,15 +8000,15 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-rating-charts@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/react-rating-charts/-/react-rating-charts-1.4.2.tgz#85862aa716670fc815746b8930f5548a790d45ce"
-  integrity sha512-zBNNXwyjQE13lQh4oWusXQ3rxuBdQd9quxXvx5dyhyvrLtriWKXaR8oliqNeRlHGYuNipUME2uESja3eu/RZNQ==
+react-rating-charts@1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/react-rating-charts/-/react-rating-charts-1.4.3.tgz#fcc0911cd67aa7f76958df619951404c38ae8fd4"
+  integrity sha512-UAeFq+pj7u/Xyx6ZTlnkea+03zVQTdV7mh8CANvr4+rfLUC4iPIBPjPuywQfAmH/cgb+8iaF06PDM2fq8tEKhg==
   dependencies:
     "@testing-library/react" "^16.0.1"
     "@types/react" "^18.3.4"
     "@types/react-dom" "^18.3.0"
-    rating-charts.js "^1.3.1"
+    rating-charts.js "1.3.2"
     ts-node "^10.9.2"
 
 react-refresh@^0.14.0:
