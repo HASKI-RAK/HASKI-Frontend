@@ -82,26 +82,26 @@ const CreateDefaultLearningPathTable = ({
 
   if (activeStep === 0) {
     return (
-      <Grid container direction="column" justifyContent="space-between" alignItems="center" sx={{ height: '100%' }}>
-        <Grid item>
-          <CoverSheet
-            header={t('components.CreateDefaultLearningPathTable.header')}
-            body={t('components.CreateDefaultLearningPathTable.introduction')}
-            imagePath="ProjectDescriptionImage04.jpg"
-          />
-        </Grid>
-        <Grid item>
+      <>
+        <CoverSheet
+          header={t('components.CreateDefaultLearningPathTable.header')}
+          body={t('components.CreateDefaultLearningPathTable.introduction')}
+          imagePath="ProjectDescriptionImage04.jpg"
+        />
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2, px: 2 }}>
           <Button
             variant="contained"
             color="primary"
             onClick={() => setActiveStep((prev) => prev + 1)}
-            sx={{ mb: '2rem', width: '20rem' }}>
+            sx={{width: '20rem' }}
+          >
             {t('appGlobal.start')}
           </Button>
-        </Grid>
-      </Grid>
+        </Box>
+      </>
     )
   }
+
 
   return (
     <DndContext
