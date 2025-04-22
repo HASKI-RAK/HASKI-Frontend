@@ -2,6 +2,7 @@ import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Typography } from '@common/components'
 
+// TODO
 const StudentRatingInfo = () => {
   const { t } = useTranslation()
 
