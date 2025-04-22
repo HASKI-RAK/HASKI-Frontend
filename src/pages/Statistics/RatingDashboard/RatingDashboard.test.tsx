@@ -2,14 +2,14 @@ import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
-import RatingStatistics from './RatingStatistics'
+import RatingDashboard from './RatingDashboard'
 
-describe('RatingStatistics', () => {
-  it('it renders correctly and buttons can be pressed', () => {
+describe('RatingDashboard tests', () => {
+  it('renders correctly and buttons can be pressed', () => {
     const { getAllByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
-          <RatingStatistics />
+          <RatingDashboard />
         </MemoryRouter>
       </AuthContext.Provider>
     )

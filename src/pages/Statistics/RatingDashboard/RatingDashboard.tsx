@@ -10,7 +10,7 @@ import {
 import { AuthContext } from '@services'
 
 /**
- * # RatingStatistics page
+ * # RatingDashboard page
  *
  * Displays the student rating and learning element rating dashboard.
  *
@@ -19,10 +19,10 @@ import { AuthContext } from '@services'
  *
  * @example
  * ```tsx
- * <RatingStatistics />
+ * <RatingDashboard />
  * ```
  */
-const RatingStatistics = () => {
+const RatingDashboard = () => {
   const { t } = useTranslation()
   const [selected, setSelected] = useState<string>('student')
   const [isOpen, setIsOpen] = useState(true)
@@ -49,8 +49,8 @@ const RatingStatistics = () => {
           <Grid container direction="column" alignItems="center" sx={{ mt: 5 }}>
             <Grid item>
               <ToggleButtonGroup value={selected} onChange={handleChange} exclusive>
-                <ToggleButton value="student">{t('pages.RatingStatistics.studentRating')}</ToggleButton>
-                <ToggleButton value="learningElement">{t('pages.RatingStatistics.learningElementRating')}</ToggleButton>
+                <ToggleButton value="student">{t('pages.ratingdashboard.studentRating')}</ToggleButton>
+                <ToggleButton value="learningElement">{t('pages.ratingdashboard.learningElementRating')}</ToggleButton>
               </ToggleButtonGroup>
             </Grid>
             <Grid sx={{ mt: 5 }}>
@@ -72,4 +72,4 @@ const RatingStatistics = () => {
   )
 }
 
-export default memo(RatingStatistics)
+export default memo(RatingDashboard)

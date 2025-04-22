@@ -1,2 +1,2 @@
-export * from './RatingStatistics'
+export * from './RatingDashboard'
 export * from './LearnerCharacteristics'
