@@ -44,7 +44,6 @@ export { Stepper } from './DefaultStepper/DefaultStepper'
 export { Step } from './DefaultStep/DefaultStep'
 export { List } from './DefaultList/DefaultList'
 export { ListItem } from './DefaultListItem/DefaultListItem'
-export { ListItemButton } from './DefaultListItemButton/DefaultListItemButton'
 export { Card } from './DefaultCard/DefaultCard'
 export { CardContent } from './DefaultCardContent/DefaultCardContent'
 export { CardHeader } from './DefaultCardHeader/DefaultCardHeader'
@@ -85,6 +84,7 @@ export type { TypographyProps } from './DefaultTypographyProps/DefaultTypography
 export type { SelectChangeEvent } from './DefaultSelectChangeEvent/DefaultSelectChangeEvent'
 export type { LinearProgressProps } from './DefaultLinearProgress/DefaultLinearProgress'
 export type { RadioProps } from './DefaultRadioProps/DefaultRadioProps'
+export type { ListItemButtonProps } from './DefaultListItemButtonProps/DefaultListItemButtonProps'
 
 /**
  * Reusable objects
@@ -114,3 +114,4 @@ export { default as Select } from './DefaultSelect/DefaultSelect'
 export { default as Radio } from './DefaultRadio/DefaultRadio'
 export { default as Switch } from './DefaultSwitch/DefaultSwitch'
 export { default as Checkbox } from './DefaultCheckbox/DefaultCheckbox'
+export { default as ListItemButton } from './DefaultListItemButton/DefaultListItemButton'

@@ -1,16 +1,16 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import Popover from './DefaultRadio'
+import Radio from './DefaultRadio'
 
-describe('DefaultPopover tests', () => {
-  test('DefaultPopover renders correctly', () => {
-    const popover = render(
+describe('DefaultRadio tests', () => {
+  test('DefaultRadio renders correctly', () => {
+    const radio = render(
       <MemoryRouter>
-        <Popover />
+        <Radio />
       </MemoryRouter>
     )
 
-    expect(popover).toBeTruthy()
+    expect(radio).toBeTruthy()
   })
 })
