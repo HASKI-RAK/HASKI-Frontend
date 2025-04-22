@@ -17,7 +17,7 @@ import {
   ProjectDescription,
   Topic,
   TopicsLearningPath,
-  RatingStatistics
+  RatingDashboard
 } from '@pages'
 import { AuthProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
 import { useApp } from './App.hooks'
@@ -60,7 +60,7 @@ export const App = () => {
                       <Route path="/login" element={<Login />} />
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-                      <Route path="/ratingdashboard" element={<RatingStatistics />} />
+                      <Route path="/ratingdashboard" element={<RatingDashboard />} />
                       <Route path="/projectdescription" element={<ProjectDescription />} />
                       <Route path="/glossary" element={<Glossary />} />
                       <Route path="/aboutus" element={<AboutUs />} />

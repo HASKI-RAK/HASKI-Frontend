@@ -2,11 +2,13 @@ import { memo } from 'react'
 import { Box, Drawer } from '@common/components'
 import { LearningElementRatingInfo, StudentRatingInfo } from '@components'
 
+// TODO
 type DashboardInfoDrawerProps = {
   isOpen: boolean
   selectedDashboard: string
 }
 
+// TODO
 const DashboardInfoDrawer = ({ isOpen, selectedDashboard }: DashboardInfoDrawerProps) => {
   return (
     <Drawer

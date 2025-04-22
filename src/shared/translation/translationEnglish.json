@@ -1391,7 +1391,7 @@
   "pages.7": "7",
   "pages.8": "8",
   "pages.9": "9",
-  "pages.aboutus": "About us",
+  "pages.aboutus": "About Us",
   "pages.aboutus.interdisciplinaryBody": [
     {
       "header": "Learning elements",
@@ -1844,7 +1844,7 @@
   "pages.imprint.referenceLinks": "References and links",
   "pages.imprint.referenceLinksText": "The university could only be held liable for direct or indirect references (“hyperlinks”) to third-party websites beyond the university’s realm of responsibility in such case where the university were to know of the content and it were to be technically possible and reasonable to expect it to prevent usage in the case of illicit content. Kempten University of Applied Sciences explicitly declares herewith that no illicit content was identifiable at the time when links were to be created to the pages in question. The university has no influence whatsoever over the current and future design, content or authorship of the linked/referenced pages. It therefore explicitly distances itself herewith from all content on all linked/referenced pages that have been changed since the link was created. This declarative statement applies to all links and references provided throughout the university’s website. The operator of the referenced website is solely responsible for illegal, faulty, or incomplete contents, and especially for damages resulting from the use or non-use of information presented in this way, and not the party that merely refers to the according publication via links.",
   "pages.imprint.subtitle": "HASKI Teaching/Learning Platform from the Software Development Lab at Kempten University",
-  "pages.learnercharacteristics": "Learner characteristics",
+  "pages.learnercharacteristics": "Learner Characteristics",
   "pages.login": "Login",
   "pages.login.redirect": "You will be redirected after a few seconds",
   "pages.privacypolicy": "Privacy Policy",
@@ -1905,8 +1905,8 @@
   "pages.projectdescription.introductionBody": "HASKI stands for \"Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt\" (\"Higher education teaching: Adaptive, self-directed, AI-assisted\") and is funded by the Federal Ministry of Education and Research with a project duration until December 2025. HASKI is a collaborative project of three Bavarian universities: OTH Regensburg, Aschaffenburg UAS & Kempten UAS.",
   "pages.projectdescription.introductionHeader": "What is HASKI?",
   "pages.ratingdashboard": "Rating Dashboard",
-  "pages.RatingStatistics.learningElementRating": "Learning Element Rating",
-  "pages.RatingStatistics.studentRating": "Student Rating",
+  "pages.ratingdashboard.learningElementRating": "Learning Element Rating",
+  "pages.ratingdashboard.studentRating": "Student Rating",
   "pages.topic": "Topic",
   "pages.topic.grouped": "Grouped",
   "pages.topic.menuItemAlgorithms": "Change learning path algorithm",

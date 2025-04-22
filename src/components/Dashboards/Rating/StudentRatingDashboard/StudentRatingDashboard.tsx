@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Histogram, LineGraph, Rating, SpiderGraph, Table, TableColumnProps } from 'react-rating-charts'
 import { FormControlLabel, Grid, Radio, RadioGroup } from '@common/components'
+import { useTheme } from '@common/hooks'
 import { Typewriter } from '@components'
 import {
   StudentRatingDashboardHookReturn,
@@ -79,7 +80,8 @@ const StudentRatingDashboard = ({
   }, [topics, spiderGraphData])
 
   // General.
-  const color = 'darkorange'
+  const theme = useTheme()
+  const color = theme.palette.primary.main
 
   // Rating title and tooltips.
   const title = t('components.StudentRatingDashboard.ratingTitle')
