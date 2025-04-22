@@ -8,7 +8,7 @@ beforeEach(() => {
   jest.mock('react-i18next', () => ({
     useTranslation: () => ({
       i18n: {
-        getFixedT: () => (key: string) => key.replace('pages.', '') // or return `Course`
+        getFixedT: () => (key: string) => key.replace('pages.', '')
       }
     })
   }))

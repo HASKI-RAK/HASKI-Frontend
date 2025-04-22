@@ -36,9 +36,8 @@ export const usePageName = (): PageNameHookReturn => {
   const pageName = useMemo(() => {
     const locationArray = location.pathname.split('/')
     const page = locationArray.pop()
-
     const rawPageName = page?.match(/\d+/) != null ? locationArray[locationArray.length - 1] : page
-    const translatedPageName = en(`pages.${rawPageName}`)
+    const translatedPageName = en(`pages.${rawPageName}`).replace(/\s/g, '')
 
     return translatedPageName
   }, [location.pathname])
