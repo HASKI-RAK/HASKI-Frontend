@@ -2,7 +2,7 @@ import { MouseEvent, memo, useCallback, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Grid, ToggleButton, ToggleButtonGroup } from '@common/components'
 import {
-  DashboardInfoDrawer,
+  RatingInfoDrawer,
   DashboardInfoDrawerButton,
   LearningElementRatingDashboard,
   StudentRatingDashboard
@@ -24,12 +24,12 @@ import { AuthContext } from '@services'
  */
 const RatingDashboard = () => {
   const { t } = useTranslation()
-  const [selected, setSelected] = useState<string>('student')
+  const [selected, setSelected] = useState<'StudentRatingDashboard' | 'LearningElementRatingDashboard'>('StudentRatingDashboard')
   const [isOpen, setIsOpen] = useState(true)
   const { isAuth } = useContext(AuthContext)
 
   const handleChange = useCallback(
-    (_: MouseEvent<HTMLElement>, newSelection: string | null) => {
+    (_: MouseEvent<HTMLElement>, newSelection: 'StudentRatingDashboard' | 'LearningElementRatingDashboard') => {
       if (newSelection) setSelected(newSelection)
     },
     [setSelected]
@@ -64,7 +64,7 @@ const RatingDashboard = () => {
               mt: 1
             }}>
             <DashboardInfoDrawerButton isOpen={isOpen} setIsOpen={setIsOpen} />
-            <DashboardInfoDrawer isOpen={isOpen} selectedDashboard={selected} />
+            <RatingInfoDrawer isOpen={isOpen} selectedDashboard={selected} />
           </Box>
         </Box>
       )}

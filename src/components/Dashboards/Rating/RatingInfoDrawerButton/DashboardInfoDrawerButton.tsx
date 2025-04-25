@@ -4,13 +4,15 @@ import { Box, Fab, Tooltip, Typography } from '@common/components'
 import { KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight } from '@common/icons'
 import { debounce } from '@services'
 
-// TODO
-type DashboardInfoDrawerButtonProps = {
+// TODO: DOKU
+// TODO: RENAME
+type DashboardInfoDrawerButtonProps = { 
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
 }
 
-// TODO
+// TODO: DOKU
+// TODO: RENAME
 const DashboardInfoDrawerButton = forwardRef(
   ({ isOpen, setIsOpen }: DashboardInfoDrawerButtonProps, ref: ForwardedRef<HTMLDivElement | null>, ...props) => {
     const { t } = useTranslation()

@@ -18,7 +18,7 @@ type TypewriterProps = TypographyProps & {
 /**
  * Typewriter component.
  *
- * @param props - Props containing the startAnimation, delay and children.
+ * @param props - Props containing startAnimation, delay and children.
  *
  * @remarks
  * Typewriter represents a component that animates and displays a text, number or array.
