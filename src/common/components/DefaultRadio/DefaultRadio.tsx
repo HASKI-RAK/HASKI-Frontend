@@ -1,48 +1,46 @@
 import DefaultRadio from '@mui/material/Radio'
-import { MouseEvent, memo, useCallback } from 'react'
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { RadioProps as DefaultRadioProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { usePageName } from '@services'
 
 /**
- * @prop DefaultRadioProps - The props of a mui Radio.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
+ * @prop {@link DefaultRadioProps} - The props of the default Radio component.
+ * @prop {@link EventHandlers} - The props containing the event handlers.
  * @interface
  */
-type RadioProps = DefaultRadioProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+type RadioProps = DefaultRadioProps & EventHandlers
+
+/**
+ * WrappedRadio component.
+ *
+ * @remarks
+ * The WrappedRadio component is a wrapper around the MUI Radio component.
+ * It is enhanced with xAPI functionality to track user interactions.
+ * WrappedRadio can be used as a standalone component on a page.
+ *
+ * @category Components
+ */
+const WrappedRadio = withXAPI(DefaultRadio, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'Radio'
+})
 
 /**
  * Radio component.
  *
- * @param props - Props containing the useStatement hook and the props of a mui Radio.
+ * @param props - Props containing the default Radio props and event handlers.
  *
- * @category Common
+ * @remarks
+ * The Radio component is a wrapper around the WrappedRadio component.
+ * It retrieves the page name from a hook and passes it to the WrappedRadio component.
+ * Radio can be used as a standalone component on a page.
+ *
+ * @category Components
  */
-const Radio = ({ useStatement = _useStatement, onClick, ...props }: RadioProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.Radio
-  })
-  return (
-    <DefaultRadio
-      onClick={useCallback(
-        (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
-          onClick?.(event)
-        },
-        [sendStatement, onClick]
-      )}
-      {...props}
-    />
-  )
+const Radio = ({ ...props }: RadioProps) => {
+  const { pageName } = usePageName()
+  return <WrappedRadio pageName={pageName} {...props} />
 }
 
 export default memo(Radio)

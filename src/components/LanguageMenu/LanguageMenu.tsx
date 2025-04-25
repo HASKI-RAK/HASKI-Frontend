@@ -1,5 +1,5 @@
-﻿import log from 'loglevel'
-import { ForwardedRef, forwardRef, memo, useCallback, useState } from 'react'
+import log from 'loglevel'
+import { ForwardedRef, MouseEvent, forwardRef, memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IconButton, Menu, MenuItem, Tooltip, Typography } from '@common/components'
 import { Language } from '@common/icons'
@@ -23,7 +23,7 @@ export const LanguageMenu = forwardRef((props, ref: ForwardedRef<HTMLDivElement 
 
   // State
   const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('i18nextLng')?.toUpperCase())
-  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null)
+  const [anchorElement, setAnchorElement] = useState<null | Element>(null)
 
   // Changes the language of the application by setting the i18next language and the local storage.
   const changeLanguage = useCallback(
@@ -41,7 +41,7 @@ export const LanguageMenu = forwardRef((props, ref: ForwardedRef<HTMLDivElement 
   )
 
   // Handles opening the menu by setting the anchor element.
-  const handleOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
+  const handleClick = useCallback((event: MouseEvent) => {
     setAnchorElement(event.currentTarget)
   }, [])
 
@@ -53,7 +53,7 @@ export const LanguageMenu = forwardRef((props, ref: ForwardedRef<HTMLDivElement 
   return (
     <div {...props} ref={ref}>
       <Tooltip arrow title={t('tooltip.languageSettings')}>
-        <IconButton id="language-menu-icon-button" onClick={handleOpen}>
+        <IconButton id="language-menu-icon-button" onClick={handleClick}>
           <Typography
             sx={{
               fontWeight: 'bold',
