@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react'
+import { MouseEvent, memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
@@ -60,13 +60,13 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   const currentLocation = useLocation()
 
   //Disable backdropClick so the Modal only closes via the buttons
-  const handleClose = useCallback((_: object, reason: string) => {
+  const handleClose = useCallback((_: MouseEvent<HTMLElement>, reason: string) => {
     if (reason && reason == 'backdropClick') return
   }, [])
 
   //Sets checkbox to enable button
   const handleChecked = useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
+    (event: MouseEvent<HTMLElement>) => {
       setChecked((event.target as HTMLInputElement).checked)
     },
     [setChecked]
