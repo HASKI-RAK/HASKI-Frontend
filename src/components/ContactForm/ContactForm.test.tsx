@@ -13,7 +13,7 @@ describe('Test ContactForm', () => {
         <ContactForm />
       </MemoryRouter>
     )
-    const submitButton = form.getByText('components.ContactForm.submit')
+    const submitButton = form.getByText('appGlobal.submit')
     const input = form.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'text' } })
     fireEvent.mouseDown(form.getByRole('combobox', { name: /Topic/i }))
@@ -30,7 +30,7 @@ describe('Test ContactForm', () => {
         <ContactForm onSubmit={send} />
       </MemoryRouter>
     )
-    const submitButton = form.getByText('components.ContactForm.submit')
+    const submitButton = form.getByText('appGlobal.submit')
     const input = form.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'text' } })
     fireEvent.mouseDown(form.getByRole('combobox', { name: /Topic/i }))
@@ -47,7 +47,7 @@ describe('Test ContactForm', () => {
         <ContactForm onSubmit={send} />
       </MemoryRouter>
     )
-    const submitButton = form.getByText('components.ContactForm.submit')
+    const submitButton = form.getByText('appGlobal.submit')
     fireEvent.mouseDown(form.getByRole('combobox', { name: /Topic/i }))
     act(() => {
       form.getAllByRole('option')[0].click()
@@ -65,7 +65,7 @@ describe('Test ContactForm', () => {
         <ContactForm onSubmit={send} />
       </MemoryRouter>
     )
-    const submitButton = form.getByText('components.ContactForm.submit')
+    const submitButton = form.getByText('appGlobal.submit')
 
     fireEvent.click(submitButton)
     expect(typeof text).toBe('string')
@@ -90,7 +90,7 @@ describe('Test ContactForm', () => {
         <ContactForm onSubmit={send} />
       </MemoryRouter>
     )
-    const submitButton = contactform.getByText('components.ContactForm.submit')
+    const submitButton = contactform.getByText('appGlobal.submit')
     const reporttype = contactform.getByRole('radio', { name: /issue/i })
     const reporttopic = contactform.getByRole('combobox', { name: /Topic/i })
 

@@ -4,6 +4,11 @@ import { fetchLearningPathElementStatus } from '@services'
 import { PersistedStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
+type LearningPathElementStatusCache = {
+  value?: LearningPathElementStatus[]
+  promise?: Promise<LearningPathElementStatus[]>
+}
+
 /*
  * getLearningPathElementStatus
  * @param courseId The course id
@@ -19,7 +24,7 @@ import { resetters } from '../Zustand/Store'
  * @interface
  */
 export type LearningPathElementStatusSlice = {
-  _learningPathElementStatus: Record<string, LearningPathElementStatus[]>
+  _learningPathElementStatus: Record<string, LearningPathElementStatusCache>
   clearLearningPathElementStatusCache: () => void
   getLearningPathElementStatus: LearningPathElementStatusReturn
   setLearningPathElementStatus: (
@@ -50,37 +55,59 @@ export const createLearningPathElementStatusSlice: StateCreator<
     },
     getLearningPathElementStatus: async (...arg) => {
       const [courseId, studentId] = arg
+      const key = `${courseId}-${studentId}`
 
-      const cached = get()._learningPathElementStatus[`${courseId}-${studentId}`]
+      const cached = get()._learningPathElementStatus[key]
 
-      if (!cached) {
-        const learningPathElementStatusResponse = await fetchLearningPathElementStatus(courseId, studentId)
-        set({
-          _learningPathElementStatus: {
-            ...get()._learningPathElementStatus,
-            [`${courseId}-${studentId}`]: learningPathElementStatusResponse
-          }
-        })
-        return learningPathElementStatusResponse
-      } else return cached
+      if (cached?.value) {
+        return cached.value
+      }
+
+      if (cached?.promise) {
+        // If we have a promise, wait for it to resolve
+        return cached.promise
+      }
+
+      const fetchPromise = fetchLearningPathElementStatus(courseId, studentId).then(
+        (response: LearningPathElementStatus[]) => {
+          // Once resolved, cache the value and remove the in-flight promise.
+          set({
+            _learningPathElementStatus: {
+              ...get()._learningPathElementStatus,
+              [key]: { value: response }
+            }
+          })
+          return response
+        }
+      )
+
+      // Cache the in-flight promise.
+      set({
+        _learningPathElementStatus: {
+          ...get()._learningPathElementStatus,
+          [key]: { promise: fetchPromise }
+        }
+      })
+      return fetchPromise
     },
     setLearningPathElementStatus: async (...arg) => {
       const [courseId, studentId, newData] = arg
+      const key = `${courseId}-${studentId}`
 
       // If the data is not cached, fetch it from the backend
-      if (get()._learningPathElementStatus[`${courseId}-${studentId}`] === undefined) {
+      if (!get()._learningPathElementStatus[key]?.value) {
         const learningPathElementStatusResponse = await fetchLearningPathElementStatus(courseId, studentId)
         set({
           _learningPathElementStatus: {
             ...get()._learningPathElementStatus,
-            [`${courseId}-${studentId}`]: learningPathElementStatusResponse
+            [key]: { value: learningPathElementStatusResponse }
           }
         })
       }
 
       // Get the cached data and convert it to an array if it is not already
-      const cached = get()._learningPathElementStatus[`${courseId}-${studentId}`]
-      const cachedArray = Array.isArray(cached) ? cached : [cached]
+      const cached = get()._learningPathElementStatus[key]?.value
+      const cachedArray = Array.isArray(cached) ? cached : cached ? [cached] : []
 
       if (!newData) return cachedArray
 
@@ -90,18 +117,14 @@ export const createLearningPathElementStatusSlice: StateCreator<
         // Create a new array with the updated state at the specified index
         const updatedState = [
           ...cachedArray.slice(0, index),
-          {
-            cmid: newData.cmid,
-            state: newData.state,
-            timecompleted: newData.timecompleted
-          },
+          { cmid: newData.cmid, state: newData.state, timecompleted: newData.timecompleted },
           ...cachedArray.slice(index + 1)
         ]
 
         set((state) => ({
           _learningPathElementStatus: {
             ...state._learningPathElementStatus,
-            [`${courseId}-${studentId}`]: updatedState
+            [key]: { value: updatedState }
           }
         }))
 
@@ -111,7 +134,7 @@ export const createLearningPathElementStatusSlice: StateCreator<
       set((state) => ({
         _learningPathElementStatus: {
           ...state._learningPathElementStatus,
-          [`${courseId}-${studentId}`]: cachedArray
+          [key]: { value: cachedArray }
         }
       }))
       return cachedArray

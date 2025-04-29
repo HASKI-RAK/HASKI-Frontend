@@ -4,13 +4,21 @@ import { fetchLearningPathElement } from '@services'
 import { StoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
-export default interface LearningPathSlice {
-  _cache_learningPathElement_record: Record<string, LearningPathElement | undefined>
+type LearningPathElementCache = {
+  value?: LearningPathElement
+  promise?: Promise<LearningPathElement>
+}
+
+export type LearningPathElementSlice = {
+  _cache_learningPathElement_record: Record<string, LearningPathElementCache>
   clearLearningPathElementCache: () => void
   getLearningPathElement: LearningPathElementReturn
 }
 
-export const createLearningPathElementSlice: StateCreator<StoreState, [], [], LearningPathSlice> = (set, get) => {
+export const createLearningPathElementSlice: StateCreator<StoreState, [], [], LearningPathElementSlice> = (
+  set,
+  get
+) => {
   resetters.push(() => set({ _cache_learningPathElement_record: {} }))
   return {
     _cache_learningPathElement_record: {},
@@ -19,27 +27,43 @@ export const createLearningPathElementSlice: StateCreator<StoreState, [], [], Le
     },
     getLearningPathElement: async (...arg) => {
       const [userId, lmsUserId, studentId, courseId, topicId] = arg
+      const key = `${courseId}-${topicId}`
 
       // Check if we have the learning path cached
-      const cached = get()._cache_learningPathElement_record[`${courseId}-${topicId}`]
+      const cached = get()._cache_learningPathElement_record[key]
 
-      if (!cached) {
-        // If not, fetch it and cache it
-        const learningPathElement_response = await fetchLearningPathElement(
-          userId,
-          lmsUserId,
-          studentId,
-          courseId,
-          topicId
-        )
-        set({
-          _cache_learningPathElement_record: {
-            ...get()._cache_learningPathElement_record,
-            [`${courseId}-${topicId}`]: learningPathElement_response
-          }
-        })
-        return learningPathElement_response
-      } else return cached
+      if (cached?.value) {
+        return cached.value
+      }
+
+      if (cached?.promise) {
+        // If we have a promise, wait for it to resolve
+        return cached.promise
+      }
+
+      // Start a new fetch and cache the resulting promise.
+      const fetchPromise = fetchLearningPathElement(userId, lmsUserId, studentId, courseId, topicId).then(
+        (response: LearningPathElement) => {
+          // Once the promise resolves, cache the value.
+          set({
+            _cache_learningPathElement_record: {
+              ...get()._cache_learningPathElement_record,
+              [key]: { value: response }
+            }
+          })
+          return response
+        }
+      )
+
+      // Cache the in-flight promise.
+      set({
+        _cache_learningPathElement_record: {
+          ...get()._cache_learningPathElement_record,
+          [key]: { promise: fetchPromise }
+        }
+      })
+
+      return fetchPromise
     }
   }
 }

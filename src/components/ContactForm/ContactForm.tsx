@@ -165,7 +165,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
               color="primary"
               sx={{ alignSelf: 'end', marginTop: '0.6rem' }}
               onClick={handleSubmit}>
-              {t('components.ContactForm.submit')}
+              {t('appGlobal.submit')}
             </Button>
           </FormControl>
           <Backdrop open={isLoading}>

@@ -5,7 +5,7 @@ import { useStore } from '../Zustand/Store'
 
 const learningPathTopic = { id: 1, name: 'Math', description: 'Learn math' }
 describe('LearningPathTopicSlice ', () => {
-  mockServices.fetchLearningPathTopic.mockReturnValue(learningPathTopic)
+  mockServices.fetchLearningPathTopic.mockResolvedValue(learningPathTopic)
 
   it('should fetch learning path from server and cache it', async () => {
     const { getLearningPathTopic } = useStore.getState()
@@ -17,7 +17,9 @@ describe('LearningPathTopicSlice ', () => {
     expect(getLearningPathTopic).toBeDefined()
     expect(mockServices.fetchLearningPathTopic).toHaveBeenCalledTimes(1)
     expect(mockServices.fetchLearningPathTopic).toHaveBeenCalledWith(1, 2, 3, courseId)
-    expect(useStore.getState()._cache_learningPathTopic_record[`${courseId}`]).toEqual(learningPathTopic)
+    expect(useStore.getState()._cache_learningPathTopic_record[`${courseId}`]).toEqual({
+      value: { id: 1, name: 'Math', description: 'Learn math' }
+    })
   })
 
   it('should return cached learning path if available', async () => {
@@ -27,7 +29,9 @@ describe('LearningPathTopicSlice ', () => {
 
     await getLearningPathTopic(1, 2, 3, courseId)
 
-    expect(useStore.getState()._cache_learningPathTopic_record[`${courseId}`]).toEqual(learningPathTopic)
+    expect(useStore.getState()._cache_learningPathTopic_record[`${courseId}`]).toEqual({
+      value: { id: 1, name: 'Math', description: 'Learn math' }
+    })
 
     const cached = await getLearningPathTopic(1, 2, 3, courseId)
 
@@ -42,7 +46,9 @@ describe('LearningPathTopicSlice ', () => {
 
     await getLearningPathTopic(1, 2, 3, courseId)
 
-    expect(useStore.getState()._cache_learningPathTopic_record[`${courseId}`]).toEqual(learningPathTopic)
+    expect(useStore.getState()._cache_learningPathTopic_record[`${courseId}`]).toEqual({
+      value: { id: 1, name: 'Math', description: 'Learn math' }
+    })
 
     const cached = await getLearningPathTopic(1, 2, 3, courseId)
 

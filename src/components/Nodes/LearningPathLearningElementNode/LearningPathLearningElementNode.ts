@@ -33,4 +33,5 @@ export type LearningPathLearningElementNode = {
   handleOpen: () => void
   handleClose: () => void
   isDone: boolean
+  isDisabled: boolean
 }
