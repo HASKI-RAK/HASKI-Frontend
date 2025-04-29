@@ -32,10 +32,7 @@ export type StoreState = LearningPathElementSlice &
   LearningElementSolutionSlice &
   TeacherLpLeAlgorithmSlice &
   StudentLpLeAlgorithmSlice
-export type PersistedStoreState = UserSlice &
-  AuthSlice &
-  LearningPathElementStatusSlice &
-  DefaultLearningPathSlice
+export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & DefaultLearningPathSlice
 export type SessionStoreState = NewsSlice
 
 export const resetters: (() => void)[] = []
@@ -98,4 +95,5 @@ export const useSessionStore = create<SessionStoreState>()(
     )
   )
 )
+// sonarjs/no-empty-collection
 export const resetAllSlices = () => resetters.forEach((reset) => reset())
