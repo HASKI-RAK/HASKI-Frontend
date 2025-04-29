@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import { CreateRemoteTopicsTable } from '@components'
 import { RemoteTopics } from '@core'
 
@@ -28,11 +29,13 @@ describe('CreateRemoteTopicsTable', () => {
 
   it('renders correctly', () => {
     const { container } = render(
-      <CreateRemoteTopicsTable
-        onTopicChange={mockHandleTopicChange}
-        selectedTopics={mockSelectedTopics}
-        remoteTopics={mockRemoteTopics}
-      />
+      <MemoryRouter>
+        <CreateRemoteTopicsTable
+          onTopicChange={mockHandleTopicChange}
+          selectedTopics={mockSelectedTopics}
+          remoteTopics={mockRemoteTopics}
+        />
+      </MemoryRouter>
     )
     expect(container).toBeTruthy()
   })
@@ -47,11 +50,13 @@ describe('CreateRemoteTopicsTable', () => {
 
   it('renders correctly with empty remoteTopics array', () => {
     const { container, getByText } = render(
-      <CreateRemoteTopicsTable
-        onTopicChange={mockHandleTopicChange}
-        selectedTopics={mockSelectedTopics}
-        remoteTopics={[]}
-      />
+      <MemoryRouter>
+        <CreateRemoteTopicsTable
+          onTopicChange={mockHandleTopicChange}
+          selectedTopics={mockSelectedTopics}
+          remoteTopics={[]}
+        />
+      </MemoryRouter>
     )
     expect(container).toBeTruthy()
     expect(getByText('components.TableRemoteTopics.noAdditionalTopics')).toBeInTheDocument()
@@ -59,24 +64,28 @@ describe('CreateRemoteTopicsTable', () => {
 
   it('renders with a child', () => {
     const { getByTestId } = render(
-      <CreateRemoteTopicsTable
-        onTopicChange={mockHandleTopicChange}
-        selectedTopics={mockSelectedTopics}
-        remoteTopics={mockRemoteTopics}>
-        <div data-testid="child">Child Content</div>
-      </CreateRemoteTopicsTable>
+      <MemoryRouter>
+        <CreateRemoteTopicsTable
+          onTopicChange={mockHandleTopicChange}
+          selectedTopics={mockSelectedTopics}
+          remoteTopics={mockRemoteTopics}>
+          <div data-testid="child">Child Content</div>
+        </CreateRemoteTopicsTable>
+      </MemoryRouter>
     )
     expect(getByTestId('child')).toBeInTheDocument()
   })
 
   it('selects 2nd available remote topic', async () => {
     const { getByText, getAllByRole } = render(
-      <CreateRemoteTopicsTable
-        onTopicChange={mockHandleTopicChange}
-        selectedTopics={mockSelectedTopics}
-        remoteTopics={mockRemoteTopics}>
-        <div data-testid="child">Child Content</div>
-      </CreateRemoteTopicsTable>
+      <MemoryRouter>
+        <CreateRemoteTopicsTable
+          onTopicChange={mockHandleTopicChange}
+          selectedTopics={mockSelectedTopics}
+          remoteTopics={mockRemoteTopics}>
+          <div data-testid="child">Child Content</div>
+        </CreateRemoteTopicsTable>
+      </MemoryRouter>
     )
     const topic1 = getAllByRole('checkbox')[0]
     const topic2 = getAllByRole('checkbox')[1]
