@@ -2,7 +2,7 @@ name: frontend
 on:
   push:
     branches:
-      - ke-eval-5
+      - th-eval-5
 jobs:
   publish_frontend:
     runs-on: ubuntu-latest
