@@ -225,7 +225,7 @@ const MenuBar = () => {
               <IconButton
                 id="manual-icon-button"
                 onClick={() => {
-                  window.open('/files/Bedienungsanleitung_HASKI_AB_11_24-4.pdf', '_blank')
+                  window.open('/files/Bedienungsanleitung_SoSe_25.pdf', '_blank')
                 }}>
                 <Help data-testid="HelpIcon" />
               </IconButton>
