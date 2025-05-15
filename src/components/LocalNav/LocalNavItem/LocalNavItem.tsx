@@ -43,11 +43,12 @@ const LocalNavItem = ({ topic, topicProgress, isProgressLoading, courseId, topic
         <ListItemButton
           key={topic?.id}
           id={topic?.name.concat('-localNavButton').replaceAll(' ', '-')}
-          sx={{ width: '100%',
+          sx={{
+            width: '100%',
             '&:hover': {
               backgroundColor: (theme) => theme.palette.secondary.dark
             }
-        }}
+          }}
           onClick={() => {
             courseId && topic && navigate(`/course/${courseId}/topic/${topic.id}`)
           }}>

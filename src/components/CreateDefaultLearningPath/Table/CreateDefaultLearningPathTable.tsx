@@ -93,15 +93,13 @@ const CreateDefaultLearningPathTable = ({
             variant="contained"
             color="primary"
             onClick={() => setActiveStep((prev) => prev + 1)}
-            sx={{ width: '20rem' }}
-          >
+            sx={{ width: '20rem' }}>
             {t('appGlobal.start')}
           </Button>
         </Box>
       </>
     )
   }
-
 
   return (
     <DndContext

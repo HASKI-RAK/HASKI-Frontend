@@ -221,7 +221,7 @@ export const PrivacyPolicy = () => {
       <Typography variant="body2">Tel.: 06021 4206 883</Typography>
       <Typography variant="body2">
         <Typography sx={{ fontWeight: 'bold', display: 'inline' }}>E-Mail:</Typography>{' '}
-        <Link href="mailto:joerg.abke@th-ab.de">joerg.abke@th-abke.de</Link>
+        <Link href="mailto:joerg.abke@th-ab.de">joerg.abke@th-ab.de</Link>
       </Typography>
 
       <Divider sx={{ my: 2 }} />

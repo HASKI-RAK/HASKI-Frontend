@@ -15,9 +15,9 @@ import {
   PageNotFound,
   PrivacyPolicy,
   ProjectDescription,
+  RatingDashboard,
   Topic,
-  TopicsLearningPath,
-  RatingDashboard
+  TopicsLearningPath
 } from '@pages'
 import { AuthProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
 import { useApp } from './App.hooks'
