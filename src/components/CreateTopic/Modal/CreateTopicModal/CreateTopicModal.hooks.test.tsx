@@ -74,6 +74,12 @@ const mockRemoteLearningElementWithClassification: { [key: number]: RemoteLearni
   ]
 }
 
+const mockLearningElementsWithSolution = {
+  1: [],
+  2: [],
+  3: []
+}
+
 describe('useCreateTopicModal', () => {
   it('should initialize correctly with default functions available', async () => {
     jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
@@ -257,7 +263,8 @@ describe('useCreateTopicModal', () => {
     )
 
     await act(async () => {
-      await result.current.handleCreateLearningElementsInExistingTopic(1, mockRemoteLearningElementWithClassification)
+      await result.current.handleCreateLearningElementsInExistingTopic(
+        1, mockRemoteLearningElementWithClassification, mockLearningElementsWithSolution)
     })
   })
 
@@ -284,6 +291,7 @@ describe('useCreateTopicModal', () => {
       await result.current.handleCreateLearningElementsInExistingTopic(
         1,
         mockRemoteLearningElementWithClassification,
+        mockLearningElementsWithSolution,
         '2',
         '1'
       )

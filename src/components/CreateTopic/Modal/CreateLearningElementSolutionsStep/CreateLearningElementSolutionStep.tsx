@@ -17,6 +17,7 @@ interface CreateLearningElementSolutionStepProps {
   onLearningElementSolutionChange: (selectedSolutions: { [key: number]: RemoteLearningElementWithSolution[] }) => void
   onNext: () => void
   onBack: () => void
+  nextButtonText: string
 }
 
 const CreateLearningElementSolutionStep = ({
@@ -26,7 +27,8 @@ const CreateLearningElementSolutionStep = ({
   learningElementsWithSolutions,
   onLearningElementSolutionChange,
   onNext,
-  onBack
+  onBack,
+  nextButtonText
 }: CreateLearningElementSolutionStepProps) => {
   const { t } = useTranslation()
 
@@ -58,7 +60,7 @@ const CreateLearningElementSolutionStep = ({
               }
               onClick={onNext}
               sx={{ mr: -2 }}>
-              {t('appGlobal.next')}
+              {nextButtonText}
             </Button>
           </Grid>
         </Box>

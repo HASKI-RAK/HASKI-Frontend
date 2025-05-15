@@ -19,7 +19,7 @@ export const useCreateLearningElementTable = ({
   selectedSolutions,
   onSolutionChange
 }: useCreateTopicModalProps) => {
-  const updateSolutions = (topicId: number, checked: boolean, element: RemoteLearningElement) => {
+  const updateSolution = (topicId: number, checked: boolean, element: RemoteLearningElement) => {
     const updatedSolutions = {
       ...selectedSolutions,
       [topicId]: checked
@@ -29,6 +29,17 @@ export const useCreateLearningElementTable = ({
 
     onSolutionChange(updatedSolutions)
   }
+
+  const updateAllSolutions = () => {
+    const updatedSolutions = selectedTopics.reduce((acc, topic) => {
+      const topicSolutions = selectedSolutions[topic.topic_lms_id] || []
+      return { ...acc, [topic.topic_lms_id]: topicSolutions }
+    }
+    , {} as { [key: number]: Solution[] })
+
+    onSolutionChange(updatedSolutions)
+  }
+
   const handleLearningElementCheckboxChange = (topicId: number, element: RemoteLearningElement, checked: boolean) => {
     const updatedSelectedElements = {
       ...selectedLearningElements,
@@ -39,7 +50,7 @@ export const useCreateLearningElementTable = ({
 
     onLearningElementChange(updatedSelectedElements)
 
-    updateSolutions(topicId, checked, element)
+    updateSolution(topicId, checked, element)
   }
 
   const handleSelectAllLearningElements = useCallback(() => {
@@ -53,11 +64,7 @@ export const useCreateLearningElementTable = ({
 
     onLearningElementChange(allLearningElements)
 
-    selectedTopics.forEach((topic) => {
-      topic.lms_learning_elements.forEach((element) => {
-        updateSolutions(topic.topic_lms_id, true, element)
-      })
-    })
+    updateAllSolutions()
   }, [onLearningElementChange, selectedTopics])
 
   const handleDeselectAllLearningElements = useCallback(() => {
@@ -71,11 +78,7 @@ export const useCreateLearningElementTable = ({
 
     onLearningElementChange(clearedElements)
 
-    selectedTopics.forEach((topic) => {
-      topic.lms_learning_elements.forEach((element) => {
-        updateSolutions(topic.topic_lms_id, false, element)
-      })
-    })
+    onSolutionChange({})
   }, [onLearningElementChange, selectedTopics])
 
   const handleToggleAll = (isChecked: boolean) => {

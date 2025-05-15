@@ -14,6 +14,8 @@ import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { RemoteLearningElementWithSolution, Solution } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 import { useCreateTopicModal } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal.hooks'
+import CreateLearningElementSolutionStep from '../CreateTopic/Modal/CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
+import { on } from 'events'
 
 export type CreateTopicModalProps = {
   openCreateTopicModal?: boolean
@@ -193,19 +195,36 @@ const CreateLearningElementModal = ({
               selectedSolutions={selectedSolutions}
               onSolutionChange={setSelectedSolutions}
               onNext={() =>
+                setActiveStep((prevStep) => prevStep + 1)
+              }
+              handleLearningElementClassification={handleLearningElementClassification}
+              onBack={() => {
+                setActiveStep((prevStep) => prevStep - 1)
+              }}
+              nextButtonText={t('appGlobal.next')}
+            />
+          )}
+          {activeStep === 2 && (
+            <CreateLearningElementSolutionStep
+              selectedTopics={remoteTopic}
+              LearningElementsClassification={selectedLearningElementsClassification}
+              selectedSolutions={selectedSolutions}
+              learningElementsWithSolutions={selectedLearningElementSolution}
+              onLearningElementSolutionChange={setSelectedLearningElementSolution}
+              onBack={() => 
+                setActiveStep((prevStep) => prevStep - 1)
+              }
+              onNext={() =>
                 handleCreateLearningElementsInExistingTopic(
                   currentTopicLmsId,
                   selectedLearningElementsClassification,
+                  selectedLearningElementSolution,
                   topicId,
                   courseId
                 ).then(() => {
                   handleCloseCreateTopicModal()
                 })
               }
-              handleLearningElementClassification={handleLearningElementClassification}
-              onBack={() => {
-                setActiveStep((prevStep) => prevStep - 1)
-              }}
               nextButtonText={t('components.CreateLearningElementModal.createLearningElements')}
             />
           )}

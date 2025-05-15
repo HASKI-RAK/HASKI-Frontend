@@ -132,6 +132,7 @@ export const useCreateTopicModal = ({
     async (
       topicLmsId: number,
       selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] },
+      selectedLearningElementSolution: { [key: number]: RemoteLearningElementWithSolution[] },
       topicId?: string,
       courseId?: string
     ): Promise<void> => {
@@ -214,7 +215,7 @@ export const useCreateTopicModal = ({
             )
               .then(() => {
                 // Step 2: Create solutions for learning elements
-                const elementsWithSolution = Object.values(selectedLearningElementSolution)
+                const elementsWithSolution = Object.values(selectedLearningElementSolution[topicLmsId])
                   .flat()
                   .filter((element) => element.solutionLmsId && element.solutionLmsId > 0 && element.solutionLmsType)
 

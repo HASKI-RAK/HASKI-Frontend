@@ -228,6 +228,7 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
               onLearningElementSolutionChange={handleLearningElementSolutionChange}
               onNext={handleNext}
               onBack={handleBack}
+              nextButtonText={t('appGlobal.next')}
             />
           )}
           {activeStep === 4 && (
