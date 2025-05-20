@@ -1,6 +1,6 @@
 import { Box, Button, Checkbox, Divider, FormControlLabel, Grid, Modal, Typography } from '@common/components'
 import { Warning } from '@common/icons'
-import { MouseEvent, SetStateAction, memo, useCallback, useState } from 'react'
+import { memo, MouseEvent, SetStateAction, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 type DeleteEntityModalProps = {

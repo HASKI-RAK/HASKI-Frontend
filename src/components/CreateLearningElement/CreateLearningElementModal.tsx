@@ -3,11 +3,11 @@ import { Close } from '@common/icons'
 import {
   CreateLearningElementClassificationsStep,
   CreateLearningElementsStep,
-RemoteLearningElementWithClassification,handleError} from '@components'
+handleError,RemoteLearningElementWithClassification} from '@components'
 import { LearningPathElement, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import { Dispatch, SetStateAction, memo, useContext, useEffect, useState } from 'react'
+import { Dispatch, memo, SetStateAction, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 

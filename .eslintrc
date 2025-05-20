@@ -33,14 +33,7 @@
     "tsdoc/syntax": "warn",
     "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "warn",
-    "sort-imports": [
-      "warn",
-      {
-        "ignoreDeclarationSort": false,
-        "ignoreMemberSort": false,
-        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
-      }
-    ],
+    "sort-imports": "off"
   },
   "settings": {
     "react": {

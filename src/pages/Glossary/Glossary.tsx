@@ -1,6 +1,6 @@
 import { Box, Button, Grid, Typography } from '@common/components'
 import { Filter, GlossaryEntryProps, GlossaryIndex, GlossaryList, Searchbar } from '@components'
-import { Dispatch, SetStateAction, memo, useState } from 'react'
+import { Dispatch, memo, SetStateAction, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { GlossaryHookReturn, useGlossary as _useGlossary } from './Glossary.hooks'

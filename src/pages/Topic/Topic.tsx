@@ -1,7 +1,7 @@
 import { Grid, Skeleton } from '@common/components'
 import {
   CreateLearningElement,
-IFrameModal,  LabeledSwitch,    ResponsiveMiniMap,    handleError,nodeTypes} from '@components'
+handleError,IFrameModal,LabeledSwitch,nodeTypes,ResponsiveMiniMap} from '@components'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'

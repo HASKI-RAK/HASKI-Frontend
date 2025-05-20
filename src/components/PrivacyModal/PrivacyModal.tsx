@@ -10,7 +10,7 @@ import {
   Typography
 } from '@common/components'
 import { useUniversity } from '@common/hooks'
-import { MouseEvent, memo, useCallback, useState } from 'react'
+import { memo, MouseEvent, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 

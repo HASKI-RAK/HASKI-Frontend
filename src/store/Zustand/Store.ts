@@ -10,7 +10,8 @@ import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
 } from '../Slices/LearningPathElementSpecificStatusSlice'
 import {
-LearningPathElementStatusSlice,createLearningPathElementStatusSlice} from '../Slices/LearningPathElementStatusSlice'
+  createLearningPathElementStatusSlice,
+  LearningPathElementStatusSlice} from '../Slices/LearningPathElementStatusSlice'
 import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
 import NewsSlice, { createNewsSlice } from '../Slices/NewsSlice'
 import RemoteTopicsSlice, { createRemoteTopicsSlice } from '../Slices/RemoteTopicsSlice'

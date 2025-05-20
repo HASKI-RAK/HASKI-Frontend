@@ -1,5 +1,5 @@
 import { Button, Grid } from '@common/components'
-import { CreateLearningElementModal, RemoteLearningElementWithClassification,handleError } from '@components'
+import { CreateLearningElementModal, handleError,RemoteLearningElementWithClassification } from '@components'
 import { RemoteLearningElement, Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'

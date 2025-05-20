@@ -3,12 +3,12 @@ import 'reactflow/dist/style.css'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ReactFlow, {
+  addEdge,
   Background,
   Connection,
   Edge,
   MarkerType,
   Node,
-  addEdge,
   useEdgesState,
   useNodesState
 } from 'reactflow'

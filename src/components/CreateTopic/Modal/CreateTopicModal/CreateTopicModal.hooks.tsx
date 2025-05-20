@@ -1,8 +1,7 @@
-import { CreateAlgorithmTableNameProps, RemoteLearningElementWithClassification,handleError } from '@components'
+import { CreateAlgorithmTableNameProps, handleError,RemoteLearningElementWithClassification } from '@components'
 import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {
-  SnackbarContext,
-  postAddAllStudentsToTopics,  postCalculateLearningPathForAllStudents,  postLearningElement,  postLearningPathAlgorithm,  postTopic} from '@services'
+postAddAllStudentsToTopics,postCalculateLearningPathForAllStudents,postLearningElement,postLearningPathAlgorithm,postTopic,SnackbarContext} from '@services'
 import { usePersistedStore, useStore } from '@store'
 import log from 'loglevel'
 import { Dispatch, SetStateAction, useCallback, useContext, useMemo } from 'react'
