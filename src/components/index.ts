@@ -6,6 +6,7 @@ export { default as TableListK } from './Questionnaire/QuestionnaireResults/Tabl
 export { default as GraphListK } from './Questionnaire/QuestionnaireResults/Graph/GraphListK'
 export { default as ResultDescriptionListK } from './Questionnaire/QuestionnaireResults/Text/ResultDescriptionListK'
 export { default as QuestionnaireQuestionsModal } from './Questionnaire/QuestionnaireQuestions/Modal/QuestionnaireQuestionsModal'
+export { default as ThemeModal } from './ThemeMenu/Modal/ThemeModal'
 export { default as TableILSQuestions } from './Questionnaire/QuestionnaireQuestions/Table/TableILSQuestions'
 export { default as TableListKQuestions } from './Questionnaire/QuestionnaireQuestions/Table/TableListKQuestions'
 export { default as LoginForm, type LoginFormProps } from './LoginForm/LoginForm'

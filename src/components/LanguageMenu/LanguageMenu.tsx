@@ -1,4 +1,4 @@
-import log from 'loglevel'
+﻿import log from 'loglevel'
 import { ForwardedRef, MouseEvent, forwardRef, memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IconButton, Menu, MenuItem, Tooltip, Typography } from '@common/components'
@@ -52,14 +52,15 @@ export const LanguageMenu = forwardRef((props, ref: ForwardedRef<HTMLDivElement 
 
   return (
     <div {...props} ref={ref}>
-      <Tooltip arrow title={t('tooltip.languageSettings')}>
+      <Tooltip arrow title={<Typography variant={'body2'}>{t('tooltip.languageSettings')}</Typography>}>
         <IconButton id="language-menu-icon-button" onClick={handleClick}>
           <Typography
-            sx={{
+            sx={(theme) => ({
               fontWeight: 'bold',
               position: 'absolute',
-              padding: { left: '1.7rem', bottom: '1.25rem' }
-            }}
+              padding: { left: '1.7rem', bottom: '1.25rem' },
+              color: theme.palette.text.secondary
+            })}
             variant="body1"
             textAlign="center">
             {currentLanguage}

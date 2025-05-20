@@ -18,7 +18,7 @@ type FractionProps = TypographyProps & {
  */
 const Fraction = ({ numerator, denominator, ...props }: FractionProps) => {
   return (
-    <Typography {...props}>
+    <Typography {...props} sx={{ color: (theme) => theme.palette.secondary.contrastText }}>
       <sup>{numerator}</sup>/<sub>{denominator}</sub>
     </Typography>
   )
