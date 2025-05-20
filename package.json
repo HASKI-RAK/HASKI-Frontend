@@ -31,7 +31,6 @@
     "@xapi/xapi": "^3.0.1",
     "dayjs": "^1.11.11",
     "dayjs-timezone-iana-plugin": "^0.1.0",
-    "eslint-plugin-import": "^2.31.0",
     "i": "^0.3.7",
     "i18next": "^22.1.2",
     "loglevel": "^1.8.1",

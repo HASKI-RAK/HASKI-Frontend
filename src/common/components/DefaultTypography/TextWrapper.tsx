@@ -1,6 +1,6 @@
+import { usePageName } from 'src/services/PageName/PageName.hooks'
 import { ElementType, memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
-import { usePageName } from '../../../services/PageName/PageName.hooks'
 import { TypographyProps as DefaultTypographyProps } from '../DefaultTypographyProps/DefaultTypographyProps'
 import { Typography } from './DefaultTypography'
 
