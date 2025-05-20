@@ -5,6 +5,7 @@
 export { AuthContext } from './AuthContext'
 export type { AuthContextType } from './AuthContext'
 export { AuthProvider } from './AuthProvider'
+export { postContactForm, type FormDataType } from './contact'
 export { RoleContext } from './RoleContext'
 export type { RoleContextType } from './RoleContext'
 export { RoleProvider } from './RoleProvider'
@@ -15,8 +16,6 @@ export {
   postCalculateLearningPathForAllStudents
 } from './LearningPath'
 export { fetchLearningPathTopic, postTopic, postAddAllStudentsToTopics } from './Topic'
-export { postContactForm } from './contact'
-export type { FormDataType } from './contact'
 export * from './auth'
 export * from './SnackbarContext'
 export { SnackbarProvider } from './SnackbarProvider'
@@ -37,6 +36,7 @@ export { postCalculateLearningPathILS } from './LearningPath'
 export { postUserSettings } from './Theme/postUserSettings'
 export { DefaultThemeProvider as ThemeProvider } from './ThemeProvider/ThemeProvider'
 export { useThemeProvider } from './ThemeProvider/ThemeProvider.hooks'
+export * from './PageName'
 export {
   fetchStudentLpLeAlg,
   fetchTeacherLpLeAlg,

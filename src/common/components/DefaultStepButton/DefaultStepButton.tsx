@@ -1,50 +1,46 @@
 import DefaultStepButton from '@mui/material/StepButton'
-import { MouseEvent, memo, useCallback } from 'react'
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { StepButtonProps as DefaultStepButtonProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { usePageName } from '@services'
 
 /**
- * @prop DefaultStepButtonProps - The props of a mui StepButton.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
+ * @prop {@link DefaultStepButtonProps} - The props of the default StepButton component.
+ * @prop {@link EventHandlers} - The props containing the event handlers.
  * @interface
  */
-type StepButtonProps = DefaultStepButtonProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+type StepButtonProps = DefaultStepButtonProps & EventHandlers
+
+/**
+ * WrappedStepButton component.
+ *
+ * @remarks
+ * The WrappedStepButton component is a wrapper around the MUI StepButton component.
+ * It is enhanced with xAPI functionality to track user interactions.
+ * WrappedStepButton can be used as a standalone component on a page.
+ *
+ * @category Components
+ */
+const WrappedStepButton = withXAPI(DefaultStepButton, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'StepButton'
+})
 
 /**
  * StepButton component.
  *
- * @param props - Props containing the useStatement hook and the props of a mui StepButton.
+ * @param props - Props containing the default StepButton props and event handlers.
  *
- * @category Common
+ * @remarks
+ * The StepButton component is a wrapper around the WrappedStepButton component.
+ * It retrieves the page name from a hook and passes it to the WrappedStepButton component.
+ * StepButton can be used as a standalone component on a page.
+ *
+ * @category Components
  */
-const StepButton = ({ useStatement = _useStatement, onClick, ...props }: StepButtonProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.StepButton
-  })
-
-  return (
-    <DefaultStepButton
-      onClick={useCallback(
-        (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
-          onClick?.(event)
-        },
-        [sendStatement, onClick]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultStepButton>
-  )
+const StepButton = ({ ...props }: StepButtonProps) => {
+  const { pageName } = usePageName()
+  return <WrappedStepButton pageName={pageName} {...props} />
 }
 
 export default memo(StepButton)

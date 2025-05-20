@@ -28,7 +28,7 @@
     "@nivo/core": "^0.80.0",
     "@nivo/network": "^0.80.0",
     "@nivo/tooltip": "^0.80.0",
-    "@xapi/xapi": "^2.2.2",
+    "@xapi/xapi": "^3.0.1",
     "dayjs": "^1.11.11",
     "dayjs-timezone-iana-plugin": "^0.1.0",
     "i": "^0.3.7",
@@ -42,6 +42,7 @@
     "react-flow-renderer": "^10.3.17",
     "react-i18next": "^12.1.1",
     "react-router-dom": "^6.4.2",
+    "react-xapi-wrapper": "1.0.0",
     "reactflow": "^11.11.4",
     "zustand": "^4.1.1"
   },

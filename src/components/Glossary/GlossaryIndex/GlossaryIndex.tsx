@@ -29,7 +29,7 @@ export type GlossaryIndexProps = {
  */
 const GlossaryIndex = (props: GlossaryIndexProps) => {
   const handleChange = useCallback(
-    (_: React.MouseEvent<HTMLElement>, newSelectedIndexElement: string) => {
+    (_event: React.MouseEvent<HTMLElement>, newSelectedIndexElement: string) => {
       props.setSelectedIndexElement?.(newSelectedIndexElement)
     },
     [props.setSelectedIndexElement]

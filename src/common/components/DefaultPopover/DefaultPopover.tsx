@@ -1,50 +1,46 @@
 import DefaultPopover from '@mui/material/Popover'
-import { memo, useCallback } from 'react'
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { PopoverProps as DefaultPopoverProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { usePageName } from '@services'
 
 /**
- * @prop DefaultPopoverProps - The props of a mui Popover.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
+ * @prop {@link DefaultPopoverProps} - The props of the default Popover component.
+ * @prop {@link EventHandlers} - The props containing the event handlers.
  * @interface
  */
-type PopoverProps = DefaultPopoverProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+type PopoverProps = DefaultPopoverProps & EventHandlers
+
+/**
+ * WrappedPopover component.
+ *
+ * @remarks
+ * The WrappedPopover component is a wrapper around the MUI Popover component.
+ * It is enhanced with xAPI functionality to track user interactions.
+ * WrappedPopover can be used as a standalone component on a page.
+ *
+ * @category Components
+ */
+const WrappedPopover = withXAPI(DefaultPopover, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'Popover'
+})
 
 /**
  * Popover component.
  *
- * @param props - Props containing the useStatement hook and the props of a mui Popover.
+ * @param props - Props containing the default Popover props and event handlers.
  *
- * @category Common
+ * @remarks
+ * The Popover component is a wrapper around the WrappedPopover component.
+ * It retrieves the page name from a hook and passes it to the WrappedPopover component.
+ * Popover can be used as a standalone component on a page.
+ *
+ * @category Components
  */
-const Popover = ({ useStatement = _useStatement, onClose, ...props }: PopoverProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.Popover
-  })
-
-  return (
-    <DefaultPopover
-      onClose={useCallback(
-        (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
-          sendStatement(xAPIVerb.closed, new URL(import.meta.url).pathname)
-          onClose?.(event, reason)
-        },
-        [onClose, sendStatement]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultPopover>
-  )
+const Popover = ({ ...props }: PopoverProps) => {
+  const { pageName } = usePageName()
+  return <WrappedPopover pageName={pageName} {...props} />
 }
 
 export default memo(Popover)
