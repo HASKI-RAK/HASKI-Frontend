@@ -30,10 +30,7 @@
     "immutable/no-let": 1,
     "immutable/no-this": 1,
     "immutable/no-mutation": 1,
-    "tsdoc/syntax": "warn",
-    "simple-import-sort/imports": "warn",
-    "simple-import-sort/exports": "warn",
-    "sort-imports": "off"
+    "tsdoc/syntax": "warn"
   },
   "settings": {
     "react": {
