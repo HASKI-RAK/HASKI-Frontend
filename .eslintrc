@@ -1,7 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prefer-arrow-functions", "react-hooks", "immutable", "eslint-plugin-tsdoc"],
+  "plugins": ["@typescript-eslint", "prefer-arrow-functions", "react-hooks", "immutable", "eslint-plugin-tsdoc", "import"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -30,7 +30,25 @@
     "immutable/no-let": 1,
     "immutable/no-this": 1,
     "immutable/no-mutation": 1,
-    "tsdoc/syntax": "warn"
+    "tsdoc/syntax": "warn",
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",    // Node “fs”, “path”, …
+          "external",   // npm packages
+          "internal",   // your src/,
+          "parent",     // ../foo
+          "sibling",    // ./bar
+          "index"       // . or ./
+        ],
+        "newlines-between": "never",
+        "alphabetize": {
+          "order": "asc",           // sort A → Z
+          "caseInsensitive": true
+        }
+      }
+    ]
   },
   "settings": {
     "react": {
