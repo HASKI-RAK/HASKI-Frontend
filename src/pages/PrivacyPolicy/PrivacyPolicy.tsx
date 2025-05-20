@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next'
 import { Divider, Link, List, ListItem, ListItemIcon, ListItemText, Typography } from '@common/components'
 import { FiberManualRecord } from '@common/icons'
+import { useTranslation } from 'react-i18next'
 
 /**
  * # Privacy Policy Page

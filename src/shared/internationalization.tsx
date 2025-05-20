@@ -1,8 +1,9 @@
-﻿import i18next from 'i18next'
+﻿import { SnackbarContext } from '@services'
+import i18next from 'i18next'
 import log from 'loglevel'
 import React from 'react'
 import { initReactI18next } from 'react-i18next'
-import { SnackbarContext } from '@services'
+
 // Import all translation files
 import translationEnglish from './translation/translationEnglish.json'
 import translationGerman from './translation/translationGerman.json'

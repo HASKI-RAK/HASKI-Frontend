@@ -1,8 +1,8 @@
+import { AccordionProps as DefaultAccordionProps } from '@common/components'
 import DefaultAccordion from '@mui/material/Accordion'
+import { usePageName } from '@services'
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
-import { AccordionProps as DefaultAccordionProps } from '@common/components'
-import { usePageName } from '@services'
 
 /**
  * @prop {@link DefaultAccordionProps} - The props of the default Accordion component.

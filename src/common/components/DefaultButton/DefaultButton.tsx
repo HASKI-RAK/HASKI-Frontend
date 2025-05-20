@@ -1,8 +1,8 @@
-import DefaultButton from '@mui/material/Button'
-import { Ref, forwardRef, memo } from 'react'
-import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { ButtonProps as DefaultButtonProps } from '@common/components'
+import DefaultButton from '@mui/material/Button'
 import { usePageName } from '@services'
+import { Ref,forwardRef,memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 
 /**
  * @prop {@link DefaultButtonProps} - The props of the default Button component.

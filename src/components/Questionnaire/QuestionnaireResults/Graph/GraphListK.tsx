@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next'
 import { Network } from '@common/components'
 import { ListK } from '@core'
+import { useTranslation } from 'react-i18next'
 
 // Center the Score beneath the Subscale name. That is done with Whitespaces before the score.
 const centerString = (str: string, maxLen: number): string => str.padStart((str.length + maxLen * 1.5) / 2)

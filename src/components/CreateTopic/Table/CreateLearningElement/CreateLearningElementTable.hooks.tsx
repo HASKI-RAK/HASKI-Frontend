@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 import { RemoteLearningElement, RemoteTopics } from '@core'
+import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 
 type useCreateTopicModalProps = {
   selectedLearningElements: { [p: number]: RemoteLearningElement[] }

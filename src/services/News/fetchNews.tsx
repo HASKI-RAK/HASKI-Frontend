@@ -1,5 +1,6 @@
 import { NewsResponse } from '@core'
 import { getConfig } from '@shared'
+
 import { fetchData } from '../RequestResponse'
 
 /**

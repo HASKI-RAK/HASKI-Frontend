@@ -1,4 +1,3 @@
-import { memo, useCallback, useState } from 'react'
 import {
   Box,
   Checkbox,
@@ -12,6 +11,7 @@ import {
   SelectChangeEvent,
   Typography
 } from '@common/components'
+import { memo, useCallback, useState } from 'react'
 
 const ITEM_HEIGHT = 48
 const ITEM_PADDING_TOP = 8

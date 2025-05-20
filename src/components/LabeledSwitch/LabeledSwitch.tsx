@@ -1,5 +1,5 @@
-import { memo } from 'react'
 import { Box, Switch, Typography } from '@common/components'
+import { memo } from 'react'
 
 /**
  * @prop labelLeft - The label on the left side of the switch.

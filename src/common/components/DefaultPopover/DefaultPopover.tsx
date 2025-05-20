@@ -1,8 +1,8 @@
+import { PopoverProps as DefaultPopoverProps } from '@common/components'
 import DefaultPopover from '@mui/material/Popover'
+import { usePageName } from '@services'
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
-import { PopoverProps as DefaultPopoverProps } from '@common/components'
-import { usePageName } from '@services'
 
 /**
  * @prop {@link DefaultPopoverProps} - The props of the default Popover component.

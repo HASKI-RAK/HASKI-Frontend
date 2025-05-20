@@ -1,6 +1,7 @@
-import { memo } from 'react'
 import { SnackbarContainer } from '@components'
 import { SnackbarContext, SnackbarContextType } from '@services'
+import { memo } from 'react'
+
 import { useSnackbarProvider as _useSnackbarProvider } from './SnackbarProvider.hooks'
 
 /**

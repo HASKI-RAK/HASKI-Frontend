@@ -1,9 +1,9 @@
+import { getConfig } from '@shared'
+import { usePersistedStore } from '@store'
 import log from 'loglevel'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { XAPI, setupXAPI } from 'react-xapi-wrapper'
-import { getConfig } from '@shared'
-import { usePersistedStore } from '@store'
+import { XAPI,setupXAPI } from 'react-xapi-wrapper'
 
 /**
  * @prop xAPI - The xAPI object.

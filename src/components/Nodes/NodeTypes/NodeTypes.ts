@@ -1,5 +1,6 @@
 import { TFunction } from 'i18next'
 import { NodeTypes } from 'reactflow'
+
 import AdditionalLiteratureNode from '../AdditionalLiteratureNode/AdditionalLiteratureNode'
 import ApplicationExampleNode from '../ApplicationExampleNode/ApplicationExampleNode'
 import BasicNode from '../BasicNode/BasicNode'

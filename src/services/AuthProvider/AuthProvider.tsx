@@ -1,4 +1,5 @@
 import { AuthContext, AuthContextType } from '@services'
+
 import { useAuthProvider as _useAuthProvider } from './AuthProvider.hooks'
 
 type AuthProviderProps = {

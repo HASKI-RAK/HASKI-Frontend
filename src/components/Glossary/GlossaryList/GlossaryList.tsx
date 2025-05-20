@@ -1,5 +1,6 @@
-import { memo, useEffect, useState } from 'react'
 import { GlossaryEntry, GlossaryEntryProps } from '@components'
+import { memo, useEffect, useState } from 'react'
+
 import { GlossaryListHookReturn, useGlossaryList as _useGlossaryList } from './GlossaryList.hooks'
 
 /**

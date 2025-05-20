@@ -1,7 +1,8 @@
-import { memo } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@common/components'
 import { ILS } from '@core'
+import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireResultTableStyle'
 
 //Returns the Interpretation of the ILS-Test (balanced, moderate, strong + Dimension (if score is not balanced))

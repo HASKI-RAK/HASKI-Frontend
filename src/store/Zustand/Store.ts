@@ -1,6 +1,7 @@
 import log from 'loglevel'
 import create from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
+
 import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import CoursesSlice, { createCoursesSlice } from '../Slices/CoursesSlice'
@@ -9,9 +10,7 @@ import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
 } from '../Slices/LearningPathElementSpecificStatusSlice'
 import {
-  LearningPathElementStatusSlice,
-  createLearningPathElementStatusSlice
-} from '../Slices/LearningPathElementStatusSlice'
+LearningPathElementStatusSlice,createLearningPathElementStatusSlice} from '../Slices/LearningPathElementStatusSlice'
 import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
 import NewsSlice, { createNewsSlice } from '../Slices/NewsSlice'
 import RemoteTopicsSlice, { createRemoteTopicsSlice } from '../Slices/RemoteTopicsSlice'

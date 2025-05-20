@@ -1,6 +1,3 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import { UserInteractionTracker, XAPIProvider } from 'react-xapi-wrapper'
-import { ReactFlowProvider } from 'reactflow'
 import { ThemeProvider } from '@common/theme'
 import { HaskiTheme } from '@common/utils'
 import {
@@ -20,6 +17,10 @@ import {
   Topic
 } from '@pages'
 import { AuthProvider, RoleProvider, SnackbarProvider } from '@services'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { UserInteractionTracker, XAPIProvider } from 'react-xapi-wrapper'
+import { ReactFlowProvider } from 'reactflow'
+
 import { useApp } from './App.hooks'
 
 /**

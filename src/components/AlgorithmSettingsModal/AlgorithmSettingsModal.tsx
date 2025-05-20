@@ -1,5 +1,3 @@
-import { memo } from 'react'
-import { useTranslation } from 'react-i18next'
 import {
   CircularProgress,
   Divider,
@@ -13,6 +11,9 @@ import {
   Typography
 } from '@common/components'
 import { Close, Save, School } from '@common/icons'
+import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+
 import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
 
 /**

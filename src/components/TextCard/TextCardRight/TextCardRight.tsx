@@ -1,7 +1,7 @@
-import { ReactNode, memo, useCallback, useEffect, useRef, useState } from 'react'
 import { Box, Divider, Fade, Grid, Typography } from '@common/components'
 import { Typewriter } from '@components'
 import { useViewport } from '@services'
+import { ReactNode, memo, useCallback, useEffect, useRef, useState } from 'react'
 
 /**
  * @prop body - The body text that is displayed on the bottom right side.

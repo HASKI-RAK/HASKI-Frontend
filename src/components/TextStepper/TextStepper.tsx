@@ -1,9 +1,9 @@
-import { memo, useCallback, useEffect, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Button, Fade, Grid, MobileStepper } from '@common/components'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
 import { Typewriter } from '@components'
 import { useViewport } from '@services'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 /**
  * @prop children - The child elements that can be stepped through.

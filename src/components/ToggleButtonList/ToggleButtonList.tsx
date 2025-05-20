@@ -1,5 +1,5 @@
-import { memo } from 'react'
 import { Box, ToggleButton } from '@common/components'
+import { memo } from 'react'
 
 /**
  * @prop toggleButtonList - The list of elements to be displayed in the toggle button list

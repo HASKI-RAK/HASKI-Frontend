@@ -1,5 +1,5 @@
-import { useCallback, useMemo } from 'react'
 import { GlossaryEntryProps } from '@components'
+import { useCallback, useMemo } from 'react'
 
 /**
  * @prop collapseAll - Function to collapse all glossary entries.

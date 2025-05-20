@@ -1,5 +1,5 @@
-import { useCallback, useMemo } from 'react'
 import { CreateAlgorithmTableNameProps } from '@components'
+import { useCallback, useMemo } from 'react'
 
 export type useCreateAlgorithmTableProps = {
   selectedAlgorithms: { [key: number]: CreateAlgorithmTableNameProps }

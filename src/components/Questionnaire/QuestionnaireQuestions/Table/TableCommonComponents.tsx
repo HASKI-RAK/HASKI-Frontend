@@ -1,5 +1,3 @@
-import { memo } from 'react'
-import { useTranslation } from 'react-i18next'
 import {
   Avatar,
   Button,
@@ -14,6 +12,8 @@ import {
   Typography
 } from '@common/components'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
+import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
 
 type ButtonStackProps = {
   activeStep: number

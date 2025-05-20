@@ -1,5 +1,5 @@
-import { useCallback, useMemo } from 'react'
 import { RemoteTopics } from '@core'
+import { useCallback, useMemo } from 'react'
 
 type useCreateRemoteTopicsTableProps = {
   onTopicChange: (selectedTopics: RemoteTopics[]) => void

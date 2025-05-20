@@ -1,5 +1,6 @@
 import { User } from '@core'
 import { getConfig } from '@shared'
+
 import { fetchData } from '../RequestResponse'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,8 +1,8 @@
+import { StepButtonProps as DefaultStepButtonProps } from '@common/components'
 import DefaultStepButton from '@mui/material/StepButton'
+import { usePageName } from '@services'
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
-import { StepButtonProps as DefaultStepButtonProps } from '@common/components'
-import { usePageName } from '@services'
 
 /**
  * @prop {@link DefaultStepButtonProps} - The props of the default StepButton component.

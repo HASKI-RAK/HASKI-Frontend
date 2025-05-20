@@ -1,6 +1,6 @@
-import React, { memo } from 'react'
 import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
+import React, { memo } from 'react'
 
 const styleBox = {
   position: 'absolute',

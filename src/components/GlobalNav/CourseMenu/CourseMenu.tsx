@@ -1,6 +1,7 @@
+import { AuthContext } from '@services'
 import { memo, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { AuthContext } from '@services'
+
 import GlobalNavMenu from '../GlobalNavMenu/GlobalNavMenu'
 import { CourseMenuHookReturn, useCourseMenu as _useCourseMenu } from './CourseMenu.hooks'
 

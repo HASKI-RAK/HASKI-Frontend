@@ -1,11 +1,12 @@
-import log, { LogLevelDesc } from 'loglevel'
 import 'normalize.css'
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import './shared/internationalization'
+
 import { reportWebVitals, sendToAnalytics } from '@common/utils'
 import { App } from '@pages'
 import { getConfig, logBuffer, setConfig } from '@shared'
-import './shared/internationalization'
+import log, { LogLevelDesc } from 'loglevel'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
 // Before the app starts, we need to load the config file which contains the backend URL and other env variables.
 fetch('/config/env.' + (process.env.NODE_ENV ?? 'development') + '.json')

@@ -1,5 +1,5 @@
-import { memo } from 'react'
 import { Box, Fade } from '@common/components'
+import { memo } from 'react'
 
 /**
  * @prop leftImgURL - Image location for left picture.

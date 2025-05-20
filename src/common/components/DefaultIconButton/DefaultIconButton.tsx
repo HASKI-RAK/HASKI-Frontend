@@ -1,8 +1,8 @@
-import DefaultIconButton from '@mui/material/IconButton'
-import { Ref, forwardRef, memo } from 'react'
-import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { IconButtonProps as DefaultIconButtonProps } from '@common/components'
+import DefaultIconButton from '@mui/material/IconButton'
 import { usePageName } from '@services'
+import { Ref,forwardRef,memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 
 /**
  * @prop {@link DefaultIconButtonProps} - The props of the default IconButton component.

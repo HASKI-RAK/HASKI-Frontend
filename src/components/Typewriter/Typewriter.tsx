@@ -1,6 +1,6 @@
-import { memo, useEffect, useState } from 'react'
 import { Typography, TypographyProps } from '@common/components'
 import { debounce } from '@services'
+import { memo, useEffect, useState } from 'react'
 
 /**
  * @prop startAnimation - Indicates if the animation has started or not.

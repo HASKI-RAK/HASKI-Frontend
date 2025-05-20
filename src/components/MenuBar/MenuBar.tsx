@@ -1,6 +1,3 @@
-import { MouseEvent, useContext, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
 import {
   AppBar,
   Avatar,
@@ -34,6 +31,9 @@ import {
   TableListKQuestions
 } from '@components'
 import { AuthContext } from '@services'
+import { MouseEvent, useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 
 /**
  * The MenuBar component is the top bar of the application.

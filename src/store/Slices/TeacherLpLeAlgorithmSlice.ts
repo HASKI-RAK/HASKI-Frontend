@@ -1,7 +1,8 @@
-import { StateCreator } from 'zustand'
 import { TeacherLpLeAlgorithm, TeacherLpLeAlgorithmReturn } from '@core'
 import { fetchTeacherLpLeAlg } from '@services'
 import { StoreState } from '@store'
+import { StateCreator } from 'zustand'
+
 import { resetters } from '../Zustand/Store'
 
 export default interface TeacherLpLeAlgorithmSlice {

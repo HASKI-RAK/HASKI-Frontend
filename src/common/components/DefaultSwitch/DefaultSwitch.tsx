@@ -1,8 +1,8 @@
+import { SwitchProps as DefaultSwitchProps } from '@common/components'
 import DefaultSwitch from '@mui/material/Switch'
+import { usePageName } from '@services'
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
-import { SwitchProps as DefaultSwitchProps } from '@common/components'
-import { usePageName } from '@services'
 
 /**
  * @prop {@link DefaultSwitchProps} - The props of the default Switch component.

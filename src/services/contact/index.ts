@@ -1,2 +1,2 @@
-export { postContactForm } from './postContactForm'
 export type { FormDataType } from './postContactForm'
+export { postContactForm } from './postContactForm'

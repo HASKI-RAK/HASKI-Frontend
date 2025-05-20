@@ -1,10 +1,10 @@
-import { memo } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Grid, ListItem, ListItemButton, ListItemText, Skeleton } from '@common/components'
 import { FiberManualRecord } from '@common/icons'
 import { Theme } from '@common/theme'
 import { Fraction } from '@components'
 import { Topic } from '@core'
+import { memo } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 type LocalNavItemProps = {
   topic?: Topic

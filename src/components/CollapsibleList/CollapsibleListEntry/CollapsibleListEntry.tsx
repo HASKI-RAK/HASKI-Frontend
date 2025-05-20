@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import {
   Accordion,
   AccordionDetails,
@@ -10,6 +9,7 @@ import {
   Zoom
 } from '@common/components'
 import { ExpandMore } from '@common/icons'
+import { memo } from 'react'
 
 /**
  * @prop body - The body text of an entry, displayed as a bullet points.

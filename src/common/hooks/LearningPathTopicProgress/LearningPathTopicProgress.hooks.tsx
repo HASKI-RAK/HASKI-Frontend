@@ -1,10 +1,10 @@
+import { LearningPathElementStatus, LearningPathLearningElement, Topic, User } from '@core'
+import { AuthContext, SnackbarContext } from '@services'
+import { usePersistedStore, useStore } from '@store'
 import log from 'loglevel'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { LearningPathElementStatus, LearningPathLearningElement, Topic, User } from '@core'
-import { AuthContext, SnackbarContext } from '@services'
-import { usePersistedStore, useStore } from '@store'
 
 type LearningPathTopicHookParams = {
   courseId?: string

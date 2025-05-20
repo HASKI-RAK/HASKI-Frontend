@@ -1,7 +1,7 @@
-import { memo } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
 import { LearningPathTopic } from '@core'
+import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
 
 type ExistingTopicsTableProps = {
   existingTopics: LearningPathTopic

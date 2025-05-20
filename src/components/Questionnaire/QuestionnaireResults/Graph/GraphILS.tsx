@@ -1,7 +1,7 @@
-import { useTranslation } from 'react-i18next'
 import { Bar } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { ILS } from '@core'
+import { useTranslation } from 'react-i18next'
 
 // The Key "Dimension" is used in the Graph, therefore the name matters
 // The naming of the Key "possibleDimensions" is not important, as it is not used in the Graph, just for indexing

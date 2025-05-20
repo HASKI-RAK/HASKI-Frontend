@@ -1,5 +1,5 @@
-import React, { memo } from 'react'
 import { Skeleton } from '@common/components'
+import React, { memo } from 'react'
 
 const SkeletonList = () => {
   return (

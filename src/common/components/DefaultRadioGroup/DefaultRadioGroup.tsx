@@ -1,8 +1,8 @@
+import { RadioGroupProps as DefaultRadioGroupProps } from '@common/components'
 import DefaultRadioGroup from '@mui/material/RadioGroup'
+import { usePageName } from '@services'
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
-import { RadioGroupProps as DefaultRadioGroupProps } from '@common/components'
-import { usePageName } from '@services'
 
 /**
  * @prop {@link DefaultRadioGroupProps} - The props of the default RadioGroup component.
