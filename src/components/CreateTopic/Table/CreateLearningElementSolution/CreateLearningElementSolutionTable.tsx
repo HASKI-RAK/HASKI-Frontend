@@ -48,6 +48,15 @@ const CreateLearningElementClassificationTable = memo(
       onLearningElementSolutionChange
     })
 
+    const allSolutionsUsed = (topicId: number) => {
+      const allSolutions = selectedSolutions[topicId] || []
+      const allElementsWithSolutions = learningElementsWithSolutions[topicId] || []
+      return allSolutions.every((solution) =>
+        allElementsWithSolutions.some((element) => element.solutionLmsId === solution.solutionLmsId)
+      )
+    }
+
+
     useEffect(() => {
       // Create Solutions from LearningElementsClassification
       const updatedSolutions = Object.keys(selectedLearningElementsClassification).reduce((accumulator, topicId) => {
@@ -114,6 +123,7 @@ const CreateLearningElementClassificationTable = memo(
           </Typography>
         </Grid>
         {selectedTopics.map((lmsTopic) => (
+          selectedSolutions[lmsTopic.topic_lms_id].length >= 1 &&
           <Grid
             item
             container
@@ -137,6 +147,7 @@ const CreateLearningElementClassificationTable = memo(
                   <Grid item container xs={6} justifyContent="flex-end">
                     <FormControl sx={{ m: 1, width: '21rem' }} size="small">
                       <Select
+                       disabled={element.solutionLmsId <= 0 && allSolutionsUsed(lmsTopic.topic_lms_id)}
                         value={String(
                           element.solutionLmsId > 0
                             ? element.solutionLmsId
@@ -155,7 +166,7 @@ const CreateLearningElementClassificationTable = memo(
                             value={solution.solutionLmsId}
                             disabled={learningElementsWithSolutions[lmsTopic.topic_lms_id]?.some(
                               (element) =>
-                                element.solutionLmsId === solution.solutionLmsId && element.learningElementLmsId > 0
+                                element.solutionLmsId === solution.solutionLmsId && solution.solutionLmsId > 0
                             )}>
                             {solution.solutionLmsName}
                           </MenuItem>

@@ -100,6 +100,24 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
   const handleNext = () => setActiveStep((prevStep) => prevStep + 1)
   const handleBack = () => setActiveStep((prevStep) => prevStep - 1)
 
+  const handleNextWithSkip = () => setActiveStep((prevStep) => {
+    const isEmpty = Object.values(selectedSolutions).every((solutions) => solutions.length === 0)
+    if (isEmpty) {
+      return prevStep + 2
+    } else {
+      return prevStep + 1
+    }
+  })
+
+  const handleBackWithSkip = () => setActiveStep((prevStep) => {
+    const isEmpty = Object.values(selectedSolutions).every((solutions) => solutions.length === 0)
+    if (isEmpty) {
+      return prevStep - 2
+    } else {
+      return prevStep - 1
+    }
+  })
+
   const handleSubmit = async () => {
     setCreateTopicIsSending(true)
     for (const key in selectedAlgorithms) {
@@ -214,7 +232,7 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
               handleLearningElementClassification={handleLearningElementClassification}
               selectedSolutions={selectedSolutions}
               onSolutionChange={handleSolutionsChange}
-              onNext={handleNext}
+              onNext={handleNextWithSkip}
               onBack={handleBack}
               nextButtonText={t('appGlobal.next')}
             />
@@ -237,7 +255,7 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
               selectedAlgorithms={selectedAlgorithms}
               handleAlgorithmChange={handleAlgorithmChange}
               createTopicIsSending={createTopicIsSending}
-              onBack={handleBack}
+              onBack={handleBackWithSkip}
               onSubmit={handleSubmit}
               successfullyCreatedTopicsCount={successfullyCreatedTopicsCount}
             />
