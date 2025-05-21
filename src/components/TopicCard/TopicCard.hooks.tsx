@@ -1,6 +1,7 @@
+import { useCallback, useEffect, useMemo, useState } from 'react'
+
 import { Topic } from '@core'
 import { usePersistedStore, useStore } from '@store'
-import { useCallback, useEffect, useMemo, useState } from 'react'
 
 export type TopicCardHookParams = {
   topic?: Topic

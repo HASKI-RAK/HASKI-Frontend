@@ -1,3 +1,6 @@
+import { memo, ReactNode, useCallback, useEffect, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+
 import {
   Box,
   FormControl,
@@ -11,10 +14,9 @@ import {
 } from '@common/components'
 import { SkeletonList } from '@components'
 import { RemoteTopics } from '@core'
-import { memo, ReactNode, useCallback, useEffect, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 
 import { useCreateAlgorithmTable } from './CreateAlgorithmTable.hooks'
+
 
 export type CreateAlgorithmTableNameProps = {
   topicName: string

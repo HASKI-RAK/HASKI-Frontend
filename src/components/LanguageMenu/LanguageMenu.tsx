@@ -1,8 +1,9 @@
-import { IconButton, Menu, MenuItem, Tooltip, Typography } from '@common/components'
-import { Language } from '@common/icons'
-import log from 'loglevel'
 import { ForwardedRef, forwardRef, memo, MouseEvent, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import log from 'loglevel'
+
+import { IconButton, Menu, MenuItem, Tooltip, Typography } from '@common/components'
+import { Language } from '@common/icons'
 
 /**
  * LanguageMenu component.

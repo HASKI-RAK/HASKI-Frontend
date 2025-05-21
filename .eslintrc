@@ -30,7 +30,17 @@
     "immutable/no-let": 1,
     "immutable/no-this": 1,
     "immutable/no-mutation": 1,
-    "tsdoc/syntax": "warn"
+    "tsdoc/syntax": "warn",
+    "simple-import-sort/imports": [
+      "warn",
+      {
+        "groups": [
+          ["^react", "^@?\\w"], // Packages starting with a letter (or digit) or @
+          ["^@mocks$", "^@common/.*$", "^@components$", "^@core$", "^@pages$", "^@services$", "^@shared$", "^@store$"], // local imports
+          ["^[./]"] // relative imports
+        ]
+      }
+    ]
   },
   "settings": {
     "react": {

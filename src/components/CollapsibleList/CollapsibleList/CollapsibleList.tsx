@@ -1,7 +1,8 @@
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
+
 import { Grid } from '@common/components'
 import { CollapsibleListEntry, CollapsibleListEntryContentProps, Typewriter } from '@components'
 import { useViewport } from '@services'
-import { memo, useCallback, useEffect, useRef, useState } from 'react'
 
 /**
  * @prop content - List of collapsible elements consisting of a header and a body.

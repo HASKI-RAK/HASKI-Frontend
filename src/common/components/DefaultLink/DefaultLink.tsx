@@ -1,8 +1,9 @@
-import { LinkProps as DefaultLinkProps } from '@common/components'
-import DefaultLink from '@mui/material/Link'
-import { usePageName } from '@services'
 import { ElementType, memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
+import DefaultLink from '@mui/material/Link'
+
+import { LinkProps as DefaultLinkProps } from '@common/components'
+import { usePageName } from '@services'
 
 /**
  * @prop {@link DefaultLinkProps} - The props of the default Link component.

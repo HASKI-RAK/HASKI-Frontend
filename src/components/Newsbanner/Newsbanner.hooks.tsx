@@ -1,10 +1,11 @@
+import { useContext, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import i18next from 'i18next'
+import log from 'loglevel'
+
 import { useUniversity } from '@common/hooks'
 import { SnackbarContext } from '@services'
 import { useSessionStore } from '@store'
-import i18next from 'i18next'
-import log from 'loglevel'
-import { useContext, useEffect, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
 /**
  * @prop  sets the newsItem if there is atleast one news

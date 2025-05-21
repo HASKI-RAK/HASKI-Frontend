@@ -1,6 +1,7 @@
+import { useTranslation } from 'react-i18next'
+
 import { Typography } from '@common/components'
 import { ListK } from '@core'
-import { useTranslation } from 'react-i18next'
 
 type GeneralSubscalesProps = {
   averageCognitiveStrategies: number

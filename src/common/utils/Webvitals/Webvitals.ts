@@ -1,6 +1,7 @@
 /* istanbul ignore file */
-import { getConfig } from '@shared'
 import { CLSReportCallback } from 'web-vitals'
+
+import { getConfig } from '@shared'
 
 /**
  * Sends statistics to backend enpoint to track vitals of website like responsiveness

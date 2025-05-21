@@ -1,8 +1,9 @@
-import { ModalProps as DefaultModalProps } from '@common/components'
-import DefaultModal from '@mui/material/Modal'
-import { usePageName } from '@services'
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
+import DefaultModal from '@mui/material/Modal'
+
+import { ModalProps as DefaultModalProps } from '@common/components'
+import { usePageName } from '@services'
 
 /**
  * @prop {@link DefaultModalProps} - The props of the default Modal component.

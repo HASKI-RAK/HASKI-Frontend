@@ -1,5 +1,6 @@
-import { LearningElementWithClassification } from '@components'
 import { useCallback, useMemo } from 'react'
+
+import { LearningElementWithClassification } from '@components'
 
 type useCreateLearningElementClassificationTableProps = {
   LearningElementsClassification: { [key: number]: LearningElementWithClassification[] }

@@ -5,6 +5,8 @@ import { usePageName } from 'src/services/PageName/PageName.hooks'
 import { TypographyProps as DefaultTypographyProps } from '../DefaultTypographyProps/DefaultTypographyProps'
 import { Typography } from './DefaultTypography'
 
+
+
 /**
  * @prop {@link DefaultTypographyProps} - The props of the default Typography component.
  * @prop {@link EventHandlers} - The props containing the event handlers.

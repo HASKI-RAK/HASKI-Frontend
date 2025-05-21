@@ -1,6 +1,7 @@
+import { memo,ReactElement } from 'react'
+
 import { Grow, Slide } from '@common/components'
 import { SeverityType } from '@components'
-import { memo,ReactElement } from 'react'
 
 /**
  * @prop children - The child element to be transitioned.

@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react'
+
 import { RoleContextType } from '@services'
 import { usePersistedStore } from '@store'
-import { useEffect, useState } from 'react'
 
 const useRoleProvider = (): RoleContextType => {
   const getUser = usePersistedStore((state) => state.getUser)

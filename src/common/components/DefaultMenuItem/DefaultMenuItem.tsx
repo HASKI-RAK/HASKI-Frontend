@@ -1,8 +1,9 @@
-import { MenuItemProps as DefaultMenuItemProps } from '@common/components'
-import DefaultMenuItem from '@mui/material/MenuItem'
-import { usePageName } from '@services'
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
+import DefaultMenuItem from '@mui/material/MenuItem'
+
+import { MenuItemProps as DefaultMenuItemProps } from '@common/components'
+import { usePageName } from '@services'
 
 /**
  * @prop {@link DefaultMenuItemProps} - The props of the default MenuItem component.

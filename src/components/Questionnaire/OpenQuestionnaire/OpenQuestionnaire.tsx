@@ -1,3 +1,8 @@
+import { useContext, useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie'
+import { useTranslation } from 'react-i18next'
+import log from 'loglevel'
+
 import {
   PrivacyModalHookReturn,
   QuestionnaireQuestionsModal,
@@ -6,10 +11,6 @@ import {
 } from '@components'
 import { AuthContext, fetchILS } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import log from 'loglevel'
-import { useContext, useEffect, useState } from 'react'
-import { useCookies } from 'react-cookie'
-import { useTranslation } from 'react-i18next'
 
 //** usePrivacyPolicy gets the 'privacy_accept_token' from the hook */
 export type PrivacyModalProps = {

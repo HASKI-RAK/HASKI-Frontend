@@ -1,8 +1,9 @@
-﻿import { SelectProps as DefaultSelectProps } from '@common/components'
-import DefaultSelect from '@mui/material/Select'
-import { usePageName } from '@services'
-import { memo } from 'react'
+﻿import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
+import DefaultSelect from '@mui/material/Select'
+
+import { SelectProps as DefaultSelectProps } from '@common/components'
+import { usePageName } from '@services'
 
 /**
  * @prop {@link DefaultSelectProps} - The props of the default Select component.

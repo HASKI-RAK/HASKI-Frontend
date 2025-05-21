@@ -1,6 +1,7 @@
-import { SnackbarMessageProps } from '@components'
 import { TFunction } from 'i18next'
 import log from 'loglevel'
+
+import { SnackbarMessageProps } from '@components'
 
 const handleError = (
   t: TFunction,

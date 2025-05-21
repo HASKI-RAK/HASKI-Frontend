@@ -4,6 +4,7 @@ import { getConfig } from '@shared'
 import learningPathBasedOn from '../../core/CalculateLearningPath/LearningPathBasedOn'
 import { fetchData } from '../RequestResponse'
 
+
 /*
   * postCalculateLearningPathILS function.
   *

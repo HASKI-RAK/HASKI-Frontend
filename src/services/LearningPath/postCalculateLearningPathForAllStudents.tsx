@@ -3,6 +3,7 @@ import { getConfig } from '@shared'
 
 import { fetchData } from '../RequestResponse'
 
+
 /*
  * @props studentId - student id
  * @props outputJson - output json

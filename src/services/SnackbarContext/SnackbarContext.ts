@@ -1,5 +1,6 @@
-import { SnackbarMessageProps } from '@components'
 import { createContext } from 'react'
+
+import { SnackbarMessageProps } from '@components'
 
 /**
  * @prop snackbarsErrorWarning - The array of error and warning snackbars.

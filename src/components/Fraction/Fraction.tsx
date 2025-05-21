@@ -1,5 +1,6 @@
-import { Typography, TypographyProps } from '@common/components'
 import { memo } from 'react'
+
+import { Typography, TypographyProps } from '@common/components'
 
 /**
  * Fraction component props.

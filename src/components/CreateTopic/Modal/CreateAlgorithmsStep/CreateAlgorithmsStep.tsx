@@ -1,8 +1,9 @@
+import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+
 import { Box, Button, CircularProgress, Grid, Typography } from '@common/components'
 import { CreateAlgorithmTable, CreateAlgorithmTableNameProps } from '@components'
 import { RemoteTopics } from '@core'
-import { memo } from 'react'
-import { useTranslation } from 'react-i18next'
 
 type CreateAlgorithmsStepProps = {
   selectedTopics: RemoteTopics[]

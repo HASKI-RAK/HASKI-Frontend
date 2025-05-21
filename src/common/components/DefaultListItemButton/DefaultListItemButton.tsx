@@ -1,8 +1,9 @@
-import { ListItemButtonProps as DefaultListItemButtonProps } from '@common/components'
-import DefaultListItemButton from '@mui/material/ListItemButton'
-import { usePageName } from '@services'
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
+import DefaultListItemButton from '@mui/material/ListItemButton'
+
+import { ListItemButtonProps as DefaultListItemButtonProps } from '@common/components'
+import { usePageName } from '@services'
 
 /**
  * @prop {@link DefaultListItemButtonProps} - The props of the default ListItemButton component.

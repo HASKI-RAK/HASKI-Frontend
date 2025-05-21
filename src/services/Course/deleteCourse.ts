@@ -2,6 +2,7 @@ import { getConfig } from '@shared'
 
 import { fetchData } from '../RequestResponse'
 
+
 type DeleteCourseResponse = {
   message: string
 }

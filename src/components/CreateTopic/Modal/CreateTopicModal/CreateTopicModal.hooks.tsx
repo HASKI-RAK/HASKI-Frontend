@@ -1,11 +1,17 @@
+import { Dispatch, SetStateAction, useCallback, useContext, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import log from 'loglevel'
+
 import { CreateAlgorithmTableNameProps, handleError,RemoteLearningElementWithClassification } from '@components'
 import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {
-postAddAllStudentsToTopics,postCalculateLearningPathForAllStudents,postLearningElement,postLearningPathAlgorithm,postTopic,SnackbarContext} from '@services'
+  postAddAllStudentsToTopics,
+  postCalculateLearningPathForAllStudents,
+  postLearningElement,
+  postLearningPathAlgorithm,
+  postTopic,
+  SnackbarContext} from '@services'
 import { usePersistedStore, useStore } from '@store'
-import log from 'loglevel'
-import { Dispatch, SetStateAction, useCallback, useContext, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export type useCreateTopicModalProps = {
   setCreateTopicIsSending?: Dispatch<SetStateAction<boolean>>

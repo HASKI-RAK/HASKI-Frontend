@@ -1,9 +1,11 @@
-import { TipsAndUpdates } from '@common/icons'
-import { LearningPathLearningElementNode } from '@components'
 import { memo } from 'react'
 import { NodeProps } from 'reactflow'
 
+import { TipsAndUpdates } from '@common/icons'
+import { LearningPathLearningElementNode } from '@components'
+
 import BasicNode from '../BasicNode/BasicNode'
+
 
 /**
  * ExplanationNode component.

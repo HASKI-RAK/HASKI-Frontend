@@ -1,8 +1,9 @@
-import { CheckboxProps as DefaultCheckBoxProps } from '@common/components'
-import DefaultCheckbox from '@mui/material/Checkbox'
-import { usePageName } from '@services'
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
+import DefaultCheckbox from '@mui/material/Checkbox'
+
+import { CheckboxProps as DefaultCheckBoxProps } from '@common/components'
+import { usePageName } from '@services'
 
 /**
  * @prop {@link DefaultCheckBoxProps} - The props of the default Checkbox component.

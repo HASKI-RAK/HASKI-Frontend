@@ -1,9 +1,11 @@
+import { StateCreator } from 'zustand'
+
 import { RemoteTopics, RemoteTopicsReturn } from '@core'
 import { fetchRemoteTopics } from '@services'
 import { StoreState } from '@store'
-import { StateCreator } from 'zustand'
 
 import { resetters } from '../Zustand/Store'
+
 
 export default interface RemoteTopicsSlice {
   _cache_remoteTopics_record: Record<string, RemoteTopics[] | undefined>

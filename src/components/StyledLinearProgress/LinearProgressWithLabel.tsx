@@ -1,5 +1,6 @@
-import { LinearProgress, LinearProgressProps, Tooltip, Typography } from '@common/components'
 import { memo } from 'react'
+
+import { LinearProgress, LinearProgressProps, Tooltip, Typography } from '@common/components'
 
 /**
  * @prop value - The value of the progress bar.

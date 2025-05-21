@@ -1,7 +1,8 @@
+import { memo, useCallback } from 'react'
+
 import { InputAdornment, TextField, Typography } from '@common/components'
 import { Search } from '@common/icons'
 import { debounce } from '@services'
-import { memo, useCallback } from 'react'
 
 /**
  * @prop label - The label text of the searchbar.

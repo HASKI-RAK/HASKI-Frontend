@@ -1,10 +1,12 @@
-import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
-import { SkeletonList } from '@components'
-import { RemoteTopics } from '@core'
 import { memo,ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
+import { SkeletonList } from '@components'
+import { RemoteTopics } from '@core'
+
 import { useCreateRemoteTopicsTable } from './CreateRemoteTopicsTable.hooks'
+
 
 type CreateRemoteTopicsTableProps = {
   onTopicChange: (selectedTopics: RemoteTopics[]) => void

@@ -1,6 +1,7 @@
+import React, { memo, useCallback } from 'react'
+
 import { ToggleButtonGroup } from '@common/components'
 import { ToggleButtonList } from '@components'
-import React, { memo, useCallback } from 'react'
 
 /**
  * @prop orientation - The orientation of the index component

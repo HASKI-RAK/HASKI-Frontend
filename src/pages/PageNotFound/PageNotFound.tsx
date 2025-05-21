@@ -1,5 +1,3 @@
-import 'reactflow/dist/style.css'
-
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ReactFlow, {
@@ -12,6 +10,8 @@ import ReactFlow, {
   useEdgesState,
   useNodesState
 } from 'reactflow'
+
+import 'reactflow/dist/style.css'
 
 const initialNodes: Node[] = [
   {

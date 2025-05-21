@@ -1,3 +1,6 @@
+import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
+
 import { Box, Grid, Typography } from '@common/components'
 import {
   CollapsibleList,
@@ -7,8 +10,6 @@ import {
   TextCardRight,
   TextStepper
 } from '@components'
-import { memo } from 'react'
-import { useTranslation } from 'react-i18next'
 
 /**
  * @prop quote - The quote to be displayed.

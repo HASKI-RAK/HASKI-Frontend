@@ -1,8 +1,9 @@
+import { memo, useCallback, useContext, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
 import { Alert, Typography } from '@common/components'
 import { SnackbarTransition } from '@components'
 import { SnackbarContext } from '@services'
-import { memo, useCallback, useContext, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
 /**
  * @prop error - The error severity of a snackbar.

@@ -1,9 +1,11 @@
+import { StateCreator } from 'zustand'
+
 import { CourseResponse, CourseReturn } from '@core'
 import { fetchCourses } from '@services'
 import { StoreState } from '@store'
-import { StateCreator } from 'zustand'
 
 import { resetters } from '../Zustand/Store'
+
 
 export default interface CoursesSlice {
   _cache_Courses_record: Record<string, CourseResponse>

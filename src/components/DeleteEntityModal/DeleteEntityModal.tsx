@@ -1,7 +1,8 @@
-import { Box, Button, Checkbox, Divider, FormControlLabel, Grid, Modal, Typography } from '@common/components'
-import { Warning } from '@common/icons'
 import { memo, MouseEvent, SetStateAction, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+
+import { Box, Button, Checkbox, Divider, FormControlLabel, Grid, Modal, Typography } from '@common/components'
+import { Warning } from '@common/icons'
 
 type DeleteEntityModalProps = {
   openDeleteEntityModal: boolean

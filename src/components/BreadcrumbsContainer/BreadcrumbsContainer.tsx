@@ -1,7 +1,8 @@
-import { Box, Breadcrumbs, Link, Typography } from '@common/components'
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom'
+
+import { Box, Breadcrumbs, Link, Typography } from '@common/components'
 
 // Regex to check if a string contains numbers
 const onlyNumbersRegex = /\d/

@@ -1,16 +1,22 @@
-import { Grid, Skeleton } from '@common/components'
-import {
-  CreateLearningElement,
-handleError,IFrameModal,LabeledSwitch,nodeTypes,ResponsiveMiniMap} from '@components'
-import { LearningPathElementStatus, User } from '@core'
-import { AuthContext, RoleContext, SnackbarContext } from '@services'
-import { usePersistedStore, useStore } from '@store'
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
 
+import { Grid, Skeleton } from '@common/components'
+import {
+  CreateLearningElement,
+  handleError,
+  IFrameModal,
+  LabeledSwitch,
+  nodeTypes,
+  ResponsiveMiniMap} from '@components'
+import { LearningPathElementStatus, User } from '@core'
+import { AuthContext, RoleContext, SnackbarContext } from '@services'
+import { usePersistedStore, useStore } from '@store'
+
 import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
+
 
 /**
  * @prop useTopic - Does the heavy work such as mapping nodes and edges and fetching.

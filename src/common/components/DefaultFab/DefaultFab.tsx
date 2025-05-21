@@ -1,8 +1,9 @@
-import { FabProps as DefaultFabProps } from '@common/components'
-import DefaultFab from '@mui/material/Fab'
-import { usePageName } from '@services'
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
+import DefaultFab from '@mui/material/Fab'
+
+import { FabProps as DefaultFabProps } from '@common/components'
+import { usePageName } from '@services'
 
 /**
  * @prop {@link DefaultFabProps} - The props of the default Fab component.

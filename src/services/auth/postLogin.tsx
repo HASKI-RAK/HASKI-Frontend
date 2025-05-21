@@ -2,6 +2,7 @@ import { getConfig } from '@shared'
 
 import { fetchData } from '../RequestResponse'
 
+
 export type LoginResponse = {
   // Unix timestamp
   expiration: number
