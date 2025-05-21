@@ -67,6 +67,20 @@ const CreateLearningElementClassificationTable = ({
     })
   }, [t])
 
+  //function to check if more than than half of elements would be selected as solution if another was selected
+  const canNotSelectSolution = (topicId: number) => {
+    const nextLength = selectedSolutions[topicId].length + 1
+    const halfOfLearningElements = LearningElementsClassification[topicId].length / 2
+    return nextLength > halfOfLearningElements
+  }
+
+
+  //function to check if solution is checked
+  const isSolution = (topicId: number, elementLmsId: number) => {
+    return (selectedSolutions[topicId] || []).some(
+      (solution) => solution.solutionLmsId === elementLmsId)
+  }
+
   useEffect(() => {
     const updatedClassifications = Object.keys(selectedLearningElements).reduce((accumulator, topicId) => {
       const topicIdInt = parseInt(topicId)
@@ -171,11 +185,11 @@ const CreateLearningElementClassificationTable = ({
                         </Select>
                       </FormControl>
                     </TableCell>
+                    {LearningElementsClassification[lmsTopic.topic_lms_id].length }
                     <TableCell sx={{ textAlign: 'center', padding: '0rem' }}>
                       <Checkbox
-                        checked={(selectedSolutions[lmsTopic.topic_lms_id] || []).some(
-                          (el) => el.solutionLmsId === element.lms_id
-                        )}
+                        checked={isSolution(lmsTopic.topic_lms_id, element.lms_id)}
+                        disabled={canNotSelectSolution(lmsTopic.topic_lms_id) && isSolution(lmsTopic.topic_lms_id, element.lms_id)}
                         onChange={(event) =>
                           handleSolutionchange(
                             lmsTopic.topic_lms_id,

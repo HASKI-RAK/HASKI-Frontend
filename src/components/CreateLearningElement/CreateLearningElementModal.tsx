@@ -78,6 +78,30 @@ const CreateLearningElementModal = ({
   //Constants
   const createLearningElementModalStepperSteps = [t('appGlobal.learningElements'), t('appGlobal.classifications')]
 
+  //functions
+  // when no solutions are selected just create Learning Element in Classification step
+  const handleClassificationNext = () => {
+    if(selectedSolutions[currentTopicLmsId].length === 0){
+      handleCreateLearningElementsInExistingTopic(
+                  currentTopicLmsId,
+                  selectedLearningElementsClassification,
+                  selectedLearningElementSolution,
+                  topicId,
+                  courseId
+                ).then(() => {
+                  handleCloseCreateTopicModal()
+      })
+    } else {
+      setActiveStep((prevStep) => prevStep + 1)
+    }
+  }
+
+  // get text for classification step next button
+  const getNextTextClassification = () : string => {
+    if(selectedSolutions[currentTopicLmsId].length === 0) return t('appGlobal.next')
+    else return t('components.CreateLearningElementModal.createLearningElements')
+  }
+
   //filter out the learning elements that are already in the learning path
   useEffect(() => {
     if (!courseId || !topicId) return
@@ -201,7 +225,7 @@ const CreateLearningElementModal = ({
               onBack={() => {
                 setActiveStep((prevStep) => prevStep - 1)
               }}
-              nextButtonText={t('appGlobal.next')}
+              nextButtonText={getNextTextClassification()}
             />
           )}
           {activeStep === 2 && (
