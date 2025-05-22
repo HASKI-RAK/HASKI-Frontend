@@ -4,41 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { StudentRating, Topic, User } from '@core'
 import { SnackbarContext, fetchStudentRatings } from '@services'
 import { usePersistedStore, useStore } from '@store'
-
-/**
- * # StudentRatingDashboardHookReturn type
- *
- * Represents the return type of the useStudentRatingDashboard hook.
- *
- * @prop userRatingValue - The rating value of the user.
- * @prop ratingValue - The average normalized rating value of the user.
- * @prop ratingDeviation - The average normalized rating deviation of the user.
- * @prop maxRatingDeviation - The maximum normalized rating deviation of the user.
- * @prop ratingValueTrend - The normalized rating value trend of the user.
- * @prop ratingDeviationTrend - The normalized rating deviation trend of the user.
- * @prop spiderGraphData - The data for the spider graph.
- * @prop lineGraphData - The data for the line graph.
- * @prop histogramData - The data for the histogram.
- * @prop isLoading - The loading state of the data.
- * @prop topics - The topics of the user.
- */
-export type StudentRatingDashboardHookReturn = {
-  userRatingValue: number
-  ratingValue: number
-  ratingDeviation: number
-  maxRatingDeviation: number
-  ratingValueTrend: number
-  ratingDeviationTrend: number
-  spiderGraphData: Record<string, number>
-  lineGraphData: {
-    value: number
-    deviation: number
-    timestamp: Date
-  }[]
-  histogramData: number[]
-  isLoading: boolean
-  topics: Topic[]
-}
+import { RatingDashboardHookReturn } from '../RatingDashboard/RatingDashboard.hooks'
 
 /**
  * # useStudentRatingDashboard hook
@@ -66,7 +32,7 @@ export type StudentRatingDashboardHookReturn = {
  * } = useStudentRatingDashboard()
  * ```
  */
-export const useStudentRatingDashboard = (): StudentRatingDashboardHookReturn => {
+export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
   // Hook.
   const { t } = useTranslation()
 

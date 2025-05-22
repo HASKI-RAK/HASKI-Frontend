@@ -4,37 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { LearningElementRating, LearningElementRatingResponse, Topic, User } from '@core'
 import { SnackbarContext, fetchLearningElementRatings } from '@services'
 import { usePersistedStore, useStore } from '@store'
-
-/**
- * # LearningElementRatingDashboardHookReturn type
- *
- * Represents the return type of the useLearningElementRatingDashboard hook.
- *
- * @prop ratingValue - The average normalized rating value of all learning elements.
- * @prop ratingDeviation - The average normalized rating deviation of all learning elements.
- * @prop maxRatingDeviation - The maximum normalized rating deviation of all learning elements.
- * @prop ratingValueTrend - The normalized trend of the average rating value of all learning elements.
- * @prop ratingDeviationTrend - The normalized trend of the average rating deviation of all learning elements.
- * @prop spiderGraphData - The data for the spider graph.
- * @prop lineGraphData - The data for the line graph.
- * @prop isLoading - The loading state.
- * @prop topics - A list of topics.
- */
-export type LearningElementRatingDashboardHookReturn = {
-  ratingValue: number
-  ratingDeviation: number
-  maxRatingDeviation: number
-  ratingValueTrend: number
-  ratingDeviationTrend: number
-  spiderGraphData: Record<string, number>
-  lineGraphData: {
-    value: number
-    deviation: number
-    timestamp: Date
-  }[]
-  isLoading: boolean
-  topics: Topic[]
-}
+import { RatingDashboardHookReturn } from '../RatingDashboard/RatingDashboard.hooks'
 
 /**
  * # useLearningElementRatingDashboard hook
@@ -61,7 +31,7 @@ export type LearningElementRatingDashboardHookReturn = {
  * } = useLearningElementRatingDashboard()
  * ```
  */
-export const useLearningElementRatingDashboard = (): LearningElementRatingDashboardHookReturn => {
+export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn => {
   // Hooks
   const { t } = useTranslation()
 
@@ -325,6 +295,8 @@ export const useLearningElementRatingDashboard = (): LearningElementRatingDashbo
   return useMemo(
     () => ({
       ...ratingStats,
+      userRatingValue: 0,
+      histogramData: [],
       spiderGraphData,
       lineGraphData,
       isLoading,

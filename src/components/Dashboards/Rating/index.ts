@@ -1,6 +1,5 @@
 export * from './StudentRatingDashboard'
 export * from './LearningElementRatingDashboard'
 export * from './RatingInfoDrawer'
-export * from './delete/StudentRatingInfo'
-export * from './delete/LearningElementRatingInfo'
 export * from './RatingInfoDrawerButton'
+export * from './RatingDashboard'

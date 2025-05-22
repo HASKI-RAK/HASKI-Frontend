@@ -4,41 +4,27 @@ import { Histogram, LineGraph, Rating, SpiderGraph, Table, TableColumnProps } fr
 import { FormControlLabel, Grid, Radio, RadioGroup } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { Typewriter } from '@components'
-import {
-  StudentRatingDashboardHookReturn,
-  useStudentRatingDashboard as _useStudentRatingDashboard
-} from './StudentRatingDashboard.hooks'
+import { RatingDashboardHookReturn, useRatingDashboard as _useRatingDashboard } from './RatingDashboard.hooks'
 
 /**
- * # StudentRatingDashboardProps type
  *
- * Represents the properties of the StudentRatingDashboard component.
- *
- * @prop useStudentRatingDashboard - The hook for the StudentRatingDashboard component.
  */
-type StudentRatingDashboardProps = {
-  useStudentRatingDashboard?: () => StudentRatingDashboardHookReturn
+export type SelectedRatingDashboard = 'StudentRating' | 'LearningElementRating'
+
+/**
+ *
+ */
+type RatingDashboardProps = {
+  selectedDashboard: SelectedRatingDashboard
+  useRatingDashboard?: () => RatingDashboardHookReturn
 }
 
 /**
- * # StudentRatingDashboard component
  *
- * Displays the student rating dashboard.
- *
- * @param props - The student rating data from the hook.
- *
- * @remarks
- * Wraps the Rating, SpiderGraph, LineGraph, Histogram, and Table components with own properties.
- * Returns empty if the data is loading.
- *
- * @example
- * ```tsx
- * <StudentRatingDashboard />
- * ```
+ * @param param0
+ * @returns
  */
-const StudentRatingDashboard = ({
-  useStudentRatingDashboard = _useStudentRatingDashboard
-}: StudentRatingDashboardProps) => {
+const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDashboard }: RatingDashboardProps) => {
   // States.
   const [chosenComponent, setChosenComponent] = useState('lineGraph')
   const [transformedSpiderGraphData, setTransformedSpiderGraphData] = useState({})
@@ -57,7 +43,7 @@ const StudentRatingDashboard = ({
     lineGraphData,
     histogramData,
     topics
-  } = useStudentRatingDashboard()
+  } = useRatingDashboard()
 
   // Map the topic ids to the topic names.
   useEffect(() => {
@@ -84,31 +70,31 @@ const StudentRatingDashboard = ({
   const color = theme.palette.primary.main
 
   // Rating title and tooltips.
-  const title = t('components.StudentRatingDashboard.ratingTitle')
+  const title = t(`components.${selectedDashboard}Dashboard.ratingTitle`)
   const ratingTooltips = {
     setDeviationTooltip: useCallback(
-      (value: number) => t('components.StudentRatingDashboard.ratingDeviationTooltip', { value: value }),
+      (value: number) => t(`components.${selectedDashboard}Dashboard.ratingDeviationTooltip`, { value: value }),
       []
     ),
     setDeviationTrendTooltip: useCallback(
-      (value: number) => t('components.StudentRatingDashboard.ratingDeviationTrendTooltip', { value: value }),
+      (value: number) => t(`components.${selectedDashboard}Dashboard.ratingDeviationTrendTooltip`, { value: value }),
       []
     ),
     setValueTooltip: useCallback(
-      (value: number) => t('components.StudentRatingDashboard.ratingValueTooltip', { value: value }),
+      (value: number) => t(`components.${selectedDashboard}Dashboard.ratingValueTooltip`, { value: value }),
       []
     ),
     setValueTrendTooltip: useCallback(
-      (value: number) => t('components.StudentRatingDashboard.ratingValueTrendTooltip', { value: value }),
+      (value: number) => t(`components.${selectedDashboard}Dashboard.ratingValueTrendTooltip`, { value: value }),
       []
     )
   }
 
   // Spider graph.
-  const spiderGraphTitle = t('components.StudentRatingDashboard.spiderGraphTitle')
+  const spiderGraphTitle = t(`components.${selectedDashboard}Dashboard.spiderGraphTitle`)
   const setTooltip = useCallback(
     (concept: string, value: number) =>
-      t('components.StudentRatingDashboard.spiderGraphTooltip', { concept: concept, value: value }),
+      t(`components.${selectedDashboard}Dashboard.spiderGraphTooltip`, { concept: concept, value: value }),
     []
   )
 
@@ -130,7 +116,7 @@ const StudentRatingDashboard = ({
   }
 
   // Line graph.
-  const lineGraphTitle = t('components.StudentRatingDashboard.lineGraphTitle')
+  const lineGraphTitle = t(`components.${selectedDashboard}Dashboard.lineGraphTitle`)
   const lineGraphTitles = {
     title: lineGraphTitle,
     xAxisTitle: t('components.RatingDashboard.lineGraphXAxisTitle'),
@@ -141,7 +127,7 @@ const StudentRatingDashboard = ({
     setYAxisTooltip: useCallback(() => t('components.RatingDashboard.lineGraphYAxisTooltip'), []),
     setDataTooltip: useCallback(
       (value: number, deviation: number, timestamp: string) =>
-        t('components.StudentRatingDashboard.lineGraphDataTooltip', {
+        t(`components.${selectedDashboard}Dashboard.lineGraphDataTooltip`, {
           value: value,
           deviation: deviation,
           timestamp: timestamp
@@ -150,12 +136,18 @@ const StudentRatingDashboard = ({
     ),
     setLowerDeviationTooltip: useCallback(
       (value: number, timestamp: string) =>
-        t('components.StudentRatingDashboard.lineGraphLowerDeviationTooltip', { value: value, timestamp: timestamp }),
+        t(`components.${selectedDashboard}Dashboard.lineGraphLowerDeviationTooltip`, {
+          value: value,
+          timestamp: timestamp
+        }),
       []
     ),
     setUpperDeviationTooltip: useCallback(
       (value: number, timestamp: string) =>
-        t('components.StudentRatingDashboard.lineGraphUpperDeviationTooltip', { value: value, timestamp: timestamp }),
+        t(`components.${selectedDashboard}Dashboard.lineGraphUpperDeviationTooltip`, {
+          value: value,
+          timestamp: timestamp
+        }),
       []
     )
   }
@@ -207,19 +199,21 @@ const StudentRatingDashboard = ({
               />
             </Grid>
           </Grid>
-          <Grid container justifyContent="center" mb={5}>
-            <Grid item>
-              <Histogram
-                color={color}
-                data={histogramData}
-                ratingValue={userRatingValue}
-                minRatingValue={0}
-                setUserInfo={setUserInfo}
-                titles={histogramTitles}
-                tooltips={histogramTooltips}
-              />
+          {selectedDashboard === 'StudentRating' && (
+            <Grid container justifyContent="center" mb={5}>
+              <Grid item>
+                <Histogram
+                  color={color}
+                  data={histogramData}
+                  ratingValue={userRatingValue}
+                  minRatingValue={0}
+                  setUserInfo={setUserInfo}
+                  titles={histogramTitles}
+                  tooltips={histogramTooltips}
+                />
+              </Grid>
             </Grid>
-          </Grid>
+          )}
           <Grid item>
             <Grid container direction="column" alignItems="center" mb={5} gap={2}>
               <Grid item>
@@ -260,11 +254,11 @@ const StudentRatingDashboard = ({
         </Grid>
       ) : (
         <Typewriter delay={25} variant="h5" sx={{ minHeight: '50em' }} align="center">
-          {t('components.StudentRatingDashboard.empty')}
+          {t(`components.${selectedDashboard}.empty`)}
         </Typewriter>
       )}
     </>
   )
 }
 
-export default memo(StudentRatingDashboard)
+export default memo(RatingDashboard)

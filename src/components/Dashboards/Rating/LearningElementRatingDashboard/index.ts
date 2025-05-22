@@ -1,1 +1,1 @@
-export { default as LearningElementRatingDashboard } from './LearningElementRatingDashboard'
+export { useLearningElementRatingDashboard } from './LearningElementRatingDashboard.hooks'

@@ -1,6 +1,6 @@
 import { act, fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import LearningElementRatingDashboard from './LearningElementRatingDashboard'
+import LearningElementRatingDashboard from '../delete/LearningElementRatingDashboard'
 
 declare global {
   interface SVGElement {

@@ -5,16 +5,14 @@ import { KeyboardDoubleArrowLeft, KeyboardDoubleArrowRight } from '@common/icons
 import { debounce } from '@services'
 
 // TODO: DOKU
-// TODO: RENAME
-type DashboardInfoDrawerButtonProps = { 
+type RatingInfoDrawerButtonProps = {
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
 }
 
 // TODO: DOKU
-// TODO: RENAME
-const DashboardInfoDrawerButton = forwardRef(
-  ({ isOpen, setIsOpen }: DashboardInfoDrawerButtonProps, ref: ForwardedRef<HTMLDivElement | null>, ...props) => {
+const RatingInfoDrawerButton = forwardRef(
+  ({ isOpen, setIsOpen }: RatingInfoDrawerButtonProps, ref: ForwardedRef<HTMLDivElement | null>, ...props) => {
     const { t } = useTranslation()
 
     return (
@@ -31,9 +29,9 @@ const DashboardInfoDrawerButton = forwardRef(
             arrow
             title={
               isOpen ? (
-                <Typography variant="body2">{t('components.DashboardInfoDrawerButton.close')}</Typography>
+                <Typography variant="body2">{t('components.DashboardInfoDrawerButton.close')}</Typography> // TODO: RENAME
               ) : (
-                <Typography variant="body2">{t('components.DashboardInfoDrawerButton.open')}</Typography>
+                <Typography variant="body2">{t('components.DashboardInfoDrawerButton.open')}</Typography> // TODO: RENAME
               )
             }
             PopperProps={{ disablePortal: true }}>
@@ -48,5 +46,5 @@ const DashboardInfoDrawerButton = forwardRef(
 )
 
 // eslint-disable-next-line immutable/no-mutation
-DashboardInfoDrawerButton.displayName = 'DashboardInfoDrawerButton'
-export default memo(DashboardInfoDrawerButton)
+RatingInfoDrawerButton.displayName = 'RatingInfoDrawerButton'
+export default memo(RatingInfoDrawerButton)

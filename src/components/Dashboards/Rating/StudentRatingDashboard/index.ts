@@ -1,1 +1,1 @@
-export { default as StudentRatingDashboard } from './StudentRatingDashboard'
+export { useStudentRatingDashboard } from './StudentRatingDashboard.hooks'

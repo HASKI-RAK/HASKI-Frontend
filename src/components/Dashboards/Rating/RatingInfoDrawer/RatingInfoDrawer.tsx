@@ -1,6 +1,7 @@
 import { memo } from 'react'
-import { Box, Drawer, Typography } from '@common/components'
 import { useTranslation } from 'react-i18next'
+import { Box, Drawer, Typography } from '@common/components'
+import { SelectedRatingDashboard } from '@components'
 
 /**
  * @prop isOpen - Whether the drawer is open or not.
@@ -9,25 +10,26 @@ import { useTranslation } from 'react-i18next'
  */
 type RatingInfoDrawerProps = {
   isOpen: boolean
-  selectedDashboard: 'StudentRatingDashboard' | 'LearningElementRatingDashboard' // TODO: Custom type
+  selectedDashboard: SelectedRatingDashboard
 }
 
+// TODO: NUR RATINGDRAWER NENNEN?
 /**
- * RatingDashboardInfoDrawer component.
- * 
+ * RatingInfoDrawer component.
+ *
  * @param props - Props containing isOpen and selectedDashboard.
- * 
+ *
  * @remarks
- * RatingDashboardInfoDrawer represents a component that displays information about the currently selected dashboard.
+ * RatingInfoDrawer represents a component that displays information about the currently selected dashboard.
  * The drawer can be opened or closed.
  * Different information is displayed based on the selected dashboard.
- * RatingDashboardInfoDrawer can be used as a standalone component on a page.
- * 
+ * RatingInfoDrawer can be used as a standalone component on a page.
+ *
  * @category Components
  */
 const RatingInfoDrawer = ({ isOpen, selectedDashboard }: RatingInfoDrawerProps) => {
   const { t } = useTranslation()
-  
+
   return (
     <Drawer
       variant="persistent"
@@ -51,30 +53,28 @@ const RatingInfoDrawer = ({ isOpen, selectedDashboard }: RatingInfoDrawerProps) 
       }}>
       {isOpen && (
         <Box sx={{ padding: '16px' }}>
-            <Typography variant ="h5">{t(`components.${selectedDashboard}.dashboardTitle`)}</Typography>
-            <Typography variant ="body1">{t(`components.${selectedDashboard}.dashboardText`)}</Typography>
-            <Typography variant ="h5" sx={{ mt: 2 }}>
-                {t(`components.${selectedDashboard}.ratingTitle`)}
-            </Typography>
-            <Typography variant ="body1">{t(`components.${selectedDashboard}.ratingText`)}</Typography>
-            <Typography variant ="h5" sx={{ mt: 2 }}>
-                {t(`components.${selectedDashboard}.spiderGraphTitle`)}
-            </Typography>
-            <Typography variant ="body1">{t(`components.${selectedDashboard}.spiderGraphText`)}</Typography>
-            {
-            selectedDashboard == 'StudentRatingDashboard' ? (
-                <>
-                    <Typography variant ="h5" sx={{ mt: 2 }}>
-                        {t('components.StudentRatingDashboard.histogramTitle')}
-                    </Typography>
-                    <Typography variant ="body1">{t('components.StudentRatingDashboard.histogramText')}</Typography>
-                </>
-            ) : null
-            }
-            <Typography variant ="h5" sx={{ mt: 2 }}>
-                {t(`components.${selectedDashboard}.lineGraphTitle`)}
-            </Typography>
-            <Typography variant ="body1">{t(`components.${selectedDashboard}.lineGraphText`)}</Typography>
+          <Typography variant="h5">{t(`components.${selectedDashboard}Info.dashboardTitle`)}</Typography>
+          <Typography variant="body1">{t(`components.${selectedDashboard}Info.dashboardText`)}</Typography>
+          <Typography variant="h5" sx={{ mt: 2 }}>
+            {t(`components.${selectedDashboard}Info.ratingTitle`)}
+          </Typography>
+          <Typography variant="body1">{t(`components.${selectedDashboard}Info.ratingText`)}</Typography>
+          <Typography variant="h5" sx={{ mt: 2 }}>
+            {t(`components.${selectedDashboard}Info.spiderGraphTitle`)}
+          </Typography>
+          <Typography variant="body1">{t(`components.${selectedDashboard}Info.spiderGraphText`)}</Typography>
+          {selectedDashboard == 'StudentRating' ? (
+            <>
+              <Typography variant="h5" sx={{ mt: 2 }}>
+                {t('components.StudentRatingInfo.histogramTitle')}
+              </Typography>
+              <Typography variant="body1">{t('components.StudentRatingInfo.histogramText')}</Typography>
+            </>
+          ) : null}
+          <Typography variant="h5" sx={{ mt: 2 }}>
+            {t(`components.${selectedDashboard}Info.lineGraphTitle`)}
+          </Typography>
+          <Typography variant="body1">{t(`components.${selectedDashboard}Info.lineGraphText`)}</Typography>
         </Box>
       )}
     </Drawer>

@@ -8,7 +8,9 @@ describe('RatingInfoDrawer tests', () => {
   })
 
   test('RatingInfoDrawer open when student no selected', () => {
-    const ratingInfoDrawer = render(<RatingInfoDrawer isOpen={true} selectedDashboard="LearningElementRatingDashboard" />)
+    const ratingInfoDrawer = render(
+      <RatingInfoDrawer isOpen={true} selectedDashboard="LearningElementRatingDashboard" />
+    )
     expect(ratingInfoDrawer).toBeTruthy()
   })
 
@@ -17,4 +19,3 @@ describe('RatingInfoDrawer tests', () => {
     expect(ratingInfoDrawer).toBeTruthy()
   })
 })
-

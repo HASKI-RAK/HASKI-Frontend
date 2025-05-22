@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
-import DashboardInfoDrawerButton from './DashboardInfoDrawerButton'
+import RatingInfoDrawerButton from './RatingInfoDrawerButton'
 
 describe('DashboardInfoDrawerButton tests', () => {
   it('renders open and can be closed', () => {
@@ -8,7 +8,7 @@ describe('DashboardInfoDrawerButton tests', () => {
     const mockSetIsOpen = jest.fn()
     const { getByRole } = render(
       <MemoryRouter>
-        <DashboardInfoDrawerButton isOpen={true} setIsOpen={mockSetIsOpen} />
+        <RatingInfoDrawerButton isOpen={true} setIsOpen={mockSetIsOpen} />
       </MemoryRouter>
     )
 
@@ -23,7 +23,7 @@ describe('DashboardInfoDrawerButton tests', () => {
     const mockSetIsOpen = jest.fn()
     const { getByRole } = render(
       <MemoryRouter>
-        <DashboardInfoDrawerButton isOpen={false} setIsOpen={mockSetIsOpen} />
+        <RatingInfoDrawerButton isOpen={false} setIsOpen={mockSetIsOpen} />
       </MemoryRouter>
     )
 

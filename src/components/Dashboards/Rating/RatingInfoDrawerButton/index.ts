@@ -1,1 +1,1 @@
-export { default as DashboardInfoDrawerButton } from './DashboardInfoDrawerButton'
+export { default as RatingInfoDrawerButton } from './RatingInfoDrawerButton'
