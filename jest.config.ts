@@ -31,7 +31,14 @@ const config: Config.InitialOptions = {
   testMatch: ['<rootDir>/src/**/*.test.{js,jsx,ts,tsx}'],
   testPathIgnorePatterns: ['node_modules', 'Webvitals.ts', '<rootDir>/src/index.tsx', '.mock.ts', 'index.ts'],
   coverageReporters: ['lcov', 'text', 'html'],
-  coveragePathIgnorePatterns: ['node_modules', 'Webvitals.ts', '<rootDir>/src/index.tsx', '.mock.ts', 'index.ts'],
+  coveragePathIgnorePatterns: [
+    'node_modules',
+    'Webvitals.ts',
+    '<rootDir>/src/index.tsx',
+    '.mock.ts',
+    'index.ts',
+    '.cjs'
+  ],
   transform: {
     'node_modules/variables/.+\\.(j|t)sx?$': 'ts-jest',
     '^.+\\.tsx?$': [
