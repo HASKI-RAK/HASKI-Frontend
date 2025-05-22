@@ -7,7 +7,7 @@ webpack.config.js
 webpack.config.prod.js
 tsconfig.json
 jest.config.js
-auto-order-json-translations.js
+auto-order-json-translations.cjs
 *.test.*
 *.config.*
 RingBuffer.ts
