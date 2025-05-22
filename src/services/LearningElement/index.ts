@@ -1,2 +1,2 @@
-export { postLearningElement } from './postLearningElement'
 export { deleteLearningElement } from './deleteLearningElement'
+export { postLearningElement } from './postLearningElement'

@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Edge, Node } from 'reactflow'
 import { useTheme } from '@common/hooks'
-import { LearningPathLearningElementNode, getGroupLabels } from '@components'
+import { getGroupLabels, LearningPathLearningElementNode } from '@components'
 import { LearningElement, LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
 
 /**

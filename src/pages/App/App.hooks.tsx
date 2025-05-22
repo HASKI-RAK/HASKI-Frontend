@@ -1,7 +1,7 @@
-import log from 'loglevel'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { XAPI, setupXAPI } from 'react-xapi-wrapper'
+import { setupXAPI, XAPI } from 'react-xapi-wrapper'
+import log from 'loglevel'
 import { getConfig } from '@shared'
 import { usePersistedStore } from '@store'
 

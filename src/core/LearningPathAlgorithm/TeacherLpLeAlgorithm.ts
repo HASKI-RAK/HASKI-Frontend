@@ -7,4 +7,4 @@ type TeacherLpLeAlgorithm = {
 }
 
 export default TeacherLpLeAlgorithm
-export type { TeacherLpLeAlgorithmReturn, TeacherLpLeAlgorithm }
+export type { TeacherLpLeAlgorithm, TeacherLpLeAlgorithmReturn }

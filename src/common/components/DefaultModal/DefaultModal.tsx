@@ -1,6 +1,6 @@
-import DefaultModal from '@mui/material/Modal'
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
+import DefaultModal from '@mui/material/Modal'
 import { ModalProps as DefaultModalProps } from '@common/components'
 import { usePageName } from '@services'
 

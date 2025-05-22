@@ -1,12 +1,12 @@
-import dayjs from 'dayjs'
-import { MouseEvent, memo, useCallback, useContext, useState } from 'react'
+import { memo, MouseEvent, useCallback, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import dayjs from 'dayjs'
 import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Tooltip, Typography } from '@common/components'
 import { DeleteForever, MoreVert } from '@common/icons'
 import { DeleteEntityModal } from '@components'
 import { Course } from '@core'
-import { SnackbarContext, deleteCourse } from '@services'
+import { deleteCourse, SnackbarContext } from '@services'
 import { useStore } from '@store'
 
 type CourseCardProps = {

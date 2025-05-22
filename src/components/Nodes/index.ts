@@ -1,2 +1,2 @@
-export { nodeTypes, getGroupLabels } from './NodeTypes/NodeTypes'
 export type { LearningPathLearningElementNode } from './LearningPathLearningElementNode/LearningPathLearningElementNode'
+export { getGroupLabels, nodeTypes } from './NodeTypes/NodeTypes'
