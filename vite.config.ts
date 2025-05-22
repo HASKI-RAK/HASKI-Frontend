@@ -17,7 +17,7 @@ export default defineConfig({
     emptyOutDir: true
   },
   server: {
-    allowedHosts: ['fakedomain.com']
+    allowedHosts: true
   },
   publicDir: '../public',
   plugins: [tsconfigPaths(), react()]
