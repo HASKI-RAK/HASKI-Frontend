@@ -1,7 +1,6 @@
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
-
 import {
   Box,
   Divider,
@@ -18,10 +17,8 @@ import {
   Typography
 } from '@common/components'
 import { SnackbarContext } from '@services'
-
 import useHandleSend from './Questions.hooks'
 import { ButtonStack, CoverSheet, MemoTableRowQuestion, SendButton, StartButton } from './TableCommonComponents'
-
 
 type TableRowAnswersProps = {
   t: (key: string) => string

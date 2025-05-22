@@ -1,8 +1,6 @@
 import { LearningPathTopic, LearningPathTopicReturn } from '@core'
 import { getConfig } from '@shared'
-
 import { fetchData } from '../RequestResponse'
-
 
 export const fetchLearningPathTopic: LearningPathTopicReturn = async (userId, lmsUserId, studentId, courseId) => {
   if (!courseId) {

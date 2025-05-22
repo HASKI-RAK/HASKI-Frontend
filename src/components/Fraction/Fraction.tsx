@@ -1,5 +1,4 @@
 import { memo } from 'react'
-
 import { Typography, TypographyProps } from '@common/components'
 
 /**

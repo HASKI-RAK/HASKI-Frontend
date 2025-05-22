@@ -1,8 +1,7 @@
 import { useCallback, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
-
-import { FormDataType, postContactForm,SnackbarContext } from '@services'
+import { FormDataType, postContactForm, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
 
 export type ContactHookProps = {

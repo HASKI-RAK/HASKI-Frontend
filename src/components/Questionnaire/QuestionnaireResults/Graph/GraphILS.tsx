@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next'
-
 import { Bar } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { ILS } from '@core'

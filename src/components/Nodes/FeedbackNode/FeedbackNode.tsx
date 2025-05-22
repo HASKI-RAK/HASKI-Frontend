@@ -1,11 +1,8 @@
 import { memo } from 'react'
 import { NodeProps } from 'reactflow'
-
 import { Feedback } from '@common/icons'
 import { LearningPathLearningElementNode } from '@components'
-
 import BasicNode from '../BasicNode/BasicNode'
-
 
 /**
  * FeedbackNode component.

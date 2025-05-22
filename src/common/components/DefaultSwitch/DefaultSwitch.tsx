@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import DefaultSwitch from '@mui/material/Switch'
-
 import { SwitchProps as DefaultSwitchProps } from '@common/components'
 import { usePageName } from '@services'
 

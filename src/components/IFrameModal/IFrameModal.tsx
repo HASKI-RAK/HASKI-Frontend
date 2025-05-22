@@ -1,5 +1,4 @@
 import { memo } from 'react'
-
 import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
 

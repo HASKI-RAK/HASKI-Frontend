@@ -1,7 +1,6 @@
 import { Fragment, memo, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-
 import { Box, Container, Divider, Grid, Link, Typography } from '@common/components'
 import { AuthContext } from '@services'
 

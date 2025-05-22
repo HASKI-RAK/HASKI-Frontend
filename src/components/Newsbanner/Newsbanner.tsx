@@ -1,12 +1,9 @@
 import { memo } from 'react'
 import { keyframes } from '@emotion/react'
-
 import { Alert, Box, Collapse, IconButton, Typography } from '@common/components'
 import { Close } from '@common/icons'
 import { useSessionStore } from '@store'
-
 import { NewsbannerHookReturn, useNewsbanner as _useNewsbanner } from './Newsbanner.hooks'
-
 
 export type NewsbannerProps = {
   useNewsbanner?: () => NewsbannerHookReturn

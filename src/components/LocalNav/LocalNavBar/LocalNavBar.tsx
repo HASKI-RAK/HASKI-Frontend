@@ -1,7 +1,6 @@
 import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-
 import { Divider, Drawer, Grid, List, Typography } from '@common/components'
 import { useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
 import { LocalNavItem, SkeletonList } from '@components'

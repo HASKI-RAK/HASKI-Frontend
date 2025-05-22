@@ -1,6 +1,5 @@
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-
 import { Box, Button, Grid } from '@common/components'
 import { CreateRemoteTopicsTable, ExistingTopicsTable } from '@components'
 import { LearningPathTopic, RemoteTopics } from '@core'

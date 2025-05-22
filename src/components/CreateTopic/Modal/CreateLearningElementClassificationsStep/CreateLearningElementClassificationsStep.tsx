@@ -1,6 +1,5 @@
 import { memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
 import { Box, Button, Grid } from '@common/components'
 import { CreateLearningElementClassificationTable, RemoteLearningElementWithClassification } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'

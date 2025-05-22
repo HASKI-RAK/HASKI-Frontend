@@ -1,6 +1,5 @@
 import { memo, ReactNode, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-
 import {
   Box,
   Checkbox,
@@ -16,9 +15,7 @@ import {
 } from '@common/components'
 import { SkeletonList } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
-
 import { useCreateLearningElementClassificationTable } from './CreateLearningElementClassificationTable.hooks'
-
 
 export type LearningElementWithClassification = RemoteLearningElement & {
   classification: string

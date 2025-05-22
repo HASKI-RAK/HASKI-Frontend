@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import DefaultStepButton from '@mui/material/StepButton'
-
 import { StepButtonProps as DefaultStepButtonProps } from '@common/components'
 import { usePageName } from '@services'
 

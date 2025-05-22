@@ -1,13 +1,10 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
-
 import { CourseResponse } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-
 import { GlobalNavContent } from '../GlobalNavMenu/GlobalNavMenu'
-
 
 export type CourseMenuHookReturn = {
   readonly content: GlobalNavContent[]

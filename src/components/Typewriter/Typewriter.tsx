@@ -1,5 +1,4 @@
 import { memo, useEffect, useState } from 'react'
-
 import { Typography, TypographyProps } from '@common/components'
 import { debounce } from '@services'
 

@@ -1,11 +1,8 @@
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-
 import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@common/components'
 import { ListK } from '@core'
-
 import { StyledTableCell, StyledTableCellWithoutBorder, StyledTableRow } from './QuestionnaireResultTableStyle'
-
 
 const StyledTableRowListK = Object.assign({}, StyledTableRow)
 

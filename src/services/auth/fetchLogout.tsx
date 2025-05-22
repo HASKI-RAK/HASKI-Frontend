@@ -1,7 +1,5 @@
 import { getConfig } from '@shared'
-
 import { fetchData } from '../RequestResponse'
-
 
 /**
  * Sends a GET request to the backend to logout the user

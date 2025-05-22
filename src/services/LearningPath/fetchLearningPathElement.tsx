@@ -1,8 +1,6 @@
 import { LearningPathElement, LearningPathElementReturn } from '@core'
 import { getConfig } from '@shared'
-
 import { fetchData } from '../RequestResponse'
-
 
 /*
  * fetchLearningPathElement function.

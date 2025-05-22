@@ -1,6 +1,4 @@
-
 import React from 'react'
-
 import RoleContext, { RoleContextType } from '../RoleContext/RoleContext'
 import { useRoleProvider as _useRoleProvider } from './RoleProvider.hooks'
 

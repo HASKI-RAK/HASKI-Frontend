@@ -1,5 +1,4 @@
 import { useCallback, useMemo } from 'react'
-
 import { LearningElementWithClassification } from '@components'
 
 type useCreateLearningElementClassificationTableProps = {

@@ -1,11 +1,8 @@
 import { Dispatch, memo, SetStateAction, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
 import { Box, Button, Grid, Typography } from '@common/components'
 import { Filter, GlossaryEntryProps, GlossaryIndex, GlossaryList, Searchbar } from '@components'
-
 import { GlossaryHookReturn, useGlossary as _useGlossary } from './Glossary.hooks'
-
 
 /**
  * @prop useGlossary - The hook that is used for the Glossary page logic.

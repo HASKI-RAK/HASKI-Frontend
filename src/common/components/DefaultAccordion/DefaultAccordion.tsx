@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import DefaultAccordion from '@mui/material/Accordion'
-
 import { AccordionProps as DefaultAccordionProps } from '@common/components'
 import { usePageName } from '@services'
 

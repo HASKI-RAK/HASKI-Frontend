@@ -1,9 +1,6 @@
 import { memo, useEffect, useState } from 'react'
-
 import { GlossaryEntry, GlossaryEntryProps } from '@components'
-
 import { GlossaryListHookReturn, useGlossaryList as _useGlossaryList } from './GlossaryList.hooks'
-
 
 /**
  * @prop glossaryEntries - The entries to be displayed in the list.

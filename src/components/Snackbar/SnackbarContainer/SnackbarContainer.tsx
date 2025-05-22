@@ -1,6 +1,5 @@
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
 import { Snackbar, Stack } from '@common/components'
 import { SnackbarMessage } from '@components'
 import { SnackbarContext, useNetworkStatus } from '@services'

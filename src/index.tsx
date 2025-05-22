@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import log, { LogLevelDesc } from 'loglevel'
-
 import { reportWebVitals, sendToAnalytics } from '@common/utils'
 import { App } from '@pages'
 import { getConfig, logBuffer, setConfig } from '@shared'

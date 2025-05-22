@@ -1,6 +1,5 @@
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-
 import { Box, Grid, Typography } from '@common/components'
 import {
   CollapsibleList,

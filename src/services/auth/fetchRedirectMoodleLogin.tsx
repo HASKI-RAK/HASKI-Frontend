@@ -1,7 +1,5 @@
 import { getConfig } from '@shared'
-
 import { fetchData } from '../RequestResponse'
-
 
 export type LTILaunchViewResponse = {
   lti_launch_view: string

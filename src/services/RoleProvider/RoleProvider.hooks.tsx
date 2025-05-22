@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-
 import { RoleContextType } from '@services'
 import { usePersistedStore } from '@store'
 

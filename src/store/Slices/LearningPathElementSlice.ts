@@ -1,11 +1,8 @@
 import { StateCreator } from 'zustand'
-
 import { LearningPathElement, LearningPathElementReturn } from '@core'
 import { fetchLearningPathElement } from '@services'
 import { StoreState } from '@store'
-
 import { resetters } from '../Zustand/Store'
-
 
 export default interface LearningPathSlice {
   _cache_learningPathElement_record: Record<string, LearningPathElement | undefined>

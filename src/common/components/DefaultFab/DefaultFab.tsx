@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import DefaultFab from '@mui/material/Fab'
-
 import { FabProps as DefaultFabProps } from '@common/components'
 import { usePageName } from '@services'
 

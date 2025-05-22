@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
-
 import { Box, Button, Card, CardContent, Grid, Stack } from '@common/components'
 import { useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
 import { AddCircle } from '@common/icons'

@@ -1,6 +1,5 @@
 /* istanbul ignore file */
 import { CLSReportCallback } from 'web-vitals'
-
 import { getConfig } from '@shared'
 
 /**

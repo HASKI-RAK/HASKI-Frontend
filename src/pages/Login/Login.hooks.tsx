@@ -2,8 +2,7 @@ import { useContext, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import log from 'loglevel'
-
-import { AuthContext, fetchRedirectMoodleLogin, postLogin,SnackbarContext } from '@services'
+import { AuthContext, fetchRedirectMoodleLogin, postLogin, SnackbarContext } from '@services'
 
 export type LoginHookParams = {
   setIsLoading: (isLoading: boolean) => void

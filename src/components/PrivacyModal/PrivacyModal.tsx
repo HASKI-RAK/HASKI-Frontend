@@ -1,7 +1,6 @@
 import { memo, MouseEvent, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
-
 import {
   Box,
   Button,
@@ -14,9 +13,7 @@ import {
   Typography
 } from '@common/components'
 import { useUniversity } from '@common/hooks'
-
 import { PrivacyModalHookReturn, usePrivacyModal as _usePrivacyModal } from './PrivacyModal.hooks'
-
 
 const style = {
   position: 'absolute',

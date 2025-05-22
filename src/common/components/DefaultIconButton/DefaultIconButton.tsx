@@ -1,7 +1,6 @@
-import { forwardRef, memo,Ref } from 'react'
+import { forwardRef, memo, Ref } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import DefaultIconButton from '@mui/material/IconButton'
-
 import { IconButtonProps as DefaultIconButtonProps } from '@common/components'
 import { usePageName } from '@services'
 

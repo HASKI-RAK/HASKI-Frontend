@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import DefaultMenuItem from '@mui/material/MenuItem'
-
 import { MenuItemProps as DefaultMenuItemProps } from '@common/components'
 import { usePageName } from '@services'
 

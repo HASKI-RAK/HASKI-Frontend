@@ -1,5 +1,4 @@
 import { memo } from 'react'
-
 import { Box, ToggleButton } from '@common/components'
 
 /**

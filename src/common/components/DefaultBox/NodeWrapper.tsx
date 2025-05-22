@@ -1,11 +1,8 @@
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
-
 import { BoxProps as DefaultBoxProps } from '@common/components'
 import { usePageName } from '@services'
-
 import { Box } from './DefaultBox'
-
 
 /**
  * @prop {@link DefaultBoxProps} - The props of the default Box component.

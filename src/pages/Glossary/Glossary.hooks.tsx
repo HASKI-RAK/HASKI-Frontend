@@ -1,5 +1,4 @@
 import { useCallback, useMemo } from 'react'
-
 import { GlossaryEntryProps } from '@components'
 
 /**

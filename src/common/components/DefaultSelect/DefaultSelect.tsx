@@ -1,7 +1,6 @@
 ﻿import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import DefaultSelect from '@mui/material/Select'
-
 import { SelectProps as DefaultSelectProps } from '@common/components'
 import { usePageName } from '@services'
 

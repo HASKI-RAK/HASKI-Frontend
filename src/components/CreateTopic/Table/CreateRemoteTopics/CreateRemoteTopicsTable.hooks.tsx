@@ -1,5 +1,4 @@
 import { useCallback, useMemo } from 'react'
-
 import { RemoteTopics } from '@core'
 
 type useCreateRemoteTopicsTableProps = {

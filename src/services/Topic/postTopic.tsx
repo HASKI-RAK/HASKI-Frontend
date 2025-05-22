@@ -1,8 +1,6 @@
 import { Topic } from '@core'
 import { getConfig } from '@shared'
-
 import { fetchData } from '../RequestResponse'
-
 
 /*
  * @props studentId - student id

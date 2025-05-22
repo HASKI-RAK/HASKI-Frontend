@@ -1,5 +1,4 @@
 import { memo, useCallback, useEffect, useRef, useState } from 'react'
-
 import { Grid } from '@common/components'
 import { CollapsibleListEntry, CollapsibleListEntryContentProps, Typewriter } from '@components'
 import { useViewport } from '@services'

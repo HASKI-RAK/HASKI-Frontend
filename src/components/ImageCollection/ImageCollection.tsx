@@ -1,5 +1,4 @@
 import { memo } from 'react'
-
 import { Box, Fade } from '@common/components'
 
 /**

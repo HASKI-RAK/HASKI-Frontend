@@ -1,9 +1,6 @@
 import { useTranslation } from 'react-i18next'
-
 import { Backdrop, Button, CircularProgress, Grid, Paper, Stack, Typography } from '@common/components'
-
 import { LoginFormHookReturn, useLoginForm as _useLoginForm } from './LoginForm.hooks'
-
 
 /**
  * LoginFormProps is the type of the props object that must be passed to

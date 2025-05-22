@@ -1,20 +1,18 @@
 import { Dispatch, memo, SetStateAction, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-
 import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
 import {
   CreateLearningElementClassificationsStep,
   CreateLearningElementsStep,
   handleError,
-  RemoteLearningElementWithClassification} from '@components'
+  RemoteLearningElementWithClassification
+} from '@components'
 import { LearningPathElement, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-
 import { useCreateTopicModal } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal.hooks'
-
 
 export type CreateTopicModalProps = {
   openCreateTopicModal?: boolean

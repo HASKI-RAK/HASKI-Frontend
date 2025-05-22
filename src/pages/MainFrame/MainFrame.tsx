@@ -1,5 +1,4 @@
 import { Outlet, useParams } from 'react-router-dom'
-
 import { Box, Divider, Grid } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
 import {

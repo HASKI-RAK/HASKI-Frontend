@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import DefaultToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-
 import { ToggleButtonGroupProps as DefaultToggleButtonGroupProps } from '@common/components'
 import { usePageName } from '@services'
 

@@ -1,11 +1,8 @@
 import { StateCreator } from 'zustand'
-
 import { NewsResponse, NewsReturn } from '@core'
 import { fetchNews } from '@services'
 import { SessionStoreState } from '@store'
-
 import { resetters } from '../Zustand/Store'
-
 
 export default interface NewsSlice {
   _news: Record<string, NewsResponse>

@@ -1,8 +1,6 @@
 import { StudentLpLeAlgorithm, StudentLpLeAlgorithmReturn } from '@core'
 import { getConfig } from '@shared'
-
 import { fetchData } from '../RequestResponse'
-
 
 /**
  * fetchStudentLpLeAlg function.

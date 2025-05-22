@@ -1,8 +1,6 @@
 import { RemoteTopics, RemoteTopicsReturn } from '@core'
 import { getConfig } from '@shared'
-
 import { fetchData } from '../RequestResponse'
-
 
 /*
  * fetchRemoteTopics function.

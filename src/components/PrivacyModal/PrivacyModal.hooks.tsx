@@ -2,7 +2,6 @@ import { useCallback, useContext, useMemo } from 'react'
 import { CookiesProvider, useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
-
 import { SnackbarContext } from '@services'
 
 /**

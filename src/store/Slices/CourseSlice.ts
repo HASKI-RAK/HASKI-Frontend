@@ -1,10 +1,7 @@
 import { StateCreator } from 'zustand'
-
 import { Course } from '@core'
 import { StoreState } from '@store'
-
 import { resetters } from '../Zustand/Store'
-
 
 export default interface CourseSlice {
   course: Course

@@ -1,6 +1,5 @@
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
 import {
   Grid,
   Table,
@@ -11,9 +10,9 @@ import {
   ToggleButtonGroup,
   Typography
 } from '@common/components'
-import { handleError,SkeletonList } from '@components'
+import { handleError, SkeletonList } from '@components'
 import { RemoteCourse } from '@core'
-import { fetchRemoteCourses,SnackbarContext } from '@services'
+import { fetchRemoteCourses, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 type CreateCourseTableProps = {

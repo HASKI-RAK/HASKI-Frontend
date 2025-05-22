@@ -1,5 +1,4 @@
 import { memo, useCallback } from 'react'
-
 import { InputAdornment, TextField, Typography } from '@common/components'
 import { Search } from '@common/icons'
 import { debounce } from '@services'

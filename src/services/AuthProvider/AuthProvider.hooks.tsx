@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import log from 'loglevel'
-
 import { AuthContextType, fetchLogout } from '@services'
 import { usePersistedStore } from '@store'
 

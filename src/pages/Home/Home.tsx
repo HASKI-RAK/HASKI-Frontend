@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
-
 import { Card, CardContent, Grid, Skeleton, Typography } from '@common/components'
-import { CourseCard, courseCardStyle,CreateCourseCard } from '@components'
+import { CourseCard, courseCardStyle, CreateCourseCard } from '@components'
 import { Course } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'

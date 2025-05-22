@@ -1,14 +1,14 @@
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import dayjs, { Dayjs } from 'dayjs'
-
 import {
   AdapterDayjs,
   DateTimePicker,
   Grid,
   LocalizationProvider,
   renderTimeViewClock,
-  TextField} from '@common/components'
+  TextField
+} from '@common/components'
 import { RemoteCourse } from '@core'
 
 type CreateCourseDetailsTableProps = {

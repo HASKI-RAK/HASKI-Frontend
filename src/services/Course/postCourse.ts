@@ -1,8 +1,6 @@
 import { Course } from '@core'
 import { getConfig } from '@shared'
-
 import { fetchData } from '../RequestResponse'
-
 
 type PostCourseProps = {
   outputJson: string

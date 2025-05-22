@@ -1,7 +1,5 @@
 import { getConfig } from '@shared'
-
 import { fetchData } from '../RequestResponse'
-
 
 /**
  * The data that is sent to the backend.
