@@ -185,11 +185,10 @@ const CreateLearningElementClassificationTable = ({
                         </Select>
                       </FormControl>
                     </TableCell>
-                    {LearningElementsClassification[lmsTopic.topic_lms_id].length }
                     <TableCell sx={{ textAlign: 'center', padding: '0rem' }}>
                       <Checkbox
                         checked={isSolution(lmsTopic.topic_lms_id, element.lms_id)}
-                        disabled={canNotSelectSolution(lmsTopic.topic_lms_id) && isSolution(lmsTopic.topic_lms_id, element.lms_id)}
+                        disabled={canNotSelectSolution(lmsTopic.topic_lms_id) && !isSolution(lmsTopic.topic_lms_id, element.lms_id)}
                         onChange={(event) =>
                           handleSolutionchange(
                             lmsTopic.topic_lms_id,
