@@ -16,6 +16,9 @@ export default defineConfig({
     outDir: '../dist',
     emptyOutDir: true
   },
+  server: {
+    allowedHosts: true
+  },
   publicDir: '../public',
   plugins: [tsconfigPaths(), react()]
 })
