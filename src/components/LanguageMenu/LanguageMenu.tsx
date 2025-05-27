@@ -1,5 +1,4 @@
-﻿import log from 'loglevel'
-import { ForwardedRef, MouseEvent, forwardRef, memo, useCallback, useState } from 'react'
+import { ForwardedRef, forwardRef, memo, MouseEvent, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IconButton, Menu, MenuItem, Tooltip, Typography } from '@common/components'
 import { Language } from '@common/icons'

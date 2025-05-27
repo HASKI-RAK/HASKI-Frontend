@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction, memo, useCallback } from 'react'
+import { Dispatch, memo, SetStateAction, useCallback } from 'react'
 import { Button, Card, CardContent, Grid } from '@common/components'
 import { AddCircle } from '@common/icons'
-import { CreateCourseModal, courseCardButtonStyle } from '@components'
+import { courseCardButtonStyle, CreateCourseModal } from '@components'
 
 type CreateCourseCardProps = {
   setCreateCourseModalOpen: (value: SetStateAction<boolean>) => void

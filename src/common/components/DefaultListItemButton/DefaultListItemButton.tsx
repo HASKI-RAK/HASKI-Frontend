@@ -1,6 +1,6 @@
-import DefaultListItemButton from '@mui/material/ListItemButton'
 import { memo } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
+import DefaultListItemButton from '@mui/material/ListItemButton'
 import { ListItemButtonProps as DefaultListItemButtonProps } from '@common/components'
 import { usePageName } from '@services'
 

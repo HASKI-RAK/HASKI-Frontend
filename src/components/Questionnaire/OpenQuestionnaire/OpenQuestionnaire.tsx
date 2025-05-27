@@ -1,7 +1,7 @@
-import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
+import log from 'loglevel'
 import {
   PrivacyModalHookReturn,
   QuestionnaireQuestionsModal,

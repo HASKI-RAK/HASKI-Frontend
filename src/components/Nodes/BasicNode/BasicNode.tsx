@@ -1,11 +1,11 @@
-import { MouseEvent, ReactElement, ReactNode, memo, useContext, useState } from 'react'
+import { memo, MouseEvent, ReactElement, ReactNode, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { Box, Checkbox, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { DeleteForever, Feedback } from '@common/icons'
 import { DeleteEntityModal, LearningPathLearningElementNode } from '@components'
-import { RoleContext, SnackbarContext, deleteLearningElement } from '@services'
+import { deleteLearningElement, RoleContext, SnackbarContext } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
 

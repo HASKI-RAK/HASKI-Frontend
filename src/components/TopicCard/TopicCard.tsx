@@ -5,7 +5,7 @@ import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Tooltip, T
 import { DeleteForever, MoreVert, Polyline } from '@common/icons'
 import { AlgorithmSettingsModal, DeleteEntityModal, StyledLinearProgress } from '@components'
 import { Topic } from '@core'
-import { RoleContext, SnackbarContext, deleteTopic } from '@services'
+import { deleteTopic, RoleContext, SnackbarContext } from '@services'
 import { useStore } from '@store'
 import { useTopicCard } from './TopicCard.hooks'
 

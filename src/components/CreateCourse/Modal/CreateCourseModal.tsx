@@ -1,13 +1,13 @@
+import { Dispatch, memo, SetStateAction, useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import dayjs, { Dayjs } from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import log from 'loglevel'
-import { Dispatch, SetStateAction, memo, useContext, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Box, Button, CircularProgress, Fab, Grid, Modal } from '@common/components'
 import { Close } from '@common/icons'
 import { CreateCourseDetailsTable, CreateCourseTable, handleError } from '@components'
 import { RemoteCourse } from '@core'
-import { SnackbarContext, postAddAllStudentsToCourse, postCourse } from '@services'
+import { postAddAllStudentsToCourse, postCourse, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
 
 dayjs.extend(utc)
