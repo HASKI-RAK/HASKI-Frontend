@@ -48,39 +48,39 @@ import User from './User/User'
  * Holds all pure business logic. Does not rely on any other components.
  */
 export type {
-  User,
   Course,
   CourseResponse,
   DefaultLearningPath,
+  ILS,
   LearningElement,
-  LearningPathTopic,
+  LearningPathBasedOn,
   LearningPathElement,
-  LearningPathLearningElement,
   LearningPathElementStatus,
+  LearningPathLearningElement,
   LearningPathLearningElementAlgorithm,
   LearningPathLearningElementAlgorithmResponse,
-  StudentLpLeAlgorithm,
-  TeacherLpLeAlgorithm,
+  LearningPathTopic,
+  ListK,
   News,
   NewsResponse,
-  Topic,
-  StudentLearningElement,
-  ILS,
-  ListK,
-  LearningPathBasedOn,
   RemoteCourse,
+  RemoteLearningElement,
   RemoteTopics,
-  RemoteLearningElement
+  StudentLearningElement,
+  StudentLpLeAlgorithm,
+  TeacherLpLeAlgorithm,
+  Topic,
+  User
 }
+export type { CourseReturn } from './Course/Course'
 export type { DefaultLearningPathResponse } from './DefaultLearningPath/DefaultLearningPath'
-export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
-export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'
-export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'
 export type { LearningPathLearningElementAlgorithmReturn } from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
 export type { StudentLpLeAlgorithmReturn } from './LearningPathAlgorithm/StudentLpLeAlgorithm'
 export type { TeacherLpLeAlgorithmReturn } from './LearningPathAlgorithm/TeacherLpLeAlgorithm'
-export type { RemoteTopicsReturn } from './RemoteTopic/RemoteTopics'
-export type { ListKReturn } from './QuestionnaireResults/ListK'
-export type { CourseReturn } from './Course/Course'
-export type { ILSReturn } from './QuestionnaireResults/ILS'
+export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
+export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'
+export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'
 export type { NewsReturn } from './News/News'
+export type { ILSReturn } from './QuestionnaireResults/ILS'
+export type { ListKReturn } from './QuestionnaireResults/ListK'
+export type { RemoteTopicsReturn } from './RemoteTopic/RemoteTopics'

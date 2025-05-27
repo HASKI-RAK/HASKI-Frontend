@@ -1,6 +1,6 @@
-import { TFunction } from 'i18next'
 import { ReactElement } from 'react'
 import { NodeTypes } from 'reactflow'
+import { TFunction } from 'i18next'
 import {
   Article,
   Assignment,

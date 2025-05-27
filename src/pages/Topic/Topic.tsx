@@ -5,11 +5,11 @@ import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from
 import { Grid, Skeleton } from '@common/components'
 import {
   CreateLearningElement,
+  handleError,
   IFrameModal,
   LabeledSwitch,
-  ResponsiveMiniMap,
-  handleError,
-  nodeTypes
+  nodeTypes,
+  ResponsiveMiniMap
 } from '@components'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'

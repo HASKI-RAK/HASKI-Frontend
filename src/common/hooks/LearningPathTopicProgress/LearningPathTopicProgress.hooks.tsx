@@ -68,7 +68,7 @@ export const useLearningPathTopicProgress = (
   // Function
   const getAllTopicProgress = useCallback(
     (user: User, topics: Topic[], disabledClassificationList: string[]) => {
-      //build an array[][] with one learning elements and all not disabled learning elements in topic
+      //build an array[][] with done learning elements and all not disabled learning elements in topic
       //do that for every topic, and lastly return an array with all the arrays for every topic
       //example: [[1,2],[2,2],[0,2]]
       return topics.map((topic) => {

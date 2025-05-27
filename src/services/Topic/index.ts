@@ -1,4 +1,4 @@
-export { fetchLearningPathTopic } from './fetchLearningPathTopic'
-export { postTopic } from './postTopic'
-export { postAddAllStudentsToTopics } from './postAddAllStudentsToTopics'
 export { deleteTopic } from './deleteTopic'
+export { fetchLearningPathTopic } from './fetchLearningPathTopic'
+export { postAddAllStudentsToTopics } from './postAddAllStudentsToTopics'
+export { postTopic } from './postTopic'

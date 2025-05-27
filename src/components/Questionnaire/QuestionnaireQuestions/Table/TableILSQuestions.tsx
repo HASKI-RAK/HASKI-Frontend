@@ -1,7 +1,7 @@
-import log from 'loglevel'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
+import log from 'loglevel'
 import {
   Box,
   Divider,
