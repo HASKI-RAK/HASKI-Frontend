@@ -1,9 +1,9 @@
-import { Theme } from '@mui/material/styles'
-import log from 'loglevel'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Theme } from '@mui/material/styles'
+import log from 'loglevel'
 import { AltTheme, DarkTheme, HaskiTheme } from '@common/utils'
-import { SnackbarContext, postUserSettings } from '@services'
+import { postUserSettings, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
 
 export const useThemeProvider = () => {

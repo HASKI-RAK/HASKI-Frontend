@@ -1,5 +1,5 @@
-import { Theme } from '@mui/material/styles'
 import { createContext } from 'react'
+import { Theme } from '@mui/material/styles'
 import { HaskiTheme } from '@common/utils'
 
 export type ThemeContextType = {

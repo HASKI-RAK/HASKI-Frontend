@@ -1,7 +1,7 @@
-import { Grid } from '@mui/material'
 import { useEffect } from 'react'
 import ReactFlow, { Background, Controls, useReactFlow } from 'reactflow'
-import { ResponsiveMiniMap, nodeTypes } from '@components'
+import { Grid } from '@mui/material'
+import { nodeTypes, ResponsiveMiniMap } from '@components'
 import { LearningPathElement, LearningPathElementStatus } from '@core'
 import { useTopic } from '../Topic/Topic.hooks'
 
