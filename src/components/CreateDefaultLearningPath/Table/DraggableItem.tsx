@@ -1,6 +1,6 @@
+import React, { ReactElement, ReactNode } from 'react'
 import { UniqueIdentifier, useDraggable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
-import React, { ReactElement, ReactNode } from 'react'
 import { Box, Grid, IconButton, Paper, Typography } from '@common/components'
 import { Block, Replay } from '@common/icons'
 import { styled } from '@common/theme'

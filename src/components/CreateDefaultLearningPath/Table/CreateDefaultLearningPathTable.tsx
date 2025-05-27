@@ -1,7 +1,7 @@
-import { DndContext, DragOverlay, rectIntersection } from '@dnd-kit/core'
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { DndContext, DragOverlay, rectIntersection } from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { Box, Button, CircularProgress, Grid, IconButton, ListItemIcon, Tooltip, Typography } from '@common/components'
 import { Close, Replay } from '@common/icons'
 import { CoverSheet, getNodeIcon } from '@components'
@@ -93,15 +93,13 @@ const CreateDefaultLearningPathTable = ({
             variant="contained"
             color="primary"
             onClick={() => setActiveStep((prev) => prev + 1)}
-            sx={{ width: '20rem' }}
-          >
+            sx={{ width: '20rem' }}>
             {t('appGlobal.start')}
           </Button>
         </Box>
       </>
     )
   }
-
 
   return (
     <DndContext

@@ -14,7 +14,7 @@ export { postAddAllStudentsToCourse } from './Course'
 export { deleteCourse } from './Course'
 export { fetchCourses } from './Courses'
 export * from './debounce'
-export { fetchDisabledClassifications, postDefaultLearningPath, fetchDefaultLearningPath } from './DefaultLearningPath'
+export { fetchDefaultLearningPath, fetchDisabledClassifications, postDefaultLearningPath } from './DefaultLearningPath'
 export { postLearningElement } from './LearningElement'
 export { deleteLearningElement } from './LearningElement'
 export {

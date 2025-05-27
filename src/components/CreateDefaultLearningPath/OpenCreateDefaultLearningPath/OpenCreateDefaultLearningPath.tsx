@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
-import { usePrivacyModal as _usePrivacyModal, handleError } from '@components'
+import { handleError, usePrivacyModal as _usePrivacyModal } from '@components'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
 import type { PrivacyModalProps } from '../../PrivacyModal/PrivacyModal'

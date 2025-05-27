@@ -1,7 +1,7 @@
+import { ReactNode } from 'react'
 import { UniqueIdentifier } from '@dnd-kit/core'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { ReactNode } from 'react'
 import { Grid, Paper, Typography } from '@common/components'
 import { styled } from '@common/theme'
 import { DraggableContainer } from './DraggableItem'

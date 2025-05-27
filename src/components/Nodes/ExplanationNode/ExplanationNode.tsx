@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { NodeProps } from 'reactflow'
-import { LearningPathLearningElementNode, getNodeIcon } from '@components'
+import { getNodeIcon, LearningPathLearningElementNode } from '@components'
 import BasicNode from '../BasicNode/BasicNode'
 
 /**

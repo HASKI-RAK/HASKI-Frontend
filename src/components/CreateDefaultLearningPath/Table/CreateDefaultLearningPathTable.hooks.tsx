@@ -1,10 +1,10 @@
-import { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
-import { arrayMove } from '@dnd-kit/sortable'
 import { Dispatch, SetStateAction, useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
+import { arrayMove } from '@dnd-kit/sortable'
 import { handleError } from '@components'
 import { DefaultLearningPath } from '@core'
-import { SnackbarContext, postDefaultLearningPath } from '@services'
+import { postDefaultLearningPath, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 export type useCreateDefaultLearningPathTableProps = {

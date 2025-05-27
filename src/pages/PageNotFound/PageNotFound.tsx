@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import ReactFlow, { Background, Edge, MarkerType, Node, useEdgesState, useNodesState } from 'reactflow'
+
 import 'reactflow/dist/style.css'
 
 const initialNodes: Node[] = [
