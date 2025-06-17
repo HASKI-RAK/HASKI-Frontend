@@ -12,6 +12,7 @@ import {
 import { RemoteLearningElement, Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+import AddSolutionModal from './AddSolutionModal'
 
 const CreateLearningElement = () => {
   const { t } = useTranslation()
@@ -21,13 +22,14 @@ const CreateLearningElement = () => {
   const [currentTopic, setCurrentTopic] = useState<Topic>()
   
   const [activeStep, setActiveStep] = useState<number>(0)
+  const [modalOpen, setModalOpen] = useState(false)
 
   const { courseId } = useParams()
   const { topicId } = useParams()
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
 
-  const handleCloseLearningElementModal = useCallback(() => {
+  const handleClose = useCallback(() => {
     setCreateLearningElementModalOpen(false)
     setActiveStep(0)
   }, [setCreateLearningElementModalOpen])
@@ -62,11 +64,10 @@ const CreateLearningElement = () => {
         {t('components.CreateLearningElement.createLearningElement')}
       </Button>
       <AddSolutionModal
-        openCreateTopicModal={createLearningElementModalOpen}
-        currentTopicLmsId={currentTopic?.lms_id ?? 0}
-        handleCloseCreateTopicModal={handleCloseLearningElementModal}
-        setActiveStep={setActiveStep}
+        open={modalOpen}
         activeStep={activeStep}
+        setActiveStep={setActiveStep}
+        onClose={() => console.log('Close Add Solution Modal')}
       />
     </Grid>
   )

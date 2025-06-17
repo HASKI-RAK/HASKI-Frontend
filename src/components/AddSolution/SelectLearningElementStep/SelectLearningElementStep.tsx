@@ -1,34 +1,42 @@
-import { memo } from 'react'
+import { memo, SetStateAction, Dispatch } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
 import { CreateLearningElementSolutionTable } from '@components'
-import { RemoteTopics } from '@core'
+import { RemoteTopics, RemoteLearningElement } from '@core'
 import SelectLearningElementTable from '../SelectLearningElementTable/SelectLearningElementTable'
+import {
+  RemoteLearningElementWithSolution,
+  RemoteLearningElementWithClassification,
+  Solution
+} from '../../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 
 interface CreateLearningElementSolutionStepProps {
   selectedTopics: RemoteTopics[]
+  selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }
+  selectedSolutions: { [key: number]: Solution[] }
+  learningElementsWithSolution: { [key: number]: RemoteLearningElementWithSolution[] }
+  setSelectedLearningElements: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>>
   onNext: () => void
-  onBack: () => void
-  nextButtonText: string
 }
 
 const CreateLearningElementSolutionStep = ({
   selectedTopics,
-  onNext,
-  onBack,
-  nextButtonText
+  selectedSolutions,
+  selectedLearningElements,
+  learningElementsWithSolution,
+  setSelectedLearningElements,
+  onNext
 }: CreateLearningElementSolutionStepProps) => {
   const { t } = useTranslation()
 
   return (
     <Grid container item>
       <SelectLearningElementTable
-        selectedTopics={selectedTopics}>
+        currentTopic={selectedTopics[0]}
+        selectedLearningElements={selectedLearningElements}
+        setSelectedLearningElements={setSelectedLearningElements}>
         <Box sx={{ padding: '1rem', width: '95%' }}>
           <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
-            <Button variant="contained" color="primary" onClick={onBack} sx={{ ml: 1 }}>
-              {t('appGlobal.back')}
-            </Button>
             <Button
               variant="contained"
               color="primary"
@@ -36,7 +44,7 @@ const CreateLearningElementSolutionStep = ({
                 // Every Solution has to be used
                 !selectedTopics.every((topic) =>
                   selectedSolutions[topic.topic_lms_id]?.every((solution) =>
-                    learningElementsWithSolutions[topic.topic_lms_id]?.some(
+                    learningElementsWithSolution[topic.topic_lms_id]?.some(
                       (element) => element.solutionLmsId === solution.solutionLmsId
                     )
                   )
@@ -44,11 +52,11 @@ const CreateLearningElementSolutionStep = ({
               }
               onClick={onNext}
               sx={{ mr: -2 }}>
-              {nextButtonText}
+              {t('appGlobal.next')}
             </Button>
           </Grid>
         </Box>
-      </CreateLearningElementSolutionTable>
+      </SelectLearningElementTable>
     </Grid>
   )
 }

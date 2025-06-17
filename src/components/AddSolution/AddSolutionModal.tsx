@@ -4,17 +4,15 @@ import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
 import {
-  CreateLearningElementClassificationsStep,
-  CreateLearningElementsStep,
   RemoteLearningElementWithClassification,
   handleError
 } from '@components'
-import { LearningPathElement, RemoteLearningElement, RemoteTopics } from '@core'
+import { RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { RemoteLearningElementWithSolution, Solution } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
-import { useCreateTopicModal } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal.hooks'
 import CreateLearningElementSolutionStep from '../CreateTopic/Modal/CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
+import SelectLearningElementStep from './SelectLearningElementStep/SelectLearningElementStep'
 
 type AddSolutionModalProps = {
   open: boolean
@@ -31,9 +29,6 @@ const AddSolutionModalProps = ({ open, onClose }: AddSolutionModalProps) => {
     const [currentTopic, setCurrentTopic] = useState<RemoteTopics>()
     const [activeStep, setActiveStep] = useState<number>(0)
     const [selectedLearningElements, setSelectedLearningElements] = useState<{
-        [key: number]: RemoteLearningElement[]
-    }>({})
-    const [selectedLearningElementsClassification, setSelectedLearningElementsClassification] = useState<{
         [key: number]: RemoteLearningElementWithClassification[]
     }>({})
     const [selectedSolutions, setSelectedSolutions] = useState<{ [key: number]: Solution[] }>({})
@@ -64,31 +59,28 @@ const AddSolutionModalProps = ({ open, onClose }: AddSolutionModalProps) => {
                         </Stepper>
                     </Grid>
                     {activeStep === 0 && (
-                        <CreateLearningElementsStep
-                            courseId={courseId}
-                            topicId={topicId}
+                        <SelectLearningElementStep
+                            selectedTopics={[]}
                             selectedLearningElements={selectedLearningElements}
+                            selectedSolutions={selectedSolutions}
+                            learningElementsWithSolution={learningElementsWithSolutions}
                             setSelectedLearningElements={setSelectedLearningElements}
-                            setActiveStep={setActiveStep}
-                        />
-                    )}
-                    {activeStep === 1 && (
-                        <CreateLearningElementClassificationsStep
-                            courseId={courseId}
-                            topicId={topicId}
-                            selectedLearningElementsClassification={selectedLearningElementsClassification}
-                            setSelectedLearningElementsClassification={setSelectedLearningElementsClassification}
-                            setActiveStep={setActiveStep}
+                            onNext={() => setActiveStep(1)}
                         />
                     )}
                     {activeStep === 2 && (
                         <CreateLearningElementSolutionStep
-                            courseId={courseId}
-                            topicId={topicId}
+                            selectedTopics={[]}
                             selectedSolutions={selectedSolutions}
-                            setSelectedSolutions={setSelectedSolutions}
+                            LearningElementsClassification={selectedLearningElements}
                             learningElementsWithSolutions={learningElementsWithSolutions}
-                            setLearningElementsWithSolutions={setLearningElementsWithSolutions}
+                            onLearningElementSolutionChange={setLearningElementsWithSolutions}
+                            onNext={() => {
+                                // Handle next step logic here
+                                onClose()
+                            }}
+                            onBack={() => setActiveStep(1)}
+                            nextButtonText={t('appGlobal.next')}
                         />
                     )}
                 </Grid>
