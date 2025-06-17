@@ -1,25 +1,39 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
-import React from 'react'
-import { useCookies } from 'react-cookie'
+import { FC, ReactNode } from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import { AuthContext, RoleContext, RoleContextType } from '@services'
+import { ReactFlowProvider } from 'reactflow'
 import OpenCreateDefaultLearningPath from './OpenCreateDefaultLearningPath'
+import { CookiesProvider, useCookies } from 'react-cookie'
 
 // --- Mocks --- //
 jest.mock('react-cookie', () => ({
   useCookies: jest.fn()
 }))
 
-// Mock the privacy modal hook to always return a truthy privacyPolicyCookie.
-jest.mock('@components', () => ({
-  ...jest.requireActual('@components'),
-  usePrivacyModal: () => ({ privacyPolicyCookie: true })
-}))
+class FakeCookiesProvider {
+  cookies = {}
+  context = {}
+  state = {}
+  refs = {}
+  render() {
+    return null
+  }
+}
+
+const fakePrivacyModalHookReturn = {
+  privacyPolicyCookie: new FakeCookiesProvider() as unknown as CookiesProvider,
+  handleAccept: jest.fn()
+}
 
 describe('OpenCreateDefaultLearningPath component', () => {
   const setCookieMock = jest.fn()
+
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
 
   // Create a dummy provider for AuthContext and RoleContext.
   const courseCreatorContext = {
@@ -27,27 +41,42 @@ describe('OpenCreateDefaultLearningPath component', () => {
     isCourseCreatorRole: true
   } as RoleContextType
 
-  const DummyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <MemoryRouter>
-      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-        <RoleContext.Provider value={courseCreatorContext}>{children}</RoleContext.Provider>
-      </AuthContext.Provider>
-    </MemoryRouter>
+  const DummyProvider: FC<{ children: ReactNode }> = ({ children }) => (
+    <ReactFlowProvider>
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <RoleContext.Provider value={courseCreatorContext}>{children}</RoleContext.Provider>
+        </AuthContext.Provider>
+      </MemoryRouter>
+    </ReactFlowProvider>
   )
 
-  beforeEach(() => {
-    // For useCookies: By default, no cookie.
-    ;(useCookies as jest.Mock).mockReturnValue([{}, setCookieMock])
+  it('renders the DefaultLearningPathModal when no cookie exists and fetchDefaultLearningPath returns an empty array', async () => {
+    // Simulate that no cookie exists.
+    ;(useCookies as jest.Mock).mockReturnValueOnce([{}, setCookieMock])
+    // Simulate fetching returns an empty array (no default learning path exists).
+    mockServices.fetchDefaultLearningPath.mockImplementationOnce(jest.fn(() => Promise.resolve([])))
+
+    render(
+      <DummyProvider>
+        <OpenCreateDefaultLearningPath usePrivacyModal={() => fakePrivacyModalHookReturn} />
+      </DummyProvider>
+    )
+
+    // Wait for the useEffect to run and update state.
+    await waitFor(() => {
+      expect(screen.getByTestId('close-default-learning-path-modal-button')).toBeInTheDocument()
+    })
   })
 
   it('does render the DefaultLearningPathModal and closes it', async () => {
-    ;(useCookies as jest.Mock).mockReturnValue([{ default_learningpath_sent_token: false }, setCookieMock])
+    ;(useCookies as jest.Mock).mockReturnValueOnce([{ default_learningpath_sent_token: false }, setCookieMock])
 
     mockServices.fetchDefaultLearningPath.mockImplementationOnce(jest.fn(() => Promise.resolve([])))
 
     const { getByTestId, queryByTestId } = render(
       <DummyProvider>
-        <OpenCreateDefaultLearningPath />
+        <OpenCreateDefaultLearningPath usePrivacyModal={() => fakePrivacyModalHookReturn} />
       </DummyProvider>
     )
 
@@ -62,13 +91,13 @@ describe('OpenCreateDefaultLearningPath component', () => {
 
   it('does render the DefaultLearningPathModal and closes it with backdropclick', async () => {
     window.confirm = jest.fn(() => true) // always click 'yes'
-    ;(useCookies as jest.Mock).mockReturnValue([{ default_learningpath_sent_token: false }, setCookieMock])
+    ;(useCookies as jest.Mock).mockReturnValueOnce([{ default_learningpath_sent_token: false }, setCookieMock])
 
     mockServices.fetchDefaultLearningPath.mockImplementationOnce(jest.fn(() => Promise.resolve([])))
 
     const { getByTestId, queryByTestId } = render(
       <DummyProvider>
-        <OpenCreateDefaultLearningPath />
+        <OpenCreateDefaultLearningPath usePrivacyModal={() => fakePrivacyModalHookReturn} />
       </DummyProvider>
     )
 
@@ -87,15 +116,16 @@ describe('OpenCreateDefaultLearningPath component', () => {
     await waitFor(() => {
       expect(queryByTestId('default-learning-path-modal')).not.toBeInTheDocument()
     })
+    window.confirm = jest.fn()
   })
 
   it('does not render the DefaultLearningPathModal when the cookie exists', async () => {
     // Simulate that the cookie already exists.
-    ;(useCookies as jest.Mock).mockReturnValue([{ default_learningpath_sent_token: true }, setCookieMock])
+    ;(useCookies as jest.Mock).mockReturnValueOnce([{ default_learningpath_sent_token: true }, setCookieMock])
 
     render(
       <DummyProvider>
-        <OpenCreateDefaultLearningPath />
+        <OpenCreateDefaultLearningPath usePrivacyModal={() => fakePrivacyModalHookReturn} />
       </DummyProvider>
     )
 
@@ -105,35 +135,17 @@ describe('OpenCreateDefaultLearningPath component', () => {
     })
   })
 
-  it('renders the DefaultLearningPathModal when no cookie exists and fetchDefaultLearningPath returns an empty array', async () => {
-    // Simulate that no cookie exists.
-    ;(useCookies as jest.Mock).mockReturnValue([{}, setCookieMock])
-    // Simulate fetching returns an empty array (no default learning path exists).
-    mockServices.fetchDefaultLearningPath.mockImplementationOnce(jest.fn(() => Promise.resolve([])))
-
-    render(
-      <DummyProvider>
-        <OpenCreateDefaultLearningPath />
-      </DummyProvider>
-    )
-
-    // Wait for the useEffect to run and update state.
-    await waitFor(() => {
-      expect(screen.getByTestId('close-default-learning-path-modal-button')).toBeInTheDocument()
-    })
-  })
-
   it('renders the DefaultLearningPathModal when no cookie exists and fetchDefaultLearningPath returns an error', async () => {
     // Simulate that no cookie exists.
-    ;(useCookies as jest.Mock).mockReturnValue([{}, setCookieMock])
+    ;(useCookies as jest.Mock).mockReturnValueOnce([{}, setCookieMock])
     // Simulate fetching returns an empty array (no default learning path exists).
-    mockServices.fetchDefaultLearningPath.mockImplementationOnce(() => {
+    mockServices.fetchDefaultLearningPath.mockImplementation(() => {
       throw new Error('fetchDefaultLearningPath error')
     })
 
     render(
       <DummyProvider>
-        <OpenCreateDefaultLearningPath />
+        <OpenCreateDefaultLearningPath usePrivacyModal={() => fakePrivacyModalHookReturn} />
       </DummyProvider>
     )
 
@@ -145,15 +157,15 @@ describe('OpenCreateDefaultLearningPath component', () => {
 
   it('renders the DefaultLearningPathModal when no cookie exists and fetchUser returns an error', async () => {
     // Simulate that no cookie exists.
-    ;(useCookies as jest.Mock).mockReturnValue([{}, setCookieMock])
+    ;(useCookies as jest.Mock).mockReturnValueOnce([{}, setCookieMock])
     // Simulate fetching returns an empty array (no default learning path exists).
-    mockServices.fetchUser.mockImplementationOnce(() => {
+    mockServices.fetchUser.mockImplementation(() => {
       throw new Error('fetchUser error')
     })
 
     render(
       <DummyProvider>
-        <OpenCreateDefaultLearningPath />
+        <OpenCreateDefaultLearningPath usePrivacyModal={() => fakePrivacyModalHookReturn} />
       </DummyProvider>
     )
 

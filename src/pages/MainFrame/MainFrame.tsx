@@ -7,10 +7,10 @@ import {
   LocalNavBar,
   MenuBar,
   Newsbanner,
+  OpenCreateDefaultLearningPath,
   OpenQuestionnaire,
   PrivacyModal
 } from '@components'
-import OpenCreateDefaultLearningPath from '../../components/CreateDefaultLearningPath/OpenCreateDefaultLearningPath/OpenCreateDefaultLearningPath'
 
 /**
  * # MainFrame Page

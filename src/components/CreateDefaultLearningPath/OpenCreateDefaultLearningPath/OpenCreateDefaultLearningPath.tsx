@@ -1,11 +1,10 @@
-import { useContext, useEffect, useState } from 'react'
+import { memo, useContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
-import { handleError, usePrivacyModal as _usePrivacyModal } from '@components'
+import { CreateDefaultLearningPathModal, handleError, usePrivacyModal as _usePrivacyModal } from '@components'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
 import type { PrivacyModalProps } from '../../PrivacyModal/PrivacyModal'
-import CreateDefaultLearningPathModal from '../Modal/CreateDefaultLearningPathModal'
 
 const OpenCreateDefaultLearningPath = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps) => {
   const { t } = useTranslation()
@@ -69,4 +68,4 @@ const OpenCreateDefaultLearningPath = ({ usePrivacyModal = _usePrivacyModal }: P
     </>
   )
 }
-export default OpenCreateDefaultLearningPath
+export default memo(OpenCreateDefaultLearningPath)
