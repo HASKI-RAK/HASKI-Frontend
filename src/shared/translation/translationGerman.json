@@ -745,6 +745,7 @@
   "components.ResultDescriptionListK.time below3-Description": "Im Hinblick auf Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es würde sich wahrscheinlich positiv auswirken, wenn Sie versuchen, sich klare Lernzeiträume zu schaffen, um Ihr Lernen effektiver zu gestalten.",
   "components.ResultDescriptionListK.time below3-Title": "Zeit hat einen Wert unter 3",
   "components.StatisticsMenu.title": "Statistiken",
+  "components.StyledLinearProgress.linearProgressWithLabel.learningProgress": "Lernfortschritt",
   "components.TableILS.active": "Aktiv",
   "components.TableILS.balanced": "balanciert",
   "components.TableILS.dimension": "Dimension",

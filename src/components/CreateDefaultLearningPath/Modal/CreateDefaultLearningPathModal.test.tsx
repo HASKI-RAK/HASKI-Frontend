@@ -97,7 +97,7 @@ describe('DefaultLearningPathModal component', () => {
       throw new Error('fetchDefaultLearningPath error')
     })
 
-    const { getByRole, getByTestId } = render(
+    const { getByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>
@@ -120,7 +120,7 @@ describe('DefaultLearningPathModal component', () => {
       throw new Error('fetchUser error')
     })
 
-    const { getByRole, getByTestId } = render(
+    const { getByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>
