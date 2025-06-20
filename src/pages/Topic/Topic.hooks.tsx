@@ -1,9 +1,10 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Edge, Node } from 'reactflow'
 import { useTheme } from '@common/hooks'
 import { getGroupLabels, LearningPathLearningElementNode } from '@components'
 import { LearningElement, LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
+import { RoleContext } from '@services'
 
 /**
  * @prop defaultUrl - The default url of a node
@@ -41,6 +42,7 @@ export type TopicHookReturn = {
   readonly mapNodes: (
     learningPathData: LearningPathElement,
     learningPathStatus: LearningPathElementStatus[],
+    learningPathDisabledClassifications: string[],
     nodesGrouped?: boolean
   ) => {
     nodes: Node[]
@@ -64,6 +66,7 @@ export type TopicHookReturn = {
 export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   // Default values
   const { defaultUrl = '', defaultTitle = '', defaultIsOpen = false, defaultLmsId = -1 } = params ?? {}
+  const { isStudentRole } = useContext(RoleContext)
 
   // State data
   const [url, setUrl] = useState(defaultUrl)
@@ -125,16 +128,17 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const getLearningElementNode = useCallback(
     (
       learningElement: LearningElement,
+      disabledClassification: boolean,
       recommended: boolean,
       learningPathStatus: LearningPathElementStatus[],
       id: string,
       position: { x: number; y: number }
     ) => {
       const learningElementNodeStyle = {
-        background: theme.palette.primary.main,
-        padding: 10,
-        border: '1px solid ' + theme.palette.grey[500],
-        borderRadius: 8,
+        background: disabledClassification ? theme.palette.info.dark : theme.palette.primary.main,
+        padding: disabledClassification && isStudentRole ? 0 : 10,
+        border: disabledClassification && isStudentRole ? 0 : '1px solid ' + theme.palette.grey[500],
+        borderRadius: disabledClassification && isStudentRole ? 0 : 8,
         cursor: 'pointer',
         width: 500
       }
@@ -151,7 +155,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         handleSetLmsId: setLmsId,
         handleOpen: handleOpen,
         handleClose: handleClose,
-        isDone: learningPathStatus?.find((item) => item.cmid === learningElement.lms_id)?.state === 1
+        isDone: learningPathStatus?.find((item) => item.cmid === learningElement.lms_id)?.state === 1,
+        isDisabled: disabledClassification
       }
 
       return {
@@ -172,6 +177,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const getLearningElementChildNodes = useCallback(
     (
       learningElements: LearningPathLearningElement[],
+      disabledClassifications: string[],
       learningPathStatus: LearningPathElementStatus[],
       position: number,
       yOffset: number
@@ -179,6 +185,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       return learningElements.map((node, index) => {
         return getLearningElementNode(
           node.learning_element,
+          disabledClassifications.includes(node.learning_element.classification), //returns if the classification is disabled
           node.recommended,
           learningPathStatus,
           node.position.toString() + '-' + node.learning_element.lms_id,
@@ -222,6 +229,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     (
       learningElements: LearningPathLearningElement[],
       learningPathStatus: LearningPathElementStatus[],
+      disabledClassifications: string[],
       index: number,
       yOffset: number
     ): Node | Node[] => {
@@ -229,6 +237,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       if (learningElements.length === 1) {
         return getLearningElementNode(
           learningElements[0].learning_element,
+          disabledClassifications.includes(learningElements[0].learning_element.classification),
           learningElements[0].recommended,
           learningPathStatus,
           learningElements[0].position.toString(),
@@ -241,7 +250,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
 
       return [
         getLearningElementParentNode(learningElements, index, yOffset),
-        ...getLearningElementChildNodes(learningElements, learningPathStatus, index, yOffset)
+        ...getLearningElementChildNodes(learningElements, disabledClassifications, learningPathStatus, index, yOffset)
       ]
     },
     [getLearningElementNode, getLearningElementParentNode, getLearningElementChildNodes, nodeOffsetX, groupHeight]
@@ -252,6 +261,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     (
       learningPath: LearningPathElement,
       learningPathStatus: LearningPathElementStatus[],
+      learningPathDisabledClassifications: string[],
       nodesGrouped: boolean
     ): Node[] => {
       // Sort learning path by position
@@ -268,7 +278,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           .map((group) => (Math.ceil(group.length / 4) * groupHeight) / 1.75)
           .reduce((a, b) => a + b, 0)
 
-        return groupNodes(group, learningPathStatus, index, yOffset)
+        return groupNodes(group, learningPathStatus, learningPathDisabledClassifications, index, yOffset)
       })
 
       // Dissovles the array of arrays into a single array.
@@ -279,8 +289,18 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
 
   // Creates nodes and edges.
   const mapNodes = useCallback(
-    (learningPathData: LearningPathElement, learningPathStatus: LearningPathElementStatus[], nodesGrouped = false) => {
-      const nodes = mapLearningPathToNodes(learningPathData, learningPathStatus, nodesGrouped)
+    (
+      learningPathData: LearningPathElement,
+      learningPathStatus: LearningPathElementStatus[],
+      learningPathDisabledClassifications: string[],
+      nodesGrouped = false
+    ) => {
+      const nodes = mapLearningPathToNodes(
+        learningPathData,
+        learningPathStatus,
+        learningPathDisabledClassifications,
+        nodesGrouped
+      )
 
       // Creates an array of node ids to be used for creating edges.
       const nodesWithEdges = nodesGrouped

@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { mockServices } from 'jest.setup'
+import { User } from '@core'
 //Tests fail with shortened Path
 import { usePersistedStore } from '../Zustand/Store'
 
@@ -36,5 +37,38 @@ describe('UserSlice', () => {
     expect(mockServices.fetchUser).toHaveBeenCalledTimes(1)
 
     expect(cached).toEqual(user)
+  })
+
+  it('should set and return the provided user without fetching', async () => {
+    // Define a sample user object
+    const sampleUser: User = {
+      id: 1,
+      lms_user_id: 1,
+      name: 'Alice',
+      role: 'student',
+      role_id: 2,
+      settings: {
+        id: 1,
+        pswd: 'hello',
+        theme: 'dark',
+        user_id: 1
+      },
+      university: 'HS-KE'
+    }
+
+    // Get the getUser function from the store
+    const { getUser } = usePersistedStore.getState()
+
+    // Call getUser with the sample user
+    const returnedUser = await getUser(sampleUser)
+
+    // Assert that the returned user is the same as the one provided.
+    expect(returnedUser).toEqual(sampleUser)
+
+    // Additionally, check that the store now has _user set to sampleUser.
+    expect(usePersistedStore.getState()._user).toEqual(sampleUser)
+
+    // Optionally, verify that fetchUser was NOT called since the user was provided.
+    expect(mockServices.fetchUser).not.toHaveBeenCalled()
   })
 })
