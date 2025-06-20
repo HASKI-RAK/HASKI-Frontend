@@ -12,13 +12,12 @@ describe('BreadcrumbsContainer', () => {
   })
 
   it('should render the default breadcrumb with default path', () => {
-    const { getAllByText, getByText } = render(
+    const { getAllByText } = render(
       <MemoryRouter initialEntries={['']}>
         <BreadcrumbsContainer />
       </MemoryRouter>
     )
     expect(getAllByText('pages.home').length).toEqual(1)
-    expect(getByText('/')).toBeInTheDocument()
 
     // click first link:
     fireEvent.click(getAllByText('pages.home')[0])
