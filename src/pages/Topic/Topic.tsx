@@ -152,6 +152,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     }
   }, [initialNodes, navigate, hasCentered])
 
+  //trigger refetch of learning path when user navigates away from topic page
   useEffect(() => {
     clearLearningPathElementCache()
   }, [navigate])
