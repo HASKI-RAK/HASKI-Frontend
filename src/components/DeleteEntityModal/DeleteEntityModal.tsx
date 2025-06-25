@@ -3,16 +3,54 @@ import { useTranslation } from 'react-i18next'
 import { Box, Button, Checkbox, Divider, FormControlLabel, Grid, Modal, Typography } from '@common/components'
 import { Warning } from '@common/icons'
 
+/**
+ * Props for the DeleteEntityModal component.
+ */
 type DeleteEntityModalProps = {
+  /**
+   * Controls the visibility of the delete modal.
+   */
   openDeleteEntityModal: boolean
+
+  /**
+   * Display name of the entity to be deleted (e.g., "Math 101").
+   */
   entityName: string
-  entityType: string // e.g. "Course", "Topic", "Learning Element"
+
+  /**
+   * The type of entity being deleted (e.g., "Course", "Topic").
+   */
+  entityType: string
+
+  /**
+   * Unique internal ID of the entity.
+   */
   entityId: number
+
+  /**
+   * External LMS-specific ID of the entity.
+   */
   entityLmsId: number
+
+  /**
+   * Callback to set the modal's open state.
+   *
+   * @param value The new open state.
+   */
   setDeleteEntityModalOpen: (value: SetStateAction<boolean>) => void
+
+  /**
+   * Callback fired when the user confirms deletion.
+   *
+   * @param entityId Internal ID.
+   * @param extraId External LMS ID.
+   */
   onDeleteConfirm: (entityId: number, extraId: number) => void
 }
 
+/**
+ * Styles for the modal's main Box container.
+ */
 const styleBox = {
   position: 'absolute',
   top: '50%',
@@ -33,7 +71,7 @@ const styleBox = {
   }
 }
 
-const DeleteEntityModal = ({
+const DeleteEntityMod = ({
   openDeleteEntityModal,
   entityName,
   entityType,
@@ -43,8 +81,17 @@ const DeleteEntityModal = ({
   onDeleteConfirm
 }: DeleteEntityModalProps) => {
   const { t } = useTranslation()
+
+  /**
+   * Local state to track whether the confirmation checkbox is checked.
+   */
   const [checked, setChecked] = useState(false)
 
+  /**
+   * Handles checkbox toggle to allow deletion.
+   *
+   * @param event Mouse event triggered by clicking the checkbox.
+   */
   const handleChecked = useCallback((event: MouseEvent<HTMLElement>) => {
     setChecked((event.target as HTMLInputElement).checked)
   }, [])
@@ -129,4 +176,24 @@ const DeleteEntityModal = ({
   )
 }
 
-export default memo(DeleteEntityModal)
+/**
+ * Modal dialog component for confirming the deletion of an entity.
+ *
+ * Displays warnings, entity info, and requires user confirmation via checkbox before enabling deletion.
+ *
+ * @param props See {@link DeleteEntityModalProps}
+ * @returns A modal component with a confirmation UI.
+ *
+ * @example
+ * <DeleteEntityModal
+ *   openDeleteEntityModal={true}
+ *   entityName="Math 101"
+ *   entityType="Course"
+ *   entityId={1}
+ *   entityLmsId={123}
+ *   setDeleteEntityModalOpen={setOpen}
+ *   onDeleteConfirm={handleConfirm}
+ * />
+ */
+const DeleteEntityModal = memo(DeleteEntityMod)
+export default DeleteEntityModal
