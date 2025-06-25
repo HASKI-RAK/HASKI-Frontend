@@ -1,50 +1,46 @@
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import DefaultAccordion from '@mui/material/Accordion'
-import { MouseEvent, memo, useCallback } from 'react'
 import { AccordionProps as DefaultAccordionProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { usePageName } from '@services'
 
 /**
- * @prop DefaultAccordionProps - The props of a mui Accordion.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
+ * @prop {@link DefaultAccordionProps} - The props of the default Accordion component.
+ * @prop {@link EventHandlers} - The props containing the event handlers.
  * @interface
  */
-type AccordionProps = DefaultAccordionProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+type AccordionProps = DefaultAccordionProps & EventHandlers
+
+/**
+ * WrappedAccordion component.
+ *
+ * @remarks
+ * The WrappedAccordion component is a wrapper around the MUI Accordion component.
+ * It is enhanced with xAPI functionality to track user interactions.
+ * WrappedAccordion can be used as a standalone component on a page.
+ *
+ * @category Components
+ */
+const WrappedAccordion = withXAPI(DefaultAccordion, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'Accordion'
+})
 
 /**
  * Accordion component.
  *
- * @param props - Props containing the useStatement hook and the props of a mui Accordion.
+ * @param props - Props containing the default Accordion props and event handlers.
  *
- * @category Common
+ * @remarks
+ * The Accordion component is a wrapper around the WrappedAccordion component.
+ * It retrieves the page name from a hook and passes it to the WrappedAccordion component.
+ * Accordion can be used as a standalone component on a page.
+ *
+ * @category Components
  */
-const Accordion = ({ useStatement = _useStatement, onClick, ...props }: AccordionProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.Accordion
-  })
-
-  return (
-    <DefaultAccordion
-      onClick={useCallback(
-        (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
-          onClick?.(event)
-        },
-        [sendStatement, onClick]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultAccordion>
-  )
+const Accordion = ({ ...props }: AccordionProps) => {
+  const { pageName } = usePageName()
+  return <WrappedAccordion pageName={pageName} {...props} />
 }
 
 export default memo(Accordion)

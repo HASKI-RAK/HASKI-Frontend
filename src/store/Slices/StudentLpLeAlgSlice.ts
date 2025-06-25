@@ -4,8 +4,13 @@ import { fetchStudentLpLeAlg } from '@services'
 import { StoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
-export default interface StudentLpLeAlgorithmSlice {
-  _cache_StudentLpLeAlgorithm_record: Record<string, StudentLpLeAlgorithm>
+type StudentLpLeAlgorithmCache = {
+  value?: StudentLpLeAlgorithm
+  promise?: Promise<StudentLpLeAlgorithm>
+}
+
+export type StudentLpLeAlgorithmSlice = {
+  _cache_StudentLpLeAlgorithm_record: Record<string, StudentLpLeAlgorithmCache>
   getStudentLpLeAlgorithm: StudentLpLeAlgorithmReturn
   setStudentLpLeAlgorithm: (userId?: number, topicId?: number, algorithmName?: string) => void
 }
@@ -18,21 +23,43 @@ export const createStudentLpLeAlgorithmSlice: StateCreator<StoreState, [], [], S
   return {
     _cache_StudentLpLeAlgorithm_record: {},
     getStudentLpLeAlgorithm: async (userId, topicId) => {
+      const key = `${userId}-${topicId}`
       const cached = get()._cache_StudentLpLeAlgorithm_record[`${userId}-${topicId}`]
-      if (!cached) {
-        const studentLpLeAlgorithmResponse = await fetchStudentLpLeAlg(userId, topicId)
+
+      if (cached?.value) {
+        return cached.value
+      }
+
+      // If there's an in-flight promise, return it.
+      if (cached?.promise) {
+        return cached.promise
+      }
+
+      const fetchPromise = fetchStudentLpLeAlg(userId, topicId).then((response: StudentLpLeAlgorithm) => {
         set({
           _cache_StudentLpLeAlgorithm_record: {
             ...get()._cache_StudentLpLeAlgorithm_record,
-            [`${userId}-${topicId}`]: studentLpLeAlgorithmResponse
+            [key]: { value: response }
           }
         })
-        return studentLpLeAlgorithmResponse
-      } else return cached
+        return response
+      })
+
+      // Cache the in-flight promise.
+      set({
+        _cache_StudentLpLeAlgorithm_record: {
+          ...get()._cache_StudentLpLeAlgorithm_record,
+          [key]: { promise: fetchPromise }
+        }
+      })
+
+      return fetchPromise
     },
     setStudentLpLeAlgorithm: (userId, topicId, algorithmName) => {
       if (userId && topicId && algorithmName) {
-        const updatedState = {
+        const key = `${userId}-${topicId}`
+
+        const updatedState: StudentLpLeAlgorithm = {
           short_name: algorithmName,
           student_id: userId,
           topic_id: topicId
@@ -40,7 +67,7 @@ export const createStudentLpLeAlgorithmSlice: StateCreator<StoreState, [], [], S
         set({
           _cache_StudentLpLeAlgorithm_record: {
             ...get()._cache_StudentLpLeAlgorithm_record,
-            [`${userId}-${topicId}`]: updatedState
+            [key]: { value: updatedState }
           }
         })
       }

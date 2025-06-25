@@ -1,4 +1,4 @@
-import { TableCell, TableRow, tableCellClasses } from '@common/components'
+import { TableCell, tableCellClasses, TableRow } from '@common/components'
 import { styled } from '@common/theme'
 
 export const StyledTableCell = styled(TableCell)(() => ({

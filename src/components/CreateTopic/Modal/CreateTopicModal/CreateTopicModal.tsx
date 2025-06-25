@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
 import {
-  CreateAlgorithmTableNameProps,
   CreateAlgorithmsStep,
+  CreateAlgorithmTableNameProps,
   CreateLearningElementClassificationsStep,
   CreateLearningElementsStep,
   CreateRemoteTopicsStep,

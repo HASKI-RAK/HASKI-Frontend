@@ -19,6 +19,8 @@
     "wiki": "yarn run typedoc --out pages&&npx serve pages"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.9",
@@ -28,9 +30,10 @@
     "@nivo/core": "^0.80.0",
     "@nivo/network": "^0.80.0",
     "@nivo/tooltip": "^0.80.0",
-    "@xapi/xapi": "^2.2.2",
+    "@xapi/xapi": "^3.0.1",
     "dayjs": "^1.11.11",
     "dayjs-timezone-iana-plugin": "^0.1.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "i": "^0.3.7",
     "i18next": "^22.1.2",
     "loglevel": "^1.8.1",
@@ -43,6 +46,7 @@
     "react-i18next": "^12.1.1",
     "react-rating-charts": "1.4.3",
     "react-router-dom": "^6.4.2",
+    "react-xapi-wrapper": "1.0.0",
     "reactflow": "^11.7.0",
     "zustand": "^4.1.1"
   },
@@ -58,7 +62,6 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/react-hooks": "^8.0.1",
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/jest": "^29.1.0",
     "@types/node": "^18.8.2",
     "@types/react": "^18.2.7",

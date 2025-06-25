@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { NodeProps } from 'reactflow'
-import { SettingsApplications } from '@common/icons'
-import { LearningPathLearningElementNode } from '@components'
+import { getNodeIcon, LearningPathLearningElementNode } from '@components'
 import BasicNode from '../BasicNode/BasicNode'
 
 /**
@@ -17,12 +16,7 @@ import BasicNode from '../BasicNode/BasicNode'
  * @category Components
  */
 const ApplicationExampleNode = (data: NodeProps<LearningPathLearningElementNode>) => {
-  return (
-    <BasicNode
-      {...data}
-      id="application-example-node"
-      icon={<SettingsApplications sx={{ fontSize: 50 }} />}></BasicNode>
-  )
+  return <BasicNode {...data} id="application-example-node" icon={getNodeIcon('AB', 50)} />
 }
 
 export default memo(ApplicationExampleNode)

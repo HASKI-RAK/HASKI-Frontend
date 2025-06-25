@@ -6,6 +6,7 @@
     "sonarsource.sonarlint-vscode",
     "ms-vscode.test-adapter-converter",
     "hbenl.vscode-test-explorer",
-    "aaron-bond.better-comments"
+    "aaron-bond.better-comments",
+    "orta.vscode-jest"
   ]
 }

@@ -11,4 +11,4 @@ type LearningPathLearningElementAlgorithm = {
 }
 
 export default LearningPathLearningElementAlgorithm
-export type { LearningPathLearningElementAlgorithmReturn, LearningPathLearningElementAlgorithmResponse }
+export type { LearningPathLearningElementAlgorithmResponse, LearningPathLearningElementAlgorithmReturn }

@@ -1,4 +1,4 @@
-import { LearningElement } from '@core'
+import LearningElement from '../LearningElement/LearningElement'
 
 type LearningPathLearningElement = {
   id: number

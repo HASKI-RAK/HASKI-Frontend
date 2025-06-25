@@ -1,4 +1,4 @@
-import { Topic } from '@core'
+import Topic from '../Topic/Topic'
 
 /**
  * Params are optional so

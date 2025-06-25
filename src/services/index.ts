@@ -2,38 +2,29 @@
  * Reusable service calls go here.
  * ! Dont forget to mock them in jest.setup.ts
  */
-export { AuthContext } from './AuthContext'
-export type { AuthContextType } from './AuthContext'
-export { AuthProvider } from './AuthProvider'
-export { RoleContext } from './RoleContext'
-export type { RoleContextType } from './RoleContext'
-export { RoleProvider } from './RoleProvider'
-export {
-  fetchLearningPathElement,
-  fetchLearningPathElementStatus,
-  fetchLearningPathElementSpecificStatus,
-  postCalculateLearningPathForAllStudents
-} from './LearningPath'
-export { fetchLearningPathTopic, postTopic, postAddAllStudentsToTopics } from './Topic'
-export { postContactForm } from './contact'
-export type { FormDataType } from './contact'
 export * from './auth'
-export * from './SnackbarContext'
-export { SnackbarProvider } from './SnackbarProvider'
+export type { AuthContextType } from './AuthContext'
+export { AuthContext } from './AuthContext'
+export { AuthProvider } from './AuthProvider'
+export { postBufferContent } from './BufferContent'
 export * from './connection'
-export { fetchCourses } from './Courses'
-export { fetchRemoteCourses } from './RemoteCourses'
-export { fetchRemoteTopics } from './RemoteTopics'
-export { postLearningElement } from './LearningElement'
-export { postLearningPathAlgorithm } from './LearningPathAlgorithm'
+export { type FormDataType, postContactForm } from './contact'
 export { postCourse } from './Course'
 export { postAddAllStudentsToCourse } from './Course'
-export * from './xAPI'
-export { fetchILS, fetchListK, postILS, postListK } from './Questionnaire'
+export { deleteCourse } from './Course'
+export { fetchCourses } from './Courses'
 export * from './debounce'
-export * from './Viewport'
-export { fetchNews } from './News'
+export { fetchDefaultLearningPath, fetchDisabledClassifications, postDefaultLearningPath } from './DefaultLearningPath'
+export { postLearningElement } from './LearningElement'
+export { deleteLearningElement } from './LearningElement'
+export {
+  fetchLearningPathElement,
+  fetchLearningPathElementSpecificStatus,
+  fetchLearningPathElementStatus,
+  postCalculateLearningPathForAllStudents
+} from './LearningPath'
 export { postCalculateLearningPathILS } from './LearningPath'
+export { postLearningPathAlgorithm } from './LearningPathAlgorithm'
 export {
   fetchStudentLpLeAlg,
   fetchTeacherLpLeAlg,
@@ -41,8 +32,17 @@ export {
   postTeacherLpLeAlg
 } from './LearningPathLearningElementAlgorithm'
 export * from './Rating'
-export { postBufferContent } from './BufferContent'
-
-export { deleteCourse } from './Course'
+export { fetchNews } from './News'
+export * from './PageName'
+export { fetchILS, fetchListK, postILS, postListK } from './Questionnaire'
+export { fetchRemoteCourses } from './RemoteCourses'
+export { fetchRemoteTopics } from './RemoteTopics'
+export type { RoleContextType } from './RoleContext'
+export { RoleContext } from './RoleContext'
+export { RoleProvider } from './RoleProvider'
+export * from './SnackbarContext'
+export { SnackbarProvider } from './SnackbarProvider'
+export { fetchLearningPathTopic, postAddAllStudentsToTopics, postTopic } from './Topic'
 export { deleteTopic } from './Topic'
-export { deleteLearningElement } from './LearningElement'
+export * from './Viewport'
+export * from './xAPI'

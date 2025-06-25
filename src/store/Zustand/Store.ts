@@ -3,22 +3,22 @@ import create from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
-import CoursesSlice, { createCoursesSlice } from '../Slices/CoursesSlice'
-import LearningPathElementSlice, { createLearningPathElementSlice } from '../Slices/LearningPathElementSlice'
+import { CoursesSlice, createCoursesSlice } from '../Slices/CoursesSlice'
+import { createDefaultLearningPathSlice, DefaultLearningPathSlice } from '../Slices/DefaultLearningPathSlice'
+import { createLearningPathElementSlice, LearningPathElementSlice } from '../Slices/LearningPathElementSlice'
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
 } from '../Slices/LearningPathElementSpecificStatusSlice'
 import {
-  LearningPathElementStatusSlice,
-  createLearningPathElementStatusSlice
+  createLearningPathElementStatusSlice,
+  LearningPathElementStatusSlice
 } from '../Slices/LearningPathElementStatusSlice'
-import LearningPathTopicSlice, { createLearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
-import NewsSlice, { createNewsSlice } from '../Slices/NewsSlice'
-import RemoteTopicsSlice, { createRemoteTopicsSlice } from '../Slices/RemoteTopicsSlice'
-import StudentLpLeAlgorithmSlice, { createStudentLpLeAlgorithmSlice } from '../Slices/StudentLpLeAlgSlice'
-import TeacherLpLeAlgorithmSlice, { createTeacherLpLeAlgorithmSlice } from '../Slices/TeacherLpLeAlgorithmSlice'
-import UserSlice, { createUserSlice } from '../Slices/UserSlice'
-import xAPISlice, { createXAPISlice } from '../Slices/xAPISlice'
+import { createLearningPathTopicSlice, LearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
+import { createNewsSlice, NewsSlice } from '../Slices/NewsSlice'
+import { createRemoteTopicsSlice, RemoteTopicsSlice } from '../Slices/RemoteTopicsSlice'
+import { createStudentLpLeAlgorithmSlice, StudentLpLeAlgorithmSlice } from '../Slices/StudentLpLeAlgSlice'
+import { createTeacherLpLeAlgorithmSlice, TeacherLpLeAlgorithmSlice } from '../Slices/TeacherLpLeAlgorithmSlice'
+import { createUserSlice, UserSlice } from '../Slices/UserSlice'
 
 export type StoreState = LearningPathElementSlice &
   CourseSlice &
@@ -28,7 +28,7 @@ export type StoreState = LearningPathElementSlice &
   RemoteTopicsSlice &
   TeacherLpLeAlgorithmSlice &
   StudentLpLeAlgorithmSlice
-export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & xAPISlice
+export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & DefaultLearningPathSlice
 export type SessionStoreState = NewsSlice
 
 export const resetters: (() => void)[] = []
@@ -51,7 +51,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
         ...createUserSlice(...a),
         ...createLearningPathElementStatusSlice(...a),
         ...createAuthSlice(...a),
-        ...createXAPISlice(...a)
+        ...createDefaultLearningPathSlice(...a)
       }),
       {
         name: 'persisted_storage',
@@ -59,6 +59,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
         partialize: (state) => ({
           _user: state._user,
           _learningPathElementStatus: state._learningPathElementStatus,
+          _defaultLearningPath: state._defaultLearningPath,
           expire: state.expire
         }),
         onRehydrateStorage: () => {
@@ -88,4 +89,6 @@ export const useSessionStore = create<SessionStoreState>()(
     )
   )
 )
+// This function is used to reset all slices of the store just for testing purposes
+// sonarjs/no-empty-collection
 export const resetAllSlices = () => resetters.forEach((reset) => reset())

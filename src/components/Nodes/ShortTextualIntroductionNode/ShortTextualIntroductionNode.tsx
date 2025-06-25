@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import { NodeProps } from 'reactflow'
-import { ShortText } from '@common/icons'
-import { LearningPathLearningElementNode } from '@components'
+import { getNodeIcon, LearningPathLearningElementNode } from '@components'
 import BasicNode from '../BasicNode/BasicNode'
 
 /**
@@ -17,9 +16,7 @@ import BasicNode from '../BasicNode/BasicNode'
  * @category Components
  */
 const ShortTextualIntroductionNode = (data: NodeProps<LearningPathLearningElementNode>) => {
-  return (
-    <BasicNode {...data} id="short-textual-introduction-node" icon={<ShortText sx={{ fontSize: 50 }} />}></BasicNode>
-  )
+  return <BasicNode {...data} id="short-textual-introduction-node" icon={getNodeIcon('KÜ', 50)} />
 }
 
 export default memo(ShortTextualIntroductionNode)

@@ -1,4 +1,4 @@
-import { ReactNode, memo, useCallback, useEffect, useMemo } from 'react'
+import { memo, ReactNode, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -68,8 +68,11 @@ const CreateAlgorithmTable = ({
 
   // Handle selection change for algorithm
   const handleSelectChange = useCallback(
-    (lmsTopicId: number, lmsTopicName: string) => (event: SelectChangeEvent) => {
-      handleAlgorithmChange(lmsTopicId, lmsTopicName, event.target.value)
+    (lmsTopicId: number, lmsTopicName: string) => (event: SelectChangeEvent<unknown>) => {
+      const { value } = event.target
+      if (typeof value === 'string') {
+        handleAlgorithmChange(lmsTopicId, lmsTopicName, value)
+      }
     },
     [handleAlgorithmChange]
   )
