@@ -93,7 +93,6 @@ const AboutUs = () => {
       <TextCardRight header="Team OTH Regensburg" body={t('pages.aboutus.membersRegensburgBody')}>
         <Box
           sx={{
-            zIndex: '-100',
             opacity: '0.35',
             position: 'absolute',
             width: {
@@ -115,7 +114,6 @@ const AboutUs = () => {
       <TextCardLeft header="Team TH Aschaffenburg" body={t('pages.aboutus.membersAschaffenburgBody')}>
         <Box
           sx={{
-            zIndex: '-100',
             opacity: '0.35',
             position: 'absolute',
             width: {
@@ -137,7 +135,6 @@ const AboutUs = () => {
       <TextCardRight header="Team HS Kempten" body={t('pages.aboutus.membersKemptenBody')}>
         <Box
           sx={{
-            zIndex: '-100',
             opacity: '0.35',
             position: 'absolute',
             width: {

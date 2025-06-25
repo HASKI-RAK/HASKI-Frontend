@@ -42,6 +42,7 @@ const LocalNavItem = ({ topic, topicProgress, isProgressLoading, courseId, topic
       <ListItem key={topic?.id} sx={{ width: '100%', p: 0 }}>
         <ListItemButton
           key={topic?.id}
+          id={topic?.name.concat('-localNavButton').replaceAll(' ', '-')}
           sx={{
             width: '100%',
             '&:hover': {

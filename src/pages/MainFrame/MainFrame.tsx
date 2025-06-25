@@ -8,6 +8,7 @@ import {
   LocalNavBar,
   MenuBar,
   Newsbanner,
+  OpenCreateDefaultLearningPath,
   OpenQuestionnaire,
   PrivacyModal
 } from '@components'
@@ -61,6 +62,7 @@ export const MainFrame = () => {
       </Box>
       <PrivacyModal />
       <OpenQuestionnaire />
+      <OpenCreateDefaultLearningPath />
     </>
   )
 }

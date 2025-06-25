@@ -3,7 +3,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react'
 import * as router from 'react-router'
 import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
-import { AuthContext, ThemeProvider } from '@services'
+import { AuthContext, ThemeProvider, RoleContext, RoleContextType } from '@services'
 import MenuBar from './MenuBar'
 
 jest.requireActual('i18next')
@@ -270,22 +270,6 @@ describe('MenuBar', () => {
     expect(navigate).toHaveBeenCalledWith('/')
   })
 
-  /*test('fetching user when opening Questionnaire Results', async () => {
-    const { getByTestId } = render(
-      <ThemeContextProvider>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <MemoryRouter>
-            <MenuBar />
-          </MemoryRouter>
-        </AuthContext.Provider>
-      </ThemeContextProvider>
-    )
-
-    await waitFor(() => {
-      fireEvent.click(getByTestId('QuestionnaireResultsIcon'))
-    })
-  })*/
-
   test('click on HelpIcon should open popover', () => {
     const result = render(
       <ThemeProvider>
@@ -332,23 +316,6 @@ describe('MenuBar', () => {
       expect(result.queryByTestId('ThemeModal')).toBeNull()
     })
   })
-
-  /** 
-  test('click on SettingsIcon should open popover', () => {
-    const props: MenuBarProps = {
-      courseSelected: false
-    }
-
-    const result = render(
-      <MemoryRouter>
-        <MenuBar {...props} />
-      </MemoryRouter>
-    )
-    // click on HelpIcon:
-    fireEvent.click(result.getByTestId('SettingsIcon'))
-    expect(result.getByTestId('SettingsIcon')).toBeInTheDocument()
-  })
-  */
 
   test('click on UserIcon should open popover', () => {
     const result = render(
@@ -552,6 +519,37 @@ describe('MenuBar', () => {
 
     expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
     fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
+  })
+
+  it('navigates to default learning path modal and closes it', async () => {
+    const courseCreatorContext = {
+      isStudentRole: false,
+      isCourseCreatorRole: true
+    } as RoleContextType
+
+    const { getAllByText, getByTestId, getByText, queryByText } = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <RoleContext.Provider value={courseCreatorContext}>
+              <MenuBar />
+            </RoleContext.Provider>
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getAllByText('components.Menubar.defaultLearningPath')[0])
+    await waitFor(() => {
+      expect(getByTestId('close-default-learning-path-modal-button')).toBeInTheDocument()
+      expect(getByText('appGlobal.start')).toBeInTheDocument()
+    })
+    fireEvent.click(getByText('appGlobal.start'))
+    await waitFor(() => {
+      expect(queryByText('appGlobal.start')).not.toBeInTheDocument()
+    })
+    fireEvent.click(getByTestId('close-default-learning-path-modal-button'))
   })
 
   it('navigates to logout page', async () => {

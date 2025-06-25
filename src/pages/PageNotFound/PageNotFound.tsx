@@ -1,15 +1,5 @@
-import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import ReactFlow, {
-  addEdge,
-  Background,
-  Connection,
-  Edge,
-  MarkerType,
-  Node,
-  useEdgesState,
-  useNodesState
-} from 'reactflow'
+import ReactFlow, { Background, Edge, MarkerType, Node, useEdgesState, useNodesState } from 'reactflow'
 
 import 'reactflow/dist/style.css'
 
@@ -119,18 +109,14 @@ const initialEdges: Edge[] = [
  * @category Pages
  */
 export const PageNotFound = () => {
-  const [nodes, , onNodesChange] = useNodesState(initialNodes)
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
-  const onConnect = useCallback((params: Edge | Connection) => setEdges((els) => addEdge(params, els)), [setEdges])
+  const [nodes] = useNodesState(initialNodes)
+  const [edges] = useEdgesState(initialEdges)
   const navigate = useNavigate()
 
   return (
     <ReactFlow
       nodes={nodes}
       edges={edges}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      onConnect={onConnect}
       onNodeClick={(event, node) => {
         if (node?.id === '7') {
           navigate('/')

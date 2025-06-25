@@ -1,18 +1,6 @@
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  Avatar,
-  Button,
-  CircularProgress,
-  Divider,
-  Fade,
-  Grid,
-  MobileStepper,
-  Stack,
-  TableCell,
-  TableRow,
-  Typography
-} from '@common/components'
+import { Button, CircularProgress, MobileStepper, Stack, TableCell, TableRow, Typography } from '@common/components'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
 
 type ButtonStackProps = {
@@ -32,11 +20,6 @@ type SendButtonProps = {
   idType: string
   isSending: boolean
   sendSuccess: boolean
-}
-
-type CoverSheetProps = {
-  header: string
-  body: string
 }
 
 /**
@@ -166,39 +149,3 @@ export const StartButton = memo(({ handleNext }: { handleNext: () => void }) => 
 })
 // eslint-disable-next-line immutable/no-mutation
 StartButton.displayName = 'MemoStartButton'
-
-export const CoverSheet = memo(({ header, body }: CoverSheetProps) => {
-  return (
-    <Grid
-      container
-      justifyContent="center"
-      sx={{
-        mt: '7.5rem',
-        mb: '3rem'
-      }}>
-      <Grid item xs={7}>
-        <Typography variant="h3" align="center" sx={{ pt: '2.5rem' }}>
-          {header}
-        </Typography>
-        <Fade in={!!body} easing="linear" timeout={1000}>
-          <Typography align="center" sx={{ pt: '2.5rem', pb: '2.5rem', pr: '2rem' }} variant="h5">
-            {body}
-          </Typography>
-        </Fade>
-      </Grid>
-      <Divider flexItem orientation="vertical" />
-      <Grid container item justifyContent="center" sx={{ pt: '7.5rem', pb: '3rem' }} xs={4}>
-        <Avatar
-          alt="Advantages Teaching 3"
-          src="/ProjectDescriptionImage03.jpg"
-          sx={{
-            height: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' },
-            width: { xs: '6.25rem', sm: '7.5rem', md: '11.25rem', lg: '15.625rem' }
-          }}
-        />
-      </Grid>
-    </Grid>
-  )
-})
-// eslint-disable-next-line immutable/no-mutation
-CoverSheet.displayName = 'MemoCoverSheet'

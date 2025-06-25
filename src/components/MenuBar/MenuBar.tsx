@@ -24,10 +24,12 @@ import {
   Login,
   Logout,
   Person,
-  PlaylistAddCheckCircleOutlined
+  PlaylistAddCheckCircleOutlined,
+  Polyline
 } from '@common/icons'
 import {
   CourseMenu,
+  CreateDefaultLearningPathModal,
   FurtherInfoMenu,
   LanguageMenu,
   QuestionnaireQuestionsModal,
@@ -36,7 +38,7 @@ import {
   TableListKQuestions,
   ThemeModal
 } from '@components'
-import { AuthContext } from '@services'
+import { AuthContext, RoleContext } from '@services'
 import { Theme } from '../../common/theme/DefaultTheme/DefaultTheme'
 
 /**
@@ -51,14 +53,16 @@ import { Theme } from '../../common/theme/DefaultTheme/DefaultTheme'
  */
 
 const MenuBar = () => {
+  const { t } = useTranslation()
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const { isAuth, logout } = useContext(AuthContext)
   const activeTheme = useTheme()
-  const { t } = useTranslation()
   const [modalOpenTheme, setModalOpenTheme] = useState(false)
+  const { isCourseCreatorRole } = useContext(RoleContext)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
   const [modalOpenListK, setModalOpenListK] = useState(false)
+  const [modalOpenDefaultLearningPath, setModalOpenDefaultLearningPath] = useState(false)
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [successSendILSShort, setSuccessSendILSShort] = useState(false)
   const [successSendListK, setSuccessSendListK] = useState(false)
@@ -110,6 +114,11 @@ const MenuBar = () => {
     setAnchorElUser(null)
   }
 
+  const handleOpenDefaultLearningPath = () => {
+    setModalOpenDefaultLearningPath(true)
+    setAnchorElUser(null)
+  }
+
   const handleCloseListKModal = (_: object, reason: string) => {
     if (!successSendListK) {
       if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenListK(false)
@@ -117,6 +126,10 @@ const MenuBar = () => {
       window.location.reload()
       setModalOpenListK(false)
     }
+  }
+
+  const handleCloseDefaultLearningPath = () => {
+    setModalOpenDefaultLearningPath(false)
   }
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
@@ -318,6 +331,19 @@ const MenuBar = () => {
               <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>
                 <TableListKQuestions successSend={successSendListK} setSuccessSend={setSuccessSendListK} />
               </QuestionnaireQuestionsModal>
+
+              {isAuth && isCourseCreatorRole && (
+                <MenuItem id="default-learningpath-menu-item" onClick={() => handleOpenDefaultLearningPath()}>
+                  <ListItemIcon>
+                    <Polyline fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{t('components.Menubar.defaultLearningPath')}</Typography>
+                </MenuItem>
+              )}
+              <CreateDefaultLearningPathModal
+                open={modalOpenDefaultLearningPath}
+                handleClose={handleCloseDefaultLearningPath}
+              />
 
               <MenuItem
                 id="login-logout-menu-item"

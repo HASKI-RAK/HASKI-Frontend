@@ -4,8 +4,13 @@ import { fetchNews } from '@services'
 import { SessionStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
-export default interface NewsSlice {
-  _news: Record<string, NewsResponse>
+type NewsCache = {
+  value?: NewsResponse
+  promise?: Promise<NewsResponse>
+}
+
+export type NewsSlice = {
+  _news: Record<string, NewsCache>
   getNews: NewsReturn
   isBannerOpen: boolean
   setIsBannerOpen: (open?: boolean) => void
@@ -21,19 +26,39 @@ export const createNewsSlice: StateCreator<SessionStoreState, [], [], NewsSlice>
     },
     getNews: async (...arg) => {
       const [languageId, university] = arg
+      const key = `${languageId}-${university}`
 
-      const cached = get()._news[`${languageId}-${university}`]
+      const cached = get()._news[key]
 
-      if (!cached) {
-        const news = await fetchNews(languageId, university)
+      if (cached?.value) {
+        return cached.value
+      }
+
+      // If there's an in-flight promise, return it.
+      if (cached?.promise) {
+        return cached.promise
+      }
+
+      // Otherwise, initiate a new fetch and cache its promise.
+      const fetchPromise = fetchNews(languageId, university).then((news: NewsResponse) => {
         set({
           _news: {
             ...get()._news,
-            [`${languageId}-${university}`]: news
+            [key]: { value: news }
           }
         })
         return news
-      } else return cached
+      })
+
+      // Cache the in-flight promise.
+      set({
+        _news: {
+          ...get()._news,
+          [key]: { promise: fetchPromise }
+        }
+      })
+
+      return fetchPromise
     }
   }
 }

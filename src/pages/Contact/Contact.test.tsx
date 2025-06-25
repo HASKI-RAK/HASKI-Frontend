@@ -89,7 +89,7 @@ describe('Test Contactpage', () => {
       </MemoryRouter>
     )
 
-    const submitButton = form.getByText('components.ContactForm.submit')
+    const submitButton = form.getByText('appGlobal.submit')
     const input = form.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'text' } })
     fireEvent.mouseDown(form.getByRole('combobox', { name: /Topic/i }))

@@ -12,107 +12,111 @@ jest.mock('@common/hooks', () => ({
 
 describe('StyledLinearProgress-1', () => {
   it('renders course page with topics, some learning elements are done (33%)', async () => {
-    mockServices.fetchLearningPathElementStatus.mockImplementation(() => [
-      {
-        cmid: 1,
-        state: 0,
-        timecompleted: '1699967821'
-      },
-      {
-        cmid: 2,
-        state: 1,
-        timecompleted: '1699967821'
-      },
-      {
-        cmid: 3,
-        state: 0,
-        timecompleted: '1699967821'
-      }
-    ])
-
-    mockServices.fetchLearningPathElement.mockImplementation(() => ({
-      id: 1,
-      course_id: 2,
-      based_on: 'string',
-      calculated_on: 'string',
-      path: [
+    mockServices.fetchLearningPathElementStatus.mockImplementation(() =>
+      Promise.resolve([
         {
-          id: 1,
-          learning_element_id: 1,
-          learning_path_id: 1,
-          recommended: false,
-          position: 1,
-          learning_element: {
-            id: 1,
-            lms_id: 1,
-            activity_type: 'test',
-            classification: 'KÜ',
-            name: 'test',
-            university: 'test',
-            created_at: 'test',
-            created_by: 'test',
-            last_updated: 'test',
-            student_learning_element: {
-              id: 1,
-              student_id: 1,
-              learning_element_id: 1,
-              done: false,
-              done_at: 'test'
-            }
-          }
+          cmid: 1,
+          state: 0,
+          timecompleted: '1699967821'
         },
         {
-          id: 2,
-          learning_element_id: 2,
-          learning_path_id: 2,
-          recommended: false,
-          position: 2,
-          learning_element: {
-            id: 2,
-            lms_id: 2,
-            activity_type: 'test',
-            classification: 'ÜB',
-            name: 'test',
-            university: 'test',
-            created_at: 'test',
-            created_by: 'test',
-            last_updated: 'test',
-            student_learning_element: {
-              id: 2,
-              student_id: 1,
-              learning_element_id: 2,
-              done: false,
-              done_at: 'test'
-            }
-          }
+          cmid: 2,
+          state: 1,
+          timecompleted: '1699967821'
         },
         {
-          id: 3,
-          learning_element_id: 3,
-          learning_path_id: 3,
-          recommended: false,
-          position: 3,
-          learning_element: {
-            id: 3,
-            lms_id: 3,
-            activity_type: 'test',
-            classification: 'ÜB',
-            name: 'test',
-            university: 'test',
-            created_at: 'test',
-            created_by: 'test',
-            last_updated: 'test',
-            student_learning_element: {
-              id: 3,
-              student_id: 1,
-              learning_element_id: 3,
-              done: false,
-              done_at: 'test'
-            }
-          }
+          cmid: 3,
+          state: 0,
+          timecompleted: '1699967821'
         }
-      ]
-    }))
+      ])
+    )
+
+    mockServices.fetchLearningPathElement.mockImplementation(() =>
+      Promise.resolve({
+        id: 1,
+        course_id: 2,
+        based_on: 'string',
+        calculated_on: 'string',
+        path: [
+          {
+            id: 1,
+            learning_element_id: 1,
+            learning_path_id: 1,
+            recommended: false,
+            position: 1,
+            learning_element: {
+              id: 1,
+              lms_id: 1,
+              activity_type: 'test',
+              classification: 'KÜ',
+              name: 'test',
+              university: 'test',
+              created_at: 'test',
+              created_by: 'test',
+              last_updated: 'test',
+              student_learning_element: {
+                id: 1,
+                student_id: 1,
+                learning_element_id: 1,
+                done: false,
+                done_at: 'test'
+              }
+            }
+          },
+          {
+            id: 2,
+            learning_element_id: 2,
+            learning_path_id: 2,
+            recommended: false,
+            position: 2,
+            learning_element: {
+              id: 2,
+              lms_id: 2,
+              activity_type: 'test',
+              classification: 'ÜB',
+              name: 'test',
+              university: 'test',
+              created_at: 'test',
+              created_by: 'test',
+              last_updated: 'test',
+              student_learning_element: {
+                id: 2,
+                student_id: 1,
+                learning_element_id: 2,
+                done: false,
+                done_at: 'test'
+              }
+            }
+          },
+          {
+            id: 3,
+            learning_element_id: 3,
+            learning_path_id: 3,
+            recommended: false,
+            position: 3,
+            learning_element: {
+              id: 3,
+              lms_id: 3,
+              activity_type: 'test',
+              classification: 'ÜB',
+              name: 'test',
+              university: 'test',
+              created_at: 'test',
+              created_by: 'test',
+              last_updated: 'test',
+              student_learning_element: {
+                id: 3,
+                student_id: 1,
+                learning_element_id: 3,
+                done: false,
+                done_at: 'test'
+              }
+            }
+          }
+        ]
+      })
+    )
 
     const { getAllByTestId } = render(
       <MemoryRouter>
@@ -400,77 +404,81 @@ describe('StyledLinearProgress-1', () => {
 })
 describe('Course3', () => {
   it('renders course page with topics, none learning elements are done (0%)', async () => {
-    mockServices.fetchLearningPathElementStatus.mockImplementation(() => [
-      {
-        cmid: 1,
-        state: 0,
-        timecompleted: '1699967821'
-      },
-      {
-        cmid: 2,
-        state: 0,
-        timecompleted: '1699967821'
-      }
-    ])
-
-    mockServices.fetchLearningPathElement.mockImplementation(() => ({
-      id: 1,
-      course_id: 2,
-      based_on: 'string',
-      calculated_on: 'string',
-      path: [
+    mockServices.fetchLearningPathElementStatus.mockImplementation(() =>
+      Promise.resolve([
         {
-          id: 1,
-          learning_element_id: 1,
-          learning_path_id: 1,
-          recommended: false,
-          position: 1,
-          learning_element: {
-            id: 1,
-            lms_id: 1,
-            activity_type: 'test',
-            classification: 'KÜ',
-            name: 'test',
-            university: 'test',
-            created_at: 'test',
-            created_by: 'test',
-            last_updated: 'test',
-            student_learning_element: {
-              id: 1,
-              student_id: 1,
-              learning_element_id: 1,
-              done: false,
-              done_at: 'test'
-            }
-          }
+          cmid: 1,
+          state: 0,
+          timecompleted: '1699967821'
         },
         {
-          id: 2,
-          learning_element_id: 2,
-          learning_path_id: 2,
-          recommended: false,
-          position: 2,
-          learning_element: {
+          cmid: 2,
+          state: 0,
+          timecompleted: '1699967821'
+        }
+      ])
+    )
+
+    mockServices.fetchLearningPathElement.mockImplementation(() =>
+      Promise.resolve({
+        id: 1,
+        course_id: 2,
+        based_on: 'string',
+        calculated_on: 'string',
+        path: [
+          {
+            id: 1,
+            learning_element_id: 1,
+            learning_path_id: 1,
+            recommended: false,
+            position: 1,
+            learning_element: {
+              id: 1,
+              lms_id: 1,
+              activity_type: 'test',
+              classification: 'KÜ',
+              name: 'test',
+              university: 'test',
+              created_at: 'test',
+              created_by: 'test',
+              last_updated: 'test',
+              student_learning_element: {
+                id: 1,
+                student_id: 1,
+                learning_element_id: 1,
+                done: false,
+                done_at: 'test'
+              }
+            }
+          },
+          {
             id: 2,
-            lms_id: 2,
-            activity_type: 'test',
-            classification: 'ÜB',
-            name: 'test',
-            university: 'test',
-            created_at: 'test',
-            created_by: 'test',
-            last_updated: 'test',
-            student_learning_element: {
+            learning_element_id: 2,
+            learning_path_id: 2,
+            recommended: false,
+            position: 2,
+            learning_element: {
               id: 2,
-              student_id: 1,
-              learning_element_id: 2,
-              done: false,
-              done_at: 'test'
+              lms_id: 2,
+              activity_type: 'test',
+              classification: 'ÜB',
+              name: 'test',
+              university: 'test',
+              created_at: 'test',
+              created_by: 'test',
+              last_updated: 'test',
+              student_learning_element: {
+                id: 2,
+                student_id: 1,
+                learning_element_id: 2,
+                done: false,
+                done_at: 'test'
+              }
             }
           }
-        }
-      ]
-    }))
+        ]
+      })
+    )
 
     const { getAllByTestId } = render(
       <MemoryRouter>
