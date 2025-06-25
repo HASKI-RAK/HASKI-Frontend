@@ -14,7 +14,6 @@ import { Topic } from '@core'
  * @prop spiderGraphData - The data for the spider graph.
  * @prop lineGraphData - The data for the line graph.
  * @prop isLoading - The loading state.
- * @prop topics - A list of topics.
  */
 /**
  * # RatingDashboardHookReturn type
@@ -31,7 +30,6 @@ import { Topic } from '@core'
  * @prop lineGraphData - The data for the line graph.
  * @prop histogramData - The data for the histogram.
  * @prop isLoading - The loading state of the data.
- * @prop topics - The topics of the user.
  */
 export type RatingDashboardHookReturn = {
   userRatingValue: number
@@ -48,7 +46,6 @@ export type RatingDashboardHookReturn = {
   }[]
   histogramData: number[]
   isLoading: boolean
-  topics: Topic[]
 }
 
 /**
@@ -74,7 +71,6 @@ export const useRatingDashboard = (): RatingDashboardHookReturn => {
       ],
       histogramData: [],
       isLoading: false,
-      topics: []
     }),
     []
   )

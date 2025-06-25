@@ -1,9 +1,9 @@
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
-import { StudentRating, Topic, User } from '@core'
+import { StudentRating, User } from '@core'
 import { fetchStudentRatings, SnackbarContext } from '@services'
-import { usePersistedStore, useStore } from '@store'
+import { usePersistedStore } from '@store'
 import { RatingDashboardHookReturn } from '../RatingDashboard/RatingDashboard.hooks'
 
 /**
@@ -28,7 +28,6 @@ import { RatingDashboardHookReturn } from '../RatingDashboard/RatingDashboard.ho
  * histogramData
  * lineGraphData,
  * isLoading,
- * topics
  * } = useStudentRatingDashboard()
  * ```
  */
@@ -36,9 +35,9 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
   // Hook.
   const { t } = useTranslation()
 
-  // States.
+  // States. // TODO: Duplicates
   const [isLoading, setIsLoading] = useState(true)
-  const [topics, setTopics] = useState<Topic[]>([])
+  // const [topics, setTopics] = useState<Topic[]>([])
   const [userRatingValue, setUserRatingValue] = useState(0)
   const [spiderGraphData, setSpiderGraphData] = useState<Record<string, number>>({})
   const [lineGraphData, setLineGraphData] = useState<{ value: number; deviation: number; timestamp: Date }[]>([])
@@ -53,8 +52,6 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
 
   // Store.
   const getUser = usePersistedStore((state) => state.getUser)
-  const getCourses = useStore((state) => state.getCourses)
-  const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
 
   // Context.
   const { addSnackbar } = useContext(SnackbarContext)
@@ -63,43 +60,6 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
     // Get the user.
     getUser()
       .then((user: User) => {
-        // Get courses of the user.
-        getCourses(user.settings.user_id, user.lms_user_id, user.id)
-          .then((courseResponse) => {
-            const courseTopics: Topic[] = []
-            // Get all topics of the course.
-            Promise.all(
-              courseResponse.courses.map((course) =>
-                // Get all topics of the course.
-                getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, course.id.toString())
-                  .then((learningPathTopicResponse) => {
-                    courseTopics.push(...learningPathTopicResponse.topics)
-                  })
-                  .catch((error) => {
-                    addSnackbar({
-                      message: t('error.fetchLearningPathTopic'),
-                      severity: 'error',
-                      autoHideDuration: 3000
-                    })
-                    log.error(t('error.fetchLearningPathTopic') + ' ' + error)
-                    setIsLoading(true)
-                  })
-              )
-            ).then(() => {
-              // Set all the topics.
-              setTopics(courseTopics)
-            })
-          })
-          .catch((error) => {
-            addSnackbar({
-              message: t('error.fetchCourses'),
-              severity: 'error',
-              autoHideDuration: 3000
-            })
-            log.error(t('error.fetchCourses') + ' ' + error)
-            setIsLoading(true)
-          })
-
         // Fetch all ratings of all students.
         fetchStudentRatings(user.settings.user_id, user.id)
           .then((ratings) => {
@@ -256,8 +216,7 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
       lineGraphData,
       histogramData,
       isLoading,
-      topics
     }),
-    [ratingStats, userRatingValue, spiderGraphData, lineGraphData, histogramData, isLoading, topics]
+    [ratingStats, userRatingValue, spiderGraphData, lineGraphData, histogramData, isLoading]
   )
 }

@@ -1,9 +1,8 @@
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
-import { LearningElementRating, LearningElementRatingResponse, Topic, User } from '@core'
+import { LearningElementRating, LearningElementRatingResponse } from '@core'
 import { fetchLearningElementRatings, SnackbarContext } from '@services'
-import { usePersistedStore, useStore } from '@store'
 import { RatingDashboardHookReturn } from '../RatingDashboard/RatingDashboard.hooks'
 
 /**
@@ -27,7 +26,6 @@ import { RatingDashboardHookReturn } from '../RatingDashboard/RatingDashboard.ho
  * spiderGraphData,
  * lineGraphData,
  * isLoading,
- * topics
  * } = useLearningElementRatingDashboard()
  * ```
  */
@@ -36,7 +34,6 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
   const { t } = useTranslation()
 
   // States.
-  const [topics, setTopics] = useState<Topic[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [spiderGraphData, setSpiderGraphData] = useState<Record<string, number>>({})
   const [lineGraphData, setLineGraphData] = useState<{ value: number; deviation: number; timestamp: Date }[]>([])
@@ -48,53 +45,10 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
     ratingDeviationTrend: 0
   })
 
-  // Store.
-  const getUser = usePersistedStore((state) => state.getUser)
-  const getCourses = useStore((state) => state.getCourses)
-  const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
-
   // Context.
   const { addSnackbar } = useContext(SnackbarContext)
 
   useEffect(() => {
-    // Get the user.
-    getUser()
-      .then((user: User) => {
-        // Get the courses of the user.
-        getCourses(user.settings.user_id, user.lms_user_id, user.id)
-          .then((courseResponse) => {
-            const courseTopics: Topic[] = []
-            Promise.all(
-              courseResponse.courses.map((course) =>
-                // Get all topics of the course.
-                getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, course.id.toString())
-                  .then((learningPathTopicResponse) => {
-                    courseTopics.push(...learningPathTopicResponse.topics)
-                  })
-                  .catch((error) => {
-                    addSnackbar({
-                      message: t('error.fetchLearningPathTopic'),
-                      severity: 'error',
-                      autoHideDuration: 3000
-                    })
-                    log.error(t('error.fetchLearningPathTopic') + ' ' + error)
-                    setIsLoading(true)
-                  })
-              )
-            ).then(() => {
-              setTopics(courseTopics)
-            })
-          })
-          .catch((error) => {
-            addSnackbar({
-              message: t('error.fetchCourses'),
-              severity: 'error',
-              autoHideDuration: 3000
-            })
-            log.error(t('error.fetchCourses') + ' ' + error)
-            setIsLoading(true)
-          })
-
         // Fetch all learning element ratings.
         fetchLearningElementRatings()
           .then((learningElementRatingResponse: LearningElementRatingResponse) => {
@@ -269,7 +223,7 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
             setLineGraphData(lineGraphData)
 
             // Set loading to false
-            if (ratingStats && spiderGraphData && lineGraphData.length > 0 && topics) setIsLoading(false)
+            if (ratingStats && spiderGraphData && lineGraphData.length > 0) setIsLoading(false)
           })
           .catch((error) => {
             addSnackbar({
@@ -280,16 +234,6 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
             log.error(t('error.fetchLearningElementRatings') + ' ' + error)
             setIsLoading(true)
           })
-      })
-      .catch((error) => {
-        addSnackbar({
-          message: t('error.fetchUser'),
-          severity: 'error',
-          autoHideDuration: 3000
-        })
-        log.error(t('error.fetchUser') + ' ' + error)
-        setIsLoading(true)
-      })
   }, [])
 
   return useMemo(
@@ -300,8 +244,7 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
       spiderGraphData,
       lineGraphData,
       isLoading,
-      topics
     }),
-    [ratingStats, spiderGraphData, lineGraphData, isLoading, topics]
+    [ratingStats, spiderGraphData, lineGraphData, isLoading]
   )
 }

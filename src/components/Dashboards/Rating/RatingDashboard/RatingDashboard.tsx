@@ -5,6 +5,7 @@ import { FormControlLabel, Grid, Radio, RadioGroup } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { Typewriter } from '@components'
 import { RatingDashboardHookReturn, useRatingDashboard as _useRatingDashboard } from './RatingDashboard.hooks'
+import { useTopics } from '../LearningElementRatingDashboard/Topics.hooks'
 
 /**
  *
@@ -19,7 +20,7 @@ type RatingDashboardProps = {
   useRatingDashboard?: () => RatingDashboardHookReturn
 }
 
-/**
+/** // TODO: 
  *
  * @param param0
  * @returns
@@ -29,7 +30,7 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
   const [chosenComponent, setChosenComponent] = useState('lineGraph')
   const [transformedSpiderGraphData, setTransformedSpiderGraphData] = useState({})
 
-  // Hook.
+  // Hooks.
   const { t } = useTranslation()
   const {
     isLoading,
@@ -42,8 +43,8 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
     spiderGraphData,
     lineGraphData,
     histogramData,
-    topics
   } = useRatingDashboard()
+    const { topics } = useTopics()
 
   // Map the topic ids to the topic names.
   useEffect(() => {
