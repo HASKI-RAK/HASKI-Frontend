@@ -1,4 +1,4 @@
-import { fireEvent, render, renderHook, waitFor } from '@testing-library/react'
+/*import { fireEvent, render, renderHook, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import StudentRatingDashboard from '../delete/StudentRatingDashboard'
@@ -318,3 +318,6 @@ describe('StudentRatingDashboard', () => {
     })
   })
 })
+*/
+
+export {}

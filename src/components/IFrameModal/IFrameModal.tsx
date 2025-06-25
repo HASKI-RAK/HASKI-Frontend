@@ -1,11 +1,11 @@
-import log from 'loglevel'
 import { memo, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
+import log from 'loglevel'
 import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
 import { User } from '@core'
-import { SnackbarContext, postCalculateRating } from '@services'
+import { postCalculateRating, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
 
 const style_box = {

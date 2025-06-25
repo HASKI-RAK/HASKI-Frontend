@@ -31,10 +31,10 @@ export {
   postStudentLpLeAlg,
   postTeacherLpLeAlg
 } from './LearningPathLearningElementAlgorithm'
-export * from './Rating'
 export { fetchNews } from './News'
 export * from './PageName'
 export { fetchILS, fetchListK, postILS, postListK } from './Questionnaire'
+export * from './Rating'
 export { fetchRemoteCourses } from './RemoteCourses'
 export { fetchRemoteTopics } from './RemoteTopics'
 export type { RoleContextType } from './RoleContext'

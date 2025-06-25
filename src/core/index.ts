@@ -83,5 +83,5 @@ export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTo
 export type { NewsReturn } from './News/News'
 export type { ILSReturn } from './QuestionnaireResults/ILS'
 export type { ListKReturn } from './QuestionnaireResults/ListK'
-export type { RemoteTopicsReturn } from './RemoteTopic/RemoteTopics'
 export * from './Rating'
+export type { RemoteTopicsReturn } from './RemoteTopic/RemoteTopics'

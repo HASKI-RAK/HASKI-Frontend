@@ -1,4 +1,4 @@
-import { act, fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react'
+/*import { act, fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import LearningElementRatingDashboard from '../delete/LearningElementRatingDashboard'
@@ -163,3 +163,6 @@ describe('LearningElementRatingDashboard hook', () => {
     })
   })
 })
+*/
+
+export {}

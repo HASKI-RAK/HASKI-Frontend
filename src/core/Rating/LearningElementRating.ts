@@ -14,4 +14,4 @@ type LearningElementRatingReturn = (
 ) => Promise<LearningElementRatingResponse>
 
 export default LearningElementRating
-export type { LearningElementRatingReturn, LearningElementRatingResponse }
+export type { LearningElementRatingResponse, LearningElementRatingReturn }

@@ -1,8 +1,8 @@
-import log from 'loglevel'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import log from 'loglevel'
 import { LearningElementRating, LearningElementRatingResponse, Topic, User } from '@core'
-import { SnackbarContext, fetchLearningElementRatings } from '@services'
+import { fetchLearningElementRatings, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { RatingDashboardHookReturn } from '../RatingDashboard/RatingDashboard.hooks'
 
