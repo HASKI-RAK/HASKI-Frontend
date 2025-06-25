@@ -18,17 +18,31 @@
 <li><a href="services.exports.DeleteEntityModalProps.html">DeleteEntityModalProps</a></li></ul>
 <h1>Type alias DeleteEntityModalProps</h1></div>
 <div class="tsd-signature"><span class="tsd-kind-type-alias">Delete<wbr/>Entity<wbr/>Modal<wbr/>Props</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">entityId</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">entityLmsId</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">entityName</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">entityType</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">onDeleteConfirm</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">entityId</span>, <span class="tsd-kind-parameter">extraId</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">openDeleteEntityModal</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">setDeleteEntityModalOpen</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></div>
+<div class="tsd-comment tsd-typography"><p>Props for the DeleteEntityModal component.</p>
+</div>
 <div class="tsd-type-declaration">
 <h4>Type declaration</h4>
 <ul class="tsd-parameters">
 <li class="tsd-parameter">
-<h5><span class="tsd-kind-property">entity<wbr/>Id</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-property">entity<wbr/>Id</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Unique internal ID of the entity.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li class="tsd-parameter">
-<h5><span class="tsd-kind-property">entity<wbr/>Lms<wbr/>Id</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-property">entity<wbr/>Lms<wbr/>Id</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>External LMS-specific ID of the entity.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li class="tsd-parameter">
-<h5><span class="tsd-kind-property">entity<wbr/>Name</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-property">entity<wbr/>Name</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>Display name of the entity to be deleted (e.g., &quot;Math 101&quot;).</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li class="tsd-parameter">
-<h5><span class="tsd-kind-property">entity<wbr/>Type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li>
+<h5><span class="tsd-kind-property">entity<wbr/>Type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>The type of entity being deleted (e.g., &quot;Course&quot;, &quot;Topic&quot;).</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li class="tsd-parameter">
 <h5><span class="tsd-kind-property">on<wbr/>Delete<wbr/>Confirm</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">entityId</span>, <span class="tsd-kind-parameter">extraId</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></h5>
 <ul class="tsd-parameters">
@@ -36,16 +50,28 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature" id="__type.onDeleteConfirm.__type-1.__type-2"><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">entityId</span>, <span class="tsd-kind-parameter">extraId</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Callback fired when the user confirms deletion.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">entityId</span>: <span class="tsd-signature-type">number</span></h5></li>
+<h5><span class="tsd-kind-parameter">entityId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>Internal ID.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">extraId</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></li></ul></li>
+<h5><span class="tsd-kind-parameter">extraId</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography"><p>External LMS ID.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div></li></ul></li></ul></li>
 <li class="tsd-parameter">
-<h5><span class="tsd-kind-property">open<wbr/>Delete<wbr/>Entity<wbr/>Modal</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5></li>
+<h5><span class="tsd-kind-property">open<wbr/>Delete<wbr/>Entity<wbr/>Modal</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><p>Controls the visibility of the delete modal.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
 <li class="tsd-parameter">
 <h5><span class="tsd-kind-property">set<wbr/>Delete<wbr/>Entity<wbr/>Modal<wbr/>Open</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></h5>
 <ul class="tsd-parameters">
@@ -53,14 +79,21 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature" id="__type.setDeleteEntityModalOpen.__type-3.__type-4"><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Callback to set the modal&#39;s open state.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type ">SetStateAction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></li></ul></li></ul></div><aside class="tsd-sources">
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type ">SetStateAction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography"><p>The new open state.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"></div></li></ul></li></ul></li></ul></div>
+<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/components/DeleteEntityModal/DeleteEntityModal.tsx#L6">src/components/DeleteEntityModal/DeleteEntityModal.tsx:6</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/components/DeleteEntityModal/DeleteEntityModal.tsx#L9">src/components/DeleteEntityModal/DeleteEntityModal.tsx:9</a></li></ul></aside></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -200,6 +233,8 @@
 <li><a href="services.exports.TableListKQuestionsProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Table<wbr/>ListKQuestions<wbr/>Props</span></a></li>
 <li><a href="services.exports.TeacherLpLeAlgorithmCache.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Teacher<wbr/>Lp<wbr/>Le<wbr/>Algorithm<wbr/>Cache</span></a></li>
 <li><a href="services.exports.TeacherLpLeAlgorithmSlice.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Teacher<wbr/>Lp<wbr/>Le<wbr/>Algorithm<wbr/>Slice</span></a></li>
+<li><a href="services.exports.ThemeModalProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Theme<wbr/>Modal<wbr/>Props</span></a></li>
+<li><a href="services.exports.ThemeProviderComponentProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Theme<wbr/>Provider<wbr/>Component<wbr/>Props</span></a></li>
 <li><a href="services.exports.TopicCardProps.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>Topic<wbr/>Card<wbr/>Props</span></a></li>
 <li><a href="services.exports.UserSettings.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>User<wbr/>Settings</span></a></li>
 <li><a href="services.exports.UserSlice.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4194304"></use></svg><span>User<wbr/>Slice</span></a></li>
@@ -234,6 +269,7 @@
 <li><a href="../functions/services.AuthProvider.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Auth<wbr/>Provider</span></a></li>
 <li><a href="../functions/services.RoleProvider.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Role<wbr/>Provider</span></a></li>
 <li><a href="../functions/services.SnackbarProvider.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Snackbar<wbr/>Provider</span></a></li>
+<li><a href="../functions/services.ThemeProvider.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Theme<wbr/>Provider</span></a></li>
 <li><a href="../functions/services.debounce.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>debounce</span></a></li>
 <li><a href="../functions/services.deleteCourse.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>delete<wbr/>Course</span></a></li>
 <li><a href="../functions/services.deleteLearningElement.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>delete<wbr/>Learning<wbr/>Element</span></a></li>
@@ -272,8 +308,10 @@
 <li><a href="../functions/services.postStudentLpLeAlg.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>post<wbr/>Student<wbr/>Lp<wbr/>Le<wbr/>Alg</span></a></li>
 <li><a href="../functions/services.postTeacherLpLeAlg.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>post<wbr/>Teacher<wbr/>Lp<wbr/>Le<wbr/>Alg</span></a></li>
 <li><a href="../functions/services.postTopic.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>post<wbr/>Topic</span></a></li>
+<li><a href="../functions/services.postUserSettings.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>post<wbr/>User<wbr/>Settings</span></a></li>
 <li><a href="../functions/services.useNetworkStatus.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>use<wbr/>Network<wbr/>Status</span></a></li>
 <li><a href="../functions/services.usePageName.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>use<wbr/>Page<wbr/>Name</span></a></li>
+<li><a href="../functions/services.useThemeProvider.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>use<wbr/>Theme<wbr/>Provider</span></a></li>
 <li><a href="../functions/services.useViewport.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>use<wbr/>Viewport</span></a></li></ul></div></details></li>
 <li><a href="../modules/shared.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>shared</span></a></li>
 <li><a href="../modules/store.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>store</span></a></li></ul></nav></div></div></div>
