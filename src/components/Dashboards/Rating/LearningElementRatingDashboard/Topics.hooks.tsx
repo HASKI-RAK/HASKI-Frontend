@@ -5,19 +5,21 @@ import { Topic, User } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
+// TODO RETURN TYPE
+
 export const useTopics = () => {
   // Hooks
   const { t } = useTranslation()
 
-  // States. // TODO: Duplicates
+  // States.
   const [topics, setTopics] = useState<Topic[]>([])
 
-  // Store. // TODO: Duplicates
+  // Store.
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
 
-  // Context. // TODO: Duplicates
+  // Context.
   const { addSnackbar } = useContext(SnackbarContext)
 
   useEffect(() => {
@@ -45,6 +47,7 @@ export const useTopics = () => {
                   })
               )
             ).then(() => {
+              // TODO: Remove indentation
               setTopics(courseTopics)
             })
           })
@@ -75,7 +78,8 @@ export const useTopics = () => {
       })
   }, [])
 
-  return { // TODO: MEMO
+  return {
+    // TODO: MEMO
     topics
   }
 }

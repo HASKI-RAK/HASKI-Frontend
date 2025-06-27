@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-import { Topic } from '@core'
 
 /**
  * # LearningElementRatingDashboardHookReturn type
@@ -70,7 +69,7 @@ export const useRatingDashboard = (): RatingDashboardHookReturn => {
         }
       ],
       histogramData: [],
-      isLoading: false,
+      isLoading: false
     }),
     []
   )

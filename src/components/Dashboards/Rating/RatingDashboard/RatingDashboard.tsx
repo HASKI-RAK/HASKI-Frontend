@@ -4,8 +4,8 @@ import { Histogram, LineGraph, Rating, SpiderGraph, Table, TableColumnProps } fr
 import { FormControlLabel, Grid, Radio, RadioGroup } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { Typewriter } from '@components'
-import { RatingDashboardHookReturn, useRatingDashboard as _useRatingDashboard } from './RatingDashboard.hooks'
 import { useTopics } from '../LearningElementRatingDashboard/Topics.hooks'
+import { RatingDashboardHookReturn, useRatingDashboard as _useRatingDashboard } from './RatingDashboard.hooks'
 
 /**
  *
@@ -20,7 +20,7 @@ type RatingDashboardProps = {
   useRatingDashboard?: () => RatingDashboardHookReturn
 }
 
-/** // TODO: 
+/** // TODO:
  *
  * @param param0
  * @returns
@@ -42,9 +42,9 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
     ratingValueTrend,
     spiderGraphData,
     lineGraphData,
-    histogramData,
+    histogramData
   } = useRatingDashboard()
-    const { topics } = useTopics()
+  const { topics } = useTopics()
 
   // Map the topic ids to the topic names.
   useEffect(() => {
