@@ -1,10 +1,109 @@
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
-import { LearningElementRating, LearningElementRatingResponse } from '@core'
+import { LearningElementRating, LearningElementRatingResponse, StudentRating } from '@core'
 import { fetchLearningElementRatings, SnackbarContext } from '@services'
 import { RatingDashboardHookReturn } from '../RatingDashboard/RatingDashboard.hooks'
-import { getMaxRatingDeviation, getMaxRatingValue } from '../StudentRatingDashboard/RatingCalculations'
+
+// TODO: DOCU
+export const getMaxRatingValue = (ratings: StudentRating[] | LearningElementRating[]) => {
+  return Math.max(...ratings.map((rating) => rating.rating_value))
+}
+
+// TODO: DOCU
+export const getMaxRatingDeviation = (ratings: StudentRating[] | LearningElementRating[]) => {
+  return Math.max(...ratings.map((rating) => rating.rating_deviation))
+}
+
+const getTopicAverages = (learningElementRatingResponse: LearningElementRatingResponse) => {
+          // Group ratings by learning element and topic, keeping only the latest and second latest ratings.
+        const groupedRatings = learningElementRatingResponse.reduce((acc, rating) => {
+          const key = `${rating.learning_element_id}-${rating.topic_id}`
+          const updatedRatings = acc[key]
+            ? [...acc[key], rating]
+                .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+                .slice(0, 2) // Keep only the two latest ratings
+            : [rating]
+          return {
+            ...acc,
+            [key]: updatedRatings
+          }
+        }, {} as { [key: string]: LearningElementRating[] })
+
+        // Calculate averages for the latest and second latest ratings.
+        const topicMap = Object.values(groupedRatings).reduce((acc, ratingsList) => {
+          const latestRating = ratingsList[0]
+          const secondLatestRating = ratingsList[1]
+          return {
+            ...acc,
+            [latestRating.topic_id]: {
+              latest: [...(acc[latestRating.topic_id]?.latest || []), latestRating],
+              secondLatest: secondLatestRating
+                ? [...(acc[latestRating.topic_id]?.secondLatest || []), secondLatestRating]
+                : acc[latestRating.topic_id]?.secondLatest || []
+            }
+          }
+        }, {} as { [topicId: number]: { latest: LearningElementRating[]; secondLatest: LearningElementRating[] } })
+
+                // Calculate the average rating for each topic.
+        return Object.keys(topicMap).map((topicId) => {
+          const topicData = topicMap[parseInt(topicId)]
+
+          // Calculate the sum of the latest ratings.
+          const latestRatingsSum = topicData.latest.reduce(
+            (acc, rating) => ({
+              ratingSum: acc.ratingSum + rating.rating_value,
+              deviationSum: acc.deviationSum + rating.rating_deviation
+            }),
+            { ratingSum: 0, deviationSum: 0 }
+          )
+
+          // Calculate the sum of the second latest ratings.
+          const secondLatestRatingsSum = topicData.secondLatest.reduce(
+            (acc, rating) => ({
+              ratingSum: acc.ratingSum + rating.rating_value,
+              deviationSum: acc.deviationSum + rating.rating_deviation
+            }),
+            { ratingSum: 0, deviationSum: 0 }
+          )
+
+          // Calculate the average rating values and deviations.
+          const latestAvgRating = latestRatingsSum.ratingSum / topicData.latest.length
+          const latestAvgDeviation = latestRatingsSum.deviationSum / topicData.latest.length
+
+          const secondLatestAvgRating = topicData.secondLatest.length
+            ? secondLatestRatingsSum.ratingSum / topicData.secondLatest.length
+            : 0
+
+          const secondLatestAvgDeviation = topicData.secondLatest.length
+            ? secondLatestRatingsSum.deviationSum / topicData.secondLatest.length
+            : 0
+
+          return {
+            topicId: parseInt(topicId),
+            latestAvgRating,
+            latestAvgDeviation,
+            secondLatestAvgRating,
+            secondLatestAvgDeviation
+          }
+        })
+}
+
+const getSpiderData = (topicAverages: {
+    topicId: number;
+    latestAvgRating: number;
+    latestAvgDeviation: number;
+    secondLatestAvgRating: number;
+    secondLatestAvgDeviation: number;
+}[]) => {
+          return topicAverages.reduce((acc, { topicId, latestAvgRating }) => {
+          return {
+            ...acc,
+            [topicId]: latestAvgRating
+          }
+        }, {} as Record<string, number>)
+}
+
 
 /**
  * # useLearningElementRatingDashboard hook
@@ -59,87 +158,11 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
         // Get the max rating deviation.
         const maxRatingDeviation = getMaxRatingDeviation(learningElementRatingResponse)
 
-        // Group ratings by learning element and topic, keeping only the latest and second latest ratings.
-        const groupedRatings = learningElementRatingResponse.reduce((acc, rating) => {
-          const key = `${rating.learning_element_id}-${rating.topic_id}`
-          const updatedRatings = acc[key]
-            ? [...acc[key], rating]
-                .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
-                .slice(0, 2) // Keep only the two latest ratings
-            : [rating]
-          return {
-            ...acc,
-            [key]: updatedRatings
-          }
-        }, {} as { [key: string]: LearningElementRating[] })
-
-        // Calculate averages for the latest and second latest ratings.
-        const topicMap = Object.values(groupedRatings).reduce((acc, ratingsList) => {
-          const latestRating = ratingsList[0]
-          const secondLatestRating = ratingsList[1]
-          return {
-            ...acc,
-            [latestRating.topic_id]: {
-              latest: [...(acc[latestRating.topic_id]?.latest || []), latestRating],
-              secondLatest: secondLatestRating
-                ? [...(acc[latestRating.topic_id]?.secondLatest || []), secondLatestRating]
-                : acc[latestRating.topic_id]?.secondLatest || []
-            }
-          }
-        }, {} as { [topicId: number]: { latest: LearningElementRating[]; secondLatest: LearningElementRating[] } })
-
         // Calculate the average rating for each topic.
-        const topicAverages = Object.keys(topicMap).map((topicId) => {
-          const topicData = topicMap[parseInt(topicId)]
+        const topicAverages = getTopicAverages(learningElementRatingResponse)
 
-          // Calculate the sum of the latest ratings.
-          const latestRatingsSum = topicData.latest.reduce(
-            (acc, rating) => ({
-              ratingSum: acc.ratingSum + rating.rating_value,
-              deviationSum: acc.deviationSum + rating.rating_deviation
-            }),
-            { ratingSum: 0, deviationSum: 0 }
-          )
-
-          // Calculate the sum of the second latest ratings.
-          const secondLatestRatingsSum = topicData.secondLatest.reduce(
-            (acc, rating) => ({
-              ratingSum: acc.ratingSum + rating.rating_value,
-              deviationSum: acc.deviationSum + rating.rating_deviation
-            }),
-            { ratingSum: 0, deviationSum: 0 }
-          )
-
-          // Calculate the average rating values and deviations.
-          const latestAvgRating = latestRatingsSum.ratingSum / topicData.latest.length
-          const latestAvgDeviation = latestRatingsSum.deviationSum / topicData.latest.length
-
-          const secondLatestAvgRating = topicData.secondLatest.length
-            ? secondLatestRatingsSum.ratingSum / topicData.secondLatest.length
-            : 0
-
-          const secondLatestAvgDeviation = topicData.secondLatest.length
-            ? secondLatestRatingsSum.deviationSum / topicData.secondLatest.length
-            : 0
-
-          return {
-            topicId: parseInt(topicId),
-            latestAvgRating,
-            latestAvgDeviation,
-            secondLatestAvgRating,
-            secondLatestAvgDeviation
-          }
-        })
-
-        // TODO: COMBINE WITH RATINGCALCULATIONS
         // Set data for spider graph.
-        const spiderData = topicAverages.reduce((acc, { topicId, latestAvgRating }) => {
-          return {
-            ...acc,
-            [topicId]: latestAvgRating
-          }
-        }, {} as Record<string, number>)
-
+        const spiderData = getSpiderData(topicAverages)
         setSpiderGraphData(spiderData)
 
         // Calculate the overall averages.
@@ -168,6 +191,7 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
           maxRatingDeviation: 1
         })
 
+        // TODO: getLineGraphData()
         // Sort the ratings by timestamp ascending.
         const sortedRatings = learningElementRatingResponse.sort((a, b) => {
           const aTime = new Date(a.timestamp).getTime()
