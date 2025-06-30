@@ -19,8 +19,8 @@ export const getMaxRatingDeviation = (ratings: StudentRating[] | LearningElement
 // TODO: DOCU
 export const getUserRatings = (ratings: StudentRating[], userId: number) => {
   return ratings
-  .filter((rating) => rating.student_id === userId)
-  .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+    .filter((rating) => rating.student_id === userId)
+    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
 }
 
 // TODO: DOCU
@@ -47,7 +47,7 @@ export const getSpiderGraphData = (categorizedRatings: Record<string, StudentRat
 
 // TODO: getTotals()
 export const getTotals = (categorizedRatings: Record<string, StudentRating[]>) => {
-    return Object.values(categorizedRatings).reduce(
+  return Object.values(categorizedRatings).reduce(
     (acc, ratings) => {
       const [current, previous] = ratings
       return {
@@ -80,9 +80,7 @@ export const getLineGraphData = (userRatings: StudentRating[]) => {
   // Calculate the data for the line graph.
   return sortedRatings.map((rating, idx) => {
     const totalRatingValue = sortedRatings.slice(0, idx + 1).reduce((acc, r) => acc + r.rating_value, 0)
-    const totalRatingDeviation = sortedRatings
-      .slice(0, idx + 1)
-      .reduce((acc, r) => acc + r.rating_deviation, 0)
+    const totalRatingDeviation = sortedRatings.slice(0, idx + 1).reduce((acc, r) => acc + r.rating_deviation, 0)
     return {
       value: totalRatingValue / (idx + 1),
       deviation: (totalRatingDeviation / (idx + 1)) * 1.96,
@@ -90,17 +88,16 @@ export const getLineGraphData = (userRatings: StudentRating[]) => {
     }
   })
 }
-            
+
 // TODO: DOCU
 export const getHistogramData = (ratings: StudentRating[]) => {
   // Get the latest of each student-topic pair.
   const latestRatings = ratings.reduce((acc, rating) => {
     const key = `${rating.student_id}-${rating.topic_id}`
-    const shouldUpdate =
-      !acc[key] || new Date(rating.timestamp).getTime() > new Date(acc[key].timestamp).getTime()
+    const shouldUpdate = !acc[key] || new Date(rating.timestamp).getTime() > new Date(acc[key].timestamp).getTime()
     return shouldUpdate ? { ...acc, [key]: rating } : acc
   }, {} as { [key: string]: StudentRating })
-  
+
   // Calculate averages for each student.
   const studentAverages = Object.values(latestRatings).reduce((acc, rating) => {
     const { student_id, rating_value } = rating
@@ -114,7 +111,7 @@ export const getHistogramData = (ratings: StudentRating[]) => {
         : { sum: rating_value, count: 1 }
     }
   }, {} as { [student_id: number]: { sum: number; count: number } })
-  
+
   // Calculate the histogram data.
   return Object.values(studentAverages).map(({ sum, count }) => sum / count)
 }
