@@ -104,6 +104,59 @@ const getSpiderData = (topicAverages: {
         }, {} as Record<string, number>)
 }
 
+const getLineGraphData = (learningElementRatingResponse: LearningElementRatingResponse) => {
+          // Sort the ratings by timestamp ascending.
+        const sortedRatings = learningElementRatingResponse.toSorted((a, b) => {
+          return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+        })
+
+        // Get all the different timestamps.
+        const timestamps = Array.from(new Set(sortedRatings.map((r) => new Date(r.timestamp).getTime())))
+          .map((t) => new Date(t))
+          .sort((a, b) => a.getTime() - b.getTime())
+
+        const lineGraphData: { value: number; deviation: number; timestamp: Date }[] = []
+
+        // Calculate the average rating for each timestamp.
+        timestamps.forEach((timestamp) => {
+          const relevantRatings = sortedRatings.filter((r) => new Date(r.timestamp).getTime() <= timestamp.getTime())
+          const topicMap = relevantRatings.reduce(
+            (acc, rating) => ({
+              ...acc,
+              [rating.topic_id]: acc[rating.topic_id]
+                ? {
+                    sum: acc[rating.topic_id].sum + rating.rating_value,
+                    count: acc[rating.topic_id].count + 1,
+                    deviationSum: acc[rating.topic_id].deviationSum + rating.rating_deviation
+                  }
+                : {
+                    sum: rating.rating_value,
+                    count: 1,
+                    deviationSum: rating.rating_deviation
+                  }
+            }),
+            {} as { [topicId: number]: { sum: number; count: number; deviationSum: number } }
+          )
+
+          const topicAverages = Object.values(topicMap).map((topic) => ({
+            avgRating: topic.sum / topic.count,
+            avgDeviation: topic.deviationSum / topic.count
+          }))
+
+          const generalAvgRating = topicAverages.reduce((acc, topic) => acc + topic.avgRating, 0) / topicAverages.length
+          const generalAvgDeviation =
+            topicAverages.reduce((acc, topic) => acc + topic.avgDeviation, 0) / topicAverages.length
+
+          lineGraphData.push({
+            value: generalAvgRating,
+            deviation: generalAvgDeviation * 1.96,
+            timestamp
+          })
+        })
+
+        return lineGraphData
+}
+
 
 /**
  * # useLearningElementRatingDashboard hook
@@ -191,57 +244,8 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
           maxRatingDeviation: 1
         })
 
-        // TODO: getLineGraphData()
-        // Sort the ratings by timestamp ascending.
-        const sortedRatings = learningElementRatingResponse.sort((a, b) => {
-          const aTime = new Date(a.timestamp).getTime()
-          const bTime = new Date(b.timestamp).getTime()
-          return aTime - bTime
-        })
-
-        // Get all the different timestamps.
-        const timestamps = Array.from(new Set(sortedRatings.map((r) => new Date(r.timestamp).getTime())))
-          .map((t) => new Date(t))
-          .sort((a, b) => a.getTime() - b.getTime())
-
-        const lineGraphData: { value: number; deviation: number; timestamp: Date }[] = []
-
-        // Calculate the average rating for each timestamp.
-        timestamps.forEach((timestamp) => {
-          const relevantRatings = sortedRatings.filter((r) => new Date(r.timestamp).getTime() <= timestamp.getTime())
-          const topicMap = relevantRatings.reduce(
-            (acc, rating) => ({
-              ...acc,
-              [rating.topic_id]: acc[rating.topic_id]
-                ? {
-                    sum: acc[rating.topic_id].sum + rating.rating_value,
-                    count: acc[rating.topic_id].count + 1,
-                    deviationSum: acc[rating.topic_id].deviationSum + rating.rating_deviation
-                  }
-                : {
-                    sum: rating.rating_value,
-                    count: 1,
-                    deviationSum: rating.rating_deviation
-                  }
-            }),
-            {} as { [topicId: number]: { sum: number; count: number; deviationSum: number } }
-          )
-
-          const topicAverages = Object.values(topicMap).map((topic) => ({
-            avgRating: topic.sum / topic.count,
-            avgDeviation: topic.deviationSum / topic.count
-          }))
-
-          const generalAvgRating = topicAverages.reduce((acc, topic) => acc + topic.avgRating, 0) / topicAverages.length
-          const generalAvgDeviation =
-            topicAverages.reduce((acc, topic) => acc + topic.avgDeviation, 0) / topicAverages.length
-
-          lineGraphData.push({
-            value: generalAvgRating,
-            deviation: generalAvgDeviation * 1.96,
-            timestamp
-          })
-        })
+        // Calculate the data for the line graph.
+        const lineGraphData = getLineGraphData(learningElementRatingResponse)
 
         // Set the data for the line graph.
         setLineGraphData(lineGraphData)
