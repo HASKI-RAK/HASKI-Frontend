@@ -108,13 +108,13 @@ const getSpiderData = (
 
 const getLineGraphData = (learningElementRatingResponse: LearningElementRating[]) => {
   // Sort the ratings by timestamp ascending.
-  const sortedRatings = learningElementRatingResponse.toSorted((a: LearningElementRating, b: LearningElementRating) => {
+  learningElementRatingResponse.sort((a: LearningElementRating, b: LearningElementRating) => {
     return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
   })
 
   // Get all the different timestamps.
   const timestamps = Array.from(
-    new Set(sortedRatings.map((r: LearningElementRating) => new Date(r.timestamp).getTime()))
+    new Set(learningElementRatingResponse.map((r: LearningElementRating) => new Date(r.timestamp).getTime()))
   )
     .map((t: number) => new Date(t))
     .sort((a, b) => a.getTime() - b.getTime())
@@ -123,7 +123,9 @@ const getLineGraphData = (learningElementRatingResponse: LearningElementRating[]
 
   // Calculate the average rating for each timestamp.
   timestamps.forEach((timestamp) => {
-    const relevantRatings = sortedRatings.filter((r) => new Date(r.timestamp).getTime() <= timestamp.getTime())
+    const relevantRatings = learningElementRatingResponse.filter(
+      (r) => new Date(r.timestamp).getTime() <= timestamp.getTime()
+    )
     const topicMap = relevantRatings.reduce(
       (
         acc: {
