@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
-import { Topic, User } from '@core'
+import { CourseResponse, Topic, User } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
@@ -22,6 +22,26 @@ export const useTopics = () => {
   // Context.
   const { addSnackbar } = useContext(SnackbarContext)
 
+  const getCourseTopics = (user: User, courseResponse: CourseResponse) => {
+    const courseTopics: Topic[] = []
+    courseResponse.courses.forEach((course) =>
+      // Get all topics of the course.
+      getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, course.id.toString())
+        .then((learningPathTopicResponse) => {
+          courseTopics.push(...learningPathTopicResponse.topics)
+        })
+        .catch((error) => {
+          addSnackbar({
+            message: t('error.fetchLearningPathTopic'),
+            severity: 'error',
+            autoHideDuration: 3000
+          })
+          log.error(t('error.fetchLearningPathTopic') + ' ' + error)
+        })
+    )
+    return courseTopics
+  }
+
   useEffect(() => {
     // Get the user.
     getUser()
@@ -29,27 +49,8 @@ export const useTopics = () => {
         // Get the courses of the user.
         getCourses(user.settings.user_id, user.lms_user_id, user.id)
           .then((courseResponse) => {
-            const courseTopics: Topic[] = []
-            Promise.all(
-              courseResponse.courses.map((course) =>
-                // Get all topics of the course.
-                getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, course.id.toString())
-                  .then((learningPathTopicResponse) => {
-                    courseTopics.push(...learningPathTopicResponse.topics)
-                  })
-                  .catch((error) => {
-                    addSnackbar({
-                      message: t('error.fetchLearningPathTopic'),
-                      severity: 'error',
-                      autoHideDuration: 3000
-                    })
-                    log.error(t('error.fetchLearningPathTopic') + ' ' + error)
-                  })
-              )
-            ).then(() => {
-              // TODO: Remove indentation
-              setTopics(courseTopics)
-            })
+            const courseTopics: Topic[] = getCourseTopics(user, courseResponse)
+            setTopics(courseTopics)
           })
           .catch((error) => {
             addSnackbar({
