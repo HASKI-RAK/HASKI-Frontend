@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { LinearProgress, LinearProgressProps, Tooltip, Typography } from '@common/components'
 
 /**
@@ -59,17 +60,18 @@ export type LinearProgressWithLabelProps = LinearProgressProps & {
  * ```
  */
 const LinearProgressWithLabel = (props: LinearProgressWithLabelProps) => {
+  const { t } = useTranslation()
   return (
     <div>
       <Tooltip title={'Completed learning elements'}>
-        <Typography sx={{ ml: props.textposition, mr: '0.5rem' }} variant="body1" color="text.secondary">
-          {'Learning progress: ' + props.text}
+        <Typography sx={{ ml: props.textposition, mr: '0.5rem' }} variant="body1" color="textPrimary">
+          {t('components.StyledLinearProgress.linearProgressWithLabel.learningProgress') + ': ' + props.text}
         </Typography>
       </Tooltip>
       <LinearProgress
         variant="determinate"
         {...props}
-        sx={{ ml: { xs: '16rem', sm: '0rem', md: '-7rem', lg: '-7rem', xl: '-11rem', xxl: '-26rem', xxxl: '-51rem' } }}
+        sx={{ ml: { xs: '16rem', sm: '0rem', md: '-8rem', lg: '-9rem', xl: '-12rem', xxl: '-28rem', xxxl: '-52rem' } }}
       />
     </div>
   )

@@ -777,6 +777,7 @@
   "components.ResultDescriptionListK.time below3-Description": "In terms of internal resource management strategies, it is clear to see that you are currently not taking enough time for your learning. It would probably have a positive effect if you tried to create clear learning periods for yourself in order to make your learning more effective.",
   "components.ResultDescriptionListK.time below3-Title": "Time has a value below 3",
   "components.StatisticsMenu.title": "Statistics",
+  "components.StyledLinearProgress.linearProgressWithLabel.learningProgress": "Learning Progress",
   "components.StudentRatingDashboard.empty": "This page fills with information about your rating as soon as you begin to work on exercises.",
   "components.StudentRatingDashboard.histogramTitle": "The rating distribution of all students",
   "components.StudentRatingDashboard.histogramUserInfo": "Your rating",
