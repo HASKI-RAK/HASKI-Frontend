@@ -84,6 +84,7 @@ export { default as CreateLearningElementClassificationsStep } from './CreateTop
 export { default as CreateLearningElementsStep } from './CreateTopic/Modal/CreateLearningElementsStep/CreateLearningElementsStep'
 export { default as CreateRemoteTopicsStep } from './CreateTopic/Modal/CreateRemoteTopicsStep/CreateRemoteTopicsStep'
 export { default as CreateAlgorithmsStep } from './CreateTopic/Modal/CreateAlgorithmsStep/CreateAlgorithmsStep'
+export { default as AddSolution } from './AddSolution/AddSolution'
 
 export * from './GlobalNav'
 export * from './Nodes' // This stays as is because it's not following the Component/Component structure

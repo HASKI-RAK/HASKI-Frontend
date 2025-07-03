@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, memo, useContext, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, memo, useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
@@ -13,21 +13,23 @@ import { usePersistedStore, useStore } from '@store'
 import { RemoteLearningElementWithSolution, Solution } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 import CreateLearningElementSolutionStep from '../CreateTopic/Modal/CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
 import SelectLearningElementStep from './SelectLearningElementStep/SelectLearningElementStep'
+import { postLearningElementSolution } from '@services'
 
 type AddSolutionModalProps = {
   open: boolean
+  activeStep: number
+  topicId?: number
+  setActiveStep: Dispatch<SetStateAction<number>>
   onClose: () => void
 }
 
-const AddSolutionModalProps = ({ open, onClose }: AddSolutionModalProps) => {
+const AddSolutionModalProps = ({ open, activeStep, topicId, setActiveStep, onClose }: AddSolutionModalProps) => {
     const { t } = useTranslation()
     const { addSnackbar } = useContext(SnackbarContext)
     const { courseId } = useParams()
-    const { topicId } = useParams()
     const getUser = usePersistedStore((state) => state.getUser)
     const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
     const [currentTopic, setCurrentTopic] = useState<RemoteTopics>()
-    const [activeStep, setActiveStep] = useState<number>(0)
     const [selectedLearningElements, setSelectedLearningElements] = useState<{
         [key: number]: RemoteLearningElementWithClassification[]
     }>({})
@@ -35,6 +37,28 @@ const AddSolutionModalProps = ({ open, onClose }: AddSolutionModalProps) => {
     const [learningElementsWithSolutions, setLearningElementsWithSolutions] = useState<{
         [key: number]: RemoteLearningElementWithSolution[]
     }>({})
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+
+    const handleSend = useCallback(() => {
+        if (!topicId) {
+            addSnackbar({ message: t('components.AddSolutionModal.noTopic'), severity: 'error' })
+            return
+        }
+        setIsLoading(true)
+        learningElementsWithSolutions[topicId]?.forEach((solution) => {
+            const outputJson = JSON.stringify({ solution_Lms_Id: solution.learningElementLmsId, activity_type: solution.solutionLmsType })
+            postLearningElementSolution({learningElementLmsId: solution.learningElementLmsId, outputJson})
+                .then(() => {
+                    addSnackbar({message: t('appGlobal.solutionAdded'), severity: 'success'})
+                })
+                .catch((error) => {
+                    handleError(t, addSnackbar, 'error.addSolution', error, 5000)
+                })
+                .finally(() => {
+                    setIsLoading(false)
+                })
+        })
+    }, [onClose])
     
     return (
         <Modal open={open} onClose={onClose}>
@@ -75,10 +99,7 @@ const AddSolutionModalProps = ({ open, onClose }: AddSolutionModalProps) => {
                             LearningElementsClassification={selectedLearningElements}
                             learningElementsWithSolutions={learningElementsWithSolutions}
                             onLearningElementSolutionChange={setLearningElementsWithSolutions}
-                            onNext={() => {
-                                // Handle next step logic here
-                                onClose()
-                            }}
+                            onNext={handleSend}
                             onBack={() => setActiveStep(1)}
                             nextButtonText={t('appGlobal.next')}
                         />
@@ -88,5 +109,5 @@ const AddSolutionModalProps = ({ open, onClose }: AddSolutionModalProps) => {
         </Modal>
     )
 }
+
 export default memo(AddSolutionModalProps)
-    

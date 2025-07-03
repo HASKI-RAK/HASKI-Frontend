@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Button, Grid } from '@common/components'
+import { Backdrop, Box, Button, CircularProgress, Grid } from '@common/components'
 import { CreateLearningElementSolutionTable } from '@components'
 import { RemoteTopics } from '@core'
 import {
@@ -18,6 +18,7 @@ interface CreateLearningElementSolutionStepProps {
   onNext: () => void
   onBack: () => void
   nextButtonText: string
+  isLoading?: boolean
 }
 
 const CreateLearningElementSolutionStep = ({
@@ -28,7 +29,8 @@ const CreateLearningElementSolutionStep = ({
   onLearningElementSolutionChange,
   onNext,
   onBack,
-  nextButtonText
+  nextButtonText,
+  isLoading
 }: CreateLearningElementSolutionStepProps) => {
   const { t } = useTranslation()
 
@@ -60,7 +62,10 @@ const CreateLearningElementSolutionStep = ({
               }
               onClick={onNext}
               sx={{ mr: -2 }}>
-              {nextButtonText}
+              {isLoading ? 
+                <Backdrop open={isLoading}>
+                  <CircularProgress color="inherit" />
+                </Backdrop> : nextButtonText}
             </Button>
           </Grid>
         </Box>

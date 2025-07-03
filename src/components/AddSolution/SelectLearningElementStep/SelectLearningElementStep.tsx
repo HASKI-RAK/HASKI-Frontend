@@ -10,7 +10,7 @@ import {
   Solution
 } from '../../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 
-interface CreateLearningElementSolutionStepProps {
+interface SelectLearningElementStep {
   selectedTopics: RemoteTopics[]
   selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }
   selectedSolutions: { [key: number]: Solution[] }
@@ -19,14 +19,14 @@ interface CreateLearningElementSolutionStepProps {
   onNext: () => void
 }
 
-const CreateLearningElementSolutionStep = ({
+const SelectLearningElementStep = ({
   selectedTopics,
   selectedSolutions,
   selectedLearningElements,
   learningElementsWithSolution,
   setSelectedLearningElements,
   onNext
-}: CreateLearningElementSolutionStepProps) => {
+}: SelectLearningElementStep) => {
   const { t } = useTranslation()
 
   return (
@@ -61,4 +61,4 @@ const CreateLearningElementSolutionStep = ({
   )
 }
 
-export default memo(CreateLearningElementSolutionStep)
+export default memo(SelectLearningElementStep)

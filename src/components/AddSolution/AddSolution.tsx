@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Button, Grid } from '@common/components'
 import {
-  CreateLearningElementModal,
   RemoteLearningElementWithClassification,
   RemoteLearningElementWithSolution,
   Solution,
@@ -18,21 +17,24 @@ const CreateLearningElement = () => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
 
-  const [createLearningElementModalOpen, setCreateLearningElementModalOpen] = useState(false)
+  const [addSolutionModalOpen, setAddSolutionModalOpen] = useState(false)
   const [currentTopic, setCurrentTopic] = useState<Topic>()
   
   const [activeStep, setActiveStep] = useState<number>(0)
-  const [modalOpen, setModalOpen] = useState(false)
 
   const { courseId } = useParams()
   const { topicId } = useParams()
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
 
+  const handleOpen = useCallback(() => {
+    setAddSolutionModalOpen(true)
+  }, [setAddSolutionModalOpen])
+
   const handleClose = useCallback(() => {
-    setCreateLearningElementModalOpen(false)
+    setAddSolutionModalOpen(false)
     setActiveStep(0)
-  }, [setCreateLearningElementModalOpen])
+  }, [setAddSolutionModalOpen])
 
   useEffect(() => {
     if (!courseId || !topicId) return
@@ -58,16 +60,15 @@ const CreateLearningElement = () => {
         variant="contained"
         color="primary"
         sx={{ alignSelf: 'end', marginTop: '0.6rem' }}
-        onClick={useCallback(() => {
-          setCreateLearningElementModalOpen(true)
-        }, [setCreateLearningElementModalOpen])}>
-        {t('components.CreateLearningElement.createLearningElement')}
+        onClick={handleOpen}>
+        {t('components.AddSolution.addSolution')}
       </Button>
       <AddSolutionModal
-        open={modalOpen}
+        open={addSolutionModalOpen}
         activeStep={activeStep}
+        topicId={currentTopic?.id}
         setActiveStep={setActiveStep}
-        onClose={() => console.log('Close Add Solution Modal')}
+        onClose={handleClose}
       />
     </Grid>
   )

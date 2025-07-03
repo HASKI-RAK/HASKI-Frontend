@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom'
-import { memo, ReactNode, useState, useEffect, SetStateAction, Dispatch } from 'react'
+import { memo, ReactNode, useState, useEffect, useContext, SetStateAction, Dispatch } from 'react'
 import { useStore, usePersistedStore } from '@store'
 import { useTranslation } from 'react-i18next'
 import { Box, Grid, Typography, FormControlLabel, Checkbox, Paper, FormControl } from '@common/components'
+import { handleError } from '@components'
+import { SnackbarContext } from '@services'
 import { LearningElement, RemoteLearningElement, RemoteTopics, Topic } from '@core'
 import { RemoteLearningElementWithClassification } from '../../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 
@@ -26,6 +28,8 @@ const SelectLearningElementTable = ({
     const { topicId } = useParams()
 
     const { t } = useTranslation()
+
+    const { addSnackbar } = useContext(SnackbarContext)
 
     const getLearningPathElement = useStore((state) => state.getLearningPathElement)
     const getUser = usePersistedStore((state) => state.getUser)
@@ -56,6 +60,7 @@ const SelectLearningElementTable = ({
                     setLearningElements(learningElements)
                 })
                 .catch((error) => {
+                    handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 5000)
                     // Handle error
                 })
         })
@@ -67,7 +72,7 @@ const SelectLearningElementTable = ({
     <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
         <Grid item container justifyContent="center">
           <Typography variant="h6" sx={{ mt: '1rem' }}>
-            {t('') // add translation key here
+            {t('components.SelectLearningElementTable.title') // add translation key here
             }
           </Typography>
         </Grid>
