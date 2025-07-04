@@ -69,7 +69,7 @@ export const useRatingDashboard = (): RatingDashboardHookReturn => {
         }
       ],
       histogramData: [],
-      isLoading: false
+      isLoading: true
     }),
     []
   )

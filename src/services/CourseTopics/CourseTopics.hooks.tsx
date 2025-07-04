@@ -1,13 +1,15 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
-import { CourseResponse, Topic, User } from '@core'
+import { CourseResponse, LearningPathTopic, Topic, User } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
-// TODO RETURN TYPE
+// TODO: DOCU
+export type CourseTopicsReturnType = { topics: Topic[] }
 
-export const useTopics = () => {
+// TODO: DOCU
+export const useCourseTopics = (): CourseTopicsReturnType => {
   // Hooks
   const { t } = useTranslation()
 
@@ -22,14 +24,12 @@ export const useTopics = () => {
   // Context.
   const { addSnackbar } = useContext(SnackbarContext)
 
-  const getCourseTopics = (user: User, courseResponse: CourseResponse) => {
-    const courseTopics: Topic[] = []
-    courseResponse.courses.forEach((course) =>
-      // Get all topics of the course.
+  // Functions.
+  const getCourseTopics = async (courseResponse: CourseResponse, user: User) => {
+    // Get all topics for each course.
+    const courseTopics = courseResponse.courses.map((course) =>
       getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, course.id.toString())
-        .then((learningPathTopicResponse) => {
-          courseTopics.push(...learningPathTopicResponse.topics)
-        })
+        .then((learningPathTopic: LearningPathTopic) => learningPathTopic.topics)
         .catch((error) => {
           addSnackbar({
             message: t('error.fetchLearningPathTopic'),
@@ -37,9 +37,12 @@ export const useTopics = () => {
             autoHideDuration: 3000
           })
           log.error(t('error.fetchLearningPathTopic') + ' ' + error)
+          // Return an empty array if an error occurs.
+          return []
         })
     )
-    return courseTopics
+    // Wait for all promises to resolve and flatten the array of topics.
+    return (await Promise.all(courseTopics)).flat()
   }
 
   useEffect(() => {
@@ -48,9 +51,8 @@ export const useTopics = () => {
       .then((user: User) => {
         // Get the courses of the user.
         getCourses(user.settings.user_id, user.lms_user_id, user.id)
-          .then((courseResponse) => {
-            const courseTopics: Topic[] = getCourseTopics(user, courseResponse)
-            setTopics(courseTopics)
+          .then(async (courseResponse) => {
+            setTopics(await getCourseTopics(courseResponse, user))
           })
           .catch((error) => {
             addSnackbar({
@@ -59,14 +61,6 @@ export const useTopics = () => {
               autoHideDuration: 3000
             })
             log.error(t('error.fetchCourses') + ' ' + error)
-          })
-          .catch((error) => {
-            addSnackbar({
-              message: t('error.fetchLearningElementRatings'),
-              severity: 'error',
-              autoHideDuration: 3000
-            })
-            log.error(t('error.fetchLearningElementRatings') + ' ' + error)
           })
       })
       .catch((error) => {
@@ -79,8 +73,10 @@ export const useTopics = () => {
       })
   }, [])
 
-  return {
-    // TODO: MEMO
-    topics
-  }
+  return useMemo(
+    () => ({
+      topics
+    }),
+    [topics]
+  )
 }

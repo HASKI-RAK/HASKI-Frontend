@@ -1,5 +1,0 @@
-export * from './LearningElementRatingDashboard'
-export * from './RatingDashboard'
-export * from './RatingInfoDrawer'
-export * from './RatingInfoDrawerButton'
-export * from './StudentRatingDashboard'

@@ -1,96 +1,48 @@
-/*import { act, fireEvent, render, renderHook, screen, waitFor } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import LearningElementRatingDashboard from '../delete/LearningElementRatingDashboard'
+import { renderHook, waitFor } from '@testing-library/react'
+import { useLearningElementRatingDashboard } from './LearningElementRatingDashboard.hooks'
+import { mockServices } from 'jest.setup'
 
-declare global {
-  interface SVGElement {
-    getComputedTextLength?: () => number
-  }
-}
-
-beforeAll(() => {
-  SVGElement.prototype.getComputedTextLength = () => 100
-})
-
-describe('LearningElementRatingDashboard', () => {
-  it('should render correctly', async () => {
-    const { getByText, container, getAllByRole, rerender } = render(
-      <MemoryRouter>
-        <LearningElementRatingDashboard />
-      </MemoryRouter>
-    )
-
-    await new Promise(process.nextTick)
-
-    rerender(
-      <MemoryRouter>
-        <LearningElementRatingDashboard />
-      </MemoryRouter>
-    )
+describe('useLearningElementRatingDashboard', () => {
+  it('correctly fetches and calculates learning element rating dashboard data', async () => {
+    const { result } = renderHook(() => useLearningElementRatingDashboard())
 
     await waitFor(() => {
-      const value = getByText('0.805')
-      act(() => {
-        fireEvent.mouseOver(value)
+      expect(result.current.ratingValue).toBe(0.8055555555555555)
+      expect(result.current.ratingDeviation).toBe(0.8055555555555556)
+      expect(result.current.maxRatingDeviation).toBe(1)
+      expect(result.current.ratingValueTrend).toBe(0.5277777777777777)
+      expect(result.current.ratingDeviationTrend).toBe(0.5277777777777778)
+      expect(result.current.userRatingValue).toBe(0)
+      expect(result.current.spiderGraphData).toStrictEqual({
+        '1': 1200,
+        '2': 900,
+        '99': 800
       })
-
-      const valueTrend = container.querySelectorAll('image.value-trend')
-      act(() => {
-        fireEvent.mouseOver(valueTrend[0])
-      })
-
-      const deviation = getByText('0.80')
-      act(() => {
-        fireEvent.mouseOver(deviation)
-      })
-
-      const deviationTrend = container.querySelectorAll('image.deviation-trend')
-      act(() => {
-        fireEvent.mouseOver(deviationTrend[0])
-      })
-
-      const dataPoints = container.querySelectorAll('circle.data-point')
-      act(() => {
-        fireEvent.mouseOver(dataPoints[0])
-        fireEvent.mouseOver(dataPoints[4])
-      })
-
-      const upperDeviation = container.querySelectorAll('circle.upper-deviation')
-      act(() => {
-        fireEvent.mouseOver(upperDeviation[0])
-      })
-
-      const lowerDeviation = container.querySelectorAll('circle.lower-deviation')
-      act(() => {
-        fireEvent.mouseOver(lowerDeviation[0])
-      })
-
-      const xAxis = container.querySelectorAll('g.x-axis')
-      act(() => {
-        fireEvent.mouseOver(xAxis[0])
-      })
-
-      const yAxis = container.querySelectorAll('g.y-axis')
-      act(() => {
-        fireEvent.mouseOver(yAxis[0])
-      })
-
-      const radioButton = getAllByRole('radio')
-      act(() => {
-        fireEvent.click(radioButton[1])
-      })
-
-      const header = container.querySelectorAll('th')
-      act(() => {
-        fireEvent.mouseOver(header[0])
-      })
+      expect(result.current.lineGraphData).toStrictEqual([
+        {
+          deviation: 196,
+          timestamp: new Date('2023-01-01T00:00:00.000Z'),
+          value: 1000
+        },
+        {
+          deviation: 182.9333333333333,
+          timestamp: new Date('2023-01-02T00:00:00.000Z'),
+          value: 933.3333333333334
+        }
+      ])
+      expect(result.current.histogramData).toStrictEqual([])
+      expect(result.current.isLoading).toBeFalsy()
     })
   })
-})
-*/
 
-describe('', () => {
-  it('should be true', () => {
-    expect(true).toBe(true)
+  it('returns isLoading true when fetchLearningElementRatings fails', async () => {
+    mockServices.fetchLearningElementRatings.mockImplementationOnce(() =>
+      Promise.reject(new Error('fetchLearningElementRatings error'))
+    )
+    const { result } = renderHook(() => useLearningElementRatingDashboard())
+
+    await waitFor(async () => {
+      expect(result.current.isLoading).toBeTruthy()
+    })
   })
 })
