@@ -7,7 +7,7 @@ import {
   RemoteLearningElementWithClassification,
   handleError
 } from '@components'
-import { RemoteLearningElement, RemoteTopics } from '@core'
+import { Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { RemoteLearningElementWithSolution, Solution } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
@@ -18,18 +18,17 @@ import { postLearningElementSolution } from '@services'
 type AddSolutionModalProps = {
   open: boolean
   activeStep: number
-  topicId?: number
   setActiveStep: Dispatch<SetStateAction<number>>
   onClose: () => void
 }
 
-const AddSolutionModalProps = ({ open, activeStep, topicId, setActiveStep, onClose }: AddSolutionModalProps) => {
+const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: AddSolutionModalProps) => {
     const { t } = useTranslation()
     const { addSnackbar } = useContext(SnackbarContext)
     const { courseId } = useParams()
     const getUser = usePersistedStore((state) => state.getUser)
     const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
-    const [currentTopic, setCurrentTopic] = useState<RemoteTopics>()
+    const [currentTopic, setCurrentTopic] = useState<Topic>()
     const [selectedLearningElements, setSelectedLearningElements] = useState<{
         [key: number]: RemoteLearningElementWithClassification[]
     }>({})
@@ -39,13 +38,15 @@ const AddSolutionModalProps = ({ open, activeStep, topicId, setActiveStep, onClo
     }>({})
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
+    const { topicId } = useParams()
+
     const handleSend = useCallback(() => {
-        if (!topicId) {
+        if (!currentTopic) {
             addSnackbar({ message: t('components.AddSolutionModal.noTopic'), severity: 'error' })
             return
         }
         setIsLoading(true)
-        learningElementsWithSolutions[topicId]?.forEach((solution) => {
+        learningElementsWithSolutions[currentTopic.id]?.forEach((solution) => {
             const outputJson = JSON.stringify({ solution_Lms_Id: solution.learningElementLmsId, activity_type: solution.solutionLmsType })
             postLearningElementSolution({learningElementLmsId: solution.learningElementLmsId, outputJson})
                 .then(() => {
@@ -59,6 +60,23 @@ const AddSolutionModalProps = ({ open, activeStep, topicId, setActiveStep, onClo
                 })
         })
     }, [onClose])
+
+    useEffect(() => {
+    if (!courseId || !topicId) return
+    getUser()
+      .then((user) => {
+        getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
+          .then((learningPathTopic) => {
+            setCurrentTopic(learningPathTopic.topics.filter((topic) => topic.id === parseInt(topicId))[0])
+          })
+          .catch((error) => {
+            handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 5000)
+          })
+      })
+      .catch((error) => {
+        handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
+      })
+  }, [topicId, getUser, getLearningPathTopic, courseId, t, addSnackbar])
     
     return (
         <Modal open={open} onClose={onClose}>

@@ -1,8 +1,7 @@
 import { memo, SetStateAction, Dispatch } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
-import { CreateLearningElementSolutionTable } from '@components'
-import { RemoteTopics, RemoteLearningElement } from '@core'
+import { RemoteTopics } from '@core'
 import SelectLearningElementTable from '../SelectLearningElementTable/SelectLearningElementTable'
 import {
   RemoteLearningElementWithSolution,
