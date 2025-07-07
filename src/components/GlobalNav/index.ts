@@ -1,4 +1,5 @@
 export { default as CourseMenu } from './CourseMenu/CourseMenu'
+export { useCourseMenu } from './CourseMenu/CourseMenu.hooks'
 export { default as FurtherInfoMenu } from './FurtherInfoMenu/FurtherInfoMenu'
 export { default as GlobalNavMenu } from './GlobalNavMenu/GlobalNavMenu'
 export { default as StatisticsMenu } from './StatisticsMenu/StatisticsMenu'

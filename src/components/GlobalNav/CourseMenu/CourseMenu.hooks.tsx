@@ -11,6 +11,16 @@ export type CourseMenuHookReturn = {
   readonly isLoading: boolean
 }
 
+/**
+ * useCourseMenu hook.
+ * @remarks
+ * Hook for the CourseMenu logic.
+ * Provides a list of courses available to the user.
+ *
+ * @returns - content and loading state.
+ *
+ * @category Hooks
+ */
 export const useCourseMenu = (): CourseMenuHookReturn => {
   const [isLoading, setIsLoading] = useState(true)
   const [content, setContent] = useState<GlobalNavContent[]>([])

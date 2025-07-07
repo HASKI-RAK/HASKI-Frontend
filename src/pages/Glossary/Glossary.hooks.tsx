@@ -37,11 +37,5 @@ export const useGlossary = (): GlossaryHookReturn => {
     )
   }, [])
 
-  return useMemo(
-    () => ({
-      collapseAll,
-      expandAll
-    }),
-    [collapseAll, expandAll]
-  )
+  return { collapseAll, expandAll }
 }

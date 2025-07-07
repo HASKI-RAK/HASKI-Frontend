@@ -9,13 +9,16 @@ import { AuthContext, RoleContext, RoleContextType } from '@services'
 
 const navigate = jest.fn()
 
-describe('Test the Home page-1', () => {
-  jest.useFakeTimers()
-  jest.mock('@common/hooks', () => ({
-    ...jest.requireActual('@common/hooks'),
-    useMediaQuery: jest.fn().mockReturnValue(true)
-  }))
-
+/**
+ * Displays empty state when no courses are returned.
+ * @interface
+ *
+ * @testID home-no-courses
+ * @userStory GH-324
+ * @see User Story {@link https://github.com/HASKI-RAK/HASKI-Frontend/issues/324 GH-324}
+ * @see {@link https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/pages/Home/Home.test.tsx#L24 Test Source}
+ */
+export const testHomeNoCourses = () =>
   test('fetching Course returns no courses', async () => {
     mockServices.fetchCourses.mockResolvedValueOnce({ courses: [] })
 
@@ -31,8 +34,30 @@ describe('Test the Home page-1', () => {
       expect(getByText('pages.home.noCourses')).toBeInTheDocument()
     })
   })
+
+/**
+ * Displays empty state when no courses are returned.
+ * @interface
+ * @see {@link https://github.com/HASKI-RAK/HASKI-Frontend/issues/324 GH-324}
+ * @see {@link https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/pages/Home/Home.test.tsx#L24 Test Source}
+ */
+describe('Test the Home page-1', () => {
+  jest.useFakeTimers()
+  jest.mock('@common/hooks', () => ({
+    ...jest.requireActual('@common/hooks'),
+    useMediaQuery: jest.fn().mockReturnValue(true)
+  }))
+  testHomeNoCourses()
 })
 
+/**
+ * Displays empty state when no courses are returned.
+ *
+ * @testID home-no-courses
+ * @userStory GH-324
+ * @see {@link https://github.com/HASKI-RAK/HASKI-Frontend/issues/324 GH-324}
+ * @see {@link https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/pages/Home/Home.test.tsx#L24 Test Source}
+ */
 describe('Test the Home page-2', () => {
   jest.useFakeTimers()
   beforeEach(() => {

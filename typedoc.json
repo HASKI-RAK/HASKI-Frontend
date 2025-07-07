@@ -5,21 +5,22 @@
   //  "entryPoints": ["./src/{pages,components,core,store,common,shared,services}/index.{ts,tsx}"],
   "commentStyle": "all",
   "entryPoints": [
-    "./src/pages/index.ts",
-    "./src/components/index.ts",
+    "./src/pages",
     "./src/core/index.ts",
     "./src/store/index.ts",
     "./src/common/index.ts",
     "./src/shared/index.ts",
-    "./src/services/index.ts"
+    "./src/services/index.ts",
+    "./src/components"
   ],
-  "exclude": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx", "./node_modules/**/*"],
+  "exclude": ["**/*.spec.ts", "**/*.spec.tsx", "./node_modules/**/*"],
   "plugin": [
     "typedoc-plugin-merge-modules",
     "typedoc-plugin-mermaid",
     "typedoc-plugin-coverage",
     "typedoc-plugin-missing-exports"
   ],
+  "readme": "./test.md",
   "sourceLinkTemplate": "https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/{path}#L{line}",
   "cleanOutputDir": true,
   "theme": "default",

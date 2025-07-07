@@ -10,7 +10,60 @@ import { usePersistedStore, useStore } from '@store'
 /**
  * # Home Page
  * Presents an overview of the courses.
- * @category Pages
+ *
+ * ```mermaid
+ * classDiagram
+ *   class Home {
+ *     - courses: Course[]
+ *     - coursesLoading: boolean
+ *     - activeStepCreateCourseModal: number
+ *     - createCourseModalOpen: boolean
+ *     - handleCloseCourseModal()
+ *     - noCourses()
+ *     + useEffect()
+ *     + render()
+ *   }
+ *   class AuthContext {
+ *     isAuth: boolean
+ *   }
+ *   class RoleContext {
+ *     isCourseCreatorRole: boolean
+ *   }
+ *   class SnackbarContext {
+ *     addSnackbar()
+ *   }
+ *   class usePersistedStore {
+ *     getUser()
+ *   }
+ *   class useStore {
+ *     getCourses()
+ *     clearCoursesCache()
+ *     _cache_Courses_record
+ *   }
+ *   class Course {
+ *     id
+ *     // ...
+ *   }
+ *   class Card
+ *   class CardContent
+ *   class Typography
+ *   class Skeleton
+ *   class Grid
+ *   Home --> AuthContext : useContext
+ *   Home --> RoleContext : useContext
+ *   Home --> SnackbarContext : useContext
+ *   Home --> usePersistedStore : getUser
+ *   Home --> useStore : getCourses, clearCoursesCache, _cache_Courses_record
+ *   Home --> CourseCard : course list rendering
+ *   Home --> CreateCourseCard : create modal
+ *   Home --> Card : for course/empty state
+ *   Home --> CardContent
+ *   Home --> Typography
+ *   Home --> Skeleton
+ *   Home --> Grid
+ *   CourseCard --> Course : course prop
+ * ```
+ * @category pages
  */
 
 export const Home = () => {

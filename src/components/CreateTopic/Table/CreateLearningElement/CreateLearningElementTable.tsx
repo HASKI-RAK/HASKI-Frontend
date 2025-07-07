@@ -5,12 +5,35 @@ import { SkeletonList } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
 import { useCreateLearningElementTable } from './CreateLearningElementTable.hooks'
 
+/**
+ * Props for the {@link CreateLearningElementTable} component.
+ */
 type CreateLearningElementTableProps = {
+  /**
+   * The list of topics (with their learning elements) to be displayed.
+   */
   selectedTopics: RemoteTopics[]
+  /**
+   * Callback triggered when the selection of learning elements changes.
+   *
+   * @param selectedLearningElements - The new selection state, mapped by topic ID.
+   */
   onLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
+  /**
+   * The currently selected learning elements, mapped by topic ID.
+   */
   selectedLearningElements: { [key: number]: RemoteLearningElement[] }
+  /**
+   * Boolean indicating whether the "select all learning elements" checkbox is checked.
+   */
   selectAllLearningElementsChecked: boolean
+  /**
+   * React state setter for the "select all" checkbox state.
+   */
   setSelectAllLearningElementsChecked: Dispatch<SetStateAction<boolean>>
+  /**
+   * Optional children to render (e.g., placeholders or additional content).
+   */
   children?: ReactNode
 }
 
@@ -31,7 +54,7 @@ const CreateLearningElementTable = ({
     setSelectAllLearningElementsChecked
   })
 
-  // Return early if no topics
+  // Render placeholder if no topics available
   if (selectedTopics.length === 0) {
     return (
       <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
@@ -113,4 +136,27 @@ const CreateLearningElementTable = ({
   )
 }
 
+/**
+ * Renders a table for selecting learning elements from a list of topics.
+ *
+ * Displays each topic with its associated learning elements as a group of checkboxes,
+ * along with a master "Select all" toggle. Utilizes {@link useCreateLearningElementTable}
+ * to centralize selection logic and keep UI in sync with state.
+ *
+ * If no topics are provided, renders a placeholder (`SkeletonList`) and optional children.
+ *
+ * @param props - See {@link CreateLearningElementTableProps}
+ * @returns A React component for learning element selection within topics.
+ *
+ * @example
+ * <CreateLearningElementTable
+ *   selectedTopics={topics}
+ *   selectedLearningElements={selectedElements}
+ *   onLearningElementChange={handleElementChange}
+ *   selectAllLearningElementsChecked={allChecked}
+ *   setSelectAllLearningElementsChecked={setAllChecked}
+ * />
+ *
+ * @see {@link useCreateLearningElementTable}
+ */
 export default memo(CreateLearningElementTable)

@@ -3,6 +3,10 @@ import { NodeProps } from 'reactflow'
 import { getNodeIcon, LearningPathLearningElementNode } from '@components'
 import BasicNode from '../BasicNode/BasicNode'
 
+const AdditionalLiteratureNode = (data: NodeProps<LearningPathLearningElementNode>) => {
+  return <BasicNode {...data} id="additional-literature-node" icon={getNodeIcon('ZL', 50)}></BasicNode>
+}
+
 /**
  * AdditionalLiteratureNode component.
  *
@@ -15,8 +19,4 @@ import BasicNode from '../BasicNode/BasicNode'
  *
  * @category Components
  */
-const AdditionalLiteratureNode = (data: NodeProps<LearningPathLearningElementNode>) => {
-  return <BasicNode {...data} id="additional-literature-node" icon={getNodeIcon('ZL', 50)}></BasicNode>
-}
-
 export default memo(AdditionalLiteratureNode)
