@@ -255,7 +255,7 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
         </Grid>
       ) : (
         <Typewriter delay={25} variant="h5" sx={{ minHeight: '50em' }} align="center">
-          {t(`components.${selectedDashboard}.empty`)}
+          {t(`components.${selectedDashboard}Dashboard.empty`)}
         </Typewriter>
       )}
     </>

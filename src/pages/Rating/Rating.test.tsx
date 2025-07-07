@@ -4,8 +4,8 @@ import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
 import Rating from './Rating'
 
-describe('RatingDashboard tests', () => {
-  it('renders correctly and buttons can be pressed', () => {
+describe('Rating', () => {
+  it('renders Rating page and toggles button on click', () => {
     const { getAllByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
         <MemoryRouter>

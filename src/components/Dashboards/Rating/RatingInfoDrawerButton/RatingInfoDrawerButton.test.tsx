@@ -2,8 +2,8 @@ import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 import RatingInfoDrawerButton from './RatingInfoDrawerButton'
 
-describe('DashboardInfoDrawerButton tests', () => {
-  it('renders open and can be closed', () => {
+describe('DashboardInfoDrawerButton', () => {
+  it('renders RatingInfoDrawerButton with isOpen set to true and triggers setIsOpen when the button is clicked', () => {
     jest.useFakeTimers()
     const mockSetIsOpen = jest.fn()
     const { getByRole } = render(
@@ -18,7 +18,7 @@ describe('DashboardInfoDrawerButton tests', () => {
     expect(mockSetIsOpen).toHaveBeenCalled()
   })
 
-  it('renders closed and can be opened', () => {
+  it('renders RatingInfoDrawerButton with isOpen set to false and triggers setIsOpen when the button is clicked', () => {
     jest.useFakeTimers()
     const mockSetIsOpen = jest.fn()
     const { getByRole } = render(

@@ -29,9 +29,9 @@ const RatingInfoDrawerButton = forwardRef(
             arrow
             title={
               isOpen ? (
-                <Typography variant="body2">{t('components.DashboardInfoDrawerButton.close')}</Typography> // TODO: RENAME
+                <Typography variant="body2">{t('components.RatingInfoDrawerButton.close')}</Typography>
               ) : (
-                <Typography variant="body2">{t('components.DashboardInfoDrawerButton.open')}</Typography> // TODO: RENAME
+                <Typography variant="body2">{t('components.RatingInfoDrawerButton.open')}</Typography>
               )
             }
             PopperProps={{ disablePortal: true }}>

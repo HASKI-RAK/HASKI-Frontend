@@ -52,10 +52,8 @@ const Rating = () => {
           <Grid container direction="column" alignItems="center" sx={{ mt: 5, width: '100%' }}>
             <Grid item>
               <ToggleButtonGroup value={selectedDashboard} onChange={handleChange} exclusive>
-                <ToggleButton value="StudentRating">{t('pages.ratingdashboard.studentRating')}</ToggleButton>
-                <ToggleButton value="LearningElementRating">
-                  {t('pages.ratingdashboard.learningElementRating')}
-                </ToggleButton>
+                <ToggleButton value="StudentRating">{t('pages.rating.studentRating')}</ToggleButton>
+                <ToggleButton value="LearningElementRating">{t('pages.rating.learningElementRating')}</ToggleButton>
               </ToggleButtonGroup>
             </Grid>
             <Grid sx={{ mt: 5 }} /** // TODO FIX THIS SHIT HERE SOMEHOW */>
