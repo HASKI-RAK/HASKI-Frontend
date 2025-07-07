@@ -12,24 +12,103 @@
 <div class="col-content">
 <div class="tsd-page-title">
 <h2>HASKI-Frontend Documentation</h2></div>
-<div class="tsd-panel tsd-typography"><a id="md:test-overview" class="tsd-anchor"></a><h1><a href="#md:test-overview">Test Overview</a></h1><p>This page documents which automated tests correspond to which features and user stories.</p>
-<a id="md:home-page" class="tsd-anchor"></a><h2><a href="#md:home-page">Home Page</a></h2><table>
+<div class="tsd-panel tsd-typography"><p><img src="https://wiki.haski.app/coverage.svg" alt="Documentation Coverage Status"></p>
+<a id="md:haski-frontend" class="tsd-anchor"></a><h1><a href="#md:haski-frontend">HASKI-Frontend</a></h1><p>The bridge between AI backend models and a Learning Management System (LMS), wrapped nicely as a web application 🎁.</p>
+<p>The complete <strong>technical documentation</strong> can be found <a href="https://wiki.haski.app">here</a>.</p>
+<a id="md:setup" class="tsd-anchor"></a><h2><a href="#md:setup">Setup</a></h2><ul>
+<li>Install a JavaScript Runtime like <a href="https://nodejs.org/">Node.js</a>.</li>
+<li>If you choose to use yarn as a package manager, install it globally via <code>npm install --global yarn</code>, otherwise use the <code>npm</code> equivalents in the following steps.</li>
+<li>Navigate into the root project directory, where <code>package.json</code> lays.</li>
+<li>Install the project dependencies via <code>yarn install</code></li>
+<li>Modify the <code>.env.development</code> or <code>.env.production file</code> to your needs (see below).</li>
+</ul>
+<a id="md:environment-variables" class="tsd-anchor"></a><h3><a href="#md:environment-variables">Environment variables</a></h3><p>To make the variables available during execution, you have to create a <code>env.development.json</code> and a <code>env.production.json</code> file in the public/config/ directory of the project.
+The content of the files should look like this:</p>
+<pre><code class="language-json"><span class="hl-0">{</span><br/><span class="hl-0">    </span><span class="hl-1">BACKEND=</span><span class="hl-2">&quot;http://fakedomain.com:5000&quot;</span><br/><span class="hl-0">    </span><span class="hl-1">MOODLE=</span><span class="hl-2">&quot;http://fakedomain.com&quot;</span><br/><span class="hl-0">    </span><span class="hl-1">LOG_LEVEL=</span><span class="hl-2">&quot;debug&quot;</span><br/><span class="hl-0">    </span><span class="hl-1">NODE_ENV=</span><span class="hl-2">&quot;development&quot;</span><br/><span class="hl-0">}</span>
+</code><button>Copy</button></pre>
+<p>Adapt the values to your needs. The <code>BACKEND</code> variable is the URL of the backend API. The <code>MOODLE</code> variable is the URL of the Moodle instance. The <code>LOG_LEVEL</code> variable is the log level of the application (trace, debug, info, warn, error). The <code>NODE_ENV</code> variable is the environment of the application.</p>
+<a id="md:scripts" class="tsd-anchor"></a><h3><a href="#md:scripts">Scripts</a></h3><ul>
+<li>Run for development: <code>yarn start</code></li>
+<li>Build for production: <code>yarn build-prod</code></li>
+<li>Serve production build: <code>yarn serve -s dist</code></li>
+<li>Run tests: <code>yarn test</code></li>
+<li>For linting: <code>yarn lint</code></li>
+</ul>
+<a id="md:docker" class="tsd-anchor"></a><h3><a href="#md:docker">Docker</a></h3><p>The volume <code>/public/config</code> contains the configuration files for the application. You can mount a local directory to this volume to use your own configuration files. the nginx server will serve the files in this directory. The default configuration files are located in the <code>public/config</code> directory of the project.</p>
+<ul>
+<li>Build docker image: <code>docker build -t haski-frontend:latest .</code></li>
+<li>Run docker image: <code>docker run -p 8080:80 -v /public/config:/usr/share/nginx/html/config haski-frontend:latest</code></li>
+</ul>
+<a id="md:development" class="tsd-anchor"></a><h2><a href="#md:development">Development</a></h2><a id="md:documentation" class="tsd-anchor"></a><h3><a href="#md:documentation">Documentation</a></h3><p>The documentation is located in the <a href="https://wiki.haski.app">wiki</a>. The project is structured in the following way:</p>
+<ul>
+<li><a href="https://wiki.haski.app/modules/common">Common</a></li>
+<li><a href="https://wiki.haski.app/modules/components">Components</a></li>
+<li><a href="https://wiki.haski.app/modules/core">Core</a></li>
+<li><a href="https://wiki.haski.app/modules/pages">Pages</a></li>
+<li><a href="https://wiki.haski.app/modules/services">Services</a></li>
+<li><a href="https://wiki.haski.app/modules/shared">Shared</a></li>
+<li><a href="https://wiki.haski.app/modules/store">Store</a></li>
+</ul>
+<a id="md:architecture" class="tsd-anchor"></a><h3><a href="#md:architecture">Architecture</a></h3><p>The frontend is built with <a href="https://reactjs.org/">React</a>, a JavaScript library for building user interfaces. It is bootstrapped with [Create React App](</p>
+<a id="md:code-style" class="tsd-anchor"></a><h3><a href="#md:code-style">Code style</a></h3><p>We use <a href="https://eslint.org/">ESLint</a> to enforce a consistent code style. A .prettierrc file is also included to format the code automatically.
+Run <code>yarn lint</code> to check for errors.
+It also runs <code>unimported</code> to check for unused imports. You will be prompted to install this package if you run <code>yarn lint</code> for the first time. You can run <code>yarn lint --fix</code> to fix some of the errors automatically.</p>
+<a id="md:testing" class="tsd-anchor"></a><h3><a href="#md:testing">Testing</a></h3><p>We use <a href="https://jestjs.io/">Jest</a> as a testing framework. Tests are located besides the actual files. The naming convention for test files is <code>*.test.(ts/tsx)</code>.</p>
+<a id="md:ide" class="tsd-anchor"></a><h3><a href="#md:ide">IDE</a></h3><p>Optional plugins for your development environment:</p>
+<table>
 <thead>
 <tr>
-<th>User Story</th>
-<th>Description</th>
-<th>Addiotional Github Tasks</th>
-<th>Test Source</th>
+<th>Plugin</th>
+<th>README</th>
+<th>Explanation</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Kurse können in HASKI erstellt werden <a href="https://github.com/HASKI-RAK/HASKI-Frontend/issues/324">GH-324</a></td>
-<td>No courses returned shows empty state</td>
-<td><a href="https://github.com/HASKI-RAK/HASKI-Frontend/issues/321">GH-321</a>, <a href="https://github.com/HASKI-RAK/HASKI-Frontend/issues/322">GH-322</a></td>
-<td><a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/pages/Home/Home.test.tsx#L20">Test Link</a></td>
+<td>SonarCube</td>
+<td><a href="https://www.sonarqube.org/">https://www.sonarqube.org/</a></td>
+<td>SonarCloud will automatically scan the code for required standards and notify you in the merge request.</td>
+</tr>
+<tr>
+<td>Babel JavaScript</td>
+<td><a href="https://babeljs.io/">https://babeljs.io/</a></td>
+<td>Compiles JavaScript.</td>
+</tr>
+<tr>
+<td>ESLint</td>
+<td><a href="https://eslint.org/">https://eslint.org/</a></td>
+<td>ESLint statically analyzes your code to quickly find problems.</td>
+</tr>
+<tr>
+<td>JavaScript and TypeScript</td>
+<td><a href="https://github.com/microsoft/vscode-typescript-next.git">https://github.com/microsoft/vscode-typescript-next.git</a></td>
+<td>TypeScript version used to power JavaScript and TypeScript IntelliSense.</td>
+</tr>
+<tr>
+<td>Npm Intellisense</td>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense">https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense</a></td>
+<td>Code completion for imports.</td>
+</tr>
+<tr>
+<td>Prettier</td>
+<td><a href="https://prettier.io/">https://prettier.io/</a></td>
+<td>Code formatter.</td>
+</tr>
+<tr>
+<td>Jest</td>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest">https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest</a></td>
+<td>Jest runner.</td>
+</tr>
+<tr>
+<td>GitLens</td>
+<td><a href="https://gitlens.amod.io/">https://gitlens.amod.io/</a></td>
+<td>GitLens supercharges the Git capabilities built into Visual Studio Code.</td>
+</tr>
+<tr>
+<td>Git History</td>
+<td><a href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory">https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory</a></td>
+<td>View git log, file history, compare branches or commits.</td>
 </tr>
 </tbody></table>
-<hr>
 </div></div>
 <div class="col-sidebar">
 <div class="page-menu">
@@ -52,10 +131,23 @@
 <ul>
 <li>
 <ul>
-<li><a href="#md:test-overview"><span>Test <wbr/>Overview</span></a></li>
+<li><a href="#md:haski-frontend"><span>HASKI-<wbr/>Frontend</span></a></li>
 <li>
 <ul>
-<li><a href="#md:home-page"><span>Home <wbr/>Page</span></a></li></ul></li></ul></li></ul></div></details></div>
+<li><a href="#md:setup"><span>Setup</span></a></li>
+<li>
+<ul>
+<li><a href="#md:environment-variables"><span>Environment variables</span></a></li>
+<li><a href="#md:scripts"><span>Scripts</span></a></li>
+<li><a href="#md:docker"><span>Docker</span></a></li></ul></li>
+<li><a href="#md:development"><span>Development</span></a></li>
+<li>
+<ul>
+<li><a href="#md:documentation"><span>Documentation</span></a></li>
+<li><a href="#md:architecture"><span>Architecture</span></a></li>
+<li><a href="#md:code-style"><span>Code style</span></a></li>
+<li><a href="#md:testing"><span>Testing</span></a></li>
+<li><a href="#md:ide"><span>IDE</span></a></li></ul></li></ul></li></ul></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="index.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>HASKI-<wbr/>Frontend <wbr/>Documentation</span></a>
 <ul class="tsd-small-nested-navigation">
