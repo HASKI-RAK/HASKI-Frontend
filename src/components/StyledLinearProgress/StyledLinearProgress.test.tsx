@@ -127,7 +127,9 @@ describe('StyledLinearProgress-1', () => {
     )
 
     await waitFor(() => {
-      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 1/3')
+      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe(
+        'components.StyledLinearProgress.linearProgressWithLabel.learningProgress: 1/3'
+      )
     })
   })
 
@@ -297,7 +299,7 @@ describe('StyledLinearProgress-1', () => {
 
       waitFor(() => {
         expect(getAllByTestId('Course-Card-Topic-Progress')[1].parentNode?.textContent).toBe(
-          'Learning progress: error..'
+          'components.StyledLinearProgress.linearProgressWithLabel.learningProgress: error..'
         )
       })
     })
@@ -487,7 +489,9 @@ describe('Course3', () => {
     )
 
     await waitFor(() => {
-      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe('Learning progress: 0/2')
+      expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe(
+        'components.StyledLinearProgress.linearProgressWithLabel.learningProgress: 0/2'
+      )
     })
   })
 })
