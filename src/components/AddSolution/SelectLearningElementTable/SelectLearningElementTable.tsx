@@ -9,7 +9,7 @@ import { LearningElement, RemoteLearningElement, RemoteTopics, Topic } from '@co
 import { RemoteLearningElementWithClassification } from '../../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 
 type SelectLearningElementTableProps = {
-    currentTopic: RemoteTopics
+    currentTopic: Topic
     selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }
     setSelectedLearningElements: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>>
     children?: ReactNode
@@ -36,9 +36,9 @@ const SelectLearningElementTable = ({
 
     const handleCheckboxChange = (learningElement: RemoteLearningElementWithClassification, checked:boolean) => {
       const updatedLearningElements = {
-        [currentTopic.topic_lms_id]: checked ?
-          [...(selectedLearningElements[currentTopic.topic_lms_id] || []), learningElement] :
-          (selectedLearningElements[currentTopic.topic_lms_id] || []).filter((el) => el.lms_id !== learningElement.lms_id)
+        [currentTopic.lms_id]: checked ?
+          [...(selectedLearningElements[currentTopic.lms_id] || []), learningElement] :
+          (selectedLearningElements[currentTopic.lms_id] || []).filter((el) => el.lms_id !== learningElement.lms_id)
       }
       setSelectedLearningElements(updatedLearningElements)
     }
@@ -46,7 +46,7 @@ const SelectLearningElementTable = ({
     useEffect(() => {
         if (!courseId || !topicId) return
         getUser().then((user) => {
-            getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId)
+            getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
                 .then((learningPathElement) => {
                     const learningElements = learningPathElement.path.map((element) => {
                         const learningElement : RemoteLearningElementWithClassification = {
@@ -64,7 +64,7 @@ const SelectLearningElementTable = ({
                     // Handle error
                 })
         })
-    })
+    }, [courseId, topicId, getUser, getLearningPathElement, t, addSnackbar, handleError, setLearningElements])
 
 
 
@@ -82,12 +82,12 @@ const SelectLearningElementTable = ({
             alignItems="center"
             justifyContent="center"
             direction="column"
-            key={'Create Topic - Learning Element Solution: ' + currentTopic.topic_lms_id}>
+            key={'Create Topic - Learning Element Solution: ' + currentTopic.lms_id}>
             <Paper sx={{ padding: '1rem', width: '95%' }}>
               <Box bgcolor={(theme) => theme.palette.info.light} borderRadius={3}>
                 <Grid item container justifyContent="center" alignItems="center">
                   <Typography variant="h6" gutterBottom>
-                    {currentTopic.topic_lms_name}
+                    {currentTopic.name}
                   </Typography>
                 </Grid>
               </Box>
@@ -95,13 +95,14 @@ const SelectLearningElementTable = ({
                 <Grid container alignItems="center" spacing={2} key={element.lms_id}>
                   <Grid item xs={6}>
                     <FormControlLabel control={
-                      <Checkbox checked={selectedLearningElements[currentTopic.topic_lms_id]?.some(el => el.lms_id === element.lms_id)} 
+                      <Checkbox checked={selectedLearningElements[currentTopic.lms_id]?.some(el => el.lms_id === element.lms_id)} 
                       onChange={(event) => handleCheckboxChange(element, event.target.checked)}/>} label={element.lms_learning_element_name} />
                   </Grid>
                 </Grid>
               ))}
             </Paper>
           </Grid>
+      {children}
     </Grid>
   )
 }

@@ -744,7 +744,7 @@
   "components.ResultDescriptionListK.time && literatureResearch below3-Title": "Time and literature research have a value below 3",
   "components.ResultDescriptionListK.time below3-Description": "In terms of internal resource management strategies, it is clear to see that you are currently not taking enough time for your learning. It would probably have a positive effect if you tried to create clear learning periods for yourself in order to make your learning more effective.",
   "components.ResultDescriptionListK.time below3-Title": "Time has a value below 3",
-  "components.SelectLearningElementTable.title": "Learning Elements",
+  "components.SelectLearningElementTable.title": "Learning Elements in Topic",
   "components.StatisticsMenu.title": "Statistics",
   "components.TableILS.active": "Active",
   "components.TableILS.balanced": "balanced",

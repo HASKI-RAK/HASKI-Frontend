@@ -57,7 +57,7 @@
   "components.AddSolutionModal.error": "Beim erstellen der Lösung ist ein Fehler aufgetreten",
   "components.AddSolutionModal.noTopic": "Topic ID konnte nicht gefunden werden",
   "components.AddSolution.addSolution": "Lösung hinzufügen",
-  "components.SelectLearningElementTable.title": "Lernelemente",
+  "components.SelectLearningElementTable.title": "Lernelemente im Topic",
   "components.BasicNode.deleteLearningElementSuccessful": "Das Lernelement wurde erfolgreich gelöscht",
   "components.BasicNode.deleteTooltip": "Lernelement löschen",
   "components.BasicNode.solutionTooltip": "Lösung anzeigen",

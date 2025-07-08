@@ -18,7 +18,6 @@ const CreateLearningElement = () => {
   const { addSnackbar } = useContext(SnackbarContext)
 
   const [addSolutionModalOpen, setAddSolutionModalOpen] = useState(false)
-  const [currentTopic, setCurrentTopic] = useState<Topic>()
   
   const [activeStep, setActiveStep] = useState<number>(0)
 
@@ -36,23 +35,7 @@ const CreateLearningElement = () => {
     setActiveStep(0)
   }, [setAddSolutionModalOpen])
 
-  useEffect(() => {
-    if (!courseId || !topicId) return
-    getUser()
-      .then((user) => {
-        getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
-          .then((learningPathTopic) => {
-            setCurrentTopic(learningPathTopic.topics.filter((topic) => topic.id === parseInt(topicId))[0])
-          })
-          .catch((error) => {
-            handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 5000)
-          })
-      })
-      .catch((error) => {
-        handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
-      })
-  }, [topicId, getUser, getLearningPathTopic, courseId, t, addSnackbar])
-
+  
   return (
     <Grid>
       <Button
@@ -66,7 +49,6 @@ const CreateLearningElement = () => {
       <AddSolutionModal
         open={addSolutionModalOpen}
         activeStep={activeStep}
-        topicId={currentTopic?.id}
         setActiveStep={setActiveStep}
         onClose={handleClose}
       />

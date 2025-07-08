@@ -1,7 +1,7 @@
 import { memo, SetStateAction, Dispatch } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
-import { RemoteTopics } from '@core'
+import { Topic } from '@core'
 import SelectLearningElementTable from '../SelectLearningElementTable/SelectLearningElementTable'
 import {
   RemoteLearningElementWithSolution,
@@ -10,7 +10,7 @@ import {
 } from '../../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 
 interface SelectLearningElementStep {
-  selectedTopics: RemoteTopics[]
+  selectedTopics: Topic
   selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }
   selectedSolutions: { [key: number]: Solution[] }
   learningElementsWithSolution: { [key: number]: RemoteLearningElementWithSolution[] }
@@ -31,7 +31,7 @@ const SelectLearningElementStep = ({
   return (
     <Grid container item>
       <SelectLearningElementTable
-        currentTopic={selectedTopics[0]}
+        currentTopic={selectedTopics}
         selectedLearningElements={selectedLearningElements}
         setSelectedLearningElements={setSelectedLearningElements}>
         <Box sx={{ padding: '1rem', width: '95%' }}>
@@ -40,14 +40,9 @@ const SelectLearningElementStep = ({
               variant="contained"
               color="primary"
               disabled={
-                // Every Solution has to be used
-                !selectedTopics.every((topic) =>
-                  selectedSolutions[topic.topic_lms_id]?.every((solution) =>
-                    learningElementsWithSolution[topic.topic_lms_id]?.some(
-                      (element) => element.solutionLmsId === solution.solutionLmsId
-                    )
-                  )
-                )
+                // At least one learning element must be selected
+                !selectedLearningElements[selectedTopics.lms_id] ||
+                selectedLearningElements[selectedTopics.lms_id]?.length === 0
               }
               onClick={onNext}
               sx={{ mr: -2 }}>

@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, memo, useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/components'
+import { Box, Fab, Grid, Modal, Paper, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
 import {
   RemoteLearningElementWithClassification,
@@ -46,7 +46,7 @@ const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: Add
             return
         }
         setIsLoading(true)
-        learningElementsWithSolutions[currentTopic.id]?.forEach((solution) => {
+        learningElementsWithSolutions[currentTopic.lms_id]?.forEach((solution) => {
             const outputJson = JSON.stringify({ solution_Lms_Id: solution.learningElementLmsId, activity_type: solution.solutionLmsType })
             postLearningElementSolution({learningElementLmsId: solution.learningElementLmsId, outputJson})
                 .then(() => {
@@ -79,8 +79,14 @@ const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: Add
   }, [topicId, getUser, getLearningPathTopic, courseId, t, addSnackbar])
     
     return (
+        !currentTopic ?
+        <Box sx={{ padding: '2rem', width: '80%', margin: 'auto', marginTop: '5rem' }}>
+            <h2>{t('components.AddSolutionModal.noTopic')}</h2>
+        </Box>
+        :
         <Modal open={open} onClose={onClose}>
             <Box sx={{ padding: '2rem', width: '80%', margin: 'auto', marginTop: '5rem' }}>
+            <Paper elevation={3} sx={{ padding: '2rem', position: 'relative' }}>
                 <Fab
                     id="close-modal-button"
                     color="primary"
@@ -93,7 +99,7 @@ const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: Add
                 <Grid container direction="column" spacing={3}>
                     <Grid item>
                         <Stepper activeStep={activeStep} alternativeLabel>
-                            {['Select Learning Elements', 'Select Classifications', 'Select Solutions'].map((label) => (
+                            {['Select Learning Elements', 'Select Solutions'].map((label) => (
                                 <Step key={label}>
                                     <StepButton onClick={() => setActiveStep(activeStep)}>{label}</StepButton>
                                 </Step>
@@ -102,7 +108,7 @@ const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: Add
                     </Grid>
                     {activeStep === 0 && (
                         <SelectLearningElementStep
-                            selectedTopics={[]}
+                            selectedTopics={currentTopic}
                             selectedLearningElements={selectedLearningElements}
                             selectedSolutions={selectedSolutions}
                             learningElementsWithSolution={learningElementsWithSolutions}
@@ -110,9 +116,17 @@ const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: Add
                             onNext={() => setActiveStep(1)}
                         />
                     )}
-                    {activeStep === 2 && (
+                    {activeStep === 1 && (
                         <CreateLearningElementSolutionStep
-                            selectedTopics={[]}
+                            selectedTopics={
+                                currentTopic
+                                    ? [{
+                                        topic_lms_id: currentTopic.lms_id,
+                                        topic_lms_name: currentTopic.name,
+                                        lms_learning_elements: []
+                                    }]
+                                    : []
+                            }
                             selectedSolutions={selectedSolutions}
                             LearningElementsClassification={selectedLearningElements}
                             learningElementsWithSolutions={learningElementsWithSolutions}
@@ -123,6 +137,7 @@ const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: Add
                         />
                     )}
                 </Grid>
+                </Paper>
             </Box>
         </Modal>
     )
