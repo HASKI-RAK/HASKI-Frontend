@@ -7,7 +7,7 @@ import {
   RemoteLearningElementWithClassification,
   handleError
 } from '@components'
-import { Topic } from '@core'
+import { LearningPathElement, Topic, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { RemoteLearningElementWithSolution, Solution } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
@@ -26,8 +26,12 @@ const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: Add
     const { t } = useTranslation()
     const { addSnackbar } = useContext(SnackbarContext)
     const { courseId } = useParams()
+
     const getUser = usePersistedStore((state) => state.getUser)
     const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
+    const getRemoteTopics = useStore((state) => state.getRemoteTopics)
+    const getLearningPathElement = useStore((state) => state.getLearningPathElement)
+
     const [currentTopic, setCurrentTopic] = useState<Topic>()
     const [selectedLearningElements, setSelectedLearningElements] = useState<{
         [key: number]: RemoteLearningElementWithClassification[]
@@ -77,6 +81,54 @@ const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: Add
         handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
       })
   }, [topicId, getUser, getLearningPathTopic, courseId, t, addSnackbar])
+
+
+  //filter out the learning elements that are already in the learning path
+  useEffect(() => {
+    if (!courseId || !topicId) return
+    getUser()
+      .then((user) =>
+        getRemoteTopics(courseId)
+          .then((topics: RemoteTopics[]) => {
+            // Filter remote topics by matching the current topic LMS ID
+            const remoteTopic = topics.find((topic) => topic.topic_lms_id === currentTopic?.lms_id)
+            return { user, remoteTopic }
+          })
+          .catch((error) => {
+            handleError(t, addSnackbar, 'error.fetchRemoteTopics', error, 3000)
+            throw error
+          })
+      )
+      .then(({ user, remoteTopic }) =>
+        getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId).then(
+          (learningPathElementData: LearningPathElement) => {
+            // Extract LMS IDs of learning elements already in the learning path
+            const existingLearningElementIds = learningPathElementData.path.map(
+              (element) => element.learning_element.lms_id
+            )
+
+            // Update remote topics by filtering out elements that already exist in the learning path
+            const filteredLearningElements = remoteTopic?.lms_learning_elements.filter(
+                (learningElement) => !existingLearningElementIds.includes(learningElement.lms_id)
+              )
+            const solutions : Solution[] = filteredLearningElements?.map((learningElement) => ({
+                solutionLmsId: learningElement.lms_id,
+                solutionLmsName: learningElement.lms_learning_element_name,
+                solutionLmsType: learningElement.lms_activity_type
+            } as Solution)) || []
+        })
+      )
+      .catch((error) => {
+        handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 3000)
+      })
+  }, [
+    activeStep,
+    setActiveStep,
+    topicId,
+    courseId,
+    selectedLearningElements,
+    setSelectedLearningElements,
+  ])
     
     return (
         !currentTopic ?

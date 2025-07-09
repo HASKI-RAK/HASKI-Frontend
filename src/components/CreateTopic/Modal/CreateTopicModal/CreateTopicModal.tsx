@@ -37,6 +37,7 @@ export type RemoteLearningElementWithSolution = {
 export type Solution = {
   solutionLmsId: number
   solutionLmsName: string
+  solutionLmsType?: string
 }
 
 const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopicModal }: CreateTopicModalProps) => {
