@@ -1,10 +1,10 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
+import { RatingDashboardHookReturn } from '@components'
 import { StudentRating, User } from '@core'
 import { fetchStudentRatings, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
-import { RatingDashboardHookReturn } from '../RatingDashboard/RatingDashboard.hooks'
 
 /**
  * # useStudentRatingDashboard hook
@@ -18,7 +18,7 @@ import { RatingDashboardHookReturn } from '../RatingDashboard/RatingDashboard.ho
  *
  * @example
  * ```tsx
- * const {
+ * const {@
  *  ratingValue,
  * ratingDeviation,
  * maxRatingDeviation,
@@ -56,24 +56,24 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
   const { addSnackbar } = useContext(SnackbarContext)
 
   // Utility functions.
-  const getMaxRatingValue = (ratings: StudentRating[]) => {
+  const getMaxRatingValue = useCallback((ratings: StudentRating[]) => {
     return Math.max(...ratings.map((rating) => rating.rating_value))
-  }
+  }, [])
 
   // TODO: DOCU
-  const getMaxRatingDeviation = (ratings: StudentRating[]) => {
+  const getMaxRatingDeviation = useCallback((ratings: StudentRating[]) => {
     return Math.max(...ratings.map((rating) => rating.rating_deviation))
-  }
+  }, [])
 
   // TODO: DOCU
-  const getUserRatings = (ratings: StudentRating[], userId: number) => {
+  const getUserRatings = useCallback((ratings: StudentRating[], userId: number) => {
     return ratings
       .filter((rating) => rating.student_id === userId)
       .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
-  }
+  }, [])
 
   // TODO: DOCU
-  const getCategorizedRatings = (userRatings: StudentRating[]) => {
+  const getCategorizedRatings = useCallback((userRatings: StudentRating[]) => {
     return userRatings.reduce(
       (acc, rating) => ({
         ...acc,
@@ -81,10 +81,10 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
       }),
       {} as Record<string, StudentRating[]>
     )
-  }
+  }, [])
 
   // TODO: DOCU
-  const getSpiderGraphData = (categorizedRatings: Record<string, StudentRating[]>) => {
+  const getSpiderGraphData = useCallback((categorizedRatings: Record<string, StudentRating[]>) => {
     return Object.keys(categorizedRatings).reduce(
       (acc: { [key: string]: number }, key) => ({
         ...acc,
@@ -92,10 +92,10 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
       }),
       {}
     )
-  }
+  }, [])
 
   // TODO: getTotals()
-  const getTotals = (categorizedRatings: Record<string, StudentRating[]>) => {
+  const getTotals = useCallback((categorizedRatings: Record<string, StudentRating[]>) => {
     return Object.values(categorizedRatings).reduce(
       (acc, ratings) => {
         const [current, previous] = ratings
@@ -117,10 +117,10 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
         previous: { ratingValue: 0, ratingDeviation: 0 }
       }
     )
-  }
+  }, [])
 
   // TODO: DOCU
-  const getLineGraphData = (userRatings: StudentRating[]) => {
+  const getLineGraphData = useCallback((userRatings: StudentRating[]) => {
     // Sort the ratings by timestamp ascending.
     const sortedRatings = [...userRatings].sort(
       (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
@@ -136,10 +136,10 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
         timestamp: new Date(rating.timestamp)
       }
     })
-  }
+  }, [])
 
   // TODO: DOCU
-  const getHistogramData = (ratings: StudentRating[]) => {
+  const getHistogramData = useCallback((ratings: StudentRating[]) => {
     // Get the latest of each student-topic pair.
     const latestRatings = ratings.reduce((acc, rating) => {
       const key = `${rating.student_id}-${rating.topic_id}`
@@ -163,7 +163,7 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
 
     // Calculate the histogram data.
     return Object.values(studentAverages).map(({ sum, count }) => sum / count)
-  }
+  }, [])
 
   useEffect(() => {
     // Get the user.
