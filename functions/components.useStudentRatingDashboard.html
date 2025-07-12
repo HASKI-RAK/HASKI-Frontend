@@ -20,18 +20,17 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="useStudentRatingDashboard"><span class="tsd-kind-call-signature">use<wbr/>Student<wbr/>Rating<wbr/>Dashboard</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/components.RatingDashboardHookReturn.html" class="tsd-signature-type tsd-kind-type-alias">RatingDashboardHookReturn</a><a href="#useStudentRatingDashboard" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><g stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" id="icon-anchor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></g></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><a id="md:usestudentratingdashboard-hook" class="tsd-anchor"></a><h1><a href="#md:usestudentratingdashboard-hook">useStudentRatingDashboard hook</a></h1><p>Fetches the student ratings and calculates the data for student rating dashboard.</p>
+<div class="tsd-comment tsd-typography"><p>Custom hook to retrieve and process student rating data for the rating dashboard.</p>
+<p>This hook fetches the rating of a student and calculates the data for the visualizations on the rating dashboard.</p>
 </div>
-<h4 class="tsd-returns-title">Returns <a href="../types/components.RatingDashboardHookReturn.html" class="tsd-signature-type tsd-kind-type-alias">RatingDashboardHookReturn</a></h4><p>StudentRatingDashboardHookReturn</p>
+<h4 class="tsd-returns-title">Returns <a href="../types/components.RatingDashboardHookReturn.html" class="tsd-signature-type tsd-kind-type-alias">RatingDashboardHookReturn</a></h4><p>See <a href="../types/components.RatingDashboardHookReturn.html" class="tsd-kind-type-alias">RatingDashboardHookReturn</a>.</p>
 
 <div class="tsd-comment tsd-typography">
-<h4>Remarks</h4><p>This hook is used in the StudentRatingDashboard component as default.</p>
-
-<h4>Example</h4><pre><code class="language-tsx"><span class="hl-3">const</span><span class="hl-0"> {@</span><br/><span class="hl-0"> </span><span class="hl-4">ratingValue</span><span class="hl-0">,</span><br/><span class="hl-4">ratingDeviation</span><span class="hl-0">,</span><br/><span class="hl-4">maxRatingDeviation</span><span class="hl-0">,</span><br/><span class="hl-4">ratingValueTrend</span><span class="hl-0">,</span><br/><span class="hl-4">ratingDeviationTrend</span><span class="hl-0">,</span><br/><span class="hl-4">spiderGraphData</span><span class="hl-0">,</span><br/><span class="hl-4">histogramData</span><br/><span class="hl-4">lineGraphData</span><span class="hl-0">,</span><br/><span class="hl-4">isLoading</span><span class="hl-0">,</span><br/><span class="hl-0">} = </span><span class="hl-5">useStudentRatingDashboard</span><span class="hl-0">()</span>
+<h4>Example</h4><pre><code class="language-tsx"><span class="hl-7">const</span><span class="hl-0"> {</span><br/><span class="hl-0"> </span><span class="hl-9">isLoading</span><span class="hl-0">,</span><br/><span class="hl-0"> </span><span class="hl-9">userRatingValue</span><span class="hl-0">,</span><br/><span class="hl-0"> </span><span class="hl-9">ratingValue</span><span class="hl-0">,</span><br/><span class="hl-0"> </span><span class="hl-9">ratingDeviation</span><span class="hl-0">,</span><br/><span class="hl-0"> </span><span class="hl-9">maxRatingDeviation</span><span class="hl-0">,</span><br/><span class="hl-0"> </span><span class="hl-9">ratingDeviationTrend</span><span class="hl-0">,</span><br/><span class="hl-0"> </span><span class="hl-9">ratingValueTrend</span><span class="hl-0">,</span><br/><span class="hl-0"> </span><span class="hl-9">spiderGraphData</span><span class="hl-0">,</span><br/><span class="hl-0"> </span><span class="hl-9">lineGraphData</span><span class="hl-0">,</span><br/><span class="hl-0"> </span><span class="hl-9">histogramData</span><br/><span class="hl-0">} = </span><span class="hl-10">useStudentRatingDashboard</span><span class="hl-0">()</span>
 </code><button>Copy</button></pre>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/components/Dashboards/Rating/StudentRatingDashboard/StudentRatingDashboard.hooks.tsx#L34">src/components/Dashboards/Rating/StudentRatingDashboard/StudentRatingDashboard.hooks.tsx:34</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/HASKI-RAK/HASKI-Frontend/blob/main/src/components/Dashboards/Rating/StudentRatingDashboard/StudentRatingDashboard.hooks.tsx#L59">src/components/Dashboards/Rating/StudentRatingDashboard/StudentRatingDashboard.hooks.tsx:59</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -46,14 +45,7 @@
 <li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
 <li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div>
 <div class="tsd-theme-toggle">
-<h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
-<details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary">
-<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg>On This Page</h3></summary>
-<div class="tsd-accordion-details">
-<ul>
-<li>
-<ul>
-<li><a href="#md:usestudentratingdashboard-hook"><span>use<wbr/>Student<wbr/>Rating<wbr/>Dashboard hook</span></a></li></ul></li></ul></div></details></div>
+<h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../index.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>HASKI-<wbr/>Frontend <wbr/>Documentation</span></a>
 <ul class="tsd-small-nested-navigation">
@@ -130,8 +122,8 @@
 <li><a href="components.PrivacyModal.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Privacy<wbr/>Modal</span></a></li>
 <li><a href="components.QuestionnaireQuestionsModal.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Questionnaire<wbr/>Questions<wbr/>Modal</span></a></li>
 <li><a href="components.RatingDashboard.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Rating<wbr/>Dashboard</span></a></li>
-<li><a href="components.RatingInfoDrawer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Rating<wbr/>Info<wbr/>Drawer</span></a></li>
-<li><a href="components.RatingInfoDrawerButton.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Rating<wbr/>Info<wbr/>Drawer<wbr/>Button</span></a></li>
+<li><a href="components.RatingDashboardDrawer.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Rating<wbr/>Dashboard<wbr/>Drawer</span></a></li>
+<li><a href="components.RatingDashboardDrawerButton.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Rating<wbr/>Dashboard<wbr/>Drawer<wbr/>Button</span></a></li>
 <li><a href="components.ResponsiveMiniMap.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Responsive<wbr/>Mini<wbr/>Map</span></a></li>
 <li><a href="components.ResultDescriptionILS.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Result<wbr/>DescriptionILS</span></a></li>
 <li><a href="components.ResultDescriptionListK.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>Result<wbr/>Description<wbr/>ListK</span></a></li>
