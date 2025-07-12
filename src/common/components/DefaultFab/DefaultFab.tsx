@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { forwardRef, memo, Ref } from 'react'
 import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import DefaultFab from '@mui/material/Fab'
 import { FabProps as DefaultFabProps } from '@common/components'
@@ -38,9 +38,12 @@ const WrappedFab = withXAPI(DefaultFab, {
  *
  * @category Components
  */
-const Fab = ({ ...props }: FabProps) => {
+const Fab = forwardRef(({ ...props }: FabProps, ref: Ref<HTMLButtonElement>) => {
   const { pageName } = usePageName()
-  return <WrappedFab pageName={pageName} {...props} />
-}
+  return <WrappedFab ref={ref} pageName={pageName} {...props} />
+})
 
 export default memo(Fab)
+
+// eslint-disable-next-line
+Fab.displayName = 'Fab'
