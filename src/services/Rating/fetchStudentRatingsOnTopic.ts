@@ -3,18 +3,26 @@ import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
 /**
- * # fetchStudentRatingsOnTopic service
+ * Sends a GET request to fetch all student ratings corresponding to a specific student and topic from the backend.
  *
- * Fetches all student ratings associated with the student and topic from the backend.
+ * This service functions sends an HTTP request to retrieve all student ratings associated
+ * with a specific student ID and topic ID from the database using the backend API.
+ * Returns an empty array if no ratings are present.
  *
- * @param studentId - The id of the student
- * @param topicId  - The id of the topic
+ * @param studentId - The id of the student.
+ * @param topicId - The id of the topic.
  *
- * @remarks
- * Returns an empty array, if there are no ratings present.
- * Throws an error if either studentId or topicId is empty.
+ * @category Services
+ *
+ * @throws If either studentId or topicId is not provided.
+ *
+ * @example
+ * ```ts
+ * const studentRatings = await fetchStudentRatingsOnTopic(studentId, topicId)
+ * ```
  */
 export const fetchStudentRatingsOnTopic: StudentRatingReturn = async (studentId?: number, topicId?: number) => {
+  // todo unused
   if (!studentId || !topicId) {
     throw new Error('studentId and topicId are required')
   }

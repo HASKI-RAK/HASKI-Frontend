@@ -3,40 +3,55 @@ import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
 import { RatingDashboardHookReturn } from '@components'
 import { LearningElementRating, LearningElementRatingResponse } from '@core'
-import { fetchLearningElementRatings, SnackbarContext } from '@services'
+import { AuthContext, fetchLearningElementRatings, SnackbarContext } from '@services'
 
 /**
- * # useLearningElementRatingDashboard hook
+ * Custom hook to retrieve and process learning element rating data for the rating dashboard.
  *
- * Fetches the learning element ratings and calculates the data for the learning element rating dashboard.
+ * This hook fetches the rating of all learning elements and calculates the data for the visualizations on the rating dashboard.
  *
- * @returns LearningElementRatingDashboardHookReturn
+ * @category Hooks
  *
- * @remarks
- * This hook is used in the LearningElementRatingDashboard component as default.
+ * @returns See {@link RatingDashboardHookReturn}.
  *
  * @example
  * ```tsx
  * const {
- * ratingValue,
- * ratingDeviation,
- * maxRatingDeviation,
- * ratingValueTrend,
- * ratingDeviationTrend,
- * spiderGraphData,
- * lineGraphData,
- * isLoading,
+ *  ratingValue,
+ *  ratingDeviation,
+ *  maxRatingDeviation,
+ *  ratingValueTrend,
+ *  ratingDeviationTrend,
+ *  spiderGraphData,
+ *  lineGraphData,
+ *  isLoading,
  * } = useLearningElementRatingDashboard()
  * ```
  */
 export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn => {
-  // Hooks
+  // Hook
   const { t } = useTranslation()
 
-  // States.
+  // Context
+  const { addSnackbar } = useContext(SnackbarContext)
+  const { isAuth } = useContext(AuthContext)
+
+  // States
+  /**
+   * Tracks whether the data is currently being loaded.
+   */
   const [isLoading, setIsLoading] = useState(true)
+  /**
+   * Stores the data for the spider graph.
+   */
   const [spiderGraphData, setSpiderGraphData] = useState<Record<string, number>>({})
+  /**
+   * Stores the data for the line graph.
+   */
   const [lineGraphData, setLineGraphData] = useState<{ value: number; deviation: number; timestamp: Date }[]>([])
+  /**
+   * Stores th rating statistics of the learning elements.
+   */
   const [ratingStats, setRatingStats] = useState({
     ratingValue: 0,
     ratingDeviation: 0,
@@ -45,21 +60,30 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
     ratingDeviationTrend: 0
   })
 
-  // Context.
-  const { addSnackbar } = useContext(SnackbarContext)
-
-  // Utility functions.
-  // TODO: DOCU
+  // Utility functions
+  /**
+   * Filters the maximum rating value from a list of learning element ratings.
+   *
+   * @param ratings - List of learning element ratings.
+   */
   const getMaxRatingValue = useCallback((ratings: LearningElementRating[]) => {
     return Math.max(...ratings.map((rating) => rating.rating_value))
   }, [])
 
-  // TODO: DOCU
+  /**
+   * Filter the maximum rating deviation from a list of learning element ratings.
+   *
+   * @param ratings - List of learning element ratings.
+   */
   const getMaxRatingDeviation = useCallback((ratings: LearningElementRating[]) => {
     return Math.max(...ratings.map((rating) => rating.rating_deviation))
   }, [])
 
-  // TODO: DOCU
+  /**
+   * Calculates the average most recent and second-most recent rating value and deviation per topic.
+   *
+   * @param learningElementRatingResponse - List of ratings for all learning elements.
+   */
   const getTopicAverages = useCallback((learningElementRatingResponse: LearningElementRatingResponse) => {
     // Group ratings by learning element and topic, keeping only the latest and second latest ratings.
     const groupedRatings = learningElementRatingResponse.reduce((acc, rating) => {
@@ -134,6 +158,11 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
     })
   }, [])
 
+  /**
+   * Aggregates the latest rating value per topic for the spider graph.
+   *
+   * @param topicAverages - List of the average rating per topic.
+   */
   const getSpiderData = useCallback(
     (
       topicAverages: {
@@ -154,6 +183,12 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
     []
   )
 
+  /**
+   * Sort learning element ratings by timestamp and calculates the average rating value and
+   * deviation at each point in time for the line graph.
+   *
+   * @param learningElementRatingResponse - List of ratings for all learning elements.
+   */
   const getLineGraphData = useCallback((learningElementRatingResponse: LearningElementRating[]) => {
     // Sort the ratings by timestamp ascending.
     learningElementRatingResponse.sort((a: LearningElementRating, b: LearningElementRating) => {
@@ -223,8 +258,11 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
   }, [])
 
   useEffect(() => {
+    // If the user is not authenticated, do not fetch ratings.
+    if (!isAuth) return
+
     // Fetch all learning element ratings.
-    fetchLearningElementRatings()
+    fetchLearningElementRatings() // todo -> getLearningElementRatings
       .then((learningElementRatingResponse: LearningElementRatingResponse) => {
         // Get the max rating value.
         const maxRatingValue = getMaxRatingValue(learningElementRatingResponse)

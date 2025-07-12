@@ -1,10 +1,17 @@
 import { renderHook, waitFor } from '@testing-library/react'
 import { useStudentRatingDashboard } from './StudentRatingDashboard.hooks'
 import { mockServices } from 'jest.setup'
+import { AuthContext } from '@services'
 
 describe('useStudentRatingDashboard', () => {
   it('correctly fetches and calculates student rating dashboard data', async () => {
-    const { result } = renderHook(() => useStudentRatingDashboard())
+    const { result } = renderHook(() => useStudentRatingDashboard(), {
+      wrapper: ({ children }) => (
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          {children}
+        </AuthContext.Provider>
+      )
+    })
 
     await waitFor(() => {
       expect(result.current.ratingValue).toBe(0.75)
@@ -41,7 +48,13 @@ describe('useStudentRatingDashboard', () => {
 
   it('returns isLoading true when fetchUser fails', async () => {
     mockServices.fetchUser.mockImplementationOnce(() => Promise.reject(new Error('fetchUser error')))
-    const { result } = renderHook(() => useStudentRatingDashboard())
+    const { result } = renderHook(() => useStudentRatingDashboard(), {
+      wrapper: ({ children }) => (
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          {children}
+        </AuthContext.Provider>
+      )
+    })
 
     await waitFor(async () => {
       expect(result.current.isLoading).toBeTruthy()
@@ -52,7 +65,27 @@ describe('useStudentRatingDashboard', () => {
     mockServices.fetchStudentRatings.mockImplementationOnce(() =>
       Promise.reject(new Error('fetchStudentRatings error'))
     )
-    const { result } = renderHook(() => useStudentRatingDashboard())
+    const { result } = renderHook(() => useStudentRatingDashboard(), {
+      wrapper: ({ children }) => (
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          {children}
+        </AuthContext.Provider>
+      )
+    })
+
+    await waitFor(async () => {
+      expect(result.current.isLoading).toBeTruthy()
+    })
+  })
+
+  it('returns isLoading true when isAuth is false', async () => {
+    const { result } = renderHook(() => useStudentRatingDashboard(), {
+      wrapper: ({ children }) => (
+        <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>
+          {children}
+        </AuthContext.Provider>
+      )
+    })
 
     await waitFor(async () => {
       expect(result.current.isLoading).toBeTruthy()

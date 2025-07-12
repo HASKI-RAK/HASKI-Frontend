@@ -1,55 +1,79 @@
 import { useMemo } from 'react'
 
 /**
- * # LearningElementRatingDashboardHookReturn type
- *
- * Represents the return type of the useLearningElementRatingDashboard hook.
- *
- * @prop ratingValue - The average normalized rating value of all learning elements.
- * @prop ratingDeviation - The average normalized rating deviation of all learning elements.
- * @prop maxRatingDeviation - The maximum normalized rating deviation of all learning elements.
- * @prop ratingValueTrend - The normalized trend of the average rating value of all learning elements.
- * @prop ratingDeviationTrend - The normalized trend of the average rating deviation of all learning elements.
- * @prop spiderGraphData - The data for the spider graph.
- * @prop lineGraphData - The data for the line graph.
- * @prop isLoading - The loading state.
- */
-/**
- * # RatingDashboardHookReturn type
- * TODO
- * Represents the return type of the useRatingDashboard hook.
- *
- * @prop userRatingValue - The rating value of the user.
- * @prop ratingValue - The average normalized rating value of the user.
- * @prop ratingDeviation - The average normalized rating deviation of the user.
- * @prop maxRatingDeviation - The maximum normalized rating deviation of the user.
- * @prop ratingValueTrend - The normalized rating value trend of the user.
- * @prop ratingDeviationTrend - The normalized rating deviation trend of the user.
- * @prop spiderGraphData - The data for the spider graph.
- * @prop lineGraphData - The data for the line graph.
- * @prop histogramData - The data for the histogram.
- * @prop isLoading - The loading state of the data.
+ * Return type for the {@link useRatingDashboard} hook.
  */
 export type RatingDashboardHookReturn = {
+  /**
+   * The current rating value of a student.
+   */
   userRatingValue: number
+  /**
+   * The average normalized rating value of a student or learning elements.
+   */
   ratingValue: number
+  /**
+   * The average normalized rating deviation of a student or learning elements.
+   */
   ratingDeviation: number
+  /**
+   * The maximum normalized rating deviation of a student or learning elements.
+   */
   maxRatingDeviation: number
+  /**
+   * The trend of the normalized rating value for a student or learning elements.
+   */
   ratingValueTrend: number
+  /**
+   * The trend of the normalized rating deviation for a student or learning elements.
+   */
   ratingDeviationTrend: number
+  /**
+   * Data for the spider graph, including topic labels and corresponding value.
+   */
   spiderGraphData: Record<string, number>
+  /**
+   * Data for the line graph, including value, deviation, and timestamp.
+   */
   lineGraphData: {
     value: number
     deviation: number
     timestamp: Date
   }[]
+  /**
+   * Rating distribution data for the histogram.
+   */
   histogramData: number[]
+  /**
+   * Whether the data is currently loading.
+   */
   isLoading: boolean
 }
 
 /**
+ * Hook for initializing default rating dashboard data.
  *
- * @returns
+ * This hook returns placeholder values for all properties in {@link RatingDashboardHookReturn}.
+ *
+ * @category Hooks
+ *
+ * @returns Default values used in the rating dashboard.
+ *
+ * @example
+ * ```tsx
+ * const {
+ *  isLoading,
+ *  userRatingValue,
+ *  ratingValue,
+ *  ratingDeviation,
+ *  maxRatingDeviation,
+ *  ratingDeviationTrend,
+ *  ratingValueTrend,
+ *  spiderGraphData,
+ *  lineGraphData,
+ *  histogramData
+ * } = useRatingDashboard()
+ * ```
  */
 export const useRatingDashboard = (): RatingDashboardHookReturn => {
   return useMemo(

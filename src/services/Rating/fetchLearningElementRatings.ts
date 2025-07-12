@@ -3,12 +3,17 @@ import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
 /**
- * # fetchLearningElementRatings service
+ * Sends a GET request to fetch all learning element ratings from the backend.
  *
- * Fetches all learning element ratings from the backend.
+ * This service function sends an HTTP request to retrieve all learning element ratings from the database using the backend API.
+ * Returns an empty array if no ratings are present.
  *
- * @remarks
- * Returns an empty array, if there are no ratings present.
+ * @category Services
+ *
+ * @example
+ * ```ts
+ * const learningElementRatings = await fetchLearningElementRatings()
+ * ```
  */
 export const fetchLearningElementRatings: LearningElementRatingReturn = async () => {
   return fetchData<LearningElementRatingResponse>(getConfig().BACKEND + `/learningElement/rating`, {

@@ -8,31 +8,30 @@ import { useCourseTopics } from '@services'
 import { RatingDashboardHookReturn, useRatingDashboard as _useRatingDashboard } from './RatingDashboard.hooks'
 
 /**
- *
+ * Custom type for the currently selected rating dashboard.
  */
 export type SelectedRatingDashboard = 'StudentRating' | 'LearningElementRating'
 
 /**
- *
+ * Props for the {@link RatingDashboard} component.
  */
 export type RatingDashboardProps = {
+  /**
+   * The currently selected Dashboard.
+   */
   selectedDashboard: SelectedRatingDashboard
+  /**
+   * Optional hook to retrieve data for the rating dashboard.
+   * If not provided, the default hook {@link useRatingDashboard} will be used.
+   */
   useRatingDashboard?: () => RatingDashboardHookReturn
 }
 
-/** // TODO:
- *
- * @param param0
- * @returns
- */
 const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDashboard }: RatingDashboardProps) => {
-  // States.
-  const [chosenComponent, setChosenComponent] = useState('lineGraph')
-  const [transformedSpiderGraphData, setTransformedSpiderGraphData] = useState({})
-
-  // Hooks.
+  // Hooks
   const { t } = useTranslation()
   const { topics } = useCourseTopics()
+  const theme = useTheme()
   const {
     isLoading,
     userRatingValue,
@@ -45,6 +44,16 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
     lineGraphData,
     histogramData
   } = useRatingDashboard()
+
+  // States
+  /**
+   * Tracks the currently chosen component (e.g., a line graph) for displaying time-series rating data.
+   */
+  const [selectedComponent, setSelectedComponent] = useState('lineGraph')
+  /**
+   * Stores the transformed spider graph data.
+   */
+  const [transformedSpiderGraphData, setTransformedSpiderGraphData] = useState({})
 
   // Map the topic ids to the topic names.
   useEffect(() => {
@@ -66,12 +75,20 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
     }
   }, [topics, spiderGraphData])
 
-  // General.
-  const theme = useTheme()
+  /**
+   * Color used for rating charts, taken from the theme palette.
+   */
   const color = theme.palette.primary.main
 
-  // Rating title and tooltips.
-  const title = t(`components.${selectedDashboard}Dashboard.ratingTitle`)
+  // Rating title and tooltips
+  /**
+   * Translated title for the rating chart of the selected dashboard.
+   */
+  const ratingTitle = t(`components.${selectedDashboard}Dashboard.ratingTitle`)
+
+  /**
+   * Translated tooltips for the rating chart of the selected dashboard.
+   */
   const ratingTooltips = {
     setDeviationTooltip: useCallback(
       (value: number) => t(`components.${selectedDashboard}Dashboard.ratingDeviationTooltip`, { value: value }),
@@ -91,21 +108,39 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
     )
   }
 
-  // Spider graph.
+  // Spider graph
+  /**
+   * Translated title for the spider graph of the selected dashboard.
+   */
   const spiderGraphTitle = t(`components.${selectedDashboard}Dashboard.spiderGraphTitle`)
+
+  /**
+   * Translated tooltip for the spider graph of the selected dashboard.
+   */
   const setTooltip = useCallback(
     (concept: string, value: number) =>
       t(`components.${selectedDashboard}Dashboard.spiderGraphTooltip`, { concept: concept, value: value }),
     []
   )
 
-  // Histogram.
+  // Histogram
+  /**
+   * Returns the translated user info for the histogram of the student rating dashboard.
+   */
   const setUserInfo = useCallback(() => t('components.StudentRatingDashboard.histogramUserInfo'), [])
+
+  /**
+   * Translated titles for the histogram of the student rating dashboard.
+   */
   const histogramTitles = {
     title: t('components.StudentRatingDashboard.histogramTitle'),
     yAxisTitle: t('components.RatingDashboard.histogramYAxisTitle'),
     xAxisTitle: t('components.RatingDashboard.histogramXAxisTitle')
   }
+
+  /**
+   * Translated tooltips for the histogram of the student rating dashboard.
+   */
   const histogramTooltips = {
     setUserInfoTooltip: useCallback(
       (value: string, percentage: string) =>
@@ -116,13 +151,24 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
     setYAxisTooltip: useCallback(() => t('components.RatingDashboard.histogramYAxisTooltip'), [])
   }
 
-  // Line graph.
-  const lineGraphTitle = t(`components.${selectedDashboard}Dashboard.lineGraphTitle`)
+  // Line graph and table
+  /**
+   * Translated title for the table of the selected dashboard.
+   */
+  const tableTitle = t(`components.${selectedDashboard}Dashboard.lineGraphTitle`)
+
+  /**
+   * Translated titles for the line graph of the rating dashboard.
+   */
   const lineGraphTitles = {
-    title: lineGraphTitle,
+    title: tableTitle,
     xAxisTitle: t('components.RatingDashboard.lineGraphXAxisTitle'),
     yAxisTitle: t('components.RatingDashboard.lineGraphYAxisTitle')
   }
+
+  /**
+   * Translated tooltips for the line graph of the selected dashboard.
+   */
   const lineGraphTooltips = {
     setXAxisTooltip: useCallback(() => t('components.RatingDashboard.lineGraphXAxisTooltip'), []),
     setYAxisTooltip: useCallback(() => t('components.RatingDashboard.lineGraphYAxisTooltip'), []),
@@ -153,12 +199,25 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
     )
   }
 
-  // Table.
+  // Table
+  /**
+   * Returns an RGB color string for the table based on the alpha value.
+   */
   const setRGBColor = useCallback((alpha: number) => 'rgba(255, 165, 0, ' + alpha + ')', [])
+
+  /**
+   * Returns the translated header tooltip for the histogram of the rating dashboard.
+   */
   const setHeaderTooltip = useCallback(
     (header: string) => t('components.RatingDashboard.tableHeaderTooltip', { header: header }),
     []
   )
+
+  /**
+   * Defines the table columns of the rating dashboard.
+   * Each column includes a translated header and a key.
+   *
+   */
   const columns: TableColumnProps[] = [
     {
       header: t('components.RatingDashboard.tableHeaderTimestamp'),
@@ -186,7 +245,7 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
                 ratingValueTrend={ratingValueTrend}
                 ratingDeviationTrend={ratingDeviationTrend}
                 maxRatingDeviation={maxRatingDeviation}
-                title={title}
+                title={ratingTitle}
                 tooltips={ratingTooltips}
               />
             </Grid>
@@ -221,8 +280,8 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
                 <RadioGroup
                   id="student-rating-radio-group"
                   row
-                  onChange={(event) => setChosenComponent(event.target.value)}
-                  value={chosenComponent}>
+                  onChange={(event) => setSelectedComponent(event.target.value)}
+                  value={selectedComponent}>
                   <FormControlLabel
                     value="lineGraph"
                     control={<Radio id={'line-graph-radio'} />}
@@ -232,7 +291,7 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
                 </RadioGroup>
               </Grid>
               <Grid item>
-                {chosenComponent == 'lineGraph' ? (
+                {selectedComponent == 'lineGraph' ? (
                   <LineGraph
                     color={color}
                     data={lineGraphData}
@@ -245,7 +304,7 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
                     data={lineGraphData}
                     columns={columns}
                     setRGBColor={setRGBColor}
-                    title={lineGraphTitle}
+                    title={tableTitle}
                     setHeaderTooltip={setHeaderTooltip}
                   />
                 )}
@@ -262,4 +321,21 @@ const RatingDashboard = ({ selectedDashboard, useRatingDashboard = _useRatingDas
   )
 }
 
+/**
+ * Dashboard component for visualizing rating data using various charts.
+ *
+ * Displays a rating chart, spider graph, histogram (only shown for student ratings),
+ * and either a line graph or table.
+ *
+ * @param props - See {@link RatingDashboardProps}.
+ * @returns A rating dashboard with detailed visualizations of rating data.
+ *
+ * @example
+ * ```tsx
+ * <RatingDashboard
+ *  selectedDashboard="StudentRating"
+ *  useRatingDashboard={useRatingDashboard}
+ * />
+ * ```
+ */
 export default memo(RatingDashboard)

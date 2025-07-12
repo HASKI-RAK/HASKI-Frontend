@@ -2,6 +2,6 @@ export * from './Rating/LearningElementRatingDashboard/LearningElementRatingDash
 export { default as RatingDashboard } from './Rating/RatingDashboard/RatingDashboard'
 export * from './Rating/RatingDashboard/RatingDashboard'
 export * from './Rating/RatingDashboard/RatingDashboard.hooks'
-export { default as RatingInfoDrawer } from './Rating/RatingInfoDrawer/RatingInfoDrawer'
-export { default as RatingInfoDrawerButton } from './Rating/RatingInfoDrawerButton/RatingInfoDrawerButton'
+export { default as RatingDashboardDrawer } from './Rating/RatingDashboardDrawer/RatingDashboardDrawer'
+export { default as RatingDashboardDrawerButton } from './Rating/RatingDashboardDrawerButton/RatingDashboardDrawerButton'
 export * from './Rating/StudentRatingDashboard/StudentRatingDashboard.hooks'

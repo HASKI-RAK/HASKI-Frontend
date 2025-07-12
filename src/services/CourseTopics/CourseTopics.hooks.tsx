@@ -2,29 +2,59 @@ import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
 import { CourseResponse, LearningPathTopic, Topic, User } from '@core'
-import { SnackbarContext } from '@services'
+import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
-// TODO: DOCU
-export type CourseTopicsReturnType = { topics: Topic[] }
+/**
+ * Return type for the {@link useCourseTopics} hook.
+ */
+export type CourseTopicsReturnType = {
+  /**
+   * List of topics fetched from all courses.
+   */
+  topics: Topic[]
+}
 
-// TODO: DOCU
+/**
+ * Hook to retrieve topics from all courses.
+ *
+ * This hook fetches topics from all courses of the current user.
+ *
+ * @category Hooks
+ *
+ * @returns See {@link CourseTopicsReturnType}.
+ *
+ * @example
+ * ```tsx
+ * const { topics } = useCourseTopics()
+ * ```
+ */
 export const useCourseTopics = (): CourseTopicsReturnType => {
-  // Hooks
+  // Hook
   const { t } = useTranslation()
 
-  // States.
-  const [topics, setTopics] = useState<Topic[]>([])
-
-  // Store.
+  // Store
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
 
-  // Context.
+  // Context
   const { addSnackbar } = useContext(SnackbarContext)
+  const { isAuth } = useContext(AuthContext)
 
-  // Functions.
+  // State
+  /**
+   * Stores the topics from all courses.
+   */
+  const [topics, setTopics] = useState<Topic[]>([])
+
+  // Functions
+  /**
+   * Fetches topics from all courses of the user.
+   *
+   * @param courseResponse - List of all available courses.
+   * @param user - The current user.
+   */
   const getCourseTopics = async (courseResponse: CourseResponse, user: User) => {
     // Get all topics for each course.
     const courseTopics = courseResponse.courses.map((course) =>
@@ -46,6 +76,9 @@ export const useCourseTopics = (): CourseTopicsReturnType => {
   }
 
   useEffect(() => {
+    // If the user is not authenticated, do not fetch topics.
+    if (!isAuth) return
+
     // Get the user.
     getUser()
       .then((user: User) => {

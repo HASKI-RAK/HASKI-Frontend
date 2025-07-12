@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
 import { RatingDashboardHookReturn } from '@components'
 import { StudentRating, User } from '@core'
-import { fetchStudentRatings, SnackbarContext } from '@services'
+import { AuthContext, fetchStudentRatings, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
 
 /**
@@ -31,16 +31,71 @@ import { usePersistedStore } from '@store'
  * } = useStudentRatingDashboard()
  * ```
  */
+/**
+ * Custom hook to retrieve and process student rating data for the rating dashboard.
+ *
+ * This hook fetches the rating of a student and calculates the data for the visualizations on the rating dashboard.
+ *
+ * @category Hooks
+ *
+ * @returns See {@link RatingDashboardHookReturn}.
+ *
+ * @example
+ * ```tsx
+ * const {
+ *  isLoading,
+ *  userRatingValue,
+ *  ratingValue,
+ *  ratingDeviation,
+ *  maxRatingDeviation,
+ *  ratingDeviationTrend,
+ *  ratingValueTrend,
+ *  spiderGraphData,
+ *  lineGraphData,
+ *  histogramData
+ * } = useStudentRatingDashboard()
+ * ```
+ */
 export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
-  // Hook.
+  // Hook
   const { t } = useTranslation()
 
-  // States.
+  // Store
+  const getUser = usePersistedStore((state) => state.getUser)
+
+  // Context
+  const { addSnackbar } = useContext(SnackbarContext)
+  const { isAuth } = useContext(AuthContext)
+
+  // States
+  /**
+   * Tracks whether the data is currently being loaded.
+   */
   const [isLoading, setIsLoading] = useState(true)
+
+  /**
+   * Stores the current user rating value.
+   */
   const [userRatingValue, setUserRatingValue] = useState(0)
+
+  /**
+   * Stores the data for the spider graph.
+   */
   const [spiderGraphData, setSpiderGraphData] = useState<Record<string, number>>({})
+
+  /**
+   * Stores the data for the line graph.
+   */
   const [lineGraphData, setLineGraphData] = useState<{ value: number; deviation: number; timestamp: Date }[]>([])
+
+  /**
+   * Stores the histogram data.
+   */
   const [histogramData, setHistogramData] = useState<number[]>([])
+
+  /**
+   * Stores the rating statistics of the student.
+   */
   const [ratingStats, setRatingStats] = useState({
     ratingValue: 0,
     ratingDeviation: 0,
@@ -49,30 +104,42 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
     ratingDeviationTrend: 0
   })
 
-  // Store.
-  const getUser = usePersistedStore((state) => state.getUser)
-
-  // Context.
-  const { addSnackbar } = useContext(SnackbarContext)
-
-  // Utility functions.
+  // Utility functions
+  /**
+   * Filters the maximum rating value from a list of student ratings.
+   *
+   * @param ratings - List of student ratings.
+   */
   const getMaxRatingValue = useCallback((ratings: StudentRating[]) => {
     return Math.max(...ratings.map((rating) => rating.rating_value))
   }, [])
 
-  // TODO: DOCU
+  /**
+   * Filters the maximum rating deviation from a list of student ratings.
+   *
+   * @param ratings - List of student ratings.
+   */
   const getMaxRatingDeviation = useCallback((ratings: StudentRating[]) => {
     return Math.max(...ratings.map((rating) => rating.rating_deviation))
   }, [])
 
-  // TODO: DOCU
+  /**
+   * Filters and sorts the ratings of a specific user from a list of student ratings.
+   *
+   * @param ratings - List of student ratings.
+   * @param userId - ID of the user.
+   */
   const getUserRatings = useCallback((ratings: StudentRating[], userId: number) => {
     return ratings
       .filter((rating) => rating.student_id === userId)
       .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
   }, [])
 
-  // TODO: DOCU
+  /**
+   * Groups the ratings of a user by topic.
+   *
+   * @param userRatings - List of ratings for a specific user.
+   */
   const getCategorizedRatings = useCallback((userRatings: StudentRating[]) => {
     return userRatings.reduce(
       (acc, rating) => ({
@@ -83,7 +150,11 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
     )
   }, [])
 
-  // TODO: DOCU
+  /**
+   * Aggregates the latest rating value per topic for the spider graph.
+   *
+   * @param categorizedRatings - Ratings categorized by topic.
+   */
   const getSpiderGraphData = useCallback((categorizedRatings: Record<string, StudentRating[]>) => {
     return Object.keys(categorizedRatings).reduce(
       (acc: { [key: string]: number }, key) => ({
@@ -94,7 +165,12 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
     )
   }, [])
 
-  // TODO: getTotals()
+  /**
+   * Aggregates the total rating values and deviations for the most recent and
+   * second-most recent ratings across all topics.
+   *
+   * @param categorizedRatings - Ratings categorized by topic.
+   */
   const getTotals = useCallback((categorizedRatings: Record<string, StudentRating[]>) => {
     return Object.values(categorizedRatings).reduce(
       (acc, ratings) => {
@@ -119,7 +195,12 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
     )
   }, [])
 
-  // TODO: DOCU
+  /**
+   * Sorts user ratings by timestamp and calculates the average rating value and
+   * deviation at each point in time for the line graph.
+   *
+   * @param userRatings - List of ratings for a specific user.
+   */
   const getLineGraphData = useCallback((userRatings: StudentRating[]) => {
     // Sort the ratings by timestamp ascending.
     const sortedRatings = [...userRatings].sort(
@@ -138,7 +219,12 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
     })
   }, [])
 
-  // TODO: DOCU
+  /**
+   * Aggregates the latest rating value for each student-topic pair and calculates
+   * the average rating value per student for the histogram.
+   *
+   * @param ratungs - List of student ratings.
+   */
   const getHistogramData = useCallback((ratings: StudentRating[]) => {
     // Get the latest of each student-topic pair.
     const latestRatings = ratings.reduce((acc, rating) => {
@@ -166,11 +252,14 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
   }, [])
 
   useEffect(() => {
+    // If the user is not authenticated, do not fetch data.
+    if (!isAuth) return
+
     // Get the user.
     getUser()
       .then((user: User) => {
         // Fetch all ratings of all students.
-        fetchStudentRatings(user.settings.user_id, user.id)
+        fetchStudentRatings(user.settings.user_id, user.id) // todo: getStudentRatings
           .then((ratings) => {
             // Get the maximum rating value.
             const maxRatingValue = getMaxRatingValue(ratings)

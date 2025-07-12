@@ -3,12 +3,22 @@ import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
 /**
- * # fetchStudentRatings service
+ * Sends a GET request to fetch all student ratings from the backend.
  *
- * Fetches all student ratings from the backend.
+ * This service function sends an HTTP request to retrieve all student ratings from the database using the backend API.
+ * Returns an empty array if no ratings are present.
  *
- * @remarks
- * Returns an empty array, if there are no ratings present.
+ * @param userId - The id of the user.
+ * @param studentId - The id of the student.
+ *
+ * @category Services
+ *
+ * @throws If either userId or studentId is not provided.
+ *
+ * @example
+ * ```ts
+ * const studentRatings = await fetchStudentRatings(userId, studentId)
+ * ```
  */
 export const fetchStudentRatings: StudentRatingReturn = async (userId?: number, studentId?: number) => {
   if (!userId || !studentId) {

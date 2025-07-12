@@ -4,30 +4,21 @@ import { Box, Drawer, Typography } from '@common/components'
 import { SelectedRatingDashboard } from '@components'
 
 /**
- * @prop isOpen - Whether the drawer is open or not.
- * @prop selectedDashboard - The currently selected dashboard.
- * @interface
+ * Props for the {@link RatingDashboardDrawer} component.
  */
-type RatingInfoDrawerProps = {
+type RatingDashboardDrawerProps = {
+  /**
+   * Whether the drawer is open or not.
+   */
   isOpen: boolean
+  /**
+   * The currently selected dashboard.
+   */
   selectedDashboard: SelectedRatingDashboard
 }
 
-// TODO: NUR RATINGDRAWER NENNEN?
-/**
- * RatingInfoDrawer component.
- *
- * @param props - Props containing isOpen and selectedDashboard.
- *
- * @remarks
- * RatingInfoDrawer represents a component that displays information about the currently selected dashboard.
- * The drawer can be opened or closed.
- * Different information is displayed based on the selected dashboard.
- * RatingInfoDrawer can be used as a standalone component on a page.
- *
- * @category Components
- */
-const RatingInfoDrawer = ({ isOpen, selectedDashboard }: RatingInfoDrawerProps) => {
+const RatingDashboardDrawer = ({ isOpen, selectedDashboard }: RatingDashboardDrawerProps) => {
+  // Hook
   const { t } = useTranslation()
 
   return (
@@ -81,4 +72,20 @@ const RatingInfoDrawer = ({ isOpen, selectedDashboard }: RatingInfoDrawerProps) 
   )
 }
 
-export default memo(RatingInfoDrawer)
+/**
+ * Drawer component for displaying details about the currently selected rating dashboard.
+ *
+ * Renders a retractable drawer that shows information based on the selected dashboard.
+ *
+ * @param props - See {@link RatingDashboardDrawerProps}.
+ * @returns A drawer containing information about the selected dashboard.
+ *
+ * @example
+ * ```tsx
+ * <RatingDashboardDrawer
+ *   isOpen={isOpen}
+ *   selectedDashboard={selectedDashboard}
+ * />
+ * ```
+ */
+export default memo(RatingDashboardDrawer)

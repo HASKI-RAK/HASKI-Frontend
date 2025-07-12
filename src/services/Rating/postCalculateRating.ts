@@ -3,17 +3,23 @@ import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
 /**
- * # postCalculateRating serivce
+ * Sends a POST request to calculate new ratings in the backend.
  *
- * Post a request to calculate new ratings of the student and the learning element.
+ * This service function sends an HTTP request to calculate a new student and learning element rating
+ * using the backend API.
  *
- * @param userId - The id of the user
- * @param courseId - The id of the course
- * @param topicId - The id of the topic
- * @param learningElementId - The id of the learning element
+ * @param userId - The ID of the user.
+ * @param courseId - The ID of the course.
+ * @param topicId - The ID of the topic.
+ * @param learningElementId - The ID of the learning element.
+ * @returns An object containing the new rating of the student and learning element.
  *
- * @remarks
- * Return an object containing the new rating of the student and the learning element.
+ * @category Services
+ *
+ * @example
+ * ```ts
+ * const { studentRating, learningElementRating } = await postCalculateRating(userId, courseId, topicId, learningElementId)
+ * ```
  */
 export const postCalculateRating = async (
   userId?: number,
