@@ -104,7 +104,13 @@ describe('useCourseTopics', () => {
     mockServices.fetchLearningPathTopic.mockImplementationOnce(() =>
       Promise.reject(new Error('fetchLearningPathTopic error'))
     )
-    const { result } = renderHook(() => useCourseTopics())
+    const { result } = renderHook(() => useCourseTopics(), {
+      wrapper: ({ children }) => (
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          {children}
+        </AuthContext.Provider>
+      )
+    })
 
     await waitFor(() => {
       expect(result.current.topics).toStrictEqual([])

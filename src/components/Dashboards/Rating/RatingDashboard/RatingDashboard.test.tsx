@@ -3,6 +3,7 @@ import { RatingDashboard, useStudentRatingDashboard } from '@components'
 import { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
 import '@testing-library/jest-dom'
+import { AuthContext } from '@services'
 
 declare global {
   interface SVGElement {
@@ -66,9 +67,11 @@ describe('RatingDashboard', () => {
     })
 
     const { getByText, container, getAllByRole } = render(
-      <MemoryRouter>
-        <RatingDashboard selectedDashboard="StudentRating" useRatingDashboard={useStudentRatingDashboard} />
-      </MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <RatingDashboard selectedDashboard="StudentRating" useRatingDashboard={useStudentRatingDashboard} />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
     await waitFor(() => {
@@ -110,7 +113,7 @@ describe('RatingDashboard', () => {
       const userInfo = container.querySelectorAll('text.user-info')
       fireEvent.mouseOver(userInfo[0])
     })
-
+    // TODO add isAUth
     expect(getByText('components.StudentRatingDashboard.ratingTitle')).toBeInTheDocument()
     expect(getByText('components.StudentRatingDashboard.spiderGraphTitle')).toBeInTheDocument()
     expect(getByText('components.StudentRatingDashboard.histogramTitle')).toBeInTheDocument()
@@ -119,9 +122,11 @@ describe('RatingDashboard', () => {
 
   it('rerenders StudentRatingDashboard and displays spider graph tooltip on hover', async () => {
     const { getAllByRole, container, getByText } = render(
-      <MemoryRouter>
-        <RatingDashboard selectedDashboard="StudentRating" useRatingDashboard={useStudentRatingDashboard} />
-      </MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <MemoryRouter>
+          <RatingDashboard selectedDashboard="StudentRating" useRatingDashboard={useStudentRatingDashboard} />
+        </MemoryRouter>
+      </AuthContext.Provider>
     )
 
     await waitFor(() => {
