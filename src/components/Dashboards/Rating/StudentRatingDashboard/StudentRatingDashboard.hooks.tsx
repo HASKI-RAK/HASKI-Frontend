@@ -223,7 +223,7 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
    * Aggregates the latest rating value for each student-topic pair and calculates
    * the average rating value per student for the histogram.
    *
-   * @param ratungs - List of student ratings.
+   * @param ratings - List of student ratings.
    */
   const getHistogramData = useCallback((ratings: StudentRating[]) => {
     // Get the latest of each student-topic pair.
@@ -321,7 +321,7 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
         log.error(t('error.fetchUser') + ' ' + error)
         setIsLoading(true)
       })
-  }, [])
+  }, [isAuth])
 
   useEffect(() => {
     // Only toggle isLoading to false when lineGraphData has data.

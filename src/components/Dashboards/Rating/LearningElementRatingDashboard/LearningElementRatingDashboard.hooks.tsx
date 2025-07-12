@@ -321,7 +321,7 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
         log.error(t('error.fetchLearningElementRatings') + ' ' + error)
         setIsLoading(true)
       })
-  }, [])
+  }, [isAuth])
 
   return useMemo(
     () => ({
