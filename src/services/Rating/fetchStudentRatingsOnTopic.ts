@@ -22,7 +22,6 @@ import { fetchData } from '../RequestResponse'
  * ```
  */
 export const fetchStudentRatingsOnTopic: StudentRatingReturn = async (studentId?: number, topicId?: number) => {
-  // todo unused
   if (!studentId || !topicId) {
     throw new Error('studentId and topicId are required')
   }

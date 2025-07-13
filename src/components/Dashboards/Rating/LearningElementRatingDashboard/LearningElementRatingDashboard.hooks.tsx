@@ -262,7 +262,7 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
     if (!isAuth) return
 
     // Fetch all learning element ratings.
-    fetchLearningElementRatings() // todo -> getLearningElementRatings
+    fetchLearningElementRatings()
       .then((learningElementRatingResponse: LearningElementRatingResponse) => {
         // Get the max rating value.
         const maxRatingValue = getMaxRatingValue(learningElementRatingResponse)

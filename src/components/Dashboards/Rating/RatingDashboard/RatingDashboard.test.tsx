@@ -113,7 +113,7 @@ describe('RatingDashboard', () => {
       const userInfo = container.querySelectorAll('text.user-info')
       fireEvent.mouseOver(userInfo[0])
     })
-    // TODO add isAUth
+    
     expect(getByText('components.StudentRatingDashboard.ratingTitle')).toBeInTheDocument()
     expect(getByText('components.StudentRatingDashboard.spiderGraphTitle')).toBeInTheDocument()
     expect(getByText('components.StudentRatingDashboard.histogramTitle')).toBeInTheDocument()
