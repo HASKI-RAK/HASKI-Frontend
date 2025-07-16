@@ -16,41 +16,50 @@ import { Close, Save, School } from '@common/icons'
 import useAlgorithmSettingsModal from './AlgorithmSettingsModal.hooks'
 
 /**
- * @prop isOpen - Boolean value to determine if the modal is open.
- * @prop handleClose - function executed when closing the modal.
- * @prop changeObserver - function executed when the algorithm is changed.
- * @prop options - Array of objects containing the name, description,
- *  and key of the algorithms. Used in Tests instead of the translation output.
- * @interface
+ * Props for the {@link AlgorithmSettingsModal} component.
  */
 type AlgorithmSettingsModalProps = {
+  /**
+   * Boolean indicating if the modal is open.
+   */
   isOpen: boolean
+  /**
+   * Callback triggered when the modal is closed.
+   */
   handleClose: () => void
+  /**
+   * Optional callback executed when the selected algorithm changes.
+   */
   changeObserver?: () => void
+  /**
+   * Optional topic ID for which to set the algorithm.
+   */
   topicId?: number
 }
 
+/**
+ * Type representing the available algorithm options.
+ * Each option contains a name, description, and unique key.
+ */
 export type OptionsType = {
   name: string
   description: string
   key: string
 }[]
-/**
- *
- * @param props - parameters allowing opening and closing of Modal and to give the ids of courses and topics
- *
- * @remarks
- * This component consists of a modal, that allows the user to set an algorithm for a topic or entire course depending
- * on the props. All available algorithms are displayed as radio buttons. A short description of the selected algorithm is displayed
- *
- *
- * @category components
- */
+
 const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element => {
+  // Translation hook for i18n text
   const { t } = useTranslation()
 
+  /**
+   * Algorithm options loaded from translations.
+   * Contains the name, description, and key for each algorithm.
+   */
   const options: OptionsType = t('components.AlgorithmSettingsModal.algorithms', { returnObjects: true })
 
+  /**
+   * Custom hook for managing selection state, save logic, and backend loading state.
+   */
   const { handleSave, handleSelect, waitForBackend, selected, teacherAlgorithm } = useAlgorithmSettingsModal({
     handleClose: props.handleClose,
     changeObserver: props.changeObserver,
@@ -76,7 +85,9 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
           boxShadow: 24,
           p: 4
         }}>
+        {/* Modal content layout */}
         <Grid item container direction="row" spacing={2}>
+          {/* Algorithm selection (radio group) */}
           <Grid item container direction="column" spacing={1} xs={5}>
             <Typography id="modal-title" variant="h6" component="h6" align="center">
               {t('pages.topic.menuItemAlgorithms')}
@@ -96,6 +107,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
                     }
                     label={option.name}
                   />
+                  {/* Teacher recommendation icon */}
                   {teacherAlgorithm === option.key && (
                     <Tooltip
                       arrow
@@ -110,6 +122,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
               ))}
             </RadioGroup>
           </Grid>
+          {/* Close button (top-right corner) */}
           <Fab
             sx={{
               width: { xl: '3.5rem', md: '2rem', sm: '2rem', xs: '2rem' },
@@ -124,7 +137,9 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
             data-testid="algorithm-settings-modal-close-button">
             <Close />
           </Fab>
+          {/* Divider between selection and description (hidden on xs screens) */}
           <Divider orientation="vertical" sx={{ display: { xs: 'none', md: 'flex' } }} />
+          {/* Selected algorithm description (hidden on xs screens) */}
           <Grid item container direction="column" spacing={1} sx={{ display: { xs: 'none', md: 'flex' } }} xs={6.5}>
             <Typography variant="h6" component="h6" align="center">
               {t('components.AlgorithmSettingsModal.headerRight')}
@@ -134,6 +149,7 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
             </Typography>
           </Grid>
         </Grid>
+        {/* Save button (bottom-right corner) */}
         <Fab
           onClick={handleSave}
           aria-label="save"
@@ -148,4 +164,29 @@ const AlgorithmSettingsModal = (props: AlgorithmSettingsModalProps): JSX.Element
     </Modal>
   )
 }
+
+/**
+ * Renders a modal dialog for selecting an algorithm for a given topic or course.
+ *
+ * Displays available algorithms as a list of radio buttons, with the option to view
+ * a short description of the currently selected algorithm. Shows a teacher recommendation
+ * icon if the option matches the recommended algorithm.
+ *
+ * The modal can be opened or closed via props, and communicates user actions via callbacks.
+ *
+ * Uses {@link useAlgorithmSettingsModal} to manage selection logic and save actions.
+ *
+ * @param props - See {@link AlgorithmSettingsModalProps}
+ * @returns A React component for algorithm selection in a modal dialog.
+ *
+ * @example
+ * <AlgorithmSettingsModal
+ *   isOpen={open}
+ *   handleClose={handleClose}
+ *   changeObserver={handleAlgorithmChange}
+ *   topicId={currentTopicId}
+ * />
+ *
+ * @see {@link useAlgorithmSettingsModal}
+ */
 export default memo(AlgorithmSettingsModal)
