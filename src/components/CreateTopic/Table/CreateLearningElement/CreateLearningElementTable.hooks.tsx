@@ -34,8 +34,7 @@ export const useCreateLearningElementTable = ({
     const updatedSolutions = selectedTopics.reduce((acc, topic) => {
       const topicSolutions = selectedSolutions[topic.topic_lms_id] || []
       return { ...acc, [topic.topic_lms_id]: topicSolutions }
-    }
-    , {} as { [key: number]: Solution[] })
+    }, {} as { [key: number]: Solution[] })
 
     onSolutionChange(updatedSolutions)
   }

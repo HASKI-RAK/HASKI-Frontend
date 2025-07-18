@@ -69,10 +69,13 @@ const CreateLearningElementSolutionStep = ({
               }
               onClick={onNext}
               sx={{ mr: -2 }}>
-              {isLoading ? 
+              {isLoading ? (
                 <Backdrop open={isLoading}>
                   <CircularProgress color="inherit" />
-                </Backdrop> : nextButtonText}
+                </Backdrop>
+              ) : (
+                nextButtonText
+              )}
             </Button>
           </Grid>
         </Box>

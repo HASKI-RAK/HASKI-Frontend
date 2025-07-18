@@ -74,11 +74,9 @@ const CreateLearningElementClassificationTable = ({
     return nextLength > halfOfLearningElements
   }
 
-
   //function to check if solution is checked
   const isSolution = (topicId: number, elementLmsId: number) => {
-    return (selectedSolutions[topicId] || []).some(
-      (solution) => solution.solutionLmsId === elementLmsId)
+    return (selectedSolutions[topicId] || []).some((solution) => solution.solutionLmsId === elementLmsId)
   }
 
   useEffect(() => {
@@ -188,7 +186,10 @@ const CreateLearningElementClassificationTable = ({
                     <TableCell sx={{ textAlign: 'center', padding: '0rem' }}>
                       <Checkbox
                         checked={isSolution(lmsTopic.topic_lms_id, element.lms_id)}
-                        disabled={canNotSelectSolution(lmsTopic.topic_lms_id) && !isSolution(lmsTopic.topic_lms_id, element.lms_id)}
+                        disabled={
+                          canNotSelectSolution(lmsTopic.topic_lms_id) &&
+                          !isSolution(lmsTopic.topic_lms_id, element.lms_id)
+                        }
                         onChange={(event) =>
                           handleSolutionchange(
                             lmsTopic.topic_lms_id,

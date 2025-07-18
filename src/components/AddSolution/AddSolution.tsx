@@ -8,7 +8,7 @@ import {
   Solution,
   handleError
 } from '@components'
-import { RemoteLearningElement, Topic, RemoteTopics, LearningPathElement } from '@core'
+import { LearningPathElement, RemoteLearningElement, RemoteTopics, Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import AddSolutionModal from './AddSolutionModal'
@@ -18,7 +18,7 @@ const CreateLearningElement = () => {
   const { addSnackbar } = useContext(SnackbarContext)
 
   const [addSolutionModalOpen, setAddSolutionModalOpen] = useState(false)
-  
+
   const [activeStep, setActiveStep] = useState<number>(0)
 
   const { courseId } = useParams()
@@ -30,11 +30,11 @@ const CreateLearningElement = () => {
 
   const [currentTopic, setCurrentTopic] = useState<Topic>()
   const [selectedLearningElements, setSelectedLearningElements] = useState<{
-      [key: number]: RemoteLearningElementWithClassification[]
+    [key: number]: RemoteLearningElementWithClassification[]
   }>({})
   const [selectedSolutions, setSelectedSolutions] = useState<{ [key: number]: Solution[] }>({})
   const [learningElementsWithSolutions, setLearningElementsWithSolutions] = useState<{
-      [key: number]: RemoteLearningElementWithSolution[]
+    [key: number]: RemoteLearningElementWithSolution[]
   }>({})
 
   const handleOpen = useCallback(() => {
@@ -50,7 +50,7 @@ const CreateLearningElement = () => {
   }, [setAddSolutionModalOpen])
 
   // Fetch Topic like in CreateLearningElement
-    useEffect(() => {
+  useEffect(() => {
     if (!courseId || !topicId) return
     getUser()
       .then((user) => {
@@ -93,32 +93,29 @@ const CreateLearningElement = () => {
 
             // Update remote topics by filtering out elements that already exist in the learning path
             const filteredLearningElements = remoteTopic?.lms_learning_elements.filter(
-                (learningElement) => !existingLearningElementIds.includes(learningElement.lms_id)
-              )
+              (learningElement) => !existingLearningElementIds.includes(learningElement.lms_id)
+            )
 
             // convert filtered learning elements to solutions
-            const solutions : Solution[] = filteredLearningElements?.map((learningElement) => ({
-                solutionLmsId: learningElement.lms_id,
-                solutionLmsName: learningElement.lms_learning_element_name,
-                solutionLmsType: learningElement.lms_activity_type
-            } as Solution)) || []
+            const solutions: Solution[] =
+              filteredLearningElements?.map(
+                (learningElement) =>
+                  ({
+                    solutionLmsId: learningElement.lms_id,
+                    solutionLmsName: learningElement.lms_learning_element_name,
+                    solutionLmsType: learningElement.lms_activity_type
+                  } as Solution)
+              ) || []
 
-            setSelectedSolutions({[currentTopic.lms_id]: solutions})
-        })
+            setSelectedSolutions({ [currentTopic.lms_id]: solutions })
+          }
+        )
       )
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 3000)
       })
-  }, [
-    activeStep,
-    setActiveStep,
-    topicId,
-    courseId,
-    selectedLearningElements,
-    setSelectedLearningElements,
-  ])
+  }, [activeStep, setActiveStep, topicId, courseId, selectedLearningElements, setSelectedLearningElements])
 
-  
   return (
     <Grid>
       <Button

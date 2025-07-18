@@ -181,101 +181,100 @@ export const useCreateTopicModal = ({
       courseId?: string
     ): Promise<void> => {
       if (!courseId) return Promise.resolve()
-      return getUser()
-        .then((user) => {
-          return handleCreateTopics(topicName, lmsCourseId, courseId, user).then((topic) => {
-            const topicLmsId = topic.lms_id
-            const topicId = topic.id
-            // Filter out disabled learning elements, that are used as solutions
-            const filterdLearningElements = selectedLearningElementsClassification[topicLmsId].filter(
-              (element) => !element.disabled
-            )
+      return getUser().then((user) => {
+        return handleCreateTopics(topicName, lmsCourseId, courseId, user).then((topic) => {
+          const topicLmsId = topic.lms_id
+          const topicId = topic.id
+          // Filter out disabled learning elements, that are used as solutions
+          const filterdLearningElements = selectedLearningElementsClassification[topicLmsId].filter(
+            (element) => !element.disabled
+          )
 
-            // Step 1: Create learning elements
-            return Promise.all(
-              filterdLearningElements.map((element) =>
-                handleCreateLearningElements(
-                  element.lms_learning_element_name,
-                  element.lms_activity_type,
-                  element.classification,
-                  element.lms_id,
-                  topic.id,
-                  user
-                ).catch((error) => {
-                  addSnackbar({
-                    message: t('error.postLearningElement') + ' ' + element.lms_learning_element_name,
-                    severity: 'error',
-                    autoHideDuration: 5000
-                  })
-                  log.error(t('error.postLearningElement') + '' + error + '' + element.lms_learning_element_name)
-                  throw error
+          // Step 1: Create learning elements
+          return Promise.all(
+            filterdLearningElements.map((element) =>
+              handleCreateLearningElements(
+                element.lms_learning_element_name,
+                element.lms_activity_type,
+                element.classification,
+                element.lms_id,
+                topic.id,
+                user
+              ).catch((error) => {
+                addSnackbar({
+                  message: t('error.postLearningElement') + ' ' + element.lms_learning_element_name,
+                  severity: 'error',
+                  autoHideDuration: 5000
                 })
-              )
+                log.error(t('error.postLearningElement') + '' + error + '' + element.lms_learning_element_name)
+                throw error
+              })
             )
-              .then(() => {
-                // Step 3: Create algorithms and add students to topics
-                return handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topic.id, algorithmShortName)
-                  .then(() => {
-                    return handleAddAllStudentsToTopics(courseId)
-                  })
-                  .catch((error) => {
-                    handleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error, 5000)
-                  })
-                  .then(() => ({ topicId, user }))
-              })
-              .then(({ topicId, user }) => {
-                // Step 4: Calculate learning paths
-                return handleCalculateLearningPaths(
-                  user.settings.user_id,
-                  user.role,
-                  user.university,
-                  courseId,
-                  topicId
-                ).then(() => {
-                  addSnackbar({
-                    message: t('appGlobal.dataSendSuccessful'),
-                    severity: 'success',
-                    autoHideDuration: 5000
-                  })
-                  log.info(t('appGlobal.dataSendSuccessful'))
-                  setSuccessfullyCreatedTopicsCount((prevCount) => prevCount + 1)
+          )
+            .then(() => {
+              // Step 3: Create algorithms and add students to topics
+              return handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topic.id, algorithmShortName)
+                .then(() => {
+                  return handleAddAllStudentsToTopics(courseId)
                 })
+                .catch((error) => {
+                  handleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error, 5000)
+                })
+                .then(() => ({ topicId, user }))
+            })
+            .then(({ topicId, user }) => {
+              // Step 4: Calculate learning paths
+              return handleCalculateLearningPaths(
+                user.settings.user_id,
+                user.role,
+                user.university,
+                courseId,
+                topicId
+              ).then(() => {
+                addSnackbar({
+                  message: t('appGlobal.dataSendSuccessful'),
+                  severity: 'success',
+                  autoHideDuration: 5000
+                })
+                log.info(t('appGlobal.dataSendSuccessful'))
+                setSuccessfullyCreatedTopicsCount((prevCount) => prevCount + 1)
               })
-              .catch((error) => {
-                handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
-              })
-              .then(() => {
-                //Create solutions for learning elements
-                const elementsWithSolution = Object.values(selectedLearningElementSolution[topicLmsId] || [])
-                  .flat()
-                  .filter((element) => element.solutionLmsId && element.solutionLmsId > 0 && element.solutionLmsType)
+            })
+            .catch((error) => {
+              handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
+            })
+            .then(() => {
+              //Create solutions for learning elements
+              const elementsWithSolution = Object.values(selectedLearningElementSolution[topicLmsId] || [])
+                .flat()
+                .filter((element) => element.solutionLmsId && element.solutionLmsId > 0 && element.solutionLmsType)
 
-                if (elementsWithSolution.length === 0) {
-                  return Promise.resolve()
-                }
+              if (elementsWithSolution.length === 0) {
+                return Promise.resolve()
+              }
 
-                return Promise.all(
-                  elementsWithSolution.map((solution) =>
-                    handleCreateSolutions(
-                      solution.learningElementLmsId,
-                      solution.solutionLmsId,
-                      solution.solutionLmsType ?? 'resource'
-                    ).catch((error) => {
-                      addSnackbar({
-                        message: t('error.postLearningElementSolution') + ' ' + solution.learningElementLmsId,
-                        severity: 'error',
-                        autoHideDuration: 5000
-                      })
-                      log.error(
-                        t('error.postLearningElementSolution') + ' ' + error + ' ' + solution.learningElementLmsId
-                      )
-                      throw error
+              return Promise.all(
+                elementsWithSolution.map((solution) =>
+                  handleCreateSolutions(
+                    solution.learningElementLmsId,
+                    solution.solutionLmsId,
+                    solution.solutionLmsType ?? 'resource'
+                  ).catch((error) => {
+                    addSnackbar({
+                      message: t('error.postLearningElementSolution') + ' ' + solution.learningElementLmsId,
+                      severity: 'error',
+                      autoHideDuration: 5000
                     })
-                  )
-                ).then(() => void 0)
-              })
-          })
+                    log.error(
+                      t('error.postLearningElementSolution') + ' ' + error + ' ' + solution.learningElementLmsId
+                    )
+                    throw error
+                  })
+                )
+              ).then(() => void 0)
+            })
         })
+      })
     },
     [
       getUser,

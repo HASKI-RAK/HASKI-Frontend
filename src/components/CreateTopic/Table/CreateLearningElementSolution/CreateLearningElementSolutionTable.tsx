@@ -58,7 +58,6 @@ const CreateLearningElementClassificationTable = memo(
       )
     }
 
-
     useEffect(() => {
       // Create Solutions from LearningElementsClassification
       const updatedSolutions = Object.keys(selectedLearningElementsClassification).reduce((accumulator, topicId) => {
@@ -124,63 +123,65 @@ const CreateLearningElementClassificationTable = memo(
             {t('components.CreateLearningElementSolutionTable.setLearningElementSolution')}
           </Typography>
         </Grid>
-        {selectedTopics.map((lmsTopic) => (
-          selectedSolutions[lmsTopic.topic_lms_id].length >= 1 &&
-          <Grid
-            item
-            container
-            alignItems="center"
-            justifyContent="center"
-            direction="column"
-            key={'Create Topic - Learning Element Solution: ' + lmsTopic.topic_lms_id}>
-            <Paper sx={{ padding: '1rem', width: '95%' }}>
-              <Box bgcolor={(theme) => theme.palette.info.light} borderRadius={3}>
-                <Grid item container justifyContent="center" alignItems="center">
-                  <Typography variant="h6" gutterBottom>
-                    {lmsTopic.topic_lms_name}
-                  </Typography>
-                </Grid>
-              </Box>
-              {learningElementsWithSolutions[lmsTopic.topic_lms_id]?.map((element) => (
-                <Grid container alignItems="center" spacing={2} key={element.learningElementLmsId}>
-                  <Grid item xs={6}>
-                    <FormControlLabel control={<Checkbox checked={true} />} label={element.learningElementName} />
-                  </Grid>
-                  <Grid item container xs={6} justifyContent="flex-end">
-                    <FormControl sx={{ m: 1, width: '21rem' }} size="small">
-                      <Select
-                       disabled={element.solutionLmsId <= 0 && allSolutionsUsed(lmsTopic.topic_lms_id)}
-                        value={String(
-                          element.solutionLmsId > 0
-                            ? element.solutionLmsId
-                            : displayedSolutions[lmsTopic.topic_lms_id]?.[0].solutionLmsId ?? 0
-                        )}
-                        onChange={(event) =>
-                          handleSolutionChange(
-                            lmsTopic.topic_lms_id,
-                            element.learningElementLmsId,
-                            parseInt(event.target.value)
-                          )
-                        }>
-                        {(displayedSolutions[lmsTopic.topic_lms_id] || []).map((solution) => (
-                          <MenuItem
-                            key={solution.solutionLmsId}
-                            value={solution.solutionLmsId}
-                            disabled={learningElementsWithSolutions[lmsTopic.topic_lms_id]?.some(
-                              (element) =>
-                                element.solutionLmsId === solution.solutionLmsId && solution.solutionLmsId > 0
-                            )}>
-                            {solution.solutionLmsName}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </Grid>
-                </Grid>
-              ))}
-            </Paper>
-          </Grid>
-        ))}
+        {selectedTopics.map(
+          (lmsTopic) =>
+            selectedSolutions[lmsTopic.topic_lms_id].length >= 1 && (
+              <Grid
+                item
+                container
+                alignItems="center"
+                justifyContent="center"
+                direction="column"
+                key={'Create Topic - Learning Element Solution: ' + lmsTopic.topic_lms_id}>
+                <Paper sx={{ padding: '1rem', width: '95%' }}>
+                  <Box bgcolor={(theme) => theme.palette.info.light} borderRadius={3}>
+                    <Grid item container justifyContent="center" alignItems="center">
+                      <Typography variant="h6" gutterBottom>
+                        {lmsTopic.topic_lms_name}
+                      </Typography>
+                    </Grid>
+                  </Box>
+                  {learningElementsWithSolutions[lmsTopic.topic_lms_id]?.map((element) => (
+                    <Grid container alignItems="center" spacing={2} key={element.learningElementLmsId}>
+                      <Grid item xs={6}>
+                        <FormControlLabel control={<Checkbox checked={true} />} label={element.learningElementName} />
+                      </Grid>
+                      <Grid item container xs={6} justifyContent="flex-end">
+                        <FormControl sx={{ m: 1, width: '21rem' }} size="small">
+                          <Select
+                            disabled={element.solutionLmsId <= 0 && allSolutionsUsed(lmsTopic.topic_lms_id)}
+                            value={String(
+                              element.solutionLmsId > 0
+                                ? element.solutionLmsId
+                                : displayedSolutions[lmsTopic.topic_lms_id]?.[0].solutionLmsId ?? 0
+                            )}
+                            onChange={(event) =>
+                              handleSolutionChange(
+                                lmsTopic.topic_lms_id,
+                                element.learningElementLmsId,
+                                parseInt(event.target.value)
+                              )
+                            }>
+                            {(displayedSolutions[lmsTopic.topic_lms_id] || []).map((solution) => (
+                              <MenuItem
+                                key={solution.solutionLmsId}
+                                value={solution.solutionLmsId}
+                                disabled={learningElementsWithSolutions[lmsTopic.topic_lms_id]?.some(
+                                  (element) =>
+                                    element.solutionLmsId === solution.solutionLmsId && solution.solutionLmsId > 0
+                                )}>
+                                {solution.solutionLmsName}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                    </Grid>
+                  ))}
+                </Paper>
+              </Grid>
+            )
+        )}
         {children}
       </Grid>
     )

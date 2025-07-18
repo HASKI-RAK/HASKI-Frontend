@@ -12,9 +12,9 @@ import {
 import { LearningPathElement, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+import CreateLearningElementSolutionStep from '../CreateTopic/Modal/CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
 import { RemoteLearningElementWithSolution, Solution } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 import { useCreateTopicModal } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal.hooks'
-import CreateLearningElementSolutionStep from '../CreateTopic/Modal/CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
 
 export type CreateTopicModalProps = {
   openCreateTopicModal?: boolean
@@ -75,20 +75,24 @@ const CreateLearningElementModal = ({
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
 
   //Constants
-  const createLearningElementModalStepperSteps = [t('appGlobal.learningElements'), t('appGlobal.classifications'), t('appGlobal.solutions')]
+  const createLearningElementModalStepperSteps = [
+    t('appGlobal.learningElements'),
+    t('appGlobal.classifications'),
+    t('appGlobal.solutions')
+  ]
 
   //functions
   // when no solutions are selected just create Learning Element in Classification step
   const handleClassificationNext = () => {
-    if(selectedSolutions[currentTopicLmsId].length === 0){
+    if (selectedSolutions[currentTopicLmsId].length === 0) {
       handleCreateLearningElementsInExistingTopic(
-                  currentTopicLmsId,
-                  selectedLearningElementsClassification,
-                  selectedLearningElementSolution,
-                  topicId,
-                  courseId
-                ).then(() => {
-                  handleCloseCreateTopicModal()
+        currentTopicLmsId,
+        selectedLearningElementsClassification,
+        selectedLearningElementSolution,
+        topicId,
+        courseId
+      ).then(() => {
+        handleCloseCreateTopicModal()
       })
     } else {
       setActiveStep((prevStep) => prevStep + 1)
@@ -96,8 +100,8 @@ const CreateLearningElementModal = ({
   }
 
   // get text for classification step next button
-  const getNextTextClassification = () : string => {
-    if(selectedSolutions[currentTopicLmsId].length > 0) return t('appGlobal.next')
+  const getNextTextClassification = (): string => {
+    if (selectedSolutions[currentTopicLmsId].length > 0) return t('appGlobal.next')
     else return t('components.CreateLearningElementModal.createLearningElements')
   }
 
@@ -232,9 +236,7 @@ const CreateLearningElementModal = ({
               selectedSolutions={selectedSolutions}
               learningElementsWithSolutions={selectedLearningElementSolution}
               onLearningElementSolutionChange={setSelectedLearningElementSolution}
-              onBack={() => 
-                setActiveStep((prevStep) => prevStep - 1)
-              }
+              onBack={() => setActiveStep((prevStep) => prevStep - 1)}
               onNext={() =>
                 handleCreateLearningElementsInExistingTopic(
                   currentTopicLmsId,

@@ -187,7 +187,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           {isCourseCreatorRole && (
             <Panel position={'top-right'} style={{ right: '2rem', top: '2.5rem' }}>
               <CreateLearningElement />
-              <AddSolution/>
+              <AddSolution />
             </Panel>
           )}
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />

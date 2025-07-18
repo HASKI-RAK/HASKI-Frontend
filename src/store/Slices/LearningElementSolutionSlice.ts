@@ -7,8 +7,7 @@ import { resetters } from '../Zustand/Store'
 type LearningElementSolutionSlice = {
   _learningElementSolution: Record<string, LearningElementSolution>
   getLearningElementSolution: LearningElementSolutionReturn
-  setLearningElementSolution: (learningElementLmsId: number, solutionLmsId: number, activityType?: string) =>
-     void
+  setLearningElementSolution: (learningElementLmsId: number, solutionLmsId: number, activityType?: string) => void
 }
 
 export default LearningElementSolutionSlice

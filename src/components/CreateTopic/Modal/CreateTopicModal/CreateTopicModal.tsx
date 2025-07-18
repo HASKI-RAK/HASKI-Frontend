@@ -101,23 +101,25 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
   const handleNext = () => setActiveStep((prevStep) => prevStep + 1)
   const handleBack = () => setActiveStep((prevStep) => prevStep - 1)
 
-  const handleNextWithSkip = () => setActiveStep((prevStep) => {
-    const isEmpty = Object.values(selectedSolutions).every((solutions) => solutions.length === 0)
-    if (isEmpty) {
-      return prevStep + 2
-    } else {
-      return prevStep + 1
-    }
-  })
+  const handleNextWithSkip = () =>
+    setActiveStep((prevStep) => {
+      const isEmpty = Object.values(selectedSolutions).every((solutions) => solutions.length === 0)
+      if (isEmpty) {
+        return prevStep + 2
+      } else {
+        return prevStep + 1
+      }
+    })
 
-  const handleBackWithSkip = () => setActiveStep((prevStep) => {
-    const isEmpty = Object.values(selectedSolutions).every((solutions) => solutions.length === 0)
-    if (isEmpty) {
-      return prevStep - 2
-    } else {
-      return prevStep - 1
-    }
-  })
+  const handleBackWithSkip = () =>
+    setActiveStep((prevStep) => {
+      const isEmpty = Object.values(selectedSolutions).every((solutions) => solutions.length === 0)
+      if (isEmpty) {
+        return prevStep - 2
+      } else {
+        return prevStep - 1
+      }
+    })
 
   const handleSubmit = async () => {
     setCreateTopicIsSending(true)

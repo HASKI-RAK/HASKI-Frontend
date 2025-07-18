@@ -264,7 +264,10 @@ describe('useCreateTopicModal', () => {
 
     await act(async () => {
       await result.current.handleCreateLearningElementsInExistingTopic(
-        1, mockRemoteLearningElementWithClassification, mockLearningElementsWithSolution)
+        1,
+        mockRemoteLearningElementWithClassification,
+        mockLearningElementsWithSolution
+      )
     })
   })
 
