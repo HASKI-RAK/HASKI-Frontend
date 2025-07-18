@@ -68,7 +68,7 @@ const CreateLearningElement = () => {
         id="create-learning-element-button"
         variant="contained"
         color="primary"
-        sx={{ alignSelf: 'end', marginTop: '0.6rem' }}
+        sx={{ alignSelf: 'end', marginTop: '0.6rem', minWidth: '14rem' }}
         onClick={useCallback(() => {
           setCreateLearningElementModalOpen(true)
         }, [setCreateLearningElementModalOpen])}>

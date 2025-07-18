@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Box, Grid, Typography, FormControlLabel, Checkbox, Paper, FormControl } from '@common/components'
 import { handleError } from '@components'
 import { SnackbarContext } from '@services'
-import { LearningElement, RemoteLearningElement, RemoteTopics, Topic } from '@core'
+import { LearningElement, LearningElementSolution, RemoteLearningElement, RemoteTopics, Topic } from '@core'
 import { RemoteLearningElementWithClassification } from '../../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 
 type SelectLearningElementTableProps = {
@@ -33,6 +33,9 @@ const SelectLearningElementTable = ({
 
     const getLearningPathElement = useStore((state) => state.getLearningPathElement)
     const getUser = usePersistedStore((state) => state.getUser)
+    const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
+    
+    const [existingSolutions, setExistingSolutions] = useState<LearningElementSolution[]>([])
 
     const handleCheckboxChange = (learningElement: RemoteLearningElementWithClassification, checked:boolean) => {
       const updatedLearningElements = {
@@ -57,7 +60,26 @@ const SelectLearningElementTable = ({
                         }
                         return learningElement
                     })
-                    setLearningElements(learningElements)
+
+                    // fetch solutions for the learning elements
+                    learningElements.forEach((learningElement) => {
+                      getLearningElementSolution(learningElement.lms_id)
+                        .then((solution: LearningElementSolution) => {
+                          setExistingSolutions((prev) => [...prev, solution])
+                        })
+                        .catch((error) => {
+                          handleError(t, addSnackbar, 'error.fetchLearningElementSolution', error, 3000)
+                        })
+                    })
+
+                    // filter out learning elements that already have solutions
+                    const filteredLearningElements = learningElements.filter((element) => {
+                        return !existingSolutions.some((solution) => solution.learning_element_lms_id === element.lms_id)
+                    })
+                    
+                    setLearningElements(filteredLearningElements)
+
+                    
                 })
                 .catch((error) => {
                     handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 5000)

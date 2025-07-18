@@ -19,10 +19,31 @@ type AddSolutionModalProps = {
   open: boolean
   activeStep: number
   setActiveStep: Dispatch<SetStateAction<number>>
+  currentTopic?: Topic
+  selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }
+  selectedSolutions: { [key: number]: Solution[] }
+  learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }
+  setCurrentTopic: Dispatch<SetStateAction<Topic | undefined>>
+  setSelectedLearningElements: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>>
+  setSelectedSolutions: Dispatch<SetStateAction<{ [key: number]: Solution[] }>>
+  setLearningElementsWithSolutions: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithSolution[] }>>
   onClose: () => void
 }
 
-const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: AddSolutionModalProps) => {
+const AddSolutionModal = ({ 
+  open, 
+  activeStep, 
+  setActiveStep, 
+  currentTopic, 
+  selectedLearningElements, 
+  selectedSolutions, 
+  learningElementsWithSolutions, 
+  setCurrentTopic, 
+  setSelectedLearningElements, 
+  setSelectedSolutions, 
+  setLearningElementsWithSolutions, 
+  onClose 
+}: AddSolutionModalProps) => {
     const { t } = useTranslation()
     const { addSnackbar } = useContext(SnackbarContext)
     const { courseId } = useParams()
@@ -32,14 +53,8 @@ const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: Add
     const getRemoteTopics = useStore((state) => state.getRemoteTopics)
     const getLearningPathElement = useStore((state) => state.getLearningPathElement)
 
-    const [currentTopic, setCurrentTopic] = useState<Topic>()
-    const [selectedLearningElements, setSelectedLearningElements] = useState<{
-        [key: number]: RemoteLearningElementWithClassification[]
-    }>({})
-    const [selectedSolutions, setSelectedSolutions] = useState<{ [key: number]: Solution[] }>({})
-    const [learningElementsWithSolutions, setLearningElementsWithSolutions] = useState<{
-        [key: number]: RemoteLearningElementWithSolution[]
-    }>({})
+    const setLearningElementSolution = useStore((state) => state.setLearningElementSolution)
+
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const { topicId } = useParams()
@@ -51,84 +66,38 @@ const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: Add
         }
         setIsLoading(true)
         learningElementsWithSolutions[currentTopic.lms_id]?.forEach((solution) => {
-            const outputJson = JSON.stringify({ solution_Lms_Id: solution.learningElementLmsId, activity_type: solution.solutionLmsType })
-            postLearningElementSolution({learningElementLmsId: solution.learningElementLmsId, outputJson})
-                .then(() => {
-                    addSnackbar({message: t('appGlobal.solutionAdded'), severity: 'success'})
-                })
-                .catch((error) => {
-                    handleError(t, addSnackbar, 'error.addSolution', error, 5000)
-                })
-                .finally(() => {
-                    setIsLoading(false)
-                })
+          if (!solution.solutionLmsId || !solution.learningElementLmsId || !solution.solutionLmsType) {
+            handleError(t, addSnackbar, 'components.AddSolutionModal.missingSolutionData', { solution }, 5000)
+            setIsLoading(false)
+            return
+          }
+
+          const outputJson = JSON.stringify({ solution_lms_id: solution.solutionLmsId, activity_type: solution.solutionLmsType })
+          
+          postLearningElementSolution({learningElementLmsId: solution.learningElementLmsId, outputJson})
+              .then(() => {
+                  addSnackbar({message: t('appGlobal.solutionAdded'), severity: 'success', autoHideDuration: 3000})
+                  setLearningElementSolution(solution.learningElementLmsId, solution.solutionLmsId, solution.solutionLmsType)
+              })
+              .catch((error) => {
+                  handleError(t, addSnackbar, 'error.addSolution', error, 5000)
+              })
+              .finally(() => {
+                  setIsLoading(false)
+                  onClose()
+          })
         })
-    }, [onClose])
+    }, [setIsLoading, currentTopic, learningElementsWithSolutions, addSnackbar, t])
 
-    useEffect(() => {
-    if (!courseId || !topicId) return
-    getUser()
-      .then((user) => {
-        getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
-          .then((learningPathTopic) => {
-            setCurrentTopic(learningPathTopic.topics.filter((topic) => topic.id === parseInt(topicId))[0])
-          })
-          .catch((error) => {
-            handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 5000)
-          })
-      })
-      .catch((error) => {
-        handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
-      })
-  }, [topicId, getUser, getLearningPathTopic, courseId, t, addSnackbar])
-
-
-  //filter out the learning elements that are already in the learning path
-  useEffect(() => {
-    if (!courseId || !topicId) return
-    getUser()
-      .then((user) =>
-        getRemoteTopics(courseId)
-          .then((topics: RemoteTopics[]) => {
-            // Filter remote topics by matching the current topic LMS ID
-            const remoteTopic = topics.find((topic) => topic.topic_lms_id === currentTopic?.lms_id)
-            return { user, remoteTopic }
-          })
-          .catch((error) => {
-            handleError(t, addSnackbar, 'error.fetchRemoteTopics', error, 3000)
-            throw error
-          })
-      )
-      .then(({ user, remoteTopic }) =>
-        getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId).then(
-          (learningPathElementData: LearningPathElement) => {
-            // Extract LMS IDs of learning elements already in the learning path
-            const existingLearningElementIds = learningPathElementData.path.map(
-              (element) => element.learning_element.lms_id
+    // Disable the send/ next button when not all selected learning elements have a solution
+    const disableSend = useCallback(() => {
+        if(!currentTopic) return true
+        return !selectedLearningElements[currentTopic.lms_id]?.every((element) =>
+            learningElementsWithSolutions[currentTopic.lms_id]?.some(
+                (solution) => solution.learningElementLmsId === element.lms_id && solution.solutionLmsType
             )
-
-            // Update remote topics by filtering out elements that already exist in the learning path
-            const filteredLearningElements = remoteTopic?.lms_learning_elements.filter(
-                (learningElement) => !existingLearningElementIds.includes(learningElement.lms_id)
-              )
-            const solutions : Solution[] = filteredLearningElements?.map((learningElement) => ({
-                solutionLmsId: learningElement.lms_id,
-                solutionLmsName: learningElement.lms_learning_element_name,
-                solutionLmsType: learningElement.lms_activity_type
-            } as Solution)) || []
-        })
-      )
-      .catch((error) => {
-        handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 3000)
-      })
-  }, [
-    activeStep,
-    setActiveStep,
-    topicId,
-    courseId,
-    selectedLearningElements,
-    setSelectedLearningElements,
-  ])
+          )
+        }, [currentTopic, selectedLearningElements, learningElementsWithSolutions, t, addSnackbar])
     
     return (
         !currentTopic ?
@@ -184,8 +153,10 @@ const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: Add
                             learningElementsWithSolutions={learningElementsWithSolutions}
                             onLearningElementSolutionChange={setLearningElementsWithSolutions}
                             onNext={handleSend}
-                            onBack={() => setActiveStep(1)}
+                            onBack={() => setActiveStep(0)}
+                            disableNext={disableSend}
                             nextButtonText={t('appGlobal.next')}
+                            isLoading={isLoading}
                         />
                     )}
                 </Grid>
@@ -195,4 +166,4 @@ const AddSolutionModalProps = ({ open, activeStep, setActiveStep, onClose }: Add
     )
 }
 
-export default memo(AddSolutionModalProps)
+export default memo(AddSolutionModal)
