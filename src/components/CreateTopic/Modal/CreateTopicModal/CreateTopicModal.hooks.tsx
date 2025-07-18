@@ -1,6 +1,6 @@
-import log from 'loglevel'
 import { Dispatch, SetStateAction, useCallback, useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import log from 'loglevel'
 import {
   CreateAlgorithmTableNameProps,
   RemoteLearningElementWithClassification,
@@ -10,13 +10,13 @@ import {
 } from '@components'
 import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {
-  SnackbarContext,
   postAddAllStudentsToTopics,
   postCalculateLearningPathForAllStudents,
   postLearningElement,
   postLearningElementSolution,
   postLearningPathAlgorithm,
-  postTopic
+  postTopic,
+  SnackbarContext
 } from '@services'
 import { usePersistedStore, useStore } from '@store'
 

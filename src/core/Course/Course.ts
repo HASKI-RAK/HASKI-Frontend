@@ -16,4 +16,4 @@ type Course = {
 }
 
 export default Course
-export type { CourseReturn, CourseResponse }
+export type { CourseResponse, CourseReturn }

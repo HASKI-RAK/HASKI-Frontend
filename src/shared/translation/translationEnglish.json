@@ -1297,6 +1297,7 @@
   "error.postStudentLpLeAlg": "An error occured while setting the new algorithm for the user.",
   "error.postTeacherLpLeAlg": "An error occured while setting the new recommended algorithm for the topic.",
   "error.postTopic": "An error occurred while sending the Topic data",
+  "error.sendStatement": "An error occurred while sending an xAPI statement.",
   "error.setLearningPathElementSpecificStatus": "An error occurred while setting the Learning Path Element Specific Status.",
   "error.setTopics": "An error occurred while setting topics.",
   "error.setTopicsPath": "An error occurred while setting the topics path.",
@@ -1392,11 +1393,11 @@
   "pages.aboutus.interdisciplinaryHeader": "Interdisciplinary work - an overview",
   "pages.aboutus.introductionBody": "HASKI is a joint project of the three Bavarian universities OTH Regensburg, Aschaffenburg UAS & Kempten UAS and comprises over 20, lecturers, scientific assistants, student assistants and people involved in the administration.",
   "pages.aboutus.introductionHeader": "Partcipants in the HASKI project",
-  "pages.aboutus.membersAschaffenburgBody": "Project Lead:\nProf. Dr.-Ing. Jörg Abke \n\nEmployees:\nProf. Dr. Galia Weidl, Isabell Hock, Michael Münch, PhD. Iryna Sapsai, Yeimy Valencia \n\nFormer: \nDoris Rebitzer, Marc Normann",
+  "pages.aboutus.membersAschaffenburgBody": "Project Lead:\nProf. Dr.-Ing. Jörg Abke\n\nEmployees:\nProf. Dr. Galia Weidl, Isabell Hock, Yeimy Valencia, Paul Schoppel, Julian Manz\n\nFormer:\nDoris Rebitzer, Marc Normann, PhD. Iryna Sapsai, Michael Münch",
   "pages.aboutus.membersAschaffenburgHeader": "Team Aschaffenburg UAS",
-  "pages.aboutus.membersKemptenBody": "Project Lead:\nProf. Dr. Georg Hagel\n\nEmployees:\nDimitri Bigler, David Fischer, Jim Haug, Kevin Lee, Julian Manz, Gesine Wagner\n\nStudent Assistents: \nMartyna Dorosewicz , Joel Scherer , Cedric Steiert \n\nFormer: \nJonathan Hilscher, Elena Gialamas (student assistant), Maximilian Jatzkowski (student assistant)",
+  "pages.aboutus.membersKemptenBody": "Project Lead:\nProf. Dr. Georg Hagel\n\nEmployees:\nDimitri Bigler, David Fischer, Jim Haug, Kevin Lee, Gesine Wagner\n\nStudent Assistents:\nJoel Scherer\n\nFormer:\nJonathan Hilscher, Elena Gialamas (student assistant), Maximilian Jatzkowski (student assistant), Cedric Steiert (student assistant), Martyna Dorosewicz (student assistant)",
   "pages.aboutus.membersKemptenHeader": "Team Kempten UAS",
-  "pages.aboutus.membersRegensburgBody": "Project Lead:\nProf. Dr. Jürgen Mottok \n\nEmployees:\nDominik Bittner, Flemming Bugert, Timur Ezer, Miriam Flannery, Lisa Grabinger, Florian Hauser, Vamsi Krishna Nadimpalli, Simon Roehrl, Susanne Staufer",
+  "pages.aboutus.membersRegensburgBody": "Project Lead:\nProf. Dr. Jürgen Mottok\n\nEmployees:\nFlemming Bugert, Timur Ezer, Miriam Flannery, Lisa Grabinger, Florian Hauser, Vamsi Krishna Nadimpalli, Simon Roehrl, Susanne Staufer\n\nFormer: Dominik Bittner",
   "pages.aboutus.membersRegensburgHeader": "Team OTH Regensburg",
   "pages.aboutus.quotesBody": [
     {

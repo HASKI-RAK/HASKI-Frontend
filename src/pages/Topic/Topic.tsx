@@ -6,11 +6,11 @@ import { Grid, Skeleton } from '@common/components'
 import {
   AddSolution,
   CreateLearningElement,
+  handleError,
   IFrameModal,
   LabeledSwitch,
-  ResponsiveMiniMap,
-  handleError,
-  nodeTypes
+  nodeTypes,
+  ResponsiveMiniMap
 } from '@components'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'

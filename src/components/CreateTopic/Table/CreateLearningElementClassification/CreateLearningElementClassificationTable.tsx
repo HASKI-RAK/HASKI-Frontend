@@ -1,5 +1,5 @@
 import { TableBody, tableCellClasses } from '@mui/material'
-import { ReactNode, memo, useEffect, useMemo } from 'react'
+import { memo, ReactNode, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Box,
@@ -100,6 +100,16 @@ const CreateLearningElementClassificationTable = ({
 
     onLearningElementChange(updatedClassifications)
   }, [selectedLearningElements])
+
+  const handleSelectChange = useCallback(
+    (lmsTopic: RemoteTopics, element: LearningElementWithClassification) => (event: SelectChangeEvent<unknown>) => {
+      const { value } = event.target
+      if (typeof value === 'string') {
+        handleClassificationChange(lmsTopic.topic_lms_id, element.lms_id, value)
+      }
+    },
+    [handleClassificationChange]
+  )
 
   //Return early
   if (Object.keys(LearningElementsClassification).length === 0) {

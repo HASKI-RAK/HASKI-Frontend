@@ -1,4 +1,4 @@
-import { ReactElement, memo } from 'react'
+import { memo, ReactElement } from 'react'
 import { Grow, Slide } from '@common/components'
 import { SeverityType } from '@components'
 

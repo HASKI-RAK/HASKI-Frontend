@@ -1,54 +1,46 @@
-import { ElementType, MouseEvent, ReactElement, memo, useCallback } from 'react'
+import { ElementType, memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { BoxProps as DefaultBoxProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { usePageName } from '@services'
 import { Box } from './DefaultBox'
 
 /**
- * @prop DefaultBoxProps - The props of a mui Box.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
+ * @prop {@link DefaultBoxProps} - The props of the default Box component.
+ * @prop {@link EventHandlers} - The props containing the event handlers.
  * @interface
  */
-type ImageWrapperProps<C extends ElementType, P = object> = DefaultBoxProps<C, P> & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+type ImageWrapperProps<C extends ElementType, P = object> = DefaultBoxProps<C, P> & EventHandlers
+
+/**
+ * WrappedImageWrapper component.
+ *
+ * @remarks
+ * The WrappedImageWrapper component is a wrapper around the MUI Box component.
+ * It is enhanced with xAPI functionality to track user interactions.
+ * WrappedImageWrapper can be used as a standalone component on a page.
+ *
+ * @category Components
+ */
+const WrappedImageWrapper = withXAPI(Box, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'ImageWrapper'
+})
 
 /**
  * ImageWrapper component.
  *
- * @param props - Props containing the useStatement hook and the props of a mui Box.
+ * @param props - Props containing the default Box props and event handlers.
  *
- * @category Common
+ * @remarks
+ * The ImageWrapper component is a wrapper around the WrappedImageWrapper component.
+ * It retrieves the page name from a hook and passes it to the WrappedImageWrapper component.
+ * ImageWrapper can be used as a standalone component on a page.
+ *
+ * @category Components
  */
-const ImageWrapper = <C extends ElementType>({
-  useStatement = _useStatement,
-  onClick,
-  ...props
-}: ImageWrapperProps<C, { alt?: string }>): ReactElement => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.Image
-  })
-
-  return (
-    <Box
-      onClick={useCallback(
-        (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
-          onClick?.(event)
-        },
-        [onClick, sendStatement]
-      )}
-      {...props}>
-      {props.children}
-    </Box>
-  )
+const ImageWrapper = <C extends ElementType>({ ...props }: ImageWrapperProps<C, { alt?: string }>) => {
+  const { pageName } = usePageName()
+  return <WrappedImageWrapper pageName={pageName} {...props} />
 }
 
 export default memo(ImageWrapper)
