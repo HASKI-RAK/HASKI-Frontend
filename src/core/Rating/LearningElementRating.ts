@@ -8,10 +8,7 @@ type LearningElementRating = {
 
 type LearningElementRatingResponse = LearningElementRating[]
 
-type LearningElementRatingReturn = (
-  learningElementId?: number,
-  topicId?: number
-) => Promise<LearningElementRatingResponse>
+type LearningElementRatingReturn = () => Promise<LearningElementRatingResponse>
 
 export default LearningElementRating
 export type { LearningElementRatingResponse, LearningElementRatingReturn }

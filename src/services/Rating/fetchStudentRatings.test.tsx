@@ -42,8 +42,4 @@ describe('fetchStudentRatings', () => {
 
     expect(result).toEqual(inputData)
   })
-
-  it('should throw error on missing variable', async () => {
-    expect(fetchStudentRatings(1)).rejects.toThrow('userId and studentId are required')
-  })
 })

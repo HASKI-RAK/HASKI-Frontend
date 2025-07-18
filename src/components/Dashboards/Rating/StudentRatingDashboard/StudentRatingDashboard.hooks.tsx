@@ -252,42 +252,26 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
   }, [])
 
   useEffect(() => {
-    // If the user is not authenticated, do not fetch data.
     if (!isAuth) return
 
-    // Get the user.
     getUser()
       .then((user: User) => {
-        // Fetch all ratings of all students.
         fetchStudentRatings(user.settings.user_id, user.id)
           .then((ratings) => {
-            // Get the maximum rating value.
             const maxRatingValue = getMaxRatingValue(ratings)
-
-            // Get the maximum rating deviation.
             const maxRatingDeviation = getMaxRatingDeviation(ratings)
-
-            // Get all ratings of the user.
             const userRatings = getUserRatings(ratings, user.id)
-
-            // Categorize the ratings of the user into topics.
             const categorizedRatings = getCategorizedRatings(userRatings)
 
-            // Set the data for the spider graph.
             setSpiderGraphData(getSpiderGraphData(categorizedRatings))
 
-            // Calculate the average rating value and deviation of the user.
             const totals = getTotals(categorizedRatings)
-
-            // Calculate the rating value trend and rating deviation trend of the user.
             const count = Object.keys(categorizedRatings).length
             const ratingValueTrend = (totals.current.ratingValue - totals.previous.ratingValue) / count
             const ratingDeviationTrend = (totals.current.ratingDeviation - totals.previous.ratingDeviation) / count
 
-            // Set the user rating value.
             setUserRatingValue(totals.current.ratingValue / count)
 
-            // Set the rating stats of the user.
             setRatingStats({
               ratingValue: totals.current.ratingValue / count / maxRatingValue,
               ratingDeviation: totals.current.ratingDeviation / count / maxRatingDeviation,
@@ -296,10 +280,7 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
               maxRatingDeviation: 1
             })
 
-            // Set the data for the line graph.
             setLineGraphData(getLineGraphData(userRatings))
-
-            // Set the histogram data.
             setHistogramData(getHistogramData(ratings))
           })
           .catch((error) => {
@@ -324,7 +305,6 @@ export const useStudentRatingDashboard = (): RatingDashboardHookReturn => {
   }, [isAuth])
 
   useEffect(() => {
-    // Only toggle isLoading to false when lineGraphData has data.
     if (lineGraphData.length > 0) setIsLoading(false)
   }, [lineGraphData])
 

@@ -20,11 +20,7 @@ import { fetchData } from '../RequestResponse'
  * const studentRatings = await fetchStudentRatings(userId, studentId)
  * ```
  */
-export const fetchStudentRatings: StudentRatingReturn = async (userId?: number, studentId?: number) => {
-  if (!userId || !studentId) {
-    throw new Error('userId and studentId are required')
-  }
-
+export const fetchStudentRatings: StudentRatingReturn = async (userId: number, studentId: number) => {
   return fetchData<StudentRating[]>(getConfig().BACKEND + `/user/${userId}/student/${studentId}/rating`, {
     method: 'GET',
     credentials: 'include',

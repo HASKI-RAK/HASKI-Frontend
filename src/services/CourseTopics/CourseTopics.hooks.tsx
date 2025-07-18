@@ -56,7 +56,6 @@ export const useCourseTopics = (): CourseTopicsReturnType => {
    * @param user - The current user.
    */
   const getCourseTopics = async (courseResponse: CourseResponse, user: User) => {
-    // Get all topics for each course.
     const courseTopics = courseResponse.courses.map((course) =>
       getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, course.id.toString())
         .then((learningPathTopic: LearningPathTopic) => learningPathTopic.topics)
@@ -67,7 +66,6 @@ export const useCourseTopics = (): CourseTopicsReturnType => {
             autoHideDuration: 3000
           })
           log.error(t('error.fetchLearningPathTopic') + ' ' + error)
-          // Return an empty array if an error occurs.
           return []
         })
     )
@@ -76,13 +74,10 @@ export const useCourseTopics = (): CourseTopicsReturnType => {
   }
 
   useEffect(() => {
-    // If the user is not authenticated, do not fetch topics.
     if (!isAuth) return
 
-    // Get the user.
     getUser()
       .then((user: User) => {
-        // Get the courses of the user.
         getCourses(user.settings.user_id, user.lms_user_id, user.id)
           .then(async (courseResponse) => {
             setTopics(await getCourseTopics(courseResponse, user))

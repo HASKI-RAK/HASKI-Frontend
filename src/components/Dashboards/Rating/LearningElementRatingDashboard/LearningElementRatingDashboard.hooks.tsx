@@ -50,7 +50,7 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
    */
   const [lineGraphData, setLineGraphData] = useState<{ value: number; deviation: number; timestamp: Date }[]>([])
   /**
-   * Stores th rating statistics of the learning elements.
+   * Stores the rating statistics of the learning elements.
    */
   const [ratingStats, setRatingStats] = useState({
     ratingValue: 0,
@@ -258,26 +258,17 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
   }, [])
 
   useEffect(() => {
-    // If the user is not authenticated, do not fetch ratings.
     if (!isAuth) return
 
-    // Fetch all learning element ratings.
     fetchLearningElementRatings()
       .then((learningElementRatingResponse: LearningElementRatingResponse) => {
-        // Get the max rating value.
         const maxRatingValue = getMaxRatingValue(learningElementRatingResponse)
-
-        // Get the max rating deviation.
         const maxRatingDeviation = getMaxRatingDeviation(learningElementRatingResponse)
-
-        // Calculate the average rating for each topic.
         const topicAverages = getTopicAverages(learningElementRatingResponse)
 
-        // Set data for spider graph.
         const spiderData = getSpiderData(topicAverages)
         setSpiderGraphData(spiderData)
 
-        // Calculate the overall averages.
         const overallAverages = topicAverages.reduce(
           (acc, topic) => ({
             latestRatingSum: acc.latestRatingSum + topic.latestAvgRating,
@@ -288,7 +279,6 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
           { latestRatingSum: 0, latestDeviationSum: 0, secondLatestRatingSum: 0, secondLatestDeviationSum: 0 }
         )
 
-        // Set the rating stats.
         const totalTopics = topicAverages.length
         setRatingStats({
           ratingValue: overallAverages.latestRatingSum / totalTopics / maxRatingValue,
@@ -303,13 +293,9 @@ export const useLearningElementRatingDashboard = (): RatingDashboardHookReturn =
           maxRatingDeviation: 1
         })
 
-        // Calculate the data for the line graph.
         const lineGraphData = getLineGraphData(learningElementRatingResponse)
-
-        // Set the data for the line graph.
         setLineGraphData(lineGraphData)
 
-        // Set loading to false
         if (ratingStats && spiderGraphData && lineGraphData.length > 0) setIsLoading(false)
       })
       .catch((error) => {
