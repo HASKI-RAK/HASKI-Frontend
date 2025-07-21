@@ -57,6 +57,7 @@ const mockDataServices: MockDataServices = {
       university: 'HS Kempten'
     })
   ),
+  fetchDisabledClassifications: jest.fn(() => Promise.resolve(['KÜ', 'EK'])),
   fetchLearningPathElement: jest.fn(() =>
     Promise.resolve({
       id: 1,
@@ -285,6 +286,28 @@ const mockDataServices: MockDataServices = {
       expiration: 999999999999999
     })
   ),
+  postDefaultLearningPath: jest.fn(() =>
+    Promise.resolve([
+      {
+        classification: 'KÜ',
+        position: 1,
+        disabled: true,
+        university: 'HS-KE'
+      },
+      {
+        classification: 'EK',
+        position: 2,
+        disabled: true,
+        university: 'HS-KE'
+      },
+      {
+        classification: 'ÜB',
+        position: 3,
+        disabled: false,
+        university: 'HS-KE'
+      }
+    ])
+  ),
   fetchRedirectMoodleLogin: jest.fn(() =>
     Promise.resolve({
       lti_launch_view: 'test'
@@ -361,6 +384,17 @@ const mockDataServices: MockDataServices = {
       url: 'http://fakedomain.com:5000/lms/student/1/questionnaire/ils'
     })
   ),
+  postCalculateLearningPathILS: jest.fn(() =>
+    Promise.resolve({
+      based_on: 'graf',
+      calculated_on: 'Mon, 24 Mar 2025 15:28:16 GMT',
+      course_id: 2,
+      id: 2,
+      path: 'KÜ, EK, AN, LZ',
+      student_id: 1,
+      topic_id: 1
+    })
+  ),
   postListK: jest.fn(() =>
     Promise.resolve({
       ok: true,
@@ -368,6 +402,52 @@ const mockDataServices: MockDataServices = {
       statusText: 'CREATED',
       url: 'http://fakedomain.com:5000/lms/student/1/questionnaire/listk'
     })
+  ),
+  fetchDefaultLearningPath: jest.fn(() =>
+    Promise.resolve([
+      {
+        classification: 'EK',
+        disabled: false,
+        id: 25,
+        position: 1,
+        university: 'HS-KE'
+      },
+      {
+        classification: 'AN',
+        disabled: false,
+        id: 26,
+        position: 2,
+        university: 'HS-KE'
+      },
+      {
+        classification: 'FO',
+        disabled: false,
+        id: 27,
+        position: 3,
+        university: 'HS-KE'
+      },
+      {
+        classification: 'LZ',
+        disabled: true,
+        id: 28,
+        position: 9000,
+        university: 'HS-KE'
+      },
+      {
+        classification: 'KÜ',
+        disabled: true,
+        id: 29,
+        position: 9001,
+        university: 'HS-KE'
+      },
+      {
+        classification: 'BE',
+        disabled: true,
+        id: 30,
+        position: 9002,
+        university: 'HS-KE'
+      }
+    ])
   ),
   fetchLearningPathElementStatus: jest.fn(() =>
     Promise.resolve([
@@ -666,6 +746,59 @@ afterAll(() => {
 // ############################## Common ############################## //
 
 jest.mock('reactflow/dist/style.css', () => jest.fn())
+
+jest.mock('@dnd-kit/core', () => {
+  const originalModule = jest.requireActual('@dnd-kit/core')
+  return {
+    __esModule: true,
+    ...originalModule,
+    useDroppable: jest.fn(() => ({
+      isOver: true,
+      setNodeRef: jest.fn()
+    })),
+    useDraggable: jest.fn(() => ({
+      listeners: {},
+      attributes: {
+        role: 'button',
+        tabIndex: 0,
+        'aria-disabled': false,
+        'aria-roledescription': 'draggable',
+        'aria-describedby': ''
+      },
+      setNodeRef: jest.fn(),
+      isDragging: true,
+      transform: {
+        x: 0,
+        y: 0
+      }
+    }))
+  }
+})
+
+jest.mock('@dnd-kit/sortable', () => {
+  const originalModule = jest.requireActual('@dnd-kit/sortable')
+  return {
+    __esModule: true,
+    ...originalModule,
+    useSortable: jest.fn(() => ({
+      attributes: {
+        role: 'button',
+        tabIndex: 0,
+        'aria-disabled': false,
+        'aria-roledescription': 'draggable',
+        'aria-describedby': ''
+      },
+      listeners: { onClick: jest.fn() },
+      setNodeRef: jest.fn(),
+      transform: {
+        x: 0,
+        y: 0
+      },
+      transition: 'transform 250ms ease',
+      isDragging: true
+    }))
+  }
+})
 
 // ############################## Services ############################## //
 /**

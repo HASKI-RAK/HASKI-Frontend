@@ -41,11 +41,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const { addSnackbar } = useContext(SnackbarContext)
   const { fitView } = useReactFlow()
   const { isCourseCreatorRole } = useContext(RoleContext)
+  const [hasCentered, setHasCentered] = useState(false)
 
   const { courseId, topicId } = useParams()
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
+  const getDefaultLearningPath = usePersistedStore((state) => state.getDefaultLearningPath)
   const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
 
@@ -63,14 +65,29 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
   const [isGrouped, setIsGrouped] = useState(true)
 
-  const getLearningElementsWithStatus = async (
-    learningPathElementStatusData: LearningPathElementStatus[],
-    user: User
-  ) => {
+  const getLearningElementsWithStatus = (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
     setLearningPathElementStatus(learningPathElementStatusData)
+
     getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
       .then((learningPathElementData) => {
-        const { nodes, edges } = mapNodes(learningPathElementData, learningPathElementStatusData, isGrouped)
+        if (learningPathElementData.based_on === 'default') {
+          return getDefaultLearningPath(user.settings.user_id, user.lms_user_id).then((defaultLearningPath) => {
+            const disabledClassificationsList = defaultLearningPath
+              .filter((classificationElement) => classificationElement.disabled)
+              .map((classificationElement) => classificationElement.classification)
+            return { learningPathElementData, disabledClassificationsList }
+          })
+        } else {
+          return { learningPathElementData, disabledClassificationsList: [] }
+        }
+      })
+      .then(({ learningPathElementData, disabledClassificationsList }) => {
+        const { nodes, edges } = mapNodes(
+          learningPathElementData,
+          learningPathElementStatusData,
+          disabledClassificationsList,
+          isGrouped
+        )
         setInitialNodes(nodes)
         setInitialEdges(edges)
       })
@@ -118,11 +135,15 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     learningPathLearningElementStatusCache
   ])
 
+  useEffect(() => {
+    setHasCentered(false)
+  }, [topicId])
+
   // custom fitView centering on first uncompleted element
   // currently focuses on first element
   // can also focus on first element that is uncomplete (node.find(node => !node.data?.isDone) || node[0])
   useEffect(() => {
-    if (initialNodes) {
+    if (initialNodes && !hasCentered) {
       setTimeout(() => {
         fitView({
           padding: 5,
@@ -130,9 +151,10 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           duration: 100,
           nodes: [{ id: initialNodes[0].id }]
         })
+        setHasCentered(true)
       }, 100)
     }
-  }, [topicId, navigate])
+  }, [initialNodes, navigate, hasCentered])
 
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)

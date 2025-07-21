@@ -16,7 +16,7 @@ describe('BasicNode tests', () => {
     mockReactFlow()
   })
 
-  const getMockNode = (isDone: boolean): Node => {
+  const getMockNode = (isDone: boolean, isDisabled: boolean): Node => {
     const mockData: LearningPathLearningElementNode = {
       learningElementId: 1,
       lmsId: 1,
@@ -29,7 +29,8 @@ describe('BasicNode tests', () => {
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
-      isDone: isDone
+      isDone: isDone,
+      isDisabled: isDisabled
     }
 
     return {
@@ -41,7 +42,7 @@ describe('BasicNode tests', () => {
   }
 
   test('renders correctly and can be clicked, isDone is false', () => {
-    const mockNode = getMockNode(false)
+    const mockNode = getMockNode(false, false)
 
     render(
       <MemoryRouter>
@@ -58,7 +59,7 @@ describe('BasicNode tests', () => {
   })
 
   test('renders correctly and can be clicked, isDone is true', () => {
-    const mockNode = getMockNode(true)
+    const mockNode = getMockNode(true, false)
 
     render(
       <MemoryRouter>
@@ -212,7 +213,7 @@ describe('BasicNode tests', () => {
   */
 
   test('shows delete button on hover when isCourseCreatorRole is true', async () => {
-    const mockNode = getMockNode(false)
+    const mockNode = getMockNode(false, false)
 
     const courseCreatorContext = {
       isStudentRole: false,
@@ -241,7 +242,7 @@ describe('BasicNode tests', () => {
   })
 
   test('clicking delete button opens delete modal', async () => {
-    const mockNode = getMockNode(false)
+    const mockNode = getMockNode(false, false)
 
     const courseCreatorContext = {
       isStudentRole: false,
@@ -264,7 +265,7 @@ describe('BasicNode tests', () => {
   })
 
   test('clicking delete button opens delete modal, clicking outside closes it', async () => {
-    const mockNode = getMockNode(false)
+    const mockNode = getMockNode(false, false)
 
     const courseCreatorContext = {
       isStudentRole: false,
@@ -302,7 +303,7 @@ describe('BasicNode tests', () => {
   })
 
   test('clicking delete button does not trigger handleOpen()', async () => {
-    const mockNode = getMockNode(false)
+    const mockNode = getMockNode(false, false)
 
     const courseCreatorContext = {
       isStudentRole: false,
@@ -325,7 +326,7 @@ describe('BasicNode tests', () => {
   })
 
   test('confirming delete calls deleteLearningElement with correct arguments', async () => {
-    const mockNode = getMockNode(false)
+    const mockNode = getMockNode(false, false)
 
     const courseCreatorContext = {
       isStudentRole: false,
@@ -351,5 +352,43 @@ describe('BasicNode tests', () => {
       fireEvent.click(screen.getByText('appGlobal.delete'))
       expect(deleteLearningElement).toHaveBeenCalledWith(1, 1)
     })
+  })
+
+  test('disabled classification nodes are not seen by students', async () => {
+    const mockNode = getMockNode(false, true)
+
+    const studentContext = {
+      isStudentRole: true,
+      isCourseCreatorRole: false
+    } as RoleContextType
+
+    const { queryByTestId } = render(
+      <RoleContext.Provider value={studentContext}>
+        <MemoryRouter>
+          <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
+        </MemoryRouter>
+      </RoleContext.Provider>
+    )
+
+    expect(queryByTestId('basicNode')).not.toBeInTheDocument()
+  })
+
+  test('disabled classification nodes are seen by courseCreator', async () => {
+    const mockNode = getMockNode(false, true)
+
+    const courseCreatorContext = {
+      isStudentRole: false,
+      isCourseCreatorRole: true
+    } as RoleContextType
+
+    const { getByTestId } = render(
+      <RoleContext.Provider value={courseCreatorContext}>
+        <MemoryRouter>
+          <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
+        </MemoryRouter>
+      </RoleContext.Provider>
+    )
+
+    expect(getByTestId('basicNode')).toBeInTheDocument()
   })
 })

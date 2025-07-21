@@ -4,7 +4,7 @@ import { NodeProps } from 'reactflow'
 import { IconButton, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { AssignmentLate } from '@common/icons'
-import { LearningPathLearningElementNode } from '@components'
+import { getNodeIcon, LearningPathLearningElementNode } from '@components'
 import BasicNode from '../BasicNode/BasicNode'
 
 /**
@@ -20,7 +20,7 @@ import BasicNode from '../BasicNode/BasicNode'
  * @category Components
  */
 const ExerciseNode = (data: NodeProps<LearningPathLearningElementNode>) => {
-  return <BasicNode {...data} id="exercise-node" icon={<AssignmentLate sx={{ fontSize: 50 }} />}></BasicNode>
+  return <BasicNode {...data} id="exercise-node" icon={getNodeIcon('ÜB', 50)} />
 }
 
 export default memo(ExerciseNode)

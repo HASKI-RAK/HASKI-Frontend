@@ -3,7 +3,7 @@ import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
 /*
- * @props studentId - student id
+ * @props courseId - course id
  * @props outputJson - output json
  * @interface
  */
@@ -15,14 +15,14 @@ type PostTopicProps = {
 /*
  * postTopic function.
  *
- * @param studentId - student id
+ * @param courseId - course id
  * @param outputJson - output json
  *
  * @remarks
- * Posts the ListK for a student
- * Throws an error if studentId or outputJson are not provided.
+ * Posts a topic for a course.
+ * Throws an error if courseId is not provided.
  *
- * @returns - returns a promise with the ListK.
+ * @returns - returns a promise with the Topic.
  *
  * @category Services
  */

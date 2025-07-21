@@ -4,8 +4,13 @@ import { fetchLearningPathTopic } from '@services'
 import { StoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
-export default interface LearningPathTopicSlice {
-  _cache_learningPathTopic_record: Record<string, LearningPathTopic | undefined>
+type LearningPathTopicCache = {
+  value?: LearningPathTopic
+  promise?: Promise<LearningPathTopic>
+}
+
+export type LearningPathTopicSlice = {
+  _cache_learningPathTopic_record: Record<string, LearningPathTopicCache>
   clearLearningPathTopicCache: () => void
   getLearningPathTopic: LearningPathTopicReturn
 }
@@ -19,19 +24,39 @@ export const createLearningPathTopicSlice: StateCreator<StoreState, [], [], Lear
     },
     getLearningPathTopic: async (...arg) => {
       const [userId, lmsUserId, studentId, courseId] = arg
+      const key = `${courseId}`
 
-      const cached = get()._cache_learningPathTopic_record[`${courseId}`]
+      const cached = get()._cache_learningPathTopic_record[key]
 
-      if (!cached) {
-        const learningPathTopic_response = await fetchLearningPathTopic(userId, lmsUserId, studentId, courseId)
-        set({
-          _cache_learningPathTopic_record: {
-            ...get()._cache_learningPathTopic_record,
-            [`${courseId}`]: learningPathTopic_response
-          }
-        })
-        return learningPathTopic_response
-      } else return cached
+      if (cached?.value) {
+        return cached.value
+      }
+
+      if (cached?.promise) {
+        return cached.promise
+      }
+
+      const fetchPromise = fetchLearningPathTopic(userId, lmsUserId, studentId, courseId).then(
+        (response: LearningPathTopic) => {
+          set({
+            _cache_learningPathTopic_record: {
+              ...get()._cache_learningPathTopic_record,
+              [key]: { value: response }
+            }
+          })
+          return response
+        }
+      )
+
+      // Cache the in-flight promise.
+      set({
+        _cache_learningPathTopic_record: {
+          ...get()._cache_learningPathTopic_record,
+          [key]: { promise: fetchPromise }
+        }
+      })
+
+      return fetchPromise
     }
   }
 }

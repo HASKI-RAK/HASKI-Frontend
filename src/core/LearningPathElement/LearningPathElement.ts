@@ -1,4 +1,4 @@
-import { LearningPathLearningElement } from '@core'
+import LearningPathLearningElement from '../LearningPathLearningElement/LearningPathLearningElement'
 
 /**
  * Params are optional so

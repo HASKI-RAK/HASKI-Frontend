@@ -1,5 +1,21 @@
+import { ReactElement } from 'react'
 import { NodeTypes } from 'reactflow'
 import { TFunction } from 'i18next'
+import {
+  Article,
+  Assignment,
+  AssignmentInd,
+  AssignmentLate,
+  Description,
+  Feedback,
+  Flag,
+  Forum,
+  QuestionMark,
+  SettingsApplications,
+  ShortText,
+  TipsAndUpdates,
+  Videocam
+} from '@common/icons'
 import AdditionalLiteratureNode from '../AdditionalLiteratureNode/AdditionalLiteratureNode'
 import ApplicationExampleNode from '../ApplicationExampleNode/ApplicationExampleNode'
 import BasicNode from '../BasicNode/BasicNode'
@@ -25,21 +41,40 @@ import VideoNode from '../VideoNode/VideoNode'
  * @category Components
  */
 export const nodeTypes: NodeTypes = {
-  RQ: FeedbackNode,
-  KÜ: ShortTextualIntroductionNode,
   AB: ApplicationExampleNode,
-  EK: ExplanationNode,
-  EF: EvaluationQuestionnaireNode,
   AN: VideoNode,
   BE: ExampleNode,
+  EK: ExplanationNode,
+  EF: EvaluationQuestionnaireNode,
   FO: ForumNode,
+  KÜ: ShortTextualIntroductionNode,
+  LZ: LearningObjectiveNode,
+  RQ: FeedbackNode,
+  SE: SelfAssessmentNode,
   ÜB: ExerciseNode,
   ZF: SummaryNode,
-  LZ: LearningObjectiveNode,
   ZL: AdditionalLiteratureNode,
-  SE: SelfAssessmentNode,
   GROUP: DefaultGroup,
   DEFAULT: BasicNode
+}
+
+export const getNodeIcon = (key: string, fontSize: number): ReactElement => {
+  const mapping: Record<string, ReactElement> = {
+    AB: <SettingsApplications sx={{ fontSize }} />,
+    AN: <Videocam sx={{ fontSize }} />,
+    BE: <Assignment sx={{ fontSize }} />,
+    EK: <TipsAndUpdates sx={{ fontSize }} />,
+    EF: <QuestionMark sx={{ fontSize }} />,
+    FO: <Forum sx={{ fontSize }} />,
+    KÜ: <ShortText sx={{ fontSize }} />,
+    LZ: <Flag sx={{ fontSize }} />,
+    RQ: <Feedback sx={{ fontSize }} />,
+    SE: <AssignmentInd sx={{ fontSize }} />,
+    ÜB: <AssignmentLate sx={{ fontSize }} />,
+    ZF: <Description sx={{ fontSize }} />,
+    ZL: <Article sx={{ fontSize }} />
+  }
+  return mapping[key] || <QuestionMark sx={{ fontSize }} />
 }
 
 /**

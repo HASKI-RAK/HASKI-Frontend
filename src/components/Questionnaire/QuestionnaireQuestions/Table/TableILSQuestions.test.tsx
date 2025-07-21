@@ -803,6 +803,71 @@ describe('Table ILS Questionnaire Short', () => {
     }
   })
 
+  test('Short ILS postCalculateLearningPathILS fails', async () => {
+    const mock = jest.fn(() => {
+      return Promise.reject(new Error('calculating ils failed'))
+    })
+    mockServices.postCalculateLearningPathILS.mockImplementationOnce(mock)
+
+    const { getByTestId, getByText } = render(
+      <MemoryRouter>
+        <TableILSQuestions ilsLong={false} successSend={successSend} setSuccessSend={setSuccessSend} />
+      </MemoryRouter>
+    )
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.TableILSQuestions.introduction'))
+    fireEvent.click(startButton)
+
+    const nextButton = getByTestId('nextButtonILSQuestionnaire')
+    const backButton = getByTestId('backButtonILSQuestionnaire')
+    expect(nextButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
+    expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
+
+    for (let i = 0; i < 6; i++) {
+      const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
+        'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton1)
+
+      const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
+        'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton2)
+
+      const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
+        'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton3)
+
+      const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
+        'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton4)
+
+      expect(RadioButton1.checked).toBe(true)
+      expect(RadioButton2.checked).toBe(true)
+      expect(RadioButton3.checked).toBe(true)
+      expect(RadioButton4.checked).toBe(true)
+
+      if (i < 5) {
+        fireEvent.click(nextButton)
+      } else {
+        const sendButton = getByTestId('sendButtonILSQuestionnaire')
+        expect(sendButton).toBeEnabled()
+        act(() => {
+          fireEvent.click(sendButton)
+          waitFor(async () => {
+            expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
+          })
+        })
+      }
+    }
+  })
+
   test('ILS Questionnaire useHandleSend returns error', async () => {
     const mock = jest.fn(() => {
       return Promise.reject(new Error('posting ils failed'))

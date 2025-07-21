@@ -4,7 +4,7 @@ import { fetchUser } from '@services'
 import { PersistedStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
-export default interface UserSlice {
+export type UserSlice = {
   _user: User | undefined
   getUser: (user?: User) => Promise<User>
 }
