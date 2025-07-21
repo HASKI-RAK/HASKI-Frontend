@@ -45,6 +45,7 @@ const SelectLearningElementTable = ({
     setSelectedLearningElements(updatedLearningElements)
   }
 
+  // Get Learning Elements in Topic that do not have solutions
   useEffect(() => {
     if (!courseId || !topicId) return
     getUser().then((user) => {
@@ -118,7 +119,7 @@ const SelectLearningElementTable = ({
                       checked={selectedLearningElements[currentTopic.lms_id]?.some(
                         (el) => el.lms_id === element.lms_id
                       )}
-                      onChange={(event) => handleCheckboxChange(element, event.target.checked)}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleCheckboxChange(element, event.target.checked)}
                     />
                   }
                   label={element.lms_learning_element_name}

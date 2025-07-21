@@ -4,25 +4,19 @@ import { Box, Button, Grid } from '@common/components'
 import { Topic } from '@core'
 import {
   RemoteLearningElementWithClassification,
-  RemoteLearningElementWithSolution,
-  Solution
 } from '../../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 import SelectLearningElementTable from '../SelectLearningElementTable/SelectLearningElementTable'
 
 interface SelectLearningElementStep {
   selectedTopics: Topic
   selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }
-  selectedSolutions: { [key: number]: Solution[] }
-  learningElementsWithSolution: { [key: number]: RemoteLearningElementWithSolution[] }
   setSelectedLearningElements: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>>
   onNext: () => void
 }
 
 const SelectLearningElementStep = ({
   selectedTopics,
-  selectedSolutions,
   selectedLearningElements,
-  learningElementsWithSolution,
   setSelectedLearningElements,
   onNext
 }: SelectLearningElementStep) => {

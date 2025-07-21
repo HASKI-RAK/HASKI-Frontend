@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Paper, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
 import { RemoteLearningElementWithClassification, handleError } from '@components'
-import { LearningPathElement, RemoteTopics, Topic } from '@core'
+import { Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { postLearningElementSolution } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -20,9 +20,7 @@ type AddSolutionModalProps = {
   selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }
   selectedSolutions: { [key: number]: Solution[] }
   learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }
-  setCurrentTopic: Dispatch<SetStateAction<Topic | undefined>>
   setSelectedLearningElements: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>>
-  setSelectedSolutions: Dispatch<SetStateAction<{ [key: number]: Solution[] }>>
   setLearningElementsWithSolutions: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithSolution[] }>>
   onClose: () => void
 }
@@ -35,20 +33,13 @@ const AddSolutionModal = ({
   selectedLearningElements,
   selectedSolutions,
   learningElementsWithSolutions,
-  setCurrentTopic,
   setSelectedLearningElements,
-  setSelectedSolutions,
   setLearningElementsWithSolutions,
   onClose
 }: AddSolutionModalProps) => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
   const { courseId } = useParams()
-
-  const getUser = usePersistedStore((state) => state.getUser)
-  const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
-  const getRemoteTopics = useStore((state) => state.getRemoteTopics)
-  const getLearningPathElement = useStore((state) => state.getLearningPathElement)
 
   const setLearningElementSolution = useStore((state) => state.setLearningElementSolution)
 
@@ -129,8 +120,6 @@ const AddSolutionModal = ({
               <SelectLearningElementStep
                 selectedTopics={currentTopic}
                 selectedLearningElements={selectedLearningElements}
-                selectedSolutions={selectedSolutions}
-                learningElementsWithSolution={learningElementsWithSolutions}
                 setSelectedLearningElements={setSelectedLearningElements}
                 onNext={() => setActiveStep(1)}
               />

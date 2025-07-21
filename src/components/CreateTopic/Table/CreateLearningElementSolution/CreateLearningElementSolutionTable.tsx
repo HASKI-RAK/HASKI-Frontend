@@ -1,16 +1,15 @@
 import { ReactNode, memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
-  Backdrop,
   Box,
   Checkbox,
-  CircularProgress,
   FormControl,
   FormControlLabel,
   Grid,
   MenuItem,
   Paper,
   Select,
+  SelectChangeEvent,
   Typography
 } from '@common/components'
 import { SkeletonList } from '@components'
@@ -155,7 +154,7 @@ const CreateLearningElementClassificationTable = memo(
                                 ? element.solutionLmsId
                                 : displayedSolutions[lmsTopic.topic_lms_id]?.[0].solutionLmsId ?? 0
                             )}
-                            onChange={(event) =>
+                            onChange={(event: SelectChangeEvent<string>) =>
                               handleSolutionChange(
                                 lmsTopic.topic_lms_id,
                                 element.learningElementLmsId,

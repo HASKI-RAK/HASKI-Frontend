@@ -66,6 +66,7 @@ const CreateLearningElement = () => {
         handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
       })
   }, [topicId, getUser, getLearningPathTopic, courseId, t, addSnackbar])
+  
   // fetch remote learning elements to use as solutions
   // filter out the learning elements that are already in the learning path
   useEffect(() => {
@@ -136,9 +137,7 @@ const CreateLearningElement = () => {
         selectedLearningElements={selectedLearningElements}
         selectedSolutions={selectedSolutions}
         learningElementsWithSolutions={learningElementsWithSolutions}
-        setCurrentTopic={setCurrentTopic}
         setSelectedLearningElements={setSelectedLearningElements}
-        setSelectedSolutions={setSelectedSolutions}
         setLearningElementsWithSolutions={setLearningElementsWithSolutions}
       />
     </Grid>

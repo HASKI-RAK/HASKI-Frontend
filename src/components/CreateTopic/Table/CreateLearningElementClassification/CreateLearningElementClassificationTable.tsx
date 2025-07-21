@@ -11,6 +11,7 @@ import {
   MenuItem,
   Paper,
   Select,
+  SelectChangeEvent,
   Table,
   TableCell,
   TableHead,
@@ -176,13 +177,7 @@ const CreateLearningElementClassificationTable = ({
                         <InputLabel>{t('appGlobal.classification')}</InputLabel>
                         <Select
                           value={element.classification}
-                          onChange={(event) =>
-                            handleClassificationChange(
-                              lmsTopic.topic_lms_id,
-                              element.lms_id,
-                              event.target.value as string
-                            )
-                          }
+                          onChange={handleSelectChange(lmsTopic, element)}
                           label={t('appGlobal.classification')}
                           disabled={element.disabled}>
                           {learningElementClassifications.map((classification) => (
@@ -200,7 +195,7 @@ const CreateLearningElementClassificationTable = ({
                           canNotSelectSolution(lmsTopic.topic_lms_id) &&
                           !isSolution(lmsTopic.topic_lms_id, element.lms_id)
                         }
-                        onChange={(event) =>
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                           handleSolutionchange(
                             lmsTopic.topic_lms_id,
                             element.lms_id,
