@@ -3,3 +3,4 @@ export { fetchLearningPathElementSpecificStatus } from './fetchLearningPathEleme
 export { fetchLearningPathElementStatus } from './fetchLearningPathElementStatus'
 export { postCalculateLearningPathForAllStudents } from './postCalculateLearningPathForAllStudents'
 export { postCalculateLearningPathILS } from './postCalculateLearningPathILS'
+export { fetchLearningPathElementSolution } from './fetchLearningPathElementSolution'

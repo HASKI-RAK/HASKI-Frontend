@@ -32,6 +32,7 @@ import LearningPathLearningElementAlgorithm, {
 import StudentLpLeAlgorithm from './LearningPathAlgorithm/StudentLpLeAlgorithm'
 import TeacherLpLeAlgorithm from './LearningPathAlgorithm/TeacherLpLeAlgorithm'
 import LearningPathElement from './LearningPathElement/LearningPathElement'
+import LearningPathElementSolution from './LearningPathElementSolution/LearningPathElementSolution'
 import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
 import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
 import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
@@ -58,6 +59,7 @@ export type {
   LearningElementSolution,
   LearningPathBasedOn,
   LearningPathElement,
+  LearningPathElementSolution,
   LearningPathElementStatus,
   LearningPathLearningElement,
   LearningPathLearningElementAlgorithm,
@@ -83,6 +85,7 @@ export type { LearningPathLearningElementAlgorithmReturn } from './LearningPathA
 export type { StudentLpLeAlgorithmReturn } from './LearningPathAlgorithm/StudentLpLeAlgorithm'
 export type { TeacherLpLeAlgorithmReturn } from './LearningPathAlgorithm/TeacherLpLeAlgorithm'
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
+export type { LearningPathElementSolutionReturn } from './LearningPathElementSolution/LearningPathElementSolution'
 export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'
 export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'
 export type { NewsReturn } from './News/News'

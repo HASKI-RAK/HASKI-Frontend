@@ -9,7 +9,7 @@ import {
   handleError,
   RemoteLearningElementWithClassification
 } from '@components'
-import { LearningPathElement, RemoteLearningElement, RemoteTopics } from '@core'
+import { LearningPathElement, LearningPathElementSolution, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import CreateLearningElementSolutionStep from '../CreateTopic/Modal/CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
@@ -73,6 +73,7 @@ const CreateLearningElementModal = ({
   const getUser = usePersistedStore((state) => state.getUser)
   const getRemoteTopics = useStore((state) => state.getRemoteTopics)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
+  const getLearningPathElementSolution = useStore((state) => state.getLearningPathElementSolution)
 
   //Constants
   const createLearningElementModalStepperSteps = [
@@ -128,16 +129,26 @@ const CreateLearningElementModal = ({
             const existingLearningElementIds = learningPathElementData.path.map(
               (element) => element.learning_element.lms_id
             )
+            // Extract LMS IDs of learning elements that are solutions in the learning path
+            getLearningPathElementSolution(topicId).then(
+              (learningPathElementSolutionData: LearningPathElementSolution) => {
+                // Extract solution LMS IDs
+                const solutionLearningElementIds = learningPathElementSolutionData.map(
+                  (solution) => solution.solution_lms_id
+                )
+                // A Set of all IDs to exclude
+                const idsToExclude = new Set([...existingLearningElementIds, ...solutionLearningElementIds])
+                // Update remote topics by filtering out elements that already exist in the learning path or are solutions
+                const updatedTopics = filteredTopics.map((topic) => ({
+                  ...topic,
+                  lms_learning_elements: topic.lms_learning_elements.filter(
+                    (learningElement) => !idsToExclude.has(learningElement.lms_id)
+                  )
+                }))
 
-            // Update remote topics by filtering out elements that already exist in the learning path
-            const updatedTopics = filteredTopics.map((topic) => ({
-              ...topic,
-              lms_learning_elements: topic.lms_learning_elements.filter(
-                (learningElement) => !existingLearningElementIds.includes(learningElement.lms_id)
-              )
-            }))
-
-            setRemoteTopic(updatedTopics)
+                setRemoteTopic(updatedTopics)
+              }
+            )
           }
         )
       )

@@ -19,6 +19,7 @@ export { postLearningElement } from './LearningElement'
 export { deleteLearningElement } from './LearningElement'
 export {
   fetchLearningPathElement,
+  fetchLearningPathElementSolution,
   fetchLearningPathElementSpecificStatus,
   fetchLearningPathElementStatus,
   postCalculateLearningPathForAllStudents
