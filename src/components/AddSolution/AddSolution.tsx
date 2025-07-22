@@ -8,7 +8,7 @@ import {
   RemoteLearningElementWithSolution,
   Solution
 } from '@components'
-import { LearningPathElement, RemoteLearningElement, RemoteTopics, Topic } from '@core'
+import { LearningPathElement, RemoteTopics, Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import AddSolutionModal from './AddSolutionModal'
@@ -124,8 +124,7 @@ const CreateLearningElement = () => {
         variant="contained"
         color="primary"
         sx={{ alignSelf: 'end', marginTop: '0.6rem', minWidth: '14rem' }}
-        onClick={handleOpen}
-        disabled={!currentTopic || Object.values(selectedSolutions).length === 0}>
+        onClick={handleOpen}>
         {t('components.AddSolution.addSolution')}
       </Button>
       <AddSolutionModal
