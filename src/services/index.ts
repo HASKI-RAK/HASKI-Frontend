@@ -17,6 +17,8 @@ export * from './debounce'
 export { fetchDefaultLearningPath, fetchDisabledClassifications, postDefaultLearningPath } from './DefaultLearningPath'
 export { postLearningElement } from './LearningElement'
 export { deleteLearningElement } from './LearningElement'
+export { fetchLearningElementSolution } from './LearningElementSolution'
+export { postLearningElementSolution } from './LearningElementSolution'
 export {
   fetchLearningPathElement,
   fetchLearningPathElementSolution,
@@ -26,8 +28,6 @@ export {
 } from './LearningPath'
 export { postCalculateLearningPathILS } from './LearningPath'
 export { postLearningPathAlgorithm } from './LearningPathAlgorithm'
-export { fetchLearningElementSolution } from './LearningElementSolution'
-export { postLearningElementSolution } from './LearningElementSolution'
 export {
   fetchStudentLpLeAlg,
   fetchTeacherLpLeAlg,

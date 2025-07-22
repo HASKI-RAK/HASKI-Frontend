@@ -1,6 +1,6 @@
 export { fetchLearningPathElement } from './fetchLearningPathElement'
+export { fetchLearningPathElementSolution } from './fetchLearningPathElementSolution'
 export { fetchLearningPathElementSpecificStatus } from './fetchLearningPathElementSpecificStatus'
 export { fetchLearningPathElementStatus } from './fetchLearningPathElementStatus'
 export { postCalculateLearningPathForAllStudents } from './postCalculateLearningPathForAllStudents'
 export { postCalculateLearningPathILS } from './postCalculateLearningPathILS'
-export { fetchLearningPathElementSolution } from './fetchLearningPathElementSolution'

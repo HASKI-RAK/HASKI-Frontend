@@ -32,8 +32,8 @@ import LearningPathLearningElementAlgorithm, {
 import StudentLpLeAlgorithm from './LearningPathAlgorithm/StudentLpLeAlgorithm'
 import TeacherLpLeAlgorithm from './LearningPathAlgorithm/TeacherLpLeAlgorithm'
 import LearningPathElement from './LearningPathElement/LearningPathElement'
-import LearningPathElementSolution from './LearningPathElementSolution/LearningPathElementSolution'
 import LearningPathElementStatus from './LearningPathElement/LearningPathElementStatus'
+import LearningPathElementSolution from './LearningPathElementSolution/LearningPathElementSolution'
 import LearningPathLearningElement from './LearningPathLearningElement/LearningPathLearningElement'
 import LearningPathTopic from './LearningPathTopic/LearningPathTopic'
 import News, { NewsResponse } from './News/News'
@@ -57,6 +57,7 @@ export type {
   ILS,
   LearningElement,
   LearningElementSolution,
+  LearningElementWithSolution,
   LearningPathBasedOn,
   LearningPathElement,
   LearningPathElementSolution,
@@ -64,7 +65,6 @@ export type {
   LearningPathLearningElement,
   LearningPathLearningElementAlgorithm,
   LearningPathLearningElementAlgorithmResponse,
-  LearningElementWithSolution,
   LearningPathTopic,
   ListK,
   News,
@@ -78,15 +78,15 @@ export type {
   Topic,
   User
 }
-export type { LearningElementSolutionReturn } from './LearningElement/LearningElementSolution'
 export type { CourseReturn } from './Course/Course'
 export type { DefaultLearningPathResponse } from './DefaultLearningPath/DefaultLearningPath'
+export type { LearningElementSolutionReturn } from './LearningElement/LearningElementSolution'
 export type { LearningPathLearningElementAlgorithmReturn } from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
 export type { StudentLpLeAlgorithmReturn } from './LearningPathAlgorithm/StudentLpLeAlgorithm'
 export type { TeacherLpLeAlgorithmReturn } from './LearningPathAlgorithm/TeacherLpLeAlgorithm'
 export type { LearningPathElementReturn } from './LearningPathElement/LearningPathElement'
-export type { LearningPathElementSolutionReturn } from './LearningPathElementSolution/LearningPathElementSolution'
 export type { LearningPathElementStatusReturn } from './LearningPathElement/LearningPathElementStatus'
+export type { LearningPathElementSolutionReturn } from './LearningPathElementSolution/LearningPathElementSolution'
 export type { LearningPathTopicReturn } from './LearningPathTopic/LearningPathTopic'
 export type { NewsReturn } from './News/News'
 export type { ILSReturn } from './QuestionnaireResults/ILS'

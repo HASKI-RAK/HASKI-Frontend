@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction, memo, useContext, useEffect, useState } from 'react'
+import { Dispatch, memo, ReactNode, SetStateAction, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Checkbox, FormControl, FormControlLabel, Grid, Paper, Typography } from '@common/components'
@@ -119,7 +119,9 @@ const SelectLearningElementTable = ({
                       checked={selectedLearningElements[currentTopic.lms_id]?.some(
                         (el) => el.lms_id === element.lms_id
                       )}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleCheckboxChange(element, event.target.checked)}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        handleCheckboxChange(element, event.target.checked)
+                      }
                     />
                   }
                   label={element.lms_learning_element_name}

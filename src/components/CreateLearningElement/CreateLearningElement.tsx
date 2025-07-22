@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom'
 import { Button, Grid } from '@common/components'
 import {
   CreateLearningElementModal,
+  handleError,
   RemoteLearningElementWithClassification,
   RemoteLearningElementWithSolution,
-  Solution,
-  handleError
+  Solution
 } from '@components'
 import { RemoteLearningElement, Topic } from '@core'
 import { SnackbarContext } from '@services'

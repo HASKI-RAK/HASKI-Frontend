@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Button, Grid } from '@common/components'
 import {
+  handleError,
   RemoteLearningElementWithClassification,
   RemoteLearningElementWithSolution,
-  Solution,
-  handleError
+  Solution
 } from '@components'
 import { LearningPathElement, RemoteLearningElement, RemoteTopics, Topic } from '@core'
 import { SnackbarContext } from '@services'
@@ -66,7 +66,7 @@ const CreateLearningElement = () => {
         handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
       })
   }, [topicId, getUser, getLearningPathTopic, courseId, t, addSnackbar])
-  
+
   // fetch remote learning elements to use as solutions
   // filter out the learning elements that are already in the learning path
   useEffect(() => {

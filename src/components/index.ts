@@ -1,3 +1,4 @@
+export { default as AddSolution } from './AddSolution/AddSolution'
 export { default as AlgorithmSettingsModal } from './AlgorithmSettingsModal/AlgorithmSettingsModal'
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
 export { default as CollapsibleList } from './CollapsibleList/CollapsibleList/CollapsibleList'
@@ -23,6 +24,12 @@ export { default as CreateLearningElementClassificationsStep } from './CreateTop
 export { default as CreateLearningElementsStep } from './CreateTopic/Modal/CreateLearningElementsStep/CreateLearningElementsStep'
 export { default as CreateRemoteTopicsStep } from './CreateTopic/Modal/CreateRemoteTopicsStep/CreateRemoteTopicsStep'
 export {
+  default as CreateTopicModal,
+  type RemoteLearningElementWithClassification,
+  type RemoteLearningElementWithSolution,
+  type Solution
+} from './CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
+export {
   default as CreateAlgorithmTable,
   type CreateAlgorithmTableNameProps
 } from './CreateTopic/Table/CreateAlgorithm/CreateAlgorithmTable'
@@ -31,21 +38,13 @@ export {
   default as CreateLearningElementClassificationTable,
   type LearningElementWithClassification
 } from './CreateTopic/Table/CreateLearningElementClassification/CreateLearningElementClassificationTable'
+export { default as CreateLearningElementSolutionTable } from './CreateTopic/Table/CreateLearningElementSolution/CreateLearningElementSolutionTable'
 export { default as CreateRemoteTopicsTable } from './CreateTopic/Table/CreateRemoteTopics/CreateRemoteTopicsTable'
 export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopics/ExistingTopicsTable'
 export { default as DeleteEntityModal } from './DeleteEntityModal/DeleteEntityModal'
 export { default as Filter } from './Filter/Filter'
 export { default as Footer } from './Footer/Footer'
 export { default as Fraction } from './Fraction/Fraction'
-export {
-  default as CreateTopicModal,
-  type RemoteLearningElementWithClassification,
-  type RemoteLearningElementWithSolution,
-  type Solution
-} from './CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
-export { default as CreateLearningElementSolutionTable } from './CreateTopic/Table/CreateLearningElementSolution/CreateLearningElementSolutionTable'
-export { default as AddSolution } from './AddSolution/AddSolution'
-
 export * from './GlobalNav'
 export { default as GlossaryEntry, type GlossaryEntryProps } from './Glossary/GlossaryEntry/GlossaryEntry'
 export { default as GlossaryIndex } from './Glossary/GlossaryIndex/GlossaryIndex'

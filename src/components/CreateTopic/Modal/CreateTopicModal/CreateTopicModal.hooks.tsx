@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
 import {
   CreateAlgorithmTableNameProps,
+  handleError,
   RemoteLearningElementWithClassification,
   RemoteLearningElementWithSolution,
-  Solution,
-  handleError
+  Solution
 } from '@components'
 import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {

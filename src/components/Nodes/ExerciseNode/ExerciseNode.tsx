@@ -1,6 +1,6 @@
-import { Task } from '@mui/icons-material'
 import { memo } from 'react'
 import { NodeProps } from 'reactflow'
+import { Task } from '@mui/icons-material'
 import { IconButton, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { AssignmentLate } from '@common/icons'

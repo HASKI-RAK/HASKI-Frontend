@@ -1,2 +1,2 @@
-export { postLearningElementSolution } from './postLearningElementSolution'
 export { fetchLearningElementSolution } from './fetchLearningElementSolution'
+export { postLearningElementSolution } from './postLearningElementSolution'
