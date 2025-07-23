@@ -180,7 +180,7 @@
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Set learning element classification",
   "components.CreateLearningElementClassificationTable.IsSolution": "Is Solution",
   "components.CreateLearningElementModal.createLearningElements": "Create Learning Elements",
-  "components.CreateLearningElementSolutionTable.noSolution": "Select additional solution",
+  "components.CreateLearningElementSolutionTable.noSolution": "Assign solution",
   "components.CreateLearningElementSolutionTable.setLearningElementSolution": "Set learning element solution",
   "components.CreateLearningElementTable.selectAllToggle": "Select all",
   "components.CreateLearningElementTable.selectLearningElements": "Select learning elements",
