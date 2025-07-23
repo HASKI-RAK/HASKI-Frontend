@@ -154,13 +154,12 @@ const CreateLearningElementClassificationTable = memo(
                                 ? element.solutionLmsId
                                 : displayedSolutions[lmsTopic.topic_lms_id]?.[0].solutionLmsId ?? 0
                             )}
-                            onChange={(event: SelectChangeEvent<string>) =>
-                              handleSolutionChange(
-                                lmsTopic.topic_lms_id,
-                                element.learningElementLmsId,
-                                parseInt(event.target.value)
-                              )
-                            }>
+                            onChange={(event: SelectChangeEvent<unknown>) => {
+                              const { value } = event.target
+                              if (typeof value === 'number') {
+                                handleSolutionChange(lmsTopic.topic_lms_id, element.learningElementLmsId, value)
+                              }
+                            }}>
                             {(displayedSolutions[lmsTopic.topic_lms_id] || []).map((solution) => (
                               <MenuItem
                                 key={solution.solutionLmsId}

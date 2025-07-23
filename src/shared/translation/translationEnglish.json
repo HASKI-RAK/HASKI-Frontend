@@ -29,11 +29,11 @@
   "appGlobal.table": "Table",
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
-  "components.AddSolution.addSolution": "Add Solution",
-  "components.AddSolution.solutionAdded": "Solution added",
+  "components.AddSolution.addSolution": "Assign Solution",
+  "components.AddSolution.solutionAdded": "Solution assigned",
   "components.AddSolutionModal.missingSolutionData": "Solution data is missing",
   "components.AddSolutionModal.noTopic": "Topic ID could not be found",
-  "components.AddSolutionModal.successful": "The solution was added successfully",
+  "components.AddSolutionModal.successful": "The solution was assigned successfully",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Fixed Order",

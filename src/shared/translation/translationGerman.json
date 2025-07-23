@@ -29,11 +29,11 @@
   "appGlobal.table": "Tabelle",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
-  "components.AddSolution.addSolution": "Lösung hinzufügen",
-  "components.AddSolution.solutionAdded": "Lösung hinzugefügt",
+  "components.AddSolution.addSolution": "Lösung zuweisen",
+  "components.AddSolution.solutionAdded": "Lösung zugewiesen",
   "components.AddSolutionModal.missingSolutionData": "Es fehlen Lösungsdaten",
   "components.AddSolutionModal.noTopic": "Topic ID konnte nicht gefunden werden",
-  "components.AddSolutionModal.successful": "Die Lösung wurde erfolgreich hinzugefügt",
+  "components.AddSolutionModal.successful": "Die Lösung wurde erfolgreich zugewiesen",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Feste Reihenfolge",
