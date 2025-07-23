@@ -90,28 +90,34 @@ const CreateLearningElementTable = ({
                 </Typography>
               </Grid>
             </Box>
-            <FormGroup>
-              {lmsTopic.lms_learning_elements.map((lmsLearningElement) => (
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={(selectedLearningElements[lmsTopic.topic_lms_id] || []).some(
-                        (el) => el.lms_id === lmsLearningElement.lms_id
-                      )}
-                      onChange={(event) =>
-                        handleLearningElementCheckboxChange(
-                          lmsTopic.topic_lms_id,
-                          lmsLearningElement,
-                          event.target.checked
-                        )
-                      }
-                    />
-                  }
-                  label={lmsLearningElement.lms_learning_element_name}
-                  key={lmsLearningElement.lms_id}
-                />
-              ))}
-            </FormGroup>
+            {lmsTopic.lms_learning_elements.length === 0 ? (
+              <Typography variant="body1" sx={{ mt: 2 }} align={'center'}>
+                {t('components.CreateLearningElementTable.noLearningElements')}
+              </Typography>
+            ) : (
+              <FormGroup>
+                {lmsTopic.lms_learning_elements.map((lmsLearningElement) => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={(selectedLearningElements[lmsTopic.topic_lms_id] || []).some(
+                          (el) => el.lms_id === lmsLearningElement.lms_id
+                        )}
+                        onChange={(event) =>
+                          handleLearningElementCheckboxChange(
+                            lmsTopic.topic_lms_id,
+                            lmsLearningElement,
+                            event.target.checked
+                          )
+                        }
+                      />
+                    }
+                    label={lmsLearningElement.lms_learning_element_name}
+                    key={lmsLearningElement.lms_id}
+                  />
+                ))}
+              </FormGroup>
+            )}
           </Paper>
         </Grid>
       ))}

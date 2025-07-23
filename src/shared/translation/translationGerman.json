@@ -31,7 +31,6 @@
   "appGlobal.universityKempten": "Hochschule Kempten",
   "components.AddSolution.addSolution": "Lösung hinzufügen",
   "components.AddSolution.solutionAdded": "Lösung hinzugefügt",
-  "components.AddSolutionModal.error": "Beim erstellen der Lösung ist ein Fehler aufgetreten",
   "components.AddSolutionModal.missingSolutionData": "Es fehlen Lösungsdaten",
   "components.AddSolutionModal.noTopic": "Topic ID konnte nicht gefunden werden",
   "components.AddSolutionModal.successful": "Die Lösung wurde erfolgreich hinzugefügt",
@@ -65,6 +64,7 @@
   "components.BasicNode.deleteLearningElementSuccessful": "Das Lernelement wurde erfolgreich gelöscht",
   "components.BasicNode.deleteTooltip": "Lernelement löschen",
   "components.BasicNode.solutionTooltip": "Lösung anzeigen",
+  "components.BasicNode.warningTooltip": "Die Klassifikation für dieses Lernelement ist im Standardlernpfad nicht gesetzt",
   "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
   "components.ContactForm.contactform": "Kontaktformular",
   "components.ContactForm.error": "Es fehlt eine Beschreibung.",
@@ -178,6 +178,7 @@
     }
   ],
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Klassifikation der Lernelemente festlegen",
+  "components.CreateLearningElementClassificationTable.IsSolution": "Ist Lösung",
   "components.CreateLearningElementModal.createLearningElements": "Lernelemente erstellen",
   "components.CreateLearningElementSolutionTable.noSolution": "Zusatzlösung zuweisen",
   "components.CreateLearningElementSolutionTable.setLearningElementSolution": "Lernelementen Lösungen zuweisen",
@@ -1304,6 +1305,7 @@
   "error.postLearningElement": "Beim Senden der LearningElement-Daten ist ein Fehler aufgetreten.",
   "error.postLearningPathAlgorithm": "Beim Senden der LearningPathAlgorithm-Daten ist ein Fehler aufgetreten.",
   "error.postListK": "Beim Senden der ListK-Fragebogendaten ist ein Fehler aufgetreten.",
+  "error.postLearningElementSolution": "Beim Senden der Lern Element Lösungen ist ein Fehler aufgetreten.",
   "error.postLogin": "Beim Einloggen ist ein Fehler aufgetreten.",
   "error.postStudentLpLeAlg": "Beim Setzen des neuen Algorithmus für den Nutzer ist ein Fehler aufgetreten.",
   "error.postTeacherLpLeAlg": "Beim Setzen des neu empfohlenen Algorithmus für das Topic ist ein Fehler aufgetreten.",
@@ -1334,6 +1336,7 @@
   "pages.8": "8",
   "pages.9": "9",
   "pages.aboutus": "Über uns",
+  "components.CreateLearningElementTable.noLearningElements": "Es sind keine Lernelemente zum Erstellen verfügbar",
   "pages.aboutus.interdisciplinaryBody": [
     {
       "header": "Lernelemente",

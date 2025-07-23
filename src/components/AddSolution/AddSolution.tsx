@@ -13,7 +13,7 @@ import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import AddSolutionModal from './AddSolutionModal'
 
-const CreateLearningElement = () => {
+const AddSolution = () => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
 
@@ -65,7 +65,7 @@ const CreateLearningElement = () => {
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
       })
-  }, [topicId, getUser, getLearningPathTopic, courseId, t, addSnackbar])
+  }, [topicId, getUser, addSolutionModalOpen, getLearningPathTopic, courseId, t, addSnackbar])
 
   // fetch remote learning elements to use as solutions
   // filter out the learning elements that are already in the learning path
@@ -115,7 +115,16 @@ const CreateLearningElement = () => {
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 3000)
       })
-  }, [activeStep, setActiveStep, topicId, courseId, selectedLearningElements, setSelectedLearningElements])
+  }, [
+    activeStep,
+    setActiveStep,
+    addSolutionModalOpen,
+    topicId,
+    currentTopic,
+    courseId,
+    selectedLearningElements,
+    setSelectedLearningElements
+  ])
 
   return (
     <Grid>
@@ -143,4 +152,4 @@ const CreateLearningElement = () => {
   )
 }
 
-export default memo(CreateLearningElement)
+export default memo(AddSolution)

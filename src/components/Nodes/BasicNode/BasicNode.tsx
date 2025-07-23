@@ -8,6 +8,7 @@ import { DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from 
 import { deleteLearningElement, RoleContext, SnackbarContext } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
+import { deleteLearningElementSolution } from '../../../services/LearningElementSolution/deleteLearningElementSolution'
 
 /**
  * @prop children - The icon of the node.
@@ -64,13 +65,15 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   }
 
   const handleAcceptDeleteLearningElementModal = (learningElementId: number, lmsLearningElementId: number) => {
-    deleteLearningElement(learningElementId, lmsLearningElementId).then(() => {
-      addSnackbar({
-        message: t('components.BasicNode.deleteLearningElementSuccessful'),
-        severity: 'success',
-        autoHideDuration: 5000
+    deleteLearningElementSolution(lmsLearningElementId).then(() => {
+      deleteLearningElement(learningElementId, lmsLearningElementId).then(() => {
+        addSnackbar({
+          message: t('components.BasicNode.deleteLearningElementSuccessful'),
+          severity: 'success',
+          autoHideDuration: 5000
+        })
+        setdeleteLearningElementModalOpen(false)
       })
-      setdeleteLearningElementModalOpen(false)
     })
     clearLearningPathElement()
     clearLearningPathElementStatusCache()
@@ -99,7 +102,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
 
   const renderNodeStatus = () => {
     return props.data.isDisabled ? (
-      <Tooltip title="Classification is not set in the Default Learning Path">
+      <Tooltip title={t('components.BasicNode.warningTooltip')}>
         <Box
           sx={{
             position: 'absolute',

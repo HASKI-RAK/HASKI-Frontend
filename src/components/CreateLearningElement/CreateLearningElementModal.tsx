@@ -133,11 +133,13 @@ const CreateLearningElementModal = ({
             getLearningPathElementSolution(topicId).then(
               (learningPathElementSolutionData: LearningPathElementSolution) => {
                 // Extract solution LMS IDs
+                console.log(learningPathElementSolutionData)
                 const solutionLearningElementIds = learningPathElementSolutionData.map(
                   (solution) => solution.solution_lms_id
                 )
                 // A Set of all IDs to exclude
                 const idsToExclude = new Set([...existingLearningElementIds, ...solutionLearningElementIds])
+                console.log(solutionLearningElementIds)
                 // Update remote topics by filtering out elements that already exist in the learning path or are solutions
                 const updatedTopics = filteredTopics.map((topic) => ({
                   ...topic,

@@ -158,9 +158,11 @@ const CreateLearningElementClassificationTable = ({
               }}>
               <TableHead>
                 <TableRow>
-                  <TableCell sx={{ textAlign: 'center' }}>{t('Learning Element')}</TableCell>
-                  <TableCell sx={{ textAlign: 'center' }}>{t('Klassifikation')}</TableCell>
-                  <TableCell sx={{ textAlign: 'center' }}>{t('Ist Lösung')}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>{t('appGlobal.learningElement')}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>{t('appGlobal.classification')}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>
+                    {t('components.CreateLearningElementClassificationTable.IsSolution')}
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

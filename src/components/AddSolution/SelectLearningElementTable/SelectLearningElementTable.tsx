@@ -48,43 +48,52 @@ const SelectLearningElementTable = ({
   // Get Learning Elements in Topic that do not have solutions
   useEffect(() => {
     if (!courseId || !topicId) return
+
     getUser().then((user) => {
       getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
-        .then((learningPathElement) => {
-          const learningElements = learningPathElement.path.map((element) => {
-            const learningElement: RemoteLearningElementWithClassification = {
+        .then(async (learningPathElement) => {
+          // Build the list of learning elements
+          const learningElements: RemoteLearningElementWithClassification[] = learningPathElement.path.map(
+            (element: any) => ({
               lms_id: element.learning_element.lms_id,
               lms_learning_element_name: element.learning_element.name,
               classification: '',
               lms_activity_type: element.learning_element.activity_type
-            }
-            return learningElement
-          })
+            })
+          )
 
-          // fetch solutions for the learning elements
-          learningElements.forEach((learningElement) => {
-            getLearningElementSolution(learningElement.lms_id)
-              .then((solution: LearningElementSolution) => {
-                setExistingSolutions((prev) => [...prev, solution])
-              })
-              .catch((error) => {
-                handleError(t, addSnackbar, 'error.fetchLearningElementSolution', error, 3000)
-              })
-          })
+          // Fetch all solutions in parallel
+          const solutions: (LearningElementSolution | null)[] = await Promise.all(
+            learningElements.map(
+              (el) => getLearningElementSolution(el.lms_id).catch(() => null) // In case of 404 or error
+            )
+          )
 
-          // filter out learning elements that already have solutions
-          const filteredLearningElements = learningElements.filter((element) => {
-            return !existingSolutions.some((solution) => solution.learning_element_lms_id === element.lms_id)
-          })
+          // Extract IDs for elements that have a solution
+          const solutionIds = solutions
+            .filter((sol): sol is LearningElementSolution => !!sol)
+            .map((sol) => sol.learning_element_lms_id)
+
+          // Filter out learning elements that already have solutions
+          const filteredLearningElements = learningElements.filter((el) => !solutionIds.includes(el.lms_id))
 
           setLearningElements(filteredLearningElements)
         })
-        .catch((error) => {
+        .catch((error: any) => {
           handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 5000)
-          // Handle error
         })
     })
-  }, [courseId, topicId, getUser, getLearningPathElement, t, addSnackbar, handleError, setLearningElements])
+  }, [
+    courseId,
+    topicId,
+    getUser,
+    getLearningPathElement,
+    getLearningElementSolution,
+    t,
+    addSnackbar,
+    handleError,
+    setLearningElements
+  ])
 
   return (
     <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
