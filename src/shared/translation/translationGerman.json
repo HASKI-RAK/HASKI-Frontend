@@ -1282,6 +1282,7 @@
   "error.fetchILS": "Beim Abrufen der ILS-Fragebogendaten ist ein Fehler aufgetreten.",
   "error.fetchLearningPathElement": "Beim Abrufen der LearningPathElement-Daten ist ein Fehler aufgetreten.",
   "error.fetchLearningPathElementStatus": "Beim Abrufen der LearningPathElementStatus-Daten ist ein Fehler aufgetreten.",
+  "error.fetchLearningPathElementSolution": "Beim Abrufen der LearningPathElementSolution-Daten ist ein Fehler aufgetreten.",
   "error.fetchLearningPathTopic": "Beim Abrufen der LearningPathTopic-Daten ist ein Fehler aufgetreten.",
   "error.fetchListK": "Beim Abrufen der ListK-Fragebogendaten ist ein Fehler aufgetreten.",
   "error.fetchRedirectMoodleLogin": "Beim Abrufen der Moodle-Login-URL ist ein Fehler aufgetreten.",

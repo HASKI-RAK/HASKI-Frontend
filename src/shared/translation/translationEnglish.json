@@ -1282,6 +1282,7 @@
   "error.fetchILS": "An error occurred while fetching the ILS questionnaire data.",
   "error.fetchLearningPathElement": "An error occurred while fetching the LearningPathElement data.",
   "error.fetchLearningPathElementStatus": "An error occurred while fetching the LearningPathElementStatus data.",
+  "error.fetchLearningPathElementSolution": "An error occured while fetching the LearningPathElementSolution data.",
   "error.fetchLearningPathTopic": "An error occurred while fetching the LearningPathTopic data.",
   "error.fetchListK": "An error occurred while fetching the ListK questionnaire data.",
   "error.fetchRedirectMoodleLogin": "An error occurred while fetching the Moodle login URL.",
