@@ -675,6 +675,11 @@ const mockDataServices: MockDataServices = {
       message: 'Deletion successful!'
     })
   ),
+  deleteLearningElementSolution: jest.fn(() =>
+    Promise.resolve({
+      message: 'Deletion successful!'
+    })
+  ),
   fetchLearningElementSolution: jest.fn(() =>
     Promise.resolve({
       id: 1,

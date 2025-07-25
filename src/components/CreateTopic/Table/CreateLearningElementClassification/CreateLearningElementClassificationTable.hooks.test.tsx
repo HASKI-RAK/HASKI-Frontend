@@ -94,7 +94,7 @@ describe('useCreateLearningElementClassificationTable', () => {
     })
 
     expect(mockOnSolutionChange).toHaveBeenCalledWith({
-      1: [{ solutionLmsId: 101, solutionLmsName: 'Element 1' }]
+      1: [{ solutionLmsId: 101, solutionLmsName: 'Element 1', solutionLmsType: 'Activity' }]
     })
     expect(mockOnLearningElementChange).toHaveBeenCalledWith({
       1: [

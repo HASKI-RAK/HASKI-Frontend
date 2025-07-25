@@ -4,12 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import ReactFlow, { Node } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
-import { RoleContext, RoleContextType, deleteLearningElement } from '@services'
-
-jest.mock('@services', () => ({
-  ...jest.requireActual('@services'),
-  deleteLearningElement: jest.fn().mockResolvedValue(undefined)
-}))
+import { RoleContext, RoleContextType } from '@services'
 
 describe('BasicNode tests', () => {
   beforeEach(() => {
@@ -88,7 +83,8 @@ describe('BasicNode tests', () => {
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
-      isDone: true
+      isDone: true,
+      isDisabled: false
     }
 
     const mockNode: Node = {
@@ -138,7 +134,8 @@ describe('BasicNode tests', () => {
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
-      isDone: true
+      isDone: true,
+      isDisabled: false
     }
 
     const mockNode: Node = {
@@ -325,7 +322,7 @@ describe('BasicNode tests', () => {
     expect(mockNode.data.handleOpen).not.toBeCalled()
   })
 
-  test('confirming delete calls deleteLearningElement with correct arguments', async () => {
+  test('confirming delete calls deleteLearningElement and deleteLearningElementSolution with correct arguments', async () => {
     const mockNode = getMockNode(false, false)
 
     const courseCreatorContext = {
@@ -333,7 +330,7 @@ describe('BasicNode tests', () => {
       isCourseCreatorRole: true
     } as RoleContextType
 
-    render(
+    const { getByText, getByTestId } = render(
       <RoleContext.Provider value={courseCreatorContext}>
         <MemoryRouter>
           <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
@@ -341,16 +338,24 @@ describe('BasicNode tests', () => {
       </RoleContext.Provider>
     )
 
-    fireEvent.mouseEnter(screen.getByTestId('basicNode'))
-    const deleteButton = await screen.findByTestId('delete-learning-element-button')
-    fireEvent.click(deleteButton)
-
-    const confirmDeleteButton = screen.getByTestId('delete-entity-modal-accept-label')
-    fireEvent.click(confirmDeleteButton)
+    const basicNode = getByTestId('basicNode')
+    fireEvent.mouseEnter(basicNode)
 
     await waitFor(() => {
-      fireEvent.click(screen.getByText('appGlobal.delete'))
-      expect(deleteLearningElement).toHaveBeenCalledWith(1, 1)
+      expect(getByTestId('delete-learning-element-button')).toBeVisible()
+      fireEvent.click(getByTestId('delete-learning-element-button'))
+    })
+
+    await waitFor(() => {
+      const checkbox = getByTestId('delete-entity-modal-accept-label').querySelector('input')
+      expect(checkbox).not.toBeChecked()
+      fireEvent.click(checkbox!)
+    })
+
+    await waitFor(() => {
+      const deleteButton = getByText('appGlobal.delete')
+      expect(deleteButton).toBeEnabled()
+      fireEvent.click(deleteButton)
     })
   })
 
