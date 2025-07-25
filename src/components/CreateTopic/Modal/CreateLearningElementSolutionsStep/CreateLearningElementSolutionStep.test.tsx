@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { RemoteTopics } from '@core'
 import {
@@ -70,6 +70,7 @@ describe('CreateLearningElementSolutionStep', () => {
           onLearningElementSolutionChange={onLearningElementSolutionChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          nextButtonText={'appGlobal.next'}
         />
       </MemoryRouter>
     )
@@ -90,6 +91,7 @@ describe('CreateLearningElementSolutionStep', () => {
           onLearningElementSolutionChange={onLearningElementSolutionChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          nextButtonText={'appGlobal.next'}
         />
       </MemoryRouter>
     )
@@ -115,6 +117,7 @@ describe('CreateLearningElementSolutionStep', () => {
           onLearningElementSolutionChange={onLearningElementSolutionChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          nextButtonText={'appGlobal.next'}
         />
       </MemoryRouter>
     )
@@ -134,6 +137,7 @@ describe('CreateLearningElementSolutionStep', () => {
           onLearningElementSolutionChange={onLearningElementSolutionChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          nextButtonText={'appGlobal.next'}
         />
       </MemoryRouter>
     )
@@ -160,6 +164,7 @@ describe('CreateLearningElementSolutionStep', () => {
           onLearningElementSolutionChange={onLearningElementSolutionChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          nextButtonText={'appGlobal.next'}
         />
       </MemoryRouter>
     )

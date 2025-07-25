@@ -310,13 +310,7 @@ describe('CreateTopicModal', () => {
       fireEvent.click(getByText('appGlobal.next'))
     })
 
-    // select solution step with no solutions
-    await waitFor(() => {
-      const dropdowns = getAllByRole('combobox', { hidden: true })
-      expect(dropdowns).toHaveLength(3)
-      expect(dropdowns[0]).toHaveTextContent('components.CreateLearningElementSolutionTable.noSolution')
-      fireEvent.click(getByText('appGlobal.next'))
-    })
+    // select solution step is skipped when no solutions where selected in the learning element step.
 
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[0]
@@ -475,13 +469,13 @@ describe('CreateTopicModal', () => {
       fireEvent.click(getByText('appGlobal.next'))
     })
 
-    // select solution step with no solutions
-    await waitFor(() => {
+    // select solution step is skepped when no solutions are present
+    /*    await waitFor(() => {
       const dropdowns = getAllByRole('combobox', { hidden: true })
       expect(dropdowns).toHaveLength(3)
       expect(dropdowns[0]).toHaveTextContent('components.CreateLearningElementSolutionTable.noSolution')
       fireEvent.click(getByText('appGlobal.next'))
-    })
+    })*/
 
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[0]
@@ -568,13 +562,13 @@ describe('CreateTopicModal', () => {
       fireEvent.click(getByText('appGlobal.next'))
     })
 
-    // select solution step with no solutions
-    await waitFor(() => {
+    // select solution step is skepped with no solutions present
+    /*    await waitFor(() => {
       const dropdowns = getAllByRole('combobox', { hidden: true })
       expect(dropdowns).toHaveLength(3)
       expect(dropdowns[0]).toHaveTextContent('components.CreateLearningElementSolutionTable.noSolution')
       fireEvent.click(getByText('appGlobal.next'))
-    })
+    })*/
 
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[0]
