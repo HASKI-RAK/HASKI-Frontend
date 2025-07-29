@@ -89,7 +89,6 @@ const CreateLearningElementModal = ({
       handleCreateLearningElementsInExistingTopic(
         currentTopicLmsId,
         selectedLearningElementsClassification,
-        selectedLearningElementSolution,
         topicId,
         courseId
       ).then(() => {
@@ -167,7 +166,8 @@ const CreateLearningElementModal = ({
     selectedLearningElements,
     selectedLearningElementsClassification,
     setSelectedLearningElements,
-    setSelectedLearningElementsClassification
+    setSelectedLearningElementsClassification,
+    selectedSolutions
   ])
 
   return (
@@ -254,7 +254,6 @@ const CreateLearningElementModal = ({
                 handleCreateLearningElementsInExistingTopic(
                   currentTopicLmsId,
                   selectedLearningElementsClassification,
-                  selectedLearningElementSolution,
                   topicId,
                   courseId
                 ).then(() => {

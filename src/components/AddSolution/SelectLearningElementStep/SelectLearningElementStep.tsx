@@ -1,4 +1,4 @@
-import { Dispatch, memo, SetStateAction, useEffect } from 'react'
+import { Dispatch, memo, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
 import { Topic } from '@core'
@@ -6,7 +6,7 @@ import { RemoteLearningElementWithClassification } from '../../CreateTopic/Modal
 import SelectLearningElementTable from '../SelectLearningElementTable/SelectLearningElementTable'
 
 interface SelectLearningElementStep {
-  selectedTopics: Topic
+  selectedTopics: Topic | undefined
   selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }
   setSelectedLearningElements: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>>
   onNext: () => void
@@ -20,7 +20,13 @@ const SelectLearningElementStep = ({
 }: SelectLearningElementStep) => {
   const { t } = useTranslation()
 
-  return (
+  return !selectedTopics ? (
+    <Grid container item>
+      <Box sx={{ padding: '1rem', width: '95%' }}>
+        <p>{t('components.SelectLearningElementStep.noTopicSelected')}</p>
+      </Box>
+    </Grid>
+  ) : (
     <Grid container item>
       <SelectLearningElementTable
         currentTopic={selectedTopics}

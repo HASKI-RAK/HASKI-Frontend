@@ -132,16 +132,18 @@ export const useCreateTopicModal = ({
     async (
       topicLmsId: number,
       selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] },
-      selectedLearningElementSolution: { [key: number]: RemoteLearningElementWithSolution[] },
       topicId?: string,
       courseId?: string
     ): Promise<void> => {
       if (!topicId || !courseId) return Promise.resolve()
 
       return getUser()
-        .then((user) =>
-          Promise.all(
-            selectedLearningElementsClassification[topicLmsId].map((element) =>
+        .then((user) => {
+          const filteredLearningElements = selectedLearningElementsClassification[topicLmsId].filter(
+            (element) => !element.disabled
+          )
+          return Promise.all(
+            filteredLearningElements.map((element) =>
               handleCreateLearningElements(
                 element.lms_learning_element_name,
                 element.lms_activity_type,
@@ -151,11 +153,46 @@ export const useCreateTopicModal = ({
                 user
               )
             )
+          ).then((createdElements) => ({ user, createdElements }))
+        })
+        .then(({ user, createdElements }) => {
+          console.log(createdElements)
+          return handleCalculateLearningPaths(
+            user.settings.user_id,
+            user.role,
+            user.university,
+            courseId,
+            parseInt(topicId)
           ).then(() => user)
-        )
-        .then((user) =>
-          handleCalculateLearningPaths(user.settings.user_id, user.role, user.university, courseId, parseInt(topicId))
-        )
+        })
+        .then((user) => {
+          // Create solutions for learning elements
+          const elementsWithSolution = Object.values(selectedLearningElementSolution[topicLmsId] || [])
+            .flat()
+            .filter((element) => element.solutionLmsId && element.solutionLmsId > 0 && element.solutionLmsType)
+          console.log('Elements with solution:', elementsWithSolution)
+          if (elementsWithSolution.length === 0) {
+            return Promise.resolve()
+          }
+
+          return Promise.all(
+            elementsWithSolution.map((solution) =>
+              handleCreateSolutions(
+                solution.learningElementLmsId,
+                solution.solutionLmsId,
+                solution.solutionLmsType ?? 'resource'
+              ).catch((error) => {
+                addSnackbar({
+                  message: t('error.postLearningElementSolution') + ' ' + solution.learningElementLmsId,
+                  severity: 'error',
+                  autoHideDuration: 5000
+                })
+                log.error(t('error.postLearningElementSolution') + ' ' + error + ' ' + solution.learningElementLmsId)
+                throw error
+              })
+            )
+          ).then(() => void 0)
+        })
         .then(() => {
           clearLearningPathElement()
           clearLearningPathElementStatusCache()
@@ -186,13 +223,13 @@ export const useCreateTopicModal = ({
           const topicLmsId = topic.lms_id
           const topicId = topic.id
           // Filter out disabled learning elements, that are used as solutions
-          const filterdLearningElements = selectedLearningElementsClassification[topicLmsId].filter(
+          const filteredLearningElements = selectedLearningElementsClassification[topicLmsId].filter(
             (element) => !element.disabled
           )
 
-          // Step 1: Create learning elements
+          // Create learning elements
           return Promise.all(
-            filterdLearningElements.map((element) =>
+            filteredLearningElements.map((element) =>
               handleCreateLearningElements(
                 element.lms_learning_element_name,
                 element.lms_activity_type,
@@ -212,7 +249,7 @@ export const useCreateTopicModal = ({
             )
           )
             .then(() => {
-              // Step 3: Create algorithms and add students to topics
+              // Create algorithms and add students to topics
               return handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topic.id, algorithmShortName)
                 .then(() => {
                   return handleAddAllStudentsToTopics(courseId)
@@ -223,7 +260,7 @@ export const useCreateTopicModal = ({
                 .then(() => ({ topicId, user }))
             })
             .then(({ topicId, user }) => {
-              // Step 4: Calculate learning paths
+              // Calculate learning paths
               return handleCalculateLearningPaths(
                 user.settings.user_id,
                 user.role,

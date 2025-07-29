@@ -64,7 +64,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   }
 
   const handleAcceptDeleteLearningElementModal = (learningElementId: number, lmsLearningElementId: number) => {
-    deleteLearningElementSolution(lmsLearningElementId).then(() => {
+    deleteLearningElementSolution(learningElementId).then(() => {
       deleteLearningElement(learningElementId, lmsLearningElementId).then(() => {
         addSnackbar({
           message: t('components.BasicNode.deleteLearningElementSuccessful'),

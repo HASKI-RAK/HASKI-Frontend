@@ -1,4 +1,4 @@
-import { Dispatch, memo, SetStateAction, useCallback, useContext, useEffect, useState } from 'react'
+import { Dispatch, memo, SetStateAction, useCallback, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Paper, Step, StepButton, Stepper } from '@common/components'
@@ -7,7 +7,7 @@ import { handleError, RemoteLearningElementWithClassification } from '@component
 import { Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { postLearningElementSolution } from '@services'
-import { usePersistedStore, useStore } from '@store'
+import { useStore } from '@store'
 import CreateLearningElementSolutionStep from '../CreateTopic/Modal/CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
 import { RemoteLearningElementWithSolution, Solution } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 import SelectLearningElementStep from './SelectLearningElementStep/SelectLearningElementStep'
@@ -39,13 +39,9 @@ const AddSolutionModal = ({
 }: AddSolutionModalProps) => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
-  const { courseId } = useParams()
-
   const setLearningElementSolution = useStore((state) => state.setLearningElementSolution)
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  const { topicId } = useParams()
 
   const handleSend = useCallback(() => {
     if (!currentTopic) {
@@ -90,11 +86,7 @@ const AddSolutionModal = ({
     )
   }, [currentTopic, selectedLearningElements, learningElementsWithSolutions, t, addSnackbar])
 
-  return !currentTopic ? (
-    <Box sx={{ padding: '2rem', width: '80%', margin: 'auto', marginTop: '5rem' }}>
-      <h2>{t('components.AddSolutionModal.noTopic')}</h2>
-    </Box>
-  ) : (
+  return (
     <Modal open={open} onClose={onClose}>
       <Box sx={{ padding: '2rem', width: '80%', margin: 'auto', marginTop: '5rem' }}>
         <Paper elevation={3} sx={{ padding: '2rem', position: 'relative' }}>

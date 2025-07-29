@@ -316,7 +316,7 @@ describe('CreateLearningElementModal Component', () => {
     })
   })
 
-  test('calls handleCreateLearningElementsInExistingTopic and closes modal on final step', async () => {
+  /*test('calls handleCreateLearningElementsInExistingTopic and closes modal on final step', async () => {
     jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
     jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
 
@@ -324,7 +324,7 @@ describe('CreateLearningElementModal Component', () => {
 
     const { getByText } = render(
       <ReactFlowProvider>
-        <MemoryRouter initialEntries={['/course', '/1', '/topic', '/1']}>
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <SnackbarContext.Provider value={mockAddSnackbar}>
               <CreateLearningElementModal
@@ -337,6 +337,51 @@ describe('CreateLearningElementModal Component', () => {
                 setSelectedLearningElementsClassification={jest.fn()}
                 selectedLearningElementSolution={{}}
                 selectedSolutions={{}}
+                setSelectedSolutions={jest.fn()}
+                setSelectedLearningElementSolution={jest.fn()}
+                activeStep={1}
+                setActiveStep={handleSetActiveStep}
+              />
+            </SnackbarContext.Provider>
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
+    )
+
+    const nextButton = getByText(/createLearningElements/i)
+    fireEvent.click(nextButton)
+
+    act(() => {
+      // Replace runAllTimers with a more controlled approach
+      jest.advanceTimersByTime(5000) // Adjust timing as needed
+    })
+
+    await waitFor(() => {
+      expect(mockHandleCloseCreateTopicModal).toHaveBeenCalled()
+    })
+  })*/
+
+  test('calls handleCreateLearningElementsInExistingTopic and closes modal on final step', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+
+    const handleSetActiveStep = jest.fn()
+
+    const { getByText } = render(
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateLearningElementModal
+                openCreateTopicModal={true}
+                currentTopicLmsId={3}
+                handleCloseCreateTopicModal={mockHandleCloseCreateTopicModal}
+                selectedLearningElements={{}}
+                setSelectedLearningElements={jest.fn()}
+                selectedLearningElementsClassification={{}}
+                setSelectedLearningElementsClassification={jest.fn()}
+                selectedLearningElementSolution={{}}
+                selectedSolutions={{ 3: [] }}
                 setSelectedSolutions={jest.fn()}
                 setSelectedLearningElementSolution={jest.fn()}
                 activeStep={1}
@@ -382,7 +427,7 @@ describe('CreateLearningElementModal Component', () => {
                 setSelectedLearningElementsClassification={jest.fn()}
                 selectedLearningElementSolution={{}}
                 setSelectedLearningElementSolution={jest.fn()}
-                selectedSolutions={{}}
+                selectedSolutions={{ 3: [] }}
                 setSelectedSolutions={jest.fn()}
                 activeStep={1}
                 setActiveStep={handleSetActiveStep}
@@ -423,7 +468,7 @@ describe('CreateLearningElementModal Component', () => {
                 selectedLearningElementsClassification={{}}
                 setSelectedLearningElementsClassification={jest.fn()}
                 selectedLearningElementSolution={{}}
-                selectedSolutions={{}}
+                selectedSolutions={{ 3: [] }}
                 setSelectedSolutions={jest.fn()}
                 setSelectedLearningElementSolution={jest.fn()}
                 activeStep={1}
@@ -460,7 +505,7 @@ describe('CreateLearningElementModal Component', () => {
                 selectedLearningElementsClassification={{}}
                 setSelectedLearningElementsClassification={jest.fn()}
                 selectedLearningElementSolution={{}}
-                selectedSolutions={{}}
+                selectedSolutions={{ 3: [] }}
                 setSelectedSolutions={jest.fn()}
                 setSelectedLearningElementSolution={jest.fn()}
                 activeStep={1}
@@ -498,7 +543,7 @@ describe('CreateLearningElementModal Component', () => {
                 selectedLearningElementsClassification={{}}
                 setSelectedLearningElementsClassification={jest.fn()}
                 selectedLearningElementSolution={{}}
-                selectedSolutions={{}}
+                selectedSolutions={{ 3: [] }}
                 setSelectedSolutions={jest.fn()}
                 setSelectedLearningElementSolution={jest.fn()}
                 activeStep={1}

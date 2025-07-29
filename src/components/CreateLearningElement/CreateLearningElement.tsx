@@ -42,6 +42,7 @@ const CreateLearningElement = () => {
     setSelectedLearningElements({})
     setSelectedLearningElementsClassification({})
     setCreateLearningElementModalOpen(false)
+    setSelectedSolutions({})
     setActiveStep(0)
   }, [setSelectedLearningElements, setCreateLearningElementModalOpen, setSelectedLearningElementsClassification])
 
