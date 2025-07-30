@@ -42,4 +42,37 @@ describe('LearningElementSolutionSlice', () => {
     expect(result).toEqual(learningElementSolution)
     expect(mockServices.fetchLearningElementSolution).toHaveBeenCalledTimes(1)
   })
+
+  it('should manually set a learning element solution', () => {
+    const { setLearningElementSolution } = useStore.getState()
+    const learningElementLmsId = 2
+    const solutionLmsId = 5
+    const activityType = 'video'
+
+    setLearningElementSolution(learningElementLmsId, solutionLmsId, activityType)
+
+    const expected = {
+      learning_element_lms_id: learningElementLmsId,
+      solution_lms_id: solutionLmsId,
+      activity_type: activityType
+    }
+
+    expect(useStore.getState()._learningElementSolution[`${learningElementLmsId}`]).toEqual(expected)
+  })
+
+  it('should manually set a learning element solution, when no activityType is given', () => {
+    const { setLearningElementSolution } = useStore.getState()
+    const learningElementLmsId = 2
+    const solutionLmsId = 5
+
+    setLearningElementSolution(learningElementLmsId, solutionLmsId)
+
+    const expected = {
+      learning_element_lms_id: learningElementLmsId,
+      solution_lms_id: solutionLmsId,
+      activity_type: 'resource'
+    }
+
+    expect(useStore.getState()._learningElementSolution[`${learningElementLmsId}`]).toEqual(expected)
+  })
 })
