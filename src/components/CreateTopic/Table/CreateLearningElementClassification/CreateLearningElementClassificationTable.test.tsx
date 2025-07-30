@@ -110,7 +110,7 @@ describe('CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
-          selectedSolutions={{}}
+          selectedSolutions={{ 1: [] }}
           onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
@@ -129,7 +129,7 @@ describe('CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
-          selectedSolutions={{}}
+          selectedSolutions={{ 1: [] }}
           onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
@@ -152,7 +152,7 @@ describe('CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
-          selectedSolutions={{}}
+          selectedSolutions={{ 1: [] }}
           onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
@@ -174,7 +174,7 @@ describe('CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
-          selectedSolutions={{}}
+          selectedSolutions={{ 1: [] }}
           onSolutionChange={jest.fn}
         />
       </MemoryRouter>
@@ -200,7 +200,7 @@ describe('CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
-          selectedSolutions={{}}
+          selectedSolutions={{ 1: [] }}
           onSolutionChange={jest.fn()}>
           <div data-testid="child">Child Content</div>
         </CreateLearningElementClassificationTable>
