@@ -1,9 +1,5 @@
 import { useCallback, useMemo } from 'react'
-import {
-  RemoteLearningElementWithClassification,
-  RemoteLearningElementWithSolution,
-  Solution
-} from '../../Modal/CreateTopicModal/CreateTopicModal'
+import { RemoteLearningElementWithClassification, RemoteLearningElementWithSolution, Solution } from '@components'
 
 type useCreateLearningElementSolutionTable = {
   learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }
@@ -36,7 +32,7 @@ export const useCreateLearningElementSolutionTable = ({
 
   const resetUnavailableSolutions = useCallback(
     (elementsWithSolutions: RemoteLearningElementWithSolution[], topicId: number) => {
-      const topicSolutions = selectedSolutions[topicId] || []
+      const topicSolutions = selectedSolutions[topicId]
       return elementsWithSolutions.map((element) =>
         topicSolutions.find((solution) => solution.solutionLmsId === element.solutionLmsId)
           ? element

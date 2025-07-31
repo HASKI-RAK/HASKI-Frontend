@@ -78,7 +78,7 @@ const CreateLearningElementClassificationTable = ({
   //function to check if solution is checked
   const isSolution = useCallback(
     (topicId: number, elementLmsId: number) =>
-      (selectedSolutions[topicId] || []).some((solution) => solution.solutionLmsId === elementLmsId),
+      selectedSolutions[topicId].some((solution) => solution.solutionLmsId === elementLmsId),
     [selectedSolutions]
   )
 

@@ -50,8 +50,8 @@ const CreateLearningElementClassificationTable = memo(
     })
 
     const allSolutionsUsed = (topicId: number) => {
-      const allSolutions = selectedSolutions[topicId] || []
-      const allElementsWithSolutions = learningElementsWithSolutions[topicId] || []
+      const allSolutions = selectedSolutions[topicId]
+      const allElementsWithSolutions = learningElementsWithSolutions[topicId]
       return allSolutions.every((solution) =>
         allElementsWithSolutions.some((element) => element.solutionLmsId === solution.solutionLmsId)
       )
@@ -95,7 +95,7 @@ const CreateLearningElementClassificationTable = memo(
         const topicIdInt = parseInt(topicId)
         const newDisplayedSolutions = [
           { solutionLmsId: 0, solutionLmsName: t('components.CreateLearningElementSolutionTable.noSolution') },
-          ...(selectedSolutions[topicIdInt] || [])
+          ...selectedSolutions[topicIdInt]
         ]
 
         return { ...accumulator, [topicIdInt]: newDisplayedSolutions }
