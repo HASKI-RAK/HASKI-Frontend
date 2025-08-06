@@ -1,6 +1,6 @@
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import {
   Box,
   Divider,
@@ -16,9 +16,10 @@ import {
   TableRow,
   Typography
 } from '@common/components'
+import { CoverSheet } from '@components'
 import { SnackbarContext } from '@services'
 import useHandleSend from './Questions.hooks'
-import { ButtonStack, CoverSheet, MemoTableRowQuestion, SendButton, StartButton } from './TableCommonComponents'
+import { ButtonStack, MemoTableRowQuestion, SendButton, StartButton } from './TableCommonComponents'
 
 type TableRowAnswersProps = {
   t: (key: string) => string
@@ -303,6 +304,7 @@ const TableListKQuestions = memo(({ successSend, setSuccessSend, testUndefined }
         <CoverSheet
           header={t('components.LearnerCharacteristics.listKNoData')}
           body={t('components.TableListKQuestions.introduction')}
+          imagePath="/ProjectDescriptionImage03.jpg"
         />
       ) : (
         <Stack direction="column" justifyContent="center" alignItems="stretch" spacing={2}>

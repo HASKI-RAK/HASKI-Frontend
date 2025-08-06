@@ -1,50 +1,46 @@
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import DefaultModal from '@mui/material/Modal'
-import { memo, useCallback } from 'react'
 import { ModalProps as DefaultModalProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { usePageName } from '@services'
 
 /**
- * @prop DefaultModalProps - The props of a mui Modal.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
+ * @prop {@link DefaultModalProps} - The props of the default Modal component.
+ * @prop {@link EventHandlers} - The props containing the event handlers.
  * @interface
  */
-type ModalProps = DefaultModalProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+type ModalProps = DefaultModalProps & EventHandlers
+
+/**
+ * WrappedModal component.
+ *
+ * @remarks
+ * The WrappedModal component is a wrapper around the MUI Modal component.
+ * It is enhanced with xAPI functionality to track user interactions.
+ * WrappedModal can be used as a standalone component on a page.
+ *
+ * @category Components
+ */
+const WrappedModal = withXAPI(DefaultModal, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'Modal'
+})
 
 /**
  * Modal component.
  *
- * @param props - Props containing the useStatement hook and the props of a mui Modal.
+ * @param props - Props containing the default Modal props and event handlers.
  *
- * @category Common
+ * @remarks
+ * The Modal component is a wrapper around the WrappedModal component.
+ * It retrieves the page name from a hook and passes it to the WrappedModal component.
+ * Modal can be used as a standalone component on a page.
+ *
+ * @category Components
  */
-const Modal = ({ useStatement = _useStatement, onClose, ...props }: ModalProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.Modal
-  })
-
-  return (
-    <DefaultModal
-      onClose={useCallback(
-        (event: object, reason: 'backdropClick' | 'escapeKeyDown') => {
-          sendStatement(xAPIVerb.closed, new URL(import.meta.url).pathname)
-          onClose?.(event, reason)
-        },
-        [sendStatement, onClose]
-      )}
-      {...props}>
-      {props.children}
-    </DefaultModal>
-  )
+const Modal = ({ ...props }: ModalProps) => {
+  const { pageName } = usePageName()
+  return <WrappedModal pageName={pageName} {...props} />
 }
 
 export default memo(Modal)

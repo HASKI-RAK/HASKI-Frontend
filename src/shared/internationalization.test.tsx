@@ -4,7 +4,7 @@ import { act, render } from '@testing-library/react'
 // your i18n config file
 import { I18nextProvider, useTranslation } from 'react-i18next'
 import { MemoryRouter } from 'react-router-dom'
-import { MenuItem, Select } from '@common/components'
+import { MenuItem, Select, SelectChangeEvent } from '@common/components'
 import i18next from './internationalization'
 
 describe('i18n test', () => {
@@ -13,9 +13,12 @@ describe('i18n test', () => {
     const { i18n } = useTranslation()
     const startingLanguage = localStorage.getItem('i18nextLng') as string
 
-    const onClickLanguageChange = (e: { target: { value: string } }) => {
-      i18n.changeLanguage(e.target.value)
-      localStorage.setItem('i18nextLng', e.target.value)
+    const onClickLanguageChange = (event: SelectChangeEvent<unknown>) => {
+      const { value } = event.target
+      if (typeof value === 'string') {
+        i18n.changeLanguage(value)
+        localStorage.setItem('i18nextLng', value)
+      }
     }
 
     return (

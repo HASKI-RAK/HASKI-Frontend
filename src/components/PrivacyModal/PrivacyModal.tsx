@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, MouseEvent, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
@@ -60,13 +60,13 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
   const currentLocation = useLocation()
 
   //Disable backdropClick so the Modal only closes via the buttons
-  const handleClose = useCallback((_: React.MouseEvent<HTMLElement>, reason: string) => {
+  const handleClose = useCallback((_: MouseEvent<HTMLElement>, reason: string) => {
     if (reason && reason == 'backdropClick') return
   }, [])
 
   //Sets checkbox to enable button
   const handleChecked = useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
+    (event: MouseEvent<HTMLElement>) => {
       setChecked((event.target as HTMLInputElement).checked)
     },
     [setChecked]
@@ -96,7 +96,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
             <Box sx={style}>
               <Typography id="transition-modal-title" variant="h4" component="h2">
                 {t('components.PrivacyModal.termsOfService')}
-                <Typography id="modal-text" variant="subtitle1" component="h2">
+                <Typography id="modal-text" variant="subtitle1" component="h3">
                   {t('components.PrivacyModal.afterReading')}
                   <FormGroup>
                     <FormControlLabel
@@ -106,6 +106,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                         <>
                           {t('components.PrivacyModal.readPrivacypolicy') + ' \n'}
                           <Link
+                            id="privacy-policy-link"
                             marginX="0.2em"
                             component="button"
                             variant="subtitle1"
@@ -129,6 +130,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                   }}>
                   <Tooltip title={t('components.PrivacyModal.returnToMoodle')}>
                     <Button
+                      id="decline-privacy-policy-button"
                       variant={'contained'}
                       sx={{ alignSelf: 'end' }}
                       aria-multiline={'true'}
@@ -151,6 +153,7 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                     </Button>
                   </Tooltip>
                   <Button
+                    id="accept-privacy-policy-button"
                     variant={'contained'}
                     sx={{ alignSelf: 'end' }}
                     disabled={!checked}

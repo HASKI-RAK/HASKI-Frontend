@@ -20,7 +20,7 @@ const showCurrentBreadcrump = (
       key={path}
       underline="hover"
       component={index === location.pathname.split('/').length - 1 ? 'span' : 'button'}
-      color={index === location.pathname.split('/').length - 1 ? 'inherit' : 'text.primary'}
+      color={'textPrimary'}
       onClick={() => {
         navigate(
           location.pathname
@@ -58,7 +58,7 @@ const BreadcrumbsContainer = () => {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
       {/** Center */}
-      <Breadcrumbs aria-label="breadcrumb">
+      <Breadcrumbs aria-label="breadcrumb" separator={<Typography>/</Typography>}>
         {location.pathname !== '/' ? (
           location.pathname.split('/').map((path, index, array) => {
             if (path === '')
@@ -67,7 +67,7 @@ const BreadcrumbsContainer = () => {
                   id="home-link"
                   key={path}
                   underline="hover"
-                  color="text.primary"
+                  color="textPrimary"
                   onClick={() => {
                     navigate('/')
                   }}>
@@ -84,15 +84,12 @@ const BreadcrumbsContainer = () => {
           <Box display="flex">
             <Link
               id="home-link"
-              color="text.primary"
               onClick={() => {
                 navigate('/')
-              }}>
+              }}
+              color="textPrimary">
               {t('pages.home')}
             </Link>
-            <Typography ml="0.3rem" color="text.primary">
-              /
-            </Typography>
           </Box>
         )}
       </Breadcrumbs>

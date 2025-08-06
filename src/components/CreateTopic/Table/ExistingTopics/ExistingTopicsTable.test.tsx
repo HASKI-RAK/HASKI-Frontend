@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import { LearningPathTopic } from '@core'
 import ExistingTopicsTable from './ExistingTopicsTable'
 
@@ -51,12 +52,20 @@ const mockExistingTopics: LearningPathTopic = {
 
 describe('ExistingTopicsTable', () => {
   it('renders title', () => {
-    const { getByText } = render(<ExistingTopicsTable existingTopics={mockExistingTopics} />)
+    const { getByText } = render(
+      <MemoryRouter>
+        <ExistingTopicsTable existingTopics={mockExistingTopics} />
+      </MemoryRouter>
+    )
     expect(getByText('components.ExistingTopicsTable.title')).toBeInTheDocument()
   })
 
   it('renders list of existing topics with checkboxes', () => {
-    const { getByText, getAllByRole } = render(<ExistingTopicsTable existingTopics={mockExistingTopics} />)
+    const { getByText, getAllByRole } = render(
+      <MemoryRouter>
+        <ExistingTopicsTable existingTopics={mockExistingTopics} />
+      </MemoryRouter>
+    )
 
     // Verify topics are rendered
     mockExistingTopics.topics.forEach((topic) => {
@@ -72,7 +81,11 @@ describe('ExistingTopicsTable', () => {
   })
 
   it('renders correct number of checkboxes', () => {
-    const { getAllByRole } = render(<ExistingTopicsTable existingTopics={mockExistingTopics} />)
+    const { getAllByRole } = render(
+      <MemoryRouter>
+        <ExistingTopicsTable existingTopics={mockExistingTopics} />
+      </MemoryRouter>
+    )
 
     // Check if number of checkboxes matches the number of topics
     const checkboxes = getAllByRole('checkbox')

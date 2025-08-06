@@ -63,9 +63,14 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
   const reportTypeChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setReportType(event.target.value)
   }
-  const reportTopicChangeHandler = (event: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>): void => {
-    setReportTopic(event.target.value)
+
+  const reportTopicChangeHandler = (event: SelectChangeEvent<unknown>): void => {
+    const { value } = event.target
+    if (typeof value === 'string') {
+      setReportTopic(value)
+    }
   }
+
   const descriptionChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setDescription(event.target.value)
   }
@@ -160,7 +165,7 @@ const ContactForm = ({ useContactForm = _useContactForm, ...props }: ContactForm
               color="primary"
               sx={{ alignSelf: 'end', marginTop: '0.6rem' }}
               onClick={handleSubmit}>
-              {t('components.ContactForm.submit')}
+              {t('appGlobal.submit')}
             </Button>
           </FormControl>
           <Backdrop open={isLoading}>

@@ -1,50 +1,46 @@
-import { MouseEvent, memo, useCallback } from 'react'
+import { memo } from 'react'
+import { EventHandlers, withXAPI } from 'react-xapi-wrapper'
 import { BoxProps as DefaultBoxProps } from '@common/components'
-import {
-  StatementHookReturn,
-  useStatement as _useStatement,
-  useStatementHookParams,
-  xAPIComponent,
-  xAPIVerb
-} from '@services'
+import { usePageName } from '@services'
 import { Box } from './DefaultBox'
 
 /**
- * @prop DefaultBoxProps - The props of a mui Box.
- * @prop useStatement - Custom hook to send xAPI statements
- * @category Common
+ * @prop {@link DefaultBoxProps} - The props of the default Box component.
+ * @prop {@link EventHandlers} - The props containing the event handlers.
  * @interface
  */
-type NodeWrapperProps = DefaultBoxProps & {
-  useStatement?: (params?: useStatementHookParams) => StatementHookReturn
-}
+type NodeWrapperProps = DefaultBoxProps & EventHandlers
+
+/**
+ * WrappedNodeWrapper component.
+ *
+ * @remarks
+ * The WrappedNodeWrapper component is a wrapper around the MUI Box component.
+ * It is enhanced with xAPI functionality to track user interactions.
+ * WrappedNodeWrapper can be used as a standalone component on a page.
+ *
+ * @category Components
+ */
+const WrappedNodeWrapper = withXAPI(Box, {
+  componentFilePath: new URL(import.meta.url).pathname,
+  componentType: 'Node'
+})
 
 /**
  * NodeWrapper component.
  *
- * @param props - Props containing the useStatement hook and the props of a mui Box.
+ * @param props - Props containing the default Box props and event handlers.
  *
- * @category Common
+ * @remarks
+ * The NodeWrapper component is a wrapper around the WrappedNodeWrapper component.
+ * It retrieves the page name from a hook and passes it to the WrappedNodeWrapper component.
+ * NodeWrapper can be used as a standalone component on a page.
+ *
+ * @category Components
  */
-const NodeWrapper = ({ useStatement = _useStatement, onClick, ...props }: NodeWrapperProps) => {
-  const { sendStatement } = useStatement({
-    defaultComponentID: props.id,
-    defaultComponent: xAPIComponent.Node
-  })
-
-  return (
-    <Box
-      onClick={useCallback(
-        (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-          sendStatement(xAPIVerb.clicked, new URL(import.meta.url).pathname)
-          onClick?.(event)
-        },
-        [onClick, sendStatement]
-      )}
-      {...props}>
-      {props.children}
-    </Box>
-  )
+const NodeWrapper = ({ ...props }: NodeWrapperProps) => {
+  const { pageName } = usePageName()
+  return <WrappedNodeWrapper pageName={pageName} {...props} />
 }
 
 export default memo(NodeWrapper)
