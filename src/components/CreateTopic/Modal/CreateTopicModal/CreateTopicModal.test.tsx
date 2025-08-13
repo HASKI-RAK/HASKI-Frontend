@@ -217,6 +217,12 @@ describe('CreateTopicModal', () => {
     })
 
     await waitFor(() => {
+      // try back and next buttons
+      expect(getByText('appGlobal.back')).toBeEnabled()
+      fireEvent.click(getByText('appGlobal.back'))
+      expect(getByText('appGlobal.next')).toBeEnabled()
+      fireEvent.click(getByText('appGlobal.next'))
+
       const button = getAllByRole('combobox', { hidden: true })[0]
       fireEvent.mouseDown(button)
       const menuItems = getAllByRole('option', { hidden: true })
@@ -311,6 +317,16 @@ describe('CreateTopicModal', () => {
     })
 
     // select solution step is skipped when no solutions where selected in the learning element step.
+    await waitFor(() => {
+      //skipping back to the learning element step
+      expect(getByText('appGlobal.back')).toBeEnabled()
+      fireEvent.click(getByText('appGlobal.back'))
+
+      //skipping forth to the algorithm step
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
+      expect(getByText('appGlobal.next')).toBeEnabled()
+      fireEvent.click(getByText('appGlobal.next'))
+    })
 
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[0]
@@ -562,7 +578,7 @@ describe('CreateTopicModal', () => {
       fireEvent.click(getByText('appGlobal.next'))
     })
 
-    // select solution step is skepped with no solutions present
+    // select solution step is skipped with no solutions present
     /*    await waitFor(() => {
       const dropdowns = getAllByRole('combobox', { hidden: true })
       expect(dropdowns).toHaveLength(3)
