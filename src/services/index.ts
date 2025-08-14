@@ -17,8 +17,11 @@ export * from './debounce'
 export { fetchDefaultLearningPath, fetchDisabledClassifications, postDefaultLearningPath } from './DefaultLearningPath'
 export { postLearningElement } from './LearningElement'
 export { deleteLearningElement } from './LearningElement'
+export { fetchLearningElementSolution } from './LearningElementSolution'
+export { postLearningElementSolution } from './LearningElementSolution'
 export {
   fetchLearningPathElement,
+  fetchLearningPathElementSolution,
   fetchLearningPathElementSpecificStatus,
   fetchLearningPathElementStatus,
   postCalculateLearningPathForAllStudents
@@ -43,5 +46,6 @@ export * from './SnackbarContext'
 export { SnackbarProvider } from './SnackbarProvider'
 export { fetchLearningPathTopic, postAddAllStudentsToTopics, postTopic } from './Topic'
 export { deleteTopic } from './Topic'
+export { deleteLearningElementSolution } from './LearningElementSolution'
 export * from './Viewport'
 export * from './xAPI'

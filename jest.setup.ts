@@ -519,6 +519,14 @@ const mockDataServices: MockDataServices = {
       university: 'HS-KE'
     })
   ),
+  postLearningElementSolution: jest.fn(() =>
+    Promise.resolve({
+      id: 1,
+      learning_element_lms_id: 1,
+      solution_lms_id: 4,
+      activity_type: 'activity'
+    })
+  ),
   fetchStudentLpLeAlg: jest.fn(() =>
     Promise.resolve({
       algorithm_id: 1,
@@ -666,6 +674,35 @@ const mockDataServices: MockDataServices = {
     Promise.resolve({
       message: 'Deletion successful!'
     })
+  ),
+  deleteLearningElementSolution: jest.fn(() =>
+    Promise.resolve({
+      message: 'Deletion successful!'
+    })
+  ),
+  fetchLearningElementSolution: jest.fn(() =>
+    Promise.resolve({
+      id: 1,
+      learning_element_lms_id: 1,
+      solution_lms_id: 4,
+      activity_type: 'activity'
+    })
+  ),
+  fetchLearningPathElementSolution: jest.fn(() =>
+    Promise.resolve([
+      {
+        id: 1,
+        learning_element_lms_id: 123,
+        activity_type: 'Quiz',
+        solution_lms_id: '4'
+      },
+      {
+        id: 2,
+        learning_element_lms_id: 124,
+        activity_type: 'Video',
+        solution_lms_id: '5'
+      }
+    ])
   )
 }
 /**

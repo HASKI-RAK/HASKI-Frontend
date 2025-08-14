@@ -1,0 +1,72 @@
+import { getConfig } from '@shared'
+import { fetchLearningElementSolution } from './fetchLearningElementSolution'
+
+describe('fetchLearningElementSolution has expected behaviour', () => {
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve({ status: 200 }),
+      ok: true,
+      headers: {
+        get: () => 'application/json'
+      }
+    })
+  ) as jest.Mock
+
+  it('should return lms id and activity type of a solution for a learning Element', async () => {
+    const expectedData = { solution_lms_id: 1, activity_type: 'activity' }
+    const mockResponse = {
+      ok: true,
+      json: jest.fn().mockResolvedValue(expectedData)
+    }
+
+    //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    fetch.mockResolvedValue(mockResponse)
+
+    const learningElementLmsId = 1
+
+    const result = await fetchLearningElementSolution(learningElementLmsId)
+
+    expect(fetch).toHaveBeenCalledWith(`${getConfig().BACKEND}/learningElement/${learningElementLmsId}/solution`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    expect(result).toEqual(expectedData)
+  })
+
+  it('should throw a specific error when the response has an error variable', async () => {
+    const expectedError = 'Error: HTTP error undefined'
+    const expectedMessage = 'Error: HTTP error undefined'
+
+    const mockResponse = {
+      ok: false,
+      json: jest.fn().mockResolvedValue({ error: expectedError, message: expectedMessage })
+    }
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    fetch.mockResolvedValue(mockResponse)
+
+    const learningElementLmsId = 1
+
+    await expect(fetchLearningElementSolution(learningElementLmsId)).rejects.toThrow(expectedMessage)
+  })
+
+  it('should throw an unknown error when the response does not have an error variable', async () => {
+    const mockResponse = {
+      ok: false,
+      json: jest.fn().mockResolvedValue({})
+    }
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    fetch.mockResolvedValue(mockResponse)
+
+    const learningElementLmsId = 1
+
+    await expect(fetchLearningElementSolution(learningElementLmsId)).rejects.toThrow('')
+  })
+})

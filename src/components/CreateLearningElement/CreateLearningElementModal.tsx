@@ -9,9 +9,11 @@ import {
   handleError,
   RemoteLearningElementWithClassification
 } from '@components'
-import { LearningPathElement, RemoteLearningElement, RemoteTopics } from '@core'
+import { LearningPathElement, LearningPathElementSolution, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+import CreateLearningElementSolutionStep from '../CreateTopic/Modal/CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
+import { RemoteLearningElementWithSolution, Solution } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 import { useCreateTopicModal } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal.hooks'
 
 export type CreateTopicModalProps = {
@@ -24,6 +26,10 @@ export type CreateTopicModalProps = {
   setSelectedLearningElementsClassification: Dispatch<
     SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>
   >
+  setSelectedLearningElementSolution: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithSolution[] }>>
+  setSelectedSolutions: Dispatch<SetStateAction<{ [key: number]: Solution[] }>>
+  selectedSolutions: { [key: number]: Solution[] }
+  selectedLearningElementSolution: { [key: number]: RemoteLearningElementWithSolution[] }
   setActiveStep: Dispatch<SetStateAction<number>>
   activeStep: number
 }
@@ -36,6 +42,10 @@ const CreateLearningElementModal = ({
   setSelectedLearningElements,
   selectedLearningElementsClassification,
   setSelectedLearningElementsClassification,
+  setSelectedLearningElementSolution,
+  setSelectedSolutions,
+  selectedSolutions,
+  selectedLearningElementSolution,
   setActiveStep,
   activeStep
 }: CreateTopicModalProps) => {
@@ -52,16 +62,48 @@ const CreateLearningElementModal = ({
     handleLearningElementClassification
   } = useCreateTopicModal({
     setSelectedLearningElements,
-    setSelectedLearningElementsClassification
+    setSelectedLearningElementsClassification,
+    setSelectedLearningElementSolution,
+    setSelectedSolutions,
+    selectedLearningElementSolution,
+    selectedSolutions
   })
 
   //Store
   const getUser = usePersistedStore((state) => state.getUser)
   const getRemoteTopics = useStore((state) => state.getRemoteTopics)
   const getLearningPathElement = useStore((state) => state.getLearningPathElement)
+  const getLearningPathElementSolution = useStore((state) => state.getLearningPathElementSolution)
 
   //Constants
-  const createLearningElementModalStepperSteps = [t('appGlobal.learningElements'), t('appGlobal.classifications')]
+  const createLearningElementModalStepperSteps = [
+    t('appGlobal.learningElements'),
+    t('appGlobal.classifications'),
+    t('appGlobal.solutions')
+  ]
+
+  //functions
+  // when no solutions are selected just create Learning Element in Classification step
+  const handleClassificationNext = () => {
+    if (selectedSolutions[currentTopicLmsId].length === 0) {
+      handleCreateLearningElementsInExistingTopic(
+        currentTopicLmsId,
+        selectedLearningElementsClassification,
+        topicId,
+        courseId
+      ).then(() => {
+        handleCloseCreateTopicModal()
+      })
+    } else {
+      setActiveStep((prevStep) => prevStep + 1)
+    }
+  }
+
+  // get text for classification step next button
+  const getNextTextClassification = (): string => {
+    if (selectedSolutions[currentTopicLmsId].length > 0) return t('appGlobal.next')
+    else return t('components.CreateLearningElementModal.createLearningElements')
+  }
 
   //filter out the learning elements that are already in the learning path
   useEffect(() => {
@@ -86,16 +128,28 @@ const CreateLearningElementModal = ({
             const existingLearningElementIds = learningPathElementData.path.map(
               (element) => element.learning_element.lms_id
             )
+            // Extract LMS IDs of learning elements that are solutions in the learning path
+            getLearningPathElementSolution(topicId)
+              .then((learningPathElementSolutionData: LearningPathElementSolution) => {
+                // Extract solution LMS IDs
+                const solutionLearningElementIds = learningPathElementSolutionData.map(
+                  (solution) => solution.solution_lms_id
+                )
+                // A Set of all IDs to exclude
+                const idsToExclude = new Set([...existingLearningElementIds, ...solutionLearningElementIds])
+                // Update remote topics by filtering out elements that already exist in the learning path or are solutions
+                const updatedTopics = filteredTopics.map((topic) => ({
+                  ...topic,
+                  lms_learning_elements: topic.lms_learning_elements.filter(
+                    (learningElement) => !idsToExclude.has(learningElement.lms_id)
+                  )
+                }))
 
-            // Update remote topics by filtering out elements that already exist in the learning path
-            const updatedTopics = filteredTopics.map((topic) => ({
-              ...topic,
-              lms_learning_elements: topic.lms_learning_elements.filter(
-                (learningElement) => !existingLearningElementIds.includes(learningElement.lms_id)
-              )
-            }))
-
-            setRemoteTopic(updatedTopics)
+                setRemoteTopic(updatedTopics)
+              })
+              .catch((error) => {
+                handleError(t, addSnackbar, 'error.fetchLearningPathElementSolution', error, 3000)
+              })
           }
         )
       )
@@ -112,7 +166,8 @@ const CreateLearningElementModal = ({
     selectedLearningElements,
     selectedLearningElementsClassification,
     setSelectedLearningElements,
-    setSelectedLearningElementsClassification
+    setSelectedLearningElementsClassification,
+    selectedSolutions
   ])
 
   return (
@@ -165,6 +220,8 @@ const CreateLearningElementModal = ({
               handleLearningElementChange={handleLearningElementChange}
               selectAllLearningElementsChecked={selectAllLearningElementsChecked}
               setSelectAllLearningElementsChecked={setSelectAllLearningElementsChecked}
+              selectedSolutions={selectedSolutions}
+              onSolutionChange={setSelectedSolutions}
               onNext={() => {
                 setActiveStep((prevStep) => prevStep + 1)
               }}
@@ -175,6 +232,24 @@ const CreateLearningElementModal = ({
               selectedTopics={remoteTopic}
               selectedLearningElements={selectedLearningElements}
               selectedLearningElementsClassification={selectedLearningElementsClassification}
+              selectedSolutions={selectedSolutions}
+              onSolutionChange={setSelectedSolutions}
+              onNext={handleClassificationNext}
+              handleLearningElementClassification={handleLearningElementClassification}
+              onBack={() => {
+                setActiveStep((prevStep) => prevStep - 1)
+              }}
+              nextButtonText={getNextTextClassification()}
+            />
+          )}
+          {activeStep === 2 && (
+            <CreateLearningElementSolutionStep
+              selectedTopics={remoteTopic}
+              LearningElementsClassification={selectedLearningElementsClassification}
+              selectedSolutions={selectedSolutions}
+              learningElementsWithSolutions={selectedLearningElementSolution}
+              onLearningElementSolutionChange={setSelectedLearningElementSolution}
+              onBack={() => setActiveStep((prevStep) => prevStep - 1)}
               onNext={() =>
                 handleCreateLearningElementsInExistingTopic(
                   currentTopicLmsId,
@@ -185,10 +260,6 @@ const CreateLearningElementModal = ({
                   handleCloseCreateTopicModal()
                 })
               }
-              handleLearningElementClassification={handleLearningElementClassification}
-              onBack={() => {
-                setActiveStep((prevStep) => prevStep - 1)
-              }}
               nextButtonText={t('components.CreateLearningElementModal.createLearningElements')}
             />
           )}

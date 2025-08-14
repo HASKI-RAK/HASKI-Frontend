@@ -1,3 +1,4 @@
+export { default as AddSolution } from './AddSolution/AddSolution'
 export { default as AlgorithmSettingsModal } from './AlgorithmSettingsModal/AlgorithmSettingsModal'
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
 export { default as CollapsibleList } from './CollapsibleList/CollapsibleList/CollapsibleList'
@@ -24,7 +25,9 @@ export { default as CreateLearningElementsStep } from './CreateTopic/Modal/Creat
 export { default as CreateRemoteTopicsStep } from './CreateTopic/Modal/CreateRemoteTopicsStep/CreateRemoteTopicsStep'
 export {
   default as CreateTopicModal,
-  type RemoteLearningElementWithClassification
+  type RemoteLearningElementWithClassification,
+  type RemoteLearningElementWithSolution,
+  type Solution
 } from './CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 export {
   default as CreateAlgorithmTable,
@@ -35,6 +38,7 @@ export {
   default as CreateLearningElementClassificationTable,
   type LearningElementWithClassification
 } from './CreateTopic/Table/CreateLearningElementClassification/CreateLearningElementClassificationTable'
+export { default as CreateLearningElementSolutionTable } from './CreateTopic/Table/CreateLearningElementSolution/CreateLearningElementSolutionTable'
 export { default as CreateRemoteTopicsTable } from './CreateTopic/Table/CreateRemoteTopics/CreateRemoteTopicsTable'
 export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopics/ExistingTopicsTable'
 export { default as DeleteEntityModal } from './DeleteEntityModal/DeleteEntityModal'
