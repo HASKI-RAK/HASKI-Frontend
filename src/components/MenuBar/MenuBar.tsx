@@ -30,6 +30,7 @@ import {
   CreateDefaultLearningPathModal,
   FurtherInfoMenu,
   LanguageMenu,
+  LevelBar,
   QuestionnaireQuestionsModal,
   StatisticsMenu,
   TableILSQuestions,
@@ -53,6 +54,7 @@ const MenuBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const { isAuth, logout } = useContext(AuthContext)
   const { isCourseCreatorRole } = useContext(RoleContext)
+  const { isStudentRole } = useContext(RoleContext)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
   const [modalOpenListK, setModalOpenListK] = useState(false)
@@ -174,8 +176,12 @@ const MenuBar = () => {
               HASKI
             </TextWrapper>
             <CourseMenu />
-            <StatisticsMenu />
-            <FurtherInfoMenu />
+            {//<StatisticsMenu />
+            <FurtherInfoMenu />}
+          </Box>
+          {/** Level bar */}
+          <Box mt={'1rem'} mr={'32rem'}>
+            <LevelBar/>
           </Box>
           {/** Search bar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>
