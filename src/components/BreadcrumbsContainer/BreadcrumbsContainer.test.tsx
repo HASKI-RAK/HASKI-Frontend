@@ -12,7 +12,7 @@ describe('BreadcrumbsContainer', () => {
   })
 
   it('should render the default breadcrumb with default path', () => {
-    const { getAllByText, getByText } = render(
+    const { getAllByText } = render(
       <MemoryRouter initialEntries={['']}>
         <BreadcrumbsContainer />
       </MemoryRouter>
