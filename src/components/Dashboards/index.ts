@@ -1,0 +1,7 @@
+export * from './Rating/LearningElementRatingDashboard/LearningElementRatingDashboard.hooks'
+export { default as RatingDashboard } from './Rating/RatingDashboard/RatingDashboard'
+export * from './Rating/RatingDashboard/RatingDashboard'
+export * from './Rating/RatingDashboard/RatingDashboard.hooks'
+export { default as RatingDashboardDrawer } from './Rating/RatingDashboardDrawer/RatingDashboardDrawer'
+export { default as RatingDashboardDrawerButton } from './Rating/RatingDashboardDrawerButton/RatingDashboardDrawerButton'
+export * from './Rating/StudentRatingDashboard/StudentRatingDashboard.hooks'
