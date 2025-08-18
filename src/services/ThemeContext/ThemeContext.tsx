@@ -13,5 +13,4 @@ const ThemeContext = createContext<ThemeContextType>({
   loadTheme: () => undefined,
   updateTheme: () => undefined
 })
-
 export default ThemeContext

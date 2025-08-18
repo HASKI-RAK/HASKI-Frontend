@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Theme } from '@mui/material/styles'
 import log from 'loglevel'
@@ -57,5 +57,5 @@ export const useThemeProvider = () => {
       })
   }
 
-  return { theme, loadTheme, updateTheme } as const
+  return  useMemo(() => ({ theme, loadTheme, updateTheme }), [theme, loadTheme, updateTheme])
 }

@@ -144,7 +144,6 @@ describe('Test the Home page-2', () => {
         expect(getByTestId('create-course-button')).toBeInTheDocument()
         fireEvent.click(getByTestId('create-course-button'))
         expect(getByTestId('create-course-modal-close-button')).toBeInTheDocument()
-        //expect(getAllByTestId('settings-menu')[0]).toBeInTheDocument()
       })
     })
   })
@@ -202,77 +201,4 @@ describe('Test the Home page-2', () => {
       expect(container.innerHTML).toContain('MuiSkeleton')
     })
   })
-
-  /*
-    * currently commented out because UI element is not used/commented out at the moment
-  test('settings button opens menu', async () => {
-    const { getAllByTestId, getByTestId } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
-    )
-    await waitFor(() => {
-      act(() => {
-        fireEvent.click(getAllByTestId('settings-button')[0])
-        expect(getAllByTestId('settings-menu')[0]).toBeInTheDocument()
-      })
-    })
-  })
-
-  test('settings button closes menu', async () => {
-    const { getAllByTestId, getByTestId, queryByTestId } = render(
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <Home />
-        </AuthContext.Provider>
-      </MemoryRouter>
-    )
-
-    await waitFor(() =>
-      act(() => {
-        fireEvent.click(getAllByTestId('settings-button')[0])
-      })
-    )
-    expect(getAllByTestId('settings-menu')[0]).toBeInTheDocument()
-    fireEvent.click(getByTestId('menu-item-algorithm'))
-    await waitFor(() => {
-      expect(queryByTestId('settings-menu')).toBeNull()
-    })
-  })
-  */
 })
-
-/*
-describe('Home2', () => {
-  test('fetching Course returns no courses', async () => {
-    mockServices.fetchCourses.mockImplementation(() => {
-      courses: []
-    })
-
-    const { getByText } = render(
-      <ThemeContextProvider>
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Home />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      </ThemeContextProvider>
-    )
-    await waitFor(async () => {
-      const { getByText } = render(
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Home />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      )
-
-      waitFor(() => {
-        expect(getByText('pages.home.noCourses')).toBeInTheDocument()
-      })
-    })
-  })
-})
-*/

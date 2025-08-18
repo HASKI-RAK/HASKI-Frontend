@@ -1,24 +1,19 @@
-import { ReactNode, useMemo } from 'react'
-import { ThemeProvider } from '@common/theme'
-import ThemeContext from '../ThemeContext/ThemeContext'
+import { ReactNode } from 'react'
+import { ThemeProvider as DefaultThemeProvider } from '@common/theme'
+import { ThemeContext, ThemeContextType } from '@services'
 import { useThemeProvider as _useThemeProvider } from './ThemeProvider.hooks'
 
 type ThemeProviderComponentProps = {
   children: ReactNode
-  useThemeProvider?: typeof _useThemeProvider
+  useThemeProvider?: () => ThemeContextType
 }
 
-export const DefaultThemeProvider = ({
-  children,
-  useThemeProvider = _useThemeProvider
-}: ThemeProviderComponentProps) => {
-  const { theme, loadTheme, updateTheme } = useThemeProvider()
-
-  const contextValue = useMemo(() => ({ theme, loadTheme, updateTheme }), [theme, loadTheme, updateTheme])
+export const ThemeProvider = ({ children, useThemeProvider = _useThemeProvider }: ThemeProviderComponentProps) => {
+  const { theme } = useThemeProvider()
 
   return (
-    <ThemeContext.Provider value={contextValue}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    <ThemeContext.Provider value={useThemeProvider()}>
+      <DefaultThemeProvider theme={theme}>{children}</DefaultThemeProvider>
     </ThemeContext.Provider>
   )
 }

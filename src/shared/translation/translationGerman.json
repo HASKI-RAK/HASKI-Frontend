@@ -1256,7 +1256,7 @@
   "components.TableRemoteTopics.noAdditionalTopics": "Keine zusätzlichen Themenbereiche gefunden",
   "components.TableRemoteTopics.title": "Verfügbare Themenbereiche",
   "components.ThemeModal.altTheme": "HASKI-Alternativ",
-  "components.ThemeModal.buttonDescription": "Theme ändern",
+  "components.MenuBar.themeModal": "Theme ändern",
   "components.ThemeModal.darkTheme": "HASKI-Dunkel",
   "components.ThemeModal.radioHeader": "Verfügbare Themes",
   "components.ThemeModal.standardTheme": "HASKI-Standard",

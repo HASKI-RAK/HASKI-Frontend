@@ -204,7 +204,7 @@ const MenuBar = () => {
           </Box>
           {/** Theme button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={<Typography variant={'body2'}>{t('components.ThemeModal.buttonDescription')}</Typography>}>
+            <Tooltip title={<Typography variant={'body2'}>{t('components.MenuBar.themeModal')}</Typography>}>
               <IconButton id="theme-icon-button" onClick={() => handleOpenThemeModal()}>
                 <Brush data-testid="BrushIcon" />
               </IconButton>
