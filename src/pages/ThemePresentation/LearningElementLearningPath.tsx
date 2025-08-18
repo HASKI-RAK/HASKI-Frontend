@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import ReactFlow, { Background, Controls, useReactFlow } from 'reactflow'
+import ReactFlow, { Background, Controls, ReactFlowProvider, useReactFlow } from 'reactflow'
 import { Grid } from '@mui/material'
 import { nodeTypes, ResponsiveMiniMap } from '@components'
 import { LearningPathElement, LearningPathElementStatus } from '@core'
@@ -211,11 +211,20 @@ const LearningElementLearningPath = () => {
         height: '40rem',
         width: '100%'
       }}>
-      <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes} fitView proOptions={{ hideAttribution: true }}>
-        <ResponsiveMiniMap />
-        <Background gap={16} />
-        <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
-      </ReactFlow>
+      {/* needs its own ReactFlowProvider to not interfere with other components that use reactflow (e.g. topic page) */}
+      <ReactFlowProvider>
+        <ReactFlow
+          id="example-flow"
+          nodes={nodes}
+          edges={edges}
+          nodeTypes={nodeTypes}
+          fitView
+          proOptions={{ hideAttribution: true }}>
+          <ResponsiveMiniMap />
+          <Background gap={16} />
+          <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
+        </ReactFlow>
+      </ReactFlowProvider>
     </Grid>
   )
 }

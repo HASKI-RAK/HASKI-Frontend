@@ -9,18 +9,14 @@ import {
   Home,
   Imprint,
   LearnerCharacteristics,
-  LearningElementLearningPath,
   Login,
   MainFrame,
   PageNotFound,
   PrivacyPolicy,
   ProjectDescription,
-  Topic,
-  TopicsLearningPath
+  Topic
 } from '@pages'
 import { AuthProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
-import { getConfig } from '@shared'
-import { usePersistedStore } from '@store'
 import { useApp } from './App.hooks'
 
 /**
@@ -56,8 +52,6 @@ export const App = () => {
                       <Route index element={<Home />} />
                       <Route path="/course/:courseId" element={<Course />} />
                       <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
-                      <Route path="/lelearningpath" element={<LearningElementLearningPath />} />
-                      <Route path="/topicslearningpath" element={<TopicsLearningPath />} />
                       <Route path="/login" element={<Login />} />
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/privacypolicy" element={<PrivacyPolicy />} />

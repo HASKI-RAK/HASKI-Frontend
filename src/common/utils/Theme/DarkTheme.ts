@@ -1,22 +1,7 @@
 import { createTheme, green, grey, red, yellow } from '@common/theme'
+import { defaultBehavior } from './CommonThemeSettings'
 
-export const defaultBehavior = {
-  boxShadowSize: {
-    default: '2px 2px 0',
-    large: '0 0.5rem 0 ',
-    hidden: '0 0 0 0 '
-  },
-  border: {
-    default: '2px solid '
-  }
-}
-
-export const defaultFonts = {
-  defaultFamily: 'din-round,sans-serif',
-  default: '700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) din-round,sans-serif'
-}
-
-export const defaultColors = {
+const defaultColors = {
   primary: {
     //orange
     [100]: '#FF8E00', //light orange
@@ -78,18 +63,6 @@ export const DarkTheme = createTheme({
       dark: grey[500],
       light: grey[200]
     }
-
-    /*action: {
-          active: defaultColors.primary[100],
-
-          hover: defaultColors.primary[100],
-          hoverOpacity: 0.1,
-          focus: defaultColors.primary[100],
-          focusOpacity: 0.1,
-          selected: defaultColors.primary[100],
-          selectedOpacity: 1,
-
-        },*/
   },
   breakpoints: {
     values: {
@@ -111,7 +84,6 @@ export const DarkTheme = createTheme({
   },
 
   components: {
-    // Name of the component
     MuiFormHelperText: {
       defaultProps: {
         color: defaultColors.primary[300]
@@ -126,13 +98,10 @@ export const DarkTheme = createTheme({
       }
     },
     MuiPaper: {
-      // Name of the rule
       styleOverrides: {
         root: {
-          //backgroundColor: 'lightgrey',
           border: defaultBehavior.border.default + defaultColors.lightgrey,
           borderRadius: '1rem',
-          //color: defaultColors.black, // text color
           boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey'
         }
       }
@@ -143,26 +112,18 @@ export const DarkTheme = createTheme({
         disableRipple: true
       },
       styleOverrides: {
-        // Name of the slot
         root: {
-          // Some CSS
           color: defaultColors.white,
-          /*font:
-                      "700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) " +
-                      defaultFonts.default,*/
           font: 'Courier New',
-          //background: 'none',
           border: defaultBehavior.border.default + defaultColors.lightgrey,
           borderRadius: '0.2rem',
           backgroundColor: 'white',
           bottom: '-2px',
-          //boxShadow: defaultBehavior.boxShadowSize["default"] + "lightgrey",
           left: '-2px',
           top: '-2px',
           padding: '0.5rem 1.2rem 0.5rem 1.2rem',
           transition: 'filter 0.1s ease',
 
-          //padding: 'var(--web-ui_button-padding,0 16px)',
           '&:hover': {
             filter: 'var(--web-ui_button-filter-hover,brightness(1.1))',
             backgroundColor: 'white'
@@ -178,7 +139,7 @@ export const DarkTheme = createTheme({
             boxShadow: 'none'
           }
         },
-        //komplett gefüllter button
+        //filled button
         contained: {
           color: defaultColors.black,
           backgroundColor: defaultColors.primary[100],
@@ -191,14 +152,13 @@ export const DarkTheme = createTheme({
             filter: 'var(--web-ui_button-filter-hover,brightness(1.1))'
           },
           '&:active': {
-            //transform: "translateY(4px) translateZ(0)",
             boxShadow: 'unset',
             color: defaultColors.white,
             backgroundColor: defaultColors.primary[300],
             textDecoration: 'underline'
           }
         },
-        //Button wird unterstrichen
+        //underlined button
         outlined: {
           color: defaultColors.black,
           boxShadow: defaultBehavior.boxShadowSize['default'] + defaultColors.white,
@@ -212,14 +172,12 @@ export const DarkTheme = createTheme({
             filter: 'var(--web-ui_button-filter-hover,brightness(1.1))'
           },
           '&:active': {
-            //transform: "translateY(4px) translateZ(0)",
             boxShadow: 'unset'
           }
         },
-        //komplett gefüllter button aber in weiß
+        //filled button in white
         text: {
           background: 'none',
-          //color: defaultColors.white,
           border: 'none',
           fontFamily: 'monospace',
           fontWeight: 700,
@@ -231,22 +189,6 @@ export const DarkTheme = createTheme({
             opacity: 1
           }
         }
-        /*text: {
-                  color: defaultColors.black,
-                  backgroundColor: defaultColors.white,
-                  boxShadow: defaultBehavior.boxShadowSize['default'] + defaultColors.black,
-                  borderColor: defaultColors.black,
-                  '&:hover': {
-                    backgroundColor: defaultColors.white,
-                    boxShadow: defaultBehavior.boxShadowSize['default'] + defaultColors.secondary[500],
-                    borderColor: defaultColors.secondary[500],
-                    filter: 'var(--web-ui_button-filter-hover,brightness(1.1))'
-                  },
-                  '&:active': {
-                    //transform: "translateY(4px) translateZ(0)",
-                    boxShadow: 'unset'
-                  }
-                }*/
       }
     },
     MuiLink: {
@@ -267,19 +209,14 @@ export const DarkTheme = createTheme({
         }
       }
     },
-    /** style a drawer component */
     MuiDrawer: {
       styleOverrides: {
         root: {
-          //backgroundColor: defaultColors.white,
           boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey',
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             borderRadius: '1rem',
             border: defaultBehavior.border.default + defaultColors.lightgrey,
-            /** color means the color of the Text */
-            //color: defaultColors.black,
-            //ackgroundColor: defaultColors.white,
             boxShadow: defaultBehavior.boxShadowSize['default'] + 'lightgrey'
           }
         }
@@ -450,69 +387,3 @@ export const DarkTheme = createTheme({
     }
   }
 })
-
-export const node_style = {
-  display: 'flex',
-  flexDirection: 'column',
-  height: '100 %',
-  borderWidth: '2px',
-  borderStyle: 'solid',
-  borderImage: 'initial',
-  borderColor: 'black',
-  borderRadius: '8px',
-  overflow: 'hidden',
-  boxShadow: 'rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px'
-}
-
-export const footer_style = {
-  //backgroundColor: '#FFCA3A',
-  //color: 'black',
-  fontWeight: '400',
-  textTransform: 'uppercase',
-  fontFamily: 'monospace',
-  fontSize: '10px',
-  paddingInlineStart: '0.5rem',
-  paddingInlineEnd: '0.5rem',
-  paddingTop: '0.2rem',
-  paddingBottom: '0.2rem',
-  borderTopWidth: '2px',
-  borderTopStyle: 'solid',
-  borderColor: 'black',
-  flex: '1 1 0%'
-}
-export const header_style = {
-  backgroundColor: '#FFCA3A',
-  //color: 'black',
-  fontWeight: '400',
-  textTransform: 'uppercase',
-  fontFamily: 'monospace',
-  fontSize: '10px',
-  paddingInlineStart: '0.5rem',
-  paddingInlineEnd: '0.5rem',
-  paddingTop: '0.2rem',
-  paddingBottom: '0.2rem',
-  borderBottomWidth: '2px',
-  borderBottomStyle: 'solid',
-  borderColor: 'black',
-  flex: '1 1 0%'
-}
-
-export const middle_style = {
-  //backgroundColor: '#FFCA3A',
-  margin: '0rem',
-  paddingTop: '0.1rem',
-  paddingBottom: '0.1rem'
-}
-
-export const bottom_text = {
-  paddingTop: '0.2rem',
-  paddingBottom: '0.2rem',
-  paddingLeft: '0.2rem'
-}
-export const bottom_text_right = {
-  position: 'absolute',
-  paddingTop: '0.2rem',
-  paddingBottom: '0.2rem',
-  paddingLeft: '0.2rem',
-  right: '0.5rem'
-}
