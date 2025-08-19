@@ -44,7 +44,7 @@ const GraphILS = ({ data }: GraphILSProps) => {
       axis: {
         domain: {
           line: {
-            stroke: '#777777',
+            stroke: theme.palette.secondary.dark,
             strokeWidth: 1
           }
         },
@@ -67,7 +67,7 @@ const GraphILS = ({ data }: GraphILSProps) => {
       },
       grid: {
         line: {
-          stroke: '#dddddd',
+          stroke: theme.palette.secondary.dark,
           strokeWidth: 1
         }
       },

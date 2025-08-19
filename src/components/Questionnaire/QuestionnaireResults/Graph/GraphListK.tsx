@@ -350,7 +350,7 @@ const GraphListK = ({ data }: GraphListKProps) => {
         if (node.data.score >= 3) {
           return theme.palette.text.primary
         } else {
-          return '#cf4d5b'
+          return theme.palette.error.main
         }
       }}
       linkColor={theme.palette.text.secondary}

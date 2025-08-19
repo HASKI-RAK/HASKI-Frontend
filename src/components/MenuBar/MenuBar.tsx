@@ -39,7 +39,7 @@ import {
   ThemeModal
 } from '@components'
 import { AuthContext, RoleContext } from '@services'
-import { Theme } from '../../common/theme/DefaultTheme/DefaultTheme'
+import { Theme } from '@common/theme'
 
 /**
  * The MenuBar component is the top bar of the application.
