@@ -15,8 +15,9 @@ import { SkeletonList, StyledLinearProgress } from '@components'
 import { Topic } from '@core'
 import { useTranslation } from 'react-i18next'
 import { Polyline, MoreVert } from '@common/icons'
+import { memo } from 'react'
 
-const mockTopics: Topic[] = [
+const exampleTopics: Topic[] = [
   {
     contains_le: true,
     created_at: 'Thu, 23 Jan 2025 00:00:00 GMT',
@@ -79,7 +80,7 @@ const mockTopics: Topic[] = [
   }
 ]
 
-const mockTopicProgress: [number, number][] = [
+const exampleTopicProgress: [number, number][] = [
   [0, 2],
   [1, 1],
   [1, 3]
@@ -93,7 +94,7 @@ const TopicsLearningPath = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container direction="column" justifyContent="center" alignItems="center">
-        {mockTopics.map((topic, index) => (
+        {exampleTopics.map((topic, index) => (
           <Card
             key={topic?.id}
             sx={{
@@ -164,8 +165,8 @@ const TopicsLearningPath = () => {
             </CardContent>
             {/* Display topic progress bar */}
             <Grid container item direction="row" justifyContent="flex-end" alignItems="flex-end">
-              {mockTopicProgress ? (
-                <StyledLinearProgress learningElementProgressTopics={mockTopicProgress[index]} />
+              {exampleTopicProgress ? (
+                <StyledLinearProgress learningElementProgressTopics={exampleTopicProgress[index]} />
               ) : (
                 // Display loading state if progress is not available yet
                 <StyledLinearProgress />
@@ -200,4 +201,4 @@ const TopicsLearningPath = () => {
   )
 }
 
-export default TopicsLearningPath
+export default memo(TopicsLearningPath)

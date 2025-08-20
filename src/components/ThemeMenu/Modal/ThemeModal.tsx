@@ -27,8 +27,6 @@ type ThemeModalProps = {
   setSelectedTheme: (theme: Theme) => void
 }
 
-const getThemeKey = (theme: Theme): Theme['name'] => theme.name
-
 /**
  * ThemeModal provides a modal to allow changing the application's theme
  *
@@ -134,7 +132,7 @@ const ThemeModal = ({ open = false, handleClose, selectedTheme, setSelectedTheme
                 flexDirection: 'row',
                 gap: 2
               }}
-              value={getThemeKey(selectedTheme)}
+              value={selectedTheme.name}
               onChange={useCallback(
                 (_e: ChangeEvent<HTMLInputElement>, value: string) => {
                   handleThemeModalRadioButtonChange(value)
@@ -221,7 +219,7 @@ const ThemeModal = ({ open = false, handleClose, selectedTheme, setSelectedTheme
             }}
             data-testid={'ThemeModal-Accept-Button'}
             onClick={useCallback(() => {
-              updateTheme(getThemeKey(selectedTheme))
+              updateTheme(selectedTheme)
               handleClose({} as object, 'backdropClick')
             }, [updateTheme, selectedTheme, handleClose])}
             disabled={activeTheme === selectedTheme}>

@@ -667,7 +667,7 @@ const mockDataServices: MockDataServices = {
       message: 'Deletion successful!'
     })
   ),
-  postUserSetting: jest.fn(() =>
+  postUserSettings: jest.fn(() =>
     Promise.resolve({
       id: 2,
       pswd: null,

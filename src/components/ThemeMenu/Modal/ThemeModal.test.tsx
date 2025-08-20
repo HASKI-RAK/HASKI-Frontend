@@ -12,16 +12,6 @@ jest.mock('react-i18next', () => ({
   })
 }))
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({ status: 200 }),
-    ok: true,
-    headers: {
-      get: () => 'application/json'
-    }
-  })
-) as jest.Mock
-
 describe('ThemeModal tests', () => {
   test('should render ThemeModal, closed', () => {
     const themeModal = render(

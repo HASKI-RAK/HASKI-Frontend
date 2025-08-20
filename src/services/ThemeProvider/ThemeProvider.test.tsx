@@ -3,19 +3,19 @@ import { act, render, renderHook, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import { ThemeProvider, useThemeProvider } from '@services'
+import { AltTheme, DarkTheme, HaskiTheme } from '@common/utils'
+import { createTheme } from '@common/theme'
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({ status: 200 }),
-    text: () => Promise.resolve(),
-    status: 200,
-    message: 'OK',
-    ok: true,
-    headers: {
-      get: () => 'application/json'
-    }
-  })
-) as jest.Mock
+const someThemeLiteral = {
+  name: 'mockTheme',
+  palette: {
+    primary: { main: '#000' },
+    secondary: { main: '#fff' }
+  }
+} as const
+
+// Build a "real" mockTheme
+const someTheme = createTheme(someThemeLiteral as any)
 
 describe('Test AuthProvider', () => {
   it('should include the standard useThemeProvider values', () => {
@@ -36,13 +36,12 @@ describe('Test AuthProvider', () => {
 
     expect(result.current).toMatchObject({
       theme: expect.any(Object),
-      loadTheme: expect.any(Function),
       updateTheme: expect.any(Function)
     })
 
     // test side effects
     act(() => {
-      result.current.loadTheme('AltTheme')
+      result.current.updateTheme(AltTheme)
     })
     expect(result.current.theme.name).toBe('AltTheme')
   })
@@ -54,13 +53,12 @@ describe('Test AuthProvider', () => {
 
     expect(result.current).toMatchObject({
       theme: expect.any(Object),
-      loadTheme: expect.any(Function),
       updateTheme: expect.any(Function)
     })
 
     // test side effects
     act(() => {
-      result.current.loadTheme('DarkTheme')
+      result.current.updateTheme(DarkTheme)
     })
     expect(result.current.theme.name).toBe('DarkTheme')
   })
@@ -72,33 +70,14 @@ describe('Test AuthProvider', () => {
 
     expect(result.current).toMatchObject({
       theme: expect.any(Object),
-      loadTheme: expect.any(Function),
       updateTheme: expect.any(Function)
     })
 
     // test side effects
     act(() => {
-      result.current.loadTheme('some-theme')
+      result.current.updateTheme(someTheme)
     })
     expect(result.current.theme.name).toBe('HaskiTheme')
-  })
-
-  test('update user theme', async () => {
-    const wrapper = ({ children }: { children: React.ReactNode }) => <MemoryRouter>{children}</MemoryRouter>
-
-    const { result } = renderHook(() => useThemeProvider(), { wrapper })
-
-    expect(result.current).toMatchObject({
-      theme: expect.any(Object),
-      loadTheme: expect.any(Function),
-      updateTheme: expect.any(Function)
-    })
-
-    // test side effects
-    act(() => {
-      result.current.updateTheme('DarkTheme')
-    })
-    expect(result.current.theme.name).toBe('DarkTheme')
   })
 
   test('getUser fails', async () => {
@@ -111,7 +90,7 @@ describe('Test AuthProvider', () => {
     const { result } = renderHook(() => useThemeProvider(), { wrapper })
 
     await act(async () => {
-      await result.current.loadTheme('some-theme')
+      await result.current.updateTheme(someTheme)
     })
 
     expect(result.current.theme.name).toBe('HaskiTheme')
@@ -124,7 +103,6 @@ describe('Test AuthProvider', () => {
 
     expect(result.current).toMatchObject({
       theme: expect.any(Object),
-      loadTheme: expect.any(Function),
       updateTheme: expect.any(Function)
     })
 
@@ -133,7 +111,7 @@ describe('Test AuthProvider', () => {
       mockServices.fetchUser.mockImplementationOnce(() => {
         throw new Error('getUser error')
       })
-      result.current.updateTheme('DarkTheme')
+      result.current.updateTheme(DarkTheme)
     })
     await waitFor(() => {
       expect(result.current.theme.name).toBe('DarkTheme')

@@ -1,4 +1,4 @@
-import { MouseEvent, useContext, useState } from 'react'
+import { MouseEvent, useCallback, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -203,7 +203,9 @@ const MenuBar = () => {
           {/** Theme button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={<Typography variant={'body2'}>{t('components.MenuBar.themeModal')}</Typography>}>
-              <IconButton id="theme-icon-button" onClick={() => handleOpenThemeModal()}>
+              <IconButton
+                id="theme-icon-button"
+                onClick={useCallback(() => handleOpenThemeModal(), [handleOpenThemeModal])}>
                 <Brush data-testid="BrushIcon" />
               </IconButton>
             </Tooltip>
