@@ -17,7 +17,7 @@ const someThemeLiteral = {
 // Build a "real" mockTheme
 const someTheme = createTheme(someThemeLiteral as any)
 
-describe('Test AuthProvider', () => {
+describe('ThemeProvider', () => {
   it('should include the standard useThemeProvider values', () => {
     const result = render(
       <MemoryRouter>
@@ -98,6 +98,9 @@ describe('Test AuthProvider', () => {
 
   test('update user theme fails', async () => {
     const wrapper = ({ children }: { children: React.ReactNode }) => <MemoryRouter>{children}</MemoryRouter>
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('getUser error')
+    })
 
     const { result } = renderHook(() => useThemeProvider(), { wrapper })
 
@@ -108,9 +111,6 @@ describe('Test AuthProvider', () => {
 
     // test side effects
     act(() => {
-      mockServices.fetchUser.mockImplementationOnce(() => {
-        throw new Error('getUser error')
-      })
       result.current.updateTheme(DarkTheme)
     })
     await waitFor(() => {

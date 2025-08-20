@@ -12,9 +12,15 @@ export const themeMapping: Record<Theme['name'], Theme> = {
   AltTheme
 }
 
-const toThemeName = (theme: Theme): Theme['name'] => theme.name
+// Utility functions to convert between Theme and Theme name
 const toTheme = (themeName: Theme['name']): Theme => themeMapping[themeName] || HaskiTheme
 
+/**
+ * useThemeProvider is a custom hook that provides the current theme and a function to update it.
+ * It fetches the user settings to determine the initial theme and updates the user's theme preference.
+ *
+ * @returns An object containing the current theme and a function to update the theme.
+ */
 export const useThemeProvider = () => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
@@ -28,9 +34,8 @@ export const useThemeProvider = () => {
       setTheme(theme.name in themeMapping ? theme : HaskiTheme)
       getUser()
         .then((user) => {
-          const themeName = toThemeName(theme)
-          postUserSettings(themeName, user.settings.user_id, user.lms_user_id)
-          updateUserTheme(themeName)
+          postUserSettings(theme.name, user.settings.user_id, user.lms_user_id)
+          updateUserTheme(theme.name)
         })
         .catch((error) => {
           addSnackbar({
@@ -41,7 +46,7 @@ export const useThemeProvider = () => {
           log.error(t('error.getUser') + ' ' + error)
         })
     },
-    [getUser, updateUserTheme, addSnackbar, t]
+    [setTheme, getUser, updateUserTheme, addSnackbar, t]
   )
 
   useEffect(() => {

@@ -3,6 +3,18 @@ import { render } from '@testing-library/react'
 import React, { useContext } from 'react'
 import { HaskiTheme } from '@common/utils'
 import ThemeContext, { ThemeContextType } from './ThemeContext'
+import { createTheme } from '@common/theme'
+
+const someThemeLiteral = {
+  name: 'mockTheme',
+  palette: {
+    primary: { main: '#000' },
+    secondary: { main: '#fff' }
+  }
+} as const
+
+// Build a "real" mockTheme
+const someTheme = createTheme(someThemeLiteral as any)
 
 describe('ThemeContext', () => {
   it('should provide default values when no provider is used', () => {
@@ -21,22 +33,18 @@ describe('ThemeContext', () => {
     expect(contextValue).toBeDefined()
     expect(contextValue!.theme).toBe(HaskiTheme)
     // Verify that loadTheme and updateTheme are functions.
-    expect(typeof contextValue!.loadTheme).toBe('function')
     expect(typeof contextValue!.updateTheme).toBe('function')
     // Calling these functions should return undefined.
-    expect(contextValue!.loadTheme('some-theme')).toBeUndefined()
-    expect(contextValue!.updateTheme('some-theme')).toBeUndefined()
+    expect(contextValue!.updateTheme(someTheme)).toBeUndefined()
   })
 
   it('should override context values when a provider is used', () => {
-    // Create some custom values to provide.
+    // Create some custom values to phrovide.
     const customTheme = { palette: { primary: { main: '#000000' } } } as any // example custom theme
-    const loadThemeMock = jest.fn()
     const updateThemeMock = jest.fn()
 
     const customContextValue: ThemeContextType = {
       theme: customTheme,
-      loadTheme: loadThemeMock,
       updateTheme: updateThemeMock
     }
 
@@ -58,13 +66,10 @@ describe('ThemeContext', () => {
     // Verify that the context values match the custom provider's value.
     expect(contextValue).toBeDefined()
     expect(contextValue!.theme).toBe(customTheme)
-    expect(contextValue!.loadTheme).toBe(loadThemeMock)
     expect(contextValue!.updateTheme).toBe(updateThemeMock)
 
     // When the functions are called, they should call the corresponding mocks.
-    contextValue!.loadTheme('dark')
-    contextValue!.updateTheme('dark')
-    expect(loadThemeMock).toHaveBeenCalledWith('dark')
-    expect(updateThemeMock).toHaveBeenCalledWith('dark')
+    contextValue!.updateTheme(someTheme)
+    expect(updateThemeMock).toHaveBeenCalledWith(someTheme)
   })
 })
