@@ -5,9 +5,10 @@ import { Box, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typograph
 import { useTheme } from '@common/hooks'
 import { CheckBox, DeleteForever, Task, Warning } from '@common/icons'
 import { DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from '@components'
-import { deleteLearningElement, RoleContext, SnackbarContext, deleteLearningElementSolution } from '@services'
+import { deleteLearningElement, RoleContext, SnackbarContext, deleteLearningElementSolution, postFavorite } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
+import { FavoriteBorder as FavoriteBorderIcon, Favorite as FavoriteIcon } from '@mui/icons-material'
 
 /**
  * @prop children - The icon of the node.
@@ -23,6 +24,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const { t } = useTranslation()
   const theme = useTheme()
   const { addSnackbar } = useContext(SnackbarContext)
+  const getUser = usePersistedStore((state) => state.getUser)
   const { isCourseCreatorRole, isStudentRole } = useContext(RoleContext)
 
   const [deleteLearningElementModalOpen, setdeleteLearningElementModalOpen] = useState(false)
@@ -30,7 +32,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const [learningElementId, setLearningElementId] = useState<number>(0)
   const [lmsLearningElementId, setLmsLearningElementId] = useState<number>(0)
   const [isHovered, setIsHovered] = useState(false)
-  //const [isFavorite, setIsFavorite] = useState(false) commented out until feature is implemented
+  const [isFavorite, setIsFavorite] = useState(false) //commented out until feature is implemented
   const [solutionLmsId, setSolutionLmsId] = useState<number>(-1)
   const [solutionActivityType, setSolutionActivityType] = useState<string>('resource')
 
@@ -78,12 +80,22 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
     clearLearningPathElementStatusCache()
   }
 
-  /* placeholder for future favorite feature
+  // placeholder for future favorite feature
   const addToFavorites = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    getUser()
+      .then((user) => {
+        postFavorite(!isFavorite, user.id, props.data.learningElementId)
+      })
+      .catch(() => {
+        addSnackbar({
+          message: t('components.BasicNode.favoriteError'),
+          severity: 'error',
+          autoHideDuration: 3000
+        })
+      })
     setIsFavorite(!isFavorite)
     event.stopPropagation()
   }
-  */
 
   const handleShowSolution = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     props.data.handleOpen()
@@ -174,7 +186,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           justifyContent="flex-end"
           alignItems="center"
           sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
-          {/* commented out until feature is implemented
+          {// commented out until feature is implemented
             <IconButton
             onClick={addToFavorites}
             data-testid={'favoriteButton'}
@@ -186,7 +198,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
             }}>
             {isFavorite ? <FavoriteIcon titleAccess="isFavorite" /> : <FavoriteBorderIcon titleAccess="notFavorite" />}
           </IconButton>
-          */}
+          }
           {solutionLmsId > 1 && (
             <Tooltip title={t('components.BasicNode.solutionTooltip')}>
               <IconButton

@@ -15,15 +15,18 @@ import { fetchData } from '../RequestResponse'
 
 export const postFavorite = async (
   is_favorite?: boolean,
-  userId?: number,
-  learningElementId?: number
+  student_id?: number,
+  learning_element_id?: number
 ): Promise<Response> => {
-  return fetchData<Response>(getConfig().BACKEND + `/user/${userId}/learningElement/${learningElementId}`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(is_favorite)
-  })
+  return fetchData<Response>(
+    getConfig().BACKEND + `/lms/student/${student_id}/learningElement/${learning_element_id}`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ is_favorite })
+    }
+  )
 }
