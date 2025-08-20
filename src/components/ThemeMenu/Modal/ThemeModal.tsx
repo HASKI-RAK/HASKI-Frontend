@@ -1,4 +1,4 @@
-import { ChangeEvent, memo, useCallback, useState } from 'react'
+import { ChangeEvent, memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Divider,
@@ -25,9 +25,9 @@ type ThemeModalProps = {
   handleClose: (event: object, reason: string) => void
   selectedTheme: Theme
   setSelectedTheme: (theme: Theme) => void
-  selectedThemeString: string
-  setSelectedThemeString: (theme: string) => void
 }
+
+const getThemeKey = (theme: Theme): Theme['name'] => theme.name
 
 /**
  * ThemeModal provides a modal to allow changing the application's theme
@@ -39,36 +39,30 @@ type ThemeModalProps = {
  * @category Components
  */
 
-const ThemeModal = ({
-  open = false,
-  handleClose,
-  selectedTheme,
-  setSelectedTheme,
-  selectedThemeString,
-  setSelectedThemeString
-}: ThemeModalProps) => {
+const ThemeModal = ({ open = false, handleClose, selectedTheme, setSelectedTheme }: ThemeModalProps) => {
   const { t } = useTranslation()
   const activeTheme = useTheme()
-
-  const themeMap: Record<string, Theme> = {
-    HaskiTheme: HaskiTheme,
-    DarkTheme: DarkTheme,
-    AltTheme: AltTheme
-  }
-
-  //gets theme from user and provides string
-
   const { updateTheme } = useThemeProvider()
+  const [activeStep, setActiveStep] = useState(0)
 
-  //handles the selection of a radio button
-  const handleThemeModalPreviewChange = (themeString: string) => {
-    const theme = themeMap[themeString]
-    setSelectedThemeString(themeString)
-    setSelectedTheme(theme)
+  const themeMap: Record<Theme['name'], Theme> = {
+    HaskiTheme,
+    DarkTheme,
+    AltTheme
   }
 
-  //PreviewPageChangerLogic
-  const [activeStep, setActiveStep] = useState(0)
+  useEffect(() => {
+    if (open) setSelectedTheme(activeTheme)
+  }, [open, activeTheme, setSelectedTheme])
+
+  const handleThemeModalRadioButtonChange: (themeKey: string) => void = useCallback(
+    (themeKey: Theme['name']) => {
+      setSelectedTheme(themeMap[themeKey])
+    },
+    [setSelectedTheme]
+  )
+
+  // example pages that are displayed in the modal
   const pages = [
     <PrivacyPolicy key="privacy" />,
     <Home key="home" />,
@@ -140,12 +134,12 @@ const ThemeModal = ({
                 flexDirection: 'row',
                 gap: 2
               }}
-              value={selectedThemeString}
+              value={getThemeKey(selectedTheme)}
               onChange={useCallback(
-                (_event: ChangeEvent<HTMLInputElement>, value: string) => {
-                  handleThemeModalPreviewChange(value)
+                (_e: ChangeEvent<HTMLInputElement>, value: string) => {
+                  handleThemeModalRadioButtonChange(value)
                 },
-                [handleThemeModalPreviewChange]
+                [handleThemeModalRadioButtonChange]
               )}
               aria-labelledby="theme-modal-radio-buttons">
               <FormControlLabel
@@ -227,9 +221,9 @@ const ThemeModal = ({
             }}
             data-testid={'ThemeModal-Accept-Button'}
             onClick={useCallback(() => {
-              updateTheme(selectedThemeString)
+              updateTheme(getThemeKey(selectedTheme))
               handleClose({} as object, 'backdropClick')
-            }, [updateTheme, selectedThemeString, handleClose])}
+            }, [updateTheme, selectedTheme, handleClose])}
             disabled={activeTheme === selectedTheme}>
             <Check />
           </Fab>

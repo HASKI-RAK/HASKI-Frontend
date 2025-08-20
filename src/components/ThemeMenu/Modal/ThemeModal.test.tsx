@@ -28,13 +28,7 @@ describe('ThemeModal tests', () => {
       <ThemeProvider>
         <MemoryRouter>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <ThemeModal
-              handleClose={jest.fn()}
-              selectedTheme={HaskiTheme}
-              selectedThemeString={'HaskiTheme'}
-              setSelectedThemeString={jest.fn()}
-              setSelectedTheme={jest.fn()}
-            />
+            <ThemeModal handleClose={jest.fn()} selectedTheme={HaskiTheme} setSelectedTheme={jest.fn()} />
           </AuthContext.Provider>
         </MemoryRouter>
       </ThemeProvider>
@@ -48,14 +42,7 @@ describe('ThemeModal tests', () => {
       <ThemeProvider>
         <MemoryRouter>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <ThemeModal
-              open={true}
-              handleClose={jest.fn()}
-              selectedTheme={HaskiTheme}
-              selectedThemeString={'HaskiTheme'}
-              setSelectedThemeString={jest.fn()}
-              setSelectedTheme={jest.fn()}
-            />
+            <ThemeModal open={true} handleClose={jest.fn()} selectedTheme={HaskiTheme} setSelectedTheme={jest.fn()} />
           </AuthContext.Provider>
         </MemoryRouter>
       </ThemeProvider>
@@ -66,7 +53,6 @@ describe('ThemeModal tests', () => {
 
   test('clicking on next and previous arrow buttons', async () => {
     const setSelectedTheme = jest.fn()
-    const setSelectedThemeString = jest.fn()
     const handleClose = jest.fn()
 
     const { getByTestId, getByLabelText } = render(
@@ -77,8 +63,6 @@ describe('ThemeModal tests', () => {
               open={true}
               handleClose={handleClose}
               selectedTheme={HaskiTheme}
-              selectedThemeString={'HaskiTheme'}
-              setSelectedThemeString={setSelectedThemeString}
               setSelectedTheme={setSelectedTheme}
             />
           </AuthContext.Provider>
@@ -97,7 +81,6 @@ describe('ThemeModal tests', () => {
     await waitFor(() => {
       fireEvent.click(getByLabelText('components.ThemeModal.darkTheme'))
       expect(setSelectedTheme).toHaveBeenCalled()
-      expect(setSelectedThemeString).toHaveBeenCalled()
     })
     await waitFor(() => {
       expect(getByTestId('ThemeModal-Accept-Button')).toBeEnabled()
@@ -106,7 +89,6 @@ describe('ThemeModal tests', () => {
 
   test('clicking on a theme and accept button', async () => {
     const setSelectedTheme = jest.fn()
-    const setSelectedThemeString = jest.fn()
     const handleClose = jest.fn()
 
     const { getByTestId, getByLabelText } = render(
@@ -117,8 +99,6 @@ describe('ThemeModal tests', () => {
               open={true}
               handleClose={handleClose}
               selectedTheme={HaskiTheme}
-              selectedThemeString={'HaskiTheme'}
-              setSelectedThemeString={setSelectedThemeString}
               setSelectedTheme={setSelectedTheme}
             />
           </AuthContext.Provider>
@@ -129,7 +109,6 @@ describe('ThemeModal tests', () => {
     await waitFor(() => {
       fireEvent.click(getByLabelText('components.ThemeModal.darkTheme'))
       expect(setSelectedTheme).toHaveBeenCalled()
-      expect(setSelectedThemeString).toHaveBeenCalled()
     })
     await waitFor(() => {
       expect(getByTestId('ThemeModal-Accept-Button')).toBeEnabled()

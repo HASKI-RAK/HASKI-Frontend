@@ -67,11 +67,9 @@ const MenuBar = () => {
   const [successSendILSShort, setSuccessSendILSShort] = useState(false)
   const [successSendListK, setSuccessSendListK] = useState(false)
   const [selectedTheme, setSelectedTheme] = useState<Theme>(activeTheme)
-  const [selectedThemeString, setSelectedThemeString] = useState(activeTheme.name)
 
   const handleOpenThemeModal = () => {
     setSelectedTheme(activeTheme)
-    setSelectedThemeString(activeTheme.name)
     setModalOpenTheme(true)
     setAnchorElUser(null)
   }
@@ -85,7 +83,7 @@ const MenuBar = () => {
     setAnchorElUser(null)
   }
 
-  const handleCloseILSShortModal = (event: object, reason: string) => {
+  const handleCloseILSShortModal = (_: object, reason: string) => {
     if (!successSendILSShort) {
       if (reason == 'backdropClick')
         if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSShort(false)
@@ -100,7 +98,7 @@ const MenuBar = () => {
     setAnchorElUser(null)
   }
 
-  const handleCloseILSLongModal = (event: object, reason: string) => {
+  const handleCloseILSLongModal = (_: object, reason: string) => {
     if (!successSendILSLong) {
       if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSLong(false)
     } else {
@@ -214,8 +212,6 @@ const MenuBar = () => {
               handleClose={() => handleCloseThemeModal()}
               selectedTheme={selectedTheme}
               setSelectedTheme={setSelectedTheme}
-              selectedThemeString={selectedThemeString}
-              setSelectedThemeString={setSelectedThemeString}
             />
           </Box>
 
