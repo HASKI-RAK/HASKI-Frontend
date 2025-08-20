@@ -176,8 +176,8 @@ const MenuBar = () => {
               HASKI
             </TextWrapper>
             <CourseMenu />
-            {//<StatisticsMenu />
-            <FurtherInfoMenu />}
+            <StatisticsMenu />
+            <FurtherInfoMenu />
           </Box>
           {/** Level bar */}
           <Box mt={'1rem'} mr={'32rem'}>
