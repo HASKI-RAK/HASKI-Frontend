@@ -1,11 +1,11 @@
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import ReactFlow, { Background, Controls, ReactFlowProvider, useReactFlow } from 'reactflow'
-import { Grid } from '@mui/material'
+import { Grid } from '@common/components'
 import { nodeTypes, ResponsiveMiniMap } from '@components'
 import { LearningPathElement, LearningPathElementStatus } from '@core'
-import { useTopic } from '../Topic/Topic.hooks'
+import { useTopic } from '@pages'
 
-const mockLearningPathElement: LearningPathElement = {
+const exampleLearningPathElement: LearningPathElement = {
   based_on: 'aco',
   calculated_on: 'Mon, 27 Jan 2025 13:02:21 GMT',
   course_id: 2,
@@ -190,7 +190,7 @@ const exampleLearningPathStatuses: LearningPathElementStatus[] = [
 const LearningElementLearningPath = () => {
   const { mapNodes } = useTopic()
   const { fitView } = useReactFlow()
-  const { nodes, edges } = mapNodes(mockLearningPathElement, exampleLearningPathStatuses, [], true)
+  const { nodes, edges } = mapNodes(exampleLearningPathElement, exampleLearningPathStatuses, [], true)
 
   useEffect(() => {
     if (nodes) {
@@ -228,4 +228,4 @@ const LearningElementLearningPath = () => {
     </Grid>
   )
 }
-export default LearningElementLearningPath
+export default memo(LearningElementLearningPath)

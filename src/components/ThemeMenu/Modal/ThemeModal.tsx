@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { ChangeEvent, memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Divider,
@@ -71,16 +71,19 @@ const ThemeModal = ({
   const [activeStep, setActiveStep] = useState(0)
   const pages = [
     <PrivacyPolicy key="privacy" />,
-    <Home key="" />,
-    <LearningElementLearningPath key="lelearningpath" />,
-    <TopicsLearningPath key="topicslearningpath" />,
+    <Home key="home" />,
+    <LearningElementLearningPath key="leLearningPath" />,
+    <TopicsLearningPath key="topicsLearningPath" />,
     <Glossary key="glossary" />
   ]
 
   //will iterate through the pages on use of arrow buttons
-  const changePage = (direction: number) => {
-    setActiveStep((prevIndex) => (prevIndex + direction + pages.length) % pages.length)
-  }
+  const changePage = useCallback(
+    (direction: number) => {
+      setActiveStep((prevIndex) => (prevIndex + direction + pages.length) % pages.length)
+    },
+    [setActiveStep, pages.length]
+  )
 
   return (
     <Modal data-testid={'ThemeModal'} open={open} onClose={handleClose}>
@@ -109,7 +112,7 @@ const ThemeModal = ({
               left: '93.5%'
             }}
             data-testid={'ThemeModal-Close-Button'}
-            onClick={() => handleClose({} as object, 'backdropClick')}>
+            onClick={useCallback(() => handleClose({} as object, 'backdropClick'), [handleClose])}>
             <Close />
           </Fab>
         </Grid>
@@ -138,9 +141,12 @@ const ThemeModal = ({
                 gap: 2
               }}
               value={selectedThemeString}
-              onChange={(event, value) => {
-                handleThemeModalPreviewChange(value)
-              }}
+              onChange={useCallback(
+                (_event: ChangeEvent<HTMLInputElement>, value: string) => {
+                  handleThemeModalPreviewChange(value)
+                },
+                [handleThemeModalPreviewChange]
+              )}
               aria-labelledby="theme-modal-radio-buttons">
               <FormControlLabel
                 id="theme-modal-radio-button-haski-theme"
@@ -196,7 +202,7 @@ const ThemeModal = ({
               left: '1.5%'
             }}
             data-testid={'ThemeModal-Left-Button'}
-            onClick={() => changePage(-1)}>
+            onClick={useCallback(() => changePage(-1), [changePage])}>
             <ArrowBack />
           </Fab>
           <Fab
@@ -208,7 +214,7 @@ const ThemeModal = ({
               left: '93.5%'
             }}
             data-testid={'ThemeModal-Right-Button'}
-            onClick={() => changePage(1)}>
+            onClick={useCallback(() => changePage(1), [changePage])}>
             <ArrowForward />
           </Fab>
           <Fab
@@ -220,10 +226,10 @@ const ThemeModal = ({
               left: '93.5%'
             }}
             data-testid={'ThemeModal-Accept-Button'}
-            onClick={() => {
+            onClick={useCallback(() => {
               updateTheme(selectedThemeString)
               handleClose({} as object, 'backdropClick')
-            }}
+            }, [updateTheme, selectedThemeString, handleClose])}
             disabled={activeTheme === selectedTheme}>
             <Check />
           </Fab>
