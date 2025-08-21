@@ -13,7 +13,7 @@ jest.mock('react-i18next', () => ({
 }))
 
 describe('ThemeModal tests', () => {
-  test('should render ThemeModal, closed', () => {
+  it('should render ThemeModal component correctly in closed state', () => {
     const themeModal = render(
       <ThemeProvider>
         <MemoryRouter>
@@ -27,7 +27,7 @@ describe('ThemeModal tests', () => {
     expect(themeModal).toBeTruthy()
   })
 
-  test('should render ThemeModal, opened', () => {
+  it('should render ThemeModal component correctly in opened state', () => {
     const { getByTestId } = render(
       <ThemeProvider>
         <MemoryRouter>
@@ -41,7 +41,7 @@ describe('ThemeModal tests', () => {
     expect(getByTestId('ThemeModal-Close-Button')).toBeInTheDocument()
   })
 
-  test('clicking on next and previous arrow buttons', async () => {
+  it('should navigate the themes and trigger callbacks on theme selection', async () => {
     const setSelectedTheme = jest.fn()
     const handleClose = jest.fn()
 

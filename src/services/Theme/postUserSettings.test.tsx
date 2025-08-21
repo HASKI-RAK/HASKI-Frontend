@@ -16,7 +16,7 @@ const output = JSON.stringify({
 })
 
 describe('postUserSettings has expected behaviour', () => {
-  it('should return inputData if successful, without pwsd', async () => {
+  it('should send data without password and return inputData on success', async () => {
     const inputData = ['user updated']
 
     const mockResponse = {
@@ -41,7 +41,7 @@ describe('postUserSettings has expected behaviour', () => {
     expect(result).toEqual(inputData)
   })
 
-  it('should return inputData if successful, with pwsd', async () => {
+  it('should send data with password and return inputData on success', async () => {
     const inputData = ['user updated']
 
     const mockResponse = {

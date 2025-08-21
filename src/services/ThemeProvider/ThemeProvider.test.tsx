@@ -29,7 +29,7 @@ describe('ThemeProvider', () => {
     expect(result.getByText('Test')).toBeInTheDocument()
   })
 
-  test('functionality of ThemeProvider hook, AltTheme switch', async () => {
+  it('should load AltTheme correctly using useThemeProvider hook', async () => {
     const wrapper = ({ children }: { children: React.ReactNode }) => <MemoryRouter>{children}</MemoryRouter>
 
     const { result } = renderHook(() => useThemeProvider(), { wrapper })
@@ -80,7 +80,7 @@ describe('ThemeProvider', () => {
     expect(result.current.theme.name).toBe('HaskiTheme')
   })
 
-  test('getUser fails', async () => {
+  test('loadTheme should fall back to default theme when fetchUser fails', async () => {
     mockServices.fetchUser.mockImplementationOnce(() => {
       throw new Error('getUser error')
     })
@@ -96,7 +96,7 @@ describe('ThemeProvider', () => {
     expect(result.current.theme.name).toBe('HaskiTheme')
   })
 
-  test('update user theme fails', async () => {
+  it('should update local theme even if user theme update fails', async () => {
     const wrapper = ({ children }: { children: React.ReactNode }) => <MemoryRouter>{children}</MemoryRouter>
     mockServices.fetchUser.mockImplementationOnce(() => {
       throw new Error('getUser error')
