@@ -3,7 +3,7 @@ import { act, render, renderHook, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import { ThemeProvider, useThemeProvider } from '@services'
-import { AltTheme, DarkTheme, HaskiTheme } from '@common/utils'
+import { AltTheme, DarkTheme } from '@common/utils'
 import { createTheme } from '@common/theme'
 
 const someThemeLiteral = {
