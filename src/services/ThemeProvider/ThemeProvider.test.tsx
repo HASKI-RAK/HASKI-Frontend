@@ -46,7 +46,7 @@ describe('ThemeProvider', () => {
     expect(result.current.theme.name).toBe('AltTheme')
   })
 
-  test('functionality of ThemeProvider hook, DarkTheme switch', async () => {
+  it('should load DarkTheme correctly using useThemeProvider hook', async () => {
     const wrapper = ({ children }: { children: React.ReactNode }) => <MemoryRouter>{children}</MemoryRouter>
 
     const { result } = renderHook(() => useThemeProvider(), { wrapper })
