@@ -1,4 +1,4 @@
-import { MouseEvent, useContext, useState } from 'react'
+import { MouseEvent, useCallback, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -15,8 +15,10 @@ import {
   Tooltip,
   Typography
 } from '@common/components'
+import { useTheme } from '@common/hooks'
 import {
   AssignmentOutlined,
+  Brush,
   Help,
   LibraryBooksOutlined,
   Login,
@@ -33,9 +35,11 @@ import {
   QuestionnaireQuestionsModal,
   StatisticsMenu,
   TableILSQuestions,
-  TableListKQuestions
+  TableListKQuestions,
+  ThemeModal
 } from '@components'
 import { AuthContext, RoleContext } from '@services'
+import { Theme } from '@common/theme'
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -52,6 +56,8 @@ const MenuBar = () => {
   const { t } = useTranslation()
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const { isAuth, logout } = useContext(AuthContext)
+  const activeTheme = useTheme()
+  const [modalOpenTheme, setModalOpenTheme] = useState(false)
   const { isCourseCreatorRole } = useContext(RoleContext)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
@@ -60,13 +66,24 @@ const MenuBar = () => {
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [successSendILSShort, setSuccessSendILSShort] = useState(false)
   const [successSendListK, setSuccessSendListK] = useState(false)
+  const [selectedTheme, setSelectedTheme] = useState<Theme>(activeTheme)
+
+  const handleOpenThemeModal = () => {
+    setSelectedTheme(activeTheme)
+    setModalOpenTheme(true)
+    setAnchorElUser(null)
+  }
+
+  const handleCloseThemeModal = () => {
+    setModalOpenTheme(false)
+  }
 
   const handleOpenILSShortModal = () => {
     setModalOpenILSShort(true)
     setAnchorElUser(null)
   }
 
-  const handleCloseILSShortModal = (event: object, reason: string) => {
+  const handleCloseILSShortModal = (_: object, reason: string) => {
     if (!successSendILSShort) {
       if (reason == 'backdropClick')
         if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSShort(false)
@@ -81,7 +98,7 @@ const MenuBar = () => {
     setAnchorElUser(null)
   }
 
-  const handleCloseILSLongModal = (event: object, reason: string) => {
+  const handleCloseILSLongModal = (_: object, reason: string) => {
     if (!successSendILSLong) {
       if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSLong(false)
     } else {
@@ -161,15 +178,15 @@ const MenuBar = () => {
               variant="h6"
               noWrap
               component="a"
-              sx={{
+              sx={(theme) => ({
                 mr: 2,
                 ml: 2,
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
-                color: 'inherit',
+                color: theme.palette.secondary.contrastText,
                 textDecoration: 'none'
-              }}
+              })}
               onClick={() => navigate('/')}>
               HASKI
             </TextWrapper>
@@ -184,26 +201,25 @@ const MenuBar = () => {
             <LanguageMenu />
           </Box>
           {/** Theme button */}
-          {/**
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={'Change your theme'}>
+            <Tooltip title={<Typography variant={'body2'}>{t('components.MenuBar.themeModal')}</Typography>}>
               <IconButton
-                id="global-settings-icon-button"
-                onClick={() => {
-                  addSnackbar({
-                    message: t('components.MenubBar.GlobalSettings.Error'),
-                    severity: 'warning',
-                    autoHideDuration: 5000
-                  })
-                }}>
-                <Contrast />
+                id="theme-icon-button"
+                onClick={useCallback(() => handleOpenThemeModal(), [handleOpenThemeModal])}>
+                <Brush data-testid="BrushIcon" />
               </IconButton>
             </Tooltip>
+            <ThemeModal
+              open={modalOpenTheme}
+              handleClose={() => handleCloseThemeModal()}
+              selectedTheme={selectedTheme}
+              setSelectedTheme={setSelectedTheme}
+            />
           </Box>
-           */}
+
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('appGlobal.help')}>
+            <Tooltip title={<Typography variant={'body2'}>{t('appGlobal.help')}</Typography>}>
               <IconButton
                 id="manual-icon-button"
                 onClick={() => {
@@ -213,7 +229,7 @@ const MenuBar = () => {
               </IconButton>
             </Tooltip>
           </Box>
-          {/** 
+          {/**
           { Settings button }
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openGlobalSettings')}>
@@ -233,7 +249,7 @@ const MenuBar = () => {
 */}
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('tooltip.openSettings')}>
+            <Tooltip title={<Typography variant={'body2'}>{t('tooltip.openSettings')}</Typography>}>
               <IconButton id="account-icon-button" onClick={handleOpenUserMenu} data-testid="useravatar">
                 <Avatar alt="Remy Sharp">
                   <Person />

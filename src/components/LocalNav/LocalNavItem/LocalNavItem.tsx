@@ -36,14 +36,19 @@ const LocalNavItem = ({ topic, topicProgress, isProgressLoading, courseId, topic
       container
       sx={{
         width: '100%',
-        bgcolor: topicId && parseInt(topicId) == topic?.id ? 'lightgrey' : 'transparent',
+        bgcolor: topicId && parseInt(topicId) == topic?.id ? (theme) => theme.palette.secondary.dark : 'transparent',
         borderRadius: 2
       }}>
       <ListItem key={topic?.id} sx={{ width: '100%', p: 0 }}>
         <ListItemButton
           key={topic?.id}
           id={topic?.name.concat('-localNavButton').replaceAll(' ', '-')}
-          sx={{ width: '100%' }}
+          sx={{
+            width: '100%',
+            '&:hover': {
+              backgroundColor: (theme) => theme.palette.secondary.dark
+            }
+          }}
           onClick={() => {
             courseId && topic && navigate(`/course/${courseId}/topic/${topic.id}`)
           }}>
@@ -53,7 +58,7 @@ const LocalNavItem = ({ topic, topicProgress, isProgressLoading, courseId, topic
                 color:
                   topicId && parseInt(topicId) == topic?.id
                     ? (theme: Theme) => theme.palette.primary.main
-                    : (theme: Theme) => theme.palette.info.dark,
+                    : (theme: Theme) => theme.palette.secondary.dark,
                 width: '0.5rem'
               }}
             />

@@ -17,7 +17,7 @@ const DefaultGroup = ({ data, isConnectable }: NodeProps) => {
   return (
     <>
       <Handle type="target" position={Position.Top} isConnectable={isConnectable} style={{ visibility: 'hidden' }} />
-      <Typography variant="h6" align="center">
+      <Typography variant="h5" align="center">
         {data.label}
       </Typography>
       <Handle type="source" position={Position.Bottom} isConnectable={isConnectable} style={{ visibility: 'hidden' }} />

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import { Box, Divider, Grid } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
@@ -34,7 +35,13 @@ export const MainFrame = () => {
 
   return (
     <>
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Box
+        sx={(theme) => ({
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '100vh',
+          bgcolor: theme.palette.background.default
+        })}>
         <MenuBar />
         <Newsbanner />
         <BreadcrumbsContainer />
