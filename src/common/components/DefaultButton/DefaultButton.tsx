@@ -43,6 +43,7 @@ const Button = forwardRef(({ ...props }: ButtonProps, ref: Ref<HTMLButtonElement
   return <WrappedButton ref={ref} pageName={pageName} {...props} />
 })
 
+export default memo(Button)
+
 // eslint-disable-next-line
 Button.displayName = 'Button'
-export default memo(Button)
