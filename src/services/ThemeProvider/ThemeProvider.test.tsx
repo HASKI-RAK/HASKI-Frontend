@@ -63,7 +63,7 @@ describe('ThemeProvider', () => {
     expect(result.current.theme.name).toBe('DarkTheme')
   })
 
-  test('functionality of ThemeProvider hook, default switch', async () => {
+  it('should load the default theme correctly using useThemeProvider hook', async () => {
     const wrapper = ({ children }: { children: React.ReactNode }) => <MemoryRouter>{children}</MemoryRouter>
 
     const { result } = renderHook(() => useThemeProvider(), { wrapper })
