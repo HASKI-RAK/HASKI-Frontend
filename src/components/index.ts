@@ -37,6 +37,7 @@ export {
 } from './CreateTopic/Table/CreateLearningElementClassification/CreateLearningElementClassificationTable'
 export { default as CreateRemoteTopicsTable } from './CreateTopic/Table/CreateRemoteTopics/CreateRemoteTopicsTable'
 export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopics/ExistingTopicsTable'
+export * from './Dashboards'
 export { default as DeleteEntityModal } from './DeleteEntityModal/DeleteEntityModal'
 export { default as Filter } from './Filter/Filter'
 export { default as Footer } from './Footer/Footer'

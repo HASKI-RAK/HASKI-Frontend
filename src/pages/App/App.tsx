@@ -14,6 +14,7 @@ import {
   PageNotFound,
   PrivacyPolicy,
   ProjectDescription,
+  Rating,
   Topic
 } from '@pages'
 import { AuthProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
@@ -60,6 +61,7 @@ export const App = () => {
                       <Route path="/aboutus" element={<AboutUs />} />
                       <Route path="/imprint" element={<Imprint />} />
                       <Route path="/learnercharacteristics" element={<LearnerCharacteristics />} />
+                      <Route path="/rating" element={<Rating />} />
                       <Route path="/privacypolicy" element={<PrivacyPolicy />} />
                       <Route path="/🥚" element={<div>Ei</div>} />
                       <Route path="*" element={<PageNotFound />} />
